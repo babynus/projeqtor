@@ -811,14 +811,14 @@ class Cron {
     global $globalCronMode, $globalCatchErrors;
     $globalCronMode=true;     
     $globalCatchErrors=true;
+    $checkEmails=Parameter::getGlobalParameter('cronCheckEmails');
+    if (!$checkEmails or intval($checkEmails)<=0) {
+      return; // disabled
+    }
     require_once("../model/ImapMailbox.php"); // Imap management Class
     if (! ImapMailbox::checkImapEnabled()) {
       traceLog("ERROR - Cron::checkEmails() - IMAP extension not enabled in your PHP config. Cannot connect to IMAP Mailbox.");
       return;
-    }
-    $checkEmails=Parameter::getGlobalParameter('cronCheckEmails');
-    if (!$checkEmails or intval($checkEmails)<=0) {
-      return; // disabled
     }
     //gautier #inputMailbox
     $inputMb = new InputMailbox();
