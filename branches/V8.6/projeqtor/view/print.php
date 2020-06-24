@@ -287,7 +287,6 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
     if ($outMode=='excel') {
       $outputFileName.=".xlsx";
       $content=ob_get_clean();
-      debugLog($content);
       require_once('../external/HtmlPhpExcel/vendor/autoload.php');
       //$htmlPhpExcel = new \Ticketpark\HtmlPhpExcel\HtmlPhpExcel(iconv('UTF-8', 'Windows-1252',$content));
       $htmlPhpExcel = new \Ticketpark\HtmlPhpExcel\HtmlPhpExcel(encodeCSV($content));
