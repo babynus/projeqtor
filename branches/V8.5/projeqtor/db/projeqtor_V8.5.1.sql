@@ -6,4 +6,4 @@
 -- ///////////////////////////////////////////////////////////
 -- Patch on V8.5.0
 
-DELETE from `${prefix}accessright` where idMenu in (251,252,253);
+DELETE from `${prefix}accessright` where `idMenu` in (251,252,253);
