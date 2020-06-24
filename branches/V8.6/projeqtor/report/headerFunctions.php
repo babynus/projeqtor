@@ -155,14 +155,14 @@ function excelFormatCell($cellType='data',$width=null, $color=null, $bgcolor=nul
   $numberFormat='';
   if ($valueType=='work') {
     //$format.=" _excel-explicit='n' ";
-    $numberFormat='###\ d';
+    //$numberFormat='0.0#';
   }
   $format.=" _excel-styles='{"
       .'"alignment":{"horizontal":"'.$hAlign.'","vertical":"'.$vAlign.'"'.(($noWrap)?'':',"wrapText":true').'},'
       .'"font":{"size":'.$fontSize.',"color":{"rgb":"'.$color.'"}'.(($bold==true)?',"bold":true':'').'},'
       .'"fill":{"fillType":"solid","color":{"rgb":"'.$bgcolor.'"}}'
       .(($noBorder)?'':',"borders":{"outline":{"borderStyle":"thin","color":{"rgb":"'.$borderColor.'"}}}')
-     // .(($numberFormat)?',"numberFormat":{"formatCode":"'.$numberFormat.'"}':'')
+      .(($numberFormat)?',"numberFormat":{"formatCode":"'.$numberFormat.'"}':'')
     ."}' ";
   
   return $format;
