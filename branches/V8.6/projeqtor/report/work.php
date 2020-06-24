@@ -117,9 +117,8 @@ if ( $periodType=='week') {
 if (isset($outMode) and $outMode=='excel') {
   $headerParameters.=str_replace('- ','<br/>',Work::displayWorkUnit()).'<br/>';
 }
-  
-include "header.php";
 
+include "header.php";
 
 #florent ticket #4049
 #$where="(".getAccesRestrictionClause('Activity',false,false,true,true) ." or idResource=". getSessionUser()->id . " or idProject in ".Project::getAdminitrativeProjectList().")";
