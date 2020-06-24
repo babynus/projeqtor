@@ -2011,6 +2011,7 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
  */
 function getTheme() {
   global $indexPhp;
+  if (getGuiMinimal()) return "ProjeQtOrFlatGrey";
   if (isset($indexPhp) and $indexPhp and getSessionValue('setup', null, true)) return "ProjeQtOr"; // On first configuration, use default
   $defaultTheme=Parameter::getGlobalParameter('defaultTheme');
   if (substr($defaultTheme, 0, 12)=="ProjectOrRia") {
@@ -5080,5 +5081,14 @@ function searchAllAttachmentMailable($objectClass,$idObj){
     }
   }
   return array($lstAttach, $lstDoc);
+}
+
+function getGui() {
+  global $paramMinimalGui;
+  if (isset($paramMinimalGui) and $paramMinimalGui==true) return "minimal";
+  else return "standard";
+}
+function getGuiMinimal() {
+  return (getGui()=='minimal');
 }
 //
