@@ -84,10 +84,10 @@ if ($idProject!=""  and $idProject!="*" and !is_array($idProject)) {
 }
 
 if ($inIdOrga!="") {
-  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$paramOrga)) . '<br/>';
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$inIdOrga)) . '<br/>';
 }
 if ($inIdTeam!="") {
-  $headerParameters.= i18n("colIdTeam") . ' : ' . SqlList::getNameFromId('Team', $paramTeam) . '<br/>';
+  $headerParameters.= i18n("colIdTeam") . ' : ' . SqlList::getNameFromId('Team', $inIdTeam) . '<br/>';
 }
 
 
