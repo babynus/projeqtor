@@ -7109,3 +7109,7 @@ function expandProjectInToDay(id,subProj,visibleRow){
   }
   //loadContent("../view/today.php", "centerDiv");
 }
+
+function refreshConcolidationValidationList(){
+  loadContent("../view/consolidationValidationMain.php", "consolidationValidationDiv");
+}

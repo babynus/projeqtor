@@ -1290,6 +1290,12 @@
 .ProjeQtOrFlatGreen .iconConsultationPlannedWorkManual  { background-image: url(customIcons/green/iconConsultationPlannedWorkManual.png); }
 .ProjeQtOrFlatGrey .iconConsultationPlannedWorkManual  { background-image: url(customIcons/grey/iconConsultationPlannedWorkManual.png); }
 
+.iconConsultationValidation  { background-image: url(images/iconConsolidationValidation.png); }
+.ProjeQtOrFlatBlue .iconConsultationValidation  { background-image: url(customIcons/blue/iconConsolidationValidation.png); }
+.ProjeQtOrFlatRed .iconConsultationValidation  { background-image: url(customIcons/red/iconConsolidationValidation.png); }
+.ProjeQtOrFlatGreen .iconConsultationValidation  { background-image: url(customIcons/green/iconConsolidationValidation.png); }
+.ProjeQtOrFlatGrey .iconConsultationValidation  { background-image: url(customIcons/grey/iconConsolidationValidation.png); }
+
 .iconPlannedWorkManual { background-image: url(images/iconPlannedWorkManual.png); }
 .ProjeQtOrFlatBlue .iconPlannedWorkManual { background-image: url(customIcons/blue/iconPlannedWorkManual.png); }
 .ProjeQtOrFlatRed .iconPlannedWorkManual { background-image: url(customIcons/red/iconPlannedWorkManual.png); }
