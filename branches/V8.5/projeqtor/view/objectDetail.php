@@ -772,7 +772,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // unset($val[5]);
       // }
       // END ADD qCazelles - dateComposition
-      $internalTableRowsCaptions=array_slice($val, $internalTableCols);
+      $internalTableRowsCaptions=($val and is_array($val))?array_slice($val, $internalTableCols):'';
       $internalTableCurrentRow=0;
       $colWidth=($detailWidth)/$nbCol;
       // #3538 - This part is no use any more since genericity of display of headers
@@ -5521,12 +5521,9 @@ function drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $can
   echo formatDateThumb($creationDate, null);
   echo formatCommentThumb($comp->comment);
   // ADD tLAGUERIE AND dFAYOLLE
-  $sts = new Status();
-  $listStatus = $sts->getSqlElementsFromCriteria(array(
-      'id' => $compObj->idStatus
-  ));
-  $nameStatus = $listStatus[0]->name;
-  $colorStatus = $listStatus[0]->color;
+  $sts = new Status($compObj->idStatus);
+  $nameStatus = $sts->name;
+  $colorStatus = $sts->color;
   echo '<td class="dependencyData colorNameData"  style="width:10%">' . colorNameFormatter($nameStatus . "#split#" . $colorStatus) . '</td>';
   echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
   $nameType = SqlList::getNameFromId('Type', $compObj->idVersionType);
