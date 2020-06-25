@@ -3339,10 +3339,12 @@ function workTimeDiffDateTime($start, $end) {
   $startDay=substr($start, 0, 10);
   $endDay=substr($end, 0, 10);
   $time=substr($start, 11, 5);
+  if (! $time) $time='00:00:00';
   $hh=substr($time, 0, 2);
   $mn=substr($time, 3, 2);
   $mnStart=intval($hh)*60+intval($mn);
   $time=substr($end, 11, 5);
+  if (! $time) $time='00:00:00';
   $hh=substr($time, 0, 2);
   $mn=substr($time, 3, 2);
   $mnStop=intval($hh)*60+intval($mn);
