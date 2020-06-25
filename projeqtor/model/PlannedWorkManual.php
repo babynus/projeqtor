@@ -335,7 +335,7 @@ class PlannedWorkManual extends GeneralWork {
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickPM.' style="cursor:'.$cursorPM.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
       echo '</table>';  
       if ($real) {
-        $height=intval($size*$real/$capacity);
+        $height=intval($size*$real/(($capacity)?$capacity:$resObj->capacity));
         if ($height>$size) $height=$size;
         $background = 'background-color:#202020;opacity:0.5';
         //echo '<div style="pointer-events: none;position:absolute;top:0;'.$background.'; height:'.$height.'px;width:'.$size.'px"> </div>';
