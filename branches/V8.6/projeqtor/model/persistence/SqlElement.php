@@ -143,7 +143,8 @@ abstract class SqlElement {
           "AccessProfile" => "controlStrict"), 
       "AccessScopeDelete" => array(
           "AccessProfile" => "controlStrict"),
-      "Asset" => array("Location" => "controlStrict"),
+      "Asset" => array("Location" => "controlStrict",
+                       "ProductAsset"=>"cascade"),
       "AssetCategory" => array("Asset" => "controlStrict"),
       "Assignment" => array(
           "AssignmentRecurring"=>"cascade",
@@ -208,7 +209,8 @@ abstract class SqlElement {
           "Requirement" => "control", 
           "TestCase" => "control", 
           "TestSession" => "control", 
-          "Ticket" => "control"), 
+          "Ticket" => "control",
+          "ProductAsset"=>"cascade"), 
       "Contact" => array(
           "Activity" => "controlStrict", 
           "Affectation" => "confirm", 
@@ -332,7 +334,8 @@ abstract class SqlElement {
           "TestSession" => "control", 
           "VersionProject" => "cascade", 
           "Ticket" => "control", 
-          "Activity" => "control"), 
+          "Activity" => "control",
+          "ProductAsset"=>"cascade"), 
       "Project" => array(
           "Action" => "control", 
           "Activity" => "confirm", 
@@ -1831,6 +1834,9 @@ abstract class SqlElement {
           $where = null;
           $obj = new $object ();
           $crit = array($obj->getDatabaseColumnName ( 'id' . $class ) => $this->id);
+          if ($class=='ComponentVersion' and $object=='ProductAsset') {
+            $crit=array($obj->getDatabaseColumnName ( 'idProductVersion' ) => $this->id);
+          }
           if (property_exists ( $obj, 'refType' ) and property_exists ( $obj, 'refId' )) {
             if (property_exists ( $obj, 'id' . $class )) {
               $crit = null;
