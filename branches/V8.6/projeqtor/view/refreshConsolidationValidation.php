@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -25,18 +25,21 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 /* ============================================================================
- * Presents an object. 
+ * Presents the list of objects of a given class.
+ *
  */
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
-  scriptLog('   ->/view/imputationValidationMain.php');  
+scriptLog('   ->/view/refreshImputationValidation.php'); 
+
+$idUser= RequestHandler::getId('userName');
+$idOrganization = RequestHandler::getId('idOrganizationConsolidation');
+$idProject = RequestHandler::getValue('idProjectConsolidation');
+$idProjectType = RequestHandler::getValue('idProjectTypeConsolidation');
+$month=RequestHandler::getMonth('monthConsolidation');
+$year=RequestHandler::getYear('yearConsolidation');
+
 ?>
-<input type="hidden" name="objectClassManual" id="objectClassManual" value="ImputationValidation" />
-  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top"  style="height:64px;">
-   <?php include 'consolidationValidationList.php'?>
-  </div>
-  <div id="imputListDiv" name="imputListDiv" dojoType="dijit.layout.ContentPane" region="center" >
-    <?php 
-    ConsolidationValidation::drawProjectConsolidationValidation($idProject,$idProjectType,$idOrganization,$year,$month);
-    ?>
-  </div>
+<div id="imputListDiv" name="imputListDiv">
+  <?php ConsolidationValidation::drawProjectConsolidationValidation($idProject,$idProjectType,$idOrganization,$year,$month);?>
+</div>

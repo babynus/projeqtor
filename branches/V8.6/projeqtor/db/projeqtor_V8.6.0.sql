@@ -28,7 +28,7 @@ CREATE TABLE `${prefix}consolidationvalidation` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `idProject` varchar(100) DEFAULT NULL,
   `idResource` varchar(100) DEFAULT NULL,
-  `sales` int(3) unsigned DEFAULT NULL,
+  `revenue` int(3) unsigned DEFAULT NULL,
   `validatedWork` int(3) unsigned DEFAULT NULL,
   `realWork` int(3) unsigned DEFAULT NULL,
   `realWorkConsumed` int(3) unsigned DEFAULT NULL,

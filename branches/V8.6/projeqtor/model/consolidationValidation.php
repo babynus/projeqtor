@@ -31,7 +31,7 @@ class ConsolidationValidation extends SqlElement{
 	public $id;
 	public $idProject;
 	public $idResource;
-	public $sales;
+	public $revenue;
 	public $validatedWork;
 	public $realWork;
 	public $realWorkConsumed;
@@ -56,27 +56,24 @@ class ConsolidationValidation extends SqlElement{
 	 */
 	function __destruct() {}
 	
+	
+	/** ==========================================================================
+	 * Draw project table 
+	 */
 	static function drawProjectConsolidationValidation($idProject,$idProjectType,$idOrganization,$year,$month){
-	  debugLog($idProject);
-	  if($idProject==0 and $idProjectType==0 and $idOrganization==0){
-	    $visibleProject=getVisibleProjectsList();
-	    $proj=new Project();
-	    $where="idProject in $visibleProject";
-	    $lstProject=$proj->getSqlElementsFromCriteria(null,null,$where);
-	  }else if($idProject==0 and ($idProjectType!=0 or $idOrganization!=0)){
-	    $proj= new Project();
-	    $idProjectType=($idProjectType!=0)?$idProjectType:"";
-	    $idOrganization=($idOrganization!=0)?$idOrganization:"";
-	    $critArray=array("idProjectType"=>$idProjectType,"idOrganization"=>$idOrganization);
-	    $lstProject=$proj->getSqlElementsFromCriteria($critArray);
-	  }
+	  $cons= new ConsolidationValidation();
+	  $idProject=($idProject=='')?0:$idProject;
+	  $idProjectType=($idProjectType=='')?0:$idProjectType;
+	  $idOrganization=($idOrganization=='')?0:$idOrganization;
+	  $lstProject=$cons->getVisibleProjectToConsolidated($idProject,$idProjectType,$idOrganization);
+
       $c=0;
 	  //Header
 	  $result  ='<div id="imputationValidationDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
 	  $result .='  <table width="98%" style="margin-left:20px;margin-right:20px;border: 1px solid grey;">';
 	  $result .='   <tr class="reportHeader">';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:20%;text-align:center;vertical-align:center;">'.i18n('Project').'</td>';
-	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colSales').'</td>';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colRevenue').'</td>';
 	  //$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:8%;text-align:center;vertical-align:center;">'.i18n('expectedWork').'</td>';
 	  $result .='     <td style="width:40%;border: 1px solid grey;border-right: 1px solid white;">';
 	  $result .='      <table width="100%"><tr><td colspan="5" style="height:30px;text-align:center;vertical-align:center;">'.i18n('sectionWork').'</td></tr>';
@@ -107,40 +104,92 @@ class ConsolidationValidation extends SqlElement{
                       </td>';
 	  $result .='   </tr>';
 	  
-	  foreach ($lstProject as $proj){
-	    $c++;
-	    $idCheckBox=$c;
-	    $uniqueId=$c;
-	   $result .='   <tr>';
-	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">'.$proj->name.'</td>';
-	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;"></td>';
-	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;"></td>';
-	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;"></td>';
-	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
-	   $result .='      <table>';
-	   $result .='        <tr>';
-	   $result .='          <td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod')).'</td>';
-	   $result .='          <td style="width:73%;padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
-	   $result .='          <td style="width:27%;padding-right:8px;height:30px;">';
-	   $result .='            <span id="buttonValidation'.$uniqueId.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
-	          . '              <script type="dojo/method" event="onClick" >'
-	          //. '                saveImputationValidation("'.$uniqueId.'", "validateWork");'
-	          //. '                saveDataToSession("idCheckBox", "'.$uniqueId.'", false);'
-	          . '              </script>'
-	          . '            </span>';
-	   $result .='          </td>';
-       $result .='         <td style="padding-right:5px;"><div class="validCheckBox" type="checkbox" dojoType="dijit.form.CheckBox" id="validCheckBox'.$idCheckBox.'"></div></td>';
-       $result .='       </tr>';
-       $result .='     </table>';
-       $result .='    </td>';
-       $result .='     <input type="hidden" id="validatedLine'.$idCheckBox.'" name="'.$uniqueId.'" value=""/>';
-       $result .='   </tr>';
+	  if(!empty($lstProject)){
+    	  foreach ($lstProject as $proj){
+    	    $c++;
+    	    $idCheckBox=$c;
+    	    $uniqueId=$c;
+    	   $result .='   <tr>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">'.$proj->name.'</td>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;"></td>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;" >';
+    	   $result .='     <table style="width:100%;height:100%" >';
+    	   $result .='       <tr>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;"></td>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;"></td>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;"></td>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;"></td>';
+    	   $result .='         <td style="width:20%;text-align:center;vertical-align:center;"></td>';
+    	   $result .='       </tr>';
+    	   $result .='     </table>';
+    	   $result .='    </td>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;"></td>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
+    	   $result .='      <table>';
+    	   $result .='        <tr>';
+    	   $result .='          <td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod')).'</td>';
+    	   $result .='          <td style="width:73%;padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
+    	   $result .='          <td style="width:27%;padding-right:8px;height:30px;">';
+    	   $result .='            <span id="buttonValidation'.$uniqueId.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
+    	          . '              <script type="dojo/method" event="onClick" >'
+    	          //. '                saveImputationValidation("'.$uniqueId.'", "validateWork");'
+    	          //. '                saveDataToSession("idCheckBox", "'.$uniqueId.'", false);'
+    	          . '              </script>'
+    	          . '            </span>';
+    	   $result .='          </td>';
+           $result .='         <td style="padding-right:5px;"><div class="validCheckBox" type="checkbox" dojoType="dijit.form.CheckBox" name="validCheckBox'.$idCheckBox.' id="validCheckBox'.$idCheckBox.'"></div></td>';
+           $result .='       </tr>';
+           $result .='     </table>';
+           $result .='    </td>';
+           $result .='     <input type="hidden" id="validatedLine'.$idCheckBox.'" name="'.$uniqueId.'" value="0"/>';
+           $result .='   </tr>';
+    	  }
+	  }else{
+	    $result .='   <tr>';
+	    $result .='    <td colspan="5">';
+	    $result .='    <div style="background:#FFDDDD;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:100%;border-right: 1px solid grey;">'.i18n('noDataFound').'</div>';
+	    $result .='    </td>';
+	    $result .='   </tr>';
 	  }
 	  $result .='<input type="hidden" id="countLine" name="countLine" value="'.$c.'"/>';
 	  $result .='  </table>';
 	  $result .='</div>';
 	  
 	  echo $result;
+	}
+	
+	/** ==========================================================================
+	 * Get Visible Project
+	 * @return list of project 
+	 */
+	public function getVisibleProjectToConsolidated ($idProject,$idProjectType,$idOrganization) {
+	  $currentUser=new User(getCurrentUserId());
+	  $visibleProject=implode(',', array_flip($currentUser->getVisibleProjects()));
+	  $where="id in ($visibleProject) ";
+	  if($idProject==0 and $idProjectType==0 and $idOrganization==0){
+	    $proj=new Project();
+	    $lstProject=$proj->getSqlElementsFromCriteria(null,null,$where);
+	  }else if($idProjectType!=0 or $idOrganization!=0){
+	    $proj= new Project();
+	    $critArray=array();
+	    ($idProjectType!=0 )?$critArray["idProjectType"]=$idProjectType:"";
+	    ($idOrganization!=0)?$critArray["idOrganization"]=$idOrganization:"";
+	    $specificWhere =($idProject!=0)?"id=$idProject or idProject=$idProject ":"$where";
+	    $lstProject=$proj->getSqlElementsFromCriteria($critArray,null,$where);
+	  }else{
+	    if($idProject!=0 and $idProjectType==0 and $idOrganization==0){
+	      if(strpos($idProject, ',')){
+	        $where="id in $idProject";
+	        $lstProject=$proj->getSqlElementsFromCriteria(null,null,$where);
+	      }else{
+	        $proj=new Project($idProject);
+	        $lstProject[]=$proj;
+	        $subProject=$proj->getSubProjects();
+	        $lstProject= array_merge($subProject,$lstProject);
+	      }
+	    }
+	  }
+	  return $lstProject;
 	}
 	
 	/**=========================================================================
