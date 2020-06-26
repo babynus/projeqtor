@@ -153,7 +153,7 @@ if($paramProject){
     }
   }
   $resourcesAffect = SqlList::getListWithCrit('Affectation', array('idProject'=>array_keys($listProj)),'idResource');
-  $resourcesProject = SqlList::getListWithCrit('ResourceAll', array('id'=>$resourcesAffect));
+  $resourcesProject = SqlList::getListWithCrit('ResourceAll', array('id'=>$resourcesAffect,'idle'=>'0'));
   $resourcesToShow = array_intersect($resourcesToShow,$resourcesProject);
 }
 //team
@@ -330,10 +330,9 @@ echo '</tr>';
 asort($resourcesToShow);
 //asort($resources);
 foreach ($resourcesToShow as $idR=>$nameR) {
-  $idCal=SqlList::getFieldFromId('Affectable', $idR, 'idCalendarDefinition');
-	//if ($paramTeam) {
-    $res=new Resource($idR);
-  //}
+  $res=new Resource($idR);
+  if ($res->idle=1 and (! isset($result[$idR]) or count($result[$idR])==0)) continue;
+  $idCal=$res->idCalendarDefinition;
   if (!$paramTeam or $res->idTeam==$paramTeam) {
     //gautier
     if(array_key_exists($idR,$resourceCapacity)){
