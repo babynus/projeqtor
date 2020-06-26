@@ -158,6 +158,7 @@ class PlanningElement extends SqlElement {
                                   "unitProgress"=>"hidden",
                                   "idProgressMode"=>"hidden",
                                   "unitWeight"=>"hidden",
+                                  "_label_weight"=>"hidden",
                                   "idWeightMode"=>"hidden"
   );   
   

@@ -71,12 +71,12 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $unitToRealise;
   public $unitRealised;
   public $unitLeft;
-  public $_tab_5_2_smallLabel_8 = array('', '','','','','','progress');
-  public $_void_20;
-  public $_void_21;
-  public $_void_22;
-  public $_void_23;
-  public $_void_24;
+  public $_tab_5_1_smallLabel_8 = array('', '','','','','progress');
+//   public $_void_20;
+//   public $_void_21;
+//   public $_void_22;
+//   public $_void_23;
+//   public $_void_24;
   public $unitProgress;
   public $idProgressMode;
   public $_label_weight;
@@ -275,6 +275,8 @@ class ActivityPlanningElementMain extends PlanningElement {
        self::$_fieldsAttributes['_tab_2_1_smallLabel_8']='nobr';
     }else{
       unset($this->_separator_menuTechnicalProgress_marginTop);
+      unset($this->_tab_5_1_smallLabel_8);
+      unset($this->_tab_4_1_smallLabel_2);
     }
   }
   /** ==========================================================================

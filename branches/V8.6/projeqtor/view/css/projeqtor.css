@@ -4008,3 +4008,99 @@ div.ticketKanbanCustom .kanbanVersion{
   width:95px;
   padding:0;
 }
+
+/* TAGS MANAGEMENT */
+.searchLine {
+  height: 30px;
+  vertical-align:top;
+}
+.docLine {
+  height:20px !important;
+  text-align:left;
+}
+.docColName {
+  font-weight:bold;
+  color: #FFFFFF;
+  background-color: #7b769c;
+  background-color: #e97b2c;
+  text-shadow: none;
+  padding-left: 5px;
+  font-size:110%
+}
+.docLineTable {
+  width:100%;
+}
+.docLineDiv {
+  overflow:auto;
+  max-height:80px;
+}
+
+.docLineDivFix {
+  overflow:hidden;
+  max-height:80px;
+}
+
+.docLineProject {
+  background: url(../../view/css/images/iconProject16.png) no-repeat left center;
+  width:20px;height:16px;
+}
+.docLineType {
+  background: url(../../view/css/images/iconType16.png) no-repeat left center;
+  width:20px;height:16px;
+}
+.docLineProduct {
+  background: url(../../view/css/images/iconProduct16.png) no-repeat left center;
+  width:20px;height:16px;
+}
+.docLineDirectory {
+  background: url(../../view/css/images/iconDocumentDirectory16.png) no-repeat left center;
+  width:20px;height:16px;
+}
+.docLineTag, .docLineTagNew {
+  background: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  border-radius:10px;
+  float:left;
+  padding: 1px 3px;
+  margin:1px;
+  /*color:#F0F0F0;*/
+}
+.docLineTagNew {
+  background: #EEFEEE;
+}
+.docLineTagDouble {
+  background: #FEEEEE;
+}
+.docLineTagRemove {
+   cursor:pointer;
+   background-color:#AAAAAA;
+   border-radius:8px;
+   min-height:16px; min-width:16px;
+   max-height:5px;
+   float:right;
+   text-align: center;
+}
+.docLineTagContainer, .docLineLinkContainer {
+  height: 78px;
+  width:100%;
+  vertical-align:top;
+  overflow-y:auto;
+}
+.docLineLink {
+  padding: 3px;
+  border: 1px solid #e97b2c;
+}
+.docLineLink:hover {
+  curso:pointer;
+  background-color: #e97b2c;
+  color: #FFFFFF;
+}
+.docLineDate, .docLineSize {
+  color: #AAAAAA;
+  font-size:80%;
+  text-align:center;
+  width:50%;
+}
+.docLineImage {
+  text-align:center;
+}
