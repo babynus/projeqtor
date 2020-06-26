@@ -60,7 +60,7 @@ foreach ($_REQUEST as $reqParam=>$reqValue) {
 	}
 }
 debugLog($headerParameters);
-if ($outMode=='excel') $headerParameters=br2nl(rtrim($headerParameters,'<br/>'));
+if ($outMode=='excel') $headerParameters=rtrim(br2nl($headerParameters),"\n");
 echo '<table _excel-name="'.i18n("menuParameter").'" style="width:100%">';
 echo '<tr>';
 if ($outMode!='excel') echo "<td style='width:1%' class='reportHeader' ".excelFormatCell('data',1,null,null,null,null,null,null,null,null,true).">&nbsp;</td>";
