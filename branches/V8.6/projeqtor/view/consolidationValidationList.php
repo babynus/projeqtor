@@ -37,7 +37,7 @@ $currentMonth=strftime("%m") ;
 
 <div dojoType="dijit.layout.BorderContainer" id="imputationValidationParamDiv" name="imputationValidationParamDiv">  
   <div dojoType="dijit.layout.ContentPane" region="top" id="imputationValidationButtonDiv" class="listTitle" >
-  <form dojoType="dijit.form.Form" name="imputValidationForm" id="imputValidationForm" action="" method="post" >
+  <form dojoType="dijit.form.Form" name="consolidationValidationForm" id="consolidationValidationForm" action="" method="post" >
   <table width="100%" height="64px" class="listTitle">
     <tr height="32px">
     <td style="vertical-align:top; min-width:100px; width:15%;">

@@ -7153,5 +7153,5 @@ function replaceAccentuatedCharacters(text){
 }
 
 function refreshConcolidationValidationList(){
-  loadContent("../view/consolidationValidationMain.php", "consolidationValidationDiv");
+  loadContent("../view/refreshConsolidationValidation.php", "imputListDiv","consolidationValidationForm");
 }
