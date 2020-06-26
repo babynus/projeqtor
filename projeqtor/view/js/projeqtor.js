@@ -7150,7 +7150,6 @@ var accentuatedCharactersTranscoding = {"à":"a","á":"a","â":"a","ã":"a","ä"
 function replaceAccentuatedCharacters(text){
   var reg=/[àáäâèéêëçìíîïòóôõöøùúûüÿñ_-]/gi; 
   return text.replace(reg,function(){ return accentuatedCharactersTranscoding[arguments[0].toLowerCase()];}).toLowerCase();
-=======
 }
 
 function refreshConcolidationValidationList(){
