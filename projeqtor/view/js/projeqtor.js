@@ -7110,6 +7110,49 @@ function expandProjectInToDay(id,subProj,visibleRow){
   //loadContent("../view/today.php", "centerDiv");
 }
 
+// ====================================================================
+// TAGS MANAGEMENT
+// ====================================================================
+
+function addDocumentTag(value) {
+  if (!value) return;
+  value=replaceAccentuatedCharacters(value);
+  cleaned=value.replace(new RegExp("[^(a-z0-9)]", "g"), '');
+  if (cleaned!=value) {
+    showInfo(i18n('tagFormatError'));
+    setTimeout("dijit.byId('tagInput').focus();",100);
+    return false;
+  }
+  tags=dojo.byId('tags');
+  if (tags.value.indexOf('#'+value+'#')>-1) {
+    duplicateTag(value);
+    return;
+  }
+  divTag=value+'&nbsp;<div class="docLineTagRemove" onClick="removeDocumentTag(\''+value+'\');">x</div>';
+  var widget=dijit.byId('tagInput');
+  dojo.create('span', {'innerHTML':divTag, class: 'docLineTagNew', id:value+'TagDiv'}, dojo.byId('tagList'),'last');
+  dijit.byId('tagInput').reset();
+  dijit.byId('tagInput').focus();
+  if (tags.value=='') tags.value='#';
+  tags.value+=value+'#';
+}
+function duplicateTag(value) {
+  dojo.addClass(value+"TagDiv","docLineTagDouble");
+  setTimeout('dojo.removeClass("'+value+'TagDiv","docLineTagDouble");',1000);
+}
+function removeDocumentTag(value) {
+  tags=dojo.byId('tags');
+  tags.value=tags.value.replace("#"+value+"#","#");
+  if (tags.value=='#') tags.value='';
+  dojo.destroy(value+"TagDiv");
+}
+var accentuatedCharactersTranscoding = {"à":"a","á":"a","â":"a","ã":"a","ä":"a","å":"a","ò":"o","ó":"o","ô":"o","õ":"o","ö":"o","ø":"o","è":"e","é":"e","ê":"e","ë":"e","ç":"c","ì":"i","í":"i","î":"i","ï":"i","ù":"u","ú":"u","û":"u","ü":"u","ÿ":"y","ñ":"n","-":" ","_":" "}; 
+function replaceAccentuatedCharacters(text){
+  var reg=/[àáäâèéêëçìíîïòóôõöøùúûüÿñ_-]/gi; 
+  return text.replace(reg,function(){ return accentuatedCharactersTranscoding[arguments[0].toLowerCase()];}).toLowerCase();
+=======
+}
+
 function refreshConcolidationValidationList(){
   loadContent("../view/consolidationValidationMain.php", "consolidationValidationDiv");
 }
