@@ -82,12 +82,12 @@ class ProjectPlanningElementMain extends PlanningElement {
   public $totalLeftCost;
   public $totalPlannedCost;
   public $_separator_menuTechnicalProgress_marginTop;
-  public $_tab_5_2_smallLabel_9 = array('', '','','','','','progress');
-  public $_void_uo_20;
-  public $_void_uo_21;
-  public $_void_uo_22;
-  public $_void_uo_23;
-  public $_void_uo_24;
+  public $_tab_5_1_smallLabel_9 = array('', '','','','','progress');
+//   public $_void_uo_20;
+//   public $_void_uo_21;
+//   public $_void_uo_22;
+//   public $_void_uo_23;
+//   public $_void_uo_24;
   public $unitProgress;
   public $idProgressMode;
   public $_label_weight;
@@ -182,6 +182,7 @@ class ProjectPlanningElementMain extends PlanningElement {
       self::$_fieldsAttributes['idWeightMode']='readonly,size1/3';
     }else{
       unset($this->_separator_menuTechnicalProgress_marginTop);
+      unset($this->_tab_5_1_smallLabel_9);
     }
   }
   /** ==========================================================================
