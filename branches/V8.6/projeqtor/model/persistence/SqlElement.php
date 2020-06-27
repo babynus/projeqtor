@@ -3678,7 +3678,7 @@ abstract class SqlElement {
     }
     $obj = new $class ();
     $formatList = array();
-    $query = "desc " . $obj->getDatabaseTableName ();
+    $query = "desc " . $obj->getDatabaseTableName();
     if (Sql::isPgsql ()) {
       $query = "SELECT a.attname as field, pg_catalog.format_type(a.atttypid, a.atttypmod) as type" . " FROM pg_catalog.pg_attribute a " . " WHERE a.attrelid = (SELECT oid FROM pg_catalog.pg_class WHERE relname='" . $obj->getDatabaseTableName () . "')" . " AND a.attnum > 0 AND NOT a.attisdropped" . " ORDER BY a.attnum";
     }
@@ -3721,6 +3721,17 @@ abstract class SqlElement {
       $to [] = 'int';
             
       $type = str_ireplace ( $from, $to, $type );
+      if ($type=='int') {
+        $tableName=$obj->getDatabaseTableName();
+        $dbName=Parameter::getGlobalParameter('paramDbName');
+        $sqlColumn="SELECT COLUMN_COMMENT as comment FROM INFORMATION_SCHEMA.COLUMNS "
+           ." WHERE TABLE_SCHEMA='$dbName' AND TABLE_NAME='$tableName' AND COLUMN_NAME='$fieldName'";
+        debugLog($sqlColumn);
+        $resultColumn=Sql::query($sqlColumn);
+        $line=Sql::fetchLine($resultColumn);
+        debugLog($line);
+        if ($line and isset($line['comment'])) $type='int('.$line['comment'].')';
+      }
       $formatList [strtolower ( $fieldName )] = $type;
     }
     self::$_tablesFormatList [$class] = $formatList;
