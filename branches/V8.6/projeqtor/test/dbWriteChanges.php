@@ -26,6 +26,7 @@ foreach($result_tables as $table) {
     //if ($row['Comment']) echo " ".$row['Field']. " => ".$row['Comment']. "<br/>";
     $type=$row['Type'];
     $name=$row['Field'];
+    if ($name=='id') continue;
     if (strtolower(substr($type,0,3))=='int') {
       $size=explode(')',explode('(',$type)[1])[0];
       echo "ALTER TABLE \${prefix}$tableName MODIFY $name $type COMMENT '$size';<br/>";
