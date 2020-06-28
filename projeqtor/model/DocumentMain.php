@@ -42,7 +42,6 @@ class DocumentMain extends SqlElement {
   public $documentReference;
   public $externalReference;
   public $idAuthor;
-  public $_spe_tags;
   public $tags;
   public $idUser;
   public $creationDate;
@@ -110,8 +109,7 @@ class DocumentMain extends SqlElement {
     "idStatus"=>"readonly",
     "documentReference"=>"readonly",
    	"idle"=>"nobr",
-    "cancelled"=>"nobr",
-    "tags"=>"hidden"
+    "cancelled"=>"nobr"
    );
    
    private static $_colCaptionTransposition = array(
@@ -247,33 +245,6 @@ class DocumentMain extends SqlElement {
     	$result .= '</button>';
     	$result .= '</td></tr>';
     	return $result;
-    }
-    if ($item=='tags' and !$print) {
-      $result='<tr><td class="label"><label>'.i18n('colTags').'&nbsp;:&nbsp;</label></td><td>'
-          .'<div id="tagListContainer" style="padding:2px 0px;width:97%;">';
-      $result.='<select dojoType="dijit.form.ComboBox" xclass="input" name="tagInput" id="tagInput" hasDownArrow="false" style="float:left;width:20%">';
-    
-      $result.='<option value=""></option>';
-      $lst=SqlList::getList('Tag');
-      foreach ($lst as $tag) {$result.='<option value="'.$tag.'">'.$tag.'</option>';}
-      $result.='<script type="dojo/connect" event="onChange">';
-      $result.=' addDocumentTag(this.value);';
-      $result.='</script>';
-      $result.='</select>';
-      $result.='<span id="tagList" style="position:relative;">';
-      $tags=explode('#',$this->tags);
-      foreach ($tags as $tag) {
-        if (trim($tag)) {
-          $result.='<span class="docLineTag" id="'.$tag.'TagDiv">';
-          $result.=$tag.'&nbsp;<div class="docLineTagRemove" onClick="removeDocumentTag(\''.$tag.'\');">x</div>';
-          $result.='</span>';
-        }
-      }
-      $result.='</span>';
-      $result.='</div>';
-      //$result.='<input type="text" name="tag" id="tag" value="" />';
-      $result.='</td></tr>';
-      return $result;
     }
   }
   

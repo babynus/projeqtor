@@ -1617,6 +1617,41 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $item=substr($col, 8);
           echo $obj->drawSpecificItem($item);
         }
+      } else if ($col=='tags') {
+        //echo '<tr><td class="label"><label>'.i18n('colTags').'&nbsp;:&nbsp;</label></td><td>';
+        echo '<div id="tagListContainer" class="input" style="padding:2px 2px;width:97%;min-height:20px;height:100%;position:relative;">';
+       
+        echo '<span id="tagList" style="position:relative;">';
+        $tags=explode('#',$val);
+        foreach ($tags as $tag) {
+          if (trim($tag)) {
+            echo '<span class="docLineTag" id="'.$tag.'TagDiv">';
+            echo $tag.'&nbsp;';
+            if (! $print and $canUpdate) echo '<div class="docLineTagRemove" onClick="removeDocumentTag(\''.$tag.'\');">x</div>';
+            echo '</span>';
+          }
+        }
+        echo '</span>';
+        if (!$print and $canUpdate) {
+          echo '<select dojoType="dijit.form.ComboBox" xclass="input" name="tagInput" id="tagInput" hasDownArrow="false" style="float:left;margin-left:10px;background:none;border:none;width:25%;" placeholder="new tag">';
+          echo '<option value=""></option>';
+          $critTag=array('refType'=>get_class($obj));
+          $critTag=array();
+          $lst=SqlList::getListWithCrit('Tag',$critTag);
+          foreach ($lst as $tag) {
+            echo '<option value="'.$tag.'">'.$tag.'</option>';
+          }
+          echo '<script type="dojo/connect" event="onChange">';
+          echo ' addDocumentTag(this.value);';
+          echo '</script>';
+          echo '<script type="dojo/method" event="onKeyPress">';
+          echo ' setTimeout(\'dojo.byId("tagInput_widget").style.width=dijit.byId("tagInput").get("value").length+" ch";\',100);';
+          echo '</script>';          
+          echo '</select>';
+        }
+        echo '</div>';
+        echo '<input type="hidden" name="tags" id="tags" value="'.$val.'" />';
+        //echo '</td></tr>';
       } else if ($print) {
         // ============================================================================================================
         // ================================================
