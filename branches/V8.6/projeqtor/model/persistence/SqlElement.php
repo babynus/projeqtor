@@ -734,6 +734,9 @@ abstract class SqlElement {
     if (property_exists($this,'idMilestone') and !isset($old)) {
       $old=$this->getOld();
     }
+    if (property_exists($this,'tags') and !isset($old)) {
+      $old=$this->getOld();
+    }
     if (isset ( $this->_onlyCallSpecificSaveFunction ) and $this->_onlyCallSpecificSaveFunction == true)
       return;
     $this->setAllDefaultValues ( true );
@@ -760,6 +763,11 @@ abstract class SqlElement {
       }
     }
     $result = $this->saveSqlElement ();
+    if (getLastOperationStatus($result=='OK') and property_exists($this, 'tags')) {
+      // Save tag list is object tag
+      Tag::saveTagList($this->tags,$old->tags,get_class($this));
+      
+    }
     if (! property_exists ( $this, '_onlyCallSpecificSaveFunction' ) or ! $this->_onlyCallSpecificSaveFunction) {
       // PlugIn Management
       $lstPluginEvt = Plugin::getEventScripts ( 'afterSave', get_class ( $this ) );

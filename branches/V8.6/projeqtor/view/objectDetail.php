@@ -1633,7 +1633,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         echo '</span>';
         if (!$print and $canUpdate) {
-          echo '<select dojoType="dijit.form.ComboBox" xclass="input" name="tagInput" id="tagInput" hasDownArrow="false" style="float:left;margin-left:10px;background:none;border:none;width:25%;" placeholder="new tag">';
+          echo '<select dojoType="dijit.form.ComboBox" xclass="input" name="tagInput" id="tagInput" hasDownArrow="false" style="float:left;padding-top:0px;padding-left:10px;background:none;border:none;width:25%;" placeholder="new tag">';
           echo '<option value=""></option>';
           $critTag=array('refType'=>get_class($obj));
           $critTag=array();

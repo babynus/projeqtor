@@ -56,16 +56,17 @@ class Tag extends SqlElement {
       if (!$newTag->id) {
         $newTag->name=$tag;
         $newTag->idle=0;
+        $newTag->refType=$refType;
         $newTag->save();
       }
     }
     if ($refType) {
-    $doc=new Document();
+      $doc=new $refType();
       foreach ($oldTagList as $tag) {
         if (! trim($tag)) continue;
         if (! in_array($tag, $newTagList)) { // Tag is deleted
           $cpt=$doc->countSqlElementsFromCriteria(null,"tags like '%#$tag#%'");
-          if ($cpt==0) { // no more document uses this tag
+          if ($cpt==0) { // no more item uses this tag
             $oldTag=SqlElement::getSingleSqlElementFromCriteria('Tag', array('name'=>$tag));
             if ($oldTag->id) {
               $oldTag->delete();
