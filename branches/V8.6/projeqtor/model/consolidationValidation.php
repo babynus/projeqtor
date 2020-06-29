@@ -1,4 +1,6 @@
 <?php
+use PhpOffice\PhpSpreadsheet\Calculation\Database;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 /*** COPYRIGHT NOTICE *********************************************************
  *
 * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -66,7 +68,10 @@ class ConsolidationValidation extends SqlElement{
 	  $idProjectType=($idProjectType=='')?0:$idProjectType;
 	  $idOrganization=($idOrganization=='')?0:$idOrganization;
 	  $lstProject=$cons->getVisibleProjectToConsolidated($idProject,$idProjectType,$idOrganization);
-
+	  $projectsList=$lstProject[0];
+	  $uniqueId=$year.$month.'_';
+	  $lstPeProject=$cons->getValuesProjectToConsolidated($lstProject[1],$year,$month);
+	  debugLog($lstPeProject);
       $c=0;
 	  //Header
 	  $result  ='<div id="imputationValidationDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
@@ -74,7 +79,6 @@ class ConsolidationValidation extends SqlElement{
 	  $result .='   <tr class="reportHeader">';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:20%;text-align:center;vertical-align:center;">'.i18n('Project').'</td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colRevenue').'</td>';
-	  //$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:8%;text-align:center;vertical-align:center;">'.i18n('expectedWork').'</td>';
 	  $result .='     <td style="width:40%;border: 1px solid grey;border-right: 1px solid white;">';
 	  $result .='      <table width="100%"><tr><td colspan="5" style="height:30px;text-align:center;vertical-align:center;">'.i18n('sectionWork').'</td></tr>';
 	  $result .='        <tr>
@@ -104,22 +108,33 @@ class ConsolidationValidation extends SqlElement{
                       </td>';
 	  $result .='   </tr>';
 	  
-	  if(!empty($lstProject)){
-    	  foreach ($lstProject as $proj){
-    	    $c++;
-    	    $idCheckBox=$c;
-    	    $uniqueId=$c;
+	  if(!empty($projectsList)){
+        for($i=0;$i<count($projectsList);$i++) {
+    	   $idCheckBox=$projectsList[$i]->id;
+    	   $uniqueId.=$projectsList[$i]->id;
+    	   $reel="";
+    	   $leftWork="";
+    	   $plannedWork="";
+    	   $validatedWork="";
+    	   $revenue="";
+    	   if(isset($lstPeProject[$i])){
+    	     $reel=$lstPeProject[$i]->realWork;
+    	     $leftWork=$lstPeProject[$i]->leftWork;
+    	     $plannedWork=$lstPeProject[$i]->plannedWork;
+    	     $validatedWork=$lstPeProject[$i]->validatedWork;
+    	     //$revenue=$lstPeProject[$i]->revenue;
+    	   }
     	   $result .='   <tr>';
-    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">'.$proj->name.'</td>';
-    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;"></td>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">'.$projectsList[$i]->name.'</td>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">'.$revenue.'</td>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;" >';
     	   $result .='     <table style="width:100%;height:100%" >';
     	   $result .='       <tr>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;">'.workFormatter($validatedWork).'</td>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;">'.workFormatter($reel).'</td>';
     	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;"></td>';
-    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;"></td>';
-    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;"></td>';
-    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;"></td>';
-    	   $result .='         <td style="width:20%;text-align:center;vertical-align:center;"></td>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;">'.workFormatter($leftWork).'</td>';
+    	   $result .='         <td style="width:20%;text-align:center;vertical-align:center;">'.workFormatter($plannedWork).'</td>';
     	   $result .='       </tr>';
     	   $result .='     </table>';
     	   $result .='    </td>';
@@ -137,7 +152,7 @@ class ConsolidationValidation extends SqlElement{
     	          . '              </script>'
     	          . '            </span>';
     	   $result .='          </td>';
-           $result .='         <td style="padding-right:5px;"><div class="validCheckBox" type="checkbox" dojoType="dijit.form.CheckBox" name="validCheckBox'.$idCheckBox.' id="validCheckBox'.$idCheckBox.'"></div></td>';
+           $result .='         <td style="padding-right:5px;"><div class="validCheckBox" type="checkbox" dojoType="dijit.form.CheckBox" name="validCheckBox'.$idCheckBox.'" id="validCheckBox'.$idCheckBox.'"></div></td>';
            $result .='       </tr>';
            $result .='     </table>';
            $result .='    </td>';
@@ -151,7 +166,7 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='    </td>';
 	    $result .='   </tr>';
 	  }
-	  $result .='<input type="hidden" id="countLine" name="countLine" value="'.$c.'"/>';
+	  $result .='<input type="hidden" id="countLine" name="countLine" value="'.$i.'"/>';
 	  $result .='  </table>';
 	  $result .='</div>';
 	  
@@ -172,9 +187,13 @@ class ConsolidationValidation extends SqlElement{
 	  }else if($idProjectType!=0 or $idOrganization!=0){
 	    $proj= new Project();
 	    $critArray=array();
+	    if($idProject!=0){
+	      $where="";
+	      $critArray["id"]=$idProject; 
+	      $critArray["idProject"]=$idProject;
+	    }
 	    ($idProjectType!=0 )?$critArray["idProjectType"]=$idProjectType:"";
-	    ($idOrganization!=0)?$critArray["idOrganization"]=$idOrganization:"";
-	    $specificWhere =($idProject!=0)?"id=$idProject or idProject=$idProject ":"$where";
+ 	    ($idOrganization!=0)?$critArray["idOrganization"]=$idOrganization:"";
 	    $lstProject=$proj->getSqlElementsFromCriteria($critArray,null,$where);
 	  }else{
 	    if($idProject!=0 and $idProjectType==0 and $idOrganization==0){
@@ -185,20 +204,43 @@ class ConsolidationValidation extends SqlElement{
 	        $proj=new Project($idProject);
 	        $lstProject[]=$proj;
 	        $subProject=$proj->getSubProjects();
-	        $lstProject= array_merge($subProject,$lstProject);
+	        $lstProject= array_merge($lstProject,$subProject);
 	      }
 	    }
 	  }
-	  return $lstProject;
+	  $result[]=$lstProject;
+	  $stringProjectList="";
+	  foreach ($lstProject as $proj){
+	    if($stringProjectList==""){
+	      $stringProjectList.=$proj->id;
+	    }else{
+	      $stringProjectList.=','.$proj->id;
+	    }
+	  }
+	  $result[]=$stringProjectList;
+	  return $result;
 	}
 	
+	
+	/** ==========================================================================
+	 * Get Visible Project
+	 * @return list of project
+	 */
+	public function getValuesProjectToConsolidated ($projects,$year,$month) {
+	  $pe=new PlanningElement();
+// 	  $dateString=$year.'-'.$month.'-'.date('d');
+// 	  $date=date("Y-m-d", strtotime($dateString));
+	  $where="refId in ($projects) and refType='Project'"; // and plannedEndDate >= $date";
+	  $projects=$pe->getSqlElementsFromCriteria(null,null,$where);
+	  return $projects;
+	}
 	/**=========================================================================
 	 * Overrides SqlElement::save() function to add specific treatments
 	* @see persistence/SqlElement#save()
 	* @return the return message of persistence/SqlElement#save() method
 	*/
 	public function save() {
-
+      
 	  $result = parent::save();
 	  return $result;
 	

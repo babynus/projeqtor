@@ -6341,7 +6341,12 @@ function validateAllSelection(){
 		}
 		if(listId != ''){
 			listId = listId.substr(0, listId.length-1);
-			saveImputationValidation(listId, 'validateSelection');
+			if(dojo.byId('imputationValidationParamDiv')){
+			  saveImputationValidation(listId, 'validateSelection');
+			}else{
+			  saveConsolidationValidation();
+			}
+			
 		}
 	}
 }
