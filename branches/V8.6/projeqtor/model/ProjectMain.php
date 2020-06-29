@@ -887,6 +887,10 @@ static function isTheLeaveProject($id=null) {
     $this->ProjectPlanningElement->organizationInherited=$this->organizationInherited;
     $this->ProjectPlanningElement->organizationElementary=$this->organizationElementary;
     
+    if($this->idProject){
+      $this->ProjectPlanningElement->idRevenueMode = 2;
+    }
+    
     // SAVE
     $result = parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
