@@ -50,7 +50,7 @@ We offer you a small overview of the major developments and you will find the fu
    .. image:: /images/iconInputMailbox.png
       :align: center
 
-   Vous pouvez désormais recevoir vos billets directement dans projeqtor par e-mails.
+   You can now receive your tickets directly in projeqtor by e-mail.
          
    :ref:`ticket-fromemail`
    
