@@ -200,6 +200,11 @@ class ProjectPlanningElementMain extends PlanningElement {
     	self::$_fieldsAttributes['commandSum']='';
     	self::$_fieldsAttributes['billSum']='';
     	self::$_fieldsAttributes['idRevenueMode']='size1/3';
+    	if($this->idRevenueMode == 2){
+    		self::$_fieldsAttributes['revenue']='readonly';
+    		self::$_fieldsAttributes['commandSum']='readonly';
+    		self::$_fieldsAttributes['billSum']='readonly';
+    	}
     }else{
       unset($this->_separator_sectionRevenue_marginTop);
     }
@@ -264,7 +269,6 @@ class ProjectPlanningElementMain extends PlanningElement {
   	  $org->updateSynthesis();
   	}
   	KpiValue::calculateKpi($this);
-  	
   	return $result;
   }
   
@@ -485,6 +489,22 @@ class ProjectPlanningElementMain extends PlanningElement {
 	  	$colScript .= '    formChanged();';
 	  	$colScript .= '  }';
 	  	$colScript .= '</script>';
+  	}else if($colName=='commandSum' or $colName=='billSum' or $colName=='revenue'){
+  	  $colScript .= '<script type="dojo/connect" event="onInput" >';
+  	  $colScript .= '  var revenue=dijit.byId("' . get_class($this) . '_revenue").get("value");';
+  	  $colScript .= '  var commandSum=dijit.byId("' . get_class($this) . '_commandSum").get("value");';
+  	  $colScript .= '  var billSum=dijit.byId("' . get_class($this) . '_billSum").get("value");';
+  	  $colScript .= '  if (revenue > commandSum) {';
+  	  $colScript .= '  console.log(dojo.byId("' . get_class($this) . '_commandSum"));';
+  	  $colScript .= '    dojo.byId("' . get_class($this) . '_commandSum").style.background = "#ff8080 !important";';
+  	  $colScript .= '    formChanged();';
+  	  $colScript .= '  }';
+  	  $colScript .= '  if (revenue < billSum) {';
+  	  $colScript .= '  console.log(dojo.byId("' . get_class($this) . '_billSum"));';
+  	  $colScript .= '    dojo.byId("' . get_class($this) . '_billSum").style.background = "#ff8080 !important";';
+  	  $colScript .= '    formChanged();';
+  	  $colScript .= '  }';
+  	  $colScript .= '</script>';
   	}
   	return $colScript;
   }
