@@ -413,6 +413,7 @@ class Assignment extends SqlElement {
     
     $obj = new $this->refType($this->refId);
     $peName=$this->refType.'PlanningElement';
+    if ($peName=='PeriodicMeetingPlanningElement') $peName='MeetingPlanningElement';
     $planningMode = new PlanningMode($obj->$peName->idPlanningMode);
     if($planningMode->code == 'MAN'){
     	$pwm = new PlannedWorkManual();
