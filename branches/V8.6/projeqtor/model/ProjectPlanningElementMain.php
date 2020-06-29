@@ -121,6 +121,17 @@ class ProjectPlanningElementMain extends PlanningElement {
   public $organizationElementary;
   public $needReplan;
   public $color;
+  public $_separator_sectionRevenue_marginTop;
+  public $_tab_5_1_smallLabel_3 = array('','','','','',
+      'CA');
+  public $revenue;
+  public $_label_commandSum;
+  public $commandSum;
+  public $_label_billSum;
+  public $billSum;
+  public $_tab_2_1_smallLabel_4 = array('','','idRevenueMode');
+  public $idRevenueMode;
+  
   
   
   private static $_fieldsAttributes=array(
@@ -155,7 +166,7 @@ class ProjectPlanningElementMain extends PlanningElement {
     "organizationInherited"=>"hidden",
     "organizationElementary"=>"hidden",
     "needReplan"=>"hidden",
-    "color"=>"hidden"
+    "color"=>"hidden",
   );   
   
   private static $_databaseTableName = 'planningelement';
@@ -183,6 +194,14 @@ class ProjectPlanningElementMain extends PlanningElement {
     }else{
       unset($this->_separator_menuTechnicalProgress_marginTop);
       unset($this->_tab_5_1_smallLabel_9);
+    }
+    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+    	self::$_fieldsAttributes['revenue']='';
+    	self::$_fieldsAttributes['commandSum']='';
+    	self::$_fieldsAttributes['billSum']='';
+    	self::$_fieldsAttributes['idRevenueMode']='size1/3';
+    }else{
+      unset($this->_separator_sectionRevenue_marginTop);
     }
   }
   /** ==========================================================================

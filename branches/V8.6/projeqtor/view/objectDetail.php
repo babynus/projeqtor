@@ -2466,7 +2466,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         
         // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-        if (($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) or $col=='idProgressMode' or $col=='idWeightMode') {
+        if (($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) or $col=='idProgressMode' or $col=='idWeightMode' or $col=='idRevenueMode') {
           $showExtraButton=true;
           $fieldWidth=round($fieldWidth/2)-23;
         }
@@ -2512,7 +2512,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
           $projSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$obj->idProject));
           $val = $projSituation->id;
-        }else if (($classObj=='ActivityPlanningElement' or $classObj=='ProjectPlanningElement') and ($col=='idWeightMode' or $col=='idProgressMode')) {
+        }else if (($classObj=='ActivityPlanningElement' or $classObj=='ProjectPlanningElement') and ($col=='idWeightMode' or $col=='idProgressMode' or $col=='idRevenueMode')) {
           $next=htmlDrawOptionForReference($col, $val, $obj,true, $critFld, $critVal);
         }else {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
@@ -2687,7 +2687,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             }
           }
         }
-        if ($dataType=='decimal' and (substr($col, -4, 4)=='Cost' or substr($col, -6, 6)=='Amount' or $col=='amount')) {
+        if ($dataType=='decimal' and (substr($col, -4, 4)=='Cost' or substr($col, -6, 6)=='Amount' or $col=='amount' or $col=='revenue' or $col=='commandSum' or $col=='billSum')) {
           $isCost=true;
           $fieldWidth=$smallWidth;
           if ( (substr($col, -6, 6)=='Amount' or $col=='amount') and ! SqlElement::is_a($obj, 'PlanningElement')) {

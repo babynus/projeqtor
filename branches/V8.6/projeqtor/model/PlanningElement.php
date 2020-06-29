@@ -98,6 +98,10 @@ class PlanningElement extends SqlElement {
   public $unitWeight;
   public $idWeightMode;
   public $color;
+  public $revenue;
+  public $commandSum;
+  public $billSum;
+  public $idRevenueMode;
   
   private static $_fieldsAttributes=array(
                                   "id"=>"hidden",
@@ -159,7 +163,11 @@ class PlanningElement extends SqlElement {
                                   "idProgressMode"=>"hidden",
                                   "unitWeight"=>"hidden",
                                   "_label_weight"=>"hidden",
-                                  "idWeightMode"=>"hidden"
+                                  "idWeightMode"=>"hidden",
+                                  "revenue"=>"hidden,noImport",
+                                  "commandSum"=>"hidden,noImport",
+                                  "billSum"=>"hidden,noImport",
+                                  "idRevenueMode"=>"hidden,noImport"
   );   
   
   private static $_predecessorItemsArray = array();
