@@ -587,18 +587,50 @@ The copy button is an accelerator to copy the value entered on Monday on all oth
 Planned Interventions assignment
 ================================
 
-.. rubric:: Assignment
-
 The assigned workload is no longer determined but will be entered on a calendar which can be clicked, per half-day.
 
-See: :ref:`Manual planning assignment<assignment-manualplanning>`
+See: :ref:`Planned interventions assignment<plannedintervention-assign>`
 
+ .. compound:: Display Manual planning calendar  
 
+   * Click on |buttonAdd| to add a new assignment. 
+   
+   * To see the workload distribution table, select the resource and confirm. Then click on the edit button.
+
+      * If the assignment already exists, click directly on the |buttonEdit|.
+
+      * The calendar will then be displayed in the assignment window..
+   
+   * The display starts in the current month and spans the next six months.
+   
+   * Each box is divided into two half days. The assigned work is then automatically the sum of the selected half-days.
+   
+
+   
 
 .. figure:: /images/GUI/GANTT_BOX_PlanningManual-Assignment.png
    :alt: Assigment with the Manual planning mode
    
    Assigment with the Manual planning mode
+   
+The workload saved in this window will be displayed to the :ref:`planned interventions<planned-interventions>` screen.
+
+
+
+
+ .. compound:: Distribution of the workload for a new assignment 
+
+   * click on a box to enter a workload.
+
+     Depending on the :ref:`global parameter<GP-effectCapacity>`, this workload will be either planned work or real work. 
+   
+   * Each day is represented by two half-days (am and pm)
+
+   * You can plan for the 6 months following the date of the assignment
+
+   * The half-days filled in will be visible on the screen of planned interventions
+
+   * Save this data with the save button
    
   
 

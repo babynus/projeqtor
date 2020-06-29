@@ -1709,24 +1709,7 @@ The goal is to make the specifications more flexible to cover broader and more g
 The assigned workload is no longer determined but will be entered on a calendar which can be clicked, per half-day.
 
 See: :ref:`Planned interventions assignment<plannedintervention-assign>`
-
- .. compound:: Display Manual planning calendar  
-
-   * Click on |buttonAdd| to add a new assignment. 
    
-   * Select the resource and save.
-
-   * A clickable calendar is displayed. 
-   
-   * The display starts in the current month and spans the next six months.
-   
-   * Each box is divided into two half days. The assigned work is then automatically the sum of the selected half-days.
-   
-   * If the assignment already exists, click on |buttonEdit|. The calendar will be displayed in the assignment window.
-
-
-   
-
 .. figure:: /images/GUI/GANTT_BOX_PlanningManual-Assignment.png
    :alt: Assigment with the Manual planning mode
    
@@ -1734,22 +1717,6 @@ See: :ref:`Planned interventions assignment<plannedintervention-assign>`
    
 The workload saved in this window will be displayed to the planned interventions screen.
 
-
-
-
- .. compound:: Distribution of the workload for a new assignment 
-
-   * click on a box to enter a workload.
-
-     Depending on the :ref:`global parameter<GP-effectCapacity>`, this workload will be either planned work or actual work. 
-   
-   * Each day is represented by two half-days (am and pm)
-
-   * You can plan for the 6 months following the date of the assignment
-
-   * The half-days filled in will be visible on the screen of planned interventions
-
-   * Save this data with the save button
 
 
 
@@ -1846,47 +1813,48 @@ The new activity will then appear in the list.
 
 .. rubric:: |twoBLC| FTE    
    
-In this calendar, we graphically display if we respect the quantity of FTE requested.
+In this calendar, we display graphically if we respect the quantity of people requested on the activity and on the half day.
 
-Fill in one FTE for each activity to be checked.
+Fill in an integer value for each activity to check.
 
-If you enter 1, you expect that 1 FTE in total will be performed over half a day on this activity, regardless of the number of resources.
+If you enter 1, you expect at least one person to perform half a day on this activity.
 
-A control is then carried out and takes into account all the resources assigned to each activity, and not only those selected and visible on the calendar
+A check is then carried out and takes into account all the resources assigned to each activity, and not only those selected and visible on the calendar.
 
+If the field is left empty or at 0 then no control is carried out and the calendar will not display any green or red box.
 
 
 
  .. compound:: Green Box
  
-   If the entry respects the workload constraint expected in FTE the box is green
+   If the entry respects the workload constraint expected in FTE the box is green.
 
    .. image:: /images/GUI/GANTT_ZONE_FTEGreen.PNG
    
-   The FTE value entered for the selected activity is set to 1.
+   Example with a value of 1 in the FTE field for the selected activity.
    
-   This FTE is defined for each half-day.
+   This FTE value is defined for each half-day.
 
-   You must therefore have 1 effective FTE planned for this day regardless of the resource or resources that will be planned
+   You must therefore have 1 effective person planned for each half day whatever the resource or resources that will be provided
    
    
    
  .. compound:: Red Box
  
-   If the total entry is greater than the expected workload in FTE the bos is red 
+  If the total entry is greater than the expected workload in FTE the bos is red.
    
-   .. image:: /images/GUI/GANTT_ZONE_FTERed.png
+  .. image:: /images/GUI/GANTT_ZONE_FTERed.png
    
-   In this example, my FTE is set to 1 for each half day
+  Example, with a value of 1 in the ETP field is for each half day
 
-   We see that for the first two days, two resources are planned on the same half day.
+  On the diagram we can see that the first two days, two resources are planned on the same half-day.
 
-   The FTE is then 2. The box turns red. The workload is higher than expected
+  The box then turns red. The workload is higher than expected since we expected a person on this half day and on this activity   
    
    
  .. compound:: Non-colored box
  
-   The total entry is less than the expected workload in FTE or there is no expected workload
+  The total entry is less than the expected workload in FTE or there is no expected workload.
    
 
 .. _manualPlan-InterventionMode:
@@ -1904,15 +1872,17 @@ The saved modes will remain fixed for all projects and all teams.
    
    Intervention mode
 
-The manager will have to select an activity or a modality or both.
+You can select an activity or a modality or both.
 
-* If the intervention mode is not selected, the box is colored according to activity but no letter appears, and vice versa.
+     * If the intervention mode is not selected, the box is colored according to the activity but no letter appears, and vice versa.
 
-* If only the intervention mode is selected, it will be saved without modifying the planned or actual work.
+     * If only the intervention mode is selected, it will be saved without modifying the planned or actual work.
 
-You can however add one or the other after planning the intervention or intervention mode.
+You can however add one or the other after having planned the intervention or the intervention mode.
 
 A second click with the same parameters will delete the assignment.
+
+Ctrl Click allows you to complete the two half days
 
 
 
@@ -1921,7 +1891,7 @@ A second click with the same parameters will delete the assignment.
 .. rubric:: |fiveBLC| Interventions Calendar
 
 
-* Click on an activity to plan workload on it
+* Click on an activity and / or an intervention modes to plan workload on it
 
 * Click on half a day to plan the workload
 
@@ -1929,16 +1899,35 @@ A second click with the same parameters will delete the assignment.
 .. image:: /images/GUI/GANTT_ZONE_PLanWork.png
    :alt: Workload on calendar
       
-* the targeted half day is filled with the color of the selected activity and the letter of the chosen intervention mode.
+* The targeted half day is filled with the color of the selected activity and the letter of the chosen intervention mode.
 
    
  .. compound:: Gray color
 
-   The gray boxes indicate the unavailability, the absence of your resource.
+   The light gray box indicates that the day is idle on the resource calendar.
+
+   The dark gray box indicates an absence of the resource. 
  
    .. image:: /images/GUI/GANTT_ZONE_PLannedInterventionAbsence.png
 
 
+   When real work is completed for half a day, the box is half gray.
+
+   If the full day is completed then the box is completely grayed out.
+   
+   
+   .. image:: /images/GUI/GANTT_ZONE_InterventionsRealwork.PNG
+   
+
+ .. compound:: striated box
+
+   The striated boxes indicates that the working time recorded by the resource has been validated.
+   
+   .. image:: /images/GUI/GANTT_ZONE_InterventionsValid.PNG
+   
+   
+   
+      
 .. note:: Planned or Real
 
    The workload can be recorded as a planned load or as a real load.   
