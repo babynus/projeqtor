@@ -1607,3 +1607,9 @@ CREATE TABLE `${prefix}tag` (
 CREATE UNIQUE INDEX tagName ON `${prefix}tag` (name);
 
 ALTER TABLE `${prefix}document` ADD `tags` varchar(4000) DEFAULT NULL;
+
+ALTER TABLE `${prefix}planningelement` 
+ADD COLUMN `revenue` decimal(11,2) unsigned DEFAULT NULL,
+ADD COLUMN `commandSum` decimal(11,2) unsigned DEFAULT NULL,
+ADD COLUMN `billSum` decimal(11,2) unsigned DEFAULT NULL,
+ADD COLUMN `revenueMode` int(12) unsigned DEFAULT NULL COMMENT '12';
