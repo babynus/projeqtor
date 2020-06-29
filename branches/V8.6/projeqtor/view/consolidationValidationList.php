@@ -35,7 +35,7 @@ $currentYear=strftime("%Y") ;
 $currentMonth=strftime("%m") ;
 ?>
 
-<div dojoType="dijit.layout.BorderContainer" id="imputationValidationParamDiv" name="imputationValidationParamDiv">  
+<div dojoType="dijit.layout.BorderContainer" id="imputationConsolidationParamDiv" name="imputationConsolidationParamDiv">  
   <div dojoType="dijit.layout.ContentPane" region="top" id="imputationValidationButtonDiv" class="listTitle" >
   <form dojoType="dijit.form.Form" name="consolidationValidationForm" id="consolidationValidationForm" action="" method="post" >
   <table width="100%" height="64px" class="listTitle">
