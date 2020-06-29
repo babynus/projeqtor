@@ -82,6 +82,9 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $_label_weight;
   public $unitWeight;
   public $idWeightMode;
+  public $_separator_sectionRevenue_marginTop;
+  public $_label_CA;
+  public $revenue;
   public $_separator_menuReview_marginTop;
   public $_tab_5_2_smallLabel_3 = array('', '', '', '', '', 'progress','priority');
   public $progress;

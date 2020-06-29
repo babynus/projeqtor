@@ -326,6 +326,20 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
           unset($table[2]);
         }
       }
+  } else if($col=="idRevenueMode"){
+    $showIdleCriteria=$showIdle;
+    $table=SqlList::getList($listType,$column,$selection, $showIdleCriteria );
+//       if(isset($obj) and get_class($obj)=='ProjectPlanningElement'){
+//         unset($table[3]);
+//         unset($table[1]);
+//         $selection=2;
+//       }else if(isset($obj)){
+//         if($obj->getSonItemsArray()){
+//           unset($table[3]);
+//         }else {
+//           unset($table[2]);
+//         }
+//       }
   }else {
     // None of the previous cases : no criteria and not of the expected above cases
     $showIdleCriteria=$showIdle;

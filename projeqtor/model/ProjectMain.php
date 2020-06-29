@@ -84,7 +84,7 @@ class ProjectMain extends SqlElement {
   public $idleDate;
   public $cancelled;
   public $_lib_cancelled;
-
+  
   public $_sec_ProductprojectProducts;
   public $_ProductProject=array();
   
