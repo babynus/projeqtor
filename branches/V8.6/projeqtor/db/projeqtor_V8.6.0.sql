@@ -1612,4 +1612,16 @@ ALTER TABLE `${prefix}planningelement`
 ADD COLUMN `revenue` decimal(11,2) unsigned DEFAULT NULL,
 ADD COLUMN `commandSum` decimal(11,2) unsigned DEFAULT NULL,
 ADD COLUMN `billSum` decimal(11,2) unsigned DEFAULT NULL,
-ADD COLUMN `revenueMode` int(12) unsigned DEFAULT NULL COMMENT '12';
+ADD COLUMN `idRevenueMode` int(12) unsigned DEFAULT NULL COMMENT '12';
+
+CREATE TABLE `${prefix}revenuemode` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `sortOrder` int(3) unsigned DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}revenuemode` (`id`, `name`,  `sortOrder`, `idle`) VALUES
+(1,'fixed',100,0),
+(2,'variable',200,0);
