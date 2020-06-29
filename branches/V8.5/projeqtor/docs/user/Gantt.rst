@@ -1906,7 +1906,7 @@ Ctrl Click allows you to complete the two half days
 
    The light gray box indicates that the day is idle on the resource calendar.
 
-   The dark gray box indicates an absence of the resource. 
+   The dark gray boxes indicate reality. It may be an absence or work actually performed and informed.
  
    .. image:: /images/GUI/GANTT_ZONE_PLannedInterventionAbsence.png
 
@@ -1919,9 +1919,9 @@ Ctrl Click allows you to complete the two half days
    .. image:: /images/GUI/GANTT_ZONE_InterventionsRealwork.PNG
    
 
- .. compound:: striated box
+ .. compound:: Striped box
 
-   The striated boxes indicates that the working time recorded by the resource has been validated.
+   The striped boxes indicates that the working time recorded by the resource has been validated.
    
    .. image:: /images/GUI/GANTT_ZONE_InterventionsValid.PNG
    
