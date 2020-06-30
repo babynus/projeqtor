@@ -731,6 +731,37 @@ class PlanningElement extends SqlElement {
           }
         }
     }
+    
+    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+      $project = new Project($this->idProject);
+      $subProj = $project->getSubProjectsList(true);
+      foreach ($subProj as $name=>$id){
+      	$proj = new Project($id);
+      	$proj->ProjectPlanningElement->idRevenueMode = 2;
+      	$proj->save();
+      }
+//       if($this->idRevenueMode == 2){
+        $projectList = $project->getRecursiveSubProjectsFlatList(true, true);
+        $projectList = array_flip($projectList);
+        $projectList = '(0,'.implode(',',$projectList).')';
+        $where = 'idProject in '.$projectList.' and idle = 0';
+        $command = new Command();
+        $commandList = $command->getSqlElementsFromCriteria(null,null,$where);
+        $bill = new Bill();
+        $billList = $bill->getSqlElementsFromCriteria(null,null,$where);
+        $cmdSum = 0;
+        foreach ($commandList as $cmd){
+        	$cmdSum += $cmd->totalFullAmount;
+        }
+        $billSum = 0;
+        foreach ($billList as $bill){
+        	$billSum += $bill->fullAmount;
+        }
+        $this->commandSum = $cmdSum;
+        $this->billSum = $billSum;
+        $this->save();
+//       }
+    }
     return $result;
   }
   public function setHandledOnRealWork ($action='check') {
