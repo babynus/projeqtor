@@ -83,7 +83,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $unitWeight;
   public $idWeightMode;
   public $_separator_sectionRevenue_marginTop;
-  public $_label_CA;
+  public $_tab_1_1_smallLabel_2 = array('', 'ca');
   public $revenue;
   public $_separator_menuReview_marginTop;
   public $_tab_5_2_smallLabel_3 = array('', '', '', '', '', 'progress','priority');
@@ -280,6 +280,12 @@ class ActivityPlanningElementMain extends PlanningElement {
       unset($this->_separator_menuTechnicalProgress_marginTop);
       unset($this->_tab_5_1_smallLabel_8);
       unset($this->_tab_4_1_smallLabel_2);
+    }
+    $project = new Project($this->idProject);
+    if(trim(Module::isModuleActive('moduleGestionCA')) == 1 and $project->ProjectPlanningElement->idRevenueMode == 2){
+    	self::$_fieldsAttributes['revenue']='';
+    }else{
+    	unset($this->_separator_sectionRevenue_marginTop);
     }
   }
   /** ==========================================================================

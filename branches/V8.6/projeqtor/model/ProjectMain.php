@@ -888,7 +888,10 @@ static function isTheLeaveProject($id=null) {
     $this->ProjectPlanningElement->organizationElementary=$this->organizationElementary;
     
     if($this->idProject){
-      $this->ProjectPlanningElement->idRevenueMode = 2;
+      $prntProject = new Project($this->idProject);
+      if($prntProject->ProjectPlanningElement->idRevenueMode != null){
+        $this->ProjectPlanningElement->idRevenueMode = 2;
+      }
     }
     
     // SAVE
