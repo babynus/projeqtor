@@ -297,8 +297,16 @@ function formatColorThumb($col,$val, $size=20, $float='right',$name="") {
   $color=SqlList::getFieldFromId($class, $val, 'color');
   if (! $color) return '';
   $radius=round($size/2,0);
+  if (isNewGui()) $radius=5;
   $res='<div style="border: 1px solid #AAAAAA;background:'.$color.';';
-  $res.='width:'.($size-2).'px;height:'.($size-2).'px;float:'.$float.';border-radius:'.$radius.'px"';
+  if (isNewGui()) $res.="margin-top:4px;margin-right:5px;";
+  $width=$size-2;
+  $height=$size-2;
+  if (isNewGui()) {
+    $width=$size-10;
+    $height=$size;
+  }
+  $res.='width:'.$width.'px;height:'.$height.'px;float:'.$float.';border-radius:'.$radius.'px"';
   //$res.=' onMouseOver="drawGraphStatus();"';
   if($name!="")$res.=' onMouseOver="showBigImage(null,null,this,\''.$name.'\');" onMouseOut="hideBigImage();"';
   $res.='>&nbsp;</div>';

@@ -1448,7 +1448,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             } else if ($thumbRes) {
               $formatedThumb=formatUserThumb($val, null, null, 22, 'right');
             } else if ($thumbColor) {
-              $formatedThumb=formatColorThumb($col, $val, 20, 'right');
+              $formatedThumb=formatColorThumb($col, $val, ((isNewGui())?25:20), 'right');
             }
             $thumb=(! $print && $val && ($thumbRes or $thumbColor or $thumbIcon) && $showThumb && $formatedThumb)?true:false;
             echo '<label for="'.$col.'" class="'.(($thumb)?'labelWithThumb ':'').'generalColClass '.$col.'Class" style="'.$specificStyle.';'.$labelStyle.'">';
@@ -1457,7 +1457,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             } else {
               echo htmlEncode($obj->getColCaption($col), 'stipAllTags');
             }
-            echo '&nbsp;'.(($thumb)?'':':&nbsp;').'</label>'.$cr;
+            echo '&nbsp;'.(($thumb or isNewGui())?'':':&nbsp;').'</label>'.$cr;
             if ($thumb) {
               // echo $formatedThumb;
               if (!$print) echo '<div style="position:absolute;top:1px;right:0px;float:right;">';
@@ -1527,6 +1527,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $fieldWidth=$largeWidth;
         }
       }
+      if (isNewGui()) $fieldWidth-=10;
       if (substr($col, 0, 2)=='id' and $dataType=='int' and strlen($col)>2 and substr($col, 2, 1)==strtoupper(substr($col, 2, 1))) {
         $fieldWidth=$largeWidth;
       }
@@ -2427,14 +2428,18 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             }
           }
         }
-        if ($displayComboButtonCol) {
-          if ($displayDirectAccessButton) {
-            $fieldWidth-=50;
-          } else {
+        if (!isNewGui()) {
+          if ($displayComboButtonCol) {
+            if ($displayDirectAccessButton) {
+              $fieldWidth-=50;
+            } else {
+              $fieldWidth-=30;
+            }
+          } else if ($displayDirectAccessButton) {
             $fieldWidth-=30;
           }
-        } else if ($displayDirectAccessButton) {
-          $fieldWidth-=30;
+        } else {
+          $fieldWidth-=10;
         }
         $hasOtherVersion=false;
         $versionType='';
@@ -2520,7 +2525,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if ($col=='idProduct' and !$obj->id and $obj->isAttributeSetToField($col, 'required')) $obj->idProduct=$next;
         echo $colScript;
         echo '</select>';
-        if ($displayDirectAccessButton) {
+        if ($displayDirectAccessButton and ! isNewGui()) {
           echo '<div id="'.$col.'ButtonGoto" ';
           echo ' title="'.i18n('showDirectAccess').'" style="float:right;margin-right:3px;'.$specificStyleWithoutCustom.'"';
           echo ' class="roundedButton  generalColClass '.$col.'Class">';
@@ -2530,13 +2535,19 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '></div>';
           echo '</div>';
         }
-        if ($displayComboButtonCol) {
+        if ($displayComboButtonCol and !isNewGui()) {
           echo '<div id="'.$col.'ButtonDetail" onmouseleave="hideIconViewSubMenu(\''.$col.'\');"';
           echo ' title="'.i18n('showDetail').'" style="float:right;margin-right:3px;'.$specificStyleWithoutCustom.'"';
           echo ' class="roundedButton generalColClass '.$col.'Class">';
-          echo '<div class="iconView" ';
-          echo ' onclick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').')"';
-          echo 'oncontextmenu="event.preventDefault();showIconViewSubMenu(\''.$col.'\');"></div>';
+          
+          if (isNewGui()) {
+            echo '<div class="iconHideStream22"  style="opacity:40%;margin-top:5px;margin-left:-10px;"';
+            echo ' onMouseOver="event.preventDefault();showIconViewSubMenu(\''.$col.'\');"></div>';
+          } else {
+            echo '<div class="iconView" ';
+            echo ' onclick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').')"';
+            echo 'oncontextmenu="event.preventDefault();showIconViewSubMenu(\''.$col.'\');"></div>';
+          }
           echo '</div>';
           echo '<div id="'.$col.'IconViewSubMenu" name="'.$col.'IconViewSubMenu" style="height:auto;overflow-y:auto;position:absolute;z-index: 999999999;display:none;width:160px;background-color:white;border:1px solid grey;"
                 onmouseleave="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'none\';" onmouseenter="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'block\';clearTimeout(hideIconViewSubMenuTimeOut);">';

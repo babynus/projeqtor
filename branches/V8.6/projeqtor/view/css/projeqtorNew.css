@@ -1,0 +1,93 @@
+/*** COPYRIGHT NOTICE *********************************************************
+ *
+ * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
+ * Contributors : -
+ *
+ * This file is part of ProjeQtOr.
+ * 
+ * ProjeQtOr is free software: you can redistribute it and/or modify it under 
+ * the terms of the GNU Affero General Public License as published by the Free 
+ * Software Foundation, either version 3 of the License, or (at your option) 
+ * any later version.
+ * 
+ * ProjeQtOr is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for 
+ * more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along with
+ * ProjeQtOr. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can get complete code of ProjeQtOr, other resource, help and information
+ * about contributors at http://www.ProjeQtOr.org 
+ *     
+ *** DO NOT REMOVE THIS NOTICE ************************************************/
+
+/* ============ */
+/* NEW GUI      */
+/* ============ */
+
+.dijitTextBox {
+    font-weight: normal;
+    color: #555555;
+    margin: 5px 2px 5px 0px;
+    padding: 2px 5px 6px 5px;
+    border: 1px solid #b3b3b3;
+    line-height: normal;
+    border-radius: 5px 5px 5px 5px;
+    barckground: url() !important;
+    barckground-color: #ffffff !important;
+    width: 195px;
+    height: 17px;
+    font-size: 10pt;
+}
+
+label, .label, .smallLabel, .labelMultiple {
+    font-weight: 400;
+    font-family: Verdana, Arial, Tahoma, sans-serif;
+    font-size: 10pt;
+    text-align: right;
+    vertical-align: top;
+    width: 140px;
+    padding: 5px 1px 2px 0px;
+    float: left;
+    border: 1px;
+    text-shadow: 1px 1px #FFFFFF;
+}
+
+.ProjeQtOrFlatGrey .dijitButtonNode, .ProjeQtOrFlatGrey .dijitReset.dijitInline.dijitButtonNode {
+  background: transparent;
+  -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  border-color : #b3b3b3;
+}
+.ProjeQtOrFlatGrey .dijitButtonNode:hover, .ProjeQtOrFlatGrey .dijitReset.dijitInline.dijitButtonNode:hover {
+  background: #dddddd;
+}
+.ProjeQtOrFlatGrey .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrFlatGrey .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
+  background: rgba(128,128,128,0.2) !important;
+}
+.dijitComboBoxMenu {
+	 background: #ffffff;
+}
+.dijitReset.dijitMenuItem  {
+	font-size: 10pt;
+	padding: 5px 5px 5px 10px;
+	color: #555555;
+	-webkit-transition: all 0.8s ease;
+  -moz-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  -ms-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+.dijitReset.dijitMenuItem.dijitMenuItemHover {
+	/* color: #ffffff; */
+	background: #cccccc;
+}
+
+.ProjeQtOrFlatGrey #mapDiv, .ProjeQtOrFlatGrey #messageDiv, .ProjeQtOrFlatGrey #listDiv, .ProjeQtOrFlatGrey #formDiv, .ProjeQtOrFlatGrey .display, .ProjeQtOrFlatGrey .background, .ProjeQtOrFlatGrey .dijitTitlePaneContentInner, .ProjeQtOrFlatGrey .dijitTabPane, .ProjeQtOrFlatGrey #mainDiv, .ProjeQtOrFlatGrey #centerDiv {
+    background-color: #ffffff; 
+}
