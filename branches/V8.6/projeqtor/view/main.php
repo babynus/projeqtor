@@ -78,6 +78,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 <!-- ELIOTT - LEAVE SYSTEM -->
   <link rel="stylesheet" type="text/css" href="css/projeqtorHr.css" />
   <link rel="stylesheet" href="../external/dojox/calendar/themes/tundra/Calendar.css" />
+  <?php if (isNewGui()) {?>
+  <link rel="stylesheet" type="text/css" href="css/projeqtorNew.css" />
+  <?php }?>
 <!-- ELIOTT - LEAVE SYSTEM -->
   <script type="text/javascript" src="../external/html2canvas/html2canvas.js?version=<?php echo $version.'.'.$build;?>"></script>
   <?php if (isHtml5()) {?>

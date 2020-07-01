@@ -2011,7 +2011,7 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
  */
 function getTheme() {
   global $indexPhp;
-  if (getGuiMinimal()) return "ProjeQtOrFlatGrey";
+  if (isNewGui()) return "ProjeQtOrFlatGrey";
   if (isset($indexPhp) and $indexPhp and getSessionValue('setup', null, true)) return "ProjeQtOr"; // On first configuration, use default
   $defaultTheme=Parameter::getGlobalParameter('defaultTheme');
   if (substr($defaultTheme, 0, 12)=="ProjectOrRia") {
@@ -4459,6 +4459,7 @@ function is_session_started() {
 }
 
 function getEditorType() {
+  if (isNewGui()) return "CKInline";
   $editor=Parameter::getUserParameter('editor');
   if ($editor) {
     return $editor;
@@ -5086,11 +5087,11 @@ function searchAllAttachmentMailable($objectClass,$idObj){
 }
 
 function getGui() {
-  global $paramMinimalGui;
-  if (isset($paramMinimalGui) and $paramMinimalGui==true) return "minimal";
+  global $paramNewGui;
+  if (isset($paramNewGui) and $paramNewGui==true) return "new";
   else return "standard";
 }
-function getGuiMinimal() {
-  return (getGui()=='minimal');
+function isNewGui() {
+  return (getGui()=='new');
 }
 //
