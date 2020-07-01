@@ -1010,6 +1010,17 @@ static function isTheLeaveProject($id=null) {
         $ps->save();
       }
     }
+    
+  	if(trim(Module::isModuleActive('moduleGestionCA')) == 1 and $this->ProjectPlanningElement->idRevenueMode == 2){
+  		$projectList = $this->getRecursiveSubProjectsFlatList(true, true);
+  		$projectList = array_flip($projectList);
+  		$projectList = '(0,'.implode(',',$projectList).')';
+  		$where = 'idProject in '.$projectList.' and idle = 0 and refType = \'Activity\'';
+    	$ape = new ActivityPlanningElement();
+    	$apeSum = $ape->sumSqlElementsFromCriteria('revenue', null, $where);
+    	$this->ProjectPlanningElement->revenue = $apeSum;
+  		$this->ProjectPlanningElement->save();
+  	}
     return $result; 
 
   }
