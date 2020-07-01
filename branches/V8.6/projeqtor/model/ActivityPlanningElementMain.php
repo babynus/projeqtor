@@ -382,6 +382,17 @@ class ActivityPlanningElementMain extends PlanningElement {
     }
     //
     return parent::save();
+    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+    	$project = new Project($this->idProject);
+    	if($project->ProjectPlanningElement->idRevenueMode == 2){
+    		$projectList = $project->getRecursiveSubProjectsFlatList(true, true);
+    		$projectList = array_flip($projectList);
+    		$projectList = '(0,'.implode(',',$projectList).')';
+    		$where = 'idProject in '.$projectList.' and idle = 0 and refType = \'Activity\'';
+    		$project->ProjectPlanningElement->revenue = $this->sumSqlElementsFromCriteria('revenue', null, $where);
+    		$project->ProjectPlanningElement->save();
+    	}
+    }
   }
   
 /** =========================================================================
