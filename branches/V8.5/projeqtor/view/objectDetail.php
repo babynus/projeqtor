@@ -3210,7 +3210,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     echo ' titleStyle="'.$labelStyle.'"';
     echo ' style="display:'.$display.';position:relative;width:'.$widthPct.';float: '.$float.';clear:'.$clear.';margin: '.$margin.'px 0 4px 4px; padding: 0;top:0px;"';
     echo ' onHide="saveCollapsed(\''.$titlePane.'\');"';
-    echo ' onShow=";saveExpanded(\''.$titlePane.'\');">';
+    echo ' onShow=";saveExpanded(\''.$titlePane.'\');refreshSectionCount(\''.$sectionName.'\')">';
     $titleHeight=($fontSize)?$fontSize*1.6:'';
     echo ' <script type="dojo/method" event="titlePaneHandler" > setAttributeOnTitlepane(\''.$titlePane.'\',\''.$labelStyle.'\',\''.$titleHeight.'\');</script>';
     echo '<table class="detail"  style="width: 100%;" >';
