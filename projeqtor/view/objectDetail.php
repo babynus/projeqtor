@@ -4540,7 +4540,14 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
       }
     }
   }
-  
+  $alreadyExistsArray=array();
+  foreach($list as $lnkTest) {
+    if ($lnkTest->ref1Type=='Document' and $lnkTest->ref1Id==$obj->id) {
+      $alreadyExistsArray[]=$lnkTest->ref2Type.'#'.$lnkTest->ref2Id;
+    } else {
+      $alreadyExistsArray[]=$lnkTest->ref1Type.'#'.$lnkTest->ref1Id;
+    }
+  }
   if (get_class($obj)=='Document') {
     $dv=new DocumentVersion();
     $lstVers=$dv->getSqlElementsFromCriteria(array('idDocument'=>$obj->id));
@@ -4553,9 +4560,11 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
         if ($lnk->ref1Type=='DocumentVersion') {
           $lnk->ref1Type='Document';
           $lnk->ref1Id=$obj->id;
+          if (in_array($lnk->ref2Type.'#'.$lnk->ref2Id, $alreadyExistsArray)) continue;
         } else {
           $lnk->ref2Type='Document';
           $lnk->ref2Id=$obj->id;
+          if (in_array($lnk->ref1Type.'#'.$lnk->ref1Id, $alreadyExistsArray)) continue;
         }
         $list[]=$lnk;
       }
