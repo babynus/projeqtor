@@ -1073,20 +1073,8 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
             }
           }
           if (dojo.byId('objectClass') && destination.indexOf(dojo.byId('objectClass').value) == 0) { // If refresh a section
-            var section = destination
-                .substr(dojo.byId('objectClass').value.length + 1);
-            if (dojo.byId(section + "SectionCount")
-                && dojo.byId(section + "Badge")) {
-              dojo.byId(section + "Badge").innerHTML = dojo.byId(section+ "SectionCount").value;
-              if (dojo.byId(section + "BadgeTab")) {
-                dojo.byId(section + "BadgeTab").innerHTML = dojo.byId(section+"SectionCount").value;
-                if (dojo.byId(section+"SectionCount").value>0) {
-                  dojo.byId(section + "BadgeTab").style.opacity=1;
-                } else {
-                  dojo.byId(section + "BadgeTab").style.opacity=0.5;
-                }
-              }
-            }
+            var section = destination.substr(dojo.byId('objectClass').value.length + 1);
+            refreshSectionCount(section);
           }
           if (destination == "detailDiv" || destination == "centerDiv") {
             finaliseButtonDisplay();
@@ -7159,4 +7147,22 @@ function replaceAccentuatedCharacters(text){
 
 function refreshConcolidationValidationList(){
   loadContent("../view/refreshConsolidationValidation.php", "imputListDiv","consolidationValidationForm");
+}
+
+function refreshSectionCount(section) {
+  console.log('refreshSectionCount('+section+')');
+  console.log(dojo.byId(section + "SectionCount"));
+  console.log(dojo.byId(section + "Badge"));
+  if (dojo.byId(section + "SectionCount")
+      && dojo.byId(section + "Badge")) {
+    dojo.byId(section + "Badge").innerHTML = dojo.byId(section+ "SectionCount").value;
+    if (dojo.byId(section + "BadgeTab")) {
+      dojo.byId(section + "BadgeTab").innerHTML = dojo.byId(section+"SectionCount").value;
+      if (dojo.byId(section+"SectionCount").value>0) {
+        dojo.byId(section + "BadgeTab").style.opacity=1;
+      } else {
+        dojo.byId(section + "BadgeTab").style.opacity=0.5;
+      }
+    }
+  }
 }
