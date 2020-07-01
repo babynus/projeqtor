@@ -267,6 +267,18 @@ class ProjectPlanningElementMain extends PlanningElement {
   	  $org->updateSynthesis();
   	}
   	KpiValue::calculateKpi($this);
+  	
+//   	if(trim(Module::isModuleActive('moduleGestionCA')) == 1 and $this->idRevenueMode == 2){
+//   		$project = new Project($this->idProject);
+//   		$projectList = $project->getRecursiveSubProjectsFlatList(true, true);
+//   		$projectList = array_flip($projectList);
+//   		$projectList = '(0,'.implode(',',$projectList).')';
+//   		$where = 'idProject in '.$projectList.' and idle = 0';
+//     	$ape = new ActivityPlanningElement();
+//     	$this->revenue = $ape->sumSqlElementsFromCriteria('revenue', null, $where);
+//   		$this->save();
+//   	}
+  	
   	return $result;
   }
   
@@ -493,11 +505,12 @@ class ProjectPlanningElementMain extends PlanningElement {
   	  $colScript .= '  var commandSum=dijit.byId("'.get_class($this) .'_commandSum").get("value");';
   	  $colScript .= '  var billSum=dijit.byId("'.get_class($this) .'_billSum").get("value");';
   	  $colScript .= '  if (revenue > commandSum) {';
-  	  $colScript .= '    dojo.byId("'.get_class($this) .'_commandSum").style.color = "#ff8080 !important";';
+  	  $colScript .= '    dojo.byId("widget_'.get_class($this) .'_commandSum").style.color = \'rgb(170, 0, 0) !important\';';
+  	  $colScript .= '    console.log(dojo.byId("widget_'.get_class($this) .'_commandSum"));';
   	  $colScript .= '    formChanged();';
   	  $colScript .= '  }';
   	  $colScript .= '  if (revenue < billSum) {';
-  	  $colScript .= '    dojo.byId("'.get_class($this) .'_billSum").style.color = "#ff8080 !important";';
+  	  $colScript .= '    dojo.byId("widget_'.get_class($this) .'_billSum").style.color = "rgb(170, 0, 0) !important";';
   	  $colScript .= '    formChanged();';
   	  $colScript .= '  }';
   	  $colScript .= '</script>';
