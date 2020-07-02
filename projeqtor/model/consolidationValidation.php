@@ -69,28 +69,49 @@ class ConsolidationValidation extends SqlElement{
 	  $idOrganization=($idOrganization=='')?0:$idOrganization;
 	  $lstProject=$cons->getVisibleProjectToConsolidated($idProject,$idProjectType,$idOrganization);
 	  $projectsList=$lstProject[0];
+	  $srtingProjectList=$lstProject[1];
 	  $uniqueId=$year.$month.'_';
-	  $lstPeProject=$cons->getValuesProjectToConsolidated($lstProject[1],$year,$month);
-	  debugLog($lstPeProject);
+	  $lstPeProject=$cons->getValuesProjectToConsolidated($srtingProjectList,$year,$month);
+	  $length=count($projectsList);
+	  $concMonth=$year.$month;
+	  $countLocked=0;
       $c=0;
+
+      foreach ($projectsList as $proj) {
+        if($proj->locked!="")$countLocked++;
+        else continue;
+      }
+      $AllLocked=($countLocked==$length)?true:false;
 	  //Header
 	  $result  ='<div id="imputationValidationDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
 	  $result .='  <table width="98%" style="margin-left:20px;margin-right:20px;border: 1px solid grey;">';
 	  $result .='   <tr class="reportHeader">';
-	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:20%;text-align:center;vertical-align:center;">'.i18n('Project').'</td>';
-	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colRevenue').'</td>';
-	  $result .='     <td style="width:40%;border: 1px solid grey;border-right: 1px solid white;">';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:16%;text-align:center;vertical-align:center;">'.i18n('Project').'</td>';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:8%;text-align:center;vertical-align:center;">'.i18n('colRevenue').'</td>';
+	  $result .='     <td style="width:38%;border: 1px solid grey;border-right: 1px solid white;">';
 	  $result .='      <table width="100%"><tr><td colspan="5" style="height:30px;text-align:center;vertical-align:center;">'.i18n('sectionWork').'</td></tr>';
 	  $result .='        <tr>
 	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.i18n('sectionWork').'</td>';
-	  $result .='          <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.i18n('colReal').'</td>';
-	  $result .='          <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.i18n('colRealCons').'</td>
-	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.i18n('colLeft').'</td>
-	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.i18n('colPlanned').'</td>
+	  $result .='          <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colReal')).'</td>';
+	  $result .='          <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colRealCons')).'</td>
+	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colLeft')).'</td>
+	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colPlanned')).'</td>
 	                     </tr>
 	                   </table>';
 	  $result .='     </td>';
-	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colMargin').'</td>';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:8%;text-align:center;vertical-align:center;">'.i18n('colMargin').'</td>';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">';
+	  $result .='      <table><tr>';
+	  $result .='          <td style="height:30px;padding-left:5px;width:10%;">';
+	  if(!$AllLocked){
+	    $result .='            <div id="UnlockedImputation" onclick="lockedImputation(\''.$srtingProjectList.'\','.$length.',\''.$concMonth.'\');" class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
+	  }else{
+	    $result .='            <div id="lockedImputation" onclick="lockedImputation(\''.$srtingProjectList.'\','.$length.',\''.$concMonth.'\');" class="iconLocked32 iconLocked iconSize32" ></div>';
+	  }
+	  $result .='           </td>';
+	  $result .='          <td> '.i18n('colBlocking').'</td>';
+	  $result .='      </tr></table>';
+	  $result .='     </td>';
 	  $result .='     <td colspan="2" style="border: 1px solid grey;height:60px;width:20%;text-align:center;vertical-align:center;">';
 	  $result .='      <table width="100%"><tr><td width="62%">'.i18n('menuImputationValidation').'</td>';
 	  $result .='        <td width="30%">';
@@ -109,7 +130,7 @@ class ConsolidationValidation extends SqlElement{
 	  $result .='   </tr>';
 	  
 	  if(!empty($projectsList)){
-        for($i=0;$i<count($projectsList);$i++) {
+        for($i=0;$i<$length;$i++) {
     	   $idCheckBox=$projectsList[$i]->id;
     	   $uniqueId.=$projectsList[$i]->id;
     	   $reel="";
@@ -117,12 +138,14 @@ class ConsolidationValidation extends SqlElement{
     	   $plannedWork="";
     	   $validatedWork="";
     	   $revenue="";
+    	   $lock=$projectsList[$i]->locked;
     	   if(isset($lstPeProject[$i])){
     	     $reel=$lstPeProject[$i]->realWork;
     	     $leftWork=$lstPeProject[$i]->leftWork;
     	     $plannedWork=$lstPeProject[$i]->plannedWork;
     	     $validatedWork=$lstPeProject[$i]->validatedWork;
-    	     //$revenue=$lstPeProject[$i]->revenue;
+    	     $revenue=$lstPeProject[$i]->revenue;
+    	     $margin=$validatedWork-$plannedWork;
     	   }
     	   $result .='   <tr>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">'.$projectsList[$i]->name.'</td>';
@@ -138,7 +161,12 @@ class ConsolidationValidation extends SqlElement{
     	   $result .='       </tr>';
     	   $result .='     </table>';
     	   $result .='    </td>';
-    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;"></td>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">'.workFormatter(abs($margin)).'</td>';
+    	   $result .='     <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
+    	   $result .='       <div id="lockedDiv_'.$projectsList[$i]->id.'" name="lockedDiv_'.$projectsList[$i]->id.'" dojoType="dijit.layout.ContentPane" region="center">';
+    	   $result .=          ConsolidationValidation::drawLockedDiv($projectsList[$i]->id,$concMonth,$lock);
+    	   $result .='       </div>';
+    	   $result .='    </td>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
     	   $result .='      <table>';
     	   $result .='        <tr>';
@@ -171,6 +199,28 @@ class ConsolidationValidation extends SqlElement{
 	  $result .='</div>';
 	  
 	  echo $result;
+	}
+	
+	/** ==========================================================================
+	 * Draw div
+	 * @return list of project
+	 */
+	static function drawLockedDiv($proj,$month,$lock){
+	  
+	  $result ='  <table>';
+	  $result .='    <tr>';
+	  $result .='      <td style="width:30%;">';
+	  if($lock==''){
+	    $result .='      <div  id="UnlockedImputation_'.$proj.'" onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\');" class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
+	  }else{
+	    $result .='      <div   id="lockedImputation_'.$proj.'" onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\');" class="iconLocked32 iconLocked iconSize32" ></div>';
+	  }
+      $result .='     </td>';
+      $result .='     <td>'.(($lock=='')?i18n('colUnlock'):i18n('colLocked')).'</td>';
+      $result .='   </tr>';
+	  $result .='  </table>';
+	  
+	  return $result;
 	}
 	
 	/** ==========================================================================
@@ -234,6 +284,7 @@ class ConsolidationValidation extends SqlElement{
 	  $projects=$pe->getSqlElementsFromCriteria(null,null,$where);
 	  return $projects;
 	}
+
 	/**=========================================================================
 	 * Overrides SqlElement::save() function to add specific treatments
 	* @see persistence/SqlElement#save()

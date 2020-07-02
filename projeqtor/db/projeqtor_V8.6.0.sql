@@ -1594,6 +1594,8 @@ CREATE TABLE `${prefix}consolidationvalidation` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
+ALTER TABLE `${prefix}project` ADD COLUMN `locked` varchar(6) DEFAULT NULL;
+
 -- Tags Management
 
 CREATE TABLE `${prefix}tag` (
@@ -1625,3 +1627,4 @@ CREATE TABLE `${prefix}revenuemode` (
 INSERT INTO `${prefix}revenuemode` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 (1,'fixed',100,0),
 (2,'variable',200,0);
+

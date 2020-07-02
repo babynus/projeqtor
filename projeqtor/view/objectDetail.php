@@ -6061,11 +6061,9 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   //gautier #accesImputation
   $canSeeDirectAcces = false;
   foreach ($list as $assignment) {
-    debugLog("$assignment->idResource = $user->id ?");
     if($assignment->idResource == $user->id){
       $canSeeDirectAcces = true;
       $idAssignment = $assignment->id;
-      debugLog("OK $idAssignment");
     }
   }
   $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentView'));

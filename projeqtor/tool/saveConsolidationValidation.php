@@ -25,54 +25,51 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 /** ============================================================================
- * Save imputation validation.
+ * Save consolidation validation.
  */
 
 require_once "../tool/projeqtor.php";
 
 //parameter
-$buttonAction = RequestHandler::getValue('buttonAction');
+$lstProj = explode(',', RequestHandler::getValue('lstProj'));
+$mode = RequestHandler::getValue('mode');
+$month= RequestHandler::getValue('month');
+$currentUser=getCurrentUserId();
+$res=array();
 //open transaction bdd
 Sql::beginTransaction();
 
-if($buttonAction != 'validateSelection'){
-  $idWorkPeriod = RequestHandler::getValue('idWorkPeriod');
-  $workPeriod = WorkPeriod::getWorkPeriod($idWorkPeriod); //new WorkPeriod($idWorkPeriod, true);
-  switch ($buttonAction){
-  	case 'cancelSubmit' :
-  	  $workPeriod->submitted = 0;
-  	  $workPeriod->submittedDate = null;
+if($mode == 'Locked' or $mode=='UnLocked'){
+  switch ($mode){
+  	case 'Locked':
+  	  $lock=$month;
   	  break;
-  	case 'cancelValidation' :
-  	  $workPeriod->validated = 0;
-  	  $workPeriod->validatedDate = null;
-  	  $workPeriod->idLocker = null;
-  	  break;
-  	case 'validateWork' :
-  	  $workPeriod->validated = 1;
-  	  $workPeriod->validatedDate = date('Y-m-d H:i:s');
-  	  $workPeriod->idLocker = getCurrentUserId();
-  	  break;
-  	default:
+  	case 'UnLocked':
+  	  $lock="";
   	  break;
   }
-  $res=$workPeriod->save();
-}
-if($buttonAction == 'validateSelection'){
-  $idWorkPeriod = RequestHandler::getValue('idWorkPeriod');
-  $arrayId = explode(',', $idWorkPeriod);
-  foreach ($arrayId as $id){
-    $workPeriod = WorkPeriod::getWorkPeriod($id);
-    if($workPeriod->validated == 0){
-      $workPeriod->validated = 1;
-      $workPeriod->validatedDate = date('Y-m-d H:i:s');
-      $workPeriod->idLocker = getCurrentUserId();
-      $res=$workPeriod->save();
-    }
+  foreach($lstProj as $projId){
+    $proj=new Project($projId);
+    $proj->locked=$lock;
+    $proj->save();
+  }
+}else {
+  foreach ($lstProj as $proj) {
+    $cons= new ConsolidationValidation();
+    $cons->idProject=$proj->id;
+    $cons->idResource=$currentUser;
+    $cons->month=$month;
+    $cons->revenue="";
+    $cons->validatedWork="";
+    $cons->realWork="";
+    $cons->realWorkConsumed="";
+    $cons->plannedWork="";
+    $cons->leftWork="";
+    $cons->margin="";
+    $cons->validationDate=date('Y-m-d');
   }
 }
 
 // commit workPeriod
 Sql::commitTransaction();
-
 ?>

@@ -6332,7 +6332,7 @@ function validateAllSelection(){
 			if(dojo.byId('imputationValidationParamDiv')){
 			  saveImputationValidation(listId, 'validateSelection');
 			}else{
-			  saveConsolidationValidation();
+			  saveConsolidationValidation(lstProj,mode,month);
 			}
 			
 		}
@@ -7146,23 +7146,70 @@ function replaceAccentuatedCharacters(text){
 }
 
 function refreshConcolidationValidationList(){
+  formInitialize();
+  showWait();
+  var callback=function() {
+    hideWait();
+  };
   loadContent("../view/refreshConsolidationValidation.php", "imputListDiv","consolidationValidationForm");
 }
 
-function refreshSectionCount(section) {
-  console.log('refreshSectionCount('+section+')');
-  console.log(dojo.byId(section + "SectionCount"));
-  console.log(dojo.byId(section + "Badge"));
-  if (dojo.byId(section + "SectionCount")
-      && dojo.byId(section + "Badge")) {
-    dojo.byId(section + "Badge").innerHTML = dojo.byId(section+ "SectionCount").value;
-    if (dojo.byId(section + "BadgeTab")) {
-      dojo.byId(section + "BadgeTab").innerHTML = dojo.byId(section+"SectionCount").value;
-      if (dojo.byId(section+"SectionCount").value>0) {
-        dojo.byId(section + "BadgeTab").style.opacity=1;
-      } else {
-        dojo.byId(section + "BadgeTab").style.opacity=0.5;
-      }
+function refreshConsolidationLockedDiv (proj,month){
+  var div='lockedDiv_'+proj+'';
+  formInitialize();
+  showWait();
+  var callback=function() {
+    hideWait();
+  };
+  loadContent('../view/refreshConsolidationDiv.php?proj='+proj+'&month='+month,div,false,false,false,false,false,callback);
+}
+
+function lockedImputation(listProj,length,month){
+  var all=false;
+  if(length!='')all=true;
+  if(all){
+    listProj=listProj.split(',');
+    if(dojo.byId('UnlockedImputation')){
+      mode='Locked';
+        for(var i=0;i<length;i++){
+          if(!dojo.byId('UnlockedImputation_'+listProj[i])){
+            delete listProj[i];
+          }
+        }
+    }else{
+      mode='UnLocked';
+        for(var i=0;i<length;i++){
+          if(!dojo.byId('lockedImputation_'+listProj[i])){
+            delete listProj[i];
+          }
+        }
+    }
+  }else{
+    if(dojo.byId('UnlockedImputation_'+listProj)){
+      mode='Locked';
+    }else{
+      mode='UnLocked';
     }
   }
+  saveConsolidationValidation(listProj,mode,month,all);
 }
+
+function saveConsolidationValidation(listProj,mode,month,all){  
+  var url='../tool/saveConsolidationValidation.php?lstProj='+listProj+'&mode='+mode+'&month='+month;
+  dojo.xhrGet({
+    url : url,
+    handleAs : "text",
+    load : function(data){
+      if(mode=='UnLocked' || mode =='Locked'){
+        if(all){
+          refreshConcolidationValidationList();
+        }else{
+          console.log(listProj);
+          refreshConsolidationLockedDiv(listProj,month);
+        }
+      }
+    }
+  });
+
+}
+

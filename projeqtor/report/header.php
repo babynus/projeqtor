@@ -59,7 +59,6 @@ foreach ($_REQUEST as $reqParam=>$reqValue) {
 		}
 	}
 }
-debugLog($headerParameters);
 if ($outMode=='excel') $headerParameters=rtrim(br2nl($headerParameters),"\n");
 echo '<table _excel-name="'.i18n("menuParameter").'" style="width:100%">';
 echo '<tr>';
