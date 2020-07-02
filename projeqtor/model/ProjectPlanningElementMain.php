@@ -267,18 +267,6 @@ class ProjectPlanningElementMain extends PlanningElement {
   	  $org->updateSynthesis();
   	}
   	KpiValue::calculateKpi($this);
-  	
-//   	if(trim(Module::isModuleActive('moduleGestionCA')) == 1 and $this->idRevenueMode == 2){
-//   		$project = new Project($this->idProject);
-//   		$projectList = $project->getRecursiveSubProjectsFlatList(true, true);
-//   		$projectList = array_flip($projectList);
-//   		$projectList = '(0,'.implode(',',$projectList).')';
-//   		$where = 'idProject in '.$projectList.' and idle = 0';
-//     	$ape = new ActivityPlanningElement();
-//     	$this->revenue = $ape->sumSqlElementsFromCriteria('revenue', null, $where);
-//   		$this->save();
-//   	}
-  	
   	return $result;
   }
   

@@ -657,6 +657,18 @@ class PlanningElement extends SqlElement {
         }
       }
     }
+    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+    	$project = new Project($this->idProject);
+    	$projectList = $project->getRecursiveSubProjectsFlatList(true, true);
+    	$projectList = array_flip($projectList);
+    	$projectList = '(0,'.implode(',',$projectList).')';
+    	$where = 'idProject in '.$projectList.' and idle = 0';
+    	$command = new Command();
+    	$this->commandSum = $command->sumSqlElementsFromCriteria('totalFullAmount', null, $where);
+    	$bill = new Bill();
+    	$this->billSum = $bill->sumSqlElementsFromCriteria('fullAmount', null, $where);
+    	$this->save();
+    }
     // save new parent (for synthesis update) if parent has changed
     // #2995 : a previous version changed the following condition so that updateSynthesis is always called for parent
     //         so now calling updateSynthesis for parent in ProjectPlanningElement::updateSynthesisProject is obsolete
@@ -731,21 +743,9 @@ class PlanningElement extends SqlElement {
           }
         }
     }
-    
-    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
-      $project = new Project($this->idProject);
-      $projectList = $project->getRecursiveSubProjectsFlatList(true, true);
-      $projectList = array_flip($projectList);
-      $projectList = '(0,'.implode(',',$projectList).')';
-      $where = 'idProject in '.$projectList.' and idle = 0';
-      $command = new Command();
-      $this->commandSum = $command->sumSqlElementsFromCriteria('totalFullAmount', null, $where);
-      $bill = new Bill();
-      $this->billSum = $bill->sumSqlElementsFromCriteria('fullAmount', null, $where);
-      $this->save();
-    }
     return $result;
   }
+  
   public function setHandledOnRealWork ($action='check') {
     $refType=$this->refType;
     $refObj=new $refType($this->refId);
@@ -1115,6 +1115,34 @@ class PlanningElement extends SqlElement {
       $this->idProgressMode=1;
       $this->unitProgress=$this->setUnitProgress();
       $this->unitWeight=$this->setUnitWeight();
+    }
+    
+    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+      $project = new Project($this->idProject);
+      $projectList = $project->getRecursiveSubProjectsFlatList(true,true);
+      $projectList = array_flip($projectList);
+      $projectList = '(0,'.implode(',',$projectList).')';
+      if($this->idRevenueMode == 2 and $this->refType == 'Project'){
+        $sons=$this->getSonItemsArray();
+        $sumActPlEl=0;
+        $sumProjlEl=0;
+        foreach ($sons as $id=>$pe){
+            if ($pe->refType=='Activity' and $pe->topRefId==$this->refId){
+        		$sumActPlEl+=$pe->revenue;
+        	}else if ($pe->refType=='Project' and $pe->topRefId==$this->refId){
+        		$sumProjlEl+=$pe->revenue;
+        	}else{
+        		continue;
+        	}
+        }
+        if($sumActPlEl>0){
+          $this->revenue = $sumActPlEl;
+        }else if($sumProjlEl>0){
+          $this->revenue = $sumProjlEl;
+        }
+      }else if($this->idRevenueMode == 2 and $this->refType == 'Activity'){
+        debugLog($this->refType);
+      }
     }
     ///
     // Add data from other planningElements dependant from this one
