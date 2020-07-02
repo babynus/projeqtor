@@ -83,6 +83,7 @@ class ProjectMain extends SqlElement {
   public $idle;
   public $idleDate;
   public $cancelled;
+  public $locked;
   public $_lib_cancelled;
   
   public $_sec_ProductprojectProducts;
@@ -165,7 +166,8 @@ class ProjectMain extends SqlElement {
                                   "fixPerimeter"=>"nobr",
                                   "isUnderConstruction"=>"nobr",
                                   "excludeFromGlobalPlanning"=>"nobr",
-  		                            "isLeaveMngProject"=>"hidden"
+  		                            "isLeaveMngProject"=>"hidden",
+  		                             "locked"=>"hidden"
   );   
  
   private static $_colCaptionTransposition = array('idResource'=>'manager',

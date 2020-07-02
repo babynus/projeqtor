@@ -1325,6 +1325,11 @@
 .iconUnsubmitted16 { background-image: url(images/Unsubmitted.png);  background-size: 16px 16px;}
 .iconUnsubmitted32 { background-image: url(images/Unsubmitted.png);  background-size: 32px 32px;}
 
+.iconUnLocked16 { background-image: url(images/unlocked.png);  background-size: 16px 16px;}
+.iconUnLocked32 { background-image: url(images/unlocked.png);  background-size: 32px 32px;}
+.iconLocked16 { background-image: url(images/locked.png);  background-size: 16px 16px;}
+.iconLocked32 { background-image: url(images/locked.png);  background-size: 32px 32px;}
+
 .iconAutoSendReport { background-image: url(images/iconAutoSendReport32.png); }
 .ProjeQtOrFlatBlue .iconAutoSendReport { background-image: url(customIcons/blue/iconAutoSendReport.png); }
 .ProjeQtOrFlatRed .iconAutoSendReport { background-image: url(customIcons/red/iconAutoSendReports.png); }
