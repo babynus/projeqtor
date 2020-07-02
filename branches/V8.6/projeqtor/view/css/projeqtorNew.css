@@ -91,3 +91,14 @@ label, .label, .smallLabel, .labelMultiple {
 .ProjeQtOrFlatGrey #mapDiv, .ProjeQtOrFlatGrey #messageDiv, .ProjeQtOrFlatGrey #listDiv, .ProjeQtOrFlatGrey #formDiv, .ProjeQtOrFlatGrey .display, .ProjeQtOrFlatGrey .background, .ProjeQtOrFlatGrey .dijitTitlePaneContentInner, .ProjeQtOrFlatGrey .dijitTabPane, .ProjeQtOrFlatGrey #mainDiv, .ProjeQtOrFlatGrey #centerDiv {
     background-color: #ffffff; 
 }
+
+html, body, #mainDiv, 
+#toolBarDiv, 
+#logoDiv,
+#contentDiv,  #listDiv, .container {
+  font-size: 10pt;
+}
+
+.tabLabel {
+  font-size: 10pt;
+}
