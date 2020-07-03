@@ -119,7 +119,7 @@ html, body, #mainDiv,
 	/*left:-50px;*/
 	display:none;
 	opacity:0%;
-	width:50px;
+	width:200px;
 	padding-right:0px;
 	-webkit-transition: opacity 0.5s ease;
   -moz-transition: opacity 0.5s ease;
@@ -127,3 +127,15 @@ html, body, #mainDiv,
   -ms-transition: opacity 0.5s ease;
   transition: opacity 0.5s ease;
 }
+.roundedButton:hover, .roundedButtonSmall:hover {
+  border: 1px solid #c0c0c0;
+  border-color: #a5a5a5;
+  border-bottom-color: #757575;
+  color: #3C3C3C;
+  background: #eeeeee url() repeat-x bottom;
+}
+
+.ProjeQtOrFlatGrey .iconView { background-image: url(customIcons/grey/iconView.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; }
+.ProjeQtOrFlatGrey .iconGoto { background-image: url(customIcons/grey/iconGoto.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrFlatGrey .iconSearch { background-image: url(customIcons/grey/iconSearch.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrFlatGrey .iconAdd { background-image: url(customIcons/grey/iconAdd.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
