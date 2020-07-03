@@ -4676,6 +4676,7 @@ validatedEndDate: "визнання затвердженої дати закін
 validatedLineWorkPeriod: "підтверджено ${1} на ${2}",
 validatedStartDate: "визнання затвердженої дати початку",
 validatedTerms: "терміни підтверджено",
+validatedWork: "validated by ${1} on ${2}",
 validatedWorkPeriod: "затверджено через  ${2} на <br/>${1}",
 validatePassword: "gідтвердження паролю",
 validatePlanning: "перевірьте правильність планування",

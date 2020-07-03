@@ -34,10 +34,18 @@ scriptLog('   ->/view/refreshSubmitValidateDiv.php');
 
 $projId = RequestHandler::getValue('proj');
 $month = RequestHandler::getValue('month');
+$mode=RequestHandler::getValue('mode');
 $proj= new Project($projId);
-$lock = $proj->locked;
+//debugLog($mode);
 
-$res = ConsolidationValidation::drawLockedDiv($projId, $month, $lock);
+if($mode!='validaTionCons' and $mode!='cancelCons'){
+  $lock = $proj->locked;
+  $res = ConsolidationValidation::drawLockedDiv($projId, $month, $lock);
+}else if ($mode=='validaTionCons' or $mode=='cancelCons'){
+  $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>substr($projId, 6),"month"=>$month));
+  $res = ConsolidationValidation ::drawValidationDiv($consValPproj,$projId,$month);
+}
+
 
 echo $res;
 ?>

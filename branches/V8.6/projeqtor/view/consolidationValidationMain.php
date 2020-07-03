@@ -31,12 +31,15 @@ require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
   scriptLog('   ->/view/imputationValidationMain.php');  
 ?>
-<input type="hidden" name="objectClassManual" id="objectClassManual" value="ImputationValidation" />
+<input type="hidden" name="objectClassManual" id="objectClassManual" value="ConsolidationValidation" />
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top"  style="height:64px;">
    <?php include 'consolidationValidationList.php'?>
   </div>
+  
   <div id="imputListDiv" name="imputListDiv" dojoType="dijit.layout.ContentPane" region="center" >
+    <form dojoType="dijit.form.Form" name="consolidationForm" id="consolidationForm"  method="Post" >
     <?php 
     ConsolidationValidation::drawProjectConsolidationValidation($idProject,$idProjectType,$idOrganization,$year,$month);
     ?>
+    </form>
   </div>
