@@ -102,3 +102,28 @@ html, body, #mainDiv,
 .tabLabel {
   font-size: 10pt;
 }
+.largeLabel {
+  width: 370px;
+}
+.dijitToolbar {
+ margin: 5px 2px 5px 0px;
+ padding: 2px 5px 6px 5px;
+ border: 1px solid #b3b3b3;
+ background-color: #ffffff; 
+ background-image: none; 
+}
+.toolbarForSelect {
+	position:absolute;
+	top:-9px;
+	right:0px;
+	/*left:-50px;*/
+	display:none;
+	opacity:0%;
+	width:50px;
+	padding-right:0px;
+	-webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+  -ms-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
