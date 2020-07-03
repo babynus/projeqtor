@@ -4676,6 +4676,7 @@ validatedEndDate: "Дата окончания отношений проверк
 validatedLineWorkPeriod: "validated by ${1} <br/>on ${2}",
 validatedStartDate: "Дата начала отношений проверки",
 validatedTerms: "validated terms",
+validatedWork: "validated by ${1} on ${2}",
 validatedWorkPeriod: "Проверено ${2} на <br/>${1}",
 validatePassword: "Проверка пароля",
 validatePlanning: "Validate planning",

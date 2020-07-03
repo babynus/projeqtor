@@ -6312,7 +6312,7 @@ function cancelSubmitbyOther(idWorkPeriod) {
 function imputationValidationSelection(){
 	var countLine = dojo.byId('countLine').value;
 	for(var i=1; i<=countLine; i++){
-		if(dojo.byId('validatedLine'+i).value == '0'){
+		if(dojo.byId('validCheckBox'+i) && dojo.byId('validatedLine'+i).value == '0'){
 			dijit.byId('validCheckBox'+i).set("checked", dijit.byId('selectAll').get('checked'));
 		}
 	}
@@ -6323,7 +6323,7 @@ function validateAllSelection(){
 	var listId = '';
 	if(countLine > 0){
 		for(var i=1; i<=countLine; i++){
-			if(dojo.byId('validatedLine'+i).value == '0' && dijit.byId('validCheckBox'+i).get('checked') == true){
+			if(dijit.byId('validCheckBox'+i) && dojo.byId('validatedLine'+i).value == '0' && dijit.byId('validCheckBox'+i).get('checked') == true){
 				listId += dojo.byId('validatedLine'+i).name+',';
 			}
 		}
@@ -6332,9 +6332,10 @@ function validateAllSelection(){
 			if(dojo.byId('imputationValidationParamDiv')){
 			  saveImputationValidation(listId, 'validateSelection');
 			}else{
-			  saveConsolidationValidation(lstProj,mode,month);
+			  mode='validaTionCons';
+			  month=dojo.byId('monthConsolidationValidation').value;
+			  saveConsolidationValidation(listId,mode,month,true);
 			}
-			
 		}
 	}
 }
@@ -7154,17 +7155,18 @@ function refreshConcolidationValidationList(){
   loadContent("../view/refreshConsolidationValidation.php", "imputListDiv","consolidationValidationForm");
 }
 
-function refreshConsolidationLockedDiv (proj,month){
-  var div='lockedDiv_'+proj+'';
+function refreshConsolidationDiv (proj,month,mode){
+  var div=((mode=='Locked' || mode=='UnLocked')?'lockedDiv_':'validatedDiv_')+proj;
   formInitialize();
   showWait();
   var callback=function() {
     hideWait();
   };
-  loadContent('../view/refreshConsolidationDiv.php?proj='+proj+'&month='+month,div,false,false,false,false,false,callback);
+  loadContent('../view/refreshConsolidationDiv.php?proj='+proj+'&month='+month+'&mode='+mode,div,false,false,false,false,false,callback);
 }
 
 function lockedImputation(listProj,length,month){
+  console.log(listProj);
   var all=false;
   if(length!='')all=true;
   if(all){
@@ -7172,14 +7174,16 @@ function lockedImputation(listProj,length,month){
     if(dojo.byId('UnlockedImputation')){
       mode='Locked';
         for(var i=0;i<length;i++){
-          if(!dojo.byId('UnlockedImputation_'+listProj[i])){
+          console.log(month+listProj[i]);
+          if(!dojo.byId('UnlockedImputation_'+month+listProj[i])){
             delete listProj[i];
           }
         }
     }else{
       mode='UnLocked';
         for(var i=0;i<length;i++){
-          if(!dojo.byId('lockedImputation_'+listProj[i])){
+          console.log(month+listProj[i]);
+          if(!dojo.byId('lockedImputation_'+month+listProj[i])){
             delete listProj[i];
           }
         }
@@ -7194,23 +7198,48 @@ function lockedImputation(listProj,length,month){
   saveConsolidationValidation(listProj,mode,month,all);
 }
 
-function saveConsolidationValidation(listProj,mode,month,all){  
-  var url='../tool/saveConsolidationValidation.php?lstProj='+listProj+'&mode='+mode+'&month='+month;
-  dojo.xhrGet({
-    url : url,
-    handleAs : "text",
-    load : function(data){
-      if(mode=='UnLocked' || mode =='Locked'){
-        if(all){
-          refreshConcolidationValidationList();
-        }else{
-          console.log(listProj);
-          refreshConsolidationLockedDiv(listProj,month);
-        }
-      }
-    }
-  });
+function saveOrCancelConsolidationValidation(proj,month){
+  all=false;
+  if(dojo.byId('buttonValidation_'+proj)){
+    mode='validaTionCons';
+  }else{
+    mode='cancelCons';
+  }
+  saveConsolidationValidation(proj,mode,month,all);
+}
 
+function saveConsolidationValidation(listProj,mode,month,all){  
+  console.log(listProj);
+  console.log(mode);
+  console.log(month);
+  console.log(all);
+  listproj=((mode=='Locked' || mode=='UnLocked') && !all )?listProj.substr(6):''+listProj+'';
+  var url='../tool/saveConsolidationValidation.php?lstProj='+listproj+'&mode='+mode+'&month='+month;
+  if(mode=='validaTionCons' || mode=='cancelCons'){
+    dojo.xhrPost({
+      url : url,
+      handleAs : "text",
+      load : function(data,args){
+          if(all){
+            refreshConcolidationValidationList();
+          }else{
+            refreshConsolidationDiv(listProj,month,mode);
+          }
+      }
+    });
+  }else{
+    dojo.xhrPost({
+      url : url,
+      handleAs : "text",
+      load : function(data,args){
+          if(all){
+            refreshConcolidationValidationList();
+          }else{
+            refreshConsolidationDiv(listProj,month,mode);
+          }
+      }
+    });
+  }
 }
 
 //====================================================================

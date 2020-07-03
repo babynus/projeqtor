@@ -63,6 +63,7 @@ class ConsolidationValidation extends SqlElement{
 	 * Draw project table 
 	 */
 	static function drawProjectConsolidationValidation($idProject,$idProjectType,$idOrganization,$year,$month){
+	  $month=(strlen($month)==1)?'0'.$month:$month;
 	  $cons= new ConsolidationValidation();
 	  $idProject=($idProject=='')?0:$idProject;
 	  $idProjectType=($idProjectType=='')?0:$idProjectType;
@@ -70,8 +71,6 @@ class ConsolidationValidation extends SqlElement{
 	  $lstProject=$cons->getVisibleProjectToConsolidated($idProject,$idProjectType,$idOrganization);
 	  $projectsList=$lstProject[0];
 	  $srtingProjectList=$lstProject[1];
-	  $uniqueId=$year.$month.'_';
-	  $lstPeProject=$cons->getValuesProjectToConsolidated($srtingProjectList,$year,$month);
 	  $length=count($projectsList);
 	  $concMonth=$year.$month;
 	  $countLocked=0;
@@ -113,7 +112,7 @@ class ConsolidationValidation extends SqlElement{
 	  $result .='      </tr></table>';
 	  $result .='     </td>';
 	  $result .='     <td colspan="2" style="border: 1px solid grey;height:60px;width:20%;text-align:center;vertical-align:center;">';
-	  $result .='      <table width="100%"><tr><td width="62%">'.i18n('menuImputationValidation').'</td>';
+	  $result .='      <table width="100%"><tr><td width="62%">'.i18n('menuConsultationValidation').'</td>';
 	  $result .='        <td width="30%">';
 	  $result .='          <span id="buttonValidationAll" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
 	  . '                    <script type="dojo/method" event="onClick" >'
@@ -128,61 +127,76 @@ class ConsolidationValidation extends SqlElement{
                        </table>
                       </td>';
 	  $result .='   </tr>';
-	  
 	  if(!empty($projectsList)){
         for($i=0;$i<$length;$i++) {
-    	   $idCheckBox=$projectsList[$i]->id;
-    	   $uniqueId.=$projectsList[$i]->id;
-    	   $reel="";
-    	   $leftWork="";
-    	   $plannedWork="";
-    	   $validatedWork="";
-    	   $revenue="";
-    	   $lock=$projectsList[$i]->locked;
-    	   if(isset($lstPeProject[$i])){
-    	     $reel=$lstPeProject[$i]->realWork;
-    	     $leftWork=$lstPeProject[$i]->leftWork;
-    	     $plannedWork=$lstPeProject[$i]->plannedWork;
-    	     $validatedWork=$lstPeProject[$i]->validatedWork;
-    	     $revenue=$lstPeProject[$i]->revenue;
-    	     $margin=$validatedWork-$plannedWork;
-    	   }
+          $idCheckBox=$projectsList[$i]->id;
+          $uniqueId=$concMonth.$projectsList[$i]->id;
+          $lock=$projectsList[$i]->locked;
+          $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$projectsList[$i]->id,"month"=>$concMonth));
+          if($consValPproj->id!=''){
+            $reel=$consValPproj->realWork;
+            $leftWork=$consValPproj->leftWork;
+            $plannedWork=$consValPproj->plannedWork;
+            $validatedWork=$consValPproj->validatedWork;
+            $revenue=$consValPproj->revenue;
+            $margin=$consValPproj->margin;
+            $reelCons=$consValPproj->realWorkConsumed;
+          }else{
+            $lstPeProject=$projectsList[$i]->ProjectPlanningElement;
+            $reel=$lstPeProject->realWork;
+            $leftWork=$lstPeProject->leftWork;
+            $plannedWork=$lstPeProject->plannedWork;
+            $validatedWork=$lstPeProject->validatedWork;
+            $revenue=($lstPeProject->revenue!='')?$lstPeProject->revenue:0;
+            $margin=$validatedWork-$plannedWork;
+            $reelCons=ConsolidationValidation::getReelWorkConsumed($projectsList[$i],$concMonth);
+          }
+    	   
     	   $result .='   <tr>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">'.$projectsList[$i]->name.'</td>';
-    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">'.$revenue.'</td>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">
+    	                     <input type="hidden" id="revenue_'.$uniqueId.'" name="revenue_'.$uniqueId.'" value="'.$revenue.'"/>
+    	                     '.$revenue.'
+    	                  </td>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;" >';
     	   $result .='     <table style="width:100%;height:100%" >';
     	   $result .='       <tr>';
-    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;">'.workFormatter($validatedWork).'</td>';
-    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;">'.workFormatter($reel).'</td>';
-    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;"></td>';
-    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;">'.workFormatter($leftWork).'</td>';
-    	   $result .='         <td style="width:20%;text-align:center;vertical-align:center;">'.workFormatter($plannedWork).'</td>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;">
+    	                         <input type="hidden" id="validatedWork_'.$uniqueId.'" name="validatedWork_'.$uniqueId.'" value="'.$validatedWork.'"/>
+    	                         '.workFormatter($validatedWork).'
+    	                       </td>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;">
+    	                         <input type="hidden" id="realWork_'.$uniqueId.'" name="realWork_'.$uniqueId.'" value="'.$reel.'"/>
+  	                             '.workFormatter($reel).'
+    	                       </td>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;">
+    	                         <input type="hidden" id="realWorkConsumed_'.$uniqueId.'" name="realWorkConsumed_'.$uniqueId.'" value="'.(($reelCons!='')?$reelCons:0).'"/>
+    	                         '.workFormatter($reelCons).'
+    	                       </td>';
+    	   $result .='         <td style="border-right: 1px solid black;width:20%;text-align:center;vertical-align:center;">
+    	                         <input type="hidden" id="leftWork_'.$uniqueId.'" name="leftWork_'.$uniqueId.'" value="'.$leftWork.'"/>
+                  	             '.workFormatter($leftWork).'
+                        	   </td>';
+    	   $result .='         <td style="width:20%;text-align:center;vertical-align:center;">
+    	                         <input type="hidden" id="plannedWork_'.$uniqueId.'" name="plannedWork_'.$uniqueId.'" value="'.$plannedWork.'"/>
+    	                         '.workFormatter($plannedWork).'
+                               </td>';
     	   $result .='       </tr>';
     	   $result .='     </table>';
     	   $result .='    </td>';
-    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">'.workFormatter(abs($margin)).'</td>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">
+    	                    <input type="hidden" id="margin_'.$uniqueId.'" name="margin_'.$uniqueId.'" value="'.abs($margin).'"/>
+    	                    '.workFormatter(abs($margin)).'
+    	                  </td>';
     	   $result .='     <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
-    	   $result .='       <div id="lockedDiv_'.$projectsList[$i]->id.'" name="lockedDiv_'.$projectsList[$i]->id.'" dojoType="dijit.layout.ContentPane" region="center">';
-    	   $result .=          ConsolidationValidation::drawLockedDiv($projectsList[$i]->id,$concMonth,$lock);
+    	   $result .='       <div style="margin:2px 0px 2px 2px;" id="lockedDiv_'.$uniqueId.'" name="lockedDiv_'.$uniqueId.'" dojoType="dijit.layout.ContentPane" region="center">';
+    	   $result .=          ConsolidationValidation::drawLockedDiv($uniqueId,$concMonth,$lock);
     	   $result .='       </div>';
     	   $result .='    </td>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
-    	   $result .='      <table>';
-    	   $result .='        <tr>';
-    	   $result .='          <td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod')).'</td>';
-    	   $result .='          <td style="width:73%;padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
-    	   $result .='          <td style="width:27%;padding-right:8px;height:30px;">';
-    	   $result .='            <span id="buttonValidation'.$uniqueId.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
-    	          . '              <script type="dojo/method" event="onClick" >'
-    	          //. '                saveImputationValidation("'.$uniqueId.'", "validateWork");'
-    	          //. '                saveDataToSession("idCheckBox", "'.$uniqueId.'", false);'
-    	          . '              </script>'
-    	          . '            </span>';
-    	   $result .='          </td>';
-           $result .='         <td style="padding-right:5px;"><div class="validCheckBox" type="checkbox" dojoType="dijit.form.CheckBox" name="validCheckBox'.$idCheckBox.'" id="validCheckBox'.$idCheckBox.'"></div></td>';
-           $result .='       </tr>';
-           $result .='     </table>';
+    	   $result .='       <div style="margin:2px 0px 2px 2px;" id="validatedDiv_'.$uniqueId.'" name="validatedDiv_'.$uniqueId.'" dojoType="dijit.layout.ContentPane" region="center">';
+           $result .=          ConsolidationValidation::drawValidationDiv($consValPproj,$uniqueId,$concMonth);
+           $result .='       </div>';
            $result .='    </td>';
            $result .='     <input type="hidden" id="validatedLine'.$idCheckBox.'" name="'.$uniqueId.'" value="0"/>';
            $result .='   </tr>';
@@ -194,6 +208,7 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='    </td>';
 	    $result .='   </tr>';
 	  }
+	  $result .='<input type="hidden" id="monthConsolidationValidation" name="monthConsolidationValidation" value="'.$concMonth.'"/>';
 	  $result .='<input type="hidden" id="countLine" name="countLine" value="'.$i.'"/>';
 	  $result .='  </table>';
 	  $result .='</div>';
@@ -209,20 +224,56 @@ class ConsolidationValidation extends SqlElement{
 	  
 	  $result ='  <table>';
 	  $result .='    <tr>';
-	  $result .='      <td style="width:30%;">';
+	  $result .='      <td style="width: 70px; ">';
 	  if($lock==''){
-	    $result .='      <div  id="UnlockedImputation_'.$proj.'" onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\');" class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
+	    $result .='      <div   id="UnlockedImputation_'.$proj.'" onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\');" class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
 	  }else{
-	    $result .='      <div   id="lockedImputation_'.$proj.'" onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\');" class="iconLocked32 iconLocked iconSize32" ></div>';
+	    $result .='      <div   style="margin-left:5px;" id="lockedImputation_'.$proj.'" onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\');" class="iconLocked32 iconLocked iconSize32" ></div>';
 	  }
       $result .='     </td>';
-      $result .='     <td>'.(($lock=='')?i18n('colUnlock'):i18n('colLocked')).'</td>';
+      $result .='     <td >'.(($lock=='')?i18n('colUnlock'):i18n('colLocked')).'</td>';
       $result .='   </tr>';
 	  $result .='  </table>';
 	  
 	  return $result;
 	}
 	
+	static function drawValidationDiv($consValPproj,$uniqueId,$concMonth){
+	  $result="";
+	  if($consValPproj->id!=''){
+	    $resource=new User ($consValPproj->idResource);
+	    $resourceName=$resource->name;
+	    $validatedDate=$consValPproj->validationDate;
+	    $result .='      <table>';
+	    $result .='        <tr>';
+	    $result .='          <td style="height:30px;">'.formatIcon('Submitted', 32, i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate)))).'</td>';
+	    $result .='          <td style="width:73%;padding-left:5px;height:30px;">'.i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate))).'</td>';
+	    $result .='          <td style="width:27%;padding-right:8px;height:30px;">';
+	    $result .='            <span id="buttonCancel_'.$uniqueId.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonCancel')
+	            . '              <script type="dojo/method" event="onClick" >'
+	            . '                saveOrCancelConsolidationValidation("'.$uniqueId.'","'.$concMonth.'");'
+	            . '              </script>'
+	            . '            </span>';
+	    $result .='          </td>';
+	    $result .='         <td style="padding-right:22px;"></td>';
+	  }else{
+	    $result .='      <table>';
+	    $result .='        <tr>';
+	    $result .='          <td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod')).'</td>';
+	    $result .='          <td style="width:73%;padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
+	    $result .='          <td style="width:27%;padding-right:8px;height:30px;">';
+	    $result .='            <span id="buttonValidation_'.$uniqueId.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
+	            . '              <script type="dojo/method" event="onClick" >'
+	            . '                saveOrCancelConsolidationValidation("'.$uniqueId.'","'.$concMonth.'");'
+	            . '              </script>'
+	            . '            </span>';
+	    $result .='          </td>';
+	    $result .='         <td style="padding-right:5px;"><div class="validCheckBox" type="checkbox" dojoType="dijit.form.CheckBox" name="validCheckBox'.$consValPproj->idProject.'" id="validCheckBox'.$consValPproj->idProject.'"></div></td>';
+	  }
+	  $result .='            </tr>';
+	  $result .='         </table>';
+	  return $result;
+	}
 	/** ==========================================================================
 	 * Get Visible Project
 	 * @return list of project 
@@ -276,24 +327,18 @@ class ConsolidationValidation extends SqlElement{
 	 * Get Visible Project
 	 * @return list of project
 	 */
-	public function getValuesProjectToConsolidated ($projects,$year,$month) {
-	  $pe=new PlanningElement();
-// 	  $dateString=$year.'-'.$month.'-'.date('d');
-// 	  $date=date("Y-m-d", strtotime($dateString));
-	  $where="refId in ($projects) and refType='Project'"; // and plannedEndDate >= $date";
-	  $projects=$pe->getSqlElementsFromCriteria(null,null,$where);
-	  return $projects;
+	static function getReelWorkConsumed ($project,$month) {
+	  $work=new Work();
+	  if($project->getSubProjectsList()){
+	    $sub=$project->getSubProjectsList();
+	    $subList=$project->id.','.implode(',', array_keys($sub));
+	    $where="idProject in ($subList) and month = $month ";
+	  }else{
+	    $where="idProject = $project->id and month = $month ";
+	  }
+	  $reelCons=$work->sumSqlElementsFromCriteria('work',null,$where);
+	  return $reelCons;
 	}
 
-	/**=========================================================================
-	 * Overrides SqlElement::save() function to add specific treatments
-	* @see persistence/SqlElement#save()
-	* @return the return message of persistence/SqlElement#save() method
-	*/
-	public function save() {
-      
-	  $result = parent::save();
-	  return $result;
 	
-	}
 }

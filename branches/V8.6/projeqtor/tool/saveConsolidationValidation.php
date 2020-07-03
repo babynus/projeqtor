@@ -36,40 +36,49 @@ $mode = RequestHandler::getValue('mode');
 $month= RequestHandler::getValue('month');
 $currentUser=getCurrentUserId();
 $res=array();
+$lstCons=array();
+$lock=($mode=='Locked')?$month:"";
+
+if($mode =='validaTionCons'){
+  foreach($lstProj as $projId){
+    $cons=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>substr($projId,6),"month"=>$month));
+    $cons->idProject=substr($projId,6);
+    $cons->idResource=$currentUser;
+    $cons->month=$month;
+    $cons->revenue=RequestHandler::getValue('revenue_'.$projId);;
+    $cons->validatedWork=RequestHandler::getValue('validatedWork_'.$projId);
+    $cons->realWork=RequestHandler::getValue('realWork_'.$projId);;
+    $cons->realWorkConsumed=RequestHandler::getValue('realWorkConsumed_'.$projId);
+    $cons->plannedWork=RequestHandler::getValue('plannedWork_'.$projId);
+    $cons->leftWork=RequestHandler::getValue('leftWork_'.$projId);
+    $cons->margin=RequestHandler::getValue('margin_'.$projId);
+    $cons->validationDate=date('Y-m-d');
+    $lstCons[]=$cons;
+  }
+}
 //open transaction bdd
 Sql::beginTransaction();
 
-if($mode == 'Locked' or $mode=='UnLocked'){
-  switch ($mode){
-  	case 'Locked':
-  	  $lock=$month;
-  	  break;
-  	case 'UnLocked':
-  	  $lock="";
-  	  break;
-  }
+if($mode !='validaTionCons' and $mode!='cancelCons'){
   foreach($lstProj as $projId){
+    if($projId=='')continue;
     $proj=new Project($projId);
     $proj->locked=$lock;
-    $proj->save();
+    $res[]=$proj->save();
   }
 }else {
-  foreach ($lstProj as $proj) {
-    $cons= new ConsolidationValidation();
-    $cons->idProject=$proj->id;
-    $cons->idResource=$currentUser;
-    $cons->month=$month;
-    $cons->revenue="";
-    $cons->validatedWork="";
-    $cons->realWork="";
-    $cons->realWorkConsumed="";
-    $cons->plannedWork="";
-    $cons->leftWork="";
-    $cons->margin="";
-    $cons->validationDate=date('Y-m-d');
+  if($mode=='validaTionCons'){
+    foreach ($lstCons as $cons) {
+      $res[]=$cons->save();
+    }
+  }else {
+      $cons=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>substr(implode('', $lstProj),6),"month"=>$month));
+      debugLog($cons);
+      $res[]=$cons->delete();
   }
 }
 
 // commit workPeriod
 Sql::commitTransaction();
+debugLog($res);
 ?>
