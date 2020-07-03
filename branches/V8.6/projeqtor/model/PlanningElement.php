@@ -1122,26 +1122,29 @@ class PlanningElement extends SqlElement {
       $projectList = $project->getRecursiveSubProjectsFlatList(true,true);
       $projectList = array_flip($projectList);
       $projectList = '(0,'.implode(',',$projectList).')';
-      if($this->idRevenueMode == 2 and $this->refType == 'Project'){
+      if(($this->idRevenueMode == 2 and $this->refType == 'Project') or $this->refType == 'Activity'){
         $sons=$this->getSonItemsArray();
         $sumActPlEl=0;
         $sumProjlEl=0;
+        $asSubProj=false;
+        $asSubAct=false;
         foreach ($sons as $id=>$pe){
-            if ($pe->refType=='Activity' and $pe->topRefId==$this->refId){
+            if ($pe->refType=='Activity' and $pe->idProject==$this->idProject and $pe->topId==$this->id){
+                debugLog($pe->refName);
         		$sumActPlEl+=$pe->revenue;
-        	}else if ($pe->refType=='Project' and $pe->topRefId==$this->refId){
+        		$asSubAct=true;
+        	}else if ($pe->refType=='Project' and $pe->topRefId==$this->idProject ){
+        	   $asSubProj=true;
         		$sumProjlEl+=$pe->revenue;
         	}else{
         		continue;
         	}
         }
-        if($sumActPlEl>0){
+        if($sumActPlEl>0 and !$asSubProj){
           $this->revenue = $sumActPlEl;
-        }else if($sumProjlEl>0){
-          $this->revenue = $sumProjlEl;
+        }else if($sumProjlEl>0 and $asSubProj and $asSubAct){
+          $this->revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
         }
-      }else if($this->idRevenueMode == 2 and $this->refType == 'Activity'){
-        debugLog($this->refType);
       }
     }
     ///
