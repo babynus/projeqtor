@@ -7266,7 +7266,7 @@ function refreshSectionCount(section) {
 
 var actionSelectTimeout=null;
 var actionSectionField=null;
-function showActionSelect(selectClass, selectId, selectField) {
+function showActionSelect(selectClass, selectId, selectField, canCreate, canUpdate) {
   if (actionSelectTimeout && actionSectionField==selectField) clearTimeout(actionSelectTimeout);
   else if (actionSelectTimeout && actionSectionField!=selectField) {
     if (dojo.byId("toolbar_"+actionSectionField)) {
@@ -7276,15 +7276,36 @@ function showActionSelect(selectClass, selectId, selectField) {
     }
   }
   var toolId="toolbar_"+selectField;
+  var width=0;
+  var maxWidth=((dojo.byId("widget_"+selectField).offsetWidth)/2)-25;
   if (! dojo.byId(toolId)) return;
   if (dojo.byId(toolId).innerHTML=="...") {
     var buttons='';
-    buttons+='<div title="todo" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
-    buttons+='  <div class="iconGoto" onclick="actionSelectGoto(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
-    buttons+='</div>';
-    buttons+='<div title="todo" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
-    buttons+='  <div class="iconView" onclick="actionSelectView(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
-    buttons+='</div>';
+    if (canUpdate && width<maxWidth) {
+      width+=25;
+      buttons+='<div title="todo Search" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
+      buttons+='  <div class="iconSearch" onclick="actionSelectSearch(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='</div>';
+    }
+    if (canCreate && width<maxWidth) {
+      width+=25;
+      buttons+='<div title="todo Create" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
+      buttons+='  <div class="iconAdd" onclick="actionSelectAdd(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='</div>';
+    }
+    if (selectId && width<maxWidth) {
+      width+=25;
+      buttons+='<div title="todo View" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
+      buttons+='  <div class="iconView" onclick="actionSelectView(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='</div>';
+    }
+    if (selectId && width<maxWidth) {
+      width+=25;
+      buttons+='<div title="todo Goto" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
+      buttons+='  <div class="iconGoto" onclick="actionSelectGoto(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='</div>';
+    }
+    dojo.byId(toolId).style.width=width+"px";
     dojo.byId(toolId).innerHTML=buttons;
   } 
   dojo.byId(toolId).style.display='block';
@@ -7298,17 +7319,21 @@ function actionSelectGoto(selectClass, selectId, selectField) {
     showAlert(i18n('cannotGoto'));
   } 
 }
-function actionSelectView(selectClass, selectId, selectField) {
+function actionSelectView(selectClass, selectId, selectField, canCreate) {
   var sel=dijit.byId(selectField);
   if (sel && trim(sel.get('value'))) { 
-    gotoElement(selectClass,sel.get('value'));
+    showDetail(selectField,((canCreate)?1:0),selectClass,false,null,false);
   } else { 
-    showAlert(i18n('cannotGoto'));
+    showAlert(i18n('cannotView'));
   } 
 }
-
-
-
+function actionSelectSearch(selectClass, selectId, selectField, canCreate) {
+  showDetail(selectField,((canCreate)?1:0),selectClass,false,null,true); 
+}
+function actionSelectAdd(selectClass, selectId, selectField) {
+  showDetail(selectField,1,selectClass,false,null,true);
+  newDetailItem();
+}
 function hideActionSelect(selectClass, selectId, selectField) {
   actionSectionField=selectField;
   actionSelectTimeout=setTimeout("dojo.byId('toolbar_"+selectField+"').style.display='none';",100);

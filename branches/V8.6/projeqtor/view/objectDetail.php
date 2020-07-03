@@ -2504,9 +2504,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo $attributes;
         echo $valStore;
         echo autoOpenFilteringSelect($comboDetail);
-        if (isNewGui()) echo ' onmouseover="showActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
-        if (isNewGui()) echo ' onmouseout="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
-        if (isNewGui()) echo ' onfocus="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
+        if (isNewGui() and !$comboDetail) echo ' onmouseover="showActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\','.(($canCreateCol)?'true':'false').','.(($canUpdate)?'true':'false').');"';
+        if (isNewGui() and !$comboDetail) echo ' onmouseout="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
+        if (isNewGui() and !$comboDetail) echo ' onfocus="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
         echo ' >';
         if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
