@@ -1695,8 +1695,6 @@ Fore more details, see :ref:`Advanced filters<advanced-filter>` in the :ref:`Gra
 Planned Interventions
 ---------------------
 
-The objective of this evolution is to be able to manage in ProjeQtOr periods of on-call on support activities. Here we propose an estimate adapting the need expressed to make it a community development. 
-
 The goal is to make the specifications more flexible to cover broader and more generic needs.
 
 
