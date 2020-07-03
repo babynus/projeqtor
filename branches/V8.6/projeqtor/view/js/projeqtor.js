@@ -7213,3 +7213,75 @@ function saveConsolidationValidation(listProj,mode,month,all){
 
 }
 
+//====================================================================
+// NEW GUI FEATURES
+//====================================================================
+
+function refreshSectionCount(section) {
+  console.log('refreshSectionCount('+section+')');
+  console.log(dojo.byId(section + "SectionCount"));
+  console.log(dojo.byId(section + "Badge"));
+  if (dojo.byId(section + "SectionCount")
+      && dojo.byId(section + "Badge")) {
+    dojo.byId(section + "Badge").innerHTML = dojo.byId(section+ "SectionCount").value;
+    if (dojo.byId(section + "BadgeTab")) {
+      dojo.byId(section + "BadgeTab").innerHTML = dojo.byId(section+"SectionCount").value;
+      if (dojo.byId(section+"SectionCount").value>0) {
+        dojo.byId(section + "BadgeTab").style.opacity=1;
+      } else {
+        dojo.byId(section + "BadgeTab").style.opacity=0.5;
+      }
+    }
+  }
+}
+
+var actionSelectTimeout=null;
+var actionSectionField=null;
+function showActionSelect(selectClass, selectId, selectField) {
+  if (actionSelectTimeout && actionSectionField==selectField) clearTimeout(actionSelectTimeout);
+  else if (actionSelectTimeout && actionSectionField!=selectField) {
+    if (dojo.byId("toolbar_"+actionSectionField)) {
+      clearTimeout(actionSelectTimeout);
+      dojo.byId("toolbar_"+actionSectionField).style.opacity='0%';
+      dojo.byId("toolbar_"+actionSectionField).style.display='none';
+    }
+  }
+  var toolId="toolbar_"+selectField;
+  if (! dojo.byId(toolId)) return;
+  if (dojo.byId(toolId).innerHTML=="...") {
+    var buttons='';
+    buttons+='<div title="todo" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
+    buttons+='  <div class="iconGoto" onclick="actionSelectGoto(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+    buttons+='</div>';
+    buttons+='<div title="todo" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
+    buttons+='  <div class="iconView" onclick="actionSelectView(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+    buttons+='</div>';
+    dojo.byId(toolId).innerHTML=buttons;
+  } 
+  dojo.byId(toolId).style.display='block';
+  dojo.byId(toolId).style.opacity='100%';
+}
+function actionSelectGoto(selectClass, selectId, selectField) {
+  var sel=dijit.byId(selectField);
+  if (sel && trim(sel.get('value'))) { 
+    gotoElement(selectClass,sel.get('value'));
+  } else { 
+    showAlert(i18n('cannotGoto'));
+  } 
+}
+function actionSelectView(selectClass, selectId, selectField) {
+  var sel=dijit.byId(selectField);
+  if (sel && trim(sel.get('value'))) { 
+    gotoElement(selectClass,sel.get('value'));
+  } else { 
+    showAlert(i18n('cannotGoto'));
+  } 
+}
+
+
+
+function hideActionSelect(selectClass, selectId, selectField) {
+  actionSectionField=selectField;
+  actionSelectTimeout=setTimeout("dojo.byId('toolbar_"+selectField+"').style.display='none';",100);
+  
+}
