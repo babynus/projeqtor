@@ -2439,7 +2439,15 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $fieldWidth-=30;
           }
         } else {
-          $fieldWidth-=11;
+        	if (strpos($obj->getFieldAttributes($col), 'size1/3')!==false) {
+        	  $fieldWidth-=17;
+        	} else if (strpos($obj->getFieldAttributes($col), 'size1/2')!==false) {
+        	  $fieldWidth-=21;
+        	} else if (($nobr_before or $nobr) and $fieldWidth>$mediumWidth) {
+        	  $fieldWidth-=21;
+        	} else {
+        	  $fieldWidth-=31;
+        	}
         }
         $hasOtherVersion=false;
         $versionType='';
