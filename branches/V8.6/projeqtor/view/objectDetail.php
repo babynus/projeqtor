@@ -1567,6 +1567,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // }
       $specificStyleWithoutCustom=$specificStyle;
       $specificStyle.=";".$fieldStyle;
+      //if (isNewGui()) $fieldWidth-=20;  
       if (strpos($obj->getFieldAttributes($col), 'size1/3')!==false) {
         $fieldWidth=$fieldWidth/3-3;
       } else if (strpos($obj->getFieldAttributes($col), 'size1/2')!==false) {
