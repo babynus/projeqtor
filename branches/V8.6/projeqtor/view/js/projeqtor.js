@@ -7271,7 +7271,7 @@ function showActionSelect(selectClass, selectId, selectField, canCreate, canUpda
   else if (actionSelectTimeout && actionSectionField!=selectField) {
     if (dojo.byId("toolbar_"+actionSectionField)) {
       clearTimeout(actionSelectTimeout);
-      dojo.byId("toolbar_"+actionSectionField).style.opacity='0%';
+      dojo.byId("toolbar_"+actionSectionField).style.opacity='0';
       dojo.byId("toolbar_"+actionSectionField).style.display='none';
     }
   }
@@ -7309,7 +7309,7 @@ function showActionSelect(selectClass, selectId, selectField, canCreate, canUpda
     dojo.byId(toolId).innerHTML=buttons;
   } 
   dojo.byId(toolId).style.display='block';
-  dojo.byId(toolId).style.opacity='100%';
+  dojo.byId(toolId).style.opacity='1';
 }
 function actionSelectGoto(selectClass, selectId, selectField) {
   var sel=dijit.byId(selectField);
