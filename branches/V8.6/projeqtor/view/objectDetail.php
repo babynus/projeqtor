@@ -1446,7 +1446,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             if ($thumbIcon) {
               $formatedThumb=formatIconThumb(SqlList::getFieldFromId(substr($col,2), $val, 'icon') , 22, 'right');
             } else if ($thumbRes) {
-              $formatedThumb=formatUserThumb($val, null, null, 22, 'right');
+              $formatedThumb=formatUserThumb($val, null, null, ((isNewGui())?25:22), 'right');
             } else if ($thumbColor) {
               $formatedThumb=formatColorThumb($col, $val, ((isNewGui())?25:20), 'right');
             }
@@ -3401,20 +3401,20 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
 }
 
 function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
-  echo '<tr class="detail"><td class="label" xstyle="width:10%;">';
-  echo '<label for="'.$col.'" >'.htmlEncode($obj->getColCaption($col), 'stipAllTags').'&nbsp;:&nbsp;</label>';
+  echo '<tr class="detail"><td class="label" style="margin:0px 0px 10px 0px;padding-top:10;vertical-align:middle">';
+  echo '<label for="'.$col.'" >'.htmlEncode($obj->getColCaption($col), 'stipAllTags').'&nbsp;'.((isNewGui())?'':':&nbsp;').'</label>';
   echo '</td>';
   $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
   if ($obj->idle==1) {
     $canUpdate=false;
   }
   if ($print) {
-    echo '<td style="width: 120px">';
+    echo '<td style="width: 120px;">';
   } else {
-    echo '<td>';
+    echo '<td style="padding-top:10px;padding-bottom:15px">';
   }
   if ($refType and $refId) {
-    echo '<table width="100%"><tr height="20px"><td xclass="noteData" width="1%" xvalign="top">';
+    echo '<table style="width:100%;"><tr height="20px;min-height:20px;border:1px solid red"><td xclass="noteData" width="1%" xvalign="top">';
     if (!$print and $canUpdate) {
       echo '<a onClick="removeOrigin(\''.$obj->$col->id.'\',\''.$refType.'\',\''.$refId.'\');" title="'.i18n('removeOrigin').'" > '.formatSmallButton('Remove').'</a>';
     }
@@ -3448,7 +3448,7 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
     echo htmlEncode($orig->name);
     echo '</td></tr></table>';
   } else {
-    echo '<table><tr height="20px"><td>';
+    echo '<table style=""><tr height="20px"><td>';
     if ($obj->id and !$print and $canUpdate) {
       echo '<a onClick="addOrigin();" title="'.i18n('addOrigin').'" class="roundedButtonSmall"> '.formatSmallButton('Add').'</a>';
     }
