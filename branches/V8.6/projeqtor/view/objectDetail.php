@@ -3401,8 +3401,8 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
 }
 
 function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
-  echo '<tr class="detail"><td class="label" style="margin:0px 0px 10px 0px;padding-top:10;vertical-align:middle">';
-  echo '<label for="'.$col.'" >'.htmlEncode($obj->getColCaption($col), 'stipAllTags').'&nbsp;'.((isNewGui())?'':':&nbsp;').'</label>';
+  echo '<tr class="detail"><td class="label" style="">';
+  echo '<label for="'.$col.'" style="margin:auto">'.htmlEncode($obj->getColCaption($col), 'stipAllTags').'&nbsp;'.((isNewGui())?'':':&nbsp;').'</label>';
   echo '</td>';
   $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
   if ($obj->idle==1) {
@@ -3411,10 +3411,10 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
   if ($print) {
     echo '<td style="width: 120px;">';
   } else {
-    echo '<td style="padding-top:10px;padding-bottom:15px">';
+    echo '<td style="'.((isNewGui())?'padding-top:10px;padding-bottom:5px':'').'">';
   }
   if ($refType and $refId) {
-    echo '<table style="width:100%;"><tr height="20px;min-height:20px;border:1px solid red"><td xclass="noteData" width="1%" xvalign="top">';
+    echo '<table style="width:100%;"><tr height="20px;min-height:20px;border:1px solid red"><td xclass="noteData" width="1%" valign="'.((isNewGui())?'top':'middle').'">';
     if (!$print and $canUpdate) {
       echo '<a onClick="removeOrigin(\''.$obj->$col->id.'\',\''.$refType.'\',\''.$refId.'\');" title="'.i18n('removeOrigin').'" > '.formatSmallButton('Remove').'</a>';
     }
