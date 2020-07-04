@@ -32,14 +32,18 @@
     color: #555555;
     margin: 5px 2px 5px 0px;
     padding: 2px 5px 6px 5px;
-    border: 1px solid #b3b3b3;
+    border: 1px solid #d4d4d4;
     line-height: normal;
     border-radius: 5px 5px 5px 5px;
-    barckground: url() !important;
+    barckground-image: url() !important;
+    background: #fff url() repeat-x top left;
     barckground-color: #ffffff !important;
     width: 195px;
     height: 17px;
     font-size: 10pt;
+}
+.dijitTextBoxFocused {
+	border: 1px solid #b2b2b2;
 }
 
 label, .label, .smallLabel, .labelMultiple {
@@ -91,6 +95,10 @@ label, .label, .smallLabel, .labelMultiple {
 .ProjeQtOrFlatGrey #mapDiv, .ProjeQtOrFlatGrey #messageDiv, .ProjeQtOrFlatGrey #listDiv, .ProjeQtOrFlatGrey #formDiv, .ProjeQtOrFlatGrey .display, .ProjeQtOrFlatGrey .background, .ProjeQtOrFlatGrey .dijitTitlePaneContentInner, .ProjeQtOrFlatGrey .dijitTabPane, .ProjeQtOrFlatGrey #mainDiv, .ProjeQtOrFlatGrey #centerDiv {
     background-color: #ffffff; 
 }
+.dijitComboBoxMenu, .dijitMenuItem {
+   background-color:#ffffff;
+   background-image: url();
+}
 
 html, body, #mainDiv, 
 #toolBarDiv, 
@@ -118,14 +126,14 @@ html, body, #mainDiv,
 	right:0px;
 	/*left:-50px;*/
 	display:none;
-	opacity:0%;
+	opacity:0;
 	width:200px;
 	padding-right:0px;
-	-webkit-transition: opacity 0.5s ease;
-  -moz-transition: opacity 0.5s ease;
-  -o-transition: opacity 0.5s ease;
-  -ms-transition: opacity 0.5s ease;
-  transition: opacity 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 .roundedButton:hover, .roundedButtonSmall:hover {
   border: 1px solid #c0c0c0;
@@ -139,3 +147,35 @@ html, body, #mainDiv,
 .ProjeQtOrFlatGrey .iconGoto { background-image: url(customIcons/grey/iconGoto.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
 .ProjeQtOrFlatGrey .iconSearch { background-image: url(customIcons/grey/iconSearch.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
 .ProjeQtOrFlatGrey .iconAdd { background-image: url(customIcons/grey/iconAdd.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+
+.fade-in {
+animation: fadeIn ease 0.5s;
+-webkit-animation: fadeIn ease 0.5s;
+-moz-animation: fadeIn ease 0.5s;
+-o-animation: fadeIn ease 0.5s;
+-ms-animation: fadeIn ease 0.5s;
+}
+@keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
