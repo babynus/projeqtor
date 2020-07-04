@@ -100,6 +100,20 @@ label, .label, .smallLabel, .labelMultiple {
    background-image: url();
 }
 
+.ProjeQtOrFlatGrey .dijitTitlePane .dijitTitlePaneTitle {
+	background:#ffffff !important;
+	color: #505050 !important;
+	border-bottom: 1px solid #d4d4d4;
+	font-size:120%;
+	Height:25px;
+	font-weight:normal !important;
+}
+.ProjeQtOrFlatGrey .dijitTitlePane .dijitArrowNode {
+    background-image: url(images/spriteArrows.png);
+}
+.dijitTitlePaneTextNode {
+	 font-weight:normal;
+}
 html, body, #mainDiv, 
 #toolBarDiv, 
 #logoDiv,
