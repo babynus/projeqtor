@@ -2529,12 +2529,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo $colScript;
         
         echo '</select>';
-        echo '<span style="width:1px;position:relative;">';
-        echo '<div id="toolbar_'.$fieldId.'" class="dijitTextBox toolbarForSelect" style=""';
-        if (isNewGui()) echo ' onmouseover="showActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
-        if (isNewGui()) echo ' onmouseout="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
-        echo '>...</div>';
-        echo '</span>';
+        if (isNewGui() and !$comboDetail) echo '<span style="width:1px;position:relative;">';
+        if (isNewGui() and !$comboDetail) echo '<div id="toolbar_'.$fieldId.'" class="fade-in dijitTextBox toolbarForSelect" style=""';
+        if (isNewGui() and !$comboDetail) echo ' onmouseover="showActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
+        if (isNewGui() and !$comboDetail) echo ' onmouseout="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
+        if (isNewGui() and !$comboDetail) echo '>...</div>';
+        if (isNewGui() and !$comboDetail) echo '</span>';
         if ($displayDirectAccessButton and ! isNewGui()) {
           echo '<div id="'.$col.'ButtonGoto" ';
           echo ' title="'.i18n('showDirectAccess').'" style="float:right;margin-right:3px;'.$specificStyleWithoutCustom.'"';
