@@ -7283,26 +7283,26 @@ function showActionSelect(selectClass, selectId, selectField, canCreate, canUpda
     var buttons='';
     if (canUpdate && width<maxWidth) {
       width+=25;
-      buttons+='<div title="todo Search" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
-      buttons+='  <div class="iconSearch" onclick="actionSelectSearch(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='<div title="'+i18n('comboSearchButton')+'" style="float:right;margin-right:3px;" class="roundedButton roundedIconButton generalColClass '+selectField+'Class">';
+      buttons+='  <div class="iconToolbarSearch" onclick="actionSelectSearch(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
       buttons+='</div>';
     }
     if (canCreate && width<maxWidth) {
       width+=25;
-      buttons+='<div title="todo Create" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
-      buttons+='  <div class="iconAdd" onclick="actionSelectAdd(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='<div title="'+i18n('buttonNew',new Array(i18n(selectClass)))+'" style="float:right;margin-right:3px;" class="roundedButton roundedIconButton generalColClass '+selectField+'Class">';
+      buttons+='  <div class="iconToolbarAdd" onclick="actionSelectAdd(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
       buttons+='</div>';
     }
     if (selectId && width<maxWidth) {
       width+=25;
-      buttons+='<div title="todo View" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
-      buttons+='  <div class="iconView" onclick="actionSelectView(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='<div title="'+i18n('showItem')+'" style="float:right;margin-right:3px;" class="roundedButton roundedIconButton generalColClass '+selectField+'Class">';
+      buttons+='  <div class="iconToolbarView" onclick="actionSelectView(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
       buttons+='</div>';
     }
     if (selectId && width<maxWidth) {
       width+=25;
-      buttons+='<div title="todo Goto" style="float:right;margin-right:3px;" class="roundedButton  generalColClass '+selectField+'Class">';
-      buttons+='  <div class="iconGoto" onclick="actionSelectGoto(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='<div title="'+i18n('showDirectAccess')+'" style="float:right;margin-right:3px;" class="roundedButton roundedIconButton generalColClass '+selectField+'Class">';
+      buttons+='  <div class="iconToolbarGoto" onclick="actionSelectGoto(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
       buttons+='</div>';
     }
     dojo.byId(toolId).style.width=width+"px";
