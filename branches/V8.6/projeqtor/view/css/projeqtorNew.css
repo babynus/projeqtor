@@ -116,7 +116,7 @@ html, body, #mainDiv,
 .dijitToolbar {
  margin: 5px 2px 5px 0px;
  padding: 2px 5px 6px 5px;
- border: 1px solid #b3b3b3;
+ border: 0px solid #b3b3b3;
  background-color: #ffffff; 
  background-image: none; 
 }
@@ -135,6 +135,14 @@ html, body, #mainDiv,
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+.roundedButton {
+  border-radius: 5px !important;
+  border: 1px solid #dddddd;
+}
+.roundedIconButton {
+	border: 1px solid #ffffff;
+	border-radius:10px !important;
+}
 .roundedButton:hover, .roundedButtonSmall:hover {
   border: 1px solid #c0c0c0;
   border-color: #a5a5a5;
@@ -143,10 +151,10 @@ html, body, #mainDiv,
   background: #eeeeee url() repeat-x bottom;
 }
 
-.ProjeQtOrFlatGrey .iconView { background-image: url(customIcons/grey/iconView.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; }
-.ProjeQtOrFlatGrey .iconGoto { background-image: url(customIcons/grey/iconGoto.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
-.ProjeQtOrFlatGrey .iconSearch { background-image: url(customIcons/grey/iconSearch.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
-.ProjeQtOrFlatGrey .iconAdd { background-image: url(customIcons/grey/iconAdd.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrFlatGrey .iconToolbarView { background-image: url(customIcons/grey/iconView.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 18px 18px}
+.ProjeQtOrFlatGrey .iconToolbarGoto { background-image: url(customIcons/grey/iconGoto.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrFlatGrey .iconToolbarSearch { background-image: url(customIcons/grey/iconSearch.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrFlatGrey .iconToolbarAdd { background-image: url(customIcons/grey/iconAdd.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
 
 .fade-in {
 animation: fadeIn ease 0.5s;
