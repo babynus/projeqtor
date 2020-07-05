@@ -1728,7 +1728,7 @@ function finalizeMessageDisplay(destination, validationType) {
             var ref=dojo.byId('directLinkUrlDivDetail').value;
             var objId=dojo.byId('id').value;
             var valueDiv='<span class="roundedButton">';
-            valueDiv+= '  <a href="'+ref+'" onClick="copyDirectLinkUrl(\'Button\');return false;" title="'+i18n("rightClickToCopy")+'" style="cursor: pointer; color: white;" onmouseover=this.style.color="black" onmouseout=this.style.color="white">';
+            valueDiv+= '&nbsp;<a href="'+ref+'" onClick="copyDirectLinkUrl(\'Button\');return false;" title="'+i18n("rightClickToCopy")+'" style="cursor: pointer; color: white;" onmouseover=this.style.color="black" onmouseout=this.style.color="white">';
             valueDiv+= (objId)?'&nbsp;#'+objId:'';
             valueDiv+= '&nbsp;</a>';
             valueDiv+= '</span>';

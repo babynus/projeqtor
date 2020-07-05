@@ -439,8 +439,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   $smallWidth='72';
   $mediumWidth='197';
   $largeWidth='300';
-  $labelWidth=160; // To be changed if changes in css file (label and .label)
-  $labelStyleWidth='145px';
+  $labelWidth=(isNewGui())?155:145; // To be changed if changes in css file (label and .label)
+  $labelStyleWidth=$labelWidth.'px';
   if ($outMode=='pdf') {
     // $labelWidth=40;
     // $labelStyleWidth=$labelWidth . 'px;';
@@ -651,7 +651,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $largeWidth=$mediumWidth;
       }
     }
-    
+    if (isNewGui()) $largeWidth-=25;
     // BEGIN - ADD BY TABARY - TOOLTIP
     $toolTip=$obj->getFieldTooltip($col);
     // END - ADD BY TABARY - TOOLTIP
@@ -1460,7 +1460,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             echo '&nbsp;'.(($thumb or isNewGui())?'':':&nbsp;').'</label>'.$cr;
             if ($thumb) {
               // echo $formatedThumb;
-              if (!$print) echo '<div style="position:absolute;top:1px;right:0px;float:right;">';
+              $pos=(isNewGui())?'-7':'0';
+              if (!$print) echo '<div style="position:absolute;top:1px;right:'.$pos.'px;float:right;">';
               if ($col=='idStatus') {
                 echo '<a onmouseover="drawGraphStatus();">';
               }
@@ -1527,7 +1528,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $fieldWidth=$largeWidth;
         }
       }
-      if (isNewGui()) $fieldWidth-=30;
+      if (isNewGui()) $fieldWidth-=10;
       if (substr($col, 0, 2)=='id' and $dataType=='int' and strlen($col)>2 and substr($col, 2, 1)==strtoupper(substr($col, 2, 1))) {
         $fieldWidth=$largeWidth;
       }
@@ -1722,7 +1723,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '</span>';
         } else if ($dataLength>4000) {
           // echo '</td></tr><tr><td colspan="2">';
-          echo '<div style="text-align:left;font-weight:normal" class="tabLabel">'.htmlEncode($obj->getColCaption($col), 'stipAllTags').'&nbsp;:&nbsp;</div>';
+          echo '<div style="text-align:left;font-weight:normal" class="tabLabel longTextLabel">'.htmlEncode($obj->getColCaption($col), 'stipAllTags').'&nbsp;:&nbsp;</div>';
           echo '<div style="border:1px dotted #AAAAAA;width:'.($colWidth-20).'px;padding:5px;'.$fieldStyle.'">';
           if (isTextFieldHtmlFormatted($val)) $val=htmlEncode($val, 'formatted');
           if ($outMode=="pdf") { // Must purge data, otherwise will never be generated
@@ -2441,13 +2442,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           }
         } else {
         	if (strpos($obj->getFieldAttributes($col), 'size1/3')!==false) {
-        	  $fieldWidth-=17;
+        	  $fieldWidth-=10;
         	} else if (strpos($obj->getFieldAttributes($col), 'size1/2')!==false) {
-        	  $fieldWidth-=21;
+        	  $fieldWidth-=10;
         	} else if (($nobr_before or $nobr) and $fieldWidth>$mediumWidth) {
-        	  $fieldWidth-=21;
+        	  $fieldWidth-=10;
         	} else {
-        	  $fieldWidth-=31;
+        	  $fieldWidth-=10;
         	}
         }
         $hasOtherVersion=false;
@@ -2956,7 +2957,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // class="generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="'.$specificStyle.'"
         if (getEditorType()=="CK"||(getEditorType()=="CKInline")) {
           // if (isIE() and ! $val) $val='<div></div>';
-          echo '<div style="text-align:left;font-weight:normal; width:300px;" class="tabLabel">'.htmlEncode($obj->getColCaption($col), 'stipAllTags').'</div>';
+          $caption=htmlEncode($obj->getColCaption($col), 'stipAllTags');
+          echo '<div style="text-align:left;font-weight:normal;width:'.strlen($caption).'ex;text-align:center;" class="tabLabel longTextLabel">'.$caption.'</div>';
           $ckEditorNumber++;
           // gautier
           $ckeDivheight=Parameter::getUserParameter('ckeditorHeight'.$classObj.$col.$extName);

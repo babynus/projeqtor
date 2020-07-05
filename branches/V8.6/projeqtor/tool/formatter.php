@@ -304,7 +304,7 @@ function formatColorThumb($col,$val, $size=20, $float='right',$name="") {
   $width=$size-2;
   $height=$size-2;
   if (isNewGui()) {
-    $width=$size-10;
+    $width=$size-0;
     $height=$size;
   }
   $res.='width:'.$width.'px;height:'.$height.'px;float:'.$float.';border-radius:'.$radius.'px"';

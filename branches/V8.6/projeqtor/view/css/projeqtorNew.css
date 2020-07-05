@@ -58,7 +58,16 @@ label, .label, .smallLabel, .labelMultiple {
     border: 1px;
     text-shadow: 1px 1px #FFFFFF;
 }
-
+.labelWithThumb {
+    width: 130px !important;
+}
+.longTextLabel {
+	padding:5px; 
+	border: 1px solid #d4d4d4;
+	border-bottom: 0px;
+	border-radius: 5px 5px 0px 0px;
+	width:100%;
+}
 .ProjeQtOrFlatGrey .dijitButtonNode, .ProjeQtOrFlatGrey .dijitReset.dijitInline.dijitButtonNode {
   background: transparent;
   -webkit-transition: all 0.5s ease;
