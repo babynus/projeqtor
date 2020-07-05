@@ -3423,36 +3423,31 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
     echo '<td style="'.((isNewGui())?'padding-top:10px;padding-bottom:5px':'').'">';
   }
   if ($refType and $refId) {
+    $origObjClass=null;
+    $origObjId=null;
+    if ($list->originType==get_class($obj) and $list->originId==$obj->id) {
+      // $origObj=new $list->refType($list->refId);
+      $origObjClass=$list->refType;
+      $origObjId=$list->refId;
+    } else {
+      // $origObj=new $list->originType($list->originId);
+      $origObjClass=$list->originType;
+      $origObjId=$list->originId;
+    }
+    //florent ticket#2948
+    if($origObjClass == 'DocumentVersion'){
+      $origObjClass = 'Document';
+      $doc = new DocumentVersion($origObjId,true);
+      $origObjId = $doc->idDocument;
+    }
+    $gotoE=' onClick="gotoElement('."'".$origObjClass."','".htmlEncode($origObjId)."'".');" ';
     echo '<table style="width:100%;"><tr height="20px;min-height:20px;border:1px solid red"><td xclass="noteData" width="1%" valign="'.((isNewGui())?'top':'middle').'">';
     if (!$print and $canUpdate) {
       echo '<a onClick="removeOrigin(\''.$obj->$col->id.'\',\''.$refType.'\',\''.$refId.'\');" title="'.i18n('removeOrigin').'" > '.formatSmallButton('Remove').'</a>';
     }
-    echo '</td><td width="30%" xclass="noteData" xvalign="top" style="xwhite-space:nowrap;padding:0px 5px;max-width:200px">';
+    echo '</td><td width="30%" xclass="noteData" valign="top" style="xwhite-space:nowrap;padding:0px 5px;max-width:200px;cursor:pointer;" '.$gotoE.'>';
     echo i18n($refType).'&nbsp;#'.$refId.'';
-    
-    foreach ($list as $origin) {
-      // $origObj=null;
-      $origObjClass=null;
-      $origObjId=null;
-      if ($list->originType==get_class($obj) and $list->originId==$obj->id) {
-        // $origObj=new $list->refType($list->refId);
-        $origObjClass=$list->refType;
-        $origObjId=$list->refId;
-      } else {
-        // $origObj=new $list->originType($list->originId);
-        $origObjClass=$list->originType;
-        $origObjId=$list->originId;
-      }
-      //florent ticket#2948
-      if($origObjClass == 'DocumentVersion'){
-        $origObjClass = 'Document';
-        $doc = new DocumentVersion($origObjId,true);
-        $origObjId = $doc->idDocument;
-      }
-      
-      $gotoE=' onClick="gotoElement('."'".$origObjClass."','".htmlEncode($origObjId)."'".');" style="cursor: pointer;" ';
-      echo '</td><td xclass="noteData" '.$gotoE.' style="height: 15px">';
-    }
+    echo '</td><td xclass="noteData" valign="top" '.$gotoE.' style="height: 15px;cursor:pointer">';
     $orig=new $refType($refId, true);
     echo htmlEncode($orig->name);
     echo '</td></tr></table>';
