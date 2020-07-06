@@ -36,16 +36,16 @@ $projId = RequestHandler::getValue('proj');
 $month = RequestHandler::getValue('month');
 $mode=RequestHandler::getValue('mode');
 $proj= new Project($projId);
-//debugLog($mode);
+$asSub=($proj->getSubProjectsList())?true:false;
 
 if($mode!='validaTionCons' and $mode!='cancelCons'){
-  $lock = $proj->locked;
-  $res = ConsolidationValidation::drawLockedDiv($projId, $month, $lock);
+  $critArray= array('idProject'=>$projId,'month'=>$month);
+  $lock = SqlElement::getSingleSqlElementFromCriteria('LockedImputation', $critArray);
+  $lock=($mode=="UnLocked")?'':$lock->month;
+  $res = ConsolidationValidation::drawLockedDiv($projId, $month, $lock,$asSub);
 }else if ($mode=='validaTionCons' or $mode=='cancelCons'){
   $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>substr($projId, 6),"month"=>$month));
-  $res = ConsolidationValidation ::drawValidationDiv($consValPproj,$projId,$month);
+  $res = ConsolidationValidation ::drawValidationDiv($consValPproj,$projId,$month,$asSub);
 }
-
-
 echo $res;
 ?>

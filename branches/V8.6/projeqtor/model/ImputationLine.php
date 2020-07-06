@@ -717,6 +717,7 @@ class ImputationLine {
     $curDate=$startDate;
     //$businessDay=0;
     $totalCapacity=0;
+    $allDate=array();
     for ($i=1; $i<=$nbDays; $i++) {
       $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
       echo '<input type="hidden" id="resourceCapacity_'.$curDate.'" value="'.$convertCapacity.'" />';
@@ -736,8 +737,10 @@ class ImputationLine {
         echo ' <input type="hidden" id="day_'.$i.'" name="day_'.$i.'" value="'.$curDate.'" />';
       }
       echo '</TD>';
+      $allDate[]=$curDate;
       $curDate=date('Y-m-d', strtotime("+1 days", strtotime($curDate)));
     }
+    
     //$businessDay=$businessDay*$capacity;
     echo '  <TD class="ganttLeftTitle" style="width: '.$workWidth.'px;max-width:'.$workWidth.'px;min-width:'.$workWidth.'px;overflow:hidden;">'.i18n('colLeft').'</TD>';
     echo '  <TD class="ganttLeftTitle" style="width: '.$workWidth.'px;max-width:'.$workWidth.'px;min-width:'.$workWidth.'px;overflow:hidden;"><div>'.i18n('colReassessed').'</div></TD>';
@@ -993,6 +996,11 @@ class ImputationLine {
         $curDate=$startDate;
         $listProject=Project::getAdminitrativeProjectList(true);
         for ($i=1; $i<=$nbDays; $i++) {
+          if($line->refType!='Project'){
+            $date=str_replace("-","",substr($allDate[$i-1], 0,7));
+            $lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', array('idProject'=>$line->idProject,'month'=>$date));
+            $lockedImpCase=(trim($lockedImp->id)!='')?true:false;
+          }
           $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
           echo '<td class="ganttDetail" align="center" width="'.$inputWidth.'px;"';
           if ($today==$curDate) {
@@ -1001,7 +1009,7 @@ class ImputationLine {
             echo ' style="background-color:#'.$weekendColor.'; color: #aaaaaa;"';
           }
           echo '>';
-          if ($line->imputable) {
+          if ($line->imputable ) {
             $isAdministrative=false;
             if (array_key_exists($line->idProject, $listProject)) $isAdministrative=true;
             $valWork=$line->arrayWork[$i]->work;
@@ -1039,7 +1047,7 @@ class ImputationLine {
               echo ' id="workValue_'.$nbLine.'_'.$i.'"';
               echo ' name="workValue_'.$i.'[]"';
               echo ' value="'.Work::displayImputation($valWork).'" ';
-              if ($line->idle or $line->locked) {
+              if ($line->idle or $line->locked or $lockedImpCase) {
                 echo ' readOnly="true" ';
               }
               echo ' >';
@@ -1094,7 +1102,7 @@ class ImputationLine {
           $curDate=date('Y-m-d', strtotime("+1 days", strtotime($curDate)));
         }
         echo '<td class="ganttDetail" align="center" width="'.($workWidth*2+1).'px;" '.(($print)?'colspan="2"':'').'>';
-        if ($line->imputable) {
+        if ($line->imputable ) {
           if (!$print) {
             if($manuPlan){
               $workPM=0;

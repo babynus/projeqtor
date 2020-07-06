@@ -7165,8 +7165,7 @@ function refreshConsolidationDiv (proj,month,mode){
   loadContent('../view/refreshConsolidationDiv.php?proj='+proj+'&month='+month+'&mode='+mode,div,false,false,false,false,false,callback);
 }
 
-function lockedImputation(listProj,length,month){
-  console.log(listProj);
+function lockedImputation(listProj,length,month,asSub){
   var all=false;
   if(length!='')all=true;
   if(all){
@@ -7174,7 +7173,6 @@ function lockedImputation(listProj,length,month){
     if(dojo.byId('UnlockedImputation')){
       mode='Locked';
         for(var i=0;i<length;i++){
-          console.log(month+listProj[i]);
           if(!dojo.byId('UnlockedImputation_'+month+listProj[i])){
             delete listProj[i];
           }
@@ -7182,7 +7180,6 @@ function lockedImputation(listProj,length,month){
     }else{
       mode='UnLocked';
         for(var i=0;i<length;i++){
-          console.log(month+listProj[i]);
           if(!dojo.byId('lockedImputation_'+month+listProj[i])){
             delete listProj[i];
           }
@@ -7195,24 +7192,21 @@ function lockedImputation(listProj,length,month){
       mode='UnLocked';
     }
   }
-  saveConsolidationValidation(listProj,mode,month,all);
+  saveConsolidationValidation(listProj,mode,month,all,asSub);
 }
 
-function saveOrCancelConsolidationValidation(proj,month){
+function saveOrCancelConsolidationValidation(proj,month,asSub){
   all=false;
   if(dojo.byId('buttonValidation_'+proj)){
     mode='validaTionCons';
   }else{
     mode='cancelCons';
   }
-  saveConsolidationValidation(proj,mode,month,all);
+  console.log(month);
+  saveConsolidationValidation(proj,mode,month,all,asSub);
 }
 
-function saveConsolidationValidation(listProj,mode,month,all){  
-  console.log(listProj);
-  console.log(mode);
-  console.log(month);
-  console.log(all);
+function saveConsolidationValidation(listProj,mode,month,all,asSub){  
   listproj=((mode=='Locked' || mode=='UnLocked') && !all )?listProj.substr(6):''+listProj+'';
   var url='../tool/saveConsolidationValidation.php?lstProj='+listproj+'&mode='+mode+'&month='+month;
   if(mode=='validaTionCons' || mode=='cancelCons'){
@@ -7220,7 +7214,7 @@ function saveConsolidationValidation(listProj,mode,month,all){
       url : url,
       handleAs : "text",
       load : function(data,args){
-          if(all){
+          if(all || asSub){
             refreshConcolidationValidationList();
           }else{
             refreshConsolidationDiv(listProj,month,mode);
@@ -7232,7 +7226,7 @@ function saveConsolidationValidation(listProj,mode,month,all){
       url : url,
       handleAs : "text",
       load : function(data,args){
-          if(all){
+          if(all || asSub){
             refreshConcolidationValidationList();
           }else{
             refreshConsolidationDiv(listProj,month,mode);
