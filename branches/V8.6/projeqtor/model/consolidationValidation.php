@@ -278,7 +278,7 @@ class ConsolidationValidation extends SqlElement{
 	            . '              </script>'
 	            . '            </span>';
 	    $result .='          </td>';
-	    $result .='         <td style="padding-right:5px;"><div class="validCheckBox" type="checkbox" dojoType="dijit.form.CheckBox" name="validCheckBox'.$consValPproj->idProject.'" id="validCheckBox'.$consValPproj->idProject.'"></div></td>';
+	    $result .='         <td style="padding-right:5px;"><div class="validCheckBox" type="checkbox" dojoType="dijit.form.CheckBox" name="validCheckBox'.substr($uniqueId, 6).'" id="validCheckBox'.substr($uniqueId, 6).'"></div></td>';
 	  }
 	  $result .='            </tr>';
 	  $result .='         </table>';
