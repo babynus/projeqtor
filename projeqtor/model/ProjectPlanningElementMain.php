@@ -487,21 +487,6 @@ class ProjectPlanningElementMain extends PlanningElement {
 	  	$colScript .= '    formChanged();';
 	  	$colScript .= '  }';
 	  	$colScript .= '</script>';
-  	}else if($colName=='commandSum' or $colName=='billSum' or $colName=='revenue'){
-  	  $colScript .= '<script type="dojo/connect" event="onChange" >';
-  	  $colScript .= '  var revenue=dijit.byId("'.get_class($this) .'_revenue").get("value");';
-  	  $colScript .= '  var commandSum=dijit.byId("'.get_class($this) .'_commandSum").get("value");';
-  	  $colScript .= '  var billSum=dijit.byId("'.get_class($this) .'_billSum").get("value");';
-  	  $colScript .= '  if (revenue > commandSum) {';
-  	  $colScript .= '    dojo.byId("widget_'.get_class($this) .'_commandSum").style.color = \'rgb(170, 0, 0) !important\';';
-  	  $colScript .= '    console.log(dojo.byId("widget_'.get_class($this) .'_commandSum"));';
-  	  $colScript .= '    formChanged();';
-  	  $colScript .= '  }';
-  	  $colScript .= '  if (revenue < billSum) {';
-  	  $colScript .= '    dojo.byId("widget_'.get_class($this) .'_billSum").style.color = "rgb(170, 0, 0) !important";';
-  	  $colScript .= '    formChanged();';
-  	  $colScript .= '  }';
-  	  $colScript .= '</script>';
   	}
   	return $colScript;
   }
