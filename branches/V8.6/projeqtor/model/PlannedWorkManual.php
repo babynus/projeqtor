@@ -252,12 +252,20 @@ class PlannedWorkManual extends GeneralWork {
     if ($refType and $refId) {
       $crit.=" and ( (refType='$refType' and refId=$refId) or refType is null)";
     }
+    $adminProject=Project::getAdminitrativeProjectList(true,true);
+    debugLog($adminProject);
     $w=new Work();
-    $wList=$w->sumSqlElementsFromCriteria('work', null, $critWork." and manual=0", 'workDate');
+    $wList=$w->sumSqlElementsFromCriteria('work', null, $critWork." and manual=0", 'workDate, idProject');
     $realWork=array();
+    $realWorkAdmin=array();
     if ($wList) {
       foreach ($wList as $sum) {
-        $realWork[$sum['workdate']]=$sum['sumwork'];
+        if (isset($adminProject[$sum['idproject']])) {
+          if (isset($realWorkAdmin[$sum['workdate']])) $realWorkAdmin[$sum['workdate']]+=$sum['sumwork'];
+          else $realWorkAdmin[$sum['workdate']]=$sum['sumwork'];
+        } 
+        if (isset($realWork[$sum['workdate']])) $realWork[$sum['workdate']]+=$sum['sumwork'];
+        else $realWork[$sum['workdate']]=$sum['sumwork'];
       }
     }
     //$realWork=
@@ -298,6 +306,8 @@ class PlannedWorkManual extends GeneralWork {
       $halfDayDuration=0.5;
       if ($manageCapacity=='DURATION') $halfDayDuration=$capacity/2;
       $real=(isset($realWork[$date]))?$realWork[$date]:0;
+      $realAdmin=(isset($realWorkAdmin[$date]))?$realWorkAdmin[$date]:0;
+      debugLog("$date - real=$real - realAdmin=$realAdmin");
       if (($capacity-$real)<$halfDayDuration) $locked='ALL';
       if (isset($exist[$date])) {
         foreach (array('AM','PM') as $period) {
@@ -333,13 +343,23 @@ class PlannedWorkManual extends GeneralWork {
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickAM.' style="cursor:'.$cursorAM.';width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
       $color=getForeColor($colorPM);
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickPM.' style="cursor:'.$cursorPM.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
-      echo '</table>';  
-      if ($real) {
-        $height=intval($size*$real/(($capacity)?$capacity:$resObj->capacity));
+      echo '</table>';
+      $leftAdmin=0;
+      if ($real and ($real-$realAdmin)>0) {
+        $height=intval($size*($real-$realAdmin)/(($capacity)?$capacity:$resObj->capacity));
         if ($height>$size) $height=$size;
         $background = 'background-color:#202020;opacity:0.5';
         //echo '<div style="pointer-events: none;position:absolute;top:0;'.$background.'; height:'.$height.'px;width:'.$size.'px"> </div>';
         echo '<div style="pointer-events: none;position:absolute;top:0;'.$background.'; width:'.$height.'px;height:'.$size.'px"> </div>';
+        $leftAdmin=$height;
+      }
+      if ($realAdmin) {
+        $height=intval($size*$realAdmin/(($capacity)?$capacity:$resObj->capacity));
+        if ($height>$size) $height=$size;
+        $background = 'background-color:#3d668f;opacity:1';
+        //echo '<div style="pointer-events: none;position:absolute;top:0;'.$background.'; height:'.$height.'px;width:'.$size.'px"> </div>';
+        // Title will not be shown as pointer-event is set to none (and this is important)
+        echo '<div title="absence" style="left:'.($leftAdmin).'px;pointer-events: none;position:absolute;top:0;'.$background.'; width:'.$height.'px;height:'.$size.'px"></div>';
       }
       if ($validated) {
         //$positionGrid=($totalRemplissage<100)?$totalRemplissage:100;
