@@ -68,18 +68,28 @@ class ConsolidationValidation extends SqlElement{
 	  $idProject=($idProject=='')?0:$idProject;
 	  $idProjectType=($idProjectType=='')?0:$idProjectType;
 	  $idOrganization=($idOrganization=='')?0:$idOrganization;
+	  $lockedProects=array();
 	  $lstProject=$cons->getVisibleProjectToConsolidated($idProject,$idProjectType,$idOrganization);
 	  $projectsList=$lstProject[0];
 	  $srtingProjectList=$lstProject[1];
 	  $length=count($projectsList);
 	  $concMonth=$year.$month;
 	  $countLocked=0;
-      $c=0;
+	  $c=0;
+      $where="idProject in ($srtingProjectList) and month ='".$concMonth."'";
+      $lockImputation=new LockedImputation();
+      $lstLockedImp=$lockImputation->getSqlElementsFromCriteria(null,null,$where);
 
       foreach ($projectsList as $proj) {
-        if($proj->locked!="")$countLocked++;
-        else continue;
+        foreach ($lstLockedImp as $lockProjImp){
+          if($lockProjImp->idProject==$proj->id){
+            $countLocked++;
+            $lockedProects[$proj->id]=$lockProjImp->month;
+          }
+          else continue;
+        }
       }
+      
       $AllLocked=($countLocked==$length)?true:false;
 	  //Header
 	  $result  ='<div id="imputationValidationDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
@@ -131,8 +141,9 @@ class ConsolidationValidation extends SqlElement{
         for($i=0;$i<$length;$i++) {
           $idCheckBox=$projectsList[$i]->id;
           $uniqueId=$concMonth.$projectsList[$i]->id;
-          $lock=$projectsList[$i]->locked;
+          $lock=(isset($lockedProects[$idCheckBox])?$lockedProects[$idCheckBox]:'');
           $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$projectsList[$i]->id,"month"=>$concMonth));
+          $asSub=($projectsList[$i]->getSubProjectsList())?true:false;
           if($consValPproj->id!=''){
             $reel=$consValPproj->realWork;
             $leftWork=$consValPproj->leftWork;
@@ -190,12 +201,12 @@ class ConsolidationValidation extends SqlElement{
     	                  </td>';
     	   $result .='     <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
     	   $result .='       <div style="margin:2px 0px 2px 2px;" id="lockedDiv_'.$uniqueId.'" name="lockedDiv_'.$uniqueId.'" dojoType="dijit.layout.ContentPane" region="center">';
-    	   $result .=          ConsolidationValidation::drawLockedDiv($uniqueId,$concMonth,$lock);
+    	   $result .=          ConsolidationValidation::drawLockedDiv($uniqueId,$concMonth,$lock,$asSub);
     	   $result .='       </div>';
     	   $result .='    </td>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
     	   $result .='       <div style="margin:2px 0px 2px 2px;" id="validatedDiv_'.$uniqueId.'" name="validatedDiv_'.$uniqueId.'" dojoType="dijit.layout.ContentPane" region="center">';
-           $result .=          ConsolidationValidation::drawValidationDiv($consValPproj,$uniqueId,$concMonth);
+           $result .=          ConsolidationValidation::drawValidationDiv($consValPproj,$uniqueId,$concMonth,$asSub);
            $result .='       </div>';
            $result .='    </td>';
            $result .='     <input type="hidden" id="validatedLine'.$idCheckBox.'" name="'.$uniqueId.'" value="0"/>';
@@ -220,15 +231,14 @@ class ConsolidationValidation extends SqlElement{
 	 * Draw div
 	 * @return list of project
 	 */
-	static function drawLockedDiv($proj,$month,$lock){
-	  
+	static function drawLockedDiv($proj,$month,$lock,$asSub){
 	  $result ='  <table>';
 	  $result .='    <tr>';
 	  $result .='      <td style="width: 70px; ">';
 	  if($lock==''){
-	    $result .='      <div   id="UnlockedImputation_'.$proj.'" onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\');" class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
+	    $result .='      <div   id="UnlockedImputation_'.$proj.'" onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\',\''.$asSub.'\');" class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
 	  }else{
-	    $result .='      <div   style="margin-left:5px;" id="lockedImputation_'.$proj.'" onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\');" class="iconLocked32 iconLocked iconSize32" ></div>';
+	    $result .='      <div   style="margin-left:5px;" id="lockedImputation_'.$proj.'" onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\',\''.$asSub.'\');" class="iconLocked32 iconLocked iconSize32" ></div>';
 	  }
       $result .='     </td>';
       $result .='     <td >'.(($lock=='')?i18n('colUnlock'):i18n('colLocked')).'</td>';
@@ -238,7 +248,7 @@ class ConsolidationValidation extends SqlElement{
 	  return $result;
 	}
 	
-	static function drawValidationDiv($consValPproj,$uniqueId,$concMonth){
+	static function drawValidationDiv($consValPproj,$uniqueId,$concMonth,$asSub){
 	  $result="";
 	  if($consValPproj->id!=''){
 	    $resource=new User ($consValPproj->idResource);
@@ -251,7 +261,7 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='          <td style="width:27%;padding-right:8px;height:30px;">';
 	    $result .='            <span id="buttonCancel_'.$uniqueId.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonCancel')
 	            . '              <script type="dojo/method" event="onClick" >'
-	            . '                saveOrCancelConsolidationValidation("'.$uniqueId.'","'.$concMonth.'");'
+	            . '                saveOrCancelConsolidationValidation("'.$uniqueId.'","'.$concMonth.'","'.$asSub.'");'
 	            . '              </script>'
 	            . '            </span>';
 	    $result .='          </td>';
@@ -264,7 +274,7 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='          <td style="width:27%;padding-right:8px;height:30px;">';
 	    $result .='            <span id="buttonValidation_'.$uniqueId.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
 	            . '              <script type="dojo/method" event="onClick" >'
-	            . '                saveOrCancelConsolidationValidation("'.$uniqueId.'","'.$concMonth.'");'
+	            . '                saveOrCancelConsolidationValidation("'.$uniqueId.'","'.$concMonth.'","'.$asSub.'");'
 	            . '              </script>'
 	            . '            </span>';
 	    $result .='          </td>';

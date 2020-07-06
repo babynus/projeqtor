@@ -31,13 +31,34 @@
 require_once "../tool/projeqtor.php";
 
 //parameter
-$lstProj = explode(',', RequestHandler::getValue('lstProj'));
 $mode = RequestHandler::getValue('mode');
+$lstProj = explode(',', RequestHandler::getValue('lstProj'));
 $month= RequestHandler::getValue('month');
 $currentUser=getCurrentUserId();
 $res=array();
 $lstCons=array();
 $lock=($mode=='Locked')?$month:"";
+
+foreach ($lstProj as $id=>$val){
+  $val=($mode =='validaTionCons' or $mode=='cancelCons')?substr($val,6):$val;
+  $project= new Project($val);
+  $proectsSubList=$project->getSubProjectsList();
+  $lstSub=array();
+  foreach ($proectsSubList as $key=>$name){
+    foreach ($lstProj as $idProj){
+      if($key==$idProj){
+       unset($proectsSubList[$key]);
+      }
+    }
+  }
+  if($mode=='cancelCons')$lstProj[$id]=$val;
+  if(!empty($proectsSubList)){
+    foreach ($proectsSubList as $key=>$name){
+      $lstProj[]=($mode =='validaTionCons' or $mode=='cancelCons')?$month.$key:$key;
+    }
+  }
+}
+
 
 if($mode =='validaTionCons'){
   foreach($lstProj as $projId){
@@ -56,15 +77,24 @@ if($mode =='validaTionCons'){
     $lstCons[]=$cons;
   }
 }
+
 //open transaction bdd
 Sql::beginTransaction();
 
 if($mode !='validaTionCons' and $mode!='cancelCons'){
-  foreach($lstProj as $projId){
-    if($projId=='')continue;
-    $proj=new Project($projId);
-    $proj->locked=$lock;
-    $res[]=$proj->save();
+  if($mode=='Locked'){
+    foreach($lstProj as $projId){
+      $lockImp=new LockedImputation();
+      $lockImp->idProject=$projId;
+      $lockImp->idResource=$currentUser;
+      $lockImp->month=$lock;
+      $lockImp->save();
+    }
+  }else{
+    $lstProj=implode(',', $lstProj);
+    $where="idProject in ($lstProj) and month ='".$month."'";
+    $lockImputation=new LockedImputation();
+    $lstImputLocked=$lockImputation->purge($where);
   }
 }else {
   if($mode=='validaTionCons'){
@@ -72,13 +102,12 @@ if($mode !='validaTionCons' and $mode!='cancelCons'){
       $res[]=$cons->save();
     }
   }else {
-      $cons=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>substr(implode('', $lstProj),6),"month"=>$month));
-      debugLog($cons);
-      $res[]=$cons->delete();
+      $lstProj=implode(',', $lstProj);
+      $where="idProject in ($lstProj) and month = $month";
+      $res[]=$cons->purge($where);
   }
 }
 
 // commit workPeriod
 Sql::commitTransaction();
-debugLog($res);
 ?>
