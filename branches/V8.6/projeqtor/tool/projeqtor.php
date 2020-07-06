@@ -5089,7 +5089,7 @@ function searchAllAttachmentMailable($objectClass,$idObj){
 function getGui() {
   global $paramNewGui;
   if (isset($paramNewGui) and $paramNewGui==true) return "new";
-  else return "standard";
+  else return "std";
 }
 function isNewGui() {
   return (getGui()=='new');
