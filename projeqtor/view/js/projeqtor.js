@@ -7202,13 +7202,12 @@ function saveOrCancelConsolidationValidation(proj,month,asSub){
   }else{
     mode='cancelCons';
   }
-  console.log(month);
   saveConsolidationValidation(proj,mode,month,all,asSub);
 }
 
 function saveConsolidationValidation(listProj,mode,month,all,asSub){  
   listproj=((mode=='Locked' || mode=='UnLocked') && !all )?listProj.substr(6):''+listProj+'';
-  var url='../tool/saveConsolidationValidation.php?lstProj='+listproj+'&mode='+mode+'&month='+month;
+  var url='../tool/saveConsolidationValidation.php?lstProj='+listproj+'&mode='+mode+'&month='+month+'&all='+all;
   if(mode=='validaTionCons' || mode=='cancelCons'){
     dojo.xhrPost({
       url : url,
