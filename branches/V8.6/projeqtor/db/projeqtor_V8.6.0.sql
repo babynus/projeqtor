@@ -83,3 +83,10 @@ INSERT INTO `${prefix}revenuemode` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 (1,'fixed',100,0),
 (2,'variable',200,0);
 
+INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `idle`, `targetDateColumnName`) VALUES
+(29, 'CACS', 'percent', 'CaMoreThanCommandSum', 430, 0, null),
+(30, 'CABS', 'percent', 'CaLessThanBillSum', 440, 0, null);
+
+INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
+('8', 'Project', '29', '0'),
+('8', 'Project', '30', '0');
