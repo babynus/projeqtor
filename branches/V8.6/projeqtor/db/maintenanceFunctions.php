@@ -376,6 +376,14 @@ function formatForDbType($query,$dbType=null) {
     } else if (substr($res,0,12)=='CREATE INDEX') {
       $res=str_replace('(255)','',$res);
     }
+    $posComment=strpos($res," COMMENT '");
+    while ($posComment) {
+      debugLog("BEFORE ==== $res");
+      $posCommentEnd=strpos($res,"'",$posComment+10);
+      $res=substr($res,0,$posComment).substr($res,$posCommentEnd+1);
+      debugLog("AFTER ===== $res");
+      $posComment=strpos($res," COMMENT '");
+    }
   } else {
     // not mysql, not pgsql, so WHAT ?
     echo "unknown database type '$dbType'";
