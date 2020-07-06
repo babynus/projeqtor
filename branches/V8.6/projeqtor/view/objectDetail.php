@@ -1827,7 +1827,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // Draw Id (only visible) ============================================= ID
         // id is only visible
         $ref=$obj->getReferenceUrl();
-        echo '<span class="roundedButton" style="padding:1px 5px 5px 5px;color:#AAAAAA;'.$specificStyle.'" >';
+        echo '<span class="roundedButton" style="padding:1px 5px 5px 5px;font-size:8pt; height: 50px; color:#AAAAAA;'.$specificStyle.'" >';
         echo '  <a  href="'.$ref.'" onClick="copyDirectLinkUrl(\'Detail\');return false;"'.' title="'.i18n("rightClickToCopy").'" style="cursor: pointer;">';
         echo '    <span style="color:grey;vertical-align:middle;padding: 2px 0px 2px 0px !important;'.$specificStyle.'">#</span>';
         echo '    <span dojoType="dijit.form.TextBox" type="text"  ';
@@ -2825,6 +2825,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if ($col=='workElementLeftWork' and property_exists($obj, 'leftWork')) {
           $negative=($obj->workElementLeftWork>$obj->leftWork)?'background-color: #FFAAAA !important;':'';
+        }
+        if($col=='commandSum'){
+          $negative=($obj->commandSum < $obj->revenue)?'background-color: #FFAAAA !important;':'';
+        }
+        if($col=='billSum'){
+        	$negative=($obj->billSum > $obj->revenue)?'background-color: #FFAAAA !important;':'';
         }
         // BEGIN - ADD BY TABARY - TOOLTIP
         echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
