@@ -232,7 +232,15 @@ class IndicatorValue extends SqlElement {
       case 'RWOAW' :   //RealWorkOverAssignedWork
         $this->targetValue=$obj->$pe->assignedWork;
         $value=$obj->$pe->realWork;
-        break;        
+        break;
+      case 'CACS' :   //CaMoreThanCommandSum
+      	$this->targetValue=$obj->$pe->commandSum;
+      	$value=$obj->$pe->revenue;
+      	break;
+  	 case 'CABS' :   //CaMoreThanBillSum
+  		$this->targetValue=$obj->$pe->revenue;
+  		$value=$obj->$pe->billSum;
+  		break;
   	}
   	$this->warningTargetValue=$this->targetValue*floatval($def->warningValue)/100;
   	$this->alertTargetValue=$this->targetValue*floatval($def->alertValue)/100;
@@ -262,7 +270,7 @@ class IndicatorValue extends SqlElement {
       	$this->status="OK";
       }   	
     }
-  }
+   }
 
   public function checkDates($obj=null) {
     if ($this->type!='delay') {
