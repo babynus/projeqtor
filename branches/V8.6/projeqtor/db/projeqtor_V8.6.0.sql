@@ -1594,7 +1594,14 @@ CREATE TABLE `${prefix}consolidationvalidation` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-ALTER TABLE `${prefix}project` ADD COLUMN `locked` varchar(6) DEFAULT NULL;
+
+CREATE TABLE `${prefix}lockedImputation` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idProject` int(12) DEFAULT NULL COMMENT '12',
+  `idResource` int(12) DEFAULT NULL COMMENT '12',
+  `month` varchar(6) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 -- Tags Management
 
