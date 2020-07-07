@@ -437,6 +437,9 @@ class ImputationLine {
       //florent
       if($manuPlan){
         foreach ($plannedManualWorkList as $work) {
+          $critArray=array('idProject'=>$work->idProject,'month'=>$work->month);
+          $lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', $critArray);
+          if($lockedImp->id!='')continue;
           if (($work->idAssignment and $work->idAssignment==$elt->idAssignment ) or (!$work->idAssignment and $work->refType==$elt->refType and $work->refId==$elt->refId) or ($work->idAssignment and $work->idAssignment==$elt->idAssignment)) {
             $workDate=$work->workDate;
             $offset=dayDiffDates($startDate, $workDate)+1;
@@ -1000,6 +1003,7 @@ class ImputationLine {
             $date=str_replace("-","",substr($allDate[$i-1], 0,7));
             $lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', array('idProject'=>$line->idProject,'month'=>$date));
             $lockedImpCase=(trim($lockedImp->id)!='')?true:false;
+            $manuPlan=($lockedImpCase)?false:$manuPlan;
           }
           $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
           echo '<td class="ganttDetail" align="center" width="'.$inputWidth.'px;"';

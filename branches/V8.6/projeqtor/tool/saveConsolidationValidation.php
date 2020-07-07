@@ -62,6 +62,7 @@ foreach ($lstProj as $id=>$val){
   }
 }
 if($mode =='validaTionCons'){
+  $lstImpLocked=array();
   foreach($lstProj as $projId){
     $projId=($all=='false')?$projId:substr($projId, 6);
     $cons=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$projId,"month"=>$month));
@@ -77,6 +78,9 @@ if($mode =='validaTionCons'){
     $cons->margin=RequestHandler::getValue('margin_'.$projId);
     $cons->validationDate=date('Y-m-d');
     $lstCons[]=$cons;
+    $critArray=array('idProject'=>$projId,'month'=>$month);
+    $lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', $critArray);
+    if($lockedImp->id!='')$lstImpLocked[]=$lockedImp->id;
   }
 }
 Sql::beginTransaction();
@@ -98,14 +102,22 @@ if($mode !='validaTionCons' and $mode!='cancelCons'){
 }else {
   if($mode=='validaTionCons'){
     foreach ($lstCons as $cons) {
-      $res[]=$cons->save();
+      $cons->save();
+    }
+    if(!empty($lstImpLocked)){
+      $lockedImpProjects= new LockedImputation();
+      $lstImpLocked=implode(',', $lstImpLocked);
+      $clause="id in ($lstImpLocked) and month = $month";
+      debugLog($clause);
+      $res=$lockedImpProjects->purge($clause);
     }
   }else {
-    $cons=new ConsolidationValidation();
+      $cons=new ConsolidationValidation();
       $lstProj=implode(',', $lstProj);
       $where="idProject in ($lstProj) and month = $month";
-      $res[]=$cons->purge($where);
+      $cons->purge($where);
   }
 }
 Sql::commitTransaction();
+debugLog($res);
 ?>
