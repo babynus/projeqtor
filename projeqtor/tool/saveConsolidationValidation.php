@@ -33,6 +33,11 @@ require_once "../tool/projeqtor.php";
 //parameter
 $mode = RequestHandler::getValue('mode');
 $lstProj = explode(',', RequestHandler::getValue('lstProj'));
+foreach ($lstProj as $id=>$pro){
+  if($pro==''){
+    unset ($lstProj[$id]);
+  }
+}
 $month= RequestHandler::getValue('month');
 $all= RequestHandler::getValue('all');
 $currentUser=getCurrentUserId();
@@ -108,7 +113,6 @@ if($mode !='validaTionCons' and $mode!='cancelCons'){
       $lockedImpProjects= new LockedImputation();
       $lstImpLocked=implode(',', $lstImpLocked);
       $clause="id in ($lstImpLocked) and month = $month";
-      debugLog($clause);
       $res=$lockedImpProjects->purge($clause);
     }
   }else {
@@ -119,5 +123,4 @@ if($mode !='validaTionCons' and $mode!='cancelCons'){
   }
 }
 Sql::commitTransaction();
-debugLog($res);
 ?>
