@@ -7155,7 +7155,8 @@ function getHabilitationConsolidation(lst,lenght,mode){
         delete lst[i];
       }
     }else{
-      if(dojo.byId('projHabilitationValidation_'+lst[i]).value=='2'){
+      console.log(lst);
+      if(dojo.byId('projHabilitationValidation_'+lst[i].substr(6).value=='2')){
         delete lst[i];
       }
     }
