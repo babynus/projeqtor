@@ -271,14 +271,14 @@ class ConsolidationValidation extends SqlElement{
 	 */
 	static function drawLockedDiv($proj,$month,$lock,$asSub,$prof){
 	  $habLockedImputation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'lockedImputation'));
-	  $functionLocked=($habLockedImputation->rightAccess=='1')?'onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\',\''.$asSub.'\');"':(($lock=='')?'style="cursor: not-allowed;"':'style="cursor: not-allowed;margin-left:5px;"');
+	  $functionLocked=($habLockedImputation->rightAccess=='1')?'onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\',\''.$asSub.'\');"':'';
 	  $result ='  <table>';
 	  $result .='    <tr>';
 	  $result .='      <td style="width: 70px; ">';
 	  if($lock==''){
-	    $result .='      <div   id="UnlockedImputation_'.$proj.'"  '.$functionLocked.' class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
+	    $result .='      <div '.(($habLockedImputation->rightAccess=='1')?'':'style="cursor: not-allowed;"').'  id="UnlockedImputation_'.$proj.'"  '.$functionLocked.' class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
 	  }else{
-	    $result .='      <div   id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" ></div>';
+	    $result .='      <div '.(($habLockedImputation->rightAccess=='1')?'style="margin-left:5px;"':'style="cursor: not-allowed;margin-left:5px;"').'  id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" ></div>';
 	  }
 	  $result .='     <input type="hidden" id="projHabilitationLocked_'.substr($proj, 6).'" name="projHabilitationLocked_'.substr($proj, 6).'" value="'.$habLockedImputation->rightAccess.'"/>';
       $result .='     </td>';
@@ -300,7 +300,7 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='      <table>';
 	    $result .='        <tr>';
 	    $result .='          <td style="height:30px;">'.formatIcon('Submitted', 32, i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate)))).'</td>';
-	    $result .='          <td style="width:73%;padding-left:5px;height:30px;">'.i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate))).'</td>';
+	    $result .='          <td style="width:'.(($right=='1')?"73%":"100%").';padding-left:5px;height:30px;">'.i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate))).'</td>';
 	    $result .='          <input type="hidden" id="projHabilitationValidation_'.substr($uniqueId, 6).'" name="projHabilitationValidation_'.substr($uniqueId, 6).'" value="'.$right.'"/>';
 	    if($right=='1'){
     	    $result .='          <td style="width:27%;padding-right:8px;height:30px;">';
@@ -316,7 +316,7 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='      <table>';
 	    $result .='        <tr>';
 	    $result .='          <td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod')).'</td>';
-	    $result .='          <td style="width:73%;padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
+	    $result .='          <td style="width:'.(($right=='1')?"73%":"100%").';padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
 	    if($right=='1'){
     	    $result .='          <td style="width:27%;padding-right:8px;height:30px;">';
     	    $result .='            <span id="buttonValidation_'.$uniqueId.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
