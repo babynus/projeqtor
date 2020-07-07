@@ -829,6 +829,7 @@ class PlannedWork extends GeneralWork {
                 }
               }
             	$delaiTh=workDayDiffDates($currentDate,$endToTake);
+            	$regulTh=0;
             	if ($delaiTh and $delaiTh>0) { 
                 $regulTh=round($ass->leftWork/$delaiTh,10);
             	}
