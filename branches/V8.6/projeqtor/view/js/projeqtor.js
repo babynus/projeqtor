@@ -6334,6 +6334,8 @@ function validateAllSelection(){
 			}else{
 			  mode='validaTionCons';
 			  month=dojo.byId('monthConsolidationValidation').value;
+			  listId=getHabilitationConsolidation(listId.split(','),length,'validation');
+			  listId=listId.join(",");
 			  saveConsolidationValidation(listId,mode,month,true);
 			}
 		}
@@ -7146,6 +7148,24 @@ function replaceAccentuatedCharacters(text){
   return text.replace(reg,function(){ return accentuatedCharactersTranscoding[arguments[0].toLowerCase()];}).toLowerCase();
 }
 
+function getHabilitationConsolidation(lst,lenght,mode){
+  for(var i=0;i<lenght;i++){
+    if(mode=='locked'){
+      if(dojo.byId('projHabilitationLocked_'+lst[i]).value=='2'){
+        delete lst[i];
+      }
+    }else{
+      if(dojo.byId('projHabilitationValidation_'+lst[i]).value=='2'){
+        delete lst[i];
+      }
+    }
+  }
+  console.log(lst);
+  return lst;
+}
+
+
+
 function refreshConcolidationValidationList(){
   formInitialize();
   showWait();
@@ -7170,6 +7190,7 @@ function lockedImputation(listProj,length,month,asSub){
   if(length!='')all=true;
   if(all){
     listProj=listProj.split(',');
+    listProj=getHabilitationConsolidation(listProj,length,'locked');
     if(dojo.byId('UnlockedImputation')){
       mode='Locked';
         for(var i=0;i<length;i++){
@@ -7185,6 +7206,7 @@ function lockedImputation(listProj,length,month,asSub){
           }
         }
     }
+    listproj=listProj.join(",");
   }else{
     if(dojo.byId('UnlockedImputation_'+listProj)){
       mode='Locked';
@@ -7192,7 +7214,7 @@ function lockedImputation(listProj,length,month,asSub){
       mode='UnLocked';
     }
   }
-  saveConsolidationValidation(listProj,mode,month,all,asSub);
+  saveConsolidationValidation(listproj,mode,month,all,asSub);
 }
 
 function saveOrCancelConsolidationValidation(proj,month,asSub){
