@@ -1891,22 +1891,27 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                <label for="idProjectPlan" ><?php echo i18n("colIdProject") ?>&nbsp;:&nbsp;</label>
              </td>
              <td>
+             <?php 
+                $proj=null; 
+                if (sessionValueExists('project')) {
+                    $proj=getSessionValue('project');
+                    debugLog("Project from session = $proj");
+                    if(strpos($proj, ",")){
+                    	$proj="*";
+                    }
+                } else {
+                  $defaultProject=Parameter::getUserParameter('defaultProject');
+                  debugLog("Project from default = $defaultProject");
+                  if (is_numeric($defaultProject)) $proj=$defaultProject;
+                }
+                if ($proj=="*" or ! $proj) $proj=null;
+                ?>
                 <div dojoType="dijit.layout.ContentPane" id="selectProjectList" style="overflow:unset">
                  <select dojoType="dojox.form.CheckedMultiSelect"  class="selectPlan" multiple="true" style="border:1px solid #A0A0A0;width:initial;height:218px;max-height:218px;"
                   id="idProjectPlan" name="idProjectPlan[]" onChange="changedIdProjectPlan(this.value);"
-                  value=" " >
+                  value="<?php echo ($proj)?$proj:' ';?>" >
                    <option value=" "><strong><?php echo i18n("allProjects");?></strong></option>
                    <?php 
-                      $proj=null; 
-                      if (sessionValueExists('project')) {
-                          $proj=getSessionValue('project');
-                          if(strpos($proj, ",")){
-                          	$proj="*";
-                          }
-                      }
-                      if ($proj=="*" or ! $proj) $proj=null;
-  //                     $projs=$user->getListOfPlannableProjects();
-  //                     htmlDrawOptionForReference('planning', null, null, true );
                       $user=getSessionUser();
                       $wbsList=SqlList::getList('Project','sortOrder',$proj, true );
                       $sepChar=Parameter::getUserParameter('projectIndentChar');
