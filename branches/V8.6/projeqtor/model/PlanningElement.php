@@ -667,6 +667,10 @@ class PlanningElement extends SqlElement {
     	$this->commandSum = $command->sumSqlElementsFromCriteria('totalFullAmount', null, $where);
     	$bill = new Bill();
     	$this->billSum = $bill->sumSqlElementsFromCriteria('fullAmount', null, $where);
+    	$paramCA = Parameter::getGlobalParameter('CaReplaceValidCost');
+    	if($paramCA == 'YES' and $this->revenue > 0){
+    		$this->validatedCost = $this->revenue;
+    	}
     	$this->save();
     }
     // save new parent (for synthesis update) if parent has changed
@@ -1122,6 +1126,7 @@ class PlanningElement extends SqlElement {
       $projectList = $project->getRecursiveSubProjectsFlatList(true,true);
       $projectList = array_flip($projectList);
       $projectList = '(0,'.implode(',',$projectList).')';
+      $revenue=0;
       if(($this->idRevenueMode == 2 and $this->refType == 'Project') or $this->refType == 'Activity'){
         $sons=$this->getSonItemsArray();
         $sumActPlEl=0;
@@ -1140,10 +1145,11 @@ class PlanningElement extends SqlElement {
         	}
         }
         if($sumActPlEl>0 and !$asSubProj){
-          $this->revenue = $sumActPlEl;
+          $revenue = $sumActPlEl;
         }else if($sumProjlEl>0 and $asSubProj and $asSubAct){
-          $this->revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
+          $revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
         }
+        $this->revenue = $revenue;
       }
     }
     ///

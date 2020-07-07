@@ -412,6 +412,11 @@ class Parameter extends SqlElement {
                     'true'=>i18n('displayYes'));
         break;
         
+      case 'CaReplaceValidCost':
+      	$list = array('NO'=>i18n('displayNo'),
+      	              'YES'=>i18n('displayYes'));
+        break;
+        	
       case 'ImputOfAmountClient':
         $list=array('HT'=>i18n('imputHT'),
                     'TTC'=>i18n('imputTTC'));
@@ -995,6 +1000,7 @@ class Parameter extends SqlElement {
                               'ImputOfBillLineClient'=>'list',
                               'sectionFinancialAutomation'=>'section',
                               'ExpenseLink'=>'list',
+                              'CaReplaceValidCost'=>'list',
                           'newColumnbFinancialRight'=>'newColumn',
                         'tabMail'=>"tab",   
                           'newColumnMailLeft'=>'newColumn',
