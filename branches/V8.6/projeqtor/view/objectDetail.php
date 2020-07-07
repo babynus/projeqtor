@@ -2829,10 +2829,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $negative=($obj->workElementLeftWork>$obj->leftWork)?'background-color: #FFAAAA !important;':'';
         }
         if($col=='commandSum'){
-          $negative=($obj->commandSum < $obj->revenue)?'background-color: #FFAAAA !important;':'';
+          $negative=($obj->commandSum < $obj->revenue and $obj->commandSum > 0)?'background-color: #FFAAAA !important;':'';
         }
         if($col=='billSum'){
-        	$negative=($obj->billSum > $obj->revenue)?'background-color: #FFAAAA !important;':'';
+        	$negative=($obj->billSum > $obj->revenue and $obj->billSum > 0)?'background-color: #FFAAAA !important;':'';
         }
         // BEGIN - ADD BY TABARY - TOOLTIP
         echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
