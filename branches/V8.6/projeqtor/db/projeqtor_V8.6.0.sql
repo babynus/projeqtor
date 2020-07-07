@@ -51,6 +51,22 @@ CREATE TABLE `${prefix}lockedImputation` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
+INSERT INTO `${prefix}habilitationother` (idProfile,scope,rightAccess) VALUES 
+(1,'lockedImputation','1'),
+(2,'lockedImputation','1'),
+(3,'lockedImputation','1'),
+(4,'lockedImputation','2'),
+(5,'lockedImputation','2'),
+(6,'lockedImputation','2'),
+(7,'lockedImputation','2'),
+(1,'validationImputation','1'),
+(2,'validationImputation','1'),
+(3,'validationImputation','1'),
+(4,'validationImputation','2'),
+(5,'validationImputation','2'),
+(6,'validationImputation','2'),
+(7,'validationImputation','2');
+
 -- Tags Management
 
 CREATE TABLE `${prefix}tag` (
