@@ -120,7 +120,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <?php Plugin::includeAllFiles();?>
   <script type="text/javascript">  
     var isNewGui=<?php echo (isNewGui())?'true':'false'?>;
-    //if (isNewGui) changeTheme('<?php echo getTheme();?>');
     var customMessageExists=<?php echo(file_exists(Plugin::getDir()."/nls/$currentLocale/lang.js"))?'true':'false';?>; 
     dojo.require("dojo.data.ItemFileWriteStore");
     dojo.require("dojo.date");
@@ -323,7 +322,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     var aesKeyLength=<?php echo Parameter::getGlobalParameter('aesKeyLength');?>;
     dojo.addOnLoad(function(){
       // Set color depending on theme for New Gui
-      setColorTheming('blue');
+      if (isNewGui) changeTheme('<?php echo getTheme();?>');
+      //setColorTheming('blue');
       // FIX IE11 not recognized as IE
       if( !dojo.isIE ) {
         var userAgent = navigator.userAgent.toLowerCase();
