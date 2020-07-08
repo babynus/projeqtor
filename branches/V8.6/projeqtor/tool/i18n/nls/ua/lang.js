@@ -2081,6 +2081,7 @@ errorSubmitForm: "Помилка у формі (SubmitForm) ('${1}'&#44; '${2}'&
 errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "This employee does'nt have earned leave rights",
 errorTooBigFile: "Розмір файлу перевищено межу ${1} байт (${2})",
+errorUniqueBillLink: "Invoices can't be linked to multiple client order",
 errorUpdateRights: "ви не маєте права оновити цей елемент",
 errorUploadFile: "Помилка при зотвантаженні (uploading) файлу. Код помилки = ${1}",
 errorUploadNotComplete: "завантаження не завершено &#58 завантаження може бути перервано",

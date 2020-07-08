@@ -2081,6 +2081,7 @@ errorSubmitForm: "Fehler bei 'submitForm('${1}'&#44; '${2}'&#44; '${3}')' &#58; 
 errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "Dieser Mitarbeiter hat keine Urlaubsrechte erworben",
 errorTooBigFile: "Dateigröße übersteigt maximales Limit von ${1} Bytes (${2})",
+errorUniqueBillLink: "Invoices can't be linked to multiple client order",
 errorUpdateRights: "Sie haben nicht das Recht zum Ändern",
 errorUploadFile: "Fehler beim Hochladen der Datei. Fehler Kode = ${1}",
 errorUploadNotComplete: "Upload nicht abgeschlossen &#58 Upload wurde möglicherweise unterbrochen",
