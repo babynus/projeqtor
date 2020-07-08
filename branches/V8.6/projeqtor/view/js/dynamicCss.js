@@ -8,7 +8,7 @@ function setColorTheming(ref) {
   var light='#d8d8d8';
   var lighter='#f0f0f0';
   
-  //ref='#9900cc';// Pour Test
+  //ref='#66ffcc';// Pour Test
   if (ref=='blue') {
     ref='#545381';
   } else if (ref=='red') {
@@ -34,6 +34,7 @@ function setColorTheming(ref) {
   element.style.setProperty("--color-button-background", lighter);
   element.style.setProperty("--color-section-title-text", dark);
   element.style.setProperty("--color-section-title-border", dark);
+  element.style.setProperty("--color-toolbar",ref);
   
 }
 
