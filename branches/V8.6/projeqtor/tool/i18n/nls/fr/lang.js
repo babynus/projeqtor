@@ -2081,6 +2081,7 @@ errorSubmitForm: "Erreur sur submitForm('${1}'&#44; '${2}'&#44; '${3}') &#58; <b
 errorSupportMeeting: "La ressource #${1} est planifiée&#44 impossible de planifier son support #${2} sur cette reunion",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "Cet employé n'a pas de droit acquis sur les absences réglementées",
 errorTooBigFile: "La taille du fichier excède la limite de ${1} octets (${2})",
+errorUniqueBillLink: "Les factures ne peuvent pas être liées à plusieurs commandes client",
 errorUpdateRights: "vous n'avez pas le droit de mettre à jour cet élément",
 errorUploadFile: "Erreur lors du chargement de fichier. Code d'erreur = ${1}",
 errorUploadNotComplete: "téléchargement incomplet. Le téléchargement a été interrompu.",

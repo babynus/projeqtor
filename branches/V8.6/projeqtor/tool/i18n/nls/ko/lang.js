@@ -2081,6 +2081,7 @@ errorSubmitForm: "에러 submitForm( '${1}'&#44 '${2}'&#44 '${3}')  Form '${3}'�
 errorSupportMeeting: "리소스 ${1}이 (가) 예약되어 있으며 이 회의에서 지원 # ${2}을 (를) 예약 할 수 없습니다",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "이 직원은 휴가를 얻지 못했습니다",
 errorTooBigFile: "파일 크기가 ${1} 바이트 (${2})의 한계를 초과했습니다.",
+errorUniqueBillLink: "Invoices can't be linked to multiple client order",
 errorUpdateRights: "이 항목을 업데이트 할 권한이 없습니다",
 errorUploadFile: "파일을 업로드하는 중 오류가 발생했습니다. 오류 코드 = ${1}",
 errorUploadNotComplete: "업로드가 완료되지 않았습니다. 업로드가 중단되었을 수 있습니다",

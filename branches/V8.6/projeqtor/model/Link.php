@@ -231,7 +231,13 @@ class Link extends SqlElement {
     $check=$lnk->getSqlElementsFromCriteria($checkCrit);
     if (count($check)>0) {
       $result.='<br/>' . i18n('errorDuplicateLink');
-    } 
+    }
+    if(trim(Module::isModuleActive('moduleGestionCA')) == 1 and $this->ref1Type == 'Bill' and $this->ref2Type == 'Command'){
+      $checkUniqueBill=$lnk->getSqlElementsFromCriteria(array('ref1Type'=>$this->ref1Type, 'ref1Id'=>$this->ref1Id));
+      if (count($checkUniqueBill)>0) {
+        $result.='<br/>' . i18n('errorUniqueBillLink');
+      }
+    }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;

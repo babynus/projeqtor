@@ -2081,6 +2081,7 @@ errorSubmitForm: "Errore in submitForm('${1}'&#44; '${2}'&#44; '${3}') &#58; <br
 errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "This employee does'nt have earned leave rights",
 errorTooBigFile: "La dimensione del file supera il limite di ${1} bytes (${2})",
+errorUniqueBillLink: "Invoices can't be linked to multiple client order",
 errorUpdateRights: "non hai i diritti per aggiornare questa voce",
 errorUploadFile: "Errore nel caricamento del file. Error code = ${1}",
 errorUploadNotComplete: "upload not complete &#58 upload may have been interrupted",
