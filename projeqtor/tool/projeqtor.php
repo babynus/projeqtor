@@ -2011,7 +2011,7 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
  */
 function getTheme() {
   global $indexPhp;
-  if (isNewGui()) return "ProjeQtOrFlatGrey";
+  //if (isNewGui()) return "ProjeQtOrFlatGrey";
   if (isset($indexPhp) and $indexPhp and getSessionValue('setup', null, true)) return "ProjeQtOr"; // On first configuration, use default
   $defaultTheme=Parameter::getGlobalParameter('defaultTheme');
   if (substr($defaultTheme, 0, 12)=="ProjectOrRia") {
