@@ -31,6 +31,7 @@
 	--color-button-background: #f0f0f0;
 	--color-section-title-text: #656565;
 	--color-section-title-border: #656565;
+	--color-table-header: #f0f0f0;
 }
 
 .dijitTextBox {
@@ -134,6 +135,22 @@ label, .label, .smallLabel, .labelMultiple {
 .ProjeQtOrFlatGrey #toolBarDiv, .ProjeQtOrFlatGrey #statusBarDiv, .ProjeQtOrFlatGrey .statusBar {
 	background: var(--color-toolbar) !important;
 }
+.ProjeQtOrFlatGrey #statusBarDiv {
+	background: white !important;
+}
+.ProjeQtOrFlatGrey #listHeaderDiv,.ProjeQtOrFlatGrey .listTitle {
+	background-color: var(--color-list-header) !important;
+}
+.ProjeQtOrFlatGrey #buttonDiv, .ProjeQtOrFlatGrey .title {
+  background-color: var(--color-detail-header) !important;
+  color: var(--color-detail-header-text) !important;
+}
+.ProjeQtOrFlatGrey .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrFlatGrey .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
+  background: rgba(255,255,255,0.3) !important;
+}
+.dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
+	border:0;
+}
 html, body, #mainDiv, 
 #toolBarDiv, 
 #logoDiv,
@@ -224,4 +241,10 @@ animation: fadeIn ease 0.5s;
 
 .ProjeQtOrFlatGrey .roundedVisibleButton.roundedButton.generalColClass {
 	background: url() var(--color-button-background);
+}
+
+.ProjeQtOrFlatGrey .linkHeader, .ProjeQtOrFlatGrey .attachmentHeader, .ProjeQtOrFlatGrey .noteHeader, .ProjeQtOrFlatGrey .dependencyHeader, .ProjeQtOrFlatGrey .historyHeader, .ProjeQtOrFlatGrey .assignHeader, .ProjeQtOrFlatGrey .messageHeader, .ProjeQtOrFlatGrey .workflowHeader, .ProjeQtOrFlatGrey .filterHeader, .ProjeQtOrFlatGrey .calendarHeader, .ProjeQtOrFlatGrey .reportTableLineHeader {
+    color: rgb(101, 101, 101);
+    text-shadow: none;
+    background: url() var(--color-table-header) !important;
 }

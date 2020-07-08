@@ -322,7 +322,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     var aesKeyLength=<?php echo Parameter::getGlobalParameter('aesKeyLength');?>;
     dojo.addOnLoad(function(){
       // Set color depending on theme for New Gui
-      if (isNewGui) changeTheme('<?php echo getTheme();?>');
+      if (isNewGui) {
+        changeTheme('<?php echo getTheme();?>');
+      }
       //setColorTheming('blue');
       // FIX IE11 not recognized as IE
       if( !dojo.isIE ) {

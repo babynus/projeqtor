@@ -571,6 +571,7 @@ function addMessage(msg) {
  * @return void
  */
 function changeTheme(newTheme) {
+  console.log("change theme to "+newTheme);
   if (newTheme != "") {
     if (isNewGui) {
       if (dojo.byId('body')) dojo.byId('body').className = 'tundra ProjeQtOrFlatGrey';
