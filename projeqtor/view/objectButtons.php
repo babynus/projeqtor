@@ -119,7 +119,7 @@
         <tr style="height:35px;">
           <td style="width:43px;min-width:43px;max-width:43px;">&nbsp;
             <?php $iconClassName=((SqlElement::is_subclass_of($class, 'PlgCustomList'))?'ListOfValues':$class);?>
-            <div style="position:absolute;left:0px;width:43px;max-width:50px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
+            <div style="position:absolute;left:0px;width:43px;max-width:50px;top:0px;height:35px;" class="iconHighlight">&nbsp;</div>
             <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>          
           </td>
           <td class="title" style="width:10%;max-width:<?php echo $maxTitleWidth?>px;overflow:hidden">
