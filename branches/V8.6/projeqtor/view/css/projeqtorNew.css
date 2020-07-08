@@ -64,6 +64,7 @@ label, .label, .smallLabel, .labelMultiple {
     float: left;
     border: 1px;
     text-shadow: 1px 1px #FFFFFF;
+    background-color: #ffffff;
 }
 .labelWithThumb {
   width: 130px !important;
@@ -75,7 +76,7 @@ label, .label, .smallLabel, .labelMultiple {
 	border-radius: 5px 5px 0px 0px;
 	width:100%;
 }
-.ProjeQtOrFlatGrey .dijitButtonNode, .ProjeQtOrFlatGrey .dijitReset.dijitInline.dijitButtonNode {
+.ProjeQtOrNewGui .dijitButtonNode, .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
   background: transparent;
   -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -84,10 +85,10 @@ label, .label, .smallLabel, .labelMultiple {
     transition: all 0.5s ease;
   border-color : #b3b3b3;
 }
-.ProjeQtOrFlatGrey .dijitButtonNode:hover, .ProjeQtOrFlatGrey .dijitReset.dijitInline.dijitButtonNode:hover {
+.ProjeQtOrNewGui .dijitButtonNode:hover, .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode:hover {
   background: #dddddd;
 }
-.ProjeQtOrFlatGrey .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrFlatGrey .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
+.ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
   background: rgba(128,128,128,0.2) !important;
 }
 .dijitComboBoxMenu {
@@ -108,7 +109,7 @@ label, .label, .smallLabel, .labelMultiple {
 	background: #cccccc;
 }
 
-.ProjeQtOrFlatGrey #mapDiv, .ProjeQtOrFlatGrey #messageDiv, .ProjeQtOrFlatGrey #listDiv, .ProjeQtOrFlatGrey #formDiv, .ProjeQtOrFlatGrey .display, .ProjeQtOrFlatGrey .background, .ProjeQtOrFlatGrey .dijitTitlePaneContentInner, .ProjeQtOrFlatGrey .dijitTabPane, .ProjeQtOrFlatGrey #mainDiv, .ProjeQtOrFlatGrey #centerDiv {
+.ProjeQtOrNewGui #mapDiv, .ProjeQtOrNewGui #messageDiv, .ProjeQtOrNewGui #listDiv, .ProjeQtOrNewGui #formDiv, .ProjeQtOrNewGui .display, .ProjeQtOrNewGui .background, .ProjeQtOrNewGui .dijitTitlePaneContentInner, .ProjeQtOrNewGui .dijitTabPane, .ProjeQtOrNewGui #mainDiv, .ProjeQtOrNewGui #centerDiv {
     background-color: #ffffff; 
 }
 .dijitComboBoxMenu, .dijitMenuItem {
@@ -116,7 +117,7 @@ label, .label, .smallLabel, .labelMultiple {
    background-image: url();
 }
 
-.ProjeQtOrFlatGrey .dijitTitlePane .dijitTitlePaneTitle {
+.ProjeQtOrNewGui .dijitTitlePane .dijitTitlePaneTitle {
 	background:#ffffff !important;
 	color: var(--color-section-title-text) !important;
 	border-bottom: 1px solid var(--color-section-title-border);
@@ -126,26 +127,29 @@ label, .label, .smallLabel, .labelMultiple {
 	Height:25px;
 	font-weight:normal !important;
 }
-.ProjeQtOrFlatGrey .dijitTitlePane .dijitArrowNode {
+.ProjeQtOrNewGui .dijitTitlePane .dijitArrowNode {
     background-image: url(images/spriteArrows.png);
 }
 .dijitTitlePaneTextNode {
 	 font-weight:normal;
 }
-.ProjeQtOrFlatGrey #toolBarDiv, .ProjeQtOrFlatGrey #statusBarDiv, .ProjeQtOrFlatGrey .statusBar {
+.ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar {
 	background: var(--color-toolbar) !important;
 }
-.ProjeQtOrFlatGrey #statusBarDiv {
+.ProjeQtOrNewGui #statusBarDiv {
 	background: white !important;
 }
-.ProjeQtOrFlatGrey #listHeaderDiv,.ProjeQtOrFlatGrey .listTitle {
+.ProjeQtOrNewGui #listHeaderDiv,.ProjeQtOrNewGui .listTitle {
 	background-color: var(--color-list-header) !important;
 }
-.ProjeQtOrFlatGrey #buttonDiv, .ProjeQtOrFlatGrey .title {
+.ProjeQtOrNewGui #buttonDiv, .ProjeQtOrNewGui .title {
   background-color: var(--color-detail-header) !important;
   color: var(--color-detail-header-text) !important;
 }
-.ProjeQtOrFlatGrey .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrFlatGrey .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
+.ProjeQtOrNewGui #buttonDiv {
+  border-bottom : 2px solid var(--color-detail-header-border);
+}
+.ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
   background: rgba(255,255,255,0.3) !important;
 }
 .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
@@ -202,10 +206,10 @@ html, body, #mainDiv,
   background: var(--color-button-background) url() repeat-x bottom;
 }
 
-.ProjeQtOrFlatGrey .iconToolbarView { background-image: url(customIcons/grey/iconView.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 18px 18px}
-.ProjeQtOrFlatGrey .iconToolbarGoto { background-image: url(customIcons/grey/iconGoto.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
-.ProjeQtOrFlatGrey .iconToolbarSearch { background-image: url(customIcons/grey/iconSearch.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
-.ProjeQtOrFlatGrey .iconToolbarAdd { background-image: url(customIcons/grey/iconAdd.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrNewGui .iconToolbarView { background-image: url(customIcons/grey/iconView.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 18px 18px}
+.ProjeQtOrNewGui .iconToolbarGoto { background-image: url(customIcons/grey/iconGoto.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrNewGui .iconToolbarSearch { background-image: url(customIcons/grey/iconSearch.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrNewGui .iconToolbarAdd { background-image: url(customIcons/grey/iconAdd.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
 
 .fade-in {
 animation: fadeIn ease 0.5s;
@@ -239,12 +243,16 @@ animation: fadeIn ease 0.5s;
 100% {opacity:1;}
 }
 
-.ProjeQtOrFlatGrey .roundedVisibleButton.roundedButton.generalColClass {
+.ProjeQtOrNewGui .roundedVisibleButton.roundedButton.generalColClass {
 	background: url() var(--color-button-background);
 }
 
-.ProjeQtOrFlatGrey .linkHeader, .ProjeQtOrFlatGrey .attachmentHeader, .ProjeQtOrFlatGrey .noteHeader, .ProjeQtOrFlatGrey .dependencyHeader, .ProjeQtOrFlatGrey .historyHeader, .ProjeQtOrFlatGrey .assignHeader, .ProjeQtOrFlatGrey .messageHeader, .ProjeQtOrFlatGrey .workflowHeader, .ProjeQtOrFlatGrey .filterHeader, .ProjeQtOrFlatGrey .calendarHeader, .ProjeQtOrFlatGrey .reportTableLineHeader {
+.ProjeQtOrNewGui .linkHeader, .ProjeQtOrNewGui .attachmentHeader, .ProjeQtOrNewGui .noteHeader, .ProjeQtOrNewGui .dependencyHeader, .ProjeQtOrNewGui .historyHeader, .ProjeQtOrNewGui .assignHeader, .ProjeQtOrNewGui .messageHeader, .ProjeQtOrNewGui .workflowHeader, .ProjeQtOrNewGui .filterHeader, .ProjeQtOrNewGui .calendarHeader, .ProjeQtOrNewGui .reportTableLineHeader {
     color: rgb(101, 101, 101);
     text-shadow: none;
     background: url() var(--color-table-header) !important;
 }
+.ProjeQtOrNewGui .sectionBadge {
+	top:18px;
+	background: var(--color-dark);
+}	

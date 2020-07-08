@@ -1,5 +1,6 @@
 
 function setColorTheming(ref) {
+  console.log("change to theme "+ref);
   var white='#ffffff';
   var black='#000000';
   if (!ref) ref='#656565'; // dark grey
@@ -31,14 +32,24 @@ function setColorTheming(ref) {
   lighter=HSLToHex(h,s,95);
   
   var element=document.getElementById('body');
-  element.style.setProperty("--color-button-background", lighter);
-  element.style.setProperty("--color-section-title-text", dark);
-  element.style.setProperty("--color-section-title-border", dark);
+  // Generic colors
+  element.style.setProperty("--color-dark", dark);
+  element.style.setProperty("--color-medium", medium);
+  element.style.setProperty("--color-light", light);
+  element.style.setProperty("--color-lighter", lighter);
+  // Main Layout
   element.style.setProperty("--color-toolbar",ref);
-  element.style.setProperty("--color-table-header", light);
+  // List
   element.style.setProperty("--color-list-header", medium);
+  // Detail
   element.style.setProperty("--color-detail-header", white);
   element.style.setProperty("--color-detail-header-text", dark);
+  element.style.setProperty("--color-detail-header-border", medium);
+  element.style.setProperty("--color-section-title-text", dark);
+  element.style.setProperty("--color-section-title-border", dark);
+  element.style.setProperty("--color-table-header", light);
+  // Tools (buttons, ...)
+  element.style.setProperty("--color-button-background", lighter);
   
 }
 
