@@ -35,6 +35,10 @@ function setColorTheming(ref) {
   element.style.setProperty("--color-section-title-text", dark);
   element.style.setProperty("--color-section-title-border", dark);
   element.style.setProperty("--color-toolbar",ref);
+  element.style.setProperty("--color-table-header", light);
+  element.style.setProperty("--color-list-header", medium);
+  element.style.setProperty("--color-detail-header", white);
+  element.style.setProperty("--color-detail-header-text", dark);
   
 }
 
