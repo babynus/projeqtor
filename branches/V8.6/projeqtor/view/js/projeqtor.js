@@ -573,7 +573,7 @@ function addMessage(msg) {
 function changeTheme(newTheme) {
   if (newTheme != "") {
     if (isNewGui) {
-      dojo.byId('body').className = 'tundra ProjeQtOrFlatGrey';
+      if (dojo.byId('body')) dojo.byId('body').className = 'tundra ProjeQtOrFlatGrey';
       if (newTheme.substr(0,13)=='ProjeQtOrFlat') {
         var color=newTheme.toLowerCase().substr(13);
         setColorTheming(color);
