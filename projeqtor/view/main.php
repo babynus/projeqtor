@@ -120,6 +120,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <?php Plugin::includeAllFiles();?>
   <script type="text/javascript">  
     var isNewGui=<?php echo (isNewGui())?'true':'false'?>;
+    //if (isNewGui) changeTheme('<?php echo getTheme();?>');
     var customMessageExists=<?php echo(file_exists(Plugin::getDir()."/nls/$currentLocale/lang.js"))?'true':'false';?>; 
     dojo.require("dojo.data.ItemFileWriteStore");
     dojo.require("dojo.date");

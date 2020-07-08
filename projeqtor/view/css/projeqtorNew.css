@@ -131,6 +131,9 @@ label, .label, .smallLabel, .labelMultiple {
 .dijitTitlePaneTextNode {
 	 font-weight:normal;
 }
+.ProjeQtOrFlatGrey #toolBarDiv, .ProjeQtOrFlatGrey #statusBarDiv, .ProjeQtOrFlatGrey .statusBar {
+	background: var(--color-toolbar) !important;
+}
 html, body, #mainDiv, 
 #toolBarDiv, 
 #logoDiv,
