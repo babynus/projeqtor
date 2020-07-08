@@ -2081,6 +2081,7 @@ errorSubmitForm: "Ошибка в submitForm('${1}'&#44; '${2}'&#44; '${3}') ;<b
 errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "This employee does'nt have earned leave rights",
 errorTooBigFile: "Размер лимита выполнения ${1} байт (${2})",
+errorUniqueBillLink: "Invoices can't be linked to multiple client order",
 errorUpdateRights: "у вас недостаточно прав для обновления этого элемента",
 errorUploadFile: "Ошибка при загрузке файла. Код ошибки = ${1}",
 errorUploadNotComplete: "upload not complete &#58 upload may have been interrupted",

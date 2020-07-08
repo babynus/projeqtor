@@ -2081,6 +2081,7 @@ errorSubmitForm: "Fout op submitForm ('${1}'&#44; '${2}'&#44; '${3}')&#58; <br/>
 errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "This employee does'nt have earned leave rights",
 errorTooBigFile: "Bestandsgrootte overschrijdt de limiet van ${1} bytes (${2})",
+errorUniqueBillLink: "Invoices can't be linked to multiple client order",
 errorUpdateRights: "je hebt geen rechten om dit item te updaten",
 errorUploadFile: "Fout bij het uploaden van het bestand. Fout code = ${1}",
 errorUploadNotComplete: "upload not complete &#58 upload may have been interrupted",

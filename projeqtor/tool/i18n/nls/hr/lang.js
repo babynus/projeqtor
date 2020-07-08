@@ -2081,6 +2081,7 @@ errorSubmitForm: "Greška u 'submitForm (&#34;${1}'&#44;'${2}'&#44; '${3}') '&#5
 errorSupportMeeting: "Resurs #${1} planirano je&#44 nemoguće planirati svoju podršku #${2} na ovom sastanku",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "ovaj zaposlenik nema stečeno pravo na regulirane odsutnosti",
 errorTooBigFile: "Veličina datoteke premašuje maksimalnu granicu od ${1} bajtova (${2})",
+errorUniqueBillLink: "Invoices can't be linked to multiple client order",
 errorUpdateRights: "nemate pravo izmjene",
 errorUploadFile: "Pogreška upload datoteka. Pogreška kod = ${1}",
 errorUploadNotComplete: "učitavanje nije dovršeno &#58  možda je prekinuto učitavanje",

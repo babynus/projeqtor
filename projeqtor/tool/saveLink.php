@@ -96,7 +96,7 @@ foreach ($arrayId as $ref2Id) {
   $crit2=array('ref2Type'=>$ref2Type,'ref2Id'=>intval($ref2Id));
   $list2=$Lnk->getSqlElementsFromCriteria($crit2);
 
-	$link=new Link($linkId);
+	$link=new Link();
 	$link->ref1Id=$ref1Id;
 	$link->ref1Type=$ref1Type;
 	$link->ref2Id=$ref2Id;
@@ -105,7 +105,6 @@ foreach ($arrayId as $ref2Id) {
   $link->idUser=$user->id;
   $link->creationDate=date("Y-m-d H:i:s"); 
   $res=$link->save();
-
   if ($copyLinksofLinked=='on'){
     foreach ($list1 as $link){
       $link->id=null;

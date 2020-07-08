@@ -2081,6 +2081,7 @@ errorSubmitForm: "SubmitForm Hata ( '${1}'&#44 '${2}'&#44 '${3}') Form '${3}'&#4
 errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "This employee does'nt have earned leave rights",
 errorTooBigFile: "Dosya boyutu ${1} byte'lık sınırı aşıyor (${2})",
+errorUniqueBillLink: "Invoices can't be linked to multiple client order",
 errorUpdateRights: "bu öğeyi güncelleme yetkiniz yok",
 errorUploadFile: "Dosya yüklenirken hata oluştu. Hata kodu = ${1}",
 errorUploadNotComplete: "upload not complete &#58 upload may have been interrupted",
