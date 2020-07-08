@@ -572,7 +572,17 @@ function addMessage(msg) {
  */
 function changeTheme(newTheme) {
   if (newTheme != "") {
-    dojo.byId('body').className = 'tundra ' + newTheme;
+    if (isNewGui) {
+      dojo.byId('body').className = 'tundra ProjeQtOrFlatGrey';
+      if (newTheme.substr(0,13)=='ProjeQtOrFlat') {
+        var color=newTheme.toLowerCase().substr(13);
+        setColorTheming(color);
+      } else {
+        setColorTheming('orange');
+      }
+    } else {
+      dojo.byId('body').className = 'tundra ' + newTheme;
+    }
     // Mehdi #2887
     var callBack = function() { 
       addMessage("Theme=" + newTheme); 

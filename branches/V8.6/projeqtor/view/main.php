@@ -80,6 +80,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <link rel="stylesheet" href="../external/dojox/calendar/themes/tundra/Calendar.css" />
   <?php if (isNewGui()) {?>
   <link rel="stylesheet" type="text/css" href="css/projeqtorNew.css" />
+  <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <?php }?>
 <!-- ELIOTT - LEAVE SYSTEM -->
   <script type="text/javascript" src="../external/html2canvas/html2canvas.js?version=<?php echo $version.'.'.$build;?>"></script>
@@ -117,7 +118,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <script type="text/javascript" src="../external/dojo/dojo.js?version=<?php echo $version.'.'.$build;?>"></script>
   <script type="text/javascript" src="../external/dojo/projeqtorDojo.js?version=<?php echo $version;?>"></script>
   <?php Plugin::includeAllFiles();?>
-  <script type="text/javascript">
+  <script type="text/javascript">  
+    var isNewGui=<?php echo (isNewGui())?'true':'false'?>;
     var customMessageExists=<?php echo(file_exists(Plugin::getDir()."/nls/$currentLocale/lang.js"))?'true':'false';?>; 
     dojo.require("dojo.data.ItemFileWriteStore");
     dojo.require("dojo.date");
@@ -319,6 +321,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     var browserLocaleDecimalSeparator="<?php echo $fmt->decimalSeparator?>";
     var aesKeyLength=<?php echo Parameter::getGlobalParameter('aesKeyLength');?>;
     dojo.addOnLoad(function(){
+      // Set color depending on theme for New Gui
+      setColorTheming('blue');
       // FIX IE11 not recognized as IE
       if( !dojo.isIE ) {
         var userAgent = navigator.userAgent.toLowerCase();
