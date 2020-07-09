@@ -1556,3 +1556,4 @@ ALTER TABLE ${prefix}workperiod MODIFY submitted int(1) unsigned COMMENT '1';
 ALTER TABLE ${prefix}workperiod MODIFY validated int(1) unsigned COMMENT '1';
 ALTER TABLE ${prefix}workperiod MODIFY idLocker int(12) unsigned COMMENT '12';
 ALTER TABLE ${prefix}workperiod MODIFY idle int(1) unsigned COMMENT '1';
+ALTER TABLE ${prefix}project MODIFY commandOnValidWork int(1) unsigned COMMENT '1';
