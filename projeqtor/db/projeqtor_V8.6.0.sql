@@ -93,9 +93,6 @@ CREATE UNIQUE INDEX tagName ON `${prefix}tag` (name);
 
 ALTER TABLE `${prefix}document` ADD `tags` varchar(4000) DEFAULT NULL;
 
-INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
-(20,'moduleGestionCA','540',5,0,0);
-
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (255,'menuCatalogUO',152,'object', 289,'Project',0,'Financial');
 
