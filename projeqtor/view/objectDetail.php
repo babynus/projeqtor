@@ -1528,7 +1528,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $fieldWidth=$largeWidth;
         }
       }
-      if (isNewGui()) $fieldWidth-=10;
+      if (isNewGui()) $fieldWidth-=10; 
       if (substr($col, 0, 2)=='id' and $dataType=='int' and strlen($col)>2 and substr($col, 2, 1)==strtoupper(substr($col, 2, 1))) {
         $fieldWidth=$largeWidth;
       }
@@ -1568,7 +1568,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // }
       $specificStyleWithoutCustom=$specificStyle;
       $specificStyle.=";".$fieldStyle;
-      //if (isNewGui()) $fieldWidth-=20;  
+      if (! isNewGui()) $fieldWidth-=15;   
       if (strpos($obj->getFieldAttributes($col), 'size1/3')!==false) {
         $fieldWidth=$fieldWidth/3-3;
       } else if (strpos($obj->getFieldAttributes($col), 'size1/2')!==false) {
