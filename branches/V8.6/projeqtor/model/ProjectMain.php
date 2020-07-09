@@ -76,6 +76,8 @@ class ProjectMain extends SqlElement {
   public $_lib_helpUnderConstruction;
   public $excludeFromGlobalPlanning;
   public $_lib_helpExcludeFromGlobalPlanning;
+  public $commandOnValidWork;
+  public $_lib_helpCommandOnValidWork;
   public $handled;
   public $handledDate;
   public $done;
@@ -141,6 +143,7 @@ class ProjectMain extends SqlElement {
       "fixPerimeter"=> "tooltipFixPerimeter",
       "isUnderConstruction" => "tooltipUnderConstruction",
       "excludeFromGlobalPlanning" => "tooltipExcludeFromGlobalPlanning",
+      "commandOnValidWork"=> "tooltipCommandOnValidWork",
   );
 // Removed in 1.2.0 
 //     <th field="wbs" from="ProjectPlanningElement" width="5%" >${wbs}</th>
@@ -165,6 +168,7 @@ class ProjectMain extends SqlElement {
                                   "fixPerimeter"=>"nobr",
                                   "isUnderConstruction"=>"nobr",
                                   "excludeFromGlobalPlanning"=>"nobr",
+                                  "commandOnValidWork"=>"nobr",
   		                            "isLeaveMngProject"=>"hidden",
   		                             "locked"=>"hidden"
   );   
@@ -211,6 +215,7 @@ class ProjectMain extends SqlElement {
   			self::$_fieldsAttributes['idSponsor']='hidden';
   			self::$_fieldsAttributes['idResource']='hidden';
   			self::$_fieldsAttributes['fixPlanning']='hidden';
+  			self::$_fieldsAttributes['commandOnValidWork']='hidden';
   			self::$_fieldsAttributes['ProjectPlanningElement']='hidden';
 			  self::$_fieldsAttributes['_sec_treatment']='hidden';
 	

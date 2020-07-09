@@ -118,3 +118,5 @@ INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `id
 INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
 ('8', 'Project', '29', '0'),
 ('8', 'Project', '30', '0');
+
+ALTER TABLE `${prefix}project` ADD COLUMN `commandOnValidWork` int(1) unsigned default 0;
