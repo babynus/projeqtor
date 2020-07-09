@@ -439,8 +439,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   $smallWidth='72';
   $mediumWidth='197';
   $largeWidth='300';
-  $labelWidth=(isNewGui())?155:145; // To be changed if changes in css file (label and .label)
-  $labelStyleWidth=$labelWidth.'px';
+  $labelWidth=(isNewGui())?175:160; // To be changed if changes in css file (label and .label) + = width in css + 15
+  $labelStyleWidth=($labelWidth-15).'px';
   if ($outMode=='pdf') {
     // $labelWidth=40;
     // $labelStyleWidth=$labelWidth . 'px;';
@@ -1568,7 +1568,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // }
       $specificStyleWithoutCustom=$specificStyle;
       $specificStyle.=";".$fieldStyle;
-      if (! isNewGui()) $fieldWidth-=15;   
+      //if (! isNewGui()) $fieldWidth-=15;   
       if (strpos($obj->getFieldAttributes($col), 'size1/3')!==false) {
         $fieldWidth=$fieldWidth/3-3;
       } else if (strpos($obj->getFieldAttributes($col), 'size1/2')!==false) {
