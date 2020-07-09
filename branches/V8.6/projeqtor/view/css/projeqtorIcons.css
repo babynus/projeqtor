@@ -1444,6 +1444,12 @@
 .ProjeQtOrFlatGreen .iconPredefinedSituation { background-image: url(customIcons/green/iconPredefinedSituation.png); }
 .ProjeQtOrFlatGrey .iconPredefinedSituation { background-image: url(customIcons/grey/iconPredefinedSituation.png); }
 
+.iconGestionCA { background-image: url(images/iconGestionCA.png); }
+.ProjeQtOrFlatBlue .iconGestionCA { background-image: url(customIcons/blue/iconGestionCA.png); }
+.ProjeQtOrFlatRed .iconGestionCA { background-image: url(customIcons/red/iconGestionCA.png); }
+.ProjeQtOrFlatGreen .iconGestionCA { background-image: url(customIcons/green/iconGestionCA.png); }
+.ProjeQtOrFlatGrey .iconGestionCA { background-image: url(customIcons/grey/iconGestionCA.png); }
+
 /* =============================================================================== */
 /* Extra CSS for custom Kanban                                                     */
 /* =============================================================================== */
