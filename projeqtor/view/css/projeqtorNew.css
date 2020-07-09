@@ -53,7 +53,7 @@
 	border: 1px solid #b2b2b2;
 }
 
-label, .label, .smallLabel, .labelMultiple {
+label, .label, .ProjeQtOrNewGui .label, .smallLabel, .labelMultiple {
     font-weight: 400;
     font-family: Verdana, Arial, Tahoma, sans-serif;
     font-size: 10pt;
