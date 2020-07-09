@@ -93,11 +93,74 @@ CREATE UNIQUE INDEX tagName ON `${prefix}tag` (name);
 
 ALTER TABLE `${prefix}document` ADD `tags` varchar(4000) DEFAULT NULL;
 
+INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
+(20,'moduleGestionCA','540',5,0,0);
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
+(255,'menuCatalogUO',152,'object', 289,'Project',0,'Financial');
+
+INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
+(20,255,0,1);
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,255,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,255,8);
+
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+('ComplexitiesNumber','3');
+
+CREATE TABLE `${prefix}cataloguo` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `name` varchar(200) DEFAULT NULL,
+  `idProject` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `nomemclature` varchar(200) DEFAULT NULL,
+  `numberComplexities` int(5) unsigned DEFAULT '0' COMMENT '5',
+  `idle` int(1) unsigned DEFAULT '0',
+  `idleDate` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+CREATE INDEX cataloguoProject ON `${prefix}cataloguo` (idProject);
+
+CREATE TABLE `${prefix}workunit` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idCatalog` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `reference` varchar(200) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `entering` varchar(200) DEFAULT NULL,
+  `deliverable` varchar(200) DEFAULT NULL,
+  `validityDate` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}complexity` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idCatalog` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `name` varchar(200) DEFAULT NULL,
+  `idZone` int(12) unsigned DEFAULT NULL COMMENT '12',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}complexityValues` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idCatalog` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idComplexity` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idWorkUnit` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `charge` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `price` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `duration` int(12) unsigned DEFAULT NULL COMMENT '12',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
 ALTER TABLE `${prefix}planningelement` 
 ADD COLUMN `revenue` decimal(11,2) unsigned DEFAULT NULL,
 ADD COLUMN `commandSum` decimal(11,2) unsigned DEFAULT NULL,
 ADD COLUMN `billSum` decimal(11,2) unsigned DEFAULT NULL,
-ADD COLUMN `idRevenueMode` int(12) unsigned DEFAULT NULL COMMENT '12';
+ADD COLUMN `idRevenueMode` int(12) unsigned DEFAULT NULL COMMENT '12',
+ADD COLUMN `idWorkUnit` int(12) unsigned DEFAULT NULL COMMENT '12',
+ADD COLUMN `idComplexity` int(12) unsigned DEFAULT NULL COMMENT '12',
+ADD COLUMN `quantity` int(5) unsigned DEFAULT NULL COMMENT '5';
 
 CREATE TABLE `${prefix}revenuemode` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,

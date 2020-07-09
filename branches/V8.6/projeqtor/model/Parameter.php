@@ -1000,6 +1000,8 @@ class Parameter extends SqlElement {
                               'ImputOfBillLineClient'=>'list',
                               'sectionFinancialAutomation'=>'section',
                               'ExpenseLink'=>'list',
+                              'sectionFinancialWorkUnit'=>'section',
+                              'ComplexitiesNumber'=>'number',
                               'CaReplaceValidCost'=>'list',
                           'newColumnbFinancialRight'=>'newColumn',
                         'tabMail'=>"tab",   
@@ -2076,6 +2078,9 @@ static public function getTimezoneList() {
    }
    if ($this->parameterCode=="SslCa" and trim($this->parameterValue)!="" and !file_exists($this->parameterValue)) {
        $result.='<br/>' . i18n('msgNotaFile',array(i18n("paramSslCa"),$this->parameterValue));
+   }
+   if($this->parameterCode=="ComplexitiesNumber" and $this->parameterValue > 10){
+     $result.='<br/>' . i18n('numberComplexityCanNotBeSuperiorOf10');
    }
    if(($this->parameterCode=="paramAttachmentMaxSize" and $this->parameterValue != "" ) or ($this->parameterCode=="paramAttachmentMaxSizeMail" and $this->parameterValue != "" )){
      $newVal=$this->parameterValue;

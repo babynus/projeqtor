@@ -7007,6 +7007,97 @@ function drawAffectationsResourceTeamFromObject($list, $obj, $type, $refresh=fal
   echo '</table></td></tr>';
   echo '</table>';
 }
+//gautier #Work Unit
+function drawComplexities($nbComplexities,$obj,$list) {
+  $tabComplexities = array();
+  foreach ($list as $val){
+    $tabComplexities[]=$val->name;
+  }
+  $nbComplexity = count($tabComplexities);
+  echo'<tr>';
+  echo ' <td><label></label></td><td>';
+  echo '<table style="width:33%">';
+  echo '  <tr>';
+  echo '    <td class="assignHeader" style="width:15%">'.i18n('complexities').'</td>';
+  echo '  </tr>';
+  for($i=1; $i<($nbComplexities+1); $i++){
+    $value = null;
+    if($i <= $nbComplexity ){
+      $value = $tabComplexities[$i-1];
+    }
+    echo '  <tr>';
+    echo '    <td>';
+    echo '      <input dojoType="dijit.form.TextBox"  type="text" id="complexity'.$i.'" name="complexity'.$i.'"  class="input" style="width:100%;" value="'.$value.'" onchange="saveComplexity('.$obj->id.','.$i.');" />';
+    echo '    </td>';
+    echo '  </tr>';
+  }
+  echo '</table>';
+  echo'</td></tr>';
+}
+
+function drawWorkUnits($obj,$listWorkUnit,$listComplexity) {
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete', $obj)=="YES";
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create', $obj)=="YES";
+  if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
+    $canCreate=false;
+    $canUpdate=false;
+    $canDelete=false;
+  }
+  if ($obj->idle==1) {
+    $canUpdate=false;
+    $canCreate=false;
+    $canDelete=false;
+  }
+  echo '<table style="width:100%">';
+  echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
+  echo '<tr>';
+  if (!$print) {
+    echo '<td class="assignHeader" style="width:5%">';
+    if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
+      echo '<a onClick="addWorkUnit(\''.$obj->id.'\');" title="'.i18n('addWorkUnit').'" /> '.formatSmallButton('Add').'</a>';
+    }
+    echo '</td>';
+  }
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colWorkUnits').'</td>';
+  foreach ($listComplexity as $comp){
+    echo '<td class="assignHeader" style="width:12%">'.$comp->name.'</td>';
+  }
+  echo'</tr>';
+  foreach ($listWorkUnit as $val){
+    echo '<tr>';
+    echo '  <td class="assignData" style="width:5%">';
+      if ($canUpdate) {
+        echo '  <a onClick="editWorkUnit(\''.$val->id.'\',\''.$val->validityDate.'\');" '.'title="'.i18n('editWorkUnit').'" > '.formatSmallButton('Edit').'</a>';
+      }
+      if ($canDelete) {
+        echo '  <a onClick="removeWorkUnit(\''.$val->id.'\');" '.'title="'.i18n('removeWorkUnit').'" > '.formatSmallButton('Remove').'</a>';
+      }
+    echo '  </td>';
+    echo '  <td class="assignData" style="width:12%">'.$val->reference.'</td>';
+    foreach ($listComplexity as $comp){
+      $compValu = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$val->id,'idComplexity'=>$comp->id));
+      $idleClass = "";
+      if(!$compValu->price and !$compValu->charge and !$compValu->duration)$idleClass = ' style="background:lightgrey;" ';
+      echo '  <td class="assignData" '.$idleClass.'>';
+      if($idleClass== ""){
+        $charge = ($compValu->charge)?Work::displayWorkWithUnit($compValu->charge):'';
+        $price = ($compValu->price)?htmlDisplayCurrency($compValu->price):'';
+        $duration = ($compValu->duration)?Work::displayWorkWithUnit($compValu->duration):'';
+        echo '    <table style="width:100%;height:100%;text-align:right;" ><tr>
+                    <td style="width:33%;border-right:1px solid #AAAAAA;">'.$charge.'</td>
+                    <td style="width:33%;border-right:1px solid #AAAAAA;">'.$price.'</td>
+                    <td style="width:33%">'.$duration.'</td>
+                    </tr></table>';
+      }
+      echo '  </td>';
+    }
+    echo'</tr>';
+  }
+  echo '</table></td></tr>';
+  echo '</table>';
+}
 
 //gautier #ResourceCapacity
 function drawResourceCapacity($list, $obj, $type, $refresh=false) {

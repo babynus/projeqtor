@@ -5069,6 +5069,9 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     height = maxEditorHeight - 150;
     currentEditorIsNote=true;
   }
+  if (editorName == 'WUReferences' || editorName == 'WUDescriptions' || editorName == 'WUIncomings' || editorName == 'WULivrables') {
+    height = 100;
+  }
   var readOnly = false;
   if (dojo.byId('ckeditor' + numEditor + 'ReadOnly')
       && dojo.byId('ckeditor' + numEditor + 'ReadOnly').value == 'true') {
