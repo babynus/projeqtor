@@ -160,10 +160,10 @@ ADD COLUMN `idComplexity` int(12) unsigned DEFAULT NULL COMMENT '12',
 ADD COLUMN `quantity` int(5) unsigned DEFAULT NULL COMMENT '5';
 
 CREATE TABLE `${prefix}revenuemode` (
-  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `name` varchar(100) DEFAULT NULL,
-  `sortOrder` int(3) unsigned DEFAULT NULL,
-  `idle` int(1) unsigned DEFAULT '0',
+  `sortOrder` int(3) unsigned DEFAULT NULL COMMENT '3',
+  `idle` int(1) unsigned DEFAULT '0' COMMENT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
@@ -179,4 +179,4 @@ INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicator
 ('8', 'Project', '29', '0'),
 ('8', 'Project', '30', '0');
 
-ALTER TABLE `${prefix}project` ADD COLUMN `commandOnValidWork` int(1) unsigned default 0;
+ALTER TABLE `${prefix}project` ADD COLUMN `commandOnValidWork` int(1) unsigned default 0 COMMENT '1';
