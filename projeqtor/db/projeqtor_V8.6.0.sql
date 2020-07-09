@@ -13,7 +13,7 @@ INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active
 UPDATE `${prefix}menu` SET `sortOrder`='120' WHERE `id`='252';
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(20,254,1,1);
+(20,254,0,1);
  
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (254, 'menuConsultationValidation', 7, 'item', 119, Null, 0, 'Work');
@@ -67,8 +67,8 @@ INSERT INTO `${prefix}habilitationother` (idProfile,scope,rightAccess) VALUES
 (6,'validationImputation','2'),
 (7,'validationImputation','2');
 
-INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasCsv`,`hasExcel`) VALUES
-(110, 'reportConsolidationValidation',7, 'consultationValidation.php', 889,'1','1');
+INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasExcel`) VALUES
+(110, 'reportConsolidationValidation',7, 'consultationValidation.php', 889,'1');
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
 (1, 110, 1);
