@@ -5172,6 +5172,18 @@ function saveTestCaseRun() {
    return false;
   }
 }
+//gautier complexity
+function saveComplexity(id,idZone) {
+  var value=dijit.byId("complexity"+idZone).get("value");
+  var url = '../tool/saveComplexity.php?idCatalog='+id +'&name='+value+'&idZone='+idZone;
+  dojo.xhrPut({
+    url : url,
+    form : 'objectForm',
+    handleAs : "text",
+    load : function(data) {}
+  });
+  
+}
 
 //gautier #1716
 function saveTcrData(id,textZone) {
@@ -5951,6 +5963,36 @@ function addAffectation(objectClass, type, idResource, idProject) {
   params+="&mode=add";
   loadDialog('dialogAffectation',callBack,false,params);
 }
+//gautier #workUnits
+function addWorkUnit(idCatalogUO) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  pauseBodyFocus();
+  var callBack = function () {
+    ckEditorReplaceEditor("WUReferences",991);
+    ckEditorReplaceEditor("WUDescriptions",992);
+    ckEditorReplaceEditor("WUIncomings",993);
+    ckEditorReplaceEditor("WULivrables",994);
+    dijit.byId("dialogWorkUnit").show();
+  };
+  var params="&id="+idCatalogUO;
+  params+="&mode=add";
+  loadDialog('dialogWorkUnit',callBack,false,params);
+}
+function removeWorkUnit(idWorkUnit) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  actionOK=function() {
+    loadContent("../tool/removeWorkUnit.php?idWorkUnit="+idWorkUnit, "resultDivMain",null, true, 'affectation');
+  };
+  msg=i18n('confirmDeleteWorkUnit', new Array(id,i18n('WorkUnit'),idWorkUnit));
+  showConfirm(msg, actionOK);
+}
+//end workUnits
 //gautier #resourceCapacity
 function addResourceCapacity(objectClass, type, idResource) {
   var callBack = function () {
@@ -6044,6 +6086,49 @@ function editResourceCapacity(id,idResource,capacity, idle, startDate, endDate) 
   params+="&mode=edit";
   loadDialog('dialogResourceCapacity',callBack,false,params);
 }
+//gautier workUnit
+function saveWorkUnit(){
+  var formVar=dijit.byId('workUnitForm');
+  if (formVar.validate()) {
+    loadContent("../tool/saveWorkUnit.php", "resultDivMain", "workUnitForm",true,'WorkUnit');
+    dijit.byId('dialogWorkUnit').hide();
+  } else {
+    showAlert(i18n("alertInvalidForm"));
+  }
+}
+function editWorkUnit(id,validityDate) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  var callBack = function () {
+    ckEditorReplaceEditor("WUReferences",991);
+    ckEditorReplaceEditor("WUDescriptions",992);
+    ckEditorReplaceEditor("WUIncomings",993);
+    ckEditorReplaceEditor("WULivrables",994);
+    dojo.xhrGet({
+      url : '../tool/getSingleData.php?dataType=WorkUnit&idWorkUnit='+id,
+      handleAs : "text",
+      load : function(data) {
+        arrayData=data.split('#!#!#!#!#!#');
+        dijit.byId('WUReference').set('value',arrayData[0]);
+        dijit.byId('WUDescription').set('value',arrayData[1]);
+        dijit.byId('WUIncoming').set('value',arrayData[2]);
+        dijit.byId('WULivrable').set('value',arrayData[3]);
+      }
+      });
+    if (validityDate) {
+      dijit.byId("ValidityDateWU").set('value', validityDate);
+    } else {
+      dijit.byId("ValidityDateWU").reset();
+    }
+    dijit.byId("dialogWorkUnit").show();
+  };
+  var params="&id="+id;
+  params+="&mode=edit";
+  loadDialog('dialogWorkUnit',callBack,false,params);
+}
+// end workUnit
 
 //gautier resourceSurbooking
 function addResourceSurbooking(objectClass, type, idResource) {

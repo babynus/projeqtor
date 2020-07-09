@@ -317,6 +317,12 @@
 .iconCatalogType22  { background-image: url(images/iconCatalogType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconCatalogType16  { background-image: url(images/iconCatalogType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
+.iconCatalogUO { background-image: url(images/iconCatalogUO.png); }
+.ProjeQtOrFlatBlue .iconCatalogUO { background-image: url(customIcons/blue/iconCatalogUO.png); }
+.ProjeQtOrFlatRed .iconCatalogUO { background-image: url(customIcons/red/iconCatalogUO.png); }
+.ProjeQtOrFlatGreen .iconCatalogUO { background-image: url(customIcons/green/iconCatalogUO.png); }
+.ProjeQtOrFlatGrey .iconCatalogUO { background-image: url(customIcons/grey/iconCatalogUO.png); }
+
 .iconCategory32 { background-image: url(images/iconCategory.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconCategory22  { background-image: url(images/iconCategory.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconCategory16  { background-image: url(images/iconCategory.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
