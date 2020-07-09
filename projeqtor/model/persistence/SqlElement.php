@@ -516,6 +516,7 @@ abstract class SqlElement {
           "VersionProject" => "cascade"), 
       // "VersioningType" => array("Versioning" => "controlStrict"),
       "WorkElement" => array("Work" => "cascade"), 
+      "WorkUnit" => array("ComplexityValues" => "cascade"),
       "Workflow" => array(
           "ActionType" => "controlStrict", 
           "ActivityType" => "controlStrict", 
