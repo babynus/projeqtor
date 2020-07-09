@@ -59,7 +59,7 @@ label, .label, .ProjeQtOrNewGui .label, .smallLabel, .labelMultiple {
     font-size: 10pt;
     text-align: right;
     vertical-align: top;
-    width: 160px;
+    width: 180px;
     padding: 5px 1px 2px 0px;
     float: left;
     border: 1px;
@@ -67,7 +67,7 @@ label, .label, .ProjeQtOrNewGui .label, .smallLabel, .labelMultiple {
     background-color: #ffffff;
 }
 .labelWithThumb {
-  width: 130px !important;
+  width: 150px !important;
 }
 .longTextLabel {
 	padding:5px; 
@@ -121,7 +121,7 @@ label, .label, .ProjeQtOrNewGui .label, .smallLabel, .labelMultiple {
 	background:#ffffff !important;
 	color: var(--color-section-title-text) !important;
 	border-bottom: 1px solid var(--color-section-title-border);
-	border-top: 5px solid var(--color-section-title-border);
+	border-top: 2px solid var(--color-section-title-border);
 	margin-top:10px;
 	font-size:120%;
 	Height:25px;
@@ -256,3 +256,15 @@ animation: fadeIn ease 0.5s;
 	top:18px;
 	background: var(--color-dark);
 }	
+
+.ProjeQtOrNewGui .dijitButtonIcon {
+	-webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+  filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+}
+.ProjeQtOrNewGui .menuBarItem {
+	 -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+  filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+} 
+.ProjeQtOrNewGui .dijitButtonIcon {
+  //background-image: url(customIcons/new/editorButtonsEnabled.png);
+]

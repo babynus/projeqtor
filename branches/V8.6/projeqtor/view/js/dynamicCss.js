@@ -1,15 +1,19 @@
 
-function setColorTheming(ref) {
+function setColorTheming(ref,smooth) {
+  //ref='#e97b2c';// Pour Test
   console.log("change to theme "+ref);
+  if (!ref) ref='#656565'; // dark grey
+  if (!smooth) smooth=false;
   var white='#ffffff';
   var black='#000000';
-  if (!ref) ref='#656565'; // dark grey
   var dark='#656565';
   var medium='#b5b5b5';
   var light='#d8d8d8';
   var lighter='#f0f0f0';
+  var hueRotate=0;
+  var saturate=0;
+  var brightness=0;
   
-  //ref='#66ffcc';// Pour Test
   if (ref=='blue') {
     ref='#545381';
   } else if (ref=='red') {
@@ -30,6 +34,12 @@ function setColorTheming(ref) {
   medium=HSLToHex(h,s,70);
   light=HSLToHex(h,s,90);
   lighter=HSLToHex(h,s,95);
+  var hslDefault=hexToHSL('#545381');
+  hueRotate=h-hslDefault[0];
+  saturate=Math.round(s/hslDefault[1]*100);
+  //brightness=Math.round(40/hslDefault[2]*100);
+  brightness=100;
+  console.log("hueRotate="+hueRotate+" saturate="+saturate+" brightness="+brightness);
   
   var element=document.getElementById('body');
   // Generic colors
@@ -46,10 +56,14 @@ function setColorTheming(ref) {
   element.style.setProperty("--color-detail-header-text", dark);
   element.style.setProperty("--color-detail-header-border", medium);
   element.style.setProperty("--color-section-title-text", dark);
-  element.style.setProperty("--color-section-title-border", dark);
+  element.style.setProperty("--color-section-title-border", (smooth)?medium:dark);
   element.style.setProperty("--color-table-header", light);
+  
   // Tools (buttons, ...)
   element.style.setProperty("--color-button-background", lighter);
+  element.style.setProperty("--image-hue-rotate", hueRotate+'deg');
+  element.style.setProperty("--image-saturate", saturate+'%');
+  element.style.setProperty("--image-brightness", brightness+'%');;
   
 }
 
