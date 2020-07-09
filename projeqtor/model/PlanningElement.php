@@ -363,6 +363,14 @@ class PlanningElement extends SqlElement {
       $colScript .= '     dijit.byId("'.$this->refType.'PlanningElement_unitProgress").set("value", progress);';
       $colScript .= '   }';
       $colScript .= '</script>';
+    }else if($colName=='idRevenueMode'){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(this.value ==  2){';
+      $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_revenue").set("readOnly",true);';
+      $colScript .= '  }else{';
+      $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_revenue").set("readOnly",false);';
+      $colScript .= '  }';
+      $colScript .= '</script>';
     }
     return $colScript;
   }
