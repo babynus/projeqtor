@@ -440,7 +440,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   $mediumWidth='197';
   $largeWidth='300';
   $labelWidth=(isNewGui())?175:160; // To be changed if changes in css file (label and .label) + = width in css + 15
-  $labelStyleWidth=($labelWidth-15).'px';
+  $labelStyleWidth=($labelWidth-((isNewGui())?0:15)).'px';
   if ($outMode=='pdf') {
     // $labelWidth=40;
     // $labelStyleWidth=$labelWidth . 'px;';

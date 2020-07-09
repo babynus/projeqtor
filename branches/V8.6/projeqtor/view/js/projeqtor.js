@@ -574,12 +574,15 @@ function changeTheme(newTheme) {
   console.log("change theme to "+newTheme);
   if (newTheme != "") {
     if (isNewGui) {
-      if (dojo.byId('body')) dojo.byId('body').className = 'tundra '+newTheme+' ProjeQtOrNewGui';
+      //if (dojo.byId('body')) dojo.byId('body').className = 'tundra '+newTheme+' ProjeQtOrNewGui';
+      //if (dojo.byId('body')) dojo.byId('body').className = 'tundra ProjeQtOrFlatBlue ProjeQtOrNewGui';
       if (newTheme.substr(0,13)=='ProjeQtOrFlat') {
+        if (dojo.byId('body')) dojo.byId('body').className = 'tundra ProjeQtOrFlatBlue ProjeQtOrNewGui';
         var color=newTheme.toLowerCase().substr(13);
         setColorTheming(color);
       } else {
-        setColorTheming('grey');
+        if (dojo.byId('body')) dojo.byId('body').className = 'tundra '+newTheme+' ProjeQtOrNewGui';
+        //setColorTheming('grey');
       }
     } else {
       dojo.byId('body').className = 'tundra ' + newTheme;
