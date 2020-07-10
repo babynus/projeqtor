@@ -47,6 +47,7 @@ function setColorTheming(ref,smooth) {
   element.style.setProperty("--color-medium", medium);
   element.style.setProperty("--color-light", light);
   element.style.setProperty("--color-lighter", lighter);
+  element.style.setProperty("--color-text", '#656565');
   // Main Layout
   element.style.setProperty("--color-toolbar",ref);
   // List
