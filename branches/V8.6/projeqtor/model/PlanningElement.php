@@ -671,10 +671,13 @@ class PlanningElement extends SqlElement {
     	$projectList = array_flip($projectList);
     	$projectList = '(0,'.implode(',',$projectList).')';
     	$where = 'idProject in '.$projectList.' and idle = 0';
+    	$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
+    	$cmdAmount = ($paramAmount == 'HT')?'totalUntaxedAmount':'totalFullAmount';
     	$command = new Command();
-    	$this->commandSum = $command->sumSqlElementsFromCriteria('totalFullAmount', null, $where);
+    	$this->commandSum = $command->sumSqlElementsFromCriteria($cmdAmount, null, $where);
+    	$billAmount = ($paramAmount == 'HT')?'untaxedAmount':'fullAmount';
     	$bill = new Bill();
-    	$this->billSum = $bill->sumSqlElementsFromCriteria('fullAmount', null, $where);
+    	$this->billSum = $bill->sumSqlElementsFromCriteria($billAmount, null, $where);
     	$paramCA = Parameter::getGlobalParameter('CaReplaceValidCost');
     	if($paramCA == 'YES' and $this->revenue > 0){
     		$this->validatedCost = $this->revenue;
@@ -1128,13 +1131,11 @@ class PlanningElement extends SqlElement {
       $this->unitProgress=$this->setUnitProgress();
       $this->unitWeight=$this->setUnitWeight();
     }
-    
     if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
       $project = new Project($this->idProject);
       $projectList = $project->getRecursiveSubProjectsFlatList(true,true);
       $projectList = array_flip($projectList);
       $projectList = '(0,'.implode(',',$projectList).')';
-      $revenue=0;
       if(($this->idRevenueMode == 2 and $this->refType == 'Project') or $this->refType == 'Activity'){
         $sons=$this->getSonItemsArray();
         $sumActPlEl=0;
@@ -1146,18 +1147,17 @@ class PlanningElement extends SqlElement {
         		$sumActPlEl+=$pe->revenue;
         		$asSubAct=true;
         	}else if ($pe->refType=='Project' and $pe->topRefId==$this->idProject ){
-        	   $asSubProj=true;
+        	    $asSubProj=true;
         		$sumProjlEl+=$pe->revenue;
         	}else{
         		continue;
         	}
         }
         if($sumActPlEl>0 and !$asSubProj){
-          $revenue = $sumActPlEl;
+          $this->revenue = $sumActPlEl;
         }else if($sumProjlEl>0 and $asSubProj and $asSubAct){
-          $revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
+          $this->revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
         }
-        $this->revenue = $revenue;
       }
     }
     ///

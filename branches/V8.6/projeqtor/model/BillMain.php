@@ -409,6 +409,18 @@ class BillMain extends SqlElement {
     	}
     }
     
+    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+    	$project = new Project($this->idProject);
+    	$projectList = $project->getRecursiveSubProjectsFlatList(true, true);
+    	$projectList = array_flip($projectList);
+    	$projectList = '(0,'.implode(',',$projectList).')';
+    	$where = 'idProject in '.$projectList.' and idle = 0';
+    	$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
+    	$billAmount = ($paramAmount == 'HT')?'untaxedAmount':'fullAmount';
+    	$project->ProjectPlanningElement->billSum = $this->sumSqlElementsFromCriteria($billAmount, null, $where);
+    	$project->save();
+    }
+    
 		$result=parent::save();
 		return $result;
 	}  
