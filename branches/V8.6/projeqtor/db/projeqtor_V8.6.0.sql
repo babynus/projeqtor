@@ -93,11 +93,14 @@ CREATE UNIQUE INDEX tagName ON `${prefix}tag` (name);
 
 ALTER TABLE `${prefix}document` ADD `tags` varchar(4000) DEFAULT NULL;
 
+UPDATE `${prefix}menu` SET `sortOrder`=282 WHERE `id`=146;
+UPDATE `${prefix}menu` SET `sortOrder`=284 WHERE `id`=174;
+
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(255,'menuCatalogUO',152,'object', 289,'Project',0,'Financial');
+(255,'menuCatalogUO',152,'object', 285,'Project',0,'Financial');
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(20,255,0,1);
+(20,255,0,0);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,255,1);
