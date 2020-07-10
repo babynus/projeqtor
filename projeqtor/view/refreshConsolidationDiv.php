@@ -41,14 +41,14 @@ $idUser=$curUser->id;
 $prof=$curUser->idProfile;
 $ass=SqlElement::getSingleSqlElementFromCriteria('Affectation',array("idProject"=>$reelIdProj,"idResource"=>$idUser));
 $profAss=$ass->idProfile;
+$consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$reelIdProj,"month"=>$month));
 
 if($mode!='validaTionCons' and $mode!='cancelCons'){
   $critArray= array('idProject'=>$projId,'month'=>$month);
   $lock = SqlElement::getSingleSqlElementFromCriteria('LockedImputation', array("idProject"=>$reelIdProj,"month"=>$month));
   $lock=($mode=="UnLocked")?'':$lock->month;
-  $res = ConsolidationValidation::drawLockedDiv($projId, $month, $lock,false,(($profAss!='' and $profAss!=$prof)?$profAss:$prof));
+  $res = ConsolidationValidation::drawLockedDiv($projId, $month, $lock,false,(($profAss!='' and $profAss!=$prof)?$profAss:$prof),$consValPproj);
 }else if ($mode=='validaTionCons' or $mode=='cancelCons'){
-  $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$reelIdProj,"month"=>$month));
   $res = ConsolidationValidation ::drawValidationDiv($consValPproj,$projId,$month,false,(($profAss!='' and $profAss!=$prof)?$profAss:$prof));
 }
 echo $res;

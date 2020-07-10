@@ -7172,13 +7172,11 @@ function getHabilitationConsolidation(lst,lenght,mode){
         delete lst[i];
       }
     }else{
-      console.log(lst);
       if(dojo.byId('projHabilitationValidation_'+lst[i].substr(6).value=='2')){
         delete lst[i];
       }
     }
   }
-  console.log(lst);
   return lst;
 }
 
@@ -7199,14 +7197,24 @@ function refreshConsolidationDiv (proj,month,mode){
   showWait();
   var callback=function() {
     hideWait();
+    if(mode=='validaTionCons'){
+      if(dojo.byId('lockedImputation_'+proj)){
+        mode='UnLocked';
+        refreshConsolidationDiv(proj,month,mode);
+      }
+
+    }
   };
+  console.log('hého');
   loadContent('../view/refreshConsolidationDiv.php?proj='+proj+'&month='+month+'&mode='+mode,div,false,false,false,false,false,callback);
 }
 
 function lockedImputation(listProj,length,month,asSub){
   var all=false;
-  if(length!='')all=true;
+  if(length!='false')all=true;
+  console.log(listProj);
   if(all){
+    console.log('pk?');
     listProj=listProj.split(',');
     listProj=getHabilitationConsolidation(listProj,length,'locked');
     if(dojo.byId('UnlockedImputation')){
@@ -7232,7 +7240,8 @@ function lockedImputation(listProj,length,month,asSub){
       mode='UnLocked';
     }
   }
-  saveConsolidationValidation(listproj,mode,month,all,asSub);
+  console.log(listProj+' mode '+mode+' month '+month+' all '+all+' asSub'+asSub);
+  saveConsolidationValidation(listProj,mode,month,all,asSub);
 }
 
 function saveOrCancelConsolidationValidation(proj,month,asSub){

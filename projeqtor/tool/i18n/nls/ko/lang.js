@@ -3127,7 +3127,7 @@ moduleExpensesComment: "비용 관리는 프로젝트 예산을 감소시키는 
 moduleFinancial: "재무",
 moduleFinancialComment: "재무 관리는 지출 관리 및 수익 관리에서 이루어집니다",
 moduleGestionCA: "Revenue management",
-moduleGestionCAComment: "Management of the revenue realized on project&#44 the revenue can be fixed or variable and in this case it will be calculated by the work units of the activities",
+moduleGestionCAComment: "Management of the revenue realized on the projects. The revenue can be fixed or variable. In this last case it will be calculated from the work units defined on the activities.",
 moduleHumanResource: "인적 자원",
 moduleHumanResourceComment: "HR 관리는 부재의 행정 후속 조치를 다룹니다. 직원으로 식별 된 각 자원은 특정 유형의 연간 계약을 제공하는 일종의 근로 계약에 연결됩니다. 이 모듈을 사용하면 획득 한 휴일의 소비를 추적하고 확인할 수 있습니다.",
 moduleImputation: "시간 추적",
