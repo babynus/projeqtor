@@ -362,6 +362,18 @@ class CommandMain extends SqlElement {
     		ProjectSituation::updateLastSituation($old, $this, $situation);
     	}
     }
+    
+    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+    	$project = new Project($this->idProject);
+    	$projectList = $project->getRecursiveSubProjectsFlatList(true, true);
+    	$projectList = array_flip($projectList);
+    	$projectList = '(0,'.implode(',',$projectList).')';
+    	$where = 'idProject in '.$projectList.' and idle = 0';
+    	$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
+    	$cmdAmount = ($paramAmount == 'HT')?'totalUntaxedAmount':'totalFullAmount';
+    	$project->ProjectPlanningElement->commandSum = $this->sumSqlElementsFromCriteria($cmdAmount, null, $where);
+    	$project->save();
+    }
     return $resultClass;
   }
   public function delete() {
