@@ -3127,7 +3127,7 @@ moduleExpensesComment: "Das Ausgabenmanagement verfolgt die Elemente&#44 die das
 moduleFinancial: "Finanzkennzahlen",
 moduleFinancialComment: "Das Finanzmanagement umfasst das Ausgaben- und das Einnahmenmanagement",
 moduleGestionCA: "Revenue management",
-moduleGestionCAComment: "Management of the revenue realized on project&#44 the revenue can be fixed or variable and in this case it will be calculated by the work units of the activities",
+moduleGestionCAComment: "Management of the revenue realized on the projects. The revenue can be fixed or variable. In this last case it will be calculated from the work units defined on the activities.",
 moduleHumanResource: "Humanressourcen",
 moduleHumanResourceComment: "Das Personalmanagement umfasst die administrative Nachverfolgung von Abwesenheiten.&#10;<br/> Jede als Angestellte identifizierte Ressource ist an eine Art Arbeitsvertrag gebunden&#44 der ihm eine bestimmte Anzahl von Jahresurlauben gibt.&#10;<br/> Dieses Modul ermöglicht es&#44 den Verbrauch der erfassten Feiertage zu verfolgen und zu überprüfen.",
 moduleImputation: "Zeiterfassung",

@@ -3127,7 +3127,7 @@ moduleExpensesComment: "Upravljanje troškovima prati elemente koji smanjuju bud
 moduleFinancial: "Financije",
 moduleFinancialComment: "Financijsko upravljanje dolazi u upravljanju izdacima i upravljanju prihodima",
 moduleGestionCA: "Revenue management",
-moduleGestionCAComment: "Management of the revenue realized on project&#44 the revenue can be fixed or variable and in this case it will be calculated by the work units of the activities",
+moduleGestionCAComment: "Management of the revenue realized on the projects. The revenue can be fixed or variable. In this last case it will be calculated from the work units defined on the activities.",
 moduleHumanResource: "Ljudski resursi",
 moduleHumanResourceComment: "Upravljanje ljudskim resursima obuhvaća administrativno praćenje odsutnosti.&#10;<br/>  Svaki resurs identificiran kao zaposlenik povezan je s vrstom ugovora o radu&#44 koja mu daje određeni broj godišnjih odmora.&#10;<br/> Ovaj modul omogućuje praćenje i provjeru potrošnje stečenih praznika.",
 moduleImputation: "Praćenje vremena",
