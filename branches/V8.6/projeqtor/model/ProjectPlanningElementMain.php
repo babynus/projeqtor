@@ -200,6 +200,12 @@ class ProjectPlanningElementMain extends PlanningElement {
     	self::$_fieldsAttributes['commandSum']='readonly';
     	self::$_fieldsAttributes['billSum']='readonly';
     	self::$_fieldsAttributes['idRevenueMode']='size1/3';
+    	$proj = new Project($this->idProject);
+    	$subProj = $proj->getSubProjects(true);
+    	if(count($subProj) > 0){
+    		self::$_fieldsAttributes['idRevenueMode']='readonly,size1/3';
+    		$this->idRevenueMode = 2;
+    	}
     	if($this->idRevenueMode == 2){
     		self::$_fieldsAttributes['revenue']='readonly';
     	}

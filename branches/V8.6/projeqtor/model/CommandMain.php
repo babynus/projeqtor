@@ -372,7 +372,7 @@ class CommandMain extends SqlElement {
     	$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
     	$cmdAmount = ($paramAmount == 'HT')?'totalUntaxedAmount':'totalFullAmount';
     	$project->ProjectPlanningElement->commandSum = $this->sumSqlElementsFromCriteria($cmdAmount, null, $where);
-    	$project->save();
+    	$project->ProjectPlanningElement->save();
     }
     return $resultClass;
   }

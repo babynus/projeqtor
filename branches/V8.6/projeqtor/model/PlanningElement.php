@@ -1155,7 +1155,7 @@ class PlanningElement extends SqlElement {
         }
         if($sumActPlEl>0 and !$asSubProj){
           $this->revenue = $sumActPlEl;
-        }else if($sumProjlEl>0 and $asSubProj and $asSubAct){
+        }else if($sumProjlEl>0 and ($asSubProj or $asSubAct)){
           $this->revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
         }
       }
