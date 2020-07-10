@@ -435,10 +435,15 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   }
   $treatedObjects[]=$obj;
   $dateWidth='72';
+  if (isNewGui()) $dateWidth='85';
   $verySmallWidth='44';
+  if (isNewGui()) $verySmallWidth='54';
   $smallWidth='72';
+  if (isNewGui()) $verySmallWidth='82';
   $mediumWidth='197';
+  if (isNewGui()) $mediumWidth='207';
   $largeWidth='300';
+  if (isNewGui()) $largeWidth='310';
   $labelWidth=(isNewGui())?175:160; // To be changed if changes in css file (label and .label) + = width in css + 15
   $labelStyleWidth=($labelWidth-((isNewGui())?0:15)).'px';
   if ($outMode=='pdf') {
@@ -645,6 +650,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     if ($detailWidth) {
       $colWidth=round((intval($displayWidth))/$nbCol); // 3 columns should be displayable
       $maxWidth=$colWidth-$labelWidth; // subtract label width
+      if (isNewGui()) $maxWidth-=13;
       if ($maxWidth>=$mediumWidth) {
         $largeWidth=$maxWidth;
       } else {
@@ -3283,7 +3289,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     echo ' id="'.$titlePane.'" ';
     echo ' class="titlePaneFromDetail generalColClass'.(($obj->isAttributeSetToField('_sec_'.$section, 'hidden'))?'Hidden':'').' _sec_'.$section.'Class" ';
     echo ' titleStyle="'.$labelStyle.'"';
-    echo ' style="display:'.$display.';position:relative;width:'.$widthPct.';float: '.$float.';clear:'.$clear.';margin: '.$margin.'px 0 4px 4px; padding: 0;top:0px;"';
+    echo ' style="display:'.$display.';position:relative;width:'.$widthPct.';float: '.$float.';clear:'.$clear.';margin: '.$margin.'px 0 4px '.((isNewGui())?'15':'4').'px; padding: 0;top:0px;"';
     echo ' onHide="saveCollapsed(\''.$titlePane.'\');"';
     echo ' onShow=";saveExpanded(\''.$titlePane.'\');refreshSectionCount(\''.$sectionName.'\')">';
     $titleHeight=($fontSize)?$fontSize*1.6:'';
@@ -8907,7 +8913,9 @@ function setWidthPct($displayWidth, $print, $printWidth, $obj, $colSpan=null) {
   }
   if (substr($displayWidth, -2, 2)=="px") {
     $val=substr($displayWidth, 0, strlen($displayWidth)-2);
-    $widthPct=floor(($val/$nbCol)-($nbCol+1))."px";
+    $widthPct=floor(($val/$nbCol)-($nbCol+1));
+    if (isNewGui()) $widthPct-=15;
+    $widthPct.="px";
   }
   if ($colSpan and $nbCol>=$colSpan) {
     $widthPct=$colSpan*substr($widthPct, 0, strlen($widthPct)-2)."px";
