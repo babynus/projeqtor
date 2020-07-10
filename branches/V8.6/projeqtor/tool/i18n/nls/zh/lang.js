@@ -3127,7 +3127,7 @@ moduleExpensesComment: "Expenses management tracks the elements decrementing the
 moduleFinancial: "Financials",
 moduleFinancialComment: "Financial management comes in Expenditure Management and Revenue Management",
 moduleGestionCA: "Revenue management",
-moduleGestionCAComment: "Management of the revenue realized on project&#44 the revenue can be fixed or variable and in this case it will be calculated by the work units of the activities",
+moduleGestionCAComment: "Management of the revenue realized on the projects. The revenue can be fixed or variable. In this last case it will be calculated from the work units defined on the activities.",
 moduleHumanResource: "Human resources",
 moduleHumanResourceComment: "HR management covers the administrative follow-up of absences.&#10;<br/> Each resource identified as an employee is linked to a type of work contract&#44; which gives him a certain number of annual leaves.&#10;<br/> This module makes it possible to follow and validate the consumption of the acquired holidays.",
 moduleImputation: "Time tracking",

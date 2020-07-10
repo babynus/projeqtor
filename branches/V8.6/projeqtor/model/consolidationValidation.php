@@ -239,7 +239,7 @@ class ConsolidationValidation extends SqlElement{
     	                  </td>';
     	   $result .='     <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
     	   $result .='       <div style="margin:2px 0px 2px 2px;" id="lockedDiv_'.$uniqueId.'" name="lockedDiv_'.$uniqueId.'" dojoType="dijit.layout.ContentPane" region="center">';
-    	   $result .=          ConsolidationValidation::drawLockedDiv($uniqueId,$concMonth,$lock,$asSub,(($profAss!='' and $profAss!=$prof)?$profAss:$prof));
+    	   $result .=          ConsolidationValidation::drawLockedDiv($uniqueId,$concMonth,$lock,$asSub,(($profAss!='' and $profAss!=$prof)?$profAss:$prof),$consValPproj);
     	   $result .='       </div>';
     	   $result .='    </td>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
@@ -269,9 +269,11 @@ class ConsolidationValidation extends SqlElement{
 	 * Draw div
 	 * @return list of project
 	 */
-	static function drawLockedDiv($proj,$month,$lock,$asSub,$prof){
+	static function drawLockedDiv($proj,$month,$lock,$asSub,$prof,$consValPproj){
 	  $habLockedImputation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'lockedImputation'));
-	  $functionLocked=($habLockedImputation->rightAccess=='1')?'onclick="lockedImputation(\''.$proj.'\',\'\',\''.$month.'\',\''.$asSub.'\');"':'';
+	  debugLog($consValPproj);
+	  $functionLocked=($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'onclick="lockedImputation(\''.$proj.'\',\'false\',\''.$month.'\',\''.$asSub.'\');"':'';
+	  debugLog($functionLocked);
 	  $result ='  <table>';
 	  $result .='    <tr>';
 	  $result .='      <td style="width: 70px; ">';
