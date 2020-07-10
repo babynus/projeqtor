@@ -65,9 +65,12 @@ label, .label, .ProjeQtOrNewGui .label, .smallLabel, .labelMultiple {
     border: 1px;
     text-shadow: 1px 1px #FFFFFF;
     background-color: #ffffff;
+    color:var(--color-text);
 }
+
 .labelWithThumb {
   width: 150px !important;
+  background-color: #ffffff;
 }
 .longTextLabel {
 	padding:5px; 
@@ -75,6 +78,8 @@ label, .label, .ProjeQtOrNewGui .label, .smallLabel, .labelMultiple {
 	border-bottom: 0px;
 	border-radius: 5px 5px 0px 0px;
 	width:100%;
+	background-color: #ffffff;
+	color:var(--color-text);
 }
 .ProjeQtOrNewGui .dijitButtonNode, .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
   background: transparent;
@@ -164,9 +169,13 @@ html, body, #mainDiv,
 
 .tabLabel {
   font-size: 10pt;
+  background-color: #ffffff;
+  color:var(--color-text);
 }
 .largeLabel {
   width: 370px;
+  background-color: #ffffff;
+  color:var(--color-text);
 }
 .dijitToolbar {
  margin: 5px 2px 5px 0px;
