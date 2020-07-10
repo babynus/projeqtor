@@ -140,8 +140,7 @@ echo ' <tr>';
   
 // Total line 
 echo '  <tr>';
-echo '   <td class="reportTableHeader" colspan="2" '.excelFormatCell('header').' >'.i18n('sum').'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('subheader').'>&nbsp;</td>';
+echo '   <td class="reportTableHeader" colspan="3" '.excelFormatCell('header').' >'.i18n('sum').'</td>';
 echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($revenueTotal).'</td>';
 echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($validatedWorkTotal).'</td>';
 echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reelTotal).'</td>';
