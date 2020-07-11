@@ -2106,7 +2106,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo ' constraints="{timePattern:\''.getSessionValue('browserLocaleTimeFormat').'\'}" ';
         }
         // echo ' constraints="{datePattern:\'yy-MM-dd\'}" ';
-        echo ' style="width:60px; text-align: center;'.$specificStyle.'" class="input '.(($isRequired)?'required':'').'" ';
+        echo ' style="width:45px; text-align: center;'.$specificStyle.'" class="input '.(($isRequired)?'required':'').'" ';
         echo ' value="'.(($fmtDT=='time')?'T':'').$valTime.'" ';
         echo ' hasDownArrow="false" ';
         echo ' >';
