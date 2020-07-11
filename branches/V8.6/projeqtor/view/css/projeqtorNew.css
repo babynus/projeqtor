@@ -53,7 +53,10 @@
 	border: 1px solid #b2b2b2;
 }
 
-label, .label, .ProjeQtOrNewGui .label, .smallLabel, .labelMultiple {
+label, .ProjeQtOrNewGui label, 
+.label, .ProjeQtOrNewGui .label, 
+.smallLabel, .ProjeQtOrNewGui .smallLabel, 
+.labelMultiple, .ProjeQtOrNewGui .labelMultiple{
     font-weight: 400;
     font-family: Verdana, Arial, Tahoma, sans-serif;
     font-size: 10pt;
@@ -68,9 +71,14 @@ label, .label, .ProjeQtOrNewGui .label, .smallLabel, .labelMultiple {
     color:var(--color-text);
 }
 
-.labelWithThumb {
+.labelWithThumb, .ProjeQtOrNewGui .labelWithThumb{
   width: 150px !important;
   background-color: #ffffff;
+  color:var(--color-text);
+}
+.tabLabel, .ProjeQtOrNewGui .tabLabel {
+	background-color: #ffffff;
+  color:var(--color-text);
 }
 .longTextLabel {
 	padding:5px; 
@@ -81,19 +89,24 @@ label, .label, .ProjeQtOrNewGui .label, .smallLabel, .labelMultiple {
 	background-color: #ffffff;
 	color:var(--color-text);
 }
-.ProjeQtOrNewGui .dijitButtonNode, .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
+.ProjeQtOrNewGui .dijitButtonNode, 
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
   background: transparent;
   -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
   border-color : #b3b3b3;
+  color:var(--color-text);
 }
-.ProjeQtOrNewGui .dijitButtonNode:hover, .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode:hover {
+.ProjeQtOrNewGui .dijitButtonNode:hover, 
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode:hover {
   background: #dddddd;
+  color:var(--color-dark);
 }
-.ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
+.ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, 
+.ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
   background: rgba(128,128,128,0.2) !important;
 }
 .dijitComboBoxMenu {
