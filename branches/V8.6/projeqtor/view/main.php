@@ -324,6 +324,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       // Set color depending on theme for New Gui
       if (isNewGui) {
         changeTheme('<?php echo getTheme();?>');
+        setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>');
       }
       //setColorTheming('blue');
       // FIX IE11 not recognized as IE
