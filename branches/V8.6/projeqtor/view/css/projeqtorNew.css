@@ -100,11 +100,7 @@ label, .ProjeQtOrNewGui label,
   border-color : #b3b3b3;
   color:var(--color-text);
 }
-.ProjeQtOrNewGui .dijitButtonNode:hover, 
-.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode:hover {
-  background: #dddddd;
-  color:var(--color-dark);
-}
+
 .ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, 
 .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
   background: rgba(128,128,128,0.2) !important;
@@ -225,7 +221,7 @@ html, body, #mainDiv,
   border-color: #a5a5a5;
   border-bottom-color: #757575;
   color: #3C3C3C;
-  background: var(--color-button-background) url() repeat-x bottom;
+  background: var(--color-light) url() repeat-x bottom;
 }
 
 .ProjeQtOrNewGui .iconToolbarView { background-image: url(customIcons/grey/iconView.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 18px 18px}
@@ -288,5 +284,76 @@ animation: fadeIn ease 0.5s;
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
 } 
 .ProjeQtOrNewGui .dijitButtonIcon {
-  //background-image: url(customIcons/new/editorButtonsEnabled.png);
-]
+  background-image: url(customIcons/new/editorButtonsEnabled.png);
+}
+
+.ProjeQtOrNewGui .dijitDialogTitleBar {
+  background: url() var(--color-lighter) !important;
+  color:var(--color-text);
+  text-align:center;
+}
+.ProjeQtOrNewGui .dijitDialog {
+	border-radius:5px;
+	
+} 
+.ProjeQtOrNewGui .dijitButton,
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
+	border-radius:5px;
+	background: var(--color-lighter);
+  color:var(--color-text);
+}
+
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNodeHover {
+  border-radius:20px;
+  background: #ffffff;
+  color:var(--color-text);
+}
+.ProjeQtOrNewGui .dijitButtonNode:hover {
+  background: #dddddd;
+  color:var(--color-dark);
+}
+.separatorSection {
+	margin-top:5px;
+	margin-bottom:5px;
+	line-height: 20px;
+	padding:5px;
+	background-color:var(--color-lighter);
+	color:var(--color-dark);
+	
+}
+.separatorSection .assignHeader,
+.ProjeQtOrNewGui .assignHeader,
+.ProjeQtOrNewGui .dependencyHeader,
+.ProjeQtOrNewGui .noteHeader,
+.ProjeQtOrNewGui .linkHeader,
+.ProjeQtOrNewGui .attachmentHeader {
+	background-color:var(--color-lighter) !important;
+  color:var(--color-dark);
+}
+.ProjeQtOrNewGui .dijitTitlePane .dijitTitlePaneTitle,
+.ProjeQtOrNewGui .section {
+	text-shadow: none;
+}
+
+.ProjeQtOrNewGui .dijitSplitter {
+ color:var(--color-dark);
+}
+
+/* Scrollbars */
+
+.ProjeQtOrNewGui ::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background: var(--color-light);
+}
+
+.ProjeQtOrNewGui ::-webkit-scrollbar-thumb {
+    background: var(--color-dark);
+}
+
+body .ProjeQtOrNewGui {
+    scrollbar-face-color: var(--color-light);
+    scrollbar-track-color: var(--color-dark);
+    scrollbar-color: var(--color-dark) var(--color-light);
+    scrollbar-width: 12px;
+}

@@ -5692,6 +5692,7 @@ function changeGalleryEntity() {
 }
 
 function saveDataToSession(param, value, saveUserParameter, callBack) {
+  console.log("saveDataToSession("+param+","+value+")");
   var url="../tool/saveDataToSession.php";
   url+="?idData="+param;
   url+="&value="+value;
