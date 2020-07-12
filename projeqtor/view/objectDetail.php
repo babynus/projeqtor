@@ -1019,7 +1019,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       }
       echo '<tr><td colspan="2" style="font-size:3px;">&nbsp;</td></tr>'; 
       echo '<tr><td colspan="2">';
-      echo '  <table style="width:99.9%"><tr><td class="assignHeader" id="'.$col.'" style="width:100%;height:14px; padding: 3px; margin-bottom:5px;'.$margin.';vertical-align:middle; border:1px solid grey;">'.$name.'</td></tr></table>';
+      echo '  <table style="width:99.9%" class="separatorSection"><tr><td class="assignHeader" id="'.$col.'" style="width:100%;height:14px; padding: 3px; margin-bottom:5px;'.$margin.';vertical-align:middle; border:1px solid grey;">'.$name.'</td></tr></table>';
       echo '</td></tr>';
     } else if ($col=='_spe_tickets' and !$obj->isAttributeSetTofield($col, 'hidden')) {
       drawTicketsList($obj);
@@ -1452,7 +1452,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             if ($thumbIcon) {
               $formatedThumb=formatIconThumb(SqlList::getFieldFromId(substr($col,2), $val, 'icon') , 22, 'right');
             } else if ($thumbRes) {
-              $formatedThumb=formatUserThumb($val, null, null, ((isNewGui())?25:22), 'right');
+              $formatedThumb=formatUserThumb($val, null, null, ((isNewGui())?32:22), 'right');
             } else if ($thumbColor) {
               $formatedThumb=formatColorThumb($col, $val, ((isNewGui())?25:20), 'right');
             }
@@ -1466,7 +1466,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             echo '&nbsp;'.(($thumb or isNewGui())?'':':&nbsp;').'</label>'.$cr;
             if ($thumb) {
               // echo $formatedThumb;
-              $pos=(isNewGui())?'-7':'0';
+              $pos=(isNewGui())?(($thumbRes)?'-10':'-7'):'0';
               if (!$print) echo '<div style="position:absolute;top:1px;right:'.$pos.'px;float:right;">';
               if ($col=='idStatus') {
                 echo '<a onmouseover="drawGraphStatus();">';
@@ -8928,12 +8928,22 @@ function setWidthPct($displayWidth, $print, $printWidth, $obj, $colSpan=null) {
 
 function getNbColMax($displayWidth, $print, $printWidth, $obj) {
   global $nbColMax,$layout;
-  if ($displayWidth>1380) {
-    $nbColMax=3;
-  } else if ($displayWidth>900) {
-    $nbColMax=2;
+  if (isNewGui()) {
+    if ($displayWidth>1650) {
+      $nbColMax=3;
+    } else if ($displayWidth>1100) {
+      $nbColMax=2;
+    } else {
+      $nbColMax=1;
+    }
   } else {
-    $nbColMax=1;
+    if ($displayWidth>1380) {
+      $nbColMax=3;
+    } else if ($displayWidth>900) {
+      $nbColMax=2;
+    } else {
+      $nbColMax=1;
+    }
   }
   if (property_exists($obj, '_nbColMax')) {
     if ($nbColMax>$obj->_nbColMax) {

@@ -165,6 +165,14 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       </select>
     </td>
   </tr>
+<?php if (isNewGui()) {?>
+  <tr style="height:40px">
+    <td width="120px" style="text-align:right"><?php echo i18n("paramTheme");?>&nbsp;:&nbsp;</td>
+    <td>
+       <input type="color" id="menuUserColorPicket" onInput="setColorTheming(this.value);" onChange="saveDataToSession('newGuiThemeColor',this.value.substr(1),true);setColorTheming(this.value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>" style="width:100%" />
+    </td>
+  </tr>  
+ <?php }?>
   <tr style="height:40px">
     <td width="120px" style="text-align:right"><?php echo i18n("menuUserStartPage");?>&nbsp;:&nbsp;</td>
     <td>  
