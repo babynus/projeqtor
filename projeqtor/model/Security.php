@@ -96,6 +96,7 @@ class Security
     return $boolean;
   }
   public static function checkValidDateTime($dateTime,$activeTraceHack=true) {
+    if (is_a($dateTime,'DateTime',true)) return Security::checkValidDateTime($dateTime->format('Y-m-d H:i:s'),$activeTraceHack);
     if (trim($dateTime)=='') return '';
     $len=strlen($dateTime);
     if ($len<5 or $len>19) {
