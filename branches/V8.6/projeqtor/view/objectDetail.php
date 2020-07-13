@@ -2481,14 +2481,14 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
 // MTY - Forgot readonly in condition        
         if (($col=='idStatus' or $col=='idResource' or $col=='idAccountable' or $col=='idResponsible') and !$readOnly) {
           if ((($col=='idStatus') or (($col=='idResource' or $col=='idAffectable' or $col=='idAccountable' or $col=='idResponsible') and $user->isResource and $user->id!=$val and $obj->id and $classObj!='Affectation')) and $classObj!='Document' and $classObj!='StatusMail' and $classObj!="TicketSimple" and $canUpdate) {
-            $showExtraButton=true;
+            if (!$readOnly) $showExtraButton=true;
             $fieldWidth=round($fieldWidth/2)-5;
           }
         }
         
         // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
         if (($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) or $col=='idProgressMode' or $col=='idWeightMode' or $col=='idRevenueMode') {
-          $showExtraButton=true;
+          if (!$readOnly) $showExtraButton=true;
           $fieldWidth=round($fieldWidth/2)-23;
         }
         // END - ADD BY TABARY - NOTIFICATION SYSTEM
@@ -2663,7 +2663,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           // if (($col == 'idResource' or $col == 'idAccountable' or $col == 'idResponsible') and $next and $showExtraButton) {
           // END - REPLACE BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
           // ADD BY Marc TABARY - 2017-03-09 - EXTRA BUTTON (Assign to me) IS VISIBLE EVEN IDLE=1
-          if ($obj->idle==1 and $classObj=='Organization') {} else {
+          if ($classObj=='Organization' and property_exists($obj, 'idle') and $obj->idle==1) {
+            // exclusion
+          } else {
             // END ADD BY Marc TABARY - 2017-03-09 - EXTRA BUTTON (Assign to me) IS VISIBLE EVEN IDLE=1
             echo '<div class="roundedVisibleButton roundedButton generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class"';
             echo ' title="'.i18n("assignToMe").'"';
