@@ -211,7 +211,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $activity = new Activity();
       $critWhere = "idActivityType in $activityTypeList";
       foreach ($critArray as $name=>$value){
-        $critWhere .= " and $name = $value";
+        if ($name and $value) $critWhere .= " and $name = $value";
       }
       $activityList = $activity->getSqlElementsFromCriteria(null,null,$critWhere);
       if(count($activityList)>0)unset($table);
