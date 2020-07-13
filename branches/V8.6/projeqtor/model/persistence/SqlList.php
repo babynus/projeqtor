@@ -52,6 +52,7 @@ class SqlList {
   }
   
   public static function getList($listType, $displayCol='name', $selectedValue=null, $showIdle=false, $applyRestrictionClause=false) {
+    if (! property_exists($listType, $displayCol)) $displayCol=self::getDefaultDisplayCol($listType);
     $listName=$listType . "_" . $displayCol;
     if ($showIdle) { $listName .= '_all'; }
     if ($applyRestrictionClause) {$listName.='_restrict';}
@@ -63,6 +64,7 @@ class SqlList {
   }
   
   public static function getListNotTranslated($listType, $displayCol='name', $selectedValue=null, $showIdle=false) {
+    if (! property_exists($listType, $displayCol)) $displayCol=self::getDefaultDisplayCol($listType);
     $listName='no_tr_' . $listType . "_" . $displayCol;
     if ($showIdle) { $listName .= '_all'; }
     if (array_key_exists($listName, self::$list)) {
@@ -74,7 +76,13 @@ class SqlList {
 
    public static function getListWithCrit($listType, $crit, $displayCol='name', $selectedValue=null, $showIdle=false) {
 //scriptLog("       =>getListWithCrit($listType, implode('|',$crit), $displayCol, $selectedValue)");
+     if (! property_exists($listType, $displayCol)) $displayCol=self::getDefaultDisplayCol($listType);
      return self::fetchListWithCrit($listType, $crit, $displayCol, $selectedValue,$showIdle);
+   }
+   
+   private static function getDefaultDisplayCol($listType) {
+     if ($listType=='Leave') return 'startDate';
+     return 'id';
    }
   /** ==========================================================================
    * Private method to get fetch the list from database and store it in a static array
