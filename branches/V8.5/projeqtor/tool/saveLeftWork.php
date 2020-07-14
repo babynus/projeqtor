@@ -41,8 +41,9 @@ if($zone == 'AssignedWork'){
 if($zone == 'LeftWork'){
 	$ass->leftWork = GeneralWork::convertWork($value);
 }
+Sql::beginTransaction();
 $ass->save();
-
+Sql::commitTransaction();
 if($zone == 'LeftWork'){
   $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>$ass->refType,'refId'=>$ass->refId));
   echo $pe->realEndDate;
