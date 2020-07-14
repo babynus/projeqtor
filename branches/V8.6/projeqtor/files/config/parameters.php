@@ -41,5 +41,5 @@ $dataCloningDirectory="D:\www\simulation";       //Modify repertory simulation a
 $dataCloningUrl="http://localhost/simulation/";  //Acces data cloning url for goto
 //$doNotExportAssignmentsForXMLFormat=true;      // Will not be needed anymore on V8.3 as it will become a user parameter
 //$pathToWkHtmlToPdf="C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe";
-$paramNewGui=true;
+//$paramNewGui=true;
 //======= END
