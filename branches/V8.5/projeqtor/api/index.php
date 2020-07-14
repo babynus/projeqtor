@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
  					$where=(count($critList)>0)?"1=1":"1=0";
  					$idTab=0;
  					foreach ($critList as $crit) {
- 			      if ($crit->sqlOperator!='SORT') {			
+ 			      if ($crit->sqlOperator!='SORT' and ! $crit->isDynamic) {			
 			      	$split=explode('_', $crit->sqlAttribute);        
 			        $critSqlValue=$crit->sqlValue;
 			        if ($crit->sqlOperator=='IN' and ($crit->sqlAttribute=='idProduct' or $crit->sqlAttribute=='idProductOrComponent' or $crit->sqlAttribute=='idComponent')) {
