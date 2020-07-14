@@ -92,12 +92,17 @@ class KpiValue extends SqlElement {
   
   public static function calculateKpi($obj,$restrictToKpi=null, $date=null) {
     $class=get_class($obj);
+    $id=$obj->id;
+    $mutexKey=$class.'#'.$id;
+    $mutex = new Mutex($mutexKey);
+    if (! $mutex->isFree()) return;
     if (property_exists($obj, 'idProject')) {
       $proj=new Project($obj->idProject);
       if ($proj->isUnderConstruction) return; // Do not calculate KPI for project under construction
       $type=new ProjectType($proj->idProjectType);
       if ($type->code=='ADM' or $type->code=='TMP') return;  // Do not calculate KPI for Administrative project
     }
+    $mutex->reserve();
     $kpiListToCalculate=KpiDefinition::getKpiDefinitionList();
     if ($class=='ProjectPlanningElement' or ($class=='PlanningElement' and $obj->refType=='Project') ) {
       if (isset($kpiListToCalculate['duration']) and ($restrictToKpi==null or $restrictToKpi='duration')) {
@@ -210,6 +215,7 @@ class KpiValue extends SqlElement {
         }
       }
     }
+    $mutex->release();
   }
   
   public static function consolidate($refType,$refId) {

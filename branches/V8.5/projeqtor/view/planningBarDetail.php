@@ -37,7 +37,7 @@ $minSurbooking=array();
 $ressAll=array();
 $start=null;
 $end=null;
-$resourceList = array();
+$resourceList = array(0=>0);
 
 if ($class=='Resource' or $class=='ResourceTeam') {
   echo '<div style="background-color:#FFF0F0;padding:3px;border:1px solid #E0E0E0;">'.i18n('noDataToDisplay')."</div>";
@@ -123,7 +123,7 @@ foreach($wkLst as $wk) {
 $where="idProject in ".Project::getAdminitrativeProjectList();
 $act = new Activity();
 $actList = $act->getSqlElementsFromCriteria(null,null,$where);
-$actListId=array();
+$actListId=array(0=>0);
 foreach ($actList as $activity){
 	$actListId[$activity->id]=$activity->id;
 }

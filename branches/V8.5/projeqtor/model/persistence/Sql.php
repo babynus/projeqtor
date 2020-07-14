@@ -470,6 +470,15 @@ class Sql {
     }
     return $value;
   }
-
+  public static function getDbName() {
+    if (!self::$dbName) {
+      self::$dbName=Parameter::getGlobalParameter('paramDbName');
+    }
+    return self::$dbName;
+  }
+  public static function getDbPrefix() {
+    return Parameter::getGlobalParameter('paramDbPrefix');
+  }
+  
 }
 ?>
