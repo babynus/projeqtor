@@ -71,7 +71,7 @@ class Mutex
     	}
     }
  
-    function isFree()
+    public function isFree()
     {
     	if (!$this->lockname) return true;
     	if (Sql::isMysql()) {
@@ -80,6 +80,15 @@ class Mutex
         $lock = (bool)$line['mutex'];
         //mysqli_free_result($rs);
         return $lock;
+    	} else {
+    	  $dbName=Sql::getDbName();
+    	  $prefix=Sql::getDbPrefix();
+    	  $querySearched="SELECT * FROM ".$prefix."mutex WHERE name=''".$this->lockname."''";
+    	  $query="SELECT a.query FROM pg_stat_activity a JOIN pg_locks l ON l.pid = a.pid";
+    	  $query.=" WHERE a.datname='$dbName' and a.query like '%$querySearched%' and l.relation=(SELECT oid FROM pg_class WHERE relname = '".$prefix."mutex');";
+    	  $rs=Sql::query($query);
+    	  if (!is_array($rs) or count($rs)==0) return true;
+    	  else return false;
     	}
     }
 }
