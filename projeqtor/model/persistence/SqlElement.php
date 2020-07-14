@@ -1727,7 +1727,10 @@ abstract class SqlElement {
       } else if ($depObj instanceof SqlElement and $returnStatusDep != "ERROR") {
         $depObj->refId = $this->id;
         $depObj->refType = get_class ( $this );
-        
+        if (get_class($depObj)=='WorkElement' and ! $depObj->id) {
+          $we=SqlElement::getSingleSqlElementFromCriteria('WorkElement', array('refType'=>$depObj->refType, 'refId'=>$depObj->refId));
+          $depObj->id=$we->id;
+        }
         // ADD BY Marc TABARY - 2017-03-20 - INIT REFNAME OF ORGANIZATION'S BUDGET ELEMENT
         if (get_class ( $this ) == 'Organization') {
           $depObj->refName = $this->name;
