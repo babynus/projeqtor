@@ -118,16 +118,16 @@ class ConsolidationValidation extends SqlElement{
 	                   </table>';
 	  $result .='     </td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:8%;text-align:center;vertical-align:center;">'.i18n('colMargin').'</td>';
-	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:7%;text-align:center;vertical-align:center;">';
 	  $result .='      <table><tr>';
-	  $result .='          <td style="height:30px;padding-left:5px;width:10%;cursor:pointer;">';
-	  if(!$AllLocked){
-	    $result .='            <div id="UnlockedImputation" '.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
-	  }else{
-	    $result .='            <div id="lockedImputation" '.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" ></div>';
-	  }
+	  $result .='          <td colspan="2"> '.i18n('colBlocking').'</td></tr><tr>';
+	  $result .='          <td style="height:25px;padding-left:20px;width:10%;cursor:pointer;">';
+      $result .='            <div region="center" id="UnlockedImputation" '.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.i18n('colUnlock').'" ></div>';
+      $result .='          </td>';
+      $result .='          <td style="height:25px;padding-right:5px;padding-top:5px;width:10%;cursor:pointer;">';
+      $result .='            <div region="center" id="lockedImputation" '.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" title="'.i18n('colLocked').'"></div>';
 	  $result .='           </td>';
-	  $result .='          <td> '.i18n('colBlocking').'</td>';
+	  
 	  $result .='      </tr></table>';
 	  $result .='     </td>';
 	  $result .='     <td colspan="2" style="border: 1px solid grey;height:60px;width:20%;text-align:center;vertical-align:center;">';
@@ -272,17 +272,16 @@ class ConsolidationValidation extends SqlElement{
 	static function drawLockedDiv($proj,$month,$lock,$asSub,$prof,$consValPproj){
 	  $habLockedImputation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'lockedImputation'));
 	  $functionLocked=($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'onclick="lockedImputation(\''.$proj.'\',\'false\',\''.$month.'\',\''.$asSub.'\');"':'';
-	  $result ='  <table>';
+	  $result ='  <table  style="width:100%;">';
 	  $result .='    <tr>';
-	  $result .='      <td style="width: 70px; ">';
+	  $result .='      <td  style="padding-left:33%;width:50%;">';
 	  if($lock==''){
-	    $result .='      <div '.(($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'style="cursor:pointer;"':'style="cursor: not-allowed;"').'  id="UnlockedImputation_'.$proj.'"  '.$functionLocked.' class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
+	    $result .='      <div '.(($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'style="cursor:pointer;"':'style="cursor: not-allowed;"').'  id="UnlockedImputation_'.$proj.'"  '.$functionLocked.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.i18n('colLocked').'" ></div>';
 	  }else{
-	    $result .='      <div '.(($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'style="margin-left:5px;cursor:pointer;"':'style="cursor: not-allowed;margin-left:5px;"').'  id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" ></div>';
+	    $result .='      <div '.(($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'style="margin-left:5px;cursor:pointer;"':'style="cursor: not-allowed;margin-left:5px;"').'  id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" title="'.i18n('colUnlock').'"></div>';
 	  }
 	  $result .='     <input type="hidden" id="projHabilitationLocked_'.substr($proj, 6).'" name="projHabilitationLocked_'.substr($proj, 6).'" value="'.$habLockedImputation->rightAccess.'"/>';
       $result .='     </td>';
-      $result .='     <td >'.(($lock=='')?i18n('colUnlock'):i18n('colLocked')).'</td>';
       $result .='   </tr>';
 	  $result .='  </table>';
 	  
