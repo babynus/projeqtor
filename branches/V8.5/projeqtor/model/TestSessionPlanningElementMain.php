@@ -190,7 +190,7 @@ class TestSessionPlanningElementMain extends PlanningElement {
     $result="";
     $mode=null;
     if ($this->idTestSessionPlanningMode) {
-      $mode=new ActivityPlanningMode($this->idTestSessionPlanningMode);
+      $mode=new TestSessionPlanningMode($this->idTestSessionPlanningMode);
     }   
     if ($mode) {
       if ($mode->mandatoryStartDate and ! $this->validatedStartDate) {
