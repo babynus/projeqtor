@@ -46,7 +46,7 @@ $currentMonth=strftime("%m") ;
   		    <td width="50px" align="center">
             <?php echo formatIcon('ConsultationValidation', 32, null, true);?>
           </td>
-          <td width="100px"><span class="title"><?php echo i18n('menuConsultationValidation');?></span></td>
+          <td width="100px"><span class="title">&nbsp;&nbsp;&nbsp;<?php echo i18n('menuConsultationValidation');?></span></td>
   		  </tr>
   		  <tr height="32px">
           <td>
