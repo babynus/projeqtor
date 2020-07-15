@@ -7198,12 +7198,17 @@ function refreshConsolidationDiv (proj,month,mode){
   showWait();
   var callback=function() {
     hideWait();
-    if(mode=='validaTionCons'){
-      if(dojo.byId('lockedImputation_'+proj)){
+    if(mode=='validaTionCons' || mode=='cancelCons'){
+      if(dojo.byId('lockedImputation_'+proj) && mode=='validaTionCons'){
+        mode='UnLocked';
+        refreshConsolidationDiv(proj,month,mode);
+      }else if(dojo.byId('lockedImputation_'+proj)){
+        mode='Locked';
+        refreshConsolidationDiv(proj,month,mode);
+      }else if(dojo.byId('UnlockedImputation_'+proj)){
         mode='UnLocked';
         refreshConsolidationDiv(proj,month,mode);
       }
-
     }
   };
   console.log('hého');
@@ -7258,11 +7263,13 @@ function saveOrCancelConsolidationValidation(proj,month,asSub){
 function saveConsolidationValidation(listProj,mode,month,all,asSub){  
   listproj=((mode=='Locked' || mode=='UnLocked') && !all )?listProj.substr(6):''+listProj+'';
   var url='../tool/saveConsolidationValidation.php?lstProj='+listproj+'&mode='+mode+'&month='+month+'&all='+all;
+  var form= dojo.byId("consolidationForm");
   if(mode=='validaTionCons' || mode=='cancelCons'){
     dojo.xhrPost({
       url : url,
+      form: form,
       handleAs : "text",
-      load : function(data,args){
+      load : function(){
           if(all || asSub){
             refreshConcolidationValidationList();
           }else{
@@ -7274,7 +7281,7 @@ function saveConsolidationValidation(listProj,mode,month,all,asSub){
     dojo.xhrPost({
       url : url,
       handleAs : "text",
-      load : function(data,args){
+      load : function(){
           if(all || asSub){
             refreshConcolidationValidationList();
           }else{
