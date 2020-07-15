@@ -19,10 +19,14 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`id
 (254, 'menuConsultationValidation', 7, 'item', 119, Null, 0, 'Work');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
-(1,254,1);
+(1,254,1),
+(2,254,1),
+(3,254,1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
-(1,254,8);
+(1,254,8),
+(2,254,8),
+(3,254,8);
 
 UPDATE `${prefix}report` SET hasExcel=1 WHERE id in (1,2,3);
 

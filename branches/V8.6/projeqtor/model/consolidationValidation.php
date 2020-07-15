@@ -107,20 +107,20 @@ class ConsolidationValidation extends SqlElement{
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:16%;text-align:center;vertical-align:center;">'.i18n('Project').'</td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:8%;text-align:center;vertical-align:center;">'.i18n('colRevenue').'</td>';
 	  $result .='     <td style="width:38%;border: 1px solid grey;border-right: 1px solid white;">';
-	  $result .='      <table width="100%"><tr><td colspan="5" style="height:30px;text-align:center;vertical-align:center;">'.i18n('sectionWork').'</td></tr>';
+	  $result .='      <table width="100%"><tr><td colspan="5" style="height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('technicalWork')).'</td></tr>';
 	  $result .='        <tr>
-	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.i18n('sectionWork').'</td>';
-	  $result .='          <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colReal')).'</td>';
+	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colWorkApproved')).'</td>';
+	  $result .='          <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('totalReal')).'</td>';
 	  $result .='          <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colRealCons')).'</td>
-	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colLeft')).'</td>
-	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colPlanned')).'</td>
+	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.i18n('colRemainToDo').'</td>
+	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colWorkReassessed')).'</td>
 	                     </tr>
 	                   </table>';
 	  $result .='     </td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:8%;text-align:center;vertical-align:center;">'.i18n('colMargin').'</td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">';
 	  $result .='      <table><tr>';
-	  $result .='          <td style="height:30px;padding-left:5px;width:10%;">';
+	  $result .='          <td style="height:30px;padding-left:5px;width:10%;cursor:pointer;">';
 	  if(!$AllLocked){
 	    $result .='            <div id="UnlockedImputation" '.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
 	  }else{
@@ -199,13 +199,12 @@ class ConsolidationValidation extends SqlElement{
           $ass=SqlElement::getSingleSqlElementFromCriteria('Affectation', $clauseArray);
           $profAss=$ass->idProfile;
           
-          
           $style.='"';
     	   $result .='   <tr>';
-    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:left;vertical-center;"><div  '.$style.' '.$goto.'>'.$tab.$projectsList[$i]->name.'</div></td>';
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:left;vertical-center;"><div  '.$style.' '.$goto.'>'.$tab.'-&nbsp;'.$projectsList[$i]->name.'</div></td>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">
     	                     <input type="hidden" id="revenue_'.$uniqueId.'" name="revenue_'.$uniqueId.'" value="'.$revenue.'"/>
-    	                     '.$revenue.'
+    	                     '.costFormatter($revenue).'
     	                  </td>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;" >';
     	   $result .='     <table style="width:100%;height:100%" >';
@@ -233,9 +232,10 @@ class ConsolidationValidation extends SqlElement{
     	   $result .='       </tr>';
     	   $result .='     </table>';
     	   $result .='    </td>';
-    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">
-    	                    <input type="hidden" id="margin_'.$uniqueId.'" name="margin_'.$uniqueId.'" value="'.abs($margin).'"/>
-    	                    '.workFormatter(abs($margin)).'
+    	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;background-color:'.(($margin<0)?"#E8ABAB":"").'">
+    	                    <input type="hidden" id="margin_'.$uniqueId.'" name="margin_'.$uniqueId.'" value="'.$margin.'"/>
+    	                    '.workFormatter($margin).'
+    	                        </div>
     	                  </td>';
     	   $result .='     <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
     	   $result .='       <div style="margin:2px 0px 2px 2px;" id="lockedDiv_'.$uniqueId.'" name="lockedDiv_'.$uniqueId.'" dojoType="dijit.layout.ContentPane" region="center">';
@@ -248,17 +248,17 @@ class ConsolidationValidation extends SqlElement{
            $result .='       </div>';
            $result .='    </td>';
            $result .='     <input type="hidden" id="validatedLine'.$idCheckBox.'" name="'.$uniqueId.'" value="0"/>';
+           $result .='     <input type="hidden" id="countLine" name="countLine" value="'.$i.'"/>';
            $result .='   </tr>';
     	  }
 	  }else{
 	    $result .='   <tr>';
-	    $result .='    <td colspan="5">';
+	    $result .='    <td colspan="6">';
 	    $result .='    <div style="background:#FFDDDD;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:100%;border-right: 1px solid grey;">'.i18n('noDataFound').'</div>';
 	    $result .='    </td>';
 	    $result .='   </tr>';
 	  }
 	  $result .='<input type="hidden" id="monthConsolidationValidation" name="monthConsolidationValidation" value="'.$concMonth.'"/>';
-	  $result .='<input type="hidden" id="countLine" name="countLine" value="'.$i.'"/>';
 	  $result .='  </table>';
 	  $result .='</div>';
 	  
@@ -271,16 +271,14 @@ class ConsolidationValidation extends SqlElement{
 	 */
 	static function drawLockedDiv($proj,$month,$lock,$asSub,$prof,$consValPproj){
 	  $habLockedImputation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'lockedImputation'));
-	  debugLog($consValPproj);
 	  $functionLocked=($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'onclick="lockedImputation(\''.$proj.'\',\'false\',\''.$month.'\',\''.$asSub.'\');"':'';
-	  debugLog($functionLocked);
 	  $result ='  <table>';
 	  $result .='    <tr>';
 	  $result .='      <td style="width: 70px; ">';
 	  if($lock==''){
-	    $result .='      <div '.(($habLockedImputation->rightAccess=='1')?'':'style="cursor: not-allowed;"').'  id="UnlockedImputation_'.$proj.'"  '.$functionLocked.' class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
+	    $result .='      <div '.(($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'style="cursor:pointer;"':'style="cursor: not-allowed;"').'  id="UnlockedImputation_'.$proj.'"  '.$functionLocked.' class="iconUnLocked32 iconUnLocked iconSize32" ></div>';
 	  }else{
-	    $result .='      <div '.(($habLockedImputation->rightAccess=='1')?'style="margin-left:5px;"':'style="cursor: not-allowed;margin-left:5px;"').'  id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" ></div>';
+	    $result .='      <div '.(($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'style="margin-left:5px;cursor:pointer;"':'style="cursor: not-allowed;margin-left:5px;"').'  id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" ></div>';
 	  }
 	  $result .='     <input type="hidden" id="projHabilitationLocked_'.substr($proj, 6).'" name="projHabilitationLocked_'.substr($proj, 6).'" value="'.$habLockedImputation->rightAccess.'"/>';
       $result .='     </td>';
@@ -343,32 +341,23 @@ class ConsolidationValidation extends SqlElement{
 	  $currentUser=new User(getCurrentUserId());
 	  $visibleProject=implode(',', array_flip($currentUser->getVisibleProjects()));
 	  $where="id in ($visibleProject) ";
+	  $proj= new Project();
 	  if($idProject==0 and $idProjectType==0 and $idOrganization==0){
-	    $proj=new Project();
+	    $where.="order by sortOrder";
 	    $lstProject=$proj->getSqlElementsFromCriteria(null,null,$where);
 	  }else if($idProjectType!=0 or $idOrganization!=0){
-	    $proj= new Project();
 	    $critArray=array();
 	    if($idProject!=0){
-	      $where="";
-	      $critArray["id"]=$idProject; 
-	      $critArray["idProject"]=$idProject;
+	      $where=ConsolidationValidation::clauseWhithSubProj($idProject);
 	    }
-	    ($idProjectType!=0 )?$critArray["idProjectType"]=$idProjectType:"";
- 	    ($idOrganization!=0)?$critArray["idOrganization"]=$idOrganization:"";
-	    $lstProject=$proj->getSqlElementsFromCriteria($critArray,null,$where);
+	    ($idProjectType!=0 )?$where.=" and idProjectType=$idProjectType ":"";
+ 	    ($idOrganization!=0)?$where.=" and idOrganization=$idOrganization ":"";
+ 	    $where.="order by sortOrder";
+	    $lstProject=$proj->getSqlElementsFromCriteria(null,null,$where);
 	  }else{
-	    if($idProject!=0 and $idProjectType==0 and $idOrganization==0){
-	      if(strpos($idProject, ',')){
-	        $where="id in $idProject";
-	        $lstProject=$proj->getSqlElementsFromCriteria(null,null,$where);
-	      }else{
-	        $proj=new Project($idProject);
-	        $lstProject[]=$proj;
-	        $subProject=$proj->getSubProjects();
-	        $lstProject= array_merge($lstProject,$subProject);
-	      }
-	    }
+        $where=ConsolidationValidation::clauseWhithSubProj($idProject);
+        $where.="order by sortOrder";
+        $lstProject=$proj->getSqlElementsFromCriteria(null,null,$where);
 	  }
 	  $result[]=$lstProject;
 	  $stringProjectList="";
@@ -383,6 +372,15 @@ class ConsolidationValidation extends SqlElement{
 	  return $result;
 	}
 	
+	static function clauseWhithSubProj($idProject){
+	  $lstProj=$idProject;
+	  $proj=new Project($idProject);
+	  $sub=$proj->getRecursiveSubProjectsFlatList();
+	  foreach ($sub as $id=>$subproj){
+	    $lstProj.=",".$id;
+	  }
+	 return "id in ($lstProj)";
+	}
 	
 	/** ==========================================================================
 	 * Get Visible Project
