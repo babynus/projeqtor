@@ -7099,9 +7099,6 @@ function expandProjectInToDay(id,subProj,visibleRow){
 }
 
 function refreshSectionCount(section) {
-  console.log('refreshSectionCount('+section+')');
-  console.log(dojo.byId(section + "SectionCount"));
-  console.log(dojo.byId(section + "Badge"));
   if (dojo.byId(section + "SectionCount")
       && dojo.byId(section + "Badge")) {
     dojo.byId(section + "Badge").innerHTML = dojo.byId(section+ "SectionCount").value;
