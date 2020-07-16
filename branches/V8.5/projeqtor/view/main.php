@@ -1895,13 +1895,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                 $proj=null; 
                 if (sessionValueExists('project')) {
                     $proj=getSessionValue('project');
-                    debugLog("Project from session = $proj");
                     if(strpos($proj, ",")){
                     	$proj="*";
                     }
                 } else {
                   $defaultProject=Parameter::getUserParameter('defaultProject');
-                  debugLog("Project from default = $defaultProject");
                   if (is_numeric($defaultProject)) $proj=$defaultProject;
                 }
                 if ($proj=="*" or ! $proj) $proj=null;
