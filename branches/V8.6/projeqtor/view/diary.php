@@ -462,6 +462,7 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
 	$workList=array_merge($pwList,$wList);
 	//KEVIN
 	foreach ($workList as $pw) {
+	  if (!$pw->refType) continue;
 	  $item=new $pw->refType($pw->refId);
 	  if (($item->done and !$showDone and !$showIdle) or ($item->idle and !$showIdle) or  (isset($countStatus) and !in_array($item->idStatus, $listStatusFilter)))
 	    continue;

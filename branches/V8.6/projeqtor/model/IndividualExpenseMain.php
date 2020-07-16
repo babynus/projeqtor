@@ -226,6 +226,7 @@ class IndividualExpenseMain extends Expense {
   public function save() {
     $this->plannedFullAmount=$this->plannedAmount;
     $this->realFullAmount=$this->realAmount;
+    //$this->idUser=$this->idResource; // To reactivate if we want that team member can update their Expense created by other user.
     return parent::save();
   }
 }
