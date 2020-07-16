@@ -847,12 +847,19 @@ class Cron {
         $mailsIds = $inputMailbox->searchMailBox($imapFilterCriteria);
       }catch (Exception $e) {
         $mb->failedRead += 1;
-        if($mb->failedRead == 3) {
+        if($mb->failedRead >= 3) {
           $mb->idle = 1;
         }
         $mb->save();
         debugTraceLog("ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddirMail,'utf-8')");
         errorLog(imap_last_error());
+        $inputMailboxHistory = new InputMailboxHistory();
+        $inputMailboxHistory->idInputMailbox = $mb->id;
+        $inputMailboxHistory->title = "Cannot connect to mailbox";
+        $inputMailboxHistory->adress = "Cannot connect to mailbox";
+        $inputMailboxHistory->date = date("Y-m-d H:i:s");
+        $inputMailboxHistory->result = mb_substr(imap_last_error().(($mb->idle)?' - mailbox closed':''),0,200);
+        $inputMailboxHistory->save();
         continue;
       }
       disableCatchErrors();
