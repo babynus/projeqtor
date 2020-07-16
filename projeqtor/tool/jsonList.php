@@ -377,10 +377,17 @@ if ($type == 'empty') {
         if (strpos($critVal, ',')) $critVal=explode(',', $critVal);
         $rtListProjectType = Type::listRestritedTypesForClass ( $class, $critVal, null, null );
         if (count ( $rtListProjectType )) {
+          $first=null;
           foreach ( $list as $id => $val ) {
-            if ($id != $selected and ! in_array ( $id, $rtListProjectType )) {
+            //if ($id != $selected and ! in_array ( $id, $rtListProjectType )) {
+            if ( ! in_array ( $id, $rtListProjectType )) {
               unset ( $list [$id] );
+            } else if (!$first) {
+              $first=$id;
             }
+          }
+          if ($selected and  ! in_array ( $selected, $rtListProjectType )) {
+            $selected=$first;
           }
         }
       }
