@@ -171,6 +171,9 @@ class InputMailbox extends SqlElement {
     if(!$this->id and !$this->limitOfHistory){
      $this->limitOfHistory = 10; 
     }
+    if ($old->idle and !$this->idle) {
+      $this->failedRead=0; // Reactivate closed mailbox
+    }
     $result = parent::save();
     if(!$old->id and $this->id == 1){
       $checkEmails=Parameter::getGlobalParameter('cronCheckEmails');
