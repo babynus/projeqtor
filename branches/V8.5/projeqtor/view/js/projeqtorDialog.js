@@ -6567,6 +6567,13 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
     if (required && ! selected && ! trim(mySelect.get('value')) ) { // required but no value set : select first
       mySelect.set("value", items[0].id);
     }
+    if (selected) { // Check that selected is in the list
+      var found=false;
+      items.forEach(function(item) {
+        if (item.id==selected) found=true;
+      });
+      if (! found) mySelect.set("value", items[0].id);
+    }
     if (field=='planning') {
       mySelect.set("value",selected); 
     }
