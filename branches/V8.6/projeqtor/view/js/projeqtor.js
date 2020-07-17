@@ -6369,15 +6369,7 @@ function validateAllSelection(){
 		}
 		if(listId != ''){
 			listId = listId.substr(0, listId.length-1);
-			if(dojo.byId('imputationValidationParamDiv')){
-			  saveImputationValidation(listId, 'validateSelection');
-			}else{
-			  mode='validaTionCons';
-			  month=dojo.byId('monthConsolidationValidation').value;
-			  listId=getHabilitationConsolidation(listId.split(','),length,'validation');
-			  listId=listId.join(",");
-			  saveConsolidationValidation(listId,mode,month,true);
-			}
+			saveImputationValidation(listId, 'validateSelection');
 		}
 	}
 }
@@ -7188,21 +7180,27 @@ function replaceAccentuatedCharacters(text){
   return text.replace(reg,function(){ return accentuatedCharactersTranscoding[arguments[0].toLowerCase()];}).toLowerCase();
 }
 
+function validateOrCancelAllConsolidation(listId,mode,month){
+  month=dojo.byId('monthConsolidationValidation').value;
+  listId=getHabilitationConsolidation(listId.split(','),length,'validation');
+  listId=listId.join(",");
+  saveConsolidationValidation(listId,mode,month,true);
+}
+
 function getHabilitationConsolidation(lst,lenght,mode){
   for(var i=0;i<lenght;i++){
     if(mode=='locked'){
       if(dojo.byId('projHabilitationLocked_'+lst[i]).value=='2'){
-        delete lst[i];
+        lst.splice(i,1);
       }
     }else{
       if(dojo.byId('projHabilitationValidation_'+lst[i].substr(6).value=='2')){
-        delete lst[i];
+        lst.splice(i,1);
       }
     }
   }
   return lst;
 }
-
 
 
 function refreshConcolidationValidationList(){
@@ -7233,42 +7231,31 @@ function refreshConsolidationDiv (proj,month,mode){
       }
     }
   };
-  console.log('hého');
   loadContent('../view/refreshConsolidationDiv.php?proj='+proj+'&month='+month+'&mode='+mode,div,false,false,false,false,false,callback);
 }
 
-function lockedImputation(listProj,length,month,asSub){
+function lockedImputation(mode,listProj,length,month,asSub){
   var all=false;
   if(length!='false')all=true;
-  console.log(listProj);
   if(all){
-    console.log('pk?');
     listProj=listProj.split(',');
     listProj=getHabilitationConsolidation(listProj,length,'locked');
-    if(dojo.byId('UnlockedImputation')){
-      mode='Locked';
+    if(mode=='Locked'){
         for(var i=0;i<length;i++){
           if(!dojo.byId('UnlockedImputation_'+month+listProj[i])){
-            delete listProj[i];
+            listProj.splice(i,1);
           }
         }
     }else{
-      mode='UnLocked';
         for(var i=0;i<length;i++){
           if(!dojo.byId('lockedImputation_'+month+listProj[i])){
-            delete listProj[i];
+            listProj.splice(i,1);
           }
         }
     }
-    listproj=listProj.join(",");
-  }else{
-    if(dojo.byId('UnlockedImputation_'+listProj)){
-      mode='Locked';
-    }else{
-      mode='UnLocked';
-    }
+    if(listProj==undefined)return;
+    listProj=listProj.join(",");
   }
-  console.log(listProj+' mode '+mode+' month '+month+' all '+all+' asSub'+asSub);
   saveConsolidationValidation(listProj,mode,month,all,asSub);
 }
 
