@@ -1761,7 +1761,7 @@ function securityCheckDisplayMenu($idMenu, $class=null, $user=null) {
   $result=false;
 // MTY - LEAVE SYSTEM
     if (isLeavesSystemMenuByMenuName("menu".$class)) {
-        return showLeavesSystemMenu("menu".$class);         
+        if (! showLeavesSystemMenu("menu".$class)) return false;
     }
 // MTY - LEAVE SYSTEM
   $typeAdmin=SqlList::getFieldFromId('Menu', $idMenu, 'isAdminMenu',false);
