@@ -174,9 +174,9 @@ class TestSessionPlanningElementMain extends PlanningElement {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
-    if($this->idTestSessionPlanningMode){
+  	if(trim($this->idTestSessionPlanningMode)){
       $this->idPlanningMode = $this->idTestSessionPlanningMode;
-    }
+    } 
     return parent::save();
   }
   
