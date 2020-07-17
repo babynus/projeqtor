@@ -301,7 +301,7 @@ function showProjects() {
         if (!$print and $show and securityCheckDisplayMenu(null, 'Project') and 
         // and securityGetAccessRightYesNo('menuProject', 'read', $prj)=="YES"
         array_key_exists($id, $prjVisLst)) {
-          $goto=' onClick="gotoElement(\'Project\',\''.$id.'\');refreshProjectSelectorList();setSelectedProject(\''.htmlEnCode($proj->id).'\',\''.htmlEnCode($proj->name).'\');" style="border-right:0px;text-align: left;cursor: pointer;'.($show?'':'color:#AAAAAA;').'" ';
+          $goto=' onClick="gotoElement(\'Project\',\''.$id.'\');setSelectedProject(\''.htmlEnCode($proj->id).'\',\''.htmlEnCode($proj->name).'\',\'selectedProject\');" style="border-right:0px;text-align: left;cursor: pointer;'.($show?'':'color:#AAAAAA;').'" ';
         } else {
           $goto=' style="border-right:0px;text-align: left;"';
         }
@@ -343,7 +343,7 @@ function showProjects() {
                               .'  <td class="messageDataValue'.($show?'':'Grey').'">'.($show?$late:'').'</td>';
         foreach ($arrayCols as $col) {
           if (!$showCol[$col]) continue;
-          echo '  <td class="messageDataValue'.($show?'':'Grey').' colorNameData" onclick=\'gotoElement("'.$col.'",null);refreshProjectSelectorList();stockHistory("'.$col.'",null,"object");setSelectedProject("'.htmlEnCode($proj->id).'","'.htmlEnCode($proj->name).'");\' style="cursor: pointer;">'.($show?displayProgress($nbItem[$col], $nbItemAll[$col], $nbItemTodo[$col], $nbItemDone[$col]):'').'</td>';
+          echo '  <td class="messageDataValue'.($show?'':'Grey').' colorNameData" onclick=\'gotoElement("'.$col.'",null);stockHistory("'.$col.'",null,"object");setSelectedProject("'.htmlEnCode($proj->id).'","'.htmlEnCode($proj->name).'","selectedProject");\' style="cursor: pointer;">'.($show?displayProgress($nbItem[$col], $nbItemAll[$col], $nbItemTodo[$col], $nbItemDone[$col]):'').'</td>';
         }
         echo '</tr>';
       }
