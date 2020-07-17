@@ -31,8 +31,23 @@
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
 scriptLog('   ->/view/imputationValidationList.php');
-$currentYear=strftime("%Y") ;
-$currentMonth=strftime("%m") ;
+
+$cons= new ConsolidationValidation();
+$lockedImp= new LockedImputation();
+$validationCons=$cons->getMaxValueFromCriteria('validationDate',null);
+$impLocked=$lockedImp->getMaxValueFromCriteria('month',null);
+if($impLocked and $validationCons){
+  $date=(intval($impLocked)<intval($validationCons))?$validationCons:$impLocked;
+  $currentYear=substr($date,0,-2);
+  $currentMonth=substr($impLocked,-2);
+}else if (($impLocked and !$validationCons) or ($validationCons and !$impLocked)){
+  $date=($impLocked)?$impLocked:$validationCons;
+  $currentYear=substr($date,0,-2);
+  $currentMonth=substr($date,-2);
+}else{
+  $currentYear=strftime("%Y") ;
+  $currentMonth=strftime("%m") ;
+}
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="imputationConsolidationParamDiv" name="imputationConsolidationParamDiv">  
@@ -142,8 +157,8 @@ $currentMonth=strftime("%m") ;
                    constraints="{min:0,max:13,places:0,pattern:'00'}"
                    intermediateChanges="true"
                    maxlength="2" class="roundedLeft"
-                   value="<?php if(sessionValueExists('monthPlannedWorkManual')){
-                                  $month = getSessionValue('monthPlannedWorkManual') ;
+                   value="<?php if(sessionValueExists('monthConsolidation')){
+                                  $month = getSessionValue('monthConsolidation') ;
                                   echo $month;  
                                  }else{
                                   $month=$currentMonth;

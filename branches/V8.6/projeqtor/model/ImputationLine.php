@@ -438,8 +438,9 @@ class ImputationLine {
       if($manuPlan){
         foreach ($plannedManualWorkList as $work) {
           $critArray=array('idProject'=>$work->idProject,'month'=>$work->month);
-          $lockedImp=SqlElement::getSingleSqlElementFromCriteria('ConsolidationValidation', $critArray);
-          if($lockedImp->id!='')continue;
+          $validatedImp=SqlElement::getSingleSqlElementFromCriteria('ConsolidationValidation', $critArray);
+          //$lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', $critArray);
+          if($validatedImp->id!='' )continue;
           if (($work->idAssignment and $work->idAssignment==$elt->idAssignment ) or (!$work->idAssignment and $work->refType==$elt->refType and $work->refId==$elt->refId) or ($work->idAssignment and $work->idAssignment==$elt->idAssignment)) {
             $workDate=$work->workDate;
             $offset=dayDiffDates($startDate, $workDate)+1;
@@ -1001,9 +1002,18 @@ class ImputationLine {
         for ($i=1; $i<=$nbDays; $i++) {
           if($line->refType!='Project'){
             $date=str_replace("-","",substr($allDate[$i-1], 0,7));
-            $lockedImp=SqlElement::getSingleSqlElementFromCriteria('ConsolidationValidation', array('idProject'=>$line->idProject,'month'=>$date));
+            $validatedImp=SqlElement::getSingleSqlElementFromCriteria('ConsolidationValidation', array('idProject'=>$line->idProject,'month'=>$date));
+            $lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', array('idProject'=>$line->idProject));
+            $validatedImpCase=(trim($validatedImp->id)!='')?true:false;
             $lockedImpCase=(trim($lockedImp->id)!='')?true:false;
-            $manuPlan=($lockedImpCase)?false:$manuPlan;
+            $impLock=false;
+            if($lockedImpCase){
+              $curMonth=substr(str_replace('-', '', $curDate), 0,6);
+              if(intval($lockedImp->month,10)<intval ($curMonth,10)){
+                $impLock=true;
+              }
+            }
+            $manuPlan=($validatedImpCase or $impLock)?false:$manuPlan;
           }
           $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
           echo '<td class="ganttDetail" align="center" width="'.$inputWidth.'px;"';
@@ -1051,7 +1061,7 @@ class ImputationLine {
               echo ' id="workValue_'.$nbLine.'_'.$i.'"';
               echo ' name="workValue_'.$i.'[]"';
               echo ' value="'.Work::displayImputation($valWork).'" ';
-              if ($line->idle or $line->locked or $lockedImpCase) {
+              if ($line->idle or $line->locked or $validatedImpCase or $impLock) {
                 echo ' readOnly="true" ';
               }
               echo ' >';
