@@ -7028,12 +7028,15 @@ function drawComplexities($nbComplexities,$obj,$list) {
   echo '  <tr>';
   echo '    <td class="assignHeader" style="width:15%">'.i18n('complexities').'</td>';
   echo '  </tr>';
-  for($i=1; $i<($nbComplexities+1); $i++){
+  for($i=1; $i<11; $i++){
     $value = null;
+    $visible = "";
     if($i <= $nbComplexity ){
       $value = $tabComplexities[$i-1];
     }
-    echo '  <tr>';
+    if($i>$nbComplexities)$visible= "style='display:none'";
+      
+    echo '  <tr '.$visible.' id="trComplexity'.$i.'">';
     echo '    <td>';
     echo '      <input dojoType="dijit.form.TextBox"  type="text" id="complexity'.$i.'" name="complexity'.$i.'"  class="input" style="width:100%;" value="'.$value.'" onchange="saveComplexity('.$obj->id.','.$i.');" />';
     echo '    </td>';
@@ -7077,7 +7080,7 @@ function drawWorkUnits($obj,$listWorkUnit,$listComplexity) {
     echo '<tr>';
     echo '  <td class="assignData" style="width:5%">';
       if ($canUpdate) {
-        echo '  <a onClick="editWorkUnit(\''.$val->id.'\',\''.$val->validityDate.'\');" '.'title="'.i18n('editWorkUnit').'" > '.formatSmallButton('Edit').'</a>';
+        echo '  <a onClick="editWorkUnit(\''.$val->id.'\',\''.$obj->id.'\',\''.$val->validityDate.'\');" '.'title="'.i18n('editWorkUnit').'" > '.formatSmallButton('Edit').'</a>';
       }
       if ($canDelete) {
         echo '  <a onClick="removeWorkUnit(\''.$val->id.'\');" '.'title="'.i18n('removeWorkUnit').'" > '.formatSmallButton('Remove').'</a>';

@@ -29,11 +29,26 @@
  */
 
 require_once "../tool/projeqtor.php";
-
+$number = RequestHandler::getValue('number');
+$idCatalog = RequestHandler::getId('idCatalog');
 $idWorkUnit = RequestHandler::getId('idWorkUnit');
 Sql::beginTransaction();
-$workUnit = new WorkUnit($idWorkUnit);
-$result=$workUnit->delete();
-// Message of correct saving
-displayLastOperationStatus($result);
+if($number){
+  $catalog = new CatalogUO($idCatalog);
+  $catalog->numberComplexities = $number;
+  $catalog->save();
+  $complexity = new Complexity();
+  $lstComplexities = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
+  foreach ($lstComplexities as $val){
+    if($val->idZone > $number){
+      $val->delete();
+    }
+  }
+  Sql::commitTransaction();
+}else{
+  $workUnit = new WorkUnit($idWorkUnit);
+  $result=$workUnit->delete();
+  // Message of correct saving
+  displayLastOperationStatus($result);
+}
 ?>

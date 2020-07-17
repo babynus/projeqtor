@@ -28,7 +28,6 @@
  * Save some information to session (remotely).
  */
 require_once "../tool/projeqtor.php";
-debugLog($_REQUEST);
 if (isset($_REQUEST['idData'])) {
   $id=$_REQUEST['idData'];
 } else if (isset($_REQUEST['id'])) {
@@ -37,7 +36,6 @@ if (isset($_REQUEST['idData'])) {
   $id=null;
   errorLog("Invalid id : value not set".(($_SERVER['REQUEST_URI'])?' for query='.$_SERVER['REQUEST_URI']:'')); 
 }
-debugLog('saveDataToSession='.$id);
 $ValidSessionIDs = '(param(ConfirmQuit|(Top)?IconSize)|lang|hideMenu'
     .'|browserLocale(DateFormat|DecimalPoint|ThousandSeparator)?|currentLocale'
     .'|defaultProject|disconnect|(switched|multiple)Mode|project(Selector(DisplayMode|ShowIdle)?)?'
@@ -70,7 +68,6 @@ if ($id=='disconnect') {
 }
 
 $value=$_REQUEST['value'];
-debugLog("$id=$value");
 setSessionValue($id, $value);
 
 if ($id=='browserLocaleDateFormat') {
@@ -88,7 +85,6 @@ if (sessionValueExists('userParamatersArray')) {
 }
 
 if (isset($_REQUEST['saveUserParam']) && $_REQUEST['saveUserParam']=='true') {
-  debugLog("save as user parameter");
 	Parameter::storeUserParameter($id, $value);
 }
 ?>

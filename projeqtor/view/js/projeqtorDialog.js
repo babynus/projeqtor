@@ -5180,7 +5180,9 @@ function saveComplexity(id,idZone) {
     url : url,
     form : 'objectForm',
     handleAs : "text",
-    load : function(data) {}
+    load : function(data) {
+      loadContent("objectDetail.php", "detailDiv", 'listForm');
+    }
   });
   
 }
@@ -5971,13 +5973,12 @@ function addWorkUnit(idCatalogUO) {
   }
   pauseBodyFocus();
   var callBack = function () {
-    ckEditorReplaceEditor("WUReferences",991);
     ckEditorReplaceEditor("WUDescriptions",992);
     ckEditorReplaceEditor("WUIncomings",993);
     ckEditorReplaceEditor("WULivrables",994);
     dijit.byId("dialogWorkUnit").show();
   };
-  var params="&id="+idCatalogUO;
+  var params="&idCatalog="+idCatalogUO;
   params+="&mode=add";
   loadDialog('dialogWorkUnit',callBack,false,params);
 }
@@ -6088,6 +6089,12 @@ function editResourceCapacity(id,idResource,capacity, idle, startDate, endDate) 
 }
 //gautier workUnit
 function saveWorkUnit(){
+  editorDescriptions=CKEDITOR.instances['WUDescriptions'];
+  editorDescriptions.updateElement();
+  editorWUIncomings=CKEDITOR.instances['WUIncomings'];
+  editorWUIncomings.updateElement();
+  editorWULivrables=CKEDITOR.instances['WULivrables'];
+  editorWULivrables.updateElement();
   var formVar=dijit.byId('workUnitForm');
   if (formVar.validate()) {
     loadContent("../tool/saveWorkUnit.php", "resultDivMain", "workUnitForm",true,'WorkUnit');
@@ -6096,27 +6103,16 @@ function saveWorkUnit(){
     showAlert(i18n("alertInvalidForm"));
   }
 }
-function editWorkUnit(id,validityDate) {
+function editWorkUnit(id,idCatalogUO,validityDate) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
+  pauseBodyFocus();
   var callBack = function () {
-    ckEditorReplaceEditor("WUReferences",991);
     ckEditorReplaceEditor("WUDescriptions",992);
     ckEditorReplaceEditor("WUIncomings",993);
     ckEditorReplaceEditor("WULivrables",994);
-    dojo.xhrGet({
-      url : '../tool/getSingleData.php?dataType=WorkUnit&idWorkUnit='+id,
-      handleAs : "text",
-      load : function(data) {
-        arrayData=data.split('#!#!#!#!#!#');
-        dijit.byId('WUReference').set('value',arrayData[0]);
-        dijit.byId('WUDescription').set('value',arrayData[1]);
-        dijit.byId('WUIncoming').set('value',arrayData[2]);
-        dijit.byId('WULivrable').set('value',arrayData[3]);
-      }
-      });
     if (validityDate) {
       dijit.byId("ValidityDateWU").set('value', validityDate);
     } else {
@@ -6125,6 +6121,7 @@ function editWorkUnit(id,validityDate) {
     dijit.byId("dialogWorkUnit").show();
   };
   var params="&id="+id;
+  params+="&idCatalog="+idCatalogUO;
   params+="&mode=edit";
   loadDialog('dialogWorkUnit',callBack,false,params);
 }
