@@ -7677,16 +7677,15 @@ function checkAlertRetour(data) {
     var reminderDiv=dojo.byId('reminderDiv');
     var dialogReminder=dojo.byId('dialogReminder');
     reminderDiv.innerHTML=data;
-    if (dojo.byId("requestRefreshProject")
-        && dojo.byId("requestRefreshProject").value == "true") {
+    if (dojo.byId("cronStatusRefresh") && dojo.byId("cronStatusRefresh").value != "") {
+      refreshCronIconStatus(dojo.byId("cronStatusRefresh").value);
+    }
+    if (dojo.byId("requestRefreshProject")&& dojo.byId("requestRefreshProject").value == "true") {
       refreshProjectSelectorList();
       if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
-    }else if (dojo.byId("cronStatusRefresh") && dojo.byId("cronStatusRefresh").value != "") {
-    	refreshCronIconStatus(dojo.byId("cronStatusRefresh").value);
-        if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
-    }else if (dojo.byId("alertNeedStreamRefresh") && dojo.byId("alertNeedStreamRefresh").value>0) {
+    } else if (dojo.byId("alertNeedStreamRefresh") && dojo.byId("alertNeedStreamRefresh").value>0) {
       loadContent("objectStream.php?onlyCenter=true", "activityStreamCenter", "listForm");
-        if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
+      if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
     } else if (dojo.byId('alertType')) {
       if (dojo.byId('alertCount') && dojo.byId('alertCount').value>1) {
         dijit.byId('markAllAsReadButton').set('label',i18n('markAllAsRead',new Array(dojo.byId('alertCount').value)));
@@ -7723,6 +7722,8 @@ function checkAlertRetour(data) {
         },
         duration : duration
       }).play();
+    } else {
+      if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
     }
   } else {
     if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
