@@ -262,7 +262,6 @@ function formatUserThumb($userId,$userName,$title,$size=22,$float='right',$alway
   if (! $userId) return '';
 	$radius=round($size/2,0);
 	$file=Affectable::getThumbUrl('Affectable', $userId, $size);
-	debugLog("$userId => $file");
 	$searchNocache=strpos($file,'?');
 	$nocache='';
 	if ($searchNocache) {

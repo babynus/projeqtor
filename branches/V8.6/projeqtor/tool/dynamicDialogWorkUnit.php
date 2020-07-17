@@ -27,17 +27,17 @@ include_once ("../tool/projeqtor.php");
 $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 $mode = RequestHandler::getValue('mode',false,null);
 $id = RequestHandler::getId('id');
+$idCatalog=RequestHandler::getValue('idCatalog',false,null);
 $workUnit = new WorkUnit($id);
-$idCatalog=RequestHandler::getValue('id',false,null);
 $detailHeight=50;
 $detailWidth=500;
-$result = "";
 $complexity = new Complexity();
 $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
 $nbComplexities = count($listComplexity);
 if(!$nbComplexities)$nbComplexities=1;
 $tdWitdh = (85/$nbComplexities);
 if($tdWitdh>10)$tdWitdh=10;
+$tabCompValues = array();
 ?>
 <div>
   <table>
@@ -46,15 +46,18 @@ if($tdWitdh>10)$tdWitdh=10;
        <form dojoType="dijit.form.Form" id='workUnitForm' name='workUnitForm' onSubmit="return false;">
         <input id="idCatalog" name="idCatalog" type="hidden" value="<?php echo $idCatalog;?>" />
         <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
+         <input id="mode" name="idWorkUnit" type="hidden" value="<?php echo $id;?>" />
          <table>
           <tr>
              <td class="dialogLabel" >
                <label for="WUReference" ><?php echo i18n("colReference");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <input dojoType="dijit.form.Textarea" id="WUReference" name="WUReference" type="hidden" value="<?php echo htmlEncode($workUnit->reference);?>"/>
-                    <textarea  style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
-                    name="WUReferences" id="WUReferences"><?php echo htmlspecialchars($result);?></textarea>
+               <textarea dojoType="dijit.form.Textarea" 
+                id="WUReferences" name="WUReferences"
+                style="width:400px;"
+                maxlength="4000"
+                class="input"><?php echo htmlspecialchars($workUnit->reference);?></textarea>   
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -63,9 +66,9 @@ if($tdWitdh>10)$tdWitdh=10;
                <label for="WUDescription" ><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-					     <input id="WUDescription" name="WUDescription" type="hidden" value="<?php echo htmlEncode($workUnit->description);?>"/>
+					     <input id="WUDescription" name="WUDescription" type="hidden" value=""/>
                     <textarea  style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
-                    name="WUDescriptions" id="WUDescriptions"><?php echo htmlspecialchars($result);?></textarea>
+                    name="WUDescriptions" id="WUDescriptions"><?php echo htmlspecialchars($workUnit->description);?></textarea>
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -74,9 +77,9 @@ if($tdWitdh>10)$tdWitdh=10;
                <label for="WUIncoming" ><?php echo i18n("colIncoming");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-              <input id="WUIncoming" name="WUIncoming" type="hidden" value="<?php echo htmlEncode($workUnit->entering);?>"/>
+              <input id="WUIncoming" name="WUIncoming" type="hidden" value=""/>
                     <textarea  style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
-                    name="WUIncomings" id="WUIncomings"><?php echo htmlspecialchars($result);?></textarea>
+                    name="WUIncomings" id="WUIncomings"><?php echo htmlspecialchars($workUnit->entering);?></textarea>
              </td>
           </tr>
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -85,9 +88,9 @@ if($tdWitdh>10)$tdWitdh=10;
                <label for="WULivrable" ><?php echo i18n("colLivrable");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <input id="WULivrable" name="WULivrable" type="hidden" value="<?php echo htmlEncode($workUnit->deliverable);?>"/>
+               <input id="WULivrable" name="WULivrable" type="hidden" value=""/>
                     <textarea style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
-                    name="WULivrables" id="WULivrables"><?php echo htmlspecialchars($result);?></textarea>
+                    name="WULivrables" id="WULivrables"><?php echo htmlspecialchars($workUnit->deliverable);?></textarea>
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -97,7 +100,7 @@ if($tdWitdh>10)$tdWitdh=10;
              </td>
              <td>
                <div id="ValidityDateWU" name="ValidityDateWU"
-                dojoType="dijit.form.DateTextBox" required="true" hasDownArrow="false"   
+                dojoType="dijit.form.DateTextBox"  hasDownArrow="false"   
                 constraints="{datePattern:browserLocaleDateFormatJs}"
                 type="text" maxlength="10"  style="width:100px; text-align: center;" class="input" value="">
                </div>
@@ -108,31 +111,45 @@ if($tdWitdh>10)$tdWitdh=10;
            <table style="width:98%">
               <tr> 
                 <td  style="width:15%" class="assignHeader"><?php echo i18n("colComplexity");?></td>
-                <?php foreach ($listComplexity as $comp){ ?>
+                <?php foreach ($listComplexity as $comp){ 
+                        if($mode =='edit'){
+                          $lstCompVal=SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalog'=>$idCatalog,'idComplexity'=>$comp->id)); 
+                          foreach ($lstCompVal as $id=>$val){
+                            if($id=='charge')$tabCompValues[$comp->id]['charge'] = $val; 
+                            if($id=='price')$tabCompValues[$comp->id]['price'] = $val;
+                            if($id=='duration')$tabCompValues[$comp->id]['duration'] = $val;
+                          }
+                         }?>
                 <td style="width:<?php echo $tdWitdh;?>%" class="assignHeader" > <?php echo $comp->name; ?> </td>
                 <?php } ?>
               </tr>
               <tr>
-                <td style="width:15%" class="assignData" > <?php echo i18n('charge'); ?> </td>
+              <?php $unit = Parameter::getGlobalParameter('workUnit'); 
+                    if($unit=='days'){
+                      $unitOfWork=i18n('shortDay');
+                     }else{
+                      $unitOfWork=i18n('shortHour');
+                     } ?>
+                <td style="width:10%;text-align:center;" class="assignData" > <?php echo i18n('charge').'  ('.$unitOfWork.')';?> </td>
                 <?php foreach ($listComplexity as $comp){ ?>
                 <td style="width:<?php echo $tdWitdh;?>%"  class="assignData">
-                <input dojoType="dijit.form.TextBox" id="charge<?php echo $comp->id;?>" name="charge<?php echo $comp->id;?>" type="number" style="width: 100%" class="input"  value="" />
+                <input dojoType="dijit.form.NumberTextBox" id="charge<?php echo $comp->id;?>" name="charge<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['charge'];} ?>" />
                 </td>
                 <?php } ?>
               </tr>
               <tr>
-                <td style="width:15%" class="assignData"> <?php echo i18n('price'); ?> </td>
+                <td style="width:10%;text-align:center;" class="assignData"> <?php echo i18n('price').'  ('.Parameter::getGlobalParameter('currency').')';?></td>
                 <?php foreach ($listComplexity as $comp){ ?>
                 <td style="width:<?php echo $tdWitdh;?>%" class="assignData">
-                <input dojoType="dijit.form.TextBox" id="price<?php echo $comp->id;?>" name="price<?php echo $comp->id;?>" type="number" style="width: 100%" class="input"  value="" />
+                <input dojoType="dijit.form.NumberTextBox" id="price<?php echo $comp->id;?>" name="price<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['price'];} ?>" />
                 </td>
                 <?php } ?>
               </tr>
               <tr>
-                <td style="width:15%" class="assignData"> <?php echo i18n('duration'); ?> </td>
+                <td style="width:10%;text-align:center;" class="assignData"> <?php echo i18n('duration').'  ('.$unitOfWork.')';?> </td>
                 <?php foreach ($listComplexity as $comp){ ?>
                 <td style="width:<?php echo $tdWitdh;?>%" class="assignData"> 
-                <input dojoType="dijit.form.TextBox" id="duration<?php echo $comp->id;?>" name="duration<?php echo $comp->id;?>" type="number" style="width: 100%" class="input"  value="" />
+                <input dojoType="dijit.form.NumberTextBox" id="duration<?php echo $comp->id;?>" name="duration<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['duration'];} ?>" />
                  </td>
                 <?php } ?>
              </tr>

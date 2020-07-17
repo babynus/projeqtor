@@ -35,14 +35,51 @@ $mode = RequestHandler::getValue('mode');
 $idCatalog= RequestHandler::getId('idCatalog');
 $WUReference=RequestHandler::getValue('WUReferences');
 $WUDescription=RequestHandler::getValue('WUDescriptions');
-$WUIncoming=RequestHandler::getValue('WULivrables');
-$WULivrable=RequestHandler::getValue('WUIncomings');
+$WUIncoming=RequestHandler::getValue('WUIncomings');
+$WULivrable=RequestHandler::getValue('WULivrables');
 $ValidityDateWU=RequestHandler::getValue('ValidityDateWU');
+$idWorkUnit = RequestHandler::getId('idWorkUnit');
 Sql::beginTransaction();
 $result = "";
 
 if($mode == 'edit'){
-  
+  $wu = new WorkUnit($idWorkUnit);
+  $wu->idCatalog = $idCatalog;
+  $wu->reference = $WUReference;
+  $wu->description = $WUDescription;
+  $wu->entering = $WUIncoming;
+  $wu->deliverable = $WULivrable;
+  $wu->validityDate = $ValidityDateWU;
+  $res = $wu->save();
+  $complexity = new Complexity();
+  $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
+  foreach ($listComplexity as $comp){
+    $charge = RequestHandler::getNumeric('charge'.$comp->id);
+    $price = RequestHandler::getNumeric('price'.$comp->id);
+    $duration = RequestHandler::getNumeric('duration'.$comp->id);
+    $compVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalog'=>$idCatalog,'idComplexity'=>$comp->id));
+     if(!$compVal->id){
+        if( !$charge and !$price and !$duration)continue;
+        $compValue = new ComplexityValues();
+        $compValue->idCatalog = $idCatalog;
+        $compValue->idComplexity = $comp->id;
+        $compValue->idWorkUnit = $wu->id;
+        $compValue->charge = $charge;
+        $compValue->price = $price;
+        $compValue->duration = $duration;
+        $compValue->save();
+     }else{
+       $compValue = new ComplexityValues($compVal->id);
+        if( !$charge and !$price and !$duration){
+          $compValue->delete;
+        }else{
+          $compValue->charge = $charge;
+          $compValue->price = $price;
+          $compValue->duration = $duration;
+          $compValue->save();
+        }
+     }
+  }
 }else{
   $wu = new WorkUnit();
   $wu->idCatalog = $idCatalog;

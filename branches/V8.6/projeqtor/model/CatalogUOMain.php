@@ -122,10 +122,13 @@ class CatalogUOMain extends SqlElement {
    */
   public function getValidationScript($colName) {
     $colScript = parent::getValidationScript($colName);
-    if ($colName=="idBrand") {
-      $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  formChanged();';
-      $colScript .= '</script>';
+    if ($colName=="numberComplexities") {
+      if($this->id){
+        $colScript .= '<script type="dojo/connect" event="onChange" >';
+        $colScript .= '  updateComplexities(dijit.byId("numberComplexities").get("value"),'.$this->id.');';
+        $colScript .= '  formChanged();';
+        $colScript .= '</script>';
+      }
     } 
     return $colScript;
   }
