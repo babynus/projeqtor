@@ -46,7 +46,6 @@
     $paramIconSize=Parameter::getUserParameter('paramIconSize');
     if (!$paramIconSize) $paramIconSize=22;
     $menu=substr($menuName,4);
-    debugLog("$idMenu - $menuName => ".securityCheckDisplayMenu($idMenu,$menu));
     if (securityCheckDisplayMenu($idMenu,$menu) or $force) {
       if (! $menuNextIsFirst) {
         echo ", \n";
