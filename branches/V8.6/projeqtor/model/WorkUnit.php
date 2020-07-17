@@ -12,7 +12,8 @@ class WorkUnit extends SqlElement {
 	public $entering;
 	public $deliverable;
 	public $validityDate;
-	
+  public $idCatalog;
+  	
 	private static $_databaseCriteria = array();
 	/** ==========================================================================
 	 * Constructor

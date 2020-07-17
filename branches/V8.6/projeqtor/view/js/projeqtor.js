@@ -4316,6 +4316,26 @@ function providerPaymentIdProviderTerm() {
     }
   });
 }
+function updateComplexities(number,idCatalog){
+  url = "../tool/removeWorkUnit.php?number="+number+"&idCatalog="+idCatalog;
+  dojo.xhrGet({
+    url : url,
+    handleAs : "text",
+    load : function(data) {
+    }
+  });
+  var callBack = function(){
+    var i;
+    for (i = 1; i < 11; i++) {
+      if(i <= number){
+        dojo.byId('trComplexity'+i).style.display = 'table-row';
+      }else{
+        dojo.byId('trComplexity'+i).style.display = 'none';
+      }
+    }
+  };
+  loadContent("objectDetail.php", "detailDiv", 'listForm',null,null,null,null,callBack);
+}
 
 function updateFinancialTotal(mode, col) {
   if (cancelRecursiveChange_OnGoingChange){
@@ -5072,8 +5092,11 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     height = maxEditorHeight - 150;
     currentEditorIsNote=true;
   }
-  if (editorName == 'WUReferences' || editorName == 'WUDescriptions' || editorName == 'WUIncomings' || editorName == 'WULivrables') {
+  forceCkInline = false;
+  if (editorName == 'WUDescriptions' || editorName == 'WUIncomings' || editorName == 'WULivrables') {
     height = 100;
+    forceCkInline = true;
+    autofocus = true;
   }
   var readOnly = false;
   if (dojo.byId('ckeditor' + numEditor + 'ReadOnly')
@@ -5090,7 +5113,7 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     language : currentLocale,
     startupFocus : autofocus
   });
-  if (editorName != 'noteNote') { // No formChanged for notes
+  if (editorName != 'noteNote' && editorName != 'WUDescriptions'&& editorName != 'WUIncomings'&& editorName != 'WULivrables') { // No formChanged for notes
     editorArray[numEditor].on('change', function(evt) {
       // evt.editor.updateElement();
       formChanged();
@@ -5831,7 +5854,6 @@ function drawGraphStatus() {
   graphIdType=dijit.byId("id"+objectClass+"Type").get('value');
   var url = '../tool/dynamicDialogGraphStatus.php?idStatus='+graphIdStatus + '&idProject='+graphIdProject + '&idType='+graphIdType;
   loadContent(url,"graphStatusDiv",null,null,null,null,null,callBack);
-  
 }
 
 function hideGraphStatus(){

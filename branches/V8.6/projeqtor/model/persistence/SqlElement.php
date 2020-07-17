@@ -188,6 +188,7 @@ abstract class SqlElement {
       "CalendarDefinition" => array(
           "Calendar" => "cascade", 
           "Resource" => "controlStrict"),
+      "CatalogUO" => array("Complexity" => "cascade"),
       "Checklist" => array(
           "ChecklistLine" => "cascade"), 
       "ChecklistDefinition" => array(

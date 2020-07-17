@@ -111,6 +111,12 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   if ((substr($col,0,2)=='id' and substr($col,0,-7)=='Version') and ($critFld=='idProductOrComponent')) {
     $critFld='idProduct';
   }
+  if($col=="idComplexity"){
+  }
+  if ($col=='idWorkUnit'){
+    $critFld='id';
+  }
+  
   if ($col=='idProfile'){
     // Limit list of profiles to profiles with sortOrder >= sortOrder of user profile
     $idPrj = ($obj)?$obj->id:null;
