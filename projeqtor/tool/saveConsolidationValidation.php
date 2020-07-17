@@ -45,10 +45,11 @@ $res=array();
 $lstCons=array();
 $lock=($mode=='Locked')?$month:"";
 
-foreach ($lstProj as $id=>$val){
+//___get Recursive Sub Projects___//
+foreach ($lstProj as $id=>$val){  
   $val=($mode =='validaTionCons' or $mode=='cancelCons' and $all=='false')?substr($val,6):$val;
   $project= new Project($val);
-  $proectsSubList=$project->getSubProjectsList();
+  $proectsSubList=$project->getRecursiveSubProjectsFlatList();
   $lstSub=array();
   foreach ($proectsSubList as $key=>$name){
     foreach ($lstProj as $idProj){
@@ -66,6 +67,8 @@ foreach ($lstProj as $id=>$val){
     }
   }
 }
+//==============//
+
 if($mode =='validaTionCons'){
   $lstImpLocked=array();
   foreach($lstProj as $projId){
