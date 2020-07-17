@@ -312,6 +312,13 @@ class BillMain extends SqlElement {
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
       return $result;     
     }	
+    $crit=array('idBill'=>$this->id);
+    $w=new Work();
+    $lstWork=$w->getSqlElementsFromCriteria($crit);
+    foreach($lstWork as $work) {
+      $work->idBill=null;
+      $work->simpleSave();
+    }
 	  return $result;
   }
     
