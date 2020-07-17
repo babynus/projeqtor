@@ -2147,6 +2147,7 @@ abstract class SqlElement {
     $newObj->id = null;
     //$typeName = 'id' . $newClass . 'Type';
     ($newClass=='PeriodicMeeting')?$typeName='idMeetingType':$typeName = 'id' . $newClass . 'Type';
+    $typeClass=substr($typeName,2);
     $newObj->$typeName = $newType;
     if ($setOrigin and property_exists ( $newObj, 'Origin' )) {
       $newObj->Origin->originType = get_class ( $this );
@@ -2156,15 +2157,29 @@ abstract class SqlElement {
     foreach ($newObj as $col_name => $col_value ) {
       if (ucfirst ( $col_name ) == $col_name) {
         if ($newObj->$col_name instanceof PlanningElement) {
+          debugLog("copySqlElementTo for $col_name");
           $sub = substr ( $col_name, 0, strlen ( $col_name ) - 15 );
           $plMode = 'id' . $sub . 'PlanningMode';
-          if ($newClass == "Activity") {
-            $newObj->$col_name->$plMode = "1";
-          } else if ($newClass == "Milestone") {
-            $newObj->$col_name->$plMode = "5";
-          }
-          if (get_class ( $this ) == $newClass and $newClass != 'Project') {
-            $newObj->$col_name->$plMode = $this->$col_name->$plMode;
+          $pm=null;
+          if (get_class($this)==$newClass and $newClass != 'Project') {
+            $pm = $this->$col_name->$plMode;
+          }else {    
+            $t=new $typeClass($newType);
+            if (property_exists($t, $plMode)) {
+              $pm=$t->$plMode;
+              debugLog("ok, planning mode from type : $pm");
+            } else {
+              $lst=SqlList::getList(substr($plMode,2));
+              if (count($lst>0)) {
+                foreach ($lst as $id->$val) {
+                  $pm=$id;
+                  break;
+                }
+              }
+              debugLog("ok, planning mode from list : $pm");
+            }
+            if (property_exists($newObj, 'idPlanningMode')) $newObj->idPlanningMode=$pm;
+            $newObj->$col_name->$plMode = $pm;
           }
           $newObj->$col_name->refName = $newName;
         }
