@@ -640,6 +640,16 @@ class PlanningElement extends SqlElement {
       	}
       }
     }
+    if ($this->wbsSortable!=$old->wbsSortable) {
+      $refType=$this->refType;
+      if ($refType=='Project') {
+        $refObj=new $refType($this->refId);
+        if ($refObj and $refObj->id) {
+          $refObj->sortOrder=$this->wbsSortable;
+          $subRes=$refObj->saveForced(true);
+        }
+      }
+    }
     // save old parent (for synthesis update) if parent has changed
     if ($old->topId!=$this->topId) {
       if ($old->topId!='') {
@@ -697,16 +707,6 @@ class PlanningElement extends SqlElement {
         }
       } else {
         self::updateSynthesisNoDispatch($this->topRefType, $this->topRefId);
-      }
-    }
-    if ($this->wbsSortable!=$old->wbsSortable) {
-    	$refType=$this->refType;
-      if ($refType=='Project') {
-        $refObj=new $refType($this->refId);
-        if ($refObj and $refObj->id) {
-        	$refObj->sortOrder=$this->wbsSortable;
-        	$subRes=$refObj->saveForced(true);
-        }
       }
     }
     // remove existing planned work (if any)
