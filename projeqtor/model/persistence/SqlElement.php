@@ -2147,7 +2147,6 @@ abstract class SqlElement {
     foreach ($newObj as $col_name => $col_value ) {
       if (ucfirst ( $col_name ) == $col_name) {
         if ($newObj->$col_name instanceof PlanningElement) {
-          debugLog("copySqlElementTo for $col_name");
           $sub = substr ( $col_name, 0, strlen ( $col_name ) - 15 );
           $plMode = 'id' . $sub . 'PlanningMode';
           $pm=null;
@@ -2157,7 +2156,6 @@ abstract class SqlElement {
             $t=new $typeClass($newType);
             if (property_exists($t, $plMode)) {
               $pm=$t->$plMode;
-              debugLog("ok, planning mode from type : $pm");
             } else {
               $lst=SqlList::getList(substr($plMode,2));
               if (count($lst>0)) {
@@ -2166,7 +2164,6 @@ abstract class SqlElement {
                   break;
                 }
               }
-              debugLog("ok, planning mode from list : $pm");
             }
             if (property_exists($newObj, 'idPlanningMode')) $newObj->idPlanningMode=$pm;
             $newObj->$col_name->$plMode = $pm;
