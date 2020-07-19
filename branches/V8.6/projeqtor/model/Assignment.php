@@ -265,7 +265,7 @@ class Assignment extends SqlElement {
     }
     
     // If Resource is part of Resource Team (Pool), subtract additional work from Pool
-    if ($additionalAssignedWork>0) {
+    if ($additionalAssignedWork>0 and !isset($this->_origin) ) {
       $arrTeams=array();
       $currentRefType=$this->refType;
       $currentRefId=$this->refId;
