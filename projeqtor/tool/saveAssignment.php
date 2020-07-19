@@ -228,6 +228,9 @@ if($planningMode == 'MAN' and $mode =='edit'){
     if(isset($optional)){
       $assignment->optional=$optional;
     }
+    if ($idOrigin) {
+      $assignment->_origin=$idOrigin;
+    }
     $result=$assignment->save();
     // 
     //$ar=new AssignmentRecurring();
