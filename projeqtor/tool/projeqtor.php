@@ -1761,7 +1761,13 @@ function securityCheckDisplayMenu($idMenu, $class=null, $user=null) {
   $result=false;
 // MTY - LEAVE SYSTEM
     if (isLeavesSystemMenuByMenuName("menu".$class)) {
-        if (! showLeavesSystemMenu("menu".$class)) return false;
+      //return showLeavesSystemMenu("menu".$class);
+      $showLeaveMenu=showLeavesSystemMenu("menu".$class);
+      if ($class=="Employee") {
+        if (! $showLeaveMenu) return false;
+      } else {
+        return $showLeaveMenu;
+      }
     }
 // MTY - LEAVE SYSTEM
   $typeAdmin=SqlList::getFieldFromId('Menu', $idMenu, 'isAdminMenu',false);
@@ -2183,6 +2189,7 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   require_once '../external/PHPMailer/src/SMTP.php';
   
   $phpmailer=new PHPMailer();
+  $phpmailer->CharSet="UTF-8";
   ob_start();
   if ($logLevel>='3') $phpmailer->SMTPDebug=4;
   // if #3077
