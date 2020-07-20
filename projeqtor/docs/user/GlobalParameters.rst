@@ -203,7 +203,7 @@ Specific parameters about Gantt planning presentation.
            
    .. compound:: Manual planned interventions enter work as
       
-      Choose whether the work entered in the manual schedule should be saved as real work or planned work.
+      Choose whether the work entered in the manual planning should be saved as real work or planned work.
       
       See: :ref:`Manual planning mode<mode-manualplanning>`
       
