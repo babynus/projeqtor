@@ -126,7 +126,7 @@ if ($dependencyId) { // Edit Mode
 	    } 
 	  }
 	  $tmpStatus=getLastOperationStatus ($result);
-	  if ($tmpStatus=='OK') {
+	  if ($tmpStatus=='OK' and $successor->idPlanningMode!=23) {
 	    if ($predecessor->plannedEndDate) {
 	      if ($predecessor->refType=='Milestone') {
 	        $successor->plannedStartDate=$predecessor->plannedEndDate;
