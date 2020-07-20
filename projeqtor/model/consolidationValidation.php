@@ -137,9 +137,9 @@ class ConsolidationValidation extends SqlElement{
 	  $result  ='<div id="imputationValidationDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
 	  $result .='  <table width="98%" style="margin-left:20px;margin-right:20px;border: 1px solid grey;">';
 	  $result .='   <tr class="reportHeader">';
-	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:16%;text-align:center;vertical-align:center;">'.i18n('Project').'</td>';
-	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:8%;text-align:center;vertical-align:center;">'.i18n('colRevenue').'</td>';
-	  $result .='     <td style="width:38%;border: 1px solid grey;border-right: 1px solid white;">';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:20%;text-align:center;vertical-align:center;">'.i18n('Project').'</td>';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colRevenue').'</td>';
+	  $result .='     <td style="width:40%;border: 1px solid grey;border-right: 1px solid white;">';
 	  $result .='      <table width="100%"><tr><td colspan="5" style="height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('technicalWork')).'</td></tr>';
 	  $result .='        <tr>
 	                       <td style="border-top: 1px solid white;border-right: 1px solid white;width:20%;height:30px;text-align:center;vertical-align:center;">'.ucfirst (i18n('colWorkApproved')).'</td>';
@@ -150,7 +150,7 @@ class ConsolidationValidation extends SqlElement{
 	                     </tr>
 	                   </table>';
 	  $result .='     </td>';
-	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:8%;text-align:center;vertical-align:center;">'.i18n('colMargin').'</td>';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colMargin').'</td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:7%;text-align:center;vertical-align:center;">';
 	  $result .='      <table><tr>';
 	  $result .='          <td colspan="2"> '.i18n('colBlocking').'</td></tr><tr>';
@@ -158,7 +158,7 @@ class ConsolidationValidation extends SqlElement{
 	  if($habLockedImputation->rightAccess=='1')$mode='onclick="lockedImputation(\'UnLocked\'';
       $result .='            <div region="center" id="UnlockedImputation" '.$mode.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.i18n('colUnlock').'" ></div>';
       $result .='          </td>';
-      $result .='          <td style="height:25px;padding-right:5px;padding-top:5px;width:10%;cursor:pointer;">';
+      $result .='          <td style="height:25px;padding-right:5px;padding-top:5px;width:13%;cursor:pointer;">';
       if($habLockedImputation->rightAccess=='1')$mode='onclick="lockedImputation(\'Locked\'';
       $result .='            <div region="center" id="lockedImputation" '.$mode.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" title="'.i18n('colLocked').'"></div>';
 	  $result .='           </td>';
@@ -167,15 +167,15 @@ class ConsolidationValidation extends SqlElement{
 	  $result .='     </td>';
 	  $result .='     <td colspan="2" style="border: 1px solid grey;height:60px;width:10%;text-align:center;vertical-align:center;">';
 	  $result .='      <table width="100%"><tr><td width="100%" colspan="2">'.i18n('menuConsultationValidation').'</td></tr>';
-	  $result .='        <tr>';
+	  $result .='        <tr style="100%" >';
 	  if($habValidationImputation->rightAccess=='1'){
-	  $result .='          <td style="width:50%;float:right;height:25px;padding-top:5px;">
-	                        <div id="buttonValidationAll" style="width:100%;" title="'.i18n('validateWorkPeriod').'" class="iconSubmitted32 iconSubmitted iconSize32"
+	  $result .='          <td >
+	                        <div id="buttonValidationAll" style="width:40%;float:right;height:25px;padding-top:5px;cursor:pointer;" title="'.i18n('validateWorkPeriod').'" class="iconSubmitted32 iconSubmitted iconSize32"
 	                             onClick="validateAllConsolidation(\''.$srtingProjectList.'\',"validaTionCons",'.$concMonth.');">
 	                        </div>
 	                       </td>';
-	  $result .='          <td style="width:50%;height:25px;padding-top:5px;">
-	                        <div id="buttonCancelAll" style="width:100%;padding-left:10px;" title="'.i18n('buttonCancel').'" class="iconUnsubmitted32 iconUnsubmitted iconSize32"
+	  $result .='          <td>
+	                        <div id="buttonCancelAll" style="width:40%;height:25px;padding-top:5px;cursor:pointer;" title="'.i18n('buttonCancel').'" class="iconUnsubmitted32 iconUnsubmitted iconSize32"
 	                             onClick="validateAllConsolidation(\''.$srtingProjectList.'\',"cancelCons",'.$concMonth.');">
 	                        </div>
 	                       </td>';
@@ -303,7 +303,7 @@ class ConsolidationValidation extends SqlElement{
     	  }
 	  }else{   // no project 
 	    $result .='   <tr>';
-	    $result .='    <td colspan="6">';
+	    $result .='    <td colspan="10">';
 	    $result .='    <div style="background:#FFDDDD;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:100%;border-right: 1px solid grey;">'.i18n('noDataFound').'</div>';
 	    $result .='    </td>';
 	    $result .='   </tr>';
