@@ -78,7 +78,7 @@ $dep->dependencyType='E-S';
 $dep->dependencyDelay=$dependencyDelay;
 $result=$dep->save();
 $tmpStatus=getLastOperationStatus ($result);
-if ($tmpStatus=='OK') {
+if ($tmpStatus=='OK' and $successor->idPlanningMode!=23) {
   if (! $predecessor->plannedEndDate and $predecessor->validatedDuration) {
     if (! $predecessor->plannedStartDate) {
       $predecessor->plannedStartDate=($predecessor->validatedStartDate)?$predecessor->validatedStartDate:date('Y-m-d');
