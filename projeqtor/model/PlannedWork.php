@@ -642,6 +642,7 @@ class PlannedWork extends GeneralWork {
 //          $idxAss=0;
           // List assignments of $plan : Search for assignment for "unique resource", if found, add virtual assignment for each resource to check
           $supportAssignments=array(); 
+          $increment=0;
           foreach ($listAss as $keyAss=>$ass) {
             if ($ass->supportedAssignment) continue;
             if ($ass->uniqueResource) {
@@ -662,7 +663,8 @@ class PlannedWork extends GeneralWork {
                 $cpAss->uniqueResource=0;
                 $cpAss->temp=true;
                 $uniqueResourceAssignment[$ass->id][$asel->idResource]=array('select'=>$asel);
-                $listAss=array_insert_before($listAss, $cpAss, $keyAss);
+                $listAss=array_insert_before($listAss, $cpAss, $keyAss+$increment);
+                $increment++;
               }
             }
           }
