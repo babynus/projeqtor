@@ -572,11 +572,11 @@ function activityStreamDisplayNote ($note,$origin){
       	if($i >= 5){
       		break;
       	}
-      	echo '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;!important;"></td>';
+      	echo '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;'.(($origin=="activityStream")?"font-size:100% !important;":"").'"></td>';
       }
-      echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:100%;"><div style="float:left;margin-top:6px;">';
+      echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:100%;'.(($origin=="activityStream")?"font-size:100% !important;":"").'"><div style="float:left;margin-top:6px;">';
     }else{
-      echo '<td colspan="6" class="noteData" style="width:100%;"><div style="float:left;margin-top:6px;">';
+      echo '<td colspan="6" class="noteData" style="width:100%;'.(($origin=="activityStream")?"font-size:100% !important;":"").'"><div style="float:left;margin-top:6px;">';
     }
     echo formatUserThumb($note->idUser, $userName, 'Creator',32,'left');
     echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
@@ -640,6 +640,65 @@ function activityStreamDisplayNote ($note,$origin){
     } 
   }
 }
+
+
+function activityStreamDisplayHist ($hist,$origin){
+  $text='';
+  $reftText='';
+  $gotoAndStyle='style="color:blue;"';
+  $userId = $hist->idUser;
+  $userName = ($hist->idUser!='')?SqlList::getNameFromId ( 'User', $userId ):lcfirst(i18n('unknown'));
+  $operation=$hist->operation;
+  $change=$hist->colName;
+  $oldVal=$hist->oldValue;
+  $newVal=$hist->newValue;
+  $date=$hist->operationDate;
+  $objectClass=$hist->refType;
+  $objectId=$hist->refId;
+  $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
+  
+  if ( securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
+    $gotoAndStyle='style="color:blue;cursor:pointer;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
+  }
+  $elementName = '<span '.$gotoAndStyle.'>'.$objectClass.'&nbsp;#'.$objectId.'</span>';
+  if($operation=='update' and $change=='idStatus'){
+    $newStatus=new Status($newVal);
+    $oldStatus=new Status($oldVal);
+    $oldStatusName='<span style="font-weight:bold;">'.$oldStatus->name.'</span>';
+    $newStatusName='<span style="font-weight:bold;">'.$newStatus->name.'</span>';
+    $text=i18n('changeStatusStream',array($oldStatusName,$newStatusName));
+    if($origin=='activityStream')$reftText=$elementName.':&nbsp;';    
+  }else if($operation=='insert'){
+    $text=i18n('createdElementStream').'&nbsp;'.$elementName;
+  }
+  if($origin=='objectStream'){
+    echo '<tr style="height:100%;">';
+    echo '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;"">';
+    echo '    <div style="float:left;margin-top:6px;">';
+    echo        formatUserThumb($hist->idUser, $userName, 'Creator',32,'left');
+    echo '    </div>';
+    echo '    <div style="color:#ca810a;">';
+    echo '      <div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp;'.$text.'</div>';
+    echo '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left").'</div>';
+    echo '      <div style="margin-top:8px;">'.htmlFormatDateTime($date,true).'</div>';
+    echo'     <div>';
+    echo '  </td>';
+    echo '</tr>';
+  }else{
+    echo '<tr style="height:100%;">';
+    echo '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;">';
+    echo '    <div style="float:left;width:100%;margin-top:6px;display:inline-block;color:#ca810a;">';
+    echo        formatUserThumb($hist->idUser, $userName, 'Creator',32,'left');
+    echo '      <div style="margin-top:2px;margin-left:45px;">'.$reftText.''.$userNameFormatted.'&nbsp'.$text.'</div>';
+    echo '      <div style="margin-top:3px;margin-left:45px;">'.formatDateThumb($date,null,"left").'</div>';
+    echo '      <div style="margin-top:8px;margin-left:45px;">'.htmlFormatDateTime($date,true).'</div>';
+    echo'     <div>';
+    echo '  </td>';
+    echo '</tr>';
+  }
+}
+
+
 
 function suppr_accents($str, $encoding='utf-8'){
   $str = htmlentities($str, ENT_NOQUOTES, $encoding);
