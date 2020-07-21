@@ -912,8 +912,27 @@ class ImputationLine {
         if ($line->refType=="Project") {
           $description=null;
           $crit=array();
+          //florent
+          $lockProject='';
+          $validatedProject='';
           $crit['id']=$line->refId;
           $description=SqlElement::getSingleSqlElementFromCriteria('Project', $crit);
+          $lockeProjImp= new LockedImputation();
+          $validatedProjCons= new ConsolidationValidation();
+          $monthStart=substr(str_replace('-', '', $startDate),0,-2);
+          $monthEnd=substr(str_replace('-', '', $endDate),0,-2);
+          $clause="idProject=$line->refId and month < '$monthEnd' ";
+          $lockedProj=$lockeProjImp->getSqlElementsFromCriteria(null,null,$clause);
+          if(empty($lockedProj)){
+            $clause="idProject=$line->refId and month between '$monthStart' and  '$monthEnd' ";
+            $validateProj=$validatedProjCons->getSqlElementsFromCriteria(null,null,$clause);
+          }
+          if(!empty($lockedProj)){
+            $lockProject=$lockedProj[0]->month;
+          }
+          if(isset($validateProj) and !empty($validateProj)){
+            $validatedProject=$validateProj[0]->month;
+          }
           if ($description) {
             $line->description=$description->description;
           }
@@ -932,7 +951,16 @@ class ImputationLine {
           echo ' class="pointer" onClick="gotoElement(\''.htmlEncode($line->refType).'\',\''.htmlEncode($line->refId).'\')"';
         }
         if ($outMode=='pdf') $line->name=wordwrap($line->name, 50, '<br/>');
-        echo '>'.(($showId&&$line->refId)?'#'.$line->refId.' - '.$line->name:$line->name);
+        echo '>'.(($showId&&$line->refId)?'#'.$line->refId.' - '.$line->name:$line->name).'&nbsp;&nbsp;';
+        if($lockProject!='' and $line->refType=="Project"){
+          $monthName=getMonthName(substr($lockProject,-2));
+          $year=substr($lockProject,0,-2);
+          echo '<div style="display: inline-block;" >'.formatIcon('Locked',16,i18n('impLockedMonth',array($monthName,$year))).'</div>';
+        }else if ($validatedProject!='' and $line->refType=="Project"){
+          $monthName=getMonthName(substr($validatedProject,-2));
+          $year=substr($validatedProject,0,-2);
+          echo '<div style="display: inline-block;" >'.formatIcon('Submitted',16,i18n('impValidatedMonth',array($monthName,$year))).'</div>';
+        }
         echo '<div id="extra_'.$nbLine.'" style="position:absolute; top:-2px; right:2px;" ></div>';
         
         if (isset($line->functionName) and $line->functionName and $outMode!="pdf") {
@@ -997,9 +1025,11 @@ class ImputationLine {
           echo '<input type="hidden" id="assignedWork_'.$nbLine.'" value="'.htmlDisplayNumericWithoutTrailingZeros(Work::displayImputation($line->assignedWork)).'" />';
           echo '<input type="hidden" id="realWork_'.$nbLine.'" value="'.htmlDisplayNumericWithoutTrailingZeros(Work::displayImputation($line->realWork)).'" />';
         }
+        
         $curDate=$startDate;
         $listProject=Project::getAdminitrativeProjectList(true);
         for ($i=1; $i<=$nbDays; $i++) {
+          //florent
           if($line->refType!='Project'){
             $date=str_replace("-","",substr($allDate[$i-1], 0,7));
             $validatedImp=SqlElement::getSingleSqlElementFromCriteria('ConsolidationValidation', array('idProject'=>$line->idProject,'month'=>$date));
