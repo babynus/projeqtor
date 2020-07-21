@@ -181,11 +181,6 @@
       $typeClass=$className.'Type';
       $type=new $typeClass($idType);
       echo $type->idCategory;
-    } else if ($type=='WorkUnit') { 
-      $idWorkUnit=RequestHandler::getId('idWorkUnit');
-      $r=new WorkUnit($idWorkUnit);
-      $catalog_array = "$r->reference#!#!#!#!#!#$r->description#!#!#!#!#!#$r->entering#!#!#!#!#!#$r->deliverable#!#!#!#!#!#";
-      echo $catalog_array;
     } else if ($type=='catalogBillLine') { //gautier #2516
       $idCat=RequestHandler::getId('idCatalog'); 
       $r=new Catalog($idCat);

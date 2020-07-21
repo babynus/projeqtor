@@ -2491,6 +2491,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if (!$readOnly) $showExtraButton=true;
           $fieldWidth=round($fieldWidth/2)-23;
         }
+        if($col=='idWorkUnit' or $col=='idComplexity'){
+          if (!$readOnly) $showExtraButton=true;
+          $fieldWidth=round($fieldWidth/2)-23;
+        }
         // END - ADD BY TABARY - NOTIFICATION SYSTEM
         
         // BEGIN - ADD BY TABARY - TOOLTIP

@@ -130,6 +130,7 @@ CREATE INDEX cataloguoProject ON `${prefix}cataloguo` (idProject);
 CREATE TABLE `${prefix}workunit` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `idCatalog` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idProject` int(12) unsigned DEFAULT NULL COMMENT '12',
   `reference` varchar(200) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   `entering` varchar(200) DEFAULT NULL,
