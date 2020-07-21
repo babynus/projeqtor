@@ -13,6 +13,7 @@ class WorkUnit extends SqlElement {
 	public $deliverable;
 	public $validityDate;
   public $idCatalog;
+  public $idProject;
   	
 	private static $_databaseCriteria = array();
 	/** ==========================================================================
@@ -38,7 +39,19 @@ class WorkUnit extends SqlElement {
 		parent::__construct($id,$withoutDependentObjects);
 	}
 	
-	
+	public function deleteControl()
+	{
+	  $result="";
+	  $actPl = new ActivityPlanningElement();
+	  $isUsed = $actPl->countSqlElementsFromCriteria(array('idWorkUnit'=>$this->id));
+	  if ($isUsed){
+	    $result .= '<br/>' . i18n ( 'workUnitIsUseByActivity' );
+	  }
+	  if (! $result) {
+	    $result=parent::deleteControl();
+	  }
+	  return $result;
+	}
 	/** ==========================================================================
 	 * Destructor
 	 * @return void

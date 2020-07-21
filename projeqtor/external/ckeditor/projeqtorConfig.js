@@ -29,7 +29,6 @@ CKEDITOR.editorConfig = function( config ) {
   //config.extraPlugins += ',image2';
   //config.extraPlugins += ',uploadimage';
   //gautier
-  console.log('je suis dans le ck config');
   if (dojo.byId('ckeditorType')){
     var cktype=dojo.byId('ckeditorType').value;
     if ((cktype != 'CK' && ! currentEditorIsNote) || forceCkInline) {

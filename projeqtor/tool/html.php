@@ -66,6 +66,13 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 	    $critVal = $firstTypeAsset[0]->id;
 	  }
 	}
+	if($col=="idComplexity"){
+	    $critFld = "idCatalog";
+	    if($obj->idWorkUnit){
+	      $workUnits = new WorkUnit($obj->idWorkUnit,true);
+	      $critVal = $workUnits->idCatalog;
+	    }
+	}
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
     $col = foreignKeyWithoutAlias($col);
 // END - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
@@ -111,12 +118,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   if ((substr($col,0,2)=='id' and substr($col,0,-7)=='Version') and ($critFld=='idProductOrComponent')) {
     $critFld='idProduct';
   }
-  if($col=="idComplexity"){
-  }
-  if ($col=='idWorkUnit'){
-    $critFld='id';
-  }
-  
+ 
   if ($col=='idProfile'){
     // Limit list of profiles to profiles with sortOrder >= sortOrder of user profile
     $idPrj = ($obj)?$obj->id:null;
@@ -346,6 +348,21 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 //           unset($table[2]);
 //         }
 //       }
+  }else if ($col=="idWorkUnit"){
+      $table=array();
+      $where="idProject=$obj->idProject";
+      $workUnit=new WorkUnit();
+      $list=$workUnit->getSqlElementsFromCriteria(null,null, $where);
+      foreach ($list as $wu) {
+        if (! array_key_exists($wu->id, $table)) {
+          $id=$wu->id;
+          $table[$id]=$wu->reference;
+        }
+      }
+      if($selection){
+        $table[$selection]=SqlList::getFieldFromId('WorkUnit', $selection, 'reference');
+      }
+      asort($table);
   }else {
     // None of the previous cases : no criteria and not of the expected above cases
     $showIdleCriteria=$showIdle;
@@ -898,6 +915,10 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 
   foreach($table as $key => $val) {
     
+    if($col == "idComplexity"){
+      $complexityVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idComplexity'=>$key,'idWorkUnit'=>$obj->idWorkUnit));
+      if(!$complexityVal->charge and !$complexityVal->price)continue;
+    }
     if($col =="idAsset"){
       if($key== $obj->id)continue;
     }

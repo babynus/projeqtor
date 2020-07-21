@@ -869,6 +869,20 @@ if ($type == 'empty') {
       //}
     }
   }
+}else if($type=="idWorkUnit"){
+  $idWorkUnit = RequestHandler::getId('idWorkUnit');
+  $complexityVal = new ComplexityValues();
+  $where = " (idWorkUnit = ".$idWorkUnit.") and  (price IS NOT NULL )and (charge IS NOT NULL) ";
+  $listComplexityValues = $complexityVal->getSqlElementsFromCriteria(null,false,$where);
+  $tabComplexityValues = array();
+  foreach ($listComplexityValues as $val){
+    $complexity = new Complexity($val->idComplexity);
+    $tabComplexityValues[$complexity->id]=$complexity->name;
+  }
+   echo '{id:"", name:""},';
+  foreach ($tabComplexityValues as $id=>$name){
+    echo '{id:"'.$id.'", name:"'.$name.'"},';
+  }
 } else if ($type == 'listStatusDocumentVersion') {
   $doc = SqlElement::getCurrentObject ( null, null, false, false ); // V5.2
   $idDocumentVersion = $_REQUEST ['idDocumentVersion'];
