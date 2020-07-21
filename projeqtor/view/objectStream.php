@@ -54,8 +54,13 @@
   $noNotes = "<div style='padding:10px'>".i18n("noNote").'</div>';
   // get the modifications (from request)
   $note=new Note();
+  $obj=new $objectClass($objectId,true);
+  $objectIsClosed=(isset($obj) and property_exists($obj, 'idle') and $obj->idle)?true:false;
+  $history=($objectIsClosed)?new HistoryArchive():new History();
   $order = "COALESCE (updateDate,creationDate) ASC";
   $notes=$note->getSqlElementsFromCriteria(array('refType'=>$objectClass,'refId'=>$objectId),null,null,$order);
+  $clauseWhere="refType='$objectClass' and refId=$objectId and ((operation='update' and colName='idStatus') or (operation='insert' and colName is null)) ";
+  if($objectId)$historyInfo=$history->getSqlElementsFromCriteria(null,null,$clauseWhere,null,"operationDate ASC");
   SqlElement::resetCurrentObjectTimestamp();
   $ress=new Resource($user->id);
   //$userId=$note->idUser;
@@ -118,10 +123,24 @@
   	    sortNotes($notes, $result, null);
   	    $notes = $result;
 	    }
-	    
+	    //florent ticket 4728
 	    foreach ( $notes as $note ) {
+          foreach ($historyInfo as $id=>$hist){
+            if($hist->operationDate < $note->creationDate){
+              echo activityStreamDisplayHist($hist,"objectStream");
+              unset($historyInfo[$id]);
+            }
+          }
 	      echo activityStreamDisplayNote ($note,"objectStream");
-	    };?>
+	    };
+	    
+	    if(!empty($historyInfo)){
+          foreach ($historyInfo as $id=>$hist){
+            echo activityStreamDisplayHist($hist,"objectStream");
+          }
+        }
+	    
+	    ?>
 	    <tr><td><div id="scrollToBottom" style="display:block"></div></td></tr>
 	  </table>
 	   

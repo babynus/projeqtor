@@ -76,17 +76,15 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
   						 <?php echo i18n("limitDisplayActivityStream");?>&nbsp;:
   						</td>
   						<td align="left" style="margin-top:10px;padding-right:20px;">
-    						<select title="<?php echo i18n('limitDisplayActivityStream')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
-    						value="<?php echo $activityStreamNumberElement;?>" 
-                <?php echo autoOpenFilteringSelect();?> 
-                id="activityStreamNumberElement" name="activityStreamNumberElement" style="width:80px;margin-left:16px;height:20px;font-size:8pt;" onChange="refreshActivityStreamList();">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value= "100">100</option>
-                    <option value= "500">500</option>
-                    <option value= "1000">1000</option>
-    				    </select>
-    				  </td>
+    						<select title="<?php echo i18n('limitDisplayActivityStream')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect" required
+    						value="100" 
+                            <?php echo autoOpenFilteringSelect(); ?> 
+                            id="activityStreamNumberElement" name="activityStreamNumberElement" style="width:80px;margin-left:16px;height:20px;font-size:8pt;" onChange="refreshActivityStreamList();">
+                              <option value="10">10</option>
+                              <option value="50">50</option>
+                              <option value="100" >100</option>
+    				        </select>
+    				    </td>
 					   </tr>
 					</table>
 				</td>

@@ -40,6 +40,7 @@ if (RequestHandler::isCodeSet('activityStreamNumberElement')) {
 } else {
 	$activityStreamNumberElement=Parameter::getUserParameter("activityStreamNumberElement");
 }
+debugLog($activityStreamNumberElement);
 
 if (RequestHandler::isCodeSet('activityStreamAuthorFilter')) {
 	$paramAuthorFilter=RequestHandler::getId("activityStreamAuthorFilter");
@@ -107,22 +108,27 @@ if(strpos($paramProject, ",")){
 
 $note = new Note ();
 $critWhere="1=1";
+$where="1=1";
 if (trim($paramAuthorFilter)!="") {
 	$critWhere.=" and idUser=$paramAuthorFilter";
+	$where.="and idUser=$paramAuthorFilter";
 }
 
 if (trim($paramTeamFilter)!="") {
 	$team = new Resource();
 	$teamResource=$team->getDatabaseTableName();
 	$critWhere.=" and idUser in (select id from $teamResource where idTeam=$paramTeamFilter)";
+	$where.="and idUser in (select id from $teamResource where idTeam=$paramTeamFilter)";
 }
 
 if (trim($paramTypeNote)!="") {
   $critWhere.=" and refType='$typeNote'";
+  $where.=" and refType='$typeNote'";
 }
 
 if (trim($paramStreamIdNote)!="") {
   $critWhere.=" and refId=$paramStreamIdNote";
+  $where.=" and refId=$paramStreamIdNote";
 }
 
 if ($paramProject!='*') {
@@ -130,26 +136,45 @@ if ($paramProject!='*') {
 } else {
 	$critWhere.=" and (idProject is null or idProject in ".getVisibleProjectsList($paramProject).')';
 }
+$import=new Importable();
+$importTableName=$import->getDatabaseTableName();
 
 if ($activityStreamNumberDays!==""){
   if (Sql::isPgsql()) {
+    $refTypeWhere=($typeNote!='')?"":"AND refType IN (SELECT name FROM $importTableName)";
     if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {
       $critWhere.=" AND creationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day' ";
-      $critWhere.=" or updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+      $critWhere.=" OR updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND colName IS NULL $refTypeWhere))";
+      $where.=" AND operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day'";
     } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!=""){
-      $critWhere.=" and creationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+      $critWhere.=" AND creationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+      $where.=" AND (operation='insert' AND colName IS NULL $refTypeWhere) ";
+      $where.=" AND operationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
     } else if ($activityStreamUpdatedRecently=="updated"){
-      $critWhere.=" and updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+      $critWhere.=" AND updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+      $where.=" AND operation='update' AND colName='idStatus' and operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+    }else{
+      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND colName IS NULL $refTypeWhere))";
     }   
   } else {
-  if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {   
-    $critWhere.=" and ( creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-    $critWhere.=" or updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) )";
-  } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!=""){
-    $critWhere.=" and creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-  } else if ($activityStreamUpdatedRecently=="updated"){
-    $critWhere.=" and updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-  }
+    $refTypeWhere=($typeNote!='')?"":"and refType in (select name from $importTableName)";
+    if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {   
+      $critWhere.=" and ( creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+      $critWhere.=" or updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) )";
+      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and colName is null $refTypeWhere))";
+      $where.=" and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)";
+    } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!=""){
+      $critWhere.=" and creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+      $where.=" and (operation='insert' and colName is null $refTypeWhere)";
+      $where.=" and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    } else if ($activityStreamUpdatedRecently=="updated"){
+      $critWhere.=" and updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+      $where.=" and operation='update' and colName='idStatus' and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)  ";
+    }else{
+      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and colName is null $refTypeWhere))";
+    }
+    
   }
 }
 
@@ -160,15 +185,36 @@ if ($activityStreamShowClosed!='1') {
 $order = "COALESCE (updateDate,creationDate) ASC";
 $notes=$note->getSqlElementsFromCriteria(null,false,$critWhere,$order,null,null,$activityStreamNumberElement);
 
+$history= new History();
+$historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate ASC",null,null,$activityStreamNumberElement);
+if($activityStreamShowClosed =='1'){
+  $historyArchive=new HistoryArchive();
+  $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate ASC",null,null,$activityStreamNumberElement);
+  if(!empty($historyInfoArchive)){
+    foreach ($historyInfoArchive as$histArch){
+      foreach ($historyInfo as $hist){
+        if($histArch->operationDate<$hist->operationDate){
+          $historyInfoLst[]=$histArch;
+        }else{
+          $historyInfoLst[]=$hist;
+        }
+      }
+    }
+  }else{
+    $historyInfoLst=$historyInfo;
+  }
+}
+
 $countIdNote = count ( $notes );
-if ($countIdNote == 0) {
+$nbHistInfo= ($activityStreamShowClosed !='1')?count($historyInfo):count($historyInfoLst);
+if ($countIdNote == 0 and $nbHistInfo==0) {
   echo "<div style='padding:10px'>".i18n ( "noNoteToDisplay" )."</div>";
   exit ();
 }
 $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : false;
 ?>
 <div dojo-type="dijit.layout.BorderContainer" class="container" style="overflow-y:auto;">
-	<table id="objectStream" style="width: 100%;"> 
+	<table id="objectStream" style="width: 100%;font-size:100% !important;"> 
 	<?php
   	function sortNotes(&$listNotes, &$result, $parent){
   		foreach ($listNotes as $note){
@@ -189,8 +235,21 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
     }
   	
 	  foreach ($notes as $note) {
+        foreach ($historyInfo as $id=>$hist){
+          if($hist->operationDate < $note->creationDate){
+            echo activityStreamDisplayHist($hist,"activityStream");
+            unset($historyInfo[$id]);
+          }
+        }
       activityStreamDisplayNote($note,"activityStream");
-	  }?>
+	 }
+	  
+	  if(!empty($historyInfo)){
+	    foreach ($historyInfo as $id=>$hist){
+	      echo activityStreamDisplayHist($hist,"activityStream");
+	    }
+	  }
+	  ?>
 	</table>
 	<div id="scrollToBottom" type="hidden"></div>
 </div>
