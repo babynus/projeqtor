@@ -50,6 +50,8 @@ if($mode == 'edit'){
   $wu->entering = $WUIncoming;
   $wu->deliverable = $WULivrable;
   $wu->validityDate = $ValidityDateWU;
+  $catalog = new CatalogUO($idCatalog);
+  $wu->idProject = $catalog->idProject;
   $res = $wu->save();
   $complexity = new Complexity();
   $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
@@ -80,6 +82,11 @@ if($mode == 'edit'){
         }
      }
   }
+  $actPl = SqlElement::getSingleSqlElementFromCriteria('ActivityPlanningElement', array('idWorkUnit'=>$idWorkUnit));
+  debugLog($actPl);
+  if ($actPl->id){
+    $actPl->save();
+  }  
 }else{
   $wu = new WorkUnit();
   $wu->idCatalog = $idCatalog;
@@ -88,6 +95,8 @@ if($mode == 'edit'){
   $wu->entering = $WUIncoming;
   $wu->deliverable = $WULivrable;
   $wu->validityDate = $ValidityDateWU;
+  $catalog = new CatalogUO($idCatalog);
+  $wu->idProject = $catalog->idProject;
   $res = $wu->save();
   if($result == ""){
     $result = getLastOperationStatus($res);

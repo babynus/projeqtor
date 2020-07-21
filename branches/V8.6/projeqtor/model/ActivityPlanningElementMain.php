@@ -85,9 +85,11 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $_separator_sectionRevenue_marginTop;
   public $_tab_1_1_smallLabel_2 = array('', 'CA');
   public $revenue;
-  public $_tab_5_1_smallLabel_3 = array('', 'complexity', '', 'quantity', '','workUnits');
+  public $_tab_5_1_smallLabel_3 = array('', '', '', '', '','workUnits');
   public $idWorkUnit;
+  public $_label_complexity;
   public $idComplexity;
+  public $_label_quantity;
   public $quantity;
   public $_separator_menuReview_marginTop;
   public $_tab_5_2_smallLabel_3 = array('', '', '', '', '', 'progress','priority');
@@ -186,7 +188,10 @@ class ActivityPlanningElementMain extends PlanningElement {
   }
   
   public function setAttributes() {
-    
+    self::$_fieldsAttributes['idWorkUnit']='hidden';
+    self::$_fieldsAttributes['idComplexity']='hidden';
+    self::$_fieldsAttributes['quantity']='hidden';
+    self::$_fieldsAttributes['_label_complexity']='hidden';
     //if (Parameter::getGlobalParameter('PlanningActivity')=='YES') {
       $act=new Activity($this->refId,true);
       if ( ! $act->isPlanningActivity) {
@@ -288,13 +293,29 @@ class ActivityPlanningElementMain extends PlanningElement {
     $project = new Project($this->idProject);
     if(trim(Module::isModuleActive('moduleGestionCA')) == 1 and $project->ProjectPlanningElement->idRevenueMode == 2){
     	self::$_fieldsAttributes['revenue']='';
-    	self::$_fieldsAttributes['idWorkUnit']='';
-    	self::$_fieldsAttributes['idComplexity']='';
-    	self::$_fieldsAttributes['quantity']='';
-    	self::$_fieldsAttributes['idWorkUnit']='size1/3';
-    	self::$_fieldsAttributes['idComplexity']='size1/3';
+    	if($this->elementary){
+      	self::$_fieldsAttributes['idWorkUnit']='';
+      	if($this->idWorkUnit){
+      	  self::$_fieldsAttributes['quantity']='';
+      	}else{
+      	  self::$_fieldsAttributes['quantity']='readonly';
+      	}
+      	self::$_fieldsAttributes['_label_complexity']='';
+      	self::$_fieldsAttributes['idWorkUnit']='size1/3';
+      	if($this->idWorkUnit){
+      	  self::$_fieldsAttributes['idComplexity']='size1/3';
+      	}else{
+      	  self::$_fieldsAttributes['idComplexity']='readonly,size1/3';
+      	}
+      	if($this->idWorkUnit and $this->idComplexity and $this->quantity){
+      	  self::$_fieldsAttributes['validatedDuration']='readonly';
+      	  self::$_fieldsAttributes['revenue']='readonly';
+      	  self::$_fieldsAttributes['validatedWork']='readonly';
+      	}
+    	}
     }else{
     	unset($this->_separator_sectionRevenue_marginTop);
+    	unset($this->_tab_5_1_smallLabel_3);
     }
   }
   /** ==========================================================================
@@ -363,6 +384,43 @@ class ActivityPlanningElementMain extends PlanningElement {
         $this->minimumThreshold = Work::convertWork($this->minimumThreshold);
       }
     }
+    //gautier #workUnit
+    if($this->idWorkUnit and $this->idComplexity and $this->quantity){
+      $complexityVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$this->idWorkUnit,'idComplexity'=>$this->idComplexity));
+      $this->validatedWork = $complexityVal->charge*$this->quantity;
+      $this->revenue = $complexityVal->price*$this->quantity;
+      $this->validatedDuration = $complexityVal->duration*$this->quantity;
+      $workUnit = new WorkUnit($this->idWorkUnit);
+      if($workUnit->validityDate ){
+        $today = new DateTime("now");
+        $validityDate = new DateTime($workUnit->validityDate);
+        if($validityDate < $today){
+          $alert = new Alert();
+          $exist = $alert->countSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->refId,'idIndicatorValue'=>$workUnit->id,'idProject'=>$this->idProject));
+          if(!$exist){
+            $itemName=i18n('Activity');
+            $title=ucfirst(i18n('Alert')) .' - '. $itemName . ' #' . $this->refId;
+            $alert->title = $title;
+            $alert->idProject = $this->idProject;
+            $alert->alertType = 'ALERT';
+            $alert->refId = $this->refId;
+            $alert->refType = "Activity";
+            $alert->idIndicatorValue = $workUnit->id;
+            $alert->message = i18n('workUnitValidityDateIsPassed');
+            $alert->readFlag=0;
+            $alert->alertInitialDateTime=date('Y-m-d H:i:s');
+            $alert->alertDateTime=date('Y-m-d H:i');
+            $alert->idle=0;
+            $alert->save();
+          }
+        }
+      }
+      $CaReplaceValidCost= Parameter::getGlobalParameter('CaReplaceValidCost');
+      if($CaReplaceValidCost=='YES'){
+        $this->validatedCost = $complexityVal->price*$this->quantity;
+      }
+    }
+    //
     //florent
     if(($this->idPlanningMode=='23' and $old->idPlanningMode!='23')or($this->idPlanningMode!='23' and $old->idPlanningMode=='23') ){
       $pw= new PlannedWork();
@@ -389,7 +447,6 @@ class ActivityPlanningElementMain extends PlanningElement {
       }
        //$this->updateSynthesis($this->refType, $this->refId);
     }
-    //
     return parent::save();
   }
   
@@ -416,6 +473,10 @@ class ActivityPlanningElementMain extends PlanningElement {
         $result.='<br/>' . i18n('errorMandatoryValidatedDuration');
       }
    
+    }
+    if($this->idWorkUnit){
+      if(!$this->quantity)$result.='<br/>' . i18n('errorMandatoryQuantity');
+      if(!$this->idComplexity)$result.='<br/>' . i18n('errorMandatoryComplexity');
     }
     
     $old = $this->getOld();
@@ -503,6 +564,27 @@ class ActivityPlanningElementMain extends PlanningElement {
         $colScript .= '  formChanged();';
         $colScript .= '</script>';
       }
+    }else if ($colName=="idWorkUnit") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  var idComplexity=dijit.byId("ActivityPlanningElement_idComplexity").get("value");';
+      $colScript .= '  var idWorkUnit=dijit.byId("ActivityPlanningElement_idWorkUnit").get("value");';
+      $colScript .= '  if(idWorkUnit == " "){';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_idComplexity").set("value","");';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_quantity").set("value","");';
+      $colScript .= '   dojo.removeClass(dijit.byId("ActivityPlanningElement_idComplexity").domNode, "required");';
+      $colScript .= '   dojo.removeClass(dijit.byId("ActivityPlanningElement_quantity").domNode, "required");';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_idComplexity").set("readOnly",true);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_quantity").set("readOnly",true);';
+      $colScript .= '  }else{';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_idComplexity").set("value","");';
+      $colScript .= '   dojo.addClass(dijit.byId("ActivityPlanningElement_idComplexity").domNode, "required");';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_idComplexity").set("readOnly",false);';
+      $colScript .= '   dojo.addClass(dijit.byId("ActivityPlanningElement_quantity").domNode, "required");';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_quantity").set("readOnly",false);';
+      $colScript .= '   refreshListSpecific("idWorkUnit", "ActivityPlanningElement_idComplexity", "idWorkUnit",idWorkUnit);';
+      $colScript .= '  }';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
     }
     return $colScript;
   }
