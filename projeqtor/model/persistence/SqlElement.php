@@ -5914,39 +5914,8 @@ abstract class SqlElement {
     }
     // End of ADDITION BY papjul - Document Version details
     if (isset ( $this->_Note ) and is_array ( $this->_Note )) {
-      $msg .= $rowStart . $sectionStart . i18n ( 'sectionNote' ) . $sectionEnd . $rowEnd;
-      $note = new Note ();
-      $notes = $note->getSqlElementsFromCriteria ( array('refType' => get_class ( $this ), 'refId' => $this->id), false, null, 'id desc' );
-      foreach ( $notes as $note ) {
-        if ($note->idPrivacy == 1) {
-          $userId = $note->idUser;
-          $userName = SqlList::getNameFromId ( 'User', $userId );
-          $creationDate = $note->creationDate;
-          $updateDate = $note->updateDate;
-          if ($updateDate == null) {
-            $updateDate = '';
-          }
-          $msg .= $rowStart . $labelStart;
-          $msg .= $userName;
-          $msg .= '<br/>';
-          if ($updateDate) {
-            $msg .= '<i>' . htmlFormatDateTime ( $updateDate ) . '</i>';
-          } else {
-            $msg .= htmlFormatDateTime ( $creationDate );
-          }
-          $msg .= $labelEnd . $fieldStart;
-          // $msg.=htmlEncode($note->note,'print');
-          $text = new Html2Text ( $note->note );
-          $plainText = $text->getText ();
-          if (mb_strlen ( $plainText ) > 10000) { // Should not send too long email
-            $noteTruncated = nl2br ( mb_substr ( $plainText, 0, 10000 ) );
-            $msg .= $noteTruncated;
-          } else {
-            $msg .= $note->note;
-          }
-          $msg .= $fieldEnd . $rowEnd;
-        }
-      }
+      //florent 
+      $msg=$this->getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd);
     } 
     if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
       $msg .= $rowStart . $sectionStart . i18n ( 'sectionLink' ) . $sectionEnd . $rowEnd;
@@ -6219,6 +6188,44 @@ function getLinksHtmlTab() {
   return $html . '</table>';
 }
 
+//florent ticket 4790
+function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd){
+  $msg .= $rowStart . $sectionStart . i18n ( 'sectionNote' ) . $sectionEnd . $rowEnd;
+  $note = new Note ();
+  $notes = $note->getSqlElementsFromCriteria ( array('refType' => get_class ( $this ), 'refId' => $this->id), false, null, 'id desc' );
+  foreach ( $notes as $note ) {
+    if ($note->idPrivacy == 1) {
+      $userId = $note->idUser;
+      $userName = SqlList::getNameFromId ( 'User', $userId );
+      $creationDate = $note->creationDate;
+      $updateDate = $note->updateDate;
+      if ($updateDate == null) {
+        $updateDate = '';
+      }
+      $msg .= $rowStart . $labelStart;
+      $msg .= $userName;
+      $msg .= '<br/>';
+      if ($updateDate) {
+        $msg .= '<i>' . htmlFormatDateTime ( $updateDate ) . '</i>';
+      } else {
+        $msg .= htmlFormatDateTime ( $creationDate );
+      }
+      $msg .= $labelEnd . $fieldStart;
+      // $msg.=htmlEncode($note->note,'print');
+      $text = new Html2Text ( $note->note );
+      $plainText = $text->getText ();
+      if (mb_strlen ( $plainText ) > 10000) { // Should not send too long email
+        $noteTruncated = nl2br ( mb_substr ( $plainText, 0, 10000 ) );
+        $msg .= $noteTruncated;
+      } else {
+        $msg .= $note->note;
+      }
+      $msg .= $fieldEnd . $rowEnd;
+    }
+  }
+  return  $msg;
+}
+
 function getNotesHtmlTab() {
   $html = '';
   $note = new Note();
@@ -6334,7 +6341,21 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         return $this->getLinksHtmlTab();
       } else if ($property == 'NOTE') {
         return $this->getNotesHtmlTab();
-      } else if ($property == 'allAttachements') {
+      }else if($property == 'NOTESTD'){
+        //florent
+        $rowStart = '<tr>';
+        $rowEnd = '</tr>';
+        $labelStart = '<td style="background:#DDDDDD;font-weight:bold;text-align: right;width:25%;vertical-align: middle;">&nbsp;&nbsp;';
+        $labelEnd = '&nbsp;</td>';
+        $fieldStart = '<td style="width:2px;">&nbsp;</td><td style="background:#FFFFFF;text-align: left;">';
+        $fieldEnd = '</td>';
+        $sectionStart = '<td colspan="3" style="background:#555555;color: #FFFFFF; text-align: center;font-size:10pt;font-weight:bold;">';
+        $sectionEnd = '</td>';
+        $notes = '<table style="font-size:9pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
+        $notes =$this->getNotesClassicTab($notes, $rowStart, $rowEnd, $sectionStart, $sectionEnd, $labelStart, $labelEnd, $fieldStart, $fieldEnd);
+        $notes .='</table>';
+        return $notes;
+      }else if ($property == 'allAttachements') {
         return;
       } else if ($property == 'lastAttachement') {
       	return;

@@ -50,6 +50,7 @@ if($idItemMailable != null){
 	$newArrayFields['_HISTORY'] = i18n('mailableHistory');
 	$newArrayFields['_LINK'] = i18n('mailableLink');
 	$newArrayFields['_NOTE'] = i18n('mailableNote');
+	$newArrayFields['_NOTESTD'] = i18n('mailableNoteTd');
     $newArrayFields['_allAttachements'] = i18n('mailableAttachments');
     $newArrayFields['_lastAttachement'] = i18n('mailableLastAttachments');
 }else{
@@ -68,6 +69,7 @@ if($idItemMailable != null){
   $newArrayFields['_HISTORY'] = i18n('mailableHistory');
   $newArrayFields['_LINK'] = i18n('mailableLink');
   $newArrayFields['_NOTE'] = i18n('mailableNote');
+  $newArrayFields['_NOTESTD'] = i18n('mailableNoteTd');
   $newArrayFields['_allAttachements'] = i18n('mailableAttachments');
   $newArrayFields['_lastAttachement'] = i18n('mailableLastAttachments');
 }
