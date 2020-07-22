@@ -102,9 +102,21 @@ class CatalogUOMain extends SqlElement {
     return $result;
   }
   
-
-  public function delete() {
-    $result=parent::delete();
+  public function deleteControl() {
+    $result="";
+    $workUnit = new WorkUnit();
+    $lstWOrkUnit = $workUnit->getSqlElementsFromCriteria(array('idCatalog'=>$this->id));
+    foreach ($lstWOrkUnit as $wu){
+      $actPl = new ActivityPlanningElement();
+      $isUsed = $actPl->countSqlElementsFromCriteria(array('idWorkUnit'=>$wu->id));
+      if ($isUsed){
+        $result .= '<br/>' . i18n ( 'workUnitIsUseByActivity' );
+      }
+    }
+    if ($result=="") {
+      $result .= parent::deleteControl();
+    }
+    return $result;
   }
   
   public function copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
