@@ -40,7 +40,6 @@ if (RequestHandler::isCodeSet('activityStreamNumberElement')) {
 } else {
 	$activityStreamNumberElement=Parameter::getUserParameter("activityStreamNumberElement");
 }
-debugLog($activityStreamNumberElement);
 
 if (RequestHandler::isCodeSet('activityStreamAuthorFilter')) {
 	$paramAuthorFilter=RequestHandler::getId("activityStreamAuthorFilter");
@@ -121,9 +120,13 @@ if (trim($paramTeamFilter)!="") {
 	$where.="and idUser in (select id from $teamResource where idTeam=$paramTeamFilter)";
 }
 
+$import=new Importable();
+$importTableName=$import->getDatabaseTableName();
 if (trim($paramTypeNote)!="") {
   $critWhere.=" and refType='$typeNote'";
   $where.=" and refType='$typeNote'";
+}else{
+  $where="and refType in (select name from $importTableName)";
 }
 
 if (trim($paramStreamIdNote)!="") {
@@ -136,43 +139,40 @@ if ($paramProject!='*') {
 } else {
 	$critWhere.=" and (idProject is null or idProject in ".getVisibleProjectsList($paramProject).')';
 }
-$import=new Importable();
-$importTableName=$import->getDatabaseTableName();
+
 
 if ($activityStreamNumberDays!==""){
   if (Sql::isPgsql()) {
-    $refTypeWhere=($typeNote!='')?"":"AND refType IN (SELECT name FROM $importTableName)";
     if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {
       $critWhere.=" AND creationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day' ";
       $critWhere.=" OR updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND colName IS NULL $refTypeWhere))";
+      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND colName IS NULL) OR (operation='delete'))";
       $where.=" AND operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day'";
     } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!=""){
       $critWhere.=" AND creationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-      $where.=" AND (operation='insert' AND colName IS NULL $refTypeWhere) ";
+      $where.=" AND (operation='insert' AND colName IS NULL ) ";
       $where.=" AND operationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
     } else if ($activityStreamUpdatedRecently=="updated"){
       $critWhere.=" AND updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-      $where.=" AND operation='update' AND colName='idStatus' and operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+      $where.=" AND ((operation='update' AND colName='idStatus') OR (operation='delete')) and operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
     }else{
-      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND colName IS NULL $refTypeWhere))";
+      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND colName IS NULL ) OR (operation='delete') )";
     }   
   } else {
-    $refTypeWhere=($typeNote!='')?"":"and refType in (select name from $importTableName)";
     if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {   
       $critWhere.=" and ( creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
       $critWhere.=" or updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) )";
-      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and colName is null $refTypeWhere))";
+      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and colName is null ) or (operation='delete'))";
       $where.=" and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)";
     } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!=""){
       $critWhere.=" and creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-      $where.=" and (operation='insert' and colName is null $refTypeWhere)";
+      $where.=" and (operation='insert' and colName is null )";
       $where.=" and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
     } else if ($activityStreamUpdatedRecently=="updated"){
       $critWhere.=" and updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-      $where.=" and operation='update' and colName='idStatus' and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)  ";
+      $where.=" and ((operation='update' and colName='idStatus') or (operation='delete')) and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)  ";
     }else{
-      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and colName is null $refTypeWhere))";
+      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and colName is null ) or (operation='delete'))";
     }
     
   }
