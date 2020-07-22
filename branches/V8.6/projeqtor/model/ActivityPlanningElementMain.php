@@ -311,6 +311,10 @@ class ActivityPlanningElementMain extends PlanningElement {
       	  self::$_fieldsAttributes['validatedDuration']='readonly';
       	  self::$_fieldsAttributes['revenue']='readonly';
       	  self::$_fieldsAttributes['validatedWork']='readonly';
+      	  $CaReplaceValidCost= Parameter::getGlobalParameter('CaReplaceValidCost');
+      	  if($CaReplaceValidCost=='YES'){
+      	    self::$_fieldsAttributes['validatedCost']='readonly';
+      	  }
       	}
     	}
     }else{
@@ -388,6 +392,22 @@ class ActivityPlanningElementMain extends PlanningElement {
     if($this->idWorkUnit and $this->idComplexity and $this->quantity){
       $complexityVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$this->idWorkUnit,'idComplexity'=>$this->idComplexity));
       $this->validatedWork = $complexityVal->charge*$this->quantity;
+      $ass = new Assignment();
+      $lstAss = $ass->getSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->refId,'idle'=>'0'));
+      $totalValidatedWork = 0;
+      foreach ($lstAss as $asVal){
+        $totalValidatedWork += $asVal->assignedWork;
+      }
+      if($totalValidatedWork < $this->validatedWork and $totalValidatedWork>0){
+        $factor = $this->validatedWork / $totalValidatedWork;
+        foreach ($lstAss as $asVal){
+          $newLeftWork = ($asVal->assignedWork*$factor) - ($asVal->assignedWork) ;
+          $asVal->assignedWork = $asVal->assignedWork*$factor;
+          $asVal->leftWork = $asVal->leftWork+$newLeftWork;
+          if($asVal->leftWork < 0)$asVal->leftWork=0;
+          $asVal->save();
+        }
+      } 
       $this->revenue = $complexityVal->price*$this->quantity;
       $this->validatedDuration = $complexityVal->duration*$this->quantity;
       $workUnit = new WorkUnit($this->idWorkUnit);
