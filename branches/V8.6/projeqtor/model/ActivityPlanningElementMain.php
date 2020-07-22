@@ -398,7 +398,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       foreach ($lstAss as $asVal){
         $totalValidatedWork += $asVal->assignedWork;
       }
-      if($totalValidatedWork < $this->validatedWork and $totalValidatedWork>0){
+      if($totalValidatedWork < $this->validatedWork and $totalValidatedWork>0 and ( $old->quantity != $this->quantity or $old->idComplexity != $this->idComplexity) ){
         $factor = $this->validatedWork / $totalValidatedWork;
         foreach ($lstAss as $asVal){
           $newLeftWork = ($asVal->assignedWork*$factor) - ($asVal->assignedWork) ;
