@@ -5424,9 +5424,10 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
   // END dFayolle ticket 366 and 367
   if (!$print) {
     echo '<td class="linkHeader" style="width:5%">';
-    if ($obj->id!=null and !$print and $canUpdate) {
-      $critStatus = array('id' => $obj->idStatus);
-      $actualStatus = SqlElement::getSingleSqlElementFromCriteria ( 'status', $critStatus);
+    if ($obj->id!=null and !$print and $canUpdate and $obj->idStatus) {
+      //$critStatus = array('id' => $obj->idStatus);
+      //$actualStatus = SqlElement::getSingleSqlElementFromCriteria ( 'status', $critStatus);
+      $actualStatus=new Status($obj->idStatus);
       if ( ( (get_class($obj)!='ComponentVersion' && get_class($obj)!='ProductVersion') || $actualStatus->setIntoserviceStatus!=1) || ($way!='composition')) {
         echo '<a onClick="addProductVersionStructure(\''.$way.'\');" title="'.i18n('addProductVersionStructure').'" > '.formatSmallButton('Add').'</a>';
         if ($way=='composition' and count($list)>0) {
