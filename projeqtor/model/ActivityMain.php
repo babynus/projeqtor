@@ -350,6 +350,13 @@ class ActivityMain extends SqlElement {
       }
     }
     
+    if($this->idActivity){
+      $parentAct = new Activity($this->idActivity);
+      if($parentAct->ActivityPlanningElement->idWorkUnit and $parentAct->ActivityPlanningElement->idComplexity and $parentAct->ActivityPlanningElement->quantity){
+        $result .= '<br/>' . i18n ( 'cantHaveParentWithWorkUnit' );
+      }
+    }
+    
 // MTY - LEAVE SYSTEM
     if (isLeavesSystemActiv()) {
         // Can't create or associate an activity on the project that is dedicated to the leave
@@ -566,7 +573,6 @@ class ActivityMain extends SqlElement {
         }
       }
     }
-    
     if($this->fixPlanning and !$this->ActivityPlanningElement->fixPlanning)$this->ActivityPlanningElement->fixPlanning=1;
     if(!$this->fixPlanning and $this->ActivityPlanningElement->fixPlanning)$this->fixPlanning=1;
     
