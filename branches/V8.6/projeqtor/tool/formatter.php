@@ -660,7 +660,6 @@ function activityStreamDisplayHist ($hist,$origin){
   if ( securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
     $gotoAndStyle='style="color:blue;cursor:pointer;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
   }
-  debugLog($operation);
   $elementName = '<span '.$gotoAndStyle.'>'.$objectClass.'&nbsp;#'.$objectId.'</span>';
   if($operation=='update' and $change=='idStatus'){
     $newStatus=new Status($newVal);
