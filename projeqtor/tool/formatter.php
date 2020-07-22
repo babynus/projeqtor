@@ -660,6 +660,7 @@ function activityStreamDisplayHist ($hist,$origin){
   if ( securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
     $gotoAndStyle='style="color:blue;cursor:pointer;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
   }
+  debugLog($operation);
   $elementName = '<span '.$gotoAndStyle.'>'.$objectClass.'&nbsp;#'.$objectId.'</span>';
   if($operation=='update' and $change=='idStatus'){
     $newStatus=new Status($newVal);
@@ -670,6 +671,8 @@ function activityStreamDisplayHist ($hist,$origin){
     if($origin=='activityStream')$reftText=$elementName.':&nbsp;';    
   }else if($operation=='insert'){
     $text=i18n('createdElementStream').'&nbsp;'.$elementName;
+  }else if($operation=='delete'){
+    $text=i18n('deletedElementStream').'&nbsp;'.$elementName;
   }
   if($origin=='objectStream'){
     echo '<tr style="height:100%;">';
@@ -691,7 +694,7 @@ function activityStreamDisplayHist ($hist,$origin){
     echo        formatUserThumb($hist->idUser, $userName, 'Creator',32,'left');
     echo '      <div style="margin-top:2px;margin-left:45px;">'.$reftText.''.$userNameFormatted.'&nbsp'.$text.'</div>';
     echo '      <div style="margin-top:3px;margin-left:45px;">'.formatDateThumb($date,null,"left").'</div>';
-    echo '      <div style="margin-top:8px;margin-left:45px;">'.htmlFormatDateTime($date,true).'</div>';
+    echo '      <div style="margin-top:8px;margin-left:45px;">&nbsp;'.htmlFormatDateTime($date,true).'</div>';
     echo'     <div>';
     echo '  </td>';
     echo '</tr>';

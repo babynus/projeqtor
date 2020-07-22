@@ -1,4 +1,5 @@
 <?php
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -1411,6 +1412,9 @@ function htmlFormatDate($val,$trunc=false) {
  */
 function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false) {
   global $browserLocale;
+  $today=false;
+  $classicFormatDateDate=true;
+  $classicFormatDateHour=false;
   $locale=substr($browserLocale, 0,2);
   if (strlen($val)!=19 and strlen($val)!=16) {
     if (strlen($val)=="10") {
@@ -1419,13 +1423,56 @@ function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false) {
       return $val;
     }
   }
-  $result=htmlFormatDate(substr($val,0,10));
+  $yesterday=date('Y-m-d', strtotime(date("Y-m-d"). ' - 1 days'));
+  $hourDiff=date_diff(date_create($val),date_create(date("Y-m-d H:i:s")));
+  switch (substr($val,0,10)){
+  	case date("Y-m-d"):
+  	  $today=true;
+  	  $classicFormatDate=false;
+  	  $result=i18n("today").'&nbsp;';
+  	  break;
+  	case $yesterday:
+  	  $classicFormatDate=false;
+  	  $result=i18n("yesterday").'&nbsp;';
+  	  break;
+  	default :
+  	  $result=htmlFormatDate(substr($val,0,10)).'&nbsp;';
+  	  break;
+  }
   if (! $hideZeroTime or substr($val,11,5)!='00:00') {
-    $result.= " " . (($withSecond)?substr($val,11):substr($val,11,5));
+    if($today){
+      switch ($hourDiff){
+        case ($hourDiff->h=='0' and $hourDiff->i<='1'):
+          $result=i18n("justNow");
+          break;
+        case ($hourDiff->h=='0' and $hourDiff->i<='5'):
+          $result=i18n("lastFiveMinutes");
+          break;
+        case ($hourDiff->h=='0' and $hourDiff->i<='15'):
+          $result=i18n("lastQuarterHour");
+          break;
+        case ($hourDiff->h=='0' and $hourDiff->i<='30'):
+          $result=i18n("lastHalfHour");
+          break;
+        case ($hourDiff->h<='1' and $hourDiff->i>'30'):
+          $result=i18n("lastHour");
+          break;
+        default :
+          $classicFormatDateHour=true;
+      	  $result.=(($withSecond)?substr($val,11):substr($val,11,5));
+      	  break;
+      }
+    }else{
+      $classicFormatDateHour=true;
+      $result.=($withSecond)?substr($val,11):substr($val,11,5);
+    }
   }
-  if(getSessionValue('browserLocaleTimeFormat')=='h:mm a'){
-    $result = htmlFormatDate(substr($val,0,10)) .' '. date('g:i A',strtotime($val));
+  if(getSessionValue('browserLocaleTimeFormat')=='h:mm a' and $classicFormatDate){
+    $result = htmlFormatDate(substr($val,0,10)) .'&nbsp;'. date('g:i A',strtotime($val));
+  }else if(getSessionValue('browserLocaleTimeFormat')=='h:mm a' and $classicFormatHours){
+    $result .=date('g:i A',strtotime($val));
   }
+  
   return $result;
 }
 //gautier #time
