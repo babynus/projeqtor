@@ -6152,15 +6152,9 @@ function directUnselectProject() {
   hideWait();
 }
 
-//Absence list refresh function
 function refreshPlannedWorkManualList() {
-  if (checkFormChangeInProgress()) {
-      showAlert(i18n('alertOngoingChange'));
-      return false;
-    }
     formInitialize();
     loadContent('../view/refreshPlannedWorkManualList.php', 'fullPlannedWorkManualList', 'listFormPlannedWorkManual', false);
-    return true;
 }
 
 function refreshConsultationPlannedWorkManualList() {
