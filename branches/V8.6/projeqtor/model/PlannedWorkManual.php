@@ -253,7 +253,6 @@ class PlannedWorkManual extends GeneralWork {
       $crit.=" and ( (refType='$refType' and refId=$refId) or refType is null)";
     }
     $adminProject=Project::getAdminitrativeProjectList(true,true);
-    debugLog($adminProject);
     $w=new Work();
     $wList=$w->sumSqlElementsFromCriteria('work', null, $critWork." and manual=0", 'workDate, idProject');
     $realWork=array();
@@ -268,7 +267,6 @@ class PlannedWorkManual extends GeneralWork {
         else $realWork[$sum['workdate']]=$sum['sumwork'];
       }
     }
-    //$realWork=
     $pwm=new PlannedWorkManual();
     $lstPwm=$pwm->getSqlElementsFromCriteria(null,null,$crit);
     $exist=array();
@@ -307,7 +305,6 @@ class PlannedWorkManual extends GeneralWork {
       if ($manageCapacity=='DURATION') $halfDayDuration=$capacity/2;
       $real=(isset($realWork[$date]))?$realWork[$date]:0;
       $realAdmin=(isset($realWorkAdmin[$date]))?$realWorkAdmin[$date]:0;
-      debugLog("$date - real=$real - realAdmin=$realAdmin");
       if (($capacity-$real)<$halfDayDuration) $locked='ALL';
       if (isset($exist[$date])) {
         foreach (array('AM','PM') as $period) {
@@ -589,6 +586,7 @@ class PlannedWorkManual extends GeneralWork {
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >'.$pe->refName.'</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="text-align:center;margin:0;padding;0;width:'.$idWidth.'px">';
       if(!$readonly and !$readonlyHabil){
+        if($valueFte==0)$valueFte=null;
         echo '<img  id="idImageInterventionActivitySelector'.$pe->refId.'" src="../view/img/savedOk.png"
                     style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
         echo '<div dojoType="dijit.form.NumberTextBox" id="interventionActivitySelector'.$pe->refId.'" name="interventionActivitySelector'.$pe->refId.'"
