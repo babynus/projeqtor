@@ -324,7 +324,6 @@ class BillLine extends SqlElement {
             }
             $lstIdPool=implode(',', $lstIdPool);
       		$ass=new Assignment();
-      		debugLog($act->id);
       		$whereAss="refType='Activity'and refId=$act->id and idProject=$act->idProject and idResource in ($lstIdPool)";
       		$assList=$ass->getSqlElementsFromCriteria(null,null,$whereAss);
       		if(!empty($assList)){
