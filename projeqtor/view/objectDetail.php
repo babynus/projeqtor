@@ -6231,7 +6231,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         }
         echo '</td>';
       }
-    }elseif(!$print and !$canUpdate and $workVisible and !$assignment->idle and !$assignment->supportedAssignment){
+    }elseif(!$print and !$canUpdate and $workVisible and !$assignment->idle and !$assignment->supportedAssignment and $canSeeDirectAcces){
       echo '<td class="assignData'.$idleClass.'" style="width:10%;text-align:center;white-space:nowrap;vertical-align:middle">';
         //gautier #directAcces
         $listUser=getListForSpecificRights('Imputation');
