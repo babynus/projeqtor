@@ -10603,7 +10603,7 @@ function getLocalLocation(){
   return locale;
 }
 function getLocalScaytAutoStartup() {
-  if (typeof scaytAutoStartup == "undefined" || scaytAutoStartup===null || scaytAutoStartup==='') {
+  if (typeof scaytAutoStartup == "undefined" || scaytAutoStartup===null || scaytAutoStartup==='' || scaytAutoStartup=='YES' || scaytAutoStartup===true) {
     return true;
   } else {
     return scaytAutoStartup;
