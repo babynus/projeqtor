@@ -1592,7 +1592,7 @@ function finalizeMessageDisplay(destination, validationType) {
         var lastSaveClass = dojo.byId('objectClass');
         if (lastSaveClass && lastSaveId) {
           waitingForReply = false;
-          gotoElement(lastSaveClass.value, lastSaveId.value, null, true);
+          gotoElement(lastSaveClass.value, lastSaveId.value, null, true, true);
           waitingForReply = true;
         }
       } else if (validationType == 'admin') {
@@ -3657,7 +3657,7 @@ function openInNewWindow(eltClass, eltId) {
   var params=(key=='shift' && ! dojo.isChrome)?"scrollbars=yes":null;
   window.open(url,'_blank',params).focus;
 }
-function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
+function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target, mustReplan) {
 if (noHistory==undefined) noHistory=false;
 if (forceListRefresh==undefined) forceListRefresh=false;
 if (target==undefined) target='object';
@@ -3697,7 +3697,8 @@ if (target==undefined) target='object';
       return;
     }
     if (forceListRefresh) {
-      refreshGrid(true);
+      if (mustReplan==null || mustReplan=='undefined') mustReplan=false;
+      refreshGrid(mustReplan);
     }
     dojo.byId('objectClass').value = eltClass;
     dojo.byId('objectId').value = eltId;
