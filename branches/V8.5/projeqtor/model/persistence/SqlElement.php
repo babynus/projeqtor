@@ -2152,13 +2152,13 @@ abstract class SqlElement {
           $pm=null;
           if (get_class($this)==$newClass and $newClass != 'Project') {
             $pm = $this->$col_name->$plMode;
-          }else {    
+          }else if ($newClass != 'Project') {    
             $t=new $typeClass($newType);
             if (property_exists($t, $plMode)) {
               $pm=$t->$plMode;
             } else {
               $lst=SqlList::getList(substr($plMode,2));
-              if (count($lst>0)) {
+              if (count($lst)>0) {
                 foreach ($lst as $id->$val) {
                   $pm=$id;
                   break;
