@@ -160,12 +160,36 @@ The message will be displayed in a color depending on the message type.
 Legal notice
 ------------
 
-You can define a "legal" message that will be displayed when you log in from the home screen
+The General Data Protection Regulation (GDPR) governs the processing of personal data in the territory of the European Union.
+
+Above all, this involves informing people about what you do with their data and respecting their rights. As a data controller, or as a processor, you must take measures to ensure that this data is used that respects the privacy of the persons concerned.
+
+You can define a "legal" message that will be displayed when you log in from the home screen.
 
 .. figure:: /images/GUI/TOOLS_SCR_MessageLegal.png
    :alt: Display of the legal message
 
-You must click on the button I agree that the message disappears
+For this message to disappear, it must be scrolled to the read confirmation button.
+
+This allows you to have a real-time follow-up of the users who have confirmed the reading of this message.
+
+
+.. note::
+
+   What is the GDPR?
+
+   The abbreviation GDPR stands for "General Data Protection Regulation" (GDPR). The GDPR governs the processing of personal data in the territory of the European Union.
+   
+   The legal context adapts to follow developments in technologies and in our societies (increased use of digital technology, development of online commerce, etc.).
+   
+   This new European regulation is a continuation of the French Data Protection Act of 1978 and strengthens the control by citizens of the use that may be made of data concerning them.
+   
+   It harmonizes the rules in Europe by offering a unique legal framework to professionals. It helps to develop their digital activities in the EU based on the trust of users.
+
+   Visit the CNIL web site :ref:`here <https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on/>`_
+
+
+
 
 .. raw:: latex
 
@@ -198,7 +222,7 @@ Imports data from CSV or XLSX files.
    * The password field must be cut and pasted from the database because it is encrypted.
    * If you enter some readable password, the users will not be able to connect.
 
-.. attention:: 
+.. warning:: 
 
    * If you want to create new users **don't put any id** because if id already exists, it will be overridden by the new (with possibility to erase admin user…).
    * Always keep in mind that your import may have some impact on administrator user.
