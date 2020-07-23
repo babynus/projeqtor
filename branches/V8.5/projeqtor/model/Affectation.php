@@ -402,7 +402,7 @@ public $_noCopy;
       }
     }
     
-    if (!Project::$_deleteProjectInProgress and !$this->idResourceTeam) {
+    if (!Project::$_deleteProjectInProgress and !$this->idResourceTeam and $this->idResource) {
       //gautier #4495
       $proj = new Project($this->idProject,true);
       $topProject = $proj->getTopProjectList(true);
