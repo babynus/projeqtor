@@ -810,8 +810,8 @@ function selectInterventionActivity(refType,refId,peId) {
 function saveInterventionCapacity(refType,refId,month,id) {
   var value=dijit.byId("interventionActivitySelector"+refId).get("value");
   if(isNaN(value) || value==null){
-    value=0;
-    dijit.byId("interventionActivitySelector"+refId).set("value",0);
+    value = 'noVal';
+    dijit.byId("interventionActivitySelector"+refId).set("value"," ");
   }
   var url = '../tool/saveInterventionCapacity.php?refType='+refType +'&refId='+refId +'&month='+month+'&value='+value;
   dojo.xhrPut({

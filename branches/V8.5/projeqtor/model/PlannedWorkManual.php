@@ -569,6 +569,7 @@ class PlannedWorkManual extends GeneralWork {
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >'.$pe->refName.'</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="text-align:center;margin:0;padding;0;width:'.$idWidth.'px">';
       if(!$readonly and !$readonlyHabil){
+        if($valueFte==0)$valueFte=null;
         echo '<img  id="idImageInterventionActivitySelector'.$pe->refId.'" src="../view/img/savedOk.png"
                     style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
         echo '<div dojoType="dijit.form.NumberTextBox" id="interventionActivitySelector'.$pe->refId.'" name="interventionActivitySelector'.$pe->refId.'"
