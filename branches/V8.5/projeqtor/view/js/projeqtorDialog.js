@@ -11389,7 +11389,7 @@ function controlChar (){
   var min =new RegExp([ "^(?=.*[a-z])"]);
   var maj =new RegExp([ "^(?=.*[A-Z])"]);
   var num=new RegExp(["^(?=.*[0-9])"]);
-  var char=new RegExp("(?=.*[!@#\$%\^&\*])");
+  var char=new RegExp("(?=.*[!@#\$%\^&\*\\/\~])");
   var progress=dojo.byId('progress');
   var value=0;
   var curpwd=dojo.byId('dojox_form__NewPWBox_0').value;
