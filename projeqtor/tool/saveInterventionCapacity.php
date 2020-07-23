@@ -38,6 +38,7 @@ if(strlen($month)==1){
   $month = '0'.$month;
 }
 $value= RequestHandler::getValue('value');
+if($value=='noVal')$value = null;
 $interventionCap = SqlElement::getSingleSqlElementFromCriteria('InterventionCapacity', array('refType'=>$refType,'refId'=>$refId,'month'=>$month)); 
 if(! $interventionCap->id) {
   $interventionCap = new InterventionCapacity();
