@@ -487,6 +487,9 @@ function queryToDo($from,$nextFrom,$type,$isStatus){
     if ($crit['sql']['operator']!='SORT') { // Sorting already applied above
       $split=explode('_', $crit['sql']['attribute']);
       $critSqlValue=$crit['sql']['value'];
+      if (array_key_exists('isDynamic', $crit) and $crit['isDynamic']=='1' and ($crit['sql']['operator']=='IN' or $crit['sql']['operator']=='NOT IN')) {
+        if ($crit['sql']['value']==0) continue;
+      }
       if (substr($crit['sql']['attribute'], -4, 4) == 'Work') {
         if ($typeKanbanC=='Ticket') {
           $critSqlValue=Work::convertImputation(trim($critSqlValue,"'"));
