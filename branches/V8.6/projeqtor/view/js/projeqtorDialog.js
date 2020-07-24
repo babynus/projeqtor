@@ -5181,7 +5181,7 @@ function saveComplexity(id,idZone) {
     form : 'objectForm',
     handleAs : "text",
     load : function(data) {
-      loadContent("objectDetail.php", "detailDiv", 'listForm');
+      loadContent("objectDetail.php?refreshComplexitiesValues=true", "CatalogUO_unitOfWork", 'listForm');
     }
   });
   
