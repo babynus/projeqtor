@@ -45,7 +45,7 @@ class CatalogUOMain extends SqlElement {
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
-    <th field="idProject" width="20%">${idProject}</th>
+    <th field="nameProject" width="20%">${idProject}</th>
     <th field="name" width="40%">${name}</th>
     <th field="nomemclature" width="30%">${nomemclature}</th>
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
