@@ -73,7 +73,7 @@ if($mode == 'edit'){
           $compValue->idWorkUnit = $wu->id;
           $compValue->charge = Work::convertWork($charge);
           $compValue->price = $price;
-          $compValue->duration = Work::convertWork($duration);
+          $compValue->duration = $duration;
           $compValue->save();
        }else{
          $compValue = new ComplexityValues($compVal->id);

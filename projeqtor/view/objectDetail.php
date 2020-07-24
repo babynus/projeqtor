@@ -7113,7 +7113,7 @@ function drawWorkUnits($obj,$listWorkUnit,$listComplexity,$refresh=false) {
         $duration = ($compValu->duration)?Work::displayWorkWithUnit($compValu->duration):'';
         echo '    <table style="width:100%;height:100%;text-align:right;" ><tr>
                     <td style="width:33%;border-right:1px solid #AAAAAA;padding-right:5px;">'.Work::displayWorkWithUnit($compValu->charge).'</td>
-                    <td style="width:33%;border-right:1px solid #AAAAAA;">'.$price.'</td>
+                    <td style="width:33%;border-right:1px solid #AAAAAA; padding-right:5px;">'.$price.'</td>
                     <td style="width:33%;padding-right:5px;">'.$duration.'</td>
                     </tr></table>';
       }
