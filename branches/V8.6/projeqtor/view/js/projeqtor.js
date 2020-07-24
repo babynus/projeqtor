@@ -4325,17 +4325,10 @@ function updateComplexities(number,idCatalog){
     load : function(data) {
     }
   });
-  var callBack = function(){
-    var i;
-    for (i = 1; i < 11; i++) {
-      if(i <= number){
-        dojo.byId('trComplexity'+i).style.display = 'table-row';
-      }else{
-        dojo.byId('trComplexity'+i).style.display = 'none';
-      }
-    }
-  };
-  loadContent("objectDetail.php", "detailDiv", 'listForm',null,null,null,null,callBack);
+  var numberComplexities = dijit.byId("numberComplexities").get("value");
+  if(numberComplexities > 0 && numberComplexities < 10 ){
+    loadContent("objectDetail.php?refreshComplexities=true&nb="+numberComplexities, "drawComplexity", 'listForm');
+  }
 }
 
 function updateFinancialTotal(mode, col) {

@@ -158,6 +158,21 @@ if ($noselect) {
     $objClass='ResourceTeam';
     $obj=new ResourceTeam($objId);
   }
+  if (array_key_exists('refreshComplexities', $_REQUEST)) {
+      $nbComplexities = RequestHandler::getValue('nb');
+      $complexity = new Complexity();
+      $list = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$obj->id));
+      drawComplexities($nbComplexities,$obj,$list,true);
+      exit();
+  }
+  if (array_key_exists('refreshComplexitiesValues', $_REQUEST)) {
+        $workUnit = new WorkUnit();
+        $listWorkUnit = $workUnit->getSqlElementsFromCriteria(array('idCatalog'=>$obj->id));
+        $complexity = new Complexity();
+        $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$obj->id));
+        drawWorkUnits($obj,$listWorkUnit,$listComplexity,true);
+        exit();
+  }
   if (array_key_exists('refreshNotes', $_REQUEST)) {
     $nbColMax=1;
     drawNotesFromObject($obj, true);
@@ -7021,14 +7036,12 @@ function drawAffectationsResourceTeamFromObject($list, $obj, $type, $refresh=fal
   echo '</table>';
 }
 //gautier #Work Unit
-function drawComplexities($nbComplexities,$obj,$list) {
+function drawComplexities($nbComplexities,$obj,$list,$refresh=false) {
   $tabComplexities = array();
   foreach ($list as $val){
     $tabComplexities[]=$val->name;
   }
   $nbComplexity = count($tabComplexities);
-  echo'<tr>';
-  echo ' <td><label></label></td><td>';
   echo '<table style="width:33%">';
   echo '  <tr>';
   echo '    <td class="assignHeader" style="width:15%">'.i18n('complexities').'</td>';
@@ -7040,7 +7053,6 @@ function drawComplexities($nbComplexities,$obj,$list) {
       $value = $tabComplexities[$i-1];
     }
     if($i>$nbComplexities)$visible= "style='display:none'";
-      
     echo '  <tr '.$visible.' id="trComplexity'.$i.'">';
     echo '    <td>';
     echo '      <input dojoType="dijit.form.TextBox"  type="text" id="complexity'.$i.'" name="complexity'.$i.'"  class="input" style="width:100%;" value="'.$value.'" onchange="saveComplexity('.$obj->id.','.$i.');" />';
@@ -7048,10 +7060,9 @@ function drawComplexities($nbComplexities,$obj,$list) {
     echo '  </tr>';
   }
   echo '</table>';
-  echo'</td></tr>';
 }
 
-function drawWorkUnits($obj,$listWorkUnit,$listComplexity) {
+function drawWorkUnits($obj,$listWorkUnit,$listComplexity,$refresh=false) {
   global $cr, $print, $user, $browserLocale, $comboDetail;
   $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete', $obj)=="YES";
   $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";

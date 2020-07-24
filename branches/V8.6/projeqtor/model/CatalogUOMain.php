@@ -78,6 +78,13 @@ class CatalogUOMain extends SqlElement {
     parent::__destruct();
   }
 
+//   public function save() {
+//     //$oldBill = $this->getOld();
+    
+//     $result=parent::save();
+//     return $result;
+//   }
+  
   public function control(){
     $result="";
     $defaultControl=parent::control();
@@ -193,6 +200,9 @@ class CatalogUOMain extends SqlElement {
     $result = "";
     if($item == "complexities"){
       if($this->id){
+        echo'<tr>';
+        echo ' <td><label></label></td><td>';
+        echo '<div id="drawComplexity" dojotype="dijit.layout.ContentPane" widgetid="drawComplexity">';
         $nbComplexities = $this->numberComplexities;
         if(!$nbComplexities){
           $nbComplexities = Parameter::getGlobalParameter('ComplexitiesNumber');
@@ -200,6 +210,8 @@ class CatalogUOMain extends SqlElement {
         $complexity = new Complexity();
         $list = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$this->id));
         drawComplexities($nbComplexities,$this,$list);
+        echo '</div>';
+        echo'</td></tr>';
       }
     }elseif($item== "unitOfWork"){
       if($this->id){
