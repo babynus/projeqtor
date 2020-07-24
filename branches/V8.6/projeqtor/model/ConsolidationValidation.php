@@ -65,6 +65,7 @@ class ConsolidationValidation extends SqlElement{
 	static function drawProjectConsolidationValidation($idProject,$idProjectType,$idOrganization,$year,$month){
 	  $lockedProjects=array();
 	  $levels=array();
+	  $canChangeValidation=true;
 	  $month=(strlen($month)==1)?'0'.$month:$month;
 	  $cons= new ConsolidationValidation();
 	  $idProject=($idProject=='')?0:$idProject;
@@ -113,7 +114,6 @@ class ConsolidationValidation extends SqlElement{
 	      $param='lockedImputation';
 	  
       $habLockedImputation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'lockedImputation'));
-      debugLog($habLockedImputation);
       if($habLockedImputation->rightAccess=='1'){
         $canLockString=array();
         foreach ($canLock as $projToLocked){
@@ -157,17 +157,17 @@ class ConsolidationValidation extends SqlElement{
 	  $result .='     </td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colMargin').'</td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:7%;text-align:center;vertical-align:center;">';
-	  $result .='      <table><tr>';
+	  $result .='      <table style="width:100%"><tr>';
 	  $result .='          <td colspan="2"> '.i18n('colBlocking').'</td></tr>';
 	  if($habLockedImputation->rightAccess=='1'){
 	   $result .='<tr>';
 	   $result .='          <td style="height:32px;padding-left:20px;width:10%;cursor:pointer;">';
 	   $mode='onclick="lockedImputation(\'UnLocked\'';
-        $result .='            <div region="center" id="UnlockedImputation" '.$mode.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.i18n('colUnlock').'" ></div>';
+        $result .='            <div region="center" id="UnlockedImputation" '.$mode.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.ucfirst(i18n('lockAll')).'" ></div>';
         $result .='          </td>';
         $result .='          <td style="height:32px;padding-right:5px;padding-top:5px;width:10%;cursor:pointer;">';
         $mode='onclick="lockedImputation(\'Locked\'';
-        $result .='            <div region="center" id="lockedImputation" '.$mode.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" title="'.i18n('colLocked').'"></div>';
+        $result .='            <div region="center" id="lockedImputation" '.$mode.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" title="'.ucfirst(i18n('unlockAll')).'"></div>';
 	    $result .='           </td>';
 	  }
 	  $result .='      </tr>';
@@ -178,12 +178,12 @@ class ConsolidationValidation extends SqlElement{
 	  $result .='        <tr style="100%" >';
 	  if($habValidationImputation->rightAccess=='1'){
 	  $result .='          <td>
-	                        <div id="buttonValidationAll" style="width:40%;float:right;height:32px;padding-top:5px;cursor:pointer;margin-top: 2px;" title="'.i18n('validateWorkPeriod').'" class="iconSubmitted32 iconSubmitted iconSize32"
+	                        <div id="buttonValidationAll" style="width:40%;float:right;height:32px;padding-top:5px;cursor:pointer;margin-top: 2px;" title="'.i18n('validatedAll').'" class="iconSubmitted32 iconSubmitted iconSize32"
 	                             onClick="validateOrCancelAllConsolidation(\''.$srtingProjectList.'\',\'validaTionCons\',\''.$concMonth.'\','.$length.');">
 	                        </div>
 	                       </td>';
 	  $result .='          <td>
-	                        <div id="buttonCancelAll" style="width:40%;height:32px;padding-top:5px;cursor:pointer;" title="'.i18n('buttonCancel').'" class="iconUnsubmitted32 iconUnsubmitted iconSize32"
+	                        <div id="buttonCancelAll" style="width:40%;height:32px;padding-top:5px;cursor:pointer;" title="'.i18n('cancelAll').'" class="iconUnsubmitted32 iconUnsubmitted iconSize32"
 	                             onClick="validateOrCancelAllConsolidation(\''.$srtingProjectList.'\',\'cancelCons\',\''.$concMonth.'\','.$length.');" >
 	                        </div>
 	                       </td>';
@@ -213,6 +213,12 @@ class ConsolidationValidation extends SqlElement{
             $revenue=$consValPproj->revenue;
             $margin=$consValPproj->margin;
             $reelCons=$consValPproj->realWorkConsumed;
+            $id=$projectsList[$i]->id;
+            $clauseWhere="idProject=$id and month<$concMonth";
+            $beforConsValidated=$consValPproj->getSqlElementsFromCriteria(null,null,$clauseWhere);
+            if(!empty($beforConsValidated)){
+              $canChangeValidation=false;
+            }
           }else{                                                          //-------- validated -------- //               
             $lstPeProject=$projectsList[$i]->ProjectPlanningElement;
             $reel=$lstPeProject->realWork;
@@ -307,7 +313,7 @@ class ConsolidationValidation extends SqlElement{
     	   $result .='    </td>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
     	   $result .='       <div style="margin:2px 2px 2px 2px;" id="validatedDiv_'.$uniqueId.'" name="validatedDiv_'.$uniqueId.'" dojoType="dijit.layout.ContentPane" region="center">';
-           $result .=          ConsolidationValidation::drawValidationDiv($consValPproj,$uniqueId,$concMonth,$asSub,(($profAss!='' and $profAss!=$prof)?$profAss:$prof));
+           $result .=          ConsolidationValidation::drawValidationDiv($consValPproj,$canChangeValidation,$uniqueId,$concMonth,$asSub,(($profAss!='' and $profAss!=$prof)?$profAss:$prof));
            $result .='       </div>';
            $result .='    </td>';
            $result .='     <input type="hidden" id="validatedLine'.$idCheckBox.'" name="'.$uniqueId.'" value="0"/>';
@@ -342,7 +348,7 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='    <tr>';
 	    $result .='      <td  style="padding-left:33%;width:50%;">';
 	    if($lock==''){ // unlocked
-	      $title=($lockBefor!='')?$titleAlredyLock:i18n('colLocked');
+	      $title=($lockBefor!='')?$titleAlredyLock:ucfirst(i18n('colLocked'));
 	      if($lockBefor=='')$style=(($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'style="cursor:pointer;"':'style="cursor: not-allowed;"');
 	      else $style='style="cursor: not-allowed;-webkit-filter:saturate(0);-moz-filter:saturate(0);filter:saturate(0);"';
 	      $result .='      <div '.$style.'  id="UnlockedImputation_'.$proj.'"  '.$functionLocked.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.$title.'" ></div>';
@@ -351,7 +357,7 @@ class ConsolidationValidation extends SqlElement{
 	      
 	      if($lockBefor=='')$style=(($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'style="margin-left:5px;cursor:pointer;"':'style="cursor: not-allowed;margin-left:5px;"');
 	      else $style='style="cursor: not-allowed;saturate(0)"';
-	      $result .='      <div '.$style.' id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" title="'.i18n('colUnlock').'"></div>';
+	      $result .='      <div '.$style.' id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" title="'.ucfirst(i18n('colUnlock')).'"></div>';
 	    }
 	    $result .='     <input type="hidden" id="projHabilitationLocked_'.substr($proj, 6).'" name="projHabilitationLocked_'.substr($proj, 6).'" value="'.$habLockedImputation->rightAccess.'"/>';
 	    $result .='     </td>';
@@ -365,7 +371,7 @@ class ConsolidationValidation extends SqlElement{
 	 * @return table
 	 */
 	
-	static function drawValidationDiv($consValPproj,$uniqueId,$concMonth,$asSub,$prof){
+	static function drawValidationDiv($consValPproj,$canChangeValidation,$uniqueId,$concMonth,$asSub,$prof){
 	  $habValidationImputation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'validationImputation'));
 	  $right=$habValidationImputation->rightAccess;
 	  $result="";
@@ -375,11 +381,12 @@ class ConsolidationValidation extends SqlElement{
 	    $validatedDate=$consValPproj->validationDate;
 	    $result .='      <table style="width:100%;">';
 	    $result .='        <tr>';
-        $validFunct=($right=='1')?'onClick="saveOrCancelConsolidationValidation(\''.$uniqueId.'\',\''.$concMonth.'\',\''.$asSub.'\');"':'';
-        $result .='          <td style="width:30%;height:32px;'.(($right==1)?"cursor:pointer;":"cursor:not-allowed;").'" ><div style="float:right;" id="buttonCancel_'.$uniqueId.'" '.$validFunct.' >
-                             '.formatIcon('Submitted', 32, i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate)))).'
+        $validFunct=($right=='1' and $canChangeValidation)?'onClick="saveOrCancelConsolidationValidation(\''.$uniqueId.'\',\''.$concMonth.'\',\''.$asSub.'\');"':'';
+        $result .='          <td style="width:30%;height:32px;'.(($right==1  and $canChangeValidation)?"cursor:pointer;":"cursor:not-allowed;").'" ><div style="float:right;" id="buttonCancel_'.$uniqueId.'" '.$validFunct.' >
+                             '.formatIcon('Submitted', 32,i18n('cancelConsolidation')).'
                            </div></td>';
-	    $result .='          <td style="width:'.(($right=='1')?"70%":"100%").';height:30px;">'.i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate))).'</td>';
+	    $result .='          <td style="width:'.(($right=='1'  and $canChangeValidation)?"70%":"100%").';height:30px;">'. i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate))).'</td>';
+	    if($right=='1'  and !$canChangeValidation)$right='2';
 	    $result .='          <input type="hidden" id="projHabilitationValidation_'.substr($uniqueId, 6).'" name="projHabilitationValidation_'.substr($uniqueId, 6).'" value="'.$right.'"/>';
 
 	  }else{
@@ -387,7 +394,7 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='        <tr>';
 	    $validFunct=($right=='1')?'onClick="saveOrCancelConsolidationValidation(\''.$uniqueId.'\',\''.$concMonth.'\',\''.$asSub.'\');"':'';
 	    $result .='          <td style="width:30%;height:32px;'.(($right==1)?"cursor:pointer;":"cursor:not-allowed;").'" ><div style="float:right;" id="buttonValidation_'.$uniqueId.'" '.$validFunct.' >
-	                           '.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod')).'
+	                           '.formatIcon('Unsubmitted', 32, i18n('validateConsolidation')).'
 	                         </div></td>';
 	    $result .='          <td style="width:'.(($right=='1')?"70%":"100%").';padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
 	    

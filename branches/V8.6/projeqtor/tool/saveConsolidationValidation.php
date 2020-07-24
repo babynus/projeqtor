@@ -33,7 +33,6 @@ require_once "../tool/projeqtor.php";
 //parameter
 $mode = RequestHandler::getValue('mode');
 $lstProj = explode(',', RequestHandler::getValue('lstProj'));
-debugLog($_REQUEST);
 $month= RequestHandler::getValue('month');
 $all= RequestHandler::getValue('all');
 $currentUser=getCurrentUserId();
