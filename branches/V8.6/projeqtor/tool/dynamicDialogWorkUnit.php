@@ -48,6 +48,7 @@ $tabCompValues = array();
         <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
          <input id="mode" name="idWorkUnit" type="hidden" value="<?php echo $id;?>" />
          <table>
+         <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr>
              <td class="dialogLabel" >
                <label for="WUReference" ><?php echo i18n("colReference");?>&nbsp;:&nbsp;</label>
@@ -107,30 +108,25 @@ $tabCompValues = array();
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr> <td></td><td>
            <table style="width:98%">
               <tr> 
                 <td  style="width:15%" class="assignHeader"><?php echo i18n("colComplexity");?></td>
                 <?php foreach ($listComplexity as $comp){ 
                         if($mode =='edit'){
-                          $lstCompVal=SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalog'=>$idCatalog,'idComplexity'=>$comp->id)); 
-                          foreach ($lstCompVal as $id=>$val){
-                            if($id=='charge')$tabCompValues[$comp->id]['charge'] = $val; 
-                            if($id=='price')$tabCompValues[$comp->id]['price'] = $val;
-                            if($id=='duration')$tabCompValues[$comp->id]['duration'] = $val;
+                          $lstCompVal=SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalog'=>$idCatalog,'idComplexity'=>$comp->id,'idWorkUnit'=>$id));
+                          foreach ($lstCompVal as $idLib=>$val){
+                            if($idLib=='charge')$tabCompValues[$comp->id]['charge'] = $val; 
+                            if($idLib=='price')$tabCompValues[$comp->id]['price'] = $val;
+                            if($idLib=='duration')$tabCompValues[$comp->id]['duration'] = $val;
                           }
                          }?>
                 <td style="width:<?php echo $tdWitdh;?>%" class="assignHeader" > <?php echo $comp->name; ?> </td>
                 <?php } ?>
               </tr>
               <tr>
-              <?php $unit = Parameter::getGlobalParameter('workUnit'); 
-                    if($unit=='days'){
-                      $unitOfWork=i18n('shortDay');
-                     }else{
-                      $unitOfWork=i18n('shortHour');
-                     } ?>
-                <td style="width:10%;text-align:center;" class="assignData" > <?php echo i18n('charge').'  ('.$unitOfWork.')';?> </td>
+                <td style="width:10%;text-align:center;" class="assignData" > <?php  echo i18n('charge').'  ('.Work::displayShortWorkUnit().')';?> </td>
                 <?php foreach ($listComplexity as $comp){ ?>
                 <td style="width:<?php echo $tdWitdh;?>%"  class="assignData">
                 <input dojoType="dijit.form.NumberTextBox" id="charge<?php echo $comp->id;?>" name="charge<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['charge'];} ?>" />
@@ -146,7 +142,7 @@ $tabCompValues = array();
                 <?php } ?>
               </tr>
               <tr>
-                <td style="width:10%;text-align:center;" class="assignData"> <?php echo i18n('duration').'  ('.$unitOfWork.')';?> </td>
+                <td style="width:10%;text-align:center;" class="assignData"> <?php echo i18n('duration').'  ('.Work::displayShortWorkUnit().')';?> </td>
                 <?php foreach ($listComplexity as $comp){ ?>
                 <td style="width:<?php echo $tdWitdh;?>%" class="assignData"> 
                 <input dojoType="dijit.form.NumberTextBox" id="duration<?php echo $comp->id;?>" name="duration<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['duration'];} ?>" />
