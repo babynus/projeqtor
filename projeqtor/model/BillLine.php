@@ -313,76 +313,62 @@ class BillLine extends SqlElement {
       		// Activity closed => idle=1
       		$actClose = $act->idle;
 // Fin Code Marc
-      		$lstIdPool=array();
-      		$lstIdPool[]=$this->idResource;
-            $resourceTemaAff=new ResourceTeamAffectation();
-            $lstPoolAff=$resourceTemaAff->getSqlElementsFromCriteria(array("idResource"=>$this->idResource));
-            if(!empty($lstPoolAff)){
-              foreach ($lstPoolAff as $poolAff){
-                $lstIdPool[]=$poolAff->idResourceTeam;
-              }
-            }
-            $lstIdPool=implode(',', $lstIdPool);
       		$ass=new Assignment();
-      		$whereAss="refType='Activity'and refId=$act->id and idProject=$act->idProject and idResource in ($lstIdPool)";
-      		$assList=$ass->getSqlElementsFromCriteria(null,null,$whereAss);
-      		if(!empty($assList)){
+      		$critAss=array("refType"=>"Activity", "refId"=>$act->id, "idProject"=>$act->idProject, "idResource"=>$this->idResource);
+      		$assList=$ass->getSqlElementsFromCriteria($critAss, false);
       		foreach ($assList as $ass) {
-        			$selectedAss=false;
-        			$actBilled+=$ass->billedWork;
-        			$actAssigned+=$ass->assignedWork;
-        			$actPlanned+=$ass->plannedWork;
-        			$work = new Work();
-              $crit = "idProject='".$bill->idProject . "'";
-              $crit.=" and idResource ='".Sql::fmtId($this->idResource). "'";    
-              $crit.=" and workDate>='".$this->startDate."'";
-              $crit.=" and workDate<='".$this->endDate."'";
-              $crit.=" and idAssignment='".Sql::fmtId($ass->id)."'";
-              $crit.=" and idBill is null";   
-              $workList = $work->getSqlElementsFromCriteria(null,false,$crit, "idAssignment asc");
-              foreach ($workList as $work) {
-              	$work->idBill=$bill->id;
-              	$totalWork+=$work->work;
-              	$actWork+=$work->work;
-              	$selectedAct=true;
-              	$selectedAss=true;
-  //            	$ass->billedWork+=$work->work;
-  // D�but Code Marc
-  				if ($billingType=='P') {
-  					// Add until not > assignment
-  					$ass->billedWork=min($ass->billedWork+$work->work,$actAssigned);
-  				} else {           	
-  	            	$ass->billedWork+=$work->work;
-  				}
-  // Fin Code Marc
-              	            	// Sum of work for dates : to be displayed if needed
-              	if (array_key_exists($work->workDate, $listDates)) {
-              	  $listDates[$work->workDate]+=$work->work;
-                } else {
-                  $listDates[$work->workDate]=$work->work;
-                }
-              	$work->save();
+      			$selectedAss=false;
+      			$actBilled+=$ass->billedWork;
+      			$actAssigned+=$ass->assignedWork;
+      			$actPlanned+=$ass->plannedWork;
+      			$work = new Work();
+            $crit = "idProject='".$bill->idProject . "'";
+            $crit.=" and idResource='".Sql::fmtId($this->idResource). "'";    
+            $crit.=" and workDate>='".$this->startDate."'";
+            $crit.=" and workDate<='".$this->endDate."'";
+            $crit.=" and idAssignment='".Sql::fmtId($ass->id)."'";
+            $crit.=" and idBill is null";   
+            $workList = $work->getSqlElementsFromCriteria(null,false,$crit, "idAssignment asc");
+            foreach ($workList as $work) {
+            	$work->idBill=$bill->id;
+            	$totalWork+=$work->work;
+            	$actWork+=$work->work;
+            	$selectedAct=true;
+            	$selectedAss=true;
+//            	$ass->billedWork+=$work->work;
+// D�but Code Marc
+				if ($billingType=='P') {
+					// Add until not > assignment
+					$ass->billedWork=min($ass->billedWork+$work->work,$actAssigned);
+				} else {           	
+	            	$ass->billedWork+=$work->work;
+				}
+// Fin Code Marc
+            	            	// Sum of work for dates : to be displayed if needed
+            	if (array_key_exists($work->workDate, $listDates)) {
+            	  $listDates[$work->workDate]+=$work->work;
+              } else {
+                $listDates[$work->workDate]=$work->work;
               }
-  /*            if ($selectedAss) {
-              	$ass->save();
-              }
-  */
-  // D�but Code Marc
-              // If some work to bill [$selectedAss==true] or the activity is close [$actClose==1]
-              if ($selectedAss OR $actClose==1) {
-              	// If the activity is close AND the $billingType=='P'
-              	if ($actClose==1 AND $billingType=='P') {
-              		// The billedWork is the assigned work
-              		$ass->billedWork=$actAssigned;
-              	}
-              	// Fin mon code
-              	$ass->save();
-              }
-  // Fin Code Marc            
-              }
-      		}else{
-      		  continue;
-      		}
+            	$work->save();
+            }
+/*            if ($selectedAss) {
+            	$ass->save();
+            }
+*/
+// D�but Code Marc
+            // If some work to bill [$selectedAss==true] or the activity is close [$actClose==1]
+            if ($selectedAss OR $actClose==1) {
+            	// If the activity is close AND the $billingType=='P'
+            	if ($actClose==1 AND $billingType=='P') {
+            		// The billedWork is the assigned work
+            		$ass->billedWork=$actAssigned;
+            	}
+            	// Fin mon code
+            	$ass->save();
+            }
+// Fin Code Marc            
+            }
 /*
       		if ($selectedAct) {
       			$doneWork=($actWork+$actBilled);
