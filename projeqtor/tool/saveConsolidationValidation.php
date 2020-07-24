@@ -33,29 +33,24 @@ require_once "../tool/projeqtor.php";
 //parameter
 $mode = RequestHandler::getValue('mode');
 $lstProj = explode(',', RequestHandler::getValue('lstProj'));
-foreach ($lstProj as $id=>$pro){
-  if($pro==''){
-    unset ($lstProj[$id]);
-  }
-}
+debugLog($_REQUEST);
 $month= RequestHandler::getValue('month');
 $all= RequestHandler::getValue('all');
 $currentUser=getCurrentUserId();
 $res=array();
 $lstCons=array();
 $lock=($mode=='Locked')?$month:"";
-
 //___get Recursive Sub Projects___//
 foreach ($lstProj as $id=>$val){  
-  $val=($mode =='validaTionCons' or $mode=='cancelCons' and $all=='false')?substr($val,6):$val;
+  $val=(($mode =='validaTionCons' or $mode=='cancelCons') and $all=='false')?substr($val,6):$val;
   $project= new Project($val);
   $proectsSubList=$project->getRecursiveSubProjectsFlatList();
   $lstSub=array();
   foreach ($proectsSubList as $key=>$name){
     foreach ($lstProj as $idProj){
-      if(((($mode =='validaTionCons' or $mode=='cancelCons') and $all=='false') or ($mode !='validaTionCons' or $mode!='cancelCons')) and $key==$idProj){
+      if($all=='false' and $month.$key==$idProj){
        unset($proectsSubList[$key]);
-      }else if(((($mode =='validaTionCons' or $mode=='cancelCons') and $all=='true')) and $month.$key==$idProj){
+      }else if( $all=='true' and $key==$idProj){
         unset($proectsSubList[$key]);
       }
     }
@@ -63,18 +58,18 @@ foreach ($lstProj as $id=>$val){
   if(($mode =='validaTionCons' or $mode=='cancelCons') and $all=='false')$lstProj[$id]=$val;
   if(!empty($proectsSubList)){
     foreach ($proectsSubList as $key=>$name){
-      $lstProj[]=((($mode =='validaTionCons' or $mode=='cancelCons') and $all=='false') or ($mode !='validaTionCons' or $mode!='cancelCons')  )?$key:$month.$key;
+      $lstProj[]=$key;
     }
   }
 }
 //==============//
 
-if($mode =='validaTionCons'){
+if($mode =='validaTionCons'){ // create all consolidationValidation for save 
   $lstImpLocked=array();
   foreach($lstProj as $projId){
-    $projId=($all=='false')?$projId:substr($projId, 6);
     $cons=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$projId,"month"=>$month));
     $cons->idProject=$projId;
+    $projId=$month.$projId;
     $cons->idResource=$currentUser;
     $cons->month=$month;
     $cons->revenue=RequestHandler::getValue('revenue_'.$projId);;
@@ -91,6 +86,7 @@ if($mode =='validaTionCons'){
     if($lockedImp->id!='')$lstImpLocked[]=$lockedImp->id;
   }
 }
+
 Sql::beginTransaction();
 if($mode !='validaTionCons' and $mode!='cancelCons'){
   if($mode=='Locked'){

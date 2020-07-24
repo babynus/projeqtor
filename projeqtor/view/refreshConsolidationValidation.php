@@ -41,5 +41,7 @@ $year=RequestHandler::getYear('yearConsolidation');
 
 ?>
 <div id="imputListDiv" name="imputListDiv">
+  <form dojoType="dijit.form.Form" name="consolidationForm" id="consolidationForm"  method="Post" >
   <?php ConsolidationValidation::drawProjectConsolidationValidation($idProject,$idProjectType,$idOrganization,$year,$month);?>
+  </form>
 </div>
