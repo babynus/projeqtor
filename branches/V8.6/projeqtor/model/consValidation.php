@@ -85,16 +85,16 @@ class ConsolidationValidation extends SqlElement{
 	  $canLock=array();
 	  if($srtingProjectList!=''){
 	    $lockImputation=new LockedImputation();
-	    $where="idProject in ($srtingProjectList) and month <'".$concMonth."'";
-	    $lstLockedImpBefor=$lockImputation->getSqlElementsFromCriteria(null,null,$where);
+	    $where="idProject in ($srtingProjectList) and (month <'".$concMonth."' or month>'".$concMonth."')";
+	    $lstLockedImpAfterBefor=$lockImputation->getSqlElementsFromCriteria(null,null,$where);
 	    
 	    $where="idProject in ($srtingProjectList) and month ='".$concMonth."'";
 	    $lstLockedImpThisMonth=$lockImputation->getSqlElementsFromCriteria(null,null,$where);
 	    $canLock=$projectsList;
 	    foreach ($projectsList as $id=>$proj) {
-	      foreach ($lstLockedImpBefor as $lockProjImpBefor){
-	        if($lockProjImpBefor->idProject==$proj->id){
-	          $lockedProjectsBefor[$proj->id]=$lockProjImpBefor->month;
+	      foreach ($lstLockedImpAfterBefor as $lockProjImpAfterBefor){
+	        if($lockProjImpAfterBefor->idProject==$proj->id){
+	          $lockedProjectsAfterBefor[$proj->id]=$lockProjImpAfterBefor->month;
 	          unset($canLock[$id]);
 	          continue;
 	        }
@@ -113,6 +113,7 @@ class ConsolidationValidation extends SqlElement{
 	      $param='lockedImputation';
 	  
       $habLockedImputation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'lockedImputation'));
+      debugLog($habLockedImputation);
       if($habLockedImputation->rightAccess=='1'){
         $canLockString=array();
         foreach ($canLock as $projToLocked){
@@ -157,17 +158,20 @@ class ConsolidationValidation extends SqlElement{
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colMargin').'</td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:7%;text-align:center;vertical-align:center;">';
 	  $result .='      <table><tr>';
-	  $result .='          <td colspan="2"> '.i18n('colBlocking').'</td></tr><tr>';
-	  $result .='          <td style="height:32px;padding-left:20px;width:10%;cursor:pointer;">';
-	  if($habLockedImputation->rightAccess=='1')$mode='onclick="lockedImputation(\'UnLocked\'';
-      $result .='            <div region="center" id="UnlockedImputation" '.$mode.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.i18n('colUnlock').'" ></div>';
-      $result .='          </td>';
-      $result .='          <td style="height:32px;padding-right:5px;padding-top:5px;width:10%;cursor:pointer;">';
-      if($habLockedImputation->rightAccess=='1')$mode='onclick="lockedImputation(\'Locked\'';
-      $result .='            <div region="center" id="lockedImputation" '.$mode.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" title="'.i18n('colLocked').'"></div>';
-	  $result .='           </td>';
-	  
-	  $result .='      </tr></table>';
+	  $result .='          <td colspan="2"> '.i18n('colBlocking').'</td></tr>';
+	  if($habLockedImputation->rightAccess=='1'){
+	   $result .='<tr>';
+	   $result .='          <td style="height:32px;padding-left:20px;width:10%;cursor:pointer;">';
+	   $mode='onclick="lockedImputation(\'UnLocked\'';
+        $result .='            <div region="center" id="UnlockedImputation" '.$mode.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.i18n('colUnlock').'" ></div>';
+        $result .='          </td>';
+        $result .='          <td style="height:32px;padding-right:5px;padding-top:5px;width:10%;cursor:pointer;">';
+        $mode='onclick="lockedImputation(\'Locked\'';
+        $result .='            <div region="center" id="lockedImputation" '.$mode.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" title="'.i18n('colLocked').'"></div>';
+	    $result .='           </td>';
+	  }
+	  $result .='      </tr>';
+	  $result .='    </table>';
 	  $result .='     </td>';
 	  $result .='     <td colspan="2" style="border: 1px solid grey;height:60px;width:13%;text-align:center;vertical-align:center;">';
 	  $result .='      <table width="100%"><tr style="height:20px;"><td width="100%;" colspan="2">'.i18n('menuConsultationValidation').'</td></tr>';
@@ -197,7 +201,7 @@ class ConsolidationValidation extends SqlElement{
           $idCheckBox=$projectsList[$i]->id;
           $uniqueId=$concMonth.$projectsList[$i]->id;
           $lock=((isset($lockedProjects[$idCheckBox]))?$lockedProjects[$idCheckBox]:'');
-          $lockBefor=((isset($lockedProjectsBefor[$idCheckBox]))?$lockedProjectsBefor[$idCheckBox]:'');
+          $lockBefor=((isset($lockedProjectsAfterBefor[$idCheckBox]))?$lockedProjectsAfterBefor[$idCheckBox]:'');
           $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$projectsList[$i]->id,"month"=>$concMonth));
           $asSub=($projectsList[$i]->getSubProjectsList())?true:false;
           
