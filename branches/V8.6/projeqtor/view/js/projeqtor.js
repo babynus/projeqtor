@@ -7175,11 +7175,17 @@ function replaceAccentuatedCharacters(text){
   return text.replace(reg,function(){ return accentuatedCharactersTranscoding[arguments[0].toLowerCase()];}).toLowerCase();
 }
 
-function validateOrCancelAllConsolidation(listId,mode,month){
-  month=dojo.byId('monthConsolidationValidation').value;
-  listId=getHabilitationConsolidation(listId.split(','),length,'validation');
-  listId=listId.join(",");
-  saveConsolidationValidation(listId,mode,month,true);
+function decrementProjectListConsolidation(listProj,length,nameDiv,month){
+  var i=0;
+  while(i<length){
+    if(dojo.byId(nameDiv+''+month+listProj[i])){
+      listProj.splice(i,1);
+      length=length-1;
+      continue;
+    }
+      i++;
+  }
+  return listProj;
 }
 
 function getHabilitationConsolidation(lst,lenght,mode){
@@ -7236,22 +7242,33 @@ function lockedImputation(mode,listProj,length,month,asSub){
     listProj=listProj.split(',');
     listProj=getHabilitationConsolidation(listProj,length,'locked');
     if(mode=='Locked'){
-        for(var i=0;i<length;i++){
-          if(!dojo.byId('UnlockedImputation_'+month+listProj[i])){
-            listProj.splice(i,1);
-          }
-        }
+        nameDiv='lockedImputation_';
+        listProj=decrementProjectListConsolidation(listProj,length,nameDiv,month);
     }else{
-        for(var i=0;i<length;i++){
-          if(!dojo.byId('lockedImputation_'+month+listProj[i])){
-            listProj.splice(i,1);
-          }
-        }
+        nameDiv='UnlockedImputation_';
+       listProj=decrementProjectListConsolidation(listProj,length,nameDiv,month);
     }
-    if(listProj==undefined)return;
+    if(listProj.length==0)return;
     listProj=listProj.join(",");
   }
   saveConsolidationValidation(listProj,mode,month,all,asSub);
+}
+
+function validateOrCancelAllConsolidation(listId,mode,month,length){
+  console.log(month);
+  listId=getHabilitationConsolidation(listId.split(','),length,'validation');
+  console.log(mode);
+  if(mode=="validaTionCons"){
+    nameDiv='buttonCancel_';
+    listId=decrementProjectListConsolidation(listId,length,nameDiv,month);
+  }else{
+    nameDiv='buttonValidation_';
+    listId=decrementProjectListConsolidation(listId,length,nameDiv,month);
+  }
+  if(listId.length==0)return;
+  listId=listId.join(",");
+  console.log(listId);
+  saveConsolidationValidation(listId,mode,month,true);
 }
 
 function saveOrCancelConsolidationValidation(proj,month,asSub){
@@ -7271,7 +7288,7 @@ function saveConsolidationValidation(listProj,mode,month,all,asSub){
   if(mode=='validaTionCons' || mode=='cancelCons'){
     dojo.xhrPost({
       url : url,
-      form: form,
+      form : form,
       handleAs : "text",
       load : function(){
           if(all || asSub){

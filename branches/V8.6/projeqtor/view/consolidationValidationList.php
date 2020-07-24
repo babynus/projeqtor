@@ -34,14 +34,9 @@ scriptLog('   ->/view/imputationValidationList.php');
 
 $cons= new ConsolidationValidation();
 $lockedImp= new LockedImputation();
-$validationCons=$cons->getMaxValueFromCriteria('validationDate',null);
 $impLocked=$lockedImp->getMaxValueFromCriteria('month',null);
-if($impLocked and $validationCons){
-  $date=(intval($impLocked)<intval($validationCons))?$validationCons:$impLocked;
-  $currentYear=substr($date,0,-2);
-  $currentMonth=substr($impLocked,-2);
-}else if (($impLocked and !$validationCons) or ($validationCons and !$impLocked)){
-  $date=($impLocked)?$impLocked:$validationCons;
+if ($impLocked ){
+  $date=$impLocked;
   $currentYear=substr($date,0,-2);
   $currentMonth=substr($date,-2);
 }else{
