@@ -6099,6 +6099,7 @@ function saveWorkUnit(){
   if (formVar.validate()) {
     loadContent("../tool/saveWorkUnit.php", "resultDivMain", "workUnitForm",true,'WorkUnit');
     dijit.byId('dialogWorkUnit').hide();
+    loadContent("objectDetail.php?refreshComplexitiesValues=true", "CatalogUO_unitOfWork", 'listForm');
   } else {
     showAlert(i18n("alertInvalidForm"));
   }

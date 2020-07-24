@@ -5089,6 +5089,7 @@ function ckEditorReplaceEditor(editorName, numEditor) {
   forceCkInline = false;
   if (editorName == 'WUDescriptions' || editorName == 'WUIncomings' || editorName == 'WULivrables') {
     height = 100;
+    padding=0;
     forceCkInline = true;
     autofocus = true;
   }
