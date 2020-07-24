@@ -7078,7 +7078,7 @@ function drawWorkUnits($obj,$listWorkUnit,$listComplexity,$refresh=false) {
     $canDelete=false;
   }
   echo '<table style="width:100%">';
-  echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
+  echo '<tr><td colspan=2 style="width:100%;"><table style="height:100%;width:100%;">';
   echo '<tr>';
   if (!$print) {
     echo '<td class="assignHeader" style="width:5%">';
@@ -7093,7 +7093,7 @@ function drawWorkUnits($obj,$listWorkUnit,$listComplexity,$refresh=false) {
   }
   echo'</tr>';
   foreach ($listWorkUnit as $val){
-    echo '<tr>';
+    echo '<tr style="height:100%">';
     echo '  <td class="assignData" style="width:5%">';
       if ($canUpdate) {
         echo '  <a onClick="editWorkUnit(\''.$val->id.'\',\''.$obj->id.'\',\''.$val->validityDate.'\');" '.'title="'.i18n('editWorkUnit').'" > '.formatSmallButton('Edit').'</a>';
@@ -7106,16 +7106,15 @@ function drawWorkUnits($obj,$listWorkUnit,$listComplexity,$refresh=false) {
     foreach ($listComplexity as $comp){
       $compValu = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$val->id,'idComplexity'=>$comp->id));
       $idleClass = "";
-      if(!$compValu->price and !$compValu->charge and !$compValu->duration)$idleClass = ' style="background:lightgrey;" ';
-      echo '  <td class="assignData" '.$idleClass.'>';
+      if(!$compValu->price and !$compValu->charge and !$compValu->duration)$idleClass = ' background:#EAEAEA; ';
+      echo '  <td style="height:100%;padding:0;'.$idleClass.'" class="assignData">';
       if($idleClass== ""){
-        $charge = ($compValu->charge)?Work::displayWorkWithUnit($compValu->charge):'';
         $price = ($compValu->price)?htmlDisplayCurrency($compValu->price):'';
         $duration = ($compValu->duration)?Work::displayWorkWithUnit($compValu->duration):'';
         echo '    <table style="width:100%;height:100%;text-align:right;" ><tr>
-                    <td style="width:33%;border-right:1px solid #AAAAAA;">'.$charge.'</td>
+                    <td style="width:33%;border-right:1px solid #AAAAAA;padding-right:5px;">'.Work::displayWorkWithUnit($compValu->charge).'</td>
                     <td style="width:33%;border-right:1px solid #AAAAAA;">'.$price.'</td>
-                    <td style="width:33%">'.$duration.'</td>
+                    <td style="width:33%;padding-right:5px;">'.$duration.'</td>
                     </tr></table>';
       }
       echo '  </td>';
