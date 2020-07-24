@@ -80,7 +80,10 @@ if ($impLocked ){
                       style="width: 175px;"
                       name="idProjectConsolidation" id="idProjectConsolidation"
                       <?php echo autoOpenFilteringSelect();?>
-                      value="<?php if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
+                      value="<?php if(sessionValueExists('idProjectConsolidation')){
+                                     $idProject =  getSessionValue('idProjectConsolidation');
+                                     echo $idProject;
+                                   }else if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
                                      if(strpos(getSessionValue('project'),',')){
                                       $idProject=0;
                                       echo $idProject;
@@ -88,9 +91,6 @@ if ($impLocked ){
                                        $idProject =  getSessionValue('project');
                                        echo $idProject;
                                      }
-                                   }else if(sessionValueExists('idProjectConsolidation')){
-                                    $idProject =  getSessionValue('idProjectConsolidation');
-                                    echo $idProject;
                                    }else{
                                     $idProject=0;
                                     echo $idProject;
