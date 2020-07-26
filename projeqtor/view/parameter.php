@@ -510,7 +510,7 @@ function drawTableFromObjectList($objectList) {
   	echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
   	echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
   	echo ' title="' . i18n('sectionButtons') . '">';
-  	htmlDrawCrossTable(array('combo'=>i18n('comboDetailAccess'),'checklist'=>i18n('checklistAccess'),'joblist'=>i18n('joblistAccess'),'multipleUpdate'=>i18n('buttonMultiUpdate'),'lockedImputation'=>i18n('buttonLockedImputation'),'validationImputation'=>i18n('buttonValidationImputation')), 'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
+  	htmlDrawCrossTable(array('combo'=>i18n('comboDetailAccess'),'checklist'=>i18n('checklistAccess'),'joblist'=>i18n('joblistAccess'),'multipleUpdate'=>i18n('buttonMultiUpdate')), 'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
   	echo '</div><br/>';
   	$titlePane="habilitationOther_PlanningRight";
   	echo '<div dojoType="dijit.TitlePane"';
@@ -520,6 +520,15 @@ function drawTableFromObjectList($objectList) {
   	echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
   	echo ' title="' . i18n('sectionPlanningRight') . '">';
   	htmlDrawCrossTable(array('planning'=>i18n('planningRight'),'planningWithOveruse'=>i18n('canPlanWithInfiniteCapacity'),'resourcePlanning'=>i18n('resourcePlanningRight'),'changeValidatedData'=>i18n('changeValidatedData'),'changePriorityProj'=>i18n('changePriorityProject'),'changePriorityOther'=>i18n('changePriorityOther'),'changeManualProgress'=>i18n('changeManualProgress'),'validatePlanning'=>i18n('validatePlanning')), 'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
+  	echo '</div><br/>';
+  	$titlePane="habilitationOther_Consolidation";
+  	echo '<div dojoType="dijit.TitlePane"';
+  	echo ' open="' . ( array_key_exists($titlePane, $collapsedList)?'false':'true') . '"';
+  	echo ' id="' . $titlePane . '" ';
+  	echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
+  	echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
+  	echo ' title="' . i18n('sectionConsolidation') . '">';
+  	htmlDrawCrossTable(array('lockedImputation'=>i18n('buttonLockedImputation'),'validationImputation'=>i18n('buttonValidationImputation')), 'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
   	echo '</div><br/>';
   	$titlePane="habilitationOther_Unlock";
   	echo '<div dojoType="dijit.TitlePane"';
@@ -539,6 +548,18 @@ function drawTableFromObjectList($objectList) {
   	echo ' title="' . i18n('sectionReport') . '">';
   	htmlDrawCrossTable(array('reportResourceAll'=>i18n('reportResourceAll')), 'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
   	echo '</div><br/>';
+  	$titlePane="habilitationOther_Financial";
+  	echo '<div dojoType="dijit.TitlePane"';
+  	echo ' open="' . ( array_key_exists($titlePane, $collapsedList)?'false':'true') . '"';
+  	echo ' id="' . $titlePane . '" ';
+  	echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
+  	echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
+  	echo ' title="' . i18n('tabFinancial') . '">';
+  	htmlDrawCrossTable(array(
+  	    'generateProjExpense'=>i18n('generateProjectExpenseButton'),
+  	    'situation'=>i18n('situationRight')),
+  	    'scope', 'profile','idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
+  	echo '</div><br/>';
   	$titlePane="habilitationOther_Delete";
   	echo '<div dojoType="dijit.TitlePane"';
   	echo ' open="' . ( array_key_exists($titlePane, $collapsedList)?'false':'true') . '"';
@@ -553,9 +574,7 @@ function drawTableFromObjectList($objectList) {
   	    'canDeleteRealWork'=>i18n('canDeleteRealWork'), 
   	    'canForceClose'=>i18n('canForceClose'),
   	    'canUpdateCreation'=>i18n('canUpdateCreationInfo'),
-  	    'viewComponents'=>i18n('viewComponents'),
-  	    'generateProjExpense'=>i18n('generateProjectExpenseButton'),
-  	    'situation'=>i18n('situationRight')), 
+  	    'viewComponents'=>i18n('viewComponents')), 
   	  'scope', 'profile','idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
   	echo '</div><br/>';
   	$titlePane="habilitationOther_ResourceVisibility";
