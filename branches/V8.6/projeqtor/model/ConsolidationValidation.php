@@ -163,11 +163,11 @@ class ConsolidationValidation extends SqlElement{
 	   $result .='<tr>';
 	   $result .='          <td style="height:32px;padding-left:20px;width:10%;cursor:pointer;">';
 	   $mode='onclick="lockedImputation(\'UnLocked\'';
-        $result .='            <div region="center" id="UnlockedImputation" '.$mode.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.ucfirst(i18n('lockAll')).'" ></div>';
+        $result .='            <div region="center" id="UnlockedImputation" '.$mode.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.ucfirst(i18n('lockAllProjects')).'" ></div>';
         $result .='          </td>';
         $result .='          <td style="height:32px;padding-right:5px;padding-top:5px;width:10%;cursor:pointer;">';
         $mode='onclick="lockedImputation(\'Locked\'';
-        $result .='            <div region="center" id="lockedImputation" '.$mode.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" title="'.ucfirst(i18n('unlockAll')).'"></div>';
+        $result .='            <div region="center" id="lockedImputation" '.$mode.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" title="'.ucfirst(i18n('unlockAllProjects')).'"></div>';
 	    $result .='           </td>';
 	  }
 	  $result .='      </tr>';
@@ -348,7 +348,7 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='    <tr>';
 	    $result .='      <td  style="padding-left:33%;width:50%;">';
 	    if($lock==''){ // unlocked
-	      $title=($lockBefor!='')?$titleAlredyLock:ucfirst(i18n('colLocked'));
+	      $title=($lockBefor!='')?$titleAlredyLock:i18n('colLockProject');
 	      if($lockBefor=='')$style=(($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'style="cursor:pointer;"':'style="cursor: not-allowed;"');
 	      else $style='style="cursor: not-allowed;-webkit-filter:saturate(0);-moz-filter:saturate(0);filter:saturate(0);"';
 	      $result .='      <div '.$style.'  id="UnlockedImputation_'.$proj.'"  '.$functionLocked.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.$title.'" ></div>';
@@ -357,7 +357,7 @@ class ConsolidationValidation extends SqlElement{
 	      
 	      if($lockBefor=='')$style=(($habLockedImputation->rightAccess=='1' and $consValPproj->id=='')?'style="margin-left:5px;cursor:pointer;"':'style="cursor: not-allowed;margin-left:5px;"');
 	      else $style='style="cursor: not-allowed;saturate(0)"';
-	      $result .='      <div '.$style.' id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" title="'.ucfirst(i18n('colUnlock')).'"></div>';
+	      $result .='      <div '.$style.' id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" title="'.ucfirst(i18n('colUnlockProject')).'"></div>';
 	    }
 	    $result .='     <input type="hidden" id="projHabilitationLocked_'.substr($proj, 6).'" name="projHabilitationLocked_'.substr($proj, 6).'" value="'.$habLockedImputation->rightAccess.'"/>';
 	    $result .='     </td>';
