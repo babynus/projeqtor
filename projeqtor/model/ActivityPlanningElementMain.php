@@ -292,9 +292,9 @@ class ActivityPlanningElementMain extends PlanningElement {
     }
     $project = new Project($this->idProject);
     if(trim(Module::isModuleActive('moduleGestionCA')) == 1 and $project->ProjectPlanningElement->idRevenueMode == 2){
-    	self::$_fieldsAttributes['revenue']='';
     	if($this->elementary){
-      	self::$_fieldsAttributes['idWorkUnit']='';
+    	 self::$_fieldsAttributes['revenue']='';
+      	 self::$_fieldsAttributes['idWorkUnit']='';
       	if($this->idWorkUnit){
       	  self::$_fieldsAttributes['quantity']='';
       	}else{
@@ -316,6 +316,8 @@ class ActivityPlanningElementMain extends PlanningElement {
       	    self::$_fieldsAttributes['validatedCost']='readonly';
       	  }
       	}
+    	}else{
+    	  self::$_fieldsAttributes['revenue']='readonly';
     	}
     }else{
     	unset($this->_separator_sectionRevenue_marginTop);
