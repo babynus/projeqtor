@@ -36,6 +36,7 @@ $lstProj = explode(',', RequestHandler::getValue('lstProj'));
 $month= RequestHandler::getValue('month');
 $all= RequestHandler::getValue('all');
 $currentUser=getCurrentUserId();
+$user=getSessionUser();
 $res=array();
 $lstCons=array();
 $lock=($mode=='Locked')?$month:"";
@@ -46,6 +47,24 @@ foreach ($lstProj as $id=>$val){
   $proectsSubList=$project->getRecursiveSubProjectsFlatList();
   $lstSub=array();
   foreach ($proectsSubList as $key=>$name){
+    $proj=new Project($key);
+    $prof=$user->getProfile($proj);
+    debugLog($prof);
+    if($mode =='validaTionCons' or $mode=='cancelCons'){
+      $habilitationVal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'validationImputation'));
+      debugLog($habilitationVal->rightAccess);
+      if($habilitationVal->rightAccess!='1'){
+        debugLog('oui');
+        unset($proectsSubList[$key]);
+        continue;
+      }
+    }else if($mode=='Locked' or $mode=='Unlocked'){
+      $habilitationLock=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'lockedImputation'));
+      if($habilitationLock->rightAccess!='1' ){
+        unset($proectsSubList[$key]);
+        continue;
+      }
+    }
     foreach ($lstProj as $idProj){
       if($all=='false' and $month.$key==$idProj){
        unset($proectsSubList[$key]);
@@ -62,22 +81,21 @@ foreach ($lstProj as $id=>$val){
   }
 }
 //==============//
-
 if($mode =='validaTionCons'){ // create all consolidationValidation for save 
   $lstImpLocked=array();
   foreach($lstProj as $projId){
     $cons=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$projId,"month"=>$month));
     $cons->idProject=$projId;
-    $projId=$month.$projId;
+    $idproj=$month.$projId;
     $cons->idResource=$currentUser;
     $cons->month=$month;
-    $cons->revenue=RequestHandler::getValue('revenue_'.$projId);;
-    $cons->validatedWork=RequestHandler::getValue('validatedWork_'.$projId);
-    $cons->realWork=RequestHandler::getValue('realWork_'.$projId);;
-    $cons->realWorkConsumed=RequestHandler::getValue('realWorkConsumed_'.$projId);
-    $cons->plannedWork=RequestHandler::getValue('plannedWork_'.$projId);
-    $cons->leftWork=RequestHandler::getValue('leftWork_'.$projId);
-    $cons->margin=RequestHandler::getValue('margin_'.$projId);
+    $cons->revenue=RequestHandler::getValue('revenue_'.$idproj);;
+    $cons->validatedWork=RequestHandler::getValue('validatedWork_'.$idproj);
+    $cons->realWork=RequestHandler::getValue('realWork_'.$idproj);;
+    $cons->realWorkConsumed=RequestHandler::getValue('realWorkConsumed_'.$idproj);
+    $cons->plannedWork=RequestHandler::getValue('plannedWork_'.$idproj);
+    $cons->leftWork=RequestHandler::getValue('leftWork_'.$idproj);
+    $cons->margin=RequestHandler::getValue('margin_'.$idproj);
     $cons->validationDate=date('Y-m-d');
     $lstCons[]=$cons;
     $critArray=array('idProject'=>$projId,'month'=>$month);

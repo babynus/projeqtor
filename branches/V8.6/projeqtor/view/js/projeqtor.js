@@ -7183,16 +7183,22 @@ function decrementProjectListConsolidation(listProj,length,nameDiv,month){
 }
 
 function getHabilitationConsolidation(lst,lenght,mode){
-  for(var i=0;i<lenght;i++){
+  var i=0;
+  while(i<length){
     if(mode=='locked'){
       if(dojo.byId('projHabilitationLocked_'+lst[i]).value=='2'){
         lst.splice(i,1);
+        length=length-1;
+        continue;
       }
     }else{
-      if(dojo.byId('projHabilitationValidation_'+lst[i].substr(6).value=='2')){
-        lst.splice(i,1);
-      }
+       if(dojo.byId('projHabilitationValidation_'+lst[i]).value=='2'){
+          lst.splice(i,1);
+          length=length-1;
+          continue;
+       }
     }
+      i++;
   }
   return lst;
 }
@@ -7229,11 +7235,12 @@ function refreshConsolidationDiv (proj,month,mode){
   loadContent('../view/refreshConsolidationDiv.php?proj='+proj+'&month='+month+'&mode='+mode,div,false,false,false,false,false,callback);
 }
 
-function lockedImputation(mode,listProj,length,month,asSub){
-  var all=false;
-  if(length!='false')all=true;
+function lockedImputation(mode,listProj,all,month,asSub){
+  if(all!='All')all=false;
+  else all=true;
   if(all){
     listProj=listProj.split(',');
+    length=listProj.length;
     listProj=getHabilitationConsolidation(listProj,length,'locked');
     if(mode=='Locked'){
         nameDiv='lockedImputation_';
@@ -7248,10 +7255,10 @@ function lockedImputation(mode,listProj,length,month,asSub){
   saveConsolidationValidation(listProj,mode,month,all,asSub);
 }
 
-function validateOrCancelAllConsolidation(listId,mode,month,length){
-  console.log(month);
-  listId=getHabilitationConsolidation(listId.split(','),length,'validation');
-  console.log(mode);
+function validateOrCancelAllConsolidation(listId,mode,month){
+  listIdP=listId.split(',');
+  length=listIdP.length;
+  listId=getHabilitationConsolidation(listIdP,length,'validation');
   if(mode=="validaTionCons"){
     nameDiv='buttonCancel_';
     listId=decrementProjectListConsolidation(listId,length,nameDiv,month);
@@ -7261,7 +7268,6 @@ function validateOrCancelAllConsolidation(listId,mode,month,length){
   }
   if(listId.length==0)return;
   listId=listId.join(",");
-  console.log(listId);
   saveConsolidationValidation(listId,mode,month,true);
 }
 
