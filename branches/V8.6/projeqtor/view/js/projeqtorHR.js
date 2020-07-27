@@ -700,6 +700,7 @@ function changesEndPM(idUser,nbDays,idStatus,idLeaveType) {
 var creatBool =false;
 
 var leavesCalendarData = [];
+var defaultLvTypeArray = [];
 var leavesTypesArray = [];
 var statusArray = [];
 var statusFromTo = [];
@@ -1002,6 +1003,7 @@ function fillLeavesCalendarDataArray(startDate,endDate){
             }
             
             leavesTypesArray = leaves["leaveTypes"];
+            defaultLvTypeArray = leaves["default"];
             statusArray = leaves["status"];
             leftArray = leaves["left"];
             statusFromTo = leaves["statusFromTo"];
@@ -1374,15 +1376,18 @@ function showModifPopup(idLeave, leaveType, status, startDate, endDate, startAMP
     
     // The popup of types
     // Disable type option if employee has not left for a type
+    var selectLeaveTypeFirst = [];
     for(var i=0;i<popupTypeSelectOptions.length;i++) {
         if (!(popupTypeSelectOptions[i].value in leftArray)) {
             popupTypeSelectOptions[i].disabled=true;
         } else {
-            popupTypeSelectOptions[i].disabled=false;            
+            popupTypeSelectOptions[i].disabled=false;
+            selectLeaveTypeFirst.push(popupTypeSelectOptions[i].value);
         }
     }
     dijit.byId('popupLeaveType').set("options", popupTypeSelectOptions);
-    dijit.byId('popupLeaveType').attr('value', leaveType);
+    //Put the first value in the select menu of leave type
+    dijit.byId('popupLeaveType').attr('value', selectLeaveTypeFirst[0]);
 
     // The popup of status
     dijit.byId('popupStatus').set("options", popupStatusSelectOptions);
@@ -1693,10 +1698,10 @@ function leaveCalendarDisplay(){
                 });
                   
             //Arrays to make the link between the names and ids of the leaveType
-                var lengthLvTArray = leavesTypesArray.length;
+                var lengthLvTArray = defaultLvTypeArray.length;
                 popupTypeSelectOptions = [];
                 for(var i = 0; i< lengthLvTArray; i++){
-                    popupTypeSelectOptions.push({value:leavesTypesArray[i].id, label:leavesTypesArray[i].name, selected:false, disabled:false}); 
+                    popupTypeSelectOptions.push({value:defaultLvTypeArray[i].id, label:defaultLvTypeArray[i].name, selected:false, disabled:false});
                 }
                 
                 var lengthStatusArray = statusArray.length;
