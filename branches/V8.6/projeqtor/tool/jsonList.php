@@ -879,6 +879,7 @@ if ($type == 'empty') {
     $complexity = new Complexity($val->idComplexity);
     $tabComplexityValues[$complexity->id]=$complexity->name;
   }
+   ksort($tabComplexityValues);
    echo '{id:"", name:""},';
   foreach ($tabComplexityValues as $id=>$name){
     echo '{id:"'.$id.'", name:"'.$name.'"},';

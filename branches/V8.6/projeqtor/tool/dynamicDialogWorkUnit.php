@@ -28,9 +28,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 $mode = RequestHandler::getValue('mode',false,null);
 $id = RequestHandler::getId('id');
 $idCatalog=RequestHandler::getValue('idCatalog',false,null);
-$workUnit = new WorkUnit($id);
+$workUnits = new WorkUnit($id);
 $detailHeight=50;
-$detailWidth=500;
+$detailWidth=800;
 $complexity = new Complexity();
 $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
 $nbComplexities = count($listComplexity);
@@ -40,17 +40,17 @@ if($tdWitdh>10)$tdWitdh=10;
 $tabCompValues = array();
 ?>
 <div>
-  <table>
+  <table style="width:100%;">
     <tr>
       <td>
        <form dojoType="dijit.form.Form" id='workUnitForm' name='workUnitForm' onSubmit="return false;">
         <input id="idCatalog" name="idCatalog" type="hidden" value="<?php echo $idCatalog;?>" />
         <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
          <input id="mode" name="idWorkUnit" type="hidden" value="<?php echo $id;?>" />
-         <table>
+         <table style="width:1000px;">
          <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr>
-             <td class="dialogLabel" >
+             <td style="width:100px;" class="dialogLabel" >
                <label for="WUReference" ><?php echo i18n("colReference");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
@@ -58,45 +58,45 @@ $tabCompValues = array();
                 id="WUReferences" name="WUReferences"
                 style="width:400px;"
                 maxlength="4000"
-                class="input"><?php echo htmlspecialchars($workUnit->reference);?></textarea>   
+                class="input"><?php echo htmlspecialchars($workUnits->reference);?></textarea>   
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
-             <td class="dialogLabel" >
+             <td style="vertical-align: top;width:100px;" class="dialogLabel" >
                <label for="WUDescription" ><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
 					     <input id="WUDescription" name="WUDescription" type="hidden" value=""/>
-                    <textarea  style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
-                    name="WUDescriptions" id="WUDescriptions"><?php echo htmlspecialchars($workUnit->description);?></textarea>
+                    <textarea  style="width:<?php echo $detailWidth;?>px; height:<?php echo $detailHeight;?>px"
+                               name="WUDescriptions" id="WUDescriptions"><?php echo htmlspecialchars($workUnits->description);?></textarea>
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
-             <td class="dialogLabel" >
+             <td style="width:100px;vertical-align: top;" class="dialogLabel" >
                <label for="WUIncoming" ><?php echo i18n("colIncoming");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
               <input id="WUIncoming" name="WUIncoming" type="hidden" value=""/>
-                    <textarea  style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
-                    name="WUIncomings" id="WUIncomings"><?php echo htmlspecialchars($workUnit->entering);?></textarea>
+                    <textarea  style="width:<?php echo $detailWidth;?>px; height:<?php echo $detailHeight;?>px"
+                    name="WUIncomings" id="WUIncomings"><?php echo htmlspecialchars($workUnits->entering);?></textarea>
              </td>
           </tr>
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr>
-             <td class="dialogLabel" >
+             <td style="width:100px;vertical-align: top;" class="dialogLabel" >
                <label for="WULivrable" ><?php echo i18n("colLivrable");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
                <input id="WULivrable" name="WULivrable" type="hidden" value=""/>
-                    <textarea style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
-                    name="WULivrables" id="WULivrables"><?php echo htmlspecialchars($workUnit->deliverable);?></textarea>
+                    <textarea style="width:<?php echo $detailWidth;?>px; height:<?php echo $detailHeight;?>px"
+                    name="WULivrables" id="WULivrables"><?php echo htmlspecialchars($workUnits->deliverable);?></textarea>
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr>
-             <td class="dialogLabel" >
+             <td  class="dialogLabel" >
                <label for="ValidityDateWU" ><?php echo i18n("colValidityDate");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
@@ -114,6 +114,7 @@ $tabCompValues = array();
               <tr> 
                 <td  style="width:15%" class="assignHeader"><?php echo i18n("colComplexity");?></td>
                 <?php foreach ($listComplexity as $comp){ 
+                  $actPl = new ActivityPlanningElement();
                         if($mode =='edit'){
                           $lstCompVal=SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalog'=>$idCatalog,'idComplexity'=>$comp->id,'idWorkUnit'=>$id));
                           foreach ($lstCompVal as $idLib=>$val){
@@ -127,25 +128,40 @@ $tabCompValues = array();
               </tr>
               <tr>
                 <td style="width:10%;text-align:center;" class="assignData" > <?php  echo i18n('charge').'  ('.Work::displayShortWorkUnit().')';?> </td>
-                <?php foreach ($listComplexity as $comp){ ?>
+                <?php foreach ($listComplexity as $comp){
+                  $isReadOnly = "";
+                  if($mode=='edit'){
+                    $readOnly = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$comp->id,'idWorkUnit'=>$id));
+                    if($readOnly)$isReadOnly= "readOnly" ;
+                  }?>
                 <td style="width:<?php echo $tdWitdh;?>%"  class="assignData">
-                <input dojoType="dijit.form.NumberTextBox" id="charge<?php echo $comp->id;?>" name="charge<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['charge'];} ?>" />
+                <input dojoType="dijit.form.NumberTextBox" <?php echo $isReadOnly; ?> id="charge<?php echo $comp->id;?>" name="charge<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['charge'];} ?>" />
                 </td>
                 <?php } ?>
               </tr>
               <tr>
                 <td style="width:10%;text-align:center;" class="assignData"> <?php echo i18n('price').'  ('.Parameter::getGlobalParameter('currency').')';?></td>
-                <?php foreach ($listComplexity as $comp){ ?>
+                <?php foreach ($listComplexity as $comp){ 
+                  $isReadOnly = "";
+                  if($mode=='edit'){
+                    $readOnly = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$comp->id,'idWorkUnit'=>$id));
+                    if($readOnly)$isReadOnly= "readOnly";
+                  }?>
                 <td style="width:<?php echo $tdWitdh;?>%" class="assignData">
-                <input dojoType="dijit.form.NumberTextBox" id="price<?php echo $comp->id;?>" name="price<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['price'];} ?>" />
+                <input dojoType="dijit.form.NumberTextBox" <?php echo $isReadOnly; ?> id="price<?php echo $comp->id;?>" name="price<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['price'];} ?>" />
                 </td>
                 <?php } ?>
               </tr>
               <tr>
-                <td style="width:10%;text-align:center;" class="assignData"> <?php echo i18n('duration').'  ('.Work::displayShortWorkUnit().')';?> </td>
-                <?php foreach ($listComplexity as $comp){ ?>
+                <td style="width:10%;text-align:center;" class="assignData"> <?php echo i18n('duration').'  ('.i18n('shortDay').')';?> </td>
+                <?php foreach ($listComplexity as $comp){
+                  $isReadOnly = "";
+                  if($mode=='edit'){
+                    $readOnly = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$comp->id,'idWorkUnit'=>$id));
+                    if($readOnly)$isReadOnly= "readOnly";
+                  }?>
                 <td style="width:<?php echo $tdWitdh;?>%" class="assignData"> 
-                <input dojoType="dijit.form.NumberTextBox" id="duration<?php echo $comp->id;?>" name="duration<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['duration'];} ?>" />
+                <input dojoType="dijit.form.NumberTextBox" <?php echo $isReadOnly; ?> id="duration<?php echo $comp->id;?>" name="duration<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['duration'];} ?>" />
                  </td>
                 <?php } ?>
              </tr>

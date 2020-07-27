@@ -78,12 +78,23 @@ class CatalogUOMain extends SqlElement {
     parent::__destruct();
   }
 
-//   public function save() {
-//     //$oldBill = $this->getOld();
-    
-//     $result=parent::save();
-//     return $result;
-//   }
+  public function save() {
+    if(!$this->id){
+      if(!$this->numberComplexities)$this->numberComplexities=Parameter::getGlobalParameter('ComplexitiesNumber');
+    }else{
+      $old = $this->getOld();
+      if($this->idProject != $old->idProject){
+        $workU = new WorkUnit();
+        $lstWorkUnit = $workU->getSqlElementsFromCriteria(array('idCatalog'=>$this->id));
+        foreach ($lstWorkUnit as $woU){
+          $woU->idProject = $this->idProject;
+          $woU->save();
+        }
+      }
+    }
+    $result=parent::save();
+    return $result;
+  }
   
   public function control(){
     $result="";
@@ -97,8 +108,9 @@ class CatalogUOMain extends SqlElement {
         $result .= '<br/>' . i18n ( 'projectIsAlreadyUsed' );
       }
     }
-    if($this->numberComplexities > 10){
-      $result .= '<br/>' . i18n ( 'complexityCantBeSuperiorThan10' );
+    $nbComplex = Parameter::getGlobalParameter('ComplexitiesNumber'); 
+    if($this->numberComplexities > $nbComplex and $nbComplex > 0){
+      $result .= '<br/>' . i18n ( 'complexityCantBeSuperiorThan'.$nbComplex );
     }
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
@@ -144,7 +156,7 @@ class CatalogUOMain extends SqlElement {
     if ($colName=="numberComplexities") {
       if($this->id){
         $colScript .= '<script type="dojo/connect" event="onChange" >';
-        $colScript .= '  updateComplexities(dijit.byId("numberComplexities").get("value"),'.$this->id.');';
+        $colScript .= '  updateComplexities(dijit.byId("numberComplexities").get("value"),'.$this->id.','.Parameter::getGlobalParameter('ComplexitiesNumber').');';
         $colScript .= '  formChanged();';
         $colScript .= '</script>';
       }

@@ -35,13 +35,17 @@ $idWorkUnit = RequestHandler::getId('idWorkUnit');
 Sql::beginTransaction();
 if($number){
   $catalog = new CatalogUO($idCatalog);
-  $catalog->numberComplexities = $number;
-  $catalog->save();
   $complexity = new Complexity();
+  $actPl = new ActivityPlanningElement();
   $lstComplexities = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
   foreach ($lstComplexities as $val){
-    if($val->idZone > $number){
+    $cantDelete = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$val->id));
+    if($val->idZone > $number and !$cantDelete){
       $val->delete();
+    }
+    if($val->idZone > $number and $cantDelete){
+      $oldCatalog = $catalog->getOld();
+       echo $oldCatalog->numberComplexities;
     }
   }
   Sql::commitTransaction();

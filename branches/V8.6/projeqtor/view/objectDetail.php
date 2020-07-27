@@ -166,8 +166,8 @@ if ($noselect) {
       exit();
   }
   if (array_key_exists('refreshComplexitiesValues', $_REQUEST)) {
-        $workUnit = new WorkUnit();
-        $listWorkUnit = $workUnit->getSqlElementsFromCriteria(array('idCatalog'=>$obj->id));
+        $wu = new WorkUnit();
+        $listWorkUnit = $wu->getSqlElementsFromCriteria(array('idCatalog'=>$obj->id));
         $complexity = new Complexity();
         $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$obj->id));
         drawWorkUnits($obj,$listWorkUnit,$listComplexity,true);
@@ -7109,12 +7109,15 @@ function drawWorkUnits($obj,$listWorkUnit,$listComplexity,$refresh=false) {
       if(!$compValu->price and !$compValu->charge and !$compValu->duration)$idleClass = ' background:#EAEAEA; ';
       echo '  <td style="height:100%;padding:0;'.$idleClass.'" class="assignData">';
       if($idleClass== ""){
+        $work=null;
+        if($compValu->charge)$work = Work::displayWorkWithUnit($compValu->charge);
         $price = ($compValu->price)?htmlDisplayCurrency($compValu->price):'';
-        $duration = ($compValu->duration)?Work::displayWorkWithUnit($compValu->duration):'';
+        $duration = null;
+        if($compValu->duration)$duration = $compValu->duration.' '.i18n('shortDay');
         echo '    <table style="width:100%;height:100%;text-align:right;" ><tr>
-                    <td style="width:33%;border-right:1px solid #AAAAAA;padding-right:5px;">'.Work::displayWorkWithUnit($compValu->charge).'</td>
-                    <td style="width:33%;border-right:1px solid #AAAAAA; padding-right:5px;">'.$price.'</td>
-                    <td style="width:33%;padding-right:5px;">'.$duration.'</td>
+                    <td title="'.i18n('charge').'" style="width:33%;border-right:1px solid #AAAAAA;padding-right:5px;padding-left:5px;">'.$work.'</td>
+                    <td title="'.i18n('price').'" style="width:33%;border-right:1px solid #AAAAAA; padding-right:5px;">'.$price.'</td>
+                    <td title="'.i18n('duration').'" style="width:33%;padding-right:5px;">'.$duration.'</td>
                     </tr></table>';
       }
       echo '  </td>';
