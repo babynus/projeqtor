@@ -228,7 +228,7 @@ class ConsolidationValidation extends SqlElement{
           $profAss=$curUser->getProfile($projectsList[$i]);
           ///----------------------------------------------------///
           
-          //________ sort by wbs ________//
+          //________ draw by wbs ________//
           
           $wbs=$projectsList[$i]->ProjectPlanningElement->wbsSortable;
           $split=explode('.', $wbs);
