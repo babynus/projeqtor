@@ -137,6 +137,10 @@ function excelFormatCell($cellType='data',$width=null, $color=null, $bgcolor=nul
       $bgcolor=getColorFromTheme('subheader');
       $color='ffffff';
       $borderColor=getColorFromTheme('rowheader');
+    } else if ($cellType=='subheaderred') {
+      $bgcolor=getColorFromTheme('subheader');
+      $color='F50000';
+      $borderColor=getColorFromTheme('rowheader');
     } else if ($cellType=='rowheader') {
       $bgcolor=getColorFromTheme('rowheader');
       $color=getColorFromTheme('dark');
