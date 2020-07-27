@@ -1143,10 +1143,10 @@ class PlanningElement extends SqlElement {
         $asSubProj=false;
         $asSubAct=false;
         foreach ($sons as $id=>$pe){
-            if ($pe->refType=='Activity' and $pe->idProject==$this->idProject and $pe->topId==$this->id){
+            if ($pe->refType=='Activity' and $pe->idProject==$this->idProject and $pe->topId==$this->id and !$pe->idle and !$this->idle){
         		$sumActPlEl+=$pe->revenue;
         		$asSubAct=true;
-        	}else if ($pe->refType=='Project' and $pe->topRefId==$this->idProject ){
+        	}else if ($pe->refType=='Project' and $pe->topRefId==$this->idProject and !$pe->idle and !$this->idle){
         	    $asSubProj=true;
         		$sumProjlEl+=$pe->revenue;
         	}else{
