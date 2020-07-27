@@ -236,6 +236,11 @@ class Module extends SqlElement {
       unset($list['useOrganizationBudgetElement']);
       unset($list['sectionOrganization']);
     }
+    if (! Module::isModuleActive('moduleGestionCA')) {
+      unset($list['ComplexitiesNumber']);
+      unset($list['CaReplaceValidCost']);
+      unset($list['sectionFinancialWorkUnit']);
+    }
   }
   
   public static function getListOfFieldsToHide($class) {

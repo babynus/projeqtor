@@ -28,7 +28,6 @@
  * Get the list of objects, in Json format, to display the grid list
  */
 require_once "../tool/projeqtor.php"; 
-
 $idCatalog=RequestHandler::getId('idCatalog');
 $name=RequestHandler::getValue('name');
 $idZone=RequestHandler::getValue('idZone');
@@ -53,7 +52,11 @@ if(!$exist){
     $compVal = new ComplexityValues();
     $nbCompVal = $compVal->countSqlElementsFromCriteria(array('idComplexity'=>$complexity->id));
     if(!$nbCompVal){
-    $complexity->delete();
+      $actPl = new ActivityPlanningElement();
+      $canDelete = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$complexity->id));
+      if(!$canDelete){
+        $complexity->delete();
+      }
     }else{
       return;
     }

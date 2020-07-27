@@ -46,47 +46,51 @@ if($mode == 'edit'){
   $wu = new WorkUnit($idWorkUnit);
   $actPl = new ActivityPlanningElement();
   $countActPL = $actPl->countSqlElementsFromCriteria(array('idWorkUnit'=>$idWorkUnit));
-  if ($countActPL){
-    $res='<b>Contrôles invalides.</b><br/><br/>'.i18n('workUnitIsUseByActivity').'<input type="hidden" id="lastOperationStatus" value="INVALID" /><input type="hidden" id="lastSaveId" value="" /><input type="hidden" id="lastOperation" value="control" />';
-  }else{
-    $wu->idCatalog = $idCatalog;
-    $wu->reference = $WUReference;
-    $wu->description = $WUDescription;
-    $wu->entering = $WUIncoming;
-    $wu->deliverable = $WULivrable;
-    $wu->validityDate = $ValidityDateWU;
-    $catalog = new CatalogUO($idCatalog);
-    $wu->idProject = $catalog->idProject;
-    $res = $wu->save();
-    $complexity = new Complexity();
-    $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
-    foreach ($listComplexity as $comp){
-      $charge = RequestHandler::getNumeric('charge'.$comp->id);
-      $price = RequestHandler::getNumeric('price'.$comp->id);
-      $duration = RequestHandler::getNumeric('duration'.$comp->id);
-      $compVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalog'=>$idCatalog,'idComplexity'=>$comp->id,'idWorkUnit'=>$idWorkUnit));
-       if(!$compVal->id){
-          if( !$charge and !$price and !$duration)continue;
-          $compValue = new ComplexityValues();
-          $compValue->idCatalog = $idCatalog;
-          $compValue->idComplexity = $comp->id;
-          $compValue->idWorkUnit = $wu->id;
-          $compValue->charge = Work::convertWork($charge);
+  //$res='<b>Contrôles invalides.</b><br/><br/>'.i18n('workUnitIsUseByActivity').'<input type="hidden" id="lastOperationStatus" value="INVALID" /><input type="hidden" id="lastSaveId" value="" /><input type="hidden" id="lastOperation" value="control" />';
+  $wu->idCatalog = $idCatalog;
+  $wu->reference = $WUReference;
+  $wu->description = $WUDescription;
+  $wu->entering = $WUIncoming;
+  $wu->deliverable = $WULivrable;
+  $wu->validityDate = $ValidityDateWU;
+  $catalog = new CatalogUO($idCatalog);
+  $wu->idProject = $catalog->idProject;
+  $res = $wu->save();
+  $result = getLastOperationStatus($res);
+  $complexity = new Complexity();
+  $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
+  foreach ($listComplexity as $comp){
+    $charge = RequestHandler::getNumeric('charge'.$comp->id);
+    $charge = Work::convertWork($charge);
+    if($charge==0)$charge=null;
+    $price = RequestHandler::getNumeric('price'.$comp->id);
+    $duration = RequestHandler::getNumeric('duration'.$comp->id);
+    $compVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalog'=>$idCatalog,'idComplexity'=>$comp->id,'idWorkUnit'=>$idWorkUnit));
+     if(!$compVal->id){
+        if( !$charge and !$price and !$duration)continue;
+        $compValue = new ComplexityValues();
+        $compValue->idCatalog = $idCatalog;
+        $compValue->idComplexity = $comp->id;
+        $compValue->idWorkUnit = $wu->id;
+        $charge = Work::convertWork($charge);
+        $compValue->charge = $charge;
+        $compValue->price = $price;
+        $compValue->duration = $duration;
+        $compValue->save();
+     }else{
+       $compValue = new ComplexityValues($compVal->id);
+        if( !$charge and !$price and !$duration){
+          $compValue->delete();
+        }else{
+          $compValue->charge = $charge;
           $compValue->price = $price;
           $compValue->duration = $duration;
           $compValue->save();
-       }else{
-         $compValue = new ComplexityValues($compVal->id);
-          if( !$charge and !$price and !$duration){
-            $compValue->delete();
-          }else{
-            $compValue->charge = Work::convertWork($charge);
-            $compValue->price = $price;
-            $compValue->duration = Work::convertWork($duration);
-            $compValue->save();
-          }
-       }
-    }
+        }
+     }
+      if($result == "NO_CHANGE"){
+        $res = i18n('WorkUnit').' #'.$idWorkUnit.' '.i18n("resultUpdated").'<input type="hidden" id="lastSaveId" value="'.$idWorkUnit.'" /><input type="hidden" id="lastOperation" value="update" /><input type="hidden" id="lastOperationStatus" value="OK" />';
+      }
   }
 }else{
   $wu = new WorkUnit();
@@ -107,6 +111,8 @@ if($mode == 'edit'){
     $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
     foreach ($listComplexity as $comp){
       $charge = RequestHandler::getNumeric('charge'.$comp->id);
+      $charge = Work::convertWork($charge);
+      if($charge==0)$charge=null;
       $price = RequestHandler::getNumeric('price'.$comp->id);
       $duration = RequestHandler::getNumeric('duration'.$comp->id);
       if( !$charge and !$price and !$duration)continue;

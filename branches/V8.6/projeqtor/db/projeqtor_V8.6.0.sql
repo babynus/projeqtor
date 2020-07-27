@@ -72,16 +72,21 @@ INSERT INTO `${prefix}habilitationother` (idProfile,scope,rightAccess) VALUES
 (7,'validationImputation','2');
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasExcel`) VALUES
-(110, 'reportConsolidationValidation',7, 'consultationValidation.php', 889,'1');
+(110, 'reportConsolidationValidation',7, 'consultationValidation.php', 889,'1'),
+(111, 'reportLeftWork',1, 'leftWork.php', 199,'1');
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
-(1, 110, 1);
+(1, 110, 1),
+(1, 111, 1);
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 (110, 'idProject', 'projectList', 10, 'currentProject'),
 (110,'idProjectType','projectTypeList',15,null),
 (110, 'idOrganization', 'organizationList', 20,null),
-(110,'month','month',25,'currentMonth');
+(110,'month','month',25,'currentMonth'),
+(111, 'idProject', 'projectList', 10, 'currentProject'),
+(111,'idProjectType','projectTypeList',15,null),
+(111, 'idOrganization', 'organizationList', 20,null);
 
 -- Tags Management
 
