@@ -685,9 +685,11 @@ class PlanningElement extends SqlElement {
     	$cmdAmount = ($paramAmount == 'HT')?'totalUntaxedAmount':'totalFullAmount';
     	$command = new Command();
     	$this->commandSum = $command->sumSqlElementsFromCriteria($cmdAmount, null, $where);
+    	if(!$this->commandSum)$this->commandSum=0;
     	$billAmount = ($paramAmount == 'HT')?'untaxedAmount':'fullAmount';
     	$bill = new Bill();
     	$this->billSum = $bill->sumSqlElementsFromCriteria($billAmount, null, $where);
+    	if(!$this->billSum)$this->billSum=0;
     	$paramCA = Parameter::getGlobalParameter('CaReplaceValidCost');
     	if($paramCA == 'YES' and $this->revenue > 0){
     		$this->validatedCost = $this->revenue;

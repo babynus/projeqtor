@@ -235,10 +235,12 @@ class IndicatorValue extends SqlElement {
         break;
       case 'CACS' :   //CaMoreThanCommandSum
       	$this->targetValue=$obj->$pe->commandSum;
+      	if(!$this->targetValue)$this->targetValue=1;
       	$value=$obj->$pe->revenue;
       	break;
   	 case 'CABS' :   //CaMoreThanBillSum
   		$this->targetValue=$obj->$pe->revenue;
+  		if(!$this->targetValue)$this->targetValue=1;
   		$value=$obj->$pe->billSum;
   		break;
   	}
