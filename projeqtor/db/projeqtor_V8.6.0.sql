@@ -40,7 +40,7 @@ CREATE TABLE `${prefix}consolidationvalidation` (
   `realWorkConsumed` decimal(14,5) unsigned DEFAULT NULL,
   `leftWork` decimal(14,5) unsigned DEFAULT NULL,
   `plannedWork` decimal(14,5) unsigned DEFAULT NULL,
-  `margin` decimal (14,5)  DEFAULT NULL,
+  `margin` decimal (14,5) DEFAULT NULL,
   `validationDate` date,
   `month` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -193,3 +193,8 @@ INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicator
 ('8', 'Project', '30', '0');
 
 ALTER TABLE `${prefix}project` ADD COLUMN `commandOnValidWork` int(1) unsigned default 0 COMMENT '1';
+
+-- ==========================================
+-- Patchs IGE
+-- ==========================================
+ALTER TABLE `${prefix}leavetype` ADD COLUMN `sortOrder` int(3) unsigned default NULL COMMENT '3';
