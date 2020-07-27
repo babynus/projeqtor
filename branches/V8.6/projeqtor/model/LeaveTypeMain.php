@@ -38,6 +38,7 @@ class LeaveTypeMain extends SqlElement {
         public $name;
         public $color;
         public $idActivity;
+        public $sortOrder=0;
     
     public $_sec_treatment;
         public $idWorkflow;
@@ -78,8 +79,9 @@ class LeaveTypeMain extends SqlElement {
     // Define the layout that will be used for lists
     private static $_layout='
     <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
-    <th field="name" width="35%">${name}</th>
+    <th field="name" width="50%">${name}</th>
     <th field="color" width="20%" formatter="colorFormatter">${color}</th>
+    <th field="sortOrder" width="15%">${sortOrderShort}</th>
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
     
@@ -101,7 +103,8 @@ class LeaveTypeMain extends SqlElement {
         "idWorkflow"=>"required",
         "idActivity"=>"hidden",
         "color"=>"required",
-        "_spe_explaination"=>"readonly"
+        "_spe_explaination"=>"readonly",
+        "sortOrder"=>"required"
         );
     
     private static $_databaseTableName = 'leavetype'; 

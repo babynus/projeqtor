@@ -104,12 +104,35 @@ if ($emp->id<0 or $emp->idle==1) { // idRes is'nt activ employee
 
 $user = getSessionUser();
 
+// The list of the leave types
+// filter for each Ressource based on the Contract Type
+$employmentContract = new EmploymentContract();
+$employment = SqlElement::getSingleSqlElementFromCriteria('EmploymentContract',array('idEmployee'=>$idRes,'idle'=>'0'));
+$idEmploymentContractType = $employment->idEmploymentContractType;
+
+$lvECT = new LeaveTypeOfEmploymentContractType();
+$leaveTypeOfEmploymentContractType = $lvECT->getSqlElementsFromCriteria(array("idEmploymentContractType"=> $idEmploymentContractType));
+
+$resLvTypes = [];
 // The left for each leave type of the employee
+$idLeaveT = [];
 $leftList = $emp->getLeftLeavesByLeaveType();
 
-// The list of the leave types
 $lvType=new LeaveType();
-$resLvTypes=$lvType->getSqlElementsFromCriteria(array());
+$defaultLvType = $lvType->getSqlElementsFromCriteria(array());
+foreach($leaveTypeOfEmploymentContractType as $lt) {
+    //$lvType = $lvType->getSqlElementsFromCriteria(array('id'=> $lt->idLeaveType))[0];
+    $lvType =new LeaveType($lt->idLeaveType);
+    array_push($resLvTypes, $lvType);
+    array_push($idLeaveT, $lt->idLeaveType);
+}
+
+foreach ($leftList as $key=>$value) {
+    if (!in_array($key, $idLeaveT)) {
+        unset($leftList[$key]);
+    }
+}
+
 
 // For each leave type, store the associated workflow
 $WfList[0] = 0;
@@ -168,7 +191,8 @@ if(! $lvList){
         "leaveTypes"=>$resLvTypes,
         "status"=>$resStatus,
         "statusFromTo"=>$statusFromToListByWorkflow,
-        "left"=>$leftList            
+        "left"=>$leftList,
+        "default"=>$defaultLvType
     );
     echo json_encode($res);
     exit;
@@ -179,6 +203,7 @@ $res=array(
     "leaveTypes"=>$resLvTypes,
     "status"=>$resStatus,
     "statusFromTo"=>$statusFromToListByWorkflow,
-    "left"=>$leftList
+    "left"=>$leftList,
+    "default"=>$defaultLvType
 );
 echo json_encode($res);
