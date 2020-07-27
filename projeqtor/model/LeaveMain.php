@@ -154,7 +154,7 @@ class LeaveMain extends SqlElement {
         $this->nbDays=1;
         
         $lvType= new LeaveType();
-        $lvTypeList = $lvType->getSqlElementsFromCriteria(null,false,"idle=0","id ASC");
+        $lvTypeList = $lvType->getSqlElementsFromCriteria(null,false,"idle=0","sortOrder ASC");
         if (count($lvTypeList)==0) {
             $this->idLeaveType= null;
         } else {
