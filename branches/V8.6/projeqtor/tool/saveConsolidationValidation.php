@@ -49,12 +49,9 @@ foreach ($lstProj as $id=>$val){
   foreach ($proectsSubList as $key=>$name){
     $proj=new Project($key);
     $prof=$user->getProfile($proj);
-    debugLog($prof);
     if($mode =='validaTionCons' or $mode=='cancelCons'){
       $habilitationVal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'validationImputation'));
-      debugLog($habilitationVal->rightAccess);
       if($habilitationVal->rightAccess!='1'){
-        debugLog('oui');
         unset($proectsSubList[$key]);
         continue;
       }
