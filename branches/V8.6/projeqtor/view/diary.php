@@ -246,7 +246,10 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 		echo '<div style="width:100%;float:left;position:relative;left:-18px;padding-top:2px">';
 		echo '   <div style="float:right;min-width:22px;height:22px;position:relative;margin-top:5px;margin-right:-13px;">#'.$item['id'].'</div>';
 		echo '   <div style="float:left;width:22px;height:22px;position:relative;top:1px;">'.formatColorThumb("idPriority",$item['priorityId'], 22, 'left', i18n('colIdPriority').' : '.$item['priorityName']).'</div>';
-		echo '   <div style="width:60%;position:relative;margin-left:47px;height:23px;overflow:hidden" class="colorNameData">'.colorNameFormatter($item['statusName'].'#split#'.SqlList::getFieldFromId('Status', $item['statusId'], 'color')).'</div>';
+		echo '   <div style="width:60%;position:relative;margin-left:20px;min-height:23px;height:28px;overflow:hidden;top:0px" class="colorNameData">'.colorNameFormatter($item['statusName'].'#split#'.SqlList::getFieldFromId('Status', $item['statusId'], 'color')).'</div>';
+		//Ticket #458 F.KARA
+    if ($item['meetingStartTime'])    echo '<div style="width:35%;position:relative;margin-left:1px;height:15px;top: 0px"><b> ' . $item['meetingStartTime'] . '</b>';
+    else echo '<div style="width:35%;position:relative;margin-left:1px;height:5px;top: 0px">';
 		echo '</div>';
 		echo '</div>';
 		echo '</td></tr></table>';
@@ -390,6 +393,11 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
         if (property_exists($item, 'description')) {
           $description=$item->description;
         }
+        //Ticket #438 F.KARA
+        $meetingStartTime=null;
+        if(property_exists($item,'meetingStartTime')) {
+            $meetingStartTime=substr($item->meetingStartTime,0,5);
+        }
         $date=null;
         $dateField="";
         $name="";
@@ -443,7 +451,9 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
               'responsibleName'=>$responsibleName,
               'statusId'=>$statusId,
               'statusName'=>$statusName,
-              'description'=>$description);
+              'description'=>$description,
+              'meetingStartTime'=> $meetingStartTime //Ticket #438 F.KARA - Get the start time of a meeting
+          );
         }
       }
     }
@@ -467,11 +477,13 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
 	  if (($item->done and !$showDone and !$showIdle) or ($item->idle and !$showIdle) or  (isset($countStatus) and !in_array($item->idStatus, $listStatusFilter)))
 	    continue;
 		if ($pw->refType=='Meeting') {
-			$display=substr($item->meetingStartTime,0,5).' - '.htmlEncode($item->name);
+		    if(isset($item->meetingStartTime)) {
+                $display=htmlFormatTime($item->meetingStartTime);
+            }
 		} else if (get_class($pw)=='Work') {
-				$display='['.Work::displayWorkWithUnit($pw->work).'] '.htmlEncode($item->name);
+				$display='['.Work::displayWorkWithUnit($pw->work).'] ';
 		} else {
-		  $display='<i>('.Work::displayWorkWithUnit($pw->work).')</i> '.htmlEncode($item->name);
+		  $display='<i>('.Work::displayWorkWithUnit($pw->work).')</i> ';
 		}
 		if (array_key_exists($item->idProject,$projectColorArray)) {
 			$color=$projectColorArray[$item->idProject];
@@ -518,6 +530,11 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
 		if (property_exists($item,'description')) {
 		  $description=$item->description;
 		}
+        //Ticket #438 F.KARA
+		$meetingStartTime=null;
+		if(property_exists($item,'meetingStartTime')) {
+		    $meetingStartTime=substr($item->meetingStartTime,0,5);;
+        }
 		$result[$date][$pw->refType.'#'.$pw->refId]=array(
 				'class'=>$pw->refType,
 		    'id'=>$pw->refId,
@@ -536,7 +553,8 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
 				'responsibleName'=>$responsibleName,
 		    'statusId'=>$statusId,
 		    'statusName'=>$statusName,
-		    'description'=>$description
+		    'description'=>$description,
+            'meetingStartTime'=> $meetingStartTime //Ticket #438 F.KARA - Get the start time of a meeting
 		);
 	}
 	return $result;
