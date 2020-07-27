@@ -529,7 +529,15 @@ class PlanningElement extends SqlElement {
     if ($this->initialStartDate and $this->initialEndDate) {
       $this->initialDuration=workDayDiffDates($this->initialStartDate, $this->initialEndDate);
     }
-    
+    if( get_class($this)=='ActivityPlanningElement'){
+      if($this->idWorkUnit and $this->idComplexity and $this->quantity){
+        $complexityVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$this->idWorkUnit,'idComplexity'=>$this->idComplexity));
+        if($complexityVal->duration){
+          $this->validatedDuration = $complexityVal->duration*$this->quantity;
+          if($this->validatedStartDate)$this->validatedEndDate = addWorkDaysToDate($this->validatedStartDate, ($this->validatedDuration));
+        }
+      }
+    }
     //
     $consolidateValidated=Parameter::getGlobalParameter('consolidateValidated');
     if ($consolidateValidated=='NO' or ! $consolidateValidated) {

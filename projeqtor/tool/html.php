@@ -914,7 +914,10 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   if (isLeavesSystemActiv()) { $leaveProjectId = Project::getLeaveProjectId();}
   $group=null;
 // MTY - LEAVE SYSTEM
-
+  if($col == "idComplexity"){
+    ksort($table);
+  }
+  
   foreach($table as $key => $val) {
     
     if($col == "idComplexity"){

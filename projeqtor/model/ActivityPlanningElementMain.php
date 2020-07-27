@@ -293,8 +293,9 @@ class ActivityPlanningElementMain extends PlanningElement {
     $project = new Project($this->idProject);
     if(trim(Module::isModuleActive('moduleGestionCA')) == 1 and $project->ProjectPlanningElement->idRevenueMode == 2){
     	if($this->elementary){
-    	 self::$_fieldsAttributes['revenue']='';
-      	 self::$_fieldsAttributes['idWorkUnit']='';
+      	self::$_fieldsAttributes['idWorkUnit']='';
+      	self::$_fieldsAttributes['revenue']='';
+      	self::$_fieldsAttributes['idWorkUnit']='';
       	if($this->idWorkUnit){
       	  self::$_fieldsAttributes['quantity']='';
       	}else{
@@ -308,7 +309,10 @@ class ActivityPlanningElementMain extends PlanningElement {
       	  self::$_fieldsAttributes['idComplexity']='readonly,size1/3';
       	}
       	if($this->idWorkUnit and $this->idComplexity and $this->quantity){
-      	  self::$_fieldsAttributes['validatedDuration']='readonly';
+      	  $complexityValues = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idComplexity'=>$this->idComplexity,'idWorkUnit'=>$this->idWorkUnit));
+      	  if($complexityValues->duration){
+      	   self::$_fieldsAttributes['validatedDuration']='readonly';
+      	  }
       	  self::$_fieldsAttributes['revenue']='readonly';
       	  self::$_fieldsAttributes['validatedWork']='readonly';
       	  $CaReplaceValidCost= Parameter::getGlobalParameter('CaReplaceValidCost');
@@ -394,6 +398,7 @@ class ActivityPlanningElementMain extends PlanningElement {
     if($this->idWorkUnit and $this->idComplexity and $this->quantity){
       $complexityVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$this->idWorkUnit,'idComplexity'=>$this->idComplexity));
       $this->validatedWork = $complexityVal->charge*$this->quantity;
+      $this->revenue = $complexityVal->price*$this->quantity;
       if($old->quantity != $this->quantity or $old->idComplexity != $this->idComplexity){
         $ass = new Assignment();
         $lstAss = $ass->getSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->refId,'idle'=>'0'));
@@ -412,33 +417,31 @@ class ActivityPlanningElementMain extends PlanningElement {
           }
         }
       }
-      $this->revenue = $complexityVal->price*$this->quantity;
-      $this->validatedDuration = $complexityVal->duration*$this->quantity;
       $workUnit = new WorkUnit($this->idWorkUnit);
-      if($workUnit->validityDate ){
-        $today = new DateTime("now");
-        $validityDate = new DateTime($workUnit->validityDate);
-        if($validityDate < $today){
-          $alert = new Alert();
-          $exist = $alert->countSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->refId,'idIndicatorValue'=>$workUnit->id,'idProject'=>$this->idProject));
-          if(!$exist){
-            $itemName=i18n('Activity');
-            $title=ucfirst(i18n('Alert')) .' - '. $itemName . ' #' . $this->refId;
-            $alert->title = $title;
-            $alert->idProject = $this->idProject;
-            $alert->alertType = 'ALERT';
-            $alert->refId = $this->refId;
-            $alert->refType = "Activity";
-            $alert->idIndicatorValue = $workUnit->id;
-            $alert->message = i18n('workUnitValidityDateIsPassed');
-            $alert->readFlag=0;
-            $alert->alertInitialDateTime=date('Y-m-d H:i:s');
-            $alert->alertDateTime=date('Y-m-d H:i');
-            $alert->idle=0;
-            $alert->save();
-          }
-        }
-      }
+//       if($workUnit->validityDate ){
+//         $today = new DateTime("now");
+//         $validityDate = new DateTime($workUnit->validityDate);
+//         if($validityDate < $today){
+//           $alert = new Alert();
+//           $exist = $alert->countSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->refId,'idIndicatorValue'=>$workUnit->id,'idProject'=>$this->idProject));
+//           if(!$exist){
+//             $itemName=i18n('Activity');
+//             $title=ucfirst(i18n('Alert')) .' - '. $itemName . ' #' . $this->refId;
+//             $alert->title = $title;
+//             $alert->idProject = $this->idProject;
+//             $alert->alertType = 'ALERT';
+//             $alert->refId = $this->refId;
+//             $alert->refType = "Activity";
+//             $alert->idIndicatorValue = $workUnit->id;
+//             $alert->message = i18n('workUnitValidityDateIsPassed');
+//             $alert->readFlag=0;
+//             $alert->alertInitialDateTime=date('Y-m-d H:i:s');
+//             $alert->alertDateTime=date('Y-m-d H:i');
+//             $alert->idle=0;
+//             $alert->save();
+//           }
+//         }
+//       }
       $CaReplaceValidCost= Parameter::getGlobalParameter('CaReplaceValidCost');
       if($CaReplaceValidCost=='YES'){
         $this->validatedCost = $complexityVal->price*$this->quantity;
