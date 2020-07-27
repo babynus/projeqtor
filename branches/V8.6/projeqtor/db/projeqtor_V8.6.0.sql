@@ -40,7 +40,7 @@ CREATE TABLE `${prefix}consolidationvalidation` (
   `realWorkConsumed` decimal(14,5) unsigned DEFAULT NULL,
   `leftWork` decimal(14,5) unsigned DEFAULT NULL,
   `plannedWork` decimal(14,5) unsigned DEFAULT NULL,
-  `margin` decimal(14,5) unsigned DEFAULT NULL,
+  `margin` decimal (14,5)  DEFAULT NULL,
   `validationDate` date,
   `month` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
