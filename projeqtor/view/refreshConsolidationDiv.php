@@ -38,15 +38,13 @@ $month = RequestHandler::getValue('month');
 $mode=RequestHandler::getValue('mode');
 $curUser=getSessionUser();
 $canChangeValidation=true;
-$idUser=$curUser->id;
-$prof=$curUser->idProfile;
-$ass=SqlElement::getSingleSqlElementFromCriteria('Affectation',array("idProject"=>$reelIdProj,"idResource"=>$idUser));
-$profAss=$ass->idProfile;
+$project=new Project($projId);
+$prof=$curUser->getProfile($project);
 $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$reelIdProj,"month"=>$month));
 if($consValPproj->id!=''){
-  $clauseWhere="idProject=$reelIdProj and month<$month";
-  $consValPprojBefor=$consValPproj->getSqlElementsFromCriteria(null,null,$clauseWhere);
-  if(!empty($consValPprojBefor)){
+  $clauseWhere="idProject=$reelIdProj and month > $month";
+  $consValPprojAfter=$consValPproj->getSqlElementsFromCriteria(null,null,$clauseWhere);
+  if(!empty($consValPprojAfter)){
     $canChangeValidation=false;
   }
 }
@@ -54,14 +52,12 @@ if($consValPproj->id!=''){
 if($mode!='validaTionCons' and $mode!='cancelCons'){
   $lockImp= new LockedImputation();
   $where="idProject=$projId and month<$month";
-//   $lockBefor=$lockImp->getSqlElementsFromCriteria(null,null,$where);
-//   $lockBefor=(empty($lockBefor))?'':$lockBefor->month;
   $critArray= array('idProject'=>$projId,'month'=>$month);
   $lock = SqlElement::getSingleSqlElementFromCriteria('LockedImputation', array("idProject"=>$reelIdProj,"month"=>$month));
   $lock=($mode=="UnLocked")?'':$lock->month;
-  $res = ConsolidationValidation::drawLockedDiv($projId, $month, $lock,/*$lockBefor*/'',false,(($profAss!='' and $profAss!=$prof)?$profAss:$prof),$consValPproj);
+  $res = ConsolidationValidation::drawLockedDiv($projId, $month, $lock,'',false,$prof,$consValPproj);
 }else if ($mode=='validaTionCons' or $mode=='cancelCons'){
-  $res = ConsolidationValidation ::drawValidationDiv($consValPproj,$canChangeValidation,$projId,$month,false,(($profAss!='' and $profAss!=$prof)?$profAss:$prof));
+  $res = ConsolidationValidation ::drawValidationDiv($consValPproj,$canChangeValidation,$projId,$month,false,$prof);
 }
 echo $res;
 ?>
