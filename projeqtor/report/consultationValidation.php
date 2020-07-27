@@ -77,23 +77,23 @@ $reelConsTotal=0;
 // top board
 echo '<table  style="width:90%;margin-left:5%;margin-right:5%;" '.excelName().'>';
 echo ' <tr>';
-echo '   <td style="width:20%,border-bottom:2px solid black;" class="reportTableHeader" '.excelFormatCell('header').' rowspan="2" colspan="2">&nbsp;</td>';
-echo '   <td style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).' rowspan="2">'.i18n('validatedConsolidation').'</td>';
-echo '   <td style="width:70%" class="reportTableHeader" '.excelFormatCell('header',20).' colspan="7">'.i18n('sectionWork').'</td>';
+echo '   <td style="width:20%,border-bottom:2px solid black;" class="reportTableHeader" '.excelFormatCell('header',60).' rowspan="2" colspan="2">'.i18n('menuProject').'</td>';
+echo '   <td style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).' rowspan="2">'.ucfirst(i18n('validatedConsolidation')).'</td>';
+echo '   <td style="width:70%" class="reportTableHeader" '.excelFormatCell('header',20).' colspan="7">'.ucfirst(i18n('technicalWork')).'</td>';
 echo ' </tr>';
 echo ' <tr>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colCA').'</td>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colValidated').'</td>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colReal').'</td>';
+echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colRevenue').'</td>';
+echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colWorkApproved').'</td>';
+echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('totalReal').'</td>';
 echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colRealCons').'</td>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colLeft').'</td>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colPlanned').'</td>';
+echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colRemainToDo').'</td>';
+echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.ucfirst(i18n('colWorkReassessed')).'</td>';
 echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colMargin').'</td>';
 echo ' <tr>';
 
 
+
   foreach ($lstProj as $proj){    // draw line for each project 
-    
     $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$proj->id,"month"=>$concMonth));
     $consolidation=i18n('displayNo');
     if($consValPproj->id!=''){
@@ -115,38 +115,56 @@ echo ' <tr>';
       $margin=$validatedWork-$plannedWork;
       $reelCons=ConsolidationValidation::getReelWorkConsumed($proj,$concMonth);
     }
+    $colorCons=($consolidation==i18n('displayYes'))?"color:green":"color:red";
     $projectCode=($proj->projectCode!='')?$proj->projectCode:'-';
 
-    $revenueTotal+=$revenue;
-    $validatedWorkTotal+=$validatedWork;
-    $reelTotal+=$reel;
-    $reelConsTotal+=$reelCons;
-    $leftWorkTotal+=$leftWork;
-    $plannedWorkTotal+=$plannedWork;
-    $marginTotal+=$margin;
+    if($proj->ProjectPlanningElement->topId=='' and $proj->ProjectPlanningElement->topRefId==''){
+      $revenueTotal+=$revenue;
+      $validatedWorkTotal+=$validatedWork;
+      $reelTotal+=$reel;
+      $reelConsTotal+=$reelCons;
+      $leftWorkTotal+=$leftWork;
+      $plannedWorkTotal+=$plannedWork;
+      $marginTotal+=$margin;
+    }
+    $wbs=$proj->ProjectPlanningElement->wbsSortable;
+    $split=explode('.', $wbs);
+    $level=0;
+    $testWbs='';
+    foreach($split as $sp) {
+      $testWbs.=(($testWbs)?'.':'').$sp;
+      if (isset($levels[$testWbs])) $level=$levels[$testWbs]+1;
+    }
+    $levels[$wbs]=$level;
+    $tab="";
+    for ($j=1; $j<=$level; $j++) {
+      $tab.='&nbsp;&nbsp;&nbsp;';
+    }
+    
+    
     echo '  <tr>';
-      echo '   <td class="reportTableData" style="border-right:1px solid grey;'.$compStyle.'" '.excelFormatCell('data',20).' >'.$proj->name.'</td>';
+      echo '   <td class="reportTableData" style="border-right:1px solid grey;text-align:left;'.$compStyle.'" '.excelFormatCell('data',40).' >&nbsp;'.$tab.$proj->name.'</td>';
       echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',20).' >'.$projectCode.'</td>';
-      echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.$consolidation.'</td>';
+      echo '   <td class="reportTableData" style="'.$compStyle.''.$colorCons.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.$consolidation.'</td>';
       echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.costFormatter($revenue).'</td>';    
       echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($validatedWork).'</td>';
       echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reel).'</td>';
       echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reelCons).'</td>';
       echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($leftWork).'</td>';
       echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($plannedWork).'</td>';
-      echo '   <td class="reportTableData" style="'.$compStyle.''.(($margin<0)?"background-color:#E8ABAB":"").'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($margin).'</td>';
+      echo '   <td class="reportTableData" style="'.$compStyle.''.(($margin<0)?"color:red":"").'" '.excelFormatCell('data',null,(($margin<0)?"#F50000":""),null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($margin).'</td>';
     echo '  </tr>';
   }
   
 // Total line 
 echo '  <tr>';
 echo '   <td class="reportTableHeader" colspan="3" '.excelFormatCell('header').' >'.i18n('sum').'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.costFormatter($revenueTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($validatedWorkTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reelTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reelConsTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($leftWorkTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($plannedWorkTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($marginTotal).'</td>';
+echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('subheader',null,null,null,null,null,null,null,'work').'>'.costFormatter($revenueTotal).'</td>';
+echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('subheader',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($validatedWorkTotal).'</td>';
+echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('subheader',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reelTotal).'</td>';
+echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('subheader',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reelConsTotal).'</td>';
+echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('subheader',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($leftWorkTotal).'</td>';
+echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('subheader',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($plannedWorkTotal).'</td>';
+echo '   <td class="assignHeader" style="'.$compStyle.''.(($marginTotal<0)?"color:red":"").'" '.excelFormatCell('subheader',null,(($marginTotal<0)?"#F50000":""),null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($marginTotal).'</td>';
 echo '  </tr>';
 echo '</table>';
