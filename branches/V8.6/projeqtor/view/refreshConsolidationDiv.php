@@ -38,7 +38,7 @@ $month = RequestHandler::getValue('month');
 $mode=RequestHandler::getValue('mode');
 $curUser=getSessionUser();
 $canChangeValidation=true;
-$project=new Project($projId);
+$project=new Project($reelIdProj);
 $prof=$curUser->getProfile($project);
 $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$reelIdProj,"month"=>$month));
 if($consValPproj->id!=''){
@@ -48,7 +48,7 @@ if($consValPproj->id!=''){
     $canChangeValidation=false;
   }
 }
-
+debugLog($prof);
 if($mode!='validaTionCons' and $mode!='cancelCons'){
   $lockImp= new LockedImputation();
   $where="idProject=$projId and month<$month";
