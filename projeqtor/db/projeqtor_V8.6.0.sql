@@ -198,3 +198,5 @@ ALTER TABLE `${prefix}project` ADD COLUMN `commandOnValidWork` int(1) unsigned d
 -- Patchs IGE
 -- ==========================================
 ALTER TABLE `${prefix}leavetype` ADD COLUMN `sortOrder` int(3) unsigned default NULL COMMENT '3';
+
+ALTER TABLE `${prefix}delivery` ADD COLUMN `idContact` int(12) unsigned DEFAULT NULL COMMENT '12';
