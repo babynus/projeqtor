@@ -1763,7 +1763,7 @@ function securityCheckDisplayMenu($idMenu, $class=null, $user=null) {
     if (isLeavesSystemMenuByMenuName("menu".$class)) {
       //return showLeavesSystemMenu("menu".$class);
       $showLeaveMenu=showLeavesSystemMenu("menu".$class);
-      if ($class=="Employee") {
+      if ($class=="Employee" or $class=="HumanResourceParameters") {
         if (! $showLeaveMenu) return false;
       } else {
         return $showLeaveMenu;
