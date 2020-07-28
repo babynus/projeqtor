@@ -44,6 +44,7 @@ class DeliveryMain extends SqlElement {
   public $idProductVersion;
   //END ADD qCazelles
   public $idUser;
+  public $idContact;
   public $creationDateTime;
   public $description;
   public $_sec_validation;
@@ -92,6 +93,7 @@ class DeliveryMain extends SqlElement {
     <th field="nameProject" width="10%" >${idProject}</th>
     <th field="nameDeliveryType" width="10%" >${idDeliveryType}</th>
     <th field="name" width="30%" >${name}</th>
+    <th field="nameUser" formatter="thumbName22" width="10%">${issuer}</th>
     <th field="colorNameDeliverableStatus" width="12%" formatter="colorNameFormatter">${idDeliverableStatus}</th>
     <th field="colorNameDeliverableWeight" width="12%" formatter="colorNameFormatter">${idDeliverableWeight}</th>
     <th field="plannedDate" width="8%" >${plannedDate}</th>
@@ -103,7 +105,6 @@ class DeliveryMain extends SqlElement {
                                   "name"=>"required", 
                                   "idProject"=>"required",
                                   "idDeliveryType"=>"required",
-                                  "idUser"=>"hidden",
                                   "creationDateTime"=>"hidden",
                                   //"scope"=>"hidden",    //REMOVED qCazelles - bug scope Delivery
                                   "idActivity"=>"title",
@@ -115,7 +116,9 @@ class DeliveryMain extends SqlElement {
                                   "cancelled"=>"nobr"
   );  
   
-  private static $_colCaptionTransposition = array('idDeliverableStatus'=>'idDeliveryStatus'
+  private static $_colCaptionTransposition = array('idDeliverableStatus'=>'idDeliveryStatus',
+                                                    'idUser'=>'issuer', //nom du champ + tab
+                                                    'idContact' =>'requestor', //nom du champ + tab
   );
   
   private static $_databaseColumnName = array();
@@ -134,6 +137,9 @@ class DeliveryMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+    if (!$this->id and getSessionUser()->isContact) {
+          $this->idContact=getSessionUser()->id;
+    }
   }
 
    /** ==========================================================================
