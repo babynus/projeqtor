@@ -702,6 +702,9 @@ class PlanningElement extends SqlElement {
     	if($paramCA == 'YES' and $this->revenue > 0){
     		$this->validatedCost = $this->revenue;
     	}
+    	if($old->idRevenueMode != $this->idRevenueMode and $this->idRevenueMode == 2){
+    	  $this->updateRevenue();
+    	}
     	$this->save();
     }
     // save new parent (for synthesis update) if parent has changed
@@ -1142,33 +1145,7 @@ class PlanningElement extends SqlElement {
       $this->unitWeight=$this->setUnitWeight();
     }
     if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
-      $project = new Project($this->idProject);
-      $projectList = $project->getRecursiveSubProjectsFlatList(true,true);
-      $projectList = array_flip($projectList);
-      $projectList = '(0,'.implode(',',$projectList).')';
-      if(($this->idRevenueMode == 2 and $this->refType == 'Project') or $this->refType == 'Activity'){
-        $sons=$this->getSonItemsArray();
-        $sumActPlEl=0;
-        $sumProjlEl=0;
-        $asSubProj=false;
-        $asSubAct=false;
-        foreach ($sons as $id=>$pe){
-            if ($pe->refType=='Activity' and $pe->idProject==$this->idProject and $pe->topId==$this->id and !$pe->idle and !$this->idle){
-        		$sumActPlEl+=$pe->revenue;
-        		$asSubAct=true;
-        	}else if ($pe->refType=='Project' and $pe->topRefId==$this->idProject and !$pe->idle and !$this->idle){
-        	    $asSubProj=true;
-        		$sumProjlEl+=$pe->revenue;
-        	}else{
-        		continue;
-        	}
-        }
-        if($sumActPlEl>0 and !$asSubProj){
-          $this->revenue = $sumActPlEl;
-        }else if($sumProjlEl>0 and ($asSubProj or $asSubAct)){
-          $this->revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
-        }
-      }
+      $this->updateRevenue();
     }
     ///
     // Add data from other planningElements dependant from this one
@@ -2405,6 +2382,37 @@ class PlanningElement extends SqlElement {
         }
       }
     }
+  }
+  
+  function updateRevenue(){
+  	$project = new Project($this->idProject);
+  	$projectList = $project->getRecursiveSubProjectsFlatList(true,true);
+  	$projectList = array_flip($projectList);
+  	$projectList = '(0,'.implode(',',$projectList).')';
+  	if(($this->idRevenueMode == 2 and $this->refType == 'Project') or $this->refType == 'Activity'){
+  	  $this->revenue = 0;
+  		$sons=$this->getSonItemsArray();
+  		$sumActPlEl=0;
+  		$sumProjlEl=0;
+  		$asSubProj=false;
+  		$asSubAct=false;
+  		foreach ($sons as $id=>$pe){
+  			if ($pe->refType=='Activity' and $pe->idProject==$this->idProject and $pe->topId==$this->id and !$pe->idle and !$this->idle){
+  				$sumActPlEl+=$pe->revenue;
+  				$asSubAct=true;
+  			}else if ($pe->refType=='Project' and $pe->topRefId==$this->idProject and !$pe->idle and !$this->idle){
+  				$asSubProj=true;
+  				$sumProjlEl+=$pe->revenue;
+  			}else{
+  				continue;
+  			}
+  		}
+  		if($sumActPlEl>0 and !$asSubProj){
+  			$this->revenue = $sumActPlEl;
+  		}else if($sumProjlEl>0 and ($asSubProj or $asSubAct)){
+  			$this->revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
+  		}
+  	}
   }
 }
 ?>
