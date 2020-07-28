@@ -85,11 +85,12 @@ if($mode =='validaTionCons'){ // create all consolidationValidation for save
     $projectP=new Project($projId);
     $profile=$user->getProfile($projectP);
     $habilitationLock=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$profile,'scope'=>'lockedImputation'));
-    debugLog($habilitationLock);
     if($habilitationLock->rightAccess=='2' ){
-      debugLog('yes');
-      unset($lstProj[$idVal]);
-      continue;
+      $locked=SqlElement::getSingleSqlElementFromCriteria("LockedImputation",array("idProject"=>$projId,"month"=>$month));
+      if($locked->id!=''){
+        unset($lstProj[$idVal]);
+        continue;
+      }
     }
     $habValidation=
     $cons->idProject=$projId;
