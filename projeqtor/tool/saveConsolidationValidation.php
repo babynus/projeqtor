@@ -80,8 +80,18 @@ foreach ($lstProj as $id=>$val){
 //==============//
 if($mode =='validaTionCons'){ // create all consolidationValidation for save 
   $lstImpLocked=array();
-  foreach($lstProj as $projId){
+  foreach($lstProj as $idVal=>$projId){
     $cons=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$projId,"month"=>$month));
+    $projectP=new Project($projId);
+    $profile=$user->getProfile($projectP);
+    $habilitationLock=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$profile,'scope'=>'lockedImputation'));
+    debugLog($habilitationLock);
+    if($habilitationLock->rightAccess=='2' ){
+      debugLog('yes');
+      unset($lstProj[$idVal]);
+      continue;
+    }
+    $habValidation=
     $cons->idProject=$projId;
     $idproj=$month.$projId;
     $cons->idResource=$currentUser;
