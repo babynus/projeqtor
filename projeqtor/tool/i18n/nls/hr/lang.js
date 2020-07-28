@@ -317,6 +317,7 @@ cantDeleteASubmittedRejectedAcceptedLeave: "Nije moguće izbrisati odsutnost koj
 CantDeleteTheDefaultEmploymentContractType: "Ne može izbrisati zadanu vrstu ugovora o radu",
 cantDeleteTheLeaveMngProject: "Ne može izbrisati projekt posvećen modulu regulirana odsutnost",
 cantDeleteTheLeaveMngWorkflow: "Ne može izbrisati workflow posvećen modulu regulirana odsutnost",
+cantHaveHabilitaionLocked: "Impossible to validate a blocked project that you cannot unblock",
 CantHaveMoreThatOneManagerAtTheSameTime: "Ne može imati više od jednog upravitelja u isto vrijeme",
 cantHaveParentWithWorkUnit: "Activities using work unit can't be parent activity",
 cantHaveSubActivity: "Nova roditeljska aktivnost ne može imati pod-zadatke koji odgovaraju vrsti aktivnosti",

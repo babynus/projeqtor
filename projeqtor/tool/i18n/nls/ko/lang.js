@@ -317,6 +317,7 @@ cantDeleteASubmittedRejectedAcceptedLeave: "제출 또는 거부 또는 수락 �
 CantDeleteTheDefaultEmploymentContractType: "기본 고용 계약 유형을 삭제할 수 없습니다",
 cantDeleteTheLeaveMngProject: "휴가 시스템 전용 프로젝트를 삭제할 수 없습니다",
 cantDeleteTheLeaveMngWorkflow: "휴가 시스템 전용 워크 플로우를 삭제할 수 없습니다",
+cantHaveHabilitaionLocked: "Impossible to validate a blocked project that you cannot unblock",
 CantHaveMoreThatOneManagerAtTheSameTime: "동시에 한 명 이상의 관리자를 가질 수 없습니다",
 cantHaveParentWithWorkUnit: "Activities using work unit can't be parent activity",
 cantHaveSubActivity: "새로운 Parrent 활동은 해당 활동 유형에 해당하는 하위 작업을 가질 수 없습니다",

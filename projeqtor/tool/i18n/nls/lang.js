@@ -316,6 +316,7 @@ cantDeleteASubmittedRejectedAcceptedLeave: "Can not delete a leave period submit
 CantDeleteTheDefaultEmploymentContractType: "Can't delete the default employment contract type",
 cantDeleteTheLeaveMngProject: "Can't delete the project dedicated to the leaves system",
 cantDeleteTheLeaveMngWorkflow: "Can't delete the workflow dedicated to the leaves system",
+cantHaveHabilitaionLocked: "Impossible to validate a blocked project that you cannot unblock",
 CantHaveMoreThatOneManagerAtTheSameTime: "Can't have more that one manager at the same time",
 cantHaveParentWithWorkUnit: "Activities using work unit can't be parent activity",
 cantHaveSubActivity: "The new parrent activity cannot have sub-tasks corresponding to its activity type",
