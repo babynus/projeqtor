@@ -316,6 +316,7 @@ cantDeleteASubmittedRejectedAcceptedLeave: "Ne peut pas supprimer une absence so
 CantDeleteTheDefaultEmploymentContractType: "Ne peut supprimer le type de contrat de travail par défaut",
 cantDeleteTheLeaveMngProject: "Ne peut supprimer le projet dédié au module Absences Réglementées",
 cantDeleteTheLeaveMngWorkflow: "Ne peut supprimer le workflow dédié au module Absences Réglementées",
+cantHaveHabilitaionLocked: "Impossible de valider un projet bloqué que vous ne pouvez pas débloquer",
 CantHaveMoreThatOneManagerAtTheSameTime: "Ne peut avoir qu'un gestionnaire en même temps",
 cantHaveParentWithWorkUnit: "Les activités utilisant les unités d’œuvres ne peuvent pas être une activité parente",
 cantHaveSubActivity: "La nouvelle activité parente ne peut pas avoir de sous activités conformément à son type d'activité",

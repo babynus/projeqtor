@@ -56,7 +56,7 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
 }
 $mode = RequestHandler::getValue('mode',false,true);
 
-$elementList = 'idResourceAll';
+$elementList =($refType=="Meeting" || $refType=="PeriodicMeeting")?'idAffectable':'idResourceAll';
 $critFld ='idProject';
 $critVal =$idProject;
 if($isTeam){
@@ -78,10 +78,10 @@ if($isOrganization){
 // if (Parameter::getGlobalParameter('OpenDayFriday')=='offDays') $arrayDefaultOffDays[]=5;
 // if (Parameter::getGlobalParameter('OpenDaySaturday')=='offDays') $arrayDefaultOffDays[]=6;
 // if (Parameter::getGlobalParameter('OpenDaySunday')=='offDays') $arrayDefaultOffDays[]=7;
+$res=($refType=="Meeting" || $refType=="PeriodicMeeting")?'Affectable':'ResourceAll';
+$resource=new $res($idResource);
 
-$resource=new ResourceAll($idResource);
-
-if($resource->id){
+if($resource->id  and $resource->isContact!='1'){
   $calendar = new CalendarDefinition($resource->idCalendarDefinition);
 }else{
   $calendar = new CalendarDefinition();
@@ -134,7 +134,7 @@ if ($planningMode=='RECW') {
                 onChange="<?php if($isSelectFonction == 'YES'){?>assignmentChangeResourceSelectFonction();<?php }else{?> assignmentChangeResource(); <?php }?> assignmentChangeResourceTeamForCapacity();refreshReccurentAssignmentDiv(this.value);"
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdResource')));?>" <?php echo ($realWork!=0 && $mode=='edit')?"readonly=readonly":"";?>>
                 <?php if($mode=='edit'){                      
-                          htmlDrawOptionForReference('idResourceAll', $idResource,$obj,true,'idProject',$idProject);
+                          htmlDrawOptionForReference((($refType=="Meeting" || $refType=="PeriodicMeeting")?'idAffectable':'idResourceAll'), $idResource,$obj,true,'idProject',$idProject);
                 }else{
                           htmlDrawOptionForReference($elementList, null,$obj,false,$critFld,$critVal);
                 }?>
@@ -240,7 +240,7 @@ if ($planningMode=='RECW') {
                  <label for="assignmentCapacity" ><?php echo i18n("colCapacity");?>&nbsp;:&nbsp;</label>
                </td>
                <td>
-                 <?php if ($mode=='edit' and $assignmentObj->capacity==0 and !$resource->isResourceTeam) round($assignmentObj->capacity=$resource->capacity*$assignmentObj->rate/100,1);
+                 <?php if ($mode=='edit' and get_class($resource)!="Affectable" and $assignmentObj->capacity==0 and !$resource->isResourceTeam) round($assignmentObj->capacity=$resource->capacity*$assignmentObj->rate/100,1);
                        if ($assignmentObj->uniqueResource ) round($assignmentObj->capacity=1*$assignmentObj->rate/100,1);?>
                  <div id="assignmentCapacity" name="assignmentCapacity" value="<?php echo ($mode=='edit')?$assignmentObj->capacity:"1";?>"
                    dojoType="dijit.form.NumberTextBox" 
