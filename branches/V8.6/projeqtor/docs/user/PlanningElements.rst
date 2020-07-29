@@ -98,7 +98,6 @@ It is also the top-level of visibility, depending on profiles.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -129,6 +128,28 @@ It is also the top-level of visibility, depending on profiles.
      - Name of the resource who manages the project.
    * - Color
      - Color of the project, to be displayed in some reports.
+   * - :term:`Description`
+     - Complete description of the project.
+   * - Objectives
+     - Objectives of the project.
+
+.. topic:: Field Customer
+
+   The value of the field is used in the Quotations, Orders and Bills concerned with the project.
+
+.. topic:: Field Bill contact
+
+   The value of the field is used in Bills concerned with the project.
+
+
+
+.. rubric:: Section treatment
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
    * - |RequiredField| Status
      - Actual :term:`status` of the project.
    * - Health status
@@ -141,32 +162,23 @@ It is also the top-level of visibility, depending on profiles.
      - Overall progress to be selected in a defined list.
    * - Fix planning
      - Box checked indicates the planning of the project is frozen, and its sub-projects.
+   * - Non extendable project 
+     - When project perimeter is fixed you can't addor delete elements to this project, move elements to or from this project.
    * - Under construction
      - Box checked indicates the project is under construction.
+   * - Exclude from global plan
+     - Do not show the not plannable items for this project on the global planning view. This means that only standard planning items will be displayed excluding actions, decisions, deliveries. 
+   * - Validated work treatment  
+     - Activates treatment of the validated work based on the sum of the work of the project orders otherwise it will be calculated on the sum of the validated work of the activities. 
+   * - :term:`handled`
+     - Box checked indicates the project is begun.
    * - :term:`Done`
      - Box checked indicates the project is finished.
    * - :term:`Closed`
      - Box checked indicates the project is archived.
    * - Cancelled
      - Box checked indicates the project is cancelled.
-   * - :term:`Description`
-     - Complete description of the project.
-   * - Objectives
-     - Objectives of the project.
 
-.. topic:: Field Customer
-
-   * The value of the field is used in the Quotations, Orders and Bills concerned with the project.
-
-.. topic:: Field Bill contact
-
-   * The value of the field is used in Bills concerned with the project.
-
-
-
-.. rubric:: Section Sub projects
-
-List of sub-projects under for the project.
 
 
 .. raw:: latex
