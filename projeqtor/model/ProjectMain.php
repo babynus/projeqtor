@@ -1009,6 +1009,9 @@ static function isTheLeaveProject($id=null) {
         $ps->save();
       }
     }
+    if($this->commandOnValidWork != $old->commandOnValidWork){
+      $this->updateValidatedWork();
+    }
     return $result; 
 
   }
@@ -1064,24 +1067,25 @@ static function isTheLeaveProject($id=null) {
 	  $lst=null;
   	$sumValidatedWork=0;
   	$sumValidatedCost=0;
-  	$order=new Command();
-  	$lst=$order->getSqlElementsFromCriteria(array('idProject'=>$this->id, 'cancelled'=>'0'));
-  	foreach ($lst as $item) { 		
-  		$sumValidatedWork+=$item->validatedWork;
-  		$sumValidatedCost+=$item->totalUntaxedAmount;
+  	if($this->commandOnValidWork == 1){
+  	  $order=new Command();
+  	  $lst=$order->getSqlElementsFromCriteria(array('idProject'=>$this->id, 'cancelled'=>'0'));
+  	  foreach ($lst as $item) {
+  	  	$sumValidatedWork+=$item->validatedWork;
+  	  	$sumValidatedCost+=$item->totalUntaxedAmount;
+  	  }
+  	}else{
+  	  $lst=null;
+  	  $prj=new Project();
+  	  $queryWhere='refType=\'Project\' and refId in (SELECT id FROM ' . $prj->getDatabaseTableName() . ' WHERE idProject=' . $this->id . ' and cancelled=0)';
+  	   
+  	  $prj=new ProjectPlanningElement();
+  	  $lst=$prj->getSqlElementsFromCriteria(null, null, $queryWhere);
+  	  foreach ($lst as $item) {
+  	  	$sumValidatedWork+=$item->validatedWork;
+  	  	$sumValidatedCost+=$item->validatedCost;
+  	  }
   	}
-  	
-  	$lst=null;
-  	$prj=new Project();
-  	$queryWhere='refType=\'Project\' and refId in (SELECT id FROM ' . $prj->getDatabaseTableName() . ' WHERE idProject=' . $this->id . ' and cancelled=0)';
-  	
-  	$prj=new ProjectPlanningElement();
-  	$lst=$prj->getSqlElementsFromCriteria(array(), false, $queryWhere);
-  	foreach ($lst as $item) {
-  		$sumValidatedWork+=$item->validatedWork;
-  		$sumValidatedCost+=$item->validatedCost;
-  	}
-
   	$this->ProjectPlanningElement->validatedWork=$sumValidatedWork;
   	$this->ProjectPlanningElement->validatedCost=$sumValidatedCost;
   	$this->save();

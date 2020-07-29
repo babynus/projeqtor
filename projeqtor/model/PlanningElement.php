@@ -1145,6 +1145,9 @@ class PlanningElement extends SqlElement {
       $this->unitWeight=$this->setUnitWeight();
     }
     if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+      if(($this->refType=='Project' or $this->refType=='Activity') and $this->idRevenueMode==''){
+        $this->idRevenueMode = 2;
+      }
       $this->updateRevenue();
     }
     ///
@@ -1180,7 +1183,12 @@ class PlanningElement extends SqlElement {
       if ($realEndDate and !$pla->realEndDate and $pla->assignedWork==0 and $pla->leftWork==0 and $pla->plannedEndDate>$realEndDate) {
         $realEndDate="";
       }
-      if (!$pla->cancelled and $pla->validatedWork) $validatedWork+=$pla->validatedWork;
+      if($this->refType=='Project'){
+        $proj=new Project($this->idProject);
+        if($proj->commandOnValidWork != 1){
+          if (!$pla->cancelled and $pla->validatedWork) $validatedWork+=$pla->validatedWork;
+        }
+      }
       if (!$pla->cancelled and $pla->validatedCost) $validatedCost+=$pla->validatedCost;
     }
     
@@ -2390,7 +2398,7 @@ class PlanningElement extends SqlElement {
   	$projectList = array_flip($projectList);
   	$projectList = '(0,'.implode(',',$projectList).')';
   	if(($this->idRevenueMode == 2 and $this->refType == 'Project') or $this->refType == 'Activity'){
-  	  $this->revenue = 0;
+  	    $this->revenue = 0;
   		$sons=$this->getSonItemsArray();
   		$sumActPlEl=0;
   		$sumProjlEl=0;
