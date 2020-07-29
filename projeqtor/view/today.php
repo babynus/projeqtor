@@ -116,6 +116,7 @@ function showProjects() {
   foreach ($prjLst as $idProject=>$p){
     $lstProj[]=substr($idProject,1);
   }
+  $showAllProject=(RequestHandler::isCodeSet('showAllProjectToday'))?RequestHandler::getValue('showAllProjectToday'):'false';
   $showProject=securityCheckDisplayMenu(null, 'Project');
   $showOne=false;
   if ($showProject) $showOne=true;
@@ -133,7 +134,8 @@ function showProjects() {
     $countScope=getSessionValue('todayCountScope');
   }
   if ($showOne and count($prjLst)>0) {
-    echo '<div style="width:100%; overflow-x:auto">';
+    echo '<div style="width:100%; overflow-x:auto" >';
+    echo '<input id="showAllProjectToday" name="showAllProjectToday" hidden value="'.$showAllProject.'" />';
     echo '<form id="todayProjectsForm" name="todayProjectsForm">';
     echo '<table align="center" style="width:100%">';
     echo '<tr><td style="text-align:left;width:10%" class="tabLabel" >';
@@ -204,14 +206,10 @@ function showProjects() {
       $cpt++;
       $visibleRows=array();
       $countPro++;
-      if($parmSizeProject!='' and $parmSizeProject==$countPro){
-        echo '<tr style="text-align: center;font-weight:bold;"><td colspan="18"><div  class="messageData">'.i18n('limitedDisplay', array($parmSizeProject)).'</div><div style="cursor:pointer;" onclik="showAllProjectOnToday()" >dsqfdsqsd'.i18n('displayMore').'</div></td></tr>';
+      if($parmSizeProject!='' and $parmSizeProject==$countPro and $showAllProject=='false'){
+        echo '<tr style="text-align: center;font-weight:bold;"><td colspan="18"  class="messageData"><div >'.i18n('limitedDisplay', array($parmSizeProject)).'</div><div style="cursor:pointer;width:16px;height:16px;margin-left:50%;" class="iconDisplayMore16" onclick="refreshTodayProjectsList(\'true\')" title="'.i18n('displayMore').'" >&nbsp;</div></td></tr>';
         break;
       }
-//       if ($cpt>$cptMax) {
-//         echo '<tr><td colspan="12" class="messageData">'.i18n('limitedDisplay', array($cptMax))</td></tr>';
-//         break;
-//       }
       $split=explode('#', $sharpName);
       $wbs=$split[0];
       $name=str_replace('&sharp;', '#', $split[1]);
@@ -354,6 +352,9 @@ function showProjects() {
         }
         echo '</tr>';
       }
+    }
+    if($showAllProject=='true'){
+      echo '<tr style="text-align: center;font-weight:bold;"><td colspan="18"  class="messageData"><div style="cursor:pointer;width:16px;height:16px;margin-left:50%;" class="iconReduceDisplay16" onclick="refreshTodayProjectsList(\'false\')" title="'.i18n('hideProject').'">&nbsp;</div></td></tr>';
     }
     echo '</table>';
     echo '</div>';

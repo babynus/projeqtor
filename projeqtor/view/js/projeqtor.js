@@ -3660,7 +3660,10 @@ function isDate(date) {
  * refresh Projects List on Today screen
  */
 function refreshTodayProjectsList(value) {
-  loadContent("../view/today.php?refreshProjects=true", "Today_project",
+  if(value==null || value==undefined){
+    value=dojo.byId('showAllProjectToday').value; 
+  }
+  loadContent("../view/today.php?refreshProjects=true+&showAllProjectToday="+value, "Today_project",
       "todayProjectsForm", false);
 }
 
@@ -7328,10 +7331,6 @@ function saveConsolidationValidation(listProj,mode,month,all,asSub){
   }
 }
 
-function showAllProjectOnToday(){
-  console.log('la');
-  loadContent('../view','todayProjectsForm','todayProjectsForm');
-}
 
 //====================================================================
 // NEW GUI FEATURES

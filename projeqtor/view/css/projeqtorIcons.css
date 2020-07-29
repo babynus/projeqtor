@@ -1338,6 +1338,11 @@
 .iconLocked16 { background-image: url(images/locked.png);  background-size: 16px 16px;}
 .iconLocked32 { background-image: url(images/locked.png);  background-size: 32px 32px;}
 
+.iconDisplayMore16 { background-image: url(images/iconDisplayMore.png);  background-size: 16px 16px;}
+.iconDisplayMore32 { background-image: url(images/iconDisplayMore.png);  background-size: 32px 32px;}
+.iconReduceDisplay16 { background-image: url(images/iconReduceDisplay.png);  background-size: 16px 16px;}
+.iconReduceDisplay32 { background-image: url(images/iconReduceDisplay.png);  background-size: 32px 32px;}
+
 .iconAutoSendReport { background-image: url(images/iconAutoSendReport32.png); }
 .ProjeQtOrFlatBlue .iconAutoSendReport { background-image: url(customIcons/blue/iconAutoSendReport.png); }
 .ProjeQtOrFlatRed .iconAutoSendReport { background-image: url(customIcons/red/iconAutoSendReports.png); }
