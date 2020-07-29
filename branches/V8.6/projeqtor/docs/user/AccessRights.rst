@@ -36,7 +36,7 @@ This screen is then accessible via a dedicated menu in the Acces Right
 * the ticketing
 * the time tracking
 * the requirements
-* the financial section with expenses - Incomes and financial situation
+* the financial section with expenses - Incomes - financial situation and revenue managment
 * the risks
 * the meetings
 * the steering 
@@ -49,9 +49,12 @@ This screen is then accessible via a dedicated menu in the Acces Right
 * and the notifications.
 
 .. note:: 
+
    Each module can be installed independently.
    
    Each module is described and explained on ProjeQtor
+
+
 
 .. index:: Profile (Access Rights)
 

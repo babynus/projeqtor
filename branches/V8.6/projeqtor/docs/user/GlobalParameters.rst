@@ -755,6 +755,7 @@ Tab Financial
    * :ref:`Input of amounts for expenses<gp-input-amount-expenses>`
    * :ref:`Input of amounts for incomes<gp-input-amount-incomes>`
    * :ref:`Automation of financial<deferral-expense>`
+   * :ref:`Revenue & work unit managment<gp-revenue-work-unit>`
    
 .. _gp-input-amount-expenses:
    
@@ -795,6 +796,22 @@ Parameters for choosing the method of entering income
 If the expense is linked to an offer, an order AND / OR an invoice, then this is carried over to the related elements. This update is recursive.
 
 Example: if the expense is generated from an invoice, it is reported on the order linked to the invoice and on the offer linked to the order.
+
+
+.. _gp-revenue-work-unit:
+   
+.. rubric:: Revenue and Work unit managment
+     
+Parameters used in the unit of work catalog.
+
+   .. compound:: Number of complexities 
+
+      Parameter used to define the default maximum number used in the unit of work catalog.   
+
+   .. compound:: Copy revenue into validated cost of activities 
+
+      Copy revenue into validated cost of activities.
+
 
 
 
