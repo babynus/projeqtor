@@ -109,6 +109,7 @@ function showMessages() {
 function showProjects() {
   global $cptMax, $print, $workVisibility, $templateProjectList, $arrayCols, $showCol, $cptCol;
   $user=getSessionUser();
+  $parmSizeProject=Parameter::getUserParameter('sizeDispalyProjectToday');
   $prjVisLst=$user->getVisibleProjects();
   $prjLst=$user->getHierarchicalViewOfVisibleProjects(true);
   $lstProj=array();
@@ -197,14 +198,20 @@ function showProjects() {
     }
     echo '</tr>';
     $cpt=0;
+    $countPro=-1;
     $levels=array();
     foreach ($prjLst as $sharpid=>$sharpName) {
       $cpt++;
       $visibleRows=array();
-      if ($cpt>$cptMax) {
-        echo '<tr><td colspan="12" class="messageData">'.i18n('limitedDisplay', array($cptMax)).'</td></tr>';
+      $countPro++;
+      if($parmSizeProject!='' and $parmSizeProject==$countPro){
+        echo '<tr style="text-align: center;font-weight:bold;"><td colspan="18"><div  class="messageData">'.i18n('limitedDisplay', array($parmSizeProject)).'</div><div style="cursor:pointer;" onclik="showAllProjectOnToday()" >dsqfdsqsd'.i18n('displayMore').'</div></td></tr>';
         break;
       }
+//       if ($cpt>$cptMax) {
+//         echo '<tr><td colspan="12" class="messageData">'.i18n('limitedDisplay', array($cptMax))</td></tr>';
+//         break;
+//       }
       $split=explode('#', $sharpName);
       $wbs=$split[0];
       $name=str_replace('&sharp;', '#', $split[1]);
