@@ -116,7 +116,14 @@ function showProjects() {
   foreach ($prjLst as $idProject=>$p){
     $lstProj[]=substr($idProject,1);
   }
-  $showAllProject=(RequestHandler::isCodeSet('showAllProjectToday'))?RequestHandler::getValue('showAllProjectToday'):'false';
+  if(sessionValueExists('showAllProjectTodayVal')){
+    $showAllProject=getSessionValue('showAllProjectTodayVal');
+  }else if(RequestHandler::isCodeSet('showAllProjectToday')){
+    $showAllProject=RequestHandler::getValue('showAllProjectToday');
+  }else{
+    $showAllProject='false';
+  }
+  debugLog($showAllProject);
   $showProject=securityCheckDisplayMenu(null, 'Project');
   $showOne=false;
   if ($showProject) $showOne=true;
@@ -135,7 +142,7 @@ function showProjects() {
   }
   if ($showOne and count($prjLst)>0) {
     echo '<div style="width:100%; overflow-x:auto" >';
-    echo '<input id="showAllProjectToday" name="showAllProjectToday" hidden value="'.$showAllProject.'" />';
+    echo '<input id="showAllProjectToday" name="showAllProjectToday"  hidden value="'.$showAllProject.'" />';
     echo '<form id="todayProjectsForm" name="todayProjectsForm">';
     echo '<table align="center" style="width:100%">';
     echo '<tr><td style="text-align:left;width:10%" class="tabLabel" >';
