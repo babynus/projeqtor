@@ -33,9 +33,13 @@
    scriptLog('   ->/view/comboSearch.php'); 
    $comboDetail=true;
    $mode="";
-   if (array_key_exists('mode', $_REQUEST)) {
-     $mode=$_REQUEST['mode'];
+   if (RequestHandler::isCodeSet('mode')) {
+     $mode=RequestHandler::getValue('mode');
    }
+   if (RequestHandler::isCodeSet('currentSelectedProject')) {
+     setSessionValue('idProjectSelectedForComboDetail', RequestHandler::getId('currentSelectedProject'));
+   }
+   
    //header("Cache-Control: public, max-age=86400");
  ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
