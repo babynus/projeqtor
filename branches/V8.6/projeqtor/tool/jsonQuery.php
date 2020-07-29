@@ -165,6 +165,20 @@
         }
 // MTY - LEAVE SYSTEM        
       }
+      //ADD - Activity type restriction by project - F.KARA #459
+      if(substr($objectClass, -4) == 'Type' and $comboDetail){
+          $idProjectSelected= getSessionValue("idProjectSelectedForComboDetail");
+          $restrictType = new RestrictType();
+          $restrictTypeActivity = $restrictType->getSqlElementsFromCriteria(array('idProject' => $idProjectSelected));
+          $tabRestrictedTypeId = array();
+          foreach ($restrictTypeActivity as $rest) {
+              array_push($tabRestrictedTypeId,$rest->idType);
+          }
+          if(count($tabRestrictedTypeId) != 0) {
+              $queryWhere.= ' and type.id in ' . transformValueListIntoInClause($tabRestrictedTypeId);
+          }
+      }
+      //END - Activity type restriction by project - F.KARA #459
     }
     // --- Direct filter on client
     if ( array_key_exists('objectClient',$_REQUEST)  and ! $quickSearch) {
@@ -582,7 +596,6 @@
       $queryOrderBy .= ($queryOrderBy=='')?'':', ';
       $queryOrderBy .= " " . $table . "." . $obj->getDatabaseColumnName('id') . " desc";
     }
-
     jsonBuildWhereCriteria($querySelect,$queryFrom,$queryWhere,$queryOrderBy,$idTab,$arrayFilter,$obj);
     
     $list=Plugin::getEventScripts('query',$objectClass);
@@ -707,7 +720,7 @@
     $query='select ' . $querySelect 
          . ' from ' . $queryFrom
          . ' where ' . $queryWhere 
-         . ' order by' . $queryOrderBy;   
+         . ' order by' . $queryOrderBy;
     // --- Execute query
     $result=Sql::query($query);
     if (isset($debugJsonQuery) and $debugJsonQuery) { // Trace in configured to
