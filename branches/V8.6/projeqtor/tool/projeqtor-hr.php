@@ -1104,7 +1104,7 @@ function showLeavesSystemMenu($menuName) {
     $leaveMenusList = leavesSystemHabilitationList(true);
     $user = getSessionUser();
     $isLeavesAdmin = isLeavesAdmin();
-    $isEmployee = ($user->isEmployee==1?true:false);    
+    $isEmployee = (($user->isEmployee==1)?true:false);    
     $isManager = isLeavesManager();
     $isManagerOfEmployees = isManagerOfEmployee();
     // Leave System is activ
