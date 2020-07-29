@@ -1,7 +1,6 @@
 
 function setColorTheming(ref,smooth) {
   //ref='#e97b2c';// Pour Test
-  console.log("change to theme "+ref);
   if (!ref) ref='#656565'; // dark grey
   if (!smooth) smooth=false;
   var white='#ffffff';
@@ -39,7 +38,6 @@ function setColorTheming(ref,smooth) {
   saturate=Math.round(s/hslDefault[1]*100);
   //brightness=Math.round(40/hslDefault[2]*100);
   brightness=100;
-  console.log("hueRotate="+hueRotate+" saturate="+saturate+" brightness="+brightness);
   
   var element=document.getElementById('body');
   // Generic colors
