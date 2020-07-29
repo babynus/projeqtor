@@ -7114,10 +7114,10 @@ function drawWorkUnits($obj,$listWorkUnit,$listComplexity,$refresh=false) {
         $price = ($compValu->price)?htmlDisplayCurrency($compValu->price):'';
         $duration = null;
         if($compValu->duration)$duration = $compValu->duration.' '.i18n('shortDay');
-        echo '    <table style="width:100%;height:100%;text-align:right;" ><tr>
-                    <td title="'.i18n('charge').'" style="width:33%;border-right:1px solid #AAAAAA;padding-right:5px;padding-left:5px;">'.$work.'</td>
-                    <td title="'.i18n('price').'" style="width:33%;border-right:1px solid #AAAAAA; padding-right:5px;">'.$price.'</td>
-                    <td title="'.i18n('duration').'" style="width:33%;padding-right:5px;">'.$duration.'</td>
+        echo '    <table style="width:100%;height:100%;text-align:right;" ><tr style="width:100%;">
+                    <td title="'.i18n('charge').'" style="width:25%;border-right:1px solid #AAAAAA;padding:8px;">'.$work.'</td>
+                    <td title="'.i18n('price').'" style="width:50%;border-right:1px solid #AAAAAA; padding:8px;">'.$price.'</td>
+                    <td title="'.i18n('duration').'" style="width:25%;padding:8px;">'.$duration.'</td>
                     </tr></table>';
       }
       echo '  </td>';

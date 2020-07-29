@@ -406,42 +406,18 @@ class ActivityPlanningElementMain extends PlanningElement {
         foreach ($lstAss as $asVal){
           $totalValidatedWork += $asVal->assignedWork;
         }
-        if($totalValidatedWork < $this->validatedWork and $totalValidatedWork>0 ){
+        //if($totalValidatedWork < $this->validatedWork and $totalValidatedWork>0 ){
+        if( $totalValidatedWork>0 ){
           $factor = $this->validatedWork / $totalValidatedWork;
           foreach ($lstAss as $asVal){
             $newLeftWork = ($asVal->assignedWork*$factor) - ($asVal->assignedWork) ;
-            $asVal->assignedWork = $asVal->assignedWork*$factor;
+            $asVal->assignedWork = round($asVal->assignedWork*$factor,2);
             $asVal->leftWork = $asVal->leftWork+$newLeftWork;
             if($asVal->leftWork < 0)$asVal->leftWork=0;
             $asVal->save();
           }
         }
       }
-      $workUnit = new WorkUnit($this->idWorkUnit);
-//       if($workUnit->validityDate ){
-//         $today = new DateTime("now");
-//         $validityDate = new DateTime($workUnit->validityDate);
-//         if($validityDate < $today){
-//           $alert = new Alert();
-//           $exist = $alert->countSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->refId,'idIndicatorValue'=>$workUnit->id,'idProject'=>$this->idProject));
-//           if(!$exist){
-//             $itemName=i18n('Activity');
-//             $title=ucfirst(i18n('Alert')) .' - '. $itemName . ' #' . $this->refId;
-//             $alert->title = $title;
-//             $alert->idProject = $this->idProject;
-//             $alert->alertType = 'ALERT';
-//             $alert->refId = $this->refId;
-//             $alert->refType = "Activity";
-//             $alert->idIndicatorValue = $workUnit->id;
-//             $alert->message = i18n('workUnitValidityDateIsPassed');
-//             $alert->readFlag=0;
-//             $alert->alertInitialDateTime=date('Y-m-d H:i:s');
-//             $alert->alertDateTime=date('Y-m-d H:i');
-//             $alert->idle=0;
-//             $alert->save();
-//           }
-//         }
-//       }
       $CaReplaceValidCost= Parameter::getGlobalParameter('CaReplaceValidCost');
       if($CaReplaceValidCost=='YES'){
         $this->validatedCost = $complexityVal->price*$this->quantity;
@@ -538,6 +514,17 @@ class ActivityPlanningElementMain extends PlanningElement {
          }
         $lstRes["Assignement".$ass->id]=$ass->idResource;
       }
+    }
+    if($this->idWorkUnit){
+     $workUnit = new WorkUnit($this->idWorkUnit);
+     if($workUnit->validityDate and !SqlElement::isSaveConfirmed() and $old->idWorkUnit != $this->idWorkUnit ){
+      $today = new DateTime("now");
+      $validityDate = new DateTime($workUnit->validityDate);
+      if($validityDate < $today){
+        $result.='<br/>' . i18n('errorValidityDate');
+        $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
+       }
+     }
     }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
