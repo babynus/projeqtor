@@ -197,7 +197,7 @@ A tracking view also exists to view only expenses and one for incomes.
 The following operations will then be displayed for the expenses.
 
 - Call for tender.
-- provider tenders
+- Provider tenders
 - Orders to provider
 - Provider bills
 
@@ -478,8 +478,8 @@ This section allows to detail the order modality.
 
 .. _client-billing-term:
 
-Client billing terms
---------------------
+Client invoicing terms
+----------------------
 
 A term is a planned trigger for billing.
 
@@ -503,12 +503,15 @@ You can define as many terms as you wish, to define the billing calendar.
    :alt: Description zone
    :align: center
 
-.. sidebar:: Other sections
 
-   * :ref:`Notes<note-section>`   
 
 .. rubric:: Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Notes<note-section>`   
+   
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table::
@@ -593,8 +596,8 @@ This section allows to manage element trigger.
 
 .. _client-bill:
 
-Client Bills
-------------
+Client invoices
+---------------
    
 A bill is a request for payment for delivered work.
 
@@ -609,7 +612,7 @@ Billing will depend on billing type defined for the project through project type
 
 .. _Billing_types:
 
-Billing Type
+Invoice Type
 ============
 
 .. figure:: /images/GUI/BILL_CAPT_SchemaBill.png
@@ -771,8 +774,8 @@ Billing Type
    * **Complete**: Flag to indicate that complete payment. 
 
 
-Bill lines
-==========
+Invoice lines
+=============
 
 .. figure:: /images/GUI/BILL_ZONE_BillLines.png
    :alt: Treatment
@@ -898,7 +901,6 @@ Input for each bill line depends on billing type.
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -923,45 +925,6 @@ Input for each bill line depends on billing type.
    * This field is used for amendment values in order detail.
 
 
-.. raw:: latex
-
-    \newpage
-
-.. index:: Bill (Activity Price)
-
-.. _activity-price:
-
-Activities prices
------------------
-
-Activity price defines daily price for activities of a given **activity type** and a given **project**.
-
-This is used to calculate a billing amount for billing type **On produced work** and **On capped produced work**.
-
-.. rubric:: Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the activity price.
-   * - Name
-     - Short description of the activity price.
-   * - |RequiredField| Project
-     - The project concerned with the activity price.
-   * - |RequiredField| Activity type
-     - Type of activities concerned with the activity price.
-   * - Price of the activity
-     - Daily price of the activities of the given activity type and the given project.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate that activity price is archived.
 
 .. raw:: latex
 
@@ -987,7 +950,6 @@ The bill keeps track of payment.
 .. tabularcolumns:: |l|l|
 
 .. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1006,7 +968,6 @@ The bill keeps track of payment.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1033,6 +994,45 @@ The bill keeps track of payment.
      - Amount of bill.
    * - :term:`Closed`
      - Flag to indicate that payment is archived.
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Bill (Activity Price)
+
+.. _activity-price:
+
+Activities prices
+-----------------
+
+Activity price defines daily price for activities of a given **activity type** and a given **project**.
+
+This is used to calculate a billing amount for billing type **On produced work** and **On capped produced work**.
+
+.. rubric:: Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table::  required field |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for the activity price.
+   * - Name
+     - Short description of the activity price.
+   * - |RequiredField| Project
+     - The project concerned with the activity price.
+   * - |RequiredField| Activity type
+     - Type of activities concerned with the activity price.
+   * - Price of the activity
+     - Daily price of the activities of the given activity type and the given project.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate that activity price is archived.
 
 
 .. raw:: latex
@@ -1107,21 +1107,20 @@ Filters can be applied to the list.
 
 .. _catalog:
 
-Catalog
--------
+Financial catalog
+-----------------
 
 Catalog defines items (products or services) that can be obects of a quotation, an order or a bill.
 
 This is used on the quotation lines, order lines and invoice lines. 
 
-See: :ref:`Bill lines<manual-billing>`.
+See: :ref:`Invoice lines<manual-billing>`.
 
 .. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1144,7 +1143,6 @@ See: :ref:`Bill lines<manual-billing>`.
 .. rubric:: Treatment
 
 .. list-table::
-   :widths: 20, 80
    :header-rows: 1            
      
    * - Field
@@ -1157,3 +1155,59 @@ See: :ref:`Bill lines<manual-billing>`.
      - Type of product.
    * - Product version
      - Version of the product.
+     
+     
+.. raw:: latex
+
+    \newpage
+    
+.. index:: Work unit catalog
+
+.. _work-unit-catalog:
+
+Work units catalog
+------------------
+
+The objective is to define catalogs of work units, made up of work units, themselves broken down into several complexities. 
+
+This functionality will only be accessible if the :ref:`Revenue management<module-management>` module is activated.
+
+
+.. rubric:: Section Description
+
+.. list-table::
+   :header-rows: 1            
+     
+   * - Field
+     - Treatment
+   * - Name
+     - Name of the catalog.
+   * - Nomenclature
+     - Code usually a reference shared with the customer.
+   * - Project
+     - Name of the project to which the catalog is attached.
+   * - Number of complexities 
+     - Maximum number of complexities per catalog OU, within the limit of the global parameter.
+   * - Complexities
+     - Text fields to fill in the complexities of the catalog   
+     
+     
+.. warning:: 
+
+   If the number of complexity isn't filled then the default number set in the global parameters is applied.
+   
+   
+Then fill in the fields with the name of the complexities managed by this catalog.
+
+Click on |buttonAdd| to open the pop-up windows and complete the complexity details.
+
+.. figure:: /images/GUI/INCOMES_BOX_Detailscompexity.png
+   :alt: details complexities
+   
+   Pop-up of the complexities details
+   
+   
+
+   
+   
+   
