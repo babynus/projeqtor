@@ -1760,15 +1760,26 @@ function securityCheckDisplayMenu($idMenu, $class=null, $user=null) {
   if (! Module::isMenuActive(SqlList::getNameFromId('Menu',$menu,false))) return false;
   $result=false;
 // MTY - LEAVE SYSTEM
-    if (isLeavesSystemMenuByMenuName("menu".$class)) {
-      //return showLeavesSystemMenu("menu".$class);
-      $showLeaveMenu=showLeavesSystemMenu("menu".$class);
-      if ($class=="Employee" or $class=="HumanResourceParameters") {
-        if (! $showLeaveMenu) return false;
-      } else {
-        return $showLeaveMenu;
+  if (isLeavesSystemMenuByMenuName("menu".$class)) {
+    //return showLeavesSystemMenu("menu".$class);
+    $showLeaveMenu=showLeavesSystemMenu("menu".$class);
+    if ($class=="HumanResourceParameters") {
+      $menuObj=new Menu();
+      $subMenus=$menuObj->getSqlElementsFromCriteria(array('idMenu'=>$menu));
+      foreach ($subMenus as $subMenu) {
+        $showSubMenu=showLeavesSystemMenu($subMenu->name);
+        if ($showSubMenu) {
+          return 1;
+        }
       }
+      return 0;
     }
+    if ($class=="Employee") {
+      if (! $showLeaveMenu) return 0;
+    } else {
+      return $showLeaveMenu;
+    }
+  }
 // MTY - LEAVE SYSTEM
   $typeAdmin=SqlList::getFieldFromId('Menu', $idMenu, 'isAdminMenu',false);
   if ($typeAdmin==0) {
