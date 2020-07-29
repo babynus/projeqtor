@@ -7131,7 +7131,7 @@ function expandProjectInToDay(id,subProj,visibleRow){
       saveCollapsed('todayProjectRow_'+item,callBack);
     });
   }
-  //loadContent("../view/today.php", "centerDiv");
+//loadContent("../view/today.php", "centerDiv");
 }
 
 // ====================================================================
@@ -7326,6 +7326,11 @@ function saveConsolidationValidation(listProj,mode,month,all,asSub){
       }
     });
   }
+}
+
+function showAllProjectOnToday(){
+  console.log('la');
+  loadContent('../view','todayProjectsForm','todayProjectsForm');
 }
 
 //====================================================================
