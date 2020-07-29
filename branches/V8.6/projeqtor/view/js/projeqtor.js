@@ -3663,6 +3663,9 @@ function refreshTodayProjectsList(value) {
   if(value==null || value==undefined){
     value=dojo.byId('showAllProjectToday').value; 
   }
+  if(value!=dojo.byId('showAllProjectToday').value){
+    saveDataToSession('showAllProjectTodayVal',value,false);
+  }
   loadContent("../view/today.php?refreshProjects=true+&showAllProjectToday="+value, "Today_project",
       "todayProjectsForm", false);
 }
