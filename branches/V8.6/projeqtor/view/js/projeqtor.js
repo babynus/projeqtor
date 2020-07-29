@@ -571,7 +571,6 @@ function addMessage(msg) {
  * @return void
  */
 function changeTheme(newTheme) {
-  console.log("change theme to "+newTheme);
   if (newTheme != "") {
     if (isNewGui) {
       //if (dojo.byId('body')) dojo.byId('body').className = 'tundra '+newTheme+' ProjeQtOrNewGui';
@@ -5723,7 +5722,6 @@ function changeGalleryEntity() {
 }
 
 function saveDataToSession(param, value, saveUserParameter, callBack) {
-  console.log("saveDataToSession("+param+","+value+")");
   var url="../tool/saveDataToSession.php";
   url+="?idData="+param;
   url+="&value="+value;
@@ -7340,9 +7338,6 @@ function saveConsolidationValidation(listProj,mode,month,all,asSub){
 //====================================================================
 
 function refreshSectionCount(section) {
-  console.log('refreshSectionCount('+section+')');
-  console.log(dojo.byId(section + "SectionCount"));
-  console.log(dojo.byId(section + "Badge"));
   if (dojo.byId(section + "SectionCount")
       && dojo.byId(section + "Badge")) {
     dojo.byId(section + "Badge").innerHTML = dojo.byId(section+ "SectionCount").value;

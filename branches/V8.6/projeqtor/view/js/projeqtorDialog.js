@@ -789,8 +789,10 @@ function displaySearch(objClass) {
   showField('comboCloseButton');
   var multipleSelect=(dojo.byId('comboMultipleSelect').value == 'true') ? '&multipleSelect=true'
       : '';
+  var currentProject=(top.dijit.byId('idProject'))?'&currentSelectedProject='+top.dijit.byId('idProject').get("value"):'';
+  if (top.dojo.byId('objectClass') && top.dojo.byId('objectClass')=='Project' && top.dojo.byId('id')) currentProject='&currentSelectedProject='+top.dojo.byId('id').value;
   window.top.frames['comboDetailFrame'].location.href="comboSearch.php?objectClass="
-      + objClass + "&mode=search" + multipleSelect;
+      + objClass + "&mode=search" + multipleSelect+currentProject;
   setTimeout('dijit.byId("dialogDetail").show()', 10);
 }
 
