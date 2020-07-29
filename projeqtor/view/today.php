@@ -354,7 +354,7 @@ function showProjects() {
       }
     }
     if($showAllProject=='true'){
-      echo '<tr style="text-align: center;font-weight:bold;"><td colspan="18"  class="messageData"><div style="cursor:pointer;width:16px;height:16px;margin-left:50%;" class="iconReduceDisplay16" onclick="refreshTodayProjectsList(\'false\')" title="'.i18n('hideProject').'">&nbsp;</div></td></tr>';
+      echo '<tr style="text-align: center;font-weight:bold;"><td colspan="18"  class="messageData"><div style="cursor:pointer;width:16px;height:16px;margin-left:50%;" class="iconReduceDisplay16" onclick="refreshTodayProjectsList(\'false\')" title="'.i18n('reduceDisplayToday').'">&nbsp;</div></td></tr>';
     }
     echo '</table>';
     echo '</div>';
