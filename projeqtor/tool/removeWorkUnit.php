@@ -38,15 +38,20 @@ if($number){
   $complexity = new Complexity();
   $actPl = new ActivityPlanningElement();
   $lstComplexities = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
+  $stopDelete = false;
   foreach ($lstComplexities as $val){
     $cantDelete = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$val->id));
-    if($val->idZone > $number and !$cantDelete){
-      $val->delete();
+    if($cantDelete)$stopDelete = true;
+  }
+  if(!$stopDelete){
+    foreach ($lstComplexities as $val){
+      if($val->idZone > $number ){
+        $val->delete();
+      }
     }
-    if($val->idZone > $number and $cantDelete){
+  }else{
       $oldCatalog = $catalog->getOld();
-       echo $oldCatalog->numberComplexities;
-    }
+      echo $oldCatalog->numberComplexities;
   }
   Sql::commitTransaction();
 }else{

@@ -110,7 +110,8 @@ class CatalogUOMain extends SqlElement {
     }
     $nbComplex = Parameter::getGlobalParameter('ComplexitiesNumber'); 
     if($this->numberComplexities > $nbComplex and $nbComplex > 0){
-      $result .= '<br/>' . i18n ( 'complexityCantBeSuperiorThan'.$nbComplex );
+      $result .= '<br/>' .  i18n('complexityCantBeSuperiorThan',array($nbComplex));;
+     
     }
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
