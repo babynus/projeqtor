@@ -1745,7 +1745,7 @@ function finalizeMessageDisplay(destination, validationType) {
             valueDiv+= (objId)?'&nbsp;#'+objId:'';
             valueDiv+= '&nbsp;</a>';
             valueDiv+= '</span>';
-            valueDiv+= '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivButton" style="display:none;font-size:9px; color: #000000;position :absolute; top: 47px; left: 157px; border: 0;background: transparent;width:300px;" value="'+ref+'" />';
+            valueDiv+= '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivButton" style="display:none;font-size:9px; color: #000000;position :absolute; top: 47px; left: 157px; border: 0;background: transparent;width:300px;" value="'+ref+objId+'" />';
             dojo.byId("buttonDivObjectId").innerHTML=valueDiv;
           }
           //gautier
