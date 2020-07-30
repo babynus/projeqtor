@@ -31,9 +31,6 @@ include_once '../tool/projeqtor.php';
 $paramProject = trim(RequestHandler::getId('idProject'));
 $paramTeam = trim(RequestHandler::getId('idTeam'));
 $idOrganization = trim(RequestHandler::getId('idOrganization'));
-//$paramYear = RequestHandler::getYear('yearSpinner');
-//$paramMonth = RequestHandler::getMonth('monthSpinner');
-//$paramWeek = RequestHandler::getValue('weekSpinner');
 
 $paramYear='';
 if (array_key_exists('yearSpinner',$_REQUEST)) {
@@ -58,7 +55,7 @@ $user=getSessionUser();
 $paramResource='';
 if (array_key_exists('idResource',$_REQUEST)) {
   $paramResource=trim($_REQUEST['idResource']);
-  $paramResource = preg_replace('/[^0-9]/', '', $paramResource); // only allow digits
+  $paramResource = preg_replace('/[^0-9]/', '', $paramResource);
   $canChangeResource=false;
   $crit=array('idProfile'=>$user->idProfile, 'scope'=>'reportResourceAll');
   $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
@@ -71,7 +68,7 @@ if (array_key_exists('idResource',$_REQUEST)) {
   } 
 }
 
-$periodType=$_REQUEST['periodType']; // not filtering as data as data is only compared against fixed strings
+$periodType=$_REQUEST['periodType']; 
 $periodValue='';
 if (array_key_exists('periodValue',$_REQUEST))
 {
@@ -93,7 +90,6 @@ if ($paramTeam!="") {
 if ($periodType=='year' or $periodType=='month' or $periodType=='week') {
   $headerParameters.= i18n("year") . ' : ' . $paramYear . '<br/>';
 }
-//ADD qCazelles - Report fiscal year - Ticket #128
 if ($periodType=='year' and $paramMonth!="01") {
   if (!$paramMonth ) {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
@@ -111,29 +107,20 @@ if ($periodType=='month') {
 if ( $periodType=='week') {
   $headerParameters.= i18n("week") . ' : ' . $paramWeek . '<br/>';
 }
-// if ( $paramResource=='') {
-//   $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Resource',$paramResource)) . '<br/>';
-// }
 if (isset($outMode) and $outMode=='excel') {
   $headerParameters.=str_replace('- ','<br/>',Work::displayWorkUnit()).'<br/>';
 }
 
 include "header.php";
 
-#florent ticket #4049
-#$where="(".getAccesRestrictionClause('Activity',false,false,true,true) ." or idResource=". getSessionUser()->id . " or idProject in ".Project::getAdminitrativeProjectList().")";
 $where="(".getAccesRestrictionClause('Activity',false,true,true,true) ." or idResource=". getSessionUser()->id . " or idProject in ".Project::getAdminitrativeProjectList().")"; 
-//$where="1=1 ";
 $where.=($periodType=='week')?" and week='" . $periodValue . "'":'';
 $where.=($periodType=='month')?" and month='" . $periodValue . "'":'';
-//CHANGE qCazelles - Report start month - Ticket #128
-//Old
-//$where.=($periodType=='year')?" and year='" . $periodValue . "'":'';
-//New
+
 if ($periodType=='year') {
   if (!$periodValue ) {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
-    echo i18n('messageNoData',array(i18n('year'))); // TODO i18n message
+    echo i18n('messageNoData',array(i18n('year')));
     echo '</div>';
     exit;
   }
@@ -141,16 +128,12 @@ if ($periodType=='year') {
   $where.=" and ((year='" . $periodValue . "' and month>='" . $periodValue.$paramMonth . "')".
           " or (year='" . ($periodValue + 1) . "' and month<'" . ($periodValue + 1) . $paramMonth . "'))";
 }
-//END CHANGE qCazelles - Report start month - Ticket #128
 
 if ($paramProject!='') {
-  #florent ticket #4049
-  #$where.=  " and idProject in " . getVisibleProjectsList(true, $paramProject); 
   $where.=  " and idProject in " . getVisibleProjectsList(false, $paramProject); 
 }
 $where.=($paramResource!='')?" and idResource='" . $paramResource . "'":'';
 $order="";
-//echo $where;
 $work=new Work();
 $lstWork=$work->getSqlElementsFromCriteria(null,false, $where, $order);
 $result=array();
@@ -167,8 +150,11 @@ foreach ($lstWork as $work) {
   if (! array_key_exists($work->idProject,$projects)) {
     $projects[$work->idProject]=SqlList::getNameFromId('Project', $work->idProject);
   }
+  if ($work->refType == 'Activity' and ! array_key_exists($work->idResource,$activities)) {
+  	$activities[$work->idResource]=array();
+  }
   if ($work->refType == 'Activity' and ! array_key_exists($work->refId,$activities)) {
-  	$activities[$work->refId]=SqlList::getNameFromId('ACtivity', $work->refId);
+  	$activities[$work->idResource][$work->refId]=SqlList::getNameFromId('ACtivity', $work->refId);
   }
   if (! array_key_exists($work->idResource,$result)) {
     $result[$work->idResource]=array();
@@ -178,16 +164,15 @@ foreach ($lstWork as $work) {
   } 
   $result[$work->idResource][$work->idProject] +=$work->work;
   
-  if (! array_key_exists($work->idProject,$activityWork)) {
-  	$activityWork[$work->idProject]=array();
+  if (! array_key_exists($work->refId,$activityWork)) {
+  	$activityWork[$work->refId]=array();
   }
-  if (! array_key_exists($work->refId,$activityWork[$work->idProject])) {
-  	$activityWork[$work->idProject][$work->refId]=0;
+  if (! array_key_exists($work->idProject,$activityWork[$work->refId])) {
+  	$activityWork[$work->refId][$work->idProject]=0;
   }
-  $activityWork[$work->idProject][$work->refId] +=$work->work;
-  $activityRes[$work->idResource][$work->idProject]=$activityWork[$work->idProject][$work->refId];
+  $activityWork[$work->refId][$work->idProject] +=$work->work;
+  $activityRes[$work->idResource][$work->refId]=$activityWork[$work->refId];
 }
-
 if (checkNoData($result)) exit;
 // title
 $newProject=array();
@@ -204,7 +189,6 @@ foreach ($projects as $id=>$name) {
 }
 
 asort($resources);
-//gautier #4342
 if($idOrganization){
   $orga = new Organization($idOrganization);
   $listOrga = $orga->getRecursiveSubOrganizationsFlatList(false,true);
@@ -281,35 +265,30 @@ echo '</tr>';
 
 $sum=0;
 foreach ($resources as $idR=>$nameR) {
-	if ($paramTeam) {
-		$res=new Resource($idR);
-	}
+  if ($paramTeam) {
+  	$res=new Resource($idR);
+  }
   if (!$paramTeam or $res->idTeam==$paramTeam) {
 		$sumRes=0;
-	  echo '<tr><td style="width:10%" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameR) . '</td>';
-	  echo '<td style="width:10%" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameR) . '</td>'; 
-	  foreach ($projects as $idP=>$nameP) {
-      $idExplo=explode('-',$idP);
-      $idP=$idExplo[1];
-    if($sumProj[$idP] != 0){
-	    echo '<td style="width:' . $colWidth . '%" class="reportTableData" '.excelFormatCell('data',null,null,null,null,null,null,null,(($val)?'work':null)).'>';
-	    if (array_key_exists($idR, $result)) {
-	      if (array_key_exists($idP, $result[$idR])) {
-	        $val=$result[$idR][$idP];
-	        echo Work::displayWorkWithUnit($val);
-	        $sumRes+=$val; 
-	        $sum+=$val;
-	      } 
-	    }
-	    echo '</td>';
-	  }
+	  echo '<tr><td style="width:10%" rowspan="'.count($activities[$idR]).'" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameR) . '</td>';
+	  $count = 0;
+	  foreach ($activityRes[$idR] as $idAct=>$proj){
+	    $count++;
+	     if($count==1){
+    	    echo '<td style="width:10%" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($activities[$idR][$idAct]) . '</td>';
+    	    drawLine($projects,$activityRes, $idR, $idAct, $colWidth,$sumRes,$sum);
+    	    echo '</tr>';
+          }else{
+            echo '<tr>';
+            echo '<td style="width:10%" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($activities[$idR][$idAct]) . '</td>';
+            drawLine($projects,$activityRes, $idR, $idAct, $colWidth,$sumRes,$sum);
+            echo '</tr>';
+	     }
   }
-	  echo '<td style="width:20%" class="reportTableColumnHeader" '.excelFormatCell('subheader').'>' . Work::displayWorkWithUnit($sumRes) . '</td>';
-	  echo '</tr>';
+
   }
 }
 echo '<tr><td class="reportTableHeader" '.excelFormatCell('header').' colspan="2">' . i18n('sum') . '</td>';
-//echo '<td class="reportTableColumnHeader" '.excelFormatCell('subheader').'>' . "" . '</td>';
 if ($nbProj == 0)
    echo '<td class="reportTableHeader" '.excelFormatCell('subheader').'>' . "" . '</td>';
 
@@ -321,3 +300,27 @@ foreach ($projects as $id=>$name) {
 }
 echo '<td class="reportTableHeader" '.excelFormatCell('header').'>' . Work::displayWorkWithUnit($sum) . '</td></tr>';
 echo '</table>';
+
+
+function drawLine ($projects,$activityRes,$idR,$idAct,$colWidth,$sumRes,&$sum){
+	     foreach ($projects as $idP=>$nameP){
+	      $idExplo=explode('-',$idP);
+	      $idP=$idExplo[1];
+        	if (array_key_exists($idR, $activityRes)) {
+        		if (array_key_exists($idAct, $activityRes[$idR])) {
+        		  if(array_key_exists($idP, $activityRes[$idR][$idAct])){
+        		    $val=$activityRes[$idR][$idAct][$idP];
+        		    echo '<td style="width:' . $colWidth . '%" class="reportTableData" '.excelFormatCell('data',null,null,null,null,null,null,null,(($val)?'work':null)).'>';
+  		  	        echo Work::displayWorkWithUnit($val);
+  		  	        echo '</td>';
+  		  	        $sumRes+=$val;
+  		  	        $sum+=$val;
+    		  	        
+        		  }else{
+        		    echo '<td style="width:' . $colWidth . '%" class="reportTableData" '.excelFormatCell('data',null,null,null,null,null,null,null,null).'></td>';
+        		  }
+        		}
+        	}
+	     }
+	     echo '<td style="width:20%" class="reportTableColumnHeader" '.excelFormatCell('subheader').'>' . Work::displayWorkWithUnit($sumRes) . '</td>';
+}
