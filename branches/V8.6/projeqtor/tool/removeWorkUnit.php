@@ -35,29 +35,31 @@ $idWorkUnit = RequestHandler::getId('idWorkUnit');
 Sql::beginTransaction();
 if($number){
   $catalog = new CatalogUO($idCatalog);
-  $complexity = new Complexity();
-  $actPl = new ActivityPlanningElement();
-  $lstComplexities = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
-  $stopDelete = false;
-  foreach ($lstComplexities as $val){
-    $cantDelete = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$val->id));
-    if($cantDelete)$stopDelete = true;
-  }
-  if(!$stopDelete){
+  //if($number < $oldCatalog->numberComplexities){
+    $complexity = new Complexity();
+    $complexityValue = new ComplexityValues();
+    $lstComplexities = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
+    $stopDelete = false;
     foreach ($lstComplexities as $val){
-      if($val->idZone > $number ){
-        $val->delete();
-      }
+      $where = " (idComplexity=".$val->id.") and (charge  IS NOT NULL OR price IS NOT NULL OR duration IS NOT NULL ) ";
+      $cantDelete = $complexityValue->countSqlElementsFromCriteria(null,$where);
+      if($cantDelete)$stopDelete = true;
     }
-  }else{
-      $oldCatalog = $catalog->getOld();
-      echo $oldCatalog->numberComplexities;
-  }
-  Sql::commitTransaction();
+    if(!$stopDelete){
+      foreach ($lstComplexities as $val){
+        if($val->idZone > $number ){
+          $val->delete();
+        }
+      }
+    }else{
+        $oldCatalog = $catalog->getOld();
+        echo $oldCatalog->numberComplexities;
+    }
+    Sql::commitTransaction();
+  //}
 }else{
   $workUnit = new WorkUnit($idWorkUnit);
   $result=$workUnit->delete();
-  // Message of correct saving
   displayLastOperationStatus($result);
 }
 ?>

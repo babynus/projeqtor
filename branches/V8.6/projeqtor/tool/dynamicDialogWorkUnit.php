@@ -56,7 +56,7 @@ $tabCompValues = array();
              <td>
                <textarea dojoType="dijit.form.Textarea" 
                 id="WUReferences" name="WUReferences"
-                style="width:400px;"
+                style="width:852px;"
                 maxlength="4000"
                 class="input"><?php echo htmlspecialchars($workUnits->reference);?></textarea>   
              </td>
