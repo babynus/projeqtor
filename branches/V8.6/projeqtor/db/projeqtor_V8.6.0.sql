@@ -100,6 +100,11 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (113, 'idOrganization', 'organizationList', 20,null),
 (113,'month','month',25,'currentMonth');
 
+INSERT INTO `${prefix}modulereport` (`id`,`idModule`,`idReport`,`hidden`,`active`) VALUES
+(91,20,110,0,1),
+(92,20,112,0,1),
+(93,20,113,0,1);
+
 -- Tags Management
 
 CREATE TABLE `${prefix}tag` (
