@@ -126,7 +126,7 @@ if (trim($paramTypeNote)!="") {
   $critWhere.=" and refType='$typeNote'";
   $where.=" and refType='$typeNote'";
 }else{
-  $where="and refType in (select name from $importTableName)";
+  $where.=" and refType in (select name from $importTableName)";
 }
 
 if (trim($paramStreamIdNote)!="") {
