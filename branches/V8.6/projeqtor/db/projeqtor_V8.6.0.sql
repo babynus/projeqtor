@@ -214,12 +214,12 @@ ALTER TABLE `${prefix}project` ADD COLUMN `commandOnValidWork` int(1) unsigned d
 ALTER TABLE `${prefix}accessscope` ADD COLUMN `isNonProject` int(1) unsigned default 0 COMMENT '1';
 UPDATE `${prefix}accessscope` SET `isNonProject`=1 WHERE accessCode!='PRO';
 ALTER TABLE `${prefix}accessprofile` ADD COLUMN `isNonProject` int(1) unsigned default 0 COMMENT '1';
-INSERT INTO `accessprofile` (`id`,`isNonProject`, `name`, `description`, `idAccessScopeRead`, `idAccessScopeCreate`, `idAccessScopeUpdate`, `idAccessScopeDelete`, `sortOrder`, `idle`) VALUES
-(1000001, 'accessProfileManager', 'Create all, update all, delete all', 4, 4, 4, 4, 100, 0),
-(1000002, 'accessProfileReader', 'Create none, update none, delete none', 4, 1, 1, 1, 200, 0),
-(1000003, 'accessProfileUpdater', 'Create none, update all, delete none', 4, 1, 4, 1, 300, 0),
-(1000004, 'accessProfileResponsible', 'Create none, update responsible, delete none', 4, 1, 5, 1, 400, 0),
-(1000005, 'accessProfileCreator', 'Create all, update own, delete own', 4, 4, 2, 2, 500, 0);
+INSERT INTO `${prefix}accessprofile` (`id`,`isNonProject`, `name`, `description`, `idAccessScopeRead`, `idAccessScopeCreate`, `idAccessScopeUpdate`, `idAccessScopeDelete`, `sortOrder`, `idle`) VALUES
+(1000001, 1, 'accessProfileManager', 'Create all, update all, delete all', 4, 4, 4, 4, 100, 0),
+(1000002, 1, 'accessProfileReader', 'Create none, update none, delete none', 4, 1, 1, 1, 200, 0),
+(1000003, 1, 'accessProfileUpdater', 'Create none, update all, delete none', 4, 1, 4, 1, 300, 0),
+(1000004, 1, 'accessProfileResponsible', 'Create none, update responsible, delete none', 4, 1, 5, 1, 400, 0),
+(1000005, 1, 'accessProfileCreator', 'Create all, update own, delete own', 4, 4, 2, 2, 500, 0);
 
 -- ==========================================
 -- Patchs IGE
