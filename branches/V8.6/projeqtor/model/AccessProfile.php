@@ -41,15 +41,17 @@ class AccessProfile extends SqlElement {
   public $sortOrder=0;
   public $idle;
   public $description;
+  public $isNonProject;
   //public $_sec_void;
   
   public $_isNameTranslatable = true;
-  
+  private static $_databaseCriteria = array('isNonProject'=>'0');
   private static $_fieldsAttributes=array("name"=>"required", 
                                   "idAccessScopeRead"=>"required",
                                   "idAccessScopeCreate"=>"required",
                                   "idAccessScopeUpdate"=>"required",
-                                  "idAccessScopeDelete"=>"required"
+                                  "idAccessScopeDelete"=>"required",
+                                  "isNonProject"=>"hidden"
   );  
 
   private static $_layout='
@@ -95,6 +97,13 @@ class AccessProfile extends SqlElement {
    */
   protected function getStaticLayout() {
     return self::$_layout;
+  }
+  /** ========================================================================
+   * Return the specific database criteria
+   * @return the databaseTableName
+   */
+  protected function getStaticDatabaseCriteria() {
+    return self::$_databaseCriteria;
   }
  
 }

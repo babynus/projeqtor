@@ -36,6 +36,7 @@ class AccessScopeDelete extends SqlElement {
   public $accessCode;
   public $sortOrder=0;
   public $idle;
+  public $isNonProject;
   
   public $_isNameTranslatable = true;
   private static $_databaseTableName = 'accessscope';
@@ -66,6 +67,7 @@ class AccessScopeDelete extends SqlElement {
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
     return $paramDbPrefix . self::$_databaseTableName;
   }
+
   
 }
 ?>
