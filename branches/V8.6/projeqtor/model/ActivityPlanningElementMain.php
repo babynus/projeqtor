@@ -515,17 +515,6 @@ class ActivityPlanningElementMain extends PlanningElement {
         $lstRes["Assignement".$ass->id]=$ass->idResource;
       }
     }
-    if($this->idWorkUnit){
-     $workUnit = new WorkUnit($this->idWorkUnit);
-     if($workUnit->validityDate and !SqlElement::isSaveConfirmed() and $old->idWorkUnit != $this->idWorkUnit ){
-      $today = new DateTime("now");
-      $validityDate = new DateTime($workUnit->validityDate);
-      if($validityDate < $today){
-        $result.='<br/>' . i18n('errorValidityDate');
-        $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
-       }
-     }
-    }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
