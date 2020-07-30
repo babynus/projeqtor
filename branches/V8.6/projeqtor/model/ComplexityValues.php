@@ -7,7 +7,7 @@ require_once('_securityCheck.php');
 class ComplexityValues extends SqlElement {
 	
 	public $id;   
-	public $idCatalog;
+	public $idCatalogUO;
 	public $idComplexity;
 	public $idWorkUnit;
 	public $charge;
