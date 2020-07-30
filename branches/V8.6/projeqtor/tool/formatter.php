@@ -647,7 +647,7 @@ function activityStreamDisplayHist ($hist,$origin){
   $reftText='';
   $gotoAndStyle='style="color:blue;"';
   $userId = $hist->idUser;
-  $userName = ($hist->idUser!='')?SqlList::getNameFromId ( 'User', $userId ):lcfirst(i18n('unknown'));
+  $userName = ($hist->idUser!='')?SqlList::getNameFromId ( 'Affectable', $userId ):lcfirst(i18n('unknown'));
   $operation=$hist->operation;
   $change=$hist->colName;
   $oldVal=$hist->oldValue;
