@@ -52,19 +52,9 @@ if(!$exist){
     $compVal = new ComplexityValues();
     $nbCompVal = $compVal->countSqlElementsFromCriteria(array('idComplexity'=>$complexity->id));
     if(!$nbCompVal){
-      $actPl = new ActivityPlanningElement();
-      $canDelete = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$complexity->id));
-      if(!$canDelete){
         $complexity->delete();
-      }else{
-        echo $complexity->name;
-      }
     }else{
-      $actPl = new ActivityPlanningElement();
-      $canDelete = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$complexity->id));
-      if($canDelete){
         echo $complexity->name;
-      }
       return;
     }
   }

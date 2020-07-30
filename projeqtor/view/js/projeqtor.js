@@ -4323,6 +4323,7 @@ function providerPaymentIdProviderTerm() {
   });
 }
 function updateComplexities(number,idCatalog,parameterNumber){
+  console.log(parameterNumber);
   url = "../tool/removeWorkUnit.php?number="+number+"&idCatalog="+idCatalog;
   var notRefresh = false;
   dojo.xhrGet({
@@ -4330,16 +4331,18 @@ function updateComplexities(number,idCatalog,parameterNumber){
     handleAs : "text",
     load : function(data) {
       if(data){
-        showAlert(i18n("cantDeleteUsingComplexity"));
+        showAlert(i18n("cantDeleteUsingUOComplexity"));
         notRefresh = true;
         dijit.byId("numberComplexities").set("value",dojo.number.format(data));
       }
       var numberComplexities = dijit.byId("numberComplexities").get("value");
       if(numberComplexities > 0 && numberComplexities < parameterNumber+1 && notRefresh==false){
         loadContent("objectDetail.php?refreshComplexities=true&nb="+numberComplexities, "drawComplexity", 'listForm');
+        loadContent("objectDetail.php?refreshComplexitiesValues=true", "CatalogUO_unitOfWork", 'listForm');
       }
       if(numberComplexities > parameterNumber && notRefresh==false){
-        showAlert(i18n("numberOfComplexitiesSuperior"));
+        showAlert(i18n("complexityCantBeSuperiorThan", new Array(parameterNumber)));
+        dijit.byId("numberComplexities").set("value",dojo.number.format(parameterNumber));
       }
     }
   });
