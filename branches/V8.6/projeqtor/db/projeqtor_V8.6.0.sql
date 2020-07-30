@@ -150,8 +150,8 @@ CREATE TABLE `${prefix}workunit` (
   `idProject` int(12) unsigned DEFAULT NULL COMMENT '12',
   `reference` varchar(200) DEFAULT NULL,
   `description` mediumtext DEFAULT NULL,
-  `entering` varchar(200) DEFAULT NULL,
-  `deliverable` varchar(200) DEFAULT NULL,
+  `entering` mediumtext DEFAULT NULL,
+  `deliverable` mediumtext DEFAULT NULL,
   `validityDate` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
