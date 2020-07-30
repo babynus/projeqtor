@@ -36,6 +36,7 @@ class AccessScopeCreate extends SqlElement {
   public $accessCode;
   public $sortOrder=0;
   public $idle;
+  public $isNonProject;
   
   public $_isNameTranslatable = true;
   private static $_databaseTableName = 'accessscope';
