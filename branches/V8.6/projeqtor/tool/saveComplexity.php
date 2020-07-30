@@ -45,8 +45,8 @@ if(!$exist){
   }
 }else{
   $complexity = SqlElement::getSingleSqlElementFromCriteria('Complexity', array('idCatalog'=>$idCatalog,'idZone'=>$idZone));
-  $complexity->name = $name;
   if(trim($name)!=''){
+    $complexity->name = $name;
     $complexity->save();
   }else{
     $compVal = new ComplexityValues();
@@ -56,8 +56,15 @@ if(!$exist){
       $canDelete = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$complexity->id));
       if(!$canDelete){
         $complexity->delete();
+      }else{
+        echo $complexity->name;
       }
     }else{
+      $actPl = new ActivityPlanningElement();
+      $canDelete = $actPl->countSqlElementsFromCriteria(array('idComplexity'=>$complexity->id));
+      if($canDelete){
+        echo $complexity->name;
+      }
       return;
     }
   }

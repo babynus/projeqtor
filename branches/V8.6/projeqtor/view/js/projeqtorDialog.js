@@ -5183,7 +5183,13 @@ function saveComplexity(id,idZone) {
     form : 'objectForm',
     handleAs : "text",
     load : function(data) {
-      loadContent("objectDetail.php?refreshComplexitiesValues=true", "CatalogUO_unitOfWork", 'listForm');
+      if(data){
+        console.log(data);
+        dijit.byId("complexity"+idZone).set("value",data);
+        showAlert(i18n("cantDeleteUsingComplexity"));
+      }else{
+        loadContent("objectDetail.php?refreshComplexitiesValues=true", "CatalogUO_unitOfWork", 'listForm');
+      }
     }
   });
   

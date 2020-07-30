@@ -4337,7 +4337,8 @@ function updateComplexities(number,idCatalog,parameterNumber){
       var numberComplexities = dijit.byId("numberComplexities").get("value");
       if(numberComplexities > 0 && numberComplexities < parameterNumber+1 && notRefresh==false){
         loadContent("objectDetail.php?refreshComplexities=true&nb="+numberComplexities, "drawComplexity", 'listForm');
-      }else{
+      }
+      if(numberComplexities > parameterNumber && notRefresh==false){
         showAlert(i18n("numberOfComplexitiesSuperior"));
       }
     }

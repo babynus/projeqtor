@@ -319,7 +319,7 @@ class ActivityMain extends SqlElement {
    */
   public function control() {
     $result = "";
-    $old = $this->getOld();
+    $old = $this->getOld(false);
     
     //Gautier #4304
     $proj = new Project($this->idProject,true);
@@ -451,6 +451,19 @@ class ActivityMain extends SqlElement {
             $dayTime = Parameter::getGlobalParameter('dayTime');
           }
           $result=i18n('minimumThresholdInputError',array(($maxThreshold*$dayTime).Work::displayShortWorkUnit()));
+        }
+      }
+    }
+    if($result=='OK'){
+      if($this->ActivityPlanningElement->idWorkUnit){
+        $workUnit = new WorkUnit($this->ActivityPlanningElement->idWorkUnit);
+        if($workUnit->validityDate and !SqlElement::isSaveConfirmed() and $old->ActivityPlanningElement->idWorkUnit != $this->ActivityPlanningElement->idWorkUnit ){
+          $today = new DateTime("now");
+          $validityDate = new DateTime($workUnit->validityDate);
+          if($validityDate < $today){
+            $result='<br/>' . i18n('errorValidityDate');
+            $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
+          }
         }
       }
     }
