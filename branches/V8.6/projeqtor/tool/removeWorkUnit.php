@@ -35,7 +35,7 @@ $idWorkUnit = RequestHandler::getId('idWorkUnit');
 Sql::beginTransaction();
 if($number){
   $catalog = new CatalogUO($idCatalog);
-  //if($number < $oldCatalog->numberComplexities){
+  if($number < $oldCatalog->numberComplexities){
     $complexity = new Complexity();
     $complexityValue = new ComplexityValues();
     $lstComplexities = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
@@ -56,7 +56,7 @@ if($number){
         echo $oldCatalog->numberComplexities;
     }
     Sql::commitTransaction();
-  //}
+  }
 }else{
   $workUnit = new WorkUnit($idWorkUnit);
   $result=$workUnit->delete();
