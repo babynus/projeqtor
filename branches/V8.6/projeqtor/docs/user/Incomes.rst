@@ -1172,6 +1172,20 @@ The objective is to define catalogs of work units, made up of work units, themse
 
 This functionality will only be accessible if the :ref:`Revenue management<module-management>` module is activated.
 
+.. figure:: /images/GUI/INCOMES_ZONE_WorkUnitCatalog.png
+   :alt: Work units Catalog screen
+   
+   Work units Catalog screen
+   
+You can select an OU on an activity, if the project has a “Variable” turnover valuation mode.
+
+.. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionProject.png
+   :alt: Revenue section
+   
+   Revenue section on the project screen
+   
+   
+      
 
 .. rubric:: Section Description
 
@@ -1185,21 +1199,31 @@ This functionality will only be accessible if the :ref:`Revenue management<modul
    * - Nomenclature
      - Code usually a reference shared with the customer.
    * - Project
-     - Name of the project to which the catalog is attached.
+     - Unique - only one catalog per project.
    * - Number of complexities 
-     - Maximum number of complexities per catalog OU, within the limit of the global parameter.
+     - Maximum number of complexities, within the limit of the global parameter.
    * - Complexities
      - Text fields to fill in the complexities of the catalog   
      
      
 .. warning:: 
 
-   If the number of complexity isn't filled then the default number set in the global parameters is applied.
+   If the number of complexity isn't filled then the default number set in the :ref:`global parameters<gp-revenue-work-unit>` is applied.
    
    
 Then fill in the fields with the name of the complexities managed by this catalog.
 
 Click on |buttonAdd| to open the pop-up windows and complete the complexity details.
+
+You can fill in the following fields for each OU:
+
+   * Reference
+   * Description
+   * Incomes
+   * Deliverable 
+   * validity date 
+
+The description, incoming and deliverable fields are text editors in inline mode. Edit buttons appear when the cursor is in the field.
 
 .. figure:: /images/GUI/INCOMES_BOX_Detailscompexity.png
    :alt: details complexities
@@ -1207,7 +1231,75 @@ Click on |buttonAdd| to open the pop-up windows and complete the complexity deta
    Pop-up of the complexities details
    
    
+For each complexity of the OU, we can define:
+
+* Validated load of complexity - 0 is allowed
+* Price (CA) of complexity
+* Duration in working days - optional
+
+
+It is not mandatory to fill in all the complexities for an OU. 
+
+The description, incoming and deliverable fields are text editors in "inline" mode. The edit buttons appear when the cursor is in the field.
+
 
    
+.. rubric:: Use of a catalog of work units
+
+You can select an OU on an activity, only if the project has a Variable CA valuation mode.
+
+We will inform the OU, its complexity and the number of units:
+
+   * Entering the OU in the list of OUs in the catalog linked to the project. This will dynamically populate the list of OU complexities by displaying only those that have a charge and a price that is not zero but may be equal to zero.
+   * Entering complexity
+   * Entering the quantity number of work units
    
+An activity will only be associated with a single OU / Complexity pair.
+
+If OU is selected, complexity and quantity are mandatory, otherwise they are prohibited, i.e. not enterable.
+
+The UO / Complexity / Quantity data will make it possible to value:
+   * The validated load = load of the OU / Complexity x Quantity
+   * The turnover of the activity = price of the OU / Complexity x Quantity
+   * The validated duration = duration of the OU / Complexity x Quantity
+
+Entering the validated duration will automatically calculate the validated end date if the validated start date is entered.
+
+.. note::
    
+   This will only determine the planned duration of the activity if it is in "fixed duration" planning mode. Otherwise, the schedule will determine the planned duration from the assigned load and the availability of assigned resources.
+
+These 3 data (validated load, validated duration, CA) will then go into read-only since they are calculated.
+
+If the OU's expiry date has passed, an alert will be displayed on the activity, without this blocking the recording of the activity.
+
+If the global parameter "Report of turnover on the validated cost of activities" is activated, the turnover entered or entered through the OU is recopied in the validated cost of the activity.   
+
+
+
+.. rubric:: modification of data
+
+You can modify the catalog on the data of an OU, a Complexity or a Quantity however it is not possible to modify a unit of work from the catalog, if it is already used on an activity. 
+
+
+* Re-calculation of validated data: validated load, validated duration and turnover
+* If resources are assigned, application of the variation in the assigned load, in proportion to the load assigned to each resource and updating of the “still to do” accordingly (without ever being able to become negative).
+
+.. tip:: 
+
+   **For example:**
+   
+   In the case of an OU whose complexity generates 5 days of load with a quantity of 1, if A is assigned for 2 days and B assigned for 3 days, if we double the quantity (and therefore the validated load) A is then assigned 4 days and B is assigned 6 days.
+
+
+.. rubric:: Deletion of data
+
+You can delete the catalog on the data of an OU, a Complexity or a Quantity however it is not possible to delete a unit of work from the catalog, if it is already used on an activity. 
+
+* The validated load data, validated duration and CA become manually modifiable again
+* The calculated data is kept
+
+The project turnover will be updated from the sum of the turnover of the project activities, whether this data is entered from an OU or entered manually.
+
+The turnover of the activities and the UO, Complexity and Quantity data will only be accessible for "basic" activities (which do not have sub-activities). For "parent" activities, the turnover will be consolidated from the turnover of the sub-activities.
+
