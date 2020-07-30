@@ -37,9 +37,12 @@ class AccessScope extends SqlElement {
   public $isSpecific;
   public $sortOrder=0;
   public $idle;
+  public $isNonProject;
   
   public $_isNameTranslatable = true;
-
+  private static $_fieldsAttributes=array(
+  		"isNonProject"=>"hidden"
+  );
   /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -56,6 +59,13 @@ class AccessScope extends SqlElement {
    */ 
   function __destruct() {
     parent::__destruct();
+  }
+  /** ==========================================================================
+   * Return the specific fieldsAttributes
+   * @return the fieldsAttributes
+   */
+  protected function getStaticFieldsAttributes() {
+  	return self::$_fieldsAttributes;
   }
     
 }
