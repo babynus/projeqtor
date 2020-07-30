@@ -85,7 +85,7 @@ class CatalogUOMain extends SqlElement {
       $old = $this->getOld();
       if($this->idProject != $old->idProject){
         $workU = new WorkUnit();
-        $lstWorkUnit = $workU->getSqlElementsFromCriteria(array('idCatalog'=>$this->id));
+        $lstWorkUnit = $workU->getSqlElementsFromCriteria(array('idCatalogUO'=>$this->id));
         foreach ($lstWorkUnit as $woU){
           $woU->idProject = $this->idProject;
           $woU->save();
@@ -125,7 +125,7 @@ class CatalogUOMain extends SqlElement {
   public function deleteControl() {
     $result="";
     $workUnit = new WorkUnit();
-    $lstWOrkUnit = $workUnit->getSqlElementsFromCriteria(array('idCatalog'=>$this->id));
+    $lstWOrkUnit = $workUnit->getSqlElementsFromCriteria(array('idCatalogUO'=>$this->id));
     foreach ($lstWOrkUnit as $wu){
       $actPl = new ActivityPlanningElement();
       $isUsed = $actPl->countSqlElementsFromCriteria(array('idWorkUnit'=>$wu->id));
@@ -221,7 +221,7 @@ class CatalogUOMain extends SqlElement {
           $nbComplexities = Parameter::getGlobalParameter('ComplexitiesNumber');
         }
         $complexity = new Complexity();
-        $list = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$this->id));
+        $list = $complexity->getSqlElementsFromCriteria(array('idCatalogUO'=>$this->id));
         drawComplexities($nbComplexities,$this,$list);
         echo '</div>';
         echo'</td></tr>';
@@ -229,9 +229,9 @@ class CatalogUOMain extends SqlElement {
     }elseif($item== "unitOfWork"){
       if($this->id){
         $workUnit = new WorkUnit();
-        $listWorkUnit = $workUnit->getSqlElementsFromCriteria(array('idCatalog'=>$this->id));
+        $listWorkUnit = $workUnit->getSqlElementsFromCriteria(array('idCatalogUO'=>$this->id));
         $complexity = new Complexity();
-        $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$this->id));
+        $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalogUO'=>$this->id));
         drawWorkUnits($this,$listWorkUnit,$listComplexity);
       }
     }

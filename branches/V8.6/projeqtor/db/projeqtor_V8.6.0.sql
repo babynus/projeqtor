@@ -146,7 +146,7 @@ CREATE INDEX cataloguoProject ON `${prefix}cataloguo` (idProject);
 
 CREATE TABLE `${prefix}workunit` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
-  `idCatalog` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idCatalogUO` int(12) unsigned DEFAULT NULL COMMENT '12',
   `idProject` int(12) unsigned DEFAULT NULL COMMENT '12',
   `reference` varchar(200) DEFAULT NULL,
   `description` mediumtext DEFAULT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE `${prefix}workunit` (
 
 CREATE TABLE `${prefix}complexity` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
-  `idCatalog` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idCatalogUO` int(12) unsigned DEFAULT NULL COMMENT '12',
   `name` varchar(200) DEFAULT NULL,
   `idZone` int(12) unsigned DEFAULT NULL COMMENT '12',
   PRIMARY KEY (`id`)
@@ -166,7 +166,7 @@ CREATE TABLE `${prefix}complexity` (
 
 CREATE TABLE `${prefix}complexityValues` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
-  `idCatalog` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idCatalogUO` int(12) unsigned DEFAULT NULL COMMENT '12',
   `idComplexity` int(12) unsigned DEFAULT NULL COMMENT '12',
   `idWorkUnit` int(12) unsigned DEFAULT NULL COMMENT '12',
   `charge` int(12) unsigned DEFAULT NULL COMMENT '12',

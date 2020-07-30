@@ -161,15 +161,15 @@ if ($noselect) {
   if (array_key_exists('refreshComplexities', $_REQUEST)) {
       $nbComplexities = RequestHandler::getValue('nb');
       $complexity = new Complexity();
-      $list = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$obj->id));
+      $list = $complexity->getSqlElementsFromCriteria(array('idCatalogUO'=>$obj->id));
       drawComplexities($nbComplexities,$obj,$list,true);
       exit();
   }
   if (array_key_exists('refreshComplexitiesValues', $_REQUEST)) {
         $wu = new WorkUnit();
-        $listWorkUnit = $wu->getSqlElementsFromCriteria(array('idCatalog'=>$obj->id));
+        $listWorkUnit = $wu->getSqlElementsFromCriteria(array('idCatalogUO'=>$obj->id));
         $complexity = new Complexity();
-        $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$obj->id));
+        $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalogUO'=>$obj->id));
         drawWorkUnits($obj,$listWorkUnit,$listComplexity,true);
         exit();
   }

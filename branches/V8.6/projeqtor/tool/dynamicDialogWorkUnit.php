@@ -32,7 +32,7 @@ $workUnits = new WorkUnit($id);
 $detailHeight=50;
 $detailWidth=800;
 $complexity = new Complexity();
-$listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
+$listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalogUO'=>$idCatalog));
 $nbComplexities = count($listComplexity);
 if(!$nbComplexities)$nbComplexities=1;
 $tdWitdh = (85/$nbComplexities);
@@ -116,7 +116,7 @@ $tabCompValues = array();
                 <?php foreach ($listComplexity as $comp){ 
                   $actPl = new ActivityPlanningElement();
                         if($mode =='edit'){
-                          $lstCompVal=SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalog'=>$idCatalog,'idComplexity'=>$comp->id,'idWorkUnit'=>$id));
+                          $lstCompVal=SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalogUO'=>$idCatalog,'idComplexity'=>$comp->id,'idWorkUnit'=>$id));
                           foreach ($lstCompVal as $idLib=>$val){
                             if($idLib=='charge')$tabCompValues[$comp->id]['charge'] = $val; 
                             if($idLib=='price')$tabCompValues[$comp->id]['price'] = $val;

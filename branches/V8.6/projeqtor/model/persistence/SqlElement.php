@@ -188,7 +188,7 @@ abstract class SqlElement {
       "CalendarDefinition" => array(
           "Calendar" => "cascade", 
           "Resource" => "controlStrict"),
-      "CatalogUO" => array("Complexity" => "cascade"),
+      "CatalogUO" => array("Complexity" => "cascade","WorkUnit" => "cascade"),
       "Checklist" => array(
           "ChecklistLine" => "cascade"), 
       "ChecklistDefinition" => array(
@@ -212,6 +212,7 @@ abstract class SqlElement {
           "TestSession" => "control", 
           "Ticket" => "control",
           "ProductAsset"=>"cascade"), 
+      "Complexity" => array("ComplexityValues" => "cascade"),
       "Contact" => array(
           "Activity" => "controlStrict", 
           "Affectation" => "confirm", 

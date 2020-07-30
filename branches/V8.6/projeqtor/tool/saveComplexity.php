@@ -32,10 +32,10 @@ $idCatalog=RequestHandler::getId('idCatalog');
 $name=RequestHandler::getValue('name');
 $idZone=RequestHandler::getValue('idZone');
 $complexity = new complexity();
-$exist = $complexity->countSqlElementsFromCriteria(array('idCatalog'=>$idCatalog,'idZone'=>$idZone));
+$exist = $complexity->countSqlElementsFromCriteria(array('idCatalogUO'=>$idCatalog,'idZone'=>$idZone));
 Sql::beginTransaction();
 if(!$exist){
-  $complexity->idCatalog = $idCatalog;
+  $complexity->idCatalogUO = $idCatalog;
   $complexity->name = $name;
   $complexity->idZone = $idZone;
   if(trim($name)!=''){
@@ -44,7 +44,7 @@ if(!$exist){
     return;
   }
 }else{
-  $complexity = SqlElement::getSingleSqlElementFromCriteria('Complexity', array('idCatalog'=>$idCatalog,'idZone'=>$idZone));
+  $complexity = SqlElement::getSingleSqlElementFromCriteria('Complexity', array('idCatalogUO'=>$idCatalog,'idZone'=>$idZone));
   if(trim($name)!=''){
     $complexity->name = $name;
     $complexity->save();

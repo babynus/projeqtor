@@ -47,7 +47,7 @@ if($mode == 'edit'){
   $actPl = new ActivityPlanningElement();
   $countActPL = $actPl->countSqlElementsFromCriteria(array('idWorkUnit'=>$idWorkUnit));
   //$res='<b>Contrôles invalides.</b><br/><br/>'.i18n('workUnitIsUseByActivity').'<input type="hidden" id="lastOperationStatus" value="INVALID" /><input type="hidden" id="lastSaveId" value="" /><input type="hidden" id="lastOperation" value="control" />';
-  $wu->idCatalog = $idCatalog;
+  $wu->idCatalogUO = $idCatalog;
   $wu->reference = $WUReference;
   $wu->description = $WUDescription;
   $wu->entering = $WUIncoming;
@@ -58,18 +58,18 @@ if($mode == 'edit'){
   $res = $wu->save();
   $result = getLastOperationStatus($res);
   $complexity = new Complexity();
-  $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
+  $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalogUO'=>$idCatalog));
   foreach ($listComplexity as $comp){
     $charge = RequestHandler::getNumeric('charge'.$comp->id);
     $charge = Work::convertWork($charge);
     if($charge==0)$charge=null;
     $price = RequestHandler::getNumeric('price'.$comp->id);
     $duration = RequestHandler::getNumeric('duration'.$comp->id);
-    $compVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalog'=>$idCatalog,'idComplexity'=>$comp->id,'idWorkUnit'=>$idWorkUnit));
+    $compVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idCatalogUO'=>$idCatalog,'idComplexity'=>$comp->id,'idWorkUnit'=>$idWorkUnit));
      if(!$compVal->id){
         if( !$charge and !$price and !$duration)continue;
         $compValue = new ComplexityValues();
-        $compValue->idCatalog = $idCatalog;
+        $compValue->idCatalogUO = $idCatalog;
         $compValue->idComplexity = $comp->id;
         $compValue->idWorkUnit = $wu->id;
         $charge = Work::convertWork($charge);
@@ -94,7 +94,7 @@ if($mode == 'edit'){
   }
 }else{
   $wu = new WorkUnit();
-  $wu->idCatalog = $idCatalog;
+  $wu->idCatalogUO = $idCatalog;
   $wu->reference = $WUReference;
   $wu->description = $WUDescription;
   $wu->entering = $WUIncoming;
@@ -108,7 +108,7 @@ if($mode == 'edit'){
   }
   if ($result == "OK") {
     $complexity = new Complexity();
-    $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
+    $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalogUO'=>$idCatalog));
     foreach ($listComplexity as $comp){
       $charge = RequestHandler::getNumeric('charge'.$comp->id);
       $charge = Work::convertWork($charge);
@@ -117,7 +117,7 @@ if($mode == 'edit'){
       $duration = RequestHandler::getNumeric('duration'.$comp->id);
       if( !$charge and !$price and !$duration)continue;
       $compValue = new ComplexityValues();
-      $compValue->idCatalog = $idCatalog;
+      $compValue->idCatalogUO = $idCatalog;
       $compValue->idComplexity = $comp->id;
       $compValue->idWorkUnit = $wu->id;
       $compValue->charge = $charge;
