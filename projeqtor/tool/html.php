@@ -68,10 +68,10 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 	  }
 	}
 	if($col=="idComplexity"){
-	    $critFld = "idCatalog";
+	    $critFld = "idCatalogUO";
 	    if($obj->idWorkUnit){
 	      $workUnits = new WorkUnit($obj->idWorkUnit,true);
-	      $critVal = $workUnits->idCatalog;
+	      $critVal = $workUnits->idCatalogUO;
 	    }
 	}
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT

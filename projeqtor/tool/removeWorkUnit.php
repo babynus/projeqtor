@@ -35,10 +35,11 @@ $idWorkUnit = RequestHandler::getId('idWorkUnit');
 Sql::beginTransaction();
 if($number){
   $catalog = new CatalogUO($idCatalog);
+  $oldCatalog = $catalog->getOld();
   if($number < $oldCatalog->numberComplexities){
     $complexity = new Complexity();
     $complexityValue = new ComplexityValues();
-    $lstComplexities = $complexity->getSqlElementsFromCriteria(array('idCatalog'=>$idCatalog));
+    $lstComplexities = $complexity->getSqlElementsFromCriteria(array('idCatalogUO'=>$idCatalog));
     $stopDelete = false;
     foreach ($lstComplexities as $val){
       $where = " (idComplexity=".$val->id.") and (charge  IS NOT NULL OR price IS NOT NULL OR duration IS NOT NULL ) ";
@@ -52,7 +53,6 @@ if($number){
         }
       }
     }else{
-        $oldCatalog = $catalog->getOld();
         echo $oldCatalog->numberComplexities;
     }
     Sql::commitTransaction();
