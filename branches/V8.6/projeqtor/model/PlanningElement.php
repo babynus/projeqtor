@@ -705,7 +705,6 @@ class PlanningElement extends SqlElement {
     	if($old->idRevenueMode != $this->idRevenueMode and $this->idRevenueMode == 2){
     	  $this->updateRevenue();
     	}
-    	$this->save();
     }
     // save new parent (for synthesis update) if parent has changed
     // #2995 : a previous version changed the following condition so that updateSynthesis is always called for parent
