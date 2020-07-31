@@ -211,15 +211,28 @@ INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicator
 
 ALTER TABLE `${prefix}project` ADD COLUMN `commandOnValidWork` int(1) unsigned default 0 COMMENT '1';
 
+-- New rights management for non project dependant objects
+
 ALTER TABLE `${prefix}accessscope` ADD COLUMN `isNonProject` int(1) unsigned default 0 COMMENT '1';
+
 UPDATE `${prefix}accessscope` SET `isNonProject`=1 WHERE accessCode!='PRO';
+
 ALTER TABLE `${prefix}accessprofile` ADD COLUMN `isNonProject` int(1) unsigned default 0 COMMENT '1';
+
 INSERT INTO `${prefix}accessprofile` (`id`,`isNonProject`, `name`, `description`, `idAccessScopeRead`, `idAccessScopeCreate`, `idAccessScopeUpdate`, `idAccessScopeDelete`, `sortOrder`, `idle`) VALUES
 (1000001, 1, 'accessProfileManager', 'Create all, update all, delete all', 4, 4, 4, 4, 100, 0),
 (1000002, 1, 'accessProfileReader', 'Create none, update none, delete none', 4, 1, 1, 1, 200, 0),
 (1000003, 1, 'accessProfileUpdater', 'Create none, update all, delete none', 4, 1, 4, 1, 300, 0),
 (1000004, 1, 'accessProfileResponsible', 'Create none, update responsible, delete none', 4, 1, 5, 1, 400, 0),
 (1000005, 1, 'accessProfileCreator', 'Create all, update own, delete own', 4, 4, 2, 2, 500, 0);
+
+UPDATE `${prefix}menu` SET sortOrder=1245 where id=47;
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`,`isAdminMenu`) VALUES
+(256, 'menuAccessProfileNoProject', 37, 'item', 1255, Null, 0, 'HabilitationParameter', 1);
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,256,1);
 
 -- ==========================================
 -- Patchs IGE
