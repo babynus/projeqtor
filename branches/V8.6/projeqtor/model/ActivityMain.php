@@ -458,7 +458,8 @@ class ActivityMain extends SqlElement {
       if($this->ActivityPlanningElement->idWorkUnit){
         $workUnit = new WorkUnit($this->ActivityPlanningElement->idWorkUnit);
         if($workUnit->validityDate and !SqlElement::isSaveConfirmed() and $old->ActivityPlanningElement->idWorkUnit != $this->ActivityPlanningElement->idWorkUnit ){
-          $today = new DateTime("now");
+          $currentDateTime = date('Y-m-d');
+          $today = new DateTime($currentDateTime);
           $validityDate = new DateTime($workUnit->validityDate);
           if($validityDate < $today){
             $result='<br/>' . i18n('errorValidityDate');
