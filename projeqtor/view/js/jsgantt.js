@@ -512,7 +512,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       if(vBarDiv) {
         vList[i].setStartX( vBarDiv.offsetLeft );
         vList[i].setEndX( vBarDiv.offsetLeft + vBarDiv.offsetWidth );
-        if (vList[i].getMile()) {
+        if (vList[i].getMile()=='hip') {
           vList[i].setEndY( vParDiv.offsetTop+vBarDiv.offsetTop+12 );
           vList[i].setStartY( vParDiv.offsetTop+vBarDiv.offsetTop+12 );
         } else {
@@ -1033,7 +1033,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           } 
         } else {
           if( vTaskList[i].getMile() ) {
-        	  vLeftTable += '<div style="width:16px; height:13px;" class="ganttNoExpandMile"></div>';	
+        	   vLeftTable += '<div style="width:16px; height:13px;" class="ganttNoExpandMile"></div>';	
           } else {
               vLeftTable += '<div style="width:16px; height:13px;" class="ganttNoExpand"></div>';
           }
@@ -1285,7 +1285,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         } else {
           vRightTable += '<DIV onselectstart="event.preventDefault();return false;" class="ganttUnselectable" onMouseup="JSGantt.cancelLink('+i+');" id=childgrid_'+vID+' style="position:relative;">';
         }
-        if( vTaskList[i].getMile()) {
+        if( vTaskList[i].getMile()=='hip') {
           vRightTable += '<DIV ' + ffSpecificHeight+ '>'
             + '<TABLE class="rightTableLine" style="width: ' + (vChartWidth) + 'px; " >' 
             + '<TR id=childrow_'+vID+' class="ganttTaskmile" style="height: 21px;"'

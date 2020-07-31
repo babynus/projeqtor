@@ -3141,6 +3141,15 @@ function drawGantt() {
     // var arrayKeys=new Array();
     var keys = "";
     var currentResource=null;
+    if(dojo.byId('portfolioPlanning')){
+      for(var j=0;j <items.lenght; i++){
+        var item = items[j];
+        console.log('ui');
+        if(item.reftype == 'Milestone'){
+          items[j-1]+=item;
+        }
+      }
+    }
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
       // var topId=(i==0)?'':item.topid;

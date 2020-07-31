@@ -59,7 +59,7 @@
   $history=($objectIsClosed)?new HistoryArchive():new History();
   $order = "COALESCE (updateDate,creationDate) ASC";
   $notes=$note->getSqlElementsFromCriteria(array('refType'=>$objectClass,'refId'=>$objectId),null,null,$order);
-  $clauseWhere="refType='$objectClass' and refId=$objectId and ((operation='update' and colName='idStatus') or (operation='insert' and colName is null)) ";
+  $clauseWhere="refType='$objectClass' and refId=$objectId and ((operation='update' and colName='idStatus') or (operation='insert' and colName is null) or operation='delete') ";
   if($objectId)$historyInfo=$history->getSqlElementsFromCriteria(null,null,$clauseWhere,null,"operationDate ASC");
   SqlElement::resetCurrentObjectTimestamp();
   $ress=new Resource($user->id);
@@ -106,14 +106,6 @@
 	  </script><?php }?>
 	  <table id="objectStream" style="width:100%;"> 
 	    <?php 
-	    function sortNotes(&$listNotes, &$result, $parent){
-	    	foreach ($listNotes as $note){
-	    		if($note->idNote == $parent){
-	    			$result[] = $note;
-	    			sortNotes($listNotes, $result, $note->id);
-	    		}
-	    	}
-	    }
 	    $noteDiscussionMode = Parameter::getUserParameter('userNoteDiscussionMode');
 	    if($noteDiscussionMode == null){
 	    	$noteDiscussionMode = Parameter::getGlobalParameter('globalNoteDiscussionMode');
@@ -123,6 +115,8 @@
   	    sortNotes($notes, $result, null);
   	    $notes = $result;
 	    }
+	    debugLog($notes);
+	    debugLog($historyInfo);
 	    //florent ticket 4728
 	    foreach ( $notes as $note ) {
           foreach ($historyInfo as $id=>$hist){
@@ -183,4 +177,16 @@
      </form>
    </div>
 </div>
-<?php }?>
+<?php }
+
+function sortNotes(&$listNotes, &$result, $parent){
+  foreach ($listNotes as $note){
+    if($note->idNote == $parent){
+      $result[] = $note;
+      sortNotes($listNotes, $result, $note->id);
+    }
+  }
+}
+
+?>
+
