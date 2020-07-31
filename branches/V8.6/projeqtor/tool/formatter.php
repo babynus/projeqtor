@@ -658,6 +658,8 @@ function activityStreamDisplayHist ($hist,$origin){
   $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
   
   if ( securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
+    if($objectClass=='Affectation' or $objectClass=='Assignment' or $objectClass=='DocumentVersion'){
+    }
     $gotoAndStyle='style="color:blue;cursor:pointer;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
   }
   $elementName = '<span '.$gotoAndStyle.'>'.i18n($objectClass).'&nbsp;#'.$objectId.'</span>';
@@ -669,12 +671,13 @@ function activityStreamDisplayHist ($hist,$origin){
     $text=i18n('changeStatusStream',array($oldStatusName,$newStatusName));
     $reftText=$elementName.':&nbsp;';    
   }else if($operation=='insert'){
-    $reftText=$elementName.': &nbsp;';
+    $reftText=$elementName.':&nbsp;';
     $text=i18n('createdElementStream');
   }else if($operation=='delete'){
-    $reftText=$elementName.': &nbsp;';
+    $reftText=$elementName.':&nbsp;';
     $text=i18n('deletedElementStream');
   }
+  
   if($origin=='objectStream'){
     echo '<tr style="height:100%;">';
     echo '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;"">';
@@ -682,7 +685,7 @@ function activityStreamDisplayHist ($hist,$origin){
     echo        formatUserThumb($hist->idUser, $userName, 'Creator',32,'left');
     echo '    </div>';
     echo '    <div >';
-    echo '      <div style="margin-top:2px;margin-left:37px;color:#ca810a;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
+    echo '      <div style="margin-top:2px;margin-left:37px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
     echo '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left").'</div>';
     echo '      <div style="margin-top:8px;">'.htmlFormatDateTime($date,true).'</div>';
     echo'     <div>';
@@ -693,7 +696,7 @@ function activityStreamDisplayHist ($hist,$origin){
     echo '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;">';
     echo '    <div style="float:left;width:100%;margin-top:6px;display:inline-block;">';
     echo        formatUserThumb($hist->idUser, $userName, 'Creator',32,'left');
-    echo '      <div style="margin-top:2px;margin-left:45px;color:#ca810a;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
+    echo '      <div style="margin-top:2px;margin-left:45px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
     echo '      <div style="margin-top:3px;margin-left:45px;">'.formatDateThumb($date,null,"left").'</div>';
     echo '      <div style="margin-top:8px;margin-left:45px;">&nbsp;'.htmlFormatDateTime($date,true).'</div>';
     echo'     <div>';
