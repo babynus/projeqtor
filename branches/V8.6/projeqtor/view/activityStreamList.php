@@ -124,7 +124,7 @@ $import=new Importable();
 $importTableName=$import->getDatabaseTableName();
 if (trim($paramTypeNote)!="") {
   $critWhere.=" and refType='$typeNote'";
-  $where.=" and refType='$typeNote'";
+  $where.=" and refType='$typeNote' ";
 }else{
   $where.=" and refType in (select name from $importTableName)";
 }
@@ -176,37 +176,41 @@ if ($activityStreamNumberDays!==""){
     }
     
   }
+}else{
+  $where.=" and operation='update' or operation='insert' or operation='delete'";
 }
+
 
 if ($activityStreamShowClosed!='1') {
 	$critWhere.=" and idle=0";
 }
 //echo '<br/>';
-$order = "COALESCE (updateDate,creationDate) ASC";
+$order = "COALESCE (updateDate,creationDate) DESC";
 $notes=$note->getSqlElementsFromCriteria(null,false,$critWhere,$order,null,null,$activityStreamNumberElement);
-
 $history= new History();
-$historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate ASC",null,null,$activityStreamNumberElement);
+$historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
 if($activityStreamShowClosed =='1'){
   $historyArchive=new HistoryArchive();
-  $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate ASC",null,null,$activityStreamNumberElement);
+  $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
   if(!empty($historyInfoArchive)){
-    foreach ($historyInfoArchive as$histArch){
+    foreach ($historyInfoArchive as $histArch){
       foreach ($historyInfo as $hist){
-        if($histArch->operationDate<$hist->operationDate){
-          $historyInfoLst[]=$histArch;
-        }else{
+        if($hist->operationDate<$histArch->operationDate){
           $historyInfoLst[]=$hist;
+        }else{
+          $historyInfoLst[]=$histArch;
         }
       }
     }
   }else{
     $historyInfoLst=$historyInfo;
   }
+}else{
+  $historyInfoLst=$historyInfo;
 }
 
 $countIdNote = count ( $notes );
-$nbHistInfo= ($activityStreamShowClosed !='1')?count($historyInfo):count($historyInfoLst);
+$nbHistInfo= count($historyInfoLst);
 if ($countIdNote == 0 and $nbHistInfo==0) {
   echo "<div style='padding:10px'>".i18n ( "noNoteToDisplay" )."</div>";
   exit ();
@@ -224,7 +228,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
   			}
   		}
   	}
-	  $noteDiscussionMode = Parameter::getUserParameter('userNoteDiscussionMode');
+	$noteDiscussionMode = Parameter::getUserParameter('userNoteDiscussionMode');
     if($noteDiscussionMode == null){
     	$noteDiscussionMode = Parameter::getGlobalParameter('globalNoteDiscussionMode');
     }
@@ -233,22 +237,35 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
 	    sortNotes($notes, $result, null);
 	    $notes = $result;
     }
-  	
+  	///
+  	 $cp=1;
 	  foreach ($notes as $note) {
-        foreach ($historyInfo as $id=>$hist){
-          if($hist->operationDate < $note->creationDate){
-            echo activityStreamDisplayHist($hist,"activityStream");
-            unset($historyInfo[$id]);
+        if($cp<=$activityStreamNumberElement){
+          foreach ($historyInfoLst as $id=>$hist){
+            if($hist->operationDate > $note->creationDate and $cp<=$activityStreamNumberElement){
+              echo activityStreamDisplayHist($hist,"activityStream");
+              unset($historyInfoLst[$id]);
+              $cp++;
+            }
           }
+        if($cp<=$activityStreamNumberElement){
+          activityStreamDisplayNote($note,"activityStream");
+          $cp++;
         }
-      activityStreamDisplayNote($note,"activityStream");
+       }else{
+        break;
+       }
 	 }
-	  
-	  if(!empty($historyInfo)){
-	    foreach ($historyInfo as $id=>$hist){
-	      echo activityStreamDisplayHist($hist,"activityStream");
-	    }
-	  }
+	 debugLog('la '.$activityStreamNumberElement);
+	 debugLog('ok '.$cp);
+     if(!empty($historyInfoLst) and $cp<=$activityStreamNumberElement){
+       foreach ($historyInfoLst as $id=>$hist){
+         if($cp<=$activityStreamNumberElement){
+          $cp++;
+          echo activityStreamDisplayHist($hist,"activityStream");
+         }
+       }
+     }
 	  ?>
 	</table>
 	<div id="scrollToBottom" type="hidden"></div>

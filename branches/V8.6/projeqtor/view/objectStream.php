@@ -31,7 +31,7 @@
   require_once "../tool/formatter.php";
   scriptLog('   ->/view/objectStream.php');
   global $print,$user;
-  
+  $historyInfoLst=array();
   if (! isset($objectClass) ) $objectClass=RequestHandler::getClass('objectClass');
   if (! isset($objectId)) $objectId=RequestHandler::getId('objectId');
   if($objectClass=='ResourcePlanning')$objectClass='PlanningElement';
@@ -60,7 +60,27 @@
   $order = "COALESCE (updateDate,creationDate) ASC";
   $notes=$note->getSqlElementsFromCriteria(array('refType'=>$objectClass,'refId'=>$objectId),null,null,$order);
   $clauseWhere="refType='$objectClass' and refId=$objectId and ((operation='update' and colName='idStatus') or (operation='insert' and colName is null) or operation='delete') ";
-  if($objectId)$historyInfo=$history->getSqlElementsFromCriteria(null,null,$clauseWhere,null,"operationDate ASC");
+  if($objectId)$historyInfo=$history->getSqlElementsFromCriteria(null,null,$clauseWhere,"operationDate ASC");
+  $obj=new $objectClass($objectId);
+  if($obj->idle==1){
+    $historyArchive=new HistoryArchive();
+    $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate ASC",null,null,$activityStreamNumberElement);
+    if(!empty($historyInfoArchive)){
+      foreach ($historyInfoArchive as $histArch){
+        foreach ($historyInfo as $hist){
+          if($histArch->operationDate>$hist->operationDate){
+            $historyInfoLst[]=$histArch;
+          }else{
+            $historyInfoLst[]=$hist;
+          }
+        }
+      }
+    }else{
+      $historyInfoLst=$historyInfo;
+    }
+  }else{
+     $historyInfoLst=($objectId)?$historyInfo:$historyInfoLst;
+  }
   SqlElement::resetCurrentObjectTimestamp();
   $ress=new Resource($user->id);
   //$userId=$note->idUser;
@@ -82,6 +102,7 @@
     exit;
   }
   $countIdNote=count($notes);
+  $countHist=count($historyInfoLst);
   $onlyCenter=(RequestHandler::getValue('onlyCenter')=='true')?true:false;
   $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
   $positionActivityStream=Parameter::getUserParameter('paramRightDiv');
@@ -115,22 +136,20 @@
   	    sortNotes($notes, $result, null);
   	    $notes = $result;
 	    }
-	    debugLog($notes);
-	    debugLog($historyInfo);
 	    //florent ticket 4728
 	    foreach ( $notes as $note ) {
-          foreach ($historyInfo as $id=>$hist){
+          foreach ($historyInfoLst as $id=>$hist){
             if($hist->operationDate < $note->creationDate){
-              echo activityStreamDisplayHist($hist,"objectStream");
-              unset($historyInfo[$id]);
+               activityStreamDisplayHist($hist,"objectStream");
+              unset($historyInfoLst[$id]);
             }
           }
-	      echo activityStreamDisplayNote ($note,"objectStream");
+	       activityStreamDisplayNote ($note,"objectStream");
 	    };
 	    
-	    if(!empty($historyInfo)){
-          foreach ($historyInfo as $id=>$hist){
-            echo activityStreamDisplayHist($hist,"objectStream");
+	    if(!empty($historyInfoLst)){
+          foreach ($historyInfoLst as $id=>$hist){
+             activityStreamDisplayHist($hist,"objectStream");
           }
         }
 	    
@@ -148,7 +167,7 @@
         $paramHeightStream=140;
       }
       $paramHeightStream=$paramHeightStream-38;
-    if($countIdNote==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	
+    if($countIdNote==0 and $countHist==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	
 ?>
 	</div>
 	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo ($positionActivityStream=='bottom')?'trailing':'bottom';?>" style="<?php if($positionActivityStream=='bottom'){echo "width:30%;height:140px;overflow-x:hidden;padding-right:8px;";}else{echo "height:70px;overflow-x:hidden;padding-right:8px;";}?><?php if ($canUpdateStream!=true) echo 'display:none;';?>">
