@@ -186,6 +186,7 @@ class ProjectPlanningElementMain extends PlanningElement {
   }
   
   function setAttributes(){
+    $proj = new Project($this->idProject);
     if(Parameter::getGlobalParameter('technicalProgress')=='YES' and $this->unitWeight!=0){
       self::$_fieldsAttributes['unitProgress']='readonly';
       self::$_fieldsAttributes['idProgressMode']='readonly,size1/3';
@@ -200,7 +201,6 @@ class ProjectPlanningElementMain extends PlanningElement {
     	self::$_fieldsAttributes['commandSum']='readonly';
     	self::$_fieldsAttributes['billSum']='readonly';
     	self::$_fieldsAttributes['idRevenueMode']='size1/3';
-    	$proj = new Project($this->idProject);
     	$subProj = $proj->getSubProjects(true);
     	if(count($subProj) > 0){
     		self::$_fieldsAttributes['idRevenueMode']='readonly,size1/3';
@@ -211,6 +211,10 @@ class ProjectPlanningElementMain extends PlanningElement {
     	}
     }else{
       unset($this->_separator_sectionRevenue_marginTop);
+    }
+    
+    if($proj->commandOnValidWork){
+      self::$_fieldsAttributes['validatedWork']='readonly';
     }
   }
   /** ==========================================================================
