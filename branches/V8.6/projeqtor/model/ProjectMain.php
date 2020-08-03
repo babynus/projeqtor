@@ -1067,9 +1067,12 @@ static function isTheLeaveProject($id=null) {
 	  $lst=null;
   	$sumValidatedWork=0;
   	$sumValidatedCost=0;
+  	$projList = $this->getRecursiveSubProjectsFlatList(true, true);
+  	$projList = '('.implode(',', array_flip($projList)).')';
   	if($this->commandOnValidWork == 1){
   	  $order=new Command();
-  	  $lst=$order->getSqlElementsFromCriteria(array('idProject'=>$this->id, 'cancelled'=>'0'));
+  	  $queryWhere='idProject in ' . $projList . ' AND idle=0';
+  	  $lst=$order->getSqlElementsFromCriteria(null,null,$queryWhere);
   	  foreach ($lst as $item) {
   	  	$sumValidatedWork+=$item->validatedWork;
   	  	$sumValidatedCost+=$item->totalUntaxedAmount;
@@ -1078,12 +1081,20 @@ static function isTheLeaveProject($id=null) {
   	  $lst=null;
   	  $prj=new Project();
   	  $queryWhere='refType=\'Project\' and refId in (SELECT id FROM ' . $prj->getDatabaseTableName() . ' WHERE idProject=' . $this->id . ' and cancelled=0)';
-  	   
   	  $prj=new ProjectPlanningElement();
   	  $lst=$prj->getSqlElementsFromCriteria(null, null, $queryWhere);
   	  foreach ($lst as $item) {
   	  	$sumValidatedWork+=$item->validatedWork;
   	  	$sumValidatedCost+=$item->validatedCost;
+  	  }
+  	  if(!$this->getSubProjects()){
+    	  $queryWhere='refType=\'Activity\' AND idProject in ' . $projList . ' AND idle=0 AND elementary=1';
+    	  $act=new ActivityPlanningElement();
+    	  $lstAct=$act->getSqlElementsFromCriteria(null, null, $queryWhere);
+    	  foreach ($lstAct as $item) {
+    	  	$sumValidatedWork+=$item->validatedWork;
+    	  	$sumValidatedCost+=$item->validatedCost;
+    	  }
   	  }
   	}
   	$this->ProjectPlanningElement->validatedWork=$sumValidatedWork;
