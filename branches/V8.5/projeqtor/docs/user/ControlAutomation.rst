@@ -737,19 +737,23 @@ A JobList is built from JobList lines.
 
 .. _notifications:
 
-Notifications
--------------
+Notifications definition
+------------------------
 
 You must activate the notifications module to display the corresponding screens
 
-This system allows you to generate notifications or according to very "powerful" rules (defined as "where" clauses).
+This system allows you to generate notifications according to very "powerful" rules defined as "where" clauses.
 
 
 .. note::
 
-   ProjeQtOr offers 2 systems to generate alerts or reminders: definition of notifications and manual notifications from the tools menu
+   ProjeQtOr offers 2 systems to generate alerts or reminders
    
-   see: :ref:`manual_notification`.
+   * Definition of notifications 
+
+   * Manual notifications from the tools menu
+   
+   see: :ref:`Notifications<manual_notification>`
 
 Notification definition in control and automation menu allows you to create notifications about events
 
