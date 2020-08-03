@@ -151,8 +151,8 @@ $userLink['Module']='AccessRight.html#module-management';
 
 
 
-$userLink['Notification']='ControlAutomation.html#notification-system';
-$userLink['NotificationDefinition']='ControlAutomation.html#notification-system';
+$userLink['Notification']='Tools.html#manual_notification';
+$userLink['NotificationDefinition']='ControlAutomation.html#notifications';
 
 
 
