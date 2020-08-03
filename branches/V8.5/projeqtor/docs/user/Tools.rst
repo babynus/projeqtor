@@ -186,9 +186,7 @@ This allows you to have a real-time follow-up of the users who have confirmed th
    
    It harmonizes the rules in Europe by offering a unique legal framework to professionals. It helps to develop their digital activities in the EU based on the trust of users.
 
-   Visit the CNIL web site :ref:`here <https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on/>`_
-
-
+   Visit the CNIL web site `here <https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on/>`_
 
 
 .. raw:: latex
@@ -403,7 +401,7 @@ The files must respect some basic rules.
 Cloned Environnement
 --------------------
 
-You will be able to duplicate the complete environment (data and code) to form a simulation environment. 
+You can duplicate the complete environment (data and code) to form a simulation environment. 
 
 .. rubric:: Administration of simulation requests
 
@@ -413,41 +411,25 @@ You will be able to duplicate the complete environment (data and code) to form a
    Cloned environment parameters
    
    
-This parameters will also be accessible from simulated environments.
+This parameters are also be accessible from simulated environments.
 
 Click on |buttonIconParameter| on the Simulation Management screen
    
    
- .. compound:: Rights management
+ .. compound:: Management of rights and limitations per profils
 
    Definition of profiles that have the right to create a simulation.
    
- .. compound:: Sequencing of the creation of simulations
-
-   This is the setting for taking creation requests into account.
-   
-   * **Fixed frequency**
-   
-     Analyzes creation requests at regular intervals and starts the generation of simulation environment as soon as a request is encountered.
-   
-   * **At a given time**
-   
-     to program night creations for example
-     
-     "Immediate" requests may take some time if multiple simulation requests are generated simultaneously.  
-  
-  
- .. compound:: Definition and management of boundaries
-
    You can limit the number of total simulations per profiles.
    
-      This limitation can have some advantages:
+   This limitation can have some advantages:
       
-      * avoid saturating the server.
-      * force users to clean up their files.
-      * limit performance degradation caused by the creation of a simulated environment
+      * Avoid saturating the server.
+      * Force users to clean up their files.
+      * Limit performance degradation caused by the creation of a simulated environment
 
-   If the limits are reached, the request screen to create a simulated environment will be blocked and the reason explained.
+   The removal requests are decremented. If the limits are reached, the request screen to create a simulated environment is blocked.
+   
    
    .. figure:: /images/GUI/TOOLS_BOX_RequestInvalid.PNG
       :alt: Invalid Request
@@ -455,8 +437,47 @@ Click on |buttonIconParameter| on the Simulation Management screen
       example of a invalid request due to too much creation request.
       
       
-   Removal requests will be decremented.
+   
+   
+  
+ .. compound:: Sequencing of the creation of simulations
 
+   The time required to create a simulation space may vary. Depending on your database, your servers or even if several requests are generated simultaneously. It is an operation which can take time. That is why you can set frequencies for creation requests.
+   
+   * **Fixed frequency**
+   
+     Analyzes creation requests at regular intervals and starts the generation of simulation environment as soon as a request is encountered.
+   
+   * **At a given time**
+   
+     In order to avoid any slowing down of the database, you can program the generations of the spaces at a specific time of the day. This allows these to be programmed outside working hours.
+     
+
+ .. compound:: Copying datas
+   
+   It is necessary to copy the code and the data because the simulations created in a version could no longer be compatible with the code of the main instance that has migrated.
+
+   The creation of a simulation instance is a heavy process for the server: duplication of code, duplication of data...
+   
+   That's why when generating your simulation space, not all data is copied.
+   
+  
+      **Is not copied**
+      
+           * Archived data (closed)
+           * Update history
+           * Attached documents and files
+      
+      **Copy of the code** 
+      
+      * Disabling all automation and notifications.
+      
+      * Update the simulations table to record the actual creation:
+      
+           * Date and time of actual creation,
+           * Flag "available environment"
+           * Instance access URL        
+  
 .. cloned-environnement-managment:
 
 .. rubric:: The cloned Environment managment
@@ -483,15 +504,19 @@ You can also track requests from other users based on your profiles and your rig
       Add request
       
 
-   Identify yourself and name your space
+   Identify the profile making the request, name your space (required) and confirm your request by clicking on OK
    
-   The simulated databases will always have a name prefixed by \simu_ followed by the name of the simulation.
+   **The simulated databases will always have a name prefixed by \simu_ followed by the name of the simulation.**
    
 
 
- .. compound:: Availability date
+ .. compound:: Dates
 
-   The dates of availability of the simulation spaces are indicated when your request is taken into account.
+   * Creation dates: Indicate precisely the date on which you made your request for simulation space.
+
+   * Availability dates: Indicates the date on which your space was actually generated. They are indicated to you when your request is taken into account.
+
+   * Delation dates: Indicates the date on which your space will be completely deleted. The simulation space must actually be generated for the deletion request status to appear. If the database is in the request phase and therefore not yet generated, then the deletion is immediate and the deletion request status does not appear..
    
    
  .. compound:: Color code
@@ -499,7 +524,7 @@ You can also track requests from other users based on your profiles and your rig
    * **Blue:** Request being created
    * **Orange:** Warning (delete request)
    * **Red:** Error creating the environment (path, rights ...)
-   * **Green:** Environment creates ready to open
+   * **Green:** Environment creates
    
       
  .. compound:: Go to the cloned Environment
@@ -523,67 +548,32 @@ You can also track requests from other users based on your profiles and your rig
      
  .. compound:: Copy a cloned Environment
    
-You did a successful simulation on one of your cloned environment. 
+   You did a successful simulation on one of your cloned environment. 
 
-You want the copy to run other tests but without touching the simulation.
+   You want the copy to run other tests but without touching the simulation.
 
-Just copy this environment.
+   Just copy this environment.
 
-The origin of the copy will then be indicated in the list with a shortcut to access it.
+   The origin of the copy will then be indicated in the list with a shortcut to access it.
 
-   
- .. compound:: Copying datas
-   
-   It is necessary to copy the code and the data because the simulations created in a version could no longer be compatible with the code of the main instance that has migrated.
-
-   The creation of a simulation instance is a heavy process for the server: duplication of code, duplication of data...
-   
-   That's why when generating your simulation space, not all data is copied.
-   
-  
-      **Is not copied**
-      
-           * Archived data (closed)
-           * Update history
-           * Attached documents and files
-      
-      **Copy of the code** 
-      
-      Disabling all automation and notifications
-      
-      Update the simulations table to record the actual creation:
-      
-           * Date and time of actual creation,
-           * Flag "available environment"
-           * Instance access URL 
 
 
  .. compound:: Deleting a simulation environment
 
-   Request to delete a simulated environment:
+   Deletion requests are stored in the simulation table. 
    
-   The delete request is available on the simulation list
+   They are processed in the same process as creations, but always with priority to free up space before allocating new resources to new instances.
    
-   Delete requests are stored in the simulations table
-   
-   Deletes are processed in the same process as creatives but before creatives to free up space before allocating new resources to new instances
-
-      **Deleting process:**
-      
-      * Deleting data
-      * Deleting the code
-      * Update the simulations table to record the effective deletion:
-      
-           * Date and time of the effective deletion,
-           * Update of the "available environment" flag   
 
 .. tip::
 
-   To avoid problems of management of the rights too broad and invasion of the server, all the simulations (code) will be placed in a directory "simulation" of the principal repertoire of ProjeQtOr.
-
-   Thus, if the main instance is accessible via the url "projeqtor.dga.fr" the simulations will be accessible via the url "projeqtor.dga.fr/simulation/name_de_simulation".
-
-.. warning:: 
+   To avoid overly broad rights management and server invasion problems, all simulations (code) will be placed in a "simulation" directory outside of the main ProjeQtOr directory. 
+   
+   Thus, if the main instance is accessible via the url "projeqtor.xxx.fr", the simulations will be accessible via the url "projeqtor.xxx.fr/simulation/nom_de_simulation".
+   
+   
+   
+   .. warning:: 
 
    The CRON program must be started and running so that the simulation request can be taken into account and can be generated.
 
@@ -601,7 +591,19 @@ The origin of the copy will then be indicated in the list with a shortcut to acc
 Notifications
 -------------
 
-You can defined manually notifications in this screen
+You can defined manually notifications in this screen.
+
+.. note::
+
+   ProjeQtOr offers 2 systems to generate alerts or reminders
+   
+   * Definition of notifications 
+
+   * Manual notifications from the tools menu
+   
+   see: :ref:`Notifications definition<notifications>`
+   
+   
 
 .. figure:: /images/GUI/TOOLS_SCR_Notifications.png
    :alt: Notifications of the Tools menu screen
@@ -654,6 +656,16 @@ Click on an unread notification for discover the details
    * |iconwarning| type Warning
    * |iconalert| type alert
    * |iconsum| sum - Records all the type
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 .. raw:: latex
 
