@@ -1,4 +1,5 @@
 <?php
+use Matrix\Operators\Operator;
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -544,10 +545,11 @@ function activityStreamDisplayNote ($note,$origin){
   $userName = SqlList::getNameFromId ( 'User', $userId );
   $userNameFormatted = '<span style="color:blue"><strong>' . $userName . '</strong></span>';
   $idNote = '<span style="color:blue">#' . $note->id . '</span>';
-  $ticketName = '<span style="color:blue;cursor:pointer;" onClick="gotoElement(\''.htmlEncode($note->refType).'\',\''.htmlEncode($note->refId).'\')">' . $note->refType . ' #' . $note->refId . '</span>';
-  if ($origin=='activityStream') $ticketName.=' - '.SqlList::getNameFromId($note->refType, $note->refId);
-  if ($note->updateDate)  $colCommentStream = i18n ( 'activityStreamUpdateComment', array ($idNote, $ticketName ) );
-  else  $colCommentStream = i18n ( 'activityStreamCreationComment', array ($idNote, $ticketName ) );
+  $ticketName = '<span style="color:blue;cursor:pointer;" onClick="gotoElement(\''.htmlEncode($note->refType).'\',\''.htmlEncode($note->refId).'\')">' . $note->refType . ' #' . $note->refId ;
+  if ($origin=='activityStream') $ticketName.=' - '.SqlList::getNameFromId($note->refType, $note->refId). '</span>';
+  else $ticketName.='</span>';
+  if ($note->updateDate)  $colCommentStream = i18n ( 'activityStreamUpdateComment', array ($idNote) );
+  else  $colCommentStream = i18n ( 'activityStreamCreationComment', array ($idNote ) );
   if (!$user) $user=getSessionUser();
   if (!$userRessource) $userRessource=new Affectable($user->id);
   $objectClass=$note->refType;
@@ -610,7 +612,7 @@ function activityStreamDisplayNote ($note,$origin){
     }
     echo '<div class="activityStreamNoteContainer" style="padding-left:4px;max-width:'.$rightWidth.'">';
     $strDataHTML=$note->note;
-    echo '<div><div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
+    echo '<div><div style="margin-top:2px;margin-left:37px;">'.(($origin!='objectStream')?$ticketName.":&nbsp;":"").$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
   	echo '<div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($note->creationDate,$note->updateDate,"left").'</div>';
   	if($note->updateDate){
   	 echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->updateDate,true).'</div></div>';    	 
@@ -645,6 +647,10 @@ function activityStreamDisplayNote ($note,$origin){
 function activityStreamDisplayHist ($hist,$origin){
   $text='';
   $reftText='';
+  $isAssign=false;
+  $isAff=false;
+  $isDovVers=false;
+  $isTestCaseRun=false;
   $gotoAndStyle='style="color:blue;"';
   $userId = $hist->idUser;
   $userName = ($hist->idUser!='')?SqlList::getNameFromId ( 'Affectable', $userId ):lcfirst(i18n('unknown'));
@@ -656,13 +662,51 @@ function activityStreamDisplayHist ($hist,$origin){
   $objectClass=$hist->refType;
   $objectId=$hist->refId;
   $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
-  
-  if ( securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
-    if($objectClass=='Affectation' or $objectClass=='Assignment' or $objectClass=='DocumentVersion'){
+  if(($objectClass=='Affectation' or $objectClass=='Assignment' or $objectClass=='DocumentVersion') and $operation!='delete'){
+    $object= new $objectClass($objectId);
+    if($object->id!=''){
+      switch ($objectClass){
+      	case 'Affectation':
+      	  $isAff=true;
+      	  $resource= new Resource($object->idResource);
+      	  $objectClass='Project';
+      	  $objectId=$object->idProject;
+      	  break;
+      	case 'Assignment':
+      	  $isAssign=true;
+      	  $resource=new Resource($object->idResource);
+      	  $objectClass=$object->refType;
+      	  $objectId=$object->refId;
+      	  break;
+      	case 'DocumentVersion':
+      	  $isDovVers=true;
+      	  $docVers='<span style="font-weight:bold;">'.$object->fullName.'</span>';
+      	  $objectClass='Document';
+      	  $objectId=$object->idDocument;
+      	  break;
+      	case 'TestCaseRun':
+      	  $isTestCaseRun=true;
+      	  $testSession=='<span style="font-weight:bold;">'.$object->id.'</span>';
+      	  $objectClass='TestSession';
+      	  $objectId=$object->idTestSession;
+      	  break;
+      }
+      if(isset($resource)){
+        if ( securityCheckDisplayMenu(null, 'Resource') and securityGetAccessRightYesNo('menu'.'Resource', 'read', '')=="YES") {
+          $gotoResource='style="font-weight:bold;cursor:pointer;color:blue;" onClick="gotoElement(\''.htmlEncode('Resource').'\',\''.htmlEncode($resource->id).'\')"';
+        }else{
+          $gotoResource='style="font-weight:bold;color:blue;"';
+        }
+        $resourceName='<span '.$gotoResource.' >'.$resource->name.'</span>';
+      }
     }
+  }
+  if ( securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
     $gotoAndStyle='style="color:blue;cursor:pointer;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
   }
-  $elementName = '<span '.$gotoAndStyle.'>'.i18n($objectClass).'&nbsp;#'.$objectId.'</span>';
+  $elementName = '<span '.$gotoAndStyle.'>'.i18n($objectClass).'&nbsp;#'.$objectId;
+  if ($origin=='activityStream') $elementName.=' - '.SqlList::getNameFromId($objectClass, $objectId).'</span>';
+  else $elementName.='</span>';
   if($operation=='update' and $change=='idStatus'){
     $newStatus=new Status($newVal);
     $oldStatus=new Status($oldVal);
@@ -670,12 +714,25 @@ function activityStreamDisplayHist ($hist,$origin){
     $newStatusName='<span style="font-weight:bold;">'.$newStatus->name.'</span>';
     $text=i18n('changeStatusStream',array($oldStatusName,$newStatusName));
     $reftText=$elementName.':&nbsp;';    
+    $icon='<div style="width:16px;height:16px;" class="iconChangedStatus16">&nbsp;&nbsp;</div>';
   }else if($operation=='insert'){
     $reftText=$elementName.':&nbsp;';
-    $text=i18n('createdElementStream');
+    if($isAssign){
+      $text=i18n('assignResource').'&nbsp;'.$resourceName;
+    }else if($isAff){
+      $text=i18n('affResource').'&nbsp;'.$resourceName;
+    }else if($isDovVers){
+      $text=i18n('addDocVersion').'&nbsp;'.$docVers;
+    }else if($isTestCaseRun){
+      $text=i18n('addTestCase').'&nbsp;'.$testSession;
+    }else{
+      $text=i18n('createdElementStream');
+    }
+    $icon='<div style="width:16px;height:16px;" class="iconNewElement16">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
   }else if($operation=='delete'){
     $reftText=$elementName.':&nbsp;';
     $text=i18n('deletedElementStream');
+    $icon='<div style="width:16px;height:16px;" class="iconDeleteElement16">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
   }
   
   if($origin=='objectStream'){
@@ -685,7 +742,8 @@ function activityStreamDisplayHist ($hist,$origin){
     echo        formatUserThumb($hist->idUser, $userName, 'Creator',32,'left');
     echo '    </div>';
     echo '    <div >';
-    echo '      <div style="margin-top:2px;margin-left:37px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
+    echo '      <div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp;'.$text.'</div>';
+    echo        $icon;
     echo '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left").'</div>';
     echo '      <div style="margin-top:8px;">'.htmlFormatDateTime($date,true).'</div>';
     echo'     <div>';
@@ -693,10 +751,10 @@ function activityStreamDisplayHist ($hist,$origin){
     echo '</tr>';
   }else{
     echo '<tr style="height:100%;">';
-    echo '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;">';
-    echo '    <div style="float:left;width:100%;margin-top:6px;display:inline-block;">';
+    echo '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;">';
+    echo '    <div style="float:left;width:800px;margin-top:6px;display:inline-block;">';
     echo        formatUserThumb($hist->idUser, $userName, 'Creator',32,'left');
-    echo '      <div style="margin-top:2px;margin-left:45px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
+    echo '      <div style="margin-top:2px;margin-left:45px;height:32px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'&nbsp'.$icon.'</div>';
     echo '      <div style="margin-top:3px;margin-left:45px;">'.formatDateThumb($date,null,"left").'</div>';
     echo '      <div style="margin-top:8px;margin-left:45px;">&nbsp;'.htmlFormatDateTime($date,true).'</div>';
     echo'     <div>';

@@ -48,7 +48,6 @@ if($consValPproj->id!=''){
     $canChangeValidation=false;
   }
 }
-debugLog($prof);
 if($mode!='validaTionCons' and $mode!='cancelCons'){
   $lockImp= new LockedImputation();
   $where="idProject=$projId and month<$month";
