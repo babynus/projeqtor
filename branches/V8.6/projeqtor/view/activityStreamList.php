@@ -256,8 +256,6 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
         break;
        }
 	 }
-	 debugLog('la '.$activityStreamNumberElement);
-	 debugLog('ok '.$cp);
      if(!empty($historyInfoLst) and $cp<=$activityStreamNumberElement){
        foreach ($historyInfoLst as $id=>$hist){
          if($cp<=$activityStreamNumberElement){

@@ -1338,6 +1338,18 @@
 .iconLocked16 { background-image: url(images/locked.png);  background-size: 16px 16px;}
 .iconLocked32 { background-image: url(images/locked.png);  background-size: 32px 32px;}
 
+.iconChangedStatus16 { background-image: url(images/iconChangedStatus.png);  background-size: 16px 16px;}
+.iconChangedStatus32 { background-image: url(images/iconChangedStatus.png);  background-size: 32px 32px;}
+
+.iconDeleteElement16 { background-image: url(images/iconDeleteElement.png);  background-size: 16px 16px;}
+.iconDeleteElement32 { background-image: url(images/iconDeleteElement.png);  background-size: 32px 32px;}
+
+.iconNewElement16 { background-image: url(images/iconNewElement.png);  background-size: 16px 16px;}
+.iconNewElement32 { background-image: url(images/iconNewElement.png);  background-size: 32px 32px;}
+
+.iconMessageStream16 { background-image: url(images/iconMessageStream.png);  background-size: 16px 16px;}
+.iconMessageStream32 { background-image: url(images/iconMessageStream.png);  background-size: 32px 32px;}
+
 .iconDisplayMore16 { background-image: url(images/iconDisplayMore.png);  background-size: 16px 16px;}
 .iconDisplayMore32 { background-image: url(images/iconDisplayMore.png);  background-size: 32px 32px;}
 .iconReduceDisplay16 { background-image: url(images/iconReduceDisplay.png);  background-size: 16px 16px;}
