@@ -3678,6 +3678,19 @@ function refreshTodayProjectsList(value) {
       "todayProjectsForm", false);
 }
 
+/**
+ * refresh Projects List on Today screen
+ */
+function refreshTodayList(list,value) {
+  if(value==null || value==undefined){
+    value=dojo.byId('showAll'+list+'Today').value; 
+  }
+  if(value!=dojo.byId('showAll'+list+'Today').value){
+    saveDataToSession('showAll'+list+'TodayVal',value,false);
+  }
+  loadContent("../view/today.php?refresh"+list+"=true+&showAll"+list+"Today="+value, "Today_"+(list=='Message'?list.toLowerCase():list),"today"+list+"Form", false);
+}
+
 //var newWin=null;
 function openInNewWindow(eltClass, eltId) {
   var url="main.php?directAccess=true&objectClass="+eltClass+"&objectId="+eltId;

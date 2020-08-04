@@ -773,7 +773,8 @@ class Parameter extends SqlElement {
                            "paramShowThumbList"=>"list",
                            "notApplicableValue"=>"list",
                            "projectIndentChar"=>'list',
-                           "sizeDispalyProjectToday"=>'number',
+                           "sizeDisplayProjectToday"=>'number',
+                           'maxItemsInTodayLists'=>'number',
                        'column_Dis_2'=>'newColumn',
                          'sectionIHM'=>'section',
                            "displayHistory"=>"list",
@@ -923,6 +924,7 @@ class Parameter extends SqlElement {
       	                    'sectionDisplay'=>'section',
       	                      'paramDbDisplayName'=>'text',
       	                      'paramFadeLoadingMode'=>'list',
+      	                      'sizeDisplayProjectToday'=>'number',
       	                      'maxItemsInTodayLists'=>'number',
       	                      'filterByStatus'=>'list', //ADD by qCazelles - Filter by Status
       	                      //'projectRestriction'=>'list', // Babynus : feature disabled do to regressions

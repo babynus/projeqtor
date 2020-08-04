@@ -33,7 +33,7 @@ require_once "../tool/projeqtor.php";
 scriptLog('   ->/view/today.php');
 $user=getSessionUser();
 $profile=new Profile($user->idProfile);
-$cptMax=Parameter::getGlobalParameter('maxItemsInTodayLists');
+$cptMax=Parameter::getUserParameter('maxItemsInTodayLists');
 if (!$cptMax) {
   $cptMax=100;
 }
@@ -67,11 +67,38 @@ if (array_key_exists('refreshProjects', $_REQUEST)) {
   showProjects();
   exit;
 }
+if(array_key_exists('refreshMessage', $_REQUEST)) {
+  showMessages();
+  exit;
+}
+if(array_key_exists('refreshWorkDiv', $_REQUEST)) {
+  showAssignedTasks();
+  exit;
+}
+if(array_key_exists('refreshRespDiv', $_REQUEST)) {
+  showResponsibleTasks();
+  exit;
+}
+if(array_key_exists('refreshFollowDiv', $_REQUEST)) {
+  showIssuerRequestorTasks();
+  exit;
+}
+if(array_key_exists('refreshDocumentDiv', $_REQUEST)) {
+  showDocuments();
+  exit;
+}
 
 function showMessages() {
   global $cptMax;
   $user=getSessionUser();
   $msg=new Message();
+  if(sessionValueExists('showAllMessageTodayVal')){
+    $showAllMessage=getSessionValue('showAllMessageTodayVal');
+  }else if(RequestHandler::isCodeSet('showAllMessageToday')){
+    $showAllMessage=RequestHandler::getValue('showAllMessageToday');
+  }else{
+    $showAllMessage='false';
+  }
   $where="idle=0";
   $where.=" and (idUser is null or idUser='".Sql::fmtId($user->id)."')";
   $where.=" and (idProfile is null or idProfile in ".transformListIntoInClause($user->getAllProfiles()).")";
@@ -79,8 +106,10 @@ function showMessages() {
   
   $sort="id desc";
   $listMsg=$msg->getSqlElementsFromCriteria(null, false, $where, $sort);
-  if (count($listMsg)>0) {
+  if (count($listMsg)>0 ) {
     $cpt=0;
+    echo '<input id="showAllMessageToday" name="showAllMessageToday"  hidden value="'.$showAllMessage.'" />';
+    echo '<form id="todayMessageForm" name="todayMessageForm">';
     echo '<table align="center" style="width:100%">';
     foreach ($listMsg as $msg) {
       #Florent ticket 4030
@@ -89,8 +118,8 @@ function showMessages() {
       $today=date('Y-m-d H:i:s');
       if( $startDate <= $today && $endDate >= $today or $startDate=='' && $endDate=='' or $startDate<= $today && $endDate==''){
           $cpt++;
-          if ($cpt>$cptMax) {
-            echo '<tr><td colspan="2" class="messageData">'.i18n('limitedDisplay', array($cptMax)).'</td></tr>';
+          if ($cpt>$cptMax and $showAllMessage=='false') {
+            echo '<tr><td colspan="2" class="messageData"><div>'.i18n('limitedDisplay', array($cptMax)).'</div><div style="cursor:pointer;width:16px;height:16px;margin-left:50%;" class="iconDisplayMore16" onclick="refreshTodayList(\'Message\',\'true\')" title="'.i18n('displayMore').'" >&nbsp;</div></td></tr>';
             break;
           }
           $type=new MessageType($msg->idMessageType);
@@ -101,15 +130,18 @@ function showMessages() {
           
         } 
       }
-     
+    if($showAllMessage=='true'){
+      echo '<tr style="text-align: center;font-weight:bold;"><td colspan="18"  class="messageData"><div style="cursor:pointer;width:16px;height:16px;margin-left:50%;" class="iconReduceDisplay16" onclick="refreshTodayList(\'Message\',\'false\')" title="'.i18n('reduceDisplayToday').'">&nbsp;</div></td></tr>';
+    }
     echo '</table>';
+    echo '</form>';
   }
 }
 
 function showProjects() {
   global $cptMax, $print, $workVisibility, $templateProjectList, $arrayCols, $showCol, $cptCol;
   $user=getSessionUser();
-  $parmSizeProject=Parameter::getUserParameter('sizeDispalyProjectToday');
+  $parmSizeProject=Parameter::getUserParameter('sizeDisplayProjectToday');
   $prjVisLst=$user->getVisibleProjects();
   $prjLst=$user->getHierarchicalViewOfVisibleProjects(true);
   $lstProj=array();
@@ -123,7 +155,6 @@ function showProjects() {
   }else{
     $showAllProject='false';
   }
-  debugLog($showAllProject);
   $showProject=securityCheckDisplayMenu(null, 'Project');
   $showOne=false;
   if ($showProject) $showOne=true;
@@ -246,7 +277,15 @@ function showProjects() {
           }
         }
       }
-      if($colParent->id=="" and $isSubProj   ){
+      $pose='';
+      $showForced=false;
+      if(count($isSubProj)!=0 ){
+        $pose=trim(strpos($lstProj,$isSubProj[0]));
+      }
+      if($pose==''){
+        $showForced=true;
+      }
+      if($colParent->id=="" and count($isSubProj)!=0 and  $showForced==false){
         continue;
       }
       if($hiddenSubProj ){
@@ -307,6 +346,9 @@ function showProjects() {
         $show=false;
       }
       $cptSubPrj=(isset($cptsubProject[$id]))?$cptsubProject[$id]:0;
+      if(count($prjLst)==1){
+        $show=true;
+      }
       if ($show or $cptSubPrj>0) {
         $goto="";
         $proj=new Project($id);
@@ -555,6 +597,14 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
   $order="";
   $list=array();
   $ticket=new Ticket();
+  $showAllLib=substr($divName,6);
+  if(sessionValueExists('showAll'.$showAllLib.'TodayVal')){
+    $showAllToday=getSessionValue('showAll'.$showAllLib.'TodayVal');
+  }else if(RequestHandler::isCodeSet('showAll'.$showAllLib.'Today')){
+    $showAllToday=RequestHandler::getValue('showAll'.$showAllLib.'Today');
+  }else{
+    $showAllToday='false';
+  }
   $listTicket=$ticket->getSqlElementsFromCriteria(null, null, $whereTicket, $order, null, true, $cptMax+1);
   $list=array_merge($list, $listTicket);
   $activity=new Activity();
@@ -629,7 +679,7 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
   $list=array_merge($list, $listTerm);
   
   if (!$print or !array_key_exists($divName, $collapsedList)) {
-    if (!$print) {
+    if (!$print and !(array_key_exists('refresh'.$showAllLib, $_REQUEST))) {
       echo '<div id="'.$divName.'" dojoType="dijit.TitlePane"';
       echo ' open="'.(array_key_exists($divName, $collapsedList)?'false':'true').'"';
       echo ' onHide="saveCollapsed(\''.$divName.'\');"';
@@ -639,6 +689,8 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
     } else {
       echo '<div class="section">'.ucfirst(i18n($title)).'</div><br/><div>';
     }
+    echo '<input id="showAll'.$showAllLib.'Today" name="showAll'.$showAllLib.'Today"  hidden value="'.$showAllToday.'" />';
+    echo '<form id="today'.$showAllLib.'Form" name="today'.$showAllLib.'Form">';
     echo '<table align="center" style="width:100%">';
     echo '<tr>'.' <td class="messageHeader" width="6%">'.ucfirst(i18n('colId')).'</td>'.' <td class="messageHeader" width="12%">'.ucfirst(i18n('colIdProject')).'</td>'.'  <td class="messageHeader" width="12%">'.ucfirst(i18n('colType')).'</td>'.'  <td class="messageHeader" width="40%">'.ucfirst(i18n('colName')).'</td>'.'  <td class="messageHeader" width="8%">'.ucfirst(i18n('colDueDate')).'</td>'.'  <td class="messageHeader" width="12%">'.ucfirst(i18n('colIdStatus')).'</td>'.'  <td class="messageHeader" width="3%" title="'.i18n('isIssuerOf').'">'.ucfirst(i18n('colIssuerShort')).'</td>'.'  <td class="messageHeader" width="3%" title="'.i18n('isAccountableOf').'">'.ucfirst(i18n('colAccountableShort')).'</td>'.'  <td class="messageHeader" width="3%" title="'.i18n('isResponsibleOf').'">'.ucfirst(i18n('colResponsibleShort')).'</td>'.'</tr>';
     $cpt=0;
@@ -696,8 +748,8 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
         }
       }
       $cpt++;
-      if ($cpt>$cptMax) {
-        echo '<tr><td colspan="8" class="messageData" style="text-align:center;"><b>'.i18n('limitedDisplay', array($cptMax)).'</b></td></tr>';
+      if ($cpt>$cptMax and $showAllToday=='false') {
+        echo '<tr><td colspan="9" class="messageData" style="text-align:center;"><div><b>'.i18n('limitedDisplay', array($cptMax)).'</b></div><div style="cursor:pointer;width:16px;height:16px;margin-left:50%;" class="iconDisplayMore16" onclick="refreshTodayList(\''.$showAllLib.'\',\'true\')" title="'.i18n('displayMore').'" >&nbsp;</div></td></tr>';
         break;
       }
       $status="";
@@ -747,8 +799,12 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
       }
       echo '</tr>';
     }
+    if($showAllToday=='true'){
+      echo '<tr style="text-align: center;font-weight:bold;"><td colspan="9"  class="messageData"><div style="cursor:pointer;width:16px;height:16px;margin-left:50%;" class="iconReduceDisplay16" onclick="refreshTodayList(\''.$showAllLib.'\',\'false\')" title="'.i18n('reduceDisplayToday').'">&nbsp;</div></td></tr>';
+    }
     echo "</table>";
     echo "</div><br/>";
+    echo "</form>";
   }
 }
 
