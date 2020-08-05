@@ -62,6 +62,8 @@ $obj=new $class($id);
 $preserveFileName=Parameter::getGlobalParameter('preserveUploadedFileName');
 if (!$preserveFileName) $preserveFileName="NO";
 
+Security::checkValidAccessForUser($obj); // Enforce security for access to files
+
 if ($class=='Attachment') {
   $path = str_replace('${attachmentDirectory}', Parameter::getGlobalParameter('paramAttachmentDirectory'), $obj->subDirectory);
   $name = $obj->fileName;
