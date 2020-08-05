@@ -96,6 +96,7 @@ class Security
     return $boolean;
   }
   public static function checkValidDateTime($dateTime,$activeTraceHack=true) {
+    if (is_a($dateTime,'DateTime',true)) return Security::checkValidDateTime($dateTime->format('Y-m-d H:i:s'),$activeTraceHack);
     if (trim($dateTime)=='') return '';
     $len=strlen($dateTime);
     if ($len<5 or $len>19) {
@@ -285,6 +286,38 @@ class Security
       traceHack("invalid locale string value - $string");
     }
     return $string;
+  }
+  
+  public static function checkValidAccessForUser($obj, $mode='read', $refType=null, $refId=null) {
+    if (!$obj) {
+      if ($refType and $refId) {
+        $obj=new $refType($refId);
+      }
+    }
+    if (get_class($obj)=='Logfile') {
+      $user=getSessionUser();
+      $accessRightList = $user->getAccessControlRights ();
+      if ( !isset($accessRightList['menuAdmin']) or !isset($accessRightList['menuAdmin']['read']) or $accessRightList['menuAdmin']['read']!='ALL' ) {
+        traceHack("checkValidAccessForUser() Reject for ".get_class($obj)." - no access to administration screen");
+      } else {
+        return; // OK
+      }
+    } else if (get_class($obj)=='Attachment') {
+      // Access an attachement : must crontrol acess on item containing the attachment
+      $refType=$obj->refType;
+      $refId=$obj->refId;
+      $obj=new $refType($refId);
+    } else if (get_class($obj)=='DocumentVersion') {  
+      // Access on document version : must crontrol acess on document containing the version
+      $obj=new Document($obj->idDocument);
+    }
+    if (!$obj->id and $mode!='create') {
+      traceHack("checkValidAccessForUser() Reject for ".get_class($obj)." #".$obj->id." - no id for object on mode different from create");
+    }
+    $right = securityGetAccessRightYesNo( 'menu'.get_class($obj), $mode,$obj );
+    if ($right!='YES') {
+      traceHack("checkValidAccessForUser() Reject for ".get_class($obj)." #".$obj->id." - no '$mode' right to this item");
+    }
   }
 }
  
