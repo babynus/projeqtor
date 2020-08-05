@@ -31,6 +31,10 @@
   require_once "../tool/formatter.php";
   scriptLog('   ->/view/objectStream.php');
   global $print,$user;
+  
+  $showOnlyNotes=Parameter::getUserParameter('showOnlyNotes');
+  if($showOnlyNotes=='')$showOnlyNotes='NO';
+  
   $historyInfoLst=array();
   if (! isset($objectClass) ) $objectClass=RequestHandler::getClass('objectClass');
   if (! isset($objectId)) $objectId=RequestHandler::getId('objectId');
@@ -59,27 +63,31 @@
   $history=($objectIsClosed)?new HistoryArchive():new History();
   $order = "COALESCE (updateDate,creationDate) ASC";
   $notes=$note->getSqlElementsFromCriteria(array('refType'=>$objectClass,'refId'=>$objectId),null,null,$order);
-  $clauseWhere="refType='$objectClass' and refId=$objectId and ((operation='update' and colName='idStatus') or (operation='insert' and colName is null) or operation='delete') ";
-  if($objectId)$historyInfo=$history->getSqlElementsFromCriteria(null,null,$clauseWhere,"operationDate ASC");
-  $obj=new $objectClass($objectId);
-  if($obj->idle==1){
-    $historyArchive=new HistoryArchive();
-    $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate ASC",null,null,$activityStreamNumberElement);
-    if(!empty($historyInfoArchive)){
-      foreach ($historyInfoArchive as $histArch){
-        foreach ($historyInfo as $hist){
-          if($histArch->operationDate>$hist->operationDate){
-            $historyInfoLst[]=$histArch;
-          }else{
-            $historyInfoLst[]=$hist;
+  $historyInfoLst=array();
+  if($showOnlyNotes=='NO'){
+    debugLog('ui');
+    $clauseWhere="refType='$objectClass' and refId=$objectId and ((operation='update' and colName='idStatus') or (operation='insert' and colName is null) or operation='delete') ";
+    if($objectId)$historyInfo=$history->getSqlElementsFromCriteria(null,null,$clauseWhere,"operationDate ASC");
+    $obj=new $objectClass($objectId);
+    if($obj->idle==1){
+      $historyArchive=new HistoryArchive();
+      $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate ASC",null,null,$activityStreamNumberElement);
+      if(!empty($historyInfoArchive)){
+        foreach ($historyInfoArchive as $histArch){
+          foreach ($historyInfo as $hist){
+            if($histArch->operationDate>$hist->operationDate){
+              $historyInfoLst[]=$histArch;
+            }else{
+              $historyInfoLst[]=$hist;
+            }
           }
         }
+      }else{
+        $historyInfoLst=$historyInfo;
       }
     }else{
-      $historyInfoLst=$historyInfo;
+       $historyInfoLst=($objectId)?$historyInfo:$historyInfoLst;
     }
-  }else{
-     $historyInfoLst=($objectId)?$historyInfo:$historyInfoLst;
   }
   SqlElement::resetCurrentObjectTimestamp();
   $ress=new Resource($user->id);
@@ -102,6 +110,7 @@
     exit;
   }
   $countIdNote=count($notes);
+  debugLog($historyInfoLst);
   $countHist=count($historyInfoLst);
   $onlyCenter=(RequestHandler::getValue('onlyCenter')=='true')?true:false;
   $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);

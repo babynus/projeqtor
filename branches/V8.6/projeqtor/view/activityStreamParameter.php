@@ -37,6 +37,8 @@ $updatedRecently=Parameter::getUserParameter("activityStreamUpdatedRecently");
 $activityStreamNumberElement=Parameter::getUserParameter("activityStreamNumberElement");
 $activityStreamIdNote=Parameter::getUserParameter("activityStreamIdNote");
 $activityStreamNumberDays=Parameter::getUserParameter("activityStreamNumberDays");
+$showOnlyNotes=Parameter::getUserParameter('showOnlyNotes');
+if($showOnlyNotes=='')$showOnlyNotes='NO';
 if(!$activityStreamNumberDays){
   $activityStreamNumberDays="7";
 }
@@ -164,8 +166,18 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
                type="text" id="activityStreamIdNote" name="activityStreamIdNote" onChange="refreshActivityStreamList();" <?php echo (trim($selectedElementType)=="")?"readonly=readonly":"";?>>
               </div>
             </td>
-           </tr>
-					</table>
+            </tr>
+              <tr>
+              <input type="hidden" id="showOnlyNotesValue" name="showOnlyNotesValue" value="<?php echo $showOnlyNotes;?>" /> 
+               <td colspan="2" style="width:50%;white-space:nowrap;" align="right">
+                <a onclick="showOnlyNoteStream();" href="#" style="cursor: pointer;display:flex;">
+                 <?php echo i18n("paramShowOnlyNotes");?>
+                 <?php $displayShowOnlyNotes=($showOnlyNotes=='YES')?'inline-block':'none';?>
+                 <span id="showOnlyNotes" style="display:<?php echo $displayShowOnlyNotes;?>;margin-left:10px;";><img src="css/images/iconSelect.png"/></span>
+               </a>
+              </td>
+            </tr>
+		  </table>
         </td>
        <td valign="top" width="20%">
         <table>
