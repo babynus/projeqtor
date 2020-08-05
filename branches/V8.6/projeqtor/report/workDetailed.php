@@ -273,17 +273,22 @@ foreach ($resources as $idR=>$nameR) {
 	  echo '<tr><td style="width:10%" rowspan="'.count($activities[$idR]).'" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameR) . '</td>';
 	  $count = 0;
 	  foreach ($activityRes[$idR] as $idAct=>$proj){
-	    $count++;
-	     if($count==1){
-    	    echo '<td style="width:10%" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($activities[$idR][$idAct]) . '</td>';
+        $count++;$nameA="";
+        if (array_key_exists($idR, $activities)) {
+         	if (array_key_exists($idAct, $activities[$idR])) {
+         	  $nameA = $activities[$idR][$idAct];
+         	}
+        }
+       if($count==1){
+    	    echo '<td style="width:10%" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameA) . '</td>';
     	    drawLine($projects,$activityRes, $idR, $idAct, $colWidth,$sumRes,$sum);
     	    echo '</tr>';
           }else{
             echo '<tr>';
-            echo '<td style="width:10%" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($activities[$idR][$idAct]) . '</td>';
+            echo '<td style="width:10%" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameA) . '</td>';
             drawLine($projects,$activityRes, $idR, $idAct, $colWidth,$sumRes,$sum);
             echo '</tr>';
-	     }
+       }
   }
 
   }
