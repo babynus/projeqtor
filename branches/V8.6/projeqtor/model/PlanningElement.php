@@ -1186,11 +1186,12 @@ class PlanningElement extends SqlElement {
         $proj=new Project($this->idProject);
         if($proj->commandOnValidWork != 1){
           if (!$pla->cancelled and $pla->validatedWork) $validatedWork+=$pla->validatedWork;
+          if (!$pla->cancelled and $pla->validatedCost) $validatedCost+=$pla->validatedCost;
         }
       }else{
         if (!$pla->cancelled and $pla->validatedWork) $validatedWork+=$pla->validatedWork;
+        if (!$pla->cancelled and $pla->validatedCost) $validatedCost+=$pla->validatedCost;
       }
-      if (!$pla->cancelled and $pla->validatedCost) $validatedCost+=$pla->validatedCost;
     }
     
     $this->realStartDate=$realStartDate;
