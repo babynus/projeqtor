@@ -580,9 +580,12 @@ function activityStreamDisplayNote ($note,$origin){
     }else{
       echo '<td colspan="6" class="noteData" style="width:100%;font-size:100% !important;"><div style="float:left;margin-top:6px;">';
     }
-    echo formatUserThumb($note->idUser, $userName, 'Creator',32,'left');
+    echo '    <div style="float:left;width:22px; margin-right:5px;">';
+    echo formatIcon("MessageStream",22);
+   echo '    </div>';
+    echo formatUserThumb($note->idUser, $userName, 'Creator',22,'left');
     echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
-    echo '</div><div>';
+    echo '</div><div style="margin-left:32px">';
     echo '<table style="float:right;"><tr><td>';
     //if($origin=="objectStream" || $origin=="objectStreamKanban") {
     if($origin=="objectStream") {
@@ -714,7 +717,7 @@ function activityStreamDisplayHist ($hist,$origin){
     $newStatusName='<span style="font-weight:bold;">'.$newStatus->name.'</span>';
     $text=i18n('changeStatusStream',array($oldStatusName,$newStatusName));
     $reftText=$elementName.':&nbsp;';    
-    $icon='<div style="width:16px;height:16px;" class="iconChangedStatus16">&nbsp;&nbsp;</div>';
+    $icon=formatIcon("ChangedStatus",22);
   }else if($operation=='insert'){
     $reftText=$elementName.':&nbsp;';
     if($isAssign){
@@ -728,22 +731,24 @@ function activityStreamDisplayHist ($hist,$origin){
     }else{
       $text=i18n('createdElementStream');
     }
-    $icon='<div style="width:16px;height:16px;" class="iconNewElement16">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+    $icon=formatIcon("NewElement",22);
   }else if($operation=='delete'){
     $reftText=$elementName.':&nbsp;';
     $text=i18n('deletedElementStream');
-    $icon='<div style="width:16px;height:16px;" class="iconDeleteElement16">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+    $icon=formatIcon("DeleteElement",22);
   }
   
   if($origin=='objectStream'){
     echo '<tr style="height:100%;">';
     echo '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;"">';
+    echo '    <div style="float:left;margin-top:6px;width:22px;">';
+    echo        $icon;
+    echo '    </div>';
     echo '    <div style="float:left;margin-top:6px;">';
-    echo        formatUserThumb($hist->idUser, $userName, 'Creator',32,'left');
+    echo        formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
     echo '    </div>';
     echo '    <div >';
     echo '      <div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp;'.$text.'</div>';
-    echo        $icon;
     echo '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left").'</div>';
     echo '      <div style="margin-top:8px;">'.htmlFormatDateTime($date,true).'</div>';
     echo'     <div>';
@@ -752,9 +757,12 @@ function activityStreamDisplayHist ($hist,$origin){
   }else{
     echo '<tr style="height:100%;">';
     echo '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;">';
-    echo '    <div style="float:left;width:800px;margin-top:6px;display:inline-block;">';
-    echo        formatUserThumb($hist->idUser, $userName, 'Creator',32,'left');
-    echo '      <div style="margin-top:2px;margin-left:45px;height:32px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'&nbsp'.$icon.'</div>';
+    echo '    <div style="float:left;margin-top:6px;width:22px;">';
+    echo        $icon;
+    echo '    </div>';
+    echo '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;">';
+    echo        formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
+    echo '      <div style="margin-top:2px;margin-left:45px;height:32px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
     echo '      <div style="margin-top:3px;margin-left:45px;">'.formatDateThumb($date,null,"left").'</div>';
     echo '      <div style="margin-top:8px;margin-left:45px;">&nbsp;'.htmlFormatDateTime($date,true).'</div>';
     echo'     <div>';

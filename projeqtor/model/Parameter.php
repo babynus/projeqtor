@@ -350,7 +350,7 @@ class Parameter extends SqlElement {
       case 'isManualProgress':
       case 'selectFonction' :
       case 'hideItemTypeRestrictionOnProject' : case 'SAML_isADFS' :
-      case 'automaticFeedingOfTheReal' ://florent
+      case 'automaticFeedingOfTheReal' : case 'showOnlyNotes'://florent
         $list=array('NO'=>i18n('displayNo'),
                     'YES'=>i18n('displayYes')); 
         break;
@@ -773,6 +773,7 @@ class Parameter extends SqlElement {
                            "paramShowThumbList"=>"list",
                            "notApplicableValue"=>"list",
                            "projectIndentChar"=>'list',
+                           "showOnlyNotes"=>"list",
                            "sizeDisplayProjectToday"=>'number',
                            'maxItemsInTodayLists'=>'number',
                        'column_Dis_2'=>'newColumn',
@@ -862,6 +863,7 @@ class Parameter extends SqlElement {
             	                'displayOnlyHandled'=>'list',
             	                'setHandledOnRealWork'=>'list',
             	                'setDoneOnNoLeftWork'=>'list',
+            	                "showOnlyNotes"=>"list",
             	                'maxDaysToBookWork'=>'number',
             	                'maxDaysToBookWorkBlocking'=>'number',
             	                'imputationAlertInputByOther'=>'list',

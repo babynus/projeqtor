@@ -6024,6 +6024,7 @@ function switchActivityStreamListAddedRecently() {
   setTimeout("refreshActivityStreamList();", 100);
 }
 
+
 function switchActivityStreamListUpdatedRecently() {
   var oldValue=dojo.byId('activityStreamUpdatedRecently').value;
   if (oldValue=="updated") {
@@ -6033,6 +6034,20 @@ function switchActivityStreamListUpdatedRecently() {
     dojo.byId('activityStreamUpdatedRecently').value="updated";
     dojo.byId('activityStreamUpdatedRecentlyCheck').style.display='inline-block';
   }
+}
+
+function showOnlyNoteStream(){
+  val=dojo.byId('showOnlyNotesValue').value;
+  if(val=='NO'){
+    val="YES";
+    dojo.byId('showOnlyNotes').style.display='inline-block';
+  }else{
+    val="NO";
+    dojo.byId('showOnlyNotes').style.display='none';
+  }
+  dojo.byId('showOnlyNotesValue').value=val;
+  saveUserParameter('showOnlyNotes',val);
+  setTimeout("refreshActivityStreamList();", 100);
 }
 
 function activityStreamTypeRead(){
@@ -7453,3 +7468,4 @@ function hideActionSelect(selectClass, selectId, selectField) {
   actionSelectTimeout=setTimeout("dojo.byId('toolbar_"+selectField+"').style.display='none';",100);
   
 }
+
