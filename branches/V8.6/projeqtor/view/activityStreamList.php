@@ -1,4 +1,5 @@
 <?php
+use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -33,12 +34,14 @@ scriptLog ( '   ->/view/objectStream.php' );
 global $print, $user;
 $user = getSessionUser ();
 
-
+$showOnlyNotes=Parameter::getUserParameter('showOnlyNotes');
+if($showOnlyNotes=='')$showOnlyNotes='NO';
 if (RequestHandler::isCodeSet('activityStreamNumberElement')) {
 	$activityStreamNumberElement=RequestHandler::getValue("activityStreamNumberElement");
 	Parameter::storeUserParameter("activityStreamNumberElement", $activityStreamNumberElement);
 } else {
 	$activityStreamNumberElement=Parameter::getUserParameter("activityStreamNumberElement");
+	if($activityStreamNumberElement=='')$activityStreamNumberElement=100;
 }
 
 if (RequestHandler::isCodeSet('activityStreamAuthorFilter')) {
@@ -188,27 +191,29 @@ if ($activityStreamShowClosed!='1') {
 $order = "COALESCE (updateDate,creationDate) DESC";
 $notes=$note->getSqlElementsFromCriteria(null,false,$critWhere,$order,null,null,$activityStreamNumberElement);
 $history= new History();
-$historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
-if($activityStreamShowClosed =='1'){
-  $historyArchive=new HistoryArchive();
-  $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
-  if(!empty($historyInfoArchive)){
-    foreach ($historyInfoArchive as $histArch){
-      foreach ($historyInfo as $hist){
-        if($hist->operationDate<$histArch->operationDate){
-          $historyInfoLst[]=$hist;
-        }else{
-          $historyInfoLst[]=$histArch;
+$historyInfoLst=array();
+if($showOnlyNotes=='NO'){
+  $historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
+  if($activityStreamShowClosed =='1'){
+    $historyArchive=new HistoryArchive();
+    $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
+    if(!empty($historyInfoArchive)){
+      foreach ($historyInfoArchive as $histArch){
+        foreach ($historyInfo as $hist){
+          if($hist->operationDate<$histArch->operationDate){
+            $historyInfoLst[]=$hist;
+          }else{
+            $historyInfoLst[]=$histArch;
+          }
         }
       }
+    }else{
+      $historyInfoLst=$historyInfo;
     }
   }else{
     $historyInfoLst=$historyInfo;
   }
-}else{
-  $historyInfoLst=$historyInfo;
 }
-
 $countIdNote = count ( $notes );
 $nbHistInfo= count($historyInfoLst);
 if ($countIdNote == 0 and $nbHistInfo==0) {
