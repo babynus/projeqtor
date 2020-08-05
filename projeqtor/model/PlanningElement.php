@@ -1187,6 +1187,8 @@ class PlanningElement extends SqlElement {
         if($proj->commandOnValidWork != 1){
           if (!$pla->cancelled and $pla->validatedWork) $validatedWork+=$pla->validatedWork;
         }
+      }else{
+        if (!$pla->cancelled and $pla->validatedWork) $validatedWork+=$pla->validatedWork;
       }
       if (!$pla->cancelled and $pla->validatedCost) $validatedCost+=$pla->validatedCost;
     }
