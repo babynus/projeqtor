@@ -595,7 +595,7 @@ class Consistency {
       $peTable=$pe->getDatabaseTableName();
       $query="SELECT act.id as actid, pe.id as peid, ass.id as assid, act.idle as actidle, pe.idle as peidle, ass.idle as assidle "
           ." FROM $actTable as act left join $peTable as pe on (pe.refType='$type' and pe.refId=act.id) left join $assTable ass on (ass.refType='$type' and ass.refId=act.id)"
-          ." WHERE act.idle!=pe.idle or (act.idle!=ass.idle and ass.idle is not null)";
+          ." WHERE act.idle!=pe.idle or (act.idle!=ass.idle and ass.idle is not null and act.idle=1)";
       $result=Sql::query($query);
       while ($line = Sql::fetchLine($result)) {
         $actId=$line['actid'];
