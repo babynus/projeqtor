@@ -292,6 +292,17 @@ class Security
     if (!$obj) {
       if ($refType and $refId) {
         $obj=new $refType($refId);
+      } else if ($refType and ! $refId) {
+        $user=getSessionUser();
+        $accessRightList = $user->getAccessControlRights ();
+        $menuName='menu'.$refType;
+        if ($menuName=='menuCalendarDefinition') $menuName='menuCalendar';
+        if ( !isset($accessRightList[$menuName]) or !isset($accessRightList[$menuName]['read']) or $accessRightList[$menuName]['read']=='NO' ) {
+        //debugLog(" *** ACCESS = ".$accessRightList[$menuName]['read']);
+          traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
+        } else {
+          return; // OK
+        }
       }
     }
     if (get_class($obj)=='Logfile') {
@@ -307,6 +318,10 @@ class Security
       $refType=$obj->refType;
       $refId=$obj->refId;
       $obj=new $refType($refId);
+      if (! property_exists($refType, '_Attachment')) {
+        // referenced object does not have _Attachmen,t : so is image of user, no control
+        return;
+      }
     } else if (get_class($obj)=='DocumentVersion') {  
       // Access on document version : must crontrol acess on document containing the version
       $obj=new Document($obj->idDocument);
