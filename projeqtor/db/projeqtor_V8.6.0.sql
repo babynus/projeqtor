@@ -229,10 +229,14 @@ INSERT INTO `${prefix}accessprofile` (`id`,`isNonProject`, `name`, `description`
 UPDATE `${prefix}menu` SET sortOrder=1245 where id=47;
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`,`isAdminMenu`) VALUES
-(256, 'menuAccessProfileNoProject', 37, 'item', 1255, Null, 0, 'HabilitationParameter', 1);
+(256, 'menuAccessProfileNoProject', 37, 'object', 1255, Null, 0, 'HabilitationParameter', 1);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,256,1);
+
+-- Fix for menu & habilitation
+
+UPDATE `${prefix}menu` set level='ReadWriteType', idle=0, menuClass='Type' WHERE id IN (229,236,226);
 
 -- ==========================================
 -- Patchs IGE
