@@ -17,6 +17,29 @@
 
 
 
+.. |unlocked| image:: images/unlocked.png
+   :alt: Unlocked
+   :scale: 60
+
+.. |locked| image:: images/locked.png
+   :alt: Locked
+   :scale: 60
+
+.. |submitted| image:: images/submitted.png
+   :alt: Unlocked
+   :scale: 60
+
+.. |unsubmitted| image:: images/unsubmitted.png
+   :alt: Locked
+   :scale: 60
+   
+   
+
+.. |consolidation| image:: images/iconConsolidationValidation.png
+   :alt: Consolidation
+   :scale: 60
+   
+
 
 .. |BackBLC| image:: images/BackWhite.png
    :alt: Back to chapter

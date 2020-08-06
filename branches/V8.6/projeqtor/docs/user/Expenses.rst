@@ -217,48 +217,7 @@ You can move budgets by "drag and drop".
    :alt: Hierarchical budget screen
    
    Hierarchical budget screen
-   
-   
-   
-
-
-.. raw:: latex
-
-    \newpage
-    
-.. index:: Financial situation  
-
-.. _financial-situation:  
- 
-Financial situation
-===================
-
-the financial situation screens allow you to precisely follow up all the financial elements of a project. Expenses as incomes.
-
-A tracking view also exists to view only expenses and one for incomes.
-
-The following operations will then be displayed for the expenses.
-
-- Call for tender.
-- provider tenders
-- Orders to provider
-- Provider bills
-
-
-And the following operations will then displayed for the incomes.
-
-- Client quatations
-- Client orders
-- Clients bills
-- Client paiements
-
-Find the financial situation in its entirety on the respective screens of the elements.
-
-Financial status screens will only display the most recent transaction.
-
-
-   
-   
+     
       
 
 .. raw:: latex
@@ -380,7 +339,7 @@ This section allows you to fill in the information relating to your contact with
    * - Phone Number
      - Phone number of the provider contact.The field is not numeric and lets you add textual information such as the extension number.
    * - |RequiredField| Levels of service agreements
-     - Determines if you have levels of service agreements (:term:`SLA`) with the s for this contract. This check box is an indication.
+     - Determines if you have levels of service agreements (:term:`SLA`) for this contract. This check box is an indication.
    * - Intervention time
      - Periods during which services, contacts and interventions with the provider will be possible. You can choose a time slot for weeks, Saturdays, as well as Sundays and holidays.
 

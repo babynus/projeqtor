@@ -187,31 +187,6 @@ No calculation is made. This is an indication to show an inconsistency.
 
 
 
-Financial situation
-===================
-
-the financial situation screens allow you to precisely follow up all the financial elements of a project. Expenses as incomes.
-
-A tracking view also exists to view only expenses and one for incomes.
-
-The following operations will then be displayed for the expenses.
-
-- Call for tender.
-- Provider tenders
-- Orders to provider
-- Provider bills
-
-
-And the following operations will then displayed for the incomes.
-
-- Client quatations
-- Client orders
-- Clients bills
-- Client paiements
-
-Find the financial situation in its entirety on the respective screens of the elements.
-
-Financial status screens will only display the most recent transaction.
 
 .. index:: Quotation 
 
@@ -1156,17 +1131,99 @@ See: :ref:`Invoice lines<manual-billing>`.
    * - Product version
      - Version of the product.
      
-     
+
 .. raw:: latex
 
     \newpage
+    
+.. index:: Revenue managment
+
+.. _revenue-managment:
+
+Revenue Managment
+-----------------
+     
+You can manage the turnover of the project at completion, and its consistency with the orders and invoices on the project.
+
+
+A new "Turnover" section is visible on the projects screen in the Progress section.     
+     
+.. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionProject.png
+   :alt: Revenue managment
+   
+   Revenue managment on the progress section
+   
+   
+**The following information is then accessible:**
+
+* The turnover at completion corresponds to the total amount that will be invoiced for this project.
+
+* Display of the sum of the project's customer orders
+
+* Display of the sum of customer invoices for the project
+
+* Method of valuation of turnover
+
+
+ .. compound:: Method of valuation of turnover fixed
+    
+   The turnover is fixed and is entered manually
+   
+
+
+ .. compound:: Method of valuation of turnover variable
+ 
+   Variable over time depending on the activities 
+
+   The turnover will then be calculated from the turnover of all the activities (not canceled) of the project and possibly of the sub-projects. In this case the activities will also have a turnover field to feed.
+
+   Projects with sub-projects will systematically have a “Variable” valuation mode, this mode will automatically consolidate the turnover of the sub-projects on the parent project.
+        
+
+.. rubric:: Consistency with project orders and invoices
+
+For projects with sub-projects, the sum of orders and invoices will consolidate the data of the sub-projects, that is to say, it will integrate the orders and invoices of the sub-projects in addition to the orders and invoices possibly on the project itself.
+
+The sum of the orders is in red if it is lower than the turnover.
+The sum of the invoices is in red if it is greater than the turnover.
+
+.. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionProjectRED.png
+   :alt: Sum of the orders is lower than the turnover.
+   
+   Sum of the orders is lower than the turnover.
+
+
+.. rubric:: Raise alerts
+
+You can create definable alerts for projects in the "unit indicators" section:
+
+   * revenue upper than command's sums
+   * revenue less than invoices sums
+
+In order to integrate this evolution into the community version, without disturbing the users who do not need this functionality, we will condition the behavior:
+   
+In order to transcribe the current use of the validated cost, a :ref:`global parameter<gp-revenue-work-unit>` will determine whether the turnover is automatically reported as validated cost on activities and projects.
+
+
+
+.. note:: 
+
+   This functionality is only visible if the Revenue Management module is activated via the access rights menu in :ref:`Modules management<module-management>`.
+   
+   The Revenue Managment is a sub-module of the financial module. 
+   
+   This new module will activate / desactivate the management of OUs and everything related to the management of OUs (see below). 
+   
+   This module will be disabled by default.
+    
+    
     
 .. index:: Work unit catalog
 
 .. _work-unit-catalog:
 
 Work units catalog
-------------------
+==================
 
 The objective is to define catalogs of work units, made up of work units, themselves broken down into several complexities. 
 
@@ -1177,6 +1234,10 @@ This functionality will only be accessible if the :ref:`Revenue management<modul
    
    Work units Catalog screen
    
+The catalog has no inheritance. It is only linked to one and the same project.
+
+If your catalog is attached to a parent project, the sub-projects of the latter will not have access to this catalog and vice versa.
+
 You can select an OU on an activity, if the project has a “Variable” turnover valuation mode.
 
 .. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionProject.png
@@ -1258,6 +1319,11 @@ An activity will only be associated with a single OU / Complexity pair.
 
 If OU is selected, complexity and quantity are mandatory, otherwise they are prohibited, i.e. not enterable.
 
+.. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionProject-details.png
+   :alt: OU is selected, complexity and quantity are mandatory
+   
+   OU is selected, complexity and quantity are mandatory
+
 The UO / Complexity / Quantity data will make it possible to value:
    * The validated load = load of the OU / Complexity x Quantity
    * The turnover of the activity = price of the OU / Complexity x Quantity
@@ -1302,4 +1368,7 @@ You can delete the catalog on the data of an OU, a Complexity or a Quantity howe
 The project turnover will be updated from the sum of the turnover of the project activities, whether this data is entered from an OU or entered manually.
 
 The turnover of the activities and the UO, Complexity and Quantity data will only be accessible for "basic" activities (which do not have sub-activities). For "parent" activities, the turnover will be consolidated from the turnover of the sub-activities.
+
+
+
 
