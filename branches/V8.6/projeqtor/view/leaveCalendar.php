@@ -155,7 +155,10 @@
 <!------------------->
 <!-- DATE SELECTOR -->
 <!------------------->
-                                    <input type="text"  id="widgetSelectDate"  data-dojo-id='widgetSelectDate'  data-dojo-type="dijit/form/DateTextBox" class="roundedLeft" 
+                                    <input type="text"  id="widgetSelectDate"  data-dojo-id='widgetSelectDate'   data-dojo-type="dijit.form.DateTextBox" class="roundedLeft" 
+                                   <?php  if (sessionValueExists('browserLocaleDateFormatJs')) {
+  							               echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
+  						            }?>
                                            data-dojo-props="invalidMessage: '<?php echo i18n('invalidDate'); ?> !'"/>
                                 </div>
                             </td>
@@ -203,6 +206,9 @@
                                 <label for='popupStartDate'><?php echo i18n("colStartDate"); ?> : </label>
                                 <input type='text' id="popupStartDate" 
                                        data-dojo-type="dijit/form/DateTextBox"
+                                       <?php  if (sessionValueExists('browserLocaleDateFormatJs')) {
+  							               echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
+  						                }?>
                                        required="true" onchange="calculateHalfDaysForLeave('popupStartDate', 'popupEndDate', 'popupStartAM', 'popupStartPM', 'popupEndAM', 'popupEndPM', 'popupNbDays',<?php echo $idUser; ?>, <?php echo $idUser; ?>);calculateNbRemainingDays('fromLeaveCalendar',<?php echo $idUser; ?>, <?php echo $idUser; ?>);"/>
                             </td>
 
@@ -210,6 +216,9 @@
                                 <label for="popupEndDate"><?php echo i18n("colEndDate"); ?> : </label>
                                 <input type="text" id="popupEndDate"
                                        data-dojo-type="dijit/form/DateTextBox"
+                                       <?php  if (sessionValueExists('browserLocaleDateFormatJs')) {
+  							               echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
+  						                }?>
                                        required="true" onchange="calculateHalfDaysForLeave('popupStartDate', 'popupEndDate', 'popupStartAM', 'popupStartPM', 'popupEndAM', 'popupEndPM', 'popupNbDays',<?php echo $idUser; ?>, <?php echo $idUser; ?>);calculateNbRemainingDays('fromLeaveCalendar',<?php echo $idUser; ?>, <?php echo $idUser; ?>);"/>
                             </td>
                         </tr>
