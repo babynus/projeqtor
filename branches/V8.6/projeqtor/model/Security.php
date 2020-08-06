@@ -294,14 +294,22 @@ class Security
         $obj=new $refType($refId);
       } else if ($refType and ! $refId) {
         $user=getSessionUser();
-        $accessRightList = $user->getAccessControlRights ();
         $menuName='menu'.$refType;
         if ($menuName=='menuCalendarDefinition') $menuName='menuCalendar';
-        if ( !isset($accessRightList[$menuName]) or !isset($accessRightList[$menuName]['read']) or $accessRightList[$menuName]['read']=='NO' ) {
-        //debugLog(" *** ACCESS = ".$accessRightList[$menuName]['read']);
-          traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
+        if (isLeavesSystemMenuByMenuName("menu".$refType)) {
+          $showLeaveMenu=showLeavesSystemMenu("menu".$refType);
+          if ( ! $showLeaveMenu) {
+            traceHack("checkValidAccessForUser() Reject for $refType - no access to HR screen '$refType'");
+          }
         } else {
-          return; // OK
+          $accessRightList = $user->getAccessControlRights ();
+          if ( !isset($accessRightList[$menuName]) or !isset($accessRightList[$menuName]['read']) or $accessRightList[$menuName]['read']=='NO' ) {
+            //debugLog(" *** ACCESS = ".$accessRightList[$menuName]['read']);
+            debugLog($accessRightList);
+            traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
+          } else {
+            return; // OK
+          }
         }
       }
     }
