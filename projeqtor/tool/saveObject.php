@@ -92,7 +92,6 @@ if(get_class ( $newObj )=='Activity' and RequestHandler::isCodeSet('selectedReso
   $result = $newObj->save ();
 }
 
-
 // Check if checklist button must be displayed
 $crit = "nameChecklistable='" . get_class ( $newObj ) . "'";
 $type = 'id' . get_class ( $newObj ) . 'Type';
