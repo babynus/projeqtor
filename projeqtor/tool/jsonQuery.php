@@ -33,7 +33,8 @@
     scriptLog('   ->/tool/jsonQuery.php'); 
     $objectClass=$_REQUEST['objectClass'];
 	  Security::checkValidClass($objectClass);
-
+	  if ($objectClass=='User' or $objectClass=='Resource' or $objectClass=='Contact') Security::checkValidAccessForUser(null, 'read', $objectClass);
+	  
     $showThumb=Parameter::getUserParameter('paramShowThumbList');
     if ($showThumb=='NO') {
       $showThumb=false;
@@ -83,6 +84,8 @@
     $res=array();
     $layout=$obj->getLayout();
     $array=explode('</th>',$layout);
+    
+    
 
     // ====================== Build restriction clauses ================================================
     
