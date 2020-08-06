@@ -322,6 +322,7 @@ This section allows to:
 * Defines who can validate weekly work for resource.
 * Defines who have access on diary for resources.
 * Defines who, as a resource, can subscribe to survey for users. 
+* Defines who have access on report for resources.
 
 .. note:: Validate real work: in most cases, it is devoted to project leader.
 
@@ -353,6 +354,14 @@ This section allows to:
 .. rubric:: Planning access rights
 
 * This section defines access for each profile to planning functionality.
+
+
+.. _monthly-consolidation-rights:
+
+.. rubric:: Monthly consolidation of projects
+
+* This section defines the right for each profile if it can validate and / or block the allocations of the resources of a project for a defined month.
+
 
 .. rubric:: Unlock items
 

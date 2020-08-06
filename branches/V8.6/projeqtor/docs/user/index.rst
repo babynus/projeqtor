@@ -30,45 +30,29 @@ We offer you a small overview of the major developments and you will find the fu
 
 .. container:: 
    
-   **Planned Interventions**
+   **Monthly consolidation**
 
-   .. image:: /images/iconPlannedWorkManual.png
+   .. image:: /images/iconConsolidationValidation.png
       :align: center
       
-   ProjeQtOr offers you a new planning mode which allows you to manually plan half days.
+   ProjeQtOr offers you a new system allowing you to validate the monthly allocations of your resources on a single project.
    
-   :ref:`planned-interventions`
-   
-   
-   
+   :ref:`monthly-consolidation`
+      
    
 
 .. container:: 
 
-   **Receive Tickets from Emails**
+   **Revenue management**
 
-   .. image:: /images/iconInputMailbox.png
+   .. image:: /images/iconCatalogUO.png
       :align: center
 
-   Vous pouvez désormais recevoir vos billets directement dans projeqtor par e-mails.
+   Manage the turnover of a project and its consistency with the financial elements of the project.
          
-   :ref:`ticket-fromemail`
-   
-   
-   
+   :ref:`revenue-managment` & :ref:`work-unit-catalog`
    
 
-.. container:: 
-
-   **Progress in units of work**
-
-   .. image:: /images/iconUnitWork.png
-      :align: center
-      
-   You can now follow the progress of your project in unit of work. 
-         
-   :ref:`Technical progress<technical-progress>`
-   
 
       
 
@@ -196,11 +180,11 @@ Financial
 ---------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    Expenses
    Incomes
-   
+   Financial
 
 
 Steering
