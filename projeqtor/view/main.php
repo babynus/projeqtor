@@ -72,6 +72,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <link rel="stylesheet" type="text/css" href="css/projeqtor.css" />
   <link rel="stylesheet" type="text/css" href="css/projeqtorFlat.css" />
   <link rel="stylesheet" type="text/css" href="css/projeqtorHRFlat.css" />
+  <link rel="stylesheet" type="text/css" href="css/projeqtorFlatMinimal.css" />
   <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
   <link rel="stylesheet" type="text/css" href="../external/dojox/form/resources/CheckedMultiSelect.css" />
   <link rel="icon" href="img/logo.ico" type="image/x-icon" />

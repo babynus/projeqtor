@@ -505,15 +505,11 @@ The task status can be changed automatically according to data entries on real w
 Timesheet Validation
 ====================
 
-The timesheet validation screen allows the project leader to receive, 
-
-check and validate the time charged by the resources on an activity.
-
+The timesheet validation screen allows the project manager to receive, verify and validate the time allocated weekly by the resources to an activity for all the projects to which this resource is assigned.
 .. figure:: /images/GUI/REALWORK_ZONE_TimesheetValidation.png
 
 
 .. list-table:: Fields - Timesheet validation
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -541,16 +537,83 @@ check and validate the time charged by the resources on an activity.
    
    the PL receives the timesheet with a precise color code
 
-      * **Green:** The completed job is the same as the expected one
+      * **Green:** The completed job is the same as the expected one.
 
-      * **Red:** The filled workload is shorter. It does not match the expected work
+      * **Red:** The filled workload is shorter or longer. It does not match the expected work.
 
-      * **Orange:** the job is not the same as the expected job but the load is the same
-
-
+      * **Orange:** the job is not the same as the expected job but the load is the same.
 
 
 
+
+   
+.. raw:: latex
+
+    \newpage
+    
+.. index:: Monthly consolidation
+    
+.. _monthly-consolidation:
+
+Monthly consolidation
+=====================
+
+Monthly consolidation allows you to view, control and validate resource allocations to a particular project for an entire month.
+This screen will list all the projects on which the user has visibility.
+
+.. figure:: /images/GUI/REALWORK_SCR_MonthlyConsolidation.png
+   :alt: Monthly consolidation screen
+   
+   Monthly consolidation screen
+
+**Filters will limit the list:**
+
+• Project to restrict the listed projects to this project and its sub-projects
+• Project Type to restrict the listed projects to projects of this type
+• Organization to restrict the listed projects to the projects of this organization
+• Month and year to restrict to this date
+
+.. note:: By default, this will be the last month for which projects are still blocked, or failing this it will be the current month.
+
+**This screen will display for each project not validated:**
+
+• The currently known CA
+• The currently known validated load
+• The total actual load currently known to the project
+• The actual load consumed on the project for the selected month
+• The remainder to be done currently known
+• The currently known reassessed load
+• The currently known margin (load) = load validated - load reassessed
+
+
+For validated projects, the data displayed is that stored during validation.
+
+
+.. rubric:: Block a project over a month
+
+The |unlocked| and |locked| buttons allow you to block or unblock charges beyond the month-end date. When the project is blocked for a given month, you cannot enter a charge for the following month, even if it has started. The block will be propagated recursively to sub-projects.
+
+
+.. rubric:: Validate a project over a month
+
+The |submitted| and |unsubmitted| buttons allow you to block or unblock charges beyond the month-end date. When the project is blocked for a given month, you cannot enter a charge for the following month, even if it has started. The block will be propagated recursively to sub-projects.
+
+
+.. warning:: 
+   
+   Access to the blocking / unlocking and the validation button will be configured by a :ref:`specific right<monthly-consolidation-rights>`.
+
+
+
+
+
+
+
+
+
+
+
+   
 
 
    
