@@ -378,10 +378,8 @@ function formatForDbType($query,$dbType=null) {
     }
     $posComment=strpos($res," COMMENT '");
     while ($posComment) {
-      debugLog("BEFORE ==== $res");
       $posCommentEnd=strpos($res,"'",$posComment+10);
       $res=substr($res,0,$posComment).substr($res,$posCommentEnd+1);
-      debugLog("AFTER ===== $res");
       $posComment=strpos($res," COMMENT '");
     }
   } else {
