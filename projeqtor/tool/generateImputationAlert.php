@@ -36,26 +36,27 @@ function cronImputationAlertCronFonction($from) {
     $sendToTeamManager="NO";
     $sendToOrganismManager="NO";
     foreach (Cron::$listCronExecution as $id=>$cronExecution) {
-        verifyCronExecution($cronExecution, $sendToResource, 'Resource', $from, $refStartDate, $refEndDate);
-        verifyCronExecution($cronExecution, $sendToProjectLeader, 'ProjectLeader', $from, $refStartDate, $refEndDate);
-        verifyCronExecution($cronExecution, $sendToTeamManager, 'TeamManager', $from, $refStartDate, $refEndDate);
-        verifyCronExecution($cronExecution, $sendToOrganismManager, 'OrganismManager', $from, $refStartDate, $refEndDate);
+        verifyCronExecution($cronExecution, $sendToResource, $incompleteResourceWork,'Resource', $from, $refStartDate, $refEndDate);
+        verifyCronExecution($cronExecution, $sendToProjectLeader, $incompleteProjectLeaderWork, 'ProjectLeader', $from, $refStartDate, $refEndDate);
+        verifyCronExecution($cronExecution, $sendToTeamManager, $incompleteTeamManagerWork, 'TeamManager', $from, $refStartDate, $refEndDate);
+        verifyCronExecution($cronExecution, $sendToOrganismManager, $incompleteOrganismManagerWork, 'OrganismManager', $from, $refStartDate, $refEndDate);
     }
     if (! $refStartDate or ! $refEndDate) {
       traceLog("Cron::run() - generationImputationAlert() - Incorrect start date = '$refStartDate' or end date = '$refEndDate' - Exiting");
       return;
     }
-    generateImputationAlert($refStartDate, $refEndDate, $sendToResource, $sendToProjectLeader, $sendToTeamManager, $sendToOrganismManager);
+    generateImputationAlert($refStartDate, $refEndDate, $sendToResource, $sendToProjectLeader, $sendToTeamManager, $sendToOrganismManager, $incompleteResourceWork, $incompleteProjectLeaderWork, $incompleteTeamManagerWork, $incompleteOrganismManagerWork);
     traceLog("Cron::run() - generateImputationAlert for ".$from.' at '.Cron::$lastCronTimeExecution. " $sendToResource $sendToProjectLeader $sendToTeamManager $sendToOrganismManager" );
 }
 
-function verifyCronExecution($cronExecution, &$sendTo, $dest, $from, $refStartDate, $refEndDate){
+function verifyCronExecution($cronExecution, &$sendTo, &$incompleteWork, $dest, $from, $refStartDate, $refEndDate){
     if($cronExecution->fonctionName=="cronImputationAlertCron".$dest){
         $endDate=date('Y-m-d');
         $startDate=$endDate;
         calculDateByDest($startDate, $endDate, $dest);
         if($cronExecution->cron==Cron::$lastCronExecution && (($cronExecution->nextTime == Cron::$lastCronTimeExecution && $refStartDate == $startDate && $refEndDate == $endDate) || $cronExecution->fonctionName == $from)){
             $sendTo=Parameter::getGlobalParameter('imputationAlertSendTo'.$dest);
+            $incompleteWork=Parameter::getGlobalParameter('imputationOnlyIncomplete'.$dest.'Work');
             traceLog("Cron::run() - Calcul Imputation Alert for ".$dest);
             if($cronExecution->fonctionName != $from){
                 $cronExecution->calculNextTime();
@@ -101,9 +102,9 @@ function cronImputationAlertCronOrganismManager() {
     cronImputationAlertCronFonction("cronImputationAlertCronOrganismManager");
 }
 
-function generateImputationAlert($startDate, $endDate, $sendToResource, $sendToProjectLeader, $sendToTeamManager, $sendToOrganismManager) {
+function generateImputationAlert($startDate, $endDate, $sendToResource, $sendToProjectLeader, $sendToTeamManager, $sendToOrganismManager ,$incompleteResourceWork, $incompleteProjectLeaderWork, $incompleteTeamManagerWork, $incompleteOrganismManagerWork) {
   $lstRes=array();
-  calculListToSend($startDate, $endDate, $lstRes);
+  calculListToSend($startDate, $endDate, $lstRes, $incompleteResourceWork, $incompleteProjectLeaderWork, $incompleteTeamManagerWork, $incompleteOrganismManagerWork);
   $dest=array();
   foreach ($lstRes as $id=>$res) {
     if (!$res['full']) {
@@ -194,13 +195,14 @@ function generateImputationAlert($startDate, $endDate, $sendToResource, $sendToP
   }
 }
 
-function calculListToSend($startDate, $endDate, &$lstRes){
-    $tmpDate=$startDate;
+function calculListToSend($startDate, $endDate, &$lstRes ,$incompleteResourceWork, $incompleteProjectLeaderWork, $incompleteTeamManagerWork, $incompleteOrganismManagerWork){
+  $tmpDate=$startDate;
     $emptyArray=array(
         'name'=>'',
         'full'=>false,
         'days'=>array(),
         'capacity'=>1,
+        'profile'=>'',
         'projects'=>array()
     );
     while ($tmpDate<=$endDate) {
@@ -217,12 +219,15 @@ function calculListToSend($startDate, $endDate, &$lstRes){
         $userTmp=new User($id);
         if (!$userTmp->id or ! securityCheckDisplayMenu(null,'Imputation',$userTmp)) continue; // #2506 : do not send alert on Real work input if resource does not have access to Timesheet screen 
         $emptyArray['name']=$name;
+        $idProfile = SqlList::getFieldFromId('Resource', $id, 'idProfile');
+        $profileCode = SqlList::getFieldFromId('Profile', $idProfile, 'profileCode');
         if(!isset($lstRes[$id])){
             $lstRes[$id]=array(
                 'name'=>$name,
                 'full'=>false,
                 'days'=>array(),
                 'capacity'=>SqlList::getFieldFromId('Resource', $id, 'capacity'),
+                'profile'=>$profileCode,
                 'projects'=>array()
             );
         }
@@ -257,15 +262,28 @@ function calculListToSend($startDate, $endDate, &$lstRes){
         if (!isset($lstRes[$wk->idResource]['days'][$wk->workDate]['work'])) $lstRes[$wk->idResource]['days'][$wk->workDate]['work']=0;
         $lstRes[$wk->idResource]['days'][$wk->workDate]['work']+=$wk->work;
     }
-    
+    //$onlyIncomplete = Parameter::getGlobalParameter('');
     foreach ($lstRes as $idRes=>$res) {
+        $profile = $lstRes[$idRes]['profile'];
+        if($incompleteOrganismManagerWork){
+        	$organization=SqlList::getFieldFromId('Resource', $idRes, 'idOrganization');
+        	$orgManager=(trim($organization))?SqlList::getFieldFromId('Organization', $organization, 'idResource'):'';
+        }
         $tmpDate=$startDate;
+        $orgManager='';
         $full=true;
+        $incomplete=true;
         while ($tmpDate<=$endDate) {
-            if (isset($res['days'][$tmpDate]) and $res['days'][$tmpDate]['open']=='1' and abs($res['days'][$tmpDate]['work'] - $res['capacity']) >= 0.01) {
-                $full=false;
+          if(($profile == '[PL]' and $incompleteProjectLeaderWork) or ($profile == '[TM]' and $incompleteTeamManagerWork) or $orgManager or $incompleteResourceWork){
+            if (isset($res['days'][$tmpDate]) and $res['days'][$tmpDate]['open']=='1') {
+            	$full=false;
             }
-            $tmpDate=addDaysToDate($tmpDate, 1);
+          }else{
+            if (isset($res['days'][$tmpDate]) and $res['days'][$tmpDate]['open']=='1' and abs($res['days'][$tmpDate]['work'] - $res['capacity']) >= 0.01) {
+              $full=false;
+            }
+          }
+          $tmpDate=addDaysToDate($tmpDate, 1);
         }
         $lstRes[$idRes]['full']=$full;
         if (!$full) {
