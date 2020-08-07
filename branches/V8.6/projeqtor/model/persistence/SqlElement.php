@@ -2175,7 +2175,6 @@ abstract class SqlElement {
                   break;
                 }
               }
-              debugLog("ok, planning mode from list : $pm");
             }
             if (property_exists($newObj, 'idPlanningMode')) $newObj->idPlanningMode=$pm;
             $newObj->$col_name->$plMode = $pm;
@@ -3753,10 +3752,8 @@ abstract class SqlElement {
         $dbName=Parameter::getGlobalParameter('paramDbName');
         $sqlColumn="SELECT COLUMN_COMMENT as comment FROM INFORMATION_SCHEMA.COLUMNS "
            ." WHERE TABLE_SCHEMA='$dbName' AND TABLE_NAME='$tableName' AND COLUMN_NAME='$fieldName'";
-        debugLog($sqlColumn);
         $resultColumn=Sql::query($sqlColumn);
         $line=Sql::fetchLine($resultColumn);
-        debugLog($line);
         if ($line and isset($line['comment'])) $type='int('.$line['comment'].')';
       }
       $formatList [strtolower ( $fieldName )] = $type;
