@@ -1010,6 +1010,7 @@ static function isTheLeaveProject($id=null) {
       }
     }
     if($this->commandOnValidWork != $old->commandOnValidWork){
+      //$this->ProjectPlanningElement->updateSynthesisObj();
       $this->updateValidatedWork();
     }
     return $result; 
@@ -1064,7 +1065,8 @@ static function isTheLeaveProject($id=null) {
   // Ticket #1175
   public function updateValidatedWork() {
   	if (! $this->id) return;
-	  $lst=null;
+  	$consolidateValidated=Parameter::getGlobalParameter('consolidateValidated');
+  	$lst=null;
   	$sumValidatedWork=0;
   	$sumValidatedCost=0;
   	$projList = $this->getRecursiveSubProjectsFlatList(true, true);
@@ -1099,6 +1101,24 @@ static function isTheLeaveProject($id=null) {
   	}
   	$this->ProjectPlanningElement->validatedWork=$sumValidatedWork;
   	$this->ProjectPlanningElement->validatedCost=$sumValidatedCost;
+  	
+  	if (! $this->ProjectPlanningElement->elementary) {
+  		if ($consolidateValidated=="ALWAYS") {
+  			$this->ProjectPlanningElement->validatedWork=$sumValidatedWork;
+  			$this->ProjectPlanningElement->validatedCost=$sumValidatedCost;
+  			$this->ProjectPlanningElement->validatedCalculated=1;
+  		} else if ($consolidateValidated=="IFSET") {
+  			if ($sumValidatedWork) {
+  				$this->ProjectPlanningElement->validatedWork=$sumValidatedWork;
+  				$this->ProjectPlanningElement->validatedCalculated=1;
+  			}
+  			if ($sumValidatedCost) {
+  				$this->ProjectPlanningElement->validatedCost=$sumValidatedCost;
+  				$this->ProjectPlanningElement->validatedCalculated=1;
+  			}
+  		}
+  	}
+  	
   	$this->save();
   	
   	if (trim($this->idProject)!='') {
