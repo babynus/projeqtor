@@ -65,7 +65,6 @@
   $notes=$note->getSqlElementsFromCriteria(array('refType'=>$objectClass,'refId'=>$objectId),null,null,$order);
   $historyInfoLst=array();
   if($showOnlyNotes=='NO'){
-    debugLog('ui');
     $clauseWhere="refType='$objectClass' and refId=$objectId and ((operation='update' and colName='idStatus') or (operation='insert' and colName is null) or operation='delete') ";
     if($objectId)$historyInfo=$history->getSqlElementsFromCriteria(null,null,$clauseWhere,"operationDate ASC");
     $obj=new $objectClass($objectId);
@@ -110,7 +109,6 @@
     exit;
   }
   $countIdNote=count($notes);
-  debugLog($historyInfoLst);
   $countHist=count($historyInfoLst);
   $onlyCenter=(RequestHandler::getValue('onlyCenter')=='true')?true:false;
   $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);

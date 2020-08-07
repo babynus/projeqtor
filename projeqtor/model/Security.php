@@ -304,8 +304,6 @@ class Security
         } else {
           $accessRightList = $user->getAccessControlRights ();
           if ( !isset($accessRightList[$menuName]) or !isset($accessRightList[$menuName]['read']) or $accessRightList[$menuName]['read']=='NO' ) {
-            //debugLog(" *** ACCESS = ".$accessRightList[$menuName]['read']);
-            debugLog($accessRightList);
             traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
           } else {
             return; // OK
