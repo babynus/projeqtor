@@ -635,9 +635,6 @@ body .ProjeQtOrFlatBlue {
 
 /* A */
 
-.ProjeQtOrFlatBlue .iconAccessProfile32 { background-image: url(customIcons/blue/iconAccessProfile.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatBlue .iconAccessProfile22 { background-image: url(customIcons/blue/iconAccessProfile.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatBlue .iconAccessProfile16 { background-image: url(customIcons/blue/iconAccessProfile.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 .ProjeQtOrFlatBlue .iconAccessRight32 { background-image: url(customIcons/blue/iconAccessRight.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatBlue .iconAccessRight22 { background-image: url(customIcons/blue/iconAccessRight.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
@@ -2167,10 +2164,6 @@ body .ProjeQtOrFlatRed {
 
 /* A */
 
-.ProjeQtOrFlatRed .iconAccessProfile32 { background-image: url(customIcons/red/iconAccessProfile.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatRed .iconAccessProfile22 { background-image: url(customIcons/red/iconAccessProfile.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatRed .iconAccessProfile16 { background-image: url(customIcons/red/iconAccessProfile.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
 .ProjeQtOrFlatRed .iconAccessRight32 { background-image: url(customIcons/red/iconAccessRight.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconAccessRight22 { background-image: url(customIcons/red/iconAccessRight.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconAccessRight16 { background-image: url(customIcons/red/iconAccessRight.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -3693,10 +3686,6 @@ body .ProjeQtOrFlatGreen {
 
 /* A */
 
-.ProjeQtOrFlatGreen .iconAccessProfile32 { background-image: url(customIcons/green/iconAccessProfile.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGreen .iconAccessProfile22 { background-image: url(customIcons/green/iconAccessProfile.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGreen .iconAccessProfile16 { background-image: url(customIcons/green/iconAccessProfile.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
 .ProjeQtOrFlatGreen .iconAccessRight32 { background-image: url(customIcons/green/iconAccessRight.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconAccessRight22 { background-image: url(customIcons/green/iconAccessRight.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconAccessRight16 { background-image: url(customIcons/green/iconAccessRight.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -5216,10 +5205,6 @@ body .ProjeQtOrFlatGrey {
 /* =============================================================================== */
 
 /* A */
-
-.ProjeQtOrFlatGrey .iconAccessProfile32 { background-image: url(customIcons/grey/iconAccessProfile.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGrey .iconAccessProfile22 { background-image: url(customIcons/grey/iconAccessProfile.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGrey .iconAccessProfile16 { background-image: url(customIcons/grey/iconAccessProfile.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 .ProjeQtOrFlatGrey .iconAccessRight32 { background-image: url(customIcons/grey/iconAccessRight.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconAccessRight22 { background-image: url(customIcons/grey/iconAccessRight.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
