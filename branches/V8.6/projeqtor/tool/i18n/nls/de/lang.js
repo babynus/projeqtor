@@ -3638,7 +3638,7 @@ paramSetHandledOnRealWork: "Aufgabe auf 'begonnen' setzen&#44; wenn Ist-Arbeit e
 paramSetResponsibleIfNeeded: "Verantwortlichen automatisch setzen&#44; wenn erforderlich",
 paramSetResponsibleIfSingle: "Verantwortlichen automatisch setzen&#44; wenn einzige Ressource",
 paramShowIdleDefault: "Aktive Elemente standardmäßig anzeigen",
-paramShowOnlyNotes: "Show only notes",
+paramShowOnlyNotes: "show only notes on Activity Stream",
 paramShowSubscribedItems: "Liste der abonnierten Artikel anzeigen",
 paramShowTendersOnVersions: "Zeige Angebote für Produkte&#44; Komponenten&#44; Versionen",
 paramSizeDisplayProjectToday: "max number of projects on today",

@@ -3638,7 +3638,7 @@ paramSetHandledOnRealWork: "Втановіть перший стан  &#34;об�
 paramSetResponsibleIfNeeded: "автоматична установка відповідальності&#44; якщо треба",
 paramSetResponsibleIfSingle: "автоматична установка відповідальності&#44; якщо один ресурс",
 paramShowIdleDefault: "показувати нечинні(idle) елементи за замовчуванням",
-paramShowOnlyNotes: "Show only notes",
+paramShowOnlyNotes: "show only notes on Activity Stream",
 paramShowSubscribedItems: "показати перелік підписаних елементів",
 paramShowTendersOnVersions: "відобразити Тендери на Продукти&#44; Компоненти&#44; Версії",
 paramSizeDisplayProjectToday: "max number of projects on today",
