@@ -441,7 +441,7 @@ class UserMain extends SqlElement {
       } else {
         $scopeArray=$noAccessArray;
         $accessProfile=new AccessProfile($arObj->idAccessProfile);
-        if ($arObj->idAccessProfile<1000000) {
+        if (1 or $arObj->idAccessProfile<1000000) { // debugLog('OK');
           if ($accessProfile->id) {
             $scopeArray=array( 'read' =>  $accessScopeList[$accessProfile->idAccessScopeRead],
                                'create' => $accessScopeList[$accessProfile->idAccessScopeCreate],

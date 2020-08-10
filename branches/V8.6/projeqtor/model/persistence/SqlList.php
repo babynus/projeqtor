@@ -354,7 +354,7 @@ class SqlList {
     if (array_key_exists($id,$list)) {
       $name=$list[$id];
       $obj=new $listType();
-      if ($translate and $obj->isFieldTranslatable('name')) {
+      if ($translate and $obj->isFieldTranslatable($field)) {
       	$trans=i18n(strtolower($listType) . ucfirst($name));
       	if ($trans=='['.strtolower($listType) . ucfirst($name).']') {
       		$trans=i18n($name);
