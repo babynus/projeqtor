@@ -1386,14 +1386,14 @@ function htmlGetJsTable($tableName, $colName, $jsTableName=null) {
  * @param $val
  * @return unknown_type
  */
-function htmlFormatDate($val,$trunc=false) {
+function htmlFormatDate($val,$trunc=false,$textual=true) {
   global $browserLocaleDateFormat;
   if (strlen($val)!=10) {
   	if (strlen($val)==19) {
   		if ($trunc) {
   			$val=substr($val,0,10);
   		} else {
-  		  return htmlFormatDateTime($val);
+  		  return htmlFormatDateTime($val,true,false,$textual);
   		}
   	} else {
       return $val;
@@ -1414,7 +1414,7 @@ function htmlFormatDate($val,$trunc=false) {
  * @param $val
  * @return unknown_type
  */
-function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false) {
+function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false,$textual=true) {
   global $browserLocale;
   $today=false;
   $classicFormatDateDate=true;
@@ -1432,19 +1432,27 @@ function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false) {
   switch (substr($val,0,10)){
   	case date("Y-m-d"):
   	  $today=true;
-  	  $classicFormatDate=false;
-  	  $result=i18n("today").'&nbsp;';
+  	  if ($textual) {
+  	    $classicFormatDate=false;
+  	    $result=i18n("today").'&nbsp;';
+  	  } else { 
+  	    $result=htmlFormatDate(substr($val,0,10)).'&nbsp;';
+  	  }	  
   	  break;
   	case $yesterday:
-  	  $classicFormatDate=false;
-  	  $result=i18n("yesterday").'&nbsp;';
+  	  if ($textual) {
+  	    $classicFormatDate=false;
+  	    $result=i18n("yesterday").'&nbsp;';
+  	  } else {
+  	    $result=htmlFormatDate(substr($val,0,10)).'&nbsp;';
+  	  }
   	  break;
   	default :
   	  $result=htmlFormatDate(substr($val,0,10)).'&nbsp;';
   	  break;
   }
   if (! $hideZeroTime or substr($val,11,5)!='00:00') {
-    if($today){
+    if($today and $textual){
       switch ($hourDiff){
         case ($hourDiff->h=='0' and $hourDiff->i<='1'):
           $result=i18n("justNow");

@@ -327,12 +327,12 @@ function formatDateThumb($creationDate,$updateDate,$float='right',$size=22,$addN
     $color='Yellow';
   } 
   $title='';
-  if($creationDate)$title=i18n('thumbCreationTitle',array('<b>'.htmlFormatDate($creationDate).'</b>'));
+  if($creationDate)$title=i18n('thumbCreationTitle',array('<b>'.htmlFormatDate($creationDate,false,false).'</b>'));
   if ($updateDate and $updateDate!=$creationDate) {
     if($title==''){
-      $title.="<i>".i18n('thumbUpdateTitle',array('<b>'.htmlFormatDate($updateDate).'</b>')).'</i>';
+      $title.="<i>".i18n('thumbUpdateTitle',array('<b>'.htmlFormatDate($updateDate,false,false).'</b>')).'</i>';
     }else{
-      $title.="<br/><i>".i18n('thumbUpdateTitle',array('<b>'.htmlFormatDate($updateDate).'</b>')).'</i>';
+      $title.="<br/><i>".i18n('thumbUpdateTitle',array('<b>'.htmlFormatDate($updateDate,false,false).'</b>')).'</i>';
     }
   }
   $title=htmlEncode($title,'quotes');
@@ -439,7 +439,7 @@ function formatDateThumbWithText($date,$text,$float='right',$size=22,$addName=""
 }
 //END ADD qCazelles - Ticket #170
 
-function formatPrivacyThumb($privacy, $team) {
+function formatPrivacyThumb($privacy, $team,$size=22) {
   // privacy=3 => private
   // privacy=2 => team
   // privacy=1 => public 
@@ -447,13 +447,13 @@ function formatPrivacyThumb($privacy, $team) {
     $title=htmlEncode(i18n('private'),'quotes');
     //echo '<img style="float:right;padding-right:3px" src="img/private.png" />';
     echo '<span style="float:right;padding-right:3px">';
-    echo formatIcon('Fixed',22,$title,false);
+    echo formatIcon('Fixed',$size,$title,false);
     echo '</span>';
   } else if ($privacy == 2) {
     $title=htmlEncode(i18n('team')." : ".SqlList::getNameFromId ('Team',$team ),'quotes');
     //echo '<img title="'.$title.'" style="float:right;padding-right:3px" src="img/team.png" />';
     echo '<span style="float:right;padding-right:3px">';
-    echo formatIcon('Team',22,$title,false);
+    echo formatIcon('Team',$size,$title,false);
     echo '</span>';
   }
 }
@@ -580,11 +580,15 @@ function activityStreamDisplayNote ($note,$origin){
     }else{
       echo '<td colspan="6" class="noteData" style="width:100%;font-size:100% !important;"><div style="float:left;margin-top:6px;">';
     }
-    echo '    <div style="float:left;width:22px; margin-right:5px;">';
-    echo formatIcon("MessageStream",22);
-   echo '    </div>';
+
     echo formatUserThumb($note->idUser, $userName, 'Creator',22,'left');
-    echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
+    echo '    <div style="float:left;clear:left;width:22px; margin-right:5px;position:relative">';
+    echo formatIcon("MessageStream",22);
+    echo ' <div style="position:absolute;top:0px;left:12px">';
+    echo formatPrivacyThumb($note->idPrivacy, $note->idTeam,16);
+    echo '</div>';
+    echo '    </div>';
+    
     echo '</div><div style="margin-left:32px">';
     echo '<table style="float:right;"><tr><td>';
     //if($origin=="objectStream" || $origin=="objectStreamKanban") {
@@ -741,10 +745,10 @@ function activityStreamDisplayHist ($hist,$origin){
   if($origin=='objectStream'){
     echo '<tr style="height:100%;">';
     echo '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;"">';
-    echo '    <div style="float:left;margin-top:6px;width:22px;">';
+    echo '    <div style="float:left;clear:left;margin-top:6px;width:22px;">';
     echo        $icon;
     echo '    </div>';
-    echo '    <div style="float:left;margin-top:6px;">';
+    echo '    <div style="float:left;clear:left;margin-top:6px;">';
     echo        formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
     echo '    </div>';
     echo '    <div >';
@@ -757,10 +761,10 @@ function activityStreamDisplayHist ($hist,$origin){
   }else{
     echo '<tr style="height:100%;">';
     echo '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;">';
-    echo '    <div style="float:left;margin-top:6px;width:22px;">';
+    echo '    <div style="float:left;margin-top:6px;width:22px;max-width:26px">';
     echo        $icon;
     echo '    </div>';
-    echo '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;">';
+    echo '    <div style="float:left;clear:left;;width:90%;margin-top:6px;display:inline-block;margin-left:5px;">';
     echo        formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
     echo '      <div style="margin-top:2px;margin-left:45px;height:32px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
     echo '      <div style="margin-top:3px;margin-left:45px;">'.formatDateThumb($date,null,"left").'</div>';
