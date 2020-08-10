@@ -1653,6 +1653,7 @@ cronRestartRequired: "CRON Neustart erforderlich (Gehen Sie auf die Administrati
 cronRunning: "cron started &#58 click here to stop",
 cronStatus: "Cron Status",
 cronStopped: "cron stopped &#58 click here to start cron",
+cronStopping: "cron shutdown in progress...",
 cronTasks: "Hintergrundverarbeitung",
 csvFile: "CSV Datei (Comma Separated Value)",
 cumulated: "kumuliert",

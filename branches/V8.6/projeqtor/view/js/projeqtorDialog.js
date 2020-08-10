@@ -11559,12 +11559,14 @@ function refreshCronIconStatus(status){
 }
 
 function checkCronStatus(status){
+	dojo.byId('cronStatus').style.filter = 'grayscale(100%)';
 	if (status=='Stopped') {
   	adminLaunchScript("cronRun", false);
   	refreshCronIconStatus("running");
 	} else {
   	adminLaunchScript("cronStop", false);
-  	refreshCronIconStatus("stopped");
+  	dojo.byId('cronStatusButton').title = i18n('cronStopping');
+  	//refreshCronIconStatus("stopped");
 	}
 }
 

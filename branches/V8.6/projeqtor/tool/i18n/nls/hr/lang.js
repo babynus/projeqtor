@@ -1653,6 +1653,7 @@ cronRestartRequired: "CRON se mora ponovno pokrenuti  ( idi na stranicu administ
 cronRunning: "cron je započeo &#58 kliknite ovdje za zaustavljanje",
 cronStatus: "cron status",
 cronStopped: "cron zaustavljen &#58 kliknite ovdje da pokrenete cron",
+cronStopping: "cron shutdown in progress...",
 cronTasks: "Obrada Pozadina",
 csvFile: "CSV datoteka (vrijednosti odvojene zarezima)",
 cumulated: "kumulativno",

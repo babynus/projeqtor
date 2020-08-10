@@ -34,6 +34,7 @@ scriptLog('   ->/view/refrehCronIconStatus.php');
 
 $cronStatus=RequestHandler::getValue('cronStatus');
 $cronStatus = ucfirst($cronStatus);
+$oldStatus = ucfirst(Cron::check());
 $simuIndex=Parameter::getGlobalParameter('simuIndex');
 if($simuIndex){
 	$simuClass = 'simuToolBar';
@@ -43,8 +44,8 @@ if($simuIndex){
 	$simuBarColor='';
 }
 ?>
-<div class="pseudoButton <?php echo $simuClass;?>"  
-style="height:28px; position:relative;top:-5px; z-index:30; width:32px;" title="<?php if($cronStatus == 'Running'){echo i18n('cronRunning');}else{echo i18n('cronStopped');}?>"
+<div class="pseudoButton <?php echo $simuClass;?>" id="cronStatusButton" name="cronStatusButton"
+style="height:28px; position:relative;top:-5px; z-index:30; width:32px;" title="<?php if($oldStatus != $cronStatus){echo i18n('cronStopping');}else{if($cronStatus == 'Running'){echo i18n('cronRunning');}else{echo i18n('cronStopped');}}?>"
 onClick="checkCronStatus('<?php echo $cronStatus;?>');">
-  <img id="cronStatus" name="cronStatus" style="height:22px;width:22px;padding-top:3px;" src="img/iconCron<?php echo $cronStatus;?>.png" />
+  <img id="cronStatus" name="cronStatus" style="<?php if($oldStatus != $cronStatus){echo 'filter:grayscale(100%);';}?>height:22px;width:22px;padding-top:3px;" src="img/iconCron<?php echo $cronStatus;?>.png" />
 </div>
