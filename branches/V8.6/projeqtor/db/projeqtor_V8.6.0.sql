@@ -75,13 +75,15 @@ INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOr
 (110, 'reportConsolidationValidation',7, 'consultationValidation.php', 889,'1'),
 (111, 'reportLeftWork',1, 'leftWork.php', 199,'1'),
 (112, 'reportWorkWeekDetail',1, 'WorkDetailed.php', 131,'1'),
-(113, 'reportWorkMonthDetail',1, 'WorkDetailed.php', 132,'1');
+(113, 'reportWorkMonthDetail',1, 'WorkDetailed.php', 132,'1'),
+(114, 'reportWorkYearDetail',1, 'WorkDetailed.php', 133,'1');
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
 (1, 110, 1),
 (1, 111, 1),
 (1, 112, 1),
-(1, 113, 1);
+(1, 113, 1),
+(1, 114, 1);
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 (110, 'idProject', 'projectList', 10, 'currentProject'),
@@ -98,12 +100,17 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (113, 'idProject', 'projectList', 10, 'currentProject'),
 (113,'idTeam','teamList',15,null),
 (113, 'idOrganization', 'organizationList', 20,null),
-(113,'month','month',25,'currentMonth');
+(113,'month','month',25,'currentMonth'),
+(114, 'idProject', 'projectList', 10, 'currentProject'),
+(114,'idTeam','teamList',15,null),
+(114, 'idOrganization', 'organizationList', 20,null),
+(114,'year','year',25,'currentYear');
 
 INSERT INTO `${prefix}modulereport` (`id`,`idModule`,`idReport`,`hidden`,`active`) VALUES
 (91,20,110,0,1),
 (92,20,112,0,1),
-(93,20,113,0,1);
+(93,20,113,0,1),
+(93,20,114,0,1);
 
 -- Tags Management
 
