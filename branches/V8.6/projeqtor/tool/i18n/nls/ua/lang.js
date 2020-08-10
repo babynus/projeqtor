@@ -1653,6 +1653,7 @@ cronRestartRequired: "Треба перезавантажити CRON (перей
 cronRunning: "cron started &#58 click here to stop",
 cronStatus: "Статус cron (час.мех.)",
 cronStopped: "cron stopped &#58 click here to start cron",
+cronStopping: "cron shutdown in progress...",
 cronTasks: "Фонові завдання",
 csvFile: "CSV-файл (значення розділені комами)",
 cumulated: "накопичено",
