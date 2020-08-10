@@ -229,13 +229,14 @@ UPDATE `${prefix}accessscope` SET `isYesNo`=1, `nameNonProject`='accessScopeNoPr
 UPDATE `${prefix}accessscope` SET `isYesNo`=1, `nameNonProject`='accessScopeNoProjectNo' WHERE accessCode ='NO';
 
 ALTER TABLE `${prefix}accessprofile` ADD COLUMN `isNonProject` int(1) unsigned default 0 COMMENT '1';
+ALTER TABLE `${prefix}accessprofile` ADD COLUMN `isExtended` int(1) unsigned default 0 COMMENT '1';
 
-INSERT INTO `${prefix}accessprofile` (`id`,`isNonProject`, `name`, `description`, `idAccessScopeRead`, `idAccessScopeCreate`, `idAccessScopeUpdate`, `idAccessScopeDelete`, `sortOrder`, `idle`) VALUES
-(1000001, 1, 'accessProfileRestrictedManager', 'Create all, update all, delete all', 4, 4, 4, 4, 100, 0),
-(1000002, 1, 'accessProfileRestrictedReader', 'Create none, update none, delete none', 4, 1, 1, 1, 200, 0),
-(1000003, 1, 'accessProfileRestrictedUpdater', 'Create none, update all, delete none', 4, 1, 4, 1, 300, 0),
-(1000004, 1, 'accessProfileResponsible', 'Create none, update responsible, delete none', 4, 1, 5, 1, 400, 0),
-(1000005, 1, 'accessProfileRestrictedCreator', 'Create all, update own, delete own', 4, 4, 2, 2, 500, 0);
+INSERT INTO `${prefix}accessprofile` (`id`,`isNonProject`, `name`, `description`, `idAccessScopeRead`, `idAccessScopeCreate`, `idAccessScopeUpdate`, `idAccessScopeDelete`, `sortOrder`, `idle`,`isExtended`) VALUES
+(1000001, 1, 'accessProfileRestrictedManager', 'Create all, update all, delete all', 4, 4, 4, 4, 100, 0, 0),
+(1000002, 1, 'accessProfileRestrictedReader', 'Create none, update none, delete none', 4, 1, 1, 1, 200, 0, 0),
+(1000003, 1, 'accessProfileRestrictedUpdater', 'Create none, update all, delete none', 4, 1, 4, 1, 300, 0, 0),
+(1000004, 1, 'accessProfileResponsible', 'Create none, update responsible, delete none', 4, 1, 5, 1, 400, 0, 1),
+(1000005, 1, 'accessProfileRestrictedCreator', 'Create all, update own, delete own', 4, 4, 2, 2, 500, 0, 1);
 
 UPDATE `${prefix}menu` SET sortOrder=1245 where id=47;
 
@@ -244,6 +245,16 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`id
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,256,1);
+
+UPDATE `${prefix}menu` set level='ReadWriteConfiguration' WHERE id IN (86,87,141,142);
+
+UPDATE `${prefix}menu` set level='ReadWriteTool' WHERE id IN (223,51);
+
+UPDATE `${prefix}menu` set level='ReadWriteAutomation' WHERE id IN (59,184,68,89,90,169,116,130,162,186);
+
+UPDATE `${prefix}accessright` set idAccessProfile=1000001 where idMenu in (237,229,236,226,51) and idAccessProfile=8;
+UPDATE `${prefix}accessright` set idAccessProfile=1000002 where idMenu in (51) and idAccessProfile=9;
+UPDATE `${prefix}accessright` set idAccessProfile=1000001 where idMenu in (51) and idAccessProfile=7;
 
 -- Fix for menu & habilitation
 
