@@ -153,8 +153,8 @@ foreach ($lstWork as $work) {
   if ($work->refType == 'Activity' and ! array_key_exists($work->idResource,$activities)) {
   	$activities[$work->idResource]=array();
   }
-  if ($work->refType == 'Activity' and ! array_key_exists($work->refId,$activities)) {
-  	$activities[$work->idResource][$work->refId]=SqlList::getNameFromId('ACtivity', $work->refId);
+  if ($work->refType == 'Activity' and ! array_key_exists($work->refId,$activities[$work->idResource])) {
+  	$activities[$work->idResource][$work->refId]=SqlList::getNameFromId('Activity', $work->refId);
   }
   if (! array_key_exists($work->idResource,$result)) {
     $result[$work->idResource]=array();
@@ -270,7 +270,8 @@ foreach ($resources as $idR=>$nameR) {
   }
   if (!$paramTeam or $res->idTeam==$paramTeam) {
 		$sumRes=0;
-	  echo '<tr><td style="width:10%" rowspan="'.count($activities[$idR]).'" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameR) . '</td>';
+		$rowspan = count($activities[$idR]);
+	  echo '<tr><td style="width:10%" rowspan="'.$rowspan.'" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameR) . '</td>';
 	  $count = 0;
 	  foreach ($activityRes[$idR] as $idAct=>$proj){
         $count++;$nameA="";
@@ -289,8 +290,7 @@ foreach ($resources as $idR=>$nameR) {
             drawLine($projects,$activityRes, $idR, $idAct, $colWidth,$sumRes,$sum);
             echo '</tr>';
        }
-  }
-
+      }
   }
 }
 echo '<tr><td class="reportTableHeader" '.excelFormatCell('header').' colspan="2">' . i18n('sum') . '</td>';
