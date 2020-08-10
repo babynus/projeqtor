@@ -28,7 +28,7 @@
  * Profile defines right to the application or to a project.
  */ 
 require_once('_securityCheck.php');
-class AccessProfileNoProject extends SqlElement {
+class AccessProfileNoProjectSimple extends SqlElement {
 
   // extends SqlElement, so has $id
   public $_sec_Description;
@@ -39,15 +39,13 @@ class AccessProfileNoProject extends SqlElement {
   public $idAccessScopeNoProjectUpdate;
   public $idAccessScopeNoProjectDelete;
   public $sortOrder=0;
-  public $isNonProject;
-  public $isExtended;
   public $idle;
   public $description;
-
+  public $isNonProject;
   //public $_sec_void;
   
   public $_isNameTranslatable = true;
-  private static $_databaseCriteria = array('isNonProject'=>'1');
+  private static $_databaseCriteria = array('isNonProject'=>'1','isExtended'=>'0');
   private static $_databaseTableName = 'accessprofile';
   private static $_databaseColumnName = array(
       'idAccessScopeNoProjectRead'   => 'idAccessScopeRead',
@@ -67,8 +65,7 @@ class AccessProfileNoProject extends SqlElement {
                                   "idAccessScopeNoProjectCreate"=>"required",
                                   "idAccessScopeNoProjectUpdate"=>"required",
                                   "idAccessScopeNoProjectDelete"=>"required",
-                                  "isNonProject"=>"hidden",
-                                  "isExtended"=>"hidden"
+                                  "isNonProject"=>"hidden"
   );  
 
   private static $_layout='
@@ -153,24 +150,5 @@ class AccessProfileNoProject extends SqlElement {
     return self::$_colCaptionTransposition;
   }
  
-  // ============================================================================**********
-  // MAIN FUNCTIONS
-  // ============================================================================**********
-  /**=========================================================================
-   * Overrides SqlElement::save() function to add specific treatments
-   * @see persistence/SqlElement#save()
-   * @return the return message of persistence/SqlElement#save() method
-   */
-  public function save() {
-    $this->isExtended=0;
-    $accessScopeUpdate=SqlList::getFieldFromId('AccessScope', $this->idAccessScopeNoProjectUpdate, 'accessCode',false);
-    $accessScopeDelete=SqlList::getFieldFromId('AccessScope', $this->idAccessScopeNoProjectDelete, 'accessCode',false);
-    debugLog("accessScopeUpdate=$accessScopeUpdate, accessScopeDelete=$accessScopeDelete");
-    if ($accessScopeUpdate=='RES' or $accessScopeUpdate=='OWN' or $accessScopeDelete=='RES' or $accessScopeDelete=='OWN') {
-      $this->isExtended=1;
-    }
-    $result = parent::save();
-    return $result;
-  }
 }
 ?>
