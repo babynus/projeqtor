@@ -4053,6 +4053,7 @@ reportWorkPlanPerTicket: "синтез роботи на виправлення 
 reportWorkWeekDetail: "Detailed work - weekly",
 reportWorkWeekly: "робота - щотижня",
 reportWorkWeeklyResource: "робота ресурсу - щотижнева",
+reportWorkYearDetail: "Detailed work - yearly",
 reportWorkYearly: "робота - щорічно",
 reportWorkYearlyResource: "робота ресурсу - щорічна",
 Requested: "Requested",
