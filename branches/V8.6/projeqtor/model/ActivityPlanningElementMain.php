@@ -157,6 +157,7 @@ class ActivityPlanningElementMain extends PlanningElement {
     "indivisibility"=>"",
     "minimumThreshold"=>"",
     "fixPlanning"=>"nobr",
+    "revenue"=>"",
   );
 
   private static $_fieldsTooltip = array(
