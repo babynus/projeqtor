@@ -502,6 +502,11 @@ class Parameter extends SqlElement {
       case 'ldapDefaultProfile': case 'defaultProfile': case 'SAML_defaultProfile' :
       	$list=SqlList::getList('Profile');
       	break;
+      case 'imputationOnlyIncompleteResourceWork':case 'imputationOnlyIncompleteProjectLeaderWork':
+      case 'imputationOnlyIncompleteTeamManagerWork':case 'imputationOnlyIncompleteOrganismManagerWork':
+    		$list = array('false'=>i18n('displayNo'),
+    		              'true'=>i18n('displayYes'));
+  		break;
       case 'ldapMsgOnUserCreation': case 'imputationAlertSendToResource': case 'SAML_msgOnUserCreation' :
       case 'imputationAlertSendToProjectLeader': case 'imputationAlertSendToTeamManager': 
       case 'imputationAlertSendToOrganismManager': case 'imputationAlertInputByOther': case 'imputationAlertCancelByOther':
@@ -1140,18 +1145,22 @@ class Parameter extends SqlElement {
           	                    'imputationAlertControlDayResource'=>'list',
           	                    'imputationAlertControlNumberOfDaysResource'=>'number',
           	                    'imputationAlertSendToResource'=>'list',
+          	                    'imputationOnlyIncompleteResourceWork'=>'list',
           	                    'imputationAlertCronProjectLeader'=>'specific',
           	                    'imputationAlertControlDayProjectLeader'=>'list',
           	                    'imputationAlertControlNumberOfDaysProjectLeader'=>'number',
           	                    'imputationAlertSendToProjectLeader'=>'list',
+          	                    'imputationOnlyIncompleteProjectLeaderWork'=>'list',
           	                    'imputationAlertCronTeamManager'=>'specific',
           	                    'imputationAlertControlDayTeamManager'=>'list',
           	                    'imputationAlertControlNumberOfDaysTeamManager'=>'number',
           	                    'imputationAlertSendToTeamManager'=>'list',
+          	                    'imputationOnlyIncompleteTeamManagerWork'=>'list',
           	                    'imputationAlertCronOrganismManager'=>'specific',
           	                    'imputationAlertControlDayOrganismManager'=>'list',
           	                    'imputationAlertControlNumberOfDaysOrganismManager'=>'number',
           	                    'imputationAlertSendToOrganismManager'=>'list',
+          	                    'imputationOnlyIncompleteOrganismManagerWork'=>'list',
           	                /*'sectionImputationAlert'=>'section',
             	                'imputationAlertGenerationDay'=>'list',
             	                'imputationAlertGenerationHour'=>'time',
