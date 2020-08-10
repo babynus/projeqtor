@@ -107,13 +107,17 @@ Allows to define parameters for automatic refresh.
 .. figure:: images/GUI/TODAY_BOX_Parameters_TRUE&FALSE.png
    :alt: You can not drag it here
 
-.. note:: 
-
-   If you have added any reports to the Today page, they will appear in the list.
+If you have added any reports to the Today page, they will appear in the list.
    
-   You can then hide or delete any added reports.
+.. figure:: /images/GUI/TODAY_BOX_ParametersREPORTS.png
+   :alt: Parameters with reports
+   :scale: 60
    
-   see : :ref:`Favorite Report<favorite_report>`
+   Parameters with reports
+      
+You can hide or delete the added reports by clicking on the cross.
+   
+see : :ref:`Favorite Report<favorite_report>`
     
 .. raw:: latex
 
