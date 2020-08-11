@@ -1712,7 +1712,7 @@ class PlannedWork extends GeneralWork {
     } else {
       Sql::rollbackTransaction ();
     }
-    echo '<div class="message' . $status . '" >' . $result . '</div>';
+    if (!$cronnedScript) echo '<div class="message' . $status . '" >' . $result . '</div>';
     self::$_planningInProgress=false;
     return $result;
   }
