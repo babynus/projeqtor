@@ -13,7 +13,7 @@ INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active
 UPDATE `${prefix}menu` SET `sortOrder`='120' WHERE `id`='252';
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(20,254,0,0);
+(3,254,0,0);
  
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (254, 'menuConsultationValidation', 7, 'item', 119, Null, 0, 'Work');
@@ -72,7 +72,7 @@ INSERT INTO `${prefix}habilitationother` (idProfile,scope,rightAccess) VALUES
 (7,'validationImputation','2');
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasExcel`) VALUES
-(110, 'reportConsolidationValidation',7, 'consultationValidation.php', 889,'1'),
+(110, 'reportConsolidationValidation',7, 'consultationValidation.php', 760,'1'),
 (111, 'reportLeftWork',1, 'leftWork.php', 199,'1'),
 (112, 'reportWorkWeekDetail',1, 'WorkDetailed.php', 131,'1'),
 (113, 'reportWorkMonthDetail',1, 'WorkDetailed.php', 132,'1'),
@@ -107,7 +107,7 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (114,'year','year',25,'currentYear');
 
 INSERT INTO `${prefix}modulereport` (`id`,`idModule`,`idReport`,`hidden`,`active`) VALUES
-(91,20,110,0,1),
+(91,3,110,0,1),
 (92,3,112,0,1),
 (93,3,113,0,1),
 (94,3,114,0,1);
