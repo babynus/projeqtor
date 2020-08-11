@@ -108,9 +108,9 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 
 INSERT INTO `${prefix}modulereport` (`id`,`idModule`,`idReport`,`hidden`,`active`) VALUES
 (91,20,110,0,1),
-(92,20,112,0,1),
-(93,20,113,0,1),
-(93,20,114,0,1);
+(92,3,112,0,1),
+(93,3,113,0,1),
+(94,3,114,0,1);
 
 -- Tags Management
 
