@@ -298,7 +298,6 @@ class Security
         $menuName='menu'.$refType;
         if ($menuName=='menuCalendarDefinition') $menuName='menuCalendar';
         if ( !isset($accessRightList[$menuName]) or !isset($accessRightList[$menuName]['read']) or $accessRightList[$menuName]['read']=='NO' ) {
-        //debugLog(" *** ACCESS = ".$accessRightList[$menuName]['read']);
           traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
         } else {
           return; // OK
