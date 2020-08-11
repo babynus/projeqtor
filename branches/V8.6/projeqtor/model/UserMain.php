@@ -440,7 +440,8 @@ class UserMain extends SqlElement {
         $accessControlRights[$menuName]=$noAccessArray;	
       } else {
         $scopeArray=$noAccessArray;
-        $accessProfile=new AccessProfile($arObj->idAccessProfile);
+        $accessProfile=new AccessProfileAll($arObj->idAccessProfile);
+        if ($arObj->idAccessProfile>1000000) debugLog($accessProfile);
         if (1 or $arObj->idAccessProfile<1000000) { // debugLog('OK');
           if ($accessProfile->id) {
             $scopeArray=array( 'read' =>  $accessScopeList[$accessProfile->idAccessScopeRead],
