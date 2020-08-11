@@ -30,6 +30,7 @@
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/listColumnSelector');
 
+$contextForAttributes='global';
 $listColumns=ColumnSelector::getColumnsList($objectClass);
 
 $cpt=0;
