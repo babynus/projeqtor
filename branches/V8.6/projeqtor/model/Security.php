@@ -311,6 +311,7 @@ class Security
         }
       }
     }
+    if (!$obj) return;
     if (get_class($obj)=='Logfile') {
       $user=getSessionUser();
       $accessRightList = $user->getAccessControlRights ();
