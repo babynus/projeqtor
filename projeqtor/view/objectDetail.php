@@ -2237,7 +2237,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
                 'idMenu'=>$menu->id, 
                 'idProfile'=>$profile));
             if ($accessRight) {
-              $accessProfile=new AccessProfile($accessRight->idAccessProfile);
+              $accessProfile=new AccessProfileAll($accessRight->idAccessProfile);
               if ($accessProfile) {
                 $accessScope=new AccessScope($accessProfile->idAccessScopeCreate);
                 if ($accessScope and $accessScope->accessCode!='NO') {
