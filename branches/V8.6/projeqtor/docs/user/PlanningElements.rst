@@ -28,8 +28,9 @@ It is also the top-level of visibility, depending on profiles.
 
 .. rubric:: Sub-projects 
 
-* You can also define sub-projects on a project.
-* Then, the projects may not be real projects, but just organizational breakdown corresponding to the organization.
+* You can define sub-projects on any project and this unlimited. 
+* On the parent project screen, you can view the children in the subproject section.
+* Then, the projects may not be real projects, but just organizational breakdown corresponding to an organization.
 
 
 .. rubric:: Fix planning 
@@ -40,17 +41,44 @@ It is also the top-level of visibility, depending on profiles.
 
 .. warning:: This may lead to dependencies unconsistancies
 
+
+
+.. rubric:: Non extendable project 
+
+When project perimeter is fixed you can't:
+
+   * add new elements to this project
+   * delete elements from this project
+   * move elements to or from this project
+
 .. rubric:: Under construction
 
-* When a project is under construction, no automatic emails will be sent, no alerts will be generated for the project elements.
-* A project can be under construction as long as it isn’t stated (set to **handled** status).
-* The resources don't see it on timesheet.
+* When a project is under construction, no :ref:`automatic emails<mail-on-event>` will be sent, no :ref:`notifications<notifications>` or :ref:`alerts<automation>` will be generated for the project elements.
+* A project can be under construction as long as it isn’t stated. Set to :term:`handled` status.
+* The resources don't see it on :ref:`timesheet<timesheet>`.
+
+
+
+.. rubric:: Exclude from global plan
+
+* Do not show the not plannable items for this project on the global planning view.
+* This means that only standard planning items will be displayed excluding:
+
+   * :ref:`Actions<action>`
+   * :ref:`Decisions<decision>`
+   * :ref:`Deliveries<deliveries>`
+   
+.. rubric:: Validated work treatment    
+
+Activates treatment of the validated work based on the sum of the work of the project orders otherwise it will be calculated on the sum of the validated work of the activities.
+
+
 
 .. rubric:: Manual indicators
 
-* Fields: Health status, Quality level, Trend and Overall progress are manual indicators.
+* Fields: :ref:`Health status<health-status>`, :ref:`Quality level<quality-level>`, :ref:`Trend<trend>` and :ref:`Overall progress<overall-progress>` are manual indicators.
 * They allow define visual way the general health, conformity, trend and progress of the project.
-* Some manual indicators are displayed on the Today screen. 
+* Some manual indicators are displayed on the :ref:`Today screen<today-screen>`. 
 
 .. figure:: /images/GUI/PLANNINGELEM_ZONE_ManualIndicator.png
    :alt: Manual indicator on the Today screen
@@ -64,21 +92,21 @@ It is also the top-level of visibility, depending on profiles.
 
 .. rubric:: Monitoring indicator
 
-* The indicators can be defined on the progress data.
+* The :ref:`indicators<indicator>` can be defined on the :ref:`progress data<progress-section>`.
 
 
 
 
 .. _project-reserve:
+
 .. index:: Project (Reserve)
 
 .. rubric:: Project reserve
 
-* Project reserve is an amount reserved based on identifying risks and opportunities.
+* Project reserve is an amount reserved based on identifying :ref:`Risks<risk>` and :ref:`Opportunity<opportunity>`.
 * Calculated from contingency reserve of risks minus potential gain of opportunities.
 * ProjeQtOr uses a technique as "Expected monetary value (EMV)" to convert risks and opportunities into an amount.
 * The amount of project reserve will be added to remaining amount.
-* See: :ref:`risk` and :ref:`opportunity`
 
 .. rubric:: Section Description
 
@@ -135,11 +163,11 @@ It is also the top-level of visibility, depending on profiles.
 
 .. topic:: Field Customer
 
-   The value of the field is used in the Quotations, Orders and Bills concerned with the project.
+   The value of the field is used in the :ref:`Quotations<quotation>`, :ref:`Orders<client-orders>` and :ref:`Invoices<client-bill>` concerned with the project.
 
 .. topic:: Field Bill contact
 
-   The value of the field is used in Bills concerned with the project.
+   The value of the field is used in :ref:`Invoices<client-bill>` concerned with the project.
 
 
 
@@ -196,7 +224,7 @@ Activity
 
    * :ref:`Assignment<assignment-section>`
    * :ref:`Progress<progress-section>`
-   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
+   * :ref:`Predecessor and Sucessor<predSuces-element-section>`
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`
@@ -214,25 +242,26 @@ An activity can be:
 
 .. rubric:: Assigned resources
 
-* Resources are assigned to activities.
-* During an assignation, some work is initially planned on this activity for the resource.
+* :ref:`Resources<resource>` are assigned to activities.
+* During an :ref:`assignation<assignment-section>`, some work is initially planned on this activity for the resource.
 
 .. rubric:: Real work allocation
 
-* For a resource, assigned activities are tasks in which he can entry the real work.
+* For a resource, assigned activities are tasks in which he can entry the :ref:`Real work<real-work-allocation>` 
 
 .. rubric:: Activities regroupment
 
 * Activities can have parents to regroup activities. 
-* So a WBS (work breakdown structure number) is calculated for the activities.
-* Activities can be sorted inside their parent activity, on the Gantt planning view, using drag and drop.
+* So a :term:`WBS` (work breakdown structure number) is calculated for the activities.
+* Activities can be sorted inside their parent activity, on the :ref:`Gantt<Gantt_chart>` planning view, using drag and drop.
 * Parent activity must belong to the same project.
 
-.. rubric:: Work on tickets
+.. _activity-planning:
 
-* Tickets can be linked to an activity (task).
+.. rubric:: Activity planning: work on tickets
+
+* :ref:`Tickets<ticket>` can be linked to an activity (task).
 * Work on tickets will be included in the activity.
-* More detail, see: :ref:`ticket` screen.
 
  .. compound:: **Assignment of resources to task**
 
@@ -266,7 +295,6 @@ Ability to filter activities by data or type, for instance by assigned resources
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 70
    :header-rows: 1
 
    * - Field
@@ -319,8 +347,7 @@ Ability to filter activities by data or type, for instance by assigned resources
  
 .. topic:: Field Target version
 
-   * Contains the list of product versions linked to the project.
-   * More detail, see: :ref:`Product concept<product-concept>`
+   * Contains the list of :ref:`product versions<product-concept>` linked to the project.
 
 .. raw:: latex
 
@@ -336,7 +363,7 @@ Milestone
 .. sidebar:: Other sections
 
    * :ref:`Progress<progress-section-milestone>`
-   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
+   * :ref:`Predecessor and Sucessor<predSuces-element-section>`
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
@@ -370,7 +397,6 @@ ProjeQtOr offers two types of milestone:
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -419,6 +445,5 @@ ProjeQtOr offers two types of milestone:
  
 .. topic:: Field "Target version"
 
-   * Contains the list of product versions linked to the project.
-   * More detail, see: :ref:`Product concept<product-concept>`
+   * Contains the list of :ref:`product versions<product-concept>` linked to the project.
 

@@ -10,9 +10,13 @@
 
 .. _RWA:
 
+.. _real-work-allocation:
+
 ********************
 Real work allocation
 ********************
+
+.. _timesheet:
 
 Timesheet
 =========
