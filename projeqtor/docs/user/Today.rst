@@ -10,6 +10,8 @@
 .. index:: Today
 .. index:: Dashboard
 
+.. _today-screen:
+
 Today (Dashboard)
 =================
 
@@ -107,13 +109,29 @@ Allows to define parameters for automatic refresh.
 .. figure:: images/GUI/TODAY_BOX_Parameters_TRUE&FALSE.png
    :alt: You can not drag it here
 
-.. note:: 
+The number of items to display for the user can be customized in the user parameters, in the display tab.
 
-   If you have added any reports to the Today page, they will appear in the list.
+Enter the number of projects or tasks to appear on the screen.
+
+See: :ref:`User parameters<display-parameters>`
+
+ 
+
+If you have added any reports to the Today page, they will appear in the list.
    
-   You can then hide or delete any added reports.
+.. figure:: /images/GUI/TODAY_BOX_ParametersREPORTS.png
+   :alt: Parameters with reports
+   :scale: 60
    
-   see : :ref:`Favorite Report<favorite_report>`
+   Parameters with reports
+      
+You can hide or delete the added reports by clicking on the cross.
+   
+see : :ref:`Favorite Report<favorite_report>`
+   
+   
+   
+   
     
 .. raw:: latex
 

@@ -136,13 +136,57 @@ and the other based on the restriction of product versions
    * **ADM:** will designate administrator.
    * **PL:** will designate project leader. 
 
+
+
+.. raw:: latex
+
+    \newpage
+    
+.. index:: Access to form
+
+.. _access-to-forms:
+
+Access to forms
+---------------
+
+This table is used to define the access to the selected screen for each profile.
+Users belonging to one profile can see the corresponding screen if authorized or not. 
+
+**Click on checkbox to permit or revoke access to the screen for a profile.**
+
+.. figure:: /images/GUI/ACCESSRIGHT_SCR_AccesTOforms.png
+   :alt: Access to forms screen
+   :align: center
+   
+   Access to forms screen
+
+.. index:: Access to reports
+
+.. _access-to-reports:
+
+Access to reports
+-----------------
+
+This screen allows to define report access for each profile.
+Users belonging to a profile can see the corresponding report in the report list.
+Reports are grouped by report categories
+
+**Click on checkbox to permit or revoke access to the report  for a profile.**
+
+.. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToReports.png
+   :alt: Access to reports screen
+   :align: center
+   
+   Access to reports screen
+   
+   
+   
 .. index:: Access mode
 
 .. _access-mode:
 
 Access modes
 ------------
-
 The access mode defines a combination of rights to Created, Read, Update or Delete items. 
 
 It's the CRUD RIGHTS
@@ -160,6 +204,15 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
    :align: center 
    
    Access modes screen
+
+
+
+Project dependant
+=================
+
+
+
+
 
 .. rubric:: Value of Field "Name"
 
@@ -210,47 +263,15 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
    * - Description
      - Complete description of the access mode.
 
+Not project dependant
+=====================
 
-.. raw:: latex
+under construction
 
-    \newpage
-    
-.. index:: Access to form
 
-.. _access-to-forms:
 
-Access to forms
----------------
 
-This table is used to define the access to the selected screen for each profile.
-Users belonging to one profile can see the corresponding screen if authorized or not. 
 
-**Click on checkbox to permit or revoke access to the screen for a profile.**
-
-.. figure:: /images/GUI/ACCESSRIGHT_SCR_AccesTOforms.png
-   :alt: Access to forms screen
-   :align: center
-   
-   Access to forms screen
-
-.. index:: Access to reports
-
-.. _access-to-reports:
-
-Access to reports
------------------
-
-This screen allows to define report access for each profile.
-Users belonging to a profile can see the corresponding report in the report list.
-Reports are grouped by report categories
-
-**Click on checkbox to permit or revoke access to the report  for a profile.**
-
-.. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToReports.png
-   :alt: Access to reports screen
-   :align: center
-   
-   Access to reports screen
 
 .. index:: Access to data 
 
