@@ -218,7 +218,8 @@ More details, see :ref:`Global Parameters<mail>`
      - ${HISTORY} : displays the last change of an object.
      - ${HISTORYFULL} : display all the modifications
      - ${LINK} : list linked elements to the item
-     - ${NOTE} : lists the notes of the item 
+     - ${NOTE} : lists the element's notes in tabular form 
+     - ${NOTESTD} : list notes in default format
 
 
 .. rubric:: the Tags selector
