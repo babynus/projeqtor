@@ -1858,6 +1858,8 @@ abstract class SqlElement {
     }
     if (array_key_exists ( $class, $relationShip )) {
       $relations = $relationShip [$class];
+      debugLog($class);
+      debugLog($relations);
       $relations ['Alert'] = 'cascade';
       $relations ['IndicatorValue'] = 'cascade';
       foreach ( $relations as $object => $mode ) {
@@ -1870,6 +1872,10 @@ abstract class SqlElement {
           $where = null;
           $obj = new $object ();
           $crit = array($obj->getDatabaseColumnName ( 'id' . $class ) => $this->id);
+          if ($class=='AccessProfileNoProject') {
+            $crit = array('idAccessProfile' => $this->id);
+          }
+          debugLog($crit);
           if ($class=='ComponentVersion' and $object=='ProductAsset') {
             $crit=array($obj->getDatabaseColumnName ( 'idProductVersion' ) => $this->id);
           }
@@ -1896,6 +1902,7 @@ abstract class SqlElement {
             $crit = null;
             $where = "idStatusFrom=" . Sql::fmtId ( $this->id ) . " or idStatusTo=" . Sql::fmtId ( $this->id );
           }
+          debugLog($crit);
           $list = $obj->getSqlElementsFromCriteria ( $crit, false, $where );
           foreach ( $list as $subObj ) {
             $subObjDel = new $object ( $subObj->id );
@@ -4900,6 +4907,9 @@ abstract class SqlElement {
           $where = null;
           $obj = new $object ();
           $crit = array('id' . get_class ( $this ) => $this->id);
+          if (get_class ( $this )=='AccessProfileNoProject') {
+            $crit = array('idAccessProfile'=> $this->id);
+          }
           if (self::is_a ( $this, 'Version' )) {
             $crit = null;
             $where = "(1=0";
