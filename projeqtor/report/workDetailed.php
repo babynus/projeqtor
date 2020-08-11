@@ -241,8 +241,8 @@ $rowspan=($hasCode)?'3':'2';
 echo '<table style="width:95%;" align="center" '.excelName().'>';
 echo '<tr>';
 echo '<td style="width:10%" class="reportTableHeader" rowspan="'.$rowspan.'" '.excelFormatCell('header',20).'>' . i18n('Resource') . '</td>';
-echo '<td style="width:10%" class="reportTableHeader" rowspan="'.$rowspan.'" '.excelFormatCell('header',20).'>' . i18n('Activity') . '</td>';
-echo '<td style="width:80%" colspan="' . $nbProj . '" class="reportTableHeader" '.excelFormatCell('header').'>' . i18n('Project') . '</td>';
+echo '<td style="width:20%" class="reportTableHeader" rowspan="'.$rowspan.'" '.excelFormatCell('header',40).'>' . i18n('Activity') . '</td>';
+echo '<td style="width:70%" colspan="' . $nbProj . '" class="reportTableHeader" '.excelFormatCell('header').'>' . i18n('Project') . '</td>';
 echo '<td style="width:10%" class="reportTableHeader" rowspan="'.$rowspan.'" '.excelFormatCell('header',10).'>' . i18n('sum') . '</td>';
 echo '</tr><tr>';
 foreach ($projects as $id=>$name) {
