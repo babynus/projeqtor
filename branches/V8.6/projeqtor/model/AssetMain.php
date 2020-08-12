@@ -50,6 +50,10 @@ class AssetMain extends SqlElement {
   public $idLocation;
   public $complement;
   public $idAffectable;
+  public $idUser;
+  public $idResource;
+  public $creationDateTime;
+  public $lastUpdateDateTime;
   public $idle;
   public $_sec_Cost;
   public $_tab_2_1_3 = array('untaxedAmount','fullAmount','purchaseValue');
@@ -88,13 +92,17 @@ class AssetMain extends SqlElement {
   
   private static $_fieldsAttributes=array(
       'name'=>'required',
+      'idUser'=>'hidden',
+      'idResource'=>'hidden',
       'idAssetType'=>'required',
       'idStatus'=>'required',
       "installationDate"=>"nobr",
       "idLocation"=>"nobr"
   );
   
-  private static $_databaseColumnName = array();
+  private static $_databaseColumnName = array(
+      'idResource'=>'idAffectable'
+  );
   
    /** ==========================================================================
    * Constructor

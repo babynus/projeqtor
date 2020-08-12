@@ -1670,6 +1670,7 @@ function finalizeMessageDisplay(destination, validationType) {
         // hideWait();
       }
     } else { // ! validationType
+      buttonRightRefresh();
       formInitialize();
       // refresh the grid to reflect changes
       var lastSaveId = dojo.byId('lastSaveId');
@@ -2461,7 +2462,18 @@ function buttonRightLock() {
     }
   }
 }
-
+function buttonRightRefresh() {
+  console.log("buttonRightRefresh()");
+  var createRight = dojo.byId('createRight');
+  var updateRight = dojo.byId('updateRight');
+  var deleteRight = dojo.byId('deleteRight');
+  var newCreateRight = dojo.byId('createRightAfterSave');
+  var newUpdateRight = dojo.byId('updateRightAfterSave');
+  var newDeleteRight = dojo.byId('deleteRightAfterSave');
+  if (createRight && newCreateRight && newCreateRight.value!=createRight.value) createRight.value=newCreateRight.value;
+  if (updateRight && newUpdateRight && newUpdateRight.value!=updateRight.value) updateRight.value=newUpdateRight.value;
+  if (deleteRight && newDeleteRight && newDeleteRight.value!=deleteRight.value) deleteRight.value=newDeleteRight.value;
+}
 /**
  * ============================================================================
  * Disable a widget, testing it exists before to avoid error
