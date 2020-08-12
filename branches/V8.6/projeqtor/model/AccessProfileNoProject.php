@@ -166,7 +166,6 @@ class AccessProfileNoProject extends SqlElement {
     if (!$this->idAccessScopeNoProjectRead) $this->idAccessScopeNoProjectRead=4;
     $accessScopeUpdate=SqlList::getFieldFromId('AccessScope', $this->idAccessScopeNoProjectUpdate, 'accessCode',false);
     $accessScopeDelete=SqlList::getFieldFromId('AccessScope', $this->idAccessScopeNoProjectDelete, 'accessCode',false);
-    debugLog("accessScopeUpdate=$accessScopeUpdate, accessScopeDelete=$accessScopeDelete");
     if ($accessScopeUpdate=='RES' or $accessScopeUpdate=='OWN' or $accessScopeDelete=='RES' or $accessScopeDelete=='OWN') {
       $this->isExtended=1;
     }

@@ -441,8 +441,7 @@ class UserMain extends SqlElement {
       } else {
         $scopeArray=$noAccessArray;
         $accessProfile=new AccessProfileAll($arObj->idAccessProfile);
-        //if ($arObj->idAccessProfile>1000000) debugLog($accessProfile);
-        if (1 or $arObj->idAccessProfile<1000000) { // debugLog('OK');
+//      if (1 or $arObj->idAccessProfile<1000000) { 
           if ($accessProfile->id) {
             $scopeArray=array( 'read' =>  $accessScopeList[$accessProfile->idAccessScopeRead],
                                'create' => $accessScopeList[$accessProfile->idAccessScopeCreate],
@@ -453,18 +452,18 @@ class UserMain extends SqlElement {
               if (!$obj) $this->_accessControlVisibility='ALL';
             }
           }
-        } else {     
-          if (isset($noAccessAllowed[$menuName]) and $noAccessAllowed[$menuName]) {
-          	// Nothing
-          } else {
-            $RW=$accessScopeRW[$arObj->idAccessProfile];
-            if ($RW=='WRITE') {
-              $scopeArray=$allAccessArray;
-            } else {
-              $scopeArray=$readAccessArray;
-            }
-          }
-        }
+//      } else {     
+//        if (isset($noAccessAllowed[$menuName]) and $noAccessAllowed[$menuName]) {
+//        // Nothing
+//        } else {
+//          $RW=$accessScopeRW[$arObj->idAccessProfile];
+//          if ($RW=='WRITE') {
+//            $scopeArray=$allAccessArray;
+//          } else {
+//            $scopeArray=$readAccessArray;
+//          }
+//        }
+//      }
         $accessControlRights[$menuName]=$scopeArray;
       }
     }
