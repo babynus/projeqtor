@@ -157,7 +157,6 @@ class ActivityPlanningElementMain extends PlanningElement {
     "indivisibility"=>"",
     "minimumThreshold"=>"",
     "fixPlanning"=>"nobr",
-    "revenue"=>"",
   );
 
   private static $_fieldsTooltip = array(
@@ -189,6 +188,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   }
   
   public function setAttributes() {
+    global $contextForAttributes;
     self::$_fieldsAttributes['idWorkUnit']='hidden';
     self::$_fieldsAttributes['idComplexity']='hidden';
     self::$_fieldsAttributes['quantity']='hidden';
@@ -292,41 +292,48 @@ class ActivityPlanningElementMain extends PlanningElement {
       unset($this->_tab_4_1_smallLabel_2);
     }
     $project = new Project($this->idProject);
-    if(trim(Module::isModuleActive('moduleGestionCA')) == 1 and $project->ProjectPlanningElement->idRevenueMode == 2){
-    	if($this->elementary){
+    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+      if (isset($contextForAttributes) and $contextForAttributes=='global'){
       	self::$_fieldsAttributes['idWorkUnit']='';
       	self::$_fieldsAttributes['revenue']='';
-      	self::$_fieldsAttributes['idWorkUnit']='';
-      	if($this->idWorkUnit){
-      	  self::$_fieldsAttributes['quantity']='';
+      	self::$_fieldsAttributes['idComplexity']='';
+      	self::$_fieldsAttributes['quantity']='';
+      }
+      if($project->ProjectPlanningElement->idRevenueMode == 2){
+      	if($this->elementary){
+      	  self::$_fieldsAttributes['idWorkUnit']='';
+      	  self::$_fieldsAttributes['revenue']='';
+        	if($this->idWorkUnit){
+        	  self::$_fieldsAttributes['quantity']='';
+        	}else{
+        	  self::$_fieldsAttributes['quantity']='readonly';
+        	}
+        	self::$_fieldsAttributes['_label_complexity']='';
+        	self::$_fieldsAttributes['idWorkUnit']='size1/3';
+        	if($this->idWorkUnit){
+        	  self::$_fieldsAttributes['idComplexity']='size1/3';
+        	}else{
+        	  self::$_fieldsAttributes['idComplexity']='readonly,size1/3';
+        	}
+        	if($this->idWorkUnit and $this->idComplexity and $this->quantity){
+        	  $complexityValues = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idComplexity'=>$this->idComplexity,'idWorkUnit'=>$this->idWorkUnit));
+        	  if($complexityValues->duration){
+        	   self::$_fieldsAttributes['validatedDuration']='readonly';
+        	  }
+        	  self::$_fieldsAttributes['revenue']='readonly';
+        	  self::$_fieldsAttributes['validatedWork']='readonly';
+        	  $CaReplaceValidCost= Parameter::getGlobalParameter('CaReplaceValidCost');
+        	  if($CaReplaceValidCost=='YES'){
+        	    self::$_fieldsAttributes['validatedCost']='readonly';
+        	  }
+        	}
       	}else{
-      	  self::$_fieldsAttributes['quantity']='readonly';
-      	}
-      	self::$_fieldsAttributes['_label_complexity']='';
-      	self::$_fieldsAttributes['idWorkUnit']='size1/3';
-      	if($this->idWorkUnit){
-      	  self::$_fieldsAttributes['idComplexity']='size1/3';
-      	}else{
-      	  self::$_fieldsAttributes['idComplexity']='readonly,size1/3';
-      	}
-      	if($this->idWorkUnit and $this->idComplexity and $this->quantity){
-      	  $complexityValues = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idComplexity'=>$this->idComplexity,'idWorkUnit'=>$this->idWorkUnit));
-      	  if($complexityValues->duration){
-      	   self::$_fieldsAttributes['validatedDuration']='readonly';
-      	  }
       	  self::$_fieldsAttributes['revenue']='readonly';
-      	  self::$_fieldsAttributes['validatedWork']='readonly';
-      	  $CaReplaceValidCost= Parameter::getGlobalParameter('CaReplaceValidCost');
-      	  if($CaReplaceValidCost=='YES'){
-      	    self::$_fieldsAttributes['validatedCost']='readonly';
-      	  }
       	}
-    	}else{
-    	  self::$_fieldsAttributes['revenue']='readonly';
-    	}
-    }else{
-    	unset($this->_separator_sectionRevenue_marginTop);
-    	unset($this->_tab_5_1_smallLabel_3);
+      }else{
+      	unset($this->_separator_sectionRevenue_marginTop);
+      	unset($this->_tab_5_1_smallLabel_3);
+      }
     }
   }
   /** ==========================================================================
