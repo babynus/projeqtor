@@ -8,6 +8,7 @@ class WorkUnit extends SqlElement {
 	
 	public $id;   
 	public $reference;
+	public $name;
 	public $description;
 	public $entering;
 	public $deliverable;
@@ -16,6 +17,9 @@ class WorkUnit extends SqlElement {
   public $idProject;
   	
 	private static $_databaseCriteria = array();
+	private static $_databaseColumnName = array(
+	    'name'   => 'reference'
+	);
 	/** ==========================================================================
 	 * Constructor
 	 * @param $id the id of the object in the database (null if not stored yet)
@@ -59,7 +63,15 @@ class WorkUnit extends SqlElement {
 	function __destruct() {
 		parent::__destruct();
 	}
-	
+	/**
+	 * ========================================================================
+	 * Return the specific databaseColumnName
+	 *
+	 * @return the databaseTableName
+	 */
+	protected function getStaticDatabaseColumnName() {
+	  return self::$_databaseColumnName;
+	}
 	
 	
 }
