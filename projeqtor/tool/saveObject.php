@@ -129,7 +129,19 @@ if ($status == "OK") {
     SqlElement::setCurrentObject(new $className ( $newObj->id ));
   }
 }
-
+if ($status == "OK") {
+  //$createRight=securityGetAccessRightYesNo('menu' . $className, 'create');
+  //if (!$newObj->id) {
+  //  $updateRight=$createRight;
+  //} else {
+    $updateRight=securityGetAccessRightYesNo('menu' . $className, 'update', $newObj);
+  //}
+  $deleteRight=securityGetAccessRightYesNo('menu' . $className, 'delete', $newObj);
+  //$newObj
+  //echo "<input type='hidden' id='createRightAfterSave' value='$createRight' />";
+  echo "<input type='hidden' id='updateRightAfterSave' value='$updateRight' />";
+  echo "<input type='hidden' id='deleteRightAfterSave' value='$deleteRight' />";
+}
 $globalResult=$result;
 $globalStatus=$status;
 if (array_key_exists('checklistDefinitionId',$_REQUEST) and array_key_exists('checklistId',$_REQUEST)) {

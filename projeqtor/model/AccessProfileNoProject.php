@@ -163,6 +163,7 @@ class AccessProfileNoProject extends SqlElement {
    */
   public function save() {
     $this->isExtended=0;
+    if (!$this->idAccessScopeNoProjectRead) $this->idAccessScopeNoProjectRead=4;
     $accessScopeUpdate=SqlList::getFieldFromId('AccessScope', $this->idAccessScopeNoProjectUpdate, 'accessCode',false);
     $accessScopeDelete=SqlList::getFieldFromId('AccessScope', $this->idAccessScopeNoProjectDelete, 'accessCode',false);
     debugLog("accessScopeUpdate=$accessScopeUpdate, accessScopeDelete=$accessScopeDelete");
