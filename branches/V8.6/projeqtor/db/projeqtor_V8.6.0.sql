@@ -256,6 +256,11 @@ UPDATE `${prefix}accessright` set idAccessProfile=1000001 where idMenu in (237,2
 UPDATE `${prefix}accessright` set idAccessProfile=1000002 where idMenu in (51) and idAccessProfile=9;
 UPDATE `${prefix}accessright` set idAccessProfile=1000001 where idMenu in (51) and idAccessProfile=7;
 
+ALTER TABLE `${prefix}asset` 
+ADD COLUMN `idUser` int(12) unsigned DEFAULT NULL COMMENT '12',
+ADD COLUMN `creationDateTime` datetime DEFAULT NULL,
+ADD COLUMN `lastUpdateDateTime` datetime DEFAULT NULL;
+
 -- Fix for menu & habilitation
 
 UPDATE `${prefix}menu` set level='ReadWriteType', idle=0, menuClass='Type' WHERE id IN (229,236,226);
