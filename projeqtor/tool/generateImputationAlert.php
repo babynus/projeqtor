@@ -274,12 +274,10 @@ function calculListToSend($startDate, $endDate, &$lstRes, $incompleteResource, $
               if (isset($res['days'][$tmpDate]) and $res['days'][$tmpDate]['open']=='1' and abs($res['days'][$tmpDate]['work'] - $res['capacity']) >= 0.01 and ($res['days'][$tmpDate]['work'] < $res['capacity'])) {
               	$full=false;
               }
-              debugLog('param');
             }else{
               if (isset($res['days'][$tmpDate]) and $res['days'][$tmpDate]['open']=='1' and abs($res['days'][$tmpDate]['work'] - $res['capacity']) >= 0.01) {
               	$full=false;
               }
-              debugLog('sans param');
             }
 //             if (isset($res['days'][$tmpDate]) and $res['days'][$tmpDate]['open']=='1' and ($res['days'][$tmpDate]['work'] - $res['capacity']) < 0 and ($res['days'][$tmpDate]['work'] < $res['capacity'])) {
 //             	$overCap=true;

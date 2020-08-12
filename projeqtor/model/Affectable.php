@@ -35,6 +35,8 @@ class Affectable extends SqlElement {
   public $id; // redefine $id to specify its visible place
   public $name;
   public $userName;
+  public $capacity=1;
+  public $idCalendarDefinition;
   public $idProfile;
   public $isResource;
   public $isUser;
