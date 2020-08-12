@@ -144,9 +144,15 @@ A quick overview of projects status.
 
 The projects list is limited to the project visibility scope of the connected user. 
 
+The number of displayed projects can be defined in the :ref:`global parameters<display>`.
+
+
 .. figure:: /images/GUI/TODAY_ZONE_Projects.png
    :alt: Section - Projects 
    :align: center
+   
+   Project section
+   
 
 .. rubric:: Description
 

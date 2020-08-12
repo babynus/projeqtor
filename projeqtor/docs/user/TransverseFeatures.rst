@@ -9,7 +9,7 @@
 Activity Stream
 ---------------
 
-This screen is devoted to display notes.
+This screen is dedicated to the display of notes and certain modifications.
 
 To default you will see all visible notes for each items.
 
