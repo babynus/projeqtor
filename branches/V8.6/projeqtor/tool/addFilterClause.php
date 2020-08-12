@@ -161,6 +161,8 @@ if ($idFilterAttribute and $idFilterOperator) {
   if (count($split)>1 and !$foreignKey) {
   	$externalClass=$split[0];
     $externalObj=new $externalClass();
+    $foreignKey=$split[1];
+    $foreignKeyName=$externalObj->getColCaption($split[1]);
     $arrayDisp["attribute"]=$externalObj->getColCaption($split[1]);
   } else {
   	//echo  $idFilterAttribute . "=>" . $obj->getColCaption($idFilterAttribute);

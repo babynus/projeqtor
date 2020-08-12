@@ -100,6 +100,7 @@ class SqlList {
     $obj=new $listType();
     $calculated=false;
     $field=$obj->getDatabaseColumnName($displayCol);
+    debuglog("fetchList($listType,$displayCol) field=$field");
     if (property_exists($obj, '_calculateForColumn') and isset($obj->_calculateForColumn[$displayCol])) {
     	$field=$obj->_calculateForColumn[$displayCol];
     	$calculated=true;
@@ -349,6 +350,7 @@ class SqlList {
     if ($id==null or $id=='') {
       return '';
     }
+    debugLog("getFieldFromId($listType, $id, $field)");
     $name=$id;
     $list=self::getListNotTranslated($listType,$field, null, true);
     if (array_key_exists($id,$list)) {
