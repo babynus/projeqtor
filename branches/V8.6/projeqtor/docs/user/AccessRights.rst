@@ -67,9 +67,9 @@ Profiles
 
    * :ref:`profiles-definition`
 
-The profile is an entitlement group, each with specific access rights to the database.
+The profile is a group of rights. Each with specific access rights to the database.
 
-So, each user is linked to a profile which defines the data they can see and possibly manage. 
+Thus, each user is linked to a profile which defines the data that he can see and possibly manage. 
 
 .. figure:: /images/GUI/ACCESSRIGHT_SCR_Profiles.png 
    :alt: Profiles screen
@@ -191,7 +191,19 @@ The access mode defines a combination of rights to Created, Read, Update or Dele
 
 It's the CRUD RIGHTS
 
-Each access is defined as scope of visible and/or updatable, that can be, by kind of elements:
+Each access is defined as scope of visible and/or updatable, that can be, by kind of elements.
+
+
+
+
+Project dependant
+=================
+
+By default, ProjeQtOr offers 10 different access modes.
+
+Each access defines the visibility that can be applied by type of elements dependent on a project (activity, ticket, action, ...).
+
+You can choose from several levels of visibility for each CRUD entitlement.
 
 * **No element:** No element is visible and updatable.
 * **Own elements:** Only the elements created by the user.
@@ -204,13 +216,6 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
    :align: center 
    
    Access modes screen
-
-
-
-Project dependant
-=================
-
-
 
 
 
@@ -266,17 +271,34 @@ Project dependant
 Not project dependant
 =====================
 
-under construction
+The non-dependent elements of a project, such as organizations, parameters, lists of values, tools or even controls and automatisms can also be set with CRUD rights.
 
+These elements must be visible. So the reading right is granted on a basic basis.
 
+ProjeQtOr offers 5 different access modes where you can define creation, update and deletion rights.
 
+* **yes:** allows the right to ...
+* **no:** does not allow the right to ...
+* **Own elements:** Only the elements created by the user.
+* **Elements he is responsible for:** Only the elements the user is responsible for.
 
-
+.. figure:: /images/GUI/ACCESRIGHT_SCR_AccesModeND.png
+   :alt: Acces mode non dependant screen
+   
+   Acces mode non dependant screen*
+   
+You can then define a mode corresponding to the visibility rights that you wish to grant on each profile in the access to data not dependent on the project.
 
 .. index:: Access to data 
 
 Access to data
 --------------
+
+This screen allows to set element access mode for each profile.
+
+Allows to define scope of visibility  and/or updating of data in elements for users and resources.
+
+
 
 .. index:: Access to data (Project dependant)
 
@@ -285,8 +307,7 @@ Access to data
 Project dependant
 =================
 
-This screen allows to set element access mode for each profile.
-Allows to define scope of visibility  and/or updating of data in elements for users and resources.
+
 This screen is only for the elements reliant on a project.
 
 **For each element, selected the access mode granted to a profile.**
@@ -315,6 +336,11 @@ This screen is only for the elements not reliant on a project.
    :align: center
    
    Access to data (Not project dependant) screen
+
+Some features do not have a manager or are not linked specifically to a user profile, like messages, tools or even environmental parameters.
+
+Certain access modes are therefore not offered in the drop-down lists on certain elements of this screen.
+
 
 .. index:: Specific Access 
 

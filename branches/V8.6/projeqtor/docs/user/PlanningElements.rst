@@ -419,7 +419,6 @@ ProjeQtOr offers two types of milestone:
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
