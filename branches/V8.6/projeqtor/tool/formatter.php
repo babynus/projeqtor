@@ -712,8 +712,11 @@ function activityStreamDisplayHist ($hist,$origin){
     $gotoAndStyle='style="color:blue;cursor:pointer;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
   }
   $elementName = '<span '.$gotoAndStyle.'>'.i18n($objectClass).'&nbsp;#'.$objectId;
-  if ($origin=='activityStream') $elementName.=' - '.SqlList::getNameFromId($objectClass, $objectId).'</span>';
-  else $elementName.='</span>';
+  if ($origin=='activityStream') {
+    $elementName.=' - '.SqlList::getNameFromId($objectClass, $objectId).'</span>';
+  } else {
+    $elementName.='</span>';
+  }
   if($operation=='update' and $change=='idStatus'){
     $newStatus=new Status($newVal);
     $oldStatus=new Status($oldVal);
@@ -740,6 +743,8 @@ function activityStreamDisplayHist ($hist,$origin){
     $reftText=$elementName.':&nbsp;';
     $text=i18n('deletedElementStream');
     $icon=formatIcon("DeleteElement",22);
+  } else {
+    return;
   }
   
   if($origin=='objectStream'){
