@@ -344,7 +344,7 @@ function formatDateThumb($creationDate,$updateDate,$float='right',$size=22,$addN
 	  $res.=' onMouseOver="showBigImage(null,null,this,\''.$title.'\');" onMouseOut="hideBigImage();"';
 	}
 	$res.='>';
-	$res.="<div class='calendar$color$addName$size' style=';width:".$size."px;height:".$size."px;' >&nbsp;</div>";
+	$res.="<div class='calendar$color$addName$size' style=';width:".$size."px;height:".$size."px;".(($size==16)?'position:relative;top:4px;':'')."' >&nbsp;</div>";
 	$res.='</a>';
 	
   $month=getMonthName(substr($date, 5,2),5);
@@ -356,7 +356,13 @@ function formatDateThumb($creationDate,$updateDate,$float='right',$size=22,$addN
     $dispDate=substr($dispDate,0,5);
   }
   switch ($size) {
-	  case 22:
+    case 16:
+      $fontSize=0;
+      $width=14;
+      $float="float:right;";
+      $top=6;
+      break;
+    case 22:
 	    $fontSize=6.5;
 	    $width=20;
 	    $float="float:right;";
@@ -539,11 +545,12 @@ function privateFormatter($value) {
 
 function activityStreamDisplayNote ($note,$origin){
   global $print,$user, $userRessource;
-  
+  $inlineUserThumb=true;
   $rightWidthScreen=RequestHandler::getNumeric('destinationWidth');
   $userId = $note->idUser;
   $userName = SqlList::getNameFromId ( 'User', $userId );
-  $userNameFormatted = '<span ><strong>' . $userName . '</strong></span>';
+  if ($inlineUserThumb) $userNameFormatted = '<span style="position:relative;margin-left:20px"><div style="position:absolute;top:-1px;left:-20px;width:25px">'.formatUserThumb($note->idUser, $userName, 'Creator',16,'none').'&nbsp;</div><strong>' . $userName . '</strong></span>';
+  else $userNameFormatted = '<span ><strong>' . $userName . '</strong></span>';
   $idNote = '<span>#' . $note->id . '</span>';
   $ticketName = '<span class="streamLink" style="margin-left:18px;position:relative;" onClick="gotoElement(\''.htmlEncode($note->refType).'\',\''.htmlEncode($note->refId).'\')">' 
       .'<div style="width:16px;position:absolute">'. formatIcon($note->refType, 16) . '</div>' . i18n($note->refType) . ' #' . $note->refId ;
@@ -599,9 +606,11 @@ function activityStreamDisplayNote ($note,$origin){
     echo            formatPrivacyThumb($note->idPrivacy, $note->idTeam,16);
     echo '        </div>';
     echo '      </div>';
+    if (!$inlineUserThumb) {
     echo '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
     echo          formatUserThumb($note->idUser, $userName, 'Creator',22,'left');
     echo '      </div>';
+    }
     echo '    </div>';
      
     
@@ -636,12 +645,12 @@ function activityStreamDisplayNote ($note,$origin){
     }
     echo '<div class="activityStreamNoteContainer" style="padding-left:4px;max-width:'.$rightWidth.'">';
     $strDataHTML=$note->note;
-    echo '<div><div style="margin-top:2px;margin-left:37px;">'.(($origin!='objectStream')?$ticketName.":&nbsp;":"").$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
-  	echo '<div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($note->creationDate,$note->updateDate,"left").'</div>';
+    echo '<div><div style="margin-top:2px;margin-left:37px;">'.(($origin!='objectStream')?$ticketName."&nbsp;|&nbsp;":"").$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
+  	echo '<div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($note->creationDate,$note->updateDate,"left",16).'</div>';
   	if($note->updateDate){
-  	 echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->updateDate,true).'</div></div>';    	 
+  	 echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->updateDate,false).'</div></div>';    	 
     } else {
-     echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->creationDate,true).'</div></div>';
+     echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->creationDate,false).'</div></div>';
     }
     $noteImgWidth=intval($rightWidthScreen)-30;
     if ($origin=='activityStream') $noteImgWidth-=40;
@@ -671,6 +680,7 @@ function activityStreamDisplayNote ($note,$origin){
 function activityStreamDisplayHist ($hist,$origin){
   $text='';
   $reftText='';
+  $inlineUserThumb=true;
   $isAssign=false;
   $isAff=false;
   $isDovVers=false;
@@ -686,7 +696,8 @@ function activityStreamDisplayHist ($hist,$origin){
   $date=$hist->operationDate;
   $objectClass=$hist->refType;
   $objectId=$hist->refId;
-  $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
+  if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-20px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16,'none').'&nbsp;</div><strong>' . $userName . '</strong></span>';
+  else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
   if ($objectClass=='Note') return;                 // Already managed through other way
   if ($objectClass=='Link') return;                 // Will be displayed on each item
   if (substr($change,0,6)=='|Note|') return;        // Already managed through other way
@@ -695,12 +706,14 @@ function activityStreamDisplayHist ($hist,$origin){
     if($object->id!=''){
       switch ($objectClass){
       	case 'Affectation':
+      	  if (!$object->idResource) return;
       	  $isAff=true;
-      	  $resource= new Resource($object->idResource);
+      	  $resource= new Affectable($object->idResource);
       	  $objectClass='Project';
       	  $objectId=$object->idProject;
       	  break;
       	case 'Assignment':
+      	  if (!$object->idResource) return;
       	  $isAssign=true;
       	  $resource=new Resource($object->idResource);
       	  $objectClass=$object->refType;
@@ -754,10 +767,13 @@ function activityStreamDisplayHist ($hist,$origin){
     $icon=formatIcon("ChangedStatus",22);
   }else if($operation=='insert'){
     $reftText=$elementName.'&nbsp;|&nbsp;';
+    $icon=formatIcon("NewElement",22);
     if($isAssign){
       $text=i18n('assignResource').'&nbsp;'.$resourceName;
+      $icon=formatIcon("ChangedStatus",22);
     }else if($isAff){
       $text=i18n('addedAffResource').'&nbsp;'.$resourceName;
+      $icon=formatIcon("ChangedStatus",22);
     }else if($isDovVers){
       $text=i18n('addedDocVersion').'&nbsp;'.$docVers;
     }else if($isTestCaseRun){
@@ -768,7 +784,6 @@ function activityStreamDisplayHist ($hist,$origin){
     }else{
       $text=i18n('createdElementStream');
     }
-    $icon=formatIcon("NewElement",22);
   }else if($operation=='delete'){
     $reftText=$elementName.'&nbsp;|&nbsp;';
     $text=i18n('deletedElementStream');
@@ -776,6 +791,10 @@ function activityStreamDisplayHist ($hist,$origin){
     if($isLink){
       $text=i18n('deletedLink').'&nbsp;'.i18n($linkedClass).' #'.intval($linkedId);
       $icon=formatIcon("LinkStream",22);
+    } else if ($isAff) {
+      $icon=formatIcon("ChangedStatus",22);
+    } else if ($isAssign) {
+      $icon=formatIcon("ChangedStatus",22);
     }
   } else {
     return;
@@ -783,19 +802,23 @@ function activityStreamDisplayHist ($hist,$origin){
   
   if($origin=='objectStream'){
     echo '<tr style="height:100%;">';
-    echo '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;"">';
-    echo '    <div style="float:left;width:22px;">';
-    echo '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
+    echo '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;">';
+    echo '    <div style="float:left;">';
+    echo '      <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px;">';
+    echo '        <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';
     echo          $icon;
+    echo '        </div>';
     echo '      </div>';
+    if (! $inlineUserThumb) {
     echo '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
     echo          formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
     echo '      </div>';
+    }
     echo '    </div>';
-    echo '    <div style="float:left;">';
+    echo '    <div style="margin-left:0px;margin-top:6px;">';
     echo '      <div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp;'.$text.'</div>';
-    echo '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left").'</div>';
-    echo '      <div style="margin-top:8px;">'.htmlFormatDateTime($date,true).'</div>';
+    echo '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left",16).'</div>';
+    echo '      <div style="margin-top:8px;margin-bottom:5px">'.htmlFormatDateTime($date,false).'</div>';
     echo'     <div>';
     echo '  </td>';
     echo '</tr>';
@@ -803,17 +826,19 @@ function activityStreamDisplayHist ($hist,$origin){
     echo '<tr style="height:100%;">';
     echo '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;position:relative;">';
     echo '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
-    echo '      <div style="float:left;width:22px;max-width:26px">';
+    echo '      <div style="float:left;max-width:26px">';
     echo          $icon;
     echo '      </div>';
+    if (! $inlineUserThumb) {
     echo '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
     echo          formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
     echo '      </div>';
+    }
     echo '    </div>';    
-    echo '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;">';
+    echo '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;margin-bottom:6px;">';
     echo '      <div style="margin-top:2px;margin-left:10px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
-    echo '      <div style="margin-top:3px;margin-left:10px;">'.formatDateThumb($date,null,"left").'</div>';
-    echo '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,true).'</div>';
+    echo '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
+    echo '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
     echo'     <div>';
     if (Parameter::getGlobalParameter('logLevel')>=3) {
       echo '      <div style="position:absolute;right:10px;top:6px;color:grey">';
