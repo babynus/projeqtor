@@ -279,13 +279,9 @@ function calculListToSend($startDate, $endDate, &$lstRes, $incompleteResource, $
               	$full=false;
               }
             }
-//             if (isset($res['days'][$tmpDate]) and $res['days'][$tmpDate]['open']=='1' and ($res['days'][$tmpDate]['work'] - $res['capacity']) < 0 and ($res['days'][$tmpDate]['work'] < $res['capacity'])) {
-//             	$overCap=true;
-//             }
             $tmpDate=addDaysToDate($tmpDate, 1);
         }
         $lstRes[$idRes]['full']=$full;
-        //$lstRes[$idRes]['overCapacity']=$overCap;
         if (!$full) {
             $lstRes[$idRes]['workDetail']=getImputationSummary($res);
         } else {
