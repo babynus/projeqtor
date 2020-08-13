@@ -1434,7 +1434,8 @@ function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false,$textual
   	  $today=true;
   	  if ($textual) {
   	    $classicFormatDate=false;
-  	    $result=i18n("today").'&nbsp;';
+  	    $withSecond=false;
+  	    $result=i18n("today").'&nbsp;'.i18n('formatDateAt').'&nbsp;';
   	  } else { 
   	    $result=htmlFormatDate(substr($val,0,10)).'&nbsp;';
   	  }	  
@@ -1442,7 +1443,8 @@ function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false,$textual
   	case $yesterday:
   	  if ($textual) {
   	    $classicFormatDate=false;
-  	    $result=i18n("yesterday").'&nbsp;';
+  	    $withSecond=false;
+  	    $result=i18n("yesterday").'&nbsp;'.i18n('formatDateAt').'&nbsp;';
   	  } else {
   	    $result=htmlFormatDate(substr($val,0,10)).'&nbsp;';
   	  }
