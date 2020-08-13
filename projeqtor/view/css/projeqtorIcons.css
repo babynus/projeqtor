@@ -1367,6 +1367,14 @@
 .iconMessageStream22 { background-image: url(images/iconMessageStream.png);  background-size: 22px 22px;}
 .iconMessageStream32 { background-image: url(images/iconMessageStream.png);  background-size: 32px 32px;}
 
+.iconLinkStream16 { background-image: url(images/iconLink.png);  background-size: 16px 16px;}
+.iconLinkStream22 { background-image: url(images/iconLink.png);  background-size: 22px 22px;}
+.iconLinkStream32 { background-image: url(images/iconLink.png);  background-size: 32px 32px;}
+
+.iconAttachStream16 { background-image: url(images/iconAttach.png);  background-size: 16px 16px;}
+.iconAttachStream22 { background-image: url(images/iconAttach.png);  background-size: 22px 22px;}
+.iconAttachStream32 { background-image: url(images/iconAttach.png);  background-size: 32px 32px;}
+
 .iconDisplayMore16 { background-image: url(images/iconDisplayMore.png);  background-size: 16px 16px;}
 .iconDisplayMore32 { background-image: url(images/iconDisplayMore.png);  background-size: 32px 32px;}
 .iconReduceDisplay16 { background-image: url(images/iconReduceDisplay.png);  background-size: 16px 16px;}
