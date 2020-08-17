@@ -50,7 +50,9 @@
    :scale: 60   
    
    
-   
+.. |change| image:: images/iconChangedStatus.png
+	:alt: Change status
+	:scale: 60   
 
 
 .. |support| image:: images/iconSupport.png
@@ -101,8 +103,39 @@
 	:alt: Hide stream top	
 
 .. |ActivityStream| image:: images/iconActivityStream.png	
-	:alt: Show/Hide Activity Stream	
+	:alt: Show Activity Stream	
 
+.. |NoActivityStream| image:: images/iconActivityStreamClose.png
+	:alt: Hide Activity Stream	
+	
+.. |LeftActivityStream| image:: images/changeActivityStream.png	
+	:alt: Left zone Activity Stream	
+
+.. |BottomActivityStream| image:: images/changeActivityStreamBot.png
+	:alt: Bottom zone Activity Stream
+
+.. |MessageStream| image:: images/iconMessageStream.png
+	:alt: Message Activity Stream	
+	:scale: 60
+
+.. |CreateStream| image:: images/iconNewElement.png
+	:alt: Creation on Activity Stream
+	:scale: 60
+
+.. |EditStream| image:: images/iconChangedStatus.png
+	:alt: Modification on Activity Stream
+	:scale: 60
+	
+.. |DeleteStream| image:: images/iconDeleteElement.png
+	:alt: Deletion on Activity Stream
+	:scale: 60
+
+.. |ShareStream| image:: images/ActivityStreamShare.PNG	
+	:alt: Public Share
+	
+.. |PrivateStream| image:: images/PrivateStream.png	
+	:alt: Private note	
+				
 .. |FullScreen| image:: images/iconFullScreen.png	
 	:alt: Full screen	
 	

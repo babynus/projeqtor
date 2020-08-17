@@ -48,7 +48,7 @@ We offer you a small overview of the major developments and you will find the fu
    .. image:: /images/iconCatalogUO.png
       :align: center
 
-   Manage the turnover of a project and its consistency with the financial elements of the project.
+   You can now manage the turnover of a project and its consistency with the financial elements of the project.
          
    :ref:`revenue-managment` & :ref:`work-unit-catalog`
    
