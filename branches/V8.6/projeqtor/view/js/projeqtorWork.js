@@ -799,10 +799,16 @@ function selectInterventionActivity(refType,refId,peId) {
   dojo.query(".interventionActivitySelector").forEach(function(node, index, nodelist) {
     dojo.removeClass(node,'dojoxGridRowSelected');
   });
+  dojo.query(".iconGoto").forEach(function(node, index, nodelist) {
+  	dojo.removeClass(node,'iconGotoWhite16');
+    });
   if (mode=='select') {
     dojo.query(".interventionActivitySelector"+peId).forEach(function(node, index, nodelist) {
       dojo.addClass(node,'dojoxGridRowSelected');
     });
+    dojo.query(".iconGoto").forEach(function(node, index, nodelist) {
+    	dojo.addClass(node,'iconGotoWhite16');
+      });
   }
   saveDataToSession('selectActivityPlannedWorkManual', refId);
 }

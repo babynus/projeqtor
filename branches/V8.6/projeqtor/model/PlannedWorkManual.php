@@ -583,7 +583,18 @@ class PlannedWorkManual extends GeneralWork {
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$nameWidth.'px">'.$projList[$pe->idProject].'</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" >#'.$pe->refId.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" >'.$colorBadge.'</td>';
-      echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >'.$pe->refName.'</td>';
+      echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >';
+      echo '  <table><tr>';
+      echo '          <td style="width:99%">'.$pe->refName.'</td>';
+      $goto=($readonly or $readonlyHabil)?'':'Onclick="gotoElement('."'".$pe->refType."','".htmlEncode($pe->refId)."'".');"';
+      if($class=='dojoxGridRowSelected'){
+        $iconGoto='<div class="iconGotoWhite16 iconGoto iconSize16" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
+      }else{
+        $iconGoto='<div class="iconGoto16 iconGoto iconSize16" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
+      }
+      echo '          <td '.$goto.' style="width:1%;" >'.$iconGoto.'</td>';
+      echo '  </tr></table>';
+      echo '</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="text-align:center;margin:0;padding;0;width:'.$idWidth.'px">';
       if(!$readonly and !$readonlyHabil){
         if($valueFte==0)$valueFte=null;
