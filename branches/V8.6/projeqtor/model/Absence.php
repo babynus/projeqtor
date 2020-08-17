@@ -214,7 +214,7 @@ class Absence{
       $result .='<table align="left" style="margin-top:20px; margin-left:100px;">';
       $result .=' <tr>';
       $unitAbs = Parameter::getGlobalParameter('imputationUnit');
-      $result .='   <td style="margin-top:10px; height:20px;">'.i18n('dailyAbsenceDuration');
+      $result .='   <td style="margin-top:10px; height:20px;">'.ucfirst(i18n('dailyAbsenceDuration')).'&nbsp;:';
       $result .='     <div id="absenceInput" name="absenceInput" value="'.$max.'"
                     		  dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:'.$max.'}"  required="true"
                     		      style="width:30px; margin-top:4px; height:20px;">';
@@ -228,18 +228,18 @@ class Absence{
       }
       $result .=' </tr>';
       $result .=' <tr style="height:20px">';
-      $result .='   <td colspan="3" style="padding-top:5px;text-align:right">';
-      $result .='   <span id="absButton_1" style="width:40px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.$max
+      $result .='   <td colspan="3" style="padding-top:5px;text-align:right">'.ucfirst(i18n('duration')).'&nbsp;:';
+      $result .='   <span id="absButton_1" style="width:55px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonFull')
               . '     <script type="dojo/method" event="onClick" >'
               . '        dijit.byId("absenceInput").setAttribute("value" ,'.$max.');'
               . '     </script>'
               . '   </span>&nbsp;';
-      $result .='   <span id="absButton_0_5" style="width:40px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.($max/2)
+      $result .='   <span id="absButton_0_5" style="width:55px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonHalf')
               . '     <script type="dojo/method" event="onClick" >'
               . '       dijit.byId("absenceInput").setAttribute("value" , '.($max/2).');'
               . '     </script>'
               . '    </span>&nbsp;';
-      $result .='   <span id="absButton_0" style="width:40px;" type="button" dojoType="dijit.form.Button" showlabel="true">0'
+      $result .='   <span id="absButton_0" style="width:55px;" type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonNone')
               . '     <script type="dojo/method" event="onClick" >'
               . '       dijit.byId("absenceInput").setAttribute("value" ,0);'
               . '     </script>'
