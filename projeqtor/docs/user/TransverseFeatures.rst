@@ -9,35 +9,99 @@
 Activity Stream
 ---------------
 
-This screen is dedicated to the display of notes and certain modifications.
+The Activity stream allows you to display certain information about each of the elements of ProjeQtOr. 
 
-To default you will see all visible notes for each items.
+It is a kind of light history which allows you to quickly see the information of creation, deletion, changes of state of the element or the comments left by users according to their right of visibility.
 
-There are filters to refine the search.
-
-.. figure:: /images/GUI/TRANSFEAT_ZONE_ActivityStream.png
+.. figure:: /images/GUI/TRANSFEAT_SCR_ActivityStream.png
    :alt: Task list zone
    :align: center
+   
+The screen dedicated to the Activity Stream allows you to view all the feeds. 
+
+ .. compound:: Filter system 
+ 
+   This filter allows you to restrict the display by ...
+   
+   * Author and team
+   * Type of element and / or its id
+   * Periods and durations
+
+   You can also select the amount of information to display and restrict the list to the screen. 
+   
+   
+ .. compound:: Show/Hide notes   
+   
+   Likewise, it is possible to view the notes directly by using the following buttons
+
+   * Click on |buttonCollapseClose|  to hide note comment.  
+   * Click on |buttonCollapseOpen|  to display note comment.
+
+   By default, you will see all visible notes for each item.
+
+   * Click on **Show only notes on activity feed** to display only notes type information.
 
 
-.. note::
+ .. compound:: Elements displayed
+ 
+   We can see on this summary several elements:
+   
+   * The creator of the note
+   * The ID of the note
+   * The element and its ID on which the note was created
+   * The date and time of creation of the note
+   * And the note itself - option enabled
 
-  * Click on |buttonCollapseClose|  to hide note comment.  
-  * Click on |buttonCollapseOpen|  to display note comment.
 
+.. rubric:: Activity Stream on element screen
 
-.. figure:: /images/GUI/TRANSFEAT_ZONE_ActivityStream_Details.png
+You can view the Activity Stream for each element on the screen of the latter.
 
-in either case, the notes are displayed or not.
+.. figure:: /images/GUI/TRANSFEAT_SCR_ShowActivityStream.PNG
+   :alt: Activity stream on the screen of a ticket element
+   
+   Activity stream on the screen of a ticket element 
 
-.. rubric:: We can see on this summary several elements displayed:
+The items displayed depend on your visibility rights.
 
-* The creator of the note,
-* The ID of the note
-* The element and its ID on which the note was created
-* the date and time of creation of the note
-* and the note itself - option enabled
+ .. compound:: Activity stream zone
+ 
+   * Click on |ActivityStream| to display the Activity stream zone.
+   * Click on |NoActivityStream| to hide it.
+   * Click on |LeftActivityStream| to choose the location of the zone on the left of the page
+   * Click on |BottomActivityStream| to choose the location of the zone at the bottom of the page
 
+ .. compound:: Activity stream information
+ 
+   .. figure:: /images/GUI/TRANSFEAT_ZONE_ActivityStream_Details.PNG
+      :alt: Activity stream details
+            
+      Activity stream details
+            
+            
+   In the activity stream area you can view the same information as on the dedicated screen. 
+
+   * The author of the information relayed with his profile icon
+   * The type of information displayed: creation, deletion, change of state or comments
+   * The date and time of the modification
+
+      .. compound:: Icon for type of information
+   
+         * |MessageStream| Note/Comment
+         * |CreateStream| Creation
+         * |EditStream| Modification/Change of state
+         * |DeleteStream| Deletion
+      
+
+ .. compound:: Add a note 
+ 
+   You can add a note simply by clicking in the text box at the bottom of the activity stream area.
+   
+   By default, your note is visible to all users assigned to the project linked to the item.
+
+   * Click on |ShareStream| to make your note private
+
+   * Click on |PrivateStream| to return to public mode
 
 .. raw:: latex
 
@@ -64,18 +128,3 @@ You can also choose to display only certain items through the list to display
    
    Display one or more items
    
-   
-Chat
-----
-
-Display of notes on right part of screen.
-
-The chat displays notes on the selected item.
-
-Possibility to quickly add note, write your text and press 'Enter' key.
-
-You can change the visibility of the note if you click on the bottom right corner.
-
-* Click on |iconHideStream|  to hide or display the chat.
-
-.. figure:: /images/GUI/TRANSFEAT_ZONE_ChatActivityStream.png
