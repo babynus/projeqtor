@@ -21,8 +21,8 @@ Sending mails, changes of status, status, loading of notes ...
 
 .. _workflow:
 
-Workflows
----------
+Workflow
+--------
 
 .. sidebar:: Concepts 
 

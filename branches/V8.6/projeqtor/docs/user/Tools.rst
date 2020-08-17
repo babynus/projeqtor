@@ -573,9 +573,7 @@ You can also track requests from other users based on your profiles and your rig
    
    
    
-   .. warning:: 
-
-   The CRON program must be started and running so that the simulation request can be taken into account and can be generated.
+   .. warning:: The CRON program must be started and running so that the simulation request can be taken into account and can be generated.
 
 
 
