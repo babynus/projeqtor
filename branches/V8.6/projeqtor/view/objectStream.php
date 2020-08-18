@@ -55,7 +55,7 @@
   }
   
   $enterTextHere = '<p style="color:red;">'.i18n("textareaEnterText").'</p>';
-  $noNotes = "<div style='padding:10px'>".i18n("noNote").'</div>';
+  $noNotes = "<div style='padding:10px'>".i18n("noNoteToDisplay").'</div>';
   // get the modifications (from request)
   $note=new Note();
   $obj=new $objectClass($objectId,true);
