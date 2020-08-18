@@ -5187,7 +5187,7 @@ abstract class SqlElement {
           continue; // exist : not corresponding type
         }
       }
-      if ($statusMail->mailToUser == 0 and $statusMail->mailToAccountable == 0 and $statusMail->mailToResource == 0 and $statusMail->mailToProject == 0 and $statusMail->mailToLeader == 0 and $statusMail->mailToContact == 0 and $statusMail->mailToOther == 0 and $statusMail->mailToManager == 0 and $statusMail->mailToAssigned == 0 and $statusMail->mailToSubscribers == 0 and $statusMail->mailToSponsor == 0 and $statusMail->mailToProjectIncludingParentProject == 0) {
+      if ($statusMail->mailToUser == 0 and $statusMail->mailToAccountable == 0 and $statusMail->mailToResource == 0 and $statusMail->mailToProject == 0 and $statusMail->mailToLeader == 0 and $statusMail->mailToContact == 0 and $statusMail->mailToOther == 0 and $statusMail->mailToManager == 0 and $statusMail->mailToAssigned == 0 and $statusMail->mailToSubscribers == 0 and $statusMail->mailToSponsor == 0 and $statusMail->mailToProjectIncludingParentProject == 0 and $statusMail->mailToFinancialResponsible == 0) {
         continue; // exit not a status for mail sending (or disabled)
       }
       if ($statusMail->mailToUser) {
@@ -5321,6 +5321,16 @@ abstract class SqlElement {
             $destTab[$emailTemplateTab[$i]->id] .= $newDest;
           }
         }
+      }
+      if ($statusMail->mailToFinancialResponsible) {
+      	if (property_exists ( $this, 'idResponsible' )) {
+      		$responsible = new Resource ( $this->idResponsible );
+      		$newDest = "###" . $responsible->email . "###";
+      		if ($responsible->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+      			$destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
+      			$destTab[$emailTemplateTab[$i]->id] .= $newDest;
+      		}
+      	}
       }
       if ($statusMail->mailToOther) {
         if ($statusMail->otherMail) {
