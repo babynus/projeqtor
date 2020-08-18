@@ -53,6 +53,7 @@ class StatusMail extends SqlElement {
   public $mailToManager;
   public $mailToAssigned;
   public $mailToSubscribers;
+  public $mailToFinancialResponsible;
   public $mailToOther;
   public $otherMail;
   public $isProject;
@@ -75,7 +76,8 @@ class StatusMail extends SqlElement {
     <th field="mailToLeader" width="5%" formatter="booleanFormatter" >${mailToLeader}</th>
     <th field="mailToManager" width="5%" formatter="booleanFormatter" >${mailToManager}</th>
     <th field="mailToAssigned" width="5%" formatter="booleanFormatter" >${mailToAssigned}</th>
-    <th field="mailToSubscribers" width="5%" formatter="booleanFormatter" >${mailToSubscribers}</th>  
+    <th field="mailToSubscribers" width="5%" formatter="booleanFormatter" >${mailToSubscribers}</th>
+    <th field="mailToFinancialResponsible" width="5%" formatter="booleanFormatter" >${mailToFinancialResponsible}</th>  
     <th field="mailToOther" width="5%" formatter="booleanFormatter" >${mailToOther}</th>
     <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>
     ';
@@ -88,7 +90,8 @@ class StatusMail extends SqlElement {
                                   "isProject"=>"hidden",
                                   "mailToProjectIncludingParentProject" => "nobr",
                                   "mailToAccountable"=>"invisible",
-                                  "mailToAssigned"=>"invisible"
+                                  "mailToAssigned"=>"invisible",
+                                  "mailToFinancialResponsible"=>"invisible"
   );  
   
   private static $_colCaptionTransposition = array('idStatus'=>'newStatus',
@@ -128,6 +131,11 @@ class StatusMail extends SqlElement {
         self::$_fieldsAttributes["mailToAssigned"]='invisible';
       } else {
         self::$_fieldsAttributes["mailToAssigned"]='';
+      }
+      if ($mailable=="IndividualExpense" or $mailable=="ProjectExpense") {
+      	self::$_fieldsAttributes["mailToFinancialResponsible"]='';
+      } else {
+      	self::$_fieldsAttributes["mailToFinancialResponsible"]='invisible';
       }
       if (Parameter::getGlobalParameter('manageAccountable')!='YES') {
         self::$_fieldsAttributes["mailToAccountable"]='invisible';
@@ -309,6 +317,13 @@ class StatusMail extends SqlElement {
       $colScript .= '  } else {';
       $colScript .= '    dijit.byId("mailToAssigned").set("checked",false);';
       $colScript .= '    dojo.query(".mailToAssignedClass").forEach(function(domNode){domNode.style.display="none";});';
+      $colScript .= '  }';
+      $colScript .= '  if (mailable=="IndividualExpense" || mailable=="ProjectExpense") {';
+      $colScript .= '    dojo.query(".generalRowClass.mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="table-row";});';
+      $colScript .= '    dojo.query(".generalColClass.mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="inline-block";});';
+      $colScript .= '  } else {';
+      $colScript .= '    dijit.byId("mailToFinancialResponsible").set("checked",false);';
+      $colScript .= '    dojo.query(".mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="none";});';
       $colScript .= '  }';
       $colScript .= ' if(isAccountableArray[mailable]==mailable) {';
       $colScript .= '    dojo.query(".generalRowClass.mailToAccountableClass").forEach(function(domNode){domNode.style.display="table-row";});';

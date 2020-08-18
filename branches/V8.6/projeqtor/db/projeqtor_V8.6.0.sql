@@ -265,6 +265,8 @@ ADD COLUMN `lastUpdateDateTime` datetime DEFAULT NULL;
 
 UPDATE `${prefix}menu` set level='ReadWriteType', idle=0, menuClass='Type' WHERE id IN (229,236,226);
 
+ALTER TABLE `${prefix}statusmail` ADD COLUMN `mailToFinancialResponsible` int(1) unsigned default 0 COMMENT '1';
+
 -- ==========================================
 -- Patchs IGE
 -- ==========================================
