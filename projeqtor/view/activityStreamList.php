@@ -113,7 +113,7 @@ $critWhere="1=1";
 $where="1=1";
 if (trim($paramAuthorFilter)!="") {
 	$critWhere.=" and idUser=$paramAuthorFilter";
-	$where.="and idUser=$paramAuthorFilter";
+	$where.=" and idUser=$paramAuthorFilter";
 }
 
 if (trim($paramTeamFilter)!="") {
@@ -142,7 +142,6 @@ if ($paramProject!='*') {
 } else {
 	$critWhere.=" and (idProject is null or idProject in ".getVisibleProjectsList($paramProject).')';
 }
-
 
 if ($activityStreamNumberDays!==""){
   if (Sql::isPgsql()) {
@@ -200,7 +199,7 @@ if($showOnlyNotes=='NO'){
     if(!empty($historyInfoArchive)){
       foreach ($historyInfoArchive as $histArch){
         foreach ($historyInfo as $hist){
-          if($hist->operationDate<$histArch->operationDate){
+          if($hist->operationDate>$histArch->operationDate){
             $historyInfoLst[]=$hist;
           }else{
             $historyInfoLst[]=$histArch;
@@ -214,6 +213,18 @@ if($showOnlyNotes=='NO'){
     $historyInfoLst=$historyInfo;
   }
 }
+if($paramProject!='*'){
+  $paramProject=explode(',', $paramProject);
+  foreach ($historyInfoLst as $id=>$his){
+    if(!in_array(SqlList::getFieldFromId($his->refType,$his->refId , 'idProject'), $paramProject)){
+      unset($historyInfoLst[$id]);
+      continue;
+    }
+    debugLog('id -> '.$his->refId.' objet -> '.$his->refType);
+    debugLog(in_array(SqlList::getFieldFromId($his->refType,$his->refId , 'idProject'),$paramProject));
+  }
+}
+
 $countIdNote = count ( $notes );
 $nbHistInfo= count($historyInfoLst);
 if ($countIdNote == 0 and $nbHistInfo==0) {
