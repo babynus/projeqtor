@@ -209,6 +209,7 @@ if ($typeSendMail=="User") {
   $mailToManager=(array_key_exists('dialogMailToManager', $_REQUEST))?true:false;
   $mailToAssigned=(array_key_exists('dialogMailToAssigned', $_REQUEST))?true:false;
   $mailToSubscribers=(array_key_exists('dialogMailToSubscribers', $_REQUEST))?true:false;
+  $mailToFinancialResponsible=(array_key_exists('dialogMailToFinancialResponsible', $_REQUEST))?true:false;
   $mailToOther=(array_key_exists('dialogMailToOther', $_REQUEST))?true:false;
   $otherMail=(array_key_exists('dialogOtherMail', $_REQUEST))?$_REQUEST['dialogOtherMail']:'';
   $otherMail=str_replace('"', '', $otherMail);
@@ -227,6 +228,7 @@ if ($typeSendMail=="User") {
   $directStatusMail->mailToLeader=$mailToLeader;
   $directStatusMail->mailToManager=$mailToManager;
   $directStatusMail->mailToSubscribers=$mailToSubscribers;
+  $directStatusMail->mailToFinancialResponsible=$mailToFinancialResponsible;
   $directStatusMail->mailToOther=$mailToOther;
   $directStatusMail->mailToAssigned=$mailToAssigned;
   $directStatusMail->otherMail=$otherMail;
