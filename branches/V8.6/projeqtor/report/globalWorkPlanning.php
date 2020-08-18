@@ -26,9 +26,6 @@
 
 include_once '../tool/projeqtor.php';
 
-debugLog($_REQUEST);
-
-
 $idProject="";
 if (array_key_exists('idProject',$_REQUEST) and trim($_REQUEST['idProject'])!="") {
   $idProject=trim($_REQUEST['idProject']);
