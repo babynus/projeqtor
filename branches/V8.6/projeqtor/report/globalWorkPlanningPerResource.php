@@ -47,6 +47,7 @@ if (array_key_exists('weekSpinner',$_REQUEST)) {
 	$paramWeek=Security::checkValidWeek($paramWeek);
 };
 $idOrganization = trim(RequestHandler::getId('idOrganization'));
+$showAdminProj=trim(RequestHandler::getValue('showAdminProj'));
 $paramTeam='';
 if (array_key_exists('idTeam',$_REQUEST)) {
   $paramTeam=trim($_REQUEST['idTeam']);
@@ -88,13 +89,16 @@ include "header.php";
 $user=getSessionUser();
 $queryWhere=getAccesRestrictionClause('Activity','t1',false,true,true);
 
-// if ($idResource!='') {
-//   $queryWhere.=  " and t1.idResource in " . getVisibleProjectsList(true, $idResource) ;
-// } else {
+if ($idResource!='') {
+  $queryWhere.=  " and t1.idResource in " . getVisibleProjectsList(true, $idResource) ;
+} 
 //   //
 // }
 // Remove Admin Projects : should not appear in Work Plan
-///$queryWhere.= " and t1.idResource not in " . Project::getAdminitrativeProjectList() ;
+if($showAdminProj !='on'){
+  $queryWhere.= " and t1.idResource not in " . Project::getAdminitrativeProjectList() ;
+}
+
 
 if ($paramYear) {
 	$queryWhere.=  " and year=".Sql::str($paramYear);
