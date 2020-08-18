@@ -4538,7 +4538,7 @@ function connect(resetPassword) {
 function addNewItem(item) {
   var objectClass=dojo.byId('objectClass').value;
   var currentItem=historyTable[historyPosition];
-  var currentScreen=currentItem[2];
+  var currentScreen=(currentItem!==undefined)?currentItem[2]:'';
   if((currentScreen=="VersionsPlanning" || currentScreen=="ResourcePlanning") && objectClass!="Activity"){
     showAlert(i18n('alertActivityVersion'));
     return;
