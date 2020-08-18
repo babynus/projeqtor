@@ -26,6 +26,9 @@
 
 include_once '../tool/projeqtor.php';
 
+debugLog($_REQUEST);
+
+
 $idProject="";
 if (array_key_exists('idProject',$_REQUEST) and trim($_REQUEST['idProject'])!="") {
   $idProject=trim($_REQUEST['idProject']);
@@ -47,6 +50,7 @@ if (array_key_exists('weekSpinner',$_REQUEST)) {
 	$paramWeek=Security::checkValidWeek($paramWeek);
 };
 $idOrganization = trim(RequestHandler::getId('idOrganization'));
+$showAdminProj=trim(RequestHandler::getValue('showAdminProj'));
 $paramTeam='';
 if (array_key_exists('idTeam',$_REQUEST)) {
   $paramTeam=trim($_REQUEST['idTeam']);
@@ -96,7 +100,10 @@ if ($idProject!='') {
   //
 }
 // Remove Admin Projects : should not appear in Work Plan
-$queryWhere.= " and t1.idProject not in " . Project::getAdminitrativeProjectList() ;
+if($showAdminProj !='on'){
+  $queryWhere.= " and t1.idProject not in " . Project::getAdminitrativeProjectList() ;
+}
+
 
 if ($paramYear) {
 	$queryWhere.=  " and year=".Sql::str($paramYear);

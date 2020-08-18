@@ -267,6 +267,14 @@ UPDATE `${prefix}menu` set level='ReadWriteType', idle=0, menuClass='Type' WHERE
 
 ALTER TABLE `${prefix}statusmail` ADD COLUMN `mailToFinancialResponsible` int(1) unsigned default 0 COMMENT '1';
 
+-- Add parameter for reports
+
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
+(19, 'showAdminProj', 'boolean', 100, 0, 0, 0),
+(20, 'showAdminProj', 'boolean', 100, 0, 0, 0),
+(76, 'showAdminProj', 'boolean', 100, 0, 0, 0),
+(77, 'showAdminProj', 'boolean', 100, 0, 0, 0);
+
 -- ==========================================
 -- Patchs IGE
 -- ==========================================
