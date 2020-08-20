@@ -24,7 +24,7 @@
 * about contributors at http://www.projeqtor.org
 *
 *** DO NOT REMOVE THIS NOTICE ************************************************/
-
+header ('Content-Type: application/json',true);
 // For security reasons, this code can be disabled to avoid API access
 // To disable API, just add $paramDisableAPI=true; in your parameters.php file
 if (isset($paramDisableAPI) and $paramDisableAPI) {
@@ -79,7 +79,6 @@ if (!$user->id) {
 }
 traceLog ("API : mode=".$_SERVER['REQUEST_METHOD']." user=$user->name, id=$user->id, profile=$user->idProfile");
 setSessionUser($user);
-
 if ($_SERVER['REQUEST_METHOD']=='GET') {
   // GET method : security => class is checked, id is numerically filtered, access right is applied
   if (isset($_REQUEST['uri'])) { 
