@@ -365,13 +365,23 @@ class SqlList {
     return $name;
   }
  
-  public static function getIdFromName($listType, $name) {
+  public static function getIdFromName($listType, $name, $noCache=false) {
     if ($name==null or $name=='') {
       return '';
     } 
-    $list=self::getList($listType);      
-    $id=array_search($name,$list);
-    return $id;
+    if ($noCache) {
+      $crit=array("name"=>$name);
+      $item=SqlElement::getSingleSqlElementFromCriteria($listType, $crit);
+      if ($item and $item->id) {
+        return $item->id;
+      } else {
+        return null;
+      }
+    } else {
+      $list=self::getList($listType);      
+      $id=array_search($name,$list);
+      return $id;
+    }
   }
   
   public static function getIdFromTranslatableName($listType, $name) {
