@@ -662,11 +662,14 @@ function addNewLinkMeeting (item,comboName,idProj){
               return;
             }
             contentWidget.set('content', data);
-            var lastOperationStatus=window.top.dojo
-                .byId('lastOperationStatus');
+            var lastOperationStatus=window.top.dojo.byId('lastOperationStatus');
             var lastSaveId=window.top.dojo.byId('lastSaveId');
             if (lastOperationStatus.value == "OK") {
               selectDetailItem(lastSaveId.value,objName);
+            } else {
+              consoleTraceLog("Error on addNewLinkMeeting() : return from saveLiveMeetingAttachment.php is not in status OK");
+              showAlert(data);
+              dojo.byId("resultDivMain").style.display='block';
             }
             hideWait();
           },
