@@ -191,11 +191,13 @@ $order = "COALESCE (updateDate,creationDate) DESC";
 $notes=$note->getSqlElementsFromCriteria(null,false,$critWhere,$order,null,null,$activityStreamNumberElement);
 $history= new History();
 $historyInfoLst=array();
+
 if($showOnlyNotes=='NO'){
   $historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
   if($activityStreamShowClosed =='1'){
     $historyArchive=new HistoryArchive();
     $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
+    debugLog($historyInfoArchive);
     if(!empty($historyInfoArchive)){
       foreach ($historyInfoArchive as $histArch){
         foreach ($historyInfo as $hist){
@@ -224,7 +226,6 @@ if($paramProject!='*'){
     debugLog(in_array(SqlList::getFieldFromId($his->refType,$his->refId , 'idProject'),$paramProject));
   }
 }
-
 $countIdNote = count ( $notes );
 $nbHistInfo= count($historyInfoLst);
 if ($countIdNote == 0 and $nbHistInfo==0) {
