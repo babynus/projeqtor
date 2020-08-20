@@ -191,13 +191,15 @@ $order = "COALESCE (updateDate,creationDate) DESC";
 $notes=$note->getSqlElementsFromCriteria(null,false,$critWhere,$order,null,null,$activityStreamNumberElement);
 $history= new History();
 $historyInfoLst=array();
+$idSubProjectList=array();
+$limliteActiviProj= true;
 
 if($showOnlyNotes=='NO'){
   $historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
   if($activityStreamShowClosed =='1'){
+    $limliteActiviProj=false;
     $historyArchive=new HistoryArchive();
     $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
-    debugLog($historyInfoArchive);
     if(!empty($historyInfoArchive)){
       foreach ($historyInfoArchive as $histArch){
         foreach ($historyInfo as $hist){
@@ -215,17 +217,43 @@ if($showOnlyNotes=='NO'){
     $historyInfoLst=$historyInfo;
   }
 }
+
 if($paramProject!='*'){
   $paramProject=explode(',', $paramProject);
+  foreach ($paramProject as $idP){
+    $proj= new Project($idP);
+    $subProjectList=$proj->getRecursiveSubProjectsFlatList($limliteActiviProj);
+    foreach ($subProjectList as $idSubrProj=>$nameSubProj){
+      $idSubProjectList[]=$idSubrProj;
+    }
+  }
+  foreach ($paramProject as $idTP=>$idProjSelector){
+    foreach ($idSubProjectList as $idTab=>$idSubProj){
+      if($idSubProj==$idProjSelector){
+        unset($idSubProjectList[$idTab]);
+        continue;
+      }else{
+        $paramProject[]=$idSubProj;
+        unset($idSubProjectList[$idTab]);
+        continue;
+      }
+    }
+  }
   foreach ($historyInfoLst as $id=>$his){
-    if(!in_array(SqlList::getFieldFromId($his->refType,$his->refId , 'idProject'), $paramProject)){
+    $obj= new $his->refType ();
+    $idProject=SqlElement::getRefField($his->refType,$his->refId , 'idProject');
+    if(!$idProject){
       unset($historyInfoLst[$id]);
       continue;
+    }else{
+      if(!in_array($idProject, $paramProject)){
+        unset($historyInfoLst[$id]);
+        continue;
+      }
     }
-    debugLog('id -> '.$his->refId.' objet -> '.$his->refType);
-    debugLog(in_array(SqlList::getFieldFromId($his->refType,$his->refId , 'idProject'),$paramProject));
   }
 }
+
 $countIdNote = count ( $notes );
 $nbHistInfo= count($historyInfoLst);
 if ($countIdNote == 0 and $nbHistInfo==0) {
