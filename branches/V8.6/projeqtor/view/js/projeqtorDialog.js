@@ -9222,7 +9222,7 @@ function showBigImage(objectClass, objectId, node, title, hideImage, nocache) {
           + '</div>';
     }
     var topPx=(top - 40 + (height / 2)) + "px";
-    var leftPx=(left - 85) + "px";
+    var leftPx=(left - 125) + "px";
     if (parseInt(leftPx)<3) {
       leftPx=(left+width+5)+"px";
     }

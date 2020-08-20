@@ -696,13 +696,15 @@ function activityStreamDisplayHist ($hist,$origin){
   $date=$hist->operationDate;
   $objectClass=$hist->refType;
   $objectId=$hist->refId;
-  if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-20px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16,'none').'&nbsp;</div><strong>' . $userName . '</strong></span>';
-  else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
   if ($objectClass=='Note') return;                 // Already managed through other way
   if ($objectClass=='Link') return;                 // Will be displayed on each item
   if (substr($change,0,6)=='|Note|') return;        // Already managed through other way
+  if(substr($hist->refType, -15) == 'PlanningElement')return;
+  if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-20px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16,'none').'&nbsp;</div><strong>' . $userName . '</strong></span>';
+  else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
   if(($objectClass=='Affectation' or $objectClass=='Assignment' or $objectClass=='DocumentVersion') and $operation!='delete'){
     $object= new $objectClass($objectId);
+    debugLog($object->id);
     if($object->id!=''){
       switch ($objectClass){
       	case 'Affectation':
