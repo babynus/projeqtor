@@ -462,7 +462,7 @@ class Importable extends SqlElement {
 							    }
 							  }
 							} else {
-						    $obj->$fldName = SqlList::getIdFromName(substr($fldName, 2), $field);
+						    $obj->$fldName = SqlList::getIdFromName(substr($fldName, 2), $field, (($fldName=='id'.get_class($obj))?true:false));
 							}
 						} else {
 							$obj->$fldName = $field;
