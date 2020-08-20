@@ -260,7 +260,7 @@ function formatIconThumb($value,$size,$float) {
 function formatUserThumb($userId,$userName,$title,$size=22,$float='right',$alwaysDisplayBigImage=false,$idTicket=-1) {
 	global $print;
 	if ($print) return "";//$userName;
-  if (! $userId) return '';
+    if (! $userId) return '';
 	$radius=round($size/2,0);
 	$file=Affectable::getThumbUrl('Affectable', $userId, $size);
 	$searchNocache=strpos($file,'?');
@@ -549,7 +549,7 @@ function activityStreamDisplayNote ($note,$origin){
   $rightWidthScreen=RequestHandler::getNumeric('destinationWidth');
   $userId = $note->idUser;
   $userName = SqlList::getNameFromId ( 'User', $userId );
-  if ($inlineUserThumb) $userNameFormatted = '<span style="position:relative;margin-left:20px"><div style="position:absolute;top:-1px;left:-20px;width:25px">'.formatUserThumb($note->idUser, $userName, 'Creator',16,'none').'&nbsp;</div><strong>' . $userName . '</strong></span>';
+  if ($inlineUserThumb) $userNameFormatted = '<span style="position:relative;margin-left:20px"><div style="position:absolute;top:-1px;left:-30px;width:25px">'.formatUserThumb($note->idUser, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span ><strong>' . $userName . '</strong></span>';
   $idNote = '<span>#' . $note->id . '</span>';
   $ticketName = '<span class="streamLink" style="margin-left:18px;position:relative;" onClick="gotoElement(\''.htmlEncode($note->refType).'\',\''.htmlEncode($note->refId).'\')">' 
@@ -700,11 +700,10 @@ function activityStreamDisplayHist ($hist,$origin){
   if ($objectClass=='Link') return;                 // Will be displayed on each item
   if (substr($change,0,6)=='|Note|') return;        // Already managed through other way
   if(substr($hist->refType, -15) == 'PlanningElement')return;
-  if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-20px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16,'none').'&nbsp;</div><strong>' . $userName . '</strong></span>';
+  if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
   if(($objectClass=='Affectation' or $objectClass=='Assignment' or $objectClass=='DocumentVersion') and $operation!='delete'){
     $object= new $objectClass($objectId);
-    debugLog($object->id);
     if($object->id!=''){
       switch ($objectClass){
       	case 'Affectation':
