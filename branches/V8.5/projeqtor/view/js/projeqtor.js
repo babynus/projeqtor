@@ -5024,7 +5024,7 @@ function getExtraReadonlyFields(idType,idStatus,idProfile) {
   });
 }
 function intercepPointKey(obj, event) {
-	var attr = dijit.byId(obj.id).get('readOnly');
+  var attr = dijit.byId(obj.id).get('readOnly');
 	if(attr == false){
 		event.preventDefault();
 		setTimeout('replaceDecimalPoint("' + obj.id + '");', 1);
@@ -5035,6 +5035,8 @@ function replaceDecimalPoint(field) {
   var dom = dojo.byId(field);
   var cursorPos = dom.selectionStart;
   dom.value = dom.value.slice(0,cursorPos)+browserLocaleDecimalSeparator+dom.value.slice(cursorPos);
+  dom.selectionStart=cursorPos+1;
+  dom.selectionEnd=cursorPos+1;
 }
 function ckEditorReplaceAll() {
   var numEditor = 1;
