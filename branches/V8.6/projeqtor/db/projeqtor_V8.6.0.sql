@@ -12,11 +12,11 @@ INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active
 
 UPDATE `${prefix}menu` SET `sortOrder`='120' WHERE `id`='252';
 
-INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(3,254,0,0);
- 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (254, 'menuConsultationValidation', 7, 'item', 119, Null, 0, 'Work');
+
+INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
+(3,254,0,1);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,254,1),
