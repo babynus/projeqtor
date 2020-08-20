@@ -512,7 +512,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       if(vBarDiv) {
         vList[i].setStartX( vBarDiv.offsetLeft );
         vList[i].setEndX( vBarDiv.offsetLeft + vBarDiv.offsetWidth );
-        if (vList[i].getMile()=='hip') {
+        if (vList[i].getMile()) {
           vList[i].setEndY( vParDiv.offsetTop+vBarDiv.offsetTop+12 );
           vList[i].setStartY( vParDiv.offsetTop+vBarDiv.offsetTop+12 );
         } else {
@@ -948,6 +948,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         + ( (dojo.ifFF)?'<div style="height:1px"></div>':'')
         +'<TABLE dojoType="dojo.dnd.Source" withHandles="true" jsId="dndSourceTable" id="dndSourceTable" type="xxx"'
         +'class="ganttTable"  ><TBODY>';
+      // =========================================== TREAT ALL LINES TO DISPLAY ON GANTT ================================================= 
       for(var i = 0; i < vTaskList.length; i++) {
         if( vTaskList[i].getGroup()) {
           vRowType = "group";
@@ -1122,6 +1123,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       vTmpDate.setMinutes(0);
       var vWidth=vColWidth+1;
       var cpt=0;
+      var tagParent=null;
       while(Date.parse(vTmpDate) <= Date.parse(vMaxDate)) { 
         vStr = vTmpDate.getFullYear() + '';
         if (vFormat == 'day') {
@@ -1269,7 +1271,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       vScpecificDayCount++;
       vHighlightSpecificDays+='<DIV id="vScpecificDay_'+vScpecificDayCount+'" class="specificDayToday" '
       +'style="top: 0px; left:'+vDayLeft+'px; height:'+100+'px;"></DIV>'; 
-        
+      // ================================================ TREAT EACH LINE - DISPLAY GANTT PART =====================================================
       for(i = 0; i < vTaskList.length; i++) {
         vTmpDate.setFullYear(vMinDate.getFullYear(), vMinDate.getMonth(), vMinDate.getDate());
         vTaskStart = vTaskList[i].getStart();
@@ -1285,7 +1287,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         } else {
           vRightTable += '<DIV onselectstart="event.preventDefault();return false;" class="ganttUnselectable" onMouseup="JSGantt.cancelLink('+i+');" id=childgrid_'+vID+' style="position:relative;">';
         }
-        if( vTaskList[i].getMile()=='hip') {
+        if( vTaskList[i].getMile()) {
           vRightTable += '<DIV ' + ffSpecificHeight+ '>'
             + '<TABLE class="rightTableLine" style="width: ' + (vChartWidth) + 'px; " >' 
             + '<TR id=childrow_'+vID+' class="ganttTaskmile" style="height: 21px;"'
@@ -1337,8 +1339,8 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           } else {
         	  vBardivName='outbardiv_' + vID;
           }	  
-          vRightTable += '<div id=' + vBardivName + ' class="barDivMilestone" style="' 
-            + 'color:#' + vTaskList[i].getColor() + ';' 
+          vRightTableTempMile = '<div id=' + vBardivName + ' class="barDivMilestone" style="' 
+            + 'z-index: 9999;color:#' + vTaskList[i].getColor() + ';' 
             + 'left:' + Math.ceil(vTaskLeft * (vDayWidth)) + 'px;"'
             + ' onmousedown=JSGantt.startLink('+i+'); '
             + ' onmouseup=JSGantt.endLink('+i+'); '
@@ -1352,14 +1354,14 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             + ' onMouseover=JSGantt.enterBarLink('+i+'); '
             + ' onMouseout=JSGantt.exitBarLink('+i+'); ';
           if(!dojo.byId('contractGantt')){
-            vRightTable += ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); ';
+            vRightTableTempMile += ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); ';
           }
-          vRightTable += ' >';
+          vRightTableTempMile += ' >';
           if (vTaskStart && vTaskEnd && Date.parse(vMaxDate)>=Date.parse(vTaskList[i].getEnd())) {
             if(vTaskList[i].getCompVal() < 100) {
-              vRightTable += '&loz;</div>' ;
+              vRightTableTempMile += '&loz;</div>' ;
             } else { 
-              vRightTable += '&diams;</div>' ;
+              vRightTableTempMile += '&diams;</div>' ;
             }          
             if( g.getCaptionType() ) {
               vCaptionStr = '';
@@ -1370,12 +1372,17 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 case 'Complete':   vCaptionStr = vTaskList[i].getCompStr();  break;
                 case 'Work':       vCaptionStr = vTaskList[i].getWork();  break;
               }
-              vRightTable += '<div class="labelBarDiv">' + vCaptionStr + '</div>';
+              vRightTableTempMile += '<div class="labelBarDiv">' + vCaptionStr + '</div>';
             }
           } else {
-        	  vRightTable += '</div>' ;  
+            vRightTableTempMile += '</div>' ;  
           }
-          vRightTable += '</div>';
+          vRightTableTempMile += '</div>';
+          if (planningPage=='PortfolioPlanning' && tagParent) {
+            
+            vRightTable=vRightTable.replace(tagParent,tagParent+vRightTableTempMile.replace('id="','id="grouped_'));
+          }
+          vRightTable+=vRightTableTempMile;
         } else {
           vDateRowStr = JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat) + ' - ' 
             + JSGantt.formatDateStr(vTaskEnd,vDateDisplayFormat);
@@ -1397,8 +1404,10 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               var vBarWidthReal=Math.ceil((vTaskRightReal) * (vDayWidth) );
               vBarWidth=vBarWidth-1;
           }
-          if( vTaskList[i].getGroup()) {            
+          if( vTaskList[i].getGroup()) {   
+            tagParent='<tag id="'+i+'" ></tag>';
             vRightTable += '<DIV ' + ffSpecificHeight+ '>'
+              + ((planningPage=='PortfolioPlanning')?tagParent:'')
               + '<TABLE class="rightTableLine" style="width:' + vChartWidth + 'px;">' 
               + '<TR id=childrow_'+vID+' class="ganttTaskgroup" style="height: 21px;"'
               + ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","right","group") '
