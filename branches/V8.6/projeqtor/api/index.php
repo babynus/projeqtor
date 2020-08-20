@@ -80,6 +80,7 @@ if (!$user->id) {
 traceLog ("API : mode=".$_SERVER['REQUEST_METHOD']." user=$user->name, id=$user->id, profile=$user->idProfile");
 setSessionUser($user);
 
+header ('Content-Type: application/json; charset=UTF-8');
 if ($_SERVER['REQUEST_METHOD']=='GET') {
   // GET method : security => class is checked, id is numerically filtered, access right is applied
   if (isset($_REQUEST['uri'])) { 
