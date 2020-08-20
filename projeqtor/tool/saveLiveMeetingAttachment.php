@@ -34,22 +34,37 @@ $idProj=(RequestHandler::isCodeSet('idProj'))?RequestHandler::getValue('idProj')
 
 $getType= new Type();
 $where= "scope= '".$objClass."'";
-$valType=$getType->getSqlElementsFromCriteria(null,false,$where);
+$listType=$getType->getSqlElementsFromCriteria(null,false,$where);
 $type='id'.$objClass.'Type';
-if(empty($valType)){
-  return;
+if(count($listType)==0){
+  echo "KO - no type for $objClass";
+  exit;
 }
-Sql::beginTransaction();
+$typeObj=reset($listType);
+$valType=$typeObj->id;
+$statusList=SqlList::getList('Status');
+$valStatus=null;
+foreach ($statusList as $idS=>$nameS) {
+  $valStatus=$idS;
+  break;
+}
 
+Sql::beginTransaction();
 
 $obj=new $objClass();
 $obj->name=$objName;
-$obj->idStatus=1;
-$obj->$type=$valType[0]->id;
+$obj->idStatus=$valStatus;
+$obj->$type=$valType;
 $obj->creationDate= date('Y-m-d');
 $obj->idProject=$idProj;
-$result=$obj->save();
+$right=securityGetAccessRightYesNo('menu'.$objClass, 'create', $obj );
+if ($right != 'YES') {
+  $result = '<br/>' . i18n ( 'errorCreateRights' );
+  $result .= ' <span style="font-style:italic">('.i18n($objClass).')</span>';
+  echo $result;
+  exit;
+}
+$result=$obj->simpleSave();
 displayLastOperationStatus($result);
-
 
 ?>
