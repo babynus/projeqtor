@@ -78,7 +78,7 @@ class DecisionMain extends SqlElement {
                                   "idUser"=>"hidden",
                                   "idStatus"=>"required",
                                   "idle"=>"nobr",
-                                  "cancelled"=>"nobr",
+                                  "cancelled"=>"nobr"
   );  
   
   private static $_colCaptionTransposition = array('idResource'=>'decisionAccountable'
