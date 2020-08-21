@@ -1383,6 +1383,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           if (planningPage=='PortfolioPlanning') {
             $idPrarent=vTaskList[i].getParent();
             var tagParent='<tag id="'+$idPrarent+'" ></tag>';
+            vRightTableTempMile=vRightTableTempMile.replace('font-size:18px', 'font-size:21px;text-shadow: 0px 0px 0px white;');
             vRightTable=vRightTable.replace(tagParent,tagParent+vRightTableTempMile.replace('id="','id="grouped_'));
           }else{
             vRightTable+=vRightTableTempMile;
