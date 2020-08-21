@@ -63,7 +63,7 @@ if (isset($obj)) {
   	$displayWidthButtonCI=$_REQUEST ['destinationWidth'];
   }
   ?>
-  <?php  if (property_exists($obj, 'idStatus') and $displayWidthButtonCI>=500) {
+  <?php  if (property_exists($obj, 'idStatus') and $displayWidthButtonCI>=500 and get_class($obj)!='Mail') {
 // Bug correction
 // Now take care of fieldAttribute
   $extraReadonlyFields=$obj->getExtraReadonlyFields();      
