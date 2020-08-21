@@ -132,8 +132,16 @@ class StatusMail extends SqlElement {
       } else {
         self::$_fieldsAttributes["mailToAssigned"]='';
       }
-      if ($mailable=="IndividualExpense" or $mailable=="ProjectExpense") {
+      if ($mailable=="ProjectExpense") {
       	self::$_fieldsAttributes["mailToFinancialResponsible"]='';
+      	self::$_colCaptionTransposition["mailToResource"]="businessResponsible";
+      } else {
+      	self::$_fieldsAttributes["mailToFinancialResponsible"]='invisible';
+      }
+      if ($mailable=="IndividualExpense") {
+      	self::$_fieldsAttributes["mailToFinancialResponsible"]='';
+      	self::$_colCaptionTransposition["mailToResource"]="resource";
+      	self::$_colCaptionTransposition["mailToFinancialResponsible"]="responsible";
       } else {
       	self::$_fieldsAttributes["mailToFinancialResponsible"]='invisible';
       }
@@ -318,12 +326,29 @@ class StatusMail extends SqlElement {
       $colScript .= '    dijit.byId("mailToAssigned").set("checked",false);';
       $colScript .= '    dojo.query(".mailToAssignedClass").forEach(function(domNode){domNode.style.display="none";});';
       $colScript .= '  }';
-      $colScript .= '  if (mailable=="IndividualExpense" || mailable=="ProjectExpense") {';
+      $colScript .= '  if (mailable=="IndividualExpense") {';
+      $colScript .= '    dojo.query(".generalColClass.mailToResourceClass").forEach(function(domNode){if(domNode.nodeName == "LABEL"){
+                         domNode.innerHTML=i18n("colResource")+"&nbsp;:&nbsp;";}});';
+      $colScript .= '    dojo.query(".generalRowClass.mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="table-row";});';
+      $colScript .= '    dojo.query(".generalColClass.mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="inline-block";});';
+      $colScript .= '    dojo.query(".generalColClass.mailToFinancialResponsibleClass").forEach(function(domNode){if(domNode.nodeName == "LABEL"){
+                         domNode.innerHTML=i18n("colResponsible")+"&nbsp;:&nbsp;";}});';
+      $colScript .= '  } else {';
+      $colScript .= '    dijit.byId("mailToFinancialResponsible").set("checked",false);';
+      $colScript .= '    dojo.query(".mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="none";});';
+      $colScript .= '    dojo.query(".generalColClass.mailToResourceClass").forEach(function(domNode){if(domNode.nodeName == "LABEL"){
+                         domNode.innerHTML=i18n("colResponsible")+"&nbsp;:&nbsp;";}});';
+      $colScript .= '  }';
+      $colScript .= '  if (mailable=="ProjectExpense") {';
+      $colScript .= '    dojo.query(".generalColClass.mailToResourceClass").forEach(function(domNode){if(domNode.nodeName == "LABEL"){
+                         domNode.innerHTML=i18n("colBusinessResponsible")+"&nbsp;:&nbsp;";}});';
       $colScript .= '    dojo.query(".generalRowClass.mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="table-row";});';
       $colScript .= '    dojo.query(".generalColClass.mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="inline-block";});';
       $colScript .= '  } else {';
       $colScript .= '    dijit.byId("mailToFinancialResponsible").set("checked",false);';
       $colScript .= '    dojo.query(".mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="none";});';
+      $colScript .= '    dojo.query(".generalColClass.mailToResourceClass").forEach(function(domNode){if(domNode.nodeName == "LABEL"){
+                         domNode.innerHTML=i18n("colResponsible")+"&nbsp;:&nbsp;";}});';
       $colScript .= '  }';
       $colScript .= ' if(isAccountableArray[mailable]==mailable) {';
       $colScript .= '    dojo.query(".generalRowClass.mailToAccountableClass").forEach(function(domNode){domNode.style.display="table-row";});';
