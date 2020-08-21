@@ -31,6 +31,7 @@ include_once '../tool/projeqtor.php';
 $paramProject = trim(RequestHandler::getId('idProject'));
 $paramProjectType = trim(RequestHandler::getId('idProjectType'));
 $idOrganization = trim(RequestHandler::getId('idOrganization'));
+
 $user=getSessionUser();
 
 // Header
@@ -50,96 +51,157 @@ if (isset($outMode) and $outMode=='excel') {
 }
 
 include "header.php";
-/*__________________________________________________*/
 
-$compStyle='font-size:10px;';
-$lstVisibleProj=($paramProject=='')?ConsolidationValidation::getVisibleProjectToConsolidated($paramProject, $paramProjectType, $idOrganization):$paramProject;
-$lstProj=$lstVisibleProj[0];
-$month=(strlen($paramMonth)==1)?'0'.$paramMonth:$paramMonth;
-$concMonth=$paramYear.$month;
+$where="(".getAccesRestrictionClause('Activity',false,true,true,true) ." or idResource=". getSessionUser()->id . " or idProject in ".Project::getAdminitrativeProjectList().")";
+if ($paramProject!='') {
+  $where.=  " and idProject in " . getVisibleProjectsList(false, $paramProject);
+}
+if($paramProjectType!=''){
+  $crit = array('idProjectType'=>$paramProjectType);
+  $listProject = SqlList::getListWithCrit('Project', $crit);
+  $where.= " and idProject in ". transformListIntoInClause($listProject);
+}
+$order="";
+$work=new PlannedWork();
+$lstWork=$work->getSqlElementsFromCriteria(null,false, $where, $order);
+$result=array();
+$projects=array();
+$resources=array();
+$sumProj=array();
 
-$reelTotal=0;
-$leftWorkTotal=0;
-$plannedWorkTotal=0;
-$validatedWorkTotal=0;
-$revenueTotal=0;
-$marginTotal=0;
-$reelConsTotal=0;
-
-
-// top board
-echo '<table  style="width:90%;margin-left:5%;margin-right:5%;" '.excelName().'>';
-echo ' <tr>';
-echo '   <td style="width:20%,border-bottom:2px solid black;" class="reportTableHeader" '.excelFormatCell('header').' rowspan="2" colspan="2">&nbsp;</td>';
-echo '   <td style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).' rowspan="2">'.i18n('validatedConsolidation').'</td>';
-echo '   <td style="width:70%" class="reportTableHeader" '.excelFormatCell('header',20).' colspan="7">'.i18n('sectionWork').'</td>';
-echo ' </tr>';
-echo ' <tr>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colCA').'</td>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colValidated').'</td>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colReal').'</td>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colRealCons').'</td>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colLeft').'</td>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colPlanned').'</td>';
-echo '  <td  style="width:10%" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colMargin').'</td>';
-echo ' <tr>';
-
-
-  foreach ($lstProj as $proj){    // draw line for each project 
-    
-    $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$proj->id,"month"=>$concMonth));
-    $consolidation=i18n('displayNo');
-    if($consValPproj->id!=''){
-      $consolidation=i18n('displayYes');
-      $reel=$consValPproj->realWork;
-      $leftWork=$consValPproj->leftWork;
-      $plannedWork=$consValPproj->plannedWork;
-      $validatedWork=$consValPproj->validatedWork;
-      $revenue=$consValPproj->revenue;
-      $margin=$consValPproj->margin;
-      $reelCons=$consValPproj->realWorkConsumed;
-    }else{
-      $lstPeProject=$proj->ProjectPlanningElement;
-      $reel=$lstPeProject->realWork;
-      $leftWork=$lstPeProject->leftWork;
-      $plannedWork=$lstPeProject->plannedWork;
-      $validatedWork=$lstPeProject->validatedWork;
-      $revenue=($lstPeProject->revenue!='')?$lstPeProject->revenue:0;
-      $margin=$validatedWork-$plannedWork;
-      $reelCons=ConsolidationValidation::getReelWorkConsumed($proj,$concMonth);
-    }
-    $projectCode=($proj->projectCode!='')?$proj->projectCode:'-';
-
-    $revenueTotal+=$revenue;
-    $validatedWorkTotal+=$validatedWork;
-    $reelTotal+=$reel;
-    $reelConsTotal+=$reelCons;
-    $leftWorkTotal+=$leftWork;
-    $plannedWorkTotal+=$plannedWork;
-    $marginTotal+=$margin;
-    echo '  <tr>';
-      echo '   <td class="reportTableData" style="border-right:1px solid grey;'.$compStyle.'" '.excelFormatCell('data',20).' >'.$proj->name.'</td>';
-      echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',20).' >'.$projectCode.'</td>';
-      echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.$consolidation.'</td>';
-      echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.costFormatter($revenue).'</td>';    
-      echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($validatedWork).'</td>';
-      echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reel).'</td>';
-      echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reelCons).'</td>';
-      echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($leftWork).'</td>';
-      echo '   <td class="reportTableData" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($plannedWork).'</td>';
-      echo '   <td class="reportTableData" style="'.$compStyle.''.(($margin<0)?"background-color:#E8ABAB":"").'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($margin).'</td>';
-    echo '  </tr>';
+foreach ($lstWork as $work) {
+  if (! array_key_exists($work->idResource,$resources)) {
+    $resources[$work->idResource]=SqlList::getNameFromId('Resource', $work->idResource);
   }
-  
-// Total line 
-echo '  <tr>';
-echo '   <td class="reportTableHeader" colspan="3" '.excelFormatCell('header').' >'.i18n('sum').'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.costFormatter($revenueTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($validatedWorkTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reelTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($reelConsTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($leftWorkTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($plannedWorkTotal).'</td>';
-echo '   <td class="assignHeader" style="'.$compStyle.'" '.excelFormatCell('data',null,null,null,null,null,null,null,'work').'>'.Work::displayWorkWithUnit($marginTotal).'</td>';
-echo '  </tr>';
+  if (! array_key_exists($work->idProject,$projects)) {
+    $projects[$work->idProject]=SqlList::getNameFromId('Project', $work->idProject);
+  }
+  if (! array_key_exists($work->idResource,$result)) {
+    $result[$work->idResource]=array();
+  }
+  if (! array_key_exists($work->idProject,$result[$work->idResource])) {
+    $result[$work->idResource][$work->idProject]=0;
+  }
+  $result[$work->idResource][$work->idProject]+=$work->work;
+}
+
+if (checkNoData($result)) exit;
+// title
+$newProject=array();
+foreach ($projects as $id=>$name) {
+  $newProject[SqlList::getFieldFromId('Project', $id, 'sortOrder').'-'.$id]=$name;
+}
+
+$projects=$newProject;
+ksort($projects);
+foreach ($projects as $id=>$name) {
+  $idExplo=explode('-',$id);
+  $id=$idExplo[1];
+  $sumProj[$id]=0;  
+}
+
+asort($resources);
+if($idOrganization){
+  $orga = new Organization($idOrganization);
+  $listOrga = $orga->getRecursiveSubOrganizationsFlatList(false,true);
+  $listResOrg = array();
+  foreach ($listOrga as $id=>$org){
+    $org = new Organization($id);
+    $listResOrg += $org->getResourcesOfOrganizationsListAsArray();
+  }
+  $listResOrg = array_flip($listResOrg);
+  foreach ($resources as $idR=>$nameR){
+    if(! in_array($idR, $listResOrg))unset($resources[$idR]);
+  }
+}
+foreach ($resources as $idR=>$nameR) {
+    foreach ($projects as $idP=>$nameP) {
+      $idExplo=explode('-',$idP);
+      $idP=$idExplo[1];
+      if (array_key_exists($idR, $result)) {
+        if (array_key_exists($idP, $result[$idR])) {
+          $val=$result[$idR][$idP];
+          $sumProj[$idP]+=$val;
+        }
+      }
+    }
+}
+
+
+$nbProj=0;
+$hasCode=false;
+$arrayCodes=array();
+foreach ($projects as $id=>$name) {
+  $idExplo=explode('-',$id);
+  $idS=$idExplo[1];
+  if($sumProj[$idS] != 0)
+    $cdProj=SqlList::getFieldFromId('Project',$idS,'projectCode');
+  $arrayCodes[$id]=($cdProj)?$cdProj:'&nbsp;';
+  if (trim($cdProj)!='') $hasCode=true;
+  $nbProj+=1;
+}
+if($nbProj != 0)
+  $colWidth=round(80/$nbProj);
+else
+  $colWidth=round(80/1);
+$rowspan=($hasCode)?'3':'2';
+echo '<table style="width:95%;" align="center" '.excelName().'>';
+echo '<tr>';
+echo '<td style="width:10%" class="reportTableHeader" rowspan="'.$rowspan.'" '.excelFormatCell('header',20).'>' . i18n('Resource') . '</td>';
+echo '<td style="width:80%" colspan="' . $nbProj . '" class="reportTableHeader" '.excelFormatCell('header').'>' . i18n('Project') . '</td>';
+echo '<td style="width:10%" class="reportTableHeader" rowspan="'.$rowspan.'" '.excelFormatCell('header',10).'>' . i18n('sum') . '</td>';
+echo '</tr><tr>';
+foreach ($projects as $id=>$name) {
+  $idExplo=explode('-',$id);
+  $id=$idExplo[1];
+  if($sumProj[$id] != 0) {
+    echo '<td style="width:'.$colWidth.'%" class="reportTableColumnHeader" '.excelFormatCell('subheader',20).'>' . htmlEncode($name) . '</td>';
+  }
+}
+echo '</tr>';
+if ($hasCode) {
+  echo '<tr>';
+  foreach ($projects as $id=>$name) {
+    if (isset($arrayCodes[$id])) {
+      echo '<td style="width:'.$colWidth.'%" class="reportTableColumnHeader" '.excelFormatCell('subheader',20).'>' . $arrayCodes[$id] . '</td>';
+    }
+  }
+  echo '</tr>';
+}
+
+$sum=0;
+foreach ($resources as $idR=>$nameR) {
+    $sumRes=0;
+    echo '<tr><td style="width:10%" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameR) . '</td>';
+    foreach ($projects as $idP=>$nameP) {
+       
+      $idExplo=explode('-',$idP);
+      $idP=$idExplo[1];
+      if($sumProj[$idP] != 0){
+        echo '<td style="width:' . $colWidth . '%" class="reportTableData" '.excelFormatCell('data',null,null,null,null,null,null,null,(($val)?'work':null)).'>';
+        if (array_key_exists($idR, $result)) {
+          if (array_key_exists($idP, $result[$idR])) {
+            $val=$result[$idR][$idP];
+            echo Work::displayWorkWithUnit($val);
+            $sumRes+=$val;
+            $sum+=$val;
+          }
+        }
+        echo '</td>';
+      }
+    }
+    echo '<td style="width:20%" class="reportTableColumnHeader" '.excelFormatCell('subheader').'>' . Work::displayWorkWithUnit($sumRes) . '</td>';
+    echo '</tr>';
+}
+echo '<tr><td class="reportTableHeader" '.excelFormatCell('header').'>' . i18n('sum') . '</td>';
+if ($nbProj == 0)
+  echo '<td class="reportTableHeader" '.excelFormatCell('subheader').'>' . "" . '</td>';
+
+foreach ($projects as $id=>$name) {
+  $idExplo=explode('-',$id);
+  $id=$idExplo[1];
+  if($sumProj[$id] != 0)
+    echo '<td class="reportTableColumnHeader" '.excelFormatCell('subheader').'>' . Work::displayWorkWithUnit($sumProj[$id]) . '</td>';
+}
+echo '<td class="reportTableHeader" '.excelFormatCell('header').'>' . Work::displayWorkWithUnit($sum) . '</td></tr>';
 echo '</table>';
