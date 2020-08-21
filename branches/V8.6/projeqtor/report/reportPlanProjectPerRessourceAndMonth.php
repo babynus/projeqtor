@@ -49,6 +49,7 @@ if (array_key_exists('idProject',$_REQUEST) and trim($_REQUEST['idProject'])!=""
   $idProject=trim($_REQUEST['idProject']);
   $idProject = Security::checkValidId($idProject);
 }
+$showAdminProj=trim(RequestHandler::getValue('showAdminProj'));
 $paramYear='';
 if (array_key_exists('yearSpinner',$_REQUEST)) {
 	$paramYear=$_REQUEST['yearSpinner'];
@@ -109,15 +110,15 @@ $queryWhere=getAccesRestrictionClause('Activity','t1',false,true,true);
 
 if ($idProject!='') {
   $queryWhere.=  " and t1.idProject in " . getVisibleProjectsList(true, $idProject) ;
-} else {
-  //
 }
 
 if ($paramMonth) {
   $queryWhere.=  " and month=".Sql::str($periodValue);
 }
 // Remove Admin Projects : should not appear in Work Plan
-$queryWhere.= " and t1.idProject not in " . Project::getAdminitrativeProjectList() ;
+if($showAdminProj !='on'){
+  $queryWhere.= " and t1.idProject not in " . Project::getAdminitrativeProjectList() ;
+}
 
 if ($paramYear) {
 	$queryWhere.=  " and year=".Sql::str($paramYear);
