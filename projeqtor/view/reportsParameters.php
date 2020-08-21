@@ -320,8 +320,8 @@ foreach ($listParam as $param) {
   } else if ($param->paramType=='boolean') {
     $defaultValue=($param->defaultValue=='true' or $param->defaultValue=='1')?true:false;
 ?>
-    <tr>
-    <td class="label"><label style="white-space:nowrap"><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <tr id="tr_<?php echo $param->name;?>" style="display:<?php echo ($param->name=='showAdminProj' and $report->id=='4' and $defaultValue!='*')?'none':'block';?>">
+    <td class="label"  ><label style="white-space:nowrap"><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
     <td>
     <div dojoType="dijit.form.CheckBox" type="checkbox" 
       id="<?php echo $param->name;?>" name="<?php echo $param->name;?>"
@@ -329,7 +329,7 @@ foreach ($listParam as $param) {
       <?php echo ($defaultValue)?' checked ':'';?> >
     </div>
     </td>
-    </tr><?php    
+    </tr><?php 
   } else if ($param->paramType=='projectList') {
     $defaultValue='';
     if ($param->defaultValue=='currentProject') {
@@ -356,6 +356,13 @@ foreach ($listParam as $param) {
      >  
        <?php htmlDrawOptionForReference('idProject', $defaultValue, null, false,null,null,$limitToActiveProjects); ?>
        <script type="dojo/connect" event="onChange" args="evt">
+          if(dojo.byId('reportId').value=='4'){
+             if(dojo.byId('idProject').value!=''){
+               dojo.byId('tr_showAdminProj').style.display='block';
+             }else{
+               dojo.byId('tr_showAdminProj').style.display='none';
+             }
+          }
           if (dijit.byId('idVersion')) {
             if (dijit.byId('idProduct')) {
               var idProduct=trim(dijit.byId('idProduct').get('value'));

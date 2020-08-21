@@ -272,6 +272,7 @@ ALTER TABLE `${prefix}statusmail` ADD COLUMN `mailToFinancialResponsible` int(1)
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
 (19, 'showAdminProj', 'boolean', 100, 0, 0, 0),
 (20, 'showAdminProj', 'boolean', 100, 0, 0, 0),
+(60, 'showAdminProj', 'boolean', 100, 0, 0, 0),
 (76, 'showAdminProj', 'boolean', 100, 0, 0, 0),
 (77, 'showAdminProj', 'boolean', 100, 0, 0, 0);
 
