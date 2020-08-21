@@ -950,167 +950,170 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         +'class="ganttTable"  ><TBODY>';
       // =========================================== TREAT ALL LINES TO DISPLAY ON GANTT ================================================= 
       for(var i = 0; i < vTaskList.length; i++) {
-        if( vTaskList[i].getGroup()) {
-          vRowType = "group";
-        } else if( vTaskList[i].getMile()){
-          vRowType  = "mile";
-        } else {
-          vRowType  = "row";
-        }
-        vID = vTaskList[i].getID();
-        
-        var invisibleDisplay=(vTaskList[i].getVisible() == 0)?'style="display:none"':'';
-        vLeftTable += '<TR id=child_'+vID+' dndType="planningTask" class="dojoDndItem ganttTask' + vRowType + '" ' 
-          + invisibleDisplay + ' style="height:21px">' ;
-        vLeftTable += '  <TD class="ganttName" style="width:'+vIconWidth+'px">';
-        var iconName = vTaskList[i].getClass();
-        if (vTaskList[i].getClass() == 'ComponentVersionhasChild') {
-          iconName = 'ComponentVersion';
-        }
-        else if (vTaskList[i].getClass() == 'ProductVersionhasChild') {
-          iconName = 'ProductVersion';
-        }
-        else if (vTaskList[i].getClass() == 'SupplierContracthasChild') {
-          iconName = 'SupplierContract';
-        }else if (vTaskList[i].getClass() == 'ClientContracthasChild') {
-          iconName = 'SupplierContract';
-        }
-      //florent ticket 4397
-        if (planningPage=='ResourcePlanning' || planningPage=='VersionsPlanning' || planningPage=='ContractGantt') {
-          vLeftTable += '<span class="">'
-            + '<table><tr><td>&nbsp;</td><td class="ganttIconBackground">'
-            + '<div class="icon'+iconName+'16" style="width:16px;height:16px;" >&nbsp;</div>'
-            + '</td></tr></table>'
-            +'</span>';
-        } else {
-          vLeftTable += 
-              '<span class="dojoDndHandle handleCursor">'
-            + ' <table><tr>'
-            + '  <td class="ganttIconBackground">'
-            + '   <div class="icon'+ iconName +'16" style="width:16px;height:16px;" >&nbsp;</div>'
-            + '  </td>'
-            + '  <td><img style="width:8px" src="css/images/iconDrag.gif" /></td>'
-            + ' </tr></table>'
-            + '</span>';
-        }
-        vLeftTable += '</TD>'
-          +'<TD class="ganttName ganttAlignLeft" style="width: ' + vNameWidth + 'px;" nowrap title="' + vTaskList[i].getNameTitle() + '">';
-        if( !vTaskList[i].getMile() && dojo.byId('contractGantt')){
-          vLeftTable+='<div class="ganttLeftHover" style="width:'+(vLeftWidth-25)+'px;" ';
-          vLeftTable+=' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); ';
-        }else{
-          vLeftTable+='<div class="ganttLeftMileContract" style="width:'+(vLeftWidth-25)+'px;" ';
-        }
-        vLeftTable+=' onMouseover=JSGantt.ganttMouseOver("'+vID+'","left","' + vRowType + '")'
-            + ' onMouseout=JSGantt.ganttMouseOut("'+vID+'","left","' + vRowType + '")>&nbsp;</div>';
-        vLeftTable += '<div ' + 
-        ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","left","' + vRowType + '")'
-        + ' onMouseout=JSGantt.ganttMouseOut("'+vID+'","left","' + vRowType + '")'+
-        ' style="position:relative;z-index:1000;width: ' + vNameWidth + 'px;">';
-        var levl=vTaskList[i].getLevel();
-        var levlWidth = (levl-1) * 16;
-        vLeftTable +='<table><tr><td>';
-        vLeftTable += '<div style="width:' + levlWidth + 'px;">';
-        if (vTaskList[i].getGroup() && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' &&  vTaskList[i].getClass() != 'SupplierContracthasChild' &&  vTaskList[i].getClass() != 'ClientContracthasChild') {
-          vLeftTable += '<div style="margin-left:3px;width:8px;">&nbsp</div>';
-        } else {
-          vLeftTable += '<div style="margin-left:3px;width:8px;background-color:#'+vTaskList[i].getTaskStatusColor()+'">&nbsp</div>';
-        }        
-        vLeftTable += '</div>';
-        vLeftTable +='</td><td>';
-        if( vTaskList[i].getGroup()) {
-          if( vTaskList[i].getOpen() == 1) {
-            vLeftTable += '<div id="group_'+vID+'" class="ganttExpandOpened"' 
-              + 'style="position: relative; z-index: 100000; width:16px; height:13px;"'
-              +' onclick="JSGantt.folder(\''+vID+'\','+vGanttVar+');'+vGanttVar+'.DrawDependencies();"' 
-              +'>'           
-              +'</div>' ;
+        if(!(planningPage=='PortfolioPlanning' && vTaskList[i].getMile())){
+          if( vTaskList[i].getGroup()) {
+            vRowType = "group";
+          } else if( vTaskList[i].getMile()){
+            vRowType  = "mile";
           } else {
-            vLeftTable += '<div id="group_'+vID+'" class="ganttExpandClosed"' 
-              + 'style="position: relative; z-index: 100000; width:16px; height:13px;"'
-              +' onclick="JSGantt.folder(\''+vID+'\','+vGanttVar+');'+vGanttVar+'.DrawDependencies();"' 
-              +' >' 
-              +'&nbsp;&nbsp;&nbsp;&nbsp;</div>' ;
-          } 
-        } else {
-          if( vTaskList[i].getMile() ) {
-        	   vLeftTable += '<div style="width:16px; height:13px;" class="ganttNoExpandMile"></div>';	
-          } else {
-              vLeftTable += '<div style="width:16px; height:13px;" class="ganttNoExpand"></div>';
+            vRowType  = "row";
           }
-        }
-        vLeftTable +='</td><td>';
-        var nameLeftWidth= vNameWidth - 16 - levlWidth - 18 ;
-        vLeftTable += '<div onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '") style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; '
-        	+'width:'+ nameLeftWidth +'px;" class="namePart' + vRowType + '"><span class="nobr">' + vTaskList[i].getName() + '</span></div>' ;
-        vLeftTable +='</td></tr></table></div>';
-        vLeftTable +='</TD>';
-        if (!dojo.byId('versionsPlanning') && !dojo.byId('contractGantt')) {
-	        for (var iSort=0;iSort<sortArray.length;iSort++) {
-	          var field=sortArray[iSort];
-	          if (field.substr(0,6)=='Hidden') field=field.substr(6);
-	          var showField=getPlanningFieldShow(field);
-	          var fieldWidth=getPlanningFieldWidth(field);
-	          if(showField==1 && field!='Name') {
-	            valueField=vTaskList[i].getFieldValue(field,JSGantt);
-	            padding='';
-	            if (field=='IdStatus' ||  field=='QualityLevel' || field=='IdTrend' || field=='IdHealthStatus' ) {
-	              valueField=colorNameFormatter(valueField);
-	              padding='';
-	            }else {
-	              padding='padding-top: 4px;';
-	            }
-	            vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
-	              +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;'+padding+'">'+valueField+'</span></TD>' ;
-	          }
-	        }
-	        vLeftTable += '</TR>';
-        }
-      //florent ticket 4397
-        else if(dojo.byId('contractGantt')) {
-          for (var iSort=0;iSort<sortArray.length;iSort++) {
-            var field=sortArray[iSort];
-            if (field.substr(0,6)=='Hidden') field=field.substr(6);
-            var showField=getPlanningFieldShow(field);
-            var fieldWidth=getPlanningFieldWidth(field);
-            var valueField=vTaskList[i].getFieldValue(field,JSGantt);
-            if (field!='Name' && showField && (field=='StartDate' || field=='EndDate' ||field=='Resource' || field=='IdStatus' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes'  ) ){
-              padding=''; 
-              if(valueField===undefined &&  (field=='Type' || field=='StartDate' || field=='EndDate')){
-                valueField='-';
-                padding='';
-              }else if(valueField===undefined ){
-                valueField='';
-                padding='padding-top: 4px;';
-              }
-              vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
-                +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;top:2px;text-overflow:ellipsis;'+padding+'">' + valueField
-                +'</span></TD>' ;
+          vID = vTaskList[i].getID();
+          
+          var invisibleDisplay=(vTaskList[i].getVisible() == 0)?'style="display:none"':'';
+          vLeftTable += '<TR id=child_'+vID+' dndType="planningTask" class="dojoDndItem ganttTask' + vRowType + '" ' 
+            + invisibleDisplay + ' style="height:21px">' ;
+          vLeftTable += '  <TD class="ganttName" style="width:'+vIconWidth+'px">';
+          var iconName = vTaskList[i].getClass();
+          if (vTaskList[i].getClass() == 'ComponentVersionhasChild') {
+            iconName = 'ComponentVersion';
+          }
+          else if (vTaskList[i].getClass() == 'ProductVersionhasChild') {
+            iconName = 'ProductVersion';
+          }
+          else if (vTaskList[i].getClass() == 'SupplierContracthasChild') {
+            iconName = 'SupplierContract';
+          }else if (vTaskList[i].getClass() == 'ClientContracthasChild') {
+            iconName = 'SupplierContract';
+          }
+        //florent ticket 4397
+          if (planningPage=='ResourcePlanning' || planningPage=='VersionsPlanning' || planningPage=='ContractGantt') {
+            vLeftTable += '<span class="">'
+              + '<table><tr><td>&nbsp;</td><td class="ganttIconBackground">'
+              + '<div class="icon'+iconName+'16" style="width:16px;height:16px;" >&nbsp;</div>'
+              + '</td></tr></table>'
+              +'</span>';
+          } else {
+            vLeftTable += 
+                '<span class="dojoDndHandle handleCursor">'
+              + ' <table><tr>'
+              + '  <td class="ganttIconBackground">'
+              + '   <div class="icon'+ iconName +'16" style="width:16px;height:16px;" >&nbsp;</div>'
+              + '  </td>'
+              + '  <td><img style="width:8px" src="css/images/iconDrag.gif" /></td>'
+              + ' </tr></table>'
+              + '</span>';
+          }
+          vLeftTable += '</TD>'
+            +'<TD class="ganttName ganttAlignLeft" style="width: ' + vNameWidth + 'px;" nowrap title="' + vTaskList[i].getNameTitle() + '">';
+          if( !vTaskList[i].getMile() && dojo.byId('contractGantt')){
+            vLeftTable+='<div class="ganttLeftHover" style="width:'+(vLeftWidth-25)+'px;" ';
+            vLeftTable+=' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); ';
+          }else{
+            vLeftTable+='<div class="ganttLeftMileContract" style="width:'+(vLeftWidth-25)+'px;" ';
+          }
+          vLeftTable+=' onMouseover=JSGantt.ganttMouseOver("'+vID+'","left","' + vRowType + '")'
+              + ' onMouseout=JSGantt.ganttMouseOut("'+vID+'","left","' + vRowType + '")>&nbsp;</div>';
+          vLeftTable += '<div ' + 
+          ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","left","' + vRowType + '")'
+          + ' onMouseout=JSGantt.ganttMouseOut("'+vID+'","left","' + vRowType + '")'+
+          ' style="position:relative;z-index:1000;width: ' + vNameWidth + 'px;">';
+          var levl=vTaskList[i].getLevel();
+          var levlWidth = (levl-1) * 16;
+          vLeftTable +='<table><tr><td>';
+          vLeftTable += '<div style="width:' + levlWidth + 'px;">';
+          if (vTaskList[i].getGroup() && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' &&  vTaskList[i].getClass() != 'SupplierContracthasChild' &&  vTaskList[i].getClass() != 'ClientContracthasChild') {
+            vLeftTable += '<div style="margin-left:3px;width:8px;">&nbsp</div>';
+          } else {
+            vLeftTable += '<div style="margin-left:3px;width:8px;background-color:#'+vTaskList[i].getTaskStatusColor()+'">&nbsp</div>';
+          }        
+          vLeftTable += '</div>';
+          vLeftTable +='</td><td>';
+          if( vTaskList[i].getGroup()) {
+            if( vTaskList[i].getOpen() == 1) {
+              vLeftTable += '<div id="group_'+vID+'" class="ganttExpandOpened"' 
+                + 'style="position: relative; z-index: 100000; width:16px; height:13px;"'
+                +' onclick="JSGantt.folder(\''+vID+'\','+vGanttVar+');'+vGanttVar+'.DrawDependencies();"' 
+                +'>'           
+                +'</div>' ;
+            } else {
+              vLeftTable += '<div id="group_'+vID+'" class="ganttExpandClosed"' 
+                + 'style="position: relative; z-index: 100000; width:16px; height:13px;"'
+                +' onclick="JSGantt.folder(\''+vID+'\','+vGanttVar+');'+vGanttVar+'.DrawDependencies();"' 
+                +' >' 
+                +'&nbsp;&nbsp;&nbsp;&nbsp;</div>' ;
+            } 
+          } else {
+            if( vTaskList[i].getMile()) {
+              vLeftTable += '<div style="width:16px; height:13px;" class="ganttNoExpandMile"></div>';  
+            } else {
+                 vLeftTable += '<div style="width:16px; height:13px;" class="ganttNoExpand"></div>';
             }
           }
+          vLeftTable +='</td><td>';
+          var nameLeftWidth= vNameWidth - 16 - levlWidth - 18 ;
+          vLeftTable += '<div onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '") style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; '
+          	+'width:'+ nameLeftWidth +'px;" class="namePart' + vRowType + '"><span class="nobr">' + vTaskList[i].getName() + '</span></div>' ;
+          vLeftTable +='</td></tr></table></div>';
+          vLeftTable +='</TD>';
+          if (!dojo.byId('versionsPlanning') && !dojo.byId('contractGantt')) {
+            if (!planningPage=='PortfolioPlanning' && vTaskList[i].getMile() ) {
+    	        for (var iSort=0;iSort<sortArray.length;iSort++) {
+    	          var field=sortArray[iSort];
+    	          if (field.substr(0,6)=='Hidden') field=field.substr(6);
+    	          var showField=getPlanningFieldShow(field);
+    	          var fieldWidth=getPlanningFieldWidth(field);
+    	          if(showField==1 && field!='Name') {
+    	            valueField=vTaskList[i].getFieldValue(field,JSGantt);
+    	            padding='';
+    	            if (field=='IdStatus' ||  field=='QualityLevel' || field=='IdTrend' || field=='IdHealthStatus' ) {
+    	              valueField=colorNameFormatter(valueField);
+    	              padding='';
+    	            }else {
+    	              padding='padding-top: 4px;';
+    	            }
+    	            vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
+    	              +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;'+padding+'">'+valueField+'</span></TD>' ;
+    	          }
+    	        }
+            }
+         }
+        //florent ticket 4397
+          else if(dojo.byId('contractGantt')) {
+            for (var iSort=0;iSort<sortArray.length;iSort++) {
+              var field=sortArray[iSort];
+              if (field.substr(0,6)=='Hidden') field=field.substr(6);
+              var showField=getPlanningFieldShow(field);
+              var fieldWidth=getPlanningFieldWidth(field);
+              var valueField=vTaskList[i].getFieldValue(field,JSGantt);
+              if (field!='Name' && showField && (field=='StartDate' || field=='EndDate' ||field=='Resource' || field=='IdStatus' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes'  ) ){
+                padding=''; 
+                if(valueField===undefined &&  (field=='Type' || field=='StartDate' || field=='EndDate')){
+                  valueField='-';
+                  padding='';
+                }else if(valueField===undefined ){
+                  valueField='';
+                  padding='padding-top: 4px;';
+                }
+                vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
+                  +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;top:2px;text-overflow:ellipsis;'+padding+'">' + valueField
+                  +'</span></TD>' ;
+              }
+            }
+          }else {
+          	for (var iSort=0;iSort<sortArray.length;iSort++) {
+    	          var field=sortArray[iSort];
+    	          if (field.substr(0,6)=='Hidden') field=field.substr(6);
+    	          var fieldWidth=getPlanningFieldWidth(field);
+    	          var valueField=vTaskList[i].getFieldValue(field,JSGantt);
+    	          if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus' || (field=='Resource' && showResourceComponentVersion=='Yes'))) { 
+    	             if(valueField===undefined && field=='Resource' && showResourceComponentVersion=='Yes'){
+    	                valueField='-';
+    	              }
+   	                padding='padding-top: 4px;';
+    	            vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
+    	              +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;'+padding+'">' + valueField
+    	              +'</span></TD>' ;
+    	          }
+    	      }
+          }
+          //END ADD
+          //END CHANGE qCazelles - GANTT (Correction)
           vLeftTable += '</TR>';
-      }else {
-        	for (var iSort=0;iSort<sortArray.length;iSort++) {
-  	          var field=sortArray[iSort];
-  	          if (field.substr(0,6)=='Hidden') field=field.substr(6);
-  	          var fieldWidth=getPlanningFieldWidth(field);
-  	          var valueField=vTaskList[i].getFieldValue(field,JSGantt);
-  	          if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus' || (field=='Resource' && showResourceComponentVersion=='Yes'))) { 
-  	             if(valueField===undefined && field=='Resource' && showResourceComponentVersion=='Yes'){
-  	                valueField='-';
-  	              }
- 	                padding='padding-top: 4px;';
-  	            vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
-  	              +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;'+padding+'">' + valueField
-  	              +'</span></TD>' ;
-  	          }
-  	        }
-  	        vLeftTable += '</TR>';
         }
-        //END ADD
-        //END CHANGE qCazelles - GANTT (Correction)
       }
       vLeftTable += '</TBODY></TABLE></DIV>';
+
 // RIGHT ======================================================================
       var vOutDays="";
       var vCurrentDay="";
@@ -1123,7 +1126,6 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       vTmpDate.setMinutes(0);
       var vWidth=vColWidth+1;
       var cpt=0;
-      var tagParent=null;
       while(Date.parse(vTmpDate) <= Date.parse(vMaxDate)) { 
         vStr = vTmpDate.getFullYear() + '';
         if (vFormat == 'day') {
@@ -1378,11 +1380,14 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             vRightTableTempMile += '</div>' ;  
           }
           vRightTableTempMile += '</div>';
-          if (planningPage=='PortfolioPlanning' && tagParent) {
-            
+          if (planningPage=='PortfolioPlanning') {
+            $idPrarent=vTaskList[i].getParent();
+            var tagParent='<tag id="'+$idPrarent+'" ></tag>';
             vRightTable=vRightTable.replace(tagParent,tagParent+vRightTableTempMile.replace('id="','id="grouped_'));
+          }else{
+            vRightTable+=vRightTableTempMile;
           }
-          vRightTable+=vRightTableTempMile;
+          
         } else {
           vDateRowStr = JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat) + ' - ' 
             + JSGantt.formatDateStr(vTaskEnd,vDateDisplayFormat);
@@ -1405,9 +1410,8 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vBarWidth=vBarWidth-1;
           }
           if( vTaskList[i].getGroup()) {   
-            tagParent='<tag id="'+i+'" ></tag>';
             vRightTable += '<DIV ' + ffSpecificHeight+ '>'
-              + ((planningPage=='PortfolioPlanning')?tagParent:'')
+              + ((planningPage=='PortfolioPlanning')?'<tag id="'+vTaskList[i].getID()+'" ></tag>':'')
               + '<TABLE class="rightTableLine" style="width:' + vChartWidth + 'px;">' 
               + '<TR id=childrow_'+vID+' class="ganttTaskgroup" style="height: 21px;"'
               + ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","right","group") '
