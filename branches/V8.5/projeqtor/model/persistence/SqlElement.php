@@ -5351,6 +5351,7 @@ abstract class SqlElement {
     //    BEGIN add gmartin Ticket #157
     $groupMails=Parameter::getGlobalParameter('mailGroupActive');
     if ($directStatusMail) $groupMails='NO';
+    $resultMail=array();
     while ($j--) {
       if ($groupMails=='YES') {
         $temp=new MailToSend();
@@ -5361,9 +5362,23 @@ abstract class SqlElement {
         $temp->template=$emailTemplateTab[$j]->name;
         $temp->title=$title;
         $temp->dest=$destTab[$emailTemplateTab[$j]->id];
+        if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and ! $cronnedScript){
+          $tabDest=explode(",", $temp->dest);
+          if(count($tabDest)>0){
+            $curUser=new Affectable(getSessionUser()->id);
+            foreach ($tabDest as $id=>$mail){
+              if(trim($mail)==$curUser->email){
+                unset($tabDest[$id]);
+              }
+            }
+          }
+          $temp->dest=implode(",", $tabDest);
+        }
         $temp->recordDateTime=date('Y-m-d H:i:s');
-        $tempRes=$temp->save();
-        $resultMail[]='TEMP';
+        if (trim($temp->dest)) {
+          $tempRes=$temp->save();
+          $resultMail[]='TEMP';
+        }
       } else { 
         $tempAttach='No';
         $erroSize='';
