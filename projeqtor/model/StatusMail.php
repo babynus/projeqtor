@@ -135,10 +135,7 @@ class StatusMail extends SqlElement {
       if ($mailable=="ProjectExpense") {
       	self::$_fieldsAttributes["mailToFinancialResponsible"]='';
       	self::$_colCaptionTransposition["mailToResource"]="businessResponsible";
-      } else {
-      	self::$_fieldsAttributes["mailToFinancialResponsible"]='invisible';
-      }
-      if ($mailable=="IndividualExpense") {
+      }else if ($mailable=="IndividualExpense") {
       	self::$_fieldsAttributes["mailToFinancialResponsible"]='';
       	self::$_colCaptionTransposition["mailToResource"]="resource";
       	self::$_colCaptionTransposition["mailToFinancialResponsible"]="responsible";
@@ -333,15 +330,11 @@ class StatusMail extends SqlElement {
       $colScript .= '    dojo.query(".generalColClass.mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="inline-block";});';
       $colScript .= '    dojo.query(".generalColClass.mailToFinancialResponsibleClass").forEach(function(domNode){if(domNode.nodeName == "LABEL"){
                          domNode.innerHTML=i18n("colResponsible")+"&nbsp;:&nbsp;";}});';
-      $colScript .= '  } else {';
-      $colScript .= '    dijit.byId("mailToFinancialResponsible").set("checked",false);';
-      $colScript .= '    dojo.query(".mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="none";});';
-      $colScript .= '    dojo.query(".generalColClass.mailToResourceClass").forEach(function(domNode){if(domNode.nodeName == "LABEL"){
-                         domNode.innerHTML=i18n("colResponsible")+"&nbsp;:&nbsp;";}});';
-      $colScript .= '  }';
-      $colScript .= '  if (mailable=="ProjectExpense") {';
+      $colScript .= '  } else if (mailable=="ProjectExpense") {';
       $colScript .= '    dojo.query(".generalColClass.mailToResourceClass").forEach(function(domNode){if(domNode.nodeName == "LABEL"){
                          domNode.innerHTML=i18n("colBusinessResponsible")+"&nbsp;:&nbsp;";}});';
+      $colScript .= '    dojo.query(".generalColClass.mailToFinancialResponsibleClass").forEach(function(domNode){if(domNode.nodeName == "LABEL"){
+                         domNode.innerHTML=i18n("colFinancialResponsible")+"&nbsp;:&nbsp;";}});';
       $colScript .= '    dojo.query(".generalRowClass.mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="table-row";});';
       $colScript .= '    dojo.query(".generalColClass.mailToFinancialResponsibleClass").forEach(function(domNode){domNode.style.display="inline-block";});';
       $colScript .= '  } else {';
