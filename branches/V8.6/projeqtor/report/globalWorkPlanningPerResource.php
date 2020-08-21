@@ -90,13 +90,13 @@ $user=getSessionUser();
 $queryWhere=getAccesRestrictionClause('Activity','t1',false,true,true);
 
 if ($idResource!='') {
-  $queryWhere.=  " and t1.idResource in " . getVisibleProjectsList(true, $idResource) ;
+  $queryWhere.=  " and t1.idProject in " . getVisibleProjectsList(true, $idResource) ;
 } 
 //   //
 // }
 // Remove Admin Projects : should not appear in Work Plan
 if($showAdminProj !='on'){
-  $queryWhere.= " and t1.idResource not in " . Project::getAdminitrativeProjectList() ;
+  $queryWhere.= " and t1.idProject not in " . Project::getAdminitrativeProjectList() ;
 }
 
 
