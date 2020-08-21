@@ -1284,18 +1284,22 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         vNumCols = 0;
         vID = vTaskList[i].getID();
         vNumUnits = (vTaskList[i].getEnd() - vTaskList[i].getStart()) / (24 * 60 * 60 * 1000) + 1;
-        if(vTaskList[i].getVisible() == 0) {
-          vRightTable += '<DIV onselectstart="event.preventDefault();return false;" class="ganttUnselectable" onMouseup="JSGantt.cancelLink('+i+');" id=childgrid_'+vID+' style="position:relative; display:none;">';
-        } else {
-          vRightTable += '<DIV onselectstart="event.preventDefault();return false;" class="ganttUnselectable" onMouseup="JSGantt.cancelLink('+i+');" id=childgrid_'+vID+' style="position:relative;">';
+        if(!(planningPage=='PortfolioPlanning' && vTaskList[i].getMile())){
+          if(vTaskList[i].getVisible() == 0) {
+            vRightTable += '<DIV onselectstart="event.preventDefault();return false;" class="ganttUnselectable" onMouseup="JSGantt.cancelLink('+i+');" id=childgrid_'+vID+' style="position:relative; display:none;">';
+          } else {
+            vRightTable += '<DIV onselectstart="event.preventDefault();return false;" class="ganttUnselectable" onMouseup="JSGantt.cancelLink('+i+');" id=childgrid_'+vID+' style="position:relative;">';
+          }
         }
         if( vTaskList[i].getMile()) {
-          vRightTable += '<DIV ' + ffSpecificHeight+ '>'
-            + '<TABLE class="rightTableLine" style="width: ' + (vChartWidth) + 'px; " >' 
-            + '<TR id=childrow_'+vID+' class="ganttTaskmile" style="height: 21px;"'
-            + ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","right","mile") ' 
-            + ' oncontextmenu="return false;"'
-            + ' onMouseout=JSGantt.ganttMouseOut("'+vID+'","right","mile")>' + vItemRowStr + '</TR></TABLE></DIV>';
+          if(!(planningPage=='PortfolioPlanning' )){
+            vRightTable += '<DIV ' + ffSpecificHeight+ '>'
+              + '<TABLE class="rightTableLine" style="width: ' + (vChartWidth) + 'px; " >' 
+              + '<TR id=childrow_'+vID+' class="ganttTaskmile" style="height: 21px;"'
+              + ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","right","mile") ' 
+              + ' oncontextmenu="return false;"'
+              + ' onMouseout=JSGantt.ganttMouseOut("'+vID+'","right","mile")>' + vItemRowStr + '</TR></TABLE></DIV>';
+          }
           vDateRowStr = JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat);
           var vBaselineTopTitle="";
           if ( vTaskList[i].getBaseTopStart()) {              
@@ -1635,7 +1639,9 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             vRightTable += '</div>' ;
           }
         }
-        vRightTable += '</DIV>';
+        if(!(planningPage=='PortfolioPlanning' && vTaskList[i].getMile())){
+          vRightTable += '</DIV>';
+        }
       }
       vRightTable+=vHighlightSpecificDays;
 
