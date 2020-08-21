@@ -150,6 +150,9 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar {
 	background: var(--color-toolbar) !important;
 }
+.ProjeQtOrNewGui #menuBarLeft {
+	background: var(--color-reference);
+}
 .ProjeQtOrNewGui #statusBarDiv {
 	background: white !important;
 }
@@ -196,7 +199,7 @@ html, body, #mainDiv,
 .toolbarForSelect {
 	position:absolute;
 	top:-9px;
-	right:0px;
+	right:25px;
 	/*left:-50px;*/
 	display:none;
 	opacity:0;
@@ -312,6 +315,32 @@ animation: fadeIn ease 0.5s;
   background: #dddddd;
   color:var(--color-dark);
 }
+.ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton .dijitButtonNode {
+    background: #ffffff;
+    border: 0px solid #ffffff;
+}    
+.ProjeQtOrNewGui .detailButton.dijitButton, .ProjeQtOrNewGui .dijitReset.dijitInline.detailButton.dijitButtonNode {
+	  background: #ffffff;
+    border: 0px solid #ffffff;
+}
+
+.ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
+  opacity:50%;
+}
+.ProjeQtOrNewGui #buttonDivObjectId {
+	margin-right:5px;
+	border:0;
+	color: var(--color-detail-header-text);
+}
+.ProjeQtOrNewGui #buttonDivObjectId .roundedButton{
+	border:1px solid white;
+}
+.ProjeQtOrNewGui #buttonDivObjectId .roundedButton:hover{
+  border:1px solid var(--color-detail-header-text);
+}
+.ProjeQtOrNewGui #buttonDivObjectId .roundedButton a{
+  color: var(--color-detail-header-text);
+}
 .separatorSection {
 	margin-top:5px;
 	margin-bottom:5px;
@@ -356,4 +385,42 @@ body .ProjeQtOrNewGui {
     scrollbar-track-color: var(--color-dark);
     scrollbar-color: var(--color-dark) var(--color-light);
     scrollbar-width: 12px;
+}
+.ProjeQtOrNewGui .calendarRed32
+  { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarRed22
+  { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarRed16 
+  { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrNewGui .calendarWhite32 
+  { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarWhite22 
+  { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarWhite16 
+  { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrNewGui .calendarYellow32 
+  { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarYellow22 
+  { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarYellow16 
+  { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.ProjeQtOrNewGui .calendarRedUpdate32 
+  { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarRedUpdate22 
+  { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarRedUpdate16 
+  { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrNewGui .calendarWhiteUpdate32 
+  { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarWhiteUpdate22 
+  { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarWhiteUpdate16 
+  { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrNewGui .calendarYellowUpdate32 
+  { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarYellowUpdate22 
+  { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarYellowUpdate16 
+  { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 }
