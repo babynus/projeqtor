@@ -568,8 +568,7 @@ class PlannedWorkManual extends GeneralWork {
       $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentEdit'));
       $readonlyHabil = false;
       if($habil->rightAccess!=1)$readonlyHabil=true;
-      
-      $onClick=($readonly or $readonlyHabil)?'':'onClick="selectInterventionActivity(\''.$pe->refType.'\','.$pe->refId.','.$pe->id.');"';
+      $onClick=($readonly or $readonlyHabil)?'':'onClick="selectInterventionActivity(\''.$pe->refType.'\', \''.$pe->refId.'\',\''.$pe->id.'\');"';
       $cursor=($readonly or $readonlyHabil)?"normal":"pointer";
       $colorBadge='<div style="border-radius:'.($badgeSize/2+2).'px;border:1px solid #e0e0e0;width:'.$badgeSize.'px;height:'.$badgeSize.'px;float:left;background-color:'.self::getColor($pe->refType,$pe->refId).'" ></div>';
       if(isset($isSaveSession)){
@@ -579,20 +578,20 @@ class PlannedWorkManual extends GeneralWork {
           $valueRefId = $pe->refId;
         }
       }
-      echo '<tr id="'.$pe->refId.'" style="border:1px solid #a0a0a0;cursor:'.$cursor.'" class="interventionActivitySelector '.$class.'" '.$onClick.'>';
-      echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$nameWidth.'px">'.$projList[$pe->idProject].'</td>';
-      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" >#'.$pe->refId.'</td>';
-      echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" >'.$colorBadge.'</td>';
+      echo '<tr id="'.$pe->refId.'" style="border:1px solid #a0a0a0;cursor:'.$cursor.'" class="interventionActivitySelector '.$class.'">';
+      echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$nameWidth.'px" '.$onClick.'>'.$projList[$pe->idProject].'</td>';
+      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" '.$onClick.'>#'.$pe->refId.'</td>';
+      echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" '.$onClick.'>'.$colorBadge.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >';
-      echo '  <table><tr>';
-      echo '          <td style="width:99%">'.$pe->refName.'</td>';
-      $goto=($readonly or $readonlyHabil)?'':'Onclick="gotoElement('."'".$pe->refType."','".htmlEncode($pe->refId)."'".');"';
+      echo '  <table style="width:100%" ><tr>';
+      echo '          <td style="width:90%" '.$onClick.'>'.$pe->refName.'</td>';
+      $goto=($readonly or $readonlyHabil)?'':'onClick="gotoElement('."'".$pe->refType."','".htmlEncode($pe->refId)."'".');"';
       if($class=='dojoxGridRowSelected'){
         $iconGoto='<div class="iconGotoWhite16 iconGoto iconSize16" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
       }else{
         $iconGoto='<div class="iconGoto16 iconGoto iconSize16" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
       }
-      echo '          <td '.$goto.' style="width:1%;" >'.$iconGoto.'</td>';
+      echo '          <td '.$goto.' style="width:10%;">'.$iconGoto.'</td>';
       echo '  </tr></table>';
       echo '</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="text-align:center;margin:0;padding;0;width:'.$idWidth.'px">';
@@ -641,7 +640,7 @@ class PlannedWorkManual extends GeneralWork {
               if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM']>$peIntervention->fte)$colorPM = "#BB5050";
             }
           }
-          echo '<td style="border:1px solid #a0a0a0;">';
+          echo '<td style="border:1px solid #a0a0a0;" '.$onClick.'>';
           echo '<table style="width:100%;height:100%">';
           $color=getForeColor($colorAM);
           echo '<tr style="height:'.$midSize.'px;">
