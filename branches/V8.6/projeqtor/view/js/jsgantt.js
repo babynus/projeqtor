@@ -512,16 +512,19 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       if(vBarDiv) {
         vList[i].setStartX( vBarDiv.offsetLeft );
         vList[i].setEndX( vBarDiv.offsetLeft + vBarDiv.offsetWidth );
-        if (vList[i].getMile()) {
+        if (vList[i].getMile() && dojo.byId('objectClassManual').value!='PortfolioPlanning') {
           vList[i].setEndY( vParDiv.offsetTop+vBarDiv.offsetTop+12 );
           vList[i].setStartY( vParDiv.offsetTop+vBarDiv.offsetTop+12 );
         } else {
-          vList[i].setEndY( vParDiv.offsetTop+vBarDiv.offsetTop+6 );
-          vList[i].setStartY( vParDiv.offsetTop+vBarDiv.offsetTop+6 );
+          if(dojo.byId('objectClassManual').value!='PortfolioPlanning'){
+            vList[i].setEndY( vParDiv.offsetTop+vBarDiv.offsetTop+6 );
+            vList[i].setStartY( vParDiv.offsetTop+vBarDiv.offsetTop+6 );
+          }
         }
       };
     };
   };
+  
   /* Does not work : cannot remove node, always referenced */
    this.ClearGraph = function () {
 	  var vList = this.getList();
@@ -1387,7 +1390,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           if (planningPage=='PortfolioPlanning') {
             $idPrarent=vTaskList[i].getParent();
             var tagParent='<tag id="'+$idPrarent+'" ></tag>';
-            vRightTableTempMile=vRightTableTempMile.replace('font-size:18px', 'font-size:21px;text-shadow: 0px 0px 0px white;');
+            vRightTableTempMile=vRightTableTempMile.replace('font-size:18px', 'font-size:21px;text-shadow: 0px -2px 0px white;');
             vRightTable=vRightTable.replace(tagParent,tagParent+vRightTableTempMile.replace('id="','id="grouped_'));
           }else{
             vRightTable+=vRightTableTempMile;
@@ -2011,8 +2014,10 @@ JSGantt.hide=function (pID,ganttObj) {
    for(var i = 0; i < vList.length; i++) {
      if(vList[i].getParent()==pID) {
        vID = vList[i].getID();
-       JSGantt.findObj('child_' + vID).style.display = "none";
-       JSGantt.findObj('childgrid_' + vID).style.display = "none";
+       if(JSGantt.findObj('child_' + vID)){
+         JSGantt.findObj('child_' + vID).style.display = "none";
+         JSGantt.findObj('childgrid_' + vID).style.display = "none";
+       }
        vList[i].setVisible(0);
        if(vList[i].getGroup() == 1) {
          JSGantt.hide(vID,ganttObj);
@@ -2042,8 +2047,10 @@ JSGantt.show =  function (pID, ganttObj) {
     if(vList[i].getParent() == pID) {
       vID = vList[i].getID();
       if (vList[pIDindex].getOpen()==1) {
-        JSGantt.findObj('child_'+vID).style.display = "";
-        JSGantt.findObj('childgrid_'+vID).style.display = "";
+        if(JSGantt.findObj('child_' + vID)){
+          JSGantt.findObj('child_'+vID).style.display = "";
+          JSGantt.findObj('childgrid_'+vID).style.display = "";
+        }
         vList[i].setVisible(1);
       }
       if(vList[i].getGroup() == 1 && vList[i].getVisible()) {
