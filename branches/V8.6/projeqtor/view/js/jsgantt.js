@@ -1389,9 +1389,9 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           vRightTableTempMile += '</div>';
           if (planningPage=='PortfolioPlanning') {
             $idPrarent=vTaskList[i].getParent();
-            var tagParent='<tag id="'+$idPrarent+'" ></tag>';
+            var tagParent='<tag id="mile_'+$idPrarent+'" ></tag>';
             vRightTableTempMile=vRightTableTempMile.replace('font-size:18px', 'font-size:21px;text-shadow: 0px -2px 0px white;');
-            vRightTable=vRightTable.replace(tagParent,tagParent+vRightTableTempMile.replace('id="','id="grouped_'));
+            vRightTable=vRightTable.replace(tagParent,tagParent+vRightTableTempMile.replace('id="mile_','id="grouped_'));
           }else{
             vRightTable+=vRightTableTempMile;
           }
@@ -1419,7 +1419,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           }
           if( vTaskList[i].getGroup()) {   
             vRightTable += '<DIV ' + ffSpecificHeight+ '>'
-              + ((planningPage=='PortfolioPlanning')?'<tag id="'+vTaskList[i].getID()+'" ></tag>':'')
+              + ((planningPage=='PortfolioPlanning')?'<tag id="mile_'+vTaskList[i].getID()+'" ></tag>':'')
               + '<TABLE class="rightTableLine" style="width:' + vChartWidth + 'px;">' 
               + '<TR id=childrow_'+vID+' class="ganttTaskgroup" style="height: 21px;"'
               + ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","right","group") '
@@ -1964,7 +1964,7 @@ JSGantt.folder= function (pID,ganttObj) {
         saveCollapsed(vList[i].getScope());
       } else {
         vList[i].setOpen(1);
-        JSGantt.show(pID, ganttObj);
+        JSGantt.show(pID, ganttObj); 
         JSGantt.findObj('group_'+pID).className = "ganttExpandOpened";
         saveExpanded(vList[i].getScope());
       }
