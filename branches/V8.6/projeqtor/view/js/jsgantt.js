@@ -1416,7 +1416,6 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vBarWidth=vBarWidth-1;
           }
           if( vTaskList[i].getGroup()) {   
-            console.log(vTaskList[i].getClass());
             vRightTable += '<DIV ' + ffSpecificHeight+ '>'
               + ((vTaskList[i].getClass()=='PeriodicMeeting')?'<tag id="meeting_'+vTaskList[i].getID()+'" ></tag>':'')
               + ((planningPage=='PortfolioPlanning')?'<tag id="mile_'+vTaskList[i].getID()+'" ></tag>':'')
@@ -2024,7 +2023,7 @@ JSGantt.hide=function (pID,ganttObj) {
        vID = vList[i].getID();
        if(vList[i].getClass()=='Meeting'){
          sonsLines = dojo.byId('taskbar_'+vID);
-         console.log(sonsLines);
+//         console.log(sonsLines);
        }
        if(JSGantt.findObj('child_' + vID)){
          JSGantt.findObj('child_' + vID).style.display = "none";
