@@ -176,17 +176,17 @@ if($paramMailerType=='phpmailer'){
               </td>
               <td>
                 <?php  
-                    $checkRes="false";
+                    $checkResp="false";
                     if(sessionValueExists('dialogMailToFinancialResponsible')){ 
-                        $dialogMailToResource = getSessionValue('dialogMailToFinancialResponsible');
-                        if($dialogMailToResource=="true"){
-                          $checkRes=$dialogMailToResource;
+                        $dialogMailToFinancialResponsible = getSessionValue('dialogMailToFinancialResponsible');
+                        if($dialogMailToFinancialResponsible=="true"){
+                          $checkResp=$dialogMailToFinancialResponsible;
                         }
                         
                      }
                 ?>
                 <div id="dialogMailToFinancialResponsible" name="dialogMailToFinancialResponsible" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToFinancialResponsible',this.checked,false);"
-                  <?php echo ($checkRes=="true")?"checked":"";?>></div>
+                  <?php echo ($checkResp=="true")?"checked":"";?>></div>
               </td>
             </tr>
           <?php } ?>
