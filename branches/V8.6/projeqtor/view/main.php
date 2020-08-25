@@ -802,7 +802,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
  <?php  } ?>
 	
   <div id="globalContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">    
-    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left" splitter="true" style="width:<?php echo $IconSizeMenuHide2;?>">
+    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left" splitter="true" style="width:<?php echo $IconSizeMenuHide2;?><?php echo (isNewGui())?';dispaly:none;':'';?>">
       <script type="dojo/connect" event="resize" args="evt">
          if (hideShowMenuInProgress) return;
          if (dojo.byId("leftDiv").offsetWidth>52) 
