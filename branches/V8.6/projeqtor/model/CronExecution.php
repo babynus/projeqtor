@@ -36,6 +36,7 @@ class CronExecution extends SqlElement {
   public $idle;
   public $fonctionName;
   public $nextTime;
+  public $_noHistory;
   
    /** ==========================================================================
    * Constructor
