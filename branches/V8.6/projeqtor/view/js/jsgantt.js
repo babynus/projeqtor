@@ -2016,14 +2016,14 @@ JSGantt.hide=function (pID,ganttObj) {
      tagParent=dojo.byId('meeting_'+pID);
      parentLine=dojo.byId('childgrid_'+pID).innerHTML;
    }
-   console.log(tagParent);
+//   console.log(tagParent);
    var newParentLine=parentLine;
    var sonsLines='';
    for(var i = 0; i < vList.length; i++) {
      if(vList[i].getParent()==pID) {
        vID = vList[i].getID();
        if(vList[i].getClass()=='Meeting'){
-         sonsLines = dojo.byId('taskbar_'+vID).innerHTML;
+         sonsLines = dojo.byId('taskbar_'+vID);
          console.log(sonsLines);
        }
        if(JSGantt.findObj('child_' + vID)){
@@ -2036,11 +2036,11 @@ JSGantt.hide=function (pID,ganttObj) {
        }
      }
    }
-   console.log(parentLine);
-   console.log(sonsLines);
-   newParentLine=parentLine.replace(tagParent,tagParent+sonsLines);
-   newParentLine="<div id='ça me saoul' >&nbsp;</div>";
-   dojo.byId('childgrid_'+pID).innerHTML=newParentLine;
+//   console.log(parentLine);
+//   console.log(sonsLines);
+//   newParentLine=parentLine.replace(tagParent,tagParent+sonsLines);
+//   newParentLine="<div id='ça me saoul' >&nbsp;</div>";
+//   dojo.byId('childgrid_'+pID).innerHTML=newParentLine;
 };
 
 /**
