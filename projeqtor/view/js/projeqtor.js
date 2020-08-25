@@ -3285,7 +3285,20 @@ function drawGantt() {
       }
       else if(item.redElement == '0') {
         pColor = '50BB50';
-      }      
+      }
+      //gautier #3925
+        if(trim(item.validatedenddate) != "" && item.done == 0){
+          var  today;
+          today = new Date();
+          var validatedEndDate = new Date (item.validatedenddate);
+          if( validatedEndDate < today){
+            if(item.reftype=="Project"){
+              pColor = '650000';
+            }else{
+              pColor = 'BB5050';
+            }
+          }
+        }
       var pItemColor=item.color;
       // pMile : is it a milestone ?      
       var pMile = (item.reftype == 'Milestone') ? 1 : 0;
