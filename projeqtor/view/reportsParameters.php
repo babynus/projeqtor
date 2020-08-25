@@ -319,15 +319,24 @@ foreach ($listParam as $param) {
 <?php    
   } else if ($param->paramType=='boolean') {
     $defaultValue=($param->defaultValue=='true' or $param->defaultValue=='1')?true:false;
+    $projectVal='';
+     if (sessionValueExists('project')) {
+      if (getSessionValue('project')!='*') {
+        $projectVal=getSessionValue('project');
+        if(strpos($defaultValue, ",") !== false){
+          $projectVal="*";
+        }
+      }
+    }
 ?>
-    <tr id="tr_<?php echo $param->name;?>" style="display:<?php echo ($param->name=='showAdminProj' and $report->id=='4' and $defaultValue!='*')?'none':'block';?>">
-    <td class="label"  ><label style="white-space:nowrap"><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <tr id="tr_<?php echo $param->name;?>" style="visibility:<?php echo ($param->name=='showAdminProj' and $report->id=='4' and ($projectVal=='*' or $projectVal==''))?'hidden;':'visible;';?>">
+    <td class="label" ><label style="white-space:nowrap"><?php echo i18n('col'.ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
     <td>
-    <div dojoType="dijit.form.CheckBox" type="checkbox" 
-      id="<?php echo $param->name;?>" name="<?php echo $param->name;?>"
-      style=""
-      <?php echo ($defaultValue)?' checked ':'';?> >
-    </div>
+      <div dojoType="dijit.form.CheckBox" type="checkbox" 
+        id="<?php echo $param->name;?>" name="<?php echo $param->name;?>"
+        style=""
+        <?php echo ($defaultValue)?' checked ':'';?> >
+      </div>
     </td>
     </tr><?php 
   } else if ($param->paramType=='projectList') {
@@ -358,9 +367,9 @@ foreach ($listParam as $param) {
        <script type="dojo/connect" event="onChange" args="evt">
           if(dojo.byId('reportId').value=='4'){
              if(dojo.byId('idProject').value!=''){
-               dojo.byId('tr_showAdminProj').style.display='block';
+               dojo.byId('tr_showAdminProj').style.visibility='visible';
              }else{
-               dojo.byId('tr_showAdminProj').style.display='none';
+               dojo.byId('tr_showAdminProj').style.visibility='hidden';
              }
           }
           if (dijit.byId('idVersion')) {
