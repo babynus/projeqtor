@@ -148,33 +148,33 @@ if ($activityStreamNumberDays!==""){
     if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {
       $critWhere.=" AND creationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day' ";
       $critWhere.=" OR updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND colName IS NULL) OR (operation='delete'))";
+      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND colName IS NULL) OR (operation='delete' AND colName not like ('|Attachment|%')))";
       $where.=" AND operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day'";
     } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!=""){
       $critWhere.=" AND creationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-      $where.=" AND (operation='insert' AND colName IS NULL ) ";
+      $where.=" AND (operation='insert' AND colName IS NULL AND refType NOT IN ('Assignment','Affectation')) ";
       $where.=" AND operationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
     } else if ($activityStreamUpdatedRecently=="updated"){
       $critWhere.=" AND updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-      $where.=" AND ((operation='update' AND colName='idStatus') OR (operation='delete')) and operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+      $where.=" AND ((operation='update' AND colName='idStatus') OR (operation='delete' AND colName not like ('|Attachment|%'))) and operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
     }else{
-      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND colName IS NULL ) OR (operation='delete') )";
+      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND colName IS NULL ) OR (operation='delete' AND colName not like ('|Attachment|%')) )";
     }   
   } else {
     if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {   
       $critWhere.=" and ( creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
       $critWhere.=" or updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) )";
-      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and colName is null ) or (operation='delete'))";
+      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and colName is null ) or (operation='delete' and colName not like ('|Attachment|%')))";
       $where.=" and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)";
     } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!=""){
       $critWhere.=" and creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-      $where.=" and (operation='insert' and colName is null )";
+      $where.=" and (operation='insert' and colName is null and refType not In ('Assignment','Affectation'))";
       $where.=" and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
     } else if ($activityStreamUpdatedRecently=="updated"){
       $critWhere.=" and updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-      $where.=" and ((operation='update' and colName='idStatus') or (operation='delete')) and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)  ";
+      $where.=" and ((operation='update' and colName='idStatus') or (operation='delete' and colName not like ('|Attachment|%'))) and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)  ";
     }else{
-      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and colName is null ) or (operation='delete'))";
+      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and colName is null ) or (operation='delete' and colName not like ('|Attachment|%')))";
     }
     
   }
