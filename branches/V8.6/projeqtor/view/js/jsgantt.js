@@ -999,11 +999,11 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           }
           vLeftTable += '</TD>'
             +'<TD class="ganttName ganttAlignLeft" style="width: ' + vNameWidth + 'px;" nowrap title="' + vTaskList[i].getNameTitle() + '">';
-          if( !vTaskList[i].getMile() && dojo.byId('contractGantt')){
+          if( vTaskList[i].getMile() && dojo.byId('contractGantt')){
+            vLeftTable+='<div class="ganttLeftMileContract" style="width:'+(vLeftWidth-25)+'px;" ';
+          }else{
             vLeftTable+='<div class="ganttLeftHover" style="width:'+(vLeftWidth-25)+'px;" ';
             vLeftTable+=' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); ';
-          }else{
-            vLeftTable+='<div class="ganttLeftMileContract" style="width:'+(vLeftWidth-25)+'px;" ';
           }
           vLeftTable+=' onMouseover=JSGantt.ganttMouseOver("'+vID+'","left","' + vRowType + '")'
               + ' onMouseout=JSGantt.ganttMouseOut("'+vID+'","left","' + vRowType + '")>&nbsp;</div>';
