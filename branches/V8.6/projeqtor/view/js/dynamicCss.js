@@ -29,6 +29,7 @@ function setColorTheming(ref,smooth) {
   var h=hsl[0];
   var s=hsl[1];
   var l=hsl[2];
+  darker=HSLToHex(h,25,25);
   dark=HSLToHex(h,s,40);
   medium=HSLToHex(h,s,70);
   light=HSLToHex(h,s,90);
@@ -36,20 +37,23 @@ function setColorTheming(ref,smooth) {
   var hslDefault=hexToHSL('#545381');
   hueRotate=h-hslDefault[0];
   saturate=Math.round(s/hslDefault[1]*100);
+  saturate=100;
   //brightness=Math.round(40/hslDefault[2]*100);
   brightness=100;
   
   var element=document.getElementById('body');
   // Generic colors
+  element.style.setProperty("--color-reference", ref);
+  element.style.setProperty("--color-darker", darker);
   element.style.setProperty("--color-dark", dark);
   element.style.setProperty("--color-medium", medium);
   element.style.setProperty("--color-light", light);
   element.style.setProperty("--color-lighter", lighter);
   element.style.setProperty("--color-text", '#656565');
   // Main Layout
-  element.style.setProperty("--color-toolbar",ref);
+  element.style.setProperty("--color-toolbar",darker);
   // List
-  element.style.setProperty("--color-list-header", medium);
+  element.style.setProperty("--color-list-header", white);
   // Detail
   element.style.setProperty("--color-detail-header", white);
   element.style.setProperty("--color-detail-header-text", dark);
