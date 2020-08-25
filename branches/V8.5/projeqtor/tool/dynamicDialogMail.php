@@ -543,7 +543,7 @@ if($paramMailerType=='phpmailer'){
                 if(($attached->idPrivacy==3 and $attached->idUser!=$currentUser->id) or ($attached->idPrivacy==2 and $attached->idTeam!=$currentUser->idTeam)){
                    continue;
                 }
-                $attachName=$attached->fileName.''.$attached->id;
+                $attachName=str_replace("'","",$attached->fileName).''.$attached->id;
                 echo "<tr>";
                 echo "<td class='assignData verticalCenterData' ><div style='width:270px'><div id='dialogMail".$attachName."' name='dialogMail".$attachName."' class='checkBoxAttachmentMail' dojoType='dijit.form.CheckBox' type='checkbox' onChange='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attachName).",".json_encode($attached->id).",".json_encode($attached->type).");'></div>&nbsp;".$attached->fileName."</div></td>";
                 //mime and img of the attachemnt
