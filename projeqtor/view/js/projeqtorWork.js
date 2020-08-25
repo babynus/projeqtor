@@ -810,7 +810,12 @@ function selectInterventionActivity(refType,refId,peId) {
     	dojo.addClass(node,'iconGotoWhite16');
       });
   }
-  saveDataToSession('selectActivityPlannedWorkManual', refId);
+  if(mode=='unselect'){
+    saveDataToSession('selectActivityPlannedWorkManual', '');
+  }else{
+    saveDataToSession('selectActivityPlannedWorkManual', refId);
+  }
+  
 }
 
 function saveInterventionCapacity(refType,refId,month,id) {

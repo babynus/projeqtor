@@ -268,6 +268,8 @@ $currentMonth = strftime("%m");
         $listResource = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idOrganization'=>$inIdOrga,'idle'=>'0'));
       }elseif(!$resourceId and $inIdTeam and $inIdOrga){
         $listResource = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'));
+      }elseif(!$resourceId and !$inIdTeam and !$inIdOrga and trim($idProject)!="" ){
+        $listResourceObj = $res->getSqlElementsFromCriteria(array('idle'=>'0'),null,null,null,true);
       }else{
         $displayNothing = true;
       }

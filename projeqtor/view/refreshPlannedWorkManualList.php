@@ -57,6 +57,8 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
     $listResourceObj = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idOrganization'=>$inIdOrga,'idle'=>'0'),null,null,null,true);
   }elseif(!$resourceId and $inIdTeam and $inIdOrga){
     $listResourceObj = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'),null,null,null,true);
+  }elseif(!$resourceId and !$inIdTeam and !$inIdOrga and $idProject){
+    $listResourceObj = $res->getSqlElementsFromCriteria(array('idle'=>'0'),null,null,null,true);
   }else{
     $displayNothing = true;
   }
