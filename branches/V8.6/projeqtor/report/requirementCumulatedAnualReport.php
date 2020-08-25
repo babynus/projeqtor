@@ -217,8 +217,8 @@ foreach ($lstRequirement as $r) {
 			$created[13]+=1;
 		}
 	}
-	else if (substr($t->creationDateTime,0,4)==$endYear) {
-		$month=intval(substr($t->creationDateTime,5,2));
+	else if (substr($r->creationDateTime,0,4)==$endYear) {
+		$month=intval(substr($r->creationDateTime,5,2));
 		if ($month<=$paramMonth) {
 			$created[12 - $paramMonth + $month + 1]+=1;
 			$created[13]+=1;
