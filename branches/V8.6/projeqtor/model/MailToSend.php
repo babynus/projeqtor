@@ -75,7 +75,7 @@ class MailToSend extends SqlElement {
         'refType'=>'notifiableItem',
         'refId'=> 'id', 
         'recordDateTime'=>'recordDate',
-        'dest'=>'recipient'
+        'dest'=>'mailTo'
     );
     
    /** ==========================================================================
