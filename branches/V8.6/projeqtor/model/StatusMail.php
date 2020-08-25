@@ -45,6 +45,7 @@ class StatusMail extends SqlElement {
   public $mailToUser;
   public $mailToAccountable;
   public $mailToResource;
+  public $mailToFinancialResponsible;
   public $mailToSponsor;
   public $mailToProject;
   public $mailToProjectIncludingParentProject;
@@ -53,7 +54,6 @@ class StatusMail extends SqlElement {
   public $mailToManager;
   public $mailToAssigned;
   public $mailToSubscribers;
-  public $mailToFinancialResponsible;
   public $mailToOther;
   public $otherMail;
   public $isProject;
@@ -71,13 +71,13 @@ class StatusMail extends SqlElement {
     <th field="mailToContact" width="5%" formatter="booleanFormatter" >${mailToContact}</th>    
     <th field="mailToUser" width="5%" formatter="booleanFormatter" >${mailToUser}</th>
     <th field="mailToResource" width="5%" formatter="booleanFormatter" >${mailToResource}</th>
+    <th field="mailToFinancialResponsible" width="5%" formatter="booleanFormatter" >${mailToFinancialResponsible}</th>
     <th field="mailToProject" width="5%" formatter="booleanFormatter" >${mailToProject}</th>
     <th field="mailToProjectIncludingParentProject" width="5%" formatter="booleanFormatter" >${mailToProjectIncludingParentProject}</th>
     <th field="mailToLeader" width="5%" formatter="booleanFormatter" >${mailToLeader}</th>
     <th field="mailToManager" width="5%" formatter="booleanFormatter" >${mailToManager}</th>
     <th field="mailToAssigned" width="5%" formatter="booleanFormatter" >${mailToAssigned}</th>
     <th field="mailToSubscribers" width="5%" formatter="booleanFormatter" >${mailToSubscribers}</th>
-    <th field="mailToFinancialResponsible" width="5%" formatter="booleanFormatter" >${mailToFinancialResponsible}</th>  
     <th field="mailToOther" width="5%" formatter="booleanFormatter" >${mailToOther}</th>
     <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>
     ';

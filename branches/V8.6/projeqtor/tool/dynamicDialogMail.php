@@ -169,6 +169,27 @@ if($paramMailerType=='phpmailer'){
               </td>
             </tr>
           <?php } ?>
+          <?php if (property_exists($objectClass, 'idResponsible') ) {?>   
+            <tr>
+              <td class="dialogLabel">
+                <label for="dialogMailToFinancialResponsible"><?php echo htmlEncode($obj->getColCaption("idResponsible")); ?>&nbsp;:&nbsp;</label>
+              </td>
+              <td>
+                <?php  
+                    $checkRes="false";
+                    if(sessionValueExists('dialogMailToFinancialResponsible')){ 
+                        $dialogMailToResource = getSessionValue('dialogMailToFinancialResponsible');
+                        if($dialogMailToResource=="true"){
+                          $checkRes=$dialogMailToResource;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToFinancialResponsible" name="dialogMailToFinancialResponsible" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToFinancialResponsible',this.checked,false);"
+                  <?php echo ($checkRes=="true")?"checked":"";?>></div>
+              </td>
+            </tr>
+          <?php } ?>
           <?php if (property_exists($objectClass, 'idSponsor')) { ?>
             <tr>
               <td class="dialogLabel">
