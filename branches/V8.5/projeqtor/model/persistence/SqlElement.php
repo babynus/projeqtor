@@ -4991,9 +4991,11 @@ abstract class SqlElement {
     if ($objectClass == 'TicketSimple') {
       $objectClass = 'Ticket';
     }
-    if ($objectClass == 'History' or $objectClass == 'Audit') {
+    if ($objectClass == 'History' or $objectClass == 'Audit' or $objectClass == 'KpiHistory' or ! in_array($objectClass,SqlList::getListNotTranslated('Mailable'))) {
       return false; // exit : not for History
     }
+    debugLog("sendMailIfMailable(statusChange=$statusChange) for ".get_class($this)." #".$this->id);
+    
     $canBeSend = true;
     if ($idProject) {
       $canBeSend = ! SqlList::getFieldFromId ( "Project", $idProject, "isUnderConstruction" );
