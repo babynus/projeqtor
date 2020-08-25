@@ -34,6 +34,9 @@
 	--color-table-header: #f0f0f0;
 }
 
+
+/* ======================= GENERIC FORM CSS ==========================*/
+
 .dijitTextBox {
     font-weight: normal;
     color: #555555;
@@ -89,6 +92,7 @@ label, .ProjeQtOrNewGui label,
 	background-color: #ffffff;
 	color:var(--color-text);
 }
+
 .ProjeQtOrNewGui .dijitButtonNode, 
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
   background: transparent;
@@ -147,6 +151,9 @@ label, .ProjeQtOrNewGui label,
 .dijitTitlePaneTextNode {
 	 font-weight:normal;
 }
+
+/*================================== LAYOUTS ===============================================*/
+
 .ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar {
 	background: var(--color-toolbar) !important;
 }
@@ -169,9 +176,8 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
   background: rgba(255,255,255,0.3) !important;
 }
-.dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
-	border:0;
-}
+
+
 html, body, #mainDiv, 
 #toolBarDiv, 
 #logoDiv,
@@ -321,7 +327,16 @@ animation: fadeIn ease 0.5s;
 }    
 .ProjeQtOrNewGui .detailButton.dijitButton, .ProjeQtOrNewGui .dijitReset.dijitInline.detailButton.dijitButtonNode {
 	  background: #ffffff;
-    border: 0px solid #ffffff;
+    /*border: 1px solid #ffffff;*/
+    
+}
+
+.ProjeQtOrNewGui .detailButton.dijitButton.dijitButtonHover, .ProjeQtOrNewGui .dijitReset.dijitInline.detailButton.dijitButtonHover .dijitButtonNode {
+  /*border: 1px solid var(--color-medium);*/
+  background: var(--color-button-background);
+}
+.dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
+  border:1px solid white;
 }
 
 .ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
@@ -424,3 +439,13 @@ body .ProjeQtOrNewGui {
 .ProjeQtOrNewGui .calendarYellowUpdate16 
   { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 }
+
+.ProjeQtOrNewGui .iconTicket32 { background-image: url(customIcons/new/iconTicket.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .iconTicket22 { background-image: url(customIcons/new/iconTicket.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .iconTicket16 { background-image: url(customIcons/new/iconTicket.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrNewGui .iconTicket { background-image: url(customIcons/new/iconTicket.png);  background-repeat: no-repeat;}
+
+.ProjeQtFlatBlue .iconTicket32 { background-image: url(customIcons/new/iconTicket.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtFlatBlue .iconTicket22 { background-image: url(customIcons/new/iconTicket.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtFlatBlue .iconTicket16 { background-image: url(customIcons/new/iconTicket.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtFlatBlue .iconTicket { background-image: url(customIcons/new/iconTicket.png);  background-repeat: no-repeat;}
