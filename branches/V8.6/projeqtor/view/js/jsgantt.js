@@ -1050,7 +1050,6 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           vLeftTable +='</td></tr></table></div>';
           vLeftTable +='</TD>';
           if (!dojo.byId('versionsPlanning') && !dojo.byId('contractGantt')) {
-            if (!planningPage=='PortfolioPlanning' && vTaskList[i].getMile() ) {
     	        for (var iSort=0;iSort<sortArray.length;iSort++) {
     	          var field=sortArray[iSort];
     	          if (field.substr(0,6)=='Hidden') field=field.substr(6);
@@ -1069,7 +1068,6 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
     	              +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;'+padding+'">'+valueField+'</span></TD>' ;
     	          }
     	        }
-            }
          }
         //florent ticket 4397
           else if(dojo.byId('contractGantt')) {
@@ -1418,7 +1416,9 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vBarWidth=vBarWidth-1;
           }
           if( vTaskList[i].getGroup()) {   
+            console.log(vTaskList[i].getClass());
             vRightTable += '<DIV ' + ffSpecificHeight+ '>'
+              + ((vTaskList[i].getClass()=='PeriodicMeeting')?'<tag id="meeting_'+vTaskList[i].getID()+'" ></tag>':'')
               + ((planningPage=='PortfolioPlanning')?'<tag id="mile_'+vTaskList[i].getID()+'" ></tag>':'')
               + '<TABLE class="rightTableLine" style="width:' + vChartWidth + 'px;">' 
               + '<TR id=childrow_'+vID+' class="ganttTaskgroup" style="height: 21px;"'
@@ -2011,9 +2011,21 @@ JSGantt.expand= function (ganttObj) {
 JSGantt.hide=function (pID,ganttObj) {
    var vList=ganttObj.getList();
    var vID=0;
+   var parentLine='';
+   if(dojo.byId('meeting_'+pID)){
+     tagParent=dojo.byId('meeting_'+pID);
+     parentLine=dojo.byId('childgrid_'+pID).innerHTML;
+   }
+   console.log(tagParent);
+   var newParentLine=parentLine;
+   var sonsLines='';
    for(var i = 0; i < vList.length; i++) {
      if(vList[i].getParent()==pID) {
        vID = vList[i].getID();
+       if(vList[i].getClass()=='Meeting'){
+         sonsLines = dojo.byId('taskbar_'+vID).innerHTML;
+         console.log(sonsLines);
+       }
        if(JSGantt.findObj('child_' + vID)){
          JSGantt.findObj('child_' + vID).style.display = "none";
          JSGantt.findObj('childgrid_' + vID).style.display = "none";
@@ -2024,6 +2036,11 @@ JSGantt.hide=function (pID,ganttObj) {
        }
      }
    }
+   console.log(parentLine);
+   console.log(sonsLines);
+   newParentLine=parentLine.replace(tagParent,tagParent+sonsLines);
+   newParentLine="<div id='ça me saoul' >&nbsp;</div>";
+   dojo.byId('childgrid_'+pID).innerHTML=newParentLine;
 };
 
 /**
