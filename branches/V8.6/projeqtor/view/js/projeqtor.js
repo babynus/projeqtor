@@ -3288,10 +3288,10 @@ function drawGantt() {
       }
       //gautier #3925
         if(trim(item.validatedenddate) != "" && item.done == 0){
-          var  today;
-          today = new Date();
+          var someDate = new Date();
+          var numberOfDaysToAdd = 1;
           var validatedEndDate = new Date (item.validatedenddate);
-          if( validatedEndDate < today){
+          if( validatedEndDate < someDate.setDate(someDate.getDate() - numberOfDaysToAdd)){
             if(item.reftype=="Project"){
               pColor = '650000';
             }else{
