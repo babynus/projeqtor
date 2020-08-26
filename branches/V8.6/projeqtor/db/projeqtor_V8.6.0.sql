@@ -277,8 +277,44 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (77, 'showAdminProj', 'boolean', 100, 0, 0, 0);
 
 -- ==========================================
+-- Add idProject ot History
+-- ==========================================
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}ticket e where e.id=${prefix}history.refId and ${prefix}history.refType='Ticket') where refType='Ticket';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}activity e where e.id=${prefix}history.refId and ${prefix}history.refType='Activity') where refType='Activity';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}milestone e where e.id=${prefix}history.refId and ${prefix}history.refType='Milestone') where refType='Milestone';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}risk e where e.id=${prefix}history.refId and ${prefix}history.refType='Risk') where refType='Risk';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}action e where e.id=${prefix}history.refId and ${prefix}history.refType='Action') where refType='Action';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}issue e where e.id=${prefix}history.refId and ${prefix}history.refType='Issue') where refType='Issue';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}meeting e where e.id=${prefix}history.refId and ${prefix}history.refType='Meeting') where refType='Meeting';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}decision e where e.id=${prefix}history.refId and ${prefix}history.refType='Decision') where refType='Decision';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}question e where e.id=${prefix}history.refId and ${prefix}history.refType='Question') where refType='Question';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}expense e where e.id=${prefix}history.refId and ${prefix}history.refType='IndividualExpense') where refType='IndividualExpense';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}expense e where e.id=${prefix}history.refId and ${prefix}history.refType='ProjectExpense') where refType='ProjectExpense';
+UPDATE ${prefix}history set idProject=id where refType='Project';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}affectation e where e.id=${prefix}history.refId and ${prefix}history.refType='Affectation') where refType='Affectation';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}assignment e where e.id=${prefix}history.refId and ${prefix}history.refType='Assignment') where refType='Assignment';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}document e where e.id=${prefix}history.refId and ${prefix}history.refType='Document') where refType='Document';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}requirement e where e.id=${prefix}history.refId and ${prefix}history.refType='Requirement') where refType='Requirement';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}testcase e where e.id=${prefix}history.refId and ${prefix}history.refType='TestCase') where refType='TestCase';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}testsession e where e.id=${prefix}history.refId and ${prefix}history.refType='TestSession') where refType='TestSession';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}opportunity e where e.id=${prefix}history.refId and ${prefix}history.refType='Opportunity') where refType='Opportunity';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}command e where e.id=${prefix}history.refId and ${prefix}history.refType='Command') where refType='Command';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}quotation e where e.id=${prefix}history.refId and ${prefix}history.refType='Quotation') where refType='Quotation';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}bill e where e.id=${prefix}history.refId and ${prefix}history.refType='Bill') where refType='Bill';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}deliverable e where e.id=${prefix}history.refId and ${prefix}history.refType='Deliverable') where refType='Deliverable';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}deliverable e where e.id=${prefix}history.refId and ${prefix}history.refType='Incoming') where refType='Incoming';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}delivery e where e.id=${prefix}history.refId and ${prefix}history.refType='Delivery') where refType='Delivery';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}tender e where e.id=${prefix}history.refId and ${prefix}history.refType='Tender') where refType='Tender';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}callfortender e where e.id=${prefix}history.refId and ${prefix}history.refType='CallForTender') where refType='CallForTender';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}term e where e.id=${prefix}history.refId and ${prefix}history.refType='Term') where refType='Term';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}changerequest e where e.id=${prefix}history.refId and ${prefix}history.refType='ChangeRequest') where refType='ChangeRequest';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}providerorder e where e.id=${prefix}history.refId and ${prefix}history.refType='ProviderOrder') where refType='ProviderOrder';
+UPDATE ${prefix}history set idProject=(select idProject from ${prefix}providerbill e where e.id=${prefix}history.refId and ${prefix}history.refType='ProviderBill') where refType='ProviderBill';
+
+-- ==========================================
 -- Patchs IGE
 -- ==========================================
 ALTER TABLE `${prefix}leavetype` ADD COLUMN `sortOrder` int(3) unsigned default NULL COMMENT '3';
 
 ALTER TABLE `${prefix}delivery` ADD COLUMN `idContact` int(12) unsigned DEFAULT NULL COMMENT '12';
+
