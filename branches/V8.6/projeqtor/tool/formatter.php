@@ -686,6 +686,7 @@ function activityStreamDisplayHist ($hist,$origin){
   $isDovVers=false;
   $isTestCaseRun=false;
   $isLink=false;
+  $attachement=false;
   $gotoAndStyle=' style="margin-left:18px;" ';
   $userId = $hist->idUser;
   $userName = ($hist->idUser!='')?SqlList::getNameFromId ( 'Affectable', $userId ):lcfirst(i18n('unknown'));
@@ -702,6 +703,16 @@ function activityStreamDisplayHist ($hist,$origin){
   if(substr($hist->refType, -15) == 'PlanningElement')return;
   if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
+  if($objectClass=='Ticket' and trim($change)!='' and  $change!='idStatus'){
+    $attach=explode('|', substr($change,1));
+    $objectAttach=new $attach[0] ($attach[1]);
+    if($objectAttach->id!=''){
+      $attachement=true;
+    }else{
+      return;
+    }
+    $attName='<span style="font-weight:bold;">'.$objectAttach->fileName.'</span>';
+  }
   if(($objectClass=='Affectation' or $objectClass=='Assignment' or $objectClass=='DocumentVersion') and $operation!='delete'){
     $object= new $objectClass($objectId);
     if($object->id!=''){
@@ -782,6 +793,9 @@ function activityStreamDisplayHist ($hist,$origin){
     }else if($isLink){
       $text=i18n('addedLink').'&nbsp;'.i18n($linkedClass).' #'.intval($linkedId);
       $icon=formatIcon("LinkStream",22);
+    }else if($attachement){
+      debugLog($attName);
+      $text=i18n('addedAttachement').'&nbsp;'.$attName;
     }else{
       $text=i18n('createdElementStream');
     }
