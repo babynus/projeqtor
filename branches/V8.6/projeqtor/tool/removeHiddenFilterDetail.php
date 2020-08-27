@@ -12,18 +12,20 @@ $user=getSessionUser();
 
 $indexes=array();
 $nbCriteria = 0;
-foreach ($user->_arrayFiltersDetail[$objectClass] as $key => $filter) {
-   if (isset($filter['hidden']) and $filter['hidden']=='1') {
-     $indexes[]=$key;
-   } else {
-     $nbCriteria+=1;
-   }
-}
-
-if ($nbCriteria==0) {
-  unset($user->_arrayFiltersDetail[$objectClass]);
-} else if (count($indexes)>0) {
-  foreach ($indexes as $index) {
-    unset($user->_arrayFiltersDetail[$objectClass][$index]);
+if(isset($user->_arrayFiltersDetail[$objectClass])){
+  foreach ($user->_arrayFiltersDetail[$objectClass] as $key => $filter) {
+  	if (isset($filter['hidden']) and $filter['hidden']=='1') {
+  		$indexes[]=$key;
+  	} else {
+  		$nbCriteria+=1;
+  	}
+  }
+  
+  if ($nbCriteria==0) {
+  	unset($user->_arrayFiltersDetail[$objectClass]);
+  } else if (count($indexes)>0) {
+  	foreach ($indexes as $index) {
+  		unset($user->_arrayFiltersDetail[$objectClass][$index]);
+  	}
   }
 }
