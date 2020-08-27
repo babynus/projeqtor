@@ -2400,7 +2400,6 @@ class PlanningElement extends SqlElement {
   	$projectList = array_flip($projectList);
   	$projectList = '(0,'.implode(',',$projectList).')';
   	if(($this->idRevenueMode == 2 and $this->refType == 'Project') or $this->refType == 'Activity'){
-  	    $this->revenue = 0;
   		$sons=$this->getSonItemsArray();
   		$sumActPlEl=0;
   		$sumProjlEl=0;
