@@ -31,7 +31,7 @@
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
 scriptLog('   ->/view/absenceList.php');
-
+$idProject = "";
 $displayNothing = false;
 $currentYear=strftime("%Y");
 $currentMonth = strftime("%m");
@@ -239,7 +239,7 @@ $currentMonth = strftime("%m");
     if(!isset($monthSpinner))$monthSpinner=$currentMonth;
     
     
-    
+    $noNeed = false;
     $listResource = array();
     $resourceId = null;$inIdTeam = null;$inIdOrga = null;$onlyRes = false;
     if(isset($userName)){
@@ -269,7 +269,18 @@ $currentMonth = strftime("%m");
       }elseif(!$resourceId and $inIdTeam and $inIdOrga){
         $listResource = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'));
       }elseif(!$resourceId and !$inIdTeam and !$inIdOrga and trim($idProject)!="" ){
-        $listResourceObj = $res->getSqlElementsFromCriteria(array('idle'=>'0'),null,null,null,true);
+        $listResourceObj = array();
+        $project = new Project($idProject);
+        $aff = new Affectation();
+        $listProj = transformListIntoInClause($project->getRecursiveSubProjectsFlatList(false,true));
+        $where = " idProject in ".$listProj;
+        $listResources = $aff->getSqlElementsFromCriteria(null,false,$where);
+        foreach ($listResources as $valueRes){
+          if($valueRes->idResourceSelect){
+            $listResource[]=$valueRes->idResourceSelect;
+          }
+        }
+        $noNeed = true;
       }else{
         $displayNothing = true;
       }
@@ -313,7 +324,7 @@ $currentMonth = strftime("%m");
                   <?php 
                   if(!$displayNothing){
                     $listMonth=array($yearSpinner.$monthSpinner);
-                    if(!$onlyRes){
+                    if(!$onlyRes and !$noNeed){
                       foreach ($listResource as $id=>$val){
                         $listResource[$id]=$val->id;
                       } 
