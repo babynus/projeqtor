@@ -6102,6 +6102,10 @@ function saveWorkUnit(){
   editorWUIncomings.updateElement();
   editorWULivrables=CKEDITOR.instances['WULivrables'];
   editorWULivrables.updateElement();
+  if (trim(dijit.byId('WUReferences').get("value"))=="") {
+    showAlert(i18n("referenceIsMissing"));
+    return;
+  }
   var formVar=dijit.byId('workUnitForm');
   if (formVar.validate()) {
     loadContent("../tool/saveWorkUnit.php", "resultDivMain", "workUnitForm",true,'WorkUnit');
