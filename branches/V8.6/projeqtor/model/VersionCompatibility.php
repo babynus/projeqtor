@@ -40,6 +40,9 @@ class VersionCompatibility extends SqlElement {
 		if (count($check)>0) {
 			$result.='<br/>' . i18n('errorDuplicateLink');
 		}
+		if ($this->idVersionA==$this->idVersionB) {
+			$result.='<br/>' . i18n('errorHierarchicLoop');
+		}
 		
 		$defaultControl=parent::control();
 		if ($defaultControl!='OK') {
