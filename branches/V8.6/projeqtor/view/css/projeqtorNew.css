@@ -138,7 +138,7 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui .dijitTitlePane .dijitTitlePaneTitle {
 	background:#ffffff !important;
 	color: var(--color-section-title-text) !important;
-	border-bottom: 1px solid var(--color-section-title-border);
+	/* border-bottom: 1px solid var(--color-section-title-border);*/
 	border-top: 2px solid var(--color-section-title-border);
 	margin-top:10px;
 	font-size:120%;
@@ -171,7 +171,7 @@ label, .ProjeQtOrNewGui label,
   color: var(--color-detail-header-text) !important;
 }
 .ProjeQtOrNewGui #buttonDiv {
-  border-bottom : 2px solid var(--color-detail-header-border);
+  border-bottom : 1px solid var(--color-detail-header-border);
 }
 .ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
   background: rgba(255,255,255,0.3) !important;
@@ -294,6 +294,9 @@ animation: fadeIn ease 0.5s;
 } 
 .ProjeQtOrNewGui .dijitButtonIcon {
   background-image: url(customIcons/new/editorButtonsEnabled.png);
+}
+.ProjeQtOrNewGui .dijitDisabled .dijitButtonIcon {
+  background-image: url(customIcons/new/editorButtonsDisabled.png);
 }
 
 .ProjeQtOrNewGui .dijitDialogTitleBar {

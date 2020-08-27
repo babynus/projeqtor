@@ -57,7 +57,7 @@ function setColorTheming(ref,smooth) {
   // Detail
   element.style.setProperty("--color-detail-header", white);
   element.style.setProperty("--color-detail-header-text", dark);
-  element.style.setProperty("--color-detail-header-border", medium);
+  element.style.setProperty("--color-detail-header-border", light);
   element.style.setProperty("--color-section-title-text", dark);
   element.style.setProperty("--color-section-title-border", (smooth)?medium:dark);
   element.style.setProperty("--color-table-header", light);
