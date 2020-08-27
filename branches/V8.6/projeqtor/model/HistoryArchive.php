@@ -41,6 +41,7 @@ class HistoryArchive extends SqlElement {
   public $operationDate;
   public $idUser;
   public $isWorkHistory;
+  public $idProject;
   
   public static $_storeDate;
   public static $_storeItem;
