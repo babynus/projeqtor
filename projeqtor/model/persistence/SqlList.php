@@ -100,7 +100,6 @@ class SqlList {
     $obj=new $listType();
     $calculated=false;
     $field=$obj->getDatabaseColumnName($displayCol);
-    debugLog("listType=$listType, displayCol=$displayCol, field=$field");
     if (property_exists($obj, '_calculateForColumn') and isset($obj->_calculateForColumn[$displayCol])) {
     	$field=$obj->_calculateForColumn[$displayCol];
     	$calculated=true;
