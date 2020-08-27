@@ -37,6 +37,7 @@ $yearSpinner= RequestHandler::getYear('yearPlannedWorkManual');
 $monthSpinner= RequestHandler::getMonth('monthPlannedWorkManual');
 $displayNothing = false;$onlyRes=false;
 $listResource = array();
+$noNeed = false;
 $resourceId = trim(RequestHandler::getId('userNamePlanned'));
 $inIdTeam = trim(RequestHandler::getId('idTeamPlannedWorkManual'));
 $inIdOrga = trim(RequestHandler::getId('idOrganizationPlannedWorkManual'));
@@ -58,11 +59,22 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
   }elseif(!$resourceId and $inIdTeam and $inIdOrga){
     $listResourceObj = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'),null,null,null,true);
   }elseif(!$resourceId and !$inIdTeam and !$inIdOrga and $idProject){
-    $listResourceObj = $res->getSqlElementsFromCriteria(array('idle'=>'0'),null,null,null,true);
+    $listResourceObj = array();
+    $project = new Project($idProject);
+    $aff = new Affectation();
+    $listProj = transformListIntoInClause($project->getRecursiveSubProjectsFlatList(false,true));
+    $where = " idProject in ".$listProj;
+    $listResources = $aff->getSqlElementsFromCriteria(null,false,$where);
+    foreach ($listResources as $valueRes){
+      if($valueRes->idResourceSelect){
+          $listResource[]=$valueRes->idResourceSelect;
+      }
+    }
+    $noNeed = true;
   }else{
     $displayNothing = true;
   }
-  if (isset($listResourceObj) and is_array($listResourceObj)) {
+  if (isset($listResourceObj) and is_array($listResourceObj) and !$noNeed) {
     foreach ($listResourceObj as $obj) {
       $listResource[]=$obj->id;
     }
