@@ -139,8 +139,10 @@ if (trim($paramStreamIdNote)!="") {
 
 if ($paramProject!='*') {
 	$critWhere.=" and (idProject in ".getVisibleProjectsList(true).')';
+	$where.=" and (idProject in ".getVisibleProjectsList(true).')';
 } else {
 	$critWhere.=" and (idProject is null or idProject in ".getVisibleProjectsList($paramProject).')';
+	$where.=" and (idProject is null or idProject in ".getVisibleProjectsList($paramProject).')';
 }
 
 if ($activityStreamNumberDays!==""){
@@ -182,7 +184,6 @@ if ($activityStreamNumberDays!==""){
   $where.=" and operation='update' or operation='insert' or operation='delete'";
 }
 
-
 if ($activityStreamShowClosed!='1') {
 	$critWhere.=" and idle=0";
 }
@@ -215,42 +216,6 @@ if($showOnlyNotes=='NO'){
     }
   }else{
     $historyInfoLst=$historyInfo;
-  }
-}
-
-if($paramProject!='*'){
-  $paramProject=explode(',', $paramProject);
-  foreach ($paramProject as $idP){
-    $proj= new Project($idP);
-    $subProjectList=$proj->getRecursiveSubProjectsFlatList($limliteActiviProj);
-    foreach ($subProjectList as $idSubrProj=>$nameSubProj){
-      $idSubProjectList[]=$idSubrProj;
-    }
-  }
-  foreach ($paramProject as $idTP=>$idProjSelector){
-    foreach ($idSubProjectList as $idTab=>$idSubProj){
-      if($idSubProj==$idProjSelector){
-        unset($idSubProjectList[$idTab]);
-        continue;
-      }else{
-        $paramProject[]=$idSubProj;
-        unset($idSubProjectList[$idTab]);
-        continue;
-      }
-    }
-  }
-  foreach ($historyInfoLst as $id=>$his){
-    $obj= new $his->refType ();
-    $idProject=SqlElement::getRefField($his->refType,$his->refId , 'idProject');
-    if(!$idProject){
-      unset($historyInfoLst[$id]);
-      continue;
-    }else{
-      if(!in_array($idProject, $paramProject)){
-        unset($historyInfoLst[$id]);
-        continue;
-      }
-    }
   }
 }
 

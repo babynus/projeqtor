@@ -41,6 +41,7 @@ class History extends SqlElement {
   public $operationDate;
   public $idUser;
   public $isWorkHistory;
+  public $idProject;
   
   public static $_storeDate;
   public static $_storeItem;
@@ -95,8 +96,11 @@ class History extends SqlElement {
     if ($refType=='PlanningElement' and $obj and isset($obj->refType)) {
     	$refType=$obj->refType.'PlanningElement';
     }
+    if(property_exists($refType, 'idProject') or $refType=='Project'){
+      $hist->idProject=($refType=='Project')?$obj->id:$obj->idProject ;
+    }
     //florent
-    if(($colName=='idle' or $colName=='cancelled') and $newValue=='1' and $canArchiveIdle='YES'){
+    if(($colName=='idle' or $colName=='cancelled') and $newValue=='1' and $canArchiveIdle=='YES'){
       $tableHist=$hist->getDatabaseTableName();
       $tableHistArch=$histArch->getDatabaseTableName();
       $hist->refType=$refType;

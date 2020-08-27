@@ -703,8 +703,8 @@ function activityStreamDisplayHist ($hist,$origin){
   if(substr($hist->refType, -15) == 'PlanningElement')return;
   if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
-  if($objectClass=='Ticket' and trim($change)!='' and  $change!='idStatus'){
-    $attach=explode('|', substr($change,1));
+  if($objectClass=='Ticket' and strpos($change, '|Attachement|')){
+    $attach=explode('|', substr($change,(strpos($change, '|Attachement|')+1)));
     $objectAttach=new $attach[0] ($attach[1]);
     if($objectAttach->id!=''){
       $attachement=true;
@@ -752,6 +752,8 @@ function activityStreamDisplayHist ($hist,$origin){
         }
         $resourceName='<span '.$gotoResource.' >'.$resource->name.'</span>';
       }
+    }else{
+      return;
     }
   }
   if (substr($change,0,4)=='Link') {
@@ -794,7 +796,6 @@ function activityStreamDisplayHist ($hist,$origin){
       $text=i18n('addedLink').'&nbsp;'.i18n($linkedClass).' #'.intval($linkedId);
       $icon=formatIcon("LinkStream",22);
     }else if($attachement){
-      debugLog($attName);
       $text=i18n('addedAttachement').'&nbsp;'.$attName;
     }else{
       $text=i18n('createdElementStream');

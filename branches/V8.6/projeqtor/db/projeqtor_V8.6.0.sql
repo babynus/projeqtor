@@ -279,6 +279,10 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 -- ==========================================
 -- Add idProject ot History
 -- ==========================================
+
+ALTER TABLE `${prefix}history` ADD `idProject` INT(12) NULL DEFAULT NULL;
+ALTER TABLE `${prefix}historyarchive` ADD `idProject` INT(12) NULL DEFAULT NULL;
+
 UPDATE ${prefix}history set idProject=(select idProject from ${prefix}ticket e where e.id=${prefix}history.refId and ${prefix}history.refType='Ticket') where refType='Ticket';
 UPDATE ${prefix}history set idProject=(select idProject from ${prefix}activity e where e.id=${prefix}history.refId and ${prefix}history.refType='Activity') where refType='Activity';
 UPDATE ${prefix}history set idProject=(select idProject from ${prefix}milestone e where e.id=${prefix}history.refId and ${prefix}history.refType='Milestone') where refType='Milestone';
