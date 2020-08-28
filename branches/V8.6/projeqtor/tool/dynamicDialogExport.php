@@ -186,17 +186,33 @@ $htmlresult.="<br/>";
   </tr>
   <tr>
     <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("exportReferencesAs")?> :&nbsp;</td>
-    <td > <select dojoType="dijit.form.FilteringSelect" class="input" 
+    <td > <select dojoType="dijit.form.FilteringSelect" class="input"
            <?php echo autoOpenFilteringSelect();?>
 				   style="width: 150px;" name="exportReferencesAs" id="exportReferencesAs">         
            <option value="name"><?php echo i18n("colName");?></option>                            
            <option value="id"><?php echo i18n("colId");?></option>
-			    </select></td>
+            </select>
+    </td>
   </tr>
   <tr>
     <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("exportHtml")?> :&nbsp;</td>
     <td > <div type="checkbox" dojoType="dijit.form.CheckBox" id="exportHtml" name="exportHtml" ></div></td>
   </tr>
+    <!--Add a separator to use for csv files - F.KARA #458-->
+    <tr>
+        <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("paramCsvSeparator")?> :&nbsp;</td>
+        <td >
+            <select dojoType="dijit.form.FilteringSelect" class="input"
+                value="<?php echo Parameter::getUserParameter('csvSeparator');?>"
+                onChange="saveDataToSession('csvSeparator',this.value,true);"
+                <?php echo autoOpenFilteringSelect();?>
+                     style="width: 150px;" name="separatorCSV" id="separatorCSV">
+                <option value=";">;</option>
+                <option value=",">,</option>
+            </select>
+        </td>
+    </tr>
+    <!--END a separator to use for csv files - F.KARA #458-->
    <?php if( $objectClass != 'Work' ){?>
   <tr><td colspan="2" >&nbsp;</td></tr>
   
