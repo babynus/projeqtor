@@ -6026,7 +6026,11 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentView'));
   if ($habil and $habil->rightAccess!=1) {
     if($canSeeDirectAcces){
-      $goto="var callback = accessImputationCallBack();
+      $goto="
+        if (checkFormChangeInProgress()) {
+          return;
+        }
+      	var callback = accessImputationCallBack();
         saveDataToSession('userName',$user->id,false, function() {
         saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
   		       saveDataToSession('weekSpinner',".substr(weekFormat($today), 5, 2).",false, function() {
@@ -6072,7 +6076,11 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       echo ' title="'.i18n('addAssignmentOrganization').'" > '.formatSmallButton('Organization', true).'</a>';
     }
     if($canSeeDirectAcces){
-      $goto="var callback = accessImputationCallBack(); 
+      $goto="
+            if (checkFormChangeInProgress()) {
+              return;
+            }
+            var callback = accessImputationCallBack(); 
              saveDataToSession('userName',$user->id,false, function() {
              saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
   		       saveDataToSession('weekSpinner',".substr(weekFormat($today), 5, 2).",false, function() {
@@ -6085,7 +6093,11 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   } else if(!$print and !$canUpdate and $canSeeDirectAcces){
     echo '<td class="assignHeader" style="width:10%;vertical-align:middle;">';
     if($canSeeDirectAcces){
-          $goto="var callback = accessImputationCallBack();
+          $goto="
+          if (checkFormChangeInProgress()) {
+            return;
+          }
+          var callback = accessImputationCallBack();
           saveDataToSession('userName',$user->id,false, function() {
           saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
   		    saveDataToSession('weekSpinner',".substr(weekFormat($today), 5, 2).",false, function() {
@@ -6133,7 +6145,11 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         //gautier #directAcces
         $listUser=getListForSpecificRights('Imputation');
         if(!$assignment->isResourceTeam and isset($listUser[$assignment->idResource])){
-          $goto=" var callback = accessImputationCallBack();
+          $goto=" 
+            if (checkFormChangeInProgress()) {
+              return;
+            }
+             var callback = accessImputationCallBack();
              saveDataToSession('userName',$assignment->idResource,false, function() {
              saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
   		       saveDataToSession('weekSpinner',".substr(weekFormat($today), 5, 2).",false, function() {
@@ -6156,7 +6172,11 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         //gautier #directAcces
         $listUser=getListForSpecificRights('Imputation');
         if(!$assignment->isResourceTeam and isset($listUser[$assignment->idResource])){
-          $goto=" var callback = accessImputationCallBack();
+          $goto=" 
+          if (checkFormChangeInProgress()) {
+            return;
+          }
+          var callback = accessImputationCallBack();
           saveDataToSession('userName',$assignment->idResource,false, function() {
           saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
   		    saveDataToSession('weekSpinner',".substr(weekFormat($today), 5, 2).",false, function() {
