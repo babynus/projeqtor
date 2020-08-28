@@ -2463,7 +2463,6 @@ function buttonRightLock() {
   }
 }
 function buttonRightRefresh() {
-  console.log("buttonRightRefresh()");
   var createRight = dojo.byId('createRight');
   var updateRight = dojo.byId('updateRight');
   var deleteRight = dojo.byId('deleteRight');
@@ -3156,7 +3155,6 @@ function drawGantt() {
     if(dojo.byId('portfolioPlanning')){
       for(var j=0;j <items.lenght; i++){
         var item = items[j];
-        console.log('ui');
         if(item.reftype == 'Milestone'){
           items[j-1]+=item;
         }
@@ -4370,7 +4368,6 @@ function providerPaymentIdProviderTerm() {
   });
 }
 function updateComplexities(number,idCatalog,parameterNumber){
-  console.log(parameterNumber);
   url = "../tool/removeWorkUnit.php?number="+number+"&idCatalog="+idCatalog;
   var notRefresh = false;
   dojo.xhrGet({
