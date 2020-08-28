@@ -230,13 +230,15 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
         		$where.=urldecode($split[$cpt]);
         		$cpt++;
         	}
+        	// 
+        	$where=$obj->replaceDatabaseColumnNameInWhereClause($where);
         } else {
         	returnError($invalidQuery, $querySyntax);
         }
         // Add access restrictions
         $where.=' and '.getAccesRestrictionClause($class,null,true); // GOOD : access limit is applied !!!
     		echo '{"identifier":"id",' ;
-        echo ' "items":[';        
+        echo ' "items":[';       
         $list=$obj->getSqlElementsFromCriteria(null,null,$where);
         $cpt=0;
         foreach ($list as $obj) {
