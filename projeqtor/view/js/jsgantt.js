@@ -1389,7 +1389,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             $idPrarent=vTaskList[i].getParent();
             var tagParent='<tag id="mile_'+$idPrarent+'" ></tag>';
             vRightTableTempMile=vRightTableTempMile.replace('font-size:18px', 'font-size:21px;text-shadow: 0px -2px 0px white;');
-            vRightTable=vRightTable.replace(tagParent,tagParent+vRightTableTempMile.replace('id="mile_','id="grouped_'));
+            vRightTable=vRightTable.replace(tagParent,tagParent+vRightTableTempMile);
           }else{
             vRightTable+=vRightTableTempMile;
           }
@@ -1558,7 +1558,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               + '</div>';
             }
             vIsOnCriticalPath=vTaskList[i].getIsOnCriticalPath();
-            vRightTable += '<div id=' + vBardivName + ' class="barDivTask" style="';
+            vRightTableTempMeeting = '<div id=' + vBardivName + ' class="barDivTask" style="'+(vTaskList[i].getVisible()==1 && vTaskList[i].getClass()=='Meeting'?'display:block;':'');
             if (! vTaskList[i].getGlobal() )
               var vBorderBottomColor=vTaskList[i].getColor();
               var vBorderBottomSize=2;
@@ -1566,12 +1566,12 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 vBorderBottomColor=vTaskList[i].getTaskStatusColor();
                 vBorderBottomSize=3;
               }
-              vRightTable += ' border-bottom: '+vBorderBottomSize+'px solid #' + vBorderBottomColor + ';';
-            vRightTable += ' left:' + vBarLeft + 'px; height:11px; '
+              vRightTableTempMeeting += ' border-bottom: '+vBorderBottomSize+'px solid #' + vBorderBottomColor + ';';
+              vRightTableTempMeeting += ' left:' + vBarLeft + 'px; height:11px; '
 	            + ' width:' + vBarWidth + 'px" '
 	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
 	            +'>';         
-            vRightTable += ' <div class="ganttTaskrowBarComplete"  '
+            vRightTableTempMeeting += ' <div class="ganttTaskrowBarComplete"  '
             	+ ' style="width:' + vTaskList[i].getCompStr() + '; cursor: pointer;'+((vTaskList[i].getGlobal)?'opacity:0.2;':'')+'"'
       		    + ' onmousedown=JSGantt.startLink('+i+'); '
               + ' onmouseup=JSGantt.endLink('+i+'); '
@@ -1599,7 +1599,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	        	  }
   	        	}
   	        	vIsOnCriticalPath=vTaskList[i].getIsOnCriticalPath();
-  	        	vRightTable += '<div id=taskbar_'+vID+' title="' + vTaskList[i].getNameTitle() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle + '" '
+  	        	vRightTableTempMeeting += '<div id=taskbar_'+vID+' title="' + vTaskList[i].getNameTitle() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle + '" '
   	            + ' class="ganttTaskrowBar" style="position:relative;background-color:'+((vIsOnCriticalPath=='1')?vCriticalPathColor:tmpColor)+'; '
   	            + ' width:' + vBarWidth + 'px;'+ ((vIsOnCriticalPath=='1')?' border-bottom: 5px solid '+tmpColor+';border-top: 5px solid '+tmpColor+';height:3px;':'')+'" ' 
         		    + ' onmousedown=JSGantt.startLink('+i+'); '
@@ -1609,11 +1609,11 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
   	            + ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); >';
   	        	  if (vTaskList[i].getGlobal()) {
-  	        	    vRightTable +='<img src="../view/css/customIcons/'+imgColor+'/icon'+vTaskList[i].getClass()+'.png" style="pointer-events: none;filter:saturate('+imgSaturate+');width:16px;height:16px;z-index:13;position:absolute;right:2px;" />';
+  	        	    vRightTableTempMeeting +='<img src="../view/css/customIcons/'+imgColor+'/icon'+vTaskList[i].getClass()+'.png" style="pointer-events: none;filter:saturate('+imgSaturate+');width:16px;height:16px;z-index:13;position:absolute;right:2px;" />';
   	        	  }
-  	            vRightTable += ' </div>';	        	
+  	        	  vRightTableTempMeeting += ' </div>';	        	
   	        	if (g.getSplitted()) {
-  	        		vRightTable +='<div class="ganttTaskrowBar"  title="' + vTaskList[i].getNameTitle() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle + '" '
+  	        	  vRightTableTempMeeting +='<div class="ganttTaskrowBar"  title="' + vTaskList[i].getNameTitle() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle + '" '
   		        		  + 'style="position: absolute; background-color:#' + vTaskList[i].getColor() +';'
   		        		  + 'top: 0px; width:' + vBarWidthPlan + 'px; left: ' + vBarLeftPlan + 'px; "'
   		        		  + ' onmousedown=JSGantt.startLink('+i+'); '
@@ -1623,7 +1623,6 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   		        		  + ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '");></div>';
   		        }
               if( g.getCaptionType() ) {
-                vCaptionStr = '';
                 switch( g.getCaptionType() ) {           
                   case 'Caption':    vCaptionStr = vTaskList[i].getCaption();  break;
                   case 'Resource':   vCaptionStr = vTaskList[i].getResource();  break;
@@ -1631,17 +1630,32 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                   case 'Complete':   vCaptionStr = vTaskList[i].getCompStr();  break;
                   case 'Work':       vCaptionStr = vTaskList[i].getWork();  break;
                 }
-                vRightTable += '<div class="labelBarDiv" '
+                vRightTableTempMeeting += '<div class="labelBarDiv" '
                 	// + ' onMouseover=JSGantt.enterBarLink('+i+'); '
 	                // + ' onMouseout=JSGantt.exitBarLink('+i+'); '
                   + ' onMouseover=JSGantt.exitBarLink('+i+'); '
                 	+ 'style="left:' + (Math.ceil((vTaskRight) * (vDayWidth) - 1) + 6) + 'px;display:block;">' + vCaptionStr + '</div>';
               }
 	          }
-            vRightTable += '</div>' ;
+  	        vRightTableTempMeeting += '</div>' ;
+            if(vTaskList[i].getClass()=='Meeting'){
+              $idPrarentMeeting=vTaskList[i].getParent();
+              var tagParentMeeting='<tag id="meeting_'+$idPrarentMeeting+'" ></tag>';
+              
+              if(vTaskList[i].getVisible()==1){
+                vRightTableMeeting=vRightTableTempMeeting.replace('style="display:block;','style="z-index:99;display:none;');
+              }else{
+                vRightTableMeeting=vRightTableTempMeeting.replace('style="','style="z-index:99;');
+              }
+              vRightTable=vRightTable.replace(tagParentMeeting,tagParentMeeting+vRightTableMeeting.replace('bardiv_','bardivMetting_'));
+
+              vRightTable+=vRightTableTempMeeting;
+            }else{
+              vRightTable+=vRightTableTempMeeting;
+            }
           }
         }
-        if(!(planningPage=='PortfolioPlanning' && vTaskList[i].getMile())){
+        if(!(planningPage=='PortfolioPlanning' && vTaskList[i].getMile()) ){
           vRightTable += '</DIV>';
         }
       }
@@ -2011,23 +2025,17 @@ JSGantt.hide=function (pID,ganttObj) {
    var vList=ganttObj.getList();
    var vID=0;
    var parentLine='';
-   if(dojo.byId('meeting_'+pID)){
-     tagParent=dojo.byId('meeting_'+pID);
-     parentLine=dojo.byId('childgrid_'+pID).innerHTML;
-   }
-//   console.log(tagParent);
    var newParentLine=parentLine;
    var sonsLines='';
    for(var i = 0; i < vList.length; i++) {
      if(vList[i].getParent()==pID) {
        vID = vList[i].getID();
-       if(vList[i].getClass()=='Meeting'){
-         sonsLines = dojo.byId('taskbar_'+vID);
-//         console.log(sonsLines);
-       }
        if(JSGantt.findObj('child_' + vID)){
          JSGantt.findObj('child_' + vID).style.display = "none";
          JSGantt.findObj('childgrid_' + vID).style.display = "none";
+       }
+       if(vList[i].getClass()=='Meeting'){
+         JSGantt.findObj('bardivMetting_' + vID).style.display = "";
        }
        vList[i].setVisible(0);
        if(vList[i].getGroup() == 1) {
@@ -2035,11 +2043,6 @@ JSGantt.hide=function (pID,ganttObj) {
        }
      }
    }
-//   console.log(parentLine);
-//   console.log(sonsLines);
-//   newParentLine=parentLine.replace(tagParent,tagParent+sonsLines);
-//   newParentLine="<div id='ça me saoul' >&nbsp;</div>";
-//   dojo.byId('childgrid_'+pID).innerHTML=newParentLine;
 };
 
 /**
@@ -2066,6 +2069,9 @@ JSGantt.show =  function (pID, ganttObj) {
         if(JSGantt.findObj('child_' + vID)){
           JSGantt.findObj('child_'+vID).style.display = "";
           JSGantt.findObj('childgrid_'+vID).style.display = "";
+        }
+        if(vList[i].getClass()=='Meeting'){
+          JSGantt.findObj('bardivMetting_' + vID).style.display = "none";
         }
         vList[i].setVisible(1);
       }

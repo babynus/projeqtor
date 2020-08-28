@@ -745,7 +745,7 @@ function activityStreamDisplayHist ($hist,$origin){
       	  break;
       }
       if(isset($resource)){
-        if ( securityCheckDisplayMenu(null, 'Resource') and securityGetAccessRightYesNo('menu'.'Resource', 'read', '')=="YES") {
+        if ( securityCheckDisplayMenu(null, 'Resource') and securityGetAccessRightYesNo('menu'.'Resource', 'read', getSessionUser())=="YES") {
           $gotoResource=' class="streamLink" onClick="gotoElement(\''.htmlEncode('Resource').'\',\''.htmlEncode($resource->id).'\')"';
         }else{
           $gotoResource=' ';
@@ -763,9 +763,11 @@ function activityStreamDisplayHist ($hist,$origin){
     $linkedId=$linkExpl[3];
   }
   
-  if ( securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
+  if ( securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', getSessionUser())=="YES") {
     $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
-  }
+  }else {
+    return;
+  }  
   $elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n($objectClass).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
     $tmpName=SqlList::getNameFromId($objectClass, $objectId);
