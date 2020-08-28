@@ -43,6 +43,12 @@ class WorkUnit extends SqlElement {
 		parent::__construct($id,$withoutDependentObjects);
 	}
 	
+	public function save() {
+	  $this->name = $this->reference;
+	  $result = parent::save();
+	  return $result;
+	}
+	
 	public function deleteControl()
 	{
 	  $result="";
