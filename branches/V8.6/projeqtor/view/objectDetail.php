@@ -3676,7 +3676,9 @@ function drawHistoryFromObjects($refresh=false) {
         }
         $dataType=$curObj->getDataType($colName);
         $dataLength=$curObj->getDataLength($colName);
-        if (strpos($curObj->getFieldAttributes($colName), 'hidden')!=false) {
+        if($hist->refType == 'Component' and $colName == 'idComponent'){
+          $hide=false;
+        }else if (strpos($curObj->getFieldAttributes($colName), 'hidden')!==false) {
           $hide=true;
         }
       }
