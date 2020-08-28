@@ -3676,7 +3676,7 @@ function drawHistoryFromObjects($refresh=false) {
         }
         $dataType=$curObj->getDataType($colName);
         $dataLength=$curObj->getDataLength($colName);
-        if (strpos($curObj->getFieldAttributes($colName), 'hidden')!==false) {
+        if (strpos($curObj->getFieldAttributes($colName), 'hidden')!=false) {
           $hide=true;
         }
       }

@@ -206,6 +206,38 @@ class History extends SqlElement {
         self::store ($obj, $obj->refType, $obj->refId, $operation , 'Approver', $aff->name,'');
       }
       
+    }else if($refType=='ProductStructure'){
+      $prodOrComp = new ProductOrComponent($obj->idProduct);
+      $objType = null;
+      if($prodOrComp->idProductType){
+        $objType = 'Product';
+      }else if($prodOrComp->idComponentType){
+        $objType = 'Component';
+      }
+      $idType = 'id'.$objType;
+      if($operation=='insert'){
+        self::store ($obj, $objType, $obj->idProduct, 'update' , 'idComponent', '', $obj->idComponent);
+        self::store ($obj, 'Component', $obj->idComponent, 'update' , 'id'.$objType, '', $obj->idProduct);
+      }else if($operation=='delete'){
+      	self::store ($obj, $objType, $obj->idProduct, 'update' , 'idComponent', $obj->idComponent, '');
+      	self::store ($obj, 'Component', $obj->idComponent, 'update' , 'id'.$objType, $obj->idProduct, '');
+      }
+    }else if($refType=='ProductVersionStructure'){
+      $prod = new ProductVersion($obj->idProductVersion);
+      $comp = new ComponentVersion($obj->idProductVersion);
+      $objType = null;
+      if($prod->id){
+        $objType = 'ProductVersion';
+      }else if($comp->id){
+        $objType = 'ComponentVersion';
+      }
+      if($operation=='insert'){
+        self::store ($obj, $objType, $obj->idProductVersion, 'update' , 'idComponentVersion', '', $obj->idComponentVersion);
+        self::store ($obj, 'ComponentVersion', $obj->idComponentVersion, 'update' , 'id'.$objType, '', $obj->idProductVersion);
+      }else if($operation=='delete'){
+      	self::store ($obj, $objType, $obj->idProductVersion, 'update' , 'idComponentVersion', $obj->idComponentVersion, '');
+      	self::store ($obj, 'ComponentVersion', $obj->idComponentVersion, 'update' , 'id'.$objType, $obj->idProductVersion, '');
+      }
     }
     if (strpos($returnValue,'<input type="hidden" id="lastOperationStatus" value="OK"')) {
       return true;
