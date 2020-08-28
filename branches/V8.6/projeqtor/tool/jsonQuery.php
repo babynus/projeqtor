@@ -745,12 +745,17 @@
     		if (isset($_REQUEST['exportHtml']) and $_REQUEST['exportHtml']=='1') {
     		  $exportHtml=true;
     		}
+            $csvSep="";
+            if (isset($_REQUEST['separatorCSV'])) {
+                $csvSep=$_REQUEST['separatorCSV'];
+            } else {
+                $csvSep=Parameter::getGlobalParameter('csvSeparator');
+            }
     		$headers='caption';
-    		$csvSep=Parameter::getGlobalParameter('csvSeparator');
     		$csvQuotedText=true;
     		if ($csvExportAll) {
     		  $exportReferencesAs='id';
-    		  if (isset($csvSepExportAll)) $csvSep=$csvSepExportAll; // test should qlzyqs be true
+    		  if (isset($csvSepExportAll)) $csvSep=$csvSepExportAll; // test should always be true
     		  $exportHtml=true;
     		  $headers='id';
     		  $csvQuotedText=false;

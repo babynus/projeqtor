@@ -9368,9 +9368,10 @@ function executeExport(obj, idUser) {
   var val=dojo.byId('column0').value;
   var exportReferencesAs=dijit.byId('exportReferencesAs').get('value');
   var exportHtml=(dijit.byId('exportHtml').get('checked'))?'1':'0';
+  var separatorCSV=dijit.byId('separatorCSV').get('value');
   if(obj == 'Work'){
     var exportDateAs = dijit.byId('exportDateAs').get('value');
-    var exportRessourceAs = dijit.byId('exportRessourceAs').get('value');  
+    var exportRessourceAs = dijit.byId('exportRessourceAs').get('value');
   }
   val=eval(val);
   var toExport="";
@@ -9392,12 +9393,13 @@ function executeExport(obj, idUser) {
     if (ExportType == 'csv') {
       if(obj != 'Work'){
       showPrint("../tool/jsonQuery.php?exportHtml="+exportHtml
-          +"&exportReferencesAs="+ exportReferencesAs + "&hiddenFields=" + toExport 
+          +"&exportReferencesAs="+ exportReferencesAs + "&hiddenFields=" + toExport + "&separatorCSV=" + separatorCSV
           , 'list', null,
           'csv');
       }else{
         showPrint("../tool/jsonQuery.php?exportHtml="+exportHtml
-            +"&exportReferencesAs="+ exportReferencesAs + "&hiddenFields=" + toExport +"&exportDateAs="+ exportDateAs +"&exportRessourceAs="+ exportRessourceAs
+            +"&exportReferencesAs="+ exportReferencesAs + "&hiddenFields=" + toExport +"&exportDateAs="+ exportDateAs
+            +"&exportRessourceAs="+ exportRessourceAs + "&separatorCSV=" + separatorCSV
             , 'list', null,
             'csv');
       }
