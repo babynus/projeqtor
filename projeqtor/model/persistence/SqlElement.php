@@ -3576,6 +3576,12 @@ abstract class SqlElement {
       // }
     return $colName;
   }
+  public function replaceDatabaseColumnNameInWhereClause($where) {
+    foreach ($this->getStaticDatabaseColumnName() as $from=>$to) {
+      $where=str_replace($from,$to,$where);
+    }
+    return $where;
+  }
 
   /**
    * ========================================================================
