@@ -191,8 +191,6 @@
 .ProjeQtOrFlatGrey .iconAccessProfileNoProject { background-image: url(customIcons/grey/iconAccessProfileNoProject.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
 .ProjeQtOrFlatRed .iconAccessProfileNoProject { background-image: url(customIcons/red/iconAccessProfileNoProject.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
 
-
-
 .iconAccessRight32 { background-image: url(images/iconAccessRight32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconAccessRight22 { background-image: url(images/iconAccessRight22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconAccessRight16 { background-image: url(images/iconAccessRight16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
@@ -434,9 +432,12 @@
 
 /* END - ADD qCazelles - Requirement dashboard - Ticket 90 */
 
-.iconDashboardTicket32 { background-image: url(images/iconDashboardTicket32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconDashboardTicket22 { background-image: url(images/iconDashboardTicket22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconDashboardTicket16 { background-image: url(images/iconDashboardTicket16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconDashboardTicket { background-image: url(images/iconDashboardTicket32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatBlue .iconDashboardTicket { background-image: url(customIcons/blue/iconTicketDashboard.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGreen .iconDashboardTicket { background-image: url(customIcons/green/iconTicketDashboard.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGrey .iconDashboardTicket { background-image: url(customIcons/grey/iconTicketDashboard.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatRed .iconDashboardTicket { background-image: url(customIcons/red/iconTicketDashboard.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrNewGui .iconDashboardTicket { background-image: url(customIcons/new/iconTicketDashboard.svg);  background-repeat: no-repeat;}
 
 .iconDecision32 { background-image: url(images/iconDecision32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconDecision22 { background-image: url(images/iconDecision22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -737,9 +738,12 @@
 .iconOverallProgress22 { background-image: url(images/iconOverallProgress22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconOverallProgress16 { background-image: url(images/iconOverallProgress16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconOrganization32 { background-image: url(images/iconOrganization32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconOrganization22 { background-image: url(images/iconOrganization22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconOrganization16 { background-image: url(images/iconOrganization16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconOrganization { background-image: url(images/iconOrganization32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatBlue .iconOrganization { background-image: url(customIcons/blue/iconOrganization.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
+.ProjeQtOrFlatGreen .iconOrganization { background-image: url(customIcons/green/iconOrganization.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
+.ProjeQtOrFlatGrey .iconOrganization { background-image: url(customIcons/grey/iconOrganization.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
+.ProjeQtOrFlatRed .iconOrganization { background-image: url(customIcons/red/iconOrganization.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
+.ProjeQtOrNewGui .iconOrganization { background-image: url(customIcons/new/iconOrganization.svg);  background-repeat: no-repeat;}
 
 .iconOrganizationType32 { background-image: url(images/iconOrganizationType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconOrganizationType22 { background-image: url(images/iconOrganizationType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -817,9 +821,13 @@
 .iconProfile22 { background-image: url(images/iconProfile22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconProfile16 { background-image: url(images/iconProfile16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconProject32 { background-image: url(images/iconProject32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconProject22 { background-image: url(images/iconProject22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconProject16 { background-image: url(images/iconProject16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconProject { background-image: url(images/iconProject32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatBlue .iconProject { background-image: url(customIcons/blue/iconProject.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGreen .iconProject { background-image: url(customIcons/green/iconProject.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGrey .iconProject { background-image: url(customIcons/grey/iconProject.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatRed .iconProject { background-image: url(customIcons/red/iconProject.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrNewGui .iconProject { background-image: url(customIcons/new/iconProject.svg);  background-repeat: no-repeat; }
+
 .iconConstruction32 { background-image: url(images/iconConstruction.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconConstruction22 { background-image: url(images/iconConstruction.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconConstruction16 { background-image: url(images/iconConstruction.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
@@ -1021,9 +1029,12 @@
 .iconTestSessionType22 { background-image: url(images/iconTestSessionType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconTestSessionType16 { background-image: url(images/iconTestSessionType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconTicket32 { background-image: url(images/iconTicket32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconTicket22 { background-image: url(images/iconTicket22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconTicket16 { background-image: url(images/iconTicket16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconTicket { background-image: url(images/iconTicket32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatBlue .iconTicket { background-image: url(customIcons/blue/iconTicket.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGreen .iconTicket { background-image: url(customIcons/green/iconTicket.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGrey .iconTicket { background-image: url(customIcons/grey/iconTicket.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatRed .iconTicket { background-image: url(customIcons/red/iconTicket.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrNewGui .iconTicket { background-image: url(customIcons/new/iconTicket.svg);  background-repeat: no-repeat;}
 
 .iconTicketSimple32 { background-image: url(images/iconTicketSimple32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconTicketSimple22 { background-image: url(images/iconTicketSimple22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -1041,9 +1052,12 @@
 .iconTicketType22 { background-image: url(images/iconTicketType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconTicketType16 { background-image: url(images/iconTicketType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconToday32 { background-image: url(images/iconToday32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconToday22 { background-image: url(images/iconToday22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconToday16 { background-image: url(images/iconToday16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconToday { background-image: url(images/iconToday32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatBlue .iconToday { background-image: url(customIcons/blue/iconToday.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGreen .iconToday { background-image: url(customIcons/green/iconToday.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGrey .iconToday { background-image: url(customIcons/grey/iconToday.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatRed .iconToday { background-image: url(customIcons/red/iconToday.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrNewGui .iconToday { background-image: url(customIcons/new/iconToday.svg);  background-repeat: no-repeat;}
 
 .iconTool32 { background-image: url(images/iconTool32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconTool22 { background-image: url(images/iconTool22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -1106,6 +1120,7 @@
 .calendarWhite16 { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .calendarRedUpdate32 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .calendarRedUpdate22 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+
 .calendarRedUpdate16 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .calendarYellowUpdate32 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .calendarYellowUpdate22 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
@@ -1123,7 +1138,7 @@
 
 .iconSize32 { background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconSize22 { background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.iconSize16 { background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.iconSize16 { background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 /* B */
 
@@ -1496,9 +1511,12 @@
 /* Extra CSS for custom Kanban                                                     */
 /* =============================================================================== */
 
-.iconKanban32 { background-image: url(images/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconKanban22 { background-image: url(images/iconKanban.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.iconKanban16 { background-image: url(images/iconKanban.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px}
+.iconKanban { background-image: url(images/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatBlue .iconKanban { background-image: url(customIcons/blue/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGreen .iconKanban { background-image: url(customIcons/green/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGrey .iconKanban { background-image: url(customIcons/grey/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatRed .iconKanban { background-image: url(customIcons/red/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrNewGui .iconKanban { background-image: url(customIcons/new/iconKanban.svg);  background-repeat: no-repeat; width: 32px; height: 32px; }
 
 .iconKanbanAdd32 { background-image: url(images/iconKanbanAddpng);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconKanbanAdd22 { background-image: url(images/iconKanbanAdd.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
@@ -1529,10 +1547,6 @@
 
 .ProjeQtOrFlatBlue .iconButtonKanbanRemove16 { background-image: url(customIcons/blue/iconKanbanRemove.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
-.ProjeQtOrFlatBlue .iconKanban32 { background-image: url(customIcons/blue/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatBlue .iconKanban22 { background-image: url(customIcons/blue/iconKanban.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatBlue .iconKanban16 { background-image: url(customIcons/blue/iconKanban.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
 .ProjeQtOrFlatBlue .iconKanbanAdd32 { background-image: url(customIcons/blue/iconKanbanAdd.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatBlue .iconKanbanAdd22 { background-image: url(customIcons/blue/iconKanbanAdd.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconKanbanAdd16 { background-image: url(customIcons/blue/iconKanbanAdd.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -1558,10 +1572,6 @@
 .ProjeQtOrFlatBlue .iconKanbanAddAction22 { background-image: url(customIcons/blue/iconKanbanAddAction.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 
 .ProjeQtOrFlatRed .iconButtonKanbanRemove16 { background-image: url(customIcons/red/iconKanbanRemove.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.ProjeQtOrFlatRed .iconKanban32 { background-image: url(customIcons/red/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatRed .iconKanban22 { background-image: url(customIcons/red/iconKanban.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatRed .iconKanban16 { background-image: url(customIcons/red/iconKanban.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 .ProjeQtOrFlatRed .iconKanbanAdd32 { background-image: url(customIcons/red/iconKanbanAdd.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconKanbanAdd22 { background-image: url(customIcons/red/iconKanbanAdd.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
@@ -1589,10 +1599,6 @@
 
 .ProjeQtOrFlatGreen .iconButtonKanbanRemove16 { background-image: url(customIcons/green/iconKanbanRemove.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
-.ProjeQtOrFlatGreen .iconKanban32 { background-image: url(customIcons/green/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGreen .iconKanban22 { background-image: url(customIcons/green/iconKanban.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGreen .iconKanban16 { background-image: url(customIcons/green/iconKanban.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
 .ProjeQtOrFlatGreen .iconKanbanAdd32 { background-image: url(customIcons/green/iconKanbanAdd.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconKanbanAdd22 { background-image: url(customIcons/green/iconKanbanAdd.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconKanbanAdd16 { background-image: url(customIcons/green/iconKanbanAdd.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -1618,10 +1624,6 @@
 .ProjeQtOrFlatGreen .iconKanbanAddAction22 { background-image: url(customIcons/green/iconKanbanAddAction.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 
 .ProjeQtOrFlatGrey .iconButtonKanbanRemove16 { background-image: url(customIcons/grey/iconKanbanRemove.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.ProjeQtOrFlatGrey .iconKanban32 { background-image: url(customIcons/grey/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGrey .iconKanban22 { background-image: url(customIcons/grey/iconKanban.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGrey .iconKanban16 { background-image: url(customIcons/grey/iconKanban.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 .ProjeQtOrFlatGrey .iconKanbanAdd32 { background-image: url(customIcons/grey/iconKanbanAdd.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconKanbanAdd22 { background-image: url(customIcons/grey/iconKanbanAdd.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
