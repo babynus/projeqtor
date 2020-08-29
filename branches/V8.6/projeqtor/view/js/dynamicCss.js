@@ -34,12 +34,15 @@ function setColorTheming(ref,smooth) {
   medium=HSLToHex(h,s,70);
   light=HSLToHex(h,s,90);
   lighter=HSLToHex(h,s,95);
-  var hslDefault=hexToHSL('#545381');
+  var hslDefault=hexToHSL('#ff0000');
   hueRotate=h-hslDefault[0];
-  saturate=Math.round(s/hslDefault[1]*100);
-  saturate=100;
+  //saturate=Math.round(s/hslDefault[1]*100);
   //brightness=Math.round(40/hslDefault[2]*100);
-  brightness=100;
+  saturate=50;
+  brightness=80;
+  //saturate=100;
+  //brightness=100;
+  
   
   var element=document.getElementById('body');
   // Generic colors
@@ -65,6 +68,7 @@ function setColorTheming(ref,smooth) {
   // Tools (buttons, ...)
   element.style.setProperty("--color-button-background", lighter);
   element.style.setProperty("--image-hue-rotate", hueRotate+'deg');
+  element.style.setProperty("--image-hue-rotate-reverse", (-1*hueRotate)+'deg');
   element.style.setProperty("--image-saturate", saturate+'%');
   element.style.setProperty("--image-brightness", brightness+'%');;
   

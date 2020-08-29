@@ -33,6 +33,7 @@
   $iconSize=32;
   $showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
   $showMenuBar='YES';
+  $iconClassWithSize=(0 and isNewGui())?false:true;
   //$showMenuBar='NO';
   if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
   $allMenuClass=array('menuBarItem'=>'all','menuBarCustom'=>'custom');
@@ -96,7 +97,7 @@
   }
   
   function drawMenu($menu) {
-  	global $iconSize, $defaultMenu,$customMenuArray;
+  	global $iconSize, $defaultMenu,$customMenuArray,$iconClassWithSize;
   	$menuName=$menu->name;
   	$menuClass=' menuBarItem '.$menu->menuClass;
   	if (in_array($menu->name,$customMenuArray)) $menuClass.=' menuBarCustom';
@@ -119,7 +120,7 @@
         }
         echo '>';
         //echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
-        echo '<div class="icon' . $class . $iconSize.' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+        echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
         echo '<div class="menuBarItemCaption">'.i18n($menu->name).'</div>';
         if ($menuName=='menuReports' and isHtml5() ) {?>
           <button class="comboButtonInvisible" dojoType="dijit.form.DropDownButton" 
@@ -152,7 +153,7 @@
       	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
       	echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
       	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" >';
-      	echo '<div class="icon' . $class . $iconSize.' icon'.$class.' iconSize.'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+      	echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
       	//echo '<img src="../view/css/images/icon' . $class . $iconSize. '.png" />';
       	echo '<div class="menuBarItemCaption">'.i18n('menu'.$class).'</div>';
       	echo '</div>';
@@ -162,7 +163,7 @@
   }  
   
   function drawAllMenus($menuList) {
-    global $isLanguageActive, $isNotificationSystemActiv;
+    global $isLanguageActive, $isNotificationSystemActiv,$iconClassWithSize;
     //echo '<td>&nbsp;</td>';
     $obj=new Menu();
     $menuList=$obj->getSqlElementsFromCriteria(null, false);
@@ -241,7 +242,7 @@
       <span style="position: relative; left:7px; top:-7px; height: 20px">
         <button id="projectSelectorParametersButton" dojoType="dijit.form.Button" showlabel="false"
          title="<?php echo i18n('dialogProjectSelectorParameters');?>" style="top:2px;height:20px;"
-         iconClass="iconParameter16 iconParameter iconSize16" xclass="detailButton">
+         iconClass="'.(($iconClassWithSize)?'iconParameter16':'').' iconParameter iconSize16" xclass="detailButton">
           <script type="dojo/connect" event="onClick" args="evt">
            loadDialog('dialogProjectSelectorParameters', null, true);
           </script>
@@ -252,7 +253,7 @@
          title="<?php echo i18n('selectCurrentProject');?>" style="top:2px;height:20px;"
          ondblclick="directUnselectProject();"
          onClick="if (!timeoutDirectSelectProject) {showWait();timeoutDirectSelectProject=setTimeout('directSelectProject();',500);}"
-         iconClass="iconProject16 iconProject iconSize16" xclass="detailButton">
+         iconClass="'.(($iconClassWithSize)?'iconProject16':'').' iconProject iconSize16" xclass="detailButton">
         </button>
 
       </span>
@@ -265,7 +266,7 @@
      <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount"  style="text-align: center; position:relative;top:-4px">
        <div dojoType="dijit.form.DropDownButton"  id=""
             style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;" >
-          <span  class="iconNotification32 iconNotification iconSize32" style="display: table-cell;">  
+          <span  class="<?php if ($iconClassWithSize) echo 'iconNotification32';?> iconNotification iconSize32" style="display: table-cell;">  
             <span id="countNotifications" class="menuBarNotificationCount" style="text-align:center;" >
               0
             </span>
@@ -312,7 +313,7 @@
 			    <table style="width:100%">
     			  <tr>
       				<td style="width:24px;padding-top:2px;">
-      				  <div class="iconChangeLayout22 iconChangeLayout iconSize22">&nbsp;</div> 
+      				  <div class="<?php if ($iconClassWithSize) echo 'iconChangeLayout22';?> iconChangeLayout iconSize22">&nbsp;</div> 
       				</td>
       			  <td style="vertical-align:middle;">&nbsp;</td>
     			  </tr>
@@ -337,7 +338,7 @@
       				</td>
       			  <?php } else {?>
       				<td style="width:24px;padding-top:2px;">
-      				  <div class="iconUserParameter22 iconUserParameter iconSize22">&nbsp;</div> 
+      				  <div class="<?php if ($iconClassWithSize) echo 'iconUserParameter22';?> iconUserParameter iconSize22">&nbsp;</div> 
       				</td>
       			   <?php }?>
       			  <td style="vertical-align:middle;">&nbsp;<?php echo ($user->resourceName)?$user->resourceName:$user->name; ?>&nbsp;&nbsp;</td>
