@@ -1042,7 +1042,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       
        <td width="220px" id="menuBarLeft" >
       
-        <div style="overflow:hidden;position: absolute; left:2px; top: 8px;width:205px; background: transparent; color: #FFFFFF !important; border:1px solid #FFF;vertical-align:middle;" 
+        <div style="overflow:hidden;position: absolute; left:2px; top: 8px;width:205px; background: transparent; color: #FFFFFF !important; border:<?php echo (isNewGui())?'0':'1';?>px solid #FFF;vertical-align:middle;" 
         onChange="menuFilter(this.value);" id="menuSelector" id="menuSelector"
         onMouseEnter="showMenuList();" onMouseLeave="hideMenuList(300);"
         dojoType="dijit.form.Select" class="input filterField rounded menuSelect" 
