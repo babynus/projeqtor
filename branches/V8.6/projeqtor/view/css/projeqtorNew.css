@@ -154,6 +154,9 @@ label, .ProjeQtOrNewGui label,
 
 /*================================== LAYOUTS ===============================================*/
 
+.ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar {
+	background: url() var(--color-toolbar) !important;
+}
 .ProjeQtOrNewGui .dijitAccordionTitle2, .ProjeQtOrNewGui .reportTableColumnHeader2, .ProjeQtOrNewGui .largeReportHeader2 {
   background: url() var(--color-light) !important;
 }
@@ -179,6 +182,7 @@ label, .ProjeQtOrNewGui label,
 }
 .ProjeQtOrNewGui #listHeaderDiv,.ProjeQtOrNewGui .listTitle {
 	background-color: var(--color-list-header) !important;
+	color: var(--color-list-header-text) !important;
 }
 .ProjeQtOrNewGui #buttonDiv, .ProjeQtOrNewGui .title {
   background-color: var(--color-detail-header) !important;
@@ -191,6 +195,28 @@ label, .ProjeQtOrNewGui label,
   background: rgba(255,255,255,0.3) !important;
 }
 
+.ProjeQtOrNewGui .dojoxGridHeader .dojoxGridCell {
+  background-color: var(--color-grid-header-bg) !important;
+  border: 1px solid #ccc;
+  border-right: 1px solid #fefefe;
+  border-top: 0;
+  color: var(--color-grid-header-text) !important;
+  text-shadow: none;
+  font-size: 120%;
+  padding-top: 0px;
+  vertical-align:bottom;
+  padding-bottom: 5px;
+}
+.ProjeQtOrNewGui .dojoxGridRowOdd {
+  background-color: #ffffff;
+}
+.ProjeQtOrNewGui .dojoxGridRowSelected {
+	background-color: var(--color-dark) !important;
+}
+.ProjeQtOrNewGui .dojoxGridRowOver .dojoxGridCell{
+	background: var(--color-light) !important;
+	color: var(--color-dark) !important;
+}
 
 html, body, #mainDiv, 
 #toolBarDiv, 
@@ -308,15 +334,61 @@ animation: fadeIn ease 0.5s;
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   background-color: transparent;
 } 
+.ProjeQtOrNewGui #toolBarDiv .dijitIcon, .ProjeQtOrNewGui #toolBarDiv .iconSize22 {
+	-webkit-filter : brightness(0) invert(1);
+  filter : brightness(0) invert(1);
+  background-color: transparent;
+  opacity: 1;
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitDisabled {
+  background-color: transparent;
+  opacity : 0;
+}
+.ProjeQtOrNewGui .dijitButtonIcon.iconNewtab  {
+    background-image: url(customIcons/new/iconNewtab.svg);
+    width: 40px;
+    height: 16px;
+}
+.ProjeQtOrNewGui #menuUserParameterTop {
+	font-weight: normal;
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitReset .dijitInline .dijitArrowButtonInner, .ProjeQtOrNewGui #toolBarDiv .dijitTextBox .dijitArrowButtonInner {
+  -webkit-filter : brightness(0) invert(1);
+  filter : brightness(0) invert(1);
+  border: 0;
+}
+.ProjeQtOrNewGui #toolBarDiv .pseudoButton, .ProjeQtOrNewGui #toolBarDiv .dijitTextBox {
+	border:none;
+	background : transparent;
+	color: white;
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitButtonNode, .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
+	border:none;
+}
 .ProjeQtOrNewGui .menuBarItem {
 	padding: 5px 1px 3px 1px;
   top: 0px;
+  border-bottom: 0px;
+  background-color: transparent;
+  background-image: url();
+}
+.ProjeQtOrNewGui .menuBarItem::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url();;
+  background-repeat: no-repeat;
+  background-position: right top;
+  -webkit-filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
+   filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
 }
 .ProjeQtOrNewGui .menuBarItem:hover {
-  -ms-transform: rotate(0deg); /* IE 9 */
-  -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+  -ms-transform: rotate(0deg) brightness(99%); /* IE 9 */
+  -webkit-transform: rotate(0deg) brightness(99%); /* Chrome, Safari, Opera */
   transform: rotate(0deg);
-  border-bottom: 1px solid #ffeeee;
+  border-bottom: 1px solid #fff0f0;
+  background-color: transparent;
 }
 .ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui .bottomNotification {
   -webkit-transition: all 0.2s ease;
@@ -327,7 +399,7 @@ animation: fadeIn ease 0.5s;
 }
 .ProjeQtOrNewGui .menuBarItemSelected {
 	 border-bottom: 1px solid #ff0000;
-	 
+	 background-color: transparent;
 }
 .ProjeQtOrNewGui .menuBarItemSelected:hover {
    border-bottom: 1px solid #ff0000;
@@ -336,9 +408,11 @@ animation: fadeIn ease 0.5s;
 	display:none;
 }
 .ProjeQtOrNewGui .menuBarCustom {
-  background-image: url();
+  /*background-image: url();*/
+  background-image: url(customIcons/red/favorite.png);
+  background-size: 16px 16px;
   background-repeat: no-repeat;
-  background-position: right bottom;
+  background-position: right top;
 }
 .ProjeQtOrNewGui .menuBarCustom::before {
 	content: "";
@@ -347,11 +421,18 @@ animation: fadeIn ease 0.5s;
   width: 100%; height: 100%;
   background-image: url(images/smallIconFavorite.png);;
   background-repeat: no-repeat;
-  background-position: right bottom;
-	-webkit-filter: hue-rotate(var(--image-hue-rotate-reverse)) ;
-   filter: hue-rotate(var(--image-hue-rotate-reverse));
+  background-position: right top;
+	-webkit-filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
+   filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
+}
+.ProjeQtOrNewGui .dijitSplitter {
+    background: var(--color-white);
+    border:0px solid var(--color-light);
 }
 
+.ProjeQtOrNewGui .dijitTabPaneWrapper {
+	border:none;
+}
 .ProjeQtOrNewGui .dijitButtonIcon {
   background-image: url(customIcons/new/editorButtonsEnabled.png);
 }
@@ -381,6 +462,13 @@ animation: fadeIn ease 0.5s;
   background: url() transparent;
   background-color: transparent;
   color:var(--color-white);
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitTreeRow {
+	color:white;font-weight:normal;font-size:90%
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitTreeRow:hover {
+  color:white;font-weight:normal;font-size:90%;
+  background-color:transparent;
 }
 
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNodeHover {

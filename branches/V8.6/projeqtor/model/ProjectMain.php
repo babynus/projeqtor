@@ -725,7 +725,7 @@ static function isTheLeaveProject($id=null) {
       $result .= '<table ><tr><td>';
       $clickEvent=' onClick=\'setSelectedProject("*", "<i>' . i18n('allProjects') . '</i>", "' . $selectField . '");\' ';
       if ($outMode=='html' or $outMode=='pdf') $clickEvent='';
-      $result .= '<div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="width:100%;">';
+      $result .= '<div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="width:100%;height:22px;margin-top:-3px;padding-top:3px;margin-bottom:5px;">';
       $result .= '<i>' . i18n('allProjects') . '</i>';
       $result .= '</div></td></tr></table>';
     }
@@ -787,7 +787,7 @@ static function isTheLeaveProject($id=null) {
         	  	$left -= ($level-2)*20;
         	  }
         	}
-          $result .='<tr>';
+          $result .='<tr style="heignt:25px">';
           if(!$drawCheckBox){
             $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="projectSelectorCheckbox" style="float:left;position:relative;left:'.$left.'px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'" '.$checked.'>';
             $result .='</div>';
@@ -802,7 +802,7 @@ static function isTheLeaveProject($id=null) {
             $clickEvent=' onClick=\'setSelectedProject("' . htmlEncode($prj->id) . '", "' . htmlEncode($prj->name,'parameter') . '", "' . $selectField . '");\' ';
             if ($outMode=='html' or $outMode=='pdf') $clickEvent='';
             $result .='<td>';
-            $result .='<div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="width:100%;color:black;">';
+            $result .='<div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="width:100%;color:black;height:25px;margin-top:-6px;padding-top:5px">';
             $result .= htmlEncode($prj->name);
             $result .='</div>';
           }

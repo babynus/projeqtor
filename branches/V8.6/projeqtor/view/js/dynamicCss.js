@@ -53,10 +53,14 @@ function setColorTheming(ref,smooth) {
   element.style.setProperty("--color-light", light);
   element.style.setProperty("--color-lighter", lighter);
   element.style.setProperty("--color-text", '#656565');
+  element.style.setProperty("--color-white", '#ffffff');
   // Main Layout
   element.style.setProperty("--color-toolbar",darker);
   // List
   element.style.setProperty("--color-list-header", white);
+  element.style.setProperty("--color-list-header-text", dark);
+  element.style.setProperty("--color-grid-header-bg", white);
+  element.style.setProperty("--color-grid-header-text", dark);
   // Detail
   element.style.setProperty("--color-detail-header", white);
   element.style.setProperty("--color-detail-header-text", dark);
