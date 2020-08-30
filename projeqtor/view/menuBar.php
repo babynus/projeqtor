@@ -234,7 +234,7 @@
       <span class="titleProject" style="position: relative; left:20px; top:-6px; text-align:right;">
         &nbsp;<?php echo (i18n("projectSelector"));?>&nbsp;:&nbsp;
       </span>
-      <span style="display:inline-block;width:250px; position:relative;left : 10px; top:-6px" title="<?php echo i18n("projectSelectorHelp");?>" >
+      <span style="display:inline-block;width:250px; position:relative;left : 10px; top:-<?php echo (isNewGui())?8:6;?>px" title="<?php echo i18n("projectSelectorHelp");?>" >
         <span style="postion:absolute;height:16px;" dojoType="dijit.layout.ContentPane" region="center"   id="projectSelectorDiv">
           &nbsp;<?php include "menuProjectSelector.php"?>
         </span>
@@ -242,7 +242,7 @@
       <span style="position: relative; left:7px; top:-7px; height: 20px">
         <button id="projectSelectorParametersButton" dojoType="dijit.form.Button" showlabel="false"
          title="<?php echo i18n('dialogProjectSelectorParameters');?>" style="top:2px;height:20px;"
-         iconClass="'.(($iconClassWithSize)?'iconParameter16':'').' iconParameter iconSize16" xclass="detailButton">
+         iconClass="<?php if ($iconClassWithSize) echo 'iconParameter16';?> iconParameter iconSize16" xclass="detailButton">
           <script type="dojo/connect" event="onClick" args="evt">
            loadDialog('dialogProjectSelectorParameters', null, true);
           </script>
@@ -253,7 +253,7 @@
          title="<?php echo i18n('selectCurrentProject');?>" style="top:2px;height:20px;"
          ondblclick="directUnselectProject();"
          onClick="if (!timeoutDirectSelectProject) {showWait();timeoutDirectSelectProject=setTimeout('directSelectProject();',500);}"
-         iconClass="'.(($iconClassWithSize)?'iconProject16':'').' iconProject iconSize16" xclass="detailButton">
+         iconClass="<?php if ($iconClassWithSize) echo 'iconProject16';?> iconProject iconSize16" xclass="detailButton">
         </button>
 
       </span>
@@ -296,11 +296,11 @@
         <a target="#" href="<?php echo $website;?>" >
           <table style="width:100%">
             <tr>
-              <td class="dijitTreeRow" style="position:relative; top:-2px;vertical-align: middle;text-align:center;width:70px">
+              <td class="dijitTreeRow" style="position:relative; top:-2px;vertical-align: middle;text-align:center;width:70px;">
                 <?php echo "$copyright<br/>$version";?>
               </td>
               <td  style="width:35px">
-                <img style="height:28px;width:28px;" src="img/logoSmall.png" />
+                <img style="height:28px;width:28px;" src="img/logoSmall<?php if (isNewGui()) echo 'White';?>.png" />
               </td>
             </tr>
           </table>
@@ -309,7 +309,7 @@
     </td>
         <td title="<?php ?>"  style="position:relative;width:55px;">
       <div dojoType="dijit.layout.ContentPane"  id="menuUserScreenTop" class="pseudoButton" style="position:relative;overflow:hidden;width:55px; height:28px; min-width:55px;top:-5px;">
-        <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuUserScreenTopTitle");?>" id="iconMenuUserScreen" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;position:relative;min-width:50px;top:-3px" >
+        <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuUserScreenTopTitle");?>" id="iconMenuUserScreen" style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:50px;top:-3px" >
 			    <table style="width:100%">
     			  <tr>
       				<td style="width:24px;padding-top:2px;">
@@ -327,7 +327,7 @@
     </td>
     <td title="<?php echo i18n('menuUserParameter');?>"  style="position:relative;width:105px;padding-right:5px;">
       <div dojoType="dijit.layout.ContentPane"  id="menuUserParameterTop" class="pseudoButton" style="position:relative;overflow:hidden; height:28px;width:100%; min-width:100px;top:-5px;left:3px;" title="<?php echo i18n('menuUserParameter');?>">
-        <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserPhoto" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;position:relative;min-width:100px;top:-3px;width:100%" >
+        <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserPhoto" style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:100px;top:-3px;width:100%" >
 			    <table style="width:100%">
     			  <tr>
       			  <?php $user=getSessionUser();
