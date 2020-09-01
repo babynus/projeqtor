@@ -117,6 +117,16 @@ if ($line->id) {
        value="" style="background-color:white;" />
    </td>
  </tr>
+ <tr>
+   <td class="dialogLabel" ><label><?php echo i18n('colRequired');?> : </label></td>
+   <td> 
+      <input dojoType="dijit.form.CheckBox" 
+       name="dialogChecklistDefinitionLineRequired" 
+       id="dialogChecklistDefinitionLineRequired"
+       <?php echo ($line->required)?' checked="checked" ':'';?>
+       value="" style="background-color:white;" />
+   </td>
+ </tr>
  <tr><td colspan="2">&nbsp;</td></tr>
  <tr>
    <td colspan="2" align="center">

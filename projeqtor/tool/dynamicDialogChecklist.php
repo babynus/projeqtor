@@ -136,7 +136,7 @@ if ($print) $canUpdate=false;
         } else {
           $lineVal=new ChecklistLine();
         }?>	 
-		    <tr style="height:25px;min-height:25px">
+		    <tr style="height:25px;min-height:25px;<?php echo ($line->required==1)?'border-left:3px solid red ;':''; ?>">
 <?php   if ($line->check01) {?>
 			    <td class="noteData" style="<?php echo ($print)?'width:'.$nameWidth:'';?>border-right:0; text-align:right" title="<?php echo ($print)?'':$line->title;?>"> 
 				  <?php echo htmlEncode($line->name);?> :   

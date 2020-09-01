@@ -4460,13 +4460,16 @@ function drawChecklistDefinitionLinesFromObject($obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="noteHeader" style="width:30%">'.i18n('colName').'</td>';
+  echo '<td class="noteHeader" style="width:25%">'.i18n('colName').'</td>';
   echo '<td class="noteHeader" style="width:'.(($print)?'65':'60').'%">'.i18n('colChoices').'</td>';
+  echo '<td class="noteHeader" style="width:5%">'.i18n('colRequired').'</td>';
   echo '<td class="noteHeader" style="width:5%">'.i18n('colExclusiveShort').'</td>';
+  
   echo '</tr>';
   
   usort($lines, "ChecklistDefinitionLine::sort");
   foreach ($lines as $line) {
+    
     echo '<tr>';
     if (!$print) {
       echo '<td class="noteData" style="width:5%;text-align:center;">';
@@ -4477,7 +4480,7 @@ function drawChecklistDefinitionLinesFromObject($obj, $refresh=false) {
       echo '</td>';
     }
     if ($line->check01) {
-      echo '<td class="noteData" style="width:30%;border-right:0; text-align:right" title="'.htmlEncode($line->title).'">';
+      echo '<td class="noteData" style="width:25%;border-right:0; text-align:right" title="'.htmlEncode($line->title).'">';
       if ($outMode!='pdf') echo '<div style="position: relative;">';
       echo htmlEncode($line->name);
       if ($outMode!='pdf') echo '<div style="position:absolute;top:0px; left:0px; color: #AAAAAA;">'.htmlEncode($line->sortOrder).'</div>';
@@ -4497,6 +4500,7 @@ function drawChecklistDefinitionLinesFromObject($obj, $refresh=false) {
       }
       echo '</tr></table>';
       echo '</td>';
+      echo '<td class="noteData" style="width:5%">'.htmlDisplayCheckbox($line->required).'</td>';
       echo '<td class="noteData" style="width:5%">'.htmlDisplayCheckbox($line->exclusive).'</td>';
     } else {
       echo '<td class="reportTableHeader" colspan="3" style="width:'.(($print)?'100':'95').'%,text-align:center" title="'.htmlEncode($line->title).'">'.htmlEncode($line->name).'</td>';
