@@ -104,7 +104,8 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (114, 'idProject', 'projectList', 10, 'currentProject'),
 (114,'idTeam','teamList',15,null),
 (114, 'idOrganization', 'organizationList', 20,null),
-(114,'year','year',25,'currentYear');
+(114,'year','year',25,'currentYear'),
+(30, 'limitNbMonth', 'nbMonth',15, null  );
 
 INSERT INTO `${prefix}modulereport` (`id`,`idModule`,`idReport`,`hidden`,`active`) VALUES
 (91,3,110,0,1),
@@ -275,6 +276,7 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (60, 'showAdminProj', 'boolean', 100, 0, 0, 0),
 (76, 'showAdminProj', 'boolean', 100, 0, 0, 0),
 (77, 'showAdminProj', 'boolean', 100, 0, 0, 0);
+
 
 -- ==========================================
 -- Add idProject ot History
