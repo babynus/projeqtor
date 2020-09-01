@@ -230,16 +230,50 @@ foreach ($listParam as $param) {
        maxlength="2"
        value="01" smallDelta="1"
        id="monthSpinner" name="monthSpinner" >
+       <script type="dojo/method" event="onChange" >
+            if(dojo.byId('NbMonthSpinner')){
+              var spinnerNbMonth = dijit.byId('NbMonthSpinner');
+                for (var i = 1; i < 12; i++) {
+                  if (this.value == i) {
+                    var putValue = 13 - i;
+                    spinnerNbMonth.set('value', putValue);
+                    spinnerNbMonth.constraints.max = putValue;
+                  } else if (this.value == 12) {
+                    spinnerNbMonth.set('value', 1);
+                    spinnerNbMonth.constraints.max = 1;
+                  }
+                }
+            }
+       </script>
      </div>
      </td>
      </tr>
-     <?php }
+     <?php } 
      else {
        echo '<input type="hidden" name="monthSpinner" id="monthSpinner" value="01" />'; 
      }
      //END ADD qCazelles - Report fiscal year - Ticket #128 ?>
 <?php    
-  } else if ($param->paramType=='date') {
+  } else if ($param->paramType=="nbMonth"){
+    ?>
+        <!-- START TICKET #383 - F.KARA : Add a number of months -->
+      <tr>
+          <td class="label"><label><?php echo i18n("NbMonth");?>&nbsp;:&nbsp;</label></td>
+          <td><div style="width:55px; text-align: center; color: #000000;"
+                   dojoType="dijit.form.NumberSpinner"
+                   constraints="{min:1,max:12,places:0,pattern:'00'}"
+                   intermediateChanges="true"
+                   maxlength="2"
+                   value="12" smallDelta="1"
+                   id="NbMonthSpinner" name="NbMonthSpinner" >
+                  <script type="dojo/method" event="onChange" >
+                    </script>
+              </div>
+          </td>
+      </tr>
+        <!-- END TICKET #383 - F.KARA : Add a number of months -->
+ <?php 
+  }else if ($param->paramType=='date') {
     $defaultDate='';
     if ($param->defaultValue=='today') {
       $defaultDate=date('Y-m-d');

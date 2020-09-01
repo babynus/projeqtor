@@ -27,6 +27,7 @@
 include_once '../tool/projeqtor.php';
 //echo "workDetail.php";
 
+
 $paramProject='';
 if (array_key_exists('idProject',$_REQUEST)) {
   $paramProject=trim($_REQUEST['idProject']);
@@ -56,6 +57,19 @@ $paramWeek='';
 if (array_key_exists('weekSpinner',$_REQUEST)) {
 	$paramWeek=$_REQUEST['weekSpinner'];
 	$paramWeek=Security::checkValidWeek($paramWeek);
+}
+$paramNbMonth='';
+if (array_key_exists('NbMonthSpinner',$_REQUEST)) {
+    $paramNbMonth=$_REQUEST['NbMonthSpinner'];
+    $paramNbMonth=Security::checkValidMonth($paramNbMonth);
+    if($paramNbMonth == NULL) {
+        $paramNbMonth = $paramMonth;
+    }
+    else {
+        $add = $paramMonth + $paramNbMonth - 1;
+        if ($add > 13) $add = 12;
+        $paramNbMonth = strval($add);
+    }
 };
 $user=getSessionUser();
 
@@ -89,6 +103,7 @@ if ($periodType=='year' and $paramMonth!="01") {
     exit;
   } else {
     $headerParameters.= i18n("startMonth") . ' : ' . i18n(date('F', mktime(0,0,0,$paramMonth,10))) . '<br/>';
+    $headerParameters.= "to" . ' : ' . i18n(date('F', mktime(0,0,0,$paramNbMonth,10))) . '<br/>';
   }
 }
 //END ADD qCazelles - Report fiscal year - Ticket #128
@@ -109,10 +124,12 @@ $where.=($periodType=='month')?" and month='" . $periodValue . "'":'';
 //$where.=($periodType=='year')?" and year='" . $periodValue . "'":'';
 //New
 if ($periodType=='year') {
-  if ($paramMonth<10) $paramMonth='0'.intval($paramMonth);
-  $where.=" and ((year='" . $periodValue . "' and month>='" . $periodValue.$paramMonth . "')".
-          " or (year='" . ($periodValue + 1) . "' and month<'" . ($periodValue + 1) . $paramMonth . "'))";
-  }
+    if ($paramMonth<10) $paramMonth='0'.intval($paramMonth);
+    if ($paramNbMonth<10) $paramNbMonth='0'.intval($paramNbMonth);
+    $where.=" and ((year='" . $periodValue . "' and month>='" . $periodValue.$paramMonth . "' and month<='" . $periodValue.$paramNbMonth ."')".
+        " or (year='" . ($periodValue + 1) . "' and month<'" . ($periodValue + 1) . $paramMonth . "' 
+          and month>'" . ($periodValue + 1) . $paramNbMonth . "' ))";
+}
 //END CHANGE qCazelles - Report start month - Ticket #128
 
 if ($paramProject!='') {
