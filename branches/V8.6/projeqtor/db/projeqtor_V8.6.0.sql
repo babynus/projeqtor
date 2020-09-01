@@ -104,8 +104,7 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (114, 'idProject', 'projectList', 10, 'currentProject'),
 (114,'idTeam','teamList',15,null),
 (114, 'idOrganization', 'organizationList', 20,null),
-(114,'year','year',25,'currentYear'),
-(30, 'limitNbMonth', 'nbMonth',15, null  );
+(114,'year','year',25,'currentYear');
 
 INSERT INTO `${prefix}modulereport` (`id`,`idModule`,`idReport`,`hidden`,`active`) VALUES
 (91,3,110,0,1),
@@ -277,6 +276,8 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (76, 'showAdminProj', 'boolean', 100, 0, 0, 0),
 (77, 'showAdminProj', 'boolean', 100, 0, 0, 0);
 
+--Add required for checklist
+ALTER TABLE `${prefix}checklistdefinitionline` ADD `required` int(1) unsigned default 0 COMMENT '1';
 
 -- ==========================================
 -- Add idProject ot History
@@ -324,3 +325,5 @@ ALTER TABLE `${prefix}leavetype` ADD COLUMN `sortOrder` int(3) unsigned default 
 
 ALTER TABLE `${prefix}delivery` ADD COLUMN `idContact` int(12) unsigned DEFAULT NULL COMMENT '12';
 
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
+(30, 'limitNbMonth', 'nbMonth',15, null  );

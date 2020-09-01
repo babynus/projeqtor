@@ -51,6 +51,7 @@ if (array_key_exists('dialogChecklistDefinitionLineSortOrder',$_REQUEST)) {
 	$sortOrder=$_REQUEST['dialogChecklistDefinitionLineSortOrder'];
 	Security::checkValidNumeric($sortOrder);
 }
+$required=(RequestHandler::isCodeSet('dialogChecklistDefinitionLineRequired') && RequestHandler::getBoolean('dialogChecklistDefinitionLineRequired')==1)?1:0;
 $checkNames=array();
 $checkTitles=array();
 for ($i=1;$i<=5;$i++) {
@@ -93,6 +94,7 @@ for ($i=1;$i<=5;$i++) {
   }
 }
 $line->exclusive=$exclusive;
+$line->required=$required;
 $result=$line->save();
 
 // Message of correct saving
