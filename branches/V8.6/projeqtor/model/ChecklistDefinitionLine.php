@@ -47,6 +47,7 @@ class ChecklistDefinitionLine extends SqlElement {
   public $title05;
   public $sortOrder;
   public $exclusive;
+  public $required;
   
   public $_noHistory=true; // Will never save history for this object
   
@@ -135,10 +136,11 @@ class ChecklistDefinitionLine extends SqlElement {
    * @return the return message of persistence/SqlElement#save() method
    */  
   public function save() {
-  	
   	$result=parent::save();
   	return $result;
   }
+  
+  
   public static function sort($a, $b) {
   	if ($a->sortOrder == $b->sortOrder) {
   		if ($a->id < $b->id) {
