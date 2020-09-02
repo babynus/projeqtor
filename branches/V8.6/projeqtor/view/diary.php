@@ -214,13 +214,18 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 				.'<b>'.$item['name']."</b><br/>"
 				.i18n('colIdProject').": <i>".$item['projectName'].'</i><br/>';
 		if ($item['date']) { $hintHtml.=i18n('colDate').": <i>".$item['date']."</i>"; }
-		if ($item['work'] and $item['real']) { $hintHtml.=i18n('colRealWork').": ".Work::displayWorkWithUnit($item['work']).""; }
-		if ($item['work'] and ! $item['real']) { $hintHtml.=i18n('planned').": <i>".Work::displayWorkWithUnit($item['work'])."</i>"; }
+		if ($item['work'] and $item['real']) { $hintHtml.=i18n('colRealWork').": ".Work::displayWorkWithUnit($item['work'])."<br/>"; }
+		if ($item['work'] and ! $item['real']) { $hintHtml.=i18n('planned').": <i>".Work::displayWorkWithUnit($item['work'])."</i><br/>"; }
+		if ($item['isResourceTeam']) { $hintHtml.=i18n('ResourceTeam').": <i>".SqlList::getNameFromId('ResourceAll', $item['idResourceTeam'], false)."</i>"; }
 		echo '<tr>';
 		echo '<td style="padding: 3px 3px 3px 3px;margin-right:20px;width:100%;position:relative;max-width:250px;">';
 		echo '<div id="item_'.$cpt.'" style="border:1px solid: #EEEEEE; box-shadow: 2px 2px 4px #AAAAAA; width: 100%;border-style:solid;border-width:0px 0px 0px 5px;border-color:'.$item['color'].'">';
 		echo '<table style="width:100%"><tr>';		
-		echo '<td><a style="position:absolute;left:15px;width:18px;top:3px;height:17px;z-index:20;">'.formatIcon($item['class'], 16,null,false).'</a></td>';
+		echo '<td><a style="position:absolute;left:15px;width:18px;top:3px;height:17px;z-index:20;">'.formatIcon($item['class'], 16,null,false).'</a>';
+		if($item['isResourceTeam']){
+		  echo '<a style="position:absolute;left:15px;width:18px;height:17px;z-index:20;">'.formatIcon('Team', 16,null,false).'</a>';
+		}
+		echo '</td>';
 		echo '<td style="color:#555555">';
 		//Modification ici , typename ne marche pas...
 		echo '<div style="cursor:pointer;height:100%;word-wrap:break-word;margin-left:27px;" onClick="gotoElement(\''.$item['class'].'\', '.$item['id'].', false);" >';
@@ -535,6 +540,17 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
 		if(property_exists($item,'meetingStartTime')) {
 		    $meetingStartTime=substr($item->meetingStartTime,0,5);;
         }
+        $isResourceTeam=false;
+        $idResourceTeam=null;
+        $ass = new Assignment();
+        $assList = $ass->getSqlElementsFromCriteria(array('refType'=>get_class($item), 'refId'=>$item->id, 'isResourceTeam'=>1));
+        foreach ($assList as $asgn){
+          $resTeam = ResourceTeamAffectation::getSingleSqlElementFromCriteria('ResourceTeamAffectation', array('idResourceTeam'=>$asgn->idResource, 'idResource'=>$ress));
+          if($resTeam->id){
+            $idResourceTeam = $resTeam->idResourceTeam;
+            $isResourceTeam=true;
+          }
+        }
 		$result[$date][$pw->refType.'#'.$pw->refId]=array(
 				'class'=>$pw->refType,
 		    'id'=>$pw->refId,
@@ -554,7 +570,9 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
 		    'statusId'=>$statusId,
 		    'statusName'=>$statusName,
 		    'description'=>$description,
-            'meetingStartTime'=> $meetingStartTime //Ticket #438 F.KARA - Get the start time of a meeting
+            'meetingStartTime'=> $meetingStartTime,
+		    'isResourceTeam'=> $isResourceTeam,
+		    'idResourceTeam'=> $idResourceTeam //Ticket #438 F.KARA - Get the start time of a meeting
 		);
 	}
 	return $result;

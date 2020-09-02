@@ -421,7 +421,7 @@ function showPrint(page, context, comboName, outMode, orientation) {
     quitConfirmed=false;
     noDisconnect=false;
     return;
-  } else if (context == 'imputation') {
+  } else if (context == 'imputation' || context == 'hierarchicalBudget') {
     var frm=dojo.byId('listForm');
     frm.action="../view/print.php?orientation=" + orientation;
     if (printInNewWin) {
