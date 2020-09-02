@@ -49,6 +49,7 @@ class AssetMain extends SqlElement {
   public $decommissioningDate;
   public $idLocation;
   public $complement;
+  public $_spe_fullNameLocation;
   public $idAffectable;
   public $idUser;
   public $idResource;
@@ -285,6 +286,18 @@ class AssetMain extends SqlElement {
       $result.='</button>';
       $result.='</div></td>';
       $result.='</tr></table>';
+    }elseif($item=="fullNameLocation"){
+      $result .="<table><tr><td class='label' valign='top'><label>" . i18n('colLocation') . "&nbsp;:&nbsp;</label>";
+      $result .="</td><td>";
+      if($this->idLocation){ 
+        $location= new Location($this->idLocation); 
+        $locationArray = array_reverse($location->getLocationFullName());
+        foreach ( $locationArray as $name){
+          $result .= $name.'  -  ';
+        }
+        $result .= $location->name;
+      }
+      $result .= '</td></tr></table>';
     }
     return $result;
   }

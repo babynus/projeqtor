@@ -261,6 +261,9 @@ ADD COLUMN `idUser` int(12) unsigned DEFAULT NULL COMMENT '12',
 ADD COLUMN `creationDateTime` datetime DEFAULT NULL,
 ADD COLUMN `lastUpdateDateTime` datetime DEFAULT NULL;
 
+ALTER TABLE `${prefix}location` 
+ADD COLUMN `idLocation` int(12) unsigned DEFAULT NULL COMMENT '12';
+
 -- Fix for menu & habilitation
 
 UPDATE `${prefix}menu` set level='ReadWriteType', idle=0, menuClass='Type' WHERE id IN (229,236,226);
