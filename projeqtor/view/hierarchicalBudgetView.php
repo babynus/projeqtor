@@ -42,6 +42,7 @@ if ( array_key_exists('print',$_REQUEST) ) {
 	$print=true;
 }
 
+global $print;
 
 $showFullAmount = false;
 if(getSessionValue('showFullAmountHierarchicalBudget')){
@@ -72,30 +73,30 @@ $query='select ' . $querySelect
 . ' order by ' . $queryOrderBy;
 $result=Sql::query($query);
 // Header
-echo "<div>";
+echo "<div id='hierarchicalBudgetListHeaderDiv'>";
 echo '<table id="hierarchicalBudgetListHeader" align="left" width="100%" style="min-width:1350px;">';
 echo '<TR class="ganttHeight" style="height:32px">';
 echo '  <TD class="reportTableHeader" style="width:20px;min-width:20px;max-width:20px; border-right: 0px;"></TD>';
 echo '  <TD class="reportTableHeader" style="border-left:0px; text-align: left;width: 100%;">' . i18n('colBudget') . '</TD>';
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colEstimateAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colInitialAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdate1Amount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdate2Amount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdate3Amount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdate4Amount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdatedAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colEngagedAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colAvailableAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colBilledAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colLeftAmount') . '</div></TD>' ;
-echo '  <TD class=""  ><div style="width:12px;" id="hierarchicBudgetScrollSpace">&nbsp;</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colEstimateAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colInitialAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colUpdate1Amount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colUpdate2Amount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colUpdate3Amount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colUpdate4Amount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colUpdatedAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colEngagedAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colAvailableAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colBilledAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colLeftAmount') . '</div></TD>' ;
+if(!$print)echo '  <TD class=""  ><div style="width:12px;" id="hierarchicBudgetScrollSpace">&nbsp;</div></TD>';
 echo '</TR>';
 echo '</table>';
 echo "</div>";
 $destHeight=RequestHandler::getValue('destinationHeight');
 $height=($destHeight)?(intval($destHeight)-40).'px':'100%';
-echo '<div id="hierarchicalBudgetListDiv" style="position:relative;height:100%;width:100%;min-width:1350px;overflow-y:scroll;overflow-x:hidden;">';
-echo '<table id="dndHierarchicalBudgetList" dojoType="dojo.dnd.Source" jsId="dndSourceTableBudget" id="dndSourceTableBudget" align="left" width="100%" style="">';
+echo '<div id="hierarchicalBudgetListDiv" style="position:relative;height:100%;width:100%;min-width:1350px;overflow-x:hidden;">';
+echo '<table id="dndHierarchicalBudgetList" dojoType="dojo.dnd.Source" jsId="dndSourceTableBudget" id="dndSourceTableBudget" align="left" width="100%" style="min-width:1350px;">';
 function getSubBudgetList($subList, &$subBudget){
 	foreach ($subList as $id=>$obj){
       $subBudget[]=$obj->id;
@@ -197,22 +198,26 @@ if (Sql::$lastQueryNbRows > 0) {
 		  $display='visibility:collapse';
 		}
 		echo '<TR id="hierarchicalBudgetRow_'.$id.'" dndType="budgetHierachical" class="dojoDndItem ganttTask'.$rowType.' hierarchicalBudgetRow" height="30px" style="cursor:default;'.$display.'">';
-		echo '  <TD class="ganttName reportTableData" style="width:30px;min-width:30px;max-width:30px;border-right:0px;' . $compStyle . '">';
-		echo '    <span class="dojoDndHandle handleCursor">';
-		echo '      <table><tr>';
-		echo '        <td class="ganttIconBackground">';
-		echo           formatIcon('Budget', '16');
-		echo '        </td>';
-		echo '        <td><img style="margin-right:2px;width:8px" src="css/images/iconDrag.gif" /></td>';
-		echo '      </tr></table>';
-		echo '    </span>';
-		echo '  </TD>';
-		echo '  <TD class="ganttName reportTableData" style="overflow:hidden;border-left:0px; text-align: left;' . $compStyle . '" nowrap>';
+  		echo '  <TD class="ganttName reportTableData" style="width:30px;min-width:30px;max-width:30px;border-right:0px;' . $compStyle . '">';
+//   		if(!$print){
+    		echo '    <span class="dojoDndHandle handleCursor">';
+    		echo '      <table><tr>';
+    		echo '        <td class="ganttIconBackground">';
+    		echo           formatIcon('Budget', '16');
+    		echo '        </td>';
+    		echo '        <td><img style="margin-right:2px;width:8px" src="css/images/iconDrag.gif" /></td>';
+    		echo '      </tr></table>';
+    		echo '    </span>';
+//   		}
+    	echo '  </TD>';
+		$nameWidth='';
+		if($print)$nameWidth='width:21%;';
+		echo '  <TD class="ganttName reportTableData" style="overflow:hidden;border-left:0px; text-align: left;' .$nameWidth. $compStyle . '" nowrap>';
 		echo '    <div style="position:relative;height:100%;width:100%;"><div class="" style="position:absolute;overflow:hidden;width:100%;height:100%;top:0px;" >';
 		echo '    <table style="width:100%;height:100%;vertical-align:middle;"><tr style="height:100%">';
 		echo '     <td style="width:1px">'.$tab.'</td>';
 		echo '     <td style="position:relative;width:10px">';
-		if($pGroup){
+		if($pGroup and !$print){
 			echo '     <div id="group_'.$line['id'].'" class="'.$class.'"';
 			echo '      style="position: relative; z-index: 100000; width:16px; height:13px;"';
 			echo '      onclick="expandHierarchicalBudgetGroup(\''.$line['id'].'\',\''.implode(',', $limitedSubBudget).'\',\''.implode(',', $subBudget).'\',\''.implode(',', $visibleRow).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
@@ -224,17 +229,24 @@ if (Sql::$lastQueryNbRows > 0) {
 		echo '    </tr></table>';
 		echo '    </div></div>';
 		echo '  </TD>';
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($plannedAmount). '</div></TD>' ;
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($initialAmount). '</div></TD>' ;
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($update1Amount). '</div></TD>' ;
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($update2Amount). '</div></TD>' ;
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($update3Amount). '</div></TD>' ;
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($update4Amount). '</div></TD>' ;
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($actualAmount). '</div></TD>' ;
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($usedAmount). '</div></TD>' ;
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($availableAmount). '</div></TD>' ;
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($billedAmount). '</div></TD>' ;
-		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($leftAmount). '</div></TD>' ;
+		$style='style="min-width:80px;"';
+		if($print)$style = 'style="min-width:80px;width:88px;"';
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($plannedAmount). '</div></TD>' ;
+		if($print)$style = 'style="min-width:80px;width:85px;"';
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($initialAmount). '</div></TD>' ;
+		if($print)$style = 'style="min-width:80px;width:90px;"';
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($update1Amount). '</div></TD>' ;
+		if($print)$style = 'style="min-width:80px;width:90px;"';
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($update2Amount). '</div></TD>' ;
+		if($print)$style = 'style="min-width:80px;width:103px;"';
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($update3Amount). '</div></TD>' ;
+		if($print)$style = 'style="min-width:80px;width:85px;"';
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($update4Amount). '</div></TD>' ;
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($actualAmount). '</div></TD>' ;
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($usedAmount). '</div></TD>' ;
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($availableAmount). '</div></TD>' ;
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($billedAmount). '</div></TD>' ;
+		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv" '.$style.'>' .htmlDisplayCurrency($leftAmount). '</div></TD>' ;
 		echo '</TR>';
 	}
 }

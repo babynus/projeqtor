@@ -220,6 +220,18 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
             </table>
           </td>
         </tr>
+        <tr>
+          <td>
+            <button title="<?php echo i18n('print')?>"  
+               dojoType="dijit.form.Button" 
+               id="printButton" name="printButton"
+               iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton" showLabel="false">
+                <script type="dojo/connect" event="onClick" args="evt">
+                  showPrint('../view/hierarchicalBudgetView.php', 'hierarchicalBudgetLis');
+                </script>
+              </button>
+          </td>
+        </tr>
       </table>
     </div>
     <div id="listBarShow" class="dijitAccordionTitle"
