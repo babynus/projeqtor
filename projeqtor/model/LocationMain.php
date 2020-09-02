@@ -33,6 +33,7 @@ class LocationMain extends SqlElement {
   public $_sec_Description;
   public $id;
   public $name;
+  public $idLocation;
   public $sortOrder=0;
   public $idle;
   public $description;
@@ -78,6 +79,21 @@ class LocationMain extends SqlElement {
     parent::__destruct();
   }
 
+  
+  public function control() {
+    $result = "";
+    if ($this->id and $this->id == $this->idLocation) {
+      $result .= '<br/>' . i18n ( 'errorHierarchicLoop' );
+    }
+    $defaultControl = parent::control ();
+    if ($defaultControl != 'OK') {
+      $result .= $defaultControl;
+    }
+    if ($result == "") {
+      $result = 'OK';
+    }
+    return $result;
+  }
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
@@ -126,5 +142,20 @@ class LocationMain extends SqlElement {
     return $result;
   }
   
+  private static $locationFullNameArray=array();
+  public function getLocationFullName(){
+    if (isset(self::$locationFullNameArray[$this->name.'#'])) {
+      return self::$locationFullNameArray[$this->name.'#'];
+    }
+    if(!$this->idLocation){
+      return array();
+    }else{
+      $topLocation=new Location($this->idLocation);
+      $topList=$topLocation->getLocationFullName();
+      $result=array_merge(array($topLocation->name),$topList);
+      self::$locationFullNameArray[$this->name]=$result;
+    }
+    return $result;
+  }
 }
 ?>
