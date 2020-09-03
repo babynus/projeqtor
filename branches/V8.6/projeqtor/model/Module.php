@@ -86,6 +86,18 @@ class Module extends SqlElement {
       traceLog("Change LeaveSystemActiv to ".(($this->active)?'YES':'NO').' :'.$status);
       if ($status!='OK') traceLog($result); 
     }
+    
+    if ($this->id==20 and $this->active and !$old->active) {
+      $projectList = getVisibleProjectsList(true);
+      $projectList = str_replace('(', '', $projectList);
+      $projectList = str_replace(')', '', $projectList);
+      $projectList = explode(',', $projectList);
+      foreach ($projectList as $id=>$idProj){
+        if(!$idProj)continue;
+        $proj = new Project($idProj);
+        $proj->ProjectPlanningElement->updateCA();
+      }
+    }
       // MTY - LEAVE SYSTEM
     unsetSessionValue('menuInactiveList',true);
     unsetSessionValue('reportInactiveList',true);
