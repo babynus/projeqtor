@@ -2394,6 +2394,33 @@ class PlanningElement extends SqlElement {
     }
   }
   
+  public function updateCA(){
+        $old = $this->getOld();
+    	$project = new Project($this->idProject);
+    	debugLog($this->idProject);
+    	$projectList = $project->getRecursiveSubProjectsFlatList(true, ($this->idProject)?true:false);
+    	$projectList = array_flip($projectList);
+    	$projectList = '(0,'.implode(',',$projectList).')';
+    	$where = 'idProject in '.$projectList.' and idle = 0';
+    	$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
+    	$cmdAmount = ($paramAmount == 'HT')?'totalUntaxedAmount':'totalFullAmount';
+    	$command = new Command();
+    	$this->commandSum = $command->sumSqlElementsFromCriteria($cmdAmount, null, $where);
+    	if(!$this->commandSum)$this->commandSum=0;
+    	$billAmount = ($paramAmount == 'HT')?'untaxedAmount':'fullAmount';
+    	$bill = new Bill();
+    	$this->billSum = $bill->sumSqlElementsFromCriteria($billAmount, null, $where);
+    	if(!$this->billSum)$this->billSum=0;
+    	$paramCA = Parameter::getGlobalParameter('CaReplaceValidCost');
+    	if($paramCA == 'YES' and $this->revenue > 0){
+    		$this->validatedCost = $this->revenue;
+    	}
+    	if($old->idRevenueMode != $this->idRevenueMode and $this->idRevenueMode == 2){
+    		$this->updateRevenue();
+    	}
+    	$this->save();
+  }
+  
   function updateRevenue(){
   	$project = new Project($this->idProject);
   	$projectList = $project->getRecursiveSubProjectsFlatList(true,true);
