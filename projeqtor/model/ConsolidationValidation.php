@@ -256,7 +256,7 @@ class ConsolidationValidation extends SqlElement{
           ///----------------------------------------------------///
           
           $style.='"';
-    	   $result .='   <tr>';
+    	   $result .='   <tr id="tr_'.$uniqueId.'" onMouseOver="dojo.byId(\'tr_'.$uniqueId.'\').style.background=\'#DFDFDF\'"  onMouseOut="dojo.byId(\'tr_'.$uniqueId.'\').style.background=\'#FFFFFF\'">';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:left;vertical-center;">
     	                   <table>
     	                     <tr>
@@ -404,8 +404,8 @@ class ConsolidationValidation extends SqlElement{
 	 */
 	static  function getVisibleProjectToConsolidated ($idProject,$idProjectType,$idOrganization) {
 	  $currentUser=new User(getCurrentUserId());
-	  $visibleProject=implode(',', array_flip($currentUser->getVisibleProjects()));
-	  $where="id in ($visibleProject) ";
+	  $visibleProject=getVisibleProjectsList();
+	  $where="id in $visibleProject ";
 	  $proj= new Project();
 	  if($idProject==0 and $idProjectType==0 and $idOrganization==0){ // no list is selected
 	    $where.="order by sortOrder";
