@@ -96,8 +96,8 @@ class History extends SqlElement {
     if ($refType=='PlanningElement' and $obj and isset($obj->refType)) {
     	$refType=$obj->refType.'PlanningElement';
     }
-    if(property_exists($refType, 'idProject') or $refType=='Project'){
-      $hist->idProject=($refType=='Project')?$obj->id:$obj->idProject ;
+    if(property_exists($obj, 'idProject') or get_class($obj)=='Project'){
+      $hist->idProject=(get_class($obj)=='Project')?$obj->id:$obj->idProject ;
     }
     //florent
     if(($colName=='idle' or $colName=='cancelled') and $newValue=='1' and $canArchiveIdle=='YES'){
