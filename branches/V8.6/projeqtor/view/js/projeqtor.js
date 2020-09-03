@@ -2914,6 +2914,7 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
         if (dijit.byId('imputationButtonDiv') && dijit.byId('limitResByProj') && dijit.byId('limitResByProj').get('value')=="on"){
           refreshList('imputationResource', null, null, dijit.byId('userName').get('value'), 'userName', true); 
         }
+        saveDataToSession('projectSelected',idProject,true);
     };
     saveDataToSession('project', idProject, null, callBack);
   }

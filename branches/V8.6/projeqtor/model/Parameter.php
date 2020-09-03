@@ -270,7 +270,8 @@ class Parameter extends SqlElement {
           $listVisible=$user->getVisibleProjects();
         } else {
           $listVisible=SqlList::getList('Project');
-        }        
+        }  
+        $list['**']=i18n('lastProject');      
         $list['*']=i18n('allProjects');
         foreach ($listVisible as $key=>$val) {
           $list[$key]=$val;
