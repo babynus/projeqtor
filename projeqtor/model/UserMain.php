@@ -1483,17 +1483,27 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     $crit['idProject']=null;
     $obj=new Parameter();
     $objList=$obj->getSqlElementsFromCriteria($crit,false);
+    $multipleProject=false;
     //$this->_arrayFilters[$filterObjectClass . "FilterName"]=$filter->name;
     foreach($objList as $obj) {
       if ($obj->parameterCode=='lang' and $obj->parameterValue) {
         setSessionValue('currentLocale', $obj->parameterValue);
         $i18nMessages=null;
       } else if ($obj->parameterCode=='defaultProject') {
-        $prj=new Project ($obj->parameterValue);
-        if ($prj->name!=null and $prj->name!='') {
-          Project::setSelectedProject($obj->parameterValue);
-        } else {
-          Project::setSelectedProject('*');
+        if($obj->parameterValue=="**"){
+          $obj->parameterValue=Parameter::getUserParameter('projectSelected');
+          if(!is_numeric($obj->parameterValue)){
+            $multipleProject = true;
+            Project::setSelectedProject($obj->parameterValue);
+          }
+        }
+        if(!$multipleProject){
+          $prj=new Project ($obj->parameterValue);
+          if ($prj->name!=null and $prj->name!='') {
+            Project::setSelectedProject($obj->parameterValue);
+          } else {
+            Project::setSelectedProject('*');
+          }
         }
       } else if (substr($obj->parameterCode,0,6)=='Filter') {
         if (! $this->_arrayFilters) {
