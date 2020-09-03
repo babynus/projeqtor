@@ -36,7 +36,7 @@ require_once "../tool/formatter.php";
    <?php include 'consolidationValidationList.php'?>
   </div>
   
-  <div id="imputListDiv" name="imputListDiv" dojoType="dijit.layout.ContentPane" region="center" >
+  <div id="imputListDiv" name="imputListDiv" dojoType="dijit.layout.ContentPane" region="center"  style=" height:95%;overflow-y: scroll;" >
     <form dojoType="dijit.form.Form" name="consolidationForm" id="consolidationForm"  method="Post" >
     <?php 
     ConsolidationValidation::drawProjectConsolidationValidation($idProject,$idProjectType,$idOrganization,$year,$month);
