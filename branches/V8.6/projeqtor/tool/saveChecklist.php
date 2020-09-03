@@ -54,7 +54,6 @@ if (! array_key_exists('checklistComment',$_REQUEST)) {
 }
 $comment=trim($_REQUEST["checklistComment"]);
 
-
 $checklistDefinition=new ChecklistDefinition($checklistDefinitionId);
 $checklist=new Checklist($checklistId);
 $cl=new ChecklistLine();
@@ -63,6 +62,7 @@ $linesVal=array();
 foreach ($linesTmp as $line) {
 	$linesVal[$line->idChecklistDefinitionLine]=$line;
 }
+
 Sql::beginTransaction();
 $checklist->refType=$checklistObjectClass;
 $checklist->refId=$checklistObjectId;
@@ -78,9 +78,14 @@ if ($changed) {
 } else {
   $status='NO_CHANGE';
 }
-
+$commitTransaction=true;
+$resultGlobal=false;
+$lstToSave=array();
+$lstToDelete=array();
 if ( ! stripos($result,'id="lastOperationStatus" value="ERROR"')>0) {
   foreach($checklistDefinition->_ChecklistDefinitionLine as $line) {
+        $lstRequired=array();
+        $asCheck=false;
 		if (isset($linesVal[$line->id])) {
 			$valLine=$linesVal[$line->id];
 		} else {
@@ -91,9 +96,11 @@ if ( ! stripos($result,'id="lastOperationStatus" value="ERROR"')>0) {
 		//$valLine->checkTime=date('Y-m-d H:i:s');		
 		$checkedCpt=0;
 		$checkedCptChanged=0;
+		$sumVal=0;
 		for ($i=1; $i<=5; $i++) {
 			$checkName="check_".$line->id."_".$i;
 			$valueName="value0".$i;
+			
 			if (isset($_REQUEST[$checkName])) {
 				$checkedCpt++;
 				if (! $valLine->$valueName) {
@@ -102,12 +109,16 @@ if ( ! stripos($result,'id="lastOperationStatus" value="ERROR"')>0) {
 				  $valLine->checkTime=date('Y-m-d H:i:s');
 				}
 				$valLine->$valueName=1;
+				
+				
 			} else {
 				if ($valLine->$valueName) {
 				  $checkedCptChanged++;
+				  $sumVal++;
 				}
 				$valLine->$valueName=0;
 			}
+			if($valLine->$valueName==1 and $asCheck==false)$asCheck=true;
 		}
 		$cmtName='checklistLineComment_'.$line->id;
 		if (isset($_REQUEST[$cmtName])) {
@@ -118,28 +129,55 @@ if ( ! stripos($result,'id="lastOperationStatus" value="ERROR"')>0) {
 			$valLine->comment=$cmt;
 			if ($cmt) $checkedCpt+=1;
 		}	
-	  $resultLine="";
-		if ($checkedCpt==0) {
-			if ($valLine->id) {
-				$resultLine=$valLine->delete();
-			}
-		} else if ($checkedCptChanged) {
-			$resultLine=$valLine->save();
-		}
-		if ($resultLine) {
-  		$statusLine=getLastOperationStatus ( $resultLine );
-  		if ($statusLine=="NO_CHANGE") {
-  		  // Nothing
-  		} else if ($statusLine=="ERROR") {
-  		 	$result=$resultLine;
-  		 	$status=$statusLine;
-  	  } else if ($status=='NO_CHANGE') { // Explicitly, $statusLine=="OK"
-  	    $result=$resultLine;
-  	    $status=$statusLine;
-  	  }
-		}
+	  
+	  if($asCheck==false and $commitTransaction==true and $newObj->done==1 and $line->required==1 ){
+	    $checkListDefinitionLine=new ChecklistDefinitionLine($valLine->idChecklistDefinitionLine);
+	    $status="INCOMPLETE";
+	    $commitTransaction=false;
+	    $resultGlobal=true;
+	    $result="<br/>" . i18n('messageMandatory',array($line->name));
+	    break;
+	  }else {
+	    if ($checkedCpt==0) {
+	      if ($valLine->id) {
+	       $lstToDelete[]=$valLine; /*$resultLine=$valLine->delete();*/  
+	      }
+	    } else if ($checkedCptChanged) {
+	      $lstToSave[]=$valLine;/*$resultLine=$valLine->save();*/  
+	    }
+	  }
+  }
+  if($commitTransaction==true){
+    $statusLine='';
+    foreach ($lstToDelete as $checkLineDelete){
+      $resultLine="";
+      $resultLine=$checkLineDelete->delete();
+      if ($resultLine) {
+        $statusLine=getLastOperationStatus ( $resultLine );
+          $result=$resultLine;
+        }
+    }
+    foreach ($lstToSave as $checkLineSave){
+      $resultLine="";
+      $resultLine=$checkLineSave->save();
+      if ($resultLine) {
+        $statusLine=getLastOperationStatus ( $resultLine );
+          $result=$resultLine;
+        }
+    }
+    if ($result) {
+      $statusLine=getLastOperationStatus ( $result );
+      if ($statusLine=="NO_CHANGE") {
+        // Nothing
+      } else if ($statusLine=="ERROR") {
+        $status=$statusLine;
+      } else if ($status=='NO_CHANGE') { // Explicitly, $statusLine=="OK"
+        $status=$statusLine;
+      }
+    }
   }
 }
+
 if ($status=="OK") {
   $result=i18n('Checklist') . ' ' . i18n('resultUpdated').' ('.i18n($checklistObjectClass).' #'.$checklistObjectId.')';
   $result .= '<input type="hidden" id="lastSaveId" value="' . $checklistObjectId . '" />';
@@ -147,10 +185,16 @@ if ($status=="OK") {
   $result .= '<input type="hidden" id="lastOperationStatus" value="OK" />';
   $result .= '<input type="hidden" id="checklistUpdated" value="true" />';
 }
+
 // Message of correct saving
 if (! isset($included) ) {
   displayLastOperationStatus($result);
 } else {
+  if($resultGlobal=true){
+    $globalStatus=$status;
+    $globalResult=$result;
+  }
+
   if ($status == "OK" or $status=="NO_CHANGE" or $status=="INCOMPLETE") {
     Sql::commitTransaction ();
   } else {
