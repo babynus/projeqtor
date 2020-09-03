@@ -991,7 +991,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 '<span class="dojoDndHandle handleCursor">'
               + ' <table><tr>'
               + '  <td class="ganttIconBackground">'
-              + '   <div class="icon'+ iconName +'16" style="width:16px;height:16px;" >&nbsp;</div>'
+              + '   <div class="icon'+ iconName +'16 icon'+ iconName +' iconSize16" style="width:16px;height:16px;" >&nbsp;</div>'
               + '  </td>'
               + '  <td><img style="width:8px" src="css/images/iconDrag.gif" /></td>'
               + ' </tr></table>'
