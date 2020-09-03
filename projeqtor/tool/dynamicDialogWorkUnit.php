@@ -46,7 +46,7 @@ $tabCompValues = array();
        <form dojoType="dijit.form.Form" id='workUnitForm' name='workUnitForm' onSubmit="return false;">
         <input id="idCatalog" name="idCatalog" type="hidden" value="<?php echo $idCatalog;?>" />
         <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
-         <input id="mode" name="idWorkUnit" type="hidden" value="<?php echo $id;?>" />
+         <input id="idWorkUnit" name="idWorkUnit" type="hidden" value="<?php echo $id;?>" />
          <table style="width:1000px;">
          <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr>
