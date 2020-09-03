@@ -176,7 +176,7 @@ CREATE TABLE `${prefix}complexity` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE `${prefix}complexityValues` (
+CREATE TABLE `${prefix}complexityvalues` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `idCatalogUO` int(12) unsigned DEFAULT NULL COMMENT '12',
   `idComplexity` int(12) unsigned DEFAULT NULL COMMENT '12',
