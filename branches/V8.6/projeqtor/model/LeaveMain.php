@@ -523,9 +523,11 @@ class LeaveMain extends SqlElement {
                 
                 . "OR (startDate='$thisStartDateRqFormat' AND startDate='$thisEndDateRqFormat' AND startDate=endDate AND ( NOT( (startAMPM='PM' AND endAMPM='PM' AND '$this->startAMPM'='AM' AND '$this->endAMPM'='AM') OR (startAMPM='AM' AND endAMPM='AM' AND '$this->startAMPM'='PM' AND '$this->endAMPM'='PM') ) ) ) "
                 . ")"; 
+        
         if($this->id != NULL){//to exclude this leave of the request
             $clauseWhere.="AND id <> ".$this->id;
         }
+        $clauseWhere.=" AND rejected = 0";
         $clauseOrderBy = "startDate, endDate ASC";
         $queryResult=$this->getSqlElementsFromCriteria ( null, false, $clauseWhere, $clauseOrderBy );
         if($queryResult){//if the query returned some leaves then error
