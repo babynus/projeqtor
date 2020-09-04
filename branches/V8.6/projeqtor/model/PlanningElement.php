@@ -2397,7 +2397,6 @@ class PlanningElement extends SqlElement {
   public function updateCA(){
         $old = $this->getOld();
     	$project = new Project($this->idProject);
-    	debugLog($this->idProject);
     	$projectList = $project->getRecursiveSubProjectsFlatList(true, ($this->idProject)?true:false);
     	$projectList = array_flip($projectList);
     	$projectList = '(0,'.implode(',',$projectList).')';
