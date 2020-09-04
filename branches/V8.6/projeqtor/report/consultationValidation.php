@@ -60,7 +60,7 @@ include "header.php";
 /*__________________________________________________*/
 
 $compStyle='font-size:10px;';
-$lstVisibleProj=($paramProject=='')?ConsolidationValidation::getVisibleProjectToConsolidated($paramProject, $paramProjectType, $idOrganization):$paramProject;
+$lstVisibleProj=ConsolidationValidation::getVisibleProjectToConsolidated($paramProject, $paramProjectType, $idOrganization);
 $lstProj=$lstVisibleProj[0];
 $month=(strlen($paramMonth)==1)?'0'.$paramMonth:$paramMonth;
 $concMonth=$paramYear.$month;
