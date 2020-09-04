@@ -77,6 +77,7 @@ foreach ($lstProj as $id=>$val){
     }
   }
 }
+
 //==============//
 if($mode =='validaTionCons'){ // create all consolidationValidation for save 
   $lstImpLocked=array();
@@ -106,9 +107,9 @@ if($mode =='validaTionCons'){ // create all consolidationValidation for save
     $cons->margin=RequestHandler::getValue('margin_'.$idproj);
     $cons->validationDate=date('Y-m-d');
     $lstCons[]=$cons;
-    $critArray=array('idProject'=>$projId,'month'=>$month);
-    $lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', $critArray);
-    if($lockedImp->id!='')$lstImpLocked[]=$lockedImp->id;
+//     $critArray=array('idProject'=>$projId,'month'=>$month);
+//     $lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', $critArray);
+//     if($lockedImp->id!='')$lstImpLocked[]=$lockedImp->id;
   }
 }
 
@@ -133,12 +134,12 @@ if($mode !='validaTionCons' and $mode!='cancelCons'){
     foreach ($lstCons as $cons) {
       $cons->save();
     }
-    if(!empty($lstImpLocked)){
-      $lockedImpProjects= new LockedImputation();
-      $lstImpLocked=implode(',', $lstImpLocked);
-      $clause="id in ($lstImpLocked) and month = $month";
-      $res=$lockedImpProjects->purge($clause);
-    }
+//     if(!empty($lstImpLocked)){
+//       $lockedImpProjects= new LockedImputation();
+//       $lstImpLocked=implode(',', $lstImpLocked);
+//       $clause="id in ($lstImpLocked) and month = $month";
+//       $res=$lockedImpProjects->purge($clause);
+//     }
   }else {
       $cons=new ConsolidationValidation();
       $lstProj=implode(',', $lstProj);

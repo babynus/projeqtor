@@ -54,7 +54,7 @@ if($mode!='validaTionCons' and $mode!='cancelCons'){
   $critArray= array('idProject'=>$projId,'month'=>$month);
   $lock = SqlElement::getSingleSqlElementFromCriteria('LockedImputation', array("idProject"=>$reelIdProj,"month"=>$month));
   $lock=($mode=="UnLocked")?'':$lock->month;
-  $res = ConsolidationValidation::drawLockedDiv($projId, $month, $lock,'',false,$prof,$consValPproj);
+  $res = ConsolidationValidation::drawLockedDiv($projId, $month, $lock,'',false,$prof /*,$consValPproj*/);
 }else if ($mode=='validaTionCons' or $mode=='cancelCons'){
   $res = ConsolidationValidation ::drawValidationDiv($consValPproj,$canChangeValidation,$projId,$month,false,$prof);
 }
