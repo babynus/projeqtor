@@ -82,6 +82,7 @@ class SqlList {
    
    private static function getDefaultDisplayCol($listType) {
      if ($listType=='Leave') return 'startDate';
+     if (property_exists($listType, 'name')) return 'name';
      return 'id';
    }
   /** ==========================================================================
