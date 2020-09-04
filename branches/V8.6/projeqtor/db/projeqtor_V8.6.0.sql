@@ -16,7 +16,7 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`id
 (254, 'menuConsultationValidation', 7, 'item', 119, Null, 0, 'Work');
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(3,254,0,1);
+(3,254,0,(select `active` from `${prefix}module` where id=3));
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,254,1),
