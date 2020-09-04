@@ -386,7 +386,7 @@ if($paramMailerType=='phpmailer'){
                          style="display:<?php echo ($checOther=='true')?'block':'none';?>" title="<?php echo i18n('showDetail')?>"iconClass="iconView">
                    <script type="dojo/connect" event="onClick" args="evt">
                       dijit.byId('dialogMailObjectIdEmail').set('value',null);
-                      showDetail('dialogMailObjectIdEmail', 0, 'Resource', true);
+                      showDetail('dialogMailObjectIdEmail', 0, 'Affectable', true);
                    </script>
                  </button>
                  <?php }?>
