@@ -331,7 +331,7 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
 		$obj=new $class($obj->id); // refresh object to display calculated values in return
 		if ($cpt) echo ",";
 		$cpt++;
-		echo '{"apiResult":"'.$resultStatus.'", "apiResultMessage":"'.$result.'", '.jsonDumpObj($obj).'}';
+		echo '{"apiResult":"'.$resultStatus.'", "apiResultMessage":"'.htmlEncodeJson($result).'", '.jsonDumpObj($obj).'}';
 	}
 	//print_r($arrayData);
 	echo '] }';
