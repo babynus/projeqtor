@@ -7511,7 +7511,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         $class = substr(foreignKeyWithoutAlias($fld),2);
         $fldName='name'.substr($fld,2);
         if ($class=='Resource' or $class=='User' or $class=='Contact') {
-          $result[$fldName]=SqlList::getFieldFromId('Affectable', $value, 'fullName');
+          $result[$fldName]=SqlList::getNameFromId('Affectable', $value);
         } else if (SqlElement::class_exists($class) and property_exists($class,'name')) {
           $result[$fldName]=SqlList::getNameFromId($class, $value);
         }
