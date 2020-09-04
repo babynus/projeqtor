@@ -205,6 +205,7 @@ class ProjectPlanningElementMain extends PlanningElement {
     	if(count($subProj) > 0){
     		self::$_fieldsAttributes['idRevenueMode']='readonly,size1/3';
     		$this->idRevenueMode = 2;
+    		$this->save();
     	}
     	if($this->idRevenueMode == 2){
     		self::$_fieldsAttributes['revenue']='readonly';
