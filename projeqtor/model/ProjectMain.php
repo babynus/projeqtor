@@ -1030,6 +1030,10 @@ static function isTheLeaveProject($id=null) {
     }
     // MTY - LEAVE SYSTEM
   	$result = parent::delete();
+  	if($this->idProject){
+  	  $proj = new Project($this->idProject);
+  	  $proj->ProjectPlanningElement->updateCA();
+  	}
   	 if(getLastOperationStatus($result)=="OK"){
   	  if($this->isSelectedProjectMultiple()){
   	    $selectedProj = explode(',', getSessionValue('project'));
