@@ -7298,18 +7298,18 @@ function refreshConsolidationDiv (proj,month,mode){
   showWait();
   var callback=function() {
     hideWait();
-    if(mode=='validaTionCons' || mode=='cancelCons'){
-      if(dojo.byId('lockedImputation_'+proj) && mode=='validaTionCons'){
-        mode='UnLocked';
-        refreshConsolidationDiv(proj,month,mode);
-      }else if(dojo.byId('lockedImputation_'+proj)){
-        mode='Locked';
-        refreshConsolidationDiv(proj,month,mode);
-      }else if(dojo.byId('UnlockedImputation_'+proj)){
-        mode='UnLocked';
-        refreshConsolidationDiv(proj,month,mode);
-      }
-    }
+//    if(mode=='validaTionCons' || mode=='cancelCons'){
+//      if(dojo.byId('lockedImputation_'+proj) && mode=='validaTionCons'){
+//        mode='UnLocked';
+//        refreshConsolidationDiv(proj,month,mode);
+//      }else if(dojo.byId('lockedImputation_'+proj)){
+//        mode='Locked';
+//        refreshConsolidationDiv(proj,month,mode);
+//      }else if(dojo.byId('UnlockedImputation_'+proj)){
+//        mode='UnLocked';
+//        refreshConsolidationDiv(proj,month,mode);
+//      }
+//    }
   };
   loadContent('../view/refreshConsolidationDiv.php?proj='+proj+'&month='+month+'&mode='+mode,div,false,false,false,false,false,callback);
 }
