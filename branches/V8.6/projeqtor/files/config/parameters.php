@@ -41,6 +41,6 @@ $dataCloningDirectory="D:\www\simulation";       // Modifies directory for simul
 $dataCloningUrl="http://localhost/simulation/";  // Acces data cloning url for goto
 //$doNotExportAssignmentsForXMLFormat=true;      // Will not be needed anymore on V8.3 as it will become a user parameter
 //$pathToWkHtmlToPdf="C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"; // Enables wkHtmlToPdf. Must indicate location of executable.
-//$paramDbCollation='utf8';
+//$paramDbCollation='utf8_general_ci';
 //$paramNewGui=true;
 //======= END
