@@ -1,4 +1,5 @@
 {
+8.6.0: "log level",
 aboutMessage: "About ProjeQtOr …",
 aboutMessageLocale: "Locale",
 aboutMessageWebsite: "Website",
@@ -2811,6 +2812,7 @@ Logfile: "Log file",
 logfileMaintenance: "Log files maintenance",
 login: "login",
 loginOK: "Login accepted",
+logLevel: "",
 low: "low",
 Mail: "Email sent",
 mailableAttachments: "add all attached files of the element to the mail",
