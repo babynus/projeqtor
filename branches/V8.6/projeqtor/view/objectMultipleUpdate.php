@@ -42,7 +42,7 @@
   Security::checkValidClass($objectClass);
   $obj=new $objectClass();
 ?>
-<div dojoType="dijit.layout.BorderContainer" class="background">
+<div dojoType="dijit.layout.BorderContainer" class="background" id="objetMultipleUpdate">
   <div id="buttonDiv" dojoType="dijit.layout.ContentPane" region="top">
     <div dojoType="dijit.layout.BorderContainer" >
       <div id="buttonDivContainer" dojoType="dijit.layout.ContentPane" region="left">

@@ -467,6 +467,18 @@
         } // end of : if ($mailable and $mailable->id) {
       ?>
     <?php 
+    $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+    $showActivityStream=false;
+    $currentScreen=getSessionValue('currentScreen');
+    if ($currentScreen=='Object') $currentScreen=$objectClass;
+    if($paramRightDiv=="bottom"){
+      $activityStreamSize=getHeightLaoutActivityStream($currentScreen);
+      $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivHeight');
+    }else{
+      $activityStreamSize=getWidthLayoutActivityStream($currentScreen);
+      $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivWidth');
+    }
+    
     $user=getSessionUser();
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$user->getProfile($obj),'scope'=>'multipleUpdate'));
     $list=new ListYesNo($habil->rightAccess);
@@ -479,6 +491,7 @@
        iconClass="dijitButtonIcon dijitButtonIconMultipleUpdate" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           hideResultDivs();
+          hideStreamMode('false','<?php echo $paramRightDiv;?>','<?php echo $activityStreamDefaultSize;?>',false);
           startMultipleUpdateMode('<?php echo get_class($obj);?>');  
           hideExtraButtons('extraButtonsDetail');
         </script>
