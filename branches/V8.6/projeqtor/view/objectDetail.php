@@ -2491,6 +2491,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $hasOtherClient=true;
             $fieldWidth-=28;
           }
+          if(trim(RequestHandler::getId('idClient')) != '')$val = RequestHandler::getId('idClient');
         }
         $showExtraButton=false;
 // MTY - Forgot readonly in condition        
