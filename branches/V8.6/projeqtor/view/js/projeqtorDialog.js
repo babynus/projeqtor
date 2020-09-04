@@ -828,6 +828,9 @@ function gotoDetailItem(objectClass,objectId) {
   } else {
     page+="&objectId=0";
     page+="&mode=new";
+    if(trim(dijit.byId('idClient').get('value')) != ''){
+    	page+="&idClient="+dijit.byId('idClient').get('value');
+    }
   }
   page+="&destinationWidth=" + destinationWidth;
   window.top.frames['comboDetailFrame'].location.href=page;
