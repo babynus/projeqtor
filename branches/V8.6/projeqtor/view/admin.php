@@ -539,6 +539,21 @@
             <table style="width:100%;">
               <tr>
                 <td class="label" style="width:200px">
+                  <?php echo i18n("logLevel"). "&nbsp;:&nbsp;";?>
+                </td>
+                <td class="display" width="90%">
+                  <div dojoType="dijit.form.NumberTextBox" constraints="{min:1,max:4}"
+                    style="width:30px;"
+                    value="<?php echo Parameter::getUserParameter('logLevel');?>"
+                    name="logLevel" id="logLevel">
+                    <script type="dojo/connect" event="onChange" args="evt">
+                       saveDataToSession('logLevel',this.value,true);
+                     </script>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="label" style="width:200px">
                   <?php echo i18n("deleteLogfile"). "&nbsp;:&nbsp;";?>
                 </td>
                 <td class="display" width="90%">
