@@ -2415,9 +2415,6 @@ class PlanningElement extends SqlElement {
     	if($paramCA == 'YES' and $this->revenue > 0){
     		$this->validatedCost = $this->revenue;
     	}
-    	if($old->idRevenueMode != $this->idRevenueMode and $this->idRevenueMode == 2){
-    		$this->updateRevenue();
-    	}
     	$this->save();
   }
   
@@ -2449,6 +2446,7 @@ class PlanningElement extends SqlElement {
   			$this->revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
   		}
   	}
+  	$this->updateCA();
   }
 }
 ?>
