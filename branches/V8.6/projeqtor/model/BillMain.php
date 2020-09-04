@@ -426,7 +426,7 @@ class BillMain extends SqlElement {
 		$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
 		$billAmount = ($paramAmount == 'HT')?'untaxedAmount':'fullAmount';
 		$project->ProjectPlanningElement->billSum = $this->sumSqlElementsFromCriteria($billAmount, null, $where);
-		$project->ProjectPlanningElement->save();
+		$project->ProjectPlanningElement->updateCA();
 	}
 	return $result;
 	}  
