@@ -205,7 +205,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $critArray['idVersionType'] = array_values($arrayType);        
     }
     $table=SqlList::getListWithCrit($listType,$critArray,$column,$selection);
-    if($col == 'idActivity'){
+    if($col == 'idActivity' and $obj and (get_class($obj)=='Activity' or get_class($obj)=='TestSession' or get_class($obj)=='Milestone')){
       $activityTypeList = "(".implode(',' ,SqlList::getListWithCrit('ActivityType', array('canHaveSubActivity'=>'1', 'idle'=>'0'),'id')).")";
       if ($activityTypeList=='()') $activityTypeList='(0)';
       $activity = new Activity();
@@ -214,11 +214,13 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         if ($name=='idProject' and $value=='*') continue;
         if ($name and $value) $critWhere .= " and $name = $value";
       }
-      $activityList = $activity->getSqlElementsFromCriteria(null,null,$critWhere);
-      if(count($activityList)>0)unset($table);
+      $activityList = $activity->getSqlElementsFromCriteria(null,null,$critWhere,null,null, true);
+      //if(count($activityList)>0)unset($table);
+      $tableForType=array();
       foreach ($activityList as $id=>$act){
-        $table[$act->id]=$act->name;
+        $tableForType[$act->id]=$act->name;
       }
+      $table=array_intersect_key($table, $tableForType);
     }
     /*Florent 
      * Ticket 3868
