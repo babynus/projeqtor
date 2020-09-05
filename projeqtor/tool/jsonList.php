@@ -482,6 +482,27 @@ if ($type == 'empty') {
           }
         }
       }
+      if($class == 'Activity'){
+        $object = SqlElement::getCurrentObject ( null, null, true, false );
+        if($object and (get_class($object)=='Activity' or get_class($object)=='TestSession' or get_class($object)=='Milestone')) {
+          $activityTypeList = "(".implode(',' ,SqlList::getListWithCrit('ActivityType', array('canHaveSubActivity'=>'1', 'idle'=>'0'),'id')).")";
+          if ($activityTypeList=='()') $activityTypeList='(0)';
+          $activity = new Activity();
+          $critWhere = "idActivityType in $activityTypeList";
+          if ($critField=='idProject' and $critValue=='*') { 
+            // nothing 
+          } else if ($critField and $critValue) {
+            $critWhere .= " and $critField = $critValue";
+          }
+          $activityList = $activity->getSqlElementsFromCriteria(null,null,$critWhere,null,null, true);
+          //if(count($activityList)>0)unset($table);
+          $tableForType=array();
+          foreach ($activityList as $id=>$act){
+            $tableForType[$act->id]=$act->name;
+          }
+          $list=array_intersect_key($list, $tableForType);
+        }
+      }
       if ($class=='Activity' or $class=='Ticket') {
       	foreach ($list as $idL=>$valL) {
       		$list[$idL]=SqlList::formatValWithId($idL,$valL);
