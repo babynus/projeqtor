@@ -5000,7 +5000,6 @@ abstract class SqlElement {
     if ($objectClass == 'History' or $objectClass == 'Audit' or $objectClass == 'KpiHistory' or ! in_array($objectClass,SqlList::getListNotTranslated('Mailable'))) {
       return false; // exit : not for History
     }
-    debugLog("sendMailIfMailable(statusChange=$statusChange) for ".get_class($this)." #".$this->id);
     
     $canBeSend = true;
     if ($idProject) {
