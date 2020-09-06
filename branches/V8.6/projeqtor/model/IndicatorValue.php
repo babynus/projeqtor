@@ -233,16 +233,16 @@ class IndicatorValue extends SqlElement {
         $this->targetValue=$obj->$pe->assignedWork;
         $value=$obj->$pe->realWork;
         break;
-      case 'CACS' :   //CaMoreThanCommandSum
+      case 'CACS' :   // Revenue more than Commands
       	$this->targetValue=$obj->$pe->commandSum;
-      	if(!$this->targetValue)$this->targetValue=1;
+      	if(!$this->targetValue)$this->targetValue=0.1; // Enter non zero value so that alert is raised even if no command exist
       	$value=$obj->$pe->revenue;
       	break;
-  	 case 'CABS' :   //CaMoreThanBillSum
-  		$this->targetValue=$obj->$pe->revenue;
-  		if(!$this->targetValue)$this->targetValue=1;
-  		$value=$obj->$pe->billSum;
-  		break;
+  	  case 'CABS' :   // Bill More than Revenue
+  		  $this->targetValue=$obj->$pe->revenue;
+  		  if(!$this->targetValue)$this->targetValue=0; // Enter zero value so that alert is not raised when not managing Revenue
+  		  $value=$obj->$pe->billSum;
+  		  break;
   	}
   	$this->warningTargetValue=$this->targetValue*floatval($def->warningValue)/100;
   	$this->alertTargetValue=$this->targetValue*floatval($def->alertValue)/100;
@@ -487,7 +487,7 @@ class IndicatorValue extends SqlElement {
     }
     if ($def->mailToProject or $def->mailToLeader or $def->alertToProject or $def->alertToLeader) {
       $aff=new Affectation();
-      $crit=array('idProject'=>$obj->idProject, 'idle'=>'0');
+      $crit=array('idProject'=>(get_class($obj)=='Project')?$obj->id:$obj->idProject, 'idle'=>'0');
       $affList=$aff->getSqlElementsFromCriteria($crit, false);
       if ($affList and count($affList)>0) {
         foreach ($affList as $aff) {
@@ -529,7 +529,7 @@ class IndicatorValue extends SqlElement {
     }
     if ($def->mailToManager or $def->alertToManager) {
       if (property_exists($obj,'idProject')) {
-        $project=new Project($obj->idProject);
+        $project=new Project((get_class($obj)=='Project')?$obj->id:$obj->idProject);
         $manager=new Affectable($project->idResource);
         if ($def->alertToManager) {
           $arrayAlertDest[$manager->id]=$manager->name;

@@ -1159,7 +1159,8 @@ abstract class SqlElement {
         $returnValue = str_replace ( '${mailMsg}', '', $returnValue );
       }
       // indicators
-      if (SqlList::getIdFromTranslatableName ( 'Indicatorable', get_class ( $this ) )) {
+      $classIndicatorable=(SqlElement::is_a($this, 'PlanningElement'))?$this->refType:get_class($this);
+      if (SqlList::getIdFromTranslatableName ( 'Indicatorable', $classIndicatorable )) {
         $indDef = new IndicatorDefinition ();
         if(property_exists($this, 'idProject')) {
           $idP=(get_class($this)=='Project')?$this->id:$this->idProject;
@@ -1168,20 +1169,27 @@ abstract class SqlElement {
           $listProj = implode(',', $listProj);
           if (trim($listProj)=='') $listProj='0';
           //$crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0','idProject' => $idP);
-          $where = "nameIndicatorable='".get_class ( $this )."' and idle = 0 and idProject in (".$listProj.")";
+          $where = "nameIndicatorable='$classIndicatorable' and idle = 0 and idProject in (".$listProj.")";
         } else {
           //$crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0');
-          $where = "nameIndicatorable='".get_class ( $this )."' and idle = 0";
+          $where = "nameIndicatorable='$classIndicatorable' and idle = 0";
         }
         $lstInd = $indDef->getSqlElementsFromCriteria ( null, false, $where );
         if(!$lstInd){
-          $crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0','idProject' =>"");
+          $crit = array('nameIndicatorable' => $classIndicatorable, 'idle' => '0','idProject' =>"");
           $lstInd = $indDef->getSqlElementsFromCriteria ( $crit, false );
         }
         foreach ( $lstInd as $ind ) {
-          $fldType = 'id' . ((get_class ( $this ) == 'TicketSimple') ? 'Ticket' : get_class ( $this )) . 'Type';
-          if (! $ind->idType or $ind->idType == $this->$fldType) {
-            IndicatorValue::addIndicatorValue ( $ind, $this );
+          $fldType = 'id' . (($classIndicatorable == 'TicketSimple') ? 'Ticket' : $classIndicatorable) . 'Type';
+          if (SqlElement::is_a($this, 'PlanningElement')) {
+            $objType=new $classIndicatorable($this->refId);
+            $fldVal=$objType->$fldType;
+          } else {
+            $objType=$this;
+            $fldVal=$this->$fldType;
+          }
+          if (! $ind->idType or $ind->idType == $fldVal) {
+            IndicatorValue::addIndicatorValue ( $ind, $objType );
           }
         }
       }
