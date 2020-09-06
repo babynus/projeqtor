@@ -74,9 +74,9 @@ INSERT INTO `${prefix}habilitationother` (idProfile,scope,rightAccess) VALUES
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasExcel`) VALUES
 (110, 'reportConsolidationValidation',7, 'consultationValidation.php', 760,'1'),
 (111, 'reportLeftWork',1, 'leftWork.php', 199,'1'),
-(112, 'reportWorkWeekDetail',1, 'WorkDetailed.php', 131,'1'),
-(113, 'reportWorkMonthDetail',1, 'WorkDetailed.php', 132,'1'),
-(114, 'reportWorkYearDetail',1, 'WorkDetailed.php', 133,'1');
+(112, 'reportWorkWeekDetail',1, 'workDetailed.php', 131,'1'),
+(113, 'reportWorkMonthDetail',1, 'workDetailed.php', 132,'1'),
+(114, 'reportWorkYearDetail',1, 'workDetailed.php', 133,'1');
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
 (1, 110, 1),
