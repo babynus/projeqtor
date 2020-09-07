@@ -9814,6 +9814,16 @@ function saveCreationInfo() {
   dijit.byId('dialogCreationInfo').hide();
 }
 
+function logLevel(value){
+  var url='../tool/storeLogLevel.php?value=' + value;
+  dojo.xhrPost({
+    url : url,
+    handleAs : "text",
+    load : function(data, args) {
+    }
+  });
+}
+
 function showLogfile(name) {
   var atEnd=null;
   if (name=='last') {

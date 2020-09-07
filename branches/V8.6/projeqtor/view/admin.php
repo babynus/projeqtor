@@ -536,20 +536,24 @@
              onHide="saveCollapsed('<?php echo $titlePane;?>');"
              onShow="saveExpanded('<?php echo $titlePane;?>');"
              title="<?php echo i18n('logfileMaintenance');?>">
-            <table style="width:100%;">
+             <table style="width:100%;">
               <tr>
                 <td class="label" style="width:200px">
-                  <?php echo i18n("logLevel"). "&nbsp;:&nbsp;";?>
+                  <?php echo i18n("paramLogLevel"). "&nbsp;:&nbsp;";?>
                 </td>
-                <td class="display" width="90%">
-                  <div dojoType="dijit.form.NumberTextBox" constraints="{min:1,max:4}"
-                    style="width:30px;"
-                    value="<?php echo Parameter::getUserParameter('logLevel');?>"
-                    name="logLevel" id="logLevel">
-                    <script type="dojo/connect" event="onChange" args="evt">
-                       saveDataToSession('logLevel',this.value,true);
+                <td class="display">
+                  <select dojoType="dijit.form.FilteringSelect" class="input" style="width:200px;"
+                      <?php echo autoOpenFilteringSelect();?>
+                            name="logLevelAdm" id="logLevelAdm" required="true">
+                            <?php $logLevelAdm = Parameter::getGlobalParameter('logLevel');?>
+                      <option value="1" <?php if($logLevelAdm==1){?> selected <?php }?>><?php echo i18n('dialogError')?></option>
+                      <option value="2" <?php if($logLevelAdm==2){?> selected <?php }?>><?php echo i18n('trace')?></option>
+                      <option value="3" <?php if($logLevelAdm==3){?> selected <?php }?>><?php echo i18n('Debug')?></option>
+                      <option value="4" <?php if($logLevelAdm==4){?> selected <?php }?>><?php echo i18n('script')?></option>
+                       <script type="dojo/connect" event="onChange" args="evt">
+                       logLevel(this.value);
                      </script>
-                  </div>
+                  </select>
                 </td>
               </tr>
               <tr>
