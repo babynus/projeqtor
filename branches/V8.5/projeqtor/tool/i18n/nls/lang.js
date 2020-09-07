@@ -1,5 +1,4 @@
 {
-8.6.0: "log level",
 aboutMessage: "About ProjeQtOr …",
 aboutMessageLocale: "Locale",
 aboutMessageWebsite: "Website",
