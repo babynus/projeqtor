@@ -6219,7 +6219,7 @@ function getAssignmentHtmlTab(){
   $style = 'border-top: 1px solid #7b7b7b ; border-bottom: 1px solid #7b7b7b;
             background-color:#dddddd; padding:4px;';
   $html = '<table style="width:50%; border-collapse:collapse;border:1px solid #7b7b7b;">';
-  $html .= '<tr> <td  style="text-align:center;' . $style . '">' . ucfirst(i18n('colListAssignment')) . '</td> </tr>';
+  $html .= '<tr> <td  style="text-align:center;' . $style . '">' . ucfirst(i18n('assignedResource')) . '</td> </tr>';
   foreach ($linkAss as $link) {
     $html .= '<tr><td style="width:70%;border: 1px solid #7b7b7b; padding:4px;"># '.$link->idResource.' - ' . SqlList::getNameFromId('Resource', $link->idResource). '</td></tr>';
   }
