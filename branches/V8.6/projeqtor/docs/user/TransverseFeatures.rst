@@ -30,27 +30,25 @@ The screen dedicated to the Activity Stream allows you to view all the feeds.
    You can also select the amount of information to display and restrict the list to the screen. 
    
    
- .. compound:: Show/Hide notes   
-   
-   Likewise, it is possible to view the notes directly by using the following buttons
-
-   * Click on |buttonCollapseClose|  to hide note comment.  
-   * Click on |buttonCollapseOpen|  to display note comment.
-
-   By default, you will see all visible notes for each item.
-
-   * Click on **Show only notes on activity feed** to display only notes type information.
-
-
  .. compound:: Elements displayed
  
    We can see on this summary several elements:
    
-   * The creator of the note
-   * The ID of the note
-   * The element and its ID on which the note was created
-   * The date and time of creation of the note
-   * And the note itself - option enabled
+   * The element and its ID
+   * The name given to this element
+   * The creator of change
+   * The date and the hour of the change
+   * The name of the person responsible for the change
+   * The type of creation, change or deletion that was carried out
+
+
+.. figure:: /images/GUI/TRANSFEAT_ZONE_ActivityLine.PNG
+   :alt: Activity stream line
+   
+   Activity stream line
+   
+The impacted elements are all clickable.
+In the case of notes, the comment is displayeds.
 
 
 .. rubric:: Activity Stream on element screen
@@ -99,9 +97,33 @@ The items displayed depend on your visibility rights.
    
    By default, your note is visible to all users assigned to the project linked to the item.
 
-   * Click on |ShareStream| to make your note private
+* Click on | ShareStream | to make your note private
+* Click on | PrivateStream | to share it in public (project team: resources allocated to the project)
+* Click on | iconTeam | to share the note only with your team
+   
+   
+   
+   
+   
+   
+    .. compound:: Show/Hide notes   
+   
+   Likewise, it is possible to view the notes directly by using the following buttons
 
-   * Click on |PrivateStream| to return to public mode
+   * Click on |buttonCollapseClose|  to hide note comment.  
+   * Click on |buttonCollapseOpen|  to display note comment.
+
+   By default, you will see all visible notes for each item.
+
+   * Click on **Show only notes on activity feed** to display only notes type information.
+
+   
+   
+   
+   
+   
+   
+   
 
 .. raw:: latex
 

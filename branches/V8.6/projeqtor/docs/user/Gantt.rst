@@ -1461,11 +1461,9 @@ It displays summary and project dependencies only.
 
 .. rubric:: Show milestones
 
-Ability to display milestones or not. 
-
-If they are displayed, it is possible to define the type of milestone to display or to display them all. 
-
-All milestones are available: deliverable, incoming, key date...
+* You have the option to show or hide milestones.
+* It is possible to define the type of milestone to display. All milestones are available: deliverable, incoming, key date, etc.
+* The milestones are displayed directly on the bar of your project.
 
 
 
