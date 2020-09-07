@@ -437,7 +437,7 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
           if (!array_key_exists($date, $result)) {
             $result[$date]=array();
           }
-
+        
           $result[$date]["$class#$id"]=array(
               'class'=>$class,
               'id'=>$id,
@@ -464,14 +464,21 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
     }
 	}
 	// Planned Activities and real work
-	$pw=new PlannedWork();
-	$w=new Work();
-	$critWhere="idResource=".Sql::fmtId($ress);
+	$ressList = array(Sql::fmtId($ress));
+	$resourceTeamAff = SqlList::getListWithCrit('ResourceTeamAffectation', array('idResource'=>$ress));
+	foreach ($resourceTeamAff as $id){
+	  $resTeamaff = new ResourceTeamAffectation($id);
+	  array_push($ressList, Sql::fmtId($resTeamaff->idResourceTeam));
+	}
+	$ressList = '('.implode(',', $ressList).')';
+	$critWhere="idResource in ".$ressList;
 	$critWhere.=" and workDate>='$startDate' and workDate<='$endDate'";
 	if ($selectedTypes != 'All') {
 	  $selectedTypes = str_replace(",", "','", $selectedTypes);
 	  $critWhere.=" AND refType IN ('$selectedTypes')";
 	}
+	$pw=new PlannedWork();
+	$w=new Work();
 	$pwList=$pw->getSqlElementsFromCriteria(null,false,$critWhere);
 	$wList=$w->getSqlElementsFromCriteria(null,false,$critWhere);
 	$workList=array_merge($pwList,$wList);
@@ -570,9 +577,9 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
 		    'statusId'=>$statusId,
 		    'statusName'=>$statusName,
 		    'description'=>$description,
-            'meetingStartTime'=> $meetingStartTime,
+            'meetingStartTime'=> $meetingStartTime,//Ticket #438 F.KARA - Get the start time of a meeting
 		    'isResourceTeam'=> $isResourceTeam,
-		    'idResourceTeam'=> $idResourceTeam //Ticket #438 F.KARA - Get the start time of a meeting
+		    'idResourceTeam'=> $idResourceTeam 
 		);
 	}
 	return $result;
