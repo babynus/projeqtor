@@ -88,6 +88,14 @@ class ChecklistDefinitionLine extends SqlElement {
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
     }
+    $countVal=0;
+    for ($i=1;$i<=5;$i++){
+      $val='check0'.$i;
+      if($this->$val!=''){
+        $countVal++;
+      }
+    }
+    if($countVal==0)$this->required=0;
     if ($result=="") {
       $result='OK';
     }

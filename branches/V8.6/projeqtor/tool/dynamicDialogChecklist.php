@@ -139,7 +139,8 @@ if ($print) $canUpdate=false;
 		    <tr style="height:25px;min-height:25px;<?php echo ($line->required==1)?'border-left:3px solid red ;':''; ?>">
 <?php   if ($line->check01) {?>
 			    <td class="noteData" style="<?php echo ($print)?'width:'.$nameWidth:'';?>border-right:0; text-align:right" title="<?php echo ($print)?'':$line->title;?>"> 
-				  <?php echo htmlEncode($line->name);?> :   
+				  <?php echo htmlEncode($line->name);?> 
+				  <input type="hidden" name="isRequired_<?php echo $line->id;?>" value="<?php echo $line->required;?>" />  
 		      </td>
 			    <td class="noteData" style="border-left:0;">
 			      <table style="width:<?php echo $internalWidth;?>;">
@@ -148,7 +149,7 @@ if ($print) $canUpdate=false;
 								$check='check0'.$i;
 								$title='title0'.$i;
 								$value='value0'.$i;?>
-								<td style="<?php echo ($line->$check)?'':''?>;min-width:100px;width:15%;vertical-align:top;<?php if (!$line->$check) echo 'display:none';?>" title="<?php echo ($print)?'':$line->$title;?>" >
+								<td style="min-width:100px;width:15%;vertical-align:top;<?php if (!$line->$check) echo 'display:none';?>" title="<?php echo ($print)?'':$line->$title;?>" >
 					<?php if ($line->$check) {
 								  $checkName="check_".htmlEncode($line->id)."_".$i;
 								  if ($print) {

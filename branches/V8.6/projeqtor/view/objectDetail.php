@@ -4504,7 +4504,7 @@ function drawChecklistDefinitionLinesFromObject($obj, $refresh=false) {
       echo '<td class="noteData" style="width:5%">'.htmlDisplayCheckbox($line->required).'</td>';
       echo '<td class="noteData" style="width:5%">'.htmlDisplayCheckbox($line->exclusive).'</td>';
     } else {
-      echo '<td class="reportTableHeader" colspan="3" style="width:'.(($print)?'100':'95').'%,text-align:center" title="'.htmlEncode($line->title).'">'.htmlEncode($line->name).'</td>';
+      echo '<td class="reportTableHeader" colspan="4" style="width:'.(($print)?'100':'95').'%,text-align:center" title="'.htmlEncode($line->title).'">'.htmlEncode($line->name).'</td>';
     }
     echo '</tr>';
   }

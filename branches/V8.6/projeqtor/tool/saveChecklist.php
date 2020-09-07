@@ -130,12 +130,9 @@ if ( ! stripos($result,'id="lastOperationStatus" value="ERROR"')>0) {
   		$statusLine=getLastOperationStatus ( $resultLine );
   		if ($statusLine=="NO_CHANGE") {
   		  // Nothing
-  		} else if ($statusLine=="ERROR") {
+  		} else  {
   		 	$result=$resultLine;
   		 	$status=$statusLine;
-  	  } else if ($status=='NO_CHANGE') { // Explicitly, $statusLine=="OK"
-  	    $result=$resultLine;
-  	    $status=$statusLine;
   	  }
 		}
   }
