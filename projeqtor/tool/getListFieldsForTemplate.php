@@ -54,7 +54,7 @@ if($idItemMailable != null){
   $newArrayFields['_allAttachements'] = i18n('mailableAttachments');
   $newArrayFields['_lastAttachement'] = i18n('mailableLastAttachments');
   if($name =="Meeting" OR  $name =="TestSession" OR $name =="Activity"){
-    $newArrayFields['_assignment'] = i18n('colIdAssignment');
+    $newArrayFields['__ASSIGNMENT'] = i18n('colListAssignment');
   }  
 }else{
   $newArrayFields['_id'] = 'id';
