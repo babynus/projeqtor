@@ -269,6 +269,7 @@ $currentMonth = strftime("%m");
       }elseif(!$resourceId and $inIdTeam and $inIdOrga){
         $listResource = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'));
       }elseif(!$resourceId and !$inIdTeam and !$inIdOrga and trim($idProject)!="" ){
+//gautier test
         $listResourceObj = array();
         $project = new Project($idProject);
         $aff = new Affectation();

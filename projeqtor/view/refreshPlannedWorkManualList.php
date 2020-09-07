@@ -59,6 +59,7 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
   }elseif(!$resourceId and $inIdTeam and $inIdOrga){
     $listResourceObj = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'),null,null,null,true);
   }elseif(!$resourceId and !$inIdTeam and !$inIdOrga and $idProject){
+    //gautier test
     $listResourceObj = array();
     $project = new Project($idProject);
     $aff = new Affectation();
