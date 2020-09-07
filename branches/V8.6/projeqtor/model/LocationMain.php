@@ -53,7 +53,7 @@ class LocationMain extends SqlElement {
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
   
-  private static $_colCaptionTransposition = array();
+  private static $_colCaptionTransposition = array('idLocation' => 'parentLocation');
   
   private static $_fieldsAttributes=array(
       'name'=>'required', 
@@ -85,12 +85,37 @@ class LocationMain extends SqlElement {
     if ($this->id and $this->id == $this->idLocation) {
       $result .= '<br/>' . i18n ( 'errorHierarchicLoop' );
     }
+    if($this->idLocation){
+      $result .= $this->controlLocationHierarchicLoop($this->idLocation);
+    }
     $defaultControl = parent::control ();
     if ($defaultControl != 'OK') {
       $result .= $defaultControl;
     }
     if ($result == "") {
       $result = 'OK';
+    }
+    return $result;
+  }
+  
+  
+  public function controlLocationHierarchicLoop($parentId) {
+    $result="";
+    $parent= new Location($parentId);
+    $parentListObj=$parent->getLocationParentItemsArray();
+    if (array_key_exists('#' . $this->id,$parentListObj)) {
+      $result='<br/>' . i18n('errorHierarchicLoop');
+      return $result;
+    }
+    return $result;
+  }
+  
+  public function getLocationParentItemsArray() {
+    $result=array();
+    if ($this->idLocation) {
+      $parent=new Location($this->idLocation);
+      $result=$parent->getLocationParentItemsArray();
+      $result['#' . $parent->id]=$parent;
     }
     return $result;
   }
