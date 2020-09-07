@@ -41,7 +41,7 @@ class VersionCompatibility extends SqlElement {
 			$result.='<br/>' . i18n('errorDuplicateLink');
 		}
 		if ($this->idVersionA==$this->idVersionB) {
-			$result.='<br/>' . i18n('errorHierarchicLoop');
+			$result.='<br/>' . i18n('errorVersionLoop');
 		}
 		
 		$defaultControl=parent::control();
