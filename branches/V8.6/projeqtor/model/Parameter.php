@@ -1473,6 +1473,33 @@ class Parameter extends SqlElement {
     return self::$planningColumnDescription;
   }
   
+  
+  static public function deleteLogLevelParamFile() {
+    global $parametersLocation, $currVersion, $maintenanceDisableEnforceUTF8;
+    $fileHandler = fopen($parametersLocation,"r");
+    if (!$fileHandler) {
+      throwError("Error opening file $parameterLocation");
+      return;
+    }
+    $noLogLevel = true;
+    $result='';
+    while (!feof($fileHandler)) {
+      $line = fgets($fileHandler);
+      $findme   = '$logLevel';
+      if (strpos($line, $findme) !== false) {
+        $noLogLevel = false;
+      }else{
+        $result.=$line;
+      }
+    }
+    fclose($fileHandler);
+    if(!$noLogLevel){
+      $fileHandler = fopen($parametersLocation,"w");
+      fwrite($fileHandler,$result);
+      fclose($fileHandler);
+    }
+  }
+  
   /** 
    * Regenerate pamareter.php file depending on new param location : 
    *  if param exists in database : do not write param to file
