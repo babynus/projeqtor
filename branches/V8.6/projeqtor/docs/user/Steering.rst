@@ -228,14 +228,25 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
   
 .. rubric:: Periodic meeting process
 
-* When saving periodic meeting, elementary meetings are automatically created.
+* When recording a recurring meeting, unit meetings are automatically created in a parent folder.
 
-* Changes can be done in elementary meetings. In most cases, these changes won't be erased by periodic meeting updates.
+.. figure:: /images/GUI/REVIEWLOGS_ZONE_Gantt-PeriodMeetings.png
+   :alt: displaying periodic meetings in the Gantt chart 
+   
+   Display of unit meetings under the parent folder
+         
+* When the parent folder is closed, the meeting lines are not visible, but they appear on the same line as the folder.
 
-.. note:: Each periodic meeting is displayed in Gantt Chart under the parent meeting.
+.. figure:: /images/GUI/REVIEWLOGS_ZONE_Gantt-PeriodMeetings_HIDE.png
+   :alt: displaying periodic meetings on the bar 
+   
+   Display of single meetings on the parent folder bar
+
+* Changes can be made on each group meeting.
+
+* In most cases, these changes will not be affected or erased by periodic meeting updates.
       
-      .. figure:: /images/GUI/REVIEWLOGS_ZONE_Gantt-PeriodMeetings.png
-         :alt: displaying periodic meetings in the Gantt chart 
+
    
   
 .. rubric:: Update on a periodic meeting
