@@ -6218,16 +6218,10 @@ function getAssignmentHtmlTab(){
   $linkAss = $ass->getSqlElementsFromCriteria(null,null,$crit);
   $style = 'border-top: 1px solid #7b7b7b ; border-bottom: 1px solid #7b7b7b;
             background-color:#dddddd; padding:4px;';
-  $html = '<table style="width:95%; border-collapse:collapse;border:1px solid #7b7b7b;">
-           <tr><td  style="width:45%' . $style . '"></td> <td  style="' . $style . ' text-align:left;" width="100%">'.i18n('Assignment').'</td></tr>';
-  $html .= '<tr>' .
-            '<td style="width:30%' . $style . '">' . ucfirst(i18n('colId')) . '</td>
-             <td  style="width:70%' . $style . '">' . ucfirst(i18n('colName')) . '</td>
-            </tr>';
-  $status = '';
+  $html = '<table style="width:50%; border-collapse:collapse;border:1px solid #7b7b7b;">';
+  $html .= '<tr> <td  style="text-align:center;' . $style . '">' . ucfirst(i18n('colListAssignment')) . '</td> </tr>';
   foreach ($linkAss as $link) {
-    $html .= '<tr><td style="width:30%;border: 1px solid #7b7b7b; padding:4px;"> #' . $link->id . '</td>' .
-             '    <td style="width:70%;border: 1px solid #7b7b7b; padding:4px;"># '.$link->idResource.' - ' . SqlList::getNameFromId('Resource', $link->idResource). '</td></tr>';
+    $html .= '<tr><td style="width:70%;border: 1px solid #7b7b7b; padding:4px;"># '.$link->idResource.' - ' . SqlList::getNameFromId('Resource', $link->idResource). '</td></tr>';
   }
   return $html . '</table>';
 }
@@ -6414,7 +6408,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         } else {
           return "-";
         }
-      }else if($property == 'assignment'){
+      }else if($property == 'ASSIGNMENT'){
         return $this->getAssignmentHtmlTab();
       } else if ($property == 'sender') {
         return SqlList::getNameFromId('Affectable', getCurrentUserId());
