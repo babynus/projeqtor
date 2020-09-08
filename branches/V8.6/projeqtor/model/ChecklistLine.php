@@ -86,7 +86,7 @@ class ChecklistLine extends SqlElement {
           }
         }
         if($countVal==0){
-          $result.='<br/>' . i18n('chips');
+          $result.='<br/>' . i18n('errorRequiredLine');
         }
     }
     $defaultControl=parent::control();
@@ -118,8 +118,7 @@ class ChecklistLine extends SqlElement {
   	    }
   	  }
   	  if($countVal==0){
-  	    $result.='<br/>' . i18n('chips');
-  	    $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
+  	    $result.='<br/>' . i18n('errorRequiredLine');
   	  }
   	}
   	if (! $result) {  
