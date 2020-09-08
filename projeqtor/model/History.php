@@ -215,10 +215,10 @@ class History extends SqlElement {
         $objType = 'Component';
       }
       if($operation=='insert'){
-        self::store ($obj, $objType, $obj->idProduct, 'update' , 'addComponentLink', '', SqlList::getNameFromId('Component', $obj->idComponent));
+        self::store ($obj, $objType, $obj->idProduct, 'update' , 'addComponentLink', '', SqlList::getNameFromId('Component', intval($obj->idComponent)));
         self::store ($obj, 'Component', $obj->idComponent, 'update' , 'add'.$objType.'Link', '', SqlList::getNameFromId($objType, $prodOrComp->id));
       }else if($operation=='delete'){
-      	self::store ($obj, $objType, $obj->idProduct, 'update' , 'deleteComponentLink', SqlList::getNameFromId('Component', $obj->idComponent), '');
+      	self::store ($obj, $objType, $obj->idProduct, 'update' , 'deleteComponentLink', SqlList::getNameFromId('Component', intval($obj->idComponent)), '');
       	self::store ($obj, 'Component', $obj->idComponent, 'update' , 'delete'.$objType.'Link', SqlList::getNameFromId($objType, $prodOrComp->id), '');
       }
     }else if($refType=='ProductVersionStructure'){
@@ -234,10 +234,10 @@ class History extends SqlElement {
         $prodOrComp = $comp;
       }
       if($operation=='insert'){
-        self::store ($obj, $objType, $obj->idProductVersion, 'update' , 'addComponentVersionLink', '', SqlList::getNameFromId('ComponentVersion', $obj->idComponentVersion));
+        self::store ($obj, $objType, $obj->idProductVersion, 'update' , 'addComponentVersionLink', '', SqlList::getNameFromId('ComponentVersion', intval($obj->idComponentVersion)));
         self::store ($obj, 'ComponentVersion', $obj->idComponentVersion, 'update' , 'add'.$objType.'Link', '', SqlList::getNameFromId($objType, $prodOrComp->id));
       }else if($operation=='delete'){
-      	self::store ($obj, $objType, $obj->idProductVersion, 'update' , 'deleteComponentVersionLink', SqlList::getNameFromId('ComponentVersion', $obj->idComponentVersion), '');
+      	self::store ($obj, $objType, $obj->idProductVersion, 'update' , 'deleteComponentVersionLink', SqlList::getNameFromId('ComponentVersion', intval($obj->idComponentVersion)), '');
       	self::store ($obj, 'ComponentVersion', $obj->idComponentVersion, 'update' , 'delete'.$objType.'Link', SqlList::getNameFromId($objType, $prodOrComp->id), '');
       }
     }
