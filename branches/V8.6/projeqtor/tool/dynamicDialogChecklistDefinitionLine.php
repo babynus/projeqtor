@@ -85,14 +85,16 @@ if ($line->id) {
       style="width: 30px;" maxlength="3" class="input" />
     </td>
   </tr>
-<?php for ($i=1;$i<=5;$i++) {?>
+<?php
+$cpVar=0;
+ for ($i=1;$i<=5;$i++) {?>
   <tr>
     <td class="dialogLabel" ><label><?php echo i18n('colChoice') . ' #'.$i;?> : </label></td>
     <td><input type="text" dojoType="dijit.form.TextBox" 
       id="dialogChecklistDefinitionLineChoice_<?php echo $i?>" 
       name="dialogChecklistDefinitionLineChoice_<?php echo $i?>"
-      value="<?php $var="check0$i";echo $line->$var;?>"
-      style="width: 300px;" maxlength="100" class="input" />
+      value="<?php $var="check0$i";echo $line->$var;if($line->$var!='')$cpVar++?>"
+      style="width: 300px;" maxlength="100" class="input" onchange="displayCheckBoxDefinitionLine();"/>
     </td>  
   </tr>
   <tr>
@@ -107,7 +109,7 @@ if ($line->id) {
     </td>
   </tr>
 <?php }?>
-  <tr>
+  <tr id="tr_dialogChecklistDefinitionLineExclusive" style="visibility:<?php echo ($cpVar==0)?'hidden':'visible';?>;">
     <td class="dialogLabel" ><label><?php echo i18n('colExclusive');?> : </label></td>
     <td> 
       <input dojoType="dijit.form.CheckBox" 
@@ -117,7 +119,7 @@ if ($line->id) {
        value="" style="background-color:white;" />
    </td>
  </tr>
- <tr>
+ <tr id="tr_dialogChecklistDefinitionLineRequired" style="visibility:<?php echo ($cpVar==0)?'hidden':'visible';?>;">
    <td class="dialogLabel" ><label><?php echo i18n('colRequired');?> : </label></td>
    <td> 
       <input dojoType="dijit.form.CheckBox" 

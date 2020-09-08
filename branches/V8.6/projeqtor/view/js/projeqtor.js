@@ -7495,3 +7495,18 @@ function hideActionSelect(selectClass, selectId, selectField) {
   
 }
 
+function displayCheckBoxDefinitionLine(){
+  var requiredVisibility=dojo.byId('tr_dialogChecklistDefinitionLineRequired').style.visibility;
+  var exclusiveVisibility=dojo.byId('tr_dialogChecklistDefinitionLineExclusive').style.visibility;
+  console.log('ui');
+  console.log(requiredVisibility);
+  console.log(exclusiveVisibility);
+  console.log(this);
+  if(requiredVisibility=='hidden' && exclusiveVisibility=='hidden' && this.value!=''){
+    dojo.byId('tr_dialogChecklistDefinitionLineRequired').style.visibility='visible';
+    dojo.byId('tr_dialogChecklistDefinitionLineExclusive').style.visibility='visible';
+  }else {
+    dojo.byId('tr_dialogChecklistDefinitionLineRequired').style.visibility='hidden';
+    dojo.byId('tr_dialogChecklistDefinitionLineExclusive').style.visibility='hidden'
+  }
+}
