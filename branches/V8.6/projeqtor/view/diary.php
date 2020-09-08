@@ -215,8 +215,8 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 				.'<b>'.$item['name']."</b><br/>"
 				.i18n('colIdProject').": <i>".$item['projectName'].'</i><br/>';
 		if ($item['date']) { $hintHtml.=i18n('colDate').": <i>".$item['date']."</i>"; }
-		if ($item['work'] and $item['real']) { $hintHtml.=i18n('colRealWork').": ".Work::displayWorkWithUnit($item['work'])."<br/>"; }
-		if ($item['work'] and ! $item['real']) { $hintHtml.=i18n('planned').": <i>".Work::displayWorkWithUnit($item['work'])."</i><br/>"; $plannedColor='background-color:#EEEEEE;';}
+		if ($item['work'] and $item['real']) { $hintHtml.=i18n('colRealWork').": ".Work::displayWorkWithUnit($item['work'])."<br/>"; $plannedColor='background-color:#EEEEEE;';}
+		if ($item['work'] and ! $item['real']) { $hintHtml.=i18n('planned').": <i>".Work::displayWorkWithUnit($item['work'])."</i><br/>"; $plannedColor='background-color:#FFFFFF;';}
 		if ($item['isResourceTeam']) { $hintHtml.=i18n('ResourceTeam').": <i>".SqlList::getNameFromId('ResourceAll', $item['idResourceTeam'], false)."</i>"; }
 		echo '<tr>';
 		echo '<td style="padding: 3px 3px 3px 3px;margin-right:20px;width:100%;position:relative;max-width:250px;'.$plannedColor.'">';
