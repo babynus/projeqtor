@@ -43,6 +43,7 @@
   $obj=new $objectClass();
 ?>
 <div dojoType="dijit.layout.BorderContainer" class="background" id="objetMultipleUpdate">
+  <input hidden id="showActicityStream" name="showActicityStream" value="<?php echo getSessionValue('showActicityStream');?>">
   <div id="buttonDiv" dojoType="dijit.layout.ContentPane" region="top">
     <div dojoType="dijit.layout.BorderContainer" >
       <div id="buttonDivContainer" dojoType="dijit.layout.ContentPane" region="left">
@@ -93,10 +94,28 @@
                   deleteMultipleUpdateMode("<?php echo $objectClass;?>");  
                 </script>
               </button>
+              <?php 
+              $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+              $showActivityStream=false;
+              $currentScreen=getSessionValue('currentScreen');
+              if ($currentScreen=='Object') $currentScreen=$objectClass;
+              if($paramRightDiv=="bottom"){
+                $activityStreamSize=getHeightLaoutActivityStream($currentScreen);
+                $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivHeight');
+              }else{
+                $activityStreamSize=getWidthLayoutActivityStream($currentScreen);
+                $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivWidth');
+              }
+              
+              ?>
               <button id="undoButtonMultiple" dojoType="dijit.form.Button" showlabel="false"
                title="<?php echo i18n('buttonQuitMultiple');?>"
                iconClass="dijitButtonIcon dijitButtonIconExit" class="detailButton" >
                 <script type="dojo/connect" event="onClick" args="evt">
+                  if(dojo.byId('showActicityStream').value=='show'){
+                    saveDataToSession('showActicityStream','hide');
+                    hideStreamMode('true','<?php echo $paramRightDiv;?>','<?php echo $activityStreamDefaultSize;?>',false);
+                  }
                   dojo.byId("undoButtonMultiple").blur();
                   endMultipleUpdateMode("<?php echo $objectClass;?>");
                 </script>
