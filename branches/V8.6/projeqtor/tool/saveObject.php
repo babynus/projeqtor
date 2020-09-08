@@ -80,95 +80,111 @@ if ((get_class($newObj)=='Ticket') and $newObj->id and (! is_object($newObj->Wor
   $newObj->WorkElement=$we;
   $newObj->fillFromRequest($ext); // Execute again fillFromRequest to get data
 }
-// save to database
-if (RequestHandler::isCodeSet('selectedResource') and ($newObj->id or RequestHandler::getValue('selectedResource')=='false')) {
-  RequestHandler::unsetCode('selectedResource');
-}
-if(get_class ( $newObj )=='Activity' and RequestHandler::isCodeSet('selectedResource')){
-  $selectedRes=RequestHandler::getValue('selectedResource');
-  if ($selectedRes=='false') $selectedRes=null;
-  $result = $newObj->save ($selectedRes);
-}else{
-  $result = $newObj->save ();
-}
-
-// Check if checklist button must be displayed
-$crit = "nameChecklistable='" . get_class ( $newObj ) . "'";
-$type = 'id' . get_class ( $newObj ) . 'Type';
-if (property_exists ( $newObj, $type )) {
-  $crit .= ' and (idType is null ';
-  if ($newObj->$type) {
-    $crit .= " or idType='" . $newObj->$type . "'";
-  }
-  $crit .= ')';
-}
-$cd = new ChecklistDefinition ();
-$cdList = $cd->getSqlElementsFromCriteria ( null, false, $crit );
-if (count ( $cdList ) > 0 and $newObj->id) {
-  $buttonCheckListVisible = "visible";
-} else {
-  $buttonCheckListVisible = "hidden";
-}
-echo '<input type="hidden" id="buttonCheckListVisibleObject" value="'.$buttonCheckListVisible.'" />';
-
-$status = getLastOperationStatus ( $result );
-// Message of correct saving
-if ($status == "OK") {
-  Sql::commitTransaction ();
-} else {
-  Sql::rollbackTransaction ();
-}
-
-if ($status == "OK" and $className=='Project') {
-  if ($newObj->name!=$obj->name or $newObj->idProject!=$obj->idProject) {
-    echo '<input type="hidden" id="needProjectListRefresh" value="true" />';
-  }
-}
-if ($status == "OK") {
-  if (! array_key_exists ( 'comboDetail', $_REQUEST )) {
-    SqlElement::setCurrentObject(new $className ( $newObj->id ));
-  }
-}
-if ($status == "OK") {
-  //$createRight=securityGetAccessRightYesNo('menu' . $className, 'create');
-  //if (!$newObj->id) {
-  //  $updateRight=$createRight;
-  //} else {
-    $updateRight=securityGetAccessRightYesNo('menu' . $className, 'update', $newObj);
-  //}
-  $deleteRight=securityGetAccessRightYesNo('menu' . $className, 'delete', $newObj);
-  //$newObj
-  //echo "<input type='hidden' id='createRightAfterSave' value='$createRight' />";
-  echo "<input type='hidden' id='updateRightAfterSave' value='$updateRight' />";
-  echo "<input type='hidden' id='deleteRightAfterSave' value='$deleteRight' />";
-}
-$globalResult=$result;
-$globalStatus=$status;
+$result='';
+$isStop=false;
 if (array_key_exists('checklistDefinitionId',$_REQUEST) and array_key_exists('checklistId',$_REQUEST)) {
   $included=true;
-  include "saveChecklist.php";
-  $included=false;
-  if ($globalStatus=='NO_CHANGE' and $status=='OK') {
-    //$status = "OK";
-    //$result => keep status of checklist save
+  include "controlChecklist.php";
+  if($result!=''){
+    $isStop=true;
+    Sql::rollbackTransaction ();
+    $status = getLastOperationStatus ( $result );
+  }else{
+    $result='OK';
+  }
+  
+}
+// save to database
+if($isStop==false){
+    if (RequestHandler::isCodeSet('selectedResource') and ($newObj->id or RequestHandler::getValue('selectedResource')=='false')) {
+      RequestHandler::unsetCode('selectedResource');
+    }
+    
+    if(get_class ( $newObj )=='Activity' and RequestHandler::isCodeSet('selectedResource')){
+      $selectedRes=RequestHandler::getValue('selectedResource');
+      if ($selectedRes=='false') $selectedRes=null;
+      $result .= $newObj->save ($selectedRes);
+    }else{
+      $result .= $newObj->save ();
+    }
+  
+  // Check if checklist button must be displayed
+  $crit = "nameChecklistable='" . get_class ( $newObj ) . "'";
+  $type = 'id' . get_class ( $newObj ) . 'Type';
+  if (property_exists ( $newObj, $type )) {
+    $crit .= ' and (idType is null ';
+    if ($newObj->$type) {
+      $crit .= " or idType='" . $newObj->$type . "'";
+    }
+    $crit .= ')';
+  }
+  $cd = new ChecklistDefinition ();
+  $cdList = $cd->getSqlElementsFromCriteria ( null, false, $crit );
+  if (count ( $cdList ) > 0 and $newObj->id) {
+    $buttonCheckListVisible = "visible";
   } else {
-    $status=$globalStatus;
-    $result=$globalResult;
+    $buttonCheckListVisible = "hidden";
+  }
+  echo '<input type="hidden" id="buttonCheckListVisibleObject" value="'.$buttonCheckListVisible.'" />';
+  
+  $status = getLastOperationStatus ( $result );
+  // Message of correct saving
+  if ($status == "OK") {
+    Sql::commitTransaction ();
+  } else {
+    Sql::rollbackTransaction ();
+  }
+  
+  if ($status == "OK" and $className=='Project') {
+    if ($newObj->name!=$obj->name or $newObj->idProject!=$obj->idProject) {
+      echo '<input type="hidden" id="needProjectListRefresh" value="true" />';
+    }
+  }
+  if ($status == "OK") {
+    if (! array_key_exists ( 'comboDetail', $_REQUEST )) {
+      SqlElement::setCurrentObject(new $className ( $newObj->id ));
+    }
+  }
+  if ($status == "OK") {
+    //$createRight=securityGetAccessRightYesNo('menu' . $className, 'create');
+    //if (!$newObj->id) {
+    //  $updateRight=$createRight;
+    //} else {
+      $updateRight=securityGetAccessRightYesNo('menu' . $className, 'update', $newObj);
+    //}
+    $deleteRight=securityGetAccessRightYesNo('menu' . $className, 'delete', $newObj);
+    //$newObj
+    //echo "<input type='hidden' id='createRightAfterSave' value='$createRight' />";
+    echo "<input type='hidden' id='updateRightAfterSave' value='$updateRight' />";
+    echo "<input type='hidden' id='deleteRightAfterSave' value='$deleteRight' />";
+  }
+  $globalResult=$result;
+  $globalStatus=$status;
+  if (array_key_exists('checklistDefinitionId',$_REQUEST) and array_key_exists('checklistId',$_REQUEST)) {
+    $included=true;
+    include "saveChecklist.php";
+    $included=false;
+    if ($globalStatus=='NO_CHANGE' and $status=='OK') {
+      //$status = "OK";
+      //$result => keep status of checklist save
+    } else {
+      $status=$globalStatus;
+      $result=$globalResult;
+    }
+  }
+  if (array_key_exists('joblistDefinitionId',$_REQUEST)) {
+    $included=true;
+    include "saveJoblist.php";
+    $included=false;
+    if ($globalStatus=='NO_CHANGE' and $status=='OK') {
+      //$status = "OK";
+      //$result => keep status of joblist save
+    } else {
+      $status=$globalStatus;
+      $result=$globalResult;
+    }
   }
 }
-if (array_key_exists('joblistDefinitionId',$_REQUEST)) {
-  $included=true;
-  include "saveJoblist.php";
-  $included=false;
-  if ($globalStatus=='NO_CHANGE' and $status=='OK') {
-    //$status = "OK";
-    //$result => keep status of joblist save
-  } else {
-    $status=$globalStatus;
-    $result=$globalResult;
-  }
-}
-
 echo '<div class="message' . $status . '" >' . formatResult ( $result ) . '</div>';
 
 function formatResult($result) {
