@@ -5962,8 +5962,8 @@ function saveNoteStream(event){
 var menuRightDivLastWidth=null;
 var menuRightDivLastHeight=null;
 function hideStreamMode(show,position,dimension,modeGlobal){
-  if(dojo.byId('objetMultipleUpdate')){
-    return;
+  if(dojo.byId('objetMultipleUpdate') && modeGlobal==true){
+         return;
   }
   if(modeGlobal){
     loadDiv("menuUserScreenOrganization.php?paramActiveGlobal="+show,"mainDivMenu");
