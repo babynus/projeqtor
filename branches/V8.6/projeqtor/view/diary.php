@@ -437,6 +437,18 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
           if (!array_key_exists($date, $result)) {
             $result[$date]=array();
           }
+          
+          $isResourceTeam=false;
+          $idResourceTeam=null;
+          $ass = new Assignment();
+          $assList = $ass->getSqlElementsFromCriteria(array('refType'=>get_class($item), 'refId'=>$item->id, 'isResourceTeam'=>1));
+          foreach ($assList as $asgn){
+          	$resTeam = ResourceTeamAffectation::getSingleSqlElementFromCriteria('ResourceTeamAffectation', array('idResourceTeam'=>$asgn->idResource, 'idResource'=>$ress));
+          	if($resTeam->id){
+          		$idResourceTeam = $resTeam->idResourceTeam;
+          		$isResourceTeam=true;
+          	}
+          }
         
           $result[$date]["$class#$id"]=array(
               'class'=>$class,
@@ -457,7 +469,9 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
               'statusId'=>$statusId,
               'statusName'=>$statusName,
               'description'=>$description,
-              'meetingStartTime'=> $meetingStartTime //Ticket #438 F.KARA - Get the start time of a meeting
+              'meetingStartTime'=> $meetingStartTime, //Ticket #438 F.KARA - Get the start time of a meeting
+              'isResourceTeam'=> $isResourceTeam,
+              'idResourceTeam'=> $idResourceTeam
           );
         }
       }
