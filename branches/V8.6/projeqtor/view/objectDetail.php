@@ -3726,7 +3726,6 @@ function drawHistoryFromObjects($refresh=false) {
           } else {
             // BEGIN - REPLACE BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
             $colWithoutAlias=foreignKeyWithoutAlias($colName);
-            if($hist->refType=='ProductVersion' or $hist->refType=='ComponentVersion' or $hist->refType=='Product' or $hist->refType=='Component')$colWithoutAlias=substr($colName, 1, -4);
             $oldValue=SqlList::getNameFromId(substr($colWithoutAlias, 2), intval($oldValue));
             // END - REPLACE BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
             // $oldValue=SqlList::getNameFromId(substr($colName, 2), $oldValue);
@@ -3735,7 +3734,6 @@ function drawHistoryFromObjects($refresh=false) {
         if ($newValue!=null and $newValue!='') {
           // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
           $colWithoutAlias=foreignKeyWithoutAlias($colName);
-          if($hist->refType=='ProductVersion' or $hist->refType=='ComponentVersion' or $hist->refType=='Product' or $hist->refType=='Component')$colWithoutAlias=substr($colName, 1, -4);
           $newValue=SqlList::getNameFromId(substr($colWithoutAlias, 2), intval($newValue));
           // $newValue=SqlList::getNameFromId(substr($colName, 2), $newValue);
           // END - ADD BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
