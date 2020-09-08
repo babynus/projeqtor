@@ -743,6 +743,16 @@ They are calculated automatically.
 But you can also enter a start date and a number of days, the end date will be automatically calculated.
 
 
+.. rubric:: Delay display
+
+If the dates entered in the validated dates are lower than the dates calculated by the software - the planned dates, then the planned end date box is red as well as the bar of the Gantt chart corresponding to the element.
+
+This then reflects a possible delay.
+
+.. figure:: /images/GUI/COMMON_ZONE_DelayDates.PNG
+   :alt: planned dates greater than validated dates
+   
+   The planned dates are greater than validated dates 
 
 
 .. _progress-section-resource:
@@ -870,7 +880,14 @@ Technical Progress
 
 The Technical Progress section allows you to display an advancement in units of work.
 
-.. note:: To display the technical progression section, which corresponds to an advancement in Unit of Work, you must position the option in the global parameters.
+
+.. figure:: /images/GUI/COMMON_ZONE_TechnicalProgress.png
+   :alt: Technical progress section
+   
+   Technical progress section
+   
+   
+.. warning:: To display the technical progression section, which corresponds to an advancement in Unit of Work, you must position the option in the global parameters.
    
    See: :ref:`Global Parameters<gp_planning-section>`
 

@@ -1601,6 +1601,8 @@ The CRON activation button allows you to quickly see if your CRON is launched or
 
 |CronRunning| the CRON is running
 
+|CronPause| In request for closure. The next refresh turns it red.
+
 |CronStopped| the CRON is stopped
 
 Click on the button to start or stop CRON in the same way as on the Administration page.
