@@ -48,3 +48,23 @@ H :
   - Déconnexion/reconnexion admin
   - Vérifications (VABF)
   - Réouverture de l'application
+
+Cas particulier de changement de serveur
+----------------------------------------
+
+Il faut :
+  - Copier la base de données
+  - Copier tout le code (c’est le plus simple pour ne rien oublier)
+  - Modifier le fichier parameters.php qui contient les informations de connexion à la base (à modifier) et certains répertoires (à modifier ou pas selon la configuration)
+  - Se connecter à l’application : tout devrait fonctionner correctement
+  - Allez de suite dans paramètres globaux, onglet « système » et vérifiez les répertoires des fichiers attachés et des documents et sous l’onglet « automatismes » le répertoire des imports
+Si ces répertoires ont un chemin relatif (« ../files/xxxx »), il n’y a rien à faire de plus, mais la configuration n’est pas sécurisée
+Si ces chemins ont un chemin absolu (« /var/xxxx ») ; il faut recopier ces répertoires de la source et éventuellement adapter les répertoires en fonction de l’environnement
+
+Si on ne veut pas recopier tout le code pour repartir avec une nouvelle version du code, il faut penser à récupérer : 
+  - les customisations : tous les fichiers dans projeqtor/model/custom
+  - les plugins : tous les répertoires dans projeqtor/plugin
+  - les rapport spécifiques : tous les fichiers dans projeqtor/report/object et dans projeqtor/report/template
+  - la configuration .htaccess dans le répertoire projeqtor/api
+
+
