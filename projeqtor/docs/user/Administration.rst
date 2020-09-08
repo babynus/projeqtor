@@ -30,22 +30,16 @@ Administration console allows to execute administration tasks on application.
 Background tasks
 ----------------
 
-Starts and stops background jobs that process and periodically checks the flags to generate the corresponding alerts, warnings, and auto-import when needed.
+The :term:`CRON` program starts and stops background jobs that process and periodically check indicators to generate the corresponding alerts, warnings or even automatic imports if necessary.
 
-.. note:: 
-
-   **It is the** :term:`CRON`
-
-   CRON is a program that automatically runs scripts, commands, or software at a specified date and time, or a pre-defined cycle
+This program automatically runs scripts, commands, or software at a specified date and time, or a pre-defined cycle.
 
 .. figure:: /images/GUI/ADMIN_ZONE_BackgroundTask.png
    :alt: Background tasks in Admin
    
    Background tasks is running in Administration console
    
-You can activate or deactivate CRON directly from the info bar
-
-See: :ref:`The CRON button<ib-cron-button>`
+You can activate or deactivate CRON directly from the info bar. See: :ref:`The CRON button<ib-cron-button>`
 
 .. figure:: /images/GUI/ADMIN_ZONE_ButtonCRON.PNG
    :alt: CRON Button

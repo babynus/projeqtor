@@ -72,9 +72,13 @@
 	:alt: icon Cron Running
 
 .. |CronStopped| image:: images/iconCronStopped.png
-	:alt: icon Cron Running
+	:alt: icon Cron stopped
 	
-	
+.. |CronPause| image:: images/iconCronPause.png
+	:alt: icon Cron Demand
+
+
+
 	
 .. |ListApprovers| image:: images/iconButtonListApprover.png
 	:alt: icon List of approvers	

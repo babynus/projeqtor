@@ -1166,30 +1166,45 @@ See: :ref:`automatic-inuptwork`
 
 Specific settings for alerts based on a profile.
  
-An email is sent on the agreed date. Click on the button **Defined Parameters** 
+* An email is sent on the agreed date. 
+* Click on the button **Define Parameters**
+* Select the frequency of the calendar with which the emails will be generated and sent to the profile. 
+
+
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_DefineParameters.png
+   :alt: Define parameters
+   
+   Define the parameters for sending alerts and / or emails
 
 See: :ref:`automated-service` to set the send frequency.
 
-   .. compound:: Generation parameters for the Resource/Project leader and Team Manager
-   
-         Select the frequency of the calendar with which the emails will be generated and sent to the profile 
 
 
-.. topic:: When and How
+.. rubric:: When and How
 
-   **Control input up to** 
+.. image:: /images/GUI/GLOBALPARAM_ZONE_Options.PNG
    
-   Select when you want to be controlled. Current day, previous day or next days.
+In addition to the sending frequency, you can refine the generation with several additional options.
+
+ .. compound:: Control input up to
+
+   Select when you want to be controlled: current day, previous day or next days.
    
-   **Number of days to control** 
+ .. compound:: Number of days to control
    
    Choose how many days will be controled
          
-   **Send alert to resource** 
+ .. compound:: Send alert to resource 
    
    Choose how alerts will be sent, Internal alert, email, both or none
 
+ .. compound:: only incompletes imputation  
+      
+   The goal is to be able to send alerts on charges only if the entry is incomplete, not if it is greater than the capacity of the resource.
 
+   With the option checked, when generating alerts, an entry greater than the capacity of the resource does not trigger an alert.      
+      
+      
 .. warning::
 
    * All days of the week, open or off days are taken into account.
