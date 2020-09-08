@@ -3726,7 +3726,8 @@ function drawHistoryFromObjects($refresh=false) {
           } else {
             // BEGIN - REPLACE BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
             $colWithoutAlias=foreignKeyWithoutAlias($colName);
-            $oldValue=SqlList::getNameFromId(substr($colWithoutAlias, 2), $oldValue);
+            if($hist->refType=='ProductVersion' or $hist->refType=='ComponentVersion' or $hist->refType=='Product' or $hist->refType=='Component')$colWithoutAlias=substr($colName, 1, -4);
+            $oldValue=SqlList::getNameFromId(substr($colWithoutAlias, 2), intval($oldValue));
             // END - REPLACE BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
             // $oldValue=SqlList::getNameFromId(substr($colName, 2), $oldValue);
           }
@@ -3734,7 +3735,8 @@ function drawHistoryFromObjects($refresh=false) {
         if ($newValue!=null and $newValue!='') {
           // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
           $colWithoutAlias=foreignKeyWithoutAlias($colName);
-          $newValue=SqlList::getNameFromId(substr($colWithoutAlias, 2), $newValue);
+          if($hist->refType=='ProductVersion' or $hist->refType=='ComponentVersion' or $hist->refType=='Product' or $hist->refType=='Component')$colWithoutAlias=substr($colName, 1, -4);
+          $newValue=SqlList::getNameFromId(substr($colWithoutAlias, 2), intval($newValue));
           // $newValue=SqlList::getNameFromId(substr($colName, 2), $newValue);
           // END - ADD BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
         }
@@ -3766,6 +3768,21 @@ function drawHistoryFromObjects($refresh=false) {
         $allstars="**********";
         if ($oldValue) $oldValue=substr($oldValue, 0, 5).$allstars.substr($oldValue, -5);
         if ($newValue) $newValue=substr($newValue, 0, 5).$allstars.substr($newValue, -5);
+      } else if(substr($colName, strlen($colName)-4)=='Link' and (substr($colName, 0, 3)=='add' or substr($colName, 0, 6)=='delete')){
+        if ($oldValue!=null and $oldValue!='' and intval($oldValue)) {
+        	if ($oldValue==0 and $colName=='idStatus') {
+        		$oldValue='';
+        	} else {
+        		$colNameWhitoutChar=substr($colName, 3, -4);
+        		if(substr($colName, 0, 6)=='delete')$colNameWhitoutChar=substr($colName, 6, -4);
+        		$oldValue=SqlList::getNameFromId($colNameWhitoutChar, intval($oldValue));
+        	}
+        }
+        if ($newValue!=null and $newValue!='' and intval($newValue)) {
+        	$colNameWhitoutChar=substr($colName, 3, -4);
+        	if(substr($colName, 0, 6)=='delete')$colNameWhitoutChar=substr($colName, 6, -4);
+        	$newValue=SqlList::getNameFromId($colNameWhitoutChar, intval($newValue));
+        }
       } else {
         // $diff=diffValues($oldValue,$newValue);
         $oldValue=htmlEncode($oldValue, 'print');
