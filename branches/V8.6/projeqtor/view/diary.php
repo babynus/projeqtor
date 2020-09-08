@@ -206,6 +206,7 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 	echo '<table style="width:'.(($period=='day')?'99%':'97%').';background-color:white;">';
 	$lst=getActivity($date);
 	foreach ($lst as $item) {
+	    $plannedColor='';
 		$cpt++;
 		$hint=i18n($item['class']).' #'.$item['id']."\n"
 				.$item['name']."\n"
@@ -215,10 +216,10 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 				.i18n('colIdProject').": <i>".$item['projectName'].'</i><br/>';
 		if ($item['date']) { $hintHtml.=i18n('colDate').": <i>".$item['date']."</i>"; }
 		if ($item['work'] and $item['real']) { $hintHtml.=i18n('colRealWork').": ".Work::displayWorkWithUnit($item['work'])."<br/>"; }
-		if ($item['work'] and ! $item['real']) { $hintHtml.=i18n('planned').": <i>".Work::displayWorkWithUnit($item['work'])."</i><br/>"; }
+		if ($item['work'] and ! $item['real']) { $hintHtml.=i18n('planned').": <i>".Work::displayWorkWithUnit($item['work'])."</i><br/>"; $plannedColor='background-color:#EEEEEE;';}
 		if ($item['isResourceTeam']) { $hintHtml.=i18n('ResourceTeam').": <i>".SqlList::getNameFromId('ResourceAll', $item['idResourceTeam'], false)."</i>"; }
 		echo '<tr>';
-		echo '<td style="padding: 3px 3px 3px 3px;margin-right:20px;width:100%;position:relative;max-width:250px;">';
+		echo '<td style="padding: 3px 3px 3px 3px;margin-right:20px;width:100%;position:relative;max-width:250px;'.$plannedColor.'">';
 		echo '<div id="item_'.$cpt.'" style="border:1px solid: #EEEEEE; box-shadow: 2px 2px 4px #AAAAAA; width: 100%;border-style:solid;border-width:0px 0px 0px 5px;border-color:'.$item['color'].'">';
 		echo '<table style="width:100%"><tr>';		
 		echo '<td><a style="position:absolute;left:15px;width:18px;top:3px;height:17px;z-index:20;">'.formatIcon($item['class'], 16,null,false).'</a>';
