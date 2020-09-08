@@ -597,10 +597,10 @@ div.dijitTab.dijitTabChecked>span.tabLabel {
 .dijitTextArea {
   padding: 2px 2px 2px 5px !important; /* New GUI */
 }
-.dijitTextBox,.dijitComboBox,.dijitSpinner,.dijitTextArea {
+.dijitTextBox,.dijitComboBox,.dijitSpinner,.dijitTextArea, .dijitInputInner {
   font-family: Verdana, Arial, Tahoma, sans-serif;
   font-size: 100%;
-  
+  font: 100% Verdana, Arial, Tahoma, sans-serif;
 }
 .dijitInputInner {
 	padding: 2px 0px 2px 3px !important; /* New GUI */
