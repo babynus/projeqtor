@@ -4535,9 +4535,19 @@ abstract class SqlElement {
         $isCopy = true;
       }
     }
+    debugLog("Control ".get_class($this));
     foreach ( $this as $col => $val ) {
       $dataType = $this->getDataType ( $col );
       $dataLength = $this->getDataLength ( $col );
+      if (get_class($this)!='Audit') debugLog("   $col");
+      if ($col=='idBudgetItem' and $val) {
+        debugLog("OK, budget item");
+        $testBudget=new Budget($val);
+        debugLog($testBudget);
+        if ($testBudget->elementary!=1) {
+          $result.='<br/>'.i18n('errorNotBudgetItem');
+        }
+      }
       if (substr ( $col, 0, 1 ) != '_') {
         if (ucfirst ( $col ) == $col and is_object ( $val )) {
           $subResult = $val->control ();

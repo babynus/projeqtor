@@ -204,6 +204,10 @@ class Expense extends SqlElement {
         $result.= '<br/>' . i18n('msgEnterRealDA');  
       }
   	}
+  	$defaultControl = parent::control ();
+  	if ($defaultControl != 'OK') {
+  	  $result .= $defaultControl;
+  	}
     if ($result=="") {
     	return 'OK';
     } else {
