@@ -491,6 +491,7 @@
        iconClass="dijitButtonIcon dijitButtonIconMultipleUpdate" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           hideResultDivs();
+          if(dijit.byId('detailRightDiv'))saveDataToSession('showActicityStream','show');
           hideStreamMode('false','<?php echo $paramRightDiv;?>','<?php echo $activityStreamDefaultSize;?>',false);
           startMultipleUpdateMode('<?php echo get_class($obj);?>');  
           hideExtraButtons('extraButtonsDetail');
