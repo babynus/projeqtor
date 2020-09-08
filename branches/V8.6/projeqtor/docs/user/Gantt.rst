@@ -1793,21 +1793,18 @@ These parameters are not exclusive, you can select team and organization.
 
 .. rubric:: |twoBLC| List of Projects and activity    
    
-We display the list of activities whose planning mode is "manual planning" of the selected project and its sub-projects
+The list of activities displayed are in the planning mode "manual planning". If no filter is selected (project, resource, organization ...) then the screen does not display any data.
 
-If no project is selected, all the projects to which it is assigned will be displayed 
+You cannot create new activities in manual planning mode from the intervention screen. You need to access the activities or schedule screen to create the new activity in manual planning mode. The new activity will then appear in the list.
 
-You can't create new activities in manual planning mode from the intervention screen.
-
-Go to the activities screen to create the new activity in manual planning mode.
-
-The new activity will then appear in the list.  
+Click on |iconGoto| to access the activity screen and view its detail 
+ 
 
 
 
    .. _manuelPlan-fte:
 
-.. rubric:: |twoBLC| FTE    
+.. rubric:: |threeBLC| FTE    
    
 In this calendar, we display graphically if we respect the quantity of people requested on the activity and on the half day.
 

@@ -200,6 +200,7 @@ This section displays :ref:`project-expense` lines in detail
    Details lines
    
    
+.. _hierarchical-budget:
    
 Hierarchical budget
 ===================

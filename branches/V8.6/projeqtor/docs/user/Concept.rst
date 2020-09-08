@@ -46,11 +46,11 @@ The project data visibility is granted according to the user profile.
    :ref:`profiles-definition` and :ref:`allocation-to-project`
 
 
-.. compound:: **Project selector**
+.. rubric:: Project selector
       
    The project selector works as a filter.
           
-   By default, the selector displays "all projects", you can change this view in the user-miscelleanous settings and choose the project to display by default
+   By default, the selector displays "all projects", you can change this view in the user parameters and choose the project to display by default.
           
    You can restrict data for one or more dedicated projects without necessarily being bound
        
@@ -942,14 +942,14 @@ planning will require finding consecutive days with at least the given value pos
 
 .. _scheduling-priority:
 
-Scheduling priority
--------------------
+Planning priority
+-----------------
 
-The scheduling priority allows to define scheduled order among planning elements.
+The planning priority allows to define planning order among planning elements.
 
 Possible values: from 1 (highest priority) to 999 (lowest priority).
 
-Scheduling priority value is set in progress section of planning element.
+planning priority value is set in progress section of planning element.
 
 .. note::
 
@@ -976,10 +976,10 @@ Breakdown can be done with sub-projects, activities and test sessions.
 * All other elements are numbered depending on their level and sequence.
 * WBS numbering is automatically adjusted.
 
-Project scheduling calculation
-------------------------------
+Project planning calculation
+----------------------------
 
-The project schedule is calculated on the full project plan that includes parents and predecessor elements (dependencies).
+The project planning is calculated on the full project plan that includes parents and predecessor elements (dependencies).
 
 .. rubric:: Scheduling
 

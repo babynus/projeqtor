@@ -269,6 +269,8 @@ To record or change your absences, double clicking on an existing date or absenc
 
 A pop up opens to display the properties of an absence (date and type of absence ...)
 
+The type of absences visible in the drop-down list depend on those recorded in the employee's contract.
+
 .. figure:: /images/GUI/RH_BOX_LeavesAttributs.png
    :alt: Leaves attributs
    :align: center
@@ -279,6 +281,8 @@ A pop up opens to display the properties of an absence (date and type of absence
 After validation, the holiday appears in the calendar.
 
 The manager (and / or administrator) can validate or not, the leave of the employees.
+
+When the leave period is rejected, it is impossible to add a new leave on these same dates
 
 The color of the holidays will change according to the validation.
    

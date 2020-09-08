@@ -53,7 +53,16 @@ We offer you a small overview of the major developments and you will find the fu
    :ref:`revenue-managment` & :ref:`work-unit-catalog`
    
 
+.. container:: 
 
+   **Improvment of access rights**
+
+   .. image:: /images/iconHabilitationParameter22.png
+      :align: center
+
+   Improvment of access rights management for non-project dependent items.
+         
+   :ref:`access-mode`
       
 
 
