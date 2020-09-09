@@ -41,6 +41,7 @@
   $objectClass=$_REQUEST['objectClass'];
   Security::checkValidClass($objectClass);
   $obj=new $objectClass();
+  debugLog(getSessionValue('showActicityStream'));
 ?>
 <div dojoType="dijit.layout.BorderContainer" class="background" id="objetMultipleUpdate">
   <input hidden id="showActicityStream" name="showActicityStream" value="<?php echo getSessionValue('showActicityStream');?>">
