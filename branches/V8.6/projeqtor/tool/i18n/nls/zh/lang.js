@@ -2130,7 +2130,7 @@ errorRegisterGlobals: "register_globals必须禁用 (设为 false). <br/>请更�
 errorRemoveTooMuchWork: "试图直接删除多项工作 (${1}). 请使用 &#34;拆分工作&#34; 功能.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "新密码必须不同于原密码",
-errorRequiredLine: "CheckList &#34${1}&#34 is required to passed status to done",
+errorRequiredLine: "CheckList &#34${1}&#34 is required to passed status to ${2}",
 errorSameName: "a version already exists with this name",
 errorSessionHash: "当前进程发生错误.<br/>请刷新浏览器页面或关闭浏览器再重试.<br/>并请检查cookies是否开启.<br/>若问题依旧存在，请联络管理员.",
 errorStartEndDates: "'${1}' 不能在 '${2}'后",

@@ -2130,7 +2130,7 @@ errorRegisterGlobals: "register_globals' muss abgeschalten werden (Wert = false)
 errorRemoveTooMuchWork: "Sie versuchten mehr als Ihre eigene Arbeit (${1}). Sie sollten hierfür &#34 nutzen;Versand Arbeit&#34; Button dafür benutzten.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "Die neue Resource muss unterschiedlich zu existierenden sein.",
-errorRequiredLine: "CheckList &#34${1}&#34 is required to passed status to done",
+errorRequiredLine: "CheckList &#34${1}&#34 is required to passed status to ${2}",
 errorSameName: "a version already exists with this name",
 errorSessionHash: "In der laufenden Session ist ein Fehler aufgetreten<br/>Bitte Browserseite aktualisieren oder Browser neu starten.",
 errorStartEndDates: "${1}' darf nicht spätester als '${2}' sein.",
