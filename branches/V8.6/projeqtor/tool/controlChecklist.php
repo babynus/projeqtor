@@ -40,7 +40,6 @@ Security::checkValidId($checklistObjectId);
 
 $checklistDefinition=new ChecklistDefinition($checklistDefinitionId);
 $done=(RequestHandler::isCodeSet('done'))?RequestHandler::getValue('done'):'false';
-debugLog($_REQUEST);
 $statusLine='';
 foreach($checklistDefinition->_ChecklistDefinitionLine as $line) {
   $required=(RequestHandler::isCodeSet('isRequired_'.$line->id))?RequestHandler::getValue('isRequired_'.$line->id):0;
