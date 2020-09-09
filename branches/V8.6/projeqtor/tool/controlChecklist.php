@@ -51,10 +51,12 @@ foreach($checklistDefinition->_ChecklistDefinitionLine as $line) {
 			$checkedCpt++;
 		} 
 	}
+	debugLog($checkedCpt.' '.$required.' '.$done);
 	if($checkedCpt==0 and $required==1 and $done=='on'){
-      $result.='<br/>' . i18n('errorRequiredLine');
+      $result.='<br/>' . i18n('errorRequiredLine',array($line->name));
 	  $result .= '<input type="hidden" id="lastOperationStatus" value="INVALID" />';
 	}
 }
+
 
 ?>
