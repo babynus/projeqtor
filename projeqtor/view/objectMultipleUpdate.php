@@ -112,6 +112,7 @@
                title="<?php echo i18n('buttonQuitMultiple');?>"
                iconClass="dijitButtonIcon dijitButtonIconExit" class="detailButton" >
                 <script type="dojo/connect" event="onClick" args="evt">
+                  console.log(dojo.byId('showActicityStream').value);
                   if(dojo.byId('showActicityStream').value=='show'){
                     saveDataToSession('showActicityStream','hide');
                     hideStreamMode('true','<?php echo $paramRightDiv;?>','<?php echo $activityStreamDefaultSize;?>',false);
