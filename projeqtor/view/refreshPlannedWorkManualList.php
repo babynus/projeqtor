@@ -67,8 +67,8 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
     $where = " idProject in ".$listProj;
     $listResources = $aff->getSqlElementsFromCriteria(null,false,$where);
     foreach ($listResources as $valueRes){
-      if($valueRes->idResourceSelect){
-          $listResource[]=$valueRes->idResourceSelect;
+      if($valueRes->idResource){
+          $listResource[]=$valueRes->idResource;
       }
     }
     $noNeed = true;
