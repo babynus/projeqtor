@@ -2130,6 +2130,7 @@ errorRegisterGlobals: "register_globals  должен быть отключен 
 errorRemoveTooMuchWork: "You tried and directly remove more than your own work (${1}). You should use &#34;Dispatch work&#34; button for this.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "новый ресурс должен отличаться от существующего",
+errorRequiredLine: "CheckList ${1} is required to passed status to done",
 errorSameName: "a version already exists with this name",
 errorSessionHash: "Произошла ошибка в текущей сессии<br/>Пожалуйста&#44; обновите страницу браузера или закройте браузер и повторите снова",
 errorStartEndDates: "'${1}' не должен быть размещен после '${2}'",

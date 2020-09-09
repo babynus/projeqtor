@@ -2130,6 +2130,7 @@ errorRegisterGlobals: "register_globals를 비활성화해야합니다 (false로
 errorRemoveTooMuchWork: "자신의 작업 (${1}) 이상을 시도하여 직접 제거했습니다. 이를 위해 '작업 파견'버튼을 사용해야 합니다.",
 errorReopenControl: "닫힌 품목 (${1}) 아래에있는이 품목을 다시 열 수 없습니다.",
 errorReplaceResourceNotChanged: "새로운 리소스는 기존 리소스와 달라야합니다",
+errorRequiredLine: "CheckList ${1} is required to passed status to done",
 errorSameName: "이 이름의 버전이 이미 존재합니다",
 errorSessionHash: "현재 session. 브라우저 새로 고침 페이지에 문제가 발생했거나 브라우저를 닫고 다시 시도하십시오.  또한 쿠키가 활성화되어 있는지 확인하십시오. 문제가 지속되면 관리자에게 문의하십시오.",
 errorStartEndDates: "'${1}'은 (는) '${2}'뒤에 있으면 안됩니다.",
