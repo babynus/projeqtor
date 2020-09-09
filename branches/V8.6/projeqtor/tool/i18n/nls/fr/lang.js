@@ -2130,7 +2130,7 @@ errorRegisterGlobals: "register_globals doit être désactivé (positionné à f
 errorRemoveTooMuchWork: "Vous tentez de retirer plus que votre propre travail (${1}). <br/>Vous devriez utilisez le bouton &#34;Répartir&#34; pour cela.",
 errorReopenControl: "Impossible de ré-ouvrir cet élément qui est sous un élément clos (${1})",
 errorReplaceResourceNotChanged: "la nouvelle ressource doit être différente de celle qu'elle remplace",
-errorRequiredLine: "La checkList ${1} est obligatoire pour passer à l'état fait",
+errorRequiredLine: "La checkList &#34${1}&#34 est obligatoire pour passer à l'état fait",
 errorSameName: "une version existe déjà avec ce nom",
 errorSessionHash: "Une anomalie est survenue avec la session actuelle.<br/>Rafraîchissez la page ou fermez le navigateur et réessayez.<br/>Vérifiez aussi que les cookies sont autorisés.<br/>Si le problème persiste&#44; contactez votre administrateur.",
 errorStartEndDates: "la '${1}'  ne doit pas être postérieure à la '${2}'",
