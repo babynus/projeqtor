@@ -11580,6 +11580,7 @@ function selectAllCheckBox(val){
 }
 
 function refreshCronIconStatus(status){
+  if (dojo.byId('actualCronStatusInDiv') && dojo.byId('actualCronStatusInDiv').value.toLowerCase()==status.toLowerCase()) return;
 	var url='../view/refreshCronIconStatus.php';
 	    url+='?cronStatus=' + status;
     loadDiv(url, 'menuBarCronStatus', null, null);
