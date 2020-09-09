@@ -88,6 +88,7 @@ if (array_key_exists('checklistDefinitionId',$_REQUEST) and array_key_exists('ch
   $included=false;
   if(trim($result)!=''){
     $isStop=true;
+    $result.=($newObj->control()!='OK')?$newObj->control():'';
     Sql::rollbackTransaction ();
     $status = getLastOperationStatus ( $result );
   }else{
@@ -104,9 +105,9 @@ if($isStop==false){
     if(get_class ( $newObj )=='Activity' and RequestHandler::isCodeSet('selectedResource')){
       $selectedRes=RequestHandler::getValue('selectedResource');
       if ($selectedRes=='false') $selectedRes=null;
-      $result .= $newObj->save ($selectedRes);
+      $result = $newObj->save ($selectedRes);
     }else{
-      $result .= $newObj->save ();
+      $result = $newObj->save ();
     }
   
   // Check if checklist button must be displayed

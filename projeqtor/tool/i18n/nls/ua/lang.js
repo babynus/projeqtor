@@ -2130,7 +2130,7 @@ errorRegisterGlobals: "&#34;register_globals&#34; мусить бути вимк
 errorRemoveTooMuchWork: "Ви намагалися безпосередньо усунути більше&#44; ніж власну роботу (${1}). Для цього вам слід скористатися кнопкою &#34;робота Організатора&#34;(Dispatch work).",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "Новий ресурс має відрізнятись від існуючих",
-errorRequiredLine: "CheckList &#34${1}&#34 is required to passed status to done",
+errorRequiredLine: "CheckList &#34${1}&#34 is required to passed status to ${2}",
 errorSameName: "a version already exists with this name",
 errorSessionHash: "проблема сталася в поточної сесії<br/>Будь ласка&#44; оновіть сторінку браузера або перезавантажте браузер і спробуйте знову ",
 errorStartEndDates: "${1}' не мусить бути після '${2}'",
