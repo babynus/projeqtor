@@ -181,7 +181,7 @@ class EmailTemplate extends SqlElement {
       $newArrayFields['_lastAttachement'] = i18n('mailableLastAttachments');
       if($this->getMailableItem() != null){
         if($mailableItem->name=="Meeting" OR $mailableItem->name=="TestSession" OR $mailableItem->name=="Activity"){
-          $newArrayFields['_ASSIGNMENT'] = i18n('colListAssignment');
+          $newArrayFields['ASSIGNMENT'] = i18n('colListAssignment');
         }
       }
       $arrayFields = $newArrayFields;
