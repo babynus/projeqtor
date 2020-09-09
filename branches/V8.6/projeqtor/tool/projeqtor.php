@@ -1560,6 +1560,14 @@ function securityCheckPage($page) {
     traceHack("securityCheckPage($page) - '".dirname(realpath($path))."' is not in allowed folders list");
     exit(); // Not required : traceHack already exits script
   }
+  if (dirname(realpath($path))==realpath("../tool/") and substr($page,0,12)!='../tool/json') {
+    traceHack("securityCheckPage($page) - '".dirname(realpath($path))."' is not in allowed except for json queries");
+    exit(); // Not required : traceHack already exits script
+  }
+  if (dirname(realpath($path))==realpath("../sso/projeqtor/") and substr($page,0,25)!='../sso/projeqtor/metadata') {
+    traceHack("securityCheckPage($page) - '".dirname(realpath($path))."' is not in allowed except metadata");
+    exit(); // Not required : traceHack already exits script
+  }
 }
 
 /**
