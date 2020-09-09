@@ -425,7 +425,12 @@ class PlannedWorkManual extends GeneralWork {
       echo '</tr>';
       $resourceListName =  array_flip($resourceList);
       foreach ($resourceListName as $idName=>$idResourceListName){
-        $resourceListName[$idName]=$nameRes=SqlList::getNameFromId('Affectable', $idName);
+        $nameRes=SqlList::getNameFromId('Resource', $idName);
+        if ($nameRes==$idName) {
+          unset($resourceListName[$idName]);
+        } else {
+          $resourceListName[$idName]=$nameRes;
+        }
       }
       $resourceListName = new ArrayObject($resourceListName);
       $resourceListName->asort();
