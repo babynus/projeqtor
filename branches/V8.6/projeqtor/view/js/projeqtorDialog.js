@@ -9230,9 +9230,13 @@ function showBigImage(objectClass, objectId, node, title, hideImage, nocache) {
     }
     var topPx=(top - 40 + (height / 2)) + "px";
     var leftPx=(left - 125) + "px";
+    if(dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value=='ActivityStream'){
+      leftPx=(left + 125) + "px";
+    }
     if (parseInt(leftPx)<3) {
       leftPx=(left+width+5)+"px";
     }
+    
     centerThumb80.innerHTML=htmlPhoto;
     centerThumb80.style.top=topPx;
     centerThumb80.style.left=leftPx;
