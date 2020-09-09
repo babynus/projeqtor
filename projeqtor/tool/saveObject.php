@@ -85,6 +85,7 @@ $isStop=false;
 if (array_key_exists('checklistDefinitionId',$_REQUEST) and array_key_exists('checklistId',$_REQUEST)) {
   $included=true;
   include "controlChecklist.php";
+  $included=false;
   if(trim($result)!=''){
     $isStop=true;
     Sql::rollbackTransaction ();
