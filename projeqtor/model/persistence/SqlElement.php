@@ -4535,15 +4535,11 @@ abstract class SqlElement {
         $isCopy = true;
       }
     }
-    debugLog("Control ".get_class($this));
     foreach ( $this as $col => $val ) {
       $dataType = $this->getDataType ( $col );
       $dataLength = $this->getDataLength ( $col );
-      if (get_class($this)!='Audit') debugLog("   $col");
       if ($col=='idBudgetItem' and $val) {
-        debugLog("OK, budget item");
         $testBudget=new Budget($val);
-        debugLog($testBudget);
         if ($testBudget->elementary!=1) {
           $result.='<br/>'.i18n('errorNotBudgetItem');
         }
@@ -6229,9 +6225,9 @@ function getAssignmentHtmlTab(){
   $style = 'border-top: 1px solid #7b7b7b ; border-bottom: 1px solid #7b7b7b;
             background-color:#dddddd; padding:4px;';
   $html = '<table style="width:50%; border-collapse:collapse;border:1px solid #7b7b7b;">';
-  $html .= '<tr> <td  style="text-align:center;' . $style . '">' . ucfirst(i18n('assignedResource')) . '</td> </tr>';
+  $html .= '<tr> <td  style="text-align:center;' . $style . '">' . ucfirst(i18n('assignedResourceList')) . '</td> </tr>';
   foreach ($linkAss as $link) {
-    $html .= '<tr><td style="width:70%;border: 1px solid #7b7b7b; padding:4px;"># '.$link->idResource.' - ' . SqlList::getNameFromId('Resource', $link->idResource). '</td></tr>';
+    $html .= '<tr><td style="width:70%;border: 1px solid #7b7b7b; padding:4px;">'. SqlList::getNameFromId('Affectable', $link->idResource). '</td></tr>';
   }
   return $html . '</table>';
 }
