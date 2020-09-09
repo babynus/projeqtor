@@ -491,12 +491,20 @@
        iconClass="dijitButtonIcon dijitButtonIconMultipleUpdate" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           hideResultDivs();
-          if(dijit.byId('detailRightDiv')){
-            saveDataToSession('showActicityStream','show');
+          var pos=<?php echo json_encode($paramRightDiv) ;?>;
+          if(pos=='bottom'){
+            if(dijit.byId('detailRightDiv').h != 0){
+              saveDataToSession('showActicityStream','show');
+            }else{
+              saveDataToSession('showActicityStream','hide');
+            }
           }else{
-            saveDataToSession('showActicityStream','hide');
+            if(dijit.byId('detailRightDiv').w != 0){
+              saveDataToSession('showActicityStream','show');
+            }else{
+              saveDataToSession('showActicityStream','hide');
+            }
           }
-           
           hideStreamMode('false','<?php echo $paramRightDiv;?>','<?php echo $activityStreamDefaultSize;?>',false);
           startMultipleUpdateMode('<?php echo get_class($obj);?>');  
           hideExtraButtons('extraButtonsDetail');
