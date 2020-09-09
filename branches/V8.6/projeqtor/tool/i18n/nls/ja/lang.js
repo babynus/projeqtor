@@ -2130,7 +2130,7 @@ errorRegisterGlobals: "register_globalsは無効にすべきです。 (falseに�
 errorRemoveTooMuchWork: "You tried and directly remove more than your own work (${1}). You should use &#34;Dispatch work&#34; button for this.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "新規リソースは存在していないものにする必要があります。",
-errorRequiredLine: "CheckList &#34${1}&#34 is required to passed status to done",
+errorRequiredLine: "CheckList &#34${1}&#34 is required to passed status to ${2}",
 errorSameName: "a version already exists with this name",
 errorSessionHash: "接続に問題が発生しました<br/>ブラウザを更新しても改善しない場合は、ブラウザを再起動してください",
 errorStartEndDates: "「${1}」は「${2}」の後にできません",

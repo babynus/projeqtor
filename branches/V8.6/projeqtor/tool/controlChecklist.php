@@ -40,6 +40,7 @@ Security::checkValidId($checklistObjectId);
 
 $checklistDefinition=new ChecklistDefinition($checklistDefinitionId);
 $done=(RequestHandler::isCodeSet('done'))?RequestHandler::getValue('done'):'false';
+debugLog($_REQUEST);
 $statusLine='';
 foreach($checklistDefinition->_ChecklistDefinitionLine as $line) {
   $required=(RequestHandler::isCodeSet('isRequired_'.$line->id))?RequestHandler::getValue('isRequired_'.$line->id):0;
@@ -51,9 +52,9 @@ foreach($checklistDefinition->_ChecklistDefinitionLine as $line) {
 			$checkedCpt++;
 		} 
 	}
-	debugLog($checkedCpt.' '.$required.' '.$done);
 	if($checkedCpt==0 and $required==1 and $done=='on'){
-      $result.='<br/>' . i18n('errorRequiredLine',array($line->name));
+	  $statusObj= new Status(RequestHandler::getValue('idStatus'));
+      $result.='<br/>' . i18n('errorRequiredLine',array($line->name,$statusObj->name));
 	  $result .= '<input type="hidden" id="lastOperationStatus" value="INVALID" />';
 	}
 }
