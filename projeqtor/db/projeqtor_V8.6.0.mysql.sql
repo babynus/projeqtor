@@ -959,7 +959,6 @@ ALTER TABLE ${prefix}planningmode MODIFY mandatoryStartDate int(1) unsigned DEFA
 ALTER TABLE ${prefix}planningmode MODIFY mandatoryEndDate int(1) unsigned DEFAULT 0 COMMENT '1';
 ALTER TABLE ${prefix}planningmode MODIFY idle int(1) unsigned DEFAULT 0 COMMENT '1';
 ALTER TABLE ${prefix}planningmode MODIFY mandatoryDuration int(1) unsigned DEFAULT 0 COMMENT '1';
-ALTER TABLE ${prefix}plgcustomlist MODIFY idle int(1) unsigned DEFAULT 0 COMMENT '1';
 ALTER TABLE ${prefix}plugin MODIFY isDeployed int(1) unsigned DEFAULT 0 COMMENT '1';
 ALTER TABLE ${prefix}plugin MODIFY idle int(1) DEFAULT 0 COMMENT '1';
 ALTER TABLE ${prefix}pluginbutton MODIFY idPlugin int(12) unsigned COMMENT '12';
