@@ -3151,7 +3151,7 @@ abstract class SqlElement {
               $this->{$col_name} = $line [$dbColName];
             } else {
               if (! $globalSilentErrors)
-                errorLog ( "Error on SqlElement to get '" . $col_name . "' for Class '" . get_class ( $this ) . "' " . " : field '" . $dbColName . "' not found in Database." );
+                errorLog ( "Error on SqlElement to get '" . $col_name . "' for Class '" . get_class ( $this ) . "' " . " : field '" . $dbColName . "' not found in Database on table ".$this->getDatabaseTableName() );
             }
             // FOR PHP 7.1 COMPATIBILITY
             //if ($this->{$col_name}===null    // FOR TEST PURPOSE
