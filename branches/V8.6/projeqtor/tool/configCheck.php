@@ -130,7 +130,11 @@
   }
   if ( ! $baseExists ) {
   	try {
-      $query='CREATE DATABASE ' . $param['DbName'];
+  	  $dbName=$param['DbName'];
+  	  $dbName=str_replace(chr(8),'',$dbName);
+  	  $dbName=$connexion->quote($dbName);
+  	  $dbName=trim($dbName,"'");
+      $query='CREATE DATABASE ' . $dbName;
       if ($dbType=='mysql') {
         $query.=' DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;';
       } else if ($dbType=='pgsql') {
