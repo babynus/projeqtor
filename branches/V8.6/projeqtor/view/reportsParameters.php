@@ -1124,7 +1124,7 @@ foreach ($listParam as $param) {
            </script>
       </button>
 		  <?php }?>
-		  <?php if($report->hasExcel) { ?>
+		  <?php if($report->hasExcel and version_compare(phpversion(), '7.1.0', '>=')) { ?>
       <button title="<?php echo i18n('reportPrintExcel')?>"
          dojoType="dijit.form.Button" type="button"
          id="reportPrintExcel" name="reportPrintExcel"
