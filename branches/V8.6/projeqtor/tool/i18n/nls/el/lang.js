@@ -72,6 +72,7 @@ addDependencySuccessor: "Προσθήκη απογόνου στο τρέχων �
 addDocumentVersion: "προσθ. / ανέβ. νέας έκδοσης",
 addedAffProject: "added allocation of project",
 addedAffResource: "added allocation of resource",
+addedAttachement: "added the attachment",
 addedDocVersion: "added the document version",
 addedLink: "added a link to",
 addedTestCaseRun: "added test case run",
