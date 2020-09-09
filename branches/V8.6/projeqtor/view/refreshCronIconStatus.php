@@ -43,9 +43,11 @@ if($simuIndex){
 	$simuClass = '';
 	$simuBarColor='';
 }
+$actualStatus=$cronStatus;
 ?>
 <div class="pseudoButton <?php echo $simuClass;?>" id="cronStatusButton" name="cronStatusButton"
 style="height:28px; position:relative;top:-5px; z-index:30; width:32px;" title="<?php if($oldStatus != $cronStatus){echo i18n('cronStopping');}else{if($cronStatus == 'Running'){echo i18n('cronRunning');}else{echo i18n('cronStopped');}}?>"
 onClick="checkCronStatus('<?php echo $cronStatus;?>');">
-  <img id="cronStatus" name="cronStatus" style="<?php if($oldStatus != $cronStatus){echo 'filter:grayscale(100%);';}?>height:22px;width:22px;padding-top:3px;" src="img/iconCron<?php echo $cronStatus;?>.png" />
+  <img id="cronStatus" name="cronStatus" style="<?php if($oldStatus != $cronStatus){echo 'filter:grayscale(100%);';$actualStatus='temp';}?>height:22px;width:22px;padding-top:3px;" src="img/iconCron<?php echo $cronStatus;?>.png" />
+  <input type='hidden' id='actualCronStatusInDiv' value='<?php echo $actualStatus;?>' />
 </div>
