@@ -697,14 +697,16 @@ function activityStreamDisplayHist ($hist,$origin){
   $date=$hist->operationDate;
   $objectClass=$hist->refType;
   $objectId=$hist->refId;
-  if ($objectClass=='Note') return;                 // Already managed through other way
+  if ($objectClass=='Note') return;   // Already managed through other way
+  if ($objectClass=='ProductStructure')return;              
   if ($objectClass=='Link') return;                 // Will be displayed on each item
   if (substr($change,0,6)=='|Note|') return;        // Already managed through other way
   if(substr($hist->refType, -15) == 'PlanningElement')return;
   if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
-  if($objectClass=='Ticket' and strpos($change, '|Attachement|')){
-    $attach=explode('|', substr($change,(strpos($change, '|Attachement|')+1)));
+  if(preg_match( '|Attachement|',$change) or preg_match('|Attachment|',$change)){
+    if(strpos($change, '|Attachement|'))$attach=explode('|', substr($change,(strpos($change, '|Attachement|')+1)));
+    else $attach=explode('|', substr($change,(strpos($change, '|Attachment|')+1)));
     $objectAttach=new $attach[0] ($attach[1]);
     if($objectAttach->id!=''){
       $attachement=true;
@@ -713,14 +715,18 @@ function activityStreamDisplayHist ($hist,$origin){
     }
     $attName='<span style="font-weight:bold;">'.$objectAttach->fileName.'</span>';
   }
+  $isPool=false;
   if(($objectClass=='Affectation' or $objectClass=='Assignment' or $objectClass=='DocumentVersion') and $operation!='delete'){
     $object= new $objectClass($objectId);
     if($object->id!=''){
       switch ($objectClass){
       	case 'Affectation':
-      	  if (!$object->idResource) return;
+      	  if (!($object->idResource or $object->idResourceSelect)) return;
       	  $isAff=true;
-      	  $resource= new Affectable($object->idResource);
+      	  $resource= new Affectable(((!$object->idResourceSelect)?$object->idResource:$object->idResourceSelect));
+      	  if($resource->isResourceTeam==1){
+      	    $isPool=true;
+      	  }
       	  $objectClass='Project';
       	  $objectId=$object->idProject;
       	  break;
@@ -745,8 +751,9 @@ function activityStreamDisplayHist ($hist,$origin){
       	  break;
       }
       if(isset($resource)){
-        if ( securityCheckDisplayMenu(null, 'Resource') and securityGetAccessRightYesNo('menu'.'Resource', 'read', '')=="YES") {
-          $gotoResource=' class="streamLink" onClick="gotoElement(\''.htmlEncode('Resource').'\',\''.htmlEncode($resource->id).'\')"';
+        $menu=($isPool==false)?'Resource':'ResourceTeam';
+        if ( securityCheckDisplayMenu(null, $menu) and securityGetAccessRightYesNo('menu'.$menu, 'read', '')=="YES") {
+          $gotoResource=' class="streamLink" onClick="gotoElement(\''.htmlEncode($menu).'\',\''.htmlEncode($resource->id).'\')"';
         }else{
           $gotoResource=' ';
         }
@@ -796,6 +803,7 @@ function activityStreamDisplayHist ($hist,$origin){
       $text=i18n('addedLink').'&nbsp;'.i18n($linkedClass).' #'.intval($linkedId);
       $icon=formatIcon("LinkStream",22);
     }else if($attachement){
+      $icon=formatIcon("ChangedStatus",22);
       $text=i18n('addedAttachement').'&nbsp;'.$attName;
     }else{
       $text=i18n('createdElementStream');
