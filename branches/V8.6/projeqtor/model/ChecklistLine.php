@@ -75,20 +75,6 @@ class ChecklistLine extends SqlElement {
    */
   public function control(){
     $result="";    
-    $required=(RequestHandler::isCodeSet('isRequired_'.$this->idChecklistDefinitionLine))?RequestHandler::getValue('isRequired_'.$this->idChecklistDefinitionLine):0;
-    $done=(RequestHandler::isCodeSet('done'))?RequestHandler::getValue('done'):0;
-    if($required==1 and $done=='on'){
-        $countVal=0;
-        for ($i=1;$i<=5;$i++){
-          $val='value0'.$i;
-          if($this->$val!=0){
-            $countVal++;
-          }
-        }
-        if($countVal==0){
-          $result.='<br/>' . i18n('errorRequiredLine');
-        }
-    }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
@@ -107,20 +93,6 @@ class ChecklistLine extends SqlElement {
   
   public function deleteControl() {
   	$result="";    
-  	$required=(RequestHandler::isCodeSet('isRequired_'.$this->idChecklistDefinitionLine))?RequestHandler::getValue('isRequired_'.$this->idChecklistDefinitionLine):0;
-  	$done=(RequestHandler::isCodeSet('done'))?RequestHandler::getValue('done'):0;
-  	if($required==1 and $done=='on'){
-  	  $countVal=0;
-  	  for ($i=1;$i<=5;$i++){
-  	    $val='value0'.$i;
-  	    if($this->$val!=0){
-  	      $countVal++;
-  	    }
-  	  }
-  	  if($countVal==0){
-  	    $result.='<br/>' . i18n('errorRequiredLine');
-  	  }
-  	}
   	if (! $result) {  
       $result=parent::deleteControl();
     }
