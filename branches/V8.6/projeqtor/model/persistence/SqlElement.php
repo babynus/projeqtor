@@ -3786,7 +3786,9 @@ abstract class SqlElement {
       $to [] = 'int';
             
       $type = str_ireplace ( $from, $to, $type );
-      if ($type=='int') {
+      if ($fieldName=='id') {
+        $type='int(12)';
+      } else if ($type=='int') {
         $tableName=$obj->getDatabaseTableName();
         $dbName=Parameter::getGlobalParameter('paramDbName');
         $sqlColumn="SELECT COLUMN_COMMENT as comment FROM INFORMATION_SCHEMA.COLUMNS "
