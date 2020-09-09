@@ -3773,13 +3773,13 @@ function drawHistoryFromObjects($refresh=false) {
         	} else {
         		$colNameWhitoutChar=substr($colName, 3, -4);
         		if(substr($colName, 0, 6)=='delete')$colNameWhitoutChar=substr($colName, 6, -4);
-        		$oldValue=SqlList::getNameFromId($colNameWhitoutChar, intval($oldValue));
+        		$oldValue='#'.intval($oldValue).' - '.SqlList::getNameFromId($colNameWhitoutChar, intval($oldValue));
         	}
         }
         if ($newValue!=null and $newValue!='' and intval($newValue)) {
         	$colNameWhitoutChar=substr($colName, 3, -4);
         	if(substr($colName, 0, 6)=='delete')$colNameWhitoutChar=substr($colName, 6, -4);
-        	$newValue=SqlList::getNameFromId($colNameWhitoutChar, intval($newValue));
+        	$newValue='#'.intval($newValue).' - '.SqlList::getNameFromId($colNameWhitoutChar, intval($newValue));
         }
       } else {
         // $diff=diffValues($oldValue,$newValue);
