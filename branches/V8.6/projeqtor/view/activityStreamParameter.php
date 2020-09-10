@@ -85,6 +85,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
                               <option value="10">10</option>
                               <option value="50">50</option>
                               <option value="100" >100</option>
+                              <option value="200" >200</option>
     				        </select>
     				    </td>
 					   </tr>

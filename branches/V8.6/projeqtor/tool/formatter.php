@@ -800,7 +800,11 @@ function activityStreamDisplayHist ($hist,$origin){
     }else if($isTestCaseRun){
       $text=i18n('addedTestCase').'&nbsp;'.$testSession;
     }else if($isLink){
-      $text=i18n('addedLink').'&nbsp;'.i18n($linkedClass).' #'.intval($linkedId);
+      $gotoLink='';
+      if ( securityCheckDisplayMenu(null, $linkedClass) and securityGetAccessRightYesNo('menu'.$linkedClass, 'read', '')=="YES") {
+        $gotoLink=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($linkedClass).'\',\''.htmlEncode($linkedId).'\')"';
+      }
+      $text=i18n('addedLink').'<span '.$gotoLink.'>'.i18n($linkedClass).' #'.intval($linkedId).'</span>';
       $icon=formatIcon("LinkStream",22);
     }else if($attachement){
       $icon=formatIcon("ChangedStatus",22);
@@ -874,7 +878,67 @@ function activityStreamDisplayHist ($hist,$origin){
  }
 }
 
+function activityStreamDisplayMail($mail,$origin){
+  $reftText='';
+  $elementName='';
+  $inlineUserThumb=true;
+  $gotoAndStyle=' style="margin-left:18px;" ';
+  $userId = $mail->idUser;
+  $userName = ($mail->idUser!='')?SqlList::getNameFromId ( 'Affectable', $userId ):lcfirst(i18n('unknown'));
+  $dest=$mail->mailTo;
+  $mailStatus=$mail->mailStatus;
+  $date=$mail->mailDateTime;
+  $objectClass=( $mail->idMailable!='')?SqlList::getNameFromId ( 'Mailable', $mail->idMailable,false):'';
+  $objectId=$mail->refId;
+  
+  if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
+  else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
 
+  if ($mail->idMailable!='' and  securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
+    $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
+  }
+  if($mail->idMailable!='')$elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n($objectClass).'&nbsp;#'.$objectId.'</span>';
+  if ($origin=='activityStream') {
+    $tmpName=SqlList::getNameFromId($objectClass, $objectId);
+    if ($tmpName!=$objectId) $elementName.='&nbsp;|&nbsp;'.$tmpName;
+  }
+  
+  if($mail->idMailable!='')$reftText=$elementName.'&nbsp;|&nbsp;';
+  $icon=formatIcon("Mail",22);
+  $text=lcfirst(i18n('mailActivityStrameSendTo',array($dest)));
+  $showMail="";
+  if ( securityCheckDisplayMenu(null, get_class($mail)) and securityGetAccessRightYesNo('menu'.get_class($mail), 'read', '')=="YES") {
+    $showMail='<div class="roundedButtonSmall" style="width:20px;height:16px;display:inline-block;margin-left:20px;" title="'.i18n('showMail',array($mail->id)).'"><div class="iconGoto" style="z-index:500;width:16px;height:10px;display:inline-block;padding-right:5px;" onClick="gotoElement(\''.htmlEncode(get_class($mail)).'\',\''.htmlEncode($mail->id).'\')" title="'.i18n('showMail',array($mail->id)).'" style="widht:16px;height:16px;"></div></div>';
+  }
+  
+  
+  if($origin=='activityStream'){
+    echo '<tr style="height:100%;">';
+    echo '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;position:relative;">';
+    echo '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
+    echo '      <div style="float:left;max-width:26px">';
+    echo          $icon;
+    echo '      </div>';
+    if (! $inlineUserThumb) {
+      echo '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
+      echo          formatUserThumb($mail->idUser, $userName, 'Creator',22,'left');
+      echo '      </div>';
+    }
+    echo '    </div>';
+    echo '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;margin-bottom:6px;">';
+    echo '      <div style="margin-top:2px;margin-left:10px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.$showMail.'</div>';
+    echo '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
+    echo '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
+    echo'     <div>';
+    if (Parameter::getGlobalParameter('logLevel')>=3) {
+      echo '      <div style="position:absolute;right:10px;top:6px;color:grey">';
+      echo        'mail#'.$mail->id;
+      echo '      </div>';
+    }
+    echo '  </td>';
+    echo '</tr>';
+  }
+}
 
 function suppr_accents($str, $encoding='utf-8'){
   $str = htmlentities($str, ENT_NOQUOTES, $encoding);
