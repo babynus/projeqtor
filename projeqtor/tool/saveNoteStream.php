@@ -30,6 +30,7 @@
  */
 
 require_once "../tool/projeqtor.php";
+require_once "../external/parsedown/Parsedown.php";
 
 // Get the note info
 $refType=RequestHandler::getValue("noteRefType",false);
@@ -38,9 +39,15 @@ if ($refType=='TicketSimple') {
 }
 
 $refId=RequestHandler::getId("noteRefId",false);
-
 $noteNote=RequestHandler::getValue("noteNoteStream",false);
-$noteNote='<div>'.htmlEncode($noteNote,"html").'</div>'; // Encode for security
+
+$Parsedown = new Parsedown();
+$Parsedown->setSafeMode(true);
+$noteNote=$Parsedown->text($noteNote);
+
+//$noteNote=htmlEncode($noteNote,"html"); // Encode for security
+
+$noteNote='<div>'.$noteNote.'</div>'; // Encode for security
 
 $notePrivacy=null;
 $notePrivacy=RequestHandler::getValue("notePrivacyStream",false);
