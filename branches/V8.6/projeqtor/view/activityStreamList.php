@@ -111,16 +111,19 @@ if(strpos($paramProject, ",")){
 $note = new Note ();
 $critWhere="1=1";
 $where="1=1";
+$clause="1=1";
 if (trim($paramAuthorFilter)!="") {
 	$critWhere.=" and idUser=$paramAuthorFilter";
 	$where.=" and idUser=$paramAuthorFilter";
+	$clause.=" and idUser=$paramAuthorFilter";
 }
 
 if (trim($paramTeamFilter)!="") {
 	$team = new Resource();
 	$teamResource=$team->getDatabaseTableName();
 	$critWhere.=" and idUser in (select id from $teamResource where idTeam=$paramTeamFilter)";
-	$where.="and idUser in (select id from $teamResource where idTeam=$paramTeamFilter)";
+	$where.=" and idUser in (select id from $teamResource where idTeam=$paramTeamFilter)";
+	$clause.=" and idUser in (select id from $teamResource where idTeam=$paramTeamFilter)";
 }
 
 $import=new Importable();
@@ -128,6 +131,7 @@ $importTableName=$import->getDatabaseTableName();
 if (trim($paramTypeNote)!="") {
   $critWhere.=" and refType='$typeNote'";
   $where.=" and refType='$typeNote' ";
+  $clause.=" and refType='$paramTypeNote' ";
 }else{
   $where.=" and refType in (select name from $importTableName)";
 }
@@ -135,66 +139,85 @@ if (trim($paramTypeNote)!="") {
 if (trim($paramStreamIdNote)!="") {
   $critWhere.=" and refId=$paramStreamIdNote";
   $where.=" and refId=$paramStreamIdNote";
+  $clause.=" and refId=$paramStreamIdNote";
 }
 
 if ($paramProject!='*') {
 	$critWhere.=" and (idProject in ".getVisibleProjectsList(true).')';
 	$where.=" and (idProject in ".getVisibleProjectsList(true).')';
+	$clause.=" and (idProject in ".getVisibleProjectsList(true).')';
 } else {
 	$critWhere.=" and (idProject is null or idProject in ".getVisibleProjectsList($paramProject).')';
 	$where.=" and (idProject is null or idProject in ".getVisibleProjectsList($paramProject).')';
+	$clause.=" and (idProject is null or idProject in ".getVisibleProjectsList($paramProject).')';
 }
 
-  if (Sql::isPgsql()) {
-    if ($activityStreamAddedRecently and $activityStreamUpdatedRecently and $activityStreamNumberDays!=="") {
-      $critWhere.=" AND creationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day' ";
-      $critWhere.=" OR updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND (colName IS NULL OR colName LIKE ('|Attachment|%') OR colName LIKE ('Link|%'))) OR (operation='delete' AND colName NOT LIKE ('|Attachment|%') AND colName NOT LIKE ('Link|%') AND reftype NOT IN ('Assignment','Affectation')))";
-      $where.=" AND operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day'";
-    } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!="" and $activityStreamNumberDays!==""){
-      $critWhere.=" AND creationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-      $where.=" AND (operation='insert' AND (colName IS NULL OR colName LIKE ('|Attachment|%') OR colName LIKE ('Link|%')) AND refType NOT IN ('Assignment','Affectation')) ";
-      $where.=" AND operationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-    } else if ($activityStreamUpdatedRecently=="updated" and $activityStreamNumberDays!==""){
-      $critWhere.=" AND updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-      $where.=" AND ((operation='update' AND colName='idStatus') OR (operation='delete' AND colName not like ('|Attachment|%'))) and operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
-    }else{
-      $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND (colName IS NULL OR colName LIKE ('|Attachment|%') OR colName LIKE ('Link|%'))) OR (operation='delete' AND colName NOT LIKE ('|Attachment|%') AND colName NOT LIKE ('Link|%') AND reftype NOT IN ('Assignment','Affectation')))";
-    }   
-  } else {
-    if ($activityStreamAddedRecently and $activityStreamUpdatedRecently and $activityStreamNumberDays!=="") {   
-      $critWhere.=" and ( creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-      $critWhere.=" or updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) )";
-      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and (colName is null or colName like ('|Attachment|%') or colName like ('Link|%'))) or (operation='delete' and colName not like ('|Attachment|%') and colName not like ('Link|%') and reftype not In ('Assignment','Affectation')))";
-      $where.=" and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)";
-    } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!="" and $activityStreamNumberDays!==""){
-      $critWhere.=" and creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-      $where.=" and (operation='insert' and (colName is null or colName like ('|Attachment|%') or colName like ('Link|%')) and refType not In ('Assignment','Affectation'))";
-      $where.=" and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-    } else if ($activityStreamUpdatedRecently=="updated" and $activityStreamNumberDays!==""){
-      $critWhere.=" and updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-      $where.=" and ((operation='update' and colName='idStatus') or (operation='delete' and colName not like ('|Attachment|%'))) and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)  ";
-    }else{
-      $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and (colName is null or colName like ('|Attachment|%') or colName like ('Link|%'))) or (operation='delete' and colName not like ('|Attachment|%') and colName not like ('Link|%') and reftype not In ('Assignment','Affectation')))";
-    }
+if (Sql::isPgsql()) {
+  if ($activityStreamAddedRecently and $activityStreamUpdatedRecently and $activityStreamNumberDays!=="") {  //////////////// added + updated
+    $critWhere.=" AND creationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day'";
+    $critWhere.=" OR updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+    $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND (colName IS NULL OR colName LIKE ('|Attachment|%') OR colName LIKE ('Link|%'))) OR (operation='delete' AND colName NOT LIKE ('|Attachment|%') AND colName NOT LIKE ('Link|%') AND reftype NOT IN ('Assignment','Affectation')))";
+    $where.=" AND operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day'";
+    $clause.= " AND mailDateTime>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day'";
+    
+  } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!="" and $activityStreamNumberDays!==""){ //////////////// added 
+    $critWhere.=" AND creationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+    $where.=" AND (operation='insert' AND (colName IS NULL OR colName LIKE ('|Attachment|%') OR colName LIKE ('Link|%')) AND refType NOT IN ('Assignment','Affectation')) ";
+    $where.=" AND operationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+    $clause.= " AND mailDateTime>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day'";
+    
+  } else if ($activityStreamUpdatedRecently=="updated" and $activityStreamNumberDays!==""){         //////////// updated
+    $critWhere.=" AND updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+    $where.=" AND ((operation='update' AND colName='idStatus') OR (operation='delete' AND colName not like ('|Attachment|%'))) and operationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+  
+  }else{
+    $where.=" AND ((operation='update' AND colName='idStatus')  OR (operation='insert' AND (colName IS NULL OR colName LIKE ('|Attachment|%') OR colName LIKE ('Link|%'))) OR (operation='delete' AND colName NOT LIKE ('|Attachment|%') AND colName NOT LIKE ('Link|%') AND reftype NOT IN ('Assignment','Affectation')))";
+  }   
+} else {
+  if ($activityStreamAddedRecently and $activityStreamUpdatedRecently and $activityStreamNumberDays!=="") {   //////////////// added + updated
+    $critWhere.=" and ( creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    $critWhere.=" or updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) )";
+    $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and (colName is null or colName like ('|Attachment|%') or colName like ('Link|%'))) or (operation='delete' and colName not like ('|Attachment|%') and colName not like ('Link|%') and reftype not In ('Assignment','Affectation')))";
+    $where.=" and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)";
+    $clause.=" and  mailDateTime>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    
+  } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!="" and $activityStreamNumberDays!==""){ //////////////// added 
+    $critWhere.=" and creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    $where.=" and (operation='insert' and (colName is null or colName like ('|Attachment|%') or colName like ('Link|%')) and refType not In ('Assignment','Affectation'))";
+    $where.=" and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    $clause.=" and  mailDateTime>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    
+  } else if ($activityStreamUpdatedRecently=="updated" and $activityStreamNumberDays!==""){   //////////// updated
+    $critWhere.=" and updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    $where.=" and ((operation='update' and colName='idStatus') or (operation='delete' and colName not like ('|Attachment|%'))) and operationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY)  ";
+  
+  }else{
+    $where.=" and ((operation='update' and colName='idStatus')  or (operation='insert' and (colName is null or colName like ('|Attachment|%') or colName like ('Link|%'))) or (operation='delete' and colName not like ('|Attachment|%') and colName not like ('Link|%') and reftype not In ('Assignment','Affectation')))";
   }
-
+}
 
 if ($activityStreamShowClosed!='1') {
 	$critWhere.=" and idle=0";
+	$clause.=" and idle=0";
 }
+
+
 //echo '<br/>';
 $order = "COALESCE (updateDate,creationDate) DESC";
 $notes=$note->getSqlElementsFromCriteria(null,false,$critWhere,$order,null,null,$activityStreamNumberElement);
-$history= new History();
 $historyInfoLst=array();
-$idSubProjectList=array();
-$limliteActiviProj= true;
+$mailsSend=array();
 
 if($showOnlyNotes=='NO'){
+  
+  $mail= new Mail();
+  $mailsSend=$mail->getSqlElementsFromCriteria(null,false,$clause,"mailDateTime DESC",null,null,$activityStreamNumberElement);
+  
+  
+  ///// search elements in history  for display on ActivityStream 
+  $history= new History();
   $historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
   if($activityStreamShowClosed =='1'){
-    $limliteActiviProj=false;
     $historyArchive=new HistoryArchive();
     $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
     if(!empty($historyInfoArchive)){
@@ -213,11 +236,13 @@ if($showOnlyNotes=='NO'){
   }else{
     $historyInfoLst=$historyInfo;
   }
+  /////
 }
-
 $countIdNote = count ( $notes );
 $nbHistInfo= count($historyInfoLst);
-if ($countIdNote == 0 and $nbHistInfo==0) {
+$countMail= count($mailsSend);
+$sumArray=$countIdNote+$countMail+$nbHistInfo;
+if ($countIdNote == 0 and $nbHistInfo==0 and $countMail==0) {
   echo "<div style='padding:10px'>".i18n ( "noNoteToDisplay" )."</div>";
   exit ();
 }
@@ -245,29 +270,88 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
     }
   	///
   	 $cp=1;
-	  foreach ($notes as $note) {
-        if($cp<=$activityStreamNumberElement){
-          foreach ($historyInfoLst as $id=>$hist){
-            if($hist->operationDate > $note->creationDate and $cp<=$activityStreamNumberElement){
-              echo activityStreamDisplayHist($hist,"activityStream");
-              unset($historyInfoLst[$id]);
-              $cp++;
-            }
-          }
-        if($cp<=$activityStreamNumberElement){
-          activityStreamDisplayNote($note,"activityStream");
-          $cp++;
-        }
+  	   foreach ($notes as $note){
+         if($cp<=$activityStreamNumberElement ){
+          if(!empty($historyInfoLst)){
+           foreach ($historyInfoLst as $id=>$hist ){ // search for each note if there is a history information to display before
+              if($hist->operationDate > $note->creationDate and $cp<=$activityStreamNumberElement){
+                if(!empty($mailsSend)){
+               	  foreach ($mailsSend as $idMail=>$mail){ // search for each history element if there is a mail information to display before
+                      if($cp<=$activityStreamNumberElement){
+                        if($mail->mailDateTime > $hist->operationDate){
+                          echo activityStreamDisplayMail($mail,'activityStream');
+                          unset($mailsSend[$idMail]);
+                          $cp++;
+                        }
+                      }else{
+                        break;
+                      }
+                    }
+                }
+                if($cp<=$activityStreamNumberElement){
+                  echo activityStreamDisplayHist($hist,"activityStream");
+                  unset($historyInfoLst[$id]);
+                  $cp++;
+                  continue;
+                }else{
+                  break;
+                }
+              }else{
+                if($cp<=$activityStreamNumberElement){
+                  echo activityStreamDisplayHist($hist,"activityStream");
+                  unset($historyInfoLst[$id]);
+                  $cp++;
+                }else{
+                  break;
+                }
+              }
+           }
+         }
+         if($cp<=$activityStreamNumberElement){
+           activityStreamDisplayNote($note,"activityStream");
+           $cp++;
+         }else{
+          break;
+         }
        }else{
         break;
        }
-	 }
+     }
+	 
      if(!empty($historyInfoLst) and $cp<=$activityStreamNumberElement){
        foreach ($historyInfoLst as $id=>$hist){
-         if($cp<=$activityStreamNumberElement){
-          $cp++;
-          echo activityStreamDisplayHist($hist,"activityStream");
-         }
+        if(!empty($mailsSend) and $cp<=$activityStreamNumberElement ){
+        	foreach ($mailsSend as $idMail=>$mail){
+                if($cp<=$activityStreamNumberElement){
+          		  if($mail->mailDateTime > $hist->operationDate){
+                    echo activityStreamDisplayMail($mail,'activityStream');
+                    unset($mailsSend[$idMail]);
+                    $cp++;
+                  }
+                }else{
+                  break;
+                }
+        	}
+        }else{
+          if($cp<=$activityStreamNumberElement){
+            $cp++;
+            echo activityStreamDisplayHist($hist,"activityStream");
+          }else{
+            break;
+          }
+        }
+       }
+     }
+     
+     if(!empty($mailsSend) and $cp<=$activityStreamNumberElement){
+        foreach ($mailsSend as $idMail=>$mail){
+          if($cp<=$activityStreamNumberElement){
+              echo activityStreamDisplayMail($mail,'activityStream');
+              unset($mailsSend[$idMail]);
+              $cp++;
+          }else{
+            break;
+          }
        }
      }
 	  ?>
