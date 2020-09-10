@@ -381,7 +381,7 @@ if($paramMailerType=='phpmailer'){
       					          style="width: 500px;display:none"
       					          class="input" onchange="dialogMailIdEmailChange();"></textarea>
   					    <td style="vertical-align: top">
-  					    <?php if ($displayComboButton) {?>
+  					    <?php if ($displayComboButton and Security::checkValidAccessForUser(null, 'read', 'Affectable',null,false)) {?>
                  <button id="otherMailDetailButton" dojoType="dijit.form.Button" showlabel="false"
                          style="display:<?php echo ($checOther=='true')?'block':'none';?>" title="<?php echo i18n('showDetail')?>"iconClass="iconView">
                    <script type="dojo/connect" event="onClick" args="evt">
