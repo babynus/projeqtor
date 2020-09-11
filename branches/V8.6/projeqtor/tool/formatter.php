@@ -698,6 +698,8 @@ function activityStreamDisplayHist ($hist,$origin){
   $objectClass=$hist->refType;
   $objectId=$hist->refId;
   $idProject=$hist->idProject;
+  $currentUser=getSessionUser();
+  $prof=$currentUser->idProfile;
   if ($objectClass=='Note') return;   // Already managed through other way
   if ($objectClass=='ProductStructure')return;              
   if ($objectClass=='Link') return;                 // Will be displayed on each item
@@ -770,11 +772,10 @@ function activityStreamDisplayHist ($hist,$origin){
     $linkedClass=$linkExpl[2];
     $linkedId=$linkExpl[3];
   }
-  if (!(securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES" )) {
-    return ;
+  $rightAcces=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'combo'));
+  if (securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES" and $rightAcces->rightAccess==1 ) {
+    $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
   }else{
-//     if(    
-//     }
     return;
   }
   $elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n($objectClass).'&nbsp;#'.$objectId.'</span>';
@@ -940,6 +941,28 @@ function activityStreamDisplayMail($mail,$origin){
       $result.=        'mail#'.$mail->id;
       $result.= '      </div>';
     }
+    $result.= '  </td>';
+    $result.= '</tr>';
+  }else{
+    $result.= '<tr style="height:100%;">';
+    $result.= '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;">';
+    $result.= '    <div style="float:left;">';
+    $result.= '      <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px;">';
+    $result.= '        <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';
+    $result.=          $icon;
+    $result.= '        </div>';
+    $result.= '      </div>';
+    if (! $inlineUserThumb) {
+      $result.= '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
+      $result.=          formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
+      $result.= '      </div>';
+    }
+    $result.= '    </div>';
+    $result.= '    <div style="margin-left:0px;margin-top:6px;">';
+    $result.= '      <div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp;'.$text.$showMail.'</div>';
+    $result.= '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left",16).'</div>';
+    $result.= '      <div style="margin-top:8px;margin-bottom:5px">'.htmlFormatDateTime($date,false).'</div>';
+    $result.='     <div>';
     $result.= '  </td>';
     $result.= '</tr>';
   }
