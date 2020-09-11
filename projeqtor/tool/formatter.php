@@ -697,6 +697,7 @@ function activityStreamDisplayHist ($hist,$origin){
   $date=$hist->operationDate;
   $objectClass=$hist->refType;
   $objectId=$hist->refId;
+  $idProject=$hist->idProject;
   if ($objectClass=='Note') return;   // Already managed through other way
   if ($objectClass=='ProductStructure')return;              
   if ($objectClass=='Link') return;                 // Will be displayed on each item
@@ -769,9 +770,12 @@ function activityStreamDisplayHist ($hist,$origin){
     $linkedClass=$linkExpl[2];
     $linkedId=$linkExpl[3];
   }
-  
-  if ( securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
-    $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
+  if (!(securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES" )) {
+    return ;
+  }else{
+//     if(    
+//     }
+    return;
   }
   $elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n($objectClass).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
@@ -827,55 +831,56 @@ function activityStreamDisplayHist ($hist,$origin){
   } else {
     return;
   }
-  
+  $result='';
   if($origin=='objectStream'){
-    echo '<tr style="height:100%;">';
-    echo '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;">';
-    echo '    <div style="float:left;">';
-    echo '      <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px;">';
-    echo '        <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';
-    echo          $icon;
-    echo '        </div>';
-    echo '      </div>';
+    $result.= '<tr style="height:100%;">';
+    $result.= '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;">';
+    $result.= '    <div style="float:left;">';
+    $result.= '      <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px;">';
+    $result.= '        <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';
+    $result.=          $icon;
+    $result.= '        </div>';
+    $result.= '      </div>';
     if (! $inlineUserThumb) {
-    echo '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
-    echo          formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
-    echo '      </div>';
+    $result.= '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
+    $result.=          formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
+    $result.= '      </div>';
     }
-    echo '    </div>';
-    echo '    <div style="margin-left:0px;margin-top:6px;">';
-    echo '      <div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp;'.$text.'</div>';
-    echo '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left",16).'</div>';
-    echo '      <div style="margin-top:8px;margin-bottom:5px">'.htmlFormatDateTime($date,false).'</div>';
-    echo'     <div>';
-    echo '  </td>';
-    echo '</tr>';
+    $result.= '    </div>';
+    $result.= '    <div style="margin-left:0px;margin-top:6px;">';
+    $result.= '      <div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp;'.$text.'</div>';
+    $result.= '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left",16).'</div>';
+    $result.= '      <div style="margin-top:8px;margin-bottom:5px">'.htmlFormatDateTime($date,false).'</div>';
+    $result.='     <div>';
+    $result.= '  </td>';
+    $result.= '</tr>';
   }else{
-    echo '<tr style="height:100%;">';
-    echo '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;position:relative;">';
-    echo '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
-    echo '      <div style="float:left;max-width:26px">';
-    echo          $icon;
-    echo '      </div>';
+    $result.= '<tr style="height:100%;">';
+    $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;position:relative;">';
+    $result.= '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
+    $result.= '      <div style="float:left;max-width:26px">';
+    $result.=          $icon;
+    $result.= '      </div>';
     if (! $inlineUserThumb) {
-    echo '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
-    echo          formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
-    echo '      </div>';
+    $result.= '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
+    $result.=          formatUserThumb($hist->idUser, $userName, 'Creator',22,'left');
+    $result.= '      </div>';
     }
-    echo '    </div>';    
-    echo '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;margin-bottom:6px;">';
-    echo '      <div style="margin-top:2px;margin-left:10px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
-    echo '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
-    echo '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
-    echo'     <div>';
+    $result.= '    </div>';    
+    $result.= '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;margin-bottom:6px;">';
+    $result.= '      <div style="margin-top:2px;margin-left:10px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
+    $result.= '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
+    $result.= '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
+    $result.='     <div>';
     if (Parameter::getGlobalParameter('logLevel')>=3) {
-      echo '      <div style="position:absolute;right:10px;top:6px;color:grey">';
-      echo        'histo#'.$hist->id;
-      echo '      </div>';
+      $result.= '      <div style="position:absolute;right:10px;top:6px;color:grey">';
+      $result.=        'histo#'.$hist->id;
+      $result.= '      </div>';
     }
-    echo '  </td>';
-    echo '</tr>';
+    $result.= '  </td>';
+    $result.= '</tr>';
  }
+ return $result;
 }
 
 function activityStreamDisplayMail($mail,$origin){
@@ -911,33 +916,34 @@ function activityStreamDisplayMail($mail,$origin){
     $showMail='<div class="roundedButtonSmall" style="width:20px;height:16px;display:inline-block;margin-left:20px;" title="'.i18n('showMail',array($mail->id)).'"><div class="iconGoto" style="z-index:500;width:16px;height:10px;display:inline-block;padding-right:5px;" onClick="gotoElement(\''.htmlEncode(get_class($mail)).'\',\''.htmlEncode($mail->id).'\')" title="'.i18n('showMail',array($mail->id)).'" style="widht:16px;height:16px;"></div></div>';
   }
   
-  
+  $result='';
   if($origin=='activityStream'){
-    echo '<tr style="height:100%;">';
-    echo '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;position:relative;">';
-    echo '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
-    echo '      <div style="float:left;max-width:26px">';
-    echo          $icon;
-    echo '      </div>';
+    $result.= '<tr style="height:100%;">';
+    $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;position:relative;">';
+    $result.= '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
+    $result.= '      <div style="float:left;max-width:26px">';
+    $result.=          $icon;
+    $result.= '      </div>';
     if (! $inlineUserThumb) {
-      echo '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
-      echo          formatUserThumb($mail->idUser, $userName, 'Creator',22,'left');
-      echo '      </div>';
+      $result.= '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
+      $result.=          formatUserThumb($mail->idUser, $userName, 'Creator',22,'left');
+      $result.= '      </div>';
     }
-    echo '    </div>';
-    echo '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;margin-bottom:6px;">';
-    echo '      <div style="margin-top:2px;margin-left:10px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.$showMail.'</div>';
-    echo '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
-    echo '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
-    echo'     <div>';
+    $result.= '    </div>';
+    $result.= '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;margin-bottom:6px;">';
+    $result.= '      <div style="margin-top:2px;margin-left:10px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.$showMail.'</div>';
+    $result.= '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
+    $result.= '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
+    $result.='     <div>';
     if (Parameter::getGlobalParameter('logLevel')>=3) {
-      echo '      <div style="position:absolute;right:10px;top:6px;color:grey">';
-      echo        'mail#'.$mail->id;
-      echo '      </div>';
+      $result.= '      <div style="position:absolute;right:10px;top:6px;color:grey">';
+      $result.=        'mail#'.$mail->id;
+      $result.= '      </div>';
     }
-    echo '  </td>';
-    echo '</tr>';
+    $result.= '  </td>';
+    $result.= '</tr>';
   }
+  return $result;
 }
 
 function suppr_accents($str, $encoding='utf-8'){
