@@ -250,6 +250,7 @@ class Absence{
     }
     $result .='</div>';
     $result .='<div id="warningExceedWork" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:10px;margin-left: 32%; height:20px; width: 35%;vertical-align:middle;font-size:110%">'.i18n('exceedWork').'</div>';
+    $result .='<div id="warningExceedWorkWithPlanned" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:10px;margin-left: 32%; height:20px; width: 35%;vertical-align:middle;font-size:110%">'.i18n('asPlannedWork').'</div>';
     $result .='<div id="warningNoActivity" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:10px;margin-left: 32%; height:20px; width: 35%;vertical-align:middle;font-size:110%">'.i18n('noActivitySelected').'</div>';
     $result .='<div id="warningisValiadtedDay" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:fixed; top:90px;left:30%; height:20px; width: 40%;vertical-align:middle;font-size:110%">'.i18n('isValidatedDay').'</div>';
     $result .='</br></br>';

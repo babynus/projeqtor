@@ -6300,6 +6300,9 @@ function selectAbsenceDay(dateId, day, workDay, month, year, week, userId, isVal
 			    	if(data == 'warning'){
 			    		dojo.byId('warningExceedWork').style.display = 'block';
 			    		setTimeout("dojo.byId('warningExceedWork').style.display = 'none'", 2000);
+			    	}else if( data == 'warningPlanned'){
+			    	  dojo.byId('warningExceedWorkWithPlanned').style.display = 'block';
+              setTimeout("dojo.byId('warningExceedWork').style.display = 'none'", 2000);
 			    	}
 			    }
 			  });
