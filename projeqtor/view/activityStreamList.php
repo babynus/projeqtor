@@ -271,7 +271,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
     }
   	///
   	 $cp=1;
-  	   foreach ($notes as $note){
+  	   foreach ($notes as $idNote=>$note){
          if($cp<=$activityStreamNumberElement ){
           if(!empty($historyInfoLst)){
            foreach ($historyInfoLst as $id=>$hist ){ // search for each note if there is a history information to display before
@@ -288,50 +288,48 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
                             $cp++;
                           }
                           continue;
-                        }else{
-                          $resultHist= activityStreamDisplayHist($hist,"activityStream");
-                          unset($historyInfoLst[$id]);
-                          if($resultHist!=''){
-                            echo $resultHist;
-                            $cp++;
-                            break;
-                          }
-                          break;
                         }
                       }else{
                         break;
                       }
                     }
-                  }
-                  if($cp<=$activityStreamNumberElement){
-                    $resultHist= activityStreamDisplayHist($hist,"activityStream");
-                    unset($historyInfoLst[$id]);
-                    if($resultHist!=''){
-                      echo $resultHist;
-                      $cp++;
+                    if($cp<=$activityStreamNumberElement){
+                      $resultHist= activityStreamDisplayHist($hist,"activityStream");
+                      unset($historyInfoLst[$id]);
+                      if($resultHist!=''){
+                        echo $resultHist;
+                        $cp++;
+                        continue;
+                      }
                     }
-                    continue;
                   }else{
-                    break;
+                    if($cp<=$activityStreamNumberElement){
+                      $resultHist= activityStreamDisplayHist($hist,"activityStream");
+                      unset($historyInfoLst[$id]);
+                      if($resultHist!=''){
+                        echo $resultHist;
+                        $cp++;
+                      }
+                      continue;
+                    }else{
+                      break;
+                    }
                   }
-                }else{
-                    activityStreamDisplayNote($note,"activityStream");
-                    unset($notes[$note]);
-                    $cp++;
-                    break;
-                  
                 }
               }else{
-              	break;
+                break;
               }
            }
-         }
-         if($cp<=$activityStreamNumberElement){
-           activityStreamDisplayNote($note,"activityStream");
-           unset($notes[$note]);
-           $cp++;
+           if($cp<=$activityStreamNumberElement){
+         	  activityStreamDisplayNote($note,"activityStream");
+           	  unset($notes[$idNote]);
+           	  $cp++;
+           	  continue;
+           }
          }else{
-          break;
+             activityStreamDisplayNote($note,"activityStream");
+             unset($notes[$idNote]);
+             $cp++;
          }
        }else{
         break;
@@ -352,19 +350,19 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
                 	$cp++;
                   }
                   continue;
-                }else{
-                  $resultHist= activityStreamDisplayHist($hist,"activityStream");
-                  unset($historyInfoLst[$id]);
-                  if($resultHist!=''){
-                    echo $resultHist;
-                    $cp++;
-                  }
-                  break;
                 }
               }else{
                 break;
               }
           	}
+          	if($cp<=$activityStreamNumberElement){
+              $resultHist= activityStreamDisplayHist($hist,"activityStream");
+              unset($historyInfoLst[$id]);
+              if($resultHist!=''){
+                echo $resultHist;
+                $cp++;
+              }
+            }
           }else{
             $resultHist= activityStreamDisplayHist($hist,"activityStream");
             unset($historyInfoLst[$id]);
