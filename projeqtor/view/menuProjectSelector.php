@@ -117,7 +117,7 @@ if ($nbProj==0) {
      <?php htmlDrawOptionForReference("idProject", null, null, false, $critFld, $critVal, $limitToActiveProjects);?>
    </div>
    <input type="hidden" id="projectSelectorMode" value="Standard" />
-   <div style="text-align:left;position:absolute; top:<?php echo (isNewGui())?'-2':'1';?>px; left:281px; padding:0px;">
+   <div style="text-align:left;position:absolute; top:<?php echo (isNewGui())?'-2':'-2';?>px; left:281px; padding:0px;">
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:2px; height: 20px"
          title="<?php echo i18n('searchProject');?>" iconClass="iconView">
          <script type="dojo/connect" event="onClick" args="evt">        
