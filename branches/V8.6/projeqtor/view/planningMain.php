@@ -104,7 +104,24 @@
           <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center"> 
             <?php $noselect=true; //include 'objectDetail.php'; ?>
           </div>
-          <?php if (Module::isModuleActive('moduleActivityStream')) {?>
+          <?php 
+            if (Module::isModuleActive('moduleActivityStream')) {
+              if(property_exists('Activity', '_Note') or property_exists('Project', '_Note') or property_exists('Milestone', '_Note')){
+                $showNotes=true;
+                $item=new Activity();
+                if ($item->isAttributeSetToField('_Note','hidden')) $showNotes=false;
+                else if (in_array('_Note',$item->getExtraHiddenFields(null, null, getSessionUser()->getProfile()))) $showNotes=false;
+                $item=new Project();
+                if ($item->isAttributeSetToField('_Note','hidden')) $showNotes=false;
+                else if (in_array('_Note',$item->getExtraHiddenFields(null, null, getSessionUser()->getProfile()))) $showNotes=false;
+                $item=new Milestone();
+                if ($item->isAttributeSetToField('_Note','hidden')) $showNotes=false;
+                else if (in_array('_Note',$item->getExtraHiddenFields(null, null, getSessionUser()->getProfile()))) $showNotes=false;
+              }
+            } else {
+              $showNotes=false;
+            }
+          if ($showNotes) {?>
           <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true"
           style="<?php if($positonRightDiv=="bottom"){echo "height:".$rightHeightPlanning;}else{ echo "width:".$rightWidthPlanning;}?>" >
               <script type="dojo/connect" event="resize" args="evt">
