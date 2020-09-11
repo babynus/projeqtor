@@ -335,8 +335,8 @@ class PlannedWorkManual extends GeneralWork {
       $cursorPM=($readonly or $locked=='PM' or $locked=='ALL')?"normal":"pointer";
       $allowDouble=true;
       if ($capacity-$real-$halfDayDuration<$halfDayDuration) $allowDouble=false;
-      $onClickAM=($readonly or $locked=='AM' or $locked=='ALL')?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\','.(($allowDouble)?'true':'false').',event);"';
-      $onClickPM=($readonly or $locked=='PM' or $locked=='ALL')?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\','.(($allowDouble)?'true':'false').',event);"';
+      $onClickAM=($readonly or $locked=='AM' or $locked=='ALL')?'onClick="selectInterventionNoCapacity();"':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\','.(($allowDouble)?'true':'false').',event);"';
+      $onClickPM=($readonly or $locked=='PM' or $locked=='ALL')?'onClick="selectInterventionNoCapacity();"':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\','.(($allowDouble)?'true':'false').',event);"';
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickAM.' style="cursor:'.$cursorAM.';width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
       $color=getForeColor($colorPM);
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickPM.' style="cursor:'.$cursorPM.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
