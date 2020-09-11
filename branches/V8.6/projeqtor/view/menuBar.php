@@ -250,7 +250,7 @@
       </span>
       <span style="position: relative; left:7px; top:-7px; height: 20px">
       <button id="projectSelectorSelectCurrent" dojoType="dijit.form.Button" showlabel="false"
-         title="<?php echo i18n('selectCurrentProject');?>" style="top:2px;height:20px;"
+         title="<?php echo i18n('selectCurrentProject');?>" style="top:2px;height:20px;width:20px;"
          ondblclick="directUnselectProject();"
          onClick="if (!timeoutDirectSelectProject) {showWait();timeoutDirectSelectProject=setTimeout('directSelectProject();',500);}"
          iconClass="<?php if ($iconClassWithSize) echo 'iconProject16';?> iconProject iconSize16" xclass="detailButton">
