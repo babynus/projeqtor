@@ -64,7 +64,19 @@
   $order = "COALESCE (updateDate,creationDate) ASC";
   $notes=$note->getSqlElementsFromCriteria(array('refType'=>$objectClass,'refId'=>$objectId),null,null,$order);
   $historyInfoLst=array();
+  $mailsSend=array();
+  
   if($showOnlyNotes=='NO'){
+    
+    if(securityCheckDisplayMenu(null,'Mail') and securityGetAccessRightYesNo('menu'.'Mail', 'read', '')=="YES"){
+      $mailable= new Mailable();
+      $idType=SqlElement::getSingleSqlElementFromCriteria('Mailable',array("name"=>$objectClass));
+      $clause=array('refType'=>$idType->id,'refId'=>$objectId);
+      $mail= new Mail();
+      $mailsSend=$mail->getSqlElementsFromCriteria($clause,null,null,"mailDateTime ASC");
+    }
+    
+    
     $clauseWhere="refType='$objectClass' and refId=$objectId and ((operation='update' and colName='idStatus')  or (operation='insert' and (colName is null  or colName like ('Link|%'))) or (operation='delete'  and colName not like ('Link|%'))) ";
     if($objectId)$historyInfo=$history->getSqlElementsFromCriteria(null,null,$clauseWhere,"operationDate ASC");
     $obj=new $objectClass($objectId);
@@ -110,6 +122,7 @@
   }
   $countIdNote=count($notes);
   $countHist=count($historyInfoLst);
+  $countMail= count($mailsSend);
   $onlyCenter=(RequestHandler::getValue('onlyCenter')=='true')?true:false;
   $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
   $positionActivityStream=Parameter::getUserParameter('paramRightDiv');
@@ -144,19 +157,57 @@
   	    $notes = $result;
 	    }
 	    //florent ticket 4728
-	    foreach ( $notes as $note ) {
-          foreach ($historyInfoLst as $id=>$hist){
-            if($hist->operationDate < $note->creationDate){
-               activityStreamDisplayHist($hist,"objectStream");
-              unset($historyInfoLst[$id]);
+	    foreach ( $notes as $idNote=>$note ) {
+          if(!empty($historyInfoLst)){
+            foreach ($historyInfoLst as $id=>$hist){
+              if($hist->operationDate < $note->creationDate){
+                 if(!empty($mailsSend)){
+                 	foreach ($mailsSend as $idMail=>$mail){
+                      if($mail->mailDateTime < $hist->operationDate){
+                      	echo activityStreamDisplayMail($mail, "objectStream");
+                      	unset($mailsSend[$idMail]);
+                      }
+                    }
+                    echo activityStreamDisplayHist($hist, "objectStream");
+                    unset($historyInfoLst[$id]);
+                 }else{
+                    echo activityStreamDisplayHist($hist,"objectStream");
+                    unset($historyInfoLst[$id]);
+                 }
+              }
             }
+            activityStreamDisplayNote ($note,"objectStream");
+            unset($notes[$idNote]);
+            continue;
+          }else{
+            activityStreamDisplayNote ($note,"objectStream");
+            unset($notes[$idNote]);
           }
-	       activityStreamDisplayNote ($note,"objectStream");
-	    };
+	    }
 	    
 	    if(!empty($historyInfoLst)){
           foreach ($historyInfoLst as $id=>$hist){
-             activityStreamDisplayHist($hist,"objectStream");
+            if(!empty($mailsSend)){
+            	foreach ($mailsSend as $idMail=>$mail){
+            		if($mail->mailDateTime < $hist->operationDate){
+            			echo activityStreamDisplayMail($mail, "objectStream");
+            			unset($mailsSend[$idMail]);
+            		}
+            	}
+            	echo activityStreamDisplayHist($hist, "objectStream");
+            	unset($historyInfoLst[$id]);
+            	continue;
+            }else{         
+              echo activityStreamDisplayHist($hist,"objectStream");
+              unset($historyInfoLst[$id]);
+            }
+          }
+        }
+        
+        if(!empty($mailsSend)){
+          foreach ($mailsSend as $idMail=>$mail){
+          	echo activityStreamDisplayMail($mail, "objectStream");
+            unset($mailsSend[$idMail]);
           }
         }
 	    
@@ -174,7 +225,7 @@
         $paramHeightStream=140;
       }
       $paramHeightStream=$paramHeightStream-38;
-    if($countIdNote==0 and $countHist==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	
+    if($countIdNote==0 and $countHist==0 and $countMail==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	
 ?>
 	</div>
 	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo ($positionActivityStream=='bottom')?'trailing':'bottom';?>" style="<?php if($positionActivityStream=='bottom'){echo "width:30%;height:140px;overflow-x:hidden;padding-right:8px;";}else{echo "height:70px;overflow-x:hidden;padding-right:8px;";}?><?php if ($canUpdateStream!=true) echo 'display:none;';?>">
