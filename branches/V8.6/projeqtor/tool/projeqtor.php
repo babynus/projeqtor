@@ -1448,10 +1448,13 @@ function exceptionHandler($exception) {
     }
   }
   if ($cronnedScript==true) {
+    // PBER : 2020-09-11 : retart fails, so CRON is stopped, not restarted
     // Exception in Cron Process => try and restart CRON
-    traceLog("Exception while executing script : try and restart");
-    Cron::setRestartFlag();
-    exit;
+    //traceLog("Exception while executing script : try and restart");
+    //Cron::setRestartFlag();
+    //exit;
+    errorLog($exception->getMessage());
+    errorLog("Exception while executing CRON script : fix the source issue and manually restart the CRON Process");
   } else if ($logLevel>=3) {
     throwError($exception->getMessage());
   } else {
@@ -1482,10 +1485,13 @@ function errorHandler($errorType, $errorMessage, $errorFile, $errorLine) {
     return true;
   }
   if ($cronnedScript==true) {
+    // PBER : 2020-09-11 : retart fails, so CRON is stopped, not restarted
     // Error in Cron Process => try and restart CRON
-    traceLog("Error while executing script : try and restart");
-    Cron::setRestartFlag();
-    exit;
+    //traceLog("Error while executing script : try and restart");
+    //Cron::setRestartFlag();
+    //exit;
+    errorLog($errorMessage." in ".basename($errorFile)." at line ".$errorLine);
+    errorLog("Error while executing CRON script : fix the source issue and manually restart the CRON Process");
   } else if ($logLevel>=3) {
     throwError($errorMessage."<br/>&nbsp;&nbsp;&nbsp;in ".basename($errorFile)."<br/>&nbsp;&nbsp;&nbsp;at line ".$errorLine, true);
   } else {
