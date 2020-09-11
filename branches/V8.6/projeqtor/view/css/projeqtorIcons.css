@@ -179,17 +179,17 @@
 
 /* A */
 
-.iconAccessProfile { background-image: url(images/iconAccessProfile.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatBlue .iconAccessProfile { background-image: url(customIcons/blue/iconAccessProfile.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
-.ProjeQtOrFlatGreen .iconAccessProfile { background-image: url(customIcons/green/iconAccessProfile.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
-.ProjeQtOrFlatGrey .iconAccessProfile { background-image: url(customIcons/grey/iconAccessProfile.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
-.ProjeQtOrFlatRed .iconAccessProfile { background-image: url(customIcons/red/iconAccessProfile.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
+.iconAccessProfile { background-image: url(images/iconAccessProfile.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconAccessProfile { background-image: url(customIcons/blue/iconAccessProfile.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGreen .iconAccessProfile { background-image: url(customIcons/green/iconAccessProfile.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGrey .iconAccessProfile { background-image: url(customIcons/grey/iconAccessProfile.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatRed .iconAccessProfile { background-image: url(customIcons/red/iconAccessProfile.png);  background-repeat: no-repeat;}
 
-.iconAccessProfileNoProject { background-image: url(images/iconAccessProfileNoProject.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatBlue .iconAccessProfileNoProject { background-image: url(customIcons/blue/iconAccessProfileNoProject.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
-.ProjeQtOrFlatGreen .iconAccessProfileNoProject { background-image: url(customIcons/green/iconAccessProfileNoProject.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
-.ProjeQtOrFlatGrey .iconAccessProfileNoProject { background-image: url(customIcons/grey/iconAccessProfileNoProject.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
-.ProjeQtOrFlatRed .iconAccessProfileNoProject { background-image: url(customIcons/red/iconAccessProfileNoProject.png);  background-repeat: no-repeat; width: 32px; height: 32px;}
+.iconAccessProfileNoProject { background-image: url(images/iconAccessProfileNoProject.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconAccessProfileNoProject { background-image: url(customIcons/blue/iconAccessProfileNoProject.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGreen .iconAccessProfileNoProject { background-image: url(customIcons/green/iconAccessProfileNoProject.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGrey .iconAccessProfileNoProject { background-image: url(customIcons/grey/iconAccessProfileNoProject.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatRed .iconAccessProfileNoProject { background-image: url(customIcons/red/iconAccessProfileNoProject.png);  background-repeat: no-repeat;}
 
 .iconAccessRight32 { background-image: url(images/iconAccessRight32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconAccessRight22 { background-image: url(images/iconAccessRight22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -432,11 +432,11 @@
 
 /* END - ADD qCazelles - Requirement dashboard - Ticket 90 */
 
-.iconDashboardTicket { background-image: url(images/iconDashboardTicket32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatBlue .iconDashboardTicket { background-image: url(customIcons/blue/iconTicketDashboard.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatGreen .iconDashboardTicket { background-image: url(customIcons/green/iconTicketDashboard.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatGrey .iconDashboardTicket { background-image: url(customIcons/grey/iconTicketDashboard.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatRed .iconDashboardTicket { background-image: url(customIcons/red/iconTicketDashboard.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconDashboardTicket { background-image: url(images/iconDashboardTicket32.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconDashboardTicket { background-image: url(customIcons/blue/iconTicketDashboard.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconDashboardTicket { background-image: url(customIcons/green/iconTicketDashboard.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconDashboardTicket { background-image: url(customIcons/grey/iconTicketDashboard.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconDashboardTicket { background-image: url(customIcons/red/iconTicketDashboard.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconDashboardTicket { background-image: url(customIcons/new/iconTicketDashboard.svg);  background-repeat: no-repeat;}
 
 .iconDecision32 { background-image: url(images/iconDecision32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
@@ -821,11 +821,11 @@
 .iconProfile22 { background-image: url(images/iconProfile22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconProfile16 { background-image: url(images/iconProfile16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconProject { background-image: url(images/iconProject32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatBlue .iconProject { background-image: url(customIcons/blue/iconProject.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatGreen .iconProject { background-image: url(customIcons/green/iconProject.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatGrey .iconProject { background-image: url(customIcons/grey/iconProject.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatRed .iconProject { background-image: url(customIcons/red/iconProject.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconProject { background-image: url(images/iconProject32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconProject { background-image: url(customIcons/blue/iconProject.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconProject { background-image: url(customIcons/green/iconProject.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconProject { background-image: url(customIcons/grey/iconProject.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconProject { background-image: url(customIcons/red/iconProject.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconProject { background-image: url(customIcons/new/iconProject.svg);  background-repeat: no-repeat; }
 
 .iconConstruction32 { background-image: url(images/iconConstruction.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
