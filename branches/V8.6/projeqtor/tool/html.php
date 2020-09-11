@@ -1515,6 +1515,8 @@ function htmlEncode($val,$context="default") {
     return str_replace('"',"''",$val);
   } else if ($context=='print' or $context=='html') {
     return nl2br(htmlentities($val,ENT_COMPAT,'UTF-8'));
+  } else if ($context=='htmlNoNl2br') {
+    return htmlentities($val,ENT_COMPAT,'UTF-8');
   } else if ($context=='withBR') {
     return nl2br(htmlspecialchars($val,ENT_QUOTES,'UTF-8'));
   } else if ($context=='mail') {

@@ -761,6 +761,9 @@ function selectInterventionDate(date,resource,period,allowDouble,event) {
     }
   });
 }
+function selectInterventionNoCapacity() {
+  showInfo(i18n("selectInterventionNoCapacity"));
+}
 function selectInterventionMode(id,letter) {
   var mode='select';
   if (dojo.byId('idInterventionMode')) {

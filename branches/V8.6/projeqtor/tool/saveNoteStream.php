@@ -40,12 +40,14 @@ if ($refType=='TicketSimple') {
 
 $refId=RequestHandler::getId("noteRefId",false);
 $noteNote=RequestHandler::getValue("noteNoteStream",false);
-
-$Parsedown = new Parsedown();
-$Parsedown->setSafeMode(true);
-$noteNote=$Parsedown->text($noteNote);
-
-//$noteNote=htmlEncode($noteNote,"html"); // Encode for security
+if (1) { // Use Markdown on notes from activity stream
+  $Parsedown = new Parsedown();
+  $Parsedown->setSafeMode(true);
+  $noteNote=$Parsedown->text($noteNote);
+  $noteNote=str_replace(array('<p>','</p>',"<ul>\n","</li>\n"),array('','','<ul>','</li>'),$noteNote);
+} else { // standard behavior (simple text)
+  $noteNote=htmlEncode($noteNote,"htmlNoNl2br"); // Encode for security
+}
 
 $noteNote='<div>'.$noteNote.'</div>'; // Encode for security
 
