@@ -45,66 +45,84 @@ $editWork = false;
 $res= new Resource($userId,true);
 $etp= round($res->capacity,2);
 //open transaction bdd
-Sql::beginTransaction();
-$result = "";
-if ($workVal == 0){
-    $work = new Work();
-    $where = "refType = 'Activity' and refId =".$actId." and idResource =".$userId." and idProject=".$idProject." and idAssignment =".$assId." and day='".$day."'";
-    $listWork = $work->getSqlElementsFromCriteria(null,false,$where);
-    
-    //delete work
-    foreach ($listWork as $isWork){
-      $isWork->deleteWork();
-    }
-}else {
-  $work = new Work();
-  $where = " idProject in " . Project::getAdminitrativeProjectList() ;
-  $where .= " and refType = 'Activity' and idResource =".$userId." and day='".$day."'";
-  $listWork = $work->getSqlElementsFromCriteria(null,false,$where);
-  $unitAbs = Parameter::getGlobalParameter('imputationUnit');
-  if($unitAbs != 'days'){
-  	$maxHour = Parameter::getGlobalParameter('dayTime');
-  	$somWork = $workVal/$maxHour;
-  }else{
-    $somWork = $workVal;
-  }
-  foreach ($listWork as $isWork){
-    if($isWork->refId == $actId and $somWork <= $etp){
-      if($unitAbs != 'days'){
-        $somWork = $workVal/$maxHour;
-        $isWork->work = $somWork;
-      }else{
-        $isWork->work = $workVal;
-      }
-      $editWork = true;
-      $isWork->saveWork();
-      $somWork += $workVal;
-    } else {
-      $somWork += $isWork->work;
-    }
-  }
-  if(!$editWork){
-    if($somWork <= $etp){
-      //put parameter in work object
-      $work->refType = 'Activity';
-      $work->refId = $actId;
-      $work->setDates($workDay);
-      $work->idResource = $userId;
-      if($unitAbs != 'days'){
-      	$workVal = $workVal/$maxHour;
-      }
-      $work->work = $workVal;
-      $work->idProject = $idProject;
-      $work->idAssignment = $assId;
-      //save work
-      $work->saveWork();
-    }else {
-      $result = 'warning';
-      echo $result;
-      //dojo.byId('warningDiv').style.display = 'block';
-    }
+
+$sumVal=0;
+$plannedWorkM= new PlannedWorkManual();
+$where=array("workDate"=>$workDay);
+$asWork=$plannedWorkM->getSqlElementsFromCriteria($where);
+if(!empty($asWork)){
+  foreach ($asWork as $id=>$work){
+    $sumVal+=$work->work;
   }
 }
-// commit work
-Sql::commitTransaction();
+
+
+  Sql::beginTransaction();
+  $result = "";
+  if($sumVal!=0 and $sumVal+$workVal>$res->capacity){
+    $result = 'warningPlanned';
+    echo $result;
+  }else{
+    if ($workVal == 0){
+        $work = new Work();
+        $where = "refType = 'Activity' and refId =".$actId." and idResource =".$userId." and idProject=".$idProject." and idAssignment =".$assId." and day='".$day."'";
+        $listWork = $work->getSqlElementsFromCriteria(null,false,$where);
+        
+        //delete work
+        foreach ($listWork as $isWork){
+          $isWork->deleteWork();
+        }
+    }else {
+      $work = new Work();
+      $where = " idProject in " . Project::getAdminitrativeProjectList() ;
+      $where .= " and refType = 'Activity' and idResource =".$userId." and day='".$day."'";
+      $listWork = $work->getSqlElementsFromCriteria(null,false,$where);
+      $unitAbs = Parameter::getGlobalParameter('imputationUnit');
+      if($unitAbs != 'days'){
+      	$maxHour = Parameter::getGlobalParameter('dayTime');
+      	$somWork = $workVal/$maxHour;
+      }else{
+        $somWork = $workVal;
+      }
+      foreach ($listWork as $isWork){
+        if($isWork->refId == $actId and $somWork <= $etp){
+          if($unitAbs != 'days'){
+            $somWork = $workVal/$maxHour;
+            $isWork->work = $somWork;
+          }else{
+            $isWork->work = $workVal;
+          }
+          $editWork = true;
+          $isWork->saveWork();
+          $somWork += $workVal;
+        } else {
+          $somWork += $isWork->work;
+        }
+      }
+      if(!$editWork){
+        if($somWork <= $etp){
+          //put parameter in work object
+          $work->refType = 'Activity';
+          $work->refId = $actId;
+          $work->setDates($workDay);
+          $work->idResource = $userId;
+          if($unitAbs != 'days'){
+          	$workVal = $workVal/$maxHour;
+          }
+          $work->work = $workVal;
+          $work->idProject = $idProject;
+          $work->idAssignment = $assId;
+          //save work
+          $work->saveWork();
+        }else {
+          $result = 'warning';
+          echo $result;
+          //dojo.byId('warningDiv').style.display = 'block';
+        }
+      }
+    }
+  }
+  // commit work
+  Sql::commitTransaction();
+  
 ?>
