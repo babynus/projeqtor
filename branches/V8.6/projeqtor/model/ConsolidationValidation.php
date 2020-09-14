@@ -461,9 +461,9 @@ class ConsolidationValidation extends SqlElement{
 	  if($project->getSubProjectsList()){
 	    $sub=$project->getSubProjectsList();
 	    $subList=$project->id.','.implode(',', array_keys($sub));
-	    $where="idProject in ($subList) and month = $month ";
+	    $where="idProject in ($subList) and month = '".$month."' ";
 	  }else{
-	    $where="idProject = $project->id and month = $month ";
+	    $where="idProject = $project->id and month = '".$month."' ";
 	  }
 	  $reelCons=$work->sumSqlElementsFromCriteria('work',null,$where);
 	  return $reelCons;
