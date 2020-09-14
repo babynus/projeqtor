@@ -40,6 +40,7 @@ $user=getSessionUser();
 $res=array();
 $lstCons=array();
 $lock=($mode=='Locked')?$month:"";
+debugLog($lock);
 //___get Recursive Sub Projects___//
 foreach ($lstProj as $id=>$val){  
   $val=(($mode =='validaTionCons' or $mode=='cancelCons') and $all=='false')?substr($val,6):$val;
@@ -143,7 +144,7 @@ if($mode !='validaTionCons' and $mode!='cancelCons'){
   }else {
       $cons=new ConsolidationValidation();
       $lstProj=implode(',', $lstProj);
-      $where="idProject in ($lstProj) and month = $month";
+      $where="idProject in ($lstProj) and month ='".$month."'";
       $cons->purge($where);
   }
 }
