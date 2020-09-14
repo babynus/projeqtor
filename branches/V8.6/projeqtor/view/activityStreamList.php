@@ -46,14 +46,14 @@ if (RequestHandler::isCodeSet('activityStreamNumberElement')) {
 
 if (RequestHandler::isCodeSet('activityStreamAuthorFilter')) {
 	$paramAuthorFilter=RequestHandler::getId("activityStreamAuthorFilter");
-	Parameter::storeUserParameter("activityStreamAuthorFilter", $paramAuthorFilter);
+	Parameter::storeUserParameter("activityStreamAuthorFilter", trim($paramAuthorFilter));
 } else {
 	$paramAuthorFilter=Parameter::getUserParameter("activityStreamAuthorFilter");
 }
 
 if (RequestHandler::isCodeSet('activityStreamTeamFilter')) {
   $paramTeamFilter=RequestHandler::getId("activityStreamTeamFilter");
-  Parameter::storeUserParameter("activityStreamTeamFilter", $paramTeamFilter);
+  Parameter::storeUserParameter("activityStreamTeamFilter", trim($paramTeamFilter));
 } else {
   $paramTeamFilter=Parameter::getUserParameter("activityStreamTeamFilter");
 }
