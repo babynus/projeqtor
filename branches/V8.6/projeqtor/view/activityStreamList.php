@@ -239,6 +239,7 @@ if($showOnlyNotes=='NO'){
   }
   /////
 }
+$countDisplay=0;
 $countIdNote = count ( $notes );
 $nbHistInfo= count($historyInfoLst);
 $countMail= count($mailsSend);
@@ -286,6 +287,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
                           if($resMail!=''){
                             echo $resMail;
                             $cp++;
+                            $countDisplay++;
                           }
                           continue;
                         }
@@ -299,6 +301,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
                       if($resultHist!=''){
                         echo $resultHist;
                         $cp++;
+                        $countDisplay++;
                         continue;
                       }
                     }
@@ -309,6 +312,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
                       if($resultHist!=''){
                         echo $resultHist;
                         $cp++;
+                        $countDisplay++;
                       }
                       continue;
                     }else{
@@ -321,15 +325,22 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
               }
            }
            if($cp<=$activityStreamNumberElement){
-         	  activityStreamDisplayNote($note,"activityStream");
-           	  unset($notes[$idNote]);
-           	  $cp++;
-           	  continue;
+         	  $resNote=activityStreamDisplayNote($note,"activityStream");
+         	  unset($notes[$idNote]);
+         	  if($resNote!=''){
+         	  	echo $resNote;
+         	  	$cp++;
+         	  	$countDisplay++;
+         	  }
+         	  continue;
            }
          }else{
-             activityStreamDisplayNote($note,"activityStream");
-             unset($notes[$idNote]);
-             $cp++;
+             $resNot=activityStreamDisplayNote($note,"activityStream");
+             if($resNot!=''){
+              unset($notes[$idNote]);
+              $cp++;
+              $countDisplay++;
+             }
          }
        }else{
         break;
@@ -348,6 +359,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
                   if($resMail!=''){
                     echo $resMail;
                 	$cp++;
+                	$countDisplay++;
                   }
                   continue;
                 }
@@ -361,6 +373,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
               if($resultHist!=''){
                 echo $resultHist;
                 $cp++;
+                $countDisplay++;
               }
             }
           }else{
@@ -369,6 +382,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
             if($resultHist!=''){
               echo $resultHist;
               $cp++;
+              $countDisplay++;
             }
           }
         }
@@ -383,11 +397,15 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
               if($res!=''){
                 echo $res;
                 $cp++;
+                $countDisplay++;
               }
           }else{
             break;
           }
        }
+     }
+     if($countDisplay==0 ){
+      echo "<div style='padding:10px'>".i18n ( "noNoteToDisplay" )."</div>";
      }
 	  ?>
 	</table>
