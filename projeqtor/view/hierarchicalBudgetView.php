@@ -251,6 +251,6 @@ if (Sql::$lastQueryNbRows > 0) {
 	}
 }
 echo "</table>";
-echo '<div id="hierarchicalBudgetListDivEnd" style="min-height:20px; display:none;border:1px solid red;">&nbsp;</div>';
+echo '<div id="hierarchicalBudgetListDivEnd" style="min-height:20px; display:none;">&nbsp;</div>';
 echo '</div>';
 ?>
