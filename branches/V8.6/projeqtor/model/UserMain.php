@@ -448,7 +448,7 @@ class UserMain extends SqlElement {
                                'update' => $accessScopeList[$accessProfile->idAccessScopeUpdate],
                                'delete' => $accessScopeList[$accessProfile->idAccessScopeDelete],
                                'report' =>  $accessScopeList[$accessProfile->idAccessScopeRead], );
-            if ($accessScopeList[$accessProfile->idAccessScopeRead]=='ALL') {
+            if ($accessScopeList[$accessProfile->idAccessScopeRead]=='ALL' and $accessProfile->isNonProject==0) {
               if (!$obj) $this->_accessControlVisibility='ALL';
             }
           }
