@@ -127,7 +127,7 @@ if ($nbProj==0) {
 	</div>
 <?php } else if ($displayMode=='select') {?>
 <select dojoType="dijit.form.FilteringSelect" class="input" 
-   style="position: absolute; left:4px; top:<?php echo (isNewGui())?'-3':'1';?>px; width: 241px;height:22px;" 
+   style="position: absolute; left:4px; top:<?php echo (isNewGui())?'-3':'1';?>px; width: 241px;height:<?php echo (isNewGui())?'20':'22';?>px;" 
    <?php echo autoOpenFilteringSelect();?>
    name="projectSelectorFiletering" id="projectSelectorFiletering" >
    <script type="dojo/connect" event="onChange" args="evt">
@@ -148,7 +148,7 @@ if ($nbProj==0) {
        </button>
 	</div>
 <?php } else if($displayMode=="search") {?>
-<select id="projectSelectorFiletering" data-dojo-type="dijit.form.FilteringSelect" class="input" style="position: absolute; left:4px; top:<?php echo (isNewGui())?'-3':'1';?>px; width: 241px;height:22px;"  
+<select id="projectSelectorFiletering" data-dojo-type="dijit.form.FilteringSelect" class="input" style="position: absolute; left:4px; top:<?php echo (isNewGui())?'-3':'1';?>px; width: 241px;height:<?php echo (isNewGui())?'20':'22';?>px;"  
 <?php echo autoOpenFilteringSelect();?>
 name="projectSelectorFiletering" 
     data-dojo-props="
