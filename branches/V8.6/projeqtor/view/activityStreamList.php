@@ -336,8 +336,9 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
            }
          }else{
              $resNot=activityStreamDisplayNote($note,"activityStream");
+             unset($notes[$idNote]);
              if($resNot!=''){
-              unset($notes[$idNote]);
+              echo $resNot;
               $cp++;
               $countDisplay++;
              }
