@@ -176,11 +176,11 @@
                  }
               }
             }
-            activityStreamDisplayNote ($note,"objectStream");
+            echo activityStreamDisplayNote ($note,"objectStream");
             unset($notes[$idNote]);
             continue;
           }else{
-            activityStreamDisplayNote ($note,"objectStream");
+            echo activityStreamDisplayNote ($note,"objectStream");
             unset($notes[$idNote]);
           }
 	    }
