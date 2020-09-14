@@ -117,7 +117,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
 					  <tr style="height:2px;"></tr>
 					  <tr>
 					   <td align="right">
-							 <?php echo ucfirst(i18n('colIdTeam'));?>&nbsp;:&nbsp;
+							 <?php echo ucfirst(i18n('Team'));?>&nbsp;:&nbsp;
 						 </td>
 						 <td align="left" style="padding-right:20px">
 							  <select title="<?php echo i18n('filterOnTeam')?>" type="text" class="filterField roundedLeft inputParameter" dojoType="dijit.form.FilteringSelect"
