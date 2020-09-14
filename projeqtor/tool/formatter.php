@@ -569,11 +569,12 @@ function activityStreamDisplayNote ($note,$origin){
   if ($origin=='activityStream' and !$canRead) {
     return ;
   }
+  $resultNote='';
   $objectIsClosed=(isset($obj) and property_exists($obj, 'idle') and $obj->idle)?true:false;
   if ($objectIsClosed) $canUpdate=false;
   $isNoteClosed=getSessionTableValue("closedNotes", $note->id);
   if ($note->idPrivacy == 1 or ($note->idPrivacy == 3 and $user->id == $note->idUser) or ($note->idPrivacy == 2 and $userRessource->idTeam == $note->idTeam)) {
-    echo '<tr style="height:100%;">';
+    $resultNote.= '<tr style="height:100%;">';
     $noteDiscussionMode = Parameter::getUserParameter('userNoteDiscussionMode');
     if($noteDiscussionMode == null){
       $noteDiscussionMode = Parameter::getGlobalParameter('globalNoteDiscussionMode');
@@ -583,11 +584,11 @@ function activityStreamDisplayNote ($note,$origin){
       	if($i >= 5){
       		break;
       	}
-      	echo '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;font-size:100% !important;"></td>';
+      	$resultNote.= '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;font-size:100% !important;"></td>';
       }
-      echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:100%;font-size:100% !important;"><div style="float:left;">';
+      $resultNote.= '<td cols$resultNote.="'.(6-$note->replyLevel).'" class="noteData" style="width:100%;font-size:100% !important;"><div style="float:left;">';
     }else{
-      echo '<td colspan="6" class="noteData" style="width:100%;font-size:100% !important;"><div style="float:left;">';
+      $resultNote.= '<td colspan="6" class="noteData" style="width:100%;font-size:100% !important;"><div style="float:left;">';
     }
 
     
@@ -599,36 +600,36 @@ function activityStreamDisplayNote ($note,$origin){
     echo '</div>';
     echo '    </div>';
     */
-    echo '    <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px">';
-    echo '      <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';
-    echo          formatIcon("MessageStream",22);
-    echo '        <div style="position:absolute;top:0px;left:12px">';
-    echo            formatPrivacyThumb($note->idPrivacy, $note->idTeam,16);
-    echo '        </div>';
-    echo '      </div>';
+    $resultNote.= '    <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px">';
+    $resultNote.= '      <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';
+    $resultNote.=          formatIcon("MessageStream",22);
+    $resultNote.= '        <div style="position:absolute;top:0px;left:12px">';
+    $resultNote.=            formatPrivacyThumb($note->idPrivacy, $note->idTeam,16);
+    $resultNote.= '        </div>';
+    $resultNote.= '      </div>';
     if (!$inlineUserThumb) {
-    echo '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
-    echo          formatUserThumb($note->idUser, $userName, 'Creator',22,'left');
-    echo '      </div>';
+    $resultNote.= '      <div style="float:left;clear:left;margin-top:6px;width:22px;">';
+    $resultNote.=          formatUserThumb($note->idUser, $userName, 'Creator',22,'left');
+    $resultNote.= '      </div>';
     }
-    echo '    </div>';
+    $resultNote.= '    </div>';
      
     
     
-    echo '</div><div style="margin-left:0px;margin-top:6px">';
-    echo '<table style="float:right;"><tr><td>';
+    $resultNote.= '</div><div style="margin-left:0px;margin-top:6px">';
+    $resultNote.= '<table style="float:right;"><tr><td>';
     //if($origin=="objectStream" || $origin=="objectStreamKanban") {
     if($origin=="objectStream") {
           if ($note->idUser == $user->id and !$print and $canUpdate){
-            echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
+            $resultNote.=  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
           }
           if (!$print and $canUpdate) {
-            echo  '<div style="float:right;" ><a onClick="addNote(true,' . htmlEncode($note->id) . ');" title="' . i18n('replyToThisNote') . '" > '.formatSmallButton('Reply').'</a></div>';
+            $resultNote.=  '<div style="float:right;" ><a onClick="addNote(true,' . htmlEncode($note->id) . ');" title="' . i18n('replyToThisNote') . '" > '.formatSmallButton('Reply').'</a></div>';
           }
     }
-    echo '</td></tr><tr><td>';
-    echo '<div "style=float:right;"><a  id="imgCollapse_'.$note->id.'" style="float:right;" onclick="switchNoteStatus('.$note->id.');">'.formatSmallButton('Collapse'.(($isNoteClosed)?'Open':'Hide')).'</a></div>';
-    echo '</div></td></tr></table>';
+    $resultNote.= '</td></tr><tr><td>';
+    $resultNote.= '<div "style=float:right;"><a  id="imgCollapse_'.$note->id.'" style="float:right;" onclick="switchNoteStatus('.$note->id.');">'.formatSmallButton('Collapse'.(($isNoteClosed)?'Open':'Hide')).'</a></div>';
+    $resultNote.= '</div></td></tr></table>';
     
     if ($origin=='objectStream') {
         if(Parameter::getUserParameter('paramRightDiv')==3){
@@ -643,37 +644,38 @@ function activityStreamDisplayNote ($note,$origin){
     		$rightWidth="100%";
     	}
     }
-    echo '<div class="activityStreamNoteContainer" style="padding-left:4px;max-width:'.$rightWidth.'">';
+    $resultNote.= '<div class="activityStreamNoteContainer" style="padding-left:4px;max-width:'.$rightWidth.'">';
     $strDataHTML=$note->note;
-    echo '<div><div style="margin-top:2px;margin-left:37px;">'.(($origin!='objectStream')?$ticketName."&nbsp;|&nbsp;":"").$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
-  	echo '<div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($note->creationDate,$note->updateDate,"left",16).'</div>';
+    $resultNote.= '<div><div style="margin-top:2px;margin-left:37px;">'.(($origin!='objectStream')?$ticketName."&nbsp;|&nbsp;":"").$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
+  	$resultNote.= '<div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($note->creationDate,$note->updateDate,"left",16).'</div>';
   	if($note->updateDate){
-  	 echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->updateDate,false).'</div></div>';    	 
+  	 $resultNote.= '<div style="margin-top:8px;">'.htmlFormatDateTime($note->updateDate,false).'</div></div>';    	 
     } else {
-     echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->creationDate,false).'</div></div>';
+     $resultNote.= '<div style="margin-top:8px;">'.htmlFormatDateTime($note->creationDate,false).'</div></div>';
     }
     $noteImgWidth=intval($rightWidthScreen)-30;
     if ($origin=='activityStream') $noteImgWidth-=40;
     $strDataHTML=htmlSetClickableImages($strDataHTML,$noteImgWidth);
     if($rightWidthScreen<100){
-      echo '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="display:block;height:'.(($isNoteClosed)?'0px':'100%').';margin-left:'.(($origin=='activityStream')?'36':'0').'px;margin-bottom:'.(($isNoteClosed)?'0px':'10px').';word-break:break-all;">';
+      $resultNote.= '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="display:block;height:'.(($isNoteClosed)?'0px':'100%').';margin-left:'.(($origin=='activityStream')?'36':'0').'px;margin-bottom:'.(($isNoteClosed)?'0px':'10px').';word-break:break-all;">';
       if($noteDiscussionMode != 'YES'){
       	if($note->idNote != null){
-      		echo '<span style="position:relative;float:left;padding-right:5px">'.formatIcon('Reply', 16, 'reply to note #'.$note->idNote).'</span>';
+      		$resultNote.= '<span style="position:relative;float:left;padding-right:5px">'.formatIcon('Reply', 16, 'reply to note #'.$note->idNote).'</span>';
       	}
       }
-      echo $strDataHTML;
-      echo '</div></div></td></tr>'; 
+      $resultNote.= $strDataHTML;
+      $resultNote.= '</div></div></td></tr>'; 
     } else {
-      echo '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="display:block;height:'.(($isNoteClosed)?'0px':'100%').';margin-left:'.(($origin=='activityStream')?'36':'0').'px;margin-bottom:'.(($isNoteClosed)?'0px':'10px').';">';
+      $resultNote.= '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="display:block;height:'.(($isNoteClosed)?'0px':'100%').';margin-left:'.(($origin=='activityStream')?'36':'0').'px;margin-bottom:'.(($isNoteClosed)?'0px':'10px').';">';
       if($noteDiscussionMode != 'YES'){
       	if($note->idNote != null){
-      		echo '<span style="position:relative;float:left;padding-right:5px">'.formatIcon('Reply', 16, 'reply to note #'.$note->idNote).'</span>';
+      		$resultNote.= '<span style="position:relative;float:left;padding-right:5px">'.formatIcon('Reply', 16, 'reply to note #'.$note->idNote).'</span>';
       	}
       }
-      echo $strDataHTML.'</div></div></td></tr>';
+      $resultNote.= $strDataHTML.'</div></div></td></tr>';
     } 
   }
+  return $resultNote;
 }
 
 
@@ -773,8 +775,10 @@ function activityStreamDisplayHist ($hist,$origin){
     $linkedId=$linkExpl[3];
   }
   $rightAcces=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'combo'));
-  if (securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES" and $rightAcces->rightAccess==1 ) {
-    $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
+  if (securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
+    if($rightAcces->rightAccess==1){
+      $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
+    }
   }else{
     return;
   }

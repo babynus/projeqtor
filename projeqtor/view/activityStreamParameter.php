@@ -79,7 +79,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
   						</td>
   						<td align="left" style="margin-top:10px;padding-right:20px;">
     						<select title="<?php echo i18n('limitDisplayActivityStream')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect" required
-    						value="100" 
+    						value="<?php echo ($activityStreamNumberElement!='')?$activityStreamNumberElement:'100';?>" 
                             <?php echo autoOpenFilteringSelect(); ?> 
                             id="activityStreamNumberElement" name="activityStreamNumberElement" style="width:80px;margin-left:16px;height:20px;font-size:8pt;" onChange="refreshActivityStreamList();">
                               <option value="10">10</option>
@@ -107,7 +107,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
                 id="activityStreamAuthorFilter" name="activityStreamAuthorFilter" >
                   <?php 
                     $selectedAuthor=Parameter::getUserParameter('activityStreamAuthorFilter');
-                    htmlDrawOptionForReference('idUser', $selectedAuthor, null, false); ?>
+                    htmlDrawOptionForReference('idUser', $selectedAuthor); ?>
                   <script type="dojo/method" event="onChange" >
                     refreshActivityStreamList();
                   </script>
