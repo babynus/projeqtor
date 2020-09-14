@@ -909,7 +909,6 @@ class ImputationLine {
             echo '<td width="16"><div style="float: left;width:16px;">&nbsp;</div></td>';
           }
         }
-        debugLog("line->refType=".$line->refType);
         $lockProject='';$validatedProject='';
         if ($line->refType=="Project") {
           $description=null;
