@@ -101,6 +101,9 @@
     <copy todir="${deploy.dir}/external/HtmlPhpExcel">
        <fileset dir="${src.dir}/external/HtmlPhpExcel"/>
     </copy>
+        <copy todir="${deploy.dir}/external/parsedown">
+       <fileset dir="${src.dir}/external/parsedown"/>
+    </copy>
   </target>
   
   <target name="copyFiles">
