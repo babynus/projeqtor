@@ -107,6 +107,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
                 id="activityStreamAuthorFilter" name="activityStreamAuthorFilter" >
                   <?php 
                     $selectedAuthor=Parameter::getUserParameter('activityStreamAuthorFilter');
+                    if ($selectedAuthor==' ') $selectedAuthor=null;
                     htmlDrawOptionForReference('idUser', $selectedAuthor); ?>
                   <script type="dojo/method" event="onChange" >
                     refreshActivityStreamList();
@@ -125,6 +126,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
                 id="activityStreamTeamFilter" name="activityStreamTeamFilter" >
                   <?php 
                     $selectedTeam=Parameter::getUserParameter('activityStreamTeamFilter');
+                    if ($selectedTeam==' ') $selectedTeam=null;
                     htmlDrawOptionForReference('idTeam', $selectedTeam, null, false); ?>
                   <script type="dojo/method" event="onChange" >
                     refreshActivityStreamList();
