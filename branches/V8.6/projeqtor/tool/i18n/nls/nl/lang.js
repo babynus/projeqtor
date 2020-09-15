@@ -2467,6 +2467,7 @@ helpParamMailTitleResult: "titel van de te verzenden e-mail wanneer het resultaa
 helpParamMailTitleStatus: "Titel van de te verzenden e-mail als de status is gewijzigd",
 helpParamMailTitleUser: "titel van de te verzenden e-mail naar gebruiker bij aankondiging van inloggegevens",
 helpParamMemoryLimitForPDF: "Geheugen limit (MB) voor genereren PDF's. (te weinig geeft PDF fouten maar teveel kan de server doen crashen)",
+helpParamOrderNoteMail: "Choose if order of notes is ascending in mail model",
 helpParamPasswordMinLength: "minimum aantal tekens dan een nieuw wachtwoord moet bevatten",
 helpParamPasswordStrength: "Determines the strength of the password &#13  - length &#58 must have at least defined number of characters &#13  - case &#58 must contain upper and lower case caracters &#13  - dijit &#58 must contain at least one dijit&#13  - special &#58 must contain some special characters",
 helpParamReportTempDirectory: "tijdelijke map voor rapporten (moet in de web documenten hoofdmap staan om afbeeldingen te verkrijgen)",

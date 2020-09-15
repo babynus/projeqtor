@@ -2467,6 +2467,7 @@ helpParamMailTitleResult: "titolo della mail inviata quando viene cambiato il ri
 helpParamMailTitleStatus: "Titolo della mail inviata quando uno stato è cambiato",
 helpParamMailTitleUser: "titolo della mail inviata all'utente quando gli vengono notificate le informazioni di login",
 helpParamMemoryLimitForPDF: "limite di memoria in MB per la generazione di file PDF (troppo piccolo può portare a errori PDF ma troppo grande può mandare in crash il server)",
+helpParamOrderNoteMail: "Choose if order of notes is ascending in mail model",
 helpParamPasswordMinLength: "numero minimo di caratteri che una nuova password deve contenere",
 helpParamPasswordStrength: "Determines the strength of the password &#13  - length &#58 must have at least defined number of characters &#13  - case &#58 must contain upper and lower case caracters &#13  - dijit &#58 must contain at least one dijit&#13  - special &#58 must contain some special characters",
 helpParamReportTempDirectory: "directory temporanea per i reports (deve essere nella root del documento web per ottenere le immagini)",

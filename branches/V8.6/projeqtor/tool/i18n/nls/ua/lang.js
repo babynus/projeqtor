@@ -2467,6 +2467,7 @@ helpParamMailTitleResult: "тема листа надсилається&#44; к�
 helpParamMailTitleStatus: "Тема листа надсилається&#44; коли змінюється статус",
 helpParamMailTitleUser: "тема листа надсилається користувачеві повідомляючи його інформацією облікового запису",
 helpParamMemoryLimitForPDF: "обмеження пам'яті(Мb) для генерації PDF (занадто маленьке може призвести до помилки у форматі PDF&#44; але занадто велике може призвести до збою сервера)",
+helpParamOrderNoteMail: "Choose if order of notes is ascending in mail model",
 helpParamPasswordMinLength: "мінімальна кількість символів&#44; яку мусить містити новий пароль ",
 helpParamPasswordStrength: "Determines the strength of the password &#13  - length &#58 must have at least defined number of characters &#13  - case &#58 must contain upper and lower case caracters &#13  - dijit &#58 must contain at least one dijit&#13  - special &#58 must contain some special characters",
 helpParamReportTempDirectory: "тимчасовий каталог для звітів (мусить бути в веб кореневому каталозі документів для отримання зображення)",
