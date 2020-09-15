@@ -2467,6 +2467,7 @@ helpParamMailTitleResult: "titre du mail envoyé lorsque le résultat est modifi
 helpParamMailTitleStatus: "Titre du mail envoyé lorsque le statut est modifié",
 helpParamMailTitleUser: "titre du mail envoyé à l'utilisateur pour lui notifier les informations sur son compte",
 helpParamMemoryLimitForPDF: "Mémoire maximale en Mo pour la génération des fichiers PDF (une valeur trop faible fera échouer certaines transformations mais une valeur trop grande peut compromettre la stabilité du serveur)",
+helpParamOrderNoteMail: "Choisissez si l'ordre des notes est croissant dans le modèle de courrier",
 helpParamPasswordMinLength: "nombre minimum de caractères que doit contenir un nouveau mot de passe",
 helpParamPasswordStrength: "Détermine la force du mot de passe &#13  - taille &#58 doit avoir au moins le nombre spécifié de caractères &#13  - casse &#58 doit contenir des majuscules et des minuscules &#13  - chiffre &#58 doit contenir au moins un chiffre &#13  - spécial &#58 doit contenir au moins un caractère spécial",
 helpParamReportTempDirectory: "Répertoire temporaire pour les rapports (doit être dans le document root web pour afficher les images)",
