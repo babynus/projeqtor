@@ -166,7 +166,7 @@
         echo "$indent<div id='UnderMenu$idMenu'  class='dijitAccordionTitle2 reportTableColumnHeader2 largeReportHeader2' style='display:none;  font-size:100%; position:absolute; left:".$paramIconSize2."px; top:0px; width:230px;' >";
         echo '<div style="margin-left:5px;padding-top:3px;margin-bottom:8px;"> <span  style="min-width:210px;" role="presentation" class=" dijitTreeRow3" >'.$menuNameI18n.'</span> </div>';
       }else{
-        //a faire pour toutes les tailles
+        // to do for all size
         echo "$indent<div id='UnderMenu$idMenu' class='hideUndermenu$idMenuParent dijitAccordionTitle2 reportTableColumnHeader2 largeReportHeader2' style='display:none;font-size:100%; overflow-y:auto; position:absolute;margin-top:".$marginTopUnderMenu."px;left:238px; width:230px;' >";
       }
       $level+=1;
