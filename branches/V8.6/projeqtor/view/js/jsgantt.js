@@ -1630,11 +1630,11 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                   case 'Complete':   vCaptionStr = vTaskList[i].getCompStr();  break;
                   case 'Work':       vCaptionStr = vTaskList[i].getWork();  break;
                 }
-                vRightTableTempMeeting += '<div class="labelBarDiv" '
-                	// + ' onMouseover=JSGantt.enterBarLink('+i+'); '
-	                // + ' onMouseout=JSGantt.exitBarLink('+i+'); '
+                  vRightTableTempMeeting += '<div id="labelBarDiv_'+vID+'" class="labelBarDiv" '
+                  // + ' onMouseover=JSGantt.enterBarLink('+i+'); '
+                  // + ' onMouseout=JSGantt.exitBarLink('+i+'); '
                   + ' onMouseover=JSGantt.exitBarLink('+i+'); '
-                	+ 'style="left:' + (Math.ceil((vTaskRight) * (vDayWidth) - 1) + 6) + 'px;display:block;">' + vCaptionStr + '</div>';
+                  + 'style="'+(vTaskList[i].getVisible()==1?'display:block;':'display:none;')+'left:'+ (Math.ceil((vTaskRight) * (vDayWidth) - 1) + 6) + 'px;">' + vCaptionStr + '</div>';
               }
 	          }
   	        vRightTableTempMeeting += '</div>' ;
@@ -2036,6 +2036,7 @@ JSGantt.hide=function (pID,ganttObj) {
        }
        if(vList[i].getClass()=='Meeting'){
          JSGantt.findObj('bardivMetting_' + vID).style.display = "";
+         JSGantt.findObj('labelBarDiv_'+ vID).style.display = "none";
        }
        vList[i].setVisible(0);
        if(vList[i].getGroup() == 1) {
@@ -2072,6 +2073,8 @@ JSGantt.show =  function (pID, ganttObj) {
         }
         if(vList[i].getClass()=='Meeting'){
           JSGantt.findObj('bardivMetting_' + vID).style.display = "none";
+          JSGantt.findObj('labelBarDiv_'+ vID).style.display = "block";
+          
         }
         vList[i].setVisible(1);
       }

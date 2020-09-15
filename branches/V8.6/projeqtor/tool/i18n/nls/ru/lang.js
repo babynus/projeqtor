@@ -2467,6 +2467,7 @@ helpParamMailTitleResult: "заголовок почты при изменени
 helpParamMailTitleStatus: "Заголовок почты при изменении статуса",
 helpParamMailTitleUser: "заголовок почты&#44; отсылаемой пользователю при отображении информации о входе",
 helpParamMemoryLimitForPDF: "ограничение памяти в Мб для генерации pdf (слишком малое значение приведет к ошибкам pdf&#44; слишком большое может обрушить сервер)",
+helpParamOrderNoteMail: "Choose if order of notes is ascending in mail model",
 helpParamPasswordMinLength: "минимальное число символов в новом пароле",
 helpParamPasswordStrength: "Determines the strength of the password &#13  - length &#58 must have at least defined number of characters &#13  - case &#58 must contain upper and lower case caracters &#13  - dijit &#58 must contain at least one dijit&#13  - special &#58 must contain some special characters",
 helpParamReportTempDirectory: "временная директория для отчетов (должна быть в корне веб-документов для получения изображений)",

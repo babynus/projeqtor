@@ -135,7 +135,7 @@ class ConsolidationValidation extends SqlElement{
       ///----------------------------------------------------///
       
 	  //*** Header***//
-	  $result  ='<div id="imputationValidationDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
+	  $result  ='<div id="imputationValidationDiv" align="center" style="margin-top:20px;margin-bottom:30px; overflow-y:auto; width:100%;">';
 	  $result .='  <table width="98%" style="margin-left:20px;margin-right:20px;border: 1px solid grey;">';
 	  $result .='   <tr class="reportHeader">';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:20%;text-align:center;vertical-align:center;">'.i18n('Project').'</td>';
