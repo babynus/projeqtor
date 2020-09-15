@@ -4384,7 +4384,7 @@ function updateComplexities(number,idCatalog,parameterNumber){
         loadContent("objectDetail.php?refreshComplexitiesValues=true", "CatalogUO_unitOfWork", 'listForm');
       }
       if(numberComplexities > parameterNumber && notRefresh==false){
-        showAlert(i18n("complexityCantBeSuperiorThan", new Array(parameterNumber)));
+        showAlert(i18n("complexityCantBeSuperiorThan", new Array(''+parameterNumber)));
         dijit.byId("numberComplexities").set("value",dojo.number.format(parameterNumber));
       }
     }
