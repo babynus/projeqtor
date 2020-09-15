@@ -414,12 +414,12 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
   	 }
   	 foreach ($historyInfoLst as $id=>$hist ){
   	   $date=$hist->operationDate;
-  	   $key=$date.'-3-'.$id;
+  	   $key=$date.'-1-'.$id;
   	   $all[$key]=array('type'=>'histo','object'=>$hist);
   	 }
   	 foreach ($mailsSend as $idMail=>$mail){
   	   $date=substr($mail->mailDateTime,0,-2).'60';
-  	   $key=$date.'-1-'.$idMail;
+  	   $key=$date.'-3-'.$idMail;
   	   $all[$key]=array('type'=>'mail','object'=>$mail);
   	 }
   	 krsort($all);
