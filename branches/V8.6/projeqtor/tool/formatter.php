@@ -757,7 +757,7 @@ function activityStreamDisplayHist ($hist,$origin){
       }
       if(isset($resource)){
         $menu=($isPool==false)?'Resource':'ResourceTeam';
-        if ( securityCheckDisplayMenu(null, $menu) and securityGetAccessRightYesNo('menu'.$menu, 'read', '')=="YES") {
+        if ( securityCheckDisplayMenu(null, $menu) and securityGetAccessRightYesNo('menu'.$menu, 'read', $resource)=="YES") {
           $gotoResource=' class="streamLink" onClick="gotoElement(\''.htmlEncode($menu).'\',\''.htmlEncode($resource->id).'\')"';
         }else{
           $gotoResource=' ';
@@ -775,7 +775,8 @@ function activityStreamDisplayHist ($hist,$origin){
     $linkedId=$linkExpl[3];
   }
   $rightAcces=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'combo'));
-  if (securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
+  $testObj=new $objectClass($objectId,true);
+  if (securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', $testObj)=="YES") {
     if($rightAcces->rightAccess==1){
       $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
     }
@@ -839,7 +840,7 @@ function activityStreamDisplayHist ($hist,$origin){
   $result='';
   if($origin=='objectStream'){
     $result.= '<tr style="height:100%;">';
-    $result.= '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;">';
+    $result.= '  <td colspan="6" class="noteData" style="width:100%;xbackground:#F8F8F8;font-size:100% !important;">';
     $result.= '    <div style="float:left;">';
     $result.= '      <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px;">';
     $result.= '        <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';
@@ -861,7 +862,7 @@ function activityStreamDisplayHist ($hist,$origin){
     $result.= '</tr>';
   }else{
     $result.= '<tr style="height:100%;">';
-    $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;position:relative;">';
+    $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;xbackground:#F8F8F8;font-size:100% !important;position:relative;">';
     $result.= '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
     $result.= '      <div style="float:left;max-width:26px">';
     $result.=          $icon;
@@ -903,9 +904,11 @@ function activityStreamDisplayMail($mail,$origin){
   
   if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
-
-  if ($mail->idMailable!='' and  securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', '')=="YES") {
+  $testObj=($objectClass)?new $objectClass($objectId):null;
+  if ($mail->idMailable!='' and  securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', $testObj)=="YES") {
     $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
+  } else {
+    return;
   }
   if($mail->idMailable!='')$elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n($objectClass).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
@@ -917,14 +920,14 @@ function activityStreamDisplayMail($mail,$origin){
   $icon=formatIcon("Mail",22);
   $text=lcfirst(i18n('mailActivityStrameSendTo',array($dest)));
   $showMail="";
-  if ( securityCheckDisplayMenu(null, get_class($mail)) and securityGetAccessRightYesNo('menu'.get_class($mail), 'read', '')=="YES") {
+  if ( securityCheckDisplayMenu(null, get_class($mail)) and securityGetAccessRightYesNo('menu'.get_class($mail), 'read', $mail)=="YES") {
     $showMail='<div class="roundedButtonSmall" style="width:20px;height:16px;display:inline-block;margin-left:20px;" title="'.i18n('showMail',array($mail->id)).'"><div class="iconGoto" style="z-index:500;width:16px;height:10px;display:inline-block;padding-right:5px;" onClick="gotoElement(\''.htmlEncode(get_class($mail)).'\',\''.htmlEncode($mail->id).'\')" title="'.i18n('showMail',array($mail->id)).'" style="widht:16px;height:16px;"></div></div>';
   }
   
   $result='';
   if($origin=='activityStream'){
     $result.= '<tr style="height:100%;">';
-    $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;background:#F8F8F8;font-size:100% !important;position:relative;">';
+    $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;xbackground:#F8F8F8;font-size:100% !important;position:relative;">';
     $result.= '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
     $result.= '      <div style="float:left;max-width:26px">';
     $result.=          $icon;
@@ -940,6 +943,9 @@ function activityStreamDisplayMail($mail,$origin){
     $result.= '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
     $result.= '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
     $result.='     <div>';
+    $result.= '    <div style="width:90%;margin-top:16px;display:block;margin-left:5px;margin-bottom:6px;">';
+    $result.=       htmlEncode($mail->mailTitle);
+    $result.='     <div>';
     if (Parameter::getGlobalParameter('logLevel')>=3) {
       $result.= '      <div style="position:absolute;right:10px;top:6px;color:grey">';
       $result.=        'mail#'.$mail->id;
@@ -949,7 +955,7 @@ function activityStreamDisplayMail($mail,$origin){
     $result.= '</tr>';
   }else{
     $result.= '<tr style="height:100%;">';
-    $result.= '  <td colspan="6" class="noteData" style="width:100%;background:#F8F8F8;font-size:100% !important;">';
+    $result.= '  <td colspan="6" class="noteData" style="width:100%;xbackground:#F8F8F8;font-size:100% !important;">';
     $result.= '    <div style="float:left;">';
     $result.= '      <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px;">';
     $result.= '        <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';
@@ -966,6 +972,9 @@ function activityStreamDisplayMail($mail,$origin){
     $result.= '      <div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp;'.$text.$showMail.'</div>';
     $result.= '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left",16).'</div>';
     $result.= '      <div style="margin-top:8px;margin-bottom:5px">'.htmlFormatDateTime($date,false).'</div>';
+    $result.='     <div>';
+    $result.= '    <div style="width:90%;margin-top:16px;display:block;margin-left:5px;margin-bottom:6px;">';
+    $result.=       htmlEncode($mail->mailTitle);
     $result.='     <div>';
     $result.= '  </td>';
     $result.= '</tr>';

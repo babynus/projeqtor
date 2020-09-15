@@ -202,25 +202,26 @@ if ($activityStreamShowClosed!='1') {
 }
 
 
+$multipleLimit=100; // To avoid reading all elements, while taking into account fact that retreived data may not be display depending on access right, multiplicated retreived max number
 //echo '<br/>';
 $order = "COALESCE (updateDate,creationDate) DESC";
-$notes=$note->getSqlElementsFromCriteria(null,false,$critWhere,$order,null,null,$activityStreamNumberElement);
+$notes=$note->getSqlElementsFromCriteria(null,false,$critWhere,$order,null,true,$activityStreamNumberElement*$multipleLimit);
 $historyInfoLst=array();
 $mailsSend=array();
 
 if($showOnlyNotes=='NO'){
   
-  if(securityCheckDisplayMenu(null,'Mail') and securityGetAccessRightYesNo('menu'.'Mail', 'read', '')=="YES"){
+  if(securityCheckDisplayMenu(null,'Mail') and securityGetAccessRightYesNo('menu'.'Mail', 'read', null)=="YES"){
     $mail= new Mail();
-    $mailsSend=$mail->getSqlElementsFromCriteria(null,false,$clause,"mailDateTime DESC",null,null,$activityStreamNumberElement);
+    $mailsSend=$mail->getSqlElementsFromCriteria(null,false,$clause,"mailDateTime DESC",null,true,$activityStreamNumberElement*$multipleLimit);
   }
   
   ///// search elements in history  for display on ActivityStream 
   $history= new History();
-  $historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
+  $historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,true,$activityStreamNumberElement*$multipleLimit);
   if($activityStreamShowClosed =='1'){
     $historyArchive=new HistoryArchive();
-    $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement);
+    $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement*$multipleLimit);
     if(!empty($historyInfoArchive)){
       foreach ($historyInfoArchive as $histArch){
         foreach ($historyInfo as $hist){
@@ -271,140 +272,187 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
 	    $notes = $result;
     }
   	///
-  	 $cp=1;
-  	   foreach ($notes as $idNote=>$note){
-         if($cp<=$activityStreamNumberElement ){
-          if(!empty($historyInfoLst)){
-           foreach ($historyInfoLst as $id=>$hist ){ // search for each note if there is a history information to display before
-              if($cp<=$activityStreamNumberElement){
-                if($hist->operationDate > $note->creationDate){
-                  if(!empty($mailsSend)){
-               	    foreach ($mailsSend as $idMail=>$mail){ // search for each history element if there is a mail information to display before
-                      if($cp<=$activityStreamNumberElement){
-                        if($mail->mailDateTime > $hist->operationDate){
-                          $resMail= activityStreamDisplayMail($mail,'activityStream');
-                          unset($mailsSend[$idMail]);
-                          if($resMail!=''){
-                            echo $resMail;
-                            $cp++;
-                            $countDisplay++;
-                          }
-                          continue;
-                        }
-                      }else{
-                        break;
-                      }
-                    }
-                    if($cp<=$activityStreamNumberElement){
-                      $resultHist= activityStreamDisplayHist($hist,"activityStream");
-                      unset($historyInfoLst[$id]);
-                      if($resultHist!=''){
-                        echo $resultHist;
-                        $cp++;
-                        $countDisplay++;
-                        continue;
-                      }
-                    }
-                  }else{
-                    if($cp<=$activityStreamNumberElement){
-                      $resultHist= activityStreamDisplayHist($hist,"activityStream");
-                      unset($historyInfoLst[$id]);
-                      if($resultHist!=''){
-                        echo $resultHist;
-                        $cp++;
-                        $countDisplay++;
-                      }
-                      continue;
-                    }else{
-                      break;
-                    }
-                  }
-                }
-              }else{
-                break;
-              }
-           }
-           if($cp<=$activityStreamNumberElement){
-         	  $resNote=activityStreamDisplayNote($note,"activityStream");
-         	  unset($notes[$idNote]);
-         	  if($resNote!=''){
-         	  	echo $resNote;
-         	  	$cp++;
-         	  	$countDisplay++;
-         	  }
-         	  continue;
-           }
-         }else{
-             $resNot=activityStreamDisplayNote($note,"activityStream");
-             unset($notes[$idNote]);
-             if($resNot!=''){
-              echo $resNot;
-              $cp++;
-              $countDisplay++;
-             }
-         }
-       }else{
-        break;
-       }
-     }
+//  	 $cp=1;
+//   	   foreach ($notes as $idNote=>$note){
+//          if($cp<=$activityStreamNumberElement ){
+//           if(!empty($historyInfoLst)){
+//            foreach ($historyInfoLst as $id=>$hist ){ // search for each note if there is a history information to display before
+//               if($cp<=$activityStreamNumberElement){
+//                 if($hist->operationDate > $note->creationDate){
+//                   if(!empty($mailsSend)){
+//                	    foreach ($mailsSend as $idMail=>$mail){ // search for each history element if there is a mail information to display before
+//                       if($cp<=$activityStreamNumberElement){
+//                         if($mail->mailDateTime > $hist->operationDate){
+//                           $resMail= activityStreamDisplayMail($mail,'activityStream');
+//                           unset($mailsSend[$idMail]);
+//                           if($resMail!=''){
+//                             echo $resMail;
+//                             $cp++;
+//                             $countDisplay++;
+//                           }
+//                           continue;
+//                         }
+//                       }else{
+//                         break;
+//                       }
+//                     }
+//                     if($cp<=$activityStreamNumberElement){
+//                       $resultHist= activityStreamDisplayHist($hist,"activityStream");
+//                       unset($historyInfoLst[$id]);
+//                       if($resultHist!=''){
+//                         echo $resultHist;
+//                         $cp++;
+//                         $countDisplay++;
+//                         continue;
+//                       }
+//                     }
+//                   }else{
+//                     if($cp<=$activityStreamNumberElement){
+//                       $resultHist= activityStreamDisplayHist($hist,"activityStream");
+//                       unset($historyInfoLst[$id]);
+//                       if($resultHist!=''){
+//                         echo $resultHist;
+//                         $cp++;
+//                         $countDisplay++;
+//                       }
+//                       continue;
+//                     }else{
+//                       break;
+//                     }
+//                   }
+//                 }
+//               }else{
+//                 break;
+//               }
+//            }
+//            if($cp<=$activityStreamNumberElement){
+//          	  $resNote=activityStreamDisplayNote($note,"activityStream");
+//          	  unset($notes[$idNote]);
+//          	  if($resNote!=''){
+//          	  	echo $resNote;
+//          	  	$cp++;
+//          	  	$countDisplay++;
+//          	  }
+//          	  continue;
+//            }
+//          }else{
+//              $resNot=activityStreamDisplayNote($note,"activityStream");
+//              unset($notes[$idNote]);
+//              if($resNot!=''){
+//               echo $resNot;
+//               $cp++;
+//               $countDisplay++;
+//              }
+//          }
+//        }else{
+//         break;
+//        }
+//      }
 	 
-     if($cp<=$activityStreamNumberElement and !empty($historyInfoLst)){
-       foreach ($historyInfoLst as $id=>$hist){
-        if( $cp<=$activityStreamNumberElement ){
-          if(!empty($mailsSend)){
-          	foreach ($mailsSend as $idMail=>$mail){
-              if($cp<=$activityStreamNumberElement){
-        		if($mail->mailDateTime > $hist->operationDate){
-                  $resMail=activityStreamDisplayMail($mail,'activityStream');
-                  unset($mailsSend[$idMail]);
-                  if($resMail!=''){
-                    echo $resMail;
-                	$cp++;
-                	$countDisplay++;
-                  }
-                  continue;
-                }
-              }else{
-                break;
-              }
-          	}
-          	if($cp<=$activityStreamNumberElement){
-              $resultHist= activityStreamDisplayHist($hist,"activityStream");
-              unset($historyInfoLst[$id]);
-              if($resultHist!=''){
-                echo $resultHist;
-                $cp++;
-                $countDisplay++;
-              }
-            }
-          }else{
-            $resultHist= activityStreamDisplayHist($hist,"activityStream");
-            unset($historyInfoLst[$id]);
-            if($resultHist!=''){
-              echo $resultHist;
-              $cp++;
-              $countDisplay++;
-            }
-          }
-        }
-       }
-     }
+//      if($cp<=$activityStreamNumberElement and !empty($historyInfoLst)){
+//        foreach ($historyInfoLst as $id=>$hist){
+//         if( $cp<=$activityStreamNumberElement ){
+//           if(!empty($mailsSend)){
+//           	foreach ($mailsSend as $idMail=>$mail){
+//               if($cp<=$activityStreamNumberElement){
+//         		if($mail->mailDateTime > $hist->operationDate){
+//                   $resMail=activityStreamDisplayMail($mail,'activityStream');
+//                   unset($mailsSend[$idMail]);
+//                   if($resMail!=''){
+//                     echo $resMail;
+//                 	$cp++;
+//                 	$countDisplay++;
+//                   }
+//                   continue;
+//                 }
+//               }else{
+//                 break;
+//               }
+//           	}
+//           	if($cp<=$activityStreamNumberElement){
+//               $resultHist= activityStreamDisplayHist($hist,"activityStream");
+//               unset($historyInfoLst[$id]);
+//               if($resultHist!=''){
+//                 echo $resultHist;
+//                 $cp++;
+//                 $countDisplay++;
+//               }
+//             }
+//           }else{
+//             $resultHist= activityStreamDisplayHist($hist,"activityStream");
+//             unset($historyInfoLst[$id]);
+//             if($resultHist!=''){
+//               echo $resultHist;
+//               $cp++;
+//               $countDisplay++;
+//             }
+//           }
+//         }
+//        }
+//      }
      
-     if($cp<=$activityStreamNumberElement and !empty($mailsSend)){
-        foreach ($mailsSend as $idMail=>$mail){
-          if($cp<=$activityStreamNumberElement){
-              $res= activityStreamDisplayMail($mail,'activityStream');
-              unset($mailsSend[$idMail]);
-              if($res!=''){
-                echo $res;
-                $cp++;
-                $countDisplay++;
-              }
-          }else{
-            break;
-          }
-       }
-     }
+//      if($cp<=$activityStreamNumberElement and !empty($mailsSend)){
+//         foreach ($mailsSend as $idMail=>$mail){
+//           if($cp<=$activityStreamNumberElement){
+//               $res= activityStreamDisplayMail($mail,'activityStream');
+//               unset($mailsSend[$idMail]);
+//               if($res!=''){
+//                 echo $res;
+//                 $cp++;
+//                 $countDisplay++;
+//               }
+//           }else{
+//             break;
+//           }
+//        }
+//      }
+  	 $all=array();
+  	 foreach ($notes as $idNote=>$note){
+  	   $date=$note->creationDate;
+  	   $key=$date.'-2-'.$idNote;
+  	   $all[$key]=array('type'=>'note','object'=>$note);
+  	 }
+  	 foreach ($historyInfoLst as $id=>$hist ){
+  	   $date=$hist->operationDate;
+  	   $key=$date.'-3-'.$id;
+  	   $all[$key]=array('type'=>'histo','object'=>$hist);
+  	 }
+  	 foreach ($mailsSend as $idMail=>$mail){
+  	   $date=substr($mail->mailDateTime,0,-2).'60';
+  	   $key=$date.'-1-'.$idMail;
+  	   $all[$key]=array('type'=>'mail','object'=>$mail);
+  	 }
+  	 krsort($all);
+  	 foreach ($all as $item) {
+  	   $type=$item['type'];
+  	   $object=$item['object'];
+  	   if ($type=='note') {
+  	     $resNot=activityStreamDisplayNote($object,"activityStream");
+  	     if($resNot){
+  	       echo $resNot;
+  	       $countDisplay++;
+  	     }  	     
+  	   } else if ($type=='histo') {
+  	     $resultHist= activityStreamDisplayHist($object,"activityStream");
+  	     if($resultHist){
+  	       echo $resultHist;
+  	       $countDisplay++;  	       
+  	     }
+  	   } else if ($type=='mail') {
+  	     $resMail=activityStreamDisplayMail($object,'activityStream'); 	    
+  	     if($resMail){
+  	       echo $resMail;
+  	       $countDisplay++;
+  	     }
+  	   } else {
+  	     // ERROR ;)
+  	   }
+  	   if ($countDisplay>=$activityStreamNumberElement) {
+  	     break;
+  	   }
+  	 }
+  	 
+  	 
      if($countDisplay==0 ){
       echo "<div style='padding:10px'>".i18n ( "noNoteToDisplay" )."</div>";
      }
