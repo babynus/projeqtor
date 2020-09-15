@@ -111,8 +111,7 @@ class ChangeRequestMain extends SqlElement {
                                   "approved"=>"nobr",
                                   "approvedDate"=>"nobr",
                                   "_lib_by"=>"nobr",
-                                  "idAffectable"=>"",
-                                  
+                                  "idAffectable"=>""
   );  
   
   private static $_colCaptionTransposition = array('idResource'=> 'responsible',
