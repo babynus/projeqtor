@@ -212,11 +212,10 @@ $historyInfoLst=array();
 $mailsSend=array();
 
 if($showOnlyNotes=='NO'){
-  
-  if(securityCheckDisplayMenu(null,'Mail') and securityGetAccessRightYesNo('menu'.'Mail', 'read', null)=="YES"){
+  //if(securityCheckDisplayMenu(null,'Mail') and securityGetAccessRightYesNo('menu'.'Mail', 'read', null)=="YES"){
     $mail= new Mail();
     $mailsSend=$mail->getSqlElementsFromCriteria(null,false,$clause,"mailDateTime DESC",null,true,$limitQuery);
-  }
+  //}
   
   ///// search elements in history  for display on ActivityStream 
   $history= new History();
@@ -411,21 +410,21 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
   	 $all=array();
   	 foreach ($notes as $idNote=>$note){
   	   $date=$note->creationDate;
-  	   $key=$date.'-2-'.$idNote;
+  	   $key=$date.'-2-'.$note->id;
   	   $all[$key]=array('type'=>'note','object'=>$note);
   	 }
   	 foreach ($historyInfoLst as $id=>$hist ){
   	   $date=$hist->operationDate;
-  	   $key=$date.'-1-'.$id;
+  	   $key=$date.'-1-'.$hist->id;
   	   $all[$key]=array('type'=>'histo','object'=>$hist);
   	 }
   	 foreach ($mailsSend as $idMail=>$mail){
   	   $date=substr($mail->mailDateTime,0,-2).'60';
-  	   $key=$date.'-3-'.$idMail;
+  	   $key=$date.'-3-'.$mail->id;
   	   $all[$key]=array('type'=>'mail','object'=>$mail);
   	 }
   	 krsort($all);
-  	 foreach ($all as $item) {
+  	 foreach ($all as $idItem=>$item) {
   	   $type=$item['type'];
   	   $object=$item['object'];
   	   if ($type=='note') {
