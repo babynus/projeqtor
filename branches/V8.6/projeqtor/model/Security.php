@@ -296,6 +296,7 @@ class Security
         $user=getSessionUser();
         $menuName='menu'.$refType;
         if ($menuName=='menuCalendarDefinition') $menuName='menuCalendar';
+        if ($menuName=='menuBudgetItem') $menuName='menuBudget';
         if (isLeavesSystemMenuByMenuName("menu".$refType)) {
           $showLeaveMenu=showLeavesSystemMenu("menu".$refType);
           if ( ! $showLeaveMenu) {
