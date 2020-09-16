@@ -210,7 +210,7 @@ class ConsolidationValidation extends SqlElement{
             $margin=$consValPproj->margin;
             $reelCons=$consValPproj->realWorkConsumed;
             $id=$projectsList[$i]->id;
-            $clauseWhere="idProject=$id and month > $concMonth";
+            $clauseWhere="idProject=$id and month > '".$concMonth."'";
             $afterConsValidated=$consValPproj->getSqlElementsFromCriteria(null,null,$clauseWhere);
             if(!empty($afterConsValidated)){
               $canChangeValidation=false;

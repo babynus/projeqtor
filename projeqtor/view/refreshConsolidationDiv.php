@@ -42,7 +42,7 @@ $project=new Project($reelIdProj);
 $prof=$curUser->getProfile($project);
 $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$reelIdProj,"month"=>$month));
 if($consValPproj->id!=''){
-  $clauseWhere="idProject=$reelIdProj and month > $month";
+  $clauseWhere="idProject=$reelIdProj and month > '".$month."'";
   $consValPprojAfter=$consValPproj->getSqlElementsFromCriteria(null,null,$clauseWhere);
   if(!empty($consValPprojAfter)){
     $canChangeValidation=false;
@@ -50,7 +50,7 @@ if($consValPproj->id!=''){
 }
 if($mode!='validaTionCons' and $mode!='cancelCons'){
   $lockImp= new LockedImputation();
-  $where="idProject=$projId and month<$month";
+  $where="idProject=$projId and month< '".$month."'";
   $critArray= array('idProject'=>$projId,'month'=>$month);
   $lock = SqlElement::getSingleSqlElementFromCriteria('LockedImputation', array("idProject"=>$reelIdProj,"month"=>$month));
   $lock=($mode=="UnLocked")?'':$lock->month;
