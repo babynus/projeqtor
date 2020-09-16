@@ -137,7 +137,7 @@ if($mode !='validaTionCons' and $mode!='cancelCons'){
 //     if(!empty($lstImpLocked)){
 //       $lockedImpProjects= new LockedImputation();
 //       $lstImpLocked=implode(',', $lstImpLocked);
-//       $clause="id in ($lstImpLocked) and month = $month";
+//       $clause="id in ($lstImpLocked) and month = '".$month."'";
 //       $res=$lockedImpProjects->purge($clause);
 //     }
   }else {
