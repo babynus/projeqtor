@@ -2443,6 +2443,8 @@ class PlanningElement extends SqlElement {
   			$this->revenue = $sumActPlEl;
   		}else if($sumProjlEl>0 and ($asSubProj or $asSubAct)){
   			$this->revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
+  		}else{
+  		  $this->revenue = 0;
   		}
   	}
   	$this->updateCA();
