@@ -1566,7 +1566,7 @@ function securityCheckPage($page) {
     traceHack("securityCheckPage($page) - '".dirname(realpath($path))."' is not in allowed folders list");
     exit(); // Not required : traceHack already exits script
   }
-  if (dirname(realpath($path))==realpath("../tool/") and substr($page,0,12)!='../tool/json') {
+  if (dirname(realpath($path))==realpath("../tool/") and substr($page,0,12)!='../tool/json' and substr($page,0,32)!='../tool/adminFunctionalities.php') {
     traceHack("securityCheckPage($page) - '".dirname(realpath($path))."' is not in allowed except for json queries");
     exit(); // Not required : traceHack already exits script
   }
