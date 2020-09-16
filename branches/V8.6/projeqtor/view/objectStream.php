@@ -40,6 +40,7 @@
   if (! isset($objectId)) $objectId=RequestHandler::getId('objectId');
   if($objectClass=='ResourcePlanning')$objectClass='PlanningElement';
   if(RequestHandler::getValue('productVersionsListId')!=null and $objectClass=='')$objectClass='PlanningElement';
+  if ($objectClass=='TicketSimple') $objectClass='Ticket';
   $obj=new $objectClass($objectId);
   $objectIsClosed=(isset($obj) and property_exists($obj, 'idle') and $obj->idle)?true:false;
   $canUpdate=securityGetAccessRightYesNo('menu' . $objectClass, 'update', $obj) == "YES";
@@ -68,14 +69,13 @@
   
   if($showOnlyNotes=='NO'){
     
-    if(securityCheckDisplayMenu(null,'Mail') and securityGetAccessRightYesNo('menu'.'Mail', 'read', '')=="YES"){
+    //if(securityCheckDisplayMenu(null,'Mail') and securityGetAccessRightYesNo('menu'.'Mail', 'read', '')=="YES"){
       $mailable= new Mailable();
       $idType=SqlElement::getSingleSqlElementFromCriteria('Mailable',array("name"=>$objectClass));
       $clause=array('refType'=>$idType->id,'refId'=>$objectId);
       $mail= new Mail();
       $mailsSend=$mail->getSqlElementsFromCriteria($clause,null,null,"mailDateTime ASC");
-    }
-    
+    //}
     
     $clauseWhere="refType='$objectClass' and refId=$objectId and ((operation='update' and colName='idStatus')  or (operation='insert' and (colName is null  or colName like ('Link|%'))) or (operation='delete'  and colName not like ('Link|%'))) ";
     if($objectId)$historyInfo=$history->getSqlElementsFromCriteria(null,null,$clauseWhere,"operationDate ASC");
