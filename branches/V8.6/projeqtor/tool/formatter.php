@@ -552,7 +552,10 @@ function activityStreamDisplayNote ($note,$origin){
   if ($inlineUserThumb) $userNameFormatted = '<span style="position:relative;margin-left:20px"><div style="position:absolute;top:-1px;left:-30px;width:25px">'.formatUserThumb($note->idUser, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span ><strong>' . $userName . '</strong></span>';
   $idNote = '<span>#' . $note->id . '</span>';
-  $ticketName = '<span class="streamLink" style="margin-left:18px;position:relative;" onClick="gotoElement(\''.htmlEncode($note->refType).'\',\''.htmlEncode($note->refId).'\')">' 
+  $objectClass=$note->refType;
+  $objectId=$note->refId;
+  if ($objectClass=='Ticket' and ! securityCheckDisplayMenu(null, $objectClass)) $objectClass='TicketSimple';
+  $ticketName = '<span class="streamLink" style="margin-left:18px;position:relative;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($note->refId).'\')">' 
       .'<div style="width:16px;position:absolute">'. formatIcon($note->refType, 16) . '</div>' . i18n($note->refType) . ' #' . $note->refId ;
   $ticketName.='</span>';
   if ($origin=='activityStream') $ticketName.=' | '.SqlList::getNameFromId($note->refType, $note->refId);
@@ -561,8 +564,7 @@ function activityStreamDisplayNote ($note,$origin){
   else  $colCommentStream = i18n ( 'activityStreamCreationComment', array ($idNote ) );
   if (!$user) $user=getSessionUser();
   if (!$userRessource) $userRessource=new Affectable($user->id);
-  $objectClass=$note->refType;
-  $objectId=$note->refId;
+
   $obj=new $objectClass($objectId,true);
   $canUpdate=securityGetAccessRightYesNo('menu' . $objectClass, 'update', $obj) == "YES";
   $canRead=securityGetAccessRightYesNo('menu' . $objectClass, 'read', $obj) == "YES";
@@ -774,16 +776,17 @@ function activityStreamDisplayHist ($hist,$origin){
     $linkedClass=$linkExpl[2];
     $linkedId=$linkExpl[3];
   }
+  if ($objectClass=='Ticket' and ! securityCheckDisplayMenu(null, $objectClass)) $objectClass='TicketSimple';
   $rightAcces=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'combo'));
   $testObj=new $objectClass($objectId,true);
   if (securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', $testObj)=="YES") {
-    if($rightAcces->rightAccess==1){
+    //if($rightAcces->rightAccess==1){
       $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
-    }
+    //}
   }else{
     return;
   }
-  $elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n($objectClass).'&nbsp;#'.$objectId.'</span>';
+  $elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
     $tmpName=SqlList::getNameFromId($objectClass, $objectId);
     if ($tmpName!=$objectId) $elementName.='&nbsp;|&nbsp;'.$tmpName;
@@ -905,12 +908,13 @@ function activityStreamDisplayMail($mail,$origin){
   if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
   $testObj=($objectClass)?new $objectClass($objectId):null;
+  if ($objectClass=='Ticket' and !securityCheckDisplayMenu(null, $objectClass)) $objectClass='TicketSimple';
   if ($mail->idMailable!='' and  securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', $testObj)=="YES") {
     $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
   } else {
     return;
   }
-  if($mail->idMailable!='')$elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n($objectClass).'&nbsp;#'.$objectId.'</span>';
+  if($mail->idMailable!='')$elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
     $tmpName=SqlList::getNameFromId($objectClass, $objectId);
     if ($tmpName!=$objectId) $elementName.='&nbsp;|&nbsp;'.$tmpName;
