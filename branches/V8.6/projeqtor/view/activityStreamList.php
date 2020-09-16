@@ -203,9 +203,11 @@ if ($activityStreamShowClosed!='1') {
 
 
 $multipleLimit=100; // To avoid reading all elements, while taking into account fact that retreived data may not be display depending on access right, multiplicated retreived max number
+$limitQuery=$activityStreamNumberElement*$multipleLimit;
+if ($limitQuery<10000) $limitQuery=10000;
 //echo '<br/>';
 $order = "COALESCE (updateDate,creationDate) DESC";
-$notes=$note->getSqlElementsFromCriteria(null,false,$critWhere,$order,null,true,$activityStreamNumberElement*$multipleLimit);
+$notes=$note->getSqlElementsFromCriteria(null,false,$critWhere,$order,null,true,$limitQuery);
 $historyInfoLst=array();
 $mailsSend=array();
 
@@ -213,15 +215,15 @@ if($showOnlyNotes=='NO'){
   
   if(securityCheckDisplayMenu(null,'Mail') and securityGetAccessRightYesNo('menu'.'Mail', 'read', null)=="YES"){
     $mail= new Mail();
-    $mailsSend=$mail->getSqlElementsFromCriteria(null,false,$clause,"mailDateTime DESC",null,true,$activityStreamNumberElement*$multipleLimit);
+    $mailsSend=$mail->getSqlElementsFromCriteria(null,false,$clause,"mailDateTime DESC",null,true,$limitQuery);
   }
   
   ///// search elements in history  for display on ActivityStream 
   $history= new History();
-  $historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,true,$activityStreamNumberElement*$multipleLimit);
+  $historyInfo=$history->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC, id desc",null,true,$limitQuery);
   if($activityStreamShowClosed =='1'){
     $historyArchive=new HistoryArchive();
-    $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC",null,null,$activityStreamNumberElement*$multipleLimit);
+    $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$where,"operationDate DESC, id desc",null,null,$limitQuery);
     if(!empty($historyInfoArchive)){
       foreach ($historyInfoArchive as $histArch){
         foreach ($historyInfo as $hist){
