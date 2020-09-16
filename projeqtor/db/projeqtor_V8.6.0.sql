@@ -322,6 +322,12 @@ UPDATE ${prefix}history set idProject=(select idProject from ${prefix}provideror
 UPDATE ${prefix}history set idProject=(select idProject from ${prefix}providerbill e where e.id=${prefix}history.refId and ${prefix}history.refType='ProviderBill') where refType='ProviderBill';
 
 -- ==========================================
+-- Fix for PG
+-- ==========================================
+UPDATE ${prefix}planningmode set id=16 where id=15;
+UPDATE ${prefix}planningelement set idPlanningMode=16 where idPlanningMode=15;
+
+-- ==========================================
 -- Patchs IGE
 -- ==========================================
 ALTER TABLE `${prefix}leavetype` ADD COLUMN `sortOrder` int(3) unsigned default NULL COMMENT '3';
