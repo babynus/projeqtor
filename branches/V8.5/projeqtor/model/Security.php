@@ -297,6 +297,7 @@ class Security
         $accessRightList = $user->getAccessControlRights ();
         $menuName='menu'.$refType;
         if ($menuName=='menuCalendarDefinition') $menuName='menuCalendar';
+        if ($menuName=='menuBudgetItem') $menuName='menuBudget';
         if ( !isset($accessRightList[$menuName]) or !isset($accessRightList[$menuName]['read']) or $accessRightList[$menuName]['read']=='NO' ) {
           traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
         } else {
