@@ -53,7 +53,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
 
 <div style="width: 100%; margin: 0 auto; height: 90px; padding-bottom: 2px; border-bottom: 1px solid #CCC;background-color:#FFFFFF">
   <form id="activityStreamForm" name="activityStreamForm">
-		<table width="100%" class="activityStream">
+		<table width="100%" class="activityStream" style="margin-left:10px;">
 			<tr>
 				<td valign="top" width="20%">
 				  <table >
