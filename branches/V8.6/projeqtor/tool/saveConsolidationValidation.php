@@ -40,7 +40,6 @@ $user=getSessionUser();
 $res=array();
 $lstCons=array();
 $lock=($mode=='Locked')?$month:"";
-debugLog($lock);
 //___get Recursive Sub Projects___//
 foreach ($lstProj as $id=>$val){  
   $val=(($mode =='validaTionCons' or $mode=='cancelCons') and $all=='false')?substr($val,6):$val;
