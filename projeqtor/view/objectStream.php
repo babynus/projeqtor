@@ -156,60 +156,101 @@
   	    sortNotes($notes, $result, null);
   	    $notes = $result;
 	    }
-	    //florent ticket 4728
-	    foreach ( $notes as $idNote=>$note ) {
-          if(!empty($historyInfoLst)){
-            foreach ($historyInfoLst as $id=>$hist){
-              if($hist->operationDate < $note->creationDate){
-                 if(!empty($mailsSend)){
-                 	foreach ($mailsSend as $idMail=>$mail){
-                      if($mail->mailDateTime < $hist->operationDate){
-                      	echo activityStreamDisplayMail($mail, "objectStream");
-                      	unset($mailsSend[$idMail]);
-                      }
-                    }
-                    echo activityStreamDisplayHist($hist, "objectStream");
-                    unset($historyInfoLst[$id]);
-                 }else{
-                    echo activityStreamDisplayHist($hist,"objectStream");
-                    unset($historyInfoLst[$id]);
-                 }
-              }
-            }
-            echo activityStreamDisplayNote ($note,"objectStream");
-            unset($notes[$idNote]);
-            continue;
-          }else{
-            echo activityStreamDisplayNote ($note,"objectStream");
-            unset($notes[$idNote]);
-          }
-	    }
+	    //florent ticket 4728	    
+// 	    foreach ( $notes as $idNote=>$note ) {
+//           if(!empty($historyInfoLst)){
+//             foreach ($historyInfoLst as $id=>$hist){
+//               if($hist->operationDate < $note->creationDate){
+//                  if(!empty($mailsSend)){
+//                  	foreach ($mailsSend as $idMail=>$mail){
+//                       if($mail->mailDateTime < $hist->operationDate){
+//                       	echo activityStreamDisplayMail($mail, "objectStream");
+//                       	unset($mailsSend[$idMail]);
+//                       }
+//                     }
+//                     echo activityStreamDisplayHist($hist, "objectStream");
+//                     unset($historyInfoLst[$id]);
+//                  }else{
+//                     echo activityStreamDisplayHist($hist,"objectStream");
+//                     unset($historyInfoLst[$id]);
+//                  }
+//               }
+//             }
+//             echo activityStreamDisplayNote ($note,"objectStream");
+//             unset($notes[$idNote]);
+//             continue;
+//           }else{
+//             echo activityStreamDisplayNote ($note,"objectStream");
+//             unset($notes[$idNote]);
+//           }
+// 	    }
 	    
-	    if(!empty($historyInfoLst)){
-          foreach ($historyInfoLst as $id=>$hist){
-            if(!empty($mailsSend)){
-            	foreach ($mailsSend as $idMail=>$mail){
-            		if($mail->mailDateTime < $hist->operationDate){
-            			echo activityStreamDisplayMail($mail, "objectStream");
-            			unset($mailsSend[$idMail]);
-            		}
-            	}
-            	echo activityStreamDisplayHist($hist, "objectStream");
-            	unset($historyInfoLst[$id]);
-            	continue;
-            }else{         
-              echo activityStreamDisplayHist($hist,"objectStream");
-              unset($historyInfoLst[$id]);
+// 	    if(!empty($historyInfoLst)){
+//           foreach ($historyInfoLst as $id=>$hist){
+//             if(!empty($mailsSend)){
+//             	foreach ($mailsSend as $idMail=>$mail){
+//             		if($mail->mailDateTime < $hist->operationDate){
+//             			echo activityStreamDisplayMail($mail, "objectStream");
+//             			unset($mailsSend[$idMail]);
+//             		}
+//             	}
+//             	echo activityStreamDisplayHist($hist, "objectStream");
+//             	unset($historyInfoLst[$id]);
+//             	continue;
+//             }else{         
+//               echo activityStreamDisplayHist($hist,"objectStream");
+//               unset($historyInfoLst[$id]);
+//             }
+//           }
+//         }
+        
+//         if(!empty($mailsSend)){
+//           foreach ($mailsSend as $idMail=>$mail){
+//           	echo activityStreamDisplayMail($mail, "objectStream");
+//             unset($mailsSend[$idMail]);
+//           }
+//         }
+          //florent ticket 4728
+          $all=array();
+          foreach ($notes as $idNote=>$note){
+            $date=$note->creationDate;
+            $key=$date.'-2-'.$idNote;
+            $all[$key]=array('type'=>'note','object'=>$note);
+          }
+          foreach ($historyInfoLst as $id=>$hist ){
+            $date=$hist->operationDate;
+            $key=$date.'-1-'.$id;
+            $all[$key]=array('type'=>'histo','object'=>$hist);
+          }
+          foreach ($mailsSend as $idMail=>$mail){
+            $date=substr($mail->mailDateTime,0,-2).'60';
+            $key=$date.'-3-'.$idMail;
+            $all[$key]=array('type'=>'mail','object'=>$mail);
+          }
+          krsort($all);
+          $all=array_reverse($all);
+          foreach ($all as $item) {
+            $type=$item['type'];
+            $object=$item['object'];
+            if ($type=='note') {
+              $resNot=activityStreamDisplayNote($object,"objectStream");
+              if($resNot){
+                echo $resNot;
+              }
+            } else if ($type=='histo') {
+              $resultHist= activityStreamDisplayHist($object,"objectStream");
+              if($resultHist){
+                echo $resultHist;
+              }
+            } else if ($type=='mail') {
+              $resMail=activityStreamDisplayMail($object,'objectStream');
+              if($resMail){
+                echo $resMail;
+              }
+            } else {
+              // ERROR ;)
             }
           }
-        }
-        
-        if(!empty($mailsSend)){
-          foreach ($mailsSend as $idMail=>$mail){
-          	echo activityStreamDisplayMail($mail, "objectStream");
-            unset($mailsSend[$idMail]);
-          }
-        }
 	    
 	    ?>
 	    <tr><td><div id="scrollToBottom" style="display:block"></div></td></tr>
