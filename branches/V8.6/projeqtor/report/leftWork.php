@@ -183,8 +183,8 @@ foreach ($resources as $idR=>$nameR) {
           if (array_key_exists($idP, $result[$idR])) {
             $val=$result[$idR][$idP];
             echo Work::displayWorkWithUnit($val);
-            $sumRes+=$val;
-            $sum+=$val;
+            $sumRes=round($sumRes+$val,2);
+            $sum=round($sum+$val,2);
           }
         }
         echo '</td>';
