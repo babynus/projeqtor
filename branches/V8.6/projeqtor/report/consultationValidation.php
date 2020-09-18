@@ -26,8 +26,8 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
-include_once '../tool/projeqtor.php';
-
+require_once '../tool/projeqtor.php';
+include_once('../tool/formatter.php');
 $paramProject = trim(RequestHandler::getId('idProject'));
 $paramProjectType = trim(RequestHandler::getId('idProjectType'));
 $idOrganization = trim(RequestHandler::getId('idOrganization'));
@@ -60,7 +60,7 @@ include "header.php";
 /*__________________________________________________*/
 
 $compStyle='font-size:10px;';
-$lstVisibleProj=ConsolidationValidation::getVisibleProjectToConsolidated($paramProject, $paramProjectType, $idOrganization);
+$lstVisibleProj=ConsolidationValidation::getVisibleProjectToConsolidated($paramProject, $paramProjectType, $idOrganization,true);
 $lstProj=$lstVisibleProj[0];
 $month=(strlen($paramMonth)==1)?'0'.$paramMonth:$paramMonth;
 $concMonth=$paramYear.$month;
