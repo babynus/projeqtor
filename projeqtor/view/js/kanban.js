@@ -190,9 +190,11 @@ function plgAddKanban(){
   var name=dijit.byId("kanbanName").get("value");
   var type=dijit.byId("kanbanTypeList").get("value");
   var shared=dijit.byId("kanbanShared").get("value");
-  if(name.trim()!=''){
+  console.log(type);
+
+  if(name.trim()!='' && type!=''){
     showWait();
-	dojo.xhrPost({
+  dojo.xhrPost({
     url : "../tool/kanbanAdd.php?name="+name+"&type="+type+"&shared="+shared,
     form : "kanbanResultForm",
     handleAs : "text",
@@ -207,7 +209,13 @@ function plgAddKanban(){
     }
   });
   }else{
-    showAlert(i18n('messageMandatory',[i18n('colName')]));
+    if(type=='' && name.trim()==''){
+      showAlert(i18n('messageMandatory',[i18n('Type')])+'</br>'+i18n('messageMandatory',[i18n('colName')]));
+    }else if(type==''){
+      showAlert(i18n('messageMandatory',[i18n('Type')]));
+    }else if(name.trim()==''){
+      showAlert(i18n('messageMandatory',[i18n('colName')]));
+    }
   }
 }
 
