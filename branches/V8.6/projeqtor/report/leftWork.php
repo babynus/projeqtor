@@ -62,7 +62,7 @@ if($paramProjectType!=''){
   $where.= " and idProject in ". transformListIntoInClause($listProject);
 }
 $order="";
-$work=new PlannedWork();
+$work=new Assignment();
 $lstWork=$work->getSqlElementsFromCriteria(null,false, $where, $order);
 $result=array();
 $projects=array();
@@ -82,7 +82,7 @@ foreach ($lstWork as $work) {
   if (! array_key_exists($work->idProject,$result[$work->idResource])) {
     $result[$work->idResource][$work->idProject]=0;
   }
-  $result[$work->idResource][$work->idProject]+=$work->work;
+  $result[$work->idResource][$work->idProject]=round($result[$work->idResource][$work->idProject]+$work->leftWork,2);
 }
 
 if (checkNoData($result)) exit;
@@ -121,12 +121,11 @@ foreach ($resources as $idR=>$nameR) {
       if (array_key_exists($idR, $result)) {
         if (array_key_exists($idP, $result[$idR])) {
           $val=$result[$idR][$idP];
-          $sumProj[$idP]+=$val;
+          $sumProj[$idP]=round($sumProj[$idP]+$val,2);
         }
       }
     }
 }
-
 
 $nbProj=0;
 $hasCode=false;
@@ -185,6 +184,7 @@ foreach ($resources as $idR=>$nameR) {
             echo Work::displayWorkWithUnit($val);
             $sumRes=round($sumRes+$val,2);
             $sum=round($sum+$val,2);
+            
           }
         }
         echo '</td>';
