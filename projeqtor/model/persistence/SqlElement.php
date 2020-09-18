@@ -3786,14 +3786,14 @@ abstract class SqlElement {
       $to [] = 'int';
             
       $type = str_ireplace ( $from, $to, $type );
+      if (substr($type,0,3)=='int') $type=trim(str_replace('unsigned','',$type));
       if ($fieldName=='id') {
         $type='int(12)';
-      } else if ($type=='int' or $type=='int(10)') {
+      } else if ($type=='int' or $type=='int(10)' or $type=='int(11)') {
         $tableName=$obj->getDatabaseTableName();
         $dbName=Parameter::getGlobalParameter('paramDbName');
         $sqlColumn="SELECT COLUMN_COMMENT as comment FROM INFORMATION_SCHEMA.COLUMNS "
            ." WHERE TABLE_SCHEMA='$dbName' AND TABLE_NAME='$tableName' AND COLUMN_NAME='$dbFieldName'";
-        if ($class=='ActivityPlanningElement') debugLog("$sqlColumn");
         if ($class=='ActivityPlanningElement') debugLog("$sqlColumn");
         $resultColumn=Sql::query($sqlColumn);
         $line=Sql::fetchLine($resultColumn);
