@@ -3749,8 +3749,8 @@ abstract class SqlElement {
     }
     $result = Sql::query ( $query );
     while ( $line = Sql::fetchLine ( $result ) ) {
-      $fieldName = (isset ( $line ['Field'] )) ? $line ['Field'] : $line ['field'];
-      $fieldName = $obj->getDatabaseColumnNameReversed ( $fieldName );
+      $dbFieldName = (isset ( $line ['Field'] )) ? $line ['Field'] : $line ['field'];
+      $fieldName = $obj->getDatabaseColumnNameReversed ( $dbFieldName );
       $type = (isset ( $line ['Type'] )) ? $line ['Type'] : $line ['type'];
       $from = array();
       $to = array();
@@ -3788,16 +3788,27 @@ abstract class SqlElement {
       $type = str_ireplace ( $from, $to, $type );
       if ($fieldName=='id') {
         $type='int(12)';
-      } else if ($type=='int') {
+      } else if ($type=='int' or $type=='int(10)') {
         $tableName=$obj->getDatabaseTableName();
         $dbName=Parameter::getGlobalParameter('paramDbName');
         $sqlColumn="SELECT COLUMN_COMMENT as comment FROM INFORMATION_SCHEMA.COLUMNS "
-           ." WHERE TABLE_SCHEMA='$dbName' AND TABLE_NAME='$tableName' AND COLUMN_NAME='$fieldName'";
+           ." WHERE TABLE_SCHEMA='$dbName' AND TABLE_NAME='$tableName' AND COLUMN_NAME='$dbFieldName'";
+        if ($class=='ActivityPlanningElement') debugLog("$sqlColumn");
+        if ($class=='ActivityPlanningElement') debugLog("$sqlColumn");
         $resultColumn=Sql::query($sqlColumn);
         $line=Sql::fetchLine($resultColumn);
         if ($line and isset($line['comment'])) $type='int('.$line['comment'].')';
       }
-      $formatList [strtolower ( $fieldName )] = $type;
+      $formatList [strtolower($fieldName)]=$type;
+      if ($class=='ActivityPlanningElement') debugLog(strtolower($fieldName)." => $type");
+      if (strtolower($fieldName)=='idplanningmode') {
+        $pmFld='id'.str_replace('PlanningElement', '', $class).'PlanningMode';
+        $formatList [strtolower ( $pmFld )] = $type;
+        if ($class=='ActivityPlanningElement') debugLog(strtolower ( $pmFld )." => $type");
+      } else if ($fieldName=='id'.str_replace('PlanningElement', '', $class).'PlanningMode') {
+        $formatList ['idplanningmode'] = $type;
+        if ($class=='ActivityPlanningElement') debugLog("idplanningmode => $type");
+      }
     }
     self::$_tablesFormatList [$class] = $formatList;
     setSessionValue ( '_tablesFormatList', self::$_tablesFormatList ); // store session value (as initalized)

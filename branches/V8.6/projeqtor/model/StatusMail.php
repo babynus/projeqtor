@@ -163,20 +163,20 @@ class StatusMail extends SqlElement {
     if (! trim($this->idMailable)) {
     	$result.='<br/>' . i18n('messageMandatory',array(i18n('colElement')));
     }
-    $crit="idMailable='" . Sql::fmtId($this->idMailable) . "'";
+    $crit="idMailable=" . Sql::fmtId($this->idMailable);
     if (trim($this->idStatus)) {
-    	$crit.=" and idStatus='" . Sql::fmtId($this->idStatus) . "'";
+    	$crit.=" and idStatus=" . Sql::fmtId($this->idStatus) ;
     }
     if (trim($this->idEventForMail)) {
-      $crit.=" and idEventForMail='" . Sql::fmtId($this->idEventForMail) . "'";
+      $crit.=" and idEventForMail=" . Sql::fmtId($this->idEventForMail);
     }
     if (trim($this->idType)) {
-      $crit.=" and idType='" . Sql::fmtId($this->idType) . "'";
+      $crit.=" and idType=" . Sql::fmtId($this->idType);
     } else {
       $crit.=" and idType is null";	
     }
     if(property_exists($this, 'idProject') and $this->idProject){
-      $crit.=  " and idProject='" . Sql::fmtId($this->idProject) . "'";
+      $crit.=  " and idProject=" . Sql::fmtId($this->idProject);
     } else {
       $crit.=  " and idProject is null";
     }

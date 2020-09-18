@@ -48,8 +48,8 @@ if (isset($objectClass) and isset($objectId)) {
   $idTextable=SqlList::getIdFromTranslatableName('Textable', $refType);
   echo ("refType=$refType, idType=$idType, idTextable=$idTextable");
 }
-$crit="scope='Note' and (idTextable is null or idTextable='" . Sql::fmtId($idTextable) ."')";
-$crit.=" and (idType is null or idType='" . Sql::fmtId($idType) ."') and idle=0";
+$crit="scope='Note' and (idTextable is null or idTextable=" . Sql::fmtId($idTextable) .")";
+$crit.=" and (idType is null or idType=" . Sql::fmtId($idType) .") and idle=0";
 
 $txt=new PredefinedNote();
 $list=$txt->getSqlElementsFromCriteria(null, false, $crit, 'name asc');
