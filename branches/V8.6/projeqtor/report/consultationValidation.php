@@ -73,6 +73,7 @@ $revenueTotal=0;
 $marginTotal=0;
 $reelConsTotal=0;
 
+
 // top board
 echo '<table  style="width:90%;margin-left:5%;margin-right:5%;" '.excelName().'>';
 echo ' <tr>';
@@ -116,16 +117,7 @@ if(isset($lstProj) and is_array($lstProj)){
     }
     $colorCons=($consolidation==i18n('displayYes'))?"color:green;":"color:red;";
     $projectCode=($proj->projectCode!='')?$proj->projectCode:'-';
-
-    if($proj->ProjectPlanningElement->topId=='' and $proj->ProjectPlanningElement->topRefId==''){
-      $revenueTotal+=$revenue;
-      $validatedWorkTotal+=$validatedWork;
-      $reelTotal+=$reel;
-      $reelConsTotal+=$reelCons;
-      $leftWorkTotal+=$leftWork;
-      $plannedWorkTotal+=$plannedWork;
-      $marginTotal+=$margin;
-    }
+    
     $wbs=$proj->ProjectPlanningElement->wbsSortable;
     $split=explode('.', $wbs);
     $level=0;
@@ -139,7 +131,15 @@ if(isset($lstProj) and is_array($lstProj)){
     for ($j=1; $j<=$level; $j++) {
       $tab.='&nbsp;&nbsp;&nbsp;';
     }
-    
+    if($level==0){
+      $revenueTotal+=$revenue;
+      $validatedWorkTotal+=$validatedWork;
+      $reelTotal+=$reel;
+      $reelConsTotal+=$reelCons;
+      $leftWorkTotal+=$leftWork;
+      $plannedWorkTotal+=$plannedWork;
+      $marginTotal+=$margin;
+    }
     
     echo '  <tr>';
       echo '   <td class="reportTableData" style="border-right:1px solid grey;text-align:left;'.$compStyle.'" '.excelFormatCell('data',40,null,null,null,'left').' >&nbsp;'.$tab.$proj->name.'</td>';
