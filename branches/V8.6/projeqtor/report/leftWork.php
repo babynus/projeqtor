@@ -204,5 +204,5 @@ foreach ($projects as $id=>$name) {
   if($sumProj[$id] != 0)
     echo '<td class="reportTableColumnHeader" '.excelFormatCell('subheader').'>' . Work::displayWorkWithUnit($sumProj[$id]) . '</td>';
 }
-echo '<td class="reportTableHeader" '.excelFormatCell('header').'>' . Work::displayWorkWithUnit($sum) . '</td></tr>';
+echo '<td style="white-space:nowrap;" class="reportTableHeader" '.excelFormatCell('header').'>' . Work::displayWorkWithUnit($sum) . '</td></tr>';
 echo '</table>';
