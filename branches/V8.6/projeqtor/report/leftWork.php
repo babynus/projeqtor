@@ -133,11 +133,12 @@ $arrayCodes=array();
 foreach ($projects as $id=>$name) {
   $idExplo=explode('-',$id);
   $idS=$idExplo[1];
-  if($sumProj[$idS] != 0)
+  if($sumProj[$idS] != 0){
     $cdProj=SqlList::getFieldFromId('Project',$idS,'projectCode');
   $arrayCodes[$id]=($cdProj)?$cdProj:'&nbsp;';
   if (trim($cdProj)!='') $hasCode=true;
   $nbProj+=1;
+}
 }
 if($nbProj != 0)
   $colWidth=round(80/$nbProj);
