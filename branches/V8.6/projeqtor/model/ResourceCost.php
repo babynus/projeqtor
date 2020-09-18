@@ -93,7 +93,7 @@ class ResourceCost extends SqlElement {
     if ($this->startDate and $new) {
       $where="idResource='" . Sql::fmtId($this->idResource) . "' and idRole='" . Sql::fmtId($this->idRole) . "' ";
       $where.=" and endDate is null";
-      $where.=" and id<>'" . Sql::fmtId($id) . "'";
+      $where.=" and id<>" . Sql::fmtId($id);
       $rc=new ResourceCost();
       $precs=$rc->getSqlElementsFromCriteria(null, false, $where);
       if (count($precs)==1) {
@@ -170,7 +170,7 @@ class ResourceCost extends SqlElement {
       $where="idResource='" . Sql::fmtId($this->idResource) . "' and idRole='" . Sql::fmtId($this->idRole)
         . "' and (endDate is not null ".((Sql::isMysql())?"and endDate<>'0000-00-00'":""). ")";
       if ($this->id) {
-        $where.=" and id<>'" . Sql::fmtId($this->id) . "'";
+        $where.=" and id<>" . Sql::fmtId($this->id);
       }
       $order="endDate desc";
       $rc=new ResourceCost();
@@ -236,7 +236,7 @@ class ResourceCost extends SqlElement {
       $where.=" and idRole='" . Sql::fmtId($this->idRole) . "' ";
       $where.=" and (endDate is null " .((Sql::isMysql())?"or endDate='0000-00-00'":"") .")";
       if ($this->id) {
-        $where.=" and id<>'" . $this->id . "'";
+        $where.=" and id<>" . $this->id;
       }
       $rc=new ResourceCost();       
       $precs=$rc->getSqlElementsFromCriteria(null, false, $where);

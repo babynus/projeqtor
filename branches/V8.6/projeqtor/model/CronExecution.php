@@ -124,7 +124,7 @@ class CronExecution extends SqlElement {
   
   public static function drawCronExecutionDefintion($scope) {
     $cronExecution=null;
-    $cronExecution=SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'cron'.$scope));
+    $cronExecution=SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'cron'.ucfirst($scope)));
     if (!$cronExecution->id) {
       $cronExecution->idle=1;
     }
