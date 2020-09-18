@@ -544,7 +544,7 @@
       if (property_exists($obj,$type) ) {
         $crit.=' and (idType is null ';
         if ($obj->$type) {
-          $crit.=" or idType='".$obj->$type."'";
+          $crit.=" or idType=".$obj->$type;
         }
         $crit.=')';
   		}

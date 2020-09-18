@@ -320,14 +320,14 @@ class IndicatorDefinition extends SqlElement {
     if ($this->warningValue!="" and ! trim($this->idWarningDelayUnit) ) {
       $result.='<br/>' . i18n('messageMandatory',array(i18n('colUnit')));
     }    
-    $crit="idIndicatorable='" . trim($this->idIndicatorable) . "' and idIndicator='" . trim($this->idIndicator) . "'";
+    $crit="idIndicatorable='" . trim($this->idIndicatorable) . "' and idIndicator=" . trim($this->idIndicator) ;
     if (trim($this->idType)) {
-      $crit.=" and idType='" . Sql::fmtId($this->idType) . "'";
+      $crit.=" and idType=" . Sql::fmtId($this->idType);
     } else {
       $crit.=" and idType is null";
     }
     if(property_exists($this, 'idProject') and $this->idProject){
-      $crit.=  " and idProject='" . Sql::fmtId($this->idProject) . "'";
+      $crit.=  " and idProject=" . Sql::fmtId($this->idProject) ;
     } else {
       $crit.=  " and idProject is null";
     }
