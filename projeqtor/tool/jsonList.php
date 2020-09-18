@@ -96,7 +96,7 @@ if ($type == 'empty') {
   $emTp = new EmailTemplate();
   $idObjectType = 'id'.$objectClass.'Type';
   $idMailable = SqlList::getIdFromTranslatableName('Mailable', $objectClass);
-  $where = "(idMailable = ".$idMailable." or idMailable IS NULL) and (idType = '".$obj->$idObjectType."' or idType IS NULL)";
+  $where = "(idMailable = ".Sql::fmtId($idMailable)." or idMailable IS NULL) and (idType = ".Sql::fmtId($obj->$idObjectType)." or idType IS NULL)";
   $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
   $tabEmailTemplate = array();
   foreach ($listEmailTemplate as $val){
