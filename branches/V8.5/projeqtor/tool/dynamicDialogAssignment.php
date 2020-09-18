@@ -490,18 +490,19 @@ if ($planningMode=='RECW') {
         $listResource=array($idResource);
         $listMonth=array();
         $date = date('m');
+        $year = date('Y');
         $diffDate = $date-7;
         if($diffDate<=0){
           $maxDate=$diffDate+12;
           for($i=$date; $i<=$maxDate; $i++){
-	         array_push($listMonth, date('Y').$i);
+	         array_push($listMonth, $year.$i);
           }
         }else{
           for($i=$date; $i<=12; $i++){
-          	array_push($listMonth, date('Y').$i);
+          	array_push($listMonth, $year.$i);
           }
           for($i=1; $i<=$diffDate; $i++){
-          	array_push($listMonth, date('Y').$i);
+          	array_push($listMonth, ($year+1).$i);
           }
         }
         $size=20;
