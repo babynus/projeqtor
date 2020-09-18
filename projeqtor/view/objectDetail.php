@@ -8913,7 +8913,7 @@ function drawChecklistFromObject($obj,$nbCol=3) {
   if (property_exists($obj, $type)) {
     $crit.=' and (idType is null ';
     if ($obj->$type) {
-      $crit.=" or idType='".$obj->$type."'";
+      $crit.=" or idType=".$obj->$type;
     }
     $crit.=')';
   }
@@ -9335,7 +9335,7 @@ function drawJoblistFromObject($obj,$nbCol=3) {
   if (property_exists($obj, $type)) {
     $crit.=' and (idType is null ';
     if ($obj->$type) {
-      $crit.=" or idType='".$obj->$type."'";
+      $crit.=" or idType=".$obj->$type;
     }
     $crit.=')';
   }
