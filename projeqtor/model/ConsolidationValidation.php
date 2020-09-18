@@ -402,9 +402,25 @@ class ConsolidationValidation extends SqlElement{
 	 * Get Visible Project
 	 * @return two list of project (first list of object, second list of string id)
 	 */
-	static  function getVisibleProjectToConsolidated ($idProject,$idProjectType,$idOrganization) {
+	static  function getVisibleProjectToConsolidated ($idProject,$idProjectType,$idOrganization,$report=false) {
 	  $currentUser=new User(getCurrentUserId());
 	  $visibleProject=getVisibleProjectsList();
+	  if($report){
+    	  $user=getSessionUser();
+    	  $visibleProject=$user->getVisibleProjects();
+    	  $countProj=count($visibleProject);
+    	  $cProj=0;
+    	  $stringProj="(";
+    	  foreach ($visibleProject as $idP=>$nameProj){
+    	    $cProj++;
+    	    if($cProj==$countProj){
+    	      $stringProj.=$idP.')';
+    	    }else{
+    	      $stringProj.=$idP.',';
+    	    }
+    	  }
+    	  $visibleProject=$stringProj;
+	  }
 	  $where="id in $visibleProject ";
 	  $result=array();
 	  $lstProject=array();
