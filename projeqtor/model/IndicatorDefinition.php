@@ -331,7 +331,7 @@ class IndicatorDefinition extends SqlElement {
     } else {
       $crit.=  " and idProject is null";
     }
-    $crit.=" and id<>'" . Sql::fmtId($this->id) . "'";
+    $crit.=" and id<>" . Sql::fmtId($this->id);
     $list=$this->getSqlElementsFromCriteria(null, false, $crit);
     if (count($list)>0) {
       $result.='<br/>' . i18n('errorDuplicateIndicator');

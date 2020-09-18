@@ -88,7 +88,7 @@ class TicketDelay extends Delay {
   
   public function control() {
     $result="";
-    $crit="scope='Ticket' and idType='" . Sql::fmtId($this->idTicketType) . "' and idUrgency='" . Sql::fmtId($this->idUrgency) . "' and id<>'" . Sql::fmtId($this->id) . "'";
+    $crit="scope='Ticket' and idType='" . Sql::fmtId($this->idTicketType) . "' and idUrgency='" . Sql::fmtId($this->idUrgency) . "' and id<>" . Sql::fmtId($this->id);
     if(property_exists($this, 'idProject') and $this->idProject){
       $crit.=  " and idProject='" . Sql::fmtId($this->idProject) . "'";
     } else {
