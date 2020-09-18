@@ -44,7 +44,7 @@ $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidati
 if($consValPproj->id!=''){
   $clauseWhere="idProject=$reelIdProj and month > '".$month."'";
   $consValPprojAfter=$consValPproj->getSqlElementsFromCriteria(null,null,$clauseWhere);
-  if(!empty($consValPprojAfter)){
+  if(isset($consValPprojAfter)){
     $canChangeValidation=false;
   }
 }

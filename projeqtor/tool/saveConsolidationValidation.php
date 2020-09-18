@@ -71,7 +71,7 @@ foreach ($lstProj as $id=>$val){
     }
   }
   if(($mode =='validaTionCons' or $mode=='cancelCons') and $all=='false')$lstProj[$id]=$val;
-  if(!empty($proectsSubList)){
+  if(isset($proectsSubList)){
     foreach ($proectsSubList as $key=>$name){
       $lstProj[]=$key;
     }

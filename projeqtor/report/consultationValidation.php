@@ -73,7 +73,6 @@ $revenueTotal=0;
 $marginTotal=0;
 $reelConsTotal=0;
 
-
 // top board
 echo '<table  style="width:90%;margin-left:5%;margin-right:5%;" '.excelName().'>';
 echo ' <tr>';
@@ -91,9 +90,9 @@ echo '  <td  style="width:10%;" class="reportTableHeader" '.excelFormatCell('hea
 echo '  <td  style="width:10%;" class="reportTableHeader" '.excelFormatCell('header',20).'>'.i18n('colMargin').'</td>';
 echo ' </tr>';
 
-
-
+if(isset($lstProj) and is_array($lstProj)){
   foreach ($lstProj as $proj){    // draw line for each project 
+    if(empty($proj))continue;
     $consValPproj=SqlElement::getSingleSqlElementFromCriteria("ConsolidationValidation",array("idProject"=>$proj->id,"month"=>$concMonth));
     $consolidation=i18n('displayNo');
     if($consValPproj->id!=''){
@@ -155,7 +154,7 @@ echo ' </tr>';
       echo '   <td class="reportTableData" style="'.$compStyle.''.(($margin<0)?"color:red;":"").'" '.excelFormatCell('data',null,(($margin<0)?"#F50000":""),null,null,null,null,null,'work').'>'.(($outMode=='excel')?$margin:Work::displayWorkWithUnit($margin)).'</td>';
     echo '  </tr>';
   }
-  
+}
 //Total line 
 if (isset($outMode) and $outMode=='excel') {
   str_replace('- ','<br/>',Work::displayWorkUnit()).'<br/>';
