@@ -3794,20 +3794,16 @@ abstract class SqlElement {
         $dbName=Parameter::getGlobalParameter('paramDbName');
         $sqlColumn="SELECT COLUMN_COMMENT as comment FROM INFORMATION_SCHEMA.COLUMNS "
            ." WHERE TABLE_SCHEMA='$dbName' AND TABLE_NAME='$tableName' AND COLUMN_NAME='$dbFieldName'";
-        if ($class=='ActivityPlanningElement') debugLog("$sqlColumn");
         $resultColumn=Sql::query($sqlColumn);
         $line=Sql::fetchLine($resultColumn);
         if ($line and isset($line['comment'])) $type='int('.$line['comment'].')';
       }
       $formatList [strtolower($fieldName)]=$type;
-      if ($class=='ActivityPlanningElement') debugLog(strtolower($fieldName)." => $type");
       if (strtolower($fieldName)=='idplanningmode') {
         $pmFld='id'.str_replace('PlanningElement', '', $class).'PlanningMode';
         $formatList [strtolower ( $pmFld )] = $type;
-        if ($class=='ActivityPlanningElement') debugLog(strtolower ( $pmFld )." => $type");
       } else if ($fieldName=='id'.str_replace('PlanningElement', '', $class).'PlanningMode') {
         $formatList ['idplanningmode'] = $type;
-        if ($class=='ActivityPlanningElement') debugLog("idplanningmode => $type");
       }
     }
     self::$_tablesFormatList [$class] = $formatList;
