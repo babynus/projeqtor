@@ -92,7 +92,7 @@ class ConsolidationValidation extends SqlElement{
 	    $where="idProject in ($srtingProjectList) and month ='".$concMonth."'";
 	    $lstLockedImpThisMonth=$lockImputation->getSqlElementsFromCriteria(null,null,$where);
 	    $canLock=$projectsList;
-	    if(!empty($projectsList)){
+	    if(isset($projectsList)){
     	    foreach ($projectsList as $id=>$proj) {
     	      foreach ($lstLockedImpAfterBefor as $lockProjImpAfterBefor){
     	        if($lockProjImpAfterBefor->idProject==$proj->id){
@@ -189,11 +189,11 @@ class ConsolidationValidation extends SqlElement{
                       </td>
 	                 </tr>';
       $compt=0;
-	  if(!empty($projectsList)){
+	  if(isset($projectsList)){
         for($i=0;$i<$length;$i++) {                 //*** Draw row for each  project ***//
           $compt++;
           //________ get informations ________//
-          
+          if(empty($projectsList[$i]))continue;
           $idCheckBox=$projectsList[$i]->id;
           $uniqueId=$concMonth.$projectsList[$i]->id;
           $lock=((isset($lockedProjects[$idCheckBox]))?$lockedProjects[$idCheckBox]:'');
@@ -212,7 +212,7 @@ class ConsolidationValidation extends SqlElement{
             $id=$projectsList[$i]->id;
             $clauseWhere="idProject=$id and month > '".$concMonth."'";
             $afterConsValidated=$consValPproj->getSqlElementsFromCriteria(null,null,$clauseWhere);
-            if(!empty($afterConsValidated)){
+            if(isset($afterConsValidated)){
               $canChangeValidation=false;
             }
           }else{                                                          //-------- validated -------- //               
@@ -406,7 +406,10 @@ class ConsolidationValidation extends SqlElement{
 	  $currentUser=new User(getCurrentUserId());
 	  $visibleProject=getVisibleProjectsList();
 	  $where="id in $visibleProject ";
+	  $result=array();
+	  $lstProject=array();
 	  $proj= new Project();
+	  //$lstProject=array();
 	  if($idProject==0 and $idProjectType==0 and $idOrganization==0){ // no list is selected
 	    $where.="order by sortOrder";
 	    $lstProject=$proj->getSqlElementsFromCriteria(null,null,$where);
@@ -424,7 +427,7 @@ class ConsolidationValidation extends SqlElement{
         $where.="order by sortOrder";
         $lstProject=$proj->getSqlElementsFromCriteria(null,null,$where);
 	  }
-	  $result[]=$lstProject;
+	  $result[0]=$lstProject;
 	  $stringProjectList="";
 	  foreach ($lstProject as $proj){
 	    if($stringProjectList==""){
@@ -433,7 +436,7 @@ class ConsolidationValidation extends SqlElement{
 	      $stringProjectList.=','.$proj->id;
 	    }
 	  }
-	  $result[]=$stringProjectList;
+	  $result[1]=$stringProjectList;
 	  return $result;
 	}
 	
