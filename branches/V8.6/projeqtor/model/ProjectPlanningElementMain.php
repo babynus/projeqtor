@@ -196,7 +196,7 @@ class ProjectPlanningElementMain extends PlanningElement {
       unset($this->_separator_menuTechnicalProgress_marginTop);
       unset($this->_tab_5_1_smallLabel_9);
     }
-    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+    if(Module::isModuleActive('moduleGestionCA')){
     	self::$_fieldsAttributes['revenue']='';
     	self::$_fieldsAttributes['commandSum']='readonly';
     	self::$_fieldsAttributes['billSum']='readonly';
