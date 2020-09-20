@@ -956,13 +956,13 @@ if (beforeVersion($currVersion,"V8.3.7") and $currVersion!='V0.0.0') {
     }
   }
 }
-
-if (beforeVersion($currVersion,"V8.6.0") and Sql::isMysql()) {
-  $nbErrors+=runScript('V8.6.0.mysql');
-}
 if (beforeVersion($currVersion,"V8.6.0") and Sql::getDbPrefix()) {
   $nbErrors+=runScript('V8.6.0.lm');
 }
+if (beforeVersion($currVersion,"V8.6.0") and Sql::isMysql()) {
+  $nbErrors+=runScript('V8.6.0.mysql');
+}
+
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
