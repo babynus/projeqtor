@@ -190,7 +190,6 @@ function plgAddKanban(){
   var name=dijit.byId("kanbanName").get("value");
   var type=dijit.byId("kanbanTypeList").get("value");
   var shared=dijit.byId("kanbanShared").get("value");
-  console.log(type);
 
   if(name.trim()!='' && type!=''){
     showWait();
