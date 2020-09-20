@@ -363,7 +363,7 @@ class CommandMain extends SqlElement {
     	}
     }
     
-    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+    if(Module::isModuleActive('moduleGestionCA')){
     	$project = new Project($this->idProject);
     	$projectList = $project->getRecursiveSubProjectsFlatList(true, true);
     	$projectList = array_flip($projectList);

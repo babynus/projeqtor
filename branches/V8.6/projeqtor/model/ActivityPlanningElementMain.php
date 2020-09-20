@@ -237,15 +237,15 @@ class ActivityPlanningElementMain extends PlanningElement {
       self::$_fieldsAttributes["minimumThreshold"]='required';
     }
     if(Parameter::getGlobalParameter('technicalProgress')=='YES'){
-      $asSon=$this->getSonItemsArray();
-      if($asSon){
+      $asSon=$this->getSonItemsArray(true);
+      if($asSon and count($asSon)>0){
         foreach ($asSon as $id=>$son ){
           if($son->refType!='Activity'){
             unset($asSon[$id]);
           }
         }
       }
-      if(!$asSon or (!$this->id)){
+      if(!$asSon or (!$this->id) or count($asSon)==0){
         if(!$this->id or $this->idProgressMode=='' or $this->idWeightMode=='' ){
           $this->idProgressMode=1;
           $this->idWeightMode=1;
@@ -292,7 +292,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       unset($this->_tab_4_1_smallLabel_2);
     }
     $project = new Project($this->idProject);
-    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+    if(Module::isModuleActive('moduleGestionCA')){
       if (isset($contextForAttributes) and $contextForAttributes=='global'){
       	self::$_fieldsAttributes['idWorkUnit']='';
       	self::$_fieldsAttributes['revenue']='';

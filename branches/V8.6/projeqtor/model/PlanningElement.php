@@ -604,7 +604,7 @@ class PlanningElement extends SqlElement {
         $this->unitLeft=0;
       }else{
         if($this->refType=='Activity'){
-          $sons=$this->getSonItemsArray();
+          $sons=$this->countSonItems();
           if(!$sons and $this->idWeightMode==2){
             $this->idWeightMode=1;
           }
@@ -684,7 +684,7 @@ class PlanningElement extends SqlElement {
         }
       }
     }
-    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+    if(Module::isModuleActive('moduleGestionCA')){
     	$project = new Project($this->idProject);
     	$projectList = $project->getRecursiveSubProjectsFlatList(true, true);
     	$projectList = array_flip($projectList);
@@ -863,7 +863,7 @@ class PlanningElement extends SqlElement {
   public function setUnitProgress(){
     if($this->idProgressMode=='1'){
       $ref=$this->refType;
-      $sons=$this->getSonItemsArray();
+      $sons=$this->getSonItemsArray(true);
       if($ref=='Project' and $sons){
         foreach ($sons as $id=>$pe) {
           if ($pe->refType=='Project' and $pe->topRefId==$this->refId) {
@@ -925,7 +925,7 @@ class PlanningElement extends SqlElement {
     if($this->idWeightMode==2){
       $refType=$this->refType;
       $summWeight=0;
-      $sons=$this->getSonItemsArray();
+      $sons=$this->getSonItemsArray(true);
       if($refType=='Project' and $sons){
         foreach ($sons as $id=>$pe){
           if($pe->refType=='Project' and $pe->topRefId==$this->refId){
@@ -1129,7 +1129,7 @@ class PlanningElement extends SqlElement {
       }else if($this->refType=='Activity' and ($this->idProgressMode=='' or $this->idWeightMode=='')) {
         $this->idProgressMode=2;
         $this->idWeightMode=1;
-        if($this->getSonItemsArray()){
+        if($this->countSonItems()){
           $this->idProgressMode=1;
           $this->idWeightMode=2;
         }
@@ -1144,7 +1144,7 @@ class PlanningElement extends SqlElement {
       $this->unitProgress=$this->setUnitProgress();
       $this->unitWeight=$this->setUnitWeight();
     }
-    if(trim(Module::isModuleActive('moduleGestionCA')) == 1){
+    if(Module::isModuleActive('moduleGestionCA')){
       if(($this->refType=='Project' or $this->refType=='Activity') and $this->idRevenueMode==''){
         $this->idRevenueMode = 2;
       }
@@ -1481,15 +1481,25 @@ class PlanningElement extends SqlElement {
     return $result;
   }
   
-  public function getSonItemsArray() {
+  public function getSonItemsArray($onlyFirstLevel=false) {
     // V2.1 refactoring of function
+    // V8.6 : add option to get only
     $result=array();
     $crit=array('topId'=>$this->id);
     $listSons=$this->getSqlElementsFromCriteria($crit);
+    if ($onlyFirstLevel) return $listSons;
     foreach ($listSons as $son) {
       $result['#'.$son->id]=$son;
       $result=array_merge($result,$son->getSonItemsArray());
     }
+    return $result;
+  }
+  public function countSonItems() {
+    // V2.1 refactoring of function
+    // V8.6 : add option to get only
+    $result=0;
+    $crit=array('topId'=>$this->id);
+    $result=$this->countSqlElementsFromCriteria($crit);
     return $result;
   }
   
@@ -2396,7 +2406,9 @@ class PlanningElement extends SqlElement {
   }
   
   public function updateCA(){
-        $old = $this->getOld();
+      if(! Module::isModuleActive('moduleGestionCA')){ return;}
+      //if ($this->refType)
+      //$old = $this->getOld();
     	$project = new Project($this->idProject);
     	$projectList = $project->getRecursiveSubProjectsFlatList(true, ($this->idProject)?true:false);
     	$projectList = array_flip($projectList);
@@ -2415,21 +2427,19 @@ class PlanningElement extends SqlElement {
     	if($paramCA == 'YES' and $this->revenue > 0){
     		$this->validatedCost = $this->revenue;
     	}
-    	$this->save();
+    	$this->simpleSave();
   }
   
   function updateRevenue(){
+    if(! Module::isModuleActive('moduleGestionCA')){ return;}
   	$project = new Project($this->idProject);
-  	$projectList = $project->getRecursiveSubProjectsFlatList(true,true);
-  	$projectList = array_flip($projectList);
-  	$projectList = '(0,'.implode(',',$projectList).')';
+  	//$projectList = $project->getRecursiveSubProjectsFlatList(true,true);
+  	//$projectList = array_flip($projectList);
+  	//$projectList = '(0,'.implode(',',$projectList).')';
   	if (! isset(self::$_revenueCalculated[$this->refId.'#'.$this->refId])) {
   	  self::$_revenueCalculated[$this->refId.'#'.$this->refId]=$this->id;
-    	if(($this->idRevenueMode == 2 and $this->refType == 'Project') or $this->refType == 'Activity'){
-    	  debugLog("Update revenue for project #$this->refId");
-    	  debugLog("Before get sons");    
-    		$sons=$this->getSonItemsArray();
-    		debugLog("After get sons");
+    	if(($this->idRevenueMode == 2 and $this->refType == 'Project') or ($this->refType == 'Activity' and $project->ProjectPlanningElement->idRevenueMode == 2)){
+    		$sons=$this->getSonItemsArray(true);
     		$sumActPlEl=0;
     		$sumProjlEl=0;
     		$asSubProj=false;
@@ -2453,7 +2463,7 @@ class PlanningElement extends SqlElement {
     		  $this->revenue = 0;
     		}
     	}
-    	$this->updateCA();
+    	if ($this->refType=='Project') $this->updateCA();
   	}
   }
 }

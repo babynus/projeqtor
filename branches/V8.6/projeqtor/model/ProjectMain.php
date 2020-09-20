@@ -491,14 +491,15 @@ static function isTheLeaveProject($id=null) {
    * @return an array containing id, name, subprojects (recursive array)
    */
   public function getRecursiveSubProjects($limitToActiveProjects=false) {
-  scriptLog("Project($this->id)->getRecursiveSubProjects($limitToActiveProjects)");
+    scriptLog("Project($this->id)->getRecursiveSubProjects($limitToActiveProjects)");
+    $key=$this->id.'-'.(($limitToActiveProjects)?'active':'all');
 // MTY - LEAVE SYSTEM
     if (isLeavesSystemActiv()) {
       if (self::isTheLeaveProject($this->id) && !self::isProjectLeaveVisible()) {return null;}
     }
 // MTY - LEAVE SYSTEM
-    if (isset(self::$_subProjectList[$this->id])) {
-    	//return self::$_subProjectList[$this->id];
+    if (isset(self::$_subProjectList[$key])) {
+    	return self::$_subProjectList[$key];
     }    	
     $crit=array('idProject'=>$this->id);
     if ($limitToActiveProjects) {
@@ -518,7 +519,7 @@ static function isTheLeaveProject($id=null) {
       $arrayProj=array('id'=>$subProj->id, 'name'=>$subProj->name, 'subItems'=>$recursiveList);
       $subProjectList[]=$arrayProj;
     }
-    self::$_subProjectList[$this->id]=$subProjectList;
+    self::$_subProjectList[$key]=$subProjectList;
     return $subProjectList;
   }
   
@@ -530,8 +531,9 @@ static function isTheLeaveProject($id=null) {
    */
   public function getRecursiveSubProjectsFlatList($limitToActiveProjects=false, $includeSelf=false) {
   scriptLog("Project($this->id)->getRecursiveSubProjectsFlatList($limitToActiveProjects,$includeSelf)");   	
-    if (isset(self::$_subProjectFlatList[$this->id])) {
-      //return self::$_subProjectFlatList[$this->id];
+    $key=$this->id.'-'.(($limitToActiveProjects)?'active':'all').(($includeSelf)?'-withSelf':'');
+    if (isset(self::$_subProjectFlatList[$key])) {
+      return self::$_subProjectFlatList[$key];
     }
     $tab=$this->getRecursiveSubProjects($limitToActiveProjects);
     $list=array();
@@ -551,7 +553,7 @@ static function isTheLeaveProject($id=null) {
         }
       }
     }
-    self::$_subProjectFlatList[$this->id]=$list;
+    self::$_subProjectFlatList[$key]=$list;
     return $list;
   }
 
