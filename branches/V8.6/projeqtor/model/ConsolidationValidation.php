@@ -159,11 +159,11 @@ class ConsolidationValidation extends SqlElement{
 	   $result .='<tr>';
 	   $result .='          <td style="height:32px;padding-left:20px;width:10%;cursor:pointer;">';
 	   $mode='onclick="lockedImputation(\'UnLocked\'';
-        $result .='            <div region="center" id="UnlockedImputation" '.$mode.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.ucfirst(i18n('lockAll')).'" ></div>';
+        $result .='            <div region="center" id="UnlockedImputation" '.$mode.$lockedFunction.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.ucfirst(i18n('unlockAllProjects')).'" ></div>';
         $result .='          </td>';
         $result .='          <td style="height:32px;padding-right:5px;padding-top:5px;width:10%;cursor:pointer;">';
         $mode='onclick="lockedImputation(\'Locked\'';
-        $result .='            <div region="center" id="lockedImputation" '.$mode.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" title="'.ucfirst(i18n('unlockAll')).'"></div>';
+        $result .='            <div region="center" id="lockedImputation" '.$mode.$lockedFunction.' class="iconLocked32 iconLocked iconSize32" title="'.ucfirst(i18n('lockAllProjects')).'"></div>';
 	    $result .='           </td>';
 	  }
 	  $result .='      </tr>';
