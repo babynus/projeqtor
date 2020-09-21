@@ -42,6 +42,7 @@ $userLink['Command']='Incomes.html#client-orders';
 $userLink['CommandType']='ListsOfTypes.html#order-type';
 $userLink['Component']='ConfigurationManagement.html#component';
 $userLink['ComponentVersion']='ConfigurationManagement.html#component-version';
+$userLink['ConsolidationValidation']='RealWorkAllocation.html#monthly-consolidation';
 $userLink['Criticality']='ListsOfValues.html#criticality';
 
 
@@ -87,7 +88,7 @@ $userLink['Habilitation']='AccessRights.html#access-to-forms';
 $userLink['HabilitationOther']='AccessRights.html#specific-access-mode';
 $userLink['HabilitationReport']='AccessRights.html#access-to-reports';
 $userLink['Health']='ListsOfValues.html#health-status';
-
+$userLink['HierarchicalBudget']='Expenses.html#hierarchical-budget';
 
 
 $userLink['Import']='Tools.html#import-data';
