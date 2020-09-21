@@ -182,8 +182,15 @@ if ($periodType) {
     //$start=$paramYear . '-01-01';
     //$end=$paramYear . '-12-31';
     //New
-    $start=$paramYear . '-' . ($paramMonth<10?'0':'') . $paramMonth . '-01';
-    $end=(($paramMonth=="1") ? $paramYear : ($paramYear + 1)) . '-' . ((($paramMonth=="1") ? "12" : ($paramMonth<11?'0':'') . $paramMonth - 1)) . '-31';
+    $startMonth=$paramMonth;
+    if ($startMonth<10) $startMonth='0'.$startMonth;
+    $start=$paramYear.'-'.$startMonth.'-01';
+    $endMonth=$paramMonth-1;
+    if ($endMonth<1) $endMonth=12;
+    if ($endMonth<10) $endMonth='0'.$endMonth;
+    $endYear=$paramYear;
+    if ($paramMonth!=1) $endYear++;
+    $end=$endYear.'-'.$endMonth.'-'.lastDayOfMonth(intval($endMonth),$endYear);
     //END CHANGE qCazelles - Report fiscal year - Ticket #128
   } else if ($periodType=='month') {
       if ((!$paramYear and !$paramMonth) or (!$paramYear) or (!$paramMonth)) {
