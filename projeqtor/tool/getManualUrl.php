@@ -77,7 +77,7 @@ $userLink['Feasibility']='ListsOfValues.html#feasibility';
 
 
 $userLink['Gallery']='Incomes.html#financial-gallery';
-$userLink['GlobalParameter']='globalParameters.html';
+$userLink['GlobalParameter']='GlobalParameters.html';
 $userLink['GlobalPlanning']='Gantt.html#planning-global';
 $userLink['GlobalView']='TransverseFeatures.html#global-view';
 $userLink['GUI']='Gui.html';
