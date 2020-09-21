@@ -2182,7 +2182,9 @@ abstract class SqlElement {
     //$typeName = 'id' . $newClass . 'Type';
     ($newClass=='PeriodicMeeting')?$typeName='idMeetingType':$typeName = 'id' . $newClass . 'Type';
     $typeClass=substr($typeName,2);
-    $newObj->$typeName = $newType;
+    if($newClass!="CatalogUO"){
+      $newObj->$typeName = $newType;
+    }
     if ($setOrigin and property_exists ( $newObj, 'Origin' )) {
       $newObj->Origin->originType = get_class ( $this );
       $newObj->Origin->originId = $this->id;

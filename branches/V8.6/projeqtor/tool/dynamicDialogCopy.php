@@ -30,7 +30,6 @@ if (! array_key_exists('objectClass',$_REQUEST)) {
 }
 $objectClass=$_REQUEST['objectClass'];
 Security::checkValidClass($objectClass);
-
 if (! array_key_exists('objectId',$_REQUEST)) {
   throwError('Parameter objectId not found in REQUEST');
 }
@@ -67,7 +66,7 @@ if($copyType=="copyObjectTo"){
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
-               <?php echo autoOpenFilteringSelect();?>
+               <?php echo autoOpenFilteringSelect(); if($objectClass == 'CatalogUO'){ ?> readOnly <?php }?>
                 id="copyToClass" name="copyToClass" required
                 class="input" >
                  <?php htmlDrawOptionForReference('idCopyable', $copyToClassId, $toCopy, true,'idle','0');?>
@@ -87,6 +86,7 @@ if($copyType=="copyObjectTo"){
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+           <?php if($objectClass != 'CatalogUO'){?>
            <tr>
              <td class="dialogLabel"  >
                <label for="copyToType" ><?php echo i18n("copyToType") ?>&nbsp;:&nbsp;</label>
@@ -103,6 +103,7 @@ if($copyType=="copyObjectTo"){
                </select>
              </td>
            </tr>
+           <?php }?>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel" >
@@ -155,7 +156,9 @@ if($copyType=="copyObjectTo"){
               </div>
              </td>
            </tr>
-           <?php if($copyToClass!="Asset"){ ?> 
+           <?php
+            if($objectClass !="CatalogUO"){
+           if($copyToClass!="Asset"){ ?> 
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                <label for="copyToOrigin" style="width:90%;text-align: right;"><?php echo i18n("copyToOrigin") ?>&nbsp;:&nbsp;</label>
@@ -191,7 +194,7 @@ if($copyType=="copyObjectTo"){
                </div>
              </td>
            </tr>
-           <?php }?>
+           <?php } }?>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                <label for="copyToWithLinks" style="width:90%;text-align: right;"><?php echo i18n("copyToWithLinks") ?>&nbsp;:&nbsp;</label>
                <?php $isCheckedWithLink=true;$isCheckedWithLink=Parameter::getUserParameter('isCheckedWithLink'.$objectClass);?>
@@ -225,7 +228,7 @@ if($copyType=="copyObjectTo"){
                </div>
              </td>
            </tr>   
-           <?php if($copyToClass!="Asset"){ ?> 
+           <?php if($copyToClass!="Asset" and $objectClass!= 'CatalogUO'){ ?> 
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                <label for="copyToWithResult" style="width:90%;text-align: right;"><?php echo i18n("copyToWithResult") ?>&nbsp;:&nbsp;</label>
@@ -519,6 +522,7 @@ else if($copyType=="copyVersion"){
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+           <?php  if($objectClass != "CatalogUO"){?>
            <tr>
              <td class="dialogLabel"  >
                <label for="copyToType" ><?php echo i18n("copyToType") ?>&nbsp;:&nbsp;</label>
@@ -533,6 +537,7 @@ else if($copyType=="copyVersion"){
                </select>
              </td>
            </tr>
+           <?php } ?>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            
            <?php $paramTypeOfCopyComponentVersion = Parameter::getGlobalParameter('typeOfCopyComponentVersion');

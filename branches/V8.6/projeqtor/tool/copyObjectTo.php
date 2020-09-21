@@ -67,10 +67,14 @@ $copyToLinkOrigin=false;
 if (array_key_exists('copyToLinkOrigin',$_REQUEST)) {
   $copyToLinkOrigin=true;
 }
+if($className != "CatalogUO"){
 if (! array_key_exists('copyToType',$_REQUEST)) {
   throwError('copyToType parameter not found in REQUEST');
 }
 $toType=$_REQUEST['copyToType'];
+}else{
+  $toType = null;
+}
 $copyToWithNotes=false;
 if (array_key_exists('copyToWithNotes',$_REQUEST)) {
   $copyToWithNotes=true;
