@@ -40,8 +40,11 @@ class CatalogUOMain extends SqlElement {
   public $idle;
   public $_sec_unitOfWork;
   public $_spe_unitOfWork;
-  public $_nbColMax = 2;
-  public $_noCopy;
+  public $_sec_Link;
+  public $_Link = array();
+  public $_Attachment = array();
+  public $_Note = array();
+  public $_nbColMax = 3;
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
@@ -140,7 +143,44 @@ class CatalogUOMain extends SqlElement {
   }
   
   public function copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
-    $result=parent::copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks);
+    $result=parent::copyTo($newClass,1, $newName, $newProject, false, $withNotes, $withAttachments, $withLinks);
+    $complexity = new Complexity();
+    $listComplexity = $complexity->getSqlElementsFromCriteria(array('idCatalogUO'=>$this->id));
+    foreach ($listComplexity as $comp){
+      $complexitys = new Complexity();
+      $complexitys->idCatalogUO = $result->id;
+      $complexitys->name = $comp->name;
+      $complexitys->idZone = $comp->idZone;
+      $complexitys->save();
+    }
+    $workUnit = new WorkUnit();
+    $listWorkUnit = $workUnit->getSqlElementsFromCriteria(array('idCatalogUO'=>$this->id));
+    foreach ($listWorkUnit as $workU){
+      $workUnits = new WorkUnit();
+      $workUnits->idCatalogUO = $result->id;
+      $workUnits->idProject = $result->idProject;
+      $workUnits->reference = $workU->reference;
+      $workUnits->description = $workU->description;
+      $workUnits->entering = $workU->entering;
+      $workUnits->deliverable = $workU->deliverable;
+      $workUnits->validityDate = $workU->validityDate;
+      $workUnits->save();
+      $valComplexity = new ComplexityValues();
+      $listValComplexity = $valComplexity->getSqlElementsFromCriteria(array('idCatalogUO'=>$this->id,'idWorkUnit'=>$workU->id));
+      foreach ($listValComplexity as $val){
+        $valComplexitys = new ComplexityValues();
+        $valComplexitys->idCatalogUO = $result->id;
+        $myComplex = new Complexity($val->idComplexity);
+        $complexityz=new Complexity();
+        $complexityz=SqlElement::getSingleSqlElementFromCriteria("Complexity",array('name'=>$myComplex->name,'idZone'=>$myComplex->idZone,'idCatalogUO'=>$result->id));
+        $valComplexitys->idComplexity = $complexityz->id;
+        $valComplexitys->idWorkUnit = $workUnits->id;
+        $valComplexitys->charge = $val->charge;
+        $valComplexitys->price =$val->price;
+        $valComplexitys->duration=$val->duration;
+        $valComplexitys->save();
+      }
+    }
     return $result;
   }
   
