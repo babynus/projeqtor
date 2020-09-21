@@ -82,7 +82,7 @@
     $obj=new $objectClass($objectId);
     if($obj->idle==1){
       $historyArchive=new HistoryArchive();
-      $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$clauseWhere,"operationDate ASC",null,null,$activityStreamNumberElement);
+      $historyInfoArchive=$historyArchive->getSqlElementsFromCriteria(null,null,$clauseWhere,"operationDate ASC");
       if(!empty($historyInfoArchive)){
         foreach ($historyInfoArchive as $histArch){
           foreach ($historyInfo as $hist){
