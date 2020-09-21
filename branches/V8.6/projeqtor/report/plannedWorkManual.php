@@ -39,14 +39,16 @@ PlannedWorkManual::setSize($size);
 $headerParameters="";
 $resourceId =trim(RequestHandler::getId('idResource'));
 $idProject = trim(RequestHandler::getId('idProject'));
-if (sessionValueExists('project') and $idProject==""){
-  $idProject=getSessionValue('project');
+// if($idProject==""){
+  
+// }else if (sessionValueExists('project')){
+//   $idProject=getSessionValue('project');
   if ($idProject =="*"){
     $idProject="*";
-  }else if (strpos($idProject, ",") != null){
+  }else if (strpos($idProject, ",") != null) {
     $idProject=explode(",", $idProject);
   }
-}
+
 
 $yearSpinner= RequestHandler::getYear('yearSpinner');
 $monthSpinner= RequestHandler::getMonth('monthSpinner');
@@ -123,6 +125,7 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
   echo'  <tr>';
   echo'    <td colspan="2">';       
                 if(isset($idProject)){
+                  debugLog($idProject);
                  if((!is_array($idProject) and trim($idProject)=='' ) or $idProject=="*"){
                     PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner,true);
                   }else{
