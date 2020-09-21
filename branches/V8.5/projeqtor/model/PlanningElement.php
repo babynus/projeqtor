@@ -1582,7 +1582,8 @@ class PlanningElement extends SqlElement {
     $parent=new PlanningElement($dest->topId);
     
     if ($status=="OK" and $task and !$recursive) { // Change parent, then will recursively call moveTo to reorder correctly
-      $peName=get_Class($task).'PlanningElement';
+      $peName=get_class($task).'PlanningElement';
+      if ($peName=='PeriodicMeetingPlanningElement') $peName='MeetingPlanningElement';
       $oldParentId=$task->$peName->topId;
       $task->$peName->topRefType=$dest->topRefType;
       $task->$peName->topRefId=$dest->topRefId;
