@@ -2438,7 +2438,7 @@ class PlanningElement extends SqlElement {
   	//$projectList = '(0,'.implode(',',$projectList).')';
   	if (! isset(self::$_revenueCalculated[$this->refId.'#'.$this->refId])) {
   	  self::$_revenueCalculated[$this->refId.'#'.$this->refId]=$this->id;
-    	if(($this->idRevenueMode == 2 and $this->refType == 'Project') or ($this->refType == 'Activity' and $project->ProjectPlanningElement->idRevenueMode == 2)){
+    	if(($this->idRevenueMode == 2 and $this->refType == 'Project') or ($this->refType == 'Activity' and property_exists($project, 'ProjectPlanningElement') and $project->ProjectPlanningElement->idRevenueMode == 2)){
     		$sons=$this->getSonItemsArray(true);
     		$sumActPlEl=0;
     		$sumProjlEl=0;
