@@ -270,7 +270,8 @@ foreach ($resources as $idR=>$nameR) {
   }
   if (!$paramTeam or $res->idTeam==$paramTeam) {
 		$sumRes=0;
-		$rowspan = count($activities[$idR]);
+		if(array_key_exists($idR, $activities))$rowspan = count($activities[$idR]);
+		else continue ;
 	  echo '<tr><td style="width:10%" rowspan="'.$rowspan.'" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameR) . '</td>';
 	  $count = 0;
 	  foreach ($activityRes[$idR] as $idAct=>$proj){
