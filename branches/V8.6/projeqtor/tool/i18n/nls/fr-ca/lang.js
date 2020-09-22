@@ -340,7 +340,7 @@ CantHaveMoreThatOneManagerAtTheSameTime: "Ne peut avoir qu'un gestionnaire en m�
 cantHaveParentWithWorkUnit: "Les activités utilisant les unités d’œuvres ne peuvent pas être une activité parente",
 cantHaveSubActivity: "La nouvelle activité parente ne peut pas avoir de sous activités conformément à son type d'activité",
 CantHaveTwoContractsUnclosedForAnEmployee: "Ne peut avoir plus d'un contrat ouvert pour un employé",
-cantMoveActivityWithoutAffectedResource: "Vous ne pouvez pas déplacer l'activité sous un nouveau projet&#44 la ressource affectée n'est pas affecté",
+cantMoveActivityWithoutAffectedResource: "Vous ne pouvez pas déplacer l'activité sous un nouveau projet&#44 une des ressources assignées n'est pas affectée au nouveau projet",
 cantOpenActivityWithoutAffectedResource: "Vous ne pouvez pas ré-ouvrir l'assignation d'une ressource qui n'est plus affectée au projet",
 CantStartPMEndAMIfOneDay: "Une absence sur une seule journée ne peut pas commencer l'après-midi et finir le matin",
 cantTakeAStartDatePriorTo: "Ne peut prendre une date de début avant",
