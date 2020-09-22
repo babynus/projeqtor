@@ -340,7 +340,7 @@ CantHaveMoreThatOneManagerAtTheSameTime: "Can't have more that one manager at th
 cantHaveParentWithWorkUnit: "Activities using work unit can't be parent activity",
 cantHaveSubActivity: "The new parrent activity cannot have sub-tasks corresponding to its activity type",
 CantHaveTwoContractsUnclosedForAnEmployee: "Can't have more that one opened contract for an employee",
-cantMoveActivityWithoutAffectedResource: "You can not moving activity under new project the assigned resource is not allocated",
+cantMoveActivityWithoutAffectedResource: "You cannot move the activity under new project as some assigned resource is not allocated to new project",
 cantOpenActivityWithoutAffectedResource: "Can not reopen assignment of resource no longer allocated to the project",
 CantStartPMEndAMIfOneDay: "Can't chose PM for start and AM for end for single day leave",
 cantTakeAStartDatePriorTo: "Can't take a start date prior to",
