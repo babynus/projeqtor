@@ -236,7 +236,9 @@ class ActivityPlanningElementMain extends PlanningElement {
     if ($this->indivisibility){
       self::$_fieldsAttributes["minimumThreshold"]='required';
     }
+    unset($this->_separator_menuTechnicalProgress_marginTop);
     if(Parameter::getGlobalParameter('technicalProgress')=='YES'){
+      $this->_separator_menuTechnicalProgress_marginTop='';
       $asSon=$this->getSonItemsArray(true);
       if($asSon and count($asSon)>0){
         foreach ($asSon as $id=>$son ){
@@ -291,8 +293,10 @@ class ActivityPlanningElementMain extends PlanningElement {
       unset($this->_tab_5_1_smallLabel_8);
       unset($this->_tab_4_1_smallLabel_2);
     }
+    unset($this->_separator_sectionRevenue_marginTop);
     $project = new Project($this->idProject);
     if(Module::isModuleActive('moduleGestionCA')){
+      $this->_separator_sectionRevenue_marginTop='';
       if (isset($contextForAttributes) and $contextForAttributes=='global'){
       	self::$_fieldsAttributes['idWorkUnit']='';
       	self::$_fieldsAttributes['revenue']='';

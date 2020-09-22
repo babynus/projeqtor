@@ -196,7 +196,9 @@ class ProjectPlanningElementMain extends PlanningElement {
       unset($this->_separator_menuTechnicalProgress_marginTop);
       unset($this->_tab_5_1_smallLabel_9);
     }
+    unset($this->_separator_sectionRevenue_marginTop);
     if(Module::isModuleActive('moduleGestionCA')){
+      $this->_separator_sectionRevenue_marginTop='';
     	self::$_fieldsAttributes['revenue']='';
     	self::$_fieldsAttributes['commandSum']='readonly';
     	self::$_fieldsAttributes['billSum']='readonly';
@@ -210,8 +212,6 @@ class ProjectPlanningElementMain extends PlanningElement {
     	if($this->idRevenueMode == 2){
     		self::$_fieldsAttributes['revenue']='readonly';
     	}
-    }else{
-      unset($this->_separator_sectionRevenue_marginTop);
     }
     
     if($proj->commandOnValidWork){
