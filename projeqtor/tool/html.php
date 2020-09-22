@@ -1417,7 +1417,8 @@ function htmlFormatDate($val,$trunc=false,$textual=true) {
  * @return unknown_type
  */
 function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false,$textual=true) {
-  global $browserLocale;
+  global $browserLocale,$idTemplate,$outputHtml;
+  if ($idTemplate) $textual=false;
   $today=false;
   $classicFormatDateDate=true;
   $classicFormatDateHour=false;
@@ -1487,6 +1488,9 @@ function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false,$textual
     $result = htmlFormatDate(substr($val,0,10)) .'&nbsp;'. date('g:i A',strtotime($val));
   }else if(getSessionValue('browserLocaleTimeFormat')=='h:mm a' and $classicFormatHours){
     $result .=date('g:i A',strtotime($val));
+  }
+  if ($idTemplate and ! $outputHtml) {
+    $result=str_replace('&nbsp;',' ',$result); 
   }
   
   return $result;
