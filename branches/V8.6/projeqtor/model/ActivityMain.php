@@ -336,7 +336,7 @@ class ActivityMain extends SqlElement {
     //Gautier #2505
     if ($this->id && $old->idProject != $this->idProject) {
       $ass = new Assignment();
-      $lstAss = $ass->getSqlElementsFromCriteria(array('idProject'=>$old->idProject,'refType'=>'Activity','refId'=>$this->id));
+      $lstAss = $ass->getSqlElementsFromCriteria(array('idProject'=>$old->idProject,'refType'=>'Activity','refId'=>$this->id,'idle'=>'0'));
       foreach ( $lstAss as $as){
         $proj = new Project($this->idProject,true);
         $topProject = $proj->getTopProjectList(true);
