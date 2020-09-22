@@ -212,7 +212,7 @@ class ConsolidationValidation extends SqlElement{
             $id=$projectsList[$i]->id;
             $clauseWhere="idProject=$id and month > '".$concMonth."'";
             $afterConsValidated=$consValPproj->getSqlElementsFromCriteria(null,null,$clauseWhere);
-            if(isset($afterConsValidated)){
+            if(!empty($afterConsValidated)){
               $canChangeValidation=false;
             }
           }else{                                                          //-------- validated -------- //               
