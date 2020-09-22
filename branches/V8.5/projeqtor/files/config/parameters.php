@@ -1,4 +1,4 @@
-<?php
+<?php 
 // =======================================================================================
 // PARAMETERS
 // =======================================================================================
@@ -8,7 +8,7 @@ $paramDbType='mysql'; $paramDbPort='3306'; $paramDbUser='root'; $paramDbPassword
 $paramDbName='projeqtor_v85';$paramDbPrefix='';
 // --- PostgreSql Default
 //$paramDbType='pgsql'; $paramDbPort='5432'; $paramDbName='projeqtor'; $paramDbUser='projeqtor'; $paramDbPassword='projeqtor';
-//$paramDbName='support_ige';$paramDbPrefix=''; 
+$paramDbName='support_ars';$paramDbPrefix=''; 
 $paramDbHost='127.0.0.1';         // With MySql on Windows, better use "127.0.0.1" rather than "localhost"
 
 // ========== Log file configuration =====================================================
@@ -25,7 +25,7 @@ $pdfNamePrefix="ProjeQtOr - ";
 
 // ========== Debugging configuration ====================================================
 $debugQuery=false;                 // Debug all queries : trace Query and running time for each query
-$debugJsonQuery=false;             // Trace only JsonQuery queries  (retrieving lists)
+$debugJsonQuery=true;             // Trace only JsonQuery queries  (retrieving lists)
 $debugPerf=true;                   // Add some timestamps and execution time at all debug lines
 $debugTraceUpdates=false;           // Will add trace on each save() or delete(), except for History and Audit
 $debugTraceHistory=false;           // Will add trace on each save() or delete() of History and Audit (only if $debugTraceUpdates=true;)
@@ -41,4 +41,5 @@ $dataCloningDirectory="D:\www\simulation";       //Modify repertory simulation a
 $dataCloningUrl="http://localhost/simulation/";  //Acces data cloning url for goto
 //$doNotExportAssignmentsForXMLFormat=true;      // Will not be needed anymore on V8.3 as it will become a user parameter
 //$pathToWkHtmlToPdf="C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe";
+//$paramDbCollation='utf8_general_ci';
 //======= END
