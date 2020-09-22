@@ -125,7 +125,6 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
   echo'  <tr>';
   echo'    <td colspan="2">';       
                 if(isset($idProject)){
-                  debugLog($idProject);
                  if((!is_array($idProject) and trim($idProject)=='' ) or $idProject=="*"){
                     PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner,true);
                   }else{
