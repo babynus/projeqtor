@@ -2506,10 +2506,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if (($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) or $col=='idProgressMode' or $col=='idWeightMode' or $col=='idRevenueMode') {
           if (!$readOnly) $showExtraButton=true;
           $fieldWidth=round($fieldWidth/2)-23;
+          if($fieldWidth<85)$fieldWidth=85;
         }
         if($col=='idWorkUnit' or $col=='idComplexity'){
           if (!$readOnly) $showExtraButton=true;
           $fieldWidth=round($fieldWidth/2)-23;
+          if($fieldWidth<85)$fieldWidth=85;
         }
         // END - ADD BY TABARY - NOTIFICATION SYSTEM
         
