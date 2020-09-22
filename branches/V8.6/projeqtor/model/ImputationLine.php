@@ -455,9 +455,11 @@ class ImputationLine {
           $workDate=$work->workDate;
           $offset=dayDiffDates($startDate, $workDate)+1;
           if (isset($elt->arrayWork[$offset])) {
-            //$elt->arrayWork[$offset]->work+=$work->work;
-            // This is a consistency issue
-            $work->delete();
+            if($elt->arrayWork[$offset]->idLeave!=''){
+              $elt->arrayWork[$offset]->work+=$work->work;
+            }else{
+              $work->delete();
+            }
           } else {
             $elt->arrayWork[$offset]=$work;
           }
@@ -1396,7 +1398,6 @@ class ImputationLine {
   // MISCELLANOUS FUNCTIONS
   // ============================================================================**********
   public function save() {
-    
     $finalResult="";
     foreach ($this->arrayWork as $work) {
       $result="";
