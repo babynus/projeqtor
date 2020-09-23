@@ -288,30 +288,51 @@ class Security
     return $string;
   }
   
-  public static function checkValidAccessForUser($obj, $mode='read', $refType=null, $refId=null) {
+  public static function checkValidAccessForUser($obj, $mode='read', $refType=null, $refId=null, $traceHack=true) {
     if (!$obj) {
       if ($refType and $refId) {
         $obj=new $refType($refId);
-      } else if ($refType and ! $refId) {
+      } else if ($refType and ! $refId) { // Here is dedicated check for jsonQuery
         $user=getSessionUser();
-        $accessRightList = $user->getAccessControlRights ();
         $menuName='menu'.$refType;
         if ($menuName=='menuCalendarDefinition') $menuName='menuCalendar';
         if ($menuName=='menuBudgetItem') $menuName='menuBudget';
-        if ( !isset($accessRightList[$menuName]) or !isset($accessRightList[$menuName]['read']) or $accessRightList[$menuName]['read']=='NO' ) {
-          traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
+        if (SqlElement::is_subclass_of($refType, 'PlgCustomList')) $menuName='menuScreenCustomization';
+        if (isLeavesSystemMenuByMenuName("menu".$refType)) {
+          $showLeaveMenu=showLeavesSystemMenu("menu".$refType);
+          if ( ! $showLeaveMenu) {
+            if ($traceHack) traceHack("checkValidAccessForUser() Reject for $refType - no access to HR screen '$refType'");
+            else return false;
+          }
         } else {
-          return; // OK
+          $accessRightList = $user->getAccessControlRights ();
+          if ($menuName=='menuAffectable') {
+            if (isset($accessRightList['menuResource']) and isset($accessRightList['menuResource']['read']) and $accessRightList['menuResource']['read']!='NO') {
+              $accessRightList['menuAffectable']=$accessRightList['menuResource'];
+            } else if (isset($accessRightList['menuUser']) and isset($accessRightList['menuUser']['read']) and $accessRightList['menuUser']['read']!='NO') {
+              $accessRightList['menuAffectable']=$accessRightList['menuUser'];
+            } else if (isset($accessRightList['menuContact']) and isset($accessRightList['menuContact']['read']) and $accessRightList['menuContact']['read']!='NO') {
+              $accessRightList['menuAffectable']=$accessRightList['menuContact'];
+            }
+          }
+          if ( !isset($accessRightList[$menuName]) or !isset($accessRightList[$menuName]['read']) or $accessRightList[$menuName]['read']=='NO' ) {
+            if ($traceHack) traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
+            else return false;
+          } else {
+            return true; // OK
+          }
         }
       }
     }
+    if (!$obj) return true;
     if (get_class($obj)=='Logfile') {
       $user=getSessionUser();
       $accessRightList = $user->getAccessControlRights ();
       if ( !isset($accessRightList['menuAdmin']) or !isset($accessRightList['menuAdmin']['read']) or $accessRightList['menuAdmin']['read']!='ALL' ) {
-        traceHack("checkValidAccessForUser() Reject for ".get_class($obj)." - no access to administration screen");
+        if ($traceHack) traceHack("checkValidAccessForUser() Reject for ".get_class($obj)." - no access to administration screen");
+        else return false;
       } else {
-        return; // OK
+        return true; // OK
       }
     } else if (get_class($obj)=='Attachment') {
       // Access an attachement : must crontrol acess on item containing the attachment
@@ -320,19 +341,22 @@ class Security
       $obj=new $refType($refId);
       if (! property_exists($refType, '_Attachment')) {
         // referenced object does not have _Attachmen,t : so is image of user, no control
-        return;
+        return true;
       }
     } else if (get_class($obj)=='DocumentVersion') {  
       // Access on document version : must crontrol acess on document containing the version
       $obj=new Document($obj->idDocument);
     }
     if (!$obj->id and $mode!='create') {
-      traceHack("checkValidAccessForUser() Reject for ".get_class($obj)." #".$obj->id." - no id for object on mode different from create");
+      if ($traceHack) traceHack("checkValidAccessForUser() Reject for ".get_class($obj)." #".$obj->id." - no id for object on mode different from create");
+      else return false;
     }
     $right = securityGetAccessRightYesNo( 'menu'.get_class($obj), $mode,$obj );
     if ($right!='YES') {
-      traceHack("checkValidAccessForUser() Reject for ".get_class($obj)." #".$obj->id." - no '$mode' right to this item");
+      if ($traceHack) traceHack("checkValidAccessForUser() Reject for ".get_class($obj)." #".$obj->id." - no '$mode' right to this item");
+      else return false;
     }
+    return true;
   }
 }
  
