@@ -6017,6 +6017,15 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
   echo '<td class="dependencyHeader" style="width:15%">'.i18n('colIdStatus').'</td>';
   //gautier #3562
   if($depType=="Predecessor"){
+    $tabGlobalElement = array();
+    $tabGlobalElement['Decision']= 'decisionDate';
+    $tabGlobalElement['Action']= 'actualDueDate';
+    $tabGlobalElement['Delivery']= 'validationDate';
+    $tabGlobalElement['Issue']= 'actualEndDate';
+    $tabGlobalElement['Opportunity']= 'actualEndDate';
+    $tabGlobalElement['Question']= 'actualDueDate';
+    $tabGlobalElement['Risk']= 'actualEndDate';
+    $tabGlobalElement['Ticket']= 'actualDueDateTime';
     echo '<td class="dependencyHeader" style="width:15%">'.i18n('colEndDate').'</td>';
     $datePredecessor = array();
     $allTabSameDate = false;
@@ -6025,14 +6034,24 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
     foreach ($list as $dep) {
       $depObj=new $dep->predecessorRefType($dep->predecessorRefId);
       $planningObj=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array('refId'=>$depObj->id, 'refType'=>get_class($depObj),'idProject'=>$depObj->idProject));
-      if($planningObj->realEndDate){
-        $endDate = $planningObj->realEndDate;
-      }elseif ($planningObj->plannedEndDate){
-        $endDate = $planningObj->plannedEndDate;
-      }elseif ($planningObj->validatedEndDate){
-        $endDate = $planningObj->validatedEndDate;
+      if(array_key_exists($dep->predecessorRefType,$tabGlobalElement)){
+        $date = $tabGlobalElement[$dep->predecessorRefType];
+        if($depObj->$date){
+          $endDate=$depObj->$date;
+          $datePredecessor[$dep->predecessorRefType."#".$depObj->id] = $endDate;
+        }else{
+          $endDate=null;
+        }
       }else{
-        $endDate = null;
+        if($planningObj->realEndDate){
+          $endDate = $planningObj->realEndDate;
+        }elseif ($planningObj->plannedEndDate){
+          $endDate = $planningObj->plannedEndDate;
+        }elseif ($planningObj->validatedEndDate){
+          $endDate = $planningObj->validatedEndDate;
+        }else{
+          $endDate = null;
+        }
       }
       if($dep->dependencyDelay>1){
         $datePredecessor[$planningObj->id]=addWorkDaysToDate($endDate,$dep->dependencyDelay+1);
@@ -6042,6 +6061,7 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
       $endDateObj[$dep->id.get_class($depObj)]= $endDate;
     }
     usort($datePredecessor, "compareByTimeStamp");
+    debugLog($datePredecessor);
     if(count($datePredecessor)>1){
       foreach ($datePredecessor as $val){
         if($val != $datePredecessor[0]){
@@ -6105,9 +6125,9 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
     echo '<td class="dependencyData colorNameData" style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
     if($depType=="Predecessor"){    
       if($allTabSameDate==true and $datePredecessor and count($datePredecessor)>1 and $datePredecessor[0]== addWorkDaysToDate($endDateObj[$dep->id.get_class($depObj)],($dep->dependencyDelay>1)?$dep->dependencyDelay+1:$dep->dependencyDelay)){
-        echo '<td class="dependencyData" style="text-align:center; width:15%; color:red">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)]).'</td>';
+        echo '<td class="dependencyData" style="text-align:center; width:15%; color:red">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)],true).'</td>';
       }else{
-        echo '<td class="dependencyData" style="text-align:center; width:15%">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)]).'</td>';
+        echo '<td class="dependencyData" style="text-align:center; width:15%">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)],true).'</td>';
       }
     }
     echo '</tr>';
