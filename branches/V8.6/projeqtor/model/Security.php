@@ -292,11 +292,12 @@ class Security
     if (!$obj) {
       if ($refType and $refId) {
         $obj=new $refType($refId);
-      } else if ($refType and ! $refId) {
+      } else if ($refType and ! $refId) { // Here is dedicated check for jsonQuery
         $user=getSessionUser();
         $menuName='menu'.$refType;
         if ($menuName=='menuCalendarDefinition') $menuName='menuCalendar';
         if ($menuName=='menuBudgetItem') $menuName='menuBudget';
+        if (SqlElement::is_subclass_of($refType, 'PlgCustomList')) $menuName='menuScreenCustomization';
         if (isLeavesSystemMenuByMenuName("menu".$refType)) {
           $showLeaveMenu=showLeavesSystemMenu("menu".$refType);
           if ( ! $showLeaveMenu) {
