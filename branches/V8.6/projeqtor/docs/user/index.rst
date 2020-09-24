@@ -19,7 +19,7 @@ Its particularity, in addition to its completeness, is to be oriented towards qu
 
     \newpage
     
-What's new in version 8.5 ?
+What's new in version 8.6 ?
 ---------------------------
 
 Find in this manual, every 3 months, the latest features integrated into ProjeQtOr.
