@@ -1692,18 +1692,18 @@ abstract class SqlElement {
       if($this->idle==1){
         $queryArchiv="insert into " .$archiv->getDatabaseTableName();
         $queryArchiv.=" (select * from ".$hist->getDatabaseTableName();
-        $queryArchiv.=" where refType='".get_class($ass)."' and refId=";
+        $queryArchiv.=" where refType='".get_class($ass)."' and refId in (";
         $queryArchiv.="(select id from " .  $ass->getDatabaseTableName ();
-        $queryArchiv .= " where refType='" . get_class ( $this ) . "' and refId=" . $this->id ."))";
+        $queryArchiv .= " where refType='" . get_class ( $this ) . "' and refId=" . $this->id .")))";
         $resultArch = Sql::query ( $queryArchiv );
         if (! $resultArch) {
           $returnValue = Sql::$lastQueryErrorMessage;
           $returnStatus = 'ERROR';
         }
         $deleteArch="delete from ".$hist->getDatabaseTableName();
-        $deleteArch.=" where refType='".get_class($ass)."' and refId=";
+        $deleteArch.=" where refType='".get_class($ass)."' and refId in(";
         $deleteArch.="(select id from " .  $ass->getDatabaseTableName ();
-        $deleteArch .= " where refType='" . get_class ( $this ) . "' and refId=" . $this->id .")";
+        $deleteArch .= " where refType='" . get_class ( $this ) . "' and refId=" . $this->id ."))";
         $resultDelete = Sql::query ( $deleteArch );
         if (! $resultDelete) {
           $returnValue = Sql::$lastQueryErrorMessage;
@@ -1723,18 +1723,18 @@ abstract class SqlElement {
       if($this->idle==1){
         $queryArchiv="insert into " .$archiv->getDatabaseTableName();
         $queryArchiv.=" (select * from ".$hist->getDatabaseTableName();
-        $queryArchiv.=" where refType='".get_class($note)."' and refId=";
+        $queryArchiv.=" where refType='".get_class($note)."' and refId in (";
         $queryArchiv.="(select id from " .  $note->getDatabaseTableName ();
-        $queryArchiv .= " where refType='" . get_class ( $this ) . "' and refId=" . $this->id ."))";
+        $queryArchiv .= " where refType='" . get_class ( $this ) . "' and refId=" . $this->id .")))";
         $resultArch = Sql::query ( $queryArchiv );
         if (! $resultArch) {
           $returnValue = Sql::$lastQueryErrorMessage;
           $returnStatus = 'ERROR';
         }
         $deleteArch="delete from ".$hist->getDatabaseTableName();
-        $deleteArch.=" where refType='".get_class($note)."' and refId=";
+        $deleteArch.=" where refType='".get_class($note)."' and refId in (";
         $deleteArch.="(select id from " .  $note->getDatabaseTableName ();
-        $deleteArch .= " where refType='" . get_class ( $this ) . "' and refId=" . $this->id .")";
+        $deleteArch .= " where refType='" . get_class ( $this ) . "' and refId=" . $this->id ."))";
         $resultDelete = Sql::query ( $deleteArch );
         if (! $resultDelete) {
           $returnValue = Sql::$lastQueryErrorMessage;
