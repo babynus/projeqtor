@@ -116,6 +116,7 @@ include "header.php";
 $where="(".getAccesRestrictionClause('Activity',false,true,true,true) ." or idResource=". getSessionUser()->id . " or idProject in ".Project::getAdminitrativeProjectList().")"; 
 $where.=($periodType=='week')?" and week='" . $periodValue . "'":'';
 $where.=($periodType=='month')?" and month='" . $periodValue . "'":'';
+$where.="and refType='Activity'";
 
 if ($periodType=='year') {
   if (!$periodValue ) {
