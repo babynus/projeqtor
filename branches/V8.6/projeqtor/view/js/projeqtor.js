@@ -5946,7 +5946,7 @@ function accessImputationCallBack(){
 
 function saveNoteStream(event){
   var key = event.keyCode;
-  if (key == 13 && !event.shiftKey) {
+  if (key == 13 && !event.shiftKey || (key == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey)) {
     var noteEditor = dijit.byId("noteNoteStream");
     var noteEditorContent=noteEditor.get("value");
     if (noteEditorContent.trim()=="") {
