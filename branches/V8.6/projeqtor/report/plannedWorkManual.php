@@ -39,17 +39,11 @@ PlannedWorkManual::setSize($size);
 $headerParameters="";
 $resourceId =trim(RequestHandler::getId('idResource'));
 $idProject = trim(RequestHandler::getId('idProject'));
-// if($idProject==""){
-  
-// }else if (sessionValueExists('project')){
-//   $idProject=getSessionValue('project');
-  if ($idProject =="*"){
-    $idProject="*";
-  }else if (strpos($idProject, ",") != null) {
-    $idProject=explode(",", $idProject);
-  }
-
-
+if ($idProject =="*"){
+  $idProject="*";
+}else if (strpos($idProject, ",") != null) {
+  $idProject=explode(",", $idProject);
+}
 $yearSpinner= RequestHandler::getYear('yearSpinner');
 $monthSpinner= RequestHandler::getMonth('monthSpinner');
 $inIdTeam = trim(RequestHandler::getId('idTeam'));
@@ -70,7 +64,7 @@ if ($monthSpinner!="") {
 if ($resourceId!="") {
   $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Affectable',$resourceId)) . '<br/>';
 }
-if ($idProject!=""  and $idProject!="*" and !is_array($idProject)) {
+if ($idProject!=" "  and $idProject!="*" and !is_array($idProject)) {
   $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project', $idProject)) . '<br/>';
 }else if ($idProject=="*"){
   $headerParameters.= i18n("colIdProject") . ' : ' .i18n("allProjects");
