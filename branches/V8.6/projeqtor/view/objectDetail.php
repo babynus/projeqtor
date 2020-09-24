@@ -6061,7 +6061,6 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
       $endDateObj[$dep->id.get_class($depObj)]= $endDate;
     }
     usort($datePredecessor, "compareByTimeStamp");
-    debugLog($datePredecessor);
     if(count($datePredecessor)>1){
       foreach ($datePredecessor as $val){
         if($val != $datePredecessor[0]){
