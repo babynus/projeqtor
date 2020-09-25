@@ -615,6 +615,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
       }
     }
+    if(property_exists($obj, '_separator_menuTechnicalProgress_marginTop')){
+      if(($obj->isAttributeSetTofield("_separator_menuTechnicalProgress_marginTop", 'hidden'))) unset($obj->_separator_menuTechnicalProgress_marginTop);
+    }
+    if(property_exists($obj, '_separator_sectionRevenue_marginTop')){
+      if(($obj->isAttributeSetTofield("_separator_sectionRevenue_marginTop", 'hidden'))) unset($obj->_separator_sectionRevenue_marginTop);
+    }
   } else if (SqlElement::is_subclass_of($obj, 'BudgetElement')) {
     $obj->setVisibility();
     $workVisibility=$obj->_workVisibility;
