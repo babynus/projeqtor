@@ -1176,7 +1176,8 @@ class PlannedWork extends GeneralWork {
                       $value=$toPlan;
                     }
                     if ($workUnit=='days') {
-                      $value=round($value,1);
+                      if ($profile=="QUART") $value=round($value,2);
+                      else $value=round($value,1);
                     } else {
                     	$value=round($value/$halfHour,0)*$halfHour;
                     }
