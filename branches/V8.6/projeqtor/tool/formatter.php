@@ -892,7 +892,7 @@ function activityStreamDisplayHist ($hist,$origin){
  return $result;
 }
 
-function activityStreamDisplayMail($mail,$origin){
+function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false){
   $reftText='';
   $elementName='';
   $inlineUserThumb=true;
@@ -913,6 +913,10 @@ function activityStreamDisplayMail($mail,$origin){
     $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
   } else {
     return;
+  }
+  if($origin=='activityStream' and $objectClass!='' and $objectId!=''){
+    $obj= new $objectClass($objectId);
+    if($obj->idle==1 and !$activityStreamShowClosed)return;
   }
   if($mail->idMailable!='')$elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
