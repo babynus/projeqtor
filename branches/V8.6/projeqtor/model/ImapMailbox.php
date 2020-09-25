@@ -349,7 +349,6 @@ class ImapMailbox {
       }
     }
     if (!empty($params['charset']) and trim($params['charset'])!='') {
-      //debugLog("conversion of data from '".$params['charset']."' to '$this->serverEncoding'");
       $data=iconv($params['charset'], $this->serverEncoding, $data);
     }
     
