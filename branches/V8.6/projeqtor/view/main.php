@@ -392,7 +392,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         window.onhelp = function() { return (false); };
       }
       var onKeyDownFunc = function(event) {
-        if (event.keyCode == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey) { // CTRL + S (save)
+        if (event.keyCode == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey && event.target.id!="noteNoteStream") { // CTRL + S (save)
           event.preventDefault();
           if (dojo.isFF) stopDef();
           globalSave();
