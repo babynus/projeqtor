@@ -235,10 +235,10 @@ class History extends SqlElement {
       }
       if($operation=='insert'){
         self::store ($obj, $objType, $obj->idProductVersion, 'update' , 'addComponentVersionLink', '', intval($obj->idComponentVersion));
-        self::store ($obj, 'ComponentVersion', $obj->idComponentVersion, 'update' , 'add'.$objType.'Link', '', $prodOrComp->id);
+        self::store ($obj, 'ComponentVersion', $obj->idComponentVersion, 'update' , 'add'.$objType.'Link', '', (($prodOrComp)?$prodOrComp->id:null));
       }else if($operation=='delete'){
       	self::store ($obj, $objType, $obj->idProductVersion, 'update' , 'deleteComponentVersionLink', intval($obj->idComponentVersion), '');
-      	self::store ($obj, 'ComponentVersion', $obj->idComponentVersion, 'update' , 'delete'.$objType.'Link', $prodOrComp->id, '');
+      	self::store ($obj, 'ComponentVersion', $obj->idComponentVersion, 'update' , 'delete'.$objType.'Link', (($prodOrComp)?$prodOrComp->id:null), '');
       }
     }
     if (strpos($returnValue,'<input type="hidden" id="lastOperationStatus" value="OK"')) {
