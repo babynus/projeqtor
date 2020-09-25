@@ -4765,7 +4765,6 @@ tooltipStatusOutOfWorkflow: "This status is no longer part of the workflow assoc
 tooltipStatusSetLeaveChange: "The status has been modified with changes to the conditions of passage to submitted or accepted or validated <br/> This leave period can not be changed until its state is not consistent with the old conditions.",
 tooltipUnderConstruction: "When a project is under contruction&#58<br/> - resource don't see it on timesheet<br/> - alerts are not generated<br/> - emails are not sent",
 tooltipWarningValue: "Tolerable value of the indicator<br/>A warning will be sent",
-totalReal: "Total real",
 totalSize: "Total size",
 trace: "Trace",
 transition: "transition",
