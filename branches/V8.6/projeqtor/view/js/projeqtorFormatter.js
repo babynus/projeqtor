@@ -642,7 +642,7 @@ function simpleDecrypt(inStr) {
 }
 
 function formatSmallButton(classname) {
-  var result="<span class='roundedButtonSmall' style='top:0px;display:inline-block;width:16px;height:16px;'><div class='iconButton"+classname+"16' style='' >&nbsp;</div></span>";
+  var result="<span class='roundedButtonSmall' style='top:0px;display:inline-block;width:16px;height:16px;'><div class='iconButton"+classname+"16 iconButton"+classname+" iconSize16' style='' >&nbsp;</div></span>";
   return result;
 }
 
