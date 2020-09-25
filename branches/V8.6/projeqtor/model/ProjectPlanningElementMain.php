@@ -167,6 +167,7 @@ class ProjectPlanningElementMain extends PlanningElement {
     "organizationElementary"=>"hidden",
     "needReplan"=>"hidden",
     "color"=>"hidden",
+    "_separator_sectionRevenue_marginTop"=>"hidden",
   );   
   
   private static $_databaseTableName = 'planningelement';
@@ -196,9 +197,8 @@ class ProjectPlanningElementMain extends PlanningElement {
       unset($this->_separator_menuTechnicalProgress_marginTop);
       unset($this->_tab_5_1_smallLabel_9);
     }
-    unset($this->_separator_sectionRevenue_marginTop);
     if(Module::isModuleActive('moduleGestionCA')){
-      $this->_separator_sectionRevenue_marginTop='';
+      self::$_fieldsAttributes['_separator_sectionRevenue_marginTop']='';
     	self::$_fieldsAttributes['revenue']='';
     	self::$_fieldsAttributes['commandSum']='readonly';
     	self::$_fieldsAttributes['billSum']='readonly';
