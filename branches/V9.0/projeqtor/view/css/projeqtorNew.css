@@ -1,0 +1,600 @@
+/*** COPYRIGHT NOTICE *********************************************************
+ *
+ * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
+ * Contributors : -
+ *
+ * This file is part of ProjeQtOr.
+ * 
+ * ProjeQtOr is free software: you can redistribute it and/or modify it under 
+ * the terms of the GNU Affero General Public License as published by the Free 
+ * Software Foundation, either version 3 of the License, or (at your option) 
+ * any later version.
+ * 
+ * ProjeQtOr is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for 
+ * more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along with
+ * ProjeQtOr. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can get complete code of ProjeQtOr, other resource, help and information
+ * about contributors at http://www.ProjeQtOr.org 
+ *     
+ *** DO NOT REMOVE THIS NOTICE ************************************************/
+
+/* ============ */
+/* NEW GUI      */
+/* ============ */
+
+:root {
+	--color-button-background: #f0f0f0;
+	--color-section-title-text: #656565;
+	--color-section-title-border: #656565;
+	--color-table-header: #f0f0f0;
+}
+
+
+/* ======================= GENERIC FORM CSS ==========================*/
+
+.dijitTextBox {
+    font-weight: normal;
+    color: #555555;
+    margin: 5px 2px 5px 0px;
+    padding: 2px 5px 6px 5px;
+    border: 1px solid #d4d4d4;
+    line-height: normal;
+    border-radius: 5px 5px 5px 5px;
+    barckground-image: url() !important;
+    background: #fff url() repeat-x top left;
+    barckground-color: #ffffff !important;
+    width: 195px;
+    height: 17px;
+    font-size: 10pt;
+}
+.dijitTextBoxFocused {
+	border: 1px solid #b2b2b2;
+}
+
+label, .ProjeQtOrNewGui label, 
+.label, .ProjeQtOrNewGui .label, 
+.smallLabel, .ProjeQtOrNewGui .smallLabel, 
+.labelMultiple, .ProjeQtOrNewGui .labelMultiple{
+    font-weight: 400;
+    font-family: Verdana, Arial, Tahoma, sans-serif;
+    font-size: 10pt;
+    text-align: right;
+    vertical-align: top;
+    width: 180px;
+    padding: 5px 1px 2px 0px;
+    float: left;
+    border: 1px;
+    text-shadow: 1px 1px #FFFFFF;
+    background-color: #ffffff;
+    color:var(--color-text);
+}
+
+.labelWithThumb, .ProjeQtOrNewGui .labelWithThumb{
+  width: 150px !important;
+  background-color: #ffffff;
+  color:var(--color-text);
+}
+.tabLabel, .ProjeQtOrNewGui .tabLabel {
+	background-color: #ffffff;
+  color:var(--color-text);
+}
+.longTextLabel {
+	padding:5px; 
+	border: 1px solid #d4d4d4;
+	border-bottom: 0px;
+	border-radius: 5px 5px 0px 0px;
+	width:100%;
+	background-color: #ffffff;
+	color:var(--color-text);
+}
+
+.ProjeQtOrNewGui .dijitButtonNode, 
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
+  background: transparent;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  border-color : #b3b3b3;
+  color:var(--color-text);
+}
+
+.ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, 
+.ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
+  background: rgba(128,128,128,0.2) !important;
+}
+.dijitComboBoxMenu {
+	 background: #ffffff;
+}
+.dijitReset.dijitMenuItem  {
+	font-size: 10pt;
+	padding: 5px 5px 5px 10px;
+	color: #555555;
+	-webkit-transition: all 0.8s ease;
+  -moz-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  -ms-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+.dijitReset.dijitMenuItem.dijitMenuItemHover {
+	/* color: #ffffff; */
+	background: #cccccc;
+}
+
+.ProjeQtOrNewGui #mapDiv, .ProjeQtOrNewGui #messageDiv, .ProjeQtOrNewGui #listDiv, .ProjeQtOrNewGui #formDiv, .ProjeQtOrNewGui .display, .ProjeQtOrNewGui .background, .ProjeQtOrNewGui .dijitTitlePaneContentInner, .ProjeQtOrNewGui .dijitTabPane, .ProjeQtOrNewGui #mainDiv, .ProjeQtOrNewGui #centerDiv {
+    background-color: #ffffff; 
+}
+.dijitComboBoxMenu, .dijitMenuItem {
+   background-color:#ffffff;
+   background-image: url();
+}
+
+.ProjeQtOrNewGui .dijitTitlePane .dijitTitlePaneTitle {
+	background:#ffffff !important;
+	color: var(--color-section-title-text) !important;
+	/* border-bottom: 1px solid var(--color-section-title-border);*/
+	border-top: 2px solid var(--color-section-title-border);
+	margin-top:10px;
+	font-size:120%;
+	Height:25px;
+	font-weight:normal !important;
+}
+.ProjeQtOrNewGui .dijitTitlePane .dijitArrowNode {
+    background-image: url(images/spriteArrows.png);
+}
+.dijitTitlePaneTextNode {
+	 font-weight:normal;
+}
+
+/*================================== LAYOUTS ===============================================*/
+
+.ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar {
+	background: url() var(--color-toolbar) !important;
+}
+.ProjeQtOrNewGui .dijitAccordionTitle2, .ProjeQtOrNewGui .reportTableColumnHeader2, .ProjeQtOrNewGui .largeReportHeader2 {
+  background: url() var(--color-light) !important;
+}
+.ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar {
+	background: var(--color-toolbar) !important;
+}
+.ProjeQtOrNewGui #menuBarLeft {
+	background: var(--color-reference);
+}
+.ProjeQtOrNewGui #menuBarRight, .ProjeQtOrNewGui #menuBarRight .statusBar {
+	background: var(--color-white) !important;
+}
+.ProjeQtOrNewGui #statusBarDiv {
+  border-bottom:0;
+  border-top:0;
+  padding:0;
+}
+.ProjeQtOrNewGui #centerDiv {
+  border-top:0;
+}
+.ProjeQtOrNewGui #statusBarDiv {
+	background: white !important;
+}
+.ProjeQtOrNewGui #listHeaderDiv,.ProjeQtOrNewGui .listTitle {
+	background-color: var(--color-list-header) !important;
+	color: var(--color-list-header-text) !important;
+}
+.ProjeQtOrNewGui #buttonDiv, .ProjeQtOrNewGui .title {
+  background-color: var(--color-detail-header) !important;
+  color: var(--color-detail-header-text) !important;
+}
+.ProjeQtOrNewGui #buttonDiv {
+  border-bottom : 1px solid var(--color-detail-header-border);
+}
+.ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
+  background: rgba(255,255,255,0.3) !important;
+}
+
+.ProjeQtOrNewGui .dojoxGridHeader .dojoxGridCell {
+  background-color: var(--color-grid-header-bg) !important;
+  border: 1px solid #ccc;
+  border-right: 1px solid #fefefe;
+  border-top: 0;
+  color: var(--color-grid-header-text) !important;
+  text-shadow: none;
+  font-size: 120%;
+  padding-top: 0px;
+  vertical-align:bottom;
+  padding-bottom: 5px;
+}
+.ProjeQtOrNewGui .dojoxGridRowOdd {
+  background-color: #ffffff;
+}
+.ProjeQtOrNewGui .dojoxGridRowSelected {
+	background-color: var(--color-dark) !important;
+}
+.ProjeQtOrNewGui .dojoxGridRowOver .dojoxGridCell{
+	background: var(--color-light) !important;
+	color: var(--color-dark) !important;
+}
+
+html, body, #mainDiv, 
+#toolBarDiv, 
+#logoDiv,
+#contentDiv,  #listDiv, .container {
+  font-size: 10pt;
+}
+
+.tabLabel {
+  font-size: 10pt;
+  background-color: #ffffff;
+  color:var(--color-text);
+}
+.largeLabel {
+  width: 370px;
+  background-color: #ffffff;
+  color:var(--color-text);
+}
+.dijitToolbar {
+ margin: 5px 2px 5px 0px;
+ padding: 2px 5px 6px 5px;
+ border: 0px solid #b3b3b3;
+ background-color: #ffffff; 
+ background-image: none; 
+}
+.toolbarForSelect {
+	position:absolute;
+	top:-9px;
+	right:25px;
+	/*left:-50px;*/
+	display:none;
+	opacity:0;
+	width:200px;
+	padding-right:0px;
+	-webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.roundedButton {
+  border-radius: 5px !important;
+  border: 1px solid #dddddd;
+}
+.roundedIconButton {
+	border: 1px solid #ffffff;
+	border-radius:10px !important;
+}
+.roundedButton:hover, .roundedButtonSmall:hover {
+  border: 1px solid #c0c0c0;
+  border-color: #a5a5a5;
+  border-bottom-color: #757575;
+  color: #3C3C3C;
+  background: var(--color-light) url() repeat-x bottom;
+}
+
+.ProjeQtOrNewGui .iconToolbarView { background-image: url(customIcons/grey/iconView.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 18px 18px}
+.ProjeQtOrNewGui .iconToolbarGoto { background-image: url(customIcons/grey/iconGoto.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrNewGui .iconToolbarSearch { background-image: url(customIcons/grey/iconSearch.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrNewGui .iconToolbarAdd { background-image: url(customIcons/grey/iconAdd.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+
+.fade-in {
+animation: fadeIn ease 0.5s;
+-webkit-animation: fadeIn ease 0.5s;
+-moz-animation: fadeIn ease 0.5s;
+-o-animation: fadeIn ease 0.5s;
+-ms-animation: fadeIn ease 0.5s;
+}
+@keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+.ProjeQtOrNewGui .roundedVisibleButton.roundedButton.generalColClass {
+	background: url() var(--color-button-background);
+}
+
+.ProjeQtOrNewGui .linkHeader, .ProjeQtOrNewGui .attachmentHeader, .ProjeQtOrNewGui .noteHeader, .ProjeQtOrNewGui .dependencyHeader, .ProjeQtOrNewGui .historyHeader, .ProjeQtOrNewGui .assignHeader, .ProjeQtOrNewGui .messageHeader, .ProjeQtOrNewGui .workflowHeader, .ProjeQtOrNewGui .filterHeader, .ProjeQtOrNewGui .calendarHeader, .ProjeQtOrNewGui .reportTableLineHeader {
+    color: rgb(101, 101, 101);
+    text-shadow: none;
+    background: url() var(--color-table-header) !important;
+}
+.ProjeQtOrNewGui .sectionBadge {
+	top:18px;
+	background: var(--color-dark);
+}	
+
+.ProjeQtOrNewGui .dijitButtonIcon {
+	-webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+  filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+}
+.ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui #menuBarShow .dijitIcon,
+.ProjeQtOrNewGui #listHeaderDiv div.iconSize32, .ProjeQtOrNewGui #buttonDiv div .iconSize32 {
+	 -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+  filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+  background-color: transparent;
+} 
+.ProjeQtOrNewGui #toolBarDiv .dijitIcon, .ProjeQtOrNewGui #toolBarDiv .iconSize22 {
+	-webkit-filter : brightness(0) invert(1);
+  filter : brightness(0) invert(1);
+  background-color: transparent;
+  opacity: 1;
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitDisabled {
+  background-color: transparent;
+  opacity : 0;
+}
+.ProjeQtOrNewGui .dijitButtonIcon.iconNewtab  {
+    background-image: url(customIcons/new/iconNewtab.svg);
+    width: 40px;
+    height: 16px;
+}
+.ProjeQtOrNewGui #menuUserParameterTop {
+	font-weight: normal;
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitReset .dijitInline .dijitArrowButtonInner, .ProjeQtOrNewGui #toolBarDiv .dijitTextBox .dijitArrowButtonInner {
+  -webkit-filter : brightness(0) invert(1);
+  filter : brightness(0) invert(1);
+  border: 0;
+}
+.ProjeQtOrNewGui #toolBarDiv .pseudoButton, .ProjeQtOrNewGui #toolBarDiv .dijitTextBox {
+	border:none;
+	background : transparent;
+	color: white;
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitButtonNode, .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
+	border:none;
+}
+.ProjeQtOrNewGui .menuBarItem {
+	padding: 5px 1px 3px 1px;
+  top: 0px;
+  border-bottom: 0px;
+  background-color: transparent;
+  background-image: url();
+}
+.ProjeQtOrNewGui .menuBarItem::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url();;
+  background-repeat: no-repeat;
+  background-position: right top;
+  -webkit-filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
+   filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
+}
+.ProjeQtOrNewGui .menuBarItem:hover {
+  -ms-transform: rotate(0deg) brightness(99%); /* IE 9 */
+  -webkit-transform: rotate(0deg) brightness(99%); /* Chrome, Safari, Opera */
+  transform: rotate(0deg);
+  border-bottom: 1px solid #fff0f0;
+  background-color: transparent;
+}
+.ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui .bottomNotification {
+  -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.ProjeQtOrNewGui .menuBarItemSelected {
+	 border-bottom: 1px solid #ff0000;
+	 background-color: transparent;
+}
+.ProjeQtOrNewGui .menuBarItemSelected:hover {
+   border-bottom: 1px solid #ff0000;
+}
+.ProjeQtOrNewGui .menuBarItemCaption {
+	display:none;
+}
+.ProjeQtOrNewGui .menuBarCustom {
+  /*background-image: url();*/
+  background-image: url(customIcons/red/favorite.png);
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: right top;
+}
+.ProjeQtOrNewGui .menuBarCustom::before {
+	content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url(images/smallIconFavorite.png);;
+  background-repeat: no-repeat;
+  background-position: right top;
+	-webkit-filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
+   filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
+}
+.ProjeQtOrNewGui .dijitSplitter {
+    background: var(--color-lighter);
+    border:0px solid var(--color-light);
+}
+
+.ProjeQtOrNewGui .dijitTabPaneWrapper {
+	border:none;
+}
+.ProjeQtOrNewGui .dijitButtonIcon {
+  background-image: url(customIcons/new/editorButtonsEnabled.png);
+}
+.ProjeQtOrNewGui .dijitDisabled .dijitButtonIcon {
+  background-image: url(customIcons/new/editorButtonsDisabled.png);
+}
+
+.ProjeQtOrNewGui .dijitDialogTitleBar {
+  background: url() var(--color-lighter) !important;
+  color:var(--color-text);
+  text-align:center;
+}
+.ProjeQtOrNewGui .dijitDialog {
+	border-radius:5px;
+	
+} 
+.ProjeQtOrNewGui .dijitButton,
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
+	border-radius:5px;
+	background: var(--color-lighter);
+  color:var(--color-text);
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitButton,
+.ProjeQtOrNewGui #toolBarDiv .dijitDropDownButton,
+.ProjeQtOrNewGui #toolBarDiv .dijitReset.dijitInline.dijitButtonNode {
+  border:0;
+  background: url() transparent;
+  background-color: transparent;
+  color:var(--color-white);
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitTreeRow {
+	color:white;font-weight:normal;font-size:90%
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitTreeRow:hover {
+  color:white;font-weight:normal;font-size:90%;
+  background-color:transparent;
+}
+
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNodeHover {
+  border-radius:20px;
+  background: #ffffff;
+  color:var(--color-text);
+}
+.ProjeQtOrNewGui .dijitButtonNode:hover {
+  background: #dddddd;
+  color:var(--color-dark);
+}
+.ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton .dijitButtonNode {
+    background: #ffffff;
+    border: 0px solid #ffffff;
+}    
+.ProjeQtOrNewGui .detailButton.dijitButton, .ProjeQtOrNewGui .dijitReset.dijitInline.detailButton.dijitButtonNode {
+	  background: #ffffff;
+    /*border: 1px solid #ffffff;*/
+    
+}
+
+.ProjeQtOrNewGui .detailButton.dijitButton.dijitButtonHover, .ProjeQtOrNewGui .dijitReset.dijitInline.detailButton.dijitButtonHover .dijitButtonNode {
+  /*border: 1px solid var(--color-medium);*/
+  background: var(--color-button-background);
+}
+.dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
+  border:1px solid white;
+}
+
+.ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
+  opacity:50%;
+}
+.ProjeQtOrNewGui #buttonDivObjectId {
+	margin-right:5px;
+	border:0;
+	color: var(--color-detail-header-text);
+}
+.ProjeQtOrNewGui #buttonDivObjectId .roundedButton{
+	border:1px solid white;
+}
+.ProjeQtOrNewGui #buttonDivObjectId .roundedButton:hover{
+  border:1px solid var(--color-detail-header-text);
+}
+.ProjeQtOrNewGui #buttonDivObjectId .roundedButton a{
+  color: var(--color-detail-header-text);
+}
+.separatorSection {
+	margin-top:5px;
+	margin-bottom:5px;
+	line-height: 20px;
+	padding:5px;
+	background-color:var(--color-lighter);
+	color:var(--color-dark);
+	
+}
+.separatorSection .assignHeader,
+.ProjeQtOrNewGui .assignHeader,
+.ProjeQtOrNewGui .dependencyHeader,
+.ProjeQtOrNewGui .noteHeader,
+.ProjeQtOrNewGui .linkHeader,
+.ProjeQtOrNewGui .attachmentHeader {
+	background-color:var(--color-lighter) !important;
+  color:var(--color-dark);
+}
+.ProjeQtOrNewGui .dijitTitlePane .dijitTitlePaneTitle,
+.ProjeQtOrNewGui .section {
+	text-shadow: none;
+}
+
+.ProjeQtOrNewGui .dijitSplitter {
+ color:var(--color-dark);
+}
+
+/* Scrollbars */
+
+.ProjeQtOrNewGui ::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background: var(--color-light);
+}
+
+.ProjeQtOrNewGui ::-webkit-scrollbar-thumb {
+    background: var(--color-dark);
+}
+
+body .ProjeQtOrNewGui {
+    scrollbar-face-color: var(--color-light);
+    scrollbar-track-color: var(--color-dark);
+    scrollbar-color: var(--color-dark) var(--color-light);
+    scrollbar-width: 12px;
+}
+.ProjeQtOrNewGui .calendarRed32
+  { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarRed22
+  { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarRed16 
+  { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrNewGui .calendarWhite32 
+  { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarWhite22 
+  { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarWhite16 
+  { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrNewGui .calendarYellow32 
+  { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarYellow22 
+  { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarYellow16 
+  { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.ProjeQtOrNewGui .calendarRedUpdate32 
+  { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarRedUpdate22 
+  { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarRedUpdate16 
+  { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrNewGui .calendarWhiteUpdate32 
+  { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarWhiteUpdate22 
+  { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarWhiteUpdate16 
+  { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrNewGui .calendarYellowUpdate32 
+  { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrNewGui .calendarYellowUpdate22 
+  { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrNewGui .calendarYellowUpdate16 
+  { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
