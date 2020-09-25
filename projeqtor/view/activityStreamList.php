@@ -440,7 +440,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
   	       $countDisplay++;  	       
   	     }
   	   } else if ($type=='mail') {
-  	     $resMail=activityStreamDisplayMail($object,'activityStream'); 	    
+  	     $resMail=activityStreamDisplayMail($object,'activityStream',$activityStreamShowClosed); 	    
   	     if($resMail){
   	       echo $resMail;
   	       $countDisplay++;
