@@ -4578,7 +4578,7 @@ function formatSmallButton($class, $isClass=false, $activeButton=true) {
   } else {
     $button=($isClass)?'':'Button';
     $buttonClass=($activeButton)?'roundedButtonSmall':'';
-    $result.="<span class='$buttonClass' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><div class='icon$button$class$size' style='' >&nbsp;</div></span>";
+    $result.="<span class='$buttonClass' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><div class='icon$button$class$size icon$button$class iconSize$size' style='' >&nbsp;</div></span>";
   }
   return $result;
 }
