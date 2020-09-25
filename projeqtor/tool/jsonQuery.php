@@ -235,7 +235,7 @@
         if (isLeavesSystemActiv()) {
             if ($objectClass!='Project' && !Project::isProjectLeaveVisible() && Project::getLeaveProjectId() && trim(Project::getLeaveProjectId()) ) {
                 $queryWhere.= ($queryWhere=='')?'':' and ';
-                $queryWhere.= $table . ".idProject <> " . Project::getLeaveProjectId() . " ";
+                $queryWhere.= "($table.idProject <> " . Project::getLeaveProjectId() . " or $table.idProject is null)";
             }
         }
 // MTY - LEAVE SYSTEM
@@ -258,7 +258,7 @@
           }
         }
     }
-    
+
     //Gautier #itemTypeRestriction
     if(Parameter::getGlobalParameter('hideItemTypeRestrictionOnProject')=='YES'){
       $lstGetClassList = Type::getClassList();
