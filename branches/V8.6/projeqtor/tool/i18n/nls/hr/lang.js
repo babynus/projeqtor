@@ -4765,7 +4765,6 @@ tooltipStatusOutOfWorkflow: "Ovo stanje više nije dio tijeka rada povezanog s t
 tooltipStatusSetLeaveChange: "Status je izmijenjenen promjenama uvjeta prijelaza na podnesene ili prihvaćene ili potvrđene <br/> Ovaj izostanak se ne može mijenjati sve dok njegovo stanje nije u skladu sa starim uvjetima.",
 tooltipUnderConstruction: "Kada se projekt nalazi pod izgradnjom&#58<br/>  - resurs ne vidi na stvarnom izvješću o radu<br/> - upozorenja nisu generirana <br/> - e-poruke nisu poslane",
 tooltipWarningValue: "podsjetnik",
-totalReal: "Ukupno stvarno",
 totalSize: "Ukupna veličina",
 trace: "Trace",
 transition: "tranzicija",
