@@ -223,10 +223,11 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
        $page="../view/objectDetail.php".((count($splitPage)>1)?'?'.$splitPage[1]:'');
     }
   }
+  $page=str_replace('../report/../tool/','../tool/',$page);
   securityCheckPage($page);
   $includeFile=$page;
   if (! substr($page,0,3)=='../') {
-    $includeFile.='../view/';
+    $includeFile='../view/'.$page;
   }
   securityCheckPage($includeFile);
   $pos = strpos($includeFile, '?');
