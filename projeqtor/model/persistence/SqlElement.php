@@ -1694,7 +1694,8 @@ abstract class SqlElement {
         $queryArchiv.=" (select * from ".$hist->getDatabaseTableName();
         $queryArchiv.=" where refType='".get_class($ass)."' and refId in (";
         $queryArchiv.="(select id from " .  $ass->getDatabaseTableName ();
-        $queryArchiv .= " where refType='" . get_class ( $this ) . "' and refId=" . $this->id .")))";
+        $queryArchiv .= " where refType='" . get_class ( $this ) . "' and refId=" . $this->id ."))";
+        $queryArchiv .= " and id not in (select id from ".$archiv->getDatabaseTableName()." ))";
         $resultArch = Sql::query ( $queryArchiv );
         if (! $resultArch) {
           $returnValue = Sql::$lastQueryErrorMessage;
@@ -4608,7 +4609,7 @@ abstract class SqlElement {
         } else {
           // check if required
           if ((strpos ( $this->getFieldAttributes ( $col ), 'required' ) !== false or array_key_exists ( $col, $arrayExtraRequired )) 
-              and ! $isCopy and !in_array( $col, $arrayExtraHidden ) ) {
+              and ! $isCopy and !in_array( $col, $arrayExtraHidden ) and $this->isAttributeSetToField($col, 'canChangeReference') ) {
             if ($col == 'idResource' and ! trim ( $this->idResource ) and $user->isResource and Parameter::getGlobalParameter ( 'setResponsibleIfNeeded' ) != 'NO') {
               $this->idResource = $user->id;
               $val = $this->idResource;
