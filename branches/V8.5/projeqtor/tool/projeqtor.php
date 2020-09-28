@@ -4117,6 +4117,7 @@ function securityCheckRequest() {
     if (isset($_REQUEST[$param])) {
       $paramVal=$_REQUEST[$param];
       if (in_array($param, $pages)) {
+        $paramVal=str_replace('../report/../tool/','../tool/',$paramVal);
         securityCheckPage($paramVal);
         $pos=strpos($paramVal, '?');
         if ($pos) {
