@@ -187,6 +187,115 @@
     //echo '<td>&nbsp;</td>';
   }
   
+  function drawNewGuiMenu($menu) {
+  	global $iconSize, $defaultMenu,$customMenuArray,$iconClassWithSize;
+  	$drawMode='textual';
+  	$menuName=$menu->name;
+  	$menuClass=' menuBarItem '.$menu->menuClass;
+  	if (in_array($menu->name,$customMenuArray)) $menuClass.=' menuBarCustom';
+  	$idMenu=$menu->id;
+  	$style=(strpos($menuClass, $defaultMenu)===false)?'display: none;':'display: block; opacity: 1;width:auto;height:auto;white-space: nowrap;padding: 0px 5px 5px 5px;';
+  	if ($menu->type=='menu') {
+  		if ($menu->idMenu==0) {
+  			//echo '<td class="menuBarSeparator" style="width:5px;"></td>';
+  		}
+  	} else if ($menu->type=='item') {
+  		$class=substr($menuName,4);
+  		//echo '<td  title="' .(($menuName=='menuReports')?'':i18n($menu->name)) . '" >';
+  		echo '<td  title="' .i18n($menu->name) . '" >';
+  		echo '<div class="'.$menuClass.'" style="position:relative;'.$style.'" id="iconMenuBar'.$class.'" ';
+  		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
+  		echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
+  		if ($menuName=='menuReports' and isHtml5() ) {
+  			echo ' onMouseEnter="showReportFavoriteTooltip();"';
+  			echo ' onMouseLeave="hideReportFavoriteTooltip(2000);"';
+  		}
+  		echo '>';
+  		//echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
+  		if($drawMode=='icon'){
+  		  echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+  		}else if($drawMode=='textual'){
+          echo '<div style="color: var(--color-dark);">'.i18n($menu->name).'</div>';
+        }else if($drawMode=='iconTextual'){
+          echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+          echo '<div class="menuBarItemCaption">'.i18n($menu->name).'</div>';
+        }
+          if ($menuName=='menuReports' and isHtml5() ) {?>
+            <button class="comboButtonInvisible" dojoType="dijit.form.DropDownButton" 
+             id="listFavoriteReports" name="listFavoriteReports" style="position:relative;top:-10px;left:-10px;height: 0px; overflow: hidden; ">
+              <div dojoType="dijit.TooltipDialog" id="favoriteReports" style="position:absolute;"
+                href="../tool/refreshFavoriteReportList.php"
+                onMouseEnter="clearTimeout(closeFavoriteReportsTimeout);"
+                onMouseLeave="hideReportFavoriteTooltip(200)"
+                onDownloadEnd="checkEmptyReportFavoriteTooltip()">
+                <?php Favorite::drawReportList();?>
+              </div>
+            </button>
+          <?php }
+          echo '</div>';
+          echo '</td>'; 
+      } else if ($menu->type=='plugin') {
+        $class=substr($menuName,4);
+        echo '<td  title="' .i18n($menu->name) . '" >';
+        echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'"';
+        echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
+        echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
+        if($drawMode=='icon'){
+          echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
+        }else if($drawMode=='textual'){
+        	echo '<div style="color: var(--color-dark);">'.i18n($menu->name).'</div>';
+        }else if($drawMode=='iconTextual'){
+          echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
+          echo '<div class="menuBarItemCaption">'.i18n($menu->name).'</div>';
+        }
+        echo '</div>';
+        echo '</td>';
+      } else if ($menu->type=='object') { 
+        $class=substr($menuName,4);
+        if (securityCheckDisplayMenu($idMenu, $class)) {
+        	echo '<td title="' .i18n('menu'.$class) . '" >';
+        	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
+        	echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
+        	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" >';
+        	if($drawMode=='icon'){
+        		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+        	}else if($drawMode=='textual'){
+        		echo '<div style="color: var(--color-dark);">'.i18n($menu->name).'</div>';
+        	}else if($drawMode=='iconTextual'){
+        		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+        	//echo '<img src="../view/css/images/icon' . $class . $iconSize. '.png" />';
+              	echo '<div class="menuBarItemCaption">'.i18n('menu'.$class).'</div>';
+        	}
+        	echo '</div>';
+        	echo '</td>';
+        }
+      }
+    }  
+    
+    function drawAllNewGuiMenus($menuList) {
+      global $isLanguageActive, $isNotificationSystemActiv,$iconClassWithSize;
+      //echo '<td>&nbsp;</td>';
+      $obj=new Menu();
+      $menuList=$obj->getSqlElementsFromCriteria(null, false);
+      $pluginObjectClass='Menu';
+      $tableObject=$menuList;
+      $lstPluginEvt=Plugin::getEventScripts('list',$pluginObjectClass);
+      foreach ($lstPluginEvt as $script) {
+        require $script; // execute code
+      }
+      $menuList=$tableObject;
+      $lastType='';
+      foreach ($menuList as $menu) { 
+        if (! $isLanguageActive and $menu->name=="menuLanguage") { continue; }
+        if (! $isNotificationSystemActiv and strpos($menu->name, "Notification")!==false) { continue; }
+        if (! $menu->canDisplay() ) { continue;}
+        if (securityCheckDisplayMenu($menu->id,substr($menu->name,4)) ) {
+      		drawNewGuiMenu($menu);
+      		$lastType=$menu->type;
+      	}
+      }
+    }
+  
 ?>
 <table width="100%">
   <tr height="<?php echo $iconSize+8; ?>px;" <?php echo $simuBarColor;?> >  
