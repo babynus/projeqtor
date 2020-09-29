@@ -706,39 +706,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     include "../view/moduleView.php";
   }
   ?>
-  <?php $leftWidth=Parameter::getUserParameter('contentPaneLeftDivWidth');
-     $leftWidth=($leftWidth and $leftWidth>35)?$leftWidth.'px':'20%';
-     if ($hideMenu){
-       $leftWidth="32px";
-     }
-     //$IconSizeMenuHide = 16;
-    $IconSizeMenuHide=Parameter::getUserParameter('paramIconSize');
-    if (!$IconSizeMenuHide) $IconSizeMenuHide=22;
-    $IconSizeMenuHide2 = $IconSizeMenuHide+5;
-   ?>
-  <div id="menuBarShow" class="dijitAccordionTitle2 reportTableColumnHeader2 largeReportHeader2"  style="position:absolute;left:0px; top:81px; bottom:0px; width:<?php echo $IconSizeMenuHide2;?>px;">
-    <?php include "menuHideMenu.php"; ?> 
-    
-   <div id="hideMenuBarShowButton" style="cursor:pointer;position:absolute; right:-22px; bottom:2px;z-index:949;display:<?php echo (isset($showModuleScreen))?"none":"block";?>;">
-		  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarShow" title="" >
-		    <span style='top:0px;display:inline-block;width:22px;height:22px;'>
-		      <div class='iconHideStream22' style='' >&nbsp;</div>
-		    </span>
-		  </a>
-		</div>
-  </div> 
-  
-  <div id="hideMenuBarShowButton2" style="cursor:pointer;position:absolute;display:<?php echo (isset($showModuleScreen))?"none":"block";?>;left:<?php echo $IconSizeMenuHide2 ?>; bottom:2px;z-index:999998">
-	<?php if (! isset($showModuleScreen)) {?>
-	  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarShow" title="" >
-	    <span style='top:0px;display:inline-block;width:22px;height:22px;'>
-	      <div class='iconHideStream22' style='' >&nbsp;</div>
-	    </span>
-	  </a>
-	<?php }?>  
-	</div>
-	
-	<?php   
+  	<?php   
   //Gautier RGPD
   $crit = array ('idUser'=>$user->id,'accepted'=>'0');
   $listMessageLegalFollowup=SqlList::getListWithCrit ('MessageLegalFollowup',$crit,'idMessageLegal');
@@ -800,19 +768,58 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
             Sql::commitTransaction(); ?>
     </div>
  <?php  } ?>
-	
+ 
+ 
+  <?php 
+    if(!isNewGui()){
+     $leftWidth=Parameter::getUserParameter('contentPaneLeftDivWidth');
+     $leftWidth=($leftWidth and $leftWidth>35)?$leftWidth.'px':'20%';
+     if ($hideMenu){
+       $leftWidth="32px";
+     }
+     
+     //$IconSizeMenuHide = 16;
+    $IconSizeMenuHide=Parameter::getUserParameter('paramIconSize');
+    if (!$IconSizeMenuHide) $IconSizeMenuHide=22;
+    $IconSizeMenuHide2 = $IconSizeMenuHide+5;
+   ?>
+  <div id="menuBarShow" class="dijitAccordionTitle2 reportTableColumnHeader2 largeReportHeader2"  style="position:absolute;left:0px; top:81px; bottom:0px; width:<?php echo $IconSizeMenuHide2;?>px;">
+    <?php // include "menuHideMenu.php"; ?> 
+    
+   <div id="hideMenuBarShowButton" style="cursor:pointer;position:absolute; right:-22px; bottom:2px;z-index:949;display:<?php echo (isset($showModuleScreen))?"none":"block";?>;">
+		  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarShow" title="" >
+		    <span style='top:0px;display:inline-block;width:22px;height:22px;'>
+		      <div class='iconHideStream22' style='' >&nbsp;</div>
+		    </span>
+		  </a>
+		</div>
+  </div> 
+  
+  <div id="hideMenuBarShowButton2" style="cursor:pointer;position:absolute;display:<?php echo (isset($showModuleScreen))?"none":"block";?>;left:<?php echo $IconSizeMenuHide2 ?>; bottom:2px;z-index:999998">
+	<?php if (! isset($showModuleScreen)) {?>
+	  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarShow" title="" >
+	    <span style='top:0px;display:inline-block;width:22px;height:22px;'>
+	      <div class='iconHideStream22' style='' >&nbsp;</div>
+	    </span>
+	  </a>
+	<?php }?>  
+	</div>
+  <?php }?>
   <div id="globalContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">    
-    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left" splitter="true" style="width:<?php echo $IconSizeMenuHide2;?><?php echo (isNewGui())?';dispaly:none;':'';?>">
+    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left" splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:'250px');?><?php echo (isNewGui())?';dispaly:none;':'';?>">
+      <?php if(!isNewGui()){?>
       <script type="dojo/connect" event="resize" args="evt">
          if (hideShowMenuInProgress) return;
          if (dojo.byId("leftDiv").offsetWidth>52) 
          saveContentPaneResizing("contentPaneLeftDivWidth", dojo.byId("leftDiv").offsetWidth, true);
          dojo.byId("hideMenuBarShowButton2").style.left=dojo.byId("leftDiv").offsetWidth+3+"px";
       </script>
+      
       <div id="menuBarShow" class="dijitAccordionTitle " onMouseover="tempShowMenu('mouse');" onClick="tempShowMenu('click');">
         <div id="menuBarIcon" valign="middle"></div>
       </div>       
       <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
+
         <div id="logoDiv" dojoType="dijit.layout.ContentPane" region="top">
           <?php 
             $width=300;
@@ -869,7 +876,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
             <?php }?>
           </div>
         </div>
-        <?php $leftBottomHeight=Parameter::getUserParameter('contentPaneLeftBottomDivHeight');
+        <?php
+           $leftBottomHeight=Parameter::getUserParameter('contentPaneLeftBottomDivHeight');
            $leftBottomHeight=($leftBottomHeight)?$leftBottomHeight.'px':'300px';?>
         <div dojoType="dijit.layout.ContentPane" id="leftBottomDiv" region="bottom" splitter="true" style="height:<?php echo $leftBottomHeight;?>;">
           <script type="dojo/connect" event="resize" args="evt">
@@ -988,6 +996,13 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           </div>
         </div>
       </div> 
+      <?php
+      }else{?>
+        <div id="menuLeftDivNewGui" style="float:left;">
+       <?php include 'menuNewGuiLeft.php'; ?> 
+        </div>
+     <?php  } 
+      ?>
     </div>
     <?php 
     //$iconSize=Parameter::getUserParameter('paramTopIconSize');
@@ -1037,9 +1052,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
        
     </div>
     
-     <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
+     <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;left:250px !important;float:right;">
       <table width="100%"><tr>
-      
        <td width="220px" id="menuBarLeft" >
       
         <div style="overflow:hidden;position: absolute; left:2px; top: 8px;width:205px; background: transparent; color: #FFFFFF !important; border:<?php echo (isNewGui())?'0':'1';?>px solid #FFF;vertical-align:middle;" 
@@ -1074,7 +1088,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
          </script>
         </button>    
       </td>
-     
      <td width="85%">       
           <div id="menuBarVisibleDiv" style="height:<?php echo $iconSize+9;?>px;width:<?php echo ($cptAllMenu*56);?>px; position: absolute; top: 0px; left:248px; z-index:0">
           <div style="width: 100%; height:48px; position: absolute; left: 0px; top:1px; overflow:hidden; z-index:0">
