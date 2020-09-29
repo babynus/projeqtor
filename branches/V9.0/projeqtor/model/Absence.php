@@ -174,7 +174,7 @@ class Absence{
     	    }
     	  }else{
     	  	$workClose = new Work();
-    	  	$where3 = " refType = 'Activity' and refId = ".$actId." and idResource =".$userID." and year = ".$currentYear;
+    	  	$where3 = " refType = 'Activity' and refId = ".$actId." and idResource =".$userID." and year = '".$currentYear."'";
     	  	$listWorkClose = $workClose->getSqlElementsFromCriteria(null,false,$where3);
     	  	if($listWorkClose){
     	  		$result .=' <tr class="absActivityRow dojoxGridRow" id="'.$actRowId.'" align="center" style="background: #DDDDDD; height:20px; border: 1px solid grey;">';
