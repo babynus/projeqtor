@@ -1008,7 +1008,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     //$iconSize=Parameter::getUserParameter('paramTopIconSize');
     //$showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
     //$showMenuBar='NO';
-    $iconSize=32;
+    $iconSize=(isNewGui())?22:32;
     $showMenuBar='YES';
     //if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
     $iconSize+=9;?>
@@ -1016,13 +1016,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <div id="toolBarDiv" style="height:30px" dojoType="dijit.layout.ContentPane" region="top"  >
       <?php include "menuBar.php";?>
     </div>
-          
+    <div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false">       
     <div id="centerDiv" dojoType="dijit.layout.ContentPane" region="center">
     </div>
-    
-    
-  
-    
     <div id="statusBarDivBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="overflow:visible;display:block;height:0px; position:absolute; bottom:0px;">
        <div id="dialogReminder" >
          <div id="reminderDiv" style="width:100%;height: 150px"></div>
@@ -1051,9 +1047,10 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         </div>
        
     </div>
-    
-     <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;left:250px !important;float:right;">
+    <?php if (!isNewGui()) {?>
+     <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
       <table width="100%"><tr>
+      
        <td width="220px" id="menuBarLeft" >
       
         <div style="overflow:hidden;position: absolute; left:2px; top: 8px;width:205px; background: transparent; color: #FFFFFF !important; border:<?php echo (isNewGui())?'0':'1';?>px solid #FFF;vertical-align:middle;" 
@@ -1088,6 +1085,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
          </script>
         </button>    
       </td>
+     
      <td width="85%">       
           <div id="menuBarVisibleDiv" style="height:<?php echo $iconSize+9;?>px;width:<?php echo ($cptAllMenu*56);?>px; position: absolute; top: 0px; left:248px; z-index:0">
           <div style="width: 100%; height:48px; position: absolute; left: 0px; top:1px; overflow:hidden; z-index:0">
@@ -1126,8 +1124,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     </td></tr>
     </table>
     </div>
-    
-    <?php
+    <?php }else{
+      include 'menuNewGuiTop.php';
+      }
       $hideMenuLeftParam = Parameter::getGlobalParameter ( 'MenuBarLeft' ); 
       if (sessionValueExists('MenuBarLeft') and getSessionValue('MenuBarLeft')=='false'){
         $hideMenuLeftParam = 'true';
@@ -1153,7 +1152,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         var height=parseInt(dojo.byId('mainDiv').offsetHeight)-30;
       </script>
     <?php }?>
-    
+  </div>
     <div id="dialogAlert" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAlert");?>">
       <table>
         <tr>
