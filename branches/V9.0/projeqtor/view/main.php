@@ -997,11 +997,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         </div>
       </div> 
       <?php
-      }else{?>
-        <div id="menuLeftDivNewGui" style="float:left;">
-       <?php include 'menuNewGuiLeft.php'; ?> 
-        </div>
-     <?php  } 
+      }else{
+         include 'menuNewGuiLeft.php'; 
+      } 
       ?>
     </div>
     <?php 
@@ -1017,36 +1015,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       <?php include "menuBar.php";?>
     </div>
     <div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false">       
-    <div id="centerDiv" dojoType="dijit.layout.ContentPane" region="center">
-    </div>
-    <div id="statusBarDivBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="overflow:visible;display:block;height:0px; position:absolute; bottom:0px;">
-       <div id="dialogReminder" >
-         <div id="reminderDiv" style="width:100%;height: 150px"></div>
-          <div style="width:100%; height:15%; text-align:right">
-            <?php echo i18n("remindMeIn");?>
-           <input type="input" dojoType="dijit.form.TextBox" id="remindAlertTime" name="remindAletTime" value="15" style="width:25px" />
-            <?php echo i18n("shortMinute");?>
-           <button dojoType="dijit.form.Button" onclick="setAlertRemindMessage();">
-                    <?php echo i18n("remind");?>
-           </button>
-         </div>
-         <div style="width:100%; height:50px; text-align:right">
-           <table><tr><td width="80%">
-           <span id="markAllAsReadButtonDiv" >
-        	 <button  dojoType="dijit.form.Button" id="markAllAsReadButton" onclick="setAllAlertReadMessage();">
-        	          <?php echo i18n("markAllAsRead");?>
-        	 </button>
-        	 &nbsp;
-        	 </span>
-        	 </td><td>
-        	 <button  dojoType="dijit.form.Button" onclick="setAlertReadMessage();">
-        	          <?php echo i18n("markAsRead");?>
-        	 </button>
-        	 </td></tr></table>
-         </div>
-        </div>
-       
-    </div>
     <?php if (!isNewGui()) {?>
      <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
       <table width="100%"><tr>
@@ -1152,6 +1120,36 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         var height=parseInt(dojo.byId('mainDiv').offsetHeight)-30;
       </script>
     <?php }?>
+        <div id="centerDiv" dojoType="dijit.layout.ContentPane" region="center">
+    </div>
+    <div id="statusBarDivBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="overflow:visible;display:block;height:0px; position:absolute; bottom:0px;">
+       <div id="dialogReminder" >
+         <div id="reminderDiv" style="width:100%;height: 150px"></div>
+          <div style="width:100%; height:15%; text-align:right">
+            <?php echo i18n("remindMeIn");?>
+           <input type="input" dojoType="dijit.form.TextBox" id="remindAlertTime" name="remindAletTime" value="15" style="width:25px" />
+            <?php echo i18n("shortMinute");?>
+           <button dojoType="dijit.form.Button" onclick="setAlertRemindMessage();">
+                    <?php echo i18n("remind");?>
+           </button>
+         </div>
+         <div style="width:100%; height:50px; text-align:right">
+           <table><tr><td width="80%">
+           <span id="markAllAsReadButtonDiv" >
+        	 <button  dojoType="dijit.form.Button" id="markAllAsReadButton" onclick="setAllAlertReadMessage();">
+        	          <?php echo i18n("markAllAsRead");?>
+        	 </button>
+        	 &nbsp;
+        	 </span>
+        	 </td><td>
+        	 <button  dojoType="dijit.form.Button" onclick="setAlertReadMessage();">
+        	          <?php echo i18n("markAsRead");?>
+        	 </button>
+        	 </td></tr></table>
+         </div>
+        </div>
+       
+    </div>
   </div>
     <div id="dialogAlert" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAlert");?>">
       <table>
