@@ -5373,7 +5373,11 @@ abstract class SqlElement {
         $temp->refId=$this->id;
         $temp->idEmailTemplate=$emailTemplateTab[$j]->id;
         $temp->template=$emailTemplateTab[$j]->name;
-        $temp->title=$title;
+        if ($emailTemplateTab[$j]->title) {
+          $temp->title=$this->getMailDetailFromTemplate($emailTemplateTab[$j]->title,null,true);
+        } else {
+          $temp->title=$title;
+        }
         $temp->dest=$destTab[$emailTemplateTab[$j]->id];
         if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and ! $cronnedScript){
           $tabDest=explode(",", $temp->dest);
