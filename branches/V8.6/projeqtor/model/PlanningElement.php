@@ -1148,6 +1148,10 @@ class PlanningElement extends SqlElement {
       if(($this->refType=='Project' or $this->refType=='Activity') and $this->idRevenueMode==''){
         $this->idRevenueMode = 2;
       }
+      if($this->refType=='Project' and $this->id and $this->idRevenueMode!= 2) {
+        $countSub=$this->countSqlElementsFromCriteria(array('topId'=>$this->id,'refType'=>'Project'));
+        if ($countSub>0) $this->idRevenueMode = 2;
+      }
       $this->updateRevenue();
     }
     ///

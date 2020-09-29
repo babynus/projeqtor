@@ -203,11 +203,10 @@ class ProjectPlanningElementMain extends PlanningElement {
     	self::$_fieldsAttributes['commandSum']='readonly';
     	self::$_fieldsAttributes['billSum']='readonly';
     	self::$_fieldsAttributes['idRevenueMode']='size1/3';
-    	$subProj = $proj->getSubProjects(true);
-    	if(count($subProj) > 0){
+    	$countSubProj=$this->countSqlElementsFromCriteria(array('topId'=>$this->id, 'refType'=>'Project'));
+    	if($countSubProj > 0){
     		self::$_fieldsAttributes['idRevenueMode']='readonly,size1/3';
     		$this->idRevenueMode = 2;
-    		$this->save();
     	}
     	if($this->idRevenueMode == 2){
     		self::$_fieldsAttributes['revenue']='readonly';
@@ -337,6 +336,9 @@ class ProjectPlanningElementMain extends PlanningElement {
   			if (isset($pla->reserveAmount) and $pla->reserveAmount) $this->reserveAmount+=$pla->reserveAmount;
   		}
   	}
+  	if($hasSubProjects){ 
+  	  $this->idRevenueMode = 2;
+  	}
   	// save cumulated data
   	$this->expenseAssignedAmount+=$assignedExpense;
   	$this->expensePlannedAmount+=$plannedExpense;
@@ -352,6 +354,7 @@ class ProjectPlanningElementMain extends PlanningElement {
   		}
   	}
   	$resultSaveProj=$this->save();
+  	//if ($this->idRevenueMode==2) $this->updateRevenue();
   	// Dispath to top element
   	// #2995 : a previous version changed the condition in save() in PlanningElement so that updateSynthesis is always called for parent
   	//         so now calling updateSynthesis for parent in ProjectPlanningElement::updateSynthesisProject is obsolete
