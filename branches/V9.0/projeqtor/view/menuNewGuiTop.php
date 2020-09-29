@@ -35,7 +35,7 @@ $iconSize=22;
     <tr>
       <td width="85%">
         <table width="100%">
-<!--          <tr>
+          <!-- <tr width="50%">
             <td>   
               <div id="newGuiBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:32px;overflow:unset;">
               <nav class="NewGuiTabBar">
@@ -51,11 +51,11 @@ $iconSize=22;
           </tr> -->
           <tr>
             <td width="100%">       
-              <div id="menuBarVisibleDiv" style="height:48px;width:<?php echo ($cptAllMenu*56);?>px;  top: 0px; left:248px; z-index:0;padding-top: 10px;">
-                <div style="width: 100%; height:48px; left: 0px; top:1px; overflow:hidden; z-index:0">
+              <div id="menuBarVisibleDiv" style="height:32px;width:<?php echo ($cptAllMenu*56);?>px;  top: 0px; left:248px; z-index:0;padding-top: 10px;">
+                <div style="width: 100%;left: 0px; top:1px; overflow:hidden; z-index:0">
             	    <div name="menubarContainer" id="menubarContainer" style="width:<?php echo ($cptAllMenu*56);?>px; position: relative; left:0px; overflow:hidden;z-index:0">
             	      <table><tr>
-            	       <?php drawAllMenus($menuList);?>
+            	       <?php drawAllNewGuiMenus($menuList);?>
             	     </tr></table>
             	    </div>
                 </div>
@@ -63,6 +63,8 @@ $iconSize=22;
             </td>
           </tr>  
         </table>
+        <button id="menuBarMoveLeft" dojoType="dijit.form.Button" showlabel="false" style="display:none"></button>
+        <button id="menuBarMoveRight" dojoType="dijit.form.Button" showlabel="false"  style="display:none"></button>
       </td>
     </tr>
   </table>

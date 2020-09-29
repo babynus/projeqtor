@@ -326,6 +326,36 @@ html, body {
       overflow-y: auto;
       overflow-x: hidden;
     }
+    
+.NewGuiTab {
+	float: left;
+	width: 10%;
+	text-align: center;
+	white-space:nowrap;
+}
+
+.NewGuiTabBar {
+	width: 50%;
+    background-color: white;
+    position: sticky;
+    top: 0px;
+}
+
+.NewGuiTabBar a{
+    display: block; /*Toute la surface sera cliquable*/
+    color: black;
+    border-bottom: 2px solid transparent;/*Evite le décalage des éléments sous le menu à cause de la bordure en :hover*/
+}
+
+.NewGuiTabBar a:hover{
+    color: var(--color-dark);
+    border-bottom: 2px solid var(--color-dark);
+}
+
+.NewGuiTabSelected a{
+    border-bottom: 2px solid var(--color-dark);
+}
+
 #statusBarDiv {
   border: 0px; margin: 0px; padding: 1px;
   overflow: hidden;

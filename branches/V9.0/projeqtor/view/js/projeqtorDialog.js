@@ -7505,7 +7505,7 @@ function loadMenuBarObject(menuClass, itemName, from) {
     return false;
   }
   currentPluginPage=null;
-  if (from == 'bar') {
+  if (from == 'bar' && !isNewGui) {
     selectTreeNodeById(dijit.byId('menuTree'), menuClass);
   }
   hideResultDivs();

@@ -387,7 +387,7 @@ animation: fadeIn ease 0.5s;
   -ms-transform: rotate(0deg) brightness(99%); /* IE 9 */
   -webkit-transform: rotate(0deg) brightness(99%); /* Chrome, Safari, Opera */
   transform: rotate(0deg);
-  border-bottom: 1px solid #fff0f0;
+  border-bottom: 1px solid var(--color-dark)/*#fff0f0*/;
   background-color: transparent;
 }
 .ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui .bottomNotification {
@@ -405,7 +405,7 @@ animation: fadeIn ease 0.5s;
    border-bottom: 1px solid #ff0000;
 }
 .ProjeQtOrNewGui .menuBarItemCaption {
-	display:none;
+	/*display:none;*/
 }
 .ProjeQtOrNewGui .menuBarCustom {
   /*background-image: url();*/
