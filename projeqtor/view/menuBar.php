@@ -368,7 +368,7 @@
       </span>
     </td>
     <td width="" style="vertical-align:top;text-align:center;">
-      <span style="position:relative;top:5px;font-size:130%;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
+      <span style="position:relative;top:5px;font-size:130%;font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
     </td>    
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
     <td  width="63px" style=""> 
@@ -390,6 +390,7 @@
     <?php } if($profile == 'ADM'){
      $cronStatus = ucfirst(Cron::check());
      ?>
+     <?php drawSeparator();?>
      <td style="vertical-align: middle;text-align:center;width:32px;">
        <div id="menuBarCronStatus" name="menuBarCronStatus" >
         <div class="pseudoButton <?php echo $simuClass;?>"  
@@ -400,6 +401,7 @@
        </div>
     </td>
     <?php }?>    
+        <?php drawSeparator();?>
     <td title="<?php echo i18n('infoMessage');?>" style="vertical-align: middle;text-align:center;width:105px;padding-left:3px;"> 
       <div class="pseudoButton <?php echo $simuClass;?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:100px;" >
         <a target="#" href="<?php echo $website;?>" >
@@ -416,6 +418,7 @@
         </a>
       </div>  
     </td>
+        <?php drawSeparator();?>
         <td title="<?php ?>"  style="position:relative;width:55px;">
       <div dojoType="dijit.layout.ContentPane"  id="menuUserScreenTop" class="pseudoButton" style="position:relative;overflow:hidden;width:55px; height:28px; min-width:55px;top:-5px;">
         <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuUserScreenTopTitle");?>" id="iconMenuUserScreen" style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:50px;top:-3px" >
@@ -434,6 +437,7 @@
 		</div>
       </div>
     </td>
+    <?php drawSeparator();?>
     <td title="<?php echo i18n('menuUserParameter');?>"  style="position:relative;width:105px;padding-right:5px;">
       <div dojoType="dijit.layout.ContentPane"  id="menuUserParameterTop" class="pseudoButton" style="position:relative;overflow:hidden; height:28px;width:100%; min-width:100px;top:-5px;left:3px;" title="<?php echo i18n('menuUserParameter');?>">
         <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserPhoto" style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:100px;top:-3px;width:100%" >
@@ -446,8 +450,8 @@
       				  <img style="border-radius:13px;height:26px" src="<?php echo $imgUrl; ?>" />
       				</td>
       			  <?php } else {?>
-      				<td style="width:24px;padding-top:2px;">
-      				  <div class="<?php if ($iconClassWithSize) echo 'iconUserParameter22';?> iconUserParameter iconSize22">&nbsp;</div> 
+      				<td id="iconTopMenuUserParameter" style="width:24px;padding-top:2px;">
+      				  <div  class="iconTopMenuUserParameter <?php if ($iconClassWithSize) echo 'iconUserParameter22';?> iconUserParameter iconSize22">&nbsp;</div> 
       				</td>
       			   <?php }?>
       			  <td style="vertical-align:middle;">&nbsp;<?php echo ($user->resourceName)?$user->resourceName:$user->name; ?>&nbsp;&nbsp;</td>
@@ -466,3 +470,8 @@
 <div class="customMenuAddRemove"  id="customMenuAdd" onClick="customMenuAddItem();"><?php echo i18n('customMenuAdd');?></div>
 <div class="customMenuAddRemove"  id="customMenuRemove" onClick="customMenuRemoveItem();"><?php echo i18n('customMenuRemove');?></div>
       
+<?php 
+function drawSeparator() {
+  echo '<td style="position:relative;width: 5px;"><div class="menuBarSeparatorDiv" style=""></div></td>';
+}
+?>
