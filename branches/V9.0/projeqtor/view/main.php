@@ -1014,7 +1014,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <div id="toolBarDiv" style="height:30px" dojoType="dijit.layout.ContentPane" region="top"  >
       <?php include "menuBar.php";?>
     </div>
-    <div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false">       
+    <?php if(isNewGui()){ ?><div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false"> <?php }?>      
     <?php if (!isNewGui()) {?>
      <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
       <table width="100%"><tr>
@@ -1150,7 +1150,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         </div>
        
     </div>
-  </div>
+ <?php if(isNewGui()){?> </div><?php }?>
     <div id="dialogAlert" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAlert");?>">
       <table>
         <tr>
