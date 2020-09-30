@@ -172,7 +172,7 @@ label, .ProjeQtOrNewGui label,
 }
 
 .ProjeQtOrNewGui #menuBarAccesLeft{
-	background: var(--color-dark) !important;
+	background: var(--color-darker) !important;
 }
 
 .ProjeQtOrNewGui #statusBarDiv {
@@ -432,8 +432,8 @@ animation: fadeIn ease 0.5s;
    filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
 }
 .ProjeQtOrNewGui .dijitSplitter {
-    background: var(--color-lighter);
-    border:0px solid var(--color-light);
+    background: var(--color-light);
+    border:0px solid var(--color-medium);
 }
 
 .ProjeQtOrNewGui .dijitTabPaneWrapper {
@@ -487,6 +487,10 @@ animation: fadeIn ease 0.5s;
 	width:1px;
 	border-left:1px solid var(--color-toolbar-text);
 	top:2px;left:2px
+}
+#countNotifications {
+	-webkit-filter : brightness(1) invert(1);
+  filter: brightness(1) invert(1));
 }
 .ProjeQtOrNewGui #projectSelectorDiv .dijitReset.dijitInputInner {
 	color: var(--color-toolbar-text);
