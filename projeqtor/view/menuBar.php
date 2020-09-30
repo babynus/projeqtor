@@ -192,9 +192,9 @@
   	$drawMode='textual';
   	$menuName=$menu->name;
   	$menuClass=' menuBarItem '.$menu->menuClass;
-  	if (in_array($menu->name,$customMenuArray)) $menuClass.=' menuBarCustom';
+  	//if (in_array($menu->name,$customMenuArray)) $menuClass.=' menuBarCustom';
   	$idMenu=$menu->id;
-  	$style=(strpos($menuClass, $defaultMenu)===false)?'display: none;':'display: block; opacity: 1;width:auto;height:auto;white-space: nowrap;padding: 10px 5px 11px 5px;';
+  	$style='display: block; opacity: 1;width:auto;height:22px;white-space: nowrap;padding: 0px 5px 0px 5px;';
   	if ($menu->type=='menu') {
   		if ($menu->idMenu==0) {
   			//echo '<td class="menuBarSeparator" style="width:5px;"></td>';
