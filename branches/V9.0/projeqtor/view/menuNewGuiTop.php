@@ -51,9 +51,9 @@ $iconSize=22;
           </tr> -->
           <tr>
             <td width="100%">       
-              <div id="menuBarVisibleDiv" style="height:32px;width:<?php echo ($cptAllMenu*56);?>px;  top: 0px; left:248px; z-index:0;padding: 0px 0px 12px 0px;border-bottom:1px solid lightgrey;">
+              <div id="menuBarVisibleDiv" style="height:22px;width:auto;  top: 0px; left:248px; z-index:0;padding: 5px 0px 1px 0px;border-bottom:1px solid lightgrey;">
                 <div style="width: 100%;left: 0px; top:1px; overflow:hidden; z-index:0">
-            	    <div name="menubarContainer" id="menubarContainer" style="width:<?php echo ($cptAllMenu*56);?>px; position: relative; left:0px; overflow:hidden;z-index:0">
+            	    <div name="menubarContainer" id="menubarContainer" style="width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
             	      <table><tr>
             	       <td></td>
             	       <?php drawAllNewGuiMenus($menuList);?>
