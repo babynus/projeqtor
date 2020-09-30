@@ -63,6 +63,7 @@ function setColorTheming(ref,smooth) {
       hex=Number(dec).toString(16); 
       if (hex.length < 2) { hex="0"+hex; } 
       foreColor = '#'+hex+hex+hex;
+      dojo.byId("logoMenuBar").src="img/logoSmallWhite.png";
     } else {
       invert=0;
       dec=parseInt(light-128);
@@ -70,11 +71,10 @@ function setColorTheming(ref,smooth) {
       hex=Number(dec).toString(16); 
       if (hex.length < 2) { hex="0"+hex; } 
       foreColor = '#'+hex+hex+hex;
+      dojo.byId("logoMenuBar").src="img/logoSmall.png";
     }
   }
-  if (light >= 229) {
-    dojo.byId("logoMenuBar").style.filter='brightness(0) invert(0)';
-  }
+  
 //  dijit.byId("menuBarUndoButton").domNode.style.filter='brightness(0) invert('+invert+')';
 //  dijit.byId("menuBarRedoButton").domNode.style.filter='brightness(0) invert('+invert+')';
 //  dojo.byId("menuBarNewtabButton").style.filter='brightness(0) invert('+invert+')';
