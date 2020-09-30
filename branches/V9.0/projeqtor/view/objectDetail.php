@@ -1487,7 +1487,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             echo '&nbsp;'.(($thumb or isNewGui())?'':':&nbsp;').'</label>'.$cr;
             if ($thumb) {
               // echo $formatedThumb;
-              $pos=(isNewGui())?(($thumbRes)?'-10':'-7'):'0';
+              $pos=(isNewGui())?(($thumbRes)?'-6':'-7'):'0';
               if (!$print) echo '<div style="position:absolute;top:1px;right:'.$pos.'px;float:right;">';
               if ($col=='idStatus') {
                 echo '<a onmouseover="drawGraphStatus();">';
