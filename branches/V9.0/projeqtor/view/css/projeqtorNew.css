@@ -154,8 +154,9 @@ label, .ProjeQtOrNewGui label,
 
 /*================================== LAYOUTS ===============================================*/
 
-.ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar {
+.ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar, .titleProject {
 	background: url() var(--color-toolbar) !important;
+	color: var(--color-toolbar-text) !important;
 }
 .ProjeQtOrNewGui .dijitAccordionTitle2, .ProjeQtOrNewGui .reportTableColumnHeader2, .ProjeQtOrNewGui .largeReportHeader2 {
   background: url() var(--color-light) !important;
@@ -353,14 +354,14 @@ animation: fadeIn ease 0.5s;
 	font-weight: normal;
 }
 .ProjeQtOrNewGui #toolBarDiv .dijitReset .dijitInline .dijitArrowButtonInner, .ProjeQtOrNewGui #toolBarDiv .dijitTextBox .dijitArrowButtonInner {
-  -webkit-filter : brightness(0) invert(1);
-  filter : brightness(0) invert(1);
+  -webkit-filter : brightness(0) invert(var(--color-toolbar-invert));
+  filter: brightness(0) invert(var(--color-toolbar-invert));
   border: 0;
 }
 .ProjeQtOrNewGui #toolBarDiv .pseudoButton, .ProjeQtOrNewGui #toolBarDiv .dijitTextBox {
 	border:none;
 	background : transparent;
-	color: white;
+	color: var;
 }
 .ProjeQtOrNewGui #toolBarDiv .dijitButtonNode, .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
 	border:none;
@@ -461,10 +462,27 @@ animation: fadeIn ease 0.5s;
   border:0;
   background: url() transparent;
   background-color: transparent;
-  color:var(--color-white);
+  color: var(--color-toolbar-text);
+  -webkit-filter : brightness(0) invert(var(--color-toolbar-invert));
+  filter: brightness(0) invert(var(--color-toolbar-invert));
 }
+.ProjeQtOrNewGui #projectSelectorDiv .dijitReset.dijitInputInner {
+	color: var(--color-toolbar-text);
+}
+
+.ProjeQtOrNewGui #toolBarDiv .dijitButtonNode, .ProjeQtOrNewGui #toolBarDiv .dijitReset.dijitInline.dijitButtonNode {
+  transition : unset;
+}
+
 .ProjeQtOrNewGui #toolBarDiv .dijitTreeRow {
-	color:white;font-weight:normal;font-size:90%
+	color: var(--color-toolbar-text);
+	font-weight:normal;
+	font-size:90%
+}
+.ProjeQtOrNewGui #iconMenuUserPhoto, .ProjeQtOrNewGui #iconMenuUserPhoto span,
+.ProjeQtOrNewGui #iconMenuUserPhoto span img {
+	filter: unset;
+	-webkit-filter: unset;
 }
 .ProjeQtOrNewGui #toolBarDiv .dijitTreeRow:hover {
   color:white;font-weight:normal;font-size:90%;

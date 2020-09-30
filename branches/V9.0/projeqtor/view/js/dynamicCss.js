@@ -1,5 +1,8 @@
 
+colorThemingInProgress=false;
 function setColorTheming(ref,smooth) {
+  if (colorThemingInProgress) return;
+  colorThemingInProgress=true;
   //ref='#e97b2c';// Pour Test
   if (!ref) ref='#656565'; // dark grey
   if (!smooth) smooth=false;
@@ -42,6 +45,43 @@ function setColorTheming(ref,smooth) {
   brightness=80;
   //saturate=100;
   //brightness=100;
+  var foreColor = '#000000';
+  var invert=1;
+  if (ref.length == 7) {
+    var red = ref.substr(1, 2);
+    var green = ref.substr(3, 2);
+    var blue = ref.substr(5, 2);
+    var light = (0.3) * parseInt(red, 16) + (0.6) * parseInt(green, 16)
+        + (0.1) * parseInt(blue, 16);
+    light=parseInt(light);
+    console.log("light="+light);
+    if (light < 128) {
+      invert=1;
+      dec=parseInt(192+light);
+      if (dec>255) dec=255;
+      console.log("<128 dec="+dec);
+      hex=Number(dec).toString(16); 
+      if (hex.length < 2) { hex="0"+hex; } 
+      foreColor = '#'+hex+hex+hex;
+    } else {
+      invert=0;
+      dec=parseInt(light-128);
+      console.log(">128 dec="+dec);
+      hex=Number(dec).toString(16); 
+      if (hex.length < 2) { hex="0"+hex; } 
+      foreColor = '#'+hex+hex+hex;
+    }
+  }
+  if (light >= 229) {
+    dojo.byId("logoMenuBar").style.filter='brightness(0) invert(0)';
+  }
+//  dijit.byId("menuBarUndoButton").domNode.style.filter='brightness(0) invert('+invert+')';
+//  dijit.byId("menuBarRedoButton").domNode.style.filter='brightness(0) invert('+invert+')';
+//  dojo.byId("menuBarNewtabButton").style.filter='brightness(0) invert('+invert+')';
+//  dojo.byId("selectedProject").style.filter='brightness(0) invert('+invert+')';
+//  dijit.byId("projectSelectorParametersButton").domNode.style.filter='brightness(0) invert('+invert+')';
+
+
   
   
   var element=document.getElementById('body');
@@ -55,7 +95,9 @@ function setColorTheming(ref,smooth) {
   element.style.setProperty("--color-text", '#656565');
   element.style.setProperty("--color-white", '#ffffff');
   // Main Layout
-  element.style.setProperty("--color-toolbar",darker);
+  element.style.setProperty("--color-toolbar",ref);
+  element.style.setProperty("--color-toolbar-text",foreColor);
+  element.style.setProperty("--color-toolbar-invert",invert);
   // List
   element.style.setProperty("--color-list-header", white);
   element.style.setProperty("--color-list-header-text", dark);
@@ -75,7 +117,7 @@ function setColorTheming(ref,smooth) {
   element.style.setProperty("--image-hue-rotate-reverse", (-1*hueRotate)+'deg');
   element.style.setProperty("--image-saturate", saturate+'%');
   element.style.setProperty("--image-brightness", brightness+'%');;
-  
+  colorThemingInProgress=false;
 }
 
 function RGBToHex(r,g,b) {
