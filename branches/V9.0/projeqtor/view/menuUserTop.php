@@ -167,11 +167,17 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
   </tr>
 <?php if (isNewGui()) {?>
   <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("paramTheme");?>&nbsp;:&nbsp;</td>
+    <td width="120px" style="text-align:right"><?php echo i18n("color");?> 1&nbsp;:&nbsp;</td>
     <td>
-       <input type="color" id="menuUserColorPicket" onInput="setColorTheming(this.value);" onChange="saveDataToSession('newGuiThemeColor',this.value.substr(1),true);setColorTheming(this.value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>" style="width:100%" />
+       <input type="color" id="menuUserColorPicker" onInput="setColorTheming(this.value,null);" onChange="saveDataToSession('newGuiThemeColor',this.value.substr(1),true);setColorTheming(this.value,null);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>" style="width:100%" />
     </td>
   </tr>  
+  <tr style="height:40px">
+    <td width="120px" style="text-align:right"><?php echo i18n("paramTheme");?>&nbsp;:&nbsp;</td>
+    <td>
+       <input type="color" id="menuUserColorPickerBis" onInput="setColorTheming(null,this.value);" onChange="saveDataToSession('newGuiThemeColorBis',this.value.substr(1),true);setColorTheming(null,this.value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>" style="width:100%" />
+    </td>
+  </tr> 
  <?php }?>
   <tr style="height:40px">
     <td width="120px" style="text-align:right"><?php echo i18n("menuUserStartPage");?>&nbsp;:&nbsp;</td>

@@ -217,11 +217,11 @@ label, .ProjeQtOrNewGui label,
   background-color: #ffffff;
 }
 .ProjeQtOrNewGui .dojoxGridRowSelected {
-	background-color: var(--color-dark) !important;
+	background-color: var(--color-dark-secondary) !important;
 }
 .ProjeQtOrNewGui .dojoxGridRowOver .dojoxGridCell{
-	background: var(--color-light) !important;
-	color: var(--color-dark) !important;
+	background: var(--color-light-secondary) !important;
+	color: var(--color-dark-secondary) !important;
 }
 
 html, body, #mainDiv, 
@@ -489,8 +489,8 @@ animation: fadeIn ease 0.5s;
 	top:2px;left:2px
 }
 #countNotifications {
-	-webkit-filter : brightness(1) invert(1);
-  filter: brightness(1) invert(1));
+	font-size:80%;
+	font-weight:normal;
 }
 .ProjeQtOrNewGui #projectSelectorDiv .dijitReset.dijitInputInner {
 	color: var(--color-toolbar-text);
@@ -642,3 +642,4 @@ body .ProjeQtOrNewGui {
 .ProjeQtOrNewGui .calendarYellowUpdate16 
   { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
+.ProjeQtOrNewGui .iconNotification { background-image: url(customIcons/new/iconNotification.svg);  background-repeat: no-repeat;}
