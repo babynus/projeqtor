@@ -51,26 +51,28 @@ function setColorTheming(ref,smooth) {
     var red = ref.substr(1, 2);
     var green = ref.substr(3, 2);
     var blue = ref.substr(5, 2);
-    var light = (0.3) * parseInt(red, 16) + (0.6) * parseInt(green, 16)
+    var lightness = (0.3) * parseInt(red, 16) + (0.6) * parseInt(green, 16)
         + (0.1) * parseInt(blue, 16);
-    light=parseInt(light);
-    console.log("light="+light);
-    if (light < 128) {
+    lightness=parseInt(lightness);
+    console.log("lightness="+lightness);
+    if (lightness < 128) {
       invert=1;
-      dec=parseInt(192+light);
+      dec=parseInt(192+lightness);
       if (dec>255) dec=255;
       console.log("<128 dec="+dec);
       hex=Number(dec).toString(16); 
       if (hex.length < 2) { hex="0"+hex; } 
       foreColor = '#'+hex+hex+hex;
+      foreColor = '#ffffff';
       dojo.byId("logoMenuBar").src="img/logoSmallWhite.png";
     } else {
       invert=0;
-      dec=parseInt(light-128);
+      dec=parseInt(lightness-128);
       console.log(">128 dec="+dec);
       hex=Number(dec).toString(16); 
       if (hex.length < 2) { hex="0"+hex; } 
       foreColor = '#'+hex+hex+hex;
+      foreColor = '#000000';
       dojo.byId("logoMenuBar").src="img/logoSmall.png";
     }
   }
@@ -98,6 +100,7 @@ function setColorTheming(ref,smooth) {
   element.style.setProperty("--color-toolbar",ref);
   element.style.setProperty("--color-toolbar-text",foreColor);
   element.style.setProperty("--color-toolbar-invert",invert);
+  element.style.setProperty("--color-toolbar-invert-reverse",(1-invert));
   // List
   element.style.setProperty("--color-list-header", white);
   element.style.setProperty("--color-list-header-text", dark);
