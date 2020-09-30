@@ -468,8 +468,25 @@ animation: fadeIn ease 0.5s;
   background: url() transparent;
   background-color: transparent;
   color: var(--color-toolbar-text);
-  -webkit-filter : brightness(0) invert(var(--color-toolbar-invert));
+ 
+}
+.ProjeQtOrNewGui #toolBarDiv .dijitButton,
+.ProjeQtOrNewGui #toolBarDiv .dijitDropDownButton,
+#iconTopMenuUserParameter, .iconTopMenuUserParameter {
+	-webkit-filter : brightness(0) invert(var(--color-toolbar-invert));
   filter: brightness(0) invert(var(--color-toolbar-invert));
+}
+.ProjeQtOrNewGui #toolBarDiv #menuUserParameterTop .dijitButton,
+.ProjeQtOrNewGui #toolBarDiv #menuUserParameterTop .dijitDropDownButton {
+  -webkit-filter : unset;
+  filter: unset;
+}
+.menuBarSeparatorDiv {
+	height:26px;
+	position:absolute;
+	width:1px;
+	border-left:1px solid var(--color-toolbar-text);
+	top:2px;left:2px
 }
 .ProjeQtOrNewGui #projectSelectorDiv .dijitReset.dijitInputInner {
 	color: var(--color-toolbar-text);
