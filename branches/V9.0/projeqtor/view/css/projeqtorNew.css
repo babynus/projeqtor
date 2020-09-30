@@ -154,7 +154,7 @@ label, .ProjeQtOrNewGui label,
 
 /*================================== LAYOUTS ===============================================*/
 
-.ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar, .titleProject {
+.ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar,  .titleProject, .ProjeQtOrNewGui #menuBArNewGuiAcces{
 	background: url() var(--color-toolbar) !important;
 	color: var(--color-toolbar-text) !important;
 }
@@ -170,6 +170,11 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui #menuBarRight, .ProjeQtOrNewGui #menuBarRight .statusBar {
 	background: var(--color-white) !important;
 }
+
+.ProjeQtOrNewGui #menuBarAccesLeft{
+	background: var(--color-dark) !important;
+}
+
 .ProjeQtOrNewGui #statusBarDiv {
   border-bottom:0;
   border-top:0;
