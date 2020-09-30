@@ -344,7 +344,7 @@ html, body {
 .NewGuiTabBar a{
     display: block; /*Toute la surface sera cliquable*/
     color: black;
-    border-bottom: 2px solid transparent;/*Evite le décalage des éléments sous le menu à cause de la bordure en :hover*/
+    border-bottom: 2px solid transparent;/*Evite le dï¿½calage des ï¿½lï¿½ments sous le menu ï¿½ cause de la bordure en :hover*/
 }
 
 .NewGuiTabBar a:hover{
