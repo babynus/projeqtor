@@ -387,22 +387,22 @@ animation: fadeIn ease 0.5s;
   -ms-transform: rotate(0deg) brightness(99%); /* IE 9 */
   -webkit-transform: rotate(0deg) brightness(99%); /* Chrome, Safari, Opera */
   transform: rotate(0deg);
-  border-bottom: 1px solid var(--color-dark)/*#fff0f0*/;
+  border-bottom: 3px solid var(--color-dark)/*#fff0f0*/;
   background-color: transparent;
 }
 .ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui .bottomNotification {
-  -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+  -webkit-transition: all 0s ease;
+    -moz-transition: all 0s ease;
+    -o-transition: all 0s ease;
+    -ms-transition: all 0s ease;
+    transition: all 0s ease;
 }
 .ProjeQtOrNewGui .menuBarItemSelected {
-	 border-bottom: 1px solid #ff0000;
+	 border-bottom: 3px solid var(--color-dark);
 	 background-color: transparent;
 }
 .ProjeQtOrNewGui .menuBarItemSelected:hover {
-   border-bottom: 1px solid #ff0000;
+   border-bottom: 3px solid var(--color-dark);
 }
 .ProjeQtOrNewGui .menuBarItemCaption {
 	/*display:none;*/

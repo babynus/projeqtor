@@ -55,6 +55,7 @@ $iconSize=22;
                 <div style="width: 100%;left: 0px; top:1px; overflow:hidden; z-index:0">
             	    <div name="menubarContainer" id="menubarContainer" style="width:<?php echo ($cptAllMenu*56);?>px; position: relative; left:0px; overflow:hidden;z-index:0">
             	      <table><tr>
+            	       <td></td>
             	       <?php drawAllNewGuiMenus($menuList);?>
             	     </tr></table>
             	    </div>
