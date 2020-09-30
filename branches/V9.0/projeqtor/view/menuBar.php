@@ -472,6 +472,6 @@
       
 <?php 
 function drawSeparator() {
-  echo '<td style="position:relative;width: 5px;"><div class="menuBarSeparatorDiv" style=""></div></td>';
+  if (isNewGui()) echo '<td style="position:relative;width: 5px;"><div class="menuBarSeparatorDiv" style=""></div></td>';
 }
 ?>
