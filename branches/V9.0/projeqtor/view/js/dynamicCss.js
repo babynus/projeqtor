@@ -1,11 +1,13 @@
 
 colorThemingInProgress=false;
-function setColorTheming(ref,smooth) {
+function setColorTheming(ref,bis) {
   if (colorThemingInProgress) return;
   colorThemingInProgress=true;
+  if (!ref && dojo.byId('menuUserColorPicker')) ref=dojo.byId('menuUserColorPicker').value;
+  if (!bis && dojo.byId('menuUserColorPickerBis')) bis=dojo.byId('menuUserColorPickerBis').value;
   //ref='#e97b2c';// Pour Test
   if (!ref) ref='#656565'; // dark grey
-  if (!smooth) smooth=false;
+  if (!bis) bis='#E97B2C';
   var white='#ffffff';
   var black='#000000';
   var dark='#656565';
@@ -33,7 +35,7 @@ function setColorTheming(ref,smooth) {
   var s=hsl[1];
   var l=hsl[2];
   darker=HSLToHex(h,25,25);
-  dark=HSLToHex(h,s,40);
+  dark=HSLToHex(h,25,40);
   medium=HSLToHex(h,s,70);
   light=HSLToHex(h,s,90);
   lighter=HSLToHex(h,s,95);
@@ -45,6 +47,19 @@ function setColorTheming(ref,smooth) {
   brightness=80;
   //saturate=100;
   //brightness=100;
+  
+  var hsl=hexToHSL(bis);
+  var h=hsl[0];
+  var s=hsl[1];
+  var l=hsl[2];
+  darkerBis=HSLToHex(h,25,25);
+  darkBis=HSLToHex(h,25,40);
+  mediumBis=HSLToHex(h,s,70);
+  lightBis=HSLToHex(h,s,90);
+  lighterBis=HSLToHex(h,s,95);
+  console.log("dark="+dark);
+  console.log("darkBis="+darkBis);
+
   var foreColor = '#000000';
   var invert=1;
   if (ref.length == 7) {
@@ -83,9 +98,6 @@ function setColorTheming(ref,smooth) {
 //  dojo.byId("selectedProject").style.filter='brightness(0) invert('+invert+')';
 //  dijit.byId("projectSelectorParametersButton").domNode.style.filter='brightness(0) invert('+invert+')';
 
-
-  
-  
   var element=document.getElementById('body');
   // Generic colors
   element.style.setProperty("--color-reference", ref);
@@ -96,6 +108,13 @@ function setColorTheming(ref,smooth) {
   element.style.setProperty("--color-lighter", lighter);
   element.style.setProperty("--color-text", '#656565');
   element.style.setProperty("--color-white", '#ffffff');
+  element.style.setProperty("--color-secondary", bis);
+  element.style.setProperty("--color-darker-secondary", darkerBis);
+  element.style.setProperty("--color-dark-secondary", darkBis);
+  element.style.setProperty("--color-medium-secondary", mediumBis);
+  element.style.setProperty("--color-light-secondary", lightBis);
+  element.style.setProperty("--color-lighter-secondary", lighterBis);
+
   // Main Layout
   element.style.setProperty("--color-toolbar",ref);
   element.style.setProperty("--color-toolbar-text",foreColor);
@@ -111,7 +130,7 @@ function setColorTheming(ref,smooth) {
   element.style.setProperty("--color-detail-header-text", dark);
   element.style.setProperty("--color-detail-header-border", light);
   element.style.setProperty("--color-section-title-text", dark);
-  element.style.setProperty("--color-section-title-border", (smooth)?medium:dark);
+  element.style.setProperty("--color-section-title-border", dark);
   element.style.setProperty("--color-table-header", light);
   
   // Tools (buttons, ...)
