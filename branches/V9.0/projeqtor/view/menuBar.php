@@ -374,7 +374,7 @@
     <td  width="63px" style=""> 
      <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount"  style="text-align: center; position:relative;top:-4px">
        <div dojoType="dijit.form.DropDownButton"  id=""
-            style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;" >
+            style="display: table-cell;vertical-align: middle;" >
           <span  class="<?php if ($iconClassWithSize) echo 'iconNotification32';?> iconNotification iconSize32" style="display: table-cell;">  
             <span id="countNotifications" class="menuBarNotificationCount" style="text-align:center;" >
               0
@@ -409,7 +409,7 @@
                 <?php echo "$copyright<br/>$version";?>
               </td>
               <td  style="width:35px">
-                <img style="height:28px;width:28px;" src="img/logoSmall<?php if (isNewGui()) echo 'White';?>.png" />
+                <img id="logoMenuBar" style="height:28px;width:28px;" src="img/logoSmall<?php if (isNewGui()) echo 'White';?>.png" />
               </td>
             </tr>
           </table>
