@@ -30,12 +30,13 @@
 
 .menu__item {
 	display: block;
-	width: calc(100% - 50px);
+	width: calc(90%);
 }
 
 .menu__link {
 	font-weight: 600;
 	position: relative;
+	vertical-align: middle;
 	display: block;
 	padding: 1em 2.5em 1em 1.5em;
 	color: #bdbdbd;
@@ -43,21 +44,6 @@
 	transition: color 0.1s;
 }
 
-.menu__link[data-submenu]::after {
-	content: '\e904';
-	font-family: 'feather';
-	position: absolute;
-	right: 0;
-	padding: 0.25em 1.25em;
-	color: #2a2b30;
-}
-
-.menu__link:hover,
-.menu__link:focus,
-.menu__link[data-submenu]:hover::after,
-.menu__link[data-submenu]:focus::after {
-	color: #5c5edc;
-}
 
 .menu__link--current::before {
 	content: '\00B7';
