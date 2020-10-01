@@ -57,32 +57,11 @@
 			mlmenu = new MLMenu(menuEl, {
 				initialBreadcrumb : 'Accueil', // initial breadcrumb text
 				backCtrl : false, // show back button
-				//onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
 			});
-
-// 		// mobile menu toggle
-// 		var openMenuCtrl = document.querySelector('.action--open');
-// 	    var closeMenuCtrl = document.querySelector('.action--close');
-
-// 		openMenuCtrl.addEventListener('click', openMenu,false);
-// 		closeMenuCtrl.addEventListener('click', closeMenu,false);
-
-// 		function openMenu() {
-// 			classie.add(menuEl, 'menu--open');
-// 			closeMenuCtrl.focus();
-// 		}
-
-// 		function closeMenu() {
-// 			classie.remove(menuEl, 'menu--open');
-// 			openMenuCtrl.focus();
-// 		}
-
-
-
 	})();
 	</script>
     </div>
-    <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:30%;border-top:1px solid black ">
+    <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" >
     </div>
   </div>
 </div>
