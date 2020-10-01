@@ -175,7 +175,6 @@ label, .ProjeQtOrNewGui label,
 	background: var(--color-darker) !important;
 }
 .ProjeQtOrNewGui #menuBarAccesBottom{
-	height:30%;
 	border-top:1px solid var(--color-toolbar);
 }
 
