@@ -194,7 +194,7 @@
   	$menuClass=' menuBarItem '.$menu->menuClass;
   	//if (in_array($menu->name,$customMenuArray)) $menuClass.=' menuBarCustom';
   	$idMenu=$menu->id;
-  	$style='display: block; opacity: 1;width:auto;height:22px;white-space: nowrap;padding: 0px 5px 0px 5px;';
+  	$style='display: block; opacity: 1;width:auto;height:auto;max-height: 35px;padding: 0px 10px 5px 10px;color: var(--color-dark);';
   	if ($menu->type=='menu') {
   		if ($menu->idMenu==0) {
   			//echo '<td class="menuBarSeparator" style="width:5px;"></td>';
@@ -215,7 +215,7 @@
   		if($drawMode=='icon'){
   		  echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
   		}else if($drawMode=='textual'){
-          echo '<div style="color: var(--color-dark);">'.i18n($menu->name).'</div>';
+          echo i18n($menu->name);
         }else if($drawMode=='iconTextual'){
           echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
           echo '<div class="menuBarItemCaption">'.i18n($menu->name).'</div>';
@@ -243,7 +243,7 @@
         if($drawMode=='icon'){
           echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
         }else if($drawMode=='textual'){
-        	echo '<div style="color: var(--color-dark);">'.i18n($menu->name).'</div>';
+          echo i18n($menu->name);
         }else if($drawMode=='iconTextual'){
           echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
           echo '<div class="menuBarItemCaption">'.i18n($menu->name).'</div>';
@@ -260,7 +260,7 @@
         	if($drawMode=='icon'){
         		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
         	}else if($drawMode=='textual'){
-        		echo '<div style="color: var(--color-dark);">'.i18n($menu->name).'</div>';
+        		echo i18n($menu->name);
         	}else if($drawMode=='iconTextual'){
         		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
         	//echo '<img src="../view/css/images/icon' . $class . $iconSize. '.png" />';
