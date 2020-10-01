@@ -435,7 +435,9 @@ animation: fadeIn ease 0.5s;
     background: var(--color-light);
     border:0px solid var(--color-medium);
 }
-
+.ProjeQtOrNewGui #centerDiv {
+	/*border-top: 4px solid var(--color-light);*/
+}	
 .ProjeQtOrNewGui .dijitTabPaneWrapper {
 	border:none;
 }
