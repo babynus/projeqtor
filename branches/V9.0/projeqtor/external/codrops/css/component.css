@@ -77,6 +77,10 @@
 	color: var(--color-secondary);
 }
 
+.menu__link:hover {
+	color: var(--color-secondary);
+}
+
 [class^='animate-'],
 [class*=' animate-'] {
 	visibility: visible;

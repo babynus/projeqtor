@@ -47,7 +47,6 @@ INSERT INTO `${prefix}navigation` (`name`, `idParent`, `idMenu`,`idMenu`,`sortOr
 ('menuImputation',3,8,''),
 ('menuAbsence',3,203,''),
 ('menuDiary',3,133,''),
-
 ('menuGlobalParameter',6,18),
 ('menuUserParameter',6,19);
 
