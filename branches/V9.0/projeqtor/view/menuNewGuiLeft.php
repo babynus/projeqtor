@@ -133,7 +133,18 @@ function drawLeftMenuListNewGui(){
       $result.='<ul data-menu="'.$nameLink.'" id="'.$nameLink.'" class="menu__level" tabindex="-1" role="menu" >';
     }
     if($obj->idParent!=0 and $obj->idMenu!=0){
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" href="#">'.i18n($obj->name).'</a></li>';
+      $realMenu=new Menu($obj->idMenu);
+      $menuName=$realMenu->name;
+      $menuNameI18n = i18n($menuName);
+      $menuName2 = addslashes(i18n($menuName));
+      $class=substr($menuName,4);
+      if($realMenu->type=='item'){
+        $funcOnClick="loadMenuBarItem('".$class."','".htmlEncode($menuName2,'quotes')."','bar');";
+      }else{
+         $funcOnClick="loadMenuBarObject('".$class."','".htmlEncode($menuName2,'bar')."','bar');";
+      }
+      
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" onclick="'.$funcOnClick.'" href="#">'.i18n($obj->name).'</a></li>';
     }else{
       $sub='submenu-'.$obj->id;
       $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#">'.i18n($obj->name).'</a></li>';
