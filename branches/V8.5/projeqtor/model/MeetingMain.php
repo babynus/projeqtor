@@ -527,11 +527,15 @@ class MeetingMain extends SqlElement {
     $vcal .= "UID:Meeting-".$this->id."-".$srv."\r\n";
     //$vcal .= "DTSTAMP:".date('Ymd').'T'.date('His')."\r\n";
     date_default_timezone_set($paramTimezone);
+    // Start hour
     if ($this->meetingStartTime) $dtStart=strtotime($this->meetingDate.' '.$this->meetingStartTime);
-    else $dtStart=strtotime($this->meetingDate);
+    else if ($this->meetingEndTime) $dtStart=strtotime('-1 hour',strtotime($this->meetingDate.' '.$this->meetingEndTime));
+    else $dtStart=strtotime($this->meetingDate.' '.Parameter::getGlobalParameter('startAM').':00');
+    // End hour
     if ($this->meetingEndTime) $dtEnd=strtotime($this->meetingDate.' '.$this->meetingEndTime);
     else if ($this->meetingStartTime) $dtEnd=strtotime('+1 hour',$dtStart);
-    else $dtEnd=strtotime(addDaysToDate($this->meetingDate,1));
+    else $dtEnd=strtotime($this->meetingDate.' '.Parameter::getGlobalParameter('endPM').':00');
+    //
     $vcal .= "DTSTART:".gmdate('Ymd',$dtStart).'T'.gmdate('Hi',$dtStart)."00Z\r\n";
     $vcal .= "DTEND:".gmdate('Ymd',$dtEnd).'T'.gmdate('Hi',$dtEnd)."00Z\r\n";
     $vcal .= "DTSTAMP:".gmdate('Ymd',$dtStart).'T'.gmdate('Hi',$dtStart)."00Z\r\n";
