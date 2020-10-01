@@ -213,11 +213,11 @@
   		echo '>';
   		//echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
   		if($drawMode=='icon'){
-  		  echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+  		  echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style=width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
   		}else if($drawMode=='textual'){
           echo i18n($menu->name);
         }else if($drawMode=='iconTextual'){
-          echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+          echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
           echo '<div class="menuBarItemCaption">'.i18n($menu->name).'</div>';
         }
           if ($menuName=='menuReports' and isHtml5() ) {?>
@@ -258,11 +258,11 @@
         	echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
         	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" >';
         	if($drawMode=='icon'){
-        		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+        		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
         	}else if($drawMode=='textual'){
         		echo i18n($menu->name);
         	}else if($drawMode=='iconTextual'){
-        		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+        		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
         	//echo '<img src="../view/css/images/icon' . $class . $iconSize. '.png" />';
               	echo '<div class="menuBarItemCaption">'.i18n('menu'.$class).'</div>';
         	}
@@ -372,7 +372,7 @@
     </td>    
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
     <td  width="63px" style=""> 
-     <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount"  style="text-align: center; position:relative;top:-4px">
+     <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount"  style="text-align: center; position:relative;top:-5px">
        <div dojoType="dijit.form.DropDownButton"  id=""
             style="display: table-cell;vertical-align: middle;" >
           <span  class="<?php if ($iconClassWithSize) echo 'iconNotification32';?> iconNotification iconSize32" style="display: table-cell;">  
@@ -408,7 +408,7 @@
           <table style="width:100%">
             <tr>
               <td class="dijitTreeRow" style="position:relative; top:-2px;vertical-align: middle;text-align:center;width:70px;">
-                <?php echo "$copyright<br/>$version";?>
+                <?php echo "$version";?>
               </td>
               <td  style="width:35px">
                 <img id="logoMenuBar" style="height:28px;width:28px;" src="img/logoSmall<?php if (isNewGui()) echo 'White';?>.png" />
