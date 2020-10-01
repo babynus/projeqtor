@@ -527,8 +527,11 @@ class MeetingMain extends SqlElement {
     $vcal .= "UID:Meeting-".$this->id."-".$srv."\r\n";
     //$vcal .= "DTSTAMP:".date('Ymd').'T'.date('His')."\r\n";
     date_default_timezone_set($paramTimezone);
-    $dtStart=strtotime($this->meetingDate.' '.$this->meetingStartTime);
-    $dtEnd=strtotime($this->meetingDate.' '.$this->meetingEndTime);
+    if ($this->meetingStartTime) $dtStart=strtotime($this->meetingDate.' '.$this->meetingStartTime);
+    else $dtStart=strtotime($this->meetingDate);
+    if ($this->meetingEndTime) $dtEnd=strtotime($this->meetingDate.' '.$this->meetingEndTime);
+    else if ($this->meetingStartTime) $dtEnd=strtotime('+1 hour',$dtStart);
+    else $dtEnd=strtotime(addDaysToDate($this->meetingDate,1));
     $vcal .= "DTSTART:".gmdate('Ymd',$dtStart).'T'.gmdate('Hi',$dtStart)."00Z\r\n";
     $vcal .= "DTEND:".gmdate('Ymd',$dtEnd).'T'.gmdate('Hi',$dtEnd)."00Z\r\n";
     $vcal .= "DTSTAMP:".gmdate('Ymd',$dtStart).'T'.gmdate('Hi',$dtStart)."00Z\r\n";
