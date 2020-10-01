@@ -10,10 +10,11 @@ CREATE TABLE `${prefix}navigation` (
   `name` varchar(200) DEFAULT NULL,
   `idParent` int(12)  unsigned DEFAULT NULL COMMENT '12',
   `idMenu` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `sortOrder` int(3) unsigned DEFAULT NULL COMMENT '3',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `${prefix}navigation` (`name`, `idParent`, `idMenu`) VALUES
+INSERT INTO `${prefix}navigation` (`name`, `idParent`, `idMenu`,`idMenu`) VALUES
 ('navPlanning','',''),
 ('navTicketing','',''),
 ('navFolowUp','',''),
@@ -46,6 +47,7 @@ INSERT INTO `${prefix}navigation` (`name`, `idParent`, `idMenu`) VALUES
 ('menuImputation',3,8),
 ('menuAbsence',3,203),
 ('menuDiary',3,133),
+
 ('menuGlobalParameter',6,18),
 ('menuUserParameter',6,19);
 

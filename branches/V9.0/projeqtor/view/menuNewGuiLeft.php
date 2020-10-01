@@ -45,12 +45,42 @@
   </div>
   <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  >
     <div id="menuBarAccesTop" dojoType="dijit.layout.ContentPane"  region="center" style="height:70%;overflow: hidden;" >
-      <div id="historyNavBar" style="height:60px;">
-      
-      </div>
-      <?php // draw Menus
-        echo drawLeftMenuListNewGui();
-      ?>
+      <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
+      <nav id="ml-menu" class="menu">
+            <?php // draw Menus
+             echo drawLeftMenuListNewGui();
+            ?>
+      </nav>
+	<script>
+	(function() {
+		var menuEl = document.getElementById('ml-menu'),
+			mlmenu = new MLMenu(menuEl, {
+				initialBreadcrumb : 'Accueil', // initial breadcrumb text
+				backCtrl : false, // show back button
+				//onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+			});
+
+// 		// mobile menu toggle
+// 		var openMenuCtrl = document.querySelector('.action--open');
+// 	    var closeMenuCtrl = document.querySelector('.action--close');
+
+// 		openMenuCtrl.addEventListener('click', openMenu,false);
+// 		closeMenuCtrl.addEventListener('click', closeMenu,false);
+
+// 		function openMenu() {
+// 			classie.add(menuEl, 'menu--open');
+// 			closeMenuCtrl.focus();
+// 		}
+
+// 		function closeMenu() {
+// 			classie.remove(menuEl, 'menu--open');
+// 			openMenuCtrl.focus();
+// 		}
+
+
+
+	})();
+	</script>
     </div>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:30%;border-top:1px solid black ">
     </div>
@@ -59,53 +89,83 @@
 
 <?php 
 // functions
+
+function sortMenus(&$listMenus, &$result, $parent,$level ){
+  $level++;
+  $c=0;
+  foreach ($listMenus as $id=>$menu){
+    if($menu->idParent == $parent){
+      $c++;
+      $key=$level.'-'.$menu->idParent.'-'.$c;
+      $result[$key] = array('level'=>$level,'object'=>$menu);
+      sortMenus($listMenus, $result, $menu->id,$level);
+    }
+  }
+}
+
 function getNavigationMenuLeft (){
-  $result="";
+  $level=0;
   $result=array();
   $nav=new Navigation();
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
-  $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc',true);
-  //debugLog($contexctMenuMain);
-  foreach ($contexctMenuMain as $idContext=>$context){
-    if($context->idParent==0 and $context->idMenu==0){
-      $result[$idContext]=array('type'=>'main','id'=>'','object'=>$context);
-    }else if ($context->idMenu==0){
-      $result[$idContext]=array('type'=>'subNavMenu','id'=>$context->idParent,'object'=>$context);
-    }else{
+  $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc');
+  sortMenus($contexctMenuMain,$result,0,$level);
+  ksort($result);
+//   $liArray=$result;
+//   foreach ($liArray as $menu){
+//     debugLog($menu['level'].'    /   '.$menu['object']->idParent.'    '.$menu['object']->name);
+//   }
+
+
+  foreach ($result as $id=>$context){
+    $context=$context['object'];
+    if($context->idParent!=0 and $context->idMenu!=0){
+      $unset=false;
       $menu=new Menu($context->idMenu);
-      if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) continue; 
-      if (! $menu->canDisplay() ) continue;
-      if (!$isLanguageActive and $menu->name=="menuLanguage") continue; 
-      if (!Module::isMenuActive($menu->name)) continue;
-      if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) continue;
-      $result[$idContext]=array('type'=>'menuDirect','id'=>$context->idParent,'object'=>$context);
+      if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) $unset=true; 
+      if (! $menu->canDisplay() )  $unset=true;
+      if (!$isLanguageActive and $menu->name=="menuLanguage")  $unset=true;
+      if (!Module::isMenuActive($menu->name))  $unset=true;
+      if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) $unset=true;
+      if($unset==true)unset($result[$id]);
     }
   }
+  
   return $result;
 }
 
+
+
 function drawLeftMenuListNewGui(){
-      $allMenu=getNavigationMenuLeft();
-      foreach ($allMenu as $idMenu=>$menu){
-          //debugLog($menu['type']);
-      }
-//       $result.='<ul data-menu="submenu-1" id="submenu-'.$context->id.'" tabindex="-1" role="menu" >';
-    //$result.='<ul data-menu="main" class="menu__level" tabindex="-1" role="menu" >';
-    
-//     foreach ($menuList as $id=>$menu) {
-//     if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) { continue; }
-//     if (! $menu->canDisplay() ) { continue;}
-//     if (!$isLanguageActive and $menu->name=="menuLanguage") { continue; }
-//     if (!Module::isMenuActive($menu->name)) {continue;}
-//     if ($level>0 and securityCheckDisplayMenu($menu->id,substr($menu->name,4))) {continue;}
-//       $subMenuId="";// menu id to link the sub
-//       $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-'.$subMenuId.'" aria-owns="submenu-1" href="#">'.$menu->name.'</a></li>';
-//     }
-//     if($context->idMenu==''){
-//       $result.='</ul>';
-//     }
- 
-//  return $result;
+  $result='';
+  $old="";
+  $idP="";
+  $maineDraw=false;
+  $allMenu=getNavigationMenuLeft();
+  $result.='<div class="menu__wrap">';
+  foreach ($allMenu as $id=>$menu){
+    $obj=$menu['object'];
+    debugLog($menu['level']);
+    if($old!=$menu['level'] and $menu['level']==1 and $maineDraw!=true){
+      $maineDraw=true;
+      $result.='<ul data-menu="main" class="menu__level" tabindex="-1" role="menu" >';
+    }
+    if ( ($old!=$menu['level'] or ($old==$menu['level'] and $idP!=$obj->idParent)) and $menu['level']!=1 ){
+      $result.='</ul>';
+      $nameLink='submenu-'.$obj->idParent;
+      $result.='<ul data-menu="'.$nameLink.'" id="'.$nameLink.'" class="menu__level" tabindex="-1" role="menu" >';
+    }
+    if($obj->idParent!=0 and $obj->idMenu!=0){
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" href="#">'.i18n($obj->name).'</a></li>';
+    }else{
+      $sub='submenu-'.$obj->id;
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#">'.i18n($obj->name).'</a></li>';
+    }
+    $old=$menu['level'];
+    $idP=$menu['object']->idParent;
+  }
+  $result.='</div">';
+  return $result;
 }
   
 
