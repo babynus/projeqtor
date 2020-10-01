@@ -139,8 +139,7 @@
 
     // create breadcrumbs
     if( self.options.breadcrumbsCtrl ) {
-      console.log(this);
-      this.breadcrumbsCtrl = document.createElement('nav');
+      this.breadcrumbsCtrl = document.createElement('div');
       this.breadcrumbsCtrl.className = 'menu__breadcrumbs';
       //this.breadcrumbsCtrl.setAttribute('aria-label', 'You are here');
       this.el.insertBefore(this.breadcrumbsCtrl, this.el.firstChild);
