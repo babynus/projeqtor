@@ -39,7 +39,7 @@
 	vertical-align: middle;
 	display: block;
 	padding: 1em 2.5em 1em 1.5em;
-	color: #bdbdbd;
+	color: white;
 	-webkit-transition: color 0.1s;
 	transition: color 0.1s;
 }
@@ -179,7 +179,7 @@
 	vertical-align: middle;
 	letter-spacing: 1px;
 	text-transform: uppercase;
-	color: #5c5edc;
+	color: var(--color-secondary);
 }
 
 .menu__breadcrumbs a:last-child {
@@ -188,7 +188,7 @@
 
 .menu__breadcrumbs a:hover,
 .menu__breadcrumbs a:focus {
-	color: #8182e0;
+	color: var(--color-light-secondary);
 }
 
 .menu__breadcrumbs a:not(:last-child)::after {
