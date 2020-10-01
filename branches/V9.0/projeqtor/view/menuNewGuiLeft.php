@@ -45,7 +45,6 @@
   </div>
   <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  >
     <div id="menuBarAccesTop" dojoType="dijit.layout.ContentPane"  region="center" style="height:70%;overflow: hidden;" >
-      <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
       <nav id="ml-menu" class="menu">
             <?php // draw Menus
              echo drawLeftMenuListNewGui();
@@ -61,7 +60,7 @@
 	})();
 	</script>
     </div>
-    <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" >
+    <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:30%;">
     </div>
   </div>
 </div>
@@ -124,7 +123,6 @@ function drawLeftMenuListNewGui(){
   $result.='<div class="menu__wrap">';
   foreach ($allMenu as $id=>$menu){
     $obj=$menu['object'];
-    debugLog($menu['level']);
     if($old!=$menu['level'] and $menu['level']==1 and $maineDraw!=true){
       $maineDraw=true;
       $result.='<ul data-menu="main" class="menu__level" tabindex="-1" role="menu" >';

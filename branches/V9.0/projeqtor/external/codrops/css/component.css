@@ -1,3 +1,24 @@
+@font-face {
+	font-family: 'feather';
+	font-weight: normal;
+	font-style: normal;
+	src: url('../fonts/feather/feather.eot?1gafuo');
+	src: url('../fonts/feather/feather.eot?1gafuo#iefix') format('embedded-opentype'), url('../fonts/feather/feather.woff2?1gafuo') format('woff2'), url('../fonts/feather/feather.ttf?1gafuo') format('truetype'), url('../fonts/feather/feather.woff?1gafuo') format('woff'), url('../fonts/feather/feather.svg?1gafuo#feather') format('svg');
+}
+
+.icon {
+	font-family: 'feather';
+	font-weight: normal;
+	font-style: normal;
+	font-variant: normal;
+	line-height: 1;
+	text-transform: none;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	speak: none;
+}
+
 /* Menu styles */
 .menu__wrap {
 	position: absolute;
@@ -53,7 +74,7 @@
 	top: 50%;
 	left: 0.5em;
 	height: 4px;
-	color: #5c5edc;
+	color: var(--color-secondary);
 }
 
 [class^='animate-'],
@@ -166,7 +187,7 @@
 }
 
 .menu__breadcrumbs {
-	font-size: 0.65em;
+	font-size:8px;
 	line-height: 1;
 	position: relative;
 	padding: 2.5em 3.75em 1.5em 2.5em;
@@ -196,12 +217,12 @@
 	font-family: 'feather';
 	display: inline-block;
 	padding: 0 0.5em;
-	color: #33353e;
+	color: var(--color-secondary);
 }
 
 .menu__breadcrumbs a:not(:last-child):hover::after,
 .menu__breadcrumbs a:not(:last-child):focus::after {
-	color: #33353e;
+	color: var(--color-secondary);
 }
 
 .menu__back {
