@@ -30,43 +30,17 @@
   require_once "../tool/projeqtor.php";
 $iconSize=22;
 ?>
-<div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:auto; position:absolute !important;top:30px;left:250px;">
-  <table width="100%">
-    <tr>
-      <td width="85%">
-        <table width="100%">
-          <!-- <tr width="50%">
-            <td>   
-              <div id="newGuiBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:32px;overflow:unset;">
-              <nav class="NewGuiTabBar">
-               <ul class="NewGuiTabBarList" style="list-style-type: none;">
-                  <li class="NewGuiTab NewGuiTabSelected"><a href="#">Favoris</a></li>
-                  <li class="NewGuiTab"><a href="#">Récents</a></li>
-                 <li class="NewGuiTab" style="margin-right: 10px;"><a href="#">Personnel</a></li>
-                  <li class="NewGuiTab"><a href="#">Flux d'activité</a></li>
-                </ul>
-              </nav>
-              </div>
-            </td>
-          </tr> -->
-          <tr>
-            <td width="100%">       
-              <div id="menuBarVisibleDiv" style="height:22px;width:auto;  top: 0px; left:248px; z-index:0;padding: 5px 0px 1px 0px;border-bottom:1px solid lightgrey;">
-                <div style="width: 100%;left: 0px; top:1px; overflow:hidden; z-index:0">
-            	    <div name="menubarContainer" id="menubarContainer" style="width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
-            	      <table><tr>
-            	       <td></td>
-            	       <?php drawAllNewGuiMenus($menuList);?>
-            	     </tr></table>
-            	    </div>
-                </div>
-              </div>
-            </td>
-          </tr>  
-        </table>
-        <button id="menuBarMoveLeft" dojoType="dijit.form.Button" showlabel="false" style="display:none"></button>
-        <button id="menuBarMoveRight" dojoType="dijit.form.Button" showlabel="false"  style="display:none"></button>
-      </td>
-    </tr>
-  </table>
+<div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute !important;top:30px;left:250px;border-bottom:3px solid var(--color-dark);">
+  <div id="menuBarVisibleDiv" style="height:auto;width:auto;  top: 0px; left:248px; z-index:0;padding: 5px 0px 1px 0px;">
+    <div style="width: 100%;left: 0px; top:1px; overflow:hidden; z-index:0">
+	    <div name="menubarContainer" id="menubarContainer" style="width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
+	      <table><tr>
+	       <td></td>
+	       <?php drawAllNewGuiMenus($menuList);?>
+    	     </tr></table>
+    	    </div>
+        </div>
+      </div>
+<button id="menuBarMoveLeft" dojoType="dijit.form.Button" showlabel="false" style="display:none"></button>
+<button id="menuBarMoveRight" dojoType="dijit.form.Button" showlabel="false"  style="display:none"></button>
 </div>
