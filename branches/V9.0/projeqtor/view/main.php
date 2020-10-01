@@ -81,7 +81,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <link rel="stylesheet" href="../external/dojox/calendar/themes/tundra/Calendar.css" />
   <?php if (isNewGui()) {?>
   <link rel="stylesheet" type="text/css" href="css/projeqtorNew.css" />
+  <link rel="stylesheet" type="text/css" href="../external/codrops/css/component.css" />
   <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="../external/codrops/js/modernizr-custom.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="../external/codrops/js/classie.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="../external/codrops/js/mainLeftMenu.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <?php }?>
 <!-- ELIOTT - LEAVE SYSTEM -->
   <script type="text/javascript" src="../external/html2canvas/html2canvas.js?version=<?php echo $version.'.'.$build;?>"></script>
