@@ -349,6 +349,8 @@ class ImapMailbox {
       }
     }
     if (!empty($params['charset'])) {
+      if (! $this->serverEncoding or ! trim($this->serverEncoding)) $this->serverEncoding='utf-8';
+      if ($this->serverEncoding!='utf-8') traceLog("ImapMailbox conversion from '".$params['charset']."' to '".$this->serverEncoding."'");
       $data=iconv($params['charset'], $this->serverEncoding, $data);
     }
     
