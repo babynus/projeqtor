@@ -5,7 +5,7 @@
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 <g id="Calque_1_1_" display="none">
 </g>
-<path fill="none" stroke="#FF0000" stroke-width="7" stroke-miterlimit="10" d="M114.67,54.5H73.5V13.329c0-5.247-4.253-9.5-9.5-9.5
+<path fill="none" stroke="#FF0000" stroke-width="6" stroke-miterlimit="10" d="M114.67,54.5H73.5V13.329c0-5.247-4.253-9.5-9.5-9.5
 	s-9.5,4.253-9.5,9.5V54.5H13.329c-5.247,0-9.5,4.253-9.5,9.5c0,5.247,4.253,9.5,9.5,9.5H54.5v41.171c0,5.247,4.253,9.5,9.5,9.5
 	s9.5-4.253,9.5-9.5V73.5h41.17c5.247,0,9.5-4.253,9.5-9.5C124.17,58.753,119.917,54.5,114.67,54.5z"/>
 </svg>
