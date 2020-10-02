@@ -333,7 +333,7 @@ animation: fadeIn ease 0.5s;
 	background: var(--color-dark);
 }	
 
-.ProjeQtOrNewGui .dijitButtonIcon {
+.ProjeQtOrNewGui .dijitButtonIcon .buttonTopBar {
 	-webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
 }
@@ -396,8 +396,8 @@ animation: fadeIn ease 0.5s;
   -ms-transform: rotate(0deg) brightness(99%) !important; /* IE 9 */
   -webkit-transform: rotate(0deg) brightness(99%) !important; /* Chrome, Safari, Opera */
   transform: rotate(0deg) !important;
-  color:var(--color-secondary) !important;
-  border-bottom: 2px solid var(--color-secondary) !important/*#fff0f0*/;
+  color:var(--color-medium-secondary) !important;
+  border-bottom: 2px solid var(--color-medium-secondary) !important/*#fff0f0*/;
   background-color: transparent !important;
 }
 .ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui .bottomNotification {
@@ -436,6 +436,11 @@ animation: fadeIn ease 0.5s;
 	-webkit-filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
    filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
 }
+
+.ProjeQtOrNewGui .buttonTopBar {
+	padding:5px 0px 0px 5px;
+}
+
 .ProjeQtOrNewGui .dijitSplitter {
     background: var(--color-dark);
     border:0px solid var(--color-medium);

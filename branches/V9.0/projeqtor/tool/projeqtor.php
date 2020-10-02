@@ -4611,6 +4611,19 @@ function formatMediumButton($class, $isClass=false, $activeButton=true) {
   }
   return $result;
 }
+
+function formatNewGuiButton($class, $size, $isClass=false, $activeButton=true) {
+	global $print, $outMode;
+	$result='';
+	if (isset($outMode) and $outMode=='pdf') {
+		$result.="<span class='roundedButtonSmall' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><img style='width:".$size."px;height:".$size."px;' src='css/customIcons/new/icon$class.png' /></span>";
+	} else {
+		$button=($isClass)?'':'Button';
+		$buttonClass=($activeButton)?'roundedButtonSmall':'';
+		$result.="<span class='$buttonClass' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><div class='icon$button$class iconSize$size' style=''>&nbsp;</div></span>";
+	}
+	return $result;
+}
 // ===============================================================================================================================
 // Text formating for long fields, to preserve or not html tags depending on text type (html formatted or plain text)
 // This is needed to preserve compatibility between texts entered in Plan Text Editor and Rich Html Editor (CK or Dojo)
