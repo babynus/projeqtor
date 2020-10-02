@@ -35,12 +35,16 @@ $iconSize=22;
     <div style="width: 100%;left: 0px; top:1px; overflow:hidden; z-index:0">
 	    <div name="menubarContainer" id="menubarContainer" style="height:48px;width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
 	      <table style="height:48px;"><tr>
-	       <td style="padding: 0px 10px 0px 20px;"><?php echo formatSmallButton('Add');?></td>
-	       <?php drawAllNewGuiMenus($menuList);?>
-    	     </tr></table>
-    	    </div>
-        </div>
-      </div>
+    	       <td style="padding-left:5px;"><?php echo formatNewGuiButton('Add', 22, true);?></td>
+    	       <td style="padding-left:5px;"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+    	       <td style="padding-left:5px;"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
+    	       <td><div style="padding-left:10px;vertical-align:middle;width:1px;height:22px;border-right:1px solid var(--color-dark);"></div></td>
+    	       <?php drawAllNewGuiMenus($menuList);?>
+    	       <td style="top: 7px;right: 5px;position: absolute;width: 22px;height: 32px;border: 1px solid black;"></td>
+    	   </tr></table>
+  	    </div>
+    </div>
+  </div>
 <button id="menuBarMoveLeft" dojoType="dijit.form.Button" showlabel="false" style="display:none"></button>
 <button id="menuBarMoveRight" dojoType="dijit.form.Button" showlabel="false"  style="display:none"></button>
 </div>
