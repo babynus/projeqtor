@@ -375,11 +375,11 @@ animation: fadeIn ease 0.5s;
 	border:none;
 }
 .ProjeQtOrNewGui .menuBarItem {
-	padding: 5px 1px 3px 1px;
-  top: 0px;
-  border-bottom: 0px;
-  background-color: transparent;
-  background-image: url();
+	padding: 5px 1px 3px 1px !important;
+  top: 0px !important;
+  border-bottom: 0px !important;
+  background-color: transparent !important;
+  background-image: url() !important;
 }
 .ProjeQtOrNewGui .menuBarItem::before {
   content: "";
@@ -393,12 +393,12 @@ animation: fadeIn ease 0.5s;
    filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
 }
 .ProjeQtOrNewGui .menuBarItem:hover {
-  -ms-transform: rotate(0deg) brightness(99%); /* IE 9 */
-  -webkit-transform: rotate(0deg) brightness(99%); /* Chrome, Safari, Opera */
-  transform: rotate(0deg);
+  -ms-transform: rotate(0deg) brightness(99%) !important; /* IE 9 */
+  -webkit-transform: rotate(0deg) brightness(99%) !important; /* Chrome, Safari, Opera */
+  transform: rotate(0deg) !important;
   color:var(--color-secondary) !important;
-  border-bottom: 2px solid var(--color-secondary)/*#fff0f0*/;
-  background-color: transparent;
+  border-bottom: 2px solid var(--color-secondary) !important/*#fff0f0*/;
+  background-color: transparent !important;
 }
 .ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui .bottomNotification {
   -webkit-transition: all 0s ease;
@@ -408,30 +408,29 @@ animation: fadeIn ease 0.5s;
     transition: all 0s ease;
 }
 .ProjeQtOrNewGui .menuBarItemSelected {
-	 border-bottom: 2px solid var(--color-secondary);
+	 border-bottom: 2px solid var(--color-secondary) !important;
    	 color:var(--color-secondary) !important;
-	 background-color: transparent;
+	 background-color: transparent !important;
 }
 .ProjeQtOrNewGui .menuBarItemSelected:hover {
-   border-bottom: 2px solid var(--color-secondary);
+   border-bottom: 2px solid var(--color-secondary) !important;
    color:var(--color-secondary) !important;
 }
 .ProjeQtOrNewGui .menuBarItemCaption {
 	/*display:none;*/
 }
 .ProjeQtOrNewGui .menuBarCustom {
-  /*background-image: url();*/
-  background-image: url(customIcons/red/favorite.png);
-  background-size: 16px 16px;
-  background-repeat: no-repeat;
-  background-position: right top;
+  background-image: unset;
+}
+.ProjeQtOrNewGui .menuBarCustom:hover {
+  background-image: unset;
 }
 .ProjeQtOrNewGui .menuBarCustom::before {
 	content: "";
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-image: url(images/smallIconFavorite.png);;
+  background-image: unset;;
   background-repeat: no-repeat;
   background-position: right top;
 	-webkit-filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
