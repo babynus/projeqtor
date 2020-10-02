@@ -2027,16 +2027,21 @@ JSGantt.hide=function (pID,ganttObj) {
    var parentLine='';
    var newParentLine=parentLine;
    var sonsLines='';
+   var node=null;
    for(var i = 0; i < vList.length; i++) {
      if(vList[i].getParent()==pID) {
        vID = vList[i].getID();
        if(JSGantt.findObj('child_' + vID)){
-         JSGantt.findObj('child_' + vID).style.display = "none";
-         JSGantt.findObj('childgrid_' + vID).style.display = "none";
+         node=JSGantt.findObj('child_' + vID);
+         if (node) node.style.display = "none";
+         node=JSGantt.findObj('childgrid_' + vID);
+         if (node) node.style.display = "none";
        }
        if(vList[i].getClass()=='Meeting'){
-         JSGantt.findObj('bardivMetting_' + vID).style.display = "";
-         JSGantt.findObj('labelBarDiv_'+ vID).style.display = "none";
+         node=JSGantt.findObj('bardivMetting_' + vID);
+         if (node) node.style.display = "";
+         node=JSGantt.findObj('labelBarDiv_'+ vID);
+         if (node) node.style.display = "none";
        }
        vList[i].setVisible(0);
        if(vList[i].getGroup() == 1) {
@@ -2060,6 +2065,7 @@ JSGantt.show =  function (pID, ganttObj) {
   var vList = ganttObj.getList();
   var vID   = 0;
   var pIDindex=0;
+  var node=null;
   for(var i = 0; i < vList.length; i++) {
     if (vList[i].getID()==pID) {
       pIDindex=i;
@@ -2068,13 +2074,16 @@ JSGantt.show =  function (pID, ganttObj) {
       vID = vList[i].getID();
       if (vList[pIDindex].getOpen()==1) {
         if(JSGantt.findObj('child_' + vID)){
-          JSGantt.findObj('child_'+vID).style.display = "";
-          JSGantt.findObj('childgrid_'+vID).style.display = "";
+          node=JSGantt.findObj('child_'+vID);
+          if (node) node.style.display = "";
+          node=JSGantt.findObj('childgrid_'+vID);
+          if (node) node.style.display = "";
         }
         if(vList[i].getClass()=='Meeting'){
-          JSGantt.findObj('bardivMetting_' + vID).style.display = "none";
-          JSGantt.findObj('labelBarDiv_'+ vID).style.display = "block";
-          
+          node=JSGantt.findObj('bardivMetting_' + vID);
+          if (node) node.style.display = "none";
+          node=JSGantt.findObj('labelBarDiv_'+ vID)
+          if (node) node.style.display = "block";        
         }
         vList[i].setVisible(1);
       }
