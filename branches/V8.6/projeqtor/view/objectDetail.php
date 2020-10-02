@@ -590,6 +590,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     if (method_exists($obj, 'setAttributes')) {
       $obj->setAttributes();
     }
+    if (method_exists($obj, 'calculateFieldsForDisplay')) {
+      $obj->calculateFieldsForDisplay();
+    }
     // ADD BY Marc TABARY - 2017-02-16 - WORK AND COST VISIBILITY
     if(property_exists($obj, '_separator_sectionCostWork_marginTop')){//#3897 Gautier damian
       $isSeparatorWork = false;
@@ -634,6 +637,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   }
   if (method_exists($obj, 'setAttributesForBudget')) {
     $obj->setAttributesForBudget();
+  }
+  if (method_exists($obj, 'calculateFieldsForDisplay')) {
+    $obj->calculateFieldsForDisplay();
   }
   $nobr=false;
   if (!$obj->id) {
