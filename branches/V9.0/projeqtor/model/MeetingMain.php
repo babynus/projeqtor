@@ -451,6 +451,10 @@ class MeetingMain extends SqlElement {
     }
     if (trim($this->idProject)!=trim($old->idProject) or trim($this->idActivity)!=trim($old->idActivity) 
     or trim($this->idPeriodicMeeting)!=trim($old->idPeriodicMeeting)) {
+      if (trim($this->idPeriodicMeeting)) {
+        $parent=new PeriodicMeeting($this->idPeriodicMeeting);
+        $this->idProject=$parent->idProject;
+      }
       $this->MeetingPlanningElement->wbs=null;
       $this->MeetingPlanningElement->wbsSortable=null;
     }
