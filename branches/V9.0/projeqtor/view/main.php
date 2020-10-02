@@ -105,6 +105,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <script type="text/javascript" src="js/kanban.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtorFormatter.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/ckeditor/ckeditor.js?version=<?php echo $version.'.'.$build;?>"></script>
+  <script type="text/javascript" src="js/projeqtorNewGui.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <!-- ELIOTT - LEAVE SYSTEM -->
   <script type="text/javascript" src="js/projeqtorHR.js?version=<?php echo $version.'.'.$build;?>" ></script>
 <!-- ELIOTT - LEAVE SYSTEM -->
