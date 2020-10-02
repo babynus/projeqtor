@@ -40,7 +40,12 @@ $iconSize=22;
     	       <td style="padding-left:5px;"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
     	       <td><div style="padding-left:10px;vertical-align:middle;width:1px;height:22px;border-right:1px solid var(--color-dark);"></div></td>
     	       <?php drawAllNewGuiMenus($menuList);?>
-    	       <td style="top: 5px;right: 5px;position: absolute;width: 22px;height: 32px;border: 1px solid black;"></td>
+    	       <td style="top: 5px;right: 5px;position: absolute;">
+       	          <table style="height:32px;">
+       	            <tr><td style="width:22px;height:50%;border: 1px solid black;"></td></tr>
+   	                <tr><td style="width:22px;height:50%;border: 1px solid black;"></td></tr>
+       	          </table>
+    	       </td>
     	   </tr></table>
   	    </div>
     </div>
