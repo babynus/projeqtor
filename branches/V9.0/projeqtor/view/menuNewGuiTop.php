@@ -30,17 +30,17 @@
   require_once "../tool/projeqtor.php";
 $iconSize=22;
 ?>
-<div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute !important;top:30px;left:250px;border-bottom:3px solid var(--color-dark);">
+<div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:43px; position:absolute !important;top:30px;left:250px;border-bottom:3px solid var(--color-dark);">
   <div id="menuBarVisibleDiv" style="height:auto;width:auto;  top: 0px; left:248px; z-index:0;">
     <div style="width: 100%;left: 0px; top:1px; overflow:hidden; z-index:0">
-	    <div name="menubarContainer" id="menubarContainer" style="height:48px;width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
-	      <table style="height:48px;"><tr>
+	    <div name="menubarContainer" id="menubarContainer" style="height:43px;width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
+	      <table style="height:43px;"><tr>
     	       <td style="padding-left:5px;"><?php echo formatNewGuiButton('Add', 22, true);?></td>
     	       <td style="padding-left:5px;"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
     	       <td style="padding-left:5px;"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
     	       <td><div style="padding-left:10px;vertical-align:middle;width:1px;height:22px;border-right:1px solid var(--color-dark);"></div></td>
     	       <?php drawAllNewGuiMenus($menuList);?>
-    	       <td style="top: 7px;right: 5px;position: absolute;width: 22px;height: 32px;border: 1px solid black;"></td>
+    	       <td style="top: 5px;right: 5px;position: absolute;width: 22px;height: 32px;border: 1px solid black;"></td>
     	   </tr></table>
   	    </div>
     </div>
