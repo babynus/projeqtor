@@ -6,14 +6,14 @@
 <g id="Calque_1_1_" display="none">
 </g>
 <g id="Calque_2">
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	<path fill="none" stroke="#FF0000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 		M34.281,112.427C18.258,102.154,7.639,84.188,7.639,63.742c0-31.915,25.872-57.787,57.787-57.787
 		c31.915,0,57.787,25.872,57.787,57.787c0,31.916-25.872,57.787-57.787,57.787c-0.966,0-1.926-0.022-2.88-0.069"/>
 	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		<polyline fill="none" stroke="#FF0000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
 		6.122,112.43 34.285,112.43 34.285,85.732 	"/>
 	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		<polyline fill="none" stroke="#FF0000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
 		65.577,27.492 65.577,63.742 92.575,63.742 	"/>
 </g>
 </svg>
