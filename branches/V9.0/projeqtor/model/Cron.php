@@ -837,8 +837,7 @@ class Cron {
     if (file_exists ( $uploaddirMail )) {
       purgeFiles ( $uploaddirMail, null );
     }
-    foreach ($lstIMb as $mb){
-      
+    foreach ($lstIMb as $mb){     
       $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddirMail,'utf-8');
       $mails = array();
       enableCatchErrors();
@@ -917,8 +916,9 @@ class Cron {
           $ticket->idStatus = $idStatus->id;
           //user know as contact
           $res = new Resource();
-          $knowUser = $res->getSingleSqlElementFromCriteria('Resource',array('email'=>$mailFrom,'isContact'=>1));
-          if($knowUser)$ticket->idContact = $knowUser->id;
+          $knowUser = $res->getSingleSqlElementFromCriteria('Affectable',array('email'=>$mailFrom));
+          if($knowUser and $knowUser->id and $knowUser->isContact) $ticket->idContact = $knowUser->id;
+          if($knowUser and $knowUser->id and $knowUser->isUser) $ticket->idUser = $knowUser->id;
           $resultTicket=$ticket->save();
           if(getLastOperationStatus($resultTicket)=='OK' and $mb->allowAttach==1){
             $sizeAttach = ($mb->sizeAttachment)*1024*1024;
