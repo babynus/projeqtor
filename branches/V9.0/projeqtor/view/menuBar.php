@@ -203,7 +203,7 @@
   		$class=substr($menuName,4);
   		//echo '<td  title="' .(($menuName=='menuReports')?'':i18n($menu->name)) . '" >';
   		echo '<td  title="' .i18n($menu->name) . '" >';
-  		echo '<div class="'.$menuClass.'" style="position:relative;'.$style.'" id="iconMenuBar'.$class.'" ';
+  		echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
   		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
   		echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
   		if ($menuName=='menuReports' and isHtml5() ) {
