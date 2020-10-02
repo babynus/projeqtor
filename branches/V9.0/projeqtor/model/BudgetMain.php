@@ -635,6 +635,9 @@ class BudgetMain extends SqlElement {
     }
     // Retreive value for $availableTransferedAmount and $availableTransferedFullAmount 
     //$crit=array("budgetStartDate"=>$this->budgetStartDate, "budgetEndDate"=>$this->budgetEndDate, "elementary"=>"1");
+
+  }
+  public function calculateFieldsForDisplay() {
     $critClause="budgetStartDate='$this->budgetStartDate' and budgetEndDate='$this->budgetEndDate' and elementary=1";
     $critClause.=" and bbsSortable like '".substr($this->bbsSortable,0,5)."%'";
     $this->availableTransferedAmount=(-1)*$this->sumSqlElementsFromCriteria('update4Amount', null,$critClause);
