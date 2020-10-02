@@ -85,7 +85,7 @@ class ImapMailbox {
   protected function initImapStream() {
     $imapStream=@imap_open($this->imapPath, $this->login, $this->password);
     if (!$imapStream) {
-      throw new ImapMailboxException('Connection error: '.imap_last_error());
+      throw new ImapMailboxException("Connection error to $this->imapPath for $this->login: ".imap_last_error());
     }
     return $imapStream;
   }
