@@ -70,6 +70,157 @@ var contentPaneResizingInProgress={};
 
 var defaultMenu=null;
 
+
+//=============================================================================
+//function for left Menu 
+//
+// ticket 4965 Florent
+//=============================================================================
+
+;( function(window) {
+  
+  function menuLeft(menu) {  
+    this.el = menu;
+    this._init();
+  }
+
+  menuLeft.prototype = {
+    _init : function() {
+      this.menuTopDiv=dojo.byId('menuTop');
+      this.menuRight=dojo.byId('menuBarVisibleDiv');
+      this.trigger = dojo.byId( 'hideStreamNewGui' );
+      this.menuLeft=this.el.querySelector( '.menu-left' );
+      this.isMenuOpen = true; //replace to datatsession;
+      //divButton
+      this.hidStreamButtonTopBar= document.createElement('div');
+      this.hidStreamButtonTopBar.className = 'hideStreamNewGuiTopBar';
+      this.hidStreamButtonTopBar.setAttribute('id', 'hideStreamNewGuiTopBar');
+      this.hidStreamButtonTopBar.setAttribute('style', 'display:none;');
+      //incon
+      this.hidStreamButtonTopBarIcon = document.createElement('div');
+      this.hidStreamButtonTopBarIcon.className = 'iconHideMenuRight iconSize32';
+      //insert in menuBar
+      this.menuRight.insertAdjacentElement('afterbegin', this.hidStreamButtonTopBar);
+      this.hidStreamButtonTopBar.insertAdjacentElement('afterbegin',  this.hidStreamButtonTopBarIcon);
+      
+      this.triggerBar = dojo.byId( 'hideStreamNewGuiTopBar' );
+      this.eventtype ='click';
+      this._initEvents();
+
+    },
+    
+    _initEvents : function() {
+      var self = this;
+      this.trigger.addEventListener( this.eventtype, function( ev ) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        if( self.isMenuOpen ) {
+          self._closeMenu();
+          document.removeEventListener( self.eventtype, self.bodyClickFn );
+        }
+      } );
+      this.triggerBar.addEventListener( this.eventtype, function( ev ) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        if(! self.isMenuOpen ) {
+          self._openMenu();
+          document.addEventListener( self.eventtype, self.bodyClickFn );
+        }
+      } );
+    },
+    
+    _openMenu : function() {
+      if( this.isMenuOpen ) return;
+      console.log('ui');
+      this.isMenuOpen = true; //replace to datatsession;
+      classie.remove( this.menuLeft, 'close' );
+      classie.remove( this.menuTopDiv, 'close-menu' );
+      dojo.removeAttr('hideStreamNewGuiTopBar','style');
+      this._showHideButton();
+    },
+    
+    _closeMenu : function() {
+      if( !this.isMenuOpen ) return;
+      this.isMenuOpen = false;//replace to datatsession;
+      //if(this.el.querySelector( '.gn-open-all' ))classie.remove( this.menuLeft, 'gn-open-all' );
+      classie.add( this.menuLeft, 'close' );
+      classie.add( this.menuTopDiv, 'close-menu' );
+      this._showHideButton();
+    },
+    
+    _showHideButton : function(){
+      dojo.removeAttr('hideStreamNewGui','style');
+      dojo.removeAttr('contentMenuBar','style');
+      dojo.removeAttr('hideStreamNewGuiTopBar','style');
+      var duration=10;
+      var globalWidth=dojo.byId('mainDiv').offsetWidth;
+      var pos='left';
+      if(this.isMenuOpen){
+        this.trigger.setAttribute('style','display:block;float:right;');
+        this.triggerBar.setAttribute('style','display:none;');
+        
+        globalWidth=globalWidth-250;
+
+      }else{
+        this.trigger.setAttribute('style','display:none;');
+        this.triggerBar.setAttribute('style','float:left;width:32px;display:block;');
+        pos='right';
+      }
+    //menuBarsize
+      
+      dojox.fx.combine([ dojox.fx.animateProperty({
+        node : "menuTop",
+        properties : {
+          width : globalWidth
+        },
+        duration : duration
+      }), dojox.fx.animateProperty({
+        node : "globalTopCenterDiv",
+        properties : {
+          width : globalWidth
+        },
+        duration : duration
+      }), dojox.fx.animateProperty({
+        node : "centerDiv",
+        properties : {
+          width : globalWidth
+        },
+        duration : duration
+      }), dojox.fx.animateProperty({
+        node : "statusBarDiv",
+        properties : {
+          width : globalWidth
+        },
+        duration : duration
+      }), dojox.fx.animateProperty({
+        node : "leftDiv",
+        properties : {
+          width : (this.isMenuOpen)? 250 : 0
+        },
+        duration : duration
+      })]).play();
+      setTimeout('dijit.byId("globalTopCenterDiv").resize();', duration+5);
+      setTimeout(this._resizeMenuBar(), duration + 10);
+    },
+    
+    _resizeMenuBar:function(){
+      var width= dojo.byId('contentMenuBar').offsetWidth ;
+      if(this.isMenuOpen){
+        width=width+38;
+      }else{
+        width=width-38;
+      }
+      dojo.setAttr('contentMenuBar','style', 'width:'+width+'px;float:'+pos+'; top:1px; overflow:hidden; z-index:0');
+    }
+  }
+
+  window.menuLeft = menuLeft;
+
+} )(window);
+
+//=============================================================================
+
+
 function menuNewGuiFilter(filter) {
   var allCollection = dojo.query(".menuBarItem");
   allCollection.style("display", "none");
@@ -81,3 +232,4 @@ function menuNewGuiFilter(filter) {
   saveUserParameter('defaultMenu', filter);
   defaultMenu=filter;
 }
+
