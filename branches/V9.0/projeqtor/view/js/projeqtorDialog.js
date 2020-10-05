@@ -7499,6 +7499,7 @@ function selectIconMenuBar(menuClass){
 		dojo.query('.menuBarItem').removeClass('menuBarItemSelected', icon);
 		dojo.addClass(icon,'menuBarItemSelected');
 		dojo.addClass(icon,'menuBarRecent');
+		menuNewGuiFilter(defaultMenu);
 	}
 }
 
