@@ -139,20 +139,10 @@
     // create breadcrumbs
     if( self.options.breadcrumbsCtrl ) {
       this.breadcrumbsCtrl = document.createElement('div');
-      this.hidStrreamButtonJs= document.createElement('div');
-      this.hideButton = document.createElement('div');
       this.breadcrumbsCtrl.className = 'menu__breadcrumbs';
-      this.hideButton.className = 'iconHideMenuLeft iconSize32';
-      this.hidStrreamButtonJs.className = 'hideStreamNewGui';
       this.breadcrumbsCtrl.setAttribute('style', 'float:left;');
-      this.hidStrreamButtonJs.setAttribute('id', 'hideStreamNewGui');
-      this.hidStrreamButtonJs.setAttribute('style', 'float:right;');
-     
-      //this.hideButton.setAttribute('onclick', 'hideShowLeftMenu()');
       this.el.insertBefore(this.breadcrumbsCtrl, this.el.firstChild);
-      this.el.insertBefore(this.hidStrreamButtonJs,  this.el.firstChild);
       
-      this.hidStrreamButtonJs.insertAdjacentElement('afterbegin',  this.hideButton);
       
       // add initial breadcrumb
       this._addBreadcrumb(0);
@@ -169,6 +159,14 @@
         this.breadCrumbs = true;
       }
     }
+    this.hidStrreamButtonJs= document.createElement('div');
+    this.hideButton = document.createElement('div');
+    this.hideButton.className = 'iconHideMenuLeft iconSize32';
+    this.hidStrreamButtonJs.className = 'hideStreamNewGui';
+    this.hidStrreamButtonJs.setAttribute('id', 'hideStreamNewGui');
+    this.hidStrreamButtonJs.setAttribute('style', 'float:right;');
+    this.el.insertBefore(this.hidStrreamButtonJs,  this.el.firstChild);
+    this.hidStrreamButtonJs.insertAdjacentElement('afterbegin',  this.hideButton);
 
     // event binding
     this._initEvents();

@@ -283,6 +283,35 @@ html, body, #mainDiv,
   background: var(--color-light) url() repeat-x bottom;
 }
 
+.menu-left, .menuTop{
+		-webkit-transform: translateX(0px);
+		-moz-transform: translateX(0px);
+		transform: translateX(0px);
+		-webkit-transition: -webkit-transform 0.3s, width 0.3s;
+		-moz-transition: -moz-transform 0.3s, width 0.3s;
+		transition: transform 0.3s, width 0.3s;
+}
+
+.menu-left.close, .menuTop.close-menu{
+		-webkit-transform: translateX(-250px);
+		-moz-transform: translateX(-250px);
+		transform: translateX(-250px);
+}
+
+.hideStreamNewGui, .hideStreamNewGuiTopBar {
+	margin-top:4px;
+	margin-right:5px;
+	width:32px;
+	height:32px;
+	line-height: 1;
+	position: relative;
+	
+}
+
+.hideStreamNewGui:hover, .hideStreamNewGuiTopBar:hover{
+	cursor:pointer;	
+}
+
 .ProjeQtOrNewGui .iconToolbarView { background-image: url(customIcons/grey/iconView.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 18px 18px}
 .ProjeQtOrNewGui .iconToolbarGoto { background-image: url(customIcons/grey/iconGoto.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
 .ProjeQtOrNewGui .iconToolbarSearch { background-image: url(customIcons/grey/iconSearch.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
@@ -338,7 +367,7 @@ animation: fadeIn ease 0.5s;
   -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
 }*/
-.ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui #menuBarShow .dijitIcon,
+.ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui #menuBarShow .dijitIcon, .ProjeQtOrNewGui .hideStreamNewGuiTopBar,
 .ProjeQtOrNewGui #listHeaderDiv div.iconSize32, .ProjeQtOrNewGui #buttonDiv div .iconSize32,
 /*.ProjeQtOrNewGui #listHeaderDiv .dijitButtonIcon, .ProjeQtOrNewGui #buttonDiv .dijitButtonIcon,*/
 .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize22, .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize32,
