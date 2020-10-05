@@ -3,12 +3,15 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="40px" height="16px" viewBox="0 0 40 16" enable-background="new 0 0 40 16" xml:space="preserve">
-<path fill="none" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M32.269,11.404
-	c0,0.598-0.484,1.082-1.082,1.082H18.474c-0.598,0-1.082-0.484-1.082-1.082V1.53c0-0.597,0.484-1.082,1.082-1.082h12.713
-	c0.598,0,1.082,0.484,1.082,1.082V11.404z"/>
-<path fill="#FFFFFF" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M22.654,14.419
-	c0,0.598-0.484,1.082-1.082,1.082H8.859c-0.598,0-1.082-0.484-1.082-1.082V4.546c0-0.597,0.484-1.082,1.082-1.082h12.713
-	c0.598,0,1.082,0.484,1.082,1.082V14.419z"/>
+<g>
+	<path fill="none" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M31.187,0.449
+		H18.474c-0.598,0-1.082,0.484-1.082,1.082v1.934h4.181c0.598,0,1.082,0.484,1.082,1.082v7.94h8.532
+		c0.598,0,1.082-0.484,1.082-1.082V1.53C32.269,0.933,31.784,0.449,31.187,0.449z"/>
+	<path fill="none" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M17.392,3.464H8.859
+		c-0.598,0-1.082,0.484-1.082,1.082v9.873c0,0.598,0.484,1.082,1.082,1.082h12.713c0.598,0,1.082-0.484,1.082-1.082v-1.933"/>
+	<path fill="none" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M22.654,12.486
+		v-7.94c0-0.597-0.484-1.082-1.082-1.082h-4.181"/>
+</g>
 <defs>
 	
 	
