@@ -102,7 +102,6 @@
       var menu = {menuEl : menuEl, menuItems : [].slice.call(menuEl.querySelectorAll('.menu__item'))};
       
       self.menusArr.push(menu);
-      console.log(pos);
       // set current menu class
       if( pos === self.current_menu ) {
         classie.add(menuEl, 'menu__level--current');
@@ -140,9 +139,21 @@
     // create breadcrumbs
     if( self.options.breadcrumbsCtrl ) {
       this.breadcrumbsCtrl = document.createElement('div');
+      this.hidStrreamButtonJs= document.createElement('div');
+      this.hideButton = document.createElement('div');
       this.breadcrumbsCtrl.className = 'menu__breadcrumbs';
-      //this.breadcrumbsCtrl.setAttribute('aria-label', 'You are here');
+      this.hideButton.className = 'iconHideMenuLeft iconSize32';
+      this.hidStrreamButtonJs.className = 'hideStreamNewGui';
+      this.breadcrumbsCtrl.setAttribute('style', 'float:left;');
+      this.hidStrreamButtonJs.setAttribute('id', 'hideStreamNewGui');
+      this.hidStrreamButtonJs.setAttribute('style', 'float:right;');
+     
+      //this.hideButton.setAttribute('onclick', 'hideShowLeftMenu()');
       this.el.insertBefore(this.breadcrumbsCtrl, this.el.firstChild);
+      this.el.insertBefore(this.hidStrreamButtonJs,  this.el.firstChild);
+      
+      this.hidStrreamButtonJs.insertAdjacentElement('afterbegin',  this.hideButton);
+      
       // add initial breadcrumb
       this._addBreadcrumb(0);
       
@@ -157,19 +168,6 @@
         this._addBreadcrumb(self.current_menu);
         this.breadCrumbs = true;
       }
-    }
-
-    // create back button
-    if (this.options.backCtrl) {
-      this.backCtrl = document.createElement('button');
-      if (this.breadCrumbs) {
-        this.backCtrl.className = 'menu__back'; 
-      } else {
-        this.backCtrl.className = 'menu__back menu__back--hidden';
-      }
-      this.backCtrl.setAttribute('aria-label', 'Go back');
-      this.backCtrl.innerHTML = '<span class="icon icon--arrow-left"></span>';
-      this.el.insertBefore(this.backCtrl, this.el.firstChild);
     }
 
     // event binding
