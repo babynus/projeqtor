@@ -263,6 +263,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     var uWorkDayList='<?php echo Calendar::getWorkDayList(getSessionUser()->idCalendarDefinition);?>';
 // MTY - MULTI CALENDAR    
     var defaultOffDays=new Array();
+    var defaultMenu="<?php echo Parameter::getUserParameter('defaultMenu'); ?>";
     <?php 
 // MTY - GENERIC DAY OFF
     $defaultOffDays = array();
