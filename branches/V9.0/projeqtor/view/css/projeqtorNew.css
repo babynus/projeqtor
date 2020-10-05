@@ -333,13 +333,15 @@ animation: fadeIn ease 0.5s;
 	background: var(--color-dark);
 }	
 
-.ProjeQtOrNewGui .dijitButtonIcon .buttonTopBar {
-	-webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+/*.ProjeQtOrNewGui .dijitButtonIcon .buttonTopBar {
+  -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
-}
+}*/
 .ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui #menuBarShow .dijitIcon,
-.ProjeQtOrNewGui #listHeaderDiv div.iconSize32, .ProjeQtOrNewGui #buttonDiv div .iconSize32 {
-	 -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+.ProjeQtOrNewGui #listHeaderDiv div.iconSize32, .ProjeQtOrNewGui #buttonDiv div .iconSize32,
+.ProjeQtOrNewGui #listHeaderDiv .dijitButtonIcon, .ProjeQtOrNewGui #buttonDiv .dijitButtonIcon
+ {
+  -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   background-color: transparent;
 } 
