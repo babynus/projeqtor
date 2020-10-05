@@ -1836,7 +1836,7 @@ class LeaveMain extends SqlElement {
             $action = "OnTreatment";
             $cause = i18n("colAccepted");
         } 
-        if ($old->idStatus != $this->idStatus AND $this->submitted==1 AND $this->submitted==0) {
+        if ($old->idStatus != $this->idStatus AND $this->submitted==1 AND $old->submitted==0) {
             $action = "OnTreatment";
             $cause = i18n("colSubmitted");
         } 
