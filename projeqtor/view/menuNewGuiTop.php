@@ -37,7 +37,7 @@ $iconSize=22;
 	      <table style="height:43px;"><tr>
     	       <td style="padding-left:10px;"><?php echo formatNewGuiButton('Add', 22, true);?></td>
     	       <td style="padding-left:5px;" onclick="menuNewGuiFilter('menuBarCustom');"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
-    	       <td style="padding-left:5px;" onclick="menuNewGuiFilter('menuBarItem');"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
+    	       <td style="padding-left:5px;" onclick="menuNewGuiFilter('menuBarRecent');"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
     	       <td><div style="padding-left:10px;vertical-align:middle;width:1px;height:22px;border-right:1px solid var(--color-dark);"></div></td>
     	       <?php drawAllNewGuiMenus($menuList);?>
     	       <td style="top: 7px;right: 15px;position: absolute;">
