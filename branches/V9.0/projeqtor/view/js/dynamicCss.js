@@ -92,6 +92,20 @@ function setColorTheming(ref,bis) {
     }
   }
   
+  var bisText = '#ffffff';
+  if (bis.length == 7) {
+    var red = bis.substr(1, 2);
+    var green = bis.substr(3, 2);
+    var blue = bis.substr(5, 2);
+    var lightness = (0.3) * parseInt(red, 16) + (0.6) * parseInt(green, 16)
+    + (0.1) * parseInt(blue, 16);
+    lightness=parseInt(lightness);
+    console.log("bis brightness "+lightness);
+    if (lightness > 128) {
+      bisText = '#000000';
+    }
+  }
+  
 //  dijit.byId("menuBarUndoButton").domNode.style.filter='brightness(0) invert('+invert+')';
 //  dijit.byId("menuBarRedoButton").domNode.style.filter='brightness(0) invert('+invert+')';
 //  dojo.byId("menuBarNewtabButton").style.filter='brightness(0) invert('+invert+')';
@@ -125,6 +139,8 @@ function setColorTheming(ref,bis) {
   element.style.setProperty("--color-list-header-text", dark);
   element.style.setProperty("--color-grid-header-bg", white);
   element.style.setProperty("--color-grid-header-text", dark);
+  element.style.setProperty("--color-grid-selected-bg", bis);
+  element.style.setProperty("--color-grid-selected-text", bisText);
   // Detail
   element.style.setProperty("--color-detail-header", white);
   element.style.setProperty("--color-detail-header-text", dark);
