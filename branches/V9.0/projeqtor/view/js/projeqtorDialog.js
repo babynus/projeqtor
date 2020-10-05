@@ -7498,6 +7498,7 @@ function selectIconMenuBar(menuClass){
 	if (icon && dojo.hasClass(icon,'menuBarItem')){
 		dojo.query('.menuBarItem').removeClass('menuBarItemSelected', icon);
 		dojo.addClass(icon,'menuBarItemSelected');
+		dojo.addClass(icon,'menuBarRecent');
 	}
 }
 

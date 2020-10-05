@@ -70,31 +70,8 @@ var contentPaneResizingInProgress={};
 
 function menuNewGuiFilter(filter) {
   var allCollection = dojo.query(".menuBarItem");
-  //allCollection.forEach(function(node, index, arr){ node.style.display="none";});
   var newCollection = dojo.query("." + filter);
-  //newCollection.forEach(function(node, index, arr){ node.style.display="block";});
-  allCollection
-      .fadeOut(
-          {
-            duration : 200,
-            onEnd : function() {
-              allCollection.style("display", "none");
-              newCollection.style("display", "block");
-              newCollection.style("width", "auto");
-              newCollection.style("height", "auto");
-              newCollection.style("max-height", "48px !important");
-              newCollection.style("white-space", "nowrap");
-              newCollection.style("filter", "unset");
-              newCollection.style("padding", "5px 10px 5px 10px !important");
-              newCollection.style("color", "var(--color-dark)");
-              if (newCollection.length < 20) {
-                newCollection.fadeIn({
-                  duration : 200
-                }).play();
-              } else {
-                newCollection.style("opacity", "1");
-              }
-            }
-          }).play();
+  allCollection.style("display", "none");
+  newCollection.style("display", "block");
   saveUserParameter('defaultMenu', filter);
 }
