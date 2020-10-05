@@ -33,7 +33,7 @@ $iconSize=22;
 <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:43px; position:absolute !important;top:30px;left:250px;border-bottom:3px solid var(--color-dark);">
   <div id="menuBarVisibleDiv" style="height:auto;width:auto;  top: 0px; left:248px; z-index:0;">
     <div style="width: 100%;left: 0px; top:1px; overflow:hidden; z-index:0">
-	    <div name="menubarContainer" id="menubarContainer" style="height:43px;width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
+	    <div class="MenuBarContainer" name="menubarContainer" id="menubarContainer" style="height:43px;width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
 	      <table style="height:43px;"><tr>
     	       <td style="padding-left:10px;"><?php echo formatNewGuiButton('Add', 22, true);?></td>
     	       <td style="padding-left:5px;" onclick="menuNewGuiFilter('menuBarCustom');"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
