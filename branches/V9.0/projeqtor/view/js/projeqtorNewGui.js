@@ -68,10 +68,13 @@ var displayFilterComponentVersionPlanning='0';
 
 var contentPaneResizingInProgress={};
 
+var defaultMenu=null;
+
 function menuNewGuiFilter(filter) {
   var allCollection = dojo.query(".menuBarItem");
   var newCollection = dojo.query("." + filter);
   allCollection.style("display", "none");
   newCollection.style("display", "block");
   saveUserParameter('defaultMenu', filter);
+  defaultMenu=filter;
 }
