@@ -44,7 +44,7 @@
     </div>
   </div>
   <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  >
-    <div id="menuBarAccesTop" dojoType="dijit.layout.ContentPane"  region="center" style="height:70%;overflow: hidden;" >
+    <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:70%;overflow: hidden;" >
       <nav id="ml-menu" class="menu">
             <?php // draw Menus
              echo drawLeftMenuListNewGui();

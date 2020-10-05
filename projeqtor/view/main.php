@@ -86,6 +86,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <script type="text/javascript" src="../external/codrops/js/modernizr-custom.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/codrops/js/classie.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/codrops/js/mainLeftMenu.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorNewGui.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <?php }?>
 <!-- ELIOTT - LEAVE SYSTEM -->
   <script type="text/javascript" src="../external/html2canvas/html2canvas.js?version=<?php echo $version.'.'.$build;?>"></script>
@@ -105,7 +106,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <script type="text/javascript" src="js/kanban.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtorFormatter.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/ckeditor/ckeditor.js?version=<?php echo $version.'.'.$build;?>"></script>
-  <script type="text/javascript" src="js/projeqtorNewGui.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <!-- ELIOTT - LEAVE SYSTEM -->
   <script type="text/javascript" src="js/projeqtorHR.js?version=<?php echo $version.'.'.$build;?>" ></script>
 <!-- ELIOTT - LEAVE SYSTEM -->
@@ -526,10 +526,12 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           $firstPage="";
         }
       }
-      $hideMenu=false;
-      if (Parameter::getUserParameter('hideMenu') and Parameter::getUserParameter('hideMenu')!='NO' and ! getSessionValue('showModule')){
-        echo 'hideShowMenu(true,true);';
-        $hideMenu=true;
+      if(!isNewGui()){
+        $hideMenu=false;
+        if (Parameter::getUserParameter('hideMenu') and Parameter::getUserParameter('hideMenu')!='NO' and ! getSessionValue('showModule')){
+          echo 'hideShowMenu(true,true);';
+          $hideMenu=true;
+        }
       }
       echo "menuDivSize='".Parameter::getUserParameter('contentPaneLeftDivWidth')."';";
       // Module
@@ -694,7 +696,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     </tr>
   </table>
 </div>
-<div id="mainDiv" style="visibility: hidden;">
+<div id="mainDiv" style="visibility: hidden;" class="mainDiv">
   <div id="wait" >
   </div>
   <div id="errorPopup" data-dojo-type="dijit.Dialog" title=<?php echo strtoupper(i18n("ERROR")) ?>></div>
@@ -811,7 +813,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 	</div>
   <?php }?>
   <div id="globalContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">    
-    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left" splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:'250px');?><?php echo (isNewGui())?';dispaly:none;':'';?>">
+    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left" class="leftDiv" splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:'250px');?><?php echo (isNewGui())?';dispaly:none;':'';?>" >
       <?php if(!isNewGui()){?>
       <script type="dojo/connect" event="resize" args="evt">
          if (hideShowMenuInProgress) return;
@@ -1019,7 +1021,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <div id="toolBarDiv" style="height:30px" dojoType="dijit.layout.ContentPane" region="top"  >
       <?php include "menuBar.php";?>
     </div>
-    <?php if(isNewGui()){ ?><div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false"> <?php }?>      
+    <?php if(isNewGui()){ ?><div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false"><div id="right-pane" class="right-pane"><?php }?>      
     <?php if (!isNewGui()) {?>
      <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
       <table width="100%"><tr>
@@ -1097,10 +1099,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     </td></tr>
     </table>
     </div>
-    <?php }else{
-      include 'menuNewGuiTop.php';
-      }
-      $hideMenuLeftParam = Parameter::getGlobalParameter ( 'MenuBarLeft' ); 
+    <?php 
+          $hideMenuLeftParam = Parameter::getGlobalParameter ( 'MenuBarLeft' ); 
       if (sessionValueExists('MenuBarLeft') and getSessionValue('MenuBarLeft')=='false'){
         $hideMenuLeftParam = 'true';
       }
@@ -1109,8 +1109,10 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
            hideShowMenu(true);
         </script>
      <?php } ?>
-    
-     <?php 
+    <?php }else{
+      include 'menuNewGuiTop.php';
+      }
+
       $hideMenuTopParam = Parameter::getGlobalParameter ( 'MenuBarTop' );
       if (sessionValueExists('hideMenuTop') and getSessionValue('hideMenuTop')!='YES'){
         $hideMenuTopParam = 'YES';
@@ -1155,7 +1157,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         </div>
        
     </div>
- <?php if(isNewGui()){?> </div><?php }?>
+ <?php if(isNewGui()){?> </div></div><?php }?>
     <div id="dialogAlert" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAlert");?>">
       <table>
         <tr>
