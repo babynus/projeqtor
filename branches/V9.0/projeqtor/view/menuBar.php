@@ -194,7 +194,8 @@
   	$menuClass=' menuBarItem '.$menu->menuClass;
   	if (in_array($menu->name,$customMenuArray)) $menuClass.=' menuBarCustom';
   	$idMenu=$menu->id;
-  	$style=(strpos($menuClass, $defaultMenu)===false)?'display: none;':'width:auto;height:auto;max-height:48px !important;padding:5px 10px 5px 10px !important;color: var(--color-dark);filter:unset !important;white-space:nowrap;';
+  	$style='width:auto;height:auto;max-height:48px !important;padding:5px 10px 5px 10px !important;color: var(--color-dark);filter:unset !important;white-space:nowrap;';
+  	$style.=(strpos($menuClass, $defaultMenu)===false)?'display: none;':'display:block';
   	if ($menu->type=='menu') {
   		if ($menu->idMenu==0) {
   			//echo '<td class="menuBarSeparator" style="width:5px;"></td>';
