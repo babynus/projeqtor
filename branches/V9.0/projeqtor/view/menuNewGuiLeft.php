@@ -31,7 +31,7 @@
 
 ?>
 
-<div id="menuLeftBarContaineur" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false" >
+<div id="menuLeftBarContaineur" class="container"  dojoType="dijit.layout.BorderContainer" liveSplitters="false" >
 
   <div id="menuBArNewGuiAcces"  class="container"  dojoType="dijit.layout.BorderContainer" region="left"  style="width:32px;height:100%;">
     <div id="breadScrumb"  dojoType="dijit.layout.ContentPane" region="center" style="height:70%;" >
@@ -58,6 +58,7 @@
 				backCtrl : false, // show back button
 			});
 	})();
+	new menuLeft( dojo.byId( 'mainDiv' ) );
 	</script>
     </div>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:30%;">

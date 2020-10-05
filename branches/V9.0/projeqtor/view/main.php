@@ -813,8 +813,160 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 	<?php }?>  
 	</div>
   <?php }?>
-  <div id="globalContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">    
-    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left" class="leftDiv" splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:'250px');?><?php echo (isNewGui())?';dispaly:none;':'';?>" >
+  <div id="globalContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false"> 
+    <?php 
+    //$iconSize=Parameter::getUserParameter('paramTopIconSize');
+    //$showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
+    //$showMenuBar='NO';
+    $iconSize=(isNewGui())?22:32;
+    $showMenuBar='YES';
+    //if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
+    $iconSize+=9;?>
+    
+    <div id="toolBarDiv" style="height:30px" dojoType="dijit.layout.ContentPane" region="top"  >
+      <?php include "menuBar.php";?>
+    </div>
+    <?php if(isNewGui()){ ?><div id="menuTop" class="menuTop"><div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false"><div id="right-pane" class="right-pane"><?php }?>      
+    <?php if (!isNewGui()) {?>
+     <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
+      <table width="100%"><tr>
+      
+       <td width="220px" id="menuBarLeft" >
+      
+        <div style="overflow:hidden;position: absolute; left:2px; top: 8px;width:205px; background: transparent; color: #FFFFFF !important; border:<?php echo (isNewGui())?'0':'1';?>px solid #FFF;vertical-align:middle;" 
+        onChange="menuFilter(this.value);" id="menuSelector" id="menuSelector"
+        onMouseEnter="showMenuList();" onMouseLeave="hideMenuList(300);"
+        dojoType="dijit.form.Select" class="input filterField rounded menuSelect" 
+        ><?php foreach ($allMenuClass as $cl=>$clVal) {
+          $selected=($defaultMenu==$cl)?' selected=selected ':'';
+          echo '<option value="'.$cl.'" '.$selected.' style="color:#fff !important;">';
+          echo '<div style="z-index:9999;height:25px;vertical-align:middle;top:2px;width:190px;" value="'.$cl.'" '.$selected.' class="menuSelectList" onMouseOver="clearTimeout(closeMenuListTimeout);" onMouseLeave="hideMenuList(200,\''.$cl.'\');">';
+          echo '  <div style="z-index:9;position:absolute;height:23px;width:25px;left:1px;background-color:#ffffff;border-radius:5px;opacity: 0.5;">&nbsp;</div>';
+          echo '  <span style="z-index:10;position:absolute;height:22px;left:2px;" class="icon'.ucfirst($cl).'22">&nbsp;</span>';
+          echo '  <span style="z-index:11;position:absolute;left:30px;top:9px;">'. i18n('menu'.ucfirst($clVal)).'</span>';
+          echo '</div>';
+          echo '</option>';
+      }?></div>
+      
+      <?php if ($showMenuBar!='NO') {?>    
+      
+        <button id="menuBarMoveLeft" dojoType="dijit.form.Button" showlabel="false"
+         title="<?php echo i18n('menuBarMoveLeft');?>" class="buttonMove"
+         iconClass="leftBarIcon" style="position:relative; left:232px; width: 14px;top:-2px;height:48px;margin:0;vertical-align:middle">
+           <script type="dojo/method" event="onMouseDown">         
+           menuBarMove=true;
+           moveMenuBar('left');
+         </script>
+           <script type="dojo/method" event="onMouseUp">
+           moveMenuBarStop();
+         </script>
+           <script type="dojo/method" event="onClick">
+           moveMenuBarStop();
+         </script>
+        </button>    
+      </td>
+     
+     <td width="85%">       
+          <div id="menuBarVisibleDiv" style="height:<?php echo $iconSize+9;?>px;width:<?php echo ($cptAllMenu*56);?>px; position: absolute; top: 0px; left:248px; z-index:0">
+          <div style="width: 100%; height:48px; position: absolute; left: 0px; top:1px; overflow:hidden; z-index:0">
+    	    <div name="menubarContainer" id="menubarContainer" style="width:<?php echo ($cptAllMenu*56);?>px; position: relative; left:0px; overflow:hidden;z-index:0">
+    	      <table><tr>
+    	       <?php drawAllMenus($menuList);?>
+    	     </tr></table>
+    	    </div>
+          </div>
+          </div>
+      </td>
+<?php } else {?>
+    <td style="width:80%"><div id="menuBarVisibleDiv"></div></td>
+<?php }?>
+    <td width="25px" align="center" id="menuBarRight" class="statusBar" style="right:0;position:absolute;z-index:30;">
+      <table><tr><td rowspan="2">
+<?php if ($showMenuBar!='NO') {?>   
+           <button id="menuBarMoveRight" dojoType="dijit.form.Button" showlabel="false"
+         title="<?php echo i18n('menuBarMoveRight');?>" class="buttonMove"
+         iconClass="rightBarIcon" style="position:relative; left:-3px; top:-2px;width: 14px;height:48px;margin:0;vertical-align:middle">
+             <script type="dojo/method" event="onMouseDown">         
+           menuBarMove=true;
+           moveMenuBar('right');
+         </script>
+             <script type="dojo/method" event="onMouseUp">
+           moveMenuBarStop();
+
+         </script>
+             <script type="dojo/method" event="onClick">
+           moveMenuBarStop();
+         </script>
+          </button>
+          <?php }?>
+      </td><tr>
+      </table>
+    </td></tr>
+    </table>
+    </div>
+    <?php 
+          $hideMenuLeftParam = Parameter::getGlobalParameter ( 'MenuBarLeft' ); 
+      if (sessionValueExists('MenuBarLeft') and getSessionValue('MenuBarLeft')=='false'){
+        $hideMenuLeftParam = 'true';
+      }
+        if($hideMenuLeftParam == 'false' and ! isset($showModuleScreen)) { ?>
+        <script type="text/javascript">
+           hideShowMenu(true);
+        </script>
+     <?php } ?>
+    <?php }else{
+      include 'menuNewGuiTop.php';
+      }
+
+      $hideMenuTopParam = Parameter::getGlobalParameter ( 'MenuBarTop' );
+      if (sessionValueExists('hideMenuTop') and getSessionValue('hideMenuTop')!='YES'){
+        $hideMenuTopParam = 'YES';
+      }
+      if (sessionValueExists('hideMenuTop') and getSessionValue('hideMenuTop')=='YES' or $hideMenuTopParam == 'NO') {?>
+      <script>
+        dojo.byId('statusBarDiv').style.height="0px";
+        dojo.byId('statusBarDiv').style.padding="0px";
+        dojo.byId('leftDiv').style.top='30px';
+        dojo.byId('centerDiv').style.top='30px';
+        dojo.byId('menuBarShow').style.top='30px';
+        var height=parseInt(dojo.byId('mainDiv').offsetHeight)-30;
+      </script>
+    <?php }?>
+        <div id="centerDiv" dojoType="dijit.layout.ContentPane" region="center">
+    </div>
+    <div id="statusBarDivBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="overflow:visible;display:block;height:0px; position:absolute; bottom:0px;">
+       <div id="dialogReminder" >
+         <div id="reminderDiv" style="width:100%;height: 150px"></div>
+          <div style="width:100%; height:15%; text-align:right">
+            <?php echo i18n("remindMeIn");?>
+           <input type="input" dojoType="dijit.form.TextBox" id="remindAlertTime" name="remindAletTime" value="15" style="width:25px" />
+            <?php echo i18n("shortMinute");?>
+           <button dojoType="dijit.form.Button" onclick="setAlertRemindMessage();">
+                    <?php echo i18n("remind");?>
+           </button>
+         </div>
+         <div style="width:100%; height:50px; text-align:right">
+           <table><tr><td width="80%">
+           <span id="markAllAsReadButtonDiv" >
+        	 <button  dojoType="dijit.form.Button" id="markAllAsReadButton" onclick="setAllAlertReadMessage();">
+        	          <?php echo i18n("markAllAsRead");?>
+        	 </button>
+        	 &nbsp;
+        	 </span>
+        	 </td><td>
+        	 <button  dojoType="dijit.form.Button" onclick="setAlertReadMessage();">
+        	          <?php echo i18n("markAsRead");?>
+        	 </button>
+        	 </td></tr></table>
+         </div>
+        </div>
+       
+    </div>
+    
+    <!--the left div must be created after the central div for the dynamism of the left menu on the new interface -->
+ <?php if(isNewGui()){?> </div></div></div><?php }?>
+     <?php if(isNewGui()){?><div id="leftMenu" class="menu-left"> <?php }?>
+    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left"  splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:'250px');?><?php echo (isNewGui())?';dispaly:none;':'';?>" >
       <?php if(!isNewGui()){?>
       <script type="dojo/connect" event="resize" args="evt">
          if (hideShowMenuInProgress) return;
@@ -1010,155 +1162,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       } 
       ?>
     </div>
-    <?php 
-    //$iconSize=Parameter::getUserParameter('paramTopIconSize');
-    //$showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
-    //$showMenuBar='NO';
-    $iconSize=(isNewGui())?22:32;
-    $showMenuBar='YES';
-    //if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
-    $iconSize+=9;?>
-    
-    <div id="toolBarDiv" style="height:30px" dojoType="dijit.layout.ContentPane" region="top"  >
-      <?php include "menuBar.php";?>
-    </div>
-    <?php if(isNewGui()){ ?><div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false"><div id="right-pane" class="right-pane"><?php }?>      
-    <?php if (!isNewGui()) {?>
-     <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
-      <table width="100%"><tr>
-      
-       <td width="220px" id="menuBarLeft" >
-      
-        <div style="overflow:hidden;position: absolute; left:2px; top: 8px;width:205px; background: transparent; color: #FFFFFF !important; border:<?php echo (isNewGui())?'0':'1';?>px solid #FFF;vertical-align:middle;" 
-        onChange="menuFilter(this.value);" id="menuSelector" id="menuSelector"
-        onMouseEnter="showMenuList();" onMouseLeave="hideMenuList(300);"
-        dojoType="dijit.form.Select" class="input filterField rounded menuSelect" 
-        ><?php foreach ($allMenuClass as $cl=>$clVal) {
-          $selected=($defaultMenu==$cl)?' selected=selected ':'';
-          echo '<option value="'.$cl.'" '.$selected.' style="color:#fff !important;">';
-          echo '<div style="z-index:9999;height:25px;vertical-align:middle;top:2px;width:190px;" value="'.$cl.'" '.$selected.' class="menuSelectList" onMouseOver="clearTimeout(closeMenuListTimeout);" onMouseLeave="hideMenuList(200,\''.$cl.'\');">';
-          echo '  <div style="z-index:9;position:absolute;height:23px;width:25px;left:1px;background-color:#ffffff;border-radius:5px;opacity: 0.5;">&nbsp;</div>';
-          echo '  <span style="z-index:10;position:absolute;height:22px;left:2px;" class="icon'.ucfirst($cl).'22">&nbsp;</span>';
-          echo '  <span style="z-index:11;position:absolute;left:30px;top:9px;">'. i18n('menu'.ucfirst($clVal)).'</span>';
-          echo '</div>';
-          echo '</option>';
-      }?></div>
-      
-      <?php if ($showMenuBar!='NO') {?>    
-      
-        <button id="menuBarMoveLeft" dojoType="dijit.form.Button" showlabel="false"
-         title="<?php echo i18n('menuBarMoveLeft');?>" class="buttonMove"
-         iconClass="leftBarIcon" style="position:relative; left:232px; width: 14px;top:-2px;height:48px;margin:0;vertical-align:middle">
-           <script type="dojo/method" event="onMouseDown">         
-           menuBarMove=true;
-           moveMenuBar('left');
-         </script>
-           <script type="dojo/method" event="onMouseUp">
-           moveMenuBarStop();
-         </script>
-           <script type="dojo/method" event="onClick">
-           moveMenuBarStop();
-         </script>
-        </button>    
-      </td>
-     
-     <td width="85%">       
-          <div id="menuBarVisibleDiv" style="height:<?php echo $iconSize+9;?>px;width:<?php echo ($cptAllMenu*56);?>px; position: absolute; top: 0px; left:248px; z-index:0">
-          <div style="width: 100%; height:48px; position: absolute; left: 0px; top:1px; overflow:hidden; z-index:0">
-    	    <div name="menubarContainer" id="menubarContainer" style="width:<?php echo ($cptAllMenu*56);?>px; position: relative; left:0px; overflow:hidden;z-index:0">
-    	      <table><tr>
-    	       <?php drawAllMenus($menuList);?>
-    	     </tr></table>
-    	    </div>
-          </div>
-          </div>
-      </td>
-<?php } else {?>
-    <td style="width:80%"><div id="menuBarVisibleDiv"></div></td>
-<?php }?>
-    <td width="25px" align="center" id="menuBarRight" class="statusBar" style="right:0;position:absolute;z-index:30;">
-      <table><tr><td rowspan="2">
-<?php if ($showMenuBar!='NO') {?>   
-           <button id="menuBarMoveRight" dojoType="dijit.form.Button" showlabel="false"
-         title="<?php echo i18n('menuBarMoveRight');?>" class="buttonMove"
-         iconClass="rightBarIcon" style="position:relative; left:-3px; top:-2px;width: 14px;height:48px;margin:0;vertical-align:middle">
-             <script type="dojo/method" event="onMouseDown">         
-           menuBarMove=true;
-           moveMenuBar('right');
-         </script>
-             <script type="dojo/method" event="onMouseUp">
-           moveMenuBarStop();
-
-         </script>
-             <script type="dojo/method" event="onClick">
-           moveMenuBarStop();
-         </script>
-          </button>
-          <?php }?>
-      </td><tr>
-      </table>
-    </td></tr>
-    </table>
-    </div>
-    <?php 
-          $hideMenuLeftParam = Parameter::getGlobalParameter ( 'MenuBarLeft' ); 
-      if (sessionValueExists('MenuBarLeft') and getSessionValue('MenuBarLeft')=='false'){
-        $hideMenuLeftParam = 'true';
-      }
-        if($hideMenuLeftParam == 'false' and ! isset($showModuleScreen)) { ?>
-        <script type="text/javascript">
-           hideShowMenu(true);
-        </script>
-     <?php } ?>
-    <?php }else{
-      include 'menuNewGuiTop.php';
-      }
-
-      $hideMenuTopParam = Parameter::getGlobalParameter ( 'MenuBarTop' );
-      if (sessionValueExists('hideMenuTop') and getSessionValue('hideMenuTop')!='YES'){
-        $hideMenuTopParam = 'YES';
-      }
-      if (sessionValueExists('hideMenuTop') and getSessionValue('hideMenuTop')=='YES' or $hideMenuTopParam == 'NO') {?>
-      <script>
-        dojo.byId('statusBarDiv').style.height="0px";
-        dojo.byId('statusBarDiv').style.padding="0px";
-        dojo.byId('leftDiv').style.top='30px';
-        dojo.byId('centerDiv').style.top='30px';
-        dojo.byId('menuBarShow').style.top='30px';
-        var height=parseInt(dojo.byId('mainDiv').offsetHeight)-30;
-      </script>
-    <?php }?>
-        <div id="centerDiv" dojoType="dijit.layout.ContentPane" region="center">
-    </div>
-    <div id="statusBarDivBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="overflow:visible;display:block;height:0px; position:absolute; bottom:0px;">
-       <div id="dialogReminder" >
-         <div id="reminderDiv" style="width:100%;height: 150px"></div>
-          <div style="width:100%; height:15%; text-align:right">
-            <?php echo i18n("remindMeIn");?>
-           <input type="input" dojoType="dijit.form.TextBox" id="remindAlertTime" name="remindAletTime" value="15" style="width:25px" />
-            <?php echo i18n("shortMinute");?>
-           <button dojoType="dijit.form.Button" onclick="setAlertRemindMessage();">
-                    <?php echo i18n("remind");?>
-           </button>
-         </div>
-         <div style="width:100%; height:50px; text-align:right">
-           <table><tr><td width="80%">
-           <span id="markAllAsReadButtonDiv" >
-        	 <button  dojoType="dijit.form.Button" id="markAllAsReadButton" onclick="setAllAlertReadMessage();">
-        	          <?php echo i18n("markAllAsRead");?>
-        	 </button>
-        	 &nbsp;
-        	 </span>
-        	 </td><td>
-        	 <button  dojoType="dijit.form.Button" onclick="setAlertReadMessage();">
-        	          <?php echo i18n("markAsRead");?>
-        	 </button>
-        	 </td></tr></table>
-         </div>
-        </div>
-       
-    </div>
- <?php if(isNewGui()){?> </div></div><?php }?>
+     <?php if(isNewGui()){?></div><?php }?>
     <div id="dialogAlert" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAlert");?>">
       <table>
         <tr>
