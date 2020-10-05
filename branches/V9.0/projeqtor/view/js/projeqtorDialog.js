@@ -6765,6 +6765,7 @@ var hideShowTries=0;
  * Hide or show the Menu (left part of the screen
  */
 function hideShowMenu(noRefresh,noStore) {
+  if(isNewGui)return;
   var disableSlide=true;
   if (!dijit.byId("leftDiv")) {
     return;

@@ -79,7 +79,7 @@ function setColorTheming(ref,bis) {
       if (hex.length < 2) { hex="0"+hex; } 
       foreColor = '#'+hex+hex+hex;
       foreColor = '#ffffff';
-     // dojo.byId("logoMenuBar").src="img/logoSmallWhite.png";
+     if(!isNewGui) dojo.byId("logoMenuBar").src="img/logoSmallWhite.png";
     } else {
       invert=0;
       dec=parseInt(lightness-128);
