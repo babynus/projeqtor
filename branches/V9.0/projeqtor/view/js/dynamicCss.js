@@ -101,7 +101,7 @@ function setColorTheming(ref,bis) {
     + (0.1) * parseInt(blue, 16);
     lightness=parseInt(lightness);
     console.log("bis brightness "+lightness);
-    if (lightness > 128) {
+    if (lightness > 150) {
       bisText = '#000000';
     }
   }

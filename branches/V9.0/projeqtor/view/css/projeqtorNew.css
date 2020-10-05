@@ -342,7 +342,8 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui #listHeaderDiv div.iconSize32, .ProjeQtOrNewGui #buttonDiv div .iconSize32,
 /*.ProjeQtOrNewGui #listHeaderDiv .dijitButtonIcon, .ProjeQtOrNewGui #buttonDiv .dijitButtonIcon,*/
 .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize22, .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize32,
-.ProjeQtOrNewGui #centerDiv .dijitButtonIcon, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall
+.ProjeQtOrNewGui #centerDiv .dijitButtonIcon, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall,
+.ProjeQtOrNewGui .ganttIconBackground div
  {
   -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
@@ -451,13 +452,20 @@ animation: fadeIn ease 0.5s;
 	border:0;
 	border-bottom: 2px solid var(--color-secondary);
 }
+.ProjeQtOrNewGui .dijitTab .tabLabel {
+	font-size:100%;
+}
 .ProjeQtOrNewGui  .dijitTabContainerTop-tabs, .ProjeQtOrNewGui .dijitTab, .ProjeQtOrNewGui div.dijitTab>span.tabLabel {
 	color: var(--color-detail-header-text);
 	border: 0px;
 	border-bottom: 2px solid transparent;
 	background-color: transparent;
+	font-weight:normal;
 }
 
+.ProjeQtOrNewGui .roundedButton:hover, .roundedButtonSmall:hover {
+  background: transparent url();
+}
 
 .ProjeQtOrNewGui .buttonTopBar {
 	padding:5px 0px 0px 5px;
@@ -494,6 +502,9 @@ animation: fadeIn ease 0.5s;
 	border-radius:5px;
 	background: var(--color-lighter);
   color:var(--color-text);
+}
+.ProjeQtOrNewGui .dijitDropDownButton .dijitReset.dijitInline.dijitButtonNode {
+  background: transparent url();
 }
 .ProjeQtOrNewGui #toolBarDiv .dijitButton,
 .ProjeQtOrNewGui #toolBarDiv .dijitDropDownButton,
