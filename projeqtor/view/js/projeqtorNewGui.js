@@ -72,8 +72,11 @@ var defaultMenu=null;
 
 function menuNewGuiFilter(filter) {
   var allCollection = dojo.query(".menuBarItem");
-  var newCollection = dojo.query("." + filter);
   allCollection.style("display", "none");
+  var newCollection = dojo.query("." + filter);
+  if(newCollection.length > 10){
+	  newCollection.splice(0, newCollection.length-10);
+  }
   newCollection.style("display", "block");
   saveUserParameter('defaultMenu', filter);
   defaultMenu=filter;
