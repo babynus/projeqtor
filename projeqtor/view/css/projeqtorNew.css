@@ -220,7 +220,8 @@ label, .ProjeQtOrNewGui label,
   background-color: #ffffff;
 }
 .ProjeQtOrNewGui .dojoxGridRowSelected {
-	background-color: var(--color-dark-secondary) !important;
+	background-color: var(--color-grid-selected-bg) !important;
+	color: var(--color-grid-selected-text) !important;
 }
 .ProjeQtOrNewGui .dojoxGridRowOver .dojoxGridCell{
 	background: var(--color-light-secondary) !important;
@@ -341,7 +342,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui #listHeaderDiv div.iconSize32, .ProjeQtOrNewGui #buttonDiv div .iconSize32,
 /*.ProjeQtOrNewGui #listHeaderDiv .dijitButtonIcon, .ProjeQtOrNewGui #buttonDiv .dijitButtonIcon,*/
 .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize22, .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize32,
-.ProjeQtOrNewGui #centerDiv .dijitButtonIcon 
+.ProjeQtOrNewGui #centerDiv .dijitButtonIcon, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall
  {
   -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
@@ -441,6 +442,22 @@ animation: fadeIn ease 0.5s;
 	-webkit-filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
    filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
 }
+
+.ProjeQtOrNewGui .dijitTabContainerTop-tabs, .ProjeQtOrNewGui .dijitTabContainerTop-tabs .dijitTabChecked {
+	background-color: transparent;
+}
+.ProjeQtOrNewGui  div.dijitTab.dijitTabChecked>span.tabLabel {
+	color: var(--color-secondary);
+	border:0;
+	border-bottom: 2px solid var(--color-secondary);
+}
+.ProjeQtOrNewGui  .dijitTabContainerTop-tabs, .ProjeQtOrNewGui .dijitTab, .ProjeQtOrNewGui div.dijitTab>span.tabLabel {
+	color: var(--color-detail-header-text);
+	border: 0px;
+	border-bottom: 2px solid transparent;
+	background-color: transparent;
+}
+
 
 .ProjeQtOrNewGui .buttonTopBar {
 	padding:5px 0px 0px 5px;
