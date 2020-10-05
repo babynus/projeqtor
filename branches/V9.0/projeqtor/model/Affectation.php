@@ -268,8 +268,9 @@ public $_noCopy;
           $result.='<br/>' . i18n('impossibleAffectationResourcePool');
         }
       }
-    } else {
-      $this->idResourceSelect=null;
+    } 
+    if ($affectable->isResource) {
+      $this->idResourceSelect=$this->idResource;
     }
     if ($affectable->isUser) {
       $this->idUser=$this->idResource;
