@@ -63,6 +63,7 @@ dependencies = {
   				"dojox.form.uploader.plugins.Flash",
   				"dojox.form.uploader.FileList",
   				"dojox.fx.scroll",
+  				"dojox.mobile.Switch",
   				"dojox.fx",
 			    "dojox.grid.DataGrid",
 			    "dojox.image.Lightbox",
