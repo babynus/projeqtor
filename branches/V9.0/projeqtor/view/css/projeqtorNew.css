@@ -292,10 +292,16 @@ html, body, #mainDiv,
 		transition: transform 0.3s, width 0.3s;
 }
 
-.menu-left.close, .menuTop.close-menu{
+.menuTop.close-menuLeft{
 		-webkit-transform: translateX(-250px);
 		-moz-transform: translateX(-250px);
 		transform: translateX(-250px);
+}
+
+.menuTop.open-menuLeft{
+		-webkit-transform: translateX(250px);
+		-moz-transform: translateX(250px);
+		transform: translateX(250px);
 }
 
 .hideStreamNewGui, .hideStreamNewGuiTopBar {
