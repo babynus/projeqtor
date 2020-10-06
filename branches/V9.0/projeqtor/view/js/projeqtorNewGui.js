@@ -158,16 +158,13 @@ var defaultMenu=null;
       if(this.isMenuOpen){
         this.trigger.setAttribute('style','display:block;float:right;');
         this.triggerBar.setAttribute('style','display:none;');
-        
         globalWidth=globalWidth-250;
-
       }else{
         this.trigger.setAttribute('style','display:none;');
         this.triggerBar.setAttribute('style','float:left;width:32px;display:block;');
         pos='right';
       }
-    //menuBarsize
-      
+      console.log(globalWidth);
       dojox.fx.combine([ dojox.fx.animateProperty({
         node : "menuTop",
         properties : {
@@ -193,26 +190,26 @@ var defaultMenu=null;
         },
         duration : duration
       }), dojox.fx.animateProperty({
-        node : "leftDiv",
+        node : "leftMenu",
         properties : {
           width : (this.isMenuOpen)? 250 : 0
         },
         duration : duration
+      }), dojox.fx.animateProperty({
+        node : "contentMenuBar",
+        properties : {
+          width : (this.isMenuOpen)? width+38 : width-38,
+          float: pos
+        },
+        duration : duration
       })]).play();
+      dojo.setAttr('contentMenuBar','style', 'top:1px; overflow:hidden; z-index:0');
       setTimeout('dijit.byId("globalTopCenterDiv").resize();', duration+5);
-      setTimeout(this._resizeMenuBar(), duration + 10);
+      
+      
     },
     
-    _resizeMenuBar:function(){
-      var width= dojo.byId('contentMenuBar').offsetWidth ;
-      if(this.isMenuOpen){
-        width=width+38;
-      }else{
-        width=width-38;
-      }
-      dojo.setAttr('contentMenuBar','style', 'width:'+width+'px;float:'+pos+'; top:1px; overflow:hidden; z-index:0');
-    }
-  }
+  };
 
   window.menuLeft = menuLeft;
 
