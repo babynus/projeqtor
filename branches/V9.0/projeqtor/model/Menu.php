@@ -88,19 +88,18 @@ class Menu extends SqlElement {
   }
   
   public static function drawNewGuiMenu($menu, $defaultMenu, $customMenuArray) {
-  	global $iconSize,$iconClassWithSize;
-  	$drawMode='textual';
+  	$drawMode=Parameter::getUserParameter('menuBarTopMode');
+  	if(!$drawMode)$drawMode='TXT';
   	$menuName=$menu->name;
   	$menuClass=' menuBarItem '.$menu->menuClass;
   	$idMenu=$menu->id;
+  	$class=substr($menuName,4);
   	$style='width:auto;height:auto;max-height:48px !important;padding:5px 10px 5px 10px !important;color: var(--color-dark);filter:unset !important;white-space:nowrap;';
   	if ($menu->type=='menu') {
   		if ($menu->idMenu==0) {
-  			//echo '<td class="menuBarSeparator" style="width:5px;"></td>';
   		}
   	} else if ($menu->type=='item') {
-  		$class=substr($menuName,4);
-  		echo '<td  title="' .i18n($menu->name) . '" >';
+  		echo '<td  title="' .i18n($menu->name) . '" dndType="menuBar" class="dojoDndItem">';
   		echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
   		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
   		echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
@@ -109,59 +108,61 @@ class Menu extends SqlElement {
   			echo ' onMouseLeave="hideReportFavoriteTooltip(2000);"';
   		}
   		echo '>';
-  		if($drawMode=='icon'){
-  			echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style=width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
-  		}else if($drawMode=='textual'){
+  		if($drawMode=='ICON'){
+  			echo '<div class="icon'.$class.'22 icon'.$class.' iconSize22" style="width:22px;height:22px"></div>';
+  		}else if($drawMode=='TXT'){
   			echo i18n($menu->name);
-  		}else if($drawMode=='iconTextual'){
-  			echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
-  			echo '<div class="menuBarItemCaption">'.i18n($menu->name).'</div>';
+  		}else if($drawMode=='ICONTXT'){
+  		  echo '<table><tr>';
+  		  echo '<td><div class="icon'.$class.'22 icon'.$class.' iconSize22" style="width:22px;height:22px"></div></td>';
+  	      echo '<td style="padding-left:5px;">'.i18n($menu->name).'</td>';
+  		  echo '</tr></table>';
   		}
-            if ($menuName=='menuReports' and isHtml5() ) {?>
-              <button class="comboButtonInvisible" dojoType="dijit.form.DropDownButton" 
-               id="listFavoriteReports" name="listFavoriteReports" style="position:relative;top:-10px;left:-10px;height: 0px; overflow: hidden; ">
-                <div dojoType="dijit.TooltipDialog" id="favoriteReports" style="position:absolute;"
-                  href="../tool/refreshFavoriteReportList.php"
-                  onMouseEnter="clearTimeout(closeFavoriteReportsTimeout);"
-                  onMouseLeave="hideReportFavoriteTooltip(200)"
-                  onDownloadEnd="checkEmptyReportFavoriteTooltip()">
-                  <?php Favorite::drawReportList();?>
-                </div>
-              </button>
-            <?php }
-            echo '</div>';
-            echo '</td>'; 
+        if ($menuName=='menuReports' and isHtml5() ) {
+          echo '<button class="comboButtonInvisible" dojoType="dijit.form.DropDownButton" 
+           id="listFavoriteReports" name="listFavoriteReports" style="position:relative;top:-10px;left:-10px;height: 0px; overflow: hidden; ">
+            <div dojoType="dijit.TooltipDialog" id="favoriteReports" style="position:absolute;"
+              href="../tool/refreshFavoriteReportList.php"
+              onMouseEnter="clearTimeout(closeFavoriteReportsTimeout);"
+              onMouseLeave="hideReportFavoriteTooltip(200)"
+              onDownloadEnd="checkEmptyReportFavoriteTooltip()">';
+              Favorite::drawReportList();
+            echo '</div></button>';
+        }
+        echo '</div>';
+        echo '</td>'; 
         } else if ($menu->type=='plugin') {
-          $class=substr($menuName,4);
-          echo '<td  title="' .i18n($menu->name) . '" >';
+          echo '<td  title="' .i18n($menu->name) . '" dndType="menuBar" class="dojoDndItem">';
           echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'"';
           echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
           echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
-          if($drawMode=='icon'){
-            echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
-          }else if($drawMode=='textual'){
+          if($drawMode=='ICON'){
+            echo '<img src="../view/css/images/icon'.$class.'22.png" />';
+          }else if($drawMode=='TXT'){
             echo i18n($menu->name);
-          }else if($drawMode=='iconTextual'){
-            echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
-            echo '<div class="menuBarItemCaption">'.i18n($menu->name).'</div>';
+          }else if($drawMode=='ICONTXT'){
+            echo '<table><tr>';
+            echo '<td><img src="../view/css/images/icon'.$class.'22.png" /></td>';
+            echo '<td style="padding-left:5px;">'.i18n($menu->name).'</td>';
+            echo '</tr></table>';
           }
           echo '</div>';
           echo '</td>';
         } else if ($menu->type=='object') { 
-          $class=substr($menuName,4);
           if (securityCheckDisplayMenu($idMenu, $class)) {
-          	echo '<td title="' .i18n('menu'.$class) . '" >';
+          	echo '<td title="' .i18n('menu'.$class) . '" dndType="menuBar" class="dojoDndItem">';
           	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
           	echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
           	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" >';
-          	if($drawMode=='icon'){
-          		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
-          	}else if($drawMode=='textual'){
+          	if($drawMode=='ICON'){
+          		echo '<div class="icon'.$class.'22 icon'.$class.' iconSize22" style="width:22px;height:22px"></div>';
+          	}else if($drawMode=='TXT'){
           		echo i18n($menu->name);
-          	}else if($drawMode=='iconTextual'){
-          		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
-          	//echo '<img src="../view/css/images/icon' . $class . $iconSize. '.png" />';
-                	echo '<div class="menuBarItemCaption">'.i18n('menu'.$class).'</div>';
+          	}else if($drawMode=='ICONTXT'){
+          		echo '<table><tr>';
+        		echo '<td><div class="icon'.$class.'22 icon'.$class.' iconSize22" style="width:22px;height:22px"></div></td>';
+        	    echo '<td style="padding-left:5px;">'.i18n($menu->name).'</td>';
+        		echo '</tr></table>';
           	}
           	echo '</div>';
           	echo '</td>';

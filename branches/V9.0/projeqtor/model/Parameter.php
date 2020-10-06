@@ -758,6 +758,11 @@ class Parameter extends SqlElement {
             'DURATION'=>i18n('capacityForInterventionDURATION'),
             'NO'=>i18n('capacityForInterventionNO'));
         break;
+      case 'menuBarTopMode':
+        $list = array('TXT'=>i18n('textual'),
+                      'ICON'=>i18n('icon'),
+                      'ICONTXT'=>i18n('iconTextual'));
+        break;
     } 
     return $list;
   }
@@ -775,6 +780,7 @@ class Parameter extends SqlElement {
                            "browserLocaleDateFormat"=>"list",
                            "browserLocaleTimeFormat"=>"list",
                            "paramIconSize"=>'list',
+                           'menuBarTopMode'=>'list',
                            "paramShowThumb"=>"list",
                            "paramShowThumbList"=>"list",
                            "notApplicableValue"=>"list",
@@ -945,6 +951,7 @@ class Parameter extends SqlElement {
       	                      'defaultTheme'=>'list',
       	                      'startPage'=>'list',
       	                      'paramIconSize'=>'list',
+      	                      'menuBarTopMode'=>'list',
       	                      'MenuBarTop'=>'list',
       	                      'MenuBarLeft'=>'list',
       	                      'displayHistory'=>'list',
