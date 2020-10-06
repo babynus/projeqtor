@@ -131,20 +131,19 @@ var defaultMenu=null;
     
     _openMenu : function() {
       if( this.isMenuOpen ) return;
-      console.log('ui');
       this.isMenuOpen = true; //replace to datatsession;
-      classie.remove( this.menuLeft, 'close' );
-      classie.remove( this.menuTopDiv, 'close-menu' );
-      dojo.removeAttr('hideStreamNewGuiTopBar','style');
+      classie.add( this.menuTopDiv, 'open-menuLeft' );
+      this._setSize();
+      classie.remove( this.menuTopDiv, 'open-menuLeft' );
       this._showHideButton();
     },
     
     _closeMenu : function() {
       if( !this.isMenuOpen ) return;
       this.isMenuOpen = false;//replace to datatsession;
-      //if(this.el.querySelector( '.gn-open-all' ))classie.remove( this.menuLeft, 'gn-open-all' );
-      classie.add( this.menuLeft, 'close' );
-      classie.add( this.menuTopDiv, 'close-menu' );
+      classie.add( this.menuTopDiv, 'close-menuLeft' );
+      this._setSize();
+      classie.remove( this.menuTopDiv, 'close-menuLeft' );
       this._showHideButton();
     },
     
@@ -152,65 +151,83 @@ var defaultMenu=null;
       dojo.removeAttr('hideStreamNewGui','style');
       dojo.removeAttr('contentMenuBar','style');
       dojo.removeAttr('hideStreamNewGuiTopBar','style');
-      var duration=10;
-      var globalWidth=dojo.byId('mainDiv').offsetWidth;
-      var pos='left';
       if(this.isMenuOpen){
         this.trigger.setAttribute('style','display:block;float:right;');
         this.triggerBar.setAttribute('style','display:none;');
-        globalWidth=globalWidth-250;
       }else{
         this.trigger.setAttribute('style','display:none;');
         this.triggerBar.setAttribute('style','float:left;width:32px;display:block;');
-        pos='right';
       }
-      console.log(globalWidth);
-      dojox.fx.combine([ dojox.fx.animateProperty({
-        node : "menuTop",
-        properties : {
-          width : globalWidth
-        },
-        duration : duration
-      }), dojox.fx.animateProperty({
-        node : "globalTopCenterDiv",
-        properties : {
-          width : globalWidth
-        },
-        duration : duration
-      }), dojox.fx.animateProperty({
-        node : "centerDiv",
-        properties : {
-          width : globalWidth
-        },
-        duration : duration
-      }), dojox.fx.animateProperty({
-        node : "statusBarDiv",
-        properties : {
-          width : globalWidth
-        },
-        duration : duration
-      }), dojox.fx.animateProperty({
-        node : "leftMenu",
-        properties : {
-          width : (this.isMenuOpen)? 250 : 0
-        },
-        duration : duration
-      }), dojox.fx.animateProperty({
-        node : "contentMenuBar",
-        properties : {
-          width : (this.isMenuOpen)? width+38 : width-38,
-          float: pos
-        },
-        duration : duration
-      })]).play();
-      dojo.setAttr('contentMenuBar','style', 'top:1px; overflow:hidden; z-index:0');
-      setTimeout('dijit.byId("globalTopCenterDiv").resize();', duration+5);
-      
-      
+      dojo.setAttr('contentMenuBar','style','top:1px; overflow:hidden; z-index:0');
     },
     
+    _setSize :function(){
+      var globalWidth=(this.isMenuOpen) ? dojo.byId('globalContainer').offsetWidth-250 : dojo.byId('globalContainer').offsetWidth;
+      console.log(globalWidth);
+      this._resizeDiv (globalWidth);
+      
+     },
+    
+    _resizeDiv : function(globalWidth){
+      var duration=10;
+        dojox.fx.combine([ dojox.fx.animateProperty({
+          node : "menuTop",
+          properties : {
+            width : globalWidth,
+            left: 0
+          },
+          duration : duration
+        }), dojox.fx.animateProperty({
+          node : "leftMenu",
+          properties : {
+            width : (this.isMenuOpen)? 250 : 0
+          },
+          duration : duration
+        }), dojox.fx.animateProperty({
+          node : "leftDiv",
+          properties : {
+            width : (this.isMenuOpen)? 250 : 0
+          },
+          duration : duration
+        }), dojox.fx.animateProperty({
+          node : "globalTopCenterDiv",
+          properties : {
+            width : globalWidth,
+            left: (this.isMenuOpen)? 250 : 0
+          },
+          duration : duration
+        }), dojox.fx.animateProperty({
+          node : "centerDiv",
+          properties : {
+            width : globalWidth,
+            left: (this.isMenuOpen)? 250 : 0
+          },
+          duration : duration
+        }),dojox.fx.animateProperty({
+          node : "menuLeftBarContaineur",
+          properties : {
+            width : (this.isMenuOpen)? 250 : 0
+          },
+          duration : duration
+        }), dojox.fx.animateProperty({
+          node : "statusBarDiv",
+          properties : {
+            width : globalWidth,
+            left: (this.isMenuOpen)? 250 : 0
+          },
+          duration : duration
+        }),  dojox.fx.animateProperty({
+          node : "statusBarDivBottom",
+          properties : {
+            width : globalWidth,
+            left: (this.isMenuOpen)? 250 : 0
+          },
+          duration : duration
+      })]).play();
+      setTimeout('dijit.byId("globalContainer").resize();', duration+5);
+    }
   };
-
+  
   window.menuLeft = menuLeft;
 
 } )(window);
