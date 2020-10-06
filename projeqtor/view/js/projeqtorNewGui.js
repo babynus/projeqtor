@@ -163,9 +163,7 @@ var defaultMenu=null;
     
     _setSize :function(){
       var globalWidth=(this.isMenuOpen) ? dojo.byId('globalContainer').offsetWidth-250 : dojo.byId('globalContainer').offsetWidth;
-      console.log(globalWidth);
       this._resizeDiv (globalWidth);
-      
      },
     
     _resizeDiv : function(globalWidth){

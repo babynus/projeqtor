@@ -1,9 +1,19 @@
+/* @font-face { */
+/* 	font-family: 'feather'; */
+/* 	font-weight: normal; */
+/* 	font-style: normal; */
+/* 	src: url('../fonts/feather/feather.eot?1gafuo'); */
+/* 	src: url('../fonts/feather/feather.eot?1gafuo#iefix') format('embedded-opentype'), url('../fonts/feather/feather.woff2?1gafuo') format('woff2'), url('../fonts/feather/feather.ttf?1gafuo') format('truetype'), url('../fonts/feather/feather.woff?1gafuo') format('woff'), url('../fonts/feather/feather.svg?1gafuo#feather') format('svg'); */
+/* } */
+
 @font-face {
 	font-family: 'feather';
+	src:
+	url('../fonts/feather/Feather.ttf?sdxovp') format('truetype'),
+	url('../fonts/feather/Feather.woff?sdxovp') format('woff'),
+	url('../fonts/feather/Feather.svg?sdxovp#Feather') format('svg');
 	font-weight: normal;
 	font-style: normal;
-	src: url('../fonts/feather/feather.eot?1gafuo');
-	src: url('../fonts/feather/feather.eot?1gafuo#iefix') format('embedded-opentype'), url('../fonts/feather/feather.woff2?1gafuo') format('woff2'), url('../fonts/feather/feather.ttf?1gafuo') format('truetype'), url('../fonts/feather/feather.woff?1gafuo') format('woff'), url('../fonts/feather/feather.svg?1gafuo#feather') format('svg');
 }
 
 .icon {
@@ -13,7 +23,6 @@
 	font-variant: normal;
 	line-height: 1;
 	text-transform: none;
-	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	speak: none;
@@ -67,11 +76,11 @@
 
 
 .menu__link[data-submenu]::after {
-	content: '\e902';
+	content: '\e930';
 	font-family: 'feather';
 	position: absolute;
-	right: 0;
-	padding: 0.25em 1.25em;
+	right: 8px;
+	top:11px
 	color: var(--color-secondary);
 }
 
@@ -236,7 +245,7 @@
 }
 
 .menu__breadcrumbs a:not(:last-child)::after {
-	content: '\e902';
+	content: '\e912';
 	font-family: 'feather';
 	display: inline-block;
 	padding: 0 0.5em;
