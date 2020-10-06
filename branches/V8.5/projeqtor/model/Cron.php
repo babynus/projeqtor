@@ -1031,9 +1031,7 @@ class Cron {
 		  }
 			return;
 		}
-    $imapServerEncoding=Parameter::getGlobalParameter('imapFilterCriteria');
-    if (! $imapServerEncoding) { $imapServerEncoding='utf-8'; }
-		$mailbox = new ImapMailbox($emailHost, $emailEmail, $emailPassword, $emailAttachmentsDir, $imapServerEncoding);
+		$mailbox = new ImapMailbox($emailHost, $emailEmail, $emailPassword, $emailAttachmentsDir,'utf-8');
 		$mails = array();
 		// Get some mail
 		//$mailsIds = $mailbox->searchMailBox('UNSEEN UNDELETED');
