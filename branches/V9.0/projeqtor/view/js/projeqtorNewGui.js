@@ -235,15 +235,22 @@ var defaultMenu=null;
 //=============================================================================
 
 
-function menuNewGuiFilter(filter) {
-  var allCollection = dojo.query(".menuBarItem");
-  allCollection.style("display", "none");
-  var newCollection = dojo.query("." + filter);
-  if(newCollection.length > 10){
-	  newCollection.splice(0, newCollection.length-10);
-  }
-  newCollection.style("display", "block");
-  saveUserParameter('defaultMenu', filter);
-  defaultMenu=filter;
+function menuNewGuiFilter(filter, item) {
+//  var allCollection = dojo.query(".menuBarItem");
+//  allCollection.style("display", "none");
+//  var newCollection = dojo.query("." + filter);
+//  if(newCollection.length > 10){
+//	  newCollection.splice(0, newCollection.length-10);
+//  }
+//  newCollection.style("display", "block");
+	var historyBar = new Array();
+	historyTable.forEach(function(element){
+		historyBar.push('menu'+element[0]);
+	});
+	var callback = function(){
+		if(item)selectIconMenuBar(item);
+	};
+	loadDiv('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, callback);
+	saveUserParameter('defaultMenu', filter);
+	defaultMenu=filter;
 }
-

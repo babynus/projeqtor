@@ -28,7 +28,9 @@
  * Presents left menu of application. 
  */
   require_once "../tool/projeqtor.php";
+  
 $iconSize=22;
+
 ?>
 <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:43px; position:absolute !important;top:30px;left:250px;border-bottom:3px solid var(--color-dark);">
   <div id="menuBarVisibleDiv" style="height:auto;width:auto;  top: 0px; left:248px; z-index:0;">
@@ -36,10 +38,18 @@ $iconSize=22;
 	    <div  name="menubarContainer" id="menubarContainer" style="height:43px;width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
 	      <table style="height:43px;"><tr>
     	       <td style="padding-left:10px;"><?php echo formatNewGuiButton('Add', 22, true);?></td>
-    	       <td style="padding-left:5px;" onclick="menuNewGuiFilter('menuBarCustom');"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
-    	       <td style="padding-left:5px;" onclick="menuNewGuiFilter('menuBarRecent');"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
+    	       <td style="padding-left:5px;" onclick="menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+    	       <td style="padding-left:5px;" onclick="menuNewGuiFilter('menuBarRecent', null);"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
     	       <td><div style="padding-left:10px;vertical-align:middle;width:1px;height:22px;border-right:1px solid var(--color-dark);"></div></td>
-    	       <?php drawAllNewGuiMenus($menuList);?>
+    	       <td>
+    	         <div name="menuBarListDiv" id="menuBarListDiv">
+        	         <table>
+        	           <tr>
+        	             <?php Menu::drawAllNewGuiMenus($defaultMenu, null);?>
+        	           </tr>
+        	         </table>
+    	         </div>
+    	       </td>
     	       <td style="top: 7px;right: 15px;position: absolute;">
        	          <table style="height:22px;width:10px">
        	            <tr><td style="font-size:11px;color: var(--color-dark);">▲</td></tr>
