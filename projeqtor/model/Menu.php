@@ -86,5 +86,130 @@ class Menu extends SqlElement {
       return $class;
     }
   }
+  
+  public static function drawNewGuiMenu($menu, $defaultMenu, $customMenuArray) {
+  	global $iconSize,$iconClassWithSize;
+  	$drawMode='textual';
+  	$menuName=$menu->name;
+  	$menuClass=' menuBarItem '.$menu->menuClass;
+  	$idMenu=$menu->id;
+  	$style='width:auto;height:auto;max-height:48px !important;padding:5px 10px 5px 10px !important;color: var(--color-dark);filter:unset !important;white-space:nowrap;';
+  	if ($menu->type=='menu') {
+  		if ($menu->idMenu==0) {
+  			//echo '<td class="menuBarSeparator" style="width:5px;"></td>';
+  		}
+  	} else if ($menu->type=='item') {
+  		$class=substr($menuName,4);
+  		echo '<td  title="' .i18n($menu->name) . '" >';
+  		echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
+  		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
+  		echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
+  		if ($menuName=='menuReports' and isHtml5() ) {
+  			echo ' onMouseEnter="showReportFavoriteTooltip();"';
+  			echo ' onMouseLeave="hideReportFavoriteTooltip(2000);"';
+  		}
+  		echo '>';
+  		if($drawMode=='icon'){
+  			echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style=width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+  		}else if($drawMode=='textual'){
+  			echo i18n($menu->name);
+  		}else if($drawMode=='iconTextual'){
+  			echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+  			echo '<div class="menuBarItemCaption">'.i18n($menu->name).'</div>';
+  		}
+            if ($menuName=='menuReports' and isHtml5() ) {?>
+              <button class="comboButtonInvisible" dojoType="dijit.form.DropDownButton" 
+               id="listFavoriteReports" name="listFavoriteReports" style="position:relative;top:-10px;left:-10px;height: 0px; overflow: hidden; ">
+                <div dojoType="dijit.TooltipDialog" id="favoriteReports" style="position:absolute;"
+                  href="../tool/refreshFavoriteReportList.php"
+                  onMouseEnter="clearTimeout(closeFavoriteReportsTimeout);"
+                  onMouseLeave="hideReportFavoriteTooltip(200)"
+                  onDownloadEnd="checkEmptyReportFavoriteTooltip()">
+                  <?php Favorite::drawReportList();?>
+                </div>
+              </button>
+            <?php }
+            echo '</div>';
+            echo '</td>'; 
+        } else if ($menu->type=='plugin') {
+          $class=substr($menuName,4);
+          echo '<td  title="' .i18n($menu->name) . '" >';
+          echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'"';
+          echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
+          echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
+          if($drawMode=='icon'){
+            echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
+          }else if($drawMode=='textual'){
+            echo i18n($menu->name);
+          }else if($drawMode=='iconTextual'){
+            echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
+            echo '<div class="menuBarItemCaption">'.i18n($menu->name).'</div>';
+          }
+          echo '</div>';
+          echo '</td>';
+        } else if ($menu->type=='object') { 
+          $class=substr($menuName,4);
+          if (securityCheckDisplayMenu($idMenu, $class)) {
+          	echo '<td title="' .i18n('menu'.$class) . '" >';
+          	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
+          	echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
+          	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" >';
+          	if($drawMode=='icon'){
+          		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+          	}else if($drawMode=='textual'){
+          		echo i18n($menu->name);
+          	}else if($drawMode=='iconTextual'){
+          		echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
+          	//echo '<img src="../view/css/images/icon' . $class . $iconSize. '.png" />';
+                	echo '<div class="menuBarItemCaption">'.i18n('menu'.$class).'</div>';
+          	}
+          	echo '</div>';
+          	echo '</td>';
+          }
+        }
+      }  
+      
+      public static function drawAllNewGuiMenus($defaultMenu, $historyTable) {
+        $isNotificationSystemActiv = isNotificationSystemActiv();
+        $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
+        $customMenuArray=SqlList::getListWithCrit("MenuCustom",array('idUser'=>getSessionUser()->id));
+        $obj=new Menu();
+        $where=null;
+        if($defaultMenu == 'menuBarCustom'){
+          $where = ($customMenuArray)?"name in ('".implode("','", $customMenuArray)."')":"";
+          $menuList=($where)?$obj->getSqlElementsFromCriteria(null, false, $where):array();
+        }else{
+          $historyTable = explode(',', $historyTable);
+          $where = ($historyTable)?"name in ('".implode("','", $historyTable)."')":"";
+          $menuList=($where)?$obj->getSqlElementsFromCriteria(null, false, $where):array();
+          $sortHistoryTable = array();
+          foreach ($historyTable as $name){
+          	foreach ($menuList as $menu){
+              if($menu->name == $name){
+                array_push($sortHistoryTable, $menu);
+              }
+            }
+          }
+          $menuList=$sortHistoryTable;
+        }
+        
+        $pluginObjectClass='Menu';
+        $tableObject=$menuList;
+        $lstPluginEvt=Plugin::getEventScripts('list',$pluginObjectClass);
+        foreach ($lstPluginEvt as $script) {
+        	require $script; // execute code
+        }
+        $menuList=$tableObject;
+        $lastType='';
+        foreach ($menuList as $menu) { 
+          if (! $isLanguageActive and $menu->name=="menuLanguage") { continue; }
+          if (! $isNotificationSystemActiv and strpos($menu->name, "Notification")!==false) { continue; }
+          if (! $menu->canDisplay() ) { continue;}
+          if (securityCheckDisplayMenu($menu->id,substr($menu->name,4)) ) {
+        		Menu::drawNewGuiMenu($menu, $defaultMenu, $customMenuArray);
+        		$lastType=$menu->type;
+        	}
+        }
+      }
 }
 ?>

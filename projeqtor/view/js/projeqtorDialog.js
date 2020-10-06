@@ -7498,8 +7498,6 @@ function selectIconMenuBar(menuClass){
 	if (icon && dojo.hasClass(icon,'menuBarItem')){
 		dojo.query('.menuBarItem').removeClass('menuBarItemSelected', icon);
 		dojo.addClass(icon,'menuBarItemSelected');
-		dojo.addClass(icon,'menuBarRecent');
-		menuNewGuiFilter(defaultMenu);
 	}
 }
 
@@ -7519,6 +7517,9 @@ function loadMenuBarObject(menuClass, itemName, from) {
   loadContent("objectMain.php?objectClass=" + currentScreen, "centerDiv"); 
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
   stockHistory(currentScreen,null,"object");
+  if(defaultMenu == 'menuBarRecent'){
+	  menuNewGuiFilter(defaultMenu, menuClass);
+  }
   selectIconMenuBar(menuClass);
   return true;
 }
@@ -7663,6 +7664,9 @@ function loadMenuBarItem(item, itemName, from) {
   }
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
   stockHistory(item,null,currentScreen);
+  if(defaultMenu == 'menuBarRecent'){
+	  menuNewGuiFilter(defaultMenu, item);
+  }
   selectIconMenuBar(item);
   return true;
 }
