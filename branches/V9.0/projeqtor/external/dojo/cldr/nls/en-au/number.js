@@ -1,2 +1,2 @@
 //>>built
-define("dojo/cldr/nls/en-au/number",{"currencyFormat":"¤#,##0.00"});
+define("dojo/cldr/nls/en-au/number",{"exponential":"e"});
