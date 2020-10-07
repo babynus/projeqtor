@@ -893,7 +893,7 @@ if ($type == 'empty') {
 }else if($type=="idWorkUnit"){
   $idWorkUnit = RequestHandler::getId('idWorkUnit');
   $complexityVal = new ComplexityValues();
-  $where = " (idWorkUnit = ".$idWorkUnit.") and  (price IS NOT NULL )and (charge IS NOT NULL) ";
+  $where = " (idWorkUnit = ".$idWorkUnit.") and  (price IS NOT NULL or charge IS NOT NULL) ";
   $listComplexityValues = $complexityVal->getSqlElementsFromCriteria(null,false,$where);
   $tabComplexityValues = array();
   foreach ($listComplexityValues as $val){
