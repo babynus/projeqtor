@@ -386,7 +386,7 @@ if ($legend=="top") {
   $graph->drawText($graphWidth/2,20,i18n("reportSCurveChart"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 }
 
-$workGap=$sumBaseline-$sumPlanned;
+$workGap=($sumBaseline-$sumPlanned)/Work::getWorkCoef();
 if ($workGap>0) {
   $format=array("R"=>50, "G"=>100, "B"=>50, "Align"=>TEXT_ALIGN_BOTTOMRIGHT, "FontSize"=>'12');
   $title=i18n('legendWorkPositive');
