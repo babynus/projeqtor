@@ -44,6 +44,7 @@ class StatusMailPerProject extends StatusMail {
   public $mailToUser;
   public $mailToAccountable;
   public $mailToResource;
+  public $mailToFinancialResponsible;
   public $mailToSponsor;
   public $mailToProject;  
   public $mailToProjectIncludingParentProject;
@@ -87,7 +88,8 @@ class StatusMailPerProject extends StatusMail {
                                   "isProject"=>"hidden",
                                   "mailToProjectIncludingParentProject" => "nobr",
                                   "mailToAccountable"=>"invisible",
-                                  "mailToAssigned"=>"invisible"
+                                  "mailToAssigned"=>"invisible",
+                                  "mailToFinancialResponsible"=>"invisible"
   );  
   
   private static $_colCaptionTransposition = array('idStatus'=>'newStatus',
@@ -124,7 +126,16 @@ class StatusMailPerProject extends StatusMail {
  public function setAttributes() {
    parent::setAttributes();
    self::$_fieldsAttributes=array_merge_preserve_keys(self::$_fieldsAttributes,parent::getStaticFieldsAttributes());
-  }
+   if ($this->id) {
+     $mailable=SqlList::getNameFromId('Mailable', $this->idMailable,false);
+     if ($mailable=="ProjectExpense") {
+       self::$_colCaptionTransposition["mailToResource"]="businessResponsible";
+     }else if ($mailable=="IndividualExpense") {
+       self::$_colCaptionTransposition["mailToResource"]="resource";
+       self::$_colCaptionTransposition["mailToFinancialResponsible"]="responsible";
+     }
+   }
+ }
   
 
 // ============================================================================**********
@@ -178,6 +189,11 @@ class StatusMailPerProject extends StatusMail {
   protected function getStaticDatabaseTableName() {
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
     return $paramDbPrefix . self::$_databaseTableName;
+  }
+  public function getValidationScript($colName) {
+  
+    $colScript = parent::getValidationScript($colName);
+    return $colScript;
   }
   
 }
