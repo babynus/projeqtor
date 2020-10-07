@@ -186,6 +186,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     dojo.require("dojox.fx.scroll");
     dojo.require("dojox.fx");
     dojo.require("dojox.grid.DataGrid");
+    dojo.require("dojox.mobile.parser");
+    dojo.require("dojox.mobile.Switch");
     dojo.require("dojox.image.Lightbox");
     dojo.subscribe("/dnd/drop", function(source, nodes, copy, target){
       if(target.id == null){
