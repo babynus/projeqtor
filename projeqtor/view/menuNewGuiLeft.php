@@ -34,17 +34,22 @@
 <div id="menuLeftBarContaineur" class="container"  dojoType="dijit.layout.BorderContainer" liveSplitters="false" >
 
   <div id="menuBArNewGuiAcces"  class="container"  dojoType="dijit.layout.BorderContainer" region="left"  style="width:32px;height:100%;">
-    <div id="breadScrumb"  dojoType="dijit.layout.ContentPane" region="center" style="height:70%;" >
-      <div id="buttonHome" style="height:60px;">
-      </div>
-      <?php // draw History navigation and Home
-      ?>
+    <div id="breadScrumb"  dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;" >
+ <!--      <div id="breadScrumbHome"  style="height:44px;">
+         <div id="buttonHome" class="iconHome iconSize22 iconBreadSrumb" onclick=""></div>
+      </div> -->
     </div>
-    <div id="menuPersonalAcces"  dojoType="dijit.layout.ContentPane" region="bottom" style="height:30%;" >
+    <div id="menuPersonalAcces"   dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;" >
+      <div id="buttonParameter" class="iconHome iconSize22 iconBreadSrumb" onclick=""></div>
+      <div id="buttonActivityStream" class="iconActivityStream iconSize22 iconBreadSrumb" onclick=""></div>
+      <div id="buttonFlux" class="iconHome iconSize22 iconBreadSrumb" onclick=""></div>
+      <div id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb" onclick=""></div>
+      <div id="buttonConsole" class="iconHome iconSize22 iconBreadSrumb" onclick=""></div>
+      <div id="buttonNotification" class="iconNotification  iconSize22 iconBreadSrumb" onclick=""></div>
     </div>
   </div>
   <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  >
-    <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:70%;overflow: hidden;" >
+    <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;overflow: hidden;" >
       <nav id="ml-menu" class="menu">
             <?php // draw Menus
              echo drawLeftMenuListNewGui();
@@ -61,7 +66,7 @@
 	new menuLeft( dojo.byId( 'mainDiv' ) );
 	</script>
     </div>
-    <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:30%;">
+    <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;">
     </div>
   </div>
 </div>
@@ -145,10 +150,10 @@ function drawLeftMenuListNewGui(){
          $funcOnClick="loadMenuBarObject('".$class."','".htmlEncode($menuName2,'bar')."','bar');";
       }
       
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" onclick="'.$funcOnClick.'" href="#">'.i18n($obj->name).'</a></li>';
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" onclick="'.$funcOnClick.'" href="#" id='.$obj->name.'>'.i18n($obj->name).'</a></li>';
     }else{
       $sub='submenu-'.$obj->id;
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#">'.i18n($obj->name).'</a></li>';
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id='.$obj->name.'>'.i18n($obj->name).'</a></li>';
     }
     $old=$menu['level'];
     $idP=$menu['object']->idParent;
