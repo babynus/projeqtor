@@ -63,11 +63,13 @@ dependencies = {
   				"dojox.form.uploader.plugins.Flash",
   				"dojox.form.uploader.FileList",
   				"dojox.fx.scroll",
-  				"dojox.mobile.Switch",
   				"dojox.fx",
 			    "dojox.grid.DataGrid",
 			    "dojox.image.Lightbox",
-			    "dojox.form.PasswordValidator"
+			    "dojox.form.PasswordValidator",
+			    "dojox.mobile.parser",
+          "dojox.mobile.Switch",
+          "dojox.mobile.compat"
 			]
 		}
 	],
