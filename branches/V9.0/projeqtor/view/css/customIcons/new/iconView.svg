@@ -8,11 +8,10 @@
 <sodipodi:namedview  id="namedview7" inkscape:zoom="2.8710938" bordercolor="#666666" guidetolerance="10" objecttolerance="10" borderopacity="1" showgrid="false" inkscape:cx="7.8240306" pagecolor="#ffffff" inkscape:cy="41.675131" gridtolerance="10" inkscape:pageopacity="0" inkscape:window-y="0" inkscape:window-x="0" inkscape:pageshadow="2" inkscape:window-width="1519" inkscape:current-layer="Livello_1" inkscape:window-height="845" inkscape:window-maximized="0">
 	</sodipodi:namedview>
 <title  id="title2"></title>
+<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="36.769" cy="35.648" r="33.069"/>
 <path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M50.404,95.251l44.557-44.559c7.953,2.088,16.773,0.019,23.008-6.216c7.175-7.176,8.84-17.776,4.988-26.536l-14.549,14.547
-	c-2.039,2.041-5.378,2.041-7.42,0l-4.438-4.441c-2.043-2.041-2.043-5.38,0-7.421l14.701-14.701
-	c-8.869-4.182-19.782-2.609-27.111,4.723c-6.234,6.236-8.302,15.053-6.216,23.008L33.368,78.209
-	c-7.955-2.082-16.775-0.016-23.008,6.222c-7.177,7.173-8.841,17.775-4.988,26.535L19.92,96.417c2.041-2.042,5.38-2.042,7.42,0
-	l4.44,4.444c2.041,2.036,2.041,5.377,0,7.415l-14.702,14.703c8.869,4.181,19.779,2.609,27.11-4.722
-	C50.423,112.021,52.491,103.204,50.404,95.251z"/>
+	M36.766,16.466c4.911-0.001,9.822,1.873,13.568,5.618c3.743,3.745,5.616,8.654,5.618,13.563"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M123.689,116.043l-6.524,6.527c-1.445,1.444-3.81,1.444-5.252,0L57.036,68.719c-1.444-1.444-1.444-3.807,0-5.253l6.525-6.525
+	c1.445-1.445,3.806-1.445,5.251,0l54.877,53.852C125.135,112.234,125.135,114.6,123.689,116.043z"/>
 </svg>
