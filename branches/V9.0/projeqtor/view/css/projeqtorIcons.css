@@ -249,7 +249,6 @@
 .ProjeQtOrFlatGreen .iconActivityStreamWhite { background-image: url(customIcons/green/iconActivityStreamWhite.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconActivityStreamWhite { background-image: url(customIcons/grey/iconActivityStreamWhite.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconActivityStreamWhite { background-image: url(customIcons/red/iconActivityStreamWhite.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconActivityStreamWhite { background-image: url(customIcons/new/iconActivityStreamWhite.svg);  background-repeat: no-repeat; }
 
 .iconActivityType32 { background-image: url(images/iconActivityType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconActivityType22 { background-image: url(images/iconActivityType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -379,6 +378,8 @@
 
 .iconButtonCollapseOpen16 { background-image: url(images/iconCollapseOpen.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .iconButtonCollapseHide16 { background-image: url(images/iconCollapseClosed.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.ProjeQtOrNewGui .iconHome { background-image: url(customIcons/new/iconHome.svg);  background-repeat: no-repeat; }
 
 .iconHideStream32 { background-image: url(images/iconHideStream.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconHideStream22 { background-image: url(images/iconHideStream.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 20px 22px;}
