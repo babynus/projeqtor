@@ -36,10 +36,8 @@ $historyTable = RequestHandler::getValue('historyTable');
 $filter = RequestHandler::getValue('menuFilter');
 
 ?>
-<div name="menuBarListDiv" id="menuBarListDiv">
-   <table>
-     <tr>
-       <?php Menu::drawAllNewGuiMenus($filter, $historyTable);?>
-     </tr>
-   </table>
-</div>
+ <table>
+   <tr>
+     <?php Menu::drawAllNewGuiMenus($filter, $historyTable);?>
+   </tr>
+ </table>
