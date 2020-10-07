@@ -8,7 +8,7 @@
  * Copyright 2015, Codrops
  * http://www.codrops.com
  */
-
+// florent ticket 4965
 ;(function(window) {
 
   'use strict';
@@ -111,8 +111,9 @@
       var links = menuEl.querySelectorAll('.menu__link');
       links.forEach(function(linkEl, lPos) {
         var submenu = linkEl.getAttribute('data-submenu');
+        var idName = linkEl.getAttribute('id');
         if (submenu) {
-          var pushMe = {"menu":submenu, "name": linkEl.innerHTML };
+          var pushMe = {"menu":submenu, "name": linkEl.innerHTML, "id": idName};
           if (submenus[pos]) {
             submenus[pos].push(pushMe);
           } else {
@@ -131,6 +132,7 @@
           if (subMenuItem.menu == menu_x) {
             self.menusArr[pos].backIdx = menu_root;
             self.menusArr[pos].name = subMenuItem.name;
+            self.menusArr[pos].id = subMenuItem.id;
           }
         });
       });
@@ -142,8 +144,7 @@
       this.breadcrumbsCtrl.className = 'menu__breadcrumbs';
       this.breadcrumbsCtrl.setAttribute('style', 'float:left;');
       this.el.insertBefore(this.breadcrumbsCtrl, this.el.firstChild);
-      
-      
+
       // add initial breadcrumb
       this._addBreadcrumb(0);
       
@@ -340,16 +341,27 @@
     if( !this.options.breadcrumbsCtrl ) {
       return false;
     }
-
+    //florent
+    var iconClass= 'Home';
+    //var iconClass=  (idx )? ''+this.menusArr[idx].id : 'Home';
+    //iconClass= (idx)? iconClass.substr(3) : iconClass;
+    
+    var breadScrumLeft=dojo.byId('breadScrumb');
+    var divBcl = document.createElement('div');
+    divBcl.className='icon'+iconClass+' iconSize22 iconBreadSrumb';
+    var name= idx ? this.menusArr[idx].name : this.options.initialBreadcrumb;
+    divBcl.setAttribute('id', 'button'+name);
+    breadScrumLeft.appendChild(divBcl);
+    
+    
     var bc = document.createElement('a');
     bc.href = '#'; // make it focusable
-    bc.innerHTML = idx ? this.menusArr[idx].name : this.options.initialBreadcrumb;
+    bc.innerHTML = name;
     this.breadcrumbsCtrl.appendChild(bc);
-
+    
     var self = this;
     bc.addEventListener('click', function(ev) {
       ev.preventDefault();
-
       // do nothing if this breadcrumb is the last one in the list of breadcrumbs
       if( !bc.nextSibling || self.isAnimating ) {
         return false;
@@ -363,11 +375,39 @@
       self._menuIn(nextMenu);
 
       // remove breadcrumbs that are ahead
-      var siblingNode;
+      var siblNode;var siblingNode;
+      while (siblNode = divBcl.nextSibling) {
+        breadScrumLeft.removeChild(siblNode);
+      }
+      while (siblingNode = bc.nextSibling) {
+        self.breadcrumbsCtrl.removeChild(siblingNode);
+      }
+
+    }),
+    
+    divBcl.addEventListener('click', function(ev) {
+      ev.preventDefault();
+      
+      if(!divBcl.nextSibling || self.isAnimating) {
+        return false;
+      }
+      self.isAnimating = true;
+      
+      // current menu slides out
+      self._menuOut();
+      // next menu slides in
+      var nextMenu = self.menusArr[idx].menuEl;
+      self._menuIn(nextMenu);
+
+      var siblNode;var siblingNode;
+      while (siblNode = divBcl.nextSibling) {
+        breadScrumLeft.removeChild(siblNode);
+      }
       while (siblingNode = bc.nextSibling) {
         self.breadcrumbsCtrl.removeChild(siblingNode);
       }
     });
+    
   };
 
   MLMenu.prototype._crawlCrumbs = function(currentMenu, menuArray) {
