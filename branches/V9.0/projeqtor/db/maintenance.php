@@ -567,7 +567,7 @@ if (beforeVersion($currVersion,"V6.3.0") and $currVersion!='V0.0.0') {
 	if (count($noteList)<100) {
 		projeqtor_set_time_limit(1500);
 	} else {
-		traceLog("   => setting unlimited execution time for script (more than 100 assignments to update)");
+		traceLog("   => setting unlimited execution time for script (more than 100 notes to update)");
 		projeqtor_set_time_limit(0);
 	}
 	foreach($noteList as $note) {
