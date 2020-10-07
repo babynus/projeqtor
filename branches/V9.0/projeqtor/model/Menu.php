@@ -99,8 +99,8 @@ class Menu extends SqlElement {
   		if ($menu->idMenu==0) {
   		}
   	} else if ($menu->type=='item') {
-  		echo '<td  title="' .i18n($menu->name) . '" dndType="menuBar" class="dojoDndItem">';
-  		echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
+  		echo '<td  title="' .i18n($menu->name) . '">';
+  		echo '<div class="'.$menuClass.' dojoDndItem" style="'.$style.'" id="iconMenuBar'.$class.'" ';
   		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
   		echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
   		if ($menuName=='menuReports' and isHtml5() ) {
@@ -109,12 +109,12 @@ class Menu extends SqlElement {
   		}
   		echo '>';
   		if($drawMode=='ICON'){
-  			echo '<div class="icon'.$class.'22 icon'.$class.' iconSize22" style="width:22px;height:22px"></div>';
+  			echo '<div class="icon'.$class.'22 icon'.$class.' iconSize22 imageColorNewGui" style="width:22px;height:22px"></div>';
   		}else if($drawMode=='TXT'){
   			echo i18n($menu->name);
   		}else if($drawMode=='ICONTXT'){
   		  echo '<table><tr>';
-  		  echo '<td><div class="icon'.$class.'22 icon'.$class.' iconSize22" style="width:22px;height:22px"></div></td>';
+  		  echo '<td><div class="icon'.$class.'22 icon'.$class.' iconSize22 imageColorNewGui" style="width:22px;height:22px"></div></td>';
   	      echo '<td style="padding-left:5px;">'.i18n($menu->name).'</td>';
   		  echo '</tr></table>';
   		}
@@ -132,8 +132,8 @@ class Menu extends SqlElement {
         echo '</div>';
         echo '</td>'; 
         } else if ($menu->type=='plugin') {
-          echo '<td  title="' .i18n($menu->name) . '" dndType="menuBar" class="dojoDndItem">';
-          echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'"';
+          echo '<td  title="' .i18n($menu->name) . '">';
+          echo '<div class="'.$menuClass.' dojoDndItem" style="'.$style.'" id="iconMenuBar'.$class.'"';
           echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
           echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
           if($drawMode=='ICON'){
@@ -150,17 +150,17 @@ class Menu extends SqlElement {
           echo '</td>';
         } else if ($menu->type=='object') { 
           if (securityCheckDisplayMenu($idMenu, $class)) {
-          	echo '<td title="' .i18n('menu'.$class) . '" dndType="menuBar" class="dojoDndItem">';
-          	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
+          	echo '<td title="' .i18n('menu'.$class) . '">';
+          	echo '<div class="'.$menuClass.' dojoDndItem" style="'.$style.'" id="iconMenuBar'.$class.'" ';
           	echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
           	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" >';
           	if($drawMode=='ICON'){
-          		echo '<div class="icon'.$class.'22 icon'.$class.' iconSize22" style="width:22px;height:22px"></div>';
+          		echo '<div class="icon'.$class.'22 icon'.$class.' iconSize22 imageColorNewGui" style="width:22px;height:22px"></div>';
           	}else if($drawMode=='TXT'){
           		echo i18n($menu->name);
           	}else if($drawMode=='ICONTXT'){
           		echo '<table><tr>';
-        		echo '<td><div class="icon'.$class.'22 icon'.$class.' iconSize22" style="width:22px;height:22px"></div></td>';
+        		echo '<td><div class="icon'.$class.'22 icon'.$class.' iconSize22 imageColorNewGui" style="width:22px;height:22px"></div></td>';
         	    echo '<td style="padding-left:5px;">'.i18n($menu->name).'</td>';
         		echo '</tr></table>';
           	}
@@ -179,7 +179,7 @@ class Menu extends SqlElement {
         if($defaultMenu == 'menuBarCustom'){
           $where = ($customMenuArray)?"name in ('".implode("','", $customMenuArray)."')":"";
           $menuList=($where)?$obj->getSqlElementsFromCriteria(null, false, $where):array();
-        }else{
+        }else if ($defaultMenu == 'menuBarRecent'){
           $historyTable = explode(',', $historyTable);
           $where = ($historyTable)?"name in ('".implode("','", $historyTable)."')":"";
           $menuList=($where)?$obj->getSqlElementsFromCriteria(null, false, $where):array();
@@ -187,11 +187,13 @@ class Menu extends SqlElement {
           foreach ($historyTable as $name){
           	foreach ($menuList as $menu){
               if($menu->name == $name){
-                array_push($sortHistoryTable, $menu);
+                $sortHistoryTable[$menu->name] = $menu;
               }
             }
           }
-          $menuList=$sortHistoryTable;
+          $menuList=array_reverse($sortHistoryTable, true);
+        }else{
+          $menuList = array();
         }
         
         $pluginObjectClass='Menu';

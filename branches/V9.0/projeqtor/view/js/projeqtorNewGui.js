@@ -240,6 +240,7 @@ function menuNewGuiFilter(filter, item) {
 	});
 	var callback = function(){
 		if(item)selectIconMenuBar(item);
+		//ajouter slection icon favori ou recent
 	};
 	loadDiv('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, callback);
 	saveUserParameter('defaultMenu', filter);
