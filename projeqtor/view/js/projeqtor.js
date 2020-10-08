@@ -3284,18 +3284,17 @@ function drawGantt() {
         pColor = '50BB50';
       }
       //gautier #3925
-        if(trim(item.validatedenddate) != "" && item.done == 0){
-          var someDate = new Date();
-          var numberOfDaysToAdd = 1;
-          var validatedEndDate = new Date (item.validatedenddate);
-          if( validatedEndDate < someDate.setDate(someDate.getDate() - numberOfDaysToAdd)){
-            if(item.reftype=="Project"){
-              pColor = '650000';
-            }else{
-              pColor = 'BB5050';
-            }
+      if(trim(item.plannedenddate) != "" && item.done == 0){
+        var today = (new Date()).toISOString().substr(0,10);
+        var endDate = item.plannedenddate.substr(0,10);
+        if( endDate < today){
+          if(item.reftype=="Project"){
+            pColor = '650000';
+          }else{
+            pColor = 'BB5050';
           }
         }
+      }
       var pItemColor=item.color;
       // pMile : is it a milestone ?      
       var pMile = (item.reftype == 'Milestone') ? 1 : 0;
