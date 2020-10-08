@@ -52,7 +52,7 @@ class AssetMain extends SqlElement {
   public $_spe_fullNameLocation;
   public $idAffectable;
   public $idUser;
-  public $idResource;
+  //public $idResource;
   public $creationDateTime;
   public $lastUpdateDateTime;
   public $idle;
@@ -94,7 +94,7 @@ class AssetMain extends SqlElement {
   private static $_fieldsAttributes=array(
       'name'=>'required',
       'idUser'=>'hidden',
-      'idResource'=>'hidden',
+      //'idResource'=>'hidden',
       'idAssetType'=>'required',
       'idStatus'=>'required',
       "installationDate"=>"nobr",
@@ -102,7 +102,7 @@ class AssetMain extends SqlElement {
   );
   
   private static $_databaseColumnName = array(
-      'idResource'=>'idAffectable'
+      //'idResource'=>'idAffectable'
   );
   
    /** ==========================================================================
