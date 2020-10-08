@@ -14,3 +14,5 @@ where exists (select 'x' from `${prefix}resource` res where res.id=idResource an
 ALTER TABLE `${prefix}complexityvalues` CHANGE `charge` `charge` DECIMAL(14,5);
 ALTER TABLE `${prefix}complexityvalues` CHANGE `price` `price` DECIMAL(11,2);
 ALTER TABLE `${prefix}complexityvalues` CHANGE `duration` `duration` int(5) unsigned COMMENT '5';
+
+DELETE FROM `${prefix}accessright` WHERE `idMenu`=254;
