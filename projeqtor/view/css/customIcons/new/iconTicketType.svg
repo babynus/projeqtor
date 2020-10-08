@@ -4,36 +4,25 @@
 <svg version="1.1" id="Calque_1" xmlns:serif="http://www.serif.com/"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px" height="128px"
 	 viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M2.83,62.795c0,0.757,0.61,1.365,1.364,1.365
-		h47.895c0.756,0,1.364-0.608,1.364-1.365V2.967c0-0.753-0.608-1.364-1.364-1.364H18.34L2.83,16.946V62.795z"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M2.83,16.946h15.171"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M18.001,16.946V1.603"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M28.141,9.274h9.523"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M28.141,16.686h15.799"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M28.141,24.162h15.799"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M12.146,45.465h30.443"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M12.146,38.38h30.443"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M12.146,52.811h30.443"/>
-</g>
 <g id="Calque_3">
 	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M16.445,64c0,16.73-13.181,16.461-13.181,16.461v16.715h121.472V80.461c0,0-13.726-0.736-13.726-13.891
-		c0-13.16,13.726-14.867,13.726-14.867V30.827H53.453"/>
+		M16.158,74.571C12.594,81.981,4,80.126,4,80.126V96.5h120V80.126c0,0-13.56-0.722-13.56-13.608c0-12.892,13.56-14.564,13.56-14.564
+		V31.503H64"/>
 	<g>
 		<g>
 			
 				<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,10" d="
-				M87.242,30.824v66.35"/>
+				M86.961,31.5v64.998"/>
 		</g>
 	</g>
 </g>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M56.199,65.921c0,0.578-0.469,1.048-1.048,1.048H5.093c-0.579,0-1.048-0.47-1.048-1.048V15.863c0-0.579,0.469-1.048,1.048-1.048
+	h50.058c0.579,0,1.048,0.469,1.048,1.048V65.921z"/>
+<circle fill="#FF0000" cx="15.969" cy="27.796" r="3.704"/>
+<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="23.764" y1="27.796" x2="45.776" y2="27.796"/>
+<circle fill="#FF0000" cx="15.969" cy="40.892" r="3.704"/>
+<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="23.764" y1="40.892" x2="45.776" y2="40.892"/>
+<circle fill="#FF0000" cx="15.969" cy="53.987" r="3.704"/>
+<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="23.764" y1="53.987" x2="45.776" y2="53.987"/>
 </svg>
