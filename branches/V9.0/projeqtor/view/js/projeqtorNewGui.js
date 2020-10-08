@@ -70,7 +70,6 @@ var contentPaneResizingInProgress={};
 
 var defaultMenu=null;
 
-
 //=============================================================================
 //function for left Menu 
 //
@@ -235,14 +234,56 @@ var defaultMenu=null;
 
 function menuNewGuiFilter(filter, item) {
 	var historyBar = new Array();
+	var historyBarSort = new Array();
 	historyTable.forEach(function(element){
 		historyBar.push('menu'+element[0]);
+		if(!historyBarSort.includes('menu'+element[0]))historyBarSort.push('menu'+element[0]);
 	});
+	var countList = historyBarSort.length*140;
+	var containerDivWidth = dojo.byId('menubarContainer').offsetWidth;
+	var listDivWidth = dojo.byId('menuBarListDiv').offsetWidth;
+	if(countList > listDivWidth)listDivWidth=countList;
+	var buttonDivWidth = dojo.byId('menuBarButtonDiv').offsetWidth;
+	var maxDivWidth = containerDivWidth-buttonDivWidth-140;
+	var nbSkipMenu = 0;
+	
+	if(filter == 'menuBarRecent'){
+		while(listDivWidth > maxDivWidth){
+			historyBarSort.splice(0, 1);
+			listDivWidth -= 140;
+			nbSkipMenu++;
+		}
+	}else{
+	}
 	var callback = function(){
 		if(item)selectIconMenuBar(item);
-		//ajouter slection icon favori ou recent
+		if(filter != 'menuBarCustom'){
+			dojo.byId('favoriteSwitch').style.display = 'none';
+			dojo.addClass('recentButton','imageColorNewGuiSelected');
+			dojo.removeClass('favoriteButton','imageColorNewGuiSelected');
+		}else{
+			dojo.byId('favoriteSwitch').style.display = 'block';
+			dojo.addClass('favoriteButton','imageColorNewGuiSelected');
+			dojo.removeClass('recentButton','imageColorNewGuiSelected');
+		}
 	};
-	loadDiv('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, callback);
+	loadDiv('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, callback);
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
+}
+
+function switchFavoriteRow(idRow, direction, maxRow){
+	var nextRow=idRow;
+	if(direction=='up'){
+		nextRow += 1;
+		if(nextRow > maxRow)nextRow=1;
+	}else if(direction=='down'){
+		nextRow -= 1;
+		if(nextRow < 1)nextRow=maxRow;
+	}
+	var callback = function(){
+		saveUserParameter('idFavoriteRow', nextRow);
+		menuNewGuiFilter('menuBarCustom', null);
+	};
+	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow, 'favoriteSwitch', null, callback);
 }
