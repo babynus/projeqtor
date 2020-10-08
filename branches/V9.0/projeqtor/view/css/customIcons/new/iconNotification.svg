@@ -1,9 +1,46 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g>
-        <g>
-            <path d="M467.819,431.851L431.168,370.795C414.272,342.614 405.333,310.358 405.333,277.483L405.333,224C405.333,141.675 338.325,74.667 256,74.667C173.675,74.667 106.667,141.675 106.667,224L106.667,277.483C106.667,310.358 97.728,342.614 80.832,370.795L44.181,431.851C42.197,435.136 42.154,439.254 44.032,442.582C45.931,445.931 49.493,448.001 53.333,448.001L458.666,448.001C462.506,448.001 466.069,445.932 467.967,442.582C469.845,439.253 469.803,435.136 467.819,431.851ZM72.171,426.667L99.115,381.76C118.016,350.272 128,314.219 128,277.483L128,224C128,153.408 185.408,96 256,96C326.592,96 384,153.408 384,224L384,277.483C384,314.219 393.984,350.272 412.864,381.76L439.829,426.667L72.171,426.667Z" style="fill-rule:nonzero;"/>
-        </g>
-    </g>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
+	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<g id="Calque_1">
+	<g id="Calque_2" display="none">
+	</g>
+	
+		<sodipodi:namedview  id="namedview7" inkscape:zoom="2.8710938" bordercolor="#666666" guidetolerance="10" objecttolerance="10" borderopacity="1" showgrid="false" inkscape:cx="7.8240306" pagecolor="#ffffff" inkscape:cy="41.675131" gridtolerance="10" inkscape:window-width="1519" inkscape:window-height="845" inkscape:pageshadow="2" inkscape:window-maximized="0" inkscape:window-x="0" inkscape:current-layer="Livello_1" inkscape:pageopacity="0" inkscape:window-y="0">
+		</sodipodi:namedview>
+	<title  id="title2"></title>
+</g>
+<g id="Calque_3">
+</g>
+<g id="Calque_2_1_">
+	<g>
+		<g>
+			<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+				M96.943,69.198c0,17.83-14.453,32.281-32.28,32.281c-17.828,0-32.281-14.451-32.281-32.281c0-17.825,14.453-32.278,32.281-32.278
+				C82.49,36.92,96.943,51.373,96.943,69.198z"/>
+			
+				<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+				64.663,51.659 64.663,69.198 79.88,84.416 			"/>
+		</g>
+		
+			<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="64.663" cy="69.122" r="42.86"/>
+		
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="42.354" y1="106.531" x2="36.155" y2="117.437"/>
+		
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="86.973" y1="106.531" x2="93.171" y2="117.437"/>
+		
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="64.663" y1="26.262" x2="64.663" y2="14.998"/>
+		
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="60.083" y1="14.998" x2="69.243" y2="14.998"/>
+		<g>
+			<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+				M11.423,46.942L11.423,46.942c-4.624-5.228-4.132-13.289,1.094-17.913l11.174-9.886c5.229-4.626,13.289-4.132,17.914,1.094
+				L11.423,46.942z"/>
+			<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+				M117.902,46.942L117.902,46.942c4.627-5.228,4.133-13.289-1.094-17.913l-11.172-9.886c-5.229-4.626-13.289-4.132-17.913,1.094
+				L117.902,46.942z"/>
+		</g>
+	</g>
+</g>
 </svg>
