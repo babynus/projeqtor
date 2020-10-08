@@ -246,5 +246,35 @@ class DecisionMain extends SqlElement {
   	}
   }
     
+  public function sendMailToApprovers($onlyNotApproved=true) {
+    $crit=array('refType'=>'Decision', 'refId'=>$this->id);
+    if ($onlyNotApproved) {
+    		$crit['approved']='0';
+    }
+    $app=new Approver();
+    $appList=$app->getSqlElementsFromCriteria($crit);
+    $dest="";
+    foreach ($appList as $app) {
+    		$res=new Affectable($app->idAffectable);
+    		$resMail=(($res->name)?$res->name:$res->userName);
+    		$resMail.=(($res->email)?' <'.$res->email.'>':'');
+    		$resMail=$res->email;
+    		$dest.=($dest)?', ':'';
+    		$dest.=$resMail;
+    }
+    $arrayFrom=array('document','Document',i18n('Document'));
+    $arrayTo=array('decision','Decision',i18n('Decision'));
+    // TODO : define specific message for decisions
+    $title=$this->parseMailMessage(Parameter::getGlobalParameter('paramMailTitleApprover'));
+    $title=str_replace($arrayFrom, $arrayTo, $title);
+    $msg=$this->parseMailMessage(Parameter::getGlobalParameter('paramMailBodyApprover'));
+    $msg=str_replace($arrayFrom, $arrayTo, $msg);
+    $result=(sendMail($dest,$title,$msg))?'OK':'';
+    if ($result) {
+    		return $dest;
+    } else {
+    		return 0;
+    }
+  }
 }
 ?>

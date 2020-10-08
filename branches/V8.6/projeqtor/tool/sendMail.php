@@ -184,6 +184,11 @@ if ($typeSendMail=="User") {
   $doc=new Document($id);
   $dest=$doc->sendMailToApprovers(true);
   $result=($dest!='' and $dest!='0')?'OK':'';
+} else if ($typeSendMail=="Decision") {
+  $id=$_REQUEST['id'];
+  $dec=new Decision($id);
+  $dest=$dec->sendMailToApprovers(true);
+  $result=($dest!='' and $dest!='0')?'OK':'';
 } else if ($typeSendMail=="Mailable") {
   $class=$_REQUEST['mailRefType'];
   Security::checkValidClass($class);
