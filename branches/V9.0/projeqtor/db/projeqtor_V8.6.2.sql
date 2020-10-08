@@ -16,3 +16,10 @@ ALTER TABLE `${prefix}complexityvalues` CHANGE `price` `price` DECIMAL(11,2);
 ALTER TABLE `${prefix}complexityvalues` CHANGE `duration` `duration` int(5) unsigned COMMENT '5';
 
 DELETE FROM `${prefix}accessright` WHERE `idMenu`=254;
+
+UPDATE `${prefix}menu` SET `level`='ReadWritePrincipal' WHERE id=174;
+
+UPDATE `${prefix}accessright` set idAccessProfile=1000001 where idMenu in (174) and idAccessProfile=8;
+UPDATE `${prefix}accessright` set idAccessProfile=1000002 where idMenu in (174) and idAccessProfile=9;
+UPDATE `${prefix}accessright` set idAccessProfile=1000001 where idMenu in (174) and idAccessProfile=7;
+UPDATE `${prefix}accessright` set idAccessProfile=1000002 where idMenu in (174) and idAccessProfile=1;
