@@ -92,6 +92,7 @@ class Menu extends SqlElement {
   	if(!$drawMode)$drawMode='TXT';
   	$menuName=$menu->name;
   	$menuClass=' menuBarItem '.$menu->menuClass;
+  	if (in_array($menu->name,$customMenuArray)) $menuClass.=' menuBarCustom';
   	$idMenu=$menu->id;
   	$class=substr($menuName,4);
   	$style='width:auto;height:auto;max-height:48px !important;padding:5px 10px 5px 10px !important;color: var(--color-dark);filter:unset !important;white-space:nowrap;';
@@ -114,7 +115,7 @@ class Menu extends SqlElement {
   			echo i18n($menu->name);
   		}else if($drawMode=='ICONTXT'){
   		  echo '<table><tr>';
-  		  echo '<td><div class="icon'.$class.'22 icon'.$class.' iconSize22 imageColorNewGui" style="width:22px;height:22px"></div></td>';
+  		  echo '<td><div class="icon'.$class.'16 icon'.$class.' iconSize16 imageColorNewGui" style="width:16px;height:16px"></div></td>';
   	      echo '<td style="padding-left:5px;">'.i18n($menu->name).'</td>';
   		  echo '</tr></table>';
   		}
@@ -160,7 +161,7 @@ class Menu extends SqlElement {
           		echo i18n($menu->name);
           	}else if($drawMode=='ICONTXT'){
           		echo '<table><tr>';
-        		echo '<td><div class="icon'.$class.'22 icon'.$class.' iconSize22 imageColorNewGui" style="width:22px;height:22px"></div></td>';
+        		 echo '<td><div class="icon'.$class.'16 icon'.$class.' iconSize16 imageColorNewGui" style="width:16px;height:16px"></div></td>';
         	    echo '<td style="padding-left:5px;">'.i18n($menu->name).'</td>';
         		echo '</tr></table>';
           	}
@@ -170,28 +171,36 @@ class Menu extends SqlElement {
         }
       }  
       
-      public static function drawAllNewGuiMenus($defaultMenu, $historyTable) {
+      public static function drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idFavoriteRow) {
         $isNotificationSystemActiv = isNotificationSystemActiv();
         $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
-        $customMenuArray=SqlList::getListWithCrit("MenuCustom",array('idUser'=>getSessionUser()->id));
+        $customMenuArray=SqlList::getListWithCrit("MenuCustom",array('idUser'=>getSessionUser()->id, 'idRow'=>$idFavoriteRow));
         $obj=new Menu();
         $where=null;
+        if(!$nbSkipMenu)$nbSkipMenu = 0;
         if($defaultMenu == 'menuBarCustom'){
           $where = ($customMenuArray)?"name in ('".implode("','", $customMenuArray)."')":"";
           $menuList=($where)?$obj->getSqlElementsFromCriteria(null, false, $where):array();
         }else if ($defaultMenu == 'menuBarRecent'){
           $historyTable = explode(',', $historyTable);
-          $where = ($historyTable)?"name in ('".implode("','", $historyTable)."')":"";
+          $reverseArray = array_reverse($historyTable);
+          $where = ($reverseArray)?"name in ('".implode("','", $reverseArray)."')":"";
           $menuList=($where)?$obj->getSqlElementsFromCriteria(null, false, $where):array();
           $sortHistoryTable = array();
-          foreach ($historyTable as $name){
+          foreach ($reverseArray as $name){
           	foreach ($menuList as $menu){
               if($menu->name == $name){
                 $sortHistoryTable[$menu->name] = $menu;
+                break;
               }
             }
           }
-          $menuList=array_reverse($sortHistoryTable, true);
+          $menuList=$sortHistoryTable;
+          if($nbSkipMenu > 0){
+            $menuList=array_reverse($sortHistoryTable);
+            $menuList = array_slice($menuList, $nbSkipMenu);
+            $menuList=array_reverse($menuList);
+          }
         }else{
           $menuList = array();
         }

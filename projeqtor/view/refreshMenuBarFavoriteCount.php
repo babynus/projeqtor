@@ -30,17 +30,23 @@
  */
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
-scriptLog('   ->/view/refreshMenuBarList.php');
+scriptLog('   ->/view/refreshMenuBarFavoriteCount.php');
 
-$historyTable = RequestHandler::getValue('historyTable');
-$defaultMenu = RequestHandler::getValue('menuFilter');
-$nbSkipMenu = RequestHandler::getValue('nbSkipMenu');
-if(!$nbSkipMenu)$nbSkipMenu=0;
-$idRow = Parameter::getUserParameter('idFavoriteRow');
+$idRow = RequestHandler::getValue('idFavoriteRow');
+$nbFavoriteRow = Parameter::getUserParameter('nbFavoriteRow');
 if(!$idRow)$idRow=1;
+if(!$nbFavoriteRow)$nbFavoriteRow=5;
 ?>
- <table>
+<table>
    <tr>
-     <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idRow);?>
-   </tr>
- </table>
+     <td id="favoriteSwitchRow" style="top: 7px;right: 25px;position: absolute;">
+    <table style="height:22px;width:10px">
+      <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'up', <?php echo $nbFavoriteRow;?>);" >▲</td></tr>
+      <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'down', <?php echo $nbFavoriteRow;?>);" >▼</td></tr>
+    </table>
+   </td>
+   <td id="favoriteCountRow" style="top:10px;right:5px;position:absolute;color: var(--color-dark);">
+     <div id="favoriteCountRowDiv" class="sectionBadge" style="top: 3px;width: 12px;right:0px;"><?php echo $idRow;?></div>
+   </td>
+ </tr>
+</table>
