@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
+	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<g id="Calque_1">
+	<g id="Calque_2" display="none">
+	</g>
+	
+		<sodipodi:namedview  id="namedview7" inkscape:zoom="2.8710938" bordercolor="#666666" guidetolerance="10" objecttolerance="10" borderopacity="1" showgrid="false" inkscape:cx="7.8240306" pagecolor="#ffffff" inkscape:cy="41.675131" gridtolerance="10" inkscape:window-width="1519" inkscape:window-height="845" inkscape:pageshadow="2" inkscape:window-maximized="0" inkscape:window-x="0" inkscape:current-layer="Livello_1" inkscape:pageopacity="0" inkscape:window-y="0">
+		</sodipodi:namedview>
+	<title  id="title2"></title>
+</g>
+<g id="Calque_3">
+	<g>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M11.152,66.492v54.855h102.889V62.269H66.17 M51.505,107.146V76.473L78.07,91.809L51.505,107.146z"/>
+		
+			<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			66.17,62.076 114.041,62.076 114.041,47.085 66.17,47.085 		"/>
+		
+			<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			66.17,30.919 109.591,18.235 105.39,3.845 66.17,15.301 		"/>
+		
+			<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			51.505,107.146 78.07,91.809 51.505,76.473 		"/>
+	</g>
+</g>
+<g id="Calque_2_1_">
+	<g>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M56.654,55.606c0,0.578-0.469,1.048-1.049,1.048H5.548c-0.579,0-1.048-0.47-1.048-1.048V5.548C4.5,4.969,4.969,4.5,5.548,4.5
+			h50.058c0.58,0,1.049,0.469,1.049,1.048V55.606z"/>
+		<circle fill="#FF0000" cx="16.424" cy="17.481" r="3.704"/>
+		<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="17.481" x2="46.231" y2="17.481"/>
+		<circle fill="#FF0000" cx="16.424" cy="30.577" r="3.704"/>
+		<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="30.578" x2="46.231" y2="30.578"/>
+		<circle fill="#FF0000" cx="16.424" cy="43.672" r="3.704"/>
+		<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="43.671" x2="46.231" y2="43.671"/>
+	</g>
+</g>
+</svg>
