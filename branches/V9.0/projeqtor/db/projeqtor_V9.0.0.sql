@@ -50,5 +50,5 @@ INSERT INTO `${prefix}navigation` (`name`, `idParent`, `idMenu`,`sortOrder`) VAL
 ('menuGlobalParameter',6,18,null),
 ('menuUserParameter',6,19,null);
 
-ALTER TABLE `${prefix}menucustom` ADD `idRow` INT(12) DEFAULT NULL COMMENT '12' AFTER `idUser`;
+ALTER TABLE `${prefix}menucustom` ADD `idRow` INT(12) DEFAULT '1' COMMENT '12' AFTER `idUser`;
 
