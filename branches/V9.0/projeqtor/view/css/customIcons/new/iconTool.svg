@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="Layer_1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" sodipodi:docname="iconTicket.svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px" height="128px"
+	 viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<sodipodi:namedview  id="namedview27" inkscape:zoom="14.75" bordercolor="#666666" guidetolerance="10" objecttolerance="10" borderopacity="1" showgrid="false" inkscape:cx="22.296444" pagecolor="#ffffff" inkscape:cy="24.881783" gridtolerance="10" inkscape:snap-global="false" inkscape:document-rotation="0" inkscape:window-width="1920" inkscape:window-height="1017" inkscape:pageshadow="2" inkscape:window-maximized="1" inkscape:window-x="-8" inkscape:current-layer="Layer_1" inkscape:pageopacity="0" inkscape:window-y="-8">
+	</sodipodi:namedview>
+<g>
+	<g>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M21.004,117.094c-6.736-6.447-7.36-13.828-7.36-13.828l30.119-29.588c0,0,3.686-1.863,7.196-1.863c0,0,6.301,1.455,18.503-10.749
+			l29.494-28.186l3.521-6.145l9.375-6.771l6.283,6.282l-6.77,9.374l-6.146,3.525L77.033,68.639
+			c-12.203,12.201-10.746,18.5-10.746,18.5c0,3.512-1.867,7.197-1.867,7.197l-29.587,30.121
+			C34.833,124.457,27.453,123.832,21.004,117.094z"/>
+		
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="40.134" y1="87.902" x2="19.927" y2="108.109"/>
+		
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="51.771" y1="86.42" x2="23.786" y2="114.406"/>
+		
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="50.289" y1="98.057" x2="30.082" y2="118.266"/>
+	</g>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M55.167,67.549L44.483,56.561c0,0-15.833-4.974-18.421,10.75c-1.25,7.596,3.689,13.266-2.673,12.559
+		c-6.362-0.705-11.695-16.322-7.276-25.335c4.417-9.012,8.305-13.605,8.128-14.844c-0.177-1.237-2.121-3.18-1.238-4.771
+		C23.887,33.328,34.058,22.45,35.6,22.323c1.542-0.126,8.08,0.049,9.318-1.187c1.236-1.239,3.003-3.712,2.474-5.657
+		c-0.53-1.943,7.776-10.604,9.188-9.896c1.415,0.708,16.083,14.313,15.728,15.729c-0.352,1.412-8.833,9.895-9.896,9.542
+		c-1.06-0.355-6.185-0.531-6.539,6.891c-0.353,7.424,0.436,6.988,0.436,6.988L68.335,56.43"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M83.37,71.051l31.177,30.314c0,0,6.537,4.42-1.239,12.195c-7.776,7.773-12.192,1.236-12.192,1.236L71.482,84.324"/>
+</g>
+</svg>
