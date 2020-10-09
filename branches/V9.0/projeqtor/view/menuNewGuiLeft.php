@@ -95,10 +95,6 @@ function getNavigationMenuLeft (){
   $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc');
   sortMenus($contexctMenuMain,$result,0,$level);
   ksort($result);
-//   $liArray=$result;
-//   foreach ($liArray as $menu){
-//     debugLog($menu['level'].'    /   '.$menu['object']->idParent.'    '.$menu['object']->name);
-//   }
 
 
   foreach ($result as $id=>$context){
