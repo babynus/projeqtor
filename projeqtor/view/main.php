@@ -916,8 +916,12 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         </script>
      <?php } ?>
     <?php }else{
-      include 'menuNewGuiTop.php';
-      }
+      include 'menuNewGuiTop.php'; ?>
+          <div region="top" dojoType="dijit.TooltipDialog" id="newGuiCustomMenuAdd" onClick="customMenuAddItem();" 
+          style="top:42px;position:absolute !important;z-index:99999999;width:auto !important;display:none;"><?php echo i18n('customMenuAdd');?></div>
+          <div region="top" dojoType="dijit.TooltipDialog" id="newGuiCustomMenuRemove" onClick="customMenuRemoveItem();" 
+          style="top:42px;position:absolute !important;z-index:99999999;width:auto !important;display:none;"><?php echo i18n('customMenuRemove');?></div>
+      <?php }
 
       $hideMenuTopParam = Parameter::getGlobalParameter ( 'MenuBarTop' );
       if (sessionValueExists('hideMenuTop') and getSessionValue('hideMenuTop')!='YES'){
