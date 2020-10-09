@@ -41,34 +41,37 @@
 
 .menu__item {
 	display: block;
-	width: calc(100%);
+	width:99%;
 }
 
 .menu__link{
+	float:left;
 	font-weight: 600;
 	position: relative;
 	vertical-align: middle;
 	display: block;
- 	padding: 0.55em 1.5em ; 
+ 	padding: 0.55em 0em 0.5em 1.5em;
 	color: white;
 	-webkit-transition: color 0.1s;
 	transition: color 0.1s;
+	width:87%;
 }
+
 .menu__linkDirect{
 	float:left;
 	font-weight: 600;
 	position: relative;
 	vertical-align: middle;
 	display: block;
- 	margin: 0.55em 0em 0em 1.5em; 
+ 	padding: 0.55em 0em 0.5em 1.5em;
 	color: white;
 	-webkit-transition: color 0.1s;
 	transition: color 0.1s;
-	width:85%;
+	width:80%;
 }
 
 .menu__add__Fav:after{
-    float: right;
+    float: left;
     content: '\f27d';
     font-family: 'Material';
     font-size: 19px;
@@ -76,19 +79,19 @@
     text-shadow: 0.9px 0px 0.4px;
     -webkit-text-stroke-color: black;
     position: relative;
-    top: 8px;
-    right: 10px;
+    top:8px;
+    right: 5px;
     color: var( --color-dark);
     width: 4%;
 }
 .menu__as__Fav::after{
-    float: right;
+    float: left;
     content: '\f27d';
     font-family: 'Material';
 	font-size:16px;
     position: relative;
     top: 8px;
-    right: 9px;
+    right: 4px;
     color: var(--color-secondary);
     display: block;
     width: 4%;
@@ -103,19 +106,27 @@
 }
 
 .menu__link--current {
-    border-right: 3px solid var(--color-secondary);
     color: var(--color-secondary);
 }
 
+.div__link{
+    padding-top: 5px;
+    float: right;
+    height: 30px;
+}
+
+.div__link--current{
+    border-right: 3px solid var(--color-secondary);
+}
 .menu__link--current::before {
-	content: '\00B7';
-	font-size: 1.5em;
-	line-height: 0;
-	position: absolute;
-	top: 50%;
-	left: 0.5em;
-	height: 4px;
-	color: var(--color-secondary);
+    content: '\00B7';
+    font-size: 1.5em;
+    line-height: 0;
+    position: relative;
+    bottom: -3px;
+    left: -0.5em;
+    height: 4px;
+    color: var(--color-secondary);
 }
 
 

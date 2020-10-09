@@ -163,10 +163,10 @@ function drawLeftMenuListNewGui(){
       
       $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
       $result.='<a class="menu__linkDirect" onclick='.$funcOnClick.' href="#" id="'.$obj->name.'" >'.i18n($obj->name).'</a>';
-      $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
+      $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div><div id="currentDiv'.$obj->name.'" class="div__link"></div></li>';
 }else{
       $sub='submenu-'.$obj->id;
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'">'.i18n($obj->name).'</a></li>';
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'">'.i18n($obj->name).'</a><div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
     }
     $old=$menu['level'];
     $idP=$menu['object']->idParent;
