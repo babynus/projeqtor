@@ -144,16 +144,29 @@ function drawLeftMenuListNewGui(){
       $menuNameI18n = i18n($menuName);
       $menuName2 = addslashes(i18n($menuName));
       $class=substr($menuName,4);
+      $isFav=SqlElement::getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$obj->name));
       if($realMenu->type=='item'){
         $funcOnClick="loadMenuBarItem('".$class."','".htmlEncode($menuName2,'quotes')."','bar');";
       }else{
          $funcOnClick="loadMenuBarObject('".$class."','".htmlEncode($menuName2,'bar')."','bar');";
       }
+      if($isFav->id==''){
+        $mode='add';
+        $class="menu__add__Fav";
+        $styleDiv="display:none;";
+      }else{
+        $mode='remove';
+        $class="menu__as__Fav";
+        $styleDiv="display:block;";
+      }
+      $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."');";
       
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" onclick="'.$funcOnClick.'" href="#" id='.$obj->name.'>'.i18n($obj->name).'</a></li>';
-    }else{
+      $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
+      $result.='<a class="menu__linkDirect" onclick='.$funcOnClick.' href="#" id="'.$obj->name.'" >'.i18n($obj->name).'</a>';
+      $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
+}else{
       $sub='submenu-'.$obj->id;
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id='.$obj->name.'>'.i18n($obj->name).'</a></li>';
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'">'.i18n($obj->name).'</a></li>';
     }
     $old=$menu['level'];
     $idP=$menu['object']->idParent;

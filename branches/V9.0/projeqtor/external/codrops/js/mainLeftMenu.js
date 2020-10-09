@@ -106,7 +106,6 @@
       if( pos === self.current_menu ) {
         classie.add(menuEl, 'menu__level--current');
       }
-
       var menu_x = menuEl.getAttribute('data-menu');
       var links = menuEl.querySelectorAll('.menu__link');
       links.forEach(function(linkEl, lPos) {
@@ -179,6 +178,7 @@
     for(var i = 0, len = this.menusArr.length; i < len; ++i) {
       this.menusArr[i].menuItems.forEach(function(item, pos) {
         item.querySelector('a').addEventListener('click', function(ev) { 
+          if (ev.clientY>ev.target.clientHeight)console.log('uis');
           var submenu = ev.target.getAttribute('data-submenu'),
             itemName = ev.target.innerHTML,
             subMenuEl = self.el.querySelector('ul[data-menu="' + submenu + '"]');
@@ -195,6 +195,7 @@
             if( currentlink ) {
               classie.remove(self.el.querySelector('.menu__link--current'), 'menu__link--current');
             }
+            console.log(ev.target);
             classie.add(ev.target, 'menu__link--current');
             
             // callback
