@@ -271,7 +271,6 @@
 .ProjeQtOrFlatGreen .iconActivityStreamWhite { background-image: url(customIcons/green/iconActivityStreamWhite.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconActivityStreamWhite { background-image: url(customIcons/grey/iconActivityStreamWhite.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconActivityStreamWhite { background-image: url(customIcons/red/iconActivityStreamWhite.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconActivityStreamWhite { background-image: url(customIcons/new/iconActivityStreamWhite.svg);  background-repeat: no-repeat; }
 
 .iconActivityType { background-image: url(images/iconActivityType32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconActivityType { background-image: url(customIcons/blue/iconActivityType.png);  background-repeat: no-repeat; }
@@ -351,7 +350,7 @@
 
 
 
-//* B *//
+/* B */
 
 
 .iconBill { background-image: url(images/iconBill32.png);  background-repeat: no-repeat;  }
@@ -361,39 +360,66 @@
 .ProjeQtOrFlatRed .iconBill { background-image: url(customIcons/red/iconBill.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconBill { background-image: url(customIcons/new/iconBill.svg);  background-repeat: no-repeat; }
 
-.iconBillType32 { background-image: url(images/iconClientBillType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px; }
-.iconBillType22 { background-image: url(images/iconClientBillType32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.iconBillType16 { background-image: url(images/iconClientBillType32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.iconBillType { background-image: url(images/iconBillType32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconBillType { background-image: url(customIcons/blue/iconBillType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconBillType { background-image: url(customIcons/green/iconBillType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconBillType { background-image: url(customIcons/grey/iconBillType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconBillType { background-image: url(customIcons/red/iconBillType.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconBillType { background-image: url(customIcons/new/iconBillType.svg);  background-repeat: no-repeat; }
 
-.iconBrand { background-image: url(images/iconBrand.png); }
-.ProjeQtOrFlatBlue .iconBrand { background-image: url(customIcons/blue/iconBrand.png); }
-.ProjeQtOrFlatRed .iconBrand { background-image: url(customIcons/red/iconBrand.png); }
-.ProjeQtOrFlatGreen .iconBrand { background-image: url(customIcons/green/iconBrand.png); }
-.ProjeQtOrFlatGrey .iconBrand { background-image: url(customIcons/grey/iconBrand.png); }
+.iconBrand { background-image: url(images/iconBrand32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconBrand { background-image: url(customIcons/blue/iconBrand.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconBrand { background-image: url(customIcons/green/iconBrand.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconBrand { background-image: url(customIcons/grey/iconBrand.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconBrand { background-image: url(customIcons/red/iconBrand.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconBrand { background-image: url(customIcons/new/iconBrand.svg);  background-repeat: no-repeat; }
 
-.iconCallForTender32 { background-image: url(images/iconCallForTender32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconCallForTender22 { background-image: url(images/iconCallForTender22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconCallForTender16 { background-image: url(images/iconCallForTender16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconCalendar32 { background-image: url(images/iconCalendar32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconCalendar22 { background-image: url(images/iconCalendar22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconCalendar16 { background-image: url(images/iconCalendar16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconCalendarDefinition32 { background-image: url(images/iconCalendarDefinition32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconCalendarDefinition22 { background-image: url(images/iconCalendarDefinition22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconCalendarDefinition16 { background-image: url(images/iconCalendarDefinition16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+/* C */
 
-.iconCallForTenderType32 { background-image: url(images/iconCallForTenderType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconCallForTenderType22 { background-image: url(images/iconCallForTenderType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconCallForTenderType16 { background-image: url(images/iconCallForTenderType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconCatalog32 { background-image: url(images/iconCatalog.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconCatalog22  { background-image: url(images/iconCatalog.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.iconCatalog16  { background-image: url(images/iconCatalog.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.iconCalendar { background-image: url(images/iconCalendar32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconCalendar { background-image: url(customIcons/blue/iconCalendar.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconCalendar { background-image: url(customIcons/green/iconCalendar.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconCalendar { background-image: url(customIcons/grey/iconCalendar.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconCalendar { background-image: url(customIcons/red/iconCalendar.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconCalendar { background-image: url(customIcons/new/iconCalendar.svg);  background-repeat: no-repeat; }
 
-.iconCatalogType32 { background-image: url(images/iconCatalogType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconCatalogType22  { background-image: url(images/iconCatalogType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.iconCatalogType16  { background-image: url(images/iconCatalogType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.iconCalendarDefinition { background-image: url(images/iconCalendarDefinition32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconCalendarDefinition { background-image: url(customIcons/blue/iconCalendarDefinition.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconCalendarDefinition { background-image: url(customIcons/green/iconCalendarDefinition.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconCalendarDefinition { background-image: url(customIcons/grey/iconCalendarDefinition.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconCalendarDefinition { background-image: url(customIcons/red/iconCalendarDefinition.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconCalendarDefinition { background-image: url(customIcons/new/iconCalendarDefinition.svg);  background-repeat: no-repeat; }
+
+.iconCallForTender { background-image: url(images/iconCallForTender32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconCallForTender { background-image: url(customIcons/blue/iconCallForTender.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconCallForTender { background-image: url(customIcons/green/iconCallForTender.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconCallForTender { background-image: url(customIcons/grey/iconCallForTender.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconCallForTender { background-image: url(customIcons/red/iconCallForTender.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconCallForTender { background-image: url(customIcons/new/iconCallForTender.svg);  background-repeat: no-repeat; }
+
+.iconCallForTenderType { background-image: url(images/iconCallForTenderType32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconCallForTenderType { background-image: url(customIcons/blue/iconCallForTenderType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconCallForTenderType { background-image: url(customIcons/green/iconCallForTenderType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconCallForTenderType { background-image: url(customIcons/grey/iconCallForTenderType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconCallForTenderType { background-image: url(customIcons/red/iconCallForTenderType.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconCallForTenderType { background-image: url(customIcons/new/iconCallForTenderType.svg);  background-repeat: no-repeat; }
+
+.iconCatalog { background-image: url(images/iconCatalog32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconCatalog { background-image: url(customIcons/blue/iconCatalog.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconCatalog { background-image: url(customIcons/green/iconCatalog.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconCatalog { background-image: url(customIcons/grey/iconCatalog.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconCatalog { background-image: url(customIcons/red/iconCatalog.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconCatalog { background-image: url(customIcons/new/iconCatalog.svg);  background-repeat: no-repeat; }
+
+.iconCatalogType { background-image: url(images/iconCatalogType32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconCatalogType { background-image: url(customIcons/blue/iconCatalogType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconCatalogType { background-image: url(customIcons/green/iconCatalogType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconCatalogType { background-image: url(customIcons/grey/iconCatalogType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconCatalogType { background-image: url(customIcons/red/iconCatalogType.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconCatalogType { background-image: url(customIcons/new/iconCatalogType.svg);  background-repeat: no-repeat; }
 
 .iconCatalogUO { background-image: url(images/iconCatalogUO.png); }
 .ProjeQtOrFlatBlue .iconCatalogUO { background-image: url(customIcons/blue/iconCatalogUO.png); }
