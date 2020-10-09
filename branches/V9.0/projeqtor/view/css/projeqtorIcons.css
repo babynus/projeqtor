@@ -340,13 +340,26 @@
 .ProjeQtOrFlatRed .iconAudit { background-image: url(customIcons/red/iconAudit.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconAudit { background-image: url(customIcons/new/iconAudit.svg);  background-repeat: no-repeat; }
 
-.iconAutomation32 { background-image: url(images/iconAutomation32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconAutomation22 { background-image: url(images/iconAutomation22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconAutomation16 { background-image: url(images/iconAutomation16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconAutomation { background-image: url(images/iconAutomation32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconAutomation { background-image: url(customIcons/blue/iconAutomation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconAutomation { background-image: url(customIcons/green/iconAutomation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconAutomation { background-image: url(customIcons/grey/iconAutomation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconAutomation { background-image: url(customIcons/red/iconAutomation.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconAutomation { background-image: url(customIcons/new/iconAutomation.svg);  background-repeat: no-repeat; }
 
-.iconBill32 { background-image: url(images/iconClientBill32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconBill22 { background-image: url(images/iconClientBill32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.iconBill16 { background-image: url(images/iconClientBill32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+
+
+
+//* B *//
+
+
+.iconBill { background-image: url(images/iconBill32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconBill { background-image: url(customIcons/blue/iconBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconBill { background-image: url(customIcons/green/iconBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconBill { background-image: url(customIcons/grey/iconBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconBill { background-image: url(customIcons/red/iconBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconBill { background-image: url(customIcons/new/iconBill.svg);  background-repeat: no-repeat; }
 
 .iconBillType32 { background-image: url(images/iconClientBillType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px; }
 .iconBillType22 { background-image: url(images/iconClientBillType32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
