@@ -178,7 +178,6 @@
     for(var i = 0, len = this.menusArr.length; i < len; ++i) {
       this.menusArr[i].menuItems.forEach(function(item, pos) {
         item.querySelector('a').addEventListener('click', function(ev) { 
-          if (ev.clientY>ev.target.clientHeight)console.log('uis');
           var submenu = ev.target.getAttribute('data-submenu'),
             itemName = ev.target.innerHTML,
             subMenuEl = self.el.querySelector('ul[data-menu="' + submenu + '"]');
@@ -188,16 +187,16 @@
             ev.preventDefault();
             // open it
             self._openSubMenu(subMenuEl, pos, itemName);
-          }
-          else {
+          }else {
             // add class current
             var currentlink = self.el.querySelector('.menu__link--current');
             if( currentlink ) {
-              classie.remove(self.el.querySelector('.menu__link--current'), 'menu__link--current');
+              var currentDiv=self.el.querySelector('.div__link--current')
+              classie.remove(currentlink , 'menu__link--current');
+              classie.remove(currentDiv,'div__link--current');
             }
-            console.log(ev.target);
+            dojo.byId('currentDiv'+ev.target.id).classList.add('div__link--current');
             classie.add(ev.target, 'menu__link--current');
-            
             // callback
             self.options.onItemClick(ev, itemName);
           }
