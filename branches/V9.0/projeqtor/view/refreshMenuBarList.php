@@ -37,8 +37,9 @@ $defaultMenu = RequestHandler::getValue('menuFilter');
 $nbSkipMenu = RequestHandler::getValue('nbSkipMenu');
 if(!$nbSkipMenu)$nbSkipMenu=0;
 $idRow = Parameter::getUserParameter('idFavoriteRow');
-if(!$idRow)$idRow=1;
+$nbFavoriteRow=5;
 ?>
+ <div style="height:100%;width:100%;position:absolute;top:0px;" onWheel="switchFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
  <table>
    <tr>
      <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idRow);?>
