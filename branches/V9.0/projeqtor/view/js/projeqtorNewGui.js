@@ -272,12 +272,28 @@ function menuNewGuiFilter(filter, item) {
 	defaultMenu=filter;
 }
 
-function switchFavoriteRow(idRow, evt, maxRow){
+function switchFavoriteRow(idRow, direction, maxRow){
 	var nextRow=idRow;
-	if(evt=='up' || evt.deltaY < 0){
+	if(direction=='up'){
 		nextRow -= 1;
 		if(nextRow < 1)nextRow=maxRow;
-	}else if(evt=='down' || evt.deltaY > 0){
+	}else if(direction=='down'){
+		nextRow += 1;
+		if(nextRow > maxRow)nextRow=1;
+	}
+	var callback = function(){
+		saveUserParameter('idFavoriteRow', nextRow);
+		menuNewGuiFilter('menuBarCustom', null);
+	};
+	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow, 'favoriteSwitch', null, callback);
+}
+
+function wheelFavoriteRow(idRow, evt, maxRow){
+	var nextRow=idRow;
+	if(evt.deltaY < 0){
+		nextRow -= 1;
+		if(nextRow < 1)nextRow=maxRow;
+	}else if(evt.deltaY > 0){
 		nextRow += 1;
 		if(nextRow > maxRow)nextRow=1;
 	}
