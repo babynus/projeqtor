@@ -5,43 +5,23 @@
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 <g id="Calque_2" display="none">
 </g>
-<g>
-	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		114.738,28.455 127.426,28.455 127.426,123.595 4.697,123.595 4.697,28.455 17.38,28.455 	"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="72.746" y1="28.455" x2="101.372" y2="28.455"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="30.751" y1="28.455" x2="59.378" y2="28.455"/>
-	
-		<rect x="60.062" y="53.358" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.312" height="11.313"/>
-	
-		<rect x="82.515" y="53.358" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.314" height="11.313"/>
-	
-		<rect x="104.972" y="53.358" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.313" height="11.313"/>
-	
-		<rect x="15.153" y="75.982" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.313" height="11.314"/>
-	
-		<rect x="37.607" y="75.982" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.313" height="11.314"/>
-	
-		<rect x="60.062" y="75.982" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.312" height="11.314"/>
-	
-		<rect x="82.515" y="75.982" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.314" height="11.314"/>
-	
-		<rect x="104.972" y="75.982" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.313" height="11.314"/>
-	
-		<rect x="15.153" y="98.61" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.313" height="11.313"/>
-	
-		<rect x="37.607" y="98.61" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.313" height="11.313"/>
-	
-		<rect x="60.062" y="98.61" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.312" height="11.313"/>
-	
-		<rect x="82.515" y="98.61" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="11.314" height="11.313"/>
-	
-		<rect x="17.381" y="17.465" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="13.37" height="21.666"/>
-	
-		<rect x="59.376" y="17.465" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="13.37" height="21.666"/>
-	
-		<rect x="101.372" y="17.465" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="13.37" height="21.666"/>
-</g>
+<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	110.253,27.917 122.436,27.917 122.436,119.267 4.597,119.267 4.597,27.917 16.775,27.917 "/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="69.935" y1="27.917" x2="97.42" y2="27.917"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="29.613" y1="27.917" x2="57.099" y2="27.917"/>
+<rect x="57.756" y="51.828" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.861" height="10.862"/>
+<rect x="79.314" y="51.828" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.863" height="10.862"/>
+<rect x="100.877" y="51.828" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-miterlimit="10" width="10.861" height="10.862"/>
+<rect x="14.637" y="73.551" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.862" height="10.862"/>
+<rect x="36.196" y="73.551" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-miterlimit="10" width="10.862" height="10.862"/>
+<rect x="57.756" y="73.551" fill="none" stroke="#FF0000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.861" height="10.862"/>
+<rect x="79.314" y="73.551" fill="none" stroke="#FF0000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.863" height="10.862"/>
+<rect x="100.877" y="73.551" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.861" height="10.862"/>
+<rect x="14.637" y="95.276" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.862" height="10.862"/>
+<rect x="36.196" y="95.276" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.862" height="10.862"/>
+<rect x="57.756" y="95.276" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.861" height="10.862"/>
+<rect x="79.314" y="95.276" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-miterlimit="10" width="10.863" height="10.862"/>
+<rect x="16.776" y="17.365" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="12.837" height="20.803"/>
+<rect x="57.097" y="17.365" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="12.837" height="20.803"/>
+<rect x="97.42" y="17.365" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="12.837" height="20.803"/>
 </svg>
