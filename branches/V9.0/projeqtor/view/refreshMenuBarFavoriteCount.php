@@ -33,9 +33,7 @@ require_once "../tool/formatter.php";
 scriptLog('   ->/view/refreshMenuBarFavoriteCount.php');
 
 $idRow = RequestHandler::getValue('idFavoriteRow');
-$nbFavoriteRow = Parameter::getUserParameter('nbFavoriteRow');
-if(!$idRow)$idRow=1;
-if(!$nbFavoriteRow)$nbFavoriteRow=5;
+$nbFavoriteRow=5;
 ?>
 <table>
    <tr>

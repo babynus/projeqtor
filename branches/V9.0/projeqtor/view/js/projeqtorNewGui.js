@@ -272,14 +272,14 @@ function menuNewGuiFilter(filter, item) {
 	defaultMenu=filter;
 }
 
-function switchFavoriteRow(idRow, direction, maxRow){
+function switchFavoriteRow(idRow, evt, maxRow){
 	var nextRow=idRow;
-	if(direction=='up'){
-		nextRow += 1;
-		if(nextRow > maxRow)nextRow=1;
-	}else if(direction=='down'){
+	if(evt=='up' || evt.deltaY < 0){
 		nextRow -= 1;
 		if(nextRow < 1)nextRow=maxRow;
+	}else if(evt=='down' || evt.deltaY > 0){
+		nextRow += 1;
+		if(nextRow > maxRow)nextRow=1;
 	}
 	var callback = function(){
 		saveUserParameter('idFavoriteRow', nextRow);
