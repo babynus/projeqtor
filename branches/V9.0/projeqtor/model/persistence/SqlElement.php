@@ -1676,7 +1676,8 @@ abstract class SqlElement {
     }
     
     // if object is Asignable, update assignments on idle change
-    if ($idleChange and $returnStatus != "ERROR") {
+    $canArchiveIdle=Parameter::getGlobalParameter('cronArchiveCloseItems');
+    if ($canArchiveIdle=='YES' and $idleChange and $returnStatus != "ERROR") {
       $ass = new Assignment ();
       $archiv=new HistoryArchive();
       $hist=new History();
