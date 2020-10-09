@@ -103,7 +103,7 @@ class Menu extends SqlElement {
   		echo '<td  title="' .i18n($menu->name) . '">';
   		echo '<div class="'.$menuClass.' dojoDndItem" style="'.$style.'" id="iconMenuBar'.$class.'" ';
   		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
-  		echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
+  		echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
   		if ($menuName=='menuReports' and isHtml5() ) {
   			echo ' onMouseEnter="showReportFavoriteTooltip();"';
   			echo ' onMouseLeave="hideReportFavoriteTooltip(2000);"';
@@ -135,7 +135,7 @@ class Menu extends SqlElement {
         } else if ($menu->type=='plugin') {
           echo '<td  title="' .i18n($menu->name) . '">';
           echo '<div class="'.$menuClass.' dojoDndItem" style="'.$style.'" id="iconMenuBar'.$class.'"';
-          echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
+          echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
           echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
           if($drawMode=='ICON'){
             echo '<img src="../view/css/images/icon'.$class.'22.png" />';
@@ -153,7 +153,7 @@ class Menu extends SqlElement {
           if (securityCheckDisplayMenu($idMenu, $class)) {
           	echo '<td title="' .i18n('menu'.$class) . '">';
           	echo '<div class="'.$menuClass.' dojoDndItem" style="'.$style.'" id="iconMenuBar'.$class.'" ';
-          	echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
+          	echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
           	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" >';
           	if($drawMode=='ICON'){
           		echo '<div class="icon'.$class.'22 icon'.$class.' iconSize22 imageColorNewGui" style="width:22px;height:22px"></div>';
