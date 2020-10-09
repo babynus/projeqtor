@@ -7708,6 +7708,7 @@ function customMenuManagement(menuClass) {
     customMenuAddRemoveTimeout=setTimeout("dojo.byId('customMenuAdd').style.display='none';",customMenuAddRemoveTimeoutDelay);
   }
 }
+
 function customMenuAddItem() {
   var param="?operation=add&class="+customMenuAddRemoveClass;
   dojo.xhrGet({
@@ -7719,6 +7720,7 @@ function customMenuAddItem() {
   dojo.addClass('iconMenuBar'+customMenuAddRemoveClass,'menuBarCustom');
   dojo.byId('customMenuAdd').style.display='none';
 }
+
 function customMenuRemoveItem() {
   var param="?operation=remove&class="+customMenuAddRemoveClass;
   dojo.xhrGet({

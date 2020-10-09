@@ -287,3 +287,44 @@ function switchFavoriteRow(idRow, direction, maxRow){
 	};
 	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow, 'favoriteSwitch', null, callback);
 }
+
+function addRemoveFavMenuLeft (id,name,mode){
+  dojo.removeClass(id);
+  dojo.removeAttr(id,'onclick');
+  if(mode=='add'){
+    var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','remove')";
+    var param="?operation=add&class="+name.substr(4);
+    dojo.xhrGet({
+      url : "../tool/saveCustomMenu.php"+param,
+      handleAs : "text",
+      load : function(data, args) {
+      },
+    });
+    dojo.setAttr(id,"onclick",func);
+    dojo.byId(id).className='menu__as__Fav';
+  }else{
+    var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','add')";
+    var param="?operation=remove&class="+name.substr(4);
+    dojo.xhrGet({
+      url : "../tool/saveCustomMenu.php"+param,
+      handleAs : "text",
+      load : function(data, args) {
+      },
+    });
+    dojo.setAttr(id,"onclick",func);
+    dojo.byId(id).className='menu__add__Fav';
+  }
+  menuNewGuiFilter('menuBarCustom', null);
+}
+
+function checkClassForDisplay(id,mode){
+  if(mode=='leave'){
+    if(dojo.byId(id).className=="menu__add__Fav"){
+        dojo.setAttr(id,'style','display:none;');
+    }
+  }else{
+    if(dojo.byId(id).className=="menu__add__Fav"){
+      dojo.setAttr(id,'style','display:display;');
+    }
+  }
+}
