@@ -76,11 +76,9 @@
 
 function sortMenus(&$listMenus, &$result, $parent,$level ){
   $level++;
-  $c=0;
   foreach ($listMenus as $id=>$menu){
     if($menu->idParent == $parent){
-      $c++;
-      $key=$level.'-'.$menu->idParent.'-'.$c;
+      $key=$level.'-'.$menu->idParent.'-'.$menu->sortOrder;
       $result[$key] = array('level'=>$level,'object'=>$menu);
       sortMenus($listMenus, $result, $menu->id,$level);
     }
@@ -139,12 +137,12 @@ function drawLeftMenuListNewGui(){
       $menuName=$realMenu->name;
       $menuNameI18n = i18n($menuName);
       $menuName2 = addslashes(i18n($menuName));
-      $class=substr($menuName,4);
+      $classEl=substr($menuName,4);
       $isFav=SqlElement::getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$obj->name));
       if($realMenu->type=='item'){
-        $funcOnClick="loadMenuBarItem('".$class."','".htmlEncode($menuName2,'quotes')."','bar');";
+        $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');";
       }else{
-         $funcOnClick="loadMenuBarObject('".$class."','".htmlEncode($menuName2,'bar')."','bar');";
+         $funcOnClick="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');";
       }
       if($isFav->id==''){
         $mode='add';
@@ -158,11 +156,11 @@ function drawLeftMenuListNewGui(){
       $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."');";
       
       $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
-      $result.='<a class="menu__linkDirect" onclick='.$funcOnClick.' href="#" id="'.$obj->name.'" >'.i18n($obj->name).'</a>';
+      $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="display:none;position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
       $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div><div id="currentDiv'.$obj->name.'" class="div__link"></div></li>';
 }else{
       $sub='submenu-'.$obj->id;
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'">'.i18n($obj->name).'</a><div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'"><div class="icon'.substr($obj->name,3).' iconSize16" style="display:none;position:relative;float:left;margin-right:10px;"></div>'.i18n(substr($obj->name,3)).'</a><div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
     }
     $old=$menu['level'];
     $idP=$menu['object']->idParent;
