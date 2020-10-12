@@ -100,8 +100,8 @@ class Menu extends SqlElement {
   		if ($menu->idMenu==0) {
   		}
   	} else if ($menu->type=='item') {
-  		echo '<td  title="' .i18n($menu->name) . '">';
-  		echo '<div class="'.$menuClass.' dojoDndItem" style="'.$style.'" id="iconMenuBar'.$class.'" ';
+  		echo '<td id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem" style="border:unset !important;" ondragstart="console.log(\'oui\');">';
+  		echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
   		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
   		echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
   		if ($menuName=='menuReports' and isHtml5() ) {
@@ -133,8 +133,8 @@ class Menu extends SqlElement {
         echo '</div>';
         echo '</td>'; 
         } else if ($menu->type=='plugin') {
-          echo '<td  title="' .i18n($menu->name) . '">';
-          echo '<div class="'.$menuClass.' dojoDndItem" style="'.$style.'" id="iconMenuBar'.$class.'"';
+          echo '<td id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem" style="border:unset !important;">';
+          echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'"';
           echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
           echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
           if($drawMode=='ICON'){
@@ -151,10 +151,10 @@ class Menu extends SqlElement {
           echo '</td>';
         } else if ($menu->type=='object') { 
           if (securityCheckDisplayMenu($idMenu, $class)) {
-          	echo '<td title="' .i18n('menu'.$class) . '">';
-          	echo '<div class="'.$menuClass.' dojoDndItem" style="'.$style.'" id="iconMenuBar'.$class.'" ';
+          	echo '<td id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n('menu'.$class) . '" class="dojoDndItem" style="border:unset !important;" ondragstart="console.log(\'oui\');">';
+          	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
           	echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
-          	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" >';
+          	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
           	if($drawMode=='ICON'){
           		echo '<div class="icon'.$class.'22 icon'.$class.' iconSize22 imageColorNewGui" style="width:22px;height:22px"></div>';
           	}else if($drawMode=='TXT'){

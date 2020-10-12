@@ -231,6 +231,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              setTimeout('moveFilterListColumn2()',100); 
            } else if( target.id=='dndHierarchicalBudgetList') {
              setTimeout('moveBudgetFromHierarchicalView("' + idFrom + '", "' + idTo + '")',100); 
+           }else if( target.id=='menuBarDndSource') {
+             setTimeout('moveMenuBarItem("' + idFrom + '", "' + idTo + '")',100); 
            }
            
         });
@@ -917,10 +919,10 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
      <?php } ?>
     <?php }else{
       include 'menuNewGuiTop.php'; ?>
-          <div region="top" dojoType="dijit.TooltipDialog" id="newGuiCustomMenuAdd" onClick="customMenuAddItem();" 
-          style="top:42px;position:absolute !important;z-index:99999999;width:auto !important;display:none;"><?php echo i18n('customMenuAdd');?></div>
-          <div region="top" dojoType="dijit.TooltipDialog" id="newGuiCustomMenuRemove" onClick="customMenuRemoveItem();" 
-          style="top:42px;position:absolute !important;z-index:99999999;width:auto !important;display:none;"><?php echo i18n('customMenuRemove');?></div>
+          <div region="center" dojoType="dijit.TooltipDialog" id="newGuiCustomMenuAdd" onClick="customMenuAddItem();" 
+          style="top:42px;position:absolute !important;z-index:99999999;width:300px !important;display:none;cursor:pointer;"><?php echo i18n('customMenuAdd');?></div>
+          <div region="center" dojoType="dijit.TooltipDialog" id="newGuiCustomMenuRemove" onClick="customMenuRemoveItem();" 
+          style="top:42px;position:absolute !important;z-index:99999999;width:300px !important;display:none;cursor:pointer;"><?php echo i18n('customMenuRemove');?></div>
       <?php }
 
       $hideMenuTopParam = Parameter::getGlobalParameter ( 'MenuBarTop' );
