@@ -344,3 +344,8 @@ function checkClassForDisplay(id,mode){
     }
   }
 }
+
+function moveMenuBarItem(idFrom, idTo){
+	console.log(idFrom);
+	console.log(idTo);
+}
