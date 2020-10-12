@@ -342,9 +342,9 @@
       return false;
     }
     //florent
-    var iconClass= 'Home';
-    //var iconClass=  (idx )? ''+this.menusArr[idx].id : 'Home';
-    //iconClass= (idx)? iconClass.substr(3) : iconClass;
+    //var iconClass= 'Home';
+    var iconClass=  (idx )? ''+this.menusArr[idx].id : 'Home';
+    iconClass= (idx)? iconClass.substr(3) : iconClass;
     
     var breadScrumLeft=dojo.byId('breadScrumb');
     var divBcl = document.createElement('div');
@@ -356,7 +356,13 @@
     
     var bc = document.createElement('a');
     bc.href = '#'; // make it focusable
+    if(idx && name.indexOf('</div>')){
+      var endDiv=name.indexOf('</div>');
+      name=name.substr(endDiv);
+    }
+    
     bc.innerHTML = name;
+    
     this.breadcrumbsCtrl.appendChild(bc);
     
     var self = this;
