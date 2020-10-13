@@ -36,12 +36,9 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 
   <div id="menuBArNewGuiAcces"  class="container"  dojoType="dijit.layout.BorderContainer" region="left"  style="width:32px;height:100%;">
     <div id="breadScrumb"  dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;" >
- <!--      <div id="breadScrumbHome"  style="height:44px;">
-         <div id="buttonHome" class="iconHome iconSize22 iconBreadSrumb" onclick=""></div>
-      </div> -->
     </div>
-    <div id="menuPersonalAcces"   dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;" >
-      <div id="buttonParameter" class="iconHome iconSize22 iconBreadSrumb" onclick=""></div>
+    <div id="menuPersonalAcces"   dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;overflow: initial;" >
+      <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb" onclick=""></div>
       <div id="buttonActivityStream" class="iconActivityStream iconSize22 iconBreadSrumb" onclick=""></div>
       <div id="buttonFlux" class="iconHome iconSize22 iconBreadSrumb" onclick=""></div>
       <div id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb" onclick=""></div>
