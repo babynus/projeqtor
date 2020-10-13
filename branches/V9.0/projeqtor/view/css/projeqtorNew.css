@@ -283,7 +283,7 @@ html, body, #mainDiv,
   background: var(--color-light) url() repeat-x bottom;
 }
 
-.menu-left, .menuTop{
+.menuTop{
 		-webkit-transform: translateX(0px);
 		-moz-transform: translateX(0px);
 		transform: translateX(0px);

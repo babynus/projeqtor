@@ -58,3 +58,5 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 
 ALTER TABLE `${prefix}menucustom` ADD `idRow` INT(12) DEFAULT '1' COMMENT '12' AFTER `idUser`;
 
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+('menuLeftDisplayMode','ICONTXT');

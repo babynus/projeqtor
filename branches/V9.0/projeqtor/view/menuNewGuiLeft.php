@@ -29,6 +29,7 @@
  */
   require_once "../tool/projeqtor.php";
 
+$displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 ?>
 
 <div id="menuLeftBarContaineur" class="container"  dojoType="dijit.layout.BorderContainer" liveSplitters="false" >
@@ -49,22 +50,23 @@
     </div>
   </div>
   <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  >
-    <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;overflow: hidden;" >
+    <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;overflow: hidden;" oncontextmenu="event.preventDefault();showIconLeftMenu('Icon')" >
       <nav id="ml-menu" class="menu">
+      <input id="displayModeLeftMenu" value="<?php echo $displayMode;?>" style="visibility:hidden"; >
             <?php // draw Menus
-             echo drawLeftMenuListNewGui();
+             echo drawLeftMenuListNewGui($displayMode);
             ?>
       </nav>
-	<script>
-	(function() {
-		var menuEl = document.getElementById('ml-menu'),
+	  <script>
+	   (function() {
+	     var menuEl = dojo.byId('ml-menu'),
 			mlmenu = new MLMenu(menuEl, {
 				initialBreadcrumb : 'Accueil', // initial breadcrumb text
 				backCtrl : false, // show back button
 			});
-	})();
-	new menuLeft( dojo.byId( 'mainDiv' ) );
-	</script>
+	    })();
+	   new menuLeft( dojo.byId( 'mainDiv' ) );
+	  </script>
     </div>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;">
     </div>
@@ -114,13 +116,14 @@ function getNavigationMenuLeft (){
 
 
 
-function drawLeftMenuListNewGui(){
+function drawLeftMenuListNewGui($displayMode){
   $result='';
   $old="";
   $idP="";
   $maineDraw=false;
   $allMenu=getNavigationMenuLeft();
   $result.='<div class="menu__wrap">';
+  $displayIcon=($displayMode=='TXT')?"display:none;":"display:block;";
   foreach ($allMenu as $id=>$menu){
     $obj=$menu['object'];
     if($old!=$menu['level'] and $menu['level']==1 and $maineDraw!=true){
@@ -156,11 +159,11 @@ function drawLeftMenuListNewGui(){
       $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."');";
       
       $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
-      $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="display:none;position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
+      $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
       $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div><div id="currentDiv'.$obj->name.'" class="div__link"></div></li>';
 }else{
       $sub='submenu-'.$obj->id;
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'"><div class="icon'.substr($obj->name,3).' iconSize16" style="display:none;position:relative;float:left;margin-right:10px;"></div>'.i18n(substr($obj->name,3)).'</a><div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'"><div class="icon'.substr($obj->name,3).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n(substr($obj->name,3)).'</a><div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
     }
     $old=$menu['level'];
     $idP=$menu['object']->idParent;
