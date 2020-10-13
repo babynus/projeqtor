@@ -231,8 +231,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              setTimeout('moveFilterListColumn2()',100); 
            } else if( target.id=='dndHierarchicalBudgetList') {
              setTimeout('moveBudgetFromHierarchicalView("' + idFrom + '", "' + idTo + '")',100); 
-           }else if( target.id=='menuBarDndSource') {
-             setTimeout('moveMenuBarItem("' + idFrom + '", "' + idTo + '")',100); 
            }
            
         });
@@ -242,6 +240,13 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         }
       }
     });
+
+//     dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
+//     	console.log(source);
+//     	console.log(nodes);
+//     	console.log(copy);
+//     	console.log(target);
+//     });
 
     dndMoveInProgress=false;
     dojo.subscribe("/dnd/drop/before", function(source, nodes, copy, target){

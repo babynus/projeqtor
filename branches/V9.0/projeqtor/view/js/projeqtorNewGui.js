@@ -261,7 +261,7 @@ function menuNewGuiFilter(filter, item) {
 			dojo.removeClass('recentButton','imageColorNewGuiSelected');
 		}
 	};
-	loadDiv('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, callback);
+	loadDiv('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarDndSource', null, callback);
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
 }
