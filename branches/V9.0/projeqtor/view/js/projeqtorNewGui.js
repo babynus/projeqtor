@@ -352,7 +352,7 @@ function moveMenuBarItem(idFrom, idTo){
 function showIconLeftMenu(){
   var leftMenu=dojo.byId('ml-menu');
   var mode=dojo.byId('displayModeLeftMenu').value;
-  display=(mode=='ICONTXT')?'block':'none';
+  display=(mode=='ICONTXT')?'none':'block';
   leftMenu.menus = [].slice.call(leftMenu.querySelectorAll('.menu__level'));
   leftMenu.menus.forEach(function(menuEl, pos) {
     var items = menuEl.querySelectorAll('.menu__item');
@@ -361,6 +361,6 @@ function showIconLeftMenu(){
       iconDiv.style.display=display;
     });
   });
-  dojo.setAttr('displayModeLeftMenu','value',(display=='block')?'TXT':'ICONTXT');
+  dojo.setAttr('displayModeLeftMenu','value',(display=='block')?'ICONTXT':'TXT');
   saveUserParameter('menuLeftDisplayMode',mode);
 }
