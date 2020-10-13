@@ -210,7 +210,6 @@ var defaultMenu=null;
           node : "statusBarDiv",
           properties : {
             width : globalWidth,
-            left: (this.isMenuOpen)? 250 : 0
           },
           duration : duration
         }),  dojox.fx.animateProperty({
@@ -348,4 +347,20 @@ function checkClassForDisplay(id,mode){
 function moveMenuBarItem(idFrom, idTo){
 	console.log(idFrom);
 	console.log(idTo);
+}
+
+function showIconLeftMenu(){
+  var leftMenu=dojo.byId('ml-menu');
+  var mode=dojo.byId('displayModeLeftMenu').value;
+  display=(mode=='ICONTXT')?'block':'none';
+  leftMenu.menus = [].slice.call(leftMenu.querySelectorAll('.menu__level'));
+  leftMenu.menus.forEach(function(menuEl, pos) {
+    var items = menuEl.querySelectorAll('.menu__item');
+    items.forEach(function(itemEl, iPos) {
+      var iconDiv = itemEl.querySelector('.iconSize16');
+      iconDiv.style.display=display;
+    });
+  });
+  dojo.setAttr('displayModeLeftMenu','value',(display=='block')?'TXT':'ICONTXT');
+  saveUserParameter('menuLeftDisplayMode',mode);
 }
