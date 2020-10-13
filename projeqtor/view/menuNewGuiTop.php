@@ -43,8 +43,36 @@ $nbFavoriteRow=5;
 	             <div name="menuBarButtonDiv" id="menuBarButtonDiv">
 	               <table>
         	           <tr>
-        	             <td style="padding-left:10px;"><?php echo formatNewGuiButton('Add', 22, true);?></td>
-    	                 <td class="<?php if($defaultMenu=='menuBarCustom')echo 'imageColorNewGuiSelected';?>" id="favoriteButton" title="<?php echo i18n('Favorite');?>" style="padding-left:5px;" onclick="console.log('buttonFav');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+        	             <td style="padding-left:5px;">
+        	               <div dojoType="dijit.form.DropDownButton" id="addItemButton" jsId="addItemButton" name="addItemButton"
+                            showlabel="false" iconClass="iconAdd iconSize22 imageColorNewGui" title="<?php echo i18n('comboNewButton');?>">
+                            <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
+                              <div style="font-weight:bold; height:25px;text-align:center">
+                              <?php echo i18n('comboNewButton');?>
+                              </div>
+                              <?php $arrayItems=array('Project','Activity','Ticket','Meeting','TestSession');
+                              foreach($arrayItems as $item) {
+                                $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
+                                if ($canCreate=='YES') {
+                                  if (! securityCheckDisplayMenu(null,$item) ) {
+                                    $canCreate='NO';
+                                  }
+                                }
+                                if ($canCreate=='YES') {?>
+                                <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
+                                 onClick="addNewItem('<?php echo $item;?>');" >
+                                  <table width:"100%"><tr style="height:22px" >
+                                  <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIconNewGui($item, 22, null, false);?></td>    
+                                  <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
+                                  </tr></table>   
+                                </div>
+                                <div style="height:5px;"></div>
+                                <?php } 
+                                }?>
+                            </div>
+                          </div>
+        	             </td>
+    	                 <td class="<?php if($defaultMenu=='menuBarCustom')echo 'imageColorNewGuiSelected';?>" id="favoriteButton" title="<?php echo i18n('Favorite');?>" onclick="console.log('buttonFav');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
     	                 <td class="<?php if($defaultMenu=='menuBarRecent')echo 'imageColorNewGuiSelected';?>" id="recentButton" title="<?php echo i18n('Recent');?>" style="padding-left:5px;" onclick="console.log('buttonRec');menuNewGuiFilter('menuBarRecent', null);"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
         	             <td><div style="padding-left:10px;vertical-align:middle;width:1px;height:22px;border-right:1px solid var(--color-dark);"></div></td>
         	           </tr>
@@ -53,9 +81,9 @@ $nbFavoriteRow=5;
 	           </td>
     	       <td>
     	         <div name="menuBarListDiv" id="menuBarListDiv" >
-    	             <div style="height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
         	         <table>
         	           <tr dojoType="dojo.dnd.Source" id="menuBarDndSource" name="menuBarDndSource">
+        	             <div style="height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
         	             <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow);?>
         	           </tr>
         	         </table>

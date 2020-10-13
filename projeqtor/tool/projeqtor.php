@@ -4570,6 +4570,33 @@ function formatIcon ($class, $size, $title=null, $withHighlight=false) {
   return $result;
 }
 
+function formatIconNewGui ($class, $size, $title=null, $withHighlight=false) {
+	$title=htmlEncode($title,"quote");
+	// MTY - LEAVE SYSTEM
+	$hr="";
+	$menuName = "menu".$class;
+	if (isLeavesSystemActiv() and isLeavesSystemMenuByMenuName($menuName)) { $hr="HR"; }
+	// MTY - LEAVE SYSTEM
+
+	//if ($size=="22") $size==24;
+	global $print, $outMode;
+	$result='';
+	if ($withHighlight) {
+		if ($size==32) {
+			$result.='<div style="position:absolute;left:0px;width:43px;top:0px;height:32px;" class="iconHighlight">&nbsp;</div>';
+		} else if ($size==16) { // Tested only for $size=16
+			$result.='<div style="position:absolute;left:3px;width:18px;top:3px;height:17px;z-index:20;opacity:0.7;alpha(opacity=70)" class="iconHighlight">&nbsp;</div>';
+		}
+	}
+	$position=($withHighlight)?'position:absolute;'.(($size=='32')?'top:0;left:5px;':''):'';
+	if (isset($outMode) and $outMode=='pdf') {
+		$result.="<span style='z-index:500;width:".$size."px;height:".$size."px;$position;' class='imageColorNewGui' >"."<img style='width:".$size."px;height:".$size."px;' src='css/customIcons/new/icon$class.svg' /></span>";
+	} else {
+		$result.="<div class='icon$class iconSize$size imageColorNewGui' style='z-index:500;width:".$size."px;height:".$size."px;$position;' title='$title'>&nbsp;</div>";
+	}
+	return $result;
+}
+
 function formatSmallButton($class, $isClass=false, $activeButton=true) {
   global $print, $outMode;
   $size="16";
@@ -4616,7 +4643,7 @@ function formatNewGuiButton($class, $size, $isClass=false, $activeButton=true) {
 	global $print, $outMode;
 	$result='';
 	if (isset($outMode) and $outMode=='pdf') {
-		$result.="<span class='roundedButtonSmall' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><img style='width:".$size."px;height:".$size."px;' src='css/customIcons/new/icon$class.png' /></span>";
+		$result.="<span class='roundedButtonSmall' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><img style='width:".$size."px;height:".$size."px;' src='css/customIcons/new/icon$class.svg' /></span>";
 	} else {
 		$button=($isClass)?'':'Button';
 		$buttonClass=($activeButton)?'roundedButtonSmall':'';
