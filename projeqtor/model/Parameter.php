@@ -763,6 +763,10 @@ class Parameter extends SqlElement {
                       'ICON'=>i18n('icon'),
                       'ICONTXT'=>i18n('iconTextual'));
         break;
+      case 'menuLeftDisplayMode':
+        $list = array('TXT'=>i18n('textual'),
+                      'ICONTXT'=>i18n('iconTextual')) ;
+        break;
     } 
     return $list;
   }
@@ -781,6 +785,7 @@ class Parameter extends SqlElement {
                            "browserLocaleTimeFormat"=>"list",
                            "paramIconSize"=>'list',
                            'menuBarTopMode'=>'list',
+                           'menuLeftDisplayMode'=>'list',
                            "paramShowThumb"=>"list",
                            "paramShowThumbList"=>"list",
                            "notApplicableValue"=>"list",
@@ -847,6 +852,10 @@ class Parameter extends SqlElement {
         }
         if(Parameter::getGlobalParameter('paramDbType')=='pgsql'){
           unset($parameterList['notApplicableValue']);
+        }
+        if(!isNewGui()){
+          unset($parameterList['menuLeftDisplayMode']);
+          unset($parameterList['menuBarTopMode']);
         }
         break;
       case ('globalParameter'):
@@ -952,6 +961,7 @@ class Parameter extends SqlElement {
       	                      'startPage'=>'list',
       	                      'paramIconSize'=>'list',
       	                      'menuBarTopMode'=>'list',
+      	                      'menuLeftDisplayMode'=>'list',
       	                      'MenuBarTop'=>'list',
       	                      'MenuBarLeft'=>'list',
       	                      'displayHistory'=>'list',
@@ -1237,6 +1247,10 @@ class Parameter extends SqlElement {
     }
     if (! $showChecklistAll) {
       unset($parameterList['displayChecklist']);
+    }
+    if(!isNewGui()){
+      unset($parameterList['menuLeftDisplayMode']);
+      unset($parameterList['menuBarTopMode']);
     }
     return $parameterList;
   }
