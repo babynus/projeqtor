@@ -131,19 +131,15 @@ var defaultMenu=null;
     _openMenu : function() {
       if( this.isMenuOpen ) return;
       this.isMenuOpen = true; //replace to datatsession;
-      classie.add( this.menuTopDiv, 'open-menuLeft' );
       this._setSize();
-      classie.remove( this.menuTopDiv, 'open-menuLeft' );
       this._showHideButton();
     },
     
     _closeMenu : function() {
       if( !this.isMenuOpen ) return;
       this.isMenuOpen = false;//replace to datatsession;
-      classie.add( this.menuTopDiv, 'close-menuLeft' );
       this._setSize();
-      classie.remove( this.menuTopDiv, 'close-menuLeft' );
-      this._showHideButton();
+      this._showHideButton(),30;
     },
     
     _showHideButton : function(){
@@ -166,44 +162,43 @@ var defaultMenu=null;
      },
     
     _resizeDiv : function(globalWidth){
-      var duration=10;
+      var duration=300;
         dojox.fx.combine([ dojox.fx.animateProperty({
           node : "menuTop",
           properties : {
             width : globalWidth,
-            left: 0
           },
           duration : duration
         }), dojox.fx.animateProperty({
           node : "leftMenu",
           properties : {
-            width : (this.isMenuOpen)? 250 : 0
+            width : { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
           },
           duration : duration
         }), dojox.fx.animateProperty({
           node : "leftDiv",
           properties : {
-            width : (this.isMenuOpen)? 250 : 0
+            width : { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
           },
           duration : duration
         }), dojox.fx.animateProperty({
           node : "globalTopCenterDiv",
           properties : {
             width : globalWidth,
-            left: (this.isMenuOpen)? 250 : 0
+            left: { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
           },
           duration : duration
         }), dojox.fx.animateProperty({
           node : "centerDiv",
           properties : {
             width : globalWidth,
-            left: (this.isMenuOpen)? 250 : 0
+            left: { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
           },
           duration : duration
         }),dojox.fx.animateProperty({
           node : "menuLeftBarContaineur",
           properties : {
-            width : (this.isMenuOpen)? 250 : 0
+            width :{ start:(this.isMenuOpen)?  0 : 250,end:(this.isMenuOpen)? 250 :0 }
           },
           duration : duration
         }), dojox.fx.animateProperty({
@@ -216,7 +211,7 @@ var defaultMenu=null;
           node : "statusBarDivBottom",
           properties : {
             width : globalWidth,
-            left: (this.isMenuOpen)? 250 : 0
+            left: { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
           },
           duration : duration
       })]).play();

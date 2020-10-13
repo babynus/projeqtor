@@ -283,27 +283,6 @@ html, body, #mainDiv,
   background: var(--color-light) url() repeat-x bottom;
 }
 
-.menuTop{
-		-webkit-transform: translateX(0px);
-		-moz-transform: translateX(0px);
-		transform: translateX(0px);
-		-webkit-transition: -webkit-transform 0.4s, width 0.4s;
-		-moz-transition: -moz-transform 0.4s, width 0.4s;
-		transition: transform 0.4s, width 0.4s;
-}
-
-.menuTop.close-menuLeft{
-		-webkit-transform: translateX(-250px);
-		-moz-transform: translateX(-250px);
-		transform: translateX(-250px);
-}
-
-.menuTop.open-menuLeft{
-		-webkit-transform: translateX(250px);
-		-moz-transform: translateX(250px);
-		transform: translateX(250px);
-}
-
 .hideStreamNewGui, .hideStreamNewGuiTopBar {
 	margin-top:4px;
 	margin-right:5px;
