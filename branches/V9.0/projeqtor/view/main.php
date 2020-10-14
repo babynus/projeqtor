@@ -232,6 +232,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              setTimeout('moveFilterListColumn2()',100); 
            } else if( target.id=='dndHierarchicalBudgetList') {
              setTimeout('moveBudgetFromHierarchicalView("' + idFrom + '", "' + idTo + '")',100); 
+           } else if( target.id=='menuBarDndSource' || target.id=='menuBarDndSourceSecond') {
+             setTimeout('moveMenuBarItem("' + idFrom + '", "' + idTo + '")',100); 
            }
            
         });
@@ -242,12 +244,13 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       }
     });
 
-//     dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
-//     	console.log(source);
-//     	console.log(nodes);
-//     	console.log(copy);
-//     	console.log(target);
-//     });
+    dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
+    	console.log(source);
+    	console.log(nodes);
+    	console.log(copy);
+    	console.log(target);
+    	dojo.byId('anotherMenubarList').style.display = 'block';
+    });
 
     dndMoveInProgress=false;
     dojo.subscribe("/dnd/drop/before", function(source, nodes, copy, target){
@@ -929,6 +932,30 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           style="top:42px;position:absolute !important;z-index:99999999;width:300px !important;display:none;cursor:pointer;"><?php echo i18n('customMenuAdd');?></div>
           <div region="center" dojoType="dijit.TooltipDialog" id="newGuiCustomMenuRemove" onClick="customMenuRemoveItem();" 
           style="top:42px;position:absolute !important;z-index:99999999;width:300px !important;display:none;cursor:pointer;"><?php echo i18n('customMenuRemove');?></div>
+          <div id="anotherMenubarList" name="anotherMenubarList" region="center" style="display:none;width:90%;height: 43px;position: absolute;z-index: 9999999;top: 48px;left: 113px;">
+            <table style="width:100%;heigth:100%">
+  	           <tr dojoType="dojo.dnd.Source" dndType="menuBar" id="menuBarDndSource2" style="height: 43px;">
+  	             <td style="border: unset !important;padding: 5px 0px 5px 0px;">
+  	               <div dndType="menuBar" class="anotherBarDiv dojoDndItem" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;"></div>
+  	             </td>
+  	           </tr>
+  	           <tr dojoType="dojo.dnd.Source" dndType="menuBar" id="menuBarDndSource3" style="height: 43px;">
+  	             <td style="border: unset !important;padding: 0px 0px 5px 0px;">
+  	               <div dndType="menuBar" class="anotherBarDiv dojoDndItem" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;"></div>
+  	             </td>
+  	           </tr>
+  	           <tr dojoType="dojo.dnd.Source" dndType="menuBar" id="menuBarDndSource4" style="height: 43px;">
+  	             <td style="border: unset !important;padding: 0px 0px 5px 0px;">
+  	               <div dndType="menuBar" class="anotherBarDiv dojoDndItem" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;"></div>
+  	             </td>
+  	           </tr>
+  	           <tr dojoType="dojo.dnd.Source" dndType="menuBar" id="menuBarDndSource5" style="height: 43px;">
+  	             <td style="border: unset !important;padding: 0px 0px 5px 0px;">
+  	               <div dndType="menuBar" class="anotherBarDiv dojoDndItem" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;"></div>
+  	             </td>
+  	           </tr>
+	        </table>
+          </div>
       <?php }
 
       $hideMenuTopParam = Parameter::getGlobalParameter ( 'MenuBarTop' );

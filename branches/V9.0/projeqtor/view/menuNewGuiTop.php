@@ -82,8 +82,8 @@ $nbFavoriteRow=5;
     	       <td>
     	         <div name="menuBarListDiv" id="menuBarListDiv" >
         	         <table>
-        	           <tr dojoType="dojo.dnd.Source" id="menuBarDndSource" name="menuBarDndSource">
-        	             <div style="height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
+        	           <tr dojoType="dojo.dnd.Source" id="menuBarDndSource" name="menuBarDndSource" dndType="menuBar">
+        	             <div id="wheelingBarDiv" style="height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
         	             <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow);?>
         	           </tr>
         	         </table>
