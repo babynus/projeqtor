@@ -4212,6 +4212,14 @@ function getAllSessionValues($global=false) {
   }
   return $_SESSION[$projeqtorSession];
 }
+//gautier filter
+function sessionDisplayFilter($code,$objectClass){
+  $display = "none";
+  if((sessionValueExists($code.$objectClass) and getSessionValue($code.$objectClass)!='' )or (sessionValueExists($code.'QuickSw'.$objectClass) and getSessionValue($code.'QuickSw'.$objectClass)=='on')){
+    $display = "block";
+  }
+  return $display;
+}
 
 // Gautier #2512
 function sessionValueExists($code, $global=false) {
