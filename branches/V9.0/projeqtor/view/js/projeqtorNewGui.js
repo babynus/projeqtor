@@ -342,6 +342,7 @@ function checkClassForDisplay(id,mode){
 function moveMenuBarItem(idFrom, idTo){
 	console.log(idFrom);
 	console.log(idTo);
+	dojo.byId('anotherMenubarList').style.display = 'none';
 }
 
 function showIconLeftMenu(){
