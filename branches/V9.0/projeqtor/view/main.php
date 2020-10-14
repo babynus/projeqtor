@@ -86,6 +86,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <script type="text/javascript" src="../external/codrops/js/classie.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/codrops/js/mainLeftMenu.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtorNewGui.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="../external/dojox/mobile/deviceTheme.js" data-dojo-config="mblUserAgent: 'Custom'"></script>
   <?php }?>
 <!-- ELIOTT - LEAVE SYSTEM -->
   <script type="text/javascript" src="../external/html2canvas/html2canvas.js?version=<?php echo $version.'.'.$build;?>"></script>

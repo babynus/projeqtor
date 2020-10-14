@@ -713,3 +713,28 @@ body .ProjeQtOrNewGui {
   { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .ProjeQtOrNewGui .iconNotification { background-image: url(customIcons/new/iconNotification.svg);  background-repeat: no-repeat;}
+
+.colorSwitch .mblSwitchBgLeft {
+    background: #51B757;
+}
+.colorSwitch .mblSwitchBgRight {
+    background: #D3D3D3;
+}
+
+.mblSwitch {
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  height: 18px !important;
+  line-height: 29px;
+  width : 40px !important;
+  overflow: hidden;
+  border-radius: 30px !important;
+}
+
+.mblSwitchKnob {
+  height: 18px !important;
+  width: 18px !important;
+  border-radius: 9px !important;
+  border : solid 1 px grey;
+}
