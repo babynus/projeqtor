@@ -46,7 +46,7 @@ $nbFavoriteRow=5;
         	             <td style="padding-left:5px;">
         	               <div dojoType="dijit.form.DropDownButton" id="addItemButton" jsId="addItemButton" name="addItemButton"
                             showlabel="false" iconClass="iconAdd iconSize22 imageColorNewGui" title="<?php echo i18n('comboNewButton');?>">
-                            <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
+                            <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">
                               <div style="font-weight:bold; height:25px;text-align:center">
                               <?php echo i18n('comboNewButton');?>
                               </div>
@@ -60,7 +60,7 @@ $nbFavoriteRow=5;
                                 }
                                 if ($canCreate=='YES') {?>
                                 <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
-                                 onClick="addNewItem('<?php echo $item;?>');" >
+                                 onClick="actionSelectAdd('<?php echo $item;?>', null, null);" >
                                   <table width:"100%"><tr style="height:22px" >
                                   <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIconNewGui($item, 22, null, false);?></td>    
                                   <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
