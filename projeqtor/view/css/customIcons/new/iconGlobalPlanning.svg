@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
+	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<g id="Calque_2">
+	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="3.456" y1="22.683" x2="56.582" y2="22.683"/>
+	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="56.582" y1="34.317" x2="84.728" y2="34.317"/>
+	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="15.729" y1="46.421" x2="35.87" y2="46.421"/>
+	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="35.371" y1="58.842" x2="76.5" y2="58.842"/>
+	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="76.5" y1="69.842" x2="105.5" y2="69.842"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M9.377,109.646c-3.316,0-6.004-2.915-6.004-6.509
+		V13.122c0-3.594,2.688-6.507,6.004-6.507h107.083c3.318,0,6.006,2.914,6.006,6.507v90.016c0,3.594-2.688,6.509-6.006,6.509"/>
+</g>
+<g id="Calque_3">
+	<g>
+		<g>
+			<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M63.026,81.624
+				c-16.104,0-30.156,8.753-37.683,21.756c7.526,13.004,21.577,21.759,37.683,21.759c16.104,0,30.155-8.757,37.682-21.759
+				C93.182,90.377,79.13,81.624,63.026,81.624z M75.06,115.42c-3.08,3.083-7.341,4.98-12.033,4.98
+				c-9.403,0-17.018-7.624-17.018-17.015c0-7.093,4.339-13.173,10.516-15.726c1.995-0.833,4.196-1.294,6.502-1.294
+				c9.402,0,17.018,7.621,17.018,17.017c0,4.7-1.902,8.953-4.982,12.033"/>
+		</g>
+		<circle fill="#FF0000" cx="63.025" cy="103.383" r="7.579"/>
+	</g>
+</g>
+</svg>
