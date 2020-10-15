@@ -24,21 +24,29 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
-/* ============================================================================
- * Presents the list of objects of a given class.
- *
+/** ============================================================================
+ * Save Today displayed info list
  */
 require_once "../tool/projeqtor.php";
-require_once "../tool/formatter.php";
-scriptLog('   ->/view/refreshMenuBarList.php');
 
-$historyTable = RequestHandler::getValue('historyTable');
-$defaultMenu = RequestHandler::getValue('menuFilter');
-$nbSkipMenu = RequestHandler::getValue('nbSkipMenu');
-if(!$nbSkipMenu)$nbSkipMenu=0;
-$idRow = Parameter::getUserParameter('idFavoriteRow');
-$nbFavoriteRow=5;
+$idFrom = RequestHandler::getValue('idFrom');
+$idTo = RequestHandler::getValue('idTo');
+$idSourceFrom = RequestHandler::getValue('idSourceFrom');
+$idSourceTo = RequestHandler::getValue('idSourceTo');
+$idRow = RequestHandler::getValue('idRow');
+$customArray = RequestHandler::getValue('customArray');
+$customArray = explode(',', $customArray);
+unset($customArray[0]);
+$customArrayOrder = array_flip($customArray);
+$customArray = implode("','", $customArray);
+
+Sql::beginTransaction();
+$where = "idUser=".getSessionUser()->id." and idRow=".$idRow." and name in ('".$customArray."')";
+$customMenu=new MenuCustom();
+$customMenuList=$customMenu->getSqlElementsFromCriteria(null, false, $where);
+foreach ($customMenuList as $menu) {
+    $menu->sortOrder = $customArrayOrder[$menu->name];
+	$menu->save();
+}
+Sql::commitTransaction();
 ?>
- <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
- <div style="height:100%;width:100%;position:absolute;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
- <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idRow);?>

@@ -339,10 +339,24 @@ function checkClassForDisplay(id,mode){
   }
 }
 
-function moveMenuBarItem(idFrom, idTo){
-	console.log(idFrom);
-	console.log(idTo);
+function moveMenuBarItem(idFrom, idTo, idSourceFrom, idSourceTo){
 	dojo.byId('anotherMenubarList').style.display = 'none';
+	menuBarDndSource.sync();
+	var nodeList = menuBarDndSource.getAllNodes();
+	var idRow = dojo.byId('idFavoriteRow').value;
+	var customArray = new Array();
+	var pos = 1;
+	nodeList.forEach(function(node){
+		customArray[pos] = 'menu'+node.id.substr(7);
+		pos++;
+	});
+	var param="?idSourceFrom="+idSourceFrom+"&idSourceTo="+idSourceTo+"&idFrom="+idFrom+"&idTo="+idTo+"&idRow="+idRow+"&customArray="+customArray;
+    dojo.xhrGet({
+      url : "../tool/saveCustomMenuOrder.php"+param,
+      handleAs : "text",
+      load : function(data, args) {
+      },
+    });
 }
 
 function showIconLeftMenu(){

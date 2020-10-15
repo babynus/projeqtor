@@ -36,6 +36,7 @@ class MenuCustom extends SqlElement {
   public $idMenu;
   public $idUser;
   public $idRow;
+  public $sortOrder=0;
   public $idle;
   
   public $_noHistory=true; // Will never save history for this object

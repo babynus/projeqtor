@@ -80,9 +80,10 @@ $nbFavoriteRow=5;
 	             </div>
 	           </td>
     	       <td>
-    	         <div name="menuBarListDiv" id="menuBarListDiv" >
+    	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dojo.dnd.Source" dndType="menuBar">
         	         <table>
-        	           <tr dojoType="dojo.dnd.Source" id="menuBarDndSource" name="menuBarDndSource" dndType="menuBar">
+        	           <tr dojoType="dojo.dnd.Source" id="menuBarDndSource" name="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBar">
+        	             <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
         	             <div id="wheelingBarDiv" style="height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
         	             <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow);?>
         	           </tr>
