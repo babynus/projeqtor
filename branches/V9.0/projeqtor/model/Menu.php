@@ -174,13 +174,28 @@ class Menu extends SqlElement {
       public static function drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idFavoriteRow) {
         $isNotificationSystemActiv = isNotificationSystemActiv();
         $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
-        $customMenuArray=SqlList::getListWithCrit("MenuCustom",array('idUser'=>getSessionUser()->id, 'idRow'=>$idFavoriteRow));
+        $customMenu = new MenuCustom();
+        $customMenuArray=$customMenu->getSqlElementsFromCriteria(array('idUser'=>getSessionUser()->id, 'idRow'=>$idFavoriteRow), false, 'ORDER BY sortOrder');
         $obj=new Menu();
         $where=null;
         if(!$nbSkipMenu)$nbSkipMenu = 0;
         if($defaultMenu == 'menuBarCustom'){
-          $where = ($customMenuArray)?"name in ('".implode("','", $customMenuArray)."')":"";
-          $menuList=($where)?$obj->getSqlElementsFromCriteria(null, false, $where):array();
+          $customArray= array();
+          foreach ($customMenuArray as $custom){
+            array_push($customArray, $custom->name);
+          }
+          $where = "name in ('".implode("','", $customArray)."')";
+          $menuList=$obj->getSqlElementsFromCriteria(null, false, $where);
+          $menuListOrder = array();
+          foreach ($customArray as $name){
+            foreach ($menuList as $menu){
+              if($menu->name == $name){
+                array_push($menuListOrder, $menu);
+              }
+            }
+          }
+          $menuList=$menuListOrder;
+          $customMenuArray=$customArray;
         }else if ($defaultMenu == 'menuBarRecent'){
           $historyTable = explode(',', $historyTable);
           $reverseArray = array_reverse($historyTable);
