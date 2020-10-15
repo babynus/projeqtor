@@ -233,7 +233,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
            } else if( target.id=='dndHierarchicalBudgetList') {
              setTimeout('moveBudgetFromHierarchicalView("' + idFrom + '", "' + idTo + '")',100); 
            } else if( target.id=='menuBarDndSource' || target.id=='menuBarDndSourceSecond') {
-             setTimeout('moveMenuBarItem("' + idFrom + '", "' + idTo + '")',100); 
+             setTimeout('moveMenuBarItem("' + idFrom + '", "' + idTo + '", "'+ source.id +'", "'+ target.id +'")',100); 
            }
            
         });

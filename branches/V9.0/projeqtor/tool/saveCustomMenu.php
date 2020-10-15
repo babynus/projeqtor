@@ -55,6 +55,7 @@ if ($operation=='add') {
   $ms->idUser=$userId;
   $ms->idMenu=$menuId;
   $ms->name=$menuName;
+  $ms->idRow=Parameter::getUserParameter('idFavoriteRow');
   $result=$ms->save();
   //echo $result;
 } else if ($operation=='remove') {
