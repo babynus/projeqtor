@@ -100,7 +100,7 @@ class Menu extends SqlElement {
   		if ($menu->idMenu==0) {
   		}
   	} else if ($menu->type=='item') {
-  		echo '<td id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem" dndType="menuBar" style="border:unset !important;" ondragstart="console.log(\'oui\');">';
+  		echo '<td id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem" dndType="menuBar" style="border:unset !important;">';
   		echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
   		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
   		echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
