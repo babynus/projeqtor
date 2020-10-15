@@ -37,13 +37,17 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
   <div id="menuBArNewGuiAcces"  class="container"  dojoType="dijit.layout.BorderContainer" region="left"  style="width:32px;height:100%;">
     <div id="breadScrumb"  dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;" >
     </div>
-    <div id="menuPersonalAcces"   dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;overflow: initial;" >
-      <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb" onclick=""></div>
-      <div id="buttonActivityStream" class="iconActivityStream iconSize22 iconBreadSrumb" onclick=""></div>
-      <div id="buttonFlux" class="iconHome iconSize22 iconBreadSrumb" onclick=""></div>
-      <div id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb" onclick=""></div>
-      <div id="buttonConsole" class="iconHome iconSize22 iconBreadSrumb" onclick=""></div>
-      <div id="buttonNotification" class="iconNotification  iconSize22 iconBreadSrumb" onclick=""></div>
+    <div id="menuPersonalAcces"  onresize="showBottomLeftMenu();"  dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;overflow: hidden;" >
+      <div id="iconsBottomSize" onresize="">
+        <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb" onclick="showBottomContent('Parameter')"></div>
+        <div id="buttonActivityStream" class="iconActivityStream iconSize22 iconBreadSrumb" onclick="showBottomContent('ActivityStream')"></div>
+        <div id="buttonLink" class="iconHome iconSize22 iconBreadSrumb" onclick="showBottomContent('Link')"></div>
+        <?php if (securityCheckDisplayMenu(null,'Document')) {?>
+        <div title="<?php echo i18n('document');?>" id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb" onclick="showBottomContent('Document')"></div>
+        <?php }?>
+        <div id="buttonConsole" class="iconHome iconSize22 iconBreadSrumb" onclick="showBottomContent('Console')"></div>
+        <div id="buttonNotification" class="iconNotification  iconSize22 iconBreadSrumb" onclick="showBottomContent('Notification')"></div>
+      </div>
     </div>
   </div>
   <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  >
@@ -55,6 +59,11 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
             ?>
       </nav>
 	  <script>
+	  var x = 0;
+	  function myFunction() {
+	    var txt = x += 1;
+	    document.getElementById("demo").innerHTML = txt;
+	  }
 	   (function() {
 	     var menuEl = dojo.byId('ml-menu'),
 			mlmenu = new MLMenu(menuEl, {
@@ -66,6 +75,21 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 	  </script>
     </div>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;">
+           <?php
+           $viewSelect=Parameter::getUserParameter('bottomMenuDivItemElect');
+           $viewSelect='Console';
+           if($viewSelect=='Link'){
+            include "../view/shortcut.php";
+           }else if($viewSelect=='Document'){
+            include "../tool/jsonDirectory.php";
+           }else if($viewSelect=='Notification'){
+            include "../tool/jsonNotification.php";
+           }else if($viewSelect=='ActivityStream'){
+            include "../view/ActivityStreamPersonal.php";
+           }else if($viewSelect=='Console'){
+              ?><div id="messageDiv" class="messageDivNewGui" style="height:35%;"></div><?php 
+           }
+           ?>
     </div>
   </div>
 </div>
@@ -77,13 +101,44 @@ function sortMenus(&$listMenus, &$result, $parent,$level ){
   $level++;
   foreach ($listMenus as $id=>$menu){
     if($menu->idParent == $parent){
+      if ($menu->idParent=='') {
+      	$menu->idParent=0;
+      }
       $key=$level.'-'.$menu->idParent.'-'.$menu->sortOrder;
-      $result[$key] = array('level'=>$level,'object'=>$menu);
+      $result[$key] = array('level'=>$level,'objectType'=>'menu','object'=>$menu);
       sortMenus($listMenus, $result, $menu->id,$level);
     }
   }
 }
-
+function getRepportMenu(){
+  $level=2;
+  $hr=new HabilitationReport();
+  $user=getSessionUser();
+  $allowedReport=array();
+  $allowedCategory=array();
+  $lst=$hr->getSqlElementsFromCriteria(array('idProfile'=>$user->idProfile, 'allowAccess'=>'1'), false);
+  $res=array();
+  $listCateg=SqlList::getList('ReportCategory');
+  $idRepport=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navRepports','idParent'=>null,'idMenu'=>null));
+  foreach ($lst as $h) {
+    $report=$h->idReport;
+    $nameReport=SqlList::getNameFromId('Report', $report, false);
+    if (! Module::isReportActive($nameReport)) continue;
+    $allowedReport[$report]=$report;
+    $category=SqlList::getFieldFromId('Report', $report, 'idReportCategory',false);
+    $allowedCategory[$category]=$category;
+  }
+  foreach ($listCateg as $id=>$name) {
+    if (isset($allowedCategory[$id])) {
+      $idReport=$idRepport->id.$level.$id;
+      $key=$level.'-'.$idRepport->id.'-'.$idReport;
+      $obj= array('id'=>$idReport,'name'=>$name,'idParent'=>$idRepport->id);
+      $res[$key]=array('level'=>$level,'objectType'=>'report','object'=>$obj);
+    }
+  }
+  return $res;
+ 
+}
 function getNavigationMenuLeft (){
   $level=0;
   $result=array();
@@ -91,26 +146,25 @@ function getNavigationMenuLeft (){
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
   $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc');
   sortMenus($contexctMenuMain,$result,0,$level);
+  $result=array_merge ($result,getRepportMenu());
   ksort($result);
-
-
   foreach ($result as $id=>$context){
-    $context=$context['object'];
-    if($context->idParent!=0 and $context->idMenu!=0){
-      $unset=false;
-      $menu=new Menu($context->idMenu);
-      if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) $unset=true; 
-      if (! $menu->canDisplay() )  $unset=true;
-      if (!$isLanguageActive and $menu->name=="menuLanguage")  $unset=true;
-      if (!Module::isMenuActive($menu->name))  $unset=true;
-      if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) $unset=true;
-      if($unset==true)unset($result[$id]);
+    if($context['objectType']=='menu'){
+      $context=$context['object'];
+      if($context->idParent!=0 and $context->idMenu!=0){
+        $unset=false;
+        $menu=new Menu($context->idMenu);
+        if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) $unset=true; 
+        if (! $menu->canDisplay() )  $unset=true;
+        if (!$isLanguageActive and $menu->name=="menuLanguage")  $unset=true;
+        if (!Module::isMenuActive($menu->name))  $unset=true;
+        if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) $unset=true;
+        if($unset==true)unset($result[$id]);
+      }
     }
   }
-  
   return $result;
 }
-
 
 
 function drawLeftMenuListNewGui($displayMode){
@@ -122,7 +176,14 @@ function drawLeftMenuListNewGui($displayMode){
   $result.='<div class="menu__wrap">';
   $displayIcon=($displayMode=='TXT')?"display:none;":"display:block;";
   foreach ($allMenu as $id=>$menu){
-    $obj=$menu['object'];
+    if($menu['objectType']=='report'){
+      $obj=new Navigation();
+      $obj->id=$menu['object']['id'];
+      $obj->idParent=$menu['object']['idParent'];
+      $obj->name=$menu['object']['name'];
+    }else{
+      $obj=$menu['object'];
+    }
     if($old!=$menu['level'] and $menu['level']==1 and $maineDraw!=true){
       $maineDraw=true;
       $result.='<ul data-menu="main" class="menu__level" tabindex="-1" role="menu" >';
@@ -158,12 +219,12 @@ function drawLeftMenuListNewGui($displayMode){
       $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
       $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
       $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div><div id="currentDiv'.$obj->name.'" class="div__link"></div></li>';
-}else{
+    }else{
       $sub='submenu-'.$obj->id;
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'"><div class="icon'.substr($obj->name,3).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n(substr($obj->name,3)).'</a><div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'"><div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$obj->name).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.(($menu['objectType']=='menu')?i18n(substr($obj->name,3)):$obj->name).'</a><div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
     }
     $old=$menu['level'];
-    $idP=$menu['object']->idParent;
+    $idP=$obj->idParent;
   }
   $result.='</div">';
   return $result;
