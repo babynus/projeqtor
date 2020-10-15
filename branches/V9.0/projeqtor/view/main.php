@@ -245,11 +245,10 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     });
 
     dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
-    	console.log(source);
-    	console.log(nodes);
-    	console.log(copy);
-    	console.log(target);
-    	dojo.byId('anotherMenubarList').style.display = 'block';
+        if(source.id == 'menuBarDndSource')dojo.byId('anotherMenubarList').style.display = 'block';
+    });
+    dojo.subscribe("/dnd/cancel", function(){
+	    dojo.byId('anotherMenubarList').style.display = 'none';
     });
 
     dndMoveInProgress=false;
