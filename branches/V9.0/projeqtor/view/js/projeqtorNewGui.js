@@ -77,7 +77,6 @@ var defaultMenu=null;
 //=============================================================================
 
 ;( function(window) {
-  
   function menuLeft(menu) {  
     this.el = menu;
     this._init();
@@ -85,11 +84,10 @@ var defaultMenu=null;
 
   menuLeft.prototype = {
     _init : function() {
-      this.menuTopDiv=dojo.byId('menuTop');
       this.menuRight=dojo.byId('menuBarVisibleDiv');
       this.trigger = dojo.byId( 'hideStreamNewGui' );
-      this.menuLeft=this.el.querySelector( '.menu-left' );
       this.isMenuOpen = true; //replace to datatsession;
+
       //divButton
       this.hidStreamButtonTopBar= document.createElement('div');
       this.hidStreamButtonTopBar.className = 'hideStreamNewGuiTopBar';
@@ -373,4 +371,27 @@ function showIconLeftMenu(){
   });
   dojo.setAttr('displayModeLeftMenu','value',(display=='block')?'ICONTXT':'TXT');
   saveUserParameter('menuLeftDisplayMode',mode);
+}
+
+function showBottomContent (item){
+  saveDataToSession('bottomMenuDivItemElect',item,true);
+  var page='';
+  switch(item){
+    case 'Link':
+      page= "../view/shortcut.php";
+      break;
+    case 'Document':
+      page='../tool/jsonDirectory.php';
+      break;
+    case 'Notification':
+      page='../tool/jsonNotification.php';
+      break;
+    case 'ActivityStream':
+      //page='../view/ActivityStreamPersonal.php';
+      break;
+    case 'Console':
+      //page='../tool/jsonDirectory.php';
+      break;
+  }
+  if(page!='')loadDiv(page, 'menuBarAccesBottom');
 }
