@@ -234,7 +234,6 @@ class Menu extends SqlElement {
           if (! $isLanguageActive and $menu->name=="menuLanguage") { continue; }
           if (! $isNotificationSystemActiv and strpos($menu->name, "Notification")!==false) { continue; }
           if (! $menu->canDisplay() ) { continue;}
-          if()
           if (securityCheckDisplayMenu($menu->id,substr($menu->name,4)) ) {
         		Menu::drawNewGuiMenu($menu, $defaultMenu, $customMenuArray);
         		$lastType=$menu->type;
