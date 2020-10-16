@@ -192,6 +192,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     dojo.require("dojox.image.Lightbox");
     dojo.subscribe("/dnd/drop", function(source, nodes, copy, target){
       if(target.id == null){
+    	  if(target.parent.id=='menuBarDndSource2' || target.parent.id=='menuBarDndSource3' || target.parent.id=='menuBarDndSource4' || target.parent.id=='menuBarDndSource5'){
+        	  setTimeout('moveMenuBarItem("'+ source.id +'", "'+ target.parent.id +'")',100); 
+          }
       //gautier #translationApplication
         //if (target.id == null) we are in dgrid DROP , nothing to do.
       }else if (target.id.indexOf('dialogRow')!=-1 && source.id!=target.id){
@@ -232,8 +235,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              setTimeout('moveFilterListColumn2()',100); 
            } else if( target.id=='dndHierarchicalBudgetList') {
              setTimeout('moveBudgetFromHierarchicalView("' + idFrom + '", "' + idTo + '")',100); 
-           } else if( target.id=='menuBarDndSource' || target.id=='menuBarDndSourceSecond') {
-             setTimeout('moveMenuBarItem("' + idFrom + '", "' + idTo + '", "'+ source.id +'", "'+ target.id +'")',100); 
+           } else if( target.id=='menuBarDndSource') {
+             setTimeout('moveMenuBarItem("'+ source.id +'", "'+ target.id +'")',100); 
            }
            
         });
@@ -243,9 +246,13 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         }
       }
     });
-
+    dojo.ready(function(){
+        dojo.query('.anotherBarDiv').forEach(function(el){
+        	var source = new dojo.dnd.Source(el.id, { accept:["menuBar" ] });
+        });
+    });
     dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
-        if(source.id == 'menuBarDndSource')dojo.byId('anotherMenubarList').style.display = 'block';
+       if(source.id == 'menuBarDndSource')dojo.byId('anotherMenubarList').style.display = 'block';
     });
     dojo.subscribe("/dnd/cancel", function(){
 	    dojo.byId('anotherMenubarList').style.display = 'none';
@@ -931,26 +938,26 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           style="top:42px;position:absolute !important;z-index:99999999;width:300px !important;display:none;cursor:pointer;"><?php echo i18n('customMenuAdd');?></div>
           <div region="center" dojoType="dijit.TooltipDialog" id="newGuiCustomMenuRemove" onClick="customMenuRemoveItem();" 
           style="top:42px;position:absolute !important;z-index:99999999;width:300px !important;display:none;cursor:pointer;"><?php echo i18n('customMenuRemove');?></div>
-          <div id="anotherMenubarList" name="anotherMenubarList" region="center" style="display:none;width:90%;height: 43px;position: absolute;z-index: 9999999;top: 48px;left: 113px;">
+          <div id="anotherMenubarList" name="anotherMenubarList" region="center" style="display:none;width:90%;height: 43px;position: absolute;z-index: 9999999;top: 48px;left: 113px; ">
             <table style="width:100%;heigth:100%">
-  	           <tr dojoType="dojo.dnd.Source" dndType="menuBar" id="menuBarDndSource2" style="height: 43px;">
+  	           <tr  style="height: 43px;">
   	             <td style="border: unset !important;padding: 5px 0px 5px 0px;">
-  	               <div dndType="menuBar" class="anotherBarDiv dojoDndItem" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;"></div>
+  	               <div id="menuBarDndSource2" jsId="menuBarDndSource2" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;" dojoType="dojo.dnd.Source" dndType="menuBar"></div>
   	             </td>
   	           </tr>
-  	           <tr dojoType="dojo.dnd.Source" dndType="menuBar" id="menuBarDndSource3" style="height: 43px;">
-  	             <td style="border: unset !important;padding: 0px 0px 5px 0px;">
-  	               <div dndType="menuBar" class="anotherBarDiv dojoDndItem" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;"></div>
+  	           <tr style="height: 43px;">
+  	             <td  style="border: unset !important;padding: 0px 0px 5px 0px;">
+  	               <div id="menuBarDndSource3" jsId="menuBarDndSource3" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;" dojoType="dojo.dnd.Source" dndType="menuBar"></div>
   	             </td>
   	           </tr>
-  	           <tr dojoType="dojo.dnd.Source" dndType="menuBar" id="menuBarDndSource4" style="height: 43px;">
+  	           <tr style="height: 43px;">
   	             <td style="border: unset !important;padding: 0px 0px 5px 0px;">
-  	               <div dndType="menuBar" class="anotherBarDiv dojoDndItem" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;"></div>
+  	               <div id="menuBarDndSource4" jsId="menuBarDndSource4" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;" dojoType="dojo.dnd.Source" dndType="menuBar"></div>
   	             </td>
   	           </tr>
-  	           <tr dojoType="dojo.dnd.Source" dndType="menuBar" id="menuBarDndSource5" style="height: 43px;">
-  	             <td style="border: unset !important;padding: 0px 0px 5px 0px;">
-  	               <div dndType="menuBar" class="anotherBarDiv dojoDndItem" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;"></div>
+  	           <tr style="height: 43px;">
+  	             <td  style="border: unset !important;padding: 0px 0px 5px 0px;">
+  	               <div id="menuBarDndSource5" jsId="menuBarDndSource5" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;" dojoType="dojo.dnd.Source" dndType="menuBar"></div>
   	             </td>
   	           </tr>
 	        </table>

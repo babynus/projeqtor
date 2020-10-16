@@ -101,7 +101,7 @@ class Menu extends SqlElement {
   		}
   	} else if ($menu->type=='item') {
   		echo '<td id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem" dndType="menuBar" style="border:unset !important;">';
-  		echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
+  		echo '<div dndType="menuBar" class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
   		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
   		echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
   		if ($menuName=='menuReports' and isHtml5() ) {
@@ -175,11 +175,13 @@ class Menu extends SqlElement {
         $isNotificationSystemActiv = isNotificationSystemActiv();
         $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
         $customMenu = new MenuCustom();
-        $customMenuArray=$customMenu->getSqlElementsFromCriteria(array('idUser'=>getSessionUser()->id, 'idRow'=>$idFavoriteRow), false, 'ORDER BY sortOrder');
+        $customMenuArray=$customMenu->getSqlElementsFromCriteria(array('idUser'=>getSessionUser()->id, 'idRow'=>$idFavoriteRow), false, null, 'sortOrder');
         $obj=new Menu();
         $where=null;
         if(!$nbSkipMenu)$nbSkipMenu = 0;
         if($defaultMenu == 'menuBarCustom'){
+          // $where = "idUser=".getSessionUser()->id." and idRow != ".$idFavoriteRow;
+          // $otherCustomArray = $customMenu->getSqlElementsFromCriteria(null, false, $where);
           $customArray= array();
           foreach ($customMenuArray as $custom){
             array_push($customArray, $custom->name);
@@ -232,6 +234,7 @@ class Menu extends SqlElement {
           if (! $isLanguageActive and $menu->name=="menuLanguage") { continue; }
           if (! $isNotificationSystemActiv and strpos($menu->name, "Notification")!==false) { continue; }
           if (! $menu->canDisplay() ) { continue;}
+          if()
           if (securityCheckDisplayMenu($menu->id,substr($menu->name,4)) ) {
         		Menu::drawNewGuiMenu($menu, $defaultMenu, $customMenuArray);
         		$lastType=$menu->type;
