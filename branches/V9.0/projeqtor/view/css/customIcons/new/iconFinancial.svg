@@ -3,25 +3,16 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g>
-	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M54.722,21.575c-4.599-0.324-9.637,1.731-11.25,4.542l-4.266,7.442c-1.57,2.737,0.717,5.327,5.133,5.778l4.809,0.49
-			c4.557,0.465,9.725-1.448,11.433-4.277l4.644-7.7c1.756-2.91,7.197-5.025,12.15-4.675l5.401,0.381
-			c5.124,0.362,7.798,3.146,5.88,6.163l-5.069,7.973c-1.861,2.929-7.446,4.893-12.352,4.391"/>
-		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="41.329" y1="29.857" x2="33.262" y2="29.16"/>
-		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="95.739" y1="34.559" x2="86.11" y2="33.727"/>
-	</g>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M7.787,31.852c0-12.64,25.391-22.883,56.711-22.883c31.323,0,56.714,10.243,56.714,22.883"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M121.213,31.852c0,12.637-25.392,22.883-56.714,22.883c-31.321,0-56.711-10.246-56.711-22.883V54.74
-		c0,12.637,25.391,22.881,56.711,22.881c31.323,0,56.714-10.244,56.714-22.881V31.852z"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M121.213,71.94v6.381c0,12.639-25.392,22.884-56.714,22.884c-31.321,0-56.711-10.245-56.711-22.884V71.94"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M121.213,93.85v8.055c0,12.64-25.392,22.883-56.714,22.883c-31.321,0-56.711-10.243-56.711-22.883V93.85"/>
-</g>
+<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	13.857,38.632 114.666,38.632 64.262,11.563 "/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="13.857" y1="46.566" x2="114.666" y2="46.566"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="13.857" y1="97.904" x2="114.666" y2="97.904"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="8.256" y1="107.238" x2="118.866" y2="107.238"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="3.358" y1="116.609" x2="124.643" y2="116.609"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="23.134" y1="46.566" x2="23.134" y2="97.904"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="35.709" y1="46.566" x2="35.709" y2="97.904"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="56.574" y1="46.566" x2="56.574" y2="97.904"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="69.148" y1="46.566" x2="69.148" y2="97.904"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="90.833" y1="46.566" x2="90.833" y2="97.904"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="103.408" y1="46.566" x2="103.408" y2="97.904"/>
 </svg>
