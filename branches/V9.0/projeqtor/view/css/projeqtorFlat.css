@@ -1619,22 +1619,6 @@ body .ProjeQtOrFlatRed {
 
 /* N */
 
-/* BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM */
-.ProjeQtOrFlatRed .iconNotification32 { background-image: url(customIcons/red/iconNotification.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatRed .iconNotification22 { background-image: url(customIcons/red/iconNotification.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatRed .iconNotification16 { background-image: url(customIcons/red/iconNotification.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
-.ProjeQtOrFlatRed .iconNotificationDefinition32 { background-image: url(customIcons/red/iconNotificationDefinition.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatRed .iconNotificationDefinition22 { background-image: url(customIcons/red/iconNotificationDefinition.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatRed .iconNotificationDefinition16 { background-image: url(customIcons/red/iconNotificationDefinition.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
-.ProjeQtOrFlatRed .iconNotificationRefresh32 { background-image: url(customIcons/red/iconNotificationRefresh.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatRed .iconNotificationRefresh22 { background-image: url(customIcons/red/iconNotificationRefresh.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatRed .iconNotificationRefresh16 { background-image: url(customIcons/red/iconNotificationRefresh.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
-.ProjeQtOrFlatRed .iconNotificationSystem32 { background-image: url(customIcons/red/iconNotificationSystem.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatRed .iconNotificationSystem22 { background-image: url(customIcons/red/iconNotificationSystem.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatRed .iconNotificationSystem16 { background-image: url(customIcons/red/iconNotificationSystem.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 .ProjeQtOrFlatRed .iconNotifiable32 { background-image: url(customIcons/red/iconNotifiable.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconNotifiable22 { background-image: url(customIcons/red/iconNotifiable.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
@@ -2535,10 +2519,6 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconInvoiceType32 { background-image: url(images/iconInvoiceType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconInvoiceType22 { background-image: url(images/iconInvoiceType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconInvoiceType16 { background-image: url(images/iconInvoiceType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
-.ProjeQtOrFlatGreen .iconNotificationSystem32 { background-image: url(customIcons/green/iconNotificationSystem.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGreen .iconNotificationSystem22 { background-image: url(customIcons/green/iconNotificationSystem.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGreen .iconNotificationSystem16 { background-image: url(customIcons/green/iconNotificationSystem.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 .ProjeQtOrFlatGreen .iconNotifiable32 { background-image: url(customIcons/green/iconNotifiable.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconNotifiable22 { background-image: url(customIcons/green/iconNotifiable.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
