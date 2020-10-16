@@ -1634,7 +1634,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                   // + ' onMouseover=JSGantt.enterBarLink('+i+'); '
                   // + ' onMouseout=JSGantt.exitBarLink('+i+'); '
                   + ' onMouseover=JSGantt.exitBarLink('+i+'); '
-                  + 'style="'+(vTaskList[i].getVisible()==1?'display:block;':'display:none;')+'left:'+ (Math.ceil((vTaskRight) * (vDayWidth) - 1) + 6) + 'px;">' + vCaptionStr + '</div>';
+                  + 'style="'+(vTaskList[i].getVisible()!=1 && vTaskList[i].getClass()=='Meeting'?'display:none;':'display:block;')+'left:'+ (Math.ceil((vTaskRight) * (vDayWidth) - 1) + 6) + 'px;">' + vCaptionStr + '</div>';
               }
 	          }
   	        vRightTableTempMeeting += '</div>' ;
@@ -1642,11 +1642,12 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               $idPrarentMeeting=vTaskList[i].getParent();
               var tagParentMeeting='<tag id="meeting_'+$idPrarentMeeting+'" ></tag>';
               
-              if(vTaskList[i].getVisible()==1){
+              if(vTaskList[i].getVisible()==1 && vTaskList[i].getClass()=='Meeting'){
                 vRightTableMeeting=vRightTableTempMeeting.replace('style="display:block;','style="z-index:99;display:none;');
               }else{
                 vRightTableMeeting=vRightTableTempMeeting.replace('style="','style="z-index:99;');
               }
+              vRightTableMeeting=vRightTableMeeting.replace('labelBarDiv_', 'labelBarDivMeting_');
               vRightTable=vRightTable.replace(tagParentMeeting,tagParentMeeting+vRightTableMeeting.replace('bardiv_','bardivMetting_'));
 
               vRightTable+=vRightTableTempMeeting;
@@ -2040,7 +2041,7 @@ JSGantt.hide=function (pID,ganttObj) {
        if(vList[i].getClass()=='Meeting'){
          node=JSGantt.findObj('bardivMetting_' + vID);
          if (node) node.style.display = "";
-         node=JSGantt.findObj('labelBarDiv_'+ vID);
+         node=JSGantt.findObj('labelBarDivMeeting_'+ vID);
          if (node) node.style.display = "none";
        }
        vList[i].setVisible(0);
@@ -2082,7 +2083,7 @@ JSGantt.show =  function (pID, ganttObj) {
         if(vList[i].getClass()=='Meeting'){
           node=JSGantt.findObj('bardivMetting_' + vID);
           if (node) node.style.display = "none";
-          node=JSGantt.findObj('labelBarDiv_'+ vID)
+          node=JSGantt.findObj('labelBarDiv_'+ vID);
           if (node) node.style.display = "block";        
         }
         vList[i].setVisible(1);
