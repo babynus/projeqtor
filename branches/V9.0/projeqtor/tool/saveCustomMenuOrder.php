@@ -29,8 +29,6 @@
  */
 require_once "../tool/projeqtor.php";
 
-$idFrom = RequestHandler::getValue('idFrom');
-$idTo = RequestHandler::getValue('idTo');
 $idSourceFrom = RequestHandler::getValue('idSourceFrom');
 $idSourceTo = RequestHandler::getValue('idSourceTo');
 $idRow = RequestHandler::getValue('idRow');

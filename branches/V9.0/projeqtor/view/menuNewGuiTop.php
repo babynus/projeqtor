@@ -50,7 +50,7 @@ $nbFavoriteRow=5;
                               <div style="font-weight:bold; height:25px;text-align:center">
                               <?php echo i18n('comboNewButton');?>
                               </div>
-                              <?php $arrayItems=array('Project','Activity','Ticket','Meeting','TestSession');
+                              <?php $arrayItems=array('Project','Resource','Activity','Ticket','Meeting','Milestone');
                               foreach($arrayItems as $item) {
                                 $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
                                 if ($canCreate=='YES') {
@@ -82,10 +82,10 @@ $nbFavoriteRow=5;
     	       <td>
     	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dojo.dnd.Source" dndType="menuBar">
         	         <table>
-        	           <tr dojoType="dojo.dnd.Source" id="menuBarDndSource" name="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBar">
+        	           <tr dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBar">
+        	             <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow);?>
         	             <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
         	             <div id="wheelingBarDiv" style="height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
-        	             <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow);?>
         	           </tr>
         	         </table>
     	         </div>
