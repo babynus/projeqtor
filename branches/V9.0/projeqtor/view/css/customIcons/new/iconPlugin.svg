@@ -3,23 +3,16 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Calque_2" display="none">
-</g>
-<g id="Livello_1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" sodipodi:docname="iconHome.svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
-	
-		<sodipodi:namedview  gridtolerance="10" inkscape:cy="41.675131" pagecolor="#ffffff" inkscape:cx="7.8240306" showgrid="false" borderopacity="1" objecttolerance="10" guidetolerance="10" bordercolor="#666666" inkscape:zoom="2.8710938" id="namedview7" inkscape:current-layer="Livello_1" inkscape:window-maximized="0" inkscape:window-height="845" inkscape:pageopacity="0" inkscape:window-y="0" inkscape:window-x="0" inkscape:pageshadow="2" inkscape:window-width="1519">
-		</sodipodi:namedview>
-	<title  id="title2"></title>
-	
-		<rect x="38.767" y="50.195" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 89.1734 146.3272)" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="72.25" height="9.001"/>
+<g>
 	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M64,26.268l9.723,9.723l17.324-17.324c0,0,4.771-5.833,0.441-10.165c-4.331-4.332-8.75-0.619-9.987,0.265
-		C80.264,9.651,64,26.268,64,26.268z"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M91.4,53.668l9.723,9.723l17.324-17.324c0,0,4.771-5.833,0.441-10.165c-4.332-4.332-8.75-0.619-9.988,0.265
-		C107.664,37.051,91.4,53.668,91.4,53.668z"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M40.47,37.612L91.559,88.7c0,0-20.841,24.415-46.572,12.825l-4.419,4.42l-3.634-3.633l-20.33,20.328l-10.43-10.43l20.33-20.33
-		l-3.536-3.535l4.419-4.419C27.388,83.928,13.246,62.714,40.47,37.612z"/>
+		M123,79.093c0,8.111-6.577,14.688-14.689,14.688c-2.983,0-5.741-0.89-8.057-2.409c0,0-3.001-1.609-6.503-2.148v33.045H61.506
+		c1.611-6.502,3.167-10.761,3.167-10.761c0.278-1.056,0.425-2.187,0.425-3.317c0-7.26-5.871-13.132-13.112-13.132
+		c-7.262,0-13.134,5.872-13.134,13.132c0,1.131,0.148,2.262,0.427,3.317c0,0,0.629,1.723,1.518,4.667
+		c0.501,1.668,1.075,3.741,1.65,6.094H7.383V88.983c5.964,1.518,9.797,2.927,9.797,2.927c1.056,0.277,2.167,0.426,3.317,0.426
+		c7.241,0,13.132-5.872,13.132-13.133c0-7.242-5.891-13.113-13.132-13.113c-1.15,0-2.261,0.148-3.317,0.425
+		c0,0-1.722,0.629-4.667,1.52c-1.445,0.427-3.167,0.908-5.13,1.407V35.917h33.172c-0.222-4.019-2.259-7.836-2.259-7.836
+		c-1.538-2.315-2.408-5.075-2.408-8.056c0-8.095,6.575-14.67,14.669-14.67c8.113,0,14.688,6.575,14.688,14.67
+		c0,2.981-0.87,5.741-2.408,8.056c0,0-2.036,3.817-2.279,7.836h33.192V68.96c1.742-0.261,3.372-0.813,4.559-1.277
+		c1.185-0.463,1.944-0.871,1.944-0.871c2.315-1.52,5.073-2.408,8.057-2.408C116.423,64.403,123,70.979,123,79.093z"/>
 </g>
 </svg>
