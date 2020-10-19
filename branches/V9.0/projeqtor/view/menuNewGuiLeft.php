@@ -40,13 +40,14 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
     <div id="menuPersonalAcces"  onresize="showBottomLeftMenu();"  dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;overflow: hidden;" >
       <div id="iconsBottomSize" onresize="">
         <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb" onclick="showBottomContent('Parameter')"></div>
-        <div id="buttonActivityStream" class="iconActivityStream iconSize22 iconBreadSrumb" onclick="showBottomContent('ActivityStream')"></div>
         <div id="buttonLink" class="iconHome iconSize22 iconBreadSrumb" onclick="showBottomContent('Link')"></div>
         <?php if (securityCheckDisplayMenu(null,'Document')) {?>
         <div title="<?php echo i18n('document');?>" id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb" onclick="showBottomContent('Document')"></div>
         <?php }?>
         <div id="buttonConsole" class="iconHome iconSize22 iconBreadSrumb" onclick="showBottomContent('Console')"></div>
+        <?php if(securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv()){?>
         <div id="buttonNotification" class="iconNotification  iconSize22 iconBreadSrumb" onclick="showBottomContent('Notification')"></div>
+        <?php }?>
       </div>
     </div>
   </div>
@@ -74,22 +75,92 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 	   new menuLeft( dojo.byId( 'mainDiv' ) );
 	  </script>
     </div>
+    <?php $viewSelect=Parameter::getUserParameter('bottomMenuDivItemElect');?>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;">
+         <div id="loadDivBarBottom" style="height:35%;display:<?php echo ($viewSelect=='Console')?'none':'block';?>;">
            <?php
-           $viewSelect=Parameter::getUserParameter('bottomMenuDivItemElect');
-           $viewSelect='Console';
+           $viewSelect='Notification';
            if($viewSelect=='Link'){
             include "../view/shortcut.php";
            }else if($viewSelect=='Document'){
             include "../tool/jsonDirectory.php";
-           }else if($viewSelect=='Notification'){
-            include "../tool/jsonNotification.php";
-           }else if($viewSelect=='ActivityStream'){
-            include "../view/ActivityStreamPersonal.php";
-           }else if($viewSelect=='Console'){
-              ?><div id="messageDiv" class="messageDivNewGui" style="height:35%;"></div><?php 
-           }
+           }else if($viewSelect=='Notification' and securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv()){
            ?>
+                <div dojoType="dojo.data.ItemFileReadStore" 
+                     id="notificationStore" 
+                    jsId="notificationStore" url="../tool/jsonNotification.php">
+                </div>
+                <div style="position: absolute; float:right; right: 5px; cursor:pointer;"
+                     title="<?php echo i18n("notificationAccess");?>"
+                     onclick="if (checkFormChangeInProgress()){return false;};loadContent('objectMain.php?objectClass=Notification','centerDiv');"
+                     class="iconHome iconSize22">
+                </div>
+                <div style="position: absolute; float:right; right: 45px; cursor:pointer;"
+                     title="<?php echo i18n("notificationRefresh");?>"
+                     onclick="if (checkFormChangeInProgress()){return false;};refreshNotificationTree(true);"
+                     class="iconHome iconSize22">
+                </div>
+                <div dojoType="dijit.tree.ForestStoreModel" id="notificationModel" jsId="notificationModel" store="notificationStore"
+                     query="{id:'*'}" rootId="notificationRoot" rootLabel="Notifications"
+                     childrenAttrs="children">
+                </div>             
+                 <div dojoType="dijit.Tree" id="notificationTree" model="notificationModel" openOnClick="false" showRoot='false'>
+                    <script type="dojo/method" event="onLoad" args="evt">;
+                        var cronCheckNotification = <?php echo Parameter::getGlobalParameter('cronCheckNotifications'); ?>;
+                        var intervalNotificationTreeDelay = cronCheckNotification*1000;
+                        var intervalNotificationTree = setInterval(function() {
+                                                                                refreshNotificationTree(true);
+                                                                              },
+                                                                   intervalNotificationTreeDelay);
+                    </script>
+                    <script type="dojo/method" event="onClick" args="item">;
+                        if (notificationStore.getValue(item, "objClass")==="") {return false;}
+                        if (checkFormChangeInProgress()){return false;}
+                        var objectId = "";
+                        var objClass = notificationStore.getValue(item, "objClass");
+                        if (objClass=="NotificationManual") {
+                                objClass="Notification";                            
+                        }
+                        if (notificationStore.getValue(item, "objId")!=="") {
+                            objectId = notificationStore.getValue(item, "objId");
+                            gotoElement(objClass, objectId, true);
+                        } else {
+                            loadContent("objectMain.php?objectClass="+objClass,"centerDiv");
+                        }                            
+                    </script>
+                    <script type="dojo/method" event="getIconClass" args="item">
+                        if (item == this.model.root) {
+                          return "checkBox";
+                        } else {
+                            var isTotal = notificationStore.getValue(item,"isTotal");
+                            if (isTotal==="YES") {
+                                var totalCount = notificationStore.getValue(item,"count");
+                                totalUnreadNotificationsCount = totalCount;
+
+                                if (totalCount==0) {
+                                    document.getElementById("notificationTree").style.visibility = "hidden";
+                                    document.getElementById("menuBarNotificationCount").style.visibility = "hidden";
+                                    document.getElementById("drawNotificationUnread").style.visibility = "hidden";
+                                    document.getElementById("countNotifications").style.visibility="hidden";
+                                } else {
+                                    // Show and Update the Notification count in menuBar
+                                    document.getElementById("notificationTree").style.visibility = "visible";
+                                    document.getElementById("countNotifications").style.visibility="visible";
+                                    document.getElementById("menuBarNotificationCount").style.visibility = "visible";
+                                    document.getElementById("countNotifications").innerHTML = totalCount;
+                                }
+                                loadContent("../view/menuNotificationRead.php", "drawNotificationUnread");  
+                            }
+                            
+                            return notificationStore.getValue(item, "iconClass");
+                        }
+                    </script>
+                </div>
+           <?php 
+           }           
+           ?>
+           </div>
+           <div id="messageDiv" class="messageDivNewGui" style="height:35%;display:<?php echo ($viewSelect=='Console')?'block':'none';?>;"></div>
     </div>
   </div>
 </div>
@@ -119,7 +190,7 @@ function getRepportMenu(){
   $lst=$hr->getSqlElementsFromCriteria(array('idProfile'=>$user->idProfile, 'allowAccess'=>'1'), false);
   $res=array();
   $listCateg=SqlList::getList('ReportCategory');
-  $idRepport=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navRepports','idParent'=>null,'idMenu'=>null));
+  $idMenuReport=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navRepports','idParent'=>null,'idMenu'=>null));
   foreach ($lst as $h) {
     $report=$h->idReport;
     $nameReport=SqlList::getNameFromId('Report', $report, false);
@@ -130,12 +201,25 @@ function getRepportMenu(){
   }
   foreach ($listCateg as $id=>$name) {
     if (isset($allowedCategory[$id])) {
-      $idReport=$idRepport->id.$level.$id;
-      $key=$level.'-'.$idRepport->id.'-'.$idReport;
-      $obj= array('id'=>$idReport,'name'=>$name,'idParent'=>$idRepport->id);
+      $lstIdCate[]=$id;
+      $idReport=$idMenuReport->id.$level.$id;
+      $key=$level.'-'.$idMenuReport->id.'-'.$idReport;
+      $obj= array('id'=>$idReport,'name'=>$name,'idParent'=>$idMenuReport->id);
       $res[$key]=array('level'=>$level,'objectType'=>'report','object'=>$obj);
     }
   }
+  $levelParent=$level;
+  $level++;
+  $reportDirect= new Report();
+  $where=" idReportCategory in (".implode(",", $lstIdCate).")";
+  $reportList= $reportDirect->getSqlElementsFromCriteria(null,false,$where,"sortOrder");
+  foreach ($reportList as $id=>$val){
+    $parentId=$idMenuReport->id.$levelParent.$val->idReportCategory;
+    $keyTab=$level.'-'.$parentId.'-'.$val->sortOrder;
+    $obj=array('id'=>$val->id,'name'=>$val->name,'idParent'=>$parentId,'idMenu'=>$val->idReportCategory);
+    $res[$keyTab]=array('level'=>$level,'objectType'=>'reportDirect','object'=>$obj);
+  }
+  
   return $res;
  
 }
@@ -176,11 +260,12 @@ function drawLeftMenuListNewGui($displayMode){
   $result.='<div class="menu__wrap">';
   $displayIcon=($displayMode=='TXT')?"display:none;":"display:block;";
   foreach ($allMenu as $id=>$menu){
-    if($menu['objectType']=='report'){
+    if($menu['objectType']=='report' or $menu['objectType']=='reportDirect'){
       $obj=new Navigation();
       $obj->id=$menu['object']['id'];
       $obj->idParent=$menu['object']['idParent'];
       $obj->name=$menu['object']['name'];
+      $obj->idMenu=($menu['objectType']=='reportDirect')?$menu['object']['idMenu']:0;
     }else{
       $obj=$menu['object'];
     }
@@ -194,34 +279,47 @@ function drawLeftMenuListNewGui($displayMode){
       $result.='<ul data-menu="'.$nameLink.'" id="'.$nameLink.'" class="menu__level" tabindex="-1" role="menu" >';
     }
     if($obj->idParent!=0 and $obj->idMenu!=0){
-      $realMenu=new Menu($obj->idMenu);
-      $menuName=$realMenu->name;
-      $menuNameI18n = i18n($menuName);
-      $menuName2 = addslashes(i18n($menuName));
-      $classEl=substr($menuName,4);
-      $isFav=SqlElement::getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$obj->name));
-      if($realMenu->type=='item'){
-        $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');";
-      }else{
-         $funcOnClick="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');";
-      }
-      if($isFav->id==''){
-        $mode='add';
-        $class="menu__add__Fav";
-        $styleDiv="display:none;";
-      }else{
-        $mode='remove';
-        $class="menu__as__Fav";
-        $styleDiv="display:block;";
-      }
-      $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."');";
-      
-      $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
-      $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
-      $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div><div id="currentDiv'.$obj->name.'" class="div__link"></div></li>';
+      if( $menu['objectType']!='reportDirect'){
+        $realMenu=new Menu($obj->idMenu);
+        $menuName=$realMenu->name;
+        $menuNameI18n = i18n($menuName);
+        $menuName2 = addslashes(i18n($menuName));
+        $classEl=substr($menuName,4);
+        $isFav=SqlElement::getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$obj->name));
+        if($realMenu->type=='item'){
+          $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');";
+        }else{
+           $funcOnClick="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');";
+        }
+        if($isFav->id==''){
+          $mode='add';
+          $class="menu__add__Fav";
+          $styleDiv="display:none;";
+        }else{
+          $mode='remove';
+          $class="menu__as__Fav";
+          $styleDiv="display:block;";
+        }
+        $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."');";
+        
+        $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
+        $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
+        $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div><div id="currentDiv'.$obj->name.'" class="div__link"></div></li>';
     }else{
+      $classEl="Report";
+      $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.")";
+      $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'report\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'report\',\'leave\');">';
+      $funcuntionFav="";
+      $styleDiv="display:none;";
+      $class="menu__add__Fav";
+      $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
+      $result.='<div id="div'.$obj->id.'report" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div><div id="currentDiv'.$obj->name.'" class="div__link"></div></li>';
+    }
+  }else{
       $sub='submenu-'.$obj->id;
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'"><div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$obj->name).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.(($menu['objectType']=='menu')?i18n(substr($obj->name,3)):$obj->name).'</a><div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
+      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'">
+                                <div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$obj->name).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.(($menu['objectType']=='menu')?i18n(substr($obj->name,3)):$obj->name).'</a>
+                            <div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
     }
     $old=$menu['level'];
     $idP=$obj->idParent;
