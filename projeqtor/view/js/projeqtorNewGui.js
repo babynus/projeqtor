@@ -375,6 +375,10 @@ function showIconLeftMenu(){
 function showBottomContent (item){
   saveDataToSession('bottomMenuDivItemElect',item,true);
   var page='';
+  if(item!='Console'){
+    dojo.byId('messageDiv').style.display='none';
+    dojo.byId('loadDivBarBottom').style.display='block';
+  }
   switch(item){
     case 'Link':
       page= "../view/shortcut.php";
@@ -385,12 +389,31 @@ function showBottomContent (item){
     case 'Notification':
       page='../tool/jsonNotification.php';
       break;
-    case 'ActivityStream':
-      //page='../view/ActivityStreamPersonal.php';
-      break;
     case 'Console':
-      //page='../tool/jsonDirectory.php';
+      dojo.byId('loadDivBarBottom').style.display='none';
+      dojo.byId('messageDiv').style.display='block';
       break;
   }
-  if(page!='')loadDiv(page, 'menuBarAccesBottom');
+  if(page!='')loadDiv(page, 'loadDivBarBottom');
+}
+
+function loadMenuReportDirect(cate,idReport){
+  if (checkFormChangeInProgress()) {
+    return false;
+  }
+  item="Reports";
+  cleanContent("detailDiv");
+  hideResultDivs();
+  formChangeInProgress=false;
+  var currentScreen=item;
+  var objectExist='false';
+  loadContent("reportsMain.php?idCategory="+cate, "centerDiv");
+  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
+  stockHistory(item,null,currentScreen);
+  if(defaultMenu == 'menuBarRecent'){
+    menuNewGuiFilter(defaultMenu, item);
+  }
+  selectIconMenuBar(item);
+  setTimeout('reportSelectReport('+idReport+')',500);
+  return true;
 }
