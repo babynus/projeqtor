@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	18.11,47.163 3.661,53.169 3.661,98.8 63.599,123.951 124.339,98.531 124.339,53.169 110.157,47.185 "/>
+<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	124.339,53.169 64,78.73 3.661,53.169 "/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="63.359" y1="88.631" x2="63.359" y2="123.951"/>
+<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="35.388" cy="40.897" rx="10.589" ry="3.12"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M45.977,40.897v9.386
+	c0,1.723-4.741,3.12-10.588,3.12c-5.848,0-10.589-1.397-10.589-3.12v-9.386"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M103.276,40.897v9.386
+	c0,1.723-4.741,3.12-10.589,3.12s-10.589-1.397-10.589-3.12v-9.386"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M74.053,27.684v9.386c0,1.723-4.74,3.12-10.588,3.12
+	c-5.848,0-10.588-1.397-10.588-3.12v-9.386"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M74.053,54.799v9.386
+	c0,1.724-4.74,3.121-10.588,3.121c-5.848,0-10.588-1.397-10.588-3.121v-9.386"/>
+<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="93.038" cy="40.897" rx="10.588" ry="3.12"/>
+<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="63.599" cy="54.799" rx="10.589" ry="3.121"/>
+<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="63.599" cy="26.909" rx="10.589" ry="3.12"/>
+</svg>
