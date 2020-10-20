@@ -259,7 +259,7 @@ function menuNewGuiFilter(filter, item) {
 			dojo.removeClass('recentButton','imageColorNewGuiSelected');
 		}
 	};
-	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, null, null, null,callback);
+	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, null, null, null, null, callback);
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
 }
@@ -371,14 +371,28 @@ function hideFavoriteTooltip(delay, menuClass) {
   customMenuAddRemoveClass=menuClass;
 }
 
-function addNewGuiItem(item, canPlan, param){
+function addNewGuiItem(item, param){
+    var currentScreen=null;
+    var objectExist='false';
+    if(dojo.byId('objectClassManuel'))currentScreen=dojo.byId('objectClassManuel').value;
+    console.log(currentScreen);
 	var callback = function(){
+		loadDiv("menuUserScreenOrganization.php?currentScreen=Planning&objectExist="+objectExist,"mainDivMenu");
+		stockHistory('Planning',null,'Planning');
+		if(defaultMenu == 'menuBarRecent'){
+		  menuNewGuiFilter(defaultMenu, 'Planning');
+		}
+		selectIconMenuBar('Planning');
 		addNewItem(item);
 	};
-	if(canPlan && item != 'Resource'){
-		loadContent("planningMain.php", "centerDiv", null,null,null,null,callback);
+	if(item != 'Resource' && item != 'Ticket'){
+		objectExist='true';
+	    vGanttCurrentLine=-1;
+	    cleanContent("centerDiv");
+		loadContent("planningMain.php", "centerDiv", null,null,null,null,null,callback);
 	}else{
-		loadMenuBarItem(item, item, 'bar');
+		loadMenuBarObject(item, item, 'bar');
+		addNewItem(item);
 	}
 }
 
