@@ -373,9 +373,9 @@ animation: fadeIn ease 0.5s;
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   background-color: transparent;
 } 
-.ProjeQtOrNewGui .imageColorNewGuiSelected {
-	-webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
-  filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+.ProjeQtOrNewGui #menubarContainer .imageColorNewGuiSelected .roundedButtonSmall .iconSize22 {
+	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   background-color: transparent;
 }
 
