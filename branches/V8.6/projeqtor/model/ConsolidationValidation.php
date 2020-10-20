@@ -477,13 +477,15 @@ class ConsolidationValidation extends SqlElement{
 	 */
 	static function getReelWorkConsumed ($project,$month) {
 	  $work=new Work();
-	  if($project->getSubProjectsList()){
-	    $sub=$project->getSubProjectsList();
-	    $subList=$project->id.','.implode(',', array_keys($sub));
-	    $where="idProject in ($subList) and month = '".$month."' ";
-	  }else{
-	    $where="idProject = $project->id and month = '".$month."' ";
-	  }
+// 	  if($project->getSubProjectsList()){
+// 	    $sub=$project->getSubProjectsList();
+// 	    $subList=$project->id.','.implode(',', array_keys($sub));
+// 	    $where="idProject in ($subList) and month = '".$month."' ";
+// 	  }else{
+// 	    $where="idProject = $project->id and month = '".$month."' ";
+// 	  }
+	  $lstProj=$project->getRecursiveSubProjectsFlatList(false,true);
+	  $where="idProject in ".transformListIntoInClause($lstProj)." and month = '".$month."' ";
 	  $reelCons=$work->sumSqlElementsFromCriteria('work',null,$where);
 	  return $reelCons;
 	}
