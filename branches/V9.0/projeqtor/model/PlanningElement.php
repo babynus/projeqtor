@@ -2418,7 +2418,7 @@ class PlanningElement extends SqlElement {
     	$projectList = $project->getRecursiveSubProjectsFlatList(true, ($this->idProject)?true:false);
     	$projectList = array_flip($projectList);
     	$projectList = '(0,'.implode(',',$projectList).')';
-    	$where = 'idProject in '.$projectList.' and idle = 0';
+    	$where = 'idProject in '.$projectList.' and cancelled = 0';
     	$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
     	$cmdAmount = ($paramAmount == 'HT')?'totalUntaxedAmount':'totalFullAmount';
     	$command = new Command();
@@ -2451,10 +2451,10 @@ class PlanningElement extends SqlElement {
     		$asSubProj=false;
     		$asSubAct=false;
     		foreach ($sons as $id=>$pe){
-    			if ($pe->refType=='Activity' and $pe->idProject==$this->idProject and $pe->topId==$this->id and !$pe->idle and !$this->idle){
+    			if ($pe->refType=='Activity' and $pe->idProject==$this->idProject and $pe->topId==$this->id and !$pe->cancelled){
     				$sumActPlEl+=$pe->revenue;
     				$asSubAct=true;
-    			}else if ($pe->refType=='Project' and $pe->topRefId==$this->idProject and !$pe->idle and !$this->idle){
+    			}else if ($pe->refType=='Project' and $pe->topRefId==$this->idProject and !$pe->cancelled){
     				$asSubProj=true;
     				$sumProjlEl+=$pe->revenue;
     			}else{
