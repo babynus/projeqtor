@@ -35,6 +35,8 @@ var closeFilterListTimeout;
 var openFilterListTimeout;
 var closeFavoriteReportsTimeout;
 var openFavoriteReportsTimeout=null;
+var closeFavoriteTimeout;
+var openFavoriteTimeout=null;
 var popupOpenDelay=200;
 var closeMenuListTimeout=null;
 var openMenuListTimeout=null;
@@ -7709,26 +7711,6 @@ function customMenuManagement(menuClass) {
   }
 }
 
-function customNewGuiMenuManagement(menuClass) {
-	  var button=dojo.byId('iconMenuBar'+menuClass);
-	  offsetbutton=button.offsetLeft;
-	  if ( dojo.hasClass(button,'menuBarCustom') ) {
-	    clearTimeout(customMenuAddRemoveTimeout);
-	    dojo.byId('newGuiCustomMenuAdd').style.display='none';
-	    customMenuAddRemoveClass=menuClass;
-	    dojo.byId('newGuiCustomMenuRemove').style.left=offsetbutton+'px';
-	    dojo.byId('newGuiCustomMenuRemove').style.display='block';
-	    customMenuAddRemoveTimeout=setTimeout("dojo.byId('newGuiCustomMenuRemove').style.display='none';",customMenuAddRemoveTimeoutDelay);
-	  } else {
-	    clearTimeout(customMenuAddRemoveTimeout);
-	    dojo.byId('newGuiCustomMenuRemove').style.display='none';
-	    customMenuAddRemoveClass=menuClass;
-	    dojo.byId('newGuiCustomMenuAdd').style.left=offsetbutton+'px';
-	    dojo.byId('newGuiCustomMenuAdd').style.display='block';
-	    customMenuAddRemoveTimeout=setTimeout("dojo.byId('newGuiCustomMenuAdd').style.display='none';",customMenuAddRemoveTimeoutDelay);
-	  }
-	}
-
 function customMenuAddItem() {
   var param="?operation=add&class="+customMenuAddRemoveClass;
   dojo.xhrGet({
@@ -7738,8 +7720,11 @@ function customMenuAddItem() {
     },
   });
   dojo.addClass('iconMenuBar'+customMenuAddRemoveClass,'menuBarCustom');
-  dojo.byId('customMenuAdd').style.display='none';
-  if(isNewGui)dojo.byId('newGuiCustomMenuAdd').style.display='none';
+  if(!isNewGui){
+	  dojo.byId('customMenuAdd').style.display='none';
+  }else{
+	  hideFavoriteTooltip(0, customMenuAddRemoveClass);
+  }
 }
 
 function customMenuRemoveItem() {
@@ -7754,8 +7739,11 @@ function customMenuRemoveItem() {
     },
   });
   dojo.removeClass('iconMenuBar'+customMenuAddRemoveClass,'menuBarCustom');
-  dojo.byId('customMenuRemove').style.display='none';
-  if(isNewGui)dojo.byId('customMenuRemove').style.display='none';
+  if(!isNewGui){
+	  dojo.byId('customMenuRemove').style.display='none';
+  }else{
+	  hideFavoriteTooltip(0, customMenuAddRemoveClass);
+  }
 }
 
 function showIconViewSubMenu(comboName){
