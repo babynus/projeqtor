@@ -475,6 +475,34 @@ animation: fadeIn ease 0.5s;
    filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
 }
 
+.menuBar_add_Fav:before{
+    float: left;
+    content: '\f27d';
+    font-family: 'Material';
+    font-size: 19px;
+    -webkit-text-stroke-width: 0.5px;
+    text-shadow: 0.5px 0px 1px;
+    -webkit-text-stroke-color: black;
+    position: relative;
+    top: -3px;
+    color: var( --color-light);
+    width: 8%;
+}
+.menuBar_remove_Fav:before{
+    float: left;
+    content: '\f27d';
+    font-family: 'Material';
+	font-size:19px;
+	-webkit-text-stroke-width: 0.5px;
+    text-shadow: 0.5px 0px 1px;
+    -webkit-text-stroke-color: black;
+    position: relative;
+    top: -3px;
+    color: var(--color-secondary);
+    display: block;
+    width: 8%;
+}
+
 .ProjeQtOrNewGui .anotherBarDiv:hover{
 	/*border: 2px solid var(--color-dark) !important;*/
 	background-color: var(--color-light-secondary) !important;/*#e6ffe6*/

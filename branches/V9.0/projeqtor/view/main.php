@@ -192,7 +192,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     dojo.require("dojox.image.Lightbox");
     dojo.subscribe("/dnd/drop", function(source, nodes, copy, target){
       if(target.id == null){
-    	  if(target.parent.id=='menuBarDndSource2' || target.parent.id=='menuBarDndSource3' || target.parent.id=='menuBarDndSource4' || target.parent.id=='menuBarDndSource5'){
+    	  if(target.parent.id=='menuBarDndSource1' || target.parent.id=='menuBarDndSource2' || target.parent.id=='menuBarDndSource3' || target.parent.id=='menuBarDndSource4' || target.parent.id=='menuBarDndSource5'){
         	  setTimeout('moveMenuBarItem("'+ source.id +'", "'+ target.parent.id +'")',100); 
           }
       //gautier #translationApplication
@@ -934,34 +934,20 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
      <?php } ?>
     <?php }else{
       include 'menuNewGuiTop.php'; ?>
-          <div region="center" dojoType="dijit.TooltipDialog" id="newGuiCustomMenuAdd" onClick="customMenuAddItem();" 
-          style="top:42px;position:absolute !important;z-index:99999999;width:300px !important;display:none;cursor:pointer;"><?php echo i18n('customMenuAdd');?></div>
-          <div region="center" dojoType="dijit.TooltipDialog" id="newGuiCustomMenuRemove" onClick="customMenuRemoveItem();" 
-          style="top:42px;position:absolute !important;z-index:99999999;width:300px !important;display:none;cursor:pointer;"><?php echo i18n('customMenuRemove');?></div>
-          <div id="anotherMenubarList" name="anotherMenubarList" region="center" style="display:none;width:90%;height: 43px;position: absolute;z-index: 9999999;top: 48px;left: 113px; ">
-            <table style="width:100%;heigth:100%">
-  	           <tr  style="height: 43px;">
-  	             <td style="border: unset !important;padding: 5px 0px 5px 0px;">
-  	               <div id="menuBarDndSource2" jsId="menuBarDndSource2" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;" dojoType="dojo.dnd.Source" dndType="menuBar"></div>
-  	             </td>
-  	           </tr>
-  	           <tr style="height: 43px;">
-  	             <td  style="border: unset !important;padding: 0px 0px 5px 0px;">
-  	               <div id="menuBarDndSource3" jsId="menuBarDndSource3" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;" dojoType="dojo.dnd.Source" dndType="menuBar"></div>
-  	             </td>
-  	           </tr>
-  	           <tr style="height: 43px;">
-  	             <td style="border: unset !important;padding: 0px 0px 5px 0px;">
-  	               <div id="menuBarDndSource4" jsId="menuBarDndSource4" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;" dojoType="dojo.dnd.Source" dndType="menuBar"></div>
-  	             </td>
-  	           </tr>
-  	           <tr style="height: 43px;">
-  	             <td  style="border: unset !important;padding: 0px 0px 5px 0px;">
-  	               <div id="menuBarDndSource5" jsId="menuBarDndSource5" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;" dojoType="dojo.dnd.Source" dndType="menuBar"></div>
-  	             </td>
-  	           </tr>
-	        </table>
-          </div>
+      <div id="anotherMenubarList" name="anotherMenubarList" region="center" style="display:none;width:90%;height: 43px;position: absolute;z-index: 9999999;top: 48px;left: 113px; ">
+        <table style="width:100%;heigth:100%">
+           <?php for($i=1; $i<=5; $i++){
+           $id = "menuBarDndSource$i";?>
+             <tr  style="height: 43px;<?php if($defaultMenu == 'menuBarCustom' and $idRow == $i)echo 'display:none;';?>">
+               <td style="border: unset !important;padding: 0px 0px 5px 0px;">
+                 <div id="<?php echo $id;?>" jsId="<?php echo $id;?>" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;">
+                    <?php //Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $i, true);?>
+                 </div>
+               </td>
+             </tr>
+           <?php }?>
+      </table>
+      </div>
       <?php }
 
       $hideMenuTopParam = Parameter::getGlobalParameter ( 'MenuBarTop' );
