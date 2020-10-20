@@ -549,14 +549,14 @@ function activityStreamDisplayNote ($note,$origin){
   $rightWidthScreen=RequestHandler::getNumeric('destinationWidth');
   $userId = $note->idUser;
   $userName = SqlList::getNameFromId ( 'User', $userId );
-  if ($inlineUserThumb) $userNameFormatted = '<span style="position:relative;margin-left:20px"><div style="position:absolute;top:-1px;left:-30px;width:25px">'.formatUserThumb($note->idUser, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
+  if ($inlineUserThumb) $userNameFormatted = '<span style="position:relative;margin-left:20px"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($note->idUser, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span ><strong>' . $userName . '</strong></span>';
   $idNote = '<span>#' . $note->id . '</span>';
   $objectClass=$note->refType;
   $objectId=$note->refId;
   if ($objectClass=='Ticket' and ! securityCheckDisplayMenu(null, $objectClass)) $objectClass='TicketSimple';
-  $ticketName = '<span class="streamLink" style="margin-left:18px;position:relative;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($note->refId).'\')">' 
-      .'<div style="width:16px;position:absolute">'. formatIcon($note->refType, 16) . '</div>' . i18n($note->refType) . ' #' . $note->refId ;
+  $ticketName = '<span class="streamLink" style="margin-left:22px;position:relative;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($note->refId).'\')">' 
+      .'<div style="width:16px;position:absolute;top:0px;">'. formatIcon($note->refType, 16) . '</div>' . i18n($note->refType) . ' #' . $note->refId ;
   $ticketName.='</span>';
   if ($origin=='activityStream') $ticketName.=' | '.SqlList::getNameFromId($note->refType, $note->refId);
   
@@ -786,7 +786,7 @@ function activityStreamDisplayHist ($hist,$origin){
   }else{
     return;
   }
-  $elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
+  $elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute;top:9px;">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
     $tmpName=SqlList::getNameFromId($objectClass, $objectId);
     if ($tmpName!=$objectId) $elementName.='&nbsp;|&nbsp;'.$tmpName;
@@ -918,7 +918,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
     $obj= new $objectClass($objectId);
     if($obj->idle==1 and !$activityStreamShowClosed)return;
   }
-  if($mail->idMailable!='')$elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
+  if($mail->idMailable!='')$elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute;top:9px">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
     $tmpName=SqlList::getNameFromId($objectClass, $objectId);
     if ($tmpName!=$objectId) $elementName.='&nbsp;|&nbsp;'.$tmpName;
