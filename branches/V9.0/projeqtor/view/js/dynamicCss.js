@@ -57,9 +57,10 @@ function setColorTheming(ref,bis) {
   mediumBis=HSLToHex(h,s,70);
   lightBis=HSLToHex(h,s,90);
   lighterBis=HSLToHex(h,s,95);
-  console.log("dark="+dark);
-  console.log("darkBis="+darkBis);
-
+  hueRotateSelected=h-hslDefault[0];
+  saturateSelected=Math.round(s/hslDefault[1]*100);
+  brightnessSelected=Math.round(l/hslDefault[2]*200);
+  
   var foreColor = '#000000';
   var invert=1;
   if (ref.length == 7) {
@@ -154,7 +155,10 @@ function setColorTheming(ref,bis) {
   element.style.setProperty("--image-hue-rotate", hueRotate+'deg');
   element.style.setProperty("--image-hue-rotate-reverse", (-1*hueRotate)+'deg');
   element.style.setProperty("--image-saturate", saturate+'%');
-  element.style.setProperty("--image-brightness", brightness+'%');;
+  element.style.setProperty("--image-brightness", brightness+'%');
+  element.style.setProperty("--image-hue-rotate-selected", hueRotateSelected+'deg');
+  element.style.setProperty("--image-saturate-selected", saturateSelected+'%');
+  element.style.setProperty("--image-brightness-selected", brightnessSelected+'%');;
   colorThemingInProgress=false;
 }
 
