@@ -52,8 +52,13 @@ $nbFavoriteRow=5;
 		                      <input type="hidden" id="objectId" name="objectId" value="" />
                               <?php echo i18n('comboNewButton');?>
                               </div>
+                              <div  id="dialogAddPopUpAcces" name="dialogAddPopUpAcces" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" leftLabel="" rightLabel=""
+                              style="width:10%">
+                                <script type="dojo/method" event="onStateChanged" >
+                                  console.log('oui');
+                                </script>
+                              </div>
                               <?php $arrayItems=array('Project','Resource','Activity','Ticket','Meeting','Milestone');
-                              $canPlan=securityGetAccessRightYesNo('menuPlanning','create');
                               foreach($arrayItems as $item) {
                                 $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
                                 if ($canCreate=='YES') {
@@ -63,7 +68,7 @@ $nbFavoriteRow=5;
                                 }
                                 if ($canCreate=='YES') {?>
                                 <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
-                                 onClick="addNewGuiItem('<?php echo $item;?>','<?php echo $canPlan;?>',null);" >
+                                 onClick="addNewGuiItem('<?php echo $item;?>',null);" >
                                   <table width:"100%"><tr style="height:22px" >
                                   <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIconNewGui($item, 22, null, false);?></td>    
                                   <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
