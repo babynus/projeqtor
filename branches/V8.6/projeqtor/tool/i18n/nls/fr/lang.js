@@ -4765,6 +4765,7 @@ tooltipStatusOutOfWorkflow: "Cet état ne fait plus partie du workflow associé 
 tooltipStatusSetLeaveChange: "L'état été modifié avec des changements sur les conditions de passage à soumis ou accepté ou validé<br/>Cette absence ne peut plus être modifiée tant que son état ne sera pas mis en cohérence avec les anciennes conditions.",
 tooltipUnderConstruction: "Quand un projet est en construction &#58<br/> - les tâches définies pour les ressources ne sont pas encore disponibles sur les imputations<br/> - les alertes ne sont pas générées<br/> - les emails ne sont pas envoyés",
 tooltipWarningValue: "Valeur tolérable de l'indicateur<br/>Un rappel sera envoyé en cas de dépassement",
+totalReal:"Réelle totale",
 totalSize: "Taille total",
 trace: "Trace",
 transition: "Transition",
