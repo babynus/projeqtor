@@ -155,7 +155,7 @@ var defaultMenu=null;
     },
     
     _setSize :function(){
-      var globalWidth=(this.isMenuOpen) ? dojo.byId('globalContainer').offsetWidth-250 : dojo.byId('globalContainer').offsetWidth;
+      var globalWidth=(this.isMenuOpen) ? dojo.byId('globalContainer').offsetWidth-280 : dojo.byId('globalContainer').offsetWidth;
       this._resizeDiv (globalWidth);
      },
     
@@ -170,33 +170,33 @@ var defaultMenu=null;
         }), dojox.fx.animateProperty({
           node : "leftMenu",
           properties : {
-            width : { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
+            width : { start:(this.isMenuOpen)? 0 : 280 ,end:(this.isMenuOpen)? 280 : 0}
           },
           duration : duration
         }), dojox.fx.animateProperty({
           node : "leftDiv",
           properties : {
-            width : { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
+            width : { start:(this.isMenuOpen)? 0 : 280 ,end:(this.isMenuOpen)? 280 : 0}
           },
           duration : duration
         }), dojox.fx.animateProperty({
           node : "globalTopCenterDiv",
           properties : {
             width : globalWidth,
-            left: { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
+            left: { start:(this.isMenuOpen)? 0 : 280 ,end:(this.isMenuOpen)? 280 : 0}
           },
           duration : duration
         }), dojox.fx.animateProperty({
           node : "centerDiv",
           properties : {
             width : globalWidth,
-            left: { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
+            left: { start:(this.isMenuOpen)? 0 : 280 ,end:(this.isMenuOpen)? 280 : 0}
           },
           duration : duration
         }),dojox.fx.animateProperty({
           node : "menuLeftBarContaineur",
           properties : {
-            width :{ start:(this.isMenuOpen)?  0 : 250,end:(this.isMenuOpen)? 250 :0 }
+            width :{ start:(this.isMenuOpen)?  0 : 280,end:(this.isMenuOpen)? 280 :0 }
           },
           duration : duration
         }), dojox.fx.animateProperty({
@@ -209,7 +209,7 @@ var defaultMenu=null;
           node : "statusBarDivBottom",
           properties : {
             width : globalWidth,
-            left: { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
+            left: { start:(this.isMenuOpen)? 0 : 280 ,end:(this.isMenuOpen)? 280 : 0}
           },
           duration : duration
       })]).play();
@@ -412,29 +412,34 @@ function showIconLeftMenu(){
   saveUserParameter('menuLeftDisplayMode',mode);
 }
 
-function showBottomContent (item){
-  saveDataToSession('bottomMenuDivItemElect',item,true);
-  var page='';
-  if(item!='Console'){
+function showBottomContent (menu){
+  saveDataToSession('bottomMenuDivItemElect',menu,true);
+  
+  if(menu!='Console'){
     dojo.byId('messageDiv').style.display='none';
     dojo.byId('loadDivBarBottom').style.display='block';
   }
-  switch(item){
+  
+  var items=dojo.byId('loadDivBarBottom');
+  var alldiv=items.querySelectorAll('.menuBottomDiv');
+  alldiv.forEach(function(el){
+    el.style.display='none';
+  });
+  switch(menu){
     case 'Link':
-      page= "../view/shortcut.php";
+      dojo.byId('projectLinkDiv').style.display='block';
       break;
     case 'Document':
-      page='../tool/jsonDirectory.php';
+      dojo.byId('documentsDiv').style.display='block';
       break;
     case 'Notification':
-      page='../tool/jsonNotification.php';
+      dojo.byId('notificationBottom').style.display='block';
       break;
     case 'Console':
-      dojo.byId('loadDivBarBottom').style.display='none';
+      items.style.display='none';
       dojo.byId('messageDiv').style.display='block';
       break;
   }
-  if(page!='')loadDiv(page, 'loadDivBarBottom');
 }
 
 function loadMenuReportDirect(cate,idReport){

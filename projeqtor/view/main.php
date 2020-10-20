@@ -996,9 +996,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     </div>
     
     <!--the left div must be created after the central div for the dynamism of the left menu on the new interface -->
- <?php if(isNewGui()){?> </div></div></div><?php }?>
-     <?php if(isNewGui()){?><div id="leftMenu" class="menu-left"> <?php }?>
-    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left"  splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:'250px');?><?php echo (isNewGui())?';dispaly:none;':'';?>" >
+ <?php if(isNewGui()){?> </div></div></div>
+    <div id="leftMenu" class="menu-left"> <?php }?>
+    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left"  splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:'280px');?><?php echo (isNewGui())?';dispaly:none;':'';?>" >
       <?php if(!isNewGui()){?>
       <script type="dojo/connect" event="resize" args="evt">
          if (hideShowMenuInProgress) return;
