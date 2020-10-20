@@ -39,20 +39,20 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
     </div>
     <div id="menuPersonalAcces"  onresize="showBottomLeftMenu();"  dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;overflow: hidden;" >
       <div id="iconsBottomSize" onresize="">
-        <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb" onclick="showBottomContent('Parameter')"></div>
-        <div id="buttonLink" class="iconHome iconSize22 iconBreadSrumb" onclick="showBottomContent('Link')"></div>
+        <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb" onclick="showBottomContent('Parameter')"  title="<?php echo i18n('menuParameter');?>"></div>
+        <div id="buttonLink" class="iconHome iconSize22 iconBreadSrumb" onclick="showBottomContent('Link')" title="<?php echo i18n('ExternalShortcuts');?>"></div>
         <?php if (securityCheckDisplayMenu(null,'Document')) {?>
         <div title="<?php echo i18n('document');?>" id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb" onclick="showBottomContent('Document')"></div>
         <?php }?>
-        <div id="buttonConsole" class="iconHome iconSize22 iconBreadSrumb" onclick="showBottomContent('Console')"></div>
+        <div id="buttonConsole" class="iconHome iconSize22 iconBreadSrumb" onclick="showBottomContent('Console')"  title="<?php echo i18n('Console');?>"></div>
         <?php if(securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv()){?>
-        <div id="buttonNotification" class="iconNotification  iconSize22 iconBreadSrumb" onclick="showBottomContent('Notification')"></div>
+        <div id="buttonNotification" class="iconNotification  iconSize22 iconBreadSrumb" onclick="showBottomContent('Notification')"  title="<?php echo i18n('accordionNotification');?>"></div>
         <?php }?>
       </div>
     </div>
   </div>
   <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  >
-    <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;overflow: hidden;" oncontextmenu="event.preventDefault();showIconLeftMenu('Icon')" >
+    <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;overflow-x: hidden;" oncontextmenu="event.preventDefault();showIconLeftMenu('Icon')" >
       <nav id="ml-menu" class="menu">
       <input id="displayModeLeftMenu" value="<?php echo $displayMode;?>" style="visibility:hidden"; >
             <?php // draw Menus
@@ -77,15 +77,35 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
     </div>
     <?php $viewSelect=Parameter::getUserParameter('bottomMenuDivItemElect');?>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;">
-         <div id="loadDivBarBottom" style="height:35%;display:<?php echo ($viewSelect=='Console')?'none':'block';?>;">
+         <div id="loadDivBarBottom" style="height:100%;display:<?php echo ($viewSelect=='Console')?'none':'block';?>;">
            <?php
            $viewSelect='Notification';
-           if($viewSelect=='Link'){
-            include "../view/shortcut.php";
-           }else if($viewSelect=='Document'){
-            include "../tool/jsonDirectory.php";
-           }else if($viewSelect=='Notification' and securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv()){
            ?>
+           <div id="projectLinkDiv" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Link')?'block':'none';?>;">
+              <?php include "../view/shortcut.php"?>
+           </div>
+           <div id="documentsDiv"  class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Document')?'block':'none';?>;">
+             <div dojoType="dojo.data.ItemFileReadStore" id="directoryStore" jsId="directoryStore" url="../tool/jsonDirectory.php"></div>
+              <div style="position: absolute; float:right; right: 5px; cursor:pointer;"
+                title="<?php echo i18n("menuDocumentDirectory");?>"
+                onclick="if (checkFormChangeInProgress()){return false;};loadContent('objectMain.php?objectClass=DocumentDirectory','centerDiv');"
+                class="iconDocumentDirectory22">
+              </div>
+              <div dojoType="dijit.tree.ForestStoreModel" id="directoryModel" jsId="directoryModel" store="directoryStore"
+               query="{id:'*'}" rootId="directoryRoot" rootLabel="Documents"
+               childrenAttrs="children">
+              </div>             
+              <div dojoType="dijit.Tree" id="documentDirectoryTree" model="directoryModel" openOnClick="false" showRoot='false'>
+                <script type="dojo/method" event="onClick" args="item">;
+                  if (checkFormChangeInProgress()){return false;}
+                  loadContent("objectMain.php?objectClass=Document&Directory="+directoryStore.getValue(item, "id"),"centerDiv");
+                </script>
+              </div>
+           </div>
+           <?php 
+           if( securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv()){
+           ?>
+           <div id="notificationBottom" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Notification')?"block":"none";?>;" >
                 <div dojoType="dojo.data.ItemFileReadStore" 
                      id="notificationStore" 
                     jsId="notificationStore" url="../tool/jsonNotification.php">
@@ -135,7 +155,6 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
                             var isTotal = notificationStore.getValue(item,"isTotal");
                             if (isTotal==="YES") {
                                 var totalCount = notificationStore.getValue(item,"count");
-                                totalUnreadNotificationsCount = totalCount;
 
                                 if (totalCount==0) {
                                     document.getElementById("notificationTree").style.visibility = "hidden";
@@ -156,11 +175,12 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
                         }
                     </script>
                 </div>
+              </div>
            <?php 
            }           
            ?>
            </div>
-           <div id="messageDiv" class="messageDivNewGui" style="height:35%;display:<?php echo ($viewSelect=='Console')?'block':'none';?>;"></div>
+           <div id="messageDiv" class="messageDivNewGui" style="height:90%;display:<?php echo ($viewSelect=='Console')?'block':'none';?>;"></div>
     </div>
   </div>
 </div>
@@ -182,6 +202,7 @@ function sortMenus(&$listMenus, &$result, $parent,$level ){
   }
 }
 function getRepportMenu(){
+  // ===============list of all reportCategories by user profil;
   $level=2;
   $hr=new HabilitationReport();
   $user=getSessionUser();
@@ -208,18 +229,34 @@ function getRepportMenu(){
       $res[$key]=array('level'=>$level,'objectType'=>'report','object'=>$obj);
     }
   }
+  //===================
+  //=================== lis of all report dependant of this categoryies
   $levelParent=$level;
   $level++;
   $reportDirect= new Report();
   $where=" idReportCategory in (".implode(",", $lstIdCate).")";
   $reportList= $reportDirect->getSqlElementsFromCriteria(null,false,$where,"sortOrder");
-  foreach ($reportList as $id=>$val){
+  $lastVal=array();
+  $listSubCat=array();
+  foreach ($reportList as $idV=>$value){
+    if((!empty($lastVal)) and $value->file==$lastVal['file']){
+       if(isset($reportList[$lastVal['id']])){
+          if(!isset($listSubCat[$lastVal['id']]))$listSubCat[$lastVal['id']]=$reportList[$lastVal['id']];
+          unset($reportList[$lastVal['id']]);
+       }
+       unset($reportList[$idV]);
+       $listSubCat[$idV]=$value;
+    }
+    $lastVal=array('id'=>$idV,'file'=>$value->file);
+  }
+  $reportListSimplify=$reportList;
+  foreach ($reportListSimplify as $id=>$val){
     $parentId=$idMenuReport->id.$levelParent.$val->idReportCategory;
     $keyTab=$level.'-'.$parentId.'-'.$val->sortOrder;
-    $obj=array('id'=>$val->id,'name'=>$val->name,'idParent'=>$parentId,'idMenu'=>$val->idReportCategory);
+    $obj=array('id'=>$val->id,'name'=>$val->name,'idParent'=>$parentId,'idMenu'=>$val->idReportCategory,'file');
     $res[$keyTab]=array('level'=>$level,'objectType'=>'reportDirect','object'=>$obj);
   }
-  
+  //======================
   return $res;
  
 }
@@ -304,7 +341,7 @@ function drawLeftMenuListNewGui($displayMode){
         
         $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
-        $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div><div id="currentDiv'.$obj->name.'" class="div__link"></div></li>';
+        $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }else{
       $classEl="Report";
       $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.")";
@@ -313,7 +350,7 @@ function drawLeftMenuListNewGui($displayMode){
       $styleDiv="display:none;";
       $class="menu__add__Fav";
       $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
-      $result.='<div id="div'.$obj->id.'report" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div><div id="currentDiv'.$obj->name.'" class="div__link"></div></li>';
+      $result.='<div id="div'.$obj->id.'report" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }
   }else{
       $sub='submenu-'.$obj->id;

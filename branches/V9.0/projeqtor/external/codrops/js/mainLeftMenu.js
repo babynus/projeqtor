@@ -191,11 +191,8 @@
             // add class current
             var currentlink = self.el.querySelector('.menu__link--current');
             if( currentlink ) {
-              var currentDiv=self.el.querySelector('.div__link--current')
               classie.remove(currentlink , 'menu__link--current');
-              classie.remove(currentDiv,'div__link--current');
             }
-            dojo.byId('currentDiv'+ev.target.id).classList.add('div__link--current');
             classie.add(ev.target, 'menu__link--current');
             // callback
             self.options.onItemClick(ev, itemName);
@@ -342,7 +339,7 @@
       return false;
     }
     //florent
-    //var iconClass= 'Home';
+    console.log((idx)?this.menusArr[idx].id :'ici');
     var iconClass=  (idx )? ''+this.menusArr[idx].id : 'Home';
     iconClass= (idx)? iconClass.substr(3) : iconClass;
     
@@ -351,16 +348,16 @@
     divBcl.className='icon'+iconClass+' iconSize22 iconBreadSrumb';
     var name= idx ? this.menusArr[idx].name : this.options.initialBreadcrumb;
     divBcl.setAttribute('id', 'button'+name);
+    if(idx && name.indexOf('</div>')){
+      var endDiv=name.indexOf('</div>');
+      name=name.substr(endDiv+6);
+    }
+    divBcl.setAttribute('title', name);
     breadScrumLeft.appendChild(divBcl);
     
     
     var bc = document.createElement('a');
     bc.href = '#'; // make it focusable
-    if(idx && name.indexOf('</div>')){
-      var endDiv=name.indexOf('</div>');
-      name=name.substr(endDiv);
-    }
-    
     bc.innerHTML = name;
     
     this.breadcrumbsCtrl.appendChild(bc);
