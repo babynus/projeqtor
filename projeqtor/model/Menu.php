@@ -87,7 +87,7 @@ class Menu extends SqlElement {
     }
   }
   
-  public static function drawNewGuiMenu($menu, $defaultMenu, $customMenuArray) {
+  public static function drawNewGuiMenu($menu, $defaultMenu, $customMenuArray, $hiddenBar) {
   	$drawMode=Parameter::getUserParameter('menuBarTopMode');
   	if(!$drawMode)$drawMode='TXT';
   	$menuName=$menu->name;
@@ -103,10 +103,12 @@ class Menu extends SqlElement {
   		echo '<td id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem" dndType="menuBar" style="border:unset !important;">';
   		echo '<div dndType="menuBar" class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
   		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
-  		echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
+  		echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);showFavoriteTooltip(\''.$class.'\');"';
   		if ($menuName=='menuReports' and isHtml5() ) {
-  			echo ' onMouseEnter="showReportFavoriteTooltip();"';
-  			echo ' onMouseLeave="hideReportFavoriteTooltip(2000);"';
+  			echo ' onMouseEnter="showReportFavoriteTooltip();hideFavoriteTooltip(0,\''.$class.'\');"';
+  			echo ' onMouseLeave="hideReportFavoriteTooltip(0);hideFavoriteTooltip(0,\''.$class.'\');"';
+  		}else{
+  		    echo ' onMouseLeave="hideFavoriteTooltip(0,\''.$class.'\');"';
   		}
   		echo '>';
   		if($drawMode=='ICON'){
@@ -120,22 +122,36 @@ class Menu extends SqlElement {
   		  echo '</tr></table>';
   		}
         if ($menuName=='menuReports' and isHtml5() ) {
-          echo '<button class="comboButtonInvisible" dojoType="dijit.form.DropDownButton" 
-           id="listFavoriteReports" name="listFavoriteReports" style="position:relative;top:-10px;left:-10px;height: 0px; overflow: hidden; ">
+          echo '<div class="comboButtonInvisible" dojoType="dijit.form.DropDownButton" 
+           id="listFavoriteReports" name="listFavoriteReports" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
             <div dojoType="dijit.TooltipDialog" id="favoriteReports" style="position:absolute;"
               href="../tool/refreshFavoriteReportList.php"
               onMouseEnter="clearTimeout(closeFavoriteReportsTimeout);"
               onMouseLeave="hideReportFavoriteTooltip(200)"
               onDownloadEnd="checkEmptyReportFavoriteTooltip()">';
               Favorite::drawReportList();
-            echo '</div></button>';
+            echo '</div></div>';
         }
+        
+        echo '<div class="comboButtonInvisible" dojoType="dijit.form.DropDownButton"
+           id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
+            <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
+        	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
+  			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
+  	    if (!in_array($menu->name,$customMenuArray)){
+        	echo 'onClick="customMenuAddItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
+        }else{
+        	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
+        }
+        echo '</div></div>';
+        
         echo '</div>';
         echo '</td>'; 
         } else if ($menu->type=='plugin') {
           echo '<td id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem" dndType="menuBar" style="border:unset !important;">';
           echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'"';
-          echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
+          echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);showFavoriteTooltip(\''.$class.'\');"';
+          echo ' onMouseLeave="hideFavoriteTooltip(0,\''.$class.'\');"';
           echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
           if($drawMode=='ICON'){
             echo '<img src="../view/css/images/icon'.$class.'22.png" />';
@@ -147,13 +163,27 @@ class Menu extends SqlElement {
             echo '<td style="padding-left:5px;">'.i18n($menu->name).'</td>';
             echo '</tr></table>';
           }
+          
+          echo '<div class="comboButtonInvisible" dojoType="dijit.form.DropDownButton"
+           id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
+            <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
+        	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
+  			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
+          if (!in_array($menu->name,$customMenuArray)){
+          	echo 'onClick="customMenuAddItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
+          }else{
+          	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
+          }
+          echo '</div></div>';
+          
           echo '</div>';
           echo '</td>';
         } else if ($menu->type=='object') { 
           if (securityCheckDisplayMenu($idMenu, $class)) {
           	echo '<td id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n('menu'.$class) . '" class="dojoDndItem" dndType="menuBar" style="border:unset !important;">';
           	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
-          	echo 'oncontextmenu="event.preventDefault();customNewGuiMenuManagement(\''.$class.'\');" ';
+          	echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);showFavoriteTooltip(\''.$class.'\');"';
+          	echo ' onMouseLeave="hideFavoriteTooltip(0,\''.$class.'\');"';
           	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
           	if($drawMode=='ICON'){
           		echo '<div class="icon'.$class.'22 icon'.$class.' iconSize22 imageColorNewGui" style="width:22px;height:22px"></div>';
@@ -165,21 +195,34 @@ class Menu extends SqlElement {
         	    echo '<td style="padding-left:5px;">'.i18n($menu->name).'</td>';
         		echo '</tr></table>';
           	}
+          	
+          	echo '<div class="comboButtonInvisible" dojoType="dijit.form.DropDownButton"
+            id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
+            <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
+        	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
+  			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
+            if (!in_array($menu->name,$customMenuArray)){
+        	   echo 'onClick="customMenuAddItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
+            }else{
+          	   echo 'onClick="customMenuRemoveItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
+            }
+          	echo '</div></div>';
+          	
           	echo '</div>';
           	echo '</td>';
           }
         }
       }  
       
-      public static function drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idFavoriteRow) {
+      public static function drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idFavoriteRow, $hiddenBar) {
         $isNotificationSystemActiv = isNotificationSystemActiv();
         $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
         $customMenu = new MenuCustom();
-        $customMenuArray=$customMenu->getSqlElementsFromCriteria(array('idUser'=>getSessionUser()->id, 'idRow'=>$idFavoriteRow), false, null, 'sortOrder');
         $obj=new Menu();
         $where=null;
         if(!$nbSkipMenu)$nbSkipMenu = 0;
         if($defaultMenu == 'menuBarCustom'){
+          $customMenuArray=$customMenu->getSqlElementsFromCriteria(array('idUser'=>getSessionUser()->id, 'idRow'=>$idFavoriteRow), false, null, 'sortOrder');
           // $where = "idUser=".getSessionUser()->id." and idRow != ".$idFavoriteRow;
           // $otherCustomArray = $customMenu->getSqlElementsFromCriteria(null, false, $where);
           $customArray= array();
@@ -199,6 +242,12 @@ class Menu extends SqlElement {
           $menuList=$menuListOrder;
           $customMenuArray=$customArray;
         }else if ($defaultMenu == 'menuBarRecent'){
+          $customMenuArray=$customMenu->getSqlElementsFromCriteria(array('idUser'=>getSessionUser()->id), false, null, 'sortOrder');
+          $customArray= array();
+          foreach ($customMenuArray as $custom){
+          	array_push($customArray, $custom->name);
+          }
+          $customMenuArray=$customArray;
           $historyTable = explode(',', $historyTable);
           $reverseArray = array_reverse($historyTable);
           $where = ($reverseArray)?"name in ('".implode("','", $reverseArray)."')":"";
@@ -235,7 +284,7 @@ class Menu extends SqlElement {
           if (! $isNotificationSystemActiv and strpos($menu->name, "Notification")!==false) { continue; }
           if (! $menu->canDisplay() ) { continue;}
           if (securityCheckDisplayMenu($menu->id,substr($menu->name,4)) ) {
-        		Menu::drawNewGuiMenu($menu, $defaultMenu, $customMenuArray);
+        		Menu::drawNewGuiMenu($menu, $defaultMenu, $customMenuArray, $hiddenBar);
         		$lastType=$menu->type;
         	}
         }

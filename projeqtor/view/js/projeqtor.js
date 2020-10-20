@@ -4649,7 +4649,7 @@ function addNewItem(item) {
     }else{
       loadContent("objectDetail.php", "detailDiv", 'listForm');
     }
-  dijit.byId('planningNewItem').closeDropDown();
+    if(dijit.byId('planningNewItem'))dijit.byId('planningNewItem').closeDropDown();
 }
 
 function startStopWork(action, type, id, start) {

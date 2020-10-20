@@ -259,7 +259,7 @@ function menuNewGuiFilter(filter, item) {
 			dojo.removeClass('recentButton','imageColorNewGuiSelected');
 		}
 	};
-	loadDiv('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarDndSource', null, callback);
+	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, null, null, null,callback);
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
 }
@@ -354,6 +354,32 @@ function moveMenuBarItem(source, target){
       load : function(data, args) {
       },
     });
+}
+
+function showFavoriteTooltip(menuClass) {
+	  clearTimeout(closeFavoriteTimeout);
+	  clearTimeout(openFavoriteTimeout);
+	  openFavoriteTimeout=setTimeout("dijit.byId('addFavorite"+menuClass+"').openDropDown();",popupOpenDelay);
+	  customMenuAddRemoveClass=menuClass;
+}
+
+function hideFavoriteTooltip(delay, menuClass) {
+  if (!dijit.byId("addFavorite"+menuClass)) return;
+  clearTimeout(closeFavoriteTimeout);
+  clearTimeout(openFavoriteTimeout);
+  closeFavoriteTimeout=setTimeout("dijit.byId('addFavorite"+menuClass+"').closeDropDown();",delay);
+  customMenuAddRemoveClass=menuClass;
+}
+
+function addNewGuiItem(item, canPlan, param){
+	var callback = function(){
+		addNewItem(item);
+	};
+	if(canPlan && item != 'Resource'){
+		loadContent("planningMain.php", "centerDiv", null,null,null,null,callback);
+	}else{
+		loadMenuBarItem(item, item, 'bar');
+	}
 }
 
 function showIconLeftMenu(){
