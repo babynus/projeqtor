@@ -569,8 +569,8 @@ td {
   /* border: 1px solid yellow; padding: 0px !important; margin: 0px !important;/* for debug purpose */
 }
 
-a {
- text-decoration: none;
+a, a:visited {
+ text-decoration: none !important;
 }
 
 
