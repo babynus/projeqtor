@@ -98,7 +98,11 @@ class Favorite extends SqlElement {
       echo '<td class="dojoDndHandle handleCursor" style="vertical-align:top;"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;</td>';
       echo '<td style="width:20px;vertical-align:top;">';
       echo '<a '; echo 'onClick="removeFavoriteReport(' . htmlEncode($favorite->id). ');" />';
-      echo formatSmallButton('Remove');
+      if(isNewGui()){
+        echo formatNewGuiButton('Remove', 16, true);
+      }else{
+        echo formatSmallButton('Remove');
+      }
       echo '</a>';
       echo '<input type="hidden" name="favoriteReport' . htmlEncode($favorite->id). '" id="favoriteReport' . htmlEncode($favorite->id). '" value="0" />';
       echo '</td>';
