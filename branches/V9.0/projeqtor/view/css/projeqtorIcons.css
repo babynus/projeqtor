@@ -1631,12 +1631,12 @@
 .ProjeQtOrFlatRed .iconRefresh { background-image: url(customIcons/red/iconRefresh.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconRefresh { background-image: url(customIcons/new/iconRefresh.svg);  background-repeat: no-repeat; }
 
-.iconReport { background-image: url(images/iconReport32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconReport { background-image: url(customIcons/blue/iconReport.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconReport { background-image: url(customIcons/green/iconReport.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconReport { background-image: url(customIcons/grey/iconReport.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconReport { background-image: url(customIcons/red/iconReport.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconReport { background-image: url(customIcons/new/iconReport.svg);  background-repeat: no-repeat; }
+.iconReports { background-image: url(images/iconReport32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconReports { background-image: url(customIcons/blue/iconReport.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconReports { background-image: url(customIcons/green/iconReport.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconReports { background-image: url(customIcons/grey/iconReport.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconReports { background-image: url(customIcons/red/iconReport.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconReports { background-image: url(customIcons/new/iconReport.svg);  background-repeat: no-repeat; }
 
 .iconReportsFavorite { background-image: url(images/iconReportsFavorite.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconReportsFavorite { background-image: url(customIcons/blue/iconReportsFavorite.png);  background-repeat: no-repeat; }
