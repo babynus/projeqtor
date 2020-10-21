@@ -391,7 +391,7 @@ animation: fadeIn ease 0.5s;
   opacity: 1;
 }
 .ProjeQtOrNewGui .menu__link .iconSize16 {
-	top:2px;
+	top: 3px;
 }
 .ProjeQtOrNewGui #toolBarDiv .dijitDisabled {
   background-color: transparent;
