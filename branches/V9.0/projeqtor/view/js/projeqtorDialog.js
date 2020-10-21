@@ -7410,11 +7410,25 @@ function quickSearchClose() {
   refreshJsonList(objClass);
 }
 
+function quickSearchCloseQuick() {
+  dijit.byId("quickSearchValueQuick").reset();
+  var objClass=(dojo.byId('objectClassList'))?dojo.byId('objectClassList').value:dojo.byId('objectClass').value;
+  refreshJsonList(objClass);
+}
 function quickSearchExecute() {
   if (!quickSearchIsOpen) {
     return;
   }
   if (!dijit.byId("quickSearchValue").get("value")) {
+    showInfo(i18n('messageMandatory', new Array(i18n('quickSearch'))));
+    return;
+  }
+  var objClass=(dojo.byId('objectClassList'))?dojo.byId('objectClassList').value:dojo.byId('objectClass').value;
+  refreshJsonList(objClass);
+}
+
+function quickSearchExecuteQuick() {
+  if (!dijit.byId("quickSearchValueQuick").get("value")) {
     showInfo(i18n('messageMandatory', new Array(i18n('quickSearch'))));
     return;
   }
