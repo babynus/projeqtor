@@ -372,7 +372,7 @@ class CommandMain extends SqlElement {
     	$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
     	$cmdAmount = ($paramAmount == 'HT')?'totalUntaxedAmount':'totalFullAmount';
     	$project->ProjectPlanningElement->commandSum = $this->sumSqlElementsFromCriteria($cmdAmount, null, $where);
-    	$project->ProjectPlanningElement->updateCA();
+    	$project->ProjectPlanningElement->updateCA(true);
     }
     return $resultClass;
   }
@@ -382,6 +382,10 @@ class CommandMain extends SqlElement {
   	if ($idP) {
   	  $prj=new Project($idP);
   	  $prj->updateValidatedWork();
+  	}
+  	if(Module::isModuleActive('moduleGestionCA')){
+  	  $project = new Project($this->idProject);
+  	  $project->ProjectPlanningElement->updateCA(true);
   	}
   	return $result;
   }
