@@ -48,7 +48,7 @@ $etp= round($res->capacity,2);
 
 $sumVal=0;
 $plannedWorkM= new PlannedWorkManual();
-$where=array("workDate"=>$workDay);
+$where=array("workDate"=>$workDay, 'idResource'=>$userId);
 $asWork=$plannedWorkM->getSqlElementsFromCriteria($where);
 if(!empty($asWork)){
   foreach ($asWork as $id=>$work){
