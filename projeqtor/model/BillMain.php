@@ -319,6 +319,10 @@ class BillMain extends SqlElement {
       $work->idBill=null;
       $work->simpleSave();
     }
+    if(Module::isModuleActive('moduleGestionCA')){
+      $project = new Project($this->idProject);
+      $project->ProjectPlanningElement->updateCA(true);
+    }
 	  return $result;
   }
     
@@ -426,7 +430,7 @@ class BillMain extends SqlElement {
 		$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
 		$billAmount = ($paramAmount == 'HT')?'untaxedAmount':'fullAmount';
 		$project->ProjectPlanningElement->billSum = $this->sumSqlElementsFromCriteria($billAmount, null, $where);
-		$project->ProjectPlanningElement->updateCA();
+		$project->ProjectPlanningElement->updateCA(true);
 	}
 	return $result;
 	}  
