@@ -258,6 +258,12 @@ function refreshJsonList(className, keepUrl) {
             + encodeURIComponent(dijit.byId('quickSearchValue').get("value"));
       }
     }
+    if (dijit.byId('quickSearchValueQuick')) {
+      if (dijit.byId('quickSearchValueQuick').get("value") != '') {
+        url = url + "&quickSearchQuick="
+            + encodeURIComponent(dijit.byId('quickSearchValueQuick').get("value"));
+      }
+    }
     // store.fetch();
     if (!keepUrl) {
       grid.setStore(new dojo.data.ItemFileReadStore({
@@ -459,6 +465,83 @@ function resetFilter(lstStat){
  
 }
 
+function resetFilterQuick(lstStat){
+  var grid = dijit.byId("objectGrid");
+  var notDef;
+  var i=0;
+  for(i=1;i<=lstStat;i++){
+    if(dijit.byId('showStatus'+i)){
+      dijit.byId('showStatus'+i).set('checked',false);
+    }
+  }
+  if (dijit.byId("listFilterFilter").iconClass == "iconActiveFilter"){
+    selectStoredFilter('0','directFilterList',notDef,notDef);
+   }    
+     if(grid){
+     if(dijit.byId('listTypeFilter')){
+       dijit.byId('listTypeFilter').set('value','');
+     }
+     if(dijit.byId('listClientFilter')){
+       dijit.byId('listClientFilter').set('value','');
+     }
+     if(dijit.byId('listItemSelector')){
+       dijit.byId('listItemSelector').set('value','');
+     }
+     if(dijit.byId('showAllProjects')){
+       dijit.byId('showAllProjects').set('value','');
+     }
+     if(dijit.byId('ListPredefinedActions')){
+       dijit.byId('ListPredefinedActions').set('value','');
+     }
+     if(dijit.byId('ListBudgetParentFilter')){
+       dijit.byId('ListBudgetParentFilter').set('value','');
+     }
+     if(dijit.byId('ListBudgetParentFilter')){
+       dijit.byId('ListBudgetParentFilter').set('value','');
+     }
+     if(dijit.byId('ListShowIdle')){
+       dijit.byId('ListShowIdle').set('value','');
+     }
+     if(dijit.byId('hideInService')){
+       dijit.byId('hideInService').set('value','');
+     }
+     if(dijit.byId('listIdFilter') || dijit.byId('listNameFilter') || dijit.byId('listNameFilter') && dijit.byId('listIdFilter') ) {
+       dijit.byId('listIdFilter').set('value','');
+       dijit.byId('listNameFilter').set('value','');
+       filter={};
+       grid.query=filter;
+       grid._refresh();
+     }
+   }
+     
+     if(dijit.byId('listIdFilterQuick')){
+       dijit.byId('listIdFilterQuick').set('value','');
+       if(dijit.byId('listIdFilterQuickSw').get('value')=='off'){
+         dojo.byId('filterDivsSpan').style.display="none";
+         dijit.byId('listIdFilter').domNode.style.display = 'none';
+       }
+     }
+     if(dijit.byId('listNameFilterQuick')){
+       dijit.byId('listNameFilterQuick').set('value','');
+     }
+     if(dijit.byId('listTypeFilterQuick')){
+       dijit.byId('listTypeFilterQuick').set('value','');
+     }
+     if(dijit.byId('listClientFilterQuick')){
+       dijit.byId('listClientFilterQuick').set('value','');
+     }
+     if(dijit.byId('listBudgetParentFilterQuick')){
+       dijit.byId('listBudgetParentFilterQuick').set('value','');
+     }
+     if(dijit.byId('quickSearchValueQuick')){
+       dijit.byId('quickSearchValueQuick').set('value','');
+     }
+     
+     
+}
+
+
+
 function filterJsonList(myObjectClass) {
   var filterId = dojo.byId('listIdFilter');
   var filterName = dojo.byId('listNameFilter');
@@ -513,9 +596,15 @@ function refreshGridCount(repeat) {
     // dojo.byId('gridRowCount').innerHTML="?";
     setTimeout("refreshGridCount(1);", 100);
   } else {
-    dojo.byId('gridRowCount').innerHTML = grid.rowCount;
-    dojo.byId('gridRowCountShadow1').innerHTML = grid.rowCount;
-    dojo.byId('gridRowCountShadow2').innerHTML = grid.rowCount;
+    if(dojo.byId('gridRowCount')){
+      dojo.byId('gridRowCount').innerHTML = grid.rowCount;
+    }
+    if(dojo.byId('gridRowCountShadow1')){
+      dojo.byId('gridRowCountShadow1').innerHTML = grid.rowCount;
+    }
+    if(dojo.byId('gridRowCountShadow2')){
+      dojo.byId('gridRowCountShadow2').innerHTML = grid.rowCount;
+    }
   }
 }
 
