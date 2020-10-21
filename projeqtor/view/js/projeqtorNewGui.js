@@ -333,13 +333,9 @@ function addRemoveFavMenuLeft (id,name,mode){
 
 function checkClassForDisplay(id,mode){
   if(mode=='leave'){
-    if(dojo.byId(id).className=="menu__add__Fav"){
         dojo.setAttr(id,'style','display:none;');
-    }
   }else{
-    if(dojo.byId(id).className=="menu__add__Fav"){
       dojo.setAttr(id,'style','display:display;');
-    }
   }
 }
 
@@ -465,9 +461,11 @@ function showBottomContent (menu){
       break;
     case 'Document':
       dojo.byId('documentsDiv').style.display='block';
+      dijit.byId('documentsDiv').resize();
       break;
     case 'Notification':
       dojo.byId('notificationBottom').style.display='block';
+      dijit.byId('notificationBottom').resize();
       break;
     case 'Console':
       items.style.display='none';

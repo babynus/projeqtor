@@ -85,7 +85,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
               <?php include "../view/shortcut.php"?>
            </div>
            <div id="documentsDiv"  class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Document')?'block':'none';?>;">
-             <div dojoType="dojo.data.ItemFileReadStore" id="directoryStore" jsId="directoryStore" url="../tool/jsonDirectory.php"></div>
+              <div dojoType="dojo.data.ItemFileReadStore" id="directoryStore" jsId="directoryStore" url="../tool/jsonDirectory.php"></div>
               <div style="position: absolute; float:right; right: 5px; cursor:pointer;"
                 title="<?php echo i18n("menuDocumentDirectory");?>"
                 onclick="if (checkFormChangeInProgress()){return false;};loadContent('objectMain.php?objectClass=DocumentDirectory','centerDiv');"
@@ -113,12 +113,12 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
                 <div style="position: absolute; float:right; right: 5px; cursor:pointer;"
                      title="<?php echo i18n("notificationAccess");?>"
                      onclick="if (checkFormChangeInProgress()){return false;};loadContent('objectMain.php?objectClass=Notification','centerDiv');"
-                     class="iconHome iconSize22">
+                     class=" iconNotification iconSize22">
                 </div>
                 <div style="position: absolute; float:right; right: 45px; cursor:pointer;"
                      title="<?php echo i18n("notificationRefresh");?>"
                      onclick="if (checkFormChangeInProgress()){return false;};refreshNotificationTree(true);"
-                     class="iconHome iconSize22">
+                     class="iconRefresh iconSize22">
                 </div>
                 <div dojoType="dijit.tree.ForestStoreModel" id="notificationModel" jsId="notificationModel" store="notificationStore"
                      query="{id:'*'}" rootId="notificationRoot" rootLabel="Notifications"
@@ -201,7 +201,7 @@ function sortMenus(&$listMenus, &$result, $parent,$level ){
     }
   }
 }
-function getRepportMenu(){
+function getReportMenu(){
   // ===============list of all reportCategories by user profil;
   $level=2;
   $hr=new HabilitationReport();
@@ -211,7 +211,7 @@ function getRepportMenu(){
   $lst=$hr->getSqlElementsFromCriteria(array('idProfile'=>$user->idProfile, 'allowAccess'=>'1'), false);
   $res=array();
   $listCateg=SqlList::getList('ReportCategory');
-  $idMenuReport=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navRepports','idParent'=>null,'idMenu'=>null));
+  $idMenuReport=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navReports','idParent'=>null,'idMenu'=>null));
   foreach ($lst as $h) {
     $report=$h->idReport;
     $nameReport=SqlList::getNameFromId('Report', $report, false);
@@ -267,7 +267,7 @@ function getNavigationMenuLeft (){
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
   $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc');
   sortMenus($contexctMenuMain,$result,0,$level);
-  $result=array_merge ($result,getRepportMenu());
+  $result=array_merge ($result,getReportMenu());
   ksort($result);
   foreach ($result as $id=>$context){
     if($context['objectType']=='menu'){
@@ -335,15 +335,15 @@ function drawLeftMenuListNewGui($displayMode){
         }else{
           $mode='remove';
           $class="menu__as__Fav";
-          $styleDiv="display:block;";
         }
+        $styleDiv="display:none;";
         $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."');";
         
         $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
         $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }else{
-      $classEl="Report";
+      $classEl="Reports";
       $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.")";
       $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'report\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'report\',\'leave\');">';
       $funcuntionFav="";

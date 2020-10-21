@@ -27,6 +27,7 @@
 /* NEW GUI      */
 /* ============ */
 
+
 :root {
 	--color-button-background: #f0f0f0;
 	--color-section-title-text: #656565;
@@ -172,7 +173,7 @@ label, .ProjeQtOrNewGui label,
 }
 
 .ProjeQtOrNewGui #menuBarAccesLeft{
-	background: var(--color-darker) !important;
+	background: var(--color-dark) !important;
 }
 .ProjeQtOrNewGui #menuBarAccesBottom{
 	border-top:1px solid var(--color-toolbar);
@@ -302,7 +303,7 @@ html, body, #mainDiv,
 }
 
 .ProjeQtOrNewGui #messageDiv{
-	background-color:var(--color-darker);
+	background-color:var(--color-dark);
 	color:white;
 	font-size:10px;
 	opacity: 1;
@@ -385,7 +386,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui #toolBarDiv .dijitIcon, .ProjeQtOrNewGui #toolBarDiv .iconSize22, 
 .ProjeQtOrNewGui .hideStreamNewGui, 
 .ProjeQtOrNewGui .menu__link .iconSize22, .ProjeQtOrNewGui .menu__link .iconSize16,
-.ProjeQtOrNewGui .menu__linkDirect .iconSize22, .ProjeQtOrNewGui .menu__linkDirect .iconSize16 {
+.ProjeQtOrNewGui .menu__linkDirect .iconSize22, .ProjeQtOrNewGui .menu__linkDirect .iconSize16,.ProjeQtOrNewGui #menuBarAccesLeft .iconSize22, .ProjeQtOrNewGui .dijitTreeIcon, .ProjeQtOrNewGui .dijitTreeLabel {
 	-webkit-filter : brightness(0) invert(1);
   filter : brightness(0) invert(1);
   background-color: transparent;
@@ -705,21 +706,33 @@ animation: fadeIn ease 0.5s;
 /* Scrollbars */
 
 .ProjeQtOrNewGui ::-webkit-scrollbar {
-    height: 12px;
-    width: 12px;
-    background: var(--color-light);
+    width: 8px;
+   	background: var(--color-light);
+  	border-radius: 10px;
 }
 
 .ProjeQtOrNewGui ::-webkit-scrollbar-thumb {
     background: var(--color-dark);
+    border-radius: 10px;
 }
 
-body .ProjeQtOrNewGui {
-    scrollbar-face-color: var(--color-light);
-    scrollbar-track-color: var(--color-dark);
-    scrollbar-color: var(--color-dark) var(--color-light);
-    scrollbar-width: 12px;
+.ProjeQtOrNewGui .menu__level::-webkit-scrollbar {
+    width: 8px;
+    background: var(--color-drak);
+    opacity:0.3;
+  	border-radius: 10px;
 }
+
+.ProjeQtOrNewGui .menu__level::-webkit-scrollbar-thumb {
+    background: var(--color-light);
+    border-radius: 10px;
+}
+
+ .ProjeQtOrNewGui div{
+  	scrollbar-color:grey white;
+  	scrollbar-width: thin;
+}
+
 .ProjeQtOrNewGui .calendarRed32
   { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrNewGui .calendarRed22
