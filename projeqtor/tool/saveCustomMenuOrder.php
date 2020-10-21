@@ -39,11 +39,16 @@ $customArrayOrder = array_flip($customArray);
 $customArray = implode("','", $customArray);
 
 Sql::beginTransaction();
-$where = "idUser=".getSessionUser()->id." and idRow=".$idRow." and name in ('".$customArray."')";
+if($idSourceFrom == $idSourceTo){
+  $where = "idUser=".getSessionUser()->id." and idRow=".$idRow." and name in ('".$customArray."')";
+}else{
+  $where = "idUser=".getSessionUser()->id." and name in ('".$customArray."')";
+}
 $customMenu=new MenuCustom();
 $customMenuList=$customMenu->getSqlElementsFromCriteria(null, false, $where);
 foreach ($customMenuList as $menu) {
-    $menu->sortOrder = $customArrayOrder[$menu->name];
+	$menu->sortOrder = $customArrayOrder[$menu->name];
+	$menu->idRow = $idRow;
 	$menu->save();
 }
 Sql::commitTransaction();

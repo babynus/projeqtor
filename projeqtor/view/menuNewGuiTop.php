@@ -33,6 +33,8 @@ $iconSize=22;
 $idRow = Parameter::getUserParameter('idFavoriteRow');
 if(!$idRow)$idRow=1;
 $nbFavoriteRow=5;
+$paramAccessMode = Parameter::getUserParameter('newItemAccessMode');
+if(!$paramAccessMode)$paramAccessMode='direct';
 ?>
 <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:43px; position:absolute !important;top:30px;left:250px;border-bottom:3px solid var(--color-dark);">
   <div id="menuBarVisibleDiv" style="height:auto;width:auto;  top: 0px; left:248px; z-index:0;">
@@ -47,17 +49,33 @@ $nbFavoriteRow=5;
         	               <div dojoType="dijit.form.DropDownButton" id="addItemButton" jsId="addItemButton" name="addItemButton"
                             showlabel="false" iconClass="iconAdd iconSize22 imageColorNewGui" title="<?php echo i18n('comboNewButton');?>">
                             <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">
-                              <div style="font-weight:bold; height:25px;text-align:center">
                               <input type="hidden" id="objectClass" name="objectClass" value="" /> 
-		                      <input type="hidden" id="objectId" name="objectId" value="" />
+                              <input type="hidden" id="objectId" name="objectId" value="" />
+                              <div style="font-weight:bold; height:25px;text-align:center">
                               <?php echo i18n('comboNewButton');?>
                               </div>
-                              <div  id="dialogAddPopUpAcces" name="dialogAddPopUpAcces" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" leftLabel="" rightLabel=""
+                              <div style="height:25px;float:right;" title="<?php echo i18n('helpNewItemAccessMode');?>">
+                              <table width:"100%"><tr>
+                              <td><?php echo i18n('newItemAccessMode');?></td>
+                              <td style="padding-left:10px;">
+                              <div  id="dialogAddPopUpAcces" name="dialogAddPopUpAcces" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" 
+                              value="<?php if($paramAccessMode=='direct'){echo 'off';}else{echo 'on';}?>" leftLabel="" rightLabel=""
                               style="width:10%">
                                 <script type="dojo/method" event="onStateChanged" >
-                                  console.log('oui');
+                                  var mode = null;
+                                  if(this.value == 'on'){
+                                    mode = 'dialog';
+                                  }else{
+                                    mode = 'direct';
+                                  }
+                                  dojo.byId('newItemAccessMode').value = mode;
+                                  saveUserParameter('newItemAccessMode', mode);
+console.log(mode);
                                 </script>
                               </div>
+                              <input type="hidden" id="newItemAccessMode" name="newItemAccessMode" value="<?php echo $paramAccessMode?>" />
+                              </td>
+                              </tr></table></div>
                               <?php $arrayItems=array('Project','Resource','Activity','Ticket','Meeting','Milestone');
                               foreach($arrayItems as $item) {
                                 $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
@@ -93,7 +111,7 @@ $nbFavoriteRow=5;
         	           <tr dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBar">
         	             <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow, false);?>
         	             <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
-        	             <div id="wheelingBarDiv" style="height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
+        	             <div id="wheelingBarDiv" style="<?php if($defaultMenu == 'menuBarRecent')echo 'display:none;';?>height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
         	           </tr>
         	         </table>
     	         </div>

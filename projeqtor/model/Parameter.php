@@ -767,6 +767,10 @@ class Parameter extends SqlElement {
         $list = array('TXT'=>i18n('textual'),
                       'ICONTXT'=>i18n('iconTextual')) ;
         break;
+      case 'newItemAccessMode':
+      	$list = array('direct'=>i18n('directAccess'),
+      	'dialog'=>i18n('dialogAccess')) ;
+      	break;
     } 
     return $list;
   }
@@ -786,6 +790,7 @@ class Parameter extends SqlElement {
                            "paramIconSize"=>'list',
                            'menuBarTopMode'=>'list',
                            'menuLeftDisplayMode'=>'list',
+                           'newItemAccessMode'=>'list',
                            "paramShowThumb"=>"list",
                            "paramShowThumbList"=>"list",
                            "notApplicableValue"=>"list",
@@ -962,6 +967,7 @@ class Parameter extends SqlElement {
       	                      'paramIconSize'=>'list',
       	                      'menuBarTopMode'=>'list',
       	                      'menuLeftDisplayMode'=>'list',
+      	                      'newItemAccessMode'=>'list',
       	                      'MenuBarTop'=>'list',
       	                      'MenuBarLeft'=>'list',
       	                      'displayHistory'=>'list',
