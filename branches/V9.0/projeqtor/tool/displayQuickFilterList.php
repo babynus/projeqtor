@@ -333,7 +333,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
             </button>
           </td>  
       </tr>
-      <?php if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?> ?>
+      <?php if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?> 
       <tr>
         <td width="36px" class="listButtonClass">
             	<button title="<?php echo i18n('filterByStatus');?>"
