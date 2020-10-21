@@ -390,7 +390,7 @@ animation: fadeIn ease 0.5s;
   background-color: transparent;
   opacity: 1;
 }
-.ProjeQtOrNewGui .menu__link .iconSize16 {
+.ProjeQtOrNewGui .menu__link .iconSize16, .ProjeQtOrNewGui .menu__linkDirect .iconSize16 {
 	top: 3px;
 }
 .ProjeQtOrNewGui #toolBarDiv .dijitDisabled {
