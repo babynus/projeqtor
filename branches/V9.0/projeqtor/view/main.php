@@ -937,10 +937,12 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       <div id="anotherMenubarList" name="anotherMenubarList" region="center" style="display:none;width:90%;height: 43px;position: absolute;z-index: 9999999;top: 48px;left: 113px; ">
         <table style="width:100%;heigth:100%">
            <?php for($i=1; $i<=5; $i++){
-           $id = "menuBarDndSource$i";?>
-             <tr  style="height: 43px;<?php if($defaultMenu == 'menuBarCustom' and $idRow == $i)echo 'display:none;';?>">
+           $idDiv = "menuBarDndSource$i";
+           $idInput = "idFavoriteRow$i";?>
+             <tr  id="<?php echo 'anotherBar'.$i;?>" name="<?php echo 'anotherBar'.$i;?>" style="height: 43px;<?php if($defaultMenu == 'menuBarCustom' and $idRow == $i)echo 'display:none;';?>">
                <td style="border: unset !important;padding: 0px 0px 5px 0px;">
-                 <div id="<?php echo $id;?>" jsId="<?php echo $id;?>" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;">
+                 <div id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;">
+                    <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $i;?>">
                     <?php //Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $i, true);?>
                  </div>
                </td>

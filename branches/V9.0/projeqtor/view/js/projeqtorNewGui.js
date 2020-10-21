@@ -251,10 +251,12 @@ function menuNewGuiFilter(filter, item) {
 		if(item)selectIconMenuBar(item);
 		if(filter != 'menuBarCustom'){
 			dojo.byId('favoriteSwitch').style.display = 'none';
+			dojo.byId('wheelingBarDiv').style.display = 'none';
 			dojo.addClass('recentButton','imageColorNewGuiSelected');
 			dojo.removeClass('favoriteButton','imageColorNewGuiSelected');
 		}else{
 			dojo.byId('favoriteSwitch').style.display = 'block';
+			dojo.byId('wheelingBarDiv').style.display = 'block';
 			dojo.addClass('favoriteButton','imageColorNewGuiSelected');
 			dojo.removeClass('recentButton','imageColorNewGuiSelected');
 		}
@@ -265,6 +267,7 @@ function menuNewGuiFilter(filter, item) {
 }
 
 function switchFavoriteRow(idRow, direction, maxRow){
+	dojo.byId('anotherBar'+idRow).style.display = '';
 	var nextRow=idRow;
 	if(direction=='up'){
 		nextRow -= 1;
@@ -274,6 +277,7 @@ function switchFavoriteRow(idRow, direction, maxRow){
 		if(nextRow > maxRow)nextRow=1;
 	}
 	var callback = function(){
+		dojo.byId('anotherBar'+nextRow).style.display = 'none';
 		saveUserParameter('idFavoriteRow', nextRow);
 		menuNewGuiFilter('menuBarCustom', null);
 	};
@@ -281,6 +285,7 @@ function switchFavoriteRow(idRow, direction, maxRow){
 }
 
 function wheelFavoriteRow(idRow, evt, maxRow){
+	dojo.byId('anotherBar'+idRow).style.display = '';
 	var nextRow=idRow;
 	if(evt.deltaY < 0){
 		nextRow -= 1;
@@ -290,6 +295,7 @@ function wheelFavoriteRow(idRow, evt, maxRow){
 		if(nextRow > maxRow)nextRow=1;
 	}
 	var callback = function(){
+		dojo.byId('anotherBar'+nextRow).style.display = 'none';
 		saveUserParameter('idFavoriteRow', nextRow);
 		menuNewGuiFilter('menuBarCustom', null);
 	};
@@ -338,12 +344,16 @@ function checkClassForDisplay(id,mode){
 }
 
 function moveMenuBarItem(source, target){
-	setTimeout('dojo.byId(\'anotherMenubarList\').style.display = \'none\';',200); 
-	var nodeList = menuBarDndSource.getAllNodes();
-	var idRow = dojo.byId('idFavoriteRow').value;
+	setTimeout('dojo.byId(\'anotherMenubarList\').style.display = \'none\';',200);
+	var idRow = null;
+	if(target != 'menuBarDndSource'){
+		idRow = target.substr(-1);
+	}else{
+		idRow = dojo.byId('idFavoriteRow').value;
+	}
 	var customArray = new Array();
 	var pos = 1;
-	nodeList.forEach(function(node){
+	dojo.byId(target).querySelectorAll('.dojoDndItem').forEach(function(node){
 		customArray[pos] = 'menu'+node.id.substr(7);
 		pos++;
 	});
@@ -371,28 +381,52 @@ function hideFavoriteTooltip(delay, menuClass) {
   customMenuAddRemoveClass=menuClass;
 }
 
-function addNewGuiItem(item, param){
+function addNewGuiItem(item){
+	if (checkFormChangeInProgress()) {
+	    return false;
+	}
     var currentScreen=null;
-    var objectExist='false';
-    if(dojo.byId('objectClassManuel'))currentScreen=dojo.byId('objectClassManuel').value;
-    console.log(currentScreen);
-	var callback = function(){
-		loadDiv("menuUserScreenOrganization.php?currentScreen=Planning&objectExist="+objectExist,"mainDivMenu");
-		stockHistory('Planning',null,'Planning');
-		if(defaultMenu == 'menuBarRecent'){
-		  menuNewGuiFilter(defaultMenu, 'Planning');
+    if(dojo.byId('objectClass'))currentScreen=dojo.byId('objectClass').value;
+    var param = dojo.byId('newItemAccessMode').value;
+	if(param == 'direct'){
+		var callbackPlanning = function(){
+			loadDiv("menuUserScreenOrganization.php?currentScreen=Planning&objectExist="+objectExist,"mainDivMenu");
+			stockHistory('Planning',null,'Planning');
+			if(defaultMenu == 'menuBarRecent'){
+			  menuNewGuiFilter(defaultMenu, 'Planning');
+			}
+			selectIconMenuBar('Planning');
+			addNewItem(item);
+		};
+		var callbackItem = function(){
+			loadDiv("menuUserScreenOrganization.php?currentScreen="+item+"&objectExist="+objectExist,"mainDivMenu");
+			stockHistory(item,null,'Object');
+			if(defaultMenu == 'menuBarRecent'){
+			  menuNewGuiFilter(defaultMenu, item);
+			}
+			selectIconMenuBar(item);
+			addNewItem(item);
+		};
+		if(item != 'Resource' && item != 'Ticket'){
+			var currentMenu=null;
+		    if(dojo.byId('objectClassManual'))currentMenu=dojo.byId('objectClassManual').value;
+		    if(currentMenu != 'Planning'){
+		    	vGanttCurrentLine=-1;
+			    cleanContent("centerDiv");
+				loadContent("planningMain.php", "centerDiv",null,null,null,null,null,callbackPlanning);
+		    }else{
+		    	addNewItem(item);
+		    }
+		}else{
+			if(currentScreen != item){
+				cleanContent("detailDiv");
+				loadContent("objectMain.php?objectClass=" + item, "centerDiv",null,null,null,null,null,callbackItem);
+			}else{
+				addNewItem(item);
+			}
 		}
-		selectIconMenuBar('Planning');
-		addNewItem(item);
-	};
-	if(item != 'Resource' && item != 'Ticket'){
-		objectExist='true';
-	    vGanttCurrentLine=-1;
-	    cleanContent("centerDiv");
-		loadContent("planningMain.php", "centerDiv", null,null,null,null,null,callback);
 	}else{
-		loadMenuBarObject(item, item, 'bar');
-		addNewItem(item);
+		actionSelectAdd(item, null, null);
 	}
 }
 
