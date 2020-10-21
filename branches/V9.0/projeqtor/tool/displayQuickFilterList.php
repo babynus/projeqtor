@@ -30,6 +30,21 @@
  */
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/displayQuickFiletrList.php');
+$referenceWidth = 50;
+if(!isset($objectClass)){
+  if($filterObjectClass)$objectClass=$filterObjectClass;
+  if($objectClass){
+    $idClassType = "id". $objectClass. "Type";
+    $objectType = $idClassType;
+  }
+}
+if(!isset($obj)){
+  if(isset($objectClass)){
+    $obj=new $objectClass;
+    $object = $obj;
+  }
+}
+
 $user=getSessionUser();
 $context="";
 $comboDetail=false;
@@ -277,6 +292,68 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       </tr>  
       <?php }?>
       
+      <?php  if (! $comboDetail) {?>
+       <tr>
+         <td style="vertical-align: middle;">
+                 <span class="nobr">&nbsp;<?php echo i18n("quickSearch");?>&nbsp;</span> 
+            <div title="<?php echo i18n('quickSearch')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
+               id="quickSearchValueQuick" name="quickSearchValueQuick"
+               style="width:200px;">
+            </div>
+  	        <button title="<?php echo i18n('quickSearch')?>"  
+  	          dojoType="dijit.form.Button" 
+  	          id="listQuickSearchExecuteQuick" name="listQuickSearchExecuteQuick"
+  	          iconClass="dijitButtonIcon dijitButtonIconSearch" class="detailButton" showLabel="false">
+  	          <script type="dojo/connect" event="onClick" args="evt">
+                quickSearchExecuteQuick();
+              </script>
+  	        </button>
+  	        <button title="<?php echo i18n('comboCloseButton')?>"  
+                  dojoType="dijit.form.Button" 
+            id="listQuickSearchCloseQuick" name="listQuickSearchCloseQuick"
+            iconClass="dijitButtonIcon dijitButtonIconUndo" class="detailButton" showLabel="false">
+            <script type="dojo/connect" event="onClick" args="evt">
+              quickSearchCloseQuick();
+            </script>
+          </button>
+  	      </td>  
+		    </tr>
+			  <?php } ?>
+      
+      <tr>
+          <td width="6px " class="allSearchTD resetSearchTD allSearchFixLength">
+            <button dojoType="dijit.form.Button" type="button" >
+                <?php echo i18n('buttonReset');?>
+                <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
+                  <script type="dojo/method" event="onClick">
+                     var lstStat = <?php echo json_encode($lstStat); ?>;
+                     resetFilterQuick(lstStat);
+                  </script>
+              
+            </button>
+          </td>  
+      </tr>
+      <?php if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?> ?>
+      <tr>
+        <td width="36px" class="listButtonClass">
+            	<button title="<?php echo i18n('filterByStatus');?>"
+			             dojoType="dijit.form.Button"
+			             id="iconStatusButtonQuick" name="iconStatusButtonQuick"
+			             iconClass="dijitButtonIcon dijitButtonIconStatusChange" class="detailButton" showLabel="false">
+			             <script type="dojo/connect" event="onClick" args="evt">
+                     protectDblClick(this);
+						         if (dijit.byId('barFilterByStatus').domNode.style.display == 'none') {
+							         dijit.byId('barFilterByStatus').domNode.style.display = 'block';
+						         } else {
+							         dijit.byId('barFilterByStatus').domNode.style.display = 'none';
+						         }
+						         dijit.byId('barFilterByStatus').getParent().resize();
+                     saveDataToSession("displayByStatusList_<?php echo $objectClass;?>", dijit.byId('barFilterByStatus').domNode.style.display, true);
+          				 </script>
+			        </button>
+			 </td>
+      </tr>
+      <?php } ?>
       
       <tr style="border-top:solid 1px;">
         <td> 

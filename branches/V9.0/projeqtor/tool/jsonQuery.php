@@ -69,6 +69,9 @@
     if ( array_key_exists('quickSearch',$_REQUEST) ) {
       $quickSearch=Sql::fmtStr($_REQUEST['quickSearch']);
     }
+    if ( array_key_exists('quickSearchQuick',$_REQUEST) ) {
+      $quickSearch=Sql::fmtStr($_REQUEST['quickSearchQuick']);
+    }
     if (! isset($outMode)) { $outMode=""; } 
     if (! isset($csvExportAll)) $csvExportAll=false;
     

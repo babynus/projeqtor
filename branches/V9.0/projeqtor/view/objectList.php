@@ -847,40 +847,6 @@ if (property_exists($objectClass,'idStatus')) {
               </td>
               <?php }?>
         
-              
-             <!-- Ticket #3988	- Object list : boutton reset parameters  
-                   florent
-              -->
-                <?php if ( $objectClass=='GlobalView') { ?>
-                <td width="56px" class="allSearchTD resetSearchTD allSearchFixLength">
-                    <button dojoType="dijit.form.Button" type="button" >
-                            <?php echo i18n('buttonReset');?>
-                            <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
-                            <script type="dojo/method" event="onClick">
-                             var lstStat = <?php echo json_encode($lstStat); ?>;
-                             resetFilter(lstStat);
-                             </script>
-                          
-                    </button>
-               </td>
-              <?php } ?>
-              <?php if (!$hideTypeSearch and $objectClass !='GlobalView') { ?>
-                <?php if ( $objectClass == 'Budget'  || property_exists($obj,'idClient') || property_exists($obj,'idMailable') || property_exists($obj,'idIndicatorable')|| property_exists($obj,'idTextable')|| property_exists($obj,'idChecklistable') || property_exists($obj,'idSituationable')) {
-                }else {  
-                  ?>
-                      <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
-                        <button dojoType="dijit.form.Button" type="button" >
-                            <?php echo i18n('buttonReset');?>
-                            <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
-                            <script type="dojo/method" event="onClick">
-                             var lstStat = <?php echo json_encode($lstStat); ?>;
-                             resetFilter(lstStat);
-                             </script>
-                        </button>
-                      </td>
-                <?php } ?>      
-              <?php } ?> 
-              
               <!-- gautier #budgetParent  -->
               <?php if ( !$hideParentBudgetSearch and  $objectClass == 'Budget' ) { ?>
                <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD parentBudgetSearchTD allSearchFixLength">
@@ -937,20 +903,7 @@ if (property_exists($objectClass,'idStatus')) {
                   </script>
                 </select>
               </td>
-              <!-- Ticket #3988	- Object list : boutton reset parameters  
-                   florent
-              -->
-              <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
-                <button dojoType="dijit.form.Button" type="button" >
-                    <?php echo i18n('buttonReset'); ?>
-                    <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
-                  <script type="dojo/method" event="onClick">
-                     var lstStat = <?php echo json_encode($lstStat); ?>;
-                     resetFilter(lstStat);
-                  </script>
-                  
-                </button>
-              </td>           
+        
               <?php } 
                  $elementable=null;
                  if ( property_exists($obj,'idMailable') ) $elementable='idMailable';
@@ -975,20 +928,9 @@ if (property_exists($objectClass,'idStatus')) {
                   </script>
                 </select>
               </td>
-              <?php if($objectClass !='GlobalView'){?>
-              <td width="6px " class="allSearchTD resetSearchTD allSearchFixLength">
-                <button dojoType="dijit.form.Button" type="button" >
-                    <?php echo i18n('buttonReset');?>
-                    <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
-                  <script type="dojo/method" event="onClick">
-                     var lstStat = <?php echo json_encode($lstStat); ?>;
-                     resetFilter(lstStat);
-                  </script>
-                  
-                </button>
-              </td>      
+                
               
-              <?php }}?>                     
+              <?php }?>                     
               <?php $activeFilter=false;
                  if (! $comboDetail and is_array(getSessionUser()->_arrayFilters)) {
                    if (array_key_exists($objectClass, getSessionUser()->_arrayFilters)) {
@@ -1030,47 +972,11 @@ if (property_exists($objectClass,'idStatus')) {
                  ?>
             <td >&nbsp;</td>
             <td width="5px"><span class="nobr">&nbsp;</span></td>
-            <!-- CHANGE qCazelles - Filter by status button is moved here -->
-            <?php //Filter by status button is moved here
-              if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?>
-            <td width="36px" class="listButtonClass">
-            	<button title="<?php echo i18n('filterByStatus');?>"
-			             dojoType="dijit.form.Button"
-			             id="iconStatusButton" name="iconStatusButton"
-			             iconClass="dijitButtonIcon dijitButtonIconStatusChange" class="detailButton" showLabel="false">
-			             <script type="dojo/connect" event="onClick" args="evt">
-                     protectDblClick(this);
-						         if (dijit.byId('barFilterByStatus').domNode.style.display == 'none') {
-							         dijit.byId('barFilterByStatus').domNode.style.display = 'block';
-						         } else {
-							         dijit.byId('barFilterByStatus').domNode.style.display = 'none';
-						         }
-						         dijit.byId('barFilterByStatus').getParent().resize();
-                     saveDataToSession("displayByStatusList_<?php echo $objectClass;?>", dijit.byId('barFilterByStatus').domNode.style.display, true);
-          				 </script>
-			        </button>
-			      </td>
-			      <?php } 
-			      if (! $comboDetail or 1) {?>
-			                </td>
-			                      </td>
-			                  <td width="36px" class="allSearchFixLength">
-			                    <button title="<?php echo i18n('quickSearch')?>"  
-			                     dojoType="dijit.form.Button" 
-			                     id="iconSearchOpenButton" name="iconSearchOpenButton"
-			                     iconClass="dijitButtonIcon dijitButtonIconSearch" class="detailButton" showLabel="false">
-			                      <script type="dojo/connect" event="onClick" args="evt">
-			                        quickSearchOpen();
-			                      </script>
-			                    </button>
-			                    <span id="gridRowCountShadow1" class="gridRowCountShadow1"></span>
-			                    <span id="gridRowCountShadow2" class="gridRowCountShadow2"></span>              
-			                    <span id="gridRowCount" class="gridRowCount"></span>             
-			                    <input type="hidden" id="listFilterClause" name="listFilterClause" value="" style="width: 50px;" />
-			                  </td>
-			      <?php } ?>
-			      
 			      </div></table><td>
+			      <span id="gridRowCountShadow1" class="gridRowCountShadow1"></span>
+            <span id="gridRowCountShadow2" class="gridRowCountShadow2"></span>              
+            <span id="gridRowCount" class="gridRowCount"></span>             
+            <input type="hidden" id="listFilterClause" name="listFilterClause" value="" style="width: 50px;" />
 <?php }
       if (! $comboDetail or 1) {?>            
             <td width="51px" class="allSearchFixLength">

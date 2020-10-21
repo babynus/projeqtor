@@ -32,7 +32,6 @@
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/selectStoredFilter.php');
 $user=getSessionUser();
-
 $comboDetail=false;
 if (array_key_exists('comboDetail',$_REQUEST)) {
   $comboDetail=true;
@@ -98,6 +97,7 @@ if (! $comboDetail) {
 }
 
 if (array_key_exists('context',$_REQUEST) and $_REQUEST['context']=='directFilterList') {
+  if(isNewGui())include "../tool/displayQuickFilterList.php";
 	include "../tool/displayFilterList.php";
 } else {
   htmlDisplayFilterCriteria($filterArray,$filter->name);
