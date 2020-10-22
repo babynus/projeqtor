@@ -178,7 +178,21 @@
 /* ICONS                                                                           */
 /* =============================================================================== */
 
+
+
+/* Sizes */
+
+.iconSize32 { background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconSize22 { background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconSize16 { background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+
+
+
+
 /* A */
+
+
 
 .iconAbsence { background-image: url(images/iconiconAbsence32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconAbsence { background-image: url(customIcons/blue/iconAbsence.png);  background-repeat: no-repeat; }
@@ -349,7 +363,14 @@
 
 
 
+
+
+
+
+
 /* B */
+
+
 
 
 .iconBill { background-image: url(images/iconBill32.png);  background-repeat: no-repeat;  }
@@ -425,7 +446,19 @@
 .iconButtonCopy16 { background-image: url(images/iconCopy.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .iconButtonCopy24 { background-image: url(images/iconCopy.png); background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 
+
+
+
+
+
+
+
+
+
+
 /* C */
+
+
 
 
 .iconCalendar { background-image: url(images/iconCalendar32.png);  background-repeat: no-repeat;  }
@@ -610,6 +643,19 @@
 .ProjeQtOrFlatRed .iconConstruction { background-image: url(customIcons/red/iconConstruction.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconConstruction { background-image: url(customIcons/new/iconConstruction.svg);  background-repeat: no-repeat; }
 
+.iconConsultationPlannedWorkManual { background-image: url(images/iconConsultationPlannedWorkManual.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconConsultationPlannedWorkManual { background-image: url(customIcons/blue/iconConsultationPlannedWorkManual.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconConsultationPlannedWorkManual { background-image: url(customIcons/green/iconConsultationPlannedWorkManual.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconConsultationPlannedWorkManual { background-image: url(customIcons/grey/iconConsultationPlannedWorkManual.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconConsultationPlannedWorkManual { background-image: url(customIcons/red/iconConsultationPlannedWorkManual.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconConsultationPlannedWorkManual { background-image: url(customIcons/new/iconConsultationPlannedWorkManual.svg);  background-repeat: no-repeat; }
+
+.iconConsultationValidation { background-image: url(images/iconConsultationValidation.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconConsultationValidation { background-image: url(customIcons/blue/iconConsultationValidation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconConsultationValidation { background-image: url(customIcons/green/iconConsultationValidation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconConsultationValidation { background-image: url(customIcons/grey/iconConsultationValidation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconConsultationValidation { background-image: url(customIcons/red/iconConsultationValidation.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconConsultationValidation { background-image: url(customIcons/new/iconConsultationValidation.svg);  background-repeat: no-repeat; }
 
 .iconContact { background-image: url(images/iconContact32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconContact { background-image: url(customIcons/blue/iconContact.png);  background-repeat: no-repeat; }
@@ -632,6 +678,13 @@
 .ProjeQtOrFlatRed .iconContextType { background-image: url(customIcons/red/iconContextType.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconContextType { background-image: url(customIcons/new/iconContextType.svg);  background-repeat: no-repeat; }
 
+.iconContractUnit { background-image: url(images/iconUnity.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconContractUnit { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconContractUnit { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconContractUnit { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconContractUnit { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconContractUnit { background-image: url(customIcons/new/iconUnity.svg);  background-repeat: no-repeat; }
+
 .iconCriticality { background-image: url(images/iconCriticality32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconCriticality { background-image: url(customIcons/blue/iconCriticality.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconCriticality { background-image: url(customIcons/green/iconCriticality.png);  background-repeat: no-repeat; }
@@ -652,7 +705,8 @@
 
 /* D */
 
-/* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
+
+
 
 .iconDashboardRequirement { background-image: url(images/iconDashboardRequirement32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconDashboardRequirement { background-image: url(customIcons/blue/iconRequirementDashboard.png);  background-repeat: no-repeat; }
@@ -660,8 +714,6 @@
 .ProjeQtOrFlatGrey .iconDashboardRequirement { background-image: url(customIcons/grey/iconRequirementDashboard.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconDashboardRequirement { background-image: url(customIcons/red/iconRequirementDashboard.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconDashboardRequirement { background-image: url(customIcons/new/iconDashboardRequirement.svg);  background-repeat: no-repeat; }
-
-/* END - ADD qCazelles - Requirement dashboard - Ticket 90 */
 
 .iconDashboardTicket { background-image: url(images/iconDashboardTicket32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconDashboardTicket { background-image: url(customIcons/blue/iconTicketDashboard.png);  background-repeat: no-repeat; }
@@ -771,7 +823,14 @@
 
 
 
+
+
+
+
+
 /* E */
+
+
 
 .iconEnvironmentalParameter { background-image: url(images/iconEnvironmentalParameter32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconEnvironmentalParameter { background-image: url(customIcons/blue/iconEnvironmentalParameter.png);  background-repeat: no-repeat; }
@@ -815,6 +874,12 @@
 .ProjeQtOrFlatGrey .iconError { background-image: url(customIcons/grey/iconError.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconError { background-image: url(customIcons/red/iconError.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconError { background-image: url(customIcons/new/iconError.svg);  background-repeat: no-repeat; }
+
+
+
+
+
+
 
 
 
@@ -872,7 +937,14 @@
 
 
 
+
+
+
+
 /* G */
+
+
+
 
 .iconGallery { background-image: url(images/iconGallery32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconGallery { background-image: url(customIcons/blue/iconGallery.png);  background-repeat: no-repeat; }
@@ -926,7 +998,15 @@
 
 
 
+
+
+
+
+
+
 /* H */
+
+
 
 .iconHabilitation { background-image: url(images/iconHabilitation32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconHabilitation { background-image: url(customIcons/blue/iconHabilitation.png);  background-repeat: no-repeat; }
@@ -1011,7 +1091,16 @@
 
 
 
+
+
+
+
+
+
 /* I */
+
+
+
 
 .iconImportData { background-image: url(images/iconImportData32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconImportData { background-image: url(customIcons/blue/iconImportData.png);  background-repeat: no-repeat; }
@@ -1137,7 +1226,15 @@
 
 
 
+
+
+
+
+
 /* J */
+
+
+
 
 .iconJoblistDefinition { background-image: url(images/iconJoblistDefinition32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconJoblistDefinition { background-image: url(customIcons/blue/iconJoblistDefinition.png);  background-repeat: no-repeat;}
@@ -1152,7 +1249,13 @@
 
 
 
+
+
+
+
 /* K */
+
+
 
 .iconKpiDefinition { background-image: url(images/iconKpiDefinition.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconKpiDefinition { background-image: url(customIcons/blue/iconKpiDefinition.png);  background-repeat: no-repeat;}
@@ -1168,7 +1271,11 @@
 
 
 
+
+
 /* L */
+
+
 
 .iconLanguage { background-image: url(images/iconLanguage32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconLanguage { background-image: url(customIcons/blue/iconLanguage.png);  background-repeat: no-repeat;}
@@ -1239,7 +1346,12 @@
 
 
 
+
+
+
 /* M */
+
+
 
 .iconMail { background-image: url(images/iconMail32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .ProjeQtOrFlatBlue .iconMail { background-image: url(customIcons/blue/iconMail.png);  background-repeat: no-repeat; }
@@ -1316,7 +1428,13 @@
 
 
 
+
+
+
+
 /* N */
+
+
 
 .iconNotification { background-image: url(images/iconNotification.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconNotification { background-image: url(customIcons/blue/iconNotification.png);  background-repeat: no-repeat;}
@@ -1357,7 +1475,14 @@
 
 
 
+
+
+
+
+
+
 /* O */
+
 
 
 .iconOpportunity { background-image: url(images/iconOpportunity32.png);  background-repeat: no-repeat; }
@@ -1394,6 +1519,8 @@
 .ProjeQtOrFlatGrey .iconOrganizationType { background-image: url(customIcons/grey/iconOrganizationType.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatRed .iconOrganizationType { background-image: url(customIcons/red/iconOrganizationType.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconOrganizationType { background-image: url(customIcons/new/iconOrganizationType.svg);  background-repeat: no-repeat;}
+
+
 
 
 
@@ -1441,12 +1568,26 @@
 .ProjeQtOrFlatRed .iconPaymentType { background-image: url(customIcons/red/iconPaymentType.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconPaymentType { background-image: url(customIcons/new/iconPaymentType.svg);  background-repeat: no-repeat;}
 
+.iconPeriod { background-image: url(images/iconPeriod.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconPeriod { background-image: url(customIcons/blue/iconPeriod.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGreen .iconPeriod { background-image: url(customIcons/green/iconPeriod.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGrey .iconPeriod { background-image: url(customIcons/grey/iconPeriod.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatRed .iconPeriod { background-image: url(customIcons/red/iconPeriod.png);  background-repeat: no-repeat;}
+.ProjeQtOrNewGui .iconPeriod { background-image: url(customIcons/new/iconPeriod.svg);  background-repeat: no-repeat;}
+
 .iconPeriodicMeeting { background-image: url(images/iconPeriodicMeeting32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconPeriodicMeeting { background-image: url(customIcons/blue/iconPeriodicMeeting.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconPeriodicMeeting { background-image: url(customIcons/green/iconPeriodicMeeting.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGrey .iconPeriodicMeeting { background-image: url(customIcons/grey/iconPeriodicMeeting.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatRed .iconPeriodicMeeting { background-image: url(customIcons/red/iconPeriodicMeeting.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconPeriodicMeeting { background-image: url(customIcons/new/iconPeriodicMeeting.svg);  background-repeat: no-repeat;}
+
+.iconPlannedWorkManual { background-image: url(images/iconPlannedWorkManual.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconPlannedWorkManual { background-image: url(customIcons/blue/iconPlannedWorkManual.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconPlannedWorkManual { background-image: url(customIcons/green/iconPlannedWorkManual.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconPlannedWorkManual { background-image: url(customIcons/grey/iconPlannedWorkManual.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconPlannedWorkManual { background-image: url(customIcons/red/iconPlannedWorkManual.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconPlannedWorkManual { background-image: url(customIcons/new/iconPlannedWorkManual.svg);  background-repeat: no-repeat; }
 
 .iconPlanning { background-image: url(images/iconPortfolioPlanning32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconPlanning { background-image: url(customIcons/blue/iconPlanning.png);  background-repeat: no-repeat; }
@@ -1518,19 +1659,19 @@
 .ProjeQtOrFlatRed .iconProductVersionType { background-image: url(customIcons/red/iconProductVersionType.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconProductVersionType { background-image: url(customIcons/new/iconProductVersionType.svg);  background-repeat: no-repeat; }
 
-.iconProject { background-image: url(images/iconProject32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconProject { background-image: url(customIcons/blue/iconProject.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconProject { background-image: url(customIcons/green/iconProject.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconProject { background-image: url(customIcons/grey/iconProject.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconProject { background-image: url(customIcons/red/iconProject.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconProject { background-image: url(customIcons/new/iconProject.svg);  background-repeat: no-repeat; }
-
 .iconProfile { background-image: url(images/iconProfile32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconProfile { background-image: url(customIcons/blue/iconProfile.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconProfile { background-image: url(customIcons/green/iconProfile.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconProfile { background-image: url(customIcons/grey/iconProfile.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconProfile { background-image: url(customIcons/red/iconProfile.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconProfile { background-image: url(customIcons/new/iconProfile.svg);  background-repeat: no-repeat; }
+
+.iconProject { background-image: url(images/iconProject32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconProject { background-image: url(customIcons/blue/iconProject.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconProject { background-image: url(customIcons/green/iconProject.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconProject { background-image: url(customIcons/grey/iconProject.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconProject { background-image: url(customIcons/red/iconProject.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconProject { background-image: url(customIcons/new/iconProject.svg);  background-repeat: no-repeat; }
 
 .iconProjectExpense { background-image: url(images/iconProjectExpense32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconProjectExpense { background-image: url(customIcons/blue/iconProjectExpense.png);  background-repeat: no-repeat; }
@@ -1574,6 +1715,20 @@
 .ProjeQtOrFlatRed .iconProvider { background-image: url(customIcons/red/iconProvider.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconProvider { background-image: url(customIcons/new/iconProvider.svg);  background-repeat: no-repeat; }
 
+.iconProviderBill { background-image: url(images/iconProviderBill.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconProviderBill { background-image: url(customIcons/blue/iconProviderBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconProviderBill { background-image: url(customIcons/green/iconProviderBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconProviderBill { background-image: url(customIcons/grey/iconProviderBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconProviderBill { background-image: url(customIcons/red/iconProviderBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconProviderBill { background-image: url(customIcons/new/iconProviderBill.svg);  background-repeat: no-repeat; }
+
+.iconProviderBillType { background-image: url(images/iconProviderBillType.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconProviderBillType { background-image: url(customIcons/blue/iconProviderBillType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconProviderBillType { background-image: url(customIcons/green/iconProviderBillType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconProviderBillType { background-image: url(customIcons/grey/iconProviderBillType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconProviderBillType { background-image: url(customIcons/red/iconProviderBillType.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconProviderBillType { background-image: url(customIcons/new/iconProviderBillType.svg);  background-repeat: no-repeat; }
+
 .iconProviderType { background-image: url(images/iconProviderType32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconProviderType { background-image: url(customIcons/blue/iconProviderType.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconProviderType { background-image: url(customIcons/green/iconProviderType.png);  background-repeat: no-repeat; }
@@ -1594,6 +1749,39 @@
 .ProjeQtOrFlatGrey .iconProviderOrderType { background-image: url(customIcons/grey/iconProviderOrderType.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconProviderOrderType { background-image: url(customIcons/red/iconProviderOrderType.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconProviderOrderType { background-image: url(customIcons/new/iconProviderOrderType.svg);  background-repeat: no-repeat; }
+
+.iconProviderTerm { background-image: url(images/iconProviderTerm.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconProviderTerm { background-image: url(customIcons/blue/iconProviderTerm.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconProviderTerm { background-image: url(customIcons/green/iconProviderTerm.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconProviderTerm { background-image: url(customIcons/grey/iconProviderTerm.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconProviderTerm { background-image: url(customIcons/red/iconProviderTerm.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconProviderTerm { background-image: url(customIcons/new/iconProviderTerm.svg);  background-repeat: no-repeat; }
+
+.iconProviderPayment { background-image: url(images/iconProviderPayment.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconProviderPayment { background-image: url(customIcons/blue/iconProviderPayment.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconProviderPayment { background-image: url(customIcons/green/iconProviderPayment.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconProviderPayment { background-image: url(customIcons/grey/iconProviderPayment.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconProviderPayment { background-image: url(customIcons/red/iconProviderPayment.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconProviderPayment { background-image: url(customIcons/new/iconProviderPayment.svg);  background-repeat: no-repeat; }
+
+.iconProviderPaymentType { background-image: url(images/iconProviderPaymentType.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconProviderPaymentType { background-image: url(customIcons/blue/iconProviderPaymentType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconProviderPaymentType { background-image: url(customIcons/green/iconProviderPaymentType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconProviderPaymentType { background-image: url(customIcons/grey/iconProviderPaymentType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconProviderPaymentType { background-image: url(customIcons/red/iconProviderPaymentType.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconProviderPaymentType { background-image: url(customIcons/new/iconProviderPaymentType.svg);  background-repeat: no-repeat; }
+
+.iconButtonProviderPayment16 { background-image: url(images/iconProviderPayment.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconButtonProviderPayment16 { background-image: url(customIcons/blue/iconProviderPayment.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconButtonProviderPayment16 { background-image: url(customIcons/green/iconProviderPayment.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconButtonProviderPayment16 { background-image: url(customIcons/grey/iconProviderPayment.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconButtonProviderPayment16 { background-image: url(customIcons/red/iconProviderPayment.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonProviderPayment16 { background-image: url(customIcons/new/iconProviderPayment.svg);  background-repeat: no-repeat; }
+
+
+
+
+
 
 
 
@@ -1626,10 +1814,22 @@
 
 
 
+
+
+
+
 /* R */
 
 
+
 .ProjeQtOrNewGui .iconRecent { background-image: url(customIcons/new/iconRecent.svg);  background-repeat: no-repeat; }
+
+.iconRenewal { background-image: url(images/iconRenewal.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconRenewal { background-image: url(customIcons/blue/iconRenewal.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconRenewal { background-image: url(customIcons/green/iconRenewal.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconRenewal { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconRenewal { background-image: url(customIcons/red/iconRenewal.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconRenewal { background-image: url(customIcons/new/iconRenewal.svg);  background-repeat: no-repeat; }
 
 .iconReplan { background-image: url(images/iconReplan.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconReplan { background-image: url(customIcons/blue/iconReplan.png);  background-repeat: no-repeat; }
@@ -1761,10 +1961,17 @@
 
 
 
+
+
+
+
+
 /* S */
 
-.iconSelect { background-image: url(images/iconSelect.png);  background-repeat: no-repeat; width: 16px; height: 16px;}
 
+
+
+.iconSelect { background-image: url(images/iconSelect.png);  background-repeat: no-repeat; width: 16px; height: 16px;}
 
 .iconSearch { background-image: url(images/iconSearch.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconSearch { background-image: url(customIcons/blue/iconSearch.png);  background-repeat: no-repeat; }
@@ -1835,6 +2042,11 @@
 .ProjeQtOrFlatGrey .iconSupplierContractType { background-image: url(customIcons/grey/iconSupplierContractType.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatRed .iconSupplierContractType { background-image: url(customIcons/red/iconSupplierContractType.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconSupplierContractType { background-image: url(customIcons/new/iconSupplierContractType.svg);  background-repeat: no-repeat; }
+
+
+
+
+
 
 
 
@@ -1981,7 +2193,15 @@
 
 
 
+
+
+
+
+
 /* U */
+
+
+
 
 .iconUrgency { background-image: url(images/iconUrgency32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .ProjeQtOrFlatBlue .iconUrgency { background-image: url(customIcons/blue/iconUrgency.png);  background-repeat: no-repeat; }
@@ -2009,7 +2229,12 @@
 
 
 
+
+
+
+
 /* V */
+
 
 
 .iconVersionsPlanning { background-image: url(images/iconVersionsPlanning32.png);  background-repeat: no-repeat;  }
@@ -2035,7 +2260,15 @@
 
 
 
+
+
+
+
+
+
+
 /* W */
+
 
 
 .iconWarning { background-image: url(images/iconWarning.png);  background-repeat: no-repeat;  }
@@ -2104,10 +2337,6 @@
 .iconPlanStopped { background-image: url(customIcons/grey/iconPlanStopped.png);}
 .iconPlan { background-image: url(customIcons/grey/iconPlan.gif);}
 
-.iconRenewal32 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconRenewal22 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.iconRenewal16 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
 .iconSelect { background-image: url(images/iconSelect.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .iconTranslation32 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
@@ -2119,95 +2348,6 @@
 /* New Format                                                                      */
 /* =============================================================================== */
 
-
-/* Sizes */
-
-.iconSize32 { background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconSize22 { background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.iconSize16 { background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-
-
-
-/* L */
-
-
-/* M */
-
-
-/* P */
-.iconPeriod { background-image: url(images/iconPeriod.png); }
-.ProjeQtOrFlatBlue .iconPeriod { background-image: url(customIcons/blue/iconPeriod.png); }
-.ProjeQtOrFlatRed .iconPeriod { background-image: url(customIcons/red/iconPeriod.png); }
-.ProjeQtOrFlatGreen .iconPeriod { background-image: url(customIcons/green/iconPeriod.png); }
-.ProjeQtOrFlatGrey .iconPeriod { background-image: url(customIcons/grey/iconPeriod.png); }
-
-.iconProviderBill { background-image: url(images/iconProviderBill.png); }
-.ProjeQtOrFlatBlue .iconProviderBill { background-image: url(customIcons/blue/iconProviderBill.png); }
-.ProjeQtOrFlatRed .iconProviderBill { background-image: url(customIcons/red/iconProviderBill.png); }
-.ProjeQtOrFlatGreen .iconProviderBill { background-image: url(customIcons/green/iconProviderBill.png); }
-.ProjeQtOrFlatGrey .iconProviderBill { background-image: url(customIcons/grey/iconProviderBill.png); }
-
-.iconProviderBillType { background-image: url(images/iconProviderBillType.png); }
-.ProjeQtOrFlatBlue .iconProviderBillType { background-image: url(customIcons/blue/iconProviderBillType.png); }
-.ProjeQtOrFlatRed .iconProviderBillType { background-image: url(customIcons/red/iconProviderBillType.png); }
-.ProjeQtOrFlatGreen .iconProviderBillType { background-image: url(customIcons/green/iconProviderBillType.png); }
-.ProjeQtOrFlatGrey .iconProviderBillType { background-image: url(customIcons/grey/iconProviderBillType.png); }
-
-.iconProviderTerm { background-image: url(images/iconProviderTerm.png); }
-.ProjeQtOrFlatBlue .iconProviderTerm { background-image: url(customIcons/blue/iconProviderTerm.png); }
-.ProjeQtOrFlatRed .iconProviderTerm { background-image: url(customIcons/red/iconProviderTerm.png); }
-.ProjeQtOrFlatGreen .iconProviderTerm { background-image: url(customIcons/green/iconProviderTerm.png); }
-.ProjeQtOrFlatGrey .iconProviderTerm { background-image: url(customIcons/grey/iconProviderTerm.png); }
-
-.iconProviderPayment { background-image: url(images/iconProviderPayment.png); }
-.ProjeQtOrFlatBlue .iconProviderPayment { background-image: url(customIcons/blue/iconProviderPayment.png); }
-.ProjeQtOrFlatRed .iconProviderPayment { background-image: url(customIcons/red/iconProviderPayment.png); }
-.ProjeQtOrFlatGreen .iconProviderPayment { background-image: url(customIcons/green/iconProviderPayment.png); }
-.ProjeQtOrFlatGrey .iconProviderPayment { background-image: url(customIcons/grey/iconProviderPayment.png); }
-
-.iconButtonProviderPayment16 { background-image: url(images/iconProviderPayment.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatBlue .iconButtonProviderPayment16 { background-image: url(customIcons/blue/iconProviderPayment.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatRed .iconButtonProviderPayment16 { background-image: url(customIcons/red/iconProviderPayment.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatGreen .iconButtonProviderPayment16 { background-image: url(customIcons/green/iconProviderPayment.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatGrey .iconButtonProviderPayment16 { background-image: url(customIcons/grey/iconProviderPayment.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.iconProviderPaymentType { background-image: url(images/iconProviderPaymentType.png); }
-.ProjeQtOrFlatBlue .iconProviderPaymentType { background-image: url(customIcons/blue/iconProviderPaymentType.png); }
-.ProjeQtOrFlatRed .iconProviderPaymentType { background-image: url(customIcons/red/iconProviderPaymentType.png); }
-.ProjeQtOrFlatGreen .iconProviderPaymentType { background-image: url(customIcons/green/iconProviderPaymentType.png); }
-.ProjeQtOrFlatGrey .iconProviderPaymentType { background-image: url(customIcons/grey/iconProviderPaymentType.png); }
-/* R */
-.iconRenewal { background-image: url(images/iconRenewal.png); }
-.ProjeQtOrFlatBlue .iconRenewal { background-image: url(customIcons/blue/iconRenewal.png); }
-.ProjeQtOrFlatRed .iconRenewal { background-image: url(customIcons/red/iconRenewal.png); }
-.ProjeQtOrFlatGreen .iconRenewal { background-image: url(customIcons/green/iconRenewal.png); }
-.ProjeQtOrFlatGrey .iconRenewal { background-image: url(customIcons/grey/iconRenewal.png); }
-
-/*U*/
-.iconContractUnit { background-image: url(images/iconUnity.png); }
-.ProjeQtOrFlatBlue .iconContractUnit { background-image: url(customIcons/blue/iconUnity.png); }
-.ProjeQtOrFlatRed .iconContractUnit { background-image: url(customIcons/red/iconUnity.png); }
-.ProjeQtOrFlatGreen .iconContractUnit { background-image: url(customIcons/green/iconUnity.png); }
-.ProjeQtOrFlatGrey .iconContractUnit { background-image: url(customIcons/grey/iconUnity.png); }
-
-.iconConsultationPlannedWorkManual  { background-image: url(images/iconConsultationPlannedWorkManual.png); }
-.ProjeQtOrFlatBlue .iconConsultationPlannedWorkManual  { background-image: url(customIcons/blue/iconConsultationPlannedWorkManual.png); }
-.ProjeQtOrFlatRed .iconConsultationPlannedWorkManual  { background-image: url(customIcons/red/iconConsultationPlannedWorkManual.png); }
-.ProjeQtOrFlatGreen .iconConsultationPlannedWorkManual  { background-image: url(customIcons/green/iconConsultationPlannedWorkManual.png); }
-.ProjeQtOrFlatGrey .iconConsultationPlannedWorkManual  { background-image: url(customIcons/grey/iconConsultationPlannedWorkManual.png); }
-
-.iconConsultationValidation  { background-image: url(images/iconConsolidationValidation.png); }
-.ProjeQtOrFlatBlue .iconConsultationValidation  { background-image: url(customIcons/blue/iconConsolidationValidation.png); }
-.ProjeQtOrFlatRed .iconConsultationValidation  { background-image: url(customIcons/red/iconConsolidationValidation.png); }
-.ProjeQtOrFlatGreen .iconConsultationValidation  { background-image: url(customIcons/green/iconConsolidationValidation.png); }
-.ProjeQtOrFlatGrey .iconConsultationValidation  { background-image: url(customIcons/grey/iconConsolidationValidation.png); }
-
-.iconPlannedWorkManual { background-image: url(images/iconPlannedWorkManual.png); }
-.ProjeQtOrFlatBlue .iconPlannedWorkManual { background-image: url(customIcons/blue/iconPlannedWorkManual.png); }
-.ProjeQtOrFlatRed .iconPlannedWorkManual { background-image: url(customIcons/red/iconPlannedWorkManual.png); }
-.ProjeQtOrFlatGreen .iconPlannedWorkManual { background-image: url(customIcons/green/iconPlannedWorkManual.png); }
-.ProjeQtOrFlatGrey .iconPlannedWorkManual { background-image: url(customIcons/grey/iconPlannedWorkManual.png); }
 
 .iconButtonReply16 { background-image: url(images/iconReply.png);  background-size: 16px 16px;}
 .ProjeQtOrFlatBlue .iconButtonReply16 { background-image: url(customIcons/blue/iconReply.png); width: 16px; height: 16px; background-size: 16px 16px;}

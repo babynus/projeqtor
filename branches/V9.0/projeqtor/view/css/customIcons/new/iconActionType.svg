@@ -4,33 +4,33 @@
 <svg version="1.1"
 	 id="svg15" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" sodipodi:docname="iconKanban.svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px" height="128px"
-	 viewBox="-40 -40 128 128" enable-background="new -40 -40 128 128" xml:space="preserve">
+	 viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 <sodipodi:namedview  bordercolor="#666666" borderopacity="1" inkscape:cx="24.979592" guidetolerance="10" showgrid="false" inkscape:zoom="15.3125" pagecolor="#ffffff" gridtolerance="10" inkscape:cy="24" id="namedview17" objecttolerance="10" inkscape:window-x="-8" inkscape:window-width="1920" inkscape:window-height="1017" inkscape:pageopacity="0" inkscape:document-rotation="0" inkscape:current-layer="svg15" inkscape:pageshadow="2" inkscape:window-y="-8" inkscape:window-maximized="1">
 	</sodipodi:namedview>
 <title  id="title6"></title>
 <g id="Calque_3">
 	<g>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M-24.942,28.718v54.877H77.99V24.492H30.1 M15.428,69.388V38.702l26.576,15.342L15.428,69.388z"/>
+			M15.862,67.898v54.877h102.932V63.673h-47.89 M56.232,108.569V77.883l26.576,15.342L56.232,108.569z"/>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M30.1,24.298H77.99V9.302H30.1"/>
+			M70.904,63.479h47.89V48.482h-47.89"/>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M30.1-6.872l43.438-12.689l-4.201-14.396L30.1-22.496"/>
+			M70.904,32.309l43.438-12.689l-4.201-14.396L70.904,16.685"/>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M15.428,69.388l26.576-15.344L15.428,38.702V69.388z"/>
+			M56.232,108.569l26.576-15.345L56.232,77.883V108.569z"/>
 	</g>
 </g>
 <g id="Calque_2_1_">
 	<g>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M20.58,17.827c0,0.578-0.469,1.048-1.051,1.048h-50.077c-0.58,0-1.049-0.471-1.049-1.048v-50.08c0-0.579,0.469-1.048,1.049-1.048
-			h50.079c0.58,0,1.049,0.469,1.049,1.048L20.58,17.827L20.58,17.827z"/>
-		<circle fill="#FF0000" cx="-19.668" cy="-20.315" r="3.706"/>
-		<path fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" d="M-11.869-20.315h22.021"/>
-		<circle fill="#FF0000" cx="-19.668" cy="-7.213" r="3.706"/>
-		<path fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" d="M-11.869-7.213h22.021"/>
-		<circle fill="#FF0000" cx="-19.668" cy="5.887" r="3.706"/>
-		<path fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" d="M-11.869,5.886h22.021"/>
+			M61.384,57.008c0,0.578-0.469,1.048-1.051,1.048H10.256c-0.58,0-1.049-0.471-1.049-1.048V6.928c0-0.579,0.469-1.048,1.049-1.048
+			h50.079c0.58,0,1.049,0.469,1.049,1.048V57.008L61.384,57.008z"/>
+		<circle fill="#FF0000" cx="21.136" cy="18.866" r="3.706"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M28.935,18.866h22.021"/>
+		<circle fill="#FF0000" cx="21.136" cy="31.968" r="3.706"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M28.935,31.968h22.021"/>
+		<circle fill="#FF0000" cx="21.136" cy="45.068" r="3.706"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M28.935,45.066h22.021"/>
 	</g>
 </g>
 </svg>
