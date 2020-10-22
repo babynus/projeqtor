@@ -492,11 +492,11 @@
 .ProjeQtOrNewGui .iconCategory { background-image: url(customIcons/new/iconCategory.svg);  background-repeat: no-repeat; }
 
 .iconChangeLayout { background-image: url(images/iconChangeLayout.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconCategory { background-image: url(customIcons/blue/iconChangeLayout.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconCategory { background-image: url(customIcons/green/iconChangeLayout.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconCategory { background-image: url(customIcons/grey/iconChangeLayout.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconCategory { background-image: url(customIcons/red/iconChangeLayout.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconCategory { background-image: url(customIcons/new/iconChangeLayout.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconChangeLayout { background-image: url(customIcons/blue/iconChangeLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconChangeLayout { background-image: url(customIcons/green/iconChangeLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconChangeLayout { background-image: url(customIcons/grey/iconChangeLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconChangeLayout { background-image: url(customIcons/red/iconChangeLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconChangeLayout { background-image: url(customIcons/new/iconChangeLayout.svg);  background-repeat: no-repeat; }
 
 .iconChangeRequest { background-image: url(images/iconChangeRequest.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconChangeRequest { background-image: url(customIcons/blue/iconChangeRequest.png);  background-repeat: no-repeat; }
@@ -916,6 +916,12 @@
 .ProjeQtOrFlatRed .iconGlobalView { background-image: url(customIcons/red/iconGlobalView.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconGlobalView { background-image: url(customIcons/new/iconGlobalView.svg);  background-repeat: no-repeat; }
 
+.iconGoto { background-image: url(images/iconGoto.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconGoto { background-image: url(customIcons/blue/iconGoto.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconGoto { background-image: url(customIcons/green/iconGoto.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconGoto { background-image: url(customIcons/grey/iconGoto.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconGoto { background-image: url(customIcons/red/iconGoto.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconGoto { background-image: url(customIcons/new/iconGoto.svg);  background-repeat: no-repeat; }
 
 
 
@@ -988,7 +994,19 @@
 .ProjeQtOrFlatRed .iconHistArchive { background-image: url(customIcons/red/iconHistArchive.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconHistArchive { background-image: url(customIcons/new/iconHistArchive.svg);  background-repeat: no-repeat; }
 
+.horizontalLayoutClass { background-image: url(images/horizontalLayout.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .horizontalLayoutClass { background-image: url(customIcons/blue/horizontalLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .horizontalLayoutClass { background-image: url(customIcons/green/horizontalLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .horizontalLayoutClass { background-image: url(customIcons/grey/horizontalLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .horizontalLayoutClass { background-image: url(customIcons/red/horizontalLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .horizontalLayoutClass { background-image: url(customIcons/new/horizontalLayout.svg);  background-repeat: no-repeat; }
 
+.verticalLayoutClass { background-image: url(images/verticalLayout.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .verticalLayoutClass { background-image: url(customIcons/blue/verticalLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .verticalLayoutClass { background-image: url(customIcons/green/verticalLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .verticalLayoutClass { background-image: url(customIcons/grey/verticalLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .verticalLayoutClass { background-image: url(customIcons/red/verticalLayout.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .verticalLayoutClass { background-image: url(customIcons/new/verticalLayout.svg);  background-repeat: no-repeat; }
 
 
 
@@ -1580,10 +1598,6 @@
 
 
 
-
-
-
-
 /* Q */
 
 .iconQuality { background-image: url(images/iconQuality.png);  background-repeat: no-repeat;  }
@@ -2051,20 +2065,6 @@
 /* A faire ou pas...                                                                      */
 /* =============================================================================== */
 
-
-
-.iconDisplay { background-image: url(images/display.png); background-repeat: no-repeat; width: 16px; height: 16px;}
-.iconDirectAccess { background-image: url(images/display10.png);  background-repeat: no-repeat; width: 10px; height: 10px;}
-
-
-.iconInvoice32 { background-image: url(images/iconInvoice32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconInvoice22 { background-image: url(images/iconInvoice22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconInvoice16 { background-image: url(images/iconInvoice16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
-
-.iconInvoiceType32 { background-image: url(images/iconInvoiceType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconInvoiceType22 { background-image: url(images/iconInvoiceType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconInvoiceType16 { background-image: url(images/iconInvoiceType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
-
 .calendarRed32 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .calendarRed22 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .calendarRed16 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
@@ -2089,9 +2089,30 @@
 .calendarWhiteUpdate22 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .calendarWhiteUpdate16 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
+.iconDisplay { background-image: url(images/display.png); background-repeat: no-repeat; width: 16px; height: 16px;}
 
+.iconDirectAccess { background-image: url(images/display10.png);  background-repeat: no-repeat; width: 10px; height: 10px;}
 
+.iconInvoice32 { background-image: url(images/iconInvoice32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconInvoice22 { background-image: url(images/iconInvoice22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.iconInvoice16 { background-image: url(images/iconInvoice16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconInvoiceType32 { background-image: url(images/iconInvoiceType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconInvoiceType22 { background-image: url(images/iconInvoiceType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.iconInvoiceType16 { background-image: url(images/iconInvoiceType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+
+.iconPlanStopped { background-image: url(customIcons/grey/iconPlanStopped.png);}
+.iconPlan { background-image: url(customIcons/grey/iconPlan.gif);}
+
+.iconRenewal32 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconRenewal22 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconRenewal16 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.iconSelect { background-image: url(images/iconSelect.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.iconTranslation32 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconTranslation22 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconTranslation16 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 
 /* =============================================================================== */
