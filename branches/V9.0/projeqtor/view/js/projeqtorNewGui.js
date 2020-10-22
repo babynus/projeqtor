@@ -260,14 +260,18 @@ function menuNewGuiFilter(filter, item) {
 			dojo.addClass('favoriteButton','imageColorNewGuiSelected');
 			dojo.removeClass('recentButton','imageColorNewGuiSelected');
 		}
+        dojo.query('.anotherBarDiv').forEach(function(el){
+        	var source = new dojo.dnd.Source(el.id, { accept:["menuBar" ],horizontal:true});
+        	
+        });
 	};
 	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, null, null, null, null, callback);
+	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter, 'anotherBarContainer');
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
 }
 
 function switchFavoriteRow(idRow, direction, maxRow){
-	dojo.byId('anotherBar'+idRow).style.display = '';
 	var nextRow=idRow;
 	if(direction=='up'){
 		nextRow -= 1;
@@ -277,7 +281,6 @@ function switchFavoriteRow(idRow, direction, maxRow){
 		if(nextRow > maxRow)nextRow=1;
 	}
 	var callback = function(){
-		dojo.byId('anotherBar'+nextRow).style.display = 'none';
 		saveUserParameter('idFavoriteRow', nextRow);
 		menuNewGuiFilter('menuBarCustom', null);
 	};
@@ -285,7 +288,6 @@ function switchFavoriteRow(idRow, direction, maxRow){
 }
 
 function wheelFavoriteRow(idRow, evt, maxRow){
-	dojo.byId('anotherBar'+idRow).style.display = '';
 	var nextRow=idRow;
 	if(evt.deltaY < 0){
 		nextRow -= 1;
@@ -295,7 +297,6 @@ function wheelFavoriteRow(idRow, evt, maxRow){
 		if(nextRow > maxRow)nextRow=1;
 	}
 	var callback = function(){
-		dojo.byId('anotherBar'+nextRow).style.display = 'none';
 		saveUserParameter('idFavoriteRow', nextRow);
 		menuNewGuiFilter('menuBarCustom', null);
 	};
@@ -340,7 +341,7 @@ function checkClassForDisplay(id,mode){
 }
 
 function moveMenuBarItem(source, target){
-	setTimeout('dojo.byId(\'anotherMenubarList\').style.display = \'none\';',200);
+	setTimeout('dojo.byId(\'anotherBarContainer\').style.display = \'none\';',200);
 	var idRow = null;
 	if(target != 'menuBarDndSource'){
 		idRow = target.substr(-1);

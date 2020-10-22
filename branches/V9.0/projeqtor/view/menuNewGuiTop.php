@@ -48,34 +48,35 @@ if(!$paramAccessMode)$paramAccessMode='direct';
         	             <td style="padding-left:5px;">
         	               <div dojoType="dijit.form.DropDownButton" id="addItemButton" jsId="addItemButton" name="addItemButton"
                             showlabel="false" iconClass="iconAdd iconSize22 imageColorNewGui" title="<?php echo i18n('comboNewButton');?>">
-                            <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">
+                            <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;height:100%;">
                               <input type="hidden" id="objectClass" name="objectClass" value="" /> 
                               <input type="hidden" id="objectId" name="objectId" value="" />
                               <div style="font-weight:bold; height:25px;text-align:center">
                               <?php echo i18n('comboNewButton');?>
                               </div>
-                              <div style="height:25px;float:right;" title="<?php echo i18n('helpNewItemAccessMode');?>">
-                              <table width:"100%"><tr>
-                              <td><?php echo i18n('newItemAccessMode');?></td>
-                              <td style="padding-left:10px;">
-                              <div  id="dialogAddPopUpAcces" name="dialogAddPopUpAcces" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" 
-                              value="<?php if($paramAccessMode=='direct'){echo 'off';}else{echo 'on';}?>" leftLabel="" rightLabel=""
-                              style="width:10%">
-                                <script type="dojo/method" event="onStateChanged" >
-                                  var mode = null;
-                                  if(this.value == 'on'){
-                                    mode = 'dialog';
-                                  }else{
-                                    mode = 'direct';
-                                  }
-                                  dojo.byId('newItemAccessMode').value = mode;
-                                  saveUserParameter('newItemAccessMode', mode);
-console.log(mode);
-                                </script>
-                              </div>
+                              <div style="height:25px;" title="<?php echo i18n('helpNewItemAccessMode');?>">
                               <input type="hidden" id="newItemAccessMode" name="newItemAccessMode" value="<?php echo $paramAccessMode?>" />
-                              </td>
-                              </tr></table></div>
+                              <table style="width:100%">
+                              <tr>
+                                <td><div style="float:right;"><?php echo i18n('newItemAccessMode');?></div></td>
+                                <td style="float:right;">
+                                  <div id="dialogAddPopUpAcces" name="dialogAddPopUpAcces" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" 
+                                    value="<?php if($paramAccessMode=='direct'){echo 'off';}else{echo 'on';}?>" leftLabel="" rightLabel=""
+                                    style="width:10%;top:3px;">
+                                      <script type="dojo/method" event="onStateChanged" >
+                                        var mode = null;
+                                        if(this.value == 'on'){
+                                          mode = 'dialog';
+                                        }else{
+                                          mode = 'direct';
+                                        }
+                                        dojo.byId('newItemAccessMode').value = mode;
+                                        saveUserParameter('newItemAccessMode', mode);
+                                      </script>
+                                  </div>
+                                </td>
+                              </tr></table>
+                              </div>
                               <?php $arrayItems=array('Project','Resource','Activity','Ticket','Meeting','Milestone');
                               foreach($arrayItems as $item) {
                                 $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
@@ -85,14 +86,13 @@ console.log(mode);
                                   }
                                 }
                                 if ($canCreate=='YES') {?>
-                                <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
+                                <div style="vertical-align:top;cursor:pointer;margin-top:5px;height:22px;" class="dijitTreeRow"
                                  onClick="addNewGuiItem('<?php echo $item;?>',null);" >
                                   <table width:"100%"><tr style="height:22px" >
                                   <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIconNewGui($item, 22, null, false);?></td>    
                                   <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
                                   </tr></table>   
                                 </div>
-                                <div style="height:5px;"></div>
                                 <?php } 
                                 }?>
                             </div>
