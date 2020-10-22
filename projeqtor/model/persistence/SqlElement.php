@@ -4610,7 +4610,7 @@ abstract class SqlElement {
         } else {
           // check if required
           if ((strpos ( $this->getFieldAttributes ( $col ), 'required' ) !== false or array_key_exists ( $col, $arrayExtraRequired )) 
-              and ! $isCopy and !in_array( $col, $arrayExtraHidden ) and $this->isAttributeSetToField($col, 'canChangeReference') ) {
+              and ! $isCopy and !in_array( $col, $arrayExtraHidden ) ) {
             if ($col == 'idResource' and ! trim ( $this->idResource ) and $user->isResource and Parameter::getGlobalParameter ( 'setResponsibleIfNeeded' ) != 'NO') {
               $this->idResource = $user->id;
               $val = $this->idResource;
