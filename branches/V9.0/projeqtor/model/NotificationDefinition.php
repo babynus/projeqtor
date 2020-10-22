@@ -160,7 +160,7 @@ class NotificationDefinition extends SqlElement {
       'fixedMonth'=>'min:1,max:12,step:1,showLabelInTab',
       'fixedDay'=>'min:1,max:31,step:1,showLabelInTab',
       'fixedMonthDay'=>'min:1,max:31,step:1,showLabelInTab',
-      'notificationNbRepeatsBefore'=>'min:-1,max:20,step:1,showLabelInTab',
+      'notificationNbRepeatsBefore'=>'min:-1,max:99,step:1,showLabelInTab',
       'notificationGenerateBefore'=>'min:0,max:1000,step:1,showLabelInTab',
       'notificationGenerateBeforeInMin'=>'min:0,max:720,step:5,showLabelInTab'
       );  
