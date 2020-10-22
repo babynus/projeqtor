@@ -594,6 +594,19 @@ function queryToDo($from,$nextFrom,$type,$isStatus){
       }
     }
   }
+  if(Parameter::getGlobalParameter('hideItemTypeRestrictionOnProject')=='YES'){
+    $user=getSessionUser();
+    $objectClass=get_class($obj);
+    $showIdleProjects=(sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;
+    $showIdle=1;
+    $lstGetClassList = Type::getClassList();
+    $objType = $obj->getDatabaseColumnName($objectClass . 'Type');
+    $lstGetClassList = array_flip($lstGetClassList);
+    if(in_array($objType,$lstGetClassList)){
+      $queryWhere.=($queryWhere)?' and ':'';
+      $queryWhere.= $user->getItemTypeRestriction($obj,$objectClass,$user,$showIdle,$showIdleProjects);
+    }
+  }
   $newOrderBy="";
   if($orderBy!='' && $queryOrderBy!='')$queryOrderBy=','.$queryOrderBy;
   if($orderBy=="idstatus")$newOrderBy=$tableName3.'.sortOrder';
