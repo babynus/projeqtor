@@ -365,7 +365,7 @@ function moveMenuBarItem(source, target){
 function showFavoriteTooltip(menuClass) {
 	  clearTimeout(closeFavoriteTimeout);
 	  clearTimeout(openFavoriteTimeout);
-	  openFavoriteTimeout=setTimeout("dijit.byId('addFavorite"+menuClass+"').openDropDown();",popupOpenDelay);
+	  openFavoriteTimeout=setTimeout("dijit.byId('addFavorite"+menuClass+"').openDropDown();",100);
 	  customMenuAddRemoveClass=menuClass;
 }
 
