@@ -126,8 +126,10 @@ $predefinedList = $predefinedSituation->getSqlElementsFromCriteria(null, null, $
               style="width: 150px;" name="ressource" id="ressource"
               <?php echo autoOpenFilteringSelect();?> value="<?php if($situation->idResource){echo $situation->idResource;}else{echo $userId;}?>">
                 <?php
-                 $specific='imputation';
-                 include '../tool/drawResourceListForSpecificAccess.php';?>  
+                 //$specific='imputation';
+                 //include '../tool/drawResourceListForSpecificAccess.php';
+                 htmlDrawOptionForReference('idResource', getCurrentUserId());
+                 ?>  
             </select>
            </td>
           </tr>
