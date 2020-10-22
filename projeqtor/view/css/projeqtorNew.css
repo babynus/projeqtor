@@ -511,8 +511,7 @@ animation: fadeIn ease 0.5s;
     width: 8%;
 }
 
-.ProjeQtOrNewGui .anotherBarDiv:hover{
-	/*border: 2px solid var(--color-dark) !important;*/
+.ProjeQtOrNewGui .anotherBar:hover{
 	background-color: var(--color-light-secondary) !important;/*#e6ffe6*/
 }
 

@@ -248,14 +248,15 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     });
     dojo.ready(function(){
         dojo.query('.anotherBarDiv').forEach(function(el){
-        	var source = new dojo.dnd.Source(el.id, { accept:["menuBar" ] });
+        	var source = new dojo.dnd.Source(el.id, { accept:["menuBar" ],horizontal:true});
+        	
         });
     });
     dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
-       if(source.id == 'menuBarDndSource')dojo.byId('anotherMenubarList').style.display = 'block';
+       if(source.id == 'menuBarDndSource')dojo.byId('anotherBarContainer').style.display = 'block';
     });
     dojo.subscribe("/dnd/cancel", function(){
-	    dojo.byId('anotherMenubarList').style.display = 'none';
+	    dojo.byId('anotherBarContainer').style.display = 'none';
     });
 
     dndMoveInProgress=false;
@@ -934,21 +935,32 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
      <?php } ?>
     <?php }else{
       include 'menuNewGuiTop.php'; ?>
-      <div id="anotherMenubarList" name="anotherMenubarList" region="center" style="display:none;width:90%;height: 43px;position: absolute;z-index: 9999999;top: 48px;left: 113px; ">
-        <table style="width:100%;heigth:100%">
-           <?php for($i=1; $i<=5; $i++){
+      <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;z-index: 9999999;display: none;height: 200px;top: 46px;">
+      <div id="anotherMenubarList" name="anotherMenubarList" style="width:90%;position:absolute !important;z-index:9999999;left:113px;">
+       <?php $top = 20; 
+       for($i=1; $i<=5; $i++){
            $idDiv = "menuBarDndSource$i";
            $idInput = "idFavoriteRow$i";?>
-             <tr  id="<?php echo 'anotherBar'.$i;?>" name="<?php echo 'anotherBar'.$i;?>" style="height: 43px;<?php if($defaultMenu == 'menuBarCustom' and $idRow == $i)echo 'display:none;';?>">
-               <td style="border: unset !important;padding: 0px 0px 5px 0px;">
-                 <div id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" class="anotherBarDiv" style="height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;">
-                    <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $i;?>">
-                    <?php //Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $i, true);?>
-                 </div>
-               </td>
-             </tr>
-           <?php }?>
-      </table>
+        <div id="<?php echo 'anotherBar'.$i;?>" class="anotherBar" style="margin-top: 5px;height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;<?php if($defaultMenu == 'menuBarCustom' and $idRow == $i)echo 'display:none;';?>">
+          <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $i;?>">
+          <table>
+               <tr class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height: 43px;width:100%;padding-top:5px;">
+                <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $i, true);?>
+                <td>
+                    <div style="position:absolute;width:100%;height:43px;top:<?php echo $top-15;?>px;left:0px;"></div>
+                  <?php if($defaultMenu == 'menuBarCustom' and $idRow != $i){ ?>
+                    <div class="sectionBadge" style="top:<?php echo $top;?>px;width: 12px;right:10px;"><?php echo $i;?></div>
+                  <?php 
+                      $top += 50;
+                    }
+                  ?>
+                </td>
+               </tr>
+          </table>
+        </div>
+        <?php 
+        }?>
+      </div>
       </div>
       <?php }
 
