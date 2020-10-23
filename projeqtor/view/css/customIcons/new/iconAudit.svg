@@ -1,36 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
-	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Calque_1">
-	<g id="Calque_2" display="none">
-	</g>
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<g>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M34.087,85.881c-2.569-4.417-4.042-9.548-4.042-15.024c0-8.26,3.349-15.74,8.762-21.153l21.152,21.153h29.914
+		c0,16.521-13.392,29.913-29.914,29.913c-7.22,0-13.842-2.558-19.01-6.817"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M88.576,62.122c-1.446-4.748-4.045-8.996-7.467-12.418L59.958,70.856h29.914c0-0.777-0.028-1.55-0.089-2.312"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M70.618,31.366c-3.312-1.263-6.904-1.955-10.66-1.955c-8.259,0-15.738,3.348-21.152,8.761l21.152,21.152l21.151-21.153
+		c-0.817-0.816-1.682-1.587-2.59-2.306"/>
 	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="9.261" y1="122.191" x2="120.413" y2="122.191"/>
+		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		62.453,39.531 84.141,17.843 104.324,17.843 	"/>
 	
-		<rect x="10.462" y="74.705" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="22.23" height="38.187"/>
+		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		83.391,62.121 96.423,62.121 108.352,74.047 124.113,74.047 	"/>
 	
-		<rect x="39.302" y="52.997" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="22.229" height="59.895"/>
-	
-		<rect x="68.141" y="62.459" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="22.232" height="50.433"/>
-	
-		<rect x="96.98" y="42.749" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="22.23" height="70.143"/>
-	
-		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="21.578" cy="52.22" r="5.708"/>
-	
-		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="50.417" cy="31.941" r="5.708"/>
-	
-		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="79.256" cy="42.04" r="5.708"/>
-	
-		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="108.096" cy="16.921" r="5.708"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="83.542" y1="38.309" x2="103.795" y2="20.667"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="55.799" y1="33.826" x2="73.874" y2="40.156"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="26.245" y1="48.938" x2="45.75" y2="35.224"/>
-</g>
-<g id="Calque_3_1_">
+		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		49.023,85.876 24.532,110.367 5.572,110.367 	"/>
 </g>
 </svg>
