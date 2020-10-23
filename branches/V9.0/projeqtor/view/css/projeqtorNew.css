@@ -705,31 +705,34 @@ animation: fadeIn ease 0.5s;
 /* Scrollbars */
 
 .ProjeQtOrNewGui ::-webkit-scrollbar {
+	height: 8px;
     width: 8px;
    	background: var(--color-light);
   	border-radius: 10px;
 }
 
 .ProjeQtOrNewGui ::-webkit-scrollbar-thumb {
-    background: var(--color-dark);
+    background: var(--color-medium);
     border-radius: 10px;
 }
 
 .ProjeQtOrNewGui .menu__level::-webkit-scrollbar {
+	height: 8px;
     width: 8px;
-    background: var(--color-drak);
+    background: var(--color-light);
     opacity:0.3;
   	border-radius: 10px;
 }
 
 .ProjeQtOrNewGui .menu__level::-webkit-scrollbar-thumb {
-    background: var(--color-light);
+    background: var(--color-medium);
     border-radius: 10px;
 }
 
  .ProjeQtOrNewGui div{
   	scrollbar-color:grey white;
   	scrollbar-width: thin;
+  	scrollbar-height: thin;
 }
 
 .ProjeQtOrNewGui .calendarRed32
