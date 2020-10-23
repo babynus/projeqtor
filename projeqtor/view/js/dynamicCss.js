@@ -34,8 +34,8 @@ function setColorTheming(ref,bis) {
   var h=hsl[0];
   var s=hsl[1];
   var l=hsl[2];
-  darker=HSLToHex(h,25,25);
-  dark=HSLToHex(h,25,40);
+  darker=HSLToHex(h,(s==0)?0:25,25);
+  dark=HSLToHex(h,(s==0)?0:25,40);
   medium=HSLToHex(h,s,70);
   light=HSLToHex(h,s,90);
   lighter=HSLToHex(h,s,95);
@@ -44,6 +44,7 @@ function setColorTheming(ref,bis) {
   //saturate=Math.round(s/hslDefault[1]*100);
   //brightness=Math.round(40/hslDefault[2]*100);
   saturate=50;
+  if (s==0) saturate=0;
   brightness=80;
   //saturate=100;
   //brightness=100;
@@ -70,12 +71,10 @@ function setColorTheming(ref,bis) {
     var lightness = (0.3) * parseInt(red, 16) + (0.6) * parseInt(green, 16)
         + (0.1) * parseInt(blue, 16);
     lightness=parseInt(lightness);
-    console.log("lightness="+lightness);
     if (lightness < 128) {
       invert=1;
       dec=parseInt(192+lightness);
       if (dec>255) dec=255;
-      console.log("<128 dec="+dec);
       hex=Number(dec).toString(16); 
       if (hex.length < 2) { hex="0"+hex; } 
       foreColor = '#'+hex+hex+hex;
@@ -98,13 +97,23 @@ function setColorTheming(ref,bis) {
     var red = bis.substr(1, 2);
     var green = bis.substr(3, 2);
     var blue = bis.substr(5, 2);
-    var lightness = (0.3) * parseInt(red, 16) + (0.6) * parseInt(green, 16)
+    var lightnessBis = (0.3) * parseInt(red, 16) + (0.6) * parseInt(green, 16)
     + (0.1) * parseInt(blue, 16);
-    lightness=parseInt(lightness);
-    console.log("bis brightness "+lightness);
-    if (lightness > 150) {
+    lightnessBis=parseInt(lightnessBis);
+    if (lightnessBis > 150) {
       bisText = '#000000';
     }
+  }
+  
+  var menu=darker;
+  red = dark.substr(1, 2);
+  green = dark.substr(3, 2);
+  blue = dark.substr(5, 2);
+  lightnessDark = (0.3) * parseInt(red, 16) + (0.6) * parseInt(green, 16)
+      + (0.1) * parseInt(blue, 16);
+  lightnessDark=parseInt(lightnessDark);
+  if (lightnessDark-lightness>20 || lightness-lightnessDark>25) {
+    menu=dark;
   }
   
 //  dijit.byId("menuBarUndoButton").domNode.style.filter='brightness(0) invert('+invert+')';
@@ -135,6 +144,7 @@ function setColorTheming(ref,bis) {
   element.style.setProperty("--color-toolbar-text",foreColor);
   element.style.setProperty("--color-toolbar-invert",invert);
   element.style.setProperty("--color-toolbar-invert-reverse",(1-invert));
+  element.style.setProperty("--color-menu",menu);
   // List
   element.style.setProperty("--color-list-header", white);
   element.style.setProperty("--color-list-header-text", dark);
