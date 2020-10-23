@@ -668,10 +668,9 @@ if (property_exists($objectClass,'idStatus')) {
 			                    <span id="gridRowCount" class="gridRowCount"></span>             
 			                    <input type="hidden" id="listFilterClause" name="listFilterClause" value="" style="width: 50px;" />
 			                  </td>
-			      <?php } ?>
-			      
-			      <?php } ?>
-			      <?php //gautier #filterEnd 
+			      <?php }
+			           } 
+			            //gautier #filterEnd 
                   }else{
 
                       $display = "none";
@@ -882,11 +881,9 @@ if (property_exists($objectClass,'idStatus')) {
                   
                 </button>
               </td>      
-              <?php } ?>     
-              <?php } ?>
-              <!-- end  -->
-              
-              <?php if ( !$hideClientSearch and property_exists($obj,'idClient') ) { ?>
+              <?php }      
+                      } 
+                if ( !$hideClientSearch and property_exists($obj,'idClient') ) { ?>
               <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD clientSearchTD allSearchFixLength">
                  <span id="listClientFilterSpan" style="display:<?php echo sessionDisplayFilter('listClientFilter',$objectClass);?>" class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colClient");?>
@@ -930,8 +927,8 @@ if (property_exists($objectClass,'idStatus')) {
               </td>
                 
               
-              <?php }?>                     
-              <?php $activeFilter=false;
+              <?php }                    
+                  $activeFilter=false;
                  if (! $comboDetail and is_array(getSessionUser()->_arrayFilters)) {
                    if (array_key_exists($objectClass, getSessionUser()->_arrayFilters)) {
                      if (count(getSessionUser()->_arrayFilters[$objectClass])>0) {
@@ -968,8 +965,7 @@ if (property_exists($objectClass,'idStatus')) {
                      	//END CHANGE qCazelles - Dynamic filter - Ticket #78
                      }
                    }
-                 }
-                 ?>
+                 } ?>
             <td >&nbsp;</td>
             <td width="5px"><span class="nobr">&nbsp;</span></td>
 			      </div></table><td>
@@ -985,7 +981,7 @@ if (property_exists($objectClass,'idStatus')) {
                class="comboButton"
                dojoType="dijit.form.DropDownButton" 
                id="listFilterFilter" name="listFilterFilter"
-               iconClass="icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
+               iconClass="dijitButtonIcon dijitButtonIcon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
                <?php if (!isNewGui()){?>
                 <script type="dojo/connect" event="onClick" args="evt">
                   showFilterDialog();
