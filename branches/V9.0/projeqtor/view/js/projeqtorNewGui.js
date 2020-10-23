@@ -302,20 +302,30 @@ function wheelFavoriteRow(idRow, evt, maxRow){
 	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow, 'favoriteSwitch', null, callback);
 }
 
-function addRemoveFavMenuLeft (id,name,mode){
+function addRemoveFavMenuLeft (id,name,mode,type){
   dojo.removeClass(id);
   dojo.removeAttr(id,'onclick');
   if(mode=='add'){
-    var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','remove')";
-    var param="?operation=add&class="+name.substr(4);
-    dojo.xhrGet({
-      url : "../tool/saveCustomMenu.php"+param,
-      handleAs : "text",
-      load : function(data, args) {
-      },
-    });
-    dojo.setAttr(id,"onclick",func);
-    dojo.byId(id).className='menu__as__Fav';
+    if(type=="reportDirect"){
+      var fileName = dojo.byId('reportFileMenu').value;
+      var form="reportForm";
+      if(fileName=="showIntervention" && dojo.byId("consultationPlannedWorkManualParamDiv")){
+        form="listFormConsPlannedWorkManual";
+      }
+        loadContent("../tool/saveReportInToday.php", "resultDivMain", form, true,
+        'report');
+    }else{
+      var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','remove')";
+      var param="?operation=add&class="+name.substr(4);
+      dojo.xhrGet({
+        url : "../tool/saveCustomMenu.php"+param,
+        handleAs : "text",
+        load : function(data, args) {
+        },
+      });
+      dojo.setAttr(id,"onclick",func);
+      dojo.byId(id).className='menu__as__Fav';
+    }
   }else{
     var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','add')";
     var param="?operation=remove&class="+name.substr(4);
@@ -328,6 +338,7 @@ function addRemoveFavMenuLeft (id,name,mode){
     dojo.setAttr(id,"onclick",func);
     dojo.byId(id).className='menu__add__Fav';
   }
+
   menuNewGuiFilter('menuBarCustom', null);
 }
 
