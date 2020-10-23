@@ -101,7 +101,7 @@ class Menu extends SqlElement {
   		}
   	} else if ($menu->type=='item') {
   		echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem" dndType="menuBar" style="border:unset !important;float:left;">';
-  		echo '<div dndType="menuBar" class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
+  		echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
   		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
   		echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);showFavoriteTooltip(\''.$class.'\');"';
   		if ($menuName=='menuReports' and isHtml5() ) {
@@ -180,7 +180,7 @@ class Menu extends SqlElement {
           echo '</div>';
         } else if ($menu->type=='object') { 
           if (securityCheckDisplayMenu($idMenu, $class)) {
-          	echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n('menu'.$class) . '" class="dojoDndItem" dndType="menuBar" style="border:unset !important;float:left;">';
+          	echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n('menu'.$class) . '" class="dojoDndItem" dndType="menuBar"  style="border:unset !important;float:left;">';
           	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
           	echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);showFavoriteTooltip(\''.$class.'\');"';
           	echo ' onMouseLeave="hideFavoriteTooltip(0,\''.$class.'\');"';

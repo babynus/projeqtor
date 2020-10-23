@@ -79,13 +79,13 @@ float: left;
     content: '\f27d';
     font-family: 'Material';
     font-size: 18px;
-    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-width: 0.5px;
     text-shadow: 0.5px 0px 1px;
     -webkit-text-stroke-color: black;
     position: relative;
     top: 8px;
     right: 14px;
-    color: var( --color-light);
+    color: var( --color-medium);
     width: 4%;
 }
 .menu__as__Fav::after{
