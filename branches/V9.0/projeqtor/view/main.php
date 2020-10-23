@@ -691,7 +691,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           <tr style="height:10px;">
             <td align="left" style="position:relative;height: 100%;" valign="top">
               <div style="position:relative; width: 400px; height: 54px;">
-    	          <div style="overflow:visible;position:absolute;width: 480px; height: 280px;top:15px;text-align: center">
+    	          <div style="overflow:visible;position:absolute;width: 480px; height: 250px;top:15px;text-align: center">
     	           <div id="waitLogin" style="position:absolute;top:50%"></div>  
 	    		        <img style="max-height:60px" src="<?php 
 	    		          if (file_exists("../logo.gif")) echo '../logo.gif';
@@ -946,8 +946,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $i;?>">
           <table style="width:100%;">
                <tr>
-                <td dojoType="dojo.dnd.Source" class="anotherBarDiv" accept="menuBar" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height: 43px;width:100%;padding-top:5px;" 
-                ndType="menuBar" data-dojo-props="accept: ['menuBar','menuBarTop']">
+                <td dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height: 43px;width:100%;padding-top:5px;" 
+                ndType="menuBar" data-dojo-props="accept: ['menuBar']">
                 <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $i, true);?>
                   <?php if($defaultMenu == 'menuBarCustom' and $idRow != $i){ ?>
                     <div class="sectionBadge" style="top:<?php echo $top;?>px;width: 12px;right:10px;"><?php echo $i;?></div>
@@ -1013,7 +1013,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <!--the left div must be created after the central div for the dynamism of the left menu on the new interface -->
  <?php if(isNewGui()){?> </div></div></div>
     <div id="leftMenu" class="menu-left"> <?php }?>
-    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left"  splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:'280px');?><?php echo (isNewGui())?';dispaly:none;':'';?>" >
+    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left"  splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:'250px');?><?php echo (isNewGui())?';dispaly:none;':'';?>" >
       <?php if(!isNewGui()){?>
       <script type="dojo/connect" event="resize" args="evt">
          if (hideShowMenuInProgress) return;
