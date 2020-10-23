@@ -350,8 +350,18 @@ function checkClassForDisplay(id,mode){
   }
 }
 
+function editFavoriteRow(){
+	if(dojo.byId('isEditFavorite').value == 'true'){
+		dojo.byId('isEditFavorite').value = 'false';
+		dojo.byId('anotherBarContainer').style.display = 'none';
+	}else{
+		dojo.byId('isEditFavorite').value = 'true';
+		dojo.byId('anotherBarContainer').style.display = 'block';
+	}
+}
+
 function moveMenuBarItem(source, target){
-	dojo.byId('anotherBarContainer').style.display = 'none';
+	if(dojo.byId('isEditFavorite').value != 'true')dojo.byId('anotherBarContainer').style.display = 'none';
 	var idRow = null;
 	if(target != 'menuBarDndSource'){
 		idRow = target.substr(-1);
