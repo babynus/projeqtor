@@ -3829,7 +3829,7 @@ if (target==undefined) target='object';
     }
   }
   if (eltClass=='BudgetItem') eltClass='Budget'; 
-  selectTreeNodeById(dijit.byId('menuTree'), eltClass);
+  if(!isNewGui)selectTreeNodeById(dijit.byId('menuTree'), eltClass);
   formChangeInProgress = false;
   // if ( dojo.byId("GanttChartDIV")
   // && (eltClass=='Project' || eltClass=='Activity' || eltClass=='Milestone'
