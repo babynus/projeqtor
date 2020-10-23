@@ -523,6 +523,10 @@ function resetFilterQuick(lstStat){
      }
      if(dijit.byId('listNameFilterQuick')){
        dijit.byId('listNameFilterQuick').set('value','');
+       if(dijit.byId('listNameFilterQuickSw').get('value')=='off'){
+         dojo.byId('listNameFilterSpan').style.display="none";
+         dijit.byId('listNameFilter').domNode.style.display = 'none';
+       }
      }
      if(dijit.byId('listTypeFilterQuick')){
        dijit.byId('listTypeFilterQuick').set('value','');
@@ -533,11 +537,6 @@ function resetFilterQuick(lstStat){
      if(dijit.byId('listBudgetParentFilterQuick')){
        dijit.byId('listBudgetParentFilterQuick').set('value','');
      }
-     if(dijit.byId('quickSearchValueQuick')){
-       dijit.byId('quickSearchValueQuick').set('value','');
-     }
-     
-     
 }
 
 
