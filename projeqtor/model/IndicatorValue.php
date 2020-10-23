@@ -278,9 +278,9 @@ class IndicatorValue extends SqlElement {
     if ($this->type!='delay') {
   		return;
   	}
-  	if (!$obj and ($this->idle or ($this->done and $this->code!='DELAY' and $this->code != 'YEARLY'))) {
+  	if ($this->idle or ($this->done and $this->code!='DELAY' and $this->code != 'YEARLY')) {
   		return;
-  	} 
+  	}
   	$targetControlColumnName='done';
   	$this->status='';
   	switch ($this->code) {
