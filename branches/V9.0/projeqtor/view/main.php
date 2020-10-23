@@ -208,7 +208,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           changeSubscriptionFromDialog(mode,'other',item.getAttribute('objectclass'),item.getAttribute('objectid'),item.getAttribute('userid'),null,item.getAttribute('currentuserid'))
         }
       }else if (source.id!=target.id) {
-    	  if(target.id=='menuBarDndSource1' || target.id=='menuBarDndSource2' || target.id=='menuBarDndSource3' || target.id=='menuBarDndSource4' || target.id=='menuBarDndSource5'){
+    	  if( target.id=='menuBarDndSource' || target.id=='menuBarDndSource1' || target.id=='menuBarDndSource2' || target.id=='menuBarDndSource3' || target.id=='menuBarDndSource4' || target.id=='menuBarDndSource5'){
         	  setTimeout('moveMenuBarItem("'+ source.id +'", "'+ target.id +'")',100); 
           }else{
         	  return;

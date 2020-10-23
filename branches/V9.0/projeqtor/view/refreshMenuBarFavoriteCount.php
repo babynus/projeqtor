@@ -37,14 +37,15 @@ $nbFavoriteRow=5;
 ?>
 <table>
    <tr>
-     <td id="favoriteSwitchRow" style="top: 7px;right: 25px;position: absolute;">
+   <td id="editFavoriteButton" title="<?php echo i18n('editFavorite');?>" onClick="editFavoriteRow();"><?php echo formatNewGuiButton('Edit', 22, false);?></td>
+   <td id="favoriteSwitchRow" style="padding-left: 5px;padding-right: 5px;">
     <table style="height:22px;width:10px">
       <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'up', <?php echo $nbFavoriteRow;?>);" >▲</td></tr>
       <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'down', <?php echo $nbFavoriteRow;?>);" >▼</td></tr>
     </table>
    </td>
-   <td id="favoriteCountRow" style="top:10px;right:5px;position:absolute;color: var(--color-dark);">
-     <div id="favoriteCountRowDiv" class="sectionBadge" style="top: 3px;width: 12px;right:0px;"><?php echo $idRow;?></div>
+   <td id="favoriteCountRow" style="padding-right: 15px;color: var(--color-dark);">
+     <div id="favoriteCountRowDiv" class="sectionBadge" style="top: 14px;width: 12px;right:2px;"><?php echo $idRow;?></div>
    </td>
  </tr>
 </table>
