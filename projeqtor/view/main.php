@@ -255,6 +255,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
        if(source.id == 'menuBarDndSource')dojo.byId('anotherBarContainer').style.display = 'block';
     });
     dojo.subscribe("/dnd/cancel", function(){
+    	if(dojo.byId('isEditFavorite').value == 'true'){
+    		dojo.byId('isEditFavorite').value = 'false';
+    	}else{
+    		dojo.byId('isEditFavorite').value = 'true';
+    	}
 	    dojo.byId('anotherBarContainer').style.display = 'none';
     });
 
