@@ -128,10 +128,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
                     <script type="dojo/method" event="onLoad" args="evt">;
                         var cronCheckNotification = <?php echo Parameter::getGlobalParameter('cronCheckNotifications'); ?>;
                         var intervalNotificationTreeDelay = cronCheckNotification*1000;
-                        var intervalNotificationTree = setInterval(function() {
-                                                                                refreshNotificationTree(true);
-                                                                              },
-                                                                   intervalNotificationTreeDelay);
+                        var intervalNotificationTree = setInterval(function() { refreshNotificationTree(true);},intervalNotificationTreeDelay);
                     </script>
                     <script type="dojo/method" event="onClick" args="item">;
                         if (notificationStore.getValue(item, "objClass")==="") {return false;}
@@ -253,7 +250,7 @@ function getReportMenu(){
   foreach ($reportListSimplify as $id=>$val){
     $parentId=$idMenuReport->id.$levelParent.$val->idReportCategory;
     $keyTab=$level.'-'.$parentId.'-'.$val->sortOrder;
-    $obj=array('id'=>$val->id,'name'=>$val->name,'idParent'=>$parentId,'idMenu'=>$val->idReportCategory,'file');
+    $obj=array('id'=>$val->id,'name'=>$val->name,'idParent'=>$parentId,'idMenu'=>$val->idReportCategory,'file'=>$val->file);
     $res[$keyTab]=array('level'=>$level,'objectType'=>'reportDirect','object'=>$obj);
   }
   //======================
@@ -303,6 +300,9 @@ function drawLeftMenuListNewGui($displayMode){
       $obj->idParent=$menu['object']['idParent'];
       $obj->name=$menu['object']['name'];
       $obj->idMenu=($menu['objectType']=='reportDirect')?$menu['object']['idMenu']:0;
+      if($menu['objectType']=='reportDirect'){
+        $file=$menu['objectType']['file'];
+      }
     }else{
       $obj=$menu['object'];
     }
@@ -337,7 +337,7 @@ function drawLeftMenuListNewGui($displayMode){
           $class="menu__as__Fav";
         }
         $styleDiv="display:none;";
-        $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."');";
+        $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
         
         $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
@@ -345,10 +345,20 @@ function drawLeftMenuListNewGui($displayMode){
     }else{
       $classEl="Reports";
       $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.")";
-      $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'report\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'report\',\'leave\');">';
-      $funcuntionFav="";
+      
+      if($isFav->id==''){
+        $mode='add';
+        $class="menu__add__Fav";
+        $styleDiv="display:none;";
+      }else{
+        $mode='remove';
+        $class="menu__as__Fav";
+      }
+      $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
       $styleDiv="display:none;";
       $class="menu__add__Fav";
+      $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'report\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'report\',\'leave\');">';
+      $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'"/>';
       $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.i18n($obj->name).'</a>';
       $result.='<div id="div'.$obj->id.'report" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }
