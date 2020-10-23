@@ -95,7 +95,7 @@ class Menu extends SqlElement {
   	if (in_array($menu->name,$customMenuArray)) $menuClass.=' menuBarCustom';
   	$idMenu=$menu->id;
   	$class=substr($menuName,4);
-  	$style='width:auto;height:auto;max-height:48px !important;padding:5px 10px 5px 10px !important;color: var(--color-dark);filter:unset !important;white-space:nowrap;';
+  	$style='width:auto;height:100%;padding:0px 10px 5px 10px !important;color: var(--color-dark);filter:unset !important;white-space:nowrap;';
   	if ($menu->type=='menu') {
   		if ($menu->idMenu==0) {
   		}

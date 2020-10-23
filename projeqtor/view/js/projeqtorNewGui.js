@@ -251,12 +251,10 @@ function menuNewGuiFilter(filter, item) {
 		if(item)selectIconMenuBar(item);
 		if(filter != 'menuBarCustom'){
 			dojo.byId('favoriteSwitch').style.display = 'none';
-			dojo.byId('wheelingBarDiv').style.display = 'none';
 			dojo.addClass('recentButton','imageColorNewGuiSelected');
 			dojo.removeClass('favoriteButton','imageColorNewGuiSelected');
 		}else{
 			dojo.byId('favoriteSwitch').style.display = 'block';
-			dojo.byId('wheelingBarDiv').style.display = 'block';
 			dojo.addClass('favoriteButton','imageColorNewGuiSelected');
 			dojo.removeClass('recentButton','imageColorNewGuiSelected');
 		}
@@ -288,6 +286,7 @@ function switchFavoriteRow(idRow, direction, maxRow){
 }
 
 function wheelFavoriteRow(idRow, evt, maxRow){
+	if(defaultMenu == 'menuBarRecent')return;
 	var nextRow=idRow;
 	if(evt.deltaY < 0){
 		nextRow -= 1;
@@ -341,7 +340,7 @@ function checkClassForDisplay(id,mode){
 }
 
 function moveMenuBarItem(source, target){
-	setTimeout('dojo.byId(\'anotherBarContainer\').style.display = \'none\';',200);
+	dojo.byId('anotherBarContainer').style.display = 'none';
 	var idRow = null;
 	if(target != 'menuBarDndSource'){
 		idRow = target.substr(-1);

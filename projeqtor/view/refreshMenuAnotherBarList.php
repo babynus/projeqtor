@@ -36,7 +36,7 @@ $defaultMenu = RequestHandler::getValue('menuFilter');
 $idRow = Parameter::getUserParameter('idFavoriteRow');
 
 ?>
-<div id="anotherMenubarList" name="anotherMenubarList" style="width:90%;position:absolute !important;z-index:9999999;left:113px;">
+<div id="anotherMenubarList" name="anotherMenubarList" style="width:93%;position:absolute !important;z-index:9999999;left:67px;">
 <?php 
 $top = 20; 
 for($i=1; $i<=5; $i++){
@@ -45,17 +45,16 @@ for($i=1; $i<=5; $i++){
   <div id="<?php echo 'anotherBar'.$i;?>" class="anotherBar" style="margin-top: 5px;height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;
   <?php if($defaultMenu == 'menuBarCustom' and $idRow == $i)echo 'display:none;';?>">
     <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $i;?>">
-    <table style="width:100%;">
+    <table style="width:100%;height:100%;">
          <tr>
-          <td class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height: 43px;width:100%;padding-top:5px;"
+         <td style="font-weight: bold;font-size: 15pt;text-align: center;color: var(--color-dark);width: 3%;border-right: 1px solid var(--color-dark);">
+          <?php if($defaultMenu == 'menuBarCustom' and $idRow != $i){
+                  echo $i;
+                }?>
+         </td>
+          <td class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97%;"
           dndType="menuBar"  dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar']">
           <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $i, true);?>
-            <?php if($defaultMenu == 'menuBarCustom' and $idRow != $i){ ?>
-              <div class="sectionBadge" style="top:<?php echo $top;?>px;width: 12px;right:10px;"><?php echo $i;?></div>
-            <?php 
-                $top += 50;
-              }
-            ?>
           </td>
          </tr>
     </table>
