@@ -192,9 +192,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     dojo.require("dojox.image.Lightbox");
     dojo.subscribe("/dnd/drop", function(source, nodes, copy, target){
       if(target.id == null){
-    	  if(target.parent.id=='menuBarDndSource1' || target.parent.id=='menuBarDndSource2' || target.parent.id=='menuBarDndSource3' || target.parent.id=='menuBarDndSource4' || target.parent.id=='menuBarDndSource5'){
-        	  setTimeout('moveMenuBarItem("'+ source.id +'", "'+ target.parent.id +'")',100); 
-          }
       //gautier #translationApplication
         //if (target.id == null) we are in dgrid DROP , nothing to do.
       }else if (target.id.indexOf('dialogRow')!=-1 && source.id!=target.id){
@@ -211,7 +208,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           changeSubscriptionFromDialog(mode,'other',item.getAttribute('objectclass'),item.getAttribute('objectid'),item.getAttribute('userid'),null,item.getAttribute('currentuserid'))
         }
       }else if (source.id!=target.id) {
-        return;
+    	  if(target.id=='menuBarDndSource1' || target.id=='menuBarDndSource2' || target.id=='menuBarDndSource3' || target.id=='menuBarDndSource4' || target.id=='menuBarDndSource5'){
+        	  setTimeout('moveMenuBarItem("'+ source.id +'", "'+ target.id +'")',100); 
+          }else{
+        	  return;
+          }
       } else if (nodes.length>0 && nodes[0] && target && target.current) {
         var moveTasks=false;
         var arrayTasks=new Array();
@@ -235,7 +236,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              setTimeout('moveFilterListColumn2()',100); 
            } else if( target.id=='dndHierarchicalBudgetList') {
              setTimeout('moveBudgetFromHierarchicalView("' + idFrom + '", "' + idTo + '")',100); 
-           } else if( target.id=='menuBarDndSource') {
+           } else if( target.id=='menuBarDndSource' || target.id=='menuBarDndSource1' || target.id=='menuBarDndSource2' || target.id=='menuBarDndSource3' || target.id=='menuBarDndSource4' || target.id=='menuBarDndSource5') {
              setTimeout('moveMenuBarItem("'+ source.id +'", "'+ target.id +'")',100); 
            }
            
@@ -244,14 +245,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         //setTimeout('moveTask("' + idFrom + '", "' + idTo + '")',100);
           var execMove=setTimeout(function() { moveTask(arrayTasks, moveTasks); },20);
         }
+      }else if(source.id == target.id){
+    	  if(source.id == 'menuBarDndSource'){
+    		  dojo.byId('anotherBarContainer').style.display = 'none';
+    	  }
       }
-    });
-    dojo.ready(function(){
-      //new dojo.dnd.Source(anotherMenubarList,{ accept:["menuBar" ]});
-//         dojo.query('.anotherBarDiv').forEach(function(el){
-//         	var source = new dojo.dnd.Source(el.id, { accept:["menuBar" ],horizontal:true});
-        	
-//         });
     });
     dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
        if(source.id == 'menuBarDndSource')dojo.byId('anotherBarContainer').style.display = 'block';
@@ -937,25 +935,24 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <?php }else{
       include 'menuNewGuiTop.php'; ?>
       <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;z-index: 9999999;height: 200px;top: 46px;display:none">
-      <div id="anotherMenubarList" name="anotherMenubarList" style="width:90%;position:absolute !important;z-index:9999999;left:113px;">
+      <div id="anotherMenubarList" name="anotherMenubarList" style="width:93%;position:absolute !important;z-index:9999999;left:67px;">
        <?php $top = 20; 
        for($i=1; $i<=5; $i++){
            $idDiv = "menuBarDndSource$i";
            $idInput = "idFavoriteRow$i";?>
         <div id="<?php echo 'anotherBar'.$i;?>" class="anotherBar" style="margin-top: 5px;height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;<?php if($defaultMenu == 'menuBarCustom' and $idRow == $i)echo 'display:none;';?>">
           <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $i;?>">
-          <table style="width:100%;">
+          <table style="width:100%;height:100%;">
                <tr>
-                <td dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height: 43px;width:100%;padding-top:5px;" 
-                ndType="menuBar" data-dojo-props="accept: ['menuBar']">
-                <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $i, true);?>
-                  <?php if($defaultMenu == 'menuBarCustom' and $idRow != $i){ ?>
-                    <div class="sectionBadge" style="top:<?php echo $top;?>px;width: 12px;right:10px;"><?php echo $i;?></div>
-                  <?php 
-                      $top += 50;
-                    }
-                  ?>
-                  <td>
+               <td style="font-weight: bold;font-size: 15pt;text-align: center;color: var(--color-dark);width: 3%;border-right: 1px solid var(--color-dark);">
+                 <?php if($defaultMenu == 'menuBarCustom' and $idRow != $i){
+                    echo $i;
+                  }?>
+               </td>
+                <td dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97%;" 
+                  ndType="menuBar" data-dojo-props="accept: ['menuBar']">
+                  <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $i, true);?>
+                </td>
                </tr>
           </table>
         </div>

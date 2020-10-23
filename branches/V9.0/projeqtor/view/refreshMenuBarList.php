@@ -39,11 +39,10 @@ if(!$nbSkipMenu)$nbSkipMenu=0;
 $idRow = Parameter::getUserParameter('idFavoriteRow');
 $nbFavoriteRow=5;
 ?>
-<table  style="width:100%;">
+<table  style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);">
   <tr >
-    <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="width:100%;" dndType="menuBar" data-dojo-props="accept: ['menuBar']">
+    <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="width:100%;height:100%;" dndType="menuBar" data-dojo-props="accept: ['menuBar']">
      <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
-     <div id="wheelingBarDiv" style="height:100%;width:100%;position:absolute;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
      <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idRow, false);?>
    </td>
   </tr>
