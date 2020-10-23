@@ -173,7 +173,7 @@ label, .ProjeQtOrNewGui label,
 }
 
 .ProjeQtOrNewGui #menuBarAccesLeft{
-	background: var(--color-dark) !important;
+	background: var(--color-menu) !important;
 }
 .ProjeQtOrNewGui #menuBarAccesBottom{
 	border-top:1px solid var(--color-toolbar);
