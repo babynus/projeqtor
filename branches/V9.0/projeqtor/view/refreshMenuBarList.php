@@ -41,7 +41,7 @@ $nbFavoriteRow=5;
 ?>
 <table  style="width:100%;">
   <tr >
-    <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="width:100%;" dndType="menuBarTop" data-dojo-props="accept:['menuBarTop']">
+    <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="width:100%;" dndType="menuBar" data-dojo-props="accept: ['menuBar']">
      <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
      <div id="wheelingBarDiv" style="height:100%;width:100%;position:absolute;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
      <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idRow, false);?>

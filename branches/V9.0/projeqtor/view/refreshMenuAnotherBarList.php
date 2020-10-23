@@ -48,7 +48,7 @@ for($i=1; $i<=5; $i++){
     <table style="width:100%;">
          <tr>
           <td class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height: 43px;width:100%;padding-top:5px;"
-          dndType="menuBar" data-dojo-props="accept: ['menuBar','menuBarTop']">
+          dndType="menuBar"  dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar']">
           <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $i, true);?>
             <?php if($defaultMenu == 'menuBarCustom' and $idRow != $i){ ?>
               <div class="sectionBadge" style="top:<?php echo $top;?>px;width: 12px;right:10px;"><?php echo $i;?></div>

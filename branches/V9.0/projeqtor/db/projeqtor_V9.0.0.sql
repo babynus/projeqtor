@@ -22,7 +22,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (5,'navSteering',null,null,5),
 (6,'navReports',null,null,6),
 (7,'navTools',null,null,7),
-(8,'navParamters',null,null,8),
+(8,'navAdministration',null,null,8),
 (9,'navOther',1,null,6),
 (10,'navIndicators',2,null,5),
 (11,'navAbsence',3,null,3),

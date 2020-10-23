@@ -109,7 +109,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
     	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dijit.layout.ContentPane"> 
         	         <table style="width:100%;">
         	           <tr>
-        	             <td style="width:100%;" dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBarTop" data-dojo-props="accept: ['menuBarTop']">
+        	             <td style="width:100%;" dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBarTop" data-dojo-props="accept: ['menuBar']">
         	               <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow, false);?>
         	               <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
         	             <!--    <div id="wheelingBarDiv" style="<?php // if($defaultMenu == 'menuBarRecent')echo 'display:block;';?>height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php //echo $idRow;?>, event, <?php // echo $nbFavoriteRow;?>);"></div>-->
