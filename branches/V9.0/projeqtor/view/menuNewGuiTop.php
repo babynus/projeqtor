@@ -105,19 +105,21 @@ if(!$paramAccessMode)$paramAccessMode='direct';
       	           </table>    
 	             </div>
 	           </td>
-    	       <td>
+    	       <td   style="width: 90%;">
     	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dijit.layout.ContentPane"> 
-        	         <table>
-        	           <tr dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBar">
-        	             <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow, false);?>
-        	             <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
-        	             <div id="wheelingBarDiv" style="<?php if($defaultMenu == 'menuBarRecent')echo 'display:none;';?>height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);"></div>
+        	         <table style="width:100%;">
+        	           <tr>
+        	             <td style="width:100%;" dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBarTop" data-dojo-props="accept: ['menuBarTop']">
+        	               <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow, false);?>
+        	               <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
+        	             <!--    <div id="wheelingBarDiv" style="<?php // if($defaultMenu == 'menuBarRecent')echo 'display:block;';?>height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php //echo $idRow;?>, event, <?php // echo $nbFavoriteRow;?>);"></div>-->
+        	             </td>
         	           </tr>
         	         </table>
     	         </div>
     	       </td>
     	       <td>
-    	       <div id="favoriteSwitch">
+    	       <div id="favoriteSwitch" >
     	         <table>
       	           <tr>
       	             <td id="favoriteSwitchRow" style="top: 7px;right: 25px;position: absolute;<?php if($defaultMenu == 'menuBarRecent')echo 'display:none';?>">
@@ -132,7 +134,6 @@ if(!$paramAccessMode)$paramAccessMode='direct';
         	       </tr>
     	         </table>
   	           </div>     
-    	       <td>
     	   </tr></table>
   	    </div>
     </div>
