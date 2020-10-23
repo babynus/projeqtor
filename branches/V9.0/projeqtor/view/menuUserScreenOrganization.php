@@ -108,7 +108,7 @@ if($paramRightDiv=='trailing'){
           <table >
             <tr>
               <td style="width:28x;text-align:center">
-                <div class="horizontalLayoutClass" style="position:absolute;top:2px;left:3px" ></div>
+                <div class="horizontalLayoutClass iconSize22" style="position:absolute;top:2px;left:3px" ></div>
               </td>
             </tr>
           </table>    
@@ -121,7 +121,7 @@ if($paramRightDiv=='trailing'){
           <table >
             <tr>
               <td style="width:28x;text-align:center">
-                <div class="verticalLayoutClass" style="position:absolute;top:2px;left:3px" ></div>
+                <div class="verticalLayoutClass iconSize22" style="position:absolute;top:2px;left:3px" ></div>
               </td>
             </tr>
           </table>    
