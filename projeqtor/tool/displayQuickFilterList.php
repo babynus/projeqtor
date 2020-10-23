@@ -71,7 +71,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
   <tr><td>
     <table style="width:100%">
      <br/> 
-      <tr><td style="width:25%"></td><td style="width:65%"></td><td style="width:10%;font-sytle:italic;color:grey;"><?php echo i18n("alwaysDisplay");?></td></tr>
+      <tr><td style="width:25%"></td><td style="width:65%"></td><td style="width:10%;font-style:italic;color:grey;"><?php echo i18n("alwaysDisplay");?></td></tr>
       <tr>
         <td style="text-align:right;width:25%">
           <span class="nobr"><?php echo i18n("colId")?>&nbsp;:&nbsp;</span> 
