@@ -40,8 +40,8 @@ if(!$paramAccessMode)$paramAccessMode='direct';
   <div id="menuBarVisibleDiv" style="height:auto;width:auto;  top: 0px; left:248px; z-index:0;">
     <div id="contentMenuBar" class="contentMenuBar" style="width:100%;left: 0px; top:1px; overflow:hidden; z-index:0">
 	    <div  name="menubarContainer" id="menubarContainer" style="height:43px;width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
-	      <table style="height:43px;"><tr>
-	           <td>
+	      <table style="height:43px;width:100%;"><tr>
+	           <td style="width: 7%;">
 	             <div name="menuBarButtonDiv" id="menuBarButtonDiv">
 	               <table>
         	           <tr>
@@ -105,14 +105,13 @@ if(!$paramAccessMode)$paramAccessMode='direct';
       	           </table>    
 	             </div>
 	           </td>
-    	       <td   style="width: 90%;">
-    	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dijit.layout.ContentPane"> 
-        	         <table style="width:100%;">
+    	       <td style="width: 93%;">
+    	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dijit.layout.ContentPane"  style="width:100%;height:100%;"> 
+        	         <table style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);">
         	           <tr>
-        	             <td style="width:100%;" dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBarTop" data-dojo-props="accept: ['menuBar']">
+        	             <td style="width:100%;height:100%;" dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBarTop" data-dojo-props="accept: ['menuBar']">
         	               <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow, false);?>
         	               <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
-        	             <!--    <div id="wheelingBarDiv" style="<?php // if($defaultMenu == 'menuBarRecent')echo 'display:block;';?>height:100%;width:100%;position:absolute !important;top:0px;" onWheel="wheelFavoriteRow(<?php //echo $idRow;?>, event, <?php // echo $nbFavoriteRow;?>);"></div>-->
         	             </td>
         	           </tr>
         	         </table>
