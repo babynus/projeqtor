@@ -935,7 +935,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <?php }else{
       include 'menuNewGuiTop.php'; ?>
       <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;z-index: 9999999;height: 200px;top: 46px;display:none">
-      <div id="anotherMenubarList" name="anotherMenubarList" style="width:93%;position:absolute !important;z-index:9999999;left:67px;">
+      <div id="anotherMenubarList" name="anotherMenubarList" style="width:92%;position:absolute !important;z-index:9999999;left:65px;">
        <?php $top = 20; 
        for($i=1; $i<=5; $i++){
            $idDiv = "menuBarDndSource$i";
