@@ -3,25 +3,68 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
 	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Calque_2">
-	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="3.456" y1="22.683" x2="56.582" y2="22.683"/>
-	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="56.582" y1="34.317" x2="84.728" y2="34.317"/>
-	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="15.729" y1="46.421" x2="35.87" y2="46.421"/>
-	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="35.371" y1="58.842" x2="76.5" y2="58.842"/>
-	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="76.5" y1="69.842" x2="105.5" y2="69.842"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M9.377,109.646c-3.316,0-6.004-2.915-6.004-6.509
-		V13.122c0-3.594,2.688-6.507,6.004-6.507h107.083c3.318,0,6.006,2.914,6.006,6.507v90.016c0,3.594-2.688,6.509-6.006,6.509"/>
-</g>
-<g id="Calque_3">
-	<g>
-		<g>
-			<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M63.026,81.624
-				c-16.104,0-30.156,8.753-37.683,21.756c7.526,13.004,21.577,21.759,37.683,21.759c16.104,0,30.155-8.757,37.682-21.759
-				C93.182,90.377,79.13,81.624,63.026,81.624z M75.06,115.42c-3.08,3.083-7.341,4.98-12.033,4.98
-				c-9.403,0-17.018-7.624-17.018-17.015c0-7.093,4.339-13.173,10.516-15.726c1.995-0.833,4.196-1.294,6.502-1.294
-				c9.402,0,17.018,7.621,17.018,17.017c0,4.7-1.902,8.953-4.982,12.033"/>
-		</g>
-		<circle fill="#FF0000" cx="63.025" cy="103.383" r="7.579"/>
+<g id="Calque_1" display="none">
+	<g id="Calque_1_1_">
 	</g>
+	
+		<line display="inline" fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="5.1" y1="35.064" x2="58.226" y2="35.064"/>
+	
+		<line display="inline" fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="58.226" y1="46.698" x2="86.372" y2="46.698"/>
+	
+		<line display="inline" fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="17.83" y1="68.512" x2="45.601" y2="68.512"/>
+	
+		<line display="inline" fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="45.601" y1="81.646" x2="68.682" y2="81.646"/>
+	
+		<line display="inline" fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="67.805" y1="92.5" x2="113.844" y2="92.5"/>
+	<path display="inline" fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M124.111,105.398
+		c0,3.594-2.688,6.509-6.006,6.509H11.022c-3.316,0-6.004-2.915-6.004-6.509V15.383c0-3.594,2.688-6.507,6.004-6.507h107.083
+		c3.318,0,6.006,2.914,6.006,6.507V105.398z"/>
+</g>
+<g id="Calque_1_-_copie">
+	<g id="Calque_3_1_">
+		<g>
+			<g>
+				<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M41.13,71.448
+					c-10.58,0-19.812,5.75-24.757,14.293c4.945,8.543,14.176,14.295,24.757,14.295c10.58,0,19.812-5.753,24.756-14.295
+					C60.941,77.198,51.709,71.448,41.13,71.448z M49.037,93.651c-2.023,2.025-4.824,3.271-7.906,3.271
+					c-6.178,0-11.181-5.009-11.181-11.179c0-4.659,2.851-8.654,6.909-10.331c1.311-0.547,2.757-0.85,4.271-0.85
+					c6.178,0,11.181,5.007,11.181,11.179c0,3.088-1.25,5.883-3.273,7.906"/>
+			</g>
+			<circle fill="#FF0000" cx="41.129" cy="85.744" r="4.979"/>
+		</g>
+	</g>
+	<g id="Calque_1_3_" display="none">
+	</g>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M121.172,67.86H59.769
+		c-1.901,0-3.443-1.671-3.443-3.732V5.358"/>
+	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="60.698" y1="15.97" x2="108.913" y2="15.97"/>
+	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="67.496" y1="32.699" x2="92.685" y2="32.699"/>
+	<line fill="none" stroke="#FF0000" stroke-width="11" stroke-miterlimit="10" x1="89.505" y1="46.5" x2="114.692" y2="46.5"/>
+	<g id="Calque_2_1_">
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M75.713,84.399c0,19.012-15.414,34.425-34.426,34.425c-19.012,0-34.425-15.413-34.425-34.425
+			c0-19.013,15.413-34.425,34.425-34.425"/>
+	</g>
+</g>
+<g id="Calque_3" display="none">
+	<g id="Calque_2" display="inline">
+		<g>
+			<g>
+				
+					<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+					M102.315,74.567c2.096-2.558,1.718-6.363-0.839-8.459c-2.561-2.097-6.368-1.718-8.463,0.839l2.212-2.699
+					c2.097-2.559,1.718-6.365-0.841-8.462c-2.561-2.097-6.367-1.72-8.464,0.839l4.069-4.967c2.096-2.558,1.717-6.365-0.841-8.461
+					c-2.56-2.097-6.366-1.719-8.462,0.84L97.898,23.03c2.096-2.559,1.719-6.366-0.84-8.463c-2.559-2.096-6.367-1.717-8.463,0.842
+					L63.857,45.604l1.516-9.225c0.535-3.261-1.697-6.37-4.96-6.906c-3.265-0.536-6.372,1.696-6.908,4.959
+					c0,0-19.643,43.706-11.642,50.261l16.662,13.65c8.001,6.556,28.285-4.852,28.546-5.172L102.315,74.567L102.315,74.567z"/>
+				
+					<rect x="21.366" y="90.455" transform="matrix(-0.7735 -0.6338 0.6338 -0.7735 16.7105 206.8854)" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="47.907" height="20.005"/>
+			</g>
+			<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+				M82.213,9.857c5-6.103,14.001-6.998,20.104-1.997c6.103,4.999,6.996,14.001,1.996,20.104"/>
+		</g>
+	</g>
+</g>
+<g id="Calque_4">
 </g>
 </svg>
