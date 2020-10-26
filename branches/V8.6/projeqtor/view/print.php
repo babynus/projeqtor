@@ -287,11 +287,15 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
     $outputFileName=$_REQUEST['reportName'].'_'.date('Ymd_His');
     if ($outMode=='excel') {
       $outputFileName.=".xlsx";
-      $content=ob_get_clean();
-      require_once('../external/HtmlPhpExcel/vendor/autoload.php');
-      //$htmlPhpExcel = new \Ticketpark\HtmlPhpExcel\HtmlPhpExcel(iconv('UTF-8', 'Windows-1252',$content));
-      $htmlPhpExcel = new \Ticketpark\HtmlPhpExcel\HtmlPhpExcel(encodeCSV($content));
-      $htmlPhpExcel->process()->output($outputFileName);
+      $content=ob_get_contents();
+      if (strpos($content,'<table _excel-name=')!==false) { // Target is Excel and stype not transformed in xlsx file
+        ob_clean();
+        require_once('../external/HtmlPhpExcel/vendor/autoload.php');
+        //$htmlPhpExcel = new \Ticketpark\HtmlPhpExcel\HtmlPhpExcel(iconv('UTF-8', 'Windows-1252',$content));
+        $htmlPhpExcel = new \Ticketpark\HtmlPhpExcel\HtmlPhpExcel(encodeCSV($content));
+        $outputFileName=str_replace("\0",'',$outputFileName);
+        $htmlPhpExcel->process()->output($outputFileName);
+      }
     } else {
       $outputFileName.=".pdf";
     }
