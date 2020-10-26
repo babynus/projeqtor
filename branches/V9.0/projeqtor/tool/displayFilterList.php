@@ -80,6 +80,10 @@ $flt=new Filter();
 $crit=array('idUser'=> $user->id, 'refType'=>$objectClass );
 $orderByFilter = "sortOrder ASC";
 $filterList=$flt->getSqlElementsFromCriteria($crit,false,null,$orderByFilter);
+$displayQuickFilter = RequestHandler::getValue('displayQuickFilter');
+if($displayQuickFilter){
+  if(isNewGui())include "../tool/displayQuickFilterList.php";
+}
 htmlDisplayStoredFilter($filterList,$filterObjectClass,$currentFilter, $context);
 
 ?>
