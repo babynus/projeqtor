@@ -5981,8 +5981,6 @@ abstract class SqlElement {
           } else {
             $msg .= ' />';
           }
-        } else if (substr ( $col, 0, 2 ) == 'id' and $dataType == 'int' and strlen ( $col ) > 2 and substr ( $col, 2, 1 ) == strtoupper ( substr ( $col, 2, 1 ) )) { // Idxxx
-         	$msg .= htmlEncode ( SqlList::getNameFromId ( substr ( $col, 2 ), $val ), 'print' );
 // BEGIN - REPLACE BY TABARY - USE isForeignKey GENERIC FUNCTION          
         } else if (isForeignKey( $col, $this)) { // Idxxx
 //        } else if (substr ( $col, 0, 2 ) == 'id' and $dataType == 'int' and strlen ( $col ) > 2 and substr ( $col, 2, 1 ) == strtoupper ( substr ( $col, 2, 1 ) )) { // Idxxx
@@ -5991,6 +5989,8 @@ abstract class SqlElement {
           $col_withoutAlias = foreignKeyWithoutAlias($col);
           $msg .= htmlEncode ( SqlList::getNameFromId ( substr($col_withoutAlias,2), $val ), 'print' );                            
 // END -  ADD BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
+        } else if (substr ( $col, 0, 2 ) == 'id' and $dataType == 'int' and strlen ( $col ) > 2 and substr ( $col, 2, 1 ) == strtoupper ( substr ( $col, 2, 1 ) )) { // Idxxx
+         	$msg .= htmlEncode ( SqlList::getNameFromId ( substr ( $col, 2 ), $val ), 'print' );
         } else if ($dataLength > 100) { // Text Area (must reproduce BR, spaces, ...
           $msg .= htmlEncode ( $val, 'print' );
         } else if ($dataType == 'decimal' and (substr ( $col, - 4, 4 ) == 'Cost' or substr ( $col, - 6, 6 ) == 'Amount' or $col == 'amount')) {
