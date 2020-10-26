@@ -1917,11 +1917,11 @@
 .ProjeQtOrNewGui .iconResolution { background-image: url(customIcons/new/iconResolution.svg);  background-repeat: no-repeat; }
 
 .iconResourcePlanning { background-image: url(images/iconResourcePlanning32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconResolution { background-image: url(customIcons/blue/iconResourcePlanning.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconResolution { background-image: url(customIcons/green/iconResourcePlanning.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconResolution { background-image: url(customIcons/grey/iconResourcePlanning.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconResolution { background-image: url(customIcons/red/iconResourcePlanning.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconResolution { background-image: url(customIcons/new/iconResourcePlanning.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconResourcePlanning { background-image: url(customIcons/blue/iconResourcePlanning.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconResourcePlanning { background-image: url(customIcons/green/iconResourcePlanning.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconResourcePlanning { background-image: url(customIcons/grey/iconResourcePlanning.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconResourcePlanning { background-image: url(customIcons/red/iconResourcePlanning.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconResourcePlanning { background-image: url(customIcons/new/iconResourcePlanning.svg);  background-repeat: no-repeat; }
 
 .iconReview { background-image: url(images/iconReview32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconReview { background-image: url(customIcons/blue/iconReview.png);  background-repeat: no-repeat; }
