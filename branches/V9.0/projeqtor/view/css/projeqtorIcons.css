@@ -686,6 +686,13 @@
 .ProjeQtOrFlatRed .iconContractUnit { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconContractUnit { background-image: url(customIcons/new/iconUnity.svg);  background-repeat: no-repeat; }
 
+.iconCopy { background-image: url(images/iconCopy.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconCopy { background-image: url(customIcons/blue/iconCopy.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconCopy { background-image: url(customIcons/green/iconCopy.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconCopy { background-image: url(customIcons/grey/iconCopy.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconCopy { background-image: url(customIcons/red/iconCopy.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconCopy { background-image: url(customIcons/new/iconCopy.svg);  background-repeat: no-repeat; }
+
 .iconCriticality { background-image: url(images/iconCriticality32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconCriticality { background-image: url(customIcons/blue/iconCriticality.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconCriticality { background-image: url(customIcons/green/iconCriticality.png);  background-repeat: no-repeat; }
@@ -2030,6 +2037,13 @@
 .ProjeQtOrFlatRed .iconStatusMailPerProject { background-image: url(customIcons/red/iconStatusMailPerProject.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconStatusMailPerProject { background-image: url(customIcons/new/iconStatusMailPerProject.svg);  background-repeat: no-repeat; }
 
+.iconSum { background-image: url(images/iconSum.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconSum { background-image: url(customIcons/blue/iconSum.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGreen .iconSum { background-image: url(customIcons/green/iconSum.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGrey .iconSum { background-image: url(customIcons/grey/iconSum.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatRed .iconSum { background-image: url(customIcons/red/iconSum.png);  background-repeat: no-repeat;}
+.ProjeQtOrNewGui .iconSum { background-image: url(customIcons/new/iconSum.svg);  background-repeat: no-repeat; }
+
 .iconSupplierContract { background-image: url(images/iconSupplierContract.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconSupplierContract { background-image: url(customIcons/blue/iconSupplierContract.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconSupplierContract { background-image: url(customIcons/green/iconSupplierContract.png);  background-repeat: no-repeat;}
@@ -2295,37 +2309,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* =============================================================================== */
-/* A faire ou pas...                                                                      */
+/* New Format                                                                      */
 /* =============================================================================== */
 
-.calendarRed32 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarRed22 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarRed16 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.calendarYellow32 { background-image: url(images/calendarYellow32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarYellow22 { background-image: url(images/calendarYellow32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarYellow16 { background-image: url(images/calendarYellow32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.calendarWhite32 { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarWhite22 { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarWhite16 { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.calendarRedUpdate32 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarRedUpdate22 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarRedUpdate16 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.calendarYellowUpdate32 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarYellowUpdate22 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarYellowUpdate16 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.calendarWhiteUpdate32 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarWhiteUpdate22 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarWhiteUpdate16 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.iconDisplay { background-image: url(images/display.png); background-repeat: no-repeat; width: 16px; height: 16px;}
-
-.iconDirectAccess { background-image: url(images/display10.png);  background-repeat: no-repeat; width: 10px; height: 10px;}
 
 .iconInvoice32 { background-image: url(images/iconInvoice32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconInvoice22 { background-image: url(images/iconInvoice22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -2343,11 +2344,6 @@
 .iconTranslation32 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconTranslation22 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconTranslation16 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
-
-/* =============================================================================== */
-/* New Format                                                                      */
-/* =============================================================================== */
 
 
 .iconButtonReply16 { background-image: url(images/iconReply.png);  background-size: 16px 16px;}
@@ -2586,4 +2582,45 @@
 .ProjeQtOrFlatGrey .iconButtonKanbanRemove { background-image: url(customIcons/grey/iconRemove.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonKanbanRemove { background-image: url(customIcons/red/iconRemove.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonKanbanRemove { background-image: url(customIcons/new/iconButtonKanbanRemove.svg);  background-repeat: no-repeat; }
+
+
+
+
+/* =============================================================================== */
+/* A faire ou pas...                                                                      */
+/* =============================================================================== */
+
+.calendarRed32 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.calendarRed22 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.calendarRed16 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.calendarYellow32 { background-image: url(images/calendarYellow32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.calendarYellow22 { background-image: url(images/calendarYellow32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.calendarYellow16 { background-image: url(images/calendarYellow32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.calendarWhite32 { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.calendarWhite22 { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.calendarWhite16 { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.calendarRedUpdate32 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.calendarRedUpdate22 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.calendarRedUpdate16 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.calendarYellowUpdate32 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.calendarYellowUpdate22 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.calendarYellowUpdate16 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.calendarWhiteUpdate32 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.calendarWhiteUpdate22 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.calendarWhiteUpdate16 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+
+
+.iconDisplay { background-image: url(images/display.png); background-repeat: no-repeat; width: 16px; height: 16px;}
+
+
+
+.iconDirectAccess { background-image: url(images/display10.png);  background-repeat: no-repeat; width: 10px; height: 10px;}
+
+
 
