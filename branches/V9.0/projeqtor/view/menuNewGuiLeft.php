@@ -40,11 +40,11 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
     <div id="menuPersonalAcces"  onresize="showBottomLeftMenu();"  dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;overflow: hidden;" >
       <div id="iconsBottomSize" onresize="">
         <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb" onclick="showBottomContent('Parameter')"  title="<?php echo i18n('menuParameter');?>"></div>
-        <div id="buttonLink" class="iconHome iconSize22 iconBreadSrumb" onclick="showBottomContent('Link')" title="<?php echo i18n('ExternalShortcuts');?>"></div>
+        <div id="buttonLink" class="iconLink iconSize22 iconBreadSrumb" onclick="showBottomContent('Link')" title="<?php echo i18n('ExternalShortcuts');?>"></div>
         <?php if (securityCheckDisplayMenu(null,'Document')) {?>
         <div title="<?php echo i18n('document');?>" id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb" onclick="showBottomContent('Document')"></div>
         <?php }?>
-        <div id="buttonConsole" class="iconHome iconSize22 iconBreadSrumb" onclick="showBottomContent('Console')"  title="<?php echo i18n('Console');?>"></div>
+        <div id="buttonConsole" class="iconConsole iconSize22 iconBreadSrumb" onclick="showBottomContent('Console')"  title="<?php echo i18n('Console');?>"></div>
         <?php if(securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv()){?>
         <div id="buttonNotification" class="iconNotification  iconSize22 iconBreadSrumb" onclick="showBottomContent('Notification')"  title="<?php echo i18n('accordionNotification');?>"></div>
         <?php }?>
@@ -105,15 +105,15 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
            <?php 
            if( securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv()){
            ?>
-           <div id="notificationBottom" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Notification')?"block":"none";?>;" >
+           <div id="notificationBottom" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Notification')?"block":"none";?>;height:100%" >
                 <div dojoType="dojo.data.ItemFileReadStore" 
                      id="notificationStore" 
-                    jsId="notificationStore" url="../tool/jsonNotification.php">
+                    jsId="notificationStore" url="../tool/jsonNotification.php" >
                 </div>
                 <div style="position: absolute; float:right; right: 5px; cursor:pointer;"
                      title="<?php echo i18n("notificationAccess");?>"
                      onclick="if (checkFormChangeInProgress()){return false;};loadContent('objectMain.php?objectClass=Notification','centerDiv');"
-                     class=" iconNotification iconSize22">
+                     class=" iconNotification iconSize22" >
                 </div>
                 <div style="position: absolute; float:right; right: 45px; cursor:pointer;"
                      title="<?php echo i18n("notificationRefresh");?>"
@@ -122,9 +122,9 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
                 </div>
                 <div dojoType="dijit.tree.ForestStoreModel" id="notificationModel" jsId="notificationModel" store="notificationStore"
                      query="{id:'*'}" rootId="notificationRoot" rootLabel="Notifications"
-                     childrenAttrs="children">
+                     childrenAttrs="children" > 
                 </div>             
-                 <div dojoType="dijit.Tree" id="notificationTree" model="notificationModel" openOnClick="false" showRoot='false'>
+                 <div dojoType="dijit.Tree" id="notificationTree" model="notificationModel" openOnClick="false" showRoot='false' style="height:100%">
                     <script type="dojo/method" event="onLoad" args="evt">;
                         var cronCheckNotification = <?php echo Parameter::getGlobalParameter('cronCheckNotifications'); ?>;
                         var intervalNotificationTreeDelay = cronCheckNotification*1000;
@@ -230,24 +230,42 @@ function getReportMenu(){
   //=================== lis of all report dependant of this categoryies
   $levelParent=$level;
   $level++;
-  $reportDirect= new Report();
-  $where=" idReportCategory in (".implode(",", $lstIdCate).")";
-  $reportList= $reportDirect->getSqlElementsFromCriteria(null,false,$where,"sortOrder");
   $lastVal=array();
   $listSubCat=array();
+  $cat=array();
+  $newCate=true;
+  $newCatParentId="";
+  $lvl=$level+1;
+  $reportDirect= new Report();
+  $where=" idReportCategory in (".implode(",", $lstIdCate).")";
+  $reportList= $reportDirect->getSqlElementsFromCriteria(null,false,$where,"file");
   foreach ($reportList as $idV=>$value){
-    if((!empty($lastVal)) and $value->file==$lastVal['file']){
+    if((!empty($lastVal)) and $value->file==$lastVal['file']){ // check if report as same file and creat parent menu to display 
+       if($newCate==true){ // creat the menu to display 
+        $pId=$idMenuReport->id.$levelParent.$value->idReportCategory;
+        $thisId=$pId.$level.$idV;
+        $k=$level.'-'.$pId.'-'.$value->sortOrder;
+        $object= array('id'=>$thisId,'name'=>substr($value->file,0,-4),'idParent'=>$pId);
+        $res[$k]=array('level'=>$level,'objectType'=>'report','object'=>$object);
+        $newCate=false;
+        $newCatParentId=$thisId;
+       }
        if(isset($reportList[$lastVal['id']])){
-          if(!isset($listSubCat[$lastVal['id']]))$listSubCat[$lastVal['id']]=$reportList[$lastVal['id']];
-          unset($reportList[$lastVal['id']]);
+         $tKey=$lvl.'-'.$newCatParentId.'-'.$reportList[$lastVal['id']]->sortOrder;
+         $sbMenu= array('id'=>$reportList[$lastVal['id']]->id,'name'=>$reportList[$lastVal['id']]->name,'idParent'=>$newCatParentId,'idMenu'=>$reportList[$lastVal['id']]->idReportCategory,'file'=>$reportList[$lastVal['id']]->file);
+         $res[$tKey]=array('level'=>$level+1,'objectType'=>'reportDirect','object'=>$sbMenu);
+         unset($reportList[$lastVal['id']]);
        }
        unset($reportList[$idV]);
-       $listSubCat[$idV]=$value;
+       $tabKey=$lvl.'-'.$newCatParentId.'-'.$value->sortOrder;
+       $subMenu= array('id'=>$value->id,'name'=>$value->name,'idParent'=>$newCatParentId,'idMenu'=>$value->idReportCategory,'file'=>$value->file);
+      $res[$tabKey]=array('level'=>$level+1,'objectType'=>'reportDirect','object'=>$subMenu);
+    }else{
+      if($newCate==false)$newCate=true;
     }
     $lastVal=array('id'=>$idV,'file'=>$value->file);
   }
-  $reportListSimplify=$reportList;
-  foreach ($reportListSimplify as $id=>$val){
+  foreach ($reportList as $id=>$val){
     $parentId=$idMenuReport->id.$levelParent.$val->idReportCategory;
     $keyTab=$level.'-'.$parentId.'-'.$val->sortOrder;
     $obj=array('id'=>$val->id,'name'=>$val->name,'idParent'=>$parentId,'idMenu'=>$val->idReportCategory,'file'=>$val->file);
@@ -257,6 +275,8 @@ function getReportMenu(){
   return $res;
  
 }
+
+
 function getNavigationMenuLeft (){
   $level=0;
   $result=array();
