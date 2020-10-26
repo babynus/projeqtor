@@ -301,7 +301,7 @@ function drawLeftMenuListNewGui($displayMode){
       $obj->name=$menu['object']['name'];
       $obj->idMenu=($menu['objectType']=='reportDirect')?$menu['object']['idMenu']:0;
       if($menu['objectType']=='reportDirect'){
-        $file=$menu['objectType']['file'];
+        $file=(isset($menu['objectType']['file']))?$menu['objectType']['file']):'';
       }
     }else{
       $obj=$menu['object'];
