@@ -41,6 +41,7 @@
     
     function getNotifications() {
         $paramIconSize=Parameter::getUserParameter('paramIconSize');
+        if(isNewGui())$paramIconSize=16;
             
         // The 'unread' status
 //        $idStatus = SqlElement::getSingleSqlElementFromCriteria("Status", array("name" => "unread"))->id;

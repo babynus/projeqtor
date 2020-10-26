@@ -307,13 +307,7 @@ function addRemoveFavMenuLeft (id,name,mode,type){
   dojo.removeAttr(id,'onclick');
   if(mode=='add'){
     if(type=="reportDirect"){
-      var fileName = dojo.byId('reportFileMenu').value;
-      var form="reportForm";
-      if(fileName=="showIntervention" && dojo.byId("consultationPlannedWorkManualParamDiv")){
-        form="listFormConsPlannedWorkManual";
-      }
-        loadContent("../tool/saveReportInToday.php", "resultDivMain", form, true,
-        'report');
+      //creat favorite report 
     }else{
       var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','remove')";
       var param="?operation=add&class="+name.substr(4);
