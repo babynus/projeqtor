@@ -35,17 +35,14 @@ scriptLog('   ->/view/refreshMenuBarFavoriteCount.php');
 $idRow = RequestHandler::getValue('idFavoriteRow');
 $nbFavoriteRow=5;
 ?>
-<table>
+<table style="width:100%;height:100%;">
    <tr>
-   <td id="editFavoriteButton" title="<?php echo i18n('editFavorite');?>" onClick="editFavoriteRow();"><?php echo formatNewGuiButton('Edit', 22, false);?></td>
-   <td id="favoriteSwitchRow" style="padding-left: 5px;padding-right: 5px;">
+   <td id="editFavoriteButton" title="<?php echo i18n('editFavorite');?>" onClick="editFavoriteRow();" style="padding-right: 5px;width: 50%;"><?php echo formatNewGuiButton('Edit', 22, false);?></td>
+   <td id="favoriteSwitchRow" style="width: 50%;">
     <table style="height:22px;width:10px">
       <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'up', <?php echo $nbFavoriteRow;?>);" >▲</td></tr>
       <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'down', <?php echo $nbFavoriteRow;?>);" >▼</td></tr>
     </table>
-   </td>
-   <td id="favoriteCountRow" style="padding-right: 15px;color: var(--color-dark);">
-     <div id="favoriteCountRowDiv" class="sectionBadge" style="top: 12px;width: 16px;right: 0px;height: 15px;padding-top: 1px;padding-bottom: 1px;font-size: 8pt;"><?php echo $idRow;?></div>
    </td>
  </tr>
 </table>

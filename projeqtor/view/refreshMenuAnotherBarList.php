@@ -36,19 +36,21 @@ $defaultMenu = RequestHandler::getValue('menuFilter');
 $idRow = Parameter::getUserParameter('idFavoriteRow');
 
 ?>
-<div id="anotherMenubarList" name="anotherMenubarList" style="width:93%;position:absolute !important;z-index:9999999;left:67px;">
+<table style="width:100%;"><tr>
+<td style="width:7%;"></td>
+<td style="width:90%;">
+<div id="anotherMenubarList" name="anotherMenubarList" style="width:100%;z-index:9999999;">
 <?php 
-$top = 20; 
-for($i=$idRow; $i<=($idRow+5); $i++){
+for($i=$idRow+1; $i<=($idRow+4); $i++){
   if($i > 5){
     $idAnotherRow = $i-5;
   }else{
     $idAnotherRow = $i;
   }
   $idDiv = "menuBarDndSource$idAnotherRow";
-  $idInput = "idFavoriteRow$idAnotherRow";?>
-  <div id="<?php echo 'anotherBar'.$idAnotherRow;?>" class="anotherBar" style="margin-top: 5px;height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;
-  <?php if($defaultMenu == 'menuBarCustom' and $idRow == $idAnotherRow)echo 'display:none;';?>">
+  $idInput = "idFavoriteRow$idAnotherRow";
+  ?>
+  <div id="<?php echo 'anotherBar'.$idAnotherRow;?>" class="anotherBar" style="margin-top: 5px;height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;">
     <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $idAnotherRow;?>">
     <table style="width:100%;height:100%;">
          <tr>
@@ -58,7 +60,7 @@ for($i=$idRow; $i<=($idRow+5); $i++){
                 }?>
          </td>
           <td class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97%;"
-          dndType="menuBar"  dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar']">
+          dndType="menuBar"  dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar', 'menuBarTop']">
           <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idAnotherRow, true);?>
           </td>
          </tr>
@@ -66,3 +68,6 @@ for($i=$idRow; $i<=($idRow+5); $i++){
     </div>
 <?php }?>
 </div>
+</td>
+<td style="width:3%;"></td>
+</tr></table>
