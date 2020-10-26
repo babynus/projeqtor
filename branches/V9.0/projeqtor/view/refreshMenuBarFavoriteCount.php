@@ -45,7 +45,7 @@ $nbFavoriteRow=5;
     </table>
    </td>
    <td id="favoriteCountRow" style="padding-right: 15px;color: var(--color-dark);">
-     <div id="favoriteCountRowDiv" class="sectionBadge" style="top: 14px;width: 12px;right:2px;"><?php echo $idRow;?></div>
+     <div id="favoriteCountRowDiv" class="sectionBadge" style="top: 12px;width: 16px;right: 0px;height: 15px;padding-top: 1px;padding-bottom: 1px;font-size: 8pt;"><?php echo $idRow;?></div>
    </td>
  </tr>
 </table>
