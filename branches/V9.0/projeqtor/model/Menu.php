@@ -134,14 +134,14 @@ class Menu extends SqlElement {
         }
         if(!$hiddenBar){
           echo '<div class="comboButtonInvisible" dojoType="dijit.form.DropDownButton"
-           id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
-            <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
-        	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
-  			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
+         id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
+          <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
+      	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
+			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
           if (!in_array($menu->name,$customMenuArray)){
-          	echo 'onClick="customMenuAddItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
+          	echo 'onClick="customMenuAddItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
           }else{
-          	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
+          	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
           }
           echo '</div></div>';
         }
@@ -165,14 +165,14 @@ class Menu extends SqlElement {
           }
           if(!$hiddenBar){
             echo '<div class="comboButtonInvisible" dojoType="dijit.form.DropDownButton"
-             id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
-              <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
-          	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
-    			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
+           id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
+            <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
+        	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
+  			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
             if (!in_array($menu->name,$customMenuArray)){
-            	echo 'onClick="customMenuAddItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
+            	echo 'onClick="customMenuAddItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
             }else{
-            	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
+            	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
             }
             echo '</div></div>';
           }
@@ -196,16 +196,16 @@ class Menu extends SqlElement {
         		echo '</tr></table>';
           	}
             if(!$hiddenBar){
-              echo '<div class="comboButtonInvisible" dojoType="dijit.form.DropDownButton"
-               id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
-                <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
-            	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
-      			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
-              if (!in_array($menu->name,$customMenuArray)){
-              	echo 'onClick="customMenuAddItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
-              }else{
-              	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
-              }
+            echo '<div class="comboButtonInvisible" dojoType="dijit.form.DropDownButton"
+            id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
+            <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
+        	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
+  			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
+            if (!in_array($menu->name,$customMenuArray)){
+            	echo 'onClick="customMenuAddItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
+            }else{
+            	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
+            }
               echo '</div></div>';
             }
           	echo '</div>';

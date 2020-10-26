@@ -939,36 +939,42 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
      <?php } ?>
     <?php }else{
       include 'menuNewGuiTop.php'; ?>
-      <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;z-index: 9999999;height: 200px;top: 46px;display:none">
-      <div id="anotherMenubarList" name="anotherMenubarList" style="width:92%;position:absolute !important;z-index:9999999;left:65px;">
-       <?php $top = 20; 
-       for($i=$idRow; $i<=($idRow+5); $i++){
-            if($i > 5){
-              $idAnotherRow = $i-5;
-            }else{
-              $idAnotherRow = $i;
-            }
-           $idDiv = "menuBarDndSource$idAnotherRow";
-           $idInput = "idFavoriteRow$idAnotherRow";?>
-        <div id="<?php echo 'anotherBar'.$idAnotherRow;?>" class="anotherBar" style="margin-top: 5px;height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;<?php if($defaultMenu == 'menuBarCustom' and $idRow == $idAnotherRow)echo 'display:none;';?>">
-          <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $idAnotherRow;?>">
-          <table style="width:100%;height:100%;">
-               <tr>
-               <td style="font-weight: bold;font-size: 15pt;text-align: center;color: var(--color-dark);width: 3%;border-right: 1px solid var(--color-dark);">
-                 <?php if($defaultMenu == 'menuBarCustom' and $idRow != $idAnotherRow){
-                    echo $idAnotherRow;
-                  }?>
-               </td>
-                <td dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97%;" 
-                  dndType="menuBar" data-dojo-props="accept: ['menuBar']">
-                  <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idAnotherRow, true);?>
-                </td>
-               </tr>
-          </table>
-        </div>
-        <?php 
-        }?>
-      </div>
+      <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;height:auto;z-index: 9999999;top:46px;display:none">
+        <table style="width:100%;"><tr>
+          <td style="width:7%;"></td>
+          <td style="width:90%;">
+            <div id="anotherMenubarList" name="anotherMenubarList" style="width:100%;z-index:9999999;">
+             <?php for($i=$idRow+1; $i<=($idRow+4); $i++){
+                  if($i > 5){
+                    $idAnotherRow = $i-5;
+                  }else{
+                    $idAnotherRow = $i;
+                  }
+                 $idDiv = "menuBarDndSource$idAnotherRow";
+                 $idInput = "idFavoriteRow$idAnotherRow";
+                 ?>
+              <div id="<?php echo 'anotherBar'.$idAnotherRow;?>" class="anotherBar" style="margin-top: 5px;height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;">
+                <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $idAnotherRow;?>">
+                <table style="width:100%;height:100%;">
+                     <tr>
+                     <td style="font-weight: bold;font-size: 15pt;text-align: center;color: var(--color-dark);width: 3%;border-right: 1px solid var(--color-dark);">
+                       <?php if($defaultMenu == 'menuBarCustom' and $idRow != $idAnotherRow){
+                          echo $idAnotherRow;
+                        }?>
+                     </td>
+                      <td dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97%;" 
+                        dndType="menuBar" data-dojo-props="accept: ['menuBar', 'menuBarTop']">
+                        <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idAnotherRow, true);?>
+                      </td>
+                     </tr>
+                </table>
+              </div>
+              <?php 
+              }?>
+            </div>
+          </td>
+          <td style="width:3%;"></td>
+        </tr></table>
       </div>
       <?php }
 
