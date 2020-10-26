@@ -1863,6 +1863,7 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
   $param=SqlElement::getSingleSqlElementFromCriteria('Parameter', 
        array('idUser'=>getSessionUser()->id, 'parameterCode'=>'Filter'.$filterObjectClass));
   $defaultFilter=($param)?$param->parameterValue:'';
+  echo "<div id='displayFilterList'>";
    if ($context!='directFilterList') {
     echo "<table id='dndListFilterSelector' jsId='dndListFilterSelector' width='100%' dojotype='dojo.dnd.Source' withhandles='true' data-dojo-props='accept: [ \"tableauBordLeft\",\"tableauBordRight\" ]' >";
    }else{
@@ -1870,11 +1871,11 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
    }
   echo "<tr style='height:22px;'>";
   if ($context!='directFilterList') {
-  	echo "<td class='filterHeader' style='width:699px;'>" . i18n("storedFilters") . "</td>";
+  	echo "<td class='filterHeader' style='width:699px;'>" . (isNewGui()?i18n("storedFiltersQuick"):i18n("storedFilters")) . "</td>";
     echo "<td class='filterHeader' style='width:25px;'>";
     echo "<td class='filterHeader' style='width:25px;'>";
   } else {
-  	echo "<td class='filterHeader' style='font-size:8pt;width:300px;'>" . i18n("storedFilters") . "</td>";
+  	echo "<td class='filterHeader' style='font-size:8pt;width:300px;'>" . (isNewGui()?i18n("storedFiltersQuick"):i18n("storedFilters")) . "</td>";
   }
   echo "</td>";
   echo "</tr>";
@@ -1931,7 +1932,7 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
   	}
   }
   echo "</table>";
-
+  echo "</div>";
 }
 
 function htmlDisplaySharedFilter($filterArray,$filterObjectClass,$currentFilter="", $context="") {

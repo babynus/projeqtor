@@ -792,8 +792,13 @@ if (property_exists($objectClass,'idStatus')) {
                     <div  style="display:<?php echo sessionDisplayFilter('listIdFilter',$objectClass); ?>" title="<?php echo i18n('filterOnId')?>" style="width:<?php echo $referenceWidth;?>px" class="filterField rounded" dojoType="dijit.form.TextBox" 
                      type="text" id="listIdFilter" name="listIdFilter" value="<?php if(!$comboDetail and sessionValueExists('listIdFilter'.$objectClass) ){ echo getSessionValue('listIdFilter'.$objectClass); }?>">
                       <script type="dojo/method" event="onKeyUp" >
-                      setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
-                </script>
+                        setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
+                        if(dijit.byId('listIdFilterQuick')){
+                          if(dijit.byId('listIdFilterQuick').get('value') != dijit.byId('listIdFilter').get('value')){
+                            dijit.byId('listIdFilterQuick').set('value',dijit.byId('listIdFilter').get('value'));
+                          }
+                        }
+                      </script>
                     </div>
                   </td>
                   <?php }?>
@@ -808,6 +813,11 @@ if (property_exists($objectClass,'idStatus')) {
                 id="listNameFilter" name="listNameFilter" style="display:<?php echo sessionDisplayFilter('listNameFilter',$objectClass); ?>; width:<?php echo $referenceWidth*2;?>px" value="<?php if(!$comboDetail and sessionValueExists('listNameFilter'.$objectClass)){ echo getSessionValue('listNameFilter'.$objectClass); }?>">
                   <script type="dojo/method" event="onKeyUp" >
                   	setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
+                     if(dijit.byId('listNameFilterQuick')){
+                          if(dijit.byId('listNameFilterQuick').get('value') != dijit.byId('listNameFilter').get('value')){
+                            dijit.byId('listNameFilterQuick').set('value',dijit.byId('listNameFilter').get('value'));
+                          }
+                      }
                 </script>
                 </div>
               </td>
@@ -839,8 +849,13 @@ if (property_exists($objectClass,'idStatus')) {
                     htmlDrawOptionForReference($idClassType, $objectType, $obj, false); 
 //                    htmlDrawOptionForReference('id' . $objectClass . 'Type', $objectType, $obj, false); 
 // MTY - LEAVE SYSTEM              
-                ?>                  <script type="dojo/method" event="onChange" >
+                ?> <script type="dojo/method" event="onChange" >
                     refreshJsonList('<?php echo $objectClass;?>');
+                     if(dijit.byId('listTypeFilterQuick')){
+                          if(dijit.byId('listTypeFilterQuick').get('value') != dijit.byId('listTypeFilter').get('value')){
+                            dijit.byId('listTypeFilterQuick').set('value',dijit.byId('listTypeFilter').get('value'));
+                          }
+                      }
                   </script>
                 </select>
               </td>
@@ -863,6 +878,11 @@ if (property_exists($objectClass,'idStatus')) {
                    htmlDrawOptionForReference('idBudgetItem',$budgetParent,$obj,false);?>
                   <script type="dojo/method" event="onChange" >
                     refreshJsonList('<?php echo $objectClass;?>');
+                       if(dijit.byId('listBudgetParentFilterQuick')){
+                          if(dijit.byId('listBudgetParentFilterQuick').get('value') != dijit.byId('listBudgetParentFilter').get('value')){
+                            dijit.byId('listBudgetParentFilterQuick').set('value',dijit.byId('listBudgetParentFilter').get('value'));
+                          }
+                      }
                   </script>
                 </select>
               </td>
@@ -897,6 +917,11 @@ if (property_exists($objectClass,'idStatus')) {
                   <?php htmlDrawOptionForReference('idClient', $objectClient, $obj, false); ?>
                   <script type="dojo/method" event="onChange" >
                     refreshJsonList('<?php echo $objectClass;?>');
+                     if(dijit.byId('listClientFilterQuick')){
+                          if(dijit.byId('listClientFilterQuick').get('value') != dijit.byId('listClientFilter').get('value')){
+                            dijit.byId('listClientFilterQuick').set('value',dijit.byId('listClientFilter').get('value'));
+                          }
+                      }
                   </script>
                 </select>
               </td>

@@ -45,6 +45,13 @@ if(!isset($obj)){
   }
 }
 
+if(!isset($idClassType)){
+  if(isset($objectClass)){
+    $idClassType = "id". $objectClass. "Type";
+    $objectType = $idClassType;
+  }
+}
+
 $user=getSessionUser();
 $context="";
 $comboDetail=false;
@@ -54,24 +61,26 @@ if (RequestHandler::isCodeSet('comboDetail')) {
 ?>
 <table style="width:99%;" id="quickFilterList">
   <tr style="width:100%;border-bottom:solid 1px;">
-  <td><table><tr> 
-    <td style="width:89%;text-transform: uppercase;"><?php echo i18n("filters");?></td>
-    <td width="6px " class="allSearchTD resetSearchTD allSearchFixLength">
-      <button dojoType="dijit.form.Button" type="button" >
-          <?php echo i18n('buttonReset');?>
-          <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
+    <td><table>
+      <tr> 
+        <td style="width:60%;text-transform: uppercase;"><?php echo i18n("filters");?></td>
+        <td style="text-align:center;" class="allSearchTD resetSearchTD allSearchFixLength">
+          <button dojoType="dijit.form.Button" type="button" >
+            <?php echo i18n('buttonReset');?>
+            <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
             <script type="dojo/method" event="onClick">
                      var lstStat = <?php echo json_encode($lstStat); ?>;
                      resetFilterQuick(lstStat);
              </script>
-      </button>
-    </td> 
-   </tr></table></td>
+          </button>
+        </td>
+        <td style="width:10%;font-style:italic;color:grey;"><?php echo i18n("alwaysDisplay");?></td>
+      </tr>
+    </table></td>
   </tr>
   <tr><td>
     <table style="width:100%">
-     <br/> 
-      <tr><td style="width:25%"></td><td style="width:65%"></td><td style="width:10%;font-style:italic;color:grey;"><?php echo i18n("alwaysDisplay");?></td></tr>
+     <br> 
       <tr>
         <td style="text-align:right;width:25%">
           <span class="nobr"><?php echo i18n("colId")?>&nbsp;:&nbsp;</span> 
@@ -316,7 +325,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       <?php  if (! $comboDetail) {?>
        <tr>
          <td  style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("quickSearch");?>&nbsp;:&nbsp;</span></td>
-         <td style="width:65%;">
+         <td  colspan=2 style="width:65%;">
             <div title="<?php echo i18n('quickSearch')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
                id="quickSearchValueQuick" name="quickSearchValueQuick"
                style="width:200px;">
@@ -329,8 +338,6 @@ if (RequestHandler::isCodeSet('comboDetail')) {
                 quickSearchExecuteQuick();
               </script>
   	        </button>
-          </td>
-          <td style="width:10%">  
   	        <button title="<?php echo i18n('comboCloseButton')?>"  
                   dojoType="dijit.form.Button" 
             id="listQuickSearchCloseQuick" name="listQuickSearchCloseQuick"
@@ -341,11 +348,9 @@ if (RequestHandler::isCodeSet('comboDetail')) {
           </button></td>  
 		    </tr>
 			  <?php } ?>
-        
       <?php if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?> 
       <tr>
-        <td  style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("filterByStatus");?>&nbsp;:&nbsp;</span></td>
-        <td></td>
+        <td colspan=2 style="width:25%;text-align:left;text-transform:lowercase;"><span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo i18n("filterByStatusQuick");?>&nbsp;:&nbsp;</span></td>
 			  <td style="width:10%;text-align:center;">
 			   <div id="filterByStatusSwitch" name="filterByStatusSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(!$comboDetail and sessionValueExists('displayByStatusListSwitch'.$objectClass)){ echo getSessionValue('displayByStatusListSwitch'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >

@@ -423,6 +423,7 @@ function resetFilter(lstStat){
      dijit.byId('showStatus'+i).set('checked',false);
    }
  }
+ 
  if (dijit.byId("listFilterFilter").iconClass == "iconActiveFilter"){
    selectStoredFilter('0','directFilterList',notDef,notDef);
   }    
@@ -1202,12 +1203,11 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           }
           if (destination == "directFilterList") {
             if (!validationType || validationType=='returnFromFilter' ) {
-              if (window.top.dojo.byId('noFilterSelected')
-                  && window.top.dojo.byId('noFilterSelected').value == 'true') {
-                dijit.byId("listFilterFilter").set("iconClass", "iconFilter");
+              console.log(dijit.byId("listFilterFilter"));
+              if (window.top.dojo.byId('noFilterSelected')&& window.top.dojo.byId('noFilterSelected').value == 'true') {
+                dijit.byId("listFilterFilter").set("iconClass", "dijitButtonIcon dijitButtonIconFilter");
               } else {
-                dijit.byId("listFilterFilter").set("iconClass",
-                    "iconActiveFilter");
+                dijit.byId("listFilterFilter").set("iconClass","dijitButtonIcon dijitButtonIconActiveFilter");
               }
               if (globalSelectFilterContenLoad && globalSelectFilterContainer) {
                 loadContent(globalSelectFilterContenLoad, globalSelectFilterContainer);

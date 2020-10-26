@@ -4575,7 +4575,7 @@ function selectFilterContinue() {
     compUrl+='&container=divKanbanContainer';
   }
   doc.loadContent(
-     "../tool/displayFilterList.php?context=directFilterList&filterObjectClass="
+     "../tool/displayFilterList.php?displayQuickFilter=true&context=directFilterList&filterObjectClass="
          + objectClass + compUrl, "directFilterList", null,
     false, 'returnFromFilter', false);
   /*
@@ -4584,9 +4584,9 @@ function selectFilterContinue() {
    * When adding filter (not stored), icon has not the "on" flag
    */
    if(dojo.byId("nbFilterCriteria").value > 0 && !dijit.byId('filterDynamicParameter').get("checked") && dojo.byId('nbDynamicFilterCriteria').value==0) {
-     setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconActiveFilter')",500);
+     setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'dijitButtonIcon dijitButtonIconActiveFilter')",500);
    }else{
-     setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconFilter')",500);
+     setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'dijitButtonIcon dijitButtonIconFilter')",500);
    }
   if(! window.top.dijit.byId('dialogDetail').open && dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Kanban' || dojo.byId('objectClassManual').value=='LiveMeeting')){
     loadContent("../view/kanbanView.php?idKanban="+dojo.byId('idKanban').value, "divKanbanContainer");
