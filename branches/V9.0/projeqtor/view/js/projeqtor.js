@@ -1210,9 +1210,9 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
             if (!validationType || validationType=='returnFromFilter' ) {
               console.log(dijit.byId("listFilterFilter"));
               if (window.top.dojo.byId('noFilterSelected')&& window.top.dojo.byId('noFilterSelected').value == 'true') {
-                dijit.byId("listFilterFilter").set("iconClass", "dijitButtonIcon dijitButtonIconFilter");
+                dijit.byId("listFilterFilter").set("iconClass", "dijitButtonIcon iconFilter");
               } else {
-                dijit.byId("listFilterFilter").set("iconClass","dijitButtonIcon dijitButtonIconActiveFilter");
+                dijit.byId("listFilterFilter").set("iconClass","dijitButtonIcon iconActiveFilter");
               }
               if (globalSelectFilterContenLoad && globalSelectFilterContainer) {
                 loadContent(globalSelectFilterContenLoad, globalSelectFilterContainer);
