@@ -229,24 +229,25 @@ function menuNewGuiFilter(filter, item) {
 	var historyBarSort = new Array();
 	historyTable.forEach(function(element){
 		historyBar.push('menu'+element[0]);
-		if(!historyBarSort.includes('menu'+element[0]))historyBarSort.push('menu'+element[0]);
+//		if(!historyBarSort.includes('menu'+element[0]))historyBarSort.push('menu'+element[0]);
 	});
-	var countList = historyBarSort.length*140;
-	var containerDivWidth = dojo.byId('menubarContainer').offsetWidth;
-	var listDivWidth = dojo.byId('menuBarListDiv').offsetWidth;
-	if(countList > listDivWidth)listDivWidth=countList;
-	var buttonDivWidth = dojo.byId('menuBarButtonDiv').offsetWidth;
-	var maxDivWidth = containerDivWidth-buttonDivWidth-140;
+//	var countList = historyBarSort.length*140;
+//	var containerDivWidth = dojo.byId('menubarContainer').offsetWidth;
+//	var listDivWidth = dojo.byId('menuBarListDiv').offsetWidth;
+//	if(countList > listDivWidth)listDivWidth=countList;
+//	var buttonDivWidth = dojo.byId('menuBarButtonDiv').offsetWidth;
+//	var maxDivWidth = containerDivWidth-buttonDivWidth-140;
 	var nbSkipMenu = 0;
+	var idRow = dojo.byId('idFavoriteRow').value;
 	
-	if(filter == 'menuBarRecent'){
-		while(listDivWidth > maxDivWidth){
-			historyBarSort.splice(0, 1);
-			listDivWidth -= 140;
-			nbSkipMenu++;
-		}
-	}else{
-	}
+//	if(filter == 'menuBarRecent'){
+//		while(listDivWidth > maxDivWidth){
+//			historyBarSort.splice(0, 1);
+//			listDivWidth -= 140;
+//			nbSkipMenu++;
+//		}
+//	}
+	
 	var callback = function(){
 		if(item)selectIconMenuBar(item);
 		if(filter != 'menuBarCustom'){
@@ -260,11 +261,14 @@ function menuNewGuiFilter(filter, item) {
 		}
         dojo.query('.anotherBarDiv').forEach(function(el){
         	var source = new dojo.dnd.Source(el.id, { accept:["menuBar" ],horizontal:true});
-        	
         });
 	};
+	var hide = function(){
+		if(filter == 'menuBarRecent')editFavoriteRow(true);
+	};
 	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, null, null, null, null, callback);
-	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter, 'anotherBarContainer');
+	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter, 'anotherBarContainer', null, null, null, null, null, hide);
+	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+idRow+'&defaultMenu='+defaultMenu, 'favoriteSwitch');
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
 }
@@ -282,7 +286,7 @@ function switchFavoriteRow(idRow, direction, maxRow){
 		saveUserParameter('idFavoriteRow', nextRow);
 		menuNewGuiFilter('menuBarCustom', null);
 	};
-	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow, 'favoriteSwitch', null, callback);
+	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow+'&defaultMenu='+defaultMenu, 'favoriteSwitch', null, callback);
 }
 
 function wheelFavoriteRow(idRow, evt, maxRow){
@@ -299,7 +303,7 @@ function wheelFavoriteRow(idRow, evt, maxRow){
 		saveUserParameter('idFavoriteRow', nextRow);
 		menuNewGuiFilter('menuBarCustom', null);
 	};
-	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow, 'favoriteSwitch', null, callback);
+	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow+'&defaultMenu='+defaultMenu, 'favoriteSwitch', null, callback);
 }
 
 function addRemoveFavMenuLeft (id,name,mode,type){
@@ -344,8 +348,9 @@ function checkClassForDisplay(id,mode){
   }
 }
 
-function editFavoriteRow(){
-	if(dojo.byId('isEditFavorite').value == 'true'){
+function editFavoriteRow(hide){
+	if(defaultMenu == 'menuBarRecent')return;
+	if(dojo.byId('isEditFavorite').value == 'true' || hide){
 		dojo.byId('isEditFavorite').value = 'false';
 		dojo.byId('anotherBarContainer').style.display = 'none';
 	}else{
@@ -368,7 +373,7 @@ function moveMenuBarItem(source, target){
 		customArray[pos] = 'menu'+node.id.substr(7);
 		pos++;
 	});
-	var param="?idSourceFrom="+source+"&idSourceTo="+target+"&idRow="+idRow+"&customArray="+customArray;
+	var param="?idSourceFrom="+source+"&idSourceTo="+target+"&idRow="+idRow+"&customArray="+customArray+'&defaultMenu='+defaultMenu;
     dojo.xhrGet({
       url : "../tool/saveCustomMenuOrder.php"+param,
       handleAs : "text",
@@ -378,10 +383,11 @@ function moveMenuBarItem(source, target){
 }
 
 function showFavoriteTooltip(menuClass) {
-	  clearTimeout(closeFavoriteTimeout);
-	  clearTimeout(openFavoriteTimeout);
-	  openFavoriteTimeout=setTimeout("dijit.byId('addFavorite"+menuClass+"').openDropDown();",100);
-	  customMenuAddRemoveClass=menuClass;
+  editFavoriteRow(true);
+  clearTimeout(closeFavoriteTimeout);
+  clearTimeout(openFavoriteTimeout);
+  openFavoriteTimeout=setTimeout("dijit.byId('addFavorite"+menuClass+"').openDropDown();",100);
+  customMenuAddRemoveClass=menuClass;
 }
 
 function hideFavoriteTooltip(delay, menuClass) {

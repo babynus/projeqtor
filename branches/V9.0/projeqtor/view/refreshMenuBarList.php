@@ -39,12 +39,17 @@ if(!$nbSkipMenu)$nbSkipMenu=0;
 $idRow = Parameter::getUserParameter('idFavoriteRow');
 $nbFavoriteRow=5;
 ?>
-<table  style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);">
+<table  style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
   <tr >
-    <td style="width: 3%;border-right: 1px solid var(--color-dark);color: var(--color-dark);font-size: 15pt;font-weight: bold;text-align: center;">
-      <?php echo $idRow;?>
+    <td style="
+     <?php if($defaultMenu=='menuBarCustom'){
+       echo 'width: 2.5%;border-right: 1px solid var(--color-dark);color: var(--color-dark);font-size: 13pt;font-weight: bold;text-align: center;';
+     }else{
+         echo 'width: 1%;color: var(--color-dark);font-size: 15pt;font-weight: bold;text-align: center;';
+       }?>">
+      <?php if($defaultMenu=='menuBarCustom')echo $idRow;?>
     </td>
-    <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="width:100%;height:100%;" dndType="menuBar" data-dojo-props="accept: ['menuBar', 'menuBarTop']">
+    <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="width:100%;height:100%;" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
      <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
      <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idRow, false);?>
    </td>
