@@ -192,12 +192,42 @@ function sortMenus(&$listMenus, &$result, $parent,$level ){
       if ($menu->idParent=='') {
       	$menu->idParent=0;
       }
-      $key=$level.'-'.$menu->idParent.'-'.$menu->sortOrder;
+      $key=$level.'-'.numericFixLengthFormatter($menu->idParent,5).'-'.numericFixLengthFormatter($menu->sortOrder,5);
       $result[$key] = array('level'=>$level,'objectType'=>'menu','object'=>$menu);
       sortMenus($listMenus, $result, $menu->id,$level);
     }
   }
 }
+
+function storReport($listReport, &$res, $lstNewNavMenu, $idMenuReport, $level ) { //store report 
+    $count=array();
+    $isNewPId=array();
+    $levelParent=$level-1;
+    $levelSub=$level+1;
+    foreach ($listReport as $id=>$report){
+        $file=substr($report->file, 0,strpos($report->file, '.php'));
+        $idParent=$idMenuReport->id.$levelParent.$report->idReportCategory;
+        if(in_array($file, $lstNewNavMenu)){
+            if(!isset($count[$file])){
+              
+              $keyParent=$level.'-'.numericFixLengthFormatter($report->idReportCategory,5).'-'.numericFixLengthFormatter($report->sortOrder,5);
+              $isNewPId[$file]=$report->idReportCategory.$level.$report->sortOrder;
+              $obj= array('id'=>$isNewPId[$file],'name'=>$file,'idParent'=>$idParent);
+              $res[$keyParent]=array('level'=>$level,'objectType'=>'report','object'=>$obj);
+            }
+            $count[$file]=1;
+            $key=$levelSub.'-'.numericFixLengthFormatter($isNewPId[$file],5).'-'.numericFixLengthFormatter($report->sortOrder,5);
+            $obj= array('id'=>$report->id,'name'=>$report->name,'idParent'=>$isNewPId[$file],'idMenu'=>$report->idReportCategory);
+            $res[$key]=array('level'=>$level,'objectType'=>'reportDirect','object'=>$obj);
+         }else{
+          $keyParent=$level.'-'.numericFixLengthFormatter($report->idReportCategory,5).'-'.numericFixLengthFormatter($report->sortOrder,5);
+          $obj= array('id'=>$report->id,'name'=>$report->name,'idParent'=>$idParent,'idMenu'=>$report->idReportCategory);
+          $res[$keyParent]=array('level'=>$level,'objectType'=>'reportDirect','object'=>$obj);
+         }
+    }
+}
+
+
 function getReportMenu(){
   // ===============list of all reportCategories by user profil;
   $level=2;
@@ -217,61 +247,36 @@ function getReportMenu(){
     $category=SqlList::getFieldFromId('Report', $report, 'idReportCategory',false);
     $allowedCategory[$category]=$category;
   }
+  $c=1;
   foreach ($listCateg as $id=>$name) {
     if (isset($allowedCategory[$id])) {
+      $c++;
       $lstIdCate[]=$id;
       $idReport=$idMenuReport->id.$level.$id;
-      $key=$level.'-'.$idMenuReport->id.'-'.$idReport;
+      $key=$level.'-'.numericFixLengthFormatter($idMenuReport->id,5).'-'.numericFixLengthFormatter($c,5);
       $obj= array('id'=>$idReport,'name'=>$name,'idParent'=>$idMenuReport->id);
       $res[$key]=array('level'=>$level,'objectType'=>'report','object'=>$obj);
     }
   }
   //===================
   //=================== lis of all report dependant of this categoryies
-  $levelParent=$level;
-  $level++;
-  $lastVal=array();
-  $listSubCat=array();
-  $cat=array();
-  $newCate=true;
-  $newCatParentId="";
-  $lvl=$level+1;
-  $reportDirect= new Report();
-  $where=" idReportCategory in (".implode(",", $lstIdCate).")";
-  $reportList= $reportDirect->getSqlElementsFromCriteria(null,false,$where,"file");
-  foreach ($reportList as $idV=>$value){
-    if((!empty($lastVal)) and $value->file==$lastVal['file']){ // check if report as same file and creat parent menu to display 
-       if($newCate==true){ // creat the menu to display 
-        $pId=$idMenuReport->id.$levelParent.$value->idReportCategory;
-        $thisId=$pId.$level.$idV;
-        $k=$level.'-'.$pId.'-'.$value->sortOrder;
-        $object= array('id'=>$thisId,'name'=>substr($value->file,0,-4),'idParent'=>$pId);
-        $res[$k]=array('level'=>$level,'objectType'=>'report','object'=>$object);
-        $newCate=false;
-        $newCatParentId=$thisId;
-       }
-       if(isset($reportList[$lastVal['id']])){
-         $tKey=$lvl.'-'.$newCatParentId.'-'.$reportList[$lastVal['id']]->sortOrder;
-         $sbMenu= array('id'=>$reportList[$lastVal['id']]->id,'name'=>$reportList[$lastVal['id']]->name,'idParent'=>$newCatParentId,'idMenu'=>$reportList[$lastVal['id']]->idReportCategory,'file'=>$reportList[$lastVal['id']]->file);
-         $res[$tKey]=array('level'=>$level+1,'objectType'=>'reportDirect','object'=>$sbMenu);
-         unset($reportList[$lastVal['id']]);
-       }
-       unset($reportList[$idV]);
-       $tabKey=$lvl.'-'.$newCatParentId.'-'.$value->sortOrder;
-       $subMenu= array('id'=>$value->id,'name'=>$value->name,'idParent'=>$newCatParentId,'idMenu'=>$value->idReportCategory,'file'=>$value->file);
-      $res[$tabKey]=array('level'=>$level+1,'objectType'=>'reportDirect','object'=>$subMenu);
-    }else{
-      if($newCate==false)$newCate=true;
-    }
-    $lastVal=array('id'=>$idV,'file'=>$value->file);
-  }
-  foreach ($reportList as $id=>$val){
-    $parentId=$idMenuReport->id.$levelParent.$val->idReportCategory;
-    $keyTab=$level.'-'.$parentId.'-'.$val->sortOrder;
-    $obj=array('id'=>$val->id,'name'=>$val->name,'idParent'=>$parentId,'idMenu'=>$val->idReportCategory,'file'=>$val->file);
-    $res[$keyTab]=array('level'=>$level,'objectType'=>'reportDirect','object'=>$obj);
-  }
-  //======================
+
+   $level++;
+   $reportDirect= new Report();
+   $where=" idReportCategory in (".implode(",", $lstIdCate).")";
+   $reportList= $reportDirect->getSqlElementsFromCriteria(null,false,$where,"file");
+   $nameFile=SqlList::getList('report','file');
+   $lstReportName=array();
+   $lstNewNavMenu=array();
+   foreach ($nameFile as $idN=>$nameFile){
+    $lstReportName[]=substr($nameFile, 0,strpos($nameFile, '.php'));
+   }
+   $countNameFil=array_count_values($lstReportName);
+   foreach ($countNameFil as $name=>$val){
+    if($val==1)unset($countNameFil[$name]);
+    else $lstNewNavMenu[]=$name;
+   }
+   storReport($reportList,$res, $lstNewNavMenu,$idMenuReport, $level);
   return $res;
  
 }
@@ -284,10 +289,7 @@ function getNavigationMenuLeft (){
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
   $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc');
   sortMenus($contexctMenuMain,$result,0,$level);
-  $result=array_merge ($result,getReportMenu());
-  ksort($result);
   foreach ($result as $id=>$context){
-    if($context['objectType']=='menu'){
       $context=$context['object'];
       if($context->idParent!=0 and $context->idMenu!=0){
         $unset=false;
@@ -299,8 +301,10 @@ function getNavigationMenuLeft (){
         if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) $unset=true;
         if($unset==true)unset($result[$id]);
       }
-    }
   }
+  $result=array_merge ($result,getReportMenu());
+  ksort($result);
+  
   return $result;
 }
 
@@ -313,7 +317,9 @@ function drawLeftMenuListNewGui($displayMode){
   $allMenu=getNavigationMenuLeft();
   $result.='<div class="menu__wrap">';
   $displayIcon=($displayMode=='TXT')?"display:none;":"display:block;";
-  foreach ($allMenu as $id=>$menu){
+  
+   foreach ($allMenu as $id=>$menu){
+    
     if($menu['objectType']=='report' or $menu['objectType']=='reportDirect'){
       $obj=new Navigation();
       $obj->id=$menu['object']['id'];
@@ -390,7 +396,7 @@ function drawLeftMenuListNewGui($displayMode){
     }
     $old=$menu['level'];
     $idP=$obj->idParent;
-  }
+   }
   $result.='</div">';
   return $result;
 }
