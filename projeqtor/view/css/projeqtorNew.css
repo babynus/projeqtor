@@ -512,7 +512,19 @@ animation: fadeIn ease 0.5s;
 }
 
 .ProjeQtOrNewGui .anotherBar:hover{
-	background-color: var(--color-light-secondary) !important;/*#e6ffe6*/
+	background-color: var(--color-light-secondary) !important;
+}
+
+.ProjeQtOrNewGui .itemBar.dojoDndItemAnchor{
+	border-left: unset !important;
+}
+
+.ProjeQtOrNewGui .itemBar.dojoDndItemAfter{
+	border-right: 2px solid var(--color-secondary) !important;
+}
+
+.ProjeQtOrNewGui .itemBar.dojoDndItemBefore{
+	border-left: 2px solid var(--color-secondary) !important;
 }
 
 .ProjeQtOrNewGui .dijitTabContainerTop-tabs, .ProjeQtOrNewGui .dijitTabContainerTop-tabs .dijitTabChecked {

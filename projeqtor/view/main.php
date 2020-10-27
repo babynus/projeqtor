@@ -194,6 +194,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       if(target.id == null){
       //gautier #translationApplication
         //if (target.id == null) we are in dgrid DROP , nothing to do.
+  	    if(target.parent.id=='menuBarDndSource1' || target.parent.id=='menuBarDndSource2' || target.parent.id=='menuBarDndSource3' || target.parent.id=='menuBarDndSource4' || target.parent.id=='menuBarDndSource5'){
+      	  setTimeout('moveMenuBarItem("'+ source.id +'", "'+ target.parent.id +'")',100); 
+        }
       }else if (target.id.indexOf('dialogRow')!=-1 && source.id!=target.id){
         var idRow=nodes[0].id.split('itemRow')[1].split('-')[0];
         var typeRow=nodes[0].id.split('-')[1];
@@ -938,13 +941,22 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         </script>
      <?php } ?>
     <?php }else{
-      include 'menuNewGuiTop.php'; ?>
+      include 'menuNewGuiTop.php'; 
+      $nbFavoriteRow = 5;
+      ?>
       <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;height:auto;z-index: 9999999;top:46px;display:none">
         <table style="width:100%;"><tr>
           <td style="width:7%;"></td>
           <td style="width:90%;">
             <div id="anotherMenubarList" name="anotherMenubarList" style="width:100%;z-index:9999999;">
-             <?php for($i=$idRow+1; $i<=($idRow+4); $i++){
+             <?php
+             if($defaultMenu == 'menuBarCustom'){
+             	$startRow = $idRow+1;
+             }else{
+             	$idRow = 1;
+             	$startRow = $idRow;
+             } 
+              for($i=$startRow; $i<=($idRow+4); $i++){
                   if($i > 5){
                     $idAnotherRow = $i-5;
                   }else{
@@ -955,16 +967,14 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                  ?>
               <div id="<?php echo 'anotherBar'.$idAnotherRow;?>" class="anotherBar" style="margin-top: 5px;height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;">
                 <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $idAnotherRow;?>">
-                <table style="width:100%;height:100%;">
+                <table style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
                      <tr>
-                     <td style="font-weight: bold;font-size: 15pt;text-align: center;color: var(--color-dark);width: 3%;border-right: 1px solid var(--color-dark);">
-                       <?php if($defaultMenu == 'menuBarCustom' and $idRow != $idAnotherRow){
-                          echo $idAnotherRow;
-                        }?>
+                     <td style="font-weight: bold;font-size: 13pt;text-align: center;color: var(--color-dark);width: 2.5%;border-right: 1px solid var(--color-dark);">
+                       <?php echo $idAnotherRow; ?>
                      </td>
-                      <td dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97%;" 
-                        dndType="menuBar" data-dojo-props="accept: ['menuBar', 'menuBarTop']">
-                        <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idAnotherRow, true);?>
+                      <td dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97.5%;" 
+                        dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
+                        <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, 0, $idAnotherRow, true);?>
                       </td>
                      </tr>
                 </table>
