@@ -339,8 +339,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
               </script>
   	        </button>
   	        <button title="<?php echo i18n('comboCloseButton')?>"  
-                  dojoType="dijit.form.Button" 
-            id="listQuickSearchCloseQuick" name="listQuickSearchCloseQuick"
+            dojoType="dijit.form.Button" id="listQuickSearchCloseQuick" name="listQuickSearchCloseQuick"
             iconClass="dijitButtonIcon dijitButtonIconUndo" class="detailButton" showLabel="false">
             <script type="dojo/connect" event="onClick" args="evt">
               quickSearchCloseQuick();
@@ -349,7 +348,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
 		    </tr>
 			  <?php } ?>
       <?php if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?> 
-      <tr>
+      <tr style="height:37px;">
         <td colspan=2 style="width:25%;text-align:left;text-transform:lowercase;"><span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo i18n("filterByStatusQuick");?>&nbsp;:&nbsp;</span></td>
 			  <td style="width:10%;text-align:center;">
 			   <div id="filterByStatusSwitch" name="filterByStatusSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(!$comboDetail and sessionValueExists('displayByStatusListSwitch'.$objectClass)){ echo getSessionValue('displayByStatusListSwitch'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
