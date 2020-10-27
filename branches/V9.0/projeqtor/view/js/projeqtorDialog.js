@@ -7537,6 +7537,7 @@ function loadMenuBarObject(menuClass, itemName, from) {
 	  menuNewGuiFilter(defaultMenu, menuClass);
   }
   selectIconMenuBar(menuClass);
+  editFavoriteRow(true);
   return true;
 }
 function hideResultDivs() {
@@ -7684,6 +7685,7 @@ function loadMenuBarItem(item, itemName, from) {
 	  menuNewGuiFilter(defaultMenu, item);
   }
   selectIconMenuBar(item);
+  editFavoriteRow(true);
   return true;
 }
 

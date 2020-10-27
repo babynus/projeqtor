@@ -32,6 +32,7 @@ require_once "../tool/projeqtor.php";
 $idSourceFrom = RequestHandler::getValue('idSourceFrom');
 $idSourceTo = RequestHandler::getValue('idSourceTo');
 $idRow = RequestHandler::getValue('idRow');
+$defaultMenu = RequestHandler::getValue('defaultMenu');
 $customArray = RequestHandler::getValue('customArray');
 $customArray = explode(',', $customArray);
 unset($customArray[0]);
@@ -50,6 +51,14 @@ foreach ($customMenuList as $menu) {
 	$menu->sortOrder = $customArrayOrder[$menu->name];
 	$menu->idRow = $idRow;
 	$menu->save();
+	unset($customArrayOrder[$menu->name]);
+}
+foreach ($customArrayOrder as $name=>$sortOrder){
+  $customMenu->name = $name;
+  $customMenu->idUser = getSessionUser()->id;
+  $customMenu->idRow = $idRow;
+  $customMenu->sortOrder = $sortOrder;
+  $customMenu->save();
 }
 Sql::commitTransaction();
 ?>
