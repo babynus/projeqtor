@@ -4584,9 +4584,9 @@ function selectFilterContinue() {
    * When adding filter (not stored), icon has not the "on" flag
    */
    if(dojo.byId("nbFilterCriteria").value > 0 && !dijit.byId('filterDynamicParameter').get("checked") && dojo.byId('nbDynamicFilterCriteria').value==0) {
-     setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'dijitButtonIcon dijitButtonIconActiveFilter')",500);
+     setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'dijitButtonIcon iconActiveFilter')",500);
    }else{
-     setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'dijitButtonIcon dijitButtonIconFilter')",500);
+     setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'dijitButtonIcon iconFilter')",500);
    }
   if(! window.top.dijit.byId('dialogDetail').open && dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Kanban' || dojo.byId('objectClassManual').value=='LiveMeeting')){
     loadContent("../view/kanbanView.php?idKanban="+dojo.byId('idKanban').value, "divKanbanContainer");
