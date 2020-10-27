@@ -27,9 +27,9 @@
 		<circle fill="#FF0000" cx="14.756" cy="77.476" r="4.763"/>
 	</g>
 </g>
-<g id="svg15" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" sodipodi:docname="iconKanban.svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" display="none">
+<g id="svg15" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" sodipodi:docname="iconKanban.svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" display="none">
 	
-		<sodipodi:namedview  bordercolor="#666666" borderopacity="1" inkscape:cx="24.979592" guidetolerance="10" showgrid="false" inkscape:zoom="15.3125" pagecolor="#ffffff" gridtolerance="10" inkscape:cy="24" id="namedview17" objecttolerance="10" inkscape:window-x="-8" inkscape:window-width="1920" inkscape:window-height="1017" inkscape:pageopacity="0" inkscape:document-rotation="0" inkscape:current-layer="svg15" inkscape:pageshadow="2" inkscape:window-y="-8" inkscape:window-maximized="1">
+		<sodipodi:namedview  id="namedview17" objecttolerance="10" gridtolerance="10" pagecolor="#ffffff" inkscape:cy="24" borderopacity="1" showgrid="false" inkscape:zoom="15.3125" inkscape:cx="24.979592" guidetolerance="10" bordercolor="#666666" inkscape:window-height="1017" inkscape:current-layer="svg15" inkscape:document-rotation="0" inkscape:window-y="-8" inkscape:window-width="1920" inkscape:window-x="-8" inkscape:pageopacity="0" inkscape:window-maximized="1" inkscape:pageshadow="2">
 		</sodipodi:namedview>
 	<title  id="title6"></title>
 	<path id="path844" display="inline" fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M112.042,121.777
@@ -46,39 +46,38 @@
 		c0.003,34.574,0.016,35.872,0.335,36.576c0.304,0.671,0.96,1.296,1.617,1.546c0.147,0.053,5.424,0.104,11.727,0.11
 		C40.875,92.432,41.246,92.42,41.958,92.074z"/>
 	<path id="path846_1_" display="inline" fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M74.559,112.367
-		c0.467-0.077,0.875-0.204,1.123-0.354l0.389-0.233V99.586V87.389l-0.398-0.197c-0.219-0.107-0.625-0.254-0.9-0.322
-		c-0.494-0.123-0.647-0.125-12.095-0.143l-11.592-0.018l-0.801,0.137c-0.586,0.1-0.908,0.209-1.201,0.404l-0.4,0.268l0.004,12.08
+		c0.467-0.077,0.875-0.204,1.123-0.354l0.389-0.233V99.586V87.389l-0.397-0.197c-0.219-0.106-0.625-0.254-0.899-0.321
+		c-0.494-0.123-0.647-0.125-12.095-0.144l-11.592-0.018l-0.801,0.137c-0.586,0.1-0.908,0.209-1.201,0.404l-0.4,0.268l0.004,12.08
 		c0.003,11.651,0.016,12.09,0.335,12.326c0.304,0.227,0.96,0.438,1.617,0.521c0.147,0.019,5.424,0.035,11.727,0.037
 		C73.475,112.486,73.846,112.482,74.559,112.367z"/>
 	<path id="path848" display="inline" fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M108.916,56.576
-		c0.271-0.205,0.686-0.637,0.898-0.96l0.399-0.589V36.493V17.959l-0.399-0.588c-0.217-0.323-0.627-0.755-0.898-0.96
-		c-0.498-0.368-0.646-0.374-12.094-0.421l-11.594-0.048l-0.804,0.404c-0.584,0.296-0.907,0.617-1.198,1.198l-0.398,0.794v18.154
-		v18.155l0.398,0.794c0.293,0.581,0.614,0.901,1.198,1.196l0.804,0.403l11.594-0.047C108.27,56.947,108.418,56.943,108.916,56.576z"
+		c0.271-0.205,0.686-0.637,0.898-0.96l0.398-0.589V36.493V17.959l-0.398-0.588c-0.217-0.323-0.627-0.755-0.898-0.96
+		c-0.498-0.368-0.646-0.374-12.094-0.421l-11.594-0.048l-0.805,0.404c-0.584,0.296-0.906,0.617-1.197,1.198l-0.398,0.794v18.154
+		v18.155l0.398,0.794c0.293,0.581,0.613,0.901,1.197,1.196l0.805,0.403l11.594-0.047C108.27,56.947,108.418,56.943,108.916,56.576z"
 		/>
 </g>
 <path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M37,91.559H14.752
 	c-5.981,0-10.832-4.85-10.832-10.832v-65.35c0-5.981,4.85-10.832,10.832-10.832h65.35c5.982,0,10.832,4.85,10.832,10.832V36.5"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="2,8" d="
-	M38.954,79.36H27.475c-3.349,0-6.064-1.809-6.064-4.036V20.781c0-2.229,2.715-4.037,6.064-4.037h21.091
-	c3.348,0,6.064,1.808,6.064,8.512v27.811"/>
 <g id="Calque_3">
 	
-		<g id="svg15_1_" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" sodipodi:docname="iconKanban.svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+		<g id="svg15_1_" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" sodipodi:docname="iconKanban.svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
 		
-			<sodipodi:namedview  bordercolor="#666666" borderopacity="1" inkscape:cx="24.979592" guidetolerance="10" showgrid="false" inkscape:zoom="15.3125" pagecolor="#ffffff" gridtolerance="10" inkscape:cy="24" id="namedview17" objecttolerance="10" inkscape:window-x="-8" inkscape:window-width="1920" inkscape:window-height="1017" inkscape:pageopacity="0" inkscape:document-rotation="0" inkscape:current-layer="svg15" inkscape:pageshadow="2" inkscape:window-y="-8" inkscape:window-maximized="1">
+			<sodipodi:namedview  id="namedview17" objecttolerance="10" gridtolerance="10" pagecolor="#ffffff" inkscape:cy="24" borderopacity="1" showgrid="false" inkscape:zoom="15.3125" inkscape:cx="24.979592" guidetolerance="10" bordercolor="#666666" inkscape:window-height="1017" inkscape:current-layer="svg15" inkscape:document-rotation="0" inkscape:window-y="-8" inkscape:window-width="1920" inkscape:window-x="-8" inkscape:pageopacity="0" inkscape:window-maximized="1" inkscape:pageshadow="2">
 			</sodipodi:namedview>
 		<title  id="title6"></title>
 		<g>
-			<path fill="#FF0000" d="M80.264,109.997c-1.072-1.071-1.605-2.42-1.605-4.047V91.096H63.8c-1.627,0-2.977-0.556-4.047-1.664
-				c-1.072-1.105-1.607-2.476-1.607-4.103c0-1.625,0.535-2.976,1.607-4.047c1.07-1.07,2.42-1.607,4.047-1.607h14.854V64.818
-				c0-1.551,0.57-2.881,1.719-3.99c1.146-1.108,2.457-1.663,3.938-1.663c1.623,0,2.975,0.537,4.045,1.608
-				c1.07,1.072,1.607,2.421,1.607,4.045v14.854h14.854c1.555,0,2.9,0.557,4.047,1.664c1.146,1.105,1.721,2.479,1.721,4.104
-				c0,1.553-0.57,2.884-1.721,3.99c-1.146,1.107-2.492,1.662-4.047,1.662H89.963v14.855c0,1.627-0.537,2.976-1.607,4.047
-				c-1.07,1.07-2.422,1.605-4.045,1.605C82.684,111.604,81.332,111.068,80.264,109.997z"/>
+			<path fill="#FF0000" d="M80.264,109.997c-1.072-1.071-1.604-2.42-1.604-4.047V91.096H63.8c-1.627,0-2.977-0.556-4.047-1.664
+				c-1.072-1.104-1.607-2.476-1.607-4.103c0-1.625,0.535-2.976,1.607-4.047c1.07-1.07,2.42-1.607,4.047-1.607h14.854V64.818
+				c0-1.551,0.57-2.881,1.719-3.99c1.146-1.108,2.457-1.663,3.938-1.663c1.623,0,2.976,0.537,4.045,1.608
+				c1.07,1.072,1.607,2.421,1.607,4.045v14.854h14.854c1.556,0,2.9,0.557,4.047,1.664c1.146,1.105,1.722,2.479,1.722,4.104
+				c0,1.554-0.569,2.885-1.722,3.99c-1.146,1.107-2.491,1.662-4.047,1.662H89.963v14.855c0,1.627-0.537,2.976-1.607,4.047
+				c-1.069,1.07-2.422,1.605-4.045,1.605C82.684,111.604,81.332,111.068,80.264,109.997z"/>
 		</g>
 		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="84.253" cy="85.384" r="37.729"/>
 		<g id="Calque_1_2_" display="none">
 		</g>
 	</g>
 </g>
+<line fill="none" stroke="#FF0000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="2,8" x1="23.246" y1="4.545" x2="23.246" y2="91.559"/>
+<line fill="none" stroke="#FF0000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="2,8" x1="54.63" y1="5.849" x2="54.63" y2="60.357"/>
 </svg>
