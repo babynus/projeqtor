@@ -2,32 +2,27 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1"
-	 id="Layer_1" xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:cc="http://creativecommons.org/ns#" sodipodi:docname="iconTicketDashboard.svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+	 id="Layer_1" sodipodi:docname="iconTicketDashboard.svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px" height="128px"
 	 viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<sodipodi:namedview  guidetolerance="10" showgrid="false" pagecolor="#ffffff" inkscape:cx="128" inkscape:cy="128" borderopacity="1" gridtolerance="10" bordercolor="#666666" inkscape:zoom="2.8710938" objecttolerance="10" id="namedview13" inkscape:current-layer="Layer_1" inkscape:pageopacity="0" inkscape:window-x="-8" inkscape:window-width="1920" inkscape:pageshadow="2" inkscape:window-y="-8" inkscape:window-height="1017" inkscape:window-maximized="1">
+<sodipodi:namedview  inkscape:window-maximized="1" inkscape:window-height="1017" inkscape:pageshadow="2" inkscape:window-x="-8" inkscape:current-layer="Layer_1" inkscape:window-y="-8" inkscape:window-width="1920" inkscape:pageopacity="0" inkscape:cy="128" inkscape:cx="128" gridtolerance="10" pagecolor="#ffffff" inkscape:zoom="2.8710938" guidetolerance="10" objecttolerance="10" showgrid="false" borderopacity="1" id="namedview13" bordercolor="#666666">
 	</sodipodi:namedview>
 <g id="Calque_3">
 	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M40.901,42.829v10.646c0,0,6.635-0.874,6.635,7.58c0,7.083-6.635,7.083-6.635,7.083v8.525h62.463v-8.525
-		c0,0-7.057-0.375-7.057-7.083c0-6.708,7.057-7.581,7.057-7.581V42.829H40.901z"/>
+		M51.411,74.824h58.419V62.402c0,0-10.283-0.546-10.283-10.323c0-9.775,10.283-11.047,10.283-11.047V25.52H18.808v15.514
+		c0,0,6.859-0.904,9.023,6.173"/>
 	<g>
 		<g>
 			
-				<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,10" x1="84.085" y1="42.829" x2="84.085" y2="76.661"/>
+				<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,10" x1="81.737" y1="25.52" x2="81.737" y2="74.821"/>
 		</g>
 	</g>
 </g>
-<g id="Calque_2">
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M58.081,116.844h61.609c2.017,0,3.649-1.633,3.649-3.648V24.148c0-2.015-1.634-3.648-3.649-3.648H14.947
-		c-2.015,0-3.649,1.634-3.649,3.648v37.568"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M20.636,61.716V32.469c0-2.015,1.634-3.649,3.649-3.649h87.683c2.016,0,3.649,1.634,3.649,3.649v71.094
-		c0,2.016-1.634,3.648-3.649,3.648H62.265"/>
-	<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="22.821" cy="80.16" r="8.096"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M8.568,103.607c0,0-1.167-6.861,6.158-6.861c7.324,0,18.052-0.441,18.052-0.441s6.104,0.563,6.104,7.305c0,6.74,0,11.375,0,11.375
-		l14.79-11.375"/>
-</g>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M76.314,116.844h43.375c2.018,0,3.649-1.633,3.649-3.648V9.148c0-2.015-1.634-3.648-3.649-3.648H8.947
+	c-2.015,0-3.649,1.634-3.649,3.648v52.568"/>
+<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="26.948" cy="75.227" r="12.239"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M5.401,104.415c0,0-1.764-10.373,9.31-10.373c11.072,0,27.291-0.667,27.291-0.667s9.228,0.852,9.228,11.043
+	c0,10.19,0,17.197,0,17.197l22.359-17.197"/>
 </svg>
