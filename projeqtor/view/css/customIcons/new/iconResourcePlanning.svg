@@ -3,17 +3,15 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M54.437,89.321c0,6.505-1.621,12.516-4.362,17.384
-	c-4.102,7.283-10.715,15.262-18.173,15.262c-7.337,0-13.857-7.826-17.97-14.907c-2.866-4.93-4.565-11.075-4.565-17.734"/>
 <g>
 	
-		<line fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="5.019" y1="84.067" x2="58.785" y2="84.067"/>
+		<line fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="5.964" y1="123.981" x2="90.486" y2="123.981"/>
 	<path fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M6.322,80.66v-2.595l3.395-2.478v-7.181c0,0,2.48-8.481,11.745-12.789v8.222"/>
+		M8.013,118.626v-4.079l5.337-3.896V99.363c0,0,3.898-13.333,18.463-20.104v12.925"/>
 	<path fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M57.257,80.66v-2.595l-3.396-2.478v-7.181c0,0-2.476-8.481-11.743-12.789v8.222"/>
+		M88.084,118.626v-4.079l-5.337-3.896V99.363c0,0-3.893-13.333-18.46-20.104v12.925"/>
 	<path fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M26.549,68.799V54.778c0,0,0-1.249,2.22-1.249c2.218,0,6.004,0,6.004,0s2.084,0.263,2.084,2.09c0,1.829,0,13.181,0,13.181"/>
+		M39.811,99.979V77.938c0,0,0-1.964,3.489-1.964c3.486,0,9.438,0,9.438,0s3.277,0.413,3.277,3.285c0,2.876,0,20.721,0,20.721"/>
 </g>
 <path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M125.707,67.604H64.305
 	c-1.901,0-3.443-1.67-3.443-3.732V5.102"/>
