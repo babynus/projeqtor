@@ -267,7 +267,7 @@
      <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount"  style="text-align: center; position:relative;top:-5px">
        <div dojoType="dijit.form.DropDownButton"  id=""
             style="display: table-cell;vertical-align: middle;" >
-          <span  class="<?php if ($iconClassWithSize) echo 'iconNotification32';?> iconNotification iconSize32" style="display: table-cell;">  
+          <span  class="<?php if ($iconClassWithSize) echo 'iconNotification22';?> iconNotification iconSize22" style="display: table-cell;">  
             <span id="countNotifications" class="menuBarNotificationCount" style="text-align:center;" >
               0
             </span>
