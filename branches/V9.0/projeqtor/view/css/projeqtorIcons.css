@@ -185,7 +185,7 @@
 
 .iconSize32 { background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconSize22 { background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.iconSize16 { background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.iconSize16 { background-repeat: no-repeat; width: 16px !important; height: 16px !important; background-size: 16px 16px;}
 
 
 
@@ -875,7 +875,7 @@
 .ProjeQtOrFlatRed .iconExpenseDetailType { background-image: url(customIcons/red/iconExpenseDetailType.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconExpenseDetailType { background-image: url(customIcons/new/iconExpenseDetailType.svg);  background-repeat: no-repeat; }
 
-/* inexistante dans thème standard */
+/* inexistante dans thï¿½me standard */
 .iconError { background-image: url(images/iconError.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconError { background-image: url(customIcons/blue/iconError.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconError { background-image: url(customIcons/green/iconError.png);  background-repeat: no-repeat; }
