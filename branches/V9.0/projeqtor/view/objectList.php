@@ -1011,7 +1011,6 @@ if (property_exists($objectClass,'idStatus')) {
                 <script type="dojo/connect" event="onClick" args="evt">
                   showFilterDialog();
                 </script>
-                <?php } ?>
                 <script type="dojo/method" event="onMouseEnter" args="evt">
                   clearTimeout(closeFilterListTimeout);
                   clearTimeout(openFilterListTimeout);
@@ -1021,6 +1020,13 @@ if (property_exists($objectClass,'idStatus')) {
                   clearTimeout(openFilterListTimeout);
                   closeFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').closeDropDown();",2000);
                 </script>
+                <?php } else{ ?>
+                 <script type="dojo/connect" event="onClick" args="evt">
+                  clearTimeout(closeFilterListTimeout);
+                  clearTimeout(openFilterListTimeout);
+                  openFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').openDropDown();",popupOpenDelay);
+                </script>
+                <?php }?>
                 <div dojoType="dijit.TooltipDialog" id="directFilterList" style=" <?php if(isNewGui()){ ?> width:450px; <?php }?> z-index: 999999;<!-- display:none; --> position: absolute;">
                   <?php 
                      if ($comboDetail) $_REQUEST['comboDetail']=true;

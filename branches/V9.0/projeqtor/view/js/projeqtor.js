@@ -475,9 +475,10 @@ function resetFilterQuick(lstStat){
       dijit.byId('showStatus'+i).set('checked',false);
     }
   }
-  if (dijit.byId("listFilterFilter").iconClass == "iconActiveFilter"){
+  
+  if (dijit.byId("listFilterFilter").iconClass == "dijitButtonIcon dijitButtonIconActiveFilter"){
     selectStoredFilter('0','directFilterList',notDef,notDef);
-   }    
+   }  
      if(grid){
      if(dijit.byId('listTypeFilter')){
        dijit.byId('listTypeFilter').set('value','');
@@ -537,6 +538,10 @@ function resetFilterQuick(lstStat){
      }
      if(dijit.byId('listBudgetParentFilterQuick')){
        dijit.byId('listBudgetParentFilterQuick').set('value','');
+     }
+     
+     if(dijit.byId('listBudgetParentFilterQuick')){
+       dijit.byId('quickSearchValueQuick').set('value','');
      }
 }
 
