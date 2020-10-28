@@ -2410,7 +2410,7 @@ class PlanningElement extends SqlElement {
     }
   }
   
-  public function updateCA(){
+  public function updateCA($updateParent=false){
       if(! Module::isModuleActive('moduleGestionCA')){ return;}
       //if ($this->refType)
       //$old = $this->getOld();
@@ -2433,6 +2433,10 @@ class PlanningElement extends SqlElement {
     		$this->validatedCost = $this->revenue;
     	}
     	$this->simpleSave();
+    	if ($updateParent and $this->topId and $this->topRefType='Project') {
+    	  $top=new PlanningElement($this->topId);
+    	  $top->updateCA(true);
+    	}
   }
   
   function updateRevenue(){
