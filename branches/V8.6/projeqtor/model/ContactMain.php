@@ -271,12 +271,14 @@ class ContactMain extends SqlElement {
       $result.='<br/>' . i18n('messageMandatory',array(i18n('colUserName')));
     } 
     // Control that user is not duplicate
-    $crit=array("name"=>$this->userName);
-    $usr=new User();
-    $lst=$usr->getSqlElementsFromCriteria($crit,false);
-    if (count($lst)>0) {
-      if (! $this->id or count($lst)>1 or $lst[0]->id!=$this->id) {
-        $result.='<br/>' . i18n('errorDuplicateUser');
+    if ($this->userName) {
+      $crit=array("name"=>$this->userName);
+      $usr=new User();
+      $lst=$usr->getSqlElementsFromCriteria($crit,false);
+      if (count($lst)>0) {
+        if (! $this->id or count($lst)>1 or $lst[0]->id!=$this->id) {
+          $result.='<br/>' . i18n('errorDuplicateUser');
+        }
       }
     }
     $old=$this->getOld();
