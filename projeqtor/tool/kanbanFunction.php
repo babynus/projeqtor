@@ -131,7 +131,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
           </td>
           <td>
             <div class="roundedButton iconView generalColClass"
-              style="width:16px;cursor:pointer;"
+              style="width:16px;height:16px;cursor:pointer;"
               onclick="showDetail(\'refreshActionAdd' . $typeKanbanC . '\',1,\'' . $typeKanbanC . '\',false,' . $line ['id'] . ', true);" title="' . i18n('kanbanEditItem',array($line ['id'])) . '"
             </div>
           </td>
@@ -181,7 +181,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
         </div>' : '').'';
 		$object= new $typeKanbanC ($line['id']);
 		$nbBadge=((isset($object->_Note) )?count ($object->_Note):'');
-		$margin=($nbBadge>9)?'-6':'-2';
+		$margin=($nbBadge>9)?'-9':'-6';
 		$badge= '<div id="'.$line['name'].'BadgeTab" class="kanbanBadge" style="">'.$nbBadge.'</div>';
        echo  '<table style="float:right;margin:2px;">
           <tr>
@@ -196,14 +196,14 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
             </div>
             </td>
             <td>
-          	  <div class="roundedButton iconView generalColClass"
-                style="width:16px;cursor:pointer;vertical-align:text-bottom;margin-right:5px;float:left;"
-                onclick="showDetail(\'refreshActionAdd' . $typeKanbanC . '\',1,\'' . $typeKanbanC . '\',false,' . $line ['id'] . ');" title="' . i18n('kanbanEditItem',array($line ['id'])) . '"
+          	  <div class="roundedButton iconSize16 iconView generalColClass imageColorNewGui"
+                style="width:16px;height:16px;cursor:pointer;vertical-align:text-bottom;margin-right:5px;float:left;"
+                onclick="showDetail(\'refreshActionAdd' . $typeKanbanC . '\',1,\'' . $typeKanbanC . '\',false,' . $line ['id'] . ');" title="' . i18n('kanbanEditItem',array($line ['id'])) . '>"
               </div>
             </td>
             <td>
-              <div class="roundedButton generalColClass"
-                style="width:20px;cursor:pointer;float:right;vertical-align:text-bottom;margin-top:3px;">
+              <div class="roundedButton iconSize16 generalColClass imageColorNewGui"
+                style="width:20px;height:16px;cursor:pointer;float:right;vertical-align:text-bottom;">
          		    <div onclick="gotoElement(\'' . $typeKanbanC . '\',' . htmlEncode ( $line ['id'] ) . ', true);"	title="' .i18n('kanbanGotoItem',array($line ['id'])) . '" style="width:18px;" class="iconGoto">
            		  </div>
               </div>
