@@ -1220,7 +1220,7 @@ function htmlDrawCrossTable($lineObj, $lineProp, $columnObj, $colProp, $pivotObj
 //             $breakVal='';
 //             continue;
 //         }
-        if (!is_array($lineObj) and $lineObj=="menu") {
+        if (!is_array($lineObj) and substr($lineObj,0,4)=="menu") {
           $menuName=SqlList::getNameFromId('Menu', $lineId,false);
           if (!Module::isMenuActive($menuName)) {
             continue;
