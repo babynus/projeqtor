@@ -62,7 +62,7 @@ switch ($type) {
 		traceHack('parameter : unknown parameter type '.$type);
 		exit;		 
 }
-
+Security::checkDisplayMenuForUser(ucfirst($type));
 /** =========================================================================
  * Design the html tags for parameter page depending on list of paramters
  * defined in $parameterList
