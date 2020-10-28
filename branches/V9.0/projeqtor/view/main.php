@@ -944,7 +944,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       include 'menuNewGuiTop.php'; 
       $nbFavoriteRow = 5;
       ?>
-      <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;height:auto;z-index: 9999999;top:46px;display:none">
+      <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;height:200px !important;z-index: 9999999;top:46px;background-color: rgb(181 181 181 / 50%);display:none">
         <table style="width:100%;"><tr>
           <td style="width:7%;"></td>
           <td style="width:90%;">
