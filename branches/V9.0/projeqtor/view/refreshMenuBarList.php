@@ -51,7 +51,7 @@ $nbFavoriteRow=5;
     </td>
     <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="width:100%;height:100%;" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
      <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
-     <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idRow, false);?>
+     <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idRow);?>
    </td>
   </tr>
 </table>
