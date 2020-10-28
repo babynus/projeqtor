@@ -1408,6 +1408,7 @@ class PlannedWork extends GeneralWork {
                           $ctrlPlannedWorkOnPool=$resources[$idRT][$currentDate];
                           $ctrlCanBeDoneByOthersOnPool=0;
                           foreach ($resources[$idRT]['members'] as $idMember=>$workMember) {
+                            $ctrlCanBeDoneByMember=0;
                             if ($idMember==$ass->idResource) continue; // Do not count work that can be done by current (we count only "others")
                             if (isset($resources[$idMember]) and isset($resources[$idMember]['capacity'])) {
                               $ctrlCapaMember=$resources[$idMember]['capacity'];
@@ -1426,6 +1427,7 @@ class PlannedWork extends GeneralWork {
                             } else {
                               $ctrlCanBeDoneByMember=0;
                             }
+                            if (!$ctrlCanBeDoneByMember) $ctrlCanBeDoneByMember=0;
                             $ctrlCanBeDoneByOthersOnPool+=$ctrlCanBeDoneByMember;
                           }
                           $mustBeDoneByCurrentResourceOnPool=$ctrlPlannedWorkOnPool-$ctrlCanBeDoneByOthersOnPool;
