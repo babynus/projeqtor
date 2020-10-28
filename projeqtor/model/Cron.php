@@ -929,6 +929,7 @@ class Cron {
               $attch->refType = 'Ticket';
               $attch->refId = $ticket->id;
               $attch->idPrivacy=1;
+              $attch->type='file';
               $namefileWithPath = $att->filePath;
               $embededImg='src="cid:'.$att->id.'"';
               if (strpos($ticket->description, $embededImg)!=0) {
