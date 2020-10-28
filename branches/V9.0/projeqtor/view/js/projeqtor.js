@@ -648,7 +648,7 @@ function addMessage(msg) {
   msg = msg.replace("<div>", "");
   msg = msg.replace("</div>", "");
   msg = msg.replace("</div>", "");
-  var msgDiv = dojo.byId("messageDiv");
+  var msgDiv =(isNewGui)? dojo.byId("messageDivNewGui"):dojo.byId("messageDiv");
   if (msgDiv) {
     msgDiv.innerHTML = "[" + getTime() + "] " + msg + "<br/>"
         + msgDiv.innerHTML;

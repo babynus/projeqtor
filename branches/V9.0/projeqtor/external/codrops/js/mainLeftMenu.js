@@ -193,7 +193,8 @@
             if( currentlink ) {
               classie.remove(currentlink , 'menu__link--current');
             }
-            classie.add(ev.target, 'menu__link--current');
+            console.log( );
+              classie.add(item.firstChild, 'menu__link--current');
             // callback
             self.options.onItemClick(ev, itemName);
           }

@@ -476,7 +476,7 @@ function showBottomContent (menu){
   saveDataToSession('bottomMenuDivItemElect',menu,true);
   
   if(menu!='Console'){
-    dojo.byId('messageDiv').style.display='none';
+    dojo.byId('messageDivNewGui').style.display='none';
     dojo.byId('loadDivBarBottom').style.display='block';
   }
   
@@ -486,6 +486,9 @@ function showBottomContent (menu){
     el.style.display='none';
   });
   switch(menu){
+    case 'Parameter':
+      dojo.byId('projectLinkDiv').style.display='block';
+      break;
     case 'Link':
       dojo.byId('projectLinkDiv').style.display='block';
       break;
@@ -499,7 +502,7 @@ function showBottomContent (menu){
       break;
     case 'Console':
       items.style.display='none';
-      dojo.byId('messageDiv').style.display='block';
+      dojo.byId('messageDivNewGui').style.display='block';
       break;
   }
 }
