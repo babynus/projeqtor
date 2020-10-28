@@ -77,10 +77,14 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
     </div>
     <?php $viewSelect=Parameter::getUserParameter('bottomMenuDivItemElect');?>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;">
+      <div class="container" style="height:98%;width:100%;">
          <div id="loadDivBarBottom" style="height:100%;display:<?php echo ($viewSelect=='Console')?'none':'block';?>;">
            <?php
            $viewSelect='Notification';
            ?>
+           <div id="parameterDiv" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Parameter')?'block':'none';?>;">
+              <?php include "../view/menuBottomParameter.php"?>
+           </div>
            <div id="projectLinkDiv" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Link')?'block':'none';?>;">
               <?php include "../view/shortcut.php"?>
            </div>
@@ -177,7 +181,8 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
            }           
            ?>
            </div>
-           <div id="messageDiv" class="messageDivNewGui" style="height:90%;display:<?php echo ($viewSelect=='Console')?'block':'none';?>;"></div>
+           <div id="messageDivNewGui" class="messageDivNewGui" style="display:<?php echo ($viewSelect=='Console')?'block':'none';?>;height:95%;"></div>
+      </div>
     </div>
   </div>
 </div>

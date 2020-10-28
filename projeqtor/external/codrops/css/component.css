@@ -118,7 +118,8 @@ float: left;
 .menu__link--current {
     color: var(--color-secondary);
    	border-left: 3px solid var(--color-secondary);
-   	padding: 5px 10px 5px 4px;
+   	padding: 5px 10px 5px 6px;
+   	margin-left:0px;
 }
 
 .div__link{
