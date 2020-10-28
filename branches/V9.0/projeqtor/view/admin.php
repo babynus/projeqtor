@@ -33,6 +33,7 @@
   
   $user=getSessionUser();
   $collapsedList=Collapsed::getCollaspedList();      
+  Security::checkDisplayMenuForUser('Admin');
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Administration" />
 <div class="container" dojoType="dijit.layout.BorderContainer">

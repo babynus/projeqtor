@@ -34,6 +34,7 @@ require_once "../tool/projeqtor.php";
 $status="NO_CHANGE";
 $errors="";
 $type=$_REQUEST['parameterType'];
+Security::checkDisplayMenuForUser(ucfirst($type));
 Sql::beginTransaction();
 $forceRefreshMenu='';
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
