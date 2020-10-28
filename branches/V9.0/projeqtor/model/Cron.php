@@ -405,6 +405,7 @@ class Cron {
 	
 	public static function run() {
 //scriptLog('Cron::run()');	
+    debugLog("Cron::run()");
     self::$cronProcessId=getmypid();
     self::$cronUniqueId=uniqid('',true);
     global $cronnedScript, $i18nMessages, $currentLocale;
