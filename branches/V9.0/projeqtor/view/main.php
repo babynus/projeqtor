@@ -947,8 +947,14 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;z-index: 9999999;top:46px;background-color: rgb(181 181 181 / 50%);display:none">
         <table style="width:100%;"><tr>
           <td style="width:7%;">
-            <div style="margin-top: 5px;height: 200px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;">
-              <div></div>
+            <div style="margin: 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;position: absolute;top: 0px;left: 0px;">
+              <table style="width:100%;height:100%;">
+        	           <tr>
+        	             <td style="padding: 5px;"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+    	                 <td style="padding: 5px;"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+    	                 <td style="padding: 5px;"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+        	           </tr>
+      	           </table
             </div>
           </td>
           <td style="width:90%;">
