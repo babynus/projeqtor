@@ -359,5 +359,16 @@ class Security
     }
     return true;
   }
+  /**
+   * 
+   * @param string $menu : name of menu without the 'menu' prefix
+   * @param string $traceHack
+   */
+  public static function checkDisplayMenuForUser($menu, $traceHack=true) {
+    $user=getSessionUser();
+    $check=securityCheckDisplayMenu(null, $menu, $user);
+    if ($check==false and $traceHack==true) traceHack("checkDisplayMenuForUser() Reject for menu '$menu'");
+    return $check;
+  }
 }
  
