@@ -492,17 +492,19 @@
         <script type="dojo/connect" event="onClick" args="evt">
           hideResultDivs();
           var pos=<?php echo json_encode($paramRightDiv) ;?>;
-          if(pos=='bottom'){
-            if(dijit.byId('detailRightDiv').h != 0){
-              saveDataToSession('showActicityStream','show');
+          if (dijit.byId('detailRightDiv')) {
+            if(pos=='bottom'){
+              if(dijit.byId('detailRightDiv').h != 0){
+                saveDataToSession('showActicityStream','show');
+              }else{
+                saveDataToSession('showActicityStream','hide');
+              }
             }else{
-              saveDataToSession('showActicityStream','hide');
-            }
-          }else{
-            if(dijit.byId('detailRightDiv').w != 0){
-              saveDataToSession('showActicityStream','show');
-            }else{
-              saveDataToSession('showActicityStream','hide');
+              if(dijit.byId('detailRightDiv').w != 0){
+                saveDataToSession('showActicityStream','show');
+              }else{
+                saveDataToSession('showActicityStream','hide');
+              }
             }
           }
           hideStreamMode('false','<?php echo $paramRightDiv;?>','<?php echo $activityStreamDefaultSize;?>',false);
