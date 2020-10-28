@@ -101,13 +101,13 @@ if(!$paramAccessMode)$paramAccessMode='direct';
         	             </td>
     	                 <td style="width:25%" class="<?php if($defaultMenu=='menuBarCustom')echo 'imageColorNewGuiSelected';?>" id="favoriteButton" title="<?php echo i18n('Favorite');?>" onclick="menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
     	                 <td style="width:5%"></td>
-    	                 <td style="width:30%" class="<?php if($defaultMenu=='menuBarRecent')echo 'imageColorNewGuiSelected';?>" id="recentButton" title="<?php echo i18n('Recent');?>" onclick="menuNewGuiFilter('menuBarRecent', null);"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
+    	                 <td style="width:30%" class="<?php if($defaultMenu=='menuBarRecent')echo 'imageColorNewGuiSelected';?>" id="recentButton" title="<?php echo i18n('Recent');?>" onclick="editFavoriteRow(true);menuNewGuiFilter('menuBarRecent', null);"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
         	           </tr>
       	           </table>    
 	             </div>
 	           </td>
     	       <td style="width: 90%;">
-    	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dijit.layout.ContentPane"  style="width: 100%;height: 100%;border-radius: 5px;border-left: 1px solid var(--color-dark);"> 
+    	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dijit.layout.ContentPane"  style="overflow:hidden;width: 100%;height: 100%;border-radius: 5px;border-left: 1px solid var(--color-dark);"> 
         	         <table style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
         	           <tr>
         	             <td style="
@@ -119,7 +119,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
                           <?php if($defaultMenu=='menuBarCustom')echo $idRow;?>
         	             </td>
         	             <td style="width:97.5%;height:100%;" dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
-        	               <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow, false);?>
+        	               <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow);?>
         	               <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
         	             </td>
         	           </tr>

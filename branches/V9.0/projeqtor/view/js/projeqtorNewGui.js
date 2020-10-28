@@ -266,7 +266,9 @@ function menuNewGuiFilter(filter, item) {
 	var hide = function(){
 		if(filter == 'menuBarRecent')editFavoriteRow(true);
 	};
+	cleanContent("menuBarListDiv");
 	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, null, null, null, null, callback);
+	cleanContent("anotherBarContainer");
 	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter, 'anotherBarContainer', null, null, null, null, null, hide);
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;

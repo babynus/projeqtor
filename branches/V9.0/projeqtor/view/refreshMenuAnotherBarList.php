@@ -43,7 +43,11 @@ if($defaultMenu == 'menuBarCustom'){
 
 ?>
 <table style="width:100%;"><tr>
-<td style="width:7%;"></td>
+<td style="width:7%;">
+  <div style="margin-top: 5px;height: 100%;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;">
+    <div></div>
+  </div>
+</td>
 <td style="width:90%;">
 <div id="anotherMenubarList" name="anotherMenubarList" style="width:100%;z-index:9999999;">
 <?php
@@ -57,7 +61,7 @@ for($i=$startRow; $i<=($idRow+4); $i++){
   $idDiv = "menuBarDndSource$idAnotherRow";
   $idInput = "idFavoriteRow$idAnotherRow";
   ?>
-  <div id="<?php echo 'anotherBar'.$idAnotherRow;?>" class="anotherBar" style="margin-top: 5px;height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;">
+  <div id="<?php echo 'anotherBar'.$idAnotherRow;?>" class="anotherBar" style="overflow:hidden;margin-top: 5px;height: 43px;width:100%;border: 1px solid var(--color-dark);border-radius: 5px;background: white;">
     <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $idAnotherRow;?>">
     <table style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
          <tr>
@@ -66,7 +70,7 @@ for($i=$startRow; $i<=($idRow+4); $i++){
          </td>
           <td class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97.5%;"
           dndType="menuBar"  dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar'], horizontal: true">
-          <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, 0, $idAnotherRow, true);?>
+          <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, 0, $idAnotherRow);?>
           </td>
          </tr>
     </table>
