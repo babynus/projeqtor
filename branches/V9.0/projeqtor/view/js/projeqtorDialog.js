@@ -7531,6 +7531,7 @@ function loadMenuBarObject(menuClass, itemName, from) {
   var objectExist='true';
   var currentScreen=menuClass; 
   loadContent("objectMain.php?objectClass=" + currentScreen, "centerDiv"); 
+  if(isNewGui)loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+menuClass+'&isObject=true',"parameterDiv");
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
   stockHistory(currentScreen,null,"object");
   if(defaultMenu == 'menuBarRecent'){
@@ -7679,6 +7680,7 @@ function loadMenuBarItem(item, itemName, from) {
   }else {  
     showInfo(i18n("messageSelectedNotAvailable", new Array(itemName)));
   }
+  if(isNewGui)loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+item+'&isObject=false',"parameterDiv");
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
   stockHistory(item,null,currentScreen);
   if(defaultMenu == 'menuBarRecent'){

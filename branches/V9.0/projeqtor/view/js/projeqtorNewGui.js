@@ -487,7 +487,11 @@ function showBottomContent (menu){
   });
   switch(menu){
     case 'Parameter':
-      dojo.byId('projectLinkDiv').style.display='block';
+      dojo.byId('parameterDiv').style.display='block';
+      var screen = dojo.byId('objectClassManual');
+      var objectClass= (dojo.byId('objectClass'))?dojo.byId('objectClass').value:false;
+      var isObject=(objectClass)?'true':'false';
+      loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+((objectClass)?objectClass:screen)+'&isObject='+isObject,"parameterDiv");
       break;
     case 'Link':
       dojo.byId('projectLinkDiv').style.display='block';
