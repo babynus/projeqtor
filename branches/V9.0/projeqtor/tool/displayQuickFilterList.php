@@ -376,7 +376,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       <tr style="border-top:solid 1px;">
         <td> 
          <?php 
-          echo '<div class="roundedVisibleButton roundedButton generalColClass ';
+          echo '<div class="roundedVisibleButton roundedButton generalColClass"';
           echo ' title="'.i18n('advancedFilters').'"';
           echo ' style="text-align:left;margin-right:10px;margin-top:10px;height:27px;width:190px;"';
           echo ' onClick="showFilterDialog();">';
