@@ -540,7 +540,7 @@ function resetFilterQuick(lstStat){
        dijit.byId('listBudgetParentFilterQuick').set('value','');
      }
      
-     if(dijit.byId('listBudgetParentFilterQuick')){
+     if(dijit.byId('quickSearchValueQuick')){
        dijit.byId('quickSearchValueQuick').set('value','');
      }
 }
@@ -1208,7 +1208,6 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           }
           if (destination == "directFilterList") {
             if (!validationType || validationType=='returnFromFilter' ) {
-              console.log(dijit.byId("listFilterFilter"));
               if (window.top.dojo.byId('noFilterSelected')&& window.top.dojo.byId('noFilterSelected').value == 'true') {
                 dijit.byId("listFilterFilter").set("iconClass", "dijitButtonIcon iconFilter");
               } else {
