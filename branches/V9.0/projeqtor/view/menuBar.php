@@ -329,7 +329,27 @@
 		</div>
       </div>
     </td>
-    <?php drawSeparator();?>
+    
+    <?php if(isNewGui()){ drawSeparator();?>
+    <td title="<?php ?>"  style="position:relative;width:55px;">
+      <div dojoType="dijit.layout.ContentPane"  id="menuInterrogation" class="pseudoButton" style="position:relative;overflow:hidden;width:55px; height:28px; min-width:55px;top:-5px;">
+        <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuInterrogationTitle");?>" id="iconMenuInterrogation" style="display: table-cell;vertical-align: middle;position:relative;min-width:50px;top:-3px" >
+        <table style="width:100%">
+    			  <tr>
+      				<td style="width:24px;padding-top:2px;">
+      				  <div class="iconHelpMenu iconSize22">&nbsp;</div> 
+      				</td>
+      			  <td style="vertical-align:middle;">&nbsp;</td>
+    			  </tr>
+			    </table>
+			    <div id="drawMenuInterrogation" dojoType="dijit.TooltipDialog"
+             style="max-width:600px; overflow-x:hidden; height:450px;  max-height:500px;  width:150px; ">
+             <?php include "menuUserInterrogation.php" ?>          
+          </div> 
+        </div>
+      </div>
+    </td>
+    <?php } drawSeparator();?>
     <td title="<?php echo i18n('menuUserParameter');?>"  style="position:relative;width:105px;padding-right:5px;">
       <div dojoType="dijit.layout.ContentPane"  id="menuUserParameterTop" class="pseudoButton" style="position:relative;overflow:hidden; height:28px;width:100%; min-width:100px;top:-5px;left:3px;" title="<?php echo i18n('menuUserParameter');?>">
         <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserPhoto" style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:100px;top:-3px;width:100%" >
