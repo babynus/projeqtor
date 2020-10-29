@@ -287,7 +287,7 @@ if (property_exists($objectClass,'idStatus')) {
         <input type="hidden" id="objectId" name="objectId" value="<?php if (isset($_REQUEST['objectId']))  { echo htmlEncode($_REQUEST['objectId']);}?>" />
         <input type="hidden" id="objectClassList" name="objectClassList" value="<?php echo $objectClass;?>" />
         
-        <table style="width: 100%; height: 27px;">
+        <table style="width: 100%; height: 39px;">
           <tr>
           <?php 
           //gautier #filterEnd
@@ -1006,7 +1006,7 @@ if (property_exists($objectClass,'idStatus')) {
                class="comboButton"
                dojoType="dijit.form.DropDownButton" 
                id="listFilterFilter" name="listFilterFilter"
-               iconClass="dijitButtonIcon dijitButtonIcon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
+               iconClass="dijitButtonIcon icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
                <?php if (!isNewGui()){?>
                 <script type="dojo/connect" event="onClick" args="evt">
                   showFilterDialog();

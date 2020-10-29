@@ -83,6 +83,7 @@ $filterList=$flt->getSqlElementsFromCriteria($crit,false,null,$orderByFilter);
 $displayQuickFilter = RequestHandler::getValue('displayQuickFilter');
 if($displayQuickFilter){
   if(isNewGui())include "../tool/displayQuickFilterList.php";
+  $context = "directFilterList";
 }
 htmlDisplayStoredFilter($filterList,$filterObjectClass,$currentFilter, $context);
 
