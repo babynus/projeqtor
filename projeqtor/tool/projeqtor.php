@@ -3434,14 +3434,14 @@ function addDelayToDatetime($dateTime, $delay, $unit) {
     if (!$startAM or !$endAM or !$startPM or !$endPM) {
       return $dateTime;
     }
-    $mnEndAM=(substr($endAM, 0, 2)*60+substr($endAM, 3));
-    $mnStartAM=(substr($startAM, 0, 2)*60+substr($startAM, 3));
-    $mnEndPM=(substr($endPM, 0, 2)*60+substr($endPM, 3));
-    $mnStartPM=(substr($startPM, 0, 2)*60+substr($startPM, 3));
+    $mnEndAM=intval((substr($endAM, 0, 2))*60+intval(substr($endAM, 3)));
+    $mnStartAM=intval(substr($startAM, 0, 2)*60+intval(substr($startAM, 3)));
+    $mnEndPM=intval(substr($endPM, 0, 2)*60+intval(substr($endPM, 3)));
+    $mnStartPM=intval(substr($startPM, 0, 2)*60+intval(substr($startPM, 3)));
     $mnDelay=$delay*60;
     $hh=substr($time, 0, 2);
     $mn=substr($time, 3, 2);
-    $mnTime=$hh*60+$mn;
+    $mnTime=intval($hh)*60+intval($mn);
     $AMPM='AM';
     if ($mnDelay>=0) {
       if (isOffDay($date)) {
