@@ -60,11 +60,11 @@ if (RequestHandler::isCodeSet('comboDetail')) {
 }
 ?>
 <table style="width:99%;" id="quickFilterList">
-  <tr style="width:100%;border-bottom:solid 1px;">
+  <tr style="width:100%;">
     <td><table>
       <tr> 
-        <td style="width:60%;text-transform: uppercase;"><?php echo i18n("filters");?></td>
-        <td style="text-align:center;" class="allSearchTD resetSearchTD allSearchFixLength">
+        <td style="width:60%;text-transform: uppercase;border-bottom:solid 1px;"><?php echo i18n("filters");?></td>
+        <td style="text-align:center;border-bottom:solid 1px;" class="allSearchTD resetSearchTD allSearchFixLength">
           <button dojoType="dijit.form.Button" type="button" >
             <?php echo i18n('buttonReset');?>
             <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
@@ -327,20 +327,24 @@ if (RequestHandler::isCodeSet('comboDetail')) {
          <td  style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("quickSearch");?>&nbsp;:&nbsp;</span></td>
          <td  colspan=2 style="width:65%;">
             <div title="<?php echo i18n('quickSearch')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
-               id="quickSearchValueQuick" name="quickSearchValueQuick"
-               style="width:200px;">
+               id="quickSearchValueQuick" name="quickSearchValueQuick" style="width:200px;">
+                <script type="dojo/method" event="onKeyUp" >
+                if(event.keyCode==13){
+                  quickSearchExecuteQuick();
+                }
+              </script>
             </div>
              <button title="<?php echo i18n('quickSearch')?>"  
   	          dojoType="dijit.form.Button" 
   	          id="listQuickSearchExecuteQuick" name="listQuickSearchExecuteQuick"
-  	          iconClass="dijitButtonIcon dijitButtonIconSearch" class="detailButton" showLabel="false">
+  	          iconClass="dijitButtonIcon dijitButtonIconSearch" class="imageColorNewGui" showLabel="false">
   	          <script type="dojo/connect" event="onClick" args="evt">
                 quickSearchExecuteQuick();
               </script>
   	        </button>
   	        <button title="<?php echo i18n('comboCloseButton')?>"  
             dojoType="dijit.form.Button" id="listQuickSearchCloseQuick" name="listQuickSearchCloseQuick"
-            iconClass="dijitButtonIcon dijitButtonIconUndo" class="detailButton" showLabel="false">
+            iconClass="dijitButtonIcon dijitButtonIconUndo" class="imageColorNewGui iconSize16" showLabel="false">
             <script type="dojo/connect" event="onClick" args="evt">
               quickSearchCloseQuick();
             </script>
@@ -349,7 +353,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
 			  <?php } ?>
       <?php if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?> 
       <tr style="height:37px;">
-        <td colspan=2 style="width:25%;text-align:left;text-transform:lowercase;"><span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo i18n("filterByStatusQuick");?>&nbsp;:&nbsp;</span></td>
+        <td colspan=2 style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("filterByStatusQuick");?>&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 			  <td style="width:10%;text-align:center;">
 			   <div id="filterByStatusSwitch" name="filterByStatusSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(!$comboDetail and sessionValueExists('displayByStatusListSwitch'.$objectClass)){ echo getSessionValue('displayByStatusListSwitch'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >
@@ -371,16 +375,15 @@ if (RequestHandler::isCodeSet('comboDetail')) {
      <table style="width: 100%;">
       <tr style="border-top:solid 1px;">
         <td> 
-          <button title="<?php echo i18n('advancedFilter')?>"  
-                  dojoType="dijit.form.Button" 
-                  id="listFilterFilterDisplay" name="listFilterFilterDisplay"
-                  iconClass="dijitButtonIcon dijitButtonIconFilter"
-                   class="detailButton" showLabel="false">
-                <script type="dojo/connect" event="onClick" args="evt">
-                   showFilterDialog();
-                </script>
-          </button>
-          <?php echo i18n('advancedFilters');?>
+         <?php 
+          echo '<div class="roundedVisibleButton roundedButton generalColClass ';
+          echo ' title="'.i18n('advancedFilters').'"';
+          echo ' style="text-align:left;margin-right:10px;margin-top:10px;height:27px;width:190px;"';
+          echo ' onClick="showFilterDialog();">';
+          echo '<img src="css/customIcons/new/iconFilter.svg" style="-webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+                filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));position:relative;left:5px;top:2px;background-repeat:no-repeat;width:24px;background-size:24px;"/>';
+          echo '<div style="color:black;position:relative;top:-21px;left:38px;">'.i18n('advancedFilters').'</div>';
+          echo '</div>'; ?>
         </td>
       </tr>  
     </table>
