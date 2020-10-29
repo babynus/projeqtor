@@ -488,7 +488,23 @@ animation: fadeIn ease 0.5s;
     opacity: 1;
     margin: 3px 4px 4px 4px;
 }
-.menuBar_add_Fav:before{
+
+.newHeaderLink{
+    color: white;
+    padding-left: 10px;
+    font-weight: 600;
+    padding: 5px 10px 5px 6px;
+}
+
+.newDataLink {
+	padding: 5px 0px 5px 15px;
+}
+
+.newDataLink  .hyperlink:hover{
+	color: var(--color-secondary)!important;
+}
+
+.menuBar_add_Fav::before{
     float: left;
     content: '\f27d';
     font-family: 'Material';
@@ -501,7 +517,7 @@ animation: fadeIn ease 0.5s;
     color: var( --color-light);
     width: 8%;
 }
-.menuBar_remove_Fav:before{
+.menuBar_remove_Fav::before{
     float: left;
     content: '\f27d';
     font-family: 'Material';

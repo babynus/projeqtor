@@ -60,11 +60,6 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
             ?>
       </nav>
 	  <script>
-	  var x = 0;
-	  function myFunction() {
-	    var txt = x += 1;
-	    document.getElementById("demo").innerHTML = txt;
-	  }
 	   (function() {
 	     var menuEl = dojo.byId('ml-menu'),
 			mlmenu = new MLMenu(menuEl, {
@@ -83,10 +78,10 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
            $viewSelect='Notification';
            ?>
            <div id="parameterDiv" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Parameter')?'block':'none';?>;">
-              <?php //include "../view/menuBottomParameter.php;"?>
+              
            </div>
            <div id="projectLinkDiv" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Link')?'block':'none';?>;">
-              <?php // include "../view/shortcut.php;"?>
+              <?php include "../view/shortcut.php";?>
            </div>
            <div id="documentsDiv"  class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Document')?'block':'none';?>;">
               <div dojoType="dojo.data.ItemFileReadStore" id="directoryStore" jsId="directoryStore" url="../tool/jsonDirectory.php"></div>
@@ -99,7 +94,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
                query="{id:'*'}" rootId="directoryRoot" rootLabel="Documents"
                childrenAttrs="children">
               </div>             
-              <div dojoType="dijit.Tree" id="documentDirectoryTree" model="directoryModel" openOnClick="false" showRoot='false'>
+              <div dojoType="dijit.Tree" id="documentDirectoryTree" style="margin-top:10px;" model="directoryModel" openOnClick="false" showRoot='false'>
                 <script type="dojo/method" event="onClick" args="item">;
                   if (checkFormChangeInProgress()){return false;}
                   loadContent("objectMain.php?objectClass=Document&Directory="+directoryStore.getValue(item, "id"),"centerDiv");
@@ -128,7 +123,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
                      query="{id:'*'}" rootId="notificationRoot" rootLabel="Notifications"
                      childrenAttrs="children" > 
                 </div>             
-                 <div dojoType="dijit.Tree" id="notificationTree" model="notificationModel" openOnClick="false" showRoot='false' style="height:100%">
+                 <div dojoType="dijit.Tree" id="notificationTree" model="notificationModel" openOnClick="false" showRoot='false' style="height:92.5%;margin-top:20px;">
                     <script type="dojo/method" event="onLoad" args="evt">;
                         var cronCheckNotification = <?php echo Parameter::getGlobalParameter('cronCheckNotifications'); ?>;
                         var intervalNotificationTreeDelay = cronCheckNotification*1000;
