@@ -2693,7 +2693,7 @@
 .ProjeQtOrFlatRed .iconButtonKanbanRemove { background-image: url(customIcons/red/iconRemove.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonKanbanRemove { background-image: url(customIcons/new/iconButtonKanbanRemove.svg);  background-repeat: no-repeat; }
 
-
+.ProjeQtOrNewGui .iconHelpMenu { background-image: url(customIcons/new/iconHelp.svg);  background-repeat: no-repeat; }
 
 
 /* =============================================================================== */

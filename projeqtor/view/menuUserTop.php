@@ -211,49 +211,4 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
     </td>
   </tr>
 <?php } // End of if ($showUserParameters)?>
-  <tr style="height:40px">
-    <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"></td>
-      <td>
-      <div class="pseudoButton"  title="<?php echo i18n('help');?>" onClick="showHelp();">
-        <table style="width:100%">
-          <tr>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconCatalog22">&nbsp;</div>
-            </td>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('help');?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>
-      </div>
-    </td>
-  </tr>
-  <tr style="height:40px">
-    <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"></td>
-    <td>
-      <div class="pseudoButton"  title="<?php echo i18n('keyboardShortcuts');?>" onClick="showHelp('ShortCut');">
-        <table style="width:100%">
-          <tr>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconShortCut">&nbsp;</div>
-            </td>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('keyboardShortcuts');?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>
-      </div>
-    </td>
-  </tr>
-  <tr style="height:40px">
-    <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"></td>
-    <td>
-      <div class="pseudoButton"  title="<?php echo i18n('aboutMessage');?>" onClick="showAbout(aboutMessage);">
-        <table style="width:100%">
-          <tr>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconInfo22">&nbsp;</div>
-            </td>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('aboutMessage');?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>
-      </div>
-    </td>
-  </tr>
 </table>
