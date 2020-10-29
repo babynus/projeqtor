@@ -51,7 +51,7 @@ if($defaultMenu == 'menuBarCustom'){
              <td style="padding: 5px;"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
              <td style="padding: 5px;"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
            </tr>
-         </table
+         </table>
   </div>
 </td>
 <td style="width:90%;">
