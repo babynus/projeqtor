@@ -48,18 +48,18 @@ if($arrayProj){
 }
 $lstProjVisible=getSessionUser()->getVisibleProjects(); 
 $lstProj=array_intersect_assoc($lstProjSelect,$lstProjVisible);
-echo '<table style="width: 100%;">';
+echo '<table style="width: 100%;margin-top:'.((isNewGui())?"10px":"0px").';">';
 foreach ($lstProj as $prjId=>$prjName) {
   $att=new Attachment();
   $lstAtt=$att->getSqlElementsFromCriteria(array('refType'=>'Project','refId'=>$prjId, 'type'=>'link'));
   //* $lstAtt Attachment[]
   if (count($lstAtt)>0) {
-    echo '<tr><th class="linkHeader">';
+    echo '<tr><th class="'.((isNewGui())?"newHeaderLink":"linkHeader").'">';
     echo htmlEncode($prjName);
     echo '</th></tr>';
     foreach ($lstAtt as $att) {
-      echo '<tr><td class="linkData">';
-        echo '<a href="' . htmlEncode($att->link) . '" target="#" class="hyperlink" title="' . htmlEncode($att->link) . '">';
+      echo '<tr><td class="'.((isNewGui())?"newDataLink":"linkData").'">';
+        echo '<a href="' . htmlEncode($att->link) . '" target="#" class="hyperlink" title="' . htmlEncode($att->link) . '" style="'.((isNewGui())?"color:white":"").';">';
         echo ($att->description)?htmlEncode($att->description):htmlEncode($att->link);
         echo '</a>';
       echo '</td></tr>';
