@@ -1056,7 +1056,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       $limitToActive = true;
       if (isset($_REQUEST['showClosedSub']) and $_REQUEST['showClosedSub'] == true) $limitToActive = false;
       drawSubscriptionsList($obj, false, $limitToActive);
-    } else if ($col=='_spe_activity' and !$obj->isAttributeSetTofield($col, 'hidden')) {
+    } else if ($col=='_spe_activity' and !$obj->isAttributeSetTofield($col, 'hidden') and !in_array($col, $extraHiddenFields)) {
       drawActivityList($obj);
       // End mOlives - ticket 215 - 09/05/2018
     } else if (substr($col, 0, 5)=='_spe_') { // if field is _spe_xxxx, draw the specific item xxx
