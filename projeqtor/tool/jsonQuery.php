@@ -483,7 +483,7 @@
 	          $queryFrom .= ' left join ' . $externalTable . ' as ' . $externalTableAlias .
 	            ' on ' . $table . "." . $obj->getDatabaseColumnName('id' . $externalClass) . 
 	            ' = ' . $externalTableAlias . '.' . $externalObj->getDatabaseColumnName('id');
-	        } else if (strlen($fld)>4 and substr($fld,0,4)=="name" and !$from) {
+	        } else if (strlen($fld)>4 and (substr($fld,0,4)=="name" or strpos($fld,'__id')>0) and !$from) {
 	          $idTab+=1;
 	          // requested field is nameXXX => must fetch it from external table, using idXXX
 	          $posExt=strpos($fld, "__id");
@@ -510,7 +510,7 @@
 	          }
 	          //if (! stripos($queryFrom,$externalTable)) {
 	            $queryFrom .= ' left join ' . $externalTable . ' as ' . $externalTableAlias .
-	              ' on ' . $table . "." . $obj->getDatabaseColumnName('id' . substr($fld,4)) . 
+	              ' on ' . $table . "." . $obj->getDatabaseColumnName((substr($fld,0,4)=="name")?'id'.substr($fld,4):$fld) . 
 	              ' = ' . $externalTableAlias . '.' . $externalObj->getDatabaseColumnName('id');
 	          //}   
 	        } else if (strlen($fld)>5 and substr($fld,0,5)=="color") {
