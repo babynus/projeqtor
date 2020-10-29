@@ -303,6 +303,8 @@ class Consistency {
     $workTable=$work->getDatabaseTableName();
     $we=new workElement();
     $weTable=$we->getDatabaseTableName();
+    $tk=new Ticket();
+    $tkTable=$tk->getDatabaseTableName();
     $query="SELECT we.refType as reftype, we.refId as refid, we.realWork as realwork, (select sum(work) from $workTable w where w.idWorkElement=we.id) as sumwork from $weTable we where realwork!=(select sum(work) from $workTable w where w.idWorkElement=we.id) ";
     $result=Sql::query($query);
     while ($line = Sql::fetchLine($result)) {
@@ -331,9 +333,38 @@ class Consistency {
             $idRes=$lineRes['idres'];
             $sumWork=$lineRes['sumwork'];
             displayMsg('&nbsp;-&nbsp;'.SqlList::getNameFromId('Affectable', $idRes).' : '.Work::displayWorkWithUnit($sumWork),true);
+          } 
+        }
+      }
+    }
+    $query="SELECT w.id as idwork, w.refType as reftype, w.refId as refid, w.workDate as date, w.idResource as res, (select idActivity from $tkTable t where t.id=w.refId) as idact from $workTable w where w.idAssignment is null and (select idActivity from $tkTable t where t.id=w.refId) is not null";
+    $result=Sql::query($query);
+    while ($line = Sql::fetchLine($result)) {
+      $refType=$line['reftype'];
+      $refId=$line['refid'];
+      $idActivity=$line['idact'];
+      $date=$line['date'];
+      $workId=$line['idwork'];
+      $idRes=$line['res'];
+      displayError(i18n("checkIncorrectAssignmentOnTicket",array(i18n($refType),$refId,$idActivity,htmlFormatDate($date,false,false),SqlList::getNameFromId('Resource', $idRes))));
+      $errors++;
+      if ($correct) {
+        $obj=new $refType($refId);
+        $work=new Work($workId);
+        $work->refType='Activity';
+        $work->refId=$idActivity;
+        if (!$work->idWorkElement) {
+          $work->idWorkElement=$obj->WorkElement->id;
+        }
+        $ass=new Assignment();
+        $assList=$ass->getSqlElementsFromCriteria(array('idResource'=>$idRes,'refType'=>'Activity','refId'=>$idActivity));
+        if (count($assList)>0) {
+          $ass=$assList[0];
+          $work->idAssignment=$ass->id;
+          $res=$work->save();
+          if (getLastOperationStatus($res)=='OK') {
+            displayOK(i18n("checkFixed"),true);
           }
-        
-          
         }
         
       }
