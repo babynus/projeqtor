@@ -112,7 +112,7 @@
         var submenu = linkEl.getAttribute('data-submenu');
         var idName = linkEl.getAttribute('id');
         if (submenu) {
-          var pushMe = {"menu":submenu, "name": linkEl.innerHTML, "id": idName};
+          var pushMe = {"menu":submenu, "name": linkEl.textContent, "id": idName};
           if (submenus[pos]) {
             submenus[pos].push(pushMe);
           } else {
@@ -128,6 +128,7 @@
       var menu_x = menuEl.getAttribute('data-menu');
       submenus.forEach(function(subMenuEl, menu_root) {
         subMenuEl.forEach(function(subMenuItem, subPos) {
+          
           if (subMenuItem.menu == menu_x) {
             self.menusArr[pos].backIdx = menu_root;
             self.menusArr[pos].name = subMenuItem.name;
@@ -178,10 +179,11 @@
     for(var i = 0, len = this.menusArr.length; i < len; ++i) {
       this.menusArr[i].menuItems.forEach(function(item, pos) {
         item.querySelector('a').addEventListener('click', function(ev) { 
-          var submenu = ev.target.getAttribute('data-submenu'),
-            itemName = ev.target.innerHTML,
+          var element=ev.target;
+          if(ev.target.className=="divPosName" || ev.target.className.substr(-10)=="iconSize16")element=ev.target.parentNode;
+          var submenu = element.getAttribute('data-submenu'),
+            itemName = element.textContent,
             subMenuEl = self.el.querySelector('ul[data-menu="' + submenu + '"]');
-
           // check if there's a sub menu for this item
           if( submenu && subMenuEl ) {
             ev.preventDefault();
@@ -193,7 +195,6 @@
             if( currentlink ) {
               classie.remove(currentlink , 'menu__link--current');
             }
-            console.log( );
               classie.add(item.firstChild, 'menu__link--current');
             // callback
             self.options.onItemClick(ev, itemName);
@@ -340,19 +341,15 @@
       return false;
     }
     //florent
-    console.log((idx)?this.menusArr[idx].id :'ici');
     var iconClass=  (idx )? ''+this.menusArr[idx].id : 'Home';
     iconClass= (idx)? iconClass.substr(3) : iconClass;
     
     var breadScrumLeft=dojo.byId('breadScrumb');
     var divBcl = document.createElement('div');
     divBcl.className='icon'+iconClass+' iconSize22 iconBreadSrumb';
+    
     var name= idx ? this.menusArr[idx].name : this.options.initialBreadcrumb;
     divBcl.setAttribute('id', 'button'+name);
-    if(idx && name.indexOf('</div>')){
-      var endDiv=name.indexOf('</div>');
-      name=name.substr(endDiv+6);
-    }
     divBcl.setAttribute('title', name);
     breadScrumLeft.appendChild(divBcl);
     
