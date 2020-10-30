@@ -325,7 +325,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       <?php  if (! $comboDetail) {?>
        <tr>
          <td  style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("quickSearch");?>&nbsp;:&nbsp;</span></td>
-         <td  colspan=2 style="width:65%;">
+         <td  style="width:65%;">
             <div title="<?php echo i18n('quickSearch')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
                id="quickSearchValueQuick" name="quickSearchValueQuick" style="width:200px;">
                 <script type="dojo/method" event="onKeyUp" >
@@ -334,21 +334,23 @@ if (RequestHandler::isCodeSet('comboDetail')) {
                 }
               </script>
             </div>
-             <button title="<?php echo i18n('quickSearch')?>"  
-  	          dojoType="dijit.form.Button" 
-  	          id="listQuickSearchExecuteQuick" name="listQuickSearchExecuteQuick"
-  	          iconClass="dijitButtonIcon dijitButtonIconSearch" class="imageColorNewGui" showLabel="false">
-  	          <script type="dojo/connect" event="onClick" args="evt">
-                quickSearchExecuteQuick();
-              </script>
-  	        </button>
-  	        <button title="<?php echo i18n('comboCloseButton')?>"  
-            dojoType="dijit.form.Button" id="listQuickSearchCloseQuick" name="listQuickSearchCloseQuick"
-            iconClass="dijitButtonIcon dijitButtonIconUndo" class="imageColorNewGui iconSize16" showLabel="false">
-            <script type="dojo/connect" event="onClick" args="evt">
-              quickSearchCloseQuick();
-            </script>
-          </button></td>  
+         </td>
+         <td>
+         <table>
+          <tr><td>
+             <div class="roundedButton iconSize16 iconView generalColClass imageColorNewGui"
+  	              title="<?php echo i18n('quickSearch')?>" style="width:16px;height:16px;cursor:pointer;vertical-align:text-bottom;margin-right:5px;"
+                  onclick="quickSearchExecuteQuick();"
+              </div>
+              </td><td>
+  	          <div class="roundedButton iconSize16 iconCancel generalColClass imageColorNewGui"
+  	           title="<?php echo i18n('comboCloseButton')?>"style="width:16px;height:16px;cursor:pointer;vertical-align:text-bottom;margin-right:5px;"
+                onclick="quickSearchCloseQuick();"
+              </div>
+              </td>
+              </tr>
+            </table>
+  	      </td>  
 		    </tr>
 			  <?php } ?>
       <?php if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?> 
@@ -382,7 +384,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
           echo ' onClick="showFilterDialog();">';
           echo '<img src="css/customIcons/new/iconFilter.svg" style="-webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
                 filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));position:relative;left:5px;top:2px;background-repeat:no-repeat;width:24px;background-size:24px;"/>';
-          echo '<div style="color:black;position:relative;top:-21px;left:38px;">'.i18n('advancedFilters').'</div>';
+          echo '<div style="color:grey;position:relative;top:-21px;left:38px;">'.i18n('advancedFilters').'</div>';
           echo '</div>'; ?>
         </td>
       </tr>  
