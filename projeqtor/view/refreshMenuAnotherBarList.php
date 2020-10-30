@@ -34,7 +34,7 @@ scriptLog('   ->/view/refreshMenuBarList.php');
 
 $defaultMenu = RequestHandler::getValue('menuFilter');
 if($defaultMenu == 'menuBarCustom'){
-  $idRow = Parameter::getUserParameter('idFavoriteRow');
+  $idRow = intval(Parameter::getUserParameter('idFavoriteRow'));
   $startRow = $idRow+1;
 }else{
   $idRow = 1;
