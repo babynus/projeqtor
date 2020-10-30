@@ -460,12 +460,16 @@ function showIconLeftMenu(){
   var leftMenu=dojo.byId('ml-menu');
   var mode=dojo.byId('displayModeLeftMenu').value;
   display=(mode=='ICONTXT')?'none':'block';
+  style=(mode=='ICONTXT')?"":"float:left;max-width:155px;";
   leftMenu.menus = [].slice.call(leftMenu.querySelectorAll('.menu__level'));
   leftMenu.menus.forEach(function(menuEl, pos) {
     var items = menuEl.querySelectorAll('.menu__item');
     items.forEach(function(itemEl, iPos) {
       var iconDiv = itemEl.querySelector('.iconSize16');
       iconDiv.style.display=display;
+      
+      var iconDiv = itemEl.querySelector('.divPosName');
+      iconDiv.style=style;
     });
   });
   dojo.setAttr('displayModeLeftMenu','value',(display=='block')?'ICONTXT':'TXT');

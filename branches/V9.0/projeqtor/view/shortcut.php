@@ -49,20 +49,26 @@ if($arrayProj){
 $lstProjVisible=getSessionUser()->getVisibleProjects(); 
 $lstProj=array_intersect_assoc($lstProjSelect,$lstProjVisible);
 echo '<table style="width: 100%;margin-top:'.((isNewGui())?"10px":"0px").';">';
-foreach ($lstProj as $prjId=>$prjName) {
-  $att=new Attachment();
-  $lstAtt=$att->getSqlElementsFromCriteria(array('refType'=>'Project','refId'=>$prjId, 'type'=>'link'));
-  //* $lstAtt Attachment[]
-  if (count($lstAtt)>0) {
-    echo '<tr><th class="'.((isNewGui())?"newHeaderLink":"linkHeader").'">';
-    echo htmlEncode($prjName);
-    echo '</th></tr>';
-    foreach ($lstAtt as $att) {
-      echo '<tr><td class="'.((isNewGui())?"newDataLink":"linkData").'">';
-        echo '<a href="' . htmlEncode($att->link) . '" target="#" class="hyperlink" title="' . htmlEncode($att->link) . '" style="'.((isNewGui())?"color:white":"").';">';
-        echo ($att->description)?htmlEncode($att->description):htmlEncode($att->link);
-        echo '</a>';
-      echo '</td></tr>';
+$att=new Attachment();
+$countAllAttachement=$att->countSqlElementsFromCriteria(array('refType'=>'Project','type'=>'link'));
+if($countAllAttachement==0 and isNewGui()){
+  echo '<tr>td><div>'.i18n('leftMenuLinkNoData').'</div></tr></td>';
+}else {
+  foreach ($lstProj as $prjId=>$prjName) {
+    $lstAtt=$att->getSqlElementsFromCriteria(array('refType'=>'Project','refId'=>$prjId, 'type'=>'link'));
+    //* $lstAtt Attachment[]
+    if (count($lstAtt)>0) {
+      echo '<tr><th class="'.((isNewGui())?"newHeaderLink":"linkHeader").'" '.((isNewGui())?'colspan="2"':'').'>';
+      echo htmlEncode($prjName);
+      echo '</th></tr>';
+      foreach ($lstAtt as $att) {
+        echo '<tr>'.((isNewGui())? '<td><div class="iconButtonLink16 iconSize16 " style="width:16px;margin-left:10px"></div></td>':''); 
+          echo  '<td class="'.((isNewGui())?"newDataLink":"linkData").'" >';
+          echo '<a href="' . htmlEncode($att->link) . '" target="#" class="hyperlink" title="' . htmlEncode($att->link) . '" style="'.((isNewGui())?"color:white":"").';">';
+          echo ($att->description)?htmlEncode($att->description):htmlEncode($att->link);
+          echo '</a>';
+        echo '</td></tr>';
+      }
     }
   }
 }
