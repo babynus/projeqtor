@@ -486,7 +486,6 @@
 	          $posExt=strpos($fld, "__id");
 	          if ($posExt>0) $externalClass=substr(foreignKeyWithoutAlias($fld), 2);
 	          else $externalClass = substr($fld,4);
-	          debugLog("externalClass=$externalClass");
 	          $externalObj=new $externalClass();
 	          $externalTable = $externalObj->getDatabaseTableName();
 	          $externalTableAlias = 'T' . $idTab;
