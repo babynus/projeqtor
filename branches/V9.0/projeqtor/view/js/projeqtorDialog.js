@@ -4727,6 +4727,9 @@ function selectStoredFilter(idFilter, context, contentLoad, container) {
         runReport();
       }
     }
+    if(isNewGui){
+      dijit.byId('listFilterFilter').closeDropDown();
+    }
   } else {
 	  if (dojo.byId('filterLogicalOperator') && dojo.byId('filterLogicalOperator').style.display=='none') {
 		  	dojo.byId('filterLogicalOperator').style.display='block';
