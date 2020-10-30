@@ -1789,6 +1789,13 @@
 .ProjeQtOrFlatRed .iconPluginManagement { background-image: url(customIcons/red/iconPlugin.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconPluginManagement { background-image: url(customIcons/new/iconPluginManagement.svg);  background-repeat: no-repeat;}
 
+.iconPlgInstallAuto32 { background-image: url(iconPlgInstallAuto32.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconPluginManagement { background-image: url(customIcons/blue/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGreen .iconPluginManagement { background-image: url(customIcons/green/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGrey .iconPluginManagement { background-image: url(customIcons/grey/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatRed .iconPluginManagement { background-image: url(customIcons/red/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
+.ProjeQtOrNewGui .iconPluginManagement { background-image: url(customIcons/new/iconPluginInstallAuto.svg);  background-repeat: no-repeat;}
+
 .iconPortfolioPlanning { background-image: url(images/iconPortfolioPlanning32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconPortfolioPlanning { background-image: url(customIcons/blue/iconPortfolioPlanning.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconPortfolioPlanning { background-image: url(customIcons/green/iconPortfolioPlanning.png);  background-repeat: no-repeat; }
