@@ -1676,10 +1676,10 @@ abstract class SqlElement {
     }
     
     // if object is Asignable, update assignments on idle change
+    $archiv=new HistoryArchive();
+    $hist=new History();
     if (property_exists($this, 'idle')) {
       $ass = new Assignment ();
-      $archiv=new HistoryArchive();
-      $hist=new History();
       $query = "update " . $ass->getDatabaseTableName ();
       $query .= " set idle='" . $this->idle . "'";
       $query .= " where refType='" . get_class ( $this ) . "' ";
