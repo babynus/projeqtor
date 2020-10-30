@@ -382,7 +382,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui #toolBarDiv .dijitIcon, .ProjeQtOrNewGui #toolBarDiv .iconSize22, 
 .ProjeQtOrNewGui .hideStreamNewGui, 
 .ProjeQtOrNewGui .menu__link .iconSize22, .ProjeQtOrNewGui .menu__link .iconSize16,
-.ProjeQtOrNewGui .menu__linkDirect .iconSize22, .ProjeQtOrNewGui .menu__linkDirect .iconSize16,.ProjeQtOrNewGui #menuBarAccesLeft .iconSize22, .ProjeQtOrNewGui .dijitTreeIcon, .ProjeQtOrNewGui .dijitTreeLabel {
+.ProjeQtOrNewGui .menu__linkDirect .iconSize22, .ProjeQtOrNewGui .menu__linkDirect .iconSize16,.ProjeQtOrNewGui #menuBarAccesLeft .iconSize22,.ProjeQtOrNewGui #menuBarAccesLeft .iconSize16, .ProjeQtOrNewGui .dijitTreeIcon, .ProjeQtOrNewGui .dijitTreeLabel {
 	-webkit-filter : brightness(0) invert(1);
   filter : brightness(0) invert(1);
   background-color: transparent;
@@ -491,17 +491,14 @@ animation: fadeIn ease 0.5s;
 
 .newHeaderLink{
     color: white;
-    padding-left: 10px;
     font-weight: 600;
-    padding: 5px 10px 5px 6px;
+    padding:10px 10px 9px 6px
 }
 
-.newDataLink {
-	padding: 5px 0px 5px 15px;
-}
 
 .newDataLink  .hyperlink:hover{
 	color: var(--color-secondary)!important;
+	font-weight:initial !important;
 }
 
 .menuBar_add_Fav::before{

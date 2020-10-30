@@ -40,7 +40,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
     <div id="menuPersonalAcces"  onresize="showBottomLeftMenu();"  dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;overflow: hidden;" >
       <div id="iconsBottomSize" onresize="">
         <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb" onclick="showBottomContent('Parameter')"  title="<?php echo i18n('menuParameter');?>"></div>
-        <div id="buttonLink" class="iconLink iconSize22 iconBreadSrumb" onclick="showBottomContent('Link')" title="<?php echo i18n('ExternalShortcuts');?>"></div>
+        <div id="buttonLink" class="iconButtonLink16 iconSize22 iconBreadSrumb" onclick="showBottomContent('Link')" title="<?php echo i18n('ExternalShortcuts');?>"></div>
         <?php if (securityCheckDisplayMenu(null,'Document')) {?>
         <div title="<?php echo i18n('document');?>" id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb" onclick="showBottomContent('Document')"></div>
         <?php }?>
@@ -366,7 +366,8 @@ function drawLeftMenuListNewGui($displayMode){
         $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
         
         $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
-        $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.ucfirst(i18n($obj->name)).'</a>';
+        $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
+        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
         $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }else{
       $classEl="Reports";
@@ -385,14 +386,17 @@ function drawLeftMenuListNewGui($displayMode){
       $class="menu__add__Fav";
       $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'report\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'report\',\'leave\');">';
       $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'"/>';
-      $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.ucfirst(i18n($obj->name)).'</a>';
+      $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
+      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
       $result.='<div id="div'.$obj->id.'report" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }
   }else{
       $sub='submenu-'.$obj->id;
-      $result.='<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'">
-                                <div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$obj->name).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>'.ucfirst((($menu['objectType']=='menu')?i18n(substr($obj->name,3)):$obj->name)).'</a>
-                            <div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
+      $result.='<li class="menu__item" role="menuitem">';
+      $result.='<a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'">';
+      $result.='<div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$obj->name).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
+      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"").'float: left;">'.ucfirst((($menu['objectType']=='menu')?i18n(substr($obj->name,3)):$obj->name)).'</div></a>';
+      $result.='<div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
     }
     $old=$menu['level'];
     $idP=$obj->idParent;
