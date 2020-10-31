@@ -49,7 +49,7 @@ if (array_key_exists('format', $_REQUEST)) {
 }
 $item = new $objectClass($objectId);
 $canRead = securityGetAccessRightYesNo('menu' . $objectClass, 'read', $item) == "YES";
-if (!$canRead) exit;
+if (!$canRead) if (!empty($cronnedScript)) goto end; else exit;
 
 $comVers = new ComponentVersionMain($objectId);
 $result = array();
@@ -85,7 +85,7 @@ if ($format == 'print') {
     //END CHANGE qCazelles - DeliveryDateXLS - Ticket #126
 } else {
     errorLog("productStructure : incorrect format '$format'");
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
 }
 
 //CHANGE by aDaspe - dateComposition
@@ -108,3 +108,5 @@ function showProduct($item)
     echo '<td class="linkData">' . $deliveryDate . '</td>';
     echo '<td class="linkData">' . $endDate . '</td>';
 }
+
+end:

@@ -57,7 +57,7 @@ if (array_key_exists('showClosedItems', $_REQUEST)){
 //end
 $item=new $objectClass($objectId);
 $canRead=securityGetAccessRightYesNo('menu' . $objectClass, 'read', $item)=="YES";
-if (!$canRead) exit;
+if (!$canRead) if (!empty($cronnedScript)) goto end; else exit;
 
 $subProducts=array();
 if ($objectClass=='Product') {
@@ -97,7 +97,7 @@ if ($format=='print') {
   }
 } else {
   errorLog("productFlatStructure : incorrect format '$format'");
-  exit;
+  if (!empty($cronnedScript)) goto end; else exit;
 }
 
 function getSubItems($item,$result){
@@ -135,3 +135,5 @@ function showProduct($class,$id,$name) {
   echo '<table style="'.$style.'"><tr><td style="padding-left:5px;padding-top:2px;width:20px;" class="icon'.$class.'16" />&nbsp;</td>'
       .'<td style="padding:0px 5px;vertical-align:middle;">'.$name.'</td></tr></table>';
 }
+
+end:

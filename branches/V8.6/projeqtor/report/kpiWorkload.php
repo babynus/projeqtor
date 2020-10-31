@@ -186,7 +186,7 @@ if ($idProject) {
   $listProjects=$prj->getSqlElementsFromCriteria(null,false,$where);
 }
 
-//if (checkNoData($listProjects)) exit;
+//if (checkNoData($listProjects)) if (!empty($cronnedScript)) goto end; else exit;
 
 $period=null;
 $periodValue='';
@@ -505,5 +505,7 @@ echo '<table width="95%" align="center"><tr><td align="center">';
 echo '<img style="width:700px;height:400px" src="' . $imgName . '" />'; 
 echo '</td></tr></table>';
 echo '<br/>';
+
+end:
 
 ?>

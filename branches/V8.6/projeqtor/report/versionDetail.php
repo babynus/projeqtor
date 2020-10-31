@@ -109,7 +109,7 @@ if ($paramVersion) {
   $lstVersion[0]='<i>'.i18n('undefinedValue').'</i>';
 }
 asort($lstVersion);
-if (checkNoData($lstVersion)) exit;
+if (checkNoData($lstVersion)) if (!empty($cronnedScript)) goto end; else exit;
 
 $lstObj=array(new Ticket(), new Activity(), new Milestone(), new Requirement(), new TestSession());
 
@@ -235,3 +235,5 @@ foreach ($lstVersion as $versId=>$versName) {
   echo '</table>';
   echo '<br/>';
 }
+
+end:

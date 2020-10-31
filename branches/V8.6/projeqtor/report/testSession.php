@@ -113,7 +113,7 @@ $lstType=SqlList::getList('TestSessionType','name',null,true);
 $ts=new TestSession();
 $lst=$ts->getSqlElementsFromCriteria(null, false, $where,'idProject, idProduct, idVersion, id');
 
-if (checkNoData($lst)) exit;
+if (checkNoData($lst)) if (!empty($cronnedScript)) goto end; else exit;
 
 foreach ($lst as $ts) {
 	$tcr=new TestCaseRun();
@@ -195,3 +195,4 @@ foreach ($lst as $ts) {
   
 }
 
+end:

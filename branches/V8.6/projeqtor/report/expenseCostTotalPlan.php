@@ -194,7 +194,7 @@ if (!$start) {
 	  $end=$start;
 	}
 }
-if (checkNoData($tab)) exit;
+if (checkNoData($tab)) if (!empty($cronnedScript)) goto end; else exit;
 
 $arrDates=array();
 $arrYear=array();
@@ -398,4 +398,7 @@ echo '<table width="95%" style="margin-top:20px;" align="center"><tr><td align="
 echo '<img src="' . $imgName . '" />'; 
 echo '</td></tr></table>';
 echo '<br/>';
+
+end:
+
 ?>

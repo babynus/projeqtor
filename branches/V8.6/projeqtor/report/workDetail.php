@@ -100,7 +100,7 @@ if ($periodType=='year' and $paramMonth!="01") {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('month'))); // TODO i18n message
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   } else {
     $headerParameters.= i18n("startMonth") . ' : ' . i18n(date('F', mktime(0,0,0,$paramMonth,10))) . '<br/>';
     $headerParameters.= "to" . ' : ' . i18n(date('F', mktime(0,0,0,$paramNbMonth,10))) . '<br/>';
@@ -182,7 +182,7 @@ foreach ($lstWork as $work) {
   $result[$work->idResource][$key]+=$work->work;
 }
 ksort($activities);
-if (checkNoData($result)) exit;
+if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
 
 // title
 echo '<table style="width:95%" align="center">';
@@ -241,3 +241,5 @@ echo '<td class="reportTableHeader">' . Work::displayWorkWithUnit($sum) . '</td>
 echo '<td colspan="3"></td>';
 echo '</tr>';
 echo '</table>';
+
+end:
