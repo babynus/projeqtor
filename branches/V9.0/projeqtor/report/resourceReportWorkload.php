@@ -119,19 +119,19 @@ if ($profile) {
 //     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
 //     echo i18n('messageNoData',array(i18n('colIdOrganization')));
 //     echo '</div>';
-//     exit;
+//     if (!empty($cronnedScript)) goto end; else exit;
 // }
 if (!$year) {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('year')));
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
 }
 if (!$month) {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('month')));
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
 }
 include "header.php";
 
@@ -257,3 +257,5 @@ $graph->render($imgName);
 echo '<table width="95%" style="margin-top:20px;" align="center"><tr><td align="center">';
 echo '<img src="' . $imgName . '" />';
 echo '</td></tr></table>';
+
+end:

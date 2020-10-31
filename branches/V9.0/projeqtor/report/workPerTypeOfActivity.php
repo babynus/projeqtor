@@ -82,7 +82,7 @@ if (array_key_exists('idResource',$_REQUEST)) {
   }
   if (!$canChangeResource and $paramResource!=$user->id) {
     echo i18n('messageNoAccess',array(i18n('colReport')));
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   } 
 }
 
@@ -116,7 +116,7 @@ if ($periodType=='year' and $paramMonth!="01") {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('month'))); // TODO i18n message
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   } else {
     $headerParameters.= i18n("startMonth") . ' : ' . i18n(date('F', mktime(0,0,0,$paramMonth,10))) . '<br/>';
   }
@@ -150,7 +150,7 @@ if ($periodType=='year') {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('year'))); // TODO i18n message
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   }
   if ($paramMonth<10) $paramMonth='0'.intval($paramMonth);
   $where.=" and ((year='" . $periodValue . "' and month>='" . $periodValue.$paramMonth . "')".
@@ -251,7 +251,7 @@ foreach ($lstWork as $work) {
   }
 }
 
-if (checkNoData($result)) exit;
+if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
 // title
 $newProject=array();
 foreach ($projects as $id=>$name) {
@@ -429,3 +429,5 @@ if ($showDetail)
 echo '<td class="reportTableHeader">' . Work::displayWorkWithUnit($sum);
 echo'</td></tr>';
 echo '</table>';
+
+end:

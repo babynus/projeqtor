@@ -89,7 +89,7 @@ if ($idProject) {
   $listProjects[$idProject]=new Project($idProject);
 }
 
-//if (checkNoData($listProjects)) exit;
+//if (checkNoData($listProjects)) if (!empty($cronnedScript)) goto end; else exit;
 $period=null;
 $periodValue='';
 if ($month) {
@@ -307,7 +307,7 @@ if ($cptProjectsDisplayed==0 and (!$start or !$end)) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n('reportNoData'); 
   echo '</div>';
-  exit;
+  if (!empty($cronnedScript)) goto end; else exit;
 }
 $lastValue=VOID;
 $arrDates=array();
@@ -458,5 +458,7 @@ echo '<table width="95%" align="center"><tr><td align="center">';
 echo '<img style="width:700px;height:400px" src="' . $imgName . '" />'; 
 echo '</td></tr></table>';
 echo '<br/>';
+
+end:
 
 ?>

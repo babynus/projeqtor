@@ -203,7 +203,7 @@ if ($periodType) {
           echo i18n('messageNoData',array(i18n('month'))); // TODO i18n message
         }
         echo '</div>';
-        exit;
+        if (!empty($cronnedScript)) goto end; else exit;
       }
     $start=$paramYear . '-' . (($paramMonth<10)?'0':'') . $paramMonth . '-01';
     $end=$paramYear . '-' . (($paramMonth<10)?'0':'') . $paramMonth . '-' . date('t',mktime(0,0,0,$paramMonth,1,$paramYear));  
@@ -218,7 +218,7 @@ if ($periodType) {
         echo i18n('messageNoData',array(i18n('week'))); // TODO i18n message
       }
       echo '</div>';
-      exit;
+      if (!empty($cronnedScript)) goto end; else exit;
     }
     $start=date('Y-m-d', firstDayofWeek($paramWeek, $paramYear));
     $end=addDaysToDate($start,6);
@@ -336,7 +336,7 @@ foreach ($lstTicket as $t) {
   }
 }
 
-if (checkNoData($lstTicket)) exit;
+if (checkNoData($lstTicket)) if (!empty($cronnedScript)) goto end; else exit;
 
 for ($i=1; $i<=3; $i++) {
   if ($i==1) {
@@ -403,56 +403,8 @@ for ($i=1; $i<=3; $i++) {
   echo '</tr>';
   echo '</table>';
   echo '<br/>';
-}  
-// Render graph
-// pGrapg standard inclusions     
+}    
+
+end:
+
 return;
-/*$dataSet=new pData;
-unset($created[13]);
-unset($done[13]);
-unset($closed[13]);
-$dataSet->AddPoint($created,"created");
-$dataSet->SetSerieName(i18n("created"),"created");  
-$dataSet->AddSerie("created");
-$dataSet->AddPoint($done,"done");
-$dataSet->SetSerieName(i18n("done"),"done");  
-$dataSet->AddSerie("done");
-$dataSet->AddPoint($closed,"closed");
-$dataSet->SetSerieName(i18n("closed"),"closed");  
-$dataSet->AddSerie("closed");
-$dataSet->AddPoint($arrMonth,"months");  
-$dataSet->SetAbsciseLabelSerie("months"); 
-
-// Initialise the graph  
-$width=700;
-
-$graph = new pChart($width,230);  
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",10);
-
-$graph->setColorPalette(0,200,100,100);
-$graph->setColorPalette(1,100,200,100);
-$graph->setColorPalette(2,100,100,200);
-
-$graph->setGraphArea(40,30,$width-120,200);  
-$graph->drawGraphArea(252,252,252);  
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",10);  
-$graph->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_START0,0,0,0,TRUE,0,1);  
-$graph->drawGrid(4,TRUE,230,230,230,255);  
-  
-// Draw the line graph  
-$graph->drawFilledLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),30,true);
-$graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription());  
-$graph->drawPlotGraph($dataSet->GetData(),$dataSet->GetDataDescription(),3,2,255,255,255);  
-  
-// Finish the graph  
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);  
-$graph->drawLegend($width-110,35,$dataSet->GetDataDescription(),240,240,240);  
-//$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",10);  
-//$graph->drawTitle(60,22,"graph",50,50,50,585);
-$imgName=getGraphImgName("ticketReport");
-
-$graph->Render($imgName);
-echo '<table width="95%" align="center"><tr><td align="center">';
-echo '<img src="' . $imgName . '" />'; 
-echo '</td></tr></table>';
-*/

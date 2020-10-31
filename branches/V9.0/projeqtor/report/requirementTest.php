@@ -97,7 +97,7 @@ $lstType=SqlList::getList('RequirementType','name',null,true);
 $req=new Requirement();
 $lst=$req->getSqlElementsFromCriteria(null, false, $where,'idProject, idProduct, idVersion, id');
 
-if (checkNoData($lst)) exit;
+if (checkNoData($lst)) if (!empty($cronnedScript)) goto end; else exit;
 
 echo '<table style="width:' . ((isset($outMode) and $outMode=='pdf')?'90':'95') . '%" align="center">';
 echo '<tr>';
@@ -197,3 +197,5 @@ echo '<td class="largeReportHeader" >' . $sumFailed . '</td>';
 echo '</tr>';
 echo '</table>';
 echo '<br/>';
+
+end:

@@ -40,7 +40,7 @@ if (! isset($outMode)) {
 
 if (array_key_exists('version',$_REQUEST)) {
 	echo "Rapport Flash version 3.0 [2015-02-26]";
-	exit;
+	if (!empty($cronnedScript)) goto end; else exit;
 }
 
 $idProject="";
@@ -50,7 +50,7 @@ if (array_key_exists('idProject',$_REQUEST) and trim($_REQUEST['idProject'])!=""
 
 $result=array();
 if ($idProject) { $result[]=$idProject;}
-if (checkNoData($result)) exit;
+if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
 
 $headerParameters="";
 if ($idProject) {
@@ -817,4 +817,7 @@ function displayIndicator($indObj) {
 	}
   echo $result;
 }  
+
+end:
+
 ?>

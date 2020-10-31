@@ -34,7 +34,6 @@ $idOrganization = trim(RequestHandler::getId('idOrganization'));
 //$paramYear = RequestHandler::getYear('yearSpinner');
 //$paramMonth = RequestHandler::getMonth('monthSpinner');
 //$paramWeek = RequestHandler::getValue('weekSpinner');
-
 $paramYear='';
 if (array_key_exists('yearSpinner',$_REQUEST)) {
 	$paramYear=$_REQUEST['yearSpinner'];
@@ -67,7 +66,7 @@ if (array_key_exists('idResource',$_REQUEST)) {
   }
   if (!$canChangeResource and $paramResource!=$user->id) {
     echo i18n('messageNoAccess',array(i18n('colReport')));
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   } 
 }
 
@@ -99,7 +98,7 @@ if ($periodType=='year' and $paramMonth!="01") {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('month'))); // TODO i18n message
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   } else {
     $headerParameters.= i18n("startMonth") . ' : ' . i18n(date('F', mktime(0,0,0,$paramMonth,10))) . '<br/>';
   }
@@ -119,7 +118,6 @@ if (isset($outMode) and $outMode=='excel') {
 }
 
 include "header.php";
-
 #florent ticket #4049
 #$where="(".getAccesRestrictionClause('Activity',false,false,true,true) ." or idResource=". getSessionUser()->id . " or idProject in ".Project::getAdminitrativeProjectList().")";
 $where="(".getAccesRestrictionClause('Activity',false,true,true,true) ." or idResource=". getSessionUser()->id . " or idProject in ".Project::getAdminitrativeProjectList().")"; 
@@ -135,14 +133,13 @@ if ($periodType=='year') {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('year'))); // TODO i18n message
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   }
   if ($paramMonth<10) $paramMonth='0'.intval($paramMonth);
   $where.=" and ((year='" . $periodValue . "' and month>='" . $periodValue.$paramMonth . "')".
           " or (year='" . ($periodValue + 1) . "' and month<'" . ($periodValue + 1) . $paramMonth . "'))";
 }
 //END CHANGE qCazelles - Report start month - Ticket #128
-
 if ($paramProject!='') {
   #florent ticket #4049
   #$where.=  " and idProject in " . getVisibleProjectsList(true, $paramProject); 
@@ -174,7 +171,7 @@ foreach ($lstWork as $work) {
 
 }
 
-if (checkNoData($result)) exit;
+if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
 // title
 $newProject=array();
 foreach ($projects as $id=>$name) {
@@ -188,7 +185,6 @@ foreach ($projects as $id=>$name) {
   $id=$idExplo[1];
   $sumProj[$id]=0;  
 }
-
 asort($resources);
 //gautier #4342
 if($idOrganization){
@@ -239,7 +235,6 @@ if($nbProj != 0)
 $colWidth=round(80/$nbProj);
 else
 $colWidth=round(80/1);
-
 $rowspan=($hasCode)?'3':'2';
 echo '<table style="width:95%;" align="center" '.excelName().'>';
 echo '<tr>';
@@ -306,3 +301,5 @@ foreach ($projects as $id=>$name) {
 }
 echo '<td class="reportTableHeader" '.excelFormatCell('header').'>' . Work::displayWorkWithUnit($sum) . '</td></tr>';
 echo '</table>';
+
+end:
