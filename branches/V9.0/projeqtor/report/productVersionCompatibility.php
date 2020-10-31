@@ -31,7 +31,7 @@ else {
 }
 
 $canRead=securityGetAccessRightYesNo('menu' . $objectClass, 'read', $item)=="YES";
-if (!$canRead) exit;
+if (!$canRead) if (!empty($cronnedScript)) goto end; else exit;
 
 $result=array();
 
@@ -73,12 +73,7 @@ if ($format=='csv') {
 }
 else {
 	errorLog("productCompatibility : incorrect format '$format'");
-	exit;
+	if (!empty($cronnedScript)) goto end; else exit;
 }
 
-
-
-
-
-
-
+end:

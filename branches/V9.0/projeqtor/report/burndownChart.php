@@ -86,7 +86,7 @@ if (!$idProject) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n('messageNoData',array(i18n('Project'))); // TODO i18n message
   echo '</div>';
-  exit; 
+  if (!empty($cronnedScript)) goto end; else exit; 
 }
 // Graph
 if (! testGraphEnabled()) { return;}
@@ -191,14 +191,14 @@ if ($showCompleted) {
   }
 }
 
-if (checkNoData(array_merge($tabLeft,$tabLeftPlanned))) exit;
+if (checkNoData(array_merge($tabLeft,$tabLeftPlanned))) if (!empty($cronnedScript)) goto end; else exit;
 //gautier #4369
 if(count($tabLeftPlanned)==1 and isset($tabLeftPlanned[$today])){
   if(trim($tabLeftPlanned[$today])==0){
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('reportNoData');
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   }
 }
 $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>'Project', 'refId'=>$idProject));
@@ -216,7 +216,7 @@ if (!$start or !$end) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n('reportNoData'); 
   echo '</div>';
-  exit;
+  if (!empty($cronnedScript)) goto end; else exit;
 }
 
 while ($date<=$end) {
@@ -533,4 +533,7 @@ echo '<table width="95%" align="center"><tr><td align="center">';
 echo '<img style="width:1000px;height:600px" src="' . $imgName . '" />'; 
 echo '</td></tr></table>';
 echo '<br/>';
+
+end:
+
 ?>

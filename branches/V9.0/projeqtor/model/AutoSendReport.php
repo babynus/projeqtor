@@ -109,7 +109,7 @@ class AutoSendReport extends SqlElement{
 	}
 	
 	public function sendReport($idReport, $reportParameter){
-	  global $displayResource, $outMode, $showMilestone, $portfolio, $columnsDescription, $graphEnabled, $showProject, $rgbPalette, $arrayColors;
+	  global $displayResource, $outMode, $showMilestone, $portfolio, $columnsDescription, $graphEnabled, $showProject, $rgbPalette, $arrayColors,$cronnedScript;
 	  ob_start();
 	  $report = new Report($idReport);
 	  $parameter = json_decode($reportParameter);
@@ -126,22 +126,34 @@ class AutoSendReport extends SqlElement{
   	  if($paramName == 'yearSpinner'){
   	    if($paramValue == 'current'){
   	      RequestHandler::setValue($paramName, date('Y'));
+  	      RequestHandler::setValue("periodType", "year");
+  	      RequestHandler::setValue("periodValue", date('Y'));
   	    }else if($paramValue == 'previous'){
   	      RequestHandler::setValue($paramName, date('Y')-1);
+  	      RequestHandler::setValue("periodType", "year");
+  	      RequestHandler::setValue("periodValue", date('Y')-1);
   	    }
   	  }
   	  if($paramName == 'monthSpinner'){
   	  if($paramValue == 'current'){
   	      RequestHandler::setValue($paramName, date('m'));
+  	      RequestHandler::setValue("periodType", "month");
+  	      RequestHandler::setValue("periodValue", date('m'));
   	    }else if($paramValue == 'previous'){
   	      RequestHandler::setValue($paramName, date('m')-1);
+  	      RequestHandler::setValue("periodType", "month");
+  	      RequestHandler::setValue("periodValue", date('m')-1);
   	    }
   	  }
   	  if($paramName == 'weekSpinner'){
   	  if($paramValue == 'current'){
   	      RequestHandler::setValue($paramName, date('W'));
+  	      RequestHandler::setValue("periodType", "week");
+  	      RequestHandler::setValue("periodValue", date('W'));
   	    }else if($paramValue == 'previous'){
   	      RequestHandler::setValue($paramName, date('W')-1);
+  	      RequestHandler::setValue("periodType", "week");
+  	      RequestHandler::setValue("periodValue", date('W')-1);
   	    }
   	  }
   	  if($paramName == 'startDate'){

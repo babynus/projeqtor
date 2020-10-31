@@ -92,7 +92,7 @@ if ($paramVersion) {
 $rq=new Requirement();
 $lst=$rq->getSqlElementsFromCriteria(null, false, $where,'idProject, idProduct, idVersion, id');
 
-if (checkNoData($lst)) exit;
+if (checkNoData($lst)) if (!empty($cronnedScript)) goto end; else exit;
 
 foreach ($lst as $rq) {
     $st=new Status($rq->idStatus);
@@ -163,3 +163,5 @@ foreach ($lst as $rq) {
         }
     }
 }
+
+end:

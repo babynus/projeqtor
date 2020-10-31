@@ -101,7 +101,7 @@
   // Test execution of query
   $test=array();
   if (Sql::$lastQueryNbRows > 0) $test[]="OK";
-  if (checkNoData($test))  exit;
+  if (checkNoData($test))  if (!empty($cronnedScript)) goto end; else exit;
 
   // Verify query result is not empty
   if (Sql::$lastQueryNbRows > 0) {
@@ -207,4 +207,7 @@
     }
   }
   echo "</table>";
+  
+end:
+  
 ?>
