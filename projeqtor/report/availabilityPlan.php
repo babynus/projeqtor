@@ -167,7 +167,7 @@ if ($periodType=='month') {
       echo i18n('messageNoData',array(i18n('month'))); // TODO i18n message
     }
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   }
   $time=mktime(0, 0, 0, $paramMonth, 1, $paramYear);
   $header=i18n(strftime("%B", $time)).strftime(" %Y", $time);
@@ -180,7 +180,7 @@ $plannedBGColor='#FFFFDD';
 $plannedFrontColor='#777777';
 $plannedStyle=' style="text-align:center;background-color:' . $plannedBGColor . '; color: ' . $plannedFrontColor . ';" ';
 
-//if (checkNoData($result)) exit;
+//if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
 
 
 echo '<table width="95%" align="center">';
@@ -309,3 +309,5 @@ foreach ($resources as $idR=>$nameR) {
 echo '</table>';
 
 echo '</td></tr></table>';
+
+end:

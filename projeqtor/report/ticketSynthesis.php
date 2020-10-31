@@ -208,7 +208,7 @@ if ($periodType) {
         echo i18n('messageNoData',array(i18n('month'))); // TODO i18n message
       }
       echo '</div>';
-      exit;
+      if (!empty($cronnedScript)) goto end; else exit;
     }
     $start=$paramYear . '-' . (($paramMonth<10)?'0':'') . $paramMonth . '-01';
     $end=$paramYear . '-' . (($paramMonth<10)?'0':'') . $paramMonth . '-' . date('t',mktime(0,0,0,$paramMonth,1,$paramYear));  
@@ -223,7 +223,7 @@ if ($periodType) {
           echo i18n('messageNoData',array(i18n('week'))); // TODO i18n message
         }
         echo '</div>';
-        exit;
+        if (!empty($cronnedScript)) goto end; else exit;
       }
     $start=date('Y-m-d', firstDayofWeek($paramWeek, $paramYear));
     $end=addDaysToDate($start,6);
@@ -329,7 +329,7 @@ foreach ($lstTicket as $t) {
   $lstResponsible[$responsible]+=1;
 }
 
-if (checkNoData($lstTicket)) exit;
+if (checkNoData($lstTicket)) if (!empty($cronnedScript)) goto end; else exit;
 
 echo '<table style="width:95%;" align="center">';
 echo '<tr>';
@@ -471,3 +471,5 @@ function drawsynthesisGraph($scope, $lst) {
   echo '<img src="' . $imgName . '" />'; 
   echo '</td></tr></table>';
 }
+
+end:

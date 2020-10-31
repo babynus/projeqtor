@@ -85,7 +85,7 @@ foreach ($lstWork as $work) {
   $result[$work->idResource][$work->idProject]=round($result[$work->idResource][$work->idProject]+$work->leftWork,2);
 }
 
-if (checkNoData($result)) exit;
+if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
 // title
 $newProject=array();
 foreach ($projects as $id=>$name) {
@@ -206,3 +206,5 @@ foreach ($projects as $id=>$name) {
 }
 echo '<td style="white-space:nowrap;" class="reportTableHeader" '.excelFormatCell('header').'>' . Work::displayWorkWithUnit($sum) . '</td></tr>';
 echo '</table>';
+
+end:

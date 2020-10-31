@@ -199,7 +199,7 @@ for ($i=1;$i<=2;$i++) {
     }
   }
 }
-if (checkNoData($tab)) exit;
+if (checkNoData($tab)) if (!empty($cronnedScript)) goto end; else exit;
 
 $arrDates=array();
 $arrYear=array();
@@ -317,5 +317,6 @@ echo '</table>';
 
 echo '</td></tr></table>';
 
+end:
 
 ?>

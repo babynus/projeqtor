@@ -80,7 +80,7 @@ $types = array();
 $typeobjs = array();
 $list = $sub->getSqlElementsFromCriteria(null, false, $where, $order);
 
-if (checkNoData($list)) exit;
+if (checkNoData($list)) if (!empty($cronnedScript)) goto end; else exit;
 foreach ($list as $key => $data) {
     $user = new Resource($data->idAffectable);
     $object = new $data->refType($data->refId);
@@ -127,4 +127,7 @@ foreach ($types as $type) {
     echo '</tr>';
 }
 echo '</table>';
+
+end:
+
 ?>

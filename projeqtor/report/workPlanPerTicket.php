@@ -60,7 +60,7 @@
   
  $test=array();
   if (Sql::$lastQueryNbRows > 0) $test[]="OK";
-  if (checkNoData($test))  exit;
+  if (checkNoData($test))  if (!empty($cronnedScript)) goto end; else exit;
 
   if (Sql::$lastQueryNbRows > 0) {
     // Header
@@ -169,4 +169,7 @@ function addTotal($idProject,$realWork,$leftWork,$plannedWork){
   if($realWork) $result["Project#$idProject"]['realWork'] += $realWork;
   if($result["Project#$idProject"]['parent']) addTotal($result["Project#$idProject"]['parent'],$realWork,$leftWork,$plannedWork);
 }
+
+end:
+
 ?>

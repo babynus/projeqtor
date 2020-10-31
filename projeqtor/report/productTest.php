@@ -97,7 +97,7 @@ $lstType=SqlList::getList('TestCaseType','name',null,true);
 $tc=new TestCase();
 $lst=$tc->getSqlElementsFromCriteria(null, false, $where,'idProject, idProduct, idVersion, id');
 
-if (checkNoData($lst)) exit;
+if (checkNoData($lst)) if (!empty($cronnedScript)) goto end; else exit;
 
 echo '<table style="width:' . ((isset($outMode) and $outMode=='pdf')?'90':'95') . '%" align="center">';
 echo '<tr>';
@@ -203,3 +203,5 @@ echo '<td class="largeReportHeader" >' . $sumFailed . '</td>';
 echo '</tr>';
 echo '</table>';
 echo '<br/>';
+
+end:

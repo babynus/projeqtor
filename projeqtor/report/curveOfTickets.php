@@ -131,7 +131,7 @@ if ($paramVersion != '') {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n ( 'wrongDate' );
     echo '</div>';
-    exit ();
+    if (!empty($cronnedScript)) goto end; else exit;
   }
 } else if ($paramProject != '') {
   $pe = new PlanningElement ();
@@ -151,14 +151,14 @@ if ($paramVersion != '') {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n ( 'wrongDate' );
     echo '</div>';
-    exit ();
+    if (!empty($cronnedScript)) goto end; else exit;
   }
 } else {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n ( 'messageNoData', array(i18n ( 'Project' )) );
   echo i18n ( 'messageNoData', array(i18n ( 'Version' )) );
   echo '</div>';
-  exit ();
+  if (!empty($cronnedScript)) goto end; else exit;
 }
 $order = "";
 // echo $where;
@@ -196,7 +196,7 @@ if ($nbDay != 0) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n ( 'invalidNbOfDay' );
   echo '</div>';
-  exit ();
+  if (!empty($cronnedScript)) goto end; else exit;
 }
 $month = getNbMonth ( 4, true );
 $arrDays = array();
@@ -293,3 +293,5 @@ $graph->Render ( $imgName );
 echo '<table width="95%" align="center"><tr><td align="center">';
 echo '<img src="' . $imgName . '" />';
 echo '</td></tr></table>';
+
+end:
