@@ -49,7 +49,7 @@ if ($paramActivity == '' && $paramProject == '') {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('Project').' / '.i18n('Activity'))); 
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
 }
 if (array_key_exists('outMode', $_REQUEST) && $_REQUEST['outMode'] == 'csv') {
     $outMode = 'csv';
@@ -72,7 +72,7 @@ if ($paramActivity != '') {
 }
 $lstAct = new Activity();
 $lstActivity =$lstAct->getSqlElementsFromCriteria(null, false, $where, null);
-if (checkNoData($lstActivity))     exit;
+if (checkNoData($lstActivity))     if (!empty($cronnedScript)) goto end; else exit;
 // Joblist definition
 $where = getAccesRestrictionClause('JoblistDefinition', false);
 $where .= "and nameChecklistable = 'Activity' ";
@@ -265,3 +265,5 @@ if ($outMode == 'csv') {
 function compareWbs($a, $b) {
 	return version_compare($a->ActivityPlanningElement->wbs, $b->ActivityPlanningElement->wbs);
 }
+
+end:

@@ -72,7 +72,7 @@ $order = ' operationDate desc, id asc';
 $hist=new History();
 $historyList=$hist->getSqlElementsFromCriteria(null,false,$where,$order);
 
-if (checkNoData($historyList)) exit;
+if (checkNoData($historyList)) if (!empty($cronnedScript)) goto end; else exit;
 
 echo '<table width="95%" align="center">';
 echo '<tr>';
@@ -230,5 +230,7 @@ echo '<td class="historyDataClosetable">&nbsp;</td>';
 echo '<td class="historyDataClosetable">&nbsp;</td>';
 echo '</tr>';
 echo '</table>';
+
+end:
 
 ?>

@@ -165,7 +165,7 @@ while ($line = Sql::fetchLine($result)) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
   
-if (checkNoData($tab)) exit;
+if (checkNoData($tab)) if (!empty($cronnedScript)) goto end; else exit;
 
 // Header
 $plannedBGColor='#FFFFDD';
@@ -192,5 +192,7 @@ echo '<br/></td></tr>';
 echo '<tr><td width="45%" align="top">';
 echo '</td></tr>';
 echo '</table>';
-	
+
+end:
+
 ?>

@@ -75,7 +75,7 @@ $result=$as->getSqlElementsFromCriteria(null, false, $crit);
 if (!$paramYear or !$paramMonth) {
   $result=array();
 }
-if (checkNoData($result)) exit;
+if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
 
 if ($paramMonth) $monthDays = date('t',mktime(0, 0, 0, $paramMonth, 1, $paramYear));
 else  $monthDays=365;
@@ -227,6 +227,7 @@ function formatDateRpt($dateRpt) {
 	
   return strtotime($baseDay.' '.$dateRpt)-strtotime(date('Y-m-d 00:00:00'));
 }  
-   
-?>
 
+end:
+
+?>

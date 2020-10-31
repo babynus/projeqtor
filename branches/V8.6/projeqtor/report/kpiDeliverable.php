@@ -111,7 +111,7 @@ if ($scope=='Project') {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('Project'))); 
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   }
 } else if ($scope=='Organization') {
   $projectVisibility=securityGetAccessRight('menuProject','read');
@@ -119,13 +119,13 @@ if ($scope=='Project') {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('colIdOrganization').' / '.i18n('colIdProjectType'))); 
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   }
   if (!$year) {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n('messageNoData',array(i18n('year')));
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
   }
 } else {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
@@ -142,7 +142,7 @@ If ($class=='Deliverable') {
   $nbCols=10;
 } else {
   errorLog("Incorrect Class '$class' for kpiDeliverable report");
-  exit;
+  if (!empty($cronnedScript)) goto end; else exit;
 }
 
 $kpi=new KpiDefinition($idKpi);
@@ -188,7 +188,7 @@ if ($idProject) {
   $listProjects=$prj->getSqlElementsFromCriteria(null,false,$where);
 }
 
-if (checkNoData($listProjects)) exit;
+if (checkNoData($listProjects)) if (!empty($cronnedScript)) goto end; else exit;
 
 $period=null;
 $periodValue='';
@@ -816,5 +816,7 @@ echo '<table width="95%" align="center"><tr><td align="center">';
 echo '<img style="width:700px;height:400px" src="' . $imgName . '" />'; 
 echo '</td></tr></table>';
 echo '<br/>';
+
+end:
 
 ?>

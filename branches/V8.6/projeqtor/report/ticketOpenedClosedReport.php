@@ -217,7 +217,7 @@ for ($i = 1; $i <= $paramNbOfDays; $i++) {
 // pGrapg standard inclusions
 if (! testGraphEnabled()) { return;}
 
-if (checkNoData(array_merge($created,$closed)))  exit;
+if (checkNoData(array_merge($created,$closed)))  if (!empty($cronnedScript)) goto end; else exit;
 
 $dataSet=new pData;
 
@@ -273,7 +273,4 @@ echo '<table width="95%" align="center"><tr><td align="center">';
 echo '<img src="' . $imgName . '" />';
 echo '</td></tr></table>';
 
-
-
-
-	
+end:

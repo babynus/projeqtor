@@ -172,7 +172,7 @@ foreach ($lstTicket as $t) {
   
 }
 
-if (checkNoData($lstTicket)) exit;
+if (checkNoData($lstTicket)) if (!empty($cronnedScript)) goto end; else exit;
   
 // title
 echo '<table width="95%" align="center">';
@@ -206,4 +206,5 @@ foreach ($version as $idVersion=>$arrayVers) {
   
 echo '</table>';
 echo '<br/>';
- 
+
+end:

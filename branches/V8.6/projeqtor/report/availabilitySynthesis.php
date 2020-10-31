@@ -84,7 +84,7 @@ if (!$paramPeriodValue) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n('messageNoData',array(i18n('colPeriod'))); // TODO i18n message
   echo '</div>';
-  exit;
+  if (!empty($cronnedScript)) goto end; else exit;
 }
 if ($paramPeriodScale=="month") {
 	$start=date('Y-m-').'01';
@@ -106,7 +106,7 @@ if ($paramPeriodScale=="month") {
 	$where.= " and day>='$startValue' and day<='$endValue'";
 } else {
 	echo "(1) ERROR incorrect Period sScale";
-	exit;
+	if (!empty($cronnedScript)) goto end; else exit;
 }
 $header=i18n($paramPeriodScale);
 
@@ -178,7 +178,7 @@ for($day=$start;$day<=$end;$day=addDaysToDate($day, 1)) {
 		$period=weekFormat($day);
 	} else {
 		echo "(2) ERROR incorrect Period sScale";
-	  exit; 
+	  if (!empty($cronnedScript)) goto end; else exit; 
 	}
 	if (! isset($resultPeriod[$period])) {
 		$resultPeriod[$period]=array();
@@ -323,3 +323,5 @@ foreach ($totalPeriod as $date=>$val){
 }
 echo' </tr></table>';
 echo '</td></tr></table>';
+
+end:

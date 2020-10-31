@@ -79,7 +79,7 @@ if ($periodType) {
       echo i18n('messageNoData',array(i18n('month'))); // TODO i18n message
     }
     echo '</div>';
-    exit;
+    if (!empty($cronnedScript)) goto end; else exit;
     }
 		$end = $paramYear . '-' . (($paramMonth < 10) ? '0' : '') . $paramMonth . '-' . date('t', mktime(0, 0, 0, $paramMonth, 1, $paramYear));
 	} if ($periodType == 'week') {
@@ -93,7 +93,7 @@ if ($periodType) {
         echo i18n('messageNoData',array(i18n('week'))); // TODO i18n message
       }
       echo '</div>';
-      exit;
+      if (!empty($cronnedScript)) goto end; else exit;
       }
 		$start=date('Y-m-d', firstDayofWeek($paramWeek, $paramYear));
   	$end=addDaysToDate($start,6);
@@ -144,4 +144,6 @@ foreach ($termList as $term)
 }
  echo '</table>';
 
+end:
+ 
 ?>
