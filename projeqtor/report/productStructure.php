@@ -65,7 +65,7 @@ if (array_key_exists('showClosedItems', $_REQUEST)){
 //end 
 $item=new $objectClass($objectId);
 $canRead=securityGetAccessRightYesNo('menu' . $objectClass, 'read', $item)=="YES";
-if (!$canRead) exit;
+if (!$canRead) if (!empty($cronnedScript)) goto end; else exit;
 
 $subProducts=array();
 $parentProducts=array();
@@ -129,3 +129,5 @@ function showProduct($class,$id,$name,$level,$position) {
     }
   }
 }
+
+end:

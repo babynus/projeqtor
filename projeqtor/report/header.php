@@ -47,13 +47,13 @@ foreach ($_REQUEST as $reqParam=>$reqValue) {
 		if(!is_array($reqValue)) {
 			if ($reqValue!=Sql::fmtStr($reqValue)) {
 				traceHack("improper value '$reqValue' for request parameter '$reqParam' while calling a report");
-				exit;
+				if (!empty($cronnedScript)) goto end; else exit;
 			}
 		} else {
 			foreach($reqValue as $v) {
 				if ($v!=Sql::fmtStr($v)) {
 					traceHack("improper value '$v' for request parameter '$reqParam' while calling a report");
-					exit;
+					if (!empty($cronnedScript)) goto end; else exit;
 				}
 			}
 		}
@@ -116,6 +116,6 @@ $arrayColors=array('#1abc9c', '#2ecc71', '#3498db',
 '#8e44ad', '#2c3e50', '#f1c40f', '#e67e22', '#99CC00',
 '#e74c3c', '#95a5a6', '#d35400', '#c0392b', '#bdc3c7', '#7f8c8d');
 
-
+end:
 
 ?>

@@ -94,7 +94,7 @@ if (!$idProject) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n('messageNoData',array(i18n('Project'))); 
   echo '</div>';
-  exit; 
+  if (!empty($cronnedScript)) goto end; else exit; 
 }
 
 // Graph
@@ -194,12 +194,12 @@ while ($line = Sql::fetchLine($resultPlanned)) {
     if ($end<$new) {$end=$new;}
   }
 }
-if (checkNoData($arrayMile)) exit;
+if (checkNoData($arrayMile)) if (!empty($cronnedScript)) goto end; else exit;
 if (!$start or !$end) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n('reportNoData'); 
   echo '</div>';
-  exit;
+  if (!empty($cronnedScript)) goto end; else exit;
 }
 //$start=substr($start,0,8).'01';
 //$end=substr($end,0,8).date('t',strtotime($end));
@@ -253,7 +253,7 @@ if (count($arrDates)<2) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n('reportNoData');
   echo '</div>';
-  exit;
+  if (!empty($cronnedScript)) goto end; else exit;
 }
 
 $graphWidth=1250;
@@ -465,4 +465,7 @@ function lastDayOf($period, DateTime $date = null)
 
   return $newDate;
 }
+
+end:
+
 ?>

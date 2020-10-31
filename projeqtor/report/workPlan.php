@@ -95,7 +95,7 @@
   $result=Sql::query($query);
   $test=array();
   if (Sql::$lastQueryNbRows > 0) $test[]="OK";
-  if (checkNoData($test))  exit;
+  if (checkNoData($test))  if (!empty($cronnedScript)) goto end; else exit;
 
   if (Sql::$lastQueryNbRows > 0) {
     // Header
@@ -162,4 +162,7 @@
     }
   }
   echo "</table>";
+  
+end:
+  
 ?>
