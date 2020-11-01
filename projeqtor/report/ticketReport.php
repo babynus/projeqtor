@@ -318,21 +318,21 @@ foreach ($lstTicket as $t) {
   $type=($t->idTicketType==null or trim($t->idTicketType)=='')?'0':$t->idTicketType;
   if ( (! $periodType and $t->creationDateTime) 
   or ($periodType and $t->creationDateTime>=$start and $t->creationDateTime<=$end) ) {
-    $created['Urgency'][$urgency][$type]+=1;
-    $created['Criticality'][$criticality][$type]+=1;
-    $created['Priority'][$priority][$type]+=1;
+    if (isset($created['Urgency'][$urgency][$type])) $created['Urgency'][$urgency][$type]+=1;
+    if (isset($created['Criticality'][$criticality][$type])) $created['Criticality'][$criticality][$type]+=1;
+    if (isset($created['Priority'][$priority][$type])) $created['Priority'][$priority][$type]+=1;
   }
   if ( (! $periodType and $t->doneDateTime) 
   or ($periodType and $t->doneDateTime>=$start and $t->doneDateTime<=$end) ) {
-    $done['Urgency'][$urgency][$type]+=1;
-    $done['Criticality'][$criticality][$type]+=1;
-    $done['Priority'][$priority][$type]+=1;
+    if (isset($done['Urgency'][$urgency][$type])) $done['Urgency'][$urgency][$type]+=1;
+    if (isset($done['Criticality'][$criticality][$type])) $done['Criticality'][$criticality][$type]+=1;
+    if (isset($done['Priority'][$priority][$type])) $done['Priority'][$priority][$type]+=1;
   }
   if ( (! $periodType and $t->idleDateTime) 
   or ($periodType and $t->idleDateTime>=$start and $t->idleDateTime<=$end) ) {  
-    $closed['Urgency'][$urgency][$type]+=1;
-    $closed['Criticality'][$criticality][$type]+=1;
-    $closed['Priority'][$priority][$type]+=1;
+    if (isset($closed['Urgency'][$urgency][$type])) $closed['Urgency'][$urgency][$type]+=1;
+    if (isset($closed['Criticality'][$criticality][$type])) $closed['Criticality'][$criticality][$type]+=1;
+    if (isset($closed['Priority'][$priority][$type])) $closed['Priority'][$priority][$type]+=1;
   }
 }
 
