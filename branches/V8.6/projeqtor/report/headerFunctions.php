@@ -100,8 +100,8 @@ function dirname_recursive($path, $count=1){
 $page=1;
 $lastName=null;
 function excelName($name=null, $quote='"') {
-  global $lastName;
-  if (!$name) $name=$_REQUEST['reportName'];
+  global $lastName, $page;
+  if (!$name) $name=RequestHandler::getValue('reportName');
   if ($name==$lastName) {
     $page++;
     $name.=" ($page)";
