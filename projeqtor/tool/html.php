@@ -1420,7 +1420,7 @@ function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false,$textual
   global $browserLocale,$idTemplate,$outputHtml;
   if ($idTemplate) $textual=false;
   $today=false;
-  $classicFormatDateDate=true;
+  $classicFormatDate=true;
   $classicFormatDateHour=false;
   $locale=substr($browserLocale, 0,2);
   if (strlen($val)!=19 and strlen($val)!=16) {
@@ -1486,7 +1486,7 @@ function htmlFormatDateTime($val, $withSecond=true, $hideZeroTime=false,$textual
   }
   if(getSessionValue('browserLocaleTimeFormat')=='h:mm a' and $classicFormatDate){
     $result = htmlFormatDate(substr($val,0,10)) .'&nbsp;'. date('g:i A',strtotime($val));
-  }else if(getSessionValue('browserLocaleTimeFormat')=='h:mm a' and $classicFormatHours){
+  }else if(getSessionValue('browserLocaleTimeFormat')=='h:mm a' and $classicFormatDateHour){
     $result .=date('g:i A',strtotime($val));
   }
   if ($idTemplate and ! $outputHtml) {
