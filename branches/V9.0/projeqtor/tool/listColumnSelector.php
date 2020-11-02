@@ -39,41 +39,80 @@ foreach ($listColumns as $col) {
 	if ( ! SqlElement::isVisibleField($col->attribute) or ($objectClass=='GlobalView' and $col->field=='id') ) {
 		// nothing
 	} else {
-		echo '<div style="width:100%;" class="dojoDndItem" id="listColumnSelectorId'.htmlEncode($col->id).'" dndType="planningColumn">';
-		if ($col->attribute=='id') {
-		  echo '<span ><img style="width:6px" src="css/images/iconNoDrag.gif" />&nbsp;&nbsp;</span>';
-		} else {
-		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
-		}
-		echo '<span dojoType="dijit.form.CheckBox" type="checkbox" id="checkListColumnSelectorId'.$cpt.'" '
-		. ((! $col->hidden)?' checked="checked" ':'')
-		. (( $col->field=='id' or $col->field=='name' or $col->field=='objectId' or $col->field=='objectClass')?' disabled="disabled" ':'')
-		. ' onChange="changeListColumn(\'' . htmlEncode($col->id) . '\','.$cpt.',this.checked,\'' . htmlEncode($col->sortOrder) . '\')" '
-		. '></span><label for="checkListColumnSelectorId'.$cpt.'" class="checkLabel">';
-		echo '&nbsp;';
-		echo $col->_displayName . "</label>&nbsp;&nbsp;";
-		echo '<div style="float: right; text-align:right">';
-		if ($col->attribute=='name') {
-      echo '<div class="input" dojoType="dijit.form.NumberTextBox" id="checkListColumnSelectorWidthId'.$cpt.'" ';
-      echo 'disabled="disabled" ';     
-      echo ' style="width:22px;position:absolute;right:24px;background: #F0F0F0; text-align: center;" value="'.htmlEncode($col->widthPct).'" ></div>';
-      echo '<input type="hidden" id="columnSelectorNameFieldId" value="'.$cpt.'" />';
-      echo '<input type="hidden" id="columnSelectorNameTableId" value="'.htmlEncode($col->id).'" />';
-		} else {
-			echo '<div dojoType="dijit.form.NumberSpinner" id="checkListColumnSelectorWidthId'.$cpt.'" ';
-			echo ($col->hidden or $col->attribute=='name')?'disabled="disabled" ':'';
-			if ($col->attribute!='name') {	
-			  echo ' onChange="changeListColumnWidth(\'' . htmlEncode($col->id) . '\','.$cpt.',this.value)" ';
-			  echo ' onClick="recalculateColumnSelectorName()" ';
-			}	 
-			echo ' constraints="{ min:1, max:50, places:0 }"';
-			echo ' style="width:'.(($col->hidden or $col->attribute=='name')?'37':'35').'px; text-align: center;" value="'.htmlEncode($col->widthPct).'" >';
-			echo '</div>';
-		}
-		echo '&nbsp;</div>';
-		echo '</div>';
-		$cpt++;
-
+	  if (isNewGui()) {
+  		echo '<div style="width:100%;height:34px;" class="dojoDndItem" id="listColumnSelectorId'.htmlEncode($col->id).'" dndType="planningColumn">';
+  		if ($col->attribute=='id') {
+  		  echo '<span style="float:left"><img style="width:10px;position:relative;top:10px" src="css/images/iconNoDrag.gif" />&nbsp;&nbsp;</span>';
+  		} else {
+  		  echo '<span class="dojoDndHandle handleCursor" style="float:left;"><img style="width:10px;position:relative;top:8px;left:5px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
+  		}
+  		echo '<label for="checkListColumnSelectorId'.$cpt.'" class="checkLabel" style="position:relative;top:9px;float:none;left:20px;">';
+  		echo '&nbsp;';
+  		echo $col->_displayName . "&nbsp;</label>&nbsp;&nbsp;";
+  		echo '<span dojoType="dijit.form.CheckBox" type="checkbox" style="position:relative; float:left; left:10px;top:11px;" id="checkListColumnSelectorId'.$cpt.'" '
+  		. ((! $col->hidden)?' checked="checked" ':'')
+  		. (( $col->field=='id' or $col->field=='name' or $col->field=='objectId' or $col->field=='objectClass')?' disabled="disabled" ':'')
+  		. ' onChange="changeListColumn(\'' . htmlEncode($col->id) . '\','.$cpt.',this.checked,\'' . htmlEncode($col->sortOrder) . '\')" '
+  		. '></span>';
+  		
+  		
+  		echo '<div style="float: right; text-align:right">';
+  		if ($col->attribute=='name') {
+        echo '<div class="input" dojoType="dijit.form.NumberTextBox" id="checkListColumnSelectorWidthId'.$cpt.'" ';
+        echo 'disabled="disabled" ';     
+        echo ' style="width:22px;position:absolute;right:18px;background: #F0F0F0; text-align: center;" value="'.htmlEncode($col->widthPct).'" ></div>';
+        echo '<input type="hidden" id="columnSelectorNameFieldId" value="'.$cpt.'" />';
+        echo '<input type="hidden" id="columnSelectorNameTableId" value="'.htmlEncode($col->id).'" />';
+  		} else {
+  			echo '<div dojoType="dijit.form.NumberSpinner" id="checkListColumnSelectorWidthId'.$cpt.'" ';
+  			echo ($col->hidden or $col->attribute=='name')?'disabled="disabled" ':'';
+  			if ($col->attribute!='name') {	
+  			  echo ' onChange="changeListColumnWidth(\'' . htmlEncode($col->id) . '\','.$cpt.',this.value)" ';
+  			  echo ' onClick="recalculateColumnSelectorName()" ';
+  			}	 
+  			echo ' constraints="{ min:1, max:50, places:0 }"';
+  			echo ' style="position:absolute;right:5px;width:'.(($col->hidden or $col->attribute=='name')?'37':'35').'px; text-align: center;" value="'.htmlEncode($col->widthPct).'" >';
+  			echo '</div>';
+  		}
+  		echo '&nbsp;</div>';
+  		echo '</div>';
+  		$cpt++;
+	  } else {
+	    echo '<div style="width:100%;" class="dojoDndItem" id="listColumnSelectorId'.htmlEncode($col->id).'" dndType="planningColumn">';
+	    if ($col->attribute=='id') {
+	      echo '<span ><img style="width:6px" src="css/images/iconNoDrag.gif" />&nbsp;&nbsp;</span>';
+	    } else {
+	      echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
+	    }
+	    echo '<span dojoType="dijit.form.CheckBox" type="checkbox" id="checkListColumnSelectorId'.$cpt.'" '
+	        . ((! $col->hidden)?' checked="checked" ':'')
+	        . (( $col->field=='id' or $col->field=='name' or $col->field=='objectId' or $col->field=='objectClass')?' disabled="disabled" ':'')
+	        . ' onChange="changeListColumn(\'' . htmlEncode($col->id) . '\','.$cpt.',this.checked,\'' . htmlEncode($col->sortOrder) . '\')" '
+	            . '></span><label for="checkListColumnSelectorId'.$cpt.'" class="checkLabel">';
+	    echo '&nbsp;';
+	    echo $col->_displayName . "</label>&nbsp;&nbsp;";
+	    echo '<div style="float: right; text-align:right">';
+	    if ($col->attribute=='name') {
+	      echo '<div class="input" dojoType="dijit.form.NumberTextBox" id="checkListColumnSelectorWidthId'.$cpt.'" ';
+	      echo 'disabled="disabled" ';
+	      echo ' style="width:22px;position:absolute;right:24px;background: #F0F0F0; text-align: center;" value="'.htmlEncode($col->widthPct).'" ></div>';
+	      echo '<input type="hidden" id="columnSelectorNameFieldId" value="'.$cpt.'" />';
+	      echo '<input type="hidden" id="columnSelectorNameTableId" value="'.htmlEncode($col->id).'" />';
+	    } else {
+	      echo '<div dojoType="dijit.form.NumberSpinner" id="checkListColumnSelectorWidthId'.$cpt.'" ';
+	      echo ($col->hidden or $col->attribute=='name')?'disabled="disabled" ':'';
+	      if ($col->attribute!='name') {
+	        echo ' onChange="changeListColumnWidth(\'' . htmlEncode($col->id) . '\','.$cpt.',this.value)" ';
+	        echo ' onClick="recalculateColumnSelectorName()" ';
+	      }
+	      echo ' constraints="{ min:1, max:50, places:0 }"';
+	      echo ' style="width:'.(($col->hidden or $col->attribute=='name')?'37':'35').'px; text-align: center;" value="'.htmlEncode($col->widthPct).'" >';
+	      echo '</div>';
+	    }
+	    echo '&nbsp;</div>';
+	    echo '</div>';
+	    $cpt++;
+	  }
 	}
 }
 ?>
