@@ -46,16 +46,22 @@ foreach ($listColumns as $col) {
   		} else {
   		  echo '<span class="dojoDndHandle handleCursor" style="float:left;"><img style="width:10px;position:relative;top:8px;left:5px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
   		}
-  		echo '<label for="checkListColumnSelectorId'.$cpt.'" class="checkLabel" style="position:relative;top:9px;float:none;left:20px;">';
-  		echo '&nbsp;';
-  		echo $col->_displayName . "&nbsp;</label>&nbsp;&nbsp;";
-  		echo '<span dojoType="dijit.form.CheckBox" type="checkbox" style="position:relative; float:left; left:10px;top:11px;" id="checkListColumnSelectorId'.$cpt.'" '
+  		echo '<div  id="checkListColumnSelectorId'.$cpt.'Sw" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="'.((! $col->hidden)?'on':'off').'" leftLabel="" rightLabel="" ';
+  		echo ' style="position:relative; float:left; left:5px;top:11px;z-index:99;"';
+  		echo  (( $col->field=='id' or $col->field=='name' or $col->field=='objectId' or $col->field=='objectClass')?' disabled="disabled" ':'');
+  		echo '>';
+  		echo '<script type="dojo/method" event="onStateChanged" >';
+  		echo '  dijit.byId("checkListColumnSelectorId'.$cpt.'").set("checked",(this.value=="on")?true:false);';
+  		echo '</script>';
+  		echo '</div>';
+  		echo '<span dojoType="dijit.form.CheckBox" type="checkbox" style="display:none;position:relative; float:left; left:10px;top:11px;" id="checkListColumnSelectorId'.$cpt.'" '
   		. ((! $col->hidden)?' checked="checked" ':'')
   		. (( $col->field=='id' or $col->field=='name' or $col->field=='objectId' or $col->field=='objectClass')?' disabled="disabled" ':'')
   		. ' onChange="changeListColumn(\'' . htmlEncode($col->id) . '\','.$cpt.',this.checked,\'' . htmlEncode($col->sortOrder) . '\')" '
   		. '></span>';
-  		
-  		
+  		echo '<label for="checkListColumnSelectorId'.$cpt.'" class="checkLabel" style="position:relative;top:9px;float:none;left:15px;">';
+  		echo '&nbsp;';
+  		echo $col->_displayName . "&nbsp;</label>&nbsp;&nbsp;";  		
   		echo '<div style="float: right; text-align:right">';
   		if ($col->attribute=='name') {
         echo '<div class="input" dojoType="dijit.form.NumberTextBox" id="checkListColumnSelectorWidthId'.$cpt.'" ';
