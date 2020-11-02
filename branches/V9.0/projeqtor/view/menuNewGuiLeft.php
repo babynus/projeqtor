@@ -367,7 +367,7 @@ function drawLeftMenuListNewGui($displayMode){
         
         $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
+        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
         $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }else{
       $classEl="Reports";
@@ -387,7 +387,7 @@ function drawLeftMenuListNewGui($displayMode){
       $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'report\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'report\',\'leave\');">';
       $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'"/>';
       $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
+      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
       $result.='<div id="div'.$obj->id.'report" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }
   }else{
@@ -395,7 +395,7 @@ function drawLeftMenuListNewGui($displayMode){
       $result.='<li class="menu__item" role="menuitem">';
       $result.='<a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'">';
       $result.='<div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$obj->name).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"").'float: left;">'.ucfirst((($menu['objectType']=='menu')?i18n(substr($obj->name,3)):$obj->name)).'</div></a>';
+      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst((($menu['objectType']=='menu')?i18n(substr($obj->name,3)):$obj->name)).'</div></a>';
       $result.='<div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
     }
     $old=$menu['level'];

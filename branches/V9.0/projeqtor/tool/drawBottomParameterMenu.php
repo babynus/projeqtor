@@ -35,7 +35,17 @@ $result='';
 
 if($isObject=='true' and $screen!=''){
   $obj=new $screen();
-  debugLog($obj);
+  $lstParam=array();
+  foreach ( $obj as $key=>$val){
+    if(substr($key, 0,2)=='id' and $key!='idle' and $key!='idleDateTime' and $key!='id' and $key!='id'.$screen){
+      if(strpos($key,'idContext')!==false){
+        $lstParam[]='Context';
+      }else{
+        $lstParam[]=substr($key,2);
+      }
+    }
+  }
+  
 }else{
   switch ($screen){
   	case 'Today':

@@ -460,7 +460,7 @@ function showIconLeftMenu(){
   var leftMenu=dojo.byId('ml-menu');
   var mode=dojo.byId('displayModeLeftMenu').value;
   display=(mode=='ICONTXT')?'none':'block';
-  style=(mode=='ICONTXT')?"":"float:left;max-width:155px;";
+  style=(mode=='ICONTXT')?"float:left;max-width:180px;":"float:left;max-width:155px;";
   leftMenu.menus = [].slice.call(leftMenu.querySelectorAll('.menu__level'));
   leftMenu.menus.forEach(function(menuEl, pos) {
     var items = menuEl.querySelectorAll('.menu__item');
