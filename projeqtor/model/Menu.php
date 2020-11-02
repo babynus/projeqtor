@@ -103,7 +103,12 @@ class Menu extends SqlElement {
   		echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;">';
   		echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
   		echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
-  		echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);showFavoriteTooltip(\''.$class.'\');"';
+  		echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);';
+  		if($defaultMenu == 'menuBarRecent' and !in_array($menu->name,$customMenuArray) or ($defaultMenu == 'menuBarCustom')){
+  		  echo 'showFavoriteTooltip(\''.$class.'\');"';
+  		}else{
+  		  echo '"';
+  		}
   		if ($menuName=='menuReports' and isHtml5() ) {
   			echo ' onMouseEnter="showReportFavoriteTooltip();hideFavoriteTooltip(0,\''.$class.'\');"';
   			echo ' onMouseLeave="hideReportFavoriteTooltip(0);hideFavoriteTooltip(0,\''.$class.'\');"';
@@ -132,6 +137,7 @@ class Menu extends SqlElement {
               Favorite::drawReportList();
             echo '</div></div>';
         }
+        if($defaultMenu == 'menuBarRecent' and !in_array($menu->name,$customMenuArray) or ($defaultMenu == 'menuBarCustom')){
           echo '<div class="comboButtonInvisible" dojoType="dijit.form.DropDownButton"
          id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
           <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
@@ -143,6 +149,7 @@ class Menu extends SqlElement {
           	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
           }
           echo '</div></div>';
+        }
         echo '</div>';
         echo '</div>'; 
         } else if ($menu->type=='plugin') {
@@ -178,7 +185,12 @@ class Menu extends SqlElement {
           if (securityCheckDisplayMenu($idMenu, $class)) {
           	echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n('menu'.$class) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;">';
           	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
-          	echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);showFavoriteTooltip(\''.$class.'\');"';
+            echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);';
+    		if($defaultMenu == 'menuBarRecent' and !in_array($menu->name,$customMenuArray) or ($defaultMenu == 'menuBarCustom')){
+    		  echo 'showFavoriteTooltip(\''.$class.'\');"';
+    		}else{
+    		  echo '"';
+    		}
           	echo ' onMouseLeave="hideFavoriteTooltip(0,\''.$class.'\');"';
           	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
           	if($drawMode=='ICON'){
@@ -191,6 +203,7 @@ class Menu extends SqlElement {
         	    echo '<td style="padding-left:5px;">'.i18n($menu->name).'</td>';
         		echo '</tr></table>';
           	}
+          	if($defaultMenu == 'menuBarRecent' and !in_array($menu->name,$customMenuArray) or ($defaultMenu == 'menuBarCustom')){
             echo '<div class="comboButtonInvisible" dojoType="dijit.form.DropDownButton"
             id="addFavorite'.$class.'" name="addFavorite'.$class.'" style="position:absolute;top:22px;left:0px;height: 0px; overflow: hidden; ">
             <div dojoType="dijit.TooltipDialog" id="dialogFavorite'.$class.'" style="cursor:pointer;"
@@ -202,6 +215,7 @@ class Menu extends SqlElement {
             	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
             }
               echo '</div></div>';
+          	}
           	echo '</div>';
           	echo '</div>';
           }
