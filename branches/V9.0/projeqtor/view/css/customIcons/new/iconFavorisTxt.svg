@@ -48,8 +48,12 @@
 		<text transform="matrix(1.2867 0 0 1 22.3228 87.667)" display="inline" fill="#FF0000" font-family="'Verdana-Bold'" font-size="30.8963" letter-spacing="-0.777">TXT</text>
 </g>
 <g id="Calque_4">
-	
-		<text transform="matrix(0.9819 0 0 1 0.8232 86.584)" fill="#FF0000" font-family="'Verdana-Bold'" font-size="61.2964" letter-spacing="-1.018">TXT</text>
+	<g>
+		<path fill="#FF0000" d="M40.644,50.638H26.979v35.946H15.694V50.638H2.028v-8.62h38.616V50.638z"/>
+		<path fill="#FF0000" d="M85.301,86.584H72.238l-9.414-14.628l-9.606,14.628h-12.47l15.518-22.45L41.072,42.019h13.026
+			l9.102,13.876l9.36-13.876h12.506L69.795,63.665L85.301,86.584z"/>
+		<path fill="#FF0000" d="M124.022,50.638h-13.666v35.946H99.071V50.638H85.406v-8.62h38.616V50.638z"/>
+	</g>
 </g>
 <g id="Calque_2_1_" display="none">
 	<g display="inline">
