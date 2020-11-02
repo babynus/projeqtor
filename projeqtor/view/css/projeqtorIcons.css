@@ -1013,6 +1013,9 @@
 
 
 .ProjeQtOrNewGui .iconFavoris { background-image: url(customIcons/new/iconFavoris.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconFavorisIcon { background-image: url(customIcons/new/iconFavorisIcon.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconFavorisIconTxt { background-image: url(customIcons/new/iconFavorisIconTxt.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconFavorisTxt { background-image: url(customIcons/new/iconFavorisTxt.svg);  background-repeat: no-repeat; }
 
 .iconFeasibility { background-image: url(images/iconFeasibility32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconFeasibility { background-image: url(customIcons/blue/iconFeasibility.png);  background-repeat: no-repeat; }
