@@ -947,14 +947,17 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;z-index: 9999999;top:46px;background-color: rgb(181 181 181 / 50%);display:none">
         <table style="width:100%;"><tr>
           <td style="width:7%;">
-            <div style="margin: 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;position: absolute;top: 0px;left: 0px;">
+            <div style="width: 100%;height: 100%;">
+            <div style="margin: 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;position:absolute;top:0px;">
+            <?php $menuBarTopMode = Parameter::getUserParameter('menuBarTopMode');?>
               <table style="width:100%;height:100%;">
-        	           <tr>
-        	             <td style="padding: 5px;"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
-    	                 <td style="padding: 5px;"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
-    	                 <td style="padding: 5px;"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
-        	           </tr>
+        	          <tr>
+                       <td class="<?php if($menuBarTopMode=='ICON'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding: 0px 2px 0px 2px;" onclick="saveUserParameter('menuBarTopMode', 'ICON');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+                       <td class="<?php if($menuBarTopMode=='ICONTXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding-right: 2px;" onclick="saveUserParameter('menuBarTopMode', 'ICONTXT');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+                       <td class="<?php if($menuBarTopMode=='TXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding: 0px 2px 0px 0px;" onclick="saveUserParameter('menuBarTopMode', 'TXT');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+                     </tr>
       	      </table>
+            </div>
             </div>
           </td>
           <td style="width:90%;">
