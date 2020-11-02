@@ -1081,7 +1081,7 @@ if (property_exists($objectClass,'idStatus')) {
                   </div>   
                   <div style="height:5px;border-bottom:1px solid #AAAAAA"></div>    
 							    <div id="dndListColumnSelector" jsId="dndListColumnSelector" dojotype="dojo.dnd.Source"  
-							      dndType="column"
+							      dndType="column" style="min-width:310px;"
 							      withhandles="true" class="container">                       
 							      <?php include('../tool/listColumnSelector.php')?>
 							    </div>
