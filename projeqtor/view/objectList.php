@@ -1073,7 +1073,11 @@ if (property_exists($objectClass,'idStatus')) {
                         validateListColumn();
                       </script>
                     </button>
-                    <div style="position: absolute;top: 34px; right:42px;" id="columnSelectorTotWidthTop"></div>
+                    <?php if (isNewGui()){?>
+                    <div style="position: absolute;top: 6px; right:2px;" id="columnSelectorTotWidthTop"></div>
+                    <?php } else {?>
+                      <div style="position: absolute;top: 34px; right:42px;" id="columnSelectorTotWidthTop"></div>
+                    <?php } ?>  
                   </div>   
                   <div style="height:5px;border-bottom:1px solid #AAAAAA"></div>    
 							    <div id="dndListColumnSelector" jsId="dndListColumnSelector" dojotype="dojo.dnd.Source"  
@@ -1095,7 +1099,11 @@ if (property_exists($objectClass,'idStatus')) {
                         validateListColumn();
                       </script>
                     </button>
+                    <?php if (isNewGui()){?>
+                    <div style="position: absolute;bottom: 4px; right:2px;" id="columnSelectorTotWidthBottom"></div>
+                    <?php } else {?>
                     <div style="position: absolute;bottom: 33px; right:42px;" id="columnSelectorTotWidthBottom"></div>
+                    <?php } ?>  
                   </div>   
 							  </div>
 							</div>   
