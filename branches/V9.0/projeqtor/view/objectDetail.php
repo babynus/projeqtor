@@ -1871,7 +1871,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo '    </span>';
         echo '  </a>';
         echo '</span>';
-        echo '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivDetail" style="display:none;font-size:9px; color: #000000;position :absolute; top: 6px; left: 150px; border: 0;background: transparent;width:300px;" value="'.$ref.'" />';
+        echo '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivDetail" style="display:none;font-size:10pt; color: #000000;position :absolute; top: 28px; left: 187px; border: 0;background: transparent;width:100%;" value="'.$ref.'" />';
         $alertLevelArray=$obj->getAlertLevel(true);
         $alertLevel=$alertLevelArray['level'];
         $colorAlert="background-color:#FFFFFF";
@@ -2194,6 +2194,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $displayComboButtonCol=$displayComboButton;
         $displayDirectAccessButton=true;
         $canCreateCol=false;
+        $canListCol=false;
         if ($comboDetail or strpos($attributes, 'readonly')!==false) {
           $displayComboButtonCol=false;
         }
@@ -2254,6 +2255,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
                 $accessScope=new AccessScope($accessProfile->idAccessScopeCreate);
                 if ($accessScope and $accessScope->accessCode!='NO') {
                   $canCreateCol=true;
+                }
+                $accessScope=new AccessScope($accessProfile->idAccessScopeRead);
+                if ($accessScope and $accessScope->accessCode!='NO') {
+                  $canListCol=true;
                 }
               }
             }
@@ -2554,9 +2559,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo $attributes;
         echo $valStore;
         echo autoOpenFilteringSelect($comboDetail);
-        if (isNewGui() and !$comboDetail) echo ' onmouseover="showActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\','.(($canCreateCol)?'true':'false').','.(($canUpdate)?'true':'false').');"';
-        if (isNewGui() and !$comboDetail) echo ' onmouseout="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
-        if (isNewGui() and !$comboDetail) echo ' onfocus="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
+        if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseover="showActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\','.(($canCreateCol)?'true':'false').','.(($canUpdate)?'true':'false').');"';
+        if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseout="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
+        if (isNewGui() and !$comboDetail and $canListCol) echo ' onfocus="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
         echo ' >';
         if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
@@ -2579,12 +2584,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo $colScript;
         
         echo '</select>';
-        if (isNewGui() and !$comboDetail) echo '<span style="width:1px;position:relative;">';
-        if (isNewGui() and !$comboDetail) echo '<div id="toolbar_'.$fieldId.'" class="fade-in dijitTextBox toolbarForSelect" style=""';
-        if (isNewGui() and !$comboDetail) echo ' onmouseover="showActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
-        if (isNewGui() and !$comboDetail) echo ' onmouseout="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
-        if (isNewGui() and !$comboDetail) echo '>...</div>';
-        if (isNewGui() and !$comboDetail) echo '</span>';
+        if (isNewGui() and !$comboDetail and $canListCol) echo '<span style="width:1px;position:relative;">';
+        if (isNewGui() and !$comboDetail and $canListCol) echo '<div id="toolbar_'.$fieldId.'" class="fade-in dijitTextBox toolbarForSelect" style=""';
+        if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseover="showActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
+        if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseout="hideActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
+        if (isNewGui() and !$comboDetail and $canListCol) echo '>...</div>';
+        if (isNewGui() and !$comboDetail and $canListCol) echo '</span>';
         if ($displayDirectAccessButton and ! isNewGui()) {
           echo '<div id="'.$col.'ButtonGoto" ';
           echo ' title="'.i18n('showDirectAccess').'" style="float:right;margin-right:3px;'.$specificStyleWithoutCustom.'"';

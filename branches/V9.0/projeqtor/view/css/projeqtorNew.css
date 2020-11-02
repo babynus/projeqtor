@@ -74,6 +74,9 @@ label, .ProjeQtOrNewGui label,
     background-color: #ffffff;
     color:var(--color-text);
 }
+.dijitComboBox .dijitInputField {
+    padding: 0;
+}
 
 .labelWithThumb, .ProjeQtOrNewGui .labelWithThumb{
   width: 150px !important;
@@ -212,7 +215,7 @@ label, .ProjeQtOrNewGui label,
   border-top: 0;
   color: var(--color-grid-header-text) !important;
   text-shadow: none;
-  font-size: 120%;
+  font-size: 10pt;
   padding-top: 0px;
   vertical-align:bottom;
   padding-bottom: 5px;
@@ -303,10 +306,10 @@ html, body, #mainDiv,
 }
 
 
-.ProjeQtOrNewGui .iconToolbarView { background-image: url(customIcons/grey/iconView.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 18px 18px}
-.ProjeQtOrNewGui .iconToolbarGoto { background-image: url(customIcons/grey/iconGoto.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
-.ProjeQtOrNewGui .iconToolbarSearch { background-image: url(customIcons/grey/iconSearch.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
-.ProjeQtOrNewGui .iconToolbarAdd { background-image: url(customIcons/grey/iconAdd.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrNewGui .iconToolbarView { background-image: url(customIcons/new/iconView.svg); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 18px 18px}
+.ProjeQtOrNewGui .iconToolbarGoto { background-image: url(customIcons/new/iconGoto.svg); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
+.ProjeQtOrNewGui .iconToolbarSearch { background-image: url(customIcons/new/iconSearch.svg); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 18px 18px}
+.ProjeQtOrNewGui .iconToolbarAdd { background-image: url(customIcons/new/iconAdd.svg); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
 
 .fade-in {
 animation: fadeIn ease 0.5s;
@@ -562,7 +565,7 @@ animation: fadeIn ease 0.5s;
 	font-weight:normal;
 }
 
-.ProjeQtOrNewGui .roundedButton:hover, .roundedButtonSmall:hover {
+.ProjeQtOrNewGui .roundedButton:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover {
   background: transparent url();
 }
 
@@ -819,6 +822,7 @@ animation: fadeIn ease 0.5s;
   width : 32px !important;
   overflow: hidden;
   border-radius: 30px !important;
+  cursor:pointer;
 }
 
 .mblSwitchKnob {
@@ -827,17 +831,10 @@ animation: fadeIn ease 0.5s;
   border-radius: 9px !important;
   border : solid 1 px grey;
 }
-
-.ProjeQtOrNewGui .paramMenuBottom{
-	width: 100%;
-    margin: 0;
-    padding: 0px;
-    height: 100%;
+.mblSwitchDisabled .mblSwitchKnob {
+	display:none;
 }
-
-.ProjeQtOrNewGui .noMenuToDisplay{
-    width: 100%;
-    text-align: center;
-    margin-top: 10px;
-    color: white;
+.mblSwitch .mblSwitchDisabled, .mblSwitch.mblSwDefaultShape.colorSwitch.mblSwitchDisabled  {
+	pointer-events: none;
+	cursor: default;
 }
