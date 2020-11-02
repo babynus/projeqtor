@@ -25,24 +25,6 @@
 					"/>
 	</g>
 </g>
-<g>
-	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		117.396,65.072 95.068,39.6 70.698,67.402 	"/>
-	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		76.809,60.43 42.315,21.078 10.172,57.746 	"/>
-	
-		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="109.031" cy="20.752" r="7.012"/>
-</g>
-<g id="Calque_4">
-	<g enable-background="new    ">
-		<path fill="#FF0000" d="M43.601,88.222H31.115v28.538h-10.31V88.222H8.32v-6.844h35.281V88.222z"/>
-		<path fill="#FF0000" d="M84.677,116.76H72.741l-8.601-11.613l-8.776,11.613H43.972l14.177-17.824L44.267,81.378h11.901
-			l8.316,11.017l8.553-11.017h11.425L70.51,98.563L84.677,116.76z"/>
-		<path fill="#FF0000" d="M120.328,88.222h-12.485v28.538H97.532V88.222H85.047v-6.844h35.281V88.222z"/>
-	</g>
-</g>
 <g id="Calque_2_1_" display="none">
 	<g display="inline">
 		
@@ -57,4 +39,24 @@
 </g>
 <g id="Calque_3_1_">
 </g>
+<g>
+	<g>
+		
+			<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			117.611,67.703 95.283,42.23 70.914,70.033 		"/>
+		
+			<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			77.023,63.06 42.531,23.708 10.388,60.376 		"/>
+		
+			<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="109.246" cy="23.382" r="7.012"/>
+	</g>
+	<g>
+		<path fill="#FF0000" d="M44.646,82.701H32.697v31.43h-9.866v-31.43H10.882v-7.537h33.764V82.701z"/>
+		<path fill="#FF0000" d="M83.691,114.131H72.27l-8.23-12.791l-8.398,12.791H44.737l13.567-19.629L45.021,75.164h11.39l7.959,12.133
+			l8.184-12.133h10.934L70.135,94.092L83.691,114.131z"/>
+		<path fill="#FF0000" d="M117.549,82.701H105.6v31.43h-9.867v-31.43H83.783v-7.537h33.766V82.701z"/>
+	</g>
+</g>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M124,122.027c0,1.088-0.881,1.973-1.969,1.973H5.967
+	C4.881,124,4,123.115,4,122.027V5.973C4,4.883,4.881,4,5.967,4h116.064C123.119,4,124,4.883,124,5.973V122.027z"/>
 </svg>
