@@ -28,12 +28,12 @@
 <g>
 	
 		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		122.344,96.446 87.245,56.406 52.823,95.679 	"/>
+		116.007,92.923 84.721,57.23 54.038,92.238 	"/>
 	
 		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		69.696,76.425 36.547,38.606 5.656,73.846 	"/>
+		69.078,75.076 39.529,41.364 11.994,72.776 	"/>
 	
-		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="100.664" cy="38.292" r="6.739"/>
+		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="96.683" cy="41.085" r="6.007"/>
 </g>
 <g id="Calque_4" display="none">
 	
@@ -53,4 +53,6 @@
 </g>
 <g id="Calque_3_1_">
 </g>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M124.5,122.511c0,1.098-0.889,1.989-1.984,1.989
+	H5.484c-1.096,0-1.984-0.892-1.984-1.989V5.489C3.5,4.391,4.388,3.5,5.484,3.5h117.032c1.096,0,1.984,0.891,1.984,1.989V122.511z"/>
 </svg>
