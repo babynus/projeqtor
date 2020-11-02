@@ -40,15 +40,15 @@ foreach ($listColumns as $col) {
 		// nothing
 	} else {
 	  if (isNewGui()) {
-  		echo '<div style="width:100%;height:34px;" class="dojoDndItem" id="listColumnSelectorId'.htmlEncode($col->id).'" dndType="planningColumn">';
+  		echo '<div style="width:100%;height:34px;cursor:default" class="dojoDndItem" id="listColumnSelectorId'.htmlEncode($col->id).'" dndType="planningColumn">';
   		if ($col->attribute=='id') {
   		  echo '<span style="float:left"><img style="width:10px;position:relative;top:10px" src="css/images/iconNoDrag.gif" />&nbsp;&nbsp;</span>';
   		} else {
   		  echo '<span class="dojoDndHandle handleCursor" style="float:left;"><img style="width:10px;position:relative;top:8px;left:5px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
   		}
-  		echo '<div  id="checkListColumnSelectorId'.$cpt.'Sw" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="'.((! $col->hidden)?'on':'off').'" leftLabel="" rightLabel="" ';
-  		echo ' style="position:relative; float:left; left:5px;top:11px;z-index:99;"';
-  		echo  (( $col->field=='id' or $col->field=='name' or $col->field=='objectId' or $col->field=='objectClass')?' disabled="disabled" ':'');
+  		$disabledClass=($col->field=='id' or $col->field=='name' or $col->field=='objectId' or $col->field=='objectClass')?'mblSwitchDisabled':'';
+  		echo '<div  id="checkListColumnSelectorId'.$cpt.'Sw" class="colorSwitch '.$disabledClass.'" data-dojo-type="dojox/mobile/Switch" value="'.((! $col->hidden)?'on':'off').'" leftLabel="" rightLabel="" ';
+  		echo ' style="position:relative; float:left; left:5px;top:11px;z-index:99;" ';
   		echo '>';
   		echo '<script type="dojo/method" event="onStateChanged" >';
   		echo '  dijit.byId("checkListColumnSelectorId'.$cpt.'").set("checked",(this.value=="on")?true:false);';

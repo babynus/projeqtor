@@ -4147,3 +4147,6 @@ div.ticketKanbanCustom .kanbanVersion{
 .docLineImage {
   text-align:center;
 }
+.mobile body {
+	font-size:10pt;
+}

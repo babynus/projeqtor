@@ -297,6 +297,7 @@ class Security
         $menuName='menu'.$refType;
         if ($menuName=='menuCalendarDefinition') $menuName='menuCalendar';
         if ($menuName=='menuBudgetItem') $menuName='menuBudget';
+        if ($menuName=='menuBusinessFeature') $menuName='menuProduct';
         if ($menuName=='menuWork') $menuName='menuImputation';
         if (SqlElement::is_subclass_of($refType, 'PlgCustomList')) $menuName='menuScreenCustomization';
         if (isLeavesSystemMenuByMenuName("menu".$refType)) {
