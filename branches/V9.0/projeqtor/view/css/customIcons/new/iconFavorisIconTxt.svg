@@ -28,19 +28,19 @@
 <g>
 	
 		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		119.086,58.393 96.758,32.92 72.388,60.723 	"/>
+		117.396,65.072 95.068,39.6 70.698,67.402 	"/>
 	
 		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		78.498,53.75 44.005,14.398 11.861,51.066 	"/>
+		76.809,60.43 42.315,21.078 10.172,57.746 	"/>
 	
-		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="110.721" cy="14.072" r="7.012"/>
+		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="109.031" cy="20.752" r="7.012"/>
 </g>
 <g id="Calque_4">
 	<g enable-background="new    ">
-		<path fill="#FF0000" d="M45.29,81.542H32.805v28.538h-10.31V81.542H10.009v-6.844H45.29V81.542z"/>
-		<path fill="#FF0000" d="M86.366,110.08H74.431L65.83,98.467l-8.776,11.613H45.661l14.177-17.824L45.957,74.698h11.901
-			l8.316,11.017l8.553-11.017h11.425L72.199,91.884L86.366,110.08z"/>
-		<path fill="#FF0000" d="M122.018,81.542h-12.485v28.538H99.222V81.542H86.736v-6.844h35.281V81.542z"/>
+		<path fill="#FF0000" d="M43.601,88.222H31.115v28.538h-10.31V88.222H8.32v-6.844h35.281V88.222z"/>
+		<path fill="#FF0000" d="M84.677,116.76H72.741l-8.601-11.613l-8.776,11.613H43.972l14.177-17.824L44.267,81.378h11.901
+			l8.316,11.017l8.553-11.017h11.425L70.51,98.563L84.677,116.76z"/>
+		<path fill="#FF0000" d="M120.328,88.222h-12.485v28.538H97.532V88.222H85.047v-6.844h35.281V88.222z"/>
 	</g>
 </g>
 <g id="Calque_2_1_" display="none">
