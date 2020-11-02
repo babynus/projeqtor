@@ -952,9 +952,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
             <?php $menuBarTopMode = Parameter::getUserParameter('menuBarTopMode');?>
               <table style="width:100%;height:100%;">
         	          <tr>
-                       <td class="<?php if($menuBarTopMode=='ICON'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding: 0px 2px 0px 2px;" onclick="saveUserParameter('menuBarTopMode', 'ICON');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
-                       <td class="<?php if($menuBarTopMode=='ICONTXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding-right: 2px;" onclick="saveUserParameter('menuBarTopMode', 'ICONTXT');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
-                       <td class="<?php if($menuBarTopMode=='TXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding: 0px 2px 0px 0px;" onclick="saveUserParameter('menuBarTopMode', 'TXT');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+                       <td class="<?php if($menuBarTopMode=='ICON'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding: 0px 2px 0px 2px;" onclick="saveUserParameter('menuBarTopMode', 'ICON');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('FavorisIcon', 22, true);?></td>
+                       <td class="<?php if($menuBarTopMode=='ICONTXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding-right: 2px;" onclick="saveUserParameter('menuBarTopMode', 'ICONTXT');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('FavorisIconTxt', 22, true);?></td>
+                       <td class="<?php if($menuBarTopMode=='TXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding: 0px 2px 0px 0px;" onclick="saveUserParameter('menuBarTopMode', 'TXT');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('FavorisTxt', 22, true);?></td>
                      </tr>
       	      </table>
             </div>
