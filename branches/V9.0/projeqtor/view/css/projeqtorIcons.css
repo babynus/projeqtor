@@ -303,7 +303,7 @@
 .ProjeQtOrFlatRed .iconAffectation { background-image: url(customIcons/red/iconAffectation.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconAffectation { background-image: url(customIcons/new/iconAffectation.svg);  background-repeat: no-repeat; }
 
-.iconAlert { background-image: url(images/iconAlert32.png);  background-repeat: no-repeat;  }
+.iconAlert32 { background-image: url(images/iconAlert32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconAlert { background-image: url(customIcons/blue/iconAlert.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconAlert { background-image: url(customIcons/green/iconAlert.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconAlert { background-image: url(customIcons/grey/iconAlert.png);  background-repeat: no-repeat; }
@@ -369,12 +369,19 @@
 
 
 
-.iconBill { background-image: url(images/iconClientBill32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconBill { background-image: url(customIcons/blue/iconClientBill.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconBill { background-image: url(customIcons/green/iconClientBill.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconBill { background-image: url(customIcons/grey/iconClientBill.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconBill { background-image: url(customIcons/red/iconClientBill.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconBill { background-image: url(customIcons/new/iconClientBill.svg);  background-repeat: no-repeat; }
+.iconBill16 { background-image: url(images/iconClientBill32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconBill16 { background-image: url(customIcons/blue/iconClientBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconBill16 { background-image: url(customIcons/green/iconClientBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconBill16 { background-image: url(customIcons/grey/iconClientBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconBill16 { background-image: url(customIcons/red/iconClientBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconBill16 { background-image: url(customIcons/new/iconClientBill.svg);  background-repeat: no-repeat; }
+
+.iconBill32 { background-image: url(images/iconClientBill32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconBill32 { background-image: url(customIcons/blue/iconClientBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconBill32 { background-image: url(customIcons/green/iconClientBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconBill32 { background-image: url(customIcons/grey/iconClientBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconBill32 { background-image: url(customIcons/red/iconClientBill.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconBill32 { background-image: url(customIcons/new/iconClientBill.svg);  background-repeat: no-repeat; }
 
 .iconBillType { background-image: url(images/iconBillType32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconBillType { background-image: url(customIcons/blue/iconBillType.png);  background-repeat: no-repeat; }
@@ -2253,7 +2260,7 @@
 .ProjeQtOrFlatRed .iconSteering { background-image: url(customIcons/red/iconReview.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconSteering { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat; }
 
-.iconSum { background-image: url(images/iconSum.png);  background-repeat: no-repeat; }
+.iconSum32 { background-image: url(images/iconSum.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconSum { background-image: url(customIcons/blue/iconSum.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconSum { background-image: url(customIcons/green/iconSum.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGrey .iconSum { background-image: url(customIcons/grey/iconSum.png);  background-repeat: no-repeat;}
