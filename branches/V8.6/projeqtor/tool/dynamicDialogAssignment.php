@@ -242,7 +242,7 @@ if ($planningMode=='RECW') {
                <td>
                  <?php if ($mode=='edit' and get_class($resource)!="Affectable" and $assignmentObj->capacity==0 and !$resource->isResourceTeam) round($assignmentObj->capacity=$resource->capacity*$assignmentObj->rate/100,1);
                        if ($assignmentObj->uniqueResource ) round($assignmentObj->capacity=1*$assignmentObj->rate/100,1);?>
-                 <div id="assignmentCapacity" name="assignmentCapacity" value="<?php echo ($mode=='edit')?$assignmentObj->capacity:"1";?>"
+                 <div id="assignmentCapacity" name="assignmentCapacity" value="<?php echo ($mode=='edit' && $assignmentObj->capacity)?$assignmentObj->capacity:"1";?>"
                    dojoType="dijit.form.NumberTextBox" 
                    style="width:97px" 
                    <?php if ($planningMode=='RECW') echo ' readonly';?>
