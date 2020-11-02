@@ -464,21 +464,32 @@ function showIconLeftMenu(){
   leftMenu.menus = [].slice.call(leftMenu.querySelectorAll('.menu__level'));
   leftMenu.menus.forEach(function(menuEl, pos) {
     var items = menuEl.querySelectorAll('.menu__item');
-    items.forEach(function(itemEl, iPos) {
+    items.forEach(function(itemEl) {
       var iconDiv = itemEl.querySelector('.iconSize16');
       iconDiv.style.display=display;
       
-      var iconDiv = itemEl.querySelector('.divPosName');
-      iconDiv.style=style;
+      var posDiv = itemEl.querySelector('.divPosName');
+      posDiv.style=style;
     });
   });
-  dojo.setAttr('displayModeLeftMenu','value',(display=='block')?'ICONTXT':'TXT');
+  if(dojo.byId('selectedViewMenu').value=='Parameter'){
+    if(dojo.byId('parameterMenu')){
+      var menuParam=dojo.byId('parameterMenu').querySelectorAll('.menu__item');
+      menuParam.forEach(function(e){
+       var icon=e.querySelector('.iconSize16');
+       icon.style.display=display;
+      });
+    }
+
+  }
+  mode=(display=='block')?'ICONTXT':'TXT';
+  dojo.setAttr('displayModeLeftMenu','value',mode);
   saveUserParameter('menuLeftDisplayMode',mode);
 }
 
 function showBottomContent (menu){
+  if(menu==dojo.byId('selectedViewMenu').value)return;
   saveDataToSession('bottomMenuDivItemElect',menu,true);
-  
   if(menu!='Console'){
     dojo.byId('messageDivNewGui').style.display='none';
     dojo.byId('loadDivBarBottom').style.display='block';
@@ -491,11 +502,11 @@ function showBottomContent (menu){
   });
   switch(menu){
     case 'Parameter':
-      dojo.byId('parameterDiv').style.display='block';
-      var screen = dojo.byId('objectClassManual');
-      var objectClass= (dojo.byId('objectClass'))?dojo.byId('objectClass').value:false;
-      var isObject=(objectClass)?'true':'false';
-      loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+((objectClass)?objectClass:screen)+'&isObject='+isObject,"parameterDiv");
+        dojo.byId('parameterDiv').style.display='block';
+        var screen = dojo.byId('objectClassManual');
+        var objectClass= (dojo.byId('objectClass'))?dojo.byId('objectClass').value:false;
+        var isObject=(objectClass)?'true':'false';
+        loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+((objectClass)?objectClass:screen)+'&isObject='+isObject,"parameterDiv");
       break;
     case 'Link':
       dojo.byId('projectLinkDiv').style.display='block';
@@ -513,6 +524,7 @@ function showBottomContent (menu){
       dojo.byId('messageDivNewGui').style.display='block';
       break;
   }
+  dojo.setAttr('selectedViewMenu','value',menu);
 }
 
 function loadMenuReportDirect(cate,idReport){

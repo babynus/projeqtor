@@ -481,12 +481,10 @@ animation: fadeIn ease 0.5s;
 .messageDivNewGui{
     border-radius: 12px 4px;
     padding: 3px 5px 3px 5px;
-    border: 4px solid;
-    border-color: var(--color-dark);
     background-color: white;
     font-size: 10px;
     opacity: 1;
-    margin: 3px 4px 4px 4px;
+    margin: 6px 4px 4px 4px;
 }
 
 .newHeaderLink{
@@ -828,4 +826,18 @@ animation: fadeIn ease 0.5s;
   width: 14px !important;
   border-radius: 9px !important;
   border : solid 1 px grey;
+}
+
+.ProjeQtOrNewGui .paramMenuBottom{
+	width: 100%;
+    margin: 0;
+    padding: 0px;
+    height: 100%;
+}
+
+.ProjeQtOrNewGui .noMenuToDisplay{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    color: white;
 }

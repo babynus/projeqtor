@@ -54,7 +54,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
   <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  >
     <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;overflow-x: hidden;" oncontextmenu="event.preventDefault();showIconLeftMenu('Icon')" >
       <nav id="ml-menu" class="menu">
-      <input id="displayModeLeftMenu" value="<?php echo $displayMode;?>" style="visibility:hidden"; >
+      <input id="displayModeLeftMenu" value="<?php echo $displayMode;?>" hidden >
             <?php // draw Menus
              echo drawLeftMenuListNewGui($displayMode);
             ?>
@@ -73,10 +73,8 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
     <?php $viewSelect=Parameter::getUserParameter('bottomMenuDivItemElect');?>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;">
       <div class="container" style="height:98%;width:100%;">
+      <input id="selectedViewMenu" value="<?php echo $viewSelect;?>" hidden >
          <div id="loadDivBarBottom" style="height:100%;display:<?php echo ($viewSelect=='Console')?'none':'block';?>;">
-           <?php
-           $viewSelect='Notification';
-           ?>
            <div id="parameterDiv" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Parameter')?'block':'none';?>;">
               
            </div>
@@ -251,10 +249,11 @@ function getReportMenu(){
   foreach ($listCateg as $id=>$name) {
     if (isset($allowedCategory[$id])) {
       $c++;
+      $cat=new ReportCategory($id);
       $lstIdCate[]=$id;
       $idReport=$idMenuReport->id.$level.$id;
       $key=$level.'-'.numericFixLengthFormatter($idMenuReport->id,5).'-'.numericFixLengthFormatter($c,5);
-      $obj= array('id'=>$idReport,'name'=>$name,'idParent'=>$idMenuReport->id);
+      $obj= array('id'=>$idReport,'name'=>$cat->name,'idParent'=>$idMenuReport->id);
       $res[$key]=array('level'=>$level,'objectType'=>'report','object'=>$obj);
     }
   }
@@ -367,7 +366,7 @@ function drawLeftMenuListNewGui($displayMode){
         
         $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
+        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst($menuNameI18n).'</div></a>';
         $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }else{
       $classEl="Reports";
@@ -393,9 +392,9 @@ function drawLeftMenuListNewGui($displayMode){
   }else{
       $sub='submenu-'.$obj->id;
       $result.='<li class="menu__item" role="menuitem">';
-      $result.='<a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.$obj->name.'">';
-      $result.='<div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$obj->name).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst((($menu['objectType']=='menu')?i18n(substr($obj->name,3)):$obj->name)).'</div></a>';
+      $result.='<a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.(($menu['objectType']=='menu')?$obj->name:substr($obj->name,14)).'">';
+      $result.='<div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):substr($obj->name,14)).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
+      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(($menu['objectType']=='menu')?i18n('menu'.substr($obj->name,3)):i18n($obj->name)).'</div></a>';
       $result.='<div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
     }
     $old=$menu['level'];

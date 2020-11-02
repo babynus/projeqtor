@@ -31,20 +31,28 @@ require_once "../tool/projeqtor.php";
 
 $screen=(RequestHandler::isCodeSet('currentScreen'))?RequestHandler::getValue('currentScreen'):'';
 $isObject=(RequestHandler::isCodeSet('isObject'))?RequestHandler::getValue('isObject'):'false';
+$isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
+$displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
+$displayIcon=($displayMode=='TXT')?"display:none;":"display:block;";
 $result='';
+$allMenu=array();
 
 if($isObject=='true' and $screen!=''){
   $obj=new $screen();
+  $menu= new Menu();
   $lstParam=array();
   foreach ( $obj as $key=>$val){
-    if(substr($key, 0,2)=='id' and $key!='idle' and $key!='idleDateTime' and $key!='id' and $key!='id'.$screen){
+    if(substr($key, 0,2)=='id' and $key!='idle' and $key!='idleDateTime' and $key!='id' and $key!='id'.$screen and $key!='idStatus'){
       if(strpos($key,'idContext')!==false){
-        $lstParam[]='Context';
+        $lstParam[]="'menuContext'";
       }else{
-        $lstParam[]=substr($key,2);
+        $lstParam[]="'menu".substr($key,2)."'";
       }
     }
   }
+  $lstString=implode(',', $lstParam);
+  $clause="name in ($lstString)";
+  $allMenu=$menu->getSqlElementsFromCriteria(null,null,$clause);
   
 }else{
   switch ($screen){
@@ -138,11 +146,35 @@ if($isObject=='true' and $screen!=''){
       break;
   }
 }
-
-$result.='<div style="margin-top:10px;color:white;margin-left:10px;">'.$screen.'</div>';
-
-
-
+if(empty($allMenu)){
+  $result.='<div class="noMenuToDisplay">'.i18n("explainParameterMenu").'</div>';
+}else{
+  $result.='<ul id="parameterMenu" class="paramMenuBottom">';
+  foreach ($allMenu as $menu){
+          $unset=false;
+          if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) $unset=true; 
+          if (! $menu->canDisplay() )  $unset=true;
+          if (!$isLanguageActive and $menu->name=="menuLanguage")  $unset=true;
+          if (!Module::isMenuActive($menu->name))  $unset=true;
+          if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) $unset=true;
+          if($unset==true)continue;
+          
+          $menuName=$menu->name;
+          $menuNameI18n = i18n($menu->name);
+          $menuName2 = addslashes(i18n($menuName));
+          $classEl=substr($menuName,4);
+          if($menu->type=='item'){
+            $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');";
+          }else{
+            $funcOnClick="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');";
+          }
+          $result.='<li class="menu__item" role="menuitem" >';
+          $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$menu->name.'Param" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
+          $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst($menuNameI18n).'</div></a>';
+          $result.='</li>';
+  }
+  $result.='</ul>';
+}
 
 
 echo $result;
