@@ -7533,25 +7533,25 @@ function showActionSelect(selectClass, selectId, selectField, canCreate, canUpda
     if (canUpdate && width<maxWidth) {
       width+=25;
       buttons+='<div title="'+i18n('comboSearchButton')+'" style="float:right;margin-right:3px;" class="roundedButton roundedIconButton generalColClass '+selectField+'Class">';
-      buttons+='  <div class="iconToolbarSearch" onclick="actionSelectSearch(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='  <div class="imageColorNewGui iconToolbarSearch" onclick="actionSelectSearch(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
       buttons+='</div>';
     }
     if (canCreate && width<maxWidth) {
       width+=25;
       buttons+='<div title="'+i18n('buttonNew',new Array(i18n(selectClass)))+'" style="float:right;margin-right:3px;" class="roundedButton roundedIconButton generalColClass '+selectField+'Class">';
-      buttons+='  <div class="iconToolbarAdd" onclick="actionSelectAdd(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='  <div class="imageColorNewGui iconToolbarAdd" onclick="actionSelectAdd(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
       buttons+='</div>';
     }
     if (selectId && width<maxWidth) {
       width+=25;
       buttons+='<div title="'+i18n('showItem')+'" style="float:right;margin-right:3px;" class="roundedButton roundedIconButton generalColClass '+selectField+'Class">';
-      buttons+='  <div class="iconToolbarView" onclick="actionSelectView(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='  <div class="imageColorNewGui iconToolbarView" onclick="actionSelectView(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
       buttons+='</div>';
     }
     if (selectId && width<maxWidth) {
       width+=25;
       buttons+='<div title="'+i18n('showDirectAccess')+'" style="float:right;margin-right:3px;" class="roundedButton roundedIconButton generalColClass '+selectField+'Class">';
-      buttons+='  <div class="iconToolbarGoto" onclick="actionSelectGoto(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
+      buttons+='  <div class="imageColorNewGui iconToolbarGoto" onclick="actionSelectGoto(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
       buttons+='</div>';
     }
     dojo.byId(toolId).style.width=width+"px";
