@@ -38,6 +38,7 @@ $paramMailerType=strtolower(Parameter::getGlobalParameter('paramMailerType'));
 $lstAttach= array();
 $lstDoc= array();
 $obj=new $objectClass($objectId);
+$obj->setAttributes();
 $emTp = new EmailTemplate();
 $idObjectType = 'id'.$objectClass.'Type';
 $idMailable = SqlList::getIdFromTranslatableName('Mailable', $objectClass);
