@@ -36,8 +36,12 @@
 		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="110.721" cy="14.072" r="7.012"/>
 </g>
 <g id="Calque_4">
-	
-		<text transform="matrix(1.13 0 0 1 8.9082 110.0801)" fill="#FF0000" font-family="'Verdana-Bold'" font-size="48.6644" letter-spacing="-0.885">TXT</text>
+	<g enable-background="new    ">
+		<path fill="#FF0000" d="M45.29,81.542H32.805v28.538h-10.31V81.542H10.009v-6.844H45.29V81.542z"/>
+		<path fill="#FF0000" d="M86.366,110.08H74.431L65.83,98.467l-8.776,11.613H45.661l14.177-17.824L45.957,74.698h11.901
+			l8.316,11.017l8.553-11.017h11.425L72.199,91.884L86.366,110.08z"/>
+		<path fill="#FF0000" d="M122.018,81.542h-12.485v28.538H99.222V81.542H86.736v-6.844h35.281V81.542z"/>
+	</g>
 </g>
 <g id="Calque_2_1_" display="none">
 	<g display="inline">
