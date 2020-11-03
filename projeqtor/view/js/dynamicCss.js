@@ -162,6 +162,7 @@ function setColorTheming(ref,bis) {
   
   // Tools (buttons, ...)
   element.style.setProperty("--color-button-background", lighter);
+  element.style.setProperty("--color-button-text", dark);
   element.style.setProperty("--image-hue-rotate", hueRotate+'deg');
   element.style.setProperty("--image-hue-rotate-reverse", (-1*hueRotate)+'deg');
   element.style.setProperty("--image-saturate", saturate+'%');
