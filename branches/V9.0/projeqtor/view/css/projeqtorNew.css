@@ -831,6 +831,21 @@ animation: fadeIn ease 0.5s;
   border-radius: 9px !important;
   border : solid 1 px grey;
 }
+
+.ProjeQtOrNewGui .paramMenuBottom{
+	width: 100%;
+    margin: 0;
+    padding: 0px;
+    height: 100%;
+}
+
+.ProjeQtOrNewGui .noMenuToDisplay{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    color: white;
+}
+
 .mblSwitchDisabled .mblSwitchKnob {
 	display:none;
 }
