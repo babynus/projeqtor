@@ -144,9 +144,9 @@ class Menu extends SqlElement {
       	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
 			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
           if (!in_array($menu->name,$customMenuArray)){
-          	echo 'onClick="customMenuAddItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
+          	echo 'onClick="addRemoveFavMenuLeft(\'div'.$menu->name.'\', \''.$menu->name.'\',\'add\',\'menu\');"><div class="menuBar_add_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
           }else{
-          	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
+          	echo 'onClick="addRemoveFavMenuLeft(\'div'.$menu->name.'\', \''.$menu->name.'\',\'remove\',\'menu\');"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
           }
           echo '</div></div>';
         }
@@ -174,9 +174,9 @@ class Menu extends SqlElement {
         	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
   			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
             if (!in_array($menu->name,$customMenuArray)){
-            	echo 'onClick="customMenuAddItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
+            	echo 'onClick="addRemoveFavMenuLeft(\'div'.$menu->name.'\', \''.$menu->name.'\',\'add\',\'plugin\');"><div class="menuBar_add_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
             }else{
-            	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
+            	echo 'onClick="addRemoveFavMenuLeft(\'div'.$menu->name.'\', \''.$menu->name.'\',\'remove\',\'plugin\');"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
             }
             echo '</div></div>';
           echo '</div>';
@@ -210,9 +210,10 @@ class Menu extends SqlElement {
         	onMouseEnter="clearTimeout(closeFavoriteTimeout);"
   			onMouseLeave="hideFavoriteTooltip(200,\''.$class.'\')"';
             if (!in_array($menu->name,$customMenuArray)){
-            	echo 'onClick="customMenuAddItem();"><div class="menuBar_add_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
+              
+            	echo 'onClick="addRemoveFavMenuLeft(\'div'.$menu->name.'\', \''.$menu->name.'\',\'add\',\'menu\');"><div class="menuBar_add_Fav" style="white-space:nowrap;">'.i18n('customMenuAdd').'</div>';
             }else{
-            	echo 'onClick="customMenuRemoveItem();"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
+            	echo 'onClick="addRemoveFavMenuLeft(\'div'.$menu->name.'\', \''.$menu->name.'\',\'remove\',\'menu\');"><div class="menuBar_remove_Fav" style="white-space:nowrap;">'. i18n('customMenuRemove').'</div>';
             }
               echo '</div></div>';
           	}

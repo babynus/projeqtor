@@ -191,11 +191,18 @@
             self._openSubMenu(subMenuEl, pos, itemName);
           }else {
             // add class current
-            var currentlink = self.el.querySelector('.menu__link--current');
-            if( currentlink ) {
-              classie.remove(currentlink , 'menu__link--current');
+            var currentlinks = self.el.querySelectorAll('.menu__link--current');
+            if( currentlinks ) {
+              currentlinks.forEach(function(el){
+                classie.remove(el , 'menu__link--current');
+              });
             }
-              classie.add(item.firstChild, 'menu__link--current');
+            var idcurentElement='#'+item.firstChild.getAttribute('id');
+            var newCurrent=dojo.byId('ml-menu').querySelectorAll(idcurentElement);
+            newCurrent.forEach(function(e){
+              classie.add(e, 'menu__link--current');
+            });
+            
             // callback
             self.options.onItemClick(ev, itemName);
           }
