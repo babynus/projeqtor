@@ -34,8 +34,6 @@ scriptLog('   ->/view/refreshMenuBarList.php');
 
 $historyTable = RequestHandler::getValue('historyTable');
 $defaultMenu = RequestHandler::getValue('menuFilter');
-$nbSkipMenu = RequestHandler::getValue('nbSkipMenu');
-if(!$nbSkipMenu)$nbSkipMenu=0;
 $idRow = Parameter::getUserParameter('idFavoriteRow');
 $nbFavoriteRow=5;
 ?>
@@ -51,7 +49,7 @@ $nbFavoriteRow=5;
     </td>
     <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="width:100%;height:100%;" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
      <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
-     <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idRow);?>
+     <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $idRow);?>
    </td>
   </tr>
 </table>

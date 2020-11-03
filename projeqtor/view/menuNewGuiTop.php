@@ -119,7 +119,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
                           <?php if($defaultMenu=='menuBarCustom')echo $idRow;?>
         	             </td>
         	             <td style="width:97.5%;height:100%;" dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
-        	               <?php Menu::drawAllNewGuiMenus($defaultMenu, null, 0, $idRow);?>
+        	               <?php Menu::drawAllNewGuiMenus($defaultMenu, null, $idRow);?>
         	               <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
         	             </td>
         	           </tr>

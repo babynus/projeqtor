@@ -231,23 +231,6 @@ function menuNewGuiFilter(filter, item) {
 		historyBar.push('menu'+element[0]);
 //		if(!historyBarSort.includes('menu'+element[0]))historyBarSort.push('menu'+element[0]);
 	});
-//	var countList = historyBarSort.length*140;
-//	var containerDivWidth = dojo.byId('menubarContainer').offsetWidth;
-//	var listDivWidth = dojo.byId('menuBarListDiv').offsetWidth;
-//	if(countList > listDivWidth)listDivWidth=countList;
-//	var buttonDivWidth = dojo.byId('menuBarButtonDiv').offsetWidth;
-//	var maxDivWidth = containerDivWidth-buttonDivWidth-140;
-	var nbSkipMenu = 0;
-//	var idRow = dojo.byId('idFavoriteRow').value;
-	
-//	if(filter == 'menuBarRecent'){
-//		while(listDivWidth > maxDivWidth){
-//			historyBarSort.splice(0, 1);
-//			listDivWidth -= 140;
-//			nbSkipMenu++;
-//		}
-//	}
-	
 	var callback = function(){
 		if(item)selectIconMenuBar(item);
 		if(filter != 'menuBarCustom'){
@@ -267,7 +250,7 @@ function menuNewGuiFilter(filter, item) {
 		if(filter == 'menuBarRecent')editFavoriteRow(true);
 	};
 	cleanContent("menuBarListDiv");
-	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, null, null, null, null, callback, true);
+	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, null, null, null, null, callback, true);
 	cleanContent("anotherBarContainer");
 	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter, 'anotherBarContainer', null, null, null, null, null, hide, true);
 	saveUserParameter('defaultMenu', filter);
@@ -291,7 +274,11 @@ function switchFavoriteRow(idRow, direction, maxRow){
 		saveUserParameter('idFavoriteRow', nextRow);
 		menuNewGuiFilter('menuBarCustom', null);
 	};
-	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow+'&defaultMenu='+defaultMenu, 'favoriteSwitch', null, callback);
+	if(nextRow != idRow){
+		loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow+'&defaultMenu='+defaultMenu, 'favoriteSwitch', null, callback);
+	}else{
+		return;
+	}
 }
 
 function wheelFavoriteRow(idRow, evt, maxRow){
@@ -312,7 +299,11 @@ function wheelFavoriteRow(idRow, evt, maxRow){
 		saveUserParameter('idFavoriteRow', nextRow);
 		menuNewGuiFilter('menuBarCustom', null);
 	};
-	loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow+'&defaultMenu='+defaultMenu, 'favoriteSwitch', null, callback);
+	if(nextRow != idRow){
+		loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow+'&defaultMenu='+defaultMenu, 'favoriteSwitch', null, callback);
+	}else{
+		return;
+	}
 }
 
 function addRemoveFavMenuLeft (id,name,mode,type){

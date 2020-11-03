@@ -79,7 +79,7 @@ for($i=$startRow; $i<=($idRow+4); $i++){
          </td>
           <td class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97.5%;"
           dndType="menuBar"  dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar'], horizontal: true">
-          <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, 0, $idAnotherRow);?>
+          <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, $idAnotherRow);?>
           </td>
          </tr>
     </table>

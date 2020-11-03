@@ -222,13 +222,12 @@ class Menu extends SqlElement {
         }
       }  
       
-      public static function drawAllNewGuiMenus($defaultMenu, $historyTable, $nbSkipMenu, $idFavoriteRow) {
+      public static function drawAllNewGuiMenus($defaultMenu, $historyTable, $idFavoriteRow) {
         $isNotificationSystemActiv = isNotificationSystemActiv();
         $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
         $customMenu = new MenuCustom();
         $obj=new Menu();
         $where=null;
-        if(!$nbSkipMenu)$nbSkipMenu = 0;
         if($defaultMenu == 'menuBarCustom'){
           $customMenuArray=$customMenu->getSqlElementsFromCriteria(array('idUser'=>getSessionUser()->id, 'idRow'=>$idFavoriteRow), false, null, 'sortOrder');
           // $where = "idUser=".getSessionUser()->id." and idRow != ".$idFavoriteRow;
@@ -270,11 +269,6 @@ class Menu extends SqlElement {
             }
           }
           $menuList=$sortHistoryTable;
-          if($nbSkipMenu > 0){
-            $menuList=array_reverse($sortHistoryTable);
-            $menuList = array_slice($menuList, $nbSkipMenu);
-            $menuList=array_reverse($menuList);
-          }
         }else{
           $menuList = array();
         }
