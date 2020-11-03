@@ -7534,12 +7534,12 @@ function loadMenuBarObject(menuClass, itemName, from) {
   var objectExist='true';
   var currentScreen=menuClass; 
   loadContent("objectMain.php?objectClass=" + currentScreen, "centerDiv"); 
-  if(isNewGui && dojo.byId('selectedViewMenu').value=='Parameter')loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+menuClass+'&isObject=true',"parameterDiv");
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
   stockHistory(currentScreen,null,"object");
   if(defaultMenu == 'menuBarRecent'){
 	  menuNewGuiFilter(defaultMenu, menuClass);
   }
+  if(isNewGui)refreshSelectedMenuLeft(menuClass);
   selectIconMenuBar(menuClass);
   editFavoriteRow(true);
   return true;
@@ -7683,12 +7683,12 @@ function loadMenuBarItem(item, itemName, from) {
   }else {  
     showInfo(i18n("messageSelectedNotAvailable", new Array(itemName)));
   }
-  if(isNewGui && dojo.byId('selectedViewMenu').value=='Parameter')loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+item+'&isObject=false',"parameterDiv");
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
   stockHistory(item,null,currentScreen);
   if(defaultMenu == 'menuBarRecent'){
 	  menuNewGuiFilter(defaultMenu, item);
   }
+  if(isNewGui)refreshSelectedMenuLeft(item);
   selectIconMenuBar(item);
   editFavoriteRow(true);
   return true;

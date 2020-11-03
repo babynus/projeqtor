@@ -852,8 +852,12 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <div id="toolBarDiv" style="height:30px" dojoType="dijit.layout.ContentPane" region="top"  >
       <?php include "menuBar.php";?>
     </div>
-    <?php if(isNewGui()){ ?><div id="menuTop" class="menuTop"><div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false"><div id="right-pane" class="right-pane"><?php }?>      
-    <?php if (!isNewGui()) {?>
+    <?php if(isNewGui()){ ?>
+    <div id="menuTop" class="menuTop">
+      <div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
+      <input id="selectedScreen" value="" hidden >
+      <div id="right-pane" class="right-pane">
+    <?php } if (!isNewGui()) {?>
      <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
       <table width="100%"><tr>
       
