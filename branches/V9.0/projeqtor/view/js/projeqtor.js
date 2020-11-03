@@ -680,7 +680,7 @@ function changeTheme(newTheme) {
     }
     // Mehdi #2887
     var callBack = function() { 
-      addMessage("Theme=" + newTheme); 
+     if(!isNewGui) addMessage("Theme=" + newTheme); 
       resizeContainer("mainDivContainer", null);
     };
     saveDataToSession('theme',newTheme, true, callBack);

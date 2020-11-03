@@ -51,8 +51,8 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
       </div>
     </div>
   </div>
-  <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  >
-    <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;overflow-x: hidden;" oncontextmenu="event.preventDefault();showIconLeftMenu('Icon')" >
+  <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  oncontextmenu="event.preventDefault();showIconLeftMenu('Icon');">
+    <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;overflow-x: hidden;" >
       <nav id="ml-menu" class="menu">
       <input id="displayModeLeftMenu" value="<?php echo $displayMode;?>" hidden >
             <?php // draw Menus
@@ -70,13 +70,13 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 	   new menuLeft( dojo.byId( 'mainDiv' ) );
 	  </script>
     </div>
-    <?php $viewSelect=Parameter::getUserParameter('bottomMenuDivItemElect');?>
+    <?php $viewSelect=Parameter::getUserParameter('bottomMenuDivItemSelect');?>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;">
       <div class="container" style="height:98%;width:100%;">
       <input id="selectedViewMenu" value="<?php echo $viewSelect;?>" hidden >
-         <div id="loadDivBarBottom" style="height:100%;display:<?php echo ($viewSelect=='Console')?'none':'block';?>;">
+         <div id="loadDivBarBottom" style="height:100%;padding-top:10px;display:<?php echo ($viewSelect=='Console')?'none':'block';?>;">
            <div id="parameterDiv" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Parameter')?'block':'none';?>;">
-              
+              <?php include '../tool/drawBottomParameterMenu.php';?>
            </div>
            <div id="projectLinkDiv" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Link')?'block':'none';?>;">
               <?php include "../view/shortcut.php";?>
@@ -330,6 +330,7 @@ function drawLeftMenuListNewGui($displayMode){
       }
     }else{
       $obj=$menu['object'];
+      debugLog($obj);
     }
     if($old!=$menu['level'] and $menu['level']==1 and $maineDraw!=true){
       $maineDraw=true;
@@ -342,6 +343,8 @@ function drawLeftMenuListNewGui($displayMode){
     }
     if($obj->idParent!=0 and $obj->idMenu!=0){
       if( $menu['objectType']!='reportDirect'){
+        debugLog($obj->name);
+        debugLog($obj->idMenu);
         $realMenu=new Menu($obj->idMenu);
         $menuName=$realMenu->name;
         $menuNameI18n = i18n($menuName);
@@ -349,9 +352,9 @@ function drawLeftMenuListNewGui($displayMode){
         $classEl=substr($menuName,4);
         $isFav=SqlElement::getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$obj->name));
         if($realMenu->type=='item'){
-          $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');";
+          $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');showMenuBottomParam('".$classEl."','false')";
         }else{
-           $funcOnClick="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');";
+           $funcOnClick="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');showMenuBottomParam('".$classEl."','true')";
         }
         if($isFav->id==''){
           $mode='add';
@@ -362,15 +365,15 @@ function drawLeftMenuListNewGui($displayMode){
           $class="menu__as__Fav";
         }
         $styleDiv="display:none;";
-        $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
+        $funcuntionFav="addRemoveFavMenuLeft('div".$obj->name."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
         
-        $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'\',\'leave\');">';
+        $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.$obj->name.'\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.$obj->name.'\',\'leave\');">';
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
         $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst($menuNameI18n).'</div></a>';
-        $result.='<div id="div'.$obj->id.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
+        $result.='<div id="div'.$obj->name.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }else{
       $classEl="Reports";
-      $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.")";
+      $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.");showMenuBottomParam('Report','true')";
       
       if($isFav->id==''){
         $mode='add';
@@ -380,19 +383,19 @@ function drawLeftMenuListNewGui($displayMode){
         $mode='remove';
         $class="menu__as__Fav";
       }
-      $funcuntionFav="addRemoveFavMenuLeft('div".$obj->id."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
+      $funcuntionFav="addRemoveFavMenuLeft('div".$obj->name."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
       $styleDiv="display:none;";
       $class="menu__add__Fav";
-      $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(\'div'.$obj->id.'report\',\'enter\');" onmouseleave="checkClassForDisplay(\'div'.$obj->id.'report\',\'leave\');">';
-      $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'"/>';
+      $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.$obj->name.'report\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.$obj->name.'report\',\'leave\');">';
+      $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'">';
       $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
       $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
-      $result.='<div id="div'.$obj->id.'report" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
+      $result.='<div id="div'.$obj->name.'report" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }
   }else{
       $sub='submenu-'.$obj->id;
       $result.='<li class="menu__item" role="menuitem">';
-      $result.='<a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.(($menu['objectType']=='menu')?$obj->name:substr($obj->name,14)).'">';
+      $result.='<a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.(($menu['objectType']=='menu')?$obj->name:"rep".substr($obj->name,14)).'">';
       $result.='<div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):substr($obj->name,14)).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
       $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(($menu['objectType']=='menu')?i18n('menu'.substr($obj->name,3)):i18n($obj->name)).'</div></a>';
       $result.='<div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';

@@ -48,7 +48,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (39,'menuImputation',3,8,1),
 (40,'menuAbsence',3,203,2),
 (41,'menuImputationValidation',3,204,4),
-(42,'menuConsultationPlannedWorkManual',3,9,5),
+(42,'menuConsultationPlannedWorkManual',3,253,5),
 (44,'menuDiary',3,133,6),
 (45,'menuLeaveCalendar',11,209,1),
 (46,'menuEmployeeLeaveEarned',11,211,2),

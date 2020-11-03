@@ -36,24 +36,36 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 $displayIcon=($displayMode=='TXT')?"display:none;":"display:block;";
 $result='';
 $allMenu=array();
+$allMenuSort=array();
 
 if($isObject=='true' and $screen!=''){
   $obj=new $screen();
   $menu= new Menu();
   $lstParam=array();
+  $sortMenu=array();
+  $lstId=array();
   foreach ( $obj as $key=>$val){
     if(substr($key, 0,2)=='id' and $key!='idle' and $key!='idleDateTime' and $key!='id' and $key!='id'.$screen and $key!='idStatus'){
       if(strpos($key,'idContext')!==false){
         $lstParam[]="'menuContext'";
+        $sortMenu[]="menuContext";
       }else{
         $lstParam[]="'menu".substr($key,2)."'";
+        $sortMenu[]="menu".substr($key,2);
       }
     }
   }
   $lstString=implode(',', $lstParam);
+  $sortMenu=array_flip($sortMenu);
   $clause="name in ($lstString)";
   $allMenu=$menu->getSqlElementsFromCriteria(null,null,$clause);
-  
+  foreach ($allMenu as $menu){
+    if(array_key_exists($menu->name,$sortMenu)){
+      $keySort=$sortMenu[$menu->name];
+      $allMenuSort[$keySort]=$menu;
+    }
+  }
+  ksort($allMenuSort);
 }else{
   switch ($screen){
   	case 'Today':
@@ -146,11 +158,11 @@ if($isObject=='true' and $screen!=''){
       break;
   }
 }
-if(empty($allMenu)){
+if(empty($allMenuSort)){
   $result.='<div class="noMenuToDisplay">'.i18n("explainParameterMenu").'</div>';
 }else{
   $result.='<ul id="parameterMenu" class="paramMenuBottom">';
-  foreach ($allMenu as $menu){
+  foreach ($allMenuSort as $menu){
           $unset=false;
           if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) $unset=true; 
           if (! $menu->canDisplay() )  $unset=true;
@@ -163,10 +175,11 @@ if(empty($allMenu)){
           $menuNameI18n = i18n($menu->name);
           $menuName2 = addslashes(i18n($menuName));
           $classEl=substr($menuName,4);
+          $funcOnClick="var currentlink = dojo.byId('parameterMenu').querySelector('.menu__link--current');if( currentlink ) {classie.remove(currentlink , 'menu__link--current');}classie.add(this, 'menu__link--current');";
           if($menu->type=='item'){
-            $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');";
+            $funcOnClick.="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');";
           }else{
-            $funcOnClick="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');";
+            $funcOnClick.="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');";
           }
           $result.='<li class="menu__item" role="menuitem" >';
           $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$menu->name.'Param" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';

@@ -48,7 +48,7 @@ if($arrayProj){
 }
 $lstProjVisible=getSessionUser()->getVisibleProjects(); 
 $lstProj=array_intersect_assoc($lstProjSelect,$lstProjVisible);
-echo '<table style="width: 100%;margin-top:'.((isNewGui())?"10px":"0px").';">';
+echo '<table style="width: 100%;">';
 $att=new Attachment();
 $countAllAttachement=$att->countSqlElementsFromCriteria(array('refType'=>'Project','type'=>'link'));
 if($countAllAttachement==0 and isNewGui()){

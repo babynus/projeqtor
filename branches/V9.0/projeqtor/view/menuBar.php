@@ -113,7 +113,7 @@
         //echo '<td  title="' .(($menuName=='menuReports')?'':i18n($menu->name)) . '" >';
     	  echo '<td  title="' .i18n($menu->name) . '" >';
         echo '<div class="'.$menuClass.'" style="position:relative;'.$style.'" id="iconMenuBar'.$class.'" ';
-        echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
+        echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');showMenuBottomParam(\'' . $class .  '\',\'false\')" ';
         echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
         if ($menuName=='menuReports' and isHtml5() ) {
           echo ' onMouseEnter="showReportFavoriteTooltip();"';
@@ -153,7 +153,7 @@
       	echo '<td title="' .i18n('menu'.$class) . '" >';
       	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
       	echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
-      	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" >';
+      	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');showMenuBottomParam(\'' . $class .  '\',\'true\')" >';
       	echo '<div class="'.(($iconClassWithSize)?'icon' . $class . $iconSize:'').' icon'.$class.' iconSize'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
       	//echo '<img src="../view/css/images/icon' . $class . $iconSize. '.png" />';
       	echo '<div class="menuBarItemCaption">'.i18n('menu'.$class).'</div>';

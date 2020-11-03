@@ -307,8 +307,11 @@ function wheelFavoriteRow(idRow, evt, maxRow){
 }
 
 function addRemoveFavMenuLeft (id,name,mode,type){
-  dojo.removeClass(id);
-  dojo.removeAttr(id,'onclick');
+  var items=dojo.byId('ml-menu').querySelectorAll('#'+id);
+  items.forEach(function(el){
+    el.removeAttribute('class');
+    el.removeAttribute('onclick');
+  });
   if(mode=='add'){
     if(type=="reportDirect"){
       //creat favorite report 
@@ -321,8 +324,12 @@ function addRemoveFavMenuLeft (id,name,mode,type){
         load : function(data, args) {
         },
       });
-      dojo.setAttr(id,"onclick",func);
-      dojo.byId(id).className='menu__as__Fav';
+      items.forEach(function(el){
+        el.setAttribute('onclick',func);
+        el.setAttribute('class','menu__as__Fav');
+//      dojo.setAttr(id,"onclick",func);
+//      dojo.byId(id).className='menu__as__Fav';
+      });
     }
   }else{
     var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','add')";
@@ -333,18 +340,23 @@ function addRemoveFavMenuLeft (id,name,mode,type){
       load : function(data, args) {
       },
     });
-    dojo.setAttr(id,"onclick",func);
-    dojo.byId(id).className='menu__add__Fav';
+    items.forEach(function(el){
+      el.setAttribute('onclick',func);
+      el.setAttribute('class','menu__add__Fav');
+//    dojo.setAttr(id,"onclick",func);
+//    dojo.byId(id).className='menu__add__Fav';
+    });
   }
 
   menuNewGuiFilter('menuBarCustom', null);
 }
 
-function checkClassForDisplay(id,mode){
+function checkClassForDisplay(el,id,mode){
+  element=el.querySelector('#'+id);
   if(mode=='leave'){
-        dojo.setAttr(id,'style','display:none;');
+    element.setAttribute('style','display:none;');
   }else{
-      dojo.setAttr(id,'style','display:display;');
+    element.setAttribute('style','display:block;');
   }
 }
 
@@ -480,10 +492,11 @@ function showIconLeftMenu(){
 
 function showBottomContent (menu){
   if(menu==dojo.byId('selectedViewMenu').value)return;
-  saveDataToSession('bottomMenuDivItemElect',menu,true);
+  saveDataToSession('bottomMenuDivItemSelect',menu,true);
   if(menu!='Console'){
     dojo.byId('messageDivNewGui').style.display='none';
     dojo.byId('loadDivBarBottom').style.display='block';
+    
   }
   
   var items=dojo.byId('loadDivBarBottom');
@@ -494,10 +507,6 @@ function showBottomContent (menu){
   switch(menu){
     case 'Parameter':
         dojo.byId('parameterDiv').style.display='block';
-        var screen = dojo.byId('objectClassManual');
-        var objectClass= (dojo.byId('objectClass'))?dojo.byId('objectClass').value:false;
-        var isObject=(objectClass)?'true':'false';
-        loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+((objectClass)?objectClass:screen)+'&isObject='+isObject,"parameterDiv");
       break;
     case 'Link':
       dojo.byId('projectLinkDiv').style.display='block';
@@ -537,4 +546,27 @@ function loadMenuReportDirect(cate,idReport){
   selectIconMenuBar(item);
   setTimeout('reportSelectReport('+idReport+')',500);
   return true;
+}
+
+function showMenuBottomParam(item,isObject){
+  var menuSelect = dojo.byId('selectedScreen').value;
+  if(isNewGui && item!=menuSelect){
+    loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+item+'&isObject='+isObject,"parameterDiv");
+  }
+  dojo.setAttr('selectedScreen','value',item);
+}
+
+
+function refreshSelectedMenuLeft(menuName){
+  var menu=dojo.byId('ml-menu');
+  var curents=menu.querySelectorAll('.menu__link--current');
+  curents.forEach(function(el){
+    classie.remove(el,'menu__link--current');
+  });
+  var newCurrents=menu.querySelectorAll('#menu'+menuName);
+  newCurrents.forEach(function(e){
+    classie.add(e,'menu__link--current');
+  });
+
+
 }
