@@ -1274,6 +1274,7 @@ if (property_exists($objectClass,'idStatus')) {
             <td style="width: 10px;text-align: center; align: center;white-space:nowrap;" class="allSearchTD idleSearchTD allSearchFixLength">&nbsp;
               <?php if (isNewGui()) {?>
               <div  id="listShowIdleSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" 
+                title="<?php echo i18n("labelShowIdle");?>"
                 value="<?php if(getSessionValue('listShowIdle'.$objectClass)== "on") echo "on"; else echo "off"; ?>" 
                 leftLabel="" rightLabel="" style="width:10px;position:relative; left:0px;top:2px;z-index:99;" >
   		          <script type="dojo/method" event="onStateChanged" >
