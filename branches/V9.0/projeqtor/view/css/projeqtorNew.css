@@ -74,6 +74,29 @@ label, .ProjeQtOrNewGui label,
     background-color: #ffffff;
     color:var(--color-text);
 }
+.ProjeQtOrNewGui label.ganttScale {
+	float: none;
+	background-color:var(--color-medium);
+	font-weight:normal;
+	text-shadow: 0px 0px;
+	color:var(--color-white);
+}
+.ProjeQtOrNewGui .ganttScaleText {
+	text-shadow: 0px 0px;
+}
+.ProjeQtOrNewGui .ganttNoLeftBorder {
+	border-left: 0;
+}
+.ProjeQtOrNewGui .ganttTaskgroup {
+	background-color:var(--color-light);
+}
+.ProjeQtOrNewGui .ganttRightTitle, .ProjeQtOrNewGui .ganttLeftTopLine, .ProjeQtOrNewGui .ganttLeftTitle {
+	background-color:var(--color-medium);
+	text-shadow: 0px 0px;
+	font-weight:normal;
+  color:var(--color-white);
+}
+	
 .dijitComboBox .dijitInputField {
     padding: 0;
 }
@@ -345,6 +368,7 @@ animation: fadeIn ease 0.5s;
 
 .ProjeQtOrNewGui .roundedVisibleButton.roundedButton.generalColClass {
 	background: url() var(--color-button-background);
+	color:var(--color-button-text);
 }
 
 .ProjeQtOrNewGui .linkHeader, .ProjeQtOrNewGui .attachmentHeader, .ProjeQtOrNewGui .noteHeader, .ProjeQtOrNewGui .dependencyHeader, .ProjeQtOrNewGui .historyHeader, .ProjeQtOrNewGui .assignHeader, .ProjeQtOrNewGui .messageHeader, .ProjeQtOrNewGui .workflowHeader, .ProjeQtOrNewGui .filterHeader, .ProjeQtOrNewGui .calendarHeader, .ProjeQtOrNewGui .reportTableLineHeader {
@@ -723,6 +747,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .attachmentHeader {
 	background-color:var(--color-lighter) !important;
   color:var(--color-dark);
+  height: 26px;
 }
 .ProjeQtOrNewGui .dijitTitlePane .dijitTitlePaneTitle,
 .ProjeQtOrNewGui .section {
