@@ -44,6 +44,6 @@ $calendarBankOffDays->idCalendarDefinition=$idCalendarDefinition;
 $calendarBankOffDays->name=$name;
 $calendarBankOffDays->month=($month==0?null:$month);
 $calendarBankOffDays->day=$day;
-$calendarBankOffDays->easterDay=($easterDay==3?null:$easterDay);
+$calendarBankOffDays->easterDay=($easterDay==4?null:$easterDay);
 $result=$calendarBankOffDays->save();
 displayLastOperationStatus($result);

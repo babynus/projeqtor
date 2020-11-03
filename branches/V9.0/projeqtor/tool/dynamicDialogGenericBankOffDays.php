@@ -107,10 +107,12 @@ if($editMode==="true"){
 }
 
 $easterDayList = array(
-                    3 => "",
+                    4 => "",
                     0 => i18n("easter"),
                     1 => i18n("ascension"),
-                    2 => i18n("pentecost")
+                    2 => i18n("pentecost"),
+                    3 => i18n("holyfriday"),
+    
                    );
 $months = array (
                     0 => "",
@@ -196,11 +198,11 @@ $months = array (
                                         name="genericBankOffDayEasterDay" 
                                         class="input" 
                                         value="<?php 
-                                            $theEasterDay = ($easterDay==null?3:$easterDay);
+                                            $theEasterDay = ($easterDay==null?4:$easterDay);
                                             echo $theEasterDay;
                                                ?>">
                                     <script type="dojo/method" event="onChange" >
-                                      if (this.value == 3) {
+                                      if (this.value == 4) {
                                         enableWidget("genericBankOffDayMonth");
                                         enableWidget("genericBankOffDayDay");
                                         dojo.addClass(dijit.byId("genericBankOffDayMonth").domNode, 'required');
