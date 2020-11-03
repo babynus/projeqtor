@@ -189,7 +189,8 @@ class CalendarDefinition extends SqlElement {
                         0 => i18n("easter"),
                         1 => i18n("ascension"),
                         2 => i18n("pentecost"),
-                        3 => ""
+                        3 => i18n("holyfriday"),
+                        4 => ""
                        );
     $months = array (
                         0 => "",
@@ -279,7 +280,7 @@ class CalendarDefinition extends SqlElement {
         $result .= '<td class="linkData" align="center">'.htmlEncode($monthName).'</td>';        
         $result .= '<td class="linkData" align="center">'.htmlEncode($obj->day).'</td>';
         if ($obj->easterDay==null) {
-            $easterDayName = $easterDay[3];
+            $easterDayName = $easterDay[4];
         } else {
             $easterDayName = $easterDay[$obj->easterDay];
         }

@@ -36,6 +36,7 @@ $easterDays = array(
                     0 => i18n("easter"),
                     1 => i18n("ascension"),
                     2 => i18n("pentecost"),
+                    3 => i18n("holyfriday"),
                     );
   
   
@@ -73,11 +74,14 @@ foreach ($calBankList as $obj) {
             $calendarDate = date('Y-m-d', $iEaster + 86400);            
             $name = $easterDays[0];
         } else if ($obj->easterDay==1) {
-	    $calendarDate = date ('Y-m-d', $iEaster + (86400*39));
+	        $calendarDate = date ('Y-m-d', $iEaster + (86400*39));
             $name = $easterDays[1];
         } else if ($obj->easterDay==2) {
-	    $calendarDate = date ('Y-m-d', $iEaster + (86400*50));
+	        $calendarDate = date ('Y-m-d', $iEaster + (86400*50));
             $name = $easterDays[2];                        
+        } else if ($obj->easterDay==3) {
+	        $calendarDate = date ('Y-m-d', $iEaster - (86400*2));
+            $name = $easterDays[3];                        
         }
     } else {
         $calendarDate = $currentYear . "-" . ($obj->month>9?$obj->month:"0".$obj->month) . "-" . ($obj->day>9?$obj->day:"0".$obj->day);
