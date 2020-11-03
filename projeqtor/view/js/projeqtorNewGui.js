@@ -226,7 +226,7 @@ var defaultMenu=null;
 
 function menuNewGuiFilter(filter, item) {
 	var historyBar = new Array();
-	var historyBarSort = new Array();
+//	var historyBarSort = new Array();
 	historyTable.forEach(function(element){
 		historyBar.push('menu'+element[0]);
 //		if(!historyBarSort.includes('menu'+element[0]))historyBarSort.push('menu'+element[0]);
@@ -238,7 +238,7 @@ function menuNewGuiFilter(filter, item) {
 //	var buttonDivWidth = dojo.byId('menuBarButtonDiv').offsetWidth;
 //	var maxDivWidth = containerDivWidth-buttonDivWidth-140;
 	var nbSkipMenu = 0;
-	var idRow = dojo.byId('idFavoriteRow').value;
+//	var idRow = dojo.byId('idFavoriteRow').value;
 	
 //	if(filter == 'menuBarRecent'){
 //		while(listDivWidth > maxDivWidth){
@@ -267,9 +267,9 @@ function menuNewGuiFilter(filter, item) {
 		if(filter == 'menuBarRecent')editFavoriteRow(true);
 	};
 	cleanContent("menuBarListDiv");
-	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, null, null, null, null, callback);
+	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar+'&nbSkipMenu='+nbSkipMenu, 'menuBarListDiv', null, null, null, null, null, callback, true);
 	cleanContent("anotherBarContainer");
-	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter, 'anotherBarContainer', null, null, null, null, null, hide);
+	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter, 'anotherBarContainer', null, null, null, null, null, hide, true);
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
 }
@@ -280,12 +280,12 @@ function switchFavoriteRow(idRow, direction, maxRow){
 		do{
 			nextRow -= 1;
 			if(nextRow < 1)nextRow=maxRow;
-		}while(dojo.byId('menuBarDndSource'+nextRow).querySelectorAll('.dojoDndItem').length == 0);
+		}while(dojo.byId('menuBarDndSource'+nextRow) && dojo.byId('menuBarDndSource'+nextRow).querySelectorAll('.dojoDndItem').length == 0);
 	}else if(direction=='down'){
 		do{
 			nextRow += 1;
 			if(nextRow > maxRow)nextRow=1;
-		}while(dojo.byId('menuBarDndSource'+nextRow).querySelectorAll('.dojoDndItem').length == 0);
+		}while(dojo.byId('menuBarDndSource'+nextRow) && dojo.byId('menuBarDndSource'+nextRow).querySelectorAll('.dojoDndItem').length == 0);
 	}
 	var callback = function(){
 		saveUserParameter('idFavoriteRow', nextRow);
@@ -301,12 +301,12 @@ function wheelFavoriteRow(idRow, evt, maxRow){
 		do{
 			nextRow -= 1;
 			if(nextRow < 1)nextRow=maxRow;
-		}while(dojo.byId('menuBarDndSource'+nextRow).querySelectorAll('.dojoDndItem').length == 0);
+		}while(dojo.byId('menuBarDndSource'+nextRow) && dojo.byId('menuBarDndSource'+nextRow).querySelectorAll('.dojoDndItem').length == 0);
 	}else if(evt.deltaY > 0){
 		do{
 			nextRow += 1;
 			if(nextRow > maxRow)nextRow=1;
-		}while(dojo.byId('menuBarDndSource'+nextRow).querySelectorAll('.dojoDndItem').length == 0);
+		}while(dojo.byId('menuBarDndSource'+nextRow) && dojo.byId('menuBarDndSource'+nextRow).querySelectorAll('.dojoDndItem').length == 0);
 	}
 	var callback = function(){
 		saveUserParameter('idFavoriteRow', nextRow);
