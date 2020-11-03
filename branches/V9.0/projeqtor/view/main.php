@@ -987,7 +987,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                      </td>
                       <td dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97.5%;" 
                         dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
-                        <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, 0, $idAnotherRow);?>
+                        <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, $idAnotherRow);?>
                       </td>
                      </tr>
                 </table>
