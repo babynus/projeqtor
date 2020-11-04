@@ -34,6 +34,9 @@ $dialog=Security::checkValidAlphanumeric($dialog);
 if (strtolower(substr($dialog,0,6))!='dialog' and strtolower(substr($dialog,0,4))!='list') {
   traceHack("dynamicDialog called with not allowed dialog parameter '$dialog'");
 }
+if ($dialog=="dialogLogfiles") {
+  Security::checkDisplayMenuForUser('Admin');
+}
 $dialogFile="../tool/dynamic".ucfirst($dialog).'.php';
 if (file_exists($dialogFile)) {
 	include $dialogFile;

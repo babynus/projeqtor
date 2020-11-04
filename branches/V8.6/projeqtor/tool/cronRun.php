@@ -25,6 +25,7 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 require_once "../tool/projeqtor.php";
+Security::checkDisplayMenuForUser('Admin');
 function cronAbort() {Cron::abort();}
 register_shutdown_function('cronAbort');
 //Cron::init();
