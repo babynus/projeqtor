@@ -25,4 +25,5 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 require_once "../tool/projeqtor.php";
+Security::checkDisplayMenuForUser('Admin');
 echo Cron::check();

@@ -25,6 +25,7 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 require_once "../tool/projeqtor.php";
+Security::checkDisplayMenuForUser('Admin');
 if (securityGetAccessRightYesNo('menuAdmin','read')!='YES') {
   traceHack ( "admin functionality reached without access right" );
   exit ();
