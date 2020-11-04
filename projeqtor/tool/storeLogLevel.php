@@ -25,6 +25,7 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 require_once "../tool/projeqtor.php";
+Security::checkDisplayMenuForUser('Admin');
 $value = RequestHandler::getValue('value');
 Parameter::storeGlobalParameter('logLevel', $value);
 Parameter::deleteLogLevelParamFile();
