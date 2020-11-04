@@ -856,6 +856,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <div id="menuTop" class="menuTop">
       <div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
       <input id="selectedScreen" value="" hidden >
+      <input id="isMenuLeftOpen" value="true" hidden >
       <div id="right-pane" class="right-pane">
     <?php } if (!isNewGui()) {?>
      <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
@@ -950,21 +951,20 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       ?>
       <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;z-index: 9999999;top:46px;background-color: rgb(181 181 181 / 50%);display:none">
         <table style="width:100%;"><tr>
-          <td style="width:7%;">
-            <div style="width: 100%;height: 100%;">
-            <div style="margin: 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;position:absolute;top:0px;">
+          <td id="hideMenuLeftMargin" style="width:37px;display:none;"></td>
+          <td style="width:103px;">
+            <div style="margin: 0px 5px 145px 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;">
             <?php $menuBarTopMode = Parameter::getUserParameter('menuBarTopMode');?>
               <table style="width:100%;height:100%;">
-        	          <tr>
-                       <td class="<?php if($menuBarTopMode=='ICON'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding: 0px 2px 0px 2px;" onclick="saveUserParameter('menuBarTopMode', 'ICON');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('FavorisIcon', 22, true);?></td>
-                       <td class="<?php if($menuBarTopMode=='ICONTXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding-right: 2px;" onclick="saveUserParameter('menuBarTopMode', 'ICONTXT');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('FavorisIconTxt', 22, true);?></td>
-                       <td class="<?php if($menuBarTopMode=='TXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding: 0px 2px 0px 0px;" onclick="saveUserParameter('menuBarTopMode', 'TXT');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('FavorisTxt', 22, true);?></td>
+                     <tr>
+                       <td class="<?php if($menuBarTopMode=='ICON'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding-left:5px;" onclick="saveUserParameter('menuBarTopMode', 'ICON');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToIcon');?>"><?php echo formatNewGuiButton('FavorisIcon', 22, true);?></td>
+                       <td class="<?php if($menuBarTopMode=='ICONTXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" onclick="saveUserParameter('menuBarTopMode', 'ICONTXT');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToIconTxt');?>"><?php echo formatNewGuiButton('FavorisIconTxt', 22, true);?></td>
+                       <td class="<?php if($menuBarTopMode=='TXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" onclick="saveUserParameter('menuBarTopMode', 'TXT');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToTxt');?>"><?php echo formatNewGuiButton('FavorisTxt', 22, true);?></td>
                      </tr>
-      	      </table>
-            </div>
+              </table>
             </div>
           </td>
-          <td style="width:90%;">
+          <td>
             <div id="anotherMenubarList" name="anotherMenubarList" style="width:100%;z-index:9999999;">
              <?php
              if($defaultMenu == 'menuBarCustom'){
@@ -986,10 +986,10 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                 <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $idAnotherRow;?>">
                 <table style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
                      <tr>
-                     <td style="font-weight: bold;font-size: 13pt;text-align: center;color: var(--color-dark);width: 2.5%;border-right: 1px solid var(--color-dark);">
+                     <td style="font-weight: bold;font-size: 13pt;text-align: center;color: var(--color-dark);width: 50px;border-right: 1px solid var(--color-dark);">
                        <?php echo $idAnotherRow; ?>
                      </td>
-                      <td dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97.5%;" 
+                      <td dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;" 
                         dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
                         <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, $idAnotherRow);?>
                       </td>
@@ -1000,7 +1000,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
               }?>
             </div>
           </td>
-          <td style="width:3%;"></td>
+          <td style="width:70px;"></td>
         </tr></table>
       </div>
       <?php }
