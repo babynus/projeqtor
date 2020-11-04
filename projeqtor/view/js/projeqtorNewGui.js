@@ -71,7 +71,7 @@ var contentPaneResizingInProgress={};
 var defaultMenu=null;
 
 //=============================================================================
-//function for left Menu 
+//function for close/open left Menu 
 //
 // ticket 4965 Florent
 //=============================================================================
@@ -225,6 +225,186 @@ var defaultMenu=null;
 
 } )(window);
 
+
+//=============================================================================
+//add remove favoris 
+//=============================================================================
+function addRemoveFavMenuLeft (id,name,mode,type){
+  var items=dojo.byId('ml-menu').querySelectorAll('#'+id);
+  items.forEach(function(el){
+  el.removeAttribute('class');
+  el.removeAttribute('onclick');
+  });
+  if(mode=='add'){
+  if(type=="reportDirect"){
+    //creat favorite report 
+  }else{
+    var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','remove')";
+    var param="?operation=add&class="+name.substr(4);
+    dojo.xhrGet({
+      url : "../tool/saveCustomMenu.php"+param,
+      handleAs : "text",
+      load : function(data, args) {
+      },
+    });
+    items.forEach(function(el){
+      el.setAttribute('onclick',func);
+      el.setAttribute('class','menu__as__Fav');
+    });
+  }
+  }else{
+  var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','add')";
+  var param="?operation=remove&class="+name.substr(4);
+  dojo.xhrGet({
+    url : "../tool/saveCustomMenu.php"+param,
+    handleAs : "text",
+    load : function(data, args) {
+    },
+  });
+  items.forEach(function(el){
+    el.setAttribute('onclick',func);
+    el.setAttribute('class','menu__add__Fav');
+  
+  });
+  }
+  
+  menuNewGuiFilter('menuBarCustom', null);
+}
+
+//=============================================================================
+//show icons on menu left 
+//=============================================================================
+function showIconLeftMenu(){
+  var leftMenu=dojo.byId('ml-menu');
+  var mode=dojo.byId('displayModeLeftMenu').value;
+  display=(mode=='ICONTXT')?'none':'block';
+  style=(mode=='ICONTXT')?"float:left;max-width:180px;":"float:left;max-width:155px;";
+  leftMenu.menus = [].slice.call(leftMenu.querySelectorAll('.menu__level'));
+  leftMenu.menus.forEach(function(menuEl, pos) {
+    var items = menuEl.querySelectorAll('.menu__item');
+    items.forEach(function(itemEl) {
+      var iconDiv = itemEl.querySelector('.iconSize16');
+      iconDiv.style.display=display;
+      
+      var posDiv = itemEl.querySelector('.divPosName');
+      posDiv.style=style;
+    });
+  });
+  if(dojo.byId('selectedViewMenu').value=='Parameter'){
+    if(dojo.byId('parameterMenu')){
+      var menuParam=dojo.byId('parameterMenu').querySelectorAll('.menu__item');
+      menuParam.forEach(function(e){
+       var icon=e.querySelector('.iconSize16');
+       icon.style.display=display;
+      });
+    }
+  
+  }
+  mode=(display=='block')?'ICONTXT':'TXT';
+  dojo.setAttr('displayModeLeftMenu','value',mode);
+  saveUserParameter('menuLeftDisplayMode',mode);
+}
+
+//=============================================================================
+//show bottom content on menu left 
+//=============================================================================
+function showBottomContent (menu){
+  if(menu==dojo.byId('selectedViewMenu').value)return;
+  saveDataToSession('bottomMenuDivItemSelect',menu,true);
+  if(menu!='Console'){
+    dojo.byId('messageDivNewGui').style.display='none';
+    dojo.byId('loadDivBarBottom').style.display='block';
+    
+  }
+  
+  var items=dojo.byId('loadDivBarBottom');
+  var alldiv=items.querySelectorAll('.menuBottomDiv');
+  alldiv.forEach(function(el){
+    el.style.display='none';
+  });
+  switch(menu){
+    case 'Parameter':
+        dojo.byId('parameterDiv').style.display='block';
+      break;
+    case 'Link':
+      dojo.byId('projectLinkDiv').style.display='block';
+      break;
+    case 'Document':
+      dojo.byId('documentsDiv').style.display='block';
+      dijit.byId('documentsDiv').resize();
+      break;
+    case 'Notification':
+      dojo.byId('notificationBottom').style.display='block';
+      dijit.byId('notificationBottom').resize();
+      break;
+    case 'Console':
+      items.style.display='none';
+      dojo.byId('messageDivNewGui').style.display='block';
+      break;
+  }
+  dojo.setAttr('selectedViewMenu','value',menu);
+}
+
+//=============================================================================
+//load reports  
+//=============================================================================
+function loadMenuReportDirect(cate,idReport){
+  if (checkFormChangeInProgress()) {
+    return false;
+  }
+  item="Reports";
+  cleanContent("detailDiv");
+  hideResultDivs();
+  formChangeInProgress=false;
+  var currentScreen=item;
+  var objectExist='false';
+  loadContent("reportsMain.php?idCategory="+cate, "centerDiv");
+  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
+  stockHistory(item,null,currentScreen);
+  if(defaultMenu == 'menuBarRecent'){
+    menuNewGuiFilter(defaultMenu, item);
+  }
+  selectIconMenuBar(item);
+  setTimeout('reportSelectReport('+idReport+')',500);
+  return true;
+}
+  
+
+//=============================================================================
+//show menu prameter on bottom left menu  
+//=============================================================================
+function showMenuBottomParam(item,isObject){
+  var menuSelect = dojo.byId('selectedScreen').value;
+  if(isNewGui && item!=menuSelect){
+    loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+item+'&isObject='+isObject,"parameterDiv");
+  }
+  dojo.setAttr('selectedScreen','value',item);
+}
+
+//=============================================================================
+//refresh selected menu on Menu left 
+//=============================================================================
+function refreshSelectedMenuLeft(menuName){
+  var menuLeftTop=dojo.byId('ml-menu');
+  if(dojo.byId('parameterMenu'))var menuLeftBottom=dojo.byId('parameterMenu');
+  
+  var curents=menuLeftTop.querySelectorAll('.menu__link--current');
+  curents.forEach(function(el){
+    classie.remove(el,'menu__link--current');
+  });
+  var newCurrents=menuLeftTop.querySelectorAll('#'+menuName);
+  newCurrents.forEach(function(e){
+    classie.add(e,'menu__link--current');
+  });
+  if(dojo.byId('parameterMenu')){
+    var bootomMenuSelcet=menuLeftBottom.querySelector('.menu__link--current');
+    if(bootomMenuSelcet!=null){
+      classie.remove(bootomMenuSelcet, 'menu__link--current');
+    }
+    var newMenuBottomSelect=menuLeftBottom.querySelector('#'+menuName+'Param');
+    if(newMenuBottomSelect!=null) classie.add(newMenuBottomSelect,'menu__link--current');
+  }
+}
 //=============================================================================
 
 
@@ -311,50 +491,6 @@ function wheelFavoriteRow(idRow, evt, maxRow){
 	}
 }
 
-function addRemoveFavMenuLeft (id,name,mode,type){
-  var items=dojo.byId('ml-menu').querySelectorAll('#'+id);
-  items.forEach(function(el){
-    el.removeAttribute('class');
-    el.removeAttribute('onclick');
-  });
-  if(mode=='add'){
-    if(type=="reportDirect"){
-      //creat favorite report 
-    }else{
-      var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','remove')";
-      var param="?operation=add&class="+name.substr(4);
-      dojo.xhrGet({
-        url : "../tool/saveCustomMenu.php"+param,
-        handleAs : "text",
-        load : function(data, args) {
-        },
-      });
-      items.forEach(function(el){
-        el.setAttribute('onclick',func);
-        el.setAttribute('class','menu__as__Fav');
-//      dojo.setAttr(id,"onclick",func);
-//      dojo.byId(id).className='menu__as__Fav';
-      });
-    }
-  }else{
-    var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','add')";
-    var param="?operation=remove&class="+name.substr(4);
-    dojo.xhrGet({
-      url : "../tool/saveCustomMenu.php"+param,
-      handleAs : "text",
-      load : function(data, args) {
-      },
-    });
-    items.forEach(function(el){
-      el.setAttribute('onclick',func);
-      el.setAttribute('class','menu__add__Fav');
-//    dojo.setAttr(id,"onclick",func);
-//    dojo.byId(id).className='menu__add__Fav';
-    });
-  }
-
-  menuNewGuiFilter('menuBarCustom', null);
-}
 
 function checkClassForDisplay(el,id,mode){
   element=el.querySelector('#'+id);
@@ -462,116 +598,4 @@ function addNewGuiItem(item){
 	}else{
 		actionSelectAdd(item, null, null);
 	}
-}
-
-function showIconLeftMenu(){
-  var leftMenu=dojo.byId('ml-menu');
-  var mode=dojo.byId('displayModeLeftMenu').value;
-  display=(mode=='ICONTXT')?'none':'block';
-  style=(mode=='ICONTXT')?"float:left;max-width:180px;":"float:left;max-width:155px;";
-  leftMenu.menus = [].slice.call(leftMenu.querySelectorAll('.menu__level'));
-  leftMenu.menus.forEach(function(menuEl, pos) {
-    var items = menuEl.querySelectorAll('.menu__item');
-    items.forEach(function(itemEl) {
-      var iconDiv = itemEl.querySelector('.iconSize16');
-      iconDiv.style.display=display;
-      
-      var posDiv = itemEl.querySelector('.divPosName');
-      posDiv.style=style;
-    });
-  });
-  if(dojo.byId('selectedViewMenu').value=='Parameter'){
-    if(dojo.byId('parameterMenu')){
-      var menuParam=dojo.byId('parameterMenu').querySelectorAll('.menu__item');
-      menuParam.forEach(function(e){
-       var icon=e.querySelector('.iconSize16');
-       icon.style.display=display;
-      });
-    }
-
-  }
-  mode=(display=='block')?'ICONTXT':'TXT';
-  dojo.setAttr('displayModeLeftMenu','value',mode);
-  saveUserParameter('menuLeftDisplayMode',mode);
-}
-
-function showBottomContent (menu){
-  if(menu==dojo.byId('selectedViewMenu').value)return;
-  saveDataToSession('bottomMenuDivItemSelect',menu,true);
-  if(menu!='Console'){
-    dojo.byId('messageDivNewGui').style.display='none';
-    dojo.byId('loadDivBarBottom').style.display='block';
-    
-  }
-  
-  var items=dojo.byId('loadDivBarBottom');
-  var alldiv=items.querySelectorAll('.menuBottomDiv');
-  alldiv.forEach(function(el){
-    el.style.display='none';
-  });
-  switch(menu){
-    case 'Parameter':
-        dojo.byId('parameterDiv').style.display='block';
-      break;
-    case 'Link':
-      dojo.byId('projectLinkDiv').style.display='block';
-      break;
-    case 'Document':
-      dojo.byId('documentsDiv').style.display='block';
-      dijit.byId('documentsDiv').resize();
-      break;
-    case 'Notification':
-      dojo.byId('notificationBottom').style.display='block';
-      dijit.byId('notificationBottom').resize();
-      break;
-    case 'Console':
-      items.style.display='none';
-      dojo.byId('messageDivNewGui').style.display='block';
-      break;
-  }
-  dojo.setAttr('selectedViewMenu','value',menu);
-}
-
-function loadMenuReportDirect(cate,idReport){
-  if (checkFormChangeInProgress()) {
-    return false;
-  }
-  item="Reports";
-  cleanContent("detailDiv");
-  hideResultDivs();
-  formChangeInProgress=false;
-  var currentScreen=item;
-  var objectExist='false';
-  loadContent("reportsMain.php?idCategory="+cate, "centerDiv");
-  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
-  stockHistory(item,null,currentScreen);
-  if(defaultMenu == 'menuBarRecent'){
-    menuNewGuiFilter(defaultMenu, item);
-  }
-  selectIconMenuBar(item);
-  setTimeout('reportSelectReport('+idReport+')',500);
-  return true;
-}
-
-function showMenuBottomParam(item,isObject){
-  var menuSelect = dojo.byId('selectedScreen').value;
-  if(isNewGui && item!=menuSelect){
-    loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+item+'&isObject='+isObject,"parameterDiv");
-  }
-  dojo.setAttr('selectedScreen','value',item);
-}
-
-
-function refreshSelectedMenuLeft(menuName){
-  var menu=dojo.byId('ml-menu');
-  var curents=menu.querySelectorAll('.menu__link--current');
-  curents.forEach(function(el){
-    classie.remove(el,'menu__link--current');
-  });
-  var newCurrents=menu.querySelectorAll('#menu'+menuName);
-  newCurrents.forEach(function(e){
-    classie.add(e,'menu__link--current');
-  });
-
-
 }

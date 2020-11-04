@@ -197,6 +197,10 @@
                 classie.remove(el , 'menu__link--current');
               });
             }
+            if(dojo.byId('parameterMenu')){
+              var bootomMenuSelcet=dojo.byId('parameterMenu').querySelector('.menu__link--current');
+              if(bootomMenuSelcet!=null)classie.remove(bootomMenuSelcet, 'menu__link--current');
+            }
             var idcurentElement='#'+item.firstChild.getAttribute('id');
             var newCurrent=dojo.byId('ml-menu').querySelectorAll(idcurentElement);
             newCurrent.forEach(function(e){
