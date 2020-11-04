@@ -1038,7 +1038,7 @@ if (property_exists($objectClass,'idStatus')) {
                   closeFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').closeDropDown();",2000);
                 </script>
                 <?php } ?>
-                <div dojoType="dijit.TooltipDialog" id="directFilterList" style=" <?php if(isNewGui()){ ?> width:425px; <?php }?> z-index: 999999;<!-- display:none; --> position: absolute;">
+                <div dojoType="dijit.TooltipDialog" id="directFilterList" style=" <?php if(isNewGui()){ ?> width:405px; <?php }?> z-index: 999999;<!-- display:none; --> position: absolute;">
                   <?php 
                      if ($comboDetail) $_REQUEST['comboDetail']=true;
                      if(isNewGui())include "../tool/displayQuickFilterList.php";

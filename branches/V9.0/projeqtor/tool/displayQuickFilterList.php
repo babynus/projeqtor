@@ -74,7 +74,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
              </script>
           </button>
         </td>
-        <td style="width:9%"></td>
+        <td style="width:4%"></td>
         <td style="width:10%;font-style:italic;color:grey;"><?php echo i18n("alwaysDisplay");?></td>
       </tr>
     </table></td>
@@ -356,7 +356,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
 			  <?php } ?>
       <?php if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?> 
       <tr style="height:37px;">
-        <td colspan=2 style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("filterByStatusQuick");?>&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+        <td colspan=2 style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("filterByStatusQuick");?>&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 			  <td style="width:10%;text-align:center;">
 			   <div id="filterByStatusSwitch" name="filterByStatusSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(!$comboDetail and sessionValueExists('displayByStatusListSwitch'.$objectClass)){ echo getSessionValue('displayByStatusListSwitch'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >
