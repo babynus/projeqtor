@@ -57,7 +57,7 @@ if($isObject=='true' and $screen!=''){
   }
   $lstString=implode(',', $lstParam);
   $sortMenu=array_flip($sortMenu);
-  $clause="name in ($lstString)";
+  $clause="name in ($lstString) and (level not in ('','Project'))";
   $allMenu=$menu->getSqlElementsFromCriteria(null,null,$clause);
   foreach ($allMenu as $menu){
     if(array_key_exists($menu->name,$sortMenu)){
@@ -175,7 +175,7 @@ if(empty($allMenuSort)){
           $menuNameI18n = i18n($menu->name);
           $menuName2 = addslashes(i18n($menuName));
           $classEl=substr($menuName,4);
-          $funcOnClick="var currentlink = dojo.byId('parameterMenu').querySelector('.menu__link--current');if( currentlink ) {classie.remove(currentlink , 'menu__link--current');}classie.add(this, 'menu__link--current');";
+          $funcOnClick="refreshSelectedMenuLeft('$menu->name');";
           if($menu->type=='item'){
             $funcOnClick.="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');";
           }else{
