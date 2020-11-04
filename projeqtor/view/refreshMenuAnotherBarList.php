@@ -33,6 +33,7 @@ require_once "../tool/formatter.php";
 scriptLog('   ->/view/refreshMenuBarList.php');
 
 $defaultMenu = RequestHandler::getValue('menuFilter');
+$isMenuLeftOpen = RequestHandler::getValue('isMenuLeftOpen');
 if($defaultMenu == 'menuBarCustom'){
   $idRow = intval(Parameter::getUserParameter('idFavoriteRow'));
   $startRow = $idRow+1;
@@ -43,21 +44,20 @@ if($defaultMenu == 'menuBarCustom'){
 
 ?>
 <table style="width:100%;"><tr>
-<td style="width:7%;">
-  <div style="width: 100%;height: 100%;">
-  <div style="margin: 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;position:absolute;top:0px;">
+<td id="hideMenuLeftMargin" style="width:37px;<?php if($isMenuLeftOpen == 'true')echo 'display:none;';?>"></td>
+<td style="width:103px;">
+  <div style="margin: 0px 5px 145px 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;">
   <?php $menuBarTopMode = Parameter::getUserParameter('menuBarTopMode');?>
     <table style="width:100%;height:100%;">
            <tr>
-             <td class="<?php if($menuBarTopMode=='ICON'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding: 0px 2px 0px 2px;" onclick="saveUserParameter('menuBarTopMode', 'ICON');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('FavorisIcon', 22, true);?></td>
-             <td class="<?php if($menuBarTopMode=='ICONTXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding-right: 2px;" onclick="saveUserParameter('menuBarTopMode', 'ICONTXT');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('FavorisIconTxt', 22, true);?></td>
-             <td class="<?php if($menuBarTopMode=='TXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding: 0px 2px 0px 0px;" onclick="saveUserParameter('menuBarTopMode', 'TXT');menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('FavorisTxt', 22, true);?></td>
+             <td class="<?php if($menuBarTopMode=='ICON'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding-left:5px;" onclick="saveUserParameter('menuBarTopMode', 'ICON');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToIcon');?>"><?php echo formatNewGuiButton('FavorisIcon', 22, true);?></td>
+             <td class="<?php if($menuBarTopMode=='ICONTXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" onclick="saveUserParameter('menuBarTopMode', 'ICONTXT');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToIconTxt');?>"><?php echo formatNewGuiButton('FavorisIconTxt', 22, true);?></td>
+             <td class="<?php if($menuBarTopMode=='TXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" onclick="saveUserParameter('menuBarTopMode', 'TXT');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToTxt');?>"><?php echo formatNewGuiButton('FavorisTxt', 22, true);?></td>
            </tr>
     </table>
   </div>
-  </div>
 </td>
-<td style="width:90%;">
+<td>
 <div id="anotherMenubarList" name="anotherMenubarList" style="width:100%;z-index:9999999;">
 <?php
 $nbFavoriteRow = 5; 
@@ -74,10 +74,10 @@ for($i=$startRow; $i<=($idRow+4); $i++){
     <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $idAnotherRow;?>">
     <table style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
          <tr>
-         <td style="font-weight: bold;font-size: 13pt;text-align: center;color: var(--color-dark);width: 2.5%;border-right: 1px solid var(--color-dark);">
+         <td style="font-weight: bold;font-size: 13pt;text-align: center;color: var(--color-dark);width: 50px;border-right: 1px solid var(--color-dark);">
           <?php echo $idAnotherRow; ?>
          </td>
-          <td class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;width:97.5%;"
+          <td class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;"
           dndType="menuBar"  dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar'], horizontal: true">
           <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, $idAnotherRow);?>
           </td>
@@ -87,5 +87,5 @@ for($i=$startRow; $i<=($idRow+4); $i++){
 <?php }?>
 </div>
 </td>
-<td style="width:3%;"></td>
+<td style="width:70px;"></td>
 </tr></table>
