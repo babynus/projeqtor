@@ -90,6 +90,10 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui .ganttTaskgroup {
 	background-color:var(--color-light);
 }
+.ProjeQtOrNewGui .ganttRightSubTitle {
+	background: url();
+	background-color:var(--color-lighter);
+}
 .ProjeQtOrNewGui .ganttRightTitle, .ProjeQtOrNewGui .ganttLeftTopLine, .ProjeQtOrNewGui .ganttLeftTitle {
 	background-color:var(--color-medium);
 	text-shadow: 0px 0px;
