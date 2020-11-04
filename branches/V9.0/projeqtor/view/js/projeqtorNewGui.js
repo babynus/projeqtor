@@ -147,9 +147,13 @@ var defaultMenu=null;
       if(this.isMenuOpen){
         this.trigger.setAttribute('style','display:block;float:right;');
         this.triggerBar.setAttribute('style','display:none;');
+        dojo.byId('hideMenuLeftMargin').style.display = 'none';
+        dojo.byId('isMenuLeftOpen').value = 'true';
       }else{
         this.trigger.setAttribute('style','display:none;');
         this.triggerBar.setAttribute('style','float:left;width:32px;display:block;');
+        dojo.byId('hideMenuLeftMargin').style.display = '';
+        dojo.byId('isMenuLeftOpen').value = 'false';
       }
       dojo.setAttr('contentMenuBar','style','top:1px; overflow:hidden; z-index:0');
     },
@@ -249,10 +253,11 @@ function menuNewGuiFilter(filter, item) {
 	var hide = function(){
 		if(filter == 'menuBarRecent')editFavoriteRow(true);
 	};
+	var isMenuLeftOpen = dojo.byId('isMenuLeftOpen').value;
 	cleanContent("menuBarListDiv");
 	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, null, null, null, null, callback, true);
 	cleanContent("anotherBarContainer");
-	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter, 'anotherBarContainer', null, null, null, null, null, hide, true);
+	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter+'&isMenuLeftOpen='+isMenuLeftOpen, 'anotherBarContainer', null, null, null, null, null, hide, true);
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
 }

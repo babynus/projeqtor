@@ -41,13 +41,13 @@ $nbFavoriteRow=5;
   <tr >
     <td style="
      <?php if($defaultMenu=='menuBarCustom'){
-       echo 'width: 2.5%;border-right: 1px solid var(--color-dark);color: var(--color-dark);font-size: 13pt;font-weight: bold;text-align: center;';
+       echo 'width: 50px;border-right: 1px solid var(--color-dark);color: var(--color-dark);font-size: 13pt;font-weight: bold;text-align: center;';
      }else{
-         echo 'width: 1%;color: var(--color-dark);font-size: 15pt;font-weight: bold;text-align: center;';
+         echo 'width: 10px;color: var(--color-dark);font-size: 15pt;font-weight: bold;text-align: center;';
        }?>">
       <?php if($defaultMenu=='menuBarCustom')echo $idRow;?>
     </td>
-    <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="width:100%;height:100%;" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
+    <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="height:100%;" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
      <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
      <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $idRow);?>
    </td>
