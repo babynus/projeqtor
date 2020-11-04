@@ -1758,17 +1758,14 @@
 .ProjeQtOrFlatGreen .iconPlan { background-image: url(customIcons/green/iconPlan.gif);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGrey .iconPlan { background-image: url(customIcons/grey/iconPlan.gif);  background-repeat: no-repeat;}
 .ProjeQtOrFlatRed .iconPlan { background-image: url(customIcons/red/iconPlan.gif);  background-repeat: no-repeat;}
-.ProjeQtOrNewGui .iconPlan { background-image: url(customIcons/new/iconPlan.gif);  background-repeat: no-repeat;}
-.ProjeQtOrNewGui .dijitButtonIcon.iconPlan { background-image: url(customIcons/new/iconPlan.gif);  background-repeat: no-repeat; width:24px;background-size : 24px}
-
+.ProjeQtOrNewGui .iconPlan { background-image: url(customIcons/new/iconPlan.gif);  background-repeat: no-repeat;width:32px;height:32px;background-size : 32px 32px;}
 
 .iconPlanStopped { background-image: url(images/planStopped.gif);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconPlanStopped { background-image: url(customIcons/blue/iconPlanStopped.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconPlanStopped { background-image: url(customIcons/green/iconPlanStopped.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGrey .iconPlanStopped { background-image: url(customIcons/grey/iconPlanStopped.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatRed .iconPlanStopped { background-image: url(customIcons/red/iconPlanStopped.png);  background-repeat: no-repeat;}
-.ProjeQtOrNewGui .iconPlanStopped { background-image: url(customIcons/new/iconPlanStopped.gif);  background-repeat: no-repeat;}
-.ProjeQtOrNewGui .dijitButtonIcon.iconPlanStopped { background-image: url(customIcons/new/iconPlanStopped.gif);  background-repeat: no-repeat; width:24px;background-size : 24px}
+.ProjeQtOrNewGui .iconPlanStopped { background-image: url(customIcons/new/iconPlanStopped.svg);  background-repeat: no-repeat;width:32px;height:32px;background-size : 32px 32px;}
 
 
 .iconPlannedWorkManual { background-image: url(images/iconPlannedWorkManual.png);  background-repeat: no-repeat;  }
