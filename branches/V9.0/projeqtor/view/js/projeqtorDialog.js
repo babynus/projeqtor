@@ -7536,10 +7536,9 @@ function loadMenuBarObject(menuClass, itemName, from) {
   loadContent("objectMain.php?objectClass=" + currentScreen, "centerDiv"); 
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
   stockHistory(currentScreen,null,"object");
-  if(defaultMenu == 'menuBarRecent'){
+  if(defaultMenu == 'menuBarRecent' and isNewGui){
 	  menuNewGuiFilter(defaultMenu, menuClass);
   }
-  if(isNewGui)refreshSelectedMenuLeft(menuClass);
   selectIconMenuBar(menuClass);
   editFavoriteRow(true);
   return true;
@@ -7685,10 +7684,9 @@ function loadMenuBarItem(item, itemName, from) {
   }
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
   stockHistory(item,null,currentScreen);
-  if(defaultMenu == 'menuBarRecent'){
+  if(defaultMenu == 'menuBarRecent' and isNewGui){
 	  menuNewGuiFilter(defaultMenu, item);
   }
-  if(isNewGui)refreshSelectedMenuLeft(item);
   selectIconMenuBar(item);
   editFavoriteRow(true);
   return true;

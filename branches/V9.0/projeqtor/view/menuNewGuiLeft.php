@@ -330,7 +330,6 @@ function drawLeftMenuListNewGui($displayMode){
       }
     }else{
       $obj=$menu['object'];
-      debugLog($obj);
     }
     if($old!=$menu['level'] and $menu['level']==1 and $maineDraw!=true){
       $maineDraw=true;
@@ -343,8 +342,6 @@ function drawLeftMenuListNewGui($displayMode){
     }
     if($obj->idParent!=0 and $obj->idMenu!=0){
       if( $menu['objectType']!='reportDirect'){
-        debugLog($obj->name);
-        debugLog($obj->idMenu);
         $realMenu=new Menu($obj->idMenu);
         $menuName=$realMenu->name;
         $menuNameI18n = i18n($menuName);
