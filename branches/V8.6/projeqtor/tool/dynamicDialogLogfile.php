@@ -48,7 +48,7 @@ if ($logname=='last') {
 </table>
 <pre id="logTableContainer">
 <?php 
-echo file_get_contents($log->filePath);
+echo htmlEncode(file_get_contents($log->filePath));
 ?>
 </pre>
 <table style="width: 100%;" >

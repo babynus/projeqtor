@@ -37,9 +37,11 @@ if($isId == 'true'){
   $id = str_replace(',','_',$id);
   $listAttendees=explode('_',$id);
   foreach ($listAttendees as $val){
-    $name = SqlList::getFieldFromId('Resource', $val, 'email');
-    if($name != ""){
-      $result .= $name.','; 
+    if (Security::checkValidId($val)) {
+      $name = SqlList::getFieldFromId('Resource', $val, 'email');
+      if($name != "" and Security::checkValidId($val,false)){
+        $result .= $name.','; 
+      }
     }
   }
   $result = substr($result, 0,-1);
