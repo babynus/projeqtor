@@ -45,12 +45,12 @@ if($defaultMenu == 'menuBarCustom'){
 ?>
 <table style="width:100%;"><tr>
 <td id="hideMenuLeftMargin" style="width:37px;<?php if($isMenuLeftOpen == 'true')echo 'display:none;';?>"></td>
-<td style="width:103px;">
+<td style="width:120px;">
   <div style="margin: 0px 5px 145px 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;">
   <?php $menuBarTopMode = Parameter::getUserParameter('menuBarTopMode');?>
     <table style="width:100%;height:100%;">
            <tr>
-             <td class="<?php if($menuBarTopMode=='ICON'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding-left:5px;" onclick="saveUserParameter('menuBarTopMode', 'ICON');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToIcon');?>"><?php echo formatNewGuiButton('FavorisIcon', 22, true);?></td>
+             <td class="<?php if($menuBarTopMode=='ICON'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" style="padding-left:8px;" onclick="saveUserParameter('menuBarTopMode', 'ICON');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToIcon');?>"><?php echo formatNewGuiButton('FavorisIcon', 22, true);?></td>
              <td class="<?php if($menuBarTopMode=='ICONTXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" onclick="saveUserParameter('menuBarTopMode', 'ICONTXT');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToIconTxt');?>"><?php echo formatNewGuiButton('FavorisIconTxt', 22, true);?></td>
              <td class="<?php if($menuBarTopMode=='TXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" onclick="saveUserParameter('menuBarTopMode', 'TXT');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToTxt');?>"><?php echo formatNewGuiButton('FavorisTxt', 22, true);?></td>
            </tr>
@@ -77,9 +77,10 @@ for($i=$startRow; $i<=($idRow+4); $i++){
          <td style="font-weight: bold;font-size: 13pt;text-align: center;color: var(--color-dark);width: 50px;border-right: 1px solid var(--color-dark);">
           <?php echo $idAnotherRow; ?>
          </td>
-          <td class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" style="height:100%;"
-          dndType="menuBar"  dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar'], horizontal: true">
-          <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, $idAnotherRow);?>
+          <td style="height:100%;">
+            <div dojoType="dojo.dnd.Source" class="anotherBarDiv" id="<?php echo $idDiv;?>" jsId="<?php echo $idDiv;?>" name="<?php echo $idDiv;?>" data-dojo-props="accept: ['menuBar'], horizontal: true" style="width: 1000%;height: 43px;vertical-align:middle;">
+              <?php Menu::drawAllNewGuiMenus('menuBarCustom', null, $idAnotherRow);?>
+            </div>
           </td>
          </tr>
     </table>

@@ -42,7 +42,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
 	    <div  name="menubarContainer" id="menubarContainer" style="height:43px;width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
 	      <input type="hidden" id="isEditFavorite" name="isEditFavorite" value="false">
 	      <table style="height:43px;width:100%;"><tr>
-	           <td style="width: 100px;">
+	           <td style="width: 120px;">
 	             <div name="menuBarButtonDiv" id="menuBarButtonDiv" style="width:100%;height:100%;">
 	               <table style="width:100%;height:100%;">
         	           <tr>
@@ -100,7 +100,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
                           </div>
         	             </td>
     	                 <td style="padding-right:5px" class="<?php if($defaultMenu=='menuBarCustom')echo 'imageColorNewGuiSelected';?>" id="favoriteButton" title="<?php echo i18n('Favorite');?>" onclick="menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
-    	                 <td style="padding-right:5px" class="<?php if($defaultMenu=='menuBarRecent')echo 'imageColorNewGuiSelected';?>" id="recentButton" title="<?php echo i18n('Recent');?>" onclick="editFavoriteRow(true);menuNewGuiFilter('menuBarRecent', null);"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
+    	                 <td style="padding-right:10px" class="<?php if($defaultMenu=='menuBarRecent')echo 'imageColorNewGuiSelected';?>" id="recentButton" title="<?php echo i18n('Recent');?>" onclick="editFavoriteRow(true);menuNewGuiFilter('menuBarRecent', null);"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
         	           </tr>
       	           </table>    
 	             </div>
@@ -117,9 +117,11 @@ if(!$paramAccessMode)$paramAccessMode='direct';
                            }?>">
                           <?php if($defaultMenu=='menuBarCustom')echo $idRow;?>
         	             </td>
-        	             <td style="height:100%;" dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
-        	               <?php Menu::drawAllNewGuiMenus($defaultMenu, null, $idRow);?>
-        	               <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
+        	             <td style="height:100%;">
+        	               <div dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true" style="width: 1000%;height: 43px;">
+        	                 <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
+        	                 <?php Menu::drawAllNewGuiMenus($defaultMenu, null, $idRow);?>
+        	               </div>
         	             </td>
         	           </tr>
         	         </table>
@@ -129,11 +131,11 @@ if(!$paramAccessMode)$paramAccessMode='direct';
       	         <div id="favoriteSwitch" style="width:100%;height:100%;">
       	           <table style="width:100%;height:100%;<?php if($defaultMenu == 'menuBarRecent')echo 'display:none';?>">
       	             <tr>
-      	               <td id="editFavoriteButton" title="<?php echo i18n('editFavorite');?>" onClick="editFavoriteRow(false);" style="padding-left:5px;padding-right: 5px;"><?php echo formatNewGuiButton('Edit', 22, false);?></td>
+      	               <td id="editFavoriteButton" title="<?php echo i18n('editFavoriteRow');?>" onClick="editFavoriteRow(false);" style="padding-left:10px;padding-right: 5px;"><?php echo formatNewGuiButton('Edit', 22, false);?></td>
       	               <td id="favoriteSwitchRow" style="padding-right:5px;">
              	          <table style="height:22px;width:10px">
-             	            <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'up', <?php echo $nbFavoriteRow;?>);" >▲</td></tr>
-         	                <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'down', <?php echo $nbFavoriteRow;?>);" >▼</td></tr>
+             	            <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'up', <?php echo $nbFavoriteRow;?>);" title="<?php echo i18n('previousRow');?>">▲</td></tr>
+         	                <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'down', <?php echo $nbFavoriteRow;?>);" title="<?php echo i18n('nextRow');?>">▼</td></tr>
              	          </table>
       	               </td>
           	         </tr>

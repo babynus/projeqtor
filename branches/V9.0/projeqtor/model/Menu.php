@@ -168,7 +168,7 @@ class Menu extends SqlElement {
   	$style='width:auto;height:100%;padding:5px 10px 5px 10px !important;color: var(--color-dark);filter:unset !important;white-space:nowrap;';
     
     if ($menu->type=='item') {
-    	echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;">';
+    	echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;margin-top: 7px;">';
     	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
     	echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menu->name.'\');" ';
     	echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);';
@@ -189,7 +189,7 @@ class Menu extends SqlElement {
         echo '</div>';
         echo '</div>'; 
     } else if ($menu->type=='plugin') {
-          echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;">';
+          echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n($menu->name) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;margin-top: 7px;">';
           echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'"';
           echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);showFavoriteTooltip(\''.$class.'\');"';
           echo ' onMouseLeave="hideFavoriteTooltip(0,\''.$class.'\');"';
@@ -200,7 +200,7 @@ class Menu extends SqlElement {
           echo '</div>';
     } else if ($menu->type=='object') { 
           if (securityCheckDisplayMenu($idMenu, $class)) {
-          	echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n('menu'.$class) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;">';
+          	echo '<div id="dndItem'.$class.'" name="dndItem'.$class.'" title="' .i18n('menu'.$class) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;margin-top: 7px;">';
           	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
             echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);';
     		if($defaultMenu == 'menuBarRecent' and !in_array($menu->name,$customMenuArray) or ($defaultMenu == 'menuBarCustom')){
