@@ -47,9 +47,11 @@ $nbFavoriteRow=5;
        }?>">
       <?php if($defaultMenu=='menuBarCustom')echo $idRow;?>
     </td>
-    <td dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource"  style="height:100%;" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true">
-     <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
-     <?php Menu::drawAllNewGuiMenus($defaultMenu, $historyTable, $idRow);?>
+    <td style="height:100%;">
+     <div dojoType="dojo.dnd.Source" id="menuBarDndSource" jsId="menuBarDndSource" dndType="menuBar" data-dojo-props="accept: ['menuBar'], horizontal: true" style="width: 1000%;height: 43px;">
+       <input type="hidden" id="idFavoriteRow" name="idFavoriteRow" value="<?php echo $idRow;?>">
+       <?php Menu::drawAllNewGuiMenus($defaultMenu, null, $idRow);?>
+     </div>
    </td>
   </tr>
 </table>
