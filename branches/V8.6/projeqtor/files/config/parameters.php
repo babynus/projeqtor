@@ -1,4 +1,4 @@
-<?php 
+<?php
 // =======================================================================================
 // PARAMETERS
 // =======================================================================================
@@ -8,12 +8,11 @@ $paramDbType='mysql'; $paramDbPort='3306'; $paramDbUser='root'; $paramDbPassword
 $paramDbName='projeqtor_v86';$paramDbPrefix='';
 // --- PostgreSql Default
 //$paramDbType='pgsql'; $paramDbPort='5432'; $paramDbName='projeqtor'; $paramDbUser='projeqtor'; $paramDbPassword='projeqtor';
-//$paramDbName='support_ige';$paramDbPrefix=''; 
+//$paramDbName='support_andros';$paramDbPrefix='andros_'; 
 $paramDbHost='127.0.0.1';          // With MySql on Windows, better use "127.0.0.1" rather than "localhost"
 
 // ========== Log file configuration =====================================================
 $logFile='../files/logs/projeqtor_${date}.log';
-$logLevel='3';                     // "1"=Errors, "2"=Trace, "3"=Debug, "4"=Script
 
 // ========== Contextual configuration ===================================================
 //$lockPassword="false";           // Forbid password change (used in Demo to forbit password change)
