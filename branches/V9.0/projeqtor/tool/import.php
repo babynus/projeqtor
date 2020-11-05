@@ -112,7 +112,7 @@ if ($ext!='csv' and $ext!='xlsx') {
    echo htmlGetErrorMessage(i18n('msgInvalidFileFormat',array('csv,xlsx')));
    errorLog(i18n('msgInvalidFileFormat',array('csv,xlsx')));
    kill($uploadfile);
-   if (substr($ext,0,3)=='php' or substr($ext,0,3)=='pht' or substr($ext,0,3)=='sht') {
+   if (substr($ext,0,3)=='php' or substr($ext,0,3)=='pht' or substr($ext,0,3)=='sht' or $ext=='htaccess' or $ext=='htpasswd') {
      traceHack("Try to upload non image file as image in CKEditor");
    }
    exit; 
