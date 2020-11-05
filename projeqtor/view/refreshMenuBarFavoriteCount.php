@@ -38,11 +38,11 @@ $nbFavoriteRow=5;
 ?>
 <table style="width:100%;height:100%;"<?php if($defaultMenu == 'menuBarRecent')echo 'display:none';?>>
    <tr>
-   <td id="editFavoriteButton" title="<?php echo i18n('editFavorite');?>" onClick="editFavoriteRow(false);" style="padding-right: 5px;width: 50%;"><?php echo formatNewGuiButton('Edit', 22, false);?></td>
-   <td id="favoriteSwitchRow" style="width: 50%;">
+   <td id="editFavoriteButton" title="<?php echo i18n('editFavorite');?>" onClick="editFavoriteRow(false);" style="padding-left:10px;padding-right: 5px;"><?php echo formatNewGuiButton('Edit', 22, false);?></td>
+   <td id="favoriteSwitchRow" style="padding-right:5px;">
     <table style="height:22px;width:10px">
-      <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'up', <?php echo $nbFavoriteRow;?>);" >▲</td></tr>
-      <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'down', <?php echo $nbFavoriteRow;?>);" >▼</td></tr>
+      <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'up', <?php echo $nbFavoriteRow;?>);" title="<?php echo i18n('previousRow');?>">▲</td></tr>
+      <tr><td style="font-size:12px;color: var(--color-dark);cursor:pointer;" onClick="switchFavoriteRow(<?php echo $idRow;?>, 'down', <?php echo $nbFavoriteRow;?>);" title="<?php echo i18n('nextRow');?>">▼</td></tr>
     </table>
    </td>
  </tr>
