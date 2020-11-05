@@ -343,7 +343,7 @@
     			  </tr>
 			    </table>
 			    <div id="drawMenuInterrogation" dojoType="dijit.TooltipDialog"
-             style="max-width:600px; overflow-x:hidden; height:450px;  max-height:500px;  width:150px; ">
+             style="max-width:600px; overflow-x:hidden; height:450px;  max-height:500px;  width:350px; ">
              <?php include "menuUserInterrogation.php" ?>          
           </div> 
         </div>

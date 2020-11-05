@@ -374,7 +374,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       </tr>
       <?php } ?>
      </table>
-     <br><br>
+     <br>
      <table style="width: 100%;">
       <tr style="border-top:solid 1px;">
         <td> 
