@@ -41,8 +41,9 @@ if (! array_key_exists('class',$_REQUEST)) {
 }
 $class=$_REQUEST['class'];
 
+$isReport=(RequestHandler::isCodeSet('isReport') and isNewGui())?RequestHandler::getValue('isReport'):'false';
 $userId=getSessionUser()->id;
-$menuName='menu'.ucfirst($class);
+$menuName=($isReport=='false')?'menu'.ucfirst($class):$class;
 $menuId=SqlList::getIdFromName('Menu', $menuName);
 if (!$menuId) {
   //throwError("impossible to reteive menu id from name '$menuName'");
@@ -52,10 +53,15 @@ if ($operation=='add') {
   if ($ms->id) {
     throwError("impossible to store already existing custom menu '$class' for user '$userId'");
   } 
+  
   $ms->idUser=$userId;
   $ms->idMenu=$menuId;
   $ms->name=$menuName;
-  $ms->idRow=Parameter::getUserParameter('idFavoriteRow');
+  $ms->idRow=(isNewGui())?Parameter::getUserParameter('idFavoriteRow'):null;
+  if(isNewGui()){
+    $sortOrder=$ms->getMaxValueFromCriteria('sortOrder',array('idRow'=>$ms->idRow));
+    $ms->sortOrder=$sortOrder+1;
+  }
   $result=$ms->save();
   //echo $result;
 } else if ($operation=='remove') {
