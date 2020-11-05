@@ -99,7 +99,7 @@ if (!$error) {
   }
   $allowedExtensions=array('jpg','jpeg','gif','tiff','png','bmp','svg','ico');
   if (! in_array($ext,$allowedExtensions)) {
-    if (substr($ext,0,3)=='php' or substr($ext,0,3)=='pht' or substr($ext,0,3)=='sht') {
+    if (substr($ext,0,3)=='php' or substr($ext,0,3)=='pht' or substr($ext,0,3)=='sht' or $ext=='htaccess' or $ext=='htpasswd') {
       traceHack("Try to upload non image file as image in CKEditor");
       exit;
     }

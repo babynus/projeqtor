@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST" or securityGetAccessRightYesNo('menuPlu
   traceHack ( "plugin management tried without access right" );
   exit ();
 }
+Security::checkDisplayMenuForUser('Plugin');
 header ('Content-Type: text/html; charset=UTF-8');
 /** ===========================================================================
  * Save a document version (file) : call corresponding method in SqlElement Class
@@ -139,7 +140,7 @@ if (!$error) {
     if ($ext!='zip') {
       $error = htmlGetErrorMessage(i18n('msgInvalidFileFormat',array('zip')));
       traceLog(i18n('errorUploadFile',array(i18n('msgInvalidFileFormat',array('zip')))));
-      if (substr($ext,0,3)=='php' or substr($ext,0,3)=='pht' or substr($ext,0,3)=='sht') {
+      if (substr($ext,0,3)=='php' or substr($ext,0,3)=='pht' or substr($ext,0,3)=='sht' or $ext=='htaccess' or $ext=='htpasswd') {
         traceHack(i18n('msgInvalidFileFormat',array('zip')));
         exit;
       }

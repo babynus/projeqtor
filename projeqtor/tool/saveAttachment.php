@@ -226,7 +226,7 @@ foreach ($uploadedFileArray as $uploadedFile) {
 	  if ($type=='file') {
 	    $attachment->fileName=trim($uploadedFile['name']);
 	    $ext = strtolower ( pathinfo ( $attachment->fileName, PATHINFO_EXTENSION ) );
-	    if (substr($ext,0,3)=='php' or substr($ext,0,3)=='pht' or substr($ext,0,3)=='sht') {
+	    if (substr($ext,0,3)=='php' or substr($ext,0,3)=='pht' or substr($ext,0,3)=='sht' or $ext=='htaccess' or $ext=='htpasswd') {
 	    	$attachment->fileName.=".projeqtor";
 	    }
 	    $attachment->mimeType=$uploadedFile['type'];
