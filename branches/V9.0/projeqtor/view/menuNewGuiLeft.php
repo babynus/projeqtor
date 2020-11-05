@@ -380,14 +380,14 @@ function drawLeftMenuListNewGui($displayMode){
         $mode='remove';
         $class="menu__as__Fav";
       }
-      $funcuntionFav="addRemoveFavMenuLeft('div".$obj->name."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
+      $funcuntionFav="addRemoveFavMenuLeft('div".ucfirst($obj->name)."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
       $styleDiv="display:none;";
       $class="menu__add__Fav";
-      $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.$obj->name.'report\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.$obj->name.'report\',\'leave\');">';
+      $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.ucfirst($obj->name).'\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.ucfirst($obj->name).'\',\'leave\');">';
       $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'">';
       $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
       $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
-      $result.='<div id="div'.$obj->name.'report" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
+      $result.='<div id="div'.ucfirst($obj->name).'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }
   }else{
       $sub='submenu-'.$obj->id;
