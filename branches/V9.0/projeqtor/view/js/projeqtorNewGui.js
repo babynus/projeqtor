@@ -236,25 +236,25 @@ function addRemoveFavMenuLeft (id,name,mode,type){
   el.removeAttribute('onclick');
   });
   if(mode=='add'){
-  if(type=="reportDirect"){
-    //creat favorite report 
+     var isReport=(type=="reportDirect")?'true':'false';
+      var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','remove','"+type+"')";
+      var menuName=(isReport=='true')?name:name.substr(4);
+      var param="?operation=add&class="+menuName+"&isReport="+isReport;
+      dojo.xhrGet({
+        url : "../tool/saveCustomMenu.php"+param,
+        handleAs : "text",
+        load : function(data, args) {
+        },
+      });
+      items.forEach(function(el){
+        el.setAttribute('onclick',func);
+        el.setAttribute('class','menu__as__Fav');
+      });
   }else{
-    var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','remove')";
-    var param="?operation=add&class="+name.substr(4);
-    dojo.xhrGet({
-      url : "../tool/saveCustomMenu.php"+param,
-      handleAs : "text",
-      load : function(data, args) {
-      },
-    });
-    items.forEach(function(el){
-      el.setAttribute('onclick',func);
-      el.setAttribute('class','menu__as__Fav');
-    });
-  }
-  }else{
-  var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','add')";
-  var param="?operation=remove&class="+name.substr(4);
+  var isReport=(type=="reportDirect")?'true':'false';
+  var func= "addRemoveFavMenuLeft('"+id+"','"+name+"','add','"+type+"')";
+  var menuName=(isReport=='true')?name:name.substr(4);
+  var param="?operation=remove&class="+menuName+"&isReport="+isReport;
   dojo.xhrGet({
     url : "../tool/saveCustomMenu.php"+param,
     handleAs : "text",
@@ -322,8 +322,17 @@ function showBottomContent (menu){
   alldiv.forEach(function(el){
     el.style.display='none';
   });
+  dojo.setAttr('selectedViewMenu','value',menu);
   switch(menu){
     case 'Parameter':
+        var menuLeftTop=dojo.byId('ml-menu');
+        var menuSelected=menuLeftTop.querySelector('.menu__link--current');
+        if(menuSelected!=null){
+          var onclick=menuSelected.getAttribute('onclick');
+          var isObject=(onclick.includes('lodMenuBarItem'))?'false':'true';
+          var id=(menuSelected.id.indexOf('report')!=-1)?'Report':menuSelected.id.substr(4);
+          showMenuBottomParam(id,isObject);
+        }
         dojo.byId('parameterDiv').style.display='block';
       break;
     case 'Link':
@@ -342,7 +351,7 @@ function showBottomContent (menu){
       dojo.byId('messageDivNewGui').style.display='block';
       break;
   }
-  dojo.setAttr('selectedViewMenu','value',menu);
+  
 }
 
 //=============================================================================
@@ -374,11 +383,17 @@ function loadMenuReportDirect(cate,idReport){
 //show menu prameter on bottom left menu  
 //=============================================================================
 function showMenuBottomParam(item,isObject){
-  var menuSelect = dojo.byId('selectedScreen').value;
-  if(isNewGui && item!=menuSelect){
-    loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+item+'&isObject='+isObject,"parameterDiv");
+  if(dojo.byId('selectedViewMenu').value=='Parameter'){
+    var execute=true;
+    if(dojo.byId('menuParamDisplay')){
+      execute=(dojo.byId('menuParamDisplay').value!=menuSelect)?true:false;
+    }
+    var menuSelect = dojo.byId('selectedScreen').value;
+    if(item!=menuSelect && execute==true ){
+      loadContent("../tool/drawBottomParameterMenu.php?currentScreen="+item+'&isObject='+isObject,"parameterDiv");
+    }
+    dojo.setAttr('selectedScreen','value',item);
   }
-  dojo.setAttr('selectedScreen','value',item);
 }
 
 //=============================================================================
