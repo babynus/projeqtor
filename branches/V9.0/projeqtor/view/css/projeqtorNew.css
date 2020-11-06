@@ -901,3 +901,10 @@ animation: fadeIn ease 0.5s;
 	background: var(--color-medium) !important;
 }
 
+.ProjeQtOrNewGui .swapView {
+  height:200px !important;
+  width:350px !important;
+}
+.ProjeQtOrNewGui .indicatorPage {
+  bottom:70px !important;
+}
