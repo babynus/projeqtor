@@ -271,7 +271,7 @@ if (property_exists($objectClass,'idStatus')) {
     <tr>
       <td style="width:50px;min-width:43px;" align="center">
          <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
-         <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>
+         <div style="position:absolute; top:3px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>
       </td>
       <td class="title" style="height:35px;width:30%;">
      
