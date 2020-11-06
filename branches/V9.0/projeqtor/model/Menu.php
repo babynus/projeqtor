@@ -273,7 +273,7 @@ class Menu extends SqlElement {
       
       public static function drawIconMenuNewGui($drawMode,$class,$menu,$isReport=false){
         if($drawMode=='ICON'){
-          if($menu->type=='plugin' and $isReport==false){
+          if($isReport==false and $menu->type=='plugin'){
             echo  '<img src="../view/css/images/icon'.$class.'22.png" />';
           }else{
             echo  '<div class="icon'.$class.'22 icon'.$class.' iconSize22 imageColorNewGui" style="width:22px;height:22px"></div>';
@@ -282,7 +282,7 @@ class Menu extends SqlElement {
           echo  i18n($menu->name);
         }else if($drawMode=='ICONTXT'){
           echo  '<table><tr>';
-          if($menu->type=='plugin' and $isReport==false){
+          if($isReport==false and $menu->type=='plugin'){
             echo '<td><img src="../view/css/images/icon'.$class.'22.png" /></td>';
           }else{
             echo  '<td><div class="icon'.$class.'16 icon'.$class.' iconSize16 imageColorNewGui" style="width:16px;height:16px"></div></td>';
