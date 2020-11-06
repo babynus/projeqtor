@@ -2312,6 +2312,7 @@ helpDisplayBusinessFeature: "Zobrazenie obchodných funkcií na Produkt (definí
 helpDisplayChecklist: "Zobraziť kontrolné zoznamy definované pre prvky",
 helpDisplayContext: "Enable context to Product/Component (Version)",
 helpDisplayHistory: "zobraziť históriu zmien pre všetky prvky",
+helpDisplayIconMenuLeft: "Right click for display/hide icons",
 helpDisplayLanguage: "Povolený jazykpre užívateľa&#44 produktu / komponentu (verzia)",
 helpDisplayListOfActivity: "display list of activities on component version",
 helpDisplayMilestonesStartDelivery: "Zobrazte štartovacie a dodacie miľníky pre produktovú / verziu komponentov a dátumy dodania v plochých štruktúrach",
