@@ -611,6 +611,14 @@ function refreshGridCount(repeat) {
       dojo.byId('gridRowCountShadow2').innerHTML = grid.rowCount;
     }
   }
+  if (isNewGui && dojo.byId("classNameSpan") && dojo.byId("objectClass")) {
+    var classText=i18n("menu"+(dojo.byId("objectClass").value));
+    if (parseInt(grid.rowCount)<=1) {
+      classText=i18n(dojo.byId("objectClass").value);
+    }
+    dojo.byId("classNameSpan").innerHTML=classText;
+    if (dojo.byId("classNameSpanQuickSearch")) dojo.byId("classNameSpanQuickSearch").innerHTML=classText;
+  }
 }
 
 /**
