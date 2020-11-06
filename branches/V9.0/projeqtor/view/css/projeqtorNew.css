@@ -126,6 +126,9 @@ label, .ProjeQtOrNewGui label,
 	background-color: #ffffff;
 	color:var(--color-text);
 }
+.ProjeQtOrNewGui .textColorNewGui{
+  color:var(--color-text);
+}
 
 .ProjeQtOrNewGui .dijitButtonNode, 
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
