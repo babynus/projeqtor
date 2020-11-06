@@ -2312,6 +2312,7 @@ helpDisplayBusinessFeature: "prikaži poslovne funkcionalosti na proizvodu (defi
 helpDisplayChecklist: "Prikaz kontrolni popis definiran za element",
 helpDisplayContext: "Prikaži kontekst za proizvode / komponente (verzije)",
 helpDisplayHistory: "Prikaži povijest izmjena svakog elementa.",
+helpDisplayIconMenuLeft: "Right click for display/hide icons",
 helpDisplayLanguage: "Prikaži jezik za proizvode / komponente (verzije) i za korisnike",
 helpDisplayListOfActivity: "prikazati popis aktivnosti na verziji komponente",
 helpDisplayMilestonesStartDelivery: "Prikaži početak i dostavne prekretnice za verzije proizvoda / komponente i isporučne datume u ravnoj strukturi",

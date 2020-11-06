@@ -2312,6 +2312,7 @@ helpDisplayBusinessFeature: "Display Business features on Product (definition) a
 helpDisplayChecklist: "Display checklist defined for the element",
 helpDisplayContext: "Enable context to Product/Component (Version)",
 helpDisplayHistory: "Display history of changes on each element",
+helpDisplayIconMenuLeft: "Right click for display/hide icons",
 helpDisplayLanguage: "Enable language to User&#44; Product/Component (Version)",
 helpDisplayListOfActivity: "display list of activities on component version",
 helpDisplayMilestonesStartDelivery: "Display start and delivery milestones for Product/Component Version and delivery dates in flat structure",

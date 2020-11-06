@@ -2312,6 +2312,7 @@ helpDisplayBusinessFeature: "Afficher les fonctionnalités métier sur les produ
 helpDisplayChecklist: "Afficher les listes de contrôle défini pour l'élément",
 helpDisplayContext: "Active le contexte pour les versions de Produit/Composant",
 helpDisplayHistory: "Afficher l'historique des modifications sur chaque élément",
+helpDisplayIconMenuLeft: "Cliquez avec le bouton droit pour afficher / masquer les icônes",
 helpDisplayLanguage: "Activer la langue pour les versions de Produit/Composant et pour les Utilisateurs",
 helpDisplayListOfActivity: "Afficher la liste des activités sur les composants versions",
 helpDisplayMilestonesStartDelivery: "Afficher les jalons début et livraison pour les versions de Produit/Composant et les dates de livraison dans la structure à plat",
