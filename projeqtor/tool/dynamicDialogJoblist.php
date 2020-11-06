@@ -266,7 +266,7 @@ $status = array('done' => '#a5eda5',
                                     echo '<div dojoType="dijit.form.TextBox" type="hidden" id="job_'.$line->id .'_creationDate" name="job_'.$line->id .'_creationDate" value="' . htmlEncode(substr($lineVal->creationDate,0,10)) . '"></div>';
                                   }
 																	?>
-																		<div style="padding-right:16px;" class="buttonDivCreationInfoEdit" onClick="changeJobInfo(<?php echo $line->id ?>)">
+																		<div style="padding-right:15px;" class="buttonDivCreationInfoEdit" onClick="changeJobInfo(<?php echo $line->id ?>)">
 																		<?php
 															      echo formatUserThumb($lineVal->idUser, SqlList::getNameFromId('User', $lineVal->idUser), 'Creator');
 																		echo formatDateThumb(substr($lineVal->creationDate, 0, 10), null);
