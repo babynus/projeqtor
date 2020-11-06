@@ -34,7 +34,7 @@ scriptLog('   ->/view/refreshMenuBarList.php');
 
 $historyTable = RequestHandler::getValue('historyTable');
 $defaultMenu = RequestHandler::getValue('menuFilter');
-$idRow = Parameter::getUserParameter('idFavoriteRow');
+$idRow = intval(Parameter::getUserParameter('idFavoriteRow'));
 $nbFavoriteRow=5;
 ?>
 <table  style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
