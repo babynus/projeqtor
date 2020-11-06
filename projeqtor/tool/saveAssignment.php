@@ -204,7 +204,7 @@ if($planningMode == 'MAN' and $mode =='edit'){
     //$assignment->realWork=Work::convertWork($realWork); // Should not be changed here
     $assignment->leftWork=Work::convertWork($leftWork);
     $assignment->plannedWork=Work::convertWork($plannedWork);
-    $assignment->idle=trim($idle);
+    $assignment->idle=intval(trim($idle));
     $assignment->comment=$comment;
     
     if (! $assignment->idProject) {
