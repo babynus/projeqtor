@@ -159,7 +159,7 @@ if($isObject=='true' and $screen!=''){
   }
 }
 if(empty($allMenuSort)){
-  $result.='<div class="noMenuToDisplay">'.i18n("explainParameterMenu").'</div>';
+  $result.='<div class="noMenuToDisplay" style="font-style:italic;">'.i18n("explainParameterMenu").'</div>';
 }else{
   $result.='<ul id="parameterMenu" class="paramMenuBottom">';
   $result.='<input id="menuParamDisplay" value="'.$screen.'" hidden>';

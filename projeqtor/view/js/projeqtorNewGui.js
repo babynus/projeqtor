@@ -310,13 +310,18 @@ function showIconLeftMenu(){
 //=============================================================================
 function showBottomContent (menu){
   if(menu==dojo.byId('selectedViewMenu').value)return;
+  menuAcces=dojo.byId('menuPersonalAcces');
+  var asSelect=menuAcces.querySelector('.iconBreadSrumbSelect');
+  if(asSelect){
+    classie.remove(asSelect,'iconBreadSrumbSelect');
+  }
+  classie.add(dojo.byId('button'+menu),'iconBreadSrumbSelect');
   saveDataToSession('bottomMenuDivItemSelect',menu,true);
   if(menu!='Console'){
     dojo.byId('messageDivNewGui').style.display='none';
     dojo.byId('loadDivBarBottom').style.display='block';
     
   }
-  
   var items=dojo.byId('loadDivBarBottom');
   var alldiv=items.querySelectorAll('.menuBottomDiv');
   alldiv.forEach(function(el){
@@ -373,6 +378,7 @@ function loadMenuReportDirect(cate,idReport){
   if(defaultMenu == 'menuBarRecent'){
     menuNewGuiFilter(defaultMenu, item);
   }
+  editFavoriteRow(true);
   selectIconMenuBar(item);
   setTimeout('reportSelectReport('+idReport+')',500);
   return true;
@@ -422,6 +428,12 @@ function refreshSelectedMenuLeft(menuName){
 }
 //=============================================================================
 
+function helpDisplayIconIsRead (val){
+  if(val=='yes'){
+    saveUserParameter('helpDisplayIconMesagediv',val);
+    dojo.byId('helpDisplayIcon').style.display='none';
+  }
+}
 
 function menuNewGuiFilter(filter, item) {
   saveUserParameter('defaultMenu', filter);

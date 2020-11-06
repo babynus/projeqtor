@@ -30,6 +30,7 @@
   require_once "../tool/projeqtor.php";
 
 $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
+ $viewSelect=Parameter::getUserParameter('bottomMenuDivItemSelect');
 ?>
 
 <div id="menuLeftBarContaineur" class="container"  dojoType="dijit.layout.BorderContainer" liveSplitters="false" >
@@ -39,14 +40,14 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
     </div>
     <div id="menuPersonalAcces"  onresize="showBottomLeftMenu();"  dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;overflow: hidden;" >
       <div id="iconsBottomSize" onresize="">
-        <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb" onclick="showBottomContent('Parameter')"  title="<?php echo i18n('menuParameter');?>"></div>
-        <div id="buttonLink" class="iconButtonLink16 iconSize22 iconBreadSrumb" onclick="showBottomContent('Link')" title="<?php echo i18n('ExternalShortcuts');?>"></div>
+        <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb <?php echo ($viewSelect=='Parameter')? 'iconBreadSrumbSelect':'';?>" onclick="showBottomContent('Parameter')"  title="<?php echo i18n('menuParameter');?>"></div>
+        <div id="buttonLink" class="iconButtonLink16 iconSize22 iconBreadSrumb <?php echo ($viewSelect=='Link')? 'iconBreadSrumbSelect':'';?>" onclick="showBottomContent('Link')" title="<?php echo i18n('ExternalShortcuts');?>"></div>
         <?php if (securityCheckDisplayMenu(null,'Document')) {?>
-        <div title="<?php echo i18n('document');?>" id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb" onclick="showBottomContent('Document')"></div>
+        <div title="<?php echo i18n('document');?>" id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb <?php echo ($viewSelect=='Document')? 'iconBreadSrumbSelect':'';?>" onclick="showBottomContent('Document')"></div>
         <?php }?>
-        <div id="buttonConsole" class="iconConsole iconSize22 iconBreadSrumb" onclick="showBottomContent('Console')"  title="<?php echo i18n('Console');?>"></div>
+        <div id="buttonConsole" class="iconConsole iconSize22 iconBreadSrumb <?php echo ($viewSelect=='Console')? 'iconBreadSrumbSelect':'';?>" onclick="showBottomContent('Console')"  title="<?php echo i18n('Console');?>"></div>
         <?php if(securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv()){?>
-        <div id="buttonNotification" class="iconNotification  iconSize22 iconBreadSrumb" onclick="showBottomContent('Notification')"  title="<?php echo i18n('accordionNotification');?>"></div>
+        <div id="buttonNotification" class="iconNotification  iconSize22 iconBreadSrumb <?php echo ($viewSelect=='Notification')? 'iconBreadSrumbSelect':'';?>" onclick="showBottomContent('Notification')"  title="<?php echo i18n('accordionNotification');?>"></div>
         <?php }?>
       </div>
     </div>
@@ -69,8 +70,15 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 	    })();
 	   new menuLeft( dojo.byId( 'mainDiv' ) );
 	  </script>
+	<?php if(Parameter::getUserParameter('helpDisplayIconMesagediv')!='yes'){ ?>
+	 <div id="helpDisplayIcon" class="helpDisplayIcon" onclick="helpDisplayIconIsRead('yes')" style="vertical-align: middle;"
+	   onmouseover="dojo.byId('textDisplayIcon').style.display='none';dojo.byId('hideTextDisplayIcon').style.display='block';"
+	  onmouseout="dojo.byId('textDisplayIcon').style.display='block';dojo.byId('hideTextDisplayIcon').style.display='none';" >
+	   <div id="textDisplayIcon"><span><?php echo i18n('helpDisplayIconMenuLeft');?></span></div>
+	   <div id="hideTextDisplayIcon" style="display:none" ><span><?php echo i18n('clickIntoToClose');?></span></div>
+	 </div>
+	<?php } ?>
     </div>
-    <?php $viewSelect=Parameter::getUserParameter('bottomMenuDivItemSelect');?>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;">
       <div class="container" style="height:98%;width:100%;">
       <input id="selectedViewMenu" value="<?php echo $viewSelect;?>" hidden >

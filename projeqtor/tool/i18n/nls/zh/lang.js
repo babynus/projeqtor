@@ -2312,6 +2312,7 @@ helpDisplayBusinessFeature: "Display Business features on Product (definition) a
 helpDisplayChecklist: "Display checklist defined for the element",
 helpDisplayContext: "启用产品/组件（版本）对应的语境",
 helpDisplayHistory: "显示每个要素的变更历史",
+helpDisplayIconMenuLeft: "Right click for display/hide icons",
 helpDisplayLanguage: "启用用户，产品/组件（版本）对应的语言",
 helpDisplayListOfActivity: "display list of activities on component version",
 helpDisplayMilestonesStartDelivery: "Display start and delivery milestones for Product/Component Version and delivery dates in flat structure",

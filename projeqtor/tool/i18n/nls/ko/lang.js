@@ -2312,6 +2312,7 @@ helpDisplayBusinessFeature: "제품 (정의) 및 티켓 및 요구 사항 (사�
 helpDisplayChecklist: "요소에 대해 정의 된 표시 점검 목록",
 helpDisplayContext: "제품 / 구성 요소에 대한 컨텍스트 사용 (버전)",
 helpDisplayHistory: "각 요소의 변경 내역 표시",
+helpDisplayIconMenuLeft: "Right click for display/hide icons",
 helpDisplayLanguage: "사용자 제품 / 구성 요소 (버전)에 언어 사용",
 helpDisplayListOfActivity: "구성 요소 버전의 활동 목록 표시",
 helpDisplayMilestonesStartDelivery: "제품 / 구성 요소 버전 및 납품 일의 시작 및 배송 이정표를 평평한 구조로 표시",

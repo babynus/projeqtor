@@ -2314,6 +2314,7 @@ helpDisplayBusinessFeature: "Отображение бизнес-функций 
 helpDisplayChecklist: "Отобразить списки выбора&#44; определённые для данного элемента",
 helpDisplayContext: "Включить контекст для продукта/компонента (версия)",
 helpDisplayHistory: "Отображение историй изменений для каждого вложения",
+helpDisplayIconMenuLeft: "Right click for display/hide icons",
 helpDisplayLanguage: "Включить язык для пользователя&#44; продукт/компонент (версия)",
 helpDisplayListOfActivity: "список действий в версии компонента",
 helpDisplayMilestonesStartDelivery: "Отображение вех и этапов запуска и доставки для версии продукта/компонента и сроков поставки в плоской структуре",

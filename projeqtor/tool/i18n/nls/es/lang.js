@@ -2312,6 +2312,7 @@ helpDisplayBusinessFeature: "Mostrar las características del negocio en el prod
 helpDisplayChecklist: "Mostrar lista de verificación definida para el elemento",
 helpDisplayContext: "Habilitar contexto a Producto / Componente (Versión)",
 helpDisplayHistory: "Mostrar el historial de cambios para cada ítem",
+helpDisplayIconMenuLeft: "Right click for display/hide icons",
 helpDisplayLanguage: "Habilitar el idioma para Usuario&#44; Producto / Componente (Versión)",
 helpDisplayListOfActivity: "mostrar la lista de actividades en la versión del componente",
 helpDisplayMilestonesStartDelivery: "Mostrar los hitos de inicio y entrega para la versión del Producto/Componente y las fechas de entrega en una estructura plana",
