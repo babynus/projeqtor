@@ -373,6 +373,7 @@ function loadMenuReportDirect(cate,idReport){
   if(defaultMenu == 'menuBarRecent'){
     menuNewGuiFilter(defaultMenu, item);
   }
+  editFavoriteRow(true);
   selectIconMenuBar(item);
   setTimeout('reportSelectReport('+idReport+')',500);
   return true;
@@ -424,6 +425,7 @@ function refreshSelectedMenuLeft(menuName){
 
 
 function menuNewGuiFilter(filter, item) {
+  saveUserParameter('defaultMenu', filter);
 	var historyBar = new Array();
 //	var historyBarSort = new Array();
 	historyTable.forEach(function(element){
@@ -453,11 +455,12 @@ function menuNewGuiFilter(filter, item) {
 	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, null, null, null, null, callback, true);
 	cleanContent("anotherBarContainer");
 	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter+'&isMenuLeftOpen='+isMenuLeftOpen, 'anotherBarContainer', null, null, null, null, null, hide, true);
-	saveUserParameter('defaultMenu', filter);
+	
 	defaultMenu=filter;
 }
 
 function switchFavoriteRow(idRow, direction, maxRow){
+  console.log(idRow);
 	var nextRow=idRow;
 	if(direction=='up'){
 		do{
@@ -482,6 +485,7 @@ function switchFavoriteRow(idRow, direction, maxRow){
 }
 
 function wheelFavoriteRow(idRow, evt, maxRow){
+  console.log(idRow);
 	if(defaultMenu == 'menuBarRecent')return;
 	var nextRow=idRow;
 	if(evt.deltaY < 0){
@@ -538,7 +542,7 @@ function moveMenuBarItem(source, target){
 	var customArray = new Array();
 	var pos = 1;
 	dojo.byId(target).querySelectorAll('.dojoDndItem').forEach(function(node){
-		customArray[pos] = 'menu'+node.id.substr(7);
+		customArray[pos] = node.id.substr(7);
 		pos++;
 	});
 	var param="?idSourceFrom="+source+"&idSourceTo="+target+"&idRow="+idRow+"&customArray="+customArray+'&defaultMenu='+defaultMenu;

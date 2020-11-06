@@ -32,7 +32,7 @@ require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
 scriptLog('   ->/view/refreshMenuBarFavoriteCount.php');
 
-$idRow = RequestHandler::getValue('idFavoriteRow');
+$idRow = intval(RequestHandler::getValue('idFavoriteRow'));
 $defaultMenu = RequestHandler::getValue('defaultMenu');
 $nbFavoriteRow=5;
 ?>
