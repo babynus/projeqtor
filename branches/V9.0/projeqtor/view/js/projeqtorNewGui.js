@@ -373,7 +373,6 @@ function loadMenuReportDirect(cate,idReport){
   if(defaultMenu == 'menuBarRecent'){
     menuNewGuiFilter(defaultMenu, item);
   }
-  editFavoriteRow(true);
   selectIconMenuBar(item);
   setTimeout('reportSelectReport('+idReport+')',500);
   return true;
@@ -455,12 +454,12 @@ function menuNewGuiFilter(filter, item) {
 	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, null, null, null, null, callback, true);
 	cleanContent("anotherBarContainer");
 	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter+'&isMenuLeftOpen='+isMenuLeftOpen, 'anotherBarContainer', null, null, null, null, null, hide, true);
-	
+	loadDiv('../view/refreshMenuBarButtonFavorite.php?item='+item, 'menuBarButtonFavorite', null);
+	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
 }
 
 function switchFavoriteRow(idRow, direction, maxRow){
-  console.log(idRow);
 	var nextRow=idRow;
 	if(direction=='up'){
 		do{
@@ -485,7 +484,6 @@ function switchFavoriteRow(idRow, direction, maxRow){
 }
 
 function wheelFavoriteRow(idRow, evt, maxRow){
-  console.log(idRow);
 	if(defaultMenu == 'menuBarRecent')return;
 	var nextRow=idRow;
 	if(evt.deltaY < 0){
