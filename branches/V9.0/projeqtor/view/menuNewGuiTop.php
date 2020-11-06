@@ -102,8 +102,16 @@ if(!$paramAccessMode)$paramAccessMode='direct';
                             </div>
                           </div>
         	             </td>
-    	                 <td style="padding-right:5px" class="<?php if($defaultMenu=='menuBarCustom')echo 'imageColorNewGuiSelected';?>" id="favoriteButton" title="<?php echo i18n('Favorite');?>" onclick="menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
-    	                 <td style="padding-right:10px" class="<?php if($defaultMenu=='menuBarRecent')echo 'imageColorNewGuiSelected';?>" id="recentButton" title="<?php echo i18n('Recent');?>" onclick="editFavoriteRow(true);menuNewGuiFilter('menuBarRecent', null);"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
+        	             <td>
+        	               <div name="menuBarFavoriteButton" id="menuBarFavoriteButton" style="width:100%;height:100%;">
+        	                 <table style="width:100%;height:100%;">
+        	                   <tr>
+        	                     <td style="padding-right:5px" class="<?php if($defaultMenu=='menuBarCustom')echo 'imageColorNewGuiSelected';?>" id="favoriteButton" title="<?php echo i18n('Favorite');?>" onclick="menuNewGuiFilter('menuBarCustom', null);"><?php echo formatNewGuiButton('Favoris', 22, true);?></td>
+    	                         <td style="padding-right:10px" class="<?php if($defaultMenu=='menuBarRecent')echo 'imageColorNewGuiSelected';?>" id="recentButton" title="<?php echo i18n('Recent');?>" onclick="editFavoriteRow(true);menuNewGuiFilter('menuBarRecent', null);"><?php echo formatNewGuiButton('Recent', 22, true);?></td>
+        	                   </tr>
+        	                 </table>
+        	               </div>
+        	             </td>
         	           </tr>
       	           </table>    
 	             </div>
