@@ -129,7 +129,10 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui .textColorNewGui{
   color:var(--color-text);
 }
-
+.ProjeQtOrNewGui  #gridRowCount:hover {
+  font-size: 100%;
+  top: 0;    
+}
 .ProjeQtOrNewGui .dijitButtonNode, 
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
   background: transparent;
