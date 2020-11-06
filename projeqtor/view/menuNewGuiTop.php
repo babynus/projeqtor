@@ -30,8 +30,11 @@
   require_once "../tool/projeqtor.php";
   
 $iconSize=22;
-$idRow = Parameter::getUserParameter('idFavoriteRow');
-if(!$idRow)$idRow=1;
+$idRow = intval(Parameter::getUserParameter('idFavoriteRow'));
+if($idRow==0){
+  $idRow=1;
+  Parameter::storeUserParameter('idFavoriteRow', $idRow);
+}
 $nbFavoriteRow=5;
 $paramAccessMode = Parameter::getUserParameter('newItemAccessMode');
 if(!$paramAccessMode)$paramAccessMode='direct';
