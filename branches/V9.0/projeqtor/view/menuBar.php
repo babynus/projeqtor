@@ -299,7 +299,7 @@
         <a target="#" href="<?php echo $website;?>" >
           <table style="width:100%">
             <tr>
-              <td class="dijitTreeRow" style="position:relative; top:-2px;vertical-align: middle;text-align:center;width:70px;">
+              <td class="dijitTreeRow" style="position:relative; top:-1px;vertical-align: middle;text-align:center;width:70px;">
                 <?php echo "$version";?>
               </td>
               <td  style="width:35px">
@@ -359,11 +359,11 @@
       					 $imgUrl=Affectable::getThumbUrl('User',$user->id, 22,true);
       				if ($imgUrl) {?>  
       				<td style="width:24px;vertical-align:middle;position:relative;">          
-      				  <img style="border-radius:13px;height:26px" src="<?php echo $imgUrl; ?>" />
+      				  <img style="border-radius:13px;height:26px;position:relative;top:1px" src="<?php echo $imgUrl; ?>" />
       				</td>
       			  <?php } else {?>
-      				<td id="iconTopMenuUserParameter" style="width:24px;padding-top:2px;">
-      				  <div  class="iconTopMenuUserParameter <?php if ($iconClassWithSize) echo 'iconUserParameter22';?> iconUserParameter iconSize22">&nbsp;</div> 
+      				<td id="iconTopMenuUserParameter" style="width:24px;padding-top:3px;">
+      				  <div style="height:22px" class="iconTopMenuUserParameter <?php if ($iconClassWithSize) echo 'iconUserParameter22';?> iconUser iconSize22">&nbsp;</div> 
       				</td>
       			   <?php }?>
       			  <td style="vertical-align:middle;">&nbsp;<?php echo ($user->resourceName)?$user->resourceName:$user->name; ?>&nbsp;&nbsp;</td>
