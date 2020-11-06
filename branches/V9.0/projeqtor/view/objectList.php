@@ -230,7 +230,7 @@ if (property_exists($objectClass,'idStatus')) {
             <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>      
             <div style="z-index:9;position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>    
           </td>
-          <td><span class="title" ><?php echo i18n("menu" . $objectClass);?></span></td>
+          <td><span class="title" id="classNameSpanQuickSearch"><?php echo i18n("menu" . $objectClass);?></span></td>
           <td style="text-align:right;" width="200px">
                   <span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <?php echo i18n("quickSearch");?>
