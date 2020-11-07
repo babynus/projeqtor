@@ -5,6 +5,8 @@ function setColorTheming(ref,bis, mode) {
   colorThemingInProgress=true;
   if (!ref && dojo.byId('menuUserColorPicker')) ref=dojo.byId('menuUserColorPicker').value;
   if (!bis && dojo.byId('menuUserColorPickerBis')) bis=dojo.byId('menuUserColorPickerBis').value;
+  var white='#ffffff';
+  var black='#000000';
   if (!mode) mode='hsl'; // Mode = hsl or hsv 
   if (mode=='hsl') {
     var hsl=hexToHSL(ref);
@@ -45,8 +47,6 @@ function setColorTheming(ref,bis, mode) {
     // Default (initialization) =============================== INIT
     if (!ref) ref='#545381';
     if (!bis) bis='#E97B2C';
-    var white='#ffffff';
-    var black='#000000';
     var dark='#656565';
     var medium='#b5b5b5';
     var light='#d8d8d8';
