@@ -1,67 +1,113 @@
 
 colorThemingInProgress=false;
-function setColorTheming(ref,bis) {
+function setColorTheming(ref,bis, mode) {
   if (colorThemingInProgress) return;
   colorThemingInProgress=true;
   if (!ref && dojo.byId('menuUserColorPicker')) ref=dojo.byId('menuUserColorPicker').value;
   if (!bis && dojo.byId('menuUserColorPickerBis')) bis=dojo.byId('menuUserColorPickerBis').value;
-  //ref='#e97b2c';// Pour Test
-  if (!ref) ref='#656565'; // dark grey
-  if (!bis) bis='#E97B2C';
-  var white='#ffffff';
-  var black='#000000';
-  var dark='#656565';
-  var medium='#b5b5b5';
-  var light='#d8d8d8';
-  var lighter='#f0f0f0';
-  var hueRotate=0;
-  var saturate=0;
-  var brightness=0;
+  if (!mode) mode='hsl'; // Mode = hsl or hsv 
+  if (mode=='hsl') {
+    var hsl=hexToHSL(ref);
+    var h=hsl[0];
+    var s=hsl[1];
+    var l=hsl[2];
+    darker=HSLToHex(h,(s==0)?0:25,25);
+    dark=HSLToHex(h,(s==0)?0:25,40);
+    medium=HSLToHex(h,s,70);
+    light=HSLToHex(h,s,90);
+    lighter=HSLToHex(h,s,95);
+    var hslDefault=hexToHSL('#ff0000');
+    hueRotate=h-hslDefault[0];
+    //saturate=Math.round(s/hslDefault[1]*100);
+    //brightness=Math.round(40/hslDefault[2]*100);
+    saturate=50;
+    if (s==0) saturate=0;
+    brightness=80;
+    //saturate=100;
+    //brightness=100;
+    
+    var hsl=hexToHSL(bis);
+    var h=hsl[0];
+    var s=hsl[1];
+    var l=hsl[2];
+    darkerBis=HSLToHex(h,25,25);
+    darkBis=HSLToHex(h,25,40);
+    mediumBis=HSLToHex(h,s,70);
+    lightBis=HSLToHex(h,s,90);
+    lighterBis=HSLToHex(h,s,95);
+    hueRotateSelected=h-hslDefault[0];
+    saturateSelected=Math.round(s/hslDefault[1]*100);
+    brightnessSelected=Math.round(l/hslDefault[2]*200);
+    if (brightnessSelected>240) brightnessSelected=240;
+    if (saturateSelected>80) saturateSelected=80;
+    console.log("saturateSelected="+saturateSelected+", brightnessSelected="+brightnessSelected);
+  } else {
+    // Default (initialization) =============================== INIT
+    if (!ref) ref='#545381';
+    if (!bis) bis='#E97B2C';
+    var white='#ffffff';
+    var black='#000000';
+    var dark='#656565';
+    var medium='#b5b5b5';
+    var light='#d8d8d8';
+    var lighter='#f0f0f0';
+    var hueRotate=0;
+    var saturate=0;
+    var brightness=0;
   
-  if (ref=='blue') {
-    ref='#545381';
-  } else if (ref=='red') {
-    ref='#833e3e';
-  } else if (ref=='green') {
-    ref='#537665';
-  } else if (ref=='grey') {
-    ref='#656565';
-  } else if (ref=='orange') {
-    ref='#e97b2c';
-  } 
-
-  var hsl=hexToHSL(ref);
-  var h=hsl[0];
-  var s=hsl[1];
-  var l=hsl[2];
-  darker=HSLToHex(h,(s==0)?0:25,25);
-  dark=HSLToHex(h,(s==0)?0:25,40);
-  medium=HSLToHex(h,s,70);
-  light=HSLToHex(h,s,90);
-  lighter=HSLToHex(h,s,95);
-  var hslDefault=hexToHSL('#ff0000');
-  hueRotate=h-hslDefault[0];
-  //saturate=Math.round(s/hslDefault[1]*100);
-  //brightness=Math.round(40/hslDefault[2]*100);
-  saturate=50;
-  if (s==0) saturate=0;
-  brightness=80;
-  //saturate=100;
-  //brightness=100;
+    // REF Color (Primary) ==================================== REF
+    var hsvRef=hexToHSV(ref);
+    var hRef=hsvRef[0];
+    var sRef=hsvRef[1];
+    var vRef=hsvRef[2];
+    console.log("***********");
+    var test=HSVToHex(hRef,sRef,vRef);
+    console.log(test);
+    darker=HSVToHex(hRef,sRef,40);
+    dark=HSVToHex(hRef,sRef,70);
+    medium=HSVToHex(hRef,sRef,90);
+    light=HSVToHex(hRef,10,99);
+    lighter=HSVToHex(hRef,5,99);
   
-  var hsl=hexToHSL(bis);
-  var h=hsl[0];
-  var s=hsl[1];
-  var l=hsl[2];
-  darkerBis=HSLToHex(h,25,25);
-  darkBis=HSLToHex(h,25,40);
-  mediumBis=HSLToHex(h,s,70);
-  lightBis=HSLToHex(h,s,90);
-  lighterBis=HSLToHex(h,s,95);
-  hueRotateSelected=h-hslDefault[0];
-  saturateSelected=Math.round(s/hslDefault[1]*100);
-  brightnessSelected=Math.round(l/hslDefault[2]*200);
+    // DEFAULT (Red) = color of icons, to define translation === ICON
+    var hsvDefault=hexToHSV('#ff0000');
+    hueRotate=hRef-hsvDefault[0];
+    saturate=100; // Math.round(sRef/hsvDefault[1]*1000)/10;
+    brightness=80;// Math.round(vRef/hsvDefault[2]*1000)/10;
+    if (sRef<25) {
+      saturate=sRef;
+      brightness=200
+    }
+    if (vRef<25) {
+      //saturate=sRef;
+      brightness=vRef;
+    }
+    saturate=sRef;
+    brightness=2*vRef;
   
+    // BIS Color (Secondary)
+    var hsvBis=hexToHSV(bis);
+    var hBis=hsvBis[0];
+    var sBis=hsvBis[1];
+    var vBis=hsvBis[2];
+    if (vBis>80) {
+      vBis=80;
+      bis=HSVToHex(hBis,sBis,vBis);
+    }
+    darkerBis=HSVToHex(hBis,25,25);
+    darkBis=HSVToHex(hBis,25,40);
+    mediumBis=HSVToHex(hBis,sBis,70);
+    lightBis=HSVToHex(hBis,sBis,90);
+    lighterBis=HSVToHex(hBis,sBis,95);
+    hueRotateSelected=hBis-hsvDefault[0];
+    saturateSelected=Math.round(sBis/hsvDefault[1]*100);
+    brightnessSelected=Math.round(vBis/hsvDefault[2]*100);
+    console.log("transform : hue="+hueRotateSelected+" sat="+saturateSelected+" bri="+brightnessSelected);
+    if (brightnessSelected > 180) {
+      //brightnessSelected=180;
+    }
+  }
+  if(!isNewGui) dojo.byId("logoMenuBar").src="img/logoSmallWhite.png";
   var foreColor = '#000000';
   var invert=1;
   if (ref.length == 7) {
@@ -78,8 +124,7 @@ function setColorTheming(ref,bis) {
       hex=Number(dec).toString(16); 
       if (hex.length < 2) { hex="0"+hex; } 
       foreColor = '#'+hex+hex+hex;
-      foreColor = '#ffffff';
-     if(!isNewGui) dojo.byId("logoMenuBar").src="img/logoSmallWhite.png";
+      foreColor = '#ffffff';    
     } else {
       invert=0;
       dec=parseInt(lightness-128);
@@ -159,7 +204,6 @@ function setColorTheming(ref,bis) {
   element.style.setProperty("--color-section-title-text", dark);
   element.style.setProperty("--color-section-title-border", dark);
   element.style.setProperty("--color-table-header", light);
-  
   // Tools (buttons, ...)
   element.style.setProperty("--color-button-background", lighter);
   element.style.setProperty("--color-button-text", dark);
@@ -173,18 +217,17 @@ function setColorTheming(ref,bis) {
   colorThemingInProgress=false;
 }
 
+// ==========================================================================
+// Transformation Functions
+//==========================================================================
+
 function RGBToHex(r,g,b) {
   r = r.toString(16);
   g = g.toString(16);
   b = b.toString(16);
-
-  if (r.length == 1)
-    r = "0" + r;
-  if (g.length == 1)
-    g = "0" + g;
-  if (b.length == 1)
-    b = "0" + b;
-
+  if (r.length == 1) r = "0" + r;
+  if (g.length == 1) g = "0" + g;
+  if (b.length == 1) b = "0" + b;
   return "#" + r + g + b;
 }
 function RGBAToHexA(r,g,b,a) {
@@ -192,46 +235,32 @@ function RGBAToHexA(r,g,b,a) {
   g = g.toString(16);
   b = b.toString(16);
   a = Math.round(a * 255).toString(16);
-
-  if (r.length == 1)
-    r = "0" + r;
-  if (g.length == 1)
-    g = "0" + g;
-  if (b.length == 1)
-    b = "0" + b;
-  if (a.length == 1)
-    a = "0" + a;
-
+  if (r.length == 1) r = "0" + r;
+  if (g.length == 1) g = "0" + g;
+  if (b.length == 1) b = "0" + b;
+  if (a.length == 1) a = "0" + a;
   return "#" + r + g + b + a;
 }
 function hexToRGB(h) {
   let r = 0, g = 0, b = 0;
-
-  // 3 digits
-  if (h.length == 4) {
-    r = "0x" + h[1] + h[1];
-    g = "0x" + h[2] + h[2];
-    b = "0x" + h[3] + h[3];
-
-  // 6 digits
-  } else if (h.length == 7) {
-    r = "0x" + h[1] + h[2];
-    g = "0x" + h[3] + h[4];
-    b = "0x" + h[5] + h[6];
+  if (h.length == 4) {   // 3 digits
+    r = parseInt("0x"+h[1]+h[1],16);
+    g = parseInt("0x"+h[2]+h[2],16);
+    b = parseInt("0x"+h[3]+h[3],16);
+  } else if (h.length == 7) { // 6 digits
+    r = parseInt("0x"+h[1]+h[2],16);
+    g = parseInt("0x"+h[3]+h[4],16);
+    b = parseInt("0x"+h[5]+h[6],16);
   }
-  
-  //return "rgb("+ +r + "," + +g + "," + +b + ")";
   return new Array(r,g,b);
 }
 function hexAToRGBA(h) {
   let r = 0, g = 0, b = 0, a = 1;
-
   if (h.length == 5) {
     r = "0x" + h[1] + h[1];
     g = "0x" + h[2] + h[2];
     b = "0x" + h[3] + h[3];
     a = "0x" + h[4] + h[4];
-
   } else if (h.length == 9) {
     r = "0x" + h[1] + h[2];
     g = "0x" + h[3] + h[4];
@@ -239,8 +268,6 @@ function hexAToRGBA(h) {
     a = "0x" + h[7] + h[8];
   }
   a = +(a / 255).toFixed(3);
-
-  //return "rgba(" + +r + "," + +g + "," + +b + "," + a + ")";
   return new Array(r,g,b,a)
 }
 function hexToHSL(H) {
@@ -265,65 +292,84 @@ function hexToHSL(H) {
       h = 0,
       s = 0,
       l = 0;
-
-  if (delta == 0)
-    h = 0;
-  else if (cmax == r)
-    h = ((g - b) / delta) % 6;
-  else if (cmax == g)
-    h = (b - r) / delta + 2;
-  else
-    h = (r - g) / delta + 4;
-
+  if (delta == 0) h = 0;
+  else if (cmax == r) h = ((g - b) / delta) % 6;
+  else if (cmax == g) h = (b - r) / delta + 2;
+  else  h = (r - g) / delta + 4;
   h = Math.round(h * 60);
-
-  if (h < 0)
-    h += 360;
-
+  if (h < 0) h += 360;
   l = (cmax + cmin) / 2;
   s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
   s = +(s * 100).toFixed(1);
   l = +(l * 100).toFixed(1);
-
-  //return "hsl(" + h + "," + s + "%," + l + "%)";
   return new Array(h,s,l);
 }
 function HSLToHex(h,s,l) {
   s /= 100;
   l /= 100;
-
   let c = (1 - Math.abs(2 * l - 1)) * s,
       x = c * (1 - Math.abs((h / 60) % 2 - 1)),
       m = l - c/2,
       r = 0,
       g = 0,
       b = 0;
-
-  if (0 <= h && h < 60) {
-    r = c; g = x; b = 0;
-  } else if (60 <= h && h < 120) {
-    r = x; g = c; b = 0;
-  } else if (120 <= h && h < 180) {
-    r = 0; g = c; b = x;
-  } else if (180 <= h && h < 240) {
-    r = 0; g = x; b = c;
-  } else if (240 <= h && h < 300) {
-    r = x; g = 0; b = c;
-  } else if (300 <= h && h < 360) {
-    r = c; g = 0; b = x;
-  }
+  if (0 <= h && h < 60) { r = c; g = x; b = 0;} 
+  else if (60 <= h && h < 120) { r = x; g = c; b = 0;} 
+  else if (120 <= h && h < 180) { r = 0; g = c; b = x;} 
+  else if (180 <= h && h < 240) { r = 0; g = x; b = c;} 
+  else if (240 <= h && h < 300) { r = x; g = 0; b = c;} 
+  else if (300 <= h && h < 360) { r = c; g = 0; b = x; }
   // Having obtained RGB, convert channels to hex
   r = Math.round((r + m) * 255).toString(16);
   g = Math.round((g + m) * 255).toString(16);
   b = Math.round((b + m) * 255).toString(16);
-
   // Prepend 0s, if necessary
-  if (r.length == 1)
-    r = "0" + r;
-  if (g.length == 1)
-    g = "0" + g;
-  if (b.length == 1)
-    b = "0" + b;
-
+  if (r.length == 1) r = "0" + r;
+  if (g.length == 1) g = "0" + g;
+  if (b.length == 1) b = "0" + b;
   return "#" + r + g + b;
+}
+function hexToHSV(H) {
+  var arr=hexToRGB(H);
+  return rgbToHsv(arr[0],arr[1],arr[2]);
+}
+function HSVToHex(h,s,v) {
+  var arr=hsvToRgb(h/360, s/100, v/100);
+  return RGBToHex(arr[0],arr[1],arr[2]);
+}
+function rgbToHsv(r, g, b) {
+  r /= 255, g /= 255, b /= 255;
+  var max = Math.max(r, g, b), min = Math.min(r, g, b);
+  var h, s, v = max;
+  var d = max - min;
+  s = max == 0 ? 0 : d / max;
+  if (max == min) {
+    h = 0; // achromatic
+  } else {
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h /= 6;
+  }
+  return [ Math.round(h*360*10)/10, Math.round(s*1000)/10, Math.round(v*1000)/10 ];
+}
+
+function hsvToRgb(h, s, v) {
+  var r, g, b;
+  var i = Math.floor(h * 6);
+  var f = h * 6 - i;
+  var p = v * (1 - s);
+  var q = v * (1 - f * s);
+  var t = v * (1 - (1 - f) * s);
+  switch (i % 6) {
+    case 0: r = v, g = t, b = p; break;
+    case 1: r = q, g = v, b = p; break;
+    case 2: r = p, g = v, b = t; break;
+    case 3: r = p, g = q, b = v; break;
+    case 4: r = t, g = p, b = v; break;
+    case 5: r = v, g = p, b = q; break;
+  }
+  return [ Math.round(r * 255), Math.round(g * 255), Math.round(b * 255) ];
 }
