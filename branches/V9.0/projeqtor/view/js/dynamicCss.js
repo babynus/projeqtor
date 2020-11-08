@@ -9,40 +9,40 @@ function setColorTheming(ref,bis, mode) {
   var black='#000000';
   if (!mode) mode='hsl'; // Mode = hsl or hsv 
   if (mode=='hsl') {
-    var hsl=hexToHSL(ref);
-    var h=hsl[0];
-    var s=hsl[1];
-    var l=hsl[2];
-    darker=HSLToHex(h,(s==0)?0:25,25);
-    dark=HSLToHex(h,(s==0)?0:25,40);
-    medium=HSLToHex(h,s,70);
-    light=HSLToHex(h,s,90);
-    lighter=HSLToHex(h,s,95);
+    var hslRef=hexToHSL(ref);
+    var hRef=hslRef[0];
+    var sRef=hslRef[1];
+    var lRef=hslRef[2];
+    darker=HSLToHex(hRef,(sRef==0)?0:25,25);
+    dark=HSLToHex(hRef,(sRef==0)?0:25,40);
+    medium=HSLToHex(hRef,sRef,70);
+    light=HSLToHex(hRef,sRef,90);
+    lighter=HSLToHex(hRef,sRef,95);
     var hslDefault=hexToHSL('#ff0000');
-    hueRotate=h-hslDefault[0];
+    hueRotate=hRef-hslDefault[0];
     //saturate=Math.round(s/hslDefault[1]*100);
     //brightness=Math.round(40/hslDefault[2]*100);
     saturate=50;
-    if (s==0) saturate=0;
+    if (sRef==0) saturate=0;
     brightness=80;
     //saturate=100;
     //brightness=100;
     
-    var hsl=hexToHSL(bis);
-    var h=hsl[0];
-    var s=hsl[1];
-    var l=hsl[2];
-    darkerBis=HSLToHex(h,25,25);
-    darkBis=HSLToHex(h,25,40);
-    mediumBis=HSLToHex(h,s,70);
-    lightBis=HSLToHex(h,s,90);
-    lighterBis=HSLToHex(h,s,95);
-    hueRotateSelected=h-hslDefault[0];
-    saturateSelected=Math.round(s/hslDefault[1]*100);
-    brightnessSelected=Math.round(l/hslDefault[2]*200);
-    if (brightnessSelected>240) brightnessSelected=240;
-    if (saturateSelected>80) saturateSelected=80;
+    var hslBis=hexToHSL(bis);
+    var hBis=hslBis[0];
+    var sBis=hslBis[1];
+    var lBis=hslBis[2];
+    darkerBis=HSLToHex(hBis,25,25);
+    darkBis=HSLToHex(hBis,25,40);
+    mediumBis=HSLToHex(hBis,sBis,70);
+    lightBis=HSLToHex(hBis,sBis,90);
+    lighterBis=HSLToHex(hBis,sBis,95);
+    hueRotateSelected=hBis-hslDefault[0];
+    saturateSelected=Math.round(sBis/hslDefault[1]*100);
+    brightnessSelected=Math.round(lBis/hslDefault[2]*200);
     console.log("saturateSelected="+saturateSelected+", brightnessSelected="+brightnessSelected);
+    if (brightnessSelected>240) brightnessSelected=240;
+    //if (saturateSelected>80) saturateSelected=80;
   } else {
     // Default (initialization) =============================== INIT
     if (!ref) ref='#545381';
@@ -102,9 +102,8 @@ function setColorTheming(ref,bis, mode) {
     hueRotateSelected=hBis-hsvDefault[0];
     saturateSelected=Math.round(sBis/hsvDefault[1]*100);
     brightnessSelected=Math.round(vBis/hsvDefault[2]*100);
-    console.log("transform : hue="+hueRotateSelected+" sat="+saturateSelected+" bri="+brightnessSelected);
     if (brightnessSelected > 180) {
-      //brightnessSelected=180;
+      brightnessSelected=180;
     }
   }
   if(!isNewGui) dojo.byId("logoMenuBar").src="img/logoSmallWhite.png";
@@ -148,6 +147,14 @@ function setColorTheming(ref,bis, mode) {
     if (lightnessBis > 150) {
       bisText = '#000000';
     }
+    console.log(lightnessBis);
+    if (lightnessBis > 180) {
+      if (mode=="hsl") bis=HSLToHex(hBis,sBis,80);
+    }
+    if (lightnessBis < 100) {
+      if (mode=="hsl") bis=HSLToHex(hBis,sBis,40);
+    }
+    
   }
   
   var menu=darker;
