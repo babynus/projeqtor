@@ -2511,11 +2511,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if(trim(RequestHandler::getId('idClient')) != '')$val = RequestHandler::getId('idClient');
         }
         $showExtraButton=false;
-// MTY - Forgot readonly in condition        
+// MTY - Forgot readonly in condition
+        $buttonFieldWidth=0;        
         if (($col=='idStatus' or $col=='idResource' or $col=='idAccountable' or $col=='idResponsible') and !$readOnly) {
           if ((($col=='idStatus') or (($col=='idResource' or $col=='idAffectable' or $col=='idAccountable' or $col=='idResponsible') and $user->isResource and $user->id!=$val and $obj->id and $classObj!='Affectation')) and $classObj!='Document' and $classObj!='StatusMail' and $classObj!="TicketSimple" and $canUpdate) {
             if (!$readOnly) $showExtraButton=true;
             $fieldWidth=round($fieldWidth/2)-5;
+            $buttonFieldWidth=$fieldWidth;
           }
         }
         
@@ -2531,7 +2533,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if($fieldWidth<85)$fieldWidth=85;
         }
         // END - ADD BY TABARY - NOTIFICATION SYSTEM
-        
+        $maxButtonWidth=max(min(2*$fieldWidth/3,350),250);
+        if ($buttonFieldWidth>$maxButtonWidth) {
+          $fieldWidth=$fieldWidth+$buttonFieldWidth-$maxButtonWidth;
+          $buttonFieldWidth=$maxButtonWidth;
+        }
         // BEGIN - ADD BY TABARY - TOOLTIP
         echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
@@ -2677,11 +2683,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if ($col=='idStatus' and $next and $showExtraButton) {
           echo '<div class="roundedVisibleButton roundedButton generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class"';
           echo ' title="'.i18n("moveStatusTo", array(SqlList::getNameFromId('Status', $next))).'"';
-          echo ' style="text-align:left;float:right;margin-right:10px; width:'.($fieldWidth-5).'px;'.$newGuiStyle.$specificStyleWithoutCustom.'"';
+          echo ' style="text-align:left;float:right;margin-right:10px; width:'.($buttonFieldWidth-5).'px;'.$newGuiStyle.$specificStyleWithoutCustom.'"';
           $saveFunction=($comboDetail)?'window.top.saveDetailItem();':'saveObject()';
           echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.$next.');setTimeout(\''.$saveFunction.'\',100);">';
           echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;'.$newGuiStyleImg.'"/>';
-          echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.SqlList::getNameFromId('Status', $next).'</div>';
+          echo '<div style="position:relative;top:-16px;left:25px;width:'.($buttonFieldWidth-30).'px">'.SqlList::getNameFromId('Status', $next).'</div>';
           echo '</div>';
         }
         // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
@@ -2708,12 +2714,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             // END ADD BY Marc TABARY - 2017-03-09 - EXTRA BUTTON (Assign to me) IS VISIBLE EVEN IDLE=1
             echo '<div class="roundedVisibleButton roundedButton generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class"';
             echo ' title="'.i18n("assignToMe").'"';
-            echo ' style="text-align:left;float:right;margin-right:10px; width:'.($fieldWidth-5).'px;'.$newGuiStyle.$specificStyle.'"';
+            echo ' style="text-align:left;float:right;margin-right:10px; width:'.($buttonFieldWidth-5).'px;'.$newGuiStyle.$specificStyle.'"';
             $saveFunction=($comboDetail)?'window.top.saveDetailItem();':'saveObject()';
             echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.htmlEncode($user->id).');setTimeout(\''.$saveFunction.'\',100);"';
             echo '>';
             echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;'.$newGuiStyleImg.'"/>';
-            echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.i18n('assignToMeShort').'</div>';
+            echo '<div style="position:relative;top:-16px;left:25px;width:'.($buttonFieldWidth-30).'px">'.i18n('assignToMeShort').'</div>';
             echo '</div>';
           }
         }
