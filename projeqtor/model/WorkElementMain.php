@@ -497,13 +497,15 @@ class WorkElementMain extends SqlElement {
 			}
 			$canUpdate = (securityGetAccessRightYesNo ( 'menu' . $this->refType, 'update', $refObj ) == 'YES');			
 			$result .= '<div style="position:absolute; right:2px;width:150px !important';
-      $result .= ' border: 0px solid #FFFFFF; -moz-border-radius: 15px; border-radius: 15px; text-align: right;">';     
+      if (isNewGui()) $result .= ' text-align: center; text-align: right;">';
+      else $result .= ' border: 0px solid #FFFFFF; -moz-border-radius: 15px; border-radius: 15px; text-align: right;">';     
       if ($user->isResource and $canUpdate and $this->id) {
 				$result .= '<button id="startStopWork" dojoType="dijit.form.Button" showlabel="true"';
 				if (($this->ongoing and $this->idUser != $user->id) or ! $user->isResource) {
 					$result .= ' disabled="disabled" ';
 				}
-				$result .= ' title="' . $title . '" style="vertical-align: middle;">';
+				if (isNewGui()) $result .= ' title="' . $title . '" style="vertical-align: middle;min-width:200px; max-width:300px;position:relative;top:3px" class="roundedVisibleButton">';
+				else $result .= ' title="' . $title . '" style="vertical-align: middle;" >';
 				$result .= '<span>' . $title . '</span>';
 				$result .= '<script type="dojo/connect" event="onClick" args="evt">';
 				$result .= 'startStopWork("' . (($this->ongoing) ? 'stop' : 'start') . '","' . htmlEncode($this->refType) . '",' . htmlEncode($this->refId) . ');';
@@ -515,6 +517,7 @@ class WorkElementMain extends SqlElement {
 			  $result.=$this->drawSpecificItem('dispatch', $readOnly, true); // Attention : must be kept call here, to preserve correct position
 			}
 			if ($this->ongoing) {
+			  $result.='<span style="font-size:80%; font-style: italic; color:#a0a0a0;padding-right:7px;">';
 				if ($this->idUser == $user->id) {
 					// $days = workDayDiffDates($this->ongoingStartDateTime, date('Y-m-d H:i'));
 					if (substr ( $this->ongoingStartDateTime, 0, 10 ) != date ( 'Y-m-d' )) {
@@ -532,6 +535,7 @@ class WorkElementMain extends SqlElement {
 							SqlList::getNameFromId ( 'Resource', $this->idUser ) 
 					) );
 				}
+				$result.='</span>';
 			}
 			$result .= '</div>';
 			return $result;
@@ -542,9 +546,11 @@ class WorkElementMain extends SqlElement {
 			$user = getSessionUser();
 			$canUpdate = (securityGetAccessRightYesNo ( 'menu' . $this->refType, 'update', $refObj ) == 'YES');
 			if ($canUpdate and $this->id) {
-			  $result .= '<div style="position:absolute; right:0px;width:80px !important;top:-24px;text-align:right;">';
+			  if (isNewGui()) $result .= '<div style="position:absolute; right:0px;top:-34px;text-align:right;">';
+			  else $result .= '<div style="position:absolute; right:0px;width:80px !important;top:-24px;text-align:right;">';
 				$result .= '<button id="dispatchWork" dojoType="dijit.form.Button" showlabel="true"';
-				$result .= ' title="'.i18n('dispatchWork').'" style="max-width:77px;vertical-align: middle;">';
+				if (isNewGui()) $result .= ' title="'.i18n('dispatchWork').'" style="max-width:150px;min-width:100px;vertical-align: middle;" class="roundedVisibleButton">';
+				else $result .= ' title="'.i18n('dispatchWork').'" style="max-width:77px;vertical-align: middle;">';
 				$result .= '<span>' . i18n('dispatchWorkShort') . '</span>';
 				$result .= '<script type="dojo/connect" event="onClick" args="evt">';
 				$result .= 'dispatchWork("' . htmlEncode($this->refType) . '",' . htmlEncode($this->refId) . ');';
