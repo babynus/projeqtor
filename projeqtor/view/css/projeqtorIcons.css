@@ -445,6 +445,7 @@
 .ProjeQtOrFlatGrey .iconButtonAdd16 { background-image: url(customIcons/grey/iconAdd.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonAdd16 { background-image: url(customIcons/red/iconAdd.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonAdd16 { background-image: url(customIcons/new/iconAdd.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonAdd { background-image: url(customIcons/new/iconAdd.svg);  background-repeat: no-repeat; }
 
 .iconButtonAdd32 { background-image: url(images/buttonAdd32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonAdd32 { background-image: url(customIcons/blue/iconAdd.png);  background-repeat: no-repeat; }
