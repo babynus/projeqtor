@@ -511,8 +511,6 @@
 
 .ProjeQtOrNewGui .iconButtonEdit { background-image: url(customIcons/new/iconEdit.svg);  background-repeat: no-repeat; }
 
-.iconButtonLink16 { background-image: url(images/smallButtonLink.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
-
 .iconButtonLink16 { background-image: url(images/smallButtonLink.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonLink16 { background-image: url(customIcons/blue/iconLink.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconButtonLink16 { background-image: url(customIcons/green/iconLink.png);  background-repeat: no-repeat; }
