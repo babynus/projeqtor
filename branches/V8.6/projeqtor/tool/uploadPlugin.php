@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST" or securityGetAccessRightYesNo('menuPlu
   traceHack ( "plugin management tried without access right" );
   exit ();
 }
-Security::checkDisplayMenuForUser('Plugin');
+Security::checkDisplayMenuForUser('PluginManagement');
 header ('Content-Type: text/html; charset=UTF-8');
 /** ===========================================================================
  * Save a document version (file) : call corresponding method in SqlElement Class
