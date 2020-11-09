@@ -3,24 +3,21 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M27.103,92.654
-	c-5.862-7.668-9.344-17.252-9.344-27.648c0-25.166,20.4-45.565,45.564-45.565s45.564,20.4,45.564,45.565
-	c0,2.531-0.206,5.014-0.603,7.43"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M105.799,81.529
-	c-6.616,16.996-23.14,29.041-42.476,29.041c-10.989,0-20.104-3.127-27.974-9.604"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="17.758" y1="65.006" x2="108.887" y2="65.006"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="63.323" y1="97.381" x2="63.323" y2="110.57"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="63.323" y1="19.44" x2="63.323" y2="89.396"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M45.148,92.436
-	c-2.895-7.631-4.612-17.131-4.612-27.43c0-25.16,10.245-45.556,22.882-45.556c12.636,0,22.881,20.396,22.881,45.556
-	c0,6.387-0.66,12.471-1.852,17.99"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M81.681,92.436
-	c-4.148,11.6-10.567,18.125-18.263,18.125c-5.908,0-10.748-3.514-14.807-10.832"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M11.385,69.555
-	c0,0-15.002,10.973-6.27,17.018s43.348,14.842,98.742-11.867c16.11-7.768,21.661-15.442,20.823-20.375
-	c-1.12-6.586-12.314-9.18-12.314-9.18"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M27.111,37.355
-	c0,0,28.766,14.175,73.02,0.797"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M89.659,90.138
-	c0,0,5.776,1.126,9.651,2.812"/>
+<g>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M63.423,29.402
+		c-25.619,0-47.973,13.925-59.946,34.609c11.972,20.687,34.326,34.615,59.946,34.615c25.617,0,47.972-13.931,59.944-34.615
+		C111.395,43.327,89.04,29.402,63.423,29.402z"/>
+</g>
+<g>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M63.422,88.873C49.709,88.829,38.606,77.7,38.606,63.978c0-13.721,11.104-24.851,24.815-24.894
+		c13.712,0.043,24.815,11.172,24.815,24.894C88.237,77.7,77.134,88.829,63.422,88.873z"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M63.422,88.829c-8.32-4.472-14.061-14.984-14.061-24.851S55.102,43.6,63.422,39.127c8.319,4.473,14.06,14.984,14.06,24.851
+		S71.741,84.357,63.422,88.829z"/>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="38.606" y1="63.978" x2="88.237" y2="63.978"/>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="63.422" y1="39.084" x2="63.422" y2="88.829"/>
+</g>
 </svg>
