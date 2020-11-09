@@ -350,11 +350,12 @@ html, body, #mainDiv,
     width: 216px;
     position: absolute;
     text-align: center;
-    font-size:12px;
+    font-size:11px;
     text-color : var(--color-toolbar-text) !important;
+    background:var(--color-menu);
 }
 .hideStreamNewGui:hover, .hideStreamNewGuiTopBar:hover, .iconBreadSrumb:hover {
-	
+	cursor:pointer;
 }
 
 .helpDisplayIcon:hover {
