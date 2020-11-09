@@ -2309,11 +2309,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 <div id="xdialogShowImage" dojoType="dojox.image.LightboxDialog" >
 </div>
 <form  method="POST" style="display:none" id="directAccessForm" action="../view/main.php">
-  <input pe="hidden" name="directAccessPage" id="directAccessPage" value="" />
-  <input pe="hidden" name="menuActualStatus" id="menuActualStatus" value="" />
-  <input pe="hidden" name="p1name" id="p1name" value="" />
-  <input pe="hidden" name="changeCurrentLocale" id="changeCurrentLocale" value="" />
-  <input pe="hidden" name="p1value" id="p1value" value="" />
+  <input type="hidden" name="directAccessPage" id="directAccessPage" value="" />
+  <input type="hidden" name="menuActualStatus" id="menuActualStatus" value="" />
+  <input type="hidden" name="p1name" id="p1name" value="" />
+  <input type="hidden" name="changeCurrentLocale" id="changeCurrentLocale" value="" />
+  <input type="hidden" name="p1value" id="p1value" value="" />
 </form>
 <form id='favoriteForm' name='favoriteForm' onSubmit="return false;">
   <input type="hidden" id="page" name="page" value=""/>
