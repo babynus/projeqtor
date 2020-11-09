@@ -1524,14 +1524,14 @@
 .ProjeQtOrFlatRed .iconLocation { background-image: url(customIcons/red/iconLocation.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconLocation { background-image: url(customIcons/new/iconLocation.svg);  background-repeat: no-repeat; }
 
-.iconLoginPassword { background-image: url(images/iconPassword.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconLoginPassword { background-image: url(images/iconPassword.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size:22px 22px }
 .ProjeQtOrFlatBlue .iconLoginPassword { background-image: url(customIcons/blue/iconPassword.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconLoginPassword { background-image: url(customIcons/green/iconPassword.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconLoginPassword { background-image: url(customIcons/grey/iconPassword.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconLoginPassword { background-image: url(customIcons/red/iconPassword.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconLoginPassword { background-image: url(customIcons/new/iconPassword.svg);  background-repeat: no-repeat;}
 
-.iconLoginUser { background-image: url(images/iconLogin.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconLoginUser { background-image: url(images/iconLogin.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size:22px 22px}
 .ProjeQtOrFlatBlue .iconLoginUser { background-image: url(customIcons/blue/iconLogin.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconLoginUser { background-image: url(customIcons/green/iconLogin.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconLoginUser { background-image: url(customIcons/grey/iconLogin.png);  background-repeat: no-repeat; }
