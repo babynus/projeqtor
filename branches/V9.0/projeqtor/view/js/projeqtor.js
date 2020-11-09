@@ -7532,6 +7532,9 @@ function showActionSelect(selectClass, selectId, selectField, canCreate, canUpda
       dojo.byId("toolbar_"+actionSectionField).style.display='none';
     }
   }
+  var selectClassTitle=selectClass;
+  if (selectClassTitle.substr(0,8)=='Original') selectClassTitle=selectClassTitle.substr(8);
+  if (selectClassTitle.substr(0,6)=='Target') selectClassTitle=selectClassTitle.substr(6);  
   var toolId="toolbar_"+selectField;
   var width=0;
   var maxWidth=((dojo.byId("widget_"+selectField).offsetWidth)/2)-25;
@@ -7546,7 +7549,7 @@ function showActionSelect(selectClass, selectId, selectField, canCreate, canUpda
     }
     if (canCreate && width<maxWidth) {
       width+=25;
-      buttons+='<div title="'+i18n('buttonNew',new Array(i18n(selectClass)))+'" style="float:right;margin-right:3px;" class="roundedButton roundedIconButton generalColClass '+selectField+'Class">';
+      buttons+='<div title="'+i18n('buttonNew',new Array(i18n(selectClassTitle)))+'" style="float:right;margin-right:3px;" class="roundedButton roundedIconButton generalColClass '+selectField+'Class">';
       buttons+='  <div class="imageColorNewGui iconToolbarAdd" onclick="actionSelectAdd(\''+selectClass+'\', \''+selectId+'\', \''+selectField+'\');"></div>';
       buttons+='</div>';
     }
