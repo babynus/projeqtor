@@ -74,8 +74,8 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 	 <div id="helpDisplayIcon" class="helpDisplayIcon" onclick="helpDisplayIconIsRead('yes')" style="vertical-align: middle;"
 	   onmouseover="dojo.byId('textDisplayIcon').style.display='none';dojo.byId('hideTextDisplayIcon').style.display='block';"
 	  onmouseout="dojo.byId('textDisplayIcon').style.display='block';dojo.byId('hideTextDisplayIcon').style.display='none';" >
-	   <div id="textDisplayIcon"><span><?php echo i18n('helpDisplayIconMenuLeft');?></span></div>
-	   <div id="hideTextDisplayIcon" style="display:none" ><span><?php echo i18n('clickIntoToClose');?></span></div>
+	   <div id="textDisplayIcon" style="color: rgb(180 180 180);padding-top:2px;"><span><?php echo i18n('helpDisplayIconMenuLeft');?></span></div>
+	   <div id="hideTextDisplayIcon" style="display:none;padding-top: 8px;" ><span><?php echo i18n('clickIntoToClose');?></span></div>
 	 </div>
 	<?php } ?>
     </div>
