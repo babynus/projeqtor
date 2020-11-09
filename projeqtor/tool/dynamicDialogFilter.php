@@ -30,6 +30,7 @@ require_once "../tool/projeqtor.php";
     <tr>
      <td class="section"><?php echo i18n("sectionStoredFilters");?></td>
     </tr>
+    <?php if (isNewGui()) {?><tr><td><div style="height:6px"></div></td></tr><?php }?>
     <tr>
       <td>
         <div id='listStoredFilters' dojoType="dijit.layout.ContentPane" region="center"></div>
@@ -49,7 +50,7 @@ require_once "../tool/projeqtor.php";
     </tr>
     <tr>
       <td style="margin: 2px;"> 
-        <div id='listFilterClauses' dojoType="dijit.layout.ContentPane" region="center" style="overflow: hidden"></div>
+        <div id='listFilterClauses' dojoType="dijit.layout.ContentPane" region="center" style="overflow: hidden;"></div>
          
         <form id='dialogFilterForm' name='dialogFilterForm' onSubmit="return false;">
          <input type="hidden" id="filterObjectClass" name="filterObjectClass" />
