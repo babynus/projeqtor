@@ -353,12 +353,14 @@ html, body, #mainDiv,
     font-size:12px;
     text-color : var(--color-toolbar-text) !important;
 }
-.hideStreamNewGui:hover, .hideStreamNewGuiTopBar:hover, .iconBreadSrumb:hover, .helpDisplayIcon:hover{
-	cursor:pointer;
-	background:var(--color-light);	
+.hideStreamNewGui:hover, .hideStreamNewGuiTopBar:hover, .iconBreadSrumb:hover {
 	
 }
 
+.helpDisplayIcon:hover {
+	cursor:pointer;
+	background:var(--color-light);
+}
 
 .ProjeQtOrNewGui .iconToolbarView { background-image: url(customIcons/new/iconView.svg); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 18px 18px}
 .ProjeQtOrNewGui .iconToolbarGoto { background-image: url(customIcons/new/iconGoto.svg); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
