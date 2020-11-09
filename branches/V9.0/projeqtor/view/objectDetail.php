@@ -2541,7 +2541,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // BEGIN - ADD BY TABARY - TOOLTIP
         echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
-        if($col=='idBudgetItem'){
+        if($col=='idBudgetItem' or $col=='idBusinessFeature'){
           echo '<select dojoType="dijit.form.Select" class="dijitComboBox input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
         }else{
           echo '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
@@ -2656,10 +2656,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if ($hasOtherVersion) {
           if ($obj->id and $canUpdate) {
-            echo '<a class="generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="float:right;margin-right:5px;'.$specificStyleWithoutCustom.'" ';
+            echo '<a class="generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="float:right;'.((isNewGui())?'margin-right:7px;margin-top:6px;':'margin-right:5px;').$specificStyleWithoutCustom.'" ';
             echo ' onClick="addOtherVersion('."'".$versionType."'".');" ';
             echo ' title="'.i18n('otherVersionAdd').'">';
-            echo formatSmallButton('Add');
+            if (isNewGui()) echo formatMediumButton('Add');
+            else echo formatSmallButton('Add');
             echo '</a>';
           }
           if (count($obj->$otherVersion)>0) {
@@ -2668,10 +2669,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if ($hasOtherClient) {
           if ($obj->id and $canUpdate) {
-            echo '<a class="generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="float:right;margin-right:5px;'.$specificStyleWithoutCustom.'" ';
+            echo '<a class="generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="float:right;'.((isNewGui())?'position:relative;right:5px;top:10px;':'margin-right:5px;').$specificStyleWithoutCustom.'" ';
             echo ' onClick="addOtherClient();" ';
             echo ' title="'.i18n('otherClientAdd').'">';
-            echo formatSmallButton('Add');
+            if (isNewGui()) echo formatMediumButton('Add');
+            else echo formatSmallButton('Add');
             echo '</a>';
           }
           if (count($obj->$otherClient)>0) {
