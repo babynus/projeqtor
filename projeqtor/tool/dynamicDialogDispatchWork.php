@@ -170,7 +170,7 @@ foreach($arrayWork as $key=>$work) {
 </table>
 <table width="100%">
  <tr>
-   <td style="width: 95%;" align="center">
+   <td style="width: 90%;" align="center">
      <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogDispatchWork').hide();">
        <?php echo i18n("buttonCancel");?>
      </button>
@@ -179,8 +179,13 @@ foreach($arrayWork as $key=>$work) {
        <?php echo i18n("buttonOK");?>
      </button>
    </td>
-   <td>
+   <td style="width:10%">
+   <?php if (isNewGui()) {?>
+   <img class="roundedButtonSmall iconSize22 imageColorNewGui" src="css/customIcons/new/iconAdd.svg" onClick="addDispatchWorkLine('<?php echo Work::displayShortWorkUnit();?>');" title="<?php echo  i18n('addLine');?>" />
+   <?php } else {?>
    <img class="roundedButtonSmall" src="css/images/smallButtonAdd.png" onClick="addDispatchWorkLine('<?php echo Work::displayShortWorkUnit();?>');" title="<?php echo  i18n('addLine');?>" />
+   
+   <?php }?>
    </td>
  </tr>      
 </table>

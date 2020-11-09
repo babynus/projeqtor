@@ -377,14 +377,13 @@ if (RequestHandler::isCodeSet('comboDetail')) {
      <br>
      <table style="width: 100%;">
       <tr style="border-top:solid 1px;">
-        <td> 
+        <td style="text-align:center"> 
          <?php 
           echo '<div class="roundedVisibleButton roundedButton generalColClass"';
           echo ' title="'.i18n('advancedFilters').'"';
-          echo ' style="text-align:left;margin-right:10px;margin-top:10px;height:23px;width:160px;"';
+          echo ' style="text-align:left;margin-right:10px;margin-top:10px;height:23px;width:160px;position:relative;left:120px;top:2px"';
           echo ' onClick="showFilterDialog();">';
-          echo '<img src="css/customIcons/new/iconFilter.svg" style="-webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
-                filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));position:relative;left:5px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>';
+          echo '<img src="css/customIcons/new/iconFilter.svg" class="imageColorNewGui" style="position:relative;left:5px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>';
           echo '<div style="color:grey;position:relative;top:-19px;left:38px;">'.i18n('advancedFilters').'</div>';
           echo '</div>'; ?>
         </td>
