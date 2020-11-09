@@ -216,7 +216,7 @@ class Menu extends SqlElement {
       if ($menu->type=='item') {
       	echo '<div id="dndItem'.$menuName.'" name="dndItem'.$menuName.'" title="' .i18n($menuName) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;margin-top: 7px;">';
       	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
-      	echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menuName.'\');showMenuBottomParam(\'' . $class .  '\',\'true\')" ';
+      	echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menuName.'\');showMenuBottomParam(\'' . $class .  '\',\'false\')" ';
       	echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);';
     	if($defaultMenu == 'menuBarRecent' and !in_array($menuName,$customMenuArray) or ($defaultMenu == 'menuBarCustom')){
           echo 'showFavoriteTooltip(\''.$class.'\');"';
@@ -239,7 +239,7 @@ class Menu extends SqlElement {
         echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'"';
         echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);showFavoriteTooltip(\''.$class.'\');"';
         echo ' onMouseLeave="hideFavoriteTooltip(0,\''.$class.'\');"';
-        echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menuName.'\');showMenuBottomParam(\'' . $class .  '\',\'true\')">';
+        echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menuName.'\');showMenuBottomParam(\'' . $class .  '\',\'false\')">';
         Menu::drawIconMenuNewGui($drawMode, $class, $menu);
         Menu::drawNewGuiDialogueAddRemoveFav($menu,$customMenuArray,$defaultMenu,$class);
         echo '</div>';
