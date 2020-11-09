@@ -1766,7 +1766,7 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
   echo '<label for="filterNameDisplay" >' . i18n("filterName") . '&nbsp;:&nbsp;</label>';
   echo '<div type="text" dojoType="dijit.form.ValidationTextBox" ';
   echo ' name="filterNameDisplay" id="filterNameDisplay"';
-  echo '  style="width: 560px;" ';
+  echo '  style="width: '.((isNewGui())?'495px':'560px;').'" ';
   echo ' trim="true" maxlength="100" class="input" ';
   echo ' value="' . $filterName . '" ';
   echo ' >';
@@ -1875,13 +1875,13 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
     echo "<td class='filterHeader' style='width:25px;'>";
     echo "<td class='filterHeader' style='width:25px;'>";
   } else {
-  	echo "<td class='filterHeader' style='font-size:8pt;width:300px;'>" . (isNewGui()?i18n("storedFiltersQuick"):i18n("storedFilters")) . "</td>";
+  	echo "<td class='filterHeader' style='".((!isNewGui())?'font-size:8pt;':'')."width:300px;'>" . (isNewGui()?i18n("storedFiltersQuick"):i18n("storedFilters")) . "</td>";
   }
   echo "</td>";
   echo "</tr>";
   if ($context=='directFilterList') {
     echo "<tr>";
-    echo '<td style="cursor:pointer;font-size:8pt;font-style:italic;padding:5px' 
+    echo '<td style="cursor:pointer;'.((!isNewGui())?'font-size:8pt;':'').'font-style:italic;padding:5px' 
            . '"' 
            . ' class="filterData" '
            . 'onClick="selectStoredFilter(\'0\',\'directFilterList\''.(array_key_exists("contentLoad", $_REQUEST) && array_key_exists("container", $_REQUEST) ? ',\''.$_REQUEST['contentLoad'].'\',\''.$_REQUEST['container'].'\'' : '').');" ' 
@@ -1901,19 +1901,19 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
       //ADD qCazelles - Dynamic filter - Ticket #78
       echo ($filter->isDynamic=="1" ? '<input type="hidden" id="dynamicFilterId'.$filter->id.'" />' : ''); //Used for selection of stored filter, to enable the prompt of dynamic value(s)
       //END ADD qCazelles - Dynamic filter - Ticket #78
-      echo '<td style="font-size:8pt;'. (($filter->name==$currentFilter and $context=='directFilterList')?'color:white; background-color: grey;':'cursor: pointer;') . '"' 
+      echo '<td style="'.((!isNewGui())?'font-size:8pt;':''). (($filter->name==$currentFilter and $context=='directFilterList')?'color:white; background-color: grey;':'cursor: pointer;') . '"' 
            . ' class="filterData" '
            //. ($filter->name==$currentFilter)?'':'onClick="selectStoredFilter('. "'" . htmlEncode($filter->id) . "'" . ');" ')
            . 'onClick="selectStoredFilter(\'' . htmlEncode($filter->id) . '\',\'' . htmlEncode($context) . '\''.(array_key_exists("contentLoad", $_REQUEST) && array_key_exists("container", $_REQUEST) ? ',\''.$_REQUEST['contentLoad'].'\',\''.$_REQUEST['container'].'\'' : '').');" ' 
            . ' title="' . i18n("selectStoredFilter") . '" >' ;
       //Gautier #filter
-      echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
-      echo  htmlEncode($filter->name)
+      echo '<span class="dojoDndHandle handleCursor"><img style="width:'.((isNewGui())?'10px;':'6px;').'" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
+      echo  '<span style="position:relative;top:-5px;margin:3px">'.htmlEncode($filter->name)
            . ( ($defaultFilter==$filter->id and $context!='directFilterList')?' (' . i18n('defaultValue') . ')':'')
-           . "</td>";
+           .'</span>'. "</td>";
       if ($context!='directFilterList') {
         echo "<td class='filterData' style='text-align: center;'>";      
-        echo ' <a src="css/images/smallButtonRemove.png" onClick="removeStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('removeStoredFilter') . '" > ';
+        echo ' <a src="css/images/smallButtonRemove.png" class="imageColorNewGui" onClick="removeStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('removeStoredFilter') . '" > ';
         echo formatSmallButton('Remove');
         echo ' </a>';
         echo "</td>";

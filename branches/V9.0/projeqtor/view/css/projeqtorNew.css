@@ -649,8 +649,10 @@ animation: fadeIn ease 0.5s;
 }
 
 .ProjeQtOrNewGui .dijitDialogTitleBar {
-  background: url() var(--color-lighter) !important;
-  color:var(--color-text);
+  /*background: url() var(--color-lighter) !important;
+  color:var(--color-text);*/
+  background: url() var(--color-darker) !important;
+  color:var(--color-white);
   text-align:center;
 }
 .ProjeQtOrNewGui .dijitDialog {
@@ -667,15 +669,47 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .dijitButtonNode{
 	padding: 0.1em 0em 0.1em 0em;
 }
+
 .ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitInline.dijitButton {
-	margin: 10px 20px;
+	/*margin: 10px 20px;*/
 }
-.ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitInline.dijitButtonNode {
-	padding: 0.2em 1em 0.2em 1em;
+.ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .dijitTooltipContainer .dijitReset.dijitInline.dijitButtonNode {
+	/*padding: 0.2em 1em 0.2em 1em;*/
 	border: 1px solid #c0c0c0;
+}
+.ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitStretch.dijitButtonContents{
+	padding: 0.2em 1em 0.2em 1em;
+}
+.ProjeQtOrNewGui .dijitTooltipContainer .dijitReset.dijitInline.dijitButtonNode {
+	padding: 0.2em 0.2em 0.2em 0.2em;
+}
+.ProjeQtOrNewGui .resetSearchTD {
+	padding-right:5px;
+}
+.ProjeQtOrNewGui .mediumTextButton {
+	height: 100%;
 }
 .ProjeQtOrNewGui .dijitDialogTitleBar{
 	padding:10px;
+}
+.ProjeQtOrNewGui .dijitDialogCloseIcon {
+	background: url(images/tabClose.svg) no-repeat right top;
+	background-size: 22px 22px;
+	height:22px;
+	width: 22px;
+	top:6px;
+	-webkit-filter : brightness(900%);
+  filter: brightness(9) ; 
+    -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.ProjeQtOrNewGui .dijitDialogCloseIcon:hover {
+	filter: brightness(15); 
+	-webkit-filter : brightness(1500%);
 }
 
 .ProjeQtOrNewGui .dijitDropDownButton .dijitReset.dijitInline.dijitButtonNode {
@@ -793,6 +827,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .dependencyHeader,
 .ProjeQtOrNewGui .noteHeader,
 .ProjeQtOrNewGui .linkHeader,
+.ProjeQtOrNewGui .filterHeader,
 .ProjeQtOrNewGui .attachmentHeader {
 	background-color:var(--color-lighter) !important;
   color:var(--color-dark);
@@ -801,6 +836,12 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .dijitTitlePane .dijitTitlePaneTitle,
 .ProjeQtOrNewGui .section {
 	text-shadow: none;
+}
+.ProjeQtOrNewGui .section {
+	background-color:var(--color-light) !important;
+	color:var(--color-dark) !important;
+	border:1px solid var(--color-medium);
+	height:26px;
 }
 
 .ProjeQtOrNewGui .dijitSplitter {
