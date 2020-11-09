@@ -1763,25 +1763,25 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
   // Display Result
   echo "<table width='99.9%'>";
   echo "<tr><td class='dialogLabel'>";
-  echo '<label for="filterNameDisplay" >' . i18n("filterName") . '&nbsp;:&nbsp;</label>';
+  echo '<label for="filterNameDisplay" style="'.((isNewGui())?'position:relative;top:5px;':'').'">' . i18n("filterName") . '&nbsp;:&nbsp;</label>';
   echo '<div type="text" dojoType="dijit.form.ValidationTextBox" ';
   echo ' name="filterNameDisplay" id="filterNameDisplay"';
-  echo '  style="width: '.((isNewGui())?'495px':'560px;').'" ';
+  echo '  style="width: '.((isNewGui())?'510px':'560px;').'" ';
   echo ' trim="true" maxlength="100" class="input" ';
   echo ' value="' . $filterName . '" ';
   echo ' >';
-  echo '</td><td>';
+  echo '</td><td style="text-align:center">';
   echo '<button title="' . i18n('saveFilter') . '" ';  
   echo ' dojoType="dijit.form.Button" '; 
-  echo ' id="dialogFilterSave" name="dialogFilterSave" ';
-  echo ' iconClass="dijitButtonIcon dijitButtonIconSave" showLabel="false"> ';
+  echo ' id="dialogFilterSave" name="dialogFilterSave" class="resetMargin" style="height:24px;width:32px;margin-top:-1px;"';
+  echo ' iconClass="dijitButtonIcon dijitButtonIconSave imageColorNewGui" showLabel="false"> ';
   echo ' <script type="dojo/connect" event="onClick" args="evt">saveFilter();</script>';
   echo '</button>';
   echo "</td></tr>";
   echo "<tr>";
   echo "<td class='filterHeader' style='width:525px;'>" . i18n("criteria") . "</td>";
   echo "<td class='filterHeader' style='width:25px;'>";
-  echo ' <a src="css/images/smallButtonRemove.png" onClick="removefilterClause(\'all\');" title="' . i18n('removeAllFilters') . '" > ';
+  echo ' <a src="css/images/smallButtonRemove.png" class="imageColorNewGui" onClick="removefilterClause(\'all\');" title="' . i18n('removeAllFilters') . '" > ';
   echo formatSmallButton('Remove');
   echo ' </a>';
   echo "</td>";
@@ -1798,7 +1798,7 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
         continue;
       }
       echo "<tr>";
-      echo "<td class='filterData'>";
+      echo "<td class='filterData' style=''>";
       //ADD qCazelles - Dynamic filter - Ticket #78
     if (!isset($filter['orOperator'])) $filter['orOperator']=0;
     if (!isset($filter['isDynamic'])) $filter['isDynamic']=0;
@@ -1822,7 +1822,7 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
            //END CHANGE qCazelles - Dynamic filter - Ticket #78
       	   "</td>";
       echo "<td class='filterData' style='text-align: center;'>";
-      echo ' <a src="css/images/smallButtonRemove.png" onClick="removefilterClause(' . $id . ');" title="' . i18n('removeFilter') . '" > ';
+      echo ' <a src="css/images/smallButtonRemove.png" class="imageColorNewGui" onClick="removefilterClause(' . $id . ');" title="' . i18n('removeFilter') . '" > ';
       echo formatSmallButton('Remove');
       echo ' </a>';
       echo "</td>";
@@ -1843,9 +1843,11 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
   //echo '<input id="nbFilterCriteria" name="nbFilterCriteria" type="hidden" value="' . count($filterArray) . '" />';
   //New
   if (count($filterArray)==$nbHiddenFilters) {
-    echo "<tr><td class='filterData' colspan='2'><i>" . i18n("noFilterClause") . "</i></td></tr>";
+    echo "<tr><td class='filterData' colspan='2' style=''><i>" . i18n("noFilterClause") . "</i></td></tr>";
   }
+  if (isNewGui()) { echo '<tr><td><div style="height:6px"></div></td></tr>';}
   echo "</table>";
+  
   echo '<input id="nbFilterCriteria" name="nbFilterCriteria" type="hidden" value="' . (count($filterArray) - $nbHiddenFilters) . '" />';
   //END CHANGE qCazelles - Ticket 165
   //ADD qCazelles - Dynamic filter - Ticket #78
@@ -1907,17 +1909,17 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
            . 'onClick="selectStoredFilter(\'' . htmlEncode($filter->id) . '\',\'' . htmlEncode($context) . '\''.(array_key_exists("contentLoad", $_REQUEST) && array_key_exists("container", $_REQUEST) ? ',\''.$_REQUEST['contentLoad'].'\',\''.$_REQUEST['container'].'\'' : '').');" ' 
            . ' title="' . i18n("selectStoredFilter") . '" >' ;
       //Gautier #filter
-      echo '<span class="dojoDndHandle handleCursor"><img style="width:'.((isNewGui())?'10px;':'6px;').'" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
-      echo  '<span style="position:relative;top:-5px;margin:3px">'.htmlEncode($filter->name)
+      echo '<span class="dojoDndHandle handleCursor"><img style="width:'.((isNewGui())?'10px;float:left':'6px;').'" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
+      echo  '<span style="position:relative;top:2px;margin:3px">'.htmlEncode($filter->name)
            . ( ($defaultFilter==$filter->id and $context!='directFilterList')?' (' . i18n('defaultValue') . ')':'')
            .'</span>'. "</td>";
       if ($context!='directFilterList') {
-        echo "<td class='filterData' style='text-align: center;'>";      
+        echo "<td class='filterData dndHidden' style='text-align: center;'>";      
         echo ' <a src="css/images/smallButtonRemove.png" class="imageColorNewGui" onClick="removeStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('removeStoredFilter') . '" > ';
         echo formatSmallButton('Remove');
         echo ' </a>';
         echo "</td>";
-        echo "<td class='filterData' style='text-align: center;'>";
+        echo "<td class='filterData dndHidden' style='text-align: center;'>";
         if($filter->isShared==0)echo ' <img src="css/images/share.png" class="roundedButtonSmall" onClick="shareStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('shareStoredFilter') . '" class="smallButton"/> ';
         if($filter->isShared==1)echo ' <img src="css/images/shared.png" class="roundedButtonSmall" onClick="shareStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('unshareStoredFilter') . '" class="smallButton"/> ';
         echo "</td>";

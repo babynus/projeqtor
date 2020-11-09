@@ -681,6 +681,10 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitStretch.dijitButtonContents{
 	padding: 0.2em 1em 0.2em 1em;
 }
+.ProjeQtOrNewGui .dijitDialogPaneContent .resetMargin .dijitReset.dijitStretch.dijitButtonContents{
+  padding: 0;
+}
+
 .ProjeQtOrNewGui .dijitTooltipContainer .dijitReset.dijitInline.dijitButtonNode {
 	padding: 0.2em 0.2em 0.2em 0.2em;
 }
@@ -833,6 +837,12 @@ animation: fadeIn ease 0.5s;
   color:var(--color-dark);
   height: 26px;
 }
+.ProjeQtOrNewGui .filterData{
+	font-size:100%;
+	padding: 0px 10px;
+	vertical-align: middle;
+	height:24px;
+}
 .ProjeQtOrNewGui .dijitTitlePane .dijitTitlePaneTitle,
 .ProjeQtOrNewGui .section {
 	text-shadow: none;
@@ -984,4 +994,7 @@ animation: fadeIn ease 0.5s;
 }
 .ProjeQtOrNewGui .indicatorPage {
   bottom:70px !important;
+}
+table.dojoDndAvatar {
+	font-size:100%;
 }
