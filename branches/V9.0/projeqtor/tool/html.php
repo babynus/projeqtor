@@ -1766,7 +1766,7 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
   echo '<label for="filterNameDisplay" style="'.((isNewGui())?'position:relative;top:5px;':'').'">' . i18n("filterName") . '&nbsp;:&nbsp;</label>';
   echo '<div type="text" dojoType="dijit.form.ValidationTextBox" ';
   echo ' name="filterNameDisplay" id="filterNameDisplay"';
-  echo '  style="width: '.((isNewGui())?'510px':'560px;').'" ';
+  echo '  style="width: '.((isNewGui())?'530px':'550px;').'" ';
   echo ' trim="true" maxlength="100" class="input" ';
   echo ' value="' . $filterName . '" ';
   echo ' >';
