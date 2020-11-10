@@ -532,14 +532,8 @@ body .ProjeQtOrFlatBlue {
 
 /* END - ADD BY TABARY - NOTIFICATION SYSTEM */
 .ProjeQtOrFlatBlue .iconButtonSubscribe16 { background-image: url(customIcons/blue/iconSubscribe.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatBlue .iconButtonSave24 { background-image: url(customIcons/blue/iconButtonSave.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatBlue .iconButtonMark24 { background-image: url(customIcons/blue/iconMark.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatBlue .iconButtonMark16 { background-image: url(customIcons/blue/iconMark.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatBlue .iconButtonCollapseHide16 { background-image: url(customIcons/blue/iconCollapseHide.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.ProjeQtOrFlatBlue .iconHelpTitle { background-image: url(customIcons/blue/iconHelpWhite.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 22px 22px;}
-.ProjeQtOrFlatBlue .iconHelp { background-image: url(customIcons/blue/iconHelp.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatBlue .iconButtonPayment16 { background-image: url(customIcons/blue/iconPayment.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 
 .ProjeQtOrFlatBlue .ganttRightTitle, .ProjeQtOrFlatBlue .ganttLeftTopLine, .ProjeQtOrFlatBlue .ganttLeftTitle {
@@ -595,9 +589,6 @@ body .ProjeQtOrFlatBlue {
   { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 
-.ProjeQtOrFlatBlue .changeActivityStreamClass { background-image: url(customIcons/blue/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
-
-.ProjeQtOrFlatBlue .changeActivityStreamBotClass { background-image: url(customIcons/blue/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
 
 
 
@@ -1128,15 +1119,8 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconSum32 { background-image: url(customIcons/red/iconSum.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 /* END - ADD BY TABARY - NOTIFICATION SYSTEM */
 .ProjeQtOrFlatRed .iconButtonSubscribe16 { background-image: url(customIcons/red/iconSubscribe.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatRed .iconButtonSave32 { background-image: url(customIcons/red/iconButtonSave.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatRed .iconButtonSave24 { background-image: url(customIcons/red/iconButtonSave.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatRed .iconButtonMark24 { background-image: url(customIcons/red/iconMark.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatRed .iconButtonMark16 { background-image: url(customIcons/red/iconMark.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatRed .iconButtonCollapseHide16 { background-image: url(customIcons/red/iconCollapseHide.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.ProjeQtOrFlatRed .iconHelpTitle { background-image: url(customIcons/red/iconHelpWhite.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 22px 22px;}
-.ProjeQtOrFlatRed .iconHelp { background-image: url(customIcons/red/iconHelp.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatRed .iconButtonPayment16 { background-image: url(customIcons/red/iconPayment.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 
 .ProjeQtOrFlatRed .ganttRightTitle, .ProjeQtOrFlatRed .ganttLeftTopLine, .ProjeQtOrFlatRed .ganttLeftTitle {
@@ -1152,9 +1136,6 @@ body .ProjeQtOrFlatRed {
 
 .ProjeQtOrFlatRed .iconMenuBarCustom16 { background-image: url(customIcons/red/favorite.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatRed .changeActivityStreamClass { background-image: url(customIcons/red/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
-
-.ProjeQtOrFlatRed .changeActivityStreamBotClass { background-image: url(customIcons/red/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
@@ -1719,15 +1700,8 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconSum32 { background-image: url(customIcons/green/iconSum.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 /* END - ADD BY TABARY - NOTIFICATION SYSTEM */
 .ProjeQtOrFlatGreen .iconButtonSubscribe16 { background-image: url(customIcons/green/iconSubscribe.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatGreen .iconButtonSave32 { background-image: url(customIcons/green/iconButtonSave.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGreen .iconButtonSave24 { background-image: url(customIcons/green/iconButtonSave.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatGreen .iconButtonMark24 { background-image: url(customIcons/green/iconMark.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatGreen .iconButtonMark16 { background-image: url(customIcons/green/iconMark.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatGreen .iconButtonCollapseHide16 { background-image: url(customIcons/green/iconCollapseHide.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.ProjeQtOrFlatGreen .iconHelpTitle { background-image: url(customIcons/green/iconHelpWhite.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 22px 22px;}
-.ProjeQtOrFlatGreen .iconHelp { background-image: url(customIcons/green/iconHelp.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatGreen .iconButtonPayment16 { background-image: url(customIcons/green/iconPayment.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 
 .ProjeQtOrFlatGreen .ganttRightTitle, .ProjeQtOrFlatGreen .ganttLeftTopLine, .ProjeQtOrFlatGreen .ganttLeftTitle {
@@ -1743,9 +1717,6 @@ body .ProjeQtOrFlatGreen {
 
 .ProjeQtOrFlatGreen .iconMenuBarCustom16 { background-image: url(customIcons/green/favorite.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatGreen .changeActivityStreamClass { background-image: url(customIcons/green/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
-
-.ProjeQtOrFlatGreen .changeActivityStreamBotClass { background-image: url(customIcons/green/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
 
 /* =============================================================================== */
 /* ICONS                                                                           */
@@ -2252,15 +2223,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconSum32 { background-image: url(customIcons/grey/iconSum.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 /* END - ADD BY TABARY - NOTIFICATION SYSTEM */
 .ProjeQtOrFlatGrey .iconButtonSubscribe16 { background-image: url(customIcons/grey/iconSubscribe.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatGrey .iconButtonSave32 { background-image: url(customIcons/grey/iconButtonSave.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGrey .iconButtonSave24 { background-image: url(customIcons/grey/iconButtonSave.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
+
 .ProjeQtOrFlatGrey .iconButtonMark24 { background-image: url(customIcons/grey/iconMark.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatGrey .iconButtonMark16 { background-image: url(customIcons/grey/iconMark.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatGrey .iconButtonCollapseHide16 { background-image: url(customIcons/grey/iconCollapseHide.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
-.ProjeQtOrFlatGrey .iconHelpTitle { background-image: url(customIcons/grey/iconHelpWhite.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 22px 22px;}
-.ProjeQtOrFlatGrey .iconHelp { background-image: url(customIcons/grey/iconHelp.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatGrey .iconButtonPayment16 { background-image: url(customIcons/grey/iconPayment.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 
 .ProjeQtOrFlatGrey .ganttRightTitle, .ProjeQtOrFlatGrey .ganttLeftTopLine, .ProjeQtOrFlatGrey .ganttLeftTitle {
@@ -2275,10 +2241,6 @@ body .ProjeQtOrFlatGrey {
 }
 
 .ProjeQtOrFlatGrey .iconMenuBarCustom16 { background-image: url(customIcons/grey/favorite.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
-.ProjeQtOrFlatGrey .changeActivityStreamClass { background-image: url(customIcons/grey/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
-
-.ProjeQtOrFlatGrey .changeActivityStreamBotClass { background-image: url(customIcons/grey/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
 
 
 
