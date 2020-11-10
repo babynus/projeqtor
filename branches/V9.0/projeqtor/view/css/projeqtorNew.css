@@ -326,6 +326,9 @@ html, body, #mainDiv,
   background: var(--color-light) url() repeat-x bottom;
 }
 
+.roundedButtonNoBorder, .roundedButtonNoBorder:hover, .roundedButtonSmall, .roundedButtonSmall:hover {
+	border: 0px;
+}
 .hideStreamNewGui, .hideStreamNewGuiTopBar {
 	margin-top:4px;
 	margin-right:5px;
