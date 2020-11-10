@@ -334,7 +334,7 @@ function showBottomContent (menu){
         var menuSelected=menuLeftTop.querySelector('.menu__link--current');
         if(menuSelected!=null){
           var onclick=menuSelected.getAttribute('onclick');
-          var isObject=(onclick.includes('lodMenuBarItem'))?'false':'true';
+          var isObject=(onclick.includes('loadMenuBarItem'))?'false':'true';
           var id=(menuSelected.id.indexOf('report')!=-1)?'Report':menuSelected.id.substr(4);
           showMenuBottomParam(id,isObject);
         }
