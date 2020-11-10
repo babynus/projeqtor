@@ -168,6 +168,7 @@
 
 .iconSize32 { background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconSize22 { background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconSize24 { background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .iconSize16 { background-repeat: no-repeat; width: 16px !important; height: 16px !important; background-size: 16px 16px;}
 
 
@@ -2103,7 +2104,7 @@
 .ProjeQtOrFlatGreen .iconReportsFavorite { background-image: url(customIcons/green/iconReportsFavorite.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconReportsFavorite { background-image: url(customIcons/grey/iconReportsFavorite.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconReportsFavorite { background-image: url(customIcons/red/iconReportsFavorite.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconReport { background-image: url(customIcons/new/iconReportsFavorite.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconReportsFavorite { background-image: url(customIcons/new/iconReportsFavorite.svg);  background-repeat: no-repeat; }
 
 .iconRequirement { background-image: url(images/iconRequirement32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconRequirement { background-image: url(customIcons/blue/iconRequirement.png);  background-repeat: no-repeat; }
