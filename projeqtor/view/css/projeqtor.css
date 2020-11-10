@@ -4152,3 +4152,6 @@ div.ticketKanbanCustom .kanbanVersion{
 .mobile body {
 	font-size:10pt;
 }
+.mobile body.nonMobile {
+  font-size:8pt;
+}

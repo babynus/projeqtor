@@ -687,7 +687,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     //window.onbeforeunload = function (evt){ return beforequit();};
   </script>
 </head>
-<body id="body" class="tundra <?php echo getTheme();?>" onBeforeUnload="return beforequit();" onUnload="quit();">
+<body id="body" class="nonMobile tundra <?php echo getTheme();?>" onBeforeUnload="return beforequit();" onUnload="quit();">
 <div id="centerThumb80" style="display:none;z-index:999999;position:absolute;top:10px;left:10px;height:80px;width:80px;"></div>
 <div id="loadingDiv" class="<?php echo getTheme();?> loginFrame" 
  style="position:absolute; visibility: visible; display:block; width:100%; height:100%; margin:0; padding:0; border:0">  

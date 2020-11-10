@@ -38,7 +38,7 @@
 
 /* ======================= GENERIC FORM CSS ==========================*/
 
-.dijitTextBox {
+.dijitTextBox, .dijitValidationTextBox {
     font-weight: normal;
     color: #555555;
     margin: 5px 2px 5px 0px;
@@ -53,6 +53,9 @@
     height: 17px;
     font-size: 10pt;
 }
+TABLE.dijitSelect {
+	padding: 2px 5px 6px 5px !important;
+}	
 .dijitTextBoxFocused {
 	border: 1px solid #b2b2b2;
 }

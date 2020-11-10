@@ -26,7 +26,7 @@
 require_once "../tool/projeqtor.php";
 
 ?>
-<table>
+<table style="<?php if (isNewGui()) echo 'width:780px';?>">
     <tr>
      <td class="section"><?php echo i18n("sectionStoredFilters");?></td>
     </tr>
@@ -44,7 +44,7 @@ require_once "../tool/projeqtor.php";
     </tr>
     <tr><td>&nbsp;</td></tr>
 </table>
-<table xstyle="border: 1px solid grey;">
+<table style="<?php if (isNewGui()) echo 'width:780px';?>">
     <tr>
      <td class="section"><?php echo i18n("sectionActiveFilter");?></td>
     </tr>
@@ -63,9 +63,9 @@ require_once "../tool/projeqtor.php";
              <?php //ADD qCazelles - Dynamic filter - Ticket #78?>
            	 <td style="width: 80px;" title="<?php echo i18n('helpOrInput');?>" >
            	  <div id="filterLogicalOperator" style="width: 80px;display: none">
-           	 	<select dojoType="dijit.form.Select"
+           	 	<select dojoType="dijit.form.FilteringSelect"
            	 		id="orOperator" name="orOperator"
-           	 		class="input" style="width: 70px;" value="0">
+           	 		class="input" style="width: <?php echo (isNewGui())?'60px;position:relative;left:5px;':'70px;';?>" value="0">
            	 		<?php echo autoOpenFilteringSelect();?> 
            	 		<!-- BOITE DE DIALOGUE A METTRE SUR LE OR -->						<!-- TODO TODO TODO -->
            	 		<option value="0" selected><?php echo i18n('AND');?></option> <!-- TRANSLATION qCazelles -->
