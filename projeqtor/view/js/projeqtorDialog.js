@@ -7647,7 +7647,7 @@ function loadMenuBarObject(menuClass, itemName, from) {
   selectIconMenuBar(menuClass);
   if(isNewGui){
 	  editFavoriteRow(true);
-	  refreshSelectedItem(item, defaultMenu);
+	  refreshSelectedItem(menuClass, defaultMenu);
 	  if(defaultMenu == 'menuBarRecent'){
 		  menuNewGuiFilter(defaultMenu, menuClass);
 	  }

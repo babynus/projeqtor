@@ -103,6 +103,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
                           </div>
         	             </td>
         	             <td>
+        	               <input type="hidden" id="itemSelected" name="itemSelected" value="null">
         	               <div name="menuBarFavoriteButton" id="menuBarFavoriteButton" style="width:100%;height:100%;">
         	                 <table style="width:100%;height:100%;">
         	                   <tr>
