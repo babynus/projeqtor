@@ -1003,3 +1003,6 @@ animation: fadeIn ease 0.5s;
 table.dojoDndAvatar {
 	font-size:100%;
 }
+.rounded {
+	border-radius: 5px 5px 5px 5px !important;
+}
