@@ -100,16 +100,29 @@ require_once "../tool/projeqtor.php";
                   </script>        
                </select>
              </td>
-             <td style="width:328px;vertical-align:middle;">
+             <td style="width:320px;vertical-align:middle;position:relative;">
              <?php //ADD qCazelles - Dynamic filter - Ticket #78?>
-               <div id="filterDynamicParameterPane" dojoType="dijit.layout.ContentPane" region="top">
+               <div id="filterDynamicParameterPane" dojoType="dijit.layout.ContentPane" region="top" 
+                style="<?php if (isNewGui()) echo 'position:absolute;left:165px;top:9px;width:160px;overflow:hidden'?>">
+                <?php if (isNewGui()) {?>
+                  <div  id="filterDynamicParameterSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" 
+                    title="<?php echo i18n("dynamicValue");?>"
+                    value="off" 
+                    leftLabel="" rightLabel="" style="width:10px;position:relative; left:0px;top:2px;z-index:99;" >
+  		              <script type="dojo/method" event="onStateChanged" >
+  		                dijit.byId("filterDynamicParameter").set("checked",(this.value=="on")?true:false);
+  		              </script>
+  		             </div>
+  		          <?php }?>
                	<input type="checkbox" id="filterDynamicParameter" name="filterDynamicParameter" value=""
-               	 	dojoType="dijit.form.CheckBox" /><label class="checkLabel" for="filterDynamicParameter"><?php echo i18n('dynamicValue');?></label>
+               	 	dojoType="dijit.form.CheckBox" style="<?php if (isNewGui()) echo 'display:none;'?>"/>
+               	 	<label class="checkLabel" for="filterDynamicParameter" 
+               	 	style="<?php if (isNewGui()) echo 'font-size:90%;text-align:left;float:none;position:absolute;left:37px;top:-4px;text-overflow:ellipsis'?>"><?php echo i18n('dynamicValue');?></label>
                	</div>
                <?php //END ADD qCazelles - Dynamic filter - Ticket #78?>
                <input id="filterValue" name="filterValue" value=""  
                  dojoType="dijit.form.TextBox" 
-                 style="width:320px" />
+                 style="width:<?php echo (isNewGui())?'150':'320';?>px" />
                <select id="filterValueList" name="filterValueList[]" value=""  
                  dojoType="dijit.form.MultiSelect" multiple
                  style="width:325px;height:150px;" size="10" class="selectList"></select>
