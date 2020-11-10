@@ -436,7 +436,8 @@ function helpDisplayIconIsRead (val){
 }
 
 function menuNewGuiFilter(filter, item) {
-  saveUserParameter('defaultMenu', filter);
+    saveUserParameter('defaultMenu', filter);
+    if(!item)item=dojo.byId('itemSelected').value;
 	var historyBar = new Array();
 	historyTable.forEach(function(element){
 		historyBar.push('menu'+element[0]);
@@ -469,6 +470,7 @@ function menuNewGuiFilter(filter, item) {
 }
 
 function refreshSelectedItem(item, filter){
+	dojo.byId('itemSelected').value = item;
 	var refreshItem = function(){
 		if(item)selectIconMenuBar(item);
 	};
