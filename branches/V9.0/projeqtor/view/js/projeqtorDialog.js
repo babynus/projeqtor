@@ -4596,7 +4596,7 @@ function addfilterClause(silent) {
   // Add controls on operator and value
   var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
   loadContent("../tool/addFilterClause.php" + compUrl, "listFilterClauses",
-      "dialogFilterForm", false);
+      "dialogFilterForm", false,null,null,null,function(){clearDivDelayed('saveFilterResult');});
   // dijit.byId('filterNameDisplay').set('value',null);
   // dojo.byId('filterName').value=null;
   
@@ -4631,7 +4631,7 @@ function removefilterClause(id) {
   }
   else if (dojo.byId('nbFilterCriteria').value == "2") { //Value is going to be set at 1
 	  loadContent("../tool/displayFilterClause.php" + compUrl,
-		"listFilterClauses", "dialogFilterForm", false);
+		"listFilterClauses", "dialogFilterForm", false,null,null,null,function(){clearDivDelayed('saveFilterResult');});
   }
   //END ADD qCazelles - Dynamic filter - Ticket #78
 }
@@ -4761,7 +4761,7 @@ function defaultFilter() {
   }
   var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
   loadContent("../tool/defaultFilter.php" + compUrl, "listStoredFilters",
-      "dialogFilterForm", false);
+      "dialogFilterForm", false,null,null,null,function(){clearDivDelayed('saveFilterResult');});
 }
 
 /**
@@ -4779,9 +4779,13 @@ function saveFilter() {
   }
   var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
   loadContent("../tool/saveFilter.php" + compUrl, "listStoredFilters",
-      "dialogFilterForm", false);
+      "dialogFilterForm", false,null,null,null,function(){clearDivDelayed('saveFilterResult');});
 }
-
+function clearDivDelayed(divName,delay) {
+  if (!divName) return;
+  if (!delay) delay=2500;
+  setTimeout("if (dojo.byId('"+divName+"')) dojo.byId('"+divName+"').innerHTML='';",delay);
+}
 /**
  * Select a stored filter in the list and fetch criteria
  * 
@@ -4853,7 +4857,7 @@ function removeStoredFilter(idFilter, nameFilter) {
   var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   var action=function() {
     loadContent("../tool/removeFilter.php?idFilter=" + idFilter + compUrl,
-        "listStoredFilters", "dialogFilterForm", false);
+        "listStoredFilters", "dialogFilterForm", false,null,null,null,function(){clearDivDelayed('saveFilterResult');});
   };
   window.top.showConfirm(i18n("confirmRemoveFilter", new Array(nameFilter)), action);
 }
