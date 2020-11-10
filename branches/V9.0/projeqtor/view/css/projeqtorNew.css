@@ -662,7 +662,7 @@ animation: fadeIn ease 0.5s;
 }
 .ProjeQtOrNewGui .dijitDialog {
 	border-radius:5px;
-	
+	font-size:10pt;
 } 
 .ProjeQtOrNewGui .dijitButton,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
@@ -688,6 +688,12 @@ animation: fadeIn ease 0.5s;
 }
 .ProjeQtOrNewGui .dijitDialogPaneContent .resetMargin .dijitReset.dijitStretch.dijitButtonContents{
   padding: 0;
+}
+.ProjeQtOrNewGui .notButton,
+.ProjeQtOrNewGui .notButton .dijitReset.dijitInline.dijitButtonNode{
+  background: url() #ffffff;
+  backgound-color: #ffffff;
+  border:1px solid #ffffff;
 }
 
 .ProjeQtOrNewGui .dijitTooltipContainer .dijitReset.dijitInline.dijitButtonNode {
@@ -1008,6 +1014,11 @@ table.dojoDndAvatar {
 .rounded {
 	border-radius: 5px 5px 5px 5px !important;
 }
-.ProjeQtOrNewGui .dijitArrowButtonInner{
+.ProjeQtOrNewGui .dijitTextBox.dijitComboBox.dijitValidationTextBox .dijitArrowButtonInner,
+.ProjeQtOrNewGui .dijitSelect.dijitValidationTextBox .dijitArrowButtonInner {
 	margin-left:6px;
+}
+select option:checked {
+	background-color:var(--color-grid-selected-bg) !important;
+	color:var(--color-grid-selected-text) !important;
 }

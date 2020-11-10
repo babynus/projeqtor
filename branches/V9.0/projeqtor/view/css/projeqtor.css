@@ -4154,4 +4154,5 @@ div.ticketKanbanCustom .kanbanVersion{
 }
 .mobile body.nonMobile {
   font-size:8pt;
+  font-family: Verdana, Arial, Tahoma, sans-serif;
 }
