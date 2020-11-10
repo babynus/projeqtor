@@ -784,8 +784,10 @@ animation: fadeIn ease 0.5s;
   color:var(--color-text);
 }
 .ProjeQtOrNewGui .dijitButtonNode:hover {
-  background: #dddddd;
-  color:var(--color-dark);
+  /*background: #dddddd;*/
+  color:var(--color-light);
+  opacity:20%;
+  
 }
 .ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton .dijitButtonNode {
     background: #ffffff;
@@ -1005,4 +1007,7 @@ table.dojoDndAvatar {
 }
 .rounded {
 	border-radius: 5px 5px 5px 5px !important;
+}
+.ProjeQtOrNewGui .dijitArrowButtonInner{
+	margin-left:6px;
 }
