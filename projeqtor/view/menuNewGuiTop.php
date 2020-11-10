@@ -49,7 +49,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
 	             <div name="menuBarButtonDiv" id="menuBarButtonDiv" style="width:100%;height:100%;">
 	               <table style="width:100%;height:100%;">
         	           <tr>
-        	             <td>
+        	             <td style="padding-left: 10px;">
         	               <div dojoType="dijit.form.DropDownButton" id="addItemButton" jsId="addItemButton" name="addItemButton"
                             showlabel="false" iconClass="iconAdd iconSize22 imageColorNewGui" title="<?php echo i18n('comboNewButton');?>">
                             <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;height:100%;">
