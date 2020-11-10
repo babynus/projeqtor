@@ -357,6 +357,15 @@
     
     var breadScrumLeft=dojo.byId('breadScrumb');
     var divBcl = document.createElement('div');
+    if(iconClass=='Plan'){
+      iconClass='Planning';
+    }else if(iconClass=='Bill'){
+      iconClass='Financial';
+    }else if(iconClass=='Resources'){
+      iconClass='Resource';
+    }else if(iconClass=='GanttPlan'){
+       iconClass='Planning';
+    }
     divBcl.className='icon'+iconClass+' iconSize22 iconBreadSrumb';
     
     var name= idx ? this.menusArr[idx].name : this.options.initialBreadcrumb;

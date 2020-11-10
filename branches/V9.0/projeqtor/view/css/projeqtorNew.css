@@ -336,13 +336,15 @@ html, body, #mainDiv,
 	
 }
 .iconBreadSrumb{
-	margin-top:10px;
+	padding-top:2px;
+	padding-bottom:1px;
+	margin-top:20px;
 	margin-left:5px;
-	padding-bottom: 10px;
+	
 }
 
 .iconBreadSrumbSelect{
-	border-right: 2px solid !important;
+	border-right: 2px solid var(--color-secondary)!important;
     padding-right: 3px;
 }
 

@@ -75,7 +75,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 	   onmouseover="dojo.byId('textDisplayIcon').style.display='none';dojo.byId('hideTextDisplayIcon').style.display='block';"
 	  onmouseout="dojo.byId('textDisplayIcon').style.display='block';dojo.byId('hideTextDisplayIcon').style.display='none';" >
 	   <div id="textDisplayIcon" style="color: rgb(180 180 180);padding-top:2px;"><span><?php echo i18n('helpDisplayIconMenuLeft');?></span></div>
-	   <div id="hideTextDisplayIcon" style="display:none;padding-top: 8px;" ><span><?php echo i18n('clickIntoToClose');?></span></div>
+	   <div id="hideTextDisplayIcon" style="display:none;padding-top: 8px;" ><span><?php echo i18n('clickIntoToCloseHelpMessage');?></span></div>
 	 </div>
 	<?php } ?>
     </div>
@@ -218,8 +218,8 @@ function storReport($listReport, &$res, $lstNewNavMenu, $idMenuReport, $level ) 
               
               $keyParent=$level.'-'.numericFixLengthFormatter($report->idReportCategory,5).'-'.numericFixLengthFormatter($report->sortOrder,5);
               $isNewPId[$file]=$report->idReportCategory.$level.$report->sortOrder;
-              $obj= array('id'=>$isNewPId[$file],'name'=>$file,'idParent'=>$idParent);
-              $res[$keyParent]=array('level'=>$level,'objectType'=>'report','object'=>$obj);
+              $obj= array('id'=>$isNewPId[$file],'name'=>ucfirst($file),'idParent'=>$idParent);
+              $res[$keyParent]=array('level'=>$level,'objectType'=>'reportSubMenu','object'=>$obj);
             }
             $count[$file]=1;
             $key=$levelSub.'-'.numericFixLengthFormatter($isNewPId[$file],5).'-'.numericFixLengthFormatter($report->sortOrder,5);
@@ -244,7 +244,7 @@ function getReportMenu(){
   $lst=$hr->getSqlElementsFromCriteria(array('idProfile'=>$user->idProfile, 'allowAccess'=>'1'), false);
   $res=array();
   $listCateg=SqlList::getList('ReportCategory');
-  $idMenuReport=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navReports','idParent'=>null,'idMenu'=>null));
+  $idMenuReport=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navReports'));
   foreach ($lst as $h) {
     $report=$h->idReport;
     $nameReport=SqlList::getNameFromId('Report', $report, false);
@@ -272,7 +272,7 @@ function getReportMenu(){
    $reportDirect= new Report();
    $where=" idReportCategory in (".implode(",", $lstIdCate).")";
    $reportList= $reportDirect->getSqlElementsFromCriteria(null,false,$where,"file");
-   $nameFile=SqlList::getList('report','file');
+   $nameFile=SqlList::getList('Report','file');
    $lstReportName=array();
    $lstNewNavMenu=array();
    foreach ($nameFile as $idN=>$nameFile){
@@ -327,7 +327,7 @@ function drawLeftMenuListNewGui($displayMode){
   
    foreach ($allMenu as $id=>$menu){
     
-    if($menu['objectType']=='report' or $menu['objectType']=='reportDirect'){
+    if($menu['objectType']=='report' or $menu['objectType']=='reportSubMenu' or $menu['objectType']=='reportDirect'){
       $obj=new Navigation();
       $obj->id=$menu['object']['id'];
       $obj->idParent=$menu['object']['idParent'];
@@ -348,7 +348,7 @@ function drawLeftMenuListNewGui($displayMode){
       $nameLink='submenu-'.$obj->idParent;
       $result.='<ul data-menu="'.$nameLink.'" id="'.$nameLink.'" class="menu__level" tabindex="-1" role="menu" >';
     }
-    if($obj->idParent!=0 and $obj->idMenu!=0){
+    if($obj->idMenu!=0){
       if( $menu['objectType']!='reportDirect'){
         $realMenu=new Menu($obj->idMenu);
         $menuName=$realMenu->name;
@@ -398,13 +398,38 @@ function drawLeftMenuListNewGui($displayMode){
       $result.='<div id="div'.ucfirst($obj->name).'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }
   }else{
+      if($menu['objectType']=='report'){
+        $idName=substr($obj->name,14);
+      }else if($menu['objectType']=='reportSubMenu'){
+       if($obj->name=='../tool/jsonPlanning')$idName='GanttPlan';
+       else $idName=$obj->name;
+      }
       $sub='submenu-'.$obj->id;
       $result.='<li class="menu__item" role="menuitem">';
-      $result.='<a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.(($menu['objectType']=='menu')?$obj->name:"rep".substr($obj->name,14)).'">';
-      $result.='<div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):substr($obj->name,14)).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(($menu['objectType']=='menu')?i18n('menu'.substr($obj->name,3)):i18n($obj->name)).'</div></a>';
+      $result.='<a class="menu__link" data-submenu="'.$sub.'" aria-owns="'.$sub.'" href="#" id="'.(($menu['objectType']=='menu')?$obj->name:"rep".$idName).'">';
+      if($menu['objectType']=='report' ){
+        $iconName=$idName;
+        switch ($idName){
+        	case 'Plan':
+        	  $iconName='Planning';
+        	  break;
+        	case 'Bill':
+        	  $iconName='Financial';
+        	  break;
+      	    case 'Resources':
+      	       $iconName='Resource';
+      	       break;
+        }
+        $idName=$obj->name;
+      }else if($menu['objectType']=='reportSubMenu'){
+         if($idName=='GanttPlan')$iconName='Planning';
+         else $iconName=$idName;
+      }
+      
+      $result.='<div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$iconName).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
+      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(($menu['objectType']=='menu')?i18n('menu'.substr($obj->name,3)):i18n($idName)).'</div></a>';
       $result.='<div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
-    }
+  }
     $old=$menu['level'];
     $idP=$obj->idParent;
    }
