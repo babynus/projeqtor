@@ -55,20 +55,24 @@ $crit['idUser']=$user->id;
 $crit['idProject']=null;
 $crit['parameterCode']="Filter" . $filterObjectClass;
 $param=SqlElement::getSingleSqlElementFromCriteria('Parameter',$crit);
+echo "<div id='saveFilterResult' style='z-index:9;position: absolute;left:50%;width:100%;margin-left:-50%;top:20px' >";
+echo '<table width="100%"><tr><td align="center" >';
 if ($name) {
   $critFilter=array("refType"=>$objectClass, "name"=>$name, "idUser"=>$user->id);
   $filter=SqlElement::getSingleSqlElementFromCriteria("Filter", $critFilter);
   if (! $filter->id) {
-    echo '<span class="messageERROR" style="z-index:999;position:relative;top:7px">' . i18n('defaultFilterError', array($name)) . '</span>';
+    echo '<span class="messageERROR" style="z-index:999;position:relative;top:7px;padding:10px 20px;white-space:nowrap">' . i18n('defaultFilterError', array($name)) . '</span>';
   } else {
     $param->parameterValue=$filter->id;
     $param->save();
-    echo '<span class="messageOK" style="z-index:999;position:relative;top:7px">' . i18n('defaultFilterSet', array($name)) . '</span>';
+    echo '<span class="messageOK" style="z-index:999;position:relative;top:7px;padding:10px 20px;white-space:nowrap">' . i18n('defaultFilterSet', array($name)) . '</span>';
   }
 } else {
   $param->delete();
-  echo '<span class="messageOK" style="z-index:999;position:relative;top:7px">' . i18n('defaultFilterCleared') . '</span>';
+  echo '<span class="messageOK" style="z-index:999;position:relative;top:7px;padding:10px 20px;white-space:nowrap">' . i18n('defaultFilterCleared') . '</span>';
 }
+echo '</td></tr></table>';
+echo "</div>";
 echo '</td></tr></table>';
 Sql::commitTransaction();
 $flt=new Filter();
