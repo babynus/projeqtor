@@ -61,11 +61,11 @@ require_once "../tool/projeqtor.php";
            <tr><td colspan="5" class="filterHeader"><?php echo i18n("addFilterClauseTitle");?></td></tr>
            <tr style="vertical-align: top;">
              <?php //ADD qCazelles - Dynamic filter - Ticket #78?>
-           	 <td style="width: 80px;" title="<?php echo i18n('helpOrInput');?>" >
-           	  <div id="filterLogicalOperator" style="width: 80px;display: none">
+           	 <td style="width:<?php echo (isNewGui())?'67':'80';?>px;" title="<?php echo i18n('helpOrInput');?>" >
+           	  <div id="filterLogicalOperator" style="width: <?php echo (isNewGui())?'65':'80';?>px;display: none">
            	 	<select dojoType="dijit.form.FilteringSelect"
            	 		id="orOperator" name="orOperator"
-           	 		class="input" style="width: <?php echo (isNewGui())?'60px;position:relative;left:5px;':'70px;';?>" value="0">
+           	 		class="input" style="width: <?php echo (isNewGui())?'45px;position:relative;left:5px;':'70px;';?>" value="0">
            	 		<?php echo autoOpenFilteringSelect();?> 
            	 		<!-- BOITE DE DIALOGUE A METTRE SUR LE OR -->						<!-- TODO TODO TODO -->
            	 		<option value="0" selected><?php echo i18n('AND');?></option> <!-- TRANSLATION qCazelles -->
@@ -74,20 +74,20 @@ require_once "../tool/projeqtor.php";
            	 	</div>
            	 </td>
              <?php //END ADD qCazelles - Dynamic filter - Ticket #78?>
-             <td style="width: 210px;" >
+             <td style="width: <?php echo (isNewGui())?'197':'210';?>px;" >
                <div dojoType="dojo.data.ItemFileReadStore" jsId="attributeStore" url="../tool/jsonList.php?listType=empty" searchAttr="name" >
                </div>
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="idFilterAttribute" name="idFilterAttribute" 
                 missingMessage="<?php echo i18n('attributeNotSelected');?>"
-                class="input" value="" style="width: 200px;" store="attributeStore">
+                class="input" value="" style="width: <?php echo (isNewGui())?'180':'200';?>px;" store="attributeStore">
                   <script type="dojo/method" event="onChange" >
                     filterSelectAtribute(this.value);
                   </script>              
                </select>
              </td>
-             <td style="width: 110px;">
+             <td style="width: <?php echo (isNewGui())?'117':'110';?>px;">
                <div dojoType="dojo.data.ItemFileReadStore" jsId="operatorStore" url="../tool/jsonList.php?listType=empty" searchAttr="name" >
                </div>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -100,10 +100,10 @@ require_once "../tool/projeqtor.php";
                   </script>        
                </select>
              </td>
-             <td style="width:320px;vertical-align:middle;position:relative;">
+             <td style="width:<?php echo (isNewGui())?'370':'320';?>px;vertical-align:middle;position:relative;">
              <?php //ADD qCazelles - Dynamic filter - Ticket #78?>
                <div id="filterDynamicParameterPane" dojoType="dijit.layout.ContentPane" region="top" 
-                style="<?php if (isNewGui()) echo 'position:absolute;left:165px;top:9px;width:160px;overflow:hidden'?>">
+                style="<?php if (isNewGui()) echo 'position:absolute;left:200px;top:9px;width:160px;overflow:hidden'?>">
                 <?php if (isNewGui()) {?>
                   <div  id="filterDynamicParameterSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" 
                     title="<?php echo i18n("dynamicValue");?>"
@@ -122,12 +122,20 @@ require_once "../tool/projeqtor.php";
                <?php //END ADD qCazelles - Dynamic filter - Ticket #78?>
                <input id="filterValue" name="filterValue" value=""  
                  dojoType="dijit.form.TextBox" 
-                 style="width:<?php echo (isNewGui())?'150':'320';?>px" />
+                 style="width:<?php echo (isNewGui())?'180':'320';?>px" />
                <select id="filterValueList" name="filterValueList[]" value=""  
                  dojoType="dijit.form.MultiSelect" multiple
-                 style="width:325px;height:150px;" size="10" class="selectList"></select>
+                 style="<?php echo (isNewGui())?'width:180px;font-size:10pt;padding:8px 0px 0px 5px;color:#555555;':'width:325px;';?>height:150px;" size="10" class="selectList"></select>
+               <?php if (isNewGui()) {?>
+               <div  id="filterValueCheckboxSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" 
+                 leftLabel="" rightLabel="" style="width:10px;position:relative; top:0px;left:5px;z-index:99;display:none;" >
+  		           <script type="dojo/method" event="onStateChanged" >
+  		             dijit.byId("filterValueCheckbox").set("checked",(this.value=="on")?true:false);
+  		           </script>
+  		         </div>
+               <?php }?>
                <input type="checkbox" id="filterValueCheckbox" name="filterValueCheckbox" value=""  
-                 dojoType="dijit.form.CheckBox" style="padding-top:7px";/> 
+                 dojoType="dijit.form.CheckBox" style="padding-top:7px;<?php echo (isNewGui())?'margin-left:5px;display:none;':'';?>";/> 
                <input id="filterValueDate" name="filterValueDate" value=""  
                  dojoType="dijit.form.DateTextBox" 
                  constraints="{datePattern:browserLocaleDateFormatJs}"
@@ -141,13 +149,13 @@ require_once "../tool/projeqtor.php";
                   <option value="desc"><?php echo i18n('sortDesc');?></option>
                </select> 
              </td>
-             <td style="width:25px; text-align: center;vertical-align:middle;" align="center"> 
+             <td style="position:relative;width:25px; text-align: center;vertical-align:<?php echo (isNewGui())?'top':'middle';?>;" align="center"> 
                <table>
                  <tr>
-                  <td style="position: absolute;margin-top:-60px;margin-left:-2px;">
+                  <td style="position: absolute;<?php echo (isNewGui())?'top:118px;left:-190px;':'margin-top:-60px;margin-left:-2px;';?>">
                     <button style="display:none;" id="showDetailInFilter" dojoType="dijit.form.Button" showlabel="false"
-                            title="<?php echo i18n('showDetail')?>"
-                            iconClass="iconView">
+                            title="<?php echo i18n('showDetail')?>" class="resetMargin notButton notButtonRounded"
+                            iconClass="iconSearch iconSize22 imageColorNewGui">
                       <script type="dojo/connect" event="onClick" args="evt">
                         var objectName = dijit.byId('showDetailInFilter').get('value');
                         if( objectName ){
@@ -162,7 +170,7 @@ require_once "../tool/projeqtor.php";
                  </tr>
                  <tr>
                    <td>
-                     <a src="css/images/smallButtonAdd.png" class="imageColorNewGui" style="margin-top:3px;<?php if (isNewGui()) echo 'position:relative;right:6px';?>" onClick="addfilterClause();" title="<?php echo i18n('addFilterClause');?>" class="smallButton">
+                     <a src="css/images/smallButtonAdd.png" class="imageColorNewGui" style="<?php echo (isNewGui())?'position:relative;right:6px;top:7px;':'margin-top:3px;';?>" onClick="addfilterClause();" title="<?php echo i18n('addFilterClause');?>" class="smallButton">
                      <?php echo (isNewGui())?formatMediumButton('Add'):formatSmallButton('Add');?>
                      </a> 
                    </td>

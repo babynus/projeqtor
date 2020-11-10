@@ -676,15 +676,15 @@ function changeTheme(newTheme) {
   if (newTheme != "") {
     if (isNewGui) {
       if (newTheme.substr(0,13)=='ProjeQtOrFlat') {
-        if (dojo.byId('body')) dojo.byId('body').className = 'tundra ProjeQtOrFlatRed ProjeQtOrNewGui';
+        if (dojo.byId('body')) dojo.byId('body').className = 'nonMobile tundra ProjeQtOrFlatRed ProjeQtOrNewGui';
         var color=newTheme.toLowerCase().substr(13);
         setColorTheming(color);
       } else {
-        if (dojo.byId('body')) dojo.byId('body').className = 'tundra '+newTheme+' ProjeQtOrNewGui';
+        if (dojo.byId('body')) dojo.byId('body').className = 'nonMobile tundra '+newTheme+' ProjeQtOrNewGui';
         //setColorTheming('grey');
       }
     } else {
-      dojo.byId('body').className = 'tundra ' + newTheme;
+      dojo.byId('body').className = 'nonMobile tundra ' + newTheme;
     }
     // Mehdi #2887
     var callBack = function() { 

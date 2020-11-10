@@ -46,7 +46,7 @@ Security::checkValidClass($objectClass);
            ?>
            
            <tr style="vertical-align: top;">
-             <td style="width: 210px;" >
+             <td style="width: 210px;padding-left:5px" >
                <input readOnly class="dijit dijitInline dijitLeft input dijitTextBox" tabIndex="-1" value="<?php echo $filterCriteria->dispAttribute;?>" style="width: 200px;padding:5px 10px;" />
                <input type="hidden" id="idFilterAttribute<?php echo $cpt;?>" name="idFilterAttribute<?php echo $cpt;?>" value="<?php echo $filterCriteria->sqlAttribute;?>" />
              </td>
@@ -60,7 +60,7 @@ Security::checkValidClass($objectClass);
                  	?>
                <select id="filterValueList<?php echo $cpt;?>" name="filterValueList<?php echo $cpt;?>[]" value=""  
                  dojoType="dijit.form.MultiSelect" multiple
-                 style="width:400px" size="10" class="selectList" onDblClick="selectDynamicFilter();">
+                 style="<?php echo (isNewGui())?'width:385px;font-size:10pt;padding:8px 0px 0px 5px;color:#555555;':'width:400px;';?>" size="10" class="selectList" onDblClick="selectDynamicFilter();">
                  <!-- REMPLIR LISTE -->
                  <?php
                  if($filterCriteria->sqlAttribute=='idBusinessFeature'){
@@ -82,7 +82,7 @@ Security::checkValidClass($objectClass);
                  	<?php } else if (in_array($filterCriteria->sqlOperator, array('LIKE', 'NOT LIKE')) or $filterCriteria->sqlValue == 'int') { ?>
                <input id="filterValue<?php echo $cpt;?>" name="filterValue<?php echo $cpt;?>" value=""  
                  dojoType="dijit.form.TextBox" 
-                 style="width:400px" />
+                 style="width:<?php echo (isNewGui())?'373':'400';?>px" />
                  <?php 
                     if ($filterCriteria->sqlValue == 'int') { ?>
                  <input type="hidden" name="filterDataType<?php echo $cpt;?>" id="filterDataType<?php echo $cpt;?>" value="int" />
@@ -102,8 +102,16 @@ Security::checkValidClass($objectClass);
                  }
                  else if ($filterCriteria->sqlValue == 'bool') {
                  	?>
+                 	                <?php if (isNewGui()) {?>
+                  <div  id="filterValueCheckbox<?php echo $cpt;?>Switch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" 
+                    leftLabel="" rightLabel="" style="width:10px;position:relative; left:10px;top:2px;z-index:99;" >
+  		              <script type="dojo/method" event="onStateChanged" >
+  		                dijit.byId("filterValueCheckbox<?php echo $cpt;?>").set("checked",(this.value=="on")?true:false);
+  		              </script>
+  		             </div>
+  		          <?php }?>
                  <input type="checkbox" id="filterValueCheckbox<?php echo $cpt;?>" name="filterValueCheckbox<?php echo $cpt;?>" value=""
-                 	dojoType="dijit.form.CheckBox" style="padding-top:7px;" />
+                 	dojoType="dijit.form.CheckBox" style="padding-top:7px;<?php if (isNewGui()) echo 'display:none;'?>" />
                  <input type="hidden" name="filterDataType<?php echo $cpt;?>" id="filterDataType<?php echo $cpt;?>" value="bool" />
                  	<?php
                  }
@@ -120,9 +128,9 @@ Security::checkValidClass($objectClass);
              </td>
              <td style="width: 25px;">
              <?php  if (in_array($filterCriteria->sqlOperator, array('IN', 'NOT IN'))) { ?>
-                    <button style="display:block;margin-left:-1px; padding-right:2px;position:relative;top:-2px;" id="idButtonCombo<?php echo $cpt;?>" dojoType="dijit.form.Button" showlabel="false"
-                            title="<?php echo i18n('showDetail')?>"
-                            iconClass="iconView">
+                    <button style="display:block;margin-left:<?php echo (isNewGui())?'0':'-1';?>px; padding-right:2px;position:relative;top:-2px;" id="idButtonCombo<?php echo $cpt;?>" dojoType="dijit.form.Button" showlabel="false"
+                            title="<?php echo i18n('showDetail')?>" class="resetMargin notButton notButtonRounded"
+                            iconClass="iconSearch iconSize22 imageColorNewGui">
                       <script type="dojo/connect" event="onClick" args="evt">
                          var nb = <?php echo $cpt;?>;
                          var fieldTarget = 'filterValueList'+nb;
