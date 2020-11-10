@@ -438,13 +438,10 @@ function helpDisplayIconIsRead (val){
 function menuNewGuiFilter(filter, item) {
   saveUserParameter('defaultMenu', filter);
 	var historyBar = new Array();
-//	var historyBarSort = new Array();
 	historyTable.forEach(function(element){
 		historyBar.push('menu'+element[0]);
-//		if(!historyBarSort.includes('menu'+element[0]))historyBarSort.push('menu'+element[0]);
 	});
 	var callback = function(){
-		if(item)selectIconMenuBar(item);
 		if(filter != 'menuBarCustom'){
 			dojo.byId('favoriteSwitch').style.display = 'none';
 			dojo.addClass('recentButton','imageColorNewGuiSelected');
@@ -466,9 +463,16 @@ function menuNewGuiFilter(filter, item) {
 	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, null, null, null, null, callback, true);
 	cleanContent("anotherBarContainer");
 	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter+'&isMenuLeftOpen='+isMenuLeftOpen, 'anotherBarContainer', null, null, null, null, null, hide, true);
-	loadDiv('../view/refreshMenuBarButtonFavorite.php?item='+item, 'menuBarButtonFavorite', null);
+	refreshSelectedItem(item, filter);
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
+}
+
+function refreshSelectedItem(item, filter){
+	var refreshItem = function(){
+		if(item)selectIconMenuBar(item);
+	};
+	loadDiv('../view/refreshMenuBarButtonFavorite.php?item='+item+'&menuFilter='+filter, 'menuBarFavoriteButton', null, refreshItem);
 }
 
 function switchFavoriteRow(idRow, direction, maxRow){

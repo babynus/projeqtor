@@ -33,6 +33,7 @@ require_once "../tool/formatter.php";
 scriptLog('   ->/view/refreshMenuBarButtonFavorite.php');
 
 $item = RequestHandler::getValue('item');
+$defaultMenu = RequestHandler::getValue('menuFilter');
 ?>
 <table style="width:100%;height:100%;">
  <tr>
