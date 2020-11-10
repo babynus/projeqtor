@@ -149,8 +149,8 @@ require_once "../tool/projeqtor.php";
                  </tr>
                  <tr>
                    <td>
-                     <a src="css/images/smallButtonAdd.png" style="margin-top:3px" onClick="addfilterClause();" title="<?php echo i18n('addFilterClause');?>" class="smallButton">
-                     <?php echo formatSmallButton('Add');?>
+                     <a src="css/images/smallButtonAdd.png" class="imageColorNewGui" style="margin-top:3px;<?php if (isNewGui()) echo 'position:relative;right:6px';?>" onClick="addfilterClause();" title="<?php echo i18n('addFilterClause');?>" class="smallButton">
+                     <?php echo (isNewGui())?formatMediumButton('Add'):formatSmallButton('Add');?>
                      </a> 
                    </td>
                   </tr>
@@ -161,6 +161,7 @@ require_once "../tool/projeqtor.php";
         </form>
       </td>
     </tr>
+    <?php if (isNewGui()) {?><tr><td><div style="height:6px"></div></td></tr><?php }?>
     <tr style="height:32px">
       <td align="center">
         <table><tr><td>
