@@ -1025,3 +1025,47 @@ select option:checked {
 	background-color:var(--color-grid-selected-bg) !important;
 	color:var(--color-grid-selected-text) !important;
 }
+/*========================== CK EDITOR ======================*/
+.ProjeQtOrNewGui .cke_top, .ProjeQtOrNewGui .cke_bottom {
+  background: var(--color-white) !important;
+  background-image: url();
+}
+.ProjeQtOrNewGui .cke_toolgroup {
+  background: var(--color-white) !important;
+  background-image: url();
+  
+}
+.ProjeQtOrNewGui a.cke_button, .ProjeQtOrNewGui a.cke_combo_button {
+  border-radius: 5px !important;
+  border: 1px solid #dddddd;
+  background: var(--color-lighter) !important;
+  /* margin-left: 1px;*/
+}
+.ProjeQtOrNewGui a.cke_button {
+  padding: 4px 6px;
+  margin-left: 1px;
+}
+.ProjeQtOrNewGui a.cke_combo_button {
+	padding:0px;
+	margin-top:1px;
+}
+.ProjeQtOrNewGui a.cke_button_on {
+  background: var(--color-light) !important;
+  border: 1px #aaaaaa solid;
+  padding: 4px 6px;
+}
+.ProjeQtOrNewGui a.cke_button:hover, .ProjeQtOrNewGui a.cke_combo_button:hover {
+  background: var(--color-white) !important;
+  background-image: url();
+  border: 1px #aaaaaa solid;
+  /*margin-left: 1px;*/
+}
+.ProjeQtOrNewGui a.cke_button:hover {
+	padding: 4px 6px;
+}
+.ProjeQtOrNewGui a.cke_button_expandable{
+	padding:4px 6px
+}
+.ProjeQtOrNewGui .cke_toolbar_separator {
+	background: var(--color-white);
+}
