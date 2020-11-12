@@ -256,12 +256,12 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (242,'menuDeliveryType',132,183,430),
 (243,'menuSupplierContractType',132,229,440),
 (244,'menuClientContractType',132,236,450),
-(245,'menuRenewal',131,231,290)
-(246,'menuPredefinedSituation',131,249,300)
-(247,'menuInterventionMode',131,251,310)
+(245,'menuRenewal',131,231,290),
+(246,'menuPredefinedSituation',131,249,300),
+(247,'menuInterventionMode',131,251,310),
 (250,'menuActivityStream',0,177,15),
-(300,'navPlugins',0,0,11),
-(301,'menuPluginManagement'300,136,10);
+(300,'navPlugins',0,0,110),
+(301,'menuPluginManagement'300,136,100);
 
 ALTER TABLE `${prefix}menucustom` ADD `idRow` INT(12) DEFAULT '1' COMMENT '12',  ADD `sortOrder` int(3) unsigned DEFAULT 1 COMMENT '3';
 
