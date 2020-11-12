@@ -261,7 +261,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (247,'menuInterventionMode',131,251,310),
 (250,'menuActivityStream',0,177,15),
 (300,'navPlugins',0,0,110),
-(301,'menuPluginManagement'300,136,100);
+(301,'menuPluginManagement',300,136,100);
 
 ALTER TABLE `${prefix}menucustom` ADD `idRow` INT(12) DEFAULT '1' COMMENT '12',  ADD `sortOrder` int(3) unsigned DEFAULT 1 COMMENT '3';
 
