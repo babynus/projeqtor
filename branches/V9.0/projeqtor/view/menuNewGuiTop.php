@@ -118,7 +118,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
 	             </div>
 	           </td>
     	       <td>
-    	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dijit.layout.ContentPane"  style="overflow:hidden;width: 100%;height: 43px;border-radius: 5px;border-left: 1px solid var(--color-dark);"> 
+    	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dijit.layout.ContentPane"  style="overflow:hidden;width: 100%;height: 43px;border-left: 1px solid var(--color-dark);"> 
         	         <table style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
         	           <tr>
         	             <td onclick="editFavoriteRow(false);" style="cursor:pointer;
