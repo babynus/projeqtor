@@ -253,11 +253,15 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       }else if(source.id == target.id){
     	  if(source.id == 'menuBarDndSource'){
     		  dojo.byId('anotherBarContainer').style.display = 'none';
+    		  dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-left: 1px solid var(--color-dark);');
     	  }
       }
     });
     dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
-       if(source.id == 'menuBarDndSource')dojo.byId('anotherBarContainer').style.display = 'block';
+       if(source.id == 'menuBarDndSource'){
+           dojo.byId('anotherBarContainer').style.display = 'block';
+           dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-radius: 5px;border-left: 1px solid var(--color-dark);');
+       }
     });
     dojo.subscribe("/dnd/cancel", function(){
     	if(dojo.byId('isEditFavorite').value == 'true'){
@@ -266,6 +270,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     		dojo.byId('isEditFavorite').value = 'true';
     	}
 	    dojo.byId('anotherBarContainer').style.display = 'none';
+	    dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-left: 1px solid var(--color-dark);');
     });
 
     dndMoveInProgress=false;

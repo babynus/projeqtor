@@ -539,9 +539,11 @@ function checkClassForDisplay(el,id,mode){
 function editFavoriteRow(hide){
 	if(defaultMenu == 'menuBarRecent')return;
 	if(dojo.byId('isEditFavorite').value == 'true' || hide){
+		dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-left: 1px solid var(--color-dark);');
 		dojo.byId('isEditFavorite').value = 'false';
 		dojo.byId('anotherBarContainer').style.display = 'none';
 	}else{
+		dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-radius: 5px;border-left: 1px solid var(--color-dark);');
 		dojo.byId('isEditFavorite').value = 'true';
 		dojo.byId('anotherBarContainer').style.display = 'block';
 	}
