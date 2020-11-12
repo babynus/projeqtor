@@ -245,6 +245,7 @@ function getReportMenu(){
   $res=array();
   $listCateg=SqlList::getList('ReportCategory');
   $idMenuReport=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navReports'));
+  $menuReport=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuReports'));
   foreach ($lst as $h) {
     $report=$h->idReport;
     $nameReport=SqlList::getNameFromId('Report', $report, false);
@@ -254,6 +255,10 @@ function getReportMenu(){
     $allowedCategory[$category]=$category;
   }
   $c=1;
+  $idReportMenu=$idMenuReport->id.$level.$menuReport->id;
+  $menuReportKey=$level.'-'.numericFixLengthFormatter($idMenuReport->id,5).'-'.numericFixLengthFormatter($c,5);
+  $object= array('id'=>$idReportMenu,'name'=>$menuReport->name,'idParent'=>$idMenuReport->id,'idMenu'=>$menuReport->id);
+  $res[$menuReportKey]=array('level'=>$level,'objectType'=>'reportDirect','object'=>$object);
   foreach ($listCateg as $id=>$name) {
     if (isset($allowedCategory[$id])) {
       $c++;
@@ -378,8 +383,13 @@ function drawLeftMenuListNewGui($displayMode){
         $result.='<div id="div'.$obj->name.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }else{
       $classEl="Reports";
-      $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.");showMenuBottomParam('Report','true')";
-      
+      if($obj->name!='menuReports'){
+        $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.");showMenuBottomParam('Report','true')";
+      }else{
+        $classEl=substr($obj->name,4);
+        $menuName = addslashes(i18n($obj->name));
+        $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName,'quotes')."','bar');showMenuBottomParam('".$classEl."','false')";
+      }
       if($isFav->id==''){
         $mode='add';
         $class="menu__add__Fav";
@@ -398,7 +408,7 @@ function drawLeftMenuListNewGui($displayMode){
       $result.='<div id="div'.ucfirst($obj->name).'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
     }
   }else{
-      if($menu['objectType']=='report'){
+      if($menu['objectType']=='report' ){
         $idName=substr($obj->name,14);
       }else if($menu['objectType']=='reportSubMenu'){
        if($obj->name=='../tool/jsonPlanning')$idName='GanttPlan';
