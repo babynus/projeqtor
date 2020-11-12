@@ -39,7 +39,7 @@ $nbFavoriteRow=5;
 ?>
 <table  style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
   <tr >
-    <td style="
+    <td onclick="editFavoriteRow(false);" style="cursor:pointer;
      <?php if($defaultMenu=='menuBarCustom'){
        echo 'width: 50px;border-right: 1px solid var(--color-dark);color: var(--color-dark);font-size: 13pt;font-weight: bold;text-align: center;';
      }else{

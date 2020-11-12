@@ -90,7 +90,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
                                   }
                                 }
                                 if ($canCreate=='YES') {?>
-                                <div style="vertical-align:top;cursor:pointer;margin-top:5px;height:22px;" class="dijitTreeRow"
+                                <div style="vertical-align:top;cursor:pointer;margin-top:5px;height:22px;"
                                  onClick="addNewGuiItem('<?php echo $item;?>',null);" >
                                   <table width:"100%"><tr style="height:22px" >
                                   <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIconNewGui($item, 22, null, false);?></td>    
@@ -121,7 +121,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
     	         <div name="menuBarListDiv" id="menuBarListDiv" dojoType="dijit.layout.ContentPane"  style="overflow:hidden;width: 100%;height: 43px;border-radius: 5px;border-left: 1px solid var(--color-dark);"> 
         	         <table style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
         	           <tr>
-        	             <td style="
+        	             <td onclick="editFavoriteRow(false);" style="cursor:pointer;
         	               <?php if($defaultMenu=='menuBarCustom'){
         	                 echo 'width: 50px;border-right: 1px solid var(--color-dark);color: var(--color-dark);font-size: 13pt;font-weight: bold;text-align: center;';
         	               }else{
