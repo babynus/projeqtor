@@ -65,7 +65,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       <tr> 
         <td style="width:60%;text-transform: uppercase;border-bottom:solid 1px;"><?php echo i18n("filters");?></td>
         <td style="text-align:right;border-bottom:solid 1px;" class="allSearchTD resetSearchTD allSearchFixLength">
-          <button dojoType="dijit.form.Button" type="button" >
+          <button dojoType="dijit.form.Button" type="button" class="mediumTextButton">
             <?php echo i18n('buttonReset');?>
             <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
             <script type="dojo/method" event="onClick">
@@ -388,7 +388,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
           echo ' style="text-align:left;margin-right:10px;margin-top:10px;height:23px;width:160px;position:relative;left:120px;top:2px"';
           echo ' onClick="showFilterDialog();">';
           echo '<img src="css/customIcons/new/iconFilter.svg" class="imageColorNewGui" style="position:relative;left:5px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>';
-          echo '<div style="color:grey;position:relative;top:-19px;left:38px;">'.i18n('advancedFilters').'</div>';
+          echo '<div style="position:relative;top:-19px;left:38px;">'.i18n('advancedFilters').'</div>';
           echo '</div>'; ?>
         </td>
       </tr>  
