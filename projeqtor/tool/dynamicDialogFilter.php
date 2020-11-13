@@ -125,7 +125,7 @@ require_once "../tool/projeqtor.php";
                  style="width:<?php echo (isNewGui())?'180':'320';?>px" />
                <select id="filterValueList" name="filterValueList[]" value=""  
                  dojoType="dijit.form.MultiSelect" multiple
-                 style="<?php echo (isNewGui())?'width:180px;font-size:10pt;padding:8px 0px 0px 5px;color:#555555;':'width:325px;';?>height:150px;" size="10" class="selectList"></select>
+                 style="<?php echo (isNewGui())?'width:350px;font-size:10pt;padding:25px 0px 0px 5px;color:#555555;':'width:325px;';?>height:150px;" size="10" class="selectList"></select>
                <?php if (isNewGui()) {?>
                <div  id="filterValueCheckboxSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" 
                  leftLabel="" rightLabel="" style="width:10px;position:relative; top:0px;left:5px;z-index:99;display:none;" >
@@ -152,7 +152,7 @@ require_once "../tool/projeqtor.php";
              <td style="position:relative;width:25px; text-align: center;vertical-align:<?php echo (isNewGui())?'top':'middle';?>;" align="center"> 
                <table>
                  <tr>
-                  <td style="position: absolute;<?php echo (isNewGui())?'top:118px;left:-190px;':'margin-top:-60px;margin-left:-2px;';?>">
+                  <td style="position: absolute;<?php echo (isNewGui())?'top:118px;left:-21px;':'margin-top:-60px;margin-left:-2px;';?>">
                     <button style="display:none;" id="showDetailInFilter" dojoType="dijit.form.Button" showlabel="false"
                             title="<?php echo i18n('showDetail')?>" class="resetMargin notButton notButtonRounded"
                             iconClass="iconSearch iconSize22 imageColorNewGui">

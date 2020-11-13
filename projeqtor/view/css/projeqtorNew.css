@@ -310,22 +310,39 @@ html, body, #mainDiv,
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.roundedButton {
+.ProjeQtOrNewGui .roundedButton {
   border-radius: 5px !important;
   border: 1px solid #dddddd;
 }
-.roundedIconButton {
+.ProjeQtOrNewGui .roundedIconButton {
 	border: 1px solid #ffffff;
 	border-radius:10px !important;
 }
-.roundedButton:hover, .roundedButtonSmall:hover {
-  border: 1px solid #c0c0c0;
-  border-color: #a5a5a5;
-  border-bottom-color: #757575;
+.ProjeQtOrNewGui .roundedButton:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover {
+  border: 1px solid #ffffff;
+  border-color: #ffffff;
+  border-bottom-color: #ffffff;
   color: #3C3C3C;
-  background: var(--color-light) url() repeat-x bottom;
+  background: transparent url();
+  /*-webkit-filter : brightness(0) invert(0);
+  filter : brightness(0) invert(0);*/
+  
+}
+.ProjeQtOrNewGui .roundedVisibleButton:hover {
+  border: 1px solid var(--color-secondary);
+  color:var(--color-secondary) !important;
+}
+.ProjeQtOrNewGui .roundedVisibleButton.roundedButton.generalColClas:hover,
+.ProjeQtOrNewGui .dijitButtonHover, .ProjeQtOrNewGui .dijitButtonHover .dijitReset.dijitInline.dijitButtonNode {
+	color:var(--color-secondary) !important;
+	opacity:1;
 }
 
+.ProjeQtOrNewGui .roundedButton:hover .imageColorNewGui, .ProjeQtOrNewGui .roundedButtonSmall:hover .imageColorNewGui {
+	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  color:var(--color-secondary);
+}
 .roundedButtonNoBorder, .roundedButtonNoBorder:hover, .roundedButtonSmall, .roundedButtonSmall:hover {
 	border: 0px;
 }
