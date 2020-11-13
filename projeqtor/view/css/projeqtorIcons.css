@@ -2500,7 +2500,7 @@
 .ProjeQtOrFlatGreen .iconTool32 { background-image: url(customIcons/green/iconTool.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconTool32 { background-image: url(customIcons/grey/iconTool.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconTool32 { background-image: url(customIcons/red/iconTool.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconTool32 { background-image: url(customIcons/new/iconTool.svg);  background-repeat: no-repeat;}
+.ProjeQtOrNewGui .iconTool { background-image: url(customIcons/new/iconTool.svg);  background-repeat: no-repeat;}
 
 .iconTranslation { background-image: url(images/iconTranslationApplication32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconTranslation { background-image: url(customIcons/blue/iconTranslation.png);  background-repeat: no-repeat;}
