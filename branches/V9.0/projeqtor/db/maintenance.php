@@ -141,6 +141,7 @@ if ($currVersion=='V0.0.0') {
   $prm->save();
   // New in V5 : Start Guide Page
   Parameter::storeUserParameter('startPage', 'startGuide.php',1);
+  Parameter::storeUserParameter('newGui', true, 1);
   enableCatchErrors();
   rename("../api/.htaccess.example","../api/.htaccess"); // Use exemple to "lock" API access (will use not existing password file)
   disableCatchErrors();
@@ -961,6 +962,9 @@ if (beforeVersion($currVersion,"V8.6.0") and Sql::getDbPrefix()) {
 }
 if (beforeVersion($currVersion,"V8.6.0") and Sql::isMysql()) {
   $nbErrors+=runScript('V8.6.0.mysql');
+}
+if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
+  
 }
 
 // To be sure, after habilitations updates ...
