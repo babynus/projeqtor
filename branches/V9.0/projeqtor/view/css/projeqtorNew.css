@@ -333,7 +333,8 @@ html, body, #mainDiv,
   color:var(--color-secondary) !important;
 }
 .ProjeQtOrNewGui .roundedVisibleButton.roundedButton.generalColClas:hover,
-.ProjeQtOrNewGui .dijitButtonHover, .ProjeQtOrNewGui .dijitButtonHover .dijitReset.dijitInline.dijitButtonNode {
+.ProjeQtOrNewGui .dijitButtonHover, .ProjeQtOrNewGui .dijitButtonHover .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .dijitDropDownButtonHover {
 	color:var(--color-secondary) !important;
 	opacity:1;
 }
@@ -440,10 +441,6 @@ animation: fadeIn ease 0.5s;
 	background: var(--color-dark);
 }	
 
-/*.ProjeQtOrNewGui .dijitButtonIcon .buttonTopBar {
-  -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
-  filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
-}*/
 .ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui #menuBarShow .dijitIcon, .ProjeQtOrNewGui .hideStreamNewGuiTopBar,
 .ProjeQtOrNewGui #listHeaderDiv div.iconSize32, .ProjeQtOrNewGui #buttonDiv div .iconSize32,
 /*.ProjeQtOrNewGui #listHeaderDiv .dijitButtonIcon, .ProjeQtOrNewGui #buttonDiv .dijitButtonIcon,*/
@@ -463,7 +460,13 @@ animation: fadeIn ease 0.5s;
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   background-color: transparent;
 }
-
+.ProjeQtOrNewGui #centerDiv .dijitButtonHover .dijitButtonIcon, .ProjeQtOrNewGui .buttonIconNewGui .dijitButtonHover .dijitIcon,
+.ProjeQtOrNewGui #centerDiv .dijitDropDownButtonHover .dijitButtonIcon, .ProjeQtOrNewGui .buttonIconNewGui .dijitDropDownButtonHover .dijitIcon
+{
+  -webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  color:var(--color-secondary);
+}
 
 .ProjeQtOrNewGui #toolBarDiv .dijitIcon, .ProjeQtOrNewGui #toolBarDiv .iconSize22, 
 .ProjeQtOrNewGui .hideStreamNewGui, 
@@ -809,12 +812,7 @@ animation: fadeIn ease 0.5s;
   background: #ffffff;
   color:var(--color-text);
 }
-.ProjeQtOrNewGui .dijitButtonNode:hover {
-  /*background: #dddddd;*/
-  color:var(--color-light);
-  opacity:20%;
-  
-}
+
 .ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton .dijitButtonNode {
     background: #ffffff;
     border: 0px solid #ffffff;
