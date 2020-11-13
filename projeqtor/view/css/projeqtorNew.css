@@ -46,7 +46,13 @@
 }
 
 TABLE.dijitSelect {
-	padding: 2px 5px 6px 5px !important;
+	padding: 2px 5px 4px 5px !important;
+}
+.dijitSelect .dijitButtonContents {
+	border-width: 0px;
+}
+.dijitValidationTextBoxMenu .dijitReset.dijitMenuItem .dijitReset.dijitMenuItemLabel {
+	padding: 2px 5px 4px 5px;
 }
 	
 .dijitTextBoxFocused {
@@ -55,6 +61,9 @@ TABLE.dijitSelect {
 
 .dijitComboBox .dijitInputField {
     padding: 0;
+}
+SELECT.selectList OPTION {
+	padding: 2px 5px 6px 7px !important;
 }
 
 /* === LABEL CSS ====================================================================== LABEL === */
@@ -354,11 +363,11 @@ html, body, #mainDiv,
   border: 1px solid #dddddd;
 }
 .ProjeQtOrNewGui .roundedIconButton {
-	border: 1px solid #ffffff;
-	border-radius:10px !important;
+	border: 0px solid #ffffff;
+	border-radius:0px !important;
 }
 .ProjeQtOrNewGui .roundedButton:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover  {
-  border: 1px solid #ffffff;
+  border: 0px solid #ffffff;
   border-color: #ffffff;
   border-bottom-color: #ffffff;
   color: #3C3C3C;
@@ -495,7 +504,8 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui #centerDiv .dijitButtonIcon, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall,
 .ProjeQtOrNewGui .ganttIconBackground div, .ProjeQtOrNewGui .imageColorNewGui,
 .ProjeQtOrNewGui .buttonIconNewGui .dijitIcon,
-.ProjeQtOrNewGui #mainDivMenu .iconSize22, .ProjeQtOrNewGui #planButton
+.ProjeQtOrNewGui #mainDivMenu .iconSize22, .ProjeQtOrNewGui #planButton,
+.ProjeQtOrNewGui #menuBarButtonDiv .roundedIconButton.imageColorNewGui:hover
  {
   -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
@@ -584,6 +594,13 @@ animation: fadeIn ease 0.5s;
     -o-transition: all 0s ease;
     -ms-transition: all 0s ease;
     transition: all 0s ease;
+}
+.ProjeQtOrNewGui #menuBarButtonDiv .roundedIconButton.imageColorNewGui {
+  -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 .ProjeQtOrNewGui .menuBarItemSelected {
 	 border-bottom: 2px solid var(--color-secondary) !important;
@@ -701,10 +718,18 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .roundedButton:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover {
   background: transparent url();
 }
-.ProjeQtOrNewGui .roundedButton:hover, .ProjeQtOrNewGui .roundedButtonNoBorder:hover {
+.ProjeQtOrNewGui .roundedButton:hover, .ProjeQtOrNewGui .roundedButtonNoBorder:hover,
+.ProjeQtOrNewGui .roundedButtonSmall:hover .iconSize22 {
   -ms-transform: rotate(0deg) brightness(99%) !important; /* IE 9 */
   -webkit-transform: rotate(0deg) brightness(99%) !important; /* Chrome, Safari, Opera */
   transform: rotate(0deg);
+}
+
+.ProjeQtOrNewGui .roundedIconButton:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover .iconSize16,
+.ProjeQtOrNewGui .roundedButton .iconSize16 .imageColorNewGui:hover {
+	-ms-transform: rotate(-22deg) brightness(99%) !important; /* IE 9 */
+  -webkit-transform: rotate(-22deg) brightness(99%) !important; /* Chrome, Safari, Opera */
+	transform: rotate(-22.5deg);
 }
 .ProjeQtOrNewGui .buttonTopBar {
 	padding:5px 0px 0px 5px;
@@ -767,7 +792,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .notButton .dijitReset.dijitInline.dijitButtonNode{
   background: url() #ffffff;
   backgound-color: #ffffff;
-  border:1px solid #ffffff;
+  border:1px solid #ffffff !important;
 }
 
 .ProjeQtOrNewGui .dijitTooltipContainer .dijitReset.dijitInline.dijitButtonNode {

@@ -50,8 +50,8 @@ if(!$paramAccessMode)$paramAccessMode='direct';
 	               <table style="width:100%;height:100%;">
         	           <tr>
         	             <td style="padding-left: 10px;">
-        	               <div dojoType="dijit.form.DropDownButton" id="addItemButton" jsId="addItemButton" name="addItemButton"
-                            showlabel="false" iconClass="iconAdd iconSize22 imageColorNewGui" title="<?php echo i18n('comboNewButton');?>">
+        	               <div dojoType="dijit.form.DropDownButton" id="addItemButton" jsId="addItemButton" name="addItemButton" class=""
+                            showlabel="false" iconClass="iconAdd iconSize22 roundedIconButton imageColorNewGui" title="<?php echo i18n('comboNewButton');?>">
                             <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;height:100%;">
                               <input type="hidden" id="objectClass" name="objectClass" value="" /> 
                               <input type="hidden" id="objectId" name="objectId" value="" />

@@ -2543,6 +2543,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // END - ADD BY TABARY - TOOLTIP
         if($col=='idBudgetItem' or $col=='idBusinessFeature'){
           echo '<select dojoType="dijit.form.Select" class="dijitComboBox input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
+          $fieldWidth+=13;
         }else{
           echo '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
         }
