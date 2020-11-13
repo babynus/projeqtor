@@ -1773,7 +1773,7 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
   echo '</td><td style="text-align:center">';
   echo '<button title="' . i18n('saveFilter') . '" ';  
   echo ' dojoType="dijit.form.Button" '; 
-  echo ' id="dialogFilterSave" name="dialogFilterSave" class="resetMargin notButton" style="height:24px;width:32px;margin-top:-1px;"';
+  echo ' id="dialogFilterSave" name="dialogFilterSave" class="resetMargin roundedButton notButton" style="height:24px;width:32px;margin-top:-1px;"';
   echo ' iconClass="dijitButtonIcon dijitButtonIconSave imageColorNewGui" showLabel="false"> ';
   echo ' <script type="dojo/connect" event="onClick" args="evt">saveFilter();</script>';
   echo '</button>';
