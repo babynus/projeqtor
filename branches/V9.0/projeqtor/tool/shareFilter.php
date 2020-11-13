@@ -50,9 +50,11 @@ if($filter->isShared==1){
   $filter->isShared=1;
 }
 $filter->save();
+echo "<div id='saveFilterResult' style='z-index:9;position: absolute;left:50%;width:100%;margin-left:-50%;top:20px' >";
 echo '<table width="100%"><tr><td align="center" >';
-echo '<span class="messageOK" style="z-index:999;position:relative;top:7px" >' . i18n('colFilter') . " '" . htmlEncode($name) . "' " . $message . ' (#'.htmlEncode($filter->id).')</span>';
+echo '<span class="messageOK" style="z-index:999;position:relative;top:7px;padding:10px 20px;white-space:nowrap" >' . i18n('colFilter') . " '" . htmlEncode($name) . "' " . $message . ' (#'.htmlEncode($filter->id).')</span>';
 echo '</td></tr></table>';
+echo "</div>";
 
 $flt=new Filter();
 $crit=array('idUser'=> $user->id, 'refType'=>$objectClass );
