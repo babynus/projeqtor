@@ -5174,7 +5174,7 @@ function searchAllAttachmentMailable($objectClass,$idObj){
 }
 
 function getGui() {
-  global $paramNewGui;
+  $paramNewGui = Parameter::getUserParameter('newGui');
   if (isset($paramNewGui) and $paramNewGui==true) return "new";
   else return "std";
 }
