@@ -44,9 +44,11 @@
     height: 17px;
     font-size: 10pt;
 }
+
 TABLE.dijitSelect {
 	padding: 2px 5px 6px 5px !important;
-}	
+}
+	
 .dijitTextBoxFocused {
 	border: 1px solid #b2b2b2;
 }
@@ -74,15 +76,18 @@ label, .ProjeQtOrNewGui label,
     background-color: #ffffff;
     color:var(--color-text);
 }
+
 .labelWithThumb, .ProjeQtOrNewGui .labelWithThumb{
   width: 150px !important;
   background-color: #ffffff;
   color:var(--color-text);
 }
+
 .tabLabel, .ProjeQtOrNewGui .tabLabel {
   background-color: #ffffff;
   color:var(--color-text);
 }
+
 .longTextLabel {
   padding:5px; 
   border: 1px solid #d4d4d4;
@@ -92,9 +97,11 @@ label, .ProjeQtOrNewGui label,
   background-color: #ffffff;
   color:var(--color-text);
 }
+
 .ProjeQtOrNewGui .textColorNewGui{
   color:var(--color-text);
 }
+
 /* === GANTT SPECIFIC CSS ============================================================= GANTT ===*/
 
 .ProjeQtOrNewGui label.ganttScale {
@@ -104,19 +111,24 @@ label, .ProjeQtOrNewGui label,
 	text-shadow: 0px 0px;
 	color:var(--color-white);
 }
+
 .ProjeQtOrNewGui .ganttScaleText {
 	text-shadow: 0px 0px;
 }
+
 .ProjeQtOrNewGui .ganttNoLeftBorder {
 	border-left: 0;
 }
+
 .ProjeQtOrNewGui .ganttTaskgroup {
 	background-color:var(--color-light);
 }
+
 .ProjeQtOrNewGui .ganttRightSubTitle {
 	background: url();
 	background-color:var(--color-lighter);
 }
+
 .ProjeQtOrNewGui .ganttRightTitle, .ProjeQtOrNewGui .ganttLeftTopLine, .ProjeQtOrNewGui .ganttLeftTitle {
 	background-color:var(--color-medium);
 	text-shadow: 0px 0px;
@@ -133,6 +145,33 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui  #gridRowCount:hover {
   font-size: 100%;
   top: 0;    
+}
+
+.ProjeQtOrNewGui .dojoxGridHeader .dojoxGridCell {
+  background-color: var(--color-grid-header-bg) !important;
+  border: 1px solid #ccc;
+  border-right: 1px solid #fefefe;
+  border-top: 0;
+  color: var(--color-grid-header-text) !important;
+  text-shadow: none;
+  font-size: 10pt;
+  padding-top: 0px;
+  vertical-align:bottom;
+  padding-bottom: 5px;
+}
+
+.ProjeQtOrNewGui .dojoxGridRowOdd {
+  background-color: #ffffff;
+}
+
+.ProjeQtOrNewGui .dojoxGridRowSelected {
+  background-color: var(--color-grid-selected-bg) !important;
+  color: var(--color-grid-selected-text) !important;
+}
+
+.ProjeQtOrNewGui .dojoxGridRowOver .dojoxGridCell{
+  background: var(--color-light-secondary) !important;
+  color: var(--color-dark-secondary) !important;
 }
 
 /* === BUTTONS (AND SIMILAR) CSS ====================================================== BUTTON ===*/
@@ -152,6 +191,10 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, 
 .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
   background: rgba(128,128,128,0.2) !important;
+}
+
+.ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
+  background: rgba(255,255,255,0.3) !important;
 }
 
 /* === MENU BUTTONS AND ITEMS CSS ===================================================== MENU ===*/
@@ -191,9 +234,11 @@ label, .ProjeQtOrNewGui label,
 	Height:25px;
 	font-weight:normal !important;
 }
+
 .ProjeQtOrNewGui .dijitTitlePane .dijitArrowNode {
     background-image: url(images/spriteArrows.png);
 }
+
 .dijitTitlePaneTextNode {
 	 font-weight:normal;
 }
@@ -203,19 +248,24 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui #mapDiv, .ProjeQtOrNewGui #listDiv, .ProjeQtOrNewGui #formDiv, .ProjeQtOrNewGui .display, .ProjeQtOrNewGui .background, .ProjeQtOrNewGui .dijitTitlePaneContentInner, .ProjeQtOrNewGui .dijitTabPane, .ProjeQtOrNewGui #mainDiv, .ProjeQtOrNewGui #centerDiv {
     background-color: #ffffff; 
 }
+
 .ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar,  .titleProject, .ProjeQtOrNewGui #menuBArNewGuiAcces{
 	background: url() var(--color-toolbar) !important;
 	color: var(--color-toolbar-text) !important;
 }
+
 .ProjeQtOrNewGui .dijitAccordionTitle2, .ProjeQtOrNewGui .reportTableColumnHeader2, .ProjeQtOrNewGui .largeReportHeader2 {
   background: url() var(--color-light) !important;
 }
+
 .ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar {
 	background: var(--color-toolbar) !important;
 }
+
 .ProjeQtOrNewGui #menuBarLeft {
 	background: var(--color-reference);
 }
+
 .ProjeQtOrNewGui #menuBarRight, .ProjeQtOrNewGui #menuBarRight .statusBar {
 	background: var(--color-white) !important;
 }
@@ -223,6 +273,7 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui #menuBarAccesLeft{
 	background: var(--color-menu) !important;
 }
+
 .ProjeQtOrNewGui #menuBarAccesBottom{
 	border-top:2px solid var(--color-toolbar);
 }
@@ -232,50 +283,32 @@ label, .ProjeQtOrNewGui label,
   border-top:0;
   padding:0;
 }
+
 .ProjeQtOrNewGui #centerDiv {
   border-top:0;
 }
+
 .ProjeQtOrNewGui #statusBarDiv {
 	background: white !important;
 }
+
 .ProjeQtOrNewGui #listHeaderDiv,.ProjeQtOrNewGui .listTitle {
 	background-color: var(--color-list-header) !important;
 	color: var(--color-list-header-text) !important;
 }
+
 .ProjeQtOrNewGui #buttonDiv, .ProjeQtOrNewGui .title {
   background-color: var(--color-detail-header) !important;
   color: var(--color-detail-header-text) !important;
 }
+
 .ProjeQtOrNewGui #buttonDiv {
   border-bottom : 1px solid var(--color-detail-header-border);
 }
-.ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
-  background: rgba(255,255,255,0.3) !important;
-}
 
-.ProjeQtOrNewGui .dojoxGridHeader .dojoxGridCell {
-  background-color: var(--color-grid-header-bg) !important;
-  border: 1px solid #ccc;
-  border-right: 1px solid #fefefe;
-  border-top: 0;
-  color: var(--color-grid-header-text) !important;
-  text-shadow: none;
-  font-size: 10pt;
-  padding-top: 0px;
-  vertical-align:bottom;
-  padding-bottom: 5px;
-}
-.ProjeQtOrNewGui .dojoxGridRowOdd {
-  background-color: #ffffff;
-}
-.ProjeQtOrNewGui .dojoxGridRowSelected {
-	background-color: var(--color-grid-selected-bg) !important;
-	color: var(--color-grid-selected-text) !important;
-}
-.ProjeQtOrNewGui .dojoxGridRowOver .dojoxGridCell{
-	background: var(--color-light-secondary) !important;
-	color: var(--color-dark-secondary) !important;
-}
+/*=========================================================================================================================================================== TODO ===*/
+
+
 
 html, body, #mainDiv, 
 #toolBarDiv, 
@@ -324,16 +357,18 @@ html, body, #mainDiv,
 	border: 1px solid #ffffff;
 	border-radius:10px !important;
 }
-.ProjeQtOrNewGui .roundedButton:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover {
+.ProjeQtOrNewGui .roundedButton:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover  {
   border: 1px solid #ffffff;
   border-color: #ffffff;
   border-bottom-color: #ffffff;
   color: #3C3C3C;
   background: transparent url();
-  /*-webkit-filter : brightness(0) invert(0);
-  filter : brightness(0) invert(0);*/
-  
 }
+.ProjeQtOrNewGui .roundedButtonNoBorder:hover {
+	border: 0px solid #ffffff;
+	background: transparent url();
+}
+
 .ProjeQtOrNewGui .roundedVisibleButton:hover {
   border: 1px solid var(--color-secondary);
   color:var(--color-secondary) !important;
@@ -350,12 +385,13 @@ html, body, #mainDiv,
 	opacity:1;
 }
 
-.ProjeQtOrNewGui .roundedButton:hover .imageColorNewGui, .ProjeQtOrNewGui .roundedButtonSmall:hover .imageColorNewGui {
+.ProjeQtOrNewGui .roundedButton:hover .imageColorNewGui, .ProjeQtOrNewGui .roundedButtonSmall:hover .imageColorNewGui, .ProjeQtOrNewGui .imageColorNewGui:hover {
 	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   color:var(--color-secondary);
 }
-.roundedButtonNoBorder, .roundedButtonNoBorder:hover, .roundedButtonSmall, .roundedButtonSmall:hover {
+.ProjeQtOrNewGui .roundedButtonNoBorder, .ProjeQtOrNewGui .roundedButtonNoBorder:hover, .ProjeQtOrNewGui .roundedButtonSmall, .ProjeQtOrNewGui .roundedButtonSmall:hover,
+.ProjeQtOrNewGui .imageColorNewGui:hover, .ProjeQtOrNewGui .imageColorNewGui:hover .roundedButtonSmall {
 	border: 0px;
 }
 .hideStreamNewGui, .hideStreamNewGuiTopBar {
