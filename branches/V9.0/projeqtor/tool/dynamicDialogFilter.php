@@ -125,7 +125,7 @@ require_once "../tool/projeqtor.php";
                  style="width:<?php echo (isNewGui())?'180':'320';?>px" />
                <select id="filterValueList" name="filterValueList[]" value=""  
                  dojoType="dijit.form.MultiSelect" multiple
-                 style="<?php echo (isNewGui())?'width:350px;font-size:10pt;padding:25px 0px 0px 5px;color:#555555;':'width:325px;';?>height:150px;" size="10" class="selectList"></select>
+                 style="<?php echo (isNewGui())?'width:350px;font-size:10pt;padding:30px 0px 0px 0px;color:#555555;':'width:325px;';?>height:150px;" size="10" class="selectList"></select>
                <?php if (isNewGui()) {?>
                <div  id="filterValueCheckboxSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" 
                  leftLabel="" rightLabel="" style="width:10px;position:relative; top:0px;left:5px;z-index:99;display:none;" >

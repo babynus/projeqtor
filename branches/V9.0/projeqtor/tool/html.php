@@ -1865,7 +1865,7 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
   $param=SqlElement::getSingleSqlElementFromCriteria('Parameter', 
        array('idUser'=>getSessionUser()->id, 'parameterCode'=>'Filter'.$filterObjectClass));
   $defaultFilter=($param)?$param->parameterValue:'';
-  echo "<div id='displayFilterList'>";
+  echo "<div id='displayFilterList' style='overflow:hidden'>";
    if ($context!='directFilterList') {
     echo "<table id='dndListFilterSelector' jsId='dndListFilterSelector' width='100%' dojotype='dojo.dnd.Source' withhandles='true' data-dojo-props='accept: [ \"tableauBordLeft\",\"tableauBordRight\" ]' >";
    }else{
