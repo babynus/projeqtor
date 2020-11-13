@@ -29,6 +29,8 @@ include_once '../tool/formatter.php';
 
 //Param
 $user=getSessionUser();
+$linkForum = "http://www.projeqtor.org";
+$linkPlugin = "http://www.projeqtor.org";
 ?>
 
 <table style="width:99%;" id="userMenuInterrogation">
@@ -77,26 +79,30 @@ $user=getSessionUser();
       </div>
     </td>
   </tr>
-  <tr style="color:grey;height:15px;border-bottom:1px dotted;">
+  <tr style="color:grey !important;height:15px;border-bottom:1px dotted;">
     <td style="cursor:pointer;">
-      <div style="margin-top:6px;" title="<?php echo i18n('linkToPlugin');?>" onClick="showAbout(aboutMessage);">
-        <table style="width:100%">
-          <tr>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('linkToPlugin');?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>
+      <div style="margin-top:6px;" title="<?php echo i18n('linkToPlugin');?>">
+         <a target="#" href="<?php echo $linkForum;?>" >
+          <table style="width:100%">
+            <tr>
+              <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('linkToPlugin');?>&nbsp;&nbsp;</td>
+            </tr>
+          </table>
+        </a>
       </div>
     </td>
   </tr>
   <tr>
     <tr style="color:grey;height:15px;border-bottom:1px dotted;">
     <td style="cursor:pointer;">
-      <div style="margin-top:6px;" title="<?php echo i18n('linkToForum');?>" onClick="showAbout(aboutMessage);">
-        <table style="width:100%">
-          <tr>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('linkToForum');?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>
+      <div style="margin-top:6px;" title="<?php echo i18n('linkToForum');?>">
+        <a target="#" href="<?php echo $linkPlugin;?>" >
+          <table style="width:100%">
+            <tr>
+              <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('linkToForum');?>&nbsp;&nbsp;</td>
+            </tr>
+          </table>
+        </a>
       </div>
     </td>
   </tr>
@@ -129,16 +135,16 @@ $user=getSessionUser();
                   <table>
                     <tr>
                       <td>
-                        <div style="cursor:pointer;text-align:center;overflow:hidden;margin-right:10px;margin-bottom:10px;height:80px;width:150px;background:#f5f5f5;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
+                        <div style="cursor:pointer;text-align:center;overflow:hidden;margin-right:10px;margin-bottom:10px;height:85px;width:155px;background:#f5f5f5;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
                           <?php echo $value->title;?>
                         </div>
                       </td>
                     </tr>
                     <tr>
-                      <td><div onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" style="display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:150px;height:50px;overflow-y:auto;background:#f2f5f5;" id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->introtext;?></div></td>
+                      <td><div onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:65px;overflow-y:auto;background:#f2f5f5;" id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->introtext;?></div></td>
                     </tr>
                      <tr>
-                      <td><div style="display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:150px;height:50px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->fulltext;?></div></td>
+                      <td><div style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:50px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->introtext.$value->fulltext;?></div></td>
                     </tr>
                   </table>
                 </td>
@@ -160,16 +166,19 @@ $user=getSessionUser();
                  if($i==9)break;
                  if($i==7){?><tr><?php } ?>
                 <td>
-                  <table>
+                 <table>
                     <tr>
                       <td>
-                        <div style="cursor:pointer;text-align:center;overflow:hidden;margin-right:10px;margin-bottom:10px;height:80px;width:150px;background:#f5f5f5;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
+                        <div style="cursor:pointer;text-align:center;overflow:hidden;margin-right:10px;margin-bottom:10px;height:85px;width:155px;background:#f5f5f5;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
                           <?php echo $value->title;?>
                         </div>
                       </td>
                     </tr>
+                    <tr>
+                      <td><div onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:65px;overflow-y:auto;background:#f2f5f5;" id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->introtext;?></div></td>
+                    </tr>
                      <tr>
-                      <td><div style="display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:150px;height:50px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->fulltext;?></div></td>
+                      <td><div style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:50px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->introtext.$value->fulltext;?></div></td>
                     </tr>
                   </table>
                 </td>
@@ -191,16 +200,19 @@ $user=getSessionUser();
                  if($i==12)break;
                  if($i==11){?><tr><?php } ?>
                 <td>
-                  <table>
+                   <table>
                     <tr>
                       <td>
-                        <div style="cursor:pointer;text-align:center;overflow:hidden;margin-right:10px;margin-bottom:10px;height:80px;width:150px;background:#f5f5f5;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
+                        <div style="cursor:pointer;text-align:center;overflow:hidden;margin-right:10px;margin-bottom:10px;height:85px;width:155px;background:#f5f5f5;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
                           <?php echo $value->title;?>
                         </div>
                       </td>
                     </tr>
+                    <tr>
+                      <td><div onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:65px;overflow-y:auto;background:#f2f5f5;" id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->introtext;?></div></td>
+                    </tr>
                      <tr>
-                      <td><div style="display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:150px;height:50px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->fulltext;?></div></td>
+                      <td><div style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:50px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->introtext.$value->fulltext;?></div></td>
                     </tr>
                   </table>
                 </td>

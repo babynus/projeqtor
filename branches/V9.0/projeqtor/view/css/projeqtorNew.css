@@ -1023,11 +1023,17 @@ animation: fadeIn ease 0.5s;
 
 .ProjeQtOrNewGui .swapView {
   height:200px !important;
-  width:350px !important;
+  width:330px !important;
 }
 .ProjeQtOrNewGui .indicatorPage {
-  bottom:70px !important;
+  bottom:56px !important;
+  left:-6px;
 }
+
+.ProjeQtOrNewGui .mblPageIndicatorDotSelected {
+	background-color : var(--color-medium) !important;
+}
+
 table.dojoDndAvatar {
 	font-size:100%;
 }

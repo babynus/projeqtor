@@ -261,61 +261,108 @@ function showAbout(msg) {
 }
 
 function showMsg(id,value){
- 
   if(dojo.byId("divMsgFull"+id).style.display=="none"){
     dojo.byId("divSubTitle"+id).style.display="none";
-    if(value==0.25){
-      dojo.byId("divMsgTitle"+(id+1)).style.display="none";
-      dojo.byId("divMsgTitle"+(id+2)).style.display="none";
-      dojo.byId("divMsgTitle"+(id+3)).style.display="none";
+    if(value==0.25 || value==1.25 || value==2.25){
+      if(dojo.byId("divMsgTitle"+(id+1))){
+        dojo.byId("divMsgTitle"+(id+1)).style.display="none";
+      }
+      if(dojo.byId("divMsgTitle"+(id+2))){
+        dojo.byId("divMsgTitle"+(id+2)).style.display="none";
+      }
+      if(dojo.byId("divMsgTitle"+(id+3))){
+        dojo.byId("divMsgTitle"+(id+3)).style.display="none";
+      }
     }
-    if(value==0.5){
-      dojo.byId("divMsgTitle"+(id+1)).style.display="none";
-      dojo.byId("divMsgTitle"+(id+2)).style.display="none";
-      dojo.byId("divMsgTitle"+(id-1)).style.display="none";
+    if(value==0.5 || value==1.5 || value==2.5){
+      if(dojo.byId("divMsgTitle"+(id+1))){
+        dojo.byId("divMsgTitle"+(id+1)).style.display="none";
+      }
+      if(dojo.byId("divMsgTitle"+(id+2))){
+        dojo.byId("divMsgTitle"+(id+2)).style.display="none";
+      }
+      if(dojo.byId("divMsgTitle"+(id-1))){
+        dojo.byId("divMsgTitle"+(id-1)).style.display="none";
+      }
     }
-    if(value==0.75){
-      dojo.byId("divMsgTitle"+(id+1)).style.display="none";
-      dojo.byId("divMsgTitle"+(id-1)).style.display="none";
-      dojo.byId("divMsgTitle"+(id-2)).style.display="none";
+    if(value==0.75 || value==1.75 || value==2.75){
+      if(dojo.byId("divMsgTitle"+(id+1))){
+        dojo.byId("divMsgTitle"+(id+1)).style.display="none";
+      }
+      if(dojo.byId("divMsgTitle"+(id-1))){
+        dojo.byId("divMsgTitle"+(id-1)).style.display="none";
+      }
+      if(dojo.byId("divMsgTitle"+(id-2))){
+        dojo.byId("divMsgTitle"+(id-2)).style.display="none";
+      }
     }
-    if(value==1){
-      dojo.byId("divMsgTitle"+(id-1)).style.display="none";
-      dojo.byId("divMsgTitle"+(id-2)).style.display="none";
-      dojo.byId("divMsgTitle"+(id-3)).style.display="none";
+    if(value==1 || value==2 || value==3){
+      if(dojo.byId("divMsgTitle"+(id-1))){
+        dojo.byId("divMsgTitle"+(id-1)).style.display="none";
+      }
+      if(dojo.byId("divMsgTitle"+(id-2))){
+        dojo.byId("divMsgTitle"+(id-2)).style.display="none";
+      }
+      if(dojo.byId("divMsgTitle"+(id-3))){
+        dojo.byId("divMsgTitle"+(id-3)).style.display="none";
+      }
     }
     
     dojo.byId("divMsgTitle"+id).style.height=40+'px';
     dojo.byId("divMsgTitle"+id).style.margin = 0+'px';
-    dojo.byId("divMsgTitle"+id).style.width=300+'px';
+    dojo.byId("divMsgTitle"+id).style.width=320+'px';
     dojo.addClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
     dojo.byId("divMsgFull"+id).style.display="block";
-    dojo.byId("divMsgFull"+id).style.height=90+'px';
-    dojo.byId("divMsgFull"+id).style.width=300+'px';
+    dojo.byId("divMsgFull"+id).style.height=140+'px';
+    dojo.byId("divMsgFull"+id).style.width=320+'px';
   }else{
     dojo.byId("divMsgFull"+id).style.display="none";
-    dojo.byId("divMsgTitle"+id).style.height=60+'px';
-    dojo.byId("divMsgTitle"+id).style.width=150+'px';
+    dojo.byId("divMsgTitle"+id).style.height=65+'px';
+    dojo.byId("divMsgTitle"+id).style.width=155+'px';
     dojo.removeClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
-    if(value==0.25){
-      dojo.byId("divMsgTitle"+(id+1)).style.display="block";
-      dojo.byId("divMsgTitle"+(id+2)).style.display="block";
-      dojo.byId("divMsgTitle"+(id+3)).style.display="block";
+    if(value==0.25 || value==1.25 || value==2.25){
+      if(dojo.byId("divMsgTitle"+(id+1))){
+        dojo.byId("divMsgTitle"+(id+1)).style.display="block";
+      }
+      if(dojo.byId("divMsgTitle"+(id+2))){
+        dojo.byId("divMsgTitle"+(id+2)).style.display="block";
+      }
+      if(dojo.byId("divMsgTitle"+(id+3))){
+        dojo.byId("divMsgTitle"+(id+3)).style.display="block";
+      }
     }
-    if(value==0.5){
-      dojo.byId("divMsgTitle"+(id+1)).style.display="block";
-      dojo.byId("divMsgTitle"+(id+2)).style.display="block";
-      dojo.byId("divMsgTitle"+(id-1)).style.display="block";
+    if(value==0.5 || value==1.5 || value==2.5){
+      if(dojo.byId("divMsgTitle"+(id+1))){
+        dojo.byId("divMsgTitle"+(id+1)).style.display="block";
+      }
+      if(dojo.byId("divMsgTitle"+(id+2))){
+        dojo.byId("divMsgTitle"+(id+2)).style.display="block";
+      }
+      if(dojo.byId("divMsgTitle"+(id-1))){
+        dojo.byId("divMsgTitle"+(id-1)).style.display="block";
+      }
     }
-    if(value==0.75){
-      dojo.byId("divMsgTitle"+(id+1)).style.display="block";
-      dojo.byId("divMsgTitle"+(id-1)).style.display="block";
-      dojo.byId("divMsgTitle"+(id-2)).style.display="block";
+    if(value==0.75 || value==1.75 || value==2.75){
+      if(dojo.byId("divMsgTitle"+(id+1))){
+        dojo.byId("divMsgTitle"+(id+1)).style.display="block";
+      }
+      if(dojo.byId("divMsgTitle"+(id-1))){
+        dojo.byId("divMsgTitle"+(id-1)).style.display="block";
+      }
+      if(dojo.byId("divMsgTitle"+(id-2))){
+        dojo.byId("divMsgTitle"+(id-2)).style.display="block";
+      }
     }
-    if(value==1){
-      dojo.byId("divMsgTitle"+(id-1)).style.display="block";
-      dojo.byId("divMsgTitle"+(id-2)).style.display="block";
-      dojo.byId("divMsgTitle"+(id-3)).style.display="block";
+    if(value==1 || value==2 || value==3){
+      if(dojo.byId("divMsgTitle"+(id-1))){
+        dojo.byId("divMsgTitle"+(id-1)).style.display="block";
+      }
+      if(dojo.byId("divMsgTitle"+(id-2))){
+        dojo.byId("divMsgTitle"+(id-2)).style.display="block";
+      }
+      if(dojo.byId("divMsgTitle"+(id-3))){
+        dojo.byId("divMsgTitle"+(id-3)).style.display="block";
+      }
     }
   }
 }
@@ -325,43 +372,69 @@ function showIntrotext(id){
     dojo.byId("divMsgTitle"+id).style.margin = 0+'px';
     dojo.addClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
     dojo.byId("divSubTitle"+id).style.display="block";
-    dojo.byId("divSubTitle"+id).style.height=60+'px';
+    dojo.byId("divSubTitle"+id).style.height=65+'px';
   }
 }
 
 function hideIntrotext(id){
   if(dojo.byId("divMsgFull"+id).style.display=="none"){
     dojo.byId("divSubTitle"+id).style.display="none";
-    dojo.byId("divMsgTitle"+id).style.height=80+'px';
-    dojo.byId("divMsgTitle"+id).style.width=150+'px';
+    dojo.byId("divMsgTitle"+id).style.height=90+'px';
+    dojo.byId("divMsgTitle"+id).style.width=155+'px';
+    dojo.byId("divMsgTitle"+id).style.marginRight = 10+'px';
+    dojo.byId("divMsgTitle"+id).style.marginBottom = 10+'px';
     dojo.removeClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
   }
 }
 
 function hideMsg(id,value){
   dojo.byId("divMsgFull"+id).style.display="none";
-  dojo.byId("divMsgTitle"+id).style.height=80+'px';
-  dojo.byId("divMsgTitle"+id).style.width=150+'px';
+  dojo.byId("divMsgTitle"+id).style.height=85+'px';
+  dojo.byId("divMsgTitle"+id).style.width=155+'px';
   dojo.removeClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
-  if(value==0.25){
-    dojo.byId("divMsgTitle"+(id+1)).style.display="block";
-    dojo.byId("divMsgTitle"+(id+2)).style.display="block";
-    dojo.byId("divMsgTitle"+(id+3)).style.display="block";
+  if(value==0.25 || value==1.25 || value==2.25){
+    if(dojo.byId("divMsgTitle"+(id+1))){
+      dojo.byId("divMsgTitle"+(id+1)).style.display="block";
+    }
+    if(dojo.byId("divMsgTitle"+(id+2))){
+      dojo.byId("divMsgTitle"+(id+2)).style.display="block";
+    }
+    if(dojo.byId("divMsgTitle"+(id+3))){
+      dojo.byId("divMsgTitle"+(id+3)).style.display="block";
+    }
   }
-  if(value==0.5){
-    dojo.byId("divMsgTitle"+(id+1)).style.display="block";
-    dojo.byId("divMsgTitle"+(id+2)).style.display="block";
-    dojo.byId("divMsgTitle"+(id-1)).style.display="block";
+  if(value==0.5 || value==1.5 || value==2.5){
+    if(dojo.byId("divMsgTitle"+(id+1))){
+      dojo.byId("divMsgTitle"+(id+1)).style.display="block";
+    }
+    if(dojo.byId("divMsgTitle"+(id+2))){
+      dojo.byId("divMsgTitle"+(id+2)).style.display="block";
+    }
+    if(dojo.byId("divMsgTitle"+(id-1))){
+      dojo.byId("divMsgTitle"+(id-1)).style.display="block";
+    }
   }
-  if(value==0.75){
-    dojo.byId("divMsgTitle"+(id+1)).style.display="block";
-    dojo.byId("divMsgTitle"+(id-2)).style.display="block";
-    dojo.byId("divMsgTitle"+(id-1)).style.display="block";
+  if(value==0.75 || value==1.75 || value==2.75){
+    if(dojo.byId("divMsgTitle"+(id+1))){
+      dojo.byId("divMsgTitle"+(id+1)).style.display="block";
+    }
+    if(dojo.byId("divMsgTitle"+(id-2))){
+      dojo.byId("divMsgTitle"+(id-2)).style.display="block";
+    }
+    if(dojo.byId("divMsgTitle"+(id-1))){
+      dojo.byId("divMsgTitle"+(id-1)).style.display="block";
+    }
   }
-  if(value==1){
-    dojo.byId("divMsgTitle"+(id-1)).style.display="block";
-    dojo.byId("divMsgTitle"+(id-2)).style.display="block";
-    dojo.byId("divMsgTitle"+(id-3)).style.display="block";
+  if(value==1 || value==2 || value==3){
+    if(dojo.byId("divMsgTitle"+(id-1))){
+      dojo.byId("divMsgTitle"+(id-1)).style.display="block";
+    }
+    if(dojo.byId("divMsgTitle"+(id-2))){
+      dojo.byId("divMsgTitle"+(id-2)).style.display="block";
+    }
+    if(dojo.byId("divMsgTitle"+(id-3))){
+      dojo.byId("divMsgTitle"+(id-3)).style.display="block";
+    }
   }
 }
 // =============================================================================
