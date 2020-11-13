@@ -771,6 +771,10 @@ class Parameter extends SqlElement {
       	$list = array('direct'=>i18n('directAccess'),
       	'dialog'=>i18n('dialogAccess')) ;
       	break;
+  	  case 'newGui':
+    		$list = array(true=>i18n('newGuiTrue'),
+    		              false=>i18n('newGuiFalse'));
+  		break;
     } 
     return $list;
   }
@@ -783,6 +787,7 @@ class Parameter extends SqlElement {
                      'tabDisplay'=>"tab",
                        'column_Dis_1'=>'newColumn',
                          'sectionDisplayParameter'=>"section",
+                           'newGui'=>'list',
                            "theme"=>"list", 
                            "lang"=>"list",
                            "browserLocaleDateFormat"=>"list",
@@ -861,6 +866,7 @@ class Parameter extends SqlElement {
         if(!isNewGui()){
           unset($parameterList['menuLeftDisplayMode']);
           unset($parameterList['menuBarTopMode']);
+          unset($parameterList['newItemAccessMode']);
         }
         break;
       case ('globalParameter'):
@@ -961,6 +967,7 @@ class Parameter extends SqlElement {
                             	'currencyPosition'=>'list',                            	
       	                  'columnDisplayRight'=>'newColumn',
       	                    'sectionDisplayDefault'=>'section',
+      	                      'newGui'=>'list',
       	                      'paramDefaultLocale'=>'list',
       	                      'defaultTheme'=>'list',
       	                      'startPage'=>'list',
@@ -1257,6 +1264,7 @@ class Parameter extends SqlElement {
     if(!isNewGui()){
       unset($parameterList['menuLeftDisplayMode']);
       unset($parameterList['menuBarTopMode']);
+      unset($parameterList['newItemAccessMode']);
     }
     return $parameterList;
   }
