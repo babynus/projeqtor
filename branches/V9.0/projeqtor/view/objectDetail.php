@@ -2681,14 +2681,15 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           }
         }
         $newGuiStyle=(isNewGui())?'position:relative;margin-top:5px;margin-right:8px;height:25px;padding-left:5px;':'';
-        $newGuiStyleImg=(isNewGui())?'top:4px;':'';
+        $newGuiStyleImg=(isNewGui())?'top:4px;width:16px;height:16px':'';
         if ($col=='idStatus' and $next and $showExtraButton) {
           echo '<div class="roundedVisibleButton roundedButton generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class"';
           echo ' title="'.i18n("moveStatusTo", array(SqlList::getNameFromId('Status', $next))).'"';
           echo ' style="text-align:left;float:right;margin-right:10px; width:'.($buttonFieldWidth-5).'px;'.$newGuiStyle.$specificStyleWithoutCustom.'"';
           $saveFunction=($comboDetail)?'window.top.saveDetailItem();':'saveObject()';
           echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.$next.');setTimeout(\''.$saveFunction.'\',100);">';
-          echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;'.$newGuiStyleImg.'"/>';
+          if (isNewGui()) echo '<img src="css/customIcons/new/iconMoveTo.svg" class="imageColorNewGui" style="position:relative;left:5px;top:2px;'.$newGuiStyleImg.'"/>';
+          else echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;"/>';
           echo '<div style="position:relative;top:-16px;left:25px;width:'.($buttonFieldWidth-30).'px">'.SqlList::getNameFromId('Status', $next).'</div>';
           echo '</div>';
         }
@@ -2699,7 +2700,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo ' style="text-align:left;float:right;margin-right:10px;width:'.($fieldWidth-5).'px;'.$newGuiStyle.$specificStyleWithoutCustom.'"';
           $saveFunction=($comboDetail)?'window.top.saveDetailItem();':'saveObject()';
           echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.$next.');setTimeout(\''.$saveFunction.'\',100);">';
-          echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;'.$newGuiStyleImg.'"/>';
+          if (isNewGui()) echo '<img src="css/customIcons/new/iconMoveTo.svg" class="imageColorNewGui" style="position:relative;left:5px;top:2px;'.$newGuiStyleImg.'"/>';
+          else echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;"/>';
           echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.i18n(SqlList::getNameFromId('StatusNotification', $next)).'</div>';
           echo '</div>';
         }
@@ -2720,7 +2722,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $saveFunction=($comboDetail)?'window.top.saveDetailItem();':'saveObject()';
             echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.htmlEncode($user->id).');setTimeout(\''.$saveFunction.'\',100);"';
             echo '>';
-            echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;'.$newGuiStyleImg.'"/>';
+            if (isNewGui()) echo '<img src="css/customIcons/new/iconMoveTo.svg" class="imageColorNewGui" style="position:relative;left:5px;top:2px;'.$newGuiStyleImg.'"/>';
+            else echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;"/>';
             echo '<div style="position:relative;top:-16px;left:25px;width:'.($buttonFieldWidth-30).'px">'.i18n('assignToMeShort').'</div>';
             echo '</div>';
           }
