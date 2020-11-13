@@ -1779,7 +1779,7 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
   echo '</button>';
   echo "</td></tr>";
   echo "<tr>";
-  echo "<td class='filterHeader' style='width:525px;'>" . i18n("criteria") . "</td>";
+  echo "<td class='filterHeader' style='width:525px;padding-left:50px'>" . i18n("criteria") . "</td>";
   echo "<td class='filterHeader' style='width:25px;'>";
   echo ' <a src="css/images/smallButtonRemove.png" class="imageColorNewGui" onClick="removefilterClause(\'all\');" title="' . i18n('removeAllFilters') . '" > ';
   echo formatSmallButton('Remove');
@@ -1873,9 +1873,9 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
    }
   echo "<tr style='height:22px;'>";
   if ($context!='directFilterList') {
-  	echo "<td class='filterHeader' style='width:699px;'>" . (isNewGui()?i18n("storedFiltersQuick"):i18n("storedFilters")) . "</td>";
-    echo "<td class='filterHeader' style='width:25px;'>";
-    echo "<td class='filterHeader' style='width:25px;'>";
+  	echo "<td class='filterHeader' colspan='3' style='width:749px;'>" . (isNewGui()?i18n("storedFiltersQuick"):i18n("storedFilters")) . "</td>";
+    /*echo "<td class='filterHeader' style='width:25px;'>";
+    echo "<td class='filterHeader' style='width:25px;'>";*/
   } else {
   	echo "<td class='filterHeader' style='".((!isNewGui())?'font-size:8pt;':'')."width:300px;'>" . (isNewGui()?i18n("storedFiltersQuick"):i18n("storedFilters")) . "</td>";
   }
@@ -1914,12 +1914,12 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
            . ( ($defaultFilter==$filter->id and $context!='directFilterList')?' (' . i18n('defaultValue') . ')':'')
            .'</span>'. "</td>";
       if ($context!='directFilterList') {
-        echo "<td class='filterData dndHidden' style='text-align: center;'>";      
+        echo "<td class='filterData dndHidden' style='text-align: center;width:25px'>";      
         echo ' <a src="css/images/smallButtonRemove.png" class="imageColorNewGui" onClick="removeStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('removeStoredFilter') . '" > ';
         echo formatSmallButton('Remove');
         echo ' </a>';
         echo "</td>";
-        echo "<td class='filterData dndHidden' style='text-align: center;'>";
+        echo "<td class='filterData dndHidden' style='text-align: center;width:25px'>";
         if($filter->isShared==0)echo ' <img src="css/images/share.png" class="roundedButtonSmall" onClick="shareStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('shareStoredFilter') . '" class="smallButton"/> ';
         if($filter->isShared==1)echo ' <img src="css/images/shared.png" class="roundedButtonSmall" onClick="shareStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('unshareStoredFilter') . '" class="smallButton"/> ';
         echo "</td>";

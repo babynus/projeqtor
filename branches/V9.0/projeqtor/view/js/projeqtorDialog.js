@@ -4122,6 +4122,7 @@ function showFilterDialog() {
     dojo.style(dijit.byId('filterValueList').domNode, {
       display : 'none'
     });
+    if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
     dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
@@ -4233,6 +4234,7 @@ function filterSelectAtribute(value) {
           dojo.style(dijit.byId('filterValueList').domNode, {
             display : 'none'
           });
+          if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
           if (dijit.byId('filterValueCheckboxSwitch')) { 
             dojo.style(dijit.byId('filterValueCheckboxSwitch').domNode, {
               display : 'block'
@@ -4344,6 +4346,7 @@ function filterSelectAtribute(value) {
           dojo.style(dijit.byId('filterValueList').domNode, {
             display : 'block'
           });
+          if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="8px";
           dojo.style(dijit.byId('showDetailInFilter').domNode, {
             display : 'block'
           });
@@ -4368,6 +4371,7 @@ function filterSelectAtribute(value) {
           dojo.style(dijit.byId('filterValueList').domNode, {
             display : 'none'
           });
+          if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
           dojo.style(dijit.byId('showDetailInFilter').domNode, {
             display : 'none'
           });
@@ -4392,6 +4396,7 @@ function filterSelectAtribute(value) {
           dojo.style(dijit.byId('filterValueList').domNode, {
             display : 'none'
           });
+          if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
           dojo.style(dijit.byId('showDetailInFilter').domNode, {
             display : 'none'
           });
@@ -4418,6 +4423,7 @@ function filterSelectAtribute(value) {
         dojo.style(dijit.byId('filterValueList').domNode, {
           display : 'none'
         });
+        if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
         dojo.style(dijit.byId('showDetailInFilter').domNode, {
           display : 'none'
         });
@@ -4451,6 +4457,7 @@ function filterSelectAtribute(value) {
     dojo.style(dijit.byId('filterValueList').domNode, {
       display : 'none'
     });
+    if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
     dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
@@ -4478,6 +4485,7 @@ function filterSelectOperator(operator) {
     dojo.style(dijit.byId('filterValueList').domNode, {
       display : 'none'
     });
+    if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
     dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
@@ -4508,6 +4516,7 @@ function filterSelectOperator(operator) {
     dojo.style(dijit.byId('filterValueList').domNode, {
       display : 'none'
     });
+    if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
     dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
@@ -4534,6 +4543,7 @@ function filterSelectOperator(operator) {
     dojo.style(dijit.byId('filterValueList').domNode, {
       display : 'none'
     });
+    if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
     dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
@@ -4580,6 +4590,7 @@ function filterSelectOperator(operator) {
       dojo.style(dijit.byId('filterValueList').domNode, {
         display : 'block'
       });
+      if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="8px";
       dojo.style(dijit.byId('showDetailInFilter').domNode, {
         display : 'block'
       });

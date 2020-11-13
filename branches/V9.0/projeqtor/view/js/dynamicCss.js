@@ -220,7 +220,8 @@ function setColorTheming(ref,bis, mode) {
   element.style.setProperty("--image-brightness", brightness+'%');
   element.style.setProperty("--image-hue-rotate-selected", hueRotateSelected+'deg');
   element.style.setProperty("--image-saturate-selected", saturateSelected+'%');
-  element.style.setProperty("--image-brightness-selected", brightnessSelected+'%');;
+  element.style.setProperty("--image-brightness-selected", brightnessSelected+'%');
+  element.style.setProperty("--image-hue-rotate-selected-from-ref", (hueRotate*(-1)+hueRotateSelected)+'deg');
   colorThemingInProgress=false;
 }
 
