@@ -136,10 +136,10 @@ foreach($fieldsArray as $key => $val){
 	if(substr($key,0,5)=="_sec_"){
 		if($val!=$last_key) {
 			$htmlresult.='</td><td style="vertical-align:top;width: 200px;" valign="top">';
-			$htmlresult.='<div class="section" style="width:90%"><b>'.$val.'</b>';
+			$htmlresult.='<div class="section" style="display:table-cell;width:195px;height:32px;vertical-align:middle;marin:auto"><b>'.$val.'</b>';
 			$htmlresult.='</div><br/>';
 			if ($key=='_sec_DocumentVersion') {
-				$htmlresult.='<div class="noteHeader" style="width:94%">';
+				$htmlresult.='<div class="noteHeader" style="width:94%;height:100%">';
 				$htmlresult.= '<table style="width:100%"><tr>';
 				$htmlresult.='<td><input type="checkbox" dojoType="dijit.form.CheckBox" id="documentVersionAll" name="documentVersionAll" 
 						onChange="dijit.byId(\'documentVersionLastOnly\').set(\'checked\',!this.checked);" />'.i18n('all').'</td>';
@@ -160,8 +160,8 @@ foreach($fieldsArray as $key => $val){
       $ctx=new ContextType(substr($key,-1));
       $val=$ctx->name;
     } 
-		$htmlresult.='<input type="checkbox" dojoType="dijit.form.CheckBox" id="column'.$index.'" name="column'.$index.'" value="'.$key.'" '.$checked.' />';
-		$htmlresult.='<label for="column'.$index.'" class="checkLabel">'.$val.'</label><br/>';
+		$htmlresult.='<input type="checkbox" '.((isNewGui())?'class="whiteCheck" style="margin-bottom:2px;"':'').' dojoType="dijit.form.CheckBox" id="column'.$index.'" name="column'.$index.'" value="'.$key.'" '.$checked.' />';
+		$htmlresult.='<label for="column'.$index.'" class="checkLabel" '.((isNewGui())?'style="font-size:100%;"':'').'>&nbsp;'.$val.'</label><br/>';
 		$index++;
 	}
 }
@@ -171,57 +171,66 @@ $htmlresult.="<br/>";
 <form id="dialogExportForm" name="dialogExportForm">
 <table style="width: 100%;">
   <tr>
-    <td colspan="2" class="reportTableHeader"><?php echo i18n("chooseColumnExport");?></td>
+    <td colspan="2" class="reportTableHeader section"><?php echo i18n("chooseColumnExport");?></td>
   </tr>
   <tr><td colspan="2" >&nbsp;</td></tr>
-  <tr>
+  <tr <?php if (isNewGui()) echo 'style="height:40px;"'; ?>>
     <td>
       <input type="checkbox" dojoType="dijit.form.CheckBox" id="checkUncheck" name="checkUncheck" value="Check" onclick="checkExportColumns();" <?php echo $allChecked?> />
-      <label for="checkUncheck" class="checkLabel"><b><?php echo i18n("checkUncheckAll")?></b></label>&nbsp;&nbsp;&nbsp;
+      <label for="checkUncheck" class="checkLabel" style="font-size:100%"><b><?php echo i18n("checkUncheckAll")?></b></label>&nbsp;&nbsp;&nbsp;
     </td>
     <td>
-      <input type="checkbox" dojoType="dijit.form.Button" id="checkAsList" name="checkAsList" onclick="checkExportColumns('aslist');" 
+      <input type="checkbox" dojoType="dijit.form.Button" id="checkAsList" class="dynamicTextButton " name="checkAsList" onclick="checkExportColumns('aslist');" 
        showLabel="true" label="<?php echo i18n("checkAsList")?>" />
     </td>
   </tr>
-  <tr>
-    <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("exportReferencesAs")?> :&nbsp;</td>
+  <tr <?php if (isNewGui()) echo 'style="height:30px;"'; ?>>
+    <td style="width:350px;text-align:right" class="dialogLabel"><?php echo i18n("exportReferencesAs")?> <?php echo (isNewGui())?'':':;';?>&nbsp;</td>
     <td > <select dojoType="dijit.form.FilteringSelect" class="input"
            <?php echo autoOpenFilteringSelect();?>
-				   style="width: 150px;" name="exportReferencesAs" id="exportReferencesAs">         
+				   style="width: <?php echo (isNewGui())?'200':'150';?>px;" name="exportReferencesAs" id="exportReferencesAs">         
            <option value="name"><?php echo i18n("colName");?></option>                            
            <option value="id"><?php echo i18n("colId");?></option>
             </select>
     </td>
   </tr>
-  <tr>
-    <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("exportHtml")?> :&nbsp;</td>
-    <td > <div type="checkbox" dojoType="dijit.form.CheckBox" id="exportHtml" name="exportHtml" ></div></td>
+  <tr <?php if (isNewGui()) echo 'style="height:30px;"'; ?>>
+    <td style="width:300px;text-align:right;" class="dialogLabel"><?php echo i18n("exportHtml")?> <?php echo (isNewGui())?'':':;';?>&nbsp;</td>
+    <td > 
+                    <?php if (isNewGui()) {?>
+                  <div  id="exportHtmlSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" 
+                    leftLabel="" rightLabel="" style="width:10px;position:relative; left:10px;top:2px;z-index:99;" >
+  		              <script type="dojo/method" event="onStateChanged" >
+  		                dijit.byId("exportHtml").set("checked",(this.value=="on")?true:false);
+  		              </script>
+  		             </div>
+  		          <?php }?>
+    <div type="checkbox" dojoType="dijit.form.CheckBox" id="exportHtml" <?php if (isNewGui()) echo 'style="display:none;"';?> name="exportHtml" ></div></td>
   </tr>
     <!--Add a separator to use for csv files - F.KARA #458-->
-    <tr>
-        <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("paramCsvSeparator")?> :&nbsp;</td>
+    <tr <?php if (isNewGui()) echo 'style="height:30px;"'; ?>>
+        <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("paramCsvSeparator")?> <?php echo (isNewGui())?'':':;';?>&nbsp</td>
         <td >
             <select dojoType="dijit.form.FilteringSelect" class="input"
                 value="<?php echo Parameter::getUserParameter('csvSeparator');?>"
                 onChange="saveDataToSession('csvSeparator',this.value,true);"
                 <?php echo autoOpenFilteringSelect();?>
-                     style="width: 150px;" name="separatorCSV" id="separatorCSV">
+                     style="width: <?php echo (isNewGui())?'40':'150';?>px;" name="separatorCSV" id="separatorCSV">
                 <option value=";">;</option>
                 <option value=",">,</option>
             </select>
         </td>
     </tr>
     <!--END a separator to use for csv files - F.KARA #458-->
-   <?php if( $objectClass != 'Work' ){?>
+   <?php if(!isNewGui() and $objectClass != 'Work' ){?>
   <tr><td colspan="2" >&nbsp;</td></tr>
   
   <?php  } if( $objectClass == 'Work' ){?>
   <tr>
-    <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("exportDateAs")?> :&nbsp;</td>
+    <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("exportDateAs")?> <?php echo (isNewGui())?'':':;';?>&nbsp;</td>
     <td > <select dojoType="dijit.form.FilteringSelect" class="input" 
            <?php echo autoOpenFilteringSelect();?>
-				   style="width: 150px;" name="exportDateAs" id="exportDateAs">         
+				   style="width:<?php echo (isNewGui())?'200':'150';?>px;" name="exportDateAs" id="exportDateAs">         
            <option value="<?php echo 'W'.$week ;?>"> <?php echo i18n("selectWeek");?> </option>                            
            <option value="<?php echo 'M'.$month ;?>"><?php echo i18n("selectMonth");?></option>
            <option value="<?php echo 'Y'.substr($month,0,4);?>"><?php echo i18n("selectYear");?></option>
@@ -229,16 +238,15 @@ $htmlresult.="<br/>";
 			    </select></td>
   </tr>
   <tr>
-    <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("exportRessourceAs")?> :&nbsp;</td>
+    <td style="width:300px;text-align:right" class="dialogLabel"><?php echo i18n("exportRessourceAs")?> <?php echo (isNewGui())?'':':;';?>&nbsp;</td>
     <td > <select dojoType="dijit.form.FilteringSelect" class="input" 
            <?php echo autoOpenFilteringSelect();?>
-				   style="width: 150px;" name="exportRessourceAs" id="exportRessourceAs">         
+				   style="width: <?php echo (isNewGui())?'200':'150';?>px;" name="exportRessourceAs" id="exportRessourceAs">         
            <option value="<?php echo 'C'.$isMyUser ;?>"> <?php echo i18n("selectResource");?> </option>                            
            <option value="<?php echo 'A' ;?>"><?php echo i18n("allResource");?></option>
 			    </select></td>
   </tr>
   <?php }?>
-
   </table>
 <table style="width: 100%;">
   <tr>
@@ -250,12 +258,12 @@ $htmlresult.="<br/>";
 <table style="width: 100%">
   <tr>
     <td style="width: 50%; text-align: right;">
-    <button align="right" dojoType="dijit.form.Button"
+    <button align="right" dojoType="dijit.form.Button" class="mediumTextButton"
       onclick="closeExportDialog();">
       <?php echo i18n("buttonCancel");?></button>&nbsp;
     </td>
     <td style="width: 50%; text-align: left;">&nbsp;
-    <button align="left" dojoType="dijit.form.Button"
+    <button align="left" dojoType="dijit.form.Button" class="mediumTextButton"
       id="dialogPrintSubmit"
       onclick="executeExport('<?php echo $objectClass;?>','<?php echo $idUser;?>');">
       <?php echo i18n("buttonOK");?></button>
