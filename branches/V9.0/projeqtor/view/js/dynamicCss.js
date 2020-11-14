@@ -19,6 +19,9 @@ function setColorTheming(ref,bis, mode) {
     light=HSLToHex(hRef,sRef,90);
     lighter=HSLToHex(hRef,sRef,95);
     var hslDefault=hexToHSL('#ff0000');
+    hueRotateDefault=hslDefault[0];
+    saturateDefault=hslDefault[1];
+    brightnessDefault=hslDefault[2];
     hueRotate=hRef-hslDefault[0];
     //saturate=Math.round(s/hslDefault[1]*100);
     //brightness=Math.round(40/hslDefault[2]*100);
@@ -41,8 +44,8 @@ function setColorTheming(ref,bis, mode) {
     saturateSelected=Math.round(sBis/hslDefault[1]*100);
     brightnessSelected=Math.round(lBis/hslDefault[2]*200);
     console.log("saturateSelected="+saturateSelected+", brightnessSelected="+brightnessSelected);
-    if (brightnessSelected>240) brightnessSelected=240;
-    //if (saturateSelected>80) saturateSelected=80;
+    if (brightnessSelected>200) brightnessSelected=200;
+    if (saturateSelected>80) saturateSelected=80;
   } else {
     // Default (initialization) =============================== INIT
     if (!ref) ref='#545381';
@@ -71,6 +74,9 @@ function setColorTheming(ref,bis, mode) {
   
     // DEFAULT (Red) = color of icons, to define translation === ICON
     var hsvDefault=hexToHSV('#ff0000');
+    hueRotateDefault=hsvDefault[0];
+    saturateDefault=hsvDefault[1];
+    brightnessDefault=hsvDefault[2];
     hueRotate=hRef-hsvDefault[0];
     saturate=100; // Math.round(sRef/hsvDefault[1]*1000)/10;
     brightness=80;// Math.round(vRef/hsvDefault[2]*1000)/10;
@@ -100,12 +106,19 @@ function setColorTheming(ref,bis, mode) {
     lightBis=HSVToHex(hBis,sBis,90);
     lighterBis=HSVToHex(hBis,sBis,95);
     hueRotateSelected=hBis-hsvDefault[0];
-    saturateSelected=Math.round(sBis/hsvDefault[1]*100);
-    brightnessSelected=Math.round(vBis/hsvDefault[2]*100);
+    saturateSelected=Math.round(sBis/hsvDefault[1]*(0.9)*100);
+    brightnessSelected=Math.round(vBis/hsvDefault[2]*(0.9)*100);
     if (brightnessSelected > 180) {
       brightnessSelected=180;
     }
   }
+  console.log("==========================================================");
+  console.log("def   Hue="+hueRotateDefault+",  Sat="+saturateDefault+',  Bri='+brightnessDefault);
+  console.log("ref   Hue="+hueRotate+",  Sat="+saturate+',   Bri='+brightness);
+  console.log("sel   Hue="+hueRotateSelected+",  Sat="+saturateSelected+',   Bri='+brightnessSelected);
+  hueRotate+=(360-hueRotate)/360*30;
+  hueRotateSelected+=(360-hueRotateSelected)/360*30;
+  
   if(!isNewGui) dojo.byId("logoMenuBar").src="img/logoSmallWhite.png";
   var foreColor = '#000000';
   var invert=1;
