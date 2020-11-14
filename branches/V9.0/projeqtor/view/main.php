@@ -1406,8 +1406,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                 </script>
               </button>
             </td>
-            <td align="left" width="<?php echo $printWidth - 300;?>px">
-              &nbsp;<b><i><?php echo i18n('sendToPrinter')?></i></b>
+            <td align="left" width="<?php echo $printWidth - 300;?>px" class="textColorNewGui">
+              &nbsp;<?php echo i18n('sendToPrinter')?>
             </td></tr></table>
           </div>
         </td>
@@ -1779,7 +1779,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
          <table>
            <tr>
              <td class="dialogLabel"  >
-               <label for="originOriginType" ><?php echo i18n("originType") ?>&nbsp;:&nbsp;</label>
+               <label for="originOriginType" ><?php echo i18n("originType") ?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -1794,17 +1794,17 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="OriginOriginId" ><?php echo i18n("originElement") ?>&nbsp;:&nbsp;</label>
+               <label for="OriginOriginId" ><?php echo i18n("originElement") ?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label>
              </td>
              <td>
                <table><tr><td>
                <div id="dialogOriginList" dojoType="dijit.layout.ContentPane" region="center">
                  <input id="originOriginId" name="originOriginId" type="hidden" value="" />
                </div>
-               </td><td style="vertical-align: top">
+               </td><td style="vertical-align: top;max-width:25px">
                <button id="originDetailButton" dojoType="dijit.form.Button" showlabel="false"
-                 title="<?php echo i18n('showDetail')?>"
-                 iconClass="iconView">
+                 title="<?php echo i18n('showDetail')?>" class="notButton notButtonRounded"
+                 iconClass="iconSearch iconSize22 imageColorNewGui">
                  <script type="dojo/connect" event="onClick" args="evt">
                     showDetailOrigin();
                  </script>
