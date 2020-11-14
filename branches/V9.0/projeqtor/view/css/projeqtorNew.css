@@ -382,9 +382,31 @@ html, body, #mainDiv,
   border: 1px solid var(--color-secondary);
   color:var(--color-secondary) !important;
 }
-.ProjeQtOrNewGui .mediumTextButton:hover .dijitReset.dijitInline.dijitButtonNode {
+.ProjeQtOrNewGui .mediumTextButton, .ProjeQtOrNewGui .largeTextButton,
+.ProjeQtOrNewGui .smallTextButton,  .ProjeQtOrNewGui .dynamicTextButton{
+  color:var(--color-button-text);
+}
+.ProjeQtOrNewGui .mediumTextButton:hover .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .largeTextButton:hover .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .smallTextButton:hover .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .dynamicTextButton:hover .dijitReset.dijitInline.dijitButtonNode {
   border: 1px solid var(--color-secondary);
   color:var(--color-secondary) !important;
+}
+.largeTextButton {
+  width:200px; 
+  height: 100%;
+}
+.mediumTextButton {
+  width:100px; 
+  height:100%;
+}
+.smallTextButton {
+  width:50px; 
+  height:100%;
+}
+.dynamicTextButton {
+  height:100%;
 }
 
 .ProjeQtOrNewGui .roundedVisibleButton.roundedButton.generalColClas:hover,
@@ -512,6 +534,7 @@ animation: fadeIn ease 0.5s;
   background-color: transparent;
 } 
 .ProjeQtOrNewGui #menubarContainer .imageColorNewGuiSelected .roundedButtonSmall .iconSize22,
+.ProjeQtOrNewGui .imageColorNewGuiSelected .roundedButtonSmall .iconSize22,
 .ProjeQtOrNewGui .menu__linkDirect.menu__link--current .iconSize22, .ProjeQtOrNewGui .menu__linkDirect.menu__link--current .iconSize16  {
 	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
@@ -801,9 +824,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .resetSearchTD {
 	padding-right:5px;
 }
-.ProjeQtOrNewGui .mediumTextButton {
-	height: 100%;
-}
+
 .ProjeQtOrNewGui .dijitDialogTitleBar{
 	padding:10px;
 }
@@ -1165,4 +1186,16 @@ select option:checked {
 }
 .ProjeQtOrNewGui .cke_toolbar_separator {
 	background: var(--color-white);
+}
+
+.ProjeQtOrNewGui .checkLabel {
+    font-weight: normal;
+    font-family: Verdana, Arial, Tahoma, sans-serif;
+    font-size: 8pt;
+    text-align: left;
+    vertical-align: top;
+    padding: 0px 0px 0px 0px;
+    float: none;
+    border: 0px;
+    cursor: pointer;
 }
