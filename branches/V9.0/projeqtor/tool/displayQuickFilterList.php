@@ -84,7 +84,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
      <br> 
       <tr>
         <td style="text-align:right;width:25%">
-          <span class="nobr"><?php echo i18n("colId")?>&nbsp;:&nbsp;</span> 
+          <span class="nobr"><?php echo i18n("colId")?>&nbsp;<?php if (!isNewGui()) echo ':'?>&nbsp;</span> 
         </td>
         <td style="width:65%">
           <div title="<?php echo i18n('filterOnId')?>" style="width:<?php echo $referenceWidth;?>px" class="filterField rounded" dojoType="dijit.form.TextBox" 
@@ -131,7 +131,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       <?php if ( property_exists($obj,'name') or get_class($obj)=='Affectation') { ?>
       <tr> 
         <td style="text-align:right;width:25%">
-          <span class="nobr"><?php echo i18n("colName");?>&nbsp;:&nbsp;</span> 
+          <span class="nobr"><?php echo i18n("colName");?>&nbsp;<?php if (!isNewGui()) echo ':';?>&nbsp;</span> 
         </td>
         <td style="width:65%">
           <div title="<?php echo i18n('filterOnName')?>" style="width:<?php echo $referenceWidth*4;?>px" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
@@ -177,7 +177,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       
       <?php if ( ( property_exists($obj,'id' . $objectClass . 'Type')) or ( $objectClass=='EmployeeLeaveEarned' and property_exists($obj,'idLeaveType')) ) { ?>
       <tr>
-        <td style="text-align:right;width:25%;text-transform:lowercase;"> <span class="nobr"><?php echo i18n("colType");?> &nbsp;:&nbsp;</span> </td>
+        <td style="text-align:right;width:25%;text-transform:lowercase;"> <span class="nobr"><?php echo i18n("colType");?>&nbsp;<?php if (!isNewGui()) echo ':';?>&nbsp;</span></td>
         <td style="width:65%">
          <select dojoType="dijit.form.FilteringSelect" class="input"  id="listTypeFilterQuick" name="listTypeFilterQuick"
           <?php echo autoOpenFilteringSelect();?>
@@ -226,7 +226,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       
       <?php if ( property_exists($obj,'idClient') ) { ?>
       <tr>
-        <td style="text-align:right;width:25%;text-transform:lowercase;"><span class="nobr">&nbsp; <?php echo i18n("colClient");?>&nbsp;:&nbsp;</span> </td>
+        <td style="text-align:right;width:25%;text-transform:lowercase;"><span class="nobr">&nbsp; <?php echo i18n("colClient");?>&nbsp;<?php if (!isNewGui()) echo ':';?>&nbsp;</span></td>
         <td style="width:65%">
           <select title="<?php echo i18n('filterOnClient')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
             <?php echo autoOpenFilteringSelect();?> 
@@ -275,7 +275,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       
       <?php if ( $objectClass == 'Budget' ) { ?>
         <tr>
-          <td style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr">&nbsp; <?php echo i18n("colParentBudget");?>&nbsp;:&nbsp;</span></td>
+          <td style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr">&nbsp; <?php echo i18n("colParentBudget");?>&nbsp;<?php if (!isNewGui()) echo ':';?>&nbsp;</span></td>
           <td style="width:65%;">
             <select title="<?php echo i18n('filterOnBudgetParent')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
                 <?php echo autoOpenFilteringSelect();?> 
@@ -325,7 +325,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       
       <?php  if (! $comboDetail) {?>
        <tr>
-         <td  style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("quickSearch");?>&nbsp;:&nbsp;</span></td>
+         <td  style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("quickSearch");?>&nbsp;<?php if (!isNewGui()) echo ':';?>&nbsp;</span></td>
          <td  style="width:65%;">
             <div title="<?php echo i18n('quickSearch')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
                id="quickSearchValueQuick" name="quickSearchValueQuick" style="width:200px;">
@@ -360,7 +360,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
 			  <?php } ?>
       <?php if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?> 
       <tr style="height:37px;">
-        <td colspan=2 style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("filterByStatusQuick");?>&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+        <td colspan=2 style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("filterByStatusQuick");?>&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 			  <td style="width:10%;text-align:center;">
 			   <div id="filterByStatusSwitch" name="filterByStatusSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(!$comboDetail and sessionValueExists('displayByStatusListSwitch'.$objectClass)){ echo getSessionValue('displayByStatusListSwitch'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >

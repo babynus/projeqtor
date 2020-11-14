@@ -1763,7 +1763,7 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
   // Display Result
   echo "<table width='99.9%'>";
   echo "<tr><td class='dialogLabel'>";
-  echo '<label for="filterNameDisplay" style="'.((isNewGui())?'position:relative;top:5px;':'').'">' . i18n("filterName") . '&nbsp;:&nbsp;</label>';
+  echo '<label for="filterNameDisplay" style="'.((isNewGui())?'position:relative;top:5px;':'').'">' . i18n("filterName") . '&nbsp;'.((!isNewGui())?':':'').'&nbsp;</label>';
   echo '<div type="text" dojoType="dijit.form.ValidationTextBox" ';
   echo ' name="filterNameDisplay" id="filterNameDisplay"';
   echo '  style="width: '.((isNewGui())?'530px':'550px;').'" ';

@@ -62,6 +62,11 @@ TABLE.dijitSelect {
 .dijitComboBox .dijitInputField {
     padding: 0;
 }
+.selectList {
+    padding: 2px 5px 2px 5px;
+    font-family: Verdana, Arial, Tahoma, sans-serif;
+    font-size: 10pt;
+}
 SELECT.selectList OPTION {
 	padding: 2px 5px 6px 7px !important;
 }
@@ -1210,4 +1215,8 @@ select option:checked {
     float: none;
     border: 0px;
     cursor: pointer;
+}
+
+.ProjeQtOrNewGui .dijitDialogPaneContent .notButton .dijitReset.dijitStretch.dijitButtonContents {
+	padding:0;
 }
