@@ -1113,7 +1113,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
         url : page,
         form : formName,
         handleAs : "text",
-        load : function(data, args) {       
+        load : function(data, args) {     
           var sourceUrl=args['url'];
           if (sourceUrl && sourceUrl!='undefined' && sourceUrl.indexOf('xhrPostDestination=')>0) {
             var xhrPostArgsString=sourceUrl.substr(sourceUrl.indexOf('xhrPostDestination='));
@@ -1170,8 +1170,33 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
             }
           }
           hideBigImage(); // Will avoid resident pop-up always displayed
-          cleanContent(destination);
-          if(!editorInFullScreen()) contentWidget.set('content', data);
+          
+          if (destination=='menuBarListDiv' || destination=='anotherBarContainer') {
+            console.log("destination="+destination);
+            // Specific treatment for refreshMenuBarList.php and refreshMenuAnotherBarList.php so that they are cleared on the same time, to avoid blinking
+            if (destination=='menuBarListDiv') { menuBarListDivData=data; menuBarListDivCallback=callBackFunction; console.log("data from menuBarListDiv");} 
+            if (destination=='anotherBarContainer') { anotherBarContainerData=data; anotherBarContainerCallback=callBackFunction; console.log("data from anotherBarContainer");}
+            if (menuBarListDivData!=null && anotherBarContainerData!=null) {
+              cleanContent('menuBarListDiv');
+              cleanContent('anotherBarContainer');
+              console.log("cleaned both");
+              dijit.byId('menuBarListDiv').set('content', menuBarListDivData);
+              console.log ('loaded menuBarListDiv');
+              dijit.byId('anotherBarContainer').set('content', anotherBarContainerData);
+              console.log ('loaded anotherBarContainer');
+              if (menuBarListDivCallback!=null) setTimeout(menuBarListDivCallback, 100);
+              if (anotherBarContainerCallback!=null) setTimeout(anotherBarContainerCallback, 100);
+              menuBarListDivData=null;
+              anotherBarContainerData=null;
+              menuNewGuiFilterInProgress=false;
+              hideWait();
+            }
+            cleanLoadContentStack(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading);
+            return;
+          } else {
+            cleanContent(destination);
+            if(!editorInFullScreen()) contentWidget.set('content', data);
+          }
           checkDestination(destination);
           // Create instances of CKEDITOR
           if (page.substr(0, 16) == 'objectDetail.php'
@@ -1847,7 +1872,7 @@ function finalizeMessageDisplay(destination, validationType) {
             valueDiv+= (objId)?'&nbsp;#'+objId:'';
             valueDiv+= '&nbsp;</a>';
             valueDiv+= '</span>';
-            valueDiv+= '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivButton" style="display:none;font-size:9px; color: #000000;position :absolute; top: 47px; left: 157px; border: 0;background: transparent;width:300px;" value="'+ref+objId+'" />';
+            valueDiv+= '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivButton" style="display:none;font-size:9px; '+((isNewGui)?'':'color: #000000')+';position :absolute; top: 47px; left: 157px; border: 0;background: transparent;width:300px;" value="'+ref+objId+'" />';
             dojo.byId("buttonDivObjectId").innerHTML=valueDiv;
           }
           //gautier

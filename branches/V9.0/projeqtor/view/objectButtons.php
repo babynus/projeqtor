@@ -132,7 +132,8 @@
             echo ($obj->id)?'&nbsp;#'.$obj->id:'';
  			      echo '&nbsp;</a>';
            	echo '</span>';
-          	echo '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivButton" style="display:none;font-size:9px; color: #000000;position :absolute; top: 47px; left: 157px; border: 0;background: transparent;width:300px;" value="' . $ref . '" />';
+          	if (isNewGui()) echo '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivButton" style="display:none;font-size:10pt;position :absolute; top: 114px; left: 204px; border: 0;background: transparent;width:100%;" value="' . $ref . '" />';
+          	else echo '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivButton" style="display:none;font-size:9px;color: #000000;position :absolute; top: 47px; left: 157px; border: 0;background: transparent;width:300px;" value="' . $ref . '" />';
           	echo '</span>';
 // END ADD BY Quentin Boudier - 2017-04-26 'copylink in tilte of object detail	'
            	?>

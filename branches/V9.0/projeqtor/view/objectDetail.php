@@ -1860,7 +1860,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // Draw Id (only visible) ============================================= ID
         // id is only visible
         $ref=$obj->getReferenceUrl();
-        echo '<span class="roundedButton" style="padding:1px 5px 5px 5px;font-size:8pt; height: 50px; color:#AAAAAA;'.$specificStyle.'" >';
+        echo '<span id="objectDetailObjectId" class="roundedButton" style="padding:1px 5px 5px 5px;font-size:8pt; height: 50px; color:#AAAAAA;'.$specificStyle.'" >';
         echo '  <a  href="'.$ref.'" onClick="copyDirectLinkUrl(\'Detail\');return false;"'.' title="'.i18n("rightClickToCopy").'" style="cursor: pointer;">';
         echo '    <span style="color:grey;vertical-align:middle;padding: 2px 0px 2px 0px !important;'.$specificStyle.'">#</span>';
         echo '    <span dojoType="dijit.form.TextBox" type="text"  ';

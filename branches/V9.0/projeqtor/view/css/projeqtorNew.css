@@ -925,7 +925,7 @@ animation: fadeIn ease 0.5s;
   background: var(--color-button-background);
 }
 .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
-  border:1px solid white;
+  /*border:1px solid white;*/
 }
 
 .ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
@@ -936,10 +936,10 @@ animation: fadeIn ease 0.5s;
 	border:0;
 	color: var(--color-detail-header-text);
 }
-.ProjeQtOrNewGui #buttonDivObjectId .roundedButton{
+.ProjeQtOrNewGui #buttonDivObjectId .roundedButton, .ProjeQtOrNewGui #objectDetailObjectId.roundedButton {
 	border:1px solid white;
 }
-.ProjeQtOrNewGui #buttonDivObjectId .roundedButton:hover{
+.ProjeQtOrNewGui #buttonDivObjectId .roundedButton:hover, .ProjeQtOrNewGui #objectDetailObjectId.roundedButton:hover{
   border:1px solid var(--color-detail-header-text);
 }
 .ProjeQtOrNewGui #buttonDivObjectId .roundedButton a{
