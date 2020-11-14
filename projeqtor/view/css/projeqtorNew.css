@@ -529,9 +529,9 @@ animation: fadeIn ease 0.5s;
 
 .ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui #menuBarShow .dijitIcon, .ProjeQtOrNewGui .hideStreamNewGuiTopBar,
 .ProjeQtOrNewGui #listHeaderDiv div.iconSize32, .ProjeQtOrNewGui #buttonDiv div .iconSize32,
-/*.ProjeQtOrNewGui #listHeaderDiv .dijitButtonIcon, .ProjeQtOrNewGui #buttonDiv .dijitButtonIcon,*/
 .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize22, .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize32,
-.ProjeQtOrNewGui #centerDiv .dijitButtonIcon, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall,
+.ProjeQtOrNewGui #centerDiv .dijitButtonIcon, 
+.ProjeQtOrNewGui #centerDiv .roundedButtonSmall .iconSize16, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall .iconSize22,
 .ProjeQtOrNewGui .ganttIconBackground div, .ProjeQtOrNewGui .imageColorNewGui, .ProjeQtOrNewGui .directAttachment ,
 .ProjeQtOrNewGui .buttonIconNewGui .dijitIcon,
 .ProjeQtOrNewGui #mainDivMenu .iconSize22, .ProjeQtOrNewGui #planButton,
@@ -549,7 +549,8 @@ animation: fadeIn ease 0.5s;
   background-color: transparent;
 }
 .ProjeQtOrNewGui #centerDiv .dijitButtonHover .dijitButtonIcon, .ProjeQtOrNewGui .buttonIconNewGui .dijitButtonHover .dijitIcon,
-.ProjeQtOrNewGui #centerDiv .dijitDropDownButtonHover .dijitButtonIcon, .ProjeQtOrNewGui .buttonIconNewGui .dijitDropDownButtonHover .dijitIcon
+.ProjeQtOrNewGui #centerDiv .dijitDropDownButtonHover .dijitButtonIcon, .ProjeQtOrNewGui .buttonIconNewGui .dijitDropDownButtonHover .dijitIcon,
+.ProjeQtOrNewGui #centerDiv .roundedButtonSmall:hover .iconSize16, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall:hover .iconSize22
 {
   -webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
@@ -727,13 +728,16 @@ animation: fadeIn ease 0.5s;
 	border-left: 2px solid var(--color-secondary) !important;
 }
 
-.ProjeQtOrNewGui .dijitTabContainerTop-tabs, .ProjeQtOrNewGui .dijitTabContainerTop-tabs .dijitTabChecked {
+.ProjeQtOrNewGui .dijitTabContainerTop-tabs, .ProjeQtOrNewGui .dijitTabContainerTop-tabs .dijitTabChecked, .ProjeQtOrNewGui .dijitTabContainerTop-tabs .dijitTabHover {
 	background-color: transparent;
 }
-.ProjeQtOrNewGui  div.dijitTab.dijitTabChecked>span.tabLabel {
+.ProjeQtOrNewGui  div.dijitTab.dijitTabChecked>span.tabLabel, .ProjeQtOrNewGui  div.dijitTab.dijitTabHover>span.tabLabel {
 	color: var(--color-secondary);
 	border:0;
 	border-bottom: 2px solid var(--color-secondary);
+}
+.ProjeQtOrNewGui .dijitTabHover {
+  background: transparent url();
 }
 .ProjeQtOrNewGui .dijitTab .tabLabel {
 	font-size:100%;
