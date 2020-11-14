@@ -3523,7 +3523,7 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
   } else {
     echo '<table style=""><tr height="20px"><td>';
     if ($obj->id and !$print and $canUpdate) {
-      echo '<a onClick="addOrigin();" title="'.i18n('addOrigin').'" class="roundedButtonSmall"> '.formatSmallButton('Add').'</a>';
+      echo '<a onClick="addOrigin();" title="'.i18n('addOrigin').'" '.((isNewGui())?'style="position:relative;top:-2px;"':'').'class="roundedButtonSmall"> '.((isNewGui())?formatMediumButton('Add'):formatSmallButton('Add')).'</a>';
     }
     echo '</td></tr></table>';
   }
