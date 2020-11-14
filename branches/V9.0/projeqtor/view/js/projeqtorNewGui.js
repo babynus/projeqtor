@@ -435,14 +435,25 @@ function helpDisplayIconIsRead (val){
   }
 }
 
+var menuBarListDivData=null;
+var anotherBarContainerData=null;
+var menuBarListDivCallback=null;
+var anotherBarContainerCallback=null;
+var menuNewGuiFilterInProgress=false;
 function menuNewGuiFilter(filter, item) {
-    saveUserParameter('defaultMenu', filter);
-    if(!item)item=dojo.byId('itemSelected').value;
+  if (menuNewGuiFilterInProgress==true) {
+    console.log("extra menuNewGuiFilter not taken into account");
+    return;
+  }
+  menuNewGuiFilterInProgress=true;
+  saveUserParameter('defaultMenu', filter);
+  if(!item)item=dojo.byId('itemSelected').value;
 	var historyBar = new Array();
 	historyTable.forEach(function(element){
 		historyBar.push('menu'+element[0]);
 	});
 	var callback = function(){
+	  //refreshSelectedItem(item, filter);
 		if(filter != 'menuBarCustom'){
 			dojo.byId('favoriteSwitch').style.display = 'none';
 			dojo.addClass('recentButton','imageColorNewGuiSelected');
@@ -452,21 +463,26 @@ function menuNewGuiFilter(filter, item) {
 			dojo.addClass('favoriteButton','imageColorNewGuiSelected');
 			dojo.removeClass('recentButton','imageColorNewGuiSelected');
 		}
-        dojo.query('.anotherBarDiv').forEach(function(el){
-        	var source = new dojo.dnd.Source(el.id, { accept:["menuBar" ],horizontal:true});
-        });
+    dojo.query('.anotherBarDiv').forEach(function(el){
+    	var source = new dojo.dnd.Source(el.id, { accept:["menuBar" ],horizontal:true});
+    });
 	};
 	var hide = function(){
 		if(filter == 'menuBarRecent')editFavoriteRow(true);
 	};
 	var isMenuLeftOpen = dojo.byId('isMenuLeftOpen').value;
-	cleanContent("menuBarListDiv");
-	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, null, null, null, null, callback, true);
-	cleanContent("anotherBarContainer");
-	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter+'&isMenuLeftOpen='+isMenuLeftOpen, 'anotherBarContainer', null, null, null, null, null, hide, true);
+	//cleanContent("menuBarListDiv");
+	menuBarListDivData=null;
+	anotherBarContainerData=null;
 	refreshSelectedItem(item, filter);
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
+	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, null, null, null, null, callback, true);
+	//cleanContent("anotherBarContainer");
+	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter+'&isMenuLeftOpen='+isMenuLeftOpen, 'anotherBarContainer', null, null, null, null, null, hide, true);
+	//refreshSelectedItem(item, filter);
+	//saveUserParameter('defaultMenu', filter);
+	//defaultMenu=filter;
 }
 
 function refreshSelectedItem(item, filter){
