@@ -415,14 +415,22 @@ html, body, #mainDiv,
 	color:var(--color-secondary) !important;
 	opacity:1;
 }
-
-.ProjeQtOrNewGui .roundedButton:hover .imageColorNewGui, .ProjeQtOrNewGui .roundedButtonSmall:hover .imageColorNewGui, .ProjeQtOrNewGui .imageColorNewGui:hover {
+.ProjeQtOrNewGui .directAttachment, 
+.ProjeQtOrNewGui .dijit.dijitReset.dijitInline.directAttachment.detailButton.dijitUploader.dijitButton .dijitButtonNode,
+.ProjeQtOrNewGui .dijit.dijitReset.dijitInline.directAttachment.detailButton.dijitUploader.dijitButton  {
+	cursor:pointer;
+	background-color:transparent;
+	background:transparent;
+}
+.ProjeQtOrNewGui .roundedButton:hover .imageColorNewGui, .ProjeQtOrNewGui .roundedButtonSmall:hover .imageColorNewGui, .ProjeQtOrNewGui .imageColorNewGui:hover,
+.ProjeQtOrNewGui .directAttachment:hover {
 	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   color:var(--color-secondary);
 }
 .ProjeQtOrNewGui .roundedButtonNoBorder, .ProjeQtOrNewGui .roundedButtonNoBorder:hover, .ProjeQtOrNewGui .roundedButtonSmall, .ProjeQtOrNewGui .roundedButtonSmall:hover,
-.ProjeQtOrNewGui .imageColorNewGui:hover, .ProjeQtOrNewGui .imageColorNewGui:hover .roundedButtonSmall {
+.ProjeQtOrNewGui .imageColorNewGui:hover, .ProjeQtOrNewGui .imageColorNewGui:hover .roundedButtonSmall,
+.ProjeQtOrNewGui .directAttachment:hover {
 	border: 0px;
 }
 .hideStreamNewGui, .hideStreamNewGuiTopBar {
@@ -524,7 +532,7 @@ animation: fadeIn ease 0.5s;
 /*.ProjeQtOrNewGui #listHeaderDiv .dijitButtonIcon, .ProjeQtOrNewGui #buttonDiv .dijitButtonIcon,*/
 .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize22, .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize32,
 .ProjeQtOrNewGui #centerDiv .dijitButtonIcon, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall,
-.ProjeQtOrNewGui .ganttIconBackground div, .ProjeQtOrNewGui .imageColorNewGui,
+.ProjeQtOrNewGui .ganttIconBackground div, .ProjeQtOrNewGui .imageColorNewGui, .ProjeQtOrNewGui .directAttachment ,
 .ProjeQtOrNewGui .buttonIconNewGui .dijitIcon,
 .ProjeQtOrNewGui #mainDivMenu .iconSize22, .ProjeQtOrNewGui #planButton,
 .ProjeQtOrNewGui #menuBarButtonDiv .roundedIconButton.imageColorNewGui:hover
