@@ -387,8 +387,21 @@ html, body, #mainDiv,
   border: 1px solid var(--color-secondary);
   color:var(--color-secondary) !important;
 }
+.ProjeQtOrNewGui .dijitReadOnly .dijitReset.dijitInline.dijitButtonNode, 
+.ProjeQtOrNewGui .dijitDisabled .dijitReset.dijitInline.dijitButtonNode {
+	border: 1px solid var(--color-light) !important;
+	color: var(--color-light) !important;;
+}
+.ProjeQtOrNewGui .dijitDisabled .dijitButtonText {
+	color: var(--color-light) !important;;
+}
+
 .ProjeQtOrNewGui .mediumTextButton, .ProjeQtOrNewGui .largeTextButton,
-.ProjeQtOrNewGui .smallTextButton,  .ProjeQtOrNewGui .dynamicTextButton{
+.ProjeQtOrNewGui .smallTextButton,  .ProjeQtOrNewGui .dynamicTextButton,
+.ProjeQtOrNewGui .mediumTextButton:hover .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .largeTextButton:hover .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .smallTextButton:hover .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .dynamicTextButton:hover .dijitReset.dijitInline.dijitButtonNode{
   color:var(--color-button-text);
 }
 .ProjeQtOrNewGui .mediumTextButton:hover .dijitReset.dijitInline.dijitButtonNode,
@@ -807,7 +820,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNode {
 	border-radius:5px;
 	background: var(--color-lighter);
-  color:var(--color-text);
+  color:var(--color-button-text);
   
 }
 .ProjeQtOrNewGui .dijitButtonNode{
@@ -1180,6 +1193,11 @@ select option:checked {
   padding: 4px 6px;
   margin-left: 1px;
 }
+.ProjeQtOrNewGui a.cke_button:hover {
+  padding: 4px 6px;
+  margin-left: 1px;
+}
+
 .ProjeQtOrNewGui a.cke_combo_button {
 	padding:0px;
 	margin-top:1px;
@@ -1198,8 +1216,9 @@ select option:checked {
 .ProjeQtOrNewGui a.cke_button:hover {
 	padding: 4px 6px;
 }
-.ProjeQtOrNewGui a.cke_button_expandable{
-	padding:4px 6px
+.ProjeQtOrNewGui a.cke_button_expandable,
+.ProjeQtOrNewGui a.cke_button_expandable:hover{
+	padding:4px 4px !important;
 }
 .ProjeQtOrNewGui .cke_toolbar_separator {
 	background: var(--color-white);
@@ -1219,4 +1238,20 @@ select option:checked {
 
 .ProjeQtOrNewGui .dijitDialogPaneContent .notButton .dijitReset.dijitStretch.dijitButtonContents {
 	padding:0;
+}
+
+.ProjeQtOrNewGui .linkData, .ProjeQtOrNewGui .attachmentData, .ProjeQtOrNewGui .noteData, .ProjeQtOrNewGui .dependencyData, 
+.ProjeQtOrNewGui .historyData, .ProjeQtOrNewGui .assignData {
+	color: #000000;
+}
+
+.ProjeQtOrNewGui .cke_button_on::after, .ProjeQtOrNewGui .cke_button_off::after, 
+.ProjeQtOrNewGui .cke_toolbar::after, .ProjeQtOrNewGui .cke_toolgroup::after {
+  display:none;
+}
+.ProjeQtOrNewGui .cke_toolbar {
+	max-height:34px;
+}
+.ProjeQtOrNewGui .labelPadding {
+	padding-right: 4px;
 }

@@ -176,8 +176,8 @@ $htmlresult.="<br/>";
   <tr><td colspan="2" >&nbsp;</td></tr>
   <tr <?php if (isNewGui()) echo 'style="height:40px;"'; ?>>
     <td>
-      <input type="checkbox" dojoType="dijit.form.CheckBox" id="checkUncheck" name="checkUncheck" value="Check" onclick="checkExportColumns();" <?php echo $allChecked?> />
-      <label for="checkUncheck" class="checkLabel" style="font-size:100%"><b><?php echo i18n("checkUncheckAll")?></b></label>&nbsp;&nbsp;&nbsp;
+      <input type="checkbox" <?php echo (isNewGui())?'class="whiteCheck" style="margin-bottom:2px;"':'';?> dojoType="dijit.form.CheckBox" id="checkUncheck" name="checkUncheck" value="Check" onclick="checkExportColumns();" <?php echo $allChecked?> />
+      <label for="checkUncheck" class="checkLabel" style="font-size:100%"><?php echo i18n("checkUncheckAll")?></label>&nbsp;&nbsp;&nbsp;
     </td>
     <td>
       <input type="checkbox" dojoType="dijit.form.Button" id="checkAsList" class="dynamicTextButton " name="checkAsList" onclick="checkExportColumns('aslist');" 
