@@ -90,6 +90,26 @@ label, .ProjeQtOrNewGui label,
     background-color: #ffffff;
     color:var(--color-text);
 }
+.ProjeQtOrNewGui .smallTabLabel, .ProjeQtOrNewGui .smallTabLabelRight {
+  font-weight: normal;
+  font-family: Verdana, Arial, Tahoma, sans-serif; font-size: 8pt;
+  text-align: left;
+  border: none; padding: 0px; spacing: 0px;
+  width: 90px;
+}
+.ProjeQtOrNewGui .smallTabLabelRight {
+  text-align: right;
+}
+.ProjeQtOrNewGui .smallLabel {
+  width: 90px !important;
+}
+.ProjeQtOrNewGui #attachmentFileDropArea .dijitButtonNode {
+	width:99%;
+}
+.ProjeQtOrNewGui #attachmentFileDropArea .dijitUploaderHover .dijitButtonNode {
+	border-color: color:var(--color-secondary);
+}
+
 
 .labelWithThumb, .ProjeQtOrNewGui .labelWithThumb{
   width: 150px !important;

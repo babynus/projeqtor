@@ -45,8 +45,8 @@ if (array_key_exists('isIE',$_REQUEST)) {
     <div id="dialogAttachmentFileDiv">
       <table>
         <tr height="30px">
-          <td class="dialogLabel" >
-           <label for="attachmentFile" ><?php echo i18n("colFile");?>&nbsp;:&nbsp;</label>
+          <td class="dialogLabel" style="vertical:align:top">
+           <label for="attachmentFile" ><?php echo i18n("colFile");?>&nbsp;<?php if (! isNewGui()) echo ':';?>&nbsp;</label>
           </td>
           <td style="position:relative">
            <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>" />
@@ -63,7 +63,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
             dojoType="dojox.form.Uploader" type="file" 
             url="../tool/saveAttachment.php"
             <?php if (! $isIE) {?>
-            style="padding:0px;margin:0px;z-index: 50;width:340px; border: 3px dotted #EEEEEE;"
+            style="padding:0px;margin:0px;<?php echo (isNewGui())?'width:350px':'z-index: 50;width:340px; border: 3px dotted #EEEEEE;';?>"
             <?php } else {?>
             style="overflow: hidden; border: 0px"
             <?php }?>
@@ -88,11 +88,11 @@ if (array_key_exists('isIE',$_REQUEST)) {
       <table>
         <tr height="30px">
           <td class="dialogLabel" >
-            <label for="attachmentLink" ><?php echo i18n("colHyperlink");?>&nbsp;:&nbsp;</label>
+            <label for="attachmentLink" ><?php echo i18n("colHyperlink");?>&nbsp;<?php if (!isNewGui()) echo ':';?>&nbsp;</label>
           </td>
           <td>
             <div id="attachmentLink" name="attachmentLink" dojoType="dijit.form.ValidationTextBox"
-               style="width: 350px;"
+               style="width: <?php echo (isNewGui())?'338':'350';?>px;"
                trim="true" maxlength="400" class="input"
                value="">
             </div>
@@ -103,7 +103,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
     <table>
       <tr>
         <td class="dialogLabel" >
-         <label for="attachmentDescription" ><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
+         <label for="attachmentDescription" ><?php echo i18n("colDescription");?>&nbsp;<?php if (!isNewGui()) echo ':';?>&nbsp;</label>
         </td>
         <td> 
          <textarea dojoType="dijit.form.Textarea" 
