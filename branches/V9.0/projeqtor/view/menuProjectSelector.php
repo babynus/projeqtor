@@ -119,7 +119,7 @@ if ($nbProj==0) {
    <input type="hidden" id="projectSelectorMode" value="Standard" />
    <div style="text-align:left;position:absolute; top:<?php echo (isNewGui())?'-2':'-2';?>px; left:281px; padding:0px;">
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:2px; height: 20px"
-         title="<?php echo i18n('searchProject');?>" iconClass="iconView">
+         title="<?php echo i18n('searchProject');?>" iconClass="iconSearch" >
          <script type="dojo/connect" event="onClick" args="evt">        
             showDetail('projectSelectorFiletering', false , 'Project',true,null,true);    
          </script>
@@ -141,7 +141,7 @@ if ($nbProj==0) {
 <input type="hidden" id="projectSelectorMode" value="Filtering" />
    <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:-1px; height: 20px"
-         title="<?php echo i18n('searchProject');?>" iconClass="iconView">
+         title="<?php echo i18n('searchProject');?>" iconClass="iconSearch">
          <script type="dojo/connect" event="onClick" args="evt">        
             showDetail('projectSelectorFiletering', false , 'Project',false,null,true);    
          </script>
@@ -165,7 +165,7 @@ name="projectSelectorFiletering"
 	<input type="hidden" id="projectSelectorMode" value="Filtering" />
    <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:-1px; height: 20px"
-         title="<?php echo i18n('searchProject');?>" iconClass="iconView">
+         title="<?php echo i18n('searchProject');?>" iconClass="iconSearch">
          <script type="dojo/connect" event="onClick" args="evt">        
             showDetail('projectSelectorFiletering', false , 'Project',false,null,true);    
          </script>

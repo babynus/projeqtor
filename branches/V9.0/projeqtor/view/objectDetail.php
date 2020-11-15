@@ -4589,7 +4589,7 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
   echo '<table width="100%">';
   echo '<tr>';
   if (!$print) {
-    echo '<td class="attachmentHeader smallButtonsGroup" style="width:10%">';
+    echo '<td class="attachmentHeader smallButtonsGroup" style="width:5%">';
     if ($obj->id!=null and !$print and $canUpdate) {
       echo '<a onClick="addAttachment(\'file\');" title="'.i18n('addAttachment').'"> '.formatSmallButton('Add').'</a>';
       echo '<a onClick="addAttachment(\'link\');" title="'.i18n('addHyperlink').'" > '.formatSmallButton('Link').'</a>';
@@ -4608,7 +4608,7 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
       $updateDate=null;
       echo '<tr>';
       if (!$print) {
-        echo '<td class="attachmentData smallButtonsGroup" style="width:10%"">';
+        echo '<td class="attachmentData smallButtonsGroup" style="width:5%"">';
         if ($attachment->fileName and $attachment->subDirectory and !$print) {
           echo '<a href="../tool/download.php?class=Attachment&id='.htmlEncode($attachment->id).'"';
           echo ' target="printFrame" title="'.i18n('helpDownload').'">'.formatSmallButton('Download').'</a>';
@@ -4819,11 +4819,11 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
       echo '</td>';
       echo '<td class="linkData" '.$goto.' style="width:'.(($classLink)?'65':'55').'%">';
       
+      echo formatCommentThumb($link->comment);
       echo (get_class($linkObj)=='DocumentVersion')?htmlEncode($linkObj->fullName):htmlEncode($linkObj->name);
       
       echo formatUserThumb($userId, $userName, 'Creator');
       echo formatDateThumb($creationDate, null);
-      echo formatCommentThumb($link->comment);
       
       echo '</td>';
       $idStatus='idStatus';
