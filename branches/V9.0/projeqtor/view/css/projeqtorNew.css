@@ -1255,3 +1255,7 @@ select option:checked {
 .ProjeQtOrNewGui .labelPadding {
 	padding-right: 4px;
 }
+.ProjeQtOrNewGui .dijitTextArea {
+	padding: 5px 8px !important;
+	line-height:18px;
+} 

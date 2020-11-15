@@ -1547,7 +1547,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                </td><td style="vertical-align: top">
                <button id="otherVersionDetailButton" dojoType="dijit.form.Button" showlabel="false"
                  title="<?php echo i18n('showDetail')?>"
-                 iconClass="iconView">
+                 iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                  <script type="dojo/connect" event="onClick" args="evt">
                    showDetailOtherVersion();
                  </script>
@@ -1600,7 +1600,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                </td><td style="vertical-align: top">
                <button id="otherClientDetailButton" dojoType="dijit.form.Button" showlabel="false"
                  title="<?php echo i18n('showDetail')?>"
-                 iconClass="iconView">
+                 iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                  <script type="dojo/connect" event="onClick" args="evt">
                    showDetailOtherClient();
                  </script>
@@ -1746,7 +1746,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                 </td><td style="vertical-align: top">
                   <button id="approverIdDetailButton" dojoType="dijit.form.Button" showlabel="false"
                           title="<?php echo i18n('showDetail')?>"
-                          iconClass="iconView">
+                          iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                     <script type="dojo/connect" event="onClick" args="evt">
                       showDetailApprover();
                     </script>
@@ -2220,7 +2220,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                </td><td style="vertical-align: top">
                <button id="dependencyDetailButton" dojoType="dijit.form.Button" showlabel="false"
                  title="<?php echo i18n('showDetail')?>"
-                 iconClass="iconView">
+                 iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                  <script type="dojo/connect" event="onClick" args="evt">
                     showDetailDependency();
                  </script>

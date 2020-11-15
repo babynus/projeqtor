@@ -173,7 +173,7 @@
                  <?php htmlDrawOptionForReference('idProject', null, null, false);?>
                 </select>
                 <button id="projectButton_multiple" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idProject",0); 
                   </script>
@@ -195,7 +195,7 @@
                  <?php htmlDrawOptionForReference($type, null, null, false);?>
                 </select>
                 <button id="typeButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail($type,0); 
                   </script>
@@ -214,7 +214,7 @@
                  <?php htmlDrawOptionForReference('idUser', null, null, false);?>
                 </select>
                 <button id="userButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idUser",0); 
                   </script>
@@ -233,7 +233,7 @@
                  <?php htmlDrawOptionForReference('idContact', null, null, false);?>
                 </select>
                 <button id="contactButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idContact",0); 
                   </script>
@@ -252,7 +252,7 @@
                  <?php htmlDrawOptionForReference('idClient', null, null, false);?>
                 </select>
                 <button id="clientButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                                 showDetail("idClient",0); 
                               </script>
@@ -273,7 +273,7 @@
                  <?php htmlDrawOptionForReference('idBusinessFeature', null, null, false);?>
                 </select>
                 <button id="businessFeatureButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                                 showDetail("idBusinessFeature",0); 
                               </script>
@@ -340,7 +340,7 @@
                  htmlDrawOptionForReference('idActivity', null, null, false,$critFld,$critVal);?>
                 </select>
                 <button id="activityButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                                 showDetail("idActivity",0); 
                               </script>
@@ -364,7 +364,7 @@
                  ?>
                 </select>
                 <button id="statusButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idStatus",0); 
                   </script>
@@ -456,7 +456,7 @@
                  <?php htmlDrawOptionForReference('idResolution', null, null, false);?>
                 </select>
                 <button id="resolutionButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                                 showDetail("idResolution",0); 
                   </script>
@@ -475,7 +475,7 @@
                  <?php htmlDrawOptionForReference('idResource', null, null, false);?>
                 </select>
                 <button id="responsibleButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idResource",0); 
                   </script>
@@ -494,7 +494,7 @@
                  <?php htmlDrawOptionForReference('idTargetVersion', null, null, false);?>
                 </select>
                 <button id="targetVersionButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idTargetVersion",0); 
                   </script>
@@ -513,7 +513,7 @@
                  <?php htmlDrawOptionForReference('idProduct', null, null, false);?>
                 </select>
                 <button id="productButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idProduct",0); 
                   </script>
@@ -532,7 +532,7 @@
                  <?php htmlDrawOptionForReference('idTargetProductVersion', null, null, false);?>
                 </select>
                 <button id="targetProductVersionButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idTargetProductVersion",0); 
                   </script>
@@ -551,7 +551,7 @@
                    <?php htmlDrawOptionForReference('idMilestone', null, null, false);?>
                   </select>
                   <button id="milestone" dojoType="dijit.form.Button" showlabel="false"
-                    title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                    title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                     <script type="dojo/connect" event="onClick" args="evt">
                       showDetail("idMilestone",0); 
                     </script>
@@ -570,7 +570,7 @@
                    <?php htmlDrawOptionForReference('idComponent', null, null, false);?>
                   </select>
                   <button id="idComponentBis" dojoType="dijit.form.Button" showlabel="false"
-                    title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                    title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                     <script type="dojo/connect" event="onClick" args="evt">
                       showDetail("idComponent",0); 
                     </script>
@@ -590,7 +590,7 @@
                  <?php htmlDrawOptionForReference('idComponentVersion', null, null, false);?>
                 </select>
                 <button id="targetComponentVersion" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idComponentVersion",0); 
                   </script>
@@ -934,7 +934,7 @@
                  <?php htmlDrawOptionForReference('idProfile', null, null, false);?>
                 </select>
                 <button id="profileButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idProfile",0); 
                   </script>
@@ -958,7 +958,7 @@
                  <?php htmlDrawOptionForReference('idTeam', null, null, false);?>
                 </select>
                 <button id="teamButton" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('showDetail');?>" iconClass="iconView">
+                  title="<?php echo i18n('showDetail');?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idTeam",0); 
                   </script>
