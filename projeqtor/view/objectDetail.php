@@ -1524,7 +1524,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if ($internalTable%$internalTableCols==0) {
           echo '</td></tr>'.$cr;
           echo '<tr class="detail">';
-          echo '<td class="'.$internalTableSpecial.'" style="text-align:right;width:'.$labelStyleWidth.';">';
+          echo '<td class="labelPadding '.$internalTableSpecial.'" style="text-align:right;width:'.$labelStyleWidth.';">';
           if ($internalTableRowsCaptions[$internalTableCurrentRow] and $arrTab['rows'][$internalTableCurrentRow]>0) {
             // ADD BY Marc TABARY - 2017-03-10 - NO ':' IF LABEL IS EMPTY
             $theLabelTab=htmlEncode($obj->getColCaption($internalTableRowsCaptions[$internalTableCurrentRow]));
@@ -1535,7 +1535,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
               echo '<label class="label '.$internalTableSpecial.'">'.$theLabelTab.'&nbsp;&nbsp;</label>';
             } else {
               // END ADD BY Marc TABARY - 2017-03-10 - NO ':' IF LABEL IS EMPTY
-              echo '<label class="label '.$internalTableSpecial.'">'.htmlEncode($obj->getColCaption($internalTableRowsCaptions[$internalTableCurrentRow])).'&nbsp;:&nbsp;</label>';
+              echo '<label class="label '.$internalTableSpecial.'">'.htmlEncode($obj->getColCaption($internalTableRowsCaptions[$internalTableCurrentRow])).'&nbsp;'.((isNewGui())?'':':&nbsp;').'</label>';
             }
           }
           echo '</td><td style="'.$alignForNumber.'width:90%;white-space:nowrap;'.(($print)?'padding-right:20px;':'').$internalTableBorder.'">';

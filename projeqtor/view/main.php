@@ -1393,6 +1393,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     }
   ?> 
   <div style="widht:100%" id="printPreview" dojoType="dijit.layout.ContentPane" region="center">
+    <?php if (isNewGui()) ?>
+  <div style="position:absolute;top:-10px;right:50px;z-index:9999">
+  XXXXXXXX
+  </div>
+  <?php ?>
     <table style="widht:100%">
       <tr>
         <td width="<?php echo $printWidth;?>px" align="right">
