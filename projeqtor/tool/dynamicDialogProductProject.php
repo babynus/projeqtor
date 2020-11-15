@@ -67,7 +67,7 @@ $pp=new ProductProject($idProductProject);
                <?php if (! $idProject) { ?>
 								<button id="productProjectProjectDetailButton"
 									dojoType="dijit.form.Button" showlabel="false"
-									title="<?php echo i18n('showDetail')?>" iconClass="iconView">
+									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
 									<script type="dojo/connect" event="onClick" args="evt">
                     showDetail('productProjectProject', 0, 'Project', false); // should not create project here 
                  </script>
@@ -88,7 +88,7 @@ $pp=new ProductProject($idProductProject);
                <?php if (!$idProduct) {?>
 								<button id="productProjectProductDetailButton"
 									dojoType="dijit.form.Button" showlabel="false"
-									title="<?php echo i18n('showDetail')?>" iconClass="iconView">
+									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
 									<script type="dojo/connect" event="onClick" args="evt">
                     var canCreate=("<?php echo securityGetAccessRightYesNo('menuProduct','create');?>"=="YES")?1:0;
                     showDetail('productProjectProduct', canCreate, 'Product', false);

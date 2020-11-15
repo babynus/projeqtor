@@ -193,7 +193,7 @@ if ($way=='composition' and $directAccessToList=='true') {
               <div style="position:relative">
               <button id="productVersionStructureDetailButtonProduct" dojoType="dijit.form.Button" showlabel="false"
                 title="<?php echo i18n('showDetail') . ' '. i18n('ProductVersion');?>"
-                iconClass="iconView">
+                iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                 <script type="dojo/connect" event="onClick" args="evt">
                 <?php $canCreate=securityGetAccessRightYesNo('menuProductVersion', 'create') == "YES"; ?>
                 showDetail('productVersionStructureListId', <?php echo $canCreate;?>, 'ProductVersion', true);
@@ -205,7 +205,7 @@ if ($way=='composition' and $directAccessToList=='true') {
               <div style="position:relative">
               <button id="productVersionStructureDetailButtonComponent" dojoType="dijit.form.Button" showlabel="false"
                 title="<?php echo i18n('showDetail'). ' '. i18n('Component')?>"
-                iconClass="iconView">
+                iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                 <script type="dojo/connect" event="onClick" args="evt">
                 <?php $canCreate=securityGetAccessRightYesNo('menuComponentVersion', 'create') == "YES"; ?>
                 showDetail('productVersionStructureListId', <?php echo $canCreate;?>, 'ComponentVersion', true);

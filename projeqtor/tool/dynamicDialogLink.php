@@ -44,10 +44,11 @@ if ($class and $id) {
          <table>
            <tr>
              <td class="dialogLabel"  >
-               <label for="linkRef2Type" ><?php echo i18n("linkType") ?>&nbsp;:&nbsp;</label>
+               <label for="linkRef2Type" ><?php echo i18n("linkType") ?>&nbsp;<?php echo (isNewGui())?'':':';?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" id="linkRef2Type" name="linkRef2Type" onchange="refreshLinkList();"
+               <?php if (isNewGui()) {?>  style="width:388px"<?php }?> 
                <?php echo autoOpenFilteringSelect();?>
                 class="input" value="">
                  <?php htmlDrawOptionForReference('idLinkable', null, $obj, true);?>
@@ -57,7 +58,7 @@ if ($class and $id) {
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="linkRef2Id" ><?php echo i18n("linkElement") ?>&nbsp;:&nbsp;</label>
+               <label for="linkRef2Id" ><?php echo i18n("linkElement") ?>&nbsp;<?php echo (isNewGui())?'':':';?>&nbsp;</label>
              </td>
              <td>
                <table><tr><td>
@@ -66,8 +67,8 @@ if ($class and $id) {
                </div>
                </td><td style="vertical-align: top">
                <button id="linkDetailButton" dojoType="dijit.form.Button" showlabel="false"
-                 title="<?php echo i18n('showDetail')?>"
-                 iconClass="iconView">
+                 title="<?php echo i18n('showDetail')?>" class="notButton notButtonRounded"
+                 iconClass="iconSearch iconSize22 imageColorNewGui">
                  <script type="dojo/connect" event="onClick" args="evt">
                     showDetailLink();
                  </script>
@@ -81,7 +82,7 @@ if ($class and $id) {
            <table>
            <tr>
                <td class="dialogLabel" >
-                   <label for="linkRef2Type" ><?php echo i18n("colIdVersion") ?>&nbsp;:&nbsp;</label>
+                   <label for="linkRef2Type" ><?php echo i18n("colIdVersion") ?>&nbsp;<?php echo (isNewGui())?'':':';?>&nbsp;</label>
                </td>
                <td>
                   <select dojoType="dijit.form.FilteringSelect" 
@@ -101,7 +102,7 @@ if ($class and $id) {
          <table>  
            <tr>
                <td class="dialogLabel" >
-                   <label for="linkRef2Type" ><?php echo i18n("colComment") ?>&nbsp;:&nbsp;</label>
+                   <label for="linkRef2Type" ><?php echo i18n("colComment") ?>&nbsp;<?php echo (isNewGui())?'':':';?>&nbsp;</label>
                </td>
                <td>
                    <textarea dojoType="dijit.form.Textarea"
@@ -117,7 +118,15 @@ if ($class and $id) {
                
              </td>     
           <td>
-             <input dojoType="dijit.form.CheckBox" name="copyLinksofLinked" id="copyLinksofLinked" checked=false />
+            <?php if (isNewGui()) {?>
+            <div  id="copyLinksofLinkedSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" 
+          	   value="off" leftLabel="" rightLabel="" style="width:10px;position:relative; left:0px;top:2px;z-index:99;" >
+          	  <script type="dojo/method" event="onStateChanged" >
+	             dijit.byId("copyLinksofLinked").set("checked",(this.value=="on")?true:false);
+	            </script>
+          	</div>
+          	<?php }?>
+             <input dojoType="dijit.form.CheckBox" name="copyLinksofLinked" id="copyLinksofLinked" checked=false <?php if (isNewGui()) {?>style="display:none;"<?php }?>/>
              <label style="float:none" for="copyLinksofLinked" ><?php echo i18n("copyLinkFromOriginalElement") ?></label>
           </td>
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>

@@ -122,7 +122,7 @@ if(strpos($selectedProject, ",")){
 	             <td style="vertical-align: top">
 	               <button id="testCaseRunTestCaseDetailButton" dojoType="dijit.form.Button" showlabel="false"
 	                 title="<?php echo i18n('showDetail');?>"
-	                 iconClass="iconView">
+	                 iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                    <?php $createRight=(securityGetAccessRightYesNo('menuTestCase', 'create')=='YES')?'1':'0';?>
 	                 <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("testCaseRunTestCaseList", "<?php echo $createRight;?>","TestCase",true); 
@@ -195,7 +195,7 @@ if(strpos($selectedProject, ",")){
 	                   $createRight=(securityGetAccessRightYesNo('menuTicket', 'create')=='YES')?'1':'0';?>
                    <button id="testCaseRunTicketDetailButton" dojoType="dijit.form.Button" showlabel="false"
 	                   title="<?php echo i18n('showDetail');?>"
-	                   iconClass="iconView">	                   
+	                   iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">	                   
 	                   <script type="dojo/connect" event="onClick" args="evt">
                       showDetail("testCaseRunTicket", "<?php echo $createRight;?>","Ticket"); 
                    </script>

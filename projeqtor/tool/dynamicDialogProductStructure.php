@@ -117,7 +117,7 @@ if ($way=='composition') {
               <div style="position:relative">
               <button id="productStructureDetailButtonProduct" dojoType="dijit.form.Button" showlabel="false"
                 title="<?php echo i18n('showDetail') . ' '. i18n('Product');?>"
-                iconClass="iconView">
+                iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                 <script type="dojo/connect" event="onClick" args="evt">
                 <?php if (!$canCreateProduct) $canCreateProduct=0;?>
                 showDetail('productStructureListId', <?php echo $canCreateProduct;?>, 'Product', true);
@@ -129,7 +129,7 @@ if ($way=='composition') {
               <div style="position:relative">
               <button id="productStructureDetailButtonComponent" dojoType="dijit.form.Button" showlabel="false"
                 title="<?php echo i18n('showDetail'). ' '. i18n('Component')?>"
-                iconClass="iconView">
+                iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                 <script type="dojo/connect" event="onClick" args="evt">
                 <?php if (!$canCreateComponent) $canCreateComponent=0;?>
                 showDetail('productStructureListId', <?php echo $canCreateComponent;?>, 'Component', true);

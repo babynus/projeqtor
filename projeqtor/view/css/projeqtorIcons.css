@@ -515,7 +515,7 @@
 .ProjeQtOrFlatGreen .iconButtonDownload16 { background-image: url(customIcons/green/iconDownload.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconButtonDownload16 { background-image: url(customIcons/grey/iconDownload.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonDownload16 { background-image: url(customIcons/red/iconDownload.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconButtonDownload16 { background-image: url(customIcons/new/iconDownload.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonDownload { background-image: url(customIcons/new/iconDownload.svg);  background-repeat: no-repeat; }
 
 .ProjeQtOrNewGui .iconButtonEdit { background-image: url(customIcons/new/iconEdit.svg);  background-repeat: no-repeat; }
 
