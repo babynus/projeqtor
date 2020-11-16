@@ -658,6 +658,11 @@ animation: fadeIn ease 0.5s;
   -webkit-filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
    filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
 }
+.ProjeQtOrNewGui #buttonDiv div .iconSize32.cancelColorImage {
+  -webkit-filter: hue-rotate(0) saturate(100) brightness(100);
+   filter: hue-rotate(0) saturate(100) brightness(100);
+}
+
 .ProjeQtOrNewGui .menuBarItem:hover {
   -ms-transform: rotate(0deg) brightness(99%) !important; /* IE 9 */
   -webkit-transform: rotate(0deg) brightness(99%) !important; /* Chrome, Safari, Opera */

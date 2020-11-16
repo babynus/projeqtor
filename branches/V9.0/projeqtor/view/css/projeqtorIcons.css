@@ -440,7 +440,7 @@
 .ProjeQtOrFlatGreen .iconButtonEdit16 { background-image: url(customIcons/green/iconEdit.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconButtonEdit16 { background-image: url(customIcons/grey/iconEdit.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonEdit16 { background-image: url(customIcons/red/iconEdit.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconButtonEdit16 { background-image: url(customIcons/new/iconEdit.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonEdit16 { background-image: url(customIcons/new/iconEdit.svg) !important;  background-repeat: no-repeat; }
 
 .iconButtonClose16 { background-image: url(images/smallButtonClose.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 .iconButtonUnClose16 { background-image: url(images/smallButtonUnclose.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
@@ -454,14 +454,14 @@
 .ProjeQtOrFlatGrey .iconButtonAdd16 { background-image: url(customIcons/grey/iconAdd.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonAdd16 { background-image: url(customIcons/red/iconAdd.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonAdd16 { background-image: url(customIcons/new/iconAdd.svg);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconButtonAdd { background-image: url(customIcons/new/iconAdd.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonAdd { background-image: url(customIcons/new/iconAdd.svg) !important;  background-repeat: no-repeat; }
 
 .iconButtonAdd32 { background-image: url(images/buttonAdd32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonAdd32 { background-image: url(customIcons/blue/iconAdd.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconButtonAdd32 { background-image: url(customIcons/green/iconAdd.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconButtonAdd32 { background-image: url(customIcons/grey/iconAdd.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonAdd32 { background-image: url(customIcons/red/iconAdd.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconButtonAdd32 { background-image: url(customIcons/new/iconAdd.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonAdd32 { background-image: url(customIcons/new/iconAdd.svg) !important;  background-repeat: no-repeat; }
 
 .iconButtonArrowRight16 { background-image: url(images/smallButtonArrowRight.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonArrowRight16 { background-image: url(customIcons/blue/iconRight.png);  background-repeat: no-repeat; }
@@ -519,7 +519,7 @@
 .ProjeQtOrFlatRed .iconButtonDownload16 { background-image: url(customIcons/red/iconDownload.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonDownload { background-image: url(customIcons/new/iconDownload.svg);  background-repeat: no-repeat; }
 
-.ProjeQtOrNewGui .iconButtonEdit { background-image: url(customIcons/new/iconEdit.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonEdit { background-image: url(customIcons/new/iconEdit.svg) !important;  background-repeat: no-repeat; }
 
 .iconButtonLink16 { background-image: url(images/smallButtonLink.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonLink16 { background-image: url(customIcons/blue/iconLink.png);  background-repeat: no-repeat; }
@@ -540,7 +540,7 @@
 .ProjeQtOrFlatGreen .iconButtonRemove16 { background-image: url(customIcons/green/iconRemove.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconButtonRemove16 { background-image: url(customIcons/grey/iconRemove.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonRemove16 { background-image: url(customIcons/red/iconRemove.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconButtonRemove16 { background-image: url(customIcons/new/iconRemove.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonRemove16 { background-image: url(customIcons/new/iconRemove.svg) !important;  background-repeat: no-repeat; }
 
 .iconButtonRemove24 { background-image: url(images/mediumButtonRemove.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonRemove24 { background-image: url(customIcons/blue/iconRemove.png);  background-repeat: no-repeat; }
