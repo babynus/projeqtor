@@ -279,13 +279,6 @@ float: left;
 	color: var(--color-light-secondary);
 }
 
-.menu__breadcrumbs a:not(:last-child)::after {
-	content: '\f2ee';
-	font-family: 'Material';
-	display: inline-block;
-	padding: 0 0.5em;
-	color: var(--color-secondary);
-}
 
 .menu__breadcrumbs a:not(:last-child):hover::after,
 .menu__breadcrumbs a:not(:last-child):focus::after {
