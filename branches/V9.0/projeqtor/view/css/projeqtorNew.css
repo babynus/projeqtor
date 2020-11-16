@@ -1077,43 +1077,6 @@ animation: fadeIn ease 0.5s;
   	scrollbar-height: thin;
 }
 
-.ProjeQtOrNewGui .calendarRed32
-  { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrNewGui .calendarRed22
-  { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrNewGui .calendarRed16 
-  { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrNewGui .calendarWhite32 
-  { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrNewGui .calendarWhite22 
-  { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrNewGui .calendarWhite16 
-  { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrNewGui .calendarYellow32 
-  { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrNewGui .calendarYellow22 
-  { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrNewGui .calendarYellow16 
-  { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.ProjeQtOrNewGui .calendarRedUpdate32 
-  { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrNewGui .calendarRedUpdate22 
-  { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrNewGui .calendarRedUpdate16 
-  { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrNewGui .calendarWhiteUpdate32 
-  { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrNewGui .calendarWhiteUpdate22 
-  { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrNewGui .calendarWhiteUpdate16 
-  { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrNewGui .calendarYellowUpdate32 
-  { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrNewGui .calendarYellowUpdate22 
-  { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrNewGui .calendarYellowUpdate16 
-  { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .ProjeQtOrNewGui .iconNotification { background-image: url(customIcons/new/iconNotification.svg);  background-repeat: no-repeat;}
 

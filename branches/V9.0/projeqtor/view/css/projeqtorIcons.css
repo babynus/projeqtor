@@ -325,6 +325,8 @@
 .ProjeQtOrFlatRed .iconAssetCategory { background-image: url(customIcons/red/iconAssetCategory.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconAssetCategory { background-image: url(customIcons/new/iconAssetCategory.svg);  background-repeat: no-repeat; }
 
+.iconArrowShowHideMenu { background-image: url(images/iconArrowShowHideMenu.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 8px 16px !important;}
+
 .ProjeQtOrNewGui .iconHideMenuLeft { background-image: url(customIcons/new/iconHideMenuLeft.svg);  background-repeat: no-repeat;  }
 .ProjeQtOrNewGui .iconHideMenuRight{ background-image: url(customIcons/new/iconHideMenuRight.svg);  background-repeat: no-repeat;  }
 
@@ -595,15 +597,37 @@
 
 /* C */
 
-
-
-
 .iconCalendar { background-image: url(images/iconCalendar32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconCalendar { background-image: url(customIcons/blue/iconCalendar.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconCalendar { background-image: url(customIcons/green/iconCalendar.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconCalendar { background-image: url(customIcons/grey/iconCalendar.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconCalendar { background-image: url(customIcons/red/iconCalendar.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconCalendar { background-image: url(customIcons/new/iconCalendar.svg);  background-repeat: no-repeat; }
+
+.calendarRed { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; }
+.calendarYellow { background-image: url(images/calendarYellow32.png);  background-repeat: no-repeat;}
+.calendarWhite { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; }
+.calendarRedUpdate { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; }
+.calendarYellowUpdate { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; }
+.calendarWhiteUpdate { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .calendarRed, .ProjeQtOrFlatRed .calendarRed, .ProjeQtOrFlatGreen .calendarRed, .ProjeQtOrFlatGrey .calendarRed 
+  { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .calendarWhite, .ProjeQtOrFlatRed .calendarWhite, .ProjeQtOrFlatGreen .calendarWhite, .ProjeQtOrFlatGrey .calendarWhite 
+  { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .calendarYellow, .ProjeQtOrFlatRed .calendarYellow, .ProjeQtOrFlatGreen .calendarYellow, .ProjeQtOrFlatGrey .calendarYellow 
+  { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatBlue .calendarRedUpdate, .ProjeQtOrFlatRed .calendarRedUpdate, .ProjeQtOrFlatGreen .calendarRedUpdate, .ProjeQtOrFlatGrey .calendarRedUpdate 
+  { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .calendarWhiteUpdate, .ProjeQtOrFlatRed .calendarWhiteUpdate, .ProjeQtOrFlatGreen .calendarWhiteUpdate, .ProjeQtOrFlatGrey .calendarWhiteUpdate 
+  { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .calendarYellowUpdate, .ProjeQtOrFlatRed .calendarYellowUpdate, .ProjeQtOrFlatGreen .calendarYellowUpdate, .ProjeQtOrFlatGrey .calendarYellowUpdate 
+  { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .calendarRed { background-image: url(images/calendarRedFlat.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .calendarWhite { background-image: url(images/calendarWhiteFlat.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .calendarYellow { background-image: url(images/calendarYellowFlat.png);  background-repeat: no-repeat; ;}
+.ProjeQtOrNewGui .calendarRedUpdate { background-image: url(images/calendarRedUpdateFlat.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .calendarWhiteUpdate { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .calendarYellowUpdate { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat;}
 
 .iconCalendarDefinition { background-image: url(images/iconCalendarDefinition32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconCalendarDefinition { background-image: url(customIcons/blue/iconCalendarDefinition.png);  background-repeat: no-repeat; }
@@ -1091,12 +1115,16 @@
 .ProjeQtOrFlatRed .iconFeasibility { background-image: url(customIcons/red/iconFeasibility.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconFeasibility { background-image: url(customIcons/new/iconFeasibility.svg);  background-repeat: no-repeat; }
 
-.iconFilter { background-image: url(images/iconFilter32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconFilter { background-image: url(customIcons/blue/iconFilter.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconFilter { background-image: url(customIcons/green/iconFilter.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconFilter { background-image: url(customIcons/grey/iconFilter.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconFilter { background-image: url(customIcons/red/iconFilter.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconFilter { background-image: url(customIcons/new/iconFilter.svg);  background-repeat: no-repeat; }
+.dijitButtonIcon.iconFilter { background-image: url(images/iconFilter32.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
+.dijitButtonIcon.iconActiveFilter { background-image: url(images/iconActiveFilter.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
+.ProjeQtOrFlatBlue .dijitButtonIcon.iconFilter { background-image: url(customIcons/blue/iconFilter.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
+.ProjeQtOrFlatBlue .dijitButtonIcon.iconActiveFilter { background-image: url(customIcons/blue/iconActiveFilter.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
+.ProjeQtOrFlatGreen .dijitButtonIcon.iconFilter { background-image: url(customIcons/green/iconFilter.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
+.ProjeQtOrFlatGreen .dijitButtonIcon.iconActiveFilter { background-image: url(customIcons/green/iconActiveFilter.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
+.ProjeQtOrFlatGrey .dijitButtonIcon.iconFilter { background-image: url(customIcons/grey/iconFilter.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
+.ProjeQtOrFlatGrey .dijitButtonIcon.iconActiveFilter { background-image: url(customIcons/grey/iconActiveFilter.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
+.ProjeQtOrFlatRed .dijitButtonIcon.iconFilter { background-image: url(customIcons/red/iconFilter.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
+.ProjeQtOrFlatRed .dijitButtonIcon.iconActiveFilter { background-image: url(customIcons/red/iconActiveFilter.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
 .ProjeQtOrNewGui .dijitButtonIcon.iconFilter { background-image: url(customIcons/new/iconFilter.svg);  background-repeat: no-repeat; width:24px;background-size : 24px}
 .ProjeQtOrNewGui .dijitButtonIcon.iconActiveFilter { background-image: url(customIcons/new/iconActiveFilter.svg);  background-repeat: no-repeat; width:24px;background-size : 24px}
 
@@ -1900,11 +1928,11 @@
 .ProjeQtOrNewGui .iconPluginManagement { background-image: url(customIcons/new/iconPluginManagement.svg);  background-repeat: no-repeat;}
 
 .iconPlgInstallAuto32 { background-image: url(iconPlgInstallAuto32.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatBlue .iconPluginManagement { background-image: url(customIcons/blue/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
-.ProjeQtOrFlatGreen .iconPluginManagement { background-image: url(customIcons/green/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
-.ProjeQtOrFlatGrey .iconPluginManagement { background-image: url(customIcons/grey/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
-.ProjeQtOrFlatRed .iconPluginManagement { background-image: url(customIcons/red/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
-.ProjeQtOrNewGui .iconPluginManagement { background-image: url(customIcons/new/iconPluginInstallAuto.svg);  background-repeat: no-repeat;}
+.ProjeQtOrFlatBlue .iconPlgInstallAuto { background-image: url(customIcons/blue/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGreen .iconPlgInstallAuto { background-image: url(customIcons/green/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGrey .iconPlgInstallAuto { background-image: url(customIcons/grey/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatRed .iconPlgInstallAuto { background-image: url(customIcons/red/iconPlgInstallAuto.png);  background-repeat: no-repeat;}
+.ProjeQtOrNewGui .iconPlgInstallAuto { background-image: url(customIcons/new/iconPluginInstallAuto.svg);  background-repeat: no-repeat;}
 
 .iconPortfolioPlanning { background-image: url(images/iconPortfolioPlanning32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconPortfolioPlanning { background-image: url(customIcons/blue/iconPortfolioPlanning.png);  background-repeat: no-repeat; }
@@ -2105,19 +2133,19 @@
 .ProjeQtOrFlatRed .iconQuestionType { background-image: url(customIcons/red/iconQuestionType.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconQuestionType { background-image: url(customIcons/new/iconQuestionType.svg);  background-repeat: no-repeat; }
 
-.iconQuotation32 { background-image: url(images/iconClientQuotation32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconQuotation32 { background-image: url(customIcons/blue/iconClientQuotation.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconQuotation32 { background-image: url(customIcons/green/iconClientQuotation.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconQuotation32 { background-image: url(customIcons/grey/iconClientQuotation.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconQuotation32 { background-image: url(customIcons/red/iconClientQuotation.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconQuotation32 { background-image: url(customIcons/new/iconClientQuotation.svg);  background-repeat: no-repeat; }
+.iconQuotation { background-image: url(images/iconClientQuotation32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconQuotation { background-image: url(customIcons/blue/iconClientQuotation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconQuotation { background-image: url(customIcons/green/iconClientQuotation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconQuotation { background-image: url(customIcons/grey/iconClientQuotation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconQuotation { background-image: url(customIcons/red/iconClientQuotation.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconQuotation { background-image: url(customIcons/new/iconClientQuotation.svg);  background-repeat: no-repeat; }
 
-.iconQuotationType32 { background-image: url(images/iconClientQuotationType32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconQuotationType32 { background-image: url(customIcons/blue/iconClientQuotationType.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconQuotationType32 { background-image: url(customIcons/green/iconClientQuotationType.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconQuotationType32 { background-image: url(customIcons/grey/iconClientQuotationType.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconQuotationType32 { background-image: url(customIcons/red/iconClientQuotationType.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconQuotationType32 { background-image: url(customIcons/new/iconClientQuotationType.svg);  background-repeat: no-repeat; }
+.iconQuotationType { background-image: url(images/iconClientQuotationType32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconQuotationType { background-image: url(customIcons/blue/iconClientQuotationType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconQuotationType { background-image: url(customIcons/green/iconClientQuotationType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconQuotationType { background-image: url(customIcons/grey/iconClientQuotationType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconQuotationType { background-image: url(customIcons/red/iconClientQuotationType.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconQuotationType { background-image: url(customIcons/new/iconClientQuotationType.svg);  background-repeat: no-repeat; }
 
 
 
@@ -2855,38 +2883,12 @@
 
 
 
-
 /* =============================================================================== */
 /* A faire ou pas...                                                                      
 /* =============================================================================== */
 
 /*
 .iconButtonExchangeArrow16 { background-image: url(images/smallButtonExchangeArrow.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
-
-.calendarRed32 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarRed22 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarRed16 { background-image: url(images/calendarRed32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.calendarYellow32 { background-image: url(images/calendarYellow32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarYellow22 { background-image: url(images/calendarYellow32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarYellow16 { background-image: url(images/calendarYellow32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.calendarWhite32 { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarWhite22 { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarWhite16 { background-image: url(images/calendarWhite32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.calendarRedUpdate32 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarRedUpdate22 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarRedUpdate16 { background-image: url(images/calendarRedUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.calendarYellowUpdate32 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarYellowUpdate22 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarYellowUpdate16 { background-image: url(images/calendarYellowUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.calendarWhiteUpdate32 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.calendarWhiteUpdate22 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.calendarWhiteUpdate16 { background-image: url(images/calendarWhiteUpdate32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
 
 IconSum existante
 .iconSum16 { background-image: url(images/iconSum.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
@@ -2901,7 +2903,6 @@ IconAdd existante
 .iconAdd { background-image: url(images/iconSum.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
 .iconAdd { background-image: url(images/iconAdd.png); background-repeat: no-repeat; width: 20px; height: 20px; background-position:center center; background-size: 16px 16px}
 
-.iconArrowShowHideMenu16 { background-image: url(images/iconArrowShowHideMenu.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 8px 16px !important;}
 
 .iconTranslation32 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconTranslation22 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}

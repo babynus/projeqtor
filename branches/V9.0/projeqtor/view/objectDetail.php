@@ -2602,7 +2602,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '<div id="'.$col.'ButtonGoto" ';
           echo ' title="'.i18n('showDirectAccess').'" style="float:right;margin-right:3px;'.$specificStyleWithoutCustom.'"';
           echo ' class="roundedButton  generalColClass '.$col.'Class">';
-          echo '<div class="iconGoto" ';
+          echo '<div class="iconGoto iconSize16" ';
           $jsFunction="var sel=dijit.byId('$fieldId');"."if (sel && trim(sel.get('value'))) {"." gotoElement('".$comboClass."','$val');"."} else {"." showAlert(i18n('cannotGoto'));"."}";
           echo ' onclick="'.$jsFunction.'"';
           echo '></div>';
@@ -2614,7 +2614,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo ' class="roundedButton generalColClass '.$col.'Class">';
           
           if (isNewGui()) {
-            echo '<div class="iconHideStream22"  style="opacity:40%;margin-top:5px;margin-left:-10px;"';
+            echo '<div class="iconHideStream22 iconHideStream iconSize22"  style="opacity:40%;margin-top:5px;margin-left:-10px;"';
             echo ' onMouseOver="event.preventDefault();showIconViewSubMenu(\''.$col.'\');"></div>';
           } else {
             echo '<div class="iconView iconSize16 imageColorNewGui" ';

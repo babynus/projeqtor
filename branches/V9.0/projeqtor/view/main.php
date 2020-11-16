@@ -840,7 +840,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
    <div id="hideMenuBarShowButton" style="cursor:pointer;position:absolute; right:-22px; bottom:2px;z-index:949;display:<?php echo (isset($showModuleScreen))?"none":"block";?>;">
 		  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarShow" title="" >
 		    <span style='top:0px;display:inline-block;width:22px;height:22px;'>
-		      <div class='iconHideStream22' style='' >&nbsp;</div>
+		      <div class='iconHideStream22 iconHideStream iconSize22' style='' >&nbsp;</div>
 		    </span>
 		  </a>
 		</div>
@@ -850,7 +850,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 	<?php if (! isset($showModuleScreen)) {?>
 	  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarShow" title="" >
 	    <span style='top:0px;display:inline-block;width:22px;height:22px;'>
-	      <div class='iconHideStream22' style='' >&nbsp;</div>
+	      <div class='iconHideStream22 iconHideStream iconSize22' style='' >&nbsp;</div>
 	    </span>
 	  </a>
 	<?php }?>  
