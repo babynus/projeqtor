@@ -137,7 +137,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (122,'menuEmploymentContractEndReason',119,219,30),
 (123,'menuLeavesSystemHabilitation',119,220,40),
 (124,'menuGlobalParameter',8,18,15),
-(125,'menuUserParameter',8,10,20),
+(125,'menuUserParameter',8,20,20),
 (126,'menuAdmin',8,92,5),
 (127,'navParameter',8,0,40),
 (128,'navEnvironmentalParameter',8,0,50),
