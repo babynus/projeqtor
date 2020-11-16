@@ -141,6 +141,7 @@
     // create breadcrumbs
     if( self.options.breadcrumbsCtrl ) {
       this.breadcrumbsCtrl = document.createElement('div');
+      this.breadScrumLeft=dojo.byId('breadScrumb');
       this.breadcrumbsCtrl.className = 'menu__breadcrumbs';
       this.breadcrumbsCtrl.setAttribute('style', 'float:left;');
       this.el.insertBefore(this.breadcrumbsCtrl, this.el.firstChild);
@@ -156,6 +157,7 @@
 
       // Create current submenu breadcrumb
       if (self.current_menu != 0) {
+        console.log('init');
         this._addBreadcrumb(self.current_menu);
         this.breadCrumbs = true;
       }
@@ -214,12 +216,6 @@
       });
     }
     
-    // back navigation
-    if( this.options.backCtrl ) {
-      this.backCtrl.addEventListener('click', function() {
-        self._back();
-      });
-    }
   };
 
   MLMenu.prototype._openSubMenu = function(subMenuEl, clickPosition, subMenuName) {
@@ -251,8 +247,16 @@
     this._menuIn(backMenu);
 
     // remove last breadcrumb
-    if( this.options.breadcrumbsCtrl ) {
-      this.breadcrumbsCtrl.removeChild(this.breadcrumbsCtrl.lastElementChild);
+    if( this.breadScrumLeft ) {
+      this.breadScrumLeft.removeChild(this.breadScrumLeft.lastElementChild);
+    }
+    if(this.breadcrumbsCtrl){
+      var idx = this.menus.indexOf(backMenu),
+      name= idx ? this.menusArr[idx].name : this.options.initialBreadcrumb;
+      var newBc = document.createElement('a');
+      newBc.href = '#'; 
+      newBc.innerHTML = name;
+      this.breadcrumbsCtrl.replaceChild(newBc,this.breadcrumbsCtrl.firstChild);
     }
   };
 
@@ -316,17 +320,14 @@
 
           // control back button and breadcrumbs navigation elements
           if( !isBackNavigation ) {
-            // show back button
-            if( self.options.backCtrl ) {
-              classie.remove(self.backCtrl, 'menu__back--hidden');
-            }
-            
             // add breadcrumb
             self._addBreadcrumb(nextMenuIdx);
           }
-          else if( self.current_menu === 0 && self.options.backCtrl ) {
-            // hide back button
-            classie.add(self.backCtrl, 'menu__back--hidden');
+          else if( self.current_menu === 0 && self.breadcrumbsCtrl) {
+            var buttonBack=self.breadcrumbsCtrl.querySelector('.dijitButtonIcon ');
+            if(buttonBack){
+              self.breadcrumbsCtrl.removeChild(buttonBack);
+            }
           }
 
           // we can navigate again..
@@ -355,7 +356,7 @@
     var iconClass=  (idx )? ''+this.menusArr[idx].id : 'Home';
     iconClass= (idx)? iconClass.substr(3) : iconClass;
     
-    var breadScrumLeft=dojo.byId('breadScrumb');
+    
     var divBcl = document.createElement('div');
     if(iconClass=='Plan'){
       iconClass='Planning';
@@ -371,41 +372,38 @@
     var name= idx ? this.menusArr[idx].name : this.options.initialBreadcrumb;
     divBcl.setAttribute('id', 'button'+name);
     divBcl.setAttribute('title', name);
-    breadScrumLeft.appendChild(divBcl);
+    this.breadScrumLeft.appendChild(divBcl);
     
     
     var bc = document.createElement('a');
-    bc.href = '#'; // make it focusable
+    bc.href = '#'; 
     bc.innerHTML = name;
     
-    this.breadcrumbsCtrl.appendChild(bc);
+
+    if(this.breadcrumbsCtrl.firstChild ){
+      this.breadcrumbsCtrl.replaceChild(bc,this.breadcrumbsCtrl.firstChild);
+      var newPreviousB=document.createElement('div');
+      newPreviousB.setAttribute('class', 'dijitButtonIcon dijitButtonIconPrevious iconBreadSrumbTop');
+      newPreviousB.setAttribute('title', i18n('previous'));
+      newPreviousB.setAttribute('style','margin-top: 10px;');
+      var oldPreviousB=this.breadcrumbsCtrl.querySelector('.dijitButtonIcon ');
+      if(oldPreviousB){
+        this.breadcrumbsCtrl.replaceChild(newPreviousB,oldPreviousB);
+      }else{
+        this.breadcrumbsCtrl.firstChild.insertAdjacentElement('afterend', newPreviousB);
+      }
+      // add event back
+      var self = this;
+      newPreviousB.addEventListener('click', function(ev) {
+        console.log('yes');
+        ev.preventDefault();
+        self._back();
+      });
+    }else{
+      this.breadcrumbsCtrl.appendChild(bc);
+    }
     
     var self = this;
-    bc.addEventListener('click', function(ev) {
-      ev.preventDefault();
-      // do nothing if this breadcrumb is the last one in the list of breadcrumbs
-      if( !bc.nextSibling || self.isAnimating ) {
-        return false;
-      }
-      self.isAnimating = true;
-      
-      // current menu slides out
-      self._menuOut();
-      // next menu slides in
-      var nextMenu = self.menusArr[idx].menuEl;
-      self._menuIn(nextMenu);
-
-      // remove breadcrumbs that are ahead
-      var siblNode;var siblingNode;
-      while (siblNode = divBcl.nextSibling) {
-        breadScrumLeft.removeChild(siblNode);
-      }
-      while (siblingNode = bc.nextSibling) {
-        self.breadcrumbsCtrl.removeChild(siblingNode);
-      }
-
-    }),
-    
     divBcl.addEventListener('click', function(ev) {
       ev.preventDefault();
       
@@ -420,24 +418,18 @@
       var nextMenu = self.menusArr[idx].menuEl;
       self._menuIn(nextMenu);
 
-      var siblNode;var siblingNode;
+      var siblNode;
+      //var siblingNode;
       while (siblNode = divBcl.nextSibling) {
-        breadScrumLeft.removeChild(siblNode);
+       console.log( self.breadScrumLeft);
+        self.breadScrumLeft.removeChild(siblNode);
       }
-      while (siblingNode = bc.nextSibling) {
-        self.breadcrumbsCtrl.removeChild(siblingNode);
-      }
+      self.breadcrumbsCtrl.replaceChild(bc,self.breadcrumbsCtrl.firstChild);
+
     });
     
   };
 
-  MLMenu.prototype._crawlCrumbs = function(currentMenu, menuArray) {
-    if (menuArray[currentMenu].backIdx != 0) {
-      this._crawlCrumbs(menuArray[currentMenu].backIdx, menuArray);
-    }
-    // create breadcrumb
-    this._addBreadcrumb(currentMenu);
-  }
 
   window.MLMenu = MLMenu;
 

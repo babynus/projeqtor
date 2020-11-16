@@ -488,6 +488,16 @@ html, body, #mainDiv,
 	
 }
 
+.iconBreadSrumbTop{
+	padding-top:2px;
+	padding-bottom:1px;
+	margin-top:20px;
+	margin-left:5px;
+	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  	filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  	background-color: transparent;
+} 
+
 .iconBreadSrumbSelect{
 	border-right: 2px solid var(--color-secondary)!important;
     padding-right: 3px;
@@ -504,7 +514,7 @@ html, body, #mainDiv,
     text-color : var(--color-toolbar-text) !important;
     background:var(--color-menu);
 }
-.hideStreamNewGui:hover, .hideStreamNewGuiTopBar:hover, .iconBreadSrumb:hover {
+.hideStreamNewGui:hover, .hideStreamNewGuiTopBar:hover, .iconBreadSrumb:hover, .iconBreadSrumbTop:hover {
 	cursor:pointer;
 }
 
