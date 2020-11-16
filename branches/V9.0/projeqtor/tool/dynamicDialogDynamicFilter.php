@@ -130,7 +130,7 @@ Security::checkValidClass($objectClass);
              <?php  if (in_array($filterCriteria->sqlOperator, array('IN', 'NOT IN'))) { ?>
                     <button style="display:block;margin-left:<?php echo (isNewGui())?'0':'-1';?>px; padding-right:2px;position:relative;top:-2px;" id="idButtonCombo<?php echo $cpt;?>" dojoType="dijit.form.Button" showlabel="false"
                             title="<?php echo i18n('showDetail')?>" class="resetMargin notButton notButtonRounded"
-                            iconClass="iconSearch iconSize22 imageColorNewGui">
+                            iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui">
                       <script type="dojo/connect" event="onClick" args="evt">
                          var nb = <?php echo $cpt;?>;
                          var fieldTarget = 'filterValueList'+nb;

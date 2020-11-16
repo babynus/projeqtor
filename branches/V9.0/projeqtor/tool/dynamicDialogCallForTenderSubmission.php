@@ -74,7 +74,7 @@ if (!$tender->expectedTenderDateTime) $tender->expectedTenderDateTime=$callForTe
                </select>
 								<button id="dialogCallForTenderSubmissionProviderDetailButton"
 									dojoType="dijit.form.Button" showlabel="false"
-									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
 									<script type="dojo/connect" event="onClick" args="evt">
                     <?php $canCreate=securityGetAccessRightYesNo('menuProvider', 'create')=="YES";?>
                     showDetail('dialogCallForTenderSubmissionProvider', <?php echo ($canCreate)?1:0;?>, 'Provider', true); 
@@ -94,7 +94,7 @@ if (!$tender->expectedTenderDateTime) $tender->expectedTenderDateTime=$callForTe
                </select>
 								<button id="dialogCallForTenderSubmissionContactDetailButton"
 									dojoType="dijit.form.Button" showlabel="false"
-									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
 									<script type="dojo/connect" event="onClick" args="evt">
                     showDetail('dialogCallForTenderSubmissionContact', 0, 'Contact', true); 
                  </script>

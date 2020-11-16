@@ -340,7 +340,7 @@ if (RequestHandler::isCodeSet('comboDetail')) {
          <table>
           <tr><td>
              <div class="roundedButtonSmall" style="width:22px;height:16px;border:0">
-               <div class="iconSize16 iconSearch generalColClass imageColorNewGui"
+               <div class="iconSize16 iconSearch iconSize16 generalColClass imageColorNewGui"
   	              title="<?php echo i18n('quickSearch')?>" style="width:24px;height:24px;cursor:pointer;vertical-align:text-bottom;margin-right:5px;"
                   onclick="quickSearchExecuteQuick();"
                 </div>

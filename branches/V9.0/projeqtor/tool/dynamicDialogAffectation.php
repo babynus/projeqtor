@@ -82,7 +82,7 @@ $objTeam=($obj)?get_class($obj):'';
                <td style="vertical-align: top">
                  <button id="affectationDetailButton" dojoType="dijit.form.Button" showlabel="false"
                    title="<?php echo i18n('showDetail')?>"
-                   iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+                   iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                    <script type="dojo/connect" event="onClick" args="evt">
                     var canCreate=("<?php echo securityGetAccessRightYesNo('menuProject','create');?>"=="YES")?1:0;
                     showDetail('affectationProject', canCreate , 'Project', false);
@@ -116,7 +116,7 @@ $objTeam=($obj)?get_class($obj):'';
                  <button id="affectationDetailButton" dojoType="dijit.form.Button" showlabel="false"
                    title="<?php echo i18n('showDetail')?>"
                    class="notButton notButtonRounded"
-	                 iconClass="iconSearch iconSize22 imageColorNewGui">
+	                 iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui">
                    <script type="dojo/connect" event="onClick" args="evt">
                     var canCreate=("<?php echo securityGetAccessRightYesNo('menuResource','create');?>"=="YES")?1:0;
                     <?php if ($type=="ResourceAll"){?>

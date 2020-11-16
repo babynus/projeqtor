@@ -58,7 +58,7 @@ if ($paramDirect=='YES') {
               <div style="position:relative">
               <button id="versionCompatibilityDetailButtonProduct" dojoType="dijit.form.Button" showlabel="false"
                 title="<?php echo i18n('showDetail') . ' '. i18n('ProductVersion');?>"
-                iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+                iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                 <script type="dojo/connect" event="onClick" args="evt">
                 <?php $canCreate=securityGetAccessRightYesNo('menuProductVersion', 'create') == "YES"; ?>
                 showDetail('versionCompatibilityListId', <?php echo $canCreate;?>, 'ProductVersion', true);
