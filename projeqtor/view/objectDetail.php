@@ -2541,7 +2541,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // BEGIN - ADD BY TABARY - TOOLTIP
         echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
-        if($col=='idBudgetItem' or $col=='idBusinessFeature'){
+        if($col=='idBudgetItem'){
           echo '<select dojoType="dijit.form.Select" class="dijitComboBox input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
           $fieldWidth+=13;
         }else{
@@ -2549,6 +2549,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         //echo ' labelType="html" spanLabel=true  ';
         echo '  style="width: '.($fieldWidth).'px;'.$specificStyle.'"';
+        if ($col=='idBusinessFeature') echo 'data-dojo-props="queryExpr: \'*${0}*\', autoComplete:false"';
         echo $name;
         // ADD BY Marc TABARY - 2017-02-24 - ORGANIZATION MANAGER
         if (get_class($obj)=='Resource' and $col=='idOrganization' and $val) {
