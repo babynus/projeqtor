@@ -489,9 +489,7 @@ html, body, #mainDiv,
 }
 
 .iconBreadSrumbTop{
-	padding-top:2px;
-	padding-bottom:1px;
-	margin-top:20px;
+	margin-top:6px;
 	margin-left:5px;
 	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   	filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));

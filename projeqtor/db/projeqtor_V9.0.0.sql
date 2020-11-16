@@ -136,7 +136,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (121,'menuEmploymentContractType',119,218,20),
 (122,'menuEmploymentContractEndReason',119,219,30),
 (123,'menuLeavesSystemHabilitation',119,220,40),
-(124,'menuGlobalParameter',8,18,10),
+(124,'menuGlobalParameter',8,18,15),
 (125,'menuUserParameter',8,10,20),
 (126,'menuAdmin',8,92,5),
 (127,'navParameter',8,0,40),
@@ -269,7 +269,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (255,'menuEmploymentContractType',133,218,20),
 (256,'menuEmploymentContractEndReason',133,219,30),
 (257,'menuLeavesSystemHabilitation',133,220,40),
-(258,'menuProjectParameter',8,19,5),
+(258,'menuProjectParameter',8,19,10),
 (300,'navPlugin',0,0,110),
 (301,'menuPluginManagement',300,136,100);
 

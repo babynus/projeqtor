@@ -261,6 +261,8 @@ float: left;
 }
 
 .menu__breadcrumbs a {
+	margin-top: 10px;
+    margin-left: 5px;
 	font-weight: bold;
 	display: inline-block;
 	cursor: pointer;
