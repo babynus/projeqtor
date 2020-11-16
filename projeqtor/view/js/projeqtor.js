@@ -657,9 +657,10 @@ function addMessage(msg) {
   msg = msg.replace("</div>", "");
   msg = msg.replace("</div>", "");
   var msgDiv =(isNewGui)? dojo.byId("messageDivNewGui"):dojo.byId("messageDiv");
+  if (isNewGui) {msg=msg.replace('- Email','<br/>Email');}
   if (msgDiv) {
-    msgDiv.innerHTML = "[" + getTime() + "] " + msg + "<br/>"
-        + msgDiv.innerHTML;
+    if (isNewGui)  msgDiv.innerHTML = "<table><tr><td style='white-space:nowrap;vertical-align:top;'>[" + getTime() + "]&nbsp;</td><td>" + msg + "</td></tr></table>" + msgDiv.innerHTML;
+    else msgDiv.innerHTML = "[" + getTime() + "] " + msg + "<br/>"+ msgDiv.innerHTML;
   }
 }
 
