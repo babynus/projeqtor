@@ -344,7 +344,7 @@ function formatDateThumb($creationDate,$updateDate,$float='right',$size=22,$addN
 	  $res.=' onMouseOver="showBigImage(null,null,this,\''.$title.'\');" onMouseOut="hideBigImage();"';
 	}
 	$res.='>';
-	$res.="<div class='calendar$color$addName$size calendar$color$addName iconSize$size' style=';width:".$size."px;height:".$size."px;".(($size==16)?'position:relative;top:4px;':'')."' >&nbsp;</div>";
+	$res.="<div class='calendar$color$addName$size calendar$color$addName iconSize$size cancelColorImage' style=';width:".$size."px;height:".$size."px;".(($size==16)?'position:relative;top:4px;':'')."' >&nbsp;</div>";
 	$res.='</a>';
 	
   $month=getMonthName(substr($date, 5,2),5);
