@@ -70,7 +70,7 @@ $idProduct=$vers->idProduct;
                <?php if (! $idProject) { ?>
 								<button id="versionProjectProjectDetailButton"
 									dojoType="dijit.form.Button" showlabel="false"
-									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
 									<script type="dojo/connect" event="onClick" args="evt">
                     showDetail('versionProjectProject', 0, 'Project', false); // should not create project here 
                  </script>
@@ -99,7 +99,7 @@ $idProduct=$vers->idProduct;
                <?php if (!$idVersion) {?>
 								<button id="versionProjectProductDetailButton"
 									dojoType="dijit.form.Button" showlabel="false"
-									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
 									<script type="dojo/connect" event="onClick" args="evt">
                     showDetail('versionProjectProduct', 0, 'Product', false); // should not create product here 
                  </script>
@@ -120,7 +120,7 @@ $idProduct=$vers->idProduct;
                <?php if (!$idVersion) {?>
 								<button id="versionProjectVersionDetailButton"
 									dojoType="dijit.form.Button" showlabel="false"
-									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+									title="<?php echo i18n('showDetail')?>" iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
 									<script type="dojo/connect" event="onClick" args="evt">
                     var canCreate=0;
                     if (canCreateArray['ProductVersion'] == "YES") {

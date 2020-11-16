@@ -143,7 +143,7 @@ if ($planningMode=='RECW') {
              <?php if($refType=="Meeting" || $refType=="PeriodicMeeting") {  ?>
              <td style="vertical-align: top">
                <button id="assignmentDetailButton" dojoType="dijit.form.Button" showlabel="false"
-                 title="<?php echo i18n('showDetail')?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+                 title="<?php echo i18n('showDetail')?>" iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                  <script type="dojo/connect" event="onClick" args="evt">
                     var canCreate=("<?php echo securityGetAccessRightYesNo('menuAffectable','create');?>"=="YES")?1:0;
                     showDetail('assignmentIdResource', canCreate ,'Affectable',false);

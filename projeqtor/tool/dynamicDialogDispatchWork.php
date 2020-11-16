@@ -171,17 +171,17 @@ foreach($arrayWork as $key=>$work) {
 <table width="100%">
  <tr>
    <td style="width: 90%;" align="center">
-     <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogDispatchWork').hide();">
+     <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogDispatchWork').hide();" class="mediumTextButton">
        <?php echo i18n("buttonCancel");?>
      </button>
-     <button id="dialogDispatchWorkSubmit" dojoType="dijit.form.Button" type="submit" 
+     <button id="dialogDispatchWorkSubmit" dojoType="dijit.form.Button" type="submit" class="mediumTextButton"
        onclick="protectDblClick(this);dispatchWorkSave();return false;" >
        <?php echo i18n("buttonOK");?>
      </button>
    </td>
    <td style="width:10%">
    <?php if (isNewGui()) {?>
-   <img class="roundedButtonSmall iconSize22 imageColorNewGui" src="css/customIcons/new/iconAdd.svg" onClick="addDispatchWorkLine('<?php echo Work::displayShortWorkUnit();?>');" title="<?php echo  i18n('addLine');?>" />
+   <img class="roundedButtonNoBorder imageColorNewGui iconSize22" src="css/customIcons/new/iconAdd.svg" onClick="addDispatchWorkLine('<?php echo Work::displayShortWorkUnit();?>');" title="<?php echo  i18n('addLine');?>" />
    <?php } else {?>
    <img class="roundedButtonSmall" src="css/images/smallButtonAdd.png" onClick="addDispatchWorkLine('<?php echo Work::displayShortWorkUnit();?>');" title="<?php echo  i18n('addLine');?>" />
    

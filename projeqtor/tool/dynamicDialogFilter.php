@@ -155,7 +155,7 @@ require_once "../tool/projeqtor.php";
                   <td style="position: absolute;<?php echo (isNewGui())?'top:118px;left:-21px;':'margin-top:-60px;margin-left:-2px;';?>">
                     <button style="display:none;" id="showDetailInFilter" dojoType="dijit.form.Button" showlabel="false"
                             title="<?php echo i18n('showDetail')?>" class="resetMargin notButton notButtonRounded"
-                            iconClass="iconSearch iconSize22 imageColorNewGui">
+                            iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui">
                       <script type="dojo/connect" event="onClick" args="evt">
                         var objectName = dijit.byId('showDetailInFilter').get('value');
                         if( objectName ){

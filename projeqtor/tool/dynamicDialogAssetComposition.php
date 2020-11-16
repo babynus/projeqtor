@@ -57,7 +57,7 @@ $object=new Asset($structureId);
               <div style="position:relative">
               <button id="assetStructureDetailButton" dojoType="dijit.form.Button" showlabel="false"
                 title="<?php echo i18n('showDetail'). ' '. i18n('Asset')?>"
-                iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+                iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                 <script type="dojo/connect" event="onClick" args="evt">
                 <?php if (!$canCreate) $canCreate=0;?>
                 showDetail('assetStuctureListId', <?php echo $canCreate;?>, 'Asset', true);

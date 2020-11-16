@@ -68,7 +68,7 @@ if ($class and $id) {
                </td><td style="vertical-align: top">
                <button id="linkDetailButton" dojoType="dijit.form.Button" showlabel="false"
                  title="<?php echo i18n('showDetail')?>" class="notButton notButtonRounded"
-                 iconClass="iconSearch iconSize22 imageColorNewGui">
+                 iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui">
                  <script type="dojo/connect" event="onClick" args="evt">
                     showDetailLink();
                  </script>
