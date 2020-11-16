@@ -98,20 +98,13 @@ class TicketMain extends SqlElement {
   
   // Define the layout that will be used for lists
   private static $_layout='
-    <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
-    <th field="nameProject" width="7%">${idProject}</th>
-    <th field="nameTicketType" width="7%" >${idTicketType}</th>
-    <th field="name" width="17%">${name}</th>
-    <th field="nameUser" formatter="thumbName22" width="10%">${issuer}</th>
-    <th field="colorNameUrgency" width="7%" formatter="colorNameFormatter">${idUrgency}</th>
-    <th field="colorNamePriority" width="7%" formatter="colorNameFormatter">${idPriority}</th>
-    <th field="colorNameStatus" width="7%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="actualDueDateTime" width="7%" formatter="dateTimeFormatter">${actualDueDateTime}</th>
-    <th field="nameTargetProductVersion" width="7%" >${idTargetProductVersion}</th>
-    <th field="nameResource" formatter="thumbName22" width="10%">${responsible}</th>
-    <th field="handled" width="3%" formatter="booleanFormatter" >${handled}</th>
-    <th field="done" width="3%" formatter="booleanFormatter" >${done}</th>
-    <th field="idle" width="3%" formatter="booleanFormatter" >${idle}</th>
+    <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
+    <th field="nameProject" width="15%">${idProject}</th>
+    <th field="nameTicketType" width="15%" >${idTicketType}</th>
+    <th field="name" width="25%">${name}</th>
+    <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
+    <th field="actualDueDateTime" width="10%" formatter="dateTimeFormatter">${actualDueDateTime}</th>
+    <th field="nameResource" formatter="thumbName22" width="15%">${responsible}</th>
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",

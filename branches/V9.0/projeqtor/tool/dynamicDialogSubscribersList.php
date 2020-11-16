@@ -59,7 +59,7 @@ echo '<table style="width:100%;height:100%;min-height:300px">';
 echo '<tr style="height:20px">';
 echo '<td style="position:relative;">';
 echo '<input dojoType="dijit.form.TextBox" id="subscriptionSubscribedSearch" class="input" style="width:230px" value="" onKeyUp="filterDnDList(\'subscriptionSubscribedSearch\',\'subscriptionSubscribed\',\'div\');" />';
-echo '<div style="position:absolute;right:4px;top:3px;" class="iconView"></div>';
+echo '<div style="position:absolute;right:4px;top:3px;" class="iconView iconSize16 imageColorNewGui"></div>';
 
 echo '</td></tr>';
 echo '<tr>';
