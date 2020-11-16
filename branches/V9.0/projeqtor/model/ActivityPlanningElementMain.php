@@ -609,7 +609,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       echo '<div id="' . $item . 'Button" ';
       echo ' title="' . i18n('showTickets') . '" style="float:right;margin-right:3px;"';
       echo ' class="roundedButton">';
-      echo '<div class="iconView" ';
+      echo '<div class="iconView iconSize16 imageColorNewGui" ';
       $jsFunction="showTickets('Activity',$this->refId);";
       echo ' onclick="' . $jsFunction . '"';
       echo '></div>';
