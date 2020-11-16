@@ -135,10 +135,10 @@ if (array_key_exists('isIE',$_REQUEST)) {
       <tr>
         <td colspan="2" align="center">
           <input type="hidden" id="dialogAttachmentAction">
-          <button dojoType="dijit.form.Button" type="button" id="dialogAttachmentCancel" onclick="dijit.byId('dialogAttachment').hide();">
+          <button dojoType="dijit.form.Button" type="button" id="dialogAttachmentCancel" onclick="dijit.byId('dialogAttachment').hide();" class="mediumTextButton">
             <?php echo i18n("buttonCancel");?>
           </button>
-          <button id="dialogAttachmentSubmit" dojoType="dijit.form.Button" type="submit"
+          <button id="dialogAttachmentSubmit" dojoType="dijit.form.Button" type="submit" class="mediumTextButton"
           <?php if ($isIE and $isIE<=9) {?>onclick="protectDblClick(this);saveAttachment();"<?php }?> >
             <?php echo i18n("buttonOK");?>
           </button>

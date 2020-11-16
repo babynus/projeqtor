@@ -727,7 +727,7 @@ function organizeButtons($nbButton=1) {
           .' iconClass="dijitButtonIcon dijitButtonIconExtraButtons" class="detailButton"'
  		      .' id="extraButtonsDetail" onClick="showExtraButtons(\'extraButtonsDetail\')" '
  		      .'></div>';
-			echo '<div class="statusBar" id="extraButtonsDetailDiv" style="display:none;position:absolute;width:36px;">';
+			echo '<div class="statusBar" id="extraButtonsDetailDiv" style="display:none;position:absolute;'.((isNewGui())?'':'width:36px;').'">';
 		} else {
 			echo '<div></div>';
 		}

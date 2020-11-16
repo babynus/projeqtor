@@ -57,7 +57,7 @@ if($provBill->taxPct > 0 ){
              <td style="vertical-align:top">
                <button id="providerTermDetailButton" dojoType="dijit.form.Button" showlabel="false"
                  title="<?php echo i18n('showDetail')?>"
-                 iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+                 iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                  <script type="dojo/connect" event="onClick" args="evt">
                     showDetail('linkProviderTerm', false, 'ProviderTerm', true);
                  </script>

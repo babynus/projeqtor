@@ -384,7 +384,7 @@ if($paramMailerType=='phpmailer'){
   					    <td style="vertical-align: top">
   					    <?php if ($displayComboButton and Security::checkValidAccessForUser(null, 'read', 'Affectable',null,false)) {?>
                  <button id="otherMailDetailButton" dojoType="dijit.form.Button" showlabel="false"
-                         style="display:<?php echo ($checOther=='true')?'block':'none';?>" title="<?php echo i18n('showDetail')?>" iconClass="iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
+                         style="display:<?php echo ($checOther=='true')?'block':'none';?>" title="<?php echo i18n('showDetail')?>" iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
                    <script type="dojo/connect" event="onClick" args="evt">
                       dijit.byId('dialogMailObjectIdEmail').set('value',null);
                       showDetail('dialogMailObjectIdEmail', 0, 'Affectable', true);
