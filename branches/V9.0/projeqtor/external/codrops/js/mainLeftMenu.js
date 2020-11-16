@@ -256,7 +256,7 @@
       var newBc = document.createElement('a');
       newBc.href = '#'; 
       newBc.innerHTML = name;
-      this.breadcrumbsCtrl.replaceChild(newBc,this.breadcrumbsCtrl.firstChild);
+      this.breadcrumbsCtrl.replaceChild(newBc,this.breadcrumbsCtrl.lastElementChild);
     }
   };
 
@@ -381,16 +381,16 @@
     
 
     if(this.breadcrumbsCtrl.firstChild ){
-      this.breadcrumbsCtrl.replaceChild(bc,this.breadcrumbsCtrl.firstChild);
+      this.breadcrumbsCtrl.replaceChild(bc,this.breadcrumbsCtrl.lastElementChild);
       var newPreviousB=document.createElement('div');
       newPreviousB.setAttribute('class', 'dijitButtonIcon dijitButtonIconPrevious iconBreadSrumbTop');
       newPreviousB.setAttribute('title', i18n('previous'));
-      newPreviousB.setAttribute('style','margin-top: 10px;');
+      newPreviousB.setAttribute('style','float:left;');
       var oldPreviousB=this.breadcrumbsCtrl.querySelector('.dijitButtonIcon ');
       if(oldPreviousB){
         this.breadcrumbsCtrl.replaceChild(newPreviousB,oldPreviousB);
       }else{
-        this.breadcrumbsCtrl.firstChild.insertAdjacentElement('afterend', newPreviousB);
+        this.breadcrumbsCtrl.firstChild.insertAdjacentElement('beforebegin', newPreviousB);
       }
       // add event back
       var self = this;
