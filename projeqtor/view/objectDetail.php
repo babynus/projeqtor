@@ -1510,7 +1510,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             if ($print and $outMode=="pdf") {
               echo '<td style="width:'.($largeWidth+10).'px">';
             } else {
-              echo '<td style="width:'.($largeWidth+10).'px">';
+              echo '<td style="width:'.($largeWidth+10).'px;'.((isNewGui())?'height:37px;':'').'">';
             }
           }
         }
@@ -2173,7 +2173,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo $name;
         echo ' class="greyCheck generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class"';
         echo $attributes;
-        echo ' style="'.$specificStyle.'" ';
+        echo ' style="'.$specificStyle.';'.((isNewGui())?'':'').'" ';
         // echo ' value="' . $col . '" ' ;
         if ($val!='0' and !$val==null) {
           echo 'checked';
@@ -2616,7 +2616,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             echo '<div class="iconHideStream22"  style="opacity:40%;margin-top:5px;margin-left:-10px;"';
             echo ' onMouseOver="event.preventDefault();showIconViewSubMenu(\''.$col.'\');"></div>';
           } else {
-            echo '<div class="iconView" ';
+            echo '<div class="iconView iconSize16 imageColorNewGui" ';
             echo ' onclick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').')"';
             echo 'oncontextmenu="event.preventDefault();showIconViewSubMenu(\''.$col.'\');"></div>';
           }
@@ -2637,7 +2637,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '  <table style="width:100%">
                     <tr>
                       <td style="width:24px;padding-top:2px;padding-left:2px;">
-                        <div class="iconView">&nbsp;</div>
+                        <div class="iconView iconSize16 imageColorNewGui">&nbsp;</div>
                       </td>
                       <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('comboSearchButton').'</td>
                     </tr>
@@ -7592,7 +7592,7 @@ function drawProjectSituation($type, $obj){
          		echo '<td style="width:75%;">'.htmlEncode(i18n($class)).' #'.htmlEncode($item->id).' - '.htmlEncode($item->name).'</td>';
          		if(!$print){
              		echo '<td style="width:5%;"><div style="padding-left: 15px;" onClick="gotoElement(\''.$situation->refType.'\',\''.htmlEncode($situation->refId).'\');">'.formatSmallButton('Goto', true).'</div></td>';
-             		echo '<td style="width:5%;"><div style="padding-left: 5px;" class="iconView roundedButtonSmall" onclick="showDetail(\'idSituation\',0,\''.$situation->refType.'\',false,'.$situation->refId.',false)"></div></td>';
+             		echo '<td style="width:5%;"><div style="padding-left: 5px;" class="roundedButtonSmall iconView iconSize16 imageColorNewGui" onclick="showDetail(\'idSituation\',0,\''.$situation->refType.'\',false,'.$situation->refId.',false)"></div></td>';
          		}    		
        		echo '</tr>';
    		echo '</table>';
@@ -7627,7 +7627,7 @@ function drawProjectSituation($type, $obj){
 		echo '<td style="padding-right: 5px;width:5%;">'.formatIcon($class, "16").'</td>';
 		echo '<td style="width:75%;">'.htmlEncode(i18n($class)).' #'.htmlEncode($element->id).' - '.htmlEncode($element->name).'</td>';
 		echo '<td style="width:5%;"><div style="padding-left: 15px;" onClick="gotoElement(\''.$class.'\',\''.$element->id.'\');">'.formatSmallButton('Goto', true).'</div></td>';
-		echo '<td style="width:5%;"><div style="padding-left: 5px;" class="iconView roundedButtonSmall" onclick="showDetail(\'idSituation\',0,\''.$class.'\',false,'.$element->id.',false)"></div></td>';
+		echo '<td style="width:5%;"><div style="padding-left: 5px;" class="roundedButtonSmall iconView iconSize16 imageColorNewGui" onclick="showDetail(\'idSituation\',0,\''.$class.'\',false,'.$element->id.',false)"></div></td>';
 		echo '</tr>';
 		echo '</table>';
 		echo '</td>';

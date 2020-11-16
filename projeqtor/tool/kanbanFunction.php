@@ -130,7 +130,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
             </div>
           </td>
           <td>
-            <div class="roundedButton iconView generalColClass"
+            <div class="roundedButton iconView iconSize16 imageColorNewGui generalColClass"
               style="width:16px;height:16px;cursor:pointer;"
               onclick="showDetail(\'refreshActionAdd' . $typeKanbanC . '\',1,\'' . $typeKanbanC . '\',false,' . $line ['id'] . ', true);" title="' . i18n('kanbanEditItem',array($line ['id'])) . '"
             </div>
@@ -196,7 +196,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
             </div>
             </td>
             <td>
-          	  <div class="roundedButton iconSize16 iconView generalColClass imageColorNewGui"
+          	  <div class="roundedButton iconView iconSize16 generalColClass imageColorNewGui"
                 style="width:16px;height:16px;cursor:pointer;vertical-align:text-bottom;margin-right:5px;float:left;"
                 onclick="showDetail(\'refreshActionAdd' . $typeKanbanC . '\',1,\'' . $typeKanbanC . '\',false,' . $line ['id'] . ');" title="' . i18n('kanbanEditItem',array($line ['id'])) . '>"
               </div>
