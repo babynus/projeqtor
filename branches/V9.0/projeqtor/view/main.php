@@ -794,12 +794,22 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                       <?php } 
                       echo i18n("buttonLater");?></span>
                      &nbsp;&nbsp;&nbsp;
-                     <?php if($cptMess != 1){?>
+                     <?php 
+                        if($messLegal->name != 'newGui'){
+                           if($cptMess != 1){?>
                   	   <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="markOK<?php echo $messFollow->id;?>" onclick="setReadMessageLegalFollowup(<?php echo $messFollow->id;?>);dojo.byId('messageLegall<?php echo $oldValue;?>').style.display='block';dojo.byId('messageLegall<?php echo $messFollow->id;?>').style.display='none'";>
                      <?php }else{?>
                        <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="markOK<?php echo $messFollow->id;?>" onclick="setReadMessageLegalFollowup(<?php echo $messFollow->id;?>);dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
                      <?php } echo i18n("buttonAgree");?>
                        </button>
+                     <?php }else{?>
+                        <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="activateNewgui" onclick="setNewGui(<?php echo $messFollow->id;?>, true);dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
+                          <?php echo i18n("cronExecutionActivate");?>
+                        </button>
+                        <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="desactiveNewgui" onclick="setNewGui(<?php echo $messFollow->id;?>, false);dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
+                          <?php echo i18n("cronExecutionDesactivate");?>
+                        </button>
+                     <?php }?>
                    </div>
                    
                  </div>
