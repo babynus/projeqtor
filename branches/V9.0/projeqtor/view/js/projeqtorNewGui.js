@@ -474,13 +474,12 @@ function menuNewGuiFilter(filter, item) {
 	//cleanContent("menuBarListDiv");
 	menuBarListDivData=null;
 	anotherBarContainerData=null;
-	refreshSelectedItem(item, filter);
 	saveUserParameter('defaultMenu', filter);
 	defaultMenu=filter;
 	loadContent('../view/refreshMenuBarList.php?menuFilter='+filter+'&historyTable='+historyBar, 'menuBarListDiv', null, null, null, null, null, callback, true);
 	//cleanContent("anotherBarContainer");
 	loadContent('../view/refreshMenuAnotherBarList.php?menuFilter='+filter+'&isMenuLeftOpen='+isMenuLeftOpen, 'anotherBarContainer', null, null, null, null, null, hide, true);
-	//refreshSelectedItem(item, filter);
+	refreshSelectedItem(item, filter);
 	//saveUserParameter('defaultMenu', filter);
 	//defaultMenu=filter;
 }

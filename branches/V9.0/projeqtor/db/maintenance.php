@@ -964,7 +964,20 @@ if (beforeVersion($currVersion,"V8.6.0") and Sql::isMysql()) {
   $nbErrors+=runScript('V8.6.0.mysql');
 }
 if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
-  
+    Sql::beginTransaction();
+    $MessageLegal = new MessageLegal();
+    //$MessageLegal->id = 999999;
+    $MessageLegal->idUser = 1;
+    $MessageLegal->name = 'newGui';
+    $MessageLegal->description = i18n('newGuiMessageLegal');
+    $MessageLegal->endDate='2010-01-01 00:00:00';
+    $MessageLegal->save();
+    $MessageLegalFollowUp = new MessageLegalFollowup();
+    $MessageLegalFollowUp->name = 'newGui';
+    $MessageLegalFollowUp->idMessageLegal = SqlList::getIdFromName('MessageLegal', 'newGui');
+    $MessageLegalFollowUp->idUser = 1;
+    $MessageLegalFollowUp->save();
+    Sql::commitTransaction();
 }
 
 // To be sure, after habilitations updates ...

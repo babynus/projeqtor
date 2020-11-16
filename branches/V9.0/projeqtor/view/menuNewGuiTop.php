@@ -29,6 +29,10 @@
  */
   require_once "../tool/projeqtor.php";
   
+if(!trim($defaultMenu) or $defaultMenu != 'menuBarCustom'){
+  $defaultMenu = 'menuBarCustom';
+  Parameter::storeUserParameter('defaultMenu', 'menuBarCustom');
+}
 $iconSize=22;
 $idRow = intval(Parameter::getUserParameter('idFavoriteRow'));
 if($idRow==0){
@@ -38,6 +42,7 @@ if($idRow==0){
 $nbFavoriteRow=5;
 $paramAccessMode = Parameter::getUserParameter('newItemAccessMode');
 if(!$paramAccessMode)$paramAccessMode='direct';
+debugLog($defaultMenu);
 ?>
 <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:43px; position:absolute !important;top:30px;left:250px;border-bottom:3px solid var(--color-dark);">
   <div id="menuBarVisibleDiv" style="height:auto;width:auto;  top: 0px; left:248px; z-index:0;">
