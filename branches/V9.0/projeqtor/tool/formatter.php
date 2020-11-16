@@ -336,7 +336,7 @@ function formatDateThumb($creationDate,$updateDate,$float='right',$size=22,$addN
     }
   }
   $title=htmlEncode($title,'quotes');
-  $file="../view/css/images/calendar$color$addName$size.png";
+  //$file="../view/css/images/calendar$color$addName$size.png";
   $res='<span style="position:relative;float:'.$float.';padding-right:3px">';
   $res.='<a ';
 	//$res.=' src="'.$file.'" ';
@@ -344,7 +344,7 @@ function formatDateThumb($creationDate,$updateDate,$float='right',$size=22,$addN
 	  $res.=' onMouseOver="showBigImage(null,null,this,\''.$title.'\');" onMouseOut="hideBigImage();"';
 	}
 	$res.='>';
-	$res.="<div class='calendar$color$addName$size' style=';width:".$size."px;height:".$size."px;".(($size==16)?'position:relative;top:4px;':'')."' >&nbsp;</div>";
+	$res.="<div class='calendar$color$addName$size calendar$color$addName iconSize$size' style=';width:".$size."px;height:".$size."px;".(($size==16)?'position:relative;top:4px;':'')."' >&nbsp;</div>";
 	$res.='</a>';
 	
   $month=getMonthName(substr($date, 5,2),5);
