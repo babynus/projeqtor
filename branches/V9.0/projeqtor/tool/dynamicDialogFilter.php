@@ -117,7 +117,7 @@ require_once "../tool/projeqtor.php";
                	<input type="checkbox" id="filterDynamicParameter" name="filterDynamicParameter" value=""
                	 	dojoType="dijit.form.CheckBox" style="<?php if (isNewGui()) echo 'display:none;'?>"/>
                	 	<label class="checkLabel" for="filterDynamicParameter" 
-               	 	style="<?php if (isNewGui()) echo 'font-size:90%;text-align:left;float:none;position:absolute;left:37px;top:-4px;text-overflow:ellipsis'?>"><?php echo i18n('dynamicValue');?></label>
+               	 	style="<?php if (isNewGui()) echo 'font-size:90%;text-align:left;float:none;position:absolute;left:37px;top:1px;text-overflow:ellipsis'?>"><?php echo i18n('dynamicValue');?></label>
                	</div>
                <?php //END ADD qCazelles - Dynamic filter - Ticket #78?>
                <input id="filterValue" name="filterValue" value=""  
