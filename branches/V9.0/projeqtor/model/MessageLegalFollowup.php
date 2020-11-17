@@ -31,6 +31,7 @@ require_once('_securityCheck.php');
 class MessageLegalFollowup extends SqlElement {
 
   public $id;
+  public $name;
   public $idMessageLegal;
   public $idUser;
   public $firstViewDate;

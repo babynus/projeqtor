@@ -42,7 +42,6 @@ if($idRow==0){
 $nbFavoriteRow=5;
 $paramAccessMode = Parameter::getUserParameter('newItemAccessMode');
 if(!$paramAccessMode)$paramAccessMode='direct';
-debugLog($defaultMenu);
 ?>
 <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:43px; position:absolute !important;top:30px;left:250px;border-bottom:3px solid var(--color-dark);">
   <div id="menuBarVisibleDiv" style="height:auto;width:auto;  top: 0px; left:248px; z-index:0;">
@@ -95,11 +94,11 @@ debugLog($defaultMenu);
                                   }
                                 }
                                 if ($canCreate=='YES') {?>
-                                <div style="vertical-align:top;cursor:pointer;margin-top:5px;height:22px;"
-                                 onClick="addNewGuiItem('<?php echo $item;?>',null);" >
-                                  <table width:"100%"><tr style="height:22px" >
+                                <div class="newGuiIconText" style="vertical-align:top;cursor:pointer;margin-top:5px;height:22px;"
+                                 onClick="addNewGuiItem('<?php echo $item;?>',null);">
+                                  <table width:"100%" ><tr style="height:22px">
                                   <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIconNewGui($item, 22, null, false);?></td>    
-                                  <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
+                                  <td style="vertical-align:top;padding-top:2px;color:var(--color-dark);"><?php echo i18n($item)?></td>
                                   </tr></table>   
                                 </div>
                                 <?php } 
