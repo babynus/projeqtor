@@ -1139,7 +1139,8 @@ animation: fadeIn ease 0.5s;
 }
 
 .ProjeQtOrNewGui .colorMediumDiv {
-	background: var(--color-medium) !important;
+	background: var(--color-dark) !important;
+	color : var(--color-white) !important;
 }
 
 .ProjeQtOrNewGui .swapView {
@@ -1152,7 +1153,7 @@ animation: fadeIn ease 0.5s;
 }
 
 .ProjeQtOrNewGui .mblPageIndicatorDotSelected {
-	background-color : var(--color-medium) !important;
+	background-color : var(--color-dark) !important;
 }
 
 table.dojoDndAvatar {
