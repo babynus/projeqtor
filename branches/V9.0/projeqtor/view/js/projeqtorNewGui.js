@@ -279,6 +279,7 @@ function showIconLeftMenu(){
   var mode=dojo.byId('displayModeLeftMenu').value;
   display=(mode=='ICONTXT')?'none':'block';
   style=(mode=='ICONTXT')?"float:left;max-width:180px;":"float:left;max-width:155px;";
+  style2=(mode=='ICONTXT')?"float:left;max-width:200px;":"float:left;max-width:165px;";
   leftMenu.menus = [].slice.call(leftMenu.querySelectorAll('.menu__level'));
   leftMenu.menus.forEach(function(menuEl, pos) {
     var items = menuEl.querySelectorAll('.menu__item');
@@ -287,7 +288,7 @@ function showIconLeftMenu(){
       iconDiv.style.display=display;
       
       var posDiv = itemEl.querySelector('.divPosName');
-      posDiv.style=style;
+      posDiv.style=(itemEl.querySelector('.menuPluginToInstlal'))?style2:style;
     });
   });
   if(dojo.byId('selectedViewMenu').value=='Parameter'){

@@ -191,21 +191,22 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 <?php 
 // functions
 
-function sortMenus(&$listMenus, &$result, $parent,$level ){
+function sortMenus(&$listMenus, &$result, $parent,$level,$rightPluginAcces=false ){
   $level++;
   foreach ($listMenus as $id=>$menu){
+    if(!$rightPluginAcces && $menu->name=='navPlugin')continue;
     if($menu->idParent == $parent){
       if ($menu->idParent=='') {
       	$menu->idParent=0;
       }
       $key=$level.'-'.numericFixLengthFormatter($menu->idParent,5).'-'.numericFixLengthFormatter($menu->sortOrder,5);
       $result[$key] = array('level'=>$level,'objectType'=>'menu','object'=>$menu);
-      sortMenus($listMenus, $result, $menu->id,$level);
+      sortMenus($listMenus, $result, $menu->id,$level,$rightPluginAcces);
     }
   }
 }
 
-function storReport($listReport, &$res, $lstNewNavMenu, $idMenuReport, $level ) { //store report 
+function storReports($listReport, &$res, $lstNewNavMenu, $idMenuReport, $level ) { //store report 
     $count=array();
     $isNewPId=array();
     $levelParent=$level-1;
@@ -234,7 +235,7 @@ function storReport($listReport, &$res, $lstNewNavMenu, $idMenuReport, $level ) 
 }
 
 
-function getReportMenu(){
+function getReportsMenu(){
   // ===============list of all reportCategories by user profil;
   $level=2;
   $hr=new HabilitationReport();
@@ -288,11 +289,66 @@ function getReportMenu(){
     if($val==1)unset($countNameFil[$name]);
     else $lstNewNavMenu[]=$name;
    }
-   storReport($reportList,$res, $lstNewNavMenu,$idMenuReport, $level);
+   storReports($reportList,$res, $lstNewNavMenu,$idMenuReport, $level);
   return $res;
  
 }
 
+function getPlugins (){
+  $level=2;
+  $result=array();
+  $idList=array();
+  $plInstal=array();
+  $menu=new Menu;
+  $idMenuPlugin=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navPlugin'));
+  $plList=Plugin::getActivePluginList();
+  foreach ($plList as $intalPlugin){
+    if($intalPlugin->name=='translationApplication'){
+      $idList[]=$intalPlugin->uniqueCode;
+    }else{
+      $idList[]=$intalPlugin->uniqueCode.'001';
+    }
+    
+    $plInstal["menu".ucfirst($intalPlugin->name)]=$intalPlugin->uniqueCode;
+  }
+  $lstPlugins=implode(',', $idList);
+  $where="id in ($lstPlugins)";
+  $pluginsInstal=$menu->getSqlElementsFromCriteria(null,null,$where);
+  $c=10;
+  foreach ($pluginsInstal as $menuPlugin){
+    if (!Module::isMenuActive($menuPlugin->name)){
+     unset($plInstal[$menuPlugin->name]);
+     continue;
+    }
+    if (!securityCheckDisplayMenu($menuPlugin->id,substr($menuPlugin->name,4))){
+      unset($plInstal[$menuPlugin->name]);
+      continue;
+    }
+    $c=$menuPlugin->sortOrder;
+    $key=$level.'-'.numericFixLengthFormatter($idMenuPlugin->id,5).'-'.numericFixLengthFormatter($c,5);
+    $obj= array('id'=>$menuPlugin->id,'name'=>$menuPlugin->name,'idParent'=>$idMenuPlugin->id,'idMenu'=>$menuPlugin->id,'menuType'=>$menuPlugin->type);
+    $result[$key]=array('level'=>$level,'objectType'=>'pluginInst','object'=>$obj);
+  }
+  $urlPlugins = "http://projeqtor.org/admin/getPlugins.php";
+  $currentVersion=null;
+  if (ini_get('allow_url_fopen')) {
+    enableCatchErrors();
+    $currentVersion=file_get_contents($urlPlugins);
+    disableCatchErrors();
+  }
+  $json = file_get_contents($urlPlugins);
+  $object = json_decode($json);
+  $plugins=$object->items;
+  if(!empty($plugins)){
+    foreach ($plugins as $id=>$val){
+      if(in_array($val->id, $plInstal))unset($plugins[$id]);
+      $c++;
+      $k=$level.'-'.numericFixLengthFormatter($idMenuPlugin->id,5).'-'.numericFixLengthFormatter($c,5);
+      $result[$k]=array('level'=>$level,'objectType'=>'pluginNotInst','object'=>$val);
+    }
+  }
+  return $result;
+}
 
 function getNavigationMenuLeft (){
   $level=0;
@@ -300,7 +356,9 @@ function getNavigationMenuLeft (){
   $nav=new Navigation();
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
   $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc');
-  sortMenus($contexctMenuMain,$result,0,$level);
+  $menuPlugin=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuPlugin'));
+  $rightPluginAcces=securityCheckDisplayMenu($menuPlugin->id,substr($menuPlugin->name,4));
+  sortMenus($contexctMenuMain,$result,0,$level,$rightPluginAcces);
   foreach ($result as $id=>$context){
       $context=$context['object'];
       if($context->idParent!=0 and $context->idMenu!=0){
@@ -314,12 +372,11 @@ function getNavigationMenuLeft (){
         if($unset==true)unset($result[$id]);
       }
   }
-  $result=array_merge ($result,getReportMenu());
+  $result=array_merge ($result,getReportsMenu());
+  if($rightPluginAcces)$result=array_merge ($result,getPlugins());
   ksort($result);
-  
   return $result;
 }
-
 
 function drawLeftMenuListNewGui($displayMode){
   $result='';
@@ -330,8 +387,8 @@ function drawLeftMenuListNewGui($displayMode){
   $result.='<div class="menu__wrap">';
   $displayIcon=($displayMode=='TXT')?"display:none;":"display:block;";
   
-   foreach ($allMenu as $id=>$menu){
-    
+  foreach ($allMenu as $id=>$menu){
+    // creat object Navigation if is report or plugin 
     if($menu['objectType']=='report' or $menu['objectType']=='reportSubMenu' or $menu['objectType']=='reportDirect'){
       $obj=new Navigation();
       $obj->id=$menu['object']['id'];
@@ -341,9 +398,20 @@ function drawLeftMenuListNewGui($displayMode){
       if($menu['objectType']=='reportDirect'){
         $file=(isset($menu['object']['file']))?$menu['object']['file']:'';
       }
+    }else if($menu['objectType']=='pluginInst' or $menu['objectType']=='pluginNotInst'){
+      if($menu['objectType']=='pluginInst'){
+        $obj->id=$menu['object']['id'];
+        $obj->idParent=$menu['object']['idParent'];
+        $obj->name=$menu['object']['name'];
+        $obj->idMenu=$menu['object']['idMenu'];
+      }else{
+        $object=$menu['object'];
+      }
     }else{
       $obj=$menu['object'];
     }
+    //
+    // draw ul element
     if($old!=$menu['level'] and $menu['level']==1 and $maineDraw!=true){
       $maineDraw=true;
       $result.='<ul data-menu="main" class="menu__level" tabindex="-1" role="menu" >';
@@ -353,7 +421,9 @@ function drawLeftMenuListNewGui($displayMode){
       $nameLink='submenu-'.$obj->idParent;
       $result.='<ul data-menu="'.$nameLink.'" id="'.$nameLink.'" class="menu__level" tabindex="-1" role="menu" >';
     }
-    if($obj->idMenu!=0){
+    //
+    //draw menu in li element
+    if( $obj->idMenu!=0 and $menu['objectType']!='pluginNotInst'){
       if( $menu['objectType']!='reportDirect'){
         $realMenu=new Menu($obj->idMenu);
         $menuName=$realMenu->name;
@@ -364,7 +434,7 @@ function drawLeftMenuListNewGui($displayMode){
         if($realMenu->type=='item'){
           $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');showMenuBottomParam('".$classEl."','false')";
         }else{
-           $funcOnClick="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');showMenuBottomParam('".$classEl."','true')";
+          $funcOnClick="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');showMenuBottomParam('".$classEl."','true')";
         }
         if($isFav->id==''){
           $mode='add';
@@ -381,38 +451,49 @@ function drawLeftMenuListNewGui($displayMode){
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
         $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst($menuNameI18n).'</div></a>';
         $result.='<div id="div'.$obj->name.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
-    }else{
-      $classEl="Reports";
-      if($obj->name!='menuReports'){
-        $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.");showMenuBottomParam('Report','true')";
       }else{
-        $classEl=substr($obj->name,4);
-        $menuName = addslashes(i18n($obj->name));
-        $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName,'quotes')."','bar');showMenuBottomParam('".$classEl."','false')";
-      }
-      if($isFav->id==''){
-        $mode='add';
-        $class="menu__add__Fav";
+        $classEl="Reports";
+        if($obj->name!='menuReports'){
+          $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.");showMenuBottomParam('Report','true')";
+        }else{
+          $classEl=substr($obj->name,4);
+          $menuName = addslashes(i18n($obj->name));
+          $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName,'quotes')."','bar');showMenuBottomParam('".$classEl."','false')";
+        }
+        if($isFav->id==''){
+          $mode='add';
+          $class="menu__add__Fav";
+          $styleDiv="display:none;";
+        }else{
+          $mode='remove';
+          $class="menu__as__Fav";
+        }
+        $funcuntionFav="addRemoveFavMenuLeft('div".ucfirst($obj->name)."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
         $styleDiv="display:none;";
-      }else{
-        $mode='remove';
-        $class="menu__as__Fav";
+        
+        $class="menu__add__Fav";
+        $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.ucfirst($obj->name).'\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.ucfirst($obj->name).'\',\'leave\');">';
+        $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'">';
+        $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
+        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
+        $result.='<div id="div'.ucfirst($obj->name).'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
       }
-      $funcuntionFav="addRemoveFavMenuLeft('div".ucfirst($obj->name)."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
-      $styleDiv="display:none;";
-      $class="menu__add__Fav";
-      $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.ucfirst($obj->name).'\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.ucfirst($obj->name).'\',\'leave\');">';
-      $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'">';
-      $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
-      $result.='<div id="div'.ucfirst($obj->name).'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
-    }
-  }else{
+    }else if($menu['objectType']=='pluginNotInst'){
+      $userLang = getSessionValue('currentLocale');
+      $lang = "en";
+      if(substr($userLang,0,2)=="fr")$lang="fr";
+      $onclickFunc='';
+      $objName=($lang=='fr')?$object->nameFr:$object->nameEn;
+      $result.='<li class="menu__item" role="menuitem" >';
+      $result.='<a class="menu__linkDirect" onclick="'.$onclickFunc.'" href="#" id="'.$object->code.'" ><div class="iconButtonDownload iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
+      $result.='<div class="divPosName menuPluginToInstlal" style="'.(($displayMode!='TXT')?"max-width: 165px !important;":"max-width: 200px !important;").'float: left;">'.ucfirst($objName).'</div></a>';
+      $result.='</li>';
+    }else{
       if($menu['objectType']=='report' ){
         $idName=substr($obj->name,14);
       }else if($menu['objectType']=='reportSubMenu'){
-       if($obj->name=='../tool/jsonPlanning')$idName='GanttPlan';
-       else $idName=$obj->name;
+        if($obj->name=='../tool/jsonPlanning')$idName='GanttPlan';
+        else $idName=$obj->name;
       }
       $sub='submenu-'.$obj->id;
       $result.='<li class="menu__item" role="menuitem">';
@@ -435,14 +516,13 @@ function drawLeftMenuListNewGui($displayMode){
          if($idName=='GanttPlan')$iconName='Planning';
          else $iconName=$idName;
       }
-      
       $result.='<div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$iconName).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
       $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(($menu['objectType']=='menu')?i18n('menu'.substr($obj->name,3)):i18n($idName)).'</div></a>';
       $result.='<div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
-  }
+    }
     $old=$menu['level'];
     $idP=$obj->idParent;
-   }
+  }
   $result.='</div">';
   return $result;
 }
