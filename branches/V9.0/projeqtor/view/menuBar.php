@@ -331,9 +331,12 @@
     </td>
     
     <?php if(isNewGui()){ drawSeparator();?>
-    <td title="<?php ?>"  style="position:relative;width:55px;">
-      <div dojoType="dijit.layout.ContentPane"  id="menuInterrogation" class="pseudoButton" style="position:relative;overflow:hidden;width:55px; height:28px; min-width:55px;top:-5px;">
-        <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuInterrogationTitle");?>" id="iconMenuInterrogation" style="display: table-cell;vertical-align: middle;position:relative;min-width:50px;top:-3px" >
+    <td title="<?php ?>"  style="position:relative;width:45px;">
+      <div dojoType="dijit.layout.ContentPane"  id="menuInterrogation" class="pseudoButton" style="position:relative;overflow:hidden;width:40px; height:28px; min-width:45px;top:-5px;">
+        <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuInterrogationTitle");?>" id="iconMenuInterrogation" style="display: table-cell;vertical-align: middle;position:relative;min-width:40px;top:-3px" >
+        <script type="dojo/connect" event="onClick" args="evt">
+           loadContent("../view/refreshLastNews.php","getLastNews");       
+        </script>
         <table style="width:100%">
     			  <tr>
       				<td style="width:24px;padding-top:2px;">
