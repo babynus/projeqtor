@@ -1265,3 +1265,12 @@ select option:checked {
 	border-top:0px;
 	top:34px;
 }
+.ProjeQtOrNewGui .newGuiIconText{
+	color:var(--color-medium-dark) !important;
+}
+.ProjeQtOrNewGui .newGuiIconText:hover {
+  -ms-transform: rotate(0deg) brightness(99%) !important; /* IE 9 */
+  -webkit-transform: rotate(0deg) brightness(99%) !important; /* Chrome, Safari, Opera */
+  transform: rotate(0deg) !important;
+  color:var(--color-medium-secondary) !important;
+}

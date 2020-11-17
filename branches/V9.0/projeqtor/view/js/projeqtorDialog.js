@@ -8244,6 +8244,23 @@ function setReadMessageLegalFollowup(idMessageLegal){
     },
   });
 }
+
+function setNewGui(idMessageLegal, newGuiActivated){
+	var param="?idMessageLegal="+idMessageLegal+"&newGuiActivated="+newGuiActivated;
+	  dojo.xhrGet({
+	    url : "../tool/saveMessageLegalFollowup.php"+param,
+	    handleAs : "text",
+	    load : function(data, args) {
+	    	if(newGuiActivated){
+	    	  showWait();
+	          noDisconnect=true;
+	          quitConfirmed=true;        
+	          dojo.byId("directAccessPage").value="today.php";
+	          dojo.byId("directAccessForm").submit();
+	    	}
+	    },
+	  });
+}
 // ===========================================================================================
 // ADMIN functionalities
 // ===========================================================================================
