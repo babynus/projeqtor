@@ -6,28 +6,21 @@
 <g id="Calque_2" display="none">
 </g>
 <polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	63.33,113.91 5.336,113.91 5.336,28.378 16.738,28.378 "/>
+	48.326,113.91 5.336,113.91 5.336,24.378 16.738,24.378 "/>
 <polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	104.265,28.378 115.669,28.378 115.669,67.825 "/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="66.513" y1="28.378" x2="92.247" y2="28.378"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="28.759" y1="28.378" x2="54.495" y2="28.378"/>
-<rect x="55.109" y="50.765" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.17" height="10.171"/>
+	104.266,24.378 115.669,24.378 115.669,50.765 "/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="66.514" y1="24.378" x2="92.247" y2="24.378"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="28.759" y1="24.378" x2="54.495" y2="24.378"/>
 <path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 	M85.466,60.936"/>
-<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	75.295,53 75.295,50.765 85.466,50.765 85.466,51.375 "/>
 <path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 	M75.295,60.936"/>
+<rect x="18.293" y="59.347" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="13.792" height="13.795"/>
+<rect x="18.293" y="86.934" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="13.792" height="13.794"/>
+<rect x="16.739" y="14.497" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="12.02" height="19.477"/>
+<rect x="54.493" y="14.497" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="12.021" height="19.477"/>
+<rect x="92.247" y="14.497" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="12.021" height="19.477"/>
+<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="86.285" cy="86.727" r="37.96"/>
 <polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	95.483,51.667 95.483,50.765 105.654,50.765 105.654,54.708 "/>
-<rect x="14.736" y="71.106" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.17" height="10.171"/>
-<rect x="34.923" y="71.106" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.17" height="10.171"/>
-<rect x="14.736" y="91.447" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.17" height="10.171"/>
-<rect x="34.923" y="91.447" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="10.17" height="10.171"/>
-<rect x="16.739" y="18.497" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="12.02" height="19.477"/>
-<rect x="54.493" y="18.497" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="12.02" height="19.477"/>
-<rect x="92.247" y="18.497" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="12.021" height="19.477"/>
-<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="88.573" cy="90.514" r="34.425"/>
-<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	86.109,71.857 86.109,90.903 102.183,106.976 "/>
+	83.569,66.155 83.569,87.155 101.294,104.879 "/>
 </svg>
