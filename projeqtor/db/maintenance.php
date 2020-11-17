@@ -142,6 +142,12 @@ if ($currVersion=='V0.0.0') {
   // New in V5 : Start Guide Page
   Parameter::storeUserParameter('startPage', 'startGuide.php',1);
   Parameter::storeUserParameter('newGui', true, 1);
+  Parameter::storeGlobalParameter('newGuiThemeColor', '363551');
+  Parameter::storeGlobalParameter('newGuiThemeColorBis', 'eb972c');
+  Parameter::storeGlobalParameter('paramScreen', 'left');
+  Parameter::storeGlobalParameter('paramRightDiv', 'bottom');
+  Parameter::storeGlobalParameter('paramLayoutObjectDetail', 'tab');
+  Parameter::storeUserParameter('menuLeftDisplayMode', 'ICONTXT');
   enableCatchErrors();
   rename("../api/.htaccess.example","../api/.htaccess"); // Use exemple to "lock" API access (will use not existing password file)
   disableCatchErrors();
@@ -970,7 +976,7 @@ if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
     $MessageLegal->idUser = 1;
     $MessageLegal->name = 'newGui';
     $MessageLegal->description = i18n('newGuiMessageLegal');
-    $MessageLegal->endDate='2010-01-01 00:00:00';
+    $MessageLegal->endDate='3721-07-21 21:21:21';
     $MessageLegal->save();
     $MessageLegalFollowUp = new MessageLegalFollowup();
     $MessageLegalFollowUp->name = 'newGui';
