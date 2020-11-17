@@ -424,7 +424,7 @@
        console.log( self.breadScrumLeft);
         self.breadScrumLeft.removeChild(siblNode);
       }
-      self.breadcrumbsCtrl.replaceChild(bc,self.breadcrumbsCtrl.firstChild);
+      self.breadcrumbsCtrl.replaceChild(bc,self.breadcrumbsCtrl.lastElementChild);
 
     });
     

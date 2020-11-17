@@ -253,7 +253,7 @@ float: left;
 }
 
 .menu__breadcrumbs {
-	width:70%;
+	width:170px;
 	font-size:9px;
 	line-height: 1;
 	position: relative;
@@ -261,7 +261,8 @@ float: left;
 }
 
 .menu__breadcrumbs a {
-	margin-top: 10px;
+	width:135px;
+	margin-top: 7px;
     margin-left: 5px;
 	font-weight: bold;
 	display: inline-block;
@@ -289,4 +290,9 @@ float: left;
 
 .menuBottomDiv{
 	height:95%;
+}
+
+.menuPluginToInstlal {
+	font-style: italic;
+	color: darkgray;
 }
