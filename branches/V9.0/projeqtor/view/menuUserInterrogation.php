@@ -57,7 +57,7 @@ if($lang=="fr"){
   
   <tr style="color:grey;height:15px;border-bottom:1px dotted;">
     <td style="cursor:pointer;">
-      <div style="margin-top:15px;" title="<?php echo i18n('help');?>" onClick="showHelp();">
+      <div style="margin-top:15px;margin-left:16px;" title="<?php echo i18n('help');?>" onClick="showHelp();">
         <table style="width:100%">
           <tr>
             <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('help');?>&nbsp;&nbsp;</td>
@@ -68,7 +68,7 @@ if($lang=="fr"){
   </tr>
   <tr style="color:grey;height:15px;border-bottom:1px dotted;">
     <td style="cursor:pointer;">
-      <div  style="margin-top:6px;" title="<?php echo i18n('keyboardShortcuts');?>" onClick="showHelp('ShortCut');">
+      <div  style="margin-top:6px;margin-left:16px;" title="<?php echo i18n('keyboardShortcuts');?>" onClick="showHelp('ShortCut');">
         <table style="width:100%">
           <tr>
             <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('keyboardShortcuts');?>&nbsp;&nbsp;</td>
@@ -79,7 +79,7 @@ if($lang=="fr"){
   </tr>
   <tr style="color:grey;height:15px;border-bottom:1px dotted;">
     <td style="cursor:pointer;">
-      <div style="margin-top:6px;" title="<?php echo i18n('aboutMessage');?>" onClick="showAbout(aboutMessage);">
+      <div style="margin-top:6px;margin-left:16px;" title="<?php echo i18n('aboutMessage');?>" onClick="showAbout(aboutMessage);">
         <table style="width:100%">
           <tr>
             <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('aboutMessage');?>&nbsp;&nbsp;</td>
@@ -127,119 +127,7 @@ if($lang=="fr"){
   <tr><td><div style="margin-bottom:15px;"></div></td></tr>
   <tr>
     <td>
-      <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage1" name="divNewsPage1">
-        <table>
-          <tr><?php 
-            $urlGetNews = "http://projeqtor.org/admin/getNews.php";
-            $currentVersion=null;
-            if (ini_get('allow_url_fopen')) {
-              enableCatchErrors();
-              $currentVersion=file_get_contents($urlGetNews);
-              disableCatchErrors();
-             }
-           $json = file_get_contents($urlGetNews);
-           $obj = json_decode($json);
-           $i=1;
-           foreach ($obj as $objV=>$val){
-              if($val!="id"){
-                foreach ($val as $value){
-                 if($value->lang!=$lang )continue;
-                 if($i==5)break;
-                 if($i==3){?><tr><?php } ?>
-                <td>
-                  <table>
-                    <tr>
-                      <td>
-                        <div style="color:var(--color-medium);font-weight:bold;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;overflow:hidden;margin-right:10px;margin-bottom:10px;height:85px;width:155px;background:#f5f5f5;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
-                          <?php echo $value->title;?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><div onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:65px;overflow-y:auto;background:#f2f5f5;" id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><br><?php echo $value->introtext;?></div></td>
-                    </tr>
-                     <tr>
-                      <td><div style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:50px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><br><?php echo $value->introtext.$value->fulltext;?></div></td>
-                    </tr>
-                  </table>
-                </td>
-                <?php $i++;
-                  if($i==3){?></tr><?php }
-                }
-               }
-              }?>
-        </tr>
-        </table>
-    </div>
-    <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage2" name="divNewsPage2">
-        <table>
-          <tr><?php
-           foreach ($obj as $objV=>$val){
-              if($val!="id"){
-                foreach ($val as $value){
-                 if($value->lang!=$lang )continue;
-                 if($i==9)break;
-                 if($i==7){?><tr><?php } ?>
-                <td>
-                  <table>
-                    <tr>
-                      <td>
-                        <div style="color:var(--color-medium);font-weight:bold;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;overflow:hidden;margin-right:10px;margin-bottom:10px;height:85px;width:155px;background:#f5f5f5;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
-                          <?php echo $value->title;?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><div onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:65px;overflow-y:auto;background:#f2f5f5;" id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><br><?php echo $value->introtext;?></div></td>
-                    </tr>
-                     <tr>
-                      <td><div style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:50px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><br><?php echo $value->introtext.$value->fulltext;?></div></td>
-                    </tr>
-                  </table>
-                </td>
-                <?php $i++;
-                  if($i==7){?></tr><?php }
-                }
-               }
-              }?>
-        </tr>
-        </table>
-    </div>
-    <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage3" name="divNewsPage3">
-        <table>
-          <tr><?php
-           foreach ($obj as $objV=>$val){
-              if($val!="id"){
-                foreach ($val as $value){
-                 if($value->lang!=$lang )continue;
-                 if($i==12)break;
-                 if($i==11){?><tr><?php } ?>
-                <td>
-                   <table>
-                    <tr>
-                      <td>
-                        <div style="cursor:pointer;text-align:center;overflow:hidden;margin-right:10px;margin-bottom:10px;height:85px;width:155px;background:#f5f5f5;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
-                          <?php echo $value->title;?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><div onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:65px;overflow-y:auto;background:#f2f5f5;" id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->introtext;?></div></td>
-                    </tr>
-                     <tr>
-                      <td><div style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:155px;height:50px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><?php echo $value->introtext.$value->fulltext;?></div></td>
-                    </tr>
-                  </table>
-                </td>
-                <?php $i++;
-                  if($i==11){?></tr><?php }
-                }
-               }
-              }?>
-        </tr>
-        </table>
-    </div>
-    <div class="indicatorPage" data-dojo-type="dojox/mobile/PageIndicator" data-dojo-props='fixed:"bottom"'></div>
+    <div  class="container" dojoType="dijit.layout.ContentPane" id="getLastNews"></div>
     </td>
   </tr>
 </td></tr></table>
