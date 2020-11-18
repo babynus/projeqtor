@@ -4000,6 +4000,7 @@ div.ticketKanbanCustom .kanbanVersion{
   display:none;
   transition: opacity 0.5s;
   -webkit-transition: opacity 0.5s;
+  pointer-events: none;
 }
 
 .amountTableDiv {
