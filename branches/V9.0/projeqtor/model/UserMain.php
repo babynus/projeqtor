@@ -71,7 +71,7 @@ class UserMain extends SqlElement {
   public $dontReceiveTeamMails;
   public $apiKey;
   public $idTeam;
-
+  public $idOrganization;
   public $_arrayFilters=array();
   //public $_arrayFiltersId=array();
   public $_arrayFiltersDetail=array();
@@ -108,6 +108,7 @@ class UserMain extends SqlElement {
   		                                    "passwordChangeDate"=>'hidden',
   		                                    "apiKey"=>"readonly",
                                           'idTeam'=>'hidden',
+                                          'idOrganization'=>'hidden',
 // MTY - LEAVE SYSTEM
                                           'isEmployee'=>'hidden',
 // MTY - LEAVE SYSTEM
@@ -1152,6 +1153,10 @@ class UserMain extends SqlElement {
   	$old=$this->getOld();
   	if ($old->locked and ! $this->locked) {
   		$this->loginTry=0;
+  	}
+  	if (!$this->isResource) {
+  	  $this->idOrganization=null;
+  	  $this->idTeam=null;
   	}
   	//$paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
     if (! $this->id and !$this->password and Parameter::getGlobalParameter('initializePassword')=="YES") {
