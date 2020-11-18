@@ -301,7 +301,7 @@ class ConsolidationValidation extends SqlElement{
     	                        </div>
     	                  </td>';
     	   $result .='     <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
-    	   $result .='       <div style="margin:2px 0px 2px 2px;" id="lockedDiv_'.$uniqueId.'" name="lockedDiv_'.$uniqueId.'" dojoType="dijit.layout.ContentPane" region="center">';
+    	   $result .='       <div style="color:margin:2px 0px 2px 2px;" id="lockedDiv_'.$uniqueId.'" name="lockedDiv_'.$uniqueId.'" dojoType="dijit.layout.ContentPane" region="center">';
     	   $result .=          ConsolidationValidation::drawLockedDiv($uniqueId,$concMonth,$lock,$lockBefor,$asSub,$profAss /*,$consValPproj*/);
     	   $result .='       </div>';
     	   $result .='    </td>';
@@ -336,7 +336,7 @@ class ConsolidationValidation extends SqlElement{
 	    $habLockedImputation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'lockedImputation'));
 	    $mode=($lock=='')?"'Locked'":"'UnLocked'";
 	    $right=/*($consValPproj->id=='')?*/$habLockedImputation->rightAccess/*:'2'*/;
-        $functionLocked=($right=='1' /*and $consValPproj->id==''*/ and $lockBefor=='')?'onclick="lockedImputation('.$mode.',\''.$proj.'\',\'false\',\''.$month.'\',\''.$asSub.'\');"':'';
+        $functionLocked=($right=='1' /*and $consValPproj->id==''*/ and ($lockBefor=='' or $lock!=''))?'onclick="lockedImputation('.$mode.',\''.$proj.'\',\'false\',\''.$month.'\',\''.$asSub.'\');"':'';
 	    $alreadyMonthLockded=($lockBefor!='')?getMonthName(substr($lockBefor,-2)):'';
         if($lockBefor!='')$titleAlredyLock=i18n('alreadyLock',array(lcfirst ($alreadyMonthLockded),substr($lockBefor, 0,-2)));
 	    $result ='  <table  style="width:100%;">';
@@ -350,8 +350,8 @@ class ConsolidationValidation extends SqlElement{
 	    
 	    }else{   //locked
 	      
-	      if($lockBefor=='')$style=(($right=='1' /*and $consValPproj->id==''*/)?'style="margin-left:5px;cursor:pointer;"':'style="cursor: not-allowed;margin-left:5px;"');
-	      else $style='style="cursor: not-allowed;saturate(0)"';
+	      if(1 or $lockBefor=='')$style=(($right=='1' /*and $consValPproj->id==''*/)?'style="margin-left:5px;cursor:pointer;"':'style="cursor: not-allowed;margin-left:5px;"');
+	      else $style='style="margin-left:5px;cursor: not-allowed;-webkit-filter:saturate(0);-moz-filter:saturate(0);filter:saturate(0);"';
 	      $result .='      <div '.$style.' id="lockedImputation_'.$proj.'" '.$functionLocked.' class="iconLocked32 iconLocked iconSize32" title="'.ucfirst(i18n('colUnlockProject')).'"></div>';
 	    }
 	    $result .='     <input type="hidden" id="projHabilitationLocked_'.substr($proj, 6).'" name="projHabilitationLocked_'.substr($proj, 6).'" value="'.$right.'"/>';
