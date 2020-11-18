@@ -428,6 +428,14 @@ function refreshSelectedMenuLeft(menuName){
   }
 }
 //=============================================================================
+//load plugin page for not intaled plugins 
+//=============================================================================
+function loadPluginView(id){
+  loadContent("pluginShopView.php?objectId="+id,"centerDiv");
+}
+//=============================================================================
+
+
 
 function helpDisplayIconIsRead (val){
   if(val=='yes'){

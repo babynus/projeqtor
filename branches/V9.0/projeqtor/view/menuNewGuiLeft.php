@@ -297,33 +297,33 @@ function getReportsMenu(){
 function getPlugins (){
   $level=2;
   $result=array();
-  $idList=array();
   $plInstal=array();
   $menu=new Menu;
+  $exist=false;
   $idMenuPlugin=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navPlugin'));
   $plList=Plugin::getActivePluginList();
   foreach ($plList as $intalPlugin){
-    if($intalPlugin->name=='translationApplication'){
-      $idList[]=$intalPlugin->uniqueCode;
-    }else{
-      $idList[]=$intalPlugin->uniqueCode.'001';
-    }
-    
-    $plInstal["menu".ucfirst($intalPlugin->name)]=$intalPlugin->uniqueCode;
+    $plInstal[$intalPlugin->uniqueCode]=$intalPlugin->uniqueCode;
   }
-  $lstPlugins=implode(',', $idList);
-  $where="id in ($lstPlugins)";
+  $where="id > 100000 and id <> 100006001";
   $pluginsInstal=$menu->getSqlElementsFromCriteria(null,null,$where);
   $c=10;
-  foreach ($pluginsInstal as $menuPlugin){
-    if (!Module::isMenuActive($menuPlugin->name)){
-     unset($plInstal[$menuPlugin->name]);
-     continue;
-    }
-    if (!securityCheckDisplayMenu($menuPlugin->id,substr($menuPlugin->name,4))){
-      unset($plInstal[$menuPlugin->name]);
+  foreach ($pluginsInstal as $id=>$menuPlugin){
+    if (!$menuPlugin->canDisplay() ){
+     if ($menuPlugin->name=='menuTranslationApplication') {
+      	unset($plInstal[$menuPlugin->id]);
+      }else{
+        unset($plInstal[substr($menuPlugin->id,0,-3)]);
+      }
       continue;
     }
+    foreach ($plInstal as $valId){
+      if(strpos(".$menuPlugin->id.", ".$valId.")!==false){
+        $exist=true;
+        break;
+      }
+    }
+    if(!$exist)continue;
     $c=$menuPlugin->sortOrder;
     $key=$level.'-'.numericFixLengthFormatter($idMenuPlugin->id,5).'-'.numericFixLengthFormatter($c,5);
     $obj= array('id'=>$menuPlugin->id,'name'=>$menuPlugin->name,'idParent'=>$idMenuPlugin->id,'idMenu'=>$menuPlugin->id,'menuType'=>$menuPlugin->type);
@@ -406,6 +406,13 @@ function drawLeftMenuListNewGui($displayMode){
         $obj->idMenu=$menu['object']['idMenu'];
       }else{
         $object=$menu['object'];
+        $userLang = getSessionValue('currentLocale');
+        $lang = "en";
+        if(substr($userLang,0,2)=="fr")$lang="fr";
+        $objName=($lang=='fr')?$object->nameFr:$object->nameEn;
+        $objectID=$object->id;
+        $objectCode=$object->code;
+        
       }
     }else{
       $obj=$menu['object'];
@@ -433,6 +440,8 @@ function drawLeftMenuListNewGui($displayMode){
         $isFav=SqlElement::getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$obj->name));
         if($realMenu->type=='item'){
           $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');showMenuBottomParam('".$classEl."','false')";
+        }elseif ($realMenu->type=='plugin'){
+        	$funcOnClick="loadMenuBarPlugin('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');showMenuBottomParam('".$classEl."','true')";
         }else{
           $funcOnClick="loadMenuBarObject('".$classEl."','".htmlEncode($menuName2,'bar')."','bar');showMenuBottomParam('".$classEl."','true')";
         }
@@ -479,13 +488,8 @@ function drawLeftMenuListNewGui($displayMode){
         $result.='<div id="div'.ucfirst($obj->name).'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
       }
     }else if($menu['objectType']=='pluginNotInst'){
-      $userLang = getSessionValue('currentLocale');
-      $lang = "en";
-      if(substr($userLang,0,2)=="fr")$lang="fr";
-      $onclickFunc='';
-      $objName=($lang=='fr')?$object->nameFr:$object->nameEn;
       $result.='<li class="menu__item" role="menuitem" >';
-      $result.='<a class="menu__linkDirect" onclick="'.$onclickFunc.'" href="#" id="'.$object->code.'" ><div class="iconButtonDownload iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
+      $result.='<a class="menu__linkDirect" onclick="loadPluginView(\''.$objectID.'\');" href="#" id="'.$objectCode.'" ><div class="iconButtonDownload iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
       $result.='<div class="divPosName menuPluginToInstlal" style="'.(($displayMode!='TXT')?"max-width: 165px !important;":"max-width: 200px !important;").'float: left;">'.ucfirst($objName).'</div></a>';
       $result.='</li>';
     }else{
