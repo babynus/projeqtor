@@ -73,6 +73,8 @@ class ContactMain extends SqlElement {
   //END ADD qCazelles - Manage ticket at customer level - Ticket #87
   public $password;
   public $crypto;
+  public $idTeam;
+  public $idOrganization;
   public $_nbColMax=3;
   
   private static $_layout='
@@ -98,6 +100,8 @@ class ContactMain extends SqlElement {
                                           "crypto"=>"hidden",
                                           // ADD tLaguerie ticket #396
                                           "startDate"=>"nobr",
+                                          'idTeam'=>'hidden',
+                                          'idOrganization'=>'hidden',
                                           // END tLaguerie ticket #396
   );    
   
@@ -311,6 +315,10 @@ class ContactMain extends SqlElement {
     if ($this->isUser and !$this->password and Parameter::getGlobalParameter('initializePassword')=="YES") {
       $this->crypto=null;
   		$this->password=User::getRandomPassword();
+    }
+    if (!$this->isResource) {
+      $this->idOrganization=null;
+      $this->idTeam=null;
     }
   	$result=parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
