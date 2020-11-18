@@ -42,92 +42,125 @@ if($lang=="fr"){
 }
 ?>
 
-<table style="width:99%;" id="userMenuInterrogation">
-  <tr><td>
-  <table><tr>
-    <td style="color:<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>;width:60%;font-size:26px;"><?php echo i18n('aboutMenuInterrogation');?></td>
-    <td> <a target="#" href="<?php echo $linkToForumRules;?>"> <div class="roundedVisibleButton roundedButton generalColClass"
-        title="<?php echo('reportBug'); ?>"
-        style="text-align:left;margin-right:10px;margin-top:10px;height:23px;width:160px;
-        onClick="showFilterDialog();">
-        <img  class="imageColorNewGui" src="css/customIcons/new/iconHelpBug.svg" style="position:relative;left:5px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>
-         <div style="color:grey;position:relative;top:-19px;left:38px;"><?php echo i18n('reportBug'); ?></div>
-          </div> </a></td></tr></table>
-  </td></tr>
-  
-  <tr style="color:grey;height:15px;border-bottom:1px dotted;">
-    <td style="cursor:pointer;">
-      <div style="margin-top:15px;margin-left:16px;" title="<?php echo i18n('help');?>" onClick="showHelp();">
-        <table style="width:100%">
-          <tr>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('help');?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>
-      </div>
-    </td>
-  </tr>
-  <tr style="color:grey;height:15px;border-bottom:1px dotted;">
-    <td style="cursor:pointer;">
-      <div  style="margin-top:6px;margin-left:16px;" title="<?php echo i18n('keyboardShortcuts');?>" onClick="showHelp('ShortCut');">
-        <table style="width:100%">
-          <tr>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('keyboardShortcuts');?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>
-      </div>
-    </td>
-  </tr>
-  <tr style="color:grey;height:15px;border-bottom:1px dotted;">
-    <td style="cursor:pointer;">
-      <div style="margin-top:6px;margin-left:16px;" title="<?php echo i18n('aboutMessage');?>" onClick="showAbout(aboutMessage);">
-        <table style="width:100%">
-          <tr>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('aboutMessage');?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>
-      </div>
-    </td>
-  </tr>
-  <tr style="color:grey !important;height:15px;border-bottom:1px dotted;">
-    <td>
-    <table>
-      <tr>
-        <td style="cursor:pointer;"><a target="#" href="<?php echo $linkPlugin;?>"><div class="imageColorNewGui iconButtonLink16 iconSize16 "> </div></a></td>
-        <td>
-          <div style="margin-top:6px;" title="<?php echo i18n('linkToPlugin');?>">
-            <table style="width:100%">
-              <tr>
-                <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('linkToPlugin');?>&nbsp;&nbsp;</td>
-              </tr>
-            </table>
-          </div>
-        </td>
-      </tr>
-    </table>
-    </td>
-  </tr>
+<table  id="userMenuInterrogation">
   <tr>
-    <tr style="color:grey;height:15px;border-bottom:1px dotted;">
+    <td><div style="width:15px !important;"></div></td>
     <td>
       <table>
         <tr>
-          <td style="cursor:pointer;"><a target="#" href="<?php echo $linkForum;?>"><div class="imageColorNewGui iconButtonLink16 iconSize16 "> </div></a></td>
-          <td><div style="margin-top:6px;" title="<?php echo i18n('linkToForum');?>">
+          <td style="color:<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>;font-size:26px;"><?php echo i18n('aboutMenuInterrogation');?></td>
+          <td><div style="width:58px"></div></td>
+          <td> <a target="#" href="<?php echo $linkToForumRules;?>"> <div class="roundedVisibleButton roundedButton generalColClass"
+            title="<?php echo('reportBug'); ?>"
+            style="text-align:left;margin-top:10px;height:23px;width:160px;
+            onClick="showFilterDialog();">
+            <img  class="imageColorNewGui" src="css/customIcons/new/iconHelpBug.svg" style="position:relative;left:5px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>
+             <div style="color:grey;position:relative;top:-19px;left:38px;"><?php echo i18n('reportBug'); ?></div>
+             </div> </a></td></tr>
+      </table>
+    </td>
+    <td><div style="width:15px !important;"></div></td>
+  </tr>
+  
+  <tr style="color:grey;height:15px;">
+    <td><div style="width:15px !important;"></div></td>
+    <td style="border-bottom:1px dotted;cursor:pointer;">
+      <div style="margin-top:15px;" title="<?php echo i18n('help');?>" onClick="showHelp();">
+        <table style="width:100%">
+          <tr>
+            <td style="vertical-align:middle;"><?php echo i18n('help');?></td>
+            <td style="float:right;"><?php echo i18n('f1');?></td>
+          </tr>
+        </table>
+      </div>
+    </td>
+    <td><div style="width:15px !important;"></div></td>
+  </tr>
+  
+  <tr style="color:grey;height:15px;">
+    <td><div style="width:15px !important;"></div></td>
+    <td style="border-bottom:1px dotted;cursor:pointer;">
+      <div  style="margin-top:6px;" title="<?php echo i18n('keyboardShortcuts');?>" onClick="showHelp('ShortCut');">
+        <table style="width:100%">
+          <tr>
+            <td style="vertical-align:middle;"><?php echo i18n('keyboardShortcuts');?></td>
+          </tr>
+        </table>
+      </div>
+    </td>
+    <td><div style="width:15px !important;"></div></td>
+  </tr>
+  
+  <tr style="color:grey;height:15px;">
+    <td><div style="width:15px !important;"></div></td>
+    <td style="cursor:pointer;border-bottom:1px dotted;">
+      <div style="margin-top:6px;" title="<?php echo i18n('aboutMessage');?>" onClick="showAbout(aboutMessage);">
+        <table style="width:100%">
+          <tr>
+            <td style="vertical-align:middle;"><?php echo i18n('aboutMessage');?>&nbsp;&nbsp;</td>
+          </tr>
+        </table>
+      </div>
+    </td>
+    <td><div style="width:15px !important;"></div></td>
+  </tr>
+  
+    <tr style="color:grey !important;height:15px;">
+      <td><div style="width:15px !important;"></div></td>
+      <td style="border-bottom:1px dotted;">
+      <a style="text-decoration:none;" target="#" href="<?php echo $linkPlugin;?>">
+        <table>
+          <tr>
+            <td>
+              <div style="color:grey;margin-top:6px;" title="<?php echo i18n('linkToPlugin');?>">
                 <table style="width:100%">
                   <tr>
-                    <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('linkToForum');?>&nbsp;&nbsp;</td>
+                    <td style="vertical-align:middle;"><?php echo i18n('linkToPlugin');?>&nbsp;&nbsp;</td>
                   </tr>
                 </table>
               </div>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-  <tr><td><div style="margin-bottom:15px;"></div></td></tr>
-  <tr>
-    <td>
-    <div  class="container" dojoType="dijit.layout.ContentPane" id="getLastNews"></div>
-    </td>
-  </tr>
-</td></tr></table>
+            </td>
+            <td style="cursor:pointer;"><div style="position:absolute;left:348px;top:140px;" class="imageColorNewGui iconButtonLink16 iconSize16 "> </div></td>
+          </tr>
+        </table>
+        </a>
+      </td>
+      <td><div style="width:15px !important;"></div></td>
+    </tr>
+  
+    <tr>
+     <td><div style="width:15px !important;"></div></td>
+      <td style="color:grey;height:15px;border-bottom:1px dotted;">
+      <a style="text-decoration:none;" target="#" href="<?php echo $linkForum;?>">
+        <table>
+          <tr>
+            <td><div style="color:grey;margin-top:6px;" title="<?php echo i18n('linkToForum');?>">
+                  <table style="width:100%">
+                    <tr>
+                      <td style="vertical-align:middle;"><?php echo i18n('linkToForum');?>&nbsp;&nbsp;</td>
+                    </tr>
+                  </table>
+                </div>
+            </td>
+            <td style="cursor:pointer;"><div style="position:absolute;left:348px;top:163px;" class="imageColorNewGui iconButtonLink16 iconSize16 "> </div></td>
+          </tr>
+        </table>
+        </a>
+      </td>
+      <td><div style="width:15px !important;"></div></td>
+    </tr>
+  
+      <tr>
+        <td><div style="width:15px !important;"></div></td>
+        <td><div style="margin-bottom:35px;"></div></td>
+        <td><div style="width:15px !important;"></div></td>
+      </tr>
+      
+      <tr>
+        <td><div style="width:15px !important;"></div></td>
+        <td>
+          <div  class="container" dojoType="dijit.layout.ContentPane" id="getLastNews"></div>
+        </td>
+        <td><div style="width:15px !important;"></div></td>
+      </tr>
+</table>
