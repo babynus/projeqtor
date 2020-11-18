@@ -1145,8 +1145,7 @@ animation: fadeIn ease 0.5s;
 }
 
 .ProjeQtOrNewGui .swapView {
-  height:200px !important;
-  width:330px !important;
+  height:450px !important;
 }
 .ProjeQtOrNewGui .indicatorPage {
   bottom:56px !important;
@@ -1273,4 +1272,19 @@ select option:checked {
   -webkit-transform: rotate(0deg) brightness(99%) !important; /* Chrome, Safari, Opera */
   transform: rotate(0deg) !important;
   color:var(--color-medium-secondary) !important;
+}
+
+.ProjeQtOrNewGui .arrow-down{
+	width: 20px;
+    height: 15px;
+    background-color: #8888e8;
+    clip-path: polygon(100% 0, 0 0, 50% 100%);
+}
+
+.ProjeQtOrNewGui .arrow-up{
+  width: 32px;
+  height: 20px;
+  background-color: #8888e8;
+
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
 }
