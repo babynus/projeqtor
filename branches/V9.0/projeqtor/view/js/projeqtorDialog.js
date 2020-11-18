@@ -308,19 +308,19 @@ function showMsg(id,value){
       }
     }
     
-    dojo.byId("divMsgTitle"+id).style.height=40+'px';
+    dojo.byId("divMsgTitle"+id).style.height=50+'px';
     dojo.byId("divMsgTitle"+id).style.margin = 0+'px';
-    dojo.byId("divMsgTitle"+id).style.width=320+'px';
+    dojo.byId("divMsgTitle"+id).style.width=340+'px';
     dojo.byId("divMsgTitle"+id).style.borderRadius = 5+'px '+5+'px '+0+'px '+0+'px';
     dojo.addClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
     dojo.byId("divMsgFull"+id).style.display="block";
-    dojo.byId("divMsgFull"+id).style.height=140+'px';
-    dojo.byId("divMsgFull"+id).style.width=320+'px';
+    dojo.byId("divMsgFull"+id).style.height=280+'px';
+    dojo.byId("divMsgFull"+id).style.width=340+'px';
     dojo.byId("divMsgTitle"+id).style.fontSize=13+'px';
   }else{
     dojo.byId("divMsgFull"+id).style.display="none";
-    dojo.byId("divMsgTitle"+id).style.height=65+'px';
-    dojo.byId("divMsgTitle"+id).style.width=155+'px';
+    dojo.byId("divMsgTitle"+id).style.height=165+'px';
+    dojo.byId("divMsgTitle"+id).style.width=165+'px';
     dojo.byId("divMsgTitle"+id).style.borderRadius = 5+'px '+5+'px '+5+'px '+5+'px';
     dojo.byId("divMsgTitle"+id).style.flexDirection="column";
     dojo.byId("divMsgTitle"+id).style.justifyContent="center";
@@ -376,23 +376,26 @@ function showMsg(id,value){
 }
 function showIntrotext(id){
   if(dojo.byId("divMsgFull"+id).style.display=="none"){
-    dojo.byId("divMsgTitle"+id).style.height=20+'px';
+    dojo.byId("divMsgTitle"+id).style.height=35+'px';
     dojo.byId("divMsgTitle"+id).style.margin = 0+'px';
     dojo.byId("divMsgTitle"+id).style.borderRadius = 5+'px '+5+'px '+0+'px '+0+'px';
     dojo.addClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
     dojo.byId("divSubTitle"+id).style.display="block";
-    dojo.byId("divSubTitle"+id).style.height=65+'px';
+    dojo.byId("divSubTitle"+id).style.height=130+'px';
     dojo.byId("divSubTitle"+id).style.fontSize=10+'px';
     dojo.byId("divMsgTitle"+id).style.fontSize=10+'px';
+    dojo.byId("divMsgTitle"+id).style.textOverflow='ellipsis';
   }
 }
 
 function hideIntrotext(id){
   if(dojo.byId("divMsgFull"+id).style.display=="none"){
     dojo.byId("divSubTitle"+id).style.display="none";
-    dojo.byId("divMsgTitle"+id).style.height=90+'px';
-    dojo.byId("divMsgTitle"+id).style.width=155+'px';
-    dojo.byId("divMsgTitle"+id).style.marginRight = 10+'px';
+    dojo.byId("divMsgTitle"+id).style.height=165+'px';
+    dojo.byId("divMsgTitle"+id).style.width=165+'px';
+    if(id==1 || id==3 || id==5 || id==7 || id==9 || id==11){
+      dojo.byId("divMsgTitle"+id).style.marginRight = 10+'px';
+    }
     dojo.byId("divMsgTitle"+id).style.marginBottom = 10+'px';
     dojo.byId("divMsgTitle"+id).style.borderRadius = 5+'px '+5+'px '+5+'px '+5+'px';
     dojo.byId("divMsgTitle"+id).style.flexDirection="column";
@@ -405,8 +408,8 @@ function hideIntrotext(id){
 
 function hideMsg(id,value){
   dojo.byId("divMsgFull"+id).style.display="none";
-  dojo.byId("divMsgTitle"+id).style.height=85+'px';
-  dojo.byId("divMsgTitle"+id).style.width=155+'px';
+  dojo.byId("divMsgTitle"+id).style.height=165+'px';
+  dojo.byId("divMsgTitle"+id).style.width=165+'px';
   dojo.removeClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
   if(value==0.25 || value==1.25 || value==2.25){
     if(dojo.byId("divMsgTitle"+(id+1))){
