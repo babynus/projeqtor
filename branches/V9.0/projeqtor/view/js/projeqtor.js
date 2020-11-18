@@ -1922,6 +1922,7 @@ function finalizeMessageDisplay(destination, validationType) {
         forceRefreshCreationInfo = false;
         if (dojo.byId('attachmentFileDirectDiv')) {
           dojo.byId('attachmentFileDirectDiv').style.visibility = 'visible';
+          dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('formDiv'),true);
         }
         if (dojo.byId('objectClass') && dojo.byId('objectId')) {
           stockHistory(dojo.byId('objectClass').value,dojo.byId('objectId').value);
@@ -1950,6 +1951,7 @@ function finalizeMessageDisplay(destination, validationType) {
         }
         if (dojo.byId('attachmentFileDirectDiv')) {
           dojo.byId('attachmentFileDirectDiv').style.visibility = 'hidden';
+          dijit.byId('attachmentFileDirect').reset();
         }
         // unselectAllRows("objectGrid");
         finaliseButtonDisplay();
@@ -5328,6 +5330,20 @@ function ckEditorReplaceEditor(editorName, numEditor) {
       dojo.query('.cke_editor_'+evt.editor.name).addClass('input required');
     }
   });
+  editorArray[numEditor].on('dragover', function(evt) {
+    console.log("Editor drag over");
+    if (dojo.byId('dropFilesInfoDiv')) {
+      dojo.byId('dropFilesInfoDiv').style.opacity='0%';
+      dojo.byId('dropFilesInfoDiv').style.display='none';
+    }
+  });
+  editorArray[numEditor].on('dragleave', function(evt) {
+    console.log("Editor drag leave");
+    if (dojo.byId('dropFilesInfoDiv')) {
+      dojo.byId('dropFilesInfoDiv').style.opacity='50%';
+      dojo.byId('dropFilesInfoDiv').style.display='block';
+    }
+  });
   doNotTriggerResize=false;
 }
 function CKeEnd(CkHeight,numEditor) {
@@ -6993,10 +7009,10 @@ function showListFilter(checkBoxName,value){
 var dropFilesFormInProgress=null;
 function dropFilesFormOnDragOver() {
   event.preventDefault();
+  if (dropFilesFormInProgress) clearTimeout(dropFilesFormInProgress);
   if (dojo.byId('updateRight') && dojo.byId('updateRight').value=='NO') return;
   if (! dojo.byId('id')) return;
   if ( dijit.byId('idle') && dijit.byId('idle').get('checked')==true) return;
-  if (dropFilesFormInProgress) clearTimeout(dropFilesFormInProgress);
   dojo.byId('dropFilesInfoDiv').style.height=(dojo.byId('formDiv').offsetHeight-10)+"px";
   var hasScrollBar=(dojo.byId('formDiv').scrollHeight>dojo.byId('formDiv').clientHeight)?true:false;
   var removeWidth=(hasScrollBar)?25:10;
@@ -7007,10 +7023,12 @@ function dropFilesFormOnDragOver() {
 }
 function dropFilesFormOnDragLeave() {
   event.preventDefault();
+  if (dropFilesFormInProgress) clearTimeout(dropFilesFormInProgress);
   dropFilesFormInProgress=setTimeout("dojo.byId('dropFilesInfoDiv').style.display='none';",100);
 }
 function dropFilesFormOnDrop() {
   event.preventDefault();
+  if (dropFilesFormInProgress) clearTimeout(dropFilesFormInProgress);
   dojo.byId('dropFilesInfoDiv').style.opacity='0%';
   dojo.byId('dropFilesInfoDiv').style.display='none';
 }
