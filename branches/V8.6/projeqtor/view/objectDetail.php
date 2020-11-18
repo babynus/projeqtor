@@ -285,11 +285,11 @@ if (array_key_exists('refresh', $_REQUEST)) {
 		<?php  include 'objectButtons.php'; ?>
   </div>
 	<div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="overflow:<?php if($layout=='tab' ){echo 'hidden';}else{echo 'auto';}?>;"
-	   ondragover="dropFilesFormOnDragOver();" 
+	  ondragover="dropFilesFormOnDragOver();" 
 	  ondragleave="dropFilesFormOnDragLeave();" 
 	       ondrop="dropFilesFormOnDrop();">
-  <div id="dropFilesInfoDiv" style="">
-    <div style="position:absolute;top:50%;margin-top:-25px;height:px;width:100%;text-align:center;"><?php echo i18n('dragAndDrop');?></div>
+  <div id="dropFilesInfoDiv" style="pointer-events: none;" ondrop="return false;">
+    <div style="position:absolute;top:50%;margin-top:-25px;height:px;width:100%;text-align:center;style="pointer-events: none;"><?php echo i18n('dragAndDrop');?></div>
   </div>
 	<?php
   }
