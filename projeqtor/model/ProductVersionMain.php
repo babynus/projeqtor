@@ -425,7 +425,7 @@ class ProductVersionMain extends Version {
   		VersionProject::updateIdle('Version', $this->id);
   	}
   	$compList=array();
-  	if ($old->idProduct!=$this->idProduct) {
+  	if ($this->id and $old->idProduct!=$this->idProduct) {
   	  $p=new Product($this->idProduct,true);
   	  $compList=$p->getComposition(false,true);
   	  $pold=new Product($old->idProduct,true);
