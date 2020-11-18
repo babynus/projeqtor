@@ -257,7 +257,7 @@ class ClientContractMain extends SqlElement {
 			$colScript .= '</script>';
 	  } else if ($colName=="idContact") {   
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if (this.value && ! dijit.byId("phoneNumber").get("value")) {';
+      $colScript .= '  if (this.value) {';
       $colScript .= '    dojo.xhrGet({';
       $colScript .= '      url: "../tool/getSingleData.php?dataType=contactPhone&idContact=" + this.value,';
       $colScript .= '      handleAs: "text",';
