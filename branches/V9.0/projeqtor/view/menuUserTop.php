@@ -63,10 +63,106 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
 <table style="width:99%;" id="userMenuPopup">
   <tr style="height:40px">
     <td <?php if ($showUserParameters) echo'rowspan="2"';?> style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"><?php if ($imgUrl) { echo '<img style="border-radius:40px;height:80px" src="'.$imgUrl.'" />'; } else { ?>
-            <div style="overflow-x:hidden;position: relative; width:80px;height:80px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
+            <div style="overflow-x:hidden;position: relative; width:80px;height:60px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
               onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
    <?php } ?></td>
     <td>
+      <div class="pseudoButton"  title="<?php echo i18n('changePassword');?>" onClick="requestPasswordChange();">
+        <table style="width:100%">
+          <tr>
+            <td style="padding-left: 10px;width: 22px !important;vertical-align: middle;">
+              <div style="height:22px;width: 22px" class="iconLoginPassword iconSize22 imageColorNewGui">&nbsp;</div>
+            </td>
+            <td style="vertical-align:middle;font-size:9pt;color: var(--color-dark);">&nbsp;&nbsp;<?php echo i18n('changePassword');?>&nbsp;&nbsp;</td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  </tr>
+<?php
+if ($showUserParameters) { // Do not give access to user parameters if locked ?>
+  <tr style="height:40px">
+    <td style="white-space:nowrap;">
+      <div class="pseudoButton"  title="<?php echo i18n('menuUserParameter');?>" onClick="loadMenuBarItem('UserParameter','UserParameter','bar');dijit.byId('iconMenuUserPhoto').closeDropDown();">
+        <table style="width:100%">
+          <tr>
+            <td style="padding-left: 10px;width: 22px !important;">
+              <div style="height:22px;width: 22px" class="iconUserParameter iconSize22 imageColorNewGui">&nbsp;</div>
+            </td>
+            <td style="vertical-align:middle;font-size:9pt;color: var(--color-dark);">&nbsp;&nbsp;<?php echo i18n('menuUserParameter');?>&nbsp;&nbsp;</td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  </tr>
+  <tr style="height:40px">
+    <td width="120px" style="text-align:right"><?php echo i18n("paramLang");?>&nbsp;:&nbsp;</td>
+    <td>  
+      <select dojoType="dijit.form.FilteringSelect" class="input" name="langMenuUserTop" id="langMenuUserTop" 
+        <?php echo autoOpenFilteringSelect();?>
+        title="<?php echo i18n('helpLang');?>" style="width:225px">
+        <script type="dojo/connect" event="onChange" >
+          changeLocale(this.value,true);
+        </script>
+<?php   $listValues=Parameter::getList('lang');
+        foreach ($listValues as $value => $valueLabel ) {
+          $selected = ($userLang==$value)?'selected':'';
+          $value=str_replace(',','#comma#',$value); // Comma sets an isse (not selected) when in value
+          echo '<option value="' . $value . '" ' . $selected . '>' . $valueLabel . '</option>';
+        }?>
+      </select>
+    </td>
+  </tr>
+  <?php if (!isNewGui()) {?>
+  <tr style="height:40px">
+    <td width="120px" style="text-align:right"><?php echo i18n("paramTheme");?>&nbsp;:&nbsp;</td>
+    <td>
+      <select dojoType="dijit.form.FilteringSelect" class="input" name="themeMenuUserTop" id="themeMenuUserTop"
+        <?php echo autoOpenFilteringSelect();?>
+        title="<?php echo i18n('helpTheme');?>" style="width:225px">
+<?php   echo $obj->getValidationScript('theme');
+        $listValues=$listTheme;
+        foreach ($listValues as $value => $valueLabel ) {
+          $selected = ($userTheme==$value)?'selected':'';
+          $value=str_replace(',','#comma#',$value); // Comma sets an isse (not selected) when in value
+          echo '<option value="' . $value . '" ' . $selected . '>' . $valueLabel . '</option>';
+        }?>
+      </select>
+    </td>
+  </tr>
+<?php } else {?>
+  <tr style="height:40px">
+    <td width="120px" style="text-align:right"><?php echo i18n("paramTheme");?> 1&nbsp;:&nbsp;</td>
+    <td>
+       <input type="color" id="menuUserColorPicker" onInput="setColorTheming(this.value,null);" onChange="saveDataToSession('newGuiThemeColor',this.value.substr(1),true);setColorTheming(this.value,null);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>" style="height: 24px;width: 98%;border-radius: 5px 5px 5px 5px;" />
+    </td>
+  </tr>  
+  <tr style="height:40px">
+    <td width="120px" style="text-align:right"><?php echo i18n("paramTheme");?> 2&nbsp;:&nbsp;</td>
+    <td>
+       <input type="color" id="menuUserColorPickerBis" onInput="setColorTheming(null,this.value);" onChange="saveDataToSession('newGuiThemeColorBis',this.value.substr(1),true);setColorTheming(null,this.value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>" style="height: 24px;width: 98%;border-radius: 5px 5px 5px 5px;" />
+    </td>
+  </tr> 
+ <?php }?>
+  <tr style="height:40px">
+    <td width="120px" style="text-align:right"><?php echo i18n("menuUserStartPage");?>&nbsp;:&nbsp;</td>
+    <td>  
+      <select dojoType="dijit.form.FilteringSelect" class="input" name="firstPageMenuUserTop" id="firstPageMenuUserTop" 
+        <?php echo autoOpenFilteringSelect();?>
+        title="<?php echo i18n('menuUserStartPage');?>" style="width:225px">
+<?php   echo $obj->getValidationScript('startPage');
+        $listValues=$listStartPage;
+        foreach ($listValues as $value => $valueLabel ) {
+          $selected = ($startPage==$value)?'selected':'';
+          $value=str_replace(',','#comma#',$value); // Comma sets an isse (not selected) when in value
+          echo '<option value="' . $value . '" ' . $selected . '>' . $valueLabel . '</option>';
+        }?>
+      </select>
+    </td>
+  </tr>
+  <tr style="height:40px">
+    <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"></td>
+        <td style="float:right;padding-right:20px">
     <?php if (Parameter::getGlobalParameter('simuIndex')){?>
      <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectDataCloning('welcome','simu');">
         <table style="width:122px;">
@@ -113,101 +209,6 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
         </table>
       </div>
      <?php } ?>
-    </td>
-  </tr>
-<?php
-if ($showUserParameters) { // Do not give access to user parameters if locked ?>
-  <tr style="height:40px">
-    <td style="white-space:nowrap;">
-      <div class="pseudoButton"  title="<?php echo i18n('menuUserParameter');?>" onClick="loadMenuBarItem('UserParameter','UserParameter','bar');dijit.byId('iconMenuUserPhoto').closeDropDown();">
-        <table style="width:100%">
-          <tr>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconUserParameter22">&nbsp;</div>
-            </td>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('menuUserParameter');?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>
-      </div>
-    </td>
-  </tr>
-  <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("paramLang");?>&nbsp;:&nbsp;</td>
-    <td>  
-      <select dojoType="dijit.form.FilteringSelect" class="input" name="langMenuUserTop" id="langMenuUserTop" 
-        <?php echo autoOpenFilteringSelect();?>
-        title="<?php echo i18n('helpLang');?>" style="width:225px">
-        <script type="dojo/connect" event="onChange" >
-          changeLocale(this.value,true);
-        </script>
-<?php   $listValues=Parameter::getList('lang');
-        foreach ($listValues as $value => $valueLabel ) {
-          $selected = ($userLang==$value)?'selected':'';
-          $value=str_replace(',','#comma#',$value); // Comma sets an isse (not selected) when in value
-          echo '<option value="' . $value . '" ' . $selected . '>' . $valueLabel . '</option>';
-        }?>
-      </select>
-    </td>
-  </tr>
-  <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("paramTheme");?>&nbsp;:&nbsp;</td>
-    <td>
-      <select dojoType="dijit.form.FilteringSelect" class="input" name="themeMenuUserTop" id="themeMenuUserTop"
-        <?php echo autoOpenFilteringSelect();?>
-        title="<?php echo i18n('helpTheme');?>" style="width:225px">
-<?php   echo $obj->getValidationScript('theme');
-        $listValues=$listTheme;
-        foreach ($listValues as $value => $valueLabel ) {
-          $selected = ($userTheme==$value)?'selected':'';
-          $value=str_replace(',','#comma#',$value); // Comma sets an isse (not selected) when in value
-          echo '<option value="' . $value . '" ' . $selected . '>' . $valueLabel . '</option>';
-        }?>
-      </select>
-    </td>
-  </tr>
-<?php if (isNewGui()) {?>
-  <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("color");?> 1&nbsp;:&nbsp;</td>
-    <td>
-       <input type="color" id="menuUserColorPicker" onInput="setColorTheming(this.value,null);" onChange="saveDataToSession('newGuiThemeColor',this.value.substr(1),true);setColorTheming(this.value,null);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>" style="width:100%" />
-    </td>
-  </tr>  
-  <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("paramTheme");?>&nbsp;:&nbsp;</td>
-    <td>
-       <input type="color" id="menuUserColorPickerBis" onInput="setColorTheming(null,this.value);" onChange="saveDataToSession('newGuiThemeColorBis',this.value.substr(1),true);setColorTheming(null,this.value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>" style="width:100%" />
-    </td>
-  </tr> 
- <?php }?>
-  <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("menuUserStartPage");?>&nbsp;:&nbsp;</td>
-    <td>  
-      <select dojoType="dijit.form.FilteringSelect" class="input" name="firstPageMenuUserTop" id="firstPageMenuUserTop" 
-        <?php echo autoOpenFilteringSelect();?>
-        title="<?php echo i18n('menuUserStartPage');?>" style="width:225px">
-<?php   echo $obj->getValidationScript('startPage');
-        $listValues=$listStartPage;
-        foreach ($listValues as $value => $valueLabel ) {
-          $selected = ($startPage==$value)?'selected':'';
-          $value=str_replace(',','#comma#',$value); // Comma sets an isse (not selected) when in value
-          echo '<option value="' . $value . '" ' . $selected . '>' . $valueLabel . '</option>';
-        }?>
-      </select>
-    </td>
-  </tr>
-  <tr style="height:40px">
-    <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"></td>
-      <td>
-      <div class="pseudoButton"  title="<?php echo i18n('changePassword');?>" onClick="requestPasswordChange();">
-        <table style="width:100%">
-          <tr>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconLoginPassword">&nbsp;</div>
-            </td>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('changePassword');?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>
-      </div>
     </td>
   </tr>
   <?php if(!isNewGui()){?>
