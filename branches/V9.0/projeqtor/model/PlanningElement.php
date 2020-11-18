@@ -2469,7 +2469,7 @@ class PlanningElement extends SqlElement {
     			$this->revenue = $sumActPlEl;
     		}else if($sumProjlEl>0 and ($asSubProj or $asSubAct)){
     			$this->revenue =($asSubAct)?$sumProjlEl+$sumActPlEl:$sumProjlEl;
-    		}else{
+    		}else if ($this->refType == 'Project'){
     		  $this->revenue = 0;
     		}
     	}
