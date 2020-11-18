@@ -151,17 +151,18 @@ $currentMonth = strftime("%m");
                       style="width: 175px;"
                       name="idProjectPlannedInt" id="idProjectPlannedInt"
                       <?php echo autoOpenFilteringSelect();?>
-                      value="<?php if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
+                      value="<?php if(sessionValueExists('idProjectPlannedIntervention')){
+                                    $idProject =  getSessionValue('idProjectPlannedIntervention');
+                                    echo $idProject;
+                                   }else if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" 
+                                       and !isset($idTeam) and !isset($idOrganization) and !isset($idUser) ){
                                      if(strpos(getSessionValue('project'),',')){
                                       echo 0;
                                      }else{
                                        $idProject =  getSessionValue('project');
                                        echo $idProject;
                                      }
-                                   }else if(sessionValueExists('idProjectPlannedIntervention')){
-                                    $idProject =  getSessionValue('idProjectPlannedIntervention');
-                                    echo $idProject;
-                                   }else{
+                                   }else {
                                     echo 0;
                                    }?>">
                         <script type="dojo/method" event="onChange" >
