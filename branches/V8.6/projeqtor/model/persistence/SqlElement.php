@@ -3739,6 +3739,7 @@ abstract class SqlElement {
 
   public function getLowercaseFieldsArray($limitToExportableFields = false) {
     $arrayFields = array();
+    if (method_exists($this, 'setAttributes')) $this->setAttributes();
     $extraHiddenFields = $this->getExtraHiddenFields(null, null, getSessionUser()->getProfile(), $limitToExportableFields);
     foreach ( $this as $fld => $fldVal ) {
       if (is_object ( $this->$fld )) {
@@ -3755,6 +3756,7 @@ abstract class SqlElement {
 
   public function getFieldsArray($limitToExportableFields = false) {
     $arrayFields = array();
+    if (method_exists($this, 'setAttributes')) $this->setAttributes();
     $extraHiddenFields = $this->getExtraHiddenFields ( null, null, getSessionUser ()->getProfile (), $limitToExportableFields );
     foreach ( $this as $fld => $fldVal ) {
       if (is_object ( $this->$fld )) {

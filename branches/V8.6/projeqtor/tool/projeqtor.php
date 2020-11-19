@@ -424,9 +424,10 @@ function foreignKeyOnlyAlias($field) {
 function isForeignKey($field, $class) {
   $field=foreignKeyWithoutAlias($field); // Will allow to have xxxx__idYyyy, not only idXxxx_idYyyy
   if (substr($field, 0, 2)=='id' and strlen($field)>2 and $field!='idle' and substr($field, 2, 1)==strtoupper(substr($field, 2, 1))) {
-    $dataLength=$class->getDataLength($field);
-    $dataType=$class->getDataType($field);
-    return ($dataLength==12 and $dataType=='int');
+//     $dataLength=$class->getDataLength($field);
+//     $dataType=$class->getDataType($field);
+//     return ($dataLength==12 and $dataType=='int');
+    return true;
   } else {
     return false;
   }
