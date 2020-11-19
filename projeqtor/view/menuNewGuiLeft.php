@@ -43,7 +43,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
         <div id="buttonParameter" class="iconParameter iconSize22 iconBreadSrumb <?php echo ($viewSelect=='Parameter')? 'iconBreadSrumbSelect':'';?>" onclick="showBottomContent('Parameter')"  title="<?php echo i18n('menuParameter');?>"></div>
         <div id="buttonLink" class="iconButtonLink16 iconSize22 iconBreadSrumb <?php echo ($viewSelect=='Link')? 'iconBreadSrumbSelect':'';?>" onclick="showBottomContent('Link')" title="<?php echo i18n('ExternalShortcuts');?>"></div>
         <?php if (securityCheckDisplayMenu(null,'Document')) {?>
-        <div title="<?php echo i18n('document');?>" id="buttonDocument" class="iconDocument iconSize22 iconBreadSrumb <?php echo ($viewSelect=='Document')? 'iconBreadSrumbSelect':'';?>" onclick="showBottomContent('Document')"></div>
+        <div title="<?php echo i18n('document');?>" id="buttonDocument" class="iconDocumentDirectory iconSize22 iconBreadSrumb <?php echo ($viewSelect=='Document')? 'iconBreadSrumbSelect':'';?>" onclick="showBottomContent('Document')"></div>
         <?php }?>
         <div id="buttonConsole" class="iconConsole iconSize22 iconBreadSrumb <?php echo ($viewSelect=='Console')? 'iconBreadSrumbSelect':'';?>" onclick="showBottomContent('Console')"  title="<?php echo i18n('Console');?>"></div>
         <?php if(securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv()){?>
