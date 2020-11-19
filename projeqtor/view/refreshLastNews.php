@@ -59,7 +59,7 @@ if(substr($userLang,0,2)=="fr")$lang="fr";
                     <tr>
                       <td>
                         <div style="position:relative;border-top-left-radius:5px;border-top-right-radius:5px;color:var(--color-dark);font-weight:bold;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;overflow:hidden;<?php if($i==1 or $i==3){?>margin-right:10px; <?php } ?>margin-bottom:10px;height:155px;width:165px;background:#DCDCDC;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
-                         <div id="textTitle<?php echo $i;?>" style="padding:15px;"> <?php echo $value->title;?> </div> <div id="arrowNewsDown<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-down"></div>
+                         <div id="divMsgtextTitle<?php echo $i;?>" style="padding:15px;"> <?php echo $value->title;?> </div> <div id="arrowNewsDown<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-down"></div>
                         </div>
                       </td>
                     </tr>
@@ -96,7 +96,7 @@ if(substr($userLang,0,2)=="fr")$lang="fr";
                     <tr>
                       <td>
                         <div style="position:relative;border-top-left-radius:5px;border-top-right-radius:5px;color:var(--color-dark);font-weight:bold;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;overflow:hidden;<?php if($i==5 or $i==7){?>margin-right:10px; <?php } ?>margin-bottom:10px;height:155px;width:165px;background:#DCDCDC;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
-                         <div id="textTitle<?php echo $i;?>" style="padding:15px;"> <?php echo $value->title;?> </div> <div id="arrowNewsDown<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-down"></div>
+                         <div id="divMsgtextTitle<?php echo $i;?>" style="padding:15px;"> <?php echo $value->title;?> </div> <div id="arrowNewsDown<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-down"></div>
                         </div>
                       </td>
                     </tr>
@@ -133,7 +133,7 @@ if(substr($userLang,0,2)=="fr")$lang="fr";
                     <tr>
                       <td>
                         <div style="position:relative;border-top-left-radius:5px;border-top-right-radius:5px;color:var(--color-dark);font-weight:bold;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;overflow:hidden;<?php if($i==9 or $i==11){?>margin-right:10px; <?php } ?>margin-bottom:10px;height:155px;width:165px;background:#DCDCDC;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
-                        <div id="textTitle<?php echo $i;?>" style="padding:15px;">  <?php echo $value->title;?> </div> <div id="arrowNewsDown<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-down"></div>
+                        <div id="divMsgtextTitle<?php echo $i;?>" style="padding:15px;">  <?php echo $value->title;?> </div> <div id="arrowNewsDown<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-down"></div>
                         </div>
                       </td>
                     </tr>

@@ -387,6 +387,7 @@ function showIntrotext(id){
     dojo.byId("divMsgTitle"+id).style.fontSize=10+'px';
     dojo.byId("divMsgTitle"+id).style.textOverflow='ellipsis';
     dojo.byId("arrowNewsDown"+id).style.display="none";
+    dojo.byId("divMsgtextTitle"+id).style.padding = 0+'px';
   }
 }
 
@@ -406,6 +407,7 @@ function hideIntrotext(id){
     dojo.byId("divMsgTitle"+id).style.fontSize=13+'px';
     dojo.removeClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
     dojo.byId("arrowNewsDown"+id).style.display="block";
+    dojo.byId("divMsgtextTitle"+id).style.padding = 15+'px';
   }
 }
 
