@@ -75,6 +75,11 @@
     if (! isset($outMode)) { $outMode=""; } 
     if (! isset($csvExportAll)) $csvExportAll=false;
     
+    if ($print && $outMode=='csv') {
+      global $contextForAttributes;
+      $contextForAttributes='global';
+    }
+    
     $obj=new $objectClass();
     $table=$obj->getDatabaseTableName();
     $accessRightRead=securityGetAccessRight($obj->getMenuClass(), 'read');  
@@ -764,6 +769,7 @@
     		  $csvQuotedText=false;
     		}
     		$obj=new $objectClass();
+    		if (method_exists($obj, 'setAttributes')) $obj->setAttributes();
     		$first=true;
     		$arrayFields=array();
         $arrayFields=$obj->getLowercaseFieldsArray(true);
@@ -786,7 +792,9 @@
     		while ($line = Sql::fetchLine($result)) {
     		  if ($first) {
 	    			foreach ($line as $id => $val) {
-	    			  if (!isset($arrayFields[strtolower($id)]) || ($objectClass=='GlobalView' and $id=='id')) continue;   
+	    			  if (!isset($arrayFields[strtolower($id)]) || ($objectClass=='GlobalView' and $id=='id')) {
+	    			    continue;   
+	    			  }
 	    				$colId=$id;
 	    				if (Sql::isPgsql() and isset($arrayFields[$id])) {
 	    					$colId=$arrayFields[$id];
@@ -824,6 +832,10 @@
 	    				echo $val.$csvSep;
 	            $dataType[$id]=$obj->getDataType($id);
 	            $dataLength[$id]=$obj->getDataLength($id);
+	            if (! $dataLength[$id] and substr($id,0,2)=='id' and strlen($id)>2 and substr($id,2,1)==strtoupper(substr($id,2,1)) ) {
+	              $dataType[$id]='int';
+	              $dataLength[$id]='12';
+	            }
 	            if ($id=='refId' and ! property_exists($objectClass,'refName') and $exportReferencesAs=='name') {
 	              echo encodeCSV(i18n('colName')).$csvSep;
 	            }
