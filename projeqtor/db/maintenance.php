@@ -149,6 +149,14 @@ if ($currVersion=='V0.0.0') {
   Parameter::storeGlobalParameter('paramRightDiv', 'bottom');
   Parameter::storeGlobalParameter('paramLayoutObjectDetail', 'tab');
   Parameter::storeUserParameter('menuLeftDisplayMode', 'ICONTXT');
+//   $customArray = array('1'=>array('Project', 'Activity', 'Milestone', 'Meeting', 'Planning', 'Resource', 'Reports'), 
+//                        '2'=>array('Ticket', 'Kanban', 'Timesheet', 'Absence'));
+//   foreach ($customArray as $row=>$menu){
+//     $customMenu = new MenuCustom();
+//     $customMenu->name = $menu;
+//     $customMenu->idRow = $row;
+//     $customMenu->save();
+//   }
   enableCatchErrors();
   rename("../api/.htaccess.example","../api/.htaccess"); // Use exemple to "lock" API access (will use not existing password file)
   disableCatchErrors();
@@ -984,6 +992,32 @@ if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
     $MessageLegalFollowUp->idMessageLegal = SqlList::getIdFromName('MessageLegal', 'newGui');
     $MessageLegalFollowUp->idUser = 1;
     $MessageLegalFollowUp->save();
+    $res = new ResourceAll();
+    $resList = $res->getSqlElementsFromCriteria(array('isUser'=>'1'));
+    $customRow[1]=array('Project', 'Activity', 'Milestone', 'Meeting', 'Planning', 'Resource', 'Reports');
+    $customRow[2]=array('Ticket', 'Kanban', 'Imputation', 'Absence');
+    foreach ($resList as $resource){
+      $sortOrder = 1;
+      foreach ($customRow[1] as $menu){
+      	$customMenu = new MenuCustom();
+      	$customMenu->name = 'menu'.$menu;
+      	$customMenu->idUser = $resource->id;
+      	$customMenu->idRow = 1;
+      	$customMenu->sortOrder = $sortOrder;
+      	$customMenu->save();
+      	$sortOrder++;
+      }
+      $sortOrder = 1;
+      foreach ($customRow[2] as $menu){
+      	$customMenu = new MenuCustom();
+      	$customMenu->name = 'menu'.$menu;
+      	$customMenu->idUser = $resource->id;
+      	$customMenu->idRow = 2;
+      	$customMenu->sortOrder = $sortOrder;
+      	$customMenu->save();
+      	$sortOrder++;
+      }
+    }
     Sql::commitTransaction();
 }
 
