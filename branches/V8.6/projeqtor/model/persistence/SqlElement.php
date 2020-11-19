@@ -1678,7 +1678,7 @@ abstract class SqlElement {
     // if object is Asignable, update assignments on idle change
     $archiv=new HistoryArchive();
     $hist=new History();
-    if (property_exists($this, 'idle')) {
+    if (property_exists($this, 'idle') and property_exists($this, '_Assignment')) {
       $ass = new Assignment ();
       $query = "update " . $ass->getDatabaseTableName ();
       $query .= " set idle='" . $this->idle . "'";
@@ -1739,7 +1739,7 @@ abstract class SqlElement {
       }
     }
     // Set notes on item to idle (or not)
-    if (property_exists($this, 'idle')) {
+    if (property_exists($this, 'idle') and property_exists($this, '_Note')) {
       $note = new Note ();
       $query = "update " . $note->getDatabaseTableName ();
       $query .= " set idle='" . $this->idle . "'";
