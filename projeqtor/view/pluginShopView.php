@@ -30,10 +30,6 @@
   require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
   scriptLog('   ->/view/pluginManagement.php');
-  $isIE=false;
-  if (array_key_exists('isIE',$_REQUEST)) {
-    $isIE=$_REQUEST['isIE'];
-  }
   $user=getSessionUser();
   $idPlugin=RequestHandler::getValue('objectId');
   $urlPlugins = "http://projeqtor.org/admin/getPlugins.php";
@@ -52,8 +48,52 @@ require_once "../tool/formatter.php";
       break;
     }
   }
+  
+  $userLang = getSessionValue('currentLocale');
+  $lang = "en";
+  if(substr($userLang,0,2)=="fr")$lang="fr";
+  $pluginName=($lang=='fr')?$obj->nameFr:$obj->nameEn;
+  $shortDec=($lang=='fr')?$obj->shortDescFr:$obj->shortDescEn;
+  $longDesc=($lang=='fr')?$obj->longDescFr:$obj->longDescEn;
+  $page=($lang=='fr')?$obj->pageFr:$obj->pageEn;
+  $userManual=$obj->userManual;
+  debugLog($obj);
 ?>  
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Plugin" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
+  <div id="pluginShopDiv" class="listTitle" dojoType="dijit.layout.ContentPane" region="top" style="z-index:3;overflow:visible">
+        <table width="100%">
+        <tr height="70px" style="vertical-align: middle;">
+          <td style="text-align:center;font-size:16px;"><span class="title" style="text-decoration: underline;"><?php echo $pluginName;?>&nbsp;</span>        
+          </td>
+          <td width="10px" >&nbsp;
+          </td>
+          <td width="50px"> 
+          </td>
+          <td>  
+          </td>
+        </tr>
+      </table>
+  </div>
+  <div dojoType="dijit.layout.ContentPane" region="center" style="overflow-y:auto;margin-top:9%;margin-left:10%;">
+    <div class="container" dojoType="dijit.layout.BorderContainer">
+      <div dojoType="dijit.layout.ContentPane" region="top" style="height:48px" >
+        <span class="listTitle" style="font-size:14px;font-weight:bold;" ><?php echo $shortDec;?></span>
+      </div>
+      <div dojoType="dijit.layout.ContentPane" region="center" >
+        <div class="longDescPlugin" ><?php echo $longDesc;?></div>
+      </div>
+      <div dojoType="dijit.layout.ContentPane" region="right" style="width:20%;text-align:center;">
+        <span ><?php echo i18n('technicalDoc');?></span>
+        <div style="margin-top:40px;margin-bottom:40px;display: flex;justify-content: center;" class="roundedButtonSmall" onclick="directionExternalPage('<?php echo $userManual?>')">
+          <div class="imageColorNewGui iconPdf iconSize32"></div>
+        </div>
+        <span ><?php echo i18n('goToThePage');?></span>
+        <div  style="margin-top:40px;display: flex;justify-content: center;" class="roundedButtonSmall" onclick="directionExternalPage('<?php echo $page?>')">
+          <div class="imageColorNewGui iconGoto iconSize32"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
