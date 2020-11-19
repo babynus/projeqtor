@@ -780,11 +780,14 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
               $val=$messLegal->description; 
               if($cptMess < $nbListMess){ ?>
                  <div id="messageLegall<?php echo $messFollow->id;?>" style="display:none; margin-top:15px; width:95%; height:135px; overflow-y:auto;"> 
-                   <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; min-height:100px; margin:0px 40px 0px 40px;">
               <?php }else{ ?> 
                  <div id="messageLegall<?php echo $messFollow->id;?>" style="display:block; margin-top:15px; width:95%; height:135px; overflow-y:auto;"> 
-                   <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; min-height:100px; margin:0px 40px 0px 40px;">
-              <?php } echo $val;?>
+              <?php }
+              if($messLegal->name == 'newGui'){?>
+                  <img src="img/newGui.png" style="float:left;height:100%;padding-right:10px;"/>
+              <?php }?>
+                  <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; min-height:100px; margin:0px 40px 0px 40px;">  
+                    <?php echo $val;?>
                   </div>
                   <div style="width:97%;  bottom:5px; text-align:right;">
                       <?php if($cptMess != 1){?>
