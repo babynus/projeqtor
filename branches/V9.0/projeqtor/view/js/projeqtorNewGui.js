@@ -433,6 +433,10 @@ function refreshSelectedMenuLeft(menuName){
 function loadPluginView(id){
   loadContent("pluginShopView.php?objectId="+id,"centerDiv");
 }
+
+function directionExternalPage (page){
+  window.open(page, '_blank');
+}
 //=============================================================================
 
 
