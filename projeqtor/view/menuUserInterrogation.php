@@ -52,10 +52,10 @@ if($lang=="fr"){
           <td><div style="width:58px"></div></td>
           <td> <a target="#" href="<?php echo $linkToForumRules;?>"> <div class="roundedVisibleButton roundedButton generalColClass"
             title="<?php echo('reportBug'); ?>"
-            style="text-align:left;margin-top:10px;height:23px;width:160px;
+            style="text-align:left;position:absolute;top:27px;right:25px;height:23px;width:160px;
             onClick="showFilterDialog();">
             <img  class="imageColorNewGui" src="css/customIcons/new/iconHelpBug.svg" style="position:relative;left:5px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>
-             <div style="color:grey;position:relative;top:-19px;left:38px;"><?php echo i18n('reportBug'); ?></div>
+             <div style="position:relative;top:-19px;left:38px;"><?php echo i18n('reportBug'); ?></div>
              </div> </a></td></tr>
       </table>
     </td>
@@ -69,7 +69,7 @@ if($lang=="fr"){
         <table style="width:100%">
           <tr>
             <td style="vertical-align:middle;"><?php echo i18n('help');?></td>
-            <td style="float:right;"><?php echo i18n('f1');?></td>
+            <td style="float:right;"><?php echo 'F1';?></td>
           </tr>
         </table>
       </div>
@@ -80,7 +80,7 @@ if($lang=="fr"){
   <tr style="color:grey;height:15px;">
     <td><div style="width:15px !important;"></div></td>
     <td style="border-bottom:1px dotted;cursor:pointer;">
-      <div  style="margin-top:6px;" title="<?php echo i18n('keyboardShortcuts');?>" onClick="showHelp('ShortCut');">
+      <div  style="padding-top:10px;margin-top:6px;" title="<?php echo i18n('keyboardShortcuts');?>" onClick="showHelp('ShortCut');">
         <table style="width:100%">
           <tr>
             <td style="vertical-align:middle;"><?php echo i18n('keyboardShortcuts');?></td>
@@ -93,7 +93,7 @@ if($lang=="fr"){
   
   <tr style="color:grey;height:15px;">
     <td><div style="width:15px !important;"></div></td>
-    <td style="cursor:pointer;border-bottom:1px dotted;">
+    <td style="padding-top:10px;cursor:pointer;border-bottom:1px dotted;">
       <div style="margin-top:6px;" title="<?php echo i18n('aboutMessage');?>" onClick="showAbout(aboutMessage);">
         <table style="width:100%">
           <tr>
@@ -104,52 +104,6 @@ if($lang=="fr"){
     </td>
     <td><div style="width:15px !important;"></div></td>
   </tr>
-  
-    <tr style="color:grey !important;height:15px;">
-      <td><div style="width:15px !important;"></div></td>
-      <td style="border-bottom:1px dotted;">
-      <a style="text-decoration:none;" target="#" href="<?php echo $linkPlugin;?>">
-        <table>
-          <tr>
-            <td>
-              <div style="color:grey;margin-top:6px;" title="<?php echo i18n('linkToPlugin');?>">
-                <table style="width:100%">
-                  <tr>
-                    <td style="vertical-align:middle;"><?php echo i18n('linkToPlugin');?>&nbsp;&nbsp;</td>
-                  </tr>
-                </table>
-              </div>
-            </td>
-            <td style="cursor:pointer;"><div style="position:absolute;left:348px;top:140px;" class="imageColorNewGui iconButtonLink16 iconSize16 "> </div></td>
-          </tr>
-        </table>
-        </a>
-      </td>
-      <td><div style="width:15px !important;"></div></td>
-    </tr>
-  
-    <tr>
-     <td><div style="width:15px !important;"></div></td>
-      <td style="color:grey;height:15px;border-bottom:1px dotted;">
-      <a style="text-decoration:none;" target="#" href="<?php echo $linkForum;?>">
-        <table>
-          <tr>
-            <td><div style="color:grey;margin-top:6px;" title="<?php echo i18n('linkToForum');?>">
-                  <table style="width:100%">
-                    <tr>
-                      <td style="vertical-align:middle;"><?php echo i18n('linkToForum');?>&nbsp;&nbsp;</td>
-                    </tr>
-                  </table>
-                </div>
-            </td>
-            <td style="cursor:pointer;"><div style="position:absolute;left:348px;top:163px;" class="imageColorNewGui iconButtonLink16 iconSize16 "> </div></td>
-          </tr>
-        </table>
-        </a>
-      </td>
-      <td><div style="width:15px !important;"></div></td>
-    </tr>
-  
       <tr>
         <td><div style="width:15px !important;"></div></td>
         <td><div style="margin-bottom:35px;"></div></td>
@@ -163,4 +117,42 @@ if($lang=="fr"){
         </td>
         <td><div style="width:15px !important;"></div></td>
       </tr>
+      
+    <tr style="margin-top:20px;height:15px;">
+      <td><div style="width:15px !important;"></div></td>
+      <td> 
+        <a target="#" href="<?php echo $linkPlugin;?>"> <div class="roundedVisibleButton roundedButton generalColClass"
+            title="<?php echo('linkToPlugin'); ?>"
+            style="text-align:left;height:23px;width:340px;
+            onClick="showFilterDialog();">
+            <img  class="imageColorNewGui" src="css/customIcons/new/iconGoto.svg" style="position:relative;left:305px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>
+             <div style="position:relative;top:-19px;left:12px;"><?php echo i18n('linkToPlugin'); ?></div>
+             </div> 
+         </a>
+      </td>
+      <td><div style="width:15px !important;"></div></td>
+    </tr>
+    
+    
+    <tr>
+      <td><div style="width:15px !important;"></div></td>
+      <td> 
+        <a target="#" href="<?php echo $linkForum;?>"> <div class="roundedVisibleButton roundedButton generalColClass"
+            title="<?php echo('linkToForum'); ?>"
+            style="margin-top:13px;text-align:left;height:23px;width:340px;
+            onClick="showFilterDialog();">
+            <img  class="imageColorNewGui" src="css/customIcons/new/iconGoto.svg" style="position:relative;left:305px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>
+             <div style="position:relative;top:-19px;left:12px;"><?php echo i18n('linkToForum'); ?></div>
+             </div> 
+         </a>
+      </td>
+      <td><div style="width:15px !important;"></div></td>
+    </tr>
+    
+    <tr>
+      <td><div style="width:15px !important;"></div></td>
+      <td><div style="margin-bottom:20px;"></div></td>
+      <td><div style="width:15px !important;"></div></td>
+   </tr>
+   
 </table>
