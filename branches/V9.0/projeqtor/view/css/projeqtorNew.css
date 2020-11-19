@@ -1145,11 +1145,11 @@ animation: fadeIn ease 0.5s;
 }
 
 .ProjeQtOrNewGui .swapView {
-  height:450px !important;
+  height:395px !important;
 }
 .ProjeQtOrNewGui .indicatorPage {
-  bottom:56px !important;
-  left:-6px;
+  bottom:103px !important;
+  left:-1px;
 }
 
 .ProjeQtOrNewGui .mblPageIndicatorDotSelected {
@@ -1275,16 +1275,15 @@ select option:checked {
 }
 
 .ProjeQtOrNewGui .arrow-down{
-	width: 20px;
-    height: 15px;
-    background-color: #8888e8;
+	  width: 13px;
+    height: 10px;
+    background-color:var(--color-dark) !important;
     clip-path: polygon(100% 0, 0 0, 50% 100%);
 }
 
 .ProjeQtOrNewGui .arrow-up{
-  width: 32px;
-  height: 20px;
-  background-color: #8888e8;
-
+  width: 13px;
+  height: 10px;
+  background-color: var(--color-dark) !important;
   clip-path: polygon(50% 0, 0 100%, 100% 100%);
 }
