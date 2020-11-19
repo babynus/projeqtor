@@ -270,7 +270,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (256,'menuEmploymentContractEndReason',133,219,30),
 (257,'menuLeavesSystemHabilitation',133,220,40),
 (258,'menuConsultationPlannedWorkManual',3,253,45),
-(258,'menuProjectParameter',8,19,10),
+(259,'menuProjectParameter',8,19,10),
 (300,'navPlugin',0,0,110),
 (301,'menuPluginManagement',300,136,10);
 
