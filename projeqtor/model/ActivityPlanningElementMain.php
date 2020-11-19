@@ -414,21 +414,40 @@ class ActivityPlanningElementMain extends PlanningElement {
       $this->revenue = $complexityVal->price*$this->quantity;
       if($old->quantity != $this->quantity or $old->idComplexity != $this->idComplexity){
         $ass = new Assignment();
-        $lstAss = $ass->getSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->refId,'idle'=>'0'));
+        $lstAss = $ass->getSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->refId));
         $totalValidatedWork = 0;
         foreach ($lstAss as $asVal){
+          if ($this->idle) continue;
           $totalValidatedWork += $asVal->assignedWork;
         }
         //if($totalValidatedWork < $this->validatedWork and $totalValidatedWork>0 ){
         if( $totalValidatedWork>0 ){
           $factor = $this->validatedWork / $totalValidatedWork;
+          $sumAssignedWork=0;
+          $sumLeftWork=0;
+          $sumAssignedCost=0;
+          $sumLeftCost=0;
           foreach ($lstAss as $asVal){
-            $newLeftWork = ($asVal->assignedWork*$factor) - ($asVal->assignedWork) ;
-            $asVal->assignedWork = round($asVal->assignedWork*$factor,2);
-            $asVal->leftWork = $asVal->leftWork+$newLeftWork;
-            if($asVal->leftWork < 0)$asVal->leftWork=0;
-            $asVal->save();
+            if (! $asVal->idle) {
+              $asVal->_skipDispatch=true;             
+              $newLeftWork = ($asVal->assignedWork*$factor) - ($asVal->assignedWork) ;
+              $asVal->assignedWork = round($asVal->assignedWork*$factor,2);
+              $asVal->leftWork = $asVal->leftWork+$newLeftWork;
+              if($asVal->leftWork < 0)$asVal->leftWork=0;
+              $asVal->save();
+            }
+            $sumAssignedWork+=$asVal->assignedWork;
+            $sumLeftWork+=$asVal->leftWork;
+            $sumAssignedCost+=$asVal->assignedCost;
+            $sumLeftCost+=$asVal->leftCost;
           }
+          $this->assignedWork=$sumAssignedWork;
+          $this->leftWork=$sumLeftWork;
+          $this->plannedWork=$this->realWork+$this->leftWork;
+          $this->assignedCost=$sumAssignedCost;
+          $this->leftCost=$sumLeftCost;          
+          $this->plannedCost=$this->realCost+$this->leftCost;
+          $this->_workHistory=true; // Will force to update data (it's a hack)
         }
       }
       $CaReplaceValidCost= Parameter::getGlobalParameter('CaReplaceValidCost');
