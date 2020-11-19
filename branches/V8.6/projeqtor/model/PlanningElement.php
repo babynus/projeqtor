@@ -617,7 +617,6 @@ class PlanningElement extends SqlElement {
       }
     }
     ///
-    
     //end
     $result=parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
