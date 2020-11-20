@@ -64,10 +64,10 @@ if(substr($userLang,0,2)=="fr")$lang="fr";
                       </td>
                     </tr>
                     <tr>
-                      <td><div onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" style="position:relative;cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:165px;overflow-y:auto;background:#f2f5f5;" id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><br><div style="margin-left:10px;"><?php echo $value->introtext;?><div id="arrowNewsUp<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-up"></div></div></div></td>
+                      <td><div onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" style="margin-bottom:10px;position:relative;cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:165px;overflow-y:auto;background:#f2f5f5;" id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><div style="padding:12px;"><?php echo $value->introtext;?></div><div id="arrowNewsUp<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-up"></div></div></td>
                     </tr>
                      <tr>
-                      <td><div style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:165px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><br><div style="margin-left:10px;"><?php echo $value->introtext.$value->fulltext;?></div></div></td>
+                      <td><div style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:165px;overflow-y:auto;background:#f2f5f5;" id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);"><div style="padding:10px;"><?php echo $value->introtext.$value->fulltext;?></div></div></td>
                     </tr>
                   </table>
                 </td>
@@ -78,6 +78,8 @@ if(substr($userLang,0,2)=="fr")$lang="fr";
               }?>
         </tr>
         </table>
+        
+        <div id="arrowRight1" style="position:absolute;top:360px;left:247px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconNext"> </div>
     </div>
     <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage2" name="divNewsPage2">
         <table>
@@ -115,6 +117,8 @@ if(substr($userLang,0,2)=="fr")$lang="fr";
               }?>
         </tr>
         </table>
+        <div id="arrowRight1" style="position:absolute;top:360px;left:75px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconPrevious"> </div>
+        <div id="arrowRight1" style="position:absolute;top:360px;left:247px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconNext"> </div>
     </div>
     <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage3" name="divNewsPage3">
         <table>
@@ -152,5 +156,6 @@ if(substr($userLang,0,2)=="fr")$lang="fr";
               }?>
         </tr>
         </table>
+        <div id="arrowRight1" style="position:absolute;top:360px;left:75px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconPrevious"> </div>
     </div>
     <div class="indicatorPage" data-dojo-type="dojox/mobile/PageIndicator" data-dojo-props='fixed:"bottom"'></div>

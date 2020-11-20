@@ -317,6 +317,7 @@ function showMsg(id,value){
     dojo.byId("divMsgFull"+id).style.height=270+'px';
     dojo.byId("divMsgFull"+id).style.width=340+'px';
     dojo.byId("divMsgTitle"+id).style.fontSize=13+'px';
+    
   }else{
     dojo.byId("divMsgFull"+id).style.display="none";
     dojo.byId("divMsgTitle"+id).style.height=155+'px';
@@ -324,8 +325,13 @@ function showMsg(id,value){
     dojo.byId("divMsgTitle"+id).style.borderRadius = 5+'px '+5+'px '+5+'px '+5+'px';
     dojo.byId("divMsgTitle"+id).style.flexDirection="column";
     dojo.byId("divMsgTitle"+id).style.justifyContent="center";
-    dojo.byId("divMsgTitle"+id).style.display="flex";
     dojo.byId("divMsgTitle"+id).style.fontSize=13+'px';
+    dojo.byId("divMsgtextTitle"+id).style.padding = 15+'px';
+    dojo.byId("arrowNewsDown"+id).style.display="block";
+    if(id==1 || id==3 || id==5 || id==7 || id==9 || id==11){
+      dojo.byId("divMsgTitle"+id).style.marginRight = 10+'px';
+    }
+    dojo.byId("divMsgTitle"+id).style.marginBottom = 10+'px';
     
     dojo.removeClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
     if(value==0.25 || value==1.25 || value==2.25){
@@ -414,7 +420,11 @@ function hideIntrotext(id){
 function hideMsg(id,value){
   dojo.byId("divMsgFull"+id).style.display="none";
   dojo.byId("divMsgTitle"+id).style.height=155+'px';
-  dojo.byId("divMsgTitle"+id).style.width=155+'px';
+  dojo.byId("divMsgTitle"+id).style.width=165+'px';
+  if(id==1 || id==3 || id==5 || id==7 || id==9 || id==11){
+    dojo.byId("divMsgTitle"+id).style.marginRight = 10+'px';
+  }
+  dojo.byId("arrowNewsDown"+id).style.display="block";
   dojo.removeClass(dojo.byId("divMsgTitle"+id),"colorMediumDiv");
   if(value==0.25 || value==1.25 || value==2.25){
     if(dojo.byId("divMsgTitle"+(id+1))){
@@ -5013,7 +5023,9 @@ function selectStoredFilter(idFilter, context, contentLoad, container) {
     if(isNewGui){
       dijit.byId('listFilterFilter').closeDropDown();
     }
+    console.log('test1');
   } else {
+    console.log('test2');
 	  if (dojo.byId('filterLogicalOperator') && dojo.byId('filterLogicalOperator').style.display=='none') {
 		  	dojo.byId('filterLogicalOperator').style.display='block';
 	  }
@@ -5097,9 +5109,10 @@ function selectDynamicFilterContinue() {
 	    compUrl+='&container=divKanbanContainer';
 	  }
     doc.loadContent(
-	      "../tool/displayFilterList.php?context=directFilterList&filterObjectClass="
-	          + objectClass+compUrl, "directFilterList", null,
-	      false, 'returnFromFilter', false);
+        "../tool/displayFilterList.php?context=directFilterList&displayQuickFilter=true&displayQuickFilter=true&filterObjectClass="
+            + objectClass+compUrl, "directFilterList", null,
+        false, 'returnFromFilter', false);
+    
 	  if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! window.top.dijit.byId('dialogDetail').open) {
       refreshJsonPlanning();
 	  } else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Report') {
