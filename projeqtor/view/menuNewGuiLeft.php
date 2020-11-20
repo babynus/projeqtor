@@ -297,7 +297,7 @@ function getReportsMenu(){
 function getPlugins (){
   $level=2;
   $result=array();
-  $plInstal=array();
+  $idMenu=array();
   $menu=new Menu;
   $exist=false;
   $idMenuPlugin=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navPlugin'));
@@ -309,16 +309,15 @@ function getPlugins (){
   $pluginsInstal=$menu->getSqlElementsFromCriteria(null,null,$where);
   $c=10;
   foreach ($pluginsInstal as $id=>$menuPlugin){
+    $idMenu=$menuPlugin->id;
+    if(strlen($menuPlugin->id)==9)$idMenu=substr($menuPlugin->id,0,-3);
     if (!$menuPlugin->canDisplay() ){
-     if ($menuPlugin->name=='menuTranslationApplication') {
-      	unset($plInstal[$menuPlugin->id]);
-      }else{
-        unset($plInstal[substr($menuPlugin->id,0,-3)]);
-      }
+  	   unset($plInstal[$idMenu]);
       continue;
     }
     foreach ($plInstal as $valId){
-      if(strpos(".$menuPlugin->id.", ".$valId.")!==false){
+      debugLog($idMenu);
+      if($idMenu==$valId){
         $exist=true;
         break;
       }
@@ -329,6 +328,7 @@ function getPlugins (){
     $obj= array('id'=>$menuPlugin->id,'name'=>$menuPlugin->name,'idParent'=>$idMenuPlugin->id,'idMenu'=>$menuPlugin->id,'menuType'=>$menuPlugin->type);
     $result[$key]=array('level'=>$level,'objectType'=>'pluginInst','object'=>$obj);
   }
+  debugLog($plInstal);
   $urlPlugins = "http://projeqtor.org/admin/getPlugins.php";
   $currentVersion=null;
   if (ini_get('allow_url_fopen')) {
@@ -341,7 +341,7 @@ function getPlugins (){
   $plugins=$object->items;
   if(!empty($plugins)){
     foreach ($plugins as $id=>$val){
-      if(in_array($val->id, $plInstal))unset($plugins[$id]);
+      if(in_array($val->id, $plInstal))continue;
       $c++;
       $k=$level.'-'.numericFixLengthFormatter($idMenuPlugin->id,5).'-'.numericFixLengthFormatter($c,5);
       $result[$k]=array('level'=>$level,'objectType'=>'pluginNotInst','object'=>$val);
