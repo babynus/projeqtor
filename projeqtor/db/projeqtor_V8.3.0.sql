@@ -155,8 +155,8 @@ INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
 (3,1,'feedingOfTheReal'),
 (1,1,'canChangeNote'),
 (3,1,'canChangeNote'),
-(1,1,'canDeleteAttachement'),
-(3,1,'canDeleteAttachement');
+(1,1,'canDeleteAttachment'),
+(3,1,'canDeleteAttachment');
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  (11,225,0,1),
