@@ -65,7 +65,7 @@ if($lang=="fr"){
   <tr style="color:grey;height:15px;">
     <td><div style="width:15px !important;"></div></td>
     <td style="border-bottom:1px dotted;cursor:pointer;">
-      <div style="margin-top:15px;" title="<?php echo i18n('help');?>" onClick="showHelp();">
+      <div style="margin-top:30px;" title="<?php echo i18n('help');?>" onClick="showHelp();">
         <table style="width:100%">
           <tr>
             <td style="vertical-align:middle;"><?php echo i18n('help');?></td>
