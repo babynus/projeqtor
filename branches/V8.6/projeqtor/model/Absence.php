@@ -392,6 +392,7 @@ class Absence{
     		$unitAbs = Parameter::getGlobalParameter('imputationUnit');
         $res = new Resource($userID,true);
         $max = $res->capacity;
+        if (!floatval($max)) $max=1;
     		if($isOpen){ 
     		  $dayWork = new Work();
     		  $whereWorkDay = " idResource=".$userID." AND workDate='".$workDay."' AND ".$whereWork;
