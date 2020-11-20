@@ -1940,7 +1940,10 @@ class PlanningElement extends SqlElement {
       if (substr($fieldName,-4)=='Cost'
        or substr($fieldName,0,7)=='expense'
        or substr($fieldName,0,5)=='total'
-       or substr($fieldName, 0,13) == 'reserveAmount') {
+       or substr($fieldName, 0,13) == 'reserveAmount'
+       or $fieldName=='revenue' 
+       or $fieldName=='_label_commandSum' or $fieldName=='commandSum'
+       or $fieldName=='_label_billSum' or $fieldName=='billSum') {
          return 'hidden';
       }
     } else if ($this->_costVisibility =='VAL') {
