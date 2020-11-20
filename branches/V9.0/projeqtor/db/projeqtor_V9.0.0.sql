@@ -280,3 +280,7 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('menuLeftDisplayMode','ICONTXT');
 
 INSERT INTO ${prefix}parameter (idUser, parameterCode, parameterValue) SELECT r.id , 'newGui', 0 FROM ${prefix}resource r where r.isUser=1;
+
+-- ========================================================
+
+UPDATE `${prefix}habilitationother` set scope='canDeleteAttachment' where scope='canDeleteAttachement';
