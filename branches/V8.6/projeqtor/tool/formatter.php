@@ -714,7 +714,10 @@ function activityStreamDisplayHist ($hist,$origin){
   if(preg_match( '|Attachement|',$change) or preg_match('|Attachment|',$change)){
     if(strpos($change, '|Attachement|'))$attach=explode('|', substr($change,(strpos($change, '|Attachement|')+1)));
     else $attach=explode('|', substr($change,(strpos($change, '|Attachment|')+1)));
-    $objectAttach=new $attach[0] ($attach[1]);
+    $objectClass=$attach[0];
+    if ($objectClass=='Attachement') $objectClass='Attachment';
+    $objectId=intval($attach[1]);
+    $objectAttach=new $objectClass($objectId);
     if($objectAttach->id!=''){
       $attachement=true;
     }else{
