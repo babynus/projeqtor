@@ -201,7 +201,7 @@ if ($activityStreamShowClosed!='1') {
 	$clause.=" and idle=0";
 }
 
-
+$activityStreamNumberElement=intval($activityStreamNumberElement);
 $multipleLimit=100; // To avoid reading all elements, while taking into account fact that retreived data may not be display depending on access right, multiplicated retreived max number
 $limitQuery=$activityStreamNumberElement*$multipleLimit;
 if ($limitQuery<10000) $limitQuery=10000;
