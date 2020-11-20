@@ -4105,13 +4105,23 @@ function formatBrowserDateToDate($dateTime) {
   } else {
     return $dateTime;
   }
+  $month=intval($month);
+  $day=intval($day);
+  $year=intval($year);
+  if ($year<100) $year+=2000;
   if (trim($time)) {
+    $AMPM=(strpos($time,'AM'))?'AM':((strpos($time,'PM'))?'PM':'');
+    if ($AMPM!='') $time=str_replace(array('AM','PM'),'',$time);
     if (substr_count($time, ':')==2) {
       list($hour, $minute, $second)=explode(':', $time);
     } else {
       list($hour, $minute)=explode(':', $time);
       $second=0;
     }
+    $hour=intval($hour);
+    $minute=intval($minute);
+    $second=intval($second);
+    if ($AMPM=='PM') $hout+=12;
     return date('Y-m-d H:i:s', mktime($hour, $minute, $second, $month, $day, $year));
   } else {
     return date('Y-m-d', mktime(0, 0, 0, $month, $day, $year));
