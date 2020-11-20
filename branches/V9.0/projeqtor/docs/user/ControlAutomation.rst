@@ -203,8 +203,8 @@ More details, see :ref:`Global Parameters<mail>`
      
 .. topic:: Attached files. 
         
-   - ${allAttachements} : allow to add to your template all the attached files of the element
-   - ${lastAttachement} : allow to add the last attached files to the element
+   - ${allAttachments} : allow to add to your template all the attached files of the element
+   - ${lastAttachment} : allow to add the last attached files to the element
      
    .. warning:: When sending all the files, the software retrieves the files one by one and this, in the order of insertion, from the most recent to the oldest attached file.
 
