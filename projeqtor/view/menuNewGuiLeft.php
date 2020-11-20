@@ -386,7 +386,7 @@ function drawLeftMenuListNewGui($displayMode){
   $allMenu=getNavigationMenuLeft();
   $result.='<div class="menu__wrap">';
   $displayIcon=($displayMode=='TXT')?"display:none;":"display:block;";
-  
+  $user=getCurrentUserId();
   foreach ($allMenu as $id=>$menu){
     // creat object Navigation if is report or plugin 
     if($menu['objectType']=='report' or $menu['objectType']=='reportSubMenu' or $menu['objectType']=='reportDirect'){
@@ -437,7 +437,10 @@ function drawLeftMenuListNewGui($displayMode){
         $menuNameI18n = i18n($menuName);
         $menuName2 = addslashes(i18n($menuName));
         $classEl=substr($menuName,4);
-        $isFav=SqlElement::getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$obj->name));
+        $menuCustom= new MenuCustom();
+        $isFav=$menuCustom->getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$menuName,"idUser"=>$user));
+        debugLog($menuName);
+        debugLog($isFav);
         if($realMenu->type=='item'){
           $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');showMenuBottomParam('".$classEl."','false')";
         }elseif ($realMenu->type=='plugin'){
