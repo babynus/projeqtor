@@ -437,8 +437,7 @@ function drawLeftMenuListNewGui($displayMode){
         $menuNameI18n = i18n($menuName);
         $menuName2 = addslashes(i18n($menuName));
         $classEl=substr($menuName,4);
-        $menuCustom= new MenuCustom();
-        $isFav=$menuCustom->getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$menuName,"idUser"=>$user));
+        $isFav=SqlElement::getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$menuName,"idUser"=>$user));
         debugLog($menuName);
         debugLog($isFav);
         if($realMenu->type=='item'){
