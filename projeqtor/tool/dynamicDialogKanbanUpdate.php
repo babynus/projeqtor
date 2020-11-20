@@ -164,10 +164,10 @@ if ($typeDynamic == 'update') {
 		<select dojoType="dijit.form.FilteringSelect" class="input required"
 			required="true" <?php echo autoOpenFilteringSelect();?>
 			name="kanbanReffList" id="kanbanReffList">
-			<option value="Ticket"><?php echo i18n('Ticket');?></option>
-			<option value="Activity"><?php echo i18n('Activity');?></option>
-			<option value="Action"><?php echo i18n('menuAction');?></option>
-			<option value="Requirement"><?php echo i18n('menuRequirement');?></option>
+			<?php if (Security::checkDisplayMenuForUser('Ticket',false)) {?><option value="Ticket"><?php echo i18n('Ticket');?></option><?php }?>
+			<?php if (Security::checkDisplayMenuForUser('Activity',false)) {?><option value="Activity"><?php echo i18n('Activity');?></option><?php }?>
+			<?php if (Security::checkDisplayMenuForUser('Action',false)) {?><option value="Action"><?php echo i18n('menuAction');?></option><?php }?>
+			<?php if (Security::checkDisplayMenuForUser('Requirement',false)) {?><option value="Requirement"><?php echo i18n('menuRequirement');?></option><?php }?>
 			<script type="dojo/connect" event="onChange" args="evt">
           var param = dijit.byId('kanbanReffList').get('value'); 
           dijit.byId('kanbanTypeList').store;
