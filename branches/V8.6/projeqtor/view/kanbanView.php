@@ -594,6 +594,9 @@ function queryToDo($from,$nextFrom,$type,$isStatus){
       }
     }
   }
+  $queryWhere.=($queryWhere)?' and ':'';
+  //$queryWhere.= "$tableName.idProject in ".getVisibleProjectsList(false);
+  $queryWhere.=getAccesRestrictionClause(get_class($obT),$tableName, true);
   if(Parameter::getGlobalParameter('hideItemTypeRestrictionOnProject')=='YES'){
     $user=getSessionUser();
     $objectClass=get_class($obj);
