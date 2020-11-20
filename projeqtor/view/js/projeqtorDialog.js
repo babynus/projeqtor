@@ -8923,7 +8923,7 @@ function octetConvertSize(octet){
       if(octet<def[i][0]) return (octet/def[i-1][0]).toFixed(2)+' '+def[i-1][1];
     }
   }else{
-    return i18n('errorNotFoundAttachement');
+    return i18n('errorNotFoundAttachment');
   }
 
 }

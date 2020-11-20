@@ -2309,7 +2309,7 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
         if($fileAttach!="" and file_exists($fileAttach)){
           $phpmailer->addAttachment($fileAttach,$id);
         }else{
-          traceLog("ERROR attachement : ".$id . ' not found');
+          traceLog("ERROR attachment : ".$id . ' not found');
         }
       }
     }
@@ -5131,7 +5131,7 @@ function octectConvertSize($octet){
       }
     }
   }else{
-      return $res=i18n('errorNotFoundAttachement');
+      return $res=i18n('errorNotFoundAttachment');
   }
 }
 

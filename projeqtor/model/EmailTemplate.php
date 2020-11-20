@@ -177,8 +177,8 @@ class EmailTemplate extends SqlElement {
       $newArrayFields['_LINK'] = i18n('mailableLink');
       $newArrayFields['_NOTE'] = i18n('mailableNote');
       $newArrayFields['_NOTESTD'] = i18n('mailableNoteTd');
-      $newArrayFields['_allAttachements'] = i18n('mailableAttachments');
-      $newArrayFields['_lastAttachement'] = i18n('mailableLastAttachments');
+      $newArrayFields['_allAttachments'] = i18n('mailableAttachments');
+      $newArrayFields['_lastAttachment'] = i18n('mailableLastAttachments');
       if($this->getMailableItem() != null){
         if($mailableItem->name=="Meeting" OR $mailableItem->name=="TestSession" OR $mailableItem->name=="Activity"){
           $newArrayFields['ASSIGNMENT'] = i18n('colListAssignment');
@@ -251,12 +251,12 @@ class EmailTemplate extends SqlElement {
     
     public function control(){
       $result="";
-      if(strpos($this->template,'${lastAttachement}')and strpos($this->template, '${allAttachements}')){
-        $result=i18n('onlyOne',array('${lastAttachement}/${allAttachements}'));
-      }else if(mb_substr_count ($this->template,'${lastAttachement}')>1 or mb_substr_count ($this->template, '${allAttachements}')>1){
-        $var='${lastAttachement}';
-        if(strpos($this->template,'${allAttachements}')){
-          $var='${allAttachements}';
+      if(strpos($this->template,'${lastAttachment}')and strpos($this->template, '${allAttachments}')){
+        $result=i18n('onlyOne',array('${lastAttachment}/${allAttachments}'));
+      }else if(mb_substr_count ($this->template,'${lastAttachment}')>1 or mb_substr_count ($this->template, '${allAttachments}')>1){
+        $var='${lastAttachment}';
+        if(strpos($this->template,'${allAttachments}')){
+          $var='${allAttachments}';
         }
         $result=i18n('onlyOne',array($var));
       }      

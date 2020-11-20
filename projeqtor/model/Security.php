@@ -337,7 +337,7 @@ class Security
         return true; // OK
       }
     } else if (get_class($obj)=='Attachment') {
-      // Access an attachement : must crontrol acess on item containing the attachment
+      // Access an attachment : must crontrol acess on item containing the attachment
       $refType=$obj->refType;
       $refId=$obj->refId;
       $obj=new $refType($refId);

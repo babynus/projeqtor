@@ -690,7 +690,7 @@ function activityStreamDisplayHist ($hist,$origin){
   $isDovVers=false;
   $isTestCaseRun=false;
   $isLink=false;
-  $attachement=false;
+  $attachment=false;
   $gotoAndStyle=' style="margin-left:18px;" ';
   $userId = $hist->idUser;
   $userName = ($hist->idUser!='')?SqlList::getNameFromId ( 'Affectable', $userId ):lcfirst(i18n('unknown'));
@@ -716,7 +716,7 @@ function activityStreamDisplayHist ($hist,$origin){
     else $attach=explode('|', substr($change,(strpos($change, '|Attachment|')+1)));
     $objectAttach=new $attach[0] ($attach[1]);
     if($objectAttach->id!=''){
-      $attachement=true;
+      $attachment=true;
     }else{
       return;
     }
@@ -819,9 +819,9 @@ function activityStreamDisplayHist ($hist,$origin){
       }
       $text=i18n('addedLink').'<span '.$gotoLink.'>'.i18n($linkedClass).' #'.intval($linkedId).'</span>';
       $icon=formatIcon("LinkStream",22);
-    }else if($attachement){
+    }else if($attachment){
       $icon=formatIcon("ChangedStatus",22);
-      $text=i18n('addedAttachement').'&nbsp;'.$attName;
+      $text=i18n('addedAttachment').'&nbsp;'.$attName;
     }else{
       $text=i18n('createdElementStream');
     }
