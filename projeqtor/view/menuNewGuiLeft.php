@@ -316,7 +316,6 @@ function getPlugins (){
       continue;
     }
     foreach ($plInstal as $valId){
-      debugLog($idMenu);
       if($idMenu==$valId){
         $exist=true;
         break;
@@ -340,7 +339,9 @@ function getPlugins (){
   $plugins=$object->items;
   if(!empty($plugins)){
     foreach ($plugins as $id=>$val){
-      if(in_array($val->id, $plInstal))continue;
+      if(!empty($plInstal)){
+        if(in_array($val->id, $plInstal))continue;
+      }
       $c++;
       $k=$level.'-'.numericFixLengthFormatter($idMenuPlugin->id,5).'-'.numericFixLengthFormatter($c,5);
       $result[$k]=array('level'=>$level,'objectType'=>'pluginNotInst','object'=>$val);
