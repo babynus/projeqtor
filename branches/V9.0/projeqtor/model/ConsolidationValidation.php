@@ -80,6 +80,8 @@ class ConsolidationValidation extends SqlElement{
 	  $prof=$curUser->idProfile;
 	  $countLocked=0;
 	  $c=0;
+	  $proj=new Project();
+	  $adminProjects=$proj->getAdminitrativeProjectList(true);
 	  
 	  //________ search projects with locked imputation ________//
       
@@ -302,7 +304,7 @@ class ConsolidationValidation extends SqlElement{
     	                  </td>';
     	   $result .='     <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
     	   $result .='       <div style="color:margin:2px 0px 2px 2px;" id="lockedDiv_'.$uniqueId.'" name="lockedDiv_'.$uniqueId.'" dojoType="dijit.layout.ContentPane" region="center">';
-    	   $result .=          ConsolidationValidation::drawLockedDiv($uniqueId,$concMonth,$lock,$lockBefor,$asSub,$profAss /*,$consValPproj*/);
+    	   $result .=          ConsolidationValidation::drawLockedDiv($uniqueId,$concMonth,$lock,$lockBefor,$asSub,$profAss, (isset($adminProjects[$idCheckBox]))?$idCheckBox:false /*,$consValPproj*/);
     	   $result .='       </div>';
     	   $result .='    </td>';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:center;vertical-align:center;">';
@@ -332,11 +334,11 @@ class ConsolidationValidation extends SqlElement{
 	 * Draw table with icon to locked/unlocked imputation of  project 
 	 * @return table
 	 */
-	static function drawLockedDiv($proj,$month,$lock,$lockBefor,$asSub,$prof /*,$consValPproj*/){
+	static function drawLockedDiv($proj,$month,$lock,$lockBefor,$asSub,$prof, $isAdmin /*,$consValPproj*/){
 	    $habLockedImputation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'lockedImputation'));
 	    $mode=($lock=='')?"'Locked'":"'UnLocked'";
 	    $right=/*($consValPproj->id=='')?*/$habLockedImputation->rightAccess/*:'2'*/;
-        $functionLocked=($right=='1' /*and $consValPproj->id==''*/ and ($lockBefor=='' or $lock!=''))?'onclick="lockedImputation('.$mode.',\''.$proj.'\',\'false\',\''.$month.'\',\''.$asSub.'\');"':'';
+        $functionLocked=($right=='1' and !$isAdmin /*and $consValPproj->id==''*/ and ($lockBefor=='' or $lock!=''))?'onclick="lockedImputation('.$mode.',\''.$proj.'\',\'false\',\''.$month.'\',\''.$asSub.'\');"':'';
 	    $alreadyMonthLockded=($lockBefor!='')?getMonthName(substr($lockBefor,-2)):'';
         if($lockBefor!='')$titleAlredyLock=i18n('alreadyLock',array(lcfirst ($alreadyMonthLockded),substr($lockBefor, 0,-2)));
 	    $result ='  <table  style="width:100%;">';
@@ -344,7 +346,11 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='      <td  style="padding-left:33%;width:50%;">';
 	    if($lock==''){ // unlocked
 	      $title=($lockBefor!='')?$titleAlredyLock:i18n('colLockProject');
-	      if($lockBefor=='')$style=(($right=='1' /*and $consValPproj->id==''*/)?'style="cursor:pointer;"':'style="cursor: not-allowed;"');
+	      if ($isAdmin) {
+	        $p=new Project($isAdmin,true);
+	        $title=i18n("colType")." '".SqlList::getNameFromId('Type', $p->idProjectType)."'";
+	      }
+	      if($lockBefor=='' and !$isAdmin)$style=(($right=='1' /*and $consValPproj->id==''*/)?'style="cursor:pointer;"':'style="cursor: not-allowed;"');
 	      else $style='style="cursor: not-allowed;-webkit-filter:saturate(0);-moz-filter:saturate(0);filter:saturate(0);"';
 	      $result .='      <div '.$style.'  id="UnlockedImputation_'.$proj.'"  '.$functionLocked.' class="iconUnLocked32 iconUnLocked iconSize32" title="'.$title.'" ></div>';
 	    
