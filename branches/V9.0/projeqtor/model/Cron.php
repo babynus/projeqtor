@@ -933,7 +933,7 @@ class Cron {
               $namefileWithPath = $att->filePath;
               $embededImg='src="cid:'.$att->id.'"';
               if (strpos($ticket->description, $embededImg)!=0) {
-                // This is an embeded image, do not save as attachement but as image embeded 
+                // This is an embeded image, do not save as attachment but as image embeded 
                 rename($att->filePath, '../files/images/'.$att->id);
                 $ticket->description=str_replace($embededImg, 'src="../files/images/'.$att->id.'"', $ticket->description);
                 $ticket->_noHistory=true;

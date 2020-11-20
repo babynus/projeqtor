@@ -50,8 +50,8 @@ $lstProjVisible=getSessionUser()->getVisibleProjects();
 $lstProj=array_intersect_assoc($lstProjSelect,$lstProjVisible);
 echo '<table style="width: 100%;">';
 $att=new Attachment();
-$countAllAttachement=$att->countSqlElementsFromCriteria(array('refType'=>'Project','type'=>'link'));
-if($countAllAttachement==0 and isNewGui()){
+$countAllAttachment=$att->countSqlElementsFromCriteria(array('refType'=>'Project','type'=>'link'));
+if($countAllAttachment==0 and isNewGui()){
   echo '<tr>td><div>'.i18n('explainLinkOnLeftMenu').'</div></tr></td>';
 }else {
   foreach ($lstProj as $prjId=>$prjName) {

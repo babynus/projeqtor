@@ -5581,7 +5581,7 @@ abstract class SqlElement {
           if($maxSizeAttachment==''){
             $maxSizeAttachment=0;
           }
-          if(strpos($emailTemplateTab[$j]->template,'${lastAttachement}')!==false){
+          if(strpos($emailTemplateTab[$j]->template,'${lastAttachment}')!==false){
             $valueAttach=explode('/',$this->searchLastAttachmentMailable());
             if($valueAttach[0]!=''){
               $fileSize=$valueAttach[1];
@@ -5596,9 +5596,9 @@ abstract class SqlElement {
                 return array('result' => 'ErrorSize','dest'=>"");
               }
             }
-          }else if(strpos($emailTemplateTab[$j]->template,'${allAttachements}')!==false){
-            $res=$this->searchAllAttachementsMailable($maxSizeAttachment);
-            $attachments=$res['attachements'];
+          }else if(strpos($emailTemplateTab[$j]->template,'${allAttachments}')!==false){
+            $res=$this->searchAllAttachmentsMailable($maxSizeAttachment);
+            $attachments=$res['attachments'];
             $erroSize=($res['result']!='Ok')?i18n('toLargeAllNotAttached'):'';
             if(!empty($attachments)){
               foreach ($attachments as $val){
@@ -6512,9 +6512,9 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         $notes =$this->getNotesClassicTab($notes, $rowStart, $rowEnd, $sectionStart, $sectionEnd, $labelStart, $labelEnd, $fieldStart, $fieldEnd);
         $notes .='</table>';
         return $notes;
-      }else if ($property == 'allAttachements') {
+      }else if ($property == 'allAttachments') {
         return;
-      } else if ($property == 'lastAttachement') {
+      } else if ($property == 'lastAttachment') {
       	return;
       }
        else {
@@ -7813,7 +7813,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       return;
     }
   }
-  public function searchAllAttachementsMailable($maxSizeAttachment){
+  public function searchAllAttachmentsMailable($maxSizeAttachment){
     $allAttach=searchAllAttachmentMailable(get_class($this),$this->id);
     $lstAttach=$allAttach[0];
     $attachments=array();
@@ -7836,7 +7836,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     if (count($lstAttach)!=$c){
       $message='Fail';
     }
-    return array('attachements'=>$attachments,'result'=>$message);
+    return array('attachments'=>$attachments,'result'=>$message);
   }
   //
 }
