@@ -1876,11 +1876,12 @@ function getVisibleProjectsList($limitToActiveProjects=true, $idProject=null) {
   }else{
     $prj=new Project($project);
     $subProjectsList=$prj->getRecursiveSubProjectsFlatList($limitToActiveProjects);
-    if ($project!='*') {
+    if ($project!='*' and $project) {
     	$result.=', '.$project;
     }
   }
   foreach ($subProjectsList as $id=>$name) {
+    if (!$id) continue;
     $result.=', '.$id;
   }
   $result.=')';
