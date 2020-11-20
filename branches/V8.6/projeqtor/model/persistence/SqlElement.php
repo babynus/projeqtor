@@ -1681,7 +1681,7 @@ abstract class SqlElement {
     if (property_exists($this, 'idle') and property_exists($this, '_Assignment')) {
       $ass = new Assignment ();
       $query = "update " . $ass->getDatabaseTableName ();
-      $query .= " set idle='" . $this->idle . "'";
+      $query .= " set idle='" . (($this->idle)?'1':'0') . "'";
       $query .= " where refType='" . get_class ( $this ) . "' ";
       $query .= " and refId=" . $this->id;
       $result = Sql::query ( $query );
@@ -1743,7 +1743,7 @@ abstract class SqlElement {
     if (property_exists($this, 'idle') and property_exists($this, '_Note')) {
       $note = new Note ();
       $query = "update " . $note->getDatabaseTableName ();
-      $query .= " set idle='" . $this->idle . "'";
+      $query .= " set idle='" . (($this->idle)?'1':'0') . "'";
       $query .= " where refType='" . get_class ( $this ) . "' ";
       $query .= " and refId=" . $this->id;
       $result = Sql::query ( $query );
