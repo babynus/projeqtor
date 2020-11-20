@@ -40,6 +40,8 @@ $user=getSessionUser();
 $res=array();
 $lstCons=array();
 $lock=($mode=='Locked')?$month:"";
+$proj=new Project();
+$adminProjects=$proj->getAdminitrativeProjectList(true);
 //___get Recursive Sub Projects___//
 foreach ($lstProj as $id=>$val){  
   $val=(($mode =='validaTionCons' or $mode=='cancelCons') and $all=='false')?substr($val,6):$val;
@@ -117,6 +119,7 @@ Sql::beginTransaction();
 if($mode !='validaTionCons' and $mode!='cancelCons'){
   if($mode=='Locked'){
     foreach($lstProj as $projId){
+      if (isset($adminProjects[$projId])) continue; 
       $lockImp=new LockedImputation();
       $lockImp->idProject=$projId;
       $lockImp->idResource=$currentUser;
