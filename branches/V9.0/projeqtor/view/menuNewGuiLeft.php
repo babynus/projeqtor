@@ -328,7 +328,6 @@ function getPlugins (){
     $obj= array('id'=>$menuPlugin->id,'name'=>$menuPlugin->name,'idParent'=>$idMenuPlugin->id,'idMenu'=>$menuPlugin->id,'menuType'=>$menuPlugin->type);
     $result[$key]=array('level'=>$level,'objectType'=>'pluginInst','object'=>$obj);
   }
-  debugLog($plInstal);
   $urlPlugins = "http://projeqtor.org/admin/getPlugins.php";
   $currentVersion=null;
   if (ini_get('allow_url_fopen')) {
