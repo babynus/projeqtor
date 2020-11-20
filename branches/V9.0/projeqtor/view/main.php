@@ -782,9 +782,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                  <div id="messageLegall<?php echo $messFollow->id;?>" style="display:none; margin-top:15px; width:95%; height:135px; overflow-y:auto;"> 
               <?php }else{ ?> 
                  <div id="messageLegall<?php echo $messFollow->id;?>" style="display:block; margin-top:15px; width:95%; height:135px; overflow-y:auto;"> 
-              <?php }
-              if($messLegal->name == 'newGui'){?>
-                  <img src="img/newGui.png" style="float:left;height:100%;padding-right:10px;"/>
               <?php }?>
                   <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; min-height:100px; margin:0px 40px 0px 40px;">  
                     <?php echo $val;?>
