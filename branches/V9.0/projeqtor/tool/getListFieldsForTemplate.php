@@ -51,8 +51,8 @@ if($idItemMailable != null){
 	$newArrayFields['_LINK'] = i18n('mailableLink');
 	$newArrayFields['_NOTE'] = i18n('mailableNote');
 	$newArrayFields['_NOTESTD'] = i18n('mailableNoteTd');
-  $newArrayFields['_allAttachements'] = i18n('mailableAttachments');
-  $newArrayFields['_lastAttachement'] = i18n('mailableLastAttachments');
+  $newArrayFields['_allAttachments'] = i18n('mailableAttachments');
+  $newArrayFields['_lastAttachment'] = i18n('mailableLastAttachments');
   if($name =="Meeting" OR  $name =="TestSession" OR $name =="Activity"){
     $newArrayFields['__ASSIGNMENT'] = i18n('colListAssignment');
   }  
@@ -73,7 +73,7 @@ if($idItemMailable != null){
   $newArrayFields['_LINK'] = i18n('mailableLink');
   $newArrayFields['_NOTE'] = i18n('mailableNote');
   $newArrayFields['_NOTESTD'] = i18n('mailableNoteTd');
-  $newArrayFields['_allAttachements'] = i18n('mailableAttachments');
-  $newArrayFields['_lastAttachement'] = i18n('mailableLastAttachments');
+  $newArrayFields['_allAttachments'] = i18n('mailableAttachments');
+  $newArrayFields['_lastAttachment'] = i18n('mailableLastAttachments');
 }
 echo json_encode($newArrayFields);

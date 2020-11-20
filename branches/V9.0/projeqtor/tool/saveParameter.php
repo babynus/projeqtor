@@ -143,7 +143,7 @@ if ($type=='habilitation') {
                                      'requirement'=>i18n('requirementUnlockRight'),
                                  'reportResourceAll'=>i18n('reportResourceAll'),
                                  'canChangeNote'=>i18n('canChangeNote'),
-                                     'canDeleteAttachement'=>i18n('canDeleteAttachement'),     
+                                     'canDeleteAttachment'=>i18n('canDeleteAttachment'),     
                                      'canForceDelete'=>i18n('canForceDelete'),
                                      'canDeleteRealWork'=>i18n('canDeleteRealWork'),
                                      'canForceClose'=>i18n('canForceClose'),

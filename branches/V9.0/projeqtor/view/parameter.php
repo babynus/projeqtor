@@ -596,7 +596,7 @@ function drawTableFromObjectList($objectList) {
   	echo ' title="' . i18n('sectionDelete') . '">';
   	htmlDrawCrossTable(array(
   	    'canChangeNote'=>i18n('canChangeNote'),
-  	    'canDeleteAttachement'=>i18n('canDeleteAttachement'),
+  	    'canDeleteAttachment'=>i18n('canDeleteAttachment'),
   	    'canForceDelete'=>i18n('canForceDelete'),
   	    'canDeleteRealWork'=>i18n('canDeleteRealWork'), 
   	    'canForceClose'=>i18n('canForceClose'),

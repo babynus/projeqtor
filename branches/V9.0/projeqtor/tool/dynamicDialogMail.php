@@ -521,7 +521,7 @@ if($paramMailerType=='phpmailer'){
   <table style="width:90%;margin-bottom:5px;margin-left:5px;width:700px;">
     <tr>
       <td class="dialogLabel" style="float:left; margin-left:5px;margin-top:3px;width:350px" >
-        <div id='titleAttachmentTab' style="font-size:14px;font-weight:bold;float:left;"><?php echo i18n('titleAttachementTabMail');?></div>
+        <div id='titleAttachmentTab' style="font-size:14px;font-weight:bold;float:left;"><?php echo i18n('titleAttachmentTabMail');?></div>
       </td style="width:30%">
       <td>
       </td>
@@ -557,7 +557,7 @@ if($paramMailerType=='phpmailer'){
     </td>
     <tr>
       <td>
-        <div id='showAttachement' style="max-height:200px;overflow-y:auto;overflow-x:hidden;float:none;width:700px;">
+        <div id='showAttachment' style="max-height:200px;overflow-y:auto;overflow-x:hidden;float:none;width:700px;">
           <table id="scrollTableMail" style='font-size:12px;width:685px;max-width:685px;'>
 
             <?php 
@@ -674,7 +674,7 @@ if($paramMailerType=='phpmailer'){
       </tr>
       <tr>
         <td>
-          <div id='showAttachement' style="max-height:3px;overflow:auto;float:none;width:690px;border-top:1px solid #cccccc"></div>
+          <div id='showAttachment' style="max-height:3px;overflow:auto;float:none;width:690px;border-top:1px solid #cccccc"></div>
         </td>
       </tr>  
     </table>
