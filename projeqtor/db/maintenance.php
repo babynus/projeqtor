@@ -149,14 +149,32 @@ if ($currVersion=='V0.0.0') {
   Parameter::storeGlobalParameter('paramRightDiv', 'bottom');
   Parameter::storeGlobalParameter('paramLayoutObjectDetail', 'tab');
   Parameter::storeUserParameter('menuLeftDisplayMode', 'ICONTXT');
-//   $customArray = array('1'=>array('Project', 'Activity', 'Milestone', 'Meeting', 'Planning', 'Resource', 'Reports'), 
-//                        '2'=>array('Ticket', 'Kanban', 'Timesheet', 'Absence'));
-//   foreach ($customArray as $row=>$menu){
-//     $customMenu = new MenuCustom();
-//     $customMenu->name = $menu;
-//     $customMenu->idRow = $row;
-//     $customMenu->save();
-//   }
+  $res = new ResourceAll();
+  $resList = $res->getSqlElementsFromCriteria(array('isUser'=>'1'));
+  $customRow[1]=array('Project', 'Activity', 'Milestone', 'Meeting', 'Planning', 'Resource', 'Reports');
+  $customRow[2]=array('Ticket', 'Kanban', 'Imputation', 'Absence');
+  foreach ($resList as $resource){
+    $sortOrder = 1;
+    foreach ($customRow[1] as $menu){
+    	$customMenu = new MenuCustom();
+    	$customMenu->name = 'menu'.$menu;
+    	$customMenu->idUser = $resource->id;
+    	$customMenu->idRow = 1;
+    	$customMenu->sortOrder = $sortOrder;
+    	$customMenu->save();
+    	$sortOrder++;
+    }
+    $sortOrder = 1;
+    foreach ($customRow[2] as $menu){
+    	$customMenu = new MenuCustom();
+    	$customMenu->name = 'menu'.$menu;
+    	$customMenu->idUser = $resource->id;
+    	$customMenu->idRow = 2;
+    	$customMenu->sortOrder = $sortOrder;
+    	$customMenu->save();
+    	$sortOrder++;
+    }
+  }
   enableCatchErrors();
   rename("../api/.htaccess.example","../api/.htaccess"); // Use exemple to "lock" API access (will use not existing password file)
   disableCatchErrors();
@@ -981,17 +999,16 @@ if (beforeVersion($currVersion,"V8.6.0") and Sql::isMysql()) {
 if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
     Sql::beginTransaction();
     $MessageLegal = new MessageLegal();
-    //$MessageLegal->id = 999999;
-    $MessageLegal->idUser = 1;
     $MessageLegal->name = 'newGui';
-    $MessageLegal->description = i18n('newGuiMessageLegal');
+    $MessageLegal->description ='<div>'.i18n('newGuiMessageLegalTop').'&nbsp;</div>
+
+    <div>&nbsp;</div>
+
+    <div><img src="../files/images//20201120155205_1_newGui.png" style="height:514px; width:1080px" /></div>
+
+    <div>'.i18n('newGuiMessageLegalBottom').'</div>';
     $MessageLegal->endDate='3721-07-21 21:21:21';
     $MessageLegal->save();
-    $MessageLegalFollowUp = new MessageLegalFollowup();
-    $MessageLegalFollowUp->name = 'newGui';
-    $MessageLegalFollowUp->idMessageLegal = SqlList::getIdFromName('MessageLegal', 'newGui');
-    $MessageLegalFollowUp->idUser = 1;
-    $MessageLegalFollowUp->save();
     $res = new ResourceAll();
     $resList = $res->getSqlElementsFromCriteria(array('isUser'=>'1'));
     $customRow[1]=array('Project', 'Activity', 'Milestone', 'Meeting', 'Planning', 'Resource', 'Reports');
