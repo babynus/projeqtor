@@ -1296,3 +1296,7 @@ select option:checked {
     line-height:2em;
 }
 
+.ProjeQtOrNewGui #userMenuInterrogation .input {
+	width:auto;
+	border:none;
+}
