@@ -84,13 +84,13 @@ require_once "../tool/formatter.php";
         <div class="longDescPlugin" ><?php echo $longDesc;?></div>
       </div>
       <div dojoType="dijit.layout.ContentPane" region="right" style="width:20%;text-align:center;">
-        <span ><?php echo i18n('technicalDoc');?></span>
-        <div style="margin-top:40px;margin-bottom:40px;display: flex;justify-content: center;" class="roundedButtonSmall" onclick="directionExternalPage('<?php echo $userManual?>')">
-          <div class="imageColorNewGui iconPdf iconSize32"></div>
+       <div class="roundedVisibleButton roundedButton generalColClass" title="<?php echo('technicalDoc'); ?>" style="height:35px;width:70%;margin:20%;" onclick="directionExternalPage('<?php echo $userManual?>')">
+             <div style="float:left;position: relative;padding:10px;"><span style="top:12px;"><?php echo i18n('technicalDoc');?></span></div>
+             <div style="float:right;position: relative;margin-top: 2px;margin-right: 2px;" class="imageColorNewGui iconPdf iconSize32"></div>            
         </div>
-        <span ><?php echo i18n('goToThePage');?></span>
-        <div  style="margin-top:40px;display: flex;justify-content: center;" class="roundedButtonSmall" onclick="directionExternalPage('<?php echo $page?>')">
-          <div class="imageColorNewGui iconGoto iconSize32"></div>
+        <div class="roundedVisibleButton roundedButton generalColClass" title="<?php echo('goToThePage'); ?>" style="height:35px;width:70%;margin:20%;" onclick="directionExternalPage('<?php echo $page?>')">
+             <div style="float:left;position: relative;padding:10px;"><span style="top:12px;"><?php echo i18n('goToThePage');?></span></div>
+             <div style="float:right;position: relative;" class="imageColorNewGui iconGoto iconSize32"></div>            
         </div>
       </div>
     </div>
