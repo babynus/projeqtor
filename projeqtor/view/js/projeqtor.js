@@ -5202,14 +5202,12 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     }
   });
   editorArray[numEditor].on('dragover', function(evt) {
-    console.log("Editor drag over");
     if (dojo.byId('dropFilesInfoDiv')) {
       dojo.byId('dropFilesInfoDiv').style.opacity='0%';
       dojo.byId('dropFilesInfoDiv').style.display='none';
     }
   });
   editorArray[numEditor].on('dragleave', function(evt) {
-    console.log("Editor drag leave");
     if (dojo.byId('dropFilesInfoDiv')) {
       dojo.byId('dropFilesInfoDiv').style.opacity='50%';
       dojo.byId('dropFilesInfoDiv').style.display='block';
