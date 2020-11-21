@@ -307,8 +307,6 @@ class Security
           }
         } else {
 //           $accessRightList = $user->getAccessControlRights ();
-//           debugLog("Check access right for $refType menuName=$menuName");
-//           debugLog($accessRightList[$menuName]);
 //           if ($menuName=='menuAffectable') {
 //             if (isset($accessRightList['menuResource']) and isset($accessRightList['menuResource']['read']) and $accessRightList['menuResource']['read']!='NO') {
 //               $accessRightList['menuAffectable']=$accessRightList['menuResource'];
