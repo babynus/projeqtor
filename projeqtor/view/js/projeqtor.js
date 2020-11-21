@@ -6145,7 +6145,7 @@ function hideStreamMode(show,position,dimension,modeGlobal){
     //if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
   }
   if (dimension==0) setTimeout("refreshObjectDivAfterResize();",100);
-  else setTimeout('loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm");',100);
+  else setTimeout('if (dojo.byId("buttonDiv")) loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm");',100);
 }
 
 function focusStream() {
@@ -6958,7 +6958,7 @@ function refreshObjectDivAfterResize() {
     if (!formChangeInProgress && dijit.byId('id')) { 
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm",null,null,null,null,null,true);', 50); 
     } else {
-      setTimeout('loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm",false,false,false,false,'
+      setTimeout('if (dojo.byId("buttonDiv")) loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm",false,false,false,false,'
                   +((formChangeInProgress)?'function() {formChanged();}':'null')
                   +',true);', 50);
     }
