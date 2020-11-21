@@ -3419,8 +3419,8 @@ function addDelayToDatetime($dateTime, $delay, $unit) {
     }
     return $newDate." ".$time;
   } else if ($unit=='HH') {
-    $hh=substr($time, 0, 2);
-    $mn=substr($time, 3, 2);
+    $hh=intval(substr($time, 0, 2));
+    $mn=intval(substr($time, 3, 2));
     if (!$hh and !$mn) {
       $hh=00;
       $mn=00;
@@ -4089,11 +4089,13 @@ function isFF() {
 
 function formatBrowserDateToDate($dateTime) {
   global $browserLocaleDateFormat;
+  $AMPM='';
   if (substr($dateTime, 4, 1)=='-' and substr($dateTime, 7, 1)=='-') {
     return $dateTime;
   }
   if (substr_count($dateTime, ':')>0 and substr_count($dateTime, ' ')>0) {
-    list($date, $time)=explode(' ', $dateTime);
+    if (substr_count($dateTime, ' ')==1) list($date, $time)=explode(' ', $dateTime);
+    else list($date, $time,$AMPM)=explode(' ', $dateTime);
   } else {
     $date=$dateTime;
     $time="";
@@ -4110,7 +4112,7 @@ function formatBrowserDateToDate($dateTime) {
   $year=intval($year);
   if ($year<100) $year+=2000;
   if (trim($time)) {
-    $AMPM=(strpos($time,'AM'))?'AM':((strpos($time,'PM'))?'PM':'');
+    if ($AMPM=='') $AMPM=(strpos($time,'AM'))?'AM':((strpos($time,'PM'))?'PM':'');
     if ($AMPM!='') $time=str_replace(array('AM','PM'),'',$time);
     if (substr_count($time, ':')==2) {
       list($hour, $minute, $second)=explode(':', $time);
