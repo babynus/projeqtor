@@ -454,11 +454,11 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   this.setCaptionType = function(pType) { vCaptionType = pType; };
   this.setBaseBottomName = function(pBaseBottomName) {vBaseBottomName = pBaseBottomName; };
   this.setBaseTopName = function(pBaseTopName) {vBaseTopName = pBaseTopName; };
-  this.setFormat = function(pFormat){ 
+  this.setFormat = function(pFormat, dontDraw){ 
     vFormat = pFormat; 
     this.clearDependencies();
     this.ClearGraph();
-    this.Draw(); 
+    if (! dontDraw) this.Draw(); 
   };
   this.setWidth = function (pWidth) {vGanttWidth=pWidth;};
   this.setStartDateView = function (pStartDateView) { vStartDateView=pStartDateView; };
