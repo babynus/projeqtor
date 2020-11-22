@@ -3248,7 +3248,7 @@ function drawGantt() {
   // to 4 :
   // "minute","hour","day","week","month","quarter")
   if (ganttPlanningScale) {
-    g.setFormat(ganttPlanningScale);
+    g.setFormat(ganttPlanningScale,true);
   }
   g.setStartDateView(startDateView);
   g.setEndDateView(endDateView);
@@ -3264,6 +3264,11 @@ function drawGantt() {
     if (dijit.byId('topGanttChartDIV')) dijit.byId('topGanttChartDIV').set('content',null);  
     if (jsonData.innerHTML.length > 10 && jsonData.innerHTML.indexOf('{"identifier":"id", "items":[ ] }')<0) {
       showAlert(jsonData.innerHTML);
+    } else {
+      dojo.byId("leftGanttChartDIV").innerHTML='<div style="width:100%;height:100%;text-align:center;font-size:100%;font-style:italic;color:#aaaaaa;position:absolute;top:42px;">'
+        + i18n('ganttMsgLeftPart') + '</div>';
+      dojo.byId("rightGanttChartDIV").innerHTML='<div style="width:100%;height:100%;text-align:center;font-size:100%;font-style:italic;color:#aaaaaa">'
+        + i18n('ganttMsgRightPart') + '</div>';
     }
     hideWait();
     return;
@@ -3487,7 +3492,6 @@ function drawGantt() {
     dijit.byId('leftGanttChartDIV').resize({w:resizeWidth});
     dijit.byId("centerDiv").resize(); 
   }
-
   highlightPlanningLine();
 }
 
