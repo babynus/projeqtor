@@ -1981,7 +1981,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo $name;
         echo $attributes;
         echo '  value="'.htmlEncode($val).'" ';
-        echo '  style="border-radius:10px; height:20px; border: 0;width: '.$smallWidth.'px; ';
+        if (isNewGui()) echo '  style="border-radius:5px; height:24px; border: 1px solid #cccccc;width: 24px; ';
+        else echo '  style="border-radius:10px; height:20px; border: 0;width: '.$smallWidth.'px; ';
         echo ' color: '.$val.'; ';
         if ($val) {
           echo ' background-color: '.$val.';';
@@ -1995,7 +1996,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if (!$readOnly) {
           echo '<div id="'.'colorButton'.$nameColor.'" dojoType="dijit.form.DropDownButton"  ';
           // echo ' style="width: 100px; background-color: ' . $val . ';"';
-          echo ' showlabel="false" iconClass="colorSelector" style="position:relative;top:-2px;height:19px">';
+          if (isNewGui()) echo ' showlabel="false" iconClass="colorSelector" style="position:relative; height:24px;width:40px;top:-3px">';
+          else echo ' showlabel="false" iconClass="colorSelector" style="position:relative;top:-2px;height:19px">';
           echo '  <span>'.i18n('selectColor').'</span>';
           echo '  <div dojoType="dijit.ColorPalette" id="colorPicker'.$nameColor.'" >';
           echo '    <script type="dojo/method" event="onChange" >';
@@ -2010,7 +2012,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         echo '</td><td>';
         if (!$readOnly) {
-          echo '<button id="resetColor'.$nameColor.'" dojoType="dijit.form.Button" showlabel="true"';
+          echo '<button id="resetColor'.$nameColor.'" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton" style="min-width:80px;max-width:150px;margin:0px 5px;';
           echo ' title="'.i18n('helpResetColor').'" >';
           echo '<span>'.i18n('resetColor').'</span>';
           echo '<script type="dojo/connect" event="onClick" args="evt">';
