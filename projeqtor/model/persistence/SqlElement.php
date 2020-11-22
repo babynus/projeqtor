@@ -1702,6 +1702,7 @@ abstract class SqlElement {
       }
       $colList=substr($colList,0,-2);
       if($this->idle==1){ // Archive history for assignment
+        $ass=new Assignment();
         $queryArchiv ="insert into " .$archiv->getDatabaseTableName()." ($colList) ";
         $queryArchiv.="  (select $colList from ".$hist->getDatabaseTableName()." hist where hist.refType='".get_class($ass)."' ";
         $queryArchiv.="    and hist.refId in (select id from ".$ass->getDatabaseTableName()." ass where ass.refType='".get_class($this)."' and ass.refId=".$this->id.")";
