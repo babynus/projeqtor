@@ -29,7 +29,7 @@
 
 /* === GENERIC INPUT FORM CSS ========================================================= INPUT ===*/
 
-.dijitTextBox, .dijitValidationTextBox {
+.ProjeQtOrNewGui .dijitTextBox, .ProjeQtOrNewGui .dijitValidationTextBox {
     font-weight: normal;
     color: #555555;
     margin: 5px 2px 5px 0px;
@@ -37,12 +37,20 @@
     border: 1px solid #d4d4d4;
     line-height: normal;
     border-radius: 5px 5px 5px 5px;
-    barckground-image: url() !important;
+    barckground-image: none;
     background: #fff url() repeat-x top left;
     barckground-color: #ffffff !important;
     width: 195px;
     height: 17px;
     font-size: 10pt;
+}
+.ProjeQtOrNewGui .dijitTextBoxReadOnly, .ProjeQtOrNewGui .dijitTextBoxDisabled {
+    color: #606060 !important;
+    background-color: #F0F0F0;
+    background-image: none;
+}
+.ProjeQtOrNewGui .referenceClass {
+	border:0;
 }
 
 TABLE.dijitSelect {
@@ -130,6 +138,9 @@ label, .ProjeQtOrNewGui label,
   width:100%;
   background-color: #ffffff;
   color:var(--color-text);
+}
+.ProjeQtOrNewGui .tabLabel.longTextLabel {
+	margin-top:5px;
 }
 
 .ProjeQtOrNewGui .textColorNewGui{
@@ -351,24 +362,24 @@ html, body, #mainDiv,
   font-size: 10pt;
 }
 
-.tabLabel {
+.ProjeQtOrNewGui .tabLabel {
   font-size: 10pt;
   background-color: #ffffff;
   color:var(--color-text);
 }
-.largeLabel {
-  width: 370px;
+.ProjeQtOrNewGui .largeLabel {
+  width: 380px;
   background-color: #ffffff;
   color:var(--color-text);
 }
-.dijitToolbar {
+.ProjeQtOrNewGui .dijitToolbar {
  margin: 5px 2px 5px 0px;
  padding: 2px 5px 6px 5px;
  border: 0px solid #b3b3b3;
  background-color: #ffffff; 
  background-image: none; 
 }
-.toolbarForSelect {
+.ProjeQtOrNewGui .toolbarForSelect {
 	position:absolute;
 	top:-9px;
 	right:25px;
@@ -1299,4 +1310,12 @@ select option:checked {
 .ProjeQtOrNewGui #userMenuInterrogation .input {
 	width:auto;
 	border:none;
+}
+.ProjeQtOrNewGui .colorSelector {
+  background-image: url(images/colorSelectorBig.png);
+  background-repeat: no-repeat;
+  width: 26px;
+  height: 26px;
+  background-size:26px;
+  text-align: center;
 }
