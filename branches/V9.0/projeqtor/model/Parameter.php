@@ -221,6 +221,10 @@ class Parameter extends SqlElement {
       $colScript .= '    if (dijit.byId("paramAttachmentMaxSizeMail") ){ disableWidget("paramAttachmentMaxSizeMail");dijit.byId("paramAttachmentMaxSizeMail").set("value",null); }';
       $colScript .= '  }';
       $colScript .= '</script>';           
+    } else if ($colName=="newGui") {
+        $colScript .= '<script type="dojo/connect" event="onChange" >';
+        $colScript .= '  saveDataToSessionAndReload("newGui", this.value, null);';
+        $colScript .= '</script>';
     }else {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  newValue=this.value;';
@@ -867,6 +871,8 @@ class Parameter extends SqlElement {
           unset($parameterList['menuLeftDisplayMode']);
           unset($parameterList['menuBarTopMode']);
           unset($parameterList['newItemAccessMode']);
+        }else{
+          unset($parameterList['theme']);
         }
         break;
       case ('globalParameter'):
@@ -1265,6 +1271,8 @@ class Parameter extends SqlElement {
       unset($parameterList['menuLeftDisplayMode']);
       unset($parameterList['menuBarTopMode']);
       unset($parameterList['newItemAccessMode']);
+    }else{
+      unset($parameterList['defaultTheme']);
     }
     return $parameterList;
   }
