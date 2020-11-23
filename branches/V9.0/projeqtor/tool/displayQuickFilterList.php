@@ -31,37 +31,42 @@
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/displayQuickFiletrList.php');
 $referenceWidth = 50;
-if(!isset($objectClass)){
-  if($filterObjectClass)$objectClass=$filterObjectClass;
-  if($objectClass){
-    $idClassType = "id". $objectClass. "Type";
-    $objectType = $idClassType;
+if(!isset($dontDisplay))$dontDisplay = false;
+  if(!isset($objectClass)){
+    if($filterObjectClass)$objectClass=$filterObjectClass;
+    if($objectClass){
+      $idClassType = "id". $objectClass. "Type";
+      $objectType = $idClassType;
+    }
   }
-}
-if(!isset($obj)){
-  if(isset($objectClass)){
-    $obj=new $objectClass;
-    $object = $obj;
+  if ($objectClass=='Planning' or $objectClass=='GlobalPlanning' or $objectClass=='VersionsPlanning' or $objectClass=='ResourcePlanning'){
+    $objectClass='Activity';
+    $dontDisplay=true;
   }
-}
-
-if(!isset($idClassType)){
-  if(isset($objectClass)){
-    $idClassType = "id". $objectClass. "Type";
-    $objectType = $idClassType;
+  if(!isset($obj)){
+    if(isset($objectClass)){
+      $obj=new $objectClass;
+      $object = $obj;
+    }
   }
-}
-
-$user=getSessionUser();
-$context="";
-$comboDetail=false;
-if (RequestHandler::isCodeSet('comboDetail')) {
-  $comboDetail=true;
-}
+  
+  if(!isset($idClassType)){
+    if(isset($objectClass)){
+      $idClassType = "id". $objectClass. "Type";
+      $objectType = $idClassType;
+    }
+  }
+  
+  $user=getSessionUser();
+  $context="";
+  $comboDetail=false;
+  if (RequestHandler::isCodeSet('comboDetail')) {
+    $comboDetail=true;
+  }
 ?>
 <table style="width:99%;" id="quickFilterList">
   <tr style="width:100%;">
-    <td><table>
+    <td> <?php if(!$dontDisplay){ ?> <table>
       <tr> 
         <td style="width:60%;text-transform: uppercase;border-bottom:solid 1px;"><?php echo i18n("filters");?></td>
         <td style="text-align:right;border-bottom:solid 1px;" class="allSearchTD resetSearchTD allSearchFixLength">
@@ -379,13 +384,20 @@ if (RequestHandler::isCodeSet('comboDetail')) {
       <?php } ?>
      </table>
      <br>
+     
+     <?php } ?>
+     
      <table style="width: 100%;">
       <tr style="border-top:solid 1px;">
         <td style="text-align:center"> 
          <?php 
           echo '<div class="roundedVisibleButton roundedButton generalColClass"';
           echo ' title="'.i18n('advancedFilters').'"';
-          echo ' style="text-align:left;margin-right:10px;margin-top:10px;height:23px;width:160px;position:relative;left:120px;top:2px"';
+          $left = "left:120px;";
+          if($dontDisplay){
+            $left = "left:69px;";
+          }
+          echo ' style="text-align:left;margin-right:10px;margin-top:10px;height:23px;width:160px;position:relative;'.$left.'top:2px"';
           echo ' onClick="showFilterDialog();">';
           echo '<img src="css/customIcons/new/iconFilter.svg" class="imageColorNewGui" style="position:relative;left:5px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>';
           echo '<div style="position:relative;top:-19px;left:38px;">'.i18n('advancedFilters').'</div>';

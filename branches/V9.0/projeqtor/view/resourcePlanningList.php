@@ -278,7 +278,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                                  class="comboButton" 
                                  dojoType="dijit.form.DropDownButton" 
                                  id="listFilterFilter" name="listFilterFilter"
-                                 iconClass="icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
+                                 iconClass="dijitButtonIcon icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
                                   <script type="dojo/connect" event="onClick" args="evt">
                                     showFilterDialog();
                                   </script>
