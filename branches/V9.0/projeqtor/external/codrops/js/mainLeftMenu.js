@@ -157,7 +157,6 @@
 
       // Create current submenu breadcrumb
       if (self.current_menu != 0) {
-        console.log('init');
         this._addBreadcrumb(self.current_menu);
         this.breadCrumbs = true;
       }
@@ -286,7 +285,6 @@
       isBackNavigation = typeof clickPosition == 'undefined' ? true : false,
       // index of the nextMenuEl
       nextMenuIdx = this.menus.indexOf(nextMenuEl);
-        console.log(nextMenuIdx);
         var nextMenu = this.menusArr[nextMenuIdx],
       nextMenuEl = nextMenu.menuEl,
       nextMenuItems = nextMenu.menuItems,
@@ -395,7 +393,6 @@
       // add event back
       var self = this;
       newPreviousB.addEventListener('click', function(ev) {
-        console.log('yes');
         ev.preventDefault();
         self._back();
       });
@@ -421,7 +418,6 @@
       var siblNode;
       //var siblingNode;
       while (siblNode = divBcl.nextSibling) {
-       console.log( self.breadScrumLeft);
         self.breadScrumLeft.removeChild(siblNode);
       }
       self.breadcrumbsCtrl.replaceChild(bc,self.breadcrumbsCtrl.lastElementChild);
