@@ -6,15 +6,13 @@
 <g id="Calque_2" display="none">
 </g>
 <g>
-	<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" points="49.902,83.5 38.55,63.839 49.902,44.175 
-		72.604,44.175 83.957,63.839 72.604,83.5 	"/>
-	<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" points="49.902,122.822 38.55,103.163 49.902,83.5 
-		72.604,83.5 83.957,103.163 72.604,122.822 	"/>
-	<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" points="83.098,103.163 71.745,83.5 83.098,63.839 
-		105.802,63.839 117.152,83.5 105.802,103.163 	"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M25.871,81.3c7.763,0,14.633,3.749,18.957,9.52c0.667-12.492,10.977-22.42,23.632-22.42c7.65,0,14.434,3.638,18.767,9.266
+		c1.753-11.358,11.542-20.062,23.39-20.062c5.446,0,10.45,1.856,14.452,4.945c-9.674-22.706-32.193-38.629-58.435-38.629
+		c-35.066,0-63.493,28.427-63.493,63.492c0,3.066,0.23,6.08,0.65,9.029C7.226,87.584,15.805,81.3,25.871,81.3z"/>
 </g>
-<polyline fill="none" stroke="#FF0000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	22.777,41.701 40.8,41.701 40.8,17.5 "/>
-<path fill="none" stroke="#FF0000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M40.8,80.134c-21.306,0-38.578-17.271-38.578-38.577C2.223,20.25,19.494,2.979,40.8,2.979S79.377,20.25,79.377,41.557"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M84.359,26.44c-0.113-0.824-0.172-1.666-0.172-2.521c0-10.118,8.201-18.319,18.319-18.319c10.117,0,18.318,8.201,18.318,18.319
+	c0,7.563-4.583,14.056-11.124,16.852"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="61.331" y1="69.498" x2="78.683" y2="126.247"/>
 </svg>
