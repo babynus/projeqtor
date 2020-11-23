@@ -3,10 +3,33 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M123.479,115.452c0,5.269-4.469,9.538-9.98,9.538
-	H15.69c-5.512,0-9.98-4.27-9.98-9.538V14.36c0-5.268,4.468-9.537,9.98-9.537h97.808c5.514,0,9.98,4.27,9.98,9.537V115.452z"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M123.479,115.452c0,5.269-4.469,9.538-9.979,9.538
+	H15.69c-5.512,0-9.98-4.27-9.98-9.538V14.36c0-5.268,4.468-9.537,9.98-9.537h97.808c5.514,0,9.98,4.271,9.98,9.537V115.452
+	L123.479,115.452z"/>
 <circle fill="#FF0000" cx="23.75" cy="21.25" r="7.25"/>
 <circle fill="#FF0000" cx="44.75" cy="21.25" r="7.25"/>
 <circle fill="#FF0000" cx="64" cy="21.25" r="7.25"/>
 <line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="5.71" y1="34.5" x2="123.479" y2="34.5"/>
+<g id="Calque_3">
+	<g>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M23.278,78.396c2.932,0,5.467,1.678,6.714,4.123c0.86-3.217,3.787-5.59,7.274-5.59c2.932,0,5.467,1.678,6.714,4.124
+			c0.86-3.217,3.786-5.59,7.274-5.59c2.932,0,5.468,1.678,6.714,4.123c0.86-3.217,3.787-5.589,7.274-5.589
+			c2.933,0,5.468,1.679,6.714,4.124c0.86-3.218,3.785-5.59,7.273-5.59c0.754,0,1.48,0.113,2.166,0.319
+			c-5.302-11.645-17.031-19.745-30.661-19.745c-16.643,0-30.458,12.073-33.186,27.938C18.931,79.425,20.983,78.396,23.278,78.396z"
+			/>
+	</g>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="49.473" y1="75.681" x2="58.555" y2="123.288"/>
+	<g>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M107.397,105.396c-1.716-0.522-3.498,0.009-4.661,1.216c0.07-2.034-1.219-3.943-3.259-4.564c-1.715-0.522-3.496,0.007-4.66,1.215
+			c0.069-2.035-1.218-3.943-3.258-4.565c-1.715-0.522-3.498,0.007-4.66,1.216c0.069-2.035-1.22-3.944-3.259-4.565
+			c-1.716-0.521-3.497,0.008-4.661,1.215c0.07-2.033-1.218-3.943-3.258-4.563c-0.441-0.137-0.886-0.198-1.325-0.199
+			c5.178-5.866,13.48-8.513,21.451-6.084c9.732,2.967,15.66,12.488,14.428,22.251C109.756,106.774,108.738,105.806,107.397,105.396z
+			"/>
+	</g>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="92.563" y1="99.142" x2="77.876" y2="125.288"/>
+</g>
 </svg>
