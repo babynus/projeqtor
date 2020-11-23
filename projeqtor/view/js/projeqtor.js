@@ -1080,6 +1080,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           if ( (page.substr(0, 16) == 'objectDetail.php' && destination == 'detailDiv')
             || (page.substr(0, 17) == 'objectButtons.php' && destination == 'buttonDiv')) {
             if (dojo.byId('attachmentFileDirectDiv') && dijit.byId('attachmentFileDirect')) {
+              dijit.byId('attachmentFileDirect').reset();
               dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('attachmentFileDirectDiv'));
               dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('formDiv'),true);
             }
@@ -1793,6 +1794,7 @@ function finalizeMessageDisplay(destination, validationType) {
         forceRefreshCreationInfo = false;
         if (dojo.byId('attachmentFileDirectDiv')) {
           dojo.byId('attachmentFileDirectDiv').style.visibility = 'visible';
+          dijit.byId('attachmentFileDirect').reset();
           dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('formDiv'),true);
         }
         if (dojo.byId('objectClass') && dojo.byId('objectId')) {
