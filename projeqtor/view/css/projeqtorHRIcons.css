@@ -26,6 +26,7 @@
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
+/*
 .iconDashboardEmployeeManager32 { background-image: url(imagesHR/iconDashboardEmployeeManager.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconDashboardEmployeeManager22 { background-image: url(imagesHR/iconDashboardEmployeeManager.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconDashboardEmployeeManager16 { background-image: url(imagesHR/iconDashboardEmployeeManager.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
@@ -54,11 +55,9 @@
 .iconEmploymentContractType22 { background-image: url(imagesHR/iconEmploymentContractType.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconEmploymentContractType16 { background-image: url(imagesHR/iconEmploymentContractType.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-/*
 .iconHumanResource32 { background-image: url(imagesHR/iconHumanResource.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconHumanResource22 { background-image: url(imagesHR/iconHumanResource.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconHumanResource16 { background-image: url(imagesHR/iconHumanResource.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
-*/
 
 .iconHumanResourceParameters32 { background-image: url(images/iconParameter32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconHumanResourceParameters22 { background-image: url(images/iconParameter22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -79,3 +78,4 @@
 .iconLeavesSystemHabilitation32 { background-image: url(imagesHR/iconLeavesSystemHabilitation.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconLeavesSystemHabilitation22 { background-image: url(imagesHR/iconLeavesSystemHabilitation.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconLeavesSystemHabilitation16 { background-image: url(imagesHR/iconLeavesSystemHabilitation.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+*/
