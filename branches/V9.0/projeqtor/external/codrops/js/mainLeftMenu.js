@@ -285,9 +285,9 @@
       currentMenu = this.menusArr[this.current_menu].menuEl,
       isBackNavigation = typeof clickPosition == 'undefined' ? true : false,
       // index of the nextMenuEl
-      nextMenuIdx = this.menus.indexOf(nextMenuEl),
-
-      nextMenu = this.menusArr[nextMenuIdx],
+      nextMenuIdx = this.menus.indexOf(nextMenuEl);
+        console.log(nextMenuIdx);
+        var nextMenu = this.menusArr[nextMenuIdx],
       nextMenuEl = nextMenu.menuEl,
       nextMenuItems = nextMenu.menuItems,
       nextMenuItemsTotal = nextMenuItems.length;
