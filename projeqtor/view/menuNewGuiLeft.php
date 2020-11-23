@@ -359,9 +359,10 @@ function getNavigationMenuLeft (){
   $menuPlugin=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuPlugin'));
   $rightPluginAcces=securityCheckDisplayMenu($menuPlugin->id,substr($menuPlugin->name,4));
   sortMenus($contexctMenuMain,$result,0,$level,$rightPluginAcces);
+  $navTa=array();
   foreach ($result as $id=>$context){
       $context=$context['object'];
-      if($context->idParent!=0 and $context->idMenu!=0){
+      if($context->idMenu!=0){
         $unset=false;
         $menu=new Menu($context->idMenu);
         if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) $unset=true; 
@@ -369,11 +370,26 @@ function getNavigationMenuLeft (){
         if (!$isLanguageActive and $menu->name=="menuLanguage")  $unset=true;
         if (!Module::isMenuActive($menu->name))  $unset=true;
         if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) $unset=true;
-        if($unset==true)unset($result[$id]);
+        if($unset==true){
+          unset($result[$id]);
+          continue;
+        }
+        $lstMenuId[]=$context->idParent;
+      }else if($context->id!=6) $navTa[$id]=$context->id;
+  }
+  foreach ($lstMenuId as $idMenu){
+    foreach ($navTa as $idArray=>$val){
+      if($val==$idMenu){
+        unset($navTa[$idArray]);
+        continue;
       }
+    }
+  }
+  foreach ($navTa as $idM=>$m){
+    unset($result[$idM]);
   }
   $result=array_merge ($result,getReportsMenu());
-  if($rightPluginAcces)$result=array_merge ($result,getPlugins());
+  if($rightPluginAcces)$result=array_merge($result,getPlugins());
   ksort($result);
   return $result;
 }
@@ -438,8 +454,6 @@ function drawLeftMenuListNewGui($displayMode){
         $menuName2 = addslashes(i18n($menuName));
         $classEl=substr($menuName,4);
         $isFav=SqlElement::getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$menuName,"idUser"=>$user));
-        debugLog($menuName);
-        debugLog($isFav);
         if($realMenu->type=='item'){
           $funcOnClick="loadMenuBarItem('".$classEl."','".htmlEncode($menuName2,'quotes')."','bar');showMenuBottomParam('".$classEl."','false')";
         }elseif ($realMenu->type=='plugin'){
