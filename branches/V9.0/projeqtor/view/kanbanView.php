@@ -134,18 +134,20 @@ $hasVersion=(property_exists($typeKanbanC,'idTargetProductVersion'))?true:false;
         <button title="<?php echo i18n('advancedFilter')?>" class="comboButton" dojoType="dijit.form.DropDownButton" id="listFilterFilter" 
         name="listFilterFilter" style="margin-right:15px;"
         iconClass="dijitButtonIcon icon<?php echo (isset(getSessionUser()->_arrayFilters[$typeKanbanC]) && is_array(getSessionUser()->_arrayFilters[$typeKanbanC]) && count(getSessionUser()->_arrayFilters[$typeKanbanC])!=0 ? 'Active' : '');?>Filter" showLabel="false">
-          <script type="dojo/connect" event="onClick" args="evt">
+           <?php if (!isNewGui()){ ?>
+            <script type="dojo/connect" event="onClick" args="evt">
             showFilterDialog();
           </script>
-          <script type="dojo/method" event="onMouseEnter" args="evt">
+            <script type="dojo/method" event="onMouseEnter" args="evt">
             clearTimeout(closeFilterListTimeout);
             clearTimeout(openFilterListTimeout);
             openFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').openDropDown();",popupOpenDelay);
           </script>
-          <script type="dojo/method" event="onMouseLeave" args="evt">
+            <script type="dojo/method" event="onMouseLeave" args="evt">
             clearTimeout(openFilterListTimeout);
             closeFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').closeDropDown();",2000);
           </script>
+         <?php }?>
           <div dojoType="dijit.TooltipDialog" id="directFilterList" style="z-index: 999999;display:none; position: absolute;">
             <?php 
               //$_REQUEST['filterObjectClass']=$objectClass;
@@ -156,18 +158,21 @@ $hasVersion=(property_exists($typeKanbanC,'idTargetProductVersion'))?true:false;
               $_REQUEST['filterObjectClass']=$typeKanbanC;
               if(isNewGui()){
                 $filterObjectClass = $typeKanbanC;
+                $dontDisplay = true;
                 include "../tool/displayQuickFilterList.php";
               }
               //ajout de mehdi
               include "../tool/displayFilterList.php";
             ?>
-            <script type="dojo/method" event="onMouseEnter" args="evt">
-              clearTimeout(closeFilterListTimeout);
-              clearTimeout(openFilterListTimeout);
-            </script>
-            <script type="dojo/method" event="onMouseLeave" args="evt">
-              dijit.byId('listFilterFilter').closeDropDown();
-            </script>
+           <?php if (!isNewGui()){ ?>
+              <script type="dojo/method" event="onMouseEnter" args="evt">
+                clearTimeout(closeFilterListTimeout);
+                clearTimeout(openFilterListTimeout);
+              </script>
+              <script type="dojo/method" event="onMouseLeave" args="evt">
+                dijit.byId('listFilterFilter').closeDropDown();
+              </script>
+           <?php }?>
           </div> 
         </button>
   </div>

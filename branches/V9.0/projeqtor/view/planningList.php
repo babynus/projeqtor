@@ -408,31 +408,35 @@ foreach ($lstUserP as $prof){
                            class="comboButton"
                            dojoType="dijit.form.DropDownButton" 
                            id="listFilterFilter" name="listFilterFilter"
-                           iconClass="icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
-                            <script type="dojo/connect" event="onClick" args="evt">
-                              showFilterDialog();
-                            </script>
-                            <script type="dojo/method" event="onMouseEnter" args="evt">
-                              clearTimeout(closeFilterListTimeout);
-                              clearTimeout(openFilterListTimeout);
-                              openFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').openDropDown();",popupOpenDelay);
-                            </script>
-                            <script type="dojo/method" event="onMouseLeave" args="evt">
-                              clearTimeout(openFilterListTimeout);
-                              closeFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').closeDropDown();",2000);
-                            </script>
-                            <div dojoType="dijit.TooltipDialog" id="directFilterList" style="z-index: 999999;<!-- display:none; --> position: absolute;">
-                            <?php 
-                            //RequestHandler::setValue('filterObjectClass','Planning');
-                            $objectClass='Planning';
-                            include "../tool/displayFilterList.php";?>
+                           iconClass="dijitButtonIcon icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
+                           <?php if(!isNewGui()){?>
+                              <script type="dojo/connect" event="onClick" args="evt">
+                                showFilterDialog();
+                              </script>
                               <script type="dojo/method" event="onMouseEnter" args="evt">
                                 clearTimeout(closeFilterListTimeout);
                                 clearTimeout(openFilterListTimeout);
+                                openFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').openDropDown();",popupOpenDelay);
                               </script>
                               <script type="dojo/method" event="onMouseLeave" args="evt">
-                                dijit.byId('listFilterFilter').closeDropDown();
+                                clearTimeout(openFilterListTimeout);
+                                closeFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').closeDropDown();",2000);
                               </script>
+                           <?php }?>
+                            <div dojoType="dijit.TooltipDialog" id="directFilterList" style="z-index: 999999;<!-- display:none; --> position: absolute;">
+                            <?php $objectClass='Planning';
+                                  $dontDisplay=true;
+                                  if(isNewGui())include "../tool/displayQuickFilterList.php";
+                                  include "../tool/displayFilterList.php";
+                                  if(!isNewGui()){?>
+                                  <script type="dojo/method" event="onMouseEnter" args="evt">
+                                    clearTimeout(closeFilterListTimeout);
+                                    clearTimeout(openFilterListTimeout);
+                                  </script>
+                                  <script type="dojo/method" event="onMouseLeave" args="evt">
+                                    dijit.byId('listFilterFilter').closeDropDown();
+                                  </script>
+                           <?php  }?>
                             </div> 
                           </button>
                         </td>
