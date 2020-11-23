@@ -838,12 +838,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       } else {
         $minWidth=75;
       }
+      if (isNewGui()) $minWidth=25;
 //       if ($print) {
 //         $minWidth*=1.5;
 //       }
       for ($i=0; $i<$internalTableCols; $i++) { // draw table headers
                                                 // echo '<td class="detail" style="min-width:75px;' . $internalTableBorderTitle . '">';
-        echo '<td class="detail" style="min-width:'.$minWidth.'px;'.$internalTableBorderTitle.'">';
+        echo '<td class="detail" style="'.((isNewGui())?'width:200px;':'').'min-width:'.$minWidth.'px;'.$internalTableBorderTitle.'">';
         if ($arrTab['cols'][$i]==0) {
           echo '<div class=""></div>';
           // CHANGE BY Marc TABARY - 2017-03-31 - COLEMPTY
@@ -2820,7 +2821,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if ($isCost) {
           $possibleWidth=intval($widthPct)-80;
           if ($internalTable) {
-            $possibleWidth=round($possibleWidth/$internalTableCols, 0)-($internalTableCols*3);
+            if (isNewGui()) $possibleWidth=round(($possibleWidth-25)/$internalTableCols, 0)-($internalTableCols*5);
+            else $possibleWidth=round($possibleWidth/$internalTableCols, 0)-($internalTableCols*3);
           }
           $expected=100;
           //if ($isAmount) $expected+=20;
