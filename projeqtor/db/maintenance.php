@@ -997,12 +997,12 @@ if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
     $MessageLegal = new MessageLegal();
     $MessageLegal->name = 'newGui';
     $MessageLegal->description ='<div>'.i18n('newGuiMessageLegalTop').'&nbsp;</div>
-
-    <div>&nbsp;</div>
-
-    <div><img src="../files/images//20201120155205_1_newGui.png" style="height:514px; width:1080px" /></div>
-
-    <div>'.i18n('newGuiMessageLegalBottom').'</div>';
+    
+        <div>&nbsp;</div>
+    
+        <div><img src="../files/images//20201120155205_1_newGui.png" style="height:514px; width:1080px" /></div>
+    
+        <div>'.i18n('newGuiMessageLegalBottom').'</div>';
     $MessageLegal->endDate='3721-07-21 21:21:21';
     $MessageLegal->save();
     $res = new ResourceAll();
