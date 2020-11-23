@@ -1477,6 +1477,7 @@ function addAttachment(attachmentType) {
       });
       addAttachment(attachmentType);
       if (isHtml5()) {
+        dijit.byId('attachmentFileDirect').reset();
         dijit.byId('attachmentFile').addDropTarget(dojo.byId('attachmentFileDropArea'));
       }
     };
