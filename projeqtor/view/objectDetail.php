@@ -827,7 +827,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // $val[5]='';
       // }
       // }
-      echo '</table><table id="'.$col.'" class="detail">';
+      echo '</table><table id="'.$col.'" class="detail internalTable">';
       echo '<tr class="detail">';
       echo '<td class="detail"></td>'; // Empty label, to have column header in front of columns
                                        // $internalTableBorderTitle=($print)?'border:1px solid #A0A0A0;':'';
@@ -1087,6 +1087,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     } else if (substr($col, 0, 6)=='_calc_') { // if field is _calc_xxxx, draw calculated item
       $item=substr($col, 6);
       echo $obj->drawCalculatedItem($item); // the method must be implemented in the corresponidng class
+      if (isNewGui()) echo "&nbsp;&nbsp;";
     } else if (substr($col, 0, 5)=='_lib_') { // if field is just a caption
       $item=substr($col, 5);
       if (strpos($obj->getFieldAttributes($col), 'nobr')!==false and $obj->getFieldAttributes($col)!='hidden' and !$hide and ! in_array($col, $extraHiddenFields)) {
@@ -1646,7 +1647,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if ($obj->isAttributeSetToField($col, 'leftAlign')) {
             echo '<span class=" '.$col.'Class" style="'.$specificStyle.'">&nbsp;'.i18n('col'.ucfirst($captionName)).'</span>';
           } else {
-            echo '<label class="label '.(($obj->isAttributeSetToField($col, 'longLabel'))?'':'shortlabel').' '.$col.'Class" style="'.$specificStyle.'">'.i18n('col'.ucfirst($captionName)).'&nbsp;:&nbsp;</label>';
+            echo '<label class="label '.(($obj->isAttributeSetToField($col, 'longLabel'))?'':'shortlabel').' '.$col.'Class" style="'.$specificStyle.'">'.i18n('col'.ucfirst($captionName)).'&nbsp;'.((isNewGui())?'':':').'&nbsp;</label>';
           }
         }
       } else if (substr($col, 0, 8)=='_button_') {
@@ -2734,11 +2735,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           }
         }
       } else if (strpos($obj->getFieldAttributes($col), 'display')!==false) {
+        if (isNewGui()) echo "<table style='width:100%'><tr style='height:32px'><td>";
         echo '<div ';
         // echo ' class="display generalColClass input'.$col.'Class" style="'.$specificStyle.'width: '.$fieldWidth.'px;"';
-        echo ' class="display generalColClass input'.$col.'Class" style="'.$specificStyle.'"';
+        echo ' class="display generalColClass input'.$col.'Class" style="'.$specificStyle.';white-space:nowrap;"';
         if ($col=="wbs") echo ' title="'.htmlEncode($val).'"';
         echo ' >';
+        
         if (strpos($obj->getFieldAttributes($col), 'html')!==false) {
           echo $val;
         } else if ($dataType=='decimal' and substr($col, -4, 4)=='Work') {
@@ -2756,6 +2759,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '&nbsp;%';
         }
         echo '</div>';
+        if (isNewGui()) echo "</td><td style='min-width:5px'>&nbsp;</td></tr></table>";
         // ADD BY Marc TABARY - 2017-03-02 - DRAW SPINNER
       } else if ($isSpinner and is_integer(intval($val))) {
         // Draw an integer as spinner ================================================ SPINNER
