@@ -510,7 +510,7 @@ class ProjectPlanningElementMain extends PlanningElement {
       if (!$this->needReplan) return '';
       $adminProjects=Project::getAdminitrativeProjectList(true);
       if (isset($adminProjects[$this->refId])) return;
-      $result .='<div style=";color:#A00000;font-weight:bold;">'.i18n('colNeedReplan').'</div>';
+      $result .='<div style=";color:#A00000;font-weight:bold;white-space:nowrap;margin-left:10px">'.i18n('colNeedReplan').'</div>';
       return $result;
     }
   }

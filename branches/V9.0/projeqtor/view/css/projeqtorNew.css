@@ -1251,6 +1251,16 @@ select option:checked {
 .ProjeQtOrNewGui .linkData, .ProjeQtOrNewGui .attachmentData, .ProjeQtOrNewGui .noteData, .ProjeQtOrNewGui .dependencyData, 
 .ProjeQtOrNewGui .historyData, .ProjeQtOrNewGui .assignData {
 	color: #000000;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.ProjeQtOrNewGui .linkData .roundedButtonSmall, .ProjeQtOrNewGui .attachmentData .roundedButtonSmall, .ProjeQtOrNewGui .noteData .roundedButtonSmall,
+.ProjeQtOrNewGui .dependencyData .roundedButtonSmall, .ProjeQtOrNewGui .historyData .roundedButtonSmall, .ProjeQtOrNewGui .assignData .roundedButtonSmall{
+  margin: 0px 2px;
+}
+.ProjeQtOrNewGui .colorNameData {
+	padding-top:0;
+	padding-bottom:0;
 }
 
 .ProjeQtOrNewGui .cke_button_on::after, .ProjeQtOrNewGui .cke_button_off::after, 
