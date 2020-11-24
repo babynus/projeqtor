@@ -1319,6 +1319,21 @@ select option:checked {
   background-size:26px;
   text-align: center;
 }
+.ProjeQtOrNewGui .shortlabel {
+	width:100%;
+	/*margin-left:20px;*/
+}
+.ProjeQtOrNewGui .internalTable DIV.display {
+	border:0;
+	border-bottom:1px solid #dddddd;
+	text-align: center;
+	height:20px;
+	margin-top:8px;
+}
+.ProjeQtOrNewGui .internalTable .shortlabel  {
+	margin-left:5px;
+}
+
 
 .loginBackground{
 /* 	background-image: url(images/bagroundLogin.svg); */
