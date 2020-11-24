@@ -256,6 +256,7 @@ function getReportsMenu(){
     $allowedCategory[$category]=$category;
   }
   $c=1;
+  $lstIdCate=array();
   $idReportMenu=$idMenuReport->id.$level.$menuReport->id;
   $menuReportKey=$level.'-'.numericFixLengthFormatter($idMenuReport->id,5).'-'.numericFixLengthFormatter($c,5);
   $object= array('id'=>$idReportMenu,'name'=>$menuReport->name,'idParent'=>$idMenuReport->id,'idMenu'=>$menuReport->id);
