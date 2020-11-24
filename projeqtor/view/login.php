@@ -27,6 +27,7 @@
 /* ============================================================================
  * Connnexion page of application.
  */
+$mobile=false;
    require_once "../tool/projeqtor.php";
    if (isset($locked) and $locked) {
      include_once "../view/locked.php";
@@ -83,6 +84,9 @@
               parseOnLoad: true, 
               isDebug: <?php echo getBooleanValueAsString(Parameter::getGlobalParameter('paramDebugMode'));?>'></script>
   <script type="text/javascript" src="../external/dojo/projeqtorDojo.js?version=<?php echo $version.'.'.$build;?>"></script>
+    <?php if(isNewGui()){?>
+  <script type="text/javascript" src="../external/dojox/mobile/deviceTheme.js" data-dojo-config="mblUserAgent: 'Custom'"></script>
+  <?php }?>
   <?php Plugin::includeAllFiles();?>
   <script type="text/javascript"> 
     var customMessageExists=<?php echo(file_exists(Plugin::getDir()."/nls/$currentLocale/lang.js"))?'true':'false';?>;
@@ -99,7 +103,12 @@
     dojo.require("dijit.form.Button");
     dojo.require("dijit.form.Form");
     dojo.require("dijit.form.FilteringSelect");
-
+    <?php if(isNewGui()){?>
+    dojo.require("dojox.mobile.parser");
+    dojo.require("dojox.mobile.Switch");
+    dojo.require("dojox.mobile.SwapView");
+    dojo.require("dojox.mobile.PageIndicator");
+    <?php }?>
     require(["dojo/sniff"], function(sniff) {
       var mobileExists=<?php echo (file_exists("../mobile"))?'true':'false';?>;
       if(mobileExists && (sniff("android") || sniff("ios") || sniff("bb") ) ) { 
@@ -179,7 +188,7 @@ if(!$secondColor){
 $secondColor='';
 }
 ?>
-<body class="loginBackground" onLoad="hideWait();" style="overflow: auto;background-color:<?php echo '#'.$firstColor?>;" onBeforeUnload="">
+<body class="nonMobile ProjeQtOrNewGui loginBackground" onLoad="hideWait();" style="overflow: auto;background-color:<?php echo '#'.$firstColor?>;" onBeforeUnload="">
 <?php 
 }else{
 ?>
@@ -285,7 +294,12 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                <?php if(!isNewGui()){?>
 			                   <td><div style="width:200px;text-align:center;"><div class="greyCheck" dojoType="dijit.form.CheckBox" type="checkbox" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
 			                <?php }else{?>
-			                   <td><div style="width:200px;text-align:center;"><div class="colorSwitch" data-dojo-type="dojox/mobile/Switch" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
+			                   <td>
+			                     <div style="width:200px;text-align:center;">
+			                       <div class="colorSwitch" data-dojo-type="dojox/mobile/Switch" name="rememberMe"  value="off" leftLabel="" rightLabel="" style="width:15px;position:relative; left:0px;top:2px;z-index:99;">
+			                       </div> <?php echo i18n('rememberMe');?>
+                                 </div>
+                               </td>
 			                <?php }?>
 			                <td></td>
 			              </tr>
@@ -294,7 +308,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr>
 			                <td style="background:transparent !important;">&nbsp;</td>
 			                <td style="text-align:center">
-			                  <button tabindex="3" type="submit" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="mediumTextButton"showlabel="true" >
+			                  <button tabindex="3" type="submit" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="mediumTextButton <?php if (isNewGui()) echo 'validationLoginButton';?>" showlabel="true" >
 			                  OK
 			                    <script type="dojo/connect" event="onClick" args="evt">
                                  return true;

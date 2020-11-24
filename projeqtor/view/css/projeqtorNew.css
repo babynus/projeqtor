@@ -1314,7 +1314,7 @@ select option:checked {
     text-decoration: none;
     font-size: 14px;
     line-height: 20px;
-    line-height:2em;
+    line-height:1,2em;
 }
 
 .ProjeQtOrNewGui #userMenuInterrogation .input {
@@ -1343,7 +1343,6 @@ select option:checked {
 .ProjeQtOrNewGui .internalTable .shortlabel  {
 	margin-left:5px;
 }
-
 
 .loginBackground{
 /* 	background-image: url(images/bagroundLogin.svg); */
@@ -1436,7 +1435,20 @@ select option:checked {
 
 .passwordButtonNewGui {
 	cursor:pointer;
-	color:#1A91E3;
+	color:#1A91E3 !important;
 	width:100%;
 	
+}
+
+.validationLoginButton{
+	background-color:#1A91E3 !important;
+	color: white !important;
+}
+
+.pluginShopButton{
+	height:35px;
+	width:150px;
+	text-align:center;
+	margin-right:15px;
+	float:right;
 }
