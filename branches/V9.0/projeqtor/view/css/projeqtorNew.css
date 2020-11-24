@@ -1319,3 +1319,99 @@ select option:checked {
   background-size:26px;
   text-align: center;
 }
+
+.loginBackground{
+/* 	background-image: url(images/bagroundLogin.svg); */
+	background-image: url(images/Engrenages.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.loginFrameNewGui {
+    background-color: white;
+    border-radius: 10px;
+    height: 300px;
+    width: 500px;
+    text-align: center;
+    box-shadow: rgb(51, 51, 51) 7px 7px 2px;
+    margin: 0px;
+    padding: 0px;
+    z-index: 999;
+}
+
+
+.loginMessageContainerNew{
+	background-color: white;
+    opacity: 0.5;
+    position: absolute;
+    width: 33%;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    overflow: hidden auto;
+    z-index: 0;
+    box-shadow: 5px 0px 2px black;
+
+}
+
+.inputLoginNewGui{
+	    float: left;
+    font-weight: normal;
+    color: rgb(0, 0, 0);
+    padding: 3px 4px 2px;
+    line-height: normal;
+    border-radius: 5px 0px 0px 5px;
+    background-position: 3px 3px;
+    height: 22px;
+    border:unset !important;
+    
+}
+
+.inputLoginIconNewGui{
+	
+	float: left;
+    font-weight: normal;
+    color: rgb(0, 0, 0);
+    padding: 3px 4px 2px;
+    line-height: normal;
+    background-position: 3px 3px;
+    height: 22px;
+}
+
+.iconLoginUserNewGui{
+	background-image: url(customIcons/new/iconLogin.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+     background-position:center;
+    width: 22px;
+     height: 22px;
+     filter: grayscale(1);
+}
+
+.iconLoginPasswordNewGui{
+	background-image: url(customIcons/new/iconPassword.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position:center;
+    width: 22px;
+    height: 22px;
+    filter: grayscale(1);
+}
+
+.loginDivContainer {
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 2px -2px 8px #bfbfbf;
+   
+}
+
+.iconLoginPasswordNewGui .dijitReset .dijitInputInner{
+	mix-blend-mode: hard-light;
+}
+
+.passwordButtonNewGui {
+	cursor:pointer;
+	color:#1A91E3;
+	width:100%;
+	
+}

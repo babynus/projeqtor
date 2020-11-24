@@ -57,7 +57,14 @@ require_once "../tool/formatter.php";
   $longDesc=($lang=='fr')?$obj->longDescFr:$obj->longDescEn;
   $page=($lang=='fr')?$obj->pageFr:$obj->pageEn;
   $userManual=$obj->userManual;
-  debugLog($obj);
+  if(strpos($longDesc,"<a href=")!==false){
+    $strat=substr($longDesc, strpos($longDesc,"<a"));
+    $end=substr($strat,0,strpos($strat,"</a>"));
+    $search=substr($strat,0,strpos($strat,"a>")+2);
+    $url=substr($end,(strpos($strat,">")+1));
+    $link='<iframe widht:"500" height:"300" src="'.$url.'"></iframe>';
+    $longDesc=str_replace (  $search , $link,$longDesc ) ;
+  }
 ?>  
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Plugin" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
@@ -81,19 +88,28 @@ require_once "../tool/formatter.php";
         <span class="listTitle" style="font-size:14px;font-weight:bold;" ><?php echo $shortDec;?></span>
       </div>
       <div dojoType="dijit.layout.ContentPane" region="center" >
-        <div class="longDescPlugin" ><?php echo $longDesc;?></div>
-      </div>
-      <div dojoType="dijit.layout.ContentPane" region="right" style="width:20%;text-align:center;">
-       <div class="roundedVisibleButton roundedButton generalColClass" title="<?php echo('technicalDoc'); ?>" style="height:35px;width:70%;margin:20%;" onclick="directionExternalPage('<?php echo $userManual?>')">
-             <div style="float:left;position: relative;padding:10px;"><span style="top:12px;"><?php echo i18n('technicalDoc');?></span></div>
-             <div style="float:right;position: relative;margin-top: 2px;margin-right: 2px;" class="imageColorNewGui iconPdf iconSize32"></div>            
-        </div>
-        <div class="roundedVisibleButton roundedButton generalColClass" title="<?php echo('goToThePage'); ?>" style="height:35px;width:70%;margin:20%;" onclick="directionExternalPage('<?php echo $page?>')">
-             <div style="float:left;position: relative;padding:10px;"><span style="top:12px;"><?php echo i18n('goToThePage');?></span></div>
-             <div style="float:right;position: relative;" class="imageColorNewGui iconGoto iconSize32"></div>            
-        </div>
+        <div class="longDescPlugin" style="padding: 10px;" ><?php echo $longDesc;?></div>
       </div>
     </div>
   </div>
+  <div dojoType="dijit.layout.ContentPane" region="right" style="width:30%;text-align:center;">
+    <div class="container" dojoType="dijit.layout.BorderContainer">
+      <div class="roundedVisibleButton roundedButton generalColClass" title="<?php echo('goToThePage'); ?>" style="height:35px;width:80%;max-width:150px;text-align: center;margin:0 auto;" onclick="directionExternalPage('<?php echo $page?>')">
+         <div style="position: relative;width:100%;height:100%;"><span style="top:12px;vertical-align:middle;"><?php echo i18n('goToThePage');?></span></div>
+         <!--  <div style="float:right;position: relative;" class="imageColorNewGui iconGoto iconSize32"></div>  -->          
+      </div>
+      <div style="height:20px;">&nbsp;</div>
+      <div class="roundedVisibleButton roundedButton generalColClass" title="<?php echo('technicalDoc'); ?>" style="height:35px;width:80%;max-width:150px;text-align: center;margin:0 auto;" onclick="directionExternalPage('<?php echo $userManual?>')">
+         <div style="position: relative;"><span style="top:12px;"><?php echo i18n('technicalDoc');?></span></div>
+         <!-- <div style="float:right;position: relative;margin-top: 2px;margin-right: 2px;" class="imageColorNewGui iconPdf iconSize32"></div>    -->         
+      </div>
+      <div style="height:20px;">&nbsp;</div>
+      <div class="container" style="height: 95%;">
+        <iframe   width="95%" height="95%" src="<?php echo $userManual?>" >
+        </iframe>
+      </div>
+    </div>
+  </div>
+  
 </div>
 

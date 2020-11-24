@@ -68,6 +68,9 @@
   <link rel="icon" href="../view/img/logo.ico" type="image/x-icon" />
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtor.css" />
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorFlat.css" />
+  <?php if(isNewGui()){?>
+   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorNew.css" />
+  <?php }?>
   <script type="text/javascript" src="../external/CryptoJS/rollups/md5.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/CryptoJS/rollups/sha256.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/phpAES/aes.js?version=<?php echo $version.'.'.$build;?>" ></script>
@@ -96,6 +99,7 @@
     dojo.require("dijit.form.Button");
     dojo.require("dijit.form.Form");
     dojo.require("dijit.form.FilteringSelect");
+
     require(["dojo/sniff"], function(sniff) {
       var mobileExists=<?php echo (file_exists("../mobile"))?'true':'false';?>;
       if(mobileExists && (sniff("android") || sniff("ios") || sniff("bb") ) ) { 
@@ -164,9 +168,25 @@
     } 
   </script>
 </head>
-
+<?php 
+if(isNewGui()){
+$firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
+$secondColor=Parameter::getGlobalParameter('newGuiThemeColorBis');
+if(!$firstColor){
+$firstColor= getTheme();
+}
+if(!$secondColor){
+$secondColor='';
+}
+?>
+<body class="loginBackground" onLoad="hideWait();" style="overflow: auto;background-color:<?php echo '#'.$firstColor?>;" onBeforeUnload="">
+<?php 
+}else{
+?>
 <body class="<?php echo getTheme();?>" onLoad="hideWait();" style="overflow: auto;" onBeforeUnload="">
-<?php if (array_key_exists('objectClass', $_REQUEST) and array_key_exists('objectId', $_REQUEST)  ) {
+<?php
+}
+ if (array_key_exists('objectClass', $_REQUEST) and array_key_exists('objectId', $_REQUEST)  ) {
 	Security::checkValidClass($_REQUEST['objectClass']);
 echo '<input type="hidden" id="objectClass" value="' . $_REQUEST['objectClass'] . '" />';
 echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['objectId']) . '" />';
@@ -182,7 +202,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
   ?></div>
   <div id="waitLogin" style="display:none" >
   </div>
-  <div class="loginMessageContainer">
+  <div class="<?php echo (isNewGui() and !empty($msgList))?'loginMessageContainerNew':'loginMessageContainer';?>">
   	<?php 
   	$cpt=0;
   	foreach ($msgList as $msg) {
@@ -201,7 +221,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
   <table align="center" width="100%" height="100%" class="loginBackground">
     <tr height="100%">
 	    <td width="100%" align="center">
-	      <div class="background loginFrame" >
+	      <div class="background <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
 	          <!--  <div style="position:fixed; top:0px; right:0px; height:128px;width:128px;box-shadow:0px 0px 50px #FFFFFF; background: #FFFFFF; border-radius:64px;"> 
 	          <img style="position:absolute; top:2px;right:-2px;" src="../view/img/logoMedium.png"  />
 	          </div>  -->
@@ -230,16 +250,18 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
                   <br/><br/>
 			            <table width="100%">
 			              <tr>     
-			                <td title="<?php echo i18n("login");?>" style="background:transparent !important;width: 100px;">
+			               <td title="<?php echo i18n("login");?>" style="background:transparent !important;width: 100px;">
 			                  
-			                </td>
-			                <td title="<?php echo i18n("login");?>" style="width:250px">
-			                  <div class="inputLoginIcon iconLoginUser">&nbsp;</div>
-			                  <input tabindex="1" id="login" type="text"  class="inputLogin"
+			               </td>
+			               <td title="<?php echo i18n("login");?>" style="width:250px">
+			                 <?php if(isNewGui())echo '<div class="loginDivContainer container">'; ?>
+			                   <div class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginUserNewGui':'inputLoginIcon iconLoginUser';?> ">&nbsp;</div>
+			                   <input tabindex="1" id="login" type="text"  class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>"
 			                   dojoType="dijit.form.TextBox" />
-                        <input type="hidden" id="hashStringLogin" name="login" value=""/>  
-			                </td>
-			                <td width="100px">&nbsp;</td>
+                               <input type="hidden" id="hashStringLogin" name="login" value=""/>  
+                              <?php if(isNewGui())echo '</div>'; ?>
+			               </td>
+			               <td width="100px">&nbsp;</td>
 			              </tr>
 			              <tr style="font-size:50%"><td colspan="3">&nbsp;</td></tr>
 			              <tr>
@@ -247,10 +269,12 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                  
 			                </td>  
 			                <td title="<?php echo i18n("password");?>">
-			                <div  class="inputLoginIcon iconLoginPassword">&nbsp;</div>
-			                  <input  tabindex="2" id="password" type="password" class="inputLogin"
+			                <?php if(isNewGui())echo '<div class="loginDivContainer container">'; ?>
+			                   <div  class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginPasswordNewGui':'inputLoginIcon iconLoginPassword';?> ">&nbsp;</div>
+			                   <input  tabindex="2" id="password" type="password" class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>"
 			                   dojoType="dijit.form.TextBox" />
-                        <input type="hidden" id="hashStringPassword" name="password" value=""/>
+                                <input type="hidden" id="hashStringPassword" name="password" value=""/>
+                             <?php if(isNewGui())echo '</div>'; ?>
 			                </td>
 			                <td></td>
 			              </tr>
@@ -258,19 +282,23 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr style="font-size:50%"><td colspan="2">&nbsp;</td></tr>
 			              <tr style="height:30px">
 			                <td></td>
-			                <td><div style="width:200px;text-align:center;"><div class="greyCheck" dojoType="dijit.form.CheckBox" type="checkbox" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
+			                <?php if(!isNewGui()){?>
+			                   <td><div style="width:200px;text-align:center;"><div class="greyCheck" dojoType="dijit.form.CheckBox" type="checkbox" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
+			                <?php }else{?>
+			                   <td><div style="width:200px;text-align:center;"><div class="colorSwitch" data-dojo-type="dojox/mobile/Switch" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
+			                <?php }?>
 			                <td></td>
 			              </tr>
 			              <?php }?>
-			              <tr style="font-size:50%"><td colspan="3">&nbsp;</td></tr>
+			              <tr style="font-size:50%;height:14px;"><td colspan="3">&nbsp;</td></tr>
 			              <tr>
 			                <td style="background:transparent !important;">&nbsp;</td>
 			                <td style="text-align:center">
-			                  <button tabindex="3" type="submit" id="loginButton" class="largeTextButton"
-			                   dojoType="dijit.form.Button" showlabel="true">OK
+			                  <button tabindex="3" type="submit" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="mediumTextButton"showlabel="true" >
+			                  OK
 			                    <script type="dojo/connect" event="onClick" args="evt">
-                            return true;
-                          </script>
+                                 return true;
+                                </script>
 			                  </button>
 			                </td>
 			                <td></td>
@@ -286,13 +314,17 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr>
 			                <td style="background:transparent !important;">&nbsp;</td>
 			                <td style="text-align:center">  
+			                <?php if (!isNewGui()){?>
 			                  <button tabindex="4" id="passwordButton" class="largeTextButton" type="button" dojoType="dijit.form.Button" showlabel="true">
 			                    <?php echo i18n('buttonChangePassword') ?>
 			                    <script type="dojo/connect" event="onClick" args="evt">
                             connect(true);
                             return false;
                           </script>
-			                  </button>  
+			                  </button> 
+			                  <?php }else{?>
+			                 <div  id="passwordButton" class="largeTextButton passwordButtonNewGui" onClick="connect(true);return false;" > <?php echo i18n('buttonChangePassword') ?></div> 
+			                  <?php }?>  
 			                </td>
 			                <td ></td>
 			              </tr>
