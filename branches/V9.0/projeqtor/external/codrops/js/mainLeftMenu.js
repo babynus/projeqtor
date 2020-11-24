@@ -381,7 +381,7 @@
     if(this.breadcrumbsCtrl.firstChild ){
       this.breadcrumbsCtrl.replaceChild(bc,this.breadcrumbsCtrl.lastElementChild);
       var newPreviousB=document.createElement('div');
-      newPreviousB.setAttribute('class', 'dijitButtonIcon dijitButtonIconPrevious iconBreadSrumbTop');
+      newPreviousB.setAttribute('class', 'dijitButtonIcon dijitButtonIconPreviousBreadScrumb iconBreadSrumbTop');
       newPreviousB.setAttribute('title', i18n('previous'));
       newPreviousB.setAttribute('style','float:left;');
       var oldPreviousB=this.breadcrumbsCtrl.querySelector('.dijitButtonIcon ');
