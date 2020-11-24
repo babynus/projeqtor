@@ -4632,7 +4632,7 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
         echo '</td>';
       }
       echo '<td class="attachmentData" style="width:5%;">#'.htmlEncode($attachment->id).'</td>';
-      echo '<td class="attachmentData" style="width:5%;border-right:none;text-align:center;">';
+      echo '<td class="attachmentData" style="width:5%;border-right:none;text-align:center;min-width:21px;max-width:21px">';
       if ($attachment->isThumbable()) {
         echo '<img src="'.getImageThumb($attachment->getFullPathFileName(), 32).'" '.' title="'.htmlEncode($attachment->fileName).'" style="float:left;cursor:pointer"'.' onClick="showImage(\'Attachment\',\''.htmlEncode($attachment->id).'\',\''.htmlEncode($attachment->fileName, 'protectQuotes').'\');" />';
       } else if ($attachment->link and !$print) {
@@ -8009,6 +8009,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
   // echo '<td class="assignHeader" style="width:10%">' . i18n('colIdle'). '</td>';
   
   echo '</tr>';
+  $displayed=0;
   foreach ($list as $aff) {
     if($aff->hideAffectation)continue;
     $canUpdate=securityGetAccessRightYesNo('menuAffectation', 'update', $aff)=="YES";
@@ -8035,6 +8036,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       }
     }
     $goto="";
+    $displayed++;
     $idToShow=$aff->id;
     $classToShow='Affectation';
     if ($type=='Project') {
@@ -8173,6 +8175,10 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       
     }
   }
+  }
+  if ($displayed==0 and isNewGui() and $type!='Project') {
+    $msg="msgAffectation".(($type=='ResourceAll')?"Resource":$type);
+    echo '<tr><td class="assignData" colSpan="'.(($print)?'6':'7').'" style="text-align:center;color:#aaaaaa;font-style:italic;">'.i18n($msg).'</td></tr>';
   }
   echo '</table></td></tr>';
   echo '</table>';
