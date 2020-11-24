@@ -151,6 +151,18 @@
       exit;
     }                     
   }
+  $param = new Parameter();
+  $paramCount = $param->countSqlElementsFromCriteria(array('idUser'=>$user->id));
+  if($paramCount==0){
+    Parameter::storeUserParameter('newGui', '1', $user->id);
+  }
+  if(isNewGui()){
+    $idMessageLegal = SqlList::getIdFromName('MessageLegal', 'newGui');
+    $messageLegalFollow = SqlElement::getSingleSqlElementFromCriteria('MessageLegalFollowUp', array('idUser'=>$user->id, 'name'=>'newGui', 'idMessageLegal'=>$idMessageLegal));
+    $messageLegalFollow->acceptedDate= date('Y-m-d H:i:s');
+    $messageLegalFollow->accepted = 1;
+    $messageLegalFollow->save();
+  }
   loginOk ($user);
   User::resetAllVisibleProjects();
   

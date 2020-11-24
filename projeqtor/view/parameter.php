@@ -379,6 +379,15 @@ function drawTableFromObjectList($objectList) {
 			    echo i18n('SAML_spCertMessage');
 			    echo '</div>';
 			  }
+			}else if($format=='color'){
+			  debugLog($obj);
+			  $theming="setColorTheming(this.value,null);";
+			  if($code=='newGuiThemeColorBis')$theming="setColorTheming(null,this.value);";
+			  if($type=='userParameter'){
+			    echo '<input type="color" id="'.$code.'" onInput="'.$theming.'" onChange="saveDataToSession(\''.$code.'\',this.value.substr(1),true);'.$theming.'" value="#'.$obj->parameterValue.'" style="height: 24px;width: 98%;border-radius: 5px 5px 5px 5px;" />';
+			  }else{
+			    echo '<input type="color" id="'.$code.'" onChange="saveDataToSession(\''.$code.'\',this.value.substr(1));" value="#'.$obj->parameterValue.'" style="height: 24px;width: 98%;border-radius: 5px 5px 5px 5px;" />';
+			  }
 			}
 			//if ($format!='photo') {
 			echo '</td></tr>'; // close the line level
