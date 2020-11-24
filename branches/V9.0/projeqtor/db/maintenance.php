@@ -142,35 +142,15 @@ if ($currVersion=='V0.0.0') {
   $prm->save();
   // New in V5 : Start Guide Page
   Parameter::storeUserParameter('startPage', 'startGuide.php',1);
-  Parameter::storeUserParameter('newGui', true, 1);
-  Parameter::storeGlobalParameter('newGuiThemeColor', '363551');
-  Parameter::storeGlobalParameter('newGuiThemeColorBis', 'eb972c');
+  Parameter::storeGlobalParameter('newGui', '1');
+  Parameter::storeUserParameter('newGui', '1', 1);
+  Parameter::storeUserParameter('newGui', '1', 2);
+  Parameter::storeGlobalParameter('newGuiThemeColor', '545381');
+  Parameter::storeGlobalParameter('newGuiThemeColorBis', 'e97b2c');
   Parameter::storeGlobalParameter('paramScreen', 'left');
   Parameter::storeGlobalParameter('paramRightDiv', 'bottom');
   Parameter::storeGlobalParameter('paramLayoutObjectDetail', 'tab');
   Parameter::storeUserParameter('menuLeftDisplayMode', 'ICONTXT');
-  $customRow[1]=array('Project', 'Activity', 'Milestone', 'Meeting', 'Planning', 'Resource', 'Reports');
-  $customRow[2]=array('Ticket', 'Kanban', 'Imputation', 'Absence');
-  $sortOrder = 1;
-  foreach ($customRow[1] as $menu){
-  	$customMenu = new MenuCustom();
-  	$customMenu->name = 'menu'.$menu;
-  	$customMenu->idUser = getCurrentUserId();
-  	$customMenu->idRow = 1;
-  	$customMenu->sortOrder = $sortOrder;
-  	$customMenu->save();
-  	$sortOrder++;
-  }
-  $sortOrder = 1;
-  foreach ($customRow[2] as $menu){
-  	$customMenu = new MenuCustom();
-  	$customMenu->name = 'menu'.$menu;
-  	$customMenu->idUser = getCurrentUserId();
-  	$customMenu->idRow = 2;
-  	$customMenu->sortOrder = $sortOrder;
-  	$customMenu->save();
-  	$sortOrder++;
-  }
   enableCatchErrors();
   rename("../api/.htaccess.example","../api/.htaccess"); // Use exemple to "lock" API access (will use not existing password file)
   disableCatchErrors();
