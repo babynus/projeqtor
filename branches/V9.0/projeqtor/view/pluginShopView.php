@@ -56,60 +56,72 @@ require_once "../tool/formatter.php";
   $shortDec=($lang=='fr')?$obj->shortDescFr:$obj->shortDescEn;
   $longDesc=($lang=='fr')?$obj->longDescFr:$obj->longDescEn;
   $page=($lang=='fr')?$obj->pageFr:$obj->pageEn;
+  $imgLst=$obj->images;
+  $firstImg=$obj->images[0];
+  $urlSite='https://www.projeqtor.net/';
+  unset($imgLst[0]);
   $userManual=$obj->userManual;
   if(strpos($longDesc,"<a href=")!==false){
     $strat=substr($longDesc, strpos($longDesc,"<a"));
     $end=substr($strat,0,strpos($strat,"</a>"));
     $search=substr($strat,0,strpos($strat,"a>")+2);
-    $url=substr($end,(strpos($strat,">")+1));
-    $link='<iframe widht:"500" height:"300" src="'.$url.'"></iframe>';
+//     $url=substr($end,(strpos($strat,">")+1));
+    $link='<iframe width="800" height="500" src="https://www.youtube.com/embed/jnPZlpEheUg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen "style="border:none !important;"></iframe>';
     $longDesc=str_replace (  $search , $link,$longDesc ) ;
   }
 ?>  
+
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Plugin" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
-  <div id="pluginShopDiv" class="listTitle" dojoType="dijit.layout.ContentPane" region="top" style="z-index:3;overflow:visible">
-        <table width="100%">
-        <tr height="70px" style="vertical-align: middle;">
-          <td style="text-align:center;font-size:16px;"><span class="title" style="text-decoration: underline;"><?php echo $pluginName;?>&nbsp;</span>        
-          </td>
-          <td width="10px" >&nbsp;
-          </td>
-          <td width="50px"> 
-          </td>
-          <td>  
-          </td>
-        </tr>
-      </table>
-  </div>
-  <div dojoType="dijit.layout.ContentPane" region="center" style="overflow-y:auto;margin-top:9%;margin-left:10%;">
+  <div dojoType="dijit.layout.ContentPane" region="center" style="overflow-y:auto;">
     <div class="container" dojoType="dijit.layout.BorderContainer">
-      <div dojoType="dijit.layout.ContentPane" region="top" style="height:48px" >
-        <span class="listTitle" style="font-size:14px;font-weight:bold;" ><?php echo $shortDec;?></span>
+      <div id="pluginShopDiv" class="listTitle" dojoType="dijit.layout.ContentPane" region="top" style="z-index:3;overflow:visible">
+        <table style='width:100%;' >
+          <tr>
+            <td style="vertical-align: top;width:300px!important;">
+              <div style="vertical-align: middle;float:left;width:300px;text-align:center;margin-top:25px;">
+                <span  class="title" style="font-size:20px;white-space: unset;"><?php echo $pluginName;?>&nbsp;</span>  
+              </div>
+              <img style="border:none !important;float:left;width:250px;height:250px;margin-left:25px;margin-right:25px;"  src="<?php echo $urlSite.$firstImg->url;?>"></img>
+            </td>
+            <td style="vertical-align:bottom;" >
+                <?php if(!empty($imgLst)){?>
+              <div style="height:100%;margin-bottom:50px;float:right;">
+                  <?php 
+                    foreach ($imgLst as $imgUrl){
+                      echo '<img style="border:none !important;float:left;width:400px;margin-left:25px;margin-right:25px;cursor:pointer;" 
+                        onClick="showImage(\'Note\',\''.$urlSite.$imgUrl->url.'\',\' \');" src="'.$urlSite.$imgUrl->url.'"></img>';
+                     }
+                  
+                  ?>
+              </div>
+              <?php }?>
+           </td>
+          </tr>
+        </table>
       </div>
-      <div dojoType="dijit.layout.ContentPane" region="center" >
+      <div dojoType="dijit.layout.ContentPane" region="center" style="height:48px;margin-left:40px;margin-top:25px;" >
+
+        <div class="roundedVisibleButton roundedButton generalColClass pluginShopButton" title="<?php echo('goToThePage'); ?>"  onclick="directionExternalPage('<?php echo $page?>')">
+          <div style="position: relative;width:100%;height:100%;"><span style="top:12px;vertical-align:middle;"><?php echo i18n('goToThePage');?></span></div>
+          <!--  <div style="float:right;position: relative;" class="imageColorNewGui iconGoto iconSize32"></div>  -->          
+        </div>
+        <div class="roundedVisibleButton roundedButton generalColClass pluginShopButton" title="<?php echo('technicalDoc'); ?>"   onclick="directionExternalPage('<?php echo $userManual?>')">
+          <div style="position: relative;"><span style="top:12px;"><?php echo i18n('technicalDoc');?></span></div>
+          <!-- <div style="float:right;position: relative;margin-top: 2px;margin-right: 2px;" class="imageColorNewGui iconPdf iconSize32"></div>    -->         
+        </div>
+        <span class="listTitle" style="font-size:14px;font-weight:bold;" ><?php echo $shortDec;?></span>
+        <div style="height:20px;">&nbsp;</div>
         <div class="longDescPlugin" style="padding: 10px;" ><?php echo $longDesc;?></div>
       </div>
     </div>
   </div>
   <div dojoType="dijit.layout.ContentPane" region="right" style="width:30%;text-align:center;">
-    <div class="container" dojoType="dijit.layout.BorderContainer">
-      <div class="roundedVisibleButton roundedButton generalColClass" title="<?php echo('goToThePage'); ?>" style="height:35px;width:80%;max-width:150px;text-align: center;margin:0 auto;" onclick="directionExternalPage('<?php echo $page?>')">
-         <div style="position: relative;width:100%;height:100%;"><span style="top:12px;vertical-align:middle;"><?php echo i18n('goToThePage');?></span></div>
-         <!--  <div style="float:right;position: relative;" class="imageColorNewGui iconGoto iconSize32"></div>  -->          
-      </div>
-      <div style="height:20px;">&nbsp;</div>
-      <div class="roundedVisibleButton roundedButton generalColClass" title="<?php echo('technicalDoc'); ?>" style="height:35px;width:80%;max-width:150px;text-align: center;margin:0 auto;" onclick="directionExternalPage('<?php echo $userManual?>')">
-         <div style="position: relative;"><span style="top:12px;"><?php echo i18n('technicalDoc');?></span></div>
-         <!-- <div style="float:right;position: relative;margin-top: 2px;margin-right: 2px;" class="imageColorNewGui iconPdf iconSize32"></div>    -->         
-      </div>
-      <div style="height:20px;">&nbsp;</div>
-      <div class="container" style="height: 95%;">
-        <iframe   width="95%" height="95%" src="<?php echo $userManual?>" >
-        </iframe>
-      </div>
+    <div class="container" style="margin:0 auto;">
+      <iframe   width="100%" height="100%" src="<?php echo $userManual?>" ></iframe>
     </div>
   </div>
+</div>
   
 </div>
 

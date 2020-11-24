@@ -2095,6 +2095,7 @@ table.dijitCalendarContainer {
 .dijitButtonIconHistory { background-position: -426px; }
 .dijitButtonIconTool { background-position: -451px; }
 .dijitButtonIconPrevious { background-position: -476px; height:16px;}
+.dijitButtonIconPreviousBreadScrumb { background-position: -476px; height:16px;}
 .dijitButtonIconNext { background-position: -501px; height:16px;}
 .dijitButtonIconSelect { background-position: -526px; }
 .dijitButtonIconHideMenu { background-position: -551px; }
