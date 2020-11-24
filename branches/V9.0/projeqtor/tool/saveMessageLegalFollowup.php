@@ -41,12 +41,12 @@ if($messLegalFollow->name == 'newGui'){
   $newGuiActivated = RequestHandler::getValue('newGuiActivated');
   if($messLegalFollow->idUser == 1){
     Parameter::storeGlobalParameter('newGui', $newGuiActivated);
-    Parameter::storeGlobalParameter('newGuiThemeColor', '363551');
-    Parameter::storeGlobalParameter('newGuiThemeColorBis', 'eb972c');
+    Parameter::storeGlobalParameter('newGuiThemeColor', '545381');
+    Parameter::storeGlobalParameter('newGuiThemeColorBis', 'e97b2c');
   }
   Parameter::storeUserParameter('newGui', $newGuiActivated);
-  Parameter::storeUserParameter('newGuiThemeColor', '363551');
-  Parameter::storeUserParameter('newGuiThemeColorBis', 'eb972c');
+  Parameter::storeUserParameter('newGuiThemeColor', '545381');
+  Parameter::storeUserParameter('newGuiThemeColorBis', 'e97b2c');
   Parameter::storeUserParameter('paramScreen', 'left');
   Parameter::storeUserParameter('paramRightDiv', 'bottom');
   Parameter::storeUserParameter('paramLayoutObjectDetail', 'tab');

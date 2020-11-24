@@ -225,6 +225,10 @@ class Parameter extends SqlElement {
         $colScript .= '<script type="dojo/connect" event="onChange" >';
         $colScript .= '  saveDataToSessionAndReload("newGui", this.value, null);';
         $colScript .= '</script>';
+    } else if ($colName=="menuBarTopMode") {
+        $colScript .= '<script type="dojo/connect" event="onChange" >';
+        $colScript .= '  saveDataToSessionAndReload("menuBarTopMode", this.value, null);';
+        $colScript .= '</script>';
     }else {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  newValue=this.value;';
@@ -792,6 +796,8 @@ class Parameter extends SqlElement {
                        'column_Dis_1'=>'newColumn',
                          'sectionDisplayParameter'=>"section",
                            'newGui'=>'list',
+                           'newGuiThemeColor'=>'color',
+                           'newGuiThemeColorBis'=>'color',
                            "theme"=>"list", 
                            "lang"=>"list",
                            "browserLocaleDateFormat"=>"list",
@@ -974,6 +980,8 @@ class Parameter extends SqlElement {
       	                  'columnDisplayRight'=>'newColumn',
       	                    'sectionDisplayDefault'=>'section',
       	                      'newGui'=>'list',
+      	                      'newGuiThemeColor'=>'color',
+      	                      'newGuiThemeColorBis'=>'color',
       	                      'paramDefaultLocale'=>'list',
       	                      'defaultTheme'=>'list',
       	                      'startPage'=>'list',
