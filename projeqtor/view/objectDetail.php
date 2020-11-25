@@ -1479,7 +1479,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $thumbIcon=SqlElement::isIconableField($col); 
             $formatedThumb='';
             if ($thumbIcon) {
-              $formatedThumb=formatIconThumb(SqlList::getFieldFromId(substr($col,2), $val, 'icon') , 22, 'right');
+              $formatedThumb=formatIconThumb(SqlList::getFieldFromId(substr($col,2), $val, 'icon') , ((isNewGui())?32:22), 'right');
             } else if ($thumbRes) {
               $formatedThumb=formatUserThumb($val, null, null, ((isNewGui())?32:22), 'right');
             } else if ($thumbColor) {
@@ -1496,7 +1496,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             if ($thumb) {
               // echo $formatedThumb;
               $pos=(isNewGui())?(($thumbRes)?'-6':'-7'):'0';
-              if (!$print) echo '<div style="position:absolute;top:1px;right:'.$pos.'px;float:right;">';
+              if (!$print) {
+                echo '<div style="position:absolute;top:1px;right:'.$pos.'px;float:right;">';
+              }
               if ($col=='idStatus') {
                 echo '<a onmouseover="drawGraphStatus();">';
               }
@@ -2553,7 +2555,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         //echo ' labelType="html" spanLabel=true  ';
         echo '  style="width: '.($fieldWidth).'px;'.$specificStyle.'"';
-        if ($col=='idBusinessFeature') echo 'data-dojo-props="queryExpr: \'*${0}*\', autoComplete:false"';
+        if ($col=='idBusinessFeature' or $col=='idProject') echo 'data-dojo-props="queryExpr: \'*${0}*\', autoComplete:false"';
         echo $name;
         // ADD BY Marc TABARY - 2017-02-24 - ORGANIZATION MANAGER
         if (get_class($obj)=='Resource' and $col=='idOrganization' and $val) {
