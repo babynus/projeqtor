@@ -227,7 +227,7 @@ class Parameter extends SqlElement {
         $colScript .= '</script>';
     } else if ($colName=="menuBarTopMode") {
         $colScript .= '<script type="dojo/connect" event="onChange" >';
-        $colScript .='   saveUserParameter("menuBarTopMode", this.value);';
+        $colScript .='   saveDataToSession("menuBarTopMode", this.value, true);';
         $colScript .= '  menuNewGuiFilter("menuBarCustom", null);';
         $colScript .= '</script>';
     }else {
