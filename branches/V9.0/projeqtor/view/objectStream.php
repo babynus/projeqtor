@@ -111,9 +111,9 @@
   }
   if (!$objectId) {  
       if(Parameter::getUserParameter('paramRightDiv')!='bottom'){
-        echo "<div onclick='switchModeLayout(\"bottom\");' class='switchModeLayout changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
+        echo "<div onclick='switchModeLayout(\"bottom\");' class='imageColorNewGui changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
       }else{
-        echo "<div onclick='switchModeLayout(\"trailing\");' class='switchModeLayout changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
+        echo "<div onclick='switchModeLayout(\"trailing\");' class='imageColorNewGui changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
       }
     
     echo "</br></br>";
@@ -133,9 +133,9 @@
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
 	<?php
       if($positionActivityStream!="bottom"){
-         echo "<div onclick='switchModeLayout(\"bottom\");' class='switchModeLayout changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
+         echo "<div onclick='switchModeLayout(\"bottom\");' class='imageColorNewGui changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
       }else{
-        echo "<div onclick='switchModeLayout(\"trailing\");'  class='switchModeLayout changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
+        echo "<div onclick='switchModeLayout(\"trailing\");'  class='imageColorNewGui changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
       }
     
     ?>
@@ -282,13 +282,13 @@
          $privacyClass="";
          $privacyLabel=i18n("public");
          if ($privacyNotes=="3") { // Team privacy
-           $privacyClass="iconFixed16";
+           $privacyClass="imageColorBlack iconFixed16 iconFixed iconSize16";
            $privacyLabel=i18n("private");
          } else if ($privacyNotes=="2") { // Private
-           $privacyClass="iconTeam16";
+           $privacyClass="imageColorBlack iconTeam16 iconTeam iconSize16";
            $privacyLabel=i18n("team");
          }?>
-         <div title="<?php echo i18n("colIdPrivacy").' = '.$privacyLabel;?>" id="notePrivacyStreamDiv" class="<?php echo $privacyClass;?>" onclick="switchNotesPrivacyStream();" style="border-radius:8px ;width:16px; height:16px;position:absolute;bottom:2px;right:-2px;opacity:1;background-color: #E0E0E0;color:#A0A0A0;cursor:pointer;text-align:center">...</div>
+         <div title="<?php echo i18n("colIdPrivacy").' = '.$privacyLabel;?>" id="notePrivacyStreamDiv" class="<?php echo $privacyClass;?>" onclick="switchNotesPrivacyStream();" style="<?php if (! isNewGui()) echo 'border-radius:8px;background-color: #E0E0E0;'; else //echo 'border:1px solid #dddddd;'?>width:16px; height:16px;position:absolute;bottom:2px;right:-2px;opacity:1;color:#A0A0A0;cursor:pointer;text-align:center">...</div>
          <input type="hidden" id="notePrivacyStream" name="notePrivacyStream" value="<?php echo $privacyNotes?>" />
          <input type="hidden" id="notePrivacyStreamUserTeam" name="notePrivacyStreamUserTeam" value="<?php echo $ress->idTeam;?>" />
        </div>
