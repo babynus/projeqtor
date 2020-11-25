@@ -59,9 +59,10 @@ require_once "../tool/formatter.php";
   $imgLst=$obj->images;
   $firstImg=$obj->images[0];
   $urlSite='https://www.projeqtor.net/';
+  $version=$obj->version;
   unset($imgLst[0]);
   $userManual=$obj->userManual;
-  if(strpos($longDesc,"<a href=")!==false){
+  if($obj->id='100012' and strpos($longDesc,"<a href=")!==false){
     $strat=substr($longDesc, strpos($longDesc,"<a"));
     $end=substr($strat,0,strpos($strat,"</a>"));
     $search=substr($strat,0,strpos($strat,"a>")+2);
@@ -80,7 +81,8 @@ require_once "../tool/formatter.php";
           <tr>
             <td style="vertical-align: top;width:300px!important;">
               <div style="vertical-align: middle;float:left;width:300px;text-align:center;margin-top:25px;">
-                <span  class="title" style="font-size:20px;white-space: unset;"><?php echo $pluginName;?>&nbsp;</span>  
+                <span  class="title" style="font-size:20px;white-space: unset;"><?php echo $pluginName;?>&nbsp;</span>
+                <span  class="title" style="font-size:14px;white-space: unset;"><br><?php echo i18n('lastVersion').'&nbsp;'.$version;?>&nbsp;</span>    
               </div>
               <img style="border:none !important;float:left;width:250px;height:250px;margin-left:25px;margin-right:25px;"  src="<?php echo $urlSite.$firstImg->url;?>"></img>
             </td>
@@ -89,7 +91,7 @@ require_once "../tool/formatter.php";
               <div style="height:100%;margin-bottom:50px;float:right;">
                   <?php 
                     foreach ($imgLst as $imgUrl){
-                      echo '<img style="border:none !important;float:left;width:400px;margin-left:25px;margin-right:25px;cursor:pointer;" 
+                      echo '<img style="border:none !important;float:left;width:200px;margin-left:15px;margin-right:25px;cursor:pointer;" 
                         onClick="showImage(\'Note\',\''.$urlSite.$imgUrl->url.'\',\' \');" src="'.$urlSite.$imgUrl->url.'"></img>';
                      }
                   
@@ -99,9 +101,7 @@ require_once "../tool/formatter.php";
            </td>
           </tr>
         </table>
-      </div>
-      <div dojoType="dijit.layout.ContentPane" region="center" style="height:48px;margin-left:40px;margin-top:25px;" >
-
+        <div style="margin-top:45px;margin-left:35px;margin-bottom:25px;">
         <div class="roundedVisibleButton roundedButton generalColClass pluginShopButton" title="<?php echo('goToThePage'); ?>"  onclick="directionExternalPage('<?php echo $page?>')">
           <div style="position: relative;width:100%;height:100%;"><span style="top:12px;vertical-align:middle;"><?php echo i18n('goToThePage');?></span></div>
           <!--  <div style="float:right;position: relative;" class="imageColorNewGui iconGoto iconSize32"></div>  -->          
@@ -112,6 +112,10 @@ require_once "../tool/formatter.php";
         </div>
         <span class="listTitle" style="font-size:14px;font-weight:bold;" ><?php echo $shortDec;?></span>
         <div style="height:20px;">&nbsp;</div>
+        </div>
+      </div>
+      <div dojoType="dijit.layout.ContentPane" region="center" style="height:48px;margin-left:40px;margin-top:25px;" >
+
         <div class="longDescPlugin" style="padding: 10px;" ><?php echo $longDesc;?></div>
       </div>
     </div>

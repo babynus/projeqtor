@@ -1442,15 +1442,11 @@ select option:checked {
 
 .passwordButtonNewGui {
 	cursor:pointer;
-	color:#1A91E3 !important;
+	color:var(--color-medium);
 	width:100%;
 	
 }
 
-.validationLoginButton{
-	background-color:#1A91E3 !important;
-	color: white !important;
-}
 
 .pluginShopButton{
 	height:35px;

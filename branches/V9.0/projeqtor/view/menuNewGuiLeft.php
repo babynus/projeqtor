@@ -298,28 +298,31 @@ function getReportsMenu(){
 function getPlugins (){
   $level=2;
   $result=array();
-  $idMenu=array();
+  $idMenu='';
   $menu=new Menu;
   $exist=false;
   $idMenuPlugin=SqlElement::getSingleSqlElementFromCriteria('Navigation', array('name'=>'navPlugin'));
   $plList=Plugin::getActivePluginList();
   foreach ($plList as $intalPlugin){
     $plInstal[$intalPlugin->uniqueCode]=$intalPlugin->uniqueCode;
+    $plInstalVersion[$intalPlugin->uniqueCode]=$intalPlugin->pluginVersion;
   }
   $where="id > 100000 and id <> 100006001";
   $pluginsInstal=$menu->getSqlElementsFromCriteria(null,null,$where);
   $c=10;
   foreach ($pluginsInstal as $id=>$menuPlugin){
-    $idMenu=$menuPlugin->id;
     if(strlen($menuPlugin->id)==9)$idMenu=substr($menuPlugin->id,0,-3);
+    else  $idMenu=$menuPlugin->id;
     if (!$menuPlugin->canDisplay() ){
   	   unset($plInstal[$idMenu]);
       continue;
     }
-    foreach ($plInstal as $valId){
-      if($idMenu==$valId){
-        $exist=true;
-        break;
+    if(!empty($plInstal)){
+      foreach ($plInstal as $valId){
+        if($idMenu==$valId){
+          $exist=true;
+          break;
+        }
       }
     }
     if(!$exist)continue;
@@ -338,10 +341,28 @@ function getPlugins (){
   $json = file_get_contents($urlPlugins);
   $object = json_decode($json);
   $plugins=$object->items;
+  $userLang = getSessionValue('currentLocale');
+  $lang = "en";
+  if(substr($userLang,0,2)=="fr")$lang="fr";
   if(!empty($plugins)){
     foreach ($plugins as $id=>$val){
       if(!empty($plInstal)){
-        if(in_array($val->id, $plInstal))continue;
+        if(in_array($val->id, $plInstal)){
+          if($val->version!=$plInstalVersion[$val->id]){
+            $notif=new Notification();
+            $notif->name=i18n('newVersion').'&nbsp'.$val->code;
+            $notif->idUser=getCurrentUserId();
+            $notif->content=i18n('newVersionForPluginName',array((($lang=='fr')?$val->nameFr:$val->nameEn),$plInstalVersion[$val->id],$val->version,));
+            $notif->emailSent=0;
+            $notif->idNotificationType=1;
+            $notif->idResource=1;
+            $notif->notificationDate=date("Y-m-d");
+            $notif->idStatusNotification = 1;
+            $notif->title=i18n('newPluginVersion',array((($lang=='fr')?$val->nameFr:$val->nameEn)));
+            $res=$notif->save();
+          }
+          continue;
+        }   
       }
       $c++;
       $k=$level.'-'.numericFixLengthFormatter($idMenuPlugin->id,5).'-'.numericFixLengthFormatter($c,5);
@@ -358,7 +379,9 @@ function getNavigationMenuLeft (){
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
   $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc');
   $menuPlugin=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuPlugin'));
+  $menuReport=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuReports'));
   $rightPluginAcces=securityCheckDisplayMenu($menuPlugin->id,substr($menuPlugin->name,4));
+  $rightReportAcces=securityCheckDisplayMenu($menuReport->id,substr($menuReport->name,4));
   sortMenus($contexctMenuMain,$result,0,$level,$rightPluginAcces);
   $navTa=array();
   foreach ($result as $id=>$context){
@@ -376,7 +399,7 @@ function getNavigationMenuLeft (){
           continue;
         }
         $lstMenuId[]=$context->idParent;
-      }else if($context->id!=6) $navTa[$id]=$context->id;
+      }else if($context->id!=6 and $rightReportAcces) $navTa[$id]=$context->id;
   }
   foreach ($lstMenuId as $idMenu){
     foreach ($navTa as $idArray=>$val){
@@ -389,7 +412,7 @@ function getNavigationMenuLeft (){
   foreach ($navTa as $idM=>$m){
     unset($result[$idM]);
   }
-  $result=array_merge ($result,getReportsMenu());
+  if($rightReportAcces)$result=array_merge ($result,getReportsMenu());
   if($rightPluginAcces)$result=array_merge($result,getPlugins());
   ksort($result);
   return $result;

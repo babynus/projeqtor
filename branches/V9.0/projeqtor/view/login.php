@@ -85,6 +85,7 @@ $mobile=false;
               isDebug: <?php echo getBooleanValueAsString(Parameter::getGlobalParameter('paramDebugMode'));?>'></script>
   <script type="text/javascript" src="../external/dojo/projeqtorDojo.js?version=<?php echo $version.'.'.$build;?>"></script>
   <?php if (isNewGui()) {?>
+  <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/dojox/mobile/deviceTheme.js" data-dojo-config="mblUserAgent: 'Custom'"></script>
   <?php }?>
   <?php Plugin::includeAllFiles();?>
@@ -262,7 +263,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			               <td title="<?php echo i18n("login");?>" style="background:transparent !important;width: 100px;">
 			                  
 			               </td>
-			               <td title="<?php echo i18n("login");?>" style="width:250px">
+			               <td title="<?php echo i18n("login");?>" style="width:270px">
 			                 <?php if(isNewGui())echo '<div class="loginDivContainer container">'; ?>
 			                   <div class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginUserNewGui':'inputLoginIcon iconLoginUser';?> ">&nbsp;</div>
 			                   <input tabindex="1" id="login" type="text"  class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>"
@@ -278,24 +279,31 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                  
 			                </td>  
 			                <td title="<?php echo i18n("password");?>">
-			                <?php if(isNewGui())echo '<div class="loginDivContainer container">'; ?>
+			                <?php if(isNewGui())echo '<div class="loginDivContainer container" style="float:left">'; ?>
 			                   <div  class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginPasswordNewGui':'inputLoginIcon iconLoginPassword';?> ">&nbsp;</div>
 			                   <input  tabindex="2" id="password" type="password" class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>" dojoType="dijit.form.TextBox" />
                                 <input type="hidden" id="hashStringPassword" name="password" value=""/>
-                             <?php if(isNewGui())echo '</div>'; ?>
+                             <?php if(isNewGui()){
+                               echo '<div class="iconView iconSize22" style="cursor:pointer;float:right;position:relative;top:6px;filter:grayscale(1)" onClick="dojo.setAttr(\'password\',\'type\',((dojo.getAttr(\'password\',\'type\')==\'password\')?\'text\':\'password\'));" ></div>';
+                               echo '</div>';
+                             }?>
 			                </td>
-			                <td></td>
+			                <td>
+                             <?php if(isNewGui()){
+                             }
+                             ?>
+                             </td>
 			              </tr>
 			              <?php if (Parameter::getGlobalParameter('rememberMe')!='NO') {?>
 			              <tr style="font-size:50%"><td colspan="2">&nbsp;</td></tr>
 			              <tr style="height:30px">
 			                <td></td>
-			                <?php if(!isNewGui()){ debugLog('yes');?>
+			                <?php if(!isNewGui()){ ?>
 			                   <td><div style="width:200px;text-align:center;"><div class="greyCheck" dojoType="dijit.form.CheckBox" type="checkbox" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
 			                <?php }else{?>
 			                   <td>
 			                     <div style="width:200px;text-align:center;">
-			                       <div class="colorSwitch" data-dojo-type="dojox/mobile/Switch" name="rememberMe"  value="off" leftLabel="" rightLabel="" style="width:15px;position:relative; left:0px;top:2px;z-index:99;">
+			                       <div class="colorSwitch" data-dojo-type="dojox/mobile/Switch" name="rememberMe"  value="off" leftLabel="" rightLabel="" style="top:2px;z-index:99;">
 			                       </div> <?php echo i18n('rememberMe');?>
                                  </div>
                                </td>
@@ -307,7 +315,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr>
 			                <td style="background:transparent !important;">&nbsp;</td>
 			                <td style="text-align:center">
-			                  <button tabindex="3" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="mediumTextButton <?php if (isNewGui()) echo 'validationLoginButton';?>" showlabel="true" >
+			                  <button tabindex="3" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="largeTextButton" showlabel="true" >
 			                  OK
 			                    <script type="dojo/connect" event="onClick" args="evt">
                                  return true;
