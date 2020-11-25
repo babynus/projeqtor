@@ -280,8 +280,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                <td title="<?php echo i18n("password");?>">
 			                <?php if(isNewGui())echo '<div class="loginDivContainer container">'; ?>
 			                   <div  class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginPasswordNewGui':'inputLoginIcon iconLoginPassword';?> ">&nbsp;</div>
-			                   <input  tabindex="2" id="password" type="password" class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>"
-			                   dojoType="dijit.form.TextBox" />
+			                   <input  tabindex="2" id="password" type="password" class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>" dojoType="dijit.form.TextBox" />
                                 <input type="hidden" id="hashStringPassword" name="password" value=""/>
                              <?php if(isNewGui())echo '</div>'; ?>
 			                </td>
@@ -308,7 +307,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr>
 			                <td style="background:transparent !important;">&nbsp;</td>
 			                <td style="text-align:center">
-			                  <button tabindex="3" type="submit" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="mediumTextButton <?php if (isNewGui()) echo 'validationLoginButton';?>" showlabel="true" >
+			                  <button tabindex="3" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="mediumTextButton <?php if (isNewGui()) echo 'validationLoginButton';?>" showlabel="true" >
 			                  OK
 			                    <script type="dojo/connect" event="onClick" args="evt">
                                  return true;
@@ -329,15 +328,14 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                <td style="background:transparent !important;">&nbsp;</td>
 			                <td style="text-align:center">  
 			                <?php if (!isNewGui()){?>
-			                  <button tabindex="4" id="passwordButton" class="largeTextButton" type="button" dojoType="dijit.form.Button" showlabel="true">
-			                    <?php echo i18n('buttonChangePassword') ?>
+			                  <button tabindex="4" id="passwordButton" class="largeTextButton" type="button" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonChangePassword') ?>
 			                    <script type="dojo/connect" event="onClick" args="evt">
-                            connect(true);
-                            return false;
-                          </script>
+                                  connect(true);
+                                  return false;
+                                </script>
 			                  </button> 
 			                  <?php }else{?>
-			                 <div  id="passwordButton" class="largeTextButton passwordButtonNewGui" onClick="connect(true);return false;" > <?php echo i18n('buttonChangePassword') ?></div> 
+			                   <div  id="passwordButton" class="largeTextButton passwordButtonNewGui" onClick="connect(true);return false;" > <?php echo i18n('buttonChangePassword') ?></div> 
 			                  <?php }?>  
 			                </td>
 			                <td ></td>
