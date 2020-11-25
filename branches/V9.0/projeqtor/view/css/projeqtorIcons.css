@@ -2825,13 +2825,6 @@
 .ProjeQtOrFlatRed .iconEmploymentContract { background-image: url(customIconsHR/red/iconEmploymentContract.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconEmploymentContract { background-image: url(customIcons/new/iconEmploymentContract.svg);  background-repeat: no-repeat; }
 
-.iconEmploymentContractType { background-image: url(imagesHR/iconEmploymentContractType.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconEmploymentContractType { background-image: url(customIconsHR/blue/iconEmploymentContractType.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconEmploymentContractType { background-image: url(customIconsHR/green/iconEmploymentContractType.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconEmploymentContractType { background-image: url(customIconsHR/grey/iconEmploymentContractType.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconEmploymentContractType { background-image: url(customIconsHR/red/iconEmploymentContractType.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconEmploymentContractType { background-image: url(customIcons/new/iconEmploymentContractType.svg);  background-repeat: no-repeat; }
-
 .iconEmployeeLeaveEarned { background-image: url(imagesHR/iconEmployeeLeaveEarned.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconEmployeeLeaveEarned { background-image: url(customIconsHR/blue/iconEmployeeLeaveEarned.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconEmployeeLeaveEarned { background-image: url(customIconsHR/green/iconEmployeeLeaveEarned.png);  background-repeat: no-repeat; }
@@ -2846,6 +2839,20 @@
 .ProjeQtOrFlatRed .iconEmployeeManager { background-image: url(customIconsHR/red/iconEmployeeManager.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconEmployeeManager { background-image: url(customIcons/new/iconEmployeeManager.svg);  background-repeat: no-repeat; }
 
+.iconEmploymentContractType { background-image: url(imagesHR/iconEmploymentContractType.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconEmploymentContractType { background-image: url(customIconsHR/blue/iconEmploymentContractType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconEmploymentContractType { background-image: url(customIconsHR/green/iconEmploymentContractType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconEmploymentContractType { background-image: url(customIconsHR/grey/iconEmploymentContractType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconEmploymentContractType { background-image: url(customIconsHR/red/iconEmploymentContractType.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconEmploymentContractType { background-image: url(customIcons/new/iconEmploymentContractType.svg);  background-repeat: no-repeat; }
+
+.iconEmploymentContractEndReason { background-image: url(imagesHR/iconEmploymentContractEndReason.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconEmploymentContractEndReason { background-image: url(customIconsHR/blue/iconEmploymentContractEndReason.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconEmploymentContractEndReason { background-image: url(customIconsHR/green/iconEmploymentContractEndReason.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconEmploymentContractEndReason { background-image: url(customIconsHR/grey/iconEmploymentContractEndReason.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconEmploymentContractEndReason { background-image: url(customIconsHR/red/iconEmploymentContractEndReason.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconEmploymentContractEndReason { background-image: url(customIcons/new/iconEmploymentContractEndReason.svg);  background-repeat: no-repeat; }
+
 .iconLeave { background-image: url(imagesHR/iconLeave.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconLeave { background-image: url(customIconsHR/blue/iconLeave.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconLeave { background-image: url(customIconsHR/green/iconLeave.png);  background-repeat: no-repeat; }
@@ -2859,6 +2866,21 @@
 .ProjeQtOrFlatGrey .iconLeaveCalendar { background-image: url(customIconsHR/grey/iconLeaveCalendar.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconLeaveCalendar { background-image: url(customIconsHR/red/iconLeaveCalendar.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconLeaveCalendar { background-image: url(customIcons/new/iconLeaveCalendar.svg);  background-repeat: no-repeat; }
+
+.iconLeaveSystem { background-image: url(imagesHR/iconEmployeeLeaveEarned.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconLeaveSystem { background-image: url(customIconsHR/blue/iconEmployeeLeaveEarned.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconLeaveSystem { background-image: url(customIconsHR/green/iconEmployeeLeaveEarned.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconLeaveSystem { background-image: url(customIconsHR/grey/iconEmployeeLeaveEarned.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconLeaveSystem { background-image: url(customIconsHR/red/iconEmployeeLeaveEarned.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconLeaveSystem { background-image: url(customIcons/new/iconEmployeeLeaveEarned.svg);  background-repeat: no-repeat; }
+
+.iconLeavesSystemHabilitation { background-image: url(imagesHR/iconLeavesSystemHabilitation.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconLeavesSystemHabilitation { background-image: url(customIconsHR/blue/iconLeavesSystemHabilitation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconLeavesSystemHabilitation { background-image: url(customIconsHR/green/iconLeavesSystemHabilitation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconLeavesSystemHabilitation { background-image: url(customIconsHR/grey/iconLeavesSystemHabilitation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconLeavesSystemHabilitation { background-image: url(customIconsHR/red/iconLeavesSystemHabilitation.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconLeavesSystemHabilitation { background-image: url(customIcons/new/iconLeavesSystemHabilitation.svg);  background-repeat: no-repeat; }
+
 
 .iconLeaveType { background-image: url(imagesHR/iconLeaveType.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconLeaveType { background-image: url(customIconsHR/blue/iconLeaveType.png);  background-repeat: no-repeat; }
@@ -2883,6 +2905,12 @@
 .ProjeQtOrFlatRed .iconHumanResourceParameters { background-image: url(customIconsHR/red/iconHumanResource.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconHumanResourceParameters { background-image: url(customIcons/new/iconHumanResource.svg);  background-repeat: no-repeat; }
 
+.iconSystemLeave { background-image: url(imagesHR/iconHumanResource.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconHumanResourceParameters { background-image: url(customIconsHR/blue/iconHumanResource.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconHumanResourceParameters { background-image: url(customIconsHR/green/iconHumanResource.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconHumanResourceParameters { background-image: url(customIconsHR/grey/iconHumanResource.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconHumanResourceParameters { background-image: url(customIconsHR/red/iconHumanResource.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconHumanResourceParameters { background-image: url(customIcons/new/iconHumanResource.svg);  background-repeat: no-repeat; }
  
 
 /* =============================================================================== */
