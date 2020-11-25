@@ -309,6 +309,19 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui .dijitAccordionTitle2, .ProjeQtOrNewGui .reportTableColumnHeader2, .ProjeQtOrNewGui .largeReportHeader2 {
   background: url() var(--color-light) !important;
 }
+.ProjeQtOrNewGui .dijitAccordionTitle, .ProjeQtOrNewGui .reportTableColumnHeader, .ProjeQtOrNewGui .largeReportHeader {
+    background: url() #ffffff !important;
+    color: --var(--color-text) !important;
+    text-shadow: none !important;
+    border-top: 0px;
+    border-bottom: 1px solid var(--color-medium);
+}
+.ProjeQtOrNewGui #activityStreamTop {
+	border-bottom: 1px solid var(--color-medium);
+}
+.ProjeQtOrNewGui #activityStreamTop_splitter{
+	background-color:#ffffff  !important;
+}
 
 .ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar {
 	background: var(--color-toolbar) !important;
@@ -627,6 +640,12 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .menu__linkDirect .iconSize22, .ProjeQtOrNewGui .menu__linkDirect .iconSize16,.ProjeQtOrNewGui #menuBarAccesLeft .iconSize22,.ProjeQtOrNewGui #menuBarAccesLeft .iconSize16, .ProjeQtOrNewGui .dijitTreeIcon, .ProjeQtOrNewGui .dijitTreeLabel {
 	-webkit-filter : brightness(0) invert(1);
   filter : brightness(0) invert(1);
+  background-color: transparent;
+  opacity: 1;
+}
+.ProjeQtOrNewGui .imageColorBlack {
+	 -webkit-filter : brightness(0) invert(0);
+  filter : brightness(0) invert(0);
   background-color: transparent;
   opacity: 1;
 }
@@ -1284,6 +1303,11 @@ select option:checked {
 	padding: 5px 8px !important;
 	line-height:18px;
 } 
+.ProjeQtOrNewGui #noteNoteStream {
+	padding: 2px 2px 2px 5px !important;
+	margin: 0em 0.1em;
+	line-height:16px;
+}
 
 .ProjeQtOrNewGui #extraButtonsDetailDiv {
 	background: #ffffff !important;
@@ -1484,11 +1508,4 @@ element.style {
     top: 0px;
     position: absolute;
     width: 238px;
-}
-.ProjeQtOrNewGui .dijitAccordionTitle, .ProjeQtOrNewGui .reportTableColumnHeader, .ProjeQtOrNewGui .largeReportHeader {
-    background: url() #ffffff !important;
-    color: --var(--color-text) !important;
-    text-shadow: none !important;
-    border-top: 0px solid #bda1a6;
-    border-bottom: 1px solid --var(--color-medium);
 }

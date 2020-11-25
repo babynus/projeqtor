@@ -846,7 +846,7 @@ function activityStreamDisplayHist ($hist,$origin){
   $result='';
   if($origin=='objectStream'){
     $result.= '<tr style="height:100%;">';
-    $result.= '  <td colspan="6" class="noteData" style="width:100%;xbackground:#F8F8F8;font-size:100% !important;">';
+    $result.= '  <td colspan="6" class="noteData" style="width:100%;border-top:0;font-size:100% !important;">';
     $result.= '    <div style="float:left;">';
     $result.= '      <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px;">';
     $result.= '        <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';
@@ -868,7 +868,7 @@ function activityStreamDisplayHist ($hist,$origin){
     $result.= '</tr>';
   }else{
     $result.= '<tr style="height:100%;">';
-    $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;xbackground:#F8F8F8;font-size:100% !important;position:relative;">';
+    $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;border-top:0;font-size:100% !important;position:relative;">';
     $result.= '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
     $result.= '      <div style="float:left;max-width:26px">';
     $result.=          $icon;
@@ -938,7 +938,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
   $result='';
   if($origin=='activityStream'){
     $result.= '<tr style="height:100%;">';
-    $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;xbackground:#F8F8F8;font-size:100% !important;position:relative;">';
+    $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;border-top:0;font-size:100% !important;position:relative;">';
     $result.= '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
     $result.= '      <div style="float:left;max-width:26px">';
     $result.=          $icon;
@@ -966,7 +966,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
     $result.= '</tr>';
   }else{
     $result.= '<tr style="height:100%;">';
-    $result.= '  <td colspan="6" class="noteData" style="width:100%;xbackground:#F8F8F8;font-size:100% !important;">';
+    $result.= '  <td colspan="6" class="noteData" style="width:100%;border-top:0;font-size:100% !important;">';
     $result.= '    <div style="float:left;">';
     $result.= '      <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px;">';
     $result.= '        <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';

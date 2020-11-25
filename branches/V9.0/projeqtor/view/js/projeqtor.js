@@ -6286,27 +6286,35 @@ function switchNoteStatus(idNote) {
   
 }
 function switchNotesPrivacyStream() {
+  console.log("switchNotesPrivacyStream()");
   if (! dojo.byId("notePrivacyStream") || !dojo.byId("notePrivacyStreamUserTeam") || !dojo.byId("notePrivacyStreamDiv") ) {
+    console.log("div missing");
     return;
   }
   var privacy=dojo.byId("notePrivacyStream").value;
+  console.log("privacy="+privacy);
   var team=dojo.byId("notePrivacyStreamUserTeam").value;
+  console.log("team="+team);
   if (privacy=="2") {
+    console.log("move to privacy 3");
     dojo.byId("notePrivacyStream").value="3";
-    dojo.byId("notePrivacyStreamDiv").className="iconFixed16";
+    dojo.byId("notePrivacyStreamDiv").className="imageColorBlack iconFixed16 iconFixed iconSize16";
     dojo.byId("notePrivacyStreamDiv").title=i18n("colIdPrivacy")+" : "+i18n("private");
   } else if (privacy=="3") {
+    console.log("move to privacy 1");
     dojo.byId("notePrivacyStream").value="1";
     dojo.byId("notePrivacyStreamDiv").className="";
     dojo.byId("notePrivacyStreamDiv").title=i18n("colIdPrivacy")+" : "+i18n("public");
   } else {
     if (team) {
+      console.log("move to privacy 2");
       dojo.byId("notePrivacyStream").value="2";
-      dojo.byId("notePrivacyStreamDiv").className="iconTeam16";
+      dojo.byId("notePrivacyStreamDiv").className="imageColorBlack iconTeam16 iconTeam iconSize16";
       dojo.byId("notePrivacyStreamDiv").title=i18n("colIdPrivacy")+" : "+i18n("team");
     } else {
+      console.log("move to privacy 3");
       dojo.byId("notePrivacyStream").value="3";
-      dojo.byId("notePrivacyStreamDiv").className="iconFixed16";
+      dojo.byId("notePrivacyStreamDiv").className="imageColorBlack iconFixed16 iconFixed iconSize16";
       dojo.byId("notePrivacyStreamDiv").title=i18n("colIdPrivacy")+" : "+i18n("private");
     }
   }
