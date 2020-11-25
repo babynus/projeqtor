@@ -33,6 +33,7 @@ class PlannedWork extends GeneralWork {
 
   public $surbooked;
   public $surbookedWork;
+  public $idLeave;
   public $manual;
   public $_noHistory;
   public static $_planningInProgress;
