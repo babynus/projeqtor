@@ -463,6 +463,26 @@ function formatPrivacyThumb($privacy, $team,$size=22) {
     echo '</span>';
   }
 }
+function formatPrivacyThumbResult($privacy, $team,$size=22) {
+  // privacy=3 => private
+  // privacy=2 => team
+  // privacy=1 => public
+  $result='';
+  if ($privacy == 3) {
+    $title=htmlEncode(i18n('private'),'quotes');
+    //echo '<img style="float:right;padding-right:3px" src="img/private.png" />';
+    $result.= '<span style="float:right;padding-right:3px">';
+    $result.= formatIcon('Fixed',$size,$title,false);
+    $result.= '</span>';
+  } else if ($privacy == 2) {
+    $title=htmlEncode(i18n('team')." : ".SqlList::getNameFromId ('Team',$team ),'quotes');
+    //$result.= '<img title="'.$title.'" style="float:right;padding-right:3px" src="img/team.png" />';
+    $result.= '<span style="float:right;padding-right:3px">';
+    $result.= formatIcon('Team',$size,$title,false);
+    $result.= '</span>';
+  }
+  return $result;
+}
 
 function formatCommentThumb($comment,$img=null) {
   global $print;
@@ -605,8 +625,8 @@ function activityStreamDisplayNote ($note,$origin){
     $resultNote.= '    <div style="float:left;width:22px;margin-left:6px;margin-bottom:6px">';
     $resultNote.= '      <div style="float:left;clear:left;margin-top:6px;width:22px;position:relative">';
     $resultNote.=          formatIcon("MessageStream",22);
-    $resultNote.= '        <div style="position:absolute;top:0px;left:12px">';
-    $resultNote.=            formatPrivacyThumb($note->idPrivacy, $note->idTeam,16);
+    $resultNote.= '        <div style="xposition:absolute;top:0px;left:12px">';
+    $resultNote.=            formatPrivacyThumbResult($note->idPrivacy, $note->idTeam,16);
     $resultNote.= '        </div>';
     $resultNote.= '      </div>';
     if (!$inlineUserThumb) {
