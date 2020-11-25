@@ -32,12 +32,23 @@
   scriptLog('   ->/view/objectMultipleUpdate.php');
 
   $displayWidth='98%';
+  $spaceWidth='33%';
+  $helpWidth=25;
+  $labelWidth=250;
+  if (isNewGui()) {
+    $labelWidth=365;
+    $helpWidth=60;
+  }
+  
   if (array_key_exists('destinationWidth',$_REQUEST)) {
     $width=$_REQUEST['destinationWidth'];
     $displayWidth=floor($width*0.6);
-    $labelWidth=250;
     $fieldWidth=$displayWidth-$labelWidth-15-15;
+    $spaceWidth=$displayWidth-670;
+    if ($spaceWidth<50) $spaceWidth='33%';
+    else $spaceWidth=$spaceWidth.'px';
   } 
+  
   $objectClass=$_REQUEST['objectClass'];
   Security::checkValidClass($objectClass);
   $obj=new $objectClass();
@@ -51,6 +62,14 @@
           <tr valign="middle" height="32px"> 
             <td width="50px" align="center" class="iconHighlight" >
 <!--               //krowry debug doesn't work in size 22 -->
+            <?php if (isNewGui()) {?>
+             <div style="position: absolute; top: 3px; left: 5px">
+              <?php echo formatIcon($objectClass, 22,null,false);?> 
+              </div>
+              <div style="position: absolute; top: 10px; left: 20px">
+              <?php echo formatIcon($objectClass, 22,null,false);?> 
+              </div>
+            <?php } else {?>
               <div style="position: absolute; top: 0px; left: 2px">
               <?php echo formatIcon($objectClass, 22,null,false);?> 
               </div>
@@ -60,11 +79,19 @@
               <div style="position: absolute; top: 10px; left: 26px">
               <?php echo formatIcon($objectClass, 22,null,false);?> 
               </div>    
+            <?php }?>
             </td>
             <td valign="middle"><span class="title"><?php echo i18n('labelMultipleMode');?></span></td>
+            <td width="50px">&nbsp;</td>
+            <td style="width:300px;white-space;nowrap"">
+              <?php echo i18n("selectedItemsCount");?> :
+              <input type="text" id="selectedCount"
+                style="font-weight: bold;background: transparent;border: 0px;width:50px;<?php if (! isNewGui()) echo 'color: white;';?>" 
+                value="0" readOnly />
+            </td>
             <td width="15px">&nbsp;</td>
             <td><span class="nobr">
-             <button id="selectAllButton" dojoType="dijit.form.Button" showlabel="false" 
+            <button id="selectAllButton" dojoType="dijit.form.Button" showlabel="false" 
                title="<?php echo i18n('buttonSelectAll');?>"
                iconClass="iconSelectAll" class="detailButton" >
                 <script type="dojo/connect" event="onClick" args="evt">
@@ -80,6 +107,10 @@
                    updateSelectedCountMultiple();
                 </script>
               </button>    
+            </span></td>
+            <td style="width:<?php echo $spaceWidth;?>">&nbsp;</td>
+            <td><span class="nobr">
+             
               <button id="saveButtonMultiple" dojoType="dijit.form.Button" showlabel="false"
                title="<?php echo i18n('buttonSaveMultiple');?>"
                iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton" >
@@ -121,13 +152,7 @@
                 </script>
               </button>    
             </span></td>
-            <td>&nbsp;&nbsp;&nbsp;</td>
-            <td>
-              <?php echo i18n("selectedItemsCount");?> :
-              <input type="text" id="selectedCount"
-                style="font-weight: bold;background: transparent;border: 0px;color: white;" 
-                value="0" readOnly />
-            </td>
+
           </tr>
         </table>
 
@@ -167,7 +192,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeProject',array($obj->getColCaption('idProject')));?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idProject" name="idProject">
                  <?php htmlDrawOptionForReference('idProject', null, null, false);?>
@@ -189,7 +214,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeType');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idType" name="idType">
                  <?php htmlDrawOptionForReference($type, null, null, false);?>
@@ -208,7 +233,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeIssuer',array($obj->getColCaption('idUser')));?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idUser" name="idUser">
                  <?php htmlDrawOptionForReference('idUser', null, null, false);?>
@@ -227,7 +252,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeRequestor',array($obj->getColCaption('idContact')));?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idContact" name="idContact">
                  <?php htmlDrawOptionForReference('idContact', null, null, false);?>
@@ -246,7 +271,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeCustomer');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idClient" name="idClient">
                  <?php htmlDrawOptionForReference('idClient', null, null, false);?>
@@ -267,7 +292,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeBusinessFeature');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idBusinessFeature" name="idBusinessFeature">
                  <?php htmlDrawOptionForReference('idBusinessFeature', null, null, false);?>
@@ -289,7 +314,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeRequestor',array($obj->getColCaption($checkField)));?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="<?php echo $checkField;?>" name="<?php echo $checkField;?>">
                  <option value=""> </option>
@@ -327,7 +352,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo (SqlElement::is_a($obj,'Ticket'))?i18n('colChangePlanningActivity'):i18n('colChangeParentActivity');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idActivity" name="idActivity">
                  <?php 
@@ -352,7 +377,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeStatus');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idStatus" name="idStatus">
                  <option value=''></option>
@@ -434,7 +459,7 @@
           <tr class="detail">
             <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeNeedInsurance');?>&nbsp;:&nbsp;</td>
             <td>
-              <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+              <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
               <?php echo autoOpenFilteringSelect();?>
                id="changeNeedInsurance" name="changeNeedInsurance">
                 <option value=""></option>
@@ -450,7 +475,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeResolution');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idResolution" name="idResolution">
                  <?php htmlDrawOptionForReference('idResolution', null, null, false);?>
@@ -469,7 +494,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeResponsible',array($obj->getColCaption('idResource')));?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idResource" name="idResource">
                  <?php htmlDrawOptionForReference('idResource', null, null, false);?>
@@ -488,7 +513,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeTargetVersion');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idTargetVersion" name="idTargetVersion">
                  <?php htmlDrawOptionForReference('idTargetVersion', null, null, false);?>
@@ -507,7 +532,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeProduct');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idProduct" name="idProduct">
                  <?php htmlDrawOptionForReference('idProduct', null, null, false);?>
@@ -526,7 +551,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeTargetProductVersion');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idTargetProductVersion" name="idTargetProductVersion">
                  <?php htmlDrawOptionForReference('idTargetProductVersion', null, null, false);?>
@@ -545,7 +570,7 @@
               <tr class="detail">
                 <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeMilestone');?>&nbsp;:&nbsp;</td>
                 <td>
-                  <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                  <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                   <?php echo autoOpenFilteringSelect();?>
                    id="idMilestone" name="idMilestone">
                    <?php htmlDrawOptionForReference('idMilestone', null, null, false);?>
@@ -564,7 +589,7 @@
               <tr class="detail">
                 <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeComponent');?>&nbsp;:&nbsp;</td>
                 <td>
-                  <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                  <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                   <?php echo autoOpenFilteringSelect();?>
                    id="idComponent" name="idComponent">
                    <?php htmlDrawOptionForReference('idComponent', null, null, false);?>
@@ -584,7 +609,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeTargetComponentVersion');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idTargetComponentVersion" name="idTargetComponentVersion">
                  <?php htmlDrawOptionForReference('idComponentVersion', null, null, false);?>
@@ -795,7 +820,7 @@
               <tr class="detail">
                 <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeResponsible',array($obj->getColCaption('fixPlanning')));?>&nbsp;:&nbsp;</td>
                 <td>
-                  <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                  <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                   <?php echo autoOpenFilteringSelect();?>
                    id="fixPlanning" name="fixPlanning">
                    <option value=""> </option>
@@ -874,7 +899,7 @@
                     <tr class="detail">
                       <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeIsEmployee');?>&nbsp;:&nbsp;</td>
                       <td>
-                        <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                        <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                         <?php echo autoOpenFilteringSelect();?>
                          id="isEmployee" name="isEmployee">
                          <option value=""> </option>
@@ -893,7 +918,7 @@
                 <tr class="detail">
                   <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeWorkFlow');?>&nbsp;:&nbsp;</td>
                   <td>
-                    <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                    <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                     <?php echo autoOpenFilteringSelect();?>
                     id="changerWorkFlow" name="changerWorkFlow">
                     <?php htmlDrawOptionForReference('idWorkflow',null,false,false);?>
@@ -928,7 +953,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeProfile',array($obj->getColCaption('idProfile')));?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idProfile_multiple" name="idProfile_multiple">
                  <?php htmlDrawOptionForReference('idProfile', null, null, false);?>
@@ -952,7 +977,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeTeam');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="idTeam_multiple" name="idTeam_multiple">
                  <?php htmlDrawOptionForReference('idTeam', null, null, false);?>
@@ -977,7 +1002,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeStatusIdle');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="changeStatusIdle" name="changeStatusIdle">
                   <option value=""></option>
@@ -992,7 +1017,7 @@
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeIsLDAP');?>&nbsp;:&nbsp;</td>
               <td>
-                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-$helpWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="changeIsLDAP" name="changeIsLDAP">
                   <option value=""></option>
