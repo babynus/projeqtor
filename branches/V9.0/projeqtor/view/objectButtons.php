@@ -484,7 +484,7 @@
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$user->getProfile($obj),'scope'=>'multipleUpdate'));
     $list=new ListYesNo($habil->rightAccess);
     $buttonMultiple=($list->code=='NO')?false:true;
-    if ($buttonMultiple and ! array_key_exists('planning',$_REQUEST) and $objClassList != 'GlobalView') {?>
+    if (! isNewGui() and $buttonMultiple and ! array_key_exists('planning',$_REQUEST) and $objClassList != 'GlobalView') {?>
     <?php organizeButtons();?> 
     <span id="multiUpdateButtonDiv" >
     <button id="multiUpdateButton" dojoType="dijit.form.Button" showlabel="false"

@@ -98,6 +98,10 @@ label, .ProjeQtOrNewGui label,
     background-color: #ffffff;
     color:var(--color-text);
 }
+.labelMultiple, .ProjeQtOrNewGui .labelMultiple {
+	width: 375px;
+	margin-top:5px;
+}
 .ProjeQtOrNewGui .smallTabLabel, .ProjeQtOrNewGui .smallTabLabelRight {
   font-weight: normal;
   font-family: Verdana, Arial, Tahoma, sans-serif; font-size: 8pt;
