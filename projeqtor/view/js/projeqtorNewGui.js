@@ -664,3 +664,9 @@ function addNewGuiItem(item){
 		actionSelectAdd(item, null, null);
 	}
 }
+
+function setGlobalNewGuiThemeColor(param, color){
+	if(dojo.byId(param)){
+		dojo.byId(param).value = color;
+    }
+}

@@ -3,8 +3,13 @@ colorThemingInProgress=false;
 function setColorTheming(ref,bis, mode) {
   if (colorThemingInProgress) return;
   colorThemingInProgress=true;
-  if (!ref && dojo.byId('menuUserColorPicker')) ref=dojo.byId('menuUserColorPicker').value;
-  if (!bis && dojo.byId('menuUserColorPickerBis')) bis=dojo.byId('menuUserColorPickerBis').value;
+  if(dojo.byId('newGuiThemeColor')){
+	  if (!ref && dojo.byId('newGuiThemeColor')) ref='#'+dojo.byId('newGuiThemeColor').value;
+	  if (!bis && dojo.byId('newGuiThemeColorBis')) bis='#'+dojo.byId('newGuiThemeColorBis').value;
+  }else{
+	  if (!ref && dojo.byId('menuUserColorPicker')) ref=dojo.byId('menuUserColorPicker').value;
+  	  if (!bis && dojo.byId('menuUserColorPickerBis')) bis=dojo.byId('menuUserColorPickerBis').value;
+  }
   var white='#ffffff';
   var black='#000000';
   if (!mode) mode='hsl'; // Mode = hsl or hsv 
