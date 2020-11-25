@@ -67,6 +67,7 @@ if ($originType) {
 ?>
 <select id="originOriginId" size="14" name="originOriginId"
 onchange="enableWidget('dialogOriginSubmit');"  ondblclick="saveOrigin();"
+<?php if (isNewGui()) {?> style="width:410px;"<?php }?>
 class="selectList" >
  <?php
  $found=false;
