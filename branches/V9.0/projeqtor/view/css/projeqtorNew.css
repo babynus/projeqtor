@@ -1348,7 +1348,7 @@ select option:checked {
 	margin-left:5px;
 }
 
-.loginBackground{
+.loginBackgroundNewGui{
 /* 	background-image: url(images/bagroundLogin.svg); */
 	background-image: url(images/Engrenages.svg);
 	background-repeat: no-repeat;
