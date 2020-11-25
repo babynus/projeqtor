@@ -1128,7 +1128,7 @@ function htmlDisplayDatabaseInfos() {
  * @return void
  */
 function htmlGetNoDataMessage($className) {
-    return '<br/><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . i18n('messageNoData',array(i18n($className))) . '</i>';
+    return '<br/><i><div style="position:relative;left:15px;">' . i18n('messageNoData',array(i18n($className))) . '</div></i>';
 }
 
 function htmlGetNoAccessMessage($className) {

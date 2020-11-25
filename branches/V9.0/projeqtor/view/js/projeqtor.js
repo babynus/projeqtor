@@ -5949,7 +5949,7 @@ function showExtraButtons(location) {
     divNode.style.display='none';
   } else {
     divNode.style.display='block';
-    divNode.style.left=(btnNode.offsetLeft-5)+"px";
+    divNode.style.left=(btnNode.offsetLeft-((isNewGui)?10:5))+"px";
     var container=dojo.byId('buttonDiv');
     var positionner=dojo.byId('buttonDivContainerDiv');
     if (container) {

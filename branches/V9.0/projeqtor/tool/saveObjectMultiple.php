@@ -237,13 +237,13 @@ $cptOk=0;
 $cptError=0;
 $cptWarning=0;
 $cptNoChange=0;
-echo "<table>";
+echo "<table style='margin-top:5px;'>";
 foreach ($selectList as $id) {
 	if (!trim($id)) { continue;}
 	projeqtor_set_time_limit(300);
 	Sql::beginTransaction();
 	echo '<tr>';
-	echo '<td valign="top"><b>#'.$id.'&nbsp:&nbsp;</b></td>';
+	echo '<td valign="top">&nbsp;<b>#'.$id.'&nbsp:&nbsp;</b></td>';
 	$item=new $className($id);
 	if (property_exists($item, 'locked') and $item->locked) {
 		Sql::rollbackTransaction();
@@ -467,7 +467,7 @@ foreach ($selectList as $id) {
 	  Sql::rollbackTransaction();
 	  $cptWarning++;
   }
-  echo '<td><div style="padding: 0px 5px;" class="message'.$statusSave.'" >' . $resultSave . '</div></td>';
+  echo '<td><div style="padding: 0px 0px 0px 10px;width:100%;margin-bottom:5px" class="message'.$statusSave.'" >' . $resultSave . '</div></td>';
   echo '</tr>';
 }
 echo "</table>";

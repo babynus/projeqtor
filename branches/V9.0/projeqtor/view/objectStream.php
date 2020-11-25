@@ -111,9 +111,9 @@
   }
   if (!$objectId) {  
       if(Parameter::getUserParameter('paramRightDiv')!='bottom'){
-        echo "<div onclick='switchModeLayout(\"bottom\");' class='changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
+        echo "<div onclick='switchModeLayout(\"bottom\");' class='switchModeLayout changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
       }else{
-        echo "<div onclick='switchModeLayout(\"trailing\");' class='changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
+        echo "<div onclick='switchModeLayout(\"trailing\");' class='switchModeLayout changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
       }
     
     echo "</br></br>";
@@ -133,9 +133,9 @@
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
 	<?php
       if($positionActivityStream!="bottom"){
-         echo "<div onclick='switchModeLayout(\"bottom\");' class='changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
+         echo "<div onclick='switchModeLayout(\"bottom\");' class='switchModeLayout changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
       }else{
-        echo "<div onclick='switchModeLayout(\"trailing\");'  class='changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
+        echo "<div onclick='switchModeLayout(\"trailing\");'  class='switchModeLayout changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
       }
     
     ?>

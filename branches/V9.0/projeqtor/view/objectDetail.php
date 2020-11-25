@@ -460,7 +460,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   $largeWidth='300';
   if (isNewGui()) $largeWidth='310';
   $labelWidth=(isNewGui())?175:160; // To be changed if changes in css file (label and .label) + = width in css + 15
-  $labelStyleWidth=($labelWidth-((isNewGui())?0:15)).'px';
+  $labelStyleWidth=($labelWidth-((isNewGui())?-7:15)).'px';
   if ($outMode=='pdf') {
     // $labelWidth=40;
     // $labelStyleWidth=$labelWidth . 'px;';
@@ -2982,18 +2982,18 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
 //         }
         if ($isWork) {
           if ($classObj=='WorkElement') {
-            echo Work::displayShortImputationUnit();
+            echo Work::displayShortImputationUnit().((isNewGui())?'&nbsp;':'');
           } else {
-            echo Work::displayShortWorkUnit();
+            echo Work::displayShortWorkUnit().((isNewGui())?'&nbsp;':'');
           }
         }
         if ($isDuration) {
           if((substr($col, -9, 9)=='DurationY')){
-            echo i18n("colYears");
+            echo i18n("colYears").((isNewGui())?'&nbsp;':'');
           }elseif((substr($col, -9, 9)=='DurationM')){
-            echo i18n("colMonths");
+            echo i18n("colMonths").((isNewGui())?'&nbsp;':'');
           }else{
-            echo i18n("shortDay");
+            echo i18n("shortDay").((isNewGui())?'&nbsp;':'');
           }
         }
         if ($isPercent) {
@@ -4197,7 +4197,7 @@ function drawNotesFromObject($obj, $refresh=false) {
       }else{
         echo '<td colspan="6" class="noteData" style="width:'.(($print)?'95':'85').'%">';
       }
-      echo "<div style='position:absolute;right:3px;height:20px;width:100px;'>";
+      echo "<div style='position:absolute;right:".((isNewGui())?'10':'3')."px;height:20px;width:100px;'>";
       echo formatUserThumb($userId, $userName, 'Creator');
       echo formatDateThumb($creationDate, $updateDate);
       echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
