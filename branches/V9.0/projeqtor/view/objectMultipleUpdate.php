@@ -179,7 +179,7 @@
      $collapsedList=Collapsed::getCollaspedList();
      $titlePane=get_class($obj)."_MultipleDescription";?>
      <br/>
-     <div style="width: <?php  echo $displayWidth;?>" dojoType="dijit.TitlePane" 
+     <div style="width: <?php  echo $displayWidth;?>;<?php if (isNewGui()) echo 'margin-left: 15px;';?>" dojoType="dijit.TitlePane" 
      title="<?php echo i18n('sectionDescription');?>"
      open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
      id="<?php echo $titlePane;?>" 
@@ -339,7 +339,7 @@
      </div>
      <?php $titlePane=get_class($obj)."_MultipleResult";?>
      <br/>
-     <div style="width: <?php echo $displayWidth;?>" dojoType="dijit.TitlePane" 
+     <div style="width: <?php echo $displayWidth;?>;<?php if (isNewGui()) echo 'margin-left: 15px;';?>" dojoType="dijit.TitlePane" 
      title="<?php echo i18n('sectionTreatment');?>"
      open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
      id="<?php echo $titlePane;?>" 
@@ -932,7 +932,7 @@
       </div>
       <?php $titlePane=get_class($obj)."_MultipleOthers";?>
       <br/>
-      <div style="width: <?php echo $displayWidth;?>" dojoType="dijit.TitlePane" 
+      <div style="width: <?php echo $displayWidth;?>;<?php if (isNewGui()) echo 'margin-left: 15px;';?>" dojoType="dijit.TitlePane" 
            title="<?php echo i18n('sectionMiscellaneous');?>"
            open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
            id="<?php echo $titlePane;?>" 
@@ -1044,6 +1044,7 @@
             </tr>
           <?php  } ?>  
           </table>
+          <br/>
           </div>
         </form>
       </div>
