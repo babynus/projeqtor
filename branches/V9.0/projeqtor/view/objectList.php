@@ -34,23 +34,13 @@ scriptLog('   ->/view/objectList.php');
 if (! isset($comboDetail)) {
   $comboDetail=false;
 }
-$objectClass=$_REQUEST['objectClass'];
+$objectClass=RequestHandler::getValue('objectClass',true);
 Security::checkValidClass($objectClass);
-$objectType='';
-if (array_key_exists('objectType',$_REQUEST)) {
-  $objectType=$_REQUEST['objectType'];
-}
+$objectType=RequestHandler::getValue('objectType',false,'');
+$budgetParent=RequestHandler::getValue('budgetParent',false);
+$objectClient=RequestHandler::getValue('objectClient',false,'');
+$objectElementable=RequestHandler::getValue('objectElementable',false,'');
 
-$budgetParent=RequestHandler::getValue('budgetParent');
-
-$objectClient='';
-if (array_key_exists('objectClient',$_REQUEST)) {
-  $objectClient=$_REQUEST['objectClient'];
-}
-$objectElementable='';
-if (array_key_exists('objectElementable',$_REQUEST)) {
-  $objectElementable=$_REQUEST['objectElementable'];
-}
 $obj=new $objectClass;
 
 if (array_key_exists('Directory', $_REQUEST)) {
@@ -1230,6 +1220,54 @@ if (property_exists($objectClass,'idStatus')) {
                 </script>
               </button>
             </td>    
+<?php if ( isNewGui()) {
+    $objClassList = RequestHandler::getValue('objectClassList');
+    $currentScreen=getSessionValue('currentScreen');
+    $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+    if($paramRightDiv=="bottom"){
+      $activityStreamSize=getHeightLaoutActivityStream($currentScreen);
+      $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivHeight');
+    }else{
+      $activityStreamSize=getWidthLayoutActivityStream($currentScreen);
+      $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivWidth');
+    }
+    $user=getSessionUser();
+    $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$user->getProfile($obj),'scope'=>'multipleUpdate'));
+    $list=new ListYesNo($habil->rightAccess);
+    $buttonMultiple=($list->code=='NO')?false:true;
+    if ($buttonMultiple and ! array_key_exists('planning',$_REQUEST) and $objClassList != 'GlobalView') {?>
+    <td width="36px" class="allSearchFixLength">
+    <span id="multiUpdateButtonDiv" >
+    <button id="multiUpdateButton" dojoType="dijit.form.Button" showlabel="false"
+       title="<?php echo i18n('buttonMultiUpdate');?>"
+       iconClass="dijitButtonIcon dijitButtonIconMultipleUpdate" class="detailButton">
+        <script type="dojo/connect" event="onClick" args="evt">
+          hideResultDivs();
+          var pos=<?php echo json_encode($paramRightDiv) ;?>;
+          if (dijit.byId('detailRightDiv')) {
+            if(pos=='bottom'){
+              if(dijit.byId('detailRightDiv').h != 0){
+                saveDataToSession('showActicityStream','show');
+              }else{
+                saveDataToSession('showActicityStream','hide');
+              }
+            }else{
+              if(dijit.byId('detailRightDiv').w != 0){
+                saveDataToSession('showActicityStream','show');
+              }else{
+                saveDataToSession('showActicityStream','hide');
+              }
+            }
+          }
+          hideStreamMode('false','<?php echo $paramRightDiv;?>','<?php echo $activityStreamDefaultSize;?>',false);
+          startMultipleUpdateMode('<?php echo $objectClass;?>');  
+          hideExtraButtons('extraButtonsDetail');
+        </script>
+    </button>
+    </span>
+    </td>
+<?php }
+    }?>
  <?php if (! $comboDetail) {            
     $extraPlgButtons=Plugin::getButtons('list', $objectClass);
     foreach ($extraPlgButtons as $bt) { ?>
