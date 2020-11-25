@@ -638,7 +638,7 @@
     <button id="hideStreamButton" dojoType="dijit.form.Button" showlabel="false" 
       title="<?php echo ($showActivityStream==false)?i18n('showActivityStream'):i18n('hideActivityStream');?>"
       <?php //if ($noselect) {echo 'style="display:none;"';}?> 
-      iconClass="dijitButtonIcon  <?php if(! $showActivityStream){echo 'iconActivityStream22';}else{echo 'iconActivityStreamClose22';}?>" class="detailButton">
+      iconClass="imageColorNewGui <?php if(! $showActivityStream){echo 'iconActivityStream22 iconActivityStream iconSize22';}else{echo 'iconActivityStreamClose22 iconActivityStreamClose iconSize22';}?>" class="detailButton">
       <script type="dojo/connect" event="onClick" args="evt">
          hideResultDivs();
          hideStreamMode('<?php echo ($showActivityStream)?'false':'true';?>','<?php echo $paramRightDiv;?>','<?php echo $activityStreamDefaultSize;?>',false);
@@ -720,14 +720,15 @@ function organizeButtons($nbButton=1) {
 	if ($showAttachment and $obj->id) {
 		$requiredWidth+=44;
 	}
-	if ($requiredWidth>($displayWidthButton/3) and $displayWidthButton<1000) {
+	if ( ($requiredWidth>($displayWidthButton/3) and $displayWidthButton<1000)
+	  or (isNewGui() and $cptButton>3) ) {
 		if (! $extendedZone) {
 			$extendedZone=true;
 			echo '<div dojoType="dijit.form.Button" showlabel="false" title="'. i18n('extraButtonsBar'). '" '
           .' iconClass="dijitButtonIcon dijitButtonIconExtraButtons" class="detailButton"'
  		      .' id="extraButtonsDetail" onClick="showExtraButtons(\'extraButtonsDetail\')" '
  		      .'></div>';
-			echo '<div class="statusBar" id="extraButtonsDetailDiv" style="display:none;position:absolute;'.((isNewGui())?'':'width:36px;').'">';
+			echo '<div class="statusBar" id="extraButtonsDetailDiv" style="display:none;position:absolute;'.((isNewGui())?'width:34px;':'width:36px;').'">';
 		} else {
 			echo '<div></div>';
 		}

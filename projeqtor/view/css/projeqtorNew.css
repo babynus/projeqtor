@@ -98,6 +98,9 @@ label, .ProjeQtOrNewGui label,
     background-color: #ffffff;
     color:var(--color-text);
 }
+.labelPadding .label {
+	padding-top:3px;
+}
 .labelMultiple, .ProjeQtOrNewGui .labelMultiple {
 	width: 375px;
 	margin-top:5px;
@@ -1455,4 +1458,41 @@ select option:checked {
 	text-align:center;
 	margin-right:15px;
 	float:right;
+}
+
+.iconSelectAll {
+	background-image: url(images/checkmarkNoBorderGrey.png) !important;
+  border: 1px solid var(--color-medium);
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  cursor: pointer;
+  background-position: -0px
+}
+.iconUnselectAll {
+  background-image: url(images/checkmarkNoBorderGrey.png) !important;
+  border: 1px solid var(--color-medium);
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  cursor: pointer;
+  background-position: -16px; 
+}
+
+
+element.style {
+    text-align: center;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 238px;
+}
+.ProjeQtOrNewGui .dijitAccordionTitle, .ProjeQtOrNewGui .reportTableColumnHeader, .ProjeQtOrNewGui .largeReportHeader {
+    background: url() #ffffff !important;
+    color: --var(--color-text) !important;
+    text-shadow: none !important;
+    border-top: 0px solid #bda1a6;
+    border-bottom: 1px solid --var(--color-medium);
 }
