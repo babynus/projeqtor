@@ -71,7 +71,7 @@ $mobile=false;
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorFlat.css" />
   <?php if(isNewGui()){?>
    <link rel="stylesheet" type="text/css" href="../view/css/projeqtorNew.css" />
-  <?php }?>
+   <?php }?>
   <script type="text/javascript" src="../external/CryptoJS/rollups/md5.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/CryptoJS/rollups/sha256.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/phpAES/aes.js?version=<?php echo $version.'.'.$build;?>" ></script>
@@ -84,7 +84,7 @@ $mobile=false;
               parseOnLoad: true, 
               isDebug: <?php echo getBooleanValueAsString(Parameter::getGlobalParameter('paramDebugMode'));?>'></script>
   <script type="text/javascript" src="../external/dojo/projeqtorDojo.js?version=<?php echo $version.'.'.$build;?>"></script>
-    <?php if(isNewGui()){?>
+  <?php if (isNewGui()) {?>
   <script type="text/javascript" src="../external/dojox/mobile/deviceTheme.js" data-dojo-config="mblUserAgent: 'Custom'"></script>
   <?php }?>
   <?php Plugin::includeAllFiles();?>
@@ -103,7 +103,7 @@ $mobile=false;
     dojo.require("dijit.form.Button");
     dojo.require("dijit.form.Form");
     dojo.require("dijit.form.FilteringSelect");
-    <?php if(isNewGui()){?>
+    <?php if (isNewGui()){?>
     dojo.require("dojox.mobile.parser");
     dojo.require("dojox.mobile.Switch");
     dojo.require("dojox.mobile.SwapView");
@@ -188,7 +188,7 @@ if(!$secondColor){
 $secondColor='';
 }
 ?>
-<body class="nonMobile ProjeQtOrNewGui loginBackground" onLoad="hideWait();" style="overflow: auto;background-color:<?php echo '#'.$firstColor?>;" onBeforeUnload="">
+<body class="nonMobile ProjeQtOrNewGui" onLoad="hideWait();" style="overflow: auto;background-color:<?php echo '#'.$firstColor?>;" onBeforeUnload="">
 <?php 
 }else{
 ?>
@@ -227,7 +227,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
     </div>
     <?php }}?>
   </div>
-  <table align="center" width="100%" height="100%" class="loginBackground">
+  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'loginBackgroundNewGui':'loginBackground';?>">
     <tr height="100%">
 	    <td width="100%" align="center">
 	      <div class="background <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
@@ -290,7 +290,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr style="font-size:50%"><td colspan="2">&nbsp;</td></tr>
 			              <tr style="height:30px">
 			                <td></td>
-			                <?php if(!isNewGui()){?>
+			                <?php if(!isNewGui()){ debugLog('yes');?>
 			                   <td><div style="width:200px;text-align:center;"><div class="greyCheck" dojoType="dijit.form.CheckBox" type="checkbox" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
 			                <?php }else{?>
 			                   <td>
