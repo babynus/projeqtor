@@ -85,10 +85,10 @@ $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
          $privacyClass="";
          $privacyLabel=i18n("public");
          if ($privacyNotes=="3") { // Team privacy
-           $privacyClass="iconFixed16";
+           $privacyClass="iconFixed16 iconFixed iconSize16";
            $privacyLabel=i18n("private");
          } else if ($privacyNotes=="2") { // Private
-           $privacyClass="iconTeam16";
+           $privacyClass="iconTeam16 iconTeam iconSize16";
            $privacyLabel=i18n("team");
          }?>
          <div title="<?php echo i18n("colIdPrivacy").' = '.$privacyLabel;?>" id="notePrivacyStreamDiv" class="<?php echo $privacyClass;?>" onclick="switchNotesPrivacyStream();" style="border-radius:7px 0px 0px 0px;width:16px; height:16px;position:absolute;bottom:1px;right:-2px;opacity:1;background-color: #E0E0E0;color:#A0A0A0;cursor:pointer;text-align:center">...</div>
