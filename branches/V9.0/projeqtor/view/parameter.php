@@ -172,8 +172,8 @@ function drawTableFromObjectList($objectList) {
 			$hasSection=true;
 	  } else {
 		  echo ($code=='paramAttachmentNum' or $code=='paramAttachmentNumMail')?'<tr hidden> ':'<tr> '; // open the line level (must end with  a </td></tr>)
-		  echo '<td class="crossTableLine"><label class="label largeLabel" for="' . $code . '" title="' . $helpTitle . '">' 
-		              . (($format!='photo')?i18n('param' . ucfirst($code) ) . ' :&nbsp;':'')
+		  echo '<td class="crossTableLine"><label class="label largeLabel" for="' . $code . '" '.((isNewGui())?' style="margin-top:-2px;" ':'').' title="' . $helpTitle . '">' 
+		              . (($format!='photo')?i18n('param' . ucfirst($code) ) . ((isNewGui())?'':' :').'&nbsp;':'')
 		         .'</label></td><td style="position:relative">';
 			if ($format=='list') {
 				$listValues=Parameter::getList($code);
