@@ -61,12 +61,12 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
 ?>
 <input type="hidden" id="userMenuIdUser" value="<?php echo getCurrentUserId();?>"/>
 <table style="width:99%;" id="userMenuPopup">
+<?php if (!isNewGui()) {?>
   <tr style="height:40px">
     <td <?php if ($showUserParameters) echo'rowspan="2"';?> style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"><?php if ($imgUrl) { echo '<img style="border-radius:40px;height:80px" src="'.$imgUrl.'" />'; } else { ?>
             <div style="overflow-x:hidden;position: relative; width:60px;height:60px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
               onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
    <?php } ?></td>
-    <?php if (!isNewGui()) {?>
     <td>
       <div class="pseudoButton"  title="<?php echo i18n('changePassword');?>" onClick="requestPasswordChange();">
         <table style="width:100%">
@@ -80,8 +80,15 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
       </div>
     </td>
   </tr>
-  <?php }?>
-<?php
+  <?php }else{?>
+  <tr>
+    <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"><?php if ($imgUrl) { echo '<img style="border-radius:40px;height:80px" src="'.$imgUrl.'" />'; } else { ?>
+            <div style="overflow-x:hidden;position: relative; width:60px;height:60px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
+              onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
+   <?php } ?>
+   </td>
+  </tr>
+<?php }
 if ($showUserParameters) { // Do not give access to user parameters if locked ?>
 <?php if(!isNewGui()){?>
 <tr style="height:40px">
