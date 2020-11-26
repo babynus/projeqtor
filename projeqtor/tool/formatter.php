@@ -901,7 +901,7 @@ function activityStreamDisplayHist ($hist,$origin){
     $result.= '      </div>';
     }
     $result.= '    </div>';    
-    $result.= '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;margin-bottom:6px;">';
+    $result.= '    <div style="float:left;width:90%;'.((isNewGui())?'':'margin-top:6px').';display:inline-block;margin-left:5px;margin-bottom:6px;">';
     $result.= '      <div style="margin-top:2px;margin-left:10px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
     $result.= '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
     $result.= '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
@@ -956,7 +956,13 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
   if ( securityCheckDisplayMenu(null, get_class($mail)) and securityGetAccessRightYesNo('menu'.get_class($mail), 'read', $mail)=="YES") {
     $showMail='<div class="roundedButtonSmall" style="width:20px;height:16px;display:inline-block;margin-left:20px;" title="'.i18n('showMail',array($mail->id)).'"><div class="iconGoto" style="z-index:500;width:16px;height:10px;display:inline-block;padding-right:5px;" onClick="gotoElement(\''.htmlEncode(get_class($mail)).'\',\''.htmlEncode($mail->id).'\')" title="'.i18n('showMail',array($mail->id)).'" style="widht:16px;height:16px;"></div></div>';
   }
-  
+  if ($origin=='objectStream') {
+    if (isNewGui()) $innerMailWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
+  } else {
+    if (RequestHandler::isCodeSet('destinationWidth')) {
+      if (isNewGui()) $innerMailWidth=(RequestHandler::getNumeric('destinationWidth')-80).'px';
+    }
+  }
   $result='';
   if($origin=='activityStream'){
     $result.= '<tr style="height:100%;">';
@@ -971,12 +977,12 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
       $result.= '      </div>';
     }
     $result.= '    </div>';
-    $result.= '    <div style="float:left;width:90%;margin-top:6px;display:inline-block;margin-left:5px;margin-bottom:6px;">';
+    $result.= '    <div style="float:left;width:90%;'.((isNewGui())?'':'margin-top:6px').';display:inline-block;margin-left:5px;margin-bottom:6px;">';
     $result.= '      <div style="margin-top:2px;margin-left:10px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.$showMail.'</div>';
     $result.= '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
     $result.= '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
     $result.='     <div>';
-    $result.= '    <div style="width:90%;margin-top:16px;display:block;margin-left:5px;margin-bottom:6px;">';
+    $result.= '    <div  class="activityStreamMailTitle" style="width:'.((isset($innerMailWidth))?$innerMailWidth:'90%').';margin-top:16px;display:block;margin-left:5px;margin-bottom:6px;">';
     $result.=       htmlEncode($mail->mailTitle);
     $result.='     <div>';
     if (Parameter::getGlobalParameter('logLevel')>=3) {
@@ -1006,7 +1012,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
     $result.= '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left",16).'</div>';
     $result.= '      <div style="margin-top:8px;margin-bottom:5px">'.htmlFormatDateTime($date,false).'</div>';
     $result.='     <div>';
-    $result.= '    <div style="width:90%;margin-top:16px;display:block;margin-left:5px;margin-bottom:6px;">';
+    $result.= '    <div class="activityStreamMailTitle" style="width:'.((isset($innerMailWidth))?$innerMailWidth:'90%').';margin-top:16px;display:block;margin-left:5px;margin-bottom:6px;">';
     $result.=       htmlEncode($mail->mailTitle);
     $result.='     <div>';
     $result.= '  </td>';
