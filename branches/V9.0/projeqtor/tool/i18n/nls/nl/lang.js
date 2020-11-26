@@ -3872,6 +3872,7 @@ pluginNotCompatibleWithCurrentVersion: "The version ${2} of plug-in '${1}' is no
 pluginNoXmlDescriptor: "kan plug-in beschrijvingsbestand niet vinden '${1}' in de map '${2}' voor plug-in '${3}'",
 pluginSqlFileError: "kan Sql bestand '${1}' niet vinden voor plugin '${2}'",
 pluginUnzipFail: "Niet in staat om het bestand ${1} uit te pakken.<br/>Controleer of de PHP gebruiker schrijfrechten heeft voor het bestand en globaal voor de map ${2}.",
+pluginVersion: "version ${1}",
 pluginVersionNotCompatible: "Je huidige versie ('${1}') is niet compatible met deze plug-in.<br/>'${2}' of hoger is vereist",
 Predecessor: "voorganger",
 predefinedAction: "predefined action",

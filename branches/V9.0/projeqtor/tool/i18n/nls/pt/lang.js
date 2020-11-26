@@ -3872,6 +3872,7 @@ pluginNotCompatibleWithCurrentVersion: "The version ${2} of plug-in '${1}' is no
 pluginNoXmlDescriptor: "não é possível encontrar o ficheiro de descrição da extensão '${1}' na pasta '${2}' para a extensão '${3}'",
 pluginSqlFileError: "não é possível encontrar o ficheiro Sql '${1}' para a extensão '${2}'",
 pluginUnzipFail: "Não é possível descomprimir o ficheiro zip ${1}.<br/>Verifique que o utilizador PHP tem acesso de escrita ao ficheiro e à pasta ${2}.",
+pluginVersion: "version ${1}",
 pluginVersionNotCompatible: "A sua versão atual ('${1}') não é compatível com esta extensão.<br/>'${2}' ou superior é necessária",
 Predecessor: "Predecessor",
 predefinedAction: "ação pré-definida",

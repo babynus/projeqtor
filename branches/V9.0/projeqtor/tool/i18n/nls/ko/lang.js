@@ -3872,6 +3872,7 @@ pluginNotCompatibleWithCurrentVersion: "플러그인 '${1}'의 ${2} 버전은 Pr
 pluginNoXmlDescriptor: "'${3}'플러그인의 '${2}'디렉토리에서 플러그인 설명자 파일 '${1}'을 (를) 찾을 수 없습니다.",
 pluginSqlFileError: "플러그인 '${2}'에 대한 SQL 파일 '${1}'을 (를) 찾을 수 없습니다.",
 pluginUnzipFail: "${1} .zip / zip 파일의 압축을 풀 수 없습니다. PHP 사용자에게 ${2} 폴더에 대한 파일에 대한 쓰기 액세스 권한이 있는지 확인하십시오.",
+pluginVersion: "version ${1}",
 pluginVersionNotCompatible: "현재 버전 ( '${1}')이이 plugin과 호환되지 않습니다. '${2}'이상이 필요합니다",
 Predecessor: "전임자",
 predefinedAction: "사전 정의 된 조치",

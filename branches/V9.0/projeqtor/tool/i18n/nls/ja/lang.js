@@ -3872,6 +3872,7 @@ pluginNotCompatibleWithCurrentVersion: "The version ${2} of plug-in '${1}' is no
 pluginNoXmlDescriptor: "プラグイン「${3}」のファイル「${1}」がディレクトリ「${2}」に見つかりません。",
 pluginSqlFileError: "プラグイン「${2}」のSQLファイル「${1}」が見つかりません。",
 pluginUnzipFail: "「${1}」を解凍できません。<br/>PHPの実行ユーザがフォルダ「${2}」への書き込みアクセス権を持っているか確認してください。",
+pluginVersion: "version ${1}",
 pluginVersionNotCompatible: "このプラグインは現在のバージョン「${1}」と互換性がありません。<br/>バージョン「${2}」以上が必要です。",
 Predecessor: "先行要素",
 predefinedAction: "predefined action",

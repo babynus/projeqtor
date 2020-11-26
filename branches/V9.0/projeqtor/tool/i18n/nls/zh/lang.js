@@ -3872,6 +3872,7 @@ pluginNotCompatibleWithCurrentVersion: "插件 '${1}'的版本 ${2} 不兼容 Pr
 pluginNoXmlDescriptor: "路径'${2}'中找不到插件'${3}'所需的插件描述文件'${1}'",
 pluginSqlFileError: "找不到插件'${2}'所需的Sql文件'${1}'",
 pluginUnzipFail: "Not able to unzip file ${1}.<br/>Check that PHP user has write access rights to file and globally to folder ${2}.",
+pluginVersion: "version ${1}",
 pluginVersionNotCompatible: "当前版本('${1}') 与该插件不兼容.<br/>必须是版本'${2}' 或以上",
 Predecessor: "前置项",
 predefinedAction: "预置措施",
