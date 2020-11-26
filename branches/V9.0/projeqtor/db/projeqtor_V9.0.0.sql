@@ -24,7 +24,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (7,'navTool',0,0,90),
 (8,'navAdministration',0,0,100),
 (9,'menuToday',0,1,10),
-(10,'navOther',1,0,60),
+(10,'navPlanningView',1,0,60),
 (11,'navIndicators',2,0,50),
 (12,'navLeaveSystem',3,0,30),
 (13,'navExpenses',4,0,40),
@@ -271,6 +271,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (257,'menuLeavesSystemHabilitation',133,220,40),
 (258,'menuPlannedWorkManual',3,252,45),
 (259,'menuProjectParameter',8,19,10),
+(260,'menuPlanning',10,9,5),
 (300,'navPlugin',0,0,110),
 (301,'menuPluginManagement',300,136,10);
 
