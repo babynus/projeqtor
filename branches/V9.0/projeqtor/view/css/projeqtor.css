@@ -553,6 +553,16 @@ html, body {
 .buttonDivCreationInfoEdit:hover {
   background: url(images/smallButtonEdit.png) no-repeat top right;
 }
+
+.ProjeQtOrNewGui .buttonDivCreationInfoEdit {
+  /*width:120px;*/
+  height:32px;
+}
+
+.ProjeQtOrNewGui .buttonDivCreationInfoEdit:hover {
+  background: url(customIcons/new/iconEdit.svg) no-repeat top right;
+}
+
 /* Specific attributes on common nodes ======================================== */
 
 table {
