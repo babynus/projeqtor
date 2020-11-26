@@ -658,10 +658,12 @@ function activityStreamDisplayNote ($note,$origin){
           $rightWidth='70%';
         }else{
           $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px';
+          if (isNewGui()) $innerNoteWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
         }
     } else {
     	if (RequestHandler::isCodeSet('destinationWidth')) {
         $rightWidth=(RequestHandler::getNumeric('destinationWidth')-30).'px';
+        if (isNewGui()) $innerNoteWidth=(RequestHandler::getNumeric('destinationWidth')-80).'px';
     	} else {
     		$rightWidth="100%";
     	}
@@ -679,7 +681,7 @@ function activityStreamDisplayNote ($note,$origin){
     if ($origin=='activityStream') $noteImgWidth-=40;
     $strDataHTML=htmlSetClickableImages($strDataHTML,$noteImgWidth);
     if($rightWidthScreen<100){
-      $resultNote.= '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="display:block;height:'.(($isNoteClosed)?'0px':'100%').';margin-left:'.(($origin=='activityStream')?'36':'0').'px;margin-bottom:'.(($isNoteClosed)?'0px':'10px').';word-break:break-all;">';
+      $resultNote.= '<div class="activityStreamNoteContent activityStreamNote" id="activityStreamNoteContent_'.$note->id.'" style="display:block;height:'.(($isNoteClosed)?'0px':'100%').';margin-left:'.(($origin=='activityStream')?'36':'0').'px;margin-bottom:'.(($isNoteClosed)?'0px':'10px').';word-break:break-all;'.((isset($innerNoteWidth))?'width:'.$innerNoteWidth:'').'">';
       if($noteDiscussionMode != 'YES'){
       	if($note->idNote != null){
       		$resultNote.= '<span style="position:relative;float:left;padding-right:5px">'.formatIcon('Reply', 16, 'reply to note #'.$note->idNote).'</span>';
@@ -688,7 +690,7 @@ function activityStreamDisplayNote ($note,$origin){
       $resultNote.= $strDataHTML;
       $resultNote.= '</div></div></td></tr>'; 
     } else {
-      $resultNote.= '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="display:block;height:'.(($isNoteClosed)?'0px':'100%').';margin-left:'.(($origin=='activityStream')?'36':'0').'px;margin-bottom:'.(($isNoteClosed)?'0px':'10px').';">';
+      $resultNote.= '<div class="activityStreamNoteContent activityStreamNote" id="activityStreamNoteContent_'.$note->id.'" style="display:block;height:'.(($isNoteClosed)?'0px':'100%').';margin-left:'.(($origin=='activityStream')?'36':'0').'px;margin-bottom:'.(($isNoteClosed)?'0px':'10px').';'.((isset($innerNoteWidth))?'width:'.$innerNoteWidth:'').'">';
       if($noteDiscussionMode != 'YES'){
       	if($note->idNote != null){
       		$resultNote.= '<span style="position:relative;float:left;padding-right:5px">'.formatIcon('Reply', 16, 'reply to note #'.$note->idNote).'</span>';
