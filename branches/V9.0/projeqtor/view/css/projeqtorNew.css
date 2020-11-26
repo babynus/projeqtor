@@ -492,7 +492,8 @@ html, body, #mainDiv,
 	background:transparent;
 }
 .ProjeQtOrNewGui .roundedButton:hover .imageColorNewGui, .ProjeQtOrNewGui .roundedButtonSmall:hover .imageColorNewGui, .ProjeQtOrNewGui .imageColorNewGui:hover,
-.ProjeQtOrNewGui .directAttachment:hover {
+.ProjeQtOrNewGui .directAttachment:hover, 
+.ProjeQtOrNewGui .menuBarItemSelected .imageColorNewGui, .ProjeQtOrNewGui .menuBarItem:hover .imageColorNewGui {
 	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   color:var(--color-secondary);
