@@ -2688,10 +2688,6 @@
 
 
 
-
-
-
-
 /* =============================================================================== */
 /* New Format                                                                      */
 /* =============================================================================== */
@@ -2711,11 +2707,13 @@
 .iconLocked16 { background-image: url(images/locked.png);  background-size: 16px 16px;}
 .iconLocked32 { background-image: url(images/locked.png);  background-size: 32px 32px;}
 
-
 .iconDeleteElement16 { background-image: url(images/iconDeleteElement.png);  background-size: 16px 16px;}
 .iconDeleteElement22 { background-image: url(images/iconDeleteElement.png);  background-size: 22px 22px;}
 .iconDeleteElement32 { background-image: url(images/iconDeleteElement.png);  background-size: 32px 32px;}
 .ProjeQtOrNewGui .iconDeleteElement { background-image: url(customIcons/new/iconRemove.svg); }
+
+.disconnectClass { background-image: url(images/iconDeleteElement.png);  background-size: 24px 24px;}
+.ProjeQtOrNewGui .disconnectClass { background-image: url(customIcons/new/icondisconnect.svg);  background-repeat: no-repeat; }
 
 .iconNewElement16 { background-image: url(images/iconNewElement.png);  background-size: 16px 16px;}
 .iconNewElement22{ background-image: url(images/iconNewElement.png);  background-size: 22px 22px;}
