@@ -30,6 +30,7 @@
    require_once "../tool/projeqtor.php";
    header ('Content-Type: text/html; charset=UTF-8');
    scriptLog('   ->/view/passwordChange.php'); 
+   $mobile=false;
 ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
   "http://www.w3.org/TR/html4/strict.dtd">
@@ -44,9 +45,16 @@
   <link rel="icon" href="img/logo.ico" type="image/x-icon" />
   <link rel="stylesheet" type="text/css" href="css/projeqtor.css" />
   <link rel="stylesheet" type="text/css" href="css/projeqtorFlat.css" />
+    <?php if(isNewGui()){?>
+   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorNew.css" />
+   <?php }?>
   <script type="text/javascript" src="../external/CryptoJS/rollups/sha256.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtor.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtorDialog.js?version=<?php echo $version.'.'.$build;?>" ></script>
+    <?php if (isNewGui()) {?>
+  <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="../external/dojox/mobile/deviceTheme.js" data-dojo-config="mblUserAgent: 'Custom'"></script>
+  <?php }?>
   <script type="text/javascript" src="../external/dojo/dojo.js?version=<?php echo $version.'.'.$build;?>"
     djConfig='modulePaths: {"i18n":"../../tool/i18n",
                             "i18nCustom":"../../plugin"},
@@ -64,6 +72,12 @@
     dojo.require("dijit.form.Form");
     dojo.require("dijit.form.FilteringSelect");
     dojo.require("dojox.form.PasswordValidator");
+    <?php if (isNewGui()){?>
+    dojo.require("dojox.mobile.parser");
+    dojo.require("dojox.mobile.Switch");
+    dojo.require("dojox.mobile.SwapView");
+    dojo.require("dojox.mobile.PageIndicator");
+    <?php }?>
     var fadeLoading=<?php echo getBooleanValueAsString(Parameter::getGlobalParameter('paramFadeLoadingMode'));?>;
     dojo.addOnLoad(function(){
       currentLocale="<?php echo $currentLocale?>";
@@ -74,13 +88,29 @@
   </script>
 </head>
 
+<?php 
+if(isNewGui()){
+$firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
+$secondColor=Parameter::getGlobalParameter('newGuiThemeColorBis');
+if(!$firstColor){
+$firstColor= getTheme();
+}
+if(!$secondColor){
+$secondColor='';
+}
+?>
+<body class="nonMobile ProjeQtOrNewGui" style="background-color:<?php echo '#'.$firstColor?>;">
+<?php 
+}else{
+?>
 <body class="<?php echo getTheme();?>" >
+<?php }?>
   <div id="wait" >
   </div> 
-  <table align="center" width="100%" height="100%" class="loginBackground">
+  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'loginBackgroundNewGui':'loginBackground';?>">
     <tr height="100%">
       <td width="100%" align="center">
-        <div class="background loginFrame" >
+        <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
         <table  align="center" >
           <tr style="height:10px;" >
             <td align="left" style="position:relative;height: 1%;" valign="top">
@@ -123,15 +153,19 @@
             }
             ?> 
             <br/>
-            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar();',20);" class="input rounded"  style="color:#000000;padding:10px;margin-left:15px;">
-              <label class="label" style="width:150px;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
+            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar();',20);" class="input rounded"  style="color:#000000;margin-left:15px;<?php echo (isNewGui())?'border:unset !important;':'padding:10px;';?>">
+              <?php if (isNewGui()) echo '<div class="loginDivContainer container">';?>
+              <label class="label" style="width:150px;<?php if(isNewGui())echo "float: none;top: 8px;position: relative;";?>"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
+              <?php if (isNewGui())echo '</div>';?>
               <br/>
-              <label class="label" style="width:150px;"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
+              <?php if (isNewGui()) echo '<div class="loginDivContainer container">';?>
+              <label class="label" style="width:150px;<?php if(isNewGui())echo "float: none;top: 8px;position: relative;";?>"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="verify" class="input rounded"  style="color:#000000;"><br/>
+              <?php if (isNewGui()) echo '</div>';?>
             <br/>
-            <p><progress  id="progress" max="4" style="margin-left:148px;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span>  </p>
-            <div style="width:200px;height:20px; position:absolute; left:170px;text-align:center;">
+            <p><progress  id="progress" max="4" style="margin-left:<?php echo (isNewGui())?'120px':'148px';?>;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span>  </p>
+            <div style="width:200px;height:20px; <?php echo (isNewGui())?'position: relative;top: 4px;left: 110px;':'position:absolute; left:170px;';?>text-align:center;">
               <span id="strength"></span> 
             </div>
             <br/>     
@@ -146,7 +180,7 @@
             <input type="hidden" id="criteria" name="criteria" value=""/>
             <!-- florent -->
             <br/>
-            <button type="submit" style="margin-left:150px;width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
+            <button type="submit" style="margin-left:<?php echo (isNewGui())?'125px':'150px';?>;width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
               <script type="dojo/connect" event="onClick" args="evt">
                 //loadContent("../tool/changePassword.php","passwordResultDiv", "passwordForm");
               </script>
