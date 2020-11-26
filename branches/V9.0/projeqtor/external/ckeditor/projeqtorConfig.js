@@ -31,12 +31,12 @@ CKEDITOR.editorConfig = function( config ) {
   //gautier
   if (dojo.byId('ckeditorType')){
     var cktype=dojo.byId('ckeditorType').value;
-    if ((cktype != 'CK' && ! currentEditorIsNote) || forceCkInline || isNewGui) {
-      if (! isNewGui) config.removeButtons = 'tools,Maximize';
+    if ((cktype != 'CK' && ! currentEditorIsNote) || forceCkInline) {
+      config.removeButtons = 'tools,Maximize';
       config.extraPlugins += ',staticspace';
       config.staticSpacePriority=1;
-      if (! isNewGui) config.removePlugins += ',elementspath';
-      if (! isNewGui) config.resize_enabled = false;
+      config.removePlugins += ',elementspath';
+      config.resize_enabled = false;
     }
   }
   //config.pasteFromWordRemoveStyles = false; // Removed in 4.6.0
