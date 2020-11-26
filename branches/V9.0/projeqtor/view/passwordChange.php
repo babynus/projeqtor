@@ -165,7 +165,7 @@ $secondColor='';
               <?php if (isNewGui()) echo '</div>';?>
             <br>
             <p><progress  id="progress" max="4" style="margin-left:<?php echo (isNewGui())?'120px':'148px';?>;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span>  </p>
-            <div style="width:200px;height:20px; <?php echo (isNewGui())?'position: relative;top: 4px;left: 110px;':'position:absolute; left:170px;';?>text-align:center;">
+            <div style="width:200px;height:20px; <?php echo (isNewGui())?'position: relative;top: 4px;left: 115px;':'position:absolute; left:170px;';?>text-align:center;">
               <span id="strength"></span> 
             </div>
             <?php if(!isNewGui()) echo '<br/>';?>    
