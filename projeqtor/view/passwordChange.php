@@ -127,7 +127,7 @@ $secondColor='';
           </tr>
           <tr style="height:100%" height="100%">
             <td style="height:99%" align="left" valign="middle">
-              <div  id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="width: 450px; height:210px;overflow:visible;position: relative;">
+              <div  id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="width: 450px; height:<?php echo (isNewGui())?'200px':'210px'?>;overflow:visible;position: relative;">
              <form  dojoType="dijit.form.Form" id="passwordForm" jsId="passwordForm" name="passwordForm" encType="multipart/form-data" action="" method="" >
              <script type="dojo/method" event="onSubmit" >
               dojo.byId('goButton').focus();
@@ -163,12 +163,12 @@ $secondColor='';
               <label class="label" style="width:150px;<?php if(isNewGui())echo "float: none;top: 8px;position: relative;";?>"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="verify" class="input rounded"  style="color:#000000;"><br/>
               <?php if (isNewGui()) echo '</div>';?>
-            <br/>
+            <br>
             <p><progress  id="progress" max="4" style="margin-left:<?php echo (isNewGui())?'120px':'148px';?>;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span>  </p>
             <div style="width:200px;height:20px; <?php echo (isNewGui())?'position: relative;top: 4px;left: 110px;':'position:absolute; left:170px;';?>text-align:center;">
               <span id="strength"></span> 
             </div>
-            <br/>     
+            <?php if(!isNewGui()) echo '<br/>';?>    
             <!-- florent 4088 -->
             </div>
             <input type="hidden" id="parmPwdSth"  value="<?php echo Parameter::getGlobalParameter('paramPasswordStrength');?>"/>
@@ -179,23 +179,23 @@ $secondColor='';
             <input type="hidden" id="passwordValidate" name="passwordValidate" value=""/>
             <input type="hidden" id="criteria" name="criteria" value=""/>
             <!-- florent -->
-            <br/>
-            <button type="submit" style="margin-left:<?php echo (isNewGui())?'125px':'150px';?>;width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
+            <?php if(!isNewGui()) echo '<br/>';?>
+            <button type="submit" style="<?php echo (isNewGui())?'margin-left:125px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
               <script type="dojo/connect" event="onClick" args="evt">
                 //loadContent("../tool/changePassword.php","passwordResultDiv", "passwordForm");
               </script>
             </button>
-            <br/>
+            <?php if(!isNewGui()) echo '<br/>';?>
             <div style="height:5px">&nbsp;</div>
             <?php if ( $user->password != md5($user->getRandomPassword()) ) {?>
-            <button class="largeTextButton" type="button" style="margin-left:150px;width:200px;color:#555555;" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
+            <button class="largeTextButton" type="button" style="<?php echo (isNewGui())?'margin-left:125px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;<?php if(isNewGui())echo ''?>" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
               <script type="dojo/connect" event="onClick" args="evt">
               showWait(); 
               window.location=".";
               </script>
             </button>  
             <?php }?>  
-            <br/><br/>
+            <br><br>
             <div id="passwordResultDiv" dojoType="dijit.layout.ContentPane" region="none" style="overflow:visible;top:<?php echo $topMsg;?>px;">
             </div>
             </form>
