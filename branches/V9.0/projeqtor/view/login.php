@@ -302,8 +302,8 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                   <td><div style="width:200px;text-align:center;"><div class="greyCheck" dojoType="dijit.form.CheckBox" type="checkbox" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
 			                <?php }else{?>
 			                   <td>
-			                     <div style="width:200px;text-align:center;">
-			                       <div class="colorSwitch" data-dojo-type="dojox/mobile/Switch" name="rememberMe"  value="off" leftLabel="" rightLabel="" style="top:2px;z-index:99;">
+			                     <div style="width:200px;text-align:center;" class="switchLogin">
+			                       <div class="colorSwitch" data-dojo-type="dojox/mobile/Switch" name="rememberMe"  value="off" leftLabel="" rightLabel="" style="top:4px;z-index:99;margin-right:5px;">
 			                       </div> <?php echo i18n('rememberMe');?>
                                  </div>
                                </td>

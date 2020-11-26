@@ -1510,6 +1510,7 @@ element.style {
     position: absolute;
     width: 238px;
 }
+
 .ProjeQtOrNewGui .activityStreamNote, .ProjeQtOrNewGui .activityStreamMailTitle {
 	border-radius: 5px;
 	/*margin:5px;*/
@@ -1531,4 +1532,8 @@ element.style {
 }
 .ProjeQtOrNewGui .activityStreamMailTitle {
 	background-color:var(--color-lighter);
+}
+
+.switchLogin .mblSwDefaultShape .mblSwitchBg{
+	border-radius: 8px !important;
 }

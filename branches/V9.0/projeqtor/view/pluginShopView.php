@@ -82,7 +82,7 @@ require_once "../tool/formatter.php";
             <td style="vertical-align: top;width:300px!important;">
               <div style="vertical-align: middle;float:left;width:300px;text-align:center;margin-top:25px;">
                 <span  class="title" style="font-size:20px;white-space: unset;"><?php echo $pluginName;?>&nbsp;</span>
-                <span  class="title" style="font-size:14px;white-space: unset;"><br><?php echo i18n('lastVersion').'&nbsp;'.$version;?>&nbsp;</span>    
+                <span  class="title" style="font-size:14px;white-space: unset;"><br><?php echo i18n('pluginVersion',array($version));?>&nbsp;</span>    
               </div>
               <img style="border:none !important;float:left;width:250px;height:250px;margin-left:25px;margin-right:25px;"  src="<?php echo $urlSite.$firstImg->url;?>"></img>
             </td>

@@ -381,9 +381,9 @@
     if(this.breadcrumbsCtrl.firstChild ){
       this.breadcrumbsCtrl.replaceChild(bc,this.breadcrumbsCtrl.lastElementChild);
       var newPreviousB=document.createElement('div');
-      newPreviousB.setAttribute('class', 'dijitButtonIcon dijitButtonIconPreviousBreadScrumb iconBreadSrumbTop');
+      newPreviousB.setAttribute('class', 'iconButtonBack32 iconSize16 imageColorNewGuiSelected iconBreadSrumbTop');
       newPreviousB.setAttribute('title', i18n('previous'));
-      newPreviousB.setAttribute('style','float:left;');
+      newPreviousB.setAttribute('style','float:left;background-size:12px !important;margin-top:8px;');
       var oldPreviousB=this.breadcrumbsCtrl.querySelector('.dijitButtonIcon ');
       if(oldPreviousB){
         this.breadcrumbsCtrl.replaceChild(newPreviousB,oldPreviousB);

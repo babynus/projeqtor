@@ -110,12 +110,12 @@ $secondColor='';
   <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'loginBackgroundNewGui':'loginBackground';?>">
     <tr height="100%">
       <td width="100%" align="center">
-        <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
+        <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" <?php if(isNewGui()) echo 'style="height:320px;"';?> >
         <table  align="center" >
           <tr style="height:10px;" >
             <td align="left" style="position:relative;height: 1%;" valign="top">
 			        <div style="position:relative;width: 400px; height: 54px;">
-			          <div style="z-index:10;overflow:visible;position:absolute;width: 480px; height: 50px;top:15px;text-align: center">
+			          <div style="z-index:10;overflow:visible;position:absolute;width: 480px; height: 50px;top:<?php echo (isNewGui())?'12px':'15px'?>;text-align: center">
 				        <img style="max-height:60px" src="<?php 
 				          if (file_exists("../logo.gif")) echo '../logo.gif';
 				          else if (file_exists("../logo.jpg")) echo '../logo.jpg';
@@ -127,7 +127,7 @@ $secondColor='';
           </tr>
           <tr style="height:100%" height="100%">
             <td style="height:99%" align="left" valign="middle">
-              <div  id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="width: 450px; height:<?php echo (isNewGui())?'200px':'210px'?>;overflow:visible;position: relative;">
+              <div  id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="<?php echo (isNewGui())?' height:200px;width:450px;':' height:210px;width:450px;'?>overflow:visible;position: relative;">
              <form  dojoType="dijit.form.Form" id="passwordForm" jsId="passwordForm" name="passwordForm" encType="multipart/form-data" action="" method="" >
              <script type="dojo/method" event="onSubmit" >
               dojo.byId('goButton').focus();
@@ -154,17 +154,38 @@ $secondColor='';
             ?> 
             <br/>
             <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar();',20);" class="input rounded"  style="color:#000000;margin-left:15px;<?php echo (isNewGui())?'border:unset !important;':'padding:10px;';?>">
-              <?php if (isNewGui()) echo '<div class="loginDivContainer container">';?>
-              <label class="label" style="width:150px;<?php if(isNewGui())echo "float: none;top: 8px;position: relative;";?>"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
-              <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
-              <?php if (isNewGui())echo '</div>';?>
+              <?php if (isNewGui()) echo '<div class="loginDivContainer container" style="margin-bottom:15px;">';?>
+              <label class="label" style="<?php if (isNewGui())echo"position: relative;text-align:center;";?>;width:150px;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
+              <?php if (isNewGui()){?>
+                <input id="newPass"  type="password" pwType="new" class="inputLoginNewGui"  style="color:#000000;"><br/>
+              <?php }else{?>
+                <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
+              <?php }?>
+              
+             
+              <?php if (isNewGui()){
+                echo '</div>';
+              }else{?>
               <br/>
-              <?php if (isNewGui()) echo '<div class="loginDivContainer container">';?>
-              <label class="label" style="width:150px;<?php if(isNewGui())echo "float: none;top: 8px;position: relative;";?>"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
-              <input type="password" pwType="verify" class="input rounded"  style="color:#000000;"><br/>
-              <?php if (isNewGui()) echo '</div>';?>
+              <?php
+              }
+               if(isNewGui())echo '<div class="loginDivContainer container" ><div style="float:left">'; ?>
+              <label class="label" style="<?php if (isNewGui())echo"position: relative;text-align:center;";?>;width:150px;"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
+              <?php if (isNewGui()){?>
+               <input  id="validatedPass" type="password" pwType="verify" class="inputLoginNewGui"  /><br/>
+              <?php }else{?>
+                <input type="password" pwType="verify" class="input rounded"  style="color:#000000;">
+              <?php }?>
+              
+              <?php if(isNewGui()){
+                 echo  '</div>';
+                 echo '<div class="iconView iconSize22" style="cursor:pointer;float:right;position:relative;top:8px;filter:grayscale(1)" 
+                       onClick="dojo.setAttr(\'newPass\',\'type\',((dojo.getAttr(\'newPass\',\'type\')==\'password\')?\'text\':\'password\'));dojo.setAttr(\'validatedPass\',\'type\',((dojo.getAttr(\'validatedPass\',\'type\')==\'password\')?\'text\':\'password\'))" ></div>';
+                 echo '</div>';
+               }?>
             <br>
-            <p><progress  id="progress" max="4" style="margin-left:<?php echo (isNewGui())?'120px':'148px';?>;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span>  </p>
+            <br>
+            <p><progress  id="progress" max="4" style="margin-left:<?php echo (isNewGui())?'120px':'148px';?>;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span></p>
             <div style="width:200px;height:20px; <?php echo (isNewGui())?'position: relative;top: 4px;left: 115px;':'position:absolute; left:170px;';?>text-align:center;">
               <span id="strength"></span> 
             </div>
@@ -180,7 +201,7 @@ $secondColor='';
             <input type="hidden" id="criteria" name="criteria" value=""/>
             <!-- florent -->
             <?php if(!isNewGui()) echo '<br/>';?>
-            <button type="submit" style="<?php echo (isNewGui())?'margin-left:125px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
+            <button type="submit" style="<?php echo (isNewGui())?'margin-left:130px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
               <script type="dojo/connect" event="onClick" args="evt">
                 //loadContent("../tool/changePassword.php","passwordResultDiv", "passwordForm");
               </script>
@@ -188,7 +209,7 @@ $secondColor='';
             <?php if(!isNewGui()) echo '<br/>';?>
             <div style="height:5px">&nbsp;</div>
             <?php if ( $user->password != md5($user->getRandomPassword()) ) {?>
-            <button class="largeTextButton" type="button" style="<?php echo (isNewGui())?'margin-left:125px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;<?php if(isNewGui())echo ''?>" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
+            <button class="largeTextButton" type="button" style="<?php echo (isNewGui())?'margin-left:130px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;<?php if(isNewGui())echo ''?>" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
               <script type="dojo/connect" event="onClick" args="evt">
               showWait(); 
               window.location=".";

@@ -3873,6 +3873,7 @@ pluginNotCompatibleWithCurrentVersion: "Verzija ${2} plug-in '${1}' nije u sklad
 pluginNoXmlDescriptor: "plugin deskriptor datoteke '${1}' u telefonskom imeniku &#34;${2}'za plug-in' ${3}'nije pronađena.",
 pluginSqlFileError: "može SQL datoteku &#34;${1}'za plug-in&#34; ${2}' nije pronađen.",
 pluginUnzipFail: "Ne mogu otpakirati datoteku ${1}.<br/> napisati PHP korisnički provjeru datoteke i imenik ${2}.",
+pluginVersion: "version ${1}",
 pluginVersionNotCompatible: "Vaša trenutna verzija (&#34;${1}') je nichtt combatible s ovog dodatka. <br/>&#34; ${2}' ili noviji potreban.",
 Predecessor: "Prethodnik",
 predefinedAction: "predefinirana akcija",
