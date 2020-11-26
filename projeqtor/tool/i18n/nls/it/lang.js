@@ -3872,6 +3872,7 @@ pluginNotCompatibleWithCurrentVersion: "La versione ${2} del plug-in '${1}' non 
 pluginNoXmlDescriptor: "Impossibile trovare il file '$ {1}' descrittore del plugin nella directory '$ {2}' per il plugin '$ {3}'",
 pluginSqlFileError: "impossibile trovare il file Sql '${1}' per il plugin '${2}'",
 pluginUnzipFail: "Non in grado di decomprimere il file $ {1}. <br/> Verificare che l'utente PHP ha i diritti di accesso in scrittura ai file e a livello globale alla cartella $ {2}.",
+pluginVersion: "version ${1}",
 pluginVersionNotCompatible: "La versione corrente ('$ {1}') non è compatibile con questo plugin. <br/> è necessaria la versione '$ {2}' o superiore",
 Predecessor: "Predecessore",
 predefinedAction: "azione predefinita",

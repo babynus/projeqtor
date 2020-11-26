@@ -3873,6 +3873,7 @@ pluginNotCompatibleWithCurrentVersion: "La version ${2} de l'extension '${1}' n'
 pluginNoXmlDescriptor: "Impossible de trouver le fichier de description '${1}' dans le répertoire '${2}' pour le module d'extension '${3}'",
 pluginSqlFileError: "Impossible de trouver le fichier SQL '${1}' pour  le module d'extension '${2}'",
 pluginUnzipFail: "Impossible de décompresser le fichier ${1}.<br/>Vérifiez que l'utilisateur lançant PHP a des droits en écriture sur ce fichier et plus globalement sur le répertoire ${2}.",
+pluginVersion: "version ${1}",
 pluginVersionNotCompatible: "Votre version actuelle ('${1}') n'est pas compatible avec ce module d'extension.<br/>Une version '${2}' ou supérieure est requise",
 Predecessor: "Prédécesseur",
 predefinedAction: "action prédéfinie",

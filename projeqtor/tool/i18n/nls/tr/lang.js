@@ -3872,6 +3872,7 @@ pluginNotCompatibleWithCurrentVersion: "'${1}' eklentisinin $ {2} $ versiyonu&#4
 pluginNoXmlDescriptor: "'$ {3}' eklentisi için '$ {1}' dizinindeki '$ {1}' eklenti tanımlayıcı dosyasını bulamıyor '$ {3}'",
 pluginSqlFileError: "'$ {2}' eklentisi için Sql dosyası '$ {1}' bulamıyor",
 pluginUnzipFail: "$ {1} dosyasını çözemiyorum. <br/> PHP kullanıcısının dosyaya erişim haklarını ve global olarak $ {2} klasöründe olduğunu kontrol edin.",
+pluginVersion: "version ${1}",
 pluginVersionNotCompatible: "Mevcut sürümünüz ('$ {1}') bu eklenti ile uyumlu değil. <br/> '$ {2}' veya üstü gerekli",
 Predecessor: "Öncelikli",
 predefinedAction: "önceden tanımlanmış eylem",
