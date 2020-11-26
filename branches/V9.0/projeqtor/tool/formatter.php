@@ -569,7 +569,7 @@ function activityStreamDisplayNote ($note,$origin){
   $rightWidthScreen=RequestHandler::getNumeric('destinationWidth');
   $userId = $note->idUser;
   $userName = SqlList::getNameFromId ( 'User', $userId );
-  if ($inlineUserThumb) $userNameFormatted = '<span style="position:relative;margin-left:20px"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($note->idUser, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
+  if ($inlineUserThumb) $userNameFormatted = '<span style="position:relative;margin-left:20px"><div style="position:absolute;top:'.((isNewGui())?'1':'-1').'px;left:-30px;width:25px;">'.formatUserThumb($note->idUser, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span ><strong>' . $userName . '</strong></span>';
   $idNote = '<span>#' . $note->id . '</span>';
   $objectClass=$note->refType;
@@ -731,7 +731,7 @@ function activityStreamDisplayHist ($hist,$origin){
   if ($objectClass=='Link') return;                 // Will be displayed on each item
   if (substr($change,0,6)=='|Note|') return;        // Already managed through other way
   if(substr($hist->refType, -15) == 'PlanningElement')return;
-  if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
+  if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:'.((isNewGui())?'1':'-1').'px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
   if(preg_match( '|Attachement|',$change) or preg_match('|Attachment|',$change)){
     if(strpos($change, '|Attachement|'))$attach=explode('|', substr($change,(strpos($change, '|Attachement|')+1)));
@@ -930,7 +930,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
   $objectClass=( $mail->idMailable!='')?SqlList::getNameFromId ( 'Mailable', $mail->idMailable,false):'';
   $objectId=$mail->refId;
   
-  if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:-1px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
+  if ($inlineUserThumb) $userNameFormatted = '<span style="font-weight:bold;position:relative;margin-left:20px;"><div style="position:absolute;top:'.((isNewGui())?'1':'-1').'px;left:-30px;width:25px;">'.formatUserThumb($userId, $userName, 'Creator',16).'&nbsp;</div><strong>' . $userName . '</strong></span>';
   else $userNameFormatted = '<span style="font-weight:bold;"><strong>' . $userName . '</strong></span>';
   $testObj=($objectClass)?new $objectClass($objectId):null;
   if ($objectClass=='Ticket' and !securityCheckDisplayMenu(null, $objectClass)) $objectClass='TicketSimple';
