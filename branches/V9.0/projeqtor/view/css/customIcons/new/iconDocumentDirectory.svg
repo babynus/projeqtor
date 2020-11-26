@@ -5,14 +5,9 @@
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 <g id="Calque_2">
 	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M123.311,61.941V45.645c0-2.761-2.238-5-5-5
-			H79.792c-2.763,0-5,2.239-5,5v9.441H14.691c-5.523,0-10,4.477-10,10v50.104c0,5.521,4.477,10,10,10h98.62c5.521,0,10-4.479,10-10
-			V65.086V61.941z"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M4.691,52.874v52.104c0,5.521,4.479,8,10,8h98.619
+			c5.523,0,10-2.479,10-8V47.874c0-5.523-4.477-8-10-8H53.21v-7.441c0-2.761-2.237-4-5-4H9.691c-2.762,0-5,1.239-5,4v17.296V52.874z
+			"/>
 	</g>
 </g>
-<g>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M100.938,32.321V21.594H86.602c-1.946,0-3.523-1.577-3.523-3.523V4.497H20.821c-1.946,0-3.523,1.578-3.523,3.523V47.5"/>
-</g>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="84.256" y1="4.497" x2="100.938" y2="20.695"/>
 </svg>
