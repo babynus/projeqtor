@@ -96,13 +96,13 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
         <td style="color: var(--color-medium);font-size: 10pt;font-style:italic;"><?php echo $user->resourceName?></td>
       </tr>
       <tr>
-        <td style="padding-top:10px;color: var(--color-dark);font-size: 10pt;"><?php echo SqlList::getNameFromId('Profile', $user->idProfile);?></td>
+        <td style="padding-top:10px;color: var(--color-dark);font-size: 10pt;font-style:italic;"><?php echo SqlList::getNameFromId('Profile', $user->idProfile);?></td>
       </tr>
       <tr>
-        <td style="color: var(--color-dark);font-size: 10pt;"><?php if($user->idOrganization)echo SqlList::getNameFromId('Organization', $user->idOrganization);?></td>
+        <td style="color: var(--color-dark);font-size: 10pt;font-style:italic;"><?php if($user->idOrganization)echo SqlList::getNameFromId('Organization', $user->idOrganization);?></td>
       </tr>
       <tr>
-        <td style="color: var(--color-dark);font-size: 10pt;padding-bottom:10px;"><?php if($user->idTeam)echo SqlList::getNameFromId('Team', $user->idTeam);?></td>
+        <td style="color: var(--color-dark);font-size: 10pt;padding-bottom:10px;font-style:italic;"><?php if($user->idTeam)echo SqlList::getNameFromId('Team', $user->idTeam);?></td>
       </tr>
     </table>
    </td>
