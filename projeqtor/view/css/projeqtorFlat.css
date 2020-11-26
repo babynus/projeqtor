@@ -313,11 +313,14 @@
 .ProjeQtOrFlatBlue .dijitAccordionContainer {
   border : none;
 }
+/*
 .ProjeQtOrFlatBlue .disconnectClass {
   background-image: url(customIcons/blue/disconnect.png);
   background-size: 24px 24px;
   background-repeat: no-repeat;
 }
+*/
+
 .ProjeQtOrFlatBlue .disconnectTextClass {
   color: #e97b2c;
 }
@@ -875,11 +878,14 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatRed .dijitAccordionContainer {
   border : none;
 }
+/*
 .ProjeQtOrFlatRed .disconnectClass {
   background-image: url(customIcons/red/disconnect.png);
   background-size: 24px 24px;
   background-repeat: no-repeat;
 }
+*/
+
 .ProjeQtOrFlatRed .disconnectTextClass {
   color: #e97b2c;
 }
@@ -1449,11 +1455,14 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatGreen .dijitAccordionContainer {
   border : none;
 }
+/*
 .ProjeQtOrFlatGreen .disconnectClass {
   background-image: url(customIcons/green/disconnect.png);
   background-size: 24px 24px;
   background-repeat: no-repeat;
 }
+*/
+
 .ProjeQtOrFlatGreen .disconnectTextClass {
   color: #e97b2c;
 }
@@ -1972,11 +1981,14 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGrey .dijitAccordionContainer {
   border : none;
 }
+/*
 .ProjeQtOrFlatGrey .disconnectClass {
   background-image: url(customIcons/grey/disconnect.png);
   background-size: 24px 24px;
   background-repeat: no-repeat;
 }
+*/
+
 .ProjeQtOrFlatGrey .disconnectTextClass {
   color: #e97b2c;
 }
