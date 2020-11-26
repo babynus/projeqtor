@@ -223,7 +223,7 @@ class Parameter extends SqlElement {
       $colScript .= '</script>';           
     } else if ($colName=="newGui") {
         $colScript .= '<script type="dojo/connect" event="onChange" >';
-        $colScript .= '  saveDataToSessionAndReload("newGui", this.value, null);';
+        $colScript .= '  saveDataToSessionAndReload("newGui", this.value, true);';
         $colScript .= '</script>';
     } else if ($colName=="menuBarTopMode") {
         $colScript .= '<script type="dojo/connect" event="onChange" >';
