@@ -85,10 +85,14 @@ $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
                           <div  onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" 
                               style="margin-bottom:10px;position:relative;cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:165px;overflow-y:auto;background:#f2f5f5;" 
                               id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
-                              <div style="position:relative;padding:12px;"><?php echo $valueIntrotext;?></div>          
-                              <?php  if($value->fulltext){?>
-                                <div id="arrowNewsUp<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-up"></div>
-                              <?php }?>
+                              <div style="position:relative;padding:12px;"><?php echo $valueIntrotext;?></div>   
+                               <?php  if($value->fulltext){
+                                      $leftBottom = "left:76px;bottom:248px;";
+                                      if($i==2)$leftBottom = "left:250px;bottom:248px;";
+                                      if($i==3)$leftBottom = "left:76px;bottom:2480px;";
+                                      if($i==4)$leftBottom = "left:250px;bottom:80px;";?>
+                                <div id="arrowNewsUp<?php echo $i;?>" style="position:fixed;<?php echo $leftBottom ;?>" class="arrow-up"></div>
+                              <?php }?>       
                           </div>
                       </td>
                     </tr>
@@ -151,8 +155,12 @@ $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
                               style="margin-bottom:10px;position:relative;cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:165px;overflow-y:auto;background:#f2f5f5;" 
                               id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
                               <div style="position:relative;padding:12px;"><?php echo $valueIntrotext;?></div>
-                       <?php  if($value->fulltext){?>
-                              <div id="arrowNewsUp<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-up"></div>
+                       <?php  if($value->fulltext){
+                                 $leftBottom = "left:76px;bottom:248px;";
+                                 if($i==6)$leftBottom = "left:250px;bottom:248px;";
+                                 if($i==7)$leftBottom = "left:76px;bottom:2480px;";
+                                 if($i==8)$leftBottom = "left:250px;bottom:80px;";?>
+                              <div id="arrowNewsUp<?php echo $i;?>" style="position:fixed;<?php echo $leftBottom;?>" class="arrow-up"></div>
                        <?php }?>
                           </div>
                       </td>
@@ -216,8 +224,12 @@ $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
                               style="margin-bottom:10px;position:relative;cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:165px;overflow-y:auto;background:#f2f5f5;" 
                               id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
                               <div style="position:relative;padding:12px;"><?php echo $valueIntrotext;?></div>
-                       <?php  if($value->fulltext){?>
-                              <div id="arrowNewsUp<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-up"></div>
+                       <?php  if($value->fulltext){
+                                 $leftBottom = "left:76px;bottom:248px;";
+                                 if($i==10)$leftBottom = "left:250px;bottom:248px;";
+                                 if($i==11)$leftBottom = "left:76px;bottom:2480px;";
+                                 if($i==12)$leftBottom = "left:250px;bottom:80px;";?>
+                              <div id="arrowNewsUp<?php echo $i;?>" style="position:fixed;<?php echo $leftBottom;?>" class="arrow-up"></div>
                        <?php }?>
                           </div>
                       </td>
