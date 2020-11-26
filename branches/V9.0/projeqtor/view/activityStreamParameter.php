@@ -46,14 +46,14 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
 ?>
 <table width="100%">
 	<tr height="32px">
-		<td width="50px" align="center"><?php echo formatIcon('ActivityStream', 32, null, true);?></td>
+		<td width="50px" <?php if (isNewGui()) echo 'style="position:relative;top:2px;"';?> align="center"><?php echo formatIcon('ActivityStream', 32, null, true);?></td>
 		<td><span class="title"><?php echo i18n('menuActivityStream');?>&nbsp;</span></td>
 	</tr>
 </table>
 
-<div style="width: 100%; margin: 0 auto; height: 90px; padding-bottom: 2px; border-bottom: 1px solid #CCC;background-color:#FFFFFF">
+<div style="width: 100%; margin: 0 auto; height: <?php echo (isNewGui())?'110':'90';?>px; padding-bottom: 2px; border-bottom: 1px solid #CCC;background-color:#FFFFFF">
   <form id="activityStreamForm" name="activityStreamForm">
-		<table width="100%" class="activityStream" style="margin-left:10px;">
+		<table width="100%" class="activityStream" style="margin-left:10px;<?php if (isNewGui()) echo 'position:relative;top:-15px;';?>">
 			<tr>
 				<td valign="top" width="20%">
 				  <table >
@@ -68,7 +68,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
 						</tr>
 						<tr>
 						  <td colspan="2" align="left" style="white-space:nowrap;padding-right:20px;">
-							  <a onclick="switchActivityStreamListShowClosed();refreshActivityStreamList();" href="#" style="cursor: pointer;">
+							  <a onclick="switchActivityStreamListShowClosed();refreshActivityStreamList();" href="#" style="cursor: pointer;<?php if (isNewGui()) echo 'position:relative;top:5px;';?>">
 							    <?php echo ucfirst(i18n("labelShowIdle"));?>
 							  </a><?php $displayShowClosedCheck=($showClosed)?'inline-block':'none';?><span id="activityStreamShowClosedCheck" style="display:<?php echo $displayShowClosedCheck;?>;margin-left:10px;";><img src="css/images/iconSelect.png"/></span>
 							</td>
@@ -81,7 +81,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
     						<select title="<?php echo i18n('limitDisplayActivityStream')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect" required
     						value="<?php echo ($activityStreamNumberElement!='')?$activityStreamNumberElement:'100';?>" 
                             <?php echo autoOpenFilteringSelect(); ?> 
-                            id="activityStreamNumberElement" name="activityStreamNumberElement" style="width:80px;margin-left:16px;height:20px;font-size:8pt;" onChange="refreshActivityStreamList();">
+                            id="activityStreamNumberElement" name="activityStreamNumberElement" style="width:80px;margin-left:16px;<?php if (!isNewGui()) echo 'height:20px;font-size:8pt;';?>" onChange="refreshActivityStreamList();">
                               <option value="10">10</option>
                               <option value="50">50</option>
                               <option value="100" >100</option>
@@ -201,7 +201,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
           </tr>
 					<tr>
 						<td colspan="2" align="left" style="width:50%;white-space:nowrap;">
-							 <a onClick="switchActivityStreamListUpdatedRecently();refreshActivityStreamList();" href="#" style="cursor: pointer;display:flex;">
+							 <a onClick="switchActivityStreamListUpdatedRecently();refreshActivityStreamList();" href="#" style="cursor: pointer;display:flex;<?php if (isNewGui()) echo 'position:relative;top:5px;';?>">
 							   <?php echo i18n("dashboardTicketMainUpdatedRecently");?>
 							   <?php $displayUpdatedRecentlyCheck=($updatedRecently)?'inline-block':'none';?>
 							   <span id="activityStreamUpdatedRecentlyCheck" style="display:<?php echo $displayUpdatedRecentlyCheck;?>;margin-left:10px;";><img src="css/images/iconSelect.png"/></span>							   
@@ -213,7 +213,7 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
 							<?php echo ucfirst(i18n('colDays'));?>&nbsp;:
 						</td>
 						<td align="left">		
-              <div style="width:30px;font-size:8pt;" class="filterField rounded" dojoType="dijit.form.TextBox" value="<?php echo $activityStreamNumberDays;?>"
+              <div style="width:30px;<?php if (!isNewGui()) echo 'font-size:8pt;';?>" class="filterField rounded" dojoType="dijit.form.TextBox" value="<?php echo $activityStreamNumberDays;?>"
                type="text" id="activityStreamNumberDays" name="activityStreamNumberDays" onChange="refreshActivityStreamList();">
               </div>
             </td>
@@ -221,8 +221,8 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
 				</table>
        </td>
        <td valign="top" width="">
-         <table><tr><td>
-          <div style="position:absolute;top:42px; right:10px" onClick="refreshActivityStreamList();"><?php echo formatBigButton('Refresh');?></div>
+         <table ><tr><td>
+          <div style="position:absolute;<?php echo (isNewGui())?'top:0px;right:30px':'top:42px;right:10px';?>" class="imageColorNewGui" onClick="refreshActivityStreamList();"><?php echo formatBigButton('Refresh');?></div>
          </td></tr></table>
        </td>      
 			</tr>

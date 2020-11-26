@@ -6262,7 +6262,7 @@ function switchNoteStatus(idNote) {
     noteDiv.style.marginBottom="10px";
     status="open";
     dojo.query('#imgCollapse_'+idNote+' div').forEach(function(node, index, arr){
-      node.className="iconButtonCollapseHide16";
+      node.className="iconButtonCollapseHide16 iconButtonCollapseHide iconSize16";
     });
   } else {
     if (noteDiv.offsetHeight) notesHeight[idNote]=noteDiv.offsetHeight;
@@ -6271,7 +6271,7 @@ function switchNoteStatus(idNote) {
     noteDiv.style.marginBottom="0px";
     status="closed";
     dojo.query('#imgCollapse_'+idNote+' div').forEach(function(node, index, arr){
-      node.className="iconButtonCollapseOpen16";
+      node.className="iconButtonCollapseOpen16 iconButtonCollapseOpen iconSize16";
     });
   }
   url="../tool/saveClosedNote.php?idNote="+idNote+"&statusNote="+status;

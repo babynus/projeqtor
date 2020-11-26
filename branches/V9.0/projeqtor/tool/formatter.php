@@ -650,7 +650,7 @@ function activityStreamDisplayNote ($note,$origin){
           }
     }
     $resultNote.= '</td></tr><tr><td>';
-    $resultNote.= '<div "style=float:right;"><a  id="imgCollapse_'.$note->id.'" style="float:right;" onclick="switchNoteStatus('.$note->id.');">'.formatSmallButton('Collapse'.(($isNoteClosed)?'Open':'Hide')).'</a></div>';
+    $resultNote.= '<div "style=float:right;"><a  id="imgCollapse_'.$note->id.'" style="float:right;'.((isNewGui() and $origin=='objectStream')?'margin-top:3px;':'').'" onclick="switchNoteStatus('.$note->id.');">'.formatSmallButton('Collapse'.(($isNoteClosed)?'Open':'Hide')).'</a></div>';
     $resultNote.= '</div></td></tr></table>';
     
     if ($origin=='objectStream') {
@@ -948,7 +948,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
   }
   
   if($mail->idMailable!='')$reftText=$elementName.'&nbsp;|&nbsp;';
-  $icon=formatIcon("Mail",22);
+  $icon=formatIcon("MailSentMsg",22);
   $text=lcfirst(i18n('mailActivityStrameSendTo',array($dest)));
   $showMail="";
   if ( securityCheckDisplayMenu(null, get_class($mail)) and securityGetAccessRightYesNo('menu'.get_class($mail), 'read', $mail)=="YES") {
