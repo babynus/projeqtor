@@ -8038,7 +8038,6 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       }
     }
     $goto="";
-    $displayed++;
     $idToShow=$aff->id;
     $classToShow='Affectation';
     if ($type=='Project') {
@@ -8176,6 +8175,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       echo '</tr>';
       
     }
+    $displayed++;
   }
   }
   if ($displayed==0 and isNewGui() and $type!='Project') {
