@@ -64,45 +64,84 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
 <?php if (!isNewGui()) {?>
   <tr style="height:40px">
     <td <?php if ($showUserParameters) echo'rowspan="2"';?> style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"><?php if ($imgUrl) { echo '<img style="border-radius:40px;height:80px" src="'.$imgUrl.'" />'; } else { ?>
-            <div style="overflow-x:hidden;position: relative; width:80px;height:40px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
+            <div style="overflow-x:hidden;position: relative; width:80px;height:80px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
               onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
    <?php } ?></td>
-    <td>
-      <div class="pseudoButton"  title="<?php echo i18n('changePassword');?>" onClick="requestPasswordChange();">
-        <table style="width:100%">
+   <td>
+    <?php if (Parameter::getGlobalParameter('simuIndex')){?>
+     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectDataCloning('welcome','simu');">
+        <table style="width:122px;">
           <tr>
-            <td style="padding-left: 10px;width: 22px !important;vertical-align: middle;">
-              <div style="height:22px;width: 22px" class="iconLoginPassword iconSize22 imageColorNewGui">&nbsp;</div>
-            </td>
-            <td style="vertical-align:middle;font-size:9pt;color: var(--color-dark);">&nbsp;&nbsp;<?php echo i18n('changePassword');?>&nbsp;&nbsp;</td>
+            <td> <div class="disconnectClass">&nbsp;</div> </td>
+            <td>&nbsp;&nbsp;<?php echo i18n('disconnect');?></td>
           </tr>
         </table>
       </div>
+    <?php }else if (SSO::isEnabled()) {?>
+     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectSSO('welcome','<?php echo SSO::getCommonName(true);?>');">
+        <table style="width:122px;">
+          <tr>
+            <td> <div class="disconnectClass">&nbsp;</div> </td>
+            <td>&nbsp;&nbsp;<?php echo i18n('disconnect');?></td>
+          </tr>
+        </table>
+      </div>
+     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('ssoDisconnectLoginMessage',array(SSO::getCommonName()));?>" onclick="disconnectSSO('login','<?php echo SSO::getCommonName(true);?>');">
+        <table style="width:122px;">
+          <tr>
+            <td> <div class="disconnectClass">&nbsp;</div> </td>
+            <td style="white-space:nowrap">&nbsp;&nbsp;<?php echo i18n('ssoDisconnectLogin');?></td>
+          </tr>
+        </table>
+      </div>
+      <?php if (isset($_SESSION['samlNameId'])) {?>
+      <div class="pseudoButton disconnectTextClass" style="width:120px;height:30px;" title="<?php echo i18n('ssoDisconnectSSOMessage',array(SSO::getCommonName()));?>" onclick="disconnectSSO('SSO','<?php echo SSO::getCommonName(true);?>');">
+        <table style="width:122px;">
+          <tr>
+            <td> <div class="disconnectClass">&nbsp;</div> </td>
+            <td style="white-space:nowrap">&nbsp;&nbsp;<?php echo i18n('ssoDisconnectSSO',array(SSO::getCommonName()));?></td>
+          </tr>
+        </table>
+      </div>
+      <?php }?>
+    <?php } else { ?>
+          <div class="pseudoButton disconnectTextClass" style="width:120px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnect(true);">
+        <table style="width:122px;">
+          <tr>
+            <td> <div class="disconnectClass">&nbsp;</div> </td>
+            <td>&nbsp;&nbsp;<?php echo i18n('disconnect');?></td>
+          </tr>
+        </table>
+      </div>
+     <?php } ?>
     </td>
   </tr>
   <?php }else{?>
   <tr>
     <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"><?php if ($imgUrl) { echo '<img style="border-radius:40px;height:80px" src="'.$imgUrl.'" />'; } else { ?>
             <div style="overflow-x:hidden;position: relative; width:60px;height:60px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
-              onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
+              onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="left: 19px;position:relative;top: 20px;height:22px;width: 22px;" class="iconAdd iconSize22 imageColorNewGui">&nbsp;</div></div> 
    <?php } ?>
    </td>
    <td style="padding-left: 10px;">
     <table>
       <tr>
-        <td style="font-weight:bold;font-size: 12pt;color: var(--color-dark);"><?php echo ucfirst($user->name);?></td>
+        <td style="font-weight:bold;font-size: 12pt;color: var(--color-dark);white-space:nowrap;"><?php echo ucfirst($user->resourceName);?></td>
       </tr>
       <tr>
-        <td style="color: var(--color-medium);font-size: 10pt;font-style:italic;"><?php echo $user->resourceName?></td>
+        <td style="color: var(--color-medium);font-size: 10pt;font-style:italic;white-space:nowrap;"><?php echo $user->name?></td>
       </tr>
       <tr>
-        <td style="padding-top:10px;color: var(--color-dark);font-size: 10pt;font-style:italic;"><?php echo SqlList::getNameFromId('Profile', $user->idProfile);?></td>
+        <td style="padding-top:10px;color: var(--color-dark);font-size: 10pt;float: left;"><?php echo i18n('colIdProfile').' :&nbsp';?></td>
+        <td style="padding-top:10px;color: var(--color-dark);font-size: 10pt;font-style:italic;white-space:nowrap;float: left;"><?php echo SqlList::getNameFromId('Profile', $user->idProfile);?></td>
       </tr>
       <tr>
-        <td style="color: var(--color-dark);font-size: 10pt;font-style:italic;"><?php if($user->idOrganization)echo SqlList::getNameFromId('Organization', $user->idOrganization);?></td>
+        <td style="color: var(--color-dark);font-size: 10pt;float: left;"><?php if($user->idOrganization)echo i18n('colIdOrganization').' :&nbsp';?></td>
+        <td style="color: var(--color-dark);font-size: 10pt;font-style:italic;white-space:nowrap;float: left;"><?php if($user->idOrganization)echo SqlList::getNameFromId('Organization', $user->idOrganization);?></td>
       </tr>
       <tr>
-        <td style="color: var(--color-dark);font-size: 10pt;padding-bottom:10px;font-style:italic;"><?php if($user->idTeam)echo SqlList::getNameFromId('Team', $user->idTeam);?></td>
+        <td style="color: var(--color-dark);font-size: 10pt;padding-bottom:10px;float: left;"><?php if($user->idTeam)echo i18n('colIdTeam').' :&nbsp';?></td>
+        <td style="color: var(--color-dark);font-size: 10pt;padding-bottom:10px;font-style:italic;white-space:nowrap;float: left;"><?php if($user->idTeam)echo SqlList::getNameFromId('Team', $user->idTeam);?></td>
       </tr>
     </table>
    </td>
@@ -110,15 +149,15 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
 <?php }
 if ($showUserParameters) { // Do not give access to user parameters if locked ?>
 <?php if(!isNewGui()){?>
-<tr style="height:40px">
+  <tr style="height:40px">
     <td style="white-space:nowrap;">
       <div class="pseudoButton"  title="<?php echo i18n('menuUserParameter');?>" onClick="loadMenuBarItem('UserParameter','UserParameter','bar');dijit.byId('iconMenuUserPhoto').closeDropDown();">
         <table style="width:100%">
           <tr>
-            <td style="padding-left: 10px;width: 22px !important;">
-              <div style="height:22px;width: 22px" class="iconUserParameter iconSize22 imageColorNewGui">&nbsp;</div>
+            <td style="width:24px;padding-top:2px;">
+              <div class="iconUserParameter22">&nbsp;</div>
             </td>
-            <td style="vertical-align:middle;font-size:9pt;color: var(--color-dark);">&nbsp;&nbsp;<?php echo i18n('menuUserParameter');?>&nbsp;&nbsp;</td>
+            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('menuUserParameter');?>&nbsp;&nbsp;</td>
           </tr>
         </table>
       </div>
@@ -191,6 +230,21 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
     </td>
   </tr>
   <?php if(!isNewGui()){?>
+  <tr style="height:40px">
+    <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"></td>
+      <td>
+      <div class="pseudoButton"  title="<?php echo i18n('changePassword');?>" onClick="requestPasswordChange();">
+        <table style="width:100%">
+          <tr>
+            <td style="width:24px;padding-top:2px;">
+              <div class="iconLoginPassword">&nbsp;</div>
+            </td>
+            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('changePassword');?>&nbsp;&nbsp;</td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  </tr>
   <tr style="height:40px">
     <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"></td>
       <td>
@@ -269,8 +323,10 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       </div>
     </td>
   </tr>
-<?php }}?>
-<tr style="height:40px">
+<?php }
+  }?>
+<?php if(isNewGui()){?>
+<tr style="height:40px;">
         <td colspan="2" style="padding-left: 46px;">
     <?php if (Parameter::getGlobalParameter('simuIndex')){?>
      <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;padding-left: 10px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectDataCloning('welcome','simu');">
@@ -320,4 +376,5 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
      <?php } ?>
     </td>
   </tr>
+<?php }?>
 </table>
