@@ -102,7 +102,7 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
         <td style="color: var(--color-dark);font-size: 10pt;"><?php if($user->idOrganization)echo SqlList::getNameFromId('Organization', $user->idOrganization);?></td>
       </tr>
       <tr>
-        <td style="color: var(--color-dark);font-size: 10pt;"><?php if($user->idTeam)echo SqlList::getNameFromId('Team', $user->idTeam);?></td>
+        <td style="color: var(--color-dark);font-size: 10pt;padding-bottom:10px;"><?php if($user->idTeam)echo SqlList::getNameFromId('Team', $user->idTeam);?></td>
       </tr>
     </table>
    </td>
@@ -271,7 +271,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
   </tr>
 <?php }}?>
 <tr style="height:40px">
-        <td colspan="2" style="padding-left: 56px;">
+        <td colspan="2" style="padding-left: 46px;">
     <?php if (Parameter::getGlobalParameter('simuIndex')){?>
      <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;padding-left: 10px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectDataCloning('welcome','simu');">
         <table style="width:122px;">
