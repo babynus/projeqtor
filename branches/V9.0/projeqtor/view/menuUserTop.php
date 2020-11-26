@@ -66,6 +66,7 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
             <div style="overflow-x:hidden;position: relative; width:60px;height:60px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
               onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
    <?php } ?></td>
+    <?php if (!isNewGui()) {?>
     <td>
       <div class="pseudoButton"  title="<?php echo i18n('changePassword');?>" onClick="requestPasswordChange();">
         <table style="width:100%">
@@ -79,9 +80,10 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
       </div>
     </td>
   </tr>
+  <?php }?>
 <?php
 if ($showUserParameters) { // Do not give access to user parameters if locked ?>
-<?php //if(!isNewGui()){?>
+<?php if(!isNewGui()){?>
 <tr style="height:40px">
     <td style="white-space:nowrap;">
       <div class="pseudoButton"  title="<?php echo i18n('menuUserParameter');?>" onClick="loadMenuBarItem('UserParameter','UserParameter','bar');dijit.byId('iconMenuUserPhoto').closeDropDown();">
@@ -96,7 +98,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       </div>
     </td>
   </tr>
-  <?php //}?>
+  <?php }?>
   <tr style="height:40px">
     <td width="120px" style="text-align:right"><?php echo i18n("paramLang");?>&nbsp;:&nbsp;</td>
     <td>  
@@ -208,8 +210,9 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       </div>
     </td>
   </tr>
-<?php } } // End of if ($showUserParameters)
-        if(isNewGui()){?>
+<?php } 
+  } // End of if ($showUserParameters)
+  if(isNewGui()){?>
 <tr style="height:40px">
     <td>
       <div class="pseudoButton"  title="<?php echo i18n('changePassword');?>" onClick="requestPasswordChange();">
