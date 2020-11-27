@@ -7633,6 +7633,27 @@ function showActionSelect(selectClass, selectId, selectField, canCreate, canUpda
   dojo.byId(toolId).style.display='block';
   dojo.byId(toolId).style.opacity='1';
 }
+
+var actionProjectSelectorTimeout=null;
+var actionProjectSelectorField=null;
+function showActionProjectSelector() {
+	var toolId="toolbar_projectSelector";
+	if (actionProjectSelectorTimeout){
+		clearTimeout(actionProjectSelectorTimeout);
+	}else {
+	    if (dojo.byId(toolId)) {
+	      clearTimeout(actionProjectSelectorTimeout);
+	      dojo.byId(toolId).style.opacity='0';
+	      dojo.byId(toolId).style.display='none';
+	    }
+	}
+  var width=0;
+  var maxWidth=((dojo.byId("selectedProject").offsetWidth)/2)-25;
+  if (! dojo.byId(toolId)) return;
+  dojo.byId(toolId).style.display='block';
+  dojo.byId(toolId).style.opacity='1';
+}
+
 function actionSelectGoto(selectClass, selectId, selectField) {
   var sel=dijit.byId(selectField);
   if (sel && trim(sel.get('value'))) { 
@@ -7660,6 +7681,10 @@ function hideActionSelect(selectClass, selectId, selectField) {
   actionSectionField=selectField;
   actionSelectTimeout=setTimeout("dojo.byId('toolbar_"+selectField+"').style.display='none';",100);
   
+}
+
+function hideActionProjectSelector() {
+  actionProjectSelectorTimeout=setTimeout("dojo.byId('toolbar_projectSelector').style.display='none';",100);
 }
 
 function displayCheckBoxDefinitionLine(){

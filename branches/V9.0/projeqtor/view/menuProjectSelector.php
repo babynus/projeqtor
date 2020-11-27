@@ -75,7 +75,7 @@ if ($displayMode!='standard' and $nbProj>1) {
 ?>
 <?php if ($displayMode=='standard') {?>
 <span maxsize="160px" style="position: absolute; left:0px; top:0px; height: 20px; width: 241px; color:#202020;" 
-  dojoType="dijit.form.DropDownButton" 
+  dojoType="dijit.form.DropDownButton"
   id="selectedProject" jsId="selectedProject" name="selectedProject" showlabel="true" class="">
   <span style="width:220px; text-align: left;">
     <div style="width:220px; overflow: hidden; text-align: left;" >
@@ -101,7 +101,7 @@ if ($nbProj==0) {
     <?php 
       echo $subProjectsToDraw;
     ?>
-    </div>       
+    </div> 
   </span>
 </span>
     <div id="multiProjectSelector"  dojoType="dijit.form.TextBox" style="display:none" value="">
@@ -117,6 +117,7 @@ if ($nbProj==0) {
      <?php htmlDrawOptionForReference("idProject", null, null, false, $critFld, $critVal, $limitToActiveProjects);?>
    </div>
    <input type="hidden" id="projectSelectorMode" value="Standard" />
+   <?php if(!isNewGui()){?>
    <div style="text-align:left;position:absolute; top:<?php echo (isNewGui())?'-2':'-2';?>px; left:281px; padding:0px;">
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:2px; height: 20px"
          title="<?php echo i18n('searchProject');?>" iconClass="iconSearch16 iconSearch iconSize16" >
@@ -125,6 +126,7 @@ if ($nbProj==0) {
          </script>
        </button>
 	</div>
+	<?php }?>
 <?php } else if ($displayMode=='select') {?>
 <select dojoType="dijit.form.FilteringSelect" class="input" 
    style="position: absolute; left:4px; top:<?php echo (isNewGui())?'-3':'1';?>px; width: 241px;height:<?php echo (isNewGui())?'20':'22';?>px;" 
@@ -139,6 +141,7 @@ if ($nbProj==0) {
    <?php htmlDrawOptionForReference("idProject", $proj, null, true,$critFld, $critVal, $limitToActiveProjects);?>
 </select>
 <input type="hidden" id="projectSelectorMode" value="Filtering" />
+ <?php if(!isNewGui()){?>
    <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:-1px; height: 20px"
          title="<?php echo i18n('searchProject');?>" iconClass="iconSearch16 iconSearch iconSize16">
@@ -147,6 +150,7 @@ if ($nbProj==0) {
          </script>
        </button>
 	</div>
+	<?php }?>
 <?php } else if($displayMode=="search") {?>
 <select id="projectSelectorFiletering" data-dojo-type="dijit.form.FilteringSelect" class="input" style="position: absolute; left:4px; top:<?php echo (isNewGui())?'-3':'1';?>px; width: 241px;height:<?php echo (isNewGui())?'20':'22';?>px;"  
 <?php echo autoOpenFilteringSelect();?>
@@ -163,6 +167,7 @@ name="projectSelectorFiletering"
    <?php htmlDrawOptionForReference("idProject", $proj, null, true,$critFld, $critVal, $limitToActiveProjects);?>  
 </select>
 	<input type="hidden" id="projectSelectorMode" value="Filtering" />
+	 <?php if(!isNewGui()){?>
    <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:-1px; height: 20px"
          title="<?php echo i18n('searchProject');?>" iconClass="iconSearch16 iconSearch iconSize16">
@@ -171,6 +176,7 @@ name="projectSelectorFiletering"
          </script>
        </button>
 	</div>
+	<?php }?>
 <?php } else  {
   ?>
 ERROR : Unknown display mode
