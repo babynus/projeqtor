@@ -71,6 +71,8 @@ $mobile=false;
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorFlat.css" />
   <?php if(isNewGui()){?>
    <link rel="stylesheet" type="text/css" href="../view/css/projeqtorNew.css" />
+   <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
+   <script type="text/javascript" src="../external/dojox/mobile/deviceTheme.js" data-dojo-config="mblUserAgent: 'Custom'"></script> 
    <?php }?>
   <script type="text/javascript" src="../external/CryptoJS/rollups/md5.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/CryptoJS/rollups/sha256.js?version=<?php echo $version.'.'.$build;?>" ></script>
@@ -84,13 +86,10 @@ $mobile=false;
               parseOnLoad: true, 
               isDebug: <?php echo getBooleanValueAsString(Parameter::getGlobalParameter('paramDebugMode'));?>'></script>
   <script type="text/javascript" src="../external/dojo/projeqtorDojo.js?version=<?php echo $version.'.'.$build;?>"></script>
-  <?php if (isNewGui()) {?>
-  <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
-  <script type="text/javascript" src="../external/dojox/mobile/deviceTheme.js" data-dojo-config="mblUserAgent: 'Custom'"></script>
-  <?php }?>
+
   <?php Plugin::includeAllFiles();?>
   <script type="text/javascript"> 
-    var isNewGui=<?php echo (isNewGui())?'true':'false'?>;
+    var isNewGui=<?php echo (isNewGui())?'true':'false';?>;
     var customMessageExists=<?php echo(file_exists(Plugin::getDir()."/nls/$currentLocale/lang.js"))?'true':'false';?>;
     dojo.require("dojo.parser");
     dojo.require("dojo.date");

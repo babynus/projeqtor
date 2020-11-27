@@ -218,6 +218,12 @@ var defaultMenu=null;
           duration : duration
       })]).play();
       setTimeout('dijit.byId("globalContainer").resize();', duration+5);
+      var detailHidden=false;
+      if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
+        if(!formChangeInProgress && dojo.byId('id') && dojo.byId('id').value && !detailHidden) {
+          setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");',
+              duration +5);
+        }
     }
   };
   
