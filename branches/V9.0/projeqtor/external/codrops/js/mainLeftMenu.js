@@ -322,7 +322,7 @@
             self._addBreadcrumb(nextMenuIdx);
           }
           else if( self.current_menu === 0 && self.breadcrumbsCtrl) {
-            var buttonBack=self.breadcrumbsCtrl.querySelector('.dijitButtonIcon ');
+            var buttonBack=self.breadcrumbsCtrl.querySelector('.iconButtonBack32 ');
             if(buttonBack){
               self.breadcrumbsCtrl.removeChild(buttonBack);
             }
@@ -384,7 +384,7 @@
       newPreviousB.setAttribute('class', 'iconButtonBack32 iconSize16 imageColorNewGuiSelected');
       newPreviousB.setAttribute('title', i18n('previous'));
       newPreviousB.setAttribute('style','float:left;background-size:12px !important;margin-top:8px;');
-      var oldPreviousB=this.breadcrumbsCtrl.querySelector('.dijitButtonIcon ');
+      var oldPreviousB=this.breadcrumbsCtrl.querySelector('.iconButtonBack32 ');
       if(oldPreviousB){
         this.breadcrumbsCtrl.replaceChild(newPreviousB,oldPreviousB);
       }else{
