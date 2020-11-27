@@ -125,7 +125,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <script type="text/javascript" src="../external/dojo/projeqtorDojo.js?version=<?php echo $version;?>"></script>
   <?php Plugin::includeAllFiles();?>
   <script type="text/javascript">  
-    var isNewGui=<?php echo (isNewGui())?'true':'false'?>;
+    var isNewGui=<?php echo (isNewGui())?'true':'false';?>;
     var customMessageExists=<?php echo(file_exists(Plugin::getDir()."/nls/$currentLocale/lang.js"))?'true':'false';?>; 
     dojo.require("dojo.data.ItemFileWriteStore");
     dojo.require("dojo.date");
