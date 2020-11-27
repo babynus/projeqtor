@@ -7817,8 +7817,8 @@ function copyProjectStructureChange() {
 
 function selectIconMenuBar(menuClass){
 	var icon = dojo.byId('iconMenuBar'+menuClass);
+	dojo.query('.menuBarItem').removeClass('menuBarItemSelected', icon);
 	if (icon && dojo.hasClass(icon,'menuBarItem')){
-		dojo.query('.menuBarItem').removeClass('menuBarItemSelected', icon);
 		dojo.addClass(icon,'menuBarItemSelected');
 	}
 }
