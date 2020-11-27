@@ -2,6 +2,10 @@
 colorThemingInProgress=false;
 function setColorTheming(ref,bis, mode) {
   if (colorThemingInProgress) return;
+  if (!ref) ref='#545382';
+  if (ref.substr(0,1)!='#') ref='#'+ref;
+  if (!bis) bis='#e97b2c';
+  if (bis.substr(0,1)!='#') bis='#'+bis;
   colorThemingInProgress=true;
   if(dojo.byId('newGuiThemeColor')){
 	  if (!ref && dojo.byId('newGuiThemeColor')) ref='#'+dojo.byId('newGuiThemeColor').value;

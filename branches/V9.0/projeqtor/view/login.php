@@ -194,7 +194,7 @@ if(!$secondColor){
 $secondColor='';
 }
 ?>
-<body class="nonMobile ProjeQtOrNewGui" onLoad="hideWait();" style="overflow: auto;background-color:<?php echo '#'.$firstColor?>;" onBeforeUnload="">
+<body id="body" class="nonMobile ProjeQtOrNewGui" onLoad="hideWait();" style="overflow: auto;background-color:<?php echo '#'.$firstColor?>;" onBeforeUnload="">
 <?php 
 }else{
 ?>
