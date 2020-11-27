@@ -313,7 +313,7 @@ class Menu extends SqlElement {
             $lib=i18n('customMenuRemove');
           }
           echo 'onClick="addRemoveFavMenuLeft(\'div'.(($isReport==true)?ucfirst($menu->name):$menu->name).'\', \''.$menu->name.'\',\''.$mode.'\',\''.(($isReport==true)?"reportDirect":"menu").'\');">';
-          echo'<div class="'.$classAttr.'" style="white-space:nowrap;">'.$lib.'</div>';
+          echo'<div class="'.$classAttr.'" style="white-space:nowrap;padding-right:10px;">'.$lib.'</div>';
           echo '</div></div>';
         }
       }
