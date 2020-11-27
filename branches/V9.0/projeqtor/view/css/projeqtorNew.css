@@ -1537,3 +1537,9 @@ element.style {
 .switchLogin .mblSwDefaultShape .mblSwitchBg{
 	border-radius: 8px !important;
 }
+
+.ProjeQtOrNewGui #menuBarAccesLeft .imageColorNewGuiSelected{
+		-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
+  filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
+  background-color: transparent !important;
+}
