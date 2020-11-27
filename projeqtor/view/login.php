@@ -90,6 +90,7 @@ $mobile=false;
   <?php }?>
   <?php Plugin::includeAllFiles();?>
   <script type="text/javascript"> 
+    var isNewGui=<?php echo (isNewGui())?'true':'false'?>;
     var customMessageExists=<?php echo(file_exists(Plugin::getDir()."/nls/$currentLocale/lang.js"))?'true':'false';?>;
     dojo.require("dojo.parser");
     dojo.require("dojo.date");
@@ -124,6 +125,10 @@ $mobile=false;
     var browserLocaleDateFormatJs="";
     var aesKeyLength=<?php echo Parameter::getGlobalParameter('aesKeyLength');?>;
     dojo.addOnLoad(function(){
+      if (isNewGui) {
+        changeTheme('<?php echo getTheme();?>');
+        setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>','<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>');
+      }
       currentLocale="<?php echo $currentLocale?>";
       saveResolutionToSession();
       saveBrowserLocaleToSession();
