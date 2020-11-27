@@ -68,35 +68,28 @@
 		</g>
 	</g>
 </g>
-<g id="Calque_2">
+<line id="line31" fill="none" stroke="#FF0000" stroke-width="12" stroke-miterlimit="10" x1="15.645" y1="19.061" x2="35.794" y2="19.061"/>
+<line id="line33" fill="none" stroke="#FF0000" stroke-width="12" stroke-miterlimit="10" x1="35.005" y1="62.394" x2="58.577" y2="62.394"/>
+<line id="line37" fill="none" stroke="#FF0000" stroke-width="12" stroke-miterlimit="10" x1="35.779" y1="38.445" x2="64.242" y2="38.445"/>
+<path id="path2790" fill="none" stroke="#FF0000" d="M35.553,13.394L35.51,67.728"/>
+<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" points="76.898,66 76.898,77.667 2.686,77.667 
+	2.686,3.455 76.898,3.455 76.898,27 "/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M49.724,87.587"/>
+<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	49.724,87.587 49.724,124.839 123.188,124.839 123.188,51.159 111.374,51.159 111.374,87.55 102.566,87.55 102.566,70.415 
+	84.612,87.55 84.612,70.337 "/>
+<g id="Calque_3_3_">
 	
-		<rect x="25.514" y="28.362" transform="matrix(-0.876 -0.4823 0.4823 -0.876 58.9233 104.9358)" fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="34.873" height="33.063"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="12.698" y1="62.677" x2="42.947" y2="79.191"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="61.124" y1="72.378" x2="92.036" y2="17.411"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M56.648,76.379c4.31,0.525,7.379,4.447,6.854,8.755
-		c-0.526,4.313-4.447,7.377-8.757,6.853c-4.308-0.525-7.378-4.442-6.852-8.756C48.418,78.923,52.34,75.854,56.648,76.379z"/>
+		<line id="line77" fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="91.433" y1="49.952" x2="79.781" y2="37.773"/>
 </g>
-<g id="Calque_4">
-	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M16.127,82.189v19.522h17.898c1.657,0,3,1.343,3,3v18.037h61.276c1.657,0,3-1.343,3-3V96.5"/>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M101.301,42.5V6.53c0-1.657-1.343-3-3-3H19.127c-1.657,0-3,1.343-3,3v31.171"/>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M16.127,101.713"/>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M37.025,122.75"/>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M37.025,122.75v-18.037c0-1.656-1.343-3-3-3H16.127L37.025,122.75z"/>
-	</g>
-</g>
-<g id="Calque_5">
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M108.974,42.415L87.832,82.189l-2.193,13.685l12.795-7.239l21.316-39.989c0,0,1.582-5.483-3.188-7.951
-		C111.79,38.227,108.974,42.415,108.974,42.415z"/>
+<g id="Calque_2_1_" transform="matrix(1.1751916,0,0,1.1766218,-13.028046,-8.1067891)">
 	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="106.766" y1="48.112" x2="116.701" y2="54.091"/>
+		<line id="line80" fill="none" stroke="#FF0000" stroke-width="4.252" stroke-miterlimit="10" x1="100.628" y1="16.736" x2="75.728" y2="41.135"/>
+	<path id="path82" fill="none" stroke="#FF0000" stroke-width="4.252" stroke-miterlimit="10" d="M111.157,27.525L100.45,16.82
+		l3.41-3.409c1.124-1.125,2.948-1.125,4.072,0l6.634,6.633c1.125,1.125,1.125,2.948,0,4.073L111.157,27.525z"/>
+	
+		<polyline id="polyline84" fill="none" stroke="#FF0000" stroke-width="4.252" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		75.728,41.135 73.063,54.588 86.256,51.923 111.157,27.525 	"/>
 </g>
 </svg>
