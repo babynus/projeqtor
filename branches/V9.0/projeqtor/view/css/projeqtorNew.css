@@ -1556,12 +1556,11 @@ element.style {
 .ProjeQtOrNewGui #userMenuPopupBottom .disconnectTextClass {
   border:0;
   background:var(--color-darker-secondary);
-  width:200px;
-  left:100px;
-  left: 50px;
-  width: 150px;
+  width:90%;
+  left:10px;
   position: relative;
   padding: 0px 10px;
+  margin:2px;
   text-shadow:none;
   color:#ffffff;
   -webkit-transition: all 0.5s ease;
@@ -1571,7 +1570,7 @@ element.style {
   transition: all 0.5s ease;
   border-radius:5px
 }
-.ProjeQtOrNewGui #userMenuPopupBottom:hover .disconnectTextClass {
+.ProjeQtOrNewGui #userMenuPopupBottom .disconnectTextClass:hover {
 	background:var(--color-white);
 	color:var(--color-dark);
 	border-radius:5px;

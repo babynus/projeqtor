@@ -674,9 +674,11 @@ function addMessage(msg) {
  * @return void
  */
 function changeTheme(newTheme) {
+  console.log("changeTheme("+newTheme+")");
   if (newTheme != "") {
     if (isNewGui) {
-      if (dojo.byId('body')) dojo.byId('body').className = 'nonMobile tundra ProjeQtOrFlatBlue ProjeQtOrNewGui';
+      console.log(" isNewGui !!!!!");
+      if (dojo.byId('body')) dojo.byId('body').className = 'nonMobile tundra ProjeQtOrFlatGrey ProjeQtOrNewGui';
     } else {
       dojo.byId('body').className = 'nonMobile tundra ' + newTheme;
     }
