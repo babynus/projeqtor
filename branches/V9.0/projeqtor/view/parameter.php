@@ -383,11 +383,12 @@ function drawTableFromObjectList($objectList) {
 			  $theming="setColorTheming(this.value,null);";
 			  if($code=='newGuiThemeColorBis')$theming="setColorTheming(null,this.value);";
 			  if($type=='userParameter'){
-			    echo '<input type="color" id="'.$type.'_'.$code.'" name="'.$type.'_'.$code.'" onInput="'.$theming.'" onChange="saveDataToSession(\''.$code.'\',this.value.substr(1),true);setGlobalNewGuiThemeColor(\''.$code.'\', this.value.substr(1));'.$theming.'" value="#'.$obj->parameterValue.'" style="height: 24px;width: 98%;border-radius: 5px 5px 5px 5px;" />';
+			    echo '<input type="color" id="'.$type.'_'.$code.'" name="'.$type.'_'.$code.'" onInput="'.$theming.'" onChange="saveDataToSession(\''.$code.'\',this.value.substr(1),true);setGlobalNewGuiThemeColor(\''.$code.'\', this.value.substr(1));'.$theming.'" value="#'.$obj->parameterValue.'" style="height: 24px;width: 145px;border-radius: 5px 5px 5px 5px;" />';
 			  }else{
-			    echo '<input type="color" id="'.$type.'_'.$code.'" name="'.$type.'_'.$code.'" onInput="'.$theming.'" onChange="saveDataToSession(\''.$code.'\',this.value.substr(1));setGlobalNewGuiThemeColor(\''.$code.'\', this.value.substr(1));" value="#'.$obj->parameterValue.'" style="height: 24px;width: 98%;border-radius: 5px 5px 5px 5px;" />';
+			    echo '<input type="color" id="'.$type.'_'.$code.'" name="'.$type.'_'.$code.'" onInput="'.$theming.'" onChange="saveDataToSession(\''.$code.'\',this.value.substr(1));setGlobalNewGuiThemeColor(\''.$code.'\', this.value.substr(1));" value="#'.$obj->parameterValue.'" style="height: 24px;width: 145px;border-radius: 5px 5px 5px 5px;" />';
 			  }
 			  echo '<input type="hidden" id="'.$code.'" name="'.$code.'" value="'.$obj->parameterValue.'"/>';
+			  if ($code=='newGuiThemeColor') drawColorDefaultThemes($type.'_newGuiThemeColor',$type.'_newGuiThemeColorBis',52,155);
 			}
 			//if ($format!='photo') {
 			echo '</td></tr>'; // close the line level

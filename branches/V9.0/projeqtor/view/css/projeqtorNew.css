@@ -1543,3 +1543,47 @@ element.style {
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
   background-color: transparent !important;
 }
+
+.ProjeQtOrNewGui #drawMenuUser .dijitTooltipContainer, .ProjeQtOrNewGui #drawMenuUser .dijitTooltipFocusNode {
+	padding:0;
+}
+.ProjeQtOrNewGui #userMenuPopup {
+	margin: 0.45em;
+}
+.ProjeQtOrNewGui #userMenuPopupBottom {
+	background:var(--color-darker-secondary);
+}
+.ProjeQtOrNewGui #userMenuPopupBottom .disconnectTextClass {
+  border:0;
+  background:var(--color-darker-secondary);
+  width:200px;
+  left:100px;
+  left: 50px;
+  width: 150px;
+  position: relative;
+  padding: 0px 10px;
+  text-shadow:none;
+  color:#ffffff;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.ProjeQtOrNewGui #userMenuPopupBottom .disconnectTextClass:hover {
+	background:var(--color-lighter-secondary);
+	color:var(--color-secondary);*/
+}
+.ProjeQtOrNewGui #userMenuPopupBottom .disconnectClass {
+  /*-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
+  filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
+  background-color: transparent !important;*/
+  -webkit-filter : saturate(0) invert(1);
+  filter : saturate(0) invert(1);
+  background-color: transparent !important;
+}
+.ProjeQtOrNewGui #userMenuPopupBottom:hover .disconnectClass {
+  -webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
+  filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
+  background-color: transparent !important;
+}
