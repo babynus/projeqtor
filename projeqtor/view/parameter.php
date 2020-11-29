@@ -380,12 +380,14 @@ function drawTableFromObjectList($objectList) {
 			    echo '</div>';
 			  }
 			}else if($format=='color'){
-			  $theming="setColorTheming(this.value,null);";
-			  if($code=='newGuiThemeColorBis')$theming="setColorTheming(null,this.value);";
+			  if($code=='newGuiThemeColor') $theming="setColorTheming(this.value,dojo.byId('".$type."_newGuiThemeColorBis').value);";
+			  if($code=='newGuiThemeColorBis') $theming="setColorTheming(dojo.byId('".$type."_newGuiThemeColor').value,this.value);";
 			  if($type=='userParameter'){
+			    if($code=='newGuiThemeColor') $theming="dojo.byId('menuUserColorPicker').value=this.value;".$theming;
+			    if($code=='newGuiThemeColorBis') $theming="dojo.byId('menuUserColorPickerBis').value=this.value;".$theming;
 			    echo '<input type="color" id="'.$type.'_'.$code.'" name="'.$type.'_'.$code.'" onInput="'.$theming.'" onChange="saveDataToSession(\''.$code.'\',this.value.substr(1),true);setGlobalNewGuiThemeColor(\''.$code.'\', this.value.substr(1));'.$theming.'" value="#'.$obj->parameterValue.'" style="height: 24px;width: 145px;border-radius: 5px 5px 5px 5px;" />';
 			  }else{
-			    echo '<input type="color" id="'.$type.'_'.$code.'" name="'.$type.'_'.$code.'" onInput="'.$theming.'" onChange="saveDataToSession(\''.$code.'\',this.value.substr(1));setGlobalNewGuiThemeColor(\''.$code.'\', this.value.substr(1));" value="#'.$obj->parameterValue.'" style="height: 24px;width: 145px;border-radius: 5px 5px 5px 5px;" />';
+			    echo '<input type="color" id="'.$type.'_'.$code.'" name="'.$type.'_'.$code.'" onInput="'.$theming.'" onChange="saveDataToSession(\''.$code.'\',this.value.substr(1));setGlobalNewGuiThemeColor(\''.$code.'\', this.value.substr(1));'.$theming.'" value="#'.$obj->parameterValue.'" style="height: 24px;width: 145px;border-radius: 5px 5px 5px 5px;" />';
 			  }
 			  echo '<input type="hidden" id="'.$code.'" name="'.$code.'" value="'.$obj->parameterValue.'"/>';
 			  if ($code=='newGuiThemeColor') drawColorDefaultThemes($type.'_newGuiThemeColor',$type.'_newGuiThemeColorBis',52,155);
