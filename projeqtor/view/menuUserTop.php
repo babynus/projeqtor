@@ -60,9 +60,9 @@ $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuUse
 $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
 ?>
 <input type="hidden" id="userMenuIdUser" value="<?php echo getCurrentUserId();?>"/>
-<table style="width:99%;" id="userMenuPopup">
+<table style="width:96%;" id="userMenuPopup">
 <?php if (!isNewGui()) {?>
-  <tr style="height:40px">
+  <tr style="height:40px" class="menuUserTopDetail" >
     <td <?php if ($showUserParameters) echo'rowspan="2"';?> style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"><?php if ($imgUrl) { echo '<img style="border-radius:40px;height:80px" src="'.$imgUrl.'" />'; } else { ?>
             <div style="overflow-x:hidden;position: relative; width:80px;height:80px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
               onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
@@ -203,13 +203,14 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
   <tr style="height:40px">
     <td width="120px" style="text-align:right"><?php echo i18n("colColor");?> 1&nbsp;:&nbsp;</td>
     <td>
-       <input type="color" id="menuUserColorPicker" onInput="setColorTheming(this.value,null);" onChange="saveDataToSession('newGuiThemeColor',this.value.substr(1),true);setColorTheming(this.value,null);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>" style="height: 24px;width: 98%;border-radius: 5px 5px 5px 5px;" />
+       <input type="color" id="menuUserColorPicker" onInput="setColorTheming(this.value,dojo.byId('menuUserColorPickerBis').value);" onChange="saveDataToSession('newGuiThemeColor',this.value.substr(1),true);setColorTheming(this.value,dojo.byId('menuUserColorPickerBis').value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>" style="height: 24px;width: 160px;border-radius: 5px 5px 5px 5px;" />
+       <?php drawColorDefaultThemes('menuUserColorPicker','menuUserColorPickerBis',62,170);?>
     </td>
   </tr>  
   <tr style="height:40px">
     <td width="120px" style="text-align:right"><?php echo i18n("colColor");?> 2&nbsp;:&nbsp;</td>
     <td>
-       <input type="color" id="menuUserColorPickerBis" onInput="setColorTheming(null,this.value);" onChange="saveDataToSession('newGuiThemeColorBis',this.value.substr(1),true);setColorTheming(null,this.value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>" style="height: 24px;width: 98%;border-radius: 5px 5px 5px 5px;" />
+       <input type="color" id="menuUserColorPickerBis" onInput="setColorTheming(dojo.byId('menuUserColorPicker').value,this.value);" onChange="saveDataToSession('newGuiThemeColorBis',this.value.substr(1),true);setColorTheming(dojo.byId('menuUserColorPicker').value,this.value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>" style="height: 24px;width: 160px;border-radius: 5px 5px 5px 5px;" />
     </td>
   </tr> 
  <?php }?>
@@ -326,10 +327,12 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
 <?php }
   }?>
 <?php if(isNewGui()){?>
+</table>
+<table style="width:100%;" id="userMenuPopupBottom">
 <tr style="height:40px;">
         <td colspan="2" style="padding-left: 46px;">
     <?php if (Parameter::getGlobalParameter('simuIndex')){?>
-     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;padding-left: 10px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectDataCloning('welcome','simu');">
+     <div class="pseudoButton disconnectTextClass" style="" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectDataCloning('welcome','simu');">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
@@ -338,7 +341,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
         </table>
       </div>
     <?php }else if (SSO::isEnabled()) {?>
-     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;padding-left: 10px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectSSO('welcome','<?php echo SSO::getCommonName(true);?>');">
+     <div class="pseudoButton disconnectTextClass" style="" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectSSO('welcome','<?php echo SSO::getCommonName(true);?>');">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
@@ -346,7 +349,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
           </tr>
         </table>
       </div>
-     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;padding-left: 10px;" title="<?php echo i18n('ssoDisconnectLoginMessage',array(SSO::getCommonName()));?>" onclick="disconnectSSO('login','<?php echo SSO::getCommonName(true);?>');">
+     <div class="pseudoButton disconnectTextClass" style="" title="<?php echo i18n('ssoDisconnectLoginMessage',array(SSO::getCommonName()));?>" onclick="disconnectSSO('login','<?php echo SSO::getCommonName(true);?>');">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
@@ -355,7 +358,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
         </table>
       </div>
       <?php if (isset($_SESSION['samlNameId'])) {?>
-      <div class="pseudoButton disconnectTextClass" style="width:120px;height:30px;padding-left: 10px;" title="<?php echo i18n('ssoDisconnectSSOMessage',array(SSO::getCommonName()));?>" onclick="disconnectSSO('SSO','<?php echo SSO::getCommonName(true);?>');">
+      <div class="pseudoButton disconnectTextClass" style="" title="<?php echo i18n('ssoDisconnectSSOMessage',array(SSO::getCommonName()));?>" onclick="disconnectSSO('SSO','<?php echo SSO::getCommonName(true);?>');">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
@@ -365,7 +368,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       </div>
       <?php }?>
     <?php } else { ?>
-          <div class="pseudoButton disconnectTextClass" style="width:120px;padding-left: 10px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnect(true);">
+          <div class="pseudoButton disconnectTextClass" style="" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnect(true);">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
