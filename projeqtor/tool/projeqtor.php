@@ -2070,6 +2070,7 @@ function getTheme() {
     $theme=$themes[$rnd];
     setSessionValue('theme', $theme); // keep value in session to have same theme during all session...
   }
+  if ($theme=='ProjeQtOrFlatGrey ProjeQtOrNewGui' and !isNewGui()) $theme='ProjeQtOrFlatBlue';
   return $theme;
 }
 

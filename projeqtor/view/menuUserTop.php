@@ -154,10 +154,10 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       <div class="pseudoButton"  title="<?php echo i18n('menuUserParameter');?>" onClick="loadMenuBarItem('UserParameter','UserParameter','bar');dijit.byId('iconMenuUserPhoto').closeDropDown();">
         <table style="width:100%">
           <tr>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconUserParameter22">&nbsp;</div>
+            <td style="width:24px;padding-top:2px;width:30px;">
+              <div class="iconUserParameter22 iconUserParameter iconSize22">&nbsp;</div>
             </td>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('menuUserParameter');?>&nbsp;&nbsp;</td>
+            <td style="vertical-align:middle;"><?php echo i18n('menuUserParameter');?>&nbsp;&nbsp;</td>
           </tr>
         </table>
       </div>
@@ -165,7 +165,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
   </tr>
   <?php }?>
   <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("paramLang");?>&nbsp;:&nbsp;</td>
+    <td width="120px" style="text-align:right"><?php echo i18n("paramLang");?>&nbsp;<?php if (! isNewGui()) echo ":&nbsp;"; ?></td>
     <td>  
       <select dojoType="dijit.form.FilteringSelect" class="input" name="langMenuUserTop" id="langMenuUserTop" 
         <?php echo autoOpenFilteringSelect();?>
@@ -201,21 +201,21 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
   </tr>
 <?php } else {?>
   <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("colColor");?> 1&nbsp;:&nbsp;</td>
+    <td width="120px" style="text-align:right"><?php echo i18n("menuMainColor");?>&nbsp;</td>
     <td>
        <input type="color" id="menuUserColorPicker" onInput="setColorTheming(this.value,dojo.byId('menuUserColorPickerBis').value);" onChange="saveDataToSession('newGuiThemeColor',this.value.substr(1),true);setColorTheming(this.value,dojo.byId('menuUserColorPickerBis').value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>" style="height: 24px;width: 160px;border-radius: 5px 5px 5px 5px;" />
        <?php drawColorDefaultThemes('menuUserColorPicker','menuUserColorPickerBis',62,170);?>
     </td>
   </tr>  
   <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("colColor");?> 2&nbsp;:&nbsp;</td>
+    <td width="120px" style="text-align:right"><?php echo i18n("menuSecondaryColor");?>&nbsp;</td>
     <td>
        <input type="color" id="menuUserColorPickerBis" onInput="setColorTheming(dojo.byId('menuUserColorPicker').value,this.value);" onChange="saveDataToSession('newGuiThemeColorBis',this.value.substr(1),true);setColorTheming(dojo.byId('menuUserColorPicker').value,this.value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>" style="height: 24px;width: 160px;border-radius: 5px 5px 5px 5px;" />
     </td>
   </tr> 
  <?php }?>
   <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("menuUserStartPage");?>&nbsp;:&nbsp;</td>
+    <td width="120px" style="text-align:right"><?php echo i18n("menuUserStartPage");?>&nbsp;<?php if (! isNewGui()) echo ":&nbsp;"; ?></td>
     <td>  
       <select dojoType="dijit.form.FilteringSelect" class="input" name="firstPageMenuUserTop" id="firstPageMenuUserTop" 
         <?php echo autoOpenFilteringSelect();?>
@@ -237,10 +237,10 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       <div class="pseudoButton"  title="<?php echo i18n('changePassword');?>" onClick="requestPasswordChange();">
         <table style="width:100%">
           <tr>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconLoginPassword">&nbsp;</div>
+            <td style="width:24px;padding-top:2px;width:30px;">
+              <div class="iconLoginPassword22 iconLoginPassword iconSize22">&nbsp;</div>
             </td>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('changePassword');?>&nbsp;&nbsp;</td>
+            <td style="vertical-align:middle;"><?php echo ucfirst(i18n('changePassword'));?>&nbsp;&nbsp;</td>
           </tr>
         </table>
       </div>
@@ -252,10 +252,10 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       <div class="pseudoButton"  title="<?php echo i18n('help');?>" onClick="showHelp();">
         <table style="width:100%">
           <tr>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconCatalog22">&nbsp;</div>
+            <td style="width:24px;padding-top:2px;width:30px;">
+              <div class="iconCatalog22 iconCatalog iconSize22">&nbsp;</div>
             </td>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('help');?>&nbsp;&nbsp;</td>
+            <td style="vertical-align:middle;"><?php echo i18n('help');?>&nbsp;&nbsp;</td>
           </tr>
         </table>
       </div>
@@ -267,10 +267,10 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       <div class="pseudoButton"  title="<?php echo i18n('keyboardShortcuts');?>" onClick="showHelp('ShortCut');">
         <table style="width:100%">
           <tr>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconShortCut">&nbsp;</div>
+            <td style="width:24px;padding-top:2px;width:30px;">
+              <div class="iconShortCut22 iconShortCut iconSize22">&nbsp;</div>
             </td>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('keyboardShortcuts');?>&nbsp;&nbsp;</td>
+            <td style="vertical-align:middle;"><?php echo i18n('keyboardShortcuts');?>&nbsp;&nbsp;</td>
           </tr>
         </table>
       </div>
@@ -282,10 +282,10 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       <div class="pseudoButton"  title="<?php echo i18n('aboutMessage');?>" onClick="showAbout(aboutMessage);">
         <table style="width:100%">
           <tr>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconInfo22">&nbsp;</div>
+            <td style="width:24px;padding-top:2px;width:30px;">
+              <div class="iconInfo22 iconInfo iconSize22">&nbsp;</div>
             </td>
-            <td style="vertical-align:middle;">&nbsp;&nbsp;<?php echo i18n('aboutMessage');?>&nbsp;&nbsp;</td>
+            <td style="vertical-align:middle;"><?php echo i18n('aboutMessage');?>&nbsp;&nbsp;</td>
           </tr>
         </table>
       </div>
@@ -300,10 +300,10 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       <div class="pseudoButton"  title="<?php echo i18n('changePassword');?>" onClick="requestPasswordChange();">
         <table style="width:100%">
           <tr>
-            <td style="padding-left: 10px;width: 22px !important;vertical-align: middle;">
+            <td style="padding-left: 10px;width: 30px;vertical-align: middle;">
               <div style="height:22px;width: 22px" class="iconLoginPassword iconSize22 imageColorNewGui">&nbsp;</div>
             </td>
-            <td style="vertical-align:middle;font-size:9pt;color: var(--color-dark);">&nbsp;&nbsp;<?php echo i18n('changePassword');?>&nbsp;&nbsp;</td>
+            <td style="vertical-align:middle;font-size:9pt;color: var(--color-dark);"><?php echo i18n('changePassword');?>&nbsp;&nbsp;</td>
           </tr>
         </table>
       </div>
@@ -315,10 +315,10 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       <div class="pseudoButton"  title="<?php echo i18n('menuUserParameter');?>" onClick="loadMenuBarItem('UserParameter','UserParameter','bar');dijit.byId('iconMenuUserPhoto').closeDropDown();">
         <table style="width:100%">
           <tr>
-            <td style="padding-left: 10px;width: 22px !important;">
+            <td style="padding-left: 10px;width: 30px;">
               <div style="height:22px;width: 22px" class="iconUserParameter iconSize22 imageColorNewGui">&nbsp;</div>
             </td>
-            <td style="vertical-align:middle;font-size:9pt;color: var(--color-dark);">&nbsp;&nbsp;<?php echo i18n('menuUserParameter');?>&nbsp;&nbsp;</td>
+            <td style="vertical-align:middle;font-size:9pt;color: var(--color-dark);"><?php echo i18n('menuUserParameter');?>&nbsp;&nbsp;</td>
           </tr>
         </table>
       </div>
@@ -330,10 +330,11 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
 </table>
 <table style="width:100%;" id="userMenuPopupBottom">
 <tr style="height:40px;">
-        <td colspan="2" style="padding-left: 46px;">
+  <td style=""></td>
+  <td style="width:20%">
     <?php if (Parameter::getGlobalParameter('simuIndex')){?>
      <div class="pseudoButton disconnectTextClass" style="" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectDataCloning('welcome','simu');">
-        <table style="width:122px;">
+        <table style="">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
             <td>&nbsp;&nbsp;<?php echo i18n('disconnect');?></td>
@@ -378,6 +379,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       </div>
      <?php } ?>
     </td>
+    <td style="width:20px;">
   </tr>
 <?php }?>
 </table>
