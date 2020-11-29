@@ -232,7 +232,10 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
     </div>
     <?php }}?>
   </div>
-  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'loginBackgroundNewGui':'loginBackground';?>">
+  <?php if (1 and isNewGui()) echo '<div style="position:absolute;margin-top:-50%;margin-left:-0%;width:250%;height:250%;opacity:10%;z-index:-2;" class="loginBackgroundNewGui"></div>';?>
+  <?php if (isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:60%;z-index:-1;" class="loginBackgroundNewGui"></div>';?>
+  <?php if (0 and isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:5%;position:-20px;" class="loginBackgroundNewGui"></div>';?>
+  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
     <tr height="100%">
 	    <td width="100%" align="center">
 	      <div class="background <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
@@ -269,7 +272,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			               </td>
 			               <td title="<?php echo i18n("login");?>" style="width:270px">
 			                 <?php if(isNewGui())echo '<div class="loginDivContainer container">'; ?>
-			                   <div class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginUserNewGui':'inputLoginIcon iconLoginUser';?> ">&nbsp;</div>
+			                   <div class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginUserNewGui imageColorNewGui iconSize22':'inputLoginIcon iconLoginUser';?> ">&nbsp;</div>
 			                   <input tabindex="1" id="login" type="text"  class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>"
 			                   dojoType="dijit.form.TextBox" />
                                <input type="hidden" id="hashStringLogin" name="login" value=""/>  
@@ -284,11 +287,11 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                </td>  
 			                <td title="<?php echo i18n("password");?>">
 			                <?php if(isNewGui())echo '<div class="loginDivContainer container" style="float:left">'; ?>
-			                   <div  class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginPasswordNewGui':'inputLoginIcon iconLoginPassword';?> ">&nbsp;</div>
+			                   <div  class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginPasswordNewGui imageColorNewGui iconSize22':'inputLoginIcon iconLoginPassword';?> ">&nbsp;</div>
 			                   <input  tabindex="2" id="password" type="password" class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>" dojoType="dijit.form.TextBox" />
                                 <input type="hidden" id="hashStringPassword" name="password" value=""/>
                              <?php if(isNewGui()){
-                               echo '<div class="iconView iconSize22" style="cursor:pointer;float:right;position:relative;top:6px;filter:grayscale(1)" onClick="dojo.setAttr(\'password\',\'type\',((dojo.getAttr(\'password\',\'type\')==\'password\')?\'text\':\'password\'));" ></div>';
+                               echo '<div class="iconView imageColorNewGui iconSize22" style="cursor:pointer;float:right;position:relative;top:6px;" onClick="dojo.setAttr(\'password\',\'type\',((dojo.getAttr(\'password\',\'type\')==\'password\')?\'text\':\'password\'));" ></div>';
                                echo '</div>';
                              }?>
 			                </td>
@@ -318,7 +321,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr style="font-size:50%;height:14px;"><td colspan="3">&nbsp;</td></tr>
 			              <tr>
 			                <td style="background:transparent !important;">&nbsp;</td>
-			                <td style="text-align:center">
+			                <td style="text-align:center" >
 			                  <button tabindex="3" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="largeTextButton" showlabel="true" >
 			                  OK
 			                    <script type="dojo/connect" event="onClick" args="evt">
