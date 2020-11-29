@@ -99,7 +99,7 @@ if(!$secondColor){
 $secondColor='';
 }
 ?>
-<body class="nonMobile ProjeQtOrFlatBlue ProjeQtOrNewGui" style="background-color:<?php echo '#'.$firstColor?>;">
+<body class="nonMobile <?php echo getTheme();?>" style="background-color:<?php echo '#'.$firstColor?>;">
 <?php 
 }else{
 ?>
