@@ -1569,10 +1569,12 @@ element.style {
   -o-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  border-radius:5px
 }
-.ProjeQtOrNewGui #userMenuPopupBottom .disconnectTextClass:hover {
-	background:var(--color-lighter-secondary);
-	color:var(--color-secondary);*/
+.ProjeQtOrNewGui #userMenuPopupBottom:hover .disconnectTextClass {
+	background:var(--color-white);
+	color:var(--color-dark);
+	border-radius:5px;
 }
 .ProjeQtOrNewGui #userMenuPopupBottom .disconnectClass {
   /*-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
@@ -1583,7 +1585,9 @@ element.style {
   background-color: transparent !important;
 }
 .ProjeQtOrNewGui #userMenuPopupBottom:hover .disconnectClass {
-  -webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
-  filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
+  /*-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;
+  filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected)) !important;*/
+  -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness)) !important;
+  filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness)) !important;
   background-color: transparent !important;
 }

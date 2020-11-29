@@ -1,5 +1,6 @@
 <?php
 use PhpOffice\PhpSpreadsheet\Shared\Date;
+use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -2283,18 +2284,32 @@ function drawColorDefaultThemes($fldMain,$fldSecondary,$width=80,$left=0) {
   $border=intval($width/15);
   $array=array(
       "blue"=>array('#545381','#e97b2c'),
-      "red"=>array('#833e3e','#2ba9e9'),
-      "green"=>array('#537665','#fbff00'),
-      "grey"=>array('#656565','#f1acac')
+      "red"=>array('#865f5f','#2ba9e9'),
+      "grey"=>array('#c2c2c2','#f1acac'),
+      "green"=>array('#656565','#8fc874')
   );
+  $globalMain='#'.Parameter::getGlobalParameter('newGuiThemeColor');
+  $globalSecondary='#'.Parameter::getGlobalParameter('newGuiThemeColorBis');
+  $globalColor=null;
+  foreach($array as $color=>$arr) {
+    if ($arr[0]==$globalMain and $arr[1]==$globalSecondary) {
+      $globalColor=$color;
+      break;
+    }
+  }
+  if ($fldMain!='globalParameter_newGuiThemeColor' and ! $globalColor) {
+    unset($array['green']);
+    $array['global']=array($globalMain,$globalSecondary);
+  }
   echo '<div style="position:relative;float:left;left:'.$left.'px">';
   echo '  <div style="position:absolute;width:'.($width+($border*2)+5).'px;height:'.($width+($border*2)+5).'px;">';
   foreach ($array as $color=>$colors) {
     $click=" onClick='dojo.byId(\"$fldMain\").value=\"".$colors[0]."\";dojo.byId(\"$fldMain\").dispatchEvent(new Event(\"change\"));"
                     ."dojo.byId(\"$fldSecondary\").value=\"".$colors[1]."\";dojo.byId(\"$fldSecondary\").dispatchEvent(new Event(\"change\"));"
                     ."'";
-    echo '    <div '.$click.' style="cursor:pointer;width:'.floor($width/2).'px;height:'.floor($width/2).'px;position:relative;float:left;margin-right:'.$border.'px;margin-bottom:'.$border.'px;background:'.$colors[0].';">';
+    echo '    <div '.$click.' style="z-index:500;overflow:hidden;border-radius:'.floor($width/2).'px;cursor:pointer;width:'.floor($width/2).'px;height:'.floor($width/2).'px;position:relative;float:left;margin-right:'.$border.'px;margin-bottom:'.$border.'px;background:'.$colors[0].';">';
     echo '      <div style="width:'.floor($width/4).'px;height:'.floor($width/4).'px;position:absolute;right:0;bottom:0;background:'.$colors[1].';">';
+    //echo '      <div style="width:'.floor($width/4).'px;height:'.floor($width/4).'px;position:absolute;left:'.intval($width/8).'px;top:'.intval($width/8).'px;background:'.$colors[1].';">';
     echo '      </div>';
     echo '    </div>';
   }
