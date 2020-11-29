@@ -446,7 +446,19 @@ html, body, #mainDiv,
 .ProjeQtOrNewGui .dijitDisabled .dijitButtonText {
 	color: var(--color-light) !important;;
 }
-
+.ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .dijitTooltipContainer .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .largeTextButton .dijitReset.dijitInline.dijitButtonNode {
+  /*padding: 0.2em 1em 0.2em 1em;*/
+  border: 1px solid #c0c0c0;
+}
+.ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitStretch.dijitButtonContents,
+.ProjeQtOrNewGui .largeTextButton .dijitReset.dijitStretch.dijitButtonContents{
+  padding: 0.2em 1em 0.2em 1em;
+}
+.ProjeQtOrNewGui .dijitDialogPaneContent .resetMargin .dijitReset.dijitStretch.dijitButtonContents{
+  padding: 0;
+}
 .ProjeQtOrNewGui .mediumTextButton, .ProjeQtOrNewGui .largeTextButton,
 .ProjeQtOrNewGui .smallTextButton,  .ProjeQtOrNewGui .dynamicTextButton,
 .ProjeQtOrNewGui .mediumTextButton:hover .dijitReset.dijitInline.dijitButtonNode,
@@ -901,17 +913,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitInline.dijitButton {
 	/*margin: 10px 20px;*/
 }
-.ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitInline.dijitButtonNode,
-.ProjeQtOrNewGui .dijitTooltipContainer .dijitReset.dijitInline.dijitButtonNode {
-	/*padding: 0.2em 1em 0.2em 1em;*/
-	border: 1px solid #c0c0c0;
-}
-.ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitStretch.dijitButtonContents{
-	padding: 0.2em 1em 0.2em 1em;
-}
-.ProjeQtOrNewGui .dijitDialogPaneContent .resetMargin .dijitReset.dijitStretch.dijitButtonContents{
-  padding: 0;
-}
+
 .ProjeQtOrNewGui .notButton,
 .ProjeQtOrNewGui .notButton .dijitReset.dijitInline.dijitButtonNode{
   background: url() #ffffff;
@@ -1424,14 +1426,13 @@ select option:checked {
 }
 
 .inputLoginIconNewGui{
-	
 	float: left;
-    font-weight: normal;
-    color: rgb(0, 0, 0);
-    padding: 3px 4px 2px;
-    line-height: normal;
-    background-position: 3px 3px;
-    height: 22px;
+  font-weight: normal;
+  color: rgb(0, 0, 0);
+  padding: 3px 4px 2px;
+  line-height: normal;
+  /*background-position: 3px 3px;*/
+  top:3px;position:relative;
 }
 
 .iconLoginUserNewGui{
@@ -1439,9 +1440,6 @@ select option:checked {
     background-repeat: no-repeat;
     background-size: contain;
      background-position:center;
-    width: 22px;
-     height: 22px;
-     filter: grayscale(1);
 }
 
 .iconLoginPasswordNewGui{
@@ -1451,7 +1449,6 @@ select option:checked {
     background-position:center;
     width: 22px;
     height: 22px;
-    filter: grayscale(1);
 }
 
 .loginDivContainer {
