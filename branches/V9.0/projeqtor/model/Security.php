@@ -307,18 +307,6 @@ class Security
             else return false;
           }
         } else {
-//           $accessRightList = $user->getAccessControlRights ();
-//           debugLog("Check access right for $refType menuName=$menuName");
-//           debugLog($accessRightList[$menuName]);
-//           if ($menuName=='menuAffectable') {
-//             if (isset($accessRightList['menuResource']) and isset($accessRightList['menuResource']['read']) and $accessRightList['menuResource']['read']!='NO') {
-//               $accessRightList['menuAffectable']=$accessRightList['menuResource'];
-//             } else if (isset($accessRightList['menuUser']) and isset($accessRightList['menuUser']['read']) and $accessRightList['menuUser']['read']!='NO') {
-//               $accessRightList['menuAffectable']=$accessRightList['menuUser'];
-//             } else if (isset($accessRightList['menuContact']) and isset($accessRightList['menuContact']['read']) and $accessRightList['menuContact']['read']!='NO') {
-//               $accessRightList['menuAffectable']=$accessRightList['menuContact'];
-//             }
-//           }
           $check=Security::checkDisplayMenuForUser(substr($menuName,4),false);
           if ( ! $check ) {
             if ($traceHack) traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
