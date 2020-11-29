@@ -2050,7 +2050,7 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
  */
 function getTheme() {
   global $indexPhp;
-  //if (isNewGui()) return "ProjeQtOrFlatRed";
+  if (isNewGui()) return "ProjeQtOrFlatBlue ProjeQtOrNewGui";
   if (isset($indexPhp) and $indexPhp and getSessionValue('setup', null, true)) return "ProjeQtOr"; // On first configuration, use default
   $defaultTheme=Parameter::getGlobalParameter('defaultTheme');
   if (substr($defaultTheme, 0, 12)=="ProjectOrRia") {
@@ -5189,6 +5189,10 @@ function searchAllAttachmentMailable($objectClass,$idObj){
 
 function getGui() {
   $paramNewGui = Parameter::getUserParameter('newGui');
+  if (!isset($paramNewGui)) {
+    $dbVersion=Parameter::getGlobalParameter('dbVersion');
+    if (!$dbVersion) $paramNewGui=1;
+  }
   if (isset($paramNewGui) and $paramNewGui==true) return "new";
   else return "std";
 }
