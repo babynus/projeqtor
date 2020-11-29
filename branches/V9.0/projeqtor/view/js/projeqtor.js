@@ -676,14 +676,7 @@ function addMessage(msg) {
 function changeTheme(newTheme) {
   if (newTheme != "") {
     if (isNewGui) {
-      if (newTheme.substr(0,13)=='ProjeQtOrFlat') {
-        if (dojo.byId('body')) dojo.byId('body').className = 'nonMobile tundra ProjeQtOrFlatRed ProjeQtOrNewGui';
-        var color=newTheme.toLowerCase().substr(13);
-        setColorTheming(color);
-      } else {
-        if (dojo.byId('body')) dojo.byId('body').className = 'nonMobile tundra '+newTheme+' ProjeQtOrNewGui';
-        //setColorTheming('grey');
-      }
+      if (dojo.byId('body')) dojo.byId('body').className = 'nonMobile tundra ProjeQtOrFlatBlue ProjeQtOrNewGui';
     } else {
       dojo.byId('body').className = 'nonMobile tundra ' + newTheme;
     }
