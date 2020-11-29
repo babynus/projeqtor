@@ -2278,3 +2278,26 @@ function htmlSetClickableImages($text,$maxWidth) {
       $text);
   return $text;
 }
+
+function drawColorDefaultThemes($fldMain,$fldSecondary,$width=80,$left=0) {
+  $border=intval($width/15);
+  $array=array(
+      "blue"=>array('#545381','#e97b2c'),
+      "red"=>array('#833e3e','#2ba9e9'),
+      "green"=>array('#537665','#fbff00'),
+      "grey"=>array('#656565','#f1acac')
+  );
+  echo '<div style="position:relative;float:left;left:'.$left.'px">';
+  echo '  <div style="position:absolute;width:'.($width+($border*2)+5).'px;height:'.($width+($border*2)+5).'px;">';
+  foreach ($array as $color=>$colors) {
+    $click=" onClick='dojo.byId(\"$fldMain\").value=\"".$colors[0]."\";dojo.byId(\"$fldMain\").dispatchEvent(new Event(\"change\"));"
+                    ."dojo.byId(\"$fldSecondary\").value=\"".$colors[1]."\";dojo.byId(\"$fldSecondary\").dispatchEvent(new Event(\"change\"));"
+                    ."'";
+    echo '    <div '.$click.' style="cursor:pointer;width:'.floor($width/2).'px;height:'.floor($width/2).'px;position:relative;float:left;margin-right:'.$border.'px;margin-bottom:'.$border.'px;background:'.$colors[0].';">';
+    echo '      <div style="width:'.floor($width/4).'px;height:'.floor($width/4).'px;position:absolute;right:0;bottom:0;background:'.$colors[1].';">';
+    echo '      </div>';
+    echo '    </div>';
+  }
+  echo '  </div>';
+  echo '</div>';
+}
