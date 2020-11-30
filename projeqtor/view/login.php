@@ -86,6 +86,7 @@ $mobile=false;
               parseOnLoad: true, 
               isDebug: <?php echo getBooleanValueAsString(Parameter::getGlobalParameter('paramDebugMode'));?>'></script>
   <script type="text/javascript" src="../external/dojo/projeqtorDojo.js?version=<?php echo $version.'.'.$build;?>"></script>
+
   <?php Plugin::includeAllFiles();?>
   <script type="text/javascript"> 
     var isNewGui=<?php echo (isNewGui())?'true':'false';?>;
@@ -104,10 +105,10 @@ $mobile=false;
     dojo.require("dijit.form.Form");
     dojo.require("dijit.form.FilteringSelect");
     if (isNewGui){
-      dojo.require("dojox.mobile.parser");
-      dojo.require("dojox.mobile.Switch");
-      dojo.require("dojox.mobile.SwapView");
-      dojo.require("dojox.mobile.PageIndicator");
+    dojo.require("dojox.mobile.parser");
+    dojo.require("dojox.mobile.Switch");
+    dojo.require("dojox.mobile.SwapView");
+    dojo.require("dojox.mobile.PageIndicator");
     }
     require(["dojo/sniff"], function(sniff) {
       var mobileExists=<?php echo (file_exists("../mobile"))?'true':'false';?>;
@@ -188,7 +189,7 @@ if(!$firstColor){
 $firstColor= getTheme();
 }
 ?>
-<body id="body" id="body" class="nonMobile tundra <?php echo getTheme();?>" onLoad="hideWait();" style="overflow: auto;" onBeforeUnload="">
+<body id="body" class="nonMobile tundra <?php echo getTheme();?>" onLoad="hideWait();" style="overflow: auto;" onBeforeUnload="">
 <?php 
 }else{
 ?>
@@ -227,7 +228,10 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
     </div>
     <?php }}?>
   </div>
-  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'loginBackgroundNewGui':'loginBackground';?>" style="<?php if (isNewGui()) echo 'background-color:#'.$firstColor.' !important;';?>">
+  <?php if (1 and isNewGui()) echo '<div style="position:absolute;margin-top:-50%;margin-left:-0%;width:250%;height:250%;opacity:10%;z-index:-2;" class="loginBackgroundNewGui"></div>';?>
+  <?php if (isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:60%;z-index:-1;" class="loginBackgroundNewGui"></div>';?>
+  <?php if (0 and isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:5%;position:-20px;" class="loginBackgroundNewGui"></div>';?>
+  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
     <tr height="100%">
 	    <td width="100%" align="center">
 	      <div class="background <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
@@ -324,7 +328,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr style="font-size:50%;height:14px;"><td colspan="3">&nbsp;</td></tr>
 			              <tr>
 			                <td style="background:transparent !important;">&nbsp;</td>
-			                <td style="text-align:center">
+			                <td style="text-align:center" >
 			                  <button tabindex="3" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="largeTextButton" showlabel="true" >
 			                  OK
 			                    <script type="dojo/connect" event="onClick" args="evt">
