@@ -876,7 +876,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       <input id="isMenuLeftOpen" value="true" hidden >
       <div id="right-pane" class="right-pane">
     <?php } if (!isNewGui()) {?>
-     <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
+     <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px;position:absolute; top:30px;">
       <table width="100%"><tr>
       
        <td width="220px" id="menuBarLeft" >
@@ -1024,11 +1024,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       </div>
       <?php }
 
-      $hideMenuTopParam = Parameter::getGlobalParameter ( 'MenuBarTop' );
-      if (sessionValueExists('hideMenuTop') and getSessionValue('hideMenuTop')!='YES'){
+      $hideMenuTopParam = (Parameter::getGlobalParameter ( 'MenuBarTop' )=='NO')?'YES':'NO';
+      if (sessionValueExists('hideMenuTop') and getSessionValue('hideMenuTop')=='YES'){
         $hideMenuTopParam = 'YES';
       }
-      if (sessionValueExists('hideMenuTop') and getSessionValue('hideMenuTop')=='YES' or $hideMenuTopParam == 'NO') {?>
+      if ( $hideMenuTopParam=='YES' and !isNewGui() ) {?>
       <script>
         dojo.byId('statusBarDiv').style.height="0px";
         dojo.byId('statusBarDiv').style.padding="0px";
