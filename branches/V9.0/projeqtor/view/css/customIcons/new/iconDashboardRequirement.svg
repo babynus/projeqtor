@@ -1,48 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
-	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Layer_1" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" sodipodi:docname="iconTicketDashboard.svg">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<g id="Layer_1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" sodipodi:docname="iconTicketDashboard.svg">
 	
-		<sodipodi:namedview  id="namedview13" bordercolor="#666666" inkscape:cy="128" objecttolerance="10" inkscape:zoom="2.8710938" gridtolerance="10" showgrid="false" borderopacity="1" pagecolor="#ffffff" inkscape:cx="128" guidetolerance="10" inkscape:current-layer="Layer_1" inkscape:window-maximized="1" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:pageshadow="2" inkscape:pageopacity="0" inkscape:window-height="1017" inkscape:window-width="1920">
+		<sodipodi:namedview  id="namedview13" inkscape:zoom="2.8710938" bordercolor="#666666" guidetolerance="10" objecttolerance="10" borderopacity="1" showgrid="false" inkscape:cx="128" pagecolor="#ffffff" inkscape:cy="128" gridtolerance="10" inkscape:window-width="1920" inkscape:window-height="1017" inkscape:pageopacity="0" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:pageshadow="2" inkscape:window-x="-8" inkscape:current-layer="Layer_1">
 		</sodipodi:namedview>
 	<g>
 		<path fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M64.718,94.374c-14.512,0-26.319-11.807-26.319-26.318c0-14.513,11.807-26.319,26.319-26.319
-			c14.513,0,26.319,11.806,26.319,26.319C91.037,82.567,79.23,94.374,64.718,94.374z"/>
+			M60.288,110.235c-15.853,0-28.75-12.898-28.75-28.749c0-15.854,12.898-28.751,28.75-28.751c15.854,0,28.751,12.897,28.751,28.751
+			C89.039,97.337,76.142,110.235,60.288,110.235z"/>
 		<path fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M64.718,87.321c-10.623,0-19.267-8.643-19.267-19.266c0-10.624,8.644-19.267,19.267-19.267c10.623,0,19.266,8.643,19.266,19.267
-			C83.983,78.679,75.341,87.321,64.718,87.321z"/>
+			M60.288,102.53c-11.604,0-21.047-9.441-21.047-21.046s9.443-21.047,21.047-21.047c11.604,0,21.047,9.442,21.047,21.047
+			C81.333,93.091,71.893,102.53,60.288,102.53z"/>
 		<g>
-			<path fill="#FF0000" d="M64.718,58.842c5.08,0,9.213,4.133,9.213,9.213c0,5.079-4.133,9.212-9.213,9.212
-				c-5.08,0-9.212-4.133-9.212-9.212C55.505,62.976,59.638,58.842,64.718,58.842 M64.718,55.842
-				c-6.734,0-12.212,5.478-12.212,12.213c0,6.732,5.478,12.212,12.212,12.212s12.213-5.479,12.213-12.212
-				C76.931,61.32,71.452,55.842,64.718,55.842L64.718,55.842z"/>
+			<path fill="#FF0000" d="M60.288,71.42c5.55,0,10.065,4.516,10.065,10.064c0,5.548-4.516,10.063-10.065,10.063
+				c-5.549,0-10.063-4.516-10.063-10.063C50.224,75.937,54.739,71.42,60.288,71.42 M60.288,68.143
+				c-7.356,0-13.34,5.985-13.34,13.342c0,7.354,5.984,13.341,13.34,13.341c7.356,0,13.343-5.985,13.343-13.341
+				C73.631,74.128,67.645,68.143,60.288,68.143L60.288,68.143z"/>
 		</g>
-		<circle fill="#FF0000" cx="64.718" cy="68.056" r="5.16"/>
+		<circle fill="#FF0000" cx="60.288" cy="81.486" r="5.636"/>
 		<g>
 			
-				<line fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="64.718" y1="68.056" x2="96.357" y2="36.415"/>
+				<line fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="60.288" y1="81.486" x2="94.852" y2="46.921"/>
 			
 				<polygon fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-				91.594,48.298 84.539,48.234 93.782,38.99 100.837,39.055 			"/>
+				89.647,59.902 81.94,59.832 92.038,49.734 99.744,49.805 			"/>
 			
 				<polygon fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-				84.475,41.18 84.539,48.234 93.782,38.99 93.718,31.936 			"/>
+				81.87,52.126 81.94,59.832 92.038,49.734 91.968,42.028 			"/>
 		</g>
 	</g>
 </g>
-<g id="Calque_2">
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M57.209,116.064h61.61c2.016,0,3.649-1.633,3.649-3.648V23.369c0-2.015-1.634-3.648-3.649-3.648H14.075
-		c-2.015,0-3.649,1.634-3.649,3.648v37.568"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M19.764,60.938V31.69c0-2.015,1.634-3.649,3.649-3.649h87.683c2.016,0,3.649,1.634,3.649,3.649v71.093
-		c0,2.016-1.634,3.649-3.649,3.649H61.392"/>
-	<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="21.949" cy="79.381" r="8.095"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M7.696,102.829c0,0-1.167-6.862,6.158-6.862c7.324,0,18.052-0.441,18.052-0.441s6.104,0.563,6.104,7.304s0,11.376,0,11.376
-		l14.79-11.376"/>
-</g>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M122.479,114.452c0,5.269-4.469,9.538-9.979,9.538
+	H14.69c-5.512,0-9.98-4.27-9.98-9.538V13.36c0-5.268,4.468-9.537,9.98-9.537h97.808c5.514,0,9.98,4.271,9.98,9.537V114.452
+	L122.479,114.452z"/>
+<circle fill="#FF0000" cx="22.75" cy="20.25" r="7.25"/>
+<circle fill="#FF0000" cx="43.75" cy="20.25" r="7.25"/>
+<circle fill="#FF0000" cx="63" cy="20.25" r="7.25"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="4.71" y1="33.5" x2="122.479" y2="33.5"/>
 </svg>
