@@ -31,6 +31,7 @@
    header ('Content-Type: text/html; charset=UTF-8');
    scriptLog('   ->/view/passwordChange.php'); 
    $mobile=false;
+   debugLog(isNewGui());
 ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
   "http://www.w3.org/TR/html4/strict.dtd">
@@ -157,13 +158,7 @@ $firstColor= getTheme();
             <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar();',20);" class="input rounded"  style="color:#000000;margin-left:15px;<?php echo (isNewGui())?'border:unset !important;width:450px;':'padding:10px;';?>">
               <?php if (isNewGui()) echo '<div class="loginDivContainer container" style="margin-bottom:15px;">';?>
               <label class="label" style="<?php echo (isNewGui())?"position: relative;text-align:center;width:180px;":"width:150px;";?>;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
-              <?php if (isNewGui()){?>
-                <input id="newPass"  type="password" pwType="new" class="inputLoginNewGui"  style="color:#000000;"><br/>
-              <?php }else{?>
-                <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
-              <?php }?>
-              
-             
+              <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
               <?php if (isNewGui()){
                 echo '</div>';
               }else{?>
@@ -172,12 +167,7 @@ $firstColor= getTheme();
               }
                if(isNewGui())echo '<div class="loginDivContainer container" ><div style="float:left">'; ?>
               <label class="label" style="<?php echo (isNewGui())?"position: relative;text-align:center;width:180px;":"width:150px;";?>"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
-              <?php if (isNewGui()){?>
-               <input  id="validatedPass" type="password" pwType="verify" class="inputLoginNewGui"  /><br/>
-              <?php }else{?>
-                <input type="password" pwType="verify" class="input rounded"  style="color:#000000;">
-              <?php }?>
-              
+              <input type="password" pwType="verify" class="input rounded"  style="color:#000000;">
               <?php if(isNewGui()){
                  echo  '</div>';
                  echo '<div class="iconView iconSize22" style="cursor:pointer;float:right;position:relative;top:8px;filter:grayscale(1)" 
