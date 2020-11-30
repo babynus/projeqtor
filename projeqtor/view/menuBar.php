@@ -235,14 +235,14 @@
       <span class="titleProject" style="position: relative; left:20px; top:-6px; text-align:right;">
         &nbsp;<?php echo (i18n("projectSelector"));?>&nbsp;:&nbsp;
       </span>
-      <span style="display:inline-block;width:400px; position:relative;left : 10px; top:-<?php echo (isNewGui())?9:6;?>px" title="<?php echo i18n("projectSelectorHelp");?>">
+      <span style="display:inline-block;width:<?php echo (isNewGui())?400:250;?>px; position:relative;left : 10px; top:-<?php echo (isNewGui())?9:6;?>px" title="<?php echo i18n("projectSelectorHelp");?>">
         <span style="postion:absolute;height:16px;" dojoType="dijit.layout.ContentPane" region="center"   id="projectSelectorDiv" 
           <?php if(isNewGui())echo 'onmouseover="showActionProjectSelector();" onmouseout="hideActionProjectSelector();" onfocus="hideActionProjectSelector();"';?>>
           &nbsp;<?php include "menuProjectSelector.php"?>
         </span>
       </span>
       <?php if (isNewGui()){ ?>
-      <span style="width:1px;position:relative;top:-6px;">
+      <span style="width:1px;position:relative;top:-7px;">
         <div id="toolbar_projectSelector" class="fade-in dijitTextBox toolbarForSelect" style=""
         onmouseover="showActionProjectSelector();"
         onmouseout="hideActionProjectSelector();">
