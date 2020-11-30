@@ -1020,9 +1020,12 @@ if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
       $countCustomMenuList = $menuCustom->countSqlElementsFromCriteria(array('idUser'=>$resource->id));
       if($countCustomMenuList > 0){
         $customMenuList = $menuCustom->getSqlElementsFromCriteria(array('idUser'=>$resource->id));
+        $sortOrder = 1;
         foreach ($customMenuList as $menu){
           $menu->idRow = 1;
+          $menu->sortOrder = $sortOrder;
           $menu->save();
+          $sortOrder++;
         }
       }else{
         $sortOrder = 1;
