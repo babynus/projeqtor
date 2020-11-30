@@ -202,7 +202,7 @@ echo '<input type="hidden" id="objectClass" value="' . $_REQUEST['objectClass'] 
 echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['objectId']) . '" />';
 }
 ?>
-  <div class="listTitle" style="position:absolute;top:10px;right:10px"><?php ;
+  <div class="listTitle" style="position:absolute;top:10px;right:10px;<?php if(isNewGui()) echo'padding: 3px;border-radius: 5px;';?>"><?php ;
   $dbVersion=Sql::getDbVersion();
   if ($version==$dbVersion) {
   	echo $version;
@@ -213,20 +213,23 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
   <div id="waitLogin" style="display:none" >
   </div>
   <div class="<?php echo (isNewGui() and !empty($msgList))?'loginMessageContainerNew':'loginMessageContainer';?>">
-  	<?php 
-  	$cpt=0;
-  	foreach ($msgList as $msg) {
-     #Florent ticket 4030
-     $startDate=$msg->startDate;
-     $endDate=$msg->endDate;
-     $today=date('Y-m-d H:i:s');
-     if( $startDate <= $today && $endDate >= $today || $startDate=='' && $endDate=='' || $startDate<= $today && $endDate=='' ){ 
-      $cpt++;?>  
-    <div class="loginMessage" id="loginMessage_<?php echo $cpt;?>">
-    <div class="loginMessageTitle" style="color:<?php echo $msgTypeList[$msg->idMessageType];?>;"><?php echo htmlEncode($msg->name);?></div>
-    <br/><?php echo $msg->description;?>
-    </div>
-    <?php }}?>
+    <?php if(isNewGui())echo '<div style="margin-top: 5%;margin-bottom: 5%;width: 90%;">' ;?>
+    	<?php 
+    	$cpt=0;
+    	foreach ($msgList as $msg) {
+       #Florent ticket 4030
+       $startDate=$msg->startDate;
+       $endDate=$msg->endDate;
+       $today=date('Y-m-d H:i:s');
+       if( $startDate <= $today && $endDate >= $today || $startDate=='' && $endDate=='' || $startDate<= $today && $endDate=='' ){ 
+        $cpt++;?>  
+      <div class="loginMessage" id="loginMessage_<?php echo $cpt;?>">
+      <div class="loginMessageTitle" style="color:<?php echo (isNewGui())?'white':$msgTypeList[$msg->idMessageType];?>;"><?php echo htmlEncode($msg->name);?></div>
+      <br/>
+      <?php echo $msg->description;?>
+      </div>
+      <?php }}?>
+    <?php if(isNewGui())echo '</div>';?>
   </div>
   <?php if (1 and isNewGui()) echo '<div style="position:absolute;margin-top:-50%;margin-left:-0%;width:250%;height:250%;opacity:10%;z-index:-2;" class="loginBackgroundNewGui"></div>';?>
   <?php if (isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:60%;z-index:-1;" class="loginBackgroundNewGui"></div>';?>
@@ -277,7 +280,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			               <td title="<?php echo i18n("login");?>" style="background:transparent !important;width: 100px;">
 			                  
 			               </td>
-			               <td title="<?php echo i18n("login");?>" style="width:270px">
+			               <td title="<?php echo i18n("login");?>" style="width:450px">
 			                 <?php if(isNewGui())echo '<div class="loginDivContainer container">'; ?>
 			                   <div class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginUserNewGui imageColorNewGui iconSize22':'inputLoginIcon iconLoginUser';?> ">&nbsp;</div>
 			                   <input tabindex="1" id="login" type="text"  class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>"
@@ -303,23 +306,30 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
                              }?>
 			                </td>
 			                <td>
-                             <?php if(isNewGui()){
-                             }
-                             ?>
                              </td>
 			              </tr>
 			              <?php if (Parameter::getGlobalParameter('rememberMe')!='NO') {?>
 			              <tr style="font-size:50%"><td colspan="2">&nbsp;</td></tr>
+			              <?php 
+			              $showPassword=true;
+			              $lockPassword=Parameter::getGlobalParameter('lockPassword');
+			              if (getBooleanValue($lockPassword)) { $showPassword=false; }
+			              $hidePasswordOnLogin=Parameter::getGlobalParameter('lockPasswordOnLogin');
+			              if (getBooleanValue($hidePasswordOnLogin)) { $showPassword=false; }
+			              ?>
 			              <tr style="height:30px">
 			                <td></td>
 			                <?php if(!isNewGui()){ ?>
 			                   <td><div style="width:200px;text-align:center;"><div class="greyCheck" dojoType="dijit.form.CheckBox" type="checkbox" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
 			                <?php }else{?>
-			                   <td>
-			                     <div style="width:200px;text-align:center;" class="switchLogin">
+			                   <td style="<?php if(isNewGui()) echo "font-size:12px;";?>">
+			                     <div style="width:auto;text-align:center;float:left;" class="switchLogin">
 			                       <div class="colorSwitch" data-dojo-type="dojox/mobile/Switch" name="rememberMe"  value="off" leftLabel="" rightLabel="" style="top:4px;z-index:99;margin-right:5px;">
 			                       </div> <?php echo i18n('rememberMe');?>
                                  </div>
+                                  <?php if($showPassword and isNewGui()){?>
+                                  <div  id="passwordButton" style="float:right;" class="largeTextButton passwordButtonNewGui" onClick="connect(true);return false;" > <?php echo i18n('buttonChangePassword') ?></div> 
+                                  <?php } ?>
                                </td>
 			                <?php }?>
 			                <td></td>
@@ -339,26 +349,17 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                <td></td>
 			              </tr>
 	<?php 
-	$showPassword=true;
-	$lockPassword=Parameter::getGlobalParameter('lockPassword');
-	if (getBooleanValue($lockPassword)) { $showPassword=false; }
-	$hidePasswordOnLogin=Parameter::getGlobalParameter('lockPasswordOnLogin');
-	if (getBooleanValue($hidePasswordOnLogin)) { $showPassword=false; }
-	if ($showPassword) { 
+	if ($showPassword and !isNewGui()) { 
 	?>               <tr style="height:5px"><td colspan="3" ></td></tr>
 			              <tr>
 			                <td style="background:transparent !important;">&nbsp;</td>
 			                <td style="text-align:center">  
-			                <?php if (!isNewGui()){?>
 			                  <button tabindex="4" id="passwordButton" class="largeTextButton" type="button" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonChangePassword') ?>
 			                    <script type="dojo/connect" event="onClick" args="evt">
                                   connect(true);
                                   return false;
                                 </script>
 			                  </button> 
-			                  <?php }else{?>
-			                   <div  id="passwordButton" class="largeTextButton passwordButtonNewGui" onClick="connect(true);return false;" > <?php echo i18n('buttonChangePassword') ?></div> 
-			                  <?php }?>  
 			                </td>
 			                <td ></td>
 			              </tr>

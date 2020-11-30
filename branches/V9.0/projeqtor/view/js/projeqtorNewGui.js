@@ -446,6 +446,24 @@ function directionExternalPage (page){
 //=============================================================================
 
 
+//=============================================================================
+//load plugin page for not intaled plugins 
+//=============================================================================
+function changePaswordType(){
+
+  var newPw=dojo.byId('dojox_form__NewPWBox_0'),
+      veryPw=dojo.byId('dojox_form__VerifyPWBox_0');
+    if(newPw.getAttribute('type')=='password' && veryPw.getAttribute('type')=='password'){
+      newPw.setAttribute('type','text');
+      veryPw.setAttribute('type','text');
+    }else{
+      newPw.setAttribute('type','password');
+      veryPw.setAttribute('type','password');
+    }
+   
+  
+}
+//=============================================================================
 
 function helpDisplayIconIsRead (val){
   if(val=='yes'){
