@@ -1288,6 +1288,7 @@ class Parameter extends SqlElement {
       unset($parameterList['newGuiThemeColorBis']);
     }else{
       unset($parameterList['defaultTheme']);
+      unset($parameterList['menuBarTop']);
     }
     return $parameterList;
   }

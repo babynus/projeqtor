@@ -4166,3 +4166,14 @@ div.ticketKanbanCustom .kanbanVersion{
   font-size:8pt;
   font-family: Verdana, Arial, Tahoma, sans-serif;
 }
+
+.labelMessageEmptyArea {
+  width:100%;
+  height:50%;
+  text-align:center;
+  font-size:100%;
+  font-style:italic;
+  color:#aaaaaa;
+  position:absolute;
+  top:40px;
+}
