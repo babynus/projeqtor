@@ -86,7 +86,6 @@ $mobile=false;
               parseOnLoad: true, 
               isDebug: <?php echo getBooleanValueAsString(Parameter::getGlobalParameter('paramDebugMode'));?>'></script>
   <script type="text/javascript" src="../external/dojo/projeqtorDojo.js?version=<?php echo $version.'.'.$build;?>"></script>
-
   <?php Plugin::includeAllFiles();?>
   <script type="text/javascript"> 
     var isNewGui=<?php echo (isNewGui())?'true':'false';?>;
@@ -104,12 +103,12 @@ $mobile=false;
     dojo.require("dijit.form.Button");
     dojo.require("dijit.form.Form");
     dojo.require("dijit.form.FilteringSelect");
-    <?php if (isNewGui()){?>
-    dojo.require("dojox.mobile.parser");
-    dojo.require("dojox.mobile.Switch");
-    dojo.require("dojox.mobile.SwapView");
-    dojo.require("dojox.mobile.PageIndicator");
-    <?php }?>
+    if (isNewGui){
+      dojo.require("dojox.mobile.parser");
+      dojo.require("dojox.mobile.Switch");
+      dojo.require("dojox.mobile.SwapView");
+      dojo.require("dojox.mobile.PageIndicator");
+    }
     require(["dojo/sniff"], function(sniff) {
       var mobileExists=<?php echo (file_exists("../mobile"))?'true':'false';?>;
       if(mobileExists && (sniff("android") || sniff("ios") || sniff("bb") ) ) { 
@@ -185,15 +184,11 @@ $mobile=false;
 <?php 
 if(isNewGui()){
 $firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
-$secondColor=Parameter::getGlobalParameter('newGuiThemeColorBis');
 if(!$firstColor){
 $firstColor= getTheme();
 }
-if(!$secondColor){
-$secondColor='';
-}
 ?>
-<body id="body" class="nonMobile <?php echo getTheme();?>" onLoad="hideWait();" style="overflow: auto;background-color:<?php echo '#'.$firstColor?>;" onBeforeUnload="">
+<body id="body" id="body" class="nonMobile tundra <?php echo getTheme();?>" onLoad="hideWait();" style="overflow: auto;" onBeforeUnload="">
 <?php 
 }else{
 ?>
@@ -232,10 +227,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
     </div>
     <?php }}?>
   </div>
-  <?php if (1 and isNewGui()) echo '<div style="position:absolute;margin-top:-50%;margin-left:-0%;width:250%;height:250%;opacity:10%;z-index:-2;" class="loginBackgroundNewGui"></div>';?>
-  <?php if (isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:60%;z-index:-1;" class="loginBackgroundNewGui"></div>';?>
-  <?php if (0 and isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:5%;position:-20px;" class="loginBackgroundNewGui"></div>';?>
-  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
+  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'loginBackgroundNewGui':'loginBackground';?>" style="<?php if (isNewGui()) echo 'background-color:#'.$firstColor.' !important;';?>">
     <tr height="100%">
 	    <td width="100%" align="center">
 	      <div class="background <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
@@ -243,6 +235,17 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 	          <img style="position:absolute; top:2px;right:-2px;" src="../view/img/logoMedium.png"  />
 	          </div>  -->
 			  <table  align="center">
+			  			    <?php if(isNewGui()){?>
+			    <tr style="height:42px;" >
+			     <td align="center" style="position:relative;height: 1%;" valign="center">
+			       <div style="position:relative;height:75px;">
+			         <div class="divLoginIconDrawing" style="position:absolute;background-color:#<?php echo $firstColor;?>";>
+			           	<div class="divLoginIconBig"></div>		         
+			         </div>
+			       </div>
+			     </td>
+			    </tr>
+			    <?php }?>
 			    <tr style="height:10px;" >
 			      <td align="left" style="position:relative;height: 1%;" valign="top">
 			        <div style="position:relative;width: 400px; height: 54px;">
@@ -321,7 +324,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr style="font-size:50%;height:14px;"><td colspan="3">&nbsp;</td></tr>
 			              <tr>
 			                <td style="background:transparent !important;">&nbsp;</td>
-			                <td style="text-align:center" >
+			                <td style="text-align:center">
 			                  <button tabindex="3" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="largeTextButton" showlabel="true" >
 			                  OK
 			                    <script type="dojo/connect" event="onClick" args="evt">

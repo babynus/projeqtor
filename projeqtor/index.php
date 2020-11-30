@@ -8,6 +8,8 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   if (RequestHandler::isCodeSet('nosso')) {
     SSO::setAvoidSSO();
   }
+  if(isNewGui())$firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
+  $background=(isNewGui())?'#'.$firstColor:' #C3C3EB';
 } 
 /*** COPYRIGHT NOTICE *********************************************************
  *
@@ -58,7 +60,7 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   </script>
 </head>
 
-<body class="tundra <?php echo $theme;?>"  style='background-color: #C3C3EB' onload="autoRedirect();">
+<body class="tundra <?php echo $theme;?>"  style="background-color:<?php echo $background;?>;" onload="autoRedirect();">
   <div id="wait">
   &nbsp;
   </div> 
