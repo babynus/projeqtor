@@ -102,7 +102,7 @@ label, .ProjeQtOrNewGui label,
 	padding-top:3px;
 }
 .labelMultiple, .ProjeQtOrNewGui .labelMultiple {
-	width: 375px;
+	width: 300px;
 	margin-top:5px;
 }
 .ProjeQtOrNewGui .smallTabLabel, .ProjeQtOrNewGui .smallTabLabelRight {
@@ -1640,4 +1640,17 @@ element.style {
   -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness)) !important;
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness)) !important;
   background-color: transparent !important;
+}
+.ProjeQtOrNewGui .listTitle.multipleResultDiv {
+	background-color: var(--color-lighter) !important;
+}
+.ProjeQtOrNewGui .listTitle.multipleResultDiv .messageOK,
+.ProjeQtOrNewGui .listTitle.multipleResultDiv .messageNO_CHANGE,
+.ProjeQtOrNewGui .listTitle.multipleResultDiv .messageINVALID,
+.ProjeQtOrNewGui .listTitle.multipleResultDiv .messageERROR,
+.ProjeQtOrNewGui .listTitle.multipleResultDiv .messageWARNING,
+.ProjeQtOrNewGui .listTitle.multipleResultDiv .messageINCOMPLETE
+{
+	border-radius:5px;
+	box-shadow:0 0 0;
 }
