@@ -1428,10 +1428,10 @@ select option:checked {
 
 .inputLoginIconNewGui{
 	float: left;
-    font-weight: normal;
-    color: rgb(0, 0, 0);
-    padding: 3px 4px 2px;
-    line-height: normal;
+  font-weight: normal;
+  color: rgb(0, 0, 0);
+  padding: 3px 4px 2px;
+  line-height: normal;
     background-position: 3px 3px;
     height: 22px;
 }
@@ -1586,11 +1586,11 @@ element.style {
 	margin: 0.45em;
 }
 .ProjeQtOrNewGui #userMenuPopupBottom {
-	background:var(--color-darker-secondary);
+	background:var(--color-darker);
 }
 .ProjeQtOrNewGui #userMenuPopupBottom .disconnectTextClass {
   border:0;
-  background:var(--color-darker-secondary);
+  background:var(--color-darker);
   width:90%;
   left:10px;
   position: relative;
