@@ -49,7 +49,7 @@
     <?php if(isNewGui()){?>
    <link rel="stylesheet" type="text/css" href="../view/css/projeqtorNew.css" />
    <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
-  <script type="text/javascript" src="../external/dojox/mobile/deviceTheme.js" data-dojo-config="mblUserAgent: 'Custom'"></script>
+   <script type="text/javascript" src="js/projeqtorNewGui.js?version=<?php echo $version.'.'.$build;?>" ></script>
    <?php }?>
   <script type="text/javascript" src="../external/CryptoJS/rollups/sha256.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtor.js?version=<?php echo $version.'.'.$build;?>" ></script>
@@ -71,12 +71,6 @@
     dojo.require("dijit.form.Button");
     dojo.require("dijit.form.Form");
     dojo.require("dijit.form.FilteringSelect");
-    if (isNewGui){
-      dojo.require("dojox.mobile.parser");
-      dojo.require("dojox.mobile.Switch");
-      dojo.require("dojox.mobile.SwapView");
-      dojo.require("dojox.mobile.PageIndicator");
-    }
     dojo.require("dojox.form.PasswordValidator");
     var fadeLoading=<?php echo getBooleanValueAsString(Parameter::getGlobalParameter('paramFadeLoadingMode'));?>;
     dojo.addOnLoad(function(){
@@ -153,11 +147,11 @@ $firstColor= getTheme();
             	$topMsg+=40;
             }
             ?> 
-            <br/>
+            <?php if(!isNewGui())echo '<br/>'?>
             <br/>
             <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar();',20);" class="input rounded"  style="color:#000000;margin-left:15px;<?php echo (isNewGui())?'border:unset !important;width:450px;':'padding:10px;';?>">
               <?php if (isNewGui()) echo '<div class="loginDivContainer container" style="margin-bottom:15px;">';?>
-              <label class="label" style="<?php echo (isNewGui())?"position: relative;text-align:center;width:180px;":"width:150px;";?>;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
+              <label class="label" style="<?php echo (isNewGui())?"position: relative;text-align:center;width:180px;margin-top: 4px;":"width:150px;";?>;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
               <?php if (isNewGui()){
                 echo '</div>';
@@ -166,21 +160,21 @@ $firstColor= getTheme();
               <?php
               }
                if(isNewGui())echo '<div class="loginDivContainer container" ><div style="float:left">'; ?>
-              <label class="label" style="<?php echo (isNewGui())?"position: relative;text-align:center;width:180px;":"width:150px;";?>"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
+              <label class="label" style="<?php echo (isNewGui())?"position: relative;text-align:center;width:180px;margin-top: 4px;":"width:150px;";?>"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="verify" class="input rounded"  style="color:#000000;">
               <?php if(isNewGui()){
                  echo  '</div>';
-                 echo '<div class="iconView iconSize22" style="cursor:pointer;float:right;position:relative;top:8px;filter:grayscale(1)" 
-                       onClick="dojo.setAttr(\'newPass\',\'type\',((dojo.getAttr(\'newPass\',\'type\')==\'password\')?\'text\':\'password\'));dojo.setAttr(\'validatedPass\',\'type\',((dojo.getAttr(\'validatedPass\',\'type\')==\'password\')?\'text\':\'password\'))" ></div>';
+                 echo '<div class="iconView imageColorNewGui iconSize22" style="cursor:pointer;float:right;position:relative;top:8px;" 
+                       onClick="changePaswordType();" ></div>';
                  echo '</div>';
                }?>
               <br/>
-              <br/>
+              <?php if(!isNewGui())echo '<br/>'?>
               <p><progress  id="progress" max="4" style="margin-left:<?php echo (isNewGui())?'145px':'148px';?>;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span></p>
               <div style="width:200px;height:20px; <?php echo (isNewGui())?'position: relative;top: 4px;left: 145px;':'position:absolute; left:170px;';?>text-align:center;">
                 <span id="strength"></span> 
               </div>
-            <?php if(!isNewGui()) echo '<br/>';?>    
+            <br/>
             <!-- florent 4088 -->
             </div>
             <input type="hidden" id="parmPwdSth"  value="<?php echo Parameter::getGlobalParameter('paramPasswordStrength');?>"/>

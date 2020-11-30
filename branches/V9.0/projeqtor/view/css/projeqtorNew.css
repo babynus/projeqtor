@@ -1408,13 +1408,12 @@ select option:checked {
     overflow: hidden auto;
     z-index: 0;
     box-shadow: 5px 0px 2px #0000008f;
-    padding-top:50px;
-    padding-bottom:50px;
+
 
 }
 
 .inputLoginNewGui{
-	    float: left;
+	float: left;
     font-weight: normal;
     color: rgb(0, 0, 0);
     padding: 3px 4px 2px;
@@ -1423,7 +1422,7 @@ select option:checked {
     background-position: 3px 3px;
     height: 22px;
     border:unset !important;
-    
+    width:305px !important;
 }
 
 .inputLoginIconNewGui{
@@ -1466,7 +1465,9 @@ select option:checked {
 .passwordButtonNewGui {
 	cursor:pointer;
 	color:var(--color-medium);
-	width:100%;
+	float: right;
+    margin-top: 4px;
+    text-align: right;
 	
 }
 
@@ -1543,26 +1544,39 @@ element.style {
 }
 
 .ProjeQtOrNewGui .loginMessage{
-	background: rgba(255,255,255,1);
-    border: 1px solid #AAAAAA;
-    font-size: 14px;
-    margin-right: 2%;
-    margin-left: 2%;
+   background: unset;
+    color: white;
+    border: unset;
+    font-size: 12px;
     padding: 10px;
-    margin-left:2%;
-    margin-right:2%;
-    margin-bottom:unset;
-    margin-top:unset;
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-bottom: 5%;
+    margin-top: unset;
     width: auto;
     z-index: -1;
     position: relative;
+    border-radius: unset;
     box-shadow: unset;
-    border-radius:unset;
     -webkit-box-shadow:unset;
 }
 
+.ProjeQtOrNewGui .loginMessageTitle{
+	position: relative;
+    top: unset;
+    left: unset;
+    border-bottom: unset;
+    width: 100%;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: bold;
+    padding: 2px 0px;
+    font-size: x-large;
+}
+
 .divLoginIconDrawing{
-    margin-left: 160px;
+    margin-left: 165px;
     width: 135px;
     height: 135px;
     top: -64px;
@@ -1571,12 +1585,14 @@ element.style {
 }
 
 .divLoginIconBig{
-	background-image: url(customIcons/new/iconLogin.svg);
-	background-repeat: no-repeat;
+    background-image: url(customIcons/new/iconLogin.svg);
+    background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     width: 115px;
+    margin-top: 23px;
     height: 115px;
+    filter: brightness(0) invert(1);
 }
 
 .ProjeQtOrNewGui #drawMenuUser .dijitTooltipContainer, .ProjeQtOrNewGui #drawMenuUser .dijitTooltipFocusNode {
