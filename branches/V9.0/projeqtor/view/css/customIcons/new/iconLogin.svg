@@ -9,19 +9,19 @@
 	</sodipodi:namedview>
 <g>
 	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M85.105,35.492v9.225c0,11.341-9.279,20.622-20.623,20.622l0,0c-11.341,0-20.62-9.281-20.62-20.622V26.269
-		c0-11.341,9.279-20.621,20.62-20.621l0,0c11.343,0,20.623,9.28,20.623,20.621V35.492z"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M70.014,70.762l5.815,1.633l9.813,2.754c4.447,1.248,8.682,3.244,12.313,6.1c3.118,2.452,5.954,5.635,5.954,9.1v19.057
-		c0,7.701-6.303,14.003-14.002,14.003H37.986c-7.701,0-14.002-6.302-14.002-14.003V90.348c0-3.466,2.836-6.647,5.954-9.101
-		c3.632-2.854,7.866-4.853,12.315-6.101l9.812-2.754l6.281-1.762"/>
+		M85.105,35.492v9.225c0,11.341-9.279,20.622-20.624,20.622l0,0c-11.341,0-20.62-9.281-20.62-20.622V26.269
+		c0-11.341,9.279-20.621,20.62-20.621l0,0c11.343,0,20.624,9.28,20.624,20.621V35.492z"/>
 	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="58.345" y1="70.632" x2="58.345" y2="65.339"/>
+		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		52.065,72.393 58.345,70.632 58.345,65.339 	"/>
 	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="70.014" y1="70.762" x2="70.014" y2="65.339"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M75.829,72.395c0.147,1.025,0.224,2.09,0.224,3.176c0,9.146-5.418,16.563-12.108,16.563c-6.684,0-12.104-7.417-12.104-16.563
-		c0-1.086,0.076-2.149,0.224-3.176"/>
+		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		75.829,72.395 70.014,70.762 70.014,65.339 	"/>
+	<path fill="#FF0000" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M75.829,72.395
+		c0.147,1.025,0.224,2.09,0.224,3.176c0,9.146-5.418,16.563-12.108,16.563c-6.684,0-12.104-7.417-12.104-16.563
+		c0-1.086,0.076-2.148,0.224-3.176l-0.187,2.079l0.187-2.081l-9.812,2.754c-4.449,1.248-8.683,3.246-12.315,6.101
+		c-3.118,2.454-5.954,5.635-5.954,9.101v19.059c0,7.701,6.301,14.003,14.002,14.003h51.921c7.698,0,14.002-6.302,14.002-14.003
+		V90.35c0-3.466-2.837-6.648-5.954-9.101c-3.631-2.856-7.866-4.853-12.313-6.101L75.829,72.395L75.829,72.395z"/>
 	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 		M43.864,26.161c3.778-4.083,9.054-8.522,14.007-7.39c3.941,0.901,4.822,4.673,9.044,6.617c3.353,1.545,8.37,2.297,17.806-3.091"/>
 </g>
