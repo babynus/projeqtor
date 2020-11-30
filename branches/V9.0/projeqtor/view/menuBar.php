@@ -242,7 +242,7 @@
         </span>
       </span>
       <?php if (isNewGui()){ ?>
-      <span style="width:1px;position:relative;top:-4px;">
+      <span style="width:1px;position:relative;top:-6px;">
         <div id="toolbar_projectSelector" class="fade-in dijitTextBox toolbarForSelect" style=""
         onmouseover="showActionProjectSelector();"
         onmouseout="hideActionProjectSelector();">

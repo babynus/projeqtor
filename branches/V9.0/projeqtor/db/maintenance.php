@@ -151,6 +151,32 @@ if ($currVersion=='V0.0.0') {
   Parameter::storeGlobalParameter('paramRightDiv', 'bottom');
   Parameter::storeGlobalParameter('paramLayoutObjectDetail', 'tab');
   Parameter::storeUserParameter('menuLeftDisplayMode', 'ICONTXT');
+  
+  $customRow[1]=array('Project', 'Activity', 'Milestone', 'Meeting', 'Planning', 'Resource', 'Reports');
+  $customRow[2]=array('Ticket', 'Kanban', 'Imputation', 'Absence');
+  for($idRes=1; $idRes <= 2; $idRes++){
+	$sortOrder = 1;
+	foreach ($customRow[1] as $menu){
+		$customMenu = new MenuCustom();
+		$customMenu->name = 'menu'.$menu;
+		$customMenu->idUser = $idRes;
+		$customMenu->idRow = 1;
+		$customMenu->sortOrder = $sortOrder;
+		$customMenu->save();
+		$sortOrder++;
+	}
+	$sortOrder = 1;
+	foreach ($customRow[2] as $menu){
+		$customMenu = new MenuCustom();
+		$customMenu->name = 'menu'.$menu;
+		$customMenu->idUser = $idRes;
+		$customMenu->idRow = 2;
+		$customMenu->sortOrder = $sortOrder;
+		$customMenu->save();
+		$sortOrder++;
+	}
+  }
+  
   enableCatchErrors();
   rename("../api/.htaccess.example","../api/.htaccess"); // Use exemple to "lock" API access (will use not existing password file)
   disableCatchErrors();
@@ -980,7 +1006,7 @@ if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
     
         <div>&nbsp;</div>
     
-        <div><img src="../files/images//20201120155205_1_newGui.png" style="height:514px; width:1080px" /></div>
+        <div><img src="../view/img/newGui.png" style="height:514px; width:1080px" /></div>
     
         <div>'.i18n('newGuiMessageLegalBottom').'</div>';
     $MessageLegal->endDate='3721-07-21 21:21:21';
@@ -990,25 +1016,35 @@ if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
     $customRow[1]=array('Project', 'Activity', 'Milestone', 'Meeting', 'Planning', 'Resource', 'Reports');
     $customRow[2]=array('Ticket', 'Kanban', 'Imputation', 'Absence');
     foreach ($resList as $resource){
-      $sortOrder = 1;
-      foreach ($customRow[1] as $menu){
-      	$customMenu = new MenuCustom();
-      	$customMenu->name = 'menu'.$menu;
-      	$customMenu->idUser = $resource->id;
-      	$customMenu->idRow = 1;
-      	$customMenu->sortOrder = $sortOrder;
-      	$customMenu->save();
-      	$sortOrder++;
-      }
-      $sortOrder = 1;
-      foreach ($customRow[2] as $menu){
-      	$customMenu = new MenuCustom();
-      	$customMenu->name = 'menu'.$menu;
-      	$customMenu->idUser = $resource->id;
-      	$customMenu->idRow = 2;
-      	$customMenu->sortOrder = $sortOrder;
-      	$customMenu->save();
-      	$sortOrder++;
+      $menuCustom = new MenuCustom();
+      $countCustomMenuList = $menuCustom->countSqlElementsFromCriteria(array('idUser'=>$resource->id));
+      if($countCustomMenuList > 0){
+        $customMenuList = $menuCustom->getSqlElementsFromCriteria(array('idUser'=>$resource->id));
+        foreach ($customMenuList as $menu){
+          $menu->idRow = 1;
+          $menu->save();
+        }
+      }else{
+        $sortOrder = 1;
+        foreach ($customRow[1] as $menu){
+        	$customMenu = new MenuCustom();
+        	$customMenu->name = 'menu'.$menu;
+        	$customMenu->idUser = $resource->id;
+        	$customMenu->idRow = 1;
+        	$customMenu->sortOrder = $sortOrder;
+        	$customMenu->save();
+        	$sortOrder++;
+        }
+        $sortOrder = 1;
+        foreach ($customRow[2] as $menu){
+        	$customMenu = new MenuCustom();
+        	$customMenu->name = 'menu'.$menu;
+        	$customMenu->idUser = $resource->id;
+        	$customMenu->idRow = 2;
+        	$customMenu->sortOrder = $sortOrder;
+        	$customMenu->save();
+        	$sortOrder++;
+        }
       }
     }
     Sql::commitTransaction();
