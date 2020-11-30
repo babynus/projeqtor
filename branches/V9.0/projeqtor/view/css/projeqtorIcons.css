@@ -1471,6 +1471,8 @@
 .ProjeQtOrFlatRed .iconIncomingWeight { background-image: url(customIcons/red/iconIncomingWeight.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconIncomingWeight { background-image: url(customIcons/new/iconIncomingWeight.svg);  background-repeat: no-repeat; }
 
+.ProjeQtOrNewGui .iconIndicators { background-image: url(customIcons/new/iconIndicators.svg);  background-repeat: no-repeat; }
+
 .iconIndividualExpense { background-image: url(images/iconIndividualExpense32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconIndividualExpense { background-image: url(customIcons/blue/iconIndividualExpense.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconIndividualExpense { background-image: url(customIcons/green/iconIndividualExpense.png);  background-repeat: no-repeat;}
