@@ -879,6 +879,8 @@ class Parameter extends SqlElement {
           unset($parameterList['menuLeftDisplayMode']);
           unset($parameterList['menuBarTopMode']);
           unset($parameterList['newItemAccessMode']);
+          unset($parameterList['newGuiThemeColor']);
+          unset($parameterList['newGuiThemeColorBis']);
         }else{
           unset($parameterList['theme']);
         }
@@ -1282,6 +1284,8 @@ class Parameter extends SqlElement {
       unset($parameterList['menuLeftDisplayMode']);
       unset($parameterList['menuBarTopMode']);
       unset($parameterList['newItemAccessMode']);
+      unset($parameterList['newGuiThemeColor']);
+      unset($parameterList['newGuiThemeColorBis']);
     }else{
       unset($parameterList['defaultTheme']);
     }
