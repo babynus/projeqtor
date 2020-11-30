@@ -230,8 +230,8 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
   </div>
   <?php if (1 and isNewGui()) echo '<div style="position:absolute;margin-top:-50%;margin-left:-0%;width:250%;height:250%;opacity:10%;z-index:-2;" class="loginBackgroundNewGui"></div>';?>
   <?php if (isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:60%;z-index:-1;" class="loginBackgroundNewGui"></div>';?>
-  <?php if (0 and isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:5%;position:-20px;" class="loginBackgroundNewGui"></div>';?>
-  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>" >
+  <?php if (1 and isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:5%;position:-20px;" class="loginBackgroundNewGui"></div>';?>
+  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
     <tr height="100%">
 	    <td width="100%" align="center">
 	      <div class="background <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
