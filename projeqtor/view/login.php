@@ -216,17 +216,20 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
     <?php if(isNewGui())echo '<div style="margin-top: 5%;margin-bottom: 5%;width: 90%;">' ;?>
     	<?php 
     	$cpt=0;
+    	$count=count($msgList);
     	foreach ($msgList as $msg) {
        #Florent ticket 4030
        $startDate=$msg->startDate;
        $endDate=$msg->endDate;
        $today=date('Y-m-d H:i:s');
        if( $startDate <= $today && $endDate >= $today || $startDate=='' && $endDate=='' || $startDate<= $today && $endDate=='' ){ 
-        $cpt++;?>  
-      <div class="loginMessage" id="loginMessage_<?php echo $cpt;?>">
+        $cpt++;?>
+      <div class="loginMessage" id="loginMessage_<?php echo $cpt;?>" style="border-bottom:<?php echo (isNewGui() and $cpt<$count)?'1px solid':'';?>;">
       <div class="loginMessageTitle" style="color:<?php echo (isNewGui())?'white':$msgTypeList[$msg->idMessageType];?>;"><?php echo htmlEncode($msg->name);?></div>
       <br/>
       <?php echo $msg->description;?>
+      <br/>
+      <br/>
       </div>
       <?php }}?>
     <?php if(isNewGui())echo '</div>';?>
