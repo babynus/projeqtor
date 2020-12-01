@@ -2,27 +2,19 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1"
-	 id="Layer_1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" sodipodi:docname="iconTicket.svg"
+	 id="Layer_1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:svg="http://www.w3.org/2000/svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" sodipodi:docname="iconTicket.svg"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px" height="128px"
 	 viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<sodipodi:namedview  id="namedview27" inkscape:zoom="14.75" bordercolor="#666666" guidetolerance="10" objecttolerance="10" borderopacity="1" showgrid="false" inkscape:cx="22.296444" pagecolor="#ffffff" inkscape:cy="24.881783" gridtolerance="10" inkscape:snap-global="false" inkscape:document-rotation="0" inkscape:window-width="1920" inkscape:window-height="1017" inkscape:pageopacity="0" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:pageshadow="2" inkscape:window-x="-8" inkscape:current-layer="Layer_1">
+<sodipodi:namedview  id="namedview27" bordercolor="#666666" borderopacity="1" inkscape:cx="22.296444" inkscape:window-x="-8" inkscape:pageopacity="0" inkscape:snap-global="false" inkscape:window-height="1017" inkscape:pageshadow="2" inkscape:window-width="1920" inkscape:window-y="-8" inkscape:document-rotation="0" inkscape:window-maximized="1" inkscape:current-layer="Layer_1" objecttolerance="10" inkscape:zoom="14.75" inkscape:cy="24.881783" gridtolerance="10" pagecolor="#ffffff" guidetolerance="10" showgrid="false">
 	</sodipodi:namedview>
-<g>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M85.105,35.492v9.225c0,11.341-9.279,20.622-20.624,20.622l0,0c-11.341,0-20.62-9.281-20.62-20.622V26.269
-		c0-11.341,9.279-20.621,20.62-20.621l0,0c11.343,0,20.624,9.28,20.624,20.621V35.492z"/>
-	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		52.065,72.393 58.345,70.632 58.345,65.339 	"/>
-	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		75.829,72.395 70.014,70.762 70.014,65.339 	"/>
-	<path fill="#FF0000" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M75.829,72.395
-		c0.147,1.025,0.224,2.09,0.224,3.176c0,9.146-5.418,16.563-12.108,16.563c-6.684,0-12.104-7.417-12.104-16.563
-		c0-1.086,0.076-2.148,0.224-3.176l-0.187,2.079l0.187-2.081l-9.812,2.754c-4.449,1.248-8.683,3.246-12.315,6.101
-		c-3.118,2.454-5.954,5.635-5.954,9.101v19.059c0,7.701,6.301,14.003,14.002,14.003h51.921c7.698,0,14.002-6.302,14.002-14.003
-		V90.35c0-3.466-2.837-6.648-5.954-9.101c-3.631-2.856-7.866-4.853-12.313-6.101L75.829,72.395L75.829,72.395z"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M43.864,26.161c3.778-4.083,9.054-8.522,14.007-7.39c3.941,0.901,4.822,4.673,9.044,6.617c3.353,1.545,8.37,2.297,17.806-3.091"/>
-</g>
+<path fill="#FF0000" d="M45.743,45.265c3.327,9.547,9.522,16.768,18.305,16.768c8.612,0,14.965-7.372,18.359-17.158
+	c6.423-6.639,5.069-11.646,3.543-14.172c3.876-18.056-7.604-28.238-22.553-28.238c-25.672,0-22.351,27.041-22.057,29.12
+	C40.054,34.363,39.592,39.141,45.743,45.265z M71.11,21.633c1.958,3.522,6.017,5.886,9.392,7.327
+	c-0.337,13.88-6.563,28.393-16.454,28.393c-9.21,0-15.242-12.587-16.302-25.527C59.323,31.144,66.986,25.658,71.11,21.633z"/>
+<path fill="#FF0000" d="M114.086,106.607l0.117-0.326l0.021-0.347c1.529-27.037-20.6-37.552-20.823-37.654L81.707,64l-3.362-1.967
+	l-1.202,1.947c-2.921,4.74-7.879,7.571-13.262,7.571c-5.495,0-10.512-2.788-13.425-7.457l-1.158-1.857l-3.277,1.75l-11.487,4.223
+	L34.36,68.28c-0.224,0.103-22.351,10.617-20.824,37.654l0.02,0.347l0.12,0.326l4.51-1.409c-0.025-0.537-0.028-1.06-0.033-1.583
+	l0.085-3.046c1.308-19.522,16.629-27.339,18.008-28.003l6.823-2.507l2.26-0.831l2.396-0.881c3.867,4.974,9.762,7.884,16.157,7.884
+	c6.274,0,12.094-2.927,15.957-7.93l2.681,0.979l2.26,0.824l6.737,2.462c1.425,0.686,16.7,8.509,18.007,28.002l0.085,3.046
+	c-0.005,0.518-0.009,1.034-0.031,1.566L114.086,106.607z"/>
 </svg>
