@@ -157,7 +157,7 @@ if ($planningMode=='RECW') {
             <td>
               <input title="<?php echo i18n('helpUniqueResource');?>" 
                      dojoType="dijit.form.CheckBox" name="assignmentUnique" id="assignmentUnique" 
-                     onChange="assignmentChangeUniqueResource(this.checked);"
+                     onChange="assignmentChangeUniqueResource(this.checked);" <?php if (isNewGui()) echo 'class="whiteCheck"';?>
                      <?php echo ($assignmentObj->uniqueResource)?"checked=checked":"";?> />
               <label title="<?php echo i18n('helpUniqueResource');?>" style="float:none" for="attendantIsOptional" ><?php echo i18n("uniqueResource"); ?></label>
             </td>          
@@ -396,7 +396,7 @@ if ($planningMode=='RECW') {
                      if ($assignmentObj->leftWork > 0) $readonly=1; 
                      ?>
                <div id="assignmentIdle" name="assignmentIdle" <?php echo ($checked)?" checked=checked ":""; ?>
-                 dojoType="dijit.form.CheckBox" type="checkbox" <?php echo ($readonly)?"readonly=readonly":"";?>
+                 dojoType="dijit.form.CheckBox" type="checkbox" <?php echo ($readonly)?"readonly=readonly":"";?> <?php if (isNewGui()) echo 'class="whiteCheck"';?>
                  onclick="if (dijit.byId('assignmentLeftWork').get('value')>0) {dojo.byId('assignmentIdleErrorMsg').innerHTML=i18n('errorIdleWithLeftWork');return false;}"
                >
                </div>
@@ -421,7 +421,8 @@ if ($planningMode=='RECW') {
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
             <td class="dialogLabel">&nbsp;</td>     
             <td>
-              <input dojoType="dijit.form.CheckBox" name="attendantIsOptional" id="attendantIsOptional" <?php echo ($mode=="edit" && $assignmentObj->optional==1)?"checked=checked":"";?> />
+              <input dojoType="dijit.form.CheckBox" name="attendantIsOptional" id="attendantIsOptional" 
+              <?php echo ($mode=="edit" && $assignmentObj->optional==1)?"checked=checked":"";?> <?php if (isNewGui()) echo 'class="whiteCheck"';?>/>
               <label style="float:none" for="attendantIsOptional" ><?php echo i18n("attendantIsOptional"); ?></label>
             </td>
            <tr>

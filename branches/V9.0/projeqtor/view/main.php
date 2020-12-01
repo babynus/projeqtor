@@ -2230,7 +2230,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
                <label for="dependencyRefIdDep" ><?php echo i18n("linkElement") ?>&nbsp;:&nbsp;</label>
              </td>
              <td><table><tr><td>
-               <div id="dialogDependencyList" dojoType="dijit.layout.ContentPane" region="center">
+               <div id="dialogDependencyList" dojoType="dijit.layout.ContentPane" region="center" >
                  <input id="dependencyRefIdDep" name="dependencyRefIdDep" type="hidden" value="" />
                </div>
                </td><td style="vertical-align: top">
