@@ -186,7 +186,7 @@ $firstColor= getTheme();
             <input type="hidden" id="criteria" name="criteria" value=""/>
             <!-- florent -->
             <?php if(!isNewGui()) echo '<br/>';?>
-            <button type="submit" style="<?php echo (isNewGui())?'margin-left:160px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
+            <button id="buttonLoginPwChange" type="submit" style="<?php echo (isNewGui())?'margin-left:160px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
               <script type="dojo/connect" event="onClick" args="evt">
                 //loadContent("../tool/changePassword.php","passwordResultDiv", "passwordForm");
               </script>
@@ -194,7 +194,7 @@ $firstColor= getTheme();
             <?php if(!isNewGui()) echo '<br/>';?>
             <div style="height:5px">&nbsp;</div>
             <?php if ( $user->password != md5($user->getRandomPassword()) ) {?>
-            <button class="largeTextButton" type="button" style="<?php echo (isNewGui())?'margin-left:160px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;<?php if(isNewGui())echo ''?>" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
+            <button  class="largeTextButton" type="button" style="<?php echo (isNewGui())?'margin-left:160px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;<?php if(isNewGui())echo ''?>" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
               <script type="dojo/connect" event="onClick" args="evt">
               showWait(); 
               window.location=".";
