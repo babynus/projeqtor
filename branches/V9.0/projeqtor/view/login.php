@@ -213,7 +213,11 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
   <div id="waitLogin" style="display:none" >
   </div>
   <div class="<?php echo (isNewGui() and !empty($msgList))?'loginMessageContainerNew':'loginMessageContainer';?>">
-    <?php if(isNewGui())echo '<div style="margin-top: 5%;margin-bottom: 5%;width: 90%;">' ;?>
+    <?php if(isNewGui()){
+            echo '<div style="margin-top: 5%;margin-bottom: 5%;width: 90%;" id="contentMessageDivLogin" >';
+            echo '<script type="dojo/method" event="onload">saveDataToSession("contentMessageDivLogin",dojo.byId("contentMessageDivLogin").offsetWidth, false);</script>';
+          }
+     ?>
     	<?php 
     	$cpt=0;
     	$count=count($msgList);
@@ -227,7 +231,13 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
       <div class="loginMessage" id="loginMessage_<?php echo $cpt;?>" style="border-bottom:<?php echo (isNewGui() and $cpt<$count)?'1px solid':'';?>;">
       <div class="loginMessageTitle" style="color:<?php echo (isNewGui())?'white':$msgTypeList[$msg->idMessageType];?>;"><?php echo htmlEncode($msg->name);?></div>
       <br/>
-      <?php echo $msg->description;?>
+      <?php 
+      if(isNewGui()){
+       debugLog(getSessionValue('contentMessageDivLogin'));
+       echo htmlSetClickableImages($msg->description,400);
+      }else{
+        echo $msg->description;
+      }?>
       <br/>
       <br/>
       </div>
