@@ -582,7 +582,7 @@
 .ProjeQtOrFlatGreen .iconButtonSplit16 { background-image: url(customIcons/green/iconSplit.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconButtonSplit16 { background-image: url(customIcons/grey/iconSplit.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonSplit16 { background-image: url(customIcons/red/iconSplit.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconButtonSplit16 { background-image: url(customIcons/new/iconSplit.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonSplit { background-image: url(customIcons/new/iconSplit.svg);  background-repeat: no-repeat; }
 
 .iconButtonSwitch16 { background-image: url(images/smallButtonSwitch.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonSwitch16 { background-image: url(customIcons/blue/iconSwitch.png);  background-repeat: no-repeat; }

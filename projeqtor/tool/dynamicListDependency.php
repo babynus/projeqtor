@@ -69,6 +69,7 @@ if ($refType=="Project") {
 ?>
 <select id="dependencyRefIdDep" size="14" name="dependencyRefIdDep[]" multiple
 onchange="enableWidget('dialogDependencySubmit');" ondblclick="saveDependency();" 
+<?php if (isNewGui()) echo ' style="width:410px;" ';?>
 class="selectList" >
  <?php
  $found=array();
