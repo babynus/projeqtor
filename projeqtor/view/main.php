@@ -57,6 +57,8 @@ SqlElement::$_cachedQuery['Project']=array();
 SqlElement::$_cachedQuery['ProjectPlanningElement']=array();
 SqlElement::$_cachedQuery['PlanningElement']=array();
 $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
+if(isNewGui())$firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
+$background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>   
@@ -692,11 +694,14 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     //window.onbeforeunload = function (evt){ return beforequit();};
   </script>
 </head>
-<body id="body" class="nonMobile tundra <?php echo getTheme();?>" onBeforeUnload="return beforequit();" onUnload="quit();">
+<body id="body" class="nonMobile tundra <?php echo getTheme();?>" <?php if(isNewGui()) echo 'style="background-color:'.$background.';"'; ?> onBeforeUnload="return beforequit();" onUnload="quit();">
 <div id="centerThumb80" style="display:none;z-index:999999;position:absolute;top:10px;left:10px;height:80px;width:80px;"></div>
 <div id="loadingDiv" class="<?php echo getTheme();?> loginFrame" 
- style="position:absolute; visibility: visible; display:block; width:100%; height:100%; margin:0; padding:0; border:0">  
-  <table align="center" width="100%" height="100%" class="loginBackground">
+ style="position:absolute; visibility: visible; display:block; width:100%; height:100%; margin:0; padding:0; border:0">
+ <?php if (1 and isNewGui()) echo '<div style="position:absolute;margin-top:-50%;margin-left:-0%;width:250%;height:250%;opacity:10%;z-index:-2;" class="loginBackgroundNewGui"></div>';?>
+  <?php if (isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:60%;z-index:-1;" class="loginBackgroundNewGui"></div>';?>
+  <?php if (0 and isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:5%;position:-20px;" class="loginBackgroundNewGui"></div>';?>   
+  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
     <tr height="100%">
       <td width="100%" align="center">
         <div class="background loginFrame" >
