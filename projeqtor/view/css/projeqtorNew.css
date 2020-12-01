@@ -1663,3 +1663,7 @@ element.style {
     -webkit-filter: hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness)) !important;
     filter: hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness)) !important;
 } 
+
+#buttonLoginPwChange, #cancelButton {
+	padding: unset !important;
+}
