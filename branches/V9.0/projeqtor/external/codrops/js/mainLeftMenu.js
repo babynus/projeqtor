@@ -383,7 +383,7 @@
       var newPreviousB=document.createElement('div');
       newPreviousB.setAttribute('class', 'iconButtonBack32 iconSize16 imageColorNewGuiSelected');
       newPreviousB.setAttribute('title', i18n('previous'));
-      newPreviousB.setAttribute('style','float:left;background-size:12px !important;margin-top:8px;');
+      newPreviousB.setAttribute('style','float:left;background-size:12px !important;margin-top:8px;cursor:pointer !important;');
       var oldPreviousB=this.breadcrumbsCtrl.querySelector('.iconButtonBack32 ');
       if(oldPreviousB){
         this.breadcrumbsCtrl.replaceChild(newPreviousB,oldPreviousB);

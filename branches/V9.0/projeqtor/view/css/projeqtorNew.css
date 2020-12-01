@@ -1433,6 +1433,7 @@ select option:checked {
   line-height: normal;
     background-position: 3px 3px;
     height: 22px;
+    margin-top:2px;
 }
 
 .iconLoginUserNewGui{
@@ -1468,9 +1469,11 @@ select option:checked {
 	float: right;
     margin-top: 4px;
     text-align: right;
-	
 }
 
+.passwordButtonNewGui:hover  {
+	color:var(--color-secondary);
+}
 
 .pluginShopButton{
 	height:35px;
@@ -1582,6 +1585,7 @@ element.style {
     top: -64px;
     border-radius: 100%;
     opacity: 1;
+    border: 3px solid white;
 }
 
 .divLoginIconBig{
@@ -1654,3 +1658,8 @@ element.style {
 	border-radius:5px;
 	box-shadow:0 0 0;
 }
+
+.inputLoginIconNewGui:hover{
+    -webkit-filter: hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness)) !important;
+    filter: hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness)) !important;
+} 
