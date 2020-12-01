@@ -203,7 +203,7 @@ class Menu extends SqlElement {
         echo '"';
       }
       echo ' onMouseLeave="hideFavoriteTooltip(0,\''.$menu->name.'\');"';
-      echo 'onClick="loadMenuReportDirect(\''.$menu->idReportCategory.'\',\''.$menu->id.'\');refreshSelectedMenuLeft(\''.$menu->name.'\');showMenuBottomParam(\'' . $class .  '\',\'true\');editFavoriteRow(false);">';
+      echo 'onClick="loadMenuReportDirect(\''.$menu->idReportCategory.'\',\''.$menu->id.'\');refreshSelectedMenuLeft(\''.$menu->name.'\');showMenuBottomParam(\'' . $class .  '\',\'true\');">';
       Menu::drawIconMenuNewGui($drawMode, $class, $menu,true);
       $class=$menu->name;
       Menu::drawNewGuiDialogueAddRemoveFav($menu,$customMenuArray,$defaultMenu,$class,false,true);
@@ -218,7 +218,7 @@ class Menu extends SqlElement {
       if ($menu->type=='item') {
       	echo '<div id="dndItem'.$menuName.'" name="dndItem'.$menuName.'" title="' .i18n($menuName) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;'.$marginTop.'">';
       	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
-      	echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menuName.'\');showMenuBottomParam(\'' . $class .  '\',\'false\');editFavoriteRow(false);"';
+      	echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menuName.'\');showMenuBottomParam(\'' . $class .  '\',\'false\');"';
       	echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);';
     	if($defaultMenu == 'menuBarRecent' and !in_array($menuName,$customMenuArray) or ($defaultMenu == 'menuBarCustom')){
           echo 'showFavoriteTooltip(\''.$class.'\');"';
@@ -241,7 +241,7 @@ class Menu extends SqlElement {
         echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'"';
         echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);showFavoriteTooltip(\''.$class.'\');"';
         echo ' onMouseLeave="hideFavoriteTooltip(0,\''.$class.'\');"';
-        echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menuName.'\');showMenuBottomParam(\'' . $class .  '\',\'false\');editFavoriteRow(false);">';
+        echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menuName.'\');showMenuBottomParam(\'' . $class .  '\',\'false\');">';
         Menu::drawIconMenuNewGui($drawMode, $class, $menu);
         Menu::drawNewGuiDialogueAddRemoveFav($menu,$customMenuArray,$defaultMenu,$class);
         echo '</div>';
@@ -257,7 +257,7 @@ class Menu extends SqlElement {
     		  echo '"';
     		}
         	echo ' onMouseLeave="hideFavoriteTooltip(0,\''.$class.'\');"';
-        	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menuName.'\');showMenuBottomParam(\'' . $class .  '\',\'true\');editFavoriteRow(false);">';
+        	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');refreshSelectedMenuLeft(\''.$menuName.'\');showMenuBottomParam(\'' . $class .  '\',\'true\');">';
              Menu::drawIconMenuNewGui($drawMode, $class, $menu);
         	Menu::drawNewGuiDialogueAddRemoveFav($menu,$customMenuArray,$defaultMenu,$class);
         	echo '</div>';
