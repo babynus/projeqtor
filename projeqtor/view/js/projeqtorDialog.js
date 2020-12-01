@@ -7841,11 +7841,11 @@ function loadMenuBarObject(menuClass, itemName, from) {
   stockHistory(currentScreen,null,"object");
   selectIconMenuBar(menuClass);
   if(isNewGui){
-	  editFavoriteRow(false);
 	  refreshSelectedItem(menuClass, defaultMenu);
 	  if(defaultMenu == 'menuBarRecent'){
 		  menuNewGuiFilter(defaultMenu, menuClass);
 	  }
+	  editFavoriteRow(false);
   }
   return true;
 }
