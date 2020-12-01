@@ -7642,8 +7642,6 @@ function showActionProjectSelector() {
 	      dojo.byId(toolId).style.display='none';
 	    }
 	}
-  var width=0;
-  var maxWidth=((dojo.byId("selectedProject").offsetWidth)/2)-25;
   if (! dojo.byId(toolId)) return;
   dojo.byId(toolId).style.display='block';
   dojo.byId(toolId).style.opacity='1';
