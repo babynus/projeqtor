@@ -164,14 +164,14 @@ $firstColor= getTheme();
               <input type="password" pwType="verify" class="input rounded"  style="color:#000000;">
               <?php if(isNewGui()){
                  echo  '</div>';
-                 echo '<div class="iconView imageColorNewGui iconSize22" style="cursor:pointer;float:right;position:relative;top:8px;" 
+                 echo '<div class="iconView imageColorNewGui iconSize22" style="cursor:pointer;float:right;position:relative;top:8px;margin-right:14px;" 
                        onClick="changePaswordType();" ></div>';
                  echo '</div>';
                }?>
               <br/>
               <?php if(!isNewGui())echo '<br/>'?>
               <p><progress  id="progress" max="4" style="margin-left:<?php echo (isNewGui())?'145px':'148px';?>;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span></p>
-              <div style="width:200px;height:20px; <?php echo (isNewGui())?'position: relative;top: 4px;left: 145px;':'position:absolute; left:170px;';?>text-align:center;">
+              <div style="width:200px;height:20px; <?php echo (isNewGui())?'position: relative;top:8px;left:135px;fonr-size:12px;white-space: nowrap;':'position:absolute; left:170px;';?>text-align:center;">
                 <span id="strength"></span> 
               </div>
             <br/>

@@ -202,7 +202,7 @@ echo '<input type="hidden" id="objectClass" value="' . $_REQUEST['objectClass'] 
 echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['objectId']) . '" />';
 }
 ?>
-  <div class="listTitle" style="position:absolute;top:10px;right:10px;<?php if(isNewGui()) echo'padding: 3px;border-radius: 5px;';?>"><?php ;
+  <div class="listTitle" style="position:absolute;top:10px;right:10px;<?php if(isNewGui()) echo'padding: 3px;border-radius: 5px;color:var(--color-toolbar-text) !important;font-size:12px;background:transparent !important';?>"><?php ;
   $dbVersion=Sql::getDbVersion();
   if ($version==$dbVersion) {
   	echo $version;
@@ -304,7 +304,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                   <input  tabindex="2" id="password" type="password" class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>" dojoType="dijit.form.TextBox" />
                                 <input type="hidden" id="hashStringPassword" name="password" value=""/>
                              <?php if(isNewGui()){
-                               echo '<div class="iconView imageColorNewGui iconSize22" style="cursor:pointer;float:right;position:relative;top:6px;" onClick="dojo.setAttr(\'password\',\'type\',((dojo.getAttr(\'password\',\'type\')==\'password\')?\'text\':\'password\'));" ></div>';
+                               echo '<div class="iconView imageColorNewGui iconSize22" style="cursor:pointer;float:right;position:relative;top:6px;margin-right:4px;" onClick="dojo.setAttr(\'password\',\'type\',((dojo.getAttr(\'password\',\'type\')==\'password\')?\'text\':\'password\'));" ></div>';
                                echo '</div>';
                              }?>
 			                </td>
@@ -325,7 +325,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                <?php if(!isNewGui()){ ?>
 			                   <td><div style="width:200px;text-align:center;"><div class="greyCheck" dojoType="dijit.form.CheckBox" type="checkbox" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
 			                <?php }else{?>
-			                   <td style="<?php if(isNewGui()) echo "font-size:12px;";?>">
+			                   <td style="<?php if(isNewGui()) echo "font-size:12px;height:32px;padding-top: 10px;";?>">
 			                     <div style="width:auto;text-align:center;float:left;" class="switchLogin">
 			                       <div class="colorSwitch" data-dojo-type="dojox/mobile/Switch" name="rememberMe"  value="off" leftLabel="" rightLabel="" style="top:4px;z-index:99;margin-right:5px;">
 			                       </div> <?php echo i18n('rememberMe');?>
