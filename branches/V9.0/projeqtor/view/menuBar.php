@@ -235,42 +235,52 @@
       <span class="titleProject" style="position: relative; left:20px; top:-6px; text-align:right;">
         &nbsp;<?php echo (i18n("projectSelector"));?>&nbsp;:&nbsp;
       </span>
-      <span style="display:inline-block;width:<?php echo (isNewGui())?400:250;?>px; position:relative;left : 10px; top:-<?php echo (isNewGui())?9:6;?>px" title="<?php echo i18n("projectSelectorHelp");?>">
+      <span style="display:inline-block;width:250px; position:relative;left : 10px; top:-<?php echo (isNewGui())?9:6;?>px" title="<?php echo i18n("projectSelectorHelp");?>">
         <span style="postion:absolute;height:16px;" dojoType="dijit.layout.ContentPane" region="center"   id="projectSelectorDiv" 
           <?php if(isNewGui())echo 'onmouseover="showActionProjectSelector();" onmouseout="hideActionProjectSelector();" onfocus="hideActionProjectSelector();"';?>>
           &nbsp;<?php include "menuProjectSelector.php"?>
         </span>
       </span>
       <?php if (isNewGui()){ ?>
-      <span style="width:1px;position:relative;top:-7px;">
-        <div id="toolbar_projectSelector" class="fade-in dijitTextBox toolbarForSelect" style=""
+      <span style="width: auto;position:relative;top:-7px;left: 130px;">
+        <div id="toolbar_projectSelector" class="fade-in dijitTextBox toolbarForSelect" style="width: auto;"
         onmouseover="showActionProjectSelector();"
         onmouseout="hideActionProjectSelector();">
-          <span style="float:right;margin-right:3px;">
-            <button id="projectSelectorParametersButton" dojoType="dijit.form.Button" showlabel="false"
-             title="<?php echo i18n('dialogProjectSelectorParameters');?>" style="top:2px;height:20px;"
-             iconClass="<?php if ($iconClassWithSize) echo 'iconParameter16';?> iconParameter iconSize16" xclass="detailButton">
-              <script type="dojo/connect" event="onClick" args="evt">
-                loadDialog('dialogProjectSelectorParameters', null, true);
-              </script>
-            </button>
-          </span>
-          <span style="float:right;margin-right:3px;">
-            <button id="projectSelectorSelectCurrent" dojoType="dijit.form.Button" showlabel="false"
-               title="<?php echo i18n('selectCurrentProject');?>" style="top:2px;height:20px;width:20px;"
-               ondblclick="directUnselectProject();"
-               onClick="if (!timeoutDirectSelectProject) {showWait();timeoutDirectSelectProject=setTimeout('directSelectProject();',500);}"
-               iconClass="<?php if ($iconClassWithSize) echo 'iconProject16';?> iconProject iconSize16" xclass="detailButton">
-            </button>
-          </span>
-          <span style="float:right;margin-right:3px;">
-            <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="top:2px;height:20px;width:20px;"
-               title="<?php echo i18n('searchProject');?>" iconClass="iconSearch16 iconSearch iconSize16" >
-               <script type="dojo/connect" event="onClick" args="evt">        
-                  showDetail('projectSelectorFiletering', false , 'Project',true,null,true);    
-               </script>
-             </button>
-    	   </span>
+        <table>
+          <tr>
+            <td>
+              <span style="margin-right:3px;" class="roundedButtonSmall">
+                <button id="projectSelectorParametersButton" dojoType="dijit.form.Button" showlabel="false"
+                 title="<?php echo i18n('dialogProjectSelectorParameters');?>" style="top:2px;height:20px;"
+                 iconClass="<?php if ($iconClassWithSize) echo 'iconParameter16';?> iconParameter iconSize16" xclass="detailButton">
+                  <script type="dojo/connect" event="onClick" args="evt">
+                    loadDialog('dialogProjectSelectorParameters', null, true);
+                  </script>
+                </button>
+              </span>
+            </td>
+            <td>
+              <span style="margin-right:3px;" class="roundedButtonSmall">
+                <button id="projectSelectorSelectCurrent" dojoType="dijit.form.Button" showlabel="false"
+                   title="<?php echo i18n('selectCurrentProject');?>" style="top:2px;height:20px;width:20px;"
+                   ondblclick="directUnselectProject();"
+                   onClick="if (!timeoutDirectSelectProject) {showWait();timeoutDirectSelectProject=setTimeout('directSelectProject();',500);}"
+                   iconClass="<?php if ($iconClassWithSize) echo 'iconProject16';?> iconProject iconSize16" xclass="detailButton">
+                </button>
+              </span>
+            </td>
+            <td>
+              <span style="margin-right:3px;" class="roundedButtonSmall">
+                <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="top:2px;height:20px;width:20px;"
+                   title="<?php echo i18n('searchProject');?>" iconClass="iconSearch16 iconSearch iconSize16" >
+                   <script type="dojo/connect" event="onClick" args="evt">        
+                      showDetail('projectSelectorFiletering', false , 'Project',true,null,true);    
+                   </script>
+                 </button>
+        	   </span>
+            </td>
+          </tr>
+        </table>
         </div>
       </span>
       <?php }else{?>
@@ -293,7 +303,7 @@
       </span>
       <?php }?>
     </td>
-    <td width="" style="vertical-align:top;text-align:center;">
+    <td width="" style="vertical-align:top;text-align:center;" onmouseover="showActionProjectSelector();" onmouseout="hideActionProjectSelector();">
       <span style="position:relative;top:5px;font-size:130%;font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
     </td>    
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
