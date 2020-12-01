@@ -6456,13 +6456,14 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         echo '<input type="hidden" id="initleft_'.$assignment->id.'" value="'.Work::displayWork($assignment->leftWork).'"/>';
       }
       echo '<td class="assignData'.$idleClass.'" align="right" style="width:15%;vertical-align:middle;">';
+      $inputSizing=(isNewGui())?'font-size:12px;padding: 0px;margin:-1px 0px;max-width:95%;':'box-sizing:border-box;margin:2px 0px;padding:1px;max-width:100%;';
       if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW' and $planningMode !="MAN" and !$assignment->idle) {
         echo '<img  id="idImageAssignedWork'.$assignment->id.'" src="../view/img/savedOk.png" 
                 style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
         echo '<div dojoType="dijit.form.NumberTextBox" id="assAssignedWork_'.$assignment->id.'" name="assAssignedWork_'.$assignment->id.'"
-    						  class="dijitReset dijitInputInner dijitNumberTextBox"
+    						  class="dijitReset dijitInputInner dijitNumberTextBox assignmentNumber"
       					  value="'.Work::displayWork($assignment->assignedWork).'"
-                  style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px" >
+                  style="background:none;max-width:100%;display:block;border:1px solid #A0A0A0 !important;'.$inputSizing.'" >
                    <script type="dojo/method" event="onChange">
                     assUpdateLeftWork('.$assignment->id.'); 
                     saveLeftWork('.$assignment->id.',\'AssignedWork\'); 
@@ -6485,7 +6486,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         echo '<div dojoType="dijit.form.NumberTextBox" id="assLeftWork_'.$assignment->id.'" name="assLeftWork_'.$assignment->id.'"
         				class="dijitReset dijitInputInner dijitNumberTextBox"
         				value="'.Work::displayWork($assignment->leftWork).'"
-                style="padding:1px;max-width:100%; background:none;box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px"  >
+                style="background:none;display:block;border:1px solid #A0A0A0 !important;'.$inputSizing.'"  >
                 <script type="dojo/method" event="onChange">
                     assUpdateLeftWorkDirect('.$assignment->id.');
                     saveLeftWork('.$assignment->id.',\'LeftWork\');
