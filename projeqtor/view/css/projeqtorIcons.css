@@ -1824,6 +1824,8 @@
 .ProjeQtOrFlatRed .iconOpportunityType { background-image: url(customIcons/red/iconOpportunityType.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconOpportunityType { background-image: url(customIcons/new/iconOpportunityType.svg);  background-repeat: no-repeat;}
 
+.ProjeQtOrNewGui .iconOther { background-image: url(customIcons/new/iconOther.svg);  background-repeat: no-repeat;}
+
 .iconOverallProgress { background-image: url(images/iconOverallProgress32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconOverallProgress { background-image: url(customIcons/blue/iconOverallProgress.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconOverallProgress { background-image: url(customIcons/green/iconOverallProgress.png);  background-repeat: no-repeat;}
