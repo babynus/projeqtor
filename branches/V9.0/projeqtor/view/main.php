@@ -967,7 +967,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       $nbFavoriteRow = 5;
       ?>
       <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;z-index: 999;top:46px;background-color: rgb(181 181 181 / 50%);display:none"
-      onClick="editFavoriteRow(false);">
+      onClick="dojo.byId('anotherBarContainer').style.display = 'none';">
         <table style="width:100%;"><tr>
           <td id="hideMenuLeftMargin" style="width:37px;display:none;"></td>
           <td style="width:120px;">
