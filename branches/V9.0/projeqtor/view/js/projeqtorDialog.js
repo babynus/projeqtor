@@ -7841,7 +7841,7 @@ function loadMenuBarObject(menuClass, itemName, from) {
   stockHistory(currentScreen,null,"object");
   selectIconMenuBar(menuClass);
   if(isNewGui){
-	  editFavoriteRow(true);
+	  editFavoriteRow(false);
 	  refreshSelectedItem(menuClass, defaultMenu);
 	  if(defaultMenu == 'menuBarRecent'){
 		  menuNewGuiFilter(defaultMenu, menuClass);
@@ -7992,7 +7992,7 @@ function loadMenuBarItem(item, itemName, from) {
   stockHistory(item,null,currentScreen);
   selectIconMenuBar(item);
   if(isNewGui){
-	  editFavoriteRow(true);
+	  editFavoriteRow(false);
 	  refreshSelectedItem(item, defaultMenu);
 	  if(defaultMenu == 'menuBarRecent'){
 		  menuNewGuiFilter(defaultMenu, item);
@@ -8013,6 +8013,13 @@ function loadMenuBarPlugin(item, itemName, from) {
   hideResultDivs();
   currentPluginPage=pluginMenuPage['menu'+item];
   loadContent(pluginMenuPage['menu'+item], "centerDiv");
+  if(isNewGui){
+	  editFavoriteRow(false);
+	  refreshSelectedItem(item, itemName);
+	  if(defaultMenu == 'menuBarRecent'){
+		  menuNewGuiFilter(defaultMenu, item);
+	  }
+  }
   return currentPluginPage;
 }
 
