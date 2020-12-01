@@ -43,8 +43,8 @@ $nbFavoriteRow=5;
 $paramAccessMode = Parameter::getUserParameter('newItemAccessMode');
 if(!$paramAccessMode)$paramAccessMode='direct';
 ?>
-<div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:43px; position:absolute !important;top:30px;left:250px;border-bottom:3px solid var(--color-dark);">
-  <div id="menuBarVisibleDiv" style="height:auto;width:auto;  top: 0px; left:248px; z-index:0;">
+<div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:46px; position:absolute !important;top:30px;left:250px;">
+  <div id="menuBarVisibleDiv" style="height:auto;width:auto;  top: 0px; height:43px; left:248px; z-index:0;border-bottom: 3px solid var(--color-dark);">
     <div id="contentMenuBar" class="contentMenuBar" style="width:100%;left: 0px; top:1px; overflow:hidden; z-index:0">
 	    <div  name="menubarContainer" id="menubarContainer" style="height:43px;width:auto; position: relative; left:0px; overflow:hidden;z-index:0">
 	      <input type="hidden" id="isEditFavorite" name="isEditFavorite" value="false">
