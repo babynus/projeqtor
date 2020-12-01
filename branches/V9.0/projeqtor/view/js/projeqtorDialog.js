@@ -7845,7 +7845,7 @@ function loadMenuBarObject(menuClass, itemName, from) {
 	  if(defaultMenu == 'menuBarRecent'){
 		  menuNewGuiFilter(defaultMenu, menuClass);
 	  }
-	  editFavoriteRow(false);
+	  editFavoriteRow(true);
   }
   return true;
 }
@@ -7992,11 +7992,11 @@ function loadMenuBarItem(item, itemName, from) {
   stockHistory(item,null,currentScreen);
   selectIconMenuBar(item);
   if(isNewGui){
-	  editFavoriteRow(false);
 	  refreshSelectedItem(item, defaultMenu);
 	  if(defaultMenu == 'menuBarRecent'){
 		  menuNewGuiFilter(defaultMenu, item);
 	  }
+	  editFavoriteRow(true);
   }
   return true;
 }
@@ -8014,11 +8014,11 @@ function loadMenuBarPlugin(item, itemName, from) {
   currentPluginPage=pluginMenuPage['menu'+item];
   loadContent(pluginMenuPage['menu'+item], "centerDiv");
   if(isNewGui){
-	  editFavoriteRow(false);
 	  refreshSelectedItem(item, itemName);
 	  if(defaultMenu == 'menuBarRecent'){
 		  menuNewGuiFilter(defaultMenu, item);
 	  }
+	  editFavoriteRow(true);
   }
   return currentPluginPage;
 }
