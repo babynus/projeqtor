@@ -482,6 +482,7 @@
 .ProjeQtOrFlatGrey .iconButtonBack32 { background-image: url(customIcons/grey/iconButtonBack.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonBack32 { background-image: url(customIcons/red/iconButtonBack.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonBack32 { background-image: url(customIcons/new/iconButtonBack.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonBack { background-image: url(customIcons/new/iconButtonBack.svg);  background-repeat: no-repeat; }
 
 .iconButtonCollapseOpen { background-image: url(images/iconCollapseOpen.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonCollapseOpen { background-image: url(images/iconCollapseOpen.png);  background-repeat: no-repeat; }

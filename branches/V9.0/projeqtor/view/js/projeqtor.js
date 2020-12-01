@@ -685,7 +685,7 @@ function changeTheme(newTheme) {
     // Mehdi #2887
     var callBack = function() { 
      if(!isNewGui) addMessage("Theme=" + newTheme); 
-      resizeContainer("mainDivContainer", null);
+      if(dojo.byId("mainDivContainer"))resizeContainer("mainDivContainer", null);
     };
     saveDataToSession('theme',newTheme, true, callBack);
   }
