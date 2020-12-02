@@ -333,7 +333,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
     $canRead=true;
   }
   if ($noselect) {
-    echo $noData;
+    echo "<div class='labelMessageEmptyArea'>$noData</div><input type='hidden' id='noDataInObjectDetail' />";
 // MTY - LEAVE SYSTEM    
 //  } else if (!$canRead) {
   } else if (!$canRead || !$canReadLeave) {

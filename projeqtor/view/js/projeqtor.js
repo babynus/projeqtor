@@ -69,6 +69,8 @@ var displayFilterComponentVersionPlanning='0';
 var contentPaneResizingInProgress={};
 
 function saveContentPaneResizing(pane, size, saveAsUserParameter) {
+  if (donotSaveResize) return;
+  console.log("saveContentPaneResizing("+pane+", "+size+", "+saveAsUserParameter+")");
   if (contentPaneResizingInProgress[pane]) clearTimeout(contentPaneResizingInProgress[pane]);
   contentPaneResizingInProgress[pane]=setTimeout('saveDataToSession("'+pane+'","'+size+'",'+((saveAsUserParameter)?'true':'false')+');contentPaneResizingInProgress["'+pane+'"]=null;',100);
   //saveDataToSession(pane,size,saveAsUserParameter);
@@ -6855,25 +6857,37 @@ function resizeListDiv() {
 //  }
 }
 
-
+var donotSaveResize=false;
+var hideEmptyDetail=false;
 function checkValidatedSize(paramDiv,paramRightDiv, paramMode){
+  var minRight=400;
+  if (donotSaveResize) return;
+  if (isNewGui) minRight=500;
   if (paramMode != 'switch'){
     if (!dojo.byId('detailRightDiv')) return;
     if (paramDiv== 'left'){
+      if(hideEmptyDetail && dojo.byId("contentDetailDiv") && dojo.byId("noDataInObjectDetail")) {
+        donotSaveResize=true;
+        var listWidth=(dojo.byId("centerDiv").offsetWidth);
+        dijit.byId("listDiv").resize({w: listWidth});
+        resizeContainer("mainDivContainer", null);
+        setTimeout("donotSaveResize=false",1000);
+        return true;
+      }  
 	    if (! dojo.byId('detailRightDiv') || dojo.byId('detailRightDiv').offsetWidth==0 || paramRightDiv=='bottom'){
-	      if (dojo.byId("contentDetailDiv").offsetWidth<400) {
-	        var listWidth=(dojo.byId("centerDiv").offsetWidth)-410;
+	      if (dojo.byId("contentDetailDiv").offsetWidth<minRight) {
+	        var listWidth=(dojo.byId("centerDiv").offsetWidth)-(minRight+10);
 	        dijit.byId("listDiv").resize({w: listWidth});
 	        resizeContainer("mainDivContainer", null);
 	        return true;
 	      }
 	    } else {
-  	    if((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < 400){
-  	      var detailRightWidth=(dojo.byId('contentDetailDiv').offsetWidth)-410;
+  	    if((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < minRight){
+  	      var detailRightWidth=(dojo.byId('contentDetailDiv').offsetWidth)-(minRight+10);
   	      var listWidth=dojo.byId('centerDiv').offsetWidth-dojo.byId('contentDetailDiv').offsetWidth;
   	      if(150 > detailRightWidth){
   	        detailRightWidth=150;
-  	        listWidth=(dojo.byId("centerDiv").offsetWidth)-560;
+  	        listWidth=(dojo.byId("centerDiv").offsetWidth)-(minRight+detailRightWidth+10);
   	      }
   	      dijit.byId('listDiv').resize({w:listWidth});
   	      dijit.byId('detailRightDiv').resize({w:detailRightWidth});
@@ -6910,6 +6924,7 @@ function checkValidatedSize(paramDiv,paramRightDiv, paramMode){
 }
 
 function checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode){
+  if (donotSaveResize) return;
 	if(paramMode !='switch'){
 	  if (!dojo.byId('detailRightDiv')) return;
 		if(paramDiv== 'left'){
