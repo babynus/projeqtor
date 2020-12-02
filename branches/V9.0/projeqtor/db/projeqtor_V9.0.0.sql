@@ -286,8 +286,3 @@ INSERT INTO ${prefix}parameter (idUser, parameterCode, parameterValue) SELECT r.
 
 UPDATE `${prefix}habilitationother` set scope='canDeleteAttachment' where scope='canDeleteAttachement';
 
-ALTER TABLE `${prefix}type` add image varchar(200) DEFAULT NULL;
-
-UPDATE `${prefix}type` set image='view/css/customIcons/new/iconAlert.svg' where scope='Message' and name="ALERT";
-UPDATE `${prefix}type` set image='view/css/customIcons/new/iconInfo.svg' where scope='Message' and name="INFO";
-UPDATE `${prefix}type` set image='view/css/customIcons/new/iconWarning.svg' where scope='Message' and name="WARNING"; 	

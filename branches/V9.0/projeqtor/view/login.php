@@ -233,14 +233,10 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
           $messageType=new MessageType($msg->idMessageType);
       }?>
       <div class="loginMessageTitle" style="color:<?php echo (isNewGui())?'white':$msgTypeList[$msg->idMessageType];?>;"><?php echo htmlEncode($msg->name);?></div>
-      <?php if(isNewGui()) echo '<div style="width:32px;height:32px;float:right;margin-right:15px;"><img class="imgMessageType" src="../'.$messageType->image.'"></div>'?>
       <br/>
       <?php 
       if(isNewGui()){
-       echo '<div style="float:left;width:100%;">';
-       echo '<br/>';
        echo htmlSetClickableImages($msg->description,400);
-       echo '</div>';
       }else{
         echo $msg->description;
       }?>

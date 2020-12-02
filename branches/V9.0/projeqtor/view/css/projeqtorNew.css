@@ -605,7 +605,6 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .roundedVisibleButton.roundedButton.generalColClass {
 	background: url() var(--color-button-background);
 	color:var(--color-button-text);
-	  
 }
 .ProjeQtOrNewGui .roundedVisibleButton .dijitReset.dijitInline.dijitButtonNode {
 	margin-right: 5px;
@@ -908,6 +907,7 @@ animation: fadeIn ease 0.5s;
 	border-radius:5px;
 	background: var(--color-lighter);
   color:var(--color-button-text);
+  
 }
 .ProjeQtOrNewGui .dijitButtonNode{
 	padding: 0.1em 0em 0.1em 0em;
@@ -1578,8 +1578,7 @@ element.style {
     top: unset;
     left: unset;
     border-bottom: unset;
-    width: auto;
-    float:right; 
+	width:100%;
     text-align: right;
     white-space: nowrap;
     overflow: hidden;

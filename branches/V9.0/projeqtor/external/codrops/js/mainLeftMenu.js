@@ -325,6 +325,8 @@
             var buttonBack=self.breadcrumbsCtrl.querySelector('.iconButtonBack ');
             if(buttonBack){
               self.breadcrumbsCtrl.removeChild(buttonBack);
+              self.breadcrumbsCtrl.style="cursor:initial;";
+              self.breadcrumbsCtrl.removeEventListener('onClick');
             }
           }
 
