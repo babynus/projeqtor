@@ -60,7 +60,6 @@ class Type extends SqlElement {
   public $_lib_statusMustChangeLeftDone;
   public $showInFlash;
   public $internalData;
-  public $image;
   public $scope;
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
   public $color;
@@ -102,7 +101,7 @@ class Type extends SqlElement {
                                           "scope"=>"hidden",
                                           "lockNoLeftOnDone"=>"hidden",
                                           "_lib_statusMustChangeLeftDone"=>"hidden",
-                                          "image"=>"hidden");
+                                          );
   
   private static $_databaseTableName = 'type';
   private static $_databaseCriteria = array();
