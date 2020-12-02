@@ -1185,7 +1185,6 @@ animation: fadeIn ease 0.5s;
 	margin-bottom: 3px;
 }
 
-
 .ProjeQtOrNewGui .colorMediumDiv {
 	background: var(--color-dark) !important;
 	color : var(--color-white) !important;
@@ -1576,7 +1575,8 @@ element.style {
     top: unset;
     left: unset;
     border-bottom: unset;
-    width: 100%;
+    width: auto;
+    float:right; 
     text-align: right;
     white-space: nowrap;
     overflow: hidden;
@@ -1678,4 +1678,10 @@ element.style {
 
 #buttonLoginPwChange, #cancelButton {
 	padding: unset !important;
+}
+
+.imgMessageType{
+	width:32px;
+	width:32px;
+	filter: brightness(0) invert(1);
 }

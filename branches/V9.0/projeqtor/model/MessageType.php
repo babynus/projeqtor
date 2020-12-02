@@ -35,6 +35,7 @@ class MessageType extends SqlElement {
   public $id;    // redefine $id to specify its visible place 
   public $name;
   public $color;
+  public $image;
   public $sortOrder=0;
   public $idle;
   public $description;
