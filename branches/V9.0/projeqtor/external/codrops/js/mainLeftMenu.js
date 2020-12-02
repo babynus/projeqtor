@@ -237,26 +237,30 @@
     if( this.isAnimating ) {
       return false;
     }
-    this.isAnimating = true;
-
-    // current menu slides out
-    this._menuOut();
-    // next menu (previous menu) slides in
-    var backMenu = this.menusArr[this.menusArr[this.current_menu].backIdx].menuEl;
-    this._menuIn(backMenu);
-
-    // remove last breadcrumb
-    if( this.breadScrumLeft ) {
-      this.breadScrumLeft.removeChild(this.breadScrumLeft.lastElementChild);
-    }
-    if(this.breadcrumbsCtrl){
-      var idx = this.menus.indexOf(backMenu),
-      name= idx ? this.menusArr[idx].name : this.options.initialBreadcrumb;
-      var newBc = document.createElement('a');
-      newBc.href = '#'; 
-      newBc.innerHTML = name;
-      this.breadcrumbsCtrl.replaceChild(newBc,this.breadcrumbsCtrl.lastElementChild);
-    }
+    var currentMenu = this.menusArr[this.current_menu].menuEl;
+   if(currentMenu.getAttribute('data-menu')!='main'){
+     this.isAnimating = true;
+      // current menu slides out
+      this._menuOut();
+      // next menu (previous menu) slides in
+      var backMenu = this.menusArr[this.menusArr[this.current_menu].backIdx].menuEl;
+      this._menuIn(backMenu);
+  
+      // remove last breadcrumb
+      if( this.breadScrumLeft ) {
+        this.breadScrumLeft.removeChild(this.breadScrumLeft.lastElementChild);
+      }
+      if(this.breadcrumbsCtrl){
+        var idx = this.menus.indexOf(backMenu),
+        name= idx ? this.menusArr[idx].name : this.options.initialBreadcrumb;
+        var newBc = document.createElement('a');
+        newBc.href = '#'; 
+        newBc.innerHTML = name;
+        this.breadcrumbsCtrl.replaceChild(newBc,this.breadcrumbsCtrl.lastElementChild);
+      }
+   }else{
+     this.isAnimating = false;
+   } 
   };
 
   MLMenu.prototype._menuOut = function(clickPosition) {
@@ -264,7 +268,6 @@
     var self = this,
       currentMenu = this.menusArr[this.current_menu].menuEl,
       isBackNavigation = typeof clickPosition == 'undefined' ? true : false;
-
     // slide out current menu items - first, set the delays for the items
     this.menusArr[this.current_menu].menuItems.forEach(function(item, pos) {
       item.style.WebkitAnimationDelay = item.style.animationDelay = isBackNavigation ? parseInt(pos * self.options.itemsDelayInterval) + 'ms' : parseInt(Math.abs(clickPosition - pos) * self.options.itemsDelayInterval) + 'ms';
@@ -326,7 +329,7 @@
             if(buttonBack){
               self.breadcrumbsCtrl.removeChild(buttonBack);
               self.breadcrumbsCtrl.style="cursor:initial;";
-              self.breadcrumbsCtrl.removeEventListener('onClick');
+
             }
           }
 
