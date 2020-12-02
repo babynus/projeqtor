@@ -798,6 +798,7 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
   barckground-color: #ffffff !important;
   background-position: 3px 3px;
   height:22px;
+  width:32px;
 }
 
 .display {
