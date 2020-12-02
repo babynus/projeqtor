@@ -5215,6 +5215,7 @@ abstract class SqlElement {
       }
       $isSubProj = false;
       foreach ($statusMailList as $stm) {
+        $isSubProj = false;
         if($proj and $stm->idProject){
         	if(in_array($stm->idProject,$topList)){
         		$statusMailListOrganized[$stm->idEventForMail]=$stm;
