@@ -95,6 +95,12 @@ if (is_file ( "../tool/parametersLocation.php" )) {
               <div  id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="width: 470px; height:210px;overflow:hidden">
   <form id="indexForm" name="indexForm" action="main.php" method="post" target="_top">
     <input type="hidden" id="xcurrentLocale" name="xcurrentLocale" value="en" />
+    <input type="hidden" id="currentWidth" name="currentWidth" value="" />
+    <script>
+    (function() {
+      dojo.byId('currentWidth').value= screen.width;
+      })();
+    </script>
   </form>
               </div>
               <div style="width: 470px; height:130px;position:absolute;top:160px;overflow:hidden;text-align:center;">
