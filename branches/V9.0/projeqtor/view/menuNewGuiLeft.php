@@ -60,16 +60,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
              echo drawLeftMenuListNewGui($displayMode);
             ?>
       </nav>
-	  <script>
-	   (function() {
-	     var menuEl = dojo.byId('ml-menu'),
-			mlmenu = new MLMenu(menuEl, {
-				initialBreadcrumb : 'Accueil', // initial breadcrumb text
-				backCtrl : false, // show back button
-			});
-	    })();
-	   new menuLeft( dojo.byId( 'mainDiv' ) );
-	  </script>
+
 	<?php if(Parameter::getUserParameter('helpDisplayIconMesagediv')!='yes'){ ?>
 	 <div id="helpDisplayIcon" class="helpDisplayIcon" onclick="helpDisplayIconIsRead('yes')" style="vertical-align: middle;"
 	   onmouseover="dojo.byId('textDisplayIcon').style.display='none';dojo.byId('hideTextDisplayIcon').style.display='block';"

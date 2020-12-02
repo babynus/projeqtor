@@ -367,6 +367,14 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       if (isNewGui) {
         changeTheme('<?php echo getTheme();?>');
         setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>','<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>');
+          (function() {
+    var menuEl = dojo.byId('ml-menu'),
+    mlmenu = new MLMenu(menuEl, {
+      initialBreadcrumb : 'Accueil', // initial breadcrumb text
+      backCtrl : false, // show back button
+    });
+  })();
+  new menuLeft( dojo.byId( 'mainDiv' ) );
       }
       //setColorTheming('blue');
       // FIX IE11 not recognized as IE
