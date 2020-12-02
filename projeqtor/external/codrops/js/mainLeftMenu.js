@@ -385,6 +385,7 @@
       newPreviousB.setAttribute('title', i18n('previous'));
       newPreviousB.setAttribute('style','float:left;background-size:12px !important;margin-top:8px;cursor:pointer !important;');
       var oldPreviousB=this.breadcrumbsCtrl.querySelector('.iconButtonBack ');
+      this.breadcrumbsCtrl.style="cursor:pointer !important;";
       if(oldPreviousB){
         this.breadcrumbsCtrl.replaceChild(newPreviousB,oldPreviousB);
       }else{
@@ -392,7 +393,7 @@
       }
       // add event back
       var self = this;
-      newPreviousB.addEventListener('click', function(ev) {
+      this.breadcrumbsCtrl.addEventListener('click', function(ev) {
         ev.preventDefault();
         self._back();
       });
@@ -423,6 +424,7 @@
       self.breadcrumbsCtrl.replaceChild(bc,self.breadcrumbsCtrl.lastElementChild);
 
     });
+
     
   };
 
