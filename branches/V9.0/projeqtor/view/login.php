@@ -299,7 +299,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			               <td title="<?php echo i18n("login");?>" style="background:transparent !important;width: 100px;">
 			                  
 			               </td>
-			               <td title="<?php echo i18n("login");?>" style="width:450px">
+			               <td title="<?php echo i18n("login");?>" style="width:<?php echo (isNewGui())?'450px':'250px';?>">
 			                 <?php if(isNewGui())echo '<div class="loginDivContainer container">'; ?>
 			                   <div class="<?php echo (isNewGui())?'inputLoginIconNewGui iconLoginUserNewGui imageColorNewGui iconSize22':'inputLoginIcon iconLoginUser';?> ">&nbsp;</div>
 			                   <input tabindex="1" id="login" type="text"  class="<?php echo (isNewGui())?'inputLoginNewGui':'inputLogin';?>"
