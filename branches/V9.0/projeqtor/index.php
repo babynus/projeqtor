@@ -61,10 +61,10 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   <script language="javascript">
   var isNewGui=<?php echo (isNewGui())?'true':'false';?>;            
   dojo.addOnLoad(function(){
-//     if (isNewGui) {
+    if (isNewGui) {
       changeTheme('<?php echo getTheme();?>');
       setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>','<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>');
-//     }
+    }
   });
     function autoRedirect() {
       window.setTimeout("document.getElementById('indexForm').submit()",10);
@@ -102,6 +102,12 @@ if (is_file ( "../tool/parametersLocation.php" )) {
               <div  id="formDivIndex" dojoType="dijit.layout.ContentPane" region="center" style="width: 470px; height:210px;overflow:hidden">
                 <form id="indexForm" name="indexForm" action="view/index.php" method="post" target="_top">
                   <input type="hidden" id="xcurrentLocale" name="xcurrentLocale" value="en" />
+                  <input type="hidden" id="currentWidth" name="currentWidth" value="" />
+                  <script>
+                  (function() {
+                    dojo.byId('currentWidth').value= screen.width;
+                    })();
+                  </script>
                 </form>
               </div>
             </td>

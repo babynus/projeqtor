@@ -236,7 +236,10 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
       <br/>
       <?php 
       if(isNewGui()){
-       echo htmlSetClickableImages($msg->description,400);
+       $currentWidth=(RequestHandler::isCodeSet('currentWidth')?RequestHandler::getValue('currentWidth'):'');
+       if($currentWidth!='')$calculatedWidth=($currentWidth*0.33)*0.82;
+       $width=($currentWidth!='')?$calculatedWidth:400;
+       echo htmlSetClickableImages($msg->description,$width);
       }else{
         echo $msg->description;
       }?>
