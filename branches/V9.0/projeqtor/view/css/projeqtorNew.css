@@ -628,7 +628,10 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .ganttIconBackground div, .ProjeQtOrNewGui .imageColorNewGui, .ProjeQtOrNewGui .directAttachment ,
 .ProjeQtOrNewGui .buttonIconNewGui .dijitIcon,
 .ProjeQtOrNewGui #mainDivMenu .iconSize22, .ProjeQtOrNewGui #planButton,
-.ProjeQtOrNewGui #menuBarButtonDiv .roundedIconButton.imageColorNewGui:hover
+.ProjeQtOrNewGui #menuBarButtonDiv .roundedIconButton.imageColorNewGui:hover,
+.ProjeQtOrNewGui .comboDetail div .iconSize32, .ProjeQtOrNewGui .comboDetail .dijitIcon, .ProjeQtOrNewGui .allSearchFixLength .dijitIcon,
+.ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButton .dijitIcon,
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButton.dialogDetailButton .dijitIcon
  {
   -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
@@ -643,11 +646,21 @@ animation: fadeIn ease 0.5s;
 }
 .ProjeQtOrNewGui #centerDiv .dijitButtonHover .dijitButtonIcon, .ProjeQtOrNewGui .buttonIconNewGui .dijitButtonHover .dijitIcon,
 .ProjeQtOrNewGui #centerDiv .dijitDropDownButtonHover .dijitButtonIcon, .ProjeQtOrNewGui .buttonIconNewGui .dijitDropDownButtonHover .dijitIcon,
-.ProjeQtOrNewGui #centerDiv .roundedButtonSmall:hover .iconSize16, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall:hover .iconSize22
+.ProjeQtOrNewGui #centerDiv .roundedButtonSmall:hover .iconSize16, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall:hover .iconSize22,
+.ProjeQtOrNewGui .allSearchFixLength .dijitButtonHover .dijitIcon, .ProjeQtOrNewGui .allSearchFixLength .dijitDropDownButtonHover .dijitIcon,
+.ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButtonHover .dijitIcon,
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonHover.dialogDetailButton .dijitIcon
 {
   -webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   color:var(--color-secondary);
+}
+.ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButton,
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButton.dialogDetailButton,
+.ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButton .dijitButtonNode,
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButton.dialogDetailButton .dijitButtonNode{
+	border:0;
+	background:transparent;
 }
 
 .ProjeQtOrNewGui #toolBarDiv .dijitIcon, .ProjeQtOrNewGui #toolBarDiv .iconSize22, 
