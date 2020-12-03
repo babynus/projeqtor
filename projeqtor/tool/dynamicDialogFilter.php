@@ -103,7 +103,7 @@ require_once "../tool/projeqtor.php";
              <td style="width:<?php echo (isNewGui())?'370':'320';?>px;vertical-align:middle;position:relative;">
              <?php //ADD qCazelles - Dynamic filter - Ticket #78?>
                <div id="filterDynamicParameterPane" dojoType="dijit.layout.ContentPane" region="top" 
-                style="<?php if (isNewGui()) echo 'position:absolute;left:200px;top:9px;width:160px;overflow:hidden'?>">
+                style="<?php if (isNewGui()) echo 'position:absolute;left:200px;top:9px;width:160px;overflow:hidden;z-index:20;'?>">
                 <?php if (isNewGui()) {?>
                   <div  id="filterDynamicParameterSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" 
                     title="<?php echo i18n("dynamicValue");?>"
@@ -126,6 +126,9 @@ require_once "../tool/projeqtor.php";
                <select id="filterValueList" name="filterValueList[]" value=""  
                  dojoType="dijit.form.MultiSelect" multiple
                  style="<?php echo (isNewGui())?'width:350px;font-size:10pt;padding:30px 0px 0px 0px;color:#555555;':'width:325px;';?>height:150px;" size="10" class="selectList"></select>
+               <?php if (isNewGui()) {?>
+                 <div id="filterValueListHideTop" style="position:absolute;top:1px;left:1px;width:340px;height:25px;background:#ffffff;z-index:15;display:none" ></div>
+               <?php }?>
                <?php if (isNewGui()) {?>
                <div  id="filterValueCheckboxSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" 
                  leftLabel="" rightLabel="" style="width:10px;position:relative; top:0px;left:5px;z-index:99;display:none;" >
