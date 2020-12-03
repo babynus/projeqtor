@@ -74,9 +74,9 @@ $hasVersion=(property_exists($typeKanbanC,'idTargetProductVersion'))?true:false;
     <table width="100%">
       <tr height="100%" style="vertical-align: middle;">
         <td width="50px" align="center">          
-          <td align="center">
+          <div style="position:absolute;top:2px">
             <?php echo formatIcon('Kanban',32,null,true);?>
-          </td>
+          </div>
         <td>
   <?php 
   kanbanListSelect($user,$name,$type,$idKanban);
@@ -346,6 +346,7 @@ function drawColumnKanban($type,$jsonD,$idKanban){
         $maxHeight=($destHeight-163);
         $seeWork=Parameter::getUserParameter("kanbanSeeWork".Parameter::getUserParameter("kanbanIdKanban"));
         if ($seeWork) $maxHeight-=32;
+        if (isNewGui()) $maxHeight-=6;
         $maxHeight.='px';
       } else {
         $maxHeight='100%';
@@ -359,11 +360,11 @@ function drawColumnKanban($type,$jsonD,$idKanban){
       
       echo '<td style="vertical-align:top;;width:'.$maxWidth.';min-width:332px;">
             <table style="width:100%;"><tr style="min-height:47px;height:47px;max-height:47px;">
-            <td class="kanbanColumn" style="position:relative;background-color:#e2e4e6;padding:3px 8px 0px;border-bottom:2px solid #ffffff;min-width:332px;">';
+            <td class="kanbanColumn" style="position:relative;background-color:'.((isNewGui())?'var(--color-light);border-radius:10px 10px 0 0':'#e2e4e6').';padding:3px 8px 0px;border-bottom:2px solid #ffffff;min-width:332px;">';
       getNameFromTypeKanban($itemKanban,$nextFrom,$type,$isStatus,$nbItems,$idKanban,$realWork,$plannedWork,$leftWork);
       echo '</td></tr><tr>';
       echo '
-        <td class="kanbanColumn" style="overflow-y:scroll;overflow-x:hidden;display:block; height:'.$maxHeight.';max-height:'.$maxHeight.'; position:relative;background-color:#e2e4e6;padding:'.(($kanbanFullWidthElement=='on')?'8px':'6px 0px 6px 4px').';width:auto;min-width:332px;" id="dialogRow'.$itemKanban['from']. '" 
+        <td class="kanbanColumn" style="overflow-y:scroll;overflow-x:hidden;display:block; height:'.$maxHeight.';max-height:'.$maxHeight.'; position:relative;background-color:'.((isNewGui())?'var(--color-light);border:2px solid var(--color-light);border-radius:0 0 10px 10px':'#e2e4e6').';padding:'.(($kanbanFullWidthElement=='on')?'8px':'6px 0px 6px 4px').';width:auto;min-width:332px;" id="dialogRow'.$itemKanban['from']. '" 
         jsId="dialogRow'.$itemKanban['from']. '" dojotype="dojo.dnd.Source" dndType="typeRow'.$itemKanban['from']. '" withhandles="true"  
         '.($acceptTmp!='[]' ? 'data-dojo-props="accept: '.$acceptTmp.'"':'').' width="'.((100/count($jsonArray))).'%" valign="top">';
       echo '
@@ -851,28 +852,30 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
       $line->save();
     }
     $typeKanbanCTmp=$jsonDecode['typeData'];
+    if (isNewGui()) echo '<div style="margin-top:5px">';
     echo '
-    <div class="icon'.$typeKanbanCTmp.'16 icon'.$typeKanbanCTmp.' iconSize16" style="width:16px;height:16px;float:left"></div>
-    <span onclick="kanbanGoToKan('.$line->id.');dijit.byId(\'kanbanListSelect\').closeDropDown();" class="menuTree" style="float:left;height:15px;" '
+    <div class="imageColorNewGuiNoSelection icon'.$typeKanbanCTmp.'16 icon'.$typeKanbanCTmp.' iconSize16" style="width:16px;height:16px;float:left"></div>
+    <span onclick="kanbanGoToKan('.$line->id.');dijit.byId(\'kanbanListSelect\').closeDropDown();" class="menuTree" style="float:left;height:15px;'.((isNewGui())?'position:relative;top:-2px;':'').'" '
         . ' >&nbsp;&nbsp'
             . htmlEncode($line->name)
             . "</span>";
-          echo '  <a onClick="copyKanban('.$line->id.')" title="' . i18n('kanbanCopy'). '" >'
+          echo '  <a class="imageColorNewGui" onClick="copyKanban('.$line->id.')" title="' . i18n('kanbanCopy'). '" >'
               .formatSmallButton('Copy')
               .'</a> ';
-          echo '  <a onClick="editKanban('.$line->id.')" title="' . i18n('kanbanEdit'). '" >'
+          echo '  <a class="imageColorNewGui" onClick="editKanban('.$line->id.')" title="' . i18n('kanbanEdit'). '" >'
               .formatSmallButton('Edit')
               .'</a> ';
-          if($line->isShared==0) echo '  <a onClick="plgShareKanban('.$line->id.')" title="' . i18n('kanbanShare'). '" >'
+          if($line->isShared==0) echo '  <a class="imageColorNewGui" onClick="plgShareKanban('.$line->id.')" title="' . i18n('kanbanShare'). '" >'
               .formatSmallButton('Share')
               .'</a> ';
-          if($line->isShared==1) echo '  <a onClick="plgShareKanban('.$line->id.')" title="' . i18n('kanbanUnshare'). '" >'
+          if($line->isShared==1) echo '  <a class="imageColorNewGui" onClick="plgShareKanban('.$line->id.')" title="' . i18n('kanbanUnshare'). '" >'
               .formatSmallButton('Shared')
               .'</a> ';
-          echo '  <a onClick="delKanban('.$line->id.', \''.i18n("kanbanDel").'\')" title="' . i18n('kanbanDelete'). '" >'
+          echo '  <a class="imageColorNewGui" onClick="delKanban('.$line->id.', \''.i18n("kanbanDel").'\')" title="' . i18n('kanbanDelete'). '" >'
               .formatSmallButton('Remove')
               .'</a> ';
-          echo "<br/>";
+          if (isNewGui()) echo '</div>';
+          else echo "<br/>";
   }
   echo '<span style="float:left;height:15px;" value="-1" '
       . ' title="' . i18n("kanbanSelectKanban") . '" ></span><br/>';
@@ -888,16 +891,18 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
       $line->save();
     }
     $typeKanbanCTmp=$jsonDecode['typeData'];
+    if (isNewGui()) echo '<div style="margin-top:5px">';
     echo '
-        <div class="icon'.$typeKanbanCTmp.'16 icon'.$typeKanbanCTmp.' iconSize16" style="width:16px;height:16px;float:left"></div>
-        <span onclick="kanbanGoToKan('.$line->id.');dijit.byId(\'kanbanListSelect\').closeDropDown();" class="menuTree" style="float:left;height:15px;" '
-        . ' >&nbsp;&nbsp;&nbsp;&nbsp;'
+        <div class="imageColorNewGuiNoSelection icon'.$typeKanbanCTmp.'16 icon'.$typeKanbanCTmp.' iconSize16" style="width:16px;height:16px;float:left"></div>
+        <span onclick="kanbanGoToKan('.$line->id.');dijit.byId(\'kanbanListSelect\').closeDropDown();" class="menuTree" style="float:left;height:15px;'.((isNewGui())?'position:relative;top:-2px;':'').'" '
+        . ' >&nbsp;&nbsp'
             . htmlEncode($line->name)
             . "</span>";
-    echo '  <a onClick="copyKanban('.$line->id.')" title="' . i18n('kanbanCopy'). '" >'
+    echo '  <a onClick="copyKanban('.$line->id.')" title="' . i18n('kanbanCopy'). '" class="imageColorNewGui">'
         .formatSmallButton('Copy')
         .'</a> ';
-    echo "<br/>";
+    if (isNewGui()) echo '</div>';
+    else echo "<br/>";
   }
   $seeWork=Parameter::getUserParameter("kanbanSeeWork".Parameter::getUserParameter("kanbanIdKanban"));
   
@@ -916,7 +921,7 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
   if($idKanban!=-1)echo "<div dojoType=\"dijit.form.Button\" class=\"detailButton\"  
                         style=\"float:left;position:relative;margin-top:-1px;width:16pw;height:16px;\"
                         onclick=\"showDetail('refreshActionAdd".$typeKanbanC."',1,'".$typeKanbanC."',false,'new');\">" 
-                        .formatIcon('KanbanAdd'.$typeKanbanC,16, i18n('kanbanAdd'.$typeKanbanC))
+                        .formatIcon('KanbanAdd'.$typeKanbanC,22, i18n('kanbanAdd'.$typeKanbanC))
                         ."</div>";
   echo "</div><div style=\"width:60%;float:left;font-size: 16px;font-weight: bold;text-align:center;\">
                 <span>$name</span>&nbsp;</div><div style=\"float:left;height:10px;padding-top:5px;width:20%;text-align:right;\">";

@@ -386,7 +386,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr>
 			                
 			                <td colspan="3" style="position:fixed;width:100%; height:100%">
-			                  <div id="loginResultDiv" dojoType="dijit.layout.ContentPane" region="none" style="margin-left: 6px;">
+			                  <div id="loginResultDiv" dojoType="dijit.layout.ContentPane" region="none" style="margin-left: 6px;?>">
 			                    <input type="hidden" id="isLoginPage" name="isLoginPage" value="true" />
 			                    <?php if (Parameter::getGlobalParameter('applicationStatus')=='Closed'
 			                          or Sql::getDbVersion()!=$version) {

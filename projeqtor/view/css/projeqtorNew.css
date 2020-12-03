@@ -512,6 +512,7 @@ html, body, #mainDiv,
 }
 .ProjeQtOrNewGui .roundedButtonNoBorder, .ProjeQtOrNewGui .roundedButtonNoBorder:hover, .ProjeQtOrNewGui .roundedButtonSmall, .ProjeQtOrNewGui .roundedButtonSmall:hover,
 .ProjeQtOrNewGui .imageColorNewGui:hover, .ProjeQtOrNewGui .imageColorNewGui:hover .roundedButtonSmall,
+.ProjeQtOrNewGui .imageColorNewGuiNoSelection:hover, .ProjeQtOrNewGui .imageColorNewGuiNoSelection:hover .roundedButtonSmall,
 .ProjeQtOrNewGui .directAttachment:hover {
 	border: 0px;
 }
@@ -629,6 +630,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .buttonIconNewGui .dijitIcon,
 .ProjeQtOrNewGui #mainDivMenu .iconSize22, .ProjeQtOrNewGui #planButton,
 .ProjeQtOrNewGui #menuBarButtonDiv .roundedIconButton.imageColorNewGui:hover,
+.ProjeQtOrNewGui .imageColorNewGuiNoSelection, .ProjeQtOrNewGui .imageColorNewGuiNoSelection:hover, 
 .ProjeQtOrNewGui .comboDetail div .iconSize32, .ProjeQtOrNewGui .comboDetail .dijitIcon, .ProjeQtOrNewGui .allSearchFixLength .dijitIcon,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButton .dijitIcon,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButton.dialogDetailButton .dijitIcon
@@ -1699,4 +1701,17 @@ element.style {
 	width:32px;
 	width:32px;
 	filter: brightness(0) invert(1);
+}
+
+.ProjeQtOrNewGui .kanbanTextTitle {
+	color:var(--color-dark);
+}
+
+
+.ProjeQtOrNewGui .menuTree:hover {
+  background-color: transparent !important;
+  color:var(--color-secondary);
+}
+.ProjeQtOrNewGui #loginResultDiv, .ProjeQtOrNewGui #passwordResultDiv {
+	top:10% !important;
 }
