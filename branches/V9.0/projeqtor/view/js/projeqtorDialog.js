@@ -4231,6 +4231,7 @@ function showFilterDialog() {
       display : 'none'
     });
     if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
+    if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
     dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
@@ -4249,6 +4250,7 @@ function showFilterDialog() {
       display : 'none'
     });
     dojo.byId('filterDynamicParameterPane').style.display='none';
+    if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
     dijit.byId('idFilterAttribute').reset();
     if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value) dojo.byId('filterObjectClass').value=dojo.byId('objectClassList').value;
     else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value) dojo.byId('filterObjectClass').value=dojo.byId('objectClassManual').value;
@@ -4332,6 +4334,7 @@ function filterSelectAtribute(value) {
         });
         //ADD qCazelles - Dynamic filter - Ticket #78
         dojo.byId('filterDynamicParameterPane').style.display='block';
+        if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
         //END ADD qCazelles - Dynamic filter - Ticket #78
         dojo.byId('filterDataType').value=dataType;
         if (dataType == "bool") {
@@ -4343,6 +4346,7 @@ function filterSelectAtribute(value) {
             display : 'none'
           });
           if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
+          if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
           if (dijit.byId('filterValueCheckboxSwitch')) { 
             dojo.style(dijit.byId('filterValueCheckboxSwitch').domNode, {
               display : 'block'
@@ -4455,6 +4459,7 @@ function filterSelectAtribute(value) {
             display : 'block'
           });
           if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="8px";
+          if (isNewGui) dojo.byId("filterValueListHideTop").style.display="block";
           dojo.style(dijit.byId('showDetailInFilter').domNode, {
             display : 'block'
           });
@@ -4480,6 +4485,7 @@ function filterSelectAtribute(value) {
             display : 'none'
           });
           if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
+          if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
           dojo.style(dijit.byId('showDetailInFilter').domNode, {
             display : 'none'
           });
@@ -4505,6 +4511,7 @@ function filterSelectAtribute(value) {
             display : 'none'
           });
           if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
+          if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
           dojo.style(dijit.byId('showDetailInFilter').domNode, {
             display : 'none'
           });
@@ -4532,6 +4539,7 @@ function filterSelectAtribute(value) {
           display : 'none'
         });
         if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
+        if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
         dojo.style(dijit.byId('showDetailInFilter').domNode, {
           display : 'none'
         });
@@ -4566,6 +4574,7 @@ function filterSelectAtribute(value) {
       display : 'none'
     });
     if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
+    if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
     dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
@@ -4594,6 +4603,7 @@ function filterSelectOperator(operator) {
       display : 'none'
     });
     if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
+    if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
     dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
@@ -4615,6 +4625,7 @@ function filterSelectOperator(operator) {
     dijit.byId('filterDynamicParameter').set('checked', '');
     if (dijit.byId('filterDynamicParameterSwitch')) dijit.byId('filterDynamicParameterSwitch').set('value', 'off');
     dojo.byId('filterDynamicParameterPane').style.display='none';
+    if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
     //END ADD qCazelles - Dynamic filter - Ticket #78
   } else if (operator == "<=now+" || operator == ">=now+") {
     filterType="text";
@@ -4625,6 +4636,7 @@ function filterSelectOperator(operator) {
       display : 'none'
     });
     if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
+    if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
     dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
@@ -4652,6 +4664,7 @@ function filterSelectOperator(operator) {
       display : 'none'
     });
     if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="200px";
+    if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
     dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
@@ -4673,6 +4686,7 @@ function filterSelectOperator(operator) {
     dijit.byId('filterDynamicParameter').set('checked', '');
     if (dijit.byId('filterDynamicParameterSwitch')) dijit.byId('filterDynamicParameterSwitch').set('value', 'off');
     dojo.byId('filterDynamicParameterPane').style.display='none';
+    if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
     //END ADD qCazelles - Dynamic filter - Ticket #78
   } else {
     dojo.style(dijit.byId('filterValue').domNode, {
@@ -4699,6 +4713,7 @@ function filterSelectOperator(operator) {
         display : 'block'
       });
       if (isNewGui) dojo.byId("filterDynamicParameterPane").style.left="8px";
+      if (isNewGui) dojo.byId("filterValueListHideTop").style.display="block";
       dojo.style(dijit.byId('showDetailInFilter').domNode, {
         display : 'block'
       });
@@ -4716,6 +4731,7 @@ function filterSelectOperator(operator) {
       dijit.byId('filterDynamicParameter').set('checked', '');
       if (dijit.byId('filterDynamicParameterSwitch')) dijit.byId('filterDynamicParameterSwitch').set('value', 'off');
       dojo.byId('filterDynamicParameterPane').style.display='block';
+      if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
       //END ADD qCazelles - Dynamic filter - Ticket #78
     } else {
       filterType="text";
@@ -4726,6 +4742,7 @@ function filterSelectOperator(operator) {
       dijit.byId('filterDynamicParameter').set('checked', '');
       if (dijit.byId('filterDynamicParameterSwitch')) dijit.byId('filterDynamicParameterSwitch').set('value', 'off');
       dojo.byId('filterDynamicParameterPane').style.display='block';
+      if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
       //END ADD qCazelles - Dynamic filter - Ticket #78
     }
   }
