@@ -12005,3 +12005,81 @@ function removeContact(idFldVal){
   showConfirm(msg, actionOK);
 }
 //End
+
+function showDisplayModule(id,total){
+  if(dojo.byId("displayModule"+id).style.display=="block"){
+      dojo.byId("moduleTitle_"+id).style.width=260+'px';
+      dojo.byId("displayModule"+id).style.display="none";
+  }else{
+    for (var i=1; i <= total; i++) {
+      if(dojo.byId("moduleTitle_"+i)){
+        if(dojo.byId("moduleTitle_"+i).style.width==290+'px'){
+          dojo.byId("moduleTitle_"+i).style.width=260+'px';
+        }
+      }
+      if(dojo.byId("displayModule"+i)){
+        if(dojo.byId("displayModule"+i).style.display=="block"){
+          dojo.byId("displayModule"+i).style.display="none";
+          dojo.byId("displayModule"+i).style.visibility = 'hidden';
+          dojo.byId("displayModule"+i).style.opacity = 0;
+        }
+      }
+    }
+    if(dojo.byId("displayModule"+id)){
+      dojo.byId("displayModule"+id).style.display="block";
+      dojo.byId("displayModule"+id).style.visibility="visible";
+      dojo.byId("displayModule"+id).style.opacity=1;
+    }
+    dojo.byId("moduleTitle_"+id).style.width=290+'px';
+  }
+}
+
+function filterMenuModule(id,nbTotal){
+  if(id==2){
+    var tab = [1,9,16];
+  }else if(id==3){
+    var tab = [2,16];
+  }else if(id==4){
+    var tab = [4,8,9,10];
+  }else if(id==5){
+    var tab = [5,6,7,19,20];
+  }else if(id==6){
+    var tab = [17,13,15];
+  }
+  for (var i=1; i <= nbTotal; i++) {
+    if(id==1){
+      if(dojo.byId("moduleMenuDiv_"+i)){
+        dojo.byId("moduleMenuDiv_"+i).style.display="block";
+      }
+    }else{
+      if(dojo.byId("moduleMenuDiv_"+i)){
+        if(tab.indexOf(i) !== -1){
+          dojo.byId("moduleMenuDiv_"+i).style.display="block";
+        }else{
+          dojo.byId("moduleMenuDiv_"+i).style.display="none";
+          if(dojo.byId("displayModule"+i).style.display=="block"){
+            dojo.byId("displayModule"+i).style.display="none";
+            dojo.byId("moduleTitle_"+i).style.width=260+'px';
+          }
+        }
+      }
+    }
+  }
+}
+
+function filterMenuModuleDisable(nbTotal){
+  for (var i=1; i <= nbTotal; i++) {
+    if(dojo.byId("moduleTitle_"+i)){
+      if(dojo.hasClass(dojo.byId("moduleMenuDiv_"+i),'activeModuleMenu')){
+        dojo.byId("moduleMenuDiv_"+i).style.display="none";
+        if(dojo.byId("displayModule"+i).style.display=="block"){
+          dojo.byId("displayModule"+i).style.display="none";
+          dojo.byId("moduleTitle_"+i).style.width=260+'px';
+        }
+      }else{
+        dojo.byId("moduleMenuDiv_"+i).style.display="block";
+      }
+    }
+  }
+}
+
