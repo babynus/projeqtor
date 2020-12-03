@@ -52,6 +52,12 @@
   <link rel="stylesheet" type="text/css" href="css/projeqtorFlat.css" />
   <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
   <link rel="icon" href="img/logo.ico" type="image/x-icon" />
+    <?php if (isNewGui()) {?>
+  <link rel="stylesheet" type="text/css" href="css/projeqtorNew.css" />
+  <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorNewGui.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="../external/dojox/mobile/deviceTheme.js" data-dojo-config="mblUserAgent: 'Custom'"></script>
+  <?php }?>
   <script type="text/javascript" src="../external/CryptoJS/rollups/md5.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/CryptoJS/rollups/sha256.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/phpAES/aes.js?version=<?php echo $version.'.'.$build;?>" ></script>
@@ -74,6 +80,7 @@
   <script type="text/javascript" src="../external/dojo/projeqtorDojo.js?version=<?php echo $version;?>"></script>
   <?php Plugin::includeAllFiles();?>
   <script type="text/javascript">
+    var isNewGui=<?php echo (isNewGui())?'true':'false';?>;
     var customMessageExists=<?php echo(file_exists(Plugin::getDir()."/nls/$currentLocale/lang.js"))?'true':'false';?>; 
     dojo.require("dojo.data.ItemFileWriteStore");
     dojo.require("dojo.date");
@@ -142,6 +149,10 @@
     <?php $fmt=new NumberFormatter52( $browserLocale, NumberFormatter52::DECIMAL );?>
     var browserLocaleDecimalSeparator="<?php echo $fmt->decimalSeparator?>";
     dojo.addOnLoad(function(){
+      if (isNewGui) {
+        changeTheme('<?php echo getTheme();?>');
+        setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>','<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>');
+      }
       currentLocale="<?php echo $currentLocale;?>";
 //       var onKeyPressFunc = function(event) {
 //             if(event.ctrlKey && event.keyChar == 's'){
@@ -171,7 +182,7 @@
     });
   </script>
 </head>
-<body id="body" style="opacity:0" class="<?php echo getTheme();?>" onload="ckEditorReplaceAll();window.top.hideWait();">
+<body id="body" style="opacity:0" class="nonMobile tundra comboDetail <?php echo getTheme();?>" onload="ckEditorReplaceAll();window.top.hideWait();">
   <input type="hidden" id="comboDetail" name="comboDetail" value="true" />
   <input type="hidden" id="comboDetailId" name="comboDetailId" value="" />
   <input type="hidden" id="comboDetailName" name="comboDetailName" value="" />
