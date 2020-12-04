@@ -6246,16 +6246,19 @@ function switchNoteStatus(idNote) {
       noteDiv.style.maxHeight="100px";
       noteDiv.style.maxHeight="0px";
       noteDiv.style.height="0px";
+      if (isNewGui) noteDiv.style.padding="0";
       setTimeout("switchNoteStatus("+idNote+")",10);
       return;
     } else {
       noteDiv.style.maxHeight=(noteDiv.offsetHeight)+"px";
+      if (isNewGui) noteDiv.style.padding="5px 8px";
     }
   }
   if (noteDiv.style.height=='0px') {
     var newHeight=(idNote in notesHeight)?notesHeight[idNote]:"1000";
     noteDiv.style.maxHeight=newHeight+"px";
     noteDiv.style.height="100%";
+    if (isNewGui) noteDiv.style.padding="5px 8px";
     noteDiv.style.marginBottom="10px";
     status="open";
     dojo.query('#imgCollapse_'+idNote+' div').forEach(function(node, index, arr){
@@ -6265,6 +6268,7 @@ function switchNoteStatus(idNote) {
     if (noteDiv.offsetHeight) notesHeight[idNote]=noteDiv.offsetHeight;
     noteDiv.style.maxHeight="0px";
     noteDiv.style.height="0px";
+    if (isNewGui) noteDiv.style.padding="0";
     noteDiv.style.marginBottom="0px";
     status="closed";
     dojo.query('#imgCollapse_'+idNote+' div').forEach(function(node, index, arr){

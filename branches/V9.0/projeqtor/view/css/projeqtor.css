@@ -560,7 +560,8 @@ html, body {
 }
 
 .ProjeQtOrNewGui .buttonDivCreationInfoEdit:hover {
-  background: url(customIcons/new/iconEdit.svg) no-repeat top right;
+  background: url(customIcons/new/iconEditBlack.svg) no-repeat top right;
+  background-size: 16px 16px;
 }
 
 /* Specific attributes on common nodes ======================================== */

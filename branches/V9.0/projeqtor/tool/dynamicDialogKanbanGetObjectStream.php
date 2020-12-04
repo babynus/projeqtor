@@ -71,7 +71,7 @@ $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
 	    <tr><td><div id="scrollToBottom" style="display:block"></div></td></tr>
 	  </table>
 	</div>
-	<div id="activityStreamBottomKanban" dojoType="dijit.layout.ContentPane" region="bottom" style="height:70px;overflow-x:hidden;">
+	<div id="activityStreamBottomKanban" dojoType="dijit.layout.ContentPane" region="bottom" style="height:<?php echo (isNewGui())?'80':'70';?>px;overflow-x:hidden;">
 	  <form id='noteFormStreamKanban' name='noteFormStreamKanban' onSubmit="return false;" >
        <input id="noteId" name="noteId" type="hidden" value="" />
        <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $objectClass;?>" />
@@ -80,18 +80,18 @@ $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
        <input id="noteEditorTypeStreamKanban" name="noteEditorTypeStreamKanban" type="hidden" value="<?php echo getEditorType();?>" />
        <div style="width:99%;position:relative">
        <textarea rows="4"  name="noteStreamKanban" id="noteStreamKanban" dojoType="dijit.form.SimpleTextarea"
-         style="width:99%;height:60px;overflow-x:hidden;overflow-y:auto;border:1px solid grey;margin-top:2px;" tabIndex="-1" onclick="focusStream();" ><?php echo i18n("textareaEnterText");?></textarea>
+         style="width:98.5%;height:60px;overflow-x:hidden;overflow-y:auto;border:1px solid grey;margin-top:2px;" tabIndex="-1" onclick="focusStream();" ><?php echo i18n("textareaEnterText");?></textarea>
          <?php
          $privacyClass="";
          $privacyLabel=i18n("public");
          if ($privacyNotes=="3") { // Team privacy
-           $privacyClass="iconFixed16 iconFixed iconSize16";
+           $privacyClass="imageColorBlack iconFixed16 iconFixed iconSize16";
            $privacyLabel=i18n("private");
          } else if ($privacyNotes=="2") { // Private
-           $privacyClass="iconTeam16 iconTeam iconSize16";
+           $privacyClass="imageColorBlack iconTeam16 iconTeam iconSize16";
            $privacyLabel=i18n("team");
          }?>
-         <div title="<?php echo i18n("colIdPrivacy").' = '.$privacyLabel;?>" id="notePrivacyStreamDiv" class="<?php echo $privacyClass;?>" onclick="switchNotesPrivacyStream();" style="border-radius:7px 0px 0px 0px;width:16px; height:16px;position:absolute;bottom:1px;right:-2px;opacity:1;background-color: #E0E0E0;color:#A0A0A0;cursor:pointer;text-align:center">...</div>
+         <div title="<?php echo i18n("colIdPrivacy").' = '.$privacyLabel;?>" id="notePrivacyStreamDiv" class="<?php echo $privacyClass;?>" onclick="switchNotesPrivacyStream();" style="<?php if (! isNewGui()) echo 'border-radius:8px;background-color: #E0E0E0;bottom:2px;right:-2px;'; else echo 'bottom:8px;right:3px;'?>width:16px; height:16px;position:absolute;opacity:1;color:#A0A0A0;cursor:pointer;text-align:center">...</div>
          <input type="hidden" id="notePrivacyStream" name="notePrivacyStream" value="<?php echo $privacyNotes?>" />
          <input type="hidden" id="notePrivacyStreamUserTeam" name="notePrivacyStreamUserTeam" value="<?php echo $ress->idTeam;?>" />
         </div>

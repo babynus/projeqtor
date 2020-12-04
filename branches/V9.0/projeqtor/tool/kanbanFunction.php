@@ -115,31 +115,34 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
       </div> ';
       $object= new $typeKanbanC ($line['id']);
 	 $nbBadge=((isset($object->_Note))?count ($object->_Note):'');
-	 $margin=($nbBadge>9)?'-6':'-2';
+	 $margin=($nbBadge>9)?'-10':'-7';
 	 $badge= '<div id="kanbanBadge_'.$line['id'].'" class="kanbanBadge" style="">'.$nbBadge.'</div>';
       echo '<table style="margin:2px 2px 0 2px;width:58px;float:right;vertical-align: middle;">
         <tr>
-    	    <td>
-            <div  id="badges" style="position:relative">
-              <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\',\''.$type.'\');" style="margin-bottom:2px;margin-right:4px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
+            <td>
+              <div id="badges" style="position:relative">
+              <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\', \''.$type.'\');" style="margin-bottom:2px;margin-right:8px;margin-top:2px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
                 ' . formatSmallButton ( 'AddComment' ) . '
-                    <div  style="position:absolute;bottom:-2px;margin-left:'.$margin.'px;width:5px;">
+                    <div  style="pointer-events: none;position:absolute;bottom:'.((isNewGui())?'-3px':'-1px').';margin-left:'.$margin.'px;width:5px;">
                     '.((count($object->_Note)!=0)?$badge:'').'
                     </div>
               </div>
             </div>
-          </td>
-          <td>
-            <div class="roundedButton iconView iconSize16 imageColorNewGui generalColClass"
-              style="width:16px;height:16px;cursor:pointer;"
-              onclick="showDetail(\'refreshActionAdd' . $typeKanbanC . '\',1,\'' . $typeKanbanC . '\',false,' . $line ['id'] . ', true);" title="' . i18n('kanbanEditItem',array($line ['id'])) . '"
-            </div>
-          </td>
-          <td>
-            <div class="roundedButton generalColClass" style="width:20px;cursor:pointer;display:inline-block">
-              <div onclick="gotoElement(\'' . $typeKanbanC . '\',' . htmlEncode ( $line ['id'] ) . ');"	title="' .i18n('kanbanGotoItem',array($line ['id'])) . '" style="width:18px;" class="iconGoto"></div>
-            </div>
-          </td>
+            </td>
+            <td>
+          	  <div class="roundedButtonSmall"
+                style="width:16px;height:16px;cursor:pointer;vertical-align:text-bottom;margin-right:5px;float:left;"
+                onclick="showDetail(\'refreshActionAdd' . $typeKanbanC . '\',1,\'' . $typeKanbanC . '\',false,' . $line ['id'] . ');" title="' . i18n('kanbanEditItem',array($line ['id'])) . '>"
+                ' . formatSmallButton ( 'Edit',false ) . '
+              </div>
+            </td>
+            <td>
+              <div class="roundedButtonSmall"
+                style="width:20px;height:16px;cursor:pointer;float:right;vertical-align:text-bottom;"
+         		    onclick="gotoElement(\'' . $typeKanbanC . '\',' . htmlEncode ( $line ['id'] ) . ', true);"	title="' .i18n('kanbanGotoItem',array($line ['id'])) . '" style="width:18px;">
+         		   ' . formatSmallButton ( 'Goto',true ) . '     
+              </div>
+            </td>
         </tr>
       </table>';
     //echo '</div>';
@@ -157,15 +160,15 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
       <div id="titleTicket' . $line ['id'] . '" class="kanbanTitleTicket" style="background-color:'.((isNewGui())?'var(--color-lighter)':'#F1F1F1').'; border-bottom: 1px solid #AAAAAA;">
         <div style="color:#000; " id="name' . $line ['id'] . '">
           <span style="position:relative;top:-1px;float:left;font-size: 9px;background:' . $color . ';color:' . htmlForeColorForBackgroundColor ( $color ) . '; border:1px solid #AAAAAA;padding:0.5px 1px 0 0.5px;margin:1px 0px 0px 0px;" title="'.$titleObject.'">#' . $line ['id'] . '</span>
-          <span style="float:left;clear:left;font-size: 8px;max-height:10px;max-width:25px;overflow:hidden;border:1px solid #a0a0a0;color:#a0a0a0;background:white;padding:0px 1px;margin:0px 2px 0px 0px;" title="'.$titleObject.'">' . SqlList::getFieldFromId('Type', $line['idtickettype'],'code') . '</span>	
+          <span style="float:left;clear:left;font-size: 8px;max-height:10px;max-width:25px;overflow:hidden;border:1px solid #a0a0a0;color:#a0a0a0;background:white;padding:0px 1px;margin:'.((isNewGui())?'3':'0').'px 2px 0px 0px;" title="'.$titleObject.'">' . SqlList::getFieldFromId('Type', $line['idtickettype'],'code') . '</span>	
           ' . htmlEncode ( $line ['name'] ) . '
         </div>
       </div>
-      <div id="divPrincItem' . $line ['id'] . '" style="margin-top:32px;">
+      <div id="divPrincItem' . $line ['id'] . '" style="cursor:move;margin-top:'.((isNewGui())?'38':'32').'px;">
         ' . kanbanAddPrinc ( $line ) . '        
       </div>
       <div id="objectDescr' . $line ['id'] . '" class="dojoDndItem"
-        style="padding:5px;font-size:12px;font-family:arial;max-height:55px;overflow-y:scroll;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
+        style="cursor:default;padding:5px;font-size:12px;font-family:arial;max-height:55px;'.((isNewGui())?'min-height:55px;':'').'overflow-y:scroll;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
         onScroll="kanbanShowDescr(\'description\',\'' . $typeKanbanC . '\', ' . $line ['id'] . ');" >
           ' . $ticketDescr2 . '
       </div>
@@ -176,36 +179,37 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
           ' . formatUserThumb ( $line ['iduser'], SqlList::getNameFromId ( "Affectable", $line ['iduser'] ).'<br/><span style="font-size:80%"><i>('.i18n('colResponsible').')</i></span>', "", 22, 'left', false, $line ['id'] ) . '
         </div>
         	' . (isset ( $line ['idpriority'] ) ? '
-        <div style="float:left;margin-left:5px;width:22px;height:22px;margin-top:3px;margin-left:2px">
+        <div style="float:left;margin-left:5px;width:22px;height:22px;margin-top:'.((isNewGui())?'-2':'3').'px;margin-left:2px">
           ' . formatColorThumb ( "idPriority", $line ['idpriority'], 20, 'left', SqlList::getNameFromId ( "Priority", $line ['idpriority'] ) ) . '
         </div>' : '').'';
 		$object= new $typeKanbanC ($line['id']);
 		$nbBadge=((isset($object->_Note) )?count ($object->_Note):'');
-		$margin=($nbBadge>9)?'-9':'-6';
+		$margin=($nbBadge>9)?'-10':'-7';
 		$badge= '<div id="'.$line['name'].'BadgeTab" class="kanbanBadge" style="">'.$nbBadge.'</div>';
        echo  '<table style="float:right;margin:2px;">
           <tr>
             <td>
               <div id="badges" style="position:relative">
-              <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\', \''.$type.'\');" style="margin-bottom:2px;margin-right:4px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
+              <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\', \''.$type.'\');" style="margin-bottom:2px;margin-right:8px;margin-top:2px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
                 ' . formatSmallButton ( 'AddComment' ) . '
-                    <div  style="position:absolute;bottom:-2px;margin-left:'.$margin.'px;width:5px;">
+                    <div  style="pointer-events: none;position:absolute;bottom:'.((isNewGui())?'-3px':'-1px').';margin-left:'.$margin.'px;width:5px;">
                     '.((count($object->_Note)!=0)?$badge:'').'
                     </div>
               </div>
             </div>
             </td>
             <td>
-          	  <div class="roundedButton iconView iconSize16 generalColClass imageColorNewGui"
+          	  <div class="roundedButtonSmall"
                 style="width:16px;height:16px;cursor:pointer;vertical-align:text-bottom;margin-right:5px;float:left;"
                 onclick="showDetail(\'refreshActionAdd' . $typeKanbanC . '\',1,\'' . $typeKanbanC . '\',false,' . $line ['id'] . ');" title="' . i18n('kanbanEditItem',array($line ['id'])) . '>"
+                ' . formatSmallButton ( 'Edit',false ) . '
               </div>
             </td>
             <td>
-              <div class="roundedButton iconSize16 generalColClass imageColorNewGui"
-                style="width:20px;height:16px;cursor:pointer;float:right;vertical-align:text-bottom;">
-         		    <div onclick="gotoElement(\'' . $typeKanbanC . '\',' . htmlEncode ( $line ['id'] ) . ', true);"	title="' .i18n('kanbanGotoItem',array($line ['id'])) . '" style="width:18px;" class="iconGoto">
-           		  </div>
+              <div class="roundedButtonSmall"
+                style="width:20px;height:16px;cursor:pointer;float:right;vertical-align:text-bottom;"
+         		    onclick="gotoElement(\'' . $typeKanbanC . '\',' . htmlEncode ( $line ['id'] ) . ', true);"	title="' .i18n('kanbanGotoItem',array($line ['id'])) . '" style="width:18px;">
+         		   ' . formatSmallButton ( 'Goto',true ) . '     
               </div>
             </td>
           </tr>

@@ -504,7 +504,7 @@ html, body, #mainDiv,
 	background:transparent;
 }
 .ProjeQtOrNewGui .roundedButton:hover .imageColorNewGui, .ProjeQtOrNewGui .roundedButtonSmall:hover .imageColorNewGui, .ProjeQtOrNewGui .imageColorNewGui:hover,
-.ProjeQtOrNewGui .directAttachment:hover, 
+.ProjeQtOrNewGui .directAttachment:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover .iconSize16,
 .ProjeQtOrNewGui .menuBarItemSelected .imageColorNewGui, .ProjeQtOrNewGui .menuBarItem:hover .imageColorNewGui {
 	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
@@ -624,7 +624,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .menuBarItem, .ProjeQtOrNewGui #menuBarShow .dijitIcon, .ProjeQtOrNewGui .hideStreamNewGuiTopBar,
 .ProjeQtOrNewGui #listHeaderDiv div.iconSize32, .ProjeQtOrNewGui #buttonDiv div .iconSize32,
 .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize22, .ProjeQtOrNewGui #menubarContainer .roundedButtonSmall .iconSize32,
-.ProjeQtOrNewGui #centerDiv .dijitButtonIcon, 
+.ProjeQtOrNewGui #centerDiv .dijitButtonIcon,  .ProjeQtOrNewGui .roundedButtonSmall .iconSize16,
 .ProjeQtOrNewGui #centerDiv .roundedButtonSmall .iconSize16, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall .iconSize22,
 .ProjeQtOrNewGui .ganttIconBackground div, .ProjeQtOrNewGui .imageColorNewGui, .ProjeQtOrNewGui .directAttachment ,
 .ProjeQtOrNewGui .buttonIconNewGui .dijitIcon,
@@ -633,7 +633,8 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .imageColorNewGuiNoSelection, .ProjeQtOrNewGui .imageColorNewGuiNoSelection:hover, 
 .ProjeQtOrNewGui .comboDetail div .iconSize32, .ProjeQtOrNewGui .comboDetail .dijitIcon, .ProjeQtOrNewGui .allSearchFixLength .dijitIcon,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButton .dijitIcon,
-.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButton.dialogDetailButton .dijitIcon
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButton.dialogDetailButton .dijitIcon,
+.ProjeQtOrNewGui .ticketKanBanStyle .roundedButton .iconSize16
  {
   -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
@@ -651,7 +652,8 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui #centerDiv .roundedButtonSmall:hover .iconSize16, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall:hover .iconSize22,
 .ProjeQtOrNewGui .allSearchFixLength .dijitButtonHover .dijitIcon, .ProjeQtOrNewGui .allSearchFixLength .dijitDropDownButtonHover .dijitIcon,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButtonHover .dijitIcon,
-.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonHover.dialogDetailButton .dijitIcon
+.ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonHover.dialogDetailButton .dijitIcon,
+.ProjeQtOrNewGui .ticketKanBanStyle .roundedButton:hover .iconSize16
 {
   -webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
@@ -727,8 +729,8 @@ animation: fadeIn ease 0.5s;
    filter: hue-rotate(var(--image-hue-rotate-reverse)) saturate(100) brightness(100);
 }
 .ProjeQtOrNewGui #buttonDiv div .iconSize32.cancelColorImage {
-  -webkit-filter: hue-rotate(0) saturate(100) brightness(100);
-   filter: hue-rotate(0) saturate(100) brightness(100);
+  -webkit-filter: hue-rotate(0);
+   filter: hue-rotate(0);
 }
 
 .ProjeQtOrNewGui .menuBarItem:hover {
@@ -1556,6 +1558,9 @@ element.style {
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+.ProjeQtOrNewGui #objectStreamKanban .activityStreamNote {
+	max-width:97%;
+}
 .ProjeQtOrNewGui .activityStreamMailTitle {
 	background-color:var(--color-lighter);
 }
@@ -1715,6 +1720,9 @@ element.style {
 .ProjeQtOrNewGui .kanbanTitleTicket {
 	min-height:38px;
 	max-height:38px;
+}
+.ProjeQtOrNewGui .kanbanTitleTicket:hover {
+  max-height:100%;
 }
 .ProjeQtOrNewGui #dialogKanbanUpdate label {
 	margin-right:5px;

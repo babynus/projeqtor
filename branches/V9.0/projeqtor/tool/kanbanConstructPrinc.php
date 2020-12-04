@@ -166,7 +166,25 @@ function displayAllWork($line, $type = 0, $numberLetter = 2) {
     </div>';
 	}
 	if ($type == 1) {
-		return '
+	  if (isNewGui()) return '
+       <table style="cursor:move;width:100%;">
+         <tr>
+           <td id="plannedWork' . $line ['id'] . '" 
+               valueWork="' . str_replace ( ',', '.', $line ['plannedwork'] != null ? $line ['plannedwork'] : 0 ) . '" 
+               class="" title="' . i18n ( 'colEstimated' ) . '" style="width:33%;text-align:center;padding:0px 3px 3px 3px;font-size:80%;">
+               <span style="font-size:90%;color:var(--color-medium);">'.i18n ( 'colEstimated' ).'</span><br/>' . $formatter ( $line ['plannedwork'] ) . '</td>
+           <td id="realWork' . $line ['id'] . '" 
+               valueWork="' . str_replace ( ',', '.', $line ['realwork'] != null ? $line ['realwork'] : 0 ) . '" 
+               class="" title="' . i18n ( 'colReal' ) . '" style="width:33%;text-align:center;padding:0px 3px 3px 3px;font-size:80%;">
+               <span style="font-size:90%;color:var(--color-medium);">'.i18n ( 'colReal' ).'</span><br/>' . $formatter ( $line ['realwork'] ) . '</td>
+           <td id="leftWork' . $line ['id'] . '" 
+               valueWork="' . str_replace ( ',', '.', $line ['leftwork'] != null ? $line ['leftwork'] : 0 ) . '" 
+               class="" title="' . i18n ( 'colLeft' ) . '" style="width:33%;text-align:center;padding:0px 3px 3px 3px;font-size:80%;">
+               <span style="font-size:90%;color:var(--color-medium);">'.i18n ( 'colLeft' ).'</span><br/>' . $formatter ( $line ['leftwork'] ) . '</td>
+         </tr>
+       </table>'; 
+	    
+		else return '
        <table style="cursor:move;width:100%;">
          <tr>
            <td id="plannedWork' . $line ['id'] . '" valueWork="' . str_replace ( ',', '.', $line ['plannedwork'] != null ? $line ['plannedwork'] : 0 ) . '" class="linkData" title="' . i18n ( 'colEstimated' ) . '" style="text-align:center;padding:3px;">' . $formatter ( $line ['plannedwork'] ) . '</td>
