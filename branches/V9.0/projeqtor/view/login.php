@@ -200,9 +200,10 @@ $firstColor= getTheme();
 	Security::checkValidClass($_REQUEST['objectClass']);
 echo '<input type="hidden" id="objectClass" value="' . $_REQUEST['objectClass'] . '" />';
 echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['objectId']) . '" />';
-}
+}    
+    
 ?>
-  <div class="listTitle" style="position:absolute;top:10px;right:10px;<?php if(isNewGui()) echo'padding: 3px;border-radius: 5px;color:var(--color-toolbar-text) !important;font-size:12px;background:transparent !important';?>"><?php ;
+  <div class="listTitle" style="position:absolute;top:10px;right:10px;<?php if(isNewGui()) echo'padding: 3px;border-radius: 5px;color:var(--color-toolbar-text) !important;font-weight: 600;font-size:14px;background:transparent !important';?>"><?php ;
   $dbVersion=Sql::getDbVersion();
   if ($version==$dbVersion) {
   	echo $version;
@@ -386,7 +387,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <tr>
 			                
 			                <td colspan="3" style="position:fixed;width:100%; height:100%">
-			                  <div id="loginResultDiv" dojoType="dijit.layout.ContentPane" region="none" style="margin-left: 6px;?>">
+			                  <div id="loginResultDiv" dojoType="dijit.layout.ContentPane" region="none" style="margin-left: 6px;">
 			                    <input type="hidden" id="isLoginPage" name="isLoginPage" value="true" />
 			                    <?php if (Parameter::getGlobalParameter('applicationStatus')=='Closed'
 			                          or Sql::getDbVersion()!=$version) {
