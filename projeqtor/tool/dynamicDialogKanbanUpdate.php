@@ -134,6 +134,7 @@ if ($typeDynamic == 'update') {
 <?php
 	}
 	?>
+			<tr><td>&nbsp;</td></tr>
     <tr>
 			<td align="center"><input type="hidden" id="dialogKanbanResultAction">
 				<button class="mediumTextButton" dojoType="dijit.form.Button"
@@ -154,13 +155,13 @@ if ($typeDynamic == 'update') {
 	?>
 <form id='kanbanResultForm' name='kanbanResultForm'
 	onSubmit="return false;">
-	<div style="height: 30px;">
-		<label class="dialogLabel"><?php echo i18n("colName");?> : </label> <input
+	<div style="height: <?php echo (isNewGui())?'34':'30';?>px;">
+		<label class="dialogLabel"><?php echo i18n("colName");?> <?php if (!isNewGui()) echo ': ';?></label> <input
 			id="kanbanName" name="kanbanName" style="width: 150px;" type="text"
 			dojoType="dijit.form.TextBox" class="input required" value="" />
 	</div>
-	<div style="height: 30px;">
-		<label class="dialogLabel"><?php echo i18n("colRefType");?> : </label>
+	<div style="height: <?php echo (isNewGui())?'34':'30';?>px;;">
+		<label class="dialogLabel"><?php echo i18n("colRefType");?> <?php if (!isNewGui()) echo ': ';?></label>
 		<select dojoType="dijit.form.FilteringSelect" class="input required"
 			required="true" <?php echo autoOpenFilteringSelect();?>
 			name="kanbanReffList" id="kanbanReffList">
@@ -176,9 +177,10 @@ if ($typeDynamic == 'update') {
         </script>
 		</select>
 	</div>
-	<div style="height: 30px;">
-		<label class="dialogLabel"><?php echo i18n("colType");?> : </label> <select
-			dojoType="dijit.form.Select" class="input required" required="true"
+	<div style="height: <?php echo (isNewGui())?'34':'30';?>px;;">
+		<label class="dialogLabel"><?php echo i18n("colType");?> <?php if (!isNewGui()) echo ': ';?></label> 
+		<select
+			dojoType="dijit.form.FilteringSelect" class="input required" required="true"
 			default="" style="width: 150px;" name="kanbanTypeList"
 			id="kanbanTypeList">
 			<option value=""></option>
@@ -188,7 +190,7 @@ if ($typeDynamic == 'update') {
 		</select>
 	</div>
 	<div style="height: 40px;">
-		<label class="dialogLabel"><?php echo i18n("kanbanSharedCheck");?> : </label>
+		<label class="dialogLabel"><?php echo i18n("kanbanSharedCheck");?> <?php if (!isNewGui()) echo ': ';?></label>
 		<div style="" id="kanbanShared" name="kanbanShared" type="checkbox"
 			dojoType="dijit.form.CheckBox"></div>
 	</div>
@@ -282,15 +284,15 @@ if ($typeDynamic == 'update') {
 <?php
 	if ($typeD == "Status") {
 		?>
-<?php echo '<div style="height:30px;"><label class="dialogLabel">'.i18n("colName");?> : </label>
+<?php echo '<div style="height:'.((isNewGui())?'34':'30').'x;"><label class="dialogLabel">'.i18n("colName");?> <?php if (!isNewGui()) echo ': ';?></label>
 		<input id="kanbanName" name="kanbanName" style="width: 150px"
 			type="text" dojoType="dijit.form.TextBox" class="input required"
 			value="<?php echo $valText;?>" />
 		</div>
 <?php
 	} else {
-		echo '<div style="height:30px;"><label class="dialogLabel">' . i18n ( "colName" );
-		?> : </label>
+		echo '<div style="height:'.((isNewGui())?'34':'30').'px;"><label class="dialogLabel">' . i18n ( "colName" );
+		?> <?php if (!isNewGui()) echo ': ';?></label>
 		<input id="kanbanName" name="kanbanName" style="width: 150px"
 			type="text" dojoType="dijit.form.TextBox" class="input"
 			value="<?php echo $valText;?>" />
@@ -304,8 +306,8 @@ if ($typeDynamic == 'update') {
 		if ($typeD == "Status")
 			$trad = "colIdStatus";
 		echo '<div style="height:40px;"><label class="dialogLabel">' . i18n ( $trad );
-		?> : </label>
-		<select dojoType="dijit.form.Select" class="input required"
+		?> <?php if (!isNewGui()) echo ': ';?></label>
+		<select dojoType="dijit.form.FilteringSelect" class="input required"
 			required="true" style="width: 150px;" name="kanbanTypeList"
 			id="kanbanTypeList">
 <?php foreach ($listFinal as $elmId => $elmName){?>
@@ -314,6 +316,7 @@ if ($typeDynamic == 'update') {
 </select>
 		</div>
 <?php }?>
+	  <tr><td>&nbsp;</td></tr>
       <tr>
 			<td align="center"><input type="hidden" id="dialogKanbanResultAction">
 				<button class="mediumTextButton" dojoType="dijit.form.Button"
@@ -343,7 +346,7 @@ if ($typeDynamic == 'update') {
 <form id='kanbanResultForm' name='kanbanResultForm'
 	onSubmit="return false;">
 	<div style="height: 40px;">
-		<label class="dialogLabel"><?php echo i18n("colName");?> : </label><input
+		<label class="dialogLabel"><?php echo i18n("colName");?> <?php if (!isNewGui()) echo ': ';?></label><input
 			id="kanbanName" name="kanbanName" style="width: 150px;" type="text"
 			dojoType="dijit.form.TextBox" class="input required"
 			value="<?php echo $kanban->name;?>" />
@@ -352,7 +355,7 @@ if ($typeDynamic == 'update') {
 		<tr>
 			<td>
 				<div style="height: 40px;">
-					<label class="dialogLabel"><?php echo i18n("colReffType");?> : </label>
+					<label class="dialogLabel"><?php echo i18n("colReffType");?> <?php if (!isNewGui()) echo ': ';?></label>
 					<select dojoType="dijit.form.FilteringSelect"
 						class="input required" required="true"
 						<?php echo autoOpenFilteringSelect ();?> name="kanbanReffList"
@@ -365,6 +368,7 @@ if ($typeDynamic == 'update') {
 				</div>
 			</td>
 		</tr>
+		<tr><td>&nbsp;</td></tr>
 		<tr>
 			<td align="center"><input type="hidden" id="dialogKanbanResultAction">
 				<button class="mediumTextButton" dojoType="dijit.form.Button"
