@@ -8,7 +8,7 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   if (RequestHandler::isCodeSet('nosso')) {
     SSO::setAvoidSSO();
   }
-  if(isNewGui())$firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
+  if(isNewGui())$firstColor=Parameter::getUserParameter('newGuiThemeColor');
   $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
   
 } 
@@ -56,10 +56,11 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   <?php if(isNewGui()){?>
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorNew.css" />
   <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtor.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <?php }?>
   <title>ProjeQtOr</title>
   <script language="javascript">
-  var isNewGui=<?php echo (isNewGui())?'true':'false';?>;            
+  var isNewGui=<?php echo (isNewGui())?'true':'false';?>;      
   dojo.addOnLoad(function(){
     if (isNewGui) {
       changeTheme('<?php echo getTheme();?>');
@@ -72,7 +73,7 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   </script>
 </head>
 
-<body class="nonMobile tundra  <?php echo $theme;?>"  style="background-color:<?php echo $background;?>;" onload="autoRedirect();">
+<body id="body" class="nonMobile tundra  <?php echo $theme;?>"  style="background-color:<?php echo $background;?>;" onload="autoRedirect();">
   <div id="wait">
   &nbsp;
   </div>
@@ -82,8 +83,18 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
     <tr height="100%">
       <td width="100%" align="center">
-        <div class="background loginFrame" >
         <table  align="center" >
+        			    <?php if(isNewGui()){?>
+			    <tr style="height:42px;" >
+			     <td align="center" style="position:relative;height: 1%;" valign="center">
+			       <div style="position:relative;height:75px;">
+			         <div class="divLoginIconDrawing" style="position:absolute;background-color:#<?php echo $firstColor;?>";>
+			           	<div class="divLoginIconBig"></div>		         
+			         </div>
+			       </div>
+			     </td>
+			    </tr>
+			    <?php }?>
           <tr style="height:10px;" >
             <td align="left" style="height: 1%;" valign="top">
 		        	<div style="position:relative;width: 400px; height: 54px;">

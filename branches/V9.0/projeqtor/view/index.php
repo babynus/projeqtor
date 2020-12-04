@@ -56,7 +56,7 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   <script type="text/javascript" src="../external/dojo/dojo.js"
     djConfig='parseOnLoad: false, 
               isDebug: false'></script>
-  <script type="text/javascript"> 
+  <script type="text/javascript">             
      dojo.addOnLoad(function(){
        //dojo.byId("currentLocale").value=dojo.locale;
        var tempo=<?php echo (is_file ( "../tool/parametersLocation.php" ) and SSO::isEnabled())?1000:10;?>;
@@ -65,7 +65,7 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   </script>
 </head>
 
-<body class="nonMobile tundra <?php echo $theme;?>" style="background-color:<?php echo $background;?>;" >
+<body class="tundra <?php echo $theme;?>" style="background-color:<?php echo $background;?>;" >
   <div id="wait">
   &nbsp;
   </div>
@@ -75,7 +75,7 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
     <tr height="100%">
       <td width="100%" align="center">
-        <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
+        <div class="background loginFrame" >
         <table  align="center" >
           <tr style="height:10px;" >
             <td align="left" style="height: 1%;" valign="top">

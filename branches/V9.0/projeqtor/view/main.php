@@ -57,7 +57,7 @@ SqlElement::$_cachedQuery['Project']=array();
 SqlElement::$_cachedQuery['ProjectPlanningElement']=array();
 SqlElement::$_cachedQuery['PlanningElement']=array();
 $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
-if(isNewGui())$firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
+if(isNewGui())$firstColor=Parameter::getUserParameter('newGuiThemeColor');
 $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -714,6 +714,17 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       <td width="100%" align="center">
         <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
         <table align="center" >
+		    <?php if(isNewGui()){?>
+			    <tr style="height:42px;" >
+			     <td align="center" style="position:relative;height: 1%;" valign="center">
+			       <div style="position:relative;height:75px;">
+			         <div class="divLoginIconDrawing" style="position:absolute;background-color:#<?php echo $firstColor;?>";>
+			           	<div class="divLoginIconBig"></div>		         
+			         </div>
+			       </div>
+			     </td>
+			    </tr>
+	    <?php }?>
           <tr style="height:10px;">
             <td align="left" style="position:relative;height: 100%;" valign="top">
               <div style="position:relative; width: 400px; height: 54px;">
