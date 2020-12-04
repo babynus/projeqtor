@@ -88,8 +88,8 @@ if ($typeDynamic == 'update') {
 		</tr>
 		<tr>
 			<td><input id="kanbanResultEditorType" name="kanbanResultEditorType"
-				type="hidden" value="<?php echo getEditorType();?>" />
-         <?php if (getEditorType()=="CK") {?> 
+				type="hidden" value="<?php if (isNewGui()) echo 'CK'; else echo getEditorType();?>" />
+         <?php if (getEditorType()=="CK" or isNewGui()) {?> 
           <textarea style="width:<?php echo $detailWidth;?>px; height:<?php echo $detailHeight;?>px"
           name="kanbanResult" class="required" id="kanbanResult"></textarea>
         <?php } else if (getEditorType()=="text"){?>
