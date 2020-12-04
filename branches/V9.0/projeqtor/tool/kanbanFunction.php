@@ -83,11 +83,11 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
        </script>';
 		if ($mode != "refresh") {
 			echo '
-      <div class="dojoDndItem ' . $handle . ' ticketKanBanStyleFull ticketKanBanColor " style="border-left:3px solid ' . $color . ';" fromC="' . $from . '" id="itemRow' . $line ['id'] . '-' . $type . '"
+      <div class="dojoDndItem ' . $handle . ' ticketKanBanStyleFull ticketKanBanColor " style="'.((isNewGui())?'border-radius:5px;':'').'border-left:3px solid ' . $color . ';" fromC="' . $from . '" id="itemRow' . $line ['id'] . '-' . $type . '"
       dndType="' . ($type == 'Status' ? 'typeRow' . $idType . $add : ($type == 'TargetProductVersion' ? $from : SqlList::getFieldFromId ( $typeKanbanC, $line ['id'], "idProject" ))) . '">';
 		}
 		echo '
-      <div id="titleTicket' . $line ['id'] . '" class="kanbanTitleTicketFull" style="background-color:#F1F1F1;border-bottom: 1px solid #AAAAAA;">
+      <div id="titleTicket' . $line ['id'] . '" class="kanbanTitleTicketFull" style="background-color:'.((isNewGui())?'var(--color-lighter)':'#F1F1F1').';border-bottom: 1px solid #AAAAAA;">
     	  <div style="font-size:12px;text-align:center;color:#000;" >
           <span style="float:left;font-size: 9px;background:' . $color . ';color:' . htmlForeColorForBackgroundColor ( $color ) . '; border:1px solid #AAAAAA;padding:1px 1px;margin:1px 2px 1px 1px;" title="' . $titleObject . '">#' . $line ['id'] . '</span>
           <span style="float:right;font-size: 9px;max-height:12px;max-width:50px;overflow:hidden;background:white;color:black;border:1px solid #AAAAAA;padding:1px 2px;margin:1px 2px 0px 0px;">' . SqlList::getNameFromId('Type', $line['idtickettype']) . '</span>
@@ -154,7 +154,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
     dndType="' . ($type == 'Status' ? 'typeRow' . $idType . $add : ($type == 'TargetProductVersion' ? $from : SqlList::getFieldFromId ( $typeKanbanC, $line ['id'], "idProject" ))) . '">';
 		}
 		echo ' 
-      <div id="titleTicket' . $line ['id'] . '" class="kanbanTitleTicket" style="background-color:#F1F1F1; border-bottom: 1px solid #AAAAAA;">
+      <div id="titleTicket' . $line ['id'] . '" class="kanbanTitleTicket" style="background-color:'.((isNewGui())?'var(--color-lighter)':'#F1F1F1').'; border-bottom: 1px solid #AAAAAA;">
         <div style="color:#000; " id="name' . $line ['id'] . '">
           <span style="position:relative;top:-1px;float:left;font-size: 9px;background:' . $color . ';color:' . htmlForeColorForBackgroundColor ( $color ) . '; border:1px solid #AAAAAA;padding:0.5px 1px 0 0.5px;margin:1px 0px 0px 0px;" title="'.$titleObject.'">#' . $line ['id'] . '</span>
           <span style="float:left;clear:left;font-size: 8px;max-height:10px;max-width:25px;overflow:hidden;border:1px solid #a0a0a0;color:#a0a0a0;background:white;padding:0px 1px;margin:0px 2px 0px 0px;" title="'.$titleObject.'">' . SqlList::getFieldFromId('Type', $line['idtickettype'],'code') . '</span>	
