@@ -161,7 +161,7 @@ foreach($fieldsArray as $key => $val){
       $ctx=new ContextType(substr($key,-1));
       $val=$ctx->name;
     } 
-		$htmlresult.='<input type="checkbox" '.((isNewGui())?'class="whiteCheck" style="margin-bottom:2px;"':'').' dojoType="dijit.form.CheckBox" id="column'.$index.'" name="column'.$index.'" value="'.$key.'" '.$checked.' />';
+		$htmlresult.='<input type="checkbox" '.((isNewGui())?'class="whiteCheck" style="margin-top:0px;margin-bottom:4px;"':'').' dojoType="dijit.form.CheckBox" id="column'.$index.'" name="column'.$index.'" value="'.$key.'" '.$checked.' />';
 		$htmlresult.='<label for="column'.$index.'" class="checkLabel" '.((isNewGui())?'style="font-size:100%;"':'').'>&nbsp;'.$val.'</label><br/>';
 		$index++;
 	}
@@ -177,7 +177,7 @@ $htmlresult.="<br/>";
   <tr><td colspan="2" >&nbsp;</td></tr>
   <tr <?php if (isNewGui()) echo 'style="height:40px;"'; ?>>
     <td>
-      <input type="checkbox" <?php echo (isNewGui())?'class="whiteCheck" style="margin-bottom:2px;"':'';?> dojoType="dijit.form.CheckBox" id="checkUncheck" name="checkUncheck" value="Check" onclick="checkExportColumns();" <?php echo $allChecked?> />
+      <input type="checkbox" <?php echo (isNewGui())?'class="whiteCheck" style="margin-top:0px;margin-bottom:2px;"':'';?> dojoType="dijit.form.CheckBox" id="checkUncheck" name="checkUncheck" value="Check" onclick="checkExportColumns();" <?php echo $allChecked?> />
       <label for="checkUncheck" class="checkLabel" style="font-size:100%"><?php echo i18n("checkUncheckAll")?></label>&nbsp;&nbsp;&nbsp;
     </td>
     <td>
