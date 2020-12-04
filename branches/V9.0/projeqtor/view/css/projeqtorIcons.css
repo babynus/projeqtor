@@ -629,12 +629,12 @@
   { background-image: url(images/calendarWhiteUpdateFlat.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .calendarYellowUpdate, .ProjeQtOrFlatRed .calendarYellowUpdate, .ProjeQtOrFlatGreen .calendarYellowUpdate, .ProjeQtOrFlatGrey .calendarYellowUpdate 
   { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .calendarRed { background-image: url(customIcons/new/iconCalendarDate.svg);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .calendarWhite { background-image: url(customIcons/new/iconCalendarDate.svg);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .calendarYellow { background-image: url(customIcons/new/iconCalendarDate.svg);  background-repeat: no-repeat; ;}
-.ProjeQtOrNewGui .calendarRedUpdate { background-image: url(customIcons/new/iconCalendarDate.svg);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .calendarWhiteUpdate { background-image: url(customIcons/new/iconCalendarDate.svg);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .calendarYellowUpdate { background-image: url(customIcons/new/iconCalendarDate.svg);  background-repeat: no-repeat;}
+.ProjeQtOrNewGui .calendarRed { background-image: url(customIcons/new/iconCalendarRed.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .calendarWhite { background-image: url(customIcons/new/iconCalendarGrey.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .calendarYellow { background-image: url(customIcons/new/iconCalendarYellow.svg);  background-repeat: no-repeat; ;}
+.ProjeQtOrNewGui .calendarRedUpdate { background-image: url(customIcons/new/iconCalendarRedUpdate.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .calendarWhiteUpdate { background-image: url(customIcons/new/iconCalendarGreyUpdate.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .calendarYellowUpdate { background-image: url(customIcons/new/iconCalendarYellowUpdate.svg);  background-repeat: no-repeat;}
 
 .iconCalendarDefinition { background-image: url(images/iconCalendarDefinition32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconCalendarDefinition { background-image: url(customIcons/blue/iconCalendarDefinition.png);  background-repeat: no-repeat; }

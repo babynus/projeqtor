@@ -919,7 +919,7 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
                                                .formatIcon('KanbanAddColumns',22,i18n('kanbanAddColumn'))
                                                ."</div>";
   if($idKanban!=-1)echo "<div dojoType=\"dijit.form.Button\" class=\"detailButton\"  
-                        style=\"float:left;position:relative;margin-top:-1px;width:16pw;height:16px;\"
+                        style=\"float:left;position:relative;margin-top:-1px;\"
                         onclick=\"showDetail('refreshActionAdd".$typeKanbanC."',1,'".$typeKanbanC."',false,'new');\">" 
                         .formatIcon('KanbanAdd'.$typeKanbanC,22, i18n('kanbanAdd'.$typeKanbanC))
                         ."</div>";
