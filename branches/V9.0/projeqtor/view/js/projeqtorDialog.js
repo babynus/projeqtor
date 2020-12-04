@@ -12035,6 +12035,22 @@ function showDisplayModule(id,total){
 }
 
 function filterMenuModule(id,nbTotal){
+  var reset = 0;
+  for (var i=1; i <= 7; i++) {
+    if(dojo.hasClass(dojo.byId("menuFilterModuleTop"+i),'menuBarItemSelected')){
+      if(id==i){
+        reset = 1;
+      }
+      dojo.removeClass(dojo.byId("menuFilterModuleTop"+i),"menuBarItemSelected");
+    }
+  }
+  if(reset==0){
+    dojo.addClass(dojo.byId("menuFilterModuleTop"+id),"menuBarItemSelected");
+  }else{
+    id=1;
+    dojo.addClass(dojo.byId("menuFilterModuleTop"+id),"menuBarItemSelected");
+  }
+  
   if(id==2){
     var tab = [1,9,16];
   }else if(id==3){
