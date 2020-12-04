@@ -1712,6 +1712,10 @@ element.style {
   background-color: transparent !important;
   color:var(--color-secondary);
 }
+.ProjeQtOrNewGui .kanbanTitleTicket {
+	min-height:38px;
+	max-height:38px;
+}
 .ProjeQtOrNewGui #loginResultDiv, .ProjeQtOrNewGui #passwordResultDiv {
 	top:10% !important;
 }
