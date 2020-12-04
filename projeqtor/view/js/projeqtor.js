@@ -5282,6 +5282,10 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     height = maxEditorHeight - 150;
     currentEditorIsNote=true;
   }
+  if (editorName == 'kanbanResult') {
+    height = maxEditorHeight - 150;
+    currentEditorIsNote=true;
+  }
   forceCkInline = false;
   if (editorName == 'WUDescriptions' || editorName == 'WUIncomings' || editorName == 'WULivrables') {
     height = 100;
