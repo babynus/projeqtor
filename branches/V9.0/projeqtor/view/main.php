@@ -704,7 +704,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
 </head>
 <body id="body" class="nonMobile tundra <?php echo getTheme();?>" <?php if(isNewGui()) echo 'style="background-color:'.$background.';"'; ?> onBeforeUnload="return beforequit();" onUnload="quit();">
 <div id="centerThumb80" style="display:none;z-index:999999;position:absolute;top:10px;left:10px;height:80px;width:80px;"></div>
-<div id="loadingDiv" class="<?php echo getTheme();?> loginFrame" 
+<div id="loadingDiv" class="<?php echo getTheme();  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" 
  style="position:absolute; visibility: visible; display:block; width:100%; height:100%; margin:0; padding:0; border:0">
  <?php if (1 and isNewGui()) echo '<div style="position:absolute;margin-top:-50%;margin-left:-0%;width:250%;height:250%;opacity:10%;z-index:-2;" class="loginBackgroundNewGui"></div>';?>
   <?php if (isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:60%;z-index:-1;" class="loginBackgroundNewGui"></div>';?>
@@ -712,7 +712,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
   <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
     <tr height="100%">
       <td width="100%" align="center">
-        <div class="background loginFrame" >
+        <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
         <table align="center" >
           <tr style="height:10px;">
             <td align="left" style="position:relative;height: 100%;" valign="top">
