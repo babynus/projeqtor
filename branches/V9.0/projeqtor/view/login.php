@@ -184,7 +184,7 @@ $mobile=false;
 </head>
 <?php 
 if(isNewGui()){
-$firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
+$firstColor=Parameter::getUserParameter('newGuiThemeColor');
 if(!$firstColor){
 $firstColor= getTheme();
 }
@@ -261,7 +261,7 @@ $dbVersion=Sql::getDbVersion();
 	          <img style="position:absolute; top:2px;right:-2px;" src="../view/img/logoMedium.png"  />
 	          </div>  -->
 			  <table  align="center">
-			  			    <?php if(isNewGui()){?>
+			    <?php if(isNewGui()){?>
 			    <tr style="height:42px;" >
 			     <td align="center" style="position:relative;height: 1%;" valign="center">
 			       <div style="position:relative;height:75px;">
@@ -359,7 +359,7 @@ $dbVersion=Sql::getDbVersion();
 			                <td style="background:transparent !important;">&nbsp;</td>
 			                <td style="text-align:center" >
 			                  <button tabindex="3" id="loginButton"  dojoType="dijit.form.Button" type="submit" class="largeTextButton" showlabel="true" >
-			                  OK
+			                  <?php echo i18n('loginLib');?>
 			                    <script type="dojo/connect" event="onClick" args="evt">
                                  return true;
                                 </script>
