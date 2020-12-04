@@ -4,6 +4,8 @@ $theme="ProjeQtOr";
 if (is_file ( "../tool/parametersLocation.php" )) {
   include_once '../tool/projeqtor.php';
   $theme=getTheme();
+  if(isNewGui())$firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
+  $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
 } 
 /*** COPYRIGHT NOTICE *********************************************************
  *
@@ -46,26 +48,38 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   <link rel="icon" href="img/logo.ico" type="image/x-icon" />
   <link rel="stylesheet" type="text/css" href="css/projeqtor.css" />
   <link rel="stylesheet" type="text/css" href="css/projeqtorFlat.css" />
+    <?php if(isNewGui()){?>
+  <link rel="stylesheet" type="text/css" href="../view/css/projeqtorNew.css" />
+  <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <?php }?>
   <title>ProjeQtOr</title>
   <script type="text/javascript" src="../external/dojo/dojo.js"
     djConfig='parseOnLoad: false, 
               isDebug: false'></script>
-  <script type="text/javascript">             
+  <script type="text/javascript">    
+  var isNewGui=<?php echo (isNewGui())?'true':'false';?>;                
      dojo.addOnLoad(function(){
+       if (isNewGui) {
+         changeTheme('<?php echo getTheme();?>');
+         setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>','<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>');
+       }
        //dojo.byId("currentLocale").value=dojo.locale;
        window.setTimeout('hideWait();',10);
      });
   </script>
 </head>
 
-<body class="tundra <?php echo $theme;?>" style='background-color: #C3C3EB' >
+<body class="nonMobile tundra <?php echo $theme;?>" style="background-color:<?php echo $background;?>;"  >
   <div id="wait" style="display:none">
   &nbsp;
   </div> 
-  <table align="center" width="100%" height="100%" class="loginBackground">
+   <?php if (1 and isNewGui()) echo '<div style="position:absolute;margin-top:-50%;margin-left:-0%;width:250%;height:250%;opacity:10%;z-index:-2;" class="loginBackgroundNewGui"></div>';?>
+  <?php if (isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:60%;z-index:-1;" class="loginBackgroundNewGui"></div>';?>
+  <?php if (0 and isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:5%;position:-20px;" class="loginBackgroundNewGui"></div>';?> 
+  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
     <tr height="100%">
       <td width="100%" align="center">
-        <div class="background loginFrame" >
+        <div class="background " >
         <table  align="center" >
           <tr style="height:10px;" >
             <td align="left" style="height: 1%;" valign="top">

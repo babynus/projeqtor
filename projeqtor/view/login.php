@@ -201,10 +201,10 @@ $firstColor= getTheme();
 echo '<input type="hidden" id="objectClass" value="' . $_REQUEST['objectClass'] . '" />';
 echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['objectId']) . '" />';
 }    
-    
+$dbVersion=Sql::getDbVersion();
 ?>
-  <div class="listTitle" style="position:absolute;top:10px;right:10px;<?php if(isNewGui()) echo'padding: 3px;border-radius: 5px;color:var(--color-toolbar-text) !important;font-weight: 600;font-size:14px;background:transparent !important';?>"><?php ;
-  $dbVersion=Sql::getDbVersion();
+  <div class="listTitle" style="position:absolute;top:10px;right:10px;<?php if(isNewGui()) echo'padding: 3px;border-radius: 5px;color:var(--color-toolbar-text) !important;font-size:20px;background:transparent !important';?>;opacity:<?php echo($version!=$dbVersion)?'':'60%;';?>"><?php ;
+  
   if ($version==$dbVersion) {
   	echo $version;
   } else {
@@ -238,7 +238,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
       <?php 
       if(isNewGui()){
        $currentWidth=(RequestHandler::isCodeSet('currentWidth')?RequestHandler::getValue('currentWidth'):'');
-       if($currentWidth!='')$calculatedWidth=($currentWidth*0.33)*0.82;
+       if($currentWidth!='')$calculatedWidth=(($currentWidth*0.33)*0.9)*0.8;
        $width=($currentWidth!='')?$calculatedWidth:400;
        echo htmlSetClickableImages($msg->description,$width);
       }else{
