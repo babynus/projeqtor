@@ -104,7 +104,7 @@ $firstColor= getTheme();
   <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'loginBackgroundNewGui':'loginBackground';?>" style="<?php if (isNewGui()) echo 'background-color:#'.$firstColor;?>">
     <tr height="100%">
       <td width="100%" align="center">
-        <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" <?php if(isNewGui()) echo 'style="height:320px;width:550px!important;"';?> >
+        <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>"  >
         <table  align="center" >
           <tr style="height:10px;" >
             <td align="left" style="position:relative;height: 1%;" valign="top">
