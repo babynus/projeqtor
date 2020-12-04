@@ -1716,6 +1716,20 @@ element.style {
 	min-height:38px;
 	max-height:38px;
 }
+.ProjeQtOrNewGui #dialogKanbanUpdate label {
+	margin-right:5px;
+	margin-top:5px;
+}
+.ProjeQtOrNewGui #dialogKanbanUpdate .dijitCheckBox {
+	margin-top:10px;
+}
+.ProjeQtOrNewGui .kanbanColumn .sectionBadge {
+	top:5px;
+}
+.ProjeQtOrNewGui .kanbanColumn .linkHeader {
+	height:18px;
+}
+
 .ProjeQtOrNewGui #loginResultDiv, .ProjeQtOrNewGui #passwordResultDiv {
 	top:10% !important;
 }
