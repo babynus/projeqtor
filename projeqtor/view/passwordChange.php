@@ -87,7 +87,7 @@
 
 <?php 
 if(isNewGui()){
-$firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
+$firstColor=Parameter::getUserParameter('newGuiThemeColor');
 if(!$firstColor){
 $firstColor= getTheme();
 }
@@ -106,22 +106,33 @@ $firstColor= getTheme();
       <td width="100%" align="center">
         <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>"  >
         <table  align="center" >
+		    <?php if(isNewGui()){?>
+			    <tr style="height:42px;" >
+			     <td align="center" style="position:relative;height: 1%;" valign="center">
+			       <div style="position:relative;height:75px;">
+			         <div class="divLoginIconDrawing" style="position:absolute;background-color:#<?php echo $firstColor;?>";>
+			           	<div class="divLoginIconBig"></div>		         
+			         </div>
+			       </div>
+			     </td>
+			    </tr>
+	    <?php }?>
           <tr style="height:10px;" >
-            <td align="left" style="position:relative;height: 1%;" valign="top">
-			        <div style="position:relative;width: 400px; height: 54px;">
-			          <div style="z-index:10;overflow:visible;position:absolute;width: 480px; height: 50px;top:<?php echo (isNewGui())?'12px':'15px'?>;text-align: center">
-				        <img style="max-height:60px" src="<?php 
-				          if (file_exists("../logo.gif")) echo '../logo.gif';
-				          else if (file_exists("../logo.jpg")) echo '../logo.jpg';
-				          else if (file_exists("../logo.png")) echo '../logo.png';
-				          else echo 'img/titleSmall.png';?>" />
-			          </div>
-			        </div>
+  	        <td align="left" style="position:relative;height: 1%;" valign="top">
+  	          <div style="position:relative;width: 400px; height: 54px;">
+  	            <div style="z-index:10;overflow:visible;position:absolute;width: 480px; height: 50px;top:15px;text-align: center">
+  		           <img style="max-height:60px" src="<?php 
+    		          if (file_exists("../logo.gif")) echo '../logo.gif';
+    		          else if (file_exists("../logo.jpg")) echo '../logo.jpg';
+    		          else if (file_exists("../logo.png")) echo '../logo.png';
+    		          else echo '../view/img/titleSmall.png';?>" />
+  	            </div>
+  	          </div>
             </td>
-          </tr>
+  	      </tr>
           <tr style="height:100%" height="100%">
             <td style="height:99%" align="left" valign="middle">
-              <div  id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="<?php echo (isNewGui())?' height:200px;width:500px;':' height:210px;width:450px;'?>overflow:visible;position: relative;">
+              <div  id="formDiv" dojoType="dijit.layout.ContentPane" region="center"style="background:transparent !important;width: 470px; overflow:hidden;position: relative;">
              <form  dojoType="dijit.form.Form" id="passwordForm" jsId="passwordForm" name="passwordForm" encType="multipart/form-data" action="" method="" >
              <script type="dojo/method" event="onSubmit" >
               dojo.byId('goButton').focus();
@@ -148,7 +159,7 @@ $firstColor= getTheme();
             ?> 
             <?php if(!isNewGui())echo '<br/>'?>
             <br/>
-            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar();',20);" class="input rounded"  style="color:#000000;margin-left:15px;<?php echo (isNewGui())?'border:unset !important;width:450px;':'padding:10px;';?>">
+            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar();',20);" class="input rounded"  style="color:#000000;<?php echo (isNewGui())?'border:unset !important;width:450px;':'padding:10px;margin-left:15px;';?>">
               <?php if (isNewGui()) echo '<div class="loginDivContainer container" style="margin-bottom:15px;">';?>
               <label class="label" style="<?php echo (isNewGui())?"position: relative;text-align:center;width:180px;margin-top: 4px;":"width:150px;";?>;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
@@ -185,15 +196,18 @@ $firstColor= getTheme();
             <input type="hidden" id="criteria" name="criteria" value=""/>
             <!-- florent -->
             <?php if(!isNewGui()) echo '<br/>';?>
-            <button id="buttonLoginPwChange" type="submit" style="<?php echo (isNewGui())?'margin-left:160px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
+            <button id="buttonLoginPwChange" type="submit" style="<?php echo (isNewGui())?'margin-left:80px;width:150px!important;;height:20px !important;floaat:left;':'margin-left:150px;';?>width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('loginLib');?>
               <script type="dojo/connect" event="onClick" args="evt">
                 //loadContent("../tool/changePassword.php","passwordResultDiv", "passwordForm");
               </script>
             </button>
-            <?php if(!isNewGui()) echo '<br/>';?>
-            <div style="height:5px">&nbsp;</div>
+            <?php if(!isNewGui()){ 
+                echo '<br/>';
+                echo '<div style="height:5px">&nbsp;</div>';
+            }
+             ?>
             <?php if ( $user->password != md5($user->getRandomPassword()) ) {?>
-            <button  class="largeTextButton" type="button" style="<?php echo (isNewGui())?'margin-left:160px;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;<?php if(isNewGui())echo ''?>" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
+            <button  class="largeTextButton" type="button" style="<?php echo (isNewGui())?'margin-right:80px;width:150px !important;float:right;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;<?php if(isNewGui())echo ''?>" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
               <script type="dojo/connect" event="onClick" args="evt">
               showWait(); 
               window.location=".";
