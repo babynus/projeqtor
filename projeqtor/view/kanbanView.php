@@ -859,19 +859,19 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
         . ' >&nbsp;&nbsp'
             . htmlEncode($line->name)
             . "</span>";
-          echo '  <a class="imageColorNewGui" onClick="copyKanban('.$line->id.')" title="' . i18n('kanbanCopy'). '" >'
+          echo '  <a class="" onClick="copyKanban('.$line->id.')" title="' . i18n('kanbanCopy'). '" >'
               .formatSmallButton('Copy')
               .'</a> ';
-          echo '  <a class="imageColorNewGui" onClick="editKanban('.$line->id.')" title="' . i18n('kanbanEdit'). '" >'
+          echo '  <a class="" onClick="editKanban('.$line->id.')" title="' . i18n('kanbanEdit'). '" >'
               .formatSmallButton('Edit')
               .'</a> ';
-          if($line->isShared==0) echo '  <a class="imageColorNewGui" onClick="plgShareKanban('.$line->id.')" title="' . i18n('kanbanShare'). '" >'
+          if($line->isShared==0) echo '  <a class="" onClick="plgShareKanban('.$line->id.')" title="' . i18n('kanbanShare'). '" >'
               .formatSmallButton('Share')
               .'</a> ';
-          if($line->isShared==1) echo '  <a class="imageColorNewGui" onClick="plgShareKanban('.$line->id.')" title="' . i18n('kanbanUnshare'). '" >'
+          if($line->isShared==1) echo '  <a class="" onClick="plgShareKanban('.$line->id.')" title="' . i18n('kanbanUnshare'). '" >'
               .formatSmallButton('Shared')
               .'</a> ';
-          echo '  <a class="imageColorNewGui" onClick="delKanban('.$line->id.', \''.i18n("kanbanDel").'\')" title="' . i18n('kanbanDelete'). '" >'
+          echo '  <a class="" onClick="delKanban('.$line->id.', \''.i18n("kanbanDel").'\')" title="' . i18n('kanbanDelete'). '" >'
               .formatSmallButton('Remove')
               .'</a> ';
           if (isNewGui()) echo '</div>';
@@ -898,7 +898,7 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
         . ' >&nbsp;&nbsp'
             . htmlEncode($line->name)
             . "</span>";
-    echo '  <a onClick="copyKanban('.$line->id.')" title="' . i18n('kanbanCopy'). '" class="imageColorNewGui">'
+    echo '  <a onClick="copyKanban('.$line->id.')" title="' . i18n('kanbanCopy'). '" class="">'
         .formatSmallButton('Copy')
         .'</a> ';
     if (isNewGui()) echo '</div>';
