@@ -1793,9 +1793,11 @@ function finalizeMessageDisplay(destination, validationType) {
         }
         forceRefreshCreationInfo = false;
         if (dojo.byId('attachmentFileDirectDiv')) {
+          if(dojo.byId('attachmentFileDirectDiv').style.visibility == 'hidden') {
+            dijit.byId('attachmentFileDirect').reset();
+            //dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('formDiv'),true);
+          }
           dojo.byId('attachmentFileDirectDiv').style.visibility = 'visible';
-          dijit.byId('attachmentFileDirect').reset();
-          dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('formDiv'),true);
         }
         if (dojo.byId('objectClass') && dojo.byId('objectId')) {
           stockHistory(dojo.byId('objectClass').value,dojo.byId('objectId').value);
