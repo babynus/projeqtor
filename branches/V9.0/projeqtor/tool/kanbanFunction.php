@@ -94,7 +94,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
           <span id="name' . $line ['id'] . '">' . htmlEncode ( $line ['name'] ) . '</span>
         </div>
       </div>
-      <div id="objectDescr' . $line ['id'] . '" dojoType="dijit.layout.ContentPane" region="center" class="dojoDndItem"
+      <div id="objectDescr' . $line ['id'] . '" dojoType="dijit.layout.ContentPane" region="center" class=""
         style="width:98%;max-width:'.$ticketWidth.'px;padding:4px;font-size:12px;font-family:arial;word-wrap:break-word;max-height:300px;overflow-y:auto;cursor:move;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
         onScroll="kanbanShowDescr(\'description\',\'' . $typeKanbanC . '\', ' . $line ['id'] . ');">
         ' . $ticketDescr . '
@@ -110,7 +110,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
           ' . formatColorThumb ( "idPriority", $line ['idpriority'], 22, 'left', SqlList::getNameFromId ( "Priority", $line ['idpriority'] ) ) . '
         </div>' : '') . '
       </div>
-      <div id="divPrincItem' . $line ['id'] . '" >
+      <div id="divPrincItem' . $line ['id'] . '" style="cursor:move;">
        ' . kanbanAddPrinc ( $line ) . '
       </div> ';
       $object= new $typeKanbanC ($line['id']);
@@ -167,8 +167,8 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
       <div id="divPrincItem' . $line ['id'] . '" style="cursor:move;margin-top:'.((isNewGui())?'38':'32').'px;">
         ' . kanbanAddPrinc ( $line ) . '        
       </div>
-      <div id="objectDescr' . $line ['id'] . '" class="dojoDndItem"
-        style="cursor:default;padding:5px;font-size:12px;font-family:arial;max-height:55px;'.((isNewGui())?'min-height:55px;':'').'overflow-y:scroll;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
+      <div id="objectDescr' . $line ['id'] . '" class=""
+        style="padding:5px;font-size:12px;font-family:arial;max-height:55px;'.((isNewGui())?'min-height:55px;':'').'overflow-y:scroll;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
         onScroll="kanbanShowDescr(\'description\',\'' . $typeKanbanC . '\', ' . $line ['id'] . ');" >
           ' . $ticketDescr2 . '
       </div>
