@@ -1478,7 +1478,7 @@ function addAttachment(attachmentType) {
       addAttachment(attachmentType);
       if (isHtml5()) {
         dijit.byId('attachmentFileDirect').reset();
-        dijit.byId('attachmentFile').addDropTarget(dojo.byId('attachmentFileDropArea'));
+        dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('attachmentFileDropArea'));
       }
     };
     loadDialog('dialogAttachment', callBack);
@@ -1543,7 +1543,10 @@ function changeAttachment(list) {
  * save an Attachment
  * 
  */
+var cancelDupplicate=false;
 function saveAttachment(direct) {
+  console.log("saveAttachment("+direct+")");
+  console.log(dijit.byId("attachmentFileDirect").getFileList());
   // disableWidget('dialogAttachmentSubmit');
   if (!isHtml5()) {
     if (dojo.isIE && dojo.isIE<=8) {
