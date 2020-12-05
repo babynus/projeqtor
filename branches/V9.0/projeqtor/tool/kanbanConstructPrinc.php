@@ -33,7 +33,7 @@ function kanbanAddPrinc($line) {
 			}
 			$addInPrinc .= '
     	<div title="'.i18n('colIdTargetProductVersion').'" style="float:left;" class="kanbanVersion" style="border:1px solid red;border-left:1px solid #e0e0e0;margin-left:5px;">
-			  <div class="iconProductVersion16 iconProductVersion iconSize16" style="margin-left:10px;margin-top:5px;width:16px;height:16px;float:left"></div>
+			  <div class="imageColorNewGuiNoSelection iconProductVersion16 iconProductVersion iconSize16" style="margin-left:10px;margin-top:5px;width:16px;height:16px;float:left"></div>
         <div id="targetProductVersion' . $line ['id'] . '" style="float:left;margin:5px 0 0 2px;overflow:hidden;">
           ' . $versionName . '
         </div>
@@ -42,7 +42,7 @@ function kanbanAddPrinc($line) {
 		if (isset ($line['idactivity']) && $line['idactivity'] != 0) {
 			$addInPrinc .= '
       <div title="'.((isset($line['WorkElement']))?i18n('colPlanningActivity'):i18n('colParentActivity')).'" style="float:left;">  
-        <div class="iconActivity16 iconActivity iconSize16" style="margin-left:10px;margin-top:5px;width:16px;height:16px;float:left"></div>
+        <div class="imageColorNewGuiNoSelection iconActivity16 iconActivity iconSize16" style="margin-left:10px;margin-top:5px;width:16px;height:16px;float:left"></div>
         <div class="kanbanActivity" style="margin:5px 0 0 2px;overflow:hidden;float:left;">
           ' . SqlList::getNameFromId ( "Activity", $line ['idactivity'] ) . '
         </div>
@@ -61,7 +61,7 @@ function kanbanAddPrinc($line) {
       <table style="margin: 2px;">
         <tr title="'.i18n('colIdTargetProductVersion').'">
           <td>
-            <div class="iconProductVersion16 iconProductVersion iconSize16" style="width:16px;height:16px;float:left"></div>
+            <div class="imageColorNewGuiNoSelection iconProductVersion16 iconProductVersion iconSize16" style="width:16px;height:16px;float:left"></div>
           </td>
           <td id="targetProductVersion' . $line ['id'] . '"  style="float:left;overflow:hidden;max-width:120px;margin-left:2px;">
             ' . $versionName . '
@@ -74,7 +74,7 @@ function kanbanAddPrinc($line) {
       <table style="margin: 2px;">
         <tr title="'.((isset($line['WorkElement']))?i18n('colPlanningActivity'):i18n('colParentActivity')).'" >
           <td>
-            <div class="iconActivity16 iconActivity iconSize16" style="width:16px;height:16px;float:left"></div>
+            <div class="imageColorNewGuiNoSelection iconActivity16 iconActivity iconSize16" style="width:16px;height:16px;float:left"></div>
           </td>
           <td style="float:left;overflow:hidden;max-width:120px;margin-left:2px;">
             ' . SqlList::getNameFromId ( "Activity", $line ['idactivity'] ) . '
