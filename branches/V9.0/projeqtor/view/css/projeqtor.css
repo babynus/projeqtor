@@ -3971,6 +3971,7 @@ progress::-webkit-progress-value {
   min-width:290px;
   margin-top:2px;
   margin-bottom:8px;
+  cursor:move;
   /*word-wrap:break-word;
   word-break: break-all;*/
 }
