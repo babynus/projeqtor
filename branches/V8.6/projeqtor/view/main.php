@@ -826,7 +826,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                if (file_exists("../logo.gif")) echo '../logo.gif';
 	    		          else if (file_exists("../logo.jpg")) echo '../logo.jpg';
 	    		          else if (file_exists("../logo.png")) echo '../logo.png';
-	    		          else echo 'img/titleWhiteSmall.png';?>); background-repeat: no-repeat; height: 50px; width:100%;max-width:300px" 
+	    		          else echo 'img/titleWhiteSmall.png';?>); background-repeat: no-repeat; height: 50px; width:100%;background-position:center" 
                onclick="showAbout(aboutMessage);" title="<?php echo i18n('aboutMessage');?>" > 
           </div>
           <div style="position:absolute; right:0px; bottom:0px" id="helpbutton" style="text-align:right;" onclick="showHelp();">
