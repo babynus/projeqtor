@@ -190,6 +190,7 @@ if (property_exists($objectClass,'idStatus')) {
     }
   }
 }
+$extendedListZone=false;
 ?>
 <div dojoType="dojo.data.ItemFileReadStore" id="objectStore" jsId="objectStore" clearOnClose="true"
   url="../tool/jsonQuery.php?objectClass=<?php echo $objectClass;?>
@@ -289,6 +290,80 @@ if (property_exists($objectClass,'idStatus')) {
           
           <table style="width: 100%; height: 39px;">
             <tr>
+            <?php if (isNewGui()) {?>
+            <td width="80%">&nbsp;</td>
+            <?php }?>
+            <?php if (! $comboDetail) {?> 
+              <td width="36px" class="allSearchFixLength">
+              <?php if ($objectClass=='GlobalView') {?>
+                <div dojoType="dijit.form.DropDownButton"
+                             class="comboButton"   
+                             id="planningNewItem" jsId="planningNewItem" name="planningNewItem" 
+                             showlabel="false" class="" iconClass="dijitButtonIcon dijitButtonIconNew"
+                             title="<?php echo i18n('comboNewButton');?>">
+                          <span>title</span>
+                          <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
+                            <div style="font-weight:bold; height:25px;text-align:center">
+                            <?php echo i18n('comboNewButton');?>
+                            </div>
+                            <?php $arrayItems=GlobalView::getGlobalizables();
+                            foreach($arrayItems as $item=>$itemName) {
+                              $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
+                              if ($canCreate=='YES') {
+                                if (! securityCheckDisplayMenu(null,$item) ) {
+                                  $canCreate='NO';
+                                }
+                              }
+                              if ($canCreate=='YES') {?>
+                              <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
+                               onClick="addNewItem('<?php echo $item;?>');" >
+                                <table width:"100%"><tr style="height:22px" >
+                                <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIcon($item, 22, null, false);;?></td>    
+                                <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
+                                </tr></table>   
+                              </div>
+                              <div style="height:5px;"></div>
+                              <?php } 
+                              }?>
+                          </div>
+                        </div>
+              <?php } else {?>
+              <button id="newButtonList" dojoType="dijit.form.Button" showlabel="false"
+                title="<?php echo i18n('buttonNew', array(i18n($_REQUEST['objectClass'])));?>"
+                iconClass="dijitButtonIcon dijitButtonIconNew" class="detailButton">
+                <script type="dojo/connect" event="onClick" args="evt">
+                  hideExtraButtons('extraButtonsList');
+		              dojo.byId("newButton").blur();
+                  id=dojo.byId('objectId');
+	                if (id) { 	
+		                id.value="";
+		                unselectAllRows("objectGrid");
+                    if (switchedMode) {
+                      setTimeout("hideList(null,true);", 1);
+                    }
+                    loadContent("objectDetail.php", "detailDiv", "listForm");
+                    if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+                  } else { 
+                    showError(i18n("errorObjectId"));
+	                }
+                </script>
+              </button>
+              <?php }?>
+            </td>
+            <?php }?>
+            
+            
+            
+              <td width="36px" class="allSearchFixLength">
+                <button id="newButtonRefresh" dojoType="dijit.form.Button" showlabel="false"
+                  title="<?php echo i18n('buttonRefreshList');?>"
+                  iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
+                  <script type="dojo/connect" event="onClick" args="evt">
+                     hideExtraButtons('extraButtonsList');
+	                   refreshGrid(true);
+                  </script>
+                </button>
+              </td>    
             <?php 
             //gautier #filterEnd
             if (!isNewGui()){
@@ -1079,10 +1154,12 @@ if (property_exists($objectClass,'idStatus')) {
                     <?php } else {?>
                       <div style="position: absolute;top: 34px; right:42px;" id="columnSelectorTotWidthTop"></div>
                     <?php } ?>  
-                  </div>   
+                  </div>  
+                  <?php $screenHeight=getSessionValue('screenHeight','1080');
+                    $columnSelectHeight=intval($screenHeight*0.6);?>
                   <div style="height:5px;border-bottom:1px solid #AAAAAA"></div>    
 							    <div id="dndListColumnSelector" jsId="dndListColumnSelector" dojotype="dojo.dnd.Source"  
-							      dndType="column" style="min-width:310px;"
+							      dndType="column" style="min-width:310px;overflow-y:auto; max-height:<?php echo $columnSelectHeight;?>px; position:relative"
 							      withhandles="true" class="container">                       
 							      <?php include('../tool/listColumnSelector.php')?>
 							    </div>
@@ -1110,7 +1187,8 @@ if (property_exists($objectClass,'idStatus')) {
 							</div>   
              </td>
 <?php }?>                 
-<?php if (! $comboDetail) {?>                
+<?php if (! $comboDetail) {?>        
+            <?php organizeListButtons();?>        
              <td width="36px" class="allSearchFixLength">
               <button title="<?php echo i18n('printList')?>"  
                dojoType="dijit.form.Button" 
@@ -1129,13 +1207,15 @@ if (property_exists($objectClass,'idStatus')) {
           if ($tmpMode=='multi') {$modePdf='download multi';}
           else if ($tmpMode=='download' or $tmpMode=='show') {$modePdf='download';}
         }
-      ?>       
+      ?> 
+             <?php organizeListButtons();?>              
              <td width="36px" class="allSearchFixLength">
               <button title="<?php echo ($modePdf=='pdf')?i18n('reportPrintPdf'):i18n('reportPrintTemplate');?>"
                dojoType="dijit.form.Button" 
                id="listPrintPdf" name="listPrintPdf"
                iconClass="dijitButtonIcon dijitButtonIcon<?php echo ucfirst($modePdf);?>" class="detailButton" showLabel="false">
                 <script type="dojo/connect" event="onClick" args="evt">
+                 hideExtraButtons('extraButtonsList');
                  <?php if (substr($modePdf,-5)=="multi" and SqlElement::class_exists('TemplateReport') ) {?>
                   selectTemplateForReport('<?php echo $objectClass?>','list');
                  <?php } else { ?> 
@@ -1144,82 +1224,21 @@ if (property_exists($objectClass,'idStatus')) {
                 </script>
               </button>              
             </td>
+            <?php organizeListButtons();?>        
             <td width="36px" class="allSearchFixLength">
               <button title="<?php echo i18n('reportPrintCsv')?>"  
                dojoType="dijit.form.Button" 
                id="listPrintCsv" name="listPrintCsv"
                iconClass="dijitButtonIcon dijitButtonIconCsv" class="detailButton" showLabel="false">
                 <script type="dojo/connect" event="onClick" args="evt">
+                  hideExtraButtons('extraButtonsList');
                   openExportDialog('csv');
                   //showPrint("../tool/jsonQuery.php", 'list', null, 'csv');
                 </script>
               </button>              
             </td>
-            <td width="36px" class="allSearchFixLength">
-              <?php if ($objectClass=='GlobalView') {?>
-              <div dojoType="dijit.form.DropDownButton"
-                             class="comboButton"   
-                             id="planningNewItem" jsId="planningNewItem" name="planningNewItem" 
-                             showlabel="false" class="" iconClass="dijitButtonIcon dijitButtonIconNew"
-                             title="<?php echo i18n('comboNewButton');?>">
-                          <span>title</span>
-                          <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
-                            <div style="font-weight:bold; height:25px;text-align:center">
-                            <?php echo i18n('comboNewButton');?>
-                            </div>
-                            <?php $arrayItems=GlobalView::getGlobalizables();
-                            foreach($arrayItems as $item=>$itemName) {
-                              $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
-                              if ($canCreate=='YES') {
-                                if (! securityCheckDisplayMenu(null,$item) ) {
-                                  $canCreate='NO';
-                                }
-                              }
-                              if ($canCreate=='YES') {?>
-                              <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
-                               onClick="addNewItem('<?php echo $item;?>');" >
-                                <table width:"100%"><tr style="height:22px" >
-                                <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIcon($item, 22, null, false);;?></td>    
-                                <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
-                                </tr></table>   
-                              </div>
-                              <div style="height:5px;"></div>
-                              <?php } 
-                              }?>
-                          </div>
-                        </div>
-              <?php } else {?>
-              <button id="newButtonList" dojoType="dijit.form.Button" showlabel="false"
-                title="<?php echo i18n('buttonNew', array(i18n($_REQUEST['objectClass'])));?>"
-                iconClass="dijitButtonIcon dijitButtonIconNew" class="detailButton">
-                <script type="dojo/connect" event="onClick" args="evt">
-		              dojo.byId("newButton").blur();
-                  id=dojo.byId('objectId');
-	                if (id) { 	
-		                id.value="";
-		                unselectAllRows("objectGrid");
-                    if (switchedMode) {
-                      setTimeout("hideList(null,true);", 1);
-                    }
-                    loadContent("objectDetail.php", "detailDiv", "listForm");
-                    if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
-                  } else { 
-                    showError(i18n("errorObjectId"));
-	                }
-                </script>
-              </button>
-              <?php }?>
-            </td>
 <?php }?>   
-      <td width="36px" class="allSearchFixLength">
-              <button id="newButtonRefresh" dojoType="dijit.form.Button" showlabel="false"
-                title="<?php echo i18n('buttonRefreshList');?>"
-                iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
-                <script type="dojo/connect" event="onClick" args="evt">
-	                 refreshGrid(true);
-                </script>
-              </button>
-            </td>    
+
 <?php if ( isNewGui()) {
     $objClassList = RequestHandler::getValue('objectClassList');
     $currentScreen=getSessionValue('currentScreen');
@@ -1236,6 +1255,7 @@ if (property_exists($objectClass,'idStatus')) {
     $list=new ListYesNo($habil->rightAccess);
     $buttonMultiple=($list->code=='NO')?false:true;
     if ($buttonMultiple and !$comboDetail and ! array_key_exists('planning',$_REQUEST) and $objClassList != 'GlobalView') {?>
+    <?php organizeListButtons();?>
     <td width="36px" class="allSearchFixLength">
     <span id="multiUpdateButtonDiv" >
     <button id="multiUpdateButton" dojoType="dijit.form.Button" showlabel="false"
@@ -1243,6 +1263,7 @@ if (property_exists($objectClass,'idStatus')) {
        iconClass="dijitButtonIcon dijitButtonIconMultipleUpdate" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           hideResultDivs();
+          hideExtraButtons('extraButtonsList');
           var pos=<?php echo json_encode($paramRightDiv) ;?>;
           if (dijit.byId('detailRightDiv')) {
             if(pos=='bottom'){
@@ -1271,11 +1292,13 @@ if (property_exists($objectClass,'idStatus')) {
  <?php if (! $comboDetail) {            
     $extraPlgButtons=Plugin::getButtons('list', $objectClass);
     foreach ($extraPlgButtons as $bt) { ?>
+    <?php organizeListButtons();?>
     <td width="36px" class="allSearchFixLength">
       <button id="pluginButtonList<?php echo $bt->id;?>" dojoType="dijit.form.Button" showlabel="false"
         title="<?php echo i18n($bt->buttonName);?>"
         iconClass="<?php echo $bt->iconClass;?>" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
+          hideExtraButtons('extraButtonsList');
           <?php if ($bt->scriptJS) {?>
           <?php echo $bt->scriptJS;?>;
           <?php } else {?>
@@ -1286,7 +1309,7 @@ if (property_exists($objectClass,'idStatus')) {
     </td>
 <?php }
      }?>             
-            
+          <?php organizeListButtonsEnd();?>      
 <?php if ( property_exists($obj,'isEis') and !$hideEisSearch) { ?>
               <td style="vertical-align: middle; width:15%; min-width:110px; text-align:right;white-space:normal;" class="allSearchTD hideInServiceTD allSearchFixLength">
                 <div style="max-height:32px;"> 
@@ -1479,3 +1502,36 @@ $listStatus = $object->getExistingStatus();
 </table>
 </div>
 </div>
+<?php 
+function organizeListButtons($nbButton=1) {
+  //return;
+  global $cptListButton,$extendedListZone;
+  $cptListButton+=$nbButton;
+  if ( isNewGui()) {
+    if (! $extendedListZone) {
+      echo "<! ========================================================>";
+      $extendedListZone=true;
+      echo '<td>';
+      echo '<div style="position:relative;z-index:9">';
+      echo '<div dojoType="dijit.form.Button" showlabel="false" title="'. i18n('extraButtonsBar'). '" '
+          .' iconClass="dijitButtonIcon dijitButtonIconExtraButtons" class="detailButton" '
+          .' id="extraButtonsList" onClick="showExtraButtons(\'extraButtonsList\')" '
+          .'></div>';
+      echo '<div class="statusBar" id="extraButtonsListDiv" style="display:none;position:absolute;width:41px;z-index:900;top:32px;text-align:right;marin-right:6px;padding-bottom:5px;background-color:#ffffff !important;border: 1px solid var(--color-light);border-top:0">';
+      echo '<table><tr>';
+    } else {
+      echo '</tr><tr>';
+    }
+  }
+}
+
+function organizeListButtonsEnd() {
+  //return;
+  global $extendedListZone;
+  if ($extendedListZone) {
+    echo "<! ========================================================>";
+    echo '</tr></table></div></div></td>';
+  }
+}
+
+?>

@@ -5945,9 +5945,13 @@ function saveDataToSession(param, value, saveUserParameter, callBack) {
 }
 
 function showExtraButtons(location) {
+  console.log("showExtraButtons("+location+")");
   var btnNode=dojo.byId(location);
+  console.log(btnNode);
   var divNode=dojo.byId(location+'Div');
+  console.log(divNode);
   if (! divNode) return;
+  
   if (divNode.style.display=='block') {
     divNode.style.display='none';
   } else {
