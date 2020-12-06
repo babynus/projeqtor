@@ -658,7 +658,9 @@ function activityStreamDisplayNote ($note,$origin){
       if (isNewGui())   {
         if (Parameter::getUserParameter('paramScreen')=='top') {
           if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
-            $innerNoteWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
+            $menuLeftOpen=1;
+            if ($menuLeftOpen) $innerNoteWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
+            else $innerNoteWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
           } else { // trailing
             $innerNoteWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
           }
@@ -972,7 +974,9 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
   if (isNewGui())   {
     if (Parameter::getUserParameter('paramScreen')=='top') {
       if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
-        $innerMailWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
+        $menuLeftOpen=1;
+        if ($menuLeftOpen) $innerMailWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
+        else $innerMailWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
       } else { // trailing
         $innerMailWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
       }
