@@ -654,12 +654,23 @@ function activityStreamDisplayNote ($note,$origin){
     $resultNote.= '</div></td></tr></table>';
     
     if ($origin=='objectStream') {
-        if(Parameter::getUserParameter('paramRightDiv')==3){
-          $rightWidth='70%';
-        }else{
-          $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px';
-          if (isNewGui()) $innerNoteWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
+      $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px';
+      if (isNewGui())   {
+        if (Parameter::getUserParameter('paramScreen')=='top') {
+          if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+            $innerNoteWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
+          } else { // trailing
+            $innerNoteWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
+          }
+        } else { // 'left'
+          if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+            $innerNoteWidth=(intval(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))*0.7)-50).'px';
+          } else { // trailing
+            $innerNoteWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
+          }
         }
+        $maxWidth=(intval($innerNoteWidth)+50).'px';
+      }
     } else {
     	if (RequestHandler::isCodeSet('destinationWidth')) {
         $rightWidth=(RequestHandler::getNumeric('destinationWidth')-30).'px';
@@ -667,8 +678,9 @@ function activityStreamDisplayNote ($note,$origin){
     	} else {
     		$rightWidth="100%";
     	}
+    	$maxWidth=$rightWidth;
     }
-    $resultNote.= '<div class="activityStreamNoteContainer" style="padding-left:4px;max-width:'.$rightWidth.'">';
+    $resultNote.= '<div class="activityStreamNoteContainer" style="padding-left:4px;max-width:'.$maxWidth.'">';
     $strDataHTML=$note->note;
     $resultNote.= '<div><div style="margin-top:2px;margin-left:37px;">'.(($origin!='objectStream')?$ticketName."&nbsp;|&nbsp;":"").$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
   	$resultNote.= '<div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($note->creationDate,$note->updateDate,"left",16).'</div>';
@@ -956,12 +968,22 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
   if ( securityCheckDisplayMenu(null, get_class($mail)) and securityGetAccessRightYesNo('menu'.get_class($mail), 'read', $mail)=="YES") {
     $showMail='<div class="roundedButtonSmall" style="width:20px;height:16px;display:inline-block;margin-left:20px;" title="'.i18n('showMail',array($mail->id)).'"><div class="iconGoto" style="z-index:500;width:16px;height:10px;display:inline-block;padding-right:5px;" onClick="gotoElement(\''.htmlEncode(get_class($mail)).'\',\''.htmlEncode($mail->id).'\')" title="'.i18n('showMail',array($mail->id)).'" style="widht:16px;height:16px;"></div></div>';
   }
-  if ($origin=='objectStream') {
-    if (isNewGui()) $innerMailWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
-  } else {
-    if (RequestHandler::isCodeSet('destinationWidth')) {
-      if (isNewGui()) $innerMailWidth=(RequestHandler::getNumeric('destinationWidth')-80).'px';
+  $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px';
+  if (isNewGui())   {
+    if (Parameter::getUserParameter('paramScreen')=='top') {
+      if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+        $innerMailWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
+      } else { // trailing
+        $innerMailWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
+      }
+    } else { // 'left'
+      if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+        $innerMailWidth=(intval(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))*0.7)-50).'px';
+      } else { // trailing
+        $innerMailWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
+      }
     }
+    $maxWidth=(intval($innerMailWidth)+50).'px';
   }
   $result='';
   if($origin=='activityStream'){

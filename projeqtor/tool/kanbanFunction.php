@@ -106,7 +106,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
           ' . formatUserThumb ( $line ['iduser'], SqlList::getNameFromId ( "Affectable", $line ['iduser'] ).'<br/><span style="font-size:80%"><i>('.i18n('colResponsible').')</i></span>', "", 22, 'left', false, $line ['id'] ) . '
         </div>
           ' . (isset ( $line ['idpriority'] ) ? '
-        <div style="float:left;height:22px;margin-top:2px;" id="kanbanPriority">
+        <div style="float:left;height:22px;margin-top:'.((isNewGui())?'-3px;margin-left:4px;':'3px;').'" id="kanbanPriority">
           ' . formatColorThumb ( "idPriority", $line ['idpriority'], 22, 'left', SqlList::getNameFromId ( "Priority", $line ['idpriority'] ) ) . '
         </div>' : '') . '
       </div>

@@ -1149,6 +1149,7 @@
 .ProjeQtOrFlatRed .dijitButtonIcon.iconActiveFilter { background-image: url(customIcons/red/iconActiveFilter.png);  background-repeat: no-repeat; width:24px;background-size : 24px}
 .ProjeQtOrNewGui .dijitButtonIcon.iconFilter { background-image: url(customIcons/new/iconFilter.svg);  background-repeat: no-repeat; width:24px;background-size : 24px}
 .ProjeQtOrNewGui .dijitButtonIcon.iconActiveFilter { background-image: url(customIcons/new/iconActiveFilter.svg);  background-repeat: no-repeat; width:24px;background-size : 24px}
+/*.ProjeQtOrNewGui .dijitButtonIcon.iconFilter, .ProjeQtOrNewGui .dijitButtonIcon.iconActiveFilter {background-size: 22px; background-position: 0px 2px;}*/
 
 .iconFinancial { background-image: url(images/iconFinancial32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconFinancial { background-image: url(customIcons/blue/iconFinancial.png);  background-repeat: no-repeat; }

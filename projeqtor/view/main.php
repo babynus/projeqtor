@@ -1492,14 +1492,21 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
        $detailWidth = getSessionValue('screenWidth') * 0.87;
     }
     if ( sessionValueExists('screenHeight')) {
-      $detailHeight=round(getSessionValue('screenHeight')*0.65);
+      $detailHeight=round(getSessionValue('screenHeight')*0.70);
     }
   ?> 
   <div id="detailView" dojoType="dijit.layout.ContentPane" region="center" style="overflow:hidden" class="background">
     <table style="width:100%;height:100%">
-      <tr style="height:10px;"><td></td></tr>
+      <?php if (!isNewGui()) {?><tr style="height:10px;"><td></td></tr><?php }?>
       <tr>
-        <td width="32px" align="left" style="white-space:nowrap">
+        <?php if (isNewGui()) {?>
+        <td></td>
+        <td align="left" style="width:<?php echo ($detailWidth - 400);?>px; position:relative;">
+          <div style="width:100%;font-size:8pt" dojoType="dijit.layout.ContentPane" region="center" name="comboDetailResult" id="comboDetailResult"></div>
+        </td>
+        
+        <?php }?>
+        <td width="32px" align="left" style="white-space:nowrap;<?php if (isNewGui()) echo "position:relative;top:-5px;right:12px;"?>">
           <input type="hidden" name="canCreateDetail" id="canCreateDetail" />
           <input type="hidden" id='comboName' name='comboName' value='' />
           <input type="hidden" id='comboClass' name='comboClass' value='' />
@@ -1540,12 +1547,13 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
             </script>
           </button>
         </td>
+        <?php if (!isNewGui()) {?>
         <td align="left" style="width:<?php echo ($detailWidth - 400);?>px; position:relative;">
           <div style="width:100%;font-size:8pt" dojoType="dijit.layout.ContentPane" region="center" name="comboDetailResult" id="comboDetailResult"></div>
         </td>
-        <td></td>
+        <td></td><?php }?>
       </tr>
-      <tr><td colspan="3">&nbsp;</td></tr>
+      <?php if (!isNewGui()) {?><tr><td colspan="3">&nbsp;</td></tr><?php }?>
       <tr>
         <td width="<?php echo $detailWidth;?>px" colspan="3">   
           <iframe width="100%" height="<?php echo $detailHeight;?>px"
