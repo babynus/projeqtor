@@ -1484,7 +1484,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
   </div>
 </div>
 
-<div id="dialogDetail" dojoType="dijit.Dialog" title="<?php echo i18n("dialogDetailCombo");?>" class="background" >
+<div id="dialogDetail" dojoType="dijit.Dialog" title="<?php echo i18n("dialogDetailCombo");?>" class="background" onHide="window.document.title=applicationName;">
   <?php 
     $detailHeight=600;
     $detailWidth=1010;
