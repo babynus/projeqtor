@@ -138,6 +138,8 @@ if ($action=='display') {
           var spl=data.split('#$#$#');
           dojo.byId('resultUrl').innerHTML=spl[0];
           dojo.byId('result').value=spl[1];
+          console.log(spl[1]);
+          console.log(JSON.parse(spl[1]));
           document.body.style.cursor = 'default';
         },
         error: function () {
