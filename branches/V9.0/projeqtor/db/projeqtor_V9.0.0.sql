@@ -32,7 +32,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (15,'navSituation',4,0,60),
 (16,'navRiskManagement',5,0,90),
 (17,'navRequirementsManagement',5,0,100),
-(18,'navConfigurationManagement',5,0,110),
+(18,'navConfigurationManagement',0,0,65),
 (19,'navAssetManagement',5,0,120),
 (20,'menuProject',1,16,10),
 (21,'menuActivity',1,25,20),
