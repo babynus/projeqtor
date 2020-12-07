@@ -392,7 +392,7 @@ $dbVersion=Sql::getDbVersion();
 			                    <?php if (Parameter::getGlobalParameter('applicationStatus')=='Closed'
 			                          or Sql::getDbVersion()!=$version) {
 			                    	      echo '<div style="position:fixed;top:50%; left:50%;margin-left:-220px;margin-top:55px;">';
-			                    	      echo '<img src="../view/img/closedApplication.gif" width="60px"/>';
+			                    	      if (!isNewGui()) echo '<img src="../view/img/closedApplication.gif" width="60px"/>';
 			                    	      echo '</div>';
 			                    	      echo '<div class="messageERROR" >';
 			                    	      if (Parameter::getGlobalParameter('applicationStatus')=='Closed') {
