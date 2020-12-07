@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
-	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Calque_1">
-</g>
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 <g id="Calque_2_1_">
-	<circle fill="#FF0000" cx="43.692" cy="54.626" r="5.196"/>
-	<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="54.627" y1="54.625" x2="85.504" y2="54.625"/>
-	<circle fill="#FF0000" cx="43.692" cy="72.996" r="5.196"/>
-	<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="54.627" y1="72.997" x2="85.504" y2="72.997"/>
-	<circle fill="#FF0000" cx="43.692" cy="91.365" r="5.196"/>
-	<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="54.627" y1="91.363" x2="85.504" y2="91.363"/>
 	<g>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M43.217,18.798h-18.88c-0.871,0-1.577,0.928-1.577,2.074v99.102c0,1.145,0.707,2.076,1.577,2.076h75.326
-			c0.871,0,1.578-0.932,1.578-2.076V20.873c0-1.146-0.705-2.074-1.578-2.074H78.998"/>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M78.998,10c0-1.657-1.344-3-3-3H46.217c-1.657,0-3,1.343-3,3v17.5h35.781V10z"/>
+			M123.407,121.297c0,1.323-1.072,2.399-2.404,2.399H6.409c-1.328,0-2.4-1.078-2.4-2.399V6.697c0-1.325,1.072-2.398,2.4-2.398
+			h114.598c1.328,0,2.4,1.073,2.4,2.398V121.297L123.407,121.297z"/>
+		<circle fill="#FF0000" cx="31.307" cy="34.015" r="8.48"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M49.153,34.016h50.392"/>
+		<circle fill="#FF0000" cx="31.307" cy="63.997" r="8.48"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M49.153,63.997h50.392"/>
+		<circle fill="#FF0000" cx="31.307" cy="93.974" r="8.481"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M49.153,93.97h50.392"/>
 	</g>
+</g>
+<g id="Calque_1_1_">
 </g>
 </svg>

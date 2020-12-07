@@ -3,36 +3,22 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g>
-	<g>
-		
-			<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="65.239" cy="26.302" r="12.596"/>
-		
-			<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-			79.584,45.849 86.719,48.921 83.15,85.81 74.556,85.81 74.556,127.076 69.344,127.076 		"/>
-		
-			<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-			50.896,45.849 43.76,48.921 47.328,85.81 55.922,85.81 55.922,127.076 61.134,127.076 		"/>
-	</g>
-	<g>
-		
-			<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="95.452" cy="19.068" r="12.597"/>
-		
-			<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-			86.135,94.8 86.135,119.842 91.349,119.842 		"/>
-		
-			<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-			109.797,38.616 116.932,41.687 113.365,78.577 104.769,78.577 104.769,119.842 99.557,119.842 		"/>
-	</g>
-	<g>
-		
-			<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="35.026" cy="19.068" r="12.597"/>
-		
-			<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-			44.343,94.8 44.343,119.842 39.131,119.842 		"/>
-		
-			<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-			20.683,38.616 13.546,41.687 17.115,78.577 25.709,78.577 25.709,119.842 30.921,119.842 		"/>
-	</g>
-</g>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M81.487,37.619c0,4.884-1.216,9.399-3.274,13.057c-3.082,5.471-8.049,11.463-13.653,11.463c-5.51,0-10.407-5.878-13.496-11.198
+	c-2.152-3.703-3.429-8.318-3.429-13.322c0-12.193,7.578-22.079,16.927-22.079C73.91,15.541,81.487,25.425,81.487,37.619z"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M40.125,43.19c0,3.423-0.852,6.588-2.294,9.151c-2.161,3.834-5.642,8.034-9.569,8.034c-3.863,0-7.294-4.12-9.459-7.848
+	c-1.508-2.595-2.404-5.83-2.404-9.337c0-8.546,5.312-15.474,11.864-15.474S40.125,34.643,40.125,43.19z"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M111.603,43.19c0,3.423-0.853,6.588-2.296,9.151c-2.159,3.834-5.642,8.034-9.568,8.034c-3.863,0-7.294-4.12-9.459-7.848
+	c-1.509-2.595-2.404-5.83-2.404-9.337c0-8.546,5.312-15.474,11.864-15.474C106.291,27.716,111.603,34.643,111.603,43.19z"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M82.569,67.625c1.932-1.32,4.333-2.438,7.313-3.217c0,0,2.858,4.846,9.826,4.846h0.06c6.966,0,9.825-4.846,9.825-4.846
+	c17.723,4.633,14.94,21.217,14.94,21.217s-1.757,3.818-20.649,4.307"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M24.19,89.932C5.275,89.445,3.467,85.625,3.467,85.625S0.684,69.041,18.406,64.408c0,0,2.859,4.846,9.827,4.846h0.058
+	c6.968,0,9.826-4.846,9.826-4.846c2.994,0.783,5.403,1.907,7.339,3.234"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M64.084,108.589
+	c-37.094,0-40.455-7.102-40.455-7.102s-4.535-27.026,24.345-34.576c0,0,4.659,7.896,16.014,7.896h0.096
+	c11.355,0,16.013-7.896,16.013-7.896c28.881,7.55,24.347,34.576,24.347,34.576S101.179,108.589,64.084,108.589z"/>
 </svg>
