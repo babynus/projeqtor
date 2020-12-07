@@ -317,6 +317,13 @@
 .ProjeQtOrFlatRed .iconAlert { background-image: url(customIcons/red/iconAlert.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconAlert { background-image: url(customIcons/new/iconAlert.svg);  background-repeat: no-repeat; }
 
+.iconAllModules { background-image: url(images/iconAllModules.svg);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconAllModules { background-image: url(customIcons/new/iconAllModules.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconAllModules { background-image: url(customIcons/new/iconAllModules.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconAllModules { background-image: url(customIcons/new/iconAllModules.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconAllModules { background-image: url(customIcons/new/iconAllModules.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconAllModules { background-image: url(customIcons/new/iconAllModules.svg);  background-repeat: no-repeat; }
+
 .iconAsset { background-image: url(images/iconAsset.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconAsset { background-image: url(customIcons/blue/iconAsset.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconAsset { background-image: url(customIcons/green/iconAsset.png);  background-repeat: no-repeat; }

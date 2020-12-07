@@ -1746,9 +1746,14 @@ element.style {
 .ProjeQtOrNewGui #barFilterByStatus.dijitBorderContainerPane {
 	z-index:auto;
 }
+
 .ProjeQtOrNewGui #listHeaderDiv.dijitBorderContainerPane {
   overflow:visible;	
 }
 .ProjeQtOrNewGui .allSearchFixLength {
   min-width: 36px;
+
+.ProjeQtOrNewGui .menuBarItemSelectedModule {
+  background-color: transparent !important;
+  color:var(--color-secondary) !important;
 }
