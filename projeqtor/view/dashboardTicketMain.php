@@ -412,7 +412,10 @@ function addTab($param){
     }
     $total=$total2;
   }
-  
+  $canGoto=true;
+  if (! securityCheckDisplayMenu(null,'Ticket') and ! securityCheckDisplayMenu(null,'TicketSimple')) {
+    $canGoto=false;
+  }
   $result=Sql::query("SELECT COUNT(*) as nbline, $ajoutGroupBy as idneed FROM $tableName t WHERE $ajoutGroupBy is not null AND t.idProject in ".getVisibleProjectsList(false)." $paramAdd GROUP BY $ajoutGroupBy ");
   if ($total > 0) {
     $res=array();
@@ -444,7 +447,8 @@ function addTab($param){
     echo "<table width=\"95%\" class=\"tabDashboardTicketMain\">";
     echo '<tr><td class="titleTabTicket">'.i18n($param["title"]).'</td><td class="titleTabTicket">'.i18n("dashboardTicketMainColumnCount").'</td><td class="titleTabTicket">'.i18n("dashboardTicketMainColumnPourcent")."</td></tr>";
     foreach ($res as $idSort=>$nbline){
-      $name='<a href="#" onclick="stockHistory(\'Ticket\',null,\'object\');loadContent(\'dashboardTicketMain.php?goToTicket='.$param["groupBy"].'&val='.$nbline['id'].'\', \'centerDiv\', \'dashboardTicketMainForm\');">'.$nbline["name"].'</a>';
+      if ($canGoto) $name='<a href="#" onclick="stockHistory(\'Ticket\',null,\'object\');loadContent(\'dashboardTicketMain.php?goToTicket='.$param["groupBy"].'&val='.$nbline['id'].'\', \'centerDiv\', \'dashboardTicketMainForm\');">'.$nbline["name"].'</a>';
+      else $name=$nbline["name"];
       $addColor=$name;
       if(isset($nbline["color"])){
         $addColor="<div style=\"background-color:".$nbline["color"].";border:1px solid #AAAAAA;border-radius:50%;width:20px;height:18px;float:left;\">&nbsp;</div><div style=\"color:".$nbline["color"].";radius:50%;width:10px;height:10px;float:left;\">&nbsp;</div>"
@@ -465,7 +469,8 @@ function addTab($param){
     if($total-$totT>0){
       echo "  <tr>";
       echo "    <td width=\"50%\">";
-      echo '<a class="styleUDashboard" href="#" onclick="stockHistory(\'Ticket\',null,\'object\');loadContent(\'dashboardTicketMain.php?goToTicket='.$param["groupBy"].'&undefined=true\', \'centerDiv\', \'dashboardTicketMainForm\');">'.i18n("undefinedValue").'</a>';
+      if ($canGoto) echo '<a class="styleUDashboard" href="#" onclick="stockHistory(\'Ticket\',null,\'object\');loadContent(\'dashboardTicketMain.php?goToTicket='.$param["groupBy"].'&undefined=true\', \'centerDiv\', \'dashboardTicketMainForm\');">'.i18n("undefinedValue").'</a>';
+      else echo i18n("undefinedValue");
       echo "    </td>";
       echo "    <td width=\"10%\">";
       echo '<span>'.($total-$totT).'</span>';
@@ -477,7 +482,8 @@ function addTab($param){
     }
     echo "  <tr>";
     echo "    <td width=\"50%\">";
-    echo '<a class="styleADashboard" href="#" onclick="stockHistory(\'Ticket\',null,\'object\');loadContent(\'dashboardTicketMain.php?goToTicket='.$param["groupBy"].'\', \'centerDiv\', \'dashboardTicketMainForm\');">'.i18n("dashboardTicketMainAllIssues").'</a>';
+    if ($canGoto) echo '<a class="styleADashboard" href="#" onclick="stockHistory(\'Ticket\',null,\'object\');loadContent(\'dashboardTicketMain.php?goToTicket='.$param["groupBy"].'\', \'centerDiv\', \'dashboardTicketMainForm\');">'.i18n("dashboardTicketMainAllIssues").'</a>';
+    else echo i18n("dashboardTicketMainAllIssues");
     echo "    </td>";
     echo "    <td width=\"10%\">";
     echo '<span style="font-weight: bold;">'.$total.'</span>';
@@ -818,6 +824,9 @@ function addParamToUser($user){
   }
   setSessionUser($user);
   $_REQUEST['objectClass']='Ticket';
+  if (! securityCheckDisplayMenu(null,'Ticket') and securityCheckDisplayMenu(null,'TicketSimple')) {
+    $_REQUEST['objectClass']='TicketSimple';
+  }
   include 'objectMain.php';
 }
 
