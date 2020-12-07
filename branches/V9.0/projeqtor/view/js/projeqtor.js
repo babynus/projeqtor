@@ -3471,6 +3471,7 @@ function drawGantt() {
         topId = '';
       }
       keys += "#" + curKey + "#";
+      console.log(item.planningmode);
       g.AddTaskItem(new JSGantt.TaskItem(item.id, pName, pStart, pEnd, pColor, pItemColor,
           runScript, contextMenu, pMile, pResource, progress, pGroup, 
           topId, pOpen, pDepend,
@@ -7718,5 +7719,71 @@ function displayCheckBoxDefinitionLine(){
   }else {
     dojo.byId('tr_dialogChecklistDefinitionLineRequired').style.visibility='hidden';
     dojo.byId('tr_dialogChecklistDefinitionLineExclusive').style.visibility='hidden'
+  }
+}
+
+
+//=================================================================
+var isResizingGanttBar=false;
+function handleResizeGantBAr (id){
+  var barDiv=dojo.byId('bardiv_'+id),
+   el = dojo.byId('taskbar_'+id),
+      resizerStart =dojo.byId('taskbar_'+id+'ResizerStart'),
+      resizerEnd =dojo.byId('taskbar_'+id+'ResizerEnd'),
+        startX,  
+          startWidth;
+  
+  if(!resizerStart && !resizerEnd)return;
+  if(resizerStart){
+    resizerStart.style.display="block";
+    resizerStart.addEventListener('mousedown', initDrag, false);
+  }
+  
+  if(resizerEnd){
+    resizerEnd.style.display="block";
+    resizerEnd.addEventListener('mousedown', initDrag, false);
+  }
+  
+  function initDrag(e) {
+    isResizingGanttBar=true
+     startX = e.clientX;
+     startWidth = parseInt(document.defaultView.getComputedStyle(el).width,10),
+     startleft = parseInt(document.defaultView.getComputedStyle(el).left,10);;
+     if(resizerEnd)document.documentElement.addEventListener('mousemove', doDragEnd, false);
+     if(resizerStart)document.documentElement.addEventListener('mousemove', doDragStart, false);
+     document.documentElement.addEventListener('mouseup', stopDrag, false);
+  }
+  
+  function doDragStart(e) {
+    el.style.width = (startWidth + e.clientX - startX) + 'px';
+    //el.style.left = startleft+(e.clientX - startX)+'px';
+    barDiv.style.width = (startWidth + e.clientX - startX) + 'px';
+    //barDiv.style.left = startleft+(e.clientX - startX)+'px';
+  }
+
+  function doDragEnd(e) {
+    el.style.width = (startWidth + e.clientX - startX) + 'px';
+    barDiv.style.width = (startWidth + e.clientX - startX) + 'px';
+  }
+
+  function stopDrag(e) {
+      if(resizerStart)document.documentElement.removeEventListener('mousemove', doDragStart, false);    
+      if(resizerEnd)document.documentElement.removeEventListener('mousemove', doDragEnd, false);   
+      document.documentElement.removeEventListener('mouseup', stopDrag, false);
+      isResizingGanttBar=false;
+      if(resizerEnd)resizerEnd.style.display="none";
+      if(resizerStart)resizerStart.style.display="none";
+  }
+  
+}
+
+function hideResizerGanttBar (vID) {
+  
+  if(isResizingGanttBar==false && dojo.byId('taskbar_'+vID+'ResizerEnd')){
+    dojo.byId('taskbar_'+vID+'ResizerEnd').style.display='none';
+  }
+  
+  if(isResizingGanttBar==false && dojo.byId('taskbar_'+vID+'ResizerStart')){
+    dojo.byId('taskbar_'+vID+'ResizerStart').style.display='none';
   }
 }

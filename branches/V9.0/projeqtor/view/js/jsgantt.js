@@ -1558,7 +1558,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               + '</div>';
             }
             vIsOnCriticalPath=vTaskList[i].getIsOnCriticalPath();
-            vRightTableTempMeeting = '<div id=' + vBardivName + ' class="barDivTask" style="'+(vTaskList[i].getVisible()==1 && vTaskList[i].getClass()=='Meeting'?'display:block;':'');
+            vRightTableTempMeeting = '<div id=' + vBardivName + '  class="barDivTask" style="'+(vTaskList[i].getVisible()==1 && vTaskList[i].getClass()=='Meeting'?'display:block;':'');
             if (! vTaskList[i].getGlobal() )
               var vBorderBottomColor=vTaskList[i].getColor();
               var vBorderBottomSize=2;
@@ -1570,7 +1570,12 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vRightTableTempMeeting += ' left:' + vBarLeft + 'px; height:11px; '
 	            + ' width:' + vBarWidth + 'px" '
 	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
-	            +'>';         
+	         // handle resizer    ========================== 
+	            + 'onmouseout="hideResizerGanttBar ('+vID+')"'
+	            +'onMouseover ="handleResizeGantBAr('+vID+')"' 
+	         //=================
+	            +'>'; 
+
             vRightTableTempMeeting += ' <div class="ganttTaskrowBarComplete"  '
             	+ ' style="width:' + vTaskList[i].getCompStr() + '; cursor: pointer;'+((vTaskList[i].getGlobal)?'opacity:0.2;':'')+'"'
       		    + ' onmousedown=JSGantt.startLink('+i+'); '
@@ -1580,6 +1585,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
             	+ ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '");>'
                 + ' </div>'; 
+
   	        if (Date.parse(vMaxDate)>=Date.parse(vTaskList[i].getStart())) {
   	        	var tmpColor=' #'+vTaskList[i].getColor();
   	        	if (g.getSplitted()) {
@@ -1608,8 +1614,20 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 + ' onMouseout=JSGantt.exitBarLink('+i+'); '
                 + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
   	            + ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); >';
+  	        	  
   	        	  if (vTaskList[i].getGlobal()) {
   	        	    vRightTableTempMeeting +='<img src="../view/css/customIcons/'+imgColor+'/icon'+vTaskList[i].getClass()+'.png" style="pointer-events: none;filter:saturate('+imgSaturate+');width:16px;height:16px;z-index:13;position:absolute;right:2px;" />';
+  	        	  }
+  	        	  console.log(vTaskList[i].getPlanningMode());
+  	        	  if(vTaskList[i].getPlanningMode()=='regular between dates' || vTaskList[i].getPlanningMode()=='régulier entre 2 dates' ){
+    	            // handle resizer start=======================
+    	            vRightTableTempMeeting +='<div class="resizerStart" id="taskbar_'+vID+'ResizerStart" style="display:none;background-color:'+((vIsOnCriticalPath=='1')?vCriticalPathColor:tmpColor)+';" ></div>';
+    	            //===========================
+  	        	  }
+  	        	  if(vTaskList[i].getPlanningMode()=='fixed duration' || vTaskList[i].getPlanningMode()=='durée fixe' ||  vTaskList[i].getPlanningMode()=='regular between dates' || vTaskList[i].getPlanningMode()=='régulier entre 2 dates' ){
+                  // handle resizer end=======================
+                  vRightTableTempMeeting +='<div class="resizerEnd " id="taskbar_'+vID+'ResizerEnd" style="display:none;background-color:'+((vIsOnCriticalPath=='1')?vCriticalPathColor:tmpColor)+';" ></div>';
+                  //===========================
   	        	  }
   	        	  vRightTableTempMeeting += ' </div>';	        	
   	        	if (g.getSplitted()) {
@@ -1658,6 +1676,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         if(!(planningPage=='PortfolioPlanning' && vTaskList[i].getMile()) ){
           vRightTable += '</DIV>';
         }
+
       }
       vRightTable+=vHighlightSpecificDays;
 

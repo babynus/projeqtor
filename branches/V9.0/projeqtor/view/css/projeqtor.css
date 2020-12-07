@@ -4180,8 +4180,28 @@ div.ticketKanbanCustom .kanbanVersion{
   position:absolute;
   top:40px;
 }
-
 .menuBarItemSelectedModule {
 	color: grey !important;
   background-color: #e1e1d0 !important;
+}
+.resizerEnd{
+    width: 6px;
+    height: 20px;
+    position: absolute;
+    right: -6px;
+    top: -3px;
+    bottom: 0;
+    cursor: e-resize;
+    border-radius: 0px 4px 4px 0px;
+}
+
+.resizerStart{
+    width: 6px;
+    height: 20px;
+    position: absolute;
+    left: -6px;
+    top: -3px;
+    bottom: 0;
+    cursor: e-resize;
+    border-radius:  4px 0px 0px 4px;
 }
