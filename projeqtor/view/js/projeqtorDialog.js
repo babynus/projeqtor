@@ -12038,18 +12038,18 @@ function showDisplayModule(id,total){
 function filterMenuModule(id,nbTotal){
   var reset = 0;
   for (var i=1; i <= 7; i++) {
-    if(dojo.hasClass(dojo.byId("menuFilterModuleTop"+i),'menuBarItemSelected')){
+    if(dojo.hasClass(dojo.byId("menuFilterModuleTop"+i),'menuBarItemSelectedModule')){
       if(id==i){
         reset = 1;
       }
-      dojo.removeClass(dojo.byId("menuFilterModuleTop"+i),"menuBarItemSelected");
+      dojo.removeClass(dojo.byId("menuFilterModuleTop"+i),"menuBarItemSelectedModule");
     }
   }
   if(reset==0){
-    dojo.addClass(dojo.byId("menuFilterModuleTop"+id),"menuBarItemSelected");
+    dojo.addClass(dojo.byId("menuFilterModuleTop"+id),"menuBarItemSelectedModule");
   }else{
     id=1;
-    dojo.addClass(dojo.byId("menuFilterModuleTop"+id),"menuBarItemSelected");
+    dojo.addClass(dojo.byId("menuFilterModuleTop"+id),"menuBarItemSelectedModule");
   }
   
   if(id==2){
@@ -12085,7 +12085,6 @@ function filterMenuModule(id,nbTotal){
 }
 
 function filterMenuModuleDisable(nbTotal){
-  
   for (var i=1; i <= 6; i++) {
     if(dojo.hasClass(dojo.byId("menuFilterModuleTop"+i),'menuBarItemSelectedModule')){
       dojo.removeClass(dojo.byId("menuFilterModuleTop"+i),"menuBarItemSelectedModule");

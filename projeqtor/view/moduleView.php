@@ -40,10 +40,10 @@ $user=getSessionUser();
       <div style="text-align:center;width:100%;padding-top:5px;font-size:250%;font-weight:bold; ">
         <?php echo i18n("menuModule")?>
       </div>
-      <button id="saveParameterButton" dojoType="dijit.form.Button"
+      <button id="saveParameterButton" dojoType="dijit.form.Button" class="resetMargin roundedButton notButton"
         title="<?php echo i18n("applyChanges");?>"
         style="position:absolute;top:15px;right:40px;color:#707070;font-weight:bold" class="" enabled="true"
-        iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton">
+        iconClass="dijitButtonIcon dijitButtonIconSave imageColorNewGui" showLabel="false" >
         <script type="dojo/connect" event="onClick" args="evt">
 		        var url="../tool/resetModuleTablesInSession.php";
             dojo.xhrPost({
