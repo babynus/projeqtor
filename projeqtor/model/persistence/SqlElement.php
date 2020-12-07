@@ -2207,7 +2207,7 @@ abstract class SqlElement {
       }
     }
     if (is_a ( $this, 'Version' ) and $newObj->versionNumber) {
-      $existWithName = $newObj->countSqlElementsFromCriteria ( null, "name='$newObj->name'" );
+      $existWithName = $newObj->countSqlElementsFromCriteria ( null, "name='".Sql::fmtStr($newObj->name)."'" );
       if ($existWithName > 0) {
         $newObj->versionNumber = $newObj->versionNumber . ' (' . i18n ( 'copy' ) . ')';
         $newObj->name = $newObj->name . ' (' . i18n ( 'copy' ) . ')';
