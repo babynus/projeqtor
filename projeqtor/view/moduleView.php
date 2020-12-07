@@ -40,9 +40,9 @@ $user=getSessionUser();
       <div style="text-align:center;width:100%;padding-top:5px;font-size:250%;font-weight:bold; ">
         <?php echo i18n("menuModule")?>
       </div>
-      <button id="saveParameterButton" dojoType="dijit.form.Button" showlabel="true" 
+      <button id="saveParameterButton" dojoType="dijit.form.Button"
         title="<?php echo i18n("applyChanges");?>"
-        style="position:absolute;top:10px;right:20px;color:#707070;font-weight:bold" class="" enabled="true"
+        style="position:absolute;top:15px;right:40px;color:#707070;font-weight:bold" class="" enabled="true"
         iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
 		        var url="../tool/resetModuleTablesInSession.php";
@@ -72,7 +72,6 @@ $user=getSessionUser();
             }
           });
         </script>
-       <?php echo i18n("applyChanges");?>
       </button>
     </div> 
     
@@ -95,10 +94,10 @@ $user=getSessionUser();
     <tr>
       <td>
       
-      <div style="margin-bottom:50px;width:100%;height:130px; ">
-       <div class="menuBarItemSelected" id="menuFilterModuleTop1" style="cursor:pointer;border-radius:5px;float:left;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;"
+      <div style="color:grey;margin-bottom:50px;width:100%;height:130px; ">
+       <div class="menuBarItemSelectedModule" id="menuFilterModuleTop1" style="cursor:pointer;border-radius:5px;float:left;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;"
             onclick="filterMenuModule(1,<?php echo $nbTotal; ?>);">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px;" class=" <?php if(isNewGui()){?>imageColorNewGui<?php }?> iconPlanning iconSize32"></div>
+        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px;" class=" <?php if(isNewGui()){?> imageColorNewGui <?php }else{ ?> imageColorBlack <?php }?>  iconAllModules iconSize32"></div>
         <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('allModule');?></div>
        </div>
        
@@ -108,7 +107,7 @@ $user=getSessionUser();
        </div>
        
        <div id="menuFilterModuleTop3" onclick="filterMenuModule(3,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }?> iconPlanning iconSize32"></div>
+        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }else{?> imageColorBlack <?php }?> iconPlanning iconSize32"></div>
         <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('moduleTimeTracking');?></div>
        </div>
        
@@ -128,7 +127,7 @@ $user=getSessionUser();
        </div>
        
        <div  id="menuFilterModuleTop7" onclick="filterMenuModuleDisable(<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }?> iconAdministration iconSize32"></div>
+        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }else{?> imageColorBlack <?php }?> iconAdministration iconSize32"></div>
         <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('moduleDisable');?></div>
        </div>
       </div>
@@ -144,9 +143,13 @@ $user=getSessionUser();
                  parent="<?php if ($mod->idModule) {echo $mod->idModule;}?>" type="checkbox" <?php echo ($mod->active)?'checked="checked"':'';?> 
                  class="moduleClass <?php if ($mod->idModule) {echo 'parentModule'.$mod->idModule;}?>" 
                  onclick="saveModuleStatus(<?php echo $mod->id?>,this.checked);" data-dojo-props="" >
+                 <script type="dojo/method" event="onChange">
+                     if(!this.checked){ dojo.byId("moduleTitle_<?php echo $mod->id;?>").style.backgroundColor="<?php if($mod->idModule){?>#e6e6e6<?php }else{ ?>#B0B0B0<?php }?>";
+                     }else{ dojo.byId("moduleTitle_<?php echo $mod->id;?>").style.backgroundColor="<?php if($mod->idModule){?>#bfcfaf<?php }else{ ?>#B0D0B0<?php }?>";}
+                  </script>
             </div>
             <div id="moduleTitle_<?php echo $mod->id;?>"  style="cursor:pointer;z-index:100;border-radius:4px;display: flex; align-items: center;font-family: Verdana, Arial, Tahoma, sans-serif !important;font-size: 10pt !important;width:260px;height:28px;
-                   margin-left:35px;margin-bottom:3px;<?php if (!$mod->idModule){?>color:white; <?php if($mod->active){?> background-color:#B0D0B0; <?php }else{?>background-color:#B0B0B0; <?php } ?><?php  }else{ if($mod->active){?>color:white !important; background-color:#91db8f; <?php }else{?>color:#B0B0B0; background-color:#e6e6e6;<?php } }?>" onClick="showDisplayModule(<?php echo $mod->id;?>,<?php echo $nbTotal;?>);">
+                   margin-left:35px;margin-bottom:3px;<?php if (!$mod->idModule){?>color:white; <?php if($mod->active){?> background-color:#B0D0B0; <?php }else{?>background-color:#B0B0B0; <?php } ?><?php  }else{ if($mod->active){?>color:white !important; background-color:#bfcfaf; <?php }else{?>color:#B0B0B0; background-color:#e6e6e6;<?php } }?>" onClick="showDisplayModule(<?php echo $mod->id;?>,<?php echo $nbTotal;?>);">
               <?php if ($mod->idModule) echo "<div style='height:100%;background-color:white;width:40px;float:left'></div>";?>
               <div style="margin-left:10px;"><?php echo i18n($mod->name);?></div>
             </div>
@@ -172,13 +175,13 @@ $user=getSessionUser();
                }
           ?>
           
-          <div id="displayModule<?php echo $mod->id;?>" style="<?php echo $height;?>;width:900px;display:none;z-index:-1;position:absolute;top:205px;margin-left:280px;background-color:#f2f2f2; -webkit-transition: opacity 600ms, visibility 600ms;transition: opacity 600ms, visibility 600ms;  opacity: 0;
+          <div id="displayModule<?php echo $mod->id;?>" style="<?php echo $height;?>;width:900px;display:none;z-index:-1;position:absolute;top:205px;margin-left:280px;background-color:#f2f2f2;webkit-transition: opacity 600ms, visibility 600ms;transition: opacity 600ms, visibility 600ms;  opacity: 0;
                    visibility: hidden;">
-            <div style="font-size:18px;margin-top:20px;margin-left:70px;"><?php echo i18n($mod->name);?></div>
+            <div style="color: #8c8c8c;font-size:18px;margin-top:20px;margin-left:70px;"><?php echo i18n($mod->name);?></div>
             <div style="margin-top:40px;width:100%">
               <div class="simpleText" style="margin-left:70px;width:300px;vertical-align:top; text-align:justify;margin-right:50px;"><?php echo i18n($mod->name.'Comment');?></div>
               <div style="margin-right:100px;margin-left:450px;position:absolute;top:86px;border-left:solid 1px black;">
-                    <div style="margin-left:30px;margin-bottom:20px;"><?php  if($mod->id != 5)echo i18n('activateScreen');?></div>
+                    <div style="color:#808080;margin-left:30px;margin-bottom:20px;"><?php  if($mod->id != 5)echo i18n('activateScreen');?></div>
                 <?php
                   foreach ($modMenuList as $modMenu) {
                     if ($modMenu->hidden) continue;
