@@ -317,6 +317,10 @@ if(isset($_REQUEST['goToRequirement'])){
     $ajoutWhere=" $ajoutGroupBy=a.id ";
     $paramAdd="";
     $total=0;
+    $canGoto=true;
+    if (! securityCheckDisplayMenu(null,'Requirement')) {
+      $canGoto=false;
+    }
     $obR=new Requirement();
     $tableName=$obR->getDatabaseTableName();
     if(isset($param['paramAdd'])){
@@ -367,7 +371,8 @@ if(isset($_REQUEST['goToRequirement'])){
       echo "<table width=\"95%\" class=\"tabDashboardTicketMain\">";
       echo '<tr><td class="titleTabRequirement">'.i18n($param["title"]).'</td><td class="titleTabTicket">'.i18n("dashboardTicketMainColumnCount").'</td><td class="titleTabTicket">'.i18n("dashboardTicketMainColumnPourcent")."</td></tr>";
       foreach ($res as $idSort=>$nbline){
-        $name='<a href="#" onclick="stockHistory(\'Requirement\',null,\'object\');loadContent(\'dashboardRequirementMain.php?goToRequirement='.$param["groupBy"].'&val='.$nbline['id'].'\', \'centerDiv\', \'dashboardRequirementMainForm\');">'.$nbline["name"].'</a>';
+        if ($canGoto) $name='<a href="#" onclick="stockHistory(\'Requirement\',null,\'object\');loadContent(\'dashboardRequirementMain.php?goToRequirement='.$param["groupBy"].'&val='.$nbline['id'].'\', \'centerDiv\', \'dashboardRequirementMainForm\');">'.$nbline["name"].'</a>';
+        else $name=$nbline["name"];
         $addColor=$name;
         if(isset($nbline["color"])){
           $addColor="<div style=\"background-color:".$nbline["color"].";border:1px solid #AAAAAA;border-radius:50%;width:20px;height:18px;float:left;\">&nbsp;</div><div style=\"color:".$nbline["color"].";radius:50%;width:10px;height:10px;float:left;\">&nbsp;</div>"
@@ -388,7 +393,8 @@ if(isset($_REQUEST['goToRequirement'])){
       if($total-$totR>0){
         echo "  <tr>";
         echo "    <td width=\"50%\">";
-        echo '<a class="styleUDashboard" href="#" onclick="stockHistory(\'Requirement\',null,\'object\');loadContent(\'dashboardRequirementMain.php?goToRequirement='.$param["groupBy"].'&undefined=true\', \'centerDiv\', \'dashboardRequirementMainForm\');">'.i18n("undefinedValue").'</a>';
+        if ($canGoto) echo '<a class="styleUDashboard" href="#" onclick="stockHistory(\'Requirement\',null,\'object\');loadContent(\'dashboardRequirementMain.php?goToRequirement='.$param["groupBy"].'&undefined=true\', \'centerDiv\', \'dashboardRequirementMainForm\');">'.i18n("undefinedValue").'</a>';
+        else echo i18n("undefinedValue");
         echo "    </td>";
         echo "    <td width=\"10%\">";
         echo '<span>'.($total-$totR).'</span>';
@@ -400,7 +406,8 @@ if(isset($_REQUEST['goToRequirement'])){
       }
       echo "  <tr>";
       echo "    <td width=\"50%\">";
-      echo '<a class="styleADashboard" href="#" onclick="stockHistory(\'Requirement\',null,\'object\');loadContent(\'dashboardRequirementMain.php?goToRequirement='.$param["groupBy"].'\', \'centerDiv\', \'dashboardRequirementMainForm\');">'.i18n("dashboardRequirementMainAllIssues").'</a>';
+      if ($canGoto) echo '<a class="styleADashboard" href="#" onclick="stockHistory(\'Requirement\',null,\'object\');loadContent(\'dashboardRequirementMain.php?goToRequirement='.$param["groupBy"].'\', \'centerDiv\', \'dashboardRequirementMainForm\');">'.i18n("dashboardRequirementMainAllIssues").'</a>';
+      else echo i18n("dashboardRequirementMainAllIssues");
       echo "    </td>";
       echo "    <td width=\"10%\">";
       echo '<span style="font-weight: bold;">'.$total.'</span>';
