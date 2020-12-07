@@ -5,8 +5,8 @@
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 <g id="Calque_2">
 	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M4.691,52.874v52.104c0,5.521,4.479,8,10,8h98.619
-			c5.523,0,10-2.479,10-8V47.874c0-5.523-4.477-8-10-8H53.21v-7.441c0-2.761-2.237-4-5-4H9.691c-2.762,0-5,1.239-5,4v17.296V52.874z
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M4.691,52.874v54.104c0,5.521,1.479,6,7,6h103.62
+			c5.522,0,8-0.479,8-6V50.874c0-9.835-7.478-11-13-11H53.21V25.433c0-2.761-2.237-4-5-4H9.691c-2.762,0-5,1.239-5,4v24.296V52.874z
 			"/>
 	</g>
 </g>

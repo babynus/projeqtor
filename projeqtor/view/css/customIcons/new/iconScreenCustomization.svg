@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
-	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Calque_2">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<g>
+	
+		<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		63.089,42.654 86.274,65.84 34.669,117.444 9.804,119.124 11.485,94.259 	"/>
 	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M70.186,96.421H10.699c-3.177,0-5.774-2.601-5.774-5.773v-70.75c0-3.177,2.598-5.774,5.774-5.774h105.334
-		c3.178,0,5.774,2.598,5.774,5.774v48.935"/>
+		M75.535,26.84l26.554,26.552c3.891,3.891,3.891,10.255,0,14.144l0,0c-3.889,3.892-10.254,3.892-14.143,0L61.392,40.981
+		c-3.889-3.889-3.889-10.252,0-14.142l0,0C65.28,22.948,71.646,22.948,75.535,26.84z"/>
 	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M70.186,96.421H57.858v14.313H36.332c-2.297,0-4.173,1.878-4.173,4.176c0,2.296,1.876,4.174,4.173,4.174H69.46"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M45.773,73.344l36.124-19.22c4.543,2.806,10.414,3.194,15.469,0.505c5.818-3.096,8.863-9.362,8.134-15.536l-11.795,6.276
-		c-1.654,0.88-3.729,0.247-4.608-1.408l-1.916-3.601c-0.88-1.655-0.247-3.729,1.407-4.609l11.921-6.341
-		c-4.714-4.28-11.79-5.372-17.733-2.211c-5.056,2.689-8.013,7.773-8.227,13.11L38.426,59.528
-		c-4.543-2.803-10.414-3.193-15.469-0.501c-5.818,3.094-8.863,9.361-8.132,15.534l11.794-6.275c1.654-0.881,3.729-0.247,4.609,1.407
-		l1.916,3.602c0.879,1.654,0.246,3.728-1.408,4.608l-11.92,6.341c4.714,4.278,11.789,5.372,17.732,2.212
-		C42.604,83.765,45.561,78.68,45.773,73.344z"/>
-</g>
-<g id="Calque_3">
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M92.139,100.896c0,3.92-3.17,7.092-7.09,7.092c-0.62,0-1.22-0.08-1.79-0.229c0,0-0.93-0.341-2.521-0.819
-		c-0.959-0.291-2.17-0.632-3.56-0.961v18.239h46.63V77.585h-17.721c0.352-1.262,0.66-2.28,0.891-2.989
-		c0.229-0.7,0.37-1.09,0.37-1.09c0.149-0.569,0.229-1.171,0.229-1.791c0-3.92-3.17-7.09-7.09-7.09c-3.91,0-7.08,3.17-7.08,7.09
-		c0,0.62,0.08,1.222,0.229,1.791c0,0,0.568,1.56,1.261,4.079h-17.72v18.229c3.66-0.879,6.08-1.771,6.08-1.771
-		c0.57-0.149,1.17-0.229,1.789-0.229C88.969,93.815,92.139,96.987,92.139,100.896z"/>
+		M78.971,30.274l18.444-18.447c5.415-5.412,14.272-5.412,19.686,0l0,0c5.412,5.415,5.412,14.271,0,19.685L98.654,49.958"/>
 </g>
 </svg>
