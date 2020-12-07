@@ -127,7 +127,7 @@ $user=getSessionUser();
        </div>
        
        <div  id="menuFilterModuleTop7" onclick="filterMenuModuleDisable(<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }else{?> imageColorBlack <?php }?> iconAdministration iconSize32"></div>
+        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }else{?> imageColorBlack <?php }?> iconDisabledModules iconSize32"></div>
         <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('moduleDisable');?></div>
        </div>
       </div>
