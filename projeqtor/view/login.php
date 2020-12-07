@@ -126,7 +126,13 @@ $mobile=false;
     dojo.addOnLoad(function(){
       if (isNewGui) {
         changeTheme('<?php echo getTheme();?>');
+        <?php if (Parameter::getUserParameter('newGuiThemeColor')) { ?>
+        console.log('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>');
         setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>','<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>');
+        <?php } else {?>
+        console.log('default color');
+        setColorTheming('#545381', '#e97b2c');
+        <?php }?>
       }
       currentLocale="<?php echo $currentLocale?>";
       saveResolutionToSession();
@@ -184,10 +190,10 @@ $mobile=false;
 </head>
 <?php 
 if(isNewGui()){
-$firstColor=Parameter::getUserParameter('newGuiThemeColor');
-if(!$firstColor){
-$firstColor= getTheme();
-}
+  $firstColor=Parameter::getUserParameter('newGuiThemeColor');
+  if(!$firstColor){
+    $firstColor= '545381';
+  }
 ?>
 <body id="body" class="nonMobile tundra <?php echo getTheme();?>" onLoad="hideWait();" style="overflow: auto;<?php if (isNewGui()) echo 'background-color:#'.$firstColor.' !important;';?>" onBeforeUnload="">
 <?php 

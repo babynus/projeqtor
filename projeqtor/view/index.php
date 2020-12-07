@@ -6,7 +6,18 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   $theme=getTheme();
   if(isNewGui())$firstColor=Parameter::getGlobalParameter('newGuiThemeColor');
   $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
-} 
+  $initialisation=false;
+} else {
+  function isNewGui() {
+    return true;
+  }
+  function getTheme() {
+    return 'ProjeQtOrFlatBlue';
+  }
+  $theme=getTheme();
+  $background="#545381";
+  $initialisation=true;
+}
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
