@@ -123,19 +123,13 @@ class ProjectMain extends SqlElement {
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
-    <th field="wbsSortable" from="ProjectPlanningElement" formatter="sortableFormatter" width="5%" >${wbs}</th>
-    <th field="name" width="15%" >${projectName}</th>
-    <th field="nameProjectType" width="10%" >${type}</th>
-    <th field="color" width="4%" formatter="colorFormatter">${color}</th>
-    <th field="projectCode" width="6%" >${projectCode}</th>
-    <th field="nameClient" width="8%" >${clientName}</th>
-    <th field="colorNameStatus" width="8%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="colorNameHealth" width="8%" formatter="colorNameFormatter">${idHealth}</th>
-    <th field="progress" from="ProjectPlanningElement" width="5%" formatter="percentFormatter">${progress}</th>
-    <th field="validatedEndDate" from="ProjectPlanningElement" width="8%" formatter="dateFormatter">${validatedEnd}</th>
-    <th field="plannedEndDate" from="ProjectPlanningElement" width="8%" formatter="dateFormatter">${plannedEnd}</th>  
-    <th field="done" width="5%" formatter="booleanFormatter" >${done}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
+    <th field="wbsSortable" from="ProjectPlanningElement" formatter="sortableFormatter" width="10%" >${wbs}</th>
+    <th field="name" width="30%" >${projectName}</th>
+    <th field="nameProjectType" width="15%" >${type}</th>
+    <th field="color" width="5%" formatter="colorFormatter">${color}</th>
+    <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
+    <th field="progress" from="ProjectPlanningElement" width="10%" formatter="percentFormatter">${progress}</th>
+    <th field="plannedEndDate" from="ProjectPlanningElement" width="10%" formatter="dateFormatter">${plannedEnd}</th>  
     ';
   
   private static $_fieldsTooltip = array(
