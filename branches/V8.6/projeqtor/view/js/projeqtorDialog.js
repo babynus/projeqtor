@@ -1332,8 +1332,6 @@ function changeAttachment(list) {
  */
 var cancelDupplicate=false;
 function saveAttachment(direct) {
-  console.log("saveAttachment("+direct+")");
-  console.log(dijit.byId("attachmentFileDirect").getFileList());
   // disableWidget('dialogAttachmentSubmit');
   if (!isHtml5()) {
     if (dojo.isIE && dojo.isIE<=8) {
