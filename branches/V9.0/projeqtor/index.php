@@ -10,8 +10,18 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   }
   if(isNewGui())$firstColor=Parameter::getUserParameter('newGuiThemeColor');
   $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
-  
-} 
+  $initialisation=false;
+} else {
+  function isNewGui() {
+    return true;
+  }
+  function getTheme() {
+    return 'ProjeQtOrFlatBlue';
+  }
+  $theme=getTheme();
+  $background="#545381";
+  $initialisation=true;
+}
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -62,10 +72,14 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   <script language="javascript">
   var isNewGui=<?php echo (isNewGui())?'true':'false';?>;      
   dojo.addOnLoad(function(){
-    if (isNewGui) {
+    <?php if (isNewGui()) { ?>
       changeTheme('<?php echo getTheme();?>');
+      <?php if ($initialisation) {?>
+      setColorTheming('#545381','#e97b2c');
+      <?php } else {?>
       setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>','<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>');
-    }
+      <?php }?>
+    <?php }?>
   });
     function autoRedirect() {
       window.setTimeout("document.getElementById('indexForm').submit()",10);
