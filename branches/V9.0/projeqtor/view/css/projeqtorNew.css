@@ -1758,3 +1758,13 @@ element.style {
   background-color: transparent !important;
   color:var(--color-secondary) !important;
 }
+.ProjeQtOrNewGui .messageOK, .ProjeQtOrNewGui .messageNO_CHANGE, .ProjeQtOrNewGui .messageINVALID, 
+.ProjeQtOrNewGui .messageERROR, .ProjeQtOrNewGui .messageWARNING, .ProjeQtOrNewGui .messageINCOMPLETE {
+	border-radius:5px;
+}
+.ProjeQtOrNewGui .closeBoxIcon {
+	background-image: url(../images/tabClose.svg);
+	background-size:24px;
+	background-repeat: no-repeat;
+	opacity:50%;
+}
