@@ -89,20 +89,14 @@ class ActivityMain extends SqlElement {
   
   // Define the layout that will be used for lists
   private static $_layout = '
-    <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
-    <th field="nameProject" width="9%" >${idProject}</th>
-    <th field="nameActivityType" width="7%" >${idActivityType}</th>
-    <th field="wbsSortable" from="ActivityPlanningElement" formatter="sortableFormatter" width="5%" >${wbs}</th>
-    <th field="name" width="12%" >${name}</th>
-    <th field="validatedEndDate" from="ActivityPlanningElement" width="8%" formatter="dateFormatter">${validatedDueDate}</th>
-    <th field="plannedEndDate" from="ActivityPlanningElement" width="8%" formatter="dateFormatter">${plannedDueDate}</th>
-    <th field="colorNameStatus" width="9%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="progress" from="ActivityPlanningElement" width="5%" formatter="percentFormatter">${progress}</th>
-    <th field="nameTargetProductVersion" width="8%" >${targetVersion}</th>
-    <th field="nameResource" formatter="thumbName22" width="8%" >${responsible}</th>
-    <th field="handled" width="4%" formatter="booleanFormatter" >${handled}</th>
-    <th field="done" width="4%" formatter="booleanFormatter" >${done}</th>
-    <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>
+    <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
+    <th field="nameProject" width="10%" >${idProject}</th>
+    <th field="nameActivityType" width="10%" >${idActivityType}</th>
+    <th field="name" width="25%" >${name}</th>
+    <th field="plannedEndDate" from="ActivityPlanningElement" width="10%" formatter="dateFormatter">${plannedDueDate}</th>
+    <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
+    <th field="progress" from="ActivityPlanningElement" width="10%" formatter="percentFormatter">${progress}</th>
+    <th field="nameResource" formatter="thumbName22" width="15%" >${responsible}</th>
     ';
   
   private static $_fieldsTooltip = array(
