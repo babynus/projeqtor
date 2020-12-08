@@ -241,15 +241,15 @@ function checkPrerequisites($showOK=false,$dbType=null) {
 function showError($msg) {
   global $error;
   $error=true;
-  echo "<div class='messageERROR'><i>" . $msg . "</i></div><br/>";
+  echo "<div style='padding:10px 20px' class='messageERROR'><i>" . $msg . "</i></div><br/>";
 }
 
 function showMessage($msg) {
-  echo "<div class='messageOK'><i>" . $msg . "</i></div><br/>";
+  echo "<div style='padding:10px 20px' class='messageOK'><i>" . $msg . "</i></div><br/>";
 }
 
 function showWarning($msg) {
-  echo "<div class='messageWARNING'><i>" . $msg . "</i></div><br/>";
+  echo "<div style='padding:10px 20px' class='messageWARNING'><i>" . $msg . "</i></div><br/>";
 }
 
 if (false === function_exists('is_session_started')) {
