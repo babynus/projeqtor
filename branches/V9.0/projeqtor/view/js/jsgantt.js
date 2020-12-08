@@ -1570,10 +1570,8 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vRightTableTempMeeting += ' left:' + vBarLeft + 'px; height:11px; '
 	            + ' width:' + vBarWidth + 'px" '
 	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
-	         // handle resizer    ========================== 
 	            + 'onmouseout="hideResizerGanttBar ('+vID+')"'
 	            +'onMouseover ="handleResizeGantBAr('+vID+')"' 
-	         //=================
 	            +'>'; 
 
             vRightTableTempMeeting += ' <div class="ganttTaskrowBarComplete"  '
@@ -1583,7 +1581,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               + ' onMouseover=JSGantt.enterBarLink('+i+'); '
               + ' onMouseout=JSGantt.exitBarLink('+i+'); '
               + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
-            	+ ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '");>'
+            	+ ' onclick=if(isResizingGanttBar==false)JSGantt.taskLink("' + vTaskList[i].getLink() + '");>'
                 + ' </div>'; 
 
   	        if (Date.parse(vMaxDate)>=Date.parse(vTaskList[i].getStart())) {
@@ -1613,20 +1611,19 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 + ' onMouseover=JSGantt.enterBarLink('+i+'); '
                 + ' onMouseout=JSGantt.exitBarLink('+i+'); '
                 + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
-  	            + ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); >';
+  	            + ' onclick=if(isResizingGanttBar==false)JSGantt.taskLink("' + vTaskList[i].getLink() + '"); >';
   	        	  
   	        	  if (vTaskList[i].getGlobal()) {
   	        	    vRightTableTempMeeting +='<img src="../view/css/customIcons/'+imgColor+'/icon'+vTaskList[i].getClass()+'.png" style="pointer-events: none;filter:saturate('+imgSaturate+');width:16px;height:16px;z-index:13;position:absolute;right:2px;" />';
   	        	  }
-  	        	  console.log(vTaskList[i].getPlanningMode());
   	        	  if(vTaskList[i].getPlanningMode()=='regular between dates' || vTaskList[i].getPlanningMode()=='régulier entre 2 dates' ){
     	            // handle resizer start=======================
-    	            vRightTableTempMeeting +='<div class="resizerStart" id="taskbar_'+vID+'ResizerStart" style="display:none;background-color:'+((vIsOnCriticalPath=='1')?vCriticalPathColor:tmpColor)+';" ></div>';
+    	            vRightTableTempMeeting +='<div class="resizerStart" id="taskbar_'+vID+'ResizerStart" style="display:none;background-color:'+((vIsOnCriticalPath=='1')?vCriticalPathColor:tmpColor)+';" ><div class="resizer"></div></div>';
     	            //===========================
   	        	  }
   	        	  if(vTaskList[i].getPlanningMode()=='fixed duration' || vTaskList[i].getPlanningMode()=='durée fixe' ||  vTaskList[i].getPlanningMode()=='regular between dates' || vTaskList[i].getPlanningMode()=='régulier entre 2 dates' ){
                   // handle resizer end=======================
-                  vRightTableTempMeeting +='<div class="resizerEnd " id="taskbar_'+vID+'ResizerEnd" style="display:none;background-color:'+((vIsOnCriticalPath=='1')?vCriticalPathColor:tmpColor)+';" ></div>';
+                  vRightTableTempMeeting +='<div class="resizerEnd " id="taskbar_'+vID+'ResizerEnd" style="display:none;background-color:'+((vIsOnCriticalPath=='1')?vCriticalPathColor:tmpColor)+';" ><div class="resizer"></div></div>';
                   //===========================
   	        	  }
   	        	  vRightTableTempMeeting += ' </div>';	        	

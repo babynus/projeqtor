@@ -86,7 +86,7 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
     <tr height="100%">
       <td width="100%" align="center">
-        <div class="background loginFrame" >
+        <div class=" <?php echo  (!isNewGui())?'background loginFrame':'loginFrameNewGui';?>" >
         <table  align="center" >
           <tr style="height:10px;" >
             <td align="left" style="height: 1%;" valign="top">
@@ -104,15 +104,15 @@ if (is_file ( "../tool/parametersLocation.php" )) {
           <tr style="height:100%" height="100%">
             <td style="height:99%;position:relative" align="left" valign="middle">
               <div  id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="width: 470px; height:210px;overflow:hidden">
-  <form id="indexForm" name="indexForm" action="main.php" method="post" target="_top">
-    <input type="hidden" id="xcurrentLocale" name="xcurrentLocale" value="en" />
-    <input type="hidden" id="currentWidth" name="currentWidth" value="" />
-    <script>
-    (function() {
-      dojo.byId('currentWidth').value= screen.width;
-      })();
-    </script>
-  </form>
+                <form id="indexForm" name="indexForm" action="main.php" method="post" target="_top">
+                  <input type="hidden" id="xcurrentLocale" name="xcurrentLocale" value="en" />
+                  <input type="hidden" id="currentWidth" name="currentWidth" value="" />
+                  <script>
+                                    (function() {
+                    dojo.byId('currentWidth').value= screen.width;
+                    })();
+                  </script>
+                </form>
               </div>
               <div style="width: 470px; height:130px;position:absolute;top:160px;overflow:hidden;text-align:center;">
                   <?php    if (is_file ( "../tool/parametersLocation.php" ) and SSO::isEnabled() and ! SSO::issetAccessFromLoginScreen()) { 
