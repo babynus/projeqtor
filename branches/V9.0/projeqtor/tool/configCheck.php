@@ -229,7 +229,7 @@
   
   showMessage('<span style="font-size:120%;color:#e97b2c">On next page, log in as user "admin" with password "admin"</span>');
   
-  echo '<br/><button id="continueButton" dojoType="dijit.form.Button" showlabel="true">continue';
+  echo '<br/><button id="continueButton" class="roundedVisibleButton" dojoType="dijit.form.Button" showlabel="true">Continue';
   echo '<script type="dojo/connect" event="onClick" args="evt">';
   echo '  window.location = ".";';
   echo '</script>';
