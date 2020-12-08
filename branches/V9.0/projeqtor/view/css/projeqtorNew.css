@@ -1769,3 +1769,18 @@ element.style {
 	background-repeat: no-repeat;
 	opacity:50%;
 }
+.siteH1 {
+  font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;
+  font-weight: bold; 
+  font-size: 25pt; 
+  text-decoration: none; 
+  color: var(--color-secondary); 
+  text-shadow: 1px 1px 1px var(--color-medium);
+}
+.siteH2 {
+  font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;
+  font-weight: normal; 
+  font-size: 14pt; 
+  text-decoration: none; 
+  color: var(--color-dark); 
+}
