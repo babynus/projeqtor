@@ -49,10 +49,10 @@
  foreach ($arrayItem as $item) {
    if (substr($item,0,4)=='menu') {
      echo '<tr class="siteH2">';
-     echo '<td colspan="3">';
+     echo '<td colspan="5">';
      echo '<b>'.i18n("startGuideActionMenu").' "'.i18n($item).'"</b>';
      echo '</td></tr>';
-     echo '<tr><td colspan="3">';
+     echo '<tr><td colspan="5">';
      echo '<br/>';
      echo '</td></tr>';
    } else {
@@ -63,9 +63,9 @@
      $canRead=(securityGetAccessRightYesNo('menuUser', 'read') == "YES");
      echo '<tr VALIGN="top" style="padding:0;margin:0;white-space:nowrap">';
      echo '<td class="siteH2" style="text-align:right;">&nbsp;&nbsp;&nbsp;'.i18n("startGuideActionCreate")." ".i18n('menu'.$item).'</td>';
-     echo '<td style="position: relative; padding-left:10px;top:-3px;">&nbsp;&nbsp;&nbsp;';
+     echo '<td style="position: relative; padding-left:10px;top:-15px;width:50px">&nbsp;&nbsp;&nbsp;';
      if ($canRead) {
-       echo '<span style="cursor:pointer; position: relative;top:-10px; margin-left:10px;" onClick="loadMenuBar'.(($is_object)?'Object':'Item').'(\'' . $item .  '\',null,\'bar\');" >';
+       echo '<span style="cursor:pointer; position: relative;top:-8px; margin-left:10px;" onClick="loadMenuBar'.(($is_object)?'Object':'Item').'(\'' . $item .  '\',null,\'bar\');" >';
      }
      echo formatIcon($item, 32);
      echo '</span>';
@@ -92,19 +92,19 @@
         }
         $nbItem=$obj->countSqlElementsFromCriteria($crit);
      }
-     echo '</td><td>';
+     echo '</td><td style="position: relative; padding-left:10px;top:-5px;width:50px">';
      if ($nbItem==0 or ($item=='User' and $nbItem<=2) ) {
        echo '<img src="css/images/iconStartGuideTodo.png" />&nbsp;&nbsp;&nbsp;</td>';
        echo '<td VALIGN="middle" colspan="2" style="white-space:normal">';
      } else {
        echo '<img src="css/images/iconStartGuideDone.png"/>&nbsp;&nbsp;&nbsp;</td>';
-       echo '<td class="siteH2" style="white-space:nowrap">'.$nbItem." ";
+       echo '<td class="siteH2" style="white-space:nowrap;">'.$nbItem." ";
        if ($item=='Planning') {
          echo i18n('plannedProjects');
        } else {
          echo i18n('menu'.$item);
        }
-       echo '&nbsp;&nbsp;</td><td VALIGN="middle" style="white-space:normal; color:#a6a0bc;vertical-align:top;padding-top:8px;">';
+       echo '&nbsp;&nbsp;</td><td VALIGN="middle" style="white-space:normal; color:#a6a0bc;vertical-align:top;padding-top:2px;">';
        $progress++;
      }
      $help=i18n("startGuide".$item);

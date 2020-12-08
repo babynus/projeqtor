@@ -960,8 +960,8 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
     <?php }?>
     <?php
     
-$titlePane="Today_message";
-    if (!$print or !array_key_exists($titlePane, $collapsedList)) {
+    $titlePane="Today_message";
+    if (! isNewGui() and (!$print or !array_key_exists($titlePane, $collapsedList))) {
       if (!$print) {
         ?>   
     <div dojoType="dijit.TitlePane"
@@ -976,8 +976,8 @@ $titlePane="Today_message";
       <div>    
     <?php
       
-}
-      showMessages();
+}   
+      //showMessages();
       ?>
     </div>
       <br /><?php
