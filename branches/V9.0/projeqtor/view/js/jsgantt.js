@@ -1395,6 +1395,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           }
           
         } else {
+          //florent
           vDateRowStr = JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat) + ' - ' 
             + JSGantt.formatDateStr(vTaskEnd,vDateDisplayFormat);
           vTmpEnd=(Date.parse(vMaxDate)<Date.parse(vTaskEnd))?vMaxDate:vTaskEnd;
@@ -1618,12 +1619,12 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	        	  }
   	        	  if(vTaskList[i].getPlanningMode()=='regular between dates' || vTaskList[i].getPlanningMode()=='régulier entre 2 dates' ){
     	            // handle resizer start=======================
-    	            vRightTableTempMeeting +='<div class="resizerStart" id="taskbar_'+vID+'ResizerStart" style="display:none;background-color:'+((vIsOnCriticalPath=='1')?vCriticalPathColor:tmpColor)+';" ><div class="resizer"></div></div>';
+    	            vRightTableTempMeeting +='<div class="resizerStart" id="taskbar_'+vID+'ResizerStart" style="display:none;" ></div>';
     	            //===========================
   	        	  }
   	        	  if(vTaskList[i].getPlanningMode()=='fixed duration' || vTaskList[i].getPlanningMode()=='durée fixe' ||  vTaskList[i].getPlanningMode()=='regular between dates' || vTaskList[i].getPlanningMode()=='régulier entre 2 dates' ){
                   // handle resizer end=======================
-                  vRightTableTempMeeting +='<div class="resizerEnd " id="taskbar_'+vID+'ResizerEnd" style="display:none;background-color:'+((vIsOnCriticalPath=='1')?vCriticalPathColor:tmpColor)+';" ><div class="resizer"></div></div>';
+                  vRightTableTempMeeting +='<div class="resizerEnd " id="taskbar_'+vID+'ResizerEnd" style="display:none;" ></div>';
                   //===========================
   	        	  }
   	        	  vRightTableTempMeeting += ' </div>';	        	
