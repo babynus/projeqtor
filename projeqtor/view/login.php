@@ -221,7 +221,7 @@ $dbVersion=Sql::getDbVersion();
   </div>
   <div class="<?php echo (isNewGui() and !empty($msgList))?'loginMessageContainerNew':'loginMessageContainer';?>">
     <?php if(isNewGui()){
-            echo '<div style="margin-top: 5%;margin-bottom: 5%;width: 90%;" id="contentMessageDivLogin" >';
+            echo '<div style="margin: 5% 2.5% 5% 2.5%;width: 95%;" id="contentMessageDivLogin" >';
             echo '<script type="dojo/method" event="onload">saveDataToSession("contentMessageDivLogin",dojo.byId("contentMessageDivLogin").offsetWidth, false);</script>';
           }
      ?>
@@ -244,7 +244,7 @@ $dbVersion=Sql::getDbVersion();
       <?php 
       if(isNewGui()){
        $currentWidth=(RequestHandler::isCodeSet('currentWidth')?RequestHandler::getValue('currentWidth'):'');
-       if($currentWidth!='')$calculatedWidth=(($currentWidth*0.33)*0.9)*0.8;
+       if($currentWidth!='')$calculatedWidth=(($currentWidth*0.33)*0.95)*0.8;
        $width=($currentWidth!='')?$calculatedWidth:400;
        echo htmlSetClickableImages($msg->description,$width);
       }else{
