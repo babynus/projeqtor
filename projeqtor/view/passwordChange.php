@@ -93,7 +93,7 @@ $firstColor= getTheme();
 }
 
 ?>
-<body id="body" class="nonMobile tundra <?php echo getTheme();?>" >
+<body id="body" class="nonMobile tundra <?php echo getTheme();?>" style="overflow: auto;<?php if (isNewGui()) echo 'background-color:#'.$firstColor.' !important;';?>">
 <?php 
 }else{
 ?>
@@ -101,7 +101,10 @@ $firstColor= getTheme();
 <?php }?>
   <div id="wait" >
   </div> 
-  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'loginBackgroundNewGui':'loginBackground';?>" style="<?php if (isNewGui()) echo 'background-color:#'.$firstColor;?>">
+    <?php if (1 and isNewGui()) echo '<div style="position:absolute;margin-top:-50%;margin-left:-0%;width:250%;height:250%;opacity:10%;z-index:-2;" class="loginBackgroundNewGui"></div>';?>
+  <?php if (isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:60%;z-index:-1;" class="loginBackgroundNewGui"></div>';?>
+  <?php if (0 and isNewGui()) echo '<div style="position:absolute;width:100%;height:100%;opacity:5%;position:-20px;" class="loginBackgroundNewGui"></div>';?>
+  <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>" >
     <tr height="100%">
       <td width="100%" align="center">
         <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>"  >
@@ -195,25 +198,36 @@ $firstColor= getTheme();
             <input type="hidden" id="passwordValidate" name="passwordValidate" value=""/>
             <input type="hidden" id="criteria" name="criteria" value=""/>
             <!-- florent -->
-            <?php if(!isNewGui()) echo '<br/>';?>
-            <button id="buttonLoginPwChange" type="submit" style="<?php echo (isNewGui())?'margin-left:80px;width:150px!important;;height:20px !important;floaat:left;':'margin-left:150px;';?>width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('loginLib');?>
+            <?php if(!isNewGui()){ ?>
+            <br/>
+            <button id="buttonLoginPwChange" type="submit" style="margin-left:150px;';width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('loginLib');?>
               <script type="dojo/connect" event="onClick" args="evt">
                 //loadContent("../tool/changePassword.php","passwordResultDiv", "passwordForm");
               </script>
             </button>
-            <?php if(!isNewGui()){ 
-                echo '<br/>';
-                echo '<div style="height:5px">&nbsp;</div>';
-            }
-             ?>
+            <br/>
+            <div style="height:5px">&nbsp;</div>
             <?php if ( $user->password != md5($user->getRandomPassword()) ) {?>
-            <button  class="largeTextButton" type="button" style="<?php echo (isNewGui())?'margin-right:80px;width:150px !important;float:right;height:20px !important;':'margin-left:150px;';?>width:200px;color:#555555;<?php if(isNewGui())echo ''?>" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
+            <button  class="largeTextButton" type="button" style="margin-left:150px;';width:200px;color:#555555;" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
               <script type="dojo/connect" event="onClick" args="evt">
               showWait(); 
               window.location=".";
               </script>
             </button>  
-            <?php }?>  
+            <?php } }else{?>
+            <?php if ( $user->password != md5($user->getRandomPassword()) ) {?>
+            <button  class="largeTextButton" type="button" style="margin-left:80px;width:150px !important;float:left;height:20px !important;width:200px;color:#555555;" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
+              <script type="dojo/connect" event="onClick" args="evt">
+              showWait(); 
+              window.location=".";
+              </script>
+            </button>
+            <button id="buttonLoginPwChange" type="submit" style="margin-right:80px;width:150px!important;;height:20px !important;float:right;width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('loginLib');?>
+              <script type="dojo/connect" event="onClick" args="evt">
+                //loadContent("../tool/changePassword.php","passwordResultDiv", "passwordForm");
+              </script>
+            </button>    
+            <?php } }?>
             <br/><br/>
             <div id="passwordResultDiv" dojoType="dijit.layout.ContentPane" region="none" style="overflow:visible;top:<?php echo $topMsg;?>px;">
             </div>

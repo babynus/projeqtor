@@ -1482,7 +1482,7 @@ select option:checked {
 .loginDivContainer {
     border-radius: 10px;
     padding: 5px;
-    box-shadow: 2px -2px 8px #bfbfbf;
+    box-shadow: 0px -1px 3px #bfbfbf;
    
 }
 

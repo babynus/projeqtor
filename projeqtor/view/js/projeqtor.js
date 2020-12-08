@@ -7747,7 +7747,7 @@ function handleResizeGantBAr (id){
   function initDragStart(e) {
      startX = e.clientX;
      startWidth = parseInt(document.defaultView.getComputedStyle(el).width,10);
-     startLeft = el.style.left;
+     startLeft = barDiv.offsetLeft;
      document.documentElement.addEventListener('mousemove', doDragStart, false);
      document.documentElement.addEventListener('mouseup', stopDrag, false);
   }
@@ -7762,7 +7762,7 @@ function handleResizeGantBAr (id){
   function doDragStart(e) {
     isResizingGanttBar=true
     el.style.width = startWidth +( startX - e.clientX) + 'px';
-    barDiv.style.left =73 - ( startX - e.clientX)+'px';
+    barDiv.style.left =startLeft - ( startX - e.clientX)+'px';
     barDiv.style.width = startWidth +( startX - e.clientX)+ 'px';
   }
 
