@@ -5824,28 +5824,45 @@ abstract class SqlElement {
     $msg = "";
     $rowStart = '<tr>';
     $rowEnd = '</tr>';
-    $labelStart = '<td style="background:#DDDDDD;font-weight:bold;text-align: right;width:25%;vertical-align: middle;">&nbsp;&nbsp;';
+    $labelStart = '<td style="background:#FFFFFF;font-weight:bold;text-align: right;width:50%;vertical-align: middle;">&nbsp;&nbsp;';
     $labelEnd = '&nbsp;</td>';
-    $fieldStart = '<td style="width:2px;">&nbsp;</td><td style="background:#FFFFFF;text-align: left;">';
+    $fieldStart = '<td style="background:#FFFFFF;text-align: left;">';//<td style="width:2px;">&nbsp;</td>
     $fieldEnd = '</td>';
-    $sectionStart = '<td colspan="3" style="background:#555555;color: #FFFFFF; text-align: center;font-size:10pt;font-weight:bold;">';
+    $sectionStart = '<td style="background:#cccccc;color: #000000; text-align: center;font-size:12pt;font-weight:bold;width: 100%;border:2px solid #606062;" colspan="2">';
+    $sectionLinkStart = '<td style="background:#cccccc;color: #000000; text-align: center;font-size:12pt;font-weight:bold;width: 100%;border-bottom:2px solid #606062;" colspan="2">';
     $sectionEnd = '</td>';
-    $tableStart = '<table style="font-size:9pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
+    $tableStart = '<table style="font-size:11pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
+    $tableLinkStart = '<table style="font-size:11pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;border:2px solid #606062;">';
+    $tableSectionStart = '<table style="font-size:11pt; width: 100%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
     $tableEnd = '</table>';
     //florent
     $ref = $this->getReferenceUrl ();
     $replyMail=i18n("replyToMail");
     $firstLine = " 
-        <table style='font-size:14pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
-        <div style='background:#F0F0F0;color:#A0A0A0;font-style:italic;font-size:80%'>".htmlEncode ( $replyMail)."</div><div style='background:#555555;color:#555555;font-size:1pt;'>###PROJEQTOR###</div>
-        <a href='". $ref ."' target='#' style='color:white'>". i18n ( get_class ( $this ) ) ." #". htmlEncode ( $this->id ) ."</a></td></tr></table>";
+        <table style='font-size:14pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr>
+        <td colspan='3' style='background:#606062;color: #FFFFFF; text-align: center;'>
+        <div style='background:#F0F0F0;color:#A0A0A0;font-style:italic;font-size:80%'>".htmlEncode ( $replyMail)."</div><div style='background:#606062;color:#606062;font-size:1pt;'>###PROJEQTOR###</div>
+        <a href='". $ref ."' target='#' style='color:white'>". i18n ( get_class ( $this ) ) ." #". htmlEncode ( $this->id ) ."</a></td>
+        </tr></table>";
     $secondLine = "  <div>&nbsp;</div>";
     $dmsg=(isset($directMessage))?$this->parseMailMessage ($directMessage). '<br/><br/>':'';
     if(Parameter::getGlobalParameter('cronCheckEmailsHost')!='' and Parameter::getGlobalParameter('cronCheckEmails')>0){
       $msg = " \n ".$firstLine."\n".$secondLine."\n".$dmsg."\n".$tableStart;
     }else{
-      $msg = " \n ".$dmsg."\n".$tableStart;
-      $msg .= '<tr><td colspan="3" style="font-size:18pt;color:#AAAAAA"><a href="' . $ref . '" target="#">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></td></tr>';
+      $msg = " \n ".$dmsg."\n".'<table style="font-size:9pt; width: 65%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
+      $msg .= '<tr>';
+      $msg .= ' <td style="font-size:18pt;color:#AAAAAA">';
+      $msg .= ' <table><tr>';
+      $msg .= '   <td><div style="float:left;"><img style="width:64px; height:64px;" src="'.self::getBaseUrl().'/view/css/customIcons/blue/icon'.get_class ( $this ).'.png" /></div></td>';
+      $msg .= '   <td><div style="float:left;font-size:22pt;"><a href="' . $ref . '" target="#">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></div></td>';
+      $msg .= ' </tr></table>';
+      $msg .= ' </td>';
+      $msg .= '</tr>';
+      $msg .= '<tr>';
+      $msg .= ' <td style="text-align:center;font-size:32pt;color:#606062;background:#DDDDDD">'.SqlList::getNameFromId(get_class ( $this ), $this->id).'</td>';
+      $msg .= '</tr>';
+      $msg .= '<tr><td><br></td></tr>';
+      $msg .= $tableEnd.$tableStart.$rowStart.'<td style="width:30%;">';
     }
     //
     $nobr = false;
@@ -5853,13 +5870,23 @@ abstract class SqlElement {
       $hide = false;
       $nobr_before = $nobr;
       $nobr = false;
+      //debugLog($col);
       if (substr ( $col, 0, 4 ) == '_tab') {
         // Nothing
       } else if (substr ( $col, 0, 5 ) == '_sec_') {
         if (strlen ( $col ) > 8) {
           $section = substr ( $col, 5 );
           if ($section == 'description' or $section == 'treatment') {
-            $msg .= $rowStart . $sectionStart . i18n ( 'section' . ucfirst ( $section ) ) . $sectionEnd . $rowEnd;
+            $icon = 'Edit';
+            if($section == 'treatment'){
+              $msg .= $tableEnd;
+              $icon = 'Review';
+            }
+            $msg .= $tableSectionStart;
+            $msg .= $rowStart . $sectionStart.'<table><tr>';
+            $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/blue/icon'.$icon.'.png" /></div></td>';
+            $msg .= '<td><div style="float:left;">'.i18n ( 'section' . ucfirst ( $section ) ).'</div></td>';
+            $msg .= '</tr></table>'.$sectionEnd;
           }
         } else {
           $section = '';
@@ -6027,8 +6054,10 @@ abstract class SqlElement {
         }
       }
     }
+    $msg .= $tableEnd.$fieldEnd.'<td float="left" style="width:100%;padding-left: 60px;float:left;"><table style="width:100%;">';
     // ADDITION BY papjul - Document Version details
     if (isset ( $this->_DocumentVersion ) and is_array ( $this->_DocumentVersion )) {
+      $msg .= $tableSectionStart;
       $msg .= $rowStart . $sectionStart . i18n ( 'sectionDocumentVersion' ) . $sectionEnd . $rowEnd;
       $documentVersion = new DocumentVersion ();
       $documentVersions = $documentVersion->getSqlElementsFromCriteria ( array('idDocument' => $this->id), false, null, 'id desc' );
@@ -6053,13 +6082,12 @@ abstract class SqlElement {
         $msg .= $fieldEnd . $rowEnd;
       }
     }
-    // End of ADDITION BY papjul - Document Version details
-    if (isset ( $this->_Note ) and is_array ( $this->_Note )) {
-      //florent 
-      $msg=$this->getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd);
-    } 
     if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
-      $msg .= $rowStart . $sectionStart . i18n ( 'sectionLink' ) . $sectionEnd . $rowEnd;
+      $msg .= $rowStart.'<td>'.$tableLinkStart;
+      $msg .= $rowStart . $sectionLinkStart.'<table><tr>';
+      $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/blue/icon'.ucfirst($section).'.png" /></div></td>';
+      $msg .= '<td><div style="float:left;">'.i18n ( 'sectionLink' ).'</div></td>';
+      $msg .= '</tr></table>'.$sectionEnd;
       $links=$this->_Link;
       foreach ( $links as $link ) {
           if($link->ref1Id == $this->id and $link->ref1Type == get_class($this)){
@@ -6083,8 +6111,16 @@ abstract class SqlElement {
           $msg.=htmlEncode($nameLink,'print');
           $msg .= $fieldEnd . $rowEnd;
       }
+      $msg .= $rowEnd.$tableEnd;
     }
-    $msg .= $tableEnd;
+    // End of ADDITION BY papjul - Document Version details
+    if (isset ( $this->_Note ) and is_array ( $this->_Note )) {
+    	//florent
+    	$msg .= $rowStart.'<td>'.$tableLinkStart;
+    	$msg=$this->getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionLinkStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd);
+    	$msg .= $rowEnd.$tableEnd;
+    }
+    $msg .= $fieldEnd.$rowEnd.$tableEnd;
     return $msg;
   }
 
@@ -6347,7 +6383,10 @@ function getLinksHtmlTab() {
 
 //florent ticket 4790
 function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd){
-  $msg .= $rowStart . $sectionStart . i18n ( 'sectionNote' ) . $sectionEnd . $rowEnd;
+  $msg .= $rowStart . $sectionStart.'<table><tr>';
+  $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:16px; height:16px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/blue/iconActivityStream.png" /></div></td>';
+  $msg .= '<td><div style="float:left;">'.i18n ( 'sectionNote' ).'</div></td>';
+  $msg .= '</tr></table>'.$sectionEnd;
   $note = new Note ();
   $notes = $note->getSqlElementsFromCriteria ( array('refType' => get_class ( $this ), 'refId' => $this->id), false, null, 'id desc' );
   foreach ( $notes as $note ) {
