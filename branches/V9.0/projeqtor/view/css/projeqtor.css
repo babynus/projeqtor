@@ -4187,23 +4187,39 @@ div.ticketKanbanCustom .kanbanVersion{
 }
 
 .resizerEnd{
-    width: 6px;
+    width: 8px;
     height: 20px;
     position: absolute;
     right: -6px;
     top: -3px;
     bottom: 0;
     cursor: e-resize;
-    border-radius: 0px 4px 4px 0px;
+    border-radius: 2px ;
+    border-right: 1px solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
 }
 
 .resizerStart{
-    width: 6px;
+    width: 8px;
     height: 20px;
     position: absolute;
     left: -6px;
     top: -3px;
     bottom: 0;
     cursor: e-resize;
-    border-radius:  4px 0px 0px 4px;
+    border-radius: 2px ;
+    border-left: 1px solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.resizer{
+	background-image:url(customIcons/new/iconHandleResizer.png);
+	background-repeat: no-repeat;
+	width: 75%;
+    height: 90%;
+    top: 1.5px;
+    left: 2px;
+    position: relative;
 }

@@ -893,11 +893,15 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     <div id="toolBarDiv" style="height:30px" dojoType="dijit.layout.ContentPane" region="top"  >
       <?php include "menuBar.php";?>
     </div>
-    <?php if(isNewGui()){ ?>
+    <?php if(isNewGui()){
+      $isMenuLeftOpen=Parameter::getUserParameter('isMenuLeftOpen');
+      if($isMenuLeftOpen=='')$isMenuLeftOpen='true';
+      debugLog($isMenuLeftOpen);
+      ?>
     <div id="menuTop" class="menuTop">
       <div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
       <input id="selectedScreen" value="" hidden >
-      <input id="isMenuLeftOpen" value="true" hidden >
+      <input id="isMenuLeftOpen" value="<?php echo $isMenuLeftOpen?>" hidden >
       <div id="right-pane" class="right-pane">
     <?php } if (!isNewGui()) {?>
      <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px;position:absolute; top:30px;">
@@ -979,7 +983,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     <?php 
           $hideMenuLeftParam = Parameter::getGlobalParameter ( 'MenuBarLeft' ); 
       if (sessionValueExists('MenuBarLeft') and getSessionValue('MenuBarLeft')=='false'){
-        $hideMenuLeftParam = 'true';
+          $hideMenuLeftParam = 'true';
       }
         if($hideMenuLeftParam == 'false' and ! isset($showModuleScreen)) { ?>
         <script type="text/javascript">
@@ -993,7 +997,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       <div dojoType="dijit.layout.ContentPane" id="anotherBarContainer" name="anotherBarContainer" region="center" style="width: 100%;z-index: 999;top:46px;background-color: rgb(181 181 181 / 50%);display:none"
       onClick="dojo.byId('anotherBarContainer').style.display = 'none';dojo.byId('isEditFavorite').value = 'false';">
         <table style="width:100%;"><tr>
-          <td id="hideMenuLeftMargin" style="width:37px;display:none;"></td>
+          <td id="hideMenuLeftMargin" style="width:37px;<?php echo ($isMenuLeftOpen=='false')?'display:block;':'display:none;'?>"></td>
           <td style="width:120px;">
             <div style="margin: 0px 5px 145px 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;">
             <?php $menuBarTopMode = Parameter::getUserParameter('menuBarTopMode');?>
@@ -1095,8 +1099,11 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     
     <!--the left div must be created after the central div for the dynamism of the left menu on the new interface -->
  <?php if(isNewGui()){?> </div></div></div>
-    <div id="leftMenu" class="menu-left"> <?php }?>
-    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left"  splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:'250px');?><?php echo (isNewGui())?';dispaly:none;':'';?>" >
+    <div id="leftMenu" class="menu-left"> 
+    <?php 
+      }
+    ?>
+    <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left"  splitter="<?php echo (isNewGui())?'false':'true';?>" style="width:<?php echo ((!isNewGui())?$IconSizeMenuHide2:(($isMenuLeftOpen=='false')?'0px':'250px'));?><?php echo (isNewGui())?';dispaly:none;':'';?>" >
       <?php if(!isNewGui()){?>
       <script type="dojo/connect" event="resize" args="evt">
          if (hideShowMenuInProgress) return;

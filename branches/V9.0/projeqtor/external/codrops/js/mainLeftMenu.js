@@ -167,6 +167,7 @@
     this.hidStrreamButtonJs.className = 'hideStreamNewGui';
     this.hidStrreamButtonJs.setAttribute('id', 'hideStreamNewGui');
     this.hidStrreamButtonJs.setAttribute('style', 'float:right;');
+    if(dojo.byId('isMenuLeftOpen').value=='false') this.hidStrreamButtonJs.style.display='none';
     this.el.insertBefore(this.hidStrreamButtonJs,  this.el.firstChild);
     this.hidStrreamButtonJs.insertAdjacentElement('afterbegin',  this.hideButton);
 

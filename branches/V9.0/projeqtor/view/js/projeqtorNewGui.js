@@ -86,13 +86,15 @@ var defaultMenu=null;
     _init : function() {
       this.menuRight=dojo.byId('menuBarVisibleDiv');
       this.trigger = dojo.byId( 'hideStreamNewGui' );
-      this.isMenuOpen = true; //replace to datatsession;
-
+      this.isMenuOpen =dojo.byId('isMenuLeftOpen').value; //replace to datatsession;
+      console.log(this.isMenuOpen);
       //divButton
       this.hidStreamButtonTopBar= document.createElement('div');
       this.hidStreamButtonTopBar.className = 'hideStreamNewGuiTopBar';
       this.hidStreamButtonTopBar.setAttribute('id', 'hideStreamNewGuiTopBar');
-      this.hidStreamButtonTopBar.setAttribute('style', 'display:none;');
+      this.hidStreamButtonTopBar.setAttribute('style', ((this.isMenuOpen=='false')?'float:left;width:32px;display:block;':'display:none;'));
+      
+      
       //incon
       this.hidStreamButtonTopBarIcon = document.createElement('div');
       this.hidStreamButtonTopBarIcon.className = 'iconHideMenuRight iconSize32';
@@ -103,15 +105,17 @@ var defaultMenu=null;
       this.triggerBar = dojo.byId( 'hideStreamNewGuiTopBar' );
       this.eventtype ='click';
       this._initEvents();
-
+      
+      
     },
     
     _initEvents : function() {
       var self = this;
+      this.isInit=false;
       this.trigger.addEventListener( this.eventtype, function( ev ) {
         ev.stopPropagation();
         ev.preventDefault();
-        if( self.isMenuOpen ) {
+        if( self.isMenuOpen=='true' ) {
           self._closeMenu();
           document.removeEventListener( self.eventtype, self.bodyClickFn );
         }
@@ -119,7 +123,7 @@ var defaultMenu=null;
       this.triggerBar.addEventListener( this.eventtype, function( ev ) {
         ev.stopPropagation();
         ev.preventDefault();
-        if(! self.isMenuOpen ) {
+        if(self.isMenuOpen=='false' ) {
           self._openMenu();
           document.addEventListener( self.eventtype, self.bodyClickFn );
         }
@@ -127,24 +131,26 @@ var defaultMenu=null;
     },
     
     _openMenu : function() {
-      if( this.isMenuOpen ) return;
-      this.isMenuOpen = true; //replace to datatsession;
+      if(this.isMenuOpen=='true' ) return;
+      this.isMenuOpen = 'true'; //replace to datatsession;
       this._setSize();
       this._showHideButton();
+      saveDataToSession('isMenuLeftOpen','true', true);
     },
     
     _closeMenu : function() {
-      if( !this.isMenuOpen ) return;
-      this.isMenuOpen = false;//replace to datatsession;
+     if(this.isMenuOpen=='false') return;
+      this.isMenuOpen = 'false';//replace to datatsession;
       this._setSize();
-      this._showHideButton(),30;
+      this._showHideButton();
+      saveDataToSession('isMenuLeftOpen','false', true);
     },
     
     _showHideButton : function(){
       dojo.removeAttr('hideStreamNewGui','style');
       dojo.removeAttr('contentMenuBar','style');
       dojo.removeAttr('hideStreamNewGuiTopBar','style');
-      if(this.isMenuOpen){
+      if(this.isMenuOpen=='true'){
         this.trigger.setAttribute('style','display:block;float:right;');
         this.triggerBar.setAttribute('style','display:none;');
         dojo.byId('hideMenuLeftMargin').style.display = 'none';
@@ -159,11 +165,12 @@ var defaultMenu=null;
     },
     
     _setSize :function(){
-      var globalWidth=(this.isMenuOpen) ? dojo.byId('globalContainer').offsetWidth-250 : dojo.byId('globalContainer').offsetWidth;
+      var globalWidth=(this.isMenuOpen=='true') ? dojo.byId('globalContainer').offsetWidth-250 : dojo.byId('globalContainer').offsetWidth;
       this._resizeDiv (globalWidth);
      },
     
     _resizeDiv : function(globalWidth){
+      console.log(this.isMenuOpen=='true');
       var duration=300;
         dojox.fx.combine([ dojox.fx.animateProperty({
           node : "menuTop",
@@ -174,33 +181,33 @@ var defaultMenu=null;
         }), dojox.fx.animateProperty({
           node : "leftMenu",
           properties : {
-            width : { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
+            width : { start:(this.isMenuOpen=='true')? 0 : 250 ,end:(this.isMenuOpen=='true')? 250 : 0}
           },
           duration : duration
         }), dojox.fx.animateProperty({
           node : "leftDiv",
           properties : {
-            width : { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
+            width : { start:(this.isMenuOpen=='true')? 0 : 250 ,end:(this.isMenuOpen=='true')? 250 : 0}
           },
           duration : duration
         }), dojox.fx.animateProperty({
           node : "globalTopCenterDiv",
           properties : {
             width : globalWidth,
-            left: { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
+            left: { start:(this.isMenuOpen=='true')? 0 : 250 ,end:(this.isMenuOpen=='true')? 250 : 0}
           },
           duration : duration
         }), dojox.fx.animateProperty({
           node : "centerDiv",
           properties : {
             width : globalWidth,
-            left: { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
+            left: { start:(this.isMenuOpen=='true')? 0 : 250 ,end:(this.isMenuOpen=='true')? 250 : 0}
           },
           duration : duration
         }),dojox.fx.animateProperty({
           node : "menuLeftBarContaineur",
           properties : {
-            width :{ start:(this.isMenuOpen)?  0 : 250,end:(this.isMenuOpen)? 250 :0 }
+            width :{ start:(this.isMenuOpen=='true')?  0 : 250,end:(this.isMenuOpen=='true')? 250 :0 }
           },
           duration : duration
         }), dojox.fx.animateProperty({
@@ -213,7 +220,7 @@ var defaultMenu=null;
           node : "statusBarDivBottom",
           properties : {
             width : globalWidth,
-            left: { start:(this.isMenuOpen)? 0 : 250 ,end:(this.isMenuOpen)? 250 : 0}
+            left: { start:(this.isMenuOpen=='true')? 0 : 250 ,end:(this.isMenuOpen=='true')? 250 : 0}
           },
           duration : duration
       })]).play();

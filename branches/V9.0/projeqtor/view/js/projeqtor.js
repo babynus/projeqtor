@@ -7736,32 +7736,38 @@ function handleResizeGantBAr (id){
   if(!resizerStart && !resizerEnd)return;
   if(resizerStart){
     resizerStart.style.display="block";
-    resizerStart.addEventListener('mousedown', initDrag, false);
+    resizerStart.addEventListener('mousedown', initDragStart, false);
   }
   
   if(resizerEnd){
     resizerEnd.style.display="block";
-    resizerEnd.addEventListener('mousedown', initDrag, false);
+    resizerEnd.addEventListener('mousedown', initDragEnd, false);
   }
   
-  function initDrag(e) {
-    isResizingGanttBar=true
+  function initDragStart(e) {
      startX = e.clientX;
-     startWidth = parseInt(document.defaultView.getComputedStyle(el).width,10),
-     startleft = parseInt(document.defaultView.getComputedStyle(el).left,10);;
-     if(resizerEnd)document.documentElement.addEventListener('mousemove', doDragEnd, false);
-     if(resizerStart)document.documentElement.addEventListener('mousemove', doDragStart, false);
+     startWidth = parseInt(document.defaultView.getComputedStyle(el).width,10);
+     startLeft = el.style.left;
+     document.documentElement.addEventListener('mousemove', doDragStart, false);
+     document.documentElement.addEventListener('mouseup', stopDrag, false);
+  }
+  
+  function initDragEnd(e) {
+     startX = e.clientX;
+     startWidth = parseInt(document.defaultView.getComputedStyle(el).width,10);
+     document.documentElement.addEventListener('mousemove', doDragEnd, false);
      document.documentElement.addEventListener('mouseup', stopDrag, false);
   }
   
   function doDragStart(e) {
-    el.style.width = (startWidth + e.clientX - startX) + 'px';
-    //el.style.left = startleft+(e.clientX - startX)+'px';
-    barDiv.style.width = (startWidth + e.clientX - startX) + 'px';
-    //barDiv.style.left = startleft+(e.clientX - startX)+'px';
+    isResizingGanttBar=true
+    el.style.width = startWidth +( startX - e.clientX) + 'px';
+    barDiv.style.left =73 - ( startX - e.clientX)+'px';
+    barDiv.style.width = startWidth +( startX - e.clientX)+ 'px';
   }
 
   function doDragEnd(e) {
+    isResizingGanttBar=true
     el.style.width = (startWidth + e.clientX - startX) + 'px';
     barDiv.style.width = (startWidth + e.clientX - startX) + 'px';
   }
@@ -7770,7 +7776,7 @@ function handleResizeGantBAr (id){
       if(resizerStart)document.documentElement.removeEventListener('mousemove', doDragStart, false);    
       if(resizerEnd)document.documentElement.removeEventListener('mousemove', doDragEnd, false);   
       document.documentElement.removeEventListener('mouseup', stopDrag, false);
-      isResizingGanttBar=false;
+      setTimeout('isResizingGanttBar=false;',500);
       if(resizerEnd)resizerEnd.style.display="none";
       if(resizerStart)resizerStart.style.display="none";
   }
