@@ -390,9 +390,6 @@ INSERT INTO `${prefix}referencable` (`id`, `name`, `idle`) VALUES
 INSERT INTO `${prefix}parameter` (idUser, idProject, parameterCode, parameterValue) VALUES
 (null, null, 'draftSeparator','_draft');
 
-INSERT INTO `${prefix}parameter` (idUser, idProject, parameterCode, parameterValue) VALUES
-(null, null, 'documentRoot','../files/documents');
-
 INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) VALUES
 (1, 'planning', 1),
 (2, 'planning', 2),
