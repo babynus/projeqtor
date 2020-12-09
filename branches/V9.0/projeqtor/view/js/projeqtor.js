@@ -7785,7 +7785,7 @@ function handleResizeGantBAr (id,element,refId,val){
       if(resizerEnd)document.documentElement.removeEventListener('mousemove', doDragEnd, false);   
       document.documentElement.removeEventListener('mouseup', stopDrag, false);
       setTimeout('isResizingGanttBar=false;',500);
-      saveGanttElementResize(element, refId,width);
+      //saveGanttElementResize(element, refId,width);
       if(resizerEnd)resizerEnd.style.display="none";
       if(resizerStart)resizerStart.style.display="none";
   }
