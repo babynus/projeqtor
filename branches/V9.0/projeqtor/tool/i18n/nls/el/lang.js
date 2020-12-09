@@ -1,4 +1,5 @@
 {
+ projeqtorIntroducoryText: "",
 aboutMenuInterrogation: "About",
 aboutMessage: "Πληροφορίες για το ProjeQtOr …",
 aboutMessageLocale: "Τοπικές ρυθμίσεις",
@@ -4943,6 +4944,7 @@ week: "εβδομάδα",
 weekEndLabel: "until",
 weekStartLabel: "from the",
 welcomeMessage: "Καλωσήρθατε",
+welcomeOnProjeQtOr: "Welcome to ProjeQtor.",
 whereClause: "where clause",
 WhereFieldWithoutTableOrTableWithoutField: "Where field without table or table without field",
 whose: "whose",

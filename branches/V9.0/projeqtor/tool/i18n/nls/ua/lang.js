@@ -1,4 +1,5 @@
 {
+ projeqtorIntroducoryText: "",
 aboutMenuInterrogation: "About",
 aboutMessage: "Про ProjeQtOr …",
 aboutMessageLocale: "Місцева специфіка(locale)",
@@ -4943,6 +4944,7 @@ week: "тиждень",
 weekEndLabel: "вгору",
 weekStartLabel: "від цього",
 welcomeMessage: "Ласкаво просимо",
+welcomeOnProjeQtOr: "Welcome to ProjeQtor.",
 whereClause: "where clause",
 WhereFieldWithoutTableOrTableWithoutField: "Where field without table or table without field",
 whose: "чий",

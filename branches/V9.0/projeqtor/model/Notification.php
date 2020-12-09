@@ -45,6 +45,7 @@ class Notification extends SqlElement {
     public $notificationTime;
     public $sendEmail=0;
     public $content;
+    public $idPluginIdVersion;
   public $_sec_treatment;
     public $idUser;
     public $idResource;
@@ -85,6 +86,7 @@ class Notification extends SqlElement {
                                             "creationDateTime"          => "hidden",
                                             "sendEmail"                 => "hidden",
                                             "emailSent"                 => "hidden",
+                                            "idPluginIdVersion"         => "hidden",
                                             "idle"                      => "nobr"
                                         );  
   
