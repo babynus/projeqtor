@@ -5853,7 +5853,7 @@ abstract class SqlElement {
       $msg .= '<tr>';
       $msg .= ' <td style="font-size:18pt;color:#AAAAAA">';
       $msg .= ' <table><tr>';
-      $msg .= '   <td><div style="float:left;"><img style="width:64px; height:64px;filter: brightness(0) invert(1);" src="'.self::getBaseUrl().'/view/css/customIcons/grey/icon'.get_class ( $this ).'.png" /></div></td>';
+      $msg .= '   <td><div style="float:left;"><img style="width:64px; height:64px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.self::getBaseUrl().'/view/css/customIcons/grey/icon'.get_class ( $this ).'.png" /></div></td>';
       $msg .= '   <td><div style="float:left;font-size:22pt;"><a href="' . $ref . '" target="#">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></div></td>';
       $msg .= ' </tr></table>';
       $msg .= ' </td>';
@@ -5886,7 +5886,7 @@ abstract class SqlElement {
             }
             $msg .= $tableSectionStart;
             $msg .= $rowStart . $sectionStart.'<table><tr>';
-            $msg .= '<td><div style="float:left;padding-right:10px;filter: brightness(0) invert(1);"><img style="width:22px; height:22px;filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.$icon.'.png" /></div></td>';
+            $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.$icon.'.png" /></div></td>';
             $msg .= '<td><div style="float:left;">'.i18n ( 'section' . $section ).'</div></td>';
             $msg .= '</tr></table>'.$sectionEnd;
           }
@@ -6061,7 +6061,7 @@ abstract class SqlElement {
     if (isset ( $this->_DocumentVersion ) and is_array ( $this->_DocumentVersion )) {
       $msg .= $rowStart.'<td>'.$tableLinkStart;
       $msg .= $rowStart . $sectionLinkStart.'<table><tr>';
-      $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
+      $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
       $msg .= '<td><div style="float:left;">'.i18n ( 'sectionDocumentVersion' ).'</div></td>';
       $msg .= '</tr></table>'.$sectionEnd;
       $documentVersion = new DocumentVersion ();
@@ -6091,7 +6091,7 @@ abstract class SqlElement {
     if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
       $msg .= $rowStart.'<td>'.$tableLinkStart;
       $msg .= $rowStart . $sectionLinkStart.'<table><tr>';
-      $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
+      $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
       $msg .= '<td><div style="float:left;">'.i18n ( 'sectionLink' ).'</div></td>';
       $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
       $links=$this->_Link;
@@ -6390,7 +6390,7 @@ function getLinksHtmlTab() {
 //florent ticket 4790
 function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd){
   $msg .= $rowStart . $sectionStart.'<table><tr>';
-  $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/iconActivityStream.png" /></div></td>';
+  $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/iconActivityStream.png" /></div></td>';
   $msg .= '<td><div style="float:left;">'.i18n ( 'sectionNote' ).'</div></td>';
   $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
   $note = new Note ();
