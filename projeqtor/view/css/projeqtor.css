@@ -3670,7 +3670,7 @@ color : #404952;
 
 .input.required {
   /*background: #FFFFDD !important;*/
-  border-left: 3px solid #FF0000;
+  border-left: 3px solid #FF0000 !important;
 }
 /* CKE */
 /* .cke_toolgroup {
