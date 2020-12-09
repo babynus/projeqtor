@@ -287,3 +287,5 @@ ALTER TABLE `${prefix}notification` ADD `idPluginIdVersion` varchar(4000) DEFAUL
 
 UPDATE `${prefix}habilitationother` set scope='canDeleteAttachment' where scope='canDeleteAttachement';
 
+ INSERT INTO `${prefix}originable` (`id`,`name`, `idle`) VALUES 
+(32,'CallForTender', 0);
