@@ -3390,7 +3390,7 @@ function drawGantt() {
       if(!(dojo.byId('contractGantt') && item.reftype=='Milestone')){
          runScript = "runScript('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
       }
-      elementIdRef='" '+ item.reftype +' "','"' + item.refid +' "','"'+ item.id + '"';
+      elementIdRef=" \' "+ item.reftype +" \',\' " + item.refid +"\',\'"+ item.id +" \' " ;
       if(!(dojo.byId('contractGantt'))){
         var contextMenu = "runScriptContextMenu('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
       }
@@ -7725,7 +7725,7 @@ function displayCheckBoxDefinitionLine(){
 
 //=================================================================
 var isResizingGanttBar=false;
-function handleResizeGantBAr (id,elementId){
+function handleResizeGantBAr (id,element,refId,val){
   var barDiv=dojo.byId('bardiv_'+id),
    el = dojo.byId('taskbar_'+id),
    width=0,
@@ -7785,8 +7785,7 @@ function handleResizeGantBAr (id,elementId){
       if(resizerEnd)document.documentElement.removeEventListener('mousemove', doDragEnd, false);   
       document.documentElement.removeEventListener('mouseup', stopDrag, false);
       setTimeout('isResizingGanttBar=false;',500);
-      console.log(elementId);
-      //saveGanttElementResize(elementId,width);
+      saveGanttElementResize(element, refId,width);
       if(resizerEnd)resizerEnd.style.display="none";
       if(resizerStart)resizerStart.style.display="none";
   }
