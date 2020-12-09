@@ -1,4 +1,5 @@
 {
+ projeqtorIntroducoryText: "",
 aboutMenuInterrogation: "About",
 aboutMessage: "关于ProjeQtOr …",
 aboutMessageLocale: "区域",
@@ -4943,6 +4944,7 @@ week: "周",
 weekEndLabel: "until",
 weekStartLabel: "from the",
 welcomeMessage: "欢迎",
+welcomeOnProjeQtOr: "Welcome to ProjeQtor.",
 whereClause: "where clause",
 WhereFieldWithoutTableOrTableWithoutField: "Where field without table or table without field",
 whose: "谁的",

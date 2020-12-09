@@ -282,6 +282,7 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 
 INSERT INTO ${prefix}parameter (idUser, parameterCode, parameterValue) SELECT r.id , 'newGui', 0 FROM ${prefix}resource r where r.isUser=1;
 
+ALTER TABLE `${prefix}notification` ADD `idPluginIdVersion` varchar(4000) DEFAULT NULL;
 -- ========================================================
 
 UPDATE `${prefix}habilitationother` set scope='canDeleteAttachment' where scope='canDeleteAttachement';

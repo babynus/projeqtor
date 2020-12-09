@@ -3390,6 +3390,7 @@ function drawGantt() {
       if(!(dojo.byId('contractGantt') && item.reftype=='Milestone')){
          runScript = "runScript('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
       }
+      elementIdRef='" '+ item.reftype +' "','"' + item.refid +' "','"'+ item.id + '"';
       if(!(dojo.byId('contractGantt'))){
         var contextMenu = "runScriptContextMenu('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
       }
@@ -3471,7 +3472,6 @@ function drawGantt() {
         topId = '';
       }
       keys += "#" + curKey + "#";
-      console.log(item.planningmode);
       g.AddTaskItem(new JSGantt.TaskItem(item.id, pName, pStart, pEnd, pColor, pItemColor,
           runScript, contextMenu, pMile, pResource, progress, pGroup, 
           topId, pOpen, pDepend,
@@ -3481,7 +3481,7 @@ function drawGantt() {
           item.status,pHealthStatus,pQualityLevel,pTrend,pOverallProgress, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
           item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, 
-          item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract));
+          item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract,elementIdRef));
     }
     g.Draw();
     g.DrawDependencies();
@@ -7725,9 +7725,11 @@ function displayCheckBoxDefinitionLine(){
 
 //=================================================================
 var isResizingGanttBar=false;
-function handleResizeGantBAr (id){
+function handleResizeGantBAr (id,elementId){
   var barDiv=dojo.byId('bardiv_'+id),
    el = dojo.byId('taskbar_'+id),
+   width=0,
+   label=dojo.byId('labelBarDiv_'+id),
       resizerStart =dojo.byId('taskbar_'+id+'ResizerStart'),
       resizerEnd =dojo.byId('taskbar_'+id+'ResizerEnd'),
         startX,  
@@ -7748,12 +7750,14 @@ function handleResizeGantBAr (id){
      startX = e.clientX;
      startWidth = parseInt(document.defaultView.getComputedStyle(el).width,10);
      startLeft = barDiv.offsetLeft;
+     labelLeft=label.offsetLeft;
      document.documentElement.addEventListener('mousemove', doDragStart, false);
      document.documentElement.addEventListener('mouseup', stopDrag, false);
   }
   
   function initDragEnd(e) {
      startX = e.clientX;
+     labelLeft=label.offsetLeft;
      startWidth = parseInt(document.defaultView.getComputedStyle(el).width,10);
      document.documentElement.addEventListener('mousemove', doDragEnd, false);
      document.documentElement.addEventListener('mouseup', stopDrag, false);
@@ -7762,14 +7766,18 @@ function handleResizeGantBAr (id){
   function doDragStart(e) {
     isResizingGanttBar=true
     el.style.width = startWidth +( startX - e.clientX) + 'px';
-    barDiv.style.left =startLeft - ( startX - e.clientX)+'px';
+    label.style.left=labelLeft +( startX - e.clientX)+'px';
+    barDiv.style.left = startLeft - ( startX - e.clientX)+'px';
+    width=startWidth +( startX - e.clientX);
     barDiv.style.width = startWidth +( startX - e.clientX)+ 'px';
   }
 
   function doDragEnd(e) {
     isResizingGanttBar=true
+    label.style.left=labelLeft +(e.clientX - startX)+'px';
     el.style.width = (startWidth + e.clientX - startX) + 'px';
     barDiv.style.width = (startWidth + e.clientX - startX) + 'px';
+    width=startWidth +(  e.clientX - startX);
   }
 
   function stopDrag(e) {
@@ -7777,6 +7785,8 @@ function handleResizeGantBAr (id){
       if(resizerEnd)document.documentElement.removeEventListener('mousemove', doDragEnd, false);   
       document.documentElement.removeEventListener('mouseup', stopDrag, false);
       setTimeout('isResizingGanttBar=false;',500);
+      console.log(elementId);
+      //saveGanttElementResize(elementId,width);
       if(resizerEnd)resizerEnd.style.display="none";
       if(resizerStart)resizerStart.style.display="none";
   }

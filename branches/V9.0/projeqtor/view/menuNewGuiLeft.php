@@ -334,23 +334,31 @@ function getPlugins (){
   $plugins=$object->items;
   $userLang = getSessionValue('currentLocale');
   $lang = "en";
+  $user=getSessionUser();
   if(substr($userLang,0,2)=="fr")$lang="fr";
   if(!empty($plugins)){
     foreach ($plugins as $id=>$val){
-      if(!empty($plInstal)){
+      if($user->idProfile==1 and !empty($plInstal) ){
         if(in_array($val->id, $plInstal)){
-          if($val->version!=$plInstalVersion[$val->id]){
-            $notif=new Notification();
-            $notif->name=i18n('newVersion').'&nbsp'.$val->code;
-            $notif->idUser=getCurrentUserId();
-            $notif->content=i18n('newVersionForPluginName',array((($lang=='fr')?$val->nameFr:$val->nameEn),$plInstalVersion[$val->id],$val->version,));
-            $notif->emailSent=0;
-            $notif->idNotificationType=1;
-            $notif->idResource=1;
-            $notif->notificationDate=date("Y-m-d");
-            $notif->idStatusNotification = 1;
-            $notif->title=i18n('newPluginVersion',array((($lang=='fr')?$val->nameFr:$val->nameEn)));
-            $res=$notif->save();
+          $idPinstal=$plInstalVersion[$val->id];
+          if($val->version!=$idPinstal){
+               debugLog($val->id."/".$idPinstal);
+              $asNotif=SqlElement::getSingleSqlElementFromCriteria('Notification', array("idPluginIdVersion" => "".$val->id."/".$idPinstal.""));
+              if($asNotif->id==''){
+                $notif=new Notification();
+                $notif->name=i18n('newVersion').'&nbsp'.$val->code;
+                $notif->idUser=getCurrentUserId();
+                $notif->content=i18n('newVersionForPluginName',array((($lang=='fr')?$val->nameFr:$val->nameEn),$idPinstal,$val->version,));
+                $notif->emailSent=0;
+                $notif->idNotificationType=1;
+                $notif->idResource=$user->id;
+                $notif->notificationDate=date("Y-m-d");
+                $notif->idStatusNotification = 1;
+                $notif->title=i18n('newPluginVersion',array((($lang=='fr')?$val->nameFr:$val->nameEn)));
+                debugLog($val->id."/".$idPinstal);
+                $notif->idPluginIdVersion=$val->id."/".$idPinstal;
+                $res=$notif->save();
+              }
           }
           continue;
         }   
