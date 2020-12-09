@@ -1574,7 +1574,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	            + ' width:' + vBarWidth + 'px" '
 	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
 	            + 'onmouseout="hideResizerGanttBar ('+vID+')"'
-	            +'onMouseover ="handleResizeGantBAr('+vID+', '')"'
+	            +'onMouseover ="handleResizeGantBAr('+vID+', '+vTaskList[i].getElementIdRef()+')"'
 	            +'>'; 
 
             vRightTableTempMeeting += ' <div class="ganttTaskrowBarComplete"  '
