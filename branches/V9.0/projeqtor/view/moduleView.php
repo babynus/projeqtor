@@ -35,14 +35,73 @@ $user=getSessionUser();
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Module" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
-  <div style="height:48px" id="listDiv" dojoType="dijit.layout.ContentPane" region="top" 
+  <div style="height:40px" id="listDiv" dojoType="dijit.layout.ContentPane" region="top" 
     style="text-align:center;width:100%;font-size:250%;font-weight:bold; " class="listTitle">
       <div style="text-align:center;width:100%;padding-top:5px;font-size:250%;font-weight:bold; ">
         <?php echo i18n("menuModule")?>
       </div>
-      <button id="saveParameterButton" dojoType="dijit.form.Button" class="resetMargin roundedButton notButton"
+    </div> 
+    
+    <?php $mod=new Module();
+          $modList=$mod->getSqlElementsFromCriteria(null,null,null,'sortOrder asc');
+          $nbTotal = count($modList);
+          $simuIndex=Parameter::getGlobalParameter('simuIndex');
+          global $hosted;
+          if ($hosted===true) $simuIndex=1; // Will hide Simulation Module for hosted 
+          $moduleEnable = array();
+          foreach ($modList as $mod){
+            if($mod->active){
+              $moduleEnable[$mod->id]=$mod->id;
+            }
+          }
+          ?>
+    
+    <div style="overflow-y:auto;overflow-x:hidden;padding-left:10px;padding-top:5px;" id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" >
+    <table style="margin-left:30px;margin-top:15px; width:100%">
+    <tr>
+      <td>
+      
+      <div style="color:grey;margin-bottom:35px;width:100%;height:130px; ">
+       <div class="menuBarItemSelectedModule" id="menuFilterModuleTop1" style="cursor:pointer;border-radius:5px;float:left;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;"
+            onclick="filterMenuModule(1,<?php echo $nbTotal; ?>);">
+        <div id="menuFilterModuleTopIcon1" style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px;" class="menuFilterModuleTopIcon <?php if(isNewGui()){?> imageColorNewGui <?php }else{ ?> imageColorBlack <?php }?>  iconAllModules iconSize32"></div>
+        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('allModule');?></div>
+       </div>
+       
+         <div  id="menuFilterModuleTop2" onclick="filterMenuModule(2,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
+        <div id="menuFilterModuleTopIcon2" style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }?> iconPlanning iconSize32"></div>
+        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('menuPlanning');?></div>
+       </div>
+       
+       <div id="menuFilterModuleTop3" onclick="filterMenuModule(3,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
+        <div id="menuFilterModuleTopIcon3" style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }else{?> imageColorBlack <?php }?> iconPeriod iconSize32"></div>
+        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('moduleTimeTracking');?></div>
+       </div>
+       
+      <div id="menuFilterModuleTop4" onclick="filterMenuModule(4,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
+        <div id="menuFilterModuleTopIcon4" style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }?> iconSteering  iconSize32"></div>
+        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('menuSteering');?></div>
+       </div>
+       
+   <div id="menuFilterModuleTop5" onclick="filterMenuModule(5,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
+        <div id="menuFilterModuleTopIcon5" style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }?> iconFinancial iconSize32"></div>
+        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('menuFinancial');?></div>
+       </div>
+       
+      <div id="menuFilterModuleTop6" onclick="filterMenuModule(6,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
+        <div id="menuFilterModuleTopIcon6" style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }?> iconAdministration iconSize32"></div>
+        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('moduleTechnical');?></div>
+       </div>
+       
+       <div  id="menuFilterModuleTop7" onclick="filterMenuModuleDisable(<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
+        <div id="menuFilterModuleTopIcon7" style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }else{?> imageColorBlack <?php }?> iconDisabledModules iconSize32"></div>
+        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('moduleDisable');?></div>
+       </div>
+       
+       <div   style="cursor:pointer;border-radius:5px;float:left;margin-left:100px;position:relative;width:120px;height:120px;">
+       <button id="saveParameterButton" dojoType="dijit.form.Button" class="resetMargin roundedButton notButton"
         title="<?php echo i18n("applyChanges");?>"
-        style="position:absolute;top:15px;right:40px;color:#707070;font-weight:bold" class="" enabled="true"
+        style="color:#707070;font-weight:bold" class="" enabled="true"
         iconClass="dijitButtonIcon dijitButtonIconSave imageColorNewGui" showLabel="false" >
         <script type="dojo/connect" event="onClick" args="evt">
 		        var url="../tool/resetModuleTablesInSession.php";
@@ -73,63 +132,13 @@ $user=getSessionUser();
           });
         </script>
       </button>
-    </div> 
-    
-    <?php $mod=new Module();
-          $modList=$mod->getSqlElementsFromCriteria(null,null,null,'sortOrder asc');
-          $nbTotal = count($modList);
-          $simuIndex=Parameter::getGlobalParameter('simuIndex');
-          global $hosted;
-          if ($hosted===true) $simuIndex=1; // Will hide Simulation Module for hosted 
-          $moduleEnable = array();
-          foreach ($modList as $mod){
-            if($mod->active){
-              $moduleEnable[$mod->id]=$mod->id;
-            }
-          }
-          ?>
-    
-    <div style="overflow-y:auto;overflow-x:hidden;padding:10px" id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" >
-    <table style="margin:20px; width:100%">
-    <tr>
-      <td>
-      
-      <div style="color:grey;margin-bottom:50px;width:100%;height:130px; ">
-       <div class="menuBarItemSelectedModule" id="menuFilterModuleTop1" style="cursor:pointer;border-radius:5px;float:left;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;"
-            onclick="filterMenuModule(1,<?php echo $nbTotal; ?>);">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px;" class=" <?php if(isNewGui()){?> imageColorNewGui <?php }else{ ?> imageColorBlack <?php }?>  iconAllModules iconSize32"></div>
-        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('allModule');?></div>
        </div>
        
-         <div  id="menuFilterModuleTop2" onclick="filterMenuModule(2,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }?> iconPlanning iconSize32"></div>
-        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('menuPlanning');?></div>
+       <?php if(isset($showModuleScreen )){  if($showModuleScreen){?>
+       <div   style="border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
+       <?php echo i18n('moduleScreenExplanation')?>
        </div>
-       
-       <div id="menuFilterModuleTop3" onclick="filterMenuModule(3,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }else{?> imageColorBlack <?php }?> iconPlanning iconSize32"></div>
-        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('moduleTimeTracking');?></div>
-       </div>
-       
-      <div id="menuFilterModuleTop4" onclick="filterMenuModule(4,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }?> iconSteering  iconSize32"></div>
-        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('menuSteering');?></div>
-       </div>
-       
-   <div id="menuFilterModuleTop5" onclick="filterMenuModule(5,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }?> iconFinancial iconSize32"></div>
-        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('menuFinancial');?></div>
-       </div>
-       
-      <div id="menuFilterModuleTop6" onclick="filterMenuModule(6,<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }?> iconAdministration iconSize32"></div>
-        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('moduleTechnical');?></div>
-       </div>
-       
-       <div  id="menuFilterModuleTop7" onclick="filterMenuModuleDisable(<?php echo $nbTotal; ?>);" style="cursor:pointer;border-radius:5px;float:left;margin-left:35px;position:relative;width:120px;height:120px;border:solid 1px #e6e6e6;box-shadow:2px 2px #e6e6e6;background-color:white;">
-        <div style="background-size:60px;width:60px;height:60px;position:absolute;left:0;right:0;margin:auto;top:10px" class="<?php if(isNewGui()){?>imageColorNewGui<?php }else{?> imageColorBlack <?php }?> iconDisabledModules iconSize32"></div>
-        <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('moduleDisable');?></div>
-       </div>
+        <?php } } ?>
       </div>
     
     <?php 
@@ -175,7 +184,7 @@ $user=getSessionUser();
                }
           ?>
           
-          <div id="displayModule<?php echo $mod->id;?>" style="<?php echo $height;?>;width:900px;display:none;z-index:-1;position:absolute;top:205px;margin-left:280px;background-color:#f2f2f2;webkit-transition: opacity 600ms, visibility 600ms;transition: opacity 600ms, visibility 600ms;  opacity: 0;
+          <div id="displayModule<?php echo $mod->id;?>" style="<?php echo $height;?>;width:900px;display:none;z-index:-1;position:absolute;top:184px;margin-left:280px;background-color:#f2f2f2;webkit-transition: opacity 600ms, visibility 600ms;transition: opacity 600ms, visibility 600ms;  opacity: 0;
                    visibility: hidden;">
             <div style="color: #8c8c8c;font-size:18px;margin-top:20px;margin-left:70px;"><?php echo i18n($mod->name);?></div>
             <div style="margin-top:40px;width:100%">
