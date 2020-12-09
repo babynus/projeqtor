@@ -6,18 +6,12 @@
 <g>
 	<g>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M90.809,42.204c0,0-14.256,15.833-31.545,9.927c-2.441-0.793-3.749-0.454-4.442,0.231c-0.684,0.694-1.024,2.002-0.232,4.441
+			M90.809,42.204c0,0-14.256,15.833-31.544,9.927c-2.441-0.793-3.749-0.454-4.442,0.231c-0.684,0.694-1.024,2.002-0.232,4.441
 			c5.908,17.292-9.927,31.547-9.927,31.547L12.946,56.634c0,0,14.255-15.834,31.546-9.927c2.439,0.791,3.749,0.452,4.442-0.231
 			c0.685-0.694,1.024-2.003,0.23-4.442c-5.906-17.293,9.928-31.548,9.928-31.548L90.809,42.204z"/>
 	</g>
 </g>
-<g id="Calque_3">
-	<g id="Calque_3_2_">
-		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="122.709" y1="18.317" x2="102.877" y2="89.968"/>
-		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="51.877" y1="103.354" x2="85.469" y2="112.651"/>
-		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="104.144" cy="109.469" r="13.01"/>
-	</g>
-</g>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="115.479" y1="25.867" x2="95.482" y2="83.154"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="28.432" y1="96.114" x2="71.055" y2="110.99"/>
+<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="95.461" cy="108.464" r="16.848"/>
 </svg>
