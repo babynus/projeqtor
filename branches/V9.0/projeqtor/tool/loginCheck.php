@@ -156,7 +156,8 @@
   if($paramCount==0){
     Parameter::storeUserParameter('newGui', '1', $user->id);
   }
-  if(isNewGui()){
+  $newGui = SqlElement::getSingleSqlElementFromCriteria('Parameter', array('idUser'=>$user->id, 'parameterCode'=>'newGui'));
+  if($newGui->parameterValue == 1){
     $idMessageLegal = SqlList::getIdFromName('MessageLegal', 'newGui');
     $messageLegalFollow = SqlElement::getSingleSqlElementFromCriteria('MessageLegalFollowUp', array('idUser'=>$user->id, 'name'=>'newGui', 'idMessageLegal'=>$idMessageLegal));
     $messageLegalFollow->acceptedDate= date('Y-m-d H:i:s');
