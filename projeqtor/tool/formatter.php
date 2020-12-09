@@ -658,7 +658,7 @@ function activityStreamDisplayNote ($note,$origin){
       if (isNewGui())   {
         if (Parameter::getUserParameter('paramScreen')=='top') {
           if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
-            $menuLeftOpen=1;
+            $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
             if ($menuLeftOpen) $innerNoteWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
             else $innerNoteWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
           } else { // trailing
@@ -974,7 +974,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
   if (isNewGui())   {
     if (Parameter::getUserParameter('paramScreen')=='top') {
       if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
-        $menuLeftOpen=1;
+        $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
         if ($menuLeftOpen) $innerMailWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
         else $innerMailWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
       } else { // trailing
