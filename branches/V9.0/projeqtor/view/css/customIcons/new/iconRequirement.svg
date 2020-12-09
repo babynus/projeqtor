@@ -7,20 +7,14 @@
 <path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 	M56.398,125.253c-27.473,0-49.826-22.354-49.826-49.823c0-27.477,22.353-49.828,49.826-49.828c27.475,0,49.827,22.352,49.827,49.828
 	C106.225,102.898,83.873,125.253,56.398,125.253z"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M56.398,111.898c-20.11,0-36.475-16.361-36.475-36.473c0-20.111,16.365-36.475,36.475-36.475c20.111,0,36.474,16.364,36.474,36.475
+<path fill="none" stroke="#FF0000" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M56.398,111.898c-20.11,0-36.475-16.361-36.475-36.474c0-20.111,16.365-36.475,36.475-36.475c20.111,0,36.474,16.364,36.474,36.475
 	C92.869,95.541,76.509,111.898,56.398,111.898z"/>
-<g>
-	<path fill="#FF0000" d="M56.398,57.985c9.618,0,17.443,7.824,17.443,17.442c0,9.615-7.825,17.441-17.443,17.441
-		c-9.617,0-17.44-7.826-17.44-17.441C38.956,65.813,46.781,57.985,56.398,57.985 M56.398,52.305
-		c-12.749,0-23.119,10.372-23.119,23.122c0,12.745,10.371,23.12,23.119,23.12c12.749,0,23.124-10.373,23.124-23.12
-		C79.521,62.677,69.146,52.305,56.398,52.305z"/>
-</g>
+<path fill="none" stroke="#FF0000" stroke-width="2.8892" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M55.774,96.501c-11.621,0-21.077-9.454-21.077-21.076c0-11.621,9.457-21.077,21.077-21.077S76.85,63.804,76.85,75.425
+	C76.849,87.049,67.395,96.501,55.774,96.501z"/>
 <circle fill="#FF0000" cx="56.398" cy="75.429" r="9.768"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+<path fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 	M56.398,75.43l59.899-59.903"/>
-<path fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M107.277,38.023l-13.354-0.12l17.498-17.5l13.356,0.122L107.277,38.023z"/>
-<path fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M93.801,24.548l0.122,13.355l17.498-17.5L111.3,7.048L93.801,24.548z"/>
+<polygon fill="#FF0000" points="111.421,20.403 111.3,7.048 93.801,24.548 93.923,37.903 107.277,38.023 124.777,20.525 "/>
 </svg>
