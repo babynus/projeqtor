@@ -5851,10 +5851,10 @@ abstract class SqlElement {
     }else{
       $msg = " \n ".$dmsg."\n".'<table style="font-size:9pt; width: 65%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
       $msg .= '<tr>';
-      $msg .= ' <td style="font-size:18pt;color:#AAAAAA">';
+      $msg .= ' <td style="color:#AAAAAA">';
       $msg .= ' <table><tr>';
-      $msg .= '   <td><div style="float:left;"><img style="width:64px; height:64px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.self::getBaseUrl().'/view/css/customIcons/grey/icon'.get_class ( $this ).'.png" /></div></td>';
-      $msg .= '   <td><div style="float:left;font-size:22pt;"><a href="' . $ref . '" target="#">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></div></td>';
+      $msg .= '   <td><img style="float:left;width:64px; height:64px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.self::getBaseUrl().'/view/css/customIcons/grey/icon'.get_class ( $this ).'.png" /></td>';
+      $msg .= '   <td><a href="' . $ref . '" target="#" style="float:left;font-size:22pt;">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></td>';
       $msg .= ' </tr></table>';
       $msg .= ' </td>';
       $msg .= '</tr>';
@@ -5862,7 +5862,8 @@ abstract class SqlElement {
       $msg .= ' <td style="text-align:center;font-size:32pt;color:#606062;background:#DDDDDD">'.SqlList::getNameFromId(get_class ( $this ), $this->id).'</td>';
       $msg .= '</tr>';
       $msg .= '<tr><td><br></td></tr>';
-      $msg .= $tableEnd.$tableStart.$rowStart.'<td style="width:30%;">';
+      $msg .= $tableEnd;
+      $msg .= $tableStart.$rowStart.'<td style="width:30%;">';
     }
     //
     $nobr = false;
@@ -5886,9 +5887,9 @@ abstract class SqlElement {
             }
             $msg .= $tableSectionStart;
             $msg .= $rowStart . $sectionStart.'<table><tr>';
-            $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.$icon.'.png" /></div></td>';
-            $msg .= '<td><div style="float:left;">'.i18n ( 'section' . $section ).'</div></td>';
-            $msg .= '</tr></table>'.$sectionEnd;
+            $msg .= '<td><img style="float:left;padding-right:10px;width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.$icon.'.png" /></td>';
+            $msg .= '<td>'.i18n ( 'section' . $section ).'</td>';
+            $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
           }
         } else {
           $section = '';
@@ -6056,14 +6057,16 @@ abstract class SqlElement {
         }
       }
     }
-    $msg .= $tableEnd.$fieldEnd.'<td style="width:100%;padding-left: 60px;float:left;"><table style="width:100%;">';
+    $msg .= $tableEnd.$fieldEnd;
+    $msg .= '<td style="width:100%;padding-left: 60px;float:left;">';
     // ADDITION BY papjul - Document Version details
     if (isset ( $this->_DocumentVersion ) and is_array ( $this->_DocumentVersion )) {
+      $msg .= '<table style="width:100%;">';
       $msg .= $rowStart.'<td>'.$tableLinkStart;
       $msg .= $rowStart . $sectionLinkStart.'<table><tr>';
       $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
       $msg .= '<td><div style="float:left;">'.i18n ( 'sectionDocumentVersion' ).'</div></td>';
-      $msg .= '</tr></table>'.$sectionEnd;
+      $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
       $documentVersion = new DocumentVersion ();
       $documentVersions = $documentVersion->getSqlElementsFromCriteria ( array('idDocument' => $this->id), false, null, 'id desc' );
       foreach ( $documentVersions as $documentVersion ) {
@@ -6086,9 +6089,10 @@ abstract class SqlElement {
         }
         $msg .= $fieldEnd . $rowEnd;
       }
-      $msg .= '</td>'.$rowEnd.$tableEnd;
+      $msg .= $tableEnd.'</td>'.$rowEnd.$tableEnd;
     }
     if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
+      $msg .= '<table style="width:100%;">';
       $msg .= $rowStart.'<td>'.$tableLinkStart;
       $msg .= $rowStart . $sectionLinkStart.'<table><tr>';
       $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
@@ -6117,14 +6121,15 @@ abstract class SqlElement {
           $msg.=htmlEncode($nameLink,'print');
           $msg .= $fieldEnd . $rowEnd;
       }
-      $msg .= $tableEnd.'</td>'.$rowEnd;
+      $msg .= $tableEnd.'</td>'.$rowEnd.$tableEnd;
     }
     // End of ADDITION BY papjul - Document Version details
     if (isset ( $this->_Note ) and is_array ( $this->_Note )) {
-    	//florent
+      //florent
+        $msg .= '<table style="width:100%;">';
     	$msg .= $rowStart.'<td>'.$tableLinkStart;
     	$msg=$this->getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionLinkStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd);
-    	$msg .= $tableEnd.'</td>'.$rowEnd;
+    	$msg .= $tableEnd.'</td>'.$rowEnd.$tableEnd;
     }
     $msg .= $fieldEnd.$rowEnd.$tableEnd;
     return $msg;
@@ -6390,8 +6395,8 @@ function getLinksHtmlTab() {
 //florent ticket 4790
 function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd){
   $msg .= $rowStart . $sectionStart.'<table><tr>';
-  $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/iconActivityStream.png" /></div></td>';
-  $msg .= '<td><div style="float:left;">'.i18n ( 'sectionNote' ).'</div></td>';
+  $msg .= '<td><img style="float:left;padding-right:10px;width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/iconActivityStream.png" /></td>';
+  $msg .= '<td>'.i18n ( 'sectionNote' ).'</td>';
   $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
   $note = new Note ();
   $notes = $note->getSqlElementsFromCriteria ( array('refType' => get_class ( $this ), 'refId' => $this->id), false, null, 'id desc' );
