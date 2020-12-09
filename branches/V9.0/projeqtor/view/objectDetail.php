@@ -298,7 +298,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
 <form dojoType="dijit.form.Form" id="objectForm" jsId="objectForm" ondragover="event.preventDefault();" ondrop="event.preventDefault();"
 			name="objectForm" encType="multipart/form-data" action="" method="">
 			<script type="dojo/method" event="onShow">
-        if (dijit.byId('name')) dijit.byId('name').focus();
+        if (dijit.byId('name') && dojo.byId('id') && ! dojo.byId('id').value) setTimeout("dijit.byId('name').focus()",100);;
       </script>
 			<script type="dojo/method" event="onSubmit">
         // Don't do anything on submit, just cancel : no button is default => must click
