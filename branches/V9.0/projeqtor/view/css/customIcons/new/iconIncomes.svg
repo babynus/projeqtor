@@ -3,27 +3,13 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="75.82" cy="24.884" r="21.873"/>
-<g>
-	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M71.625,25.663c-3.238,0-5.861-2.623-5.861-5.859l0,0c0-3.238,2.623-5.86,5.861-5.86h8.527c3.236,0,5.859,2.622,5.859,5.86l0,0"/>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M71.625,25.663h8.527c3.236,0,5.859,2.622,5.859,5.858l0,0c0,3.238-2.623,5.86-5.859,5.86h-8.527c-3.238,0-5.861-2.622-5.861-5.86
-			"/>
-	</g>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="75.889" y1="13.943" x2="75.889" y2="8.478"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="75.889" y1="42.846" x2="75.889" y2="37.381"/>
-</g>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M50.5,42.846c0,0-7.5,0.667-11.5,3.91c0,0-8-10.53-26-6.643L22.5,56c0,0-8.5,8.5-9.5,16.5H7.875c0,0-3.75-0.5-3.75,4.875
-	s0,15.625,0,15.625s-0.5,2.375,3.75,2.375s5.5,0,5.5,0s4.25,10,15.75,14l-3.75,13.75c0,0-0.375,3.125,3.75,3.125s13.25,0,13.25,0
-	s1.375,0.375,2.375-3.375s1.625-7.5,1.625-7.5s14.25,2.625,24.5,0.5l1.625,7.375c0,0,0.4,3.021,3.389,3.01
-	c2.986-0.01,13.486,0,13.486,0s3,0.74,1.875-5.01s-3.125-13.125-3.125-13.125s17.125-9.25,17.125-32.25c0-16.875-15.75-24-15.75-24"
-	/>
-<ellipse transform="matrix(0.3722 -0.9281 0.9281 0.3722 -48.324 69.2128)" fill="#FF0000" cx="27.002" cy="70.329" rx="4.833" ry="2.667"/>
-<path fill="none" stroke="#E42320" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M105.25,75.875
-	c0,0,7.749,4.459,14.083-5.541"/>
+<path fill="none" stroke="#FF0000" stroke-width="5.6099" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M56.198,26.457c0,0-8.415,0.748-12.903,4.387c0,0-8.976-11.814-29.172-7.454l10.659,17.825c0,0-9.536,9.537-10.659,18.513h-5.75
+	c0,0-4.208-0.562-4.208,5.47c0,6.03,0,17.531,0,17.531s-0.561,2.664,4.208,2.664c4.769,0,6.171,0,6.171,0s4.769,11.22,17.671,15.708
+	l-4.208,15.426c0,0-0.42,3.508,4.208,3.508c4.628,0,14.866,0,14.866,0s1.543,0.421,2.665-3.786c1.122-4.208,1.823-8.416,1.823-8.416
+	s15.989,2.945,27.489,0.562l1.823,8.274c0,0,0.449,3.39,3.802,3.376c3.351-0.01,15.132,0,15.132,0s3.366,0.831,2.104-5.62
+	c-1.263-6.452-3.506-14.727-3.506-14.727s21.659-10.493,19.215-36.184C112.463,9.275,56.198,26.457,56.198,26.457z"/>
+<ellipse transform="matrix(-0.9281 -0.3723 0.3723 -0.9281 36.1828 121.5707)" fill="#FF0000" cx="29.83" cy="57.292" rx="2.992" ry="5.422"/>
+<path fill="none" stroke="#FF0000" stroke-width="5.6099" stroke-linecap="round" stroke-miterlimit="10" d="M117.628,63.515
+	c0,0,0.957,1.572,6.878-6.222"/>
 </svg>

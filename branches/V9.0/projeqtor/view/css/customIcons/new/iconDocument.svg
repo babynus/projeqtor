@@ -3,12 +3,10 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="26.3" y1="27.313" x2="44.167" y2="27.313"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="26.3" y1="41.833" x2="69.327" y2="41.833"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="26.3" y1="61.5" x2="96.396" y2="61.5"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="26.3" y1="75.471" x2="96.396" y2="75.471"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="26.3" y1="90.5" x2="96.396" y2="90.5"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="26.3" y1="106.244" x2="96.396" y2="106.244"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="34.586" y1="45.527" x2="70.216" y2="45.527"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="34.586" y1="67.094" x2="85.313" y2="67.094"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="34.586" y1="84.961" x2="85.313" y2="84.961"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="34.586" y1="102.828" x2="85.313" y2="102.828"/>
 <g>
 	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M80.168,22.5V3.235H23.036c-2.761,0-5,2.239-5,5
 		v111.958c0,2.762,2.239,5,5,5h77.479c2.762,0,5-2.238,5-5V27.5H85.168C82.406,27.5,80.168,25.262,80.168,22.5z"/>
