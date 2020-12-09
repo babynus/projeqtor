@@ -12043,13 +12043,16 @@ function filterMenuModule(id,nbTotal){
         reset = 1;
       }
       dojo.removeClass(dojo.byId("menuFilterModuleTop"+i),"menuBarItemSelectedModule");
+      dojo.removeClass(dojo.byId("menuFilterModuleTopIcon"+i),"menuFilterModuleTopIcon");
     }
   }
   if(reset==0){
     dojo.addClass(dojo.byId("menuFilterModuleTop"+id),"menuBarItemSelectedModule");
+    dojo.addClass(dojo.byId("menuFilterModuleTopIcon"+id),"menuFilterModuleTopIcon");
   }else{
     id=1;
     dojo.addClass(dojo.byId("menuFilterModuleTop"+id),"menuBarItemSelectedModule");
+    dojo.addClass(dojo.byId("menuFilterModuleTopIcon"+id),"menuFilterModuleTopIcon");
   }
   
   if(id==2){
@@ -12088,6 +12091,7 @@ function filterMenuModuleDisable(nbTotal){
   for (var i=1; i <= 6; i++) {
     if(dojo.hasClass(dojo.byId("menuFilterModuleTop"+i),'menuBarItemSelectedModule')){
       dojo.removeClass(dojo.byId("menuFilterModuleTop"+i),"menuBarItemSelectedModule");
+      dojo.removeClass(dojo.byId("menuFilterModuleTopIcon"+i),"menuFilterModuleTopIcon");
     }
   }
   var reset = 0;
@@ -12096,6 +12100,7 @@ function filterMenuModuleDisable(nbTotal){
   }
   if(reset==0){
     dojo.addClass(dojo.byId("menuFilterModuleTop7"),"menuBarItemSelectedModule");
+    dojo.addClass(dojo.byId("menuFilterModuleTopIcon7"),"menuFilterModuleTopIcon");
     for (var i=1; i <= nbTotal; i++) {
       if(dojo.byId("moduleTitle_"+i)){
         if(dojo.hasClass(dojo.byId("moduleMenuDiv_"+i),'activeModuleMenu')){
