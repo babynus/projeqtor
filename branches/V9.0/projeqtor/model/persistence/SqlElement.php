@@ -5824,15 +5824,15 @@ abstract class SqlElement {
     $msg = "";
     $rowStart = '<tr>';
     $rowEnd = '</tr>';
-    $labelStart = '<td style="background:#FFFFFF;font-weight:bold;text-align: right;width:50%;vertical-align: middle;">&nbsp;&nbsp;';
+    $labelStart = '<td style="background:#FFFFFF;font-weight:bold;text-align: right;width:25%;vertical-align: middle;white-space:nowrap;">&nbsp;&nbsp;';
     $labelEnd = '&nbsp;</td>';
-    $fieldStart = '<td style="background:#FFFFFF;text-align: left;">';//<td style="width:2px;">&nbsp;</td>
+    $fieldStart = '<td style="background:#FFFFFF;text-align: left;width:75%;white-space:nowrap;padding-left:20px;">';//<td style="width:2px;">&nbsp;</td>
     $fieldEnd = '</td>';
-    $sectionStart = '<td style="background:#cccccc;color: #000000; text-align: center;font-size:12pt;font-weight:bold;width: 100%;border:2px solid #606062;" colspan="2">';
-    $sectionLinkStart = '<td style="background:#cccccc;color: #000000; text-align: center;font-size:12pt;font-weight:bold;width: 100%;border-bottom:2px solid #606062;" colspan="2">';
+    $sectionStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:bold;width: 100%;" colspan="2">';
+    $sectionLinkStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:bold;width: 100%;" colspan="2">';
     $sectionEnd = '</td>';
     $tableStart = '<table style="font-size:11pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
-    $tableLinkStart = '<table style="font-size:11pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;border:2px solid #606062;">';
+    $tableLinkStart = '<table style="font-size:11pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
     $tableSectionStart = '<table style="font-size:11pt; width: 100%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
     $tableEnd = '</table>';
     //florent
@@ -5853,7 +5853,7 @@ abstract class SqlElement {
       $msg .= '<tr>';
       $msg .= ' <td style="font-size:18pt;color:#AAAAAA">';
       $msg .= ' <table><tr>';
-      $msg .= '   <td><div style="float:left;"><img style="width:64px; height:64px;" src="'.self::getBaseUrl().'/view/css/customIcons/blue/icon'.get_class ( $this ).'.png" /></div></td>';
+      $msg .= '   <td><div style="float:left;"><img style="width:64px; height:64px;filter: brightness(0) invert(1);" src="'.self::getBaseUrl().'/view/css/customIcons/grey/icon'.get_class ( $this ).'.png" /></div></td>';
       $msg .= '   <td><div style="float:left;font-size:22pt;"><a href="' . $ref . '" target="#">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></div></td>';
       $msg .= ' </tr></table>';
       $msg .= ' </td>';
@@ -5866,6 +5866,7 @@ abstract class SqlElement {
     }
     //
     $nobr = false;
+    debugLog($this);
     foreach ( $this as $col => $val ) {
       $hide = false;
       $nobr_before = $nobr;
@@ -5876,16 +5877,17 @@ abstract class SqlElement {
       } else if (substr ( $col, 0, 5 ) == '_sec_') {
         if (strlen ( $col ) > 8) {
           $section = substr ( $col, 5 );
-          if ($section == 'description' or $section == 'treatment') {
+          $section = ucfirst ( $section );
+          if ($section == 'Description' or $section == 'Treatment') {
             $icon = 'Edit';
-            if($section == 'treatment'){
+            if($section == 'Treatment'){
               $msg .= $tableEnd;
               $icon = 'Review';
             }
             $msg .= $tableSectionStart;
             $msg .= $rowStart . $sectionStart.'<table><tr>';
-            $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/blue/icon'.$icon.'.png" /></div></td>';
-            $msg .= '<td><div style="float:left;">'.i18n ( 'section' . ucfirst ( $section ) ).'</div></td>';
+            $msg .= '<td><div style="float:left;padding-right:10px;filter: brightness(0) invert(1);"><img style="width:22px; height:22px;filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.$icon.'.png" /></div></td>';
+            $msg .= '<td><div style="float:left;">'.i18n ( 'section' . $section ).'</div></td>';
             $msg .= '</tr></table>'.$sectionEnd;
           }
         } else {
@@ -6054,11 +6056,14 @@ abstract class SqlElement {
         }
       }
     }
-    $msg .= $tableEnd.$fieldEnd.'<td float="left" style="width:100%;padding-left: 60px;float:left;"><table style="width:100%;">';
+    $msg .= $tableEnd.$fieldEnd.'<td style="width:100%;padding-left: 60px;float:left;"><table style="width:100%;">';
     // ADDITION BY papjul - Document Version details
     if (isset ( $this->_DocumentVersion ) and is_array ( $this->_DocumentVersion )) {
-      $msg .= $tableSectionStart;
-      $msg .= $rowStart . $sectionStart . i18n ( 'sectionDocumentVersion' ) . $sectionEnd . $rowEnd;
+      $msg .= $rowStart.'<td>'.$tableLinkStart;
+      $msg .= $rowStart . $sectionLinkStart.'<table><tr>';
+      $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
+      $msg .= '<td><div style="float:left;">'.i18n ( 'sectionDocumentVersion' ).'</div></td>';
+      $msg .= '</tr></table>'.$sectionEnd;
       $documentVersion = new DocumentVersion ();
       $documentVersions = $documentVersion->getSqlElementsFromCriteria ( array('idDocument' => $this->id), false, null, 'id desc' );
       foreach ( $documentVersions as $documentVersion ) {
@@ -6081,13 +6086,14 @@ abstract class SqlElement {
         }
         $msg .= $fieldEnd . $rowEnd;
       }
+      $msg .= '</td>'.$rowEnd.$tableEnd;
     }
     if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
       $msg .= $rowStart.'<td>'.$tableLinkStart;
       $msg .= $rowStart . $sectionLinkStart.'<table><tr>';
-      $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/blue/icon'.ucfirst($section).'.png" /></div></td>';
+      $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
       $msg .= '<td><div style="float:left;">'.i18n ( 'sectionLink' ).'</div></td>';
-      $msg .= '</tr></table>'.$sectionEnd;
+      $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
       $links=$this->_Link;
       foreach ( $links as $link ) {
           if($link->ref1Id == $this->id and $link->ref1Type == get_class($this)){
@@ -6111,14 +6117,14 @@ abstract class SqlElement {
           $msg.=htmlEncode($nameLink,'print');
           $msg .= $fieldEnd . $rowEnd;
       }
-      $msg .= $rowEnd.$tableEnd;
+      $msg .= $tableEnd.'</td>'.$rowEnd;
     }
     // End of ADDITION BY papjul - Document Version details
     if (isset ( $this->_Note ) and is_array ( $this->_Note )) {
     	//florent
     	$msg .= $rowStart.'<td>'.$tableLinkStart;
     	$msg=$this->getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionLinkStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd);
-    	$msg .= $rowEnd.$tableEnd;
+    	$msg .= $tableEnd.'</td>'.$rowEnd;
     }
     $msg .= $fieldEnd.$rowEnd.$tableEnd;
     return $msg;
@@ -6384,9 +6390,9 @@ function getLinksHtmlTab() {
 //florent ticket 4790
 function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd){
   $msg .= $rowStart . $sectionStart.'<table><tr>';
-  $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:16px; height:16px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/blue/iconActivityStream.png" /></div></td>';
+  $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/iconActivityStream.png" /></div></td>';
   $msg .= '<td><div style="float:left;">'.i18n ( 'sectionNote' ).'</div></td>';
-  $msg .= '</tr></table>'.$sectionEnd;
+  $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
   $note = new Note ();
   $notes = $note->getSqlElementsFromCriteria ( array('refType' => get_class ( $this ), 'refId' => $this->id), false, null, 'id desc' );
   foreach ( $notes as $note ) {
