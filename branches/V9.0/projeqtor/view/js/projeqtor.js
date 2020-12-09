@@ -6189,10 +6189,14 @@ function switchActivityStreamListShowClosed() {
   var oldValue=dojo.byId('activityStreamShowClosed').value;
   if (oldValue==1) {
     dojo.byId('activityStreamShowClosed').value=0;
-    dojo.byId('activityStreamShowClosedCheck').style.display='none';
+    if(dojo.byId('activityStreamShowClosedCheck')){
+      dojo.byId('activityStreamShowClosedCheck').style.display='none';
+    }
   } else {
     dojo.byId('activityStreamShowClosed').value=1;
-    dojo.byId('activityStreamShowClosedCheck').style.display='inline-block';
+    if(dojo.byId('activityStreamShowClosedCheck')){
+      dojo.byId('activityStreamShowClosedCheck').style.display='inline-block';
+    }
   }
   setTimeout("refreshActivityStreamList();", 100);
 }
@@ -6201,10 +6205,14 @@ function switchActivityStreamListAddedRecently() {
   var oldValue=dojo.byId('activityStreamAddedRecently').value;
   if (oldValue=="added") {
     dojo.byId('activityStreamAddedRecently').value="";
-    dojo.byId('activityStreamAddedRecentlyCheck').style.display='none';
+    if(dojo.byId('activityStreamAddedRecentlyCheck')){
+      dojo.byId('activityStreamAddedRecentlyCheck').style.display='none';
+    }
   } else {
     dojo.byId('activityStreamAddedRecently').value="added";
-    dojo.byId('activityStreamAddedRecentlyCheck').style.display='inline-block';
+    if(dojo.byId('activityStreamAddedRecentlyCheck')){
+      dojo.byId('activityStreamAddedRecentlyCheck').style.display='inline-block';
+    }
   }
   setTimeout("refreshActivityStreamList();", 100);
 }
@@ -6214,10 +6222,14 @@ function switchActivityStreamListUpdatedRecently() {
   var oldValue=dojo.byId('activityStreamUpdatedRecently').value;
   if (oldValue=="updated") {
     dojo.byId('activityStreamUpdatedRecently').value="";
-    dojo.byId('activityStreamUpdatedRecentlyCheck').style.display='none';
+    if(dojo.byId('activityStreamUpdatedRecentlyCheck')){
+      dojo.byId('activityStreamUpdatedRecentlyCheck').style.display='none';
+    }
   } else {
     dojo.byId('activityStreamUpdatedRecently').value="updated";
-    dojo.byId('activityStreamUpdatedRecentlyCheck').style.display='inline-block';
+    if(dojo.byId('activityStreamUpdatedRecentlyCheck')){
+      dojo.byId('activityStreamUpdatedRecentlyCheck').style.display='inline-block';
+    }
   }
 }
 
@@ -6225,10 +6237,14 @@ function showOnlyNoteStream(){
   val=dojo.byId('showOnlyNotesValue').value;
   if(val=='NO'){
     val="YES";
-    dojo.byId('showOnlyNotes').style.display='inline-block';
+    if(dojo.byId('showOnlyNotes')){
+      dojo.byId('showOnlyNotes').style.display='inline-block';
+    }
   }else{
     val="NO";
-    dojo.byId('showOnlyNotes').style.display='none';
+    if(dojo.byId('showOnlyNotes')){
+      dojo.byId('showOnlyNotes').style.display='none';
+    }
   }
   dojo.byId('showOnlyNotesValue').value=val;
   saveUserParameter('showOnlyNotes',val);
