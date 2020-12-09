@@ -149,7 +149,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
                             pPriority, pPlanningMode,
                             pStatus,pHealthStatus,pQualityLevel,pTrend,pOverallProgress, pType, 
                             pValidatedCost, pAssignedCost, pRealCost, pLeftCost, pPlannedCost,
-                            pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes,pDurationContract) {
+                            pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes,pDurationContract,pElementIdRef) {
   var vID    = pID;
   var vName  = pName;
   var vId	 = pId;
@@ -206,6 +206,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   var vIsOnCriticalPath=pIsOnCriticalPath;
   var vGlobal='notSet';
   var vDurationContract=pDurationContract;
+  var vElementIdRef=pElementIdRef;
   
   
   vStart = JSGantt.parseDateStr(pStart,g.getDateInputFormat());
@@ -297,7 +298,8 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   this.getResource = function(){ if(vRes) return vRes; else return '&nbsp';  };
   this.getCompVal  = function(){ if(vComp) return vComp; else return 0; };
   this.getCompStr  = function(){ if(vComp) return vComp+'%'; else return '0%'; };
-  this.getDurationContract =function(){ return vDurationContract; };
+  this.getDurationContract = function(){ return vDurationContract; };
+  this.getElementIdRef = function(){ return vElementIdRef;}
   this.getDuration = function(vFormat){ 
     if (vMile) { 
       vDuration = '-';
@@ -1572,7 +1574,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	            + ' width:' + vBarWidth + 'px" '
 	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
 	            + 'onmouseout="hideResizerGanttBar ('+vID+')"'
-	            +'onMouseover ="handleResizeGantBAr('+vID+')"' 
+	            +'onMouseover ="handleResizeGantBAr('+vID+', '+vTaskList[i].gvTaskList[i].etElementIdRef()+')"'
 	            +'>'; 
 
             vRightTableTempMeeting += ' <div class="ganttTaskrowBarComplete"  '

@@ -1,4 +1,5 @@
 {
+ projeqtorIntroducoryText: "",
 aboutMenuInterrogation: "About",
 aboutMessage: "ProjeQtOr 소개…",
 aboutMessageLocale: "로컬",
@@ -4943,6 +4944,7 @@ week: "주",
 weekEndLabel: "까지",
 weekStartLabel: "로 부터",
 welcomeMessage: "환영합니다",
+welcomeOnProjeQtOr: "Welcome to ProjeQtor.",
 whereClause: "Where 절",
 WhereFieldWithoutTableOrTableWithoutField: "필드가없는 테이블 또는 테이블이 없는 필드",
 whose: "whose",

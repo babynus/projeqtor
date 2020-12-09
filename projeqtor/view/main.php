@@ -896,7 +896,6 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     <?php if(isNewGui()){
       $isMenuLeftOpen=Parameter::getUserParameter('isMenuLeftOpen');
       if($isMenuLeftOpen=='')$isMenuLeftOpen='true';
-      debugLog($isMenuLeftOpen);
       ?>
     <div id="menuTop" class="menuTop">
       <div id="globalTopCenterDiv" class="container" region="center" dojoType="dijit.layout.BorderContainer" liveSplitters="false">

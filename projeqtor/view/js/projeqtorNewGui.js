@@ -87,7 +87,6 @@ var defaultMenu=null;
       this.menuRight=dojo.byId('menuBarVisibleDiv');
       this.trigger = dojo.byId( 'hideStreamNewGui' );
       this.isMenuOpen =dojo.byId('isMenuLeftOpen').value; //replace to datatsession;
-      console.log(this.isMenuOpen);
       //divButton
       this.hidStreamButtonTopBar= document.createElement('div');
       this.hidStreamButtonTopBar.className = 'hideStreamNewGuiTopBar';
@@ -170,7 +169,6 @@ var defaultMenu=null;
      },
     
     _resizeDiv : function(globalWidth){
-      console.log(this.isMenuOpen=='true');
       var duration=300;
         dojox.fx.combine([ dojox.fx.animateProperty({
           node : "menuTop",

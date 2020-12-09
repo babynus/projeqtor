@@ -1,4 +1,5 @@
 {
+ projeqtorIntroducoryText: "",
 aboutMenuInterrogation: "About",
 aboutMessage: "درباره پروژکتور",
 aboutMessageLocale: "محلی",
@@ -4943,6 +4944,7 @@ week: "هفته",
 weekEndLabel: "until",
 weekStartLabel: "from the",
 welcomeMessage: "خوش آمدید",
+welcomeOnProjeQtOr: "Welcome to ProjeQtor.",
 whereClause: "where clause",
 WhereFieldWithoutTableOrTableWithoutField: "Where field without table or table without field",
 whose: "whose",
