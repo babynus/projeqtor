@@ -162,7 +162,7 @@ $firstColor= getTheme();
             ?> 
             <?php if(!isNewGui())echo '<br/>'?>
             <br/>
-            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar();',20);" class="input rounded"  style="color:#000000;<?php echo (isNewGui())?'border:unset !important;width:450px;':'padding:10px;margin-left:15px;';?>">
+            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar();',20);" class="input rounded"  style="color:#000000;<?php echo (isNewGui())?'border:unset !important;width:440px;':'padding:10px;margin-left:15px;';?>">
               <?php if (isNewGui()) echo '<div class="loginDivContainer container" style="margin-bottom:15px;">';?>
               <label class="label" style="<?php echo (isNewGui())?"position: relative;text-align:center;width:180px;margin-top: 4px;":"width:150px;";?>;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
@@ -177,7 +177,7 @@ $firstColor= getTheme();
               <input type="password" pwType="verify" class="input rounded"  style="color:#000000;">
               <?php if(isNewGui()){
                  echo  '</div>';
-                 echo '<div class="iconView imageColorNewGui iconSize22" style="cursor:pointer;float:right;position:relative;top:8px;margin-right:14px;" 
+                 echo '<div class="iconView imageColorNewGui iconSize22" style="cursor:pointer;float:right;position:relative;top:8px;margin-right:8px;" 
                        onClick="changePaswordType();" ></div>';
                  echo '</div>';
                }?>
