@@ -248,7 +248,7 @@ if(!isNewGui()){
 			
 			<td valign="top" width="15%">
          <table ><tr><td>
-          <div title=" <?php echo i18n('refresh');?>" style="position:absolute;top:80px;" class="imageColorNewGui" onClick="refreshActivityStreamList();"><?php echo formatBigButton('Refresh');?></div>
+          <div title=" <?php echo i18n('paramRefreshUpdates');?>" style="position:absolute;top:80px;" class="imageColorNewGui" onClick="refreshActivityStreamList();"><?php echo formatBigButton('Refresh');?></div>
           <div class="iconSize32 iconEraser  imageColorNewGui" title=" <?php echo i18n('activityStreamResetParameters');?>" style="cursor:pointer;position:absolute;top:80px;left:60px;"  onClick="resetActivityStreamListParameters();refreshActivityStreamList();"></div>
          </td></tr></table>
        </td>   
@@ -258,7 +258,7 @@ if(!isNewGui()){
 					<table>
 						<tr>
 						  <td > <div style="writing-mode: vertical-rl; transform: rotate(180deg);border-left:1px solid;margin-right:10px;">
-						  <strong><?php echo i18n('filterOnElementActivityStream')?></strong> </div>
+						  <strong><?php echo ucfirst(i18n('filterOnElementActivityStream'));?></strong> </div>
 						  </td>
 						  <td>
 						    <table>
@@ -372,7 +372,7 @@ if(!isNewGui()){
         					
         				  <tr>
         						<td style="width:10%;white-space:nowrap;" align="right">
-        							<?php echo ucfirst(i18n('display'));?>&nbsp;
+        							<?php echo ucfirst(i18n('since'));?>&nbsp;
         						</td>
         						<td align="left">		
                       <div style="width:30px;<?php if (!isNewGui()) echo 'font-size:8pt;';?>" class="filterField rounded" dojoType="dijit.form.TextBox" value="<?php echo $activityStreamNumberDays;?>"
@@ -380,7 +380,7 @@ if(!isNewGui()){
                       </div>
                    </td>
                    <td style="width:10%;white-space:nowrap;" align="right">
-        							<?php echo ucfirst(i18n('days'));?>&nbsp;
+        							<?php echo i18n('days');?>&nbsp;
         						</td>
                    </tr>
                 
@@ -413,7 +413,7 @@ if(!isNewGui()){
 			 <tr style="margin-top:10px;">
         <input type="hidden" id="showOnlyNotesValue" name="showOnlyNotesValue" value="<?php echo $showOnlyNotes;?>" /> 
          <td  style="padding:10px;white-space:nowrap;" align="right">
-           <?php echo i18n("showOnlyNotes");?>
+           <?php echo ucfirst(i18n("showOnlyNotes"));?>
            <?php $displayShowOnlyNotes=($showOnlyNotes=='YES')?'inline-block':'none';?>
         </td>
         <td style="text-align:left;">
