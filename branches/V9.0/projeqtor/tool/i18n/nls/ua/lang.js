@@ -4593,6 +4593,7 @@ showTickets: "відобразити виправлення (tickets) прив'�
 showVersionsForAll: "показати версії для всієї структури",
 showWbs: "показати СДР (WBS) з ім'ям",
 showWork: "відобразити дані по роботі",
+since: "since",
 singleIcon: "тільки іконки",
 Situation: "Financial situation",
 situationRight: "Can update financial situations",
