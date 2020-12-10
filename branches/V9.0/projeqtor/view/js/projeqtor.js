@@ -7752,16 +7752,20 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
                      startX,  
                        startWidth,
                          dateStart='',
-                           dateEnd='';
+                           dateEnd='',
+                           divVisibleStartDateChange=dojo.byId('divStartDateResize_'+id),
+                             divVisibleEndDateChange=dojo.byId('divEndDateResize_'+id);
   
   if(!resizerStart && !resizerEnd)return;
   if(resizerStart){
     resizerStart.style.display="block";
+    divVisibleStartDateChange.style.display="block";
     resizerStart.addEventListener('mousedown', initDragStart, false);
   }
   
   if(resizerEnd){
     resizerEnd.style.display="block";
+    divVisibleEndDateChange.style.display="block";
     resizerEnd.addEventListener('mousedown', initDragEnd, false);
   }
   
@@ -7795,6 +7799,7 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
     endDate=minDate+((((left/dayWidth)+duration)*(24 * 60 * 60 * 1000)));
     dateStart = new Date(startDate);
     dateEnd = new Date(endDate);
+    divVisibleStartDateChange.innerHTML=JSGantt.formatDateStr(dateStart,dateFormat);
   }
 
   function doDragEnd(e) {
@@ -7809,6 +7814,7 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
     endDate=minDate+((((left/dayWidth)+duration)*(24 * 60 * 60 * 1000)));
     dateStart = new Date(startDate);
     dateEnd = new Date(endDate);
+    divVisibleEndDateChange.innerHTML=JSGantt.formatDateStr(dateEnd,dateFormat);
   }
 
   function stopDrag(e) {
@@ -7816,9 +7822,12 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
       if(resizerEnd)document.documentElement.removeEventListener('mousemove', doDragEnd, false);   
       document.documentElement.removeEventListener('mouseup', stopDrag, false);
       setTimeout('isResizingGanttBar=false;',500);
-      saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration);
+      //saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration);
       if(resizerEnd)resizerEnd.style.display="none";
+      if(resizerEnd)divVisibleEndDateChange.style.display="none";
+      if(resizerStart)divVisibleStartDateChange.style.display="none";
       if(resizerStart)resizerStart.style.display="none";
+      
   }
   
 }

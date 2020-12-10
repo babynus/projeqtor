@@ -1406,12 +1406,6 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           vTaskRight = (Date.parse(vTmpEnd) - Date.parse(vTaskStart)) / (24 * 60 * 60 * 1000) + 1 ;
           vTaskLeft = Math.ceil((Date.parse(vTaskStart) - Date.parse(vMinDate)) / (24 * 60 * 60 * 1000) );
           vTaskLeft = vTaskLeft - 1;
-          console.log("=========================================");
-          console.log(Date.parse(vMinDate));
-          console.log(vMinDate);// à ajouter 
-          console.log(vMaxDate);
-          console.log(vTaskLeft);
-          console.log("=========================================");
           var vBarLeft=Math.ceil(vTaskLeft * (vDayWidth));
           var vBarWidth=Math.ceil((vTaskRight) * (vDayWidth) );
           //if (vBarWidth<10) vBarWidth=10;
@@ -1631,12 +1625,14 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                   || vTaskList[i].getIdPlanningMode()=='11' || vTaskList[i].getIdPlanningMode()=='12' || vTaskList[i].getIdPlanningMode()=='13' ){
     	            // handle resizer start=======================
     	            vRightTableTempMeeting +='<div class="resizerStart" id="taskbar_'+vID+'ResizerStart" style="display:none;" ></div>';
+    	            vRightTableTempMeeting +='<div class="divDateGantBarResizeleft" id="divStartDateResize_'+vID+'" style="display:none;" >'+JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat)+'</div>';
     	            //===========================
   	        	  }
   	        	  if(vTaskList[i].getIdPlanningMode()=='2'  ||  vTaskList[i].getIdPlanningMode()=='20' || vTaskList[i].getIdPlanningMode()=='3' || vTaskList[i].getIdPlanningMode()=='7' || vTaskList[i].getIdPlanningMode()=='10'
   	        	    || vTaskList[i].getIdPlanningMode()=='11' || vTaskList[i].getIdPlanningMode()=='12' || vTaskList[i].getIdPlanningMode()=='13' || vTaskList[i].getIdPlanningMode()=='8'){
                   // handle resizer end=======================
                   vRightTableTempMeeting +='<div class="resizerEnd " id="taskbar_'+vID+'ResizerEnd" style="display:none;" ></div>';
+                  vRightTableTempMeeting +='<div class="divDateGantBarResizeRight" id="divEndDateResize_'+vID+'" style="display:none;">'+JSGantt.formatDateStr(vTaskEnd,vDateDisplayFormat)+'</div>';
                   //===========================
   	        	  }
   	        	  vRightTableTempMeeting += ' </div>';	        	
