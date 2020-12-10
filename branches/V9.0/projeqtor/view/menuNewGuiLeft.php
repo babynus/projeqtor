@@ -342,7 +342,6 @@ function getPlugins (){
         if(in_array($val->id, $plInstal)){
           $idPinstal=$plInstalVersion[$val->id];
           if($val->version!=$idPinstal){
-               debugLog($val->id."/".$idPinstal);
               $asNotif=SqlElement::getSingleSqlElementFromCriteria('Notification', array("idPluginIdVersion" => "".$val->id."/".$idPinstal.""));
               if($asNotif->id==''){
                 $notif=new Notification();
@@ -355,7 +354,6 @@ function getPlugins (){
                 $notif->notificationDate=date("Y-m-d");
                 $notif->idStatusNotification = 1;
                 $notif->title=i18n('newPluginVersion',array((($lang=='fr')?$val->nameFr:$val->nameEn)));
-                debugLog($val->id."/".$idPinstal);
                 $notif->idPluginIdVersion=$val->id."/".$idPinstal;
                 $res=$notif->save();
               }
