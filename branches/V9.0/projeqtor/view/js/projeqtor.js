@@ -7835,10 +7835,11 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
 function hideResizerGanttBar (vID) {
   if(isResizingGanttBar==false && dojo.byId('taskbar_'+vID+'ResizerEnd')){
     dojo.byId('taskbar_'+vID+'ResizerEnd').style.display='none';
+    dojo.byId('divEndDateResize_'+vID).style.display='none';
   }
-  
   if(isResizingGanttBar==false && dojo.byId('taskbar_'+vID+'ResizerStart')){
     dojo.byId('taskbar_'+vID+'ResizerStart').style.display='none';
+    dojo.byId('divStartDateResize_'+vID).style.display='none';
   }
 }
 
