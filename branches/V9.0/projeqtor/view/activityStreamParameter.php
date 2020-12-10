@@ -43,6 +43,8 @@ if(!$activityStreamNumberDays){
   $activityStreamNumberDays="7";
 }
 $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
+
+if(!isNewGui()){
 ?>
 <table width="100%">
 	<tr height="32px">
@@ -229,3 +231,220 @@ $inputWidth=(RequestHandler::getValue('destinationWidth')<1000)?100:150;
 		</table>
 	</form>
 </div>
+<?php }else{ ?>
+<table width="100%">
+	<tr height="32px">
+		<td width="50px" <?php if (isNewGui()) echo 'style="position:relative;top:2px;"';?> align="center"><?php echo formatIcon('ActivityStream', 32, null, true);?></td>
+		<td><span class="title"><?php echo i18n('menuActivityStream');?>&nbsp;</span></td>
+	</tr>
+</table>
+
+<div style="width: 100%; margin: 0 auto; height: <?php echo (isNewGui())?'90':'90';?>px; padding-bottom: 2px; border-bottom: 1px solid #CCC;background-color:#FFFFFF">
+  <form id="activityStreamForm" name="activityStreamForm">
+		<table width="100%"  style="margin-left:10px;<?php if (isNewGui()) echo 'position:relative;top:-29px;';?>">
+			<tr>
+			
+			
+			
+			<td valign="top" width="15%">
+         <table ><tr><td>
+          <div title=" <?php echo i18n('refresh');?>" style="position:absolute;top:80px;" class="imageColorNewGui" onClick="refreshActivityStreamList();"><?php echo formatBigButton('Refresh');?></div>
+          <div class="iconSize32 iconEraser  imageColorNewGui" title=" <?php echo i18n('activityStreamResetParameters');?>" style="cursor:pointer;position:absolute;top:80px;left:60px;"  onClick="resetActivityStreamListParameters();refreshActivityStreamList();"></div>
+         </td></tr></table>
+       </td>   
+			
+			
+				<td valign="top" width="25%">
+					<table>
+						<tr>
+						  <td > <div style="writing-mode: vertical-rl; transform: rotate(180deg);border-left:1px solid;margin-right:10px;">
+						  <strong><?php echo i18n('filterOnElementActivityStream')?></strong> </div>
+						  </td>
+						  <td>
+						    <table>
+						    <tr>
+						      <td style="width:10%;" align="right">
+      			       <?php echo ucfirst(i18n('colType'));?>&nbsp;&nbsp;
+      			     </td>
+      			     <td align="left" style="margin-top:10px;width:<?php echo $inputWidth;?>px;">
+        			     <select title="<?php echo i18n('filterOnElement')?>" type="text" class="filterField roundedLeft inputParameter" dojoType="dijit.form.FilteringSelect"
+                        <?php echo autoOpenFilteringSelect();?> style="width:<?php echo $inputWidth;?>px;"
+                        id="activityStreamTypeNote" name="activityStreamTypeNote">
+                          <?php 
+                            $selectedElementType=Parameter::getUserParameter('activityStreamElementType');
+                            htmlDrawOptionForReference('idImportable', $selectedElementType, null, false); ?>
+                          <script type="dojo/method" event="onChange" >
+                          refreshActivityStreamList();
+                          activityStreamTypeRead();
+                        </script>
+                  </select>
+        			 </td>
+        			 <td align="right" style="width:5%;">
+        			   <?php echo ucfirst(i18n('colId'));?>&nbsp;&nbsp;
+        			 </td>
+        			 <td align="left" style="padding-right:20px;">
+                      <div style="width:30px;font-size:8pt;" class="filterField rounded" dojoType="dijit.form.TextBox" value="<?php echo $activityStreamIdNote;?>"
+                       type="text" id="activityStreamIdNote" name="activityStreamIdNote" onChange="refreshActivityStreamList();" <?php echo (trim($selectedElementType)=="")?"readonly=readonly":"";?>>
+                      </div>
+                </td>
+  						</tr>
+  						<tr>						  
+  							<td style="width:10%" align="right">
+  							 <?php echo ucfirst(i18n('colIdAuthor'));?>&nbsp;&nbsp;
+  							</td>
+  							<td align="left" style="margin-top:10px;padding-right:20px">
+  							  <select title="<?php echo i18n('filterOnAuthor')?>" type="text" class="filterField roundedLeft inputParameter" dojoType="dijit.form.FilteringSelect"
+                  <?php echo autoOpenFilteringSelect();?> style="width:<?php echo $inputWidth;?>px;"
+                  id="activityStreamAuthorFilter" name="activityStreamAuthorFilter" >
+                    <?php 
+                      $selectedAuthor=Parameter::getUserParameter('activityStreamAuthorFilter');
+                      if ($selectedAuthor==' ') $selectedAuthor=null;
+                      htmlDrawOptionForReference('idUser', $selectedAuthor); ?>
+                    <script type="dojo/method" event="onChange" >
+                    refreshActivityStreamList();
+                  </script>
+                  </select>
+  							</td>
+  					  </tr>
+  					  <tr style="height:2px;"></tr>
+  					  <tr>
+  					   <td align="right">
+  							 <?php echo ucfirst(i18n('Team'));?>&nbsp;&nbsp;
+  						 </td>
+  						 <td align="left" style="padding-right:20px">
+  							  <select title="<?php echo i18n('filterOnTeam')?>" type="text" class="filterField roundedLeft inputParameter" dojoType="dijit.form.FilteringSelect"
+                  <?php echo autoOpenFilteringSelect();?> style="width:<?php echo $inputWidth;?>px;"
+                  id="activityStreamTeamFilter" name="activityStreamTeamFilter" >
+                    <?php 
+                      $selectedTeam=Parameter::getUserParameter('activityStreamTeamFilter');
+                      if ($selectedTeam==' ') $selectedTeam=null;
+                      htmlDrawOptionForReference('idTeam', $selectedTeam, null, false); ?>
+                    <script type="dojo/method" event="onChange" >
+                    refreshActivityStreamList();
+                  </script>
+                  </select>
+  						 </td>
+  						 </tr>
+						  </table>
+						  
+						  </td>
+						</tr>
+					</table>
+				</td>
+				
+       <td valign="top" width="20%">
+        <table>
+          <input type="hidden" id="activityStreamAddedRecently" name="activityStreamAddedRecently" value="<?php echo $addedRecently;?>" />   
+          <input type="hidden" id="activityStreamUpdatedRecently" name="activityStreamUpdatedRecently" value="<?php echo $updatedRecently;?>" /> 
+						<tr>
+						  <td> <div style="writing-mode: vertical-rl; transform: rotate(180deg);border-left:1px solid;">
+						  <strong><?php echo i18n('filterOnDate')?></strong> </div>
+						  </td>
+						  <td>
+						    <table>
+						      <tr>
+                  <td  style="padding:10px;white-space:nowrap;text-align:right;">
+                     <?php echo i18n("dashboardTicketMainAddedRecently");?>&nbsp;&nbsp;&nbsp;&nbsp;
+                     <?php $displayAddedRecentlyCheck=($addedRecently)?'inline-block':'none';?>
+                  </td>
+                  <td style="text-align:left;">
+                  <div  id="listIdFilterQuickSw" name="listIdFilterQuickSw" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayAddedRecentlyCheck=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
+                  <script type="dojo/method" event="onStateChanged" >
+                    switchActivityStreamListAddedRecently();refreshActivityStreamList();
+                  </script>
+                  </div>
+                </td>
+                </tr>
+                
+        			  <tr>
+        						<td style="padding:10px;white-space:nowrap;text-align:right;">
+        							   <?php echo i18n("dashboardTicketMainUpdatedRecently");?>
+        							   <?php $displayUpdatedRecentlyCheck=($updatedRecently)?'inline-block':'none';?>
+        						</td>
+        					  <td style="text-align:left;">
+                  <div  id="listIdFilterQuickSw1" name="listIdFilterQuickSw1" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayUpdatedRecentlyCheck=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
+                    <script type="dojo/method" event="onStateChanged" >
+                    switchActivityStreamListUpdatedRecently();refreshActivityStreamList();
+                  </script>
+                  </div>
+                </td>
+        					</tr>
+        					
+        				  <tr>
+        						<td style="width:10%;white-space:nowrap;" align="right">
+        							<?php echo ucfirst(i18n('display'));?>&nbsp;
+        						</td>
+        						<td align="left">		
+                      <div style="width:30px;<?php if (!isNewGui()) echo 'font-size:8pt;';?>" class="filterField rounded" dojoType="dijit.form.TextBox" value="<?php echo $activityStreamNumberDays;?>"
+                       type="text" id="activityStreamNumberDays" name="activityStreamNumberDays" onChange="refreshActivityStreamList();">
+                      </div>
+                   </td>
+                   <td style="width:10%;white-space:nowrap;" align="right">
+        							<?php echo ucfirst(i18n('days'));?>&nbsp;
+        						</td>
+                   </tr>
+                
+             </td>
+						</tr>
+					</table>
+            
+          </tr>		
+				</table>
+       </td>
+       
+       <td valign="top" width="20%">
+       <table>
+       <input type="hidden" id="activityStreamShowClosed" name="activityStreamShowClosed" value="<?php echo $showClosed;?>" />
+       	<tr>
+  			  <td align="right" style="padding:10px;white-space:nowrap;">
+  				    <?php echo ucfirst(i18n("labelShowIdle"));?>
+  				  <?php $displayShowClosedCheck=($showClosed)?'inline-block':'none';?>
+  				</td>
+  		    <td style="text-align:left;">
+          <div  id="listIdFilterQuickSw2" name="listIdFilterQuickSw2" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayShowClosedCheck=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
+            <script type="dojo/method" event="onStateChanged" >
+              switchActivityStreamListShowClosed();refreshActivityStreamList();
+            </script>
+          </div>
+        </td>
+  				
+  				
+			 </tr>
+			 <tr style="margin-top:10px;">
+        <input type="hidden" id="showOnlyNotesValue" name="showOnlyNotesValue" value="<?php echo $showOnlyNotes;?>" /> 
+         <td  style="padding:10px;white-space:nowrap;" align="right">
+           <?php echo i18n("showOnlyNotes");?>
+           <?php $displayShowOnlyNotes=($showOnlyNotes=='YES')?'inline-block':'none';?>
+        </td>
+        <td style="text-align:left;">
+          <div  id="listIdFilterQuickSw3" name="listIdFilterQuickSw3" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayShowOnlyNotes=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
+            <script type="dojo/method" event="onStateChanged" >
+              showOnlyNoteStream();
+            </script>
+          </div>
+        </td>
+       </tr>
+       <tr>
+  		  <td align="left" style="width:10%;white-space:nowrap;">
+  			 <?php echo i18n("limitDisplayActivityStream");?>&nbsp;
+  			</td>
+  			<td align="left" style="margin-top:10px;padding-right:20px;">
+  				<select title="<?php echo i18n('limitDisplayActivityStream')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect" required
+  				        value="<?php echo ($activityStreamNumberElement!='')?$activityStreamNumberElement:'100';?>" 
+                        <?php echo autoOpenFilteringSelect(); ?> 
+                      id="activityStreamNumberElement" name="activityStreamNumberElement" style="width:80px;margin-left:16px;<?php if (!isNewGui()) echo 'height:20px;font-size:8pt;';?>" onChange="refreshActivityStreamList();">
+                        <option value="10">10</option>
+                        <option value="50">50</option>
+                        <option value="100" >100</option>
+                        <option value="200" >200</option>
+  		     </select>
+  		  </td>
+			 </tr>
+       </table>
+       </td>
+       
+			</tr>
+		</table>
+	</form>
+</div>
+<?php } ?>
