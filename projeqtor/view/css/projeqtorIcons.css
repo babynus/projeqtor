@@ -289,11 +289,11 @@
 .ProjeQtOrFlatRed .iconAdd { background-image: url(customIcons/red/iconAdd.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconAdd { background-image: url(customIcons/new/iconAdd.svg);  background-repeat: no-repeat; }
 
-.iconAdministration { background-image: url(images/iconAdmin32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconAdministration { background-image: url(customIcons/blue/iconAdministration.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconAdministration { background-image: url(customIcons/green/iconAdministration.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconAdministration { background-image: url(customIcons/grey/iconAdministration.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconAdministration { background-image: url(customIcons/red/iconAdministration.png);  background-repeat: no-repeat; }
+.iconAdministration { background-image: url(customIcons/new/iconAdministration.svg);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconAdministration { background-image: url(customIcons/new/iconAdministration.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconAdministration { background-image: url(customIcons/new/iconAdministration.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconAdministration { background-image: url(customIcons/new/iconAdministration.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconAdministration { background-image: url(customIcons/new/iconAdministration.svg);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconAdministration { background-image: url(customIcons/new/iconAdministration.svg);  background-repeat: no-repeat; }
 
 .iconAdmin { background-image: url(images/iconAdmin32.png);  background-repeat: no-repeat;  }
@@ -1133,6 +1133,13 @@
 .ProjeQtOrFlatRed .iconExpenseDetailType { background-image: url(customIcons/red/iconExpenseDetailType.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconExpenseDetailType { background-image: url(customIcons/new/iconExpenseDetailType.svg);  background-repeat: no-repeat; }
 
+.iconEraser { background-image: url(customIcons/new/iconEraser.svg);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconEraser { background-image: url(customIcons/new/iconEraser.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconEraser { background-image: url(customIcons/new/iconEraser.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconEraser { background-image: url(customIcons/new/iconEraser.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconEraser { background-image: url(customIcons/new/iconEraser.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconEraser { background-image: url(customIcons/new/iconEraser.svg);  background-repeat: no-repeat; }
+
 /* inexistante dans thème standard */
 .iconError { background-image: url(images/iconError.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconError { background-image: url(customIcons/blue/iconError.png);  background-repeat: no-repeat; }
@@ -1186,6 +1193,13 @@
 .ProjeQtOrFlatGrey .iconFinancial { background-image: url(customIcons/grey/iconFinancial.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconFinancial { background-image: url(customIcons/red/iconFinancial.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconFinancial { background-image: url(customIcons/new/iconFinancial.svg);  background-repeat: no-repeat; }
+
+.iconFinancialModule {  background-image: url(customIcons/new/iconFinancial.svg);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconFinancialModule { background-image: url(customIcons/new/iconFinancial.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconFinancialModule { background-image: url(customIcons/new/iconFinancial.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconFinancialModule { background-image: url(customIcons/new/iconFinancial.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconFinancialModule { background-image: url(customIcons/new/iconFinancial.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconFinancialModule { background-image: url(customIcons/new/iconFinancial.svg);  background-repeat: no-repeat; }
 
 .iconFixed { background-image: url(images/iconFixed.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconFixed { background-image: url(customIcons/blue/iconFixed.png);  background-repeat: no-repeat; }
@@ -1940,6 +1954,13 @@
 .ProjeQtOrFlatRed .iconPeriod { background-image: url(customIcons/red/iconPeriod.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconPeriod { background-image: url(customIcons/new/iconPeriod.svg);  background-repeat: no-repeat;}
 
+.iconPeriodModule { background-image: url(customIcons/new/iconPeriod.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconPeriodModule { background-image: url(customIcons/new/iconPeriod.svg);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGreen .iconPeriodModule { background-image: url(customIcons/new/iconPeriod.svg);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGrey .iconPeriodModule { background-image: url(customIcons/new/iconPeriod.svg);  background-repeat: no-repeat;}
+.ProjeQtOrFlatRed .iconPeriodModule { background-image: url(customIcons/new/iconPeriod.svg);  background-repeat: no-repeat;}
+.ProjeQtOrNewGui .iconPeriodModule { background-image: url(customIcons/new/iconPeriod.svg);  background-repeat: no-repeat;}
+
 .iconPeriodicMeeting { background-image: url(images/iconPeriodicMeeting32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconPeriodicMeeting { background-image: url(customIcons/blue/iconPeriodicMeeting.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconPeriodicMeeting { background-image: url(customIcons/green/iconPeriodicMeeting.png);  background-repeat: no-repeat;}
@@ -1975,6 +1996,13 @@
 .ProjeQtOrFlatGrey .iconPlanning { background-image: url(customIcons/grey/iconPlanning.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconPlanning { background-image: url(customIcons/red/iconPlanning.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconPlanning { background-image: url(customIcons/new/iconPlanning.svg);  background-repeat: no-repeat; }
+
+.iconPlanningModule { background-image: url(customIcons/new/iconPlanning.svg);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconPlanningModule { background-image: url(customIcons/new/iconPlanning.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconPlanningModule { background-image: url(customIcons/new/iconPlanning.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconPlanningModule { background-image: url(customIcons/new/iconPlanning.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconPlanningModule { background-image: url(customIcons/new/iconPlanning.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconPlanningModule { background-image: url(customIcons/new/iconPlanning.svg);  background-repeat: no-repeat; }
 
 .iconPlugin { background-image: url(images/iconPlugin32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconPlugin { background-image: url(customIcons/blue/iconPlugin.png);  background-repeat: no-repeat;}
@@ -2475,6 +2503,13 @@
 .ProjeQtOrFlatGrey .iconSteering { background-image: url(customIcons/grey/iconReview.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatRed .iconSteering { background-image: url(customIcons/red/iconReview.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconSteering { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat; }
+
+.iconSteeringModule { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconSteeringModule { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGreen .iconSteeringModule { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGrey .iconSteeringModule { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat;}
+.ProjeQtOrFlatRed .iconSteeringModule { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat;}
+.ProjeQtOrNewGui .iconSteeringModule { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat; }
 
 .iconSum32 { background-image: url(images/iconSum.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconSum { background-image: url(customIcons/blue/iconSum.png);  background-repeat: no-repeat;}
