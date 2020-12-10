@@ -4214,3 +4214,27 @@ width: 20px;
   background-color: transparent;
   opacity: 1;
 }
+
+.divDateGantBarResizeRight{
+	border: 1px solid black;
+	background:white;
+    width: 80px;
+    height: 13px;
+    top: -22px;
+    right: -40px;
+    text-align: center;
+    font-size: 11px;
+    position: absolute;
+}
+
+.divDateGantBarResizeleft{
+	border: 1px solid black;
+	background:white;
+	width: 80px;
+    height: 13px;
+    top: -22px;
+    left: -40px;
+    text-align: center;
+    font-size: 11px;
+    position: absolute;	
+}
