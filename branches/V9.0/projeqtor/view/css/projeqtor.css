@@ -4194,6 +4194,7 @@ width: 20px;
     cursor: e-resize;
     background-image: url(customIcons/new/iconRightGantt.png);
     background-repeat: no-repeat;
+    z-index:55000;
 }
 
 .resizerStart{
@@ -4204,4 +4205,5 @@ width: 20px;
     cursor: e-resize;
     background-image: url(customIcons/new/iconLeftGantt.png);
     background-repeat: no-repeat;
+    z-index:55000;
 }

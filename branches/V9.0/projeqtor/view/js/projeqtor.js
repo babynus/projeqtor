@@ -1171,18 +1171,14 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           hideBigImage(); // Will avoid resident pop-up always displayed
           
           if (destination=='menuBarListDiv' || destination=='anotherBarContainer') {
-            console.log("destination="+destination);
             // Specific treatment for refreshMenuBarList.php and refreshMenuAnotherBarList.php so that they are cleared on the same time, to avoid blinking
-            if (destination=='menuBarListDiv') { menuBarListDivData=data; menuBarListDivCallback=callBackFunction; console.log("data from menuBarListDiv");} 
-            if (destination=='anotherBarContainer') { anotherBarContainerData=data; anotherBarContainerCallback=callBackFunction; console.log("data from anotherBarContainer");}
+            if (destination=='menuBarListDiv') { menuBarListDivData=data; menuBarListDivCallback=callBackFunction; } 
+            if (destination=='anotherBarContainer') { anotherBarContainerData=data; anotherBarContainerCallback=callBackFunction; }
             if (menuBarListDivData!=null && anotherBarContainerData!=null) {
               cleanContent('menuBarListDiv');
               cleanContent('anotherBarContainer');
-              console.log("cleaned both");
               dijit.byId('menuBarListDiv').set('content', menuBarListDivData);
-              console.log ('loaded menuBarListDiv');
               dijit.byId('anotherBarContainer').set('content', anotherBarContainerData);
-              console.log ('loaded anotherBarContainer');
               if (menuBarListDivCallback!=null) setTimeout(menuBarListDivCallback, 100);
               if (anotherBarContainerCallback!=null) setTimeout(anotherBarContainerCallback, 100);
               menuBarListDivData=null;
@@ -3477,7 +3473,7 @@ function drawGantt() {
           topId, pOpen, pDepend,
           pCaption, pClass, pScope, pRealEnd, pPlannedStart,
           item.validatedworkdisplay, item.assignedworkdisplay, item.realworkdisplay, item.leftworkdisplay, item.plannedworkdisplay,
-          item.priority, item.planningmode, 
+          item.priority,item.idplanningmode, item.planningmode, 
           item.status,pHealthStatus,pQualityLevel,pTrend,pOverallProgress, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
           item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, 
@@ -7741,15 +7737,22 @@ function displayCheckBoxDefinitionLine(){
 
 //=================================================================
 var isResizingGanttBar=false;
-function handleResizeGantBAr (id,element,refId,val){
+function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
+  id=id.trim();
   var barDiv=dojo.byId('bardiv_'+id),
    el = dojo.byId('taskbar_'+id),
-   width=0,
-   label=dojo.byId('labelBarDiv_'+id),
-      resizerStart =dojo.byId('taskbar_'+id+'ResizerStart'),
-      resizerEnd =dojo.byId('taskbar_'+id+'ResizerEnd'),
-        startX,  
-          startWidth;
+     width=0,
+       left=0,
+         startDate=0,
+           endDate=0,
+             duration=0,
+               label=dojo.byId('labelBarDiv_'+id),
+                 resizerStart =dojo.byId('taskbar_'+id+'ResizerStart'),
+                   resizerEnd =dojo.byId('taskbar_'+id+'ResizerEnd'),
+                     startX,  
+                       startWidth,
+                         dateStart='',
+                           dateEnd='';
   
   if(!resizerStart && !resizerEnd)return;
   if(resizerStart){
@@ -7784,8 +7787,14 @@ function handleResizeGantBAr (id,element,refId,val){
     el.style.width = startWidth +( startX - e.clientX) + 'px';
     label.style.left=labelLeft +( startX - e.clientX)+'px';
     barDiv.style.left = startLeft - ( startX - e.clientX)+'px';
-    width=startWidth +( startX - e.clientX);
     barDiv.style.width = startWidth +( startX - e.clientX)+ 'px';
+    width=startWidth +( startX - e.clientX);
+    left=barDiv.offsetLeft;
+    duration=Math.ceil(width/dayWidth)-1;
+    startDate=minDate+(((left/dayWidth)*(24 * 60 * 60 * 1000)));
+    endDate=minDate+((((left/dayWidth)+duration)*(24 * 60 * 60 * 1000)));
+    dateStart = new Date(startDate);
+    dateEnd = new Date(endDate);
   }
 
   function doDragEnd(e) {
@@ -7793,7 +7802,13 @@ function handleResizeGantBAr (id,element,refId,val){
     label.style.left=labelLeft +(e.clientX - startX)+'px';
     el.style.width = (startWidth + e.clientX - startX) + 'px';
     barDiv.style.width = (startWidth + e.clientX - startX) + 'px';
-    width=startWidth +(  e.clientX - startX);
+    width=startWidth + e.clientX - startX;
+    left=barDiv.offsetLeft;
+    duration=Math.ceil(width/dayWidth)-1;
+    startDate=minDate+(((left/dayWidth)*(24 * 60 * 60 * 1000)));
+    endDate=minDate+((((left/dayWidth)+duration)*(24 * 60 * 60 * 1000)));
+    dateStart = new Date(startDate);
+    dateEnd = new Date(endDate);
   }
 
   function stopDrag(e) {
@@ -7801,7 +7816,7 @@ function handleResizeGantBAr (id,element,refId,val){
       if(resizerEnd)document.documentElement.removeEventListener('mousemove', doDragEnd, false);   
       document.documentElement.removeEventListener('mouseup', stopDrag, false);
       setTimeout('isResizingGanttBar=false;',500);
-      //saveGanttElementResize(element, refId,width);
+      saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration);
       if(resizerEnd)resizerEnd.style.display="none";
       if(resizerStart)resizerStart.style.display="none";
   }
@@ -7809,7 +7824,6 @@ function handleResizeGantBAr (id,element,refId,val){
 }
 
 function hideResizerGanttBar (vID) {
-  
   if(isResizingGanttBar==false && dojo.byId('taskbar_'+vID+'ResizerEnd')){
     dojo.byId('taskbar_'+vID+'ResizerEnd').style.display='none';
   }
@@ -7817,4 +7831,17 @@ function hideResizerGanttBar (vID) {
   if(isResizingGanttBar==false && dojo.byId('taskbar_'+vID+'ResizerStart')){
     dojo.byId('taskbar_'+vID+'ResizerStart').style.display='none';
   }
+}
+
+function saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration){
+    dateStart=dateStart.toISOString().split("T")[0];
+    dateEnd=dateEnd.toISOString().split("T")[0];
+    
+  var param="?id="+id+"&object="+element+"&idObj="+refId+"&startDate="+dateStart+"&endDate="+dateEnd+"&duration="+duration;
+  dojo.xhrGet({
+    url : "../tool/savePlanningElementAfterResize.php"+param,
+    handleAs : "text",
+    load : function(data, args) {
+    },
+  });
 }
