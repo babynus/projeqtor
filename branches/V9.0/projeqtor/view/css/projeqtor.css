@@ -4183,7 +4183,7 @@ div.ticketKanbanCustom .kanbanVersion{
 
 .menuBarItemSelectedModule {
 	color: grey !important;
-  background-color: #e1e1d0 !important;
+  background-color: lightgray !important;
 }
 
 .resizerEnd{
@@ -4206,4 +4206,11 @@ width: 20px;
     background-image: url(customIcons/new/iconLeftGantt.png);
     background-repeat: no-repeat;
     z-index:55000;
+}
+
+.imageColorBlack{
+	-webkit-filter : brightness(0) invert(0);
+  filter : brightness(0) invert(0);
+  background-color: transparent;
+  opacity: 1;
 }
