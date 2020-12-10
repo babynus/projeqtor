@@ -7822,7 +7822,7 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
       if(resizerEnd)document.documentElement.removeEventListener('mousemove', doDragEnd, false);   
       document.documentElement.removeEventListener('mouseup', stopDrag, false);
       setTimeout('isResizingGanttBar=false;',500);
-      //saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration);
+      saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration);
       if(resizerEnd)resizerEnd.style.display="none";
       if(resizerEnd)divVisibleEndDateChange.style.display="none";
       if(resizerStart)divVisibleStartDateChange.style.display="none";
