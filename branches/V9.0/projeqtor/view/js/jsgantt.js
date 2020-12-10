@@ -146,7 +146,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
                             pParent, pOpen, pDepend, 
                             pCaption, pClass, pScope, pRealEnd, pPlanStart,
                             pValidatedWork, pAssignedWork, pRealWork, pLeftWork, pPlannedWork, 
-                            pPriority, pPlanningMode,
+                            pPriority,pIdPlanningMode, pPlanningMode,
                             pStatus,pHealthStatus,pQualityLevel,pTrend,pOverallProgress, pType, 
                             pValidatedCost, pAssignedCost, pRealCost, pLeftCost, pPlannedCost,
                             pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes,pDurationContract,pElementIdRef) {
@@ -187,6 +187,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   var vLeftWork=pLeftWork;
   var vPlannedWork=pPlannedWork;
   var vPriority=pPriority;
+  var vIdPlanningMode=pIdPlanningMode;
   var vPlanningMode=pPlanningMode;
   var vStatus=pStatus;
   var vHealthStatus=pHealthStatus;
@@ -264,6 +265,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   this.getLeftWork     = function(){ return vLeftWork;  };
   this.getPlannedWork     = function(){ return vPlannedWork;  };
   this.getPriority     = function(){ return vPriority;  };
+  this.getIdPlanningMode =function(){ return vIdPlanningMode;};
   this.getPlanningMode     = function(){ return vPlanningMode;  };
   this.getStatus     = function(){ return vStatus;  };
   this.getHealthStatus =function(){ return vHealthStatus;};
@@ -1404,6 +1406,12 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           vTaskRight = (Date.parse(vTmpEnd) - Date.parse(vTaskStart)) / (24 * 60 * 60 * 1000) + 1 ;
           vTaskLeft = Math.ceil((Date.parse(vTaskStart) - Date.parse(vMinDate)) / (24 * 60 * 60 * 1000) );
           vTaskLeft = vTaskLeft - 1;
+          console.log("=========================================");
+          console.log(Date.parse(vMinDate));
+          console.log(vMinDate);// à ajouter 
+          console.log(vMaxDate);
+          console.log(vTaskLeft);
+          console.log("=========================================");
           var vBarLeft=Math.ceil(vTaskLeft * (vDayWidth));
           var vBarWidth=Math.ceil((vTaskRight) * (vDayWidth) );
           //if (vBarWidth<10) vBarWidth=10;
@@ -1574,7 +1582,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	            + ' width:' + vBarWidth + 'px" '
 	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
 	            + 'onmouseout="hideResizerGanttBar ('+vID+')"'
-	            +'onMouseover ="handleResizeGantBAr('+vID+', '+vTaskList[i].getElementIdRef()+')"'
+	            +'onMouseover ="handleResizeGantBAr('+vTaskList[i].getElementIdRef()+','+ Date.parse(vMinDate)+','+vDayWidth+',\''+vDateDisplayFormat+'\')"'
 	            +'>'; 
 
             vRightTableTempMeeting += ' <div class="ganttTaskrowBarComplete"  '
@@ -1619,12 +1627,14 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	        	  if (vTaskList[i].getGlobal()) {
   	        	    vRightTableTempMeeting +='<img src="../view/css/customIcons/'+imgColor+'/icon'+vTaskList[i].getClass()+'.png" style="pointer-events: none;filter:saturate('+imgSaturate+');width:16px;height:16px;z-index:13;position:absolute;right:2px;" />';
   	        	  }
-  	        	  if(vTaskList[i].getPlanningMode()=='regular between dates' || vTaskList[i].getPlanningMode()=='régulier entre 2 dates' ){
+  	        	  if(vTaskList[i].getIdPlanningMode()=='2'  ||  vTaskList[i].getIdPlanningMode()=='20' || vTaskList[i].getIdPlanningMode()=='3' || vTaskList[i].getIdPlanningMode()=='7' || vTaskList[i].getIdPlanningMode()=='10'
+                  || vTaskList[i].getIdPlanningMode()=='11' || vTaskList[i].getIdPlanningMode()=='12' || vTaskList[i].getIdPlanningMode()=='13' ){
     	            // handle resizer start=======================
     	            vRightTableTempMeeting +='<div class="resizerStart" id="taskbar_'+vID+'ResizerStart" style="display:none;" ></div>';
     	            //===========================
   	        	  }
-  	        	  if(vTaskList[i].getPlanningMode()=='fixed duration' || vTaskList[i].getPlanningMode()=='durée fixe' ||  vTaskList[i].getPlanningMode()=='regular between dates' || vTaskList[i].getPlanningMode()=='régulier entre 2 dates' ){
+  	        	  if(vTaskList[i].getIdPlanningMode()=='2'  ||  vTaskList[i].getIdPlanningMode()=='20' || vTaskList[i].getIdPlanningMode()=='3' || vTaskList[i].getIdPlanningMode()=='7' || vTaskList[i].getIdPlanningMode()=='10'
+  	        	    || vTaskList[i].getIdPlanningMode()=='11' || vTaskList[i].getIdPlanningMode()=='12' || vTaskList[i].getIdPlanningMode()=='13' || vTaskList[i].getIdPlanningMode()=='8'){
                   // handle resizer end=======================
                   vRightTableTempMeeting +='<div class="resizerEnd " id="taskbar_'+vID+'ResizerEnd" style="display:none;" ></div>';
                   //===========================
