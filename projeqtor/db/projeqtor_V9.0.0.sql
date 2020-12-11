@@ -124,7 +124,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (109,'menuAutoSendReport',7,205,80),
 (110,'menuDataCloning',7,222,90),
 (111,'menuMessageLegal',7,223,100),
-(112,'navHumanResource',0,0,70),
+(112,'navHumanResourceNav',0,0,70),
 (113,'menuLeaveCalendar',112,209,10),
 (114,'menuLeave',112,210,20),
 (115,'menuEmployeeLeaveEarned',112,211,30),

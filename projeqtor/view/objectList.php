@@ -1142,7 +1142,7 @@ $extendedListZone=false;
                         <script type="dojo/connect" event="onClick" args="evt">
                         resetListColumn();
                       </script>
-                      </button>
+                    </button>
                     <button title="" dojoType="dijit.form.Button" 
                       class="mediumTextButton" id="" name="" showLabel="true"><?php echo i18n('buttonOK');?>
                       <script type="dojo/connect" event="onClick" args="evt">

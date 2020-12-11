@@ -653,6 +653,7 @@ function activityStreamDisplayNote ($note,$origin){
     $resultNote.= '<div "style=float:right;"><a  id="imgCollapse_'.$note->id.'" style="float:right;'.((isNewGui() and $origin=='objectStream')?'margin-top:3px;':'').'" onclick="switchNoteStatus('.$note->id.');">'.formatSmallButton('Collapse'.(($isNoteClosed)?'Open':'Hide')).'</a></div>';
     $resultNote.= '</div></td></tr></table>';
     
+    $maxWidth='100%';
     if ($origin=='objectStream') {
       $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px';
       if (isNewGui())   {
