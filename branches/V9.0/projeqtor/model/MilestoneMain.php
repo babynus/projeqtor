@@ -72,16 +72,11 @@ class MilestoneMain extends SqlElement {
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
-    <th field="nameProject" width="10%" >${idProject}</th>
+    <th field="nameProject" width="20%" >${idProject}</th>
     <th field="nameMilestoneType" width="10%" >${idMilestoneType}</th>
-    <th field="wbsSortable" from="MilestonePlanningElement" formatter="sortableFormatter" width="5%" >${wbs}</th>    
-    <th field="name" width="25%" >${name}</th>
-    <th field="validatedEndDate" from="MilestonePlanningElement" width="10%" formatter="dateFormatter">${validatedDueDate}</th>
+    <th field="name" width="40%" >${name}</th>
     <th field="plannedEndDate" from="MilestonePlanningElement" width="10%" formatter="dateFormatter">${plannedDueDate}</th>
-    <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
-    <th field="done" width="5%" formatter="booleanFormatter" >${done}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
+    <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",

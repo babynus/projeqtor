@@ -577,10 +577,10 @@ class ImputationLine {
     $canValidate=self::getValidationRight($resourceId);
     $locked=false;
     $oldValues="";
-    $nameWidth=220;
-    $dateWidth=80;
-    $workWidth=65;
-    $inputWidth=55;
+    $nameWidth=(isNewGui())?220:220;
+    $dateWidth=(isNewGui())?90:80;
+    $workWidth=(isNewGui())?68:65;
+    $inputWidth=(isNewGui())?55:55;
     $iconWidth=16;
     if ($outMode=='pdf') {
       $dateWidth=75;
@@ -615,7 +615,7 @@ class ImputationLine {
     $tab=ImputationLine::getLines($resourceId, $rangeType, $rangeValue, $showIdle, $showPlanned, $hideDone, $hideNotHandled, $displayOnlyCurrentWeekMeetings);
     if (!$print) {
       echo '<div dojoType="dijit.layout.BorderContainer">';
-      echo '<div dojoType="dijit.layout.ContentPane" id="topRegionImputation" data-dojo-props="splitter: true" region="top" style="overflow-y: scroll;height: auto;">';
+      echo '<div dojoType="dijit.layout.ContentPane" id="topRegionImputation" data-dojo-props="splitter: true" region="top" style="overflow-y: hide;height: auto;">';
     }
     echo '<table class="imputationTable" style="width:100%">';
     echo '<TR class="ganttHeight">';
@@ -630,7 +630,7 @@ class ImputationLine {
     
     if (!$print) {
       echo '<script type="dojo/connect" event="resize" args="evt">
-        var valueHeight=parseInt(dojo.byId(\'topRegionImputation\').offsetHeight)-5;
+        var valueHeight=parseInt(dojo.byId(\'topRegionImputation\').offsetHeight)-3;
         dojo.byId(\'imputationComment\').style.height=valueHeight+\'px\';
         dojo.byId(\'imputationComment\').style.maxHeight=valueHeight+\'px\';
         dojo.byId(\'imputationComment\').style.minHeight=valueHeight+\'px\';
@@ -650,9 +650,9 @@ class ImputationLine {
     echo '</td>';
     if (!$print and !$period->validated and !$period->submitted and !$lowRes) { // and $resourceId == $user->id
       echo '<td style="width:1%">';
-      echo '<button id="enterRealAsPlanned" dojoType="dijit.form.Button" showlabel="true" >';
+      echo '<button id="enterRealAsPlanned" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">';
       echo '<script type="dojo/connect" event="onClick" args="evt">enterRealAsPlanned('.$nbDays.');</script>';
-      echo i18n('enterRealAsPlanned');
+      echo ucfirst(i18n('enterRealAsPlanned'));
       echo '</button>';
       echo '</td>';
     }
@@ -663,9 +663,9 @@ class ImputationLine {
       if (!$print and !$period->validated and ($resourceId==$user->id or $canValidate)) {
         echo '<td style="width:1%">'.$msg.'</td>';
         echo '<td style="width:1%">';
-        echo '<button id="unsubmitButton" jsid="unsubmitButton" dojoType="dijit.form.Button" showlabel="true" >';
+        echo '<button id="unsubmitButton" class="roundedVisibleButton"jsid="unsubmitButton" dojoType="dijit.form.Button" showlabel="true" >';
         echo '<script type="dojo/connect" event="onClick" args="evt">submitWorkPeriod("unsubmit");</script>';
-        echo i18n('unSubmitWorkPeriod');
+        echo ucfirst(i18n('unSubmitWorkPeriod'));
         echo '</button>';
         echo '</td>';
         $locked=true;
@@ -674,9 +674,9 @@ class ImputationLine {
       }
     } else if (!$print and $resourceId==$user->id and !$period->validated) {
       echo '<td style="width:1%">';
-      echo '<button id="submitButton" dojoType="dijit.form.Button" showlabel="true" >';
+      echo '<button id="submitButton" class="roundedVisibleButton" dojoType="dijit.form.Button" showlabel="true" >';
       echo '<script type="dojo/connect" event="onClick" args="evt">submitWorkPeriod("submit");</script>';
-      echo i18n('submitWorkPeriod');
+      echo ucfirst(i18n('submitWorkPeriod'));
       echo '</button>';
       echo '</td>';
     }
@@ -691,9 +691,9 @@ class ImputationLine {
         echo '<td style="width:1%">'.$msg.'</td>';
         // echo '<div xdojoType="dijit.Tooltip" xconnectId="unvalidateButton" xposition="above" >'.$msg.'</div>';
         echo '<td style="width:1%">';
-        echo '<button id="unvalidateButton" jsid="unvalidateButton" dojoType="dijit.form.Button" showlabel="true" >';
+        echo '<button id="unvalidateButton" class="roundedVisibleButton" jsid="unvalidateButton" dojoType="dijit.form.Button" showlabel="true" >';
         echo '<script type="dojo/connect" event="onClick" args="evt">submitWorkPeriod("unvalidate");</script>';
-        echo i18n('unValidateWorkPeriod');
+        echo ucfirst(i18n('unValidateWorkPeriod'));
         echo '</button>';
         echo '</td>';
       } else {
@@ -701,9 +701,9 @@ class ImputationLine {
       }
     } else if (!$print and $canValidate) {
       echo '<td style="width:1%">';
-      echo '<button id="validateButton" dojoType="dijit.form.Button" showlabel="true" >';
+      echo '<button id="validateButton" class="roundedVisibleButton" dojoType="dijit.form.Button" showlabel="true" >';
       echo '<script type="dojo/connect" event="onClick" args="evt">submitWorkPeriod("validate");</script>';
-      echo i18n('validateWorkPeriod');
+      echo ucfirst(i18n('validateWorkPeriod'));
       echo '</button>';
       echo '</td>';
     }

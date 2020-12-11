@@ -86,12 +86,9 @@ class MeetingMain extends SqlElement {
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
     <th field="nameProject" width="15%" >${idProject}</th>
     <th field="nameMeetingType" width="15%" >${idMeetingType}</th>
-    <th field="meetingDate" formatter="dateFormatter" width="15%" >${meetingDate}</th>
-    <th field="name" width="25%" >${name}</th>
-    <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
-    <th field="done" width="5%" formatter="booleanFormatter" >${done}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
+    <th field="meetingDate" formatter="dateFormatter" width="10%" >${meetingDate}</th>
+    <th field="name" width="40%" >${name}</th>
+    <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
