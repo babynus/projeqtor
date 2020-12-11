@@ -248,8 +248,8 @@ if(!isNewGui()){
 			
 			<td valign="top" width="15%">
          <table ><tr><td>
-          <div title=" <?php echo i18n('paramRefreshUpdates');?>" style="position:absolute;top:80px;" class="imageColorNewGui" onClick="refreshActivityStreamList();"><?php echo formatBigButton('Refresh');?></div>
-          <div class="iconSize32 iconEraser  imageColorNewGui" title=" <?php echo i18n('activityStreamResetParameters');?>" style="cursor:pointer;position:absolute;top:80px;left:60px;"  onClick="resetActivityStreamListParameters();refreshActivityStreamList();"></div>
+          <div title=" <?php echo i18n('paramRefreshUpdates');?>" style="cursor:pointer;left:40px;position:absolute;top:80px;" class="iconSize32 iconRefresh  imageColorNewGui" onClick="refreshActivityStreamList();"></div>
+          <div class="iconSize32 iconEraser  imageColorNewGui" title=" <?php echo i18n('activityStreamResetParameters');?>" style="cursor:pointer;position:absolute;top:80px;left:100px;"  onClick="resetActivityStreamListParametersNewGui();refreshActivityStreamList();"></div>
          </td></tr></table>
        </td>   
 			
@@ -257,7 +257,7 @@ if(!isNewGui()){
 				<td valign="top" width="25%">
 					<table>
 						<tr>
-						  <td > <div style="writing-mode: vertical-rl; transform: rotate(180deg);border-left:1px solid;margin-right:10px;">
+						  <td > <div style="height:120px;text-align:center;writing-mode: vertical-rl; transform: rotate(180deg);border-left:1px solid;margin-right:15px;">
 						  <strong><?php echo ucfirst(i18n('filterOnElementActivityStream'));?></strong> </div>
 						  </td>
 						  <td>
@@ -337,8 +337,8 @@ if(!isNewGui()){
           <input type="hidden" id="activityStreamAddedRecently" name="activityStreamAddedRecently" value="<?php echo $addedRecently;?>" />   
           <input type="hidden" id="activityStreamUpdatedRecently" name="activityStreamUpdatedRecently" value="<?php echo $updatedRecently;?>" /> 
 						<tr>
-						  <td> <div style="writing-mode: vertical-rl; transform: rotate(180deg);border-left:1px solid;">
-						  <strong><?php echo i18n('filterOnDate')?></strong> </div>
+						  <td> <div style="height:120px;text-align:center;writing-mode: vertical-rl; transform: rotate(180deg);border-left:1px solid;margin-right:15px;">
+						  <strong><?php echo i18n('filterOnEdit')?></strong> </div>
 						  </td>
 						  <td>
 						    <table>
@@ -348,7 +348,7 @@ if(!isNewGui()){
                      <?php $displayAddedRecentlyCheck=($addedRecently)?'inline-block':'none';?>
                   </td>
                   <td style="text-align:left;">
-                  <div  id="listIdFilterQuickSw" name="listIdFilterQuickSw" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayAddedRecentlyCheck=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
+                  <div  id="addRecentlySwitch" name="addRecentlySwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayAddedRecentlyCheck=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
                   <script type="dojo/method" event="onStateChanged" >
                     switchActivityStreamListAddedRecently();refreshActivityStreamList();
                   </script>
@@ -362,7 +362,7 @@ if(!isNewGui()){
         							   <?php $displayUpdatedRecentlyCheck=($updatedRecently)?'inline-block':'none';?>
         						</td>
         					  <td style="text-align:left;">
-                  <div  id="listIdFilterQuickSw1" name="listIdFilterQuickSw1" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayUpdatedRecentlyCheck=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
+                  <div  id="updatedRecentlySwitch" name="updatedRecentlySwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayUpdatedRecentlyCheck=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
                     <script type="dojo/method" event="onStateChanged" >
                     switchActivityStreamListUpdatedRecently();refreshActivityStreamList();
                   </script>
@@ -401,7 +401,7 @@ if(!isNewGui()){
   				  <?php $displayShowClosedCheck=($showClosed)?'inline-block':'none';?>
   				</td>
   		    <td style="text-align:left;">
-          <div  id="listIdFilterQuickSw2" name="listIdFilterQuickSw2" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayShowClosedCheck=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
+          <div  id="showIdleSwitchAS" name="showIdleSwitchAS" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayShowClosedCheck=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >
               switchActivityStreamListShowClosed();refreshActivityStreamList();
             </script>
@@ -417,7 +417,7 @@ if(!isNewGui()){
            <?php $displayShowOnlyNotes=($showOnlyNotes=='YES')?'inline-block':'none';?>
         </td>
         <td style="text-align:left;">
-          <div  id="listIdFilterQuickSw3" name="listIdFilterQuickSw3" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayShowOnlyNotes=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
+          <div  id="showOnlyNoteSwitch" name="showOnlyNoteSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if($displayShowOnlyNotes=='inline-block'){?>on<?php }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >
               showOnlyNoteStream();
             </script>
