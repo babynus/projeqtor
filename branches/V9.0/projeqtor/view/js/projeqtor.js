@@ -6181,6 +6181,28 @@ function resetActivityStreamListParameters() {
   dijit.byId("activityStreamTeamFilter").set('value',null);
 }
 
+function resetActivityStreamListParametersNewGui(){
+ // dojo.byId('activityStreamShowClosed').value=1;
+  //switchActivityStreamListShowClosed();
+  dijit.byId("activityStreamAuthorFilter").set('value',null);
+  dijit.byId("activityStreamTypeNote").set('value',null);
+  dijit.byId("activityStreamIdNote").set('value',null);
+  dijit.byId("activityStreamNumberDays").set('value','7'); 
+  dijit.byId("activityStreamTeamFilter").set('value',null);
+  if(dijit.byId('addRecentlySwitch').get('value')=='on'){
+    dijit.byId("addRecentlySwitch").set('value','off');
+  }
+  if(dijit.byId('updatedRecentlySwitch').get('value')=='on'){
+    dijit.byId("updatedRecentlySwitch").set('value','off');
+  }
+  if(dijit.byId('showIdleSwitchAS').get('value')=='on'){
+    dijit.byId("showIdleSwitchAS").set('value','off');
+  }
+  if(dijit.byId('showOnlyNoteSwitch').get('value')=='on'){
+    dijit.byId("showOnlyNoteSwitch").set('value','off');
+  }
+}
+
 function switchActivityStreamListShowClosed() {
   var oldValue=dojo.byId('activityStreamShowClosed').value;
   if (oldValue==1) {
