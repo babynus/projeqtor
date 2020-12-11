@@ -98,11 +98,11 @@ $user=getSessionUser();
         <div style="position:absolute;left:0;right:0;margin:auto;bottom:10px;text-align:center;"> <?php echo i18n('moduleDisable');?></div>
        </div>
        
-       <div   style="cursor:pointer;border-radius:5px;float:left;margin-left:100px;position:relative;width:120px;height:120px;">
-       <button id="saveParameterButton" dojoType="dijit.form.Button" class="resetMargin roundedButton notButton"
+       <div   style="cursor:pointer;border-radius:5px;float:left;margin-left:100px;position:absolute;right:-30px;top:20px;width:120px;height:120px;">
+       <button id="saveParameterButton" dojoType="dijit.form.Button" class="resetMargin detailButton notButton"
         title="<?php echo i18n("applyChanges");?>"
-        style="color:#707070;font-weight:bold" class="" enabled="true"
-        iconClass="dijitButtonIcon dijitButtonIconSave imageColorNewGui" showLabel="false" >
+        style="color:#707070;font-weight:bold; width:50px;height:50px" class="" enabled="true"
+        iconClass="iconButtonSave iconSize48 imageColorNewGui" showLabel="false" >
         <script type="dojo/connect" event="onClick" args="evt">
 		        var url="../tool/resetModuleTablesInSession.php";
             dojo.xhrPost({

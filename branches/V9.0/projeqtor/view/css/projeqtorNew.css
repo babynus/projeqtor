@@ -1812,3 +1812,42 @@ element.style {
     font-size: 12px;
     color: var(--color-dark);
 }
+
+.ProjeQtOrNewGui .imputationTable .ganttName, .ProjeQtOrNewGui .imputationTable .ganttDetail,
+.ProjeQtOrNewGui .imputationTable .ganttLeftTopLine, .ProjeQtOrNewGui .imputationTable .ganttLeftTitle {
+	font-size:10pt;
+}
+.ProjeQtOrNewGui .imputationTable .ganttTaskRow, .ProjeQtOrNewGui .imputationTable .ganttTaskgroup, .ProjeQtOrNewGui .checkboxLabel {
+	height:26px;
+	min-height:26px;
+}
+
+.ProjeQtOrNewGui .imputationTable .dijitTextBox, .ProjeQtOrNewGui .imputationTable .dijitValidationTextBox {
+	margin:1px;
+	padding: 1px 2px 3px 2px;
+}
+.ProjeQtOrNewGui .imputationTable .ganttLeftTopLine .dijitReset.dijitInline.dijitButtonNode {
+	background: var(--color-lighter);
+}
+.ProjeQtOrNewGui .imputationSubmitted {
+	font-size: 90%;
+	padding:1px 5px;
+	/*background: var(--color-medium);*/
+	border:0;
+	color:var(--color-darker);
+}
+.ProjeQtOrNewGui .imputationValidated {
+	 font-size: 90%;
+  padding:1px 5px;
+  border:0;
+  color:var(--color-darker);
+}
+.ProjeQtOrNewGui .roundedLeft {
+  border-top-left-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+}
+
+.ProjeQtOrNewGui .dijitDropDownButtonActive .dijitButtonNode,
+.comboButton .dijitReset.dijitInline.dijitButtonNode:Active {
+  border: none;
+}

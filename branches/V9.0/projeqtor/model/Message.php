@@ -35,29 +35,23 @@ class Message extends SqlElement {
   public $id;    // redefine $id to specify its visiblez place 
   public $name;
   public $idMessageType;
-  
-  //Florent  ticket #4030
   public $startDate;
   public $endDate;
-  
-  
+  public $idle;
+  public $_sec_message;
   public $description;
-  public $_sec_treatment;
+  public $_sec_detail;
   public $idProfile;
   public $idProject;
   public $idAffectable;
   public $showOnLogin;
-  public $idle;
+  
   private static $_layout='
-    <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
-    <th field="name" width="40%">${title}</th>
-    <th field="colorNameMessageType" width="10%" formatter="colorNameFormatter">${idMessageType}</th>
-    <th field="nameProfile" width="10%" formatter="translateFormatter">${idProfile}</th>
-    <th field="nameProject" width="10%">${idProject}</th>
-    <th field="nameAffectable" formatter="thumbName22" width="15%">${idUser}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
-    <th field="startDate" width="10%" formatter="dateFormatter" >${startDate}</th>
-    <th field="endDate" width="10%" formatter="dateFormatter" >${endDate}</th>'
+    <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
+    <th field="name" width="50%">${title}</th>
+    <th field="colorNameMessageType" width="15%" formatter="colorNameFormatter">${idMessageType}</th>
+    <th field="startDate" width="15%" formatter="dateFormatter" >${startDate}</th>
+    <th field="endDate" width="15%" formatter="dateFormatter" >${endDate}</th>'
     ;
   
   private static $_colCaptionTransposition = array('name'=> 'title', 'description'=>'message','idAffectable'=>'idUser');
@@ -73,6 +67,9 @@ class Message extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+    if (! $this->id) {
+      $this->showOnLogin=1;
+    }
   }
 
   
@@ -170,5 +167,16 @@ public function getValidationScript($colName) {
     return self::$_databaseColumnName;
   }
   
+  public function setAttributes() {
+    if (isNewGui()) {
+      if ($this->showOnLogin) self::$_fieldsAttributes["showOnLogin"]="hidden";
+      self::$_fieldsAttributes["_sec_detail"]="hidden";
+      self::$_fieldsAttributes["idProfile"]="hidden";
+      self::$_fieldsAttributes["idProject"]="hidden";
+      if (Parameter::getUserParameter('paramLayoutObjectDetail')=='tab') self::$_fieldsAttributes["_sec_message"]="hidden";
+    } else {
+      self::$_fieldsAttributes["_sec_message"]="hidden";
+    }
+  }
 }
 ?>

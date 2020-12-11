@@ -5199,6 +5199,9 @@ function getGui() {
   else return "std";
 }
 function isNewGui() {
+  $auditBrowser=Audit::getBrowser();
+  if ($auditBrowser['browser']=='Internet Explorer') return false;
+  debugLog($auditBrowser['browser']);
   return (getGui()=='new');
 }
 //
