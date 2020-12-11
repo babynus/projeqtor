@@ -319,7 +319,7 @@
 .ProjeQtOrFlatRed .iconAlert { background-image: url(customIcons/red/iconAlert.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconAlert { background-image: url(customIcons/new/iconAlert.svg);  background-repeat: no-repeat; }
 
-.iconAllModules { background-image: url(images/iconAllModules.svg);  background-repeat: no-repeat;  }
+.iconAllModules { background-image: url(customIcons/new/iconAllModules.svg);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconAllModules { background-image: url(customIcons/new/iconAllModules.svg);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconAllModules { background-image: url(customIcons/new/iconAllModules.svg);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconAllModules { background-image: url(customIcons/new/iconAllModules.svg);  background-repeat: no-repeat; }
@@ -1083,7 +1083,7 @@
 .ProjeQtOrFlatRed .iconDocumentType { background-image: url(customIcons/red/iconDocumentDirectory.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconDocumentType { background-image: url(customIcons/new/iconDocumentDirectory.svg);  background-repeat: no-repeat; }
 
-.iconDisabledModules { background-image: url(images/iconDisabledModules.svg);  background-repeat: no-repeat;  }
+.iconDisabledModules { background-image: url(customIcons/new/iconDisabledModules.svg);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconDisabledModules { background-image: url(customIcons/new/iconDisabledModules.svg);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconDisabledModules { background-image: url(customIcons/new/iconDisabledModules.svg);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconDisabledModules { background-image: url(customIcons/new/iconDisabledModules.svg);  background-repeat: no-repeat; }
