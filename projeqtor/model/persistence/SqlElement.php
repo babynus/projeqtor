@@ -5829,11 +5829,8 @@ abstract class SqlElement {
     $fieldStart = '<td style="background:#FFFFFF;text-align: left;width:75%;white-space:nowrap;padding-left:20px;">';//<td style="width:2px;">&nbsp;</td>
     $fieldEnd = '</td>';
     $sectionStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:bold;width: 100%;" colspan="2">';
-    $sectionLinkStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:bold;width: 100%;" colspan="2">';
     $sectionEnd = '</td>';
-    $tableStart = '<table style="font-size:11pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
-    $tableLinkStart = '<table style="font-size:11pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
-    $tableSectionStart = '<table style="font-size:11pt; width: 100%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
+    $tableStart = '<table style="font-size:11pt; width: 100%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
     $tableEnd = '</table>';
     //florent
     $ref = $this->getReferenceUrl ();
@@ -5847,9 +5844,9 @@ abstract class SqlElement {
     $secondLine = "  <div>&nbsp;</div>";
     $dmsg=(isset($directMessage))?$this->parseMailMessage ($directMessage). '<br/><br/>':'';
     if(Parameter::getGlobalParameter('cronCheckEmailsHost')!='' and Parameter::getGlobalParameter('cronCheckEmails')>0){
-      $msg = " \n ".$firstLine."\n".$secondLine."\n".$dmsg."\n".$tableStart;
+      $msg = " \n ".$firstLine."\n".$secondLine."\n".$dmsg."\n".'<table style="font-size:9pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;">';;
     }else{
-      $msg = " \n ".$dmsg."\n".'<table style="font-size:9pt; width: 65%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
+      $msg = " \n ".$dmsg."\n".'<table style="font-size:9pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
       $msg .= '<tr>';
       $msg .= ' <td style="color:#AAAAAA">';
       $msg .= ' <table><tr>';
@@ -5859,20 +5856,18 @@ abstract class SqlElement {
       $msg .= ' </td>';
       $msg .= '</tr>';
       $msg .= '<tr>';
-      $msg .= ' <td style="text-align:center;font-size:32pt;color:#606062;background:#DDDDDD">'.SqlList::getNameFromId(get_class ( $this ), $this->id).'</td>';
+      $msg .= ' <td style="text-align:center;font-size:32pt;color:#606062;background:#DDDDDD" colspan="2">'.SqlList::getNameFromId(get_class ( $this ), $this->id).'</td>';
       $msg .= '</tr>';
       $msg .= '<tr><td><br></td></tr>';
-      $msg .= $tableEnd;
-      $msg .= $tableStart.$rowStart.'<td style="width:30%;">';
     }
     //
+    $colArray = array();
+    $section = null;
     $nobr = false;
-    debugLog($this);
     foreach ( $this as $col => $val ) {
       $hide = false;
       $nobr_before = $nobr;
       $nobr = false;
-      //debugLog($col);
       if (substr ( $col, 0, 4 ) == '_tab') {
         // Nothing
       } else if (substr ( $col, 0, 5 ) == '_sec_') {
@@ -5880,16 +5875,7 @@ abstract class SqlElement {
           $section = substr ( $col, 5 );
           $section = ucfirst ( $section );
           if ($section == 'Description' or $section == 'Treatment') {
-            $icon = 'Edit';
-            if($section == 'Treatment'){
-              $msg .= $tableEnd;
-              $icon = 'Review';
-            }
-            $msg .= $tableSectionStart;
-            $msg .= $rowStart . $sectionStart.'<table><tr>';
-            $msg .= '<td><img style="float:left;padding-right:10px;width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.$icon.'.png" /></td>';
-            $msg .= '<td>'.i18n ( 'section' . $section ).'</td>';
-            $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
+            $colArray[$section] = array($col=>$section);
           }
         } else {
           $section = '';
@@ -5898,18 +5884,13 @@ abstract class SqlElement {
         // Nothing
       } else if (substr ( $col, 0, 6 ) == '_calc_') {
         $item = substr ( $col, 6 );
-        $msg .= $this->drawCalculatedItem ( $item );
+        $colArray[$section][$col]=$item;
       } else if (substr ( $col, 0, 5 ) == '_lib_') {
         $item = substr ( $col, 5 );
         if (strpos ( $this->getFieldAttributes ( $col ), 'nobr' ) !== false) {
           $nobr = true;
         }
-        if ($this->getFieldAttributes ( $col ) != 'hidden') {
-          $msg .= (($nobr) ? '&nbsp;' : '') . i18n ( $item ) . '&nbsp;';
-        }
-        if (! $nobr) {
-          $msg .= $fieldEnd . $rowEnd;
-        }
+        $colArray[$section][$col]=$item;
       } else if (substr ( $col, 0, 5 ) == '_Link') {
         // Nothing
       } else if (substr ( $col, 0, 11 ) == '_Assignment') {
@@ -5931,10 +5912,6 @@ abstract class SqlElement {
       } else if (substr ( $col, 0, 1 ) == '_' and substr ( $col, 0, 6 ) != '_void_' and substr ( $col, 0, 7 ) != '_label_') {
         // Nothing
       } else {
-        $attributes = '';
-        $isRequired = false;
-        $readOnly = false;
-        $specificStyle = '';
         $dataType = $this->getDataType ( $col );
         $dataLength = $this->getDataLength ( $col );
         if ($dataType == 'decimal' and substr ( $col, - 4, 4 ) == 'Work') {
@@ -5942,12 +5919,6 @@ abstract class SqlElement {
         }
         if (strpos ( $this->getFieldAttributes ( $col ), 'hidden' ) !== false) {
           $hide = true;
-        }
-        if (strpos ( $this->getFieldAttributes ( $col ), 'nobr' ) !== false) {
-          $nobr = true;
-        }
-        if (strpos ( $this->getFieldAttributes ( $col ), 'invisible' ) !== false) {
-          $specificStyle .= ' visibility:hidden';
         }
         if (is_object ( $val )) {
           if (get_class ( $val ) == 'Origin') {
@@ -5965,105 +5936,59 @@ abstract class SqlElement {
         if ($hide) {
           continue;
         }
-        if (! $nobr_before) {
-          $msg .= $rowStart . $labelStart . $this->getColCaption ( $col ) . $labelEnd . $fieldStart;
-        } else {
-          $msg .= "&nbsp;&nbsp;&nbsp;";
-        }
-        if (is_array ( $val )) {
-          // Nothing
-        } else if (substr ( $col, 0, 6 ) == '_void_') {
-          // Nothing
-        } else if (substr ( $col, 0, 7 ) == '_label_') {
-          // $captionName=substr($col,7);
-          // $msg.='<label class="label shortlabel">' . i18n('col' . ucfirst($captionName)) . '&nbsp;:&nbsp;</label>';
-        } else if ($hide) {
-          // Nothing
-        } else if ($dataLength > 4000) {
-          if (mb_strlen ( $val ) > 1000000) {
-            $text = new Html2Text ( $val );
-            $plainText = $text->getText();
-            $msg .= nl2br(mb_substr($plainText,0, 1000000));
-          } else {
-            $msg .= $val;
-          }
-        } else if (strpos ( $this->getFieldAttributes ( $col ), 'displayHtml' ) !== false) {
-          $msg .= $val;
-        } else if ($col == 'id') { // id
-          $msg .= '<span style="color:grey;">#</span>' . $val;
-        } else if ($col == 'password') {
-          $msg .= "*****"; // nothing
-        } else if ($dataType == 'date' and $val != null and $val != '') {
-          $msg .= htmlFormatDate ( $val );
-        } else if ($dataType == 'datetime' and $val != null and $val != '') {
-          $msg .= htmlFormatDateTime ( $val, false );
-        } else if ($dataType == 'time' and $val != null and $val != '') {
-          $msg .= htmlFormatTime ( $val, false );
-        } else if ($col == 'color' and $dataLength == 7) { // color
-          /*
-           * echo '<table><tr><td style="width: 100px;">';
-           * echo '<div class="colorDisplay" readonly tabindex="-1" ';
-           * echo ' value="' . htmlEncode($val) . '" ';
-           * echo ' style="width: ' . $smallWidth / 2 . 'px; ';
-           * echo ' color: ' . $val . '; ';
-           * echo ' background-color: ' . $val . ';"';
-           * echo ' >';
-           * echo '</div>';
-           * echo '</td>';
-           * if ($val!=null and $val!='') {
-           * //echo '<td class="detail">&nbsp;(' . htmlEncode($val) . ')</td>';
-           * }
-           * echo '</tr></table>';
-           */
-        } else if ($dataType == 'int' and $dataLength == 1) { // boolean
-          $msg .= '<input type="checkbox" disabled="disabled" ';
-          if ($val != '0' and ! $val == null) {
-            $msg .= ' checked />';
-          } else {
-            $msg .= ' />';
-          }
-// BEGIN - REPLACE BY TABARY - USE isForeignKey GENERIC FUNCTION          
-        } else if (isForeignKey( $col, $this)) { // Idxxx
-//        } else if (substr ( $col, 0, 2 ) == 'id' and $dataType == 'int' and strlen ( $col ) > 2 and substr ( $col, 2, 1 ) == strtoupper ( substr ( $col, 2, 1 ) )) { // Idxxx
-// END - REPLACE BY TABARY - USE isForeignKey GENERIC FUNCTION
-// BEGIN -  ADD BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
-          $col_withoutAlias = foreignKeyWithoutAlias($col);
-          $msg .= htmlEncode ( SqlList::getNameFromId ( substr($col_withoutAlias,2), $val ), 'print' );                            
-// END -  ADD BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
-        } else if (substr ( $col, 0, 2 ) == 'id' and $dataType == 'int' and strlen ( $col ) > 2 and substr ( $col, 2, 1 ) == strtoupper ( substr ( $col, 2, 1 ) )) { // Idxxx
-         	$msg .= htmlEncode ( SqlList::getNameFromId ( substr ( $col, 2 ), $val ), 'print' );
-        } else if ($dataLength > 100) { // Text Area (must reproduce BR, spaces, ...
-          $msg .= htmlEncode ( $val, 'print' );
-        } else if ($dataType == 'decimal' and (substr ( $col, - 4, 4 ) == 'Cost' or substr ( $col, - 6, 6 ) == 'Amount' or $col == 'amount')) {
-          if ($currencyPosition == 'after') {
-            $msg .= htmlEncode ( $val, 'print' ) . ' ' . $currency;
-          } else {
-            $msg .= $currency . ' ' . htmlEncode ( $val, 'print' );
-          }
-        } else if ($dataType == 'decimal' and substr ( $col, - 4, 4 ) == 'Work') {
-          // $msg.= Work::displayWork($val) . ' ' . Work::displayShortWorkUnit();
-        } else {
-          if ($this->isFieldTranslatable ( $col )) {
-            $val = i18n ( $val );
-          }
-          if (strpos ( $this->getFieldAttributes ( $col ), 'html' ) !== false) {
-            $msg .= $val;
-          } else {
-            $msg .= htmlEncode ( $val, 'print' );
-          }
-        }
-        if (! $nobr) {
-          $msg .= $fieldEnd . $rowEnd;
-        }
+        $colArray[$section][$col]=$val;
       }
     }
-    $msg .= $tableEnd.$fieldEnd;
-    $msg .= '<td style="width:100%;padding-left: 60px;float:left;">';
+    $msg .= $rowStart.'<td style="width:50%;vertical-align:top;">';
+    self::drawMailDetailCol($colArray['Description'], $msg);
+    $msg .= $fieldEnd.'<td style="width:50%;vertical-align:top;">';
+    if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
+    	$msg .= $tableStart;
+    	$msg .= $rowStart . $sectionStart.'<table><tr>';
+    	$msg .= '<td><img style="float:left;padding-right:10px;width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></td>';
+    	$msg .= '<td>'.i18n ( 'sectionLink' ).'</td>';
+    	$msg .= '</tr></table>'.$sectionEnd.$rowEnd;
+    	$links=$this->_Link;
+    	foreach ( $links as $link ) {
+    		if($link->ref1Id == $this->id and $link->ref1Type == get_class($this)){
+    			$refLinkType = $link->ref2Type;
+    			$refLinkId = $link->ref2Id;
+    		} else if ($link->ref2Id == $this->id and $link->ref2Type == get_class($this)) {
+    			$refLinkType = $link->ref1Type;
+    			$refLinkId = $link->ref1Id;
+    		}
+    		$creationDate = $link->creationDate;
+    		$msg .= $rowStart . $labelStart;
+    		$userId = $link->idUser;
+    		$userName = SqlList::getNameFromId ( 'User', $userId );
+    		$msg .= $userName;
+    		$msg .= '<br/>';
+    		$msg .= htmlFormatDateTime ( $creationDate );
+    		$msg .= $labelEnd . $fieldStart;
+    		$msg .= '<b>'.i18n($refLinkType);
+    		$msg .= '&nbsp;#'.$refLinkId.'</b>&nbsp;-&nbsp;';
+    		$nameLink = SqlList::getNameFromId($refLinkType,$refLinkId);
+    		$msg.=htmlEncode($nameLink,'print');
+    		$msg .= $fieldEnd . $rowEnd;
+    	}
+    	$msg .= $tableEnd;
+    }
+    $msg .= $fieldEnd.$rowEnd;
+    $msg .= $rowStart.'<td style="width:50%;vertical-align:top;">';
+    self::drawMailDetailCol($colArray['Treatment'], $msg);
+    $msg .= $fieldEnd.'<td style="width:50%;vertical-align:top;">';
+    if (isset ( $this->_Note ) and is_array ( $this->_Note )) {
+    	//florent
+    	$msg .= $tableStart;
+    	$msg=$this->getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd);
+    	$msg .= $tableEnd;
+    }
+    $msg .= $fieldEnd.$rowEnd;
+    $msg .= $rowStart.'<td style="width:50%;vertical-align:top;">';
     // ADDITION BY papjul - Document Version details
     if (isset ( $this->_DocumentVersion ) and is_array ( $this->_DocumentVersion )) {
-      $msg .= '<table style="width:100%;">';
-      $msg .= $rowStart.'<td>'.$tableLinkStart;
-      $msg .= $rowStart . $sectionLinkStart.'<table><tr>';
+      $msg .= $tableStart;
+      $msg .= $rowStart . $sectionStart.'<table><tr>';
       $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
       $msg .= '<td><div style="float:left;">'.i18n ( 'sectionDocumentVersion' ).'</div></td>';
       $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
@@ -6089,51 +6014,202 @@ abstract class SqlElement {
         }
         $msg .= $fieldEnd . $rowEnd;
       }
-      $msg .= $tableEnd.'</td>'.$rowEnd.$tableEnd;
-    }
-    if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
-      $msg .= '<table style="width:100%;">';
-      $msg .= $rowStart.'<td>'.$tableLinkStart;
-      $msg .= $rowStart . $sectionLinkStart.'<table><tr>';
-      $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
-      $msg .= '<td><div style="float:left;">'.i18n ( 'sectionLink' ).'</div></td>';
-      $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
-      $links=$this->_Link;
-      foreach ( $links as $link ) {
-          if($link->ref1Id == $this->id and $link->ref1Type == get_class($this)){
-            $refLinkType = $link->ref2Type;
-            $refLinkId = $link->ref2Id;
-          } else if ($link->ref2Id == $this->id and $link->ref2Type == get_class($this)) {
-            $refLinkType = $link->ref1Type;
-            $refLinkId = $link->ref1Id;
-          }
-          $creationDate = $link->creationDate;
-          $msg .= $rowStart . $labelStart;
-          $userId = $link->idUser;
-          $userName = SqlList::getNameFromId ( 'User', $userId );
-          $msg .= $userName;
-          $msg .= '<br/>';
-          $msg .= htmlFormatDateTime ( $creationDate );
-          $msg .= $labelEnd . $fieldStart;
-          $msg .= '<b>'.i18n($refLinkType);
-          $msg .= '&nbsp;#'.$refLinkId.'</b>&nbsp;-&nbsp;';
-          $nameLink = SqlList::getNameFromId($refLinkType,$refLinkId);
-          $msg.=htmlEncode($nameLink,'print');
-          $msg .= $fieldEnd . $rowEnd;
-      }
-      $msg .= $tableEnd.'</td>'.$rowEnd.$tableEnd;
+      $msg .= $tableEnd;
     }
     // End of ADDITION BY papjul - Document Version details
-    if (isset ( $this->_Note ) and is_array ( $this->_Note )) {
-      //florent
-        $msg .= '<table style="width:100%;">';
-    	$msg .= $rowStart.'<td>'.$tableLinkStart;
-    	$msg=$this->getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionLinkStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd);
-    	$msg .= $tableEnd.'</td>'.$rowEnd.$tableEnd;
-    }
     $msg .= $fieldEnd.$rowEnd.$tableEnd;
     return $msg;
   }
+  
+public function drawMailDetailCol($colArray, &$msg){
+  $rowStart = '<tr>';
+  $rowEnd = '</tr>';
+  $labelStart = '<td style="background:#FFFFFF;font-weight:bold;text-align: right;width:25%;vertical-align: middle;white-space:nowrap;">&nbsp;&nbsp;';
+  $labelEnd = '&nbsp;</td>';
+  $fieldStart = '<td style="background:#FFFFFF;text-align: left;width:75%;white-space:nowrap;padding-left:20px;">';//<td style="width:2px;">&nbsp;</td>
+  $fieldEnd = '</td>';
+  $sectionStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:bold;width: 100%;" colspan="2">';
+  $sectionEnd = '</td>';
+  $tableStart = '<table style="font-size:11pt; width: 100%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
+  $tableEnd = '</table>';
+  
+  $section = null;
+  $nobr = false;
+  foreach ( $colArray as $col => $val ) {
+  	$hide = false;
+  	$nobr_before = $nobr;
+  	$nobr = false;
+  	if (substr ( $col, 0, 4 ) == '_tab') {
+  		// Nothing
+  	} else if (substr ( $col, 0, 5 ) == '_sec_') {
+  		if (strlen ( $col ) > 8) {
+  			$section = substr ( $col, 5 );
+  			$section = ucfirst ( $section );
+  			if ($section == 'Description' or $section == 'Treatment') {
+  				$icon = 'Edit';
+  				if($section == 'Treatment'){
+  					$icon = 'Review';
+  				}
+  				$msg .= $tableStart;
+  				$msg .= $rowStart . $sectionStart.'<table><tr>';
+  				$msg .= '<td><img style="float:left;padding-right:10px;width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.$icon.'.png" /></td>';
+  				$msg .= '<td>'.i18n ( 'section' . $section ).'</td>';
+  				$msg .= '</tr></table>'.$sectionEnd.$rowEnd;
+  			}
+  		} else {
+  			$section = '';
+  		}
+  	} else if (substr ( $col, 0, 5 ) == '_spe_') {
+  		// Nothing
+  	} else if (substr ( $col, 0, 6 ) == '_calc_') {
+  		$item = substr ( $col, 6 );
+  		$msg .= $this->drawCalculatedItem ( $item );
+  	} else if (substr ( $col, 0, 5 ) == '_lib_') {
+  		$item = substr ( $col, 5 );
+  		if (strpos ( $this->getFieldAttributes ( $col ), 'nobr' ) !== false) {
+  			$nobr = true;
+  		}
+  		if ($this->getFieldAttributes ( $col ) != 'hidden') {
+  			$msg .= (($nobr) ? '&nbsp;' : '') . i18n ( $item ) . '&nbsp;';
+  		}
+  		if (! $nobr) {
+  			$msg .= $fieldEnd . $rowEnd;
+  		}
+  	} else if (substr ( $col, 0, 5 ) == '_Link') {
+  		// Nothing
+  	} else if (substr ( $col, 0, 11 ) == '_Assignment') {
+  		// Nothing
+  	} else if (substr ( $col, 0, 11 ) == '_Approver') {
+  		// Nothing
+  	} else if (substr ( $col, 0, 15 ) == '_VersionProject') {
+  		// Nothing
+  	} else if (substr ( $col, 0, 11 ) == '_Dependency') {
+  		// Nothing
+  	} else if ($col == '_ResourceCost') {
+  		// Nothing
+  	} else if ($col == '_DocumentVersion') {
+  		// Nothing
+  	} else if ($col == '_ExpenseDetail') {
+  		// Nothing
+  	} else if (substr ( $col, 0, 12 ) == '_TestCaseRun') {
+  		// Nothing
+  	} else if (substr ( $col, 0, 1 ) == '_' and substr ( $col, 0, 6 ) != '_void_' and substr ( $col, 0, 7 ) != '_label_') {
+  		// Nothing
+  	} else {
+  		$attributes = '';
+  		$isRequired = false;
+  		$readOnly = false;
+  		$specificStyle = '';
+  		$dataType = $this->getDataType ( $col );
+  		$dataLength = $this->getDataLength ( $col );
+  		if ($dataType == 'decimal' and substr ( $col, - 4, 4 ) == 'Work') {
+  			$hide = true;
+  		}
+  		if (strpos ( $this->getFieldAttributes ( $col ), 'hidden' ) !== false) {
+  			$hide = true;
+  		}
+  		if (strpos ( $this->getFieldAttributes ( $col ), 'nobr' ) !== false) {
+  			$nobr = true;
+  		}
+  		if (strpos ( $this->getFieldAttributes ( $col ), 'invisible' ) !== false) {
+  			$specificStyle .= ' visibility:hidden';
+  		}
+  		if (is_object ( $val )) {
+  			if (get_class ( $val ) == 'Origin') {
+  				if ($val->originType and $val->originId) {
+  					$val = i18n ( $val->originType ) . ' #' . htmlEncode ( $val->originId ) . ' : ' . htmlEncode ( SqlList::getNameFromId ( $val->originType, $val->originId ) );
+  				} else {
+  					$val = "";
+  				}
+  				$dataType = 'varchar';
+  				$dataLength = 4000;
+  			} else {
+  				$hide = true;
+  			}
+  		}
+  		if ($hide) {
+  			continue;
+  		}
+  		if (! $nobr_before) {
+  			$msg .= $rowStart . $labelStart . $this->getColCaption ( $col ) . $labelEnd . $fieldStart;
+  		} else {
+  			$msg .= "&nbsp;&nbsp;&nbsp;";
+  		}
+  		if (is_array ( $val )) {
+  			// Nothing
+  		} else if (substr ( $col, 0, 6 ) == '_void_') {
+  			// Nothing
+  		} else if (substr ( $col, 0, 7 ) == '_label_') {
+  			// $captionName=substr($col,7);
+  			// $msg.='<label class="label shortlabel">' . i18n('col' . ucfirst($captionName)) . '&nbsp;:&nbsp;</label>';
+  		} else if ($hide) {
+  			// Nothing
+  		} else if ($dataLength > 4000) {
+  			if (mb_strlen ( $val ) > 1000000) {
+  				$text = new Html2Text ( $val );
+  				$plainText = $text->getText();
+  				$msg .= nl2br(mb_substr($plainText,0, 1000000));
+  			} else {
+  				$msg .= $val;
+  			}
+  		} else if (strpos ( $this->getFieldAttributes ( $col ), 'displayHtml' ) !== false) {
+  			$msg .= $val;
+  		} else if ($col == 'id') { // id
+  			$msg .= '<span style="color:grey;">#</span>' . $val;
+  		} else if ($col == 'password') {
+  			$msg .= "*****"; // nothing
+  		} else if ($dataType == 'date' and $val != null and $val != '') {
+  			$msg .= htmlFormatDate ( $val );
+  		} else if ($dataType == 'datetime' and $val != null and $val != '') {
+  			$msg .= htmlFormatDateTime ( $val, false );
+  		} else if ($dataType == 'time' and $val != null and $val != '') {
+  			$msg .= htmlFormatTime ( $val, false );
+  		} else if ($col == 'color' and $dataLength == 7) { // color
+  			//nothing
+  		} else if ($dataType == 'int' and $dataLength == 1) { // boolean
+  			$msg .= '<input type="checkbox" disabled="disabled" ';
+  			if ($val != '0' and ! $val == null) {
+  				$msg .= ' checked />';
+  			} else {
+  				$msg .= ' />';
+  			}
+  			// BEGIN - REPLACE BY TABARY - USE isForeignKey GENERIC FUNCTION
+  		} else if (isForeignKey( $col, $this)) { // Idxxx
+  			//        } else if (substr ( $col, 0, 2 ) == 'id' and $dataType == 'int' and strlen ( $col ) > 2 and substr ( $col, 2, 1 ) == strtoupper ( substr ( $col, 2, 1 ) )) { // Idxxx
+  			// END - REPLACE BY TABARY - USE isForeignKey GENERIC FUNCTION
+  			// BEGIN -  ADD BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
+  			$col_withoutAlias = foreignKeyWithoutAlias($col);
+  			$msg .= htmlEncode ( SqlList::getNameFromId ( substr($col_withoutAlias,2), $val ), 'print' );
+  			// END -  ADD BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
+  		} else if (substr ( $col, 0, 2 ) == 'id' and $dataType == 'int' and strlen ( $col ) > 2 and substr ( $col, 2, 1 ) == strtoupper ( substr ( $col, 2, 1 ) )) { // Idxxx
+  			$msg .= htmlEncode ( SqlList::getNameFromId ( substr ( $col, 2 ), $val ), 'print' );
+  		} else if ($dataLength > 100) { // Text Area (must reproduce BR, spaces, ...
+  			$msg .= htmlEncode ( $val, 'print' );
+  		} else if ($dataType == 'decimal' and (substr ( $col, - 4, 4 ) == 'Cost' or substr ( $col, - 6, 6 ) == 'Amount' or $col == 'amount')) {
+  			if ($currencyPosition == 'after') {
+  				$msg .= htmlEncode ( $val, 'print' ) . ' ' . $currency;
+  			} else {
+  				$msg .= $currency . ' ' . htmlEncode ( $val, 'print' );
+  			}
+  		} else if ($dataType == 'decimal' and substr ( $col, - 4, 4 ) == 'Work') {
+  			// $msg.= Work::displayWork($val) . ' ' . Work::displayShortWorkUnit();
+  		} else {
+  			if ($this->isFieldTranslatable ( $col )) {
+  				$val = i18n ( $val );
+  			}
+  			if (strpos ( $this->getFieldAttributes ( $col ), 'html' ) !== false) {
+  				$msg .= $val;
+  			} else {
+  				$msg .= htmlEncode ( $val, 'print' );
+  			}
+  		}
+  		if (! $nobr) {
+  			$msg .= $rowEnd;
+  		}
+  	}
+  }
+  $msg .= $tableEnd;
+}
 
 /** ========================================================================
  * Return the HTML last changes history table of an object.
