@@ -1092,6 +1092,20 @@
 
 
 
+.ganttExpandOpened { background-image: url(images/minus.gif);  background-repeat: no-repeat; cursor: pointer; }
+.ProjeQtOrFlatBlue .ganttExpandOpened { background-image: url(images/minus.gif);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .ganttExpandOpened { background-image: url(images/minus.gif);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .ganttExpandOpened { background-image: url(images/minus.gif);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .ganttExpandOpened { background-image: url(images/minus.gif);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .ganttExpandOpened { background-image: url(customIcons/new/iconMinus.svg);  background-repeat: no-repeat; background-size: 10px 10px; cursor: pointer; }
+
+  
+.ganttExpandClosed { background-image: url(images/plus.gif);  background-repeat: no-repeat; cursor: pointer; }
+.ProjeQtOrFlatBlue .ganttExpandClosed { background-image: url(images/plus.gif);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .ganttExpandClosed { background-image: url(images/plus.gif);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .ganttExpandClosed { background-image: url(images/plus.gif);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .ganttExpandClosed { background-image: url(images/plus.gif);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .ganttExpandClosed { background-image: url(customIcons/new/iconPlus.svg);  background-repeat: no-repeat; background-size: 10px 10px; cursor: pointer; }
 
 
 
