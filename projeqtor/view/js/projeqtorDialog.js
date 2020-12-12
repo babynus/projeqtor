@@ -4096,7 +4096,7 @@ function showSelectedProject(value){
 function plan() {
   var bt=dijit.byId('planButton');
   if (bt) {
-    bt.set('iconClass', "iconPlan");
+    bt.set('iconClass', "dijitIcon iconPlan");
   }
   if (!dijit.byId('idProjectPlan').get('value')) {
     dijit.byId('idProjectPlan').set('value', ' ');

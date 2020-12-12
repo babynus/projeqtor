@@ -1335,7 +1335,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
               hideWait();
             var bt = dijit.byId('planButton');
             if (bt) {
-              bt.set('iconClass', "iconPlanStopped");
+              bt.set('iconClass', "dijitIcon iconPlanStopped");
             }
           } else if (destination == "resultDivMultiple") {
             finalizeMultipleSave();

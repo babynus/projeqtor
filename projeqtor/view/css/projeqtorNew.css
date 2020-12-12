@@ -94,9 +94,13 @@ label, .ProjeQtOrNewGui label,
     padding: 5px 1px 2px 0px;
     float: left;
     border: 1px;
-    text-shadow: 1px 1px #FFFFFF;
+    text-shadow: 0px 0px #FFFFFF;
     background-color: #ffffff;
     color:var(--color-text);
+}
+.ProjeQtOrNewGui .labelLeft {
+	text-align: left;
+	float:none;
 }
 .labelPadding .label {
 	padding-top:3px;
@@ -628,7 +632,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui #centerDiv .roundedButtonSmall .iconSize16, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall .iconSize22,
 .ProjeQtOrNewGui .ganttIconBackground div, .ProjeQtOrNewGui .imageColorNewGui, .ProjeQtOrNewGui .directAttachment ,
 .ProjeQtOrNewGui .buttonIconNewGui .dijitIcon,
-.ProjeQtOrNewGui #mainDivMenu .iconSize22, .ProjeQtOrNewGui #planButton,
+.ProjeQtOrNewGui #mainDivMenu .iconSize22, 
 .ProjeQtOrNewGui #menuBarButtonDiv .roundedIconButton.imageColorNewGui:hover,
 .ProjeQtOrNewGui .imageColorNewGuiNoSelection, .ProjeQtOrNewGui .imageColorNewGuiNoSelection:hover, 
 .ProjeQtOrNewGui .comboDetail div .iconSize32, .ProjeQtOrNewGui .comboDetail .dijitIcon, .ProjeQtOrNewGui .allSearchFixLength .dijitIcon,
@@ -648,6 +652,7 @@ animation: fadeIn ease 0.5s;
   background-color: transparent;
 }
 .ProjeQtOrNewGui #centerDiv .dijitButtonHover .dijitButtonIcon, .ProjeQtOrNewGui .buttonIconNewGui .dijitButtonHover .dijitIcon,
+.ProjeQtOrNewGui .dijit.dijitReset.dijitInline.buttonIconNewGui.dijitButton.dijitButtonHover.dijitHover .dijitIcon,
 .ProjeQtOrNewGui #centerDiv .dijitDropDownButtonHover .dijitButtonIcon, .ProjeQtOrNewGui .buttonIconNewGui .dijitDropDownButtonHover .dijitIcon,
 .ProjeQtOrNewGui #centerDiv .roundedButtonSmall:hover .iconSize16, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall:hover .iconSize22,
 .ProjeQtOrNewGui .allSearchFixLength .dijitButtonHover .dijitIcon, .ProjeQtOrNewGui .allSearchFixLength .dijitDropDownButtonHover .dijitIcon,
