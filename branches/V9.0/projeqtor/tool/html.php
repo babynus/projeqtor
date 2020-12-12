@@ -1777,7 +1777,7 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
   echo "<tr>";
   echo "<td class='filterHeader' style='width:525px;padding-left:50px'>" . i18n("criteria") . "</td>";
   echo "<td class='filterHeader' style='width:25px;'>";
-  echo ' <a src="css/images/smallButtonRemove.png" class="imageColorNewGui" onClick="removefilterClause(\'all\');" title="' . i18n('removeAllFilters') . '" > ';
+  echo ' <a src="css/images/smallButtonRemove.png" onClick="removefilterClause(\'all\');" title="' . i18n('removeAllFilters') . '" > ';
   echo formatSmallButton('Remove');
   echo ' </a>';
   echo "</td>";
@@ -1818,7 +1818,7 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
            //END CHANGE qCazelles - Dynamic filter - Ticket #78
       	   "</td>";
       echo "<td class='filterData' style='text-align: center;'>";
-      echo ' <a src="css/images/smallButtonRemove.png" class="imageColorNewGui" onClick="removefilterClause(' . $id . ');" title="' . i18n('removeFilter') . '" > ';
+      echo ' <a src="css/images/smallButtonRemove.png" onClick="removefilterClause(' . $id . ');" title="' . i18n('removeFilter') . '" > ';
       echo formatSmallButton('Remove');
       echo ' </a>';
       echo "</td>";
@@ -1911,7 +1911,7 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
            .'</span>'. "</td>";
       if ($context!='directFilterList') {
         echo "<td class='filterData dndHidden' style='text-align: center;width:25px'>";      
-        echo ' <a src="css/images/smallButtonRemove.png" class="imageColorNewGui" onClick="removeStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('removeStoredFilter') . '" > ';
+        echo ' <a src="css/images/smallButtonRemove.png" onClick="removeStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('removeStoredFilter') . '" > ';
         echo formatSmallButton('Remove');
         echo ' </a>';
         echo "</td>";
@@ -2310,4 +2310,18 @@ function drawColorDefaultThemes($fldMain,$fldSecondary,$width=80,$left=0) {
   }
   echo '  </div>';
   echo '</div>';
+}
+
+function htmlDrawSwitch($field,$value,$directDraw=true) {
+  $result='';
+  $result.='<div  id="'.$field.'Switch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch"';
+  if (substr(i18n('label'.$field),0,1)!='[') $result.='    title="'.i18n("labelShowIdle").'" ';
+  $result.='   value="'.(($value)?"on":"off").'" ';
+  $result.='   leftLabel="" rightLabel="" style="width:10px;position:relative; left:0px;top:2px;z-index:99;" >';
+  $result.='   <script type="dojo/method" event="onStateChanged" >';
+  $result.='     dijit.byId("'.$field.'").set("checked",(this.value=="on")?true:false);';
+  $result.='   </script>';
+  $result.='</div>';
+  if ($directDraw) echo $result;
+  else return $result;
 }
