@@ -127,7 +127,6 @@ class PlannedWork extends GeneralWork {
     global $arrayPlannedWork,$arrayRealWork,$arrayAssignment,$arrayPlanningElement;
     global $listPlan,$fullListPlan,$resources,$topList,$reserved,$arrayNotPlanned,$arrayWarning;
     global $cronnedScript;
-    
     // Increase default limits
   	projeqtor_set_time_limit(300);
   	projeqtor_set_memory_limit('512M');
