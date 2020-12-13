@@ -98,7 +98,7 @@ if(!$paramAccessMode)$paramAccessMode='direct';
                                  onClick="addNewGuiItem('<?php echo $item;?>',null);">
                                   <table width:"100%" ><tr style="height:22px">
                                   <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIconNewGui($item, 22, null, false);?></td>    
-                                  <td style="vertical-align:top;padding-top:2px;color:var(--color-dark);"><?php echo i18n($item)?></td>
+                                  <td style="vertical-align:top;padding-top:2px;"><?php echo i18n($item)?></td>
                                   </tr></table>   
                                 </div>
                                 <?php } 

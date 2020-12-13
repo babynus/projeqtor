@@ -8,6 +8,7 @@
 //   => 'resource'  => resource planning
 //   => 'global'    => global planning
 //   => 'version'   => product version et component version planning
+//   => 'contract'  => contract 
 
 // ================================================== BUTTON PLAN 
 function drawButtonPlan() {?>
@@ -215,10 +216,10 @@ function drawButtonsDefault() {
   global $objectClass, $planningType;?>
   <table>
     <tr>
-      <td colspan="1" width="51px" style="padding-right: 5px;">
-        <?php // ================================================================= NEW ?>
-        <?php 
-        if ($planningType=='planning' or $planningType=='resource' or $planningType=='global') {?>
+      <?php 
+      if ($planningType=='planning' or $planningType=='resource' or $planningType=='global') {?>
+        <td colspan="1" width="51px" style="padding-right: 5px;">
+          <?php // ================================================================= NEW ?>
           <div dojoType="dijit.form.DropDownButton"
             class="comboButton"   
             id="planningNewItem" jsId="planningNewItem" name="planningNewItem" 
@@ -229,7 +230,9 @@ function drawButtonsDefault() {
               <div style="font-weight:bold; height:25px;text-align:center">
                 <?php echo i18n('comboNewButton');?>
               </div>
-              <?php $arrayItems=array('Project','Activity','Milestone','Meeting','PeriodicMeeting','TestSession');
+              <?php 
+              $arrayItems=array('Project','Activity','Milestone','Meeting','PeriodicMeeting','TestSession');
+              if ($planningType=='resource') $arrayItems=array('Activity');
               foreach($arrayItems as $item) {
                 $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
                 if ($canCreate=='YES') {
@@ -238,9 +241,9 @@ function drawButtonsDefault() {
                   }
                 }
                 if ($canCreate=='YES') {?>
-                  <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
+                  <div style="vertical-align:top;cursor:pointer;" class="newGuiIconText"
                     onClick="addNewItem('<?php echo $item;?>');" >
-                    <table width:"100%"><tr style="height:22px" ><tr>
+                    <table width:"100%"><tr style="height:22px" >
                       <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIcon($item, 22, null, false);;?></td>    
                       <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
                     </tr></table>   
@@ -250,11 +253,10 @@ function drawButtonsDefault() {
                 } 
               }?>
             </div>
-          </div>
-        <?php 
-        }?>
-      </td>                  
+          </div>        
+        </td>   
       <?php 
+      } 
       $activeFilter=false;
       if (is_array(getSessionUser()->_arrayFilters)) {
         if (array_key_exists('Planning', getSessionUser()->_arrayFilters)) {
@@ -321,14 +323,20 @@ function drawButtonsDefault() {
           showlabel="false" class="comboButton" iconClass="dijitButtonIcon dijitButtonIconColumn" 
           title="<?php echo i18n('columnSelector');?>">
           <span>title</span>
-          <div dojoType="dijit.TooltipDialog" id="planningColumnSelectorDialog" class="white" style="width:250px;">   
+          <?php 
+          $screenHeight=getSessionValue('screenHeight','1080');
+          $columnSelectHeight=intval($screenHeight*0.6);?>
+          <div dojoType="dijit.TooltipDialog" id="planningColumnSelectorDialog" class="white" style="width:300px;">   
             <script type="dojo/connect" event="onHide" data-dojo-args="evt">
               if (dndMoveInProgress) {  setTimeout('dijit.byId("planningColumnSelector").openDropDown();',1); }
             </script>
             <div id="dndPlanningColumnSelector" jsId="dndPlanningColumnSelector" dojotype="dojo.dnd.Source"  
-              dndType="column"
+              dndType="column" style="overflow-y:auto; max-height:<?php echo $columnSelectHeight;?>px; position:relative"
               withhandles="true" class="container">    
-              <?php include('../tool/planningColumnSelector.php')?>
+              <?php 
+              if ($planningType=='portfolio') $portfolioPlanning=true;
+              if ($planningType=='contract') $contractGantt=true;
+              include('../tool/planningColumnSelector.php');?>
             </div>
             <div style="height:5px;"></div>    
             <div style="text-align: center;"> 
@@ -394,7 +402,7 @@ function drawOptionBaseline() {
 
 // ================================================== CHECKBOXES FOR DISPLAY OPTIONS 
 function drawOptionsDisplay() {
-  global $saveShowWbs, $saveShowClosed, $saveShowResource;?>
+  global $saveShowWbs, $saveShowClosed, $saveShowResource,$planningType;?>
   <table width="100%">
     <tr class="checkboxLabel">
       <td><?php echo ucfirst(i18n("labelShowWbs".((isNewGui())?'':'Short')));?></td>
@@ -423,7 +431,7 @@ function drawOptionsDisplay() {
       </td>
     </tr>
     <?php 
-    if (strtoupper(Parameter::getUserParameter('displayResourcePlan'))!='NO') {?>
+    if (strtoupper(Parameter::getUserParameter('displayResourcePlan'))!='NO' and ($planningType=='planning' or  $planningType=='global') ) {?>
       <tr class="checkboxLabel">
         <td><?php echo ucfirst(i18n("labelShowResource".((isNewGui())?'':'Short')));?></td>
         <td>
@@ -460,4 +468,25 @@ function drawOptionCriticalPath() {
   </div>
 <?php 
 }
+
+// 
+function drawMilestones() {
+  global $saveShowMilestone;
+  ?>
+  <?php echo i18n("showMilestoneShort");?>
+  <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
+    style="width: 150px;"
+    <?php echo autoOpenFilteringSelect();?>
+    name="listShowMilestone" id="listShowMilestone">
+    <script type="dojo/method" event="onChange" >
+      saveUserParameter('planningShowMilestone',this.value);
+      refreshJsonPlanning();
+    </script>
+    <option value=" " <?php echo (! $saveShowMilestone)?'SELECTED':'';?>><?php echo i18n("paramNone");?></option>                            
+      <?php htmlDrawOptionForReference('idMilestoneType', (($saveShowMilestone and $saveShowMilestone!='all')?$saveShowMilestone:null) ,null, true);?>
+    <option value="all" <?php echo ($saveShowMilestone=='all')?'SELECTED':'';?>><?php echo i18n("all");?></option>                            
+  </select>
+<?php                         
+}
 ?>
+
