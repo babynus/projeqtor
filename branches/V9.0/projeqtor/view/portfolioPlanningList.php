@@ -105,13 +105,13 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 	style="z-index: 3; position: relative; overflow: visible !important;">
 		<table width="100%" height="27px" class="listTitle" >
 		  <tr height="27px">
-		  	<td style="vertical-align:top;min-width:100px; width:15%;">
+		  	<td style="vertical-align:top;min-width:200px; width:15%;">
 		      <table >
     		    <tr height="32px">
       		    <td width="50px" style="min-width:50px" align="center">
                 <?php echo formatIcon('PortfolioPlanning', 32, null, true);?>
               </td>
-              <td style="min-width:100px" ><span class="title" style="max-width:250px;white-space:normal"><?php echo i18n('menuPortfolioPlanning');?></span></td>
+              <td style="min-width:<?php echo (isNewGui())?'250':'150';?>px" ><span class="title" style="max-width:<?php echo (isNewGui())?'400':'250';?>px;white-space:normal"><?php echo i18n('menuPortfolioPlanning');?></span></td>
       		  </tr>
     		  </table>
 		    </td>
