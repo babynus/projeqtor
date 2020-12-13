@@ -50,6 +50,7 @@ $startDate=date('Y-m-d');
 $endDate=null;
 $user=getSessionUser();
 $saveDates=false;
+$projectDate=Parameter::getUserParameter('projectDate');
 $paramStart=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningStartDate'));
 if ($paramStart->id) {
   $startDate=$paramStart->parameterValue;
@@ -152,20 +153,19 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                 <td style="width:250px;">
                   <table >
                     <tr>
-                    <td style="white-space:nowrap;padding-right:10px;position:relative;top:4px">
-                    <?php drawOptionAllProject();?>
-                            
-                     </td>
-                      <td colsan="3">
+                      <td style="white-space:nowrap;padding-right:10px;position:relative;top:4px">
+                        <?php drawOptionAllProject();?>
+                      </td>
+                      <td >
                         <?php drawButtonsPlanning();?>
+                      </td>
+                      <td style="text-align:left">
+                        <?php drawButtonsDefault();?>
                       </td>
                     </tr>
                     <tr>
-                    <td style="white-space:nowrap;padding-right:10px;position:relative;top:-4px">
-                       <?php drawOptionSaveDates();?>
-                          </td>
-                      <td colspan="3">
-                       <?php drawButtonsDefault();?>
+                      <td colsan="3" style="white-space:nowrap;padding-right:10px;position:relative;top:-4px">
+                        <?php drawOptionSaveDates();?>
                       </td>
                     </tr>
                   </table>
@@ -176,7 +176,9 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                 
 		            <td style="text-align: right; align: right;">
                   <?php drawOptionsDisplay();?>
+                  <?php drawMilestones();?>
 		            </td>
+		            
 		          </tr>
 		        </table>
 		        <?php }?>    
@@ -198,8 +200,8 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                     <?php drawButtonPlan(); ?>
                     </div>    
 		            </td>
-		            <td style="width:70px; position:relative;padding-right:20px;">
-                   
+		            <td style="width:500px; min-width:250px;position:relative;padding-left:30px">
+                   <?php drawMilestones();?>
                 </td>
                 <?php } ?>
                 <td style="width:150px;text-aliogn:right;">
@@ -243,7 +245,6 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                                    </td>
 		                               <td style="text-align: right; align: right;">
                                      <?php drawOptionsDisplay();?>
-                                      <?php drawOptionCriticalPath();?>
                                       <br/>
 		                               </td>
 		                             </tr>

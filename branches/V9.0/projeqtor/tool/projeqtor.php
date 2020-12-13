@@ -5201,7 +5201,6 @@ function getGui() {
 function isNewGui() {
   $auditBrowser=Audit::getBrowser();
   if ($auditBrowser['browser']=='Internet Explorer') return false;
-  debugLog($auditBrowser['browser']);
   return (getGui()=='new');
 }
 //
