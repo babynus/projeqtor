@@ -261,8 +261,8 @@ class PlannedWork extends GeneralWork {
       $endPlan=null;
       $step=1;
       $profile=$plan->_profile;
-      foreach ($plan->_directPredecessorList as $idp=>$pp) debugLog("  direct prec = $idp - ".$pp['type']." [".$pp['delay']."]");
-      foreach ($plan->_predecessorListWithParent as $idp=>$pp) debugLog("  parent prec = $idp - ".$pp['type']." [".$pp['delay']."]");
+      //foreach ($plan->_directPredecessorList as $idp=>$pp) debugLog("  direct prec = $idp - ".$pp['type']." [".$pp['delay']."]");
+      //foreach ($plan->_predecessorListWithParent as $idp=>$pp) debugLog("  parent prec = $idp - ".$pp['type']." [".$pp['delay']."]");
       if ($profile=="ASAP" and $plan->assignedWork==0 and $plan->leftWork==0 and $plan->validatedDuration>0) {
         $profile="FDUR";
       }

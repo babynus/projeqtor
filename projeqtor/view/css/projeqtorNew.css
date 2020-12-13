@@ -154,8 +154,11 @@ label, .ProjeQtOrNewGui label,
 	margin-top:5px;
 }
 
-.ProjeQtOrNewGui .textColorNewGui{
-  color:var(--color-text);
+.ProjeQtOrNewGui .textColorNewGui, .ProjeQtOrNewGui .newGuiIconText{
+  color:var(--color-dark);
+}
+.ProjeQtOrNewGui .newGuiIconText:hover{
+  color:var(--color-secondary);
 }
 
 /* === GANTT SPECIFIC CSS ============================================================= GANTT ===*/
@@ -509,7 +512,8 @@ html, body, #mainDiv,
 }
 .ProjeQtOrNewGui .roundedButton:hover .imageColorNewGui, .ProjeQtOrNewGui .roundedButtonSmall:hover .imageColorNewGui, .ProjeQtOrNewGui .imageColorNewGui:hover,
 .ProjeQtOrNewGui .directAttachment:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover .iconSize16,
-.ProjeQtOrNewGui .menuBarItemSelected .imageColorNewGui, .ProjeQtOrNewGui .menuBarItem:hover .imageColorNewGui {
+.ProjeQtOrNewGui .menuBarItemSelected .imageColorNewGui, .ProjeQtOrNewGui .menuBarItem:hover .imageColorNewGui,
+.ProjeQtOrNewGui .newGuiIconText:hover .imageColorNewGui {
 	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   color:var(--color-secondary);
