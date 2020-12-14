@@ -258,7 +258,7 @@ function drawButtonsDefault() {
         </td>   
       <?php
       } 
-      if ($planningType=='planning' or $planningType=='resource' or $planningType=='global') {?>
+      if ($planningType=='global') {?>
         <td colspan="1" width="51px" style="<?php if (isNewGui()) echo 'padding-right: 5px;';?>">
           <?php drawGlobalItemsSelector();?>
         </td>  
