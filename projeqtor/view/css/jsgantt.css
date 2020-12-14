@@ -357,26 +357,6 @@ div .scrollRightTop {
 
 */
 
-.ganttNoExpand {
-  background-image: url(images/none.gif);  background-repeat: no-repeat;
-  cursor: default;
-}
-
-.ganttAsset {
-  background-image: url(images/none.gif);  background-repeat: no-repeat;
-  cursor: default;
-}
-
-.ganttOrganization {
-  background-image: url(images/none.gif);  background-repeat: no-repeat;
-  cursor: default;
-}
-
-.ganttNoExpandMile {
-  background-image: url(images/mile.gif);  background-repeat: no-repeat;
-  cursor: default;
-}
-
 .ganttSep {
   width: 16px;
   font-size: 90%;

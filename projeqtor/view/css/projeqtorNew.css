@@ -642,7 +642,8 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .comboDetail div .iconSize32, .ProjeQtOrNewGui .comboDetail .dijitIcon, .ProjeQtOrNewGui .allSearchFixLength .dijitIcon,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButton .dijitIcon,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButton.dialogDetailButton .dijitIcon,
-.ProjeQtOrNewGui .ticketKanBanStyle .roundedButton .iconSize16
+.ProjeQtOrNewGui .ticketKanBanStyle .roundedButton .iconSize16,
+.ProjeQtOrNewGui .ganttExpandOpened, .ProjeQtOrNewGui .ganttExpandClosed 
  {
   -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
