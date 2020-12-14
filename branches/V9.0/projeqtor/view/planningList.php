@@ -160,15 +160,16 @@ foreach ($lstUserP as $prof){
 		    </td>
 		    <td>   
 		      <form dojoType="dijit.form.Form" id="listForm" action="" method="" style="">
-		      <?php if (!isNewGui()) { // =========================================================== NOT NEW GUI?>
+		      	<?php 
+		        $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
+		        $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';?>
+		        <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
+		        <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
+		        <?php if (!isNewGui()) { // =========================================================== NOT NEW GUI?>
 		        <table style="width: 100%;">
 		          <tr>
 		            <td style="width:70px; position:relative;">
-		              <?php 
-		              $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
-		              $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';?>
-		              <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
-		              <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
+
 		              &nbsp;&nbsp;&nbsp;
                   <?php if ($canPlan) { ?>
                   <?php drawButtonPlan(); ?>
@@ -229,11 +230,6 @@ foreach ($lstUserP as $prof){
                 </td>
                 <?php if ($canPlan) { ?>
 		            <td style="width:70px; position:relative;">
-		              <?php 
-		              $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
-		              $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';?>
-		              <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
-		              <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
 		              &nbsp;&nbsp;&nbsp;
 		                <div style="position:absolute;top:-4px;right:10px">
                     <?php drawButtonPlan(); ?>
