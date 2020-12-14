@@ -5836,30 +5836,29 @@ abstract class SqlElement {
     $ref = $this->getReferenceUrl ();
     $replyMail=i18n("replyToMail");
     $firstLine = " 
-        <table style='font-size:14pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr>
-        <td colspan='3' style='background:#606062;color: #FFFFFF; text-align: center;'>
+        <table style='font-size:14pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;padding-bottom:10px;'><tr style='height:22px;'>
+        <td colspan='2' style='background:#606062;color: #FFFFFF; text-align: center;vertical-align: middle;'>
         <div style='background:#F0F0F0;color:#A0A0A0;font-style:italic;font-size:80%'>".htmlEncode ( $replyMail)."</div><div style='background:#606062;color:#606062;font-size:1pt;'>###PROJEQTOR###</div>
-        <a href='". $ref ."' target='#' style='color:white'>". i18n ( get_class ( $this ) ) ." #". htmlEncode ( $this->id ) ."</a></td>
-        </tr></table>";
-    $secondLine = "  <div>&nbsp;</div>";
-    $dmsg=(isset($directMessage))?$this->parseMailMessage ($directMessage). '<br/><br/>':'';
+        <div style='vertical-align: middle;'>
+        <img style='width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);' src='".self::getBaseUrl()."/view/css/customIcons/grey/icon".get_class ( $this ).".png'/>
+        <a href='". $ref ."' target='#' style='color:white'>". i18n ( get_class ( $this ) ) ." #". htmlEncode ( $this->id ) ."</a></div></td>
+        </tr>";
+    $dmsg=(isset($directMessage))?$this->parseMailMessage ($directMessage):'';
     if(Parameter::getGlobalParameter('cronCheckEmailsHost')!='' and Parameter::getGlobalParameter('cronCheckEmails')>0){
-      $msg = " \n ".$firstLine."\n".$secondLine."\n".$dmsg."\n".'<table style="font-size:9pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;">';;
+      $msg = " \n ".$firstLine."\n".$dmsg."\n";
     }else{
-      $msg = " \n ".$dmsg."\n".'<table style="font-size:9pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
-      $msg .= '<tr>';
-      $msg .= ' <td style="color:#AAAAAA">';
-      $msg .= ' <table><tr>';
-      $msg .= '   <td><img style="float:left;width:64px; height:64px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.self::getBaseUrl().'/view/css/customIcons/grey/icon'.get_class ( $this ).'.png" /></td>';
-      $msg .= '   <td><a href="' . $ref . '" target="#" style="float:left;font-size:22pt;">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></td>';
-      $msg .= ' </tr></table>';
-      $msg .= ' </td>';
-      $msg .= '</tr>';
-      $msg .= '<tr>';
-      $msg .= ' <td style="text-align:center;font-size:32pt;color:#606062;background:#DDDDDD" colspan="2">'.SqlList::getNameFromId(get_class ( $this ), $this->id).'</td>';
-      $msg .= '</tr>';
-      $msg .= '<tr><td><br></td></tr>';
+      $msg = "<table style='font-size:14pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr style='height:22px;'>";
+      $msg .= "  <td colspan='2' style='background:#606062;color: #FFFFFF; text-align: center;vertical-align: middle;'><div style='vertical-align: middle;'>";
+      $msg .= "  <img style='width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);' src='".self::getBaseUrl()."/view/css/customIcons/grey/icon".get_class ( $this ).".png'/>";
+      $msg .= "  <a href='". $ref ."' target='#' style='color:white'>". i18n ( get_class ( $this ) ) ." #". htmlEncode ( $this->id ) ."</a></div></td>";
+      $msg .= "  </tr>";
+      $msg .= " \n ".$dmsg."\n";
     }
+    $msg .= '<tr><td><br></td></tr>';
+    $msg .= '<tr>';
+    $msg .= ' <td style="text-align:center;font-size:32pt;color:#606062;background:#DDDDDD;border:1px solid #606062;vertical-align: middle;" colspan="2">'.SqlList::getNameFromId(get_class ( $this ), $this->id).'</td>';
+    $msg .= '</tr>';
+    $msg .= '<tr><td><br></td></tr>';
     //
     $colArray = array();
     $section = null;
@@ -5946,7 +5945,7 @@ abstract class SqlElement {
     	$msg .= $tableStart;
     	$msg .= $rowStart . $sectionStart.'<table><tr>';
     	$msg .= '<td><img style="float:left;padding-right:10px;width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></td>';
-    	$msg .= '<td>'.i18n ( 'sectionLink' ).'</td>';
+    	$msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;">'.i18n ( 'sectionLink' ).'</td>';
     	$msg .= '</tr></table>'.$sectionEnd.$rowEnd;
     	$links=$this->_Link;
     	foreach ( $links as $link ) {
@@ -5961,8 +5960,7 @@ abstract class SqlElement {
     		$msg .= $rowStart . $labelStart;
     		$userId = $link->idUser;
     		$userName = SqlList::getNameFromId ( 'User', $userId );
-    		$msg .= $userName;
-    		$msg .= '<br/>';
+    		$msg .= $userName.'&nbsp;&nbsp;';
     		$msg .= htmlFormatDateTime ( $creationDate );
     		$msg .= $labelEnd . $fieldStart;
     		$msg .= '<b>'.i18n($refLinkType);
@@ -5989,8 +5987,8 @@ abstract class SqlElement {
     if (isset ( $this->_DocumentVersion ) and is_array ( $this->_DocumentVersion )) {
       $msg .= $tableStart;
       $msg .= $rowStart . $sectionStart.'<table><tr>';
-      $msg .= '<td><div style="float:left;padding-right:10px;"><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></div></td>';
-      $msg .= '<td><div style="float:left;">'.i18n ( 'sectionDocumentVersion' ).'</div></td>';
+      $msg .= '<td><img style="width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.ucfirst($section).'.png" /></td>';
+      $msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;">'.i18n ( 'sectionDocumentVersion' ).'</td>';
       $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
       $documentVersion = new DocumentVersion ();
       $documentVersions = $documentVersion->getSqlElementsFromCriteria ( array('idDocument' => $this->id), false, null, 'id desc' );
@@ -6053,7 +6051,7 @@ public function drawMailDetailCol($colArray, &$msg){
   				$msg .= $tableStart;
   				$msg .= $rowStart . $sectionStart.'<table><tr>';
   				$msg .= '<td><img style="float:left;padding-right:10px;width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/icon'.$icon.'.png" /></td>';
-  				$msg .= '<td>'.i18n ( 'section' . $section ).'</td>';
+  				$msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;">'.i18n ( 'section' . $section ).'</td>';
   				$msg .= '</tr></table>'.$sectionEnd.$rowEnd;
   			}
   		} else {
@@ -6472,7 +6470,7 @@ function getLinksHtmlTab() {
 function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd){
   $msg .= $rowStart . $sectionStart.'<table><tr>';
   $msg .= '<td><img style="float:left;padding-right:10px;width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/grey/iconActivityStream.png" /></td>';
-  $msg .= '<td>'.i18n ( 'sectionNote' ).'</td>';
+  $msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;">'.i18n ( 'sectionNote' ).'</td>';
   $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
   $note = new Note ();
   $notes = $note->getSqlElementsFromCriteria ( array('refType' => get_class ( $this ), 'refId' => $this->id), false, null, 'id desc' );
@@ -6486,8 +6484,7 @@ function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,
         $updateDate = '';
       }
       $msg .= $rowStart . $labelStart;
-      $msg .= $userName;
-      $msg .= '<br/>';
+      $msg .= $userName.'&nbsp;&nbsp;';
       if ($updateDate) {
         $msg .= '<i>' . htmlFormatDateTime ( $updateDate ) . '</i>';
       } else {
