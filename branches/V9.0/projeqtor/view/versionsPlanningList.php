@@ -39,7 +39,9 @@ $showClosedPlanningVersion = Parameter::getUserParameter('planningVersionShowClo
 $showOnlyActivesVersions=Parameter::getUserParameter('showOnlyActivesVersions');
 $listDisplayProductVersionActivity=Parameter::getUserParameter('listDisplayProductVersionActivity');
 $listDisplayComponentVersionActivity=Parameter::getUserParameter('listDisplayComponentVersionActivity');
-
+$showOneTimeActivities=Parameter::getUserParameter('showOneTimeActivities');
+$showProjectLevel = Parameter::getUserParameter('planningVersionShowProjectLevel');
+$showActivityHierarchy = Parameter::getUserParameter('planningVersionDisplayActivityHierarchy');
 if ($saveShowClosed) {
 	$_REQUEST['idle']=true;
 }
@@ -341,6 +343,33 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                           </script>
                         </span>
                         <span for="listSaveDates"><?php echo i18n("saveDates");?></span>
+                          <div dojoType="dijit.form.DropDownButton" style="margin-left: 34px"
+                               id="planningColumnSelector" jsId="planningColumnSelector" name="planningColumnSelector"
+                               showlabel="false" class="comboButton" iconClass="dijitButtonIcon dijitButtonIconColumn"
+                               title="<?php echo i18n('columnSelector');?>">
+                              <span>title</span>
+                              <div dojoType="dijit.TooltipDialog" id="planningColumnSelectorDialog" class="white" style="width:250px;">
+                                  <script type="dojo/connect" event="onHide" data-dojo-args="evt">
+                              if (dndMoveInProgress) {  setTimeout('dijit.byId("planningColumnSelector").openDropDown();',1); }
+                            </script>
+                                  <div id="dndPlanningColumnSelector" jsId="dndPlanningColumnSelector" dojotype="dojo.dnd.Source"
+                                       dndType="column"
+                                       withhandles="true" class="container">
+                                      <?php
+                                      $versionPlanning=true;
+                                      include('../tool/planningColumnSelector.php')?>
+                                  </div>
+                                  <div style="height:5px;"></div>
+                                  <div style="text-align: center;">
+                                      <button title="" dojoType="dijit.form.Button"
+                                              id="" name="" showLabel="true"><?php echo i18n('buttonOK');?>
+                                          <script type="dojo/connect" event="onClick" args="evt">
+                                  validatePlanningColumn();
+                                </script>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
                       </td>
                        <td style="padding-right:5px;padding-left:20px;text-align: right;">
                       <?php echo i18n('displayProductVersionActivity');?>
@@ -379,6 +408,45 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                         </script>
                       </div>
                       </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="white-space:nowrap;">
+                                                                    <span title="<?php echo i18n('versionPlanningShowOneTimeActivities')?>" dojoType="dijit.form.CheckBox"
+                                                                          type="checkbox" id="showOneTimeActivities" name="showOneTimeActivities" class="whiteCheck"
+                                                                       <?php if ( $showOneTimeActivities) {echo 'checked="checked"'; } ?>  >
+
+                                                                      <script type="dojo/method" event="onChange" >
+                                                                        saveUserParameter('showOneTimeActivities',((this.checked)?'1':'0'));
+                                                                        refreshJsonPlanning();
+                                                                      </script>
+                                                                    </span>
+                                <span for="showOneTimeActivities"><?php echo i18n("versionPlanningShowOneTimeActivities");?></span>
+                            </td>
+                            <td style="padding-right:5px;padding-left:20px;text-align: right;">
+                                <?php echo i18n('labelShowProjectLevel');?>
+                            </td><td>
+                                <div title="<?php echo i18n('labelShowProjectLevel')?>" dojoType="dijit.form.CheckBox"
+                                     class="whiteCheck" type="checkbox" id="showProjectLevel" name="showProjectLevel"
+                                    <?php if ($showProjectLevel) { echo ' checked="checked" '; }?> >
+                                    <script type="dojo/method" event="onChange" >
+                                                        saveUserParameter('planningVersionShowProjectLevel',((this.checked)?'1':'0'));
+                                                        refreshJsonPlanning();
+                                                </script>
+                                </div>
+                            </td>
+                            <td style="padding-right:5px;padding-left:20px;text-align: right;">
+                                <?php echo i18n('labelShowActivityHierarchy');?>
+                            </td><td>
+                                <div title="<?php echo i18n('labelShowActivityHierarchy')?>" dojoType="dijit.form.CheckBox"
+                                     class="whiteCheck" type="checkbox" id="showActivityHierarchy" name="showActivityHierarchy"
+                                    <?php if ($showActivityHierarchy) { echo ' checked="checked" '; }?> >
+                                    <script type="dojo/method" event="onChange" >
+                                                        saveUserParameter('planningVersionDisplayActivityHierarchy',((this.checked)?'1':'0'));
+                                                        refreshJsonPlanning();
+                                                </script>
+                                </div>
+                            </td>
                     </tr>
                   </table>
                 </td>

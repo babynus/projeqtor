@@ -36,9 +36,10 @@ $columnsAll=Parameter::getPlanningColumnOrder(true);
 $desc=Parameter::getPlanningColumnDescription();
   
 foreach ($columnsAll as $order=>$col) {
-	if ( (isset($resourcePlanning) and ($col=='ValidatedWork' or $col=='Resource' or substr($col,-4)=='Cost') )
-	  or (isset($portfolioPlanning) and ($col=='Resource' or $col=='IdPlanningMode') )) {
-	  // nothing	
+    if ( (isset($resourcePlanning) and ($col=='ValidatedWork' or $col=='Resource' or substr($col,-4)=='Cost') )
+        or (isset($portfolioPlanning) and ($col=='Resource' or $col=='IdPlanningMode') )
+        or (isset($versionPlanning) and (substr($col,-4)=='Cost'))) {
+        // nothing
 	} else if ( ! SqlElement::isVisibleField($col) ) {
 		// nothing 
 	}else {
