@@ -3358,7 +3358,7 @@ function drawGantt() {
       // pGroup : is the task a group one ?
       var pGroup = (item.elementary == '0') ? 1 : 0;
       //MODIF qCazelles - GANTT
-      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' || item.reftype=='ClientContracthasChild') pGroup=1;
+      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' || item.reftype=='ClientContracthasChild' || item.reftype=='ActivityhasChild') pGroup=1;
      //END MODIF qCazelles - GANTT
       var pobjecttype='';
       var pHealthStatus='';
@@ -3379,6 +3379,9 @@ function drawGantt() {
         pOverallProgress=item.overallprogress
       }
 
+      if(dojo.byId('versionsPlanning')){
+        pobjecttype=item.objecttype;
+      }
      
       // runScript : JavaScript to run when click on task (to display the
       // detail of the task)
@@ -3513,6 +3516,9 @@ function runScript(refType, refId, id) {
     refType = 'Project';
   }
   //ADD by qCazelles - GANTT
+  if (refType == 'ActivityhasChild') {
+    refType = 'Activity';
+  }
   if (refType == 'ProductVersionhasChild') {
     refType = 'ProductVersion';
   }
