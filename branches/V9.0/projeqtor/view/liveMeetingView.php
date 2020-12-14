@@ -193,26 +193,26 @@ function timeToTimeStamp($time){
 }
 $hidecouters=(Parameter::getUserParameter('hideCounters')!='')?Parameter::getUserParameter('hideCounters'):'false';
 ?>
-<div class="container statusBar" style="color: #000;"
+<div class="container <?php if (!isNewGui()) echo 'statusBar';?>" style="color: #000;"
 	dojoType="dijit.layout.BorderContainer">
 	<div id="titleLiveMeeting" class="listTitle"
-		style="z-index: 3; overflow: visible"
+		style="z-index: 3; overflow: visible; height:40px"
 		dojoType="dijit.layout.ContentPane" region="top">
 	  <input type="hidden" name="objectClassManual" id="objectClassManual" value="LiveMeeting" />
 		<table width="100%">
-			<tr height="100%" style="vertical-align: middle;height:34px;">
-				<td width="50px" align="middle"><?php echo formatIcon('Meeting', 32,null,true)?></td>
+			<tr height="100%" style="vertical-align: middle;height:36px;">
+				<td width="50px" align="middle" style="<?php if (isNewGui()) echo 'position:relative;top:2px';?>"><?php echo formatIcon('Meeting', 32,null,true)?></td>
 				<td ><span class="title"><?php echo i18n("Meeting").' : '.$meeting->name;?></span></td>
-				<td style="width:80px;"><label for='hideCounters' style="width:172px;margin-top:3px;margin-right:5px;text-shadow:none;visibility:<?php echo (count ( $meeting->_Assignment )==0)?'hidden':'visible'; ?>"><?php echo i18n('hideCounters');?></label></td>
+				<td style="width:80px;"><label for='hideCounters' style="width:250px;margin-top:3px;margin-right:5px;text-shadow:none;visibility:<?php echo (count ( $meeting->_Assignment )==0)?'hidden':'visible'; ?>"><?php echo i18n('hideCounters');?></label></td>
 				<td style="width:30px;"><div id="hideCounters" name="hideCounters" dojoType="dijit.form.CheckBox" type="checkbox"  onclick="hideCounters();" style="margin-top:7px;visibility:<?php echo (count ( $meeting->_Assignment )==0)?'hidden':'visible'; ?>" <?php echo ($hidecouters=='true' or count ( $meeting->_Assignment )==0 )?'checked':'';?>></div></td>
 				<td style="width:157px;position:relative;text-align:left">
-						<div style="position:absolute;width:78px; height:24px;background-color: #DDD; padding: 2px 5px; top:6px;border-radius: 5px;margin-right: 20px;">
-								<button iconClass="iconLiveMeetingPlay22" class="detailButton" style="position:absolute;top:-1px;"
+						<div style="position:absolute;height:24px; padding: 2px 5px; top:6px;border-radius: 5px;margin-right: 20px;background-color: <?php echo (isNewGui())?'#FFF;border:1px solid var(--color-light);left:5px;width:70px;':'#DDD;width:78px;';?>">
+								<button iconClass="iconLiveMeetingPlay22 iconLiveMeetingPlay iconSize22" class="detailButton" style="position:absolute;top:-1px;"
 									dojoType="dijit.form.Button"
 									title="<?php echo i18n('liveMeetingTitlePlay');?>"
 									onclick="liveMeetingGoPlay();" 
 									id="playPauseButton"></button>
-								<button iconClass="iconLiveMeetingStop22" class="detailButton" style="position:absolute;top:-1px;left:45px;"
+								<button iconClass="iconLiveMeetingStop22 iconLiveMeetingStop iconSize22" class="detailButton" style="position:absolute;top:-1px;left:45px;"
 									dojoType="dijit.form.Button"
 									title="<?php echo i18n('liveMeetingTitleStop');?>"
 									onclick="liveMeetingGoStop(<?php echo $idMeeting;?>);" 
@@ -220,14 +220,14 @@ $hidecouters=(Parameter::getUserParameter('hideCounters')!='')?Parameter::getUse
 					  </div>
 					  <div style="position:absolute;width:85px; height:22px; padding: 2px 10px; margin-right: 20px; top:12px;left:100px;">
 							  <button id="switchDivBottom" dojoType="dijit.form.Button"
-							  <?php if($typeLoadBottom=='normal'){ ?>
+							  <?php if($typeLoadBottom=='normal'){ ?> 
 							  title="<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>"
-							  iconClass="iconKanban22" class="detailButton" style="cursor:pointer;padding:3px;margin-top:-10px;margin-left:-2px;height:23px"
+							  iconClass="imageColorNewGui iconKanban22 iconKanban iconSize22" class="detailButton" style="cursor:pointer;padding:3px;margin-top:-10px;margin-left:-2px;height:23px"
 							  <?php }else{ ?>
 							  title="<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>"
-							  iconClass="iconActionQuestionDecision22 iconSize22" class="detailButton" style="cursor:pointer;padding:3px;margin-top:-10px;margin-left:-2px;height:23px"
+							  iconClass="imageColorNewGui iconActionQuestionDecision22 iconActionQuestionDecision iconSize22" class="detailButton" style="cursor:pointer;padding:3px;margin-top:-10px;margin-left:-2px;height:23px"
 							  <?php } ?>						  
-									onclick="if(typeLoadBottom=='normal'){dijit.byId('switchDivBottom').setAttribute('iconClass','iconActionQuestionDecision22 iconSize22');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>');typeLoadBottom='kanban';loadContent('../view/kanbanViewMain.php?storeParameterBottomLiveMeeting=true', 'divBottom');}else{dijit.byId('switchDivBottom').setAttribute('iconClass','iconKanban22');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>');typeLoadBottom='normal';loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>', 'divBottom');}"
+									onclick="if(typeLoadBottom=='normal'){dijit.byId('switchDivBottom').setAttribute('iconClass','imageColorNewGui iconActionQuestionDecision22 iconActionQuestionDecision iconSize22');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>');typeLoadBottom='kanban';loadContent('../view/kanbanViewMain.php?storeParameterBottomLiveMeeting=true', 'divBottom');}else{dijit.byId('switchDivBottom').setAttribute('iconClass','imageColorNewGui iconKanban22 iconKanban iconSize22');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>');typeLoadBottom='normal';loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>', 'divBottom');}"
 									id="switchDivBottom"></button>
                       </div>
 				</td>
@@ -288,7 +288,7 @@ $hidecouters=(Parameter::getUserParameter('hideCounters')!='')?Parameter::getUse
 			<input dojoType="dijit.form.TextBox" type="hidden"
 				id="refreshBottomQuestion" value="-1"
 				onchange="if(dijit.byId(this.id).get('value')!=-1 && dijit.byId(this.id).get('value')!='')loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>&typeObj=Question&idObj='+this.value, 'divBottom');dijit.byId(this.id).set('value',-1);">
-		  <div class="statusBar"
+		  <div class="<?php if (!isNewGui()) echo 'statusBar';?>"
 				style="background-image:none !important;color: #000; height: 100%; width: 100%; min-width: 970px; margin: 0 auto; margin-top: 10px;">
 				<table id="tabeTimeEditor" width="100%"  style="position:relative;display:<?php echo ($hidecouters!='true')?'block':'none'; ?>;">
 					<tr>
@@ -348,7 +348,7 @@ $hidecouters=(Parameter::getUserParameter('hideCounters')!='')?Parameter::getUse
 <?php $bottomHeight=Parameter::getUserParameter('contentPaneBottomLiveMeeting');
   	$bottomHeight=($bottomHeight)?$bottomHeight.'px':'215px';?>
 	<div id="divBottom" dojoType="dijit.layout.ContentPane" region="bottom"
-		splitter="true" class="statusBar" 
+		splitter="true" class="<?php if (!isNewGui()) echo 'statusBar';?>" 
 		style="background-image:none !important;color: #000; height:<?php echo $bottomHeight;?>;min-width: 970px; width: 100%; margin: 0 auto; margin-top: 15px;">
 		
       <?php 

@@ -1086,7 +1086,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           vLeftTable +='</td><td>';
           var nameLeftWidth= vNameWidth - 16 - levlWidth - 18 ;
           vLeftTable += '<div onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '") style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; '
-          	+'width:'+ nameLeftWidth +'px;" class="namePart' + vRowType + '"><span class="nobr">' + vTaskList[i].getClass()+vTaskList[i].getName() + '</span></div>' ;
+          	+'width:'+ nameLeftWidth +'px;" class="namePart' + vRowType + '"><span class="nobr">' +vTaskList[i].getName() + '</span></div>' ;
           vLeftTable +='</td></tr></table></div>';
           vLeftTable +='</TD>';
           if (!dojo.byId('versionsPlanning') && !dojo.byId('contractGantt')) {
