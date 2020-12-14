@@ -21,10 +21,10 @@
 
 function generateAttachment($type,$meeting,$last=false){
   $countGood=0;
-	echo '<td width="33%" style="position:relative;min-width:300px;padding:5px;border-radius:10px;height:100%;background-color:#EEE;vertical-align:top;">'
+	echo '<td width="33%" style="position:relative;min-width:300px;padding:5px;border-radius:10px;height:100%;background-color:'.((isNewGui())?'var(--color-light)':'#EEE').';vertical-align:top;">'
         .'<div style="height:38px;width:32px">'.formatIcon($type,32,null,false).'</div>'
-        .'<div class="messageData" style="position:absolute;background:url();border:0;top:7px;left:50px;font-size:200%;">'.i18n('menu'.$type).'</div>'
-        .'<div style="white-space:nowrap;overflow:hidden;top:14px;left:48%;width:50%;position:absolute;text-align:right;" dojoType="dijit.layout.ContentPane">'
+        .'<div class="messageData" style="'.((isNewGui())?'color:var(--color-dark);top:4px;':'top:7px;').'position:absolute;background:url();border:0;left:50px;font-size:200%;">'.i18n('menu'.$type).'</div>'
+        .'<div style="white-space:nowrap;overflow:hidden;top:'.((isNewGui())?'4':'14').'px;left:48%;width:50%;position:absolute;text-align:right;" dojoType="dijit.layout.ContentPane">'
         .'<div style="width:85%;" dojoType="dijit.form.TextBox" id="new'.$type.'" name="new'.$type.'" ></div>'
         .'<a id="addLink" onClick="addNewLinkMeeting(\'new'.$type.'\',\'refreshBottom'.$type.'\','.$meeting->idProject.');" title="'. i18n('addLink') .'" >'
         .formatSmallButton('Add')
@@ -104,8 +104,15 @@ function generateSpeakTimeEditor($param){
     if(is_int($key)){
       $playIcon='<div class="iconLiveMeetingPlay iconSize16" dojoType="dijit.layout.ContentPane" style="float:left;margin-top:8px;" id="playPauseButtonItem'.$key.'"></div>';
       if($iterateur==0)$playIcon='<div class="iconLiveMeetingPlayS iconSize16" dojoType="dijit.layout.ContentPane" style="float:left;margin-top:8px;" id="playPauseButtonItem'.$key.'"></div>';
-      echo'<td title="'.i18n('liveMeetingTitleSpeakResource',array($line['name'])).'" onclick="liveMeetingStartTimerSpeak(this.id,\''.$line['name'].'\',\''.i18n('liveMeetingBreak').'\');if(dojo.byId(\'blockFor'.$key.'\').getAttribute(\'title\')==\''.i18n('liveMeetingTitlePause').'\')dojo.byId(blockFor'.$key.').setAttribute(\'title\',\''.i18n('liveMeetingTitleSpeakResource',array($line['name'])).'\'); else dojo.byId(blockFor'.$key.').setAttribute(\'title\',\''.i18n('liveMeetingTitlePause').'\');" id="blockFor'.$key.'" isorganizator="'.($line['organizator'] ? '1' : '0').'" canspeak="'.$line['canSpeak'].'" width="150" style="border-radius:5px 5px 0 0;position:relative;cursor:pointer;height:92px;min-height:92px; width:150px;max-width:150px;padding:5px; vertical-align:top; background-color:#EEE;">
-          <div style="width:100%;position:relative;max-height:21px;overflow:hidden;white-space:nowrap;"><h4 id="nameFor'.$key.'" style="margin:0;font-size:13px;">'.$line['name'].'</h4></div><div id="timeFor'.$key.'" style="width:100%;text-align:center;font-weight:bold;font-size:25px;color:'.$line['color'].'">'.$line['time'].'</div>
+      echo'<td title="'.i18n('liveMeetingTitleSpeakResource',array($line['name'])).'" onclick="liveMeetingStartTimerSpeak(this.id,\''.$line['name'].'\',\''
+          .i18n('liveMeetingBreak').'\');if(dojo.byId(\'blockFor'.$key.'\').getAttribute(\'title\')==\''
+          .i18n('liveMeetingTitlePause').'\')dojo.byId(blockFor'.$key.').setAttribute(\'title\',\''
+          .i18n('liveMeetingTitleSpeakResource',array($line['name'])).'\'); else dojo.byId(blockFor'.$key.').setAttribute(\'title\',\''
+          .i18n('liveMeetingTitlePause').'\');" id="blockFor'.$key.'" isorganizator="'.($line['organizator'] ? '1' : '0')
+          .'" canspeak="'.$line['canSpeak'].'" width="150" style="border-radius:5px 5px 0 0;position:relative;cursor:pointer;height:92px;min-height:92px; width:150px;max-width:150px;padding:5px; vertical-align:top; background-color:'.((isNewGui())?'var(--color-light)':'#EEE').';">
+          <div style="width:100%;position:relative;max-height:21px;overflow:hidden;white-space:nowrap;"><h4 id="nameFor'.$key.'" style="margin:0;font-size:13px;">'
+          .$line['name'].'</h4></div><div id="timeFor'.$key.'" style="width:100%;text-align:center;font-weight:bold;font-size:25px;color:'.$line['color'].'">'
+          .$line['time'].'</div>
           '.$playIcon.
           '<button id="buttonChangeTimer'.$key.'" dojoType="dijit.form.Button" iconClass="'.((!$line['organizator'] && $line['canSpeak']) ? 'iconLiveMeetingNormal iconSize22' : ($line['organizator'] ? 'iconLiveMeetingOrganizator iconSize22' : 'iconLiveMeetingCanSpeak iconSize22')).'" style="'.($countParam<=1?'display:none;':'').'width:22px;height:22px; z-index:10000;position:relative;float:right;bottom:0;">
               <script type="dojo/connect" event="onClick" args="evt">

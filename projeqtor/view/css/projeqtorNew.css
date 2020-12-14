@@ -1043,9 +1043,10 @@ animation: fadeIn ease 0.5s;
   color:var(--color-text);
 }
 
-.ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton .dijitButtonNode {
+.ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton .dijitButtonNode,
+.ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitButtonHover {
     background: #ffffff;
-    border: 0px solid #ffffff;
+    border: 0px solid #ffffff !important;
 }    
 .ProjeQtOrNewGui .detailButton.dijitButton, .ProjeQtOrNewGui .dijitReset.dijitInline.detailButton.dijitButtonNode {
 	  background: #ffffff;
