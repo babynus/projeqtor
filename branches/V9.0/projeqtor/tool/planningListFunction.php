@@ -411,6 +411,7 @@ function drawOptionBaseline() {
 function drawOptionsDisplay() {
   global $saveShowWbs, $saveShowClosed, $saveShowResource,$planningType;?>
   <table width="100%">
+    <?php if ($planningType!='contract' and $planningType!='version') {?>
     <tr class="checkboxLabel">
       <td><?php echo ucfirst(i18n("labelShowWbs".((isNewGui())?'':'Short')));?></td>
       <td width="35px">
@@ -424,6 +425,7 @@ function drawOptionsDisplay() {
         </div>&nbsp;
       </td>
     </tr>
+    <?php }?>
     <tr class="checkboxLabel">
       <td><?php echo ucfirst(i18n("labelShowIdle".((isNewGui())?'':'Short')));?></td>
       <td>
@@ -438,7 +440,7 @@ function drawOptionsDisplay() {
       </td>
     </tr>
     <?php 
-    if (strtoupper(Parameter::getUserParameter('displayResourcePlan'))!='NO' and ($planningType=='planning' or  $planningType=='global') ) {?>
+    if (strtoupper(Parameter::getUserParameter('displayResourcePlan'))!='NO' and ($planningType=='planning' or  $planningType=='global' or $planningType=='contract') ) {?>
       <tr class="checkboxLabel">
         <td><?php echo ucfirst(i18n("labelShowResource".((isNewGui())?'':'Short')));?></td>
         <td>

@@ -1052,7 +1052,10 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           var levlWidth = (levl-1) * 16;
           vLeftTable +='<table><tr><td>';
           vLeftTable += '<div style="width:' + levlWidth + 'px;">';
-          if (vTaskList[i].getGroup() && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' &&  vTaskList[i].getClass() != 'SupplierContracthasChild' &&  vTaskList[i].getClass() != 'ClientContracthasChild' &&  vTaskList[i].getClass() != 'ActivityhasChild') {
+          if (vTaskList[i].getGroup() 
+          && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' 
+          //&&  vTaskList[i].getClass() != 'SupplierContracthasChild' &&  vTaskList[i].getClass() != 'ClientContracthasChild' 
+          &&  vTaskList[i].getClass() != 'ActivityhasChild') {
             vLeftTable += '<div style="margin-left:3px;width:8px;">&nbsp</div>';
           } else {
             vLeftTable += '<div style="margin-left:3px;width:8px;background-color:#'+vTaskList[i].getTaskStatusColor()+'">&nbsp</div>';
@@ -1083,7 +1086,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           vLeftTable +='</td><td>';
           var nameLeftWidth= vNameWidth - 16 - levlWidth - 18 ;
           vLeftTable += '<div onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '") style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; '
-          	+'width:'+ nameLeftWidth +'px;" class="namePart' + vRowType + '"><span class="nobr">' + vTaskList[i].getName() + '</span></div>' ;
+          	+'width:'+ nameLeftWidth +'px;" class="namePart' + vRowType + '"><span class="nobr">' + vTaskList[i].getClass()+vTaskList[i].getName() + '</span></div>' ;
           vLeftTable +='</td></tr></table></div>';
           vLeftTable +='</TD>';
           if (!dojo.byId('versionsPlanning') && !dojo.byId('contractGantt')) {
