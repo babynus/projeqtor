@@ -52,7 +52,7 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
   if($object!='ComponentVersion'){
     foreach ($pvsArray as $id=>$idProd){ // product version 
       $prod= new ProductVersion($idProd);
-      $activityOfProdV=$prod->searchAtivityForVersion();
+      $activityOfProdV=$prod->searchActivityForVersion();
       $activityOfProductV=(isset($activityOfProdV[0]))?$activityOfProdV[0]:array();
       $activityOfProdV=(isset($activityOfProdV[1]))?$activityOfProdV[1]:array();
       $listOfCompo=ProductVersionStructure::getComposition($idProd);
@@ -62,7 +62,7 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
       foreach ($listOfCompo as $idComponentVersion){ // component  version 
         $cp++;
         $componentVersion = new ComponentVersion($idComponentVersion);
-        $result=$componentVersion->searchAtivityForVersion();
+        $result=$componentVersion->searchActivityForVersion();
         $listActivityComponent=(isset($result[0]))?$result[0]:array();
         $listActivityComponentVersion=(isset($result[1]))?$result[1]:array();
         if(empty($listActivityComponent) and empty($listActivityComponentVersion)){
@@ -91,7 +91,7 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
       $comp[$idComponentVersion]=ProductVersionStructure::getComposition($idComponentVersion);
       $cp++;
       $componentVersion = new ComponentVersion($idComponentVersion);
-      $result=$componentVersion->searchAtivityForVersion();
+      $result=$componentVersion->searchActivityForVersion();
       $listActivityComponent=(isset($result[0]))?$result[0]:array();
       $listActivityComponentVersion=(isset($result[1]))?$result[1]:array();
       if(empty($listActivityComponent) and empty($listActivityComponentVersion)){

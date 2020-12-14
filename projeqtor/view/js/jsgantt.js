@@ -207,6 +207,8 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   var vIsOnCriticalPath=pIsOnCriticalPath;
   var vGlobal='notSet';
   var vDurationContract=pDurationContract;
+  var vStartInit = pStart;
+  var vEndInit   = pEnd;
   var vElementIdRef=pElementIdRef;
   
   
@@ -257,6 +259,8 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   this.getNameTitle=function(){ return vName.replace(/"/g,"''"); };
   this.getStart    = function(){ return vStart;};
   this.getEnd      = function(){ return vEnd;  };
+  this.getStartInit    = function(){ return vStartInit;};
+  this.getEndInit      = function(){ return vEndInit;  };
   this.getRealEnd  = function(){ return vRealEnd;  };
   this.getPlanStart= function(){ return vPlanStart;  };
   this.getValidatedWork     = function(){ return vValidatedWork;  };
@@ -363,6 +367,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   this.setRealEnd  = function(pRealEnd)  { vRealEnd   = pRealEnd;  };
   this.setWork     = function(pWork)  { vWork   = pWork;  };
   this.setLevel    = function(pLevel){ vLevel = pLevel;};
+  this.setColor    = function(pColor){ vColor = pColor;};
   this.setNumKid   = function(pNumKid){ vNumKid = pNumKid;};
   this.setCompVal  = function(pCompVal){ vComp = pCompVal;};
   this.setStartX   = function(pX) {x1 = pX; };
@@ -797,7 +802,14 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           if (field!='Name' && showField && (field=='StartDate' || field=='EndDate' ||field=='Resource' || field=='IdStatus' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes'  ) ) vLeftWidth+=1+fieldWidth;
         }
     }
-    //ADD
+    else if (dojo.byId('versionsPlanning')){
+      for (var iSort=0;iSort<sortArray.length;iSort++) {
+        var field=sortArray[iSort];
+        if (field.substr(0,6)=='Hidden') field=field.substr(6);
+        var fieldWidth=getPlanningFieldWidth(field);
+        if (field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus'  || field=='Id' || field=='Duration' || field=='Priority' || field=='Type' || field=='Progress' || (field.slice(-4) == 'Work' && field.substr(0,6)!='hidden')|| (field=='Resource' && showResourceComponentVersion=='Yes'))) vLeftWidth+=1+fieldWidth;
+      }
+    }
     else {
     	for (var iSort=0;iSort<sortArray.length;iSort++) {
   	      var field=sortArray[iSort];
@@ -924,7 +936,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	        var field=sortArray[iSort];
   	        if (field.substr(0,6)=='Hidden') field=field.substr(6);
   	        var fieldWidth=getPlanningFieldWidth(field);
-  	      if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus'   || (field=='Resource' && showResourceComponentVersion=='Yes'))) {
+            if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus'   || (field=='Resource' && showResourceComponentVersion=='Yes' ) || (dojo.byId('versionsPlanning') && (field == 'Id' || field == 'Type' || field == 'Progress' || field=='Duration' || field=='Priority' || ( field.slice(-4) == 'Work' && field.substr(0,6)!='hidden'))))) {
   		        vLeftTable += '<TD class="ganttLeftTopLine" style="width: ' + fieldWidth + 'px;"></TD>' ;
   		      }
   	      }
@@ -937,7 +949,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	        var field=sortArray[iSort];
   	        if (field.substr(0,6)=='Hidden') field=field.substr(6);
   	        var fieldWidth=getPlanningFieldWidth(field);
-  	        if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus'  || (field=='Resource' && showResourceComponentVersion=='Yes') )) {
+            if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus'  || (field=='Resource' && showResourceComponentVersion=='Yes') || (dojo.byId('versionsPlanning') && (field == 'Id' || field == 'Type' || field == 'Progress' || field=='Duration' || field=='Priority' ||  (field.slice(-4) == 'Work' && field.substr(0,6)!='hidden' ))))) {
   		        vLeftTable += '<TD id="jsGanttHeaderTD'+field+'" class="ganttLeftTitle" style="position:relative;width: ' + fieldWidth + 'px;max-width: ' + fieldWidth + 'px;overflow:hidden" nowrap>'
   		          +'<div id="jsGanttHeader'+field+'" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width:' + fieldWidth + 'px; z-index:1000;" class="namePartgroup">'
   		          +'<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work','')) + '</span>'
@@ -972,6 +984,10 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             + invisibleDisplay + ' style="height:21px">' ;
           vLeftTable += '  <TD class="ganttName" style="width:'+vIconWidth+'px">';
           var iconName = vTaskList[i].getClass();
+
+          if (vTaskList[i].getClass() == 'ActivityhasChild') {
+            iconName = 'Activity';
+          }
           if (vTaskList[i].getClass() == 'ComponentVersionhasChild') {
             iconName = 'ComponentVersion';
           }
@@ -982,6 +998,23 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             iconName = 'SupplierContract';
           }else if (vTaskList[i].getClass() == 'ClientContracthasChild') {
             iconName = 'SupplierContract';
+          }
+          if (vTaskList[i].getClass() == 'ProductVersionhasChild' || vTaskList[i].getClass() == 'ComponentVersionhasChild'){
+            dateEndMax = new Date(vTaskList[i].getEnd());
+            dateEnd = new Date(vTaskList[i].getEndInit());
+            dateStarMin = new Date(vTaskList[i].getStart())
+
+            dateEndMax.setHours(23, 59, 59, 0);
+            dateEnd.setHours(23, 59, 59, 0);
+            dateStarMin.setHours(0,0,0);
+
+            diffEndStartMin = dateEnd.getTime() - dateStarMin.getTime();
+            diffEndMaxStartMin = dateEndMax.getTime() - dateStarMin.getTime();
+
+            vTaskList[i].setCompVal((diffEndStartMin/diffEndMaxStartMin)*100)
+            if (dateEndMax > dateEnd){
+              vTaskList[i].setColor('BB5050') // set to red.
+            }
           }
         //florent ticket 4397
           if (planningPage=='ResourcePlanning' || planningPage=='VersionsPlanning' || planningPage=='ContractGantt') {
@@ -1019,7 +1052,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           var levlWidth = (levl-1) * 16;
           vLeftTable +='<table><tr><td>';
           vLeftTable += '<div style="width:' + levlWidth + 'px;">';
-          if (vTaskList[i].getGroup() && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' &&  vTaskList[i].getClass() != 'SupplierContracthasChild' &&  vTaskList[i].getClass() != 'ClientContracthasChild') {
+          if (vTaskList[i].getGroup() && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' &&  vTaskList[i].getClass() != 'SupplierContracthasChild' &&  vTaskList[i].getClass() != 'ClientContracthasChild' &&  vTaskList[i].getClass() != 'ActivityhasChild') {
             vLeftTable += '<div style="margin-left:3px;width:8px;">&nbsp</div>';
           } else {
             vLeftTable += '<div style="margin-left:3px;width:8px;background-color:#'+vTaskList[i].getTaskStatusColor()+'">&nbsp</div>';
@@ -1093,6 +1126,32 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
                   +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;top:2px;text-overflow:ellipsis;'+padding+'">' + valueField
                   +'</span></TD>' ;
+              }
+            }
+          }
+          else if (dojo.byId('versionsPlanning')) {
+            for (var iSort=0;iSort<sortArray.length;iSort++) {
+              var field=sortArray[iSort];
+              if (field.substr(0,6)=='Hidden') field=field.substr(6);
+              var fieldWidth=getPlanningFieldWidth(field);
+              var valueField=vTaskList[i].getFieldValue(field,JSGantt);
+
+              if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus' || field=='Id' || field=='Type' || field=='Progress' || field=='Duration' || field=='Priority' ||  (field.slice(-4) == 'Work' && field.substr(0,6)!='hidden') || (field=='Resource' && showResourceComponentVersion=='Yes'))) {
+                if(valueField===undefined && field=='Resource' && showResourceComponentVersion=='Yes'){
+                  valueField='-';
+                }
+                if ((field.slice(-4) == 'Work' || field == 'Priority') && vTaskList[i].getFieldValue('ObjectType',JSGantt) == 'version'){
+                  valueField='-';
+                }
+                if (field=='IdStatus') {
+                  valueField=colorNameFormatter(valueField);
+                  padding='';
+                }else {
+                  padding='padding-top: 4px;';
+                }
+                vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
+                    +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;'+padding+'">' + valueField
+                    +'</span></TD>' ;
               }
             }
           }else {
