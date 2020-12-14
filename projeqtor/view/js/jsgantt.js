@@ -1649,7 +1649,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	          }
   	        vRightTableTempMeeting += '</div>' ;
             var idPm=vTaskList[i].getIdPlanningMode();
-            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13' ) && vTaskList[i].getGroup()!=1 && !vTaskList[i].getGroup()){
+            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13' || idPm=='19' || idPm=='21') && vTaskList[i].getGroup()!=1 && !vTaskList[i].getGroup()){
               // handle resizer start=======================
               leftposLeftResizer=vBarLeft-22;
               leftposdivDate=vBarLeft-43;
@@ -1657,7 +1657,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vRightTableTempMeeting +='<div class="divDateGantBarResizeleft" id="divStartDateResize_'+vID+'" style="display:none;left:'+leftposdivDate+'px;" >'+JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat)+'</div>';
               //===========================
             }
-            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8') && vTaskList[i].getGroup()!=1 && !vTaskList[i].getGroup()){
+            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8'  || idPm=='4'  || idPm=='12') && vTaskList[i].getGroup()!=1 && !vTaskList[i].getGroup()){
               // handle resizer end=======================
               leftposRightResizer=vBarLeft+vBarWidth-11;
               vRightTableTempMeeting +='<div class="resizerEnd" id="taskbar_'+vID+'ResizerEnd" style="display:none;left:'+leftposRightResizer+'px;" onmouseenter ="showResizerGanttBar ('+vID+',\'end\');"></div>';
