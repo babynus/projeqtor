@@ -100,7 +100,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
       		    <td width="50px" style="min-width:50px;<?php if (isNewGui()) echo 'position:relative;top:2px';?>" align="center">
                 <?php echo formatIcon('ResourcePlanning', 32, null, true);?>
               </td>
-              <td style="min-width:100px"><span class="title" style="max-width:250px;white-space:normal"><?php echo i18n('menuResourcePlanning');?></span></td>
+              <td style="min-width:100px"><span class="title" style="<?php echo (isNewGui())?'max-width:400px;white-space:nowrap':'max-width:250px;white-space:normal';?>"><?php echo i18n('menuResourcePlanning');?></span></td>
       		  </tr>
     		  </table>
 		    </td>
