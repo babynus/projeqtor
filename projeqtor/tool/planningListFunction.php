@@ -129,7 +129,7 @@ function drawOptionAllProject() {
 <?php 
 }
 
-// ================================================== BUTTONS FOR PLANNING FUNCTIONS (save vazlidated dates, baselines, print, pdf export)
+// ================================================== BUTTONS FOR PLANNING FUNCTIONS (save validated dates, baselines, print, pdf export)
 function drawButtonsPlanning() { 
   global $canPlan,$showValidationButton, $planningType;?>
   <table>
@@ -140,7 +140,7 @@ function drawButtonsPlanning() {
       ?>
       <td colspan="1" width="32px">
         <button id="savePlanningButton" dojoType="dijit.form.Button" showlabel="false"
-         title="<?php echo i18n('validatePlanning');?>"
+         title="<?php echo i18n('validatePlanning');?>" 
          iconClass="dijitButtonIcon dijitButtonIconValidPlan" class="buttonIconNewGui detailButton">
          <script type="dojo/connect" event="onClick" args="evt">
 		       showPlanSaveDates();
@@ -214,11 +214,11 @@ function drawButtonsPlanning() {
 // ================================================== BUTTONS DEFAULT (NEW, FILTER, COLUMNS)
 function drawButtonsDefault() {
   global $objectClass, $planningType;?>
-  <table>
+  <table style="width:10px">
     <tr>
       <?php 
       if ($planningType=='planning' or $planningType=='resource' or $planningType=='global') {?>
-        <td colspan="1" width="51px" style="padding-right: 5px;">
+        <td colspan="1" width="51px" style="<?php if (isNewGui()) echo 'padding-right: 5px;';?>">
           <?php // ================================================================= NEW ?>
           <div dojoType="dijit.form.DropDownButton"
             class="comboButton"   
@@ -469,7 +469,7 @@ function drawOptionCriticalPath() {
 <?php 
 }
 
-// 
+// ================================================== FIELD MILESTONES
 function drawMilestones() {
   global $saveShowMilestone;
   ?>
@@ -487,6 +487,128 @@ function drawMilestones() {
     <option value="all" <?php echo ($saveShowMilestone=='all')?'SELECTED':'';?>><?php echo i18n("all");?></option>                            
   </select>
 <?php                         
+}
+
+// ================================================== CHECKBOX SHOW LEFT WORK
+function drawOptionLeftWork() {
+  global $saveShowWork;?>
+  <table width="100%">
+    <tr class="checkboxLabel">
+      <td >
+        <?php echo ucfirst(i18n("labelShowLeftWork".((isNewGui()?'':'Short'))));?>
+      </td>
+      <td style="width:36px">
+        <div title="<?php echo i18n('showLeftWork')?>" dojoType="dijit.form.CheckBox" 
+          type="checkbox" id="listShowLeftWork" name="listShowLeftWork" class="whiteCheck"
+          <?php if ($saveShowWork=='1') { echo ' checked="checked" '; }?> >
+          <script type="dojo/method" event="onChange" >
+        saveUserParameter('planningShowWork',((this.checked)?'1':'0'));
+        refreshJsonPlanning();
+      </script>
+        </div>&nbsp;
+      </td>
+    </tr>
+  </table>
+<?php 
+}
+
+// ================================================== CHECKBOX FOR RESOURCE 
+function drawOptionResource() {
+  global $saveShowNullAssignment, $saveShowProject;?>
+  <table width="100%">
+    <tr class="checkboxLabel">
+      <td style="min-width:80px;<?php if (!isNewGui()) echo 'text-align:right;padding-right:10px;';?>"><?php echo ucfirst(i18n("labelShowAssignmentWithoutWork".((isNewGui())?'':'Short')));?></td>
+      <td style="width:36px">
+        <div title="<?php echo i18n('titleShowAssignmentWithoutWork')?>" dojoType="dijit.form.CheckBox" 
+          type="checkbox" id="listShowNullAssignment" name="listShowNullAssignment" class="whiteCheck" 
+          <?php if ($saveShowNullAssignment=='1') { echo ' checked="checked" '; }?> >
+          <script type="dojo/method" event="onChange" >
+          saveUserParameter('listShowNullAssignment',((this.checked)?'1':'0'));
+          refreshJsonPlanning();
+        </script>
+        </div>&nbsp;
+      </td>
+    </tr>
+    <tr class="checkboxLabel">
+      <td style="min-width:80px;<?php if (!isNewGui()) echo 'text-align:right;padding-right:10px;';?>"><?php echo ucfirst(i18n("labelShowProjectLevel".((isNewGui())?'':'Short')));?></td>
+      <td tyle="width:36px">
+        <div title="<?php echo i18n('showProjectLevel')?>" dojoType="dijit.form.CheckBox" 
+          type="checkbox" id="listShowProject" name="listShowProject" class="whiteCheck"
+          <?php if ($saveShowProject=='1') { echo ' checked="checked" '; }?> >
+          <script type="dojo/method" event="onChange" >
+            saveUserParameter('planningShowProject',((this.checked)?'1':'0'));
+            refreshJsonPlanning();
+          </script>
+        </div>&nbsp;
+      </td>
+  </table>
+<?php 
+}
+
+// ==================
+function drawResourceTeamOrga() {
+  global $displayWidthPlan;?>
+  <table>
+    <tr>
+      <td style="text-align:right;padding-left:15px"><?php echo i18n('colIdResource');?>&nbsp;&nbsp;</td>
+      <td>
+        <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
+          style="width: <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
+          <?php echo autoOpenFilteringSelect();?>
+          name="selectResourceName" id="selectResourceName" value="<?php if(sessionValueExists('selectResourceName')){ echo getSessionValue('selectResourceName'); }?>" >
+          <script type="dojo/method" event="onChange" >
+            saveDataToSession('selectResourceName', dijit.byId('selectResourceName').get("value"), false);
+            refreshJsonPlanning();
+          </script>
+          <option value=""></option>
+          <?php 
+          $specific='resourcePlanning';
+          $includePool=true;
+          $specificDoNotInitialize=true;                       
+          include '../tool/drawResourceListForSpecificAccess.php'; ?>
+        </select>
+      </td>
+    <?php if (! isNewGui()) {?>
+    </tr>
+    <tr>
+    <?php }?>
+      <td style="text-align:right;padding-left:15px"><?php echo i18n('colIdTeam');?>&nbsp;&nbsp;</td>
+      <td>
+        <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
+          style="width:  <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
+          name="teamName" id="teamName" value="<?php if(sessionValueExists('teamName')){ echo getSessionValue('teamName'); }?>"
+          <?php echo autoOpenFilteringSelect();?>
+          >
+          <script type="dojo/method" event="onChange" > 
+            saveDataToSession('teamName', dijit.byId('teamName').get("value"), false);                          
+            refreshJsonPlanning();
+          </script>
+          <?php 
+          htmlDrawOptionForReference('idTeam', null)?>  
+        </select>
+      </td>
+    <?php if (! isNewGui()) {?>  
+    </tr>
+    <tr>
+    <?php }?>
+      <td style="text-align:right;padding-left:15px"><?php echo i18n('colIdOrganization');?>&nbsp;&nbsp;</td>
+        <td>
+        <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
+          style="width:  <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
+          name="organizationName" id="organizationName" value="<?php if(sessionValueExists('organizationName')){ echo getSessionValue('organizationName'); }?>"
+          <?php echo autoOpenFilteringSelect();?>
+          >
+          <script type="dojo/method" event="onChange" > 
+            saveDataToSession('organizationName', dijit.byId('organizationName').get("value"), false);                          
+            refreshJsonPlanning();
+          </script>
+          <?php 
+          htmlDrawOptionForReference('idOrganization', null)?>  
+        </select>
+      </td>
+    </tr>
+  </table>
+<?php   
 }
 ?>
 

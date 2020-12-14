@@ -30,6 +30,8 @@
  */
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/view/resourcePlanningList.php');
+$planningType='resource';
+require_once '../tool/planningListFunction.php';
 
 $canPlan=false;
 $right=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$user->idProfile, 'scope'=>'planning'));
@@ -90,7 +92,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 <div id="mainPlanningDivContainer" dojoType="dijit.layout.BorderContainer">
 	<div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" height="27px"
 	style="z-index: 3; position: relative; overflow: visible !important;">
-		<table width="100%" height="27px" class="listTitle" >
+		<table width="100%" style="height:36px" class="listTitle" >
 		  <tr height="32px">
 		    <td style="vertical-align:top; min-width:100px; width:15%;">
 		      <table >
@@ -104,352 +106,144 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 		    </td>
 		    <td>   
 		      <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
-		        <input type="hidden" name="resourcePlanningSelectedResource" id="resourcePlanningSelectedResource" value="" />
+		      <?php if (!isNewGui()) { // =========================================================== NOT NEW GUI?>
 		        <table style="width: 100%;">
 		          <tr>
-		            <td style="width:70px">
+		            <td style="width:70px; position:relative;">
 		              <?php 
 		              $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
 		              $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';?>
 		              <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
 		              <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
 		              &nbsp;&nbsp;&nbsp;
-<?php if ($canPlan) { ?>
-		              <button id="planButton" dojoType="dijit.form.Button" showlabel="false"
-		                title="<?php echo i18n('buttonPlan');?>"
-		                iconClass="iconPlanStopped" >
-		                <script type="dojo/connect" event="onClick" args="evt">
-                     showPlanParam();
-                     return false;
-                    </script>
-		              </button>
-<?php }?>             
+                  <?php if ($canPlan) { ?>
+                  <?php drawButtonPlan(); ?>
+                  <?php //drawOptionAutomatic();?>
+                  <?php }?>             
 		            </td>
 		            <td style="white-space:nowrap;width:<?php echo ($displayWidthPlan>1030)?240:150;?>px">
-		              <table>
+		              <table align="right" style="margin:7px">
                     <tr>
                       <td align="right">&nbsp;&nbsp;&nbsp;<?php echo ($displayWidthPlan>1030)?i18n("displayStartDate"):i18n("from");?>&nbsp;&nbsp;</td><td>
-                        <div dojoType="dijit.form.DateTextBox"
-	                        <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
-														echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
-													}?>
-                           id="startDatePlanView" name="startDatePlanView"
-                           invalidMessage="<?php echo i18n('messageInvalidDate')?>"
-                           type="text" maxlength="10"
-                           style="width:100px; text-align: center;" class="input roundedLeft"
-                           hasDownArrow="true"
-                           value="<?php if(sessionValueExists('startDatePlanView')){ echo getSessionValue('startDatePlanView'); }else{ echo $startDate; }?>" >
-                           <script type="dojo/method" event="onChange" >
-                            saveDataToSession('startDatePlanView',formatDate(dijit.byId('startDatePlanView').get("value")), false);
-                            refreshJsonPlanning();
-                           </script>
-                         </div>
+                        <?php drawFieldStartDate();?>
                       </td>
                     </tr>
                     <tr>
                       <td align="right">&nbsp;&nbsp;&nbsp;<?php echo ($displayWidthPlan>1030)?i18n("displayEndDate"):i18n("to");?>&nbsp;&nbsp;</td>
                       <td>
-                        <div dojoType="dijit.form.DateTextBox"
-	                        <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
-														echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
-													}?>
-                           id="endDatePlanView" name="endDatePlanView"
-                           invalidMessage="<?php echo i18n('messageInvalidDate')?>"
-                           type="text" maxlength="10"
-                           style="width:100px; text-align: center;" class="input roundedLeft"
-                           hasDownArrow="true"
-                           value="<?php if(sessionValueExists('endDatePlanView')){ echo getSessionValue('endDatePlanView'); }else{ echo $endDate; } ?>" >
-                           <script type="dojo/method" event="onChange" >
-                            saveDataToSession('endDatePlanView',formatDate(dijit.byId('endDatePlanView').get("value")), false);
-                            refreshJsonPlanning();
-                           </script>
-                        </div>
+                      <?php drawFieldEndDate();?>
+
                       </td>
                     </tr>
                   </table>
 		            </td>
-                <td style="width:<?php echo ($displayWidthPlan>1030)?'240':'210';?>px">
-                  <table>
+                <td style="width:250px;">
+                  <table >
                     <tr>
-                      <td>
-                        <div dojoType="dijit.form.DropDownButton" class="comboButton" id="planningNewItem" jsId="planningNewItem" name="planningNewItem" 
-                         iconClass="dijitButtonIcon dijitButtonIconNew" title="<?php echo i18n('comboNewButton');?>">
-                            <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
-                              <div style="font-weight:bold; height:25px;text-align:center">
-                              <?php echo i18n('comboNewButton');?>
-                              </div>
-                              <?php $arrayItems=array('Activity');
-                              foreach($arrayItems as $item) {
-                              $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
-                              if ($canCreate=='YES') {
-                                if (! securityCheckDisplayMenu(null,$item) ) {
-                                  $canCreate='NO';
-                                }
-                              }
-                              if ($canCreate=='YES') {?>
-                              <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
-                               onClick="addNewItem('<?php echo $item;?>');" >
-                                <table width:"100%"><tr style="height:22px" >
-                                <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIcon($item, 22, null, false);;?></td>    
-                                <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
-                                </tr></table>   
-                              </div>
-                              <div style="height:5px;"></div>
-                              <?php } 
-                              }?>
-                            </div>
-                          </div>
-                        </td>  
-                      <td width="32px">
-                        <button title="<?php echo i18n('printPlanning')?>"
-                         dojoType="dijit.form.Button"
-                         id="listPrint" name="listPrint"
-                         iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton" showLabel="false">
-                          <script type="dojo/connect" event="onClick" args="evt">
-<?php $ganttPlanningPrintOldStyle=Parameter::getGlobalParameter('ganttPlanningPrintOldStyle');
-      if (!$ganttPlanningPrintOldStyle) {$ganttPlanningPrintOldStyle="NO";}
-      if ($ganttPlanningPrintOldStyle=='YES') {?>
-                          showPrint("../tool/jsonResourcePlanning.php", 'planning');
-<?php } else { ?>
-                          showPrint("planningPrint.php", 'planning');
-<?php }?>            
-                          </script>
-                        </button>
-                      </td>
-                      <td width="32px">
-                        <button title="<?php echo i18n('reportPrintPdf')?>"
-                         dojoType="dijit.form.Button"
-                         id="listPrintPdf" name="listPrintPdf"
-                         iconClass="dijitButtonIcon dijitButtonIconPdf" class="detailButton" showLabel="false">
-                          <script type="dojo/connect" event="onClick" args="evt">
-                          var paramPdf='<?php echo Parameter::getGlobalParameter("pdfPlanningBeta");?>';
-                          if(paramPdf!='false') planningPDFBox();
-                          else showPrint("../tool/jsonResourcePlanning_pdf.php", 'planning', null, 'pdf');
-                          </script>
-                        </button>
-                      </td>
-                      <td width="32px" >
-                        <input type="hidden" id="outMode" name="outMode" value="" />
-                        <div dojoType="dijit.form.DropDownButton"
-                             id="planningColumnSelector" jsId="planningColumnSelector" name="planningColumnSelector" 
-                             showlabel="false" class="comboButton" iconClass="dijitButtonIcon dijitButtonIconColumn" 
-                             title="<?php echo i18n('columnSelector');?>">
-                          <span>title</span>
-                          <div dojoType="dijit.TooltipDialog" class="white" style="width:250px;">
-                            <script type="dojo/connect" event="onHide" args="evt">
-                              if (dndMoveInProgress) { setTimeout('dijit.byId("planningColumnSelector").openDropDown();',1); }
-                            </script>   
-									          <div id="dndPlanningColumnSelector" jsId="dndPlanningColumnSelector" 
-                             dndType="column" dojotype="dojo.dnd.Source" 
-                             withhandles="true" class="container">    
-									             <?php 
-									               $resourcePlanning=true; 
-									               include('../tool/planningColumnSelector.php')?>
-									          </div>
-                            <div style="height:5px;"></div>    
-                            <div style="text-align: center;"> 
-                              <button title="" dojoType="dijit.form.Button" 
-                                id="" name="" showLabel="true"><?php echo i18n('buttonOK');?>
-                                <script type="dojo/connect" event="onClick" args="evt">
-                                  validatePlanningColumn();
-                                </script>
-                              </button>
-                            </div>                 
-									        </div>
-									      </div>
-                      </td>
-                      <td width="50px">
-                             <?php $activeFilter=false;
-                             if (is_array(getSessionUser()->_arrayFilters)) {
-                               if (array_key_exists('ResourcePlanning', getSessionUser()->_arrayFilters)) {
-                                 if (count(getSessionUser()->_arrayFilters['ResourcePlanning'])>0) {
-                                 	foreach (getSessionUser()->_arrayFilters['ResourcePlanning'] as $filter) {
-                                 		if (!isset($filter['isDynamic']) or $filter['isDynamic']=="0") {
-                                 			$activeFilter=true;
-                                 		}
-                                 	}
-                                 }
-                               }
-                             }
-                             ?>
-                              <div id="listFilterAdvanced" >
-                                <button 
-                                 title="<?php echo i18n('advancedFilter')?>"  
-                                 class="comboButton" 
-                                 dojoType="dijit.form.DropDownButton" 
-                                 id="listFilterFilter" name="listFilterFilter"
-                                 iconClass="dijitButtonIcon icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
-                                  <script type="dojo/connect" event="onClick" args="evt">
-                                    showFilterDialog();
-                                  </script>
-                                  <script type="dojo/method" event="onMouseEnter" args="evt">
-                                    clearTimeout(closeFilterListTimeout);
-                                    clearTimeout(openFilterListTimeout);
-                                    openFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').openDropDown();",popupOpenDelay);
-                                  </script>
-                                  <script type="dojo/method" event="onMouseLeave" args="evt">
-                                    clearTimeout(openFilterListTimeout);
-                                    closeFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').closeDropDown();",2000);
-                                  </script>
-                                  <div dojoType="dijit.TooltipDialog" id="directFilterList" style="z-index: 999999;<!-- display:none; --> position: absolute;">
-                                  <?php $objectClass='ResourcePlanning';
-                                        include "../tool/displayFilterList.php";
-                                  ?>
-                                  <script type="dojo/method" event="onMouseEnter" args="evt">
-                                    clearTimeout(closeFilterListTimeout);
-                                    clearTimeout(openFilterListTimeout);
-                                  </script>
-                                  <script type="dojo/method" event="onMouseLeave" args="evt">
-                                    dijit.byId('listFilterFilter').closeDropDown();
-                                  </script>
-                                  </div> 
-                                </button>
-                              </div>
+                    <td style="white-space:nowrap;padding-right:10px;position:relative;top:4px">
+                    <?php drawOptionAllProject();?>
+                            
+                     </td>
+                      <td colsan="3">
+                        <?php drawButtonsPlanning();?>
                       </td>
                     </tr>
                     <tr>
-                      <td colspan="3" style="white-space:nowrap;">
-                        <span title="<?php echo i18n('saveDates')?>" dojoType="dijit.form.CheckBox"
-                           type="checkbox" id="listSaveDates" name="listSaveDates" class="whiteCheck"
-                           <?php if ( $saveDates) {echo 'checked="checked"'; } ?>  >
-
-                          <script type="dojo/method" event="onChange" >
-                            refreshJsonPlanning();
-                          </script>
-                        </span>
-                        <span for="listSaveDates"><?php echo i18n("saveDates");?></span>
+                    <td style="white-space:nowrap;padding-right:10px;position:relative;top:-4px">
+                       <?php drawOptionSaveDates();?>
+                          </td>
+                      <td colspan="3">
+                       <?php drawButtonsDefault();?>
                       </td>
                     </tr>
                   </table>
                 </td>
-		        <td style="width:170px">
-                  <table>
-                    <tr>
-                      <td style="text-align:right;"><?php echo i18n('colIdResource');?>&nbsp;&nbsp;</td>
-                      <td>
-                      <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-                        style="width: <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
-                        name="selectResourceName" id="selectResourceName" value="<?php if(sessionValueExists('selectResourceName')){ echo getSessionValue('selectResourceName'); }?>"
-                        <?php echo autoOpenFilteringSelect();?>  
-                      >
-                        <script type="dojo/method" event="onChange" >
-                           saveDataToSession('selectResourceName', dijit.byId('selectResourceName').get("value"), false);
-                           refreshJsonPlanning();
-                        </script>
-                         <option value=""></option>
-                        <?php 
-                         //$specific='imputation';
-                         $specific='resourcePlanning';
-                         $includePool=true;
-                         $specificDoNotInitialize=true;                       
-                         include '../tool/drawResourceListForSpecificAccess.php'; ?>
-                      </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:right;"><?php echo i18n('colIdTeam');?>&nbsp;&nbsp;</td>
-                      <td>
-                      <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-                        style="width:  <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
-                        name="teamName" id="teamName" value="<?php if(sessionValueExists('teamName')){ echo getSessionValue('teamName'); }?>"
-                        <?php echo autoOpenFilteringSelect();?>
-                        >
-                        <script type="dojo/method" event="onChange" > 
-                           saveDataToSession('teamName', dijit.byId('teamName').get("value"), false);                          
-                           refreshJsonPlanning();
-                        </script>
-                        <?php 
-                         htmlDrawOptionForReference('idTeam', null)?>  
-                      </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="text-align:right;"><?php echo i18n('colIdOrganization');?>&nbsp;&nbsp;</td>
-                      <td>
-                      <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-                        style="width:  <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
-                        name="organizationName" id="organizationName" value="<?php if(sessionValueExists('organizationName')){ echo getSessionValue('organizationName'); }?>"
-                        <?php echo autoOpenFilteringSelect();?>
-                        >
-                        <script type="dojo/method" event="onChange" > 
-                           saveDataToSession('organizationName', dijit.byId('organizationName').get("value"), false);                          
-                           refreshJsonPlanning();
-                        </script>
-                        <?php 
-                         htmlDrawOptionForReference('idOrganization', null)?>  
-                      </select>
-                      </td>
-                    </tr>
-                  </table>
+		            <td style="">
+                  <?php drawResourceTeamOrga();?>
                 </td>
+ 		            <td style="">
+                  <?php drawOptionResource();?>
+                </td>               
 		            <td style="text-align: right; align: right;">
-		              <table width="100%"><tr>
-		              <td>&nbsp;</td>
-		              <td width="35px">&nbsp;</td>
-		              <td width="200px">
-                  <?php echo i18n("labelShowWbsShort");?>
-                  </td><td width="35px">
-		              <div title="<?php echo i18n('showWbs')?>" dojoType="dijit.form.CheckBox" 
-                    type="checkbox" id="showWBS" name="showWBS" class="whiteCheck"
-                    <?php if ($saveShowWbs=='1') { echo ' checked="checked" '; }?> >
-		                <script type="dojo/method" event="onChange" >
-                      saveUserParameter('planningShowWbs',((this.checked)?'1':'0'));
-                      refreshJsonPlanning();
-                    </script>
-		              </div>&nbsp;
-		              </td></tr>
-		              <tr>
-		              <td style="min-width:80px;"><?php echo i18n("labelShowAssignmentWithoutWork");?></td>
-		              <td>
-                  <div title="<?php echo i18n('titleShowAssignmentWithoutWork')?>" dojoType="dijit.form.CheckBox" 
-                    type="checkbox" id="listShowNullAssignment" name="listShowNullAssignment" class="whiteCheck"
-                    <?php if ($saveShowNullAssignment=='1') { echo ' checked="checked" '; }?> >
-                    <script type="dojo/method" event="onChange" >
-                      saveUserParameter('listShowNullAssignment',((this.checked)?'1':'0'));
-                      refreshJsonPlanning();
-                    </script>
-                  </div>&nbsp;
-                  </td>
-		              <td>
-		              <?php echo i18n("labelShowIdleShort");?>
-                  </td><td>
-		              <div title="<?php echo i18n('showIdleElements')?>" dojoType="dijit.form.CheckBox" 
-                    type="checkbox" id="listShowIdle" name="listShowIdle" class="whiteCheck"
-                    <?php if ($saveShowClosed=='1') { echo ' checked="checked" '; }?> >
-		                <script type="dojo/method" event="onChange" >
-                      saveUserParameter('planningShowClosed',((this.checked)?'1':'0'));
-                      refreshJsonPlanning();
-                    </script>
-		              </div>&nbsp;
-                  </td></tr>
-                  <tr>
-                  <td style="min-width:80px;"><?php echo i18n("labelShowProjectLevel");?></td>
-		              <td>
-                  <div title="<?php echo i18n('showProjectLevel')?>" dojoType="dijit.form.CheckBox" 
-                    type="checkbox" id="listShowProject" name="listShowProject" class="whiteCheck"
-                    <?php if ($saveShowProject=='1') { echo ' checked="checked" '; }?> >
-                    <script type="dojo/method" event="onChange" >
-                      saveUserParameter('planningShowProject',((this.checked)?'1':'0'));
-                      refreshJsonPlanning();
-                    </script>
-                  </div>&nbsp;
-                  </td>
-                  <td>
-                  <?php echo i18n("labelShowLeftWork");?>
-                  </td><td>
-                  <div title="<?php echo i18n('showLeftWork')?>" dojoType="dijit.form.CheckBox" 
-                    type="checkbox" id="listShowLeftWork" name="listShowLeftWork" class="whiteCheck"
-                    <?php if ($saveShowWork=='1') { echo ' checked="checked" '; }?> >
-                    <script type="dojo/method" event="onChange" >
-                      saveUserParameter('planningShowWork',((this.checked)?'1':'0'));
-                      refreshJsonPlanning();
-                    </script>
-                  </div>&nbsp;
-                  </td></tr>
-                  </table>
+                  <?php drawOptionsDisplay();?>
 		            </td>
 		          </tr>
-		        </table>    
+		        </table>
+		        <?php }?>    
+		        <?php if (isNewGui()) { // ========================================================= NEW GUI?>
+		        <table style="width: 100%;">
+		          <tr>
+		            <td style="width:90%;">&nbsp;</td>
+		            <td style="padding-right:70px;"><?php drawResourceTeamOrga();?></td>
+                <?php if ($canPlan) { ?>
+		            <td style="width:70px; position:relative;">
+		              <?php 
+		              $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
+		              $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';?>
+		              <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
+		              <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
+		              &nbsp;&nbsp;&nbsp;
+		                <div style="position:absolute;top:-1px;right:10px">
+                    <?php drawButtonPlan(); ?>
+                    </div>    
+		            </td>
+		            <td style="width:70px; position:relative;padding-right:20px;">
+                    <?php //drawOptionAutomatic();?>
+                </td>
+                <?php } ?>
+                <td style="width:150px;text-aliogn:right;">
+                       <?php drawButtonsDefault();?>
+                </td>
+                <td style="width:50px;padding-right:10px">
+                        <div dojoType="dijit.form.DropDownButton"							    
+							             id="extraButtonPlanning" jsId="extraButtonPlanning" name="extraButtonPlanning" 
+							             showlabel="false" class="comboButton" iconClass="dijitButtonIcon dijitButtonIconExtraButtons" class="detailButton" 
+							             title="<?php echo i18n('extraButtons');?>">
+                           <div dojoType="dijit.TooltipDialog" class="white" id="extraButtonImputationDialog"
+							              style="position: absolute; top: 50px; right: 40%">        
+                               <table >
+                                 <tr style="height:30px">
+                                   <td colspan="2" style="position:relative;">&nbsp;
+                                     <div style="position:absolute;right:0px;top:0px;text-align:right"><?php drawButtonsPlanning();?></div>
+                                   </td>
+                                 </tr>
+                                 <tr>
+                                   <td style="width:50%">
+                                     <table align="right" style="margin:7px">
+                                       <tr>
+                                         <td align="right">&nbsp;&nbsp;&nbsp;<?php echo ($displayWidthPlan>1030)?i18n("displayStartDate"):i18n("from");?>&nbsp;&nbsp;</td>
+                                         <td><?php drawFieldStartDate();?></td>
+                                       </tr>
+                                       <tr>
+                                         <td align="right">&nbsp;&nbsp;&nbsp;<?php echo ($displayWidthPlan>1030)?i18n("displayEndDate"):i18n("to");?>&nbsp;&nbsp;</td>
+                                         <td><?php drawFieldEndDate();?></td>
+                                       </tr>
+                                     </table>
+                                   </td>
+                                   <td style="width:50%">
+                                     <?php drawOptionAllProject();?>
+                                     <br/><br/>
+                                     <?php drawOptionSaveDates();?>
+                                   </td>
+                                 </tr>
+                                 <tr>
+                                   <td>
+                                     <?php //drawOptionBaseline();?>
+                                   </td>
+		                               <td style="text-align: right; align: right;">
+                                     <?php drawOptionsDisplay();?>
+                                     <?php drawOptionLeftWork();?>
+                                     <?php drawOptionResource();?>
+                                     <br/>
+		                               </td>
+		                             </tr>
+		                           </table>
+                           </div>
+                        </div>
+                </td>
+		          </tr>
+		        </table>
+		        <?php }?>    
 		      </form>
 		    </td>
 		  </tr>
