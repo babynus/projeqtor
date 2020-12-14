@@ -7848,7 +7848,7 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
     directionMovement=(Math.sign(e.clientX - startX)==-1)?'neg':'pos';
     //
     // move all ellement 
-    left=(Math.ceil((startLeft+startWidth+(e.clientX - startX))/dayWidth)*dayWidth < startLeft)? dayWidth : Math.ceil((startLeft+startWidth+(e.clientX - startX))/dayWidth)*dayWidth;
+    left=(Math.ceil((startLeft+startWidth+(e.clientX - startX))/dayWidth)*dayWidth < startLeft)? startLeft+dayWidth : Math.ceil((startLeft+startWidth+(e.clientX - startX))/dayWidth)*dayWidth;
     resizerEnd.style.left=(left-11)+'px';
     divVisibleEndDateChange.style.left=(left-11)+'px';
     label.style.left=Math.ceil((labelLeft +(e.clientX - startX))/dayWidth)*dayWidth+'px';
