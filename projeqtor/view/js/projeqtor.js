@@ -7776,9 +7776,10 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
                          dateStart='',
                            dateEnd='',
                            divVisibleStartDateChange=dojo.byId('divStartDateResize_'+id),
-                             divVisibleEndDateChange=dojo.byId('divEndDateResize_'+id);
+                             divVisibleEndDateChange=dojo.byId('divEndDateResize_'+id),
+                               directionMovement='';
   
-  if(!resizerStart && !resizerEnd)return;
+  if((!resizerStart && !resizerEnd ))return;
   if(resizerStart){
     resizerStart.style.display="block";
     divVisibleStartDateChange.style.display="block";
@@ -7792,68 +7793,174 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
   }
   
   function initDragStart(e) {
+      //set current pos
      startX = e.clientX;
-     startWidth = parseInt(document.defaultView.getComputedStyle(el).width,10);
      startLeft = barDiv.offsetLeft;
-     labelLeft=label.offsetLeft;
+     startWidth = parseInt(document.defaultView.getComputedStyle(el).width,10);
+     
      document.documentElement.addEventListener('mousemove', doDragStart, false);
      document.documentElement.addEventListener('mouseup', stopDrag, false);
   }
   
   function initDragEnd(e) {
+  //set current pos
      startX = e.clientX;
      labelLeft=label.offsetLeft;
+     startLeft = barDiv.offsetLeft;
      startWidth = parseInt(document.defaultView.getComputedStyle(el).width,10);
+     
      document.documentElement.addEventListener('mousemove', doDragEnd, false);
      document.documentElement.addEventListener('mouseup', stopDrag, false);
   }
   
+  
   function doDragStart(e) {
     isResizingGanttBar=true
-    el.style.width = startWidth +( startX - e.clientX) + 'px';
-    label.style.left=labelLeft +( startX - e.clientX)+'px';
-    barDiv.style.left = startLeft - ( startX - e.clientX)+'px';
-    barDiv.style.width = startWidth +( startX - e.clientX)+ 'px';
-    width=startWidth +( startX - e.clientX);
-    left=barDiv.offsetLeft;
-    duration=Math.ceil(width/dayWidth)-1;
-    startDate=minDate+(((left/dayWidth)*(24 * 60 * 60 * 1000)));
-    endDate=minDate+((((left/dayWidth)+duration)*(24 * 60 * 60 * 1000)));
-    dateStart = new Date(startDate);
-    dateEnd = new Date(endDate);
+    if(resizerEnd){
+      resizerEnd.style.display="none";
+      divVisibleEndDateChange.style.display="none";
+    }
+    // defined if it's positive movement or negative with respect to the initial position 
+    directionMovement=(Math.sign( startX - e.clientX)==-1)?'neg':'pos';
+    //
+    // move all ellement 
+    left=Math.ceil((startLeft - ( startX - e.clientX))/dayWidth)*dayWidth;
+    resizerStart.style.left=(left-22)+'px';
+    divVisibleStartDateChange.style.left=(left-43)+'px';
+    barDiv.style.left = left+'px';
+    width=(Math.ceil((startWidth +( startX - e.clientX))/dayWidth)*dayWidth > dayWidth)? Math.ceil((startWidth +( startX - e.clientX))/dayWidth)*dayWidth : dayWidth;
+    barDiv.style.width = width+ 'px';
+    el.style.width =width+ 'px';
+    
+    //
+    calculatedDate();
     divVisibleStartDateChange.innerHTML=JSGantt.formatDateStr(dateStart,dateFormat);
   }
 
+  
   function doDragEnd(e) {
     isResizingGanttBar=true
-    label.style.left=labelLeft +(e.clientX - startX)+'px';
-    el.style.width = (startWidth + e.clientX - startX) + 'px';
-    barDiv.style.width = (startWidth + e.clientX - startX) + 'px';
-    width=startWidth + e.clientX - startX;
+    if(resizerStart){
+      divVisibleStartDateChange.style.display="none";
+      resizerStart.style.display="none";
+    }
+    // defined if it's positive movement or negative with respect to the initial position 
+    directionMovement=(Math.sign(e.clientX - startX)==-1)?'neg':'pos';
+    //
+    // move all ellement 
+    left=(Math.ceil((startLeft+startWidth+(e.clientX - startX))/dayWidth)*dayWidth < startLeft)? dayWidth : Math.ceil((startLeft+startWidth+(e.clientX - startX))/dayWidth)*dayWidth;
+    resizerEnd.style.left=(left-11)+'px';
+    divVisibleEndDateChange.style.left=(left-11)+'px';
+    label.style.left=Math.ceil((labelLeft +(e.clientX - startX))/dayWidth)*dayWidth+'px';
+    width=(Math.ceil((startWidth + e.clientX - startX)/dayWidth)*dayWidth > dayWidth)? Math.ceil((startWidth + e.clientX - startX)/dayWidth)*dayWidth : dayWidth ;
+    el.style.width = width+ 'px';
+    barDiv.style.width = width+ 'px';
+    //
+    calculatedDate();
+    divVisibleEndDateChange.innerHTML=JSGantt.formatDateStr(dateEnd,dateFormat);
+  }
+  
+  
+  function calculatedDate(){ //calcul new date 
     left=barDiv.offsetLeft;
     duration=Math.ceil(width/dayWidth)-1;
     startDate=minDate+(((left/dayWidth)*(24 * 60 * 60 * 1000)));
     endDate=minDate+((((left/dayWidth)+duration)*(24 * 60 * 60 * 1000)));
     dateStart = new Date(startDate);
     dateEnd = new Date(endDate);
-    divVisibleEndDateChange.innerHTML=JSGantt.formatDateStr(dateEnd,dateFormat);
-  }
-
-  function stopDrag(e) {
-      if(resizerStart)document.documentElement.removeEventListener('mousemove', doDragStart, false);    
-      if(resizerEnd)document.documentElement.removeEventListener('mousemove', doDragEnd, false);   
-      document.documentElement.removeEventListener('mouseup', stopDrag, false);
-      setTimeout('isResizingGanttBar=false;',500);
-      saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration);
-      if(resizerEnd)resizerEnd.style.display="none";
-      if(resizerEnd)divVisibleEndDateChange.style.display="none";
-      if(resizerStart)divVisibleStartDateChange.style.display="none";
-      if(resizerStart)resizerStart.style.display="none";
-      
   }
   
+  
+  function stopDrag(e) {
+    var startDateFormatForDisplay=JSGantt.formatDateStr(dateStart,dateFormat);
+    var endDateFormatForDisplay=JSGantt.formatDateStr(dateEnd,dateFormat);
+    var startResize=0,
+    endResize=0;
+    //stop event and hide handle
+    document.documentElement.removeEventListener('mouseup', stopDrag,false);
+      if(resizerEnd){
+        resizerEnd.removeEventListener('mousedown', initDragEnd, false);
+        document.documentElement.removeEventListener('mousemove', doDragEnd, false);   
+        resizerEnd.style.display="none";
+        divVisibleEndDateChange.style.display="none";
+      }
+      if(resizerStart){
+        resizerStart.removeEventListener('mousedown', initDragStart, false);
+        document.documentElement.removeEventListener('mousemove', doDragStart, false);   
+        divVisibleStartDateChange.style.display="none";
+        resizerStart.style.display="none";
+      }
+     // loop to define a non-off Day date
+      if(isOffDay(dateStart)){
+        while(isOffDay(dateStart)==true){
+          if(directionMovement=='pos'){
+            startDate=startDate+(24 * 60 * 60 * 1000);
+          }else{
+            startDate= startDate-(24 * 60 * 60 * 1000);
+          }
+          dateStart = new Date(startDate);
+          startResize++;
+        }
+      }else if(isOffDay(dateEnd)){
+        while(isOffDay(dateEnd)==true) {
+          if(directionMovement=='neg'){
+            endDate=endDate+(24 * 60 * 60 * 1000);
+          }else{
+            endDate= endDate-(24 * 60 * 60 * 1000)
+          }
+          dateEnd = new Date(endDate);
+          endResize++;
+        }
+      }
+     // 
+     //redefines the size if it was a day off
+      if(startResize!=0){
+        if(directionMovement=='pos'){
+          left=barDiv.offsetLeft+(dayWidth*startResize);
+          barDiv.style.left =left+'px';
+          width=width+(dayWidth*startResize);
+        }else{
+          left=barDiv.offsetLeft-(dayWidth*startResize);
+          barDiv.style.left =left+'px';
+          width=width-(dayWidth*startResize);
+        }
+        resizerStart.style.left=(left-22)+'px';
+        divVisibleStartDateChange.style.left=(left-43)+'px';
+        //el.style.width = width+ 'px';
+        //barDiv.style.width = width+ 'px';
+        startDateFormatForDisplay=JSGantt.formatDateStr(dateStart,dateFormat);
+        divVisibleStartDateChange.innerHTML=startDateFormatForDisplay;
+      }else if (endResize!=0){
+        if(directionMovement=='pos'){
+          width=width-(dayWidth*endResize);
+          left=barDiv.offsetLeft+width;
+          label.style.left=label.offsetLeft-(dayWidth*endResize)+'px';
+        }else{
+          width=width+(dayWidth*endResize);
+          left=barDiv.offsetLeft+width;
+          label.style.left=label.offsetLeft+(dayWidth*endResize)+'px';
+        }
+        barDiv.style.width = width+ 'px';
+        el.style.width = width+ 'px';
+        resizerEnd.style.left=(left-11)+'px';
+        divVisibleEndDateChange.style.left=(left-11)+'px';
+        endDateFormatForDisplay=JSGantt.formatDateStr(dateEnd,dateFormat);
+        divVisibleEndDateChange.innerHTML=endDateFormatForDisplay;
+      }
+      //
+      dateStart=JSGantt.formatDateStr(dateStart,'yyyy-mm-dd');
+      dateEnd=JSGantt.formatDateStr(dateEnd,'yyyy-mm-dd');
+      saveGanttElementResize( element,refId,id,dateStart,dateEnd,duration);
+      setTimeout('isResizingGanttBar=false;',250);
+      if(dojo.getAttr('automaticRunPlan','aria-checked')=='true')plan();
+      if(dojo.byId('objectClass').value.trim() !='' && dojo.byId('objectId').value.trim() !='' && dojo.getAttr('automaticRunPlan','aria-checked')!='true'){
+        loadContent("objectDetail.php", "detailDiv", 'listForm');
+        if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+      }
+  }
 }
 
+isOnResizer=false;
 function hideResizerGanttBar (vID) {
   if(isResizingGanttBar==false && dojo.byId('taskbar_'+vID+'ResizerEnd')){
     dojo.byId('taskbar_'+vID+'ResizerEnd').style.display='none';
@@ -7863,16 +7970,26 @@ function hideResizerGanttBar (vID) {
     dojo.byId('taskbar_'+vID+'ResizerStart').style.display='none';
     dojo.byId('divStartDateResize_'+vID).style.display='none';
   }
+  
 }
 
+function showResizerGanttBar (vID,val) {
+  if(val=='start'){
+    dojo.byId('taskbar_'+vID+'ResizerStart').style.display='block';
+    dojo.byId('divStartDateResize_'+vID).style.display='block';
+  }else{
+    dojo.byId('taskbar_'+vID+'ResizerEnd').style.display='block';
+    dojo.byId('divEndDateResize_'+vID).style.display='block';
+  }
+
+}
+
+
 function saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration){
-    dateStart=dateStart.toISOString().split("T")[0];
-    dateEnd=dateEnd.toISOString().split("T")[0];
-    
   var param="?id="+id+"&object="+element+"&idObj="+refId+"&startDate="+dateStart+"&endDate="+dateEnd+"&duration="+duration;
+  var url= "../tool/savePlanningElementAfterResize.php"+param;
   dojo.xhrGet({
-    url : "../tool/savePlanningElementAfterResize.php"+param,
-    handleAs : "text",
+    url : url,
     load : function(data, args) {
     },
   });
