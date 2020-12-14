@@ -987,7 +987,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           if (planningPage=='ResourcePlanning' || planningPage=='VersionsPlanning' || planningPage=='ContractGantt') {
             vLeftTable += '<span class="">'
               + '<table><tr><td>&nbsp;</td><td class="ganttIconBackground">'
-              + '<div class="icon'+iconName+'16" style="width:16px;height:16px;" >&nbsp;</div>'
+              + '<div class="icon'+iconName+' icon'+iconName+'16 iconSize16" style="width:16px;height:16px;" >&nbsp;</div>'
               + '</td></tr></table>'
               +'</span>';
           } else {
