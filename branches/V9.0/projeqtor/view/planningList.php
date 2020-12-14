@@ -228,14 +228,14 @@ foreach ($lstUserP as $prof){
 		            <td style="width:90%;">&nbsp;
                 </td>
                 <?php if ($canPlan) { ?>
-		            <td style="width:70px; position:relative;top:-10px">
+		            <td style="width:70px; position:relative;">
 		              <?php 
 		              $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
 		              $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';?>
 		              <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
 		              <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
 		              &nbsp;&nbsp;&nbsp;
-		                <div style="position:absolute;top:6px;right:10px">
+		                <div style="position:absolute;top:-4px;right:10px">
                     <?php drawButtonPlan(); ?>
                     </div>    
 		            </td>
@@ -255,7 +255,7 @@ foreach ($lstUserP as $prof){
 							              style="position: absolute; top: 50px; right: 40%">        
                                <table >
                                  <tr style="height:30px">
-                                   <td colspan="2" style="position:relative;">&nbsp;
+                                   <td colspan="2" style="position:relative;">
                                      <div style="position:absolute;right:0px;top:0px;text-align:right"><?php drawButtonsPlanning();?></div>
                                    </td>
                                  </tr>

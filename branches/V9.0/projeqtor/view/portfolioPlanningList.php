@@ -102,14 +102,14 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 ?>
   
 <div id="mainPlanningDivContainer" dojoType="dijit.layout.BorderContainer">
-	<div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" height="27px"
+	<div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" height="36px"
 	style="z-index: 3; position: relative; overflow: visible !important;">
-		<table width="100%" height="27px" class="listTitle" >
-		  <tr height="27px">
+		<table width="100%" style="height:36px" class="listTitle" >
+		  <tr height="36px">
 		  	<td style="vertical-align:top;min-width:200px; width:15%;">
 		      <table >
     		    <tr height="32px">
-      		    <td width="50px" style="min-width:50px" align="center">
+      		    <td width="50px" style="min-width:50px;<?php if (isNewGui()) echo 'position:relative;top:2px';?>" align="center">
                 <?php echo formatIcon('PortfolioPlanning', 32, null, true);?>
               </td>
               <td style="min-width:<?php echo (isNewGui())?'250':'150';?>px" ><span class="title" style="max-width:<?php echo (isNewGui())?'400':'250';?>px;white-space:normal"><?php echo i18n('menuPortfolioPlanning');?></span></td>
@@ -131,7 +131,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 		              &nbsp;&nbsp;&nbsp;
                   <?php if ($canPlan) { ?>
                   <?php drawButtonPlan(); ?>
-                  <?php drawOptionAutomatic();?>
+                  <?php //drawOptionAutomatic();?>
                   <?php }?>             
 		            </td>
 		            <td style="white-space:nowrap;width:<?php echo ($displayWidthPlan>1030)?240:150;?>px">
@@ -188,7 +188,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 		            <td style="width:90%;">&nbsp;
                 </td>
                 <?php if ($canPlan) { ?>
-		            <td style="width:70px; position:relative;top:-10px">
+		            <td style="width:70px; position:relative;">
 		              <?php 
 		              $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
 		              $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';?>
@@ -196,7 +196,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 		              <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
 		              <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
 		              &nbsp;&nbsp;&nbsp;
-		                <div style="position:absolute;top:6px;right:10px">
+		                <div style="position:absolute;top:-1px;right:10px">
                     <?php drawButtonPlan(); ?>
                     </div>    
 		            </td>
