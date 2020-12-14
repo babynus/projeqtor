@@ -4187,25 +4187,29 @@ div.ticketKanbanCustom .kanbanVersion{
 }
 
 .resizerEnd{
-width: 20px;
-    height: 20px;
-    right: -20px;
+	width: 34px;
+    height: 13px;
+/*     right: -21px; */
+    top: 4px;
     position: absolute;
     cursor: e-resize;
+    background-position: center;
     background-image: url(customIcons/new/iconRightGantt.png);
     background-repeat: no-repeat;
     z-index:55000;
 }
 
 .resizerStart{
-    width: 20px;
+    width: 34px;
     height: 13px;
-    left: -13px;
+/*     left: -21px; */
+    top: 4px;
     position: absolute;
     cursor: e-resize;
+    background-position: center;
     background-image: url(customIcons/new/iconLeftGantt.png);
     background-repeat: no-repeat;
-    z-index:55000;
+    z-index: 55000;
 }
 
 .imageColorBlack{
@@ -4225,6 +4229,7 @@ width: 20px;
     text-align: center;
     font-size: 11px;
     position: absolute;
+     z-index: 55000;
 }
 
 .divDateGantBarResizeleft{
@@ -4237,4 +4242,5 @@ width: 20px;
     text-align: center;
     font-size: 11px;
     position: absolute;	
+     z-index: 55000;
 }
