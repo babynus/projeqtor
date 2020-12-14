@@ -67,7 +67,7 @@ $contractGantt=true;
 				<td style="vertical-align: top; min-width: 100px; width: 25%">
 					<table>
 						<tr height="32px">
-							<td width="50px" style="min-width: 50px" align="center">
+							<td width="50px" style="min-width: 50px;<?php if (isNewGui()) echo 'position:relative;top:2px';?>" align="center">
                   <?php echo formatIcon($typeGanttContract, 32, null, true);?>
             </td>
 							<td width="400px"><span class="title"
@@ -101,21 +101,21 @@ $contractGantt=true;
                     </tr>
                   </table>
 		            </td>
+		            <td style="width:50px">&nbsp;</td> 
                 <td style="width:250px;">
                   <table >
-                    <tr>
-                      <td colsan="3">
-                        <?php drawButtonsPlanning();?>
-                      </td>
-                    </tr>
                     <tr>
                       <td colspan="3">
                        <?php drawButtonsDefault();?>
                       </td>
+                      <td colsan="3">
+                        <?php drawButtonsPlanning();?>
+                      </td>
                     </tr>
                   </table>
-                </td>               
-		            <td style="text-align: right; align: right;">
+                </td>
+                <td style="">&nbsp;</td>               
+		            <td style="text-align: right; width:120px">
                   <?php drawOptionsDisplay();?>
 		            </td>
 		          </tr>
