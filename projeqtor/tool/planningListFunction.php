@@ -233,6 +233,7 @@ function drawButtonsDefault() {
               <?php 
               $arrayItems=array('Project','Activity','Milestone','Meeting','PeriodicMeeting','TestSession');
               if ($planningType=='resource') $arrayItems=array('Activity');
+              if ($planningType=='global') $arrayItems=array_merge($arrayItems,array('Ticket','Action','Decision','Delivery','Risk','Issue','Opportunity','Question'));
               foreach($arrayItems as $item) {
                 $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
                 if ($canCreate=='YES') {
@@ -255,6 +256,12 @@ function drawButtonsDefault() {
             </div>
           </div>        
         </td>   
+      <?php
+      } 
+      if ($planningType=='planning' or $planningType=='resource' or $planningType=='global') {?>
+        <td colspan="1" width="51px" style="<?php if (isNewGui()) echo 'padding-right: 5px;';?>">
+          <?php drawGlobalItemsSelector();?>
+        </td>  
       <?php 
       } 
       $activeFilter=false;
@@ -609,6 +616,46 @@ function drawResourceTeamOrga() {
     </tr>
   </table>
 <?php   
+}
+
+function drawGlobalItemsSelector() {
+?>
+  <div dojoType="dijit.form.DropDownButton"
+    id="listItemsSelector" jsId="listItemsSelector" name="listItemsSelector"
+    showlabel="false" class="comboButton" iconClass="iconGlobalView iconSize22 imageColorNewGui"
+    title="<?php echo i18n('itemSelector');?>">
+    <span>title</span>
+    <div dojoType="dijit.TooltipDialog" class="white" id="listItemsSelectorDialog"
+      style="position: absolute; top: 50px; right: 40%">
+      <script type="dojo/connect" event="onShow" args="evt">
+        oldSelectedItems=dijit.byId('globalPlanningSelectItems').get('value');
+      </script>
+      <div style="text-align: center;position: relative;">
+        <button title="" dojoType="dijit.form.Button"
+          class="mediumTextButton" id="" name="" showLabel="true"><?php echo i18n('buttonOK');?>
+          <script type="dojo/connect" event="onClick" args="evt">
+            dijit.byId('listItemsSelector').closeDropDown();
+          </script>
+        </button>
+        <div style="position: absolute;top: 34px; right:42px;"></div>
+      </div>   
+      <div style="height:5px;border-bottom:1px solid #AAAAAA"></div>    
+      <div>                       
+        <?php GlobalPlanningElement::drawGlobalizableList();?>
+      </div>
+      <div style="height:5px;border-top:1px solid #AAAAAA"></div>    
+      <div style="text-align: center;position: relative;">
+        <button title="" dojoType="dijit.form.Button" 
+          class="mediumTextButton" id="" name="" showLabel="true"><?php echo i18n('buttonOK');?>
+          <script type="dojo/connect" event="onClick" args="evt">
+            dijit.byId('listItemsSelector').closeDropDown();
+          </script>
+        </button>
+        <div style="position: absolute;bottom: 33px; right:42px;" ></div>
+      </div>   
+	  </div>
+	</div>       
+<?php             
 }
 ?>
 
