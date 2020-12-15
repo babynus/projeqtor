@@ -4260,6 +4260,7 @@ screenCustomizationErrorExist: "Деякі налаштування екрана
 screenCustomizationErrorFixed: "Налаштування екрана були виправлені автоматично",
 screenCustomizationErrorRemaining: "Будь ласка&#44; перейдіть до кожного екрану на плагіні налаштування&#44; щоб вирішити проблему (потрібен плагін V5.0 або більше).",
 script: "Script",
+searchMenu: "Menu search",
 searchProject: "Пошук в проекті",
 second: "другий",
 sectionAbacus: "сітчати номограми(Abacus)",

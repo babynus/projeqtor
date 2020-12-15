@@ -4260,6 +4260,7 @@ screenCustomizationErrorExist: "Einige Bildschirmanpassungen sind nicht mehr kon
 screenCustomizationErrorFixed: "Bildschirmanpassungen wurden automatisch korrigiert ;)",
 screenCustomizationErrorRemaining: "Bitte greifen Sie auf jeden Bildschirm des Anpassungs-Plugins zu&#44; um das Problem zu beheben (Plugin V5.0 oder höher ist erforderlich)",
 script: "Script",
+searchMenu: "Menu search",
 searchProject: "nach Projekt suchen",
 second: "Sekunde",
 sectionAbacus: "Rechenhilfe",
