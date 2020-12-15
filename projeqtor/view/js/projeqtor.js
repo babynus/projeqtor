@@ -7967,7 +7967,7 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
         dateEnd=JSGantt.formatDateStr(dateEnd,'yyyy-mm-dd');
         saveGanttElementResize( element,refId,id,dateStart,dateEnd,duration);
         if(dojo.getAttr('automaticRunPlan','aria-checked')=='true')plan();
-        if((dojo.byId('objectClass').value.trim() !='' && dojo.byId('objectId').value.trim() !='' && dojo.getAttr('automaticRunPlan','aria-checked')!='true') && dojo.byId('objectId').value.trim()==refId ){
+        if((dojo.byId('objectClass').value.trim() !='' && dojo.byId('objectId').value.trim() !='' && dojo.getAttr('automaticRunPlan','aria-checked')!='true') && dojo.byId('objectId').value.trim()==refId.trim() ){
           loadContent("objectDetail.php", "detailDiv", 'listForm');
           if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
         }

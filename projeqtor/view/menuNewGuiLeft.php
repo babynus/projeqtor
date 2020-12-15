@@ -55,10 +55,11 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
   <div id="menuBarAccesLeft"  class="container"  dojoType="dijit.layout.BorderContainer" region="center"  oncontextmenu="event.preventDefault();showIconLeftMenu('Icon');">
     <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;overflow-x: hidden;" >
       <nav id="ml-menu" class="menu">
-      <input id="displayModeLeftMenu" value="<?php echo $displayMode;?>" hidden >
+      <input id="displayModeLeftMenu" value="<?php echo $displayMode;?>" hidden />
             <?php // draw Menus
              echo drawLeftMenuListNewGui($displayMode);
             ?>
+            <div class="menu__searchMenuDiv" style="display:none;"></div>
       </nav>
 
 	<?php if(Parameter::getUserParameter('helpDisplayIconMesagediv')!='yes'){ ?>
@@ -72,7 +73,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
     </div>
     <div id="menuBarAccesBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:35%;">
       <div class="container" style="height:98%;width:100%;">
-      <input id="selectedViewMenu" value="<?php echo $viewSelect;?>" hidden >
+      <input id="selectedViewMenu" value="<?php echo $viewSelect;?>" hidden />
          <div id="loadDivBarBottom" style="height:100%;padding-top:10px;display:<?php echo ($viewSelect=='Console')?'none':'block';?>;">
            <div id="parameterDiv" class="menuBottomDiv" dojoType="dijit.layout.ContentPane" style="display:<?php echo ($viewSelect=='Parameter')?'block':'none';?>;">
               <?php include '../tool/drawBottomParameterMenu.php';?>
@@ -493,9 +494,9 @@ function drawLeftMenuListNewGui($displayMode){
         $styleDiv="display:none;";
         $funcuntionFav="addRemoveFavMenuLeft('div".$obj->name."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
         
-        $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.$obj->name.'\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.$obj->name.'\',\'leave\');">';
+        $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.$obj->name.'\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.$obj->name.'\',\'leave\');">'; //li
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst($menuNameI18n).'</div></a>';
+        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst($menuNameI18n).'</div></a>'; 
         $result.='<div id="div'.$obj->name.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
       }else{
         $classEl="Reports";
@@ -519,7 +520,7 @@ function drawLeftMenuListNewGui($displayMode){
         
         $class="menu__add__Fav";
         $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.ucfirst($obj->name).'\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.ucfirst($obj->name).'\',\'leave\');">';
-        $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'">';
+        $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'"/>';
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
         $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
         $result.='<div id="div'.ucfirst($obj->name).'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
@@ -564,7 +565,8 @@ function drawLeftMenuListNewGui($displayMode){
     $old=$menu['level'];
     $idP=$obj->idParent;
   }
-  $result.='</div">';
+  $result.='</ul>';
+  $result.='</div>';
   return $result;
 }
   

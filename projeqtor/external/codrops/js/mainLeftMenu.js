@@ -161,16 +161,29 @@
         this.breadCrumbs = true;
       }
     }
+    this.researchDiv=document.createElement('div');
+    this.researchIcon=document.createElement('div');
+    this.researchInput=document.createElement('input');
     this.hidStrreamButtonJs= document.createElement('div');
     this.hideButton = document.createElement('div');
     this.hideButton.className = 'iconHideMenuLeft iconSize32';
     this.hidStrreamButtonJs.className = 'hideStreamNewGui';
+    this.researchInput.className='dijitReset dijitInputInner menuSearchInput';
+    this.researchIcon.className='iconSearch  iconSize16 ';
     this.hidStrreamButtonJs.setAttribute('id', 'hideStreamNewGui');
     this.hidStrreamButtonJs.setAttribute('style', 'float:right;');
+    this.researchDiv.setAttribute('id', 'researchMenuLeftMenu');
+    this.researchDiv.setAttribute('style', 'width:90%;');
+    this.researchInput.setAttribute('dojoType', 'dijit.form.TextBox');
+    this.researchInput.setAttribute('onKeyUp', 'searchMenuToDisplay(this.value);');
+    this.researchInput.setAttribute('id', 'menuSearchDiv');
+    this.researchIcon.setAttribute('style', 'position:relative;float: left;top: -4px;left: 0.7em;');
     if(dojo.byId('isMenuLeftOpen').value=='false') this.hidStrreamButtonJs.style.display='none';
     this.el.insertBefore(this.hidStrreamButtonJs,  this.el.firstChild);
     this.hidStrreamButtonJs.insertAdjacentElement('afterbegin',  this.hideButton);
-
+    this.breadcrumbsCtrl.insertAdjacentElement('afterend',this.researchDiv );
+    this.researchDiv.insertAdjacentElement('afterbegin', this.researchIcon);
+    this.researchDiv.insertAdjacentElement('afterbegin',  this.researchInput);
     // event binding
     this._initEvents();
   };
@@ -240,6 +253,7 @@
     }
     var currentMenu = this.menusArr[this.current_menu].menuEl;
    if(currentMenu.getAttribute('data-menu')!='main'){
+     clearSearchInputMenuLeft();
      this.isAnimating = true;
       // current menu slides out
       this._menuOut();
@@ -414,6 +428,7 @@
       if(!divBcl.nextSibling || self.isAnimating) {
         return false;
       }
+      clearSearchInputMenuLeft();
       self.isAnimating = true;
       
       // current menu slides out
