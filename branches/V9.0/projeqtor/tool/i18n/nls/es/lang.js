@@ -4260,6 +4260,7 @@ screenCustomizationErrorExist: "Algunas personalizaciones de pantalla ya no son 
 screenCustomizationErrorFixed: "Las personalizaciones de pantalla se han solucionado automáticamente ;)",
 screenCustomizationErrorRemaining: "Acceda a cada pantalla en el complemento de personalización para solucionar el problema (se requiere el complemento V5.0 o superior)",
 script: "Script",
+searchMenu: "Menu search",
 searchProject: "buscar un proyecto",
 second: "Segundo",
 sectionAbacus: "Ábaco",

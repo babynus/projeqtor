@@ -4261,6 +4261,7 @@ screenCustomizationErrorExist: "Некоторые настройки экран
 screenCustomizationErrorFixed: "Настройки экрана были исправлены автоматически",
 screenCustomizationErrorRemaining: "Пожалуйста&#44; получите доступ к каждому экрану на настройке плагина&#44; чтобы исправить эту проблему (Plugin V5.0 или более не требуется)",
 script: "Сценарий",
+searchMenu: "Menu search",
 searchProject: "Поиск проекта",
 second: "второй",
 sectionAbacus: "Счеты Abacus",

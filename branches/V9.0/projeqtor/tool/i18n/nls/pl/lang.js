@@ -4260,6 +4260,7 @@ screenCustomizationErrorExist: "Some screen customizations are not consistent an
 screenCustomizationErrorFixed: "Screen customizations have been fixed automatically ;)",
 screenCustomizationErrorRemaining: "Please access each screen on customization plugin to fix the issue (Plugin V5.0 or over is required)",
 script: "Scenariusz",
+searchMenu: "Menu search",
 searchProject: "search for a project",
 second: "second",
 sectionAbacus: "Abacus",
