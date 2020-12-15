@@ -884,8 +884,7 @@ class Parameter extends SqlElement {
         }else{
           unset($parameterList['theme']);
         }
-        $auditBrowser=Audit::getBrowser();
-        if ($auditBrowser['browser']=='Internet Explorer') unset($parameterList['newGui']);
+        if (isIE()) unset($parameterList['newGui']);
         break;
       case ('globalParameter'):
       	$parameterList=array(
@@ -1292,8 +1291,7 @@ class Parameter extends SqlElement {
       unset($parameterList['defaultTheme']);
       unset($parameterList['menuBarTop']);
     }
-    $auditBrowser=Audit::getBrowser();
-    if ($auditBrowser['browser']=='Internet Explorer') unset($parameterList['newGui']);
+    if (isIE()) unset($parameterList['newGui']);
     return $parameterList;
   }
   
