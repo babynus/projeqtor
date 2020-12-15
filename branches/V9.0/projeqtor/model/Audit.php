@@ -253,6 +253,7 @@ class Audit extends SqlElement {
 		disableSilentErrors();
 	}
 	static function getBrowser() {
+	  if (!isset($_SERVER ['HTTP_USER_AGENT'])) return null;
 		$u_agent = $_SERVER ['HTTP_USER_AGENT'];
 		$bname = 'Unknown';
 		$platform = 'Unknown';
