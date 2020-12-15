@@ -52,7 +52,6 @@ function setColorTheming(ref,bis, mode) {
     hueRotateSelected=hBis-hslDefault[0];
     saturateSelected=Math.round(sBis/hslDefault[1]*100);
     brightnessSelected=Math.round(lBis/hslDefault[2]*200);
-    console.log("saturateSelected="+saturateSelected+", brightnessSelected="+brightnessSelected);
     if (brightnessSelected>200) brightnessSelected=200;
     if (saturateSelected>80) saturateSelected=80;
   } else {
@@ -72,9 +71,7 @@ function setColorTheming(ref,bis, mode) {
     var hRef=hsvRef[0];
     var sRef=hsvRef[1];
     var vRef=hsvRef[2];
-    console.log("***********");
     var test=HSVToHex(hRef,sRef,vRef);
-    console.log(test);
     darker=HSVToHex(hRef,sRef,40);
     dark=HSVToHex(hRef,sRef,70);
     medium=HSVToHex(hRef,sRef,90);
@@ -121,10 +118,6 @@ function setColorTheming(ref,bis, mode) {
       brightnessSelected=180;
     }
   }
-  console.log("==========================================================");
-  console.log("def   Hue="+hueRotateDefault+",  Sat="+saturateDefault+',  Bri='+brightnessDefault);
-  console.log("ref   Hue="+hueRotate+",  Sat="+saturate+',   Bri='+brightness);
-  console.log("sel   Hue="+hueRotateSelected+",  Sat="+saturateSelected+',   Bri='+brightnessSelected);
   hueRotate+=(360-hueRotate)/360*30;
   hueRotateSelected+=(360-hueRotateSelected)/360*30;
   
@@ -149,7 +142,6 @@ function setColorTheming(ref,bis, mode) {
     } else {
       invert=0;
       dec=parseInt(lightness-128);
-      console.log(">128 dec="+dec);
       hex=Number(dec).toString(16); 
       if (hex.length < 2) { hex="0"+hex; } 
       foreColor = '#'+hex+hex+hex;
@@ -169,7 +161,6 @@ function setColorTheming(ref,bis, mode) {
     if (lightnessBis > 150) {
       bisText = '#000000';
     }
-    console.log(lightnessBis);
     if (lightnessBis > 180) {
       if (mode=="hsl") bis=HSLToHex(hBis,sBis,80);
     }
