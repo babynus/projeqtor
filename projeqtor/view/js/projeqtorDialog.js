@@ -5042,9 +5042,7 @@ function selectStoredFilter(idFilter, context, contentLoad, container) {
     if(isNewGui){
       dijit.byId('listFilterFilter').closeDropDown();
     }
-    console.log('test1');
   } else {
-    console.log('test2');
 	  if (dojo.byId('filterLogicalOperator') && dojo.byId('filterLogicalOperator').style.display=='none') {
 		  	dojo.byId('filterLogicalOperator').style.display='block';
 	  }

@@ -38,7 +38,6 @@ $endDate=trim((RequestHandler::isCodeSet('endDate'))?RequestHandler::getValue('e
 $duration=trim((RequestHandler::isCodeSet('duration'))?RequestHandler::getValue('duration'):'');
 $user=getSessionUser();
 
-//debugLog($_REQUEST);
 $object=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array("id"=>$id ,"refType"=>$obj, "refId"=>$idObj));
 
 Sql::beginTransaction();
