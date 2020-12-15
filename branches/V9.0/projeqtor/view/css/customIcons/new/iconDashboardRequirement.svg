@@ -3,36 +3,6 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Layer_1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" sodipodi:docname="iconTicketDashboard.svg">
-	
-		<sodipodi:namedview  id="namedview13" inkscape:zoom="2.8710938" bordercolor="#666666" guidetolerance="10" objecttolerance="10" borderopacity="1" showgrid="false" inkscape:cx="128" pagecolor="#ffffff" inkscape:cy="128" gridtolerance="10" inkscape:window-width="1920" inkscape:window-height="1017" inkscape:pageopacity="0" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:pageshadow="2" inkscape:window-x="-8" inkscape:current-layer="Layer_1">
-		</sodipodi:namedview>
-	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M60.288,110.235c-15.853,0-28.75-12.898-28.75-28.749c0-15.854,12.898-28.751,28.75-28.751c15.854,0,28.751,12.897,28.751,28.751
-			C89.039,97.337,76.142,110.235,60.288,110.235z"/>
-		<path fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M60.288,102.53c-11.604,0-21.047-9.441-21.047-21.046s9.443-21.047,21.047-21.047c11.604,0,21.047,9.442,21.047,21.047
-			C81.333,93.091,71.893,102.53,60.288,102.53z"/>
-		<g>
-			<path fill="#FF0000" d="M60.288,71.42c5.55,0,10.065,4.516,10.065,10.064c0,5.548-4.516,10.063-10.065,10.063
-				c-5.549,0-10.063-4.516-10.063-10.063C50.224,75.937,54.739,71.42,60.288,71.42 M60.288,68.143
-				c-7.356,0-13.34,5.985-13.34,13.342c0,7.354,5.984,13.341,13.34,13.341c7.356,0,13.343-5.985,13.343-13.341
-				C73.631,74.128,67.645,68.143,60.288,68.143L60.288,68.143z"/>
-		</g>
-		<circle fill="#FF0000" cx="60.288" cy="81.486" r="5.636"/>
-		<g>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="60.288" y1="81.486" x2="94.852" y2="46.921"/>
-			
-				<polygon fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-				89.647,59.902 81.94,59.832 92.038,49.734 99.744,49.805 			"/>
-			
-				<polygon fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-				81.87,52.126 81.94,59.832 92.038,49.734 91.968,42.028 			"/>
-		</g>
-	</g>
-</g>
 <path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M122.479,114.452c0,5.269-4.469,9.538-9.979,9.538
 	H14.69c-5.512,0-9.98-4.27-9.98-9.538V13.36c0-5.268,4.468-9.537,9.98-9.537h97.808c5.514,0,9.98,4.271,9.98,9.537V114.452
 	L122.479,114.452z"/>
@@ -40,4 +10,11 @@
 <circle fill="#FF0000" cx="43.75" cy="20.25" r="7.25"/>
 <circle fill="#FF0000" cx="63" cy="20.25" r="7.25"/>
 <line fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" x1="4.71" y1="33.5" x2="122.479" y2="33.5"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M63.595,109.498c-17.479,0-31.702-14.223-31.702-31.699c0-17.481,14.222-31.702,31.702-31.702c17.48,0,31.701,14.221,31.701,31.702
+	C95.295,95.275,81.075,109.498,63.595,109.498z"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M63.595,97.307c-10.758,0-19.511-8.754-19.511-19.512s8.754-19.51,19.511-19.51s19.51,8.753,19.51,19.51
+	C83.104,88.557,74.352,97.307,63.595,97.307z"/>
+<circle fill="#FF0000" cx="63.595" cy="77.799" r="6.215"/>
 </svg>

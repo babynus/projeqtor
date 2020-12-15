@@ -2368,12 +2368,12 @@
 .ProjeQtOrFlatRed .iconRequirement { background-image: url(customIcons/red/iconRequirement.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconRequirement { background-image: url(customIcons/new/iconRequirement.svg);  background-repeat: no-repeat; }
 
-.iconRequirementManagement { background-image: url(images/iconRequirement32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconRequirementManagement { background-image: url(customIcons/blue/iconRequirement.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconRequirementManagement { background-image: url(customIcons/green/iconRequirement.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconRequirementManagement { background-image: url(customIcons/grey/iconRequirement.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconRequirementManagement { background-image: url(customIcons/red/iconRequirement.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconRequirementManagement { background-image: url(customIcons/new/iconRequirementManagement.svg);  background-repeat: no-repeat; }
+.iconRequirementsManagement { background-image: url(images/iconRequirement32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconRequirementsManagement { background-image: url(customIcons/blue/iconRequirement.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconRequirementsManagement { background-image: url(customIcons/green/iconRequirement.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconRequirementsManagement { background-image: url(customIcons/grey/iconRequirement.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconRequirementsManagement { background-image: url(customIcons/red/iconRequirement.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconRequirementsManagement { background-image: url(customIcons/new/iconRequirementManagement.svg);  background-repeat: no-repeat; }
 
 .iconRequirementTest { background-image: url(images/iconRequirement32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconRequirementTest { background-image: url(customIcons/blue/iconRequirementTest.png);  background-repeat: no-repeat; }

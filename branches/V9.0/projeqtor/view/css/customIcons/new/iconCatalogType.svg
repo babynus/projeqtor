@@ -3,39 +3,48 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
 	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Calque_1">
-	<g id="Calque_4">
-	</g>
+<g id="Calque_2_1_">
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M63.787,33.433c0,0-0.991-16.799,15.035-16.799c16.025,0,35.83,0,35.83,0s7.347,0.21,7.347,8.816c0,8.606,0,78.715,0,78.715
+		s0.075,6.19-8.606,6.19c-10.076,0-33.432,0-37.533,0c-4.104,0-11.831,4.011-11.831,15.137c0,0-0.241-15.137-12.349-15.137
+		c-10.705,0-38.204,0-38.204,0S5.5,111.243,5.5,101.018C5.5,89.262,5.5,64,5.5,64"/>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="63.787" y1="33.433" x2="63.787" y2="119.488"/>
 	<g>
-		<path fill="#FF0000" d="M61.707,59.45l20.599,6.555c0.465,0.162,0.932,0.245,1.395,0.245c1.09,0,2.075-0.459,2.771-1.293
-			c0.635-0.759,0.969-1.755,0.969-2.88V47.448c0-2.548-1.691-5.067-3.938-5.861l-20.456-6.872v3.728l19.261,6.535
-			c0.713,0.251,1.537,1.385,1.537,2.47v14.629l0,0c0,0.389-0.109,0.562-0.121,0.577c0,0-0.008,0.003-0.023,0.003l-21.881-6.984
-			L61.707,59.45z"/>
-		<path fill="#FF0000" d="M45.242,20.377c0.019,0.008,0.033,0.016,0.051,0.024 M40.545,62.121v40.761
-			c0,0.97,0.594,1.839,1.495,2.188l56.493,22.016c0.274,0.107,0.563,0.159,0.854,0.159c0.467,0,0.928-0.138,1.324-0.407
-			c0.381-0.263,0.633-0.641,0.805-1.053c1.338-1.934,2.789-3.553,6.646-5.038c3.477-1.336,5.77-1.233,7.602-1.147
-			c0.043,0.004,0.078,0.004,0.119,0.004c0.34,0.191,0.711,0.328,1.129,0.328c1.3,0,2.349-1.05,2.349-2.348V25.393
-			c0-0.996-0.625-1.884-1.563-2.216L63.047,4.5v5.216l51.614,17.338l0.813,89.112c0,0.001-6.822-1.77-11.577,2.616
-			c-0.834,0.47-1.541,0.956-2.162,1.452V37.333c0-0.021-0.011-0.038-0.011-0.06c-0.006-0.189-0.063-0.364-0.11-0.542
-			c-0.032-0.119-0.04-0.243-0.089-0.351c-0.064-0.146-0.17-0.262-0.266-0.394c-0.084-0.113-0.147-0.24-0.25-0.34
-			c-0.096-0.091-0.22-0.148-0.332-0.224c-0.145-0.097-0.278-0.203-0.44-0.268c-0.021-0.008-0.035-0.024-0.058-0.032l-37.132-12.51
-			v5.005l33.991,11.366v82.476l-51.796-20.185V62.121H40.545z"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M109.939,47.162c0-5.448-4.463-9.908-9.91-9.908H85.412c-5.449,0-9.906,4.462-9.906,9.908v5.842c0,5.452,4.458,9.907,9.906,9.907
+			h14.617c5.447,0,9.908,4.46,9.908,9.909v5.842c0,5.456-4.461,9.908-9.908,9.908H85.412c-5.449,0-9.906-4.457-9.906-9.908"/>
+		
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="92.723" y1="37.254" x2="92.723" y2="27.162"/>
+		
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="92.723" y1="98.668" x2="92.723" y2="88.57"/>
 	</g>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="21.01" y1="86.712" x2="42.9" y2="86.712"/>
 </g>
-<g id="Calque_2">
-	<g id="Calque_3_2_">
-		<g id="Calque_3">
-			<g>
-				
-					<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-					M56.654,55.605c0,0.578-0.469,1.049-1.049,1.049H5.548c-0.579,0-1.048-0.471-1.048-1.049V5.548C4.5,4.969,4.969,4.5,5.548,4.5
-					h50.058c0.58,0,1.049,0.469,1.049,1.048L56.654,55.605L56.654,55.605z"/>
-				<circle fill="#FF0000" cx="16.424" cy="17.481" r="3.704"/>
-				<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="17.48" x2="46.23" y2="17.48"/>
-				<circle fill="#FF0000" cx="16.424" cy="30.577" r="3.704"/>
-				<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="30.578" x2="46.23" y2="30.578"/>
-				<circle fill="#FF0000" cx="16.424" cy="43.673" r="3.704"/>
-				<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="43.672" x2="46.23" y2="43.672"/>
+<g id="Calque_1">
+	<g id="Calque_1_1_">
+		<g id="Calque_4">
+		</g>
+		<g>
+			<path fill="#FF0000" d="M45.242,20.377c0.019,0.008,0.033,0.016,0.051,0.024"/>
+		</g>
+	</g>
+	<g id="Calque_2">
+		<g id="Calque_3_2_">
+			<g id="Calque_3">
+				<g>
+					
+						<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+						M56.654,55.605c0,0.578-0.469,1.049-1.049,1.049H5.548c-0.579,0-1.048-0.471-1.048-1.049V5.548C4.5,4.969,4.969,4.5,5.548,4.5
+						h50.058c0.58,0,1.049,0.469,1.049,1.048L56.654,55.605L56.654,55.605z"/>
+					<circle fill="#FF0000" cx="16.424" cy="17.481" r="3.704"/>
+					<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="17.48" x2="46.23" y2="17.48"/>
+					<circle fill="#FF0000" cx="16.424" cy="30.577" r="3.704"/>
+					<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="30.578" x2="46.23" y2="30.578"/>
+					<circle fill="#FF0000" cx="16.424" cy="43.673" r="3.704"/>
+					<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="43.672" x2="46.23" y2="43.672"/>
+				</g>
 			</g>
 		</g>
 	</g>
