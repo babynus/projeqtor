@@ -127,10 +127,8 @@ $mobile=false;
       if (isNewGui) {
         changeTheme('<?php echo getTheme();?>');
         <?php if (Parameter::getUserParameter('newGuiThemeColor')) { ?>
-        console.log('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>');
         setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>','<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>');
         <?php } else {?>
-        console.log('default color');
         setColorTheming('#545381', '#e97b2c');
         <?php }?>
       }
