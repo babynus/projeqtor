@@ -1,7 +1,7 @@
 -- ///////////////////////////////////////////////////////////
 -- // PROJECTOR                                             //
 -- //-------------------------------------------------------//
--- // Version : 8.9.0                                      //
+-- // Version : 9.0.0                                      //
 -- // Date : 2020-09-29                                     //
 -- ///////////////////////////////////////////////////////////
 
@@ -14,58 +14,84 @@ CREATE TABLE `${prefix}navigation` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
+-- TRUNCATE navigation; -- debugLog (for tests only)
 INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`) VALUES
--- root level
-(9,'menuToday',0,1,20),
-(250,'menuActivityStream',0,177,40),
-(1,'navPlanning',0,0,60),
-(2,'navTicketing',0,0,80),
-(3,'navFollowup',0,0,100),
-(4,'navFinancial',0,0,120),
-(5,'navSteering',0,0,140),
-(18,'navConfigurationManagement',0,0,160),
-(112,'navHumanResourceNav',0,0,180),
-(6,'navReports',0,0,200),
-(7,'navTool',0,0,220),
-(8,'navAdministration',0,0,240),
-(300,'navPlugin',0,0,260),
-
-(10,'navPlanningView',1,0,60),
-(11,'navIndicators',2,0,50),
-(12,'navLeaveSystem',3,0,30),
-(13,'navExpenses',4,0,40),
-(14,'navIncomes',4,0,50),
-(15,'navSituation',4,0,60),
-(16,'navRiskManagement',5,0,90),
-(17,'navRequirementsManagement',5,0,100),
-(19,'navAssetManagement',5,0,120),
+-- 0 ------------------------------------------------------ root level
+(9,'menuToday',0,1,10),
+(1,'navPlanning',0,0,20),
+(2,'navTicketing',0,0,30),
+(3,'navFollowup',0,0,40),
+(4,'navFinancial',0,0,50),
+(5,'navSteering',0,0,60),
+(18,'navConfigurationManagement',0,0,70),
+(112,'navHumanResourceNav',0,0,80),
+(6,'navReports',0,0,90),
+(7,'navTool',0,0,100),
+(8,'navAdministration',0,0,110),
+(300,'navPlugin',0,0,120),
+-- 1 ------------------------------------------------------ Planning
 (20,'menuProject',1,16,10),
 (21,'menuActivity',1,25,20),
 (22,'menuMilestone',1,26,30),
 (23,'menuMeeting',1,62,40),
-(24,'menuPlanning',1,9,50),
-(25,'menuPlannedWorkManual',10,252,40),
-(26,'menuPortfolioPlanning',10,123,10),
-(27,'menuGlobalPlanning',10,196,30),
-(28,'menuResourcePlanning',10,106,20),
-(29,'menuConsultationPlannedWorkManual',10,253,50),
-(30,'menuGlobalView',3,192,70),
-(31,'menuDashboardTicket',2,150,10),
+(302,'menuPeriodicMeeting',1,124,50),
+(303,'menuTestSession',1,113,60),
+(24,'menuPlanning',1,9,70),
+(25,'menuPlannedWorkManual',1,252,80),
+(310,'menuKanban',1,100006001,90),
+(10,'navPlanningView',1,0,100),
+-- 1 - 10 ------------------------------------------------- Plannings, vues de type Gantt
+(260,'menuPlanning',10,9,10),
+(26,'menuPortfolioPlanning',10,123,20),
+(28,'menuResourcePlanning',10,106,30),
+(27,'menuGlobalPlanning',10,196,40),
+(306,'menuVersionsPlanning',10,179,70),
+(307,'menuVersionsComponentPlanning',10,227,80),
+(308,'menuGanttSupplierContract',10,232,90),
+(309,'menuGanttClientContract',10,235,100),
+-- 2 ------------------------------------------------------ Ticketing
+(304,'menuProject',2,16,10),
 (32,'menuTicket',2,22,20),
 (33,'menuTicketSimple',2,118,30),
 (34,'menuKanban',2,100006001,40),
+(31,'menuDashboardTicket',2,150,50),
+(11,'navIndicators',2,0,60),
+-- 2 - 11 ------------------------------------------------- Indicators
 (35,'menuTicketDelay',11,89,10),
 (36,'menuTicketDelayPerProject',11,182,20),
 (37,'menuIndicatorDefinition',11,90,30),
 (38,'menuIndicatorDefinitionPerProject',11,181,40),
-(39,'menuImputation',3,8,10),
-(40,'menuAbsence',3,203,20),
-(41,'menuImputationValidation',3,204,40),
-(42,'menuConsultationPlannedWorkManual',3,253,50),
-(44,'menuDiary',3,133,60),
+-- 3 ------------------------------------------------------ Followup
+(305,'menuProject',3,16,10),
+(39,'menuImputation',3,8,20),
+(40,'menuAbsence',3,203,30),
+(12,'navLeaveSystem',3,0,40),
+(41,'menuImputationValidation',3,204,50),
+(253,'menuConsultationValidation',3,254,60),
+(258,'menuPlannedWorkManual',3,252,70),
+(42,'menuConsultationPlannedWorkManual',3,253,80),
+(30,'menuGlobalView',3,192,90),
+(44,'menuDiary',3,133,100),
+(250,'menuActivityStream',3,177,110),
+-- 4 ------------------------------------------------------ Financials
+(68,'menuHierarchicalBudget',4,233,10),
+(311,'menuProjectSituation',4,245,20),
+(13,'navExpenses',4,0,30),
+(14,'navIncomes',4,0,40),
+(15,'navSituation',4,0,50),
+(69,'menuGanttSupplierContract',4,232,60),
+(70,'menuGanttClientContract',4,235,70),
+-- 5 ------------------------------------------------------ Steering
+(16,'navRiskManagement',5,0,90),
+(17,'navRequirementsManagement',5,0,100),
+(19,'navAssetManagement',5,0,120),
+(249,'menuAction',5,4,15),
+(251,'menuRequirement',5,111,17),
+--
 (45,'menuLeaveCalendar',12,209,10),
 (46,'menuEmployeeLeaveEarned',12,211,20),
 (47,'menuDashboardEmployeeManager',12,215,30),
+--
 (48,'menuBudget',13,197,10),
 (49,'menuSupplierContract',13,228,20),
 (50,'menuCallForTender',13,153,30),
@@ -76,6 +102,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (55,'menuProviderPayment',13,201,80),
 (56,'menuIndividualExpense',13,75,90),
 (57,'menuProjectExpense',13,76,100),
+--
 (58,'menuClientContract',14,234,10),
 (59,'menuQuotation',14,131,20),
 (60,'menuCommand',14,125,30),
@@ -86,9 +113,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (65,'menuGallery',14,146,80),
 (66,'menuCatalog',14,174,90),
 (67,'menuCatalogUO',14,255,100),
-(68,'menuHierarchicalBudget',4,233,10),
-(69,'menuGanttSupplierContract',4,232,20),
-(70,'menuGanttClientContract',4,235,30),
+--
 (71,'menuProjectSituation',15,245,10),
 (72,'menuProjectSituationExpense',15,246,20),
 (73,'menuProjectSituationIncome',15,247,30),
@@ -107,39 +132,34 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (87,'menuTestCase',17,112,20),
 (88,'menuTestSession',17,113,30),
 (89,'menuDashboardRequirement',17,189,40),
+-- 18 ----------------------------------------------------- Produit
 (90,'menuProduct',18,86,10),
 (91,'menuProductVersion',18,87,20),
 (92,'menuComponent',18,141,30),
 (93,'menuComponentVersion',18,142,40),
 (94,'menuVersionsPlanning',18,179,50),
 (95,'menuVersionsComponentPlanning',18,227,60),
+--
 (96,'menuAsset',19,237,10),
 (97,'menuLocation',19,238,20),
 (98,'menuBrand',19,239,30),
 (99,'menuModel',19,240,40),
 (100,'menuAssetCategory',19,241,50),
 (101,'menuAssetType',19,248,60),
+--
 (102,'menuMessage',7,51,10),
 (103,'menuImportData',7,58,30),
 (104,'menuMail',7,69,30),
 (105,'menuAlert',7,91,40),
-(106,'menuAudit',8,122,50),
 (107,'menuNotification',7,185,60),
 (108,'menuMailToSend',7,187,70),
 (109,'menuAutoSendReport',7,205,80),
 (110,'menuDataCloning',7,222,90),
 (111,'menuMessageLegal',7,223,100),
-(113,'menuLeaveCalendar',112,209,10),
-(114,'menuLeave',112,210,20),
-(115,'menuEmployeeLeaveEarned',112,211,30),
-(116,'menuEmploymentContract',112,213,40),
-(117,'menuEmployeeManager',112,214,50),
-(118,'menuDashboardEmployeeManager',112,215,60),
-(119,'navParameter',112,0,70),
-(120,'menuLeaveType',119,217,10),
-(121,'menuEmploymentContractType',119,218,20),
-(122,'menuEmploymentContractEndReason',119,219,30),
-(123,'menuLeavesSystemHabilitation',119,220,40),
+(248,'menuDocument',7,102,15),
+--
+(106,'menuAudit',8,122,50),
+(259,'menuProjectParameter',8,19,10),
 (124,'menuGlobalParameter',8,18,15),
 (125,'menuUserParameter',8,20,20),
 (126,'menuAdmin',8,92,5),
@@ -147,10 +167,25 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (128,'navEnvironmentalParameter',8,0,50),
 (129,'navAutomation',8,0,60),
 (130,'navHabilitationParameter',8,0,70),
+--
+(113,'menuLeaveCalendar',112,209,10),
+(114,'menuLeave',112,210,20),
+(115,'menuEmployeeLeaveEarned',112,211,30),
+(116,'menuEmploymentContract',112,213,40),
+(117,'menuEmployeeManager',112,214,50),
+(118,'menuDashboardEmployeeManager',112,215,60),
+(119,'navParameter',112,0,70),
+--
+(120,'menuLeaveType',119,217,10),
+(121,'menuEmploymentContractType',119,218,20),
+(122,'menuEmploymentContractEndReason',119,219,30),
+(123,'menuLeavesSystemHabilitation',119,220,40),
+--
 (131,'navListOfValues',127,0,10),
 (132,'navType',127,0,20),
 (133,'navHumanResourceParameters',127,0,30),
 (134,'menuDataCloningParameter',127,224,40),
+--
 (135,'menuClient',128,15,10),
 (136,'menuUser',128,17,20),
 (137,'menuResource',128,44,30),
@@ -164,6 +199,8 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (146,'menuProvider',128,148,110),
 (147,'menuResourceTeam',128,188,120),
 (148,'menuEmployee',128,212,130),
+(252,'menuOrganization',128,158,5),
+--
 (149,'menuWorkflow',129,59,10),
 (150,'menuStatusMail',129,68,20),
 (151,'menuTicketDelay',129,89,30),
@@ -178,6 +215,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (160,'menuEmailTemplate',129,184,120),
 (161,'menuNotificationDefinition',129,186,120),
 (162,'menuInputMailbox',129,250,130),
+--
 (163,'menuHabilitation',130,21,10),
 (164,'menuAccessProfile',130,47,20),
 (165,'menuAccessRight',130,48,30),
@@ -187,6 +225,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (169,'menuAccessRightNoProject',130,135,70),
 (170,'menuModule',130,221,5),
 (171,'menuAccessProfileNoProject',130,256,90),
+--
 (172,'menuRole',131,73,10),
 (173,'menuStatus',131,34,20),
 (174,'menuResolution',131,149,30),
@@ -215,6 +254,10 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (197,'menuIncomingStatus',131,172,260),
 (198,'menuDeliverableStatus',131,164,270),
 (199,'menuLanguage',131,178,280),
+(245,'menuRenewal',131,231,290),
+(246,'menuPredefinedSituation',131,249,300),
+(247,'menuInterventionMode',131,251,310),
+--
 (200,'menuOrganizationType',132,159,10),
 (201,'menuProjectType',132,93,20),
 (202,'menuTicketType',132,53,30),
@@ -260,22 +303,15 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (242,'menuDeliveryType',132,183,430),
 (243,'menuSupplierContractType',132,229,440),
 (244,'menuClientContractType',132,236,450),
-(245,'menuRenewal',131,231,290),
-(246,'menuPredefinedSituation',131,249,300),
-(247,'menuInterventionMode',131,251,310),
-(248,'menuDocument',7,102,15),
-(249,'menuAction',5,4,15),
-(251,'menuRequirement',5,111,17),
-(252,'menuOrganization',128,158,5),
-(253,'menuConsultationValidation',3,254,45),
+--
 (254,'menuLeaveType',133,217,10),
 (255,'menuEmploymentContractType',133,218,20),
 (256,'menuEmploymentContractEndReason',133,219,30),
 (257,'menuLeavesSystemHabilitation',133,220,40),
-(258,'menuPlannedWorkManual',3,252,45),
-(259,'menuProjectParameter',8,19,10),
-(260,'menuPlanning',10,9,5),
+--
 (301,'menuPluginManagement',300,136,10);
+
+-- ========================================================
 
 ALTER TABLE `${prefix}menucustom` ADD `idRow` INT(12) DEFAULT '1' COMMENT '12',  ADD `sortOrder` int(3) unsigned DEFAULT 1 COMMENT '3';
 
@@ -285,9 +321,8 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 INSERT INTO ${prefix}parameter (idUser, parameterCode, parameterValue) SELECT r.id , 'newGui', 0 FROM ${prefix}resource r where r.isUser=1;
 
 ALTER TABLE `${prefix}notification` ADD `idPluginIdVersion` varchar(4000) DEFAULT NULL;
--- ========================================================
 
 UPDATE `${prefix}habilitationother` set scope='canDeleteAttachment' where scope='canDeleteAttachement';
 
- INSERT INTO `${prefix}originable` (`id`,`name`, `idle`) VALUES 
+INSERT INTO `${prefix}originable` (`id`,`name`, `idle`) VALUES 
 (32,'CallForTender', 0);

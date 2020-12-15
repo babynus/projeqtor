@@ -84,9 +84,8 @@ class IndicatorDefinition extends SqlElement {
     
     private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
-    <th field="nameIndicatorable" formatter="translateFormatter" width="15%" >${element}</th>
-    <th field="nameIndicator" width="20%" formatter="translateFormatter">${idIndicator}</th>
-    <th field="nameType" width="5%" >${type}</th>
+    <th field="nameIndicatorable" formatter="translateFormatter" width="10%" >${element}</th>
+    <th field="nameIndicator" width="30%" formatter="translateFormatter">${idIndicator}</th>
     <th field="nameProject" width="15%" >${idProject}</th>
     <th field="warningValue" width="8%" formatter="numericFormatter">${warning}</th>
     <th field="nameWarningDelayUnit" width="12%" formatter="translateFormatter">${unit}</th>
@@ -96,7 +95,7 @@ class IndicatorDefinition extends SqlElement {
     ';
 
   private static $_fieldsAttributes=array("name"=>"hidden",
-                                  "idType"=>"nocombo",
+                                  "idType"=>"hidden",
                                   "warningValue"=>"nobr",
                                   "alertValue"=>"nobr",
                                   "nameIndicatorable"=>"hidden",

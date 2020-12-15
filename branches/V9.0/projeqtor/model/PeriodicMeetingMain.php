@@ -81,19 +81,19 @@ class PeriodicMeetingMain extends SqlElement {
 
   public $_nbColMax=3;
   // Define the layout that will be used for lists
+
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
-    <th field="nameProject" width="14%" >${idProject}</th>
-    <th field="nameMeetingType" width="14%" >${idMeetingType}</th>
-    <th field="name" width="22%" >${name}</th>
+    <th field="nameProject" width="15%" >${idProject}</th>
+    <th field="nameMeetingType" width="15%" >${idMeetingType}</th>
     <th field="periodicityStartDate" formatter="dateFormatter" width="10%" >${startDate}</th>
     <th field="periodicityEndDate" formatter="dateFormatter" width="10%" >${endDate}</th>
-    <th field="periodicityTimes" width="6%" >${periodicityTimes}</th>
-    <th field="meetingStartTime" width="8%" >${startTime}</th>
-    <th field="meetingEndTime" width="8%" >${endTime}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
+    <th field="namePeriodicity" formatter="translateFormatter" width="10%" >${idPeriodicity}</th>
+    <th field="meetingStartTime" formatter="dateFormatter" width="10%" >${meetingStartTime}</th>
+    <th field="name" width="25%" >${name}</th>
     ';
-
+  
+  
   private static $_fieldsAttributes=array("idProject"=>"required",
                                   "idMeetingType"=>"required",
                                   "periodicityStartDate"=>"required, nobr",
