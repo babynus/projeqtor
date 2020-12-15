@@ -1862,3 +1862,7 @@ element.style {
 .comboButton .dijitReset.dijitInline.dijitButtonNode:Active {
   border: none;
 }
+
+.ProjeQtOrNewGui .dojoxGridRowSelected .ganttIconBackground {
+	background-color: transparent;
+}

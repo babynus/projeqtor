@@ -159,7 +159,7 @@
   $newGui = SqlElement::getSingleSqlElementFromCriteria('Parameter', array('idUser'=>$user->id, 'parameterCode'=>'newGui'));
   if($newGui->parameterValue == 1 or isIE()){
     $idMessageLegal = SqlList::getIdFromName('MessageLegal', 'newGui');
-    $messageLegalFollow = SqlElement::getSingleSqlElementFromCriteria('MessageLegalFollowUp', array('idUser'=>$user->id, 'name'=>'newGui', 'idMessageLegal'=>$idMessageLegal));
+    $messageLegalFollow = SqlElement::getSingleSqlElementFromCriteria('MessageLegalFollowup', array('idUser'=>$user->id, 'name'=>'newGui', 'idMessageLegal'=>$idMessageLegal));
     $messageLegalFollow->acceptedDate= date('Y-m-d H:i:s');
     $messageLegalFollow->accepted = 1;
     $messageLegalFollow->save();
