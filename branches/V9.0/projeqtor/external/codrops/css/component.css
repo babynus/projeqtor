@@ -10,9 +10,9 @@
 }
 
 /* Menu styles */
-.menu__wrap {
+.menu__wrap, .menu__searchMenuDiv {
 	position: absolute;
-	top: 4.5em;
+	top: 5.5em;
 	overflow-x: hidden;
 	bottom: 0;
 	width: 99%;
@@ -296,3 +296,14 @@ float: left;
 	font-style: italic;
 	color: darkgray;
 }
+
+.menuSearchInput{
+	float:right;
+    position: relative;
+    top: 1.0em;
+    width: 170px !important;
+    right: -24px;
+    background-color: white !important;
+    border-radius:4px !important;
+}
+
