@@ -1099,7 +1099,7 @@
 .ProjeQtOrFlatGreen .ganttExpandOpened { background-image: url(images/minus.gif);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .ganttExpandOpened { background-image: url(images/minus.gif);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .ganttExpandOpened { background-image: url(images/minus.gif);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .ganttExpandOpened { background-image: url(customIcons/new/iconMinus.svg); position:relative;top:1px; background-repeat: no-repeat; background-size: 13px 13px; cursor: pointer; }
+.ProjeQtOrNewGui .ganttExpandOpened { background-image: url(customIcons/new/iconMinus.svg); position:relative;top:1px; background-repeat: no-repeat; background-size: 12px 12px; cursor: pointer; }
 
   
 .ganttExpandClosed { background-image: url(images/plus.gif);  background-repeat: no-repeat; cursor: pointer; }
@@ -1107,14 +1107,17 @@
 .ProjeQtOrFlatGreen .ganttExpandClosed { background-image: url(images/plus.gif);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .ganttExpandClosed { background-image: url(images/plus.gif);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .ganttExpandClosed { background-image: url(images/plus.gif);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .ganttExpandClosed { background-image: url(customIcons/new/iconPlus.svg);  position:relative;top:1px; background-repeat: no-repeat; background-size: 13px 13px; cursor: pointer; }
+.ProjeQtOrNewGui .ganttExpandClosed { background-image: url(customIcons/new/iconPlus.svg);  position:relative;top:1px; background-repeat: no-repeat; background-size: 12px 12px; cursor: pointer; }
 
 .ganttNoExpand { background-image: url(images/none.gif);  background-repeat: no-repeat; cursor: default; }
 .ganttAsset { background-image: url(images/none.gif);  background-repeat: no-repeat; cursor: default; }
 .ganttOrganization { background-image: url(images/none.gif);  background-repeat: no-repeat; cursor: default;}
 .ganttNoExpandMile { background-image: url(images/mile.gif);  background-repeat: no-repeat; }
 
-
+.ProjeQtOrNewGui .ganttNoExpand { background-image: url();  background-repeat: no-repeat; cursor: default;}
+.ProjeQtOrNewGui .ganttAsset { background-image: url();  background-repeat: no-repeat; cursor: default; }
+.ProjeQtOrNewGui .ganttOrganization { background-image: url();  background-repeat: no-repeat; cursor: default;}
+.ProjeQtOrNewGui .ganttNoExpandMile { background-image: url();  background-repeat: no-repeat; }
 
 
 /* E */

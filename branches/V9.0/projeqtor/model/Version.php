@@ -917,6 +917,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
             $ass = new Assignment();
             $assList = $ass->getSqlElementsFromCriteria($crit, false);
             $resp = $activity->idResource;
+            $arrayResource = array();
             foreach ($assList as $assLine) {
                 $res = new ResourceAll($assLine->idResource, true);
                 if (!isset($arrayResource[$res->id])) {

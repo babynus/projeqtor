@@ -520,7 +520,7 @@
     <?php 
     $isGlobal=GlobalPlanningElement::isGlobalizable($class);
     if (RequestHandler::isCodeSet('planning') and RequestHandler::isCodeSet('planningType') and RequestHandler::getValue('planningType')=='Planning') {organizeButtons(2);}?>
-    <span id="indentButtonDiv" class="statusBar" style="display:<?php echo ($isGlobal)?'none':'inline-block';?>;height:32px; width:72px;">
+    <div id="indentButtonDiv" class="statusBar" style="display:<?php echo ($isGlobal)?'none':'inline-block';?>;<?php echo (isNewGui())?'height:64px;width:36px;background:#fff !important;':'height:32px; width:'.(($extendedZone)?'72':'68').'px;';?>">
      <button id="indentDecreaseButton" dojoType="dijit.form.Button" showlabel="false" 
         title="<?php echo i18n('indentDecreaseButton');?>"
         iconClass="dijitButtonIcon dijitButtonIconDecrease" class="statusBar detailButton">
@@ -529,7 +529,7 @@
           hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
         </script>
-      </button>
+      </button><?php if (isNewGui()) echo '<br/>';?>
       <button id="indentIncreaseButton" dojoType="dijit.form.Button" showlabel="false"
         title="<?php echo i18n('indentIncreaseButton');?>"
         iconClass="dijitButtonIcon dijitButtonIconIncrease" class="detailButton">
@@ -538,8 +538,8 @@
           hideResultDivs();
           hideExtraButtons('extraButtonsDetail');  
         </script>
-      </button>
-    </span>
+      </button> 
+    </div>
     <?php }?> 
     <?php 
       $crit="nameChecklistable='".get_class($obj)."'";

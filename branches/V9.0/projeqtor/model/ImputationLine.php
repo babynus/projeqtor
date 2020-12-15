@@ -998,7 +998,7 @@ class ImputationLine {
               echo '<input type="text" xdojoType="dijit.form.NumberTextBox" ';
               // echo ' constraints="{pattern:\'###0.0#\'}"';
               echo ' style="width: 60px; text-align: center; " ';
-              echo ' trim="true" class="input dijitTextBox dijitNumberTextBox dijitValidationTextBox displayTransparent" readOnly="true" tabindex="-1" ';
+              echo ' trim="true" class="input dijitTextBox dijitNumberTextBox dijitValidationTextBox dijitTextBoxReadOnly" readOnly="true" tabindex="-1" ';
               echo ' id="assignedWork_'.$nbLine.'"';
               echo ' value="'.htmlDisplayNumericWithoutTrailingZeros(Work::displayImputation($line->assignedWork)).'" ';
               echo ' />';
@@ -1014,7 +1014,7 @@ class ImputationLine {
               echo '<input type="text" xdojoType="dijit.form.NumberTextBox" ';
               // echo ' constraints="{pattern:\'###0.0#\'}"';
               echo ' style="width: 60px; text-align: center;" ';
-              echo ' trim="true" class="input dijitTextBox dijitNumberTextBox dijitValidationTextBox displayTransparent" readOnly="true" tabindex="-1" ';
+              echo ' trim="true" class="input dijitTextBox dijitNumberTextBox dijitValidationTextBox dijitTextBoxReadOnly" readOnly="true" tabindex="-1" ';
               echo ' id="realWork_'.$nbLine.'"';
               echo ' value="'.htmlDisplayNumericWithoutTrailingZeros(Work::displayImputation($line->realWork)).'" ';
               echo ' />';
@@ -1065,8 +1065,8 @@ class ImputationLine {
               echo '<div style="position: relative">';
               if ($showPlanned and $line->arrayPlannedWork[$i]->work) {
                 echo '<div style="display: inline;';
-                echo ' position: absolute; left: 7px; top: 1px; text-align: right;';
-                echo ' color:#8080DD; font-size:90%;"';
+                echo ' position: absolute; left: '.((isNewGui())?'5':'7').'px; top: 1px; text-align: right;';
+                echo ' color:#8080DD; font-size:'.((isNewGui())?'75':'90').'%;"';
                 echo ' id="plannedValue_'.$nbLine.'_'.$i.'" ';
                 echo ' data-value="'.htmlDisplayNumericWithoutTrailingZeros(Work::displayImputation($line->arrayPlannedWork[$i]->work)).'"';
                 echo ' > ';
@@ -1205,7 +1205,7 @@ class ImputationLine {
               echo '<input type="text" xdojoType="dijit.form.NumberTextBox" ';
               // echo ' constraints="{pattern:\'###0.0#\'}"';
               echo '  style="width: 60px; text-align: center;" ';
-              echo ' trim="true" class="input dijitTextBox dijitNumberTextBox dijitValidationTextBox displayTransparent" readOnly="true" tabindex="-1" ';
+              echo ' trim="true" class="input dijitTextBox dijitNumberTextBox dijitValidationTextBox dijitTextBoxReadOnly" readOnly="true" tabindex="-1" ';
               echo ' id="plannedWork_'.$nbLine.'"';
               echo ' value="'.htmlDisplayNumericWithoutTrailingZeros(Work::displayImputation($line->plannedWork)).'" ';
               echo ' />';

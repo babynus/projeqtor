@@ -395,10 +395,88 @@ if(sessionValueExists('listShowIdleTimesheet')and getSessionValue('listShowIdleT
                 </script>
               </button> 
               </div>
-              <table style="margin-top:20px;x">
-              <tr class="checkboxLabel">
+              <table style="margin-top:40px;x">
+              
+				       <tr class="checkboxLabel">
+              <td style="text-align: right; align: right;min-width:150px" >
+            	  &nbsp;&nbsp;<?php echo ucfirst(i18n("labelDisplayOnlyCurrentWeekMeetings"));?>
+              </td>
+              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
+                <div title="<?php echo ucfirst(i18n('labelDisplayOnlyCurrentWeekMeetings'));?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
+                  id="listDisplayOnlyCurrentWeekMeetings" name="listDisplayOnlyCurrentWeekMeetings" <?php if ($displayOnlyCurrentWeekMeetings) echo 'checked';?>>
+                  <script type="dojo/method" event="onChange" >
+                    return refreshImputationList();
+                  </script>
+                </div>&nbsp;
+              </td>
+              <td style="width:200px;text-align: right; align: right;min-width:150px" >
+              &nbsp;&nbsp;<?php echo ucfirst(i18n("labelShowIdle"));?>
+              </td>
+              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
+                <div title="<?php echo ucfirst(i18n('showIdleElements'))?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
+                  id="listShowIdle" name="listShowIdle"  <?php if (sessionValueExists('listShowIdleTimesheet')){ if(getSessionValue('listShowIdleTimesheet')=='on'){ echo ' checked="checked" '; }}?> >      >
+                  <script type="dojo/method" event="onChange" >
+                    saveDataToSession("listShowIdleTimesheet",dijit.byId('listShowIdle').get('value'),false);
+                    return refreshImputationList();
+                  </script>
+                </div>&nbsp;
+              </td>
+            </tr>
+				    <tr class="checkboxLabel">
+              <td style="text-align: right; align: right;min-width:150px" >
+            	  &nbsp;&nbsp;<?php echo ucfirst(i18n("labelHideDone"));?>
+              </td>
+              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
+                <div title="<?php echo ucfirst(i18n('labelHideDone'));?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
+                  id="listHideDone" name="listHideDone" <?php if ($hideDone) echo 'checked';?>>
+                  <script type="dojo/method" event="onChange" >
+                    return refreshImputationList();
+                  </script>
+                </div>&nbsp;
+              </td>
+              <td style="width:200px;text-align: right; align: right;min-width:150px" >
+      	        &nbsp;&nbsp;<?php echo ucfirst(i18n("labelShowPlannedWork"));?>
+              </td>
+              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
+				        <div title="<?php echo ucfirst(i18n('showPlannedWork'));?>" dojoType="dijit.form.CheckBox" type="checkbox" 
+				        class="whiteCheck"
+				         id="listShowPlannedWork" name="listShowPlannedWork" <?php if ($showPlanned) echo 'checked';?>>
+				          <script type="dojo/method" event="onChange" >
+                    return refreshImputationList();
+                  </script>
+				        </div>&nbsp;
+				      </td>
+            </tr>
+            <tr class="checkboxLabel">
+              <td style="text-align: right; align: right;min-width:150px" >
+            	  <?php if ( $displayHandledGlobal!="YES") { echo '&nbsp;&nbsp;'.ucfirst(i18n("labelHideNotHandled"));}?>
+              </td>
+              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
+                <?php if ( $displayHandledGlobal!="YES") { ?>
+                <div title="<?php echo ucfirst(i18n('labelHideNotHandled'));?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
+                id="listHideNotHandled" name="listHideNotHandled" <?php if ($hideNotHandled) echo 'checked';?>>
+                  <script type="dojo/method" event="onChange" >
+                    return refreshImputationList();
+                  </script>
+                </div>&nbsp;
+                <?php }?>
+              </td>
+              <td style="width:200px;text-align: right; align: right;min-width:150px" >
+      	        &nbsp;&nbsp;<?php echo ucfirst(i18n("labelShowId"));?>
+              </td>
+              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
+				        <div title="<?php echo ucfirst(i18n('labelShowId'));?>" dojoType="dijit.form.CheckBox" type="checkbox" 
+				        class="whiteCheck"
+				         id="showId" name="showId" <?php if ($showId) echo 'checked';?>>
+				          <script type="dojo/method" event="onChange" >
+                    return refreshImputationList();
+                  </script>
+				        </div>&nbsp;
+				      </td>
+				    </tr>
+				    <tr class="checkboxLabel">
               <td style="width:200px;text-align: right; align: right;min-width:150px;white-space:nowrap" >
-      	        &nbsp;&nbsp;<?php echo i18n("labelLimitResourceByProject");?>
+      	        &nbsp;&nbsp;<?php echo ucfirst(i18n("labelLimitResourceByProject"));?>
               </td>
               <td style="width:10px;text-align: left; align: left;white-space:nowrap;">&nbsp;
 				        <div title="<?php echo i18n('labelLimitResourceByProject')?>" dojoType="dijit.form.CheckBox" type="checkbox" 
@@ -410,83 +488,6 @@ if(sessionValueExists('listShowIdleTimesheet')and getSessionValue('listShowIdleT
 				        </div>&nbsp;
 				      </td>				      
 				      </tr>
-				       <tr class="checkboxLabel">
-              <td style="text-align: right; align: right;min-width:150px" >
-            	  &nbsp;&nbsp;<?php echo i18n("labelDisplayOnlyCurrentWeekMeetings");?>
-              </td>
-              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
-                <div title="<?php echo i18n('labelDisplayOnlyCurrentWeekMeetings')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
-                  id="listDisplayOnlyCurrentWeekMeetings" name="listDisplayOnlyCurrentWeekMeetings" <?php if ($displayOnlyCurrentWeekMeetings) echo 'checked';?>>
-                  <script type="dojo/method" event="onChange" >
-                    return refreshImputationList();
-                  </script>
-                </div>&nbsp;
-              </td>
-              <td style="width:200px;text-align: right; align: right;min-width:150px" >
-              &nbsp;&nbsp;<?php echo i18n("labelShowIdle");?>
-              </td>
-              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
-                <div title="<?php echo i18n('showIdleElements')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
-                  id="listShowIdle" name="listShowIdle"  <?php if (sessionValueExists('listShowIdleTimesheet')){ if(getSessionValue('listShowIdleTimesheet')=='on'){ echo ' checked="checked" '; }}?> >      >
-                  <script type="dojo/method" event="onChange" >
-                    saveDataToSession("listShowIdleTimesheet",dijit.byId('listShowIdle').get('value'),false);
-                    return refreshImputationList();
-                  </script>
-                </div>&nbsp;
-              </td>
-            </tr>
-				    <tr class="checkboxLabel">
-              <td style="text-align: right; align: right;min-width:150px" >
-            	  &nbsp;&nbsp;<?php echo i18n("labelHideDone");?>
-              </td>
-              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
-                <div title="<?php echo i18n('labelHideDone')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
-                  id="listHideDone" name="listHideDone" <?php if ($hideDone) echo 'checked';?>>
-                  <script type="dojo/method" event="onChange" >
-                    return refreshImputationList();
-                  </script>
-                </div>&nbsp;
-              </td>
-              <td style="width:200px;text-align: right; align: right;min-width:150px" >
-      	        &nbsp;&nbsp;<?php echo i18n("labelShowPlannedWork");?>
-              </td>
-              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
-				        <div title="<?php echo i18n('showPlannedWork')?>" dojoType="dijit.form.CheckBox" type="checkbox" 
-				        class="whiteCheck"
-				         id="listShowPlannedWork" name="listShowPlannedWork" <?php if ($showPlanned) echo 'checked';?>>
-				          <script type="dojo/method" event="onChange" >
-                    return refreshImputationList();
-                  </script>
-				        </div>&nbsp;
-				      </td>
-            </tr>
-            <tr class="checkboxLabel">
-              <td style="text-align: right; align: right;min-width:150px" >
-            	  <?php if ( $displayHandledGlobal!="YES") { echo '&nbsp;&nbsp;'.i18n("labelHideNotHandled");}?>
-              </td>
-              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
-                <?php if ( $displayHandledGlobal!="YES") { ?>
-                <div title="<?php echo i18n('labelHideNotHandled')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
-                id="listHideNotHandled" name="listHideNotHandled" <?php if ($hideNotHandled) echo 'checked';?>>
-                  <script type="dojo/method" event="onChange" >
-                    return refreshImputationList();
-                  </script>
-                </div>&nbsp;
-                <?php }?>
-              </td>
-              <td style="width:200px;text-align: right; align: right;min-width:150px" >
-      	        &nbsp;&nbsp;<?php echo i18n("labelShowId");?>
-              </td>
-              <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
-				        <div title="<?php echo i18n('labelShowId')?>" dojoType="dijit.form.CheckBox" type="checkbox" 
-				        class="whiteCheck"
-				         id="showId" name="showId" <?php if ($showId) echo 'checked';?>>
-				          <script type="dojo/method" event="onChange" >
-                    return refreshImputationList();
-                  </script>
-				        </div>&nbsp;
-				      </td>
-				    </tr>
 				    <tr><td>&nbsp;</td></tr>
 				      </table>
 				      </div>
