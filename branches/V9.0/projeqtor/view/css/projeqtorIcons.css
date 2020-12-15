@@ -3225,3 +3225,5 @@ IconAdd existante
 .iconInvoiceType16 { background-image: url(images/iconInvoiceType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
 */
+
+.ProjeQtOrNewGui .iconPlanningView { background-image: url(customIcons/new/iconConsultationPlannedWorkManual.svg);  background-repeat: no-repeat; }
