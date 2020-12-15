@@ -3,14 +3,14 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g>
-	
-		<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		63.089,42.654 86.274,65.84 34.669,117.444 9.804,119.124 11.485,94.259 	"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M75.535,26.84l26.554,26.552c3.891,3.891,3.891,10.255,0,14.144l0,0c-3.889,3.892-10.254,3.892-14.143,0L61.392,40.981
-		c-3.889-3.889-3.889-10.252,0-14.142l0,0C65.28,22.948,71.646,22.948,75.535,26.84z"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M78.971,30.274l18.444-18.447c5.415-5.412,14.272-5.412,19.686,0l0,0c5.412,5.415,5.412,14.271,0,19.685L98.654,49.958"/>
-</g>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M75.267,106.444
+	c2.941-12.75-4.904-23.219,3.433-32.855c8.337-9.638,19.989-1.162,25.501-2.298c5.51-1.137,19.218-16.337,17.254-32.03
+	c-1.959-15.693-20.197-27.303-31.478-30.894C78.699,4.775,53.199,2.255,34.565,13.3C15.929,24.347,3.671,44.656,6.612,71.291
+	c1.987,17.985,10.789,40.762,28.933,48.011C53.689,126.55,72.324,119.193,75.267,106.444z"/>
+<circle fill="#FF0000" cx="97.964" cy="37.79" r="8.336"/>
+<circle fill="#FF0000" cx="76.882" cy="24.4" r="8.337"/>
+<circle fill="#FF0000" cx="51.295" cy="25.476" r="8.336"/>
+<circle fill="#FF0000" cx="31.045" cy="41.073" r="8.337"/>
+<circle fill="#FF0000" cx="22.708" cy="65.099" r="8.337"/>
+<circle fill="#FF0000" cx="29.419" cy="88.787" r="8.336"/>
 </svg>
