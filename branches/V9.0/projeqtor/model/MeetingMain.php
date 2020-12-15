@@ -87,7 +87,8 @@ class MeetingMain extends SqlElement {
     <th field="nameProject" width="15%" >${idProject}</th>
     <th field="nameMeetingType" width="15%" >${idMeetingType}</th>
     <th field="meetingDate" formatter="dateFormatter" width="10%" >${meetingDate}</th>
-    <th field="name" width="40%" >${name}</th>
+    <th field="meetingStartTime" formatter="dateFormatter" width="10%" >${meetingStartTime}</th>  
+    <th field="name" width="30%" >${name}</th>
     <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
     ';
 
