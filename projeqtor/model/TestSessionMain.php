@@ -100,20 +100,16 @@ class TestSessionMain extends SqlElement {
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
-    <th field="nameProject" width="8%" >${idProject}</th>
-    <th field="nameProduct" width="8%" >${idProduct}</th>
-    <th field="nameVersion" width="8%" >${idVersion}</th>
-    <th field="nameTestSessionType" width="10%" >${type}</th>
-    <th field="name" width="20%" >${name}</th>
-    <th field="colorNameRunStatus" width="6%" formatter="colorNameFormatter">${testSummary}</th>
+    <th field="nameProject" width="15%" >${idProject}</th>
+    <th field="nameTestSessionType" width="15%" >${type}</th>
+    <th field="name" width="30%" >${name}</th>
+    <th field="colorNameRunStatus" width="10%" formatter="colorNameFormatter">${testSummary}</th>
     <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="nameResource" formatter="thumbName22" width="10%" >${responsible}</th>
-    <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
-    <th field="done" width="5%" formatter="booleanFormatter" >${done}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
+    <th field="nameResource" formatter="thumbName22" width="15%" >${responsible}</th>
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
+                                  "idProject"=>"required",
                                   "name"=>"required", 
                                   "idTestSessionType"=>"required",
                                   "idStatus"=>"required",
