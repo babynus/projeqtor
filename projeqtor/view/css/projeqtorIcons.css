@@ -2365,6 +2365,13 @@
 .ProjeQtOrFlatRed .iconRequirement { background-image: url(customIcons/red/iconRequirement.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconRequirement { background-image: url(customIcons/new/iconRequirement.svg);  background-repeat: no-repeat; }
 
+.iconRequirementManagement { background-image: url(images/iconRequirement32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconRequirementManagement { background-image: url(customIcons/blue/iconRequirement.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconRequirementManagement { background-image: url(customIcons/green/iconRequirement.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconRequirementManagement { background-image: url(customIcons/grey/iconRequirement.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconRequirementManagement { background-image: url(customIcons/red/iconRequirement.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconRequirementManagement { background-image: url(customIcons/new/iconRequirementManagement.svg);  background-repeat: no-repeat; }
+
 .iconRequirementTest { background-image: url(images/iconRequirement32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconRequirementTest { background-image: url(customIcons/blue/iconRequirementTest.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconRequirementTest { background-image: url(customIcons/green/iconRequirementTest.png);  background-repeat: no-repeat; }
@@ -2428,12 +2435,22 @@
 .ProjeQtOrFlatRed .iconRiskLevel { background-image: url(customIcons/red/iconRiskLevel.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconRiskLevel { background-image: url(customIcons/new/iconRiskLevel.svg);  background-repeat: no-repeat; }
 
+/* les deux existent (managementPlan pour 8.6 et Management pour 9.0 - ne sait pas laquelle doit être concervée */
+.iconRiskManagement { background-image: url(images/iconRiskManagementPlan32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconRiskManagement { background-image: url(customIcons/blue/iconRiskManagementPlan.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconRiskManagement { background-image: url(customIcons/green/iconRiskManagementPlan.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconRiskManagement { background-image: url(customIcons/grey/iconRiskManagementPlan.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconRiskManagement { background-image: url(customIcons/red/iconRiskManagementPlan.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconRiskManagement { background-image: url(customIcons/new/iconRiskManagement.svg);  background-repeat: no-repeat; }
+
 .iconRiskManagementPlan { background-image: url(images/iconRiskManagementPlan32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconRiskManagementPlan { background-image: url(customIcons/blue/iconRiskManagementPlan.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconRiskManagementPlan { background-image: url(customIcons/green/iconRiskManagementPlan.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconRiskManagementPlan { background-image: url(customIcons/grey/iconRiskManagementPlan.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconRiskManagementPlan { background-image: url(customIcons/red/iconRiskManagementPlan.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconRiskManagementPlan { background-image: url(customIcons/new/iconRiskManagementPlan.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconRiskManagementPlan { background-image: url(customIcons/new/iconRiskManagement.svg);  background-repeat: no-repeat; }
+
+/* ---------------------------------------------------------------------------------------------------- */
 
 .iconRiskType { background-image: url(images/iconRiskType32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconRiskType { background-image: url(customIcons/blue/iconRiskType.png);  background-repeat: no-repeat; }
