@@ -468,7 +468,70 @@ function changePaswordType(){
    
   
 }
+
 //=============================================================================
+//load plugin page for not intaled plugins 
+//=============================================================================
+function searchMenuToDisplay(val){
+  console.log(val);
+  var menuExist= new Array();
+  var arrayMenuName=new Array();
+  var menuLeftTop=dojo.byId('ml-menu');
+  var currentDivMenu=menuLeftTop.querySelector('.menu__wrap');
+  var menuSearchMenu=menuLeftTop.querySelector('.menu__searchMenuDiv ');
+  
+  if(currentDivMenu.style.display!='none' && val.trim()!=''){
+    currentDivMenu.setAttribute('style','display:none;');
+  }else if(currentDivMenu.style.display=='none' && val.trim()==''){
+    currentDivMenu.setAttribute('style','display:block;');
+  }
+  if(menuSearchMenu.style.display=='none' && val.trim()!=''){
+    menuSearchMenu.setAttribute('style','display:block;');
+  }else if(menuSearchMenu.style.display=='block' && val.trim()==''){
+    menuSearchMenu.setAttribute('style','display:none;');
+  }else if((menuSearchMenu.style.display=='block' && val.trim()!='')){
+    menuSearchMenu.remove();
+    var menuSearchMenu=document.createElement('div');
+    menuSearchMenu.className='menu__searchMenuDiv ';
+    menuSearchMenu.setAttribute('style','display:block');
+    menuLeftTop.insertAdjacentElement('beforeEnd',menuSearchMenu );
+  }
+  
+  if(val.trim()=='')return;
+  var menus=menuLeftTop.querySelectorAll('.divPosName');
+  var c=0;
+  menus.forEach(function(el){
+    c++;
+    menuName=el.innerHTML.toLowerCase();
+    if(!arrayMenuName.includes(menuName)){
+      if(menuName.includes(val.toLowerCase())){
+        if(el.parentNode.className=='menu__linkDirect'){
+          arrayMenuName.push(menuName);
+          menuExist.push(el.parentNode.parentNode.cloneNode(true));
+        }
+      }
+    }
+  });
+  menuExist.forEach(function(e){
+    menuSearchMenu.insertAdjacentElement('beforeEnd',e);
+  });
+}
+
+
+function clearSearchInputMenuLeft(){
+  dojo.byId('menuSearchDiv').value='';
+  var menuLeftTop=dojo.byId('ml-menu');
+  var currentDivMenu=menuLeftTop.querySelector('.menu__wrap');
+  var menuSearchMenu=menuLeftTop.querySelector('.menu__searchMenuDiv ');
+  menuSearchMenu.remove();
+  var newMenuSearchMenu=document.createElement('div');
+  newMenuSearchMenu.className='menu__searchMenuDiv ';
+  newMenuSearchMenu.setAttribute('style','display:none');
+  menuLeftTop.insertAdjacentElement('beforeEnd',newMenuSearchMenu );
+  currentDivMenu.setAttribute('style','display:block;');
+}
+//=============================================================================
+
 
 function helpDisplayIconIsRead (val){
   if(val=='yes'){
