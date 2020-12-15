@@ -287,6 +287,7 @@ function addRemoveFavMenuLeft (id,name,mode,type){
 //=============================================================================
 function showIconLeftMenu(){
   var leftMenu=dojo.byId('ml-menu');
+  var divMenuSearch=dojo.byId('menu__searchMenuDiv');
   var mode=dojo.byId('displayModeLeftMenu').value;
   display=(mode=='ICONTXT')?'none':'block';
   style=(mode=='ICONTXT')?"float:left;max-width:180px;":"float:left;max-width:155px;";
@@ -302,6 +303,16 @@ function showIconLeftMenu(){
       posDiv.style=(itemEl.querySelector('.menuPluginToInstlal'))?style2:style;
     });
   });
+  if(dojo.byId('menuSearchDiv').value.trim()!=''){
+    var menus=divMenuSearch.querySelectorAll('.menu__item');
+    menus.forEach(function(menuCopyEl, pos) {
+        var iconDivCopy = menuCopyEl.querySelector('.iconSize16');
+        iconDivCopy.style.display=display;
+        var posDivCopy = menuCopyEl.querySelector('.divPosName');
+        posDivCopy.style=(menuCopyEl.querySelector('.menuPluginToInstlal'))?style2:style;
+    });
+  }
+
   if(dojo.byId('selectedViewMenu').value=='Parameter'){
     if(dojo.byId('parameterMenu')){
       var menuParam=dojo.byId('parameterMenu').querySelectorAll('.menu__item');
@@ -310,7 +321,6 @@ function showIconLeftMenu(){
        icon.style.display=display;
       });
     }
-  
   }
   mode=(display=='block')?'ICONTXT':'TXT';
   dojo.setAttr('displayModeLeftMenu','value',mode);
@@ -470,39 +480,43 @@ function changePaswordType(){
 }
 
 //=============================================================================
-//load plugin page for not intaled plugins 
+//search menu 
 //=============================================================================
 function searchMenuToDisplay(val){
-  console.log(val);
   var menuExist= new Array();
   var arrayMenuName=new Array();
   var menuLeftTop=dojo.byId('ml-menu');
   var currentDivMenu=menuLeftTop.querySelector('.menu__wrap');
   var menuSearchMenu=menuLeftTop.querySelector('.menu__searchMenuDiv ');
+  var clearSearch=dojo.byId('clearSearchMenu');
   
   if(currentDivMenu.style.display!='none' && val.trim()!=''){
     currentDivMenu.setAttribute('style','display:none;');
   }else if(currentDivMenu.style.display=='none' && val.trim()==''){
     currentDivMenu.setAttribute('style','display:block;');
   }
-  if(menuSearchMenu.style.display=='none' && val.trim()!=''){
+  var testasChild=menuSearchMenu.hasChildNodes();
+  if(menuSearchMenu.style.display=='none' && val.trim()!='' && !testasChild){
     menuSearchMenu.setAttribute('style','display:block;');
   }else if(menuSearchMenu.style.display=='block' && val.trim()==''){
     menuSearchMenu.setAttribute('style','display:none;');
-  }else if((menuSearchMenu.style.display=='block' && val.trim()!='')){
+  }else if((val.trim()!='' && testasChild )){
     menuSearchMenu.remove();
     var menuSearchMenu=document.createElement('div');
     menuSearchMenu.className='menu__searchMenuDiv ';
     menuSearchMenu.setAttribute('style','display:block');
     menuLeftTop.insertAdjacentElement('beforeEnd',menuSearchMenu );
   }
-  
-  if(val.trim()=='')return;
+  if(val.trim()==''){
+    clearSearch.style.display='none';
+    return;
+  }
+  if(clearSearch.style.display=='none')clearSearch.style.display='block';
   var menus=menuLeftTop.querySelectorAll('.divPosName');
   var c=0;
   menus.forEach(function(el){
     c++;
-    menuName=el.innerHTML.toLowerCase();
+    menuName="'"+el.innerHTML.toLowerCase()+"'";
     if(!arrayMenuName.includes(menuName)){
       if(menuName.includes(val.toLowerCase())){
         if(el.parentNode.className=='menu__linkDirect'){
@@ -517,9 +531,13 @@ function searchMenuToDisplay(val){
   });
 }
 
+//=============================================================================
+//clear search
+//=============================================================================
 
 function clearSearchInputMenuLeft(){
   dojo.byId('menuSearchDiv').value='';
+  dojo.byId('clearSearchMenu').style.display='none';
   var menuLeftTop=dojo.byId('ml-menu');
   var currentDivMenu=menuLeftTop.querySelector('.menu__wrap');
   var menuSearchMenu=menuLeftTop.querySelector('.menu__searchMenuDiv ');
@@ -547,7 +565,6 @@ var anotherBarContainerCallback=null;
 var menuNewGuiFilterInProgress=false;
 function menuNewGuiFilter(filter, item) {
   if (menuNewGuiFilterInProgress==true) {
-    console.log("extra menuNewGuiFilter not taken into account");
     return;
   }
   menuNewGuiFilterInProgress=true;

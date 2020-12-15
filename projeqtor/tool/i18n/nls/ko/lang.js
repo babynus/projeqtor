@@ -4260,6 +4260,7 @@ screenCustomizationErrorExist: "일부 화면 사용자 정의가 현재 버전�
 screenCustomizationErrorFixed: "화면 사용자 정의가 자동으로 수정되었습니다.",
 screenCustomizationErrorRemaining: "문제를 해결하려면 사용자 정의 플러그인의 각 화면에 액세스하십시오 (플러그인 V5.0 이상이 필요함)",
 script: "Script",
+searchMenu: "Menu search",
 searchProject: "프로젝트 검색",
 second: "두 번째",
 sectionAbacus: "Abacus",

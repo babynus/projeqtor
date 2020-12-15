@@ -4260,6 +4260,7 @@ screenCustomizationErrorExist: "Bazı ekran özelleştirmeleri mevcut sürümle 
 screenCustomizationErrorFixed: "Ekran özelleştirmeleri otomatik olarak düzeltildi;)",
 screenCustomizationErrorRemaining: "Sorunu düzeltmek için lütfen özelleştirme eklentisi üzerindeki her ekrana erişin (Eklenti V5.0 veya üstü gereklidir)",
 script: "Script",
+searchMenu: "Menu search",
 searchProject: "search for a project",
 second: "ikinci",
 sectionAbacus: "Abaküs",

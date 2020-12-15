@@ -4260,6 +4260,7 @@ screenCustomizationErrorExist: "Alcune personalizzazioni delle schermate non son
 screenCustomizationErrorFixed: "Le personalizzazioni delle schermate sono state corrette automaticamente ;)",
 screenCustomizationErrorRemaining: "Accedere ad ogni schermata mediante il plugin di personalizzazione per risolvere il problema (è richiesta la vers. 5.0 o sup. del plugin)",
 script: "Script",
+searchMenu: "Menu search",
 searchProject: "Cerca un progetto",
 second: "secondo",
 sectionAbacus: "Abaco",

@@ -4260,6 +4260,7 @@ screenCustomizationErrorExist: "Neke prilagodbe zaslona više nisu u skladu s tr
 screenCustomizationErrorFixed: "Prilagođavanje je ispravljeno automatski",
 screenCustomizationErrorRemaining: "Pristupite svakom zaslonu prilikom prilagodbe kako biste riješili problem (potreban je dodatak V5.0 ili noviji)",
 script: "Script",
+searchMenu: "Menu search",
 searchProject: "traži projekt",
 second: "sekunda",
 sectionAbacus: "Izračun potpore",
