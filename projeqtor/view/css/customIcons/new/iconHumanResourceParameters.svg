@@ -3,21 +3,14 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_2_1_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
 	 y="0px" width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="63.833" y1="6.281" x2="63.833" y2="74.129"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="26.173" y1="21.089" x2="101.064" y2="3.296"/>
-<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	5.876,63.076 46.469,63.076 25.413,23.384 "/>
 <path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M46.361,63.076c-3.892,9.256-9.771,15.961-20.137,15.961c-10.587,0-16.348-6.006-20.131-15.961"/>
-<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	81.768,42.989 122.361,42.989 101.305,3.296 "/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M122.253,42.989c-3.892,9.253-9.771,15.958-20.138,15.958c-10.586,0-16.348-6.004-20.131-15.958"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M40.623,116.181l46.765-0.033c3.08,5.268,8.797,8.808,15.34,8.803c7.532-0.006,13.964-4.698,16.536-11.318l-15.269,0.009
-	c-2.141,0.003-3.895-1.749-3.896-3.892l-0.001-4.658c-0.003-2.144,1.748-3.897,3.892-3.897l15.428-0.01
-	c-2.464-6.847-9.02-11.744-16.712-11.736c-6.544,0.005-12.254,3.551-15.33,8.82l-46.76,0.03c-3.085-5.265-8.8-8.806-15.346-8.799
-	c-7.529,0.003-13.963,4.697-16.534,11.317l15.269-0.01c2.143-0.002,3.896,1.748,3.896,3.891l0,4.661
-	c0.004,2.139-1.748,3.895-3.888,3.894l-15.43,0.012c2.464,6.846,9.018,11.741,16.711,11.736
-	C31.838,124.996,37.548,121.45,40.623,116.181z"/>
+	M107.501,85.102l-0.002-42.199c5.912-3.452,9.884-9.862,9.884-17.203c0-8.447-5.259-15.667-12.682-18.557l-0.003,17.127
+	c0.003,2.402-1.964,4.367-4.366,4.367h-5.226c-2.405,0-4.37-1.965-4.37-4.369V6.96c-7.682,2.761-13.181,10.11-13.179,18.739
+	c0.002,7.341,3.974,13.749,9.885,17.202L87.44,85.098c-5.908,3.458-9.883,9.864-9.881,17.205
+	c-0.002,8.447,5.259,15.666,12.683,18.556v-17.127c0-2.404,1.966-4.37,4.367-4.368l5.229,0.003c2.398-0.003,4.366,1.963,4.364,4.365
+	v17.308c7.683-2.76,13.18-10.107,13.18-18.736C117.383,94.961,113.411,88.552,107.501,85.102z"/>
+<g>
+	<polygon fill="#FF0000" points="21.708,16.146 51.714,16.146 46.021,34.517 27.713,34.517 	"/>
+	<polygon fill="#FF0000" points="36.574,123.186 55.762,107.02 42.483,34.517 31.406,34.517 18.243,107.02 	"/>
+</g>
 </svg>

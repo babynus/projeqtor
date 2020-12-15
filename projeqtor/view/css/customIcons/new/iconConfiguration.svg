@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
-	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Calque_1" display="none">
-	<g id="Calque_2">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<g id="Calque_1_1_" display="none">
+	<g id="Calque_2" display="inline">
 	</g>
-	<g id="Calque_2_1_">
+	<g id="Calque_2_1_" display="inline">
 	</g>
 	
-		<image display="inline" overflow="visible" width="767" height="634" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+		<image display="inline" overflow="visible" enable-background="new    " width="768" height="635" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
 EAMCAwYAABBvAAAwUAAAZIr/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
 Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
 JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAnsDAAMBIgACEQEDEQH/
@@ -460,18 +460,18 @@ HMFCR0DdTTUECi0gYZUTphA0vcakkVxWloAAyA53RMwPb1HFClsz0L2rdh2DBF0ETY3HAloph0zs
 WQXuhVaKdD9oVXuhZUQaMh0LD/BFNvTcegY8nD+G9qqcx/h/FGh6fhzeHRsei4cz3ZqgVTzeHM4/
 xTHofqXrRVRn/gTDyZhZhYdEoFWvnXaqUoseh4dCx5GPQcORhywAdixOKHRaj0LBHoQDTSqrVe8U
 OhEjMLAqlUS41x6HVU5nuVUAOvoWKqu1V29EHYFQIDoZVNqqV5+h0VB5zzJrTz1Wz7UMs+3oJ5Gz
-omNMttfuWz7UMs+3oeP2/wDpfD9q2fahT7OibOT/AP/Z" transform="matrix(1 0 0 1 -311 -249)">
+omNMttfuWz7UMs+3oeP2/wDpfD9q2fahT7OibOT/AP/Z" transform="matrix(0.9987 0 0 0.9984 -310.9995 -249)">
 	</image>
 	<path display="inline" fill="none" stroke="#FF0000" stroke-miterlimit="10" d="M-74.24,14.406"/>
 </g>
 <g id="Calque_2_2_">
 	
 		<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		8.028,30.33 8.028,95.836 64.735,121.747 119.975,93.39 119.975,33.752 64.002,6.377 	"/>
+		8.028,30.33 8.028,95.836 64.734,121.747 119.975,93.391 119.975,33.752 64.002,6.377 	"/>
 	
 		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
 		17.316,35.219 64.002,54.284 64.002,110.502 	"/>
 	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="64.002" y1="54.284" x2="112.153" y2="35.219"/>
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="64.002" y1="54.284" x2="109.965" y2="37.424"/>
 </g>
 </svg>

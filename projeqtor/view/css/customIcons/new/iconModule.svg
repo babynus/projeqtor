@@ -4,20 +4,20 @@
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 <polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	17.11,37.163 2.661,43.169 2.661,88.8 62.599,113.951 123.339,88.531 123.339,43.169 109.157,37.185 "/>
+	17.11,37.163 2.661,43.169 2.661,97.8 62.599,122.951 123.339,97.531 123.339,43.169 109.157,37.185 "/>
 <polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
 	123.339,43.169 63,68.73 2.661,43.169 "/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="62.359" y1="78.631" x2="62.359" y2="113.951"/>
-<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="34.388" cy="30.897" rx="10.589" ry="3.12"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M44.977,30.897v9.386
-	c0,1.723-4.741,3.12-10.588,3.12c-5.848,0-10.589-1.397-10.589-3.12v-9.386"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M102.275,30.897v9.386
-	c0,1.723-4.74,3.12-10.588,3.12c-5.849,0-10.59-1.397-10.59-3.12v-9.386"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M73.053,17.684v9.386c0,1.723-4.74,3.12-10.588,3.12
-	s-10.588-1.397-10.588-3.12v-9.386"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M73.053,44.799v9.386
-	c0,1.724-4.74,3.122-10.588,3.122s-10.588-1.397-10.588-3.122v-9.386"/>
-<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="92.038" cy="30.897" rx="10.588" ry="3.12"/>
-<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="62.599" cy="44.799" rx="10.588" ry="3.121"/>
-<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="62.599" cy="16.909" rx="10.588" ry="3.12"/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="62.359" y1="78.631" x2="62.359" y2="122.951"/>
+<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="34.388" cy="28.897" rx="10.589" ry="3.12"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M44.977,28.897v11.386
+	c0,1.723-4.741,3.12-10.588,3.12c-5.848,0-10.589-1.397-10.589-3.12V28.897"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M102.275,28.897v11.386
+	c0,1.723-4.74,3.12-10.588,3.12c-5.85,0-10.59-1.397-10.59-3.12V28.897"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M73.053,15.684V27.07c0,1.723-4.74,3.12-10.588,3.12
+	s-10.588-1.397-10.588-3.12V15.684"/>
+<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M73.053,42.799v11.386
+	c0,1.724-4.74,3.122-10.588,3.122s-10.588-1.397-10.588-3.122V42.799"/>
+<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="92.038" cy="28.897" rx="10.588" ry="3.12"/>
+<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="62.599" cy="42.799" rx="10.588" ry="3.121"/>
+<ellipse fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="62.599" cy="14.909" rx="10.588" ry="3.12"/>
 </svg>
