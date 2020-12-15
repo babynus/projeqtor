@@ -48,6 +48,10 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
            }
            saveDataToSession('projectSelectorShowIdle', ((this.checked)?1:0),false,callBack);
            dijit.byId('dialogProjectSelectorParameters').hide();
+           <?php if(isNewGui()){?>
+              dojo.byId('archiveOn').style.display=(this.checked)?'':'none';
+              dojo.byId('dataBaseTitle').style.top=(this.checked)?'-18px':'5px';
+           <?php } ?>
          </script>
 	     </div>
 	     <?php echo i18n('enterArchiveMode');?>

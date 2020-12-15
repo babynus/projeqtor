@@ -302,9 +302,21 @@
         </button>
       </span>
       <?php }?>
+      
     </td>
-    <td width="" style="vertical-align:top;text-align:center;" onmouseover="showActionProjectSelector();" onmouseout="hideActionProjectSelector();">
-      <span style="position:relative;top:5px;font-size:130%;font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
+    <td width="" style="vertical-align:top;text-align:center;" <?php if(isNewGui())echo 'onmouseover="showActionProjectSelector();" onmouseout="hideActionProjectSelector();"';?> >
+      <?php $archiveOn = (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;?>
+      <?php if(isNewGui()){
+            $display = 'display:none;';
+            if($archiveOn==1)$display = '';?>
+      <span id="archiveOn" style="position:relative;top:5px;left:-30px;<?php echo $display;?>">
+        <?php echo formatIconNewGui('HistArchive',22,i18n('archiveOn'), false);?>
+        <span style="position:relative;top:-20px;float:left;left:30px;">
+          <?php echo i18n('archiveOn');?>
+        </span>
+      </span>
+      <?php }?>
+      <span id="dataBaseTitle" style="position:relative;top:<?php echo (isNewGui() and $archiveOn==1)?-18:5;?>px;font-size:130%;font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
     </td>    
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
     <td  width="63px" style=""> 
