@@ -89,8 +89,7 @@ class ProjectExpenseMain extends Expense {
     <th field="nameProject" width="15%" >${idProject}</th>
     <th field="nameProjectExpenseType" width="15%" >${type}</th>
     <th field="name" width="50%" >${name}</th>
-    <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
+    <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",

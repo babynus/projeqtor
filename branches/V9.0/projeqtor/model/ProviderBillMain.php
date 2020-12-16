@@ -104,18 +104,16 @@ class ProviderBillMain extends SqlElement {
   public $_nbColMax=3;
  
   private static $_layout='
-    <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
-    <th field="nameProject" width="9%" >${idProject}</th>
-    <th field="nameProviderBillType" width="9%" >${idProviderBillType}</th>
-    <th field="name" width="27%" >${name}</th>
-    <th field="colorNameStatus" width="9%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="nameResource" formatter="thumbName22" width="8%" >${responsible}</th>
-    <th field="paymentDueDate" width="8%" formatter="dateFormatter" >${paymentDueDate}</th>
-    <th field="untaxedAmount" width="7%" formatter="costFormatter">${untaxedAmount}</th>
-    <th field="totalUntaxedAmount" width="7%" formatter="costFormatter">${totalUntaxedAmount}</th>
-    <th field="handled" width="4%" formatter="booleanFormatter" >${handled}</th>
-    <th field="done" width="4%" formatter="booleanFormatter" >${done}</th>
-    <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>   ';
+    <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
+    <th field="nameProject" width="10%" >${idProject}</th>
+    <th field="nameProviderBillType" width="10%" >${idProviderBillType}</th>
+    <th field="name" width="25%" >${name}</th>
+    <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
+    <th field="nameResource" formatter="thumbName22" width="10%" >${responsible}</th>
+    <th field="paymentDueDate" width="10%" formatter="dateFormatter" >${paymentDueDate}</th>
+    <th field="untaxedAmount" width="10%" formatter="costFormatter">${untaxedAmount}</th>
+    <th field="totalUntaxedAmount" width="10%" formatter="costFormatter">${totalUntaxedAmount}</th>
+  ';
   
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
       "name"=>"required",

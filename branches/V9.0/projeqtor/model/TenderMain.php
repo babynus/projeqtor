@@ -106,8 +106,7 @@ class TenderMain extends SqlElement {
     <th field="colorNameTenderStatus" width="10%" formatter="colorNameFormatter">${idTenderStatus}</th>
     <th field="evaluationValue" width="10%" >${evaluationValue}</th>
     <th field="totalUntaxedAmount" width="10%" formatter="amountFormatter">${totalUntaxedAmount}</th>
-    <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
+    <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",

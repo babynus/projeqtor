@@ -14,7 +14,7 @@ CREATE TABLE `${prefix}navigation` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
--- TRUNCATE navigation; -- debugLog (for tests only)
+TRUNCATE navigation; -- debugLog (for tests only)
 INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`) VALUES
 -- 0 ------------------------------------------------------ root level
 (9,'menuToday',0,1,10),
@@ -78,9 +78,31 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (311,'menuProjectSituation',4,245,20),
 (13,'navExpenses',4,0,30),
 (14,'navIncomes',4,0,40),
-(15,'navSituation',4,0,50),
+(15,'navSituationNav',4,0,50),
 (69,'menuGanttSupplierContract',4,232,60),
 (70,'menuGanttClientContract',4,235,70),
+-- 4 - 13 ------------------------------------------------- Financial Expenses
+(48,'menuBudget',13,197,10),
+(57,'menuProjectExpense',13,76,20),
+(56,'menuIndividualExpense',13,75,30),
+(50,'menuCallForTender',13,153,40),
+(51,'menuTender',13,154,50),
+(52,'menuProviderOrder',13,191,60),
+(54,'menuProviderBill',13,194,70),
+(53,'menuProviderTerm',13,195,80),
+(55,'menuProviderPayment',13,201,90),
+(49,'menuSupplierContract',13,228,100),
+-- 4 - 14 ------------------------------------------------- Financial Incomes
+(59,'menuQuotation',14,131,10),
+(60,'menuCommand',14,125,20),
+(61,'menuTerm',14,96,30),
+(62,'menuBill',14,97,40),
+(63,'menuPayment',14,78,50),
+(65,'menuGallery',14,146,60),
+(64,'menuActivityPrice',14,94,70),
+(66,'menuCatalog',14,174,80),
+(67,'menuCatalogUO',14,255,90),
+(58,'menuClientContract',14,234,100),
 -- 5 ------------------------------------------------------ Steering
 (16,'navRiskManagement',5,0,90),
 (17,'navRequirementsManagement',5,0,100),
@@ -91,28 +113,6 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (45,'menuLeaveCalendar',12,209,10),
 (46,'menuEmployeeLeaveEarned',12,211,20),
 (47,'menuDashboardEmployeeManager',12,215,30),
---
-(48,'menuBudget',13,197,10),
-(49,'menuSupplierContract',13,228,20),
-(50,'menuCallForTender',13,153,30),
-(51,'menuTender',13,154,40),
-(52,'menuProviderOrder',13,191,50),
-(53,'menuProviderTerm',13,195,60),
-(54,'menuProviderBill',13,194,70),
-(55,'menuProviderPayment',13,201,80),
-(56,'menuIndividualExpense',13,75,90),
-(57,'menuProjectExpense',13,76,100),
---
-(58,'menuClientContract',14,234,10),
-(59,'menuQuotation',14,131,20),
-(60,'menuCommand',14,125,30),
-(61,'menuTerm',14,96,40),
-(62,'menuBill',14,97,50),
-(63,'menuPayment',14,78,60),
-(64,'menuActivityPrice',14,94,70),
-(65,'menuGallery',14,146,80),
-(66,'menuCatalog',14,174,90),
-(67,'menuCatalogUO',14,255,100),
 --
 (71,'menuProjectSituation',15,245,10),
 (72,'menuProjectSituationExpense',15,246,20),
