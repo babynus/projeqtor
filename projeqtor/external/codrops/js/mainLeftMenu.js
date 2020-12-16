@@ -180,7 +180,7 @@
     this.clearSearchIcon.setAttribute('onClick', 'clearSearchInputMenuLeft()');
     this.researchInput.setAttribute('id', 'menuSearchDiv');
     this.clearSearchIcon.setAttribute('id', 'clearSearchMenu');
-    this.researchInput.setAttribute('placeholder', i18n('searchMenu'));
+    this.researchInput.placeholder= i18n('searchMenu');
     this.researchIcon.setAttribute('style', 'position:relative;float: left;left:8px;top:2px;');
     this.clearSearchIcon.setAttribute('style', 'display:none;');
     if(dojo.byId('isMenuLeftOpen').value=='false') this.hidStrreamButtonJs.style.display='none';

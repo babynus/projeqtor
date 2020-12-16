@@ -230,6 +230,10 @@ class Parameter extends SqlElement {
         $colScript .='   saveDataToSession("menuBarTopMode", this.value, true);';
         $colScript .= '  menuNewGuiFilter("menuBarCustom", null);';
         $colScript .= '</script>';
+    }else if ($colName=="menuLeftDisplayMode") {
+        $colScript .= '<script type="dojo/connect" event="onChange" >';
+        $colScript .= '  showIconLeftMenu();';
+        $colScript .= '</script>';
     }else {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  newValue=this.value;';
