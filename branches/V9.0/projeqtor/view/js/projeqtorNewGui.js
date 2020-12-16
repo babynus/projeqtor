@@ -532,13 +532,15 @@ function searchMenuToDisplay(val){
       }
     }
   });
+  console.log(menuReportExist.length);
+  console.log(menuExist.length);
   //menuExist.push(menuReportExist);
   menuExist.forEach(function(e){
     menuSearchMenu.insertAdjacentElement('beforeEnd',e);
   });
-
-  if(menuReportExist.lenght!==0){
-    if(menuExist.lenght!==0){
+  
+  if(menuReportExist.length!==0){
+    if(menuExist.length!==0){
       var reportDiv=document.createElement('div');
       reportDiv.className='sectionReportMenuSearch';
       reportDiv.innerHTML=i18n('menuReports');
