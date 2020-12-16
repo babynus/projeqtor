@@ -88,13 +88,12 @@ class SupplierContractMain extends SqlElement {
   
   private static $_layout='
           <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
-          <th field="name" width="15%" >${name}</th>
+          <th field="nameProject" width="15%" >${idProject}</th>
+          <th field="name" width="30%" >${name}</th>
           <th field="number" width="15%" >${number}</th>
-          <th field="nameProject" width="8%" >${idProject}</th>
-          <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
-          <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
-          <th field="done" width="5%" formatter="booleanFormatter" >${done}</th>
-          <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
+          <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
+          <th field="startDate" width="10%" formatter="dateFromatter">${startDate}</th>
+          <th field="endDate" width="10%" formatter="dateFromatter">${endDate}</th>
     ';
 
   private static $_fieldsAttributes=array("name"=>"required",  

@@ -64,10 +64,10 @@ class ProviderTermMain extends SqlElement {
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
     <th field="nameProject" width="10%">${idProject}</th>
-    <th field="name" width="20%">${name}</th>
+    <th field="name" width="15%">${name}</th>
     <th field="nameProviderOrder"  width="15%">${idProviderOrder}</th>
-    <th field="nameProviderBill" formatter="noCalculate" width="16%">${idProviderBill}</th>
-    <th field="date" width="5%" formatter="dateFormatter">${date}</th>
+    <th field="nameProviderBill" formatter="noCalculate" width="15%">${idProviderBill}</th>
+    <th field="date" width="10%" formatter="dateFormatter">${date}</th>
     <th field="untaxedAmount" width="10%" formatter="costFormatter">${untaxedAmount}</th>
     <th field="fullAmount" width="10%" formatter="costFormatter">${fullAmount}</th>
     <th field="isBilled" width="5%" formatter="booleanFormatter" >${isBilled}</th>

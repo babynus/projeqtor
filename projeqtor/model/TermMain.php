@@ -59,16 +59,15 @@ class TermMain extends SqlElement {
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
-    <th field="nameProject" width="12%">${idProject}</th>
-    <th field="name" width="20%">${name}</th>
-    <th field="amount" width="8%" formatter="costFormatter">${realAmount}</th>
-    <th field="date" width="8%" formatter="dateFormatter">${realDate}</th>
-  	<th field="validatedAmount" width="8%" formatter="costFormatter">${validatedAmount3}</th>
-    <th field="validatedDate" width="8%" formatter="dateFormatter">${validatedDate}</th>
-  	<th field="plannedAmount" width="8%" formatter="costFormatter">${plannedAmount2}</th>
-    <th field="plannedDate" width="8%" formatter="dateFormatter">${plannedDate2}</th>
-    <th field="idBill" width="10%" formatter="booleanFormatter" >${isBilled}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
+    <th field="nameProject" width="10%">${idProject}</th>
+    <th field="name" width="15%">${name}</th>
+    <th field="amount" width="10%" formatter="costFormatter">${realAmount}</th>
+    <th field="date" width="10%" formatter="dateFormatter">${realDate}</th>
+  	<th field="validatedAmount" width="10%" formatter="costFormatter">${validatedAmount3}</th>
+    <th field="validatedDate" width="10%" formatter="dateFormatter">${validatedDate}</th>
+  	<th field="plannedAmount" width="10%" formatter="costFormatter">${plannedAmount2}</th>
+    <th field="plannedDate" width="10%" formatter="dateFormatter">${plannedDate2}</th>
+    <th field="idBill" width="5%" formatter="booleanFormatter" >${isBilled}</th>
     ';
   
   private static $_fieldsAttributes=array("name"=>"required",

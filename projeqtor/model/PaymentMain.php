@@ -61,14 +61,12 @@ class PaymentMain extends SqlElement {
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
     <th field="namePaymentType" width="10%" >${idPaymentType}</th>
-    <th field="name" width="20%">${name}</th>
+    <th field="name" width="25%">${name}</th>
     <th field="namePaymentMode" width="10%" >${idPaymentMode}</th>
     <th field="paymentDate" formatter="dateFormatter" width="10%" >${paymentDate}</th>
     <th field="paymentAmount" formatter="costFormatter" width="10%" >${paymentAmount}</th>  
-    <th field="referenceBill" width="10%" >${referenceBill}</th>
-    <th field="nameClient" width="10%" >${idClient}</th>
-    <th field="nameRecipient" width="10%" >${idRecipient}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
+    <th field="referenceBill" width="15%" >${referenceBill}</th>
+    <th field="nameClient" width="15%" >${idClient}</th>
     ';
 
   private static $_fieldsAttributes=array("name"=>"required",
