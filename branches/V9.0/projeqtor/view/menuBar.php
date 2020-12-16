@@ -306,7 +306,7 @@
     </td>
     <td width="" style="vertical-align:top;text-align:center;" <?php if(isNewGui())echo 'onmouseover="showActionProjectSelector();" onmouseout="hideActionProjectSelector();"';?> >
       <span id="dataBaseTitle" style="position:relative;top:5px;font-size:130%;font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
-    </td>    
+    </td>
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
     <td  width="63px" style=""> 
      <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount"  style="text-align: center; position:relative;top:-5px">
@@ -324,8 +324,9 @@
        </div>         
      </div>
     </td>
+    <?php } ?>
     <?php if(isNewGui()){ ?>
-    <?php $archiveOn = (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0; debugLog(getSessionValue('projectSelectorShowIdle'));?>
+    <?php $archiveOn = (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;?>
     <?php $display = 'display:none;';if($archiveOn==1)$display = '';?>
     <td id="archiveOnSeparator" style="position:relative;width: 5px;<?php echo $display;?>">
       <div class="menuBarSeparatorDiv" style=""></div>
@@ -339,7 +340,15 @@
         </div>
     </td>
     <?php }?>
-    <?php } if($profile == 'ADM'){
+    <?php if(isset($paramNewGuiSwitch) and $paramNewGuiSwitch){ ?>
+    <?php drawSeparator();?>
+    <td style="vertical-align: middle;width:32px;">
+       <div id="switchNewGui" class="pseudoButton" style="cursor:pointer;position: relative;top: -<?php echo (isNewGui())?3:5;?>px;left: <?php echo (isNewGui())?5:-3;?>px;height: <?php echo (isNewGui())?28:25;?>px;<?php echo (isNewGui())?'':'padding-top: 3px;padding-left: 3px;';?>" onClick="switchNewGui();">
+          <?php echo formatNewGuiButton('Refresh', 22, true);?>
+       </div>
+    </td>
+    <?php }?>
+    <?php if($profile == 'ADM'){
      $cronStatus = ucfirst(Cron::check());
      ?>
      <?php drawSeparator();?>
