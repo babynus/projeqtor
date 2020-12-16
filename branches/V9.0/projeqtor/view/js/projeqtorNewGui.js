@@ -287,7 +287,7 @@ function addRemoveFavMenuLeft (id,name,mode,type){
 //=============================================================================
 function showIconLeftMenu(){
   var leftMenu=dojo.byId('ml-menu');
-  var divMenuSearch=dojo.byId('menu__searchMenuDiv');
+  var divMenuSearch=leftMenu.querySelector('.menu__searchMenuDiv ');
   var mode=dojo.byId('displayModeLeftMenu').value;
   display=(mode=='ICONTXT')?'none':'block';
   style=(mode=='ICONTXT')?"float:left;max-width:180px;":"float:left;max-width:155px;";
@@ -324,7 +324,7 @@ function showIconLeftMenu(){
   }
   mode=(display=='block')?'ICONTXT':'TXT';
   dojo.setAttr('displayModeLeftMenu','value',mode);
-  saveUserParameter('menuLeftDisplayMode',mode);
+  saveDataToSession('menuLeftDisplayMode',mode,true);
 }
 
 //=============================================================================
@@ -429,6 +429,7 @@ function showMenuBottomParam(item,isObject){
 //=============================================================================
 function refreshSelectedMenuLeft(menuName){
   var menuLeftTop=dojo.byId('ml-menu');
+  var divMenuSearch=leftMenu.querySelector('.menu__searchMenuDiv ');
   if(dojo.byId('parameterMenu'))var menuLeftBottom=dojo.byId('parameterMenu');
   
   var curents=menuLeftTop.querySelectorAll('.menu__link--current');
@@ -446,6 +447,14 @@ function refreshSelectedMenuLeft(menuName){
     }
     var newMenuBottomSelect=menuLeftBottom.querySelector('#'+menuName+'Param');
     if(newMenuBottomSelect!=null) classie.add(newMenuBottomSelect,'menu__link--current');
+  }
+  if(dojo.byId('menuSearchDiv').value.trim()!=''){
+    var searchMenuSelcet=divMenuSearch.querySelector('.menu__link--current');
+    if(searchMenuSelcet!=null){
+      classie.remove(searchMenuSelcet, 'menu__link--current');
+    }
+    var newSearchMenuSelect=divMenuSearch.querySelector('#'+menuName);
+    if(newSearchMenuSelect!=null) classie.add(newSearchMenuSelect,'menu__link--current');
   }
 }
 //=============================================================================
@@ -523,9 +532,13 @@ function searchMenuToDisplay(val){
         if(el.parentNode.className=='menu__linkDirect'){
           arrayMenuName.push(menuName);
           if(el.parentNode.parentNode.querySelector('#reportFileMenu')){
-            menuReportExist.push(el.parentNode.parentNode.cloneNode(true));
+            var report=el.parentNode.parentNode.cloneNode(true);
+            report.setAttribute('onClick','refreshSelectedMenuLeft("'+el.parentNode.id+'")');
+            menuReportExist.push(report);
           }else{
-            menuExist.push(el.parentNode.parentNode.cloneNode(true));
+            var menu=el.parentNode.parentNode.cloneNode(true);
+            menu.setAttribute('onClick','refreshSelectedMenuLeft("'+el.parentNode.id+'")');
+            menuExist.push(menu);
           }
           
         }
