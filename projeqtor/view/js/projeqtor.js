@@ -7694,13 +7694,11 @@ function showActionProjectSelector() {
 	      clearTimeout(actionProjectSelectorTimeout);
 	      dojo.byId(toolId).style.opacity='0';
 	      dojo.byId(toolId).style.display='none';
-	      dojo.byId('archiveOn').style.left = '-30px';
 	    }
 	}
   if (! dojo.byId(toolId)) return;
   dojo.byId(toolId).style.display='block';
   dojo.byId(toolId).style.opacity='1';
-  dojo.byId('archiveOn').style.left = '50px';
 }
 
 function actionSelectGoto(selectClass, selectId, selectField) {
@@ -7733,7 +7731,7 @@ function hideActionSelect(selectClass, selectId, selectField) {
 }
 
 function hideActionProjectSelector() {
-  actionProjectSelectorTimeout=setTimeout("dojo.byId('toolbar_projectSelector').style.display='none';dojo.byId('archiveOn').style.left = '-30px';",100);
+  actionProjectSelectorTimeout=setTimeout("dojo.byId('toolbar_projectSelector').style.display='none';",100);
 }
 
 function displayCheckBoxDefinitionLine(){

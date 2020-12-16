@@ -51,7 +51,7 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
            dijit.byId('dialogProjectSelectorParameters').hide();
            <?php if(isNewGui()){?>
               dojo.byId('archiveOn').style.display=(this.checked)?'':'none';
-              dojo.byId('dataBaseTitle').style.top=(this.checked)?'-18px':'5px';
+              dojo.byId('archiveOnSeparator').style.display=(this.checked)?'':'none';
            <?php } ?>
          </script>
 	     </div>
