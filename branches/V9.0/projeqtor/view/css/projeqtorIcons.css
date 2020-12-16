@@ -942,6 +942,8 @@
 .ProjeQtOrFlatRed .iconCopy { background-image: url(customIcons/red/iconCopy.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconCopy { background-image: url(customIcons/new/iconCopy.svg);  background-repeat: no-repeat; }
 
+.ProjeQtOrNewGui .iconCost { background-image: url(customIcons/new/iconCost.svg);  background-repeat: no-repeat; }
+
 .iconCriticality { background-image: url(images/iconCriticality32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconCriticality { background-image: url(customIcons/blue/iconCriticality.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconCriticality { background-image: url(customIcons/green/iconCriticality.png);  background-repeat: no-repeat; }
@@ -1594,6 +1596,13 @@
 .ProjeQtOrFlatRed .iconInfo { background-image: url(customIcons/red/iconInfo.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconInfo { background-image: url(customIcons/new/iconInfo.svg);  background-repeat: no-repeat; }
 
+.iconInputMailbox { background-image: url(images/iconInputMailbox.png); }
+.ProjeQtOrFlatBlue .iconInputMailbox { background-image: url(customIcons/blue/iconInputMailbox.png); }
+.ProjeQtOrFlatRed .iconInputMailbox { background-image: url(customIcons/red/iconInputMailbox.png); }
+.ProjeQtOrFlatGreen .iconInputMailbox { background-image: url(customIcons/green/iconInputMailbox.png); }
+.ProjeQtOrFlatGrey .iconInputMailbox { background-image: url(customIcons/grey/iconInputMailbox.png); }
+.ProjeQtOrNewGui .iconInputMailbox { background-image: url(customIcons/new/iconInputMailBox.svg);  background-repeat: no-repeat; }
+
 .iconInterventionMode { background-image: url(images/iconInterventionMode.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconInterventionMode { background-image: url(customIcons/blue/iconInterventionMode.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconInterventionMode { background-image: url(customIcons/green/iconInterventionMode.png);  background-repeat: no-repeat;}
@@ -1658,6 +1667,7 @@
 .ProjeQtOrNewGui .iconKpiDefinition32 { background-image: url(customIcons/new/iconKpiDefinition.svg);  background-repeat: no-repeat; }
 
 
+.ProjeQtOrNewGui .iconKpi { background-image: url(customIcons/new/iconKpi.svg);  background-repeat: no-repeat; }
 
 
 
@@ -1743,8 +1753,14 @@
 
 /* M */
 
+.iconMail { background-image: url(images/iconMail32.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconMail { background-image: url(customIcons/blue/iconMail.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconMail { background-image: url(customIcons/green/iconMail.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconMail { background-image: url(customIcons/grey/iconMail.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconMail { background-image: url(customIcons/red/iconMail.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconMail { background-image: url(customIcons/new/iconMail.svg);  background-repeat: no-repeat;}
 
-
+/*
 .iconMail22 { background-image: url(images/iconMail32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconMail22 { background-image: url(customIcons/blue/iconMail.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconMail22 { background-image: url(customIcons/green/iconMail.png);  background-repeat: no-repeat; }
@@ -1758,6 +1774,9 @@
 .ProjeQtOrFlatGrey .iconMail32 { background-image: url(customIcons/grey/iconMail.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconMail32 { background-image: url(customIcons/red/iconMail.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconMail32 { background-image: url(customIcons/new/iconMail.svg);  background-repeat: no-repeat;}
+
+*/
+
 
 .iconMailToSend { background-image: url(images/iconMailToSend32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconMailToSend { background-image: url(customIcons/blue/iconMailToSend.png);  background-repeat: no-repeat; }
@@ -1821,6 +1840,8 @@
 .ProjeQtOrFlatGrey .iconMilestoneType { background-image: url(customIcons/grey/iconMilestoneType.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatRed .iconMilestoneType { background-image: url(customIcons/red/iconMilestoneType.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconMilestoneType { background-image: url(customIcons/new/iconMilestoneType.svg);  background-repeat: no-repeat;}
+
+.ProjeQtOrNewGui .iconMisc { background-image: url(customIcons/new/iconMisc.svg);  background-repeat: no-repeat; }
 
 .iconModel { background-image: url(images/iconModel.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconModel { background-image: url(customIcons/blue/iconModel.png);  background-repeat: no-repeat;}
@@ -2556,6 +2577,8 @@
 .ProjeQtOrFlatRed .iconSteering { background-image: url(customIcons/red/iconReview.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconSteering { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat; }
 
+.ProjeQtOrNewGui .iconSteeringCharts { background-image: url(customIcons/new/iconSteeringCharts.svg);  background-repeat: no-repeat; }
+
 .iconSteeringModule { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconSteeringModule { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconSteeringModule { background-image: url(customIcons/new/iconReview.svg);  background-repeat: no-repeat;}
@@ -2903,14 +2926,6 @@
 .iconDisplayMore32 { background-image: url(images/iconDisplayMore.png);  background-size: 32px 32px;}
 .iconReduceDisplay16 { background-image: url(images/iconReduceDisplay.png);  background-size: 16px 16px;}
 .iconReduceDisplay32 { background-image: url(images/iconReduceDisplay.png);  background-size: 32px 32px;}
-
-
-.iconInputMailbox { background-image: url(images/iconInputMailbox.png); }
-.ProjeQtOrFlatBlue .iconInputMailbox { background-image: url(customIcons/blue/iconInputMailbox.png); }
-.ProjeQtOrFlatRed .iconInputMailbox { background-image: url(customIcons/red/iconInputMailbox.png); }
-.ProjeQtOrFlatGreen .iconInputMailbox { background-image: url(customIcons/green/iconInputMailbox.png); }
-.ProjeQtOrFlatGrey .iconInputMailbox { background-image: url(customIcons/grey/iconInputMailbox.png); }
-
 
 
 .iconArrowMessageLegal { background-image: url(images/iconArrowMessageLegal.png); }
