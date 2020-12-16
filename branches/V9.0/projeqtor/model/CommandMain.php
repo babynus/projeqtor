@@ -101,19 +101,16 @@ class CommandMain extends SqlElement {
   
   // Define the layout that will be used for lists
   private static $_layout='
-    <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
-    <th field="nameProject" width="9%" >${idProject}</th>
-    <th field="nameCommandType" width="7%" >${idCommandType}</th>
-    <th field="name" width="12%" >${name}</th>
-    <th field="colorNameStatus" width="9%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="nameResource" formatter="thumbName22" width="8%" >${responsible}</th>
-    <th field="validatedEndDate" width="8%" formatter="dateFormatter" >${validatedEndDate}</th>
-  	<th field="untaxedAmount" formatter="costFormatter" width="7%" >${untaxedAmount}</th>
-  	<th field="addUntaxedAmount" formatter="costFormatter" width="7%" >${addUntaxedAmount}</th>
-  	<th field="totalUntaxedAmount" formatter="costFormatter" width="7%" >${totalUntaxedAmount}</th>
-  	<th field="handled" width="4%" formatter="booleanFormatter" >${handled}</th>
-    <th field="done" width="4%" formatter="booleanFormatter" >${done}</th>
-    <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>
+    <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
+    <th field="nameProject" width="10%" >${idProject}</th>
+    <th field="nameCommandType" width="10%" >${idCommandType}</th>
+    <th field="name" width="15%" >${name}</th>
+    <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
+    <th field="nameResource" formatter="thumbName22" width="10%" >${responsible}</th>
+    <th field="validatedEndDate" width="10%" formatter="dateFormatter" >${validatedEndDate}</th>
+  	<th field="untaxedAmount" formatter="costFormatter" width="10%" >${untaxedAmount}</th>
+  	<th field="addUntaxedAmount" formatter="costFormatter" width="10%" >${addUntaxedAmount}</th>
+  	<th field="totalUntaxedAmount" formatter="costFormatter" width="10%" >${totalUntaxedAmount}</th>
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",

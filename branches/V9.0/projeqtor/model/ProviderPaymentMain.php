@@ -59,14 +59,13 @@ class ProviderPaymentMain extends SqlElement {
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
-    <th field="nameProviderPaymentType" width="10%" >${idProviderPaymentType}</th>
-    <th field="name" width="20%">${name}</th>
-    <th field="namePaymentMode" width="10%" >${idPaymentMode}</th>
+    <th field="nameProviderPaymentType" width="15%" >${idProviderPaymentType}</th>
+    <th field="nameProvider" width="10%" >${idProvider}</th>
+    <th field="referenceProviderBill" width="10%" >${referenceProviderBill}</th>
+    <th field="name" width="25%">${name}</th>
+    <th field="namePaymentMode" width="15%" >${idPaymentMode}</th>
     <th field="paymentDate" formatter="dateFormatter" width="10%" >${paymentDate}</th>
     <th field="paymentAmount" formatter="costFormatter" width="10%" >${paymentAmount}</th>  
-    <th field="referenceProviderBill" width="10%" >${referenceProviderBill}</th>
-    <th field="nameProvider" width="10%" >${idProvider}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
 
   private static $_fieldsAttributes=array("name"=>"required",
