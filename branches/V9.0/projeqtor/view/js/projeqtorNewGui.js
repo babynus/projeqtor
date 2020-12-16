@@ -798,3 +798,16 @@ function setGlobalNewGuiThemeColor(param, color){
 		dojo.byId(param).value = color;
     }
 }
+
+function setArchiveMode(){
+	var callBack = function(){
+	    refreshProjectSelectorList();
+	    if (dojo.byId('objectClass') ) {
+	      refreshGrid(true);
+	    }
+	  };
+  saveDataToSession('projectSelectorShowIdle', 0,false,callBack);
+  dijit.byId('dialogProjectSelectorParameters').hide();
+  dojo.byId('archiveOn').style.display='none';
+  dojo.byId('archiveOnSeparator').style.display='none';
+}

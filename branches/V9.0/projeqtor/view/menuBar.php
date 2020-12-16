@@ -305,22 +305,7 @@
       
     </td>
     <td width="" style="vertical-align:top;text-align:center;" <?php if(isNewGui())echo 'onmouseover="showActionProjectSelector();" onmouseout="hideActionProjectSelector();"';?> >
-      <?php $archiveOn = (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0; debugLog(getSessionValue('projectSelectorShowIdle'));?>
-      <?php if(isNewGui()){
-            $display = 'display:none;';
-            if($archiveOn==1)$display = '';?>
-      <span id="archiveOn" style="position:relative;top:5px;left:-30px;<?php echo $display;?>">
-        <div class="iconHistArchive iconSize22 imageColorNewGui" style="z-index:500;width:22px;height:22px;;" title="[archiveOn]">
-          <div style="top: 10px;position: relative;left: 8px;filter: unset !important;">
-            <img style="height:12px;width:12px;" src="img/iconCronRunning.png">
-          </div>
-        </div>
-        <span style="position:relative;top:-20px;float:left;left:30px;">
-          <?php echo i18n('archiveOn');?>
-        </span>
-      </span>
-      <?php }?>
-      <span id="dataBaseTitle" style="position:relative;top:<?php echo (isNewGui() and $archiveOn==1)?-18:5;?>px;font-size:130%;font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
+      <span id="dataBaseTitle" style="position:relative;top:5px;font-size:130%;font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
     </td>    
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
     <td  width="63px" style=""> 
@@ -339,6 +324,21 @@
        </div>         
      </div>
     </td>
+    <?php if(isNewGui()){ ?>
+    <?php $archiveOn = (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0; debugLog(getSessionValue('projectSelectorShowIdle'));?>
+    <?php $display = 'display:none;';if($archiveOn==1)$display = '';?>
+    <td id="archiveOnSeparator" style="position:relative;width: 5px;<?php echo $display;?>">
+      <div class="menuBarSeparatorDiv" style=""></div>
+    </td>
+    <td style="vertical-align: middle;text-align:center;width:32px;">
+        <div id="archiveOn" style="padding-left: 4px;cursor:pointer;<?php echo $display;?>" onClick="setArchiveMode();">
+          <div class="iconHistArchive iconSize22 imageColorNewGui" style="width:22px;height:22px;position: relative;top: 3px;" title="<?php echo i18n('archiveOn');?>"></div>
+          <div style="top: -8px;position: relative;left: 5px;">
+            <img style="height:12px;width:12px;" src="img/iconCronRunning.png">
+          </div>
+        </div>
+    </td>
+    <?php }?>
     <?php } if($profile == 'ADM'){
      $cronStatus = ucfirst(Cron::check());
      ?>
