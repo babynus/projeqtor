@@ -3036,7 +3036,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if (getEditorType()=="CK"||(getEditorType()=="CKInline")) {
           // if (isIE() and ! $val) $val='<div></div>';
           $caption=htmlEncode($obj->getColCaption($col), 'stipAllTags');
-          echo '<div style="text-align:left;font-weight:normal;width:'.strlen($caption).'ex;text-align:center;" class="tabLabel longTextLabel">'.$caption.'</div>';
+          echo '<div style="text-align:left;font-weight:normal;width:'.(strlen($caption)+2).'ex;text-align:center;" class="tabLabel longTextLabel">'.$caption.'</div>';
           $ckEditorNumber++;
           // gautier
           $ckeDivheight=Parameter::getUserParameter('ckeditorHeight'.$classObj.$col.$extName);
