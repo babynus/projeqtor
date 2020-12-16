@@ -532,9 +532,6 @@ function searchMenuToDisplay(val){
       }
     }
   });
-  console.log(menuReportExist.length);
-  console.log(menuExist.length);
-  //menuExist.push(menuReportExist);
   menuExist.forEach(function(e){
     menuSearchMenu.insertAdjacentElement('beforeEnd',e);
   });
