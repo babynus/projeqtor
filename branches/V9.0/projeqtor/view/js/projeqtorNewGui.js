@@ -484,6 +484,7 @@ function changePaswordType(){
 //=============================================================================
 function searchMenuToDisplay(val){
   var menuExist= new Array();
+  var menuReportExist= new Array();
   var arrayMenuName=new Array();
   var menuLeftTop=dojo.byId('ml-menu');
   var currentDivMenu=menuLeftTop.querySelector('.menu__wrap');
@@ -521,14 +522,33 @@ function searchMenuToDisplay(val){
       if(menuName.includes(val.toLowerCase())){
         if(el.parentNode.className=='menu__linkDirect'){
           arrayMenuName.push(menuName);
-          menuExist.push(el.parentNode.parentNode.cloneNode(true));
+          if(el.parentNode.parentNode.querySelector('#reportFileMenu')){
+            menuReportExist.push(el.parentNode.parentNode.cloneNode(true));
+          }else{
+            menuExist.push(el.parentNode.parentNode.cloneNode(true));
+          }
+          
         }
       }
     }
   });
+  //menuExist.push(menuReportExist);
   menuExist.forEach(function(e){
     menuSearchMenu.insertAdjacentElement('beforeEnd',e);
   });
+
+  if(menuReportExist.lenght!==0){
+    if(menuExist.lenght!==0){
+      var reportDiv=document.createElement('div');
+      reportDiv.className='sectionReportMenuSearch';
+      reportDiv.innerHTML=i18n('menuReports');
+      menuSearchMenu.insertAdjacentElement('beforeEnd',reportDiv );
+    }
+
+    menuReportExist.forEach(function(e){
+      menuSearchMenu.insertAdjacentElement('beforeEnd',e);
+    });
+  }
 }
 
 //=============================================================================
