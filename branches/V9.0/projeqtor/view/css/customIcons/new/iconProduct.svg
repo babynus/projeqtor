@@ -6,31 +6,11 @@
 <g id="Calque_2_2_">
 	
 		<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		13.48,70.933 13.48,107.073 44.766,121.368 75.243,105.724 75.243,72.819 44.362,57.717 	"/>
+		8.422,31.74 8.422,97.585 65.425,123.631 120.953,95.128 120.953,35.173 64.688,7.659 	"/>
 	
 		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		22.304,75.14 44.362,84.147 44.362,113.08 	"/>
+		24.5,39.405 64.688,55.813 64.688,108.529 	"/>
 	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="44.362" y1="84.147" x2="66.358" y2="75.634"/>
-</g>
-<g id="Calque_2_1_">
-	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		72.382,28.804 72.382,22.126 41.5,7.023 10.619,20.239 10.619,56.378 18.605,60.028 	"/>
-	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		18.721,24.152 41.5,33.455 41.5,49.78 	"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="41.5" y1="33.455" x2="63.588" y2="25.353"/>
-</g>
-<g id="Calque_2_3_">
-	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		84.863,84.97 94.874,89.543 125.35,73.898 125.35,40.995 94.469,25.892 63.588,39.107 63.588,55.697 	"/>
-	
-		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		70.855,42.68 94.469,52.323 94.469,81.618 	"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="94.469" y1="52.323" x2="116.224" y2="44.342"/>
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="64.688" y1="55.813" x2="104.764" y2="40.304"/>
 </g>
 </svg>
