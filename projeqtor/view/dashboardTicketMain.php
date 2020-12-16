@@ -179,7 +179,7 @@
     <td width="50px" align="center"><?php echo formatIcon('TicketDashboard', 32, null, true);?></td>
     New */
 			?>
-		<table width="40%">
+		<table width="<?php if(!isNewGui()){?>40%<?php }else{ ?>95% <?php }?>">
 			<tr height="32px" >
 			<?php //Here i correct a bug with standard themes (no icon) ?>
 				<td width="50px" align="center"><?php echo formatIcon('DashboardTicket', 32, null, true);?></td>
@@ -187,6 +187,7 @@
 				<td><span class="title"><?php echo i18n('dashboardTicketMainTitle');?>&nbsp;</span>
 				</td>
 				<?php //BEGIN - ADD qCazelles - Dashboard : filter by type - Ticket 154 ?>
+				<?php if(!isNewGui()){ ?>
         <td style="vertical-align: middle; text-align:right;" width="5px">
            <span class="nobr">&nbsp;&nbsp;&nbsp;
           <?php echo i18n("colType");?>
@@ -225,16 +226,44 @@
           		  </script>
 	        </button>
 		  	</td>
+      <?php }else{   	
+      $displayTypes=Parameter::getUserParameter("displayByTypeList_TicketDashboard");
+		   if (!$displayTypes) $displayTypes='none'; ?>
+		  <td align="right">
+      <div class="listTitle" id="barFilterByType"
+      data-dojo-type="dijit/layout/ContentPane" region="top"
+      style="height:20px; display: <?php echo $displayTypes;?>">
+      	<table style="position:relative;top:2px;left:3px">
+      		<tr>
+      			<td style="font-weight:bold"><?php echo i18n('filterOnType'); ?>&nbsp;:&nbsp;</td>
+      <?php
+      foreach ($listType as $idType => $nameType) {
+    	?>
+    				<td>
+    					<div dojoType="dijit.form.CheckBox" type="checkbox" <?php echo ((in_array($idType, $filterTypesArray)) ? 'checked' : ''); ?>
+    					id="showType<?php echo $idType; ?>" name="showType<?php echo $idType; ?>" title="<?php echo htmlEncode($nameType); ?>"
+    					onClick="changeParamDashboardTicket('dashboardTicketMainTypes=<?php echo $idType ?>')"></div>
+    					<?php echo htmlEncode($nameType); ?>&nbsp;&nbsp;
+    				</td>
+    	<?php
+    	}
+    	?>
+      		</tr>
+      	</table>
+      </div>
+      </td>
+    <?php }?>
 			</tr>
 		</table>
 		<?php 
 		$displayTypes=Parameter::getUserParameter("displayByTypeList_TicketDashboard");
 		if (!$displayTypes) $displayTypes='none';
+		if(!isNewGui()){
 		?>
     <div class="listTitle" id="barFilterByType"
     data-dojo-type="dijit/layout/ContentPane" region="top"
     style="height:20px; display: <?php echo $displayTypes;?>">
-    	<table style="position:relative;top:3px;left:3px">
+    	<table style="position:relative;top:2px;left:3px">
     		<tr>
     			<td style="font-weight:bold"><?php echo i18n('filterOnType'); ?>&nbsp;:&nbsp;</td>
     <?php
@@ -252,10 +281,12 @@
     		</tr>
     	</table>
     </div>
+    <?php }?>
     </form>
   </div>
   <?php //END - ADD qCazelles - Dashboard : filter by type - Ticket 154 ?>
 	<div dojo-type="dijit.layout.ContentPane" region="center" style="height:100%;overflow:auto;">
+	<?php if(!isNewGui()){?>
 		<div
 			style="width: 97%; margin: 0 auto; height: 90px; padding-bottom: 15px; border-bottom: 1px solid #CCC;">
 			<table width="100%" class="dashboardTicketMain">
@@ -348,8 +379,166 @@
 					</td>
 				</tr>
 			</table>
+		</div>
+<?php }else{
+  
+  $paramDashboardTicketMainAllTicket = RequestHandler::getValue('dashboardTicketMainAllTicket');
+  $paramDashboardTicketMainRecent = RequestHandler::getValue('dashboardTicketMainRecent');
+  $paramDashboardTicketMainToMe = RequestHandler::getValue('dashboardTicketMainToMe');
+  ?>
+<div style="width: 97%; margin: 0 auto; height: 90px; padding-bottom: 15px; border-bottom: 1px solid #CCC;">
+			<table width="100%" class="dashboardTicketMain">
+				<tr>
+				<td valign="top" style="width:25%">
+						<table>
+						<tr height="37px"><td>&nbsp;&nbsp;<?php echo ucfirst(i18n('filterByTicket'));?></td> </tr>
+								<tr>
+								<?php 
+								$paramDashboardTicketMainAllTicket=0;
+  				        if(Parameter::getUserParameter("dashboardTicketMainAllTicket")!=null){
+  				          $paramDashboardTicketMainAllTicket=Parameter::getUserParameter("dashboardTicketMainAllTicket");
+  				        }
+								?>
+								  <td>
+								    <ul data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
+                      <li onClick="changeParamDashboardTicket('dashboardTicketMainAllTicket=0')" data-dojo-type="dojox/mobile/TabBarButton"   <?php if($paramDashboardTicketMainAllTicket==0){ echo "data-dojo-props='selected:true'"; }?> > <?php echo i18n('AllIssues');?></li>
+                      <li onClick="changeParamDashboardTicket('dashboardTicketMainAllTicket=2')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardTicketMainAllTicket==2){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('unclosed');?></li>
+                      <li onClick="changeParamDashboardTicket('dashboardTicketMainAllTicket=1')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardTicketMainAllTicket==1){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('Unresolved');?></li>
+                    </ul>
+								  </td>
+								</tr>
+						</table>
+					</td>
+					<td valign="top" style="width:25%">
+						<table>
+							<tr><td>
+							 <table>
+						        <tr height="37px">
+						          <td>&nbsp;&nbsp;<?php echo i18n('filterDateByTicket');?></td> 
+								     	<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo i18n("dashboardTicketMainNumberDay");?>&nbsp;:&nbsp;<div
+										      dojoType="dijit.form.NumberTextBox"
+										      id="dashboardTicketMainNumberDay" style="width: 30px"
+										      onChange="if(isNaN(this.value))dijit.byId('dashboardTicketMainNumberDay').set('value',7);
+                            loadContent('dashboardTicketMain.php?dashboardTicketMainNumberDay='+dijit.byId('dashboardTicketMainNumberDay').get('value'), 'centerDiv', 'dashboardTicketMainForm');"
+										      value="<?php echo $nbDay;?>"></div></td>
+										</tr>
+							 </table> 
+							 </td> </tr>
+							<?php 
+							    $paramDashboardTicketMainRecent =null;
+							    if(Parameter::getUserParameter("dashboardTicketMainRecent")!=null){
+  				          $paramDashboardTicketMainRecent=Parameter::getUserParameter("dashboardTicketMainRecent");
+  				        } ?>
+								  <td>
+								    <ul data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
+                      <li onClick="changeParamDashboardTicket('dashboardTicketMainRecent=1')" data-dojo-type="dojox/mobile/TabBarButton"   <?php if($paramDashboardTicketMainRecent==1){ echo "data-dojo-props='selected:true'"; }?> > <?php echo i18n('AddedRecently');?></li>
+                      <li onClick="changeParamDashboardTicket('dashboardTicketMainRecent=2')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardTicketMainRecent==2){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('ResolvedRecently');?></li>
+                      <li onClick="changeParamDashboardTicket('dashboardTicketMainRecent=3')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardTicketMainRecent==3){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('updatedRecently');?></li>
+                    </ul>
+								  </td>
+						  </tr>
+						</table>
+					</td>
+					<td valign="top" style="width:25%">
+						<table>
+						<tr height="37px"><td>&nbsp;&nbsp;<?php echo i18n('filterCreateByTicket');?></td> </tr>
+							<tr>
+								<?php 
+							    $paramDashboardTicketMainRecent =null;
+							    if(Parameter::getUserParameter("dashboardTicketMainToMe")!=null){
+  				          $paramDashboardTicketMainToMe=Parameter::getUserParameter("dashboardTicketMainToMe");
+  				        } ?>
+								  <td>
+								    <ul data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
+                      <li onClick="changeParamDashboardTicket('dashboardTicketMainToMe=1')" data-dojo-type="dojox/mobile/TabBarButton"   <?php if($paramDashboardTicketMainToMe==1){ echo "data-dojo-props='selected:true'"; }?> > <?php echo i18n('AssignedToMe');?></li>
+                      <li onClick="changeParamDashboardTicket('dashboardTicketMainToMe=2')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardTicketMainToMe==2){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('ReportedByMe');?></li>
+                    </ul>
+								  </td>
+						  </tr>
+						</table>
+					</td>
+					<td valign="top" style="width:25%">
+    					<table style="margin-top:6px;">
+    				<tr>
+    					<td style="vertical-align: middle; text-align:right;" width="5px">
+           <span class="nobr">&nbsp;&nbsp;&nbsp;
+          <?php echo i18n("colType");?>
+          &nbsp;</span>
+        </td>
+				<td width="5px">
+        	<select title="<?php echo i18n('filterOnType'); ?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
+        	<?php echo autoOpenFilteringSelect();
+        	if ($filterTypes != '') echo ' readOnly'; ?>
+        	id="typeFilter" name="typeFilter" style="width:200px">
+              <?php htmlDrawOptionForReference('idTicketType', $filterOnType); ?>
+          	<script type="dojo/method" event="onChange" >
+              if (this.value != ' ') {
+                changeParamDashboardTicket('dashboardTicketMainType=' + this.value);
+              } else {
+                changeParamDashboardTicket('dashboardTicketMainType=null');
+              }
+            </script>
+           </select>
+        </td>
+        <td width="36px">
+        	<button title="<?php echo i18n('filterOnType');?>"
+	             dojoType="dijit.form.Button"
+	             id="iconTypeButton" name="iconTypeButton"
+	             iconClass="dijitButtonIcon dijitButtonIconFilter" class="detailButton" showLabel="false">
+	             <script type="dojo/connect" event="onClick" args="evt">
+               <?php if ($filterTypes == '') { ?>
+			           if (dijit.byId('barFilterByType').domNode.style.display == 'none') {
+							     dijit.byId('barFilterByType').domNode.style.display = 'block';
+						     } else {
+							     dijit.byId('barFilterByType').domNode.style.display = 'none';
+						     }
+						     dijit.byId('barFilterByType').getParent().resize();
+                 saveDataToSession("displayByTypeList_TicketDashboard", dijit.byId('barFilterByType').domNode.style.display, true);
+               <?php } ?>
+          		  </script>
+	        </button>
+		  	</td>
+    							</tr>
+    						</table>
+					
+						<table>
+							<tr>
+				        <td align="right" style="padding:10px;white-space:nowrap;">
+  				        <?php echo ucfirst(i18n("filterSynthesis"));?>
+  				      </td>
+  				      <?php 
+  				      $valueSwitch = "off";
+  				      if(Parameter::getUserParameter("filterSynthesis")!=null){
+  				        $valueSwitchValue=Parameter::getUserParameter("filterSynthesis");
+  				        if($valueSwitchValue)$valueSwitch="on";
+  				      }
+  				      ?>
+  		          <td style="text-align:left;">
+                  <div  id="showIdleSwitchAS" name="showIdleSwitchAS" class="colorSwitch" data-dojo-type="dojox/mobile/Switch"  leftLabel="" value="<?php echo $valueSwitch?>" rightLabel="">
+                    <script type="dojo/method" event="onStateChanged" >
+                      changeParamDashboardTicket('filterSynthesis=1');
+                    </script>
+                  </div>
+                </td>
+							</tr>
+						</table>
+					</td>
+					<td valign="top" >
+						<button id="updateTabDashboardTicketMain" class="resetMargin detailButton notButton"
+							dojoType="dijit.form.Button" showlabel="false"
+							title="<?php echo i18n('menuParameter');?>"
+							iconClass="iconParameter iconSize16  <?php if(isNewGui()){?> imageColorNewGui <?php }?>">
+							<script type="dojo/connect" event="onClick" args="evt">
+                dijit.byId('popUpdatePositionTab').show();
+              </script>
+						</button>
+						
+					</td>
+			  </tr>
+			</table>
 
 		</div>
+<?php } ?>
 		<div style="width: 97%; margin: 0 auto; padding-bottom: 50px;">
 			<div style="width: 50%; float: left; padding-bottom: 50px;">
       <?php 
@@ -372,6 +561,7 @@
 		</div>
 	</div>
 </div>
+
 <div id="popUpdatePositionTab" dojoType="dijit.Dialog"
 	onHide="loadContent('dashboardTicketMain.php', 'centerDiv');" title="<?php echo i18n("listTodayItems");?>">
   <?php createPopUpDnd($tabPosition);?>
@@ -509,6 +699,26 @@ function addSelected($param,$value){
 }
 
 function createPopUpDnd($tabPosition){
+
+    if(isNewGui()){
+      echo '<table><tr><td>';
+      echo ucfirst(i18n("dashboardRequirementMainUnscheduled"));
+      echo'   </td>';
+      $valueSwitch = "off";
+      if(Parameter::getUserParameter("dashboardTicketMainUnresolved")!=null){
+        $valueSwitchValue=Parameter::getUserParameter("dashboardTicketMainUnresolved");
+        if($valueSwitchValue)$valueSwitch="on";
+      }
+      echo' <td>';
+      echo '<div  id="showIdleSwitchAS45" name="showIdleSwitchAS45" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value='.$valueSwitch.' leftLabel="" rightLabel="" >';
+      echo '<script type="dojo/method" event="onStateChanged" >
+                  changeParamDashboardTicket("dashboardTicketMainUnresolved=1");
+                </script>
+                </div>
+                </td>';
+      echo '</td></tr></table>';
+    }
+    
   echo '<table><tr><td valign="top"><table id="dndDashboardLeftParameters" jsId="dndDashboardLeftParameters" dojotype="dojo.dnd.Source" dndType="tableauBordLeft"
                withhandles="true" style="width:300px;cellspacing:0; cellpadding:0;" data-dojo-props="accept: [ \'tableauBordRight\',\'tableauBordLeft\' ]"> ';
 echo '<tr><td colspan="3">&nbsp;</td></tr>';
