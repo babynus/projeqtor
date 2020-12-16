@@ -7993,3 +7993,12 @@ function saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration){
     },
   });
 }
+
+function switchNewGui(){
+	if(isNewGui){
+		val = 0;
+	}else{
+		val = 1;
+	}
+	saveDataToSessionAndReload("newGui", val, true);
+}
