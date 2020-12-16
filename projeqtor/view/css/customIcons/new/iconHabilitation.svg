@@ -6,19 +6,17 @@
 <g id="Calque_2" display="none">
 </g>
 <g>
-	
-		<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="32.143" cy="23.468" r="9.008"/>
 	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M60.093,32.267c0-15.437-12.513-27.951-27.949-27.951c-15.438,0-27.951,12.515-27.951,27.951c0,10.863,6.21,20.257,15.264,24.883
-		v9.273l7.923,7.922l-8.526,8.529l7.166,7.165l-6.523,6.523l7.014,7.013l-7.217,7.217l12.475,12.476l13.242-13.244V57.074h-0.028
-		C53.954,52.423,60.093,43.07,60.093,32.267z"/>
+		M58.143,95.139h12.871H118.9c3.314,0,6.031-2.713,6.031-6.029v-9.266"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M58.143,75.813h66.789V15.225c0-3.318-2.717-6.031-6.031-6.031H66.5"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M71.014,118.807V95.139H58.143"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M54.472,118.807h37.657"/>
 </g>
-<g>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M58.143,95.139h12.871h47.886c3.315,0,6.031-2.713,6.031-6.03v-9.265"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M53.83,79.844h71.101V15.225c0-3.318-2.716-6.031-6.031-6.031H66.5"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M49.163,118.806h42.966c2.398,0,4.358-1.961,4.358-4.358c0-2.398-1.96-4.36-4.358-4.36H71.014V95.139H58.143"/>
-</g>
+<path fill="#FF0000" d="M63.593,30.956c0-16.373-13.269-29.645-29.639-29.645c-16.373,0-29.643,13.273-29.643,29.645
+	c0,11.519,6.585,21.482,16.188,26.389v9.833l8.403,8.4l-9.042,9.046l7.6,7.6l-6.917,6.916l7.439,7.438l-7.656,7.654l13.231,13.231
+	l14.044-14.046V57.264h-0.03C57.085,52.331,63.593,42.412,63.593,30.956z M33.953,31.176c-5.276,0-9.554-4.277-9.554-9.554
+	c0-5.275,4.278-9.553,9.554-9.553s9.553,4.277,9.553,9.553C43.506,26.899,39.229,31.176,33.953,31.176z"/>
 </svg>
