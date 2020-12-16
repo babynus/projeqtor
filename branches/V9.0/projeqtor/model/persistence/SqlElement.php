@@ -5825,9 +5825,9 @@ abstract class SqlElement {
     $rowStart = '<tr>';
     $rowEnd = '</tr>';
     $labelStart = '<td style="background:#FFFFFF;font-weight:bold;text-align: right;width:30%;min-width:30%;vertical-align: middle;white-space:nowrap;padding-bottom:10px;">&nbsp;&nbsp;';
-    $labelLinkStart = '<td style="background:#FFFFFF;text-align: right;width:30%;min-width:30%;vertical-align: middle;white-space:nowrap;padding-bottom:10px;">&nbsp;&nbsp;';
+    $labelLinkStart = '<td style="background:#FFFFFF;text-align: right;width:30%;min-width:30%;vertical-align: top;white-space:nowrap;padding-bottom:10px;">&nbsp;&nbsp;';
     $labelEnd = '&nbsp;</td>';
-    $fieldStart = '<td style="background:#FFFFFF;text-align: left;width:70%;padding-left:20px;padding-bottom:10px;">';//<td style="width:2px;">&nbsp;</td>
+    $fieldStart = '<td style="background:#FFFFFF;text-align: left;width:70%;padding-left:20px;padding-bottom:10px;vertical-align: top;">';//<td style="width:2px;">&nbsp;</td>
     $fieldEnd = '</td>';
     $sectionStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:bold;width: 100%;" colspan="2">';
     $sectionEnd = '</td>';
@@ -5941,12 +5941,13 @@ abstract class SqlElement {
         $colArray[$section][$col]=$val;
       }
     }
-    $msg .= $rowStart.'<td style="width:50%;vertical-align:top;">';
+    $msg .= $rowStart.'<td style="width:50%;vertical-align:top;padding-right:15px;">';
     self::drawMailDetailCol($colArray['Description'], $msg);
-    $msg .= $fieldEnd.'<td style="width:50%;vertical-align:top;">';
+    $msg .= $fieldEnd.'<td style="width:50%;vertical-align:top;padding-left:15px;">';
     if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
     	$msg .= $tableStart;
     	$msg .= $rowStart . $sectionStart.'<table style="float:left;"><tr>';
+    	$msg .= '<td>&nbsp;</td>';
     	$msg .= '<td><img style="float:left;width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/new/iconEmailLinkedElement.png" /></td>';
     	$msg .= '<td>&nbsp;</td>';
     	$msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;white-space:nowrap;">'.i18n ( 'sectionLink' ).'</td>';
@@ -5967,7 +5968,7 @@ abstract class SqlElement {
     		$userId = $link->idUser;
     		$userName = SqlList::getNameFromId ( 'User', $userId );
     		$msg .= '<b>'.$userName.'&nbsp;&nbsp;</b>';
-    		$msg .= '<br>'.htmlFormatDateTime ( $creationDate );
+    		$msg .= '<br>'.htmlFormatDateTime ( $creationDate ,false, false, false);
     		$msg .= $labelEnd . $fieldStart;
     		$msg .= '<b>'.i18n($refLinkType);
     		$msg .= '&nbsp;#'.$refLinkId.'</b>&nbsp;-&nbsp;';
@@ -5978,9 +5979,9 @@ abstract class SqlElement {
     	$msg .= $tableEnd;
     }
     $msg .= $fieldEnd.$rowEnd;
-    $msg .= $rowStart.'<td style="width:50%;vertical-align:top;">';
+    $msg .= $rowStart.'<td style="width:50%;vertical-align:top;padding-right:15px;">';
     self::drawMailDetailCol($colArray['Treatment'], $msg);
-    $msg .= $fieldEnd.'<td style="width:50%;vertical-align:top;">';
+    $msg .= $fieldEnd.'<td style="width:50%;vertical-align:top;padding-left:15px;">';
     if (isset ( $this->_Note ) and is_array ( $this->_Note )) {
     	//florent
     	$msg .= $tableStart;
@@ -5993,6 +5994,7 @@ abstract class SqlElement {
     if (isset ( $this->_DocumentVersion ) and is_array ( $this->_DocumentVersion )) {
       $msg .= $tableStart;
       $msg .= $rowStart . $sectionStart.'<table style="float:left;"><tr>';
+      $msg .= '<td>&nbsp;</td>';
       $msg .= '<td><img style="width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/new/iconEmailAttachment.png" /></td>';
       $msg .= '<td>&nbsp;</td>';
       $msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;white-space:nowrap;">'.i18n ( 'sectionDocumentVersion' ).'</td>';
@@ -6006,7 +6008,7 @@ abstract class SqlElement {
         $msg .= $rowStart . $labelStart;
         $msg .= $name;
         $msg .= '<br />';
-        $msg .= htmlFormatDateTime ( $versionDate );
+        $msg .= htmlFormatDateTime ( $versionDate ,false, false, false);
         $msg .= $labelEnd . $fieldStart;
         $msg .= $documentVersion->fileName;
         $msg .= '<br />';
@@ -6032,7 +6034,7 @@ public function drawMailDetailCol($colArray, &$msg){
   $rowEnd = '</tr>';
   $labelStart = '<td style="background:#FFFFFF;font-weight:bold;text-align: right;width:30%;min-width:30%;vertical-align: top;white-space:nowrap;padding-bottom:10px;">&nbsp;&nbsp;';
   $labelEnd = '&nbsp;</td>';
-  $fieldStart = '<td style="background:#FFFFFF;text-align: left;width:70%;padding-left:20px;padding-bottom:10px;">';//<td style="width:2px;">&nbsp;</td>
+  $fieldStart = '<td style="background:#FFFFFF;text-align: left;width:70%;padding-left:20px;padding-bottom:10px;vertical-align: top;">';//<td style="width:2px;">&nbsp;</td>
   $fieldEnd = '</td>';
   $sectionStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:bold;width: 100%;" colspan="2">';
   $sectionEnd = '</td>';
@@ -6054,6 +6056,7 @@ public function drawMailDetailCol($colArray, &$msg){
   			if ($section == 'Description' or $section == 'Treatment') {
   				$msg .= $tableStart;
   				$msg .= $rowStart . $sectionStart.'<table><tr>';
+  				$msg .= '<td>&nbsp;</td>';
   				$msg .= '<td><img style="float:left;width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/new/iconEmail'.$section.'.png" /></td>';
   				$msg .= '<td>&nbsp;</td>';
   				$msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;white-space:nowrap;">'.i18n ( 'section' . $section ).'</td>';
@@ -6164,9 +6167,9 @@ public function drawMailDetailCol($colArray, &$msg){
   		} else if ($col == 'password') {
   			$msg .= "*****"; // nothing
   		} else if ($dataType == 'date' and $val != null and $val != '') {
-  			$msg .= htmlFormatDate ( $val );
+  			$msg .= htmlFormatDate ( $val ,false, false);
   		} else if ($dataType == 'datetime' and $val != null and $val != '') {
-  			$msg .= htmlFormatDateTime ( $val, false );
+  			$msg .= htmlFormatDateTime ( $val, false, false, false);
   		} else if ($dataType == 'time' and $val != null and $val != '') {
   			$msg .= htmlFormatTime ( $val, false );
   		} else if ($col == 'color' and $dataLength == 7) { // color
@@ -6476,6 +6479,7 @@ function getLinksHtmlTab() {
 //florent ticket 4790
 function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,$labelStart, $labelEnd,$fieldStart,$fieldEnd){
   $msg .= $rowStart . $sectionStart.'<table style="float:left;"><tr>';
+  $msg .= '<td>&nbsp;</td>';
   $msg .= '<td><img style="float:left;width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/new/iconEmailNotes.png" /></td>';
   $msg .= '<td>&nbsp;</td>';
   $msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;">'.i18n ( 'sectionNote' ).'</td>';
@@ -6496,9 +6500,9 @@ function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,
       $msg .= $rowStart . $labelStart;
       $msg .= '<b>'.$userName.'&nbsp;&nbsp;</b><br>';
       if ($updateDate) {
-        $msg .= '<i>' . htmlFormatDateTime ( $updateDate ) . '</i>';
+        $msg .= '<i>' . htmlFormatDateTime ( $updateDate ,false, false, false) . '</i>';
       } else {
-        $msg .= htmlFormatDateTime ( $creationDate );
+        $msg .= htmlFormatDateTime ( $creationDate ,false, false, false);
       }
       $msg .= $labelEnd . $fieldStart;
       // $msg.=htmlEncode($note->note,'print');
