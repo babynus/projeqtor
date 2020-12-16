@@ -1863,6 +1863,29 @@ element.style {
   border: none;
 }
 
+.ProjeQtOrNewGui .mblTabBarSegmentedControl {
+	background-image: none !important;
+}
+
+.ProjeQtOrNewGui .mblTabBar {
+  border: none !important;
+}
+
+.ProjeQtOrNewGui .mblTabBarSegmentedControl .mblTabBarButton {
+	background-color: var(--color-lighter) !important;
+	background-image:none !important;
+}
+
+
+.ProjeQtOrNewGui .mblTabBarButtonLabel {
+	font-weight : normal !important;
+}
+ 
+.ProjeQtOrNewGui .mblTabBarSegmentedControl .mblTabBarButtonSelected {
+	background-color:var(--color-dark) !important;
+	color:revert;
+}
+
 .ProjeQtOrNewGui .dojoxGridRowSelected .ganttIconBackground {
 	background-color: transparent;
 }

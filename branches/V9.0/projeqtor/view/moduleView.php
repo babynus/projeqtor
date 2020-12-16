@@ -101,7 +101,7 @@ $user=getSessionUser();
        <div   style="cursor:pointer;border-radius:5px;float:left;margin-left:100px;position:absolute;right:-30px;top:20px;width:120px;height:120px;">
        <button id="saveParameterButton" dojoType="dijit.form.Button" class="resetMargin detailButton notButton"
         title="<?php echo i18n("applyChanges");?>"
-        style="color:#707070;font-weight:bold; width:50px;height:50px" class="" enabled="true"
+        style="color:#707070;font-weight:bold; width:50px;height:50px" enabled="true"
         iconClass="iconButtonSave <?php if(isNewGui()){?>iconSize48 <?php }else{ ?> iconSize32 <?php }?> imageColorNewGui" showLabel="false" >
         <script type="dojo/connect" event="onClick" args="evt">
 		        var url="../tool/resetModuleTablesInSession.php";
