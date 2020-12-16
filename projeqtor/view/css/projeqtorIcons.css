@@ -2512,6 +2512,7 @@
 .ProjeQtOrFlatGrey .iconSituation { background-image: url(customIcons/grey/iconSituation.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatRed .iconSituation { background-image: url(customIcons/red/iconSituation.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconSituation { background-image: url(customIcons/new/iconSituation.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconSituationNav { background-image: url(customIcons/new/iconSituation.svg);  background-repeat: no-repeat; }
 
 .iconSupport { background-image: url(images/iconSupport.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconSupport { background-image: url(customIcons/blue/iconSupport.png);  background-repeat: no-repeat;}

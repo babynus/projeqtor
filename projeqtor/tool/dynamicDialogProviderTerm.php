@@ -200,12 +200,12 @@ if(isset ($isLineMulti)){
             $providerTermEdit = new ProviderTerm($idProviderTerm);    
             $NewMaxValue = $maxValue+$providerTermEdit->untaxedAmount;
           }
-          $percent = (100*$maxValue/$providerOrder->totalUntaxedAmount);
+          $percent = (floatval($providerOrder->totalUntaxedAmount))?(100*$maxValue/$providerOrder->totalUntaxedAmount):0;
           $taxAmount = ($maxValue*$providerOrder->taxPct)/100;
           $totalFullAmount = $maxValue+$taxAmount;
           if($mode == 'edit'){
             $MaxPercent = $percent;
-            $percent = (100*$providerTermEdit->untaxedAmount/$providerOrder->totalUntaxedAmount);
+            $percent = (floatval($providerOrder->totalUntaxedAmount))?(100*$providerTermEdit->untaxedAmount/$providerOrder->totalUntaxedAmount):0;
             $MaxPercent += $percent;
             $taxAmount = $providerTermEdit->taxAmount;
             $totalFullAmount = $providerTermEdit->untaxedAmount+$taxAmount;
@@ -370,7 +370,7 @@ if(isset ($isLineMulti)){
                   }
                 }
                 $discount = 0;
-                $percent = (100*$maxValue/$bill->amount);
+                $percent = (floatval($bill->amount))?(100*$maxValue/$bill->amount):0;
                 if($providerOrder->discountRate > 0){
                   $discount = ($maxValue*$providerOrder->discountRate/100);
                 }
@@ -382,6 +382,8 @@ if(isset ($isLineMulti)){
                   $billLine3 = new BillLine();
                   $critArray = array("refType"=>"ProviderTerm","idBillLine"=>$bill->id , "refId"=>$idProviderTerm);
                   $billLineList3=$billLine2->getSqlElementsFromCriteria($critArray);
+                  $newPercent=0;
+                  $newMaxValue=0;
                   foreach ($billLineList3 as $billLineTerm){
                     $newPercent = $percent;
                     $percent = $billLineTerm->rate;
