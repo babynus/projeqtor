@@ -88,19 +88,16 @@ class QuotationMain extends SqlElement {
   
   // Define the layout that will be used for lists
   private static $_layout='
-    <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
+    <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
     <th field="nameProject" width="10%" >${idProject}</th>
-    <th field="nameClient" width="7%" >${idClient}</th>
-    <th field="nameQuotationType" width="7%" >${idQuotationType}</th>
-    <th field="name" width="20%" >${name}</th>
+    <th field="nameClient" width="10%" >${idClient}</th>
+    <th field="nameQuotationType" width="10%" >${idQuotationType}</th>
+    <th field="name" width="15%" >${name}</th>
     <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="nameResource" formatter="thumbName22" width="8%" >${responsible}</th>
-    <th field="validityEndDate" width="8%" formatter="dateFormatter" >${offerValidityEndDate}</th>
-  	<th field="untaxedAmount" formatter="costFormatter" width="7%" >${untaxedAmount}</th>
-  	<th field="fullAmount" formatter="costFormatter" width="7%" >${fullAmount}</th>
-  	<th field="handled" width="4%" formatter="booleanFormatter" >${handled}</th>
-    <th field="done" width="4%" formatter="booleanFormatter" >${done}</th>
-    <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>
+    <th field="nameResource" formatter="thumbName22" width="10%" >${responsible}</th>
+    <th field="validityEndDate" width="10%" formatter="dateFormatter" >${offerValidityEndDate}</th>
+  	<th field="untaxedAmount" formatter="costFormatter" width="10%" >${untaxedAmount}</th>
+  	<th field="fullAmount" formatter="costFormatter" width="10%" >${fullAmount}</th>
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", 

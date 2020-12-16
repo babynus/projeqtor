@@ -95,8 +95,7 @@ class BillMain extends SqlElement {
     <th field="date" formatter="dateFormatter" width="10%" >${date}</th>  
     <th field="nameRecipient" width="10%" >${idRecipient}</th>
     <th field="fullAmount" formatter="costFormatter" width="10%" >${fullAmount}</th>
-    <th field="done" formatter="booleanFormatter" width="5%" >${done}</th>
-    <th field="idle" formatter="booleanFormatter" width="5%" >${idle}</th>
+    <th field="colorNameStatus" formatter="colorNameFormatter" width="10%" >${idStatus}</th>
     ';
   
   private static $_fieldsAttributes=array('name'=>'required','id'=>'nobr',
@@ -472,8 +471,8 @@ class BillMain extends SqlElement {
   	$largeWidth=( (intval($displayWidth)+30) / 2) - $labelWidth;
     $result="";
     if ($item=='billingType') {
-    	$result .="<table><tr><td class='label' valign='top'><label>" . i18n('colBillingType') . "&nbsp;:&nbsp;</label>";
-      $result .="</td><td>";
+    	$result .="<table><tr><td class='label' valign='top'><label>" . i18n('colBillingType') . "&nbsp;".((isNewGui())?'':':&nbsp;')."</label>";
+      $result .="</td><td style='".((isNewGui()?'padding-top:5px;':''))."'>";
       if ($print) {
       	$result.=i18n('billingType'.$this->billingType);
       } else {
@@ -485,7 +484,7 @@ class BillMain extends SqlElement {
 	      $result.=' style="width:100%;"';
 	      $result.=' readonly="readonly"';
 	      $result .='/>';*/
-        if ($this->billingType) $result .=  i18n('billingType'.$this->billingType) ;
+        if ($this->billingType) $result .= ((isNewGui()?'"':'')). i18n('billingType'.$this->billingType) .((isNewGui()?'"':''));
       }
 	    $result .= '</td></tr></table>';
     } else if ($item=='paymentsList') {
