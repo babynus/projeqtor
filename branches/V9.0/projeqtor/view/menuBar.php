@@ -305,12 +305,16 @@
       
     </td>
     <td width="" style="vertical-align:top;text-align:center;" <?php if(isNewGui())echo 'onmouseover="showActionProjectSelector();" onmouseout="hideActionProjectSelector();"';?> >
-      <?php $archiveOn = (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;?>
+      <?php $archiveOn = (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0; debugLog(getSessionValue('projectSelectorShowIdle'));?>
       <?php if(isNewGui()){
             $display = 'display:none;';
             if($archiveOn==1)$display = '';?>
       <span id="archiveOn" style="position:relative;top:5px;left:-30px;<?php echo $display;?>">
-        <?php echo formatIconNewGui('HistArchive',22,i18n('archiveOn'), false);?>
+        <div class="iconHistArchive iconSize22 imageColorNewGui" style="z-index:500;width:22px;height:22px;;" title="[archiveOn]">
+          <div style="top: 10px;position: relative;left: 8px;filter: unset !important;">
+            <img style="height:12px;width:12px;" src="img/iconCronRunning.png">
+          </div>
+        </div>
         <span style="position:relative;top:-20px;float:left;left:30px;">
           <?php echo i18n('archiveOn');?>
         </span>

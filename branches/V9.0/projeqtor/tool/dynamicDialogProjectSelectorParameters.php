@@ -24,6 +24,7 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 $showIdle=(sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;
+debugLog(getSessionValue('projectSelectorShowIdle'));
 $showHandlelProject=Parameter::getUserParameter('projectSelectorShowHandlelProject');
 $displayMode="standard";
 if (sessionValueExists('projectSelectorDisplayMode')) {
