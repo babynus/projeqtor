@@ -862,7 +862,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
 
             echo ',';
             echo '{';
-            $idAct = $activity->id . '.' . self::$nbOccurencesActivity[$activity->id];
+            $idAct = $activity->id . '.' . self::$nbOccurencesActivity[$activity->id]  . '.activity';
 
             echo '"id":"' . $idAct . '"';
             echo ',"refid":"' . $activity->id . '"';
@@ -883,7 +883,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
                 echo ',"topreftype":"' . $this->scope . 'VersionhasChild"';
                 echo ',"toprefid":"' . $this->id . '"';
             } else {
-                echo ',"topid":"' . $activity->idActivity . '.' . self::$nbOccurencesActivity[$activity->idActivity] . '"';
+                echo ',"topid":"' . $activity->idActivity . '.' . self::$nbOccurencesActivity[$activity->idActivity] . '.activity' . '"';
                 echo ',"topreftype":"Activity"';
                 echo ',"toprefid":"' . $activity->idActivity . '"';
             }
