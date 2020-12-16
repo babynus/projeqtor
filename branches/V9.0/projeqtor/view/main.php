@@ -192,6 +192,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     dojo.require("dojox.mobile.parser");
     dojo.require("dojox.mobile.Switch");
     dojo.require("dojox.mobile.SwapView");
+    dojo.require("dojox.mobile.TabBar");
     dojo.require("dojox.mobile.PageIndicator");
     dojo.require("dojox.image.Lightbox");
     dojo.subscribe("/dnd/drop", function(source, nodes, copy, target){
