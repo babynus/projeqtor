@@ -32,10 +32,10 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
 ?>
 <table style="width:100%">
   <tr>
-    <td style="text-align: right;width:250px">
-	    <?php echo i18n("labelShowIdle");?>&nbsp;:&nbsp;
+    <td style="text-align: right;width:250px;white-space:nowrap;">
+	    <?php echo i18n("labelShowIdle");?>&nbsp;<?php echo (isNewGui())?'':':';?>&nbsp;
 	  </td>
-	  <td style="text-align: left; vertical-align: middle;width:250px" title="<?php echo i18n('helpEnterArchiveMode');?>">
+	  <td style="text-align: left; vertical-align: middle;width:250px;white-space:nowrap;" title="<?php echo i18n('helpEnterArchiveMode');?>">
 	     <div title="<?php echo i18n('showIdleElements');?>" dojoType="dijit.form.CheckBox" type="checkbox"
          <?php if ($showIdle) echo ' checked ';?>">
 	       <script type="dojo/method" event="onChange" >
@@ -58,10 +58,10 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
 	  </td>
   </tr>
   <tr>
-    <td style="text-align: right;width:250px">
-	    <?php echo i18n("showHandlelProject");?>&nbsp;:&nbsp;
+    <td style="text-align: right;width:250px;white-space:nowrap;">
+	    <?php echo i18n("showHandlelProject");?>&nbsp;<?php echo (isNewGui())?'':':';?>&nbsp;
 	  </td>
-	  <td style="text-align: left; vertical-align: middle;width:280px" title="<?php echo i18n('showHandlelProject');?>">
+	  <td style="text-align: left; vertical-align: middle;width:280px;white-space:nowrap" title="<?php echo i18n('showHandlelProject');?>">
 	     <div title="<?php echo i18n('showHandlelProject');?>" dojoType="dijit.form.CheckBox" type="checkbox"
          <?php if ($showHandlelProject) echo ' checked ';?>">
 	       <script type="dojo/method" event="onChange" >
@@ -80,28 +80,28 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
   </tr>
   <tr><td></td><td>&nbsp;</td></tr>
   <tr>
-    <td style="text-align: right;width:250px">
-      <?php echo i18n("projectListDisplayMode");?>&nbsp;:&nbsp;
+    <td style="text-align: right;width:250px;white-space:nowrap;white-space:nowrap">
+      <?php echo i18n("projectListDisplayMode");?>&nbsp;<?php echo (isNewGui())?'':':';?>&nbsp;
     </td>
-    <td style="text-align: left; vertical-align: middle;width:250px; word-wrap: none">
+    <td style="text-align: left; vertical-align: middle;width:250px; word-wrap: none;white-space:nowrap">
       <table><tr><td>
 	    <input type="radio" data-dojo-type="dijit/form/RadioButton" name="displayModeCkeckbox"
 	     <?php echo ($displayMode=='standard')?'checked':'';?> 
         id="displayModeCkeckboxStandard" value="standard" onClick="changeProjectSelectorType('standard');" />
         </td><td>
-        <label class="display" style="background-color: white" for="displayModeCkeckboxStandard"><?php echo i18n("displayModeStandard")?></label>
+        <label class="display" style="background-color: white;<?php echo (isNewGui())?'position:relative;left:6px;top:-2px':'';?>" for="displayModeCkeckboxStandard"><?php echo i18n("displayModeStandard")?></label>
         </td></tr><tr><td>
 	    <input type="radio" data-dojo-type="dijit/form/RadioButton" name="displayModeCkeckbox" 
 	     <?php echo ($displayMode=='select')?'checked':'';?> 
         id="displayModeCkeckboxSelect" value="select" onClick="changeProjectSelectorType('select');" />
         </td><td>
-        <label class="display" style="background-color: white" for="displayModeCkeckboxSelect"><?php echo i18n("displayModeSelect")?></label>
+        <label class="display" style="background-color: white;<?php echo (isNewGui())?'position:relative;left:6px;top:-2px':'';?>" for="displayModeCkeckboxSelect"><?php echo i18n("displayModeSelect")?></label>
         </td></tr><tr><td>
 	    <input type="radio" data-dojo-type="dijit/form/RadioButton" name="displayModeCkeckbox" 
 	     <?php echo ($displayMode=='search')?'checked':'';?> 
         id="displayModeCkeckboxSearch" value="select" onClick="changeProjectSelectorType('search');" />
         </td><td>
-        <label class="display" style="background-color: white" for="displayModeCkeckboxSearch"><?php echo i18n("displayModeSearch")?></label>
+        <label class="display" style="background-color: white;<?php echo (isNewGui())?'position:relative;left:6px;top:-2px':'';?>" for="displayModeCkeckboxSearch"><?php echo i18n("displayModeSearch")?></label>
         </td></tr></table>
     </td>
   </tr>
@@ -116,7 +116,7 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
 	   <button class="mediumTextButton" dojoType="dijit.form.Button" onclick="dijit.byId('dialogProjectSelectorParameters').hide();">
 	     <?php echo i18n("buttonCancel");?>
 	   </button>&nbsp;
-     <button class="mediumTextButton" dojoType="dijit.form.Button"
+     <button class="dynamicTextButton" dojoType="dijit.form.Button"
      onclick="refreshProjectSelectorList();">
        <?php echo i18n("buttonRefreshList");?>
      </button>
