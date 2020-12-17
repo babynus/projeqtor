@@ -382,6 +382,7 @@ function getNavigationMenuLeft (){
   $rightReportAcces=securityCheckDisplayMenu($menuReport->id,substr($menuReport->name,4));
   sortMenus($contexctMenuMain,$result,0,$level,$rightPluginAcces);
   $navTa=array();
+  $allNavSect=array();
   foreach ($result as $id=>$context){
       $context=$context['object'];
       if($context->idMenu!=0){
@@ -397,13 +398,30 @@ function getNavigationMenuLeft (){
           continue;
         }
         $lstMenuId[]=$context->idParent;
-      }else if($context->id!=6 and $rightReportAcces) $navTa[$id]=$context->id;
+      }else if($context->id!=6 and $rightReportAcces){
+         $navTa[$id]=$context->id;
+         $allNavSect[$context->id]=$context->idParent;
+      }
   }
+
+  $exist=array();
   foreach ($lstMenuId as $idMenu){
     foreach ($navTa as $idArray=>$val){
       if($val==$idMenu){
         unset($navTa[$idArray]);
+        $exist[]=$val;
         continue;
+      }
+    }
+  }
+  asort ($allNavSect);
+  ksort($exist);
+  $exist=array_reverse($exist);
+  foreach ($allNavSect as $idN=>$idP){
+    foreach ($exist as $idT=>$valT){
+      if($idN==$valT and array_search($idP, $navTa)){
+        debugLog(array_search($idP, $navTa));
+         unset($navTa[array_search($idP, $navTa)]);
       }
     }
   }
