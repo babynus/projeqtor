@@ -788,9 +788,9 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
    }
    if($listMessageLegalFollowup){
     ?>
-   <div id="dialogMessageLegal" style="width:100%; visibility:visible; display:inline-block;"> 
-     <div id="messageLegallArrow" style="display:block; float:right; margin-top:15px; width:5%; height:140px; margin-top:5px;">
-      <div class="iconArrowMessageLegal"><span style="color:white; width:18px; writing-mode:vertical-rl; margin-top:10px;"><?php echo i18n("readToHide");?></span></div>
+   <div id="dialogMessageLegal" style="width:100%; visibility:visible; display:inline-block;height:30%;"> 
+     <div id="messageLegallArrow" style="display:block; float:right; margin-top:15px; width:5%; height:100%; margin-top:5px;">
+      <div class="iconArrowMessageLegal" ><span style="color:white; width:18px; height:90%;writing-mode:vertical-rl;"><?php echo i18n("readToHide");?></span></div>
      </div>
       <?php Sql::beginTransaction();
             foreach ($listMessageLegalFollowup as $idFollowup=>$idMessage){
@@ -804,11 +804,11 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
               $messFollow->save();
               $val=$messLegal->description; 
               if($cptMess < $nbListMess){ ?>
-                 <div id="messageLegall<?php echo $messFollow->id;?>" style="display:none; margin-top:15px; width:95%; height:135px; overflow-y:auto;"> 
+                 <div id="messageLegall<?php echo $messFollow->id;?>" style="display:none;  width:95%; height:100%; overflow-y:auto;"> 
               <?php }else{ ?> 
-                 <div id="messageLegall<?php echo $messFollow->id;?>" style="display:block; margin-top:15px; width:95%; height:135px; overflow-y:auto;"> 
+                 <div id="messageLegall<?php echo $messFollow->id;?>" style="display:block;  width:95%; height:100%; overflow-y:auto;"> 
               <?php }?>
-                  <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; min-height:100px; margin:0px 40px 0px 40px;">  
+                  <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; margin-top:15px; min-height:200px; margin:15px 40px 5px 40px;">  
                     <?php echo $val;?>
                   </div>
                   <div style="width:97%;  bottom:5px; text-align:right;">
