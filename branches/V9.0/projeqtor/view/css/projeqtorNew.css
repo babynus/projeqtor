@@ -1899,3 +1899,100 @@ element.style {
 	padding-left:10px !important;
 
 }
+
+.ProjeQtOrNewGui .bmenu{
+    padding: 0px;
+    position: relative;
+    margin-left:20px;
+    margin-right:20px;
+    margin-top:0px;
+    width:100%;
+}
+
+.ProjeQtOrNewGui .bmenu li{
+    display:table-cell;
+    cursor:pointer;
+    display: block;
+    width:250px;
+    float:left;
+    text-transform: unset;
+    text-shadow: unset;
+    text-align:center;
+    margin: 2px;
+    height:40px;
+    padding:0px;
+    background: unset;
+    -webkit-transition: unset;
+    -moz-transition: unset;
+    -o-transition: unset;
+    -ms-transition: unset;
+    transition: unset;
+}
+.ProjeQtOrNewGui .bmenuText {
+  font-size: 11px;
+  vertical-align: middle;
+  font-weight:normal;
+  text-transform: unset;
+  letter-spacing:unset;
+  padding:unset;
+  height: 40px;
+}
+.ProjeQtOrNewGui .bmenuCategText {
+  font-size: 12px;
+  vertical-align: middle;
+  text-transform: unset;
+  letter-spacing:unset;
+  padding:unset;
+  font-weight:borld; 
+  height: 40px; 
+}
+
+.ProjeQtOrNewGui .bmenu li:hover{
+  background-color: var(--color-light-secondary) !important;
+  border: 1px solid var(--color-secondary) !important;
+  cursor:pointer;
+}
+
+.ProjeQtOrNewGui .bmenu li .reportSelected, .reportSelected {
+  background-color: var(--color-light-secondary) !important;
+}
+.ProjeQtOrNewGui .reportSelected .bmenuText{
+  background-color: var(--color-light-secondary) !important;
+  font-weight: bold;
+}
+
+.ProjeQtOrNewGui .headerReport{
+  color:var(--color-dark) !important;
+  font-size: 22px; 
+  font-family: Verdana,"Arial Black", Arial, sans-serif;
+  font-weight: bold;
+  border:0px;
+  position:absolute;
+  top:-5px;
+  text-align:center;
+  background:transparent;
+  left:40px;
+  width:470px;
+}
+
+.ProjeQtOrNewGui li.section {
+  border-radius:5px;
+}
+
+.ProjeQtOrNewGui li.section:hover {
+  background-color: var(--color-light-secondary) !important;
+  border: 1px solid var(--color-secondary) !important;
+}
+
+.ProjeQtOrNewGui li.section.reportSelected {
+  background-color: var(--color-light-secondary) !important;
+  border: 1px solid var(--color-secondary) !important;
+}
+
+.ProjeQtOrNewGui .largeReportHeader2 {
+	-webkit-transition: unset !important;
+  -moz-transition:unset !important;
+  -o-transition: unset !important;
+  -ms-transition: unset !important;
+  transition: unset !important;
+}
