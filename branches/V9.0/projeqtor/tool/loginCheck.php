@@ -105,7 +105,7 @@
 // "password"  wrong password
 // "ldap"      error connecting to Ldap  
 // "plugin"    error triggered by plugin on Connect event
-  
+
   if ( $authResult!="OK") {
   	if ($user->locked!=0) {
   	  debugTraceLog("loginCheck : user locked");
@@ -159,10 +159,14 @@
   $newGui = SqlElement::getSingleSqlElementFromCriteria('Parameter', array('idUser'=>$user->id, 'parameterCode'=>'newGui'));
   if($newGui->parameterValue == 1 or isIE()){
     $idMessageLegal = SqlList::getIdFromName('MessageLegal', 'newGui');
-    $messageLegalFollow = SqlElement::getSingleSqlElementFromCriteria('MessageLegalFollowup', array('idUser'=>$user->id, 'name'=>'newGui', 'idMessageLegal'=>$idMessageLegal));
-    $messageLegalFollow->acceptedDate= date('Y-m-d H:i:s');
-    $messageLegalFollow->accepted = 1;
-    $messageLegalFollow->save();
+    if ($idMessageLegal) {
+      $messageLegalFollow = SqlElement::getSingleSqlElementFromCriteria('MessageLegalFollowup', array('idUser'=>$user->id, 'name'=>'newGui', 'idMessageLegal'=>$idMessageLegal));
+      if ($messageLegalFollow and $messageLegalFollow->id and $messageLegalFollow->accepted==0) {
+        $messageLegalFollow->acceptedDate= date('Y-m-d H:i:s');
+        $messageLegalFollow->accepted = 1;      
+        $res=$messageLegalFollow->save();
+      }
+    }
   }
   loginOk ($user);
   User::resetAllVisibleProjects();
