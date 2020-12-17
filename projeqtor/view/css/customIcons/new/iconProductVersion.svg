@@ -19,57 +19,20 @@
 	</g>
 </g>
 <g id="Calque_2_2_">
-	<g>
-		<g>
-			<polyline fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" points="10.952,28.718 
-				7.734,30.095 7.734,33.595 			"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8.7642,25.0405" x1="7.734" y1="58.636" x2="7.734" y2="79.92"/>
-			<polyline fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" points="7.734,92.439 
-				7.734,95.939 10.918,97.395 			"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8.2915,23.69" x1="32.465" y1="107.24" x2="50.78" y2="115.609"/>
-			<polyline fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" points="
-				61.554,120.532 64.736,121.986 67.852,120.389 			"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8.2535,23.5815" x1="88.83" y1="109.619" x2="106.662" y2="100.466"/>
-			<polyline fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" points="
-				117.152,95.082 120.266,93.482 120.266,89.982 			"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7.8869,22.5339" x1="120.266" y1="67.449" x2="120.266" y2="48.296"/>
-			<polyline fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" points="
-				120.266,37.029 120.266,33.529 117.121,31.991 			"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8.2856,23.6732" x1="95.854" y1="21.591" x2="77.777" y2="12.751"/>
-			<polyline fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" points="67.146,7.552 
-				64.001,6.014 60.783,7.391 			"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8.0728,23.0652" x1="39.579" y1="16.466" x2="21.555" y2="24.181"/>
-		</g>
-	</g>
-	<g>
-		<g>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="23.813" y1="37.76" x2="27.053" y2="39.083"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5.4226,15.4931" x1="41.396" y1="44.939" x2="53.589" y2="49.917"/>
-			<polyline fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" points="60.761,52.845 
-				64.001,54.168 64.001,57.668 			"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6.8089,19.454" x1="64.001" y1="77.122" x2="64.001" y2="93.658"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="64.001" y1="103.385" x2="64.001" y2="106.885"/>
-		</g>
-	</g>
-	<g>
-		<g>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="64.001" y1="54.168" x2="67.266" y2="52.905"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5.3574,15.307" x1="81.54" y1="47.38" x2="93.675" y2="42.685"/>
-			
-				<line fill="none" stroke="#FF0000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="100.813" y1="39.922" x2="104.076" y2="38.659"/>
-		</g>
-	</g>
+	
+		<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		7.422,29.74 7.422,95.585 64.425,121.631 119.953,93.128 119.953,33.173 63.688,5.659 	"/>
+	
+		<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		23.5,37.405 63.688,53.813 63.688,106.529 	"/>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="63.688" y1="53.813" x2="103.764" y2="38.304"/>
+</g>
+<g>
+	<path fill="#FF0000" d="M104.467,83.621c0.036,0.515-0.13,1.043-0.491,1.574c-0.369,0.537-0.828,0.926-1.387,1.173l-16.163,7.156
+		c-0.56,0.247-1.044,0.271-1.465,0.067c-0.412-0.207-0.635-0.568-0.672-1.086c-0.035-0.503,0.127-1.012,0.488-1.539
+		c0.369-0.526,0.829-0.912,1.389-1.159l6.153-2.725l0.466-26.922l-6.063,2.685c-0.554,0.245-1.042,0.273-1.458,0.086
+		c-0.414-0.188-0.64-0.543-0.676-1.058c-0.036-0.519,0.128-1.042,0.491-1.577c0.365-0.534,0.828-0.923,1.382-1.168l10.067-4.458
+		l-0.205,30.641l4.009-1.775C100.327,83.537,104.313,81.428,104.467,83.621z"/>
 </g>
 </svg>
