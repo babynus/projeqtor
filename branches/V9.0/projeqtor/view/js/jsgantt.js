@@ -149,7 +149,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
                             pPriority,pIdPlanningMode, pPlanningMode,
                             pStatus,pHealthStatus,pQualityLevel,pTrend,pOverallProgress, pType, 
                             pValidatedCost, pAssignedCost, pRealCost, pLeftCost, pPlannedCost,
-                            pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes,pDurationContract,pElementIdRef) {
+                            pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes,pDurationContract,pElementIdRef,pFixPlan) {
   var vID    = pID;
   var vName  = pName;
   var vId	 = pId;
@@ -210,6 +210,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   var vStartInit = pStart;
   var vEndInit   = pEnd;
   var vElementIdRef=pElementIdRef;
+  var vFixPlan=pFixPlan;
   
   
   vStart = JSGantt.parseDateStr(pStart,g.getDateInputFormat());
@@ -305,7 +306,8 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   this.getCompVal  = function(){ if(vComp) return vComp; else return 0; };
   this.getCompStr  = function(){ if(vComp) return vComp+'%'; else return '0%'; };
   this.getDurationContract = function(){ return vDurationContract; };
-  this.getElementIdRef = function(){ return vElementIdRef;}
+  this.getElementIdRef = function(){ return vElementIdRef;};
+  this.getFixPlanning = function(){ return vFixPlan;};
   this.getDuration = function(vFormat){ 
     if (vMile) { 
       vDuration = '-';
@@ -1463,7 +1465,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         } else {
           //florent
           if(dojo.byId('inputDateGantBarResizeleft_'+vID) && dojo.byId('inputDateGantBarResizeleft_'+vID).value.trim()!='') vTaskStart= new Date(Date.parse("'"+dojo.byId('inputDateGantBarResizeleft_'+vID).value+"'"));
-          if(dojo.byId('inputDateGantBarResizeRight_'+vID) && dojo.byId('inputDateGantBarResizeRight_'+vID).value.trim()!='')vTaskEnd= new Date(Date.parse("'"+dojo.byId('inputDateGantBarResizeRight_'+vID).value+"'"));
+          if(dojo.byId('inputDateGantBarResizeRight_'+vID) && dojo.byId('inputDateGantBarResizeRight_'+vID).value.trim()!='') vTaskEnd= new Date(Date.parse("'"+dojo.byId('inputDateGantBarResizeRight_'+vID).value+"'"));
           vDateRowStr = JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat) + ' - ' 
             + JSGantt.formatDateStr(vTaskEnd,vDateDisplayFormat);
           vTmpEnd=(Date.parse(vMaxDate)<Date.parse(vTaskEnd))?vMaxDate:vTaskEnd;
@@ -1713,7 +1715,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	          }
   	        vRightTableTempMeeting += '</div>' ;
             var idPm=vTaskList[i].getIdPlanningMode();
-            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13' || idPm=='19' || idPm=='21') && vTaskList[i].getGroup()!=1 && !vTaskList[i].getGroup()){
+            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13' || idPm=='19' || idPm=='21') && vTaskList[i].getFixPlanning()!=1 && !vTaskList[i].getGroup()){
               // handle resizer start=======================
               leftposLeftResizer=vBarLeft-22;
               leftposdivDate=vBarLeft-43;
@@ -1723,7 +1725,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vRightTableTempMeeting +='<input  id="inputDateGantBarResizeleft_'+vID+'" name="inputDateGantBarResizeleft_'+vID+'" type="hidden" value="'+vTaskStart+'" />';
               //===========================
             }
-            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8'  || idPm=='4'  || idPm=='12') && vTaskList[i].getGroup()!=1 && !vTaskList[i].getGroup()){
+            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8'  || idPm=='4'  || idPm=='12') && vTaskList[i].getFixPlanning()!=1 && !vTaskList[i].getGroup()){
               // handle resizer end=======================
               leftposRightResizer=vBarLeft+vBarWidth-11;
               vRightTableTempMeeting +='<div class="resizerEnd" id="taskbar_'+vID+'ResizerEnd" style="display:none;left:'+leftposRightResizer+'px;" '

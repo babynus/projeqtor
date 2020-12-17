@@ -33,19 +33,23 @@ require_once "../tool/projeqtor.php";
 $id=trim((RequestHandler::isCodeSet('id'))?RequestHandler::getValue('id'):'');
 $obj=trim((RequestHandler::isCodeSet('object'))?RequestHandler::getValue('object'):'');
 $idObj=trim((RequestHandler::isCodeSet('idObj'))?RequestHandler::getValue('idObj'):'');
-$startDate=trim((RequestHandler::isCodeSet('startDate'))?RequestHandler::getValue('startDate'):'');
-$endDate=trim((RequestHandler::isCodeSet('endDate'))?RequestHandler::getValue('endDate'):'');
-$duration=trim((RequestHandler::isCodeSet('duration'))?RequestHandler::getValue('duration'):'');
+$startDate=trim((RequestHandler::isCodeSet('startDate'))?strtotime(RequestHandler::getValue('startDate')):'');
+$endDate=trim((RequestHandler::isCodeSet('endDate'))?strtotime(RequestHandler::getValue('endDate')):'');
 $user=getSessionUser();
 
-$object=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array("id"=>$id ,"refType"=>$obj, "refId"=>$idObj));
+$newStratDate = date('Y-m-d',$startDate);
+$newEndDate = date('Y-m-d',$endDate);
 
+
+
+$object=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array("id"=>$id ,"refType"=>$obj, "refId"=>$idObj));
+debugLog($newStratDate);
+debugLog($newEndDate);
 Sql::beginTransaction();
 
-$object->validatedStartDate=$startDate;
-$object->validatedEndDate=$endDate;
-$object->validatedDuration=$duration;
-$object->save();
+$object->validatedStartDate=$newStratDate;
+$object->validatedEndDate=$newEndDate;
+$result=$object->save();
 
 Sql::commitTransaction();
 ?>
