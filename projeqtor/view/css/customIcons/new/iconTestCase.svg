@@ -25,15 +25,12 @@
 			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="59.272" y1="69.415" x2="113.904" y2="16.864"/>
 	</g>
 </g>
-<g id="Calque_2_1_">
-	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M79.975,51.583V13.571h5.934V3.323H42.093v10.248h5.932v38.012c-13.17,6.055-22.316,19.354-22.316,34.799
-			c0,21.147,17.144,38.294,38.294,38.294c21.146,0,38.29-17.146,38.29-38.294C102.292,70.938,93.145,57.638,79.975,51.583z"/>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M94.896,85.794c0,17.065-13.832,30.897-30.895,30.897c-17.067,0-30.898-13.832-30.898-30.897c0,0,5.886-20.308,32.21-9.276
-			S94.896,85.794,94.896,85.794z"/>
-	</g>
+<g>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M79.975,51.583V13.571h5.935V3.323H42.093v10.248h5.932v38.012c-13.17,6.055-22.316,19.354-22.316,34.799
+		c0,21.147,17.144,38.294,38.294,38.294c21.146,0,38.29-17.146,38.29-38.294C102.292,70.938,93.145,57.638,79.975,51.583z"/>
+	<path fill="#FF0000" d="M93.293,86.27c0,16.18-13.114,29.294-29.292,29.294c-16.181,0-29.294-13.114-29.294-29.294
+		c0,0,5.58-19.253,30.538-8.795C90.202,87.935,93.293,86.27,93.293,86.27z"/>
 </g>
 <g id="Calque_5" display="none">
 </g>
