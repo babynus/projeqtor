@@ -354,3 +354,5 @@ UPDATE `${prefix}habilitationother` set scope='canDeleteAttachment' where scope=
 
 INSERT INTO `${prefix}originable` (`id`,`name`, `idle`) VALUES 
 (32,'CallForTender', 0);
+
+ALTER TABLE `${prefix}milestone` ADD `lastUpdateDateTime` datetime DEFAULT NULL;
