@@ -1455,6 +1455,7 @@
 .ProjeQtOrFlatGrey .iconHistArchive { background-image: url(customIcons/grey/iconHistArchive.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconHistArchive { background-image: url(customIcons/red/iconHistArchive.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconHistArchive { background-image: url(customIcons/new/iconHistArchive.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconHistArchiveNo { background-image: url(customIcons/new/iconHistArchiveNo.svg) !important;  background-repeat: no-repeat; }
 
 .iconHumanResource32 { background-image: url(imagesHR/iconHumanResource.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconHumanResource32 { background-image: url(customIconsHR/blue/iconHumanResource.png);  background-repeat: no-repeat; }
