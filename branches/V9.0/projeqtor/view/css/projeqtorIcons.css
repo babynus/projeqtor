@@ -1142,12 +1142,12 @@
 .ProjeQtOrFlatRed .iconEfficiency { background-image: url(customIcons/red/iconEfficiency.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconEfficiency { background-image: url(customIcons/new/iconEfficiency.svg);  background-repeat: no-repeat; }
 
-.iconEmailTemplate32 { background-image: url(images/iconEmailTemplate.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconEmailTemplate32 { background-image: url(customIcons/blue/iconEmailTemplate.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconEmailTemplate32 { background-image: url(customIcons/green/iconEmailTemplate.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconEmailTemplate32 { background-image: url(customIcons/grey/iconEmailTemplate.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconEmailTemplate32 { background-image: url(customIcons/red/iconEmailTemplate.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconEmailTemplate32 { background-image: url(customIcons/new/iconEmailTemplate.svg);  background-repeat: no-repeat; }
+.iconEmailTemplate { background-image: url(images/iconEmailTemplate.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconEmailTemplate { background-image: url(customIcons/blue/iconEmailTemplate.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconEmailTemplate { background-image: url(customIcons/green/iconEmailTemplate.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconEmailTemplate { background-image: url(customIcons/grey/iconEmailTemplate.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconEmailTemplate { background-image: url(customIcons/red/iconEmailTemplate.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconEmailTemplate { background-image: url(customIcons/new/iconEmailTemplate.svg);  background-repeat: no-repeat; }
 
 .iconExpenses { background-image: url(images/iconExpenses32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconExpenses { background-image: url(customIcons/blue/iconExpenses.png);  background-repeat: no-repeat; }
@@ -1386,12 +1386,12 @@
 .ProjeQtOrFlatRed .iconHabilitationReport { background-image: url(customIcons/red/iconHabilitationReport.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconHabilitationReport { background-image: url(customIcons/new/iconHabilitationReport.svg);  background-repeat: no-repeat; }
 
-.iconHabilitationParameter32 { background-image: url(images/iconHabilitationParameter32.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatBlue .iconHabilitationParameter32 { background-image: url(customIcons/blue/iconHabilitationParameter.png);  background-repeat: no-repeat;}
-.ProjeQtOrFlatGreen .iconHabilitationParameter32 { background-image: url(customIcons/green/iconHabilitationParameter.png);  background-repeat: no-repeat;}
-.ProjeQtOrFlatGrey .iconHabilitationParameter32 { background-image: url(customIcons/grey/iconHabilitationParameter.png);  background-repeat: no-repeat;}
-.ProjeQtOrFlatRed .iconHabilitationParameter32 { background-image: url(customIcons/red/iconHabilitationParameter.png);  background-repeat: no-repeat;}
-.ProjeQtOrNewGui .iconHabilitationParameter32 { background-image: url(customIcons/new/iconHabilitationParameter.svg);  background-repeat: no-repeat; }
+.iconHabilitationParameter { background-image: url(images/iconHabilitationParameter32.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconHabilitationParameter { background-image: url(customIcons/blue/iconHabilitationParameter.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGreen .iconHabilitationParameter { background-image: url(customIcons/green/iconHabilitationParameter.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatGrey .iconHabilitationParameter { background-image: url(customIcons/grey/iconHabilitationParameter.png);  background-repeat: no-repeat;}
+.ProjeQtOrFlatRed .iconHabilitationParameter { background-image: url(customIcons/red/iconHabilitationParameter.png);  background-repeat: no-repeat;}
+.ProjeQtOrNewGui .iconHabilitationParameter { background-image: url(customIcons/new/iconHabilitationParameter.svg);  background-repeat: no-repeat; }
 
 .iconHealth { background-image: url(images/iconHealth32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconHealth { background-image: url(customIcons/blue/iconHealth.png);  background-repeat: no-repeat;}
