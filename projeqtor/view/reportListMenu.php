@@ -20,7 +20,7 @@ foreach ($lst as $h) {
 
 if (!$categ) {
   echo "<div class='messageData headerReport' style= ''>";
-  echo i18n('colCategory');
+  echo ucfirst(i18n('colCategory'));
   echo "</div>";
   $listCateg=SqlList::getList('ReportCategory');
   echo "<ul class='bmenu'>";
@@ -35,9 +35,13 @@ if (!$categ) {
   echo "<div class='messageData headerReport' style= ''>";
   echo i18n($catObj->name);
   echo "</div>";
-  echo "<div class='arrowBack' style= 'position:absolute;top:0px;left:0px;'>";
-  echo "<span class='dijitInline dijitButtonNode backButton'  onClick='loadDiv(\"../view/reportListMenu.php\",\"reportMenuList\")'";
-  echo formatBigButton('Back');
+  echo "<div class='arrowBack' style='position:absolute;top:5px;left:25px;'>";
+  echo "<span class='dijitInline dijitButtonNode backButton'  onClick='loadDiv(\"../view/reportListMenu.php\",\"reportMenuList\")' style='border:unset;'>";
+  if(isNewGui()){
+    echo formatNewGuiButton('Back', 22);
+  }else{
+    echo formatBigButton('Back');
+  }
   echo "</div>";
   echo '</span>';
   
