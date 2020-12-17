@@ -2326,7 +2326,7 @@
 .ProjeQtOrFlatGreen .iconQuotationType { background-image: url(customIcons/green/iconClientQuotationType.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconQuotationType { background-image: url(customIcons/grey/iconClientQuotationType.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconQuotationType { background-image: url(customIcons/red/iconClientQuotationType.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconQuotationType { background-image: url(customIcons/new/iconClientQuotationType.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconQuotationType { background-image: url(customIcons/new/iconQuotationType.svg);  background-repeat: no-repeat; }
 
 
 
