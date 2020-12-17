@@ -18,16 +18,16 @@
 				<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
 				57.073,69.902 66.047,60.93 66.047,91.588 			"/>
 			<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-				M19.379,93.488c0-5.784,4.689-10.475,10.472-10.475c5.783,0,10.474,4.689,10.474,10.475c0,5.783-4.691,10.472-10.474,10.472
+				M19.379,93.488c0-5.784,4.689-10.475,10.472-10.475c5.783,0,10.474,4.688,10.474,10.475c0,5.783-4.691,10.472-10.474,10.472
 				c0,0-10.472,0.804-10.472,10.574h20.945"/>
 			<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-				M90.787,94.881c0-4.251,3.443-7.695,7.695-7.695c4.248,0,7.692,3.444,7.692,7.695c0,4.248-3.444,7.693-7.692,7.693l0.319-0.004
-				c4.25,0,7.694,3.445,7.694,7.695s-3.444,7.695-7.694,7.695c-4.249,0-7.694-3.445-7.694-7.695"/>
+				M90.787,94.881c0-4.251,3.443-7.695,7.695-7.695c4.248,0,7.691,3.444,7.691,7.695c0,4.248-3.443,7.693-7.691,7.693l0.318-0.004
+				c4.25,0,7.694,3.445,7.694,7.695s-3.444,7.694-7.694,7.694c-4.248,0-7.693-3.444-7.693-7.694"/>
 		</g>
 		<g>
 			<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-				M73.663,13.712c0,5.024-4.073,13.01-9.101,13.01c-5.026,0-9.1-7.986-9.1-13.01c0-5.026,4.073-9.102,9.1-9.102
-				C69.59,4.61,73.663,8.686,73.663,13.712z"/>
+				M73.663,13.712c0,5.024-4.073,13.01-9.101,13.01c-5.026,0-9.101-7.986-9.101-13.01c0-5.026,4.073-9.102,9.101-9.102
+				S73.663,8.686,73.663,13.712z"/>
 			
 				<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
 				61.039,25.382 61.051,29.633 45.213,33.987 45.213,42.404 83.281,42.404 83.281,33.943 68.018,29.486 67.988,25.483 			"/>
@@ -37,21 +37,21 @@
 <g id="Calque_2_1_">
 	<g>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M51.303,46.318l-38.97,15.316C5.535,64.307,2.16,72.055,4.831,78.85l2.277,5.793c2.671,6.797,10.419,10.172,17.216,7.5
-			l4.357-1.713l25.242,20.108c1.923,1.534,4.752,1.214,6.287-0.71l5.822-7.311c1.534-1.925,1.215-4.754-0.71-6.287L48.341,82.703
-			l14.953-5.877"/>
+			M55.517,49.159L13.255,65.768C5.883,68.667,2.223,77.069,5.12,84.438l2.469,6.282c2.896,7.371,11.299,11.031,18.67,8.134
+			l4.725-1.857l18.914,14.096c2.086,1.664,5.153,1.316,6.818-0.77l6.314-7.929c1.664-2.088,1.317-5.155-0.77-6.817l-9.956-6.959
+			l16.216-6.374"/>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M78.648,42.548L78.648,42.548c4.035-1.587,8.377-0.249,9.644,2.976l2.651,6.746c1.268,3.222-1,7.158-5.037,8.745l0,0"/>
+			M85.172,45.07L85.172,45.07c4.376-1.721,9.084-0.27,10.458,3.228l2.875,7.316c1.375,3.494-1.084,7.763-5.463,9.483l0,0"/>
 		
 			<polygon fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-			64.738,80.503 49.742,42.348 67.895,15.186 96.15,87.08 		"/>
+			70.087,86.23 53.824,44.854 73.51,15.397 104.151,93.363 		"/>
 	</g>
 	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="96.723" y1="42.871" x2="120.623" y2="30.075"/>
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="104.772" y1="45.42" x2="120.887" y2="36.793"/>
 	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="90.854" y1="33.088" x2="102.954" y2="15.41"/>
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="98.407" y1="34.811" x2="107.609" y2="21.369"/>
 	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="99.854" y1="53.398" x2="123.311" y2="56.616"/>
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="108.168" y1="56.836" x2="124.808" y2="59.119"/>
 </g>
 <g id="Calque_3" display="none">
 	<g display="inline">
@@ -105,7 +105,7 @@
 				M31.592,64.039c-4.171,0-7.551-3.379-7.551-7.548l0,0c0-4.171,3.379-7.55,7.551-7.55h10.991c4.169,0,7.55,3.379,7.55,7.55l0,0"/>
 			<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 				M31.592,64.039h10.991c4.169,0,7.55,3.379,7.55,7.551l0,0c0,4.171-3.381,7.551-7.55,7.551H31.592
-				c-4.171,0-7.551-3.38-7.551-7.551"/>
+				c-4.171,0-7.551-3.379-7.551-7.551"/>
 		</g>
 		
 			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="37.086" y1="48.94" x2="37.086" y2="41.897"/>
