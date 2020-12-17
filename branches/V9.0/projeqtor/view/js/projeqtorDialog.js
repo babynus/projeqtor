@@ -7558,14 +7558,15 @@ function undoItemButton(curClass,curId) {
     target=getTargetFromCurrentScreen(currentScreen);
     loadContent(target,"centerDiv"); 
   }
-  if(isNewGui){
-    refreshSelectedMenuLeft('menu'+currentItem[0]);
-  }
   enableWidget('menuBarRedoButton');
   if (historyPosition == 0) {
     disableWidget('menuBarUndoButton');
   }
   selectIconMenuBar(currentItem[0]);
+  if(isNewGui){
+    refreshSelectedMenuLeft('menu'+currentItem[0]);
+    refreshSelectedItem(currentItem[0], defaultMenu);
+  }
 }
 
 function getTargetFromCurrentScreen(currentScreen){
