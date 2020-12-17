@@ -1285,7 +1285,8 @@ class Parameter extends SqlElement {
     if (! $showChecklistAll) {
       unset($parameterList['displayChecklist']);
     }
-    if(!isNewGui()){
+    $newGui = Parameter::getGlobalParameter('newGui');
+    if(!isNewGui() or !$newGui){
       unset($parameterList['menuLeftDisplayMode']);
       unset($parameterList['menuBarTopMode']);
       unset($parameterList['newItemAccessMode']);
