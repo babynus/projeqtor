@@ -193,7 +193,7 @@ class Menu extends SqlElement {
     if($isReportMenu==true){
       $menuClass=' menuBarItem ';
       if (in_array($menu->name,$customMenuArray)) $menuClass.=' menuBarCustom';
-      $class='Report';
+      $class='Reports';
       echo '<div id="dndItem'.$menu->name.'" name="dndItem'.$menu->name.'" title="' .i18n($menu->name) . '" class="dojoDndItem itemBar" dndType="menuBar" style="float:left;'.$marginTop.'">';
       echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$menu->name.'" ';
       echo 'oncontextmenu="event.preventDefault();hideReportFavoriteTooltip(0);';
