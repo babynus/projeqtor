@@ -1006,7 +1006,7 @@ if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
     
         <div>&nbsp;</div>
     
-        <div><img onClick="showImage(\'Note\',\'../view/img/newGui.png\',\' \');" src="../view/img/newGui.png" style="height:514px; width:1080px;cursor:pointer;" /></div>
+        <div style="margin-left:100px"><img onClick="showImage(\'Note\',\'../view/img/newGui.png\',\' \');" src="../view/img/newGui.png" style="width:500px;cursor:pointer;" title="'.i18n("clickToView").'"/></div>
     
         <div>'.i18n('newGuiMessageLegalBottom').'</div>';
     $MessageLegal->endDate='3721-07-21 21:21:21';
