@@ -185,6 +185,16 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 
 function sortMenus(&$listMenus, &$result, $parent,$level,$rightPluginAcces=false ){
   $level++;
+  $hr=new HabilitationReport();
+  $user=getSessionUser();
+  $lst=$hr->getSqlElementsFromCriteria(array('idProfile'=>$user->idProfile, 'allowAccess'=>'1'), false);
+  foreach ($lst as $h) {
+    $reportHb=$h->idReport;
+    $nameReport=SqlList::getNameFromId('Report', $reportHb, false);
+    if (! Module::isReportActive($nameReport)) continue;
+    $category=SqlList::getFieldFromId('Report', $reportHb, 'idReportCategory',false);
+    $allowedCategory[$category]=$category;
+  }
   foreach ($listMenus as $id=>$menu){
     if(!$rightPluginAcces && $menu->name=='navPlugin')continue;
     if($menu->idParent == $parent){
@@ -192,7 +202,16 @@ function sortMenus(&$listMenus, &$result, $parent,$level,$rightPluginAcces=false
       	$menu->idParent=0;
       }
       $key=$level.'-'.numericFixLengthFormatter($menu->idParent,5).'-'.numericFixLengthFormatter($menu->sortOrder,5);
-      $result[$key] = array('level'=>$level,'objectType'=>'menu','object'=>$menu);
+      $isMenu=true;
+      if($menu->idReport!=0){
+        $report=new Report($menu->idReport);
+        if(in_array($report->idReportCategory, $allowedCategory)){
+          $isMenu=false;
+        }else{
+          continue;
+        }
+      }
+      $result[$key] = array('level'=>$level,'objectType'=>($isMenu)?'menu':'reportDirectInMenu','object'=>$menu);
       sortMenus($listMenus, $result, $menu->id,$level,$rightPluginAcces);
     }
   }
@@ -232,7 +251,7 @@ function getReportsMenu(){
   $level=2;
   $hr=new HabilitationReport();
   $user=getSessionUser();
-  $allowedReport=array();
+  //$allowedReport=array();
   $allowedCategory=array();
   $lst=$hr->getSqlElementsFromCriteria(array('idProfile'=>$user->idProfile, 'allowAccess'=>'1'), false);
   $res=array();
@@ -243,7 +262,7 @@ function getReportsMenu(){
     $report=$h->idReport;
     $nameReport=SqlList::getNameFromId('Report', $report, false);
     if (! Module::isReportActive($nameReport)) continue;
-    $allowedReport[$report]=$report;
+    //$allowedReport[$report]=$report;
     $category=SqlList::getFieldFromId('Report', $report, 'idReportCategory',false);
     $allowedCategory[$category]=$category;
   }
@@ -385,22 +404,24 @@ function getNavigationMenuLeft (){
   $allNavSect=array();
   foreach ($result as $id=>$context){
       $context=$context['object'];
-      if($context->idMenu!=0){
-        $unset=false;
-        $menu=new Menu($context->idMenu);
-        if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) $unset=true; 
-        if (! $menu->canDisplay() )  $unset=true;
-        if (!$isLanguageActive and $menu->name=="menuLanguage")  $unset=true;
-        if (!Module::isMenuActive($menu->name))  $unset=true;
-        if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) $unset=true;
-        if($unset==true){
-          unset($result[$id]);
-          continue;
+      if($context->idMenu){
+        if($context->idMenu!=0 ){
+          $unset=false;
+          $menu=new Menu($context->idMenu);
+          if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) $unset=true; 
+          if (! $menu->canDisplay() )  $unset=true;
+          if (!$isLanguageActive and $menu->name=="menuLanguage")  $unset=true;
+          if (!Module::isMenuActive($menu->name))  $unset=true;
+          if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) $unset=true;
+          if($unset==true){
+            unset($result[$id]);
+            continue;
+          }
+          $lstMenuId[]=$context->idParent;
+        }else if($context->id!=6 and $rightReportAcces ){
+           $navTa[$id]=$context->id;
+           $allNavSect[$context->id]=$context->idParent;
         }
-        $lstMenuId[]=$context->idParent;
-      }else if($context->id!=6 and $rightReportAcces){
-         $navTa[$id]=$context->id;
-         $allNavSect[$context->id]=$context->idParent;
       }
   }
 
@@ -420,7 +441,6 @@ function getNavigationMenuLeft (){
   foreach ($allNavSect as $idN=>$idP){
     foreach ($exist as $idT=>$valT){
       if($idN==$valT and array_search($idP, $navTa)){
-        debugLog(array_search($idP, $navTa));
          unset($navTa[array_search($idP, $navTa)]);
       }
     }
@@ -472,6 +492,10 @@ function drawLeftMenuListNewGui($displayMode){
       }
     }else{
       $obj=$menu['object'];
+      if( $menu['objectType']=='reportDirectInMenu'){
+         $report=New Report($obj->idReport);
+         $file=$report->file;
+      }
     }
     //
     // draw ul element
@@ -486,8 +510,8 @@ function drawLeftMenuListNewGui($displayMode){
     }
     //
     //draw menu in li element
-    if( $obj->idMenu!=0 and $menu['objectType']!='pluginNotInst'){
-      if( $menu['objectType']!='reportDirect'){
+    if( (($obj->idMenu!=0 and $obj->idReport==0) or ($obj->idMenu==0 and $obj->idReport!=0) ) and $menu['objectType']!='pluginNotInst'){
+      if( $menu['objectType']!='reportDirect' and $menu['objectType']!='reportDirectInMenu'){
         $realMenu=new Menu($obj->idMenu);
         $menuName=$realMenu->name;
         $menuNameI18n = i18n($menuName);
@@ -518,8 +542,13 @@ function drawLeftMenuListNewGui($displayMode){
         $result.='<div id="div'.$obj->name.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
       }else{
         $classEl="Reports";
+        if($menu['objectType']=='reportDirectInMenu'){
+            $reportDirectInMenu=new Report($obj->idReport);
+        }
+        $idMenu=($menu['objectType']=='reportDirectInMenu')?$reportDirectInMenu->idReportCategory:$obj->idMenu;
+        $objId=($menu['objectType']=='reportDirectInMenu')?$reportDirectInMenu->id:$obj->id;
         if($obj->name!='menuReports'){
-          $funcOnClick="loadMenuReportDirect(".$obj->idMenu.",".$obj->id.");showMenuBottomParam('Report','true')";
+          $funcOnClick="loadMenuReportDirect(".$idMenu.",".$objId.");showMenuBottomParam('Report','true')";
         }else{
           $classEl=substr($obj->name,4);
           $menuName = addslashes(i18n($obj->name));
@@ -533,6 +562,7 @@ function drawLeftMenuListNewGui($displayMode){
           $mode='remove';
           $class="menu__as__Fav";
         }
+        $menu['objectType']=($menu['objectType']=='reportDirectInMenu')?'reportDirect':$menu['objectType'];
         $funcuntionFav="addRemoveFavMenuLeft('div".ucfirst($obj->name)."', '".$obj->name."','".$mode."','".$menu['objectType']."');";
         $styleDiv="display:none;";
         

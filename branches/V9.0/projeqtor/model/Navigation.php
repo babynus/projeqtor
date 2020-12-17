@@ -35,6 +35,7 @@ class Navigation extends SqlElement {
   public $name;
   public $idParent;
   public $idMenu;
+  public $idReport;
   public $sortOrder=0;
   public $_isNameTranslatable = true;
   public $_noHistory=true; // Will never save history for this object
