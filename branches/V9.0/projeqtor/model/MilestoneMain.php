@@ -39,6 +39,7 @@ class MilestoneMain extends SqlElement {
   public $idMilestoneType;
   public $idProject;
   public $creationDate;
+  public $lastUpdateDateTime;
   public $idUser;
   public $Origin;
   public $description;
