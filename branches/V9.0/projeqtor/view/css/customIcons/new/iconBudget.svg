@@ -3,24 +3,28 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M60.202,34.699c0,0-25.667-4.334-43.333,26.666
-	c-17.667,31-6,53,0,57.667s9.667,5.333,18.333,5.333s60.666,0,60.666,0s10.001-0.667,17.334-8s14.333-32.666-6.667-58.333
-	S64.863,34.878,60.202,34.699z"/>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M52.172,34.816c0,0-19.636-24.451-15.97-25.784s22.666,1.333,25.666,0s23.001-8.333,24.334-4s4.364,7.499-13.651,30.583l-8.19-0.896
-	l-2.858-0.012l-3.292-0.186L52.172,34.816z"/>
 <g>
 	<g>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M56.828,80.815c-5.449,0-9.86-4.412-9.86-9.859l0,0c0-5.444,4.411-9.856,9.86-9.856h14.348c5.442,0,9.857,4.412,9.857,9.856l0,0"
+			M56.828,80.814c-5.449,0-9.86-4.412-9.86-9.858l0,0c0-5.444,4.411-9.856,9.86-9.856h14.348c5.442,0,9.857,4.412,9.857,9.856l0,0"
 			/>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M56.828,80.815h14.348c5.442,0,9.857,4.411,9.857,9.854l0,0c0,5.445-4.415,9.857-9.857,9.857H56.828
-			c-5.449,0-9.86-4.412-9.86-9.857"/>
+			M56.828,80.814h14.348c5.442,0,9.857,4.412,9.857,9.854l0,0c0,5.445-4.415,9.856-9.857,9.856H56.828
+			c-5.449,0-9.86-4.411-9.86-9.856"/>
 	</g>
 	
 		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="63.998" y1="61.099" x2="63.998" y2="51.908"/>
 	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="63.998" y1="109.722" x2="63.998" y2="100.526"/>
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="63.998" y1="109.723" x2="63.998" y2="100.525"/>
+</g>
+<g>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M64.715,2.794L53.338,12.22L37.085,5.719l12.026,24.38c0,0,3.25,3.249,15.603,3.249c12.352,0,15.602-3.249,15.602-3.249
+		l12.026-24.38L76.09,12.22L64.715,2.794z"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M49.112,30.099l-2.927,9.425c0,0,8.777,4.722,18.53,4.722c9.751,0,18.526-4.722,18.526-4.722l-2.925-9.425"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M46.185,39.524c0,0-70.041,52.058-11.191,79.818c12.848,6.061,29.721,5.668,29.721,5.668s17.421,0.04,30.022-6.135
+		c55.858-27.371-11.496-79.351-11.496-79.351"/>
 </g>
 </svg>

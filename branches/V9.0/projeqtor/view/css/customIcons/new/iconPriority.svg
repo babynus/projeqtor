@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Calque_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M11.128,64.773H37.06
-		v18.568h10.16l-23.126,27.726L0.969,83.342h10.159V64.773z"/>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
+	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<g id="Calque_3">
 </g>
-<g>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M87.845,64.773h25.933
-		v18.568h10.16l-23.125,27.726L77.684,83.342h10.161V64.773z"/>
+<g id="Calque_2">
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M65.876,122.113
+		c-1.036,1.038-2.717,1.038-3.753,0L5.886,65.875c-1.037-1.035-1.037-2.715,0-3.751L62.123,5.886c1.036-1.037,2.717-1.037,3.753,0
+		l56.237,56.238c1.036,1.036,1.036,2.716,0,3.751L65.876,122.113z"/>
+	<path fill="#FF0000" d="M65.021,95.595c-0.563,0.562-1.477,0.564-2.04,0L32.406,65.021c-0.563-0.563-0.563-1.477,0-2.04
+		L62.98,32.406c0.563-0.563,1.477-0.563,2.04,0L95.596,62.98c0.562,0.563,0.562,1.476,0,2.039L65.021,95.595z"/>
 </g>
-<g>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M79.167,70.342H45.291
-		V46.088H32.017L62.228,9.863L92.44,46.088H79.167V70.342z"/>
-</g>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="46.61" y1="102.187" x2="77.847" y2="102.187"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="49.4" y1="92.498" x2="75.057" y2="92.498"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="54.498" y1="83.5" x2="69.959" y2="83.5"/>
-<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="43.047" y1="112.067" x2="81.41" y2="112.067"/>
 </svg>
