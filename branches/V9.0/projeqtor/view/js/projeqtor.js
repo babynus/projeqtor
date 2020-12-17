@@ -3934,6 +3934,10 @@ if (target==undefined) target='object';
     stockHistory(eltClass, eltId);
   }
   selectIconMenuBar(eltClass);
+  if(isNewGui){
+    refreshSelectedMenuLeft('menu'+eltClass);
+    refreshSelectedItem(eltClass, defaultMenu);
+  }
 }
 
 function runReport() {

@@ -332,7 +332,7 @@
       <div class="menuBarSeparatorDiv" style=""></div>
     </td>
     <td style="vertical-align: middle;text-align:center;width:32px;">
-        <div id="archiveOn" style="padding-left: 4px;cursor:pointer;<?php echo $display;?>" onClick="setArchiveMode();">
+        <div id="archiveOn" style="padding-left: 4px;cursor:pointer;<?php echo $display;?>" onClick="setArchiveMode();" title="<?php echo i18n('archiveOn');?>">
           <div class="iconHistArchive iconSize22 imageColorNewGui" style="width:22px;height:22px;position: relative;top: 3px;" title="<?php echo i18n('archiveOn');?>"></div>
           <div style="top: -8px;position: relative;left: 5px;">
             <img style="height:12px;width:12px;" src="img/iconCronRunning.png">
