@@ -2,35 +2,32 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1"
-	 id="svg15" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" sodipodi:docname="iconKanban.svg" inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+	 id="svg15" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" sodipodi:docname="iconKanban.svg"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px" height="128px"
 	 viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<sodipodi:namedview  bordercolor="#666666" borderopacity="1" inkscape:cx="24.979592" guidetolerance="10" showgrid="false" inkscape:zoom="15.3125" pagecolor="#ffffff" gridtolerance="10" inkscape:cy="24" id="namedview17" objecttolerance="10" inkscape:window-x="-8" inkscape:window-width="1920" inkscape:window-height="1017" inkscape:pageopacity="0" inkscape:document-rotation="0" inkscape:current-layer="svg15" inkscape:pageshadow="2" inkscape:window-y="-8" inkscape:window-maximized="1">
+<sodipodi:namedview  objecttolerance="10" inkscape:cy="24" gridtolerance="10" pagecolor="#ffffff" inkscape:zoom="15.3125" showgrid="false" guidetolerance="10" inkscape:cx="24.979592" borderopacity="1" bordercolor="#666666" id="namedview17" inkscape:window-maximized="1" inkscape:document-rotation="0" inkscape:pageopacity="0" inkscape:window-height="1017" inkscape:window-width="1920" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:pageshadow="2" inkscape:current-layer="svg15">
 	</sodipodi:namedview>
 <title  id="title6"></title>
 <g id="Calque_3">
 	<g>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M15.862,67.898v54.877h102.932V63.673h-47.89 M56.232,108.569V77.883l26.576,15.342L56.232,108.569z"/>
+			M21.862,74.919v50.335h102.932V66.152h-47.89 M62.232,111.047V80.361l26.577,15.342L62.232,111.047z"/>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M70.904,63.479h47.89V48.482h-47.89"/>
+			M76.904,65.958h47.89V50.961h-47.89"/>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M70.904,32.309l43.438-12.689l-4.201-14.396L70.904,16.685"/>
+			M76.904,34.788l43.438-12.689l-4.201-14.396L76.904,19.164"/>
 		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M56.232,108.569l26.576-15.345L56.232,77.883V108.569z"/>
+			M62.232,111.047l26.577-15.344L62.232,80.361V111.047z"/>
 	</g>
 </g>
-<g id="Calque_2_1_">
-	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M61.384,57.008c0,0.578-0.469,1.048-1.051,1.048H10.256c-0.58,0-1.049-0.471-1.049-1.048V6.928c0-0.579,0.469-1.048,1.049-1.048
-			h50.079c0.58,0,1.049,0.469,1.049,1.048V57.008L61.384,57.008z"/>
-		<circle fill="#FF0000" cx="21.136" cy="18.866" r="3.706"/>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M28.935,18.866h22.021"/>
-		<circle fill="#FF0000" cx="21.136" cy="31.968" r="3.706"/>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M28.935,31.968h22.021"/>
-		<circle fill="#FF0000" cx="21.136" cy="45.068" r="3.706"/>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M28.935,45.066h22.021"/>
-	</g>
-</g>
+<path fill="#FF0000" d="M67.904,2.644H5.654c-1.657,0-3,1.343-3,3v62.25c0,1.657,1.343,3,3,3h62.25c1.656,0,3-1.343,3-3V5.644
+	C70.904,3.987,69.561,2.644,67.904,2.644z M17.883,56.216c-2.768,0-5.011-2.242-5.011-5.01s2.243-5.01,5.011-5.01
+	c2.767,0,5.01,2.242,5.01,5.01S20.65,56.216,17.883,56.216z M17.883,40.979c-2.768,0-5.011-2.243-5.011-5.01
+	c0-2.768,2.243-5.011,5.011-5.011c2.767,0,5.01,2.243,5.01,5.011C22.893,38.735,20.65,40.979,17.883,40.979z M17.883,25.741
+	c-2.768,0-5.011-2.244-5.011-5.01c0-2.768,2.243-5.012,5.011-5.012c2.767,0,5.01,2.244,5.01,5.012
+	C22.893,23.497,20.65,25.741,17.883,25.741z M56.51,55.364H32.783c-2.305,0-4.174-1.87-4.174-4.176s1.869-4.176,4.174-4.176H56.51
+	c2.306,0,4.175,1.87,4.175,4.176S58.816,55.364,56.51,55.364z M56.51,40.126H32.783c-2.305,0-4.174-1.869-4.174-4.176
+	c0-2.305,1.869-4.175,4.174-4.175H56.51c2.306,0,4.175,1.87,4.175,4.175C60.685,38.257,58.816,40.126,56.51,40.126z M56.51,24.888
+	H32.783c-2.305,0-4.174-1.869-4.174-4.175s1.869-4.175,4.174-4.175H56.51c2.306,0,4.175,1.869,4.175,4.175
+	S58.816,24.888,56.51,24.888z"/>
 </svg>

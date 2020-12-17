@@ -9,29 +9,29 @@
 			<g>
 				
 					<path fill="#FF0000" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-					M80.127,99.258v13.352l-5.826,5.717c0,0-3.752,3.396-11.157,3.396c-7.404,0-11.156-3.396-11.156-3.396l-5.828-5.717V99.258
+					M80.127,102.258v13.352l-5.826,5.718c0,0-3.752,3.396-11.157,3.396c-7.404,0-11.156-3.396-11.156-3.396l-5.828-5.718v-13.352
 					H80.127z"/>
 				
 					<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-					M46.16,99.258c0,0,0.25-2.619,0-3.736c-0.267-1.181-0.625-8.699-3.949-12.646C29.54,68.748,31.097,59.178,31.097,59.178
+					M46.16,102.258c0,0,0.25-2.619,0-3.736c-0.267-1.181-0.625-8.698-3.949-12.646C29.54,71.748,31.097,62.178,31.097,62.178
 					c0-17.705,14.346-32.06,32.047-32.074c17.699,0.014,32.043,14.37,32.043,32.074c0,0,1.56,9.57-11.112,23.696
-					c-3.325,3.946-3.683,11.467-3.948,12.647c-0.25,1.117,0,3.735,0,3.735L46.16,99.258L46.16,99.258z"/>
+					c-3.325,3.946-3.683,11.467-3.948,12.647c-0.25,1.117,0,3.734,0,3.734L46.16,102.258L46.16,102.258z"/>
 			</g>
 		</g>
 		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="64.375" y1="2.904" x2="64.375" y2="17.237"/>
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="64.375" y1="5.904" x2="64.375" y2="20.237"/>
 		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="103.491" y1="19.415" x2="93.354" y2="29.551"/>
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="103.491" y1="22.415" x2="93.354" y2="32.551"/>
 		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="119.473" y1="58.75" x2="105.139" y2="58.75"/>
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="119.473" y1="61.75" x2="105.139" y2="61.75"/>
 		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="102.963" y1="97.863" x2="92.825" y2="87.727"/>
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="102.963" y1="100.863" x2="92.825" y2="90.727"/>
 		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="24.513" y1="97.334" x2="34.649" y2="87.199"/>
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="24.513" y1="100.334" x2="34.649" y2="90.199"/>
 		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="8.528" y1="58" x2="22.867" y2="58"/>
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="8.528" y1="61" x2="22.867" y2="61"/>
 		
-			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="25.042" y1="18.888" x2="35.177" y2="29.022"/>
+			<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="25.042" y1="21.888" x2="35.177" y2="32.022"/>
 	</g>
 </g>
 <g id="Calque_2" display="none">
