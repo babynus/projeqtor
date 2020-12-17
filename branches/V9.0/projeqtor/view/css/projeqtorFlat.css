@@ -575,10 +575,6 @@ body .ProjeQtOrFlatBlue {
 
 .ProjeQtOrFlatBlue .iconRight { background-image: url(images/iconRight.png);  background-repeat: no-repeat;}
 
-.ProjeQtOrFlatBlue .iconRenewal32 { background-image: url(customIcons/blue/iconRenewal.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatBlue .iconRenewal22 { background-image: url(customIcons/blue/iconRenewal.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatBlue .iconRenewal16 { background-image: url(customIcons/blue/iconRenewal.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
 .ProjeQtOrFlatBlue .iconNotifiable32 { background-image: url(customIcons/green/iconNotifiable.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatBlue .iconNotifiable22 { background-image: url(customIcons/green/iconNotifiable.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconNotifiable16 { background-image: url(customIcons/green/iconNotifiable.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -1150,10 +1146,6 @@ body .ProjeQtOrFlatRed {
 
 .ProjeQtOrFlatRed .iconRight { background-image: url(images/iconRight.png);  background-repeat: no-repeat;}
 
-.ProjeQtOrFlatRed .iconRenewal32 { background-image: url(customIcons/red/iconRenewal.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatRed .iconRenewal22 { background-image: url(customIcons/red/iconRenewal.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatRed .iconRenewal16 { background-image: url(customIcons/red/iconRenewal.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
 .ProjeQtOrFlatRed .iconNotifiable32 { background-image: url(customIcons/red/iconNotifiable.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconNotifiable22 { background-image: url(customIcons/red/iconNotifiable.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconNotifiable16 { background-image: url(customIcons/red/iconNotifiable.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -1672,15 +1664,7 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconRight22 { background-image: url(customIcons/green/iconRight.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconRight16 { background-image: url(customIcons/green/iconRight.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatGreen .iconRenewal32 { background-image: url(customIcons/green/iconRenewal.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGreen .iconRenewal22 { background-image: url(customIcons/green/iconRenewal.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGreen .iconRenewal16 { background-image: url(customIcons/green/iconRenewal.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
 .ProjeQtOrFlatGreen .iconSelect { background-image: url(images/iconSelect.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.ProjeQtOrFlatGreen .iconTranslation32 { background-image: url(customIcons/green/iconTranslation.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGreen .iconTranslation22 { background-image: url(customIcons/green/iconTranslation.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGreen .iconTranslation16 { background-image: url(customIcons/green/iconTranslation.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 .ProjeQtOrFlatGreen .iconContractUnit32 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconContractUnit22 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
@@ -2190,15 +2174,7 @@ body .ProjeQtOrFlatGrey {
 /* =============================================================================== */
 
 
-.ProjeQtOrFlatGrey .iconRenewal32 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGrey .iconRenewal22 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGrey .iconRenewal16 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
-
 .ProjeQtOrFlatGrey .iconSelect { background-image: url(images/iconSelect.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
-.ProjeQtOrFlatGrey .iconTranslation32 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGrey .iconTranslation22 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGrey .iconTranslation16 { background-image: url(customIcons/grey/iconTranslation.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 .ProjeQtOrFlatGrey .iconContractUnit32 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconContractUnit22 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
