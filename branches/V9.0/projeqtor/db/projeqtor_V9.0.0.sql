@@ -14,9 +14,7 @@ CREATE TABLE `${prefix}navigation` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-TRUNCATE navigation; -- debugLog (for tests only)
--- INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`) VALUES -- debugLog (for tests only)
-INSERT INTO `navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`) VALUES
+INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`) VALUES
 -- 0 ------------------------------------------------------ root level
 (9,'menuToday',0,1,10),
 (1,'navPlanning',0,0,20),
