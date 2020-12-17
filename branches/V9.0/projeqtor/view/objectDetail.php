@@ -3548,7 +3548,7 @@ function drawHistoryFromObjects($refresh=false) {
   $histListApprover=array();
   $showArchiveValue=1;
   $showArchive=false;
-  if(getSessionValue('showArchive')==1){
+  if(getSessionValue('showArchive')=="1"){
       $showArchive=true;
       $showArchiveValue=0;
   }
@@ -3596,7 +3596,8 @@ function drawHistoryFromObjects($refresh=false) {
     $histArchive= new HistoryArchive();
     $histArchiveList=$histArchive->getSqlElementsFromCriteria(null, false, $where, $order);
     if(count($histArchiveList)==0){
-      $showArchive=false;
+      //$showArchive=false;
+      //$showArchiveValue=1;
     }
     $historyList=array_merge($historyList, $histArchiveList);
   }
@@ -3638,15 +3639,15 @@ function drawHistoryFromObjects($refresh=false) {
   if( (RequestHandler::isCodeSet('dialog') and RequestHandler::getValue('dialog')=='dialogHistory') or $print ){
     // Done on dynamicDialogHistory
   }else{
-    echo '<div style="position:absolute;right:6px;top:3px;">';
-      if($showArchive==true){
-      echo '  <button id="historyArchive" title="'.i18n('helpCloseHistoryArchive').'" region="center" dojoType="dijit.form.Button"  iconClass="iconButtonMark16 iconButtonMark  iconSize16" > ';
+    echo '<div style="position:absolute;right:6px;'.((isNewGui())?'top:15px;':'top:3px;').'">';
+    if($showArchive==true){
+      echo '  <button id="historyArchiveDetail" title="'.i18n('helpCloseHistoryArchive').'" region="center" dojoType="dijit.form.Button" class="detailButton"  iconClass="imageColorNewGui iconButtonMark16 iconButtonMark  iconHistArchiveNo iconSize16" > ';
     }else{
-      echo '  <button id="historyArchive" title="'.i18n('helpShowHistoryArchive').'" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
+      echo '<button id="historyArchiveDetail" title="'.i18n('helpShowHistoryArchive').'" region="center" dojoType="dijit.form.Button"  class="detailButton" iconClass="imageColorNewGui iconHistArchive16 iconHistArchive iconSize16" > ';
     }
     echo '     <script type="dojo/connect" event="onClick" args="evt">';
-    echo '         saveDataToSession("showArchive",'.$showArchiveValue.');';
-    echo '         loadContent("objectDetail.php", "detailDiv", "listForm")';
+    echo '         var callBack=function() {loadContent("objectDetail.php?refreshHistory=true", dojo.byId("objectClass").value+"_history", "listForm");};';
+    echo '         saveDataToSession("showArchive","'.$showArchiveValue.'",false,callBack);';
     echo '     </script>';
     echo '  </button>';
     echo '</div>';
