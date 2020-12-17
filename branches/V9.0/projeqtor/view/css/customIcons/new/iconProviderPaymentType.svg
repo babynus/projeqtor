@@ -18,20 +18,14 @@
 <line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="58.476" y1="106.91" x2="86.182" y2="116.579"/>
 <circle fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="102.046" cy="114.937" r="10.951"/>
 <g>
-	<path fill="none" stroke="#FF0000" stroke-width="2" stroke-miterlimit="10" d="M96.228,89.691c0.203,1.405-0.772,2.707-2.178,2.91
-		L53.469,98.46c-1.405,0.203-2.707-0.771-2.91-2.176l-3.791-26.262c-0.203-1.404,0.771-2.708,2.175-2.911l40.581-5.858
-		c1.404-0.203,2.708,0.772,2.91,2.177L96.228,89.691L96.228,89.691z"/>
-	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="2" stroke-miterlimit="10" d="M84.564,89.352
-			c0.911,0.46,1.966,0.656,3.053,0.499c2.816-0.406,4.77-3.019,4.363-5.834s-3.02-4.77-5.836-4.362
-			c-1.086,0.156-2.043,0.643-2.787,1.343"/>
-		<path fill="#FF0000" stroke="#FF0000" stroke-width="2" stroke-miterlimit="10" d="M81.782,85.488
-			c-0.249-1.728,0.392-3.379,1.575-4.49c-0.911-0.461-1.967-0.656-3.055-0.5c-2.816,0.407-4.77,3.019-4.362,5.834
-			c0.406,2.815,3.019,4.769,5.835,4.362c1.086-0.157,2.044-0.644,2.788-1.342C83.114,88.619,82.032,87.217,81.782,85.488z"/>
-		<path fill="none" stroke="#FF0000" stroke-width="2" stroke-miterlimit="10" d="M83.358,80.998
-			c-1.184,1.11-1.825,2.763-1.576,4.49c0.25,1.729,1.332,3.131,2.782,3.864"/>
-	</g>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M81.821,70.8c0.002-2.219-1.811-4.036-4.027-4.04l-5.951-0.009c-2.223-0.002-4.039,1.811-4.041,4.028L67.8,73.156
+		c-0.006,2.221,1.809,4.037,4.025,4.039l5.953,0.01c2.217,0.003,4.031,1.822,4.027,4.043l-0.004,2.376
+		c-0.004,2.222-1.822,4.031-4.041,4.029l-5.951-0.012c-2.221-0.002-4.029-1.818-4.027-4.039"/>
 	
-		<rect x="47.597" y="71.843" transform="matrix(-0.9897 0.1429 -0.1429 -0.9897 151.1983 137.3553)" fill="#FF0000" stroke="#FF0000" stroke-miterlimit="10" width="46.14" height="4.529"/>
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="74.817" y1="66.756" x2="74.823" y2="62.646"/>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="74.778" y1="91.761" x2="74.784" y2="87.649"/>
 </g>
+<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="74.801" cy="77.204" r="25.216"/>
 </svg>
