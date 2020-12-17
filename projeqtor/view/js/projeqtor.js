@@ -3320,7 +3320,7 @@ function drawGantt() {
       pEnd = (trim(item.initialenddate) != "") ? item.initialenddate : pEnd;
       pEnd = (trim(item.validatedenddate) != "") ? item.validatedenddate : pEnd;
       pEnd = (trim(item.plannedenddate) != "") ? item.plannedenddate : pEnd;
-
+      
       pRealEnd = "";
       pPlannedStart = "";
       pWork = "";
@@ -3477,7 +3477,7 @@ function drawGantt() {
           item.status,pHealthStatus,pQualityLevel,pTrend,pOverallProgress, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
           item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, 
-          item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract,elementIdRef));
+          item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract,elementIdRef,item.fixplanning));
     }
     g.Draw();
     g.DrawDependencies();
@@ -7863,9 +7863,9 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
   
   function calculatedDate(){ //calcul new date 
     left=barDiv.offsetLeft;
-    duration=Math.ceil(width/dayWidth)-1;
+    duration=Math.ceil(width/dayWidth);
     startDate=minDate+(((left/dayWidth)*(24 * 60 * 60 * 1000)));
-    endDate=minDate+((((left/dayWidth)+duration)*(24 * 60 * 60 * 1000)));
+    endDate=minDate+((((left/dayWidth)+duration-1)*(24 * 60 * 60 * 1000)));
     dateStart = new Date(startDate);
     dateEnd = new Date(endDate);
     isCalulated=true;
@@ -7947,6 +7947,7 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
           endDateFormatForDisplay=JSGantt.formatDateStr(dateEnd,dateFormat);
           divVisibleEndDateChange.innerHTML=endDateFormatForDisplay;
         }
+        duration=duration-endResize-startResize;
         if(resizerStart)inputDateGantBarResizeleft.setAttribute('value',dateStart);
         if(resizerEnd)inputDateGantBarResizeRight.setAttribute('value',dateEnd);
         dateStart=JSGantt.formatDateStr(dateStart,'yyyy-mm-dd');
