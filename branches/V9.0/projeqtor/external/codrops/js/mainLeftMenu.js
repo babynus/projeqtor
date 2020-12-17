@@ -346,7 +346,7 @@
             self._addBreadcrumb(nextMenuIdx);
           }
           else if( self.current_menu === 0 && self.breadcrumbsCtrl) {
-            var buttonBack=self.breadcrumbsCtrl.querySelector('.iconButtonBack ');
+            var buttonBack=self.breadcrumbsCtrl.querySelector('.iconButtonBackBreadScrum ');
             if(buttonBack){
               self.breadcrumbsCtrl.removeChild(buttonBack);
               self.breadcrumbsCtrl.style="cursor:initial;";
@@ -407,10 +407,10 @@
     if(this.breadcrumbsCtrl.firstChild ){
       this.breadcrumbsCtrl.replaceChild(bc,this.breadcrumbsCtrl.lastElementChild);
       var newPreviousB=document.createElement('div');
-      newPreviousB.setAttribute('class', 'iconButtonBack iconSize16 imageColorNewGuiSelected');
+      newPreviousB.setAttribute('class', 'iconButtonBackBreadScrum iconSize16 imageColorNewGuiSelected');
       newPreviousB.setAttribute('title', i18n('previous'));
       newPreviousB.setAttribute('style','float:left;background-size:12px !important;margin-top:8px;cursor:pointer !important;');
-      var oldPreviousB=this.breadcrumbsCtrl.querySelector('.iconButtonBack ');
+      var oldPreviousB=this.breadcrumbsCtrl.querySelector('.iconButtonBackBreadScrum ');
       this.breadcrumbsCtrl.style="cursor:pointer !important;";
       if(oldPreviousB){
         this.breadcrumbsCtrl.replaceChild(newPreviousB,oldPreviousB);
