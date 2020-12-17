@@ -1,57 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
-	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Calque_3_2_">
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="55.459" y1="65.256" x2="55.459" y2="88.051"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M44.216,60.669v14.063h0.001c0,0.676-0.548,1.226-1.224,1.226H15.549c-0.677,0-1.225-0.55-1.225-1.226V60.669"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M44.217,92.448v-8.574c0-0.678-0.548-1.226-1.224-1.226H15.549c-0.677,0-1.225,0.548-1.225,1.226v23.667
-		c0,0.678,0.548,1.225,1.225,1.225h23.026C38.577,108.766,38.116,99.966,44.217,92.448z"/>
-	
-		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="7.65" y1="115.853" x2="44.21" y2="115.853"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M61.762,84.329h8.84l7.154-31.659h27.721l1.807,33.668h15.065v26.313h-2.812c0,0-1.105-9.742-11.379-9.742
-		c-10.85,0-11.419,8.8-11.419,8.8H82.454c0,0-0.078-2.77-0.078-6.488c0-3.114-2.209-17.666-18.081-17.666h-2.533V84.329z"/>
-	<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="62.197" cy="107.407" r="13.645"/>
-	<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="108.447" cy="115.225" r="6.239"/>
-	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linejoin="round" stroke-miterlimit="10" d="M83.286,59.339h16.316
-		v21.715h-6.785l-3.05,4.878H85.5c0,0-0.659-4.192-6.833-5.945L83.286,59.339z"/>
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+<g>
+	<circle fill="#FF0000" cx="67.174" cy="86.071" r="6.149"/>
+	<circle fill="#FF0000" cx="89.277" cy="86.071" r="6.149"/>
+	<circle fill="#FF0000" cx="45.297" cy="86.071" r="6.149"/>
 </g>
-<g id="Calque_4">
-	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M115.554,12.819H71.051c-1.789,0-3.252,1.462-3.252,3.251v21.452l-2.492,10.816l12.041-7.564h38.206
-			c1.788,0,3.251-1.463,3.251-3.251V16.07C118.805,14.281,117.342,12.819,115.554,12.819z"/>
-		<g>
-			
-				<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="93.656" cy="26.756" r="4.049"/>
-			
-				<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="108.21" cy="26.756" r="4.049"/>
-			
-				<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="79.252" cy="26.756" r="4.049"/>
-		</g>
-	</g>
-</g>
-<g id="Calque_2">
-	<g id="Calque_2_1_">
-		<g id="Calque_3_1_">
-			<g>
-				
-					<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-					M56.654,55.605c0,0.578-0.469,1.049-1.049,1.049H5.548c-0.579,0-1.048-0.471-1.048-1.049V5.548C4.5,4.969,4.969,4.5,5.548,4.5
-					h50.058c0.58,0,1.049,0.469,1.049,1.048V55.605L56.654,55.605z"/>
-				<circle fill="#FF0000" cx="16.424" cy="17.481" r="3.704"/>
-				<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="17.48" x2="46.23" y2="17.48"/>
-				<circle fill="#FF0000" cx="16.424" cy="30.577" r="3.704"/>
-				<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="30.578" x2="46.23" y2="30.578"/>
-				<circle fill="#FF0000" cx="16.424" cy="43.673" r="3.704"/>
-				<line fill="none" stroke="#FF0000" stroke-width="4" stroke-miterlimit="10" x1="24.219" y1="43.672" x2="46.23" y2="43.672"/>
-			</g>
-		</g>
-	</g>
-</g>
+<path fill="#FF0000" d="M66.25,1H4C2.343,1,1,2.343,1,4v62.25c0,1.656,1.343,3,3,3h62.25c1.656,0,3-1.344,3-3V4
+	C69.25,2.343,67.906,1,66.25,1z M16.229,54.572c-2.768,0-5.011-2.242-5.011-5.01c0-2.77,2.243-5.012,5.011-5.012
+	c2.767,0,5.01,2.242,5.01,5.012C21.239,52.33,18.996,54.572,16.229,54.572z M16.229,39.334c-2.768,0-5.011-2.242-5.011-5.01
+	s2.243-5.01,5.011-5.01c2.767,0,5.01,2.242,5.01,5.01C21.239,37.09,18.996,39.334,16.229,39.334z M16.229,24.098
+	c-2.768,0-5.011-2.244-5.011-5.011c0-2.769,2.243-5.013,5.011-5.013c2.767,0,5.01,2.244,5.01,5.013
+	C21.239,21.854,18.996,24.098,16.229,24.098z M54.855,53.721H31.129c-2.305,0-4.174-1.871-4.174-4.178
+	c0-2.305,1.869-4.176,4.174-4.176h23.726c2.307,0,4.176,1.871,4.176,4.176C59.031,51.85,57.162,53.721,54.855,53.721z
+	 M54.855,38.482H31.129c-2.305,0-4.174-1.869-4.174-4.176c0-2.306,1.869-4.176,4.174-4.176h23.726c2.307,0,4.176,1.87,4.176,4.176
+	C59.031,36.613,57.162,38.482,54.855,38.482z M54.855,23.244H31.129c-2.305,0-4.174-1.869-4.174-4.176
+	c0-2.305,1.869-4.174,4.174-4.174h23.726c2.307,0,4.176,1.869,4.176,4.174C59.031,21.375,57.162,23.244,54.855,23.244z"/>
+<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	125.497,53.081 115.195,58.408 102.197,95.646 "/>
+<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="58.615" y1="104.069" x2="86.32" y2="113.738"/>
+<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" cx="102.185" cy="112.096" r="10.951"/>
 </svg>
