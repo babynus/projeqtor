@@ -50,13 +50,13 @@ if (array_key_exists('isIE',$_REQUEST)) {
     <input id="typeEvo" name="typeEvo" type="hidden" value="" />
 <div id="inputFileDocumentVersion" name="inputFileDocumentVersion">
     <table>
-      <tr height="32px"> 
+      <tr height="30px"> 
         <td class="dialogLabel" >
          <label for="documentVersionFile" ><?php echo i18n("colFile");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td>
          <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>" />     
-         <?php  if ($isIE and $isIE<=9) {?>
+         <?php  if (! isHtml5()) {?>
          <input MAX_FILE_SIZE="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>"
           dojoType="dojox.form.FileInput" type="file" 
           name="documentVersionFile" id="documentVersionFile" 
@@ -64,19 +64,26 @@ if (array_key_exists('isIE',$_REQUEST)) {
           label="<?php echo i18n("buttonBrowse");?>"
           title="<?php echo i18n("helpSelectFile");?>" />
          <?php } else {?>  
+         <span id="attachmentFileDropArea" >  
          <input MAX_FILE_SIZE="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>"
           dojoType="dojox.form.Uploader" type="file" 
           url="../tool/saveDocumentVersion.php"
           name="documentVersionFile" id="documentVersionFile" 
           cancelText="<?php echo i18n("buttonReset");?>"
+          <?php if (! $isIE) {?>
+            style="padding:0px;margin:0px;<?php echo (isNewGui())?'width:212px':'z-index: 50;width:190px; border: 3px dotted #EEEEEE;';?>"
+          <?php } else {?>
+            style="overflow: hidden; border: 0px"
+          <?php }?>
           multiple="false" 
           onBegin="saveDocumentVersion();"
           onChange="changeDocumentVersion(this.getFileList());"
           onError="dojo.style(dojo.byId('downloadProgress'), {display:'none'});"
           label="<?php echo i18n("buttonBrowse");?>"
           title="<?php echo i18n("helpSelectFile");?>"  />
+          </span> 
          <?php }?>
-         <i><span name="documentVersionFileName" id="documentVersionFileName"></span></i> 
+         <i><span name="documentVersionFileName" id="documentVersionFileName"></span></i>
         </td>
       </tr>
       <tr><td colspan="2"><div style="display:none"><table>
@@ -104,7 +111,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
         <td> 
          <div dojoType="dijit.form.TextBox" 
           id="documentVersionVersionDisplay" name="documentVersionVersionDisplay"
-          style="width: 450px;" readonly
+          style="width: 200px;" readonly
           maxlength="100"
           class="input">  
          </div>  
@@ -130,6 +137,9 @@ if (array_key_exists('isIE',$_REQUEST)) {
                name="documentVersionUpdate" id="documentVersionUpdateMinor"
                value="minor" style="background-color:white;"/>
             </td>
+            <?php if (isNewGui()) {?>
+            </tr><tr>
+            <?php }?>
             <td style="text-align:right; width:5%">
               <label class="smallRadioLabel" for="documentVersionUpdateNo"><?php echo i18n('versionNoUpdate');?>&nbsp;</label>
             </td><td style="text-align:left;">    
@@ -156,7 +166,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
         <input id="oldDocumentVersionNewVersionDisplay" name="oldDocumentVersionNewVersionDisplay"  value="" hidden/>
          <div dojoType="dijit.form.TextBox" 
           id="documentVersionNewVersionDisplay" name="documentVersionNewVersionDisplay"
-          style="width: 450px;" readonly required
+          style="width: 200px;" readonly required
           maxlength="100"
           class="input">  
          </div>  
@@ -176,7 +186,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
            type="text" maxlength="10" 
            style="width:100px; text-align: center;" class="input"
            required="true"
-           hasDownArrow="true" 
+           hasDownArrow="false" 
            onchange="calculateNewVersion(false);"
            missingMessage="<?php echo i18n('messageMandatory',array('colDate'));?>" 
            invalidMessage="<?php echo i18n('messageMandatory',array('colDate'));?>" 
@@ -193,7 +203,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
           <?php echo autoOpenFilteringSelect();?>
                 id="documentVersionIdStatus" name="documentVersionIdStatus"
                 class="input" value="" 
-                onChange=""
+                onChange="" style="width:200px"
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdStatus')));?>" >
                  <?php //htmlDrawOptionForReference('idStatus', null, null, true);
                        // no need will be updated on dialog opening?>
