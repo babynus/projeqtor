@@ -57,8 +57,8 @@ foreach ($notifsList as $result) {
     echo'   <td>';
     echo '  <span onClick="gotoElement(\'Notification\',\''.htmlEncode($result->id).'\')" style="cursor:pointer; width:90%; overflow-x:hidden;position:relative;left:8px"><b>'. $result->title.' </b></span>';
     echo'   </td>';
-    echo'   <td width="15px">';
-    echo '<span style="cursor:pointer; top:5px; margin-left:14px;" onClick="readNotification(\''.htmlEncode($result->id).'\')"  title="'.i18n('markAsRead').'" class="iconNotification16"> &nbsp;&nbsp;&nbsp;</span>';
+    echo'   <td style="width:20px;position:relative">';
+    echo '    <div style="posiotion:absolute; cursor:pointer; top:5px; ;right:2px; width:16px" onClick="readNotification(\''.htmlEncode($result->id).'\')"  title="'.i18n('markAsRead').'" class="imageColorNewGui iconNotification16 iconNotification iconSize16"> &nbsp;</div>';
     echo'   </td>';
     echo' </tr>';
     echo' <tr>';
