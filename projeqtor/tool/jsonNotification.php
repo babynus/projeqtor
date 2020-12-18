@@ -42,6 +42,7 @@
     function getNotifications() {
         $paramIconSize=Parameter::getUserParameter('paramIconSize');
         if(isNewGui())$paramIconSize=16;
+        $paramIconSize=16;
             
         // The 'unread' status
 //        $idStatus = SqlElement::getSingleSqlElementFromCriteria("Status", array("name" => "unread"))->id;
@@ -114,11 +115,13 @@
         if (count($notifList)===0) {
             $totalCount=0;
             $theId=1;
+            $iconRoot="iconSum";
             $row  = '{id:"' . $theId . '"';
             $row .= ', name:"'. str_replace('"', "''", ucfirst(i18n("colCountTotal"))) . ' ('.$totalCount.')"';
             $row .= ', objClass:""';
             $row .= ', objId:""';
-            $row .= ', iconClass:"iconSum' . $paramIconSize. '"';
+            //$row .= ', iconClass:"iconSum' . $paramIconSize. '"';
+            $row .= ', iconClass:"'.$iconRoot.$paramIconSize.' '.$iconRoot.' iconSize'.$paramIconSize.'"';
             $row .= ', count:"'.$totalCount.'"';
             $row .= ', isTotal:"YES"';
             $row .= ', type:"folder"';
@@ -207,11 +210,13 @@
             if ($nbRows>0) {$theEcho .= ', ';}
             $nbRows++;
             $theId++;
+            $iconRoot='icon' .ucfirst(strtolower($type["type"]));
             $row  = '{id:"'. $theId . '"';
             $row .= ', name:"'. str_replace('"', "''",i18n($type["type"])) . ' ('.$type['count'].')"';
             $row .= ', objClass:""';
             $row .= ', objId:""';
-            $row .= ', iconClass:"icon' .ucfirst(strtolower($type["type"])).$paramIconSize. '"';
+            //$row .= ', iconClass:"icon' .ucfirst(strtolower($type["type"])).$paramIconSize. '"';
+            $row .= ', iconClass:"'.$iconRoot.$paramIconSize.' '.$iconRoot.' iconSize'.$paramIconSize.'"';
             $row .= ', count:"'.$type['count'].'"';
             $row .= ', isTotal:"NO"';
             $row .= ', type:"folder"';
@@ -221,16 +226,18 @@
             
             // Second Level = Notifiable
             $listObjClass = $type["objectClass"];
-            $nbRowsObjectClass=0;
+            $nbRowsObjectClass=0;           
             foreach($listObjClass as $objectClass) {
                 if ($nbRowsObjectClass>0) {$theEcho .= ', ';}
                 $nbRowsObjectClass++;
                 $theId++;
+                $iconRoot='icon'.$objectClass["notifiableItem"];
                 $row  = '{id:"' . $theId . '"';
                 $row .= ', name:"'. str_replace('"', "''",$objectClass["objectClassName"]) . ' ('.$objectClass['count'].')"';
                 $row .= ', objClass:""';
                 $row .= ', objId:""';
-                $row .= ', iconClass:"icon' .$objectClass["notifiableItem"].$paramIconSize. '"';
+                //$row .= ', iconClass:"icon' .$objectClass["notifiableItem"].$paramIconSize. '"';
+                $row .= ', iconClass:"'.$iconRoot.$paramIconSize.' '.$iconRoot.' iconSize'.$paramIconSize.'"';
                 $row .= ', count:"'.$objectClass['count'].'"';
                 $row .= ', isTotal:"NO"';
                 $row .= ', type:"folder"';
@@ -240,6 +247,7 @@
                 // Third Level = Definition
                 $listDef = $objectClass["definition"];
                 $nbRowsDef=0;
+                $iconRoot="iconNotificationDefinition";
                foreach($listDef as $definition) {
                     if ($nbRowsDef>0) {$theEcho .= ', ';}
                     $nbRowsDef++;
@@ -248,7 +256,8 @@
                     $row .= ', name:"'. str_replace('"', "''",$definition["definition"]) . ' ('.$definition['count'].')"';
                     $row .= ', objClass:""';
                     $row .= ', objId:""';
-                    $row .= ', iconClass:"iconNotificationDefinition'.$paramIconSize. '"';
+                    //$row .= ', iconClass:"iconNotificationDefinition'.$paramIconSize. '"';
+                    $row .= ', iconClass:"'.$iconRoot.$paramIconSize.' '.$iconRoot.' iconSize'.$paramIconSize.'"';
                     $row .= ', count:"'.$definition['count'].'"';
                     $row .= ', isTotal:"NO"';
                     $row .= ', type:"folder"';
@@ -258,6 +267,7 @@
                     // Last Level = Object Id
                     $listIdObj = $definition["objectId"];
                     $nbRowsId=0;
+                    $iconRoot="iconGoto";
                     foreach($listIdObj as $objectId) {
                         if ($nbRowsId>0) {$theEcho .= ', ';}
                         $nbRowsId++;
@@ -266,7 +276,8 @@
                         $row .= ', name:"#'. str_replace('"', "''",$objectId["idObject"]) . ' ('.$objectId['count'].')"';
                         $row .= ', objClass:"'.$objectClass["notifiableItem"].'"';
                         $row .= ', objId:"'.$objectId["idObject"].'"';
-                        $row .= ', iconClass:"iconGoto' . $paramIconSize. '"';
+                        //$row .= ', iconClass:"iconGoto' . $paramIconSize. '"';
+                        $row .= ', iconClass:"'.$iconRoot.$paramIconSize.' '.$iconRoot.' iconSize'.$paramIconSize.'"';
                         $row .= ', count:"'.$objectId['count'].'"';
                         $row .= ', isTotal:"NO"';
                         $row .= ', type:"folder"}';
@@ -280,12 +291,14 @@
         }
         // The total
         $theId++;
+        $iconRoot="iconSum";
         if ($nbRows>0) {$theEcho .= ', ';}
         $row  = '{id:"' . $theId . '"';
         $row .= ', name:"'. str_replace('"', "''", ucfirst(i18n("colCountTotal"))) . ' ('.$totalCount.')"';
         $row .= ', objClass:""';
         $row .= ', objId:""';
-        $row .= ', iconClass:"iconSum' . $paramIconSize. '"';
+        //$row .= ', iconClass:"iconSum' . $paramIconSize. '"';
+        $row .= ', iconClass:"'.$iconRoot.$paramIconSize.' '.$iconRoot.' iconSize'.$paramIconSize.'"';
         $row .= ', count:"'.$totalCount.'"';
         $row .= ', isTotal:"YES"';
         $row .= ', type:"folder"';
