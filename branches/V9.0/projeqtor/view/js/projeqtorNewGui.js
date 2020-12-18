@@ -658,12 +658,30 @@ function switchFavoriteRow(idRow, direction, maxRow){
 			nextRow += 1;
 			if(nextRow > maxRow)nextRow=1;
 		}while(dojo.byId('menuBarDndSource'+nextRow) && dojo.byId('menuBarDndSource'+nextRow).querySelectorAll('.dojoDndItem').length == 0);
+	}else{
+		
 	}
 	var callback = function(){
 		saveUserParameter('idFavoriteRow', nextRow);
 		menuNewGuiFilter('menuBarCustom', null);
 	};
 	if(nextRow != idRow){
+		loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow+'&defaultMenu='+defaultMenu, 'favoriteSwitch', null, callback);
+	}else{
+		return;
+	}
+}
+
+function gotoFavoriteRow(idRow, nextRow){
+	var row = nextRow;
+	if(dojo.byId('menuBarDndSource'+nextRow).querySelectorAll('.dojoDndItem').length == 0){
+		row=idRow;
+	}
+	var callback = function(){
+		saveUserParameter('idFavoriteRow', nextRow);
+		menuNewGuiFilter('menuBarCustom', null);
+	};
+	if(row != idRow){
 		loadDiv('../view/refreshMenuBarFavoriteCount.php?idFavoriteRow='+nextRow+'&defaultMenu='+defaultMenu, 'favoriteSwitch', null, callback);
 	}else{
 		return;
