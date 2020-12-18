@@ -77,8 +77,9 @@ if (array_key_exists('isIE',$_REQUEST)) {
             label="<?php echo i18n("buttonBrowse");?>"
             title="<?php echo i18n("helpSelectFile");?>"  />
             <span style="font-style:italic;position: absolute; z-index: 49; top: 8px; left: 120px; color: #AAAAAA; width:230px"><?php echo i18n("dragAndDrop");?></span>
+            </span>
           <?php }?>
-          </span>
+          
           <div style="font-style:italic;position: relative; left:10px; border-left: 2px solid #EEEEEE; padding-left:5px;" name="attachmentFileName" id="attachmentFileName"></div>     
           </td>
         </tr>
