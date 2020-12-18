@@ -836,4 +836,5 @@ function setArchiveMode(){
   dijit.byId('dialogProjectSelectorParameters').hide();
   dojo.byId('archiveOn').style.display='none';
   dojo.byId('archiveOnSeparator').style.display='none';
+  dojo.byId('archiveOnDiv').style.display='none';
 }
