@@ -402,7 +402,7 @@
       </div>
     </td>
     <?php } drawSeparator();?>
-      <td title="<?php ?>"  style="position:relative;width:55px;padding-left:5px">
+      <td title="<?php ?>"  style="position:relative;width:55px;<?php if(isNewGui()){?>padding-left:5px<?php }?>">
       <div dojoType="dijit.layout.ContentPane"  id="menuUserScreenTop" class="pseudoButton" style="position:relative;overflow:hidden;width:50px; height:28px; min-width:55px;top:-5px;">
         <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuUserScreenTopTitle");?>" id="iconMenuUserScreen" style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:50px;top:-3px" >
 			    <table style="width:100%">
