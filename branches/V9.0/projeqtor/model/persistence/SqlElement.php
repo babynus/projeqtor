@@ -5539,18 +5539,18 @@ abstract class SqlElement {
         $notFound=' not found ';
         if(!empty($attachments) and Parameter::getGlobalParameter('paramMailerType')=='phpmailer'){
           $c=0;
-          $addAttachToMessage="<table style='font-size:11ptwidth: 46%;font-family:Verdana,Arial,Helvetica,sans-serif;'>
-                                <tr><td colspan='3' style='background:#606062;color:#ffffff;text-align:center;font-size:14pt;font-weight:bold;width:100%'>".htmlEncode( i18n('fileAttachment'))."</td></tr>";
+          $addAttachToMessage="<table style='font-size:11pt;width:46%;font-family:Verdana,Arial,Helvetica,sans-serif;'>
+                                <tr><td colspan='3' style='background:#606062;color:#ffffff;text-align:center;font-size:14pt;font-weight:bold;width:100%'><div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr>";
           foreach ($attachments as $val){
             $c++;
-            $addAttachToMessage.="<tr><td colspan='2' style='background:#ffffff;font-weight:bold;text-align:right;width:30%;min-width:30%;vertical-align:top;white-space:nowrap;padding-bottom:10px;'>".i18n('col'.ucfirst($val[1]))."</td>";
+            $addAttachToMessage.="<tr><td colspan='2' style='background:#ffffff;font-weight:bold;text-align:right;width:30%;min-width:30%;vertical-align:top;white-space:nowrap;padding-bottom:10px;'><div>".i18n('col'.ucfirst($val[1]))."</div></td>";
             if($val[1]=='file'){
               $att=new Attachment($val[0]);
               $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
               if( file_exists(str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName) and $lstAtt[$att->fileName]!=''){
-                $addAttachToMessage .="<td colspan='2' style='background:#ffffff;text-align:left;width:70%;padding-left:20px;padding-bottom:10px;vertical-align:top;padding-bottom:10px;'>".$att->fileName."</td></tr>";
+                $addAttachToMessage .="<td colspan='2' style='background:#ffffff;text-align:left;width:70%;padding-left:20px;padding-bottom:10px;vertical-align:top;padding-bottom:10px;'><div>".$att->fileName."</div></td></tr>";
               }else{
-                $addAttachToMessage .="<td colspan='2' style='background:#ffffff;text-align:left;width:70%;padding-left:20px;padding-bottom:10px;vertical-align:top;padding-bottom:10px;color:red;'>".$att->fileName.$notFound."</td></tr>";
+                $addAttachToMessage .="<td colspan='2' ><div style='background:#ffffff;text-align:left;width:70%;padding-left:20px;padding-bottom:10px;vertical-align:top;padding-bottom:10px;color:red;'>".$att->fileName.$notFound."</div></td></tr>";
               }
             }else{
               $doc=new DocumentVersion($val[0]);
