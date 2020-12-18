@@ -168,7 +168,7 @@ if(isset($_REQUEST['goToRequirement'])){
         data-dojo-type="dijit/layout/ContentPane" region="top">
         	<table>
         		<tr>
-        			<td style="font-weight:bold"><?php echo i18n('filterOnType'); ?>&nbsp;:&nbsp;</td>
+        			<td style="font-weight:bold"><?php echo i18n('filterOnType'); ?>&nbsp;&nbsp;</td>
         <?php
         foreach ($listType as $idType => $nameType) {
       	?>
@@ -317,7 +317,7 @@ if(isset($_REQUEST['goToRequirement'])){
   				        }
 								?>
 								  <td>
-								    <ul data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
+								    <ul style="top:-8px;" data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainAllRequirement=0')" data-dojo-type="dojox/mobile/TabBarButton"   <?php if($paramDashboardRequierementMain==0){ echo "data-dojo-props='selected:true'"; }?> > <?php echo i18n('AllIssues');?></li>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainAllRequirement=2')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardRequierementMain==2){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('unclosed');?></li>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainAllRequirement=1')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardRequierementMain==1){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('Unresolved');?></li>
@@ -332,14 +332,19 @@ if(isset($_REQUEST['goToRequirement'])){
 						    <td>
 						      <table>
 						        <tr height="37px">
-						          <td>&nbsp;&nbsp;<?php echo i18n('filterDateByTicket');?></td> 
-								      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo i18n("dashboardTicketMainNumberDay");?>&nbsp;&nbsp;<div
-										      dojoType="dijit.form.NumberTextBox"
-										      id="dashboardRequirementMainNumberDay" style="width: 30px"
-										      onChange="if(isNaN(this.value))dijit.byId('dashboardRequirementMainNumberDay').set('value',7);
-          										loadContent('dashboardRequirementMain.php?dashboardRequirementMainNumberDay='+dijit.byId('dashboardRequirementMainNumberDay').get('value'), 'centerDiv', 'dashboardRequirementMainForm');"
-										      value="<?php echo $nbDay;?>"></div></td>
-										  </td>
+						          <td>&nbsp;&nbsp;<?php echo i18n('filterDateByTicket');?></td>
+						          <td style="width:10%;white-space:nowrap;" align="right">
+        							 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo ucfirst(i18n('since'));?>&nbsp;
+        						  </td>
+        						  <td align="left">		
+                      <div style="width:30px;" class="filterField rounded" dojoType="dijit.form.TextBox" value="<?php echo $nbDay;?>"
+                       type="text" id="dashboardRequirementMainNumberDay" name="dashboardRequirementMainNumberDay" onChange="if(isNaN(this.value))dijit.byId('dashboardRequirementMainNumberDay').set('value',7);
+          										loadContent('dashboardRequirementMain.php?dashboardRequirementMainNumberDay='+dijit.byId('dashboardRequirementMainNumberDay').get('value'), 'centerDiv', 'dashboardRequirementMainForm');">
+                      </div>
+                      </td>
+                      <td style="width:10%;white-space:nowrap;" align="right">
+        							 <?php echo i18n('days');?>&nbsp;
+        						</td>
 										</tr>
 									</table>
 						  </tr>
@@ -351,7 +356,7 @@ if(isset($_REQUEST['goToRequirement'])){
   				        }
 								?>
 								  <td>
-								     <ul data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
+								     <ul style="top:-8px;" data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainRecent=1')" data-dojo-type="dojox/mobile/TabBarButton"   <?php if($paramnDateDashboardRequirement==1){ echo "data-dojo-props='selected:true'"; }?> > <?php echo i18n('AddedRecently');?></li>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainRecent=2')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramnDateDashboardRequirement==2){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('ResolvedRecently');?></li>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainRecent=3')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramnDateDashboardRequirement==3){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('updatedRecently');?></li>
@@ -370,7 +375,7 @@ if(isset($_REQUEST['goToRequirement'])){
   				          $paramDashboardRequierementRecent=Parameter::getUserParameter("dashboardRequirementMainToMe");
   				        } ?>
 								  <td>
-								    <ul data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
+								    <ul style="top:-8px;" data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainToMe=1')" data-dojo-type="dojox/mobile/TabBarButton"   <?php if($paramDashboardRequierementRecent==1){ echo "data-dojo-props='selected:true'"; }?> > <?php echo i18n('AssignedToMe');?></li>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainToMe=2')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardRequierementRecent==2){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('ReportedByMe');?></li>
                     </ul>
@@ -422,10 +427,10 @@ if(isset($_REQUEST['goToRequirement'])){
 						</table>
 					</td>
 					<td valign="top" >
-						<button id="updateTabDashboardRequirementMain" class="resetMargin detailButton notButton"
+						<button style="margin-top:10px;" id="updateTabDashboardRequirementMain" class="resetMargin detailButton notButton"
 							dojoType="dijit.form.Button" showlabel="false"
 							title="<?php echo i18n('menuParameter');?>"
-							iconClass="iconParameter iconSize16  <?php if(isNewGui()){?> imageColorNewGui <?php }?>">
+							iconClass="iconParameter iconSize22  <?php if(isNewGui()){?> imageColorNewGui <?php }?>">
 							<script type="dojo/connect" event="onClick" args="evt">
                 dijit.byId('popUpdatePositionTab').show();
               </script>
