@@ -308,7 +308,7 @@
       <span id="dataBaseTitle" style="position:relative;top:5px;font-size:130%;font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
     </td>
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
-    <td  width="63px" style=""> 
+    <td  width="42px" style=""> 
      <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount"  style="text-align: center; position:relative;top:-5px">
        <div dojoType="dijit.form.DropDownButton"  id=""
             style="display: table-cell;vertical-align: middle;" >
@@ -331,7 +331,7 @@
     <td id="archiveOnSeparator" style="position:relative;width: 5px;<?php echo $display;?>">
       <div class="menuBarSeparatorDiv" style=""></div>
     </td>
-    <td style="vertical-align: middle;text-align:center;width:32px;">
+    <td id="archiveOnDiv" style="vertical-align: middle;text-align:center;width:32px;<?php echo $display;?>">
         <div id="archiveOn" style="padding-left: 4px;cursor:pointer;<?php echo $display;?>" onClick="setArchiveMode();" title="<?php echo i18n('archiveOn');?>">
           <div class="iconHistArchive iconSize22 imageColorNewGui" style="width:22px;height:22px;position: relative;top: 3px;" title="<?php echo i18n('archiveOn');?>"></div>
           <div style="top: -8px;position: relative;left: 5px;">
@@ -379,26 +379,6 @@
         </a>
       </div>  
     </td>
-        <?php drawSeparator();?>
-        <td title="<?php ?>"  style="position:relative;width:55px;padding-left:5px">
-      <div dojoType="dijit.layout.ContentPane"  id="menuUserScreenTop" class="pseudoButton" style="position:relative;overflow:hidden;width:50px; height:28px; min-width:55px;top:-5px;">
-        <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuUserScreenTopTitle");?>" id="iconMenuUserScreen" style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:50px;top:-3px" >
-			    <table style="width:100%">
-    			  <tr>
-      				<td style="width:24px;padding-top:2px;">
-      				  <div class="<?php if ($iconClassWithSize) echo 'iconChangeLayout22';?> iconChangeLayout iconSize22">&nbsp;</div> 
-      				</td>
-      			  <td style="vertical-align:middle;">&nbsp;</td>
-    			  </tr>
-			    </table>
-			    <div id="drawMenuUserScreenOrganization" dojoType="dijit.TooltipDialog"
-             style="max-width:600px; overflow-x:hidden; height:450px;  max-height:500px;  width:150px; ">
-             <?php include "menuUserScreenOrganization.php" ?>          
-          </div> 
-		</div>
-      </div>
-    </td>
-    
     <?php if(isNewGui()){ drawSeparator();?>
     <td title="<?php ?>"  style="position:relative;width:55px;padding-left:5px">
       <div dojoType="dijit.layout.ContentPane"  id="menuInterrogation" class="pseudoButton" style="position:relative;overflow:hidden;width:50px; height:28px; min-width:45px;top:-5px;">
@@ -422,6 +402,25 @@
       </div>
     </td>
     <?php } drawSeparator();?>
+      <td title="<?php ?>"  style="position:relative;width:55px;padding-left:5px">
+      <div dojoType="dijit.layout.ContentPane"  id="menuUserScreenTop" class="pseudoButton" style="position:relative;overflow:hidden;width:50px; height:28px; min-width:55px;top:-5px;">
+        <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuUserScreenTopTitle");?>" id="iconMenuUserScreen" style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:50px;top:-3px" >
+			    <table style="width:100%">
+    			  <tr>
+      				<td style="width:24px;padding-top:2px;">
+      				  <div class="<?php if ($iconClassWithSize) echo 'iconChangeLayout22';?> iconChangeLayout iconSize22">&nbsp;</div> 
+      				</td>
+      			  <td style="vertical-align:middle;">&nbsp;</td>
+    			  </tr>
+			    </table>
+			    <div id="drawMenuUserScreenOrganization" dojoType="dijit.TooltipDialog"
+             style="max-width:600px; overflow-x:hidden; height:450px;  max-height:500px;  width:150px; ">
+             <?php include "menuUserScreenOrganization.php" ?>          
+          </div> 
+		</div>
+      </div>
+    </td>
+    <?php drawSeparator();?>
     <td title="<?php echo i18n('menuUserParameter');?>"  style="position:relative;width:105px;padding-right:5px;">
       <div dojoType="dijit.layout.ContentPane"  id="menuUserParameterTop" class="pseudoButton" style="position:relative;overflow:hidden; height:28px;width:100%; min-width:100px;top:-5px;left:3px;" title="<?php echo i18n('menuUserParameter');?>">
         <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserPhoto" style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:100px;top:-3px;width:100%" >
