@@ -9,8 +9,8 @@
         
 .. _graphic-user-interface:
 
-Graphical User Interface
-************************
+Graphical User Interface v 8.6
+******************************
 
 .. _overview:
 
@@ -2142,3 +2142,161 @@ Indicates the visibility level defined in a note or attachment.
 * Displays a colored circle for field colorable.
 * Some list of values has a field to define a color. 
 * A color is defined for each value.
+
+
+
+.. _gui9.0:
+
+Graphical User Interface 9.0
+****************************
+
+
+
+.. _overview-9.0:
+
+ProjeQtOr interface is divided into several areas.
+
+.. figure:: /images/GUI9.0/GUI_SCR_Overview9.0.png
+   :alt: Overview
+   :align: center
+   
+   Overview graphical user interface screen
+
+.. topic:: Interface areas:
+
+   |one| :ref:`topbar-v9`
+   
+   |two| :ref:`info-bar9.0<Info Bar>` 
+   
+   |three| :ref:`menu9.0<Menu>`
+   
+   |four| :ref:`menu-secondary9.0<Secondary menu>`
+   
+   |five| :ref:`list-area9.0<List area>` 
+   
+   |six| :ref:`detail-area9.0<Details area>` 
+   
+   |seven| :ref:`activity-stream9.0<Activity Stream>`
+   
+
+
+.. note:: Area separation
+
+   .. figure:: /images/GUI9.0/GUI_SCR_Splitters9.0.png
+      :scale: 15 %
+      :alt: Windows splitters
+      :align: center   
+      
+      The splitters allow resizing areas in the interface.
+   
+      The position of splitters is saved and retrieved on each connection.
+
+
+
+
+
+.. _topbar-v9:
+
+Top bar
+-------
+
+.. figure:: /images/GUI9.0/GUI_ZONE_TopBar9.0.png
+   :alt: Top bar
+   :align: center
+
+.. topic:: Interface areas:
+
+   |one| :ref:`Navigation buttons<navigation-buttons9>`
+   
+   |two| :ref:`New tab<buttons-newtab9>` 
+   
+   |three|  :ref:`Project selector<project-selector9>` 
+   
+   |four| :ref:`Refresh<refresh-topbar9>` 
+   
+   
+   
+   
+
+
+
+
+.. _navigation-buttons9:
+
+.. rubric:: |oneBLC| Navigation buttons
+
+The navigation buttons |buttonIconBackNavigation9| |buttonIconForwardNavigation9| give access to previous and next pages in the history.
+
+.. _buttons-new-tab9:
+
+.. rubric:: |twoBLC| Button New tab 
+
+The new tab button |newtab9| allows to open a new tab within the same session.
+
+
+
+   
+.. index:: Project (Selector)
+
+.. _project-selector9:
+
+.. rubric:: |threeBLC| Project selector
+
+.. figure:: /images/GUI9.0/GUI_ZONE_ProjectSelector9.0.png
+   :alt: Project Selector
+   :align: center
+   
+Allows to select the project to work on.
+
+Limited visibility of all elements of the selected project, including sub-projects if applicable.
+
+Definition of the "default" project for new elements.
+
+.. note:: 
+
+   **User parameter**
+
+   **default project** Defines the project that will be selected and display by default into the project selector
+   
+   See: :ref:`User parameters - section automation<UP-automation>`
+
+
+.. figure:: /images/GUI9.0/GUI_ZONE_SelectorProject9.0.png
+   :alt: Project Selector Multi selection
+   
+You can choose to display multiple projects by checking the corresponding boxes.
+
+
+.. rubric:: Project selector parameters
+
+Click on |buttonIconParameter9| to display the project selector parameters dialog box, you can select :
+
+   * View closed projects and handled projects.
+   * Change the project list display mode.
+   * Refresh the list.
+
+.. figure:: /images/GUI9.0/GUI_BOX_ProjectSelect-Param9.0.png
+   :alt: Dialog box - Project selector parameters
+   :align: center
+   :scale: 60
+
+
+.. rubric:: Show / hide
+
+Choose which types of projects to display from the project selector list.
+
+ .. compound:: show closed items
+ 
+   This option allows you to enter the archive mode of the project selector.
+
+   Closed projects will then appear in the selector list.
+   
+   When archive mode is activated then icon |archive9| is displayed in the top bar. Click on it to stop the process.
+
+   .. image:: /images/GUI9.0/GUI_ZONE_ModeArchive.png
+  
+   For them to appear in the list box you must activate the check box "closed" in this same area.
+
+ .. compound:: Display the handled projects
+ 
+   This option allows to display only in the list of the project selector, the projects with the macro state :term:`handled`. 
