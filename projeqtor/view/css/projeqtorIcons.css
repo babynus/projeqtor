@@ -1501,7 +1501,7 @@
 .ProjeQtOrFlatGreen .iconImportData { background-image: url(customIcons/green/iconImportData.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconImportData { background-image: url(customIcons/grey/iconImportData.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconImportData { background-image: url(customIcons/red/iconImportData.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconImportData { background-image: url(customIcons/new/iconImportData.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconImportData { background-image: url(customIcons/new/iconImportProject.svg);  background-repeat: no-repeat; }
 
 .iconImportProject { background-image: url(images/iconImportProject.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconImportProject { background-image: url(customIcons/blue/iconImportProject.png);  background-repeat: no-repeat; }
