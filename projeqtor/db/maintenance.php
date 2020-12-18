@@ -149,7 +149,7 @@ if ($currVersion=='V0.0.0') {
   Parameter::storeGlobalParameter('newGuiThemeColorBis', 'e97b2c');
   Parameter::storeGlobalParameter('paramScreen', 'left');
   Parameter::storeGlobalParameter('paramRightDiv', 'bottom');
-  Parameter::storeGlobalParameter('paramLayoutObjectDetail', 'tab');
+  if (! isIE())Parameter::storeGlobalParameter('paramLayoutObjectDetail', 'tab');
   Parameter::storeUserParameter('menuLeftDisplayMode', 'ICONTXT');
   
   $customRow[1]=array('Project', 'Activity', 'Milestone', 'Meeting', 'Planning', 'Resource', 'Reports');

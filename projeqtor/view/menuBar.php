@@ -308,7 +308,7 @@
       <span id="dataBaseTitle" style="position:relative;top:5px;font-size:130%;font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
     </td>
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
-    <td  width="42px" style=""> 
+    <td  width="<?php echo (isNewGui())?42:57;?>px;" style=""> 
      <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount"  style="text-align: center; position:relative;top:-5px">
        <div dojoType="dijit.form.DropDownButton"  id=""
             style="display: table-cell;vertical-align: middle;" >
@@ -402,7 +402,7 @@
       </div>
     </td>
     <?php } drawSeparator();?>
-      <td title="<?php ?>"  style="position:relative;width:55px;<?php if(isNewGui()){?>padding-left:5px<?php }?>">
+      <td title="<?php ?>"  style="position:relative;width:55px;<?php echo (isNewGui())?'padding-left:5px':'';?>">
       <div dojoType="dijit.layout.ContentPane"  id="menuUserScreenTop" class="pseudoButton" style="position:relative;overflow:hidden;width:50px; height:28px; min-width:55px;top:-5px;">
         <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuUserScreenTopTitle");?>" id="iconMenuUserScreen" style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:50px;top:-3px" >
 			    <table style="width:100%">
