@@ -265,9 +265,9 @@ $dbVersion=Sql::getDbVersion();
 	          <img style="position:absolute; top:2px;right:-2px;" src="../view/img/logoMedium.png"  />
 	          </div>  -->
 	          <?php if(isNewGui() and $dbVersion==''){?>
-	          <div class="messageInitLogin">
+	          <div class="messageInitLogin" style="height:370px">
 	           <div style="text-align: center;margin-top:15px;"><span class="titleWelcomeMessage"><?php echo i18n('welcomeOnProjeQtOr');?></span></div>
-	           <div style="text-align: left;margin:15px;margin-top:35px;"><span class="textWelcomeMessage"><?php echo i18n('projeqtorIntroducoryText');?></span></div>
+	           <div style="text-align: left;margin:15px;margin-top:35px;padding-bottom:20px"><span class="textWelcomeMessage"><?php echo i18n('projeqtorIntroducoryText');?></span></div>
 	          </div>
 	          <?php }?>
 			  <table  align="center">
