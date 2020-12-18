@@ -58,7 +58,7 @@ if ($printFormat=="A3") {
          <table>
            <tr>
              <td class="dialogLabel"  >
-               <label for="printOrientation" ><?php echo i18n("printOrientation") ?>&nbsp;:&nbsp;</label>
+               <label for="printOrientation" ><?php echo i18n("printOrientation") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <table><tr>
@@ -82,7 +82,7 @@ if ($printFormat=="A3") {
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel"  >
-               <label for="printFormat" ><?php echo i18n("printFormat") ?>&nbsp;:&nbsp;</label>
+               <label for="printFormat" ><?php echo i18n("printFormat") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <table><tr>
@@ -106,7 +106,7 @@ if ($printFormat=="A3") {
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel"  >
-               <label for="printZoom" ><?php echo i18n("printZoom") ?>&nbsp;:&nbsp;</label>
+               <label for="printZoom" ><?php echo i18n("printZoom") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -121,7 +121,7 @@ if ($printFormat=="A3") {
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel"  >
-               <label for="printRepeat"><?php echo i18n("printRepeat") ?>&nbsp;:&nbsp;</label>
+               <label for="printRepeat"><?php echo i18n("printRepeat") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                

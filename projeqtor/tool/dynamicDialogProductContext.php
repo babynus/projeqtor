@@ -68,7 +68,7 @@ if ($objectClass == 'ProductVersion' or $objectClass == 'ComponentVersion') {
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>  
           <tr>
             <td class="dialogLabel">
-              <label for="productContextName" ><?php echo i18n('Context'); ?>&nbsp;:&nbsp;</label>
+              <label for="productContextName" ><?php echo i18n('Context'); ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
 				<select size="14" id="productContextListId" name="productContextListId[]"

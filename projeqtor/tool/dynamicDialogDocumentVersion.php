@@ -52,7 +52,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
     <table>
       <tr height="32px"> 
         <td class="dialogLabel" >
-         <label for="documentVersionFile" ><?php echo i18n("colFile");?>&nbsp;:&nbsp;</label>
+         <label for="documentVersionFile" ><?php echo i18n("colFile");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td>
          <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>" />     
@@ -82,7 +82,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
       <tr><td colspan="2"><div style="display:none"><table>
       <tr> 
         <td class="dialogLabel" >
-         <label for="documentVersionLink" ><?php echo i18n("colOrLink");?>&nbsp;:&nbsp;</label>
+         <label for="documentVersionLink" ><?php echo i18n("colOrLink");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td> 
          <div dojoType="dijit.form.TextBox" 
@@ -99,7 +99,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
     <table>
       <tr> 
         <td class="dialogLabel" >
-         <label for="documentVersionVersionDisplay" ><?php echo i18n("colCurrentDocumentVersion");?>&nbsp;:&nbsp;</label>
+         <label for="documentVersionVersionDisplay" ><?php echo i18n("colCurrentDocumentVersion");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td> 
          <div dojoType="dijit.form.TextBox" 
@@ -112,7 +112,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
       </tr>            
       <tr style="height:21px">
         <td class="dialogLabel" >
-         <label for="documentVersionUpdateMajor" ><?php echo i18n("documentVersionUpdate");?>&nbsp;:&nbsp;</label>
+         <label for="documentVersionUpdateMajor" ><?php echo i18n("documentVersionUpdate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td>
           <table><tr>
@@ -150,7 +150,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
       </tr>
       <tr> 
         <td class="dialogLabel" >
-         <label for="documentVersionNewVersionDisplay" ><?php echo i18n("colNextDocumentVersion");?>&nbsp;:&nbsp;</label>
+         <label for="documentVersionNewVersionDisplay" ><?php echo i18n("colNextDocumentVersion");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td> 
         <input id="oldDocumentVersionNewVersionDisplay" name="oldDocumentVersionNewVersionDisplay"  value="" hidden/>
@@ -164,7 +164,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
       </tr>   
       <tr>
         <td class="dialogLabel" >
-          <label for="documentVersionDate" ><?php echo i18n("colDate");?>&nbsp;:&nbsp;</label>
+          <label for="documentVersionDate" ><?php echo i18n("colDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td>
           <div id="documentVersionDate" name="documentVersionDate"
@@ -186,7 +186,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
       </tr>
       <tr>
         <td class="dialogLabel" >
-          <label for="documentVersionIdStatus" ><?php echo i18n("colIdStatus");?>&nbsp;:&nbsp;</label>
+          <label for="documentVersionIdStatus" ><?php echo i18n("colIdStatus");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td>
           <select dojoType="dijit.form.FilteringSelect" 
@@ -202,7 +202,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
       </tr>
       <tr>
         <td class="dialogLabel" >
-          <label for="documentVersionIsRef" ><?php echo i18n("colIsRef");?>&nbsp;:&nbsp;</label>
+          <label for="documentVersionIsRef" ><?php echo i18n("colIsRef");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td>
           <table><tr><td>
@@ -218,7 +218,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
       </tr>          
       <tr> 
         <td class="dialogLabel" >
-         <label for="documentVersionDescription" ><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
+         <label for="documentVersionDescription" ><?php echo i18n("colDescription");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td> 
          <textarea dojoType="dijit.form.Textarea" 

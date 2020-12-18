@@ -104,7 +104,7 @@ if ($way=='composition') {
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>  
           <tr>
             <td class="dialogLabel"  >
-              <label for="productStructureListId" ><?php echo i18n($listClass) ?>&nbsp;:&nbsp;</label>
+              <label for="productStructureListId" ><?php echo i18n($listClass) ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
               <select size="14" id="productStructureListId" name="productStructureListId[]"
@@ -144,7 +144,7 @@ if ($way=='composition') {
         <table>  
           <tr>
             <td class="dialogLabel" >
-              <label for="productStructureComment" ><?php echo i18n("colComment") ?>&nbsp;:&nbsp;</label>
+              <label for="productStructureComment" ><?php echo i18n("colComment") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
               <textarea dojoType="dijit.form.Textarea"

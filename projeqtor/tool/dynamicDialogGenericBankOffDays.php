@@ -146,7 +146,7 @@ $months = array (
                     <table>                        
                         <tr>
                             <td class="dialogLabel" >
-                                <label class="longLabel" for="genericBankOffDayName"><?php echo i18n('name');?>&nbsp;:&nbsp;</label>
+                                <label class="longLabel" for="genericBankOffDayName"><?php echo i18n('name');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit.form.ValidationTextBox" type="text" id="genericBankOffDayName" name="genericBankOffDayName" class="input required"
@@ -156,7 +156,7 @@ $months = array (
 			                      
                         <tr>
                             <td class="dialogLabel" >
-                                <label class="longLabel" for="genericBankOffDayMonth"><?php echo i18n('month');?>&nbsp;:&nbsp;</label>
+                                <label class="longLabel" for="genericBankOffDayMonth"><?php echo i18n('month');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                             </td>
                             <td>
                                 <select id="genericBankOffDayMonth"  dojoType="dijit.form.FilteringSelect"
@@ -181,7 +181,7 @@ $months = array (
                         
                         <tr>
                             <td class="dialogLabel" >
-                                <label class="longLabel" for="genericBankOffDayDay"><?php echo i18n('day');?>&nbsp;:&nbsp;</label>
+                                <label class="longLabel" for="genericBankOffDayDay"><?php echo i18n('day');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/NumberSpinner" id="genericBankOffDayDay" name="genericBankOffDayDay" value="<?php echo $day;?>" class="input required"
@@ -191,7 +191,7 @@ $months = array (
               
                         <tr>
                             <td class="dialogLabel" >
-                                <label class="longLabel" for="genericBankOffDayEasterDay"><?php echo i18n('easterDay');?>&nbsp;:&nbsp;</label>
+                                <label class="longLabel" for="genericBankOffDayEasterDay"><?php echo i18n('easterDay');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                             </td>
                             <td>
                                 <select id="genericBankOffDayEasterDay"  dojoType="dijit.form.Select"

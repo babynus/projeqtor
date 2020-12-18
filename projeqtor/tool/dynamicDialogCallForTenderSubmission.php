@@ -63,7 +63,7 @@ if (!$tender->expectedTenderDateTime) $tender->expectedTenderDateTime=$callForTe
 						value="<?php echo $tender->id;?>" />
 					<table>
 					  <tr>
-					    <td class="dialogLabel"><label for="dialogCallForTenderSubmissionProvider"><?php echo i18n("colIdProvider") ?>&nbsp;:&nbsp;</label>
+					    <td class="dialogLabel"><label for="dialogCallForTenderSubmissionProvider"><?php echo i18n("colIdProvider") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td><select dojoType="dijit.form.FilteringSelect"
 								<?php echo autoOpenFilteringSelect();?>
@@ -83,7 +83,7 @@ if (!$tender->expectedTenderDateTime) $tender->expectedTenderDateTime=$callForTe
 						  </td>
 						</tr>
 						<tr>
-					    <td class="dialogLabel"><label for="dialogCallForTenderSubmissionContact"><?php echo i18n("colIdContact") ?>&nbsp;:&nbsp;</label>
+					    <td class="dialogLabel"><label for="dialogCallForTenderSubmissionContact"><?php echo i18n("colIdContact") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td><select dojoType="dijit.form.FilteringSelect"
 								<?php echo autoOpenFilteringSelect();?>
@@ -102,7 +102,7 @@ if (!$tender->expectedTenderDateTime) $tender->expectedTenderDateTime=$callForTe
 						  </td>
 						</tr>
 						<tr>
-					    <td class="dialogLabel"><label for="dialogCallForTenderSubmissionRequestDateTime"><?php echo i18n("colRequestDate") ?>&nbsp;:&nbsp;</label>
+					    <td class="dialogLabel"><label for="dialogCallForTenderSubmissionRequestDateTime"><?php echo i18n("colRequestDate") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
   							<div id="dialogCallForTenderSubmissionRequestDate" name="dialogCallForTenderSubmissionRequestDate"
@@ -121,7 +121,7 @@ if (!$tender->expectedTenderDateTime) $tender->expectedTenderDateTime=$callForTe
 						  </td>
 						</tr>
 						<tr>
-					    <td class="dialogLabel"><label for="dialogCallForTenderSubmissionExpectedTenderDate"><?php echo i18n("colExpectedTenderDate") ?>&nbsp;:&nbsp;</label>
+					    <td class="dialogLabel"><label for="dialogCallForTenderSubmissionExpectedTenderDate"><?php echo i18n("colExpectedTenderDate") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
   							<div id="dialogCallForTenderSubmissionExpectedTenderDate" name="dialogCallForTenderSubmissionExpectedTenderDate"
@@ -140,7 +140,7 @@ if (!$tender->expectedTenderDateTime) $tender->expectedTenderDateTime=$callForTe
 						  </td>
 						</tr>
 						<tr>
-					    <td class="dialogLabel"><label for="dialogCallForTenderSubmissionStatus"><?php echo i18n("colIdTenderStatus") ?>&nbsp;:&nbsp;</label>
+					    <td class="dialogLabel"><label for="dialogCallForTenderSubmissionStatus"><?php echo i18n("colIdTenderStatus") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td><select dojoType="dijit.form.FilteringSelect"
 								<?php echo autoOpenFilteringSelect();?>

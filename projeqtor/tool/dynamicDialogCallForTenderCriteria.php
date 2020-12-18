@@ -64,7 +64,7 @@ if ($mode=='add') {
 						value="<?php echo $criteria->id;?>" />
 					<table>
 						<tr>
-							<td class="dialogLabel"><label for="dialogTenderCriteriaName"><?php echo i18n("colName") ?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="dialogTenderCriteriaName"><?php echo i18n("colName") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
 							  <input type="text" dojoType="dijit.form.ValidationTextBox" 
@@ -75,7 +75,7 @@ if ($mode=='add') {
 						  </td>
 						</tr>
 						<tr>
-							<td class="dialogLabel"><label for="dialogTenderCriteriaMaxValue"><?php echo i18n("colEvaluationMaxValue") ?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="dialogTenderCriteriaMaxValue"><?php echo i18n("colEvaluationMaxValue") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
 							  <div dojoType="dijit.form.NumberTextBox" 
@@ -86,7 +86,7 @@ if ($mode=='add') {
 						  </td>
 						</tr>
 						<tr>
-							<td class="dialogLabel"><label for="dialogTenderCriteriaCoef"><?php echo i18n("colCoefficient") ?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="dialogTenderCriteriaCoef"><?php echo i18n("colCoefficient") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
 							  <div dojoType="dijit.form.NumberTextBox" 

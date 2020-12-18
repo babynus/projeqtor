@@ -124,7 +124,7 @@ if ($planningMode=='RECW') {
          <table>
            <tr>
              <td class="dialogLabel" >
-               <label for="assignmentIdResource" ><?php if($isTeam){  echo i18n("colIdTeam");}else if($isOrganization){  echo i18n("colIdOrganization");}else{ echo i18n("colIdResource");}?>&nbsp;:&nbsp;</label>
+               <label for="assignmentIdResource" ><?php if($isTeam){  echo i18n("colIdTeam");}else if($isOrganization){  echo i18n("colIdOrganization");}else{ echo i18n("colIdResource");}?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>  
              <td>
               <select dojoType="dijit.form.FilteringSelect"
@@ -164,7 +164,7 @@ if ($planningMode=='RECW') {
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="assignmentIdRole" ><?php echo i18n("colIdRole");?>&nbsp;:&nbsp;</label>
+               <label for="assignmentIdRole" ><?php echo i18n("colIdRole");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
               <select dojoType="dijit.form.FilteringSelect" 
@@ -197,7 +197,7 @@ if ($planningMode=='RECW') {
            $pe->setVisibility(); ?>
            <tr <?php echo ($pe->_costVisibility=='ALL')?'':'style="display:none;"'?>>
              <td class="dialogLabel" >
-               <label for="assignmentDailyCost" ><?php echo i18n("colCost");?>&nbsp;:&nbsp;</label>
+               <label for="assignmentDailyCost" ><?php echo i18n("colCost");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <?php echo ($currencyPosition=='before')?$currency:''; ?>
@@ -216,7 +216,7 @@ if ($planningMode=='RECW') {
 
            <tr id="assignmentRateRow" name="assignmentRateRow" <?php if (($resource->isResourceTeam and !$assignmentObj->uniqueResource) or $planningMode=="MAN") echo 'style="display:none"';?>>
              <td class="dialogLabel" >
-               <label for="assignmentRate" ><?php echo i18n("colRate");?>&nbsp;:&nbsp;</label>
+               <label for="assignmentRate" ><?php echo i18n("colRate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
              <?php if($resource->isResourceTeam and !$assignmentObj->uniqueResource){
@@ -237,7 +237,7 @@ if ($planningMode=='RECW') {
            
              <tr id="assignmentCapacityResourceTeam" name="assignmentCapacityResourceTeam" <?php if (! $resource->isResourceTeam or $assignmentObj->uniqueResource) echo 'style="display:none"';?>>
                <td class="dialogLabel" >
-                 <label for="assignmentCapacity" ><?php echo i18n("colCapacity");?>&nbsp;:&nbsp;</label>
+                 <label for="assignmentCapacity" ><?php echo i18n("colCapacity");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                </td>
                <td>
                  <?php if ($mode=='edit' and get_class($resource)!="Affectable" and $assignmentObj->capacity==0 and !$resource->isResourceTeam) round($assignmentObj->capacity=$resource->capacity*$assignmentObj->rate/100,1);
@@ -255,7 +255,7 @@ if ($planningMode=='RECW') {
            
            <tr style="<?php if ($planningMode=='RECW') echo 'display:none;';?>">
              <td class="dialogLabel" >
-               <label for="assignmentAssignedWork" ><?php echo i18n("colAssignedWork");?>&nbsp;:&nbsp;</label>
+               <label for="assignmentAssignedWork" ><?php echo i18n("colAssignedWork");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="assignmentAssignedWork" name="assignmentAssignedWork" <?php if($planningMode=='MAN'){ echo "readonly";}?>
@@ -293,7 +293,7 @@ if ($planningMode=='RECW') {
            </tr>
            <tr style="<?php if ($planningMode=='RECW') echo 'display:none;';?>">
              <td class="dialogLabel" >
-               <label for="assignmentRealWork" ><?php echo i18n("colRealWork");?>&nbsp;:&nbsp;</label>
+               <label for="assignmentRealWork" ><?php echo i18n("colRealWork");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="assignmentRealWork" name="assignmentRealWork" value="<?php echo ($mode=="edit")?Work::displayWork($assignmentObj->realWork):"0";?>"  
@@ -309,7 +309,7 @@ if ($planningMode=='RECW') {
            </tr>
            <tr style="<?php if ($planningMode=='RECW') echo 'display:none;';?>">
              <td class="dialogLabel" >
-               <label for="assignmentLeftWork" ><?php echo i18n("colLeftWork");?>&nbsp;:&nbsp;</label>
+               <label for="assignmentLeftWork" ><?php echo i18n("colLeftWork");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="assignmentLeftWork" name="assignmentLeftWork" <?php if($planningMode=='MAN'){ echo "readonly";}?>                 
@@ -355,7 +355,7 @@ if ($planningMode=='RECW') {
            </tr>
            <tr style="<?php if ($planningMode=='RECW') echo 'display:none;';?>">
              <td class="dialogLabel" >
-               <label for="assignmentPlannedWork" ><?php echo i18n("colPlannedWork");?>&nbsp;:&nbsp;</label>
+               <label for="assignmentPlannedWork" ><?php echo i18n("colPlannedWork");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="assignmentPlannedWork" name="assignmentPlannedWork"                  
@@ -384,7 +384,7 @@ if ($planningMode=='RECW') {
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="assignmentIdle" ><?php echo i18n("colIdle");?>&nbsp;:&nbsp;</label>
+               <label for="assignmentIdle" ><?php echo i18n("colIdle");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <?php $checked=$assignmentObj->idle;
@@ -405,7 +405,7 @@ if ($planningMode=='RECW') {
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="assignmentComment" ><?php echo i18n("colComment");?>&nbsp;:&nbsp;</label>
+               <label for="assignmentComment" ><?php echo i18n("colComment");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <input id="assignmentComment" name="assignmentComment" value="<?php echo htmlEncode($assignmentObj->comment);?>"  

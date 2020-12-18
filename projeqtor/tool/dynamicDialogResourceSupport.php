@@ -48,7 +48,7 @@ if($idSupport){
          <table>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceSupport" style="white-space:nowrap;width:200px;"><?php echo i18n("colIdResourceSupport");?>&nbsp;:&nbsp;</label>
+               <label for="resourceSupport" style="white-space:nowrap;width:200px;"><?php echo i18n("colIdResourceSupport");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
             <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" 
@@ -73,7 +73,7 @@ if($idSupport){
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="SupportingRate" style="white-space:nowrap;width:200px;"><?php echo i18n("colRate");?>&nbsp;:&nbsp;</label>
+               <label for="SupportingRate" style="white-space:nowrap;width:200px;"><?php echo i18n("colRate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="SupportingRate" name="SupportingRate" value="<?php echo $supportRate;?>" 
@@ -86,7 +86,7 @@ if($idSupport){
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceSupportDescription" style="white-space:nowrap;width:200px;"><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
+               <label for="resourceSupportDescription" style="white-space:nowrap;width:200px;"><?php echo i18n("colDescription");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td> 
                <textarea dojoType="dijit.form.Textarea" 

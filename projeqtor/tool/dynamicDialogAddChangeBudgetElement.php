@@ -127,7 +127,7 @@ $costVisibility = ($workAndCostVisibility['costVisibility']=='NO'?'hidden':'');
             <table>
                 <tr>
                     <td class="dialogLabel">
-                        <label for="AddChangeBudgetElementYear"><?php echo i18n('colPeriod');?>&nbsp;:&nbsp;</label>
+                        <label for="AddChangeBudgetElementYear"><?php echo i18n('colPeriod');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                     </td>                    
                     <td>
                         <input id="AddChangeBudgetElementYear" name="AddChangeBudgetElementYear"
@@ -139,7 +139,7 @@ $costVisibility = ($workAndCostVisibility['costVisibility']=='NO'?'hidden':'');
                 <?php if($workVisibility!='hidden') { ?>
                 <tr class="detail">
                     <td class="dialogLabel">
-                        <label for="AddChangeBudgetElementBudgetWork"><?php echo i18n('colWork');?>&nbsp;:&nbsp;</label>
+                        <label for="AddChangeBudgetElementBudgetWork"><?php echo i18n('colWork');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                     </td>
                     <td>                        
                         <div id="AddChangeBudgetElementBudgetWork" name="AddChangeBudgetElementBudgetWork"
@@ -161,7 +161,7 @@ $costVisibility = ($workAndCostVisibility['costVisibility']=='NO'?'hidden':'');
                 <?php if($costVisibility!='hidden') { ?>
                 <tr class="detail">
                     <td class="dialogLabel">
-                        <label for="AddChangeBudgetElementBudgetCost"><?php echo i18n('colCost');?>&nbsp;:&nbsp;</label>
+                        <label for="AddChangeBudgetElementBudgetCost"><?php echo i18n('colCost');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                     </td>
                     <td>
                         <?php 
@@ -181,7 +181,7 @@ $costVisibility = ($workAndCostVisibility['costVisibility']=='NO'?'hidden':'');
                 </tr>
                 <tr class="detail">
                     <td class="dialogLabel">
-                        <label for="AddChangeBudgetElementBudgetExpenseAmount"><?php echo i18n('colExpense');?>&nbsp;:&nbsp;</label>
+                        <label for="AddChangeBudgetElementBudgetExpenseAmount"><?php echo i18n('colExpense');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                     </td>
                     <td>
                         <?php echo ($currencyPosition=='before'?$currency:''); ?>

@@ -45,7 +45,7 @@ $object=new Asset($structureId);
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>  
           <tr>
             <td class="dialogLabel"  >
-              <label for="assetStuctureListId" ><?php echo i18n('Asset') ?>&nbsp;:&nbsp;</label>
+              <label for="assetStuctureListId" ><?php echo i18n('Asset') ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
               <select size="14" id="assetStuctureListId" name="assetStuctureListId[]"

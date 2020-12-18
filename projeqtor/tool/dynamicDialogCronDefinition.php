@@ -55,7 +55,7 @@ $dayOfWeek=$cron[4];
   <td colspan="2" style="font-weight:bold;text-align:center">&nbsp;</td>
 </tr>
 <tr>
-  <td class="dialogLabel"><label><?php echo i18n("minute");?>&nbsp;:&nbsp;</label></td>
+  <td class="dialogLabel"><label><?php echo i18n("minute");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
   <td>
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
     <?php echo autoOpenFilteringSelect();?>
@@ -67,7 +67,7 @@ $dayOfWeek=$cron[4];
   </td>
 </tr>
 <tr>
-  <td class="dialogLabel"><label><?php echo i18n("hour");?>&nbsp;:&nbsp;</label></td>
+  <td class="dialogLabel"><label><?php echo i18n("hour");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
   <td>
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
     <?php echo autoOpenFilteringSelect();?>
@@ -79,7 +79,7 @@ $dayOfWeek=$cron[4];
   </td>
 </tr>
 <tr>
-  <td class="dialogLabel"><label><?php echo i18n("colFixedDay");?>&nbsp;:&nbsp;</label></td>
+  <td class="dialogLabel"><label><?php echo i18n("colFixedDay");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
   <td>
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
     <?php echo autoOpenFilteringSelect();?>
@@ -91,7 +91,7 @@ $dayOfWeek=$cron[4];
   </td>
 </tr>
 <tr>
-  <td class="dialogLabel"><label><?php echo i18n("month");?>&nbsp;:&nbsp;</label></td>
+  <td class="dialogLabel"><label><?php echo i18n("month");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
   <td>
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
     <?php echo autoOpenFilteringSelect();?>
@@ -105,7 +105,7 @@ $dayOfWeek=$cron[4];
   </td>
 </tr>
 <tr>
-  <td class="dialogLabel"><label><?php echo i18n("colFixedDayOfWeek");?>&nbsp;:&nbsp;</label></td>
+  <td class="dialogLabel"><label><?php echo i18n("colFixedDayOfWeek");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
   <td>
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
     <?php echo autoOpenFilteringSelect();?>
