@@ -176,6 +176,7 @@ if($paramRightDiv=='trailing'){
       </td>
     </tr>
     <tr>
+    <?php if (! isNewGui()) {?>
     <td width="<?php echo (isIE())?37:35;?>px">
 	   <div id="hideMenuBarBottom" class="pseudoButton" onClick="hideMenuBarShowMode();" title="<?php echo i18n('buttonShowLeftMenu')?>" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
 	     <?php if (! isset($showModuleScreen)) {?>
@@ -200,8 +201,9 @@ if($paramRightDiv=='trailing'){
           </table>    
 	  </div>
     </td>
+    <?php }?>  
     <?php if (! isIE()) {?>
-    <td width="<?php echo (isIE())?37:35;?>px"> 
+    <td width="<?php echo (isIE())?37:35;?>px;" style="<?php echo (isNewGui())?'padding-left: 4px;':'';?>"> 
       <div  class="pseudoButtonFullScreen " style="height:28px; position:relative;top:0px; z-index:30; width:30px; right:0px;" onclick="toggleFullScreen()" >
         <table>
           <tr>
