@@ -39,7 +39,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <table>
       <tr>
         <td class="dialogLabel" >
-          <label for="resourceCostIdRole" ><?php echo i18n("colIdRole");?>&nbsp;:&nbsp;</label>
+          <label for="resourceCostIdRole" ><?php echo i18n("colIdRole");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
          <td>
           <select dojoType="dijit.form.FilteringSelect" 
@@ -54,7 +54,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceCostValue" ><?php echo i18n("colCost");?>&nbsp;:&nbsp;</label>
+               <label for="resourceCostValue" ><?php echo i18n("colCost");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td><span class="nobr">
                <?php echo ($currencyPosition=='before')?$currency:''; ?>
@@ -74,7 +74,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceCostStartDate" ><?php echo i18n("colStartDate");?>&nbsp;:&nbsp;</label>
+               <label for="resourceCostStartDate" ><?php echo i18n("colStartDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="resourceCostStartDate" name="resourceCostStartDate" value="" 

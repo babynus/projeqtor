@@ -51,7 +51,7 @@ $tabCompValues = array();
          <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr>
              <td style="width:100px;" class="dialogLabel" >
-               <label for="WUReference" ><?php echo i18n("colReference");?>&nbsp;:&nbsp;</label>
+               <label for="WUReference" ><?php echo i18n("colReference");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <textarea dojoType="dijit.form.Textarea" 
@@ -64,7 +64,7 @@ $tabCompValues = array();
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td style="vertical-align: top;width:100px;" class="dialogLabel" >
-               <label for="WUDescription" ><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
+               <label for="WUDescription" ><?php echo i18n("colDescription");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
 					     <input id="WUDescription" name="WUDescription" type="hidden" value=""/>
@@ -75,7 +75,7 @@ $tabCompValues = array();
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td style="width:100px;vertical-align: top;" class="dialogLabel" >
-               <label for="WUIncoming" ><?php echo i18n("colIncoming");?>&nbsp;:&nbsp;</label>
+               <label for="WUIncoming" ><?php echo i18n("colIncoming");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
               <input id="WUIncoming" name="WUIncoming" type="hidden" value=""/>
@@ -86,7 +86,7 @@ $tabCompValues = array();
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr>
              <td style="width:100px;vertical-align: top;" class="dialogLabel" >
-               <label for="WULivrable" ><?php echo i18n("colLivrable");?>&nbsp;:&nbsp;</label>
+               <label for="WULivrable" ><?php echo i18n("colLivrable");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <input id="WULivrable" name="WULivrable" type="hidden" value=""/>
@@ -97,7 +97,7 @@ $tabCompValues = array();
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr>
              <td  class="dialogLabel" >
-               <label for="ValidityDateWU" ><?php echo i18n("colValidityDate");?>&nbsp;:&nbsp;</label>
+               <label for="ValidityDateWU" ><?php echo i18n("colValidityDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="ValidityDateWU" name="ValidityDateWU"

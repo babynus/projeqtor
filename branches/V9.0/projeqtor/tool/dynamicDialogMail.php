@@ -85,7 +85,7 @@ if($paramMailerType=='phpmailer'){
           <?php if (property_exists($objectClass, 'idContact')) { ?>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToContact"><?php echo htmlEncode($obj->getColCaption("idContact"));?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToContact"><?php echo htmlEncode($obj->getColCaption("idContact"));?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
               <?php  
@@ -107,7 +107,7 @@ if($paramMailerType=='phpmailer'){
           <?php if (property_exists($objectClass, 'idUser') and $objectClass!='Project') {?>   
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToUser"><?php echo htmlEncode($obj->getColCaption("idUser")); ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToUser"><?php echo htmlEncode($obj->getColCaption("idUser")); ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -129,7 +129,7 @@ if($paramMailerType=='phpmailer'){
           <?php if (property_exists($objectClass, 'idAccountable') and !$obj->isAttributeSetToField('idAccountable','hidden') ) {?>   
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToAccountable"><?php echo htmlEncode($obj->getColCaption("idAccountable")); ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToAccountable"><?php echo htmlEncode($obj->getColCaption("idAccountable")); ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -151,7 +151,7 @@ if($paramMailerType=='phpmailer'){
           <?php if (property_exists($objectClass, 'idResource') ) {?>   
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToResource"><?php echo htmlEncode($obj->getColCaption("idResource")); ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToResource"><?php echo htmlEncode($obj->getColCaption("idResource")); ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -173,7 +173,7 @@ if($paramMailerType=='phpmailer'){
           <?php if (property_exists($objectClass, 'idResponsible') ) {?>   
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToFinancialResponsible"><?php echo htmlEncode($obj->getColCaption("idResponsible")); ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToFinancialResponsible"><?php echo htmlEncode($obj->getColCaption("idResponsible")); ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -194,7 +194,7 @@ if($paramMailerType=='phpmailer'){
           <?php if (property_exists($objectClass, 'idSponsor')) { ?>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToSponsor"><?php echo htmlEncode($obj->getColCaption("idSponsor"));?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToSponsor"><?php echo htmlEncode($obj->getColCaption("idSponsor"));?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -216,7 +216,7 @@ if($paramMailerType=='phpmailer'){
           <?php if (property_exists($objectClass, 'idProject')) { ?>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToProject"><?php echo i18n("colMailToProject") ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToProject"><?php echo i18n("colMailToProject") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -236,7 +236,7 @@ if($paramMailerType=='phpmailer'){
             </tr>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToProjectIncludingParentProject"><?php echo i18n("colMailToProjectIncludingParentProject") ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToProjectIncludingParentProject"><?php echo i18n("colMailToProjectIncludingParentProject") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -257,7 +257,7 @@ if($paramMailerType=='phpmailer'){
             </tr>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToLeader"><?php echo i18n("colMailToLeader") ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToLeader"><?php echo i18n("colMailToLeader") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -277,7 +277,7 @@ if($paramMailerType=='phpmailer'){
             </tr>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToManager"><?php echo i18n("colMailToManager") ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToManager"><?php echo i18n("colMailToManager") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -303,7 +303,7 @@ if($paramMailerType=='phpmailer'){
               }?>  
              <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToAssigned"><?php echo $assigedLabel; ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToAssigned"><?php echo $assigedLabel; ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -323,7 +323,7 @@ if($paramMailerType=='phpmailer'){
             <?php }?>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToSubscribers"><?php echo i18n("colMailToSubscribers") ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToSubscribers"><?php echo i18n("colMailToSubscribers") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -344,7 +344,7 @@ if($paramMailerType=='phpmailer'){
             </tr>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToOther"><?php echo i18n("colMailToOther") ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToOther"><?php echo i18n("colMailToOther") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -418,7 +418,7 @@ if($paramMailerType=='phpmailer'){
             </tr>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailMessage"><?php echo i18n("colMailMessage") ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailMessage"><?php echo i18n("colMailMessage") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php  
@@ -439,7 +439,7 @@ if($paramMailerType=='phpmailer'){
             <?php if (property_exists($objectClass, '_Note') ) {?>    
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailSaveAsNote"><?php echo i18n("colSaveAsNote") ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailSaveAsNote"><?php echo i18n("colSaveAsNote") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php 
@@ -460,7 +460,7 @@ if($paramMailerType=='phpmailer'){
             <?php }?>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailEmailTemplate" class="generalColClass idEmailTemplateClass"><?php echo htmlEncode($obj->getColCaption("idEmailTemplate")); ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailEmailTemplate" class="generalColClass idEmailTemplateClass"><?php echo htmlEncode($obj->getColCaption("idEmailTemplate")); ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php 

@@ -55,7 +55,7 @@ $pp=new ProductProject($idProductProject);
 						value="<?php echo $idProductProject;?>" />
 					<table>
 						<tr>
-							<td class="dialogLabel"><label for="productProjectProject"><?php echo i18n("colIdProject") ?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="productProjectProject"><?php echo i18n("colIdProject") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td><select dojoType="dijit.form.FilteringSelect"
 								<?php echo autoOpenFilteringSelect();?>
@@ -76,7 +76,7 @@ $pp=new ProductProject($idProductProject);
 						  </td>
 						</tr>
 						<tr>
-							<td class="dialogLabel"><label for="productProjectProduct"><?php echo i18n("colIdProduct") ?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="productProjectProduct"><?php echo i18n("colIdProduct") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td><select dojoType="dijit.form.FilteringSelect"
 								<?php echo autoOpenFilteringSelect();?>
@@ -98,7 +98,7 @@ $pp=new ProductProject($idProductProject);
 								</td>
 						</tr>
 						<tr>
-							<td class="dialogLabel"><label for="productProjectStartDate"><?php echo i18n("colStartDate");?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="productProjectStartDate"><?php echo i18n("colStartDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
 								<div id="productProjectStartDate" name="productProjectStartDate"
@@ -108,7 +108,7 @@ $pp=new ProductProject($idProductProject);
 							</td>
 						</tr>
 						<tr>
-							<td class="dialogLabel"><label for="productProjectEndDate"><?php echo i18n("colEndDate");?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="productProjectEndDate"><?php echo i18n("colEndDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
 								<div id="productProjectEndDate" name="productProjectEndDate"
@@ -118,7 +118,7 @@ $pp=new ProductProject($idProductProject);
 							</td>
 						</tr>
 						<tr>
-							<td class="dialogLabel"><label for="productProjectIdle"><?php echo i18n("colIdle");?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="productProjectIdle"><?php echo i18n("colIdle");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
 								<div id="productProjectIdle" name="productProjectIdle"

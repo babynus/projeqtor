@@ -69,7 +69,7 @@ if ($mode=='edit') {
           <table>
             <tr>
               <td class="dialogLabel" >
-               <label for="kpiThresholdName" ><?php echo i18n("colName");?>&nbsp;:&nbsp;</label>
+               <label for="kpiThresholdName" ><?php echo i18n("colName");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
 		            <input dojoType="dijit.form.ValidationTextBox" 
@@ -81,7 +81,7 @@ if ($mode=='edit') {
 		        </tr>
 		        <tr>
               <td class="dialogLabel" >
-                <label for="kpiThresholdValue" ><?php echo i18n("colValue");?>&nbsp;:&nbsp;</label>
+                <label for="kpiThresholdValue" ><?php echo i18n("colValue");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
 		            <input dojoType="dijit.form.NumberTextBox" 
@@ -94,7 +94,7 @@ if ($mode=='edit') {
 		        </tr>
 		        <tr>
 		          <td class="dialogLabel" >
-                <label for="kpiThresholdColor" ><?php echo i18n("colColor");?>&nbsp;:&nbsp;</label>
+                <label for="kpiThresholdColor" ><?php echo i18n("colColor");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
 		          <td>
 		            <table>

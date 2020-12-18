@@ -41,7 +41,7 @@ $bf=new BusinessFeature($businessFeatureId);
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>  
           <tr>
             <td class="dialogLabel"  >
-              <label for="businessFeatureName" ><?php echo i18n('colName'); ?>&nbsp;:&nbsp;</label>
+              <label for="businessFeatureName" ><?php echo i18n('colName'); ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
             <?php //CHANGE qCazelles - Business Feature (Correction)

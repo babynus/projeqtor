@@ -32,7 +32,7 @@ $approverId=RequestHandler::getId('approverId');
   <table>
     <tr>
       <td class="dialogLabel">
-       <label style="white-space:nowrap;padding-right: 5px;" for="disapproveDescription" ><?php echo i18n("colDisapproveDescription");?>&nbsp;:&nbsp;&nbsp;</label>
+       <label style="white-space:nowrap;padding-right: 5px;" for="disapproveDescription" ><?php echo i18n("colDisapproveDescription");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;&nbsp;</label>
       </td>
       <td> 
        <textarea dojoType="dijit.form.Textarea" 

@@ -39,7 +39,7 @@ $obj=new Document($objectId);
              <table>
                 <tr>
                   <td class="dialogLabel"  >
-                    <label for="copyToName" ><?php echo i18n("copyToName") ?>&nbsp;:&nbsp;</label>
+                    <label for="copyToName" ><?php echo i18n("copyToName") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                   </td>
                     <td colspan=2> 
                        <div id="copyToNameDoc" name="copyToNameDoc" dojoType="dijit.form.ValidationTextBox"
@@ -53,7 +53,7 @@ $obj=new Document($objectId);
                 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
                 <tr>
                   <td class="dialogLabel"  >
-                    <label for="copyToType" ><?php echo i18n("alsoCopyDocument") ?>&nbsp;:&nbsp;</label>
+                    <label for="copyToType" ><?php echo i18n("alsoCopyDocument") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                   </td>
                   <td> <input type="radio" data-dojo-type="dijit/form/RadioButton" name="copyOption" id="copyOption1"  checked value="none"/> </td> 
                   <td> <label style="text-align:left;" for="copyOption1"><?php echo i18n("noneVersion");?></label> </td>

@@ -49,7 +49,7 @@ if(isset($listRescap[0])){
          <table>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceCapacity" ><?php echo i18n("colCapacity");?>&nbsp;:&nbsp;</label>
+               <label for="resourceCapacity" ><?php echo i18n("colCapacity");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="resourceCapacity" name="resourceCapacity" value="<?php echo htmlDisplayNumericWithoutTrailingZeros($res->capacity); ?>" 
@@ -67,7 +67,7 @@ if(isset($listRescap[0])){
                <table>
                  <tr>
                    <td class="dialogLabel" >
-                     <label for="resourceCapacityStartDate" ><?php echo i18n("colStartDate");?>&nbsp;:&nbsp;</label>
+                     <label for="resourceCapacityStartDate" ><?php echo i18n("colStartDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                    </td>
                    <td>
                      <input id="resourceCapacityStartDate" name="resourceCapacityStartDate" value="<?php if(isset($date)){ echo $date;} ?>"  
@@ -78,7 +78,7 @@ if(isset($listRescap[0])){
 			                 style="width:100px" />
                    </td>
                    <td class="dialogLabel" >
-                     <label for="resourceCapacityEndDate" ><?php echo i18n("colEndDate");?>&nbsp;:&nbsp;</label>
+                     <label for="resourceCapacityEndDate" ><?php echo i18n("colEndDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                    </td>
                    <td>
                    <input id="resourceCapacityEndDate" name="resourceCapacityEndDate" value=""  
@@ -92,7 +92,7 @@ if(isset($listRescap[0])){
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceCapacityDescription" ><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
+               <label for="resourceCapacityDescription" ><?php echo i18n("colDescription");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td> 
                <textarea dojoType="dijit.form.Textarea" 
@@ -104,7 +104,7 @@ if(isset($listRescap[0])){
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceCapacityIdle" ><?php echo i18n("colIdle");?>&nbsp;:&nbsp;</label>
+               <label for="resourceCapacityIdle" ><?php echo i18n("colIdle");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="resourceCapacityIdle" name="resourceCapacityIdle"

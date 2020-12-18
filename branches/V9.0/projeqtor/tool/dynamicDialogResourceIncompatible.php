@@ -35,7 +35,7 @@ $idResource=RequestHandler::getValue('idResource');
          <table>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceIncompatible" style="white-space:nowrap;width:200px;"><?php echo i18n("colIdResourceIncompatible");?>&nbsp;:&nbsp;</label>
+               <label for="resourceIncompatible" style="white-space:nowrap;width:200px;"><?php echo i18n("colIdResourceIncompatible");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
             <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" 
@@ -59,7 +59,7 @@ $idResource=RequestHandler::getValue('idResource');
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceIncompatibleDescription" style="white-space:nowrap;width:200px;"><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
+               <label for="resourceIncompatibleDescription" style="white-space:nowrap;width:200px;"><?php echo i18n("colDescription");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td> 
                <textarea dojoType="dijit.form.Textarea" 
