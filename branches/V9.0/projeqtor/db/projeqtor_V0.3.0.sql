@@ -895,24 +895,24 @@ CREATE TABLE `${prefix}parameter` (
 -- Contenu de la TABLE `${prefix}parameter`
 --
 
-INSERT INTO `${prefix}parameter` (`id`, `idUser`, `idProject`, `parameterCode`, `parameterValue`) VALUES
-(1, NULL, NULL, 'dbVersion', 'V0.0.0'),
-(2, 1, NULL, 'destinationWidth', '847'),
-(3, 1, NULL, 'theme', 'ProjectOrRia'),
-(4, 1, NULL, 'lang', 'en'),
-(5, 1, NULL, 'defaultProject', '3'),
-(6, 1, NULL, 'displayAttachment', 'YES_CLOSED'),
-(7, 1, NULL, 'displayNote', 'YES_CLOSED'),
-(8, 1, NULL, 'displayHistory', 'YES_CLOSED'),
-(9, 1, NULL, 'refreshUpdates', 'YES'),
-(10, 3, NULL, 'destinationWidth', '719'),
-(11, 3, NULL, 'theme', 'ProjectOrRia'),
-(12, 3, NULL, 'lang', 'en'),
-(13, 3, NULL, 'defaultProject', '3'),
-(14, 3, NULL, 'displayAttachment', 'YES_CLOSED'),
-(15, 3, NULL, 'displayNote', 'YES_CLOSED'),
-(16, 3, NULL, 'displayHistory', 'YES_CLOSED'),
-(17, 3, NULL, 'refreshUpdates', 'YES');
+-- INSERT INTO `${prefix}parameter` (`id`, `idUser`, `idProject`, `parameterCode`, `parameterValue`) VALUES
+-- (1, NULL, NULL, 'dbVersion', 'V0.0.0'),
+-- (2, 1, NULL, 'destinationWidth', '847'),
+-- (3, 1, NULL, 'theme', 'ProjectOrRia'),
+-- (4, 1, NULL, 'lang', 'en'),
+-- (5, 1, NULL, 'defaultProject', '3'),
+-- (6, 1, NULL, 'displayAttachment', 'YES_CLOSED'),
+-- (7, 1, NULL, 'displayNote', 'YES_CLOSED'),
+-- (8, 1, NULL, 'displayHistory', 'YES_CLOSED'),
+-- (9, 1, NULL, 'refreshUpdates', 'YES'),
+-- (10, 3, NULL, 'destinationWidth', '719'),
+-- (11, 3, NULL, 'theme', 'ProjectOrRia'),
+-- (12, 3, NULL, 'lang', 'en'),
+-- (13, 3, NULL, 'defaultProject', '3'),
+-- (14, 3, NULL, 'displayAttachment', 'YES_CLOSED'),
+-- (15, 3, NULL, 'displayNote', 'YES_CLOSED'),
+-- (16, 3, NULL, 'displayHistory', 'YES_CLOSED'),
+-- (17, 3, NULL, 'refreshUpdates', 'YES');
 
 -- --------------------------------------------------------
 
