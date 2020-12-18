@@ -17,6 +17,10 @@
 
 
 
+
+
+
+
 .. |unlocked| image:: images/unlocked.png
    :alt: Unlocked
    :scale: 60
@@ -342,6 +346,15 @@
 .. |buttonIconParameter| image:: images/iconParameter.png
    :alt: Button icon parameter 
 
+.. |buttonIconParameter9| image:: images/v9/iconParameter.png
+   :alt: Button icon parameter 
+   :scale: 15
+
+.. |archive9| image:: images/v9/iconHistArchive.png
+   :alt: Button Archive 
+   :scale: 15
+
+
 .. |buttonIconDocDir| image:: images/iconDocumentDirectory.png
    :alt: Button icon document directory
 
@@ -431,11 +444,29 @@
 .. |buttonIconMultipleUpdate| image:: images/buttonIconMultipleUpdate.png
    :alt: Button icon multiple update
 
+
+
+
+
 .. |buttonIconBackNavigation| image:: images/buttonIconBackNavigation.png
    :alt: Button icon back navigation
 
 .. |buttonIconForwardNavigation| image:: images/buttonIconForwardNavigation.png
    :alt: Button icon forward navigation
+
+.. |buttonIconBackNavigation9| image:: images/v9/iconLeft.png
+   :alt: Button icon back navigation
+   :scale: 15
+   
+.. |buttonIconForwardNavigation9| image:: images/v9/iconRight.png
+   :alt: Button icon forward navigation
+   :scale: 15
+
+.. |newtab9| image:: images/v9/iconNewtab.png
+   :alt: Open a new tab
+   :scale: 15
+
+
 
 .. |buttonIconSelect| image:: images/buttonIconSelect.png
    :alt: Button icon select
