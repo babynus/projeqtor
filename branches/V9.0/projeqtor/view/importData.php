@@ -60,7 +60,7 @@
            </select> 
         </td>
         <td width="20%" align="left"> 
-          <button id="helpImportData" iconClass="iconHelp" dojoType="dijit.form.Button" type="button" showlabel="false"
+          <button id="helpImportData" class="detailButton" iconClass="imageColorNewGui iconHelp iconSize16" dojoType="dijit.form.Button" type="button" showlabel="false"
           title="<?php echo i18n('helpImport');?>">
              <script type="dojo/connect" event="onClick" args="evt">
                showHelpImportData();
@@ -106,7 +106,7 @@
       <tr>
         <td colspan="4"></td>
         <td>
-          <button id="runImportData" dojoType="dijit.form.Button" style="color: #000000;" type="submit">
+          <button id="runImportData" dojoType="dijit.form.Button" style="color: #000000;" type="submit" class="dynamicTextButton">
             <?php echo i18n("buttonImportData");?>
           </button>
          </td>
