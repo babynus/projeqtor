@@ -1085,12 +1085,12 @@
 .ProjeQtOrFlatRed .iconDocumentDirectory { background-image: url(customIcons/red/iconDocumentDirectory.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconDocumentDirectory { background-image: url(customIcons/new/iconDocumentDirectory.svg);  background-repeat: no-repeat; }
 
-.iconDocumentType { background-image: url(images/iconDocumentDirectory32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconDocumentType { background-image: url(customIcons/blue/iconDocumentDirectory.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconDocumentType { background-image: url(customIcons/green/iconDocumentDirectory.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconDocumentType { background-image: url(customIcons/grey/iconDocumentDirectory.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconDocumentType { background-image: url(customIcons/red/iconDocumentDirectory.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconDocumentType { background-image: url(customIcons/new/iconDocumentDirectory.svg);  background-repeat: no-repeat; }
+.iconDocumentType { background-image: url(images/iconDocumentType32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconDocumentType { background-image: url(customIcons/blue/iconDocumentType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconDocumentType { background-image: url(customIcons/green/iconDocumentType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconDocumentType { background-image: url(customIcons/grey/iconDocumentType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconDocumentType { background-image: url(customIcons/red/iconDocumentType.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconDocumentType { background-image: url(customIcons/new/iconDocumentType.svg);  background-repeat: no-repeat; }
 
 .iconDisabledModules { background-image: url(customIcons/new/iconDisabledModules.svg);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconDisabledModules { background-image: url(customIcons/new/iconDisabledModules.svg);  background-repeat: no-repeat; }

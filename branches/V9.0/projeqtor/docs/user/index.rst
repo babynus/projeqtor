@@ -19,7 +19,7 @@ Its particularity, in addition to its completeness, is to be oriented towards qu
 
     \newpage
     
-What's new in version 8.6 ?
+What's new in version 9.0 ?
 ---------------------------
 
 Find in this manual, every 3 months, the latest features integrated into ProjeQtOr.
@@ -30,40 +30,17 @@ We offer you a small overview of the major developments and you will find the fu
 
 .. container:: 
    
-   **Monthly consolidation**
+   **New Interface**
 
-   .. image:: /images/iconConsolidationValidation.png
+   .. image:: /images/NewInterface_connexion.png
       :align: center
       
-   ProjeQtOr offers you a new system allowing you to validate the monthly allocations of your resources on a single project.
+   ProjeQtOr offers you a whole new interface, more intuitive and more ergonomic.
+   Finally a complete and sexy tool!
    
-   :ref:`monthly-consolidation`
+   :ref:`gui9.0`
       
-   
-
-.. container:: 
-
-   **Revenue management**
-
-   .. image:: /images/iconCatalogUO.png
-      :align: center
-
-   You can now manage the turnover of a project and its consistency with the financial elements of the project.
          
-   :ref:`revenue-managment` & :ref:`work-unit-catalog`
-   
-
-.. container:: 
-
-   **Improvment of access rights**
-
-   .. image:: /images/iconHabilitationParameter22.png
-      :align: center
-
-   Improvment of access rights management for non-project dependent items.
-         
-   :ref:`access-mode`
-      
 
 
 
