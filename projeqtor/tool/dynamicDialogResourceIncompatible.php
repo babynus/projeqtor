@@ -62,7 +62,7 @@ $idResource=RequestHandler::getValue('idResource');
                <label for="resourceIncompatibleDescription" style="white-space:nowrap;width:200px;"><?php echo i18n("colDescription");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td> 
-               <textarea dojoType="dijit.form.Textarea" 
+               <textarea dojoType="dijit.form.Textarea" style="width:411px"
                 id="resourceIncompatibleDescription" name="resourceIncompatibleDescription"
                 maxlength="4000"
                 class="input"></textarea>   

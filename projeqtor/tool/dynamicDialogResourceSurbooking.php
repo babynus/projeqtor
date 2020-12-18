@@ -98,7 +98,7 @@ if(isset($listRescap[0])){
              <td> 
                <textarea dojoType="dijit.form.Textarea" 
                 id="resourceSurbookingDescription" name="resourceSurbookingDescription"
-                style="width:400px;"
+                style="width:408px;"
                 maxlength="4000"
                 class="input"></textarea>   
              </td>
