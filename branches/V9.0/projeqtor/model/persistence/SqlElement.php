@@ -5539,30 +5539,30 @@ abstract class SqlElement {
         $notFound=' not found ';
         if(!empty($attachments) and Parameter::getGlobalParameter('paramMailerType')=='phpmailer'){
           $c=0;
-          $addAttachToMessage="<table style='font-size:10pt;font-weight:bold; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
-        <div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr></table><table style='font-size:9pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'>";
+          $addAttachToMessage="<table style='font-size:11pt;min-width: 50%;max-width: 95%;font-family:Verdana,Arial,Helvetica,sans-serif;'>
+                                <tr><td colspan='3' style='background:#606062;color:#ffffff;text-align:center;font-size:14pt;font-weight:bold;width:100%'><div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr>";
           foreach ($attachments as $val){
             $c++;
-            $addAttachToMessage.="<tr><td colspan='3' style='background:#DDDDDD;font-weight:bold;text-align:right;width:25%;vertical-align: middle;'><div>".i18n('col'.ucfirst($val[1]))."&nbsp</div></td>";
+            $addAttachToMessage.="<tr><td colspan='2' style='background:#ffffff;font-weight:bold;text-align:right;width:30%;min-width:30%;vertical-align:top;white-space:nowrap;padding-bottom:10px;'><div>".i18n('col'.ucfirst($val[1]))."</div></td>";
             if($val[1]=='file'){
               $att=new Attachment($val[0]);
               $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
               if( file_exists(str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName) and $lstAtt[$att->fileName]!=''){
-                $addAttachToMessage .="<td colspan='3' style='background:#FFFFFF;text-align: left;'><div>&nbsp;&nbsp;".$att->fileName."</div></td></tr>";
+                $addAttachToMessage .="<td colspan='2' style='background:#ffffff;text-align:left;width:70%;padding-left:20px;padding-bottom:10px;vertical-align:top;padding-bottom:10px;'><div>".$att->fileName."</div></td></tr>";
               }else{
-                $addAttachToMessage .="<td colspan='3' ><div style='background:#FFFFFF;text-align: left;color:red;'>&nbsp;&nbsp;".$att->fileName.$notFound."</div></td></tr>";
+                $addAttachToMessage .="<td colspan='2' ><div style='background:#ffffff;text-align:left;width:70%;padding-left:20px;padding-bottom:10px;vertical-align:top;padding-bottom:10px;color:red;'>".$att->fileName.$notFound."</div></td></tr>";
               }
             }else{
               $doc=new DocumentVersion($val[0]);
               $lstAtt[$doc->fileName]=$doc->getUploadFileName();
               if( file_exists($doc->getUploadFileName()) and $lstAtt[$doc->fileName]!=''){
-                $addAttachToMessage.= "<td colspan='3' ><div style='background:#FFFFFF;text-align: left;'>&nbsp;&nbsp;".$doc->fileName."</div></td></tr>";
+                $addAttachToMessage.= "<td colspan='2' ><div style='background:#FFFFFF;text-align: left;'>".$doc->fileName."</div></td></tr>";
               }else{
-                $addAttachToMessage.= "<td colspan='3' ><div style='background:#FFFFFF;text-align: left;color:red;'>&nbsp;&nbsp;".$doc->fileName.$notFound."</div></td></tr>";
+                $addAttachToMessage.= "<td colspan='2' ><div style='background:#FFFFFF;text-align: left;color:red;'>".$doc->fileName.$notFound."</div></td></tr>";
               }
             }
           }
-          $addAttachToMessage.="</tr></table>;";
+          $addAttachToMessage.="</table>";
           $attachments=$lstAtt;
         }
         //
@@ -5837,7 +5837,7 @@ abstract class SqlElement {
     $ref = $this->getReferenceUrl ();
     $replyMail=i18n("replyToMail");
     $firstLine = " 
-        <table style='font-size:14pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;padding-bottom:10px;'><tr style='height:22px;'>
+        <table style='font-size:14pt;min-width: 50%;max-width: 95%;font-family:Verdana,Arial,Helvetica,sans-serif;padding-bottom:10px;'><tr style='height:22px;'>
         <td colspan='2' style='background:#606062;color: #FFFFFF; text-align: center;vertical-align: middle;'>
         <div style='background:#F0F0F0;color:#A0A0A0;font-style:italic;font-size:80%'>".htmlEncode ( $replyMail)."</div><div style='background:#606062;color:#606062;font-size:1pt;'>###PROJEQTOR###</div>
         <div style='vertical-align: middle;'>
@@ -5849,7 +5849,7 @@ abstract class SqlElement {
     if(Parameter::getGlobalParameter('cronCheckEmailsHost')!='' and Parameter::getGlobalParameter('cronCheckEmails')>0){
       $msg = " \n ".$firstLine."\n".$dmsg."\n";
     }else{
-      $msg = "<table style='font-size:20pt; width: 50%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr style='height:22px;'>";
+      $msg = "<table style='font-size:14pt;min-width: 50%;max-width: 95%;font-family:Verdana,Arial,Helvetica,sans-serif;'><tr style='height:22px;'>";
       $msg .= "  <td colspan='2' style='background:#606062;color: #FFFFFF; text-align: center;vertical-align: middle;'><div style='vertical-align: middle;'>";
       $msg .= "  <img style='width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);' src='".self::getBaseUrl()."/view/css/customIcons/grey/icon".get_class ( $this ).".png'/>";
       $msg .= '  &nbsp;';
@@ -5941,6 +5941,7 @@ abstract class SqlElement {
         $colArray[$section][$col]=$val;
       }
     }
+    debugLog($colArray);
     $msg .= $rowStart.'<td style="width:50%;vertical-align:top;padding-right:15px;">';
     self::drawMailDetailCol($colArray['Description'], $msg);
     $msg .= $fieldEnd.'<td style="width:50%;vertical-align:top;padding-left:15px;">';
