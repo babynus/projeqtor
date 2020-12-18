@@ -455,12 +455,16 @@ html, body, #mainDiv,
 }
 .ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitInline.dijitButtonNode,
 .ProjeQtOrNewGui .dijitTooltipContainer .dijitReset.dijitInline.dijitButtonNode,
-.ProjeQtOrNewGui .largeTextButton .dijitReset.dijitInline.dijitButtonNode {
+.ProjeQtOrNewGui .largeTextButton .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .mediumTextButton .dijitReset.dijitInline.dijitButtonNode,
+.ProjeQtOrNewGui .dynamicTextButton .dijitReset.dijitInline.dijitButtonNode {
   /*padding: 0.2em 1em 0.2em 1em;*/
   border: 1px solid #c0c0c0;
 }
 .ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitStretch.dijitButtonContents,
-.ProjeQtOrNewGui .largeTextButton .dijitReset.dijitStretch.dijitButtonContents{
+.ProjeQtOrNewGui .largeTextButton .dijitReset.dijitStretch.dijitButtonContents,
+.ProjeQtOrNewGui .mediumTextButton .dijitReset.dijitStretch.dijitButtonContents,
+.ProjeQtOrNewGui .dynamicTextButton .dijitReset.dijitStretch.dijitButtonContents{
   padding: 0.2em 1em 0.2em 1em;
 }
 .ProjeQtOrNewGui .dijitDialogPaneContent .resetMargin .dijitReset.dijitStretch.dijitButtonContents{
