@@ -197,7 +197,7 @@ $objTeam=($obj)?get_class($obj):'';
              <td> 
                <textarea dojoType="dijit.form.Textarea" 
                 id="affectationDescription" name="affectationDescription"
-                style="width:400px;"
+                style="width:415px;"
                 maxlength="4000"
                 class="input"></textarea>   
              </td>
