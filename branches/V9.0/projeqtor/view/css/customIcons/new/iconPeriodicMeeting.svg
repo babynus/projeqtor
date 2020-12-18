@@ -56,20 +56,86 @@
 		M46.527,103.725v-9.138c0-3.21,2.514-5.812,5.614-5.812h23.32c3.102,0,5.615,2.602,5.615,5.812v9.431"/>
 	
 		<path display="inline" fill="none" stroke="#E42320" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-		M85.086,123.658v-10.018c0-3.211,2.514-5.813,5.614-5.813h23.319c3.103,0,5.613,2.603,5.613,5.813v10.019"/>
+		M85.086,123.658v-10.018c0-3.211,2.514-5.813,5.614-5.813h23.319c3.103,0,5.612,2.603,5.612,5.813v10.019"/>
 </g>
 <polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	35.759,18.944 55.926,52.427 70.758,43.293 "/>
-<g>
-	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M57.608,7.359c-29.706,0-53.785,18.646-53.785,41.646c0,12.19,6.766,23.156,17.546,30.772l-0.003-0.002v23.552L37.162,87.53
-			c6.304,2.009,13.207,3.122,20.446,3.122c29.704,0,53.785-18.646,53.785-41.646C111.394,26.005,87.313,7.359,57.608,7.359z"/>
+	49.368,21.264 64.248,45.97 75.191,39.23 "/>
+<g id="Calque_1_2_">
+	<g id="Calque_1_3_" display="none">
+		<g id="Calque_3_2_" display="inline">
+			<g>
+				<g>
+					
+						<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="63.233" cy="46.701" r="12.596"/>
+					
+						<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+						77.578,66.248 84.711,69.32 81.145,106.208 72.549,106.208 72.549,147.475 67.336,147.475 					"/>
+					
+						<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+						48.89,66.248 41.753,69.32 45.321,106.208 53.915,106.208 53.915,147.475 59.128,147.475 					"/>
+				</g>
+				<g>
+					
+						<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="93.445" cy="39.467" r="12.597"/>
+					
+						<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+						84.127,115.198 84.127,140.24 89.342,140.24 					"/>
+					
+						<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+						107.789,59.015 114.924,62.085 111.359,98.977 102.762,98.977 102.762,140.24 97.549,140.24 					"/>
+				</g>
+				<g>
+					
+						<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="33.019" cy="39.467" r="12.597"/>
+					
+						<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+						42.336,115.198 42.336,140.24 37.124,140.24 					"/>
+					
+						<polyline fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+						18.676,59.015 11.54,62.085 15.108,98.977 23.703,98.977 23.703,140.24 28.915,140.24 					"/>
+				</g>
+			</g>
+		</g>
+		<g id="Calque_2_1_" display="inline">
+		</g>
 	</g>
-	<g>
-		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-			M115.915,58.32c4.219,5.212,6.659,11.377,6.659,17.982c0,9.923-5.508,18.85-14.284,25.05h0.004v19.17l-12.86-12.859
-			c-5.132,1.635-10.751,2.543-16.645,2.543c-15.112,0-28.438-5.931-36.307-14.948"/>
+	<g id="Calque_4_1_" display="none">
+		
+			<circle display="inline" fill="none" stroke="#E42320" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="62.762" cy="96.048" r="9.893"/>
+		
+			<circle display="inline" fill="none" stroke="#E42320" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="24.391" cy="115.253" r="9.892"/>
+		
+			<circle display="inline" fill="none" stroke="#E42320" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="101.086" cy="115.253" r="9.892"/>
+		
+			<path display="inline" fill="none" stroke="#E42320" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M7.212,145.234v-9.139c0-3.209,2.514-5.813,5.615-5.813h23.319c3.101,0,5.615,2.604,5.615,5.813v9.432"/>
+		
+			<path display="inline" fill="none" stroke="#E42320" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M45.254,126.182v-9.138c0-3.21,2.514-5.812,5.614-5.812h23.319c3.102,0,5.615,2.602,5.615,5.812v9.431"/>
+		
+			<path display="inline" fill="none" stroke="#E42320" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M83.813,146.115v-10.018c0-3.211,2.514-5.813,5.615-5.813h23.318c3.104,0,5.613,2.603,5.613,5.813v10.019"/>
 	</g>
+	<g id="Calque_3_1_" display="none">
+		
+			<path display="inline" fill="none" stroke="#E42320" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M20.003,100.939c-3.97-7.104-6.232-15.293-6.232-24.008c0-27.223,22.068-49.291,49.291-49.291s49.292,22.067,49.292,49.291
+			c0,8.77-2.291,17.006-6.307,24.14"/>
+		
+			<polyline display="inline" fill="none" stroke="#E42320" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			47.521,51.131 63.061,76.932 74.488,69.891 		"/>
+	</g>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="16.715" y1="84.116" x2="16.715" y2="124.801"/>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="37.883" y1="88.686" x2="37.883" y2="116.055"/>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="88.537" y1="88.686" x2="88.537" y2="116.055"/>
+	
+		<line fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="110.244" y1="84.116" x2="110.244" y2="124.801"/>
+	<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M92.525,60.839
+		c19.23,2.484,32.324,7.401,32.324,13.062c0,8.166-27.244,14.785-60.849,14.785c-33.606,0-60.85-6.619-60.85-14.785
+		c0-5.66,13.093-10.577,32.323-13.062"/>
 </g>
+<circle fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="64" cy="39.303" r="35.746"/>
 </svg>
