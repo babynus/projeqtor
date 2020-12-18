@@ -51,6 +51,7 @@ $arrayPanes=array('paneDescription','paneTreatment','paneAllocation','paneProgre
 // $panes['checkList']="";
 $arrayGroupe=array();
 $layout=Parameter::getUserParameter('paramLayoutObjectDetail');
+if (isIE()) $layout='col';
 scriptLog('   ->/view/objectDetail.php');
 if (!isset($comboDetail)) {
   $comboDetail=false;
@@ -4282,7 +4283,7 @@ function drawBillLinesFromObject($obj, $refresh=false) {
     $billingType=$obj->billingType;
   }
   if (!$print) {
-    echo '<td class="noteHeader" style="width:5%">'; // changer le header
+    echo '<td class="noteHeader" style="width:5%;white-space:nowrap">'; // changer le header
     if ($obj->id!=null and !$print and !$lock) {
       echo '<a onClick="addBillLine(\'M\');" title="'.i18n('addLine').'" > '.formatSmallButton('Add').'</a>';
       if ($billingType!='M') {
@@ -4521,7 +4522,7 @@ function drawChecklistDefinitionLinesFromObject($obj, $refresh=false) {
   }
   echo '<td class="noteHeader" style="width:25%">'.i18n('colName').'</td>';
   echo '<td class="noteHeader" style="width:'.(($print)?'65':'60').'%">'.i18n('colChoices').'</td>';
-  echo '<td class="noteHeader" style="width:5%">'.i18n('colRequired').'</td>';
+  echo '<td class="noteHeader" style="width:5%">'.i18n('colRequiredShort').'</td>';
   echo '<td class="noteHeader" style="width:5%">'.i18n('colExclusiveShort').'</td>';
   
   echo '</tr>';
@@ -4531,7 +4532,7 @@ function drawChecklistDefinitionLinesFromObject($obj, $refresh=false) {
     
     echo '<tr>';
     if (!$print) {
-      echo '<td class="noteData" style="width:5%;text-align:center;">';
+      echo '<td class="noteData" style="width:5%;text-align:center;white-space:nowrap">';
       if ($canUpdate) {
         echo ' <a onClick="editChecklistDefinitionLine('.htmlEncode($obj->id).','.htmlEncode($line->id).');"'.' title="'.i18n('editLine').'" > '.formatSmallButton('Edit').'</a>';
         echo ' <a onClick="removeChecklistDefinitionLine('.htmlEncode($line->id).');"'.' title="'.i18n('removeLine').'" > '.formatSmallButton('Remove').'</a>';
