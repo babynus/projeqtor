@@ -1285,16 +1285,19 @@ class Parameter extends SqlElement {
     if (! $showChecklistAll) {
       unset($parameterList['displayChecklist']);
     }
-    $newGui = Parameter::getGlobalParameter('newGui');
-    if(!isNewGui() or !$newGui){
+    if(!isNewGui()){
       unset($parameterList['menuLeftDisplayMode']);
       unset($parameterList['menuBarTopMode']);
       unset($parameterList['newItemAccessMode']);
+    }else{
+      unset($parameterList['menuBarTop']);
+    }
+    $newGui = Parameter::getGlobalParameter('newGui');
+    if(!$newGui){
       unset($parameterList['newGuiThemeColor']);
       unset($parameterList['newGuiThemeColorBis']);
     }else{
       unset($parameterList['defaultTheme']);
-      unset($parameterList['menuBarTop']);
     }
     if (isIE()) unset($parameterList['newGui']);
     return $parameterList;

@@ -83,13 +83,13 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
   <?php if (isNewGui()) {?>
   <link rel="stylesheet" type="text/css" href="css/projeqtorNew.css" />
   <link rel="stylesheet" type="text/css" href="../external/codrops/css/component.css" />
-  <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/codrops/js/modernizr-custom.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/codrops/js/classie.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/codrops/js/mainLeftMenu.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtorNewGui.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/dojox/mobile/deviceTheme.js" data-dojo-config="mblUserAgent: 'Custom'"></script>
   <?php }?>
+  <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
 <!-- ELIOTT - LEAVE SYSTEM -->
   <script type="text/javascript" src="../external/html2canvas/html2canvas.js?version=<?php echo $version.'.'.$build;?>"></script>
   <?php if (isHtml5()) {?>

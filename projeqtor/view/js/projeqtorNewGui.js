@@ -824,11 +824,6 @@ function addNewGuiItem(item){
 	}
 }
 
-function setGlobalNewGuiThemeColor(param, color){
-	if(dojo.byId(param)){
-		dojo.byId(param).value = color;
-    }
-}
 
 function setArchiveMode(){
 	var callBack = function(){
