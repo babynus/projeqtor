@@ -135,7 +135,7 @@ $user=getSessionUser();
        </div>
        
        <?php if(isset($showModuleScreen )){  if($showModuleScreen){?>
-       <div   style="border-radius:5px;float:left;margin-left:35px;position:relative;min-width:240px;max-width:300px;height:111px;padding:5x 10px;border:solid 1px #e6e6e6;box-shadow:2px 2px 5px #e6e6e6;background-color:white;">
+       <div   style="border-radius:5px;float:left;margin-left:35px;position:relative;min-width:240px;max-width:300px;height:111px;padding:5px 10px;border:solid 1px #e6e6e6;box-shadow:2px 2px 5px #e6e6e6;background-color:white;">
        <?php echo i18n('moduleScreenExplanation')?>
        </div>
         <?php } } ?>
