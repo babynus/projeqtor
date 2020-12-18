@@ -142,6 +142,7 @@ if($paramRightDiv=='trailing'){
           </table>    
        </div>
       </td>
+      <?php if (! isIE()) {?>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="layoutTab" class="pseudoButton"   style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
         <?php if($paramObjectDetail=='tab'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" 
@@ -156,6 +157,7 @@ if($paramRightDiv=='trailing'){
           </table>    
        </div>
       </td>
+      <?php }?>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
       <?php if (Module::isModuleActive('moduleActivityStream')) {?>
         <div id="hideStreamButtonGlobal" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
