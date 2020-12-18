@@ -215,7 +215,7 @@ if(isset ($isLineMulti)){
               <td class="dialogLabel" >
                 <label for="providerTermSum" ><?php echo i18n("fullAmountOfTerms");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
-              <td>
+              <td style="white-space:nowrap">
                 <?php if ($currencyPosition=='before') echo $currency;?>
                 <input dojoType="dijit.form.NumberTextBox" 
                       id="" name=""
@@ -351,7 +351,7 @@ if(isset ($isLineMulti)){
               </td>
              </tr>
 	           <?php 
-	           $style2 = 'border-left:1px solid black;border-bottom:1px solid black;';
+	           $style2 = 'border-left:1px solid black;border-bottom:1px solid black;white-space:nowrap;';
 	           foreach ($billLineList as $bill) {  ?>
 	             <?php $i++;?>
               <input id="providerOrderBillLineId<?php echo $i;?>" name="providerOrderBillLineId<?php echo $i;?>" type="hidden" value="<?php echo $bill->id;?>" />
