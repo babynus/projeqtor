@@ -312,7 +312,7 @@
 .ProjeQtOrFlatRed .iconAffectation { background-image: url(customIcons/red/iconAffectation.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconAffectation { background-image: url(customIcons/new/iconAffectation.svg);  background-repeat: no-repeat; }
 
-.iconAlert32 { background-image: url(images/iconAlert32.png);  background-repeat: no-repeat;  }
+.iconAlert { background-image: url(images/iconAlert32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconAlert { background-image: url(customIcons/blue/iconAlert.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconAlert { background-image: url(customIcons/green/iconAlert.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconAlert { background-image: url(customIcons/grey/iconAlert.png);  background-repeat: no-repeat; }
@@ -1422,7 +1422,7 @@
 
 .ProjeQtOrNewGui .iconHome { background-image: url(customIcons/new/iconHome.svg);  background-repeat: no-repeat; }
 
-.iconHideStream { background-image: url(images/iconHideStream32.png);  background-repeat: no-repeat; }
+.iconHideStream { background-image: url(images/iconHideStream.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconHideStream { background-image: url(customIcons/blue/iconHideStream.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconHideStream { background-image: url(customIcons/green/iconHideStream.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGrey .iconHideStream { background-image: url(customIcons/grey/iconHideStream.png);  background-repeat: no-repeat;}
@@ -1458,11 +1458,11 @@
 .ProjeQtOrNewGui .iconHistArchive { background-image: url(customIcons/new/iconHistArchive.svg);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconHistArchiveNo { background-image: url(customIcons/new/iconHistArchiveNo.svg) !important;  background-repeat: no-repeat; }
 
-.iconHumanResource32 { background-image: url(imagesHR/iconHumanResource.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconHumanResource32 { background-image: url(customIconsHR/blue/iconHumanResource.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconHumanResource32 { background-image: url(customIconsHR/green/iconHumanResource.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconHumanResource32 { background-image: url(customIconsHR/grey/iconHumanResource.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconHumanResource32 { background-image: url(customIconsHR/red/iconHumanResource.png);  background-repeat: no-repeat; }
+.iconHumanResource { background-image: url(imagesHR/iconHumanResource.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconHumanResource { background-image: url(customIconsHR/blue/iconHumanResource.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconHumanResource { background-image: url(customIconsHR/green/iconHumanResource.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconHumanResource { background-image: url(customIconsHR/grey/iconHumanResource.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconHumanResource { background-image: url(customIconsHR/red/iconHumanResource.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconHumanResource32 { background-image: url(customIcons/new/iconHumanResource.svg);  background-repeat: no-repeat; }
 
 .ProjeQtOrNewGui .iconHumanResource { background-image: url(customIcons/new/iconHumanResource.svg);  background-repeat: no-repeat; }
@@ -1882,11 +1882,11 @@
 .ProjeQtOrFlatRed .iconNotification { background-image: url(customIcons/red/iconNotification.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconNotification { background-image: url(customIcons/new/iconNotification.svg);  background-repeat: no-repeat;}
 
-.iconNotificationDefinition32 { background-image: url(images/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
-.ProjeQtOrFlatBlue .iconNotificationDefinition32 { background-image: url(customIcons/blue/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
-.ProjeQtOrFlatGreen .iconNotificationDefinition32 { background-image: url(customIcons/green/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
-.ProjeQtOrFlatGrey .iconNotificationDefinition32 { background-image: url(customIcons/grey/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
-.ProjeQtOrFlatRed .iconNotificationDefinition32 { background-image: url(customIcons/red/iconNotificationDefinition.png);  background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
+.iconNotificationDefinition { background-image: url(images/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
+.ProjeQtOrFlatBlue .iconNotificationDefinition { background-image: url(customIcons/blue/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
+.ProjeQtOrFlatGreen .iconNotificationDefinition { background-image: url(customIcons/green/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
+.ProjeQtOrFlatGrey .iconNotificationDefinition { background-image: url(customIcons/grey/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
+.ProjeQtOrFlatRed .iconNotificationDefinition { background-image: url(customIcons/red/iconNotificationDefinition.png);  background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
 .ProjeQtOrNewGui .iconNotificationDefinition16 { background-image: url(customIcons/new/iconNotificationDefinition.svg);  background-repeat: no-repeat; background-repeat: no-repeat; width:16px ;height:16px; background-size: 16px 16px; }
 .ProjeQtOrNewGui .iconNotificationDefinition { background-image: url(customIcons/new/iconNotificationDefinition.svg);  background-repeat: no-repeat; }
 
@@ -2748,11 +2748,11 @@
 .ProjeQtOrFlatRed .iconToday { background-image: url(customIcons/red/iconToday.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconToday { background-image: url(customIcons/new/iconToday.svg);  background-repeat: no-repeat;}
 
-.iconTool32 { background-image: url(images/iconTool32.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatBlue .iconTool32 { background-image: url(customIcons/blue/iconTool.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconTool32 { background-image: url(customIcons/green/iconTool.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconTool32 { background-image: url(customIcons/grey/iconTool.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconTool32 { background-image: url(customIcons/red/iconTool.png);  background-repeat: no-repeat; }
+.iconTool { background-image: url(images/iconTool.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconTool { background-image: url(customIcons/blue/iconTool.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconTool { background-image: url(customIcons/green/iconTool.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconTool { background-image: url(customIcons/grey/iconTool.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconTool { background-image: url(customIcons/red/iconTool.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconTool { background-image: url(customIcons/new/iconTool.svg);  background-repeat: no-repeat;}
 
 .iconTrend { background-image: url(images/iconTrend32.png);  background-repeat: no-repeat; }
