@@ -267,7 +267,7 @@ $dbVersion=Sql::getDbVersion();
 	          <?php if(isNewGui() and $dbVersion==''){?>
 	          <div class="messageInitLogin">
 	           <div style="text-align: center;margin-top:15px;"><span class="titleWelcomeMessage"><?php echo i18n('welcomeOnProjeQtOr');?></span></div>
-	           <div style="text-align: left;margin-top:35px;margin-left:15px;"><span class="textWelcomeMessage"><?php echo i18n('projeqtorIntroducoryText');?></span></div>
+	           <div style="text-align: left;margin:15px;margin-top:35px;"><span class="textWelcomeMessage"><?php echo i18n('projeqtorIntroducoryText');?></span></div>
 	          </div>
 	          <?php }?>
 			  <table  align="center">
