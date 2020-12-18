@@ -1032,7 +1032,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
                 <input type="hidden" id="<?php echo $idInput;?>" name="<?php echo $idInput;?>" value="<?php echo $idAnotherRow;?>"> 
                 <table style="width:100%;height:100%;" onWheel="wheelFavoriteRow(<?php echo $idRow;?>, event, <?php echo $nbFavoriteRow;?>);" oncontextmenu="event.preventDefault();editFavoriteRow(false);">
                      <tr>
-                     <td style="font-weight: bold;font-size: 13pt;text-align: center;color: var(--color-dark);width: 50px;border-right: 1px solid var(--color-dark);">
+                     <td style="font-weight: bold;font-size: 13pt;text-align: center;color: var(--color-dark);width: 50px;border-right: 1px solid var(--color-dark);cursor:pointer;" onclick="saveUserParameter('idFavoriteRow', <?php echo $idAnotherRow;?>);gotoFavoriteRow(<?php echo $idRow;?>,<?php echo $idAnotherRow;?>);">
                        <?php echo $idAnotherRow; ?>
                      </td>
                       <td style="height:100%;">
