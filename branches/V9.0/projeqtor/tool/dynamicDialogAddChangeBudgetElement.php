@@ -131,7 +131,7 @@ $costVisibility = ($workAndCostVisibility['costVisibility']=='NO'?'hidden':'');
                     </td>                    
                     <td>
                         <input id="AddChangeBudgetElementYear" name="AddChangeBudgetElementYear"
-                             dojoType="dijit.form.TextBox" 
+                             dojoType="dijit.form.TextBox" style="text-align:center; width:100px;"
                              value="<?php echo $year;?>"  
                              class="display" readonly /> 
                     </td>
