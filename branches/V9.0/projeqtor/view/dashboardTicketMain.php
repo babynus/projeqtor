@@ -389,7 +389,7 @@
 <div style="width: 97%; margin: 0 auto; height: 90px; padding-bottom: 15px; border-bottom: 1px solid #CCC;">
 			<table width="100%" class="dashboardTicketMain">
 				<tr>
-				<td valign="top" style="width:25%">
+				<td valign="top" style="width:30%">
 						<table>
 						<tr height="37px"><td>&nbsp;&nbsp;<?php echo ucfirst(i18n('filterByTicket'));?></td> </tr>
 								<tr>
@@ -399,7 +399,7 @@
   				          $paramDashboardTicketMainAllTicket=Parameter::getUserParameter("dashboardTicketMainAllTicket");
   				        }
 								?>
-								  <td width="220px">
+								  <td width="320px">
 								    <ul style="top:-8px;" data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
                       <li onClick="changeParamDashboardTicket('dashboardTicketMainAllTicket=0')" data-dojo-type="dojox/mobile/TabBarButton"   <?php if($paramDashboardTicketMainAllTicket==0){ echo "data-dojo-props='selected:true'"; }?> > <?php echo i18n('AllIssues');?></li>
                       <li onClick="changeParamDashboardTicket('dashboardTicketMainAllTicket=2')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardTicketMainAllTicket==2){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('unclosed');?></li>
@@ -454,7 +454,7 @@
 						  </tr>
 						</table>
 					</td>
-					<td valign="top" style="width:25%">
+					<td valign="top" style="width:20%">
 						<table>
 						<tr height="37px"><td>&nbsp;&nbsp;<?php echo i18n('filterCreateByTicket');?></td> </tr>
 							<tr>
@@ -474,12 +474,10 @@
 					</td>
 					<td valign="top" style="width:25%">
     					<table style="margin-top:6px;">
-    				<tr>
-    					<td style="vertical-align: middle; text-align:right;" width="5px">
-           <span class="nobr">&nbsp;&nbsp;&nbsp;
-          <?php echo i18n("colType");?>
-          &nbsp;</span>
-        </td>
+    				<tr height="25px">
+    					<td style="vertical-align: middle; text-align:left;" width="5px">
+           <span class="nobr"><?php echo i18n("colType");?></span>
+        </td> </tr><tr>
 				<td width="5px">
         	<select title="<?php echo i18n('filterOnType'); ?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
         	<?php echo autoOpenFilteringSelect();
