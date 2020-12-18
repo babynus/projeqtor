@@ -102,7 +102,7 @@ if(strpos($selectedProject, ",")){
 	         <table>
 	           <tr>
 	             <td class="dialogLabel" >
-	               <label for="testCaseRunTestCaseList" ><?php echo i18n("colTestCases") ?>&nbsp;:&nbsp;</label>
+	               <label for="testCaseRunTestCaseList" ><?php echo i18n("colTestCases") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 	             </td>
 	             <td>
 	               <div id="testCaseRunListDiv" dojoType="dijit.layout.ContentPane" region="center">
@@ -133,7 +133,7 @@ if(strpos($selectedProject, ",")){
              <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
              <tr>
                <td class="dialogLabel" >
-                 <label for="testCaseRunAllowDuplicate" ><?php echo i18n("colAllowDuplicate") ?>&nbsp;:&nbsp;</label>
+                 <label for="testCaseRunAllowDuplicate" ><?php echo i18n("colAllowDuplicate") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                </td>
                <td>
                  <div id="testCaseRunAllowDuplicate" name="testCaseRunAllowDuplicate"
@@ -149,7 +149,7 @@ if(strpos($selectedProject, ",")){
 	         <table>
 	           <tr>
 	             <td class="dialogLabel"  >
-	               <label for="testCaseRunTestCase" ><?php echo i18n("colTestCase") ?>&nbsp;:&nbsp;</label>
+	               <label for="testCaseRunTestCase" ><?php echo i18n("colTestCase") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 	             </td>
 	             <td>
 	               <select dojoType="dijit.form.FilteringSelect" 
@@ -162,7 +162,7 @@ if(strpos($selectedProject, ",")){
 	           </tr>
 	           <tr>
 	             <td class="dialogLabel"  >
-	               <label for="testCaseRunStatus" ><?php echo i18n("colIdStatus") ?>&nbsp;:&nbsp;</label>
+	               <label for="testCaseRunStatus" ><?php echo i18n("colIdStatus") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 	             </td>
 	             <td>
 	               <select dojoType="dijit.form.FilteringSelect" 
@@ -179,7 +179,7 @@ if(strpos($selectedProject, ",")){
 		         <table>
 		          <tr>
 		             <td class="dialogLabel"  >
-		               <label for="testCaseRunTicket" ><?php echo i18n("colTicket") ?>&nbsp;:&nbsp;</label>
+		               <label for="testCaseRunTicket" ><?php echo i18n("colTicket") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 		             </td>
 		             <td>
 		               <select dojoType="dijit.form.FilteringSelect" 
@@ -212,7 +212,7 @@ if(strpos($selectedProject, ",")){
          <table>
              <tr>
 	             <td class="dialogLabel" >
-	               <label for="testCaseRunResult" ><?php echo i18n("colResult");?>&nbsp;:&nbsp;</label>
+	               <label for="testCaseRunResult" ><?php echo i18n("colResult");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 	             </td>
 	             <td>
 	                <textarea dojoType="dijit.form.Textarea"
@@ -224,7 +224,7 @@ if(strpos($selectedProject, ",")){
 	           </tr>
 	           <tr>
 	             <td class="dialogLabel" >
-	               <label for="testCaseRunComment" ><?php echo i18n("colComment");?>&nbsp;:&nbsp;</label>
+	               <label for="testCaseRunComment" ><?php echo i18n("colComment");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 	             </td>
 	             <td>
 	                <textarea dojoType="dijit.form.Textarea"

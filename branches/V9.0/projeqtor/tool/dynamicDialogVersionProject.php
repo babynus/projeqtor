@@ -58,7 +58,7 @@ $idProduct=$vers->idProduct;
 						value="<?php echo $idVersionProject;?>" />
 					<table>
 						<tr>
-							<td class="dialogLabel"><label for="versionProjectProject"><?php echo i18n("colIdProject") ?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="versionProjectProject"><?php echo i18n("colIdProject") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td><select dojoType="dijit.form.FilteringSelect"
 								<?php echo autoOpenFilteringSelect();?>
@@ -79,7 +79,7 @@ $idProduct=$vers->idProduct;
 						  </td>
 						</tr>
 						<tr>
-							<td class="dialogLabel"><label for="versionProjectProduct"><?php echo i18n("colIdProduct") ?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="versionProjectProduct"><?php echo i18n("colIdProduct") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td><select dojoType="dijit.form.FilteringSelect"
 								<?php echo autoOpenFilteringSelect();?>
@@ -108,7 +108,7 @@ $idProduct=$vers->idProduct;
 							</td>
 						</tr>
 						<tr>
-							<td class="dialogLabel"><label for="versionProjectVersion"><?php echo i18n("colIdVersion") ?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="versionProjectVersion"><?php echo i18n("colIdVersion") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td><select dojoType="dijit.form.FilteringSelect"
 								<?php echo autoOpenFilteringSelect();?>
@@ -134,7 +134,7 @@ $idProduct=$vers->idProduct;
 						</tr>
 						<?php if (Parameter::getGlobalParameter('displayMilestonesStartDelivery')!='YES') { //ADD qCazelles - Ticket #119 ?>
 						<tr>
-							<td class="dialogLabel"><label for="versionProjectStartDate"><?php echo i18n("colStartDate");?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="versionProjectStartDate"><?php echo i18n("colStartDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
 								<div id="versionProjectStartDate" name="versionProjectStartDate"
@@ -144,7 +144,7 @@ $idProduct=$vers->idProduct;
 							</td>
 						</tr>
 						<tr>
-							<td class="dialogLabel"><label for="versionProjectEndDate"><?php echo i18n("colEndDate");?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="versionProjectEndDate"><?php echo i18n("colEndDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
 								<div id="versionProjectEndDate" name="versionProjectEndDate"
@@ -160,7 +160,7 @@ $idProduct=$vers->idProduct;
  						  }
  						  //END ADD qCazelles - Ticket #119 ?>
 						<tr>
-							<td class="dialogLabel"><label for="versionProjectIdle"><?php echo i18n("colIdle");?>&nbsp;:&nbsp;</label>
+							<td class="dialogLabel"><label for="versionProjectIdle"><?php echo i18n("colIdle");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 							</td>
 							<td>
 								<div id="versionProjectIdle" name="versionProjectIdle"

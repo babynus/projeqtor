@@ -145,7 +145,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
        	 <?php if ($billingType == 'M' &&  $refType != 'Tender' and $refType != 'ProviderOrder' and $refType != 'ProviderBill') {?>
        	     <tr>
              <td class="dialogLabel"  >
-               <label for="billLineIdCatalog" ><?php echo i18n("colIdCatalog") ?>&nbsp;:&nbsp;</label>
+               <label for="billLineIdCatalog" ><?php echo i18n("colIdCatalog") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect"
@@ -163,7 +163,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
          <?php } ?>  	      	 
            <tr>
              <td class="dialogLabel" >
-              <label for="billLineLine" ><?php echo i18n("colLineNumber");?>&nbsp;:&nbsp;</label>
+              <label for="billLineLine" ><?php echo i18n("colLineNumber");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
 		           <input dojoType="dijit.form.NumberTextBox" 
@@ -193,7 +193,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
           <table>
 		       <tr>
              <td class="dialogLabel" >
-               <label for="billLineIdTerm" ><?php echo i18n("colIdTerm");?>&nbsp;:&nbsp;</label>
+               <label for="billLineIdTerm" ><?php echo i18n("colIdTerm");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -215,7 +215,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
            <table>
            <tr>
              <td class="dialogLabel" >
-               <label for="billLineIdResource" ><?php echo i18n("colIdResource");?>&nbsp;:&nbsp;</label>
+               <label for="billLineIdResource" ><?php echo i18n("colIdResource");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -232,7 +232,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="billLineIdActivityPrice" ><?php echo i18n("colIdActivityPrice");?>&nbsp;:&nbsp;</label>
+               <label for="billLineIdActivityPrice" ><?php echo i18n("colIdActivityPrice");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -249,7 +249,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
            </tr>
 		       <tr>
              <td class="dialogLabel" >
-               <label for="billLineStartDate" ><?php echo i18n("colStartDate");?>&nbsp;:&nbsp;</label>
+               <label for="billLineStartDate" ><?php echo i18n("colStartDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="billLineStartDate" name="billLineStartDate"
@@ -265,7 +265,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="billLineEndDate" ><?php echo i18n("colEndDate");?>&nbsp;:&nbsp;</label>
+               <label for="billLineEndDate" ><?php echo i18n("colEndDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="billLineEndDate" name="billLineEndDate"
@@ -285,7 +285,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
            <table>
            <tr>
              <td class="dialogLabel" >
-              <label for="billLineDescription" ><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
+              <label for="billLineDescription" ><?php echo i18n("colDescription");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
               <textarea dojoType="dijit.form.Textarea" 
@@ -297,7 +297,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
 	        </tr>
             <tr>
              <td class="dialogLabel" >
-              <label for="billLineDetail" ><?php echo i18n("colDetail");?>&nbsp;:&nbsp;</label>
+              <label for="billLineDetail" ><?php echo i18n("colDetail");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <textarea dojoType="dijit.form.Textarea" 
@@ -312,7 +312,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
           <table>
             <tr>
              <td class="dialogLabel" >
-              <label for="billLinePrice" ><?php echo i18n("colPrice");?>&nbsp;:&nbsp;</label>
+              <label for="billLinePrice" ><?php echo i18n("colPrice");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
               <?php if ($currencyPosition=='before') echo $currency;?>
@@ -346,7 +346,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
          <table>
 	        <tr>
              <td class="dialogLabel" >
-               <label for="billLineQuantity" ><?php echo i18n("colQuantity");?>&nbsp;:&nbsp;</label>
+               <label for="billLineQuantity" ><?php echo i18n("colQuantity");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div dojoType="dijit.form.NumberTextBox" 
@@ -362,7 +362,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="billLineAmount" ><?php echo i18n("colAmount");?>&nbsp;:&nbsp;</label>
+               <label for="billLineAmount" ><?php echo i18n("colAmount");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
              <?php if ($currencyPosition=='before') echo $currency;?>
@@ -378,7 +378,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
            <?php if($refType=="Quotation" or $refType=="Command"){?>
            <tr>
              <td class="dialogLabel" >
-               <label for="billLineNumberDays" ><?php echo i18n("numberOfDays");?>&nbsp;:&nbsp;</label>
+               <label for="billLineNumberDays" ><?php echo i18n("numberOfDays");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div dojoType="dijit.form.NumberTextBox" 

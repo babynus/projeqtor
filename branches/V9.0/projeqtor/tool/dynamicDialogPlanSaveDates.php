@@ -34,7 +34,7 @@
          <table width="100%" >
            <tr>
              <td class="dialogLabel"  >
-               <label for="idProjectPlanSaveDates" ><?php echo i18n("colIdProject") ?>&nbsp;:&nbsp;</label>
+               <label for="idProjectPlanSaveDates" ><?php echo i18n("colIdProject") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 

@@ -71,7 +71,7 @@ $listCtrlDate=$base->getSqlElementsFromCriteria($crit);
          <table width="100%" >
            <tr>
              <td class="dialogLabel"  >
-               <label for="idProjectPlanBaseline" ><?php echo i18n("colIdProject") ?>&nbsp;:&nbsp;</label>
+               <label for="idProjectPlanBaseline" ><?php echo i18n("colIdProject") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -115,7 +115,7 @@ $listCtrlDate=$base->getSqlElementsFromCriteria($crit);
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel"  >
-               <label for="namePlanBaseline" ><?php echo i18n("colName") ?>&nbsp;:&nbsp;</label>
+               <label for="namePlanBaseline" ><?php echo i18n("colName") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <input id="namePlanBaseline" name="namePlanBaseline" dojoType="dijit.form.ValidationTextBox" 
@@ -125,7 +125,7 @@ $listCtrlDate=$base->getSqlElementsFromCriteria($crit);
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel"  >
-               <label for="datePlanBaseline" ><?php echo i18n("colDate") ?>&nbsp;:&nbsp;</label>
+               <label for="datePlanBaseline" ><?php echo i18n("colDate") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div dojoType="dijit.form.DateTextBox" 
@@ -144,7 +144,7 @@ $listCtrlDate=$base->getSqlElementsFromCriteria($crit);
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel"  >
-               <label for="numberBaseline" ><?php echo i18n("colLineNumber") ?>&nbsp;:&nbsp;</label>
+               <label for="numberBaseline" ><?php echo i18n("colLineNumber") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div dojoType="dijit.form.NumberTextBox" 

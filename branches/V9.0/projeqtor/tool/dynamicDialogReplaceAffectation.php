@@ -52,7 +52,7 @@
     </tr>
     <tr><td colspan="4">&nbsp;</td></tr>
     <tr>
-      <td class="dialogLabel"><label><?php echo i18n('colIdResource');?>&nbsp;:&nbsp;</label></td>
+      <td class="dialogLabel"><label><?php echo i18n('colIdResource');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
       <td><input dojoType="dijit.form.TextBox" class="input" readonly style="width:200px;" value="<?php echo htmlEncode($res->name);?>"/></td>
       <td>&nbsp;&nbsp;</td>
       <td><select dojoType="dijit.form.FilteringSelect" id="replaceAffectationResource" name="replaceAffectationResource" 
@@ -63,7 +63,7 @@
           </select></td>
     </tr>
     <tr>
-      <td class="dialogLabel"><label><?php echo i18n('colCapacity');?>&nbsp;:&nbsp;</label></td>
+      <td class="dialogLabel"><label><?php echo i18n('colCapacity');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
       <td><input dojoType="dijit.form.NumberTextBox" class="input" readonly style="width:30px;" 
            value="<?php echo htmlEncode($res->capacity);?>"/></td>
       <td>&nbsp;&nbsp;</td>
@@ -72,7 +72,7 @@
            value="" /></td>
     </tr>
     <tr>
-      <td class="dialogLabel"><label><?php echo i18n('colIdProfile');?>&nbsp;:&nbsp;</label></td>
+      <td class="dialogLabel"><label><?php echo i18n('colIdProfile');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
       <td><input dojoType="dijit.form.TextBox" class="input" readonly style="width:200px;" value="<?php echo htmlEncode(SqlList::getNameFromId('Profile',$aff->idProfile));?>"/></td>
       <td>&nbsp;&nbsp;</td>
       <td><select dojoType="dijit.form.FilteringSelect" id="replaceAffectationProfile" name="replaceAffectationProfile"
@@ -82,7 +82,7 @@
           </select></td>
     </tr>
     <tr>
-      <td class="dialogLabel"><label><?php echo i18n('colRate');?>&nbsp;:&nbsp;</label></td>
+      <td class="dialogLabel"><label><?php echo i18n('colRate');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
       <td><input dojoType="dijit.form.TextBox" class="input" readonly style="width:30px;" value="<?php echo htmlEncode($aff->rate);?>"/> %</td>
       <td>&nbsp;&nbsp;</td>
       <td><div id="replaceAffectationRate" name="replaceAffectationRate" value="<?php echo htmlEncode($aff->rate);?>" 
@@ -90,7 +90,7 @@
                </div> %</td>
     </tr>
     <tr>
-      <td class="dialogLabel"><label><?php echo i18n('colStartDate');?>&nbsp;:&nbsp;</label></td>
+      <td class="dialogLabel"><label><?php echo i18n('colStartDate');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
       <td><input value="<?php echo $aff->startDate;?>" dojoType="dijit.form.DateTextBox" class="input" readonly 
                  id="replaceAffectationExistingStartDate"
 			           constraints="{datePattern:browserLocaleDateFormatJs}"  style="width:100px" /></td>
@@ -105,7 +105,7 @@
 			           constraints="{datePattern:browserLocaleDateFormatJs}" style="width:100px" /></td>
     </tr>
     <tr>
-      <td class="dialogLabel"><label><?php echo i18n('colEndDate');?>&nbsp;:&nbsp;</label></td>
+      <td class="dialogLabel"><label><?php echo i18n('colEndDate');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
       <td><input value="<?php echo $aff->endDate;?>" dojoType="dijit.form.DateTextBox" class="input" readonly 
                  id="replaceAffectationExistingEndDate"
 			           constraints="{datePattern:browserLocaleDateFormatJs}"  style="width:100px" /></td>

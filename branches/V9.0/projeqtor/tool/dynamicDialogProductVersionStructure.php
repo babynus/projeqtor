@@ -153,7 +153,7 @@ if ($way=='composition' and $directAccessToList=='true') {
         <?php if (0) {?>
           <tr>
             <td class="dialogLabel">
-              <label for="productVersionStructureHideInService" class="nobr">&nbsp;&nbsp;<?php echo i18n("hideInService");?>&nbsp;:&nbsp;</label>
+              <label for="productVersionStructureHideInService" class="nobr">&nbsp;&nbsp;<?php echo i18n("hideInService");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td><?php $hideInService=Parameter::getUserParameter('hideInService');?>
               <div title="<?php echo i18n('hideInService')?>" dojoType="dijit.form.CheckBox" 
@@ -169,7 +169,7 @@ if ($way=='composition' and $directAccessToList=='true') {
        <?php }?>     
           <tr>
             <td class="dialogLabel"  >
-              <label for="productVersionStructureListId" ><?php echo i18n($listClass) ?>&nbsp;:&nbsp;</label>
+              <label for="productVersionStructureListId" ><?php echo i18n($listClass) ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
               <?php $listWidth=getSessionValue('screenWidth',800)/2;?>             
@@ -220,7 +220,7 @@ if ($way=='composition' and $directAccessToList=='true') {
         <table>  
           <tr>
             <td class="dialogLabel" >
-              <label for="productVersionStructureComment" ><?php echo i18n("colComment") ?>&nbsp;:&nbsp;</label>
+              <label for="productVersionStructureComment" ><?php echo i18n("colComment") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
               <textarea dojoType="dijit.form.Textarea"

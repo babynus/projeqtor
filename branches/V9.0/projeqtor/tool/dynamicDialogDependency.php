@@ -46,7 +46,7 @@ $commentDep=$dep->comment;
 	    <tr style="height:28px">
 	      <td style="text-align:right; width:100px;">
 	        <input id="dependencyRightClickId" name="dependencyRightClickId" type="hidden" value="<?php echo $id;?>" />
-          <label for="dependencyDelay" style="width:100px"><?php echo i18n("colDependencyDelay");?>&nbsp;:&nbsp;</label>
+          <label for="dependencyDelay" style="width:100px"><?php echo i18n("colDependencyDelay");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
         </td>
         <td style="text-align:left; white-space:nowrap">
 	        <input id="delayDependency" name="delayDependency" dojoType="dijit.form.NumberTextBox" constraints="{min:-999, max:999}" 
@@ -59,7 +59,7 @@ $commentDep=$dep->comment;
       </tr>
       <tr style="height:28px">
 	      <td style="text-align:right;">
-	        <label for="modeDependency" style="width:100px"><?php echo i18n("colType");?>&nbsp;:&nbsp;</label> 
+	        <label for="modeDependency" style="width:100px"><?php echo i18n("colType");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label> 
 	      </td>
 	      <td colspan="2">
 	        <select dojoType="dijit.form.FilteringSelect" class="input" name="dependencyType" id="dependencyType"
@@ -75,7 +75,7 @@ $commentDep=$dep->comment;
 	    </tr>
 	    <tr>
 	      <td colspan="2">
-	        <label for="commentDependency" style="text-align: left;"><?php echo i18n("colComment");?>&nbsp;:&nbsp;</label>
+	        <label for="commentDependency" style="text-align: left;"><?php echo i18n("colComment");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 					<input id="commentDependency" name="commentDependency"  dojoType="dijit.form.Textarea" value="<?php echo $commentDep;?>" />                        
 	      </td>
 	      <td style="text-align:right;vertical-align:bottom;">

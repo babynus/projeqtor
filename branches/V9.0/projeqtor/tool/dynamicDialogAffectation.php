@@ -62,7 +62,7 @@ $objTeam=($obj)?get_class($obj):'';
          <table>
            <tr>
              <td class="dialogLabel" >
-               <label for="affectationProject" ><?php echo i18n("colIdProject") ?>&nbsp;:&nbsp;</label>
+               <label for="affectationProject" ><?php echo i18n("colIdProject") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -96,7 +96,7 @@ $objTeam=($obj)?get_class($obj):'';
                <label for="affectationResource" ><?php 
                  if ($type=="Contact") echo i18n("colIdContact");
                  else if ($type=="User") echo i18n("colIdUser");
-                 else echo i18n("colIdResource") ?>&nbsp;:&nbsp;</label>
+                 else echo i18n("colIdResource") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -131,7 +131,7 @@ $objTeam=($obj)?get_class($obj):'';
            </tr>
            <tr id="affectationToProfile" name="affectationToProfile"  >
              <td class="dialogLabel" >
-               <label for="affectationProfile" ><?php echo i18n("colIdProfile");?>&nbsp;:&nbsp;</label>
+               <label for="affectationProfile" ><?php echo i18n("colIdProfile");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -150,7 +150,7 @@ $objTeam=($obj)?get_class($obj):'';
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="affectationRate" ><?php echo i18n("colRate");?>&nbsp;:&nbsp;</label>
+               <label for="affectationRate" ><?php echo i18n("colRate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="affectationRate" name="affectationRate" value="<?php echo $affectation->rate;?>" 
@@ -167,7 +167,7 @@ $objTeam=($obj)?get_class($obj):'';
                <table>
                  <tr>
                    <td class="dialogLabel" >
-                     <label for="affectationStartDate" ><?php echo i18n("colStartDate");?>&nbsp;:&nbsp;</label>
+                     <label for="affectationStartDate" ><?php echo i18n("colStartDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                    </td>
                    <td>
                      <input id="affectationStartDate" name="affectationStartDate" value=""  
@@ -178,7 +178,7 @@ $objTeam=($obj)?get_class($obj):'';
 			                 style="width:100px" />
                    </td>
                    <td class="dialogLabel" >
-                     <label for="affectationEndDate" ><?php echo i18n("colEndDate");?>&nbsp;:&nbsp;</label>
+                     <label for="affectationEndDate" ><?php echo i18n("colEndDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                    </td>
                    <td>
                    <input id="affectationEndDate" name="affectationEndDate" value=""  
@@ -192,7 +192,7 @@ $objTeam=($obj)?get_class($obj):'';
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="affectationDescription" ><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
+               <label for="affectationDescription" ><?php echo i18n("colDescription");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td> 
                <textarea dojoType="dijit.form.Textarea" 
@@ -204,7 +204,7 @@ $objTeam=($obj)?get_class($obj):'';
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="affectationIdle" ><?php echo i18n("colIdle");?>&nbsp;:&nbsp;</label>
+               <label for="affectationIdle" ><?php echo i18n("colIdle");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="affectationIdle" name="affectationIdle"

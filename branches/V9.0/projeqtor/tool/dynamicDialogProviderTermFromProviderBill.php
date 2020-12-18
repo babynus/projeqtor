@@ -41,7 +41,7 @@ if($provBill->taxPct > 0 ){
 	         <table>
 	            <tr>
              <td class="dialogLabel"  >
-               <label for="linkRef2TypeProviderTerm" ><?php echo i18n("colIdProviderTerm") ?>&nbsp;:&nbsp;</label>
+               <label for="linkRef2TypeProviderTerm" ><?php echo i18n("colIdProviderTerm") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="linkProviderTermDiv">

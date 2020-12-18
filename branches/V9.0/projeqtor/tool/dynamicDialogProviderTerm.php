@@ -73,7 +73,7 @@ if(isset ($isLineMulti)){
          <table>
            <tr>
              <td class="dialogLabel" >
-              <label for="providerTermName" ><?php echo i18n("colName");?>&nbsp;:&nbsp;</label>
+              <label for="providerTermName" ><?php echo i18n("colName");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
               <input dojoType="dijit.form.TextBox" 
@@ -87,7 +87,7 @@ if(isset ($isLineMulti)){
 	        
           <tr>
             <td class="dialogLabel" >
-               <label for="providerTermDate" ><?php echo i18n("colDate");?>&nbsp;:&nbsp;</label>
+               <label for="providerTermDate" ><?php echo i18n("colDate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
                <div id="providerTermDate" name="providerTermDate"
@@ -104,7 +104,7 @@ if(isset ($isLineMulti)){
           </tr>
           <tr>
             <td class="dialogLabel" >
-              <label for="providerTermOrderUntaxedAmount" ><?php echo i18n("colUntaxedAmount");?>&nbsp;:&nbsp;</label>
+              <label for="providerTermOrderUntaxedAmount" ><?php echo i18n("colUntaxedAmount");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
             <?php if ($currencyPosition=='before') echo $currency;?>
@@ -121,7 +121,7 @@ if(isset ($isLineMulti)){
           </tr>
            <tr>
            <td class="dialogLabel" >
-              <label for="providerTermDiscount" ><?php echo i18n("colDiscountRate");?>&nbsp;:&nbsp;</label>
+              <label for="providerTermDiscount" ><?php echo i18n("colDiscountRate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
            </td>
            <td>
                <input dojoType="dijit.form.NumberTextBox" 
@@ -137,7 +137,7 @@ if(isset ($isLineMulti)){
           </tr>
           <tr>
             <td class="dialogLabel" >
-              <label for="providerTermOrderUntaxedAmount" ><?php echo i18n("colTotalUntaxedAmount");?>&nbsp;:&nbsp;</label>
+              <label for="providerTermOrderUntaxedAmount" ><?php echo i18n("colTotalUntaxedAmount");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
             <?php if ($currencyPosition=='before') echo $currency;?>
@@ -154,7 +154,7 @@ if(isset ($isLineMulti)){
           </tr>
           <tr>
             <td class="dialogLabel" >
-              <label for="providerTermTax" ><?php echo i18n("colTaxPct");?>&nbsp;:&nbsp;</label>
+              <label for="providerTermTax" ><?php echo i18n("colTaxPct");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
            </td>
            <td>
                <input dojoType="dijit.form.NumberTextBox" 
@@ -170,7 +170,7 @@ if(isset ($isLineMulti)){
          </tr>
           <tr>
             <td class="dialogLabel" >
-              <label for="providerTermOrderFullAmount" ><?php echo i18n("colTotalFullAmount");?>&nbsp;:&nbsp;</label>
+              <label for="providerTermOrderFullAmount" ><?php echo i18n("colTotalFullAmount");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
               <?php if ($currencyPosition=='before') echo $currency;?>
@@ -213,7 +213,7 @@ if(isset ($isLineMulti)){
           <?php if ($mode!='edit') {?>
              <tr>
               <td class="dialogLabel" >
-                <label for="providerTermSum" ><?php echo i18n("fullAmountOfTerms");?>&nbsp;:&nbsp;</label>
+                <label for="providerTermSum" ><?php echo i18n("fullAmountOfTerms");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
               </td>
               <td>
                 <?php if ($currencyPosition=='before') echo $currency;?>

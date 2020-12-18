@@ -62,7 +62,7 @@ if($copyType=="copyObjectTo"){
          <table>
            <tr>
              <td class="dialogLabel"  >
-               <label for="copyToClass" ><?php echo i18n("copyToClass") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToClass" ><?php echo i18n("copyToClass") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -89,7 +89,7 @@ if($copyType=="copyObjectTo"){
            <?php if($objectClass != 'CatalogUO'){?>
            <tr>
              <td class="dialogLabel"  >
-               <label for="copyToType" ><?php echo i18n("copyToType") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToType" ><?php echo i18n("copyToType") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -107,7 +107,7 @@ if($copyType=="copyObjectTo"){
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="copyToName" ><?php echo i18n("copyToName") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToName" ><?php echo i18n("copyToName") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select id="copyToName" name="copyToName" dojoType="dijit.form.ValidationTextBox"
@@ -122,7 +122,7 @@ if($copyType=="copyObjectTo"){
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="copyToProject" ><?php echo i18n("copyToProject") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToProject" ><?php echo i18n("copyToProject") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="copyToProject" name="copyToProject" dojoType="dijit.form.FilteringSelect"
@@ -138,7 +138,7 @@ if($copyType=="copyObjectTo"){
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                <div id="copyWithStructureDiv" style="display:none;">
-	               <label for="copyWithStructure" style="width:90%;text-align: right;"><?php echo i18n("copyWithStructure") ?>&nbsp;:&nbsp;</label>
+	               <label for="copyWithStructure" style="width:90%;text-align: right;"><?php echo i18n("copyWithStructure") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 	               <?php $isCheckedStructure=true;$isCheckedStructure=Parameter::getUserParameter('isCheckedStructure'.$objectClass);?>
 	               <div id="copyWithStructure" name="copyWithStructure" dojoType="dijit.form.CheckBox" <?php if ($isCheckedStructure=='true') echo " checked ";?> type="checkbox" >
 	               <script type="dojo/method" event="onChange" >
@@ -146,7 +146,7 @@ if($copyType=="copyObjectTo"){
                  </script>
 	               </div>
 	               <br />
-                 <label for="copyWithAssignments" style="width:90%;text-align: right;"><?php echo i18n("copyAssignments") ?>&nbsp;:&nbsp;</label>
+                 <label for="copyWithAssignments" style="width:90%;text-align: right;"><?php echo i18n("copyAssignments") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                  <?php $isCheckedWithAsignments=true;$isCheckedWithAsignments=Parameter::getUserParameter('isCheckedWithAsignments'.$objectClass);?>
                  <div id="copyWithAssignments" name="copyWithAssignments" dojoType="dijit.form.CheckBox" <?php if ($isCheckedWithAsignments=='true') echo " checked ";?> type="checkbox" >
                  <script type="dojo/method" event="onChange" >
@@ -161,7 +161,7 @@ if($copyType=="copyObjectTo"){
            if($copyToClass!="Asset"){ ?> 
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToOrigin" style="width:90%;text-align: right;"><?php echo i18n("copyToOrigin") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToOrigin" style="width:90%;text-align: right;"><?php echo i18n("copyToOrigin") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedOrigin=true;$isCheckedOrigin=Parameter::getUserParameter('isCheckedOrigin'.$objectClass);?>
                <div id="copyToOrigin" name="copyToOrigin" dojoType="dijit.form.CheckBox"  <?php if ($isCheckedOrigin=='true') echo " checked ";?> type="checkbox" >
                <script type="dojo/method" event="onChange" >
@@ -172,7 +172,7 @@ if($copyType=="copyObjectTo"){
            </tr>
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToLinkOrigin" style="width:90%;text-align: right;"><?php echo i18n("copyToLinkOrigin") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToLinkOrigin" style="width:90%;text-align: right;"><?php echo i18n("copyToLinkOrigin") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedLinkOrigin=true;$isCheckedLinkOrigin=Parameter::getUserParameter('isCheckedLinkOrigin'.$objectClass);?>
                <div id="copyToLinkOrigin" name="copyToLinkOrigin" dojoType="dijit.form.CheckBox" <?php if ($isCheckedLinkOrigin=='true') echo " checked ";?> type="checkbox" >
                <script type="dojo/method" event="onChange" >
@@ -185,7 +185,7 @@ if($copyType=="copyObjectTo"){
            <?php }else{ ?> 
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyStructure" style="width:90%;text-align: right;"><?php echo i18n("copyStructure") ?>&nbsp;:&nbsp;</label>
+               <label for="copyStructure" style="width:90%;text-align: right;"><?php echo i18n("copyStructure") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedSructure=true;$isCheckedSructure=Parameter::getUserParameter('isCheckedSructure'.$objectClass);?>
                <div id="copyStructure" name="copyStructure" dojoType="dijit.form.CheckBox" <?php if ($isCheckedSructure=='true') echo " checked ";?> type="checkbox" >
                <script type="dojo/method" event="onChange" >
@@ -196,7 +196,7 @@ if($copyType=="copyObjectTo"){
            </tr>
            <?php } }?>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToWithLinks" style="width:90%;text-align: right;"><?php echo i18n("copyToWithLinks") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToWithLinks" style="width:90%;text-align: right;"><?php echo i18n("copyToWithLinks") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedWithLink=true;$isCheckedWithLink=Parameter::getUserParameter('isCheckedWithLink'.$objectClass);?>
                <div id="copyToWithLinks" name="copyToWithLinks" dojoType="dijit.form.CheckBox" <?php if ($isCheckedWithLink=='true') echo " checked ";?> type="checkbox" >
                <script type="dojo/method" event="onChange" >
@@ -207,7 +207,7 @@ if($copyType=="copyObjectTo"){
            </tr>
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToWithAttachments" style="width:90%;text-align: right;"><?php echo i18n("copyToWithAttachments") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToWithAttachments" style="width:90%;text-align: right;"><?php echo i18n("copyToWithAttachments") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedWithAttachments=true;$isCheckedWithAttachments=Parameter::getUserParameter('isCheckedWithAttachments'.$objectClass);?>
                <div id="copyToWithAttachments" name="copyToWithAttachments" dojoType="dijit.form.CheckBox" <?php if ($isCheckedWithAttachments=='true') echo " checked ";?> type="checkbox">
                <script type="dojo/method" event="onChange" >
@@ -218,7 +218,7 @@ if($copyType=="copyObjectTo"){
            </tr>
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToWithNotes" style="width:90%;text-align: right;"><?php echo i18n("copyToWithNotes") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToWithNotes" style="width:90%;text-align: right;"><?php echo i18n("copyToWithNotes") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedWithNotes=true;$isCheckedWithNotes=Parameter::getUserParameter('isCheckedWithNotes'.$objectClass);?>
                <div id="copyToWithNotes" name="copyToWithNotes" dojoType="dijit.form.CheckBox" <?php if ($isCheckedWithNotes=='true') echo " checked ";?> 
                     type="checkbox" >
@@ -231,7 +231,7 @@ if($copyType=="copyObjectTo"){
            <?php if($copyToClass!="Asset" and $objectClass!= 'CatalogUO'){ ?> 
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToWithResult" style="width:90%;text-align: right;"><?php echo i18n("copyToWithResult") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToWithResult" style="width:90%;text-align: right;"><?php echo i18n("copyToWithResult") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                 <?php $isCheckedWithResult=true;$isCheckedWithResult=Parameter::getUserParameter('isCheckedWithResult'.$objectClass);?>
                <div id="copyToWithResult" name="copyToWithResult" dojoType="dijit.form.CheckBox" <?php if ($isCheckedWithResult=='true') echo " checked ";?> 
                     type="checkbox">
@@ -270,7 +270,7 @@ if($copyType=="copyObjectTo"){
          <table>
            <tr>
              <td class="dialogLabel"  >
-               <label for="copyProjectToType" ><?php echo i18n("colProjectType") ?>&nbsp;:&nbsp;</label>
+               <label for="copyProjectToType" ><?php echo i18n("colProjectType") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -284,7 +284,7 @@ if($copyType=="copyObjectTo"){
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="copyProjectToName" ><?php echo i18n("copyToName") ?>&nbsp;:&nbsp;</label>
+               <label for="copyProjectToName" ><?php echo i18n("copyToName") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="copyProjectToName" name="copyProjectToName" dojoType="dijit.form.ValidationTextBox"
@@ -298,7 +298,7 @@ if($copyType=="copyObjectTo"){
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="copyProjectToName" ><?php echo i18n("colProjectCode") ?>&nbsp;:&nbsp;</label>
+               <label for="copyProjectToName" ><?php echo i18n("colProjectCode") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="copyProjectToProjectCode" name="copyProjectToProjectCode" dojoType="dijit.form.ValidationTextBox"
@@ -311,7 +311,7 @@ if($copyType=="copyObjectTo"){
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel"  >
-               <label for="copyProjectToSubProject" ><?php echo i18n("colIsSubProject") ?>&nbsp;:&nbsp;</label>
+               <label for="copyProjectToSubProject" ><?php echo i18n("colIsSubProject") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -325,7 +325,7 @@ if($copyType=="copyObjectTo"){
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyProjectStructure" style="width:90%;text-align: right;"><?php echo i18n("copyProjectStructure") ?>&nbsp;:&nbsp;</label>
+               <label for="copyProjectStructure" style="width:90%;text-align: right;"><?php echo i18n("copyProjectStructure") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedProjectStructure=true;$isCheckedProjectStructure=Parameter::getUserParameter('isCheckedProjectStructure'.$objectClass);?>
                <div id="copyProjectStructure" name="copyProjectStructure" dojoType="dijit.form.CheckBox" <?php if ($isCheckedProjectStructure=='true') echo " checked ";?>
                 type="checkbox" onChange="copyProjectStructureChange()" >
@@ -337,7 +337,7 @@ if($copyType=="copyObjectTo"){
            </tr>
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyOtherProjectStructure" style="width:90%;text-align: right;"><?php echo i18n("copyOtherProjectStructure") ?>&nbsp;:&nbsp;</label>
+               <label for="copyOtherProjectStructure" style="width:90%;text-align: right;"><?php echo i18n("copyOtherProjectStructure") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedOtherProjectStructure=true;$isCheckedOtherProjectStructure=Parameter::getUserParameter('isCheckedOtherProjectStructure'.$objectClass);?>
                <div id="copyOtherProjectStructure" name="copyOtherProjectStructure" dojoType="dijit.form.CheckBox" <?php if ($isCheckedOtherProjectStructure=='true') echo " checked ";?>
                 type="checkbox" onChange="copyProjectStructureChange()" >
@@ -349,7 +349,7 @@ if($copyType=="copyObjectTo"){
            </tr>
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copySubProjects" style="width:90%;text-align: right;"><?php echo i18n("copySubProjects") ?>&nbsp;:&nbsp;</label>
+               <label for="copySubProjects" style="width:90%;text-align: right;"><?php echo i18n("copySubProjects") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedSubProject=true;$isCheckedSubProject=Parameter::getUserParameter('isCheckedSubProject'.$objectClass);?>
                <div id="copySubProjects" name="copySubProjects" dojoType="dijit.form.CheckBox" <?php if ($isCheckedSubProject=='true') echo " checked ";?> type="checkbox" >
                <script type="dojo/method" event="onChange" >
@@ -360,7 +360,7 @@ if($copyType=="copyObjectTo"){
            </tr>
             <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyProjectAffectations" style="width:90%;text-align: right;"><?php echo i18n("copyProjectAffectations") ?>&nbsp;:&nbsp;</label>              
+               <label for="copyProjectAffectations" style="width:90%;text-align: right;"><?php echo i18n("copyProjectAffectations") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>              
                <?php $isCheckedProjectAffectation=Parameter::getUserParameter('isCheckedProjectAffectation'.$objectClass);?>
                <div id="copyProjectAffectations" name="copyProjectAffectations" dojoType="dijit.form.CheckBox" <?php if ($isCheckedProjectAffectation=='true') echo " checked ";?>
                     type="checkbox" >
@@ -372,7 +372,7 @@ if($copyType=="copyObjectTo"){
            </tr>
         <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyProjectAssignments" style="width:90%;text-align: right;"><?php echo i18n("copyAssignments") ?>&nbsp;:&nbsp;</label>
+               <label for="copyProjectAssignments" style="width:90%;text-align: right;"><?php echo i18n("copyAssignments") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedProjectAssignment=Parameter::getUserParameter('isCheckedProjectAssignment'.$objectClass);?>
                <div id="copyProjectAssignments" name="copyProjectAssignments" dojoType="dijit.form.CheckBox" <?php if ($isCheckedProjectAssignment=='true') echo " checked ";?> 
                     type="checkbox" >
@@ -385,7 +385,7 @@ if($copyType=="copyObjectTo"){
            <!--  Krowry #2206 -->
             <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToWithVersionProjects" style="width:90%;text-align: right;"><?php echo i18n("copyToWithVersionProjects") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToWithVersionProjects" style="width:90%;text-align: right;"><?php echo i18n("copyToWithVersionProjects") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedVersionProjects=true;$isCheckedVersionProjects=Parameter::getUserParameter('isCheckedVersionProjects'.$objectClass);?>
                <div id="copyToWithVersionProjects" name="copyToWithVersionProjects" dojoType="dijit.form.CheckBox" <?php if ($isCheckedVersionProjects=='true') echo " checked ";?> 
                     type="checkbox" >
@@ -397,7 +397,7 @@ if($copyType=="copyObjectTo"){
            </tr>
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyProjectRequirement" style="width:90%;text-align: right;"><?php echo i18n("copyProjectRequirement") ?>&nbsp;:&nbsp;</label>
+               <label for="copyProjectRequirement" style="width:90%;text-align: right;"><?php echo i18n("copyProjectRequirement") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedProjectRequirement=true;$isCheckedProjectRequirement=Parameter::getUserParameter('isCheckedProjectRequirement'.$objectClass);?>
                <div id="copyProjectRequirement" name="copyProjectRequirement" dojoType="dijit.form.CheckBox" <?php if ($isCheckedProjectRequirement=='true') echo " checked ";?>
                 type="checkbox"  >
@@ -410,7 +410,7 @@ if($copyType=="copyObjectTo"){
 <!-- ADD BY Marc TABARY - 2017-03-17 - COPY ACTIVITY PRICE WHEN COPY PROJECT -->
             <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToWithActivityPrice" style="width:90%;text-align: right;"><?php echo i18n("copyToWithActivityPrice") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToWithActivityPrice" style="width:90%;text-align: right;"><?php echo i18n("copyToWithActivityPrice") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                 <?php $isCheckedActivityPrice=Parameter::getUserParameter('isCheckedActivityPrice'.$objectClass);?>
                <div id="copyToWithActivityPrice" name="copyToWithActivityPrice" dojoType="dijit.form.CheckBox" <?php if ($isCheckedActivityPrice=='true') echo " checked ";?> 
                     type="checkbox">
@@ -424,7 +424,7 @@ if($copyType=="copyObjectTo"){
             <!-- Gautier #1769 --> 
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToWithLinks" style="width:90%;text-align: right;"><?php echo i18n("copyToWithLinks") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToWithLinks" style="width:90%;text-align: right;"><?php echo i18n("copyToWithLinks") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedLink=true;$isCheckedLink=Parameter::getUserParameter('isCheckedLink'.$objectClass);?>
                <div id="copyToWithLinks" name="copyToWithLinks" dojoType="dijit.form.CheckBox" <?php if ($isCheckedLink=='true') echo " checked ";?> 
                     type="checkbox" >
@@ -438,7 +438,7 @@ if($copyType=="copyObjectTo"){
           <!-- Gautier #copyAttachments Project --> 
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToWithAttachments" style="width:90%;text-align: right;"><?php echo i18n("copyToWithAttachments") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToWithAttachments" style="width:90%;text-align: right;"><?php echo i18n("copyToWithAttachments") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                <?php $isCheckedWithAttachments=true;$isCheckedWithAttachments=Parameter::getUserParameter('isCheckedWithAttachments'.$objectClass);?>
                <div id="copyToWithAttachments" name="copyToWithAttachments" dojoType="dijit.form.CheckBox" <?php if ($isCheckedWithAttachments=='true') echo " checked ";?> type="checkbox">
                <script type="dojo/method" event="onChange" >
@@ -492,7 +492,7 @@ else if($copyType=="copyVersion"){
            <?php if ($paramNameAutoformat=='YES') {?>
            <tr>
              <td class="dialogLabel" >
-               <label for="copyToVersionNumber" ><?php echo i18n("colVersionNumber") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToVersionNumber" ><?php echo i18n("colVersionNumber") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="copyToVersionNumber" name="copyToVersionNumber" dojoType="dijit.form.ValidationTextBox"
@@ -510,7 +510,7 @@ else if($copyType=="copyVersion"){
            <?php }?>
            <tr>
              <td class="dialogLabel" >
-               <label for="copyToName" ><?php echo i18n("copyToName") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToName" ><?php echo i18n("copyToName") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div id="copyToName" name="copyToName" dojoType="dijit.form.ValidationTextBox"
@@ -525,7 +525,7 @@ else if($copyType=="copyVersion"){
            <?php  if($objectClass != "CatalogUO"){?>
            <tr>
              <td class="dialogLabel"  >
-               <label for="copyToType" ><?php echo i18n("copyToType") ?>&nbsp;:&nbsp;</label>
+               <label for="copyToType" ><?php echo i18n("copyToType") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -545,7 +545,7 @@ else if($copyType=="copyVersion"){
            
            <tr>
              <td class="dialogLabel" >
-               <label><?php echo i18n("copyToCopyVersionStructure") ?>&nbsp;:&nbsp;</label>           
+               <label><?php echo i18n("copyToCopyVersionStructure") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>           
              </td>
              <td>
                <table style="width:100%;">

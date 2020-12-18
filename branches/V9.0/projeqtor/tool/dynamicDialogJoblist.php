@@ -128,7 +128,7 @@ $status = array('done' => '#a5eda5',
         <table >
           <tr id="dialogJobInfoCreatorLine">
             <td class="dialogLabel"  >
-              <label for="dialogJobInfoCreator" ><?php echo i18n("colResponsible") ?>&nbsp;:&nbsp;</label>
+              <label for="dialogJobInfoCreator" ><?php echo i18n("colResponsible") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
               <select dojoType="dijit.form.FilteringSelect" id="dialogJobInfoCreator" class="input" value="" <?php echo autoOpenFilteringSelect ();?>>
@@ -139,7 +139,7 @@ $status = array('done' => '#a5eda5',
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr id="dialogJobInfoDateLine">
             <td class="dialogLabel" >
-              <label for="dialogJobInfoDate" ><?php echo i18n("colValidatedEndDate") ?>&nbsp;:&nbsp;</label>
+              <label for="dialogJobInfoDate" ><?php echo i18n("colValidatedEndDate") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
             </td>
             <td>
               <div id="dialogJobInfoDate" dojoType="dijit.form.DateTextBox"

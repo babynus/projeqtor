@@ -34,6 +34,8 @@
   $user=getSessionUser();
   $collapsedList=Collapsed::getCollaspedList();      
   Security::checkDisplayMenuForUser('Admin');
+  $newGuiDisplaydoublePoint = "&nbsp;:&nbsp;";
+  if(isNewGui())$newGuiDisplaydoublePoint="&nbsp;&nbsp;";
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Administration" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
@@ -69,7 +71,7 @@
              title="<?php echo i18n('cronTasks');?>">
             <table style="width:100%;">            
               <tr>
-                <td class="label"><?php echo i18n("cronStatus"). "&nbsp;:&nbsp;";?></td>
+                <td class="label"><?php echo i18n("cronStatus").$newGuiDisplaydoublePoint;?></td>
                 <td class="display">
                   <?php 
                     $cronStatus=Cron::check();
@@ -168,7 +170,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label"><?php echo i18n("colSendDate"). "&nbsp;:&nbsp;";?></td>
+                <td class="label"><?php echo i18n("colSendDate"). $newGuiDisplaydoublePoint;?></td>
                 <td>
                   <div dojoType="dijit.form.DateTextBox" name="alertSendDate" id="alertSendDate"
 	                  <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -190,7 +192,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label"><?php echo i18n("colType"). "&nbsp;:&nbsp;";?></td>
+                <td class="label"><?php echo i18n("colType"). $newGuiDisplaydoublePoint;?></td>
                 <td>
                   <select dojoType="dijit.form.FilteringSelect" class="input" 
                     <?php echo autoOpenFilteringSelect();?>
@@ -202,7 +204,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label"><?php echo i18n("colTitle"). "&nbsp;:&nbsp;";?></td>
+                <td class="label"><?php echo i18n("colTitle"). $newGuiDisplaydoublePoint;?></td>
                 <td>
                   <div dojoType="dijit.form.TextBox"
                     style="width:98%;" required="true"
@@ -211,7 +213,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label"><?php echo i18n("colMessage"). "&nbsp;:&nbsp;";?></td>
+                <td class="label"><?php echo i18n("colMessage"). $newGuiDisplaydoublePoint;?></td>
                 <td>
                   <textarea dojoType="dijit.form.Textarea"
                     name="alertSendMessage" id="alertSendMessage"
@@ -243,7 +245,7 @@
              title="<?php echo i18n('manageConnections');?>">
             <table style="width:100%;">
               <tr>
-                <td width="200px;" class="label"><?php echo i18n("activeConnections"). "&nbsp;:&nbsp;";?></td>
+                <td width="200px;" class="label"><?php echo i18n("activeConnections"). $newGuiDisplaydoublePoint;?></td>
                 <td width="90%">
                   <?php $audit=New Audit();
                   $cpt=$audit->countSqlElementsFromCriteria(array('idle'=>'0'));
@@ -264,7 +266,7 @@
               </tr>
                 <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
-                <td width="200px;" class="label"><?php echo i18n("applicationStatus"). "&nbsp;:&nbsp;";?></td>
+                <td width="200px;" class="label"><?php echo i18n("applicationStatus"). $newGuiDisplaydoublePoint;?></td>
                 <td width="90%">
                   <?php $statusApp=Parameter::getGlobalParameter('applicationStatus');
                   if (!trim($statusApp)) {$statusApp='Open';}
@@ -287,7 +289,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label"><?php echo i18n("closedMessage"). "&nbsp;:&nbsp;";?></td>
+                <td class="label"><?php echo i18n("closedMessage"). $newGuiDisplaydoublePoint;?></td>
                 <td>
                   <textarea dojoType="dijit.form.Textarea"
                     name="msgClosedApplication" id="msgClosedApplication"
@@ -308,7 +310,7 @@
              title="<?php echo i18n('consistencyCheckSection');?>">
             <table style="width:100%;">
               <tr>
-                <td width="200px" class="label"><?php echo i18n("runConsistencyCheck"). "&nbsp;:&nbsp;";?></td>
+                <td width="200px" class="label"><?php echo i18n("runConsistencyCheck"). $newGuiDisplaydoublePoint;?></td>
                 <td style="width:99%;text-align:left;">
                   <button id="runConsistencyCheck" dojoType="dijit.form.Button" showlabel="true">
                     <?php echo i18n('consistencyCheck'); ?>
@@ -341,7 +343,7 @@
             <table style="width:100%;">
               <tr>
                 <td class="label" style="width:200px">
-                  <?php echo i18n("closeEmails"). "&nbsp;:&nbsp;";?>
+                  <?php echo i18n("closeEmails"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display" width="90%">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
@@ -368,7 +370,7 @@
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
                 <td class="label" style="width:200px">
-                  <?php echo i18n("deleteEmails"). "&nbsp;:&nbsp;";?>
+                  <?php echo i18n("deleteEmails"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
@@ -395,7 +397,7 @@
                        <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
                 <td class="label" style="width:200px">
-                  <?php echo i18n("closeAlerts"). "&nbsp;:&nbsp;";?>
+                  <?php echo i18n("closeAlerts"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
@@ -422,7 +424,7 @@
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
                 <td class="label" style="width:200px">
-                  <?php echo i18n("deleteAlerts"). "&nbsp;:&nbsp;";?>
+                  <?php echo i18n("deleteAlerts"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
@@ -450,7 +452,7 @@
               <tr>
 <!-- BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM -->
               <td class="label" style="width:200px">
-                  <?php echo i18n("deleteNotifications"). "&nbsp;:&nbsp;";?>
+                  <?php echo i18n("deleteNotifications"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
@@ -477,7 +479,7 @@
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
 <!-- END - ADD BY TABARY - NOTIFICATION SYSTEM -->
-              <td class="label" style="width:200px">                <?php echo i18n("deleteAudit"). "&nbsp;:&nbsp;";?>
+              <td class="label" style="width:200px">                <?php echo i18n("deleteAudit"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
                   <?php echo i18n('closedSinceMore');?>&nbsp;
@@ -504,7 +506,7 @@
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
                 <td class="label" style="width:200px">
-                  <?php echo i18n("updateReference"). "&nbsp;:&nbsp;";?>
+                  <?php echo i18n("updateReference"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
                   <select dojoType="dijit.form.FilteringSelect" class="input" style="width:200px;"
@@ -540,7 +542,7 @@
              <table style="width:100%;">
               <tr>
                 <td class="label" style="width:200px">
-                  <?php echo i18n("paramLogLevel"). "&nbsp;:&nbsp;";?>
+                  <?php echo i18n("paramLogLevel"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
                   <select dojoType="dijit.form.FilteringSelect" class="input" style="width:200px;"
@@ -559,7 +561,7 @@
               </tr>
               <tr>
                 <td class="label" style="width:200px">
-                  <?php echo i18n("deleteLogfile"). "&nbsp;:&nbsp;";?>
+                  <?php echo i18n("deleteLogfile"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display" width="90%">
                   <?php echo i18n('olderThan');?>&nbsp;
@@ -585,7 +587,7 @@
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
-                <td class="label" style="width:200px"><?php echo i18n('showLogfiles'). "&nbsp;:&nbsp;";?></td>
+                <td class="label" style="width:200px"><?php echo i18n('showLogfiles'). $newGuiDisplaydoublePoint;?></td>
                 <td>
                  <button id="showLogfile" dojoType="dijit.form.Button" showlabel="true" class="">
                     <?php echo i18n('showLogfiles'); ?>
