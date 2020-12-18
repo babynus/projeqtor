@@ -53,8 +53,8 @@ if(getSessionValue('showArchive')==1){ $showArchive=true; }
 
 <?php showCloseButton();?>
 
-<div style="">
-  <div style="position:absolute;z-index:3;<?php echo (isNewGui())?'top:12px; left:50%; ':'margin-top:-1px;right:12px;';?>">
+<div style="position:relative;">
+  <div style="position:absolute; z-index:3;<?php echo (isNewGui())?'top:-32px; left:50%; ':'margin-top:-1px;right:12px;';?>">
   <?php if($showArchive==true){?>
       <button id="historyArchive" title="<?php echo i18n('helpCloseHistoryArchive');?>" region="center" dojoType="dijit.form.Button"  iconClass="imageColorNewGui iconButtonMark16 iconButtonMark iconHistArchiveNo iconSize16" >
   <?php }else{?>
