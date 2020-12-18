@@ -51,6 +51,7 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
            <?php if(isNewGui()){?>
               dojo.byId('archiveOn').style.display=(this.checked)?'':'none';
               dojo.byId('archiveOnSeparator').style.display=(this.checked)?'':'none';
+              dojo.byId('archiveOnDiv').style.display=(this.checked)?'':'none';
            <?php } ?>
          </script>
 	     </div>
