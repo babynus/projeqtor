@@ -306,9 +306,9 @@ if(isset($_REQUEST['goToRequirement'])){
 				</tr>
 				<?php }else{?>
 				<tr>
-				  <td valign="top" style="width:25%">
+				  <td valign="top" style="width:30%">
 						<table>
-						<tr height="37px"><td>&nbsp;&nbsp;<?php echo ucfirst(i18n('filterCreateByRequierement'));?></td> </tr>
+						<tr height="37px"><td>&nbsp;&nbsp;<?php echo ucfirst(i18n('filterByTicket'));?></td> </tr>
 								<tr>
 								<?php 
 								$paramDashboardRequierementMain=0;
@@ -316,11 +316,20 @@ if(isset($_REQUEST['goToRequirement'])){
   				          $paramDashboardRequierementMain=Parameter::getUserParameter("dashboardRequirementMainAllRequirement");
   				        }
 								?>
-								  <td>
+								  <td width="320px">
 								    <ul style="top:-8px;" data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainAllRequirement=0')" data-dojo-type="dojox/mobile/TabBarButton"   <?php if($paramDashboardRequierementMain==0){ echo "data-dojo-props='selected:true'"; }?> > <?php echo i18n('AllIssues');?></li>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainAllRequirement=2')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardRequierementMain==2){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('unclosed');?></li>
                       <li onClick="changeParamDashboardRequirement('dashboardRequirementMainAllRequirement=1')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($paramDashboardRequierementMain==1){ echo "data-dojo-props='selected:true'"; }?> ><?php echo i18n('Unresolved');?></li>
+                    </ul>
+								  </td>
+								   <?php  $dashboardTicketMainUnresolved=null;
+  				        if(Parameter::getUserParameter("dashboardRequirementMainUnresolved")!=null){
+  				          $dashboardTicketMainUnresolved=Parameter::getUserParameter("dashboardRequirementMainUnresolved");
+  				        } ?>
+								  <td>
+								    <ul style="top:-8px;" data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
+                      <li onClick="changeParamDashboardRequirement('dashboardRequirementMainUnresolved=1')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($dashboardTicketMainUnresolved==1){ echo "data-dojo-props='selected:true'"; }?> ><?php echo ucfirst(i18n("dashboardRequirementMainUnscheduled"));?></li>
                     </ul>
 								  </td>
 								</tr>
@@ -365,7 +374,7 @@ if(isset($_REQUEST['goToRequirement'])){
 							</tr>
 						</table>
 					</td>
-					<td valign="top" style="width:25%">
+					<td valign="top" style="width:20%">
 						<table>
 						<tr height="37px"><td>&nbsp;&nbsp;<?php echo i18n('filterCreateByTicket');?></td> </tr>
 							<tr>
@@ -384,24 +393,24 @@ if(isset($_REQUEST['goToRequirement'])){
 						</table>
 						<td valign="top" style="width:25%">
 						<table style="margin-top:6px;">
-							<tr>
-					<td style="vertical-align: middle; text-align:right;" width="5px">
-           <span class="nobr">&nbsp;&nbsp;&nbsp;
-          <?php echo i18n("colType");?>
-          &nbsp;</span>
-        </td>
-				<td width="5px">
-        	<select title="<?php echo i18n('filterOnType'); ?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
-        	<?php echo autoOpenFilteringSelect();
-        	if ($filterTypes != '') echo ' readOnly'; ?>
-        	id="typeFilter" name="typeFilter" style="width:200px">
-              <?php htmlDrawOptionForReference('idRequirementType', $filterOnType); ?>
-          	<script type="dojo/method" event="onChange" >
-              if (this.value != ' ') {
-                changeParamDashboardRequirement('dashboardRequirementMainType=' + this.value);
-              } else {
-                changeParamDashboardRequirement('dashboardRequirementMainType=null');
-              }
+					   <tr height="25px">
+					     <td style="vertical-align: middle; text-align:left;" width="5px">
+                <span class="nobr"><?php echo i18n("colType");?></span>
+               </td>
+             </tr>
+             <tr>
+				      <td>
+        	     <select title="<?php echo i18n('filterOnType'); ?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
+        	       <?php echo autoOpenFilteringSelect();
+        	       if ($filterTypes != '') echo ' readOnly'; ?>
+        	       id="typeFilter" name="typeFilter" style="top:-8px;width:200px">
+                  <?php htmlDrawOptionForReference('idRequirementType', $filterOnType); ?>
+                	<script type="dojo/method" event="onChange" >
+                   if (this.value != ' ') {
+                    changeParamDashboardRequirement('dashboardRequirementMainType=' + this.value);
+                    } else {
+                      changeParamDashboardRequirement('dashboardRequirementMainType=null');
+                    }
             </script>
            </select>
         </td>
@@ -598,24 +607,6 @@ if(isset($_REQUEST['goToRequirement'])){
   }
   
   function createPopUpDnd($tabPosition){
-    if(isNewGui()){
-      echo '<table><tr><td>';
-      echo ucfirst(i18n("dashboardRequirementMainUnscheduled"));
-      echo'   </td>';
-      $valueSwitch = "off";
-      if(Parameter::getUserParameter("dashboardRequirementMainUnresolved")!=null){
-        $valueSwitchValue=Parameter::getUserParameter("dashboardRequirementMainUnresolved");
-        if($valueSwitchValue)$valueSwitch="on";
-      }
-      echo' <td>';
-      echo '<div  id="showIdleSwitchAS45" name="showIdleSwitchAS45" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value='.$valueSwitch.' leftLabel="" rightLabel="" >';
-      echo '<script type="dojo/method" event="onStateChanged" >
-              changeParamDashboardRequirement("dashboardRequirementMainUnresolved=1");
-            </script>
-            </div>
-            </td>';
-      echo '</td></tr></table>';
-	  }
     echo '<table><tr><td valign="top"><table id="dndDashboardLeftParameters" jsId="dndDashboardLeftParameters" dojotype="dojo.dnd.Source" dndType="tableauBordLeft"
                withhandles="true" style="width:300px;cellspacing:0; cellpadding:0;" data-dojo-props="accept: [ \'tableauBordRight\',\'tableauBordLeft\' ]"> ';
     echo '<tr><td colspan="3">&nbsp;</td></tr>';
