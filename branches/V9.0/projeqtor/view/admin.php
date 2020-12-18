@@ -158,7 +158,7 @@
              title="<?php echo i18n('sendAlert');?>">
             <table style="width:100%;">
               <tr>
-                <td width="200px;" class="label"><?php echo i18n("colMailTo"). "&nbsp;:&nbsp;";?></td>
+                <td width="200px;" class="label"><?php echo i18n("colMailTo"). $newGuiDisplaydoublePoint;?></td>
                 <td width="90%">
                   <select dojoType="dijit.form.FilteringSelect" class="input" required="true"
                     <?php echo autoOpenFilteringSelect();?>
