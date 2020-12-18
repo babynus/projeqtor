@@ -56,7 +56,7 @@ $dayOfWeek=$cron[4];
 </tr>
 <tr>
   <td class="dialogLabel"><label><?php echo i18n("minute");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
-  <td>
+  <td style="padding-right:20px">
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
     <?php echo autoOpenFilteringSelect();?>
     style="width: 98%;" name="cronDefinitonMinutes" id="cronDefinitonMinutes">
@@ -68,7 +68,7 @@ $dayOfWeek=$cron[4];
 </tr>
 <tr>
   <td class="dialogLabel"><label><?php echo i18n("hour");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
-  <td>
+  <td style="padding-right:20px">
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
     <?php echo autoOpenFilteringSelect();?>
     style="width: 98%;" name="cronDefinitonHours" id="cronDefinitonHours">
@@ -80,7 +80,7 @@ $dayOfWeek=$cron[4];
 </tr>
 <tr>
   <td class="dialogLabel"><label><?php echo i18n("colFixedDay");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
-  <td>
+  <td style="padding-right:20px">
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
     <?php echo autoOpenFilteringSelect();?>
     style="width: 98%;" name="cronDefinitonDayOfMonth" id="cronDefinitonDayOfMonth">
@@ -92,7 +92,7 @@ $dayOfWeek=$cron[4];
 </tr>
 <tr>
   <td class="dialogLabel"><label><?php echo i18n("month");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
-  <td>
+  <td style="padding-right:20px">
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
     <?php echo autoOpenFilteringSelect();?>
     style="width: 98%;" name="cronDefinitonMonth" id="cronDefinitonMonth">
@@ -106,7 +106,7 @@ $dayOfWeek=$cron[4];
 </tr>
 <tr>
   <td class="dialogLabel"><label><?php echo i18n("colFixedDayOfWeek");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>
-  <td>
+  <td style="padding-right:20px">
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
     <?php echo autoOpenFilteringSelect();?>
     style="width: 98%;" name="cronDefinitonDayOfWeek" id="cronDefinitonDayOfWeek">
