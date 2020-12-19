@@ -127,6 +127,7 @@ if ($displayWidthList<1400) {
     }
   }
 }
+
 $extrahiddenFields=$obj->getExtraHiddenFields('*','*');
 if ($obj->isAttributeSetToField('idClient','hidden') or in_array('idClient',$extrahiddenFields)) $hideClientSearch=true;
 if ($obj->isAttributeSetToField('idBudget','hidden') or in_array('idBudget',$extrahiddenFields)) $hideParentBudgetSearch=true;
@@ -208,6 +209,7 @@ $extendedListZone=false;
 </div>
 <div dojoType="dijit.layout.BorderContainer" >
 <div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" style="width:50%;">
+  <!-- QUICK SEARCH DIV --> 
   <form dojoType="dijit.form.Form" id="quickSearchListForm" action="" method="" >
     <script type="dojo/method" event="onSubmit" >
       quickSearchExecute();
@@ -258,14 +260,15 @@ $extendedListZone=false;
       </table>
     </div>
   </form>
+  <!-- END QUICK SEARCH DIV --> 
   <table width="100%" class="listTitle" >
     <tr>
+      <!-- ICON AND NAME -->
       <td style="width:50px;min-width:43px;" align="center">
          <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
          <div style="position:absolute; top:3px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>
       </td>
-      <td class="title" style="height:35px;width:30%;">
-     
+      <td class="title" style="height:35px;width:30%;">    
         <div style="width:100%;height:100%;position:relative;">
           <div id="menuName" style="float:left;width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;">
             <?php if (isNewGui()) {?>           
@@ -279,6 +282,7 @@ $extendedListZone=false;
           </div>
         </div>
       </td>
+      <!-- ALL OTHERS -->
       <td>   
         <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
           <script type="dojo/method" event="onSubmit" >
@@ -286,119 +290,288 @@ $extendedListZone=false;
           </script>  
           <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" />  
           <input type="hidden" id="objectId" name="objectId" value="<?php if (isset($_REQUEST['objectId']))  { echo htmlEncode($_REQUEST['objectId']);}?>" />
-          <input type="hidden" id="objectClassList" name="objectClassList" value="<?php echo $objectClass;?>" />
-          
+          <input type="hidden" id="objectClassList" name="objectClassList" value="<?php echo $objectClass;?>" />          
           <table style="width: 100%; height: 39px;">
             <tr>
-            <?php if (isNewGui()) {?>
-            <td width="80%">&nbsp;</td>
-            <?php }?>
-            <?php if (! $comboDetail) {?> 
-              <td width="36px" class="allSearchFixLength">
-              <?php if ($objectClass=='GlobalView') {?>
-                <div dojoType="dijit.form.DropDownButton"
-                             class="comboButton"   
-                             id="planningNewItem" jsId="planningNewItem" name="planningNewItem" 
-                             showlabel="false" class="" iconClass="dijitButtonIcon dijitButtonIconNew"
-                             title="<?php echo i18n('comboNewButton');?>">
-                          <span>title</span>
-                          <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
-                            <div style="font-weight:bold; height:25px;text-align:center">
-                            <?php echo i18n('comboNewButton');?>
-                            </div>
-                            <?php $arrayItems=GlobalView::getGlobalizables();
-                            foreach($arrayItems as $item=>$itemName) {
-                              $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
-                              if ($canCreate=='YES') {
-                                if (! securityCheckDisplayMenu(null,$item) ) {
-                                  $canCreate='NO';
-                                }
-                              }
-                              if ($canCreate=='YES') {?>
-                              <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
-                               onClick="addNewItem('<?php echo $item;?>');" >
-                                <table width:"100%"><tr style="height:22px" >
-                                <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIcon($item, 22, null, false);;?></td>    
-                                <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
-                                </tr></table>   
-                              </div>
-                              <div style="height:5px;"></div>
-                              <?php } 
-                              }?>
-                          </div>
-                        </div>
-              <?php } else {?>
-              <button id="newButtonList" dojoType="dijit.form.Button" showlabel="false"
-                title="<?php echo i18n('buttonNew', array(i18n($_REQUEST['objectClass'])));?>"
-                iconClass="dijitButtonIcon dijitButtonIconNew" class="detailButton">
-                <script type="dojo/connect" event="onClick" args="evt">
-                  hideExtraButtons('extraButtonsList');
-		              dojo.byId("newButton").blur();
-                  id=dojo.byId('objectId');
-	                if (id) { 	
-		                id.value="";
-		                unselectAllRows("objectGrid");
-                    if (switchedMode) {
-                      setTimeout("hideList(null,true);", 1);
-                    }
-                    loadContent("objectDetail.php", "detailDiv", "listForm");
-                    if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
-                  } else { 
-                    showError(i18n("errorObjectId"));
-	                }
-                </script>
-              </button>
-              <?php }?>
-            </td>
-            <?php }?>
-            
-            
-            
-              <td width="36px" class="allSearchFixLength">
-                <button id="newButtonRefresh" dojoType="dijit.form.Button" showlabel="false"
-                  title="<?php echo i18n('buttonRefreshList');?>"
-                  iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
-                  <script type="dojo/connect" event="onClick" args="evt">
-                     hideExtraButtons('extraButtonsList');
-	                   refreshGrid(true);
-                  </script>
-                </button>
-              </td>    
-            <?php 
-            //gautier #filterEnd
-            if (!isNewGui()){
-              if ( ! $hideIdSearch ) { ?>
-              <td style="text-align:right;" width="5px" class="allSearchTD idSearchTD allSearchFixLength">
-                <span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;
-                <?php echo i18n("colId");?>
-                &nbsp;</span> 
-              </td>
-              <td width="5px" class="allSearchTD idSearchTD">
-                <div title="<?php echo i18n('filterOnId')?>" style="width:<?php echo $referenceWidth;?>px" class="filterField rounded" dojoType="dijit.form.TextBox" 
-                 type="text" id="listIdFilter" name="listIdFilter" value="<?php if(!$comboDetail and sessionValueExists('listIdFilter'.$objectClass)){ echo getSessionValue('listIdFilter'.$objectClass); }?>">
-                  <script type="dojo/method" event="onKeyUp" >
-                    setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
-                  </script>
-                </div>
-              </td>
-              <?php }?>
+              <?php 
+              if (isNewGui()) {
+                $display = "none";
+                if( (sessionValueExists('listIdFilter'.$objectClass) and getSessionValue('listIdFilter'.$objectClass)!='') or (sessionValueExists('listIdFilterQuickSw'.$objectClass) and getSessionValue('listIdFilterQuickSw'.$objectClass)=='on')
+                    or (sessionValueExists('listNameFilter'.$objectClass) and getSessionValue('listNameFilter'.$objectClass)!='') or (sessionValueExists('listNameFilterQuickSw'.$objectClass) and getSessionValue('listNameFilterQuickSw'.$objectClass)=='on')
+                    or (sessionValueExists('listTypeFilter'.$objectClass) and getSessionValue('listTypeFilter'.$objectClass)!='') or (sessionValueExists('listTypeFilterQuickSw'.$objectClass) and getSessionValue('listTypeFilterQuickSw'.$objectClass)=='on')
+                    or (sessionValueExists('listClientFilter'.$objectClass) and getSessionValue('listClientFilter'.$objectClass)!='') or (sessionValueExists('listClientFilterQuickSw'.$objectClass) and getSessionValue('listClientFilterQuickSw'.$objectClass)=='on')
+                    or (sessionValueExists('listBudgetParentFilter'.$objectClass) and getSessionValue('listBudgetParentFilter'.$objectClass)!='') or (sessionValueExists('listBudgetParentFilterQuickSw'.$objectClass) and getSessionValue('listBudgetParentFilterQuickSw'.$objectClass)=='on')
+                ){
+                  $display = "block";
+                }
+                ?>
+                <td width="80%">&nbsp;</td>
+              
+             <!--  DIRECT FILTERS -->
+             <td>
+               <div id="filterDivs" name="filterDivs" style="display:<?php echo $display;?>">
+                 <table><tr>  
+                  
+                <?php  if ( ! $hideIdSearch ) { ?>
+                  <td style="text-align:right;" width="5px" class="allSearchTD idSearchTD allSearchFixLength">
+                    <span id="filterDivsSpan" style="display:<?php echo sessionDisplayFilter('listIdFilter',$objectClass);?>" class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php echo i18n("colId");?>
+                    &nbsp;</span> 
+                  </td>
+                  <td width="5px" class="allSearchTD idSearchTD">
+                    <div  style="display:<?php echo sessionDisplayFilter('listIdFilter',$objectClass); ?>" title="<?php echo i18n('filterOnId')?>" style="width:<?php echo $referenceWidth;?>px" class="filterField rounded" dojoType="dijit.form.TextBox" 
+                     type="text" id="listIdFilter" name="listIdFilter" value="<?php if(!$comboDetail and sessionValueExists('listIdFilter'.$objectClass) ){ echo getSessionValue('listIdFilter'.$objectClass); }?>">
+                      <script type="dojo/method" event="onKeyUp" >
+                        setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
+                        if(dijit.byId('listIdFilterQuick')){
+                          if(dijit.byId('listIdFilterQuick').get('value') != dijit.byId('listIdFilter').get('value')){
+                            dijit.byId('listIdFilterQuick').set('value',dijit.byId('listIdFilter').get('value'));
+                          }
+                        }
+                      </script>
+                    </div>
+                  </td>
+                  <?php }?>
               <?php if ( ! $hideNameSearch and (property_exists($obj,'name') or get_class($obj)=='Affectation')) { ?>
               <td style="text-align:right;" width="5px" class="allSearchTD nameSearchTD allSearchFixLength">
-                <span class="nobr">&nbsp;&nbsp;&nbsp;
-                  <?php echo i18n("colName");?>
+                <span id="listNameFilterSpan" style="display:<?php echo sessionDisplayFilter('listNameFilter',$objectClass); ?>" class="nobr">&nbsp;&nbsp;&nbsp;
+                <?php echo i18n("colName");?>
                 &nbsp;</span> 
               </td>
               <td width="5px" class="allSearchTD nameSearchTD">
                 <div title="<?php echo i18n('filterOnName')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
-                  id="listNameFilter" name="listNameFilter" style="width:<?php echo $referenceWidth*2;?>px" value="<?php if(!$comboDetail and sessionValueExists('listNameFilter'.$objectClass)){ echo getSessionValue('listNameFilter'.$objectClass); }?>">
+                id="listNameFilter" name="listNameFilter" style="display:<?php echo sessionDisplayFilter('listNameFilter',$objectClass); ?>; width:<?php echo $referenceWidth*2;?>px" value="<?php if(!$comboDetail and sessionValueExists('listNameFilter'.$objectClass)){ echo getSessionValue('listNameFilter'.$objectClass); }?>">
                   <script type="dojo/method" event="onKeyUp" >
                   	setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
-                  </script>
+                     if(dijit.byId('listNameFilterQuick')){
+                          if(dijit.byId('listNameFilterQuick').get('value') != dijit.byId('listNameFilter').get('value')){
+                            dijit.byId('listNameFilterQuick').set('value',dijit.byId('listNameFilter').get('value'));
+                          }
+                      }
+                </script>
                 </div>
               </td>
               <?php }?>              
               <?php 
-  // MTY - LEAVE SYSTEM        
+// MTY - LEAVE SYSTEM        
+              $idClassType = "id". $objectClass. "Type";
+              if ( (!$hideTypeSearch and property_exists($obj,'id' . $objectClass . 'Type')) 
+              or (!$hideTypeSearch and $objectClass=='EmployeeLeaveEarned' and property_exists($obj,'idLeaveType')) ) {
+                if ($objectClass=="EmployeeLeaveEarned") {
+                  $idClassType = "idLeaveType";
+                } else {
+                  $idClassType = "id". $objectClass. "Type";
+                }
+//              if ( !$hideTypeSearch and property_exists($obj,'id' . $objectClass . 'Type') ) { 
+// MTY - LEAVE SYSTEM              
+              ?>
+              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD typeSearchTD allSearchFixLength">
+                 <span style="display:<?php echo sessionDisplayFilter('listTypeFilter',$objectClass); ?>" id="listTypeFilterSpan" class="nobr">&nbsp;&nbsp;&nbsp;
+                <?php echo i18n("colType");?>
+                &nbsp;</span>
+              </td>
+              <td width="5px" class="allSearchTD typeSearchTD">
+                <select title="<?php echo i18n('filterOnType')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
+                <?php echo autoOpenFilteringSelect();?> 
+                id="listTypeFilter" name="listTypeFilter" style="display:<?php echo sessionDisplayFilter('listTypeFilter',$objectClass); ?>; width:<?php echo $referenceWidth*4;?>px" value="<?php if(!$comboDetail and sessionValueExists('listTypeFilter'.$objectClass)){ echo getSessionValue('listTypeFilter'.$objectClass); }?>">
+                <?php 
+// MTY - LEAVE SYSTEM              
+                    htmlDrawOptionForReference($idClassType, $objectType, $obj, false); 
+//                    htmlDrawOptionForReference('id' . $objectClass . 'Type', $objectType, $obj, false); 
+// MTY - LEAVE SYSTEM              
+                ?> <script type="dojo/method" event="onChange" >
+                    refreshJsonList('<?php echo $objectClass;?>');
+                     if(dijit.byId('listTypeFilterQuick')){
+                          if(dijit.byId('listTypeFilterQuick').get('value') != dijit.byId('listTypeFilter').get('value')){
+                            dijit.byId('listTypeFilterQuick').set('value',dijit.byId('listTypeFilter').get('value'));
+                          }
+                      }
+                  </script>
+                </select>
+              </td>
+              <?php }?>
+        
+              <!-- gautier #budgetParent  -->
+              <?php if ( !$hideParentBudgetSearch and  $objectClass == 'Budget' ) { ?>
+               <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD parentBudgetSearchTD allSearchFixLength">
+                 <span id="listBudgetParentFilterSpan" style="display:<?php echo sessionDisplayFilter('listIdFilter',$objectClass);?>" class="nobr">&nbsp;&nbsp;&nbsp;
+                <?php echo i18n("colParentBudget");?>
+                &nbsp;</span>
+              </td>
+              <td width="5px" class="allSearchTD parentBudgetSearchTD">
+                <select title="<?php echo i18n('filterOnBudgetParent')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
+                <?php echo autoOpenFilteringSelect();?> 
+                data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
+                id="listBudgetParentFilter" name="listBudgetParentFilter" style="display:<?php echo sessionDisplayFilter('listIdFilter',$objectClass);?>; width:<?php echo $referenceWidth*3;?>px" value="<?php if(!$comboDetail and sessionValueExists('listBudgetParentFilter')){ echo getSessionValue('listBudgetParentFilter'); }?>" >
+                  <?php 
+                   //gautier #indentBudget
+                   htmlDrawOptionForReference('idBudgetItem',$budgetParent,$obj,false);?>
+                  <script type="dojo/method" event="onChange" >
+                    refreshJsonList('<?php echo $objectClass;?>');
+                       if(dijit.byId('listBudgetParentFilterQuick')){
+                          if(dijit.byId('listBudgetParentFilterQuick').get('value') != dijit.byId('listBudgetParentFilter').get('value')){
+                            dijit.byId('listBudgetParentFilterQuick').set('value',dijit.byId('listBudgetParentFilter').get('value'));
+                          }
+                      }
+                  </script>
+                </select>
+              </td>
+              <!-- Ticket #3988	- Object list : boutton reset parameters  
+                   florent
+              -->
+              <?php if ($hideClientSearch and $objectClass !='GlobalView') { ?>
+              <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
+                <button dojoType="dijit.form.Button" type="button">
+                    <?php echo i18n('buttonReset');?>
+                    <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
+                  <script type="dojo/method" event="onClick">
+                     var lstStat = <?php echo json_encode($lstStat); ?>;
+                     resetFilter(lstStat);
+                  </script>
+                  
+                </button>
+              </td>      
+              <?php }      
+                      } 
+                if ( !$hideClientSearch and property_exists($obj,'idClient') ) { ?>
+              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD clientSearchTD allSearchFixLength">
+                 <span id="listClientFilterSpan" style="display:<?php echo sessionDisplayFilter('listClientFilter',$objectClass);?>" class="nobr">&nbsp;&nbsp;&nbsp;
+                <?php echo i18n("colClient");?>
+                &nbsp;</span>
+              </td>
+              <td width="5px" class="allSearchTD clientSearchTD">
+                <select title="<?php echo i18n('filterOnClient')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
+                <?php echo autoOpenFilteringSelect();?> 
+                data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
+                id="listClientFilter" name="listClientFilter" style="display:<?php echo sessionDisplayFilter('listClientFilter',$objectClass);?>; width:<?php echo $referenceWidth*3;?>px" value="<?php if(!$comboDetail and sessionValueExists('listClientFilter'.$objectClass)){ echo getSessionValue('listClientFilter'.$objectClass); }?>" >
+                  <?php htmlDrawOptionForReference('idClient', $objectClient, $obj, false); ?>
+                  <script type="dojo/method" event="onChange" >
+                    refreshJsonList('<?php echo $objectClass;?>');
+                     if(dijit.byId('listClientFilterQuick')){
+                          if(dijit.byId('listClientFilterQuick').get('value') != dijit.byId('listClientFilter').get('value')){
+                            dijit.byId('listClientFilterQuick').set('value',dijit.byId('listClientFilter').get('value'));
+                          }
+                      }
+                  </script>
+                </select>
+              </td>
+        
+              <?php } 
+                 $elementable=null;
+                 if ( property_exists($obj,'idMailable') ) $elementable='idMailable';
+                 else if (property_exists($obj,'idIndicatorable')) $elementable='idIndicatorable';
+                 else if (property_exists($obj,'idTextable')) $elementable='idTextable';
+                 else if ( property_exists($obj,'idChecklistable')) $elementable='idChecklistable';
+                 else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable';
+                 //$elementable=null;
+                 if ($elementable) { ?>
+              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD elementSearchTD allSearchFixLength">
+                 <span class="nobr">&nbsp;&nbsp;&nbsp;
+                <?php echo i18n("colElement");?>
+                &nbsp;</span>
+              </td>
+              <td width="5px" class="allSearchTD elementSearchTD">
+                <select title="<?php echo i18n('filterOnElement')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
+                <?php echo autoOpenFilteringSelect();?> 
+                id="listElementableFilter" name="listElementableFilter" style="width:140px" value="<?php if(!$comboDetail and sessionValueExists('listElementableFilter'.$objectClass)){ echo getSessionValue('listElementableFilter'.$objectClass); }?>">
+                  <?php htmlDrawOptionForReference($elementable, $objectElementable, $obj, false); ?>
+                  <script type="dojo/method" event="onChange" >
+                    refreshJsonList('<?php echo $objectClass;?>');
+                  </script>
+                </select>
+              </td>
+                
+              
+              <?php }                    
+                  $activeFilter=false;
+                 if (! $comboDetail and is_array(getSessionUser()->_arrayFilters)) {
+                   if (array_key_exists($objectClass, getSessionUser()->_arrayFilters)) {
+                     if (count(getSessionUser()->_arrayFilters[$objectClass])>0) {
+                     	//CHANGE qCazelles - Dynamic filter - Ticket #78
+                     	//Old
+                     	//$activeFilter=true;
+                     	//New
+                     	//A filter with isDynamic=1 is not active
+                     	foreach (getSessionUser()->_arrayFilters[$objectClass] as $filter) {
+                     		if (!isset($filter['isDynamic']) or $filter['isDynamic']=="0") {
+                     			$activeFilter=true;
+                     		}
+                     	}
+                     	//END CHANGE qCazelles - Dynamic filter - Ticket #78
+                     }
+                   }
+                 } else if ($comboDetail and is_array(getSessionUser()->_arrayFiltersDetail)) {
+                   if (array_key_exists($objectClass, getSessionUser()->_arrayFiltersDetail)) {
+                     if (count(getSessionUser()->_arrayFiltersDetail[$objectClass])>0) {
+                     	//CHANGE qCazelles - Dynamic filter - Ticket #78
+                     	//Old
+                     	//$activeFilter=true;
+                     	//New
+                     	foreach (getSessionUser()->_arrayFiltersDetail[$objectClass] as $filter) {
+                     	  //CHANGE qCazelles - Ticket 165
+                     	  //Old
+                     	  //if (!isset($filter['isDynamic']) or $filter['isDynamic']=="0") {
+                     	  //New
+                     		if ((!isset($filter['isDynamic']) or $filter['isDynamic']=="0") and (!isset($filter['hidden']) or $filter['hidden']=="0")) {
+                     		//END CHANGE qCazelles - Ticket 165
+                     			$activeFilter=true;
+                     		}
+                     	}
+                     	//END CHANGE qCazelles - Dynamic filter - Ticket #78
+                     }
+                   }
+                 } ?>
+            <td >&nbsp;</td>
+            <td width="5px"><span class="nobr">&nbsp;</span></td>
+			      </tr></table></div><td>              
+              
+              
+              
+              
+              
+              <?php }?>
+              
+              
+              
+              
+   
+              <?php 
+              //gautier #filterEnd
+              if (!isNewGui()){ // ========================== NOT NEW GUI
+                if ( ! $hideIdSearch ) { ?>
+                  <td style="text-align:right;" width="5px" class="allSearchTD idSearchTD allSearchFixLength">
+                    <span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php echo i18n("colId");?>
+                    &nbsp;</span> 
+                  </td>
+                  <td width="5px" class="allSearchTD idSearchTD">
+                    <div title="<?php echo i18n('filterOnId')?>" style="width:<?php echo $referenceWidth;?>px" class="filterField rounded" dojoType="dijit.form.TextBox" 
+                     type="text" id="listIdFilter" name="listIdFilter" value="<?php if(!$comboDetail and sessionValueExists('listIdFilter'.$objectClass)){ echo getSessionValue('listIdFilter'.$objectClass); }?>">
+                      <script type="dojo/method" event="onKeyUp" >
+                    setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
+                  </script>
+                    </div>
+                  </td>
+                <?php 
+                } // End if ( ! $hideIdSearch )?>
+                <?php 
+                if ( ! $hideNameSearch and (property_exists($obj,'name') or get_class($obj)=='Affectation')) { ?>
+                  <td style="text-align:right;" width="5px" class="allSearchTD nameSearchTD allSearchFixLength">
+                    <span class="nobr">&nbsp;&nbsp;&nbsp;
+                      <?php echo i18n("colName");?>
+                    &nbsp;</span> 
+                  </td>
+                  <td width="5px" class="allSearchTD nameSearchTD">
+                    <div title="<?php echo i18n('filterOnName')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
+                      id="listNameFilter" name="listNameFilter" style="width:<?php echo $referenceWidth*2;?>px" value="<?php if(!$comboDetail and sessionValueExists('listNameFilter'.$objectClass)){ echo getSessionValue('listNameFilter'.$objectClass); }?>">
+                      <script type="dojo/method" event="onKeyUp" >
+                  	setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
+                  </script>
+                    </div>
+                  </td>
+                <?php 
+                } 
+                // MTY - LEAVE SYSTEM        
                 $idClassType = "id". $objectClass. "Type";
                 if ( (!$hideTypeSearch and property_exists($obj,'id' . $objectClass . 'Type')) 
                 or (!$hideTypeSearch and $objectClass=='EmployeeLeaveEarned' and property_exists($obj,'idLeaveType')) ) {
@@ -406,31 +579,25 @@ $extendedListZone=false;
                     $idClassType = "idLeaveType";
                   } else {
                     $idClassType = "id". $objectClass. "Type";
-                  }
-  //              if ( !$hideTypeSearch and property_exists($obj,'id' . $objectClass . 'Type') ) { 
-  // MTY - LEAVE SYSTEM              
-              ?>
-              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD typeSearchTD allSearchFixLength">
-                <span class="nobr">&nbsp;&nbsp;&nbsp;
-                  <?php echo i18n("colType");?>
-                &nbsp;</span>
-              </td>
-              <td width="5px" class="allSearchTD typeSearchTD">
-                <select title="<?php echo i18n('filterOnType')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
-                <?php echo autoOpenFilteringSelect();?> 
-                id="listTypeFilter" name="listTypeFilter" style="width:<?php echo $referenceWidth*4;?>px" value="<?php if(!$comboDetail and sessionValueExists('listTypeFilter'.$objectClass)){ echo getSessionValue('listTypeFilter'.$objectClass); }?>">
+                  }?>
+                  <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD typeSearchTD allSearchFixLength">
+                    <span class="nobr">&nbsp;&nbsp;&nbsp;<?php echo i18n("colType");?>&nbsp;</span>
+                  </td>
+                  <td width="5px" class="allSearchTD typeSearchTD">
+                    <select title="<?php echo i18n('filterOnType')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
+                    <?php echo autoOpenFilteringSelect();?> 
+                    id="listTypeFilter" name="listTypeFilter" style="width:<?php echo $referenceWidth*4;?>px" 
+                    value="<?php if(!$comboDetail and sessionValueExists('listTypeFilter'.$objectClass)){ echo getSessionValue('listTypeFilter'.$objectClass); }?>">
+                      <?php           
+                        htmlDrawOptionForReference($idClassType, $objectType, $obj, false); 
+                      ?>
+                      <script type="dojo/method" event="onChange" >
+                        refreshJsonList('<?php echo $objectClass;?>');
+                      </script>
+                    </select>
+                  </td>
                 <?php 
-// MTY - LEAVE SYSTEM              
-                    htmlDrawOptionForReference($idClassType, $objectType, $obj, false); 
-//                    htmlDrawOptionForReference('id' . $objectClass . 'Type', $objectType, $obj, false); 
-// MTY - LEAVE SYSTEM              
-                ?>
-                  <script type="dojo/method" event="onChange" >
-                    refreshJsonList('<?php echo $objectClass;?>');
-                  </script>
-                </select>
-              </td>
-            <?php }?>
+                } // End : if ( (!$hideTypeSearch?>
             <?php if ( $objectClass=='GlobalView') { ?>
               <td width="56px" class="allSearchTD resetSearchTD allSearchFixLength">
                 <button dojoType="dijit.form.Button" type="button" >
@@ -751,17 +918,8 @@ $extendedListZone=false;
 			      <?php }
 			           } 
 			            //gautier #filterEnd 
-                  }else{
+               }else{ //  ============================ NEW GUI
 
-                      $display = "none";
-                      if( (sessionValueExists('listIdFilter'.$objectClass) and getSessionValue('listIdFilter'.$objectClass)!='') or (sessionValueExists('listIdFilterQuickSw'.$objectClass) and getSessionValue('listIdFilterQuickSw'.$objectClass)=='on')
-                         or (sessionValueExists('listNameFilter'.$objectClass) and getSessionValue('listNameFilter'.$objectClass)!='') or (sessionValueExists('listNameFilterQuickSw'.$objectClass) and getSessionValue('listNameFilterQuickSw'.$objectClass)=='on')
-                         or (sessionValueExists('listTypeFilter'.$objectClass) and getSessionValue('listTypeFilter'.$objectClass)!='') or (sessionValueExists('listTypeFilterQuickSw'.$objectClass) and getSessionValue('listTypeFilterQuickSw'.$objectClass)=='on')
-                         or (sessionValueExists('listClientFilter'.$objectClass) and getSessionValue('listClientFilter'.$objectClass)!='') or (sessionValueExists('listClientFilterQuickSw'.$objectClass) and getSessionValue('listClientFilterQuickSw'.$objectClass)=='on')
-                         or (sessionValueExists('listBudgetParentFilter'.$objectClass) and getSessionValue('listBudgetParentFilter'.$objectClass)!='') or (sessionValueExists('listBudgetParentFilterQuickSw'.$objectClass) and getSessionValue('listBudgetParentFilterQuickSw'.$objectClass)=='on')
-                       ){
-                        $display = "block";
-                      }
                    ?>
                    
                 <?php if ( $objectClass=='GlobalView') { ?>
@@ -860,220 +1018,8 @@ $extendedListZone=false;
               <?php } ?>
               <!-- END ADD qCazelles -->
                    
-                  <td><div id="filterDivs" name="filterDivs" style="display:<?php echo $display;?>"><table><tr>  
-                  
-                <?php  if ( ! $hideIdSearch ) { ?>
-                  <td style="text-align:right;" width="5px" class="allSearchTD idSearchTD allSearchFixLength">
-                    <span id="filterDivsSpan" style="display:<?php echo sessionDisplayFilter('listIdFilter',$objectClass);?>" class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <?php echo i18n("colId");?>
-                    &nbsp;</span> 
-                  </td>
-                  <td width="5px" class="allSearchTD idSearchTD">
-                    <div  style="display:<?php echo sessionDisplayFilter('listIdFilter',$objectClass); ?>" title="<?php echo i18n('filterOnId')?>" style="width:<?php echo $referenceWidth;?>px" class="filterField rounded" dojoType="dijit.form.TextBox" 
-                     type="text" id="listIdFilter" name="listIdFilter" value="<?php if(!$comboDetail and sessionValueExists('listIdFilter'.$objectClass) ){ echo getSessionValue('listIdFilter'.$objectClass); }?>">
-                      <script type="dojo/method" event="onKeyUp" >
-                        setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
-                        if(dijit.byId('listIdFilterQuick')){
-                          if(dijit.byId('listIdFilterQuick').get('value') != dijit.byId('listIdFilter').get('value')){
-                            dijit.byId('listIdFilterQuick').set('value',dijit.byId('listIdFilter').get('value'));
-                          }
-                        }
-                      </script>
-                    </div>
-                  </td>
-                  <?php }?>
-              <?php if ( ! $hideNameSearch and (property_exists($obj,'name') or get_class($obj)=='Affectation')) { ?>
-              <td style="text-align:right;" width="5px" class="allSearchTD nameSearchTD allSearchFixLength">
-                <span id="listNameFilterSpan" style="display:<?php echo sessionDisplayFilter('listNameFilter',$objectClass); ?>" class="nobr">&nbsp;&nbsp;&nbsp;
-                <?php echo i18n("colName");?>
-                &nbsp;</span> 
-              </td>
-              <td width="5px" class="allSearchTD nameSearchTD">
-                <div title="<?php echo i18n('filterOnName')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
-                id="listNameFilter" name="listNameFilter" style="display:<?php echo sessionDisplayFilter('listNameFilter',$objectClass); ?>; width:<?php echo $referenceWidth*2;?>px" value="<?php if(!$comboDetail and sessionValueExists('listNameFilter'.$objectClass)){ echo getSessionValue('listNameFilter'.$objectClass); }?>">
-                  <script type="dojo/method" event="onKeyUp" >
-                  	setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
-                     if(dijit.byId('listNameFilterQuick')){
-                          if(dijit.byId('listNameFilterQuick').get('value') != dijit.byId('listNameFilter').get('value')){
-                            dijit.byId('listNameFilterQuick').set('value',dijit.byId('listNameFilter').get('value'));
-                          }
-                      }
-                </script>
-                </div>
-              </td>
-              <?php }?>              
-              <?php 
-// MTY - LEAVE SYSTEM        
-              $idClassType = "id". $objectClass. "Type";
-              if ( (!$hideTypeSearch and property_exists($obj,'id' . $objectClass . 'Type')) 
-              or (!$hideTypeSearch and $objectClass=='EmployeeLeaveEarned' and property_exists($obj,'idLeaveType')) ) {
-                if ($objectClass=="EmployeeLeaveEarned") {
-                  $idClassType = "idLeaveType";
-                } else {
-                  $idClassType = "id". $objectClass. "Type";
-                }
-//              if ( !$hideTypeSearch and property_exists($obj,'id' . $objectClass . 'Type') ) { 
-// MTY - LEAVE SYSTEM              
-              ?>
-              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD typeSearchTD allSearchFixLength">
-                 <span style="display:<?php echo sessionDisplayFilter('listTypeFilter',$objectClass); ?>" id="listTypeFilterSpan" class="nobr">&nbsp;&nbsp;&nbsp;
-                <?php echo i18n("colType");?>
-                &nbsp;</span>
-              </td>
-              <td width="5px" class="allSearchTD typeSearchTD">
-                <select title="<?php echo i18n('filterOnType')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
-                <?php echo autoOpenFilteringSelect();?> 
-                id="listTypeFilter" name="listTypeFilter" style="display:<?php echo sessionDisplayFilter('listTypeFilter',$objectClass); ?>; width:<?php echo $referenceWidth*4;?>px" value="<?php if(!$comboDetail and sessionValueExists('listTypeFilter'.$objectClass)){ echo getSessionValue('listTypeFilter'.$objectClass); }?>">
-                <?php 
-// MTY - LEAVE SYSTEM              
-                    htmlDrawOptionForReference($idClassType, $objectType, $obj, false); 
-//                    htmlDrawOptionForReference('id' . $objectClass . 'Type', $objectType, $obj, false); 
-// MTY - LEAVE SYSTEM              
-                ?> <script type="dojo/method" event="onChange" >
-                    refreshJsonList('<?php echo $objectClass;?>');
-                     if(dijit.byId('listTypeFilterQuick')){
-                          if(dijit.byId('listTypeFilterQuick').get('value') != dijit.byId('listTypeFilter').get('value')){
-                            dijit.byId('listTypeFilterQuick').set('value',dijit.byId('listTypeFilter').get('value'));
-                          }
-                      }
-                  </script>
-                </select>
-              </td>
-              <?php }?>
-        
-              <!-- gautier #budgetParent  -->
-              <?php if ( !$hideParentBudgetSearch and  $objectClass == 'Budget' ) { ?>
-               <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD parentBudgetSearchTD allSearchFixLength">
-                 <span id="listBudgetParentFilterSpan" style="display:<?php echo sessionDisplayFilter('listIdFilter',$objectClass);?>" class="nobr">&nbsp;&nbsp;&nbsp;
-                <?php echo i18n("colParentBudget");?>
-                &nbsp;</span>
-              </td>
-              <td width="5px" class="allSearchTD parentBudgetSearchTD">
-                <select title="<?php echo i18n('filterOnBudgetParent')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
-                <?php echo autoOpenFilteringSelect();?> 
-                data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
-                id="listBudgetParentFilter" name="listBudgetParentFilter" style="display:<?php echo sessionDisplayFilter('listIdFilter',$objectClass);?>; width:<?php echo $referenceWidth*3;?>px" value="<?php if(!$comboDetail and sessionValueExists('listBudgetParentFilter')){ echo getSessionValue('listBudgetParentFilter'); }?>" >
-                  <?php 
-                   //gautier #indentBudget
-                   htmlDrawOptionForReference('idBudgetItem',$budgetParent,$obj,false);?>
-                  <script type="dojo/method" event="onChange" >
-                    refreshJsonList('<?php echo $objectClass;?>');
-                       if(dijit.byId('listBudgetParentFilterQuick')){
-                          if(dijit.byId('listBudgetParentFilterQuick').get('value') != dijit.byId('listBudgetParentFilter').get('value')){
-                            dijit.byId('listBudgetParentFilterQuick').set('value',dijit.byId('listBudgetParentFilter').get('value'));
-                          }
-                      }
-                  </script>
-                </select>
-              </td>
-              <!-- Ticket #3988	- Object list : boutton reset parameters  
-                   florent
-              -->
-              <?php if ($hideClientSearch and $objectClass !='GlobalView') { ?>
-              <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
-                <button dojoType="dijit.form.Button" type="button">
-                    <?php echo i18n('buttonReset');?>
-                    <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
-                  <script type="dojo/method" event="onClick">
-                     var lstStat = <?php echo json_encode($lstStat); ?>;
-                     resetFilter(lstStat);
-                  </script>
-                  
-                </button>
-              </td>      
-              <?php }      
-                      } 
-                if ( !$hideClientSearch and property_exists($obj,'idClient') ) { ?>
-              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD clientSearchTD allSearchFixLength">
-                 <span id="listClientFilterSpan" style="display:<?php echo sessionDisplayFilter('listClientFilter',$objectClass);?>" class="nobr">&nbsp;&nbsp;&nbsp;
-                <?php echo i18n("colClient");?>
-                &nbsp;</span>
-              </td>
-              <td width="5px" class="allSearchTD clientSearchTD">
-                <select title="<?php echo i18n('filterOnClient')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
-                <?php echo autoOpenFilteringSelect();?> 
-                data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
-                id="listClientFilter" name="listClientFilter" style="display:<?php echo sessionDisplayFilter('listClientFilter',$objectClass);?>; width:<?php echo $referenceWidth*3;?>px" value="<?php if(!$comboDetail and sessionValueExists('listClientFilter'.$objectClass)){ echo getSessionValue('listClientFilter'.$objectClass); }?>" >
-                  <?php htmlDrawOptionForReference('idClient', $objectClient, $obj, false); ?>
-                  <script type="dojo/method" event="onChange" >
-                    refreshJsonList('<?php echo $objectClass;?>');
-                     if(dijit.byId('listClientFilterQuick')){
-                          if(dijit.byId('listClientFilterQuick').get('value') != dijit.byId('listClientFilter').get('value')){
-                            dijit.byId('listClientFilterQuick').set('value',dijit.byId('listClientFilter').get('value'));
-                          }
-                      }
-                  </script>
-                </select>
-              </td>
-        
-              <?php } 
-                 $elementable=null;
-                 if ( property_exists($obj,'idMailable') ) $elementable='idMailable';
-                 else if (property_exists($obj,'idIndicatorable')) $elementable='idIndicatorable';
-                 else if (property_exists($obj,'idTextable')) $elementable='idTextable';
-                 else if ( property_exists($obj,'idChecklistable')) $elementable='idChecklistable';
-                 else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable';
-                 //$elementable=null;
-                 if ($elementable) { ?>
-              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD elementSearchTD allSearchFixLength">
-                 <span class="nobr">&nbsp;&nbsp;&nbsp;
-                <?php echo i18n("colElement");?>
-                &nbsp;</span>
-              </td>
-              <td width="5px" class="allSearchTD elementSearchTD">
-                <select title="<?php echo i18n('filterOnElement')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
-                <?php echo autoOpenFilteringSelect();?> 
-                id="listElementableFilter" name="listElementableFilter" style="width:140px" value="<?php if(!$comboDetail and sessionValueExists('listElementableFilter'.$objectClass)){ echo getSessionValue('listElementableFilter'.$objectClass); }?>">
-                  <?php htmlDrawOptionForReference($elementable, $objectElementable, $obj, false); ?>
-                  <script type="dojo/method" event="onChange" >
-                    refreshJsonList('<?php echo $objectClass;?>');
-                  </script>
-                </select>
-              </td>
-                
-              
-              <?php }                    
-                  $activeFilter=false;
-                 if (! $comboDetail and is_array(getSessionUser()->_arrayFilters)) {
-                   if (array_key_exists($objectClass, getSessionUser()->_arrayFilters)) {
-                     if (count(getSessionUser()->_arrayFilters[$objectClass])>0) {
-                     	//CHANGE qCazelles - Dynamic filter - Ticket #78
-                     	//Old
-                     	//$activeFilter=true;
-                     	//New
-                     	//A filter with isDynamic=1 is not active
-                     	foreach (getSessionUser()->_arrayFilters[$objectClass] as $filter) {
-                     		if (!isset($filter['isDynamic']) or $filter['isDynamic']=="0") {
-                     			$activeFilter=true;
-                     		}
-                     	}
-                     	//END CHANGE qCazelles - Dynamic filter - Ticket #78
-                     }
-                   }
-                 } else if ($comboDetail and is_array(getSessionUser()->_arrayFiltersDetail)) {
-                   if (array_key_exists($objectClass, getSessionUser()->_arrayFiltersDetail)) {
-                     if (count(getSessionUser()->_arrayFiltersDetail[$objectClass])>0) {
-                     	//CHANGE qCazelles - Dynamic filter - Ticket #78
-                     	//Old
-                     	//$activeFilter=true;
-                     	//New
-                     	foreach (getSessionUser()->_arrayFiltersDetail[$objectClass] as $filter) {
-                     	  //CHANGE qCazelles - Ticket 165
-                     	  //Old
-                     	  //if (!isset($filter['isDynamic']) or $filter['isDynamic']=="0") {
-                     	  //New
-                     		if ((!isset($filter['isDynamic']) or $filter['isDynamic']=="0") and (!isset($filter['hidden']) or $filter['hidden']=="0")) {
-                     		//END CHANGE qCazelles - Ticket 165
-                     			$activeFilter=true;
-                     		}
-                     	}
-                     	//END CHANGE qCazelles - Dynamic filter - Ticket #78
-                     }
-                   }
-                 } ?>
-            <td >&nbsp;</td>
-            <td width="5px"><span class="nobr">&nbsp;</span></td>
-			      </div></table><td>
+
+			      
 			      <?php if (!isNewGui()) {?>
 			      <span id="gridRowCountShadow1" class="gridRowCountShadow1"></span>
             <span id="gridRowCountShadow2" class="gridRowCountShadow2"></span>              
@@ -1310,6 +1256,83 @@ $extendedListZone=false;
 <?php }
      }?>             
           <?php organizeListButtonsEnd();?>      
+     
+     <?php if (! isNewGui()) {?>
+                  <?php if (! $comboDetail) {?> 
+              <td width="36px" class="allSearchFixLength">
+                <!-- Global View : NEW ITEM DROPDOWN -->
+                <?php if ($objectClass=='GlobalView') {?>
+                <div dojoType="dijit.form.DropDownButton"
+                 class="comboButton"   
+                 id="planningNewItem" jsId="planningNewItem" name="planningNewItem" 
+                 showlabel="false" class="" iconClass="dijitButtonIcon dijitButtonIconNew"
+                 title="<?php echo i18n('comboNewButton');?>">
+                  <span>title</span>
+                  <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
+                    <div style="font-weight:bold; height:25px;text-align:center">
+                    <?php echo i18n('comboNewButton');?>
+                    </div>
+                    <?php $arrayItems=GlobalView::getGlobalizables();
+                    foreach($arrayItems as $item=>$itemName) {
+                      $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
+                      if ($canCreate=='YES') {
+                        if (! securityCheckDisplayMenu(null,$item) ) {
+                          $canCreate='NO';
+                        }
+                      }
+                      if ($canCreate=='YES') {?>
+                      <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
+                       onClick="addNewItem('<?php echo $item;?>');" >
+                        <table width:"100%"><tr style="height:22px" >
+                        <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIcon($item, 22, null, false);;?></td>    
+                        <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
+                        </tr></table>   
+                      </div>
+                      <div style="height:5px;"></div>
+                      <?php 
+                      } 
+                    }?>
+                  </div>
+                </div>
+                <?php } else {?>
+                <!-- Not Global View : Single NEW BUTTON -->
+                <button id="newButtonList" dojoType="dijit.form.Button" showlabel="false"
+                  title="<?php echo i18n('buttonNew', array(i18n($_REQUEST['objectClass'])));?>"
+                  iconClass="dijitButtonIcon dijitButtonIconNew" class="detailButton">
+                  <script type="dojo/connect" event="onClick" args="evt">
+                    hideExtraButtons('extraButtonsList');
+		                dojo.byId("newButton").blur();
+                    id=dojo.byId('objectId');
+	                  if (id) { 	
+		                  id.value="";
+		                  unselectAllRows("objectGrid");
+                      if (switchedMode) {
+                        setTimeout("hideList(null,true);", 1);
+                      }
+                      loadContent("objectDetail.php", "detailDiv", "listForm");
+                      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+                      } else { 
+                      showError(i18n("errorObjectId"));
+	                  }
+                  </script>
+                </button>
+                <?php }?>
+              </td>
+              <?php } // End : if (!$comboDetail)?>             
+              <!--  BUTTON REFRESH -->
+              <td width="36px" class="allSearchFixLength">
+                <button id="newButtonRefresh" dojoType="dijit.form.Button" showlabel="false"
+                  title="<?php echo i18n('buttonRefreshList');?>"
+                  iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
+                  <script type="dojo/connect" event="onClick" args="evt">
+                     hideExtraButtons('extraButtonsList');
+	                   refreshGrid(true);
+                  </script>
+                </button>
+              </td>  
+     
+     <?php }?>     
+          
 <?php if ( property_exists($obj,'isEis') and !$hideEisSearch) { ?>
               <td style="vertical-align: middle; width:15%; min-width:110px; text-align:right;white-space:normal;" class="allSearchTD hideInServiceTD allSearchFixLength">
                 <div style="max-height:32px;"> 

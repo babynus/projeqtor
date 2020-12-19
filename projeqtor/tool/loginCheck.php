@@ -163,8 +163,8 @@
       $messageLegalFollow = SqlElement::getSingleSqlElementFromCriteria('MessageLegalFollowup', array('idUser'=>$user->id, 'name'=>'newGui', 'idMessageLegal'=>$idMessageLegal));
       if ($messageLegalFollow and $messageLegalFollow->id and $messageLegalFollow->accepted==0) {
         $messageLegalFollow->acceptedDate= date('Y-m-d H:i:s');
-        $messageLegalFollow->accepted = 1;      
-        $res=$messageLegalFollow->save();
+        $messageLegalFollow->accepted = 1;
+        $res=$messageLegalFollow->saveForced();
       }
     }
   }
