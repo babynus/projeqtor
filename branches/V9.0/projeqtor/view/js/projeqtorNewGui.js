@@ -31,44 +31,44 @@
 // =============================================================================
 // = Variables (global)
 // =============================================================================
-var i18nMessages = null; // array containing i18n messages
-var i18nMessagesCustom = null; // array containing i18n messages
-var currentLocale = null; // the locale, from browser or user set
-var browserLocale = null; // the locale, from browser
-var cancelRecursiveChange_OnGoingChange = false; // boolean to avoid
+//var i18nMessages = null; // array containing i18n messages
+//var i18nMessagesCustom = null; // array containing i18n messages
+//var currentLocale = null; // the locale, from browser or user set
+//var browserLocale = null; // the locale, from browser
+//var cancelRecursiveChange_OnGoingChange = false; // boolean to avoid
 // recursive change trigger
-var formChangeInProgress = false; // boolean to avoid exit from form when
+//var formChangeInProgress = false; // boolean to avoid exit from form when
 // changes are not saved
-var currentRow = null; // the row num of the current selected
+//var currentRow = null; // the row num of the current selected
 // element in the main grid
-var currentFieldId = ''; // Id of the ciurrent form field (got
+//var currentFieldId = ''; // Id of the ciurrent form field (got
 // via onFocus)
-var currentFieldValue = ''; // Value of the current form field (got
+//var currentFieldValue = ''; // Value of the current form field (got
 // via onFocus)
-var g; // Gant chart for JsGantt : must be
+//var g; // Gant chart for JsGantt : must be
 // named "g"
-var quitConfirmed = false;
-var noDisconnect = false;
-var forceRefreshMenu = false;
-var directAccessIndex = null;
+//var quitConfirmed = false;
+//var noDisconnect = false;
+//var forceRefreshMenu = false;
+//var directAccessIndex = null;
 
-var debugPerf = new Array();
+//var debugPerf = new Array();
 
-var pluginMenuPage = new Array();
-
-var previousSelectedProject=null;
-var previousSelectedProjectName=null;
-
-var mustApplyFilter=false;
-
-var arraySelectedProject = new Array();
-
-var displayFilterVersionPlanning='0';
-var displayFilterComponentVersionPlanning='0';
-
-var contentPaneResizingInProgress={};
-
-var defaultMenu=null;
+//var pluginMenuPage = new Array();
+//
+//var previousSelectedProject=null;
+//var previousSelectedProjectName=null;
+//
+//var mustApplyFilter=false;
+//
+//var arraySelectedProject = new Array();
+//
+//var displayFilterVersionPlanning='0';
+//var displayFilterComponentVersionPlanning='0';
+//
+//var contentPaneResizingInProgress={};
+//
+//var defaultMenu=null;
 
 //=============================================================================
 //function for close/open left Menu 
