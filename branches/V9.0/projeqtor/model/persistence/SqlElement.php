@@ -5547,8 +5547,8 @@ abstract class SqlElement {
         $notFound=' not found ';
         if(!empty($attachments) and Parameter::getGlobalParameter('paramMailerType')=='phpmailer'){
           $c=0;
-          $addAttachToMessage="<table style='font-size:11pt;width:46%;font-family:Verdana,Arial,Helvetica,sans-serif;'>
-                                <tr><td colspan='3' style='background:#606062;color:#ffffff;text-align:center;font-size:14pt;font-weight:bold;width:100%'><div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr>";
+          $addAttachToMessage="<table style='font-size:11pt;min-width: 800px; max-width: 1200px; width:95%;font-family:Verdana,Arial,Helvetica,sans-serif;'>
+                                <tr><td colspan='3' style='background:#606062;color:#ffffff;text-align:center;font-size:14pt;font-weight:normal;width:100%'><div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr>";
           foreach ($attachments as $val){
             $c++;
             $addAttachToMessage.="<tr><td colspan='2' style='background:#ffffff;font-weight:bold;text-align:right;width:30%;min-width:30%;vertical-align:top;white-space:nowrap;padding-bottom:10px;'><div>".i18n('col'.ucfirst($val[1]))."</div></td>";
@@ -5837,7 +5837,7 @@ abstract class SqlElement {
     $labelEnd = '&nbsp;</td>';
     $fieldStart = '<td style="background:#FFFFFF;text-align: left;width:70%;padding-left:20px;padding-bottom:10px;vertical-align: top;">';//<td style="width:2px;">&nbsp;</td>
     $fieldEnd = '</td>';
-    $sectionStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:bold;width: 100%;" colspan="2">';
+    $sectionStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:normal;width: 100%;font-family:Verdana,Arial,Helvetica,sans-serif" colspan="2">';
     $sectionEnd = '</td>';
     $tableStart = '<table style="font-size:11pt; width: 100%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
     $tableEnd = '</table>';
@@ -5845,7 +5845,7 @@ abstract class SqlElement {
     $ref = $this->getReferenceUrl ();
     $replyMail=i18n("replyToMail");
     $firstLine = " 
-        <table style='font-size:14pt;min-width: 50%;max-width: 95%;font-family:Verdana,Arial,Helvetica,sans-serif;padding-bottom:10px;'><tr style='height:22px;'>
+        <table style='font-size:14pt;min-width: 800px; max-width: 1200px; width:95%;font-family:Verdana,Arial,Helvetica,sans-serif;padding-bottom:10px;'><tr style='height:22px;'>
         <td colspan='2' style='background:#606062;color: #FFFFFF; text-align: center;vertical-align: middle;'>
         <div style='background:#F0F0F0;color:#A0A0A0;font-style:italic;font-size:80%'>".htmlEncode ( $replyMail)."</div><div style='background:#606062;color:#606062;font-size:1pt;'>###PROJEQTOR###</div>
         <div style='vertical-align: middle;'>
@@ -5857,7 +5857,7 @@ abstract class SqlElement {
     if(Parameter::getGlobalParameter('cronCheckEmailsHost')!='' and Parameter::getGlobalParameter('cronCheckEmails')>0){
       $msg = " \n ".$firstLine."\n".$dmsg."\n";
     }else{
-      $msg = "<table style='font-size:14pt;min-width: 50%;max-width: 95%;font-family:Verdana,Arial,Helvetica,sans-serif;'><tr style='height:22px;'>";
+      $msg = "<table style='font-size:14pt;min-width: 800px; max-width: 1200px; width:95%;font-family:Verdana,Arial,Helvetica,sans-serif;'><tr style='height:22px;'>";
       $msg .= "  <td colspan='2' style='background:#606062;color: #FFFFFF; text-align: center;vertical-align: middle;'><div style='vertical-align: middle;'>";
       $msg .= "  <img style='width:22px; height:22px;-webkit-filter :brightness(0) invert(1);filter: brightness(0) invert(1);' src='".self::getBaseUrl()."/view/css/customIcons/grey/icon".get_class ( $this ).".png'/>";
       $msg .= '  &nbsp;';
@@ -5867,7 +5867,7 @@ abstract class SqlElement {
     }
     $msg .= '<tr><td style="padding-bottom:10px"></td></tr>';
     $msg .= '<tr>';
-    $msg .= ' <td style="text-align:center;font-size:20pt;color:#606062;background:#DDDDDD;border:1px solid #606062;vertical-align: middle;" colspan="2">'.SqlList::getNameFromId(get_class ( $this ), $this->id).'</td>';
+    $msg .= ' <td style="text-align:center;font-size:14pt;color:#606062;background:#DDDDDD;border:1px solid #606062;vertical-align: middle;" colspan="2">'.SqlList::getNameFromId(get_class ( $this ), $this->id).'</td>';
     $msg .= '</tr>';
     $msg .= '<tr><td style="padding-bottom:10px"></td></tr>';
     //
@@ -5959,7 +5959,7 @@ abstract class SqlElement {
     	$msg .= '<td>&nbsp;</td>';
     	$msg .= '<td><img style="float:left;width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/new/iconEmailLinkedElement.png" /></td>';
     	$msg .= '<td>&nbsp;</td>';
-    	$msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;white-space:nowrap;">'.i18n ( 'sectionLink' ).'</td>';
+    	$msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:normal;white-space:nowrap;font-family:Verdana,Arial,Helvetica,sans-serif">'.i18n ( 'sectionLink' ).'</td>';
     	$msg .= '<td style="width:90%;">&nbsp;</td>';
     	$msg .= '</tr></table>'.$sectionEnd.$rowEnd;
     	$msg .= $rowStart.'<td><br></td>'.$rowEnd;
@@ -6006,7 +6006,7 @@ abstract class SqlElement {
       $msg .= '<td>&nbsp;</td>';
       $msg .= '<td><img style="width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/new/iconEmailAttachment.png" /></td>';
       $msg .= '<td>&nbsp;</td>';
-      $msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;white-space:nowrap;">'.i18n ( 'sectionDocumentVersion' ).'</td>';
+      $msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:normal;white-space:nowrap;font-family:Verdana,Arial,Helvetica,sans-serif">'.i18n ( 'sectionDocumentVersion' ).'</td>';
       $msg .= '<td style="width:90%;">&nbsp;</td>';
       $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
       $documentVersion = new DocumentVersion ();
@@ -6045,7 +6045,7 @@ public function drawMailDetailCol($colArray, &$msg){
   $labelEnd = '&nbsp;</td>';
   $fieldStart = '<td style="background:#FFFFFF;text-align: left;width:70%;padding-left:20px;padding-bottom:10px;vertical-align: top;">';//<td style="width:2px;">&nbsp;</td>
   $fieldEnd = '</td>';
-  $sectionStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:bold;width: 100%;" colspan="2">';
+  $sectionStart = '<td style="background:#606062;color: #FFFFFF; text-align: center;font-size:14pt;font-weight:normal;width: 100%;font-family:Verdana,Arial,Helvetica,sans-serif" colspan="2">';
   $sectionEnd = '</td>';
   $tableStart = '<table style="font-size:11pt; width: 100%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
   $tableEnd = '</table>';
@@ -6068,7 +6068,7 @@ public function drawMailDetailCol($colArray, &$msg){
   				$msg .= '<td>&nbsp;</td>';
   				$msg .= '<td><img style="float:left;width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/new/iconEmail'.$section.'.png" /></td>';
   				$msg .= '<td>&nbsp;</td>';
-  				$msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;white-space:nowrap;">'.i18n ( 'section' . $section ).'</td>';
+  				$msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:normal;white-space:nowrap;font-family:Verdana,Arial,Helvetica,sans-serif">'.i18n ( 'section' . $section ).'</td>';
   				$msg .= '<td style="width:90%;">&nbsp;</td>';
   				$msg .= '</tr></table>'.$sectionEnd.$rowEnd;
   				$msg .= $rowStart.'<td><br></td>'.$rowEnd;
@@ -6491,7 +6491,7 @@ function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,
   $msg .= '<td>&nbsp;</td>';
   $msg .= '<td><img style="float:left;width:22px; height:22px;" src="'.SqlElement::getBaseUrl().'/view/css/customIcons/new/iconEmailNotes.png" /></td>';
   $msg .= '<td>&nbsp;</td>';
-  $msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:bold;">'.i18n ( 'sectionNote' ).'</td>';
+  $msg .= '<td style="color: #FFFFFF;font-size:14pt;font-weight:normal;font-family:Verdana,Arial,Helvetica,sans-serif">'.i18n ( 'sectionNote' ).'</td>';
   $msg .= '<td style="width:90%;">&nbsp;</td>';
   $msg .= '</tr></table>'.$sectionEnd.$rowEnd;
   $msg .= $rowStart.'<td><br></td>'.$rowEnd;
@@ -6654,7 +6654,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         $labelEnd = '&nbsp;</td>';
         $fieldStart = '<td style="width:2px;">&nbsp;</td><td style="background:#FFFFFF;text-align: left;">';
         $fieldEnd = '</td>';
-        $sectionStart = '<td colspan="3" style="background:#555555;color: #FFFFFF; text-align: center;font-size:10pt;font-weight:bold;">';
+        $sectionStart = '<td colspan="3" style="background:#555555;color: #FFFFFF; text-align: center;font-size:10pt;font-weight:normal;">';
         $sectionEnd = '</td>';
         $notes = '<table style="font-size:9pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
         $notes =$this->getNotesClassicTab($notes, $rowStart, $rowEnd, $sectionStart, $sectionEnd, $labelStart, $labelEnd, $fieldStart, $fieldEnd);
