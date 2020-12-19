@@ -364,6 +364,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     var browserLocaleDecimalSeparator="<?php echo $fmt->decimalSeparator?>";
     var aesKeyLength=<?php echo Parameter::getGlobalParameter('aesKeyLength');?>;
     dojo.addOnLoad(function(){
+      currentLocale="<?php echo $currentLocale;?>";
       // Set color depending on theme for New Gui
       if (isNewGui) {
         changeTheme('<?php echo getTheme();?>');
@@ -393,8 +394,6 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       dojo.extend( dojo.dnd.Source, { copyState: function( keyPressed, self ){ 
           return false; }}
       );
-      
-      currentLocale="<?php echo $currentLocale;?>";
       <?php 
       if (sessionValueExists('project')) {
         $proj=getSessionValue('project');

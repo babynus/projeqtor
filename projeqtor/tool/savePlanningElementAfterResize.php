@@ -43,8 +43,6 @@ $newEndDate = date('Y-m-d',$endDate);
 
 
 $object=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array("id"=>$id ,"refType"=>$obj, "refId"=>$idObj));
-debugLog($newStratDate);
-debugLog($newEndDate);
 Sql::beginTransaction();
 
 $object->validatedStartDate=$newStratDate;
