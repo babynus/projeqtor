@@ -164,13 +164,16 @@ if(isset($_REQUEST['goToRequirement'])){
 		            $displayTypes=Parameter::getUserParameter("displayByTypeList_RequirementDashboard");
             		if (!$displayTypes) $displayTypes='none';
             		?> <td align="right">
-        <div class="listTitle" id="barFilterByType" style="display: <?php echo $displayTypes;?>"
+        <div class="listTitle" id="barFilterByType" style="min-height:20px;display: <?php echo $displayTypes;?>"
         data-dojo-type="dijit/layout/ContentPane" region="top">
         	<table>
         		<tr>
         			<td style="font-weight:bold"><?php echo i18n('filterOnType'); ?>&nbsp;&nbsp;</td>
         <?php
-        foreach ($listType as $idType => $nameType) {
+        $cptType=0;
+        foreach ($listType as $idType => $nameType) {    
+          if ($cptType!=0 and $cptType%5==0) echo "</tr><tr><td></td>";
+          $cptType++;
       	?>
       				<td>
       					<div dojoType="dijit.form.CheckBox" type="checkbox" <?php echo ((in_array($idType, $filterTypesArray)) ? 'checked' : ''); ?>
