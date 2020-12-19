@@ -1223,8 +1223,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
               loadingContentDiv=false;
             }else{
               showList();
-            }
-            
+            }           
           }
           if (destination == "centerDiv" && dijit.byId('objectGrid')) {
             mustApplyFilter=true;
@@ -6856,6 +6855,7 @@ function resizeListDiv() {
     cptLoop++;
   }
   var finalSize=Math.floor(leftWidth/variableSize);
+  //if (isNewGui) finalSize-=10;
   if (finalSize>100) finalSize=100;
   for (var i=0;i<arrayFieldsOrder.length;i++) {
     var fld=arrayFieldsOrder[i];

@@ -38,10 +38,18 @@ header ('Content-Type: text/html; charset=UTF-8');
   <link rel="icon" href="../view/img/logo.ico" type="../view/image/x-icon" />
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtor.css" />
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorFlat.css" />
+  <?php if (isNewGui()) {?><link rel="stylesheet" type="text/css" href="../view/css/projeqtorNew.css" /> <?php }?>
+  <script type="text/javascript" src="../view/js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../view/js/projeqtorDialog.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <?php if (isNewGui()) {?>
+  <script type="text/javascript">
+    //var isNewGui=true;
+    //setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>','<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>');
+  </script>
+  <?php }?>
 </head>
 
-<body class="white" onLoad="window.top.hideWait();//showInfo('<?php echo i18n('ImportCompleted')?>');" style="overflow: auto; ">
+<body class="white <?php if (0 and isNewGui()) echo 'ProjeQtOrNewGui';?>" onLoad="window.top.hideWait();//showInfo('<?php echo i18n('ImportCompleted')?>');" style="overflow: auto; ">
 <?php 
 $class='';
 $dateFormat='dd/mm/yyyy';

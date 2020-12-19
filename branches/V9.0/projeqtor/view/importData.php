@@ -60,7 +60,8 @@
            </select> 
         </td>
         <td width="20%" align="left"> 
-          <button id="helpImportData" class="detailButton" iconClass="imageColorNewGui iconHelp iconSize16" dojoType="dijit.form.Button" type="button" showlabel="false"
+          <button id="helpImportData" class="detailButton" iconClass="imageColorNewGui iconHelp iconSize<?php echo (isNewGui())?'22':'16';?>" dojoType="dijit.form.Button" type="button" showlabel="false"
+          <?php if (isNewGui()) {?> style="position:relative;top:-1px;width:24px;height:24px;"<?php }?>
           title="<?php echo i18n('helpImport');?>">
              <script type="dojo/connect" event="onClick" args="evt">
                showHelpImportData();
@@ -95,8 +96,8 @@
         <td colspan="2">
          <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>" />     
          <input MAX_FILE_SIZE="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>"
-          dojoType="dojox.form.FileInput" type="file"
-          style="color: #000000;" 
+          dojoType="dojox.form.FileInput" type="file" 
+          style="color: #000000;<?php if (isNewGui()) echo "position:relative;top:-3px;";?>" 
           name="importFile" id="importFile" 
           cancelText="<?php echo i18n("buttonReset");?>"
           label="<?php echo i18n("buttonBrowse");?>"
