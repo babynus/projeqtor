@@ -500,7 +500,7 @@ html, body {
 }
   
 #dialogMessageLegal {
-  z-index:9999999;
+  z-index:950;
   position:absolute; 
   bottom:0; right:0; 
   height: 300px;

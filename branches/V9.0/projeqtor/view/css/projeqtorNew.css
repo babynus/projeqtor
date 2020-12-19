@@ -2000,3 +2000,29 @@ element.style {
   -ms-transition: unset !important;
   transition: unset !important;
 }
+.ProjeQtOrNewGui .iconHelp {
+  width: 22px;
+  height:22px;
+}
+.ProjeQtOrNewGui .dijitFakeInput input {
+	background: #ffffff url();
+	border: 1px solid #d0d0d0;
+	padding:3px 5px;
+	
+}	
+.ProjeQtOrNewGui .dijitFakeInput .dijitInline.dijitFileInputText,
+.ProjeQtOrNewGui .dijitFakeInput .dijitInline.dijitFileInputButton {
+	  background: var(--color-lighter);
+    padding: 2px;
+    position: relative;
+    top: -1px;
+    border:1px solid #c0c0c0;
+    border-radius:5px;
+    color:var(--color-dark);
+}
+.ProjeQtOrNewGui .dijitFakeInput .dijitInline.dijitFileInputButton:hover {
+    background: #ffffff;
+    color:var(--color-secondary);
+    border:1px solid var(--color-secondary);
+}
+

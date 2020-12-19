@@ -1060,12 +1060,16 @@ abstract class SqlElement {
     // . ((SqlElement::is_subclass_of($this,'PlanningElement'))?" => $this->refType #$this->refId":''));
     // if (get_class($this)=='History') traceLog(" => $this->colName : '$this->oldValue'->'$this->newValue'");
     // #305
+    debugLog("saveSqlElement");
     $this->recalculateCheckboxes ();
     // select operation to be executed
+    debugLog("saveSqlElement 1");
     if ($force) {
       $control = "OK";
     } else {
+      debugLog("saveSqlElement 2");
       $control = $this->control ();
+      debugLog("saveSqlElement 3");
       $class = get_class ( $this );
       if (($control == 'OK' or strpos ( $control, 'id="confirmControl" value="save"' ) > 0) and property_exists ( $class, $class . 'PlanningElement' )) {
         $pe = $class . 'PlanningElement';
@@ -1074,6 +1078,7 @@ abstract class SqlElement {
           $control = $controlPe;
         }
       }
+      debugLog("saveSqlElement 3");
       if (($control == 'OK' or strpos ( $control, 'id="confirmControl" value="save"' ) > 0) and property_exists ( $this, 'WorkElement' ) and isset ( $this->WorkElement )) {
         $we = 'WorkElement';
         $controlWe = $this->WorkElement->control ();
@@ -1091,6 +1096,7 @@ abstract class SqlElement {
         }
       }
     }
+    debugLog("saveSqlElement 9");
     if ($control == "OK") {
       // $old=new Project();
       if (property_exists ( $this, 'idStatus' ) or property_exists ( $this, 'reference' ) or property_exists ( $this, 'idResource' ) or property_exists ( $this, 'description' ) or property_exists ( $this, 'result' )) {
@@ -1497,6 +1503,7 @@ abstract class SqlElement {
    */
   private function updateSqlElement($force = false, $withoutDependencies = false) {
     // traceLog('updateSqlElement (for ' . get_class($this) . ' #' . $this->id . ')');
+    debugLog("updateSqlElement");
     $returnValue = i18n ( 'messageNoChange' ) . ' ' . i18n ( get_class ( $this ) ) . ' #' . $this->id;
     $returnStatus = 'NO_CHANGE';
     $depedantObjects = array();
@@ -1534,6 +1541,7 @@ abstract class SqlElement {
         }
       }
     }
+    debugLog("updateSqlElement 1");
     if (property_exists ( $this, 'idClient' ) and property_exists ( $this, '_OtherClient' )) { // If client is cleared and item has other client, replace main with first other
       usort ( $oldObject->_OtherClient, "OtherClient::sort" );
       foreach ( $oldObject->_OtherClient as $otherClient ) {
