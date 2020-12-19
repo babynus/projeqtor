@@ -232,12 +232,15 @@
 		  <td align="right">
       <div class="listTitle" id="barFilterByType"
       data-dojo-type="dijit/layout/ContentPane" region="top"
-      style="height:20px; display: <?php echo $displayTypes;?>">
+      style="min-height:20px; display: <?php echo $displayTypes;?>">
       	<table>
       		<tr>
       			<td style="font-weight:bold"><?php echo i18n('filterOnType'); ?>&nbsp;&nbsp;</td>
       <?php
-      foreach ($listType as $idType => $nameType) {
+      $cptType=0;
+      foreach ($listType as $idType => $nameType) {    
+        if ($cptType!=0 and $cptType%5==0) echo "</tr><tr><td></td>";
+        $cptType++;
     	?>
     				<td>
     					<div dojoType="dijit.form.CheckBox" type="checkbox" <?php echo ((in_array($idType, $filterTypesArray)) ? 'checked' : ''); ?>
@@ -262,11 +265,12 @@
 		?>
     <div class="listTitle" id="barFilterByType"
     data-dojo-type="dijit/layout/ContentPane" region="top"
-    style="height:20px; display: <?php echo $displayTypes;?>">
+    style="min-height:20px; z-index:999;display: <?php echo $displayTypes;?>">
     	<table style="position:relative;top:2px;left:3px">
     		<tr>
     			<td style="font-weight:bold"><?php echo i18n('filterOnType'); ?>&nbsp;:&nbsp;</td>
     <?php
+    $cptType=0;
     foreach ($listType as $idType => $nameType) {
   	?>
   				<td>
@@ -692,7 +696,7 @@ function addSelected($param,$value){
 function createPopUpDnd($tabPosition){
 
     if(isNewGui()){
-      echo '<table><tr><td>';
+      echo '<table><tr><td style="padding-left:30px">';
       echo ucfirst(i18n("filterSynthesis"));
       echo'   </td>';
       $valueSwitch = "off";
@@ -700,7 +704,7 @@ function createPopUpDnd($tabPosition){
         $valueSwitchValue=Parameter::getUserParameter("filterSynthesis");
         if($valueSwitchValue)$valueSwitch="on";
       }
-      echo' <td>';
+      echo' <td>&nbsp;';
       echo '<div  id="showIdleSwitchAS112" name="showIdleSwitchAS112" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value='.$valueSwitch.' leftLabel="" rightLabel="" >';
       echo '<script type="dojo/method" event="onStateChanged" >
                   changeParamDashboardTicket("filterSynthesis=1");
