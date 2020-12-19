@@ -931,11 +931,11 @@ $extendedListZone=false;
               <td width="5px">
                 <div dojoType="dijit.form.DropDownButton"							    
   							  id="listItemsSelector" jsId="listItemsSelector" name="listItemsSelector" 
-  							  showlabel="false" class="comboButton" iconClass="iconGlobalView iconSize22" 
+  							  showlabel="false" class="comboButton" iconClass="imageColorNewGui iconGlobalView iconSize22" 
   							  title="<?php echo i18n('itemSelector');?>">
                   <span>title</span>
   							  <div dojoType="dijit.TooltipDialog" class="white" id="listItemsSelectorDialog"
-  							    style="position: absolute; top: 50px; right: 40%">   
+  							    style="position: absolute; top: 50px; right: 40%;">   
                     <script type="dojo/connect" event="onShow" args="evt">
                       oldSelectedItems=dijit.byId('globalViewSelectItems').get('value');
                     </script>                 

@@ -82,7 +82,19 @@ if ($type == 'empty') {
   $objectClass = $_REQUEST ['objectClass'];
   Security::checkValidClass ( $objectClass, 'objectClass' );
   $obj = new $objectClass ();
+  ob_start();
   $nbRows = listFieldsForFilter ( $obj, 0 );
+  $json=ob_get_clean();
+  $jsonValid='{"identifier":"id", "items":['.$json.']}';
+  $arr=json_decode($jsonValid);
+  function build_sorter($key) {
+    return function ($a, $b) use ($key) {
+      return strnatcmp($a->$key, $b->$key);
+    };
+  }
+  usort($arr->items, function ($a, $b) { return (strcasecmp(replace_accents($a->name),replace_accents($b->name))); });
+  $result=str_replace(array('[',']'),'',json_encode($arr->items));
+  echo $result;
   //damian
 }else if($type == "emailTemplate"){
   $objIdClass = RequestHandler::getValue('objectIdClass');
@@ -951,7 +963,7 @@ function listFieldsForFilter($obj, $nbRows, $included = false) {
     if (get_class($obj)=='GlobalView' and $col=='id') continue;
     if ($col=='_Assignment') {
       if ($nbRows > 0) echo ', ';
-      echo '{id:"' . ($included ? get_class ( $obj ) . '_' : '') . 'assignedResource__idResourceAll' . '", name:"' . i18n("assignedResource") . '", dataType:"list"}';
+      echo '{"id":"' . ($included ? get_class ( $obj ) . '_' : '') . 'assignedResource__idResourceAll' . '", "name":"' . i18n("assignedResource") . '", "dataType":"list"}';
       continue;
     }
     if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'calculated' ) and 
@@ -974,7 +986,7 @@ function listFieldsForFilter($obj, $nbRows, $included = false) {
       if (substr ( $col, 0, 9 ) == 'idContext') {
         $colName = SqlList::getNameFromId ( 'ContextType', substr ( $col, 9 ) );
       }
-      echo '{id:"' . ($included ? get_class ( $obj ) . '_' : '') . $col . '", name:"' . $colName . '", dataType:"' . $dataType . '"}';
+      echo '{"id":"' . ($included ? get_class ( $obj ) . '_' : '') . $col . '", "name":"' . $colName . '", "dataType":"' . $dataType . '"}';
       $nbRows ++;
     } else if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) == ucfirst ( substr ( $col, 0, 1 ) )) {
       $sub = new $col ();
@@ -984,7 +996,7 @@ function listFieldsForFilter($obj, $nbRows, $included = false) {
   if (isset ( $obj->_Note )) {
     if ($nbRows > 0)
       echo ', ';
-    echo '{id:"Note", name:"' . i18n ( 'colNote' ) . '", dataType:"refObject"}';
+    echo '{"id":"Note", "name":"' . i18n ( 'colNote' ) . '", "dataType":"refObject"}';
     $nbRows ++;
   }
   return $nbRows;
