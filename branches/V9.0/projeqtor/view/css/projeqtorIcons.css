@@ -577,12 +577,12 @@
 .ProjeQtOrFlatRed .iconButtonRemove16 { background-image: url(customIcons/red/iconRemove.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonRemove16 { background-image: url(customIcons/new/iconRemove.svg) !important;  background-repeat: no-repeat; }
 
-.iconButtonRemove24 { background-image: url(images/mediumButtonRemove.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconButtonRemove24 { background-image: url(customIcons/blue/iconRemove.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconButtonRemove24 { background-image: url(customIcons/green/iconRemove.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconButtonRemove24 { background-image: url(customIcons/grey/iconRemove.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconButtonRemove24 { background-image: url(customIcons/red/iconRemove.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconButtonRemove24 { background-image: url(customIcons/new/iconRemove.svg);  background-repeat: no-repeat; }
+.iconButtonRemove { background-image: url(images/mediumButtonRemove.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconButtonRemove { background-image: url(customIcons/blue/iconRemove.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconButtonRemove { background-image: url(customIcons/green/iconRemove.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconButtonRemove { background-image: url(customIcons/grey/iconRemove.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconButtonRemove { background-image: url(customIcons/red/iconRemove.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonRemove { background-image: url(customIcons/new/iconRemove.svg);  background-repeat: no-repeat; }
 
 .iconButtonReply16 { background-image: url(images/iconReply.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonReply16 { background-image: url(customIcons/blue/iconReply.png);  background-repeat: no-repeat; }
