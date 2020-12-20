@@ -3944,6 +3944,8 @@ if (target==undefined) target='object';
 
 function runReport() {
   var fileName = dojo.byId('reportFile').value;
+  dijit.byId('listReportDiv').resize({h:250});
+  dijit.byId('mainReportContainer').resize();
   loadContent("../report/" + fileName, "detailReportDiv", "reportForm", false);
 }
 function saveReportInToday() {

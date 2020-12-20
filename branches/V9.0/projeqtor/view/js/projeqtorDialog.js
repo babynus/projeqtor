@@ -5180,6 +5180,9 @@ function reportSelectReport(idReport) {
   if (isNaN(idReport)) return;
   dojo.query(".section").removeClass("reportSelected");
   dojo.addClass(dojo.byId('report'+idReport),"reportSelected");
+  var height=dojo.byId('mainReportContainer').offsetHeight;
+  dijit.byId('listReportDiv').resize({h:height});
+  dijit.byId('mainReportContainer').resize();
   loadContent("../view/reportsParameters.php?idReport=" + idReport,
   "reportParametersDiv", null, false);
   //mehdi Ticket #3092

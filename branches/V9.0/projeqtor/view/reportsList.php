@@ -65,7 +65,7 @@ scriptLog('   ->/view/reportsList.php');
     <td style="width:36px">
       <button id="gotoAutoSendReportList" dojoType="dijit.form.Button" showlabel="false"
               title="<?php echo i18n('autoSendReportAccess');?>"
-              iconClass="iconAutoSendReport22 iconAutoSendReport iconSize22" class="detailButton">
+              iconClass="imageColorNewGui iconAutoSendReport22 iconAutoSendReport iconSize22" class="detailButton">
               <script type="dojo/method" event="onClick" args="evt">
 	             loadContent('../view/autoSendReportList.php','centerDiv');;
               </script>
@@ -74,7 +74,7 @@ scriptLog('   ->/view/reportsList.php');
   </tr>
 </table>
 </div>
-<div dojoType="dijit.layout.ContentPane" region="center" id="gridContainerDiv">
+<div dojoType="dijit.layout.ContentPane" region="center" id="gridContainerDiv" >
   <table style="height:100%">
     <tr>
       <td width="5px" height="35px">&nbsp;</td>
