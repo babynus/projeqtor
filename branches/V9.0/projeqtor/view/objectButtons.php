@@ -412,7 +412,7 @@
       <button id="subscribeButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('showSubscribeOptions');?>"
        <?php if ($noselect) {echo "disabled";} ?> 
-       iconClass="dijitButtonIcon dijitButtonIconSubscribe<?php if ($subscribed) echo 'Valid';?>" class="detailButton">
+       iconClass="imageColorNewGui dijitButtonIcon dijitButtonIconSubscribe<?php if ($subscribed) echo 'Valid';?>" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           showExtraButtons('subscribeButton');
           hideResultDivs();
@@ -420,7 +420,7 @@
       </button>   
       <div class="statusBar" id="subscribeButtonDiv" style="display:none;position:absolute;width:220px">
         <button id="subscribeButtonSubscribe" dojoType="dijit.form.Button" showlabel="true" style="" <?php if ($subscribed) echo 'disabled';?>
-          iconClass="dijitButtonIcon dijitButtonIconSubscribe" class="detailButton"><div style="width:180px;"><?php echo i18n('subscribeButton')?></div>
+          iconClass="imageColorNewGui dijitButtonIcon dijitButtonIconSubscribe" class="detailButton"><div style="width:180px;"><?php echo i18n('subscribeButton')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
             hideResultDivs();
@@ -428,7 +428,7 @@
           </script>
         </button><br/>
         <button id="subscribeButtonUnsubscribe" dojoType="dijit.form.Button" showlabel="true"  style="" <?php if (! $subscribed) echo 'disabled';?>
-          iconClass="dijitButtonIcon dijitButtonIconDelete" class="detailButton"><div style="width:180px;"><?php echo i18n('unsubscribeButton')?></div>
+          iconClass="imageColorNewGui dijitButtonIcon dijitButtonIconDelete" class="detailButton"><div style="width:180px;"><?php echo i18n('unsubscribeButton')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
             hideResultDivs();
@@ -437,7 +437,7 @@
         </button><br/>  
         <?php if ($canSubscribeForOthers) {?>
         <button id="subscribeButtonSubscribeOthers" dojoType="dijit.form.Button" showlabel="true"
-          iconClass="idijitButtonIcon iconTeam22" class="detailButton"><div style="width:180px"><?php echo i18n('subscribeOthersButton')?></div>
+          iconClass="imageColorNewGui idijitButtonIcon iconTeam22 iconTeam iconSize22" class="detailButton"><div style="width:180px"><?php echo i18n('subscribeOthersButton')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
             hideResultDivs();
@@ -446,7 +446,7 @@
         </button><br/> 
         <?php } else {?>
         <button id="subscribeButtonSubscribers" dojoType="dijit.form.Button" showlabel="true"
-          iconClass="idijitButtonIcon iconTeam22" class="detailButton"><div style="width:180px"><?php echo i18n('subscribersList')?></div>
+          iconClass="imageColorNewGui idijitButtonIcon iconTeam22 iconTeam iconSize22" class="detailButton"><div style="width:180px"><?php echo i18n('subscribersList')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
             hideResultDivs();
@@ -455,7 +455,7 @@
         </button><br/> 
         <?php }?>
         <button id="subscribeButtonSubscribtionList" dojoType="dijit.form.Button" showlabel="true"
-          iconClass="dijitButtonIcon iconListOfValues22" class="detailButton"><div style="width:180px"><?php echo i18n('showSubscribedItemsList')?></div>
+          iconClass="imageColorNewGui iconListOfValues22 iconListOfValues iconSize22 idijitButtonIcon" class="detailButton"><div style="width:180px"><?php echo i18n('showSubscribedItemsList')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
             hideResultDivs();
