@@ -1722,7 +1722,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vRightTableTempMeeting +='<div class="resizerStart" id="taskbar_'+vID+'ResizerStart" style="display:none;left:'+leftposLeftResizer+'px;"'
                                      + 'onmouseenter ="showResizerGanttBar ('+vID+',\'start\');" onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"></div>';
               vRightTableTempMeeting +='<div class="divDateGantBarResizeleft" id="divStartDateResize_'+vID+'" style="display:none;left:'+leftposdivDate+'px;" >'+JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat)+'</div>';
-              vRightTableTempMeeting +='<input  id="inputDateGantBarResizeleft_'+vID+'" name="inputDateGantBarResizeleft_'+vID+'" type="hidden" value="'+vTaskStart+'" />';
+              vRightTableTempMeeting +='<input class="inputDateGantBarResize" id="inputDateGantBarResizeleft_'+vID+'" name="inputDateGantBarResizeleft_'+vID+'" type="hidden" value="'+vTaskStart+'" />';
               //===========================
             }
             if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8'  || idPm=='4'  || idPm=='12') && vTaskList[i].getFixPlanning()!=1 && !vTaskList[i].getGroup()){
@@ -1731,7 +1731,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vRightTableTempMeeting +='<div class="resizerEnd" id="taskbar_'+vID+'ResizerEnd" style="display:none;left:'+leftposRightResizer+'px;" '
                                      +'onmouseenter ="showResizerGanttBar ('+vID+',\'end\');"  onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"></div>';
               vRightTableTempMeeting +='<div class="divDateGantBarResizeRight" id="divEndDateResize_'+vID+'" style="display:none;left:'+leftposRightResizer+'px;">'+JSGantt.formatDateStr(vTaskEnd,vDateDisplayFormat)+'</div>';
-              vRightTableTempMeeting +='<input  id="inputDateGantBarResizeRight_'+vID+'" name="inputDateGantBarResizeRight_'+vID+'" type="hidden" value="'+vTaskEnd+'" />';
+              vRightTableTempMeeting +='<input class="inputDateGantBarResize" id="inputDateGantBarResizeRight_'+vID+'" name="inputDateGantBarResizeRight_'+vID+'" type="hidden" value="'+vTaskEnd+'" />';
               //===========================
             }
             if(vTaskList[i].getClass()=='Meeting'){
