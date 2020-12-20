@@ -31,13 +31,17 @@ $commentDep=$dep->comment;
 
 
 ?>
-<div class="contextMenuDiv" id="contextMenuDiv" style="height:135px;z-index:99999999999;">
+<div class="contextMenuDiv" id="contextMenuDiv" style="height:<?php echo (isNewGui())?"140px":"135px";?>;z-index:99999999999;">
 
   <div style="width:215px;border-radius:1px 1px 0px 0px;">
-    <div class="section" style="display: inline-block;width:100%; border-radius:0px" >
-      <p  style="text-align:center;color:white;height:20px;font-size:15px;display:inline-block;"><?php echo i18n("operationUpdate");?></p>
+    <div class="section" style="display: inline-block;width:100%; border-radius:0px;<?php if (isNewGui()) echo "background:var(--color-darker) !important;"?>" >
+      <p  style="text-align:center;color:white;height:20px;font-size:15px;display:inline-block;<?php if (isNewGui()) echo "position:relative;top:3px;"?>"><?php echo i18n("operationUpdate");?></p>
       <div style="float:right;">
+        <?php if (isNewGui()) {?>
+        <div onclick="hideDependencyRightClick();" class="dijitDialogCloseIcon"></div>
+        <?php } else  {?>
         <a onclick="hideDependencyRightClick();" <?php echo formatSmallButton('Mark') ;?></a>
+         <?php } ?>
       </div>
     </div>
   </div>
@@ -57,7 +61,7 @@ $commentDep=$dep->comment;
 		      <a id="dependencyRightClickSave" onclick="saveDependencyRightClick();"><?php echo formatMediumButton('Save') ;?></a> 
         </td>
       </tr>
-      <tr style="height:28px">
+      <tr style="height:28px;">
 	      <td style="text-align:right;">
 	        <label for="modeDependency" style="width:100px"><?php echo i18n("colType");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label> 
 	      </td>
@@ -73,7 +77,7 @@ $commentDep=$dep->comment;
           </select>
 	      </td>
 	    </tr>
-	    <tr>
+	    <tr style="height:28px;">
 	      <td colspan="2">
 	        <label for="commentDependency" style="text-align: left;"><?php echo i18n("colComment");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
 					<input id="commentDependency" name="commentDependency"  dojoType="dijit.form.Textarea" value="<?php echo $commentDep;?>" />                        
