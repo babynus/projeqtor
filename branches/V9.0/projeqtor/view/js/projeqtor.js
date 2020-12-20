@@ -3478,6 +3478,9 @@ function drawGantt() {
           item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, 
           item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract,elementIdRef,item.fixplanning));
     }
+    dojo.query(".inputDateGantBarResize").forEach(function(node, index, nodelist) {
+      node.value='';
+    });
     g.Draw();
     g.DrawDependencies();
   } else {
@@ -7924,12 +7927,12 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
             barDiv.style.left =left+'px';
             width=width+(dayWidth*startResize);
           }
-          resizerStart.style.left=(left-22)+'px';
-          divVisibleStartDateChange.style.left=(left-43)+'px';
-          el.style.width = width+ 'px';
-          barDiv.style.width = width+ 'px';
+          if (resizerStart) resizerStart.style.left=(left-22)+'px';
+          if (divVisibleStartDateChange) divVisibleStartDateChange.style.left=(left-43)+'px';
+          if (el) el.style.width = width+ 'px';
+          if (barDiv) barDiv.style.width = width+ 'px';
           startDateFormatForDisplay=JSGantt.formatDateStr(dateStart,dateFormat);
-          divVisibleStartDateChange.innerHTML=startDateFormatForDisplay;
+          if (divVisibleStartDateChange) divVisibleStartDateChange.innerHTML=startDateFormatForDisplay;
         }else if (endResize!=0){
           if(directionMovement=='pos'){
             width=width-(dayWidth*endResize);
