@@ -543,7 +543,10 @@ if($paramMailerType=='phpmailer'){
               <td class='assignHeader' ><div style="width:280px">
               
               <div style="float:left;margin-left:5px;" id='dialogMailAll' name='dialogMailAll'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='selectAllCheckBox(".checkBoxAttachmentMail");'></div>
-              <?php echo i18n('sectionAttachment')."&nbsp;";?></div></td>
+              <?php if (isNewGui()) {?><div style="padding-top:7px"><?php }?>
+              <?php echo i18n('sectionAttachment')."&nbsp;";?>
+              <?php if (isNewGui()) {?></div><?php }?>
+              </div></td>
               <td class='assignHeader' ><div style="width:120px"><?php echo i18n('dashboardTicketMainTitleType');?></div></td>
               <td class='assignHeader' ><div style="width:110px"><?php echo i18n('FileSize');?></div></td>
               <?php 
