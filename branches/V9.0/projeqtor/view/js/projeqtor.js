@@ -7956,11 +7956,6 @@ function handleResizeGantBAr (element,refId,id,minDate,dayWidth,dateFormat){
         dateStart=JSGantt.formatDateStr(dateStart,'yyyy-mm-dd');
         dateEnd=JSGantt.formatDateStr(dateEnd,'yyyy-mm-dd');
         saveGanttElementResize( element,refId,id,dateStart,dateEnd,duration);
-        if(dojo.getAttr('automaticRunPlan','aria-checked')=='true')plan();
-        if((dojo.byId('objectClass').value.trim() !='' && dojo.byId('objectId').value.trim() !='' && dojo.getAttr('automaticRunPlan','aria-checked')!='true') && dojo.byId('objectId').value.trim()==refId.trim() ){
-          loadContent("objectDetail.php", "detailDiv", 'listForm');
-          if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
-        }
     }
     setTimeout('isResizingGanttBar=false;',150);
     setTimeout('resizerEventIsInit=false;',150);
@@ -7998,6 +7993,12 @@ function saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration){
   dojo.xhrGet({
     url : url,
     load : function(data, args) {
+      if (dojo.getAttr('automaticRunPlan','aria-checked')=='true')plan();
+      else refreshJsonPlanning();
+      if((dojo.byId('objectClass').value.trim() !='' && dojo.byId('objectId').value.trim() !='' && dojo.getAttr('automaticRunPlan','aria-checked')!='true') && dojo.byId('objectId').value.trim()==refId.trim() ){
+        loadContent("objectDetail.php", "detailDiv", 'listForm');
+        if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+      }
     },
   });
 }

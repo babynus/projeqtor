@@ -37,7 +37,7 @@ $startDate=trim((RequestHandler::isCodeSet('startDate'))?strtotime(RequestHandle
 $endDate=trim((RequestHandler::isCodeSet('endDate'))?strtotime(RequestHandler::getValue('endDate')):'');
 $user=getSessionUser();
 
-$newStratDate = date('Y-m-d',$startDate);
+$newStartDate = date('Y-m-d',$startDate);
 $newEndDate = date('Y-m-d',$endDate);
 
 
@@ -45,8 +45,28 @@ $newEndDate = date('Y-m-d',$endDate);
 $object=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array("id"=>$id ,"refType"=>$obj, "refId"=>$idObj));
 Sql::beginTransaction();
 
-$object->validatedStartDate=$newStratDate;
-$object->validatedEndDate=$newEndDate;
+$pm=SqlList::getFieldFromId('PlanningMode', $object->idPlanningMode, "code");
+if ($pm=="START") {
+  $object->validatedStartDate=$newStartDate;
+  if ($object->validatedEndDate) $object->validatedEndDate=$newEndDate;
+}
+if ($pm=="ALAP") {
+  $object->validatedEndDate=$newEndDate;
+  if ($object->validatedStartDate) $object->validatedStartDate=$newStartDate;
+}
+if ($pm=="FDUR") {
+  $object->validatedDuration=workDayDiffDates($newStartDate, $newEndDate);
+  if ($object->validatedStartDate) $object->validatedStartDate=$newStartDate;
+  if ($object->validatedEndDate) $object->validatedEndDate=$newEndDate;
+}
+if ($pm=="REGUL" or $pm=="QUART" or $pm=="HALF" or $pm=="FULL") {
+  $object->validatedStartDate=$newStartDate;
+  $object->validatedEndDate=$newEndDate;
+}
+$object->plannedStartDate=$newStartDate;
+$object->plannedEndDate=$newEndDate;
+$object->plannedDuration=workDayDiffDates($newStartDate, $newEndDate);
+
 $result=$object->save();
 
 Sql::commitTransaction();

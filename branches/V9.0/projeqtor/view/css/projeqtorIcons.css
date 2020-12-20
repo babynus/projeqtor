@@ -1723,7 +1723,7 @@
 .ProjeQtOrFlatRed .iconType { background-image: url(customIcons/red/iconListOfTypes.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconType { background-image: url(customIcons/new/iconListOfTypes.svg);  background-repeat: no-repeat; }
 
-.iconListOfValues { background-image: url(images/iconListOfValues32.png);  background-repeat: no-repeat; }
+.iconListOfValues { background-image: url(images/iconListOfValues.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconListOfValues { background-image: url(customIcons/blue/iconListOfValues.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconListOfValues { background-image: url(customIcons/green/iconListOfValues.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGrey .iconListOfValues { background-image: url(customIcons/grey/iconListOfValues.png);  background-repeat: no-repeat;}
@@ -2748,7 +2748,7 @@
 .ProjeQtOrFlatRed .iconToday { background-image: url(customIcons/red/iconToday.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconToday { background-image: url(customIcons/new/iconToday.svg);  background-repeat: no-repeat;}
 
-.iconTool { background-image: url(images/iconTool.png);  background-repeat: no-repeat; }
+.iconTool { background-image: url(images/iconTool32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconTool { background-image: url(customIcons/blue/iconTool.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconTool { background-image: url(customIcons/green/iconTool.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconTool { background-image: url(customIcons/grey/iconTool.png);  background-repeat: no-repeat; }
