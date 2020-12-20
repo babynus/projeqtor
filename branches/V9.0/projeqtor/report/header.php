@@ -62,17 +62,17 @@ foreach ($_REQUEST as $reqParam=>$reqValue) {
 if ($outMode=='excel') $headerParameters=rtrim(br2nl($headerParameters),"\n");
 echo '<table _excel-name="'.i18n("menuParameter").'" style="width:100%">';
 echo '<tr>';
-if ($outMode!='excel') echo "<td style='width:1%' class='reportHeader' ".excelFormatCell('data',1,null,null,null,null,null,null,null,null,true).">&nbsp;</td>";
-echo "<td style='width:10%' class='reportHeader' ".excelFormatCell('header',20,null,null,null,null,null,null,null,null,true).">" . i18n('colParameters') . "</td>";
-if ($outMode!='excel') echo "<td style='width:1%' class='reportHeader' ".excelFormatCell('data',1,null,null,null,null,null,null,null,null,true).">&nbsp;</td>";
-if ($outMode!='excel') echo "<td style='width:1%' ".excelFormatCell('data',1,null,null,null,null,null,null,null,null,true).">&nbsp;</td>";
-echo "<td style='width:30%' ".excelFormatCell('data',50,null,null,false,'left',null,null,null,null,true).">"; 
+if ($outMode!='excel') echo "<td style='width:1%' class='' ".excelFormatCell('data',1,null,null,null,null,null,null,null,null,true).">&nbsp;</td>";
+echo "<td style='border-radius:5px 0 0 5px;width:10%' class='reportHeader' ".excelFormatCell('header',20,null,null,null,null,null,null,null,null,true).">" . i18n('colParameters') . "</td>";
+if ($outMode!='excel') echo "<td style='border-top:1px solid var(--color-darker);border-bottom:1px solid var(--color-darker);width:1%' class='' ".excelFormatCell('data',1,null,null,null,null,null,null,null,null,true).">&nbsp;</td>";
+if ($outMode!='excel') echo "<td style='border-top:1px solid var(--color-darker);border-bottom:1px solid var(--color-darker);width:1%' ".excelFormatCell('data',1,null,null,null,null,null,null,null,null,true).">&nbsp;</td>";
+echo "<td style='white-space:nowrap;width:10%;padding-right:20px;border:1px solid var(--color-darker);border-left:0px;' ".excelFormatCell('data',50,null,null,false,'left',null,null,null,null,true).">"; 
 echo $headerParameters;
 echo "</td>";
-echo "<td align='center' style='width:40%; font-size: 150%; font-weight: bold;' ".excelFormatCell('header',80,null,null,null,null,null,16,null,null, true).">"; 
+echo "<td align='center' style='width:40%; font-size: 100%; font-weight: normal;' ".excelFormatCell('header',80,null,null,null,null,null,16,null,null, true).">"; 
 
 if (array_key_exists('reportName', $_REQUEST)) {
-  if ($outMode!='excel') echo '<table><tr><td class="reportTableHeader" style="text-align: center; padding: 3px 10px 3px 10px;">';
+  if ($outMode!='excel') echo '<table><tr><td class="reportHeader" style="text-align: center; padding: 10px 30px 10px 30px;">';
   echo htmlEncode(ucfirst($_REQUEST['reportName']),'html');
   if ($outMode!='excel') echo '</td></tr></table>';
 }

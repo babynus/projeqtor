@@ -165,7 +165,7 @@ label, .ProjeQtOrNewGui label,
 
 .ProjeQtOrNewGui label.ganttScale {
 	float: none;
-	background-color:var(--color-medium);
+	background-color:var(--color-darker);
 	font-weight:normal;
 	text-shadow: 0px 0px;
 	color:var(--color-white);
@@ -189,14 +189,14 @@ label, .ProjeQtOrNewGui label,
 }
 
 .ProjeQtOrNewGui .ganttRightTitle, .ProjeQtOrNewGui .ganttLeftTopLine, .ProjeQtOrNewGui .ganttLeftTitle {
-	background-color:var(--color-medium);
+	background-color:var(--color-darker);
 	text-shadow: 0px 0px;
 	font-weight:normal;
   color:var(--color-white);
 }
 	
 .ProjeQtOrNewGui .ganttLeftTopLine .dijitReset.dijitInline.dijitButtonNode {
-	background: var(--color-medium) ;
+	background: var(--color-darker) ;
 }
 
 /* === GRID AND LINKED TO GRID CSS ==================================================== GRID ===*/
@@ -1050,7 +1050,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton .dijitButtonNode,
 .ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitButtonHover {
     background: #ffffff;
-    border: 0px solid #ffffff !important;
+    border: 0px solid #ffffff !important; /* DO NOT TOUCH : IMORTANT FOR LIST AND DETAIL BUTTONS */
 }    
 .ProjeQtOrNewGui .detailButton.dijitButton, .ProjeQtOrNewGui .dijitReset.dijitInline.detailButton.dijitButtonNode {
 	  background: #ffffff;
@@ -2026,7 +2026,7 @@ element.style {
     border:1px solid var(--color-secondary);
 }
 
-.ProjeQtOrNewGui .reportTableHeader, .ProjeQtOrNewGui .reportHeader {
+.ProjeQtOrNewGui .reportTableHeader, .ProjeQtOrNewGui .reportHeader, .ProjeQtOrNewGui .largeReportHeader {
 	background: var(--color-darker) !important;
 	color:#ffffff !important;
 }
@@ -2038,5 +2038,12 @@ element.style {
   background: var(--color-light) !important;
   color:#000000 !important;
 }
-
- 
+.ProjeQtOrNewGui .reportHeader {
+	border-radius: 5px;
+ }
+.ProjeQtOrNewGui #detailReportDiv {
+	margin-top:10px;
+}
+.ProjeQtOrNewGui .whiteBackground, .ProjeQtOrNewGui .whiteBackground:hover {
+	border: 0px solid #ffffff !important;
+}

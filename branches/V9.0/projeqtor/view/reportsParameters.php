@@ -79,7 +79,7 @@ foreach ($listParam as $param) {
     <input type="hidden" id='periodValue' name='periodValue' value='<?php echo $currentYear . $currentWeek;?>' />
     <input type="hidden" id='periodType' name='periodType' value='week'/>
     <tr>
-    <td class="label"><label><?php echo i18n("year");?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n("year");?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td><div style="width:70px; text-align: center; color: #000000;" 
       dojoType="dijit.form.NumberSpinner" 
       constraints="{min:2000,max:2100,places:0,pattern:'###0'}"
@@ -96,7 +96,7 @@ foreach ($listParam as $param) {
     </div></td>
     </tr>
     <tr>
-    <td class="label"><label><?php echo i18n("week");?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n("week");?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td><div style="width:55px; text-align: center; color: #000000;" 
        dojoType="dijit.form.NumberSpinner" 
        constraints="{min:0,max:55,places:0,pattern:'00'}"
@@ -135,7 +135,7 @@ foreach ($listParam as $param) {
     <input type="hidden" id='periodValue' name='periodValue' value='<?php echo $currentYear . $currentMonth;?>' />
     <input type="hidden" id='periodType' name='periodType' value='month'/>
     <tr>
-    <td class="label"><label><?php echo i18n("year");?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n("year");?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td><div style="width:70px; text-align: center; color: #000000;" 
       dojoType="dijit.form.NumberSpinner" 
       constraints="{min:2000,max:2100,places:0,pattern:'###0'}"
@@ -160,7 +160,7 @@ foreach ($listParam as $param) {
     </td>
     </tr>
     <tr>
-    <td class="label"><label><?php echo i18n("month");?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n("month");?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td><div style="width:55px; text-align: center; color: #000000;" 
        dojoType="dijit.form.NumberSpinner" 
        constraints="{min:0,max:13,places:0,pattern:'00'}"
@@ -204,7 +204,7 @@ foreach ($listParam as $param) {
     <input type="hidden" id='periodValue' name='periodValue' value='<?php echo $currentYear;?>' />
     <input type="hidden" id='periodType' name='periodType' value='year'/>
     <tr>
-    <td class="label"><label><?php echo i18n("year");?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n("year");?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td><div style="width:70px; text-align: center; color: #000000;" 
       dojoType="dijit.form.NumberSpinner" 
       constraints="{min:2000,max:2100,places:0,pattern:'###0'}"
@@ -222,7 +222,7 @@ foreach ($listParam as $param) {
     if (Parameter::getGlobalParameter("reportStartMonth")!='NO') {
     ?>
     <tr>
-    <td class="label"><label><?php echo i18n("startMonth");?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n("startMonth");?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td><div style="width:55px; text-align: center; color: #000000;" 
        dojoType="dijit.form.NumberSpinner" 
        constraints="{min:1,max:12,places:0,pattern:'00'}"
@@ -258,7 +258,7 @@ foreach ($listParam as $param) {
     ?>
         <!-- START TICKET #383 - F.KARA : Add a number of months -->
       <tr>
-          <td class="label"><label><?php echo i18n("NbMonth");?>&nbsp;:&nbsp;</label></td>
+          <td class="label"><label><?php echo i18n("NbMonth");?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
           <td><div style="width:55px; text-align: center; color: #000000;"
                    dojoType="dijit.form.NumberSpinner"
                    constraints="{min:1,max:12,places:0,pattern:'00'}"
@@ -282,7 +282,7 @@ foreach ($listParam as $param) {
     }
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td><div style="width:100px; text-align: center; color: #000000;" 
       dojoType="dijit.form.DateTextBox" 
       <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -299,7 +299,7 @@ foreach ($listParam as $param) {
     $defaultValue=$param->defaultValue;
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select dojoType="dijit.form.FilteringSelect" class="input" 
     <?php echo autoOpenFilteringSelect();?>
@@ -319,7 +319,7 @@ foreach ($listParam as $param) {
     $defaultValue=$param->defaultValue;
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select dojoType="dijit.form.FilteringSelect" class="input" 
     <?php echo autoOpenFilteringSelect();?>
@@ -336,7 +336,7 @@ foreach ($listParam as $param) {
     $defaultValue=$param->defaultValue;
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select dojoType="dijit.form.FilteringSelect" class="input" 
     <?php echo autoOpenFilteringSelect();?>
@@ -364,11 +364,11 @@ foreach ($listParam as $param) {
     }
 ?>
     <tr id="tr_<?php echo $param->name;?>" style="visibility:<?php echo ($param->name=='showAdminProj' and $report->id=='4' and ($projectVal=='*' or $projectVal==''))?'hidden;':'visible;';?>">
-    <td class="label" ><label style="white-space:nowrap"><?php echo i18n('col'.ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label" ><label style="white-space:nowrap"><?php echo i18n('col'.ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
       <div dojoType="dijit.form.CheckBox" type="checkbox" 
         id="<?php echo $param->name;?>" name="<?php echo $param->name;?>"
-        style=""
+        style="<?php if (isNewGui()) echo 'position:relative;top:4px';?>"
         <?php echo ($defaultValue)?' checked ':'';?> >
       </div>
     </td>
@@ -390,7 +390,7 @@ foreach ($listParam as $param) {
     }
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select dojoType="dijit.form.FilteringSelect" class="input" 
     <?php echo autoOpenFilteringSelect();?>
@@ -453,7 +453,7 @@ foreach ($listParam as $param) {
     }
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select dojoType="dijit.form.FilteringSelect" class="input" 
     <?php echo autoOpenFilteringSelect();?>
@@ -500,7 +500,7 @@ foreach ($listParam as $param) {
     }
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select dojoType="dijit.form.FilteringSelect" class="input" 
     <?php echo autoOpenFilteringSelect();?>
@@ -516,7 +516,7 @@ foreach ($listParam as $param) {
     $defaultValue=$param->defaultValue;
     ?>
   <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
       <select dojoType="dijit.form.FilteringSelect" class="input"
       <?php echo autoOpenFilteringSelect();?>
@@ -532,7 +532,7 @@ foreach ($listParam as $param) {
     $defaultValue=$param->defaultValue;
     ?>
   <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
       <select dojoType="dijit.form.FilteringSelect" class="input"
       <?php echo autoOpenFilteringSelect();?>
@@ -565,7 +565,7 @@ foreach ($listParam as $param) {
     }
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <?php if (! $canChangeResource) $param->multiple=0;?>
     <select dojoType="<?php echo (($param->multiple == 1) ? 'dojox.form.CheckedMultiSelect' : 'dijit.form.FilteringSelect') ?>" class="input" 
@@ -584,7 +584,7 @@ foreach ($listParam as $param) {
     $defaultValue='';
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select dojoType="dijit.form.FilteringSelect" class="input" 
     <?php echo autoOpenFilteringSelect();?>
@@ -603,7 +603,7 @@ foreach ($listParam as $param) {
     if (! is_numeric($defaultValue)) $defaultValue=null;
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select dojoType="dijit.form.FilteringSelect" class="input" 
     <?php echo autoOpenFilteringSelect();?>
@@ -619,7 +619,7 @@ foreach ($listParam as $param) {
     $defaultValue='';
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
       <input dojoType="dijit.form.CheckBox" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" />
     </td>
@@ -629,7 +629,7 @@ foreach ($listParam as $param) {
     $defaultValue='';
     ?>
   <tr>
-  <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+  <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
   <td>
     <input dojoType="dijit.form.CheckBox" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" />
   </td>
@@ -642,7 +642,7 @@ foreach ($listParam as $param) {
     }
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select dojoType="dijit.form.FilteringSelect" class="input" 
     <?php echo autoOpenFilteringSelect();?>
@@ -662,7 +662,7 @@ foreach ($listParam as $param) {
     $arr=SqlList::getListNotTranslated('Importable');
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select dojoType="dijit.form.FilteringSelect" class="input" 
     <?php echo autoOpenFilteringSelect();?>
@@ -690,7 +690,7 @@ foreach ($listParam as $param) {
     }
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>#
     <div style="width:60px; text-align: left; color: #000000;" 
       dojoType="dijit.form.TextBox" 
@@ -710,7 +710,7 @@ foreach ($listParam as $param) {
     $defaultPeriodScale=$defList[1];
 ?>
     <tr style="height:10px;">
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td >
 	    <div style="width:20px; text-align: left; color: #000000;" 
 	      dojoType="dijit.form.NumberTextBox"
@@ -738,7 +738,7 @@ foreach ($listParam as $param) {
   	}
 ?>
   	<tr>
-  	<td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+  	<td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
   	<td>
   		<table>
   			<tr>
@@ -803,7 +803,7 @@ foreach ($listParam as $param) {
   	}
 ?>
 	<tr>
-	<td class="label"><label><?php echo i18n('numberOfDays');?>&nbsp;:&nbsp;</label></td>
+	<td class="label"><label><?php echo i18n('numberOfDays');?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
 	<td>
 	<div dojoType="dijit.form.TextBox" type="text" class="input" style="width: 150px" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" value="<?php echo $defaultValue;?>" />
 	</td>
@@ -816,7 +816,7 @@ foreach ($listParam as $param) {
       }
   ?>
     <tr>
-    <td class="label"><label><?php echo i18n('numberOfMonths');?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('numberOfMonths');?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <div dojoType="dijit.form.NumberSpinner" type="text" class="input" style="width: 55px" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" value="<?php echo $defaultValue;?>" />
     </td>
@@ -827,7 +827,7 @@ foreach ($listParam as $param) {
       } else if ($param->paramType=='urgencyList') {
     ?>
   	<tr>
-  	<td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+  	<td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
   	<td>
   		<table>
   			<tr>
@@ -893,7 +893,7 @@ foreach ($listParam as $param) {
   	}
 ?>
 	<tr>
-	<td class="label"><label><?php echo i18n('numberOfDays');?>&nbsp;:&nbsp;</label></td>
+	<td class="label"><label><?php echo i18n('numberOfDays');?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
 	<td>
 	<div dojoType="dijit.form.TextBox" type="text" class="input" style="width: 150px" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" value="<?php echo $defaultValue;?>" />
 	</td>
@@ -906,7 +906,7 @@ foreach ($listParam as $param) {
   	}
 ?>
 	<tr>
-	<td class="label"><label><?php echo i18n('numberOfMonths');?>&nbsp;:&nbsp;</label></td>
+	<td class="label"><label><?php echo i18n('numberOfMonths');?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
 	<td>
 	<div dojoType="dijit.form.NumberSpinner" type="text" class="input" style="width: 55px" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" value="<?php echo $defaultValue;?>" />
 	</td>
@@ -917,7 +917,7 @@ foreach ($listParam as $param) {
 } else if ($param->paramType=='criticalityList') {
   ?>
   	<tr>
-  	<td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+  	<td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
   	<td>
   		<table>
   			<tr>
@@ -983,7 +983,7 @@ foreach ($listParam as $param) {
   	}
 ?>
 	<tr>
-	<td class="label"><label><?php echo i18n('numberOfDays');?>&nbsp;:&nbsp;</label></td>
+	<td class="label"><label><?php echo i18n('numberOfDays');?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
 	<td>
 	<div dojoType="dijit.form.TextBox" type="text" class="input" style="width: 150px" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" value="<?php echo $defaultValue;?>" />
 	</td>
@@ -996,7 +996,7 @@ foreach ($listParam as $param) {
   	}
 ?>
 	<tr>
-	<td class="label"><label><?php echo i18n('numberOfMonths');?>&nbsp;:&nbsp;</label></td>
+	<td class="label"><label><?php echo i18n('numberOfMonths');?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
 	<td>
 	<div dojoType="dijit.form.NumberSpinner" type="text" class="input" style="width: 55px" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" value="<?php echo $defaultValue;?>" />
 	</td>
@@ -1020,7 +1020,7 @@ foreach ($listParam as $param) {
     if (! class_exists($class)) continue;
 ?>
     <tr>
-    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+    <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select data-dojo-type="<?php echo (($param->multiple == 1) ? 'dojox.form.CheckedMultiSelect' : 'dijit.form.FilteringSelect') ?>" class="input" 
     <?php echo ($param->multiple == 1) ? '' : autoOpenFilteringSelect(); ?>
@@ -1096,7 +1096,7 @@ foreach ($listParam as $param) {
       <button title="<?php echo i18n('defineAsFavorite')?>"   
          dojoType="dijit.form.Button" type="button" 
          id="reportDefineAsFavorite" name="reportDefineAsFavorite" 
-         iconClass="iconReportsFavorite" class="detailButton whiteBackground" showLabel="false"
+         iconClass="imageColorNewGui iconReportsFavorite iconSize22" class="detailButton whiteBackground" showLabel="false"
          onclick="saveReportAsFavorite();">
       </button>
       <?php }?>

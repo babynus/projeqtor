@@ -3,24 +3,19 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<g id="Calque_1_1_">
-</g>
 <g id="Calque_2_1_">
 	<g>
-		
-			<polygon fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-			14,43.816 42.234,18.932 87.846,18.932 114.789,43.816 64.404,109.068 		"/>
-		
-			<polyline fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-			42.234,18.932 64.404,43.922 87.846,18.932 		"/>
-		
-			<line fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="14" y1="43.816" x2="114.789" y2="43.816"/>
-		
-			<polyline fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-			82.375,43.816 64.404,109.068 48.591,43.816 		"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M123.407,121.297c0,1.323-1.072,2.399-2.404,2.399H6.409c-1.328,0-2.4-1.078-2.4-2.399V6.697c0-1.325,1.072-2.398,2.4-2.398
+			h114.598c1.328,0,2.4,1.073,2.4,2.398V121.297L123.407,121.297z"/>
+		<circle fill="#FF0000" cx="31.307" cy="34.015" r="8.48"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M49.153,34.016h50.392"/>
+		<circle fill="#FF0000" cx="31.307" cy="63.997" r="8.48"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M49.153,63.997h50.392"/>
+		<circle fill="#FF0000" cx="31.307" cy="93.974" r="8.481"/>
+		<path fill="none" stroke="#FF0000" stroke-width="5" stroke-miterlimit="10" d="M49.153,93.97h50.392"/>
 	</g>
 </g>
-<path fill="none" stroke="#FF0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M124.094,121.299c0,1.324-1.072,2.4-2.404,2.4H7.095c-1.327,0-2.399-1.078-2.399-2.4V6.699c0-1.325,1.072-2.398,2.399-2.398h114.599
-	c1.328,0,2.4,1.073,2.4,2.398V121.299L124.094,121.299z"/>
+<g id="Calque_1_1_">
+</g>
 </svg>
