@@ -1371,7 +1371,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           }
           vDateRowStr = JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat);
           var vBaselineTopTitle="";
-          if ( vTaskList[i].getBaseTopStart()) {              
+          if ( vTaskList[i].getBaseTopStart() && planningPage!='PortfolioPlanning') {              
             vBaseStart=vTaskList[i].getBaseTopStart();
             vDateBaseStr = JSGantt.formatDateStr(vBaseStart,vDateDisplayFormat);
             vBaselineTopTitle="\n"+vBaseTopName+" : "+vDateBaseStr;
@@ -1388,7 +1388,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             }
           }
           var vBaselineBottomTitle="";
-          if ( vTaskList[i].getBaseBottomStart()) {              
+          if ( vTaskList[i].getBaseBottomStart() && planningPage!='PortfolioPlanning') {              
             vBaseStart=vTaskList[i].getBaseBottomStart();
             vDateBaseStr = JSGantt.formatDateStr(vBaseStart,vDateDisplayFormat);
             vBaselineBottomTitle="\n"+vBaseBottomName+" : "+vDateBaseStr;
