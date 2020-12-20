@@ -148,7 +148,7 @@ if (!Parameter::getGlobalParameter('paramAttachmentDirectory') or !Parameter::ge
 if (isset($debugReport) and $debugReport) {
   $pos=strpos($_SERVER["SCRIPT_NAME"], '/report/');
   if ($pos!==false) {
-    echo substr($_SERVER["SCRIPT_NAME"], $pos);
+    echo '<div style="color:var(--color-medium);position:absolute;right:17px;top:-3px;font-size:90%">'.substr($_SERVER["SCRIPT_NAME"], $pos).'</div>';
   }
 }
 if (false===function_exists('lcfirst')) {

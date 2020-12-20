@@ -31,8 +31,8 @@
   scriptLog('   ->/view/reportsMain.php');  
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Report" />
-<div class="container" dojoType="dijit.layout.BorderContainer">
-  <div id="listReportDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:245px;">
+<div class="container" dojoType="dijit.layout.BorderContainer" id="mainReportContainer">
+  <div id="listReportDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:100%;">
    <?php include 'reportsList.php'?>
   </div>
   <div id="detailReportDiv" dojoType="dijit.layout.ContentPane" region="center">
