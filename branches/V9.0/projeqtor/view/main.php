@@ -917,7 +917,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
           echo '<option value="'.$cl.'" '.$selected.' style="color:#fff !important;">';
           echo '<div style="z-index:9999;height:25px;vertical-align:middle;top:2px;width:190px;" value="'.$cl.'" '.$selected.' class="menuSelectList" onMouseOver="clearTimeout(closeMenuListTimeout);" onMouseLeave="hideMenuList(200,\''.$cl.'\');">';
           echo '  <div style="z-index:9;position:absolute;height:23px;width:25px;left:1px;background-color:#ffffff;border-radius:5px;opacity: 0.5;">&nbsp;</div>';
-          echo '  <span style="z-index:10;position:absolute;height:22px;left:2px;" class="icon'.ucfirst($cl).'22">&nbsp;</span>';
+          echo '  <span style="z-index:10;position:absolute;height:22px;left:2px;" class="icon'.ucfirst($cl).'22 icon'.ucfirst($cl).' iconSize22">&nbsp;</span>';
           echo '  <span style="z-index:11;position:absolute;left:30px;top:9px;">'. i18n('menu'.ucfirst($clVal)).'</span>';
           echo '</div>';
           echo '</option>';
