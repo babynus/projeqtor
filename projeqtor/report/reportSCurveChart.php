@@ -399,7 +399,7 @@ $graph->drawText($graphWidth-40,$graphHeight-120,$title,$format);
 
 if ($endACWP>$endBCWS) {
   $delayGap=dayDiffDates($endBCWS, $endACWP);
-  $delayGapOpen=workDayDiffDates($endBCWS, $endACWP)-1;
+  $delayGapOpen=intval(workDayDiffDates($endBCWS, $endACWP))-1;
   $format=array("R"=>100, "G"=>50, "B"=>50, "Align"=>TEXT_ALIGN_BOTTOMRIGHT, "FontSize"=>'12');
   $title=i18n('legendDelayNegative');
 } else {
