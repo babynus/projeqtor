@@ -213,13 +213,15 @@ function drawButtonsPlanning() {
 
 // ================================================== BUTTONS DEFAULT (NEW, FILTER, COLUMNS)
 function drawButtonsDefault() {
-  global $objectClass, $planningType;?>
+  global $objectClass, $planningType, $showListFilter;
+  ?>
   <table style="width:10px">
     <tr>
       <?php 
-      if ($planningType=='planning' or $planningType=='resource' or $planningType=='global') {?>
+      if ($planningType=='planning' or $planningType=='resource' or $planningType=='global' or $planningType=='version') {?>
         <td colspan="1" width="51px" style="<?php if (isNewGui()) echo 'padding-right: 5px;';?>">
           <?php // ================================================================= NEW ?>
+          <?php if ($planningType=='version') {?><div id ="addNewActivity" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>;"><?php } ?>
           <div dojoType="dijit.form.DropDownButton"
             class="comboButton"   
             id="planningNewItem" jsId="planningNewItem" name="planningNewItem" 
@@ -227,12 +229,10 @@ function drawButtonsDefault() {
             title="<?php echo i18n('comboNewButton');?>">
             <span>title</span>
             <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
-              <div style="font-weight:bold; height:25px;text-align:center">
-                <?php echo i18n('comboNewButton');?>
-              </div>
+              <div style="font-weight:bold; height:25px;text-align:center"><?php echo i18n('comboNewButton');?>      </div>
               <?php 
               $arrayItems=array('Project','Activity','Milestone','Meeting','PeriodicMeeting','TestSession');
-              if ($planningType=='resource') $arrayItems=array('Activity');
+              if ($planningType=='resource' or $planningType=='version') $arrayItems=array('Activity');
               if ($planningType=='global') $arrayItems=array_merge($arrayItems,array('Ticket','Action','Decision','Delivery','Risk','Issue','Opportunity','Question'));
               foreach($arrayItems as $item) {
                 $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
@@ -254,7 +254,8 @@ function drawButtonsDefault() {
                 } 
               }?>
             </div>
-          </div>        
+          </div>
+          <?php if ($planningType=='version') {?></div><?php } ?>        
         </td>   
       <?php
       } 
@@ -278,9 +279,10 @@ function drawButtonsDefault() {
       }
       ?>
       <?php 
-      if ($planningType=='planning' or $planningType=='resource') {?>
+      if ($planningType=='planning' or $planningType=='resource' or $planningType=='version') {?>
         <td colspan="1" width="55px" style="padding-left:1px";>
           <?php // ================================================================= FILTER ?>
+          <?php if ($planningType=='version') {?><div id="listFilterAdvanced" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>;"><?php }?>
           <button title="<?php echo i18n('advancedFilter')?>"  
             class="comboButton"
             dojoType="dijit.form.DropDownButton" 
@@ -320,6 +322,7 @@ function drawButtonsDefault() {
               }?>
             </div> 
           </button>
+          <?php if ($planningType=='version') {?></div><?php }?>
         </td>
       <?php 
       }?>  
@@ -343,6 +346,7 @@ function drawButtonsDefault() {
               <?php 
               if ($planningType=='portfolio') $portfolioPlanning=true;
               if ($planningType=='contract') $contractGantt=true;
+              if ($planningType=='version') $versionPlanning=true;
               include('../tool/planningColumnSelector.php');?>
             </div>
             <div style="height:5px;"></div>    
@@ -409,7 +413,7 @@ function drawOptionBaseline() {
 
 // ================================================== CHECKBOXES FOR DISPLAY OPTIONS 
 function drawOptionsDisplay() {
-  global $saveShowWbs, $saveShowClosed, $saveShowResource,$planningType;?>
+  global $saveShowWbs, $saveShowClosed, $saveShowResource,$planningType, $showListFilter,$showClosedPlanningVersion;?>
   <table width="100%">
     <?php if ($planningType!='contract' and $planningType!='version') {?>
     <tr class="checkboxLabel">
@@ -429,6 +433,16 @@ function drawOptionsDisplay() {
     <tr class="checkboxLabel">
       <td><?php echo ucfirst(i18n("labelShowIdle".((isNewGui())?'':'Short')));?></td>
       <td>
+        <?php if ($planningType=='version') {?>
+        <div title="<?php echo i18n('labelShowIdle')?>" dojoType="dijit.form.CheckBox" 
+         class="whiteCheck" type="checkbox" id="showClosedPlanningVersion" name="showClosedPlanningVersion"
+         <?php if ($showClosedPlanningVersion=='1') { echo ' checked="checked" '; }?> >
+          <script type="dojo/method" event="onChange" >
+            saveUserParameter('planningVersionShowClosed',((this.checked)?'1':'0'));
+            refreshJsonPlanning();
+          </script>
+        </div>
+        <?php } else {?>
         <div title="<?php echo ucfirst(i18n('showIdleElements'));?>" dojoType="dijit.form.CheckBox" 
           class="whiteCheck" type="checkbox" id="listShowIdle" name="listShowIdle"
           <?php if ($saveShowClosed=='1') { echo ' checked="checked" '; }?> >
@@ -437,21 +451,29 @@ function drawOptionsDisplay() {
             refreshJsonPlanning();
           </script>
         </div>&nbsp;
+        <?php }?>
       </td>
     </tr>
     <?php 
-    if (strtoupper(Parameter::getUserParameter('displayResourcePlan'))!='NO' and ($planningType=='planning' or  $planningType=='global' or $planningType=='contract') ) {?>
+    if (strtoupper(Parameter::getUserParameter('displayResourcePlan'))!='NO' and ($planningType=='planning' or  $planningType=='global' or $planningType=='contract' or $planningType=='version') ) {?>
       <tr class="checkboxLabel">
-        <td><?php echo ucfirst(i18n("labelShowResource".((isNewGui())?'':'Short')));?></td>
         <td>
+          <?php if ($planningType=='version') {?><div id="displayRessource" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>;"><?php }?>
+          <?php echo ucfirst(i18n("labelShowResource".((isNewGui())?'':'Short')));?>
+          <?php if ($planningType=='version') {?></div><?php }?>
+        </td>
+        <td>
+          <?php if ($planningType=='version') {?><div id="displayRessourceCheck" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>!important;"><?php }?>
           <div title="<?php echo ucfirst(i18n('showResources'));?>" dojoType="dijit.form.CheckBox" 
-            class="whiteCheck" type="checkbox" id="listShowResource" name="listShowResource"
+            class="whiteCheck" type="checkbox" 
+            <?php if ($planningType=='version') {?>id="showRessourceComponentVersion" name="showRessourceComponentVersion"<?php } else { ?>id="listShowResource" name="listShowResource"<?php }?> 
             <?php if ($saveShowResource=='1') { echo ' checked="checked" '; }?> >
             <script type="dojo/method" event="onChange" >
               saveUserParameter('planningShowResource',((this.checked)?'1':'0'));
               refreshJsonPlanning();
             </script>
           </div>&nbsp;
+          <?php if ($planningType=='version') {?></div><?php }?>
         </td>
       </tr>
     <?php 
@@ -659,5 +681,143 @@ function drawGlobalItemsSelector() {
 	</div>       
 <?php             
 }
-?>
+function drawVersionOptionsComponentVersionActivity() {
+  global $displayComponentVersionActivity;
+  ?>
+  <td style="padding-right:5px;padding-left:20px;text-align: right;">
+    <?php echo ucfirst(i18n('displayComponentVersionActivity'));?>
+  </td>
+  <td>
+    <div title="<?php echo ucfirst(i18n('displayComponentVersionActivity'));?>" dojoType="dijit.form.CheckBox" 
+     class="whiteCheck" type="checkbox" id="listDisplayComponentVersionActivity" name="listDisplayComponentVersionActivity"
+     <?php if ($displayComponentVersionActivity=='1') { echo ' checked="checked" '; }?> >
+      <script type="dojo/method" event="onChange" >
+        saveUserParameter('planningVersionDisplayComponentVersionActivity',((this.checked)?'1':'0'));
+        showListFilter('planningVersionDisplayComponentVersionActivity',((this.checked)?'1':'0'));
+        refreshJsonPlanning();
+      </script>
+    </div>
+  </td>
+<?php 
+}
+function drawVersionOptionsVersionsWithoutActivity() {
+  global $showListFilter;
+  ?>
+  <td style="padding-right:5px;padding-left:20px;text-align: right;" >
+	  <div id="versionsWithoutActivity" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>;">
+      <?php echo ucfirst(i18n('versionsWithoutActivity'));?>
+    </div>
+  </td>
+  <td>
+	  <div id="hideVersionsWithoutActivityCheck" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>!important;">
+      <div title="<?php echo ucfirst(i18n('versionsWithoutActivityCheck'));?>" dojoType="dijit.form.CheckBox" 
+       class="whiteCheck" type="checkbox" id="versionsWithoutActivityCheck" name="versionsWithoutActivityCheck"
+       <?php if ($hideversionsWithoutActivity=Parameter::getUserParameter('versionsWithoutActivity')=='1') { echo ' checked="checked" '; }?> >
+        <script type="dojo/method" event="onChange" >
+          saveUserParameter('versionsWithoutActivity',((this.checked)?'1':'0'));
+          refreshJsonPlanning();
+        </script>
+      </div>
+    </div>
+  </td>
+<?php
+} 
+function drawVersionOptionsProductVersionActivity() {
+  global $showListFilter, $displayProductVersionActivity;
+  ?>
+  <td style="padding-right:5px;padding-left:20px;text-align: right;">
+    <?php echo ucfirst(i18n('displayProductVersionActivity'));?>
+  </td>
+  <td>
+    <div title="<?php echo ucfirst(i18n('displayProductVersionActivity'));?>" dojoType="dijit.form.CheckBox" 
+     class="whiteCheck" type="checkbox" id="listDisplayProductVersionActivity" name="listDisplayProductVersionActivity"
+     <?php if ($displayProductVersionActivity=='1') { echo ' checked="checked" '; }?> >
+      <script type="dojo/method" event="onChange" >
+        saveUserParameter('planningVersionDisplayProductVersionActivity',((this.checked)?'1':'0'));
+        showListFilter('planningVersionDisplayProductVersionActivity',((this.checked)?'1':'0'));
+        refreshJsonPlanning();
+      </script>
+    </div>
+  </td>
+<?php
+} 
 
+function drawVersionOptionsOnlyActivesVersions() {
+  global $showOnlyActivesVersions,$showListFilter;?>
+  <td  style="padding-right:5px;padding-left:20px;text-align: right;" > 
+    <?php echo ucfirst(i18n('showOnlyActivesVersions'));?>
+  </td>
+  <td>  
+    <div title="<?php echo ucfirst(i18n('showOnlyActivesVersions'));?>" dojoType="dijit.form.CheckBox" 
+     class="whiteCheck" type="checkbox" id="showOnlyActivesVersions" name="showOnlyActivesVersions"
+     <?php if ($showOnlyActivesVersions=='1') { echo ' checked="checked" '; }?> >
+      <script type="dojo/method" event="onChange" >
+        saveUserParameter('showOnlyActivesVersions',((this.checked)?'1':'0'));
+        refreshJsonPlanning();
+      </script>
+    </div>
+  </td>
+<?php 
+}
+function drawVersionOptionsOneTimeActivities() {
+  global $showOneTimeActivities,$showListFilter;?>
+  <td  style="padding-right:5px;padding-left:20px;text-align: right;" >
+    <div id="hideOneTimeActivitiesLabel" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>;">
+      <span for="showOneTimeActivities"><?php echo ucfirst(i18n("versionPlanningShowOneTimeActivities"));?></span>
+    </div>
+  </td>
+  <td>
+    <div id="hideOneTimeActivitiesCheck" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>!important;">  
+    <span title="<?php echo ucfirst(i18n('versionPlanningShowOneTimeActivities'));?>" dojoType="dijit.form.CheckBox"
+     type="checkbox" id="showOneTimeActivities" name="showOneTimeActivities" class="whiteCheck"
+     <?php if ( $showOneTimeActivities) {echo 'checked="checked"'; } ?>  >
+      <script type="dojo/method" event="onChange" >
+        saveUserParameter('showOneTimeActivities',((this.checked)?'1':'0'));
+        refreshJsonPlanning();
+      </script>
+    </span>
+    </div>
+  </td>
+<?php 
+}                            
+function drawVersionOptionsProjectLevels() {
+  global $showProjectLevel,$showListFilter;?>
+  <td style="padding-right:5px;padding-left:20px;text-align: right;">
+    <div id="hideProjectLevelLabel" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>;">
+    <?php echo ucfirst(i18n('labelShowProjectLevel'));?>
+    </div>
+  </td>
+  <td>
+      <div id="hideProjectLevelCheck" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>;">
+    <div title="<?php echo ucfirst(i18n('labelShowProjectLevel'));?>" dojoType="dijit.form.CheckBox"
+     class="whiteCheck" type="checkbox" id="showProjectLevel" name="showProjectLevel"
+     <?php if ($showProjectLevel) { echo ' checked="checked" '; }?> >
+      <script type="dojo/method" event="onChange" >
+        saveUserParameter('planningVersionShowProjectLevel',((this.checked)?'1':'0'));
+        refreshJsonPlanning();
+      </script>
+    </div>
+  </td>
+<?php 
+}                            
+function drawVersionOptionsActivityHierarchy() {
+  global $showActivityHierarchy,$showListFilter;?>  
+  <td style="padding-right:5px;padding-left:20px;text-align: right;">
+    <div id="hideActivityHierarchyLabel" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>;">
+    <?php echo ucfirst(i18n('labelShowActivityHierarchy'));?>
+    </div>
+  </td>
+  <td>
+    <div id="hideActivityHierarchyCheck" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>;">
+    <div title="<?php echo ucfirst(i18n('labelShowActivityHierarchy'));?>" dojoType="dijit.form.CheckBox"
+     class="whiteCheck" type="checkbox" id="showActivityHierarchy" name="showActivityHierarchy"
+     <?php if ($showActivityHierarchy) { echo ' checked="checked" '; }?> >
+      <script type="dojo/method" event="onChange" >
+        saveUserParameter('planningVersionDisplayActivityHierarchy',((this.checked)?'1':'0'));
+        refreshJsonPlanning();
+      </script>
+    </div>
+    </div>
+  </td>
+<?php 
+} ?>
