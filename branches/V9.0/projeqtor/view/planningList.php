@@ -179,12 +179,12 @@ foreach ($lstUserP as $prof){
 		            <td style="white-space:nowrap;width:<?php echo ($displayWidthPlan>1030)?240:150;?>px">
 		              <table align="right" style="margin:7px">
                     <tr>
-                      <td align="right">&nbsp;&nbsp;&nbsp;<?php echo ($displayWidthPlan>1030)?i18n("displayStartDate"):i18n("from");?>&nbsp;&nbsp;</td><td>
+                      <td align="right" style="white-space:nowrap">&nbsp;&nbsp;&nbsp;<?php echo ($displayWidthPlan>1030)?i18n("displayStartDate"):i18n("from");?>&nbsp;&nbsp;</td><td>
                         <?php drawFieldStartDate();?>
                       </td>
                     </tr>
                     <tr>
-                      <td align="right">&nbsp;&nbsp;&nbsp;<?php echo ($displayWidthPlan>1030)?i18n("displayEndDate"):i18n("to");?>&nbsp;&nbsp;</td>
+                      <td align="right" style="white-space:nowrap">&nbsp;&nbsp;&nbsp;<?php echo ($displayWidthPlan>1030)?i18n("displayEndDate"):i18n("to");?>&nbsp;&nbsp;</td>
                       <td>
                       <?php drawFieldEndDate();?>
 
