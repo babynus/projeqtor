@@ -593,6 +593,7 @@ class ImputationLine {
     if (!$cal) $cal=1;
     $capacity=work::getConvertedCapacity($resource->capacity);
     $weekendColor="cfcfcf";
+    if (isNewGui()) $weekendColor="f0f0f0";
     $currentdayColor="ffffaa";
     $today=date('Y-m-d');
     if ($rangeType=='week') {
@@ -710,7 +711,7 @@ class ImputationLine {
     echo '</tr></table>';
     echo '</TD>';
     echo '  <TD class="ganttLeftTitle" colspan="'.$nbDays.'" '.'style="border-right: 1px solid #ffffff;border-bottom: 1px solid #DDDDDD;width:'.($nbDays*$inputWidth).'px">'.htmlFormatDate($startDate).' - '.htmlFormatDate($endDate).'</TD>';
-    echo '  <TD class="ganttLeftTopLine" colspan="2" style="text-align:center;color: #707070;width:'.(2*$workWidth).'px">'.htmlFormatDate($today).'</TD>';
+    echo '  <TD class="ganttLeftTopLine" colspan="2" style="text-align:center;color: '.((isNewGui())?'#ffffff':'#707070').';width:'.(2*$workWidth).'px">'.htmlFormatDate($today).'</TD>';
     echo '</TR>';
     echo '<TR class="ganttHeight">';
     echo '  <TD class="ganttLeftTitle" style="width:'.$iconWidth.'px;"></TD>';
