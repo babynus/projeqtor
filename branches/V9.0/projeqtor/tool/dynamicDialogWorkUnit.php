@@ -135,7 +135,7 @@ $tabCompValues = array();
                     if($readOnly)$isReadOnly= "readOnly" ;
                   }?>
                 <td style="width:<?php echo $tdWitdh;?>%"  class="assignData">
-                <input dojoType="dijit.form.NumberTextBox" <?php echo $isReadOnly; ?> id="charge<?php echo $comp->id;?>" name="charge<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['charge'];} ?>" />
+                <input dojoType="dijit.form.NumberTextBox" <?php echo $isReadOnly; ?> id="charge<?php echo $comp->id;?>" name="charge<?php echo $comp->id;?>" type="text" style="padding:0 !important;margin:0 !important; height:100% !important;width:100% !important;" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['charge'];} ?>" />
                 </td>
                 <?php } ?>
               </tr>
@@ -148,7 +148,7 @@ $tabCompValues = array();
                     if($readOnly)$isReadOnly= "readOnly";
                   }?>
                 <td style="width:<?php echo $tdWitdh;?>%" class="assignData">
-                <input dojoType="dijit.form.NumberTextBox" <?php echo $isReadOnly; ?> id="price<?php echo $comp->id;?>" name="price<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['price'];} ?>" />
+                <input dojoType="dijit.form.NumberTextBox" <?php echo $isReadOnly; ?> id="price<?php echo $comp->id;?>" name="price<?php echo $comp->id;?>" type="text" style="padding:0 !important;margin:0 !important; height:100% !important;width:100% !important;" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['price'];} ?>" />
                 </td>
                 <?php } ?>
               </tr>
@@ -161,7 +161,7 @@ $tabCompValues = array();
                     if($readOnly)$isReadOnly= "readOnly";
                   }?>
                 <td style="width:<?php echo $tdWitdh;?>%" class="assignData"> 
-                <input dojoType="dijit.form.NumberTextBox" <?php echo $isReadOnly; ?> id="duration<?php echo $comp->id;?>" name="duration<?php echo $comp->id;?>" type="text" style="width: 100%" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['duration'];} ?>" />
+                <input dojoType="dijit.form.NumberTextBox" <?php echo $isReadOnly; ?> id="duration<?php echo $comp->id;?>" name="duration<?php echo $comp->id;?>" type="text" style="padding:0 !important;margin:0 !important; height:100% !important;width:100% !important;" class="input"  value="<?php if($mode=='edit'){echo $tabCompValues[$comp->id]['duration'];} ?>" />
                  </td>
                 <?php } ?>
              </tr>

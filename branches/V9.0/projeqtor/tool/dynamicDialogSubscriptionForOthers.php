@@ -144,16 +144,25 @@ echo '<tr style="height:10px"><td colspan="3">&nbsp;</td></tr>';
 echo '<tr style="height:20px">';
 echo '<td style="position:relative">';
 echo '<input dojoType="dijit.form.TextBox" id="subscriptionAvailableSearch" class="input" style="width:210px" value="" onKeyUp="filterDnDList(\'subscriptionAvailableSearch\',\'subscriptionAvailable\',\'div\');" />';
-echo '<div style="position:absolute;right:4px;top:3px;" class="iconView iconSize16 imageColorNewGui"></div>';
+if(!isNewGui()){
+  $iconViewPosition = "right:4px;top:3px;";
+}else{
+  $iconViewPosition = "right:6px;top:10px;";
+}
+echo '<div style="position:absolute;'.$iconViewPosition.'" class="iconView iconSize16 imageColorNewGui"></div>';
 echo '</td>';
 echo '<td >&nbsp;</td>';
 echo '<td style="position:relative;">';
 echo '<input dojoType="dijit.form.TextBox" id="subscriptionSubscribedSearch" class="input" style="width:210px" value="" onKeyUp="filterDnDList(\'subscriptionSubscribedSearch\',\'subscriptionSubscribed\',\'div\');" />';
-echo '<div style="position:absolute;right:4px;top:3px;" class="iconView iconSize16 imageColorNewGui"></div>';
+echo '<div style="position:absolute;'.$iconViewPosition.'" class="iconView iconSize16 imageColorNewGui"></div>';
 echo '</td></tr>';
 echo '<tr>';
 echo '<td style="position:relative;max-width:200px;vertical-align:top;" class="noteHeader" >';
-echo '<div style="position:absolute;bottom:5px;left:5px;width:24px;height:24px;opacity:0.7;" class="dijitButtonIcon dijitButtonIconDelete" ></div>';
+$imageColorNewGui = "";
+if(isNewGui()){
+  $imageColorNewGui = 'imageColorNewGui';
+}
+echo '<div style="position:absolute;bottom:5px;left:5px;width:24px;height:24px;opacity:0.7;" class="dijitButtonIcon dijitButtonIconDelete '.$imageColorNewGui.'" ></div>';
 echo '<div style="height:'.$showHeight.';overflow:auto;" id="subscriptionAvailable" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" data-dojo-props="accept: [ \'subscription\' ]">';
 foreach($lstRes as $res) {
   drawResourceTile($res,"subscriptionAvailable");
@@ -162,7 +171,7 @@ echo '</div>';
 echo '</td>';
 echo '<td class="" ></td>';
 echo '<td style="position:relative;max-width:200px;max-height:'.$showHeight.';vertical-align:top;" class="noteHeader" >';
-echo '<div style="position:absolute;bottom:5px;left:5px;width:24px;height:24px;opacity:0.7;" class="dijitButtonIcon dijitButtonIconSubscribe" ></div>';
+echo '<div style="position:absolute;bottom:5px;left:5px;width:24px;height:24px;opacity:0.7;" class="dijitButtonIcon dijitButtonIconSubscribe '.$imageColorNewGui.'" ></div>';
 echo '<div style="height:'.$showHeight.';overflow:auto;" id="subscriptionSubscribed" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" data-dojo-props="accept: [ \'subscription\' ]">';
 foreach($lstSub as $sub) {
   drawResourceTile($sub,"subscriptionSubscribed");
