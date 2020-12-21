@@ -2050,3 +2050,27 @@ element.style {
 .ProjeQtOrNewGui .whiteBackground, .ProjeQtOrNewGui .whiteBackground:hover {
 	border: 0px solid #ffffff !important;
 }
+
+.ProjeQtOrNewGui .iconRight { background-image: url(customIcons/new/iconRight.svg);  background-repeat: no-repeat;}
+
+.ProjeQtOrNewGui .ganttLeftTitle input {
+	color:#ffffff;
+}
+.ProjeQtOrNewGui .ganttLeftTitle .imputationValidCapacity input,
+.ProjeQtOrNewGui .ganttLeftTitle .imputationInvalidCapacity input   {
+  color:#505050;
+}
+.ProjeQtOrNewGui .ganttLeftTitle .imputation {
+  border: 1px solid var(--color-darker);
+}
+.ProjeQtOrNewGui .ganttDetail .dijitTextBox, .ProjeQtOrNewGui .ganttDetail .dijitValidationTextBox {
+	border: 1px solid var(--color-medium);
+}
+
+.ProjeQtOrNewGui .ganttDetail input.dijitTextBoxReadOnly,
+.ProjeQtOrNewGui .ganttDetail .dijitReadOnly, .ProjeQtOrNewGui .ganttDetail .dijitReadOnly input,
+.ProjeQtOrNewGui .ganttDetail .displayTransparent {
+	border: 1px solid transparent;
+	background:transparent;
+}
+ 
