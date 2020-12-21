@@ -430,9 +430,9 @@ function drawOptionsDisplay() {
       </td>
     </tr>
     <?php }?>
-    <tr class="checkboxLabel">
-      <td><?php echo ucfirst(i18n("labelShowIdle".((isNewGui())?'':'Short')));?></td>
-      <td>
+    <tr class="checkboxLabel" <?php echo ($planningType=='version')?'style="height:25px"':''?>>
+      <td><?php echo ucfirst(i18n("labelShowIdle".((isNewGui() or $planningType=='version')?'':'Short')));?></td>
+      <td style="width: 30px;">
         <?php if ($planningType=='version') {?>
         <div title="<?php echo i18n('labelShowIdle')?>" dojoType="dijit.form.CheckBox" 
          class="whiteCheck" type="checkbox" id="showClosedPlanningVersion" name="showClosedPlanningVersion"
@@ -441,7 +441,7 @@ function drawOptionsDisplay() {
             saveUserParameter('planningVersionShowClosed',((this.checked)?'1':'0'));
             refreshJsonPlanning();
           </script>
-        </div>
+        </div>&nbsp;
         <?php } else {?>
         <div title="<?php echo ucfirst(i18n('showIdleElements'));?>" dojoType="dijit.form.CheckBox" 
           class="whiteCheck" type="checkbox" id="listShowIdle" name="listShowIdle"
@@ -456,13 +456,13 @@ function drawOptionsDisplay() {
     </tr>
     <?php 
     if (strtoupper(Parameter::getUserParameter('displayResourcePlan'))!='NO' and ($planningType=='planning' or  $planningType=='global' or $planningType=='contract' or $planningType=='version') ) {?>
-      <tr class="checkboxLabel">
+      <tr class="checkboxLabel" <?php echo ($planningType=='version')?'style="height:25px"':''?>>
         <td>
           <?php if ($planningType=='version') {?><div id="displayRessource" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>;"><?php }?>
-          <?php echo ucfirst(i18n("labelShowResource".((isNewGui())?'':'Short')));?>
+          <?php echo ucfirst(i18n("labelShowResource".((isNewGui() or $planningType=='version')?'':'Short')));?>
           <?php if ($planningType=='version') {?></div><?php }?>
         </td>
-        <td>
+        <td style="width: 30px;">
           <?php if ($planningType=='version') {?><div id="displayRessourceCheck" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>!important;"><?php }?>
           <div title="<?php echo ucfirst(i18n('showResources'));?>" dojoType="dijit.form.CheckBox" 
             class="whiteCheck" type="checkbox" 
