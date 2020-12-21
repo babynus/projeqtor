@@ -585,9 +585,18 @@ class WorkflowMain extends SqlElement {
       }
     } else if ($item=='hideStatus') {
     	if (!$print and $this->id) {
+    	  if(!isNewGui()){
+          $positionParameterIcon = "top:-1px;";
+          $iconClass="iconParameter iconSize16 ";
+          $class= '';
+        }else{
+          $positionParameterIcon = "top:12px;";
+          $iconClass="iconParameter iconSize22 imageColorNewGui";
+          $class= 'class="resetMargin detailButton notButton"';
+        }
         $result.='<button id="workflowParameterButton" dojoType="dijit.form.Button" showlabel="false"';
         $result.='title="'.i18n('workflowParameters').'"'; 
-        $result.='iconClass="iconParameter16" style="position:absolute;right:3px;top:-1px;">';
+        $result.=' '.$class.' iconClass="'.$iconClass.'" style="position:absolute;right:3px;'.$positionParameterIcon.'">';
         $result.=' <script type="dojo/connect" event="onClick" args="evt">';
 		    $result.='  showWorkflowParameter('.htmlEncode($this->id).');';
         $result.=' </script>';
@@ -596,9 +605,18 @@ class WorkflowMain extends SqlElement {
       //gautier tableauWorkflow
     } else if ($item=='hideProfile') {
       if (!$print and $this->id) {
+        if(!isNewGui()){
+          $positionParameterIcon = "top:-1px;";
+          $iconClass="iconParameter iconSize16 ";
+          $class= '';
+        }else{
+          $positionParameterIcon = "top:12px;";
+          $iconClass="iconParameter iconSize22 imageColorNewGui";
+          $class= 'class="resetMargin detailButton notButton"';
+        }
         $result.='<button id="workflowParameterProfileButton" dojoType="dijit.form.Button" showlabel="false"';
         $result.='title="'.i18n('workflowProfileParameters').'"';
-        $result.='iconClass="iconParameter16" style="position:absolute;right:3px;top:-1px;">';
+        $result.=' '.$class.' iconClass="'.$iconClass.'" style="position:absolute;right:3px;'.$positionParameterIcon.'">';
         $result.=' <script type="dojo/connect" event="onClick" args="evt">';
         $result.='  showWorkflowProfileParameter('.htmlEncode($this->id).');';
         $result.=' </script>';

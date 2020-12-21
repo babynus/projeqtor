@@ -590,8 +590,12 @@ static function isTheLeaveProject($id=null) {
     global $drawCheckBox;
     $result="";
     if ($item=='subprojects') {
-      $result .="<table><tr><td class='label' valign='top'><label>" . i18n('subProjects') . "&nbsp;:&nbsp;</label>";
-      $result .="</td><td>";
+      if(isNewGui()){
+        $result .="<table style='margin-left:20px;'><tr><td >";
+      }else{
+        $result .="<table><tr><td class='label' valign='top'><label>" . i18n('subProjects') . "&nbsp;:&nbsp;</label>";
+        $result .="</td><td>";
+      }
       if ($this->id) {
         $drawCheckBox = 'false';
         $result .= $this->drawSubProjects();
@@ -725,7 +729,11 @@ static function isTheLeaveProject($id=null) {
       $result .= '<i>' . i18n('allProjects') . '</i>';
       $result .= '</div></td></tr></table>';
     }
-    $result .='<table style="width:100%;">';
+    if(isNewGui()){
+      $result .='<table style="width:100%;margin-top:10px;">';
+    }else{
+      $result .='<table style="width:100%;">';
+    }
     $handled = 0;
     if (count($subList)>0) {
       $level++;
@@ -783,15 +791,19 @@ static function isTheLeaveProject($id=null) {
         	  	$left -= ($level-2)*20;
         	  }
         	}
-          $result .='<tr style="heignt:25px">';
+          $result .='<tr style="height:25px">';
           if(!$drawCheckBox){
             $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="projectSelectorCheckbox" style="float:left;position:relative;left:'.$left.'px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'" '.$checked.'>';
             $result .='</div>';
             $result .='<input type="hidden" id="projectSelectorName'.$idPrj.'" name="projectSelectorName'.$idPrj.'" value="'.$prj->name.'"></td>';
           }
-          $result .='<td valign="top" width="20px"><img src="css/images/iconList16.png" height="16px" /></td>';
+          if(!isNewGui()){
+            $result .='<td valign="top" width="20px"><img src="css/images/iconList16.png" height="16px" /></td>';
+          }else{
+            $result .='<td valign="top" width="20px"><div style="margin-right:5px;" class="iconProject16 iconProject iconSize16 imageColorNewGui"></div></td>';
+          }
           if ($selectField==null) {
-            $result .= '<td class="'.(($outMode=='html' or $outMode=='pdf')?'':'display').'"  NOWRAP>' . (($outMode=='html' or $outMode=='pdf')?htmlEncode($prj->name):htmlDrawLink($prj));
+            $result .= '<td valign="top" class="'.(($outMode=='html' or $outMode=='pdf')?'':'display').'"  NOWRAP>' . (($outMode=='html' or $outMode=='pdf')?htmlEncode($prj->name):htmlDrawLink($prj));
           } else if (! $reachLine) {
             $result .= '<td style="#AAAAAA;" NOWRAP><div class="'.(($outMode=='html' or $outMode=='pdf')?'':'display').'" style="width: 100%;">' . htmlEncode($prj->name) . '</div>';
           } else {

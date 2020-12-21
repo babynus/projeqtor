@@ -2073,4 +2073,10 @@ element.style {
 	border: 1px solid transparent;
 	background:transparent;
 }
- 
+
+.ProjeQtOrNewGui .link:hover {
+  background-color: var(--color-light);
+  text-decoration: underline;
+  color:var(--color-dark) !important;
+  font-weight: bold;
+}

@@ -418,7 +418,7 @@
           hideResultDivs();
         </script>
       </button>   
-      <div class="statusBar" id="subscribeButtonDiv" style="display:none;position:absolute;width:220px">
+      <div class="statusBar" id="subscribeButtonDiv" style="display:none;position:absolute;width:220px;z-index:100;">
         <button id="subscribeButtonSubscribe" dojoType="dijit.form.Button" showlabel="true" style="" <?php if ($subscribed) echo 'disabled';?>
           iconClass="imageColorNewGui dijitButtonIcon dijitButtonIconSubscribe" class="detailButton"><div style="width:180px;"><?php echo i18n('subscribeButton')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
