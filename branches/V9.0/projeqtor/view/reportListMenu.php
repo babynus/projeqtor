@@ -52,7 +52,7 @@ if (!$categ) {
   foreach ($listReport as $rpt) {
     if($rpt->id=="108" and Parameter::getGlobalParameter("technicalProgress")!="YES")continue;
     if (isset($allowedReport[$rpt->id])) {
-      echo "<li class='section' id='report$rpt->id' onClick='reportSelectReport($rpt->id);'><div class='bmenuText'>".i18n($rpt->name)."</div></li>";   
+      echo "<li class='section' id='report$rpt->id' onClick='reportSelectReport($rpt->id);'><div class='bmenuText'>".ucfirst(i18n($rpt->name))."</div></li>";   
     }
   }
   echo "</ul>";
