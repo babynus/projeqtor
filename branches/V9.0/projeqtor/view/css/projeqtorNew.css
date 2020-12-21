@@ -889,10 +889,11 @@ animation: fadeIn ease 0.5s;
   background: transparent url();
 }
 .ProjeQtOrNewGui .roundedButton:hover, .ProjeQtOrNewGui .roundedButtonNoBorder:hover,
-.ProjeQtOrNewGui .roundedButtonSmall:hover .iconSize22 {
+.ProjeQtOrNewGui .roundedButtonSmall:hover .iconSize22, 
+.ProjeQtOrNewGui .noRotate, .ProjeQtOrNewGui .noRotate:hover {
   -ms-transform: rotate(0deg) brightness(99%) !important; /* IE 9 */
   -webkit-transform: rotate(0deg) brightness(99%) !important; /* Chrome, Safari, Opera */
-  transform: rotate(0deg);
+  transform: rotate(0deg) !important;
 }
 
 .ProjeQtOrNewGui .roundedIconButton:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover .iconSize16,
@@ -1940,6 +1941,7 @@ element.style {
   letter-spacing:unset;
   padding:unset;
   height: 40px;
+  border-radius:5px;
 }
 .ProjeQtOrNewGui .bmenuCategText {
   font-size: 12px;
@@ -1962,7 +1964,8 @@ element.style {
 }
 .ProjeQtOrNewGui .reportSelected .bmenuText{
   background-color: var(--color-light-secondary) !important;
-  font-weight: bold;
+  font-weight: normal;
+  color: var(--color-secondary);
 }
 
 .ProjeQtOrNewGui .headerReport{
