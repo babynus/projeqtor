@@ -1882,12 +1882,11 @@
 .ProjeQtOrFlatRed .iconNotification { background-image: url(customIcons/red/iconNotification.png);  background-repeat: no-repeat;}
 .ProjeQtOrNewGui .iconNotification { background-image: url(customIcons/new/iconNotification.svg);  background-repeat: no-repeat;}
 
-.iconNotificationDefinition { background-image: url(images/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
-.ProjeQtOrFlatBlue .iconNotificationDefinition { background-image: url(customIcons/blue/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
-.ProjeQtOrFlatGreen .iconNotificationDefinition { background-image: url(customIcons/green/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
-.ProjeQtOrFlatGrey .iconNotificationDefinition { background-image: url(customIcons/grey/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
-.ProjeQtOrFlatRed .iconNotificationDefinition { background-image: url(customIcons/red/iconNotificationDefinition.png);  background-repeat: no-repeat; width:32px ;height:32px; background-size: 32px 32px; }
-.ProjeQtOrNewGui .iconNotificationDefinition16 { background-image: url(customIcons/new/iconNotificationDefinition.svg);  background-repeat: no-repeat; background-repeat: no-repeat; width:16px ;height:16px; background-size: 16px 16px; }
+.iconNotificationDefinition { background-image: url(images/iconNotificationDefinition.png);  background-repeat: no-repeat; background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconNotificationDefinition { background-image: url(customIcons/blue/iconNotificationDefinition.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatGreen .iconNotificationDefinition { background-image: url(customIcons/green/iconNotificationDefinition.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconNotificationDefinition { background-image: url(customIcons/grey/iconNotificationDefinition.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatRed .iconNotificationDefinition { background-image: url(customIcons/red/iconNotificationDefinition.png);  background-repeat: no-repeat;  }
 .ProjeQtOrNewGui .iconNotificationDefinition { background-image: url(customIcons/new/iconNotificationDefinition.svg);  background-repeat: no-repeat; }
 
 .iconNotificationManual { background-image: url(images/iconNotificationManual.png);  background-repeat: no-repeat; }
