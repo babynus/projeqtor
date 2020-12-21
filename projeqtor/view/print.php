@@ -209,7 +209,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
   </script>
 </head>
 <page backtop="100px" backbottom="20px" footer="page">
-<<?php echo ($printInNewPage or $outMode=='pdf' or (isset($outModeBack) and $outModeBack=='pdf')) ?'body':'div';?> style="-webkit-print-color-adjust: exact;<?php echo ($outMode=='pdf' and $pdfLib!='WkHtmlToPdf')?'font-size:90%;overflow:auto;':''; ?>" id="bodyPrint" class="tundra ProjeQtOrFlatGrey <?php if (isNewGui() and $outMode!='pdf') echo 'ProjeQtOrNewGui';?>" onload="<?php if (isNewGui()) echo 'setColorTheming();';?>window.top.hideWait();">
+<<?php echo ($printInNewPage or $outMode=='pdf' or (isset($outModeBack) and $outModeBack=='pdf')) ?'body':'div';?> style="-webkit-print-color-adjust: exact;<?php echo ($outMode=='pdf' and $pdfLib!='WkHtmlToPdf')?'font-size:90%;overflow:auto;':''; ?>" id="bodyPrint" class="tundra ProjeQtOrFlatGrey <?php if (0 and isNewGui() and $outMode!='pdf') echo 'ProjeQtOrNewGui';?>" onload="<?php if (isNewGui()) echo 'setColorTheming();';?>window.top.hideWait();">
   <?php 
   }
   $page=$_REQUEST['page'];
