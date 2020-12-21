@@ -180,7 +180,7 @@ if (is_array(getSessionUser()->_arrayFilters)) {
 							             showlabel="false" class="comboButton" iconClass="dijitButtonIcon dijitButtonIconExtraButtons" class="detailButton" 
 							             title="<?php echo i18n('extraButtons');?>">
                            <div dojoType="dijit.TooltipDialog" class="white" id="extraButtonImputationDialog"
-							              style="position: absolute; top: 50px; right: 40%">        
+							              style="position: absolute; top: 50px; right: 40%;max-width:800px">        
                                <table >
                                  <tr style="height:30px">
                                    <td colspan="2" style="position:relative;">
@@ -207,8 +207,8 @@ if (is_array(getSessionUser()->_arrayFilters)) {
                                    </td>
                                  </tr>
                                  <tr>
-                                   <td>
-                                     <table>
+                                   <td style="width:60%;">
+                                     <table style="">
                                        <tr class="checkboxLabel"><?php drawVersionOptionsOnlyActivesVersions();?></tr>
                                        <tr class="checkboxLabel"><?php drawVersionOptionsComponentVersionActivity();?></tr>
                                        <tr class="checkboxLabel"><?php drawVersionOptionsProductVersionActivity();?></tr>
@@ -219,7 +219,7 @@ if (is_array(getSessionUser()->_arrayFilters)) {
                                      </table>                                       
                                      
                                    </td>
-		                               <td style="text-align: right; align: right;vertical-align:top;">
+		                               <td style="width:40%;text-align: right; align: right;vertical-align:top;">
                                      <?php drawOptionsDisplay();?> 
                                      <br/>
 		                               </td>
