@@ -152,7 +152,7 @@ foreach ($listParam as $param) {
     </div>
     <?php if (!$defaultYear) {?>
     <div class="roundedVisibleButton roundedButton generalColClass" 
-      style="text-align:center;float:right;margin-right:10px; padding:0px 5px;width:50%;height:16px;" 
+      style="text-align:center;float:right;margin-right:0px; width:50%;<?php echo (isNewGui())?'padding:3px 5px;position:relative;top:4px;':'padding:0px 5px;height:16px;';?>"
       onclick="dijit.byId('yearSpinner').set('value','<?php echo date('Y');?>');">
       <?php echo i18n('setToCurrentYear');?>
     </div>
@@ -187,7 +187,7 @@ foreach ($listParam as $param) {
      </div>
      <?php if (!$defaultMonth) {?>
     <div class="roundedVisibleButton roundedButton generalColClass" 
-      style="text-align:center;float:right;margin-right:10px; padding:0px 5px;width:50%;height:16px;" 
+      style="text-align:center;float:right;margin-right:0px; width:50%;<?php echo (isNewGui())?'padding:3px 5px;position:relative;top:4px;':'padding:0px 5px;height:16px;';?>" 
       onclick="dijit.byId('yearSpinner').set('value','<?php echo date('Y');?>');dijit.byId('monthSpinner').set('value','<?php echo date('m');?>');">
       <?php echo i18n('setToCurrentMonth');?>
     </div>
@@ -618,9 +618,9 @@ foreach ($listParam as $param) {
   } else if ($param->paramType=='showDetail') {
     $defaultValue='';
 ?>
-    <tr>
+    <tr >
     <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
-    <td>
+    <td ">
       <input dojoType="dijit.form.CheckBox" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" />
     </td>
     </tr>       
@@ -718,15 +718,15 @@ foreach ($listParam as $param) {
 	      value="<?php echo $defaultPeriodValue;?>"
 	      id="<?php echo $param->name;?>Value" name="<?php echo $param->name;?>Value" >
 	    </div>
-	    <div style="border: 1px solid #eeeeee; position: relative; top: -18px; left: 35px;">
-		    <input type="radio" data-dojo-type="dijit/form/RadioButton"
+	    <div style="<?php echo (isNewGui())?'border:0;position:relative;top:0px;float:right':'border: 1px solid #eeeeee; position: relative; top: -18px; left: 35px;'?>">
+		    &nbsp;<input type="radio" data-dojo-type="dijit/form/RadioButton"
 		      <?php if ($defaultPeriodScale=="month") { echo 'checked';} ?>
 		      name="<?php echo $param->name;?>Scale" id="scaleMonth" value="month"/> 
-		    <label for="scaleMonth" class="notLabel"><?php echo i18n('month');?></label> <br />
-		    <input type="radio" data-dojo-type="dijit/form/RadioButton"
+		    <label for="scaleMonth" class="notLabel" style="<?php echo (isNewGui())?'float:right;text-align:left;position:relative;top:0px;left:5px;padding:0':'';?>"><?php echo i18n('month');?></label> <br />
+		    &nbsp;<input type="radio" data-dojo-type="dijit/form/RadioButton"
 		      <?php if ($defaultPeriodScale=="week") { echo 'checked';} ?>
 		      name="<?php echo $param->name;?>Scale" id="scaleWeek" value="week"/> 
-		    <label for="scaleWeek" class="notLabel"><?php echo i18n('week');?></label>
+		    <label for="scaleWeek" class="notLabel" style="<?php echo (isNewGui())?'float:right;text-align:left;position:absolute;top:17px;left:25px;;padding:0':'';?>"><?php echo i18n('week');?></label>
 	    </div>
     </td>
     </tr>
