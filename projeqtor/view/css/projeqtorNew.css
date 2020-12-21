@@ -451,7 +451,7 @@ html, body, #mainDiv,
 	color: var(--color-light) !important;;
 }
 .ProjeQtOrNewGui .dijitDisabled .dijitButtonText {
-	color: var(--color-light) !important;;
+	/* color: var(--color-light) !important;*/
 }
 .ProjeQtOrNewGui .dijitDialogPaneContent .dijitReset.dijitInline.dijitButtonNode,
 .ProjeQtOrNewGui .dijitTooltipContainer .dijitReset.dijitInline.dijitButtonNode,
@@ -640,7 +640,7 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui #centerDiv .roundedButtonSmall .iconSize16, .ProjeQtOrNewGui #centerDiv .roundedButtonSmall .iconSize22,
 .ProjeQtOrNewGui .ganttIconBackground div, .ProjeQtOrNewGui .imageColorNewGui, .ProjeQtOrNewGui .directAttachment ,
 .ProjeQtOrNewGui .buttonIconNewGui .dijitIcon,
-.ProjeQtOrNewGui #mainDivMenu .iconSize22, 
+.ProjeQtOrNewGui #mainDivMenu .iconSize22, .ProjeQtOrNewGui #centerDiv .notDijitButtonIcon,
 .ProjeQtOrNewGui #menuBarButtonDiv .roundedIconButton.imageColorNewGui:hover,
 .ProjeQtOrNewGui .imageColorNewGuiNoSelection, .ProjeQtOrNewGui .imageColorNewGuiNoSelection:hover, 
 .ProjeQtOrNewGui .comboDetail div .iconSize32, .ProjeQtOrNewGui .comboDetail .dijitIcon, .ProjeQtOrNewGui .allSearchFixLength .dijitIcon,
@@ -667,7 +667,8 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .allSearchFixLength .dijitButtonHover .dijitIcon, .ProjeQtOrNewGui .allSearchFixLength .dijitDropDownButtonHover .dijitIcon,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButtonHover .dijitIcon,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonHover.dialogDetailButton .dijitIcon,
-.ProjeQtOrNewGui .ticketKanBanStyle .roundedButton:hover .iconSize16
+.ProjeQtOrNewGui .ticketKanBanStyle .roundedButton:hover .iconSize16,
+.ProjeQtOrNewGui #centerDiv .dijitButtonHover .notDijitButtonIcon
 {
   -webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
@@ -2079,4 +2080,9 @@ element.style {
   text-decoration: underline;
   color:var(--color-dark) !important;
   font-weight: bold;
+}
+.ProjeQtOrNewGui #subscribeButtonDiv {
+	background: #ffffff !important;
+	width:250px;
+	left:-251px;
 }
