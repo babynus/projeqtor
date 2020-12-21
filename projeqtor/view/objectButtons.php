@@ -418,7 +418,7 @@
           hideResultDivs();
         </script>
       </button>   
-      <div class="statusBar" id="subscribeButtonDiv" style="display:none;position:absolute;width:220px;z-index:100;">
+      <div class="statusBar" id="subscribeButtonDiv" style="display:none;position:absolute;<?php echo (isNewGui())?'width:250px;border:1px solid var(--color-light);border-right:0;':'width:220px;';?>z-index:100;">
         <button id="subscribeButtonSubscribe" dojoType="dijit.form.Button" showlabel="true" style="" <?php if ($subscribed) echo 'disabled';?>
           iconClass="imageColorNewGui dijitButtonIcon dijitButtonIconSubscribe" class="detailButton"><div style="width:180px;"><?php echo i18n('subscribeButton')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
@@ -437,7 +437,7 @@
         </button><br/>  
         <?php if ($canSubscribeForOthers) {?>
         <button id="subscribeButtonSubscribeOthers" dojoType="dijit.form.Button" showlabel="true"
-          iconClass="imageColorNewGui idijitButtonIcon iconTeam22 iconTeam iconSize22" class="detailButton"><div style="width:180px"><?php echo i18n('subscribeOthersButton')?></div>
+          iconClass="imageColorNewGui notDijitButtonIcon iconTeam22 iconTeam iconSize22" class="detailButton"><div style="width:180px"><?php echo i18n('subscribeOthersButton')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
             hideResultDivs();
@@ -446,7 +446,7 @@
         </button><br/> 
         <?php } else {?>
         <button id="subscribeButtonSubscribers" dojoType="dijit.form.Button" showlabel="true"
-          iconClass="imageColorNewGui idijitButtonIcon iconTeam22 iconTeam iconSize22" class="detailButton"><div style="width:180px"><?php echo i18n('subscribersList')?></div>
+          iconClass="imageColorNewGui notDijitButtonIcon iconTeam22 iconTeam iconSize22" class="detailButton"><div style="width:180px"><?php echo i18n('subscribersList')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
             hideResultDivs();
@@ -455,7 +455,7 @@
         </button><br/> 
         <?php }?>
         <button id="subscribeButtonSubscribtionList" dojoType="dijit.form.Button" showlabel="true"
-          iconClass="imageColorNewGui iconListOfValues22 iconListOfValues iconSize22 idijitButtonIcon" class="detailButton"><div style="width:180px"><?php echo i18n('showSubscribedItemsList')?></div>
+          iconClass="imageColorNewGui notDijitButtonIcon iconListOfValues22 iconListOfValues iconSize22 idijitButtonIcon" class="detailButton"><div style="width:180px"><?php echo i18n('showSubscribedItemsList')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
             hideResultDivs();
@@ -520,7 +520,7 @@
     <?php 
     $isGlobal=GlobalPlanningElement::isGlobalizable($class);
     if (RequestHandler::isCodeSet('planning') and RequestHandler::isCodeSet('planningType') and RequestHandler::getValue('planningType')=='Planning') {organizeButtons(2);}?>
-    <div id="indentButtonDiv" class="statusBar" style="display:<?php echo ($isGlobal)?'none':'inline-block';?>;<?php echo (isNewGui())?'height:64px;width:36px;background:#fff !important;':'height:32px; width:'.(($extendedZone)?'72':'68').'px;';?>">
+    <div id="indentButtonDiv" class="statusBar" style="display:<?php echo ($isGlobal)?'none':'block';?>;<?php echo (isNewGui())?'height:64px;width:36px;background:#fff !important;':'height:32px; width:'.(($extendedZone)?'72':'68').'px;';?>">
      <button id="indentDecreaseButton" dojoType="dijit.form.Button" showlabel="false" 
         title="<?php echo i18n('indentDecreaseButton');?>"
         iconClass="dijitButtonIcon dijitButtonIconDecrease" class="statusBar detailButton">
