@@ -1291,6 +1291,7 @@ class Parameter extends SqlElement {
       unset($parameterList['newItemAccessMode']);
     }else{
       unset($parameterList['menuBarTop']);
+      unset($parameterList['paramIconSize']);
     }
     $newGui = Parameter::getGlobalParameter('newGui');
     if(!$newGui){
