@@ -219,7 +219,7 @@ if (is_array(getSessionUser()->_arrayFilters)) {
                                      </table>                                       
                                      
                                    </td>
-		                               <td style="text-align: right; align: right;">
+		                               <td style="text-align: right; align: right;vertical-align:top;">
                                      <?php drawOptionsDisplay();?> 
                                      <br/>
 		                               </td>
