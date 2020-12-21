@@ -1440,21 +1440,21 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
 }
 .imputationValidated {
   font-size:8px;
-  background-color: #dAe5d4;;
+  background-color: #dAe5d4 !important;
   border: 1px solid grey;
 }
 .imputationInvalidCapacity {
-  background-color : #ff7777;
-  color : #ff0000;
+  background-color : #ff7777 !important;
+  color : #ff0000 !important;
   font-weight: normal;
 }
 .imputationValidCapacity {
-  background-color : #77ff77;
-  color : #ff0000;
-  font-weight: normal;
+  background-color : #77ff77 !important;
+  color : #ff0000 !important;
+  font-weight: normal !important;
 }
 .imputationHasValue{
-	background: #ffffaa;
+	background: #ffffaa !important;
 }
 
 .parametersButton {
