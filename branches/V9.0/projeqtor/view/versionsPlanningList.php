@@ -115,11 +115,11 @@ if (is_array(getSessionUser()->_arrayFilters)) {
 		        <?php if (!isNewGui()) { // =========================================================== NOT NEW GUI ?>
 		        <table style="width: 100%;">
 		          <tr>
-		            <td style="width:70px; position:relative;">
+		            <td style="width:10px; position:relative;">
 		              &nbsp;&nbsp;&nbsp;             
 		            </td>
 		            <td style="white-space:nowrap;width:<?php echo ($displayWidthPlan>1030)?240:150;?>px">
-		              <table align="right" style="margin:7px">
+		              <table align="right" style="margin:4px">
                     <tr>
                       <td align="right">&nbsp;&nbsp;&nbsp;<?php echo ($displayWidthPlan>1030)?i18n("displayStartDate"):i18n("from");?>&nbsp;&nbsp;</td><td>
                         <?php drawFieldStartDate();?>
@@ -132,35 +132,43 @@ if (is_array(getSessionUser()->_arrayFilters)) {
 
                       </td>
                     </tr>
+                    <tr>
+                      <td></td>
+                      <td style="white-space:nowrap;padding-right:10px;position:relative;top:2px">
+                        <?php drawOptionSaveDates();?>
+                      </td>
+                    </tr>
                   </table>
 		            </td>
-                <td style="width:250px;">
+                <td style="width:150px;">
                   <table >
                     <tr>
-                    <td style="white-space:nowrap;padding-right:10px;position:relative;top:4px">
-                    <?php drawOptionAllProject();?>
-                            
-                     </td>
-                      <td colsan="3">
-                        <?php drawButtonsPlanning();?>
-                      </td>
+                      <td><?php drawButtonsPlanning();?></td>
                     </tr>
                     <tr>
-                    <td style="white-space:nowrap;padding-right:10px;position:relative;top:-4px">
-                       <?php drawOptionSaveDates();?>
-                          </td>
-                      <td colspan="3">
+                      <td style="position:relative">
                        <?php drawButtonsDefault();?>
-                       
                       </td>
                     </tr>
                   </table>
                 </td>
-		            <td style="">
-                  <?php drawOptionBaseline();?>
+                <td ></td>
+                <td style="width:30%;">
+                 <table style="">                 
+                   <tr class="checkboxLabel" style="height:25px"><?php drawVersionOptionsProductVersionActivity();?></tr>
+                   <tr class="checkboxLabel" style="height:25px"><?php drawVersionOptionsComponentVersionActivity();?></tr>                                       
+                   <tr class="checkboxLabel" style="height:25px"><?php drawVersionOptionsVersionsWithoutActivity();?></tr>
+                 </table>
                 </td>
-                
-		            <td style="text-align: right; align: right;">
+                <td style="width:20%;">
+                 <table>
+                   <tr class="checkboxLabel" style="height:25px"><?php drawVersionOptionsOneTimeActivities();?></tr>
+                   <tr class="checkboxLabel" style="height:25px"><?php drawVersionOptionsProjectLevels();?></tr>
+                   <tr class="checkboxLabel" style="height:25px"><?php drawVersionOptionsActivityHierarchy();?></tr>
+                 </table>                                                                         
+                </td>
+		            <td style="width:22%;text-align: right; align: right;">
+		              <table width="100%"><tr class="checkboxLabel" style="height:25px"><?php drawVersionOptionsOnlyActivesVersions();?><td>&nbsp;</td></tr></table>
                   <?php drawOptionsDisplay();?>
 		            </td>
 		          </tr>
@@ -210,14 +218,13 @@ if (is_array(getSessionUser()->_arrayFilters)) {
                                    <td style="width:60%;">
                                      <table style="">
                                        <tr class="checkboxLabel"><?php drawVersionOptionsOnlyActivesVersions();?></tr>
-                                       <tr class="checkboxLabel"><?php drawVersionOptionsComponentVersionActivity();?></tr>
                                        <tr class="checkboxLabel"><?php drawVersionOptionsProductVersionActivity();?></tr>
+                                       <tr class="checkboxLabel"><?php drawVersionOptionsComponentVersionActivity();?></tr>                                       
                                        <tr class="checkboxLabel"><?php drawVersionOptionsVersionsWithoutActivity();?></tr>
                                        <tr class="checkboxLabel"><?php drawVersionOptionsOneTimeActivities();?></tr>
                                        <tr class="checkboxLabel"><?php drawVersionOptionsProjectLevels();?></tr>
                                        <tr class="checkboxLabel"><?php drawVersionOptionsActivityHierarchy();?></tr>
-                                     </table>                                       
-                                     
+                                     </table>                                                                         
                                    </td>
 		                               <td style="width:40%;text-align: right; align: right;vertical-align:top;">
                                      <?php drawOptionsDisplay();?> 
