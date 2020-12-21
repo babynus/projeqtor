@@ -5971,7 +5971,8 @@ function showExtraButtons(location) {
         divNode.style.left=(containerWidth-position-nodeWidth-5)+"px";
       }
       if(nodeLeft < 220 && location=="subscribeButton"){
-        divNode.style.left = -186+'px';
+        if (isNewGui) {divNode.style.left = '-250px';divNode.style.top='65px';}
+        else divNode.style.left = -186+'px';
       }
     }
   }
