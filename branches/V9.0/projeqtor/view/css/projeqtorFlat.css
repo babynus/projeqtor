@@ -586,7 +586,7 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconContractUnit16 { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 
-
+.iconRight { background-image: url(images/iconRight.png);  background-repeat: no-repeat;}
 
 /* =============================================================================== */
 /* ProjeqtorFlatRed THEME                                                             */

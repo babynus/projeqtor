@@ -7068,6 +7068,13 @@ function showListFilter(checkBoxName,value){
     dojo.byId('versionsWithoutActivity').style.visibility="hidden";
     dojo.byId('hideVersionsWithoutActivityCheck').style.visibility="hidden";
     dojo.byId('addNewActivity').style.visibility="hidden";
+    dojo.byId('versionsWithoutActivity').style.visibility="hidden";
+    dojo.byId('hideOneTimeActivitiesLabel').style.visibility="hidden";
+    dojo.byId('hideOneTimeActivitiesCheck').style.visibility="hidden";
+    dojo.byId('hideProjectLevelLabel').style.visibility="hidden";
+    dojo.byId('hideProjectLevelCheck').style.visibility="hidden";
+    dojo.byId('hideActivityHierarchyLabel').style.visibility="hidden";
+    dojo.byId('hideActivityHierarchyCheck').style.visibility="hidden";
   }else{
     dojo.byId('listFilterAdvanced').style.visibility="visible";
     dojo.byId('displayRessource').style.visibility="visible";
@@ -7075,6 +7082,12 @@ function showListFilter(checkBoxName,value){
     dojo.byId('versionsWithoutActivity').style.visibility="visible";
     dojo.byId('hideVersionsWithoutActivityCheck').style.visibility="visible";
     dojo.byId('addNewActivity').style.visibility="visible";
+    dojo.byId('hideOneTimeActivitiesLabel').style.visibility="visible";
+    dojo.byId('hideOneTimeActivitiesCheck').style.visibility="visible";
+    dojo.byId('hideProjectLevelLabel').style.visibility="visible";
+    dojo.byId('hideProjectLevelCheck').style.visibility="visible";
+    dojo.byId('hideActivityHierarchyLabel').style.visibility="visible";
+    dojo.byId('hideActivityHierarchyCheck').style.visibility="visible";
   }
 }
 
