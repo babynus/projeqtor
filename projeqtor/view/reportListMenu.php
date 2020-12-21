@@ -36,7 +36,7 @@ if (!$categ) {
   echo i18n($catObj->name);
   echo "</div>";
   echo "<div class='arrowBack' style='position:absolute;top:5px;left:25px;'>";
-  echo "<span class='dijitInline dijitButtonNode backButton'  onClick='loadDiv(\"../view/reportListMenu.php\",\"reportMenuList\")' style='border:unset;'>";
+  echo "<span class='dijitInline dijitButtonNode backButton noRotate'  onClick='loadDiv(\"../view/reportListMenu.php\",\"reportMenuList\")' style='border:unset;'>";
   if(isNewGui()){
     echo formatNewGuiButton('Back', 22);
   }else{
