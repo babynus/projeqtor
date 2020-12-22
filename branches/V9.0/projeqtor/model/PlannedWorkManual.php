@@ -594,12 +594,14 @@ class PlannedWorkManual extends GeneralWork {
       if($class=='dojoxGridRowSelected'){
         $iconGoto='<div class="iconGotoWhite16 iconGoto iconSize16" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
       }else{
-        $iconGoto='<div class="iconGoto16 iconGoto iconSize16" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
+        $iconGoto='<div class="iconGoto16 iconGoto iconSize16 imageColorNewGui" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
       }
       echo '          <td '.$goto.' style="width:10%;">'.$iconGoto.'</td>';
       echo '  </tr></table>';
       echo '</td>';
-      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="text-align:center;margin:0;padding;0;width:'.$idWidth.'px">';
+      $paddingRight="";
+      if(isNewGui())$paddingRight="padding-right:7px;";
+      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="'.$paddingRight.' text-align:center;margin:0;padding;0;width:'.$idWidth.'px">';
       if(!$readonly and !$readonlyHabil){
         if($valueFte==0)$valueFte=null;
         echo '<img  id="idImageInterventionActivitySelector'.$pe->refId.'" src="../view/img/savedOk.png"
@@ -607,7 +609,7 @@ class PlannedWorkManual extends GeneralWork {
         echo '<div dojoType="dijit.form.NumberTextBox" id="interventionActivitySelector'.$pe->refId.'" name="interventionActivitySelector'.$pe->refId.'"
       						  class="dijitReset dijitInputInner dijitNumberTextBox"
         					  value="'.$valueFte.'"
-                    style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px" >
+                    style="padding:1px;background:none;max-width:100%;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px" >
                      <script type="dojo/method" event="onChange">
                       saveInterventionCapacity("'.$pe->refType.'",'.$pe->refId.','.$monthYear.','.$pe->id.'); 
                      </script>';

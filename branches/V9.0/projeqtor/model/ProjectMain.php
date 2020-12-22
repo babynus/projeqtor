@@ -800,7 +800,11 @@ static function isTheLeaveProject($id=null) {
           if(!isNewGui()){
             $result .='<td valign="top" width="20px"><img src="css/images/iconList16.png" height="16px" /></td>';
           }else{
-            $result .='<td valign="top" width="20px"><div style="margin-right:5px;" class="iconProject16 iconProject iconSize16 imageColorNewGui"></div></td>';
+            $styleMargin = "margin-right:5px;margin-top:3px;";
+            if(!$drawCheckBox){
+              $styleMargin = "";
+            }
+            $result .='<td valign="top" width="20px"><div style="'.$styleMargin.'" class="iconProject16 iconProject iconSize16 imageColorNewGuiNoSelection"></div></td>';
           }
           if ($selectField==null) {
             $result .= '<td valign="top" class="'.(($outMode=='html' or $outMode=='pdf')?'':'display').'"  NOWRAP>' . (($outMode=='html' or $outMode=='pdf')?htmlEncode($prj->name):htmlDrawLink($prj));
@@ -810,7 +814,11 @@ static function isTheLeaveProject($id=null) {
             $clickEvent=' onClick=\'setSelectedProject("' . htmlEncode($prj->id) . '", "' . htmlEncode($prj->name,'parameter') . '", "' . $selectField . '");\' ';
             if ($outMode=='html' or $outMode=='pdf') $clickEvent='';
             $result .='<td>';
-            $result .='<div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="width:100%;color:black;height:25px;margin-top:-6px;padding-top:5px">';
+            $borderNone = "";
+            if(isNewGui()){
+              $borderNone="border:none !important;";
+            }
+            $result .='<div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style=" '.$borderNone.' width:100%;color:black;height:25px;margin-top:-6px;padding-top:5px">';
             $result .= htmlEncode($prj->name);
             $result .='</div>';
           }

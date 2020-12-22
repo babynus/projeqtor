@@ -108,7 +108,7 @@ class ImputationValidation{
 	  $result .='     <td colspan="2" style="border: 1px solid grey;height:60px;width:26%;text-align:center;vertical-align:center;">';
       $result .='       <table width="100%"><tr><td width="62%">'.i18n('menuImputationValidation').'</td>';
       $result .='       <td width="30%">';
-      $result .='       <span id="buttonValidationAll" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
+      $result .='       <span class="mediumTextButton" id="buttonValidationAll" style="width:98% !important;" type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
             . '         <script type="dojo/method" event="onClick" >'
         		. '           validateAllSelection();'
     				. '         </script>'
@@ -300,7 +300,7 @@ class ImputationValidation{
   			$result .='   <td style="border: 1px solid grey;height:30px;width:20%;text-align:left;vertical-align:center;">';
   			$result .='   <div id="submittedDiv'.$uniqueId.'" name="submittedDiv'.$uniqueId.'" width="100%" dojoType="dijit.layout.ContentPane" region="center">';
   			if($week->submitted){
-  				$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Submitted', 32, i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate)))).'</td>';
+  				$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Submitted', 32, i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate))),false,true).'</td>';
   				$result .='     <td style="width:73%;padding-left:5px;height:30px;">'.i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate))).'</td>';
   				$result .='     <td style="width:27%;height:30px;padding-right:8px;">';
   				$result .='      <span id="buttonCancel'.$week->id.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonCancel')
@@ -311,7 +311,7 @@ class ImputationValidation{
 									. '     </span>';
   				$result .='     </td></tr></table></div></td>';
   			}else{
-  				$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unsubmittedWork')).'</td>';
+  				$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unsubmittedWork'),false,true).'</td>';
   				$result .='     <td style="height:30px;width:90%;">'.i18n('unsubmittedWork').'</td></tr></table></div></td>';
   			}
   			$result .='   <td style="border: 1px solid grey;height:30px;width:26%;text-align:left;vertical-align:center;">';
@@ -319,20 +319,20 @@ class ImputationValidation{
   			$result .='     <table width="100%"><tr>';
   			if($week->validated){
   				$locker = SqlList::getNameFromId('Affectable', $week->idLocker);
-  				$result .='     <td style="height:30px;">'.formatIcon('Submitted', 32, i18n('validatedLineWorkPeriod', array($locker, htmlFormatDate($week->validatedDate)))).'</td>';
+  				$result .='     <td style="height:30px;">'.formatIcon('Submitted', 32, i18n('validatedLineWorkPeriod', array($locker, htmlFormatDate($week->validatedDate))),false,true).'</td>';
   				$result .='     <td style="width:73%;padding-left:5px;height:30px;">'.i18n('validatedLineWorkPeriod', array($locker, htmlFormatDate($week->validatedDate))).'</td>';
-  				$result .='     <td style="width:27%;padding-right:8px;height:30px;">';
-  				$result .='      <span id="buttonCancelValidation'.$week->id.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonCancel')
+  				$result .='     <td style="width:27%;padding-right:8px;">';
+  				$result .='      <span id="buttonCancelValidation'.$week->id.'" style="width:100% !important; " class="mediumTextButton" type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonCancel')
   				        . '       <script type="dojo/method" event="onClick" >'
   				        . '        saveDataToSession("idCheckBox", '.$idCheckBox.', false);' 
 				          . '        saveImputationValidation('.$week->id.', "cancelValidation");'   
   								. '       </script>'
 									. '     </span>';
   			} else {
-  			  $result .='     <td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod')).'</td>';
+  			  $result .='     <td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod'),false,true).'</td>';
   				$result .='     <td style="width:73%;padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
-  				$result .='     <td style="width:27%;padding-right:8px;height:30px;">';
-  				$result .='      <span id="buttonValidation'.$uniqueId.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
+  				$result .='     <td style="width:27%;padding-right:8px;">';
+  				$result .='      <span class="mediumTextButton" id="buttonValidation'.$uniqueId.'" style="width:100% !important;" type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
   				        . '       <script type="dojo/method" event="onClick" >'
 				          . '        saveImputationValidation("'.$uniqueId.'", "validateWork");'
 		              . '        saveDataToSession("idCheckBox", "'.$uniqueId.'", false);' 

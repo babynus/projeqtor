@@ -164,7 +164,7 @@
 									<div dojoType="dijit.form.DropDownButton"
 										id="listItemsSelector" jsId="listItemsSelector"
 										name="listItemsSelector" showlabel="false" class="comboButton"
-										iconClass="iconGlobalView iconSize22"
+										iconClass="iconGlobalView iconSize22 imageColorNewGui"
 										title="<?php echo i18n('itemSelector');?>">
 										<div dojoType="dijit.TooltipDialog" class="white"
 											id="listItemsSelectorDialog"

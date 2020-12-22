@@ -113,9 +113,13 @@ class Absence{
     $result .='<div id="activityDiv" align="center" style="margin-top:20px; overflow-y:auto; width:100%;">';
     $result .=' <table align="left" style="margin-left:20px; border: 1px solid grey; width: 50%;">';
     $result .='   <tr>';
-    $result .='     <td class="reportHeader" style="border-right: 1px solid grey; height:30px;">'.i18n('colProjectName').'</td>';
-    $result .='     <td class="reportHeader" style="border-right: 1px solid grey; height:30px; width: 10%;">'.i18n('activityId').'</td>';
-    $result .='     <td class="reportHeader" style="height:30px;">'.i18n('activityName').'</td>';
+    $borderRadius = "";
+    if(isNewGui()){
+      $borderRadius = "border-radius:0 !important;";
+    }
+    $result .='     <td class="reportHeader" style=" '.$borderRadius.' border-right: 1px solid grey; height:30px;">'.i18n('colProjectName').'</td>';
+    $result .='     <td class="reportHeader" style=" '.$borderRadius.'border-right: 1px solid grey; height:30px; width: 10%;">'.i18n('activityId').'</td>';
+    $result .='     <td class="reportHeader" style=" '.$borderRadius.'height:30px;">'.i18n('activityName').'</td>';
     $result .='   </tr>';
     
     $listActId="(";
@@ -214,32 +218,51 @@ class Absence{
       $result .='<table align="left" style="margin-top:20px; margin-left:100px;">';
       $result .=' <tr>';
       $unitAbs = Parameter::getGlobalParameter('imputationUnit');
-      $result .='   <td style="margin-top:10px; height:20px;">'.ucfirst(i18n('dailyAbsenceDuration')).'&nbsp;:';
+      $doublePoint="&nbsp;:";
+      if(isNewGui()){
+        $doublePoint="&nbsp;";
+      }
+      $result .='   <td style="margin-top:10px; height:20px;">'.ucfirst(i18n('dailyAbsenceDuration')).$doublePoint;
       $result .='     <div id="absenceInput" name="absenceInput" value="'.$max.'"
                     		  dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:'.$max.'}"  required="true"
                     		      style="width:30px; margin-top:4px; height:20px;">';
       $result .= $keyDownEventScript;
       $result .='     </div> ';
+      if(isNewGui()){
+        if($unitAbs == 'days'){
+          $result .=' &nbsp;'.i18n('day');
+        }else{
+          $result .=' &nbsp;'.i18n('hours');
+        }
+      }
       $result .='   </td>';
-      if($unitAbs == 'days'){
-      	$result .=' <td style="margin-top:30px; height:20px;width:55px">&nbsp;'.i18n('day').'</td>';
-      }else{
-      	$result .=' <td style="margin-top:30px; height:20px;width:40px">&nbsp;'.i18n('hours').'</td>';
+      if(!isNewGui()){
+        if($unitAbs == 'days'){
+        	$result .=' <td style="margin-top:30px; height:20px;width:55px">&nbsp;'.i18n('day').'</td>';
+        }else{
+        	$result .=' <td style="margin-top:30px; height:20px;width:40px">&nbsp;'.i18n('hours').'</td>';
+        }
       }
       $result .=' </tr>';
       $result .=' <tr style="height:20px">';
-      $result .='   <td colspan="3" style="padding-top:5px;text-align:right">'.ucfirst(i18n('duration')).'&nbsp;:';
-      $result .='   <span id="absButton_1" style="width:55px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonFull')
+      $result .='   <td colspan="3" style="padding-top:5px;text-align:right">'.ucfirst(i18n('duration')).$doublePoint;
+      $classMediumText = "";
+      $widthMedium = "55";
+      if(isNewGui()){
+        $mediumTextButton = 'class="mediumTextButton"';
+        $widthMedium = "100";
+      }
+      $result .='   <span id="absButton_1" style="width:'.$widthMedium.'px; " type="button" dojoType="dijit.form.Button" '.$mediumTextButton.' showlabel="true">'.i18n('buttonFull')
               . '     <script type="dojo/method" event="onClick" >'
               . '        dijit.byId("absenceInput").setAttribute("value" ,'.$max.');'
               . '     </script>'
               . '   </span>&nbsp;';
-      $result .='   <span id="absButton_0_5" style="width:55px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonHalf')
+      $result .='   <span id="absButton_0_5" style="width:'.$widthMedium.'px; " type="button" dojoType="dijit.form.Button" '.$mediumTextButton.' showlabel="true">'.i18n('buttonHalf')
               . '     <script type="dojo/method" event="onClick" >'
               . '       dijit.byId("absenceInput").setAttribute("value" , '.($max/2).');'
               . '     </script>'
               . '    </span>&nbsp;';
-      $result .='   <span id="absButton_0" style="width:55px;" type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonNone')
+      $result .='   <span id="absButton_0" style="width:'.$widthMedium.'px;" type="button" dojoType="dijit.form.Button" '.$mediumTextButton.' showlabel="true">'.i18n('buttonNone')
               . '     <script type="dojo/method" event="onClick" >'
               . '       dijit.byId("absenceInput").setAttribute("value" ,0);'
               . '     </script>'

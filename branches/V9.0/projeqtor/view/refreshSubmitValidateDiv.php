@@ -43,10 +43,10 @@ if($buttonAction and $idWorkPeriod){
   	$result .='     <table width="100%"><tr>';
   	if($week->validated){
   		$locker = SqlList::getNameFromId('Resource', $week->idLocker);
-  		$result .='     <td style="height:30px;">'.formatIcon('Submitted', 32, i18n('validatedLineWorkPeriod', array($locker, htmlFormatDate($week->validatedDate)))).'</td>';
+  		$result .='     <td style="height:30px;">'.formatIcon('Submitted', 32, i18n('validatedLineWorkPeriod', array($locker, htmlFormatDate($week->validatedDate))),false,true).'</td>';
   		$result .='     <td style="width:73%;padding-left:5px;height:30px;">'.i18n('validatedLineWorkPeriod', array($locker, htmlFormatDate($week->validatedDate))).'</td>';
-  		$result .='     <td style="width:27%;padding-right:8px;height:30px;">';
-  		$result .='      <span id="buttonCancelValidation'.$idWorkPeriod.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonCancel')
+  		$result .='     <td style="width:27%;padding-right:8px;">';
+  		$result .='      <span id="buttonCancelValidation'.$idWorkPeriod.'" style="width:100% !important;" class="mediumTextButton" type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonCancel')
   		. '       <script type="dojo/method" event="onClick" >'
   				. '        saveImputationValidation("'.$idWorkPeriod.'", "cancelValidation");'
   				    . '        saveDataToSession("idCheckBox", '.$idCheckBox.', false);' 
@@ -54,10 +54,10 @@ if($buttonAction and $idWorkPeriod){
   						. '       </script>'
   								. '     </span>';
   	}else{
-  		$result .='     <td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod')).'</td>';
+  		$result .='     <td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod'),false,true).'</td>';
   		$result .='     <td style="width:73%;padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
-  		$result .='     <td style="width:27%;padding-right:8px;height:30px;">';
-  		$result .='      <span id="buttonValidation'.$idWorkPeriod.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
+  		$result .='     <td style="width:27%;padding-right:8px;">';
+  		$result .='      <span class="mediumTextButton" id="buttonValidation'.$idWorkPeriod.'" style="width:100% !important; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
   		. '       <script type="dojo/method" event="onClick" >'
   				. '        saveImputationValidation("'.$idWorkPeriod.'", "validateWork");'
   				    . '        saveDataToSession("idCheckBox", '.$idCheckBox.', false);' 
@@ -70,7 +70,7 @@ if($buttonAction and $idWorkPeriod){
 		$result .='     <input type="hidden" id="validatedLine'.$idCheckBox.'" name="'.$week->id.'" value="'.$week->validated.'"/>';
   }else{
   	if($week->submitted){
-  		$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Submitted', 32, i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate)))).'</td>';
+  		$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Submitted', 32, i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate))),false,true).'</td>';
   		$result .='     <td style="width:73%;padding-left:5px;height:30px;">'.i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate))).'</td>';
   		$result .='     <td style="width:27%;height:30px;padding-right:8px;">';
   		$result .='      <span id="buttonCancel'.$week->id.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonCancel')
@@ -81,7 +81,7 @@ if($buttonAction and $idWorkPeriod){
   								. '     </span>';
   		$result .='     </td></tr></table>';
   	}else{
-  		$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unsubmittedWork')).'</td>';
+  		$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unsubmittedWork'),false,true).'</td>';
   		$result .='     <td style="height:30px;width:90%;">'.i18n('unsubmittedWork').'&nbsp'.htmlFormatDate($week->submittedDate).'</td></tr></table>';
   	}
   }
