@@ -248,7 +248,7 @@ if(isset ($isLineMulti)){
             <td class="assignHeader" ><?php echo i18n("colFullAmount");?></td>
           </tr>
           <tr>
-           <td class="assignData" style="text-align:center;<?php if ($mode=='edit') echo 'display:none;';?>"> 
+           <td class="assignData" style="padding-top:0;padding-bottom:0;text-align:center;<?php if ($mode=='edit') echo 'display:none;';?>"> 
              <div dojoType="dijit.form.NumberTextBox" 
                 id="providerTermNumberOfTerms" name="providerTermNumberOfTerms"
                 constraints="{min:0,max:999,places:0}"
@@ -259,7 +259,7 @@ if(isset ($isLineMulti)){
                 class="input">
                </div> 
            </td>
-           <td class="assignData">
+           <td class="assignData" style="padding-top:0;padding-bottom:0;">
             <?php if ($currencyPosition=='before') echo $currency;?>
             <div dojoType="dijit.form.NumberTextBox" 
               id="providerTermUntaxedAmount" name="providerTermUntaxedAmount"
@@ -272,7 +272,7 @@ if(isset ($isLineMulti)){
             </div>
             <?php if ($currencyPosition=='after') echo $currency;?>
            </td>
-           <td class="assignData">
+           <td class="assignData" style="padding-top:0;padding-bottom:0;">
             <div dojoType="dijit.form.NumberTextBox" 
               id="providerTermPercent" name="providerTermPercent"
               style="width: 100px;"
@@ -284,7 +284,7 @@ if(isset ($isLineMulti)){
             </div>
             <?php echo '%';?>
            </td>
-           <td class="assignData">
+           <td class="assignData" style="padding-top:0;padding-bottom:0;">
              <?php if ($currencyPosition=='before') echo $currency;?>
                <input dojoType="dijit.form.NumberTextBox" 
                 id="providerTermTaxAmount" name="providerTermTaxAmount"
@@ -295,7 +295,7 @@ if(isset ($isLineMulti)){
                </input> 
                <?php if ($currencyPosition=='after') echo $currency;?>
             </td>
-            <td class="assignData">
+            <td class="assignData" style="padding-top:0;padding-bottom:0;">
              <?php if ($currencyPosition=='before') echo $currency;?>
                <input dojoType="dijit.form.NumberTextBox" 
                 id="providerTermFullAmount" name="providerTermFullAmount"
@@ -351,7 +351,7 @@ if(isset ($isLineMulti)){
               </td>
              </tr>
 	           <?php 
-	           $style2 = 'border-left:1px solid black;border-bottom:1px solid black;white-space:nowrap;';
+	           $style2 = 'border-left:1px solid black;border-bottom:1px solid black;white-space:nowrap;padding:0 2px;';
 	           foreach ($billLineList as $bill) {  ?>
 	             <?php $i++;?>
               <input id="providerOrderBillLineId<?php echo $i;?>" name="providerOrderBillLineId<?php echo $i;?>" type="hidden" value="<?php echo $bill->id;?>" />
