@@ -147,6 +147,7 @@ if (!Parameter::getGlobalParameter('paramAttachmentDirectory') or !Parameter::ge
 
 if (isset($debugReport) and $debugReport) {
   $pos=strpos($_SERVER["SCRIPT_NAME"], '/report/');
+  if (RequestHandler::getValue('fromToday',false,'false')=='true') $pos=false;
   if ($pos!==false) {
     echo '<div style="color:var(--color-medium);position:absolute;right:17px;top:-3px;font-size:90%">'.substr($_SERVER["SCRIPT_NAME"], $pos).'</div>';
   }
