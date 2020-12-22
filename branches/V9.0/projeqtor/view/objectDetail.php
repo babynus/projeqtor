@@ -755,6 +755,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       $decomp=explode("_", $col);
       $internalTableCols=$decomp[2];
       $internalTableRows=$decomp[3];
+      $allowWrap=false;
+      if (count($decomp)>4) {
+        if (strtolower($decomp[4])=='allowwrap') $allowWrap=true;
+      }
       // ADD qCazelles - dateComposition
       // if (count($val) == 8 and $val[4]=='startDate' and $val[5]=='deliveryDate' and Parameter::getGlobalParameter('displayMilestonesStartDelivery') != 'YES') $internalTableRows -= 2;
       // END ADD qCazelles - dateComposition
@@ -853,7 +857,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           // old
           // } else if ($val [$i]) {
           // END CHANGE BY Marc TABARY - 2017-03-31 - COLEMPTY
-          echo '<div class="tabLabel" style="text-align:'.(($print)?'center':'left').';white-space:nowrap;">'.htmlEncode($obj->getColCaption($val[$i])).'</div>';
+          echo '<div class="tabLabel" style="text-align:'.(($print)?'center':'left').';'.(($allowWrap)?'':'white-space:nowrap;').'">'.htmlEncode($obj->getColCaption($val[$i])).'</div>';
         } else {
           echo '<div class="tabLabel" style="text-align:left;white-space:nowrap;"></div>';
         }
