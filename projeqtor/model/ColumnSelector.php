@@ -190,6 +190,7 @@ class ColumnSelector extends SqlElement {
 		if (method_exists($obj, 'setAttributes')) $obj->setAttributes();
 		$user=getSessionUser();
 		$cpt=count($result);
+		$resultTemp=array();
 		foreach($obj as $col => $val) {
 		  if (array_key_exists($col,$result)) {
         continue;
@@ -214,7 +215,7 @@ class ColumnSelector extends SqlElement {
 				continue;
 			}
 			if (is_object($val)) {
-				$result=self::addAllFields($result, $val, true, get_class($obj));
+				$resultTemp=array_merge_preserve_keys($resultTemp,self::addAllFields($result, $val, true, get_class($obj)));
 				continue;
 			}
 
@@ -223,7 +224,7 @@ class ColumnSelector extends SqlElement {
 			if ($dataLength>400 or $dataType=='text') {
 				continue;
 			}
-			$cpt++;
+			//$cpt++;
 			$cs=new ColumnSelector();
 			$cs->scope="list";
 			if ($included) {
@@ -239,7 +240,7 @@ class ColumnSelector extends SqlElement {
 				$cs->field='name'.substr($cs->field,2);
 			}
 			$cs->attribute=$col;
-			$cs->sortOrder=$cpt;
+			//$cs->sortOrder=$cpt;
 			$cs->widthPct=5;
 			$cs->name=$col;
 			$cs->_displayName=$obj->getColCaption($col);
@@ -297,9 +298,17 @@ class ColumnSelector extends SqlElement {
 				  $cs->formatter="numericFormatter";
 				}
 			}
-			$res=$cs->save();
-			$result[$cs->attribute]=$cs;
+			$resultTemp[replace_accents($obj->getColCaption($col)).'-'.$cs->attribute]=$cs;
 		}
+		if ($included) return $resultTemp;
+		ksort($resultTemp); 
+		foreach ($resultTemp as $temp) {
+		  $cpt++;
+		  $temp->sortOrder=$cpt;
+		  $res=$temp->save();
+		  $result[$temp->attribute]=$temp;
+		}
+		
 		return $result;
 	}
 }
