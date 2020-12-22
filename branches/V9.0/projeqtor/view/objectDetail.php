@@ -8430,7 +8430,7 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
       $order=new ProviderOrder($prT->idProviderOrder);
       $objStatus=new Status($order->idStatus);
       echo '<td class="assignData" align="center" '.$goto.' style="white-space:nowrap; padding:0px !important;'.(($goto)?'cursor: pointer;':'').'" >';
-      echo '<table style="width:100%;padding:0;marin:0;"><tr>';
+      echo '<table style="width:100%;padding:0;marin:0;'.((isNewGui())?'height:26px':'').'"><tr>';
       echo '<td class="assignData" style="width:10%;border:0;">#'.htmlEncode($prT->idProviderOrder).'</td>';
       echo '<td class="assignData" style="width:50%;border:0;">'.htmlEncode($order->name).'</td>';
       echo '<td class="assignData colorNameData" style="width:40%;border:0;">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';

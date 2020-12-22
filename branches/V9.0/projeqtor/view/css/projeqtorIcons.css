@@ -49,7 +49,7 @@
 
 .iconButtonMark24 { background-image: url(images/iconMark.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .iconButtonMark16 { background-image: url(images/iconMark.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-
+.ProjeQtOrNewGui .iconButtonMark16, .ProjeQtOrNewGui .iconButtonMark { background-image: url(customIcons/new//iconButtonMark.svg) !important;  background-repeat: no-repeat;}
 
 .iconCollapse {
   background-image: url(images/minus.gif);
@@ -133,6 +133,7 @@
 .iconButtonSubscribe16 { background-image: url(images/iconSubscribe.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .iconButtonListApprover16 { background-image: url(images/iconButtonListApprover.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .iconButtonList16 { background-image: url(images/iconButtonList.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrNewGui .iconButtonList { background-image: url(customIcons/new/iconListOfValues.svg) !important;  background-repeat: no-repeat; }
 
 .iconButtonRefresh { background-image: url(images/iconRefresh.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconButtonRefresh { background-image: url(customIcons/blue/iconRefresh.png);  background-repeat: no-repeat; }
