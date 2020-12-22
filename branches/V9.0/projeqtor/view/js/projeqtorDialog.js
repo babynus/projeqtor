@@ -7365,10 +7365,9 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
   if(objectIdScreen !=''){
     callBack=function(){loadContent("objectDetail.php", "detailDiv", 'listForm');};
   }
-  loadContent(urlPage+urlParams, "centerDiv",null,null,null,null,null,callBack);
-  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+"&"+paramDiv+"="+paramToSend,"mainDivMenu");
-  
-  }
+  if(dojo.byId('objectClass') && currentObject) {loadContent(urlPage+urlParams, "centerDiv",null,null,null,null,null,callBack);}
+  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+"&"+paramDiv+"="+paramToSend,"mainDivMenu");  
+}
 var switchModeSkipAnimation=true;
 function showList(mode, skipAnimation) {
   duration=300;
