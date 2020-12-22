@@ -2079,11 +2079,10 @@ element.style {
 }
 
 .ProjeQtOrNewGui .link:hover {
-  background-color: var(--color-light);
-  text-decoration: underline;
-  color:var(--color-dark) !important;
-  font-weight: bold;
+  color:var(--color-secondary) !important;
+  background-color:none !important;
 }
+
 .ProjeQtOrNewGui #subscribeButtonDiv {
 	background: #ffffff !important;
 	width:250px;

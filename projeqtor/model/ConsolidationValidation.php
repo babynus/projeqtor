@@ -175,8 +175,15 @@ class ConsolidationValidation extends SqlElement{
 	  $result .='      <table width="100%"><tr style="height:20px;"><td width="100%;" colspan="2">'.i18n('menuConsultationValidation').'</td></tr>';
 	  $result .='        <tr style="100%" >';
 	  if($habValidationImputation->rightAccess=='1'){
+	    $paddingTop="5";
+	    $classMediumTextButtonInClass= "";
+	    if(isNewGui()){
+	      $paddingTop="38";
+	      $classMediumTextButtonInClass= "mediumTextButton";
+	    }
+	  
 	  $result .='          <td>
-	                        <div id="buttonValidationAll" style="width:40%;float:right;height:32px;padding-top:5px;cursor:pointer;margin-top: 2px;" title="'.i18n('validatedAll').'" class="iconSubmitted32 iconSubmitted iconSize32"
+	                        <div id="buttonValidationAll" style="width:40%;float:right;padding-top:'.$paddingTop.'px;cursor:pointer;margin-top: 2px;" title="'.i18n('validatedAll').'" class=" '.$classMediumTextButtonInClass.' iconSubmitted32 iconSubmitted iconSize32"
 	                             onClick="validateOrCancelAllConsolidation(\''.$srtingProjectList.'\',\'validaTionCons\',\''.$concMonth.'\');">
 	                        </div>
 	                       </td>';
@@ -384,7 +391,7 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='        <tr>';
         $validFunct=($right=='1' and $canChangeValidation)?'onClick="saveOrCancelConsolidationValidation(\''.$uniqueId.'\',\''.$concMonth.'\',\''.$asSub.'\');"':'';
         $result .='          <td style="width:30%;height:32px;'.(($right==1  and $canChangeValidation)?"cursor:pointer;":"cursor:not-allowed;").'" ><div style="float:right;" id="buttonCancel_'.$uniqueId.'" '.$validFunct.' >
-                             '.formatIcon('Submitted', 32,i18n('cancelConsolidation')).'
+                             '.formatIcon('Submitted', 32,i18n('cancelConsolidation'),false,true).'
                            </div></td>';
 	    $result .='          <td style="width:'.(($right=='1'  and $canChangeValidation)?"70%":"100%").';height:30px;">'. i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate))).'</td>';
 	    if($right=='1'  and !$canChangeValidation)$right='2';
@@ -393,8 +400,12 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='      <table style="width:100%;">';
 	    $result .='        <tr>';
 	    $validFunct=($right=='1')?'onClick="saveOrCancelConsolidationValidation(\''.$uniqueId.'\',\''.$concMonth.'\',\''.$asSub.'\');"':'';
-	    $result .='          <td style="width:30%;height:32px;'.(($right==1)?"cursor:pointer;":"cursor:not-allowed;").'" ><div style="float:right;" id="buttonValidation_'.$uniqueId.'" '.$validFunct.' >
-	                           '.formatIcon('Unsubmitted', 32, i18n('validateConsolidation')).'
+	    $classMediumTextButton = "";
+	    if(isNewGui()){
+	     $classMediumTextButton='class="mediumTextButton"';
+	    }
+	    $result .='          <td style="width:30%;'.(($right==1)?"cursor:pointer;":"cursor:not-allowed;").'" ><div '.$classMediumTextButton.' style="float:right;" id="buttonValidation_'.$uniqueId.'" '.$validFunct.' >
+	                           '.formatIcon('Unsubmitted', 32, i18n('validateConsolidation'),false,true).'
 	                         </div></td>';
 	    $result .='          <td style="width:'.(($right=='1')?"70%":"100%").';padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
 	  }
