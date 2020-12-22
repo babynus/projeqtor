@@ -33,7 +33,7 @@ scriptLog('   ->/view/galleryMain.php');
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Gallery" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
-    <div id="listGalleryDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:60px;">
+    <div id="listGalleryDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:62px;">
         <?php include 'galleryParameters.php' ?>
     </div>
     <div id="detailGalleryDiv" dojoType="dijit.layout.ContentPane" region="center">
