@@ -508,9 +508,13 @@ function resetFilterQuick(lstStat){
      if(dijit.byId('hideInService')){
        dijit.byId('hideInService').set('value','');
      }
-     if(dijit.byId('listIdFilter') || dijit.byId('listNameFilter') || dijit.byId('listNameFilter') && dijit.byId('listIdFilter') ) {
+     if (dijit.byId('listIdFilter')) {
        dijit.byId('listIdFilter').set('value','');
+     }
+     if (dijit.byId('listNameFilter')) {
        dijit.byId('listNameFilter').set('value','');
+     }
+     if(dijit.byId('listIdFilter') || dijit.byId('listNameFilter') ) { 
        filter={};
        grid.query=filter;
        grid._refresh();
