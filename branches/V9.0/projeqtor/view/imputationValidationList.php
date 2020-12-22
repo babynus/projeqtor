@@ -175,6 +175,60 @@ if(sessionValueExists('endWeekImputationValidation')){
          </tr>
         </table>
       </td>
+      <?php if(isNewGui()){?>
+      <td style="text-align: right; align: right;">
+        <table width="100%">
+          <tr>
+            <td>
+              <table><tr><td>
+              <label for="showUnvalidated" class="notLabel" style="color:var(--color-list-header-text) !important;margin-top:-5px;text-shadow: 0px 0px;"><?php echo i18n('colShowUnvalidated');?></label>
+              <input type="radio" data-dojo-type="dijit/form/RadioButton"
+              <?php if ($showValidated==='0') { echo "checked='checked'"; }?>
+                id="showUnvalidated" name="showValidatedWork" value="0" 
+                onchange="refreshImputationValidation(null);"/>
+              </td>
+              <td>
+              <label for="showValidated" class="notLabel" style="color:var(--color-list-header-text) !important;margin-top:-5px;text-shadow: 0px 0px;"><?php echo i18n('colShowValidated');?></label>
+              <input type="radio" data-dojo-type="dijit/form/RadioButton"
+              <?php if ($showValidated==='1') { echo "checked='checked'"; }?>
+                id="showValidated" name="showValidatedWork" value="1"
+                onchange="refreshImputationValidation(null);"/>
+                </td><td>
+              <label for="showAllValidated" class="notLabel" style="color:var(--color-list-header-text) !important;width:100px;margin-top:-5px;text-shadow: 0px 0px;"><?php echo i18n('colShowAll');?></label>
+              <input type="radio" data-dojo-type="dijit/form/RadioButton"
+              <?php if ($showValidated==='') { echo "checked='checked'"; }?>
+                id="showAllValidated" name="showValidatedWork" value=""
+                onchange="refreshImputationValidation(null);"/>
+                
+               </td> </tr></table>
+           </td>
+          </tr>
+          <tr>
+            <td>
+            <table><tr><td>
+              <label for="showUnsubmitWork" class="notLabel" style="color:var(--color-list-header-text) !important;margin-top:-5px;text-shadow: 0px 0px;"><?php echo i18n('colShowUnsubmitWork');?></label>
+              <input type="radio" data-dojo-type="dijit/form/RadioButton"
+              <?php if ($showSubmitted==='0') { echo "checked='checked'"; }?>
+                id="showUnsubmitWork" name="showSubmitWork" value="0" 
+                onchange="refreshImputationValidation(null);"/>
+               </td><td>
+              <label for="showSubmitted" class="notLabel" style="color:var(--color-list-header-text) !important;margin-top:-5px;text-shadow: 0px 0px;"><?php echo i18n('colShowSubmitWork');?></label>
+              <input type="radio" data-dojo-type="dijit/form/RadioButton"
+              <?php if ($showSubmitted==='1') { echo "checked='checked'"; }?>
+                id="showSubmitted" name="showSubmitWork" value="1"
+                onchange="refreshImputationValidation(null);"/>
+               </td><td>
+              <label for="showAllSubmitted" class="notLabel" style="color:var(--color-list-header-text) !important;width:100px;margin-top:-5px;text-shadow: 0px 0px;"><?php echo i18n('colShowAll');?></label>
+              <input type="radio" data-dojo-type="dijit/form/RadioButton"
+              <?php if ($showSubmitted==='') { echo "checked='checked'"; }?>
+                id="showAllSubmitted" name="showSubmitWork" value=""
+                onchange="refreshImputationValidation(null);"/>
+                </td> </tr></table>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <?php }else{?>
       <td style="text-align: right; align: right;">
         <table width="100%">
           <tr>
@@ -217,6 +271,7 @@ if(sessionValueExists('endWeekImputationValidation')){
           </tr>
         </table>
       </td>
+      <?php }?>
     </tr>
   </table>
   </form>

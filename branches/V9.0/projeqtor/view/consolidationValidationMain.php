@@ -32,11 +32,11 @@ require_once "../tool/formatter.php";
   scriptLog('   ->/view/imputationValidationMain.php');  
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="ConsolidationValidation" />
-  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top"  style="height:64px;">
+  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top"  style="height:<?php if(isNewGui()){?>70px;<?php }else{?>64px;<?php }?>">
    <?php include 'consolidationValidationList.php'?>
   </div>
   
-  <div id="imputListDiv" name="imputListDiv" dojoType="dijit.layout.ContentPane" region="center"  style=" height:95%;overflow-y: scroll;" >
+  <div id="imputListDiv" name="imputListDiv" dojoType="dijit.layout.ContentPane" region="center"  style="<?php if(isNewGui()){?>max-height:95%;overflow-y: auto;<?php }else{?>height:95%;overflow-y:scroll;<?php }?>" >
     <form dojoType="dijit.form.Form" name="consolidationForm" id="consolidationForm"  method="Post" >
     <?php 
     ConsolidationValidation::drawProjectConsolidationValidation($idProject,$idProjectType,$idOrganization,$year,$month);

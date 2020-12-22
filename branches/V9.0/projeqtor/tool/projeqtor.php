@@ -4574,7 +4574,7 @@ function debugPrintTraceStack() {
   }
 }
 
-function formatIcon ($class, $size, $title=null, $withHighlight=false) {
+function formatIcon ($class, $size, $title=null, $withHighlight=false, $withImageColorNewGui=false) {
   $title=htmlEncode($title,"quote");
 // MTY - LEAVE SYSTEM    
     $hr="";
@@ -4596,7 +4596,11 @@ function formatIcon ($class, $size, $title=null, $withHighlight=false) {
   if (isset($outMode) and $outMode=='pdf') {
     $result.="<span style='z-index:500;width:".$size."px;height:".$size."px;$position;'>"."<img style='width:".$size."px;height:".$size."px;' src='css/customIcons/grey/icon$class.png' /></span>";
   } else {
-    $result.="<div class='imageColorNewGui".((isNewGui() and $withHighlight)?'NoSelection':'')." icon$class$size icon$class iconSize$size' style='z-index:500;width:".$size."px;height:".$size."px;$position;' title='$title'>&nbsp;</div>";
+    if($withImageColorNewGui){
+      $result.="<div class=".((isNewGui() and $withHighlight)?'NoSelection':'')." icon$class$size icon$class iconSize$size' style='z-index:500;width:".$size."px;height:".$size."px;$position;' title='$title'>&nbsp;</div>";
+    }else{
+      $result.="<div class='imageColorNewGui".((isNewGui() and $withHighlight)?'NoSelection':'')." icon$class$size icon$class iconSize$size' style='z-index:500;width:".$size."px;height:".$size."px;$position;' title='$title'>&nbsp;</div>";
+    }
   }
   return $result;
 }
