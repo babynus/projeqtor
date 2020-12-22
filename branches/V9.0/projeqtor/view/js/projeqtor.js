@@ -5306,6 +5306,10 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     forceCkInline = true;
     autofocus = true;
   }
+  if (editorName == 'situationComment') {
+    height = 200;
+    currentEditorIsNote=true;
+  }
   var readOnly = false;
   if (dojo.byId('ckeditor' + numEditor + 'ReadOnly')
       && dojo.byId('ckeditor' + numEditor + 'ReadOnly').value == 'true') {
@@ -5321,7 +5325,7 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     language : currentLocale,
     startupFocus : autofocus
   });
-  if (editorName != 'noteNote' && editorName != 'WUDescriptions'&& editorName != 'WUIncomings'&& editorName != 'WULivrables') { // No formChanged for notes
+  if (editorName != 'noteNote' && editorName != 'WUDescriptions'&& editorName != 'WUIncomings'&& editorName != 'WULivrables' && editorName!="situationComment") { // No formChanged for notes
     editorArray[numEditor].on('change', function(evt) {
       // evt.editor.updateElement();
       formChanged();
