@@ -366,9 +366,9 @@ class ProductVersionMain extends Version {
     $showClosedItemCompositionProduct=(Parameter::getUserParameter('showClosedItemCompositionProduct')!='0')?true:false;
     if ($item=='hideClosedComposition' and !$print and $this->id){
       $result.='<div style="position:absolute;right:5px;top:3px;">';
-      $result.='<label for="showClosedItemCompositionProduct" class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:250px">'.i18n('labelShowIdle').'</label>';
-      $result.='<div id="hideClosedComposition" style="'.((isNewGui())?'margin-top:14px':'').'"  dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedItemCompositionProduct)?'checked':'').'>';
-      $result.='title="'.i18n('labelShowIdle').'"';
+      $result.='<label for="showClosedItemCompositionProduct" class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'</label>';
+      $result.='<div id="hideClosedComposition" style="'.((isNewGui())?'margin-top:14px':'').'"  dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedItemCompositionProduct)?'checked':'');
+      $result.=' title="'.i18n('labelShowIdle').'" >';
       $result.='<script type="dojo/connect" event="onChange" args="evt">';
       $result.=' saveUserParameter("showClosedItemCompositionProduct",((this.checked)?"1":"0"));';
       $result.=' if (checkFormChangeInProgress()) {return false;}';

@@ -197,8 +197,9 @@ class ComponentMain extends ProductOrComponent {
       // $resultSC is here to store the "Show Closed" part, it allows to move the checkbox more easily
       if (!$print) {
         $resultSC='<div style="position:absolute;right:5px;top:3px;">';
-        $resultSC.='<label for="showClosedVersions"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:250px">'.i18n('labelShowIdle').'&nbsp;</label>';
-        $resultSC.='<div class="whiteCheck" id="showClosedVersions" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedVersions)?'checked':'').' >';
+        $resultSC.='<label for="showClosedVersions"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'&nbsp;</label>';
+        $resultSC.='<div class="whiteCheck" id="showClosedVersions" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedVersions)?'checked':'');
+        $resultSC.=' title="'.i18n('labelShowIdle').'" >';
         $resultSC.='<script type="dojo/connect" event="onChange" args="evt">';
         $resultSC.=' saveUserParameter("showClosedVersions",((this.checked)?"1":"0"));';
         $resultSC.=' if (checkFormChangeInProgress()) {return false;}';

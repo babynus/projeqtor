@@ -519,7 +519,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
   if ($print) return "";
   $result = '<td>';
   $result .= '<button id="showFlatStructureButtonAscending" dojoType="dijit.form.Button" showlabel="true"';
-  $result .= ' title="' . i18n('showFlatStructureAscenfing') . '" style="vertical-align: middle;">';
+  $result .= ' title="' . i18n('showFlatStructureAscenfing') . '" style="vertical-align: middle;" class="roundedVisibleButton" >';
   $result .= '<span>' . i18n('showFlatStructureAscending') . '</span>';
   $result .= '<script type="dojo/connect" event="onClick" args="evt">';
   $page = "../report/productUsingComponentVersion.php?objectClass=$class&objectId=$id";
@@ -529,7 +529,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
   $result .= '</script>';
   $result .= '</button>';
   $result .= '<button id="showFlatStructureButtonCsvAcending" dojoType="dijit.form.Button" showlabel="false" ';
-  $result .= ' title="' . i18n('showFlatStructureAscending') . '" iconClass="dijitButtonIcon dijitButtonIconCsv" class="roundedButtonSmall">';
+  $result .= ' title="' . i18n('showFlatStructureAscending') . '" iconClass="imageColorNewGui dijitButtonIcon dijitButtonIconCsv" class="detailButton">';
   $result .= '<script type="dojo/connect" event="onClick" args="evt">';
   $page = "../report/productUsingComponentVersion.php?objectClass=$class&objectId=$id";
   $result .= "var url='$page';";
