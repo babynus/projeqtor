@@ -623,7 +623,7 @@ animation: fadeIn ease 0.5s;
 	margin-right: 5px;
 }
 
-.ProjeQtOrNewGui .linkHeader, .ProjeQtOrNewGui .attachmentHeader, .ProjeQtOrNewGui .noteHeader, .ProjeQtOrNewGui .dependencyHeader, .ProjeQtOrNewGui .historyHeader, .ProjeQtOrNewGui .assignHeader, .ProjeQtOrNewGui .messageHeader, .ProjeQtOrNewGui .workflowHeader, .ProjeQtOrNewGui .filterHeader, .ProjeQtOrNewGui .calendarHeader {
+.ProjeQtOrNewGui .linkHeader, .ProjeQtOrNewGui .attachmentHeader, .ProjeQtOrNewGui .noteHeader, .ProjeQtOrNewGui .dependencyHeader, .ProjeQtOrNewGui .historyHeader, .ProjeQtOrNewGui .assignHeader, .ProjeQtOrNewGui .workflowHeader, .ProjeQtOrNewGui .filterHeader, .ProjeQtOrNewGui .calendarHeader {
     color: rgb(101, 101, 101);
     text-shadow: none;
     background: url() var(--color-table-header) !important;
@@ -2030,9 +2030,12 @@ element.style {
     border:1px solid var(--color-secondary);
 }
 
-.ProjeQtOrNewGui .reportTableHeader, .ProjeQtOrNewGui .reportHeader, .ProjeQtOrNewGui .largeReportHeader {
+.ProjeQtOrNewGui .reportTableHeader, .ProjeQtOrNewGui .reportHeader, .ProjeQtOrNewGui .largeReportHeader, .ProjeQtOrNewGui .messageHeader {
 	background: var(--color-darker) !important;
 	color:#ffffff !important;
+}
+.ProjeQtOrNewGui .messageHeader {
+	padding:5px;
 }
 .ProjeQtOrNewGui .reportTableColumnHeader {
   background: var(--color-medium) !important;
