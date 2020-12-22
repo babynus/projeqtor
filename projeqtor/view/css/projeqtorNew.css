@@ -2035,7 +2035,7 @@ element.style {
 	color:#ffffff !important;
 }
 .ProjeQtOrNewGui .messageHeader {
-	padding:5px;
+	padding:5px 0px;
 }
 .ProjeQtOrNewGui .reportTableColumnHeader {
   background: var(--color-medium) !important;
