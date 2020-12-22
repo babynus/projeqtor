@@ -146,7 +146,7 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
             <div
               style="position: absolute; left: 0px; width: 43px; top: 0px; height: 36px;"
               class="iconHighlight">&nbsp;</div>
-            <div style="position: absolute; top: 0px; left: 5px;"
+            <div style="position: absolute; top: 2px; left: 5px;"
               class="icon<?php echo $currentScreen;?>32 icon<?php echo $currentScreen;?> iconSize32" ></div>
           </td>
           <td class="title" style="height: 35px; width: 20%;">
@@ -164,7 +164,8 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
                 <?php echo i18n("colParentBudget");?>
                 &nbsp;</span>
           </td>
-          <td width="5px" class="allSearchTD parentBudgetSearchTD"><select title="<?php echo i18n('filterOnBudgetParent')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
+          <td width="5px" class="allSearchTD parentBudgetSearchTD">
+            <select title="<?php echo i18n('filterOnBudgetParent')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
                 <?php echo autoOpenFilteringSelect();?> 
                 data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
                 id="listBudgetParentFilter" name="listBudgetParentFilter" style="width:<?php echo $referenceWidth*4;?>px" value="<?php if(!$comboDetail and sessionValueExists('listBudgetParentFilter')){ echo getSessionValue('listBudgetParentFilter'); }?>" >
@@ -176,18 +177,19 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
                     var callBack=function() {refreshHierarchicalBudgetList();};
                     saveDataToSession('listBudgetParentFilter', this.value, false,callBack);
                   </script>
-          </select></td>
-          <td style="height: 35px; width: 80%; text-align: right">
+            </select>
+          </td>
+          <td style="max-height: 35px; width: 30%; text-align: right">
     <?php if($positionListDiv == 'left'){ $style='float:right;margin-left:40%;width:12%';}else{$style='float:right;margin-right: 2%;width:12%;';}?>
         <table style="float: right; margin-right: 5px">
               <tr>
                 <td><label for="showFullAmount" class="Label"
-                  style="text-shadow: 0px 0px; margin-left: 5px; width: 150px; text-align: left"><?php echo i18n('showFullAmount')?></label>
+                  style="white-space:nowrap;text-shadow: 0px 0px; margin-left: 5px; width: 200px; text-align:right"><?php echo ucfirst(i18n('showFullAmount'));?>&nbsp;</label>
                 </td>
                 <td>
                   <div title="<?php echo i18n('showFullAmount')?>"
                     dojoType="dijit.form.CheckBox" type="checkbox"
-                    class="whiteCheck" id="showFullAmount"
+                    class="whiteCheck" id="showFullAmount" <?php echo (isNewGui())?'style="position:relative;top:3px"':'';?>
                     name="showFullAmount"
                     <?php if ($showFullAmount) echo "checked=ckecked"?>>
                     <script type="dojo/method" event="onChange">
@@ -200,7 +202,7 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
               </tr>
               <tr>
                 <td><label for="showClosed" class="Label"
-                  style="text-shadow: 0px 0px; margin-left: 5px; width: 150px; text-align: left"><?php echo i18n('labelShowIdle')?></label>
+                  style="text-shadow: 0px 0px; margin-left: 5px; width: 200px; text-align: right"><?php echo ucfirst(i18n('labelShowIdle'));?>&nbsp;</label>
                 </td>
                 <td>
                   <div title="<?php echo i18n('labelShowIdle')?>"
@@ -219,9 +221,7 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
               </tr>
             </table>
           </td>
-        </tr>
-        <tr>
-          <td>
+          <td style="width:40px;text-align:center">
             <button title="<?php echo i18n('print')?>"  
                dojoType="dijit.form.Button" 
                id="printButtonList" name="printButtonList"
