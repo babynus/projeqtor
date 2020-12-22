@@ -490,9 +490,9 @@ class ProjectExpenseMain extends Expense {
         drawTabExpense($this, false);
       }
       if (!$print) {
-      	$result='<div style="position:absolute;right:5px;top:2px;">';
-      	$result.='<label for="showExpenseProjectDetail"  class="dijitTitlePaneTitle" style="font-weight:normal !important;height:10px;width:250px">'.i18n('colShowDetail').'&nbsp;</label>';
-      	$result.='<div class="whiteCheck" id="showExpenseProjectDetail" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showExpenseProjectDetail)?'checked':'').' >';
+      	$result='<div style="position:absolute;right:5px;top:3px;">';
+      	$result.='<label for="showExpenseProjectDetail"  class="dijitTitlePaneTitle" s style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:250px">'.i18n('colShowDetail').'&nbsp;</label>';
+      	$result.='<div class="whiteCheck" id="showExpenseProjectDetail" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showExpenseProjectDetail)?'checked':'').' >';
       	$result.='<script type="dojo/connect" event="onChange" args="evt">';
       	$result.=' saveUserParameter("showExpenseProjectDetail",((this.checked)?"1":"0"));';
       	$result.=' if (checkFormChangeInProgress()) {return false;}';

@@ -370,9 +370,10 @@ class ComponentVersionMain extends Version {
   		$result=parent::drawFlatStructureButton('ComponentVersion', $this->id);
   		return $result;
     }
-  	if ($item=='hideClosedActivity' and !$print and $this->id){
-  	  $result.='<td for="showClosedActivity" style="color:white;position:absolute;right:25px;top:3px;">'.i18n('labelShowIdleActivities').'</td>';
-  	  $result.='<div id="hideClosedActivity" style="position:absolute;right:3px;top:3px;" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedActivity)?'checked':'').'>';  	  
+  	if ($item=='hideClosedActivity' and !$print and $this->id){  	  
+  	  $result.='<div style="position:absolute;right:5px;top:3px;">';
+  	  $result.='<label for="showClosedActivity" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:250px">'.i18n('labelShowIdleActivities').'</label>';
+  	  $result.='<div id="hideClosedActivity" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedActivity)?'checked':'').'>';  	  
   	  $result.='title="'.i18n('labelShowIdle').'"';
   	  $result.='<script type="dojo/connect" event="onChange" args="evt">';
   	  $result.=' saveUserParameter("showClosedActivity",((this.checked)?"1":"0"));';
@@ -380,12 +381,14 @@ class ComponentVersionMain extends Version {
   	  $result.=' loadContent("objectDetail.php", "detailDiv", "listForm");';
   	  $result.=' </script>';
   	  $result.='</div>';
+  	  $result.='</div>';
     }
     
     // ADD tlaguerie & dFayolle ticket 366 and 367
   	if ($item=='hideClosedComposition' and !$print and $this->id){
-      $result.='<td for="showClosedItemComposition" style="color:white;position:absolute;right:25px;top:3px;">'.i18n('labelShowIdle').'</td>';
-      $result.='<div id="hideClosedComposition" style="position:absolute;right:3px;top:3px;" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedItemComposition)?'checked':'').'>';
+  	  $result.='<div style="position:absolute;right:5px;top:3px;">';
+      $result.='<label for="showClosedItemComposition" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:250px">'.i18n('labelShowIdle').'</label>';
+      $result.='<div id="hideClosedComposition" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedItemComposition)?'checked':'').'>';
       $result.='title="'.i18n('labelShowIdle').'"';
       $result.='<script type="dojo/connect" event="onChange" args="evt">';
       $result.=' saveUserParameter("showClosedItemComposition",((this.checked)?"1":"0"));';
@@ -393,16 +396,19 @@ class ComponentVersionMain extends Version {
       $result.=' loadContent("objectDetail.php", "detailDiv", "listForm");';
       $result.=' </script>';
       $result.='</div>';
+      $result.='</div>';
     }
     if ($item=='hideClosedStructure' and !$print and $this->id){
-        $result.='<td for="showClosedItemStructure" style="color:white;position:absolute;right:25px;top:3px;">'.i18n('labelShowIdle').'</td>';
-        $result.='<div id="hideClosedStructure" style="position:absolute;right:3px;top:3px;" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedItemStructure)?'checked':'').'>';
+        $result.='<div style="position:absolute;right:5px;top:3px;">';
+        $result.='<label for="showClosedItemStructure" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:250px"">'.i18n('labelShowIdle').'</label>';
+        $result.='<div id="hideClosedStructure" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedItemStructure)?'checked':'').'>';
         $result.='title="'.i18n('labelShowIdle').'"';
         $result.='<script type="dojo/connect" event="onChange" args="evt">';
         $result.=' saveUserParameter("showClosedItemStructure",((this.checked)?"1":"0"));';
         $result.=' if (checkFormChangeInProgress()) {return false;}';
         $result.=' loadContent("objectDetail.php", "detailDiv", "listForm");';
         $result.=' </script>';
+        $result.='</div>';
         $result.='</div>';
     }
     // END tlaguerie & dFayolle ticket 366 and 367
