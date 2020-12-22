@@ -995,11 +995,7 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
                    ?>
                    
                 <?php if ( $objectClass=='GlobalView') { ?>
-              <td style="vertical-align: middle; text-align:right;" width="5px">
-                 <span class="nobr">&nbsp;&nbsp;&nbsp;
-                <?php echo i18n("listTodayItems");?>&nbsp;
-              </td>
-              
+
               <td width="5px">
                 <div dojoType="dijit.form.DropDownButton"							    
   							  id="listItemsSelector" jsId="listItemsSelector" name="listItemsSelector" 
