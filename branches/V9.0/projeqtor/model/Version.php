@@ -485,7 +485,7 @@ class Version extends SqlElement {
     $result='<br/><table>';
     $result.='<tr><td>';
     $result.='<button id="showFlatStructureButton" dojoType="dijit.form.Button" showlabel="true"';
-    $result.=' title="'.i18n('showFlatStructure').'" style="vertical-align: middle;">';
+    $result.=' title="'.i18n('showFlatStructure').'" class="roundedVisibleButton" style="vertical-align: middle;">';
     $result.='<span>' . i18n('showFlatStructure') . '</span>';
     $result.='<script type="dojo/connect" event="onClick" args="evt">';
     $page="../report/productVersionFlatStructure.php?objectClass=$class&objectId=$id";
@@ -495,7 +495,7 @@ class Version extends SqlElement {
     $result.='</script>';
     $result.='</button>';
     $result.='<button id="showFlatStructureButtonCsv" dojoType="dijit.form.Button" showlabel="false" ';
-    $result.=' title="'.i18n('showFlatStructure').'" iconClass="dijitButtonIcon dijitButtonIconCsv" class="roundedButtonSmall">';
+    $result.=' title="'.i18n('showFlatStructure').'" iconClass="dijitButtonIcon dijitButtonIconCsv" class="detailButton">';
     $result.='<script type="dojo/connect" event="onClick" args="evt">';
     $page="../report/productVersionFlatStructure.php?objectClass=$class&objectId=$id";
     $result.="var url='$page';";
