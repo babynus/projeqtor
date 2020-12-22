@@ -91,7 +91,7 @@ require_once "../tool/formatter.php";
             
             <table style="width:100%;">
               <tr>
-                <td class="display" colspan="6">
+                <td class="display" colspan="6" style="border:0">
                  <?php echo i18n('pluginDir',array(Plugin::unrelativeDir(Plugin::getDir()) ));?>
                 <br/><br/></td>
               </tr>
@@ -100,9 +100,9 @@ require_once "../tool/formatter.php";
             <table style="width:100%;">
               <tr height="30px"> 
                 <td class="dialogLabel" style="width:200px";>
-                  <label for="uploadPlugin" style="width:200px"><?php echo i18n("addPluginFile");?>&nbsp;:&nbsp;</label>
+                  <label for="uploadPlugin" style="width:200px;white-space:nowrap"><?php echo i18n("addPluginFile");?>&nbsp;:&nbsp;</label>
                 </td>
-                <td style="text-align:left;">
+                <td style="text-align:left;width;200px" >
                  <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>" />     
                  <?php  if ($isIE and $isIE<=9) {?>
                  <input MAX_FILE_SIZE="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>"
@@ -115,7 +115,7 @@ require_once "../tool/formatter.php";
                  <div MAX_FILE_SIZE="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>"
                   dojoType="dojox.form.Uploader" type="file" 
                   url="../tool/uploadPlugin.php"
-                  target="pluginPost"
+                  target="pluginPost" class="dynamicTextButton pluginFile" style="padding:0;"
                   name="pluginFile" id="pluginFile" 
                   cancelText="<?php echo i18n("buttonReset");?>"
                   multiple="false" 
