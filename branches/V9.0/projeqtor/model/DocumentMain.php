@@ -205,7 +205,7 @@ class DocumentMain extends SqlElement {
     	  }
     	  if ($canUnlock) {
 	    		$result .= '<tr><td></td><td>';
-	        $result .= '<button id="unlockDocument" dojoType="dijit.form.Button" showlabel="true"'; 
+	        $result .= '<button id="unlockDocument" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton"'; 
 	        $result .= ' title="' . i18n('unlockDocument') . '" >';
 	        $result .= '<span>' . i18n('unlockDocument') . '</span>';
 	        $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
@@ -217,7 +217,7 @@ class DocumentMain extends SqlElement {
     	} else {
 	    	$result .= '<tr><td></td><td>';
 	    	$result .= '<button id="lockDocument" dojoType="dijit.form.Button" showlabel="true"'; 
-	      $result .= ' title="' . i18n('lockDocument') . '" >';
+	      $result .= ' title="' . i18n('lockDocument') . '" class="roundedVisibleButton" >';
 	      $result .= '<span>' . i18n('lockDocument') . '</span>';
 	      $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
 	      $result .=  '  lockDocument();';
@@ -234,7 +234,7 @@ class DocumentMain extends SqlElement {
     	}
     	$result .= '<tr><td colspan="2">';
     	$result .= '<button id="sendInfoToApprovers" dojoType="dijit.form.Button" showlabel="true"';
-    	$result .= ' title="' . i18n('sendInfoToApprovers') . '" >';
+    	$result .= ' title="' . i18n('sendInfoToApprovers') . '"class="roundedVisibleButton" >';
     	$result .= '<span>' . i18n('sendInfoToApprovers') . '</span>';
     	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
     	$result .= '   if (checkFormChangeInProgress()) {return false;}';
