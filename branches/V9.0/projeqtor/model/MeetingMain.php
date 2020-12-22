@@ -294,7 +294,7 @@ class MeetingMain extends SqlElement {
       }
       $result .= '<tr><td valign="top" class="label"><label></label></td><td>';
       $result .= '<button id="sendMailToAttendees" dojoType="dijit.form.Button" showlabel="true"';
-      $result .= ' title="' . i18n('sendMailToAttendees') . '" class="roundedVisibleButton">';
+      $result .= ' title="' . i18n('sendMailToAttendees') . '" class="roundedVisibleButton" >';
       $result .= '<span>' . i18n('sendMailToAttendees') . '</span>';
       $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
       $result .= '   if (checkFormChangeInProgress()) {return false;}';
