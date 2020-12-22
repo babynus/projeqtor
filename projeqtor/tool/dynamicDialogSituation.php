@@ -84,10 +84,20 @@ $predefinedList = $predefinedSituation->getSqlElementsFromCriteria(null, null, $
 ?>
 <div >
   <table style="width:100%;">
-  <tr>
+      <td>
+        <form dojoType="dijit.form.Form" id='situationForm' name='situationForm' onSubmit="return false;" >
+         <input id="situationId" name="situationId" type="hidden" value="<?php echo $situation->id;?>" />
+         <input id="situationRefType" name="situationRefType" type="hidden" value="<?php if($situationId){echo $situation->refType;}else{echo $objectClass;}?>" />
+         <input id="situationRefId" name="situationRefId" type="hidden" value="<?php if($situationId){echo $situation->refId;}else{echo $object->id;}?>" />
+         <input id="situationType" name="situationType" type="hidden" value="<?php echo $situation->situationType;?>" />
+         <input id="idProject" name="idProject" type="hidden" value="<?php if($situationId){echo $situation->idProject;}else{echo $object->idProject;}?>" />
+         <input id="situationEditorType" name="situationEditorType" type="hidden" value="<?php echo getEditorType();?>" />
+         <table>
+           <tr>
     <td>
-      <div>
-        <label class="dialogLabel" for="dialogSituationPredefinedSituation" ><?php echo i18n("colPredefinedSituation");?> : </label>
+        <label class="dialogLabel" for="dialogSituationPredefinedSituation" ><?php echo i18n("colPredefinedSituation");?>&nbsp;<?php if (!isNewGui()) echo ': ';?></label>
+     </td>
+     <td>
         <select id="dialogSituationPredefinedSituation" name="dialogSituationPredefinedSituation" dojoType="dijit.form.FilteringSelect"
         <?php echo autoOpenFilteringSelect();?>
         onchange="situationSelectPredefinedText(this.value);"
@@ -99,29 +109,23 @@ $predefinedList = $predefinedSituation->getSqlElementsFromCriteria(null, null, $
          }
          ?>
         </select>
-        </div>
+
       </td>
     </tr>
     <tr>
-      <td>
-        <form dojoType="dijit.form.Form" id='situationForm' name='situationForm' onSubmit="return false;" >
-         <input id="situationId" name="situationId" type="hidden" value="<?php echo $situation->id;?>" />
-         <input id="situationRefType" name="situationRefType" type="hidden" value="<?php if($situationId){echo $situation->refType;}else{echo $objectClass;}?>" />
-         <input id="situationRefId" name="situationRefId" type="hidden" value="<?php if($situationId){echo $situation->refId;}else{echo $object->id;}?>" />
-         <input id="situationType" name="situationType" type="hidden" value="<?php echo $situation->situationType;?>" />
-         <input id="idProject" name="idProject" type="hidden" value="<?php if($situationId){echo $situation->idProject;}else{echo $object->idProject;}?>" />
-         <input id="situationEditorType" name="situationEditorType" type="hidden" value="<?php echo getEditorType();?>" />
-         <table>
           <tr>
-            <td>
-              <label class="dialogLabel" for="situationSituation"><?php echo i18n('colSituation');?> : </label>
+            <td style="vertical-align:middle">
+              <label class="dialogLabel" for="situationSituation"><?php echo i18n('colSituation');?>&nbsp;<?php if (!isNewGui()) echo ': ';?></label>
+            </td><td>
               <input id="situationSituation" name="situationSituation" value="<?php echo $situation->name;?>" 
                    dojoType="dijit.form.TextBox" class="input required" required='required' style="width:345px"/>
             </td>
           </tr>
           <tr>
            <td>
-            <label class="dialogLabel" for="ressource"><?php echo i18n('colResponsible');?> : </label>
+            <label class="dialogLabel" for="ressource"><?php echo i18n('colResponsible');?>&nbsp;<?php if (!isNewGui()) echo ': ';?></label>
+            </td>
+            <td>
             <select dojoType="dijit.form.FilteringSelect" class="input required" required='required'
               style="width: 150px;" name="ressource" id="ressource"
               <?php echo autoOpenFilteringSelect();?> value="<?php if($situation->idResource){echo $situation->idResource;}else{echo $userId;}?>">
@@ -133,14 +137,16 @@ $predefinedList = $predefinedSituation->getSqlElementsFromCriteria(null, null, $
             </select>
            </td>
           </tr>
-          <tr>
+          <tr style="height:16px">
             <td>
-              <label class="dialogLabel" for="situationDate"><?php echo i18n('colDate');?> : </label>
+              <label class="dialogLabel" for="situationDate"><?php echo i18n('colDate');?>&nbsp;<?php if (!isNewGui()) echo ': ';?></label>
+            </td>
+            <td>
               <div id="situationDate" name="situationDate" dojoType="dijit.form.DateTextBox" invalidMessage="<?php echo i18n('messageInvalidDate'); ?>" type="text" maxlength="10"
               <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
                 echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
               }?>
-              style="width:82px;text-align: center;margin-right:-3px;margin-top:1px;" class="input required generalColClass" required='required' value="<?php echo $date;?>" hasDownArrow="false">
+              style="width:82px;text-align: center;margin-right:-3px;<?php echo (isNewGui())?'':'margin-top:1px;';?>" class="input required generalColClass" required='required' value="<?php echo $date;?>" hasDownArrow="false">
               </div>
               <div id="situationTime" name="situationTime" dojoType="dijit.form.TimeTextBox" invalidMessage="<?php echo i18n('messageInvalidTime'); ?>" type="text" maxlength="8"
               <?php if (sessionValueExists('browserLocaleTimeFormat')) {
@@ -151,8 +157,8 @@ $predefinedList = $predefinedSituation->getSqlElementsFromCriteria(null, null, $
             <td>
           </tr>
           <tr>
-            <td>
-              <label class="tabLabel" for="situationComment" style="text-align:left;font-weight:normal; width:300px;"><?php echo i18n('colComment');?></label><br/>
+            <td colspan="2">
+              <label class="tabLabel" for="situationComment" style="text-align:left;font-weight:normal; width:300px;<?php echo (isNewGui())?'position:relative;top:-6px;background:transparent':'';?>"><?php echo i18n('colComment');?></label><br/>
          <?php if (getEditorType()=="CK" or getEditorType()=="CKInline") {?>
           <textarea style="width:<?php echo $detailWidth;?>px; height:<?php echo $detailHeight;?>px"
           name="situationComment" id="situationComment"><?php
