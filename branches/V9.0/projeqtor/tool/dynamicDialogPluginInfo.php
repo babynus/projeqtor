@@ -32,7 +32,7 @@ echo "<br/>";
 echo "<table>";
 foreach ($arrayData as $prop=>$val) {
   $label=i18n("col".substr($prop,6));
-  echo '<tr><td class="input label" style="width:200px">'.$label.'&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</td><td class="input">'.$val.'</td></tr>';
+  echo '<tr><td class="input label" style="width:250px;">'.$label.'&nbsp;'.((isNewGui())?'':':').'&nbsp;</td><td class="input" style="padding-left:10px;">'.$val.'</td></tr>';
   echo '<tr><td colspan="2">&nbsp;</td></tr>';
 }
 echo "</table>"; 

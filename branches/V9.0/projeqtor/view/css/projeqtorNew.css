@@ -2088,3 +2088,6 @@ element.style {
 	width:250px;
 	left:-251px;
 }
+.ProjeQtOrNewGui .dynamicTextButton.pluginFile .dijitButtonNode  {
+	width:150px;
+}
