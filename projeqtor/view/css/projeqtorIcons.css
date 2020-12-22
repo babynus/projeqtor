@@ -480,7 +480,7 @@
 .ProjeQtOrFlatGrey .iconButtonAdd16 { background-image: url(customIcons/grey/display.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonAdd16 { background-image: url(customIcons/red/display.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonAdd16 { background-image: url(customIcons/new/display.svg);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconButtonView { background-image: url(customIcons/new/iconButtonView.svg) !important;  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonView { background-image: url(customIcons/new/iconView.svg) !important;  background-repeat: no-repeat; }
 
 .iconButtonAdd16 { background-image: url(images/smallButtonAdd.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonAdd16 { background-image: url(customIcons/blue/iconAdd.png);  background-repeat: no-repeat; }
