@@ -72,7 +72,7 @@ class SupplierContractMain extends SqlElement {
   public $phoneNumber;
   public $sla;
   public $_lib_help_sla;
-  public $_tab_2_3=array('StartTime', 'EndTime' , 'weekPeriod','saturdayPeriod','sundayAndOffDayPeriod');
+  public $_tab_2_3_allowWrap=array('StartTime', 'EndTime' , 'weekPeriod','saturdayPeriod','sundayAndOffDayPeriod');
   public $weekPeriod;
   public $weekPeriodEnd;
   public $saturdayPeriod;
