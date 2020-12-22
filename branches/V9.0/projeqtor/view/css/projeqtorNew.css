@@ -2091,3 +2091,6 @@ element.style {
 .ProjeQtOrNewGui .dynamicTextButton.pluginFile .dijitButtonNode  {
 	width:150px;
 }
+.ProjeQtOrNewGui .dijitTitlePaneTitle {
+	overflow:hidden;
+}

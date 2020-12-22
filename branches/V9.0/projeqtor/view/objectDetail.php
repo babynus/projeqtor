@@ -5790,7 +5790,7 @@ function drawVersionCompatibility($obj, $refresh=false) {
     if ($obj->id!=null and !$print and $canUpdate) {
       echo '<a onClick="addVersionCompatibility();" title="'.i18n('addVersionCompatibility').'" > '.formatSmallButton('Add').'</a>';
     }
-    echo '<button dojoType="dijit.form.Button" title="'.i18n('exportVersionCompatibilities').'" iconClass="dijitButtonIcon dijitButtonIconCsv" class="roundedButtonSmall" style="border:0">';
+    echo '<button dojoType="dijit.form.Button" title="'.i18n('exportVersionCompatibilities').'" iconClass="imageColorNewGui dijitButtonIcon dijitButtonIconCsv" class=" noRotate roundedButtonSmall" style="border:0">';
     echo '<script type="dojo/connect" event="onClick" args="evt">';
     $page='../report/productVersionCompatibility.php?objectClass='.get_class($obj).'&objectId='.$obj->id;
     echo "var url='$page';";
