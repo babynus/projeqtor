@@ -51,6 +51,12 @@ $pe->setVisibility();
 $workVisibility=$pe->_workVisibility;
 $costVisibility=$pe->_costVisibility;
 
+$displayWidth=RequestHandler::getValue('destinationWidth');
+$twoCols=($displayWidth>1400)?true:false;
+if (!isNewGui() ) $twoCols=false;
+$twoCols=false;
+//echo "width=$displayWidth";
+
 $arrayCols=array('Ticket', 'Activity', 'Milestone', 'Action', 'Risk', 'Issue', 'Question', 'Requirement','Delivery');
 $showCol=array();
 foreach ($arrayCols as $col) {
@@ -209,6 +215,7 @@ function showProjects() {
           .' type="radio" dojoType="dijit.form.RadioButton" name="countScope" id="countScopeAll" '
           .(($countScope=='all')?'checked':'').' value="all" />';
       echo '</td>';
+      echo "<td style='width:50%'>&nbsp;</td>";
     }
     echo '</tr>';
     echo '</table></form>';
@@ -830,11 +837,12 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
   value="Today" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
   <div style="overflow: <?php echo(!$print)?'auto':'hidden';?>;padding:10px" id="detailDiv" dojoType="dijit.layout.ContentPane" region="center">
-    <?php if (!$print) {?>
+    <?php 
+    if (!$print) {?>
     <div class="parametersButton">
       <button id="todayRefreshButton" dojoType="dijit.form.Button"
         showlabel="false" title="<?php echo i18n('enableRefresh');?>"
-        style="width: 28px"
+        style="width: 28px" class="detailButton"
         iconClass="dijitButtonIcon dijitButtonIconRefresh">
         <script type="dojo/connect" event="onClick" args="evt">
         if(typeof refreshEnabled === 'undefined') {
@@ -872,8 +880,7 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
                 }).play();
               }
             }
-            window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+            window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
             var start = null;
             var reportNodes = dojo.query('#detailDiv .dijitTitlePane');
             var nbReports = reportNodes.length;
@@ -886,41 +893,41 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
                 nbReports = reportNodes.length;
                 requestAnimationFrame(step);
               } else {
-              if (start === null) start = timestamp;
-              progress = timestamp - start;
-              var scrollDelay=<?php echo $paramScrollDelay;?>;
-              if (progress > (scrollDelay * 1000 * nbTimes)) {
-                if(i >= reportNodes.length) {
-                  i = 0;
-                  ++nbTimes;
+                if (start === null) start = timestamp;
+                progress = timestamp - start;
+                var scrollDelay=<?php echo $paramScrollDelay;?>;
+                if (progress > (scrollDelay * 1000 * nbTimes)) {
+                  if(i >= reportNodes.length) {
+                    i = 0;
+                    ++nbTimes;
+                  }
+                  scrollToAnchor(reportNodes[i]);
+                  if(i < reportNodes.length) {
+                    ++i;
+                    ++nbTimes;
+                  }
+                  myReq = requestAnimationFrame(step);
+                } else {
+                  myReq = requestAnimationFrame(step);
                 }
-                scrollToAnchor(reportNodes[i]);
-                if(i < reportNodes.length) {
-                  ++i;
-                  ++nbTimes;
-                }
-                myReq = requestAnimationFrame(step);
-              } else {
-                myReq = requestAnimationFrame(step);
               }
             }
+            requestAnimationFrame(step);
           }
-          requestAnimationFrame(step);
-        }
-        animateScrollReport();
-        var refreshDelay=<?php echo $paramRefreshDelay;?>;
-        refreshEnabled = setInterval(function() {
-          formChangeInProgress=false;
-          var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
-          if(typeof myReq !== 'undefined') {
-            window.cancelAnimationFrame(myReq);
-          }
-          loadMenuBarItem('Today', 'Today', 'tree');
           animateScrollReport();
-        }, refreshDelay * 60 * 1000);
-      } else {
-        exitFullScreen();
-        formChangeInProgress=false;
+          var refreshDelay=<?php echo $paramRefreshDelay;?>;
+          refreshEnabled = setInterval(function() {
+            formChangeInProgress=false;
+            var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+            if(typeof myReq !== 'undefined') {
+              window.cancelAnimationFrame(myReq);
+            }
+            loadMenuBarItem('Today', 'Today', 'tree');
+            animateScrollReport();
+          }, refreshDelay * 60 * 1000);
+        } else {
+          exitFullScreen();
+          formChangeInProgress=false;
           dojo.byId('statusBarDiv').style.top='30px';
           dijit.byId("toolBarDiv").resize({h :30});
           dijit.byId("statusBarDiv").resize({h :52});
@@ -929,98 +936,96 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
           var heightCenterDiv = dojo.byId('centerDiv').style.height;
           heightCenterDiv = heightCenterDiv.substring(0,heightCenterDiv.length-2);
           heightCenterDiv =  parseInt(heightCenterDiv)-81;
-           dojo.byId('centerDiv').style.height=heightCenterDiv+'px';
-        showInfo(i18n("disableRefreshDone"));
-        clearTimeout(refreshEnabled);
-        var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
-        if(typeof myReq !== 'undefined') {
-          window.cancelAnimationFrame(myReq);
+          dojo.byId('centerDiv').style.height=heightCenterDiv+'px';
+          showInfo(i18n("disableRefreshDone"));
+          clearTimeout(refreshEnabled);
+          var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+          if(typeof myReq !== 'undefined') {
+            window.cancelAnimationFrame(myReq);
+          }
+          delete refreshEnabled;
         }
-        delete refreshEnabled;
-      }
-      </script>
-    </button>
-    <button id="todayParametersButton" dojoType="dijit.form.Button"
-      showlabel="false" title="<?php echo i18n('menuParameter');?>"
-      style="width: 28px"
-      iconClass="dijitButtonIcon iconParameter22">
-      <script type="dojo/connect" event="onClick" args="evt">
+        </script>
+      </button>
+      <button id="todayParametersButton" dojoType="dijit.form.Button"
+        showlabel="false" title="<?php echo i18n('menuParameter');?>"
+        style="width: 28px" class="detailButton"
+        iconClass="imageColorNewGui iconParameter iconSize22">
+        <script type="dojo/connect" event="onClick" args="evt">
           loadDialog('dialogTodayParameters', null, true);
         </script>
-    </button>
-    <button id="todayPrintButton" dojoType="dijit.form.Button"
-      showlabel="false" title="<?php echo i18n('print');?>"
-      iconClass="dijitButtonIcon dijitButtonIconPrint">
-      <script type="dojo/connect" event="onClick" args="evt">
+      </button>
+      <button id="todayPrintButton" dojoType="dijit.form.Button"
+        showlabel="false" title="<?php echo i18n('print');?>"  class="detailButton"
+        iconClass="dijitButtonIcon dijitButtonIconPrint">
+        <script type="dojo/connect" event="onClick" args="evt">
           showPrint('../view/today.php');
         </script>
-    </button>
-    
+      </button>    
     </div>    
-    <?php }?>
-    <?php
-    
+    <?php 
+    } 
     $titlePane="Today_message";
     if (! isNewGui() and (!$print or !array_key_exists($titlePane, $collapsedList))) {
-      if (!$print) {
-        ?>   
-    <div dojoType="dijit.TitlePane"
-      open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
-      id="<?php echo $titlePane;?>"
-      onHide="saveCollapsed('<?php echo $titlePane;?>');"
-      onShow="saveExpanded('<?php echo $titlePane;?>');"
-      title="<?php echo i18n('menuMessage');?>">  
-    <?php } else {?>
+      if (!$print) {?>   
+      <div dojoType="dijit.TitlePane"
+        open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
+        id="<?php echo $titlePane;?>"
+        onHide="saveCollapsed('<?php echo $titlePane;?>');"
+        onShow="saveExpanded('<?php echo $titlePane;?>');"
+        title="<?php echo i18n('menuMessage');?>">  
+      <?php 
+      } else {?>
       <div class="section"><?php echo i18n('menuMessage');?></div>
       <br />
       <div>    
-    <?php
-      
-}   
+      <?php
+      }   
       //showMessages();
       ?>
-    </div>
+      </div>
       <br /><?php
     }
     $paramFirstPage=Parameter::getUserParameter('startPage');
     if ($paramFirstPage=='startGuide.php' and !$print) {
       $titlePane="Today_startGuide";
       ?>
-    <div dojoType="dijit.TitlePane"
-        open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
-        id="<?php echo $titlePane;?>"
-        onHide="saveCollapsed('<?php echo $titlePane;?>');"
-        onShow="saveExpanded('<?php echo $titlePane;?>');"
-        title="<?php echo i18n('startGuideTitle');?>">  
-      <?php include "startGuide.php";?>
-    </div>
+      <div dojoType="dijit.TitlePane"
+          open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
+          id="<?php echo $titlePane;?>"
+          onHide="saveCollapsed('<?php echo $titlePane;?>');"
+          onShow="saveExpanded('<?php echo $titlePane;?>');"
+          title="<?php echo i18n('startGuideTitle');?>">  
+        <?php include "startGuide.php";?>
+      </div>
       <br />
     <?php
     }
-    
+    if ($twoCols) {?>
+    <table style=""><tr><td style="width:50%; border:1px solid green">
+    <?php 
+    }
     foreach ($todayList as $todayItem) {
       if ($todayItem->scope=='static' and $todayItem->staticSection=='Projects') {
         $titlePane="Today_project";
         if (!$print or !array_key_exists($titlePane, $collapsedList)) {
-          if (!$print) {
-            ?> 
-    <div dojoType="dijit.TitlePane"
-        open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
-        id="<?php echo $titlePane;?>"
-        onHide="saveCollapsed('<?php echo $titlePane;?>');"
-        onShow="saveExpanded('<?php echo $titlePane;?>');"
-        title="<?php echo i18n('menuProject');?>">
-    <?php } else {?>
-      <div class="section"><?php echo i18n('menuProject');?></div>
-        <br />
-        <div>    
-    <?php
-          
-}
+          if (!$print) {?> 
+            <div dojoType="dijit.TitlePane"
+              open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
+              id="<?php echo $titlePane;?>"
+              onHide="saveCollapsed('<?php echo $titlePane;?>');"
+              onShow="saveExpanded('<?php echo $titlePane;?>');"
+              title="<?php echo i18n('menuProject');?>">
+          <?php 
+          } else {?>
+            <div class="section"><?php echo i18n('menuProject');?></div><br />
+            <div>    
+          <?php
+          }
           showProjects();
           ?>
-    </div>
-        <br /><?php
+          </div>
+          <br /><?php
         }
       } else if ($todayItem->scope=='static' and $todayItem->staticSection=='AssignedTasks') {
         showAssignedTasks();
@@ -1057,7 +1062,7 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
             foreach ($paramsToday as $pName=>$pValue) {
               $params[$pName]=$pValue;
             }
-            $urlParam="";
+            $urlParam="?fromToday=true";
             foreach ($params as $paramName=>$paramValue) {
               $urlParam.=($urlParam or strpos($rpt->file, '?')>0)?'&':'?';
               $urlParam.=$paramName.'='.$paramValue;
@@ -1082,7 +1087,16 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
 	  	echo '</div>';
 	  	echo '<br/>';
 	  }
+	  if ($twoCols) {?>
+	    </td>
+	    <td style="width:100px;border:1px solid red">
+	    <?php include('../view/activityStreamList.php');?>
+	  	</td>
+	    </tr></table>
+	  <?php 
+	  }	  
   }
+
 } ?>
   </div>
     </div>

@@ -39,7 +39,7 @@ $today=new Today();
   $profile=SqlList::getFieldFromId('Profile', $user->idProfile, 'profileCode',false);
   echo '<form dojoType="dijit.form.Form" id="todayParametersForm" name="todayParametersForm" onSubmit="return false;">';
   echo '<table style="width:100%">';
-  echo '<tr><td class="dialogSection" colspan="2">'.i18n('periodForTasks').'</td></tr>';
+  echo '<tr><td class="dialogSection section" colspan="2">'.i18n('periodForTasks').'</td></tr>';
   echo '<tr><td></td><td>&nbsp;</td></tr>';
   echo '<tr style="height:10px;">';
   echo '  <td class="dialogLabel" width="10px;"><label>'.i18n('colDueDate').'&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>';
@@ -69,7 +69,7 @@ $today=new Today();
   $paramScrollDelay=Parameter::getUserParameter('todayScrollDelay');
   if (!$paramScrollDelay) $paramScrollDelay=10;
   echo '<table style="width:100%">';
-  echo '<tr><td class="dialogSection" colspan="2">'.i18n('todayRefreshParameters').'</td></tr>';
+  echo '<tr><td class="dialogSection section" colspan="2">'.i18n('todayRefreshParameters').'</td></tr>';
   echo '<tr><td></td><td>&nbsp;</td></tr>';
   echo '<tr style="height:10px;">';
   echo '  <td class="dialogLabel" width="10px;"><label>'.i18n('todayRefreshParametersRefresh').'&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>';
@@ -91,7 +91,7 @@ $today=new Today();
   echo '</table>';
   echo '<table id="dndTodayParameters" jsId="dndTodayParameters" dojotype="dojo.dnd.Source" dndType="today"
                withhandles="true" class="container" style="height:10px;width:100%;cellspacing:0; cellpadding:0;">';
-  echo '<tr><td class="dialogSection" colspan="4">'.i18n('listTodayItems').'</td></tr>';
+  echo '<tr><td class="dialogSection section" colspan="4">'.i18n('listTodayItems').'</td></tr>';
   echo '<tr><td colspan="4">&nbsp;</td></tr>';
   foreach ($todayList as $todayItem) {
     if ($todayItem->scope=='static') {
@@ -104,11 +104,14 @@ $today=new Today();
       echo '<tr id="dialogTodayParametersRow' . htmlEncode($todayItem->id). '"
                 class="dojoDndItem" dndType="today" style="height:10px;">';
       echo '<td class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;</td>';
-      echo '<td style="width:16px;height:10px;">';
-      if ($todayItem->scope!='static') {
-        echo '<img class="roundedButtonSmall" src="../view/css/images/smallButtonRemove.png" onClick="setTodayParameterDeleted(' . htmlEncode($todayItem->id). ');" />';
-      }
       echo '<input type="hidden" name="dialogTodayParametersDelete' . htmlEncode($todayItem->id). '" id="dialogTodayParametersDelete' . htmlEncode($todayItem->id). '" value="0" />';
+      echo '<td style="height:10px;">';
+      if ($todayItem->scope!='static') {
+        echo "<div style='width:24px;".((isNewGui())?'position:relative;top:2px;':'')."'>";
+        $image=(isNewGui())?'../view/css/customIcons/new/iconRemove.svg':'../view/css/images/smallButtonRemove.png';
+        echo '<img class="roundedButtonSmall imageColorNewGui iconSize16" src="'.$image.'" onClick="setTodayParameterDeleted(' . htmlEncode($todayItem->id). ');" />';
+        echo "</div>";
+      }
       echo '</td>';
       echo '<td style="width:16px;height:10px;"><div name="dialogTodayParametersIdle' . htmlEncode($todayItem->id). '" 
                  dojoType="dijit.form.CheckBox" type="checkbox" '.(($todayItem->idle=='0')?' checked="checked"':'').'>
