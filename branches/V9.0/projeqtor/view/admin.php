@@ -71,7 +71,7 @@
              title="<?php echo i18n('cronTasks');?>">
             <table style="width:100%;">            
               <tr>
-                <td class="label"><?php echo i18n("cronStatus").$newGuiDisplaydoublePoint;?></td>
+                <td class="label" style="<?php echo (isNewGui())?'margin-top:-3px;':'';?>"><?php echo i18n("cronStatus").$newGuiDisplaydoublePoint;?></td>
                 <td class="display">
                   <?php 
                     $cronStatus=Cron::check();
@@ -129,7 +129,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <button id="alertRunStop" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="alertRunStop" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo ($cronStatus=='stopped')?i18n('run'):i18n('stop'); ?>
                    <script type="dojo/connect" event="onClick" args="evt">                 
                   <?php if ($cronStatus=='stopped') {
@@ -158,7 +158,7 @@
              title="<?php echo i18n('sendAlert');?>">
             <table style="width:100%;">
               <tr>
-                <td width="200px;" class="label"><?php echo i18n("colMailTo"). $newGuiDisplaydoublePoint;?></td>
+                <td width="200px;" style="<?php echo (isNewGui())?'margin-top:5px;':'';?>" class="label"><?php echo i18n("colMailTo"). $newGuiDisplaydoublePoint;?></td>
                 <td width="90%">
                   <select dojoType="dijit.form.FilteringSelect" class="input" required="true"
                     <?php echo autoOpenFilteringSelect();?>
@@ -170,7 +170,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label"><?php echo i18n("colSendDate"). $newGuiDisplaydoublePoint;?></td>
+                <td class="label" style="<?php echo (isNewGui())?'margin-top:5px;':'';?>"><?php echo i18n("colSendDate"). $newGuiDisplaydoublePoint;?></td>
                 <td>
                   <div dojoType="dijit.form.DateTextBox" name="alertSendDate" id="alertSendDate"
 	                  <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -192,7 +192,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label"><?php echo i18n("colType"). $newGuiDisplaydoublePoint;?></td>
+                <td class="label" style="<?php echo (isNewGui())?'margin-top:5px;':'';?>"><?php echo i18n("colType"). $newGuiDisplaydoublePoint;?></td>
                 <td>
                   <select dojoType="dijit.form.FilteringSelect" class="input" 
                     <?php echo autoOpenFilteringSelect();?>
@@ -204,7 +204,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label"><?php echo i18n("colTitle"). $newGuiDisplaydoublePoint;?></td>
+                <td class="label" style="<?php echo (isNewGui())?'margin-top:5px;':'';?>"><?php echo i18n("colTitle"). $newGuiDisplaydoublePoint;?></td>
                 <td>
                   <div dojoType="dijit.form.TextBox"
                     style="width:98%;" required="true"
@@ -213,7 +213,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label"><?php echo i18n("colMessage"). $newGuiDisplaydoublePoint;?></td>
+                <td class="label" style="<?php echo (isNewGui())?'margin-top:5px;':'';?>"><?php echo i18n("colMessage"). $newGuiDisplaydoublePoint;?></td>
                 <td>
                   <textarea dojoType="dijit.form.Textarea"
                     name="alertSendMessage" id="alertSendMessage"
@@ -225,7 +225,7 @@
               <tr>
                 <td class="label"></td>
                 <td>
-                  <button id="alertSend" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="alertSend" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('send'); ?>
                    <script type="dojo/connect" event="onClick" args="evt">                 
                      adminSendAlert();
@@ -245,7 +245,7 @@
              title="<?php echo i18n('manageConnections');?>">
             <table style="width:100%;">
               <tr>
-                <td width="200px;" class="label"><?php echo i18n("activeConnections"). $newGuiDisplaydoublePoint;?></td>
+                <td width="200px;" style="<?php echo (isNewGui())?'margin-top:-3px;':'';?>" class="label"><?php echo i18n("activeConnections"). $newGuiDisplaydoublePoint;?></td>
                 <td width="90%">
                   <?php $audit=New Audit();
                   $cpt=$audit->countSqlElementsFromCriteria(array('idle'=>'0'));
@@ -255,7 +255,7 @@
               <tr>
                 <td class="label"></td>
                 <td>
-                  <button id="disconnectAll" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="disconnectAll" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('disconnectAll'); ?>
                    <script type="dojo/connect" event="onClick" args="evt">                 
                      adminDisconnectAll(true);
@@ -266,7 +266,7 @@
               </tr>
                 <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
-                <td width="200px;" class="label"><?php echo i18n("applicationStatus"). $newGuiDisplaydoublePoint;?></td>
+                <td width="200px;" style="<?php echo (isNewGui())?'margin-top:-3px;':'';?>" class="label"><?php echo i18n("applicationStatus"). $newGuiDisplaydoublePoint;?></td>
                 <td width="90%">
                   <?php $statusApp=Parameter::getGlobalParameter('applicationStatus');
                   if (!trim($statusApp)) {$statusApp='Open';}
@@ -277,7 +277,7 @@
               <tr>
                 <td class="label"></td>
                 <td>
-                  <button id="openCloseApp" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="openCloseApp" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php $operation="Closed";
                     if ($statusApp!='Open') {$operation='Open';}
                     echo i18n('setApplicationTo'.$operation); ?>
@@ -289,7 +289,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label"><?php echo i18n("closedMessage"). $newGuiDisplaydoublePoint;?></td>
+                <td class="label" style="<?php echo (isNewGui())?'margin-top:5px;':'';?>"><?php echo i18n("closedMessage"). $newGuiDisplaydoublePoint;?></td>
                 <td>
                   <textarea dojoType="dijit.form.Textarea"
                     name="msgClosedApplication" id="msgClosedApplication"
@@ -312,14 +312,14 @@
               <tr>
                 <td width="200px" class="label"><?php echo i18n("runConsistencyCheck"). $newGuiDisplaydoublePoint;?></td>
                 <td style="width:99%;text-align:left;">
-                  <button id="runConsistencyCheck" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="runConsistencyCheck" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('consistencyCheck'); ?>
                    <script type="dojo/connect" event="onClick" args="evt">   
                      page="../tool/adminFunctionalities.php?adminFunctionality=checkConsistency&correct=0";           
                      showPrint(page, "admin", null, "html", "P");
                    </script>
                  </button><br/>
-                 <button id="runConsistencyFix" dojoType="dijit.form.Button" showlabel="true">
+                 <button id="runConsistencyFix" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('consistencyFix'); ?>
                    <script type="dojo/connect" event="onClick" args="evt">                 
                      page="../tool/adminFunctionalities.php?adminFunctionality=checkConsistency&correct=1";           
@@ -342,7 +342,7 @@
              title="<?php echo i18n('dbMaintenance');?>">
             <table style="width:100%;">
               <tr>
-                <td class="label" style="width:200px">
+                <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("closeEmails"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display" width="90%">
@@ -358,7 +358,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <button id="closeEmails" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="closeEmails" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('close'); ?>
                      <script type="dojo/connect" event="onClick" args="evt">
                        maintenance('close','Mail');
@@ -369,7 +369,7 @@
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
-                <td class="label" style="width:200px">
+                <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("deleteEmails"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
@@ -385,7 +385,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <button id="deleteEmails" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="deleteEmails" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('deleteButton'); ?>
                      <script type="dojo/connect" event="onClick" args="evt">
                        maintenance('delete','Mail');
@@ -396,7 +396,7 @@
               </tr>
                        <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
-                <td class="label" style="width:200px">
+                <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("closeAlerts"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
@@ -412,7 +412,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <button id="closeAlerts" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="closeAlerts" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('close'); ?>
                      <script type="dojo/connect" event="onClick" args="evt">
                        maintenance('close','Alert');
@@ -423,7 +423,7 @@
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
-                <td class="label" style="width:200px">
+                <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("deleteAlerts"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
@@ -439,7 +439,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <button id="deleteAlerts" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="deleteAlerts" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('deleteButton'); ?>
                      <script type="dojo/connect" event="onClick" args="evt">
                        maintenance('delete','Alert');
@@ -451,8 +451,8 @@
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
 <!-- BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM -->
-              <td class="label" style="width:200px">
-                  <?php echo i18n("deleteNotifications"). $newGuiDisplaydoublePoint;?>
+              <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
+                  <?php echo lcfirst(i18n("deleteNotifications")). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
@@ -467,7 +467,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <button id="deleteNotifications" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="deleteNotifications" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('deleteButton'); ?>
                      <script type="dojo/connect" event="onClick" args="evt">
                        maintenance('delete','Notification');
@@ -479,7 +479,7 @@
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
 <!-- END - ADD BY TABARY - NOTIFICATION SYSTEM -->
-              <td class="label" style="width:200px">                <?php echo i18n("deleteAudit"). $newGuiDisplaydoublePoint;?>
+              <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">                <?php echo i18n("deleteAudit"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
                   <?php echo i18n('closedSinceMore');?>&nbsp;
@@ -494,7 +494,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <button id="deleteAudit" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="deleteAudit" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('deleteButton'); ?>
                      <script type="dojo/connect" event="onClick" args="evt">
                        maintenance('delete','Audit');
@@ -505,7 +505,7 @@
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
-                <td class="label" style="width:200px">
+                <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("updateReference"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
@@ -520,7 +520,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <button id="updateReference" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="updateReference" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('operationUpdate'); ?>
                      <script type="dojo/connect" event="onClick" args="evt">
                        item=dijit.byId('updateReferenceItem').get('value');
@@ -541,7 +541,7 @@
              title="<?php echo i18n('logfileMaintenance');?>">
              <table style="width:100%;">
               <tr>
-                <td class="label" style="width:200px">
+                <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("paramLogLevel"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display">
@@ -560,7 +560,7 @@
                 </td>
               </tr>
               <tr>
-                <td class="label" style="width:200px">
+                <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("deleteLogfile"). $newGuiDisplaydoublePoint;?>
                 </td>
                 <td class="display" width="90%">
@@ -576,7 +576,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <button id="deleteLogfile" dojoType="dijit.form.Button" showlabel="true">
+                  <button id="deleteLogfile" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('deleteButton'); ?>
                      <script type="dojo/connect" event="onClick" args="evt">
                        maintenance('delete','Logfile');
@@ -587,9 +587,9 @@
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
               <tr>
-                <td class="label" style="width:200px"><?php echo i18n('showLogfiles'). $newGuiDisplaydoublePoint;?></td>
+                <td class="label" style="width:200px"><?php echo lcfirst(i18n('dialogLogfiles')). $newGuiDisplaydoublePoint;?></td>
                 <td>
-                 <button id="showLogfile" dojoType="dijit.form.Button" showlabel="true" class="">
+                 <button id="showLogfile" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('showLogfiles'); ?>
                      <script type="dojo/connect" event="onClick" args="evt">
                        loadDialog('dialogLogfiles',null,true);
@@ -597,7 +597,7 @@
                      </script>
                  </button>
                  <br/>
-                 <button id="showLastLogfile" dojoType="dijit.form.Button" showlabel="true" class="">
+                 <button id="showLastLogfile" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">
                     <?php echo i18n('showLastLogfile'); ?>
                      <script type="dojo/connect" event="onClick" args="evt">
                        showLogfile('last');
