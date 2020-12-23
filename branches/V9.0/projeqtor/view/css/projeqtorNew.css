@@ -2106,3 +2106,6 @@ element.style {
 .ProjeQtOrNewGui .marginLabel {
 	margin-top:5px;
 }
+.ProjeQtOrNewGui a:hover {
+	background:transparent !important;
+}
