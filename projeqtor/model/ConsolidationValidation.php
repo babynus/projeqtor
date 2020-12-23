@@ -401,10 +401,12 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='        <tr>';
 	    $validFunct=($right=='1')?'onClick="saveOrCancelConsolidationValidation(\''.$uniqueId.'\',\''.$concMonth.'\',\''.$asSub.'\');"':'';
 	    $classMediumTextButton = "";
+	    $alignCenter = "";
 	    if(isNewGui()){
 	     $classMediumTextButton='class="mediumTextButton"';
+	     $alignCenter= 'align="center"';
 	    }
-	    $result .='          <td style="width:30%;'.(($right==1)?"cursor:pointer;":"cursor:not-allowed;").'" ><div '.$classMediumTextButton.' style="float:right;" id="buttonValidation_'.$uniqueId.'" '.$validFunct.' >
+	    $result .='          <td '.$alignCenter.' style="width:30%;'.(($right==1)?"cursor:pointer;":"cursor:not-allowed;").'" ><div '.$classMediumTextButton.' style="float:right;" id="buttonValidation_'.$uniqueId.'" '.$validFunct.' >
 	                           '.formatIcon('Unsubmitted', 32, i18n('validateConsolidation'),false,true).'
 	                         </div></td>';
 	    $result .='          <td style="width:'.(($right=='1')?"70%":"100%").';padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
