@@ -38,19 +38,21 @@ foreach ($_REQUEST as $paramName=>$paramValue){
 ?>
 <table>
   <tr>
-    <td>
-      <input type="radio" data-dojo-type="dijit/form/RadioButton" 
+    <td style="height:36px">
+      <label for="everyDays" class="dialogLabel" style="text-align:right;"><?php echo i18n('showAllDays').$newGuiDisplayDoublePoint;?></label>
+      <input type="radio" data-dojo-type="dijit/form/RadioButton"  class="marginLabel"
         id="everyDays" name="sendFrequency" value="everyDays" <?php if($sendFrequency == 'everyDays'){echo 'checked';}?>
       onchange="this.checked?refreshRadioButtonDiv():'';"/>
-    <label for="everyDays" class="dialogLabel" style="text-align:right;"><?php echo i18n('showAllDays');?> </label>
+    
     </td>
   </tr>
-  <tr>
+  <tr style="height:36px">
     <td>
-      <input type="radio" data-dojo-type="dijit/form/RadioButton" 
+      <label for="everyOpenDays" class="dialogLabel" style="text-align:right;"><?php echo i18n('showAllOpenDays').$newGuiDisplayDoublePoint;?></label>
+      <input type="radio" data-dojo-type="dijit/form/RadioButton"  class="marginLabel"
         id="everyOpenDays" name="sendFrequency" value="everyOpenDays" <?php if($sendFrequency == 'everyOpenDays'){echo 'checked';}?>
       onchange="this.checked?refreshRadioButtonDiv():'';"/>
-    <label for="everyOpenDays" class="dialogLabel" style="text-align:right;"><?php echo i18n('showAllOpenDays');?> </label>
+    
     </td>
   </tr>
   <tr>
@@ -58,7 +60,7 @@ foreach ($_REQUEST as $paramName=>$paramValue){
       <input type="radio" data-dojo-type="dijit/form/RadioButton" 
         id="everyWeeks" name="sendFrequency" value="everyWeeks" <?php if($sendFrequency == 'everyWeeks'){echo 'checked';}?>
       onchange="this.checked?refreshRadioButtonDiv():'';"/>&nbsp;&nbsp;
-    <label for="everyWeeks" class="dialogLabel" style="text-align:right;"><?php echo i18n('showAllWeeks');?> : </label>
+    <label for="everyWeeks" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('showAllWeeks').$newGuiDisplayDoublePoint;?></label>
     <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
       style="width:100px;" name="weekFrequency" id="weekFrequency" <?php echo autoOpenFilteringSelect();?>
       <?php if($sendFrequency != 'everyWeeks'){?> readonly <?php }?>>>
@@ -72,7 +74,7 @@ foreach ($_REQUEST as $paramName=>$paramValue){
       <input type="radio" data-dojo-type="dijit/form/RadioButton" 
         id="everyMonths" name="sendFrequency" value="everyMonths"  <?php if($sendFrequency == 'everyMonths'){echo 'checked';}?>
       onchange="this.checked?refreshRadioButtonDiv():'';"/>&nbsp;&nbsp;
-    <label for="everyMonths" class="dialogLabel" style="text-align:right;"><?php echo i18n('showAllMonths');?> : </label>
+    <label for="everyMonths" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('showAllMonths').$newGuiDisplayDoublePoint;?></label>
     <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
     style="width:100px;" name="monthFrequency" id="monthFrequency" <?php echo autoOpenFilteringSelect();?>
     <?php if($sendFrequency != 'everyMonths'){?> readonly <?php }?>>

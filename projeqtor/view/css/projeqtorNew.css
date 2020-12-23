@@ -2103,3 +2103,6 @@ element.style {
 .ProjeQtOrNewGui .display {
     border: 1px solid #ffffff;
 }
+.ProjeQtOrNewGui .marginLabel {
+	margin-top:5px;
+}
