@@ -290,8 +290,12 @@ class BudgetMain extends SqlElement {
   public function drawSpecificItem($item){ 	
     $result="";
     if ($item=='subBudgets') {
-      $result .="<table><tr><td class='label' valign='top'><label>" . i18n('subBudgets') . "&nbsp;:&nbsp;</label>";
-      $result .="</td><td style='padding-top:5px;'>";
+      $label = "<td class='label' valign='top'><label>" . i18n('subBudgets') . "&nbsp;:&nbsp;</label></td>";
+      if(isNewGui()){
+        $label = "<td width='30px'></td>";
+      }
+      $result .="<table><tr>$label";
+      $result .="<td style='padding-top:5px;'>";
       if ($this->elementary) {
         $result .=i18n('isBudgetItemMsg');
       }
@@ -321,11 +325,18 @@ class BudgetMain extends SqlElement {
     if (count($subList)>0) {
       foreach ($subList as $idBdg=>$nameBdg) {
       	$bdg=new Budget($idBdg,true);
-        $result .='<tr><td valign="top" width="20px"><img src="css/images/iconList16.png" height="16px" /></td>';
+      	$iconBudget  = '<img src="css/images/iconList16.png" height="16px" />';
+      	$padding="";
+      	if(isNewGui()){
+      	  $iconBudget = '<div class="iconProject16 iconBudget iconSize16 imageColorNewGuiNoSelection"></div>';
+      	  $padding="padding-bottom:5px;"; 
+      	}
+        $result .='<tr><td valign="top" width="20px">'.$iconBudget.'</td>';
         //$result .= '<td style="#AAAAAA;" NOWRAP><div class="'.(($outMode=='html' or $outMode=='pdf')?'':'display').'" style="width: 100%;">' . htmlEncode($bdg->name) . '</div>';
         $clickEvent=' onClick=\'gotoElement("Budget","' . htmlEncode($bdg->id) . '");\' ';
         if ($outMode=='html' or $outMode=='pdf') $clickEvent='';
-        $result .= '<td><div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="width:100%;color:black">';
+        
+        $result .= '<td><div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="'.$padding.' width:100%;color:black">';
         $result .= htmlEncode($bdg->name);
         $ttc=(Parameter::getGlobalParameter('ImputOfAmountProvider')=='TTC')?true:false;
         $amount=($ttc)?$bdg->actualFullAmount:$bdg->actualAmount;       
