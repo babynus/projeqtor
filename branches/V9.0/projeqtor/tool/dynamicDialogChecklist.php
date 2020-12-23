@@ -139,7 +139,7 @@ if ($print) $canUpdate=false;
 		    <tr style="height:25px;min-height:25px;<?php echo ($line->required==1)?'border-left:3px solid red ;':''; ?>">
 <?php   if ($line->check01) {?>
 			    <td class="noteData" style="<?php echo ($print)?'width:'.$nameWidth:'';?>border-right:0; text-align:right" title="<?php echo ($print)?'':$line->title;?>"> 
-				  <?php echo htmlEncode($line->name);?> 
+				  <?php echo htmlEncode($line->name);?>
 				  <input type="hidden" name="isRequired_<?php echo $line->id;?>" value="<?php echo $line->required;?>" />  
 		      </td>
 			    <td class="noteData" style="border-left:0;">
@@ -181,11 +181,11 @@ if ($print) $canUpdate=false;
             echo formatDateThumb($lineVal->checkTime,null);
          }?></td>
 				<td style="width:3px;">&nbsp;</td>
-				<td valign="top" style="width:<?php echo ($print)?'115px;font-size:90%;':'150px;';?>"> 
+				<td valign="top" style="width:<?php echo ($print)?'115px;font-size:90%;':'150px;'; echo (isNewGui())?'padding:0;':'';?>"> 
 				  <?php if (! $print) {?>
-				  <textarea dojoType="dijit.form.Textarea" 
+				  <textarea dojoType="dijit.form.Textarea"
             id="checklistLineComment_<?php echo $line->id;?>" name="checklistLineComment_<?php echo $line->id;?>"
-            style="width: 150px;min-height:20px; top:-2px;font-size:90%"
+            style="width: 150px;min-height:20px; top:-2px;font-size:90%;<?php echo (isNewGui())?'position:relative;top:-5px':'';?>"
             maxlength="4000"
             class="input"><?php echo $lineVal->comment;?></textarea>
           <?php } else {

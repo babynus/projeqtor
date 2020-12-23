@@ -57,7 +57,7 @@ if ($line->id) {
 <input type="hidden" name="checklistDefinitionId" value="<?php echo htmlEncode($checkId);?>" />
 <table style="width: 100%;">
   <tr>
-    <td class="dialogLabel" ><label><?php echo i18n('colName');?> : </label></td>
+    <td class="dialogLabel" ><label><?php echo i18n('colName').Tool::getDoublePoint();?></label></td>
     <td><input type="text" dojoType="dijit.form.TextBox" 
       id="dialogChecklistDefinitionLineName" 
       name="dialogChecklistDefinitionLineName"
@@ -66,7 +66,7 @@ if ($line->id) {
     </td>
   </tr>
   <tr>
-    <td class="dialogLabel" ><label><i>(<?php echo i18n('tooltip');?>)</i><label></td>
+    <td class="dialogLabel" ><label><i>(<?php echo i18n('tooltip');?>)&nbsp;&nbsp;</i><label></td>
     <td><textarea dojoType="dijit.form.Textarea" 
           id="dialogChecklistDefinitionLineTitle" name="dialogChecklistDefinitionLineTitle"
           style="width: 300px;"
@@ -77,7 +77,7 @@ if ($line->id) {
     </td>
   </tr>
   <tr>
-    <td class="dialogLabel" ><label><?php echo i18n('colSortOrder');?> : </label></td>
+    <td class="dialogLabel" ><label><?php echo i18n('colSortOrder').Tool::getDoublePoint();?></label></td>
     <td><input type="text" dojoType="dijit.form.NumberTextBox" 
       id="dialogChecklistDefinitionLineSortOrder" 
       name="dialogChecklistDefinitionLineSortOrder"
@@ -89,7 +89,7 @@ if ($line->id) {
 $cpVar=0;
  for ($i=1;$i<=5;$i++) {?>
   <tr>
-    <td class="dialogLabel" ><label><?php echo i18n('colChoice') . ' #'.$i;?> : </label></td>
+    <td class="dialogLabel" ><label><?php echo i18n('colChoice') . ' #'.$i.Tool::getDoublePoint();?></label></td>
     <td><input type="text" dojoType="dijit.form.TextBox" 
       id="dialogChecklistDefinitionLineChoice_<?php echo $i?>" 
       name="dialogChecklistDefinitionLineChoice_<?php echo $i?>"
@@ -98,7 +98,7 @@ $cpVar=0;
     </td>  
   </tr>
   <tr>
-    <td class="dialogLabel" ><label><i>(<?php echo i18n('tooltip');?>)</i><label></td>
+    <td class="dialogLabel" ><label><i>(<?php echo i18n('tooltip');?>)&nbsp;&nbsp;</i><label></td>
     <td><textarea dojoType="dijit.form.Textarea" 
           id="dialogChecklistDefinitionLineTitle_<?php echo $i?>" 
           name="dialogChecklistDefinitionLineTitle_<?php echo $i?>"
@@ -110,7 +110,7 @@ $cpVar=0;
   </tr>
 <?php }?>
   <tr id="tr_dialogChecklistDefinitionLineExclusive" style="visibility:<?php echo ($cpVar==0)?'hidden':'visible';?>;">
-    <td class="dialogLabel" ><label><?php echo i18n('colExclusive');?> : </label></td>
+    <td class="dialogLabel" ><label><?php echo i18n('colExclusive').Tool::getDoublePoint();?></label></td>
     <td> 
       <input dojoType="dijit.form.CheckBox" 
        name="dialogChecklistDefinitionLineExclusive" 
@@ -120,7 +120,7 @@ $cpVar=0;
    </td>
  </tr>
  <tr id="tr_dialogChecklistDefinitionLineRequired" style="visibility:<?php echo ($cpVar==0)?'hidden':'visible';?>;">
-   <td class="dialogLabel" ><label><?php echo i18n('colRequired');?> : </label></td>
+   <td class="dialogLabel" ><label><?php echo i18n('colRequired').Tool::getDoublePoint();?></label></td>
    <td> 
       <input dojoType="dijit.form.CheckBox" 
        name="dialogChecklistDefinitionLineRequired" 
