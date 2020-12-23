@@ -2094,3 +2094,12 @@ element.style {
 .ProjeQtOrNewGui .dijitTitlePaneTitle {
 	overflow:hidden;
 }
+
+element.style {
+}
+.ProjeQtOrNewGui #mapDiv, .ProjeQtOrNewGui #listDiv, .ProjeQtOrNewGui #formDiv, .ProjeQtOrNewGui .display, .ProjeQtOrNewGui .background, .ProjeQtOrNewGui .dijitTitlePaneContentInner, .ProjeQtOrNewGui .dijitTabPane, .ProjeQtOrNewGui #mainDiv, .ProjeQtOrNewGui #centerDiv {
+    background-color: #ffffff;
+}
+.ProjeQtOrNewGui .display {
+    border: 1px solid #ffffff;
+}
