@@ -53,13 +53,14 @@ if ($impLocked ){
     <td style="vertical-align:top; min-width:100px; width:15%;">
       <table >
 		    <tr height="32px">
-  		    <td width="50px" align="center">
+  		    <td width="80px" align="center">
             <?php echo formatIcon('ConsultationValidation', 32, null, true);?>
           </td>
           <td width="100px"><span class="title">&nbsp;&nbsp;&nbsp;<?php echo i18n('menuConsultationValidation');?></span></td>
   		  </tr>
   		  <tr height="32px">
           <td>
+           <?php if(!isNewGui()){?>
             <button id="refreshConcolidationValidationButton" dojoType="dijit.form.Button" showlabel="false"
               title="<?php echo i18n('buttonRefreshList');?>"
               iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
@@ -67,6 +68,9 @@ if ($impLocked ){
 	             refreshConcolidationValidationList();
               </script>
             </button> 
+             <?php }else{ ?>
+             <div style="width:40px;"></div>
+             <?php }?>
           </td>
         </tr>
 		  </table>
@@ -176,6 +180,17 @@ if ($impLocked ){
                   </script>
                 </div>
            </td>
+            <?php if(isNewGui()){?>
+           <td align="top">
+            <button id="refreshConcolidationValidationButton" dojoType="dijit.form.Button" showlabel="false" style="position:absolute; right:10px; top:0px;"
+              title="<?php echo i18n('buttonRefreshList');?>"
+              iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
+              <script type="dojo/method" event="onClick" args="evt">
+	             refreshConcolidationValidationList();
+              </script>
+            </button> 
+            </td>
+             <?php }?>
            </tr>
            <tr>
              <td nowrap="nowrap" style="text-align: right;padding-left:50px; padding-right:5px;"><?php echo i18n("colIdOrganization");?></td>

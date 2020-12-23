@@ -331,7 +331,7 @@ class PeriodicMeetingMain extends SqlElement {
     // Gautier ticket #2838
     if ($item=='buttonAssignTeam') {
       $result .= '<tr><td valign="top" class="label"><label></label></td><td>';
-      $result .= '<button style="height:71% !important;" class="largeTextButton" id="attendeesAllTeam2" dojoType="dijit.form.Button" showlabel="true" onClick ="assignTeamForMeeting()"';
+      $result .= '<button style="height:71% !important;" class="dynamicTextButton" id="attendeesAllTeam2" dojoType="dijit.form.Button" showlabel="true" onClick ="assignTeamForMeeting()"';
       $result .= ' title="' . i18n('buttonAssignWholeTeam') . '" >';
       $result .= '<span>' . i18n('buttonAssignWholeTeam') . '</span>';
       $result .= '</button>';
