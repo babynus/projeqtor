@@ -66,7 +66,7 @@ if (! $comboDetail and is_array( getSessionUser()->_arrayFilters)) {
     }
   }
 }
-
+$displayWidth=RequestHandler::getNumeric('destinationWidth');
 $displayWidthList="1980";
 if (RequestHandler::isCodeSet('destinationWidth')) {
   //$displayWidthList=RequestHandler::getNumeric('destinationWidth');
@@ -1402,15 +1402,17 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
      <?php }?>     
           
 <?php if ( property_exists($obj,'isEis') and !$hideEisSearch) { ?>
-              <td style="vertical-align: middle; width:15%; min-width:110px; text-align:right;white-space:normal;" class="allSearchTD hideInServiceTD allSearchFixLength">
+              <td style="vertical-align: middle; width:15%; min-width:<?php echo ($displayWidth>1200)?250:150;?>px; text-align:right;white-space:normal;" class="allSearchTD hideInServiceTD allSearchFixLength">
                 <div style="max-height:32px;"> 
                 <?php echo i18n("hideInService");?>
                 </div>
               </td>
               <td style="width: 10px;text-align: center; align: center;white-space:nowrap;" class="allSearchTD hideInServiceTD allSearchFixLength">&nbsp;
-                <?php $hideInService=Parameter::getUserParameter('hideInService');?>
+                <?php $hideInService=Parameter::getUserParameter('hideInService');
+                if (isNewGui()) htmlDrawSwitch('hideInService',($hideInService=='true')?1:0,true);?>
                 <div title="<?php echo i18n('hideInService')?>" dojoType="dijit.form.CheckBox" 
                      class="whiteCheck" <?php if ($hideInService=='true') echo " checked ";?>
+                     style="<?php if (isNewGui()) echo "display:none;";?>"
                      type="checkbox" id="hideInService" name="hideInService">
                  <script type="dojo/method" event="onChange" >
                   saveDataToSession('hideInService',((this.checked)?true:false),true);

@@ -100,7 +100,7 @@ require_once "../tool/formatter.php";
             <table style="width:100%;">
               <tr height="30px"> 
                 <td class="dialogLabel" style="width:200px";>
-                  <label for="uploadPlugin" style="width:200px;white-space:nowrap"><?php echo i18n("addPluginFile");?>&nbsp;:&nbsp;</label>
+                  <label for="uploadPlugin" style="width:200px;white-space:nowrap"><?php echo i18n("addPluginFile").$newGuiDisplayDoublePoint;?></label>
                 </td>
                 <td style="text-align:left;width;200px" >
                  <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>" />     
