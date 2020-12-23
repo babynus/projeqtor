@@ -336,7 +336,7 @@ class BudgetMain extends SqlElement {
         $clickEvent=' onClick=\'gotoElement("Budget","' . htmlEncode($bdg->id) . '");\' ';
         if ($outMode=='html' or $outMode=='pdf') $clickEvent='';
         
-        $result .= '<td><div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="'.$padding.' width:100%;color:black">';
+        $result .= '<td><div ' . $clickEvent . ' class="  '.(isNewGui()?' link ':'').(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="'.$padding.' width:100%;color:black">';
         $result .= htmlEncode($bdg->name);
         $ttc=(Parameter::getGlobalParameter('ImputOfAmountProvider')=='TTC')?true:false;
         $amount=($ttc)?$bdg->actualFullAmount:$bdg->actualAmount;       

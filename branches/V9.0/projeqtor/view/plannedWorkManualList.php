@@ -114,12 +114,32 @@ $currentMonth = strftime("%m");
                       <?php htmlDrawOptionForReference('idOrganization', null)?>
                   </select>
                </td>
+               <?php if(isNewGui()){?>
+               <td style="min-width:200px"> 
+                  <button  style="position:absolute;right:40px;top:0;" title="<?php echo i18n('print')?>"  
+                   dojoType="dijit.form.Button" 
+                   id="printButton" name="printButton"
+                   iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton" showLabel="false">
+                    <script type="dojo/method" event="onClick" args="evt">
+                      showPrint('../report/plannedWorkManual.php?idProject='+dijit.byId('idProjectPlannedInt').get('value')+'&idResource='+dijit.byId('userNamePlanned').get('value')+'&idTeam='+dijit.byId('idTeamPlannedWorkManual').get('value')+'&idOrganization='+dijit.byId('idOrganizationPlannedWorkManual').get('value')+'&yearSpinner='+dijit.byId('yearPlannedWorkManual').get('value')+'&monthSpinner='+dijit.byId('monthPlannedWorkManual').get('value'), 'print');
+                    </script>
+                  </button>
+                  <button style="position:absolute;right:0px;top:0;" id="refreshButtonAlwaysAvailable" dojoType="dijit.form.Button" showlabel="false"
+                    title="<?php echo i18n('buttonRefreshList');?>"
+                    iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
+                    <script type="dojo/method" event="onClick" args="evt">
+	                   refreshPlannedWorkManualList();
+                    </script>
+                  </button>
+                </td>
+               <?php }?>
              </tr>
             </table>
           </td>
         </tr>
         <tr height="32px"  >
           <td colspan="2">
+          <?php if(!isNewGui()){?>
             <table width="100%"  >
               <tr height="27px">
                 <td style="min-width:200px"> 
@@ -141,6 +161,7 @@ $currentMonth = strftime("%m");
                 </td>
               </tr>
             </table>
+            <?php } ?>
           </td>
           <td>
             <table>

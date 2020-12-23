@@ -46,9 +46,11 @@ $yearSpinner = $currentYear;
         <?php echo formatIcon('Absence', 32, null, true);?>
       </td>
       <td width="200px" > 
+      <?php if(isNewGui()){ ?> <div style="position:absolute;top:7px;"> <?php }?>
         <span class="title"><?php echo i18n('menuAbsence');?></span>
+        <?php if(isNewGui()){ ?></div> <?php }?>
       </td>
-      <td>   
+      <?php if(isNewGui()){ ?><td style="position:absolute;"> <?php }else{ ?><td> <?php }?>
         <table>
          <tr>
            <td nowrap="nowrap" style="text-align: right;">
@@ -106,8 +108,35 @@ $yearSpinner = $currentYear;
          </tr>
         </table>
       </td>
+      <?php if(isNewGui()){?> 
+      <td style="position:absolute;top:0px; right:7px;"> 
+              <button title="<?php echo i18n('print')?>"  
+               dojoType="dijit.form.Button" 
+               id="printButton" name="printButton"
+               iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton" showLabel="false">
+                <script type="dojo/method" event="onClick" args="evt">
+                  showPrint('../report/absenceReport.php?userName='+dijit.byId('userName').get('value')+'&yearSpinner='+dijit.byId('yearSpinner').get('value'), 'print');
+                </script>
+              </button>
+              <button title="<?php echo i18n('reportPrintPdf')?>"  
+               dojoType="dijit.form.Button" 
+               id="printButtonPdf" name="printButtonPdf"
+               iconClass="dijitButtonIcon dijitButtonIconPdf" class="detailButton" showLabel="false" style="display:none;">
+                <script type="dojo/method" event="onClick" args="evt">
+                  showPrint('../report/absenceReport.php?userName='+dijit.byId('userName').get('value')+'&yearSpinner='+dijit.byId('yearSpinner').get('value'), 'print', null, 'pdf');
+                </script>
+              </button>               
+              <button id="refreshButtonAlwaysAvailable" dojoType="dijit.form.Button" showlabel="false"
+                title="<?php echo i18n('buttonRefreshList');?>"
+                iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
+                <script type="dojo/method" event="onClick" args="evt">
+	                 refreshAbsenceList();
+                </script>
+              </button> 
+            </td>
+      <?php }?>
     </tr>
-    
+      <?php if(!isNewGui()){?>
     <tr height="32px"  >
       <td colspan="2">
         <table width="100%"  >
@@ -141,6 +170,7 @@ $yearSpinner = $currentYear;
         </table>
       </td>
     </tr> 
+      <?php }?>
   </table>
   </form>
   </div>
