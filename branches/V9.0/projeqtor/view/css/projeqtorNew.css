@@ -813,6 +813,7 @@ animation: fadeIn ease 0.5s;
     font-size: 10px;
     opacity: 1;
     margin: 6px 4px 4px 4px;
+    overflow-y: auto;
 }
 
 .newHeaderLink{
