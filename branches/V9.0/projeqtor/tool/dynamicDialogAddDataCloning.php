@@ -54,7 +54,7 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
           <table width="100%" style="white-space:nowrap">
             <tr>
               <td>
-                <label for="dataCloningUser" class="dialogLabel" style="text-align:right;"><?php echo i18n('colUser');?> : </label>
+                <label for="dataCloningUser" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('colUser').Tool::getDoublePoint();?></label>
                 <select dojoType="dijit.form.FilteringSelect" class="input" xlabelType="html"
                 style="width: 150px;" name="dataCloningUser" id="dataCloningUser" required
                 <?php echo autoOpenFilteringSelect();?>
@@ -72,7 +72,7 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
            </tr>
             <tr>
               <td>
-                <label for="dataCloningName" class="dialogLabel" style="text-align:right;"><?php echo i18n('colName');?> : </label>
+                <label for="dataCloningName" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('colName').Tool::getDoublePoint();?></label>
                 <input data-dojo-type="dijit.form.TextBox"
   				          id="dataCloningName" name="dataCloningName"
   				          style="width: 300px;"
@@ -85,18 +85,18 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
            </tr>
             <tr>
               <td>
-                <label for="dataCloningPlannedDate" class="dialogLabel" style="text-align:right;"><?php echo i18n('colPlannedDate');?> : </label>
+                <label for="dataCloningPlannedDate" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('colPlannedDate').Tool::getDoublePoint();?></label>
   				      <div dojoType="dijit.form.DateTextBox" disabled
                <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
   							echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
   						 }?>
                id="dataCloningPlannedDate" name="dataCloningPlannedDate"
                type="text" maxlength="10" hasDownArrow=false
-               style="width:80px; text-align:center;" class="input rounded"
+               style="width:90px; text-align:center;" class="input rounded"
                value="<?php echo $plannedDate;?>">
                </div>
                <div dojoType="dijit.form.TimeTextBox" name="dataCloningPlannedHours" id="dataCloningPlannedHours" disabled
-                    type="text" maxlength="5" style="margin-left:5px;width:40px; text-align: center;" class="input rounded"
+                    type="text" maxlength="5" style="margin-left:5px;width:50px; text-align: center;" class="input rounded"
                     value="T<?php echo $plannedHours;?>" hasDownArrow="false">';
                </div>
   				    </td>
