@@ -158,7 +158,7 @@ class DataCloning extends SqlElement {
     $result.='     <td style="border: 1px solid grey;height:60px;width:20%;text-align:center;vertical-align:center;">';
     $result.='       <table width="100%"><tr>';
     $result.='         <td width="80%">'.$dataCloningCount.'</td>';
-    $result.='         <td width="20%"><a onClick="addDataCloning();" title="'.i18n('dialogAddDataCloning').'" style="display:'.$hide.'">'.formatBigButton('Add').'</a></td>';
+    $result.='         <td width="20%"><a onClick="addDataCloning();" class="imageColorWhite" title="'.i18n('dialogAddDataCloning').'" style="display:'.$hide.'">'.formatBigButton('Add').'</a></td>';
     $result.='       </tr></table>';
     $result.='   </tr>';
     foreach ($listUser as $id=>$name) {
@@ -299,7 +299,7 @@ class DataCloning extends SqlElement {
       echo '<td class="tabLabel">'.$col.'</td>';
     }
     echo '</tr>';
-    echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningAccess').' : </label></td>';
+    echo '<tr><td class="crossTableLine"><label class="label largeLabel" style="'.((isNewGui())?'margin-top:-2px':'').'">'.i18n('dataCloningAccess').Tool::getDoublePoint().'</label></td>';
     foreach ($columnList as $colId=>$colName) {
       echo '<td class="crossTablePivot">';
       $crit=array("idProfile"=>$colId, "idMenu"=>"222");
@@ -309,7 +309,7 @@ class DataCloning extends SqlElement {
       echo '</td>';
     }
     echo '</tr>';
-    echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningRight').' : </label></td>';
+    echo '<tr><td class="crossTableLine"><label class="label largeLabel" style="'.((isNewGui())?'margin-top:-5px':'').'">'.i18n('dataCloningRight').Tool::getDoublePoint().'</label></td>';
     foreach ($columnList as $colId=>$colName) {
       echo '<td class="crossTablePivot">';
       echo '<select dojoType="dijit.form.FilteringSelect" class="input" ';
@@ -323,7 +323,7 @@ class DataCloning extends SqlElement {
       echo '</select>';
       echo '</td>';
     }
-    echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningTotal').' : </label></td>';
+    echo '<tr><td class="crossTableLine"><label class="label largeLabel" style="'.((isNewGui())?'margin-top:-3px':'').'">'.i18n('dataCloningTotal').Tool::getDoublePoint().'</label></td>';
     foreach ($columnList as $colId=>$colName) {
       echo '<td class="crossTablePivot">';
       $crit=array("scope"=>"dataCloningTotal", "idProfile"=>$colId);
@@ -354,7 +354,7 @@ class DataCloning extends SqlElement {
 //       echo '<div class="messageWARNING" style="width:89%; margin-left:5%;margin-right:5%;text-align:center;margin-bottom:0.5%;margin-top:0.2%">'.i18n('pgsqlDataCloningMessage', array($endPm, $startAm)).'</div>';
 //     }
     echo '<table class="crossTable" >';
-    echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningCreationRequest').' : </label></td>';
+    echo '<tr><td class="crossTableLine"><label class="label largeLabel" style="'.((isNewGui())?'margin-top:-5px':'').'">'.i18n('dataCloningCreationRequest').Tool::getDoublePoint().'</label></td>';
     echo '<td class="crossTablePivot">';
     $disabled='';
 //     if ($paramDbType=='pgsql') {
@@ -419,7 +419,7 @@ class DataCloning extends SqlElement {
     echo '<option value="720" '.$selected.'>12'.i18n('shortHour').'</option>';
     echo '</select>';
     echo '</td></tr>';
-    echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningPerDay').' : </label></td>';
+    echo '<tr><td class="crossTableLine"><label class="label largeLabel" style="'.((isNewGui())?'margin-top:-3px':'').'">'.i18n('dataCloningPerDay').Tool::getDoublePoint().'</label></td>';
     echo '<td class="crossTablePivot">';
     $paramPerDay=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningPerDay"));
     $creaPerDay=$paramPerDay->parameterValue;

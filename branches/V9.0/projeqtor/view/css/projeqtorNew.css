@@ -308,9 +308,13 @@ label, .ProjeQtOrNewGui label,
     background-color: #ffffff; 
 }
 
-.ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar,  .titleProject, .ProjeQtOrNewGui #menuBArNewGuiAcces{
+.ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar, .ProjeQtOrNewGui #menuBArNewGuiAcces{
 	background: url() var(--color-toolbar) !important;
 	color: var(--color-toolbar-text) !important;
+}
+.ProjeQtOrNewGui .titleProject {
+	color: var(--color-toolbar-text) !important;
+	background: url() transparent !important;
 }
 
 .ProjeQtOrNewGui .dijitAccordionTitle2, .ProjeQtOrNewGui .reportTableColumnHeader2, .ProjeQtOrNewGui .largeReportHeader2 {
@@ -685,7 +689,10 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui #toolBarDiv .dijitIcon, .ProjeQtOrNewGui #toolBarDiv .iconSize22, 
 .ProjeQtOrNewGui .hideStreamNewGui, 
 .ProjeQtOrNewGui .menu__link .iconSize22, .ProjeQtOrNewGui .menu__link .iconSize16,
-.ProjeQtOrNewGui .menu__linkDirect .iconSize22, .ProjeQtOrNewGui .menu__linkDirect .iconSize16,.ProjeQtOrNewGui #menuBarAccesLeft .iconSize22,.ProjeQtOrNewGui #menuBarAccesLeft .iconSize16, .ProjeQtOrNewGui .dijitTreeIcon, .ProjeQtOrNewGui .dijitTreeLabel {
+.ProjeQtOrNewGui .menu__linkDirect .iconSize22, .ProjeQtOrNewGui .menu__linkDirect .iconSize16,
+.ProjeQtOrNewGui #menuBarAccesLeft .iconSize22, .ProjeQtOrNewGui #menuBarAccesLeft .iconSize16, 
+.ProjeQtOrNewGui .dijitTreeIcon, .ProjeQtOrNewGui .dijitTreeLabel,
+.ProjeQtOrNewGui .imageColorWhite, .ProjeQtOrNewGui .buttonColorWhite .dijitIcon {
 	-webkit-filter : brightness(0) invert(1);
   filter : brightness(0) invert(1);
   background-color: transparent;
@@ -2110,5 +2117,5 @@ element.style {
 	background:transparent !important;
 }
 .ProjeQtOrNewGui .dropDownNoBorder.dijitDropDownButton .dijitReset.dijitInline.dijitButtonNode {
-	border:0;
+	border:0;	
 }
