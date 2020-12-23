@@ -12,6 +12,7 @@ CREATE TABLE `${prefix}navigation` (
   `idMenu` int(12)  unsigned DEFAULT NULL COMMENT '12',
   `idReport` int(12)  unsigned DEFAULT NULL COMMENT '12',
   `sortOrder` int(3) unsigned DEFAULT NULL COMMENT '3',
+  `tag` varchar(4000) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
@@ -340,6 +341,8 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (257,'menuLeavesSystemHabilitation',133,220,40,0),
 -- 300 ---------------------------------------------------- Plugins
 (301,'menuPluginManagement',300,136,10,0);
+
+UPDATE `${prefix}navigation` set `tag`='gantt' WHERE name like '%Planning';
 
 -- ========================================================
 

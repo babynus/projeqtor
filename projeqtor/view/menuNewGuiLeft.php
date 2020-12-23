@@ -515,6 +515,7 @@ function drawLeftMenuListNewGui($displayMode){
         $realMenu=new Menu($obj->idMenu);
         $menuName=$realMenu->name;
         $menuNameI18n = i18n($menuName);
+        $menuTag=$obj->tag;
         $menuName2 = addslashes(i18n($menuName));
         $classEl=substr($menuName,4);
         $isFav=SqlElement::getSingleSqlElementFromCriteria('MenuCustom', array("name"=>$menuName,"idUser"=>$user));
@@ -538,7 +539,7 @@ function drawLeftMenuListNewGui($displayMode){
         
         $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.$obj->name.'\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.$obj->name.'\',\'leave\');">'; //li
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst($menuNameI18n).'</div></a>'; 
+        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst($menuNameI18n).'<span style="display:none">'.strtolower(replace_accents($menuNameI18n)).';'.$menuTag.'</span></div></a>'; 
         $result.='<div id="div'.$obj->name.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
       }else{
         $classEl="Reports";
