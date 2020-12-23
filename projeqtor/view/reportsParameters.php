@@ -1153,10 +1153,10 @@ foreach ($listParam as $param) {
 		   <input type="hidden" id="objectClassList" name="objectClassList" value="Report_<?php echo $report->filterClass;?>"/>
        <button 
          title="<?php echo i18n('advancedFilter')?>"  
-         class="comboButton detailButton whiteBackground"
+         class="comboButton detailButton <?php echo (isNewGui())?'':'whiteBackground';?>"
          dojoType="dijit.form.DropDownButton" 
          id="listFilterFilter" name="listFilterFilter"
-         iconClass="icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
+         iconClass="dijitButtonIcon icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
           <script type="dojo/connect" event="onClick" args="evt">
                               showFilterDialog();
                             </script>
