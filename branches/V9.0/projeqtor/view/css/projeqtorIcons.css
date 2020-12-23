@@ -615,6 +615,7 @@
 .ProjeQtOrFlatGrey .iconButtonSwitch16 { background-image: url(customIcons/grey/iconSwitch.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonSwitch16 { background-image: url(customIcons/red/iconSwitch.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonSwitch16 { background-image: url(customIcons/new/iconSwitch.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonSwitch { background-image: url(customIcons/new/iconSwitch.svg) !important;  background-repeat: no-repeat; }
 
 .iconButtonSwitchUser16 { background-image: url(images/smallButtonSwitch.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconButtonSwitchUser16 { background-image: url(customIcons/blue/iconSwitch.png);  background-repeat: no-repeat; }
@@ -622,7 +623,7 @@
 .ProjeQtOrFlatGrey .iconButtonSwitchUser16 { background-image: url(customIcons/grey/iconSwitch.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonSwitchUser16 { background-image: url(customIcons/red/iconSwitch.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonSwitchUser16 { background-image: url(customIcons/new/iconSwitch.svg);  background-repeat: no-repeat; }
-
+.ProjeQtOrNewGui .iconButtonSwitchUser { background-image: url(customIcons/new/iconSwitch.svg) !important;  background-repeat: no-repeat; }
 
 
 
