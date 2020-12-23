@@ -2119,3 +2119,7 @@ element.style {
 .ProjeQtOrNewGui .dropDownNoBorder.dijitDropDownButton .dijitReset.dijitInline.dijitButtonNode {
 	border:0;	
 }
+
+#cke_situationComment .cke_top {
+	display:inline-block;
+} 
