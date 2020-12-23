@@ -4942,8 +4942,8 @@ function clearFilter() {
   }
   dojo.byId('filterName').value="";
   removefilterClause('all');
-  // setTimeout("selectFilter();dijit.byId('listFilterFilter').set('iconClass','iconFilter');",100);
-  dijit.byId('listFilterFilter').set('iconClass', 'iconFilter');
+  // setTimeout("selectFilter();dijit.byId('listFilterFilter').set('iconClass','dijitButtonIcon iconFilter');",100);
+  dijit.byId('listFilterFilter').set('iconClass', 'dijitButtonIcon iconFilter');
   dijit.byId('filterNameDisplay').set('value', null);
   dojo.byId('filterName').value=null;
 }
@@ -5115,7 +5115,7 @@ function selectDynamicFilterContinue() {
 	  if (dijit.byId('filterNameDisplay')) {
 		  dojo.byId('filterName').value=dijit.byId('filterNameDisplay').get('value');
 	  }
-	  doc.dijit.byId("listFilterFilter").set("iconClass", "iconActiveFilter");
+	  doc.dijit.byId("listFilterFilter").set("iconClass", "dijitButtonIcon iconActiveFilter");
 	  if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value) objectClass=dojo.byId('objectClassList').value;
 	  else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value) objectClass=dojo.byId("objectClassManual").value;
     else if (dojo.byId('objectClass') && dojo.byId('objectClass').value) objectClass=dojo.byId('objectClass').value;

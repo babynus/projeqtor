@@ -425,7 +425,7 @@ function resetFilter(lstStat){
    }
  }
  
- if (dijit.byId("listFilterFilter").iconClass == "iconActiveFilter"){
+ if (dijit.byId("listFilterFilter").iconClass == "dijitButtonIcon iconActiveFilter"){
    selectStoredFilter('0','directFilterList',notDef,notDef);
   }    
     if(grid){
