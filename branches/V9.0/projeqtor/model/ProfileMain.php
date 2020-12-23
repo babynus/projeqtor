@@ -134,7 +134,7 @@ class ProfileMain extends SqlElement {
       if (!$this->id) return '';
       if (! $print) {
         $result.= '<button id="buttonRestrictTypes" dojoType="dijit.form.Button" showlabel="true"'
-            . ' title="'.i18n('helpRestrictTypesProfile').'" iconClass="iconType16" >'
+            . ' title="'.i18n('helpRestrictTypesProfile').'" iconClass="iconType16" class="roundedVisibleButton">'
                 . '<span>'.i18n('restrictTypes').'</span>'
                     . ' <script type="dojo/connect" event="onClick" args="evt">'
                         . '  var params="&idProfile='.$this->id.'";'
@@ -143,8 +143,8 @@ class ProfileMain extends SqlElement {
                                     . '</button>';
         $result.= '<span style="font-size:80%">&nbsp;&nbsp;&nbsp;('.i18n('helpRestrictTypesProfileInline').')</span>';
       }
-      $result.='<table style="witdh:100%"><tr><td class="label">'.i18n('existingRestrictions').'&nbsp;:&nbsp;</td><td>';
-      $result.='<div id="resctrictedTypeClassList">';
+      $result.='<table style="witdh:100%"><tr style=""><td class="label" style="width:220px">'.i18n('existingRestrictions').Tool::getDoublePoint().'</td><td>';
+      $result.='<div id="resctrictedTypeClassList" style="position:relative;left:5px;top:2px">';
       $list=Type::getRestrictedTypesClass(null,null,$this->id);
       $cpt=0;
       foreach ($list as $cl) {
@@ -152,10 +152,10 @@ class ProfileMain extends SqlElement {
         $result.=(($cpt>1)?', ':'').$cl;
       }
       $result.='</div>';
-      $result.='</td></tr></table>';
+      $result.='</td></tr><tr><td colspan="2">&nbsp;</td></tr></table>';
       if (! $print) {
         $result.= '<button id="buttonRestrictProductList" dojoType="dijit.form.Button" showlabel="true"'
-                . ' title="'.i18n('helpRestrictProductListProfile').'" iconClass="iconType16" >'
+                . ' title="'.i18n('helpRestrictProductListProfile').'" iconClass="iconType16" class="roundedVisibleButton">'
                 . '<span>'.i18n('restrictProductList').'</span>'
                 . ' <script type="dojo/connect" event="onClick" args="evt">'
                 . '  var params="&idProfile='.$this->id.'";'

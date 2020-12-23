@@ -2109,3 +2109,6 @@ element.style {
 .ProjeQtOrNewGui a:hover {
 	background:transparent !important;
 }
+.ProjeQtOrNewGui .dropDownNoBorder.dijitDropDownButton .dijitReset.dijitInline.dijitButtonNode {
+	border:0;
+}

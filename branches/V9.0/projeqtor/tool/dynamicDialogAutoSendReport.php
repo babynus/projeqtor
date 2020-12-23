@@ -83,7 +83,7 @@ $sendFrequency = 'everyDays';
              <?php if ($yearSpinner != '') {?>
             <tr>
               <td>
-                <label for="yearParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('year').$newGuiDisplayDoublePoint;?></label>
+                <label for="yearParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('year').Tool::getDoublePoint();?></label>
                 <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
                   style="margin-top:10px;width:120px;" name="yearParam" id="yearParam" <?php echo autoOpenFilteringSelect();?>
                   value="<?php if($yearSpinner >= date('Y')){ echo "current";}else if($yearSpinner <= date('Y')-1){echo "previous";}?>">
@@ -96,7 +96,7 @@ $sendFrequency = 'everyDays';
             <?php if ($periodType == 'month') {?>
             <tr>
               <td>
-                <label for="monthParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('month').$newGuiDisplayDoublePoint;?></label>
+                <label for="monthParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('month').Tool::getDoublePoint();?></label>
                 <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
                   style="margin-top:10px;width:120px;" name="monthParam" id="monthParam" <?php echo autoOpenFilteringSelect();?>
                   value="<?php if($monthSpinner >= date('m')){ echo "current";}else if($monthSpinner <= date('m')-1){echo "previous";}?>">
@@ -108,7 +108,7 @@ $sendFrequency = 'everyDays';
             <?php }else if($periodType == 'year' and $monthSpinner != '') { ?>
             <tr>
               <td>
-                <label for="monthParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('startMonth').$newGuiDisplayDoublePoint;?></label>
+                <label for="monthParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('startMonth').Tool::getDoublePoint();?></label>
                 <div style="margin-top:10px;width:50px; text-align: center; color: #000000;" 
                    dojoType="dijit.form.NumberSpinner" 
                    constraints="{min:1,max:12,places:0,pattern:'00'}"
@@ -123,7 +123,7 @@ $sendFrequency = 'everyDays';
             <?php if ($periodType == 'week') {?>
             <tr>
               <td>
-                <label for="weekParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('week').$newGuiDisplayDoublePoint;?></label>
+                <label for="weekParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('week').Tool::getDoublePoint();?></label>
                 <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
                   style="margin-top:10px;width:120px;" name="weekParam" id="weekParam" <?php echo autoOpenFilteringSelect();?>
                   value="<?php if($weekSpinner >= date('W')){ echo "current";}else if($weekSpinner <= date('W')-1){echo "previous";}?>">
@@ -150,7 +150,7 @@ $sendFrequency = 'everyDays';
                       <table>
                         <tr style="height:36px">
                           <td>
-                            <label for="everyDays" class="dialogLabel " style="text-align:right;"><?php echo i18n('showAllDays').$newGuiDisplayDoublePoint;?></label>
+                            <label for="everyDays" class="dialogLabel " style="text-align:right;"><?php echo i18n('showAllDays').Tool::getDoublePoint();?></label>
                             <input type="radio" data-dojo-type="dijit/form/RadioButton" class="marginLabel"
                               id="everyDays" name="sendFrequency" value="everyDays" <?php if($sendFrequency == 'everyDays'){echo 'checked';}?>
                               onchange="this.checked?refreshRadioButtonDiv():'';" />
@@ -159,7 +159,7 @@ $sendFrequency = 'everyDays';
                         </tr>
                         <tr style="height:36px">
                           <td>
-                            <label for="everyOpenDays" class="dialogLabel " style="text-align:right;"><?php echo i18n('showAllOpenDays').$newGuiDisplayDoublePoint;?></label>
+                            <label for="everyOpenDays" class="dialogLabel " style="text-align:right;"><?php echo i18n('showAllOpenDays').Tool::getDoublePoint();?></label>
                             <input type="radio" data-dojo-type="dijit/form/RadioButton" 
                               id="everyOpenDays" name="sendFrequency" value="everyOpenDays" class="marginLabel"
                               onchange="this.checked?refreshRadioButtonDiv():'';"/>
@@ -171,7 +171,7 @@ $sendFrequency = 'everyDays';
                             <input type="radio" data-dojo-type="dijit/form/RadioButton" 
                               id="everyWeeks" name="sendFrequency" value="everyWeeks"
                               onchange="this.checked?refreshRadioButtonDiv():'';"/>&nbsp;&nbsp;
-                            <label for="everyWeeks" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('showAllWeeks').$newGuiDisplayDoublePoint;?></label>
+                            <label for="everyWeeks" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('showAllWeeks').Tool::getDoublePoint();?></label>
                             <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
                               style="width:100px;" name="weekFrequency" id="weekFrequency" <?php echo autoOpenFilteringSelect();?>
                               <?php if($sendFrequency != 'everyWeeks'){?> readonly <?php }?>>>
@@ -184,7 +184,7 @@ $sendFrequency = 'everyDays';
                             <input type="radio" data-dojo-type="dijit/form/RadioButton" 
                               id="everyMonths" name="sendFrequency" value="everyMonths"
                               onchange="this.checked?refreshRadioButtonDiv():'';"/>&nbsp;&nbsp;
-                            <label for="everyMonths" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('showAllMonths').$newGuiDisplayDoublePoint;?></label>
+                            <label for="everyMonths" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('showAllMonths').Tool::getDoublePoint();?></label>
                             <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
                             style="width:100px;" name="monthFrequency" id="monthFrequency" <?php echo autoOpenFilteringSelect();?>
                             <?php if($sendFrequency != 'everyMonths'){?> readonly <?php }?>>
@@ -203,7 +203,7 @@ $sendFrequency = 'everyDays';
             </tr>
             <tr>
               <td>
-                <label for="sendTime" class="dialogLabel marginLabel" style="text-align:right;"><?php echo ucfirst(i18n('hours')).$newGuiDisplayDoublePoint;?></label>
+                <label for="sendTime" class="dialogLabel marginLabel" style="text-align:right;"><?php echo ucfirst(i18n('hours')).Tool::getDoublePoint();?></label>
                 <div dojoType="dijit.form.TimeTextBox" name="sendTime" id="sendTime"
                     invalidMessage="<?php echo i18n('messageInvalidTime')?>" 
                     type="text" maxlength="5" required="true"
@@ -218,7 +218,7 @@ $sendFrequency = 'everyDays';
             </tr>
             <tr>
               <td>
-                <label for="name" class="dialogLabel marginLabel" style="text-align:right;"><?php echo ucfirst(i18n('colSendName')).$newGuiDisplayDoublePoint;?></label>
+                <label for="name" class="dialogLabel marginLabel" style="text-align:right;"><?php echo ucfirst(i18n('colSendName')).Tool::getDoublePoint();?></label>
                 <input data-dojo-type="dijit.form.TextBox"
   				          id="name" name="name"
   				          style="width: 300px;"
@@ -237,7 +237,7 @@ $sendFrequency = 'everyDays';
             </tr>
             <tr>
               <td>
-                <label for="destinationInput" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('sectionReceivers').$newGuiDisplayDoublePoint;?></label>
+                <label for="destinationInput" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('sectionReceivers').Tool::getDoublePoint();?></label>
                 <select dojoType="dijit.form.FilteringSelect" class="input" xlabelType="html"
                 style="width: 150px;" name="destinationInput" id="destinationInput" required
                 <?php echo autoOpenFilteringSelect();?>
@@ -250,7 +250,7 @@ $sendFrequency = 'everyDays';
             </tr>
             <tr>
               <td  >
-                <label for="otherDestinationInput" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('colOtherReceivers').$newGuiDisplayDoublePoint;?></label>
+                <label for="otherDestinationInput" class="dialogLabel marginLabel" style="text-align:right;"><?php echo i18n('colOtherReceivers').Tool::getDoublePoint();?></label>
                 <textarea type="text" dojoType="dijit.form.Textarea" 
   				          id="otherDestinationInput" name="otherDestinationInput"
   				          style="width: 302px;" maxlength="4000" class="input"></textarea>
