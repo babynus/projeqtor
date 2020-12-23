@@ -132,8 +132,10 @@ $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCl
             </td>
             <td width="90%" nowrap="nowrap" style="padding-right:2%">
               <?php echo i18n("labelShowIdle");?>
+              <?php htmlDrawSwitch('listShowIdle', ($showClosed=='1')?1:0);?>
               <div title="<?php echo i18n('showIdleElements')?>" dojoType="dijit.form.CheckBox" 
                  class="whiteCheck" type="checkbox" id="listShowIdle" name="listShowIdle"
+                 style="<?php if (isNewGui()) echo 'display:none;';?>"
                 <?php if ($showClosed=='1') { echo ' checked="checked" '; }?> >
                 <script type="dojo/method" event="onChange" >
                   saveUserParameter('dataCloningShowClosed',((this.checked)?'1':'0'));
@@ -145,14 +147,14 @@ $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCl
             <?php if($userProfil->profileCode == 'ADM'){?>
               <button id="parameterDataCloning" dojoType="dijit.form.Button" showlabel="false"
               title="<?php echo i18n('menuDataCloningParameter');?>"
-              iconClass="iconParameter32   iconSize32" class="button">
+              iconClass="imageColorNewGui iconParameter32 iconParameter iconSize32" class="button detailButton">
                 <script type="dojo/method" event="onClick" args="evt">
                   loadMenuBarItem('DataCloningParameter', 'DataCloningParameter', 'bar');  
                 </script>
               </button>
-              <button id="refreshDataCloningButton" dojoType="dijit.form.Button" showlabel="false"
+              <button id="refreshDataCloningButton" dojoType="dijit.form.Button" showlabel="true"
               title="<?php echo i18n('buttonRefreshList');?>"
-              iconClass="iconRefresh32" class="button">
+              iconClass="imageColorNewGui iconButtonRefresh32 iconButtonRefresh iconSize32" class="button detailButton">
               <script type="dojo/method" event="onClick" args="evt">
 	             refreshDataCloningList();
               </script>
