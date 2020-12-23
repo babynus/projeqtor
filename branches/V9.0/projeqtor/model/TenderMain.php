@@ -594,14 +594,16 @@ class TenderMain extends SqlElement {
     foreach ( $evalList as $eval ) {
       $tenderEval=SqlElement::getSingleSqlElementFromCriteria('TenderEvaluation', array('idTender'=>$this->id,'idTenderEvaluationCriteria'=>$eval->id));
       echo '<tr>';
-      echo '<td class="noteData">' . htmlEncode($eval->criteriaName) . '</td>';
-      echo '<td class="noteData"><input type="text" dojoType="dijit.form.NumberTextBox"  
+      echo '<td class="noteData" style="text-align:left;vertical-align:middle">' . htmlEncode($eval->criteriaName) . '</td>';
+      echo '<td class="noteData" style="text-align:center;'.((isNewGui())?'padding-top:0,padding-bottom:0;':'').'">
+            <input type="text" dojoType="dijit.form.NumberTextBox"  
                   id="tenderEvaluation_'.$eval->id.'" name="tenderEvaluation_'.$eval->id.'"
                   constraints="{min:0,max:'.$eval->criteriaMaxValue.'}" style="width: 50px;" class="input" 
                   value="'.$tenderEval->evaluationValue.'" onChange="changeTenderEvaluationValue('.$eval->id.');"/>
             /&nbsp;'.htmlEncode($eval->criteriaMaxValue).'&nbsp;</td>';
-      echo '<td class="noteData" style="text-align:center">' . htmlEncode($eval->criteriaCoef) . '<input type="hidden" id="tenderCoef_'.$eval->id.'" value="'.$eval->criteriaCoef.'"/></td>';
-      echo '<td class="noteData"><input type="text" dojoType="dijit.form.NumberTextBox"  readonly="true" tabindex="-1"
+      echo '<td class="noteData" style="text-align:center;vertical-align:middle">' . htmlEncode($eval->criteriaCoef) . '
+          <input type="hidden" id="tenderCoef_'.$eval->id.'" value="'.$eval->criteriaCoef.'"/></td>';
+      echo '<td class="noteData" style="text-align:center;'.((isNewGui())?'padding-top:0,padding-bottom:0;':'').'"><input type="text" dojoType="dijit.form.NumberTextBox"  readonly="true" tabindex="-1"
                   id="tenderTotal_'.$eval->id.'" name="tenderTotal_'.$eval->id.'"
                   value="'.(($tenderEval->evaluationValue===null)?null:($tenderEval->evaluationValue*$eval->criteriaCoef)).'" style="width: 50px;" class="input" /></td>';
       echo '</tr>';
@@ -610,7 +612,7 @@ class TenderMain extends SqlElement {
       $idList.=(($idList!='')?';':'').$eval->id;
     }
     echo '<tr>';
-    echo '<td class="noteData" style="border-right:0;text-align:center;color:#555555">';
+    echo '<td class="noteData" style="border-right:0;text-align:center;vertical-align:middle;color:#555555">';
     if ($cft->fixValue) {
       echo '<i>'.i18n('msgEvalutationMaxValue').' '.(($cft->evaluationMaxValue===null)?null:htmlDisplayNumericWithoutTrailingZeros($cft->evaluationMaxValue)).'</i>';
     }
@@ -620,7 +622,7 @@ class TenderMain extends SqlElement {
     echo '</td>';  
     echo '<td class="noteData" colspan="2" style="border-left:0;text-align:center;color:#555555">'.i18n('colEvaluationMaxValue')."&nbsp;:&nbsp;".$sumMax;
     echo '</td>';
-    echo '<td class="noteData"><input type="text" dojoType="dijit.form.NumberTextBox"  readonly="true" tabindex="-1"
+    echo '<td class="noteData"style="text-align:center;'.((isNewGui())?'padding-top:0,padding-bottom:0;':'').'"><input type="text" dojoType="dijit.form.NumberTextBox"  readonly="true" tabindex="-1"
                   id="tenderTotal" name="tenderTotal"
                   value="'.$sum.'" style="width: 50px;" class="input" /></td>';
     echo '</tr>';
