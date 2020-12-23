@@ -211,10 +211,10 @@
         </script>
       </button>
       <a id="menuBarNewtabButton" title="<?php echo i18n('buttonNewtabItem');?>"
-         style="height:18px; position:relative;left: 5px; top:-7px; z-index:30; width:60px;" 
+         style="height:22px; position:relative;left: 5px; top:-7px; z-index:30; width:60px;" 
          href="" target="_blank">
-        <button dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconNewtab" class="detailButton"
-          style="height:18px;width:60px;">
+        <button dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconNewtab iconSize22" class="detailButton"
+          style="height:22px;width:60px;">
           <script type="dojo/connect" event="onClick" args="evt">
             var url="main.php?directAccess=true";
             if (dojo.byId('objectClass') && dojo.byId('objectClass').value) { 
