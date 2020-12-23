@@ -49,7 +49,7 @@ if ($line->id) {
 <input type="hidden" name="joblistDefinitionId" value="<?php echo $checkId;?>" />
 <table style="width: 100%;">
   <tr>
-    <td class="dialogLabel" ><label style="width:200px"><?php echo i18n('colName');?> : </label></td>
+    <td class="dialogLabel" ><label style="width:250px"><?php echo i18n('colName').Tool::getDoublePoint();?></label></td>
     <td><input type="text" dojoType="dijit.form.TextBox"
       id="dialogJobDefinitionName"
       name="dialogJobDefinitionName"
@@ -58,7 +58,7 @@ if ($line->id) {
     </td>
   </tr>
   <tr>
-    <td class="dialogLabel" style="text-align:right"><i>(<?php echo i18n('tooltip');?>)</i></td>
+    <td class="dialogLabel" style="text-align:right"><i>(<?php echo i18n('tooltip');?>)&nbsp;&nbsp;</i></td>
     <td><textarea dojoType="dijit.form.Textarea"
           id="dialogJobDefinitionTitle" name="dialogJobDefinitionTitle"
           style="width: 300px;"
@@ -69,7 +69,7 @@ if ($line->id) {
     </td>
   </tr>
   <tr>
-    <td class="dialogLabel" ><label style="width:200px"><?php echo i18n('colSortOrder');?> : </label></td>
+    <td class="dialogLabel" ><label style="width:250px"><?php echo i18n('colSortOrder').Tool::getDoublePoint();?></label></td>
     <td><input type="text" dojoType="dijit.form.TextBox"
       id="dialogJobDefinitionSortOrder"
       name="dialogJobDefinitionSortOrder"
@@ -78,7 +78,7 @@ if ($line->id) {
     </td>
   </tr>
   <tr>
-    <td class="dialogLabel" ><label style="width:200px"><?php echo i18n('colDaysBeforeWarning');?> : </label></td>
+    <td class="dialogLabel" ><label style="width:250px"><?php echo i18n('colDaysBeforeWarning').Tool::getDoublePoint();?></label></td>
     <td><input type="text" dojoType="dijit.form.TextBox"
       id="dialogJobDefinitionDaysBeforeWarning"
       name="dialogJobDefinitionDaysBeforeWarning"

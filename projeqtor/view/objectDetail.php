@@ -4548,7 +4548,7 @@ function drawChecklistDefinitionLinesFromObject($obj, $refresh=false) {
       if ($outMode!='pdf') echo '<div style="position: relative;">';
       echo htmlEncode($line->name);
       if ($outMode!='pdf') echo '<div style="position:absolute;top:0px; left:0px; color: #AAAAAA;">'.htmlEncode($line->sortOrder).'</div>';
-      echo ' : ';
+      echo Tool::getDoublePoint();
       if ($outMode!='pdf') echo '</div>';
       echo '</td>';
       echo '<td class="noteData" style="width:'.(($print)?'65':'60').'%;border-left:0;">';
