@@ -77,7 +77,7 @@ if ($idProject) {
 unset($lstCustom['VersionType']);
 echo "<table style='width:100%'>";
 foreach ($lstCustom as $class=>$nameClass) {
-  echo "<tr style='padding-bottom:20px'><td class='dialogLabel' valign='top'><label>$nameClass&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label></td>";
+  echo "<tr style='padding-bottom:20px'><td class='dialogLabel' valign='top' style='min-width:250px'><label style='min-width:250px'>$nameClass".Tool::getDoublePoint()."</label></td>";
   echo "<td>";
   $list=SqlList::getList($class);
   if ($idProject and $idProjectType) {

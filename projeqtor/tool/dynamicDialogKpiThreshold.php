@@ -106,12 +106,12 @@ if ($mode=='edit') {
                        value="<?php echo $color;?>"
                        style="border-radius:10px; height:20px; border: 0;width:50px;color:<?php echo $color;?>;background-color:<?php echo $color;?>;" />
                     </td>
-                    <td class="detail">
+                    <td class="detail" style="text-align:left">
                       <div id="kpiThresholdColorButton" dojoType="dijit.form.DropDownButton"
-                        style="width: 40px; background-color:<?php echo $color;?>;"
+                        style="position:relative;<?php echo (isNewGui())?'border:0 !important;width:60px;':'width:40px';?>; "
                         title="<?php echo i18n('selectColor');?>"
-                        showlabel="false" iconClass="colorSelector" style="position:relative;top:-2px;height:19px">
-                        <div dojoType="dijit.ColorPalette" >
+                        showlabel="false" iconClass="colorSelector" class="dropDownNoBorder">
+                        <div dojoType="dijit.ColorPalette" style="<?php echo (isNewGui())?'border:0;':'';?>">
                           <script type="dojo/method" event="onChange" >
                             var fld=dojo.byId("kpiThresholdColor");
                             fld.style.color=this.value;
