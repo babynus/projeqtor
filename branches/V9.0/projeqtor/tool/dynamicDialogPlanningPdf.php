@@ -66,15 +66,15 @@ if ($printFormat=="A3") {
                   <input type="radio" dojoType="dijit.form.RadioButton" 
                    name="printOrientation" id="printLandscape" <?php echo $printLandscape;?>
                    value="landscape" style="background-color:white;float:right;"/>
-                </td><td style="text-align:left;">    
-                  <label style="text-align: left;" class="smallRadioLabel" for="printLandscape"><?php echo i18n('printLandscape');?>&nbsp;</label>
+                </td><td style="text-align:left;width:150px;">    
+                  <label style="text-align: left;<?php echo (isNewGui())?'position:relative;top:-4px;left:5px;width:100px':'';?>" class="smallRadioLabel" for="printLandscape"><?php echo i18n('printLandscape');?>&nbsp;</label>
                 </td>
-                <td style="text-align:right; width:5%;">
+                <td style="text-align:right; width:5%;margin-left:10px">
                   <input type="radio" dojoType="dijit.form.RadioButton" 
                    name="printOrientation" id="printPortrait" <?php echo $printPortrait;?>
                    value="portrait" style="background-color:white;"/>
-                </td><td style="text-align:left;"> 
-                  <label style="text-align: left;" class="smallRadioLabel" for="printPortrait"><?php echo i18n('printPortrait');?>&nbsp;</label>
+                </td><td style="text-align:left;width:150px;"> 
+                  <label style="text-align: left;<?php echo (isNewGui())?'position:relative;top:-4px;left:5px;width:100px':'';?>" class="smallRadioLabel" for="printPortrait"><?php echo i18n('printPortrait');?>&nbsp;</label>
                 </td>
               </tr></table>
              </td>
@@ -90,15 +90,15 @@ if ($printFormat=="A3") {
                   <input type="radio" dojoType="dijit.form.RadioButton" 
                    name="printFormat" id="printFormatA4" <?php echo $printFormatA4;?>
                    value="A4" style="background-color:white;float:right;"/>
-                </td><td style="text-align:left;">    
-                  <label style="text-align: left;" class="smallRadioLabel" for="printFormatA4">A4&nbsp;</label>
+                </td><td style="text-align:left;width:150px;">    
+                  <label style="text-align: left;<?php echo (isNewGui())?'position:relative;top:-3px;left:5px;width:100px':'';?>" class="smallRadioLabel" for="printFormatA4">A4&nbsp;</label>
                 </td>
                 <td style="text-align:right; width:5%;">
                   <input type="radio" dojoType="dijit.form.RadioButton" 
                    name="printFormat" id="printFormatA3" <?php echo $printFormatA3;?>
                    value="A3" style="background-color:white;"/>
-                </td><td style="text-align:left;"> 
-                  <label style="text-align: left;" class="smallRadioLabel" for="printFormatA3">A3&nbsp;</label>
+                </td><td style="text-align:left;width:150px;"> 
+                  <label style="text-align: left;<?php echo (isNewGui())?'position:relative;top:-3px;left:5px;width:100px':'';?>" class="smallRadioLabel" for="printFormatA3">A3&nbsp;</label>
                 </td>
               </tr></table>
              </td>

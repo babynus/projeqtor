@@ -159,8 +159,6 @@ if (false===function_exists('lcfirst')) {
     return (string)$str;
   }
 }
-$newGuiDisplayDoublePoint = "&nbsp;:&nbsp;";
-if(isNewGui())$newGuiDisplayDoublePoint="&nbsp;&nbsp;";
 /*
  * ============================================================================ main controls ============================================================================
  */
