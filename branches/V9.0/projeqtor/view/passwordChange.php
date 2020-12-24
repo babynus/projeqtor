@@ -80,7 +80,7 @@
       currentLocale="<?php echo $currentLocale?>";
       hideWait();
       changePassword=false;
-      dojo.byId('dojox_form__NewPWBox_0').focus();
+      if (dojo.byId('dojox_form__NewPWBox_0')) dojo.byId('dojox_form__NewPWBox_0').focus();
     }); 
   </script>
 </head>
@@ -138,7 +138,7 @@ $firstColor= getTheme();
               <div  id="formDiv" dojoType="dijit.layout.ContentPane" region="center"style="background:transparent !important;width: 470px; overflow:hidden;position: relative;">
              <form  dojoType="dijit.form.Form" id="passwordForm" jsId="passwordForm" name="passwordForm" encType="multipart/form-data" action="" method="" >
              <script type="dojo/method" event="onSubmit" >
-              dojo.byId('goButton').focus();
+              if (dojo.byId('goButton')) dojo.byId('goButton').focus();
               var extDate=new Date();
               var userSalt=CryptoJS.SHA256('projeqtor'+extDate.getTime());
               dojo.byId('userSalt').value=userSalt;
