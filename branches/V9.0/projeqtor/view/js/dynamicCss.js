@@ -16,6 +16,8 @@ function setColorTheming(ref,bis, mode) {
   }
   var white='#ffffff';
   var black='#000000';
+  var background='#e0e0e0';
+  background='#ffffff';
   if (!mode) mode='hsl'; // Mode = hsl or hsv 
   if (mode=='hsl') {
     var hslRef=hexToHSL(ref);
@@ -205,20 +207,21 @@ function setColorTheming(ref,bis, mode) {
   element.style.setProperty("--color-lighter-secondary", lighterBis);
 
   // Main Layout
+  element.style.setProperty("--color-background",background);
   element.style.setProperty("--color-toolbar",ref);
   element.style.setProperty("--color-toolbar-text",foreColor);
   element.style.setProperty("--color-toolbar-invert",invert);
   element.style.setProperty("--color-toolbar-invert-reverse",(1-invert));
   element.style.setProperty("--color-menu",menu);
   // List
-  element.style.setProperty("--color-list-header", white);
+  element.style.setProperty("--color-list-header", background);
   element.style.setProperty("--color-list-header-text", dark);
-  element.style.setProperty("--color-grid-header-bg", white);
+  element.style.setProperty("--color-grid-header-bg", background);
   element.style.setProperty("--color-grid-header-text", dark);
   element.style.setProperty("--color-grid-selected-bg", bis);
   element.style.setProperty("--color-grid-selected-text", bisText);
   // Detail
-  element.style.setProperty("--color-detail-header", white);
+  element.style.setProperty("--color-detail-header", background);
   element.style.setProperty("--color-detail-header-text", dark);
   element.style.setProperty("--color-detail-header-border", light);
   element.style.setProperty("--color-section-title-text", dark);
