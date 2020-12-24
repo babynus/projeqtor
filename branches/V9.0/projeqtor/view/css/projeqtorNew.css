@@ -2127,3 +2127,7 @@ element.style {
 .ProjeQtOrNewGui .dojoxGridScrollbox, .ProjeQtOrNewGui .iconHighlight {
 	background-color: var(--color-background);
 }
+
+.ProjeQtOrNewGui .absActivityRow {
+	height:30px !important;
+}
