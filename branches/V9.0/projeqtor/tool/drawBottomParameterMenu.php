@@ -57,6 +57,7 @@ if($isObject=='true' and $screen!=''){
   }
   $lstString=implode(',', $lstParam);
   $sortMenu=array_flip($sortMenu);
+  if (! $lstString) $lstString="''";
   $clause="name in ($lstString) and (level not in ('','Project'))";
   $allMenu=$menu->getSqlElementsFromCriteria(null,null,$clause);
   foreach ($allMenu as $menu){

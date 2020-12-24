@@ -199,7 +199,7 @@ if ($paramIssuer!="") {
   $where.=" and idUser='" . Sql::fmtId($paramIssuer) . "'";
 }
 if ($paramResponsible!="") {
-  $where.=" and responsible='" . Sql::fmtId($paramResponsible) . "'";
+  $where.=" and idResource='" . Sql::fmtId($paramResponsible) . "'";
 }
 
 $filterByPriority = false;
