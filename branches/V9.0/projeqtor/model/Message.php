@@ -38,7 +38,7 @@ class Message extends SqlElement {
   public $startDate;
   public $endDate;
   public $idle;
-  public $_sec_message;
+  //public $_sec_message;
   public $description;
   public $_sec_detail;
   public $idProfile;
@@ -173,9 +173,9 @@ public function getValidationScript($colName) {
       self::$_fieldsAttributes["_sec_detail"]="hidden";
       self::$_fieldsAttributes["idProfile"]="hidden";
       self::$_fieldsAttributes["idProject"]="hidden";
-      if (Parameter::getUserParameter('paramLayoutObjectDetail')=='tab') self::$_fieldsAttributes["_sec_message"]="hidden";
+      //if (Parameter::getUserParameter('paramLayoutObjectDetail')=='tab') self::$_fieldsAttributes["_sec_message"]="hidden";
     } else {
-      self::$_fieldsAttributes["_sec_message"]="hidden";
+      //self::$_fieldsAttributes["_sec_message"]="hidden";
     }
   }
 }
