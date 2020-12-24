@@ -149,18 +149,18 @@ if(!isNewGui()){
 }else{
   $iconViewPosition = "right:6px;top:10px;";
 }
-echo '<div style="position:absolute;'.$iconViewPosition.'" class="iconView iconSize16 imageColorNewGui"></div>';
+echo '<div style="position:absolute;'.$iconViewPosition.'" class="iconSearch iconSize16 imageColorNewGuiNoSelection"></div>';
 echo '</td>';
 echo '<td >&nbsp;</td>';
 echo '<td style="position:relative;">';
 echo '<input dojoType="dijit.form.TextBox" id="subscriptionSubscribedSearch" class="input" style="width:210px" value="" onKeyUp="filterDnDList(\'subscriptionSubscribedSearch\',\'subscriptionSubscribed\',\'div\');" />';
-echo '<div style="position:absolute;'.$iconViewPosition.'" class="iconView iconSize16 imageColorNewGui"></div>';
+echo '<div style="position:absolute;'.$iconViewPosition.'" class="iconSearch iconSize16 imageColorNewGuiNoSelection"></div>';
 echo '</td></tr>';
 echo '<tr>';
 echo '<td style="position:relative;max-width:200px;vertical-align:top;" class="noteHeader" >';
 $imageColorNewGui = "";
 if(isNewGui()){
-  $imageColorNewGui = 'imageColorNewGui';
+  $imageColorNewGui = 'imageColorNewGuiNoSelection';
 }
 echo '<div style="position:absolute;bottom:5px;left:5px;width:24px;height:24px;opacity:0.7;" class="dijitButtonIcon dijitButtonIconDelete '.$imageColorNewGui.'" ></div>';
 echo '<div style="height:'.$showHeight.';overflow:auto;" id="subscriptionAvailable" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" data-dojo-props="accept: [ \'subscription\' ]">';

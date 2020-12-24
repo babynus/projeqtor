@@ -231,9 +231,11 @@
                 <!--------------------->
                 <td width="240px">
                     <div style="width:240px; margin:0 auto;">
+                    <?php if(isNewGui()){?><table><tr><td><?php }?>
                         <label style="text-shadow: none;width:80px;"
-                               for='employeeSelect'><?php echo (i18n("colIdEmployee"));?> : 
+                               for='employeeSelect'><?php echo (i18n("colIdEmployee")).Tool::getDoublePoint();?>
                         </label>
+                        <?php if(isNewGui()){?> </td><td> <?php } ?>
                         <select id="employeeSelect" name="employeeSelect" dojoType="dijit.form.FilteringSelect" 
                                 data-dojo-id="employeeSelect" class="filterField roundedLeft" xlabelType="html" style="width:120px;"
                                 <?php  echo autoOpenFilteringSelect();?>
@@ -256,6 +258,7 @@
                                 loadContentDashboardEmployeeManager();
                             </script>
                         </select>
+                         <?php if(isNewGui()){?>  </td></tr></table> <?php } ?>
                     </div>
                 </td>
                 <!----------------------->
@@ -263,13 +266,15 @@
                 <!----------------------->
                 <td width="240px">
                     <div style="width:240px; margin:0 auto;">
+                    <?php if(isNewGui()){?><table><tr><td><?php }?>
                         <label style="text-shadow: none;width:80px;"
-                               for='leaveTypeSelect'><?php echo (i18n("colType"));?> : 
+                               for='leaveTypeSelect'><?php echo (i18n("colType")).Tool::getDoublePoint();?>
                         </label>
+                     <?php if(isNewGui()){?> </td><td> <?php } ?>
                         <select id="leaveTypeSelect" name="leaveTypeSelect" dojoType="dijit.form.FilteringSelect"  data-dojo-id="leaveTypeSelect"
                                 class="filterField roundedLeft" xlabelType="html" style="width:120px;"
                                 <?php  echo autoOpenFilteringSelect();?>
-                        >
+                        > 
                         <?php 
                             echo '<option value="0"';
                             if ($idTypeRequest==0) {
@@ -288,6 +293,7 @@
                                 loadContentDashboardEmployeeManager();
                             </script>
                         </select>
+                        <?php if(isNewGui()){?>  </td></tr></table> <?php } ?>
                     </div>
                 </td>
                 <!------------------->
@@ -295,9 +301,11 @@
                 <!------------------->
                 <td width="240px">
                     <div style="width:240px; margin:0 auto;">
+                    <?php if(isNewGui()){?><table><tr><td><?php }?>
                         <label style="text-shadow: none;width:80px;"
-                               for='leaveStatusSelect'><?php echo (i18n("colIdStatus"));?> : 
+                               for='leaveStatusSelect'><?php echo (i18n("colIdStatus")).Tool::getDoublePoint();?>  
                         </label>
+                         <?php if(isNewGui()){?> </td><td> <?php } ?>
                         <select id="leaveStatusSelect" name="leaveStatusSelect" dojoType="dijit.form.FilteringSelect" 
                                 data-dojo-id="leaveStatusSelect" class="filterField roundedLeft" xlabelType="html" style="width:120px;"
                                 <?php  echo autoOpenFilteringSelect();?>
@@ -321,6 +329,7 @@
                                 loadContentDashboardEmployeeManager();
                             </script>
                         </select>
+                         <?php if(isNewGui()){?>  </td></tr></table> <?php } ?>
                     </div>
                 </td>
                 <td style="position:relative;"></td>
