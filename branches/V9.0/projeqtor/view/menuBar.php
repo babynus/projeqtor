@@ -213,7 +213,7 @@
       <a id="menuBarNewtabButton" title="<?php echo i18n('buttonNewtabItem');?>"
          style="height:22px; position:relative;left: 5px; top:-7px; z-index:30; width:60px;" 
          href="" target="_blank">
-        <button dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconNewtab iconSize22" class="detailButton"
+        <button dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconNewtab  <?php if(isNewGui()){?>iconSize22 <?php }?>" class="detailButton"
           style="height:22px;width:60px;">
           <script type="dojo/connect" event="onClick" args="evt">
             var url="main.php?directAccess=true";

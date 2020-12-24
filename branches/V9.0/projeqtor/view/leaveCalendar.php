@@ -76,8 +76,10 @@
                     <!-- Manager => List of managed employees -->
                     <?php if ($isManager) {?>
                     <div style="width:500px; margin:0 auto;">
-                        <label style="text-shadow: none;font-size:12px;width:165px;" for='leaveEmployee'><?php echo i18n("selectAnEmployee");?> : 
+                    <?php if(isNewGui()){?><table><tr><td><?php }?>
+                        <label style="text-shadow: none;font-size:12px;width:165px;" for='leaveEmployee'><?php echo i18n("selectAnEmployee");?> <?php if(!isNewGui()){?>:<?php }?> 
                         </label>
+                     <?php if(isNewGui()){?> &nbsp;&nbsp;  </td><td> <?php } ?>
                         <select id="leaveEmployeeSelect" name="leaveEmployeeSelect" dojoType="dijit.form.FilteringSelect"  data-dojo-id="leaveEmployeeSelect"
                                 class="filterField roundedLeft"  style="width:200px;"  <?php  echo autoOpenFilteringSelect();?>
                         >
@@ -85,6 +87,7 @@
                               htmlDrawOptionForReference('idEmployee',1,null,true);
                         ?>        
                         </select>
+                      <?php if(isNewGui()){?>  </td></tr></table> <?php } ?>
                     </div>
                     <?php }?>
             </td>
@@ -149,17 +152,26 @@
 <!-- REFRESH BUTTON -->
 <!-------------------->
                                     <button data-dojo-type="dijit/form/Button" 
-                                            data-dojo-id="refreshCalendarButton" 
+                                            data-dojo-id="refreshCalendarButton"  <?php if(isNewGui()){ ?> class="dynamicTextButton" <?php } ?>
                                             type="button" 
                                             onclick=""><?php echo i18n("refreshTheCalendar"); ?></button>
 <!------------------->
 <!-- DATE SELECTOR -->
 <!------------------->
-                                    <input type="text"  id="widgetSelectDate"  data-dojo-id='widgetSelectDate'   data-dojo-type="dijit.form.DateTextBox" class="roundedLeft" 
+                                  <?php if(isNewGui()){?>
+                                    <input type="text"  id="widgetSelectDate"  data-dojo-id='widgetSelectDate'   data-dojo-type="dijit.form.DateTextBox" style="width:90px; text-align: center;" class="input roundedLeft"
+                                          hasDownArrow="false" 
+                                   <?php  if (sessionValueExists('browserLocaleDateFormatJs')) {
+  							                             echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
+  						                            }?>
+                                           data-dojo-props="invalidMessage: '<?php echo i18n('invalidDate'); ?> !'"/>
+                                           <?php }else{ ?>
+                                       <input type="text"  id="widgetSelectDate"  data-dojo-id='widgetSelectDate'   data-dojo-type="dijit.form.DateTextBox" class="roundedLeft" 
                                    <?php  if (sessionValueExists('browserLocaleDateFormatJs')) {
   							               echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
   						            }?>
                                            data-dojo-props="invalidMessage: '<?php echo i18n('invalidDate'); ?> !'"/>
+                                           <?php } ?>
                                 </div>
                             </td>
                         </tr>
