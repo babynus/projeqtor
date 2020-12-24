@@ -1427,14 +1427,11 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
             </td>
             <td style="width: 10px;text-align: center; align: center;white-space:nowrap;" class="allSearchTD idleSearchTD allSearchFixLength">&nbsp;
               <?php if (isNewGui()) {?>
-              <div  id="listShowIdleSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" 
-                title="<?php echo i18n("labelShowIdle");?>"
-                value="<?php if(getSessionValue('listShowIdle'.$objectClass)== "on") echo "on"; else echo "off"; ?>" 
-                leftLabel="" rightLabel="" style="width:10px;position:relative; left:0px;top:2px;z-index:99;" >
-  		          <script type="dojo/method" event="onStateChanged" >
-  		           dijit.byId("listShowIdle").set("checked",(this.value=="on")?true:false);
-  		          </script>
-  		        </div>
+
+  		        <?php 
+  		        $showIdleValue=0;
+  		        if(!$comboDetail and sessionValueExists('listShowIdle'.$objectClass)){   if(getSessionValue('listShowIdle'.$objectClass)== "on") {$showIdleValue=1;}}
+  		        if (isNewGui()) htmlDrawSwitch('listShowIdle',$showIdleValue,true);?>
   		        <?php }?>
               <div title="<?php echo i18n('labelShowIdle')?>" dojoType="dijit.form.CheckBox" style="<?php if (isNewGui()) echo "display:none";?>"
                 class="whiteCheck" <?php if ($showIdle) echo " checked ";?>

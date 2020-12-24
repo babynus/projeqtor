@@ -94,8 +94,8 @@ label, .ProjeQtOrNewGui label,
     padding: 5px 1px 2px 0px;
     float: left;
     border: 1px;
-    text-shadow: 0px 0px #FFFFFF;
-    background-color: #ffffff;
+    text-shadow: 0px 0px var(--color-background);
+    background-color: var(--color-background);
     color:var(--color-text);
 }
 .ProjeQtOrNewGui .labelLeft {
@@ -132,12 +132,12 @@ label, .ProjeQtOrNewGui label,
 
 .labelWithThumb, .ProjeQtOrNewGui .labelWithThumb{
   width: 150px !important;
-  background-color: #ffffff;
+  background-color: var(--color-background);
   color:var(--color-text);
 }
 
 .tabLabel, .ProjeQtOrNewGui .tabLabel {
-  background-color: #ffffff;
+  background-color: var(--color-background);
   color:var(--color-text);
 }
 
@@ -147,7 +147,7 @@ label, .ProjeQtOrNewGui label,
   border-bottom: 0px;
   border-radius: 5px 5px 0px 0px;
   width:100%;
-  background-color: #ffffff;
+  background-color: var(--color-background);
   color:var(--color-text);
 }
 .ProjeQtOrNewGui .tabLabel.longTextLabel {
@@ -219,8 +219,8 @@ label, .ProjeQtOrNewGui label,
   padding-bottom: 5px;
 }
 
-.ProjeQtOrNewGui .dojoxGridRowOdd {
-  background-color: #ffffff;
+.ProjeQtOrNewGui .dojoxGridRowOdd, .ProjeQtOrNewGui .dojoxGridRow  {
+  background-color: var(--color-background);
 }
 
 .ProjeQtOrNewGui .dojoxGridRowSelected {
@@ -259,7 +259,7 @@ label, .ProjeQtOrNewGui label,
 /* === MENU BUTTONS AND ITEMS CSS ===================================================== MENU ===*/
 
 .dijitComboBoxMenu {
-	 background: #ffffff;
+	 background: var(--color-background);
 }
 .dijitReset.dijitMenuItem  {
 	font-size: 10pt;
@@ -272,19 +272,19 @@ label, .ProjeQtOrNewGui label,
   transition: all 0.8s ease;
 }
 .dijitReset.dijitMenuItem.dijitMenuItemHover {
-	/* color: #ffffff; */
-	background: #cccccc;
+	/* color: var(--color-background); */
+	background: var(--color-light);
 }
 
 .dijitComboBoxMenu, .dijitMenuItem {
-   background-color:#ffffff;
+   background-color:var(--color-background);
    background-image: url();
 }
 
 /*=== TITLE PANE ====================================================================== PANE ===*/
 
 .ProjeQtOrNewGui .dijitTitlePane .dijitTitlePaneTitle {
-	background:#ffffff !important;
+	background:var(--color-background) !important;
 	color: var(--color-section-title-text) !important;
 	/* border-bottom: 1px solid var(--color-section-title-border);*/
 	border-top: 2px solid var(--color-section-title-border);
@@ -305,7 +305,7 @@ label, .ProjeQtOrNewGui label,
 /*=== LAYOUTS AND SCREEN DISPOSITION ================================================== LAYOUT ===*/
 
 .ProjeQtOrNewGui #mapDiv, .ProjeQtOrNewGui #listDiv, .ProjeQtOrNewGui #formDiv, .ProjeQtOrNewGui .display, .ProjeQtOrNewGui .background, .ProjeQtOrNewGui .dijitTitlePaneContentInner, .ProjeQtOrNewGui .dijitTabPane, .ProjeQtOrNewGui #mainDiv, .ProjeQtOrNewGui #centerDiv {
-    background-color: #ffffff; 
+    background-color: var(--color-background); 
 }
 
 .ProjeQtOrNewGui #toolBarDiv, .ProjeQtOrNewGui #statusBarDiv, .ProjeQtOrNewGui .statusBar, .ProjeQtOrNewGui #menuBArNewGuiAcces{
@@ -365,7 +365,7 @@ label, .ProjeQtOrNewGui label,
 }
 
 .ProjeQtOrNewGui #statusBarDiv {
-	background: white !important;
+	background: var(--color-background) !important;
 }
 
 .ProjeQtOrNewGui #listHeaderDiv,.ProjeQtOrNewGui .listTitle {
@@ -395,19 +395,19 @@ html, body, #mainDiv,
 
 .ProjeQtOrNewGui .tabLabel {
   font-size: 10pt;
-  background-color: #ffffff;
+  background-color: var(--color-background);
   color:var(--color-text);
 }
 .ProjeQtOrNewGui .largeLabel {
   width: 380px;
-  background-color: #ffffff;
+  background-color: var(--color-background);
   color:var(--color-text);
 }
 .ProjeQtOrNewGui .dijitToolbar {
  margin: 5px 2px 5px 0px;
  padding: 2px 5px 6px 5px;
  border: 0px solid #b3b3b3;
- background-color: #ffffff; 
+ background-color: var(--color-background); 
  background-image: none; 
 }
 .ProjeQtOrNewGui .toolbarForSelect {
@@ -430,18 +430,18 @@ html, body, #mainDiv,
   border: 1px solid #dddddd;
 }
 .ProjeQtOrNewGui .roundedIconButton {
-	border: 0px solid #ffffff;
+	border: 0px solid var(--color-background);
 	border-radius:0px !important;
 }
 .ProjeQtOrNewGui .roundedButton:hover, .ProjeQtOrNewGui .roundedButtonSmall:hover  {
-  border: 0px solid #ffffff;
-  border-color: #ffffff;
-  border-bottom-color: #ffffff;
+  border: 0px solid var(--color-background);
+  border-color: var(--color-background);
+  border-bottom-color: var(--color-background);
   color: #3C3C3C;
   background: transparent url();
 }
 .ProjeQtOrNewGui .roundedButtonNoBorder:hover {
-	border: 0px solid #ffffff;
+	border: 0px solid var(--color-background);
 	background: transparent url();
 }
 
@@ -809,7 +809,7 @@ animation: fadeIn ease 0.5s;
 .messageDivNewGui{
     border-radius: 12px 4px;
     padding: 3px 5px 3px 5px;
-    background-color: white;
+    background-color: var(--color-background);
     font-size: 10px;
     opacity: 1;
     margin: 6px 4px 4px 4px;
@@ -960,9 +960,9 @@ animation: fadeIn ease 0.5s;
 
 .ProjeQtOrNewGui .notButton,
 .ProjeQtOrNewGui .notButton .dijitReset.dijitInline.dijitButtonNode{
-  background: url() #ffffff;
-  backgound-color: #ffffff;
-  border:1px solid #ffffff !important;
+  background: url() var(--color-background);
+  backgound-color: var(--color-background);
+  border:1px solid var(--color-background) !important;
 }
 
 .ProjeQtOrNewGui .dijitTooltipContainer .dijitReset.dijitInline.dijitButtonNode {
@@ -1053,18 +1053,18 @@ animation: fadeIn ease 0.5s;
 
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonNodeHover {
   border-radius:20px;
-  background: #ffffff;
+  background: var(--color-background);
   color:var(--color-text);
 }
 
 .ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton .dijitButtonNode,
 .ProjeQtOrNewGui .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitButtonHover {
-    background: #ffffff;
-    border: 0px solid #ffffff !important; /* DO NOT TOUCH : IMORTANT FOR LIST AND DETAIL BUTTONS */
+    background: var(--color-background);
+    border: 0px solid var(--color-background) !important; /* DO NOT TOUCH : IMORTANT FOR LIST AND DETAIL BUTTONS */
 }    
 .ProjeQtOrNewGui .detailButton.dijitButton, .ProjeQtOrNewGui .dijitReset.dijitInline.detailButton.dijitButtonNode {
-	  background: #ffffff;
-    /*border: 1px solid #ffffff;*/
+	  background: var(--color-background);
+    /*border: 1px solid var(--color-background);*/
     
 }
 
@@ -1073,7 +1073,7 @@ animation: fadeIn ease 0.5s;
   background: var(--color-button-background);
 }
 .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
-  /*border:1px solid white;*/
+  /*border:1px solid var(--color-background);*/
 }
 #buttonDiv .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode,
 #listHeaderDiv .dijit.dijitReset.dijitInline.detailButton.dijitButton.dijitDisabled .dijitButtonNode {
@@ -1088,7 +1088,7 @@ animation: fadeIn ease 0.5s;
 	color: var(--color-detail-header-text);
 }
 .ProjeQtOrNewGui #buttonDivObjectId .roundedButton, .ProjeQtOrNewGui #objectDetailObjectId.roundedButton {
-	border:1px solid white;
+	border:1px solid var(--color-background);
 }
 .ProjeQtOrNewGui #buttonDivObjectId .roundedButton:hover, .ProjeQtOrNewGui #objectDetailObjectId.roundedButton:hover{
   border:1px solid var(--color-detail-header-text);
@@ -1165,7 +1165,7 @@ animation: fadeIn ease 0.5s;
 }
 
  .ProjeQtOrNewGui div{
-  	scrollbar-color:grey white;
+  	scrollbar-color:grey var(--color-background);
   	scrollbar-width: thin;
   	scrollbar-height: thin;
 }
@@ -1367,7 +1367,7 @@ select option:checked {
 }
 
 .ProjeQtOrNewGui #extraButtonsDetailDiv {
-	background: #ffffff !important;
+	background: var(--color-background) !important;
 	padding-left:5px;
 	border:1px solid var(--color-light);
 	border-top:0px;
@@ -2060,7 +2060,7 @@ element.style {
 	margin-top:10px;
 }
 .ProjeQtOrNewGui .whiteBackground, .ProjeQtOrNewGui .whiteBackground:hover {
-	border: 0px solid #ffffff !important;
+	border: 0px solid var(--color-background) !important;
 }
 
 .ProjeQtOrNewGui .iconRight { background-image: url(customIcons/new/iconRight.svg);  background-repeat: no-repeat;}
@@ -2092,7 +2092,7 @@ element.style {
 }
 
 .ProjeQtOrNewGui #subscribeButtonDiv {
-	background: #ffffff !important;
+	background: var(--color-background) !important;
 	width:250px;
 	left:-251px;
 }
@@ -2106,10 +2106,10 @@ element.style {
 element.style {
 }
 .ProjeQtOrNewGui #mapDiv, .ProjeQtOrNewGui #listDiv, .ProjeQtOrNewGui #formDiv, .ProjeQtOrNewGui .display, .ProjeQtOrNewGui .background, .ProjeQtOrNewGui .dijitTitlePaneContentInner, .ProjeQtOrNewGui .dijitTabPane, .ProjeQtOrNewGui #mainDiv, .ProjeQtOrNewGui #centerDiv {
-    background-color: #ffffff;
+    background-color: var(--color-background);
 }
 .ProjeQtOrNewGui .display {
-    border: 1px solid #ffffff;
+    border: 1px solid var(--color-background);
 }
 .ProjeQtOrNewGui .marginLabel {
 	margin-top:5px;
@@ -2124,3 +2124,6 @@ element.style {
 #cke_situationComment .cke_top {
 	display:inline-block;
 } 
+.ProjeQtOrNewGui .dojoxGridScrollbox, .ProjeQtOrNewGui .iconHighlight {
+	background-color: var(--color-background);
+}

@@ -188,6 +188,7 @@ function sortMenus(&$listMenus, &$result, $parent,$level,$rightPluginAcces=false
   $hr=new HabilitationReport();
   $user=getSessionUser();
   $lst=$hr->getSqlElementsFromCriteria(array('idProfile'=>$user->idProfile, 'allowAccess'=>'1'), false);
+  $allowedCategory=array();
   foreach ($lst as $h) {
     $reportHb=$h->idReport;
     $nameReport=SqlList::getNameFromId('Report', $reportHb, false);

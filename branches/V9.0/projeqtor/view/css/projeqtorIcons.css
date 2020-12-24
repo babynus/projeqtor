@@ -2913,7 +2913,7 @@
 .ProjeQtOrNewGui .iconDeleteElement { background-image: url(customIcons/new/iconRemove.svg); }
 
 .disconnectClass { background-image: url(images/iconDeleteElement.png);  background-size: 24px 24px;}
-.ProjeQtOrNewGui .disconnectClass { background-image: url(customIcons/new/icondisconnect.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .disconnectClass { background-image: url(customIcons/new/iconDisconnect.svg);  background-repeat: no-repeat; }
 
 .iconNewElement16 { background-image: url(images/iconNewElement.png);  background-size: 16px 16px;}
 .iconNewElement22{ background-image: url(images/iconNewElement.png);  background-size: 22px 22px;}
