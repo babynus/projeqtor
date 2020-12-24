@@ -289,7 +289,7 @@ function getReportsMenu(){
 
    $level++;
    $reportDirect= new Report();
-   $where=" idReportCategory in (".implode(",", $lstIdCate).")";
+   $where=" idReportCategory in (0,".implode(",", $lstIdCate).")";
    $reportList= $reportDirect->getSqlElementsFromCriteria(null,false,$where,"file");
    $nameFile=SqlList::getList('Report','file');
    $lstReportName=array();
