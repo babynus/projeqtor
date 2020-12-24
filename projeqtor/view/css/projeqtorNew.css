@@ -2121,11 +2121,18 @@ element.style {
 	border:0;	
 }
 
+/* SPECIFIC FOR POP-UP CK EDITOR */
 #cke_situationComment .cke_top {
 	display:inline-block;
 } 
+
+/* SPECIFIC FOR GREYED BACKGROUND */
 .ProjeQtOrNewGui .dojoxGridScrollbox, .ProjeQtOrNewGui .iconHighlight {
 	background-color: var(--color-background);
+}
+
+.ProjeQtOrNewGui .dijitTabContainerTop-tabs .dijitTabChecked {
+	border-bottom-color: var(--color-background);
 }
 
 .ProjeQtOrNewGui .absActivityRow {
