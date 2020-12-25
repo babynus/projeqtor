@@ -71,7 +71,7 @@ $sumProj=array();
 
 foreach ($lstWork as $work) {
   if (! array_key_exists($work->idResource,$resources)) {
-    $resources[$work->idResource]=SqlList::getNameFromId('Resource', $work->idResource);
+    $resources[$work->idResource]=SqlList::getNameFromId('ResourceAll', $work->idResource);
   }
   if (! array_key_exists($work->idProject,$projects)) {
     $projects[$work->idProject]=SqlList::getNameFromId('Project', $work->idProject);
