@@ -452,7 +452,46 @@ function getNavigationMenuLeft (){
   if($rightReportAcces)$result=array_merge ($result,getReportsMenu());
   if($rightPluginAcces)$result=array_merge($result,getPlugins());
   ksort($result);
+  foreach ($result as $idx=>$res) {
+    $nav=$res['object'];
+    if (is_object($nav) and property_exists($nav, 'idMenu') and $nav->idMenu==0 and property_exists($nav, 'idReport') and $nav->idReport==0) {
+      if (navMenuHasItem($nav->id,$result)==false) {
+        unset($result[$idx]);
+      }
+    }
+  }
   return $result;
+}
+function navMenuHasItem($id,$result) {
+  $hasItem=false;
+  foreach($result as $res) {
+    $nav=$res['object'];
+    $idReport=0;
+    $idMenu=0;
+    $idParent=0;
+    $idItem=0;
+    if (! is_object($nav)) {
+      $idParent=(isset($nav['idParent']))?$nav['idParent']:0;
+      $idMenu=(isset($nav['idMenu']))?$nav['idMenu']:0;
+      $idMenu=(isset($nav['idReport']))?$nav['idReport']:0;
+      $idItem=(isset($nav['id']))?$nav['id']:0;
+    } else {
+      $idParent=(property_exists($nav, 'idParent'))?$nav->idParent:0;
+      $idReport=(property_exists($nav, 'idReport'))?$nav->idReport:0;
+      $idMenu=(property_exists($nav, 'idMenu'))?$nav->idMenu:0;
+      $idItem=(property_exists($nav, 'id'))?$nav->id:0;
+    }
+    if ($idParent==$id) {
+      if ($idMenu!=0 or $idReport!=0) {
+        $hasItem=true;
+        break;
+      } else if ($idItem and navMenuHasItem($idItem,$result)) {
+        $hasItem=true;
+        break;
+      } 
+    }
+  }
+  return $hasItem;
 }
 
 function drawLeftMenuListNewGui($displayMode){
