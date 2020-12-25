@@ -290,7 +290,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
              <td>
               <textarea dojoType="dijit.form.Textarea" 
 	          id="billLineDescription" name="billLineDescription"
-	          style="width: 500px;"
+	          style="width: 500px;<?php if (isNewGui()) echo 'min-height:32px;max-height:153px';?>"
 	          maxlength="200"
 	          class="input"><?php echo $line->description;?></textarea>
 	         </td>
@@ -302,7 +302,7 @@ if ($billingType == 'M' and $refType == 'ProviderOrder' and $line->id ) {
              <td>
                <textarea dojoType="dijit.form.Textarea" 
 	          id="billLineDetail" name="billLineDetail"
-	          style="width: 500px;"
+	          style="width: 500px;<?php if (isNewGui()) echo 'min-height:32px;max-height:153px';?>"
 	          maxlength="200"
 	          class="input"><?php echo $line->detail;?></textarea>  
 	         </td>
