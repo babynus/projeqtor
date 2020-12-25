@@ -86,13 +86,12 @@ class CommandMain extends SqlElement {
   public $initialEndDate;
   public $validatedEndDate;
   public $comment;
-  public $_sec_situation;
-  public $idSituation;
-  public $_spe_situation;
-  
   //public $_sec_BillLine;
   public $_BillLine=array();
   public $_BillLine_colSpan="2";
+  public $_sec_situation;
+  public $idSituation;
+  public $_spe_situation;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();

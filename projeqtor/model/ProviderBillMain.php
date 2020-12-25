@@ -86,14 +86,13 @@ class ProviderBillMain extends SqlElement {
   public $_spe_paymentsList;
   public $paymentsCount;
   public $comment;
+  public $_BillLine=array();
+  public $_BillLine_colSpan="2";
   public $_sec_situation;
   public $idSituation;
   public $_spe_situation;
-  //link
   public $_sec_ProviderTerm;
   public $_ProviderTerm=array();
-  public $_BillLine=array();
-  public $_BillLine_colSpan="2";
   public $_BillLineTerm=array();
   public $_BillLineTerm_colSpan="2";
   public $_sec_Link;
