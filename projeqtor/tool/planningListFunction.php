@@ -578,13 +578,18 @@ function drawOptionResource() {
 
 // ==================
 function drawResourceTeamOrga() {
-  global $displayWidthPlan;?>
+  global $displayWidthPlan, $displayListDiv;
+  $sizeSelect=($displayListDiv>1400)?150:100;
+  $showOrga=($displayListDiv>1180)?true:false;
+  $showTeam=($displayListDiv>980)?true:false;
+  $showRes=($displayListDiv>780)?true:false;
+  ?>
   <table>
     <tr>
-      <td style="text-align:right;padding-left:15px"><?php echo i18n('colIdResource');?>&nbsp;&nbsp;</td>
-      <td>
+      <td style="text-align:right;padding-left:15px;<?php if (! $showRes) echo 'display:none;'?>"><?php echo i18n('colIdResource');?>&nbsp;&nbsp;</td>
+      <td style="<?php if (! $showRes) echo 'display:none;'?>">
         <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-          style="width: <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
+          style="width: <?php echo $sizeSelect;?>px;"
           <?php echo autoOpenFilteringSelect();?>
           name="selectResourceName" id="selectResourceName" value="<?php if(sessionValueExists('selectResourceName')){ echo getSessionValue('selectResourceName'); }?>" >
           <script type="dojo/method" event="onChange" >
@@ -603,10 +608,10 @@ function drawResourceTeamOrga() {
     </tr>
     <tr>
     <?php }?>
-      <td style="text-align:right;padding-left:15px"><?php echo i18n('colIdTeam');?>&nbsp;&nbsp;</td>
-      <td>
+      <td style="text-align:right;padding-left:15px;<?php if (! $showTeam) echo 'display:none;'?>"><?php echo i18n('colIdTeam');?>&nbsp;&nbsp;</td>
+      <td style="<?php if (! $showTeam) echo 'display:none;'?>">
         <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-          style="width:  <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
+          style="width:<?php echo $sizeSelect;?>px;"
           name="teamName" id="teamName" value="<?php if(sessionValueExists('teamName')){ echo getSessionValue('teamName'); }?>"
           <?php echo autoOpenFilteringSelect();?>
           >
@@ -622,10 +627,10 @@ function drawResourceTeamOrga() {
     </tr>
     <tr>
     <?php }?>
-      <td style="text-align:right;padding-left:15px"><?php echo i18n('colIdOrganization');?>&nbsp;&nbsp;</td>
-        <td>
+      <td style="text-align:right;padding-left:15px;<?php if (! $showOrga) echo 'display:none;'?>"><?php echo i18n('colIdOrganization');?>&nbsp;&nbsp;</td>
+        <td style="<?php if (! $showOrga) echo 'display:none;'?>">
         <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-          style="width:  <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
+          style="width:<?php echo $sizeSelect;?>px;"
           name="organizationName" id="organizationName" value="<?php if(sessionValueExists('organizationName')){ echo getSessionValue('organizationName'); }?>"
           <?php echo autoOpenFilteringSelect();?>
           >
