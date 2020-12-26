@@ -74,7 +74,14 @@ scriptLog('   ->/view/reportsList.php');
   </tr>
 </table>
 </div>
-<div dojoType="dijit.layout.ContentPane" region="center" id="gridContainerDiv" >
+<div dojoType="dijit.layout.ContentPane" region="center" id="gridContainerDiv" onresize="">
+  <script type="dojo/connect" event="resize" args="evt">
+   if (dojo.byId('gridContainerDiv') && dojo.byId('gridContainerDiv').offsetHeight) {
+     var divHeight=(dojo.byId('gridContainerDiv').offsetHeight)-40+'px';
+     dojo.byId('reportMenuList').style.height=divHeight;
+     dojo.byId('reportParametersDiv').style.height=divHeight;
+   }
+  </script>
   <table style="height:100%">
     <tr>
       <td width="5px" height="35px">&nbsp;</td>
