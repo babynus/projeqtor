@@ -17,6 +17,10 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   $theme=getTheme();
   $background="#545381";
   $initialisation=true;
+  $version=0;
+  $build=0;
+  $firstColor='545381';
+  $background='#545381 !important';
 }
 /*** COPYRIGHT NOTICE *********************************************************
  *
