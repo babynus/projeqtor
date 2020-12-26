@@ -9,6 +9,7 @@ if (is_file ( "../tool/parametersLocation.php" )) {
     SSO::setAvoidSSO();
   }
   if(isNewGui())$firstColor=Parameter::getUserParameter('newGuiThemeColor');
+  else $firstColor='545381';
   $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
   $initialisation=false;
 } else {
@@ -21,6 +22,10 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   $theme=getTheme();
   $background="#545381";
   $initialisation=true;
+  $version=0;
+  $build=0;
+  $firstColor='545381';
+  $background='#545381 !important';
 }
 /*** COPYRIGHT NOTICE *********************************************************
  *
@@ -102,7 +107,7 @@ if (is_file ( "../tool/parametersLocation.php" )) {
 			    <tr style="height:42px;" >
 			     <td align="center" style="position:relative;height: 1%;" valign="center">
 			       <div style="position:relative;height:75px;">
-			         <div class="divLoginIconDrawing" style="position:absolute;background-color:#<?php echo $firstColor;?>";>
+			         <div class="divLoginIconDrawing" style="position:absolute;background-color:#<?php echo $firstColor; ?>";>
 			           	<div class="divLoginIconBig"></div>		         
 			         </div>
 			       </div>

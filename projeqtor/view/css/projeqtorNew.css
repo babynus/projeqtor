@@ -1624,9 +1624,9 @@ element.style {
     top: unset;
     left: unset;
     border-bottom: unset;
-	width:100%;
+	  width:100%;
     text-align: right;
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
     font-weight: bold;
     padding: 2px 0px;
@@ -2137,4 +2137,30 @@ element.style {
 
 .ProjeQtOrNewGui .absActivityRow {
 	height:30px !important;
+}
+
+element.style {
+    border: 1px solid red;
+}
+
+/* SPECIFIC FOR Dijit Calendar : Leave System, Calender */
+.ProjeQtOrNewGui .dojoxCalendar .buttonContainer .dijit.dijitToolbar span.dijit.dijitReset.dijitInline.dijitButton {
+  display:none;
+  
+}
+.ProjeQtOrNewGui .dojoxCalendar .buttonContainer .dijit.dijitToolbar span.dijit.dijitReset.dijitInline.dijitButton[widgetid=dijit_form_Button_22],
+.ProjeQtOrNewGui .dojoxCalendar .buttonContainer .dijit.dijitToolbar span.dijit.dijitReset.dijitInline.dijitButton[widgetid=dijit_form_Button_23]{
+	display:inline-block; 
+}
+.ProjeQtOrNewGui .dojoxCalendar .buttonContainer .dijit.dijitToolbar span.dijit.dijitReset.dijitInline.dijitButton[widgetid=dijit_form_Button_22] span.dijitButtonNode,
+.ProjeQtOrNewGui .dojoxCalendar .buttonContainer .dijit.dijitToolbar span.dijit.dijitReset.dijitInline.dijitButton[widgetid=dijit_form_Button_23] span.dijitButtonNode{
+border:1px solid var(--color-medium);
+}
+.ProjeQtOrNewGui .dojoxCalendar .buttonContainer .dijit.dijitToolbar span.dijitButtonHover[widgetid=dijit_form_Button_22],
+.ProjeQtOrNewGui .dojoxCalendar .buttonContainer .dijit.dijitToolbar span.dijitButtonHover[widgetid=dijit_form_Button_23] {
+  border:1px solid transparent;
+}
+.ProjeQtOrNewGui .dojoxCalendar .buttonContainer .dijit.dijitToolbar span.dijitButtonHover[widgetid=dijit_form_Button_22] span.dijitButtonNode,
+.ProjeQtOrNewGui .dojoxCalendar .buttonContainer .dijit.dijitToolbar span.dijitButtonHover[widgetid=dijit_form_Button_23] span.dijitButtonNode {
+  border:1px solid var(--color-secondary) !important;
 }

@@ -149,7 +149,23 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorIcons.css" />
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorPrint.css" />
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorFlat.css" />
-  <?php if (isNewGui() and $outMode!='pdf') {?><link rel="stylesheet" type="text/css" href="../view/css/projeqtorNew.css" /><?php }?>
+  <?php if (isNewGui() and $outMode!='pdf') {?>
+    <style type="text/css">
+      <?php 
+      $css=file_get_contents('../view/css/projeqtorNew.css');
+      $colors=getSessionValue('allColorsDynamicCss');
+      $colorsArray=json_decode('['.$colors.']');
+      $arrayFrom=array();
+      $arrayTo=array();
+      foreach ($colorsArray as $o) {
+        $arrayFrom[]='var('.$o->key.')';
+        $arrayTo[]=str_replace('*', '#',$o->value);
+      }
+      $css=str_ireplace($arrayFrom, $arrayTo, $css);
+      echo $css;
+      ?>
+    </style>
+  <?php }?>
   <script type="text/javascript" src="js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <link rel="shortcut icon" href="../view/img/logo.ico" type="image/x-icon" />
   <link rel="icon" href="../view/img/logo.ico" type="image/x-icon" />
@@ -209,7 +225,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
   </script>
 </head>
 <page backtop="100px" backbottom="20px" footer="page">
-<<?php echo ($printInNewPage or $outMode=='pdf' or (isset($outModeBack) and $outModeBack=='pdf')) ?'body':'div';?> style="-webkit-print-color-adjust: exact;<?php echo ($outMode=='pdf' and $pdfLib!='WkHtmlToPdf')?'font-size:90%;overflow:auto;':''; ?>" id="bodyPrint" class="tundra ProjeQtOrFlatGrey <?php if (0 and isNewGui() and $outMode!='pdf') echo 'ProjeQtOrNewGui';?>" onload="<?php if (isNewGui()) echo 'setColorTheming();';?>window.top.hideWait();">
+<<?php echo ($printInNewPage or $outMode=='pdf' or (isset($outModeBack) and $outModeBack=='pdf')) ?'body':'div';?> style="-webkit-print-color-adjust: exact;<?php echo ($outMode=='pdf' and $pdfLib!='WkHtmlToPdf')?'font-size:90%;overflow:auto;':''; ?>" id="bodyPrint" class="tundra ProjeQtOrFlatGrey <?php if (isNewGui()) echo 'ProjeQtOrNewGui';?>" onload="window.top.hideWait();">
   <?php 
   }
   $page=$_REQUEST['page'];

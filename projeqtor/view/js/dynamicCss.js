@@ -1,5 +1,7 @@
 
-colorThemingInProgress=false;
+var colorThemingInProgress=false;
+var elementDynamicCss=document.getElementById('body');
+var allColors="";
 function setColorTheming(ref,bis, mode) {
   if (colorThemingInProgress) return;
   if (!ref) ref='#545382';
@@ -188,56 +190,57 @@ function setColorTheming(ref,bis, mode) {
 //  dojo.byId("menuBarNewtabButton").style.filter='brightness(0) invert('+invert+')';
 //  dojo.byId("selectedProject").style.filter='brightness(0) invert('+invert+')';
 //  dijit.byId("projectSelectorParametersButton").domNode.style.filter='brightness(0) invert('+invert+')';
-
-  var element=document.getElementById('body');
+  elementDynamicCss=document.getElementById('body');
+  allColors="";
   // Generic colors
-  element.style.setProperty("--color-reference", ref);
-  element.style.setProperty("--color-darker", darker);
-  element.style.setProperty("--color-dark", dark);
-  element.style.setProperty("--color-medium", medium);
-  element.style.setProperty("--color-light", light);
-  element.style.setProperty("--color-lighter", lighter);
-  element.style.setProperty("--color-text", '#656565');
-  element.style.setProperty("--color-white", '#ffffff');
-  element.style.setProperty("--color-secondary", bis);
-  element.style.setProperty("--color-darker-secondary", darkerBis);
-  element.style.setProperty("--color-dark-secondary", darkBis);
-  element.style.setProperty("--color-medium-secondary", mediumBis);
-  element.style.setProperty("--color-light-secondary", lightBis);
-  element.style.setProperty("--color-lighter-secondary", lighterBis);
-
+  addColor("--color-reference", ref);
+  addColor("--color-darker", darker);
+  addColor("--color-dark", dark);
+  addColor("--color-medium", medium);
+  addColor("--color-light", light);
+  addColor("--color-lighter", lighter);
+  addColor("--color-text", '#656565');
+  addColor("--color-white", '#ffffff');
+  addColor("--color-secondary", bis);
+  addColor("--color-darker-secondary", darkerBis);
+  addColor("--color-dark-secondary", darkBis);
+  addColor("--color-medium-secondary", mediumBis);
+  addColor("--color-light-secondary", lightBis);
+  addColor("--color-lighter-secondary", lighterBis);
+  
   // Main Layout
-  element.style.setProperty("--color-background",background);
-  element.style.setProperty("--color-toolbar",ref);
-  element.style.setProperty("--color-toolbar-text",foreColor);
-  element.style.setProperty("--color-toolbar-invert",invert);
-  element.style.setProperty("--color-toolbar-invert-reverse",(1-invert));
-  element.style.setProperty("--color-menu",menu);
+  addColor("--color-background",background);
+  addColor("--color-toolbar",ref);
+  addColor("--color-toolbar-text",foreColor);
+  addColor("--color-toolbar-invert",invert);
+  addColor("--color-toolbar-invert-reverse",(1-invert));
+  addColor("--color-menu",menu);
   // List
-  element.style.setProperty("--color-list-header", background);
-  element.style.setProperty("--color-list-header-text", dark);
-  element.style.setProperty("--color-grid-header-bg", background);
-  element.style.setProperty("--color-grid-header-text", dark);
-  element.style.setProperty("--color-grid-selected-bg", bis);
-  element.style.setProperty("--color-grid-selected-text", bisText);
+  addColor("--color-list-header", background);
+  addColor("--color-list-header-text", dark);
+  addColor("--color-grid-header-bg", background);
+  addColor("--color-grid-header-text", dark);
+  addColor("--color-grid-selected-bg", bis);
+  addColor("--color-grid-selected-text", bisText);
   // Detail
-  element.style.setProperty("--color-detail-header", background);
-  element.style.setProperty("--color-detail-header-text", dark);
-  element.style.setProperty("--color-detail-header-border", light);
-  element.style.setProperty("--color-section-title-text", dark);
-  element.style.setProperty("--color-section-title-border", dark);
-  element.style.setProperty("--color-table-header", light);
+  addColor("--color-detail-header", background);
+  addColor("--color-detail-header-text", dark);
+  addColor("--color-detail-header-border", light);
+  addColor("--color-section-title-text", dark);
+  addColor("--color-section-title-border", dark);
+  addColor("--color-table-header", light);
   // Tools (buttons, ...)
-  element.style.setProperty("--color-button-background", lighter);
-  element.style.setProperty("--color-button-text", dark);
-  element.style.setProperty("--image-hue-rotate", hueRotate+'deg');
-  element.style.setProperty("--image-hue-rotate-reverse", (-1*hueRotate)+'deg');
-  element.style.setProperty("--image-saturate", saturate+'%');
-  element.style.setProperty("--image-brightness", brightness+'%');
-  element.style.setProperty("--image-hue-rotate-selected", hueRotateSelected+'deg');
-  element.style.setProperty("--image-saturate-selected", saturateSelected+'%');
-  element.style.setProperty("--image-brightness-selected", brightnessSelected+'%');
-  element.style.setProperty("--image-hue-rotate-selected-from-ref", (hueRotate*(-1)+hueRotateSelected)+'deg');
+  addColor("--color-button-background", lighter);
+  addColor("--color-button-text", dark);
+  addColor("--image-hue-rotate", hueRotate+'deg');
+  addColor("--image-hue-rotate-reverse", (-1*hueRotate)+'deg');
+  addColor("--image-saturate", saturate+'%');
+  addColor("--image-brightness", brightness+'%');
+  addColor("--image-hue-rotate-selected", hueRotateSelected+'deg');
+  addColor("--image-saturate-selected", saturateSelected+'%');
+  addColor("--image-brightness-selected", brightnessSelected+'%');
+  addColor("--image-hue-rotate-selected-from-ref", (hueRotate*(-1)+hueRotateSelected)+'deg');
+  saveDataToSession('allColorsDynamicCss',allColors,false);
   colorThemingInProgress=false;
 }
 
@@ -402,4 +405,11 @@ function setGlobalNewGuiThemeColor(param, color){
 	if(dojo.byId(param)){
 		dojo.byId(param).value = color;
     }
+}
+
+function addColor(name,color) {
+  elementDynamicCss.style.setProperty(name, color);
+  console.log(color);
+  var colorNum=(typeof color == 'string')?color.replace('#','*'):color;
+  allColors+=((allColors!="")?',':'')+'{"key":"'+name+'","value":"'+colorNum+'"}';
 }
