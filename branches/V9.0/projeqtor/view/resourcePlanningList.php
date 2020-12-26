@@ -82,11 +82,15 @@ if ($saveShowClosed) {
 //$objectClass='Task';
 //$obj=new $objectClass;
 
-$displayWidthPlan="9999";
+$displayWidthPlan="1920";
 if (RequestHandler::isCodeSet('destinationWidth')) {
   $displayWidthPlan=RequestHandler::getNumeric('destinationWidth');
 }
-
+$paramScreen=Parameter::getUserParameter('paramScreen');
+$displayListDiv=$displayWidthPlan;
+if ($paramScreen=='left') {
+  $displayListDiv-=intval(getSessionValue('contentPaneDetailDivWidthResourcePlanning'))+5; 
+}
 ?>
    
 <div id="mainPlanningDivContainer" dojoType="dijit.layout.BorderContainer">
