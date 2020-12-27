@@ -492,6 +492,7 @@ function changePaswordType(){
 //search menu 
 //=============================================================================
 function searchMenuToDisplay(val){
+  val=val.toUpperCaseWithoutAccent();
   var menuExist= new Array();
   var menuReportExist= new Array();
   var arrayMenuName=new Array();
