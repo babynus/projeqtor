@@ -649,8 +649,14 @@ function drawLeftMenuListNewGui($displayMode){
          if($idName=='GanttPlan')$iconName='Planning';
          else $iconName=$idName;
       }
-      $result.='<div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$iconName).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(($menu['objectType']=='menu')?i18n('menu'.substr($obj->name,3)):i18n($idName)).'</div></a>';
+      $result.='<div class="icon'.(($menu['objectType']=='menu')?substr($obj->name,3):$iconName).' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';   
+      if ($menu['objectType']=='menu') {
+        if(substr(i18n($obj->name),0,1)!='[') $navMenuName=i18n($obj->name);
+        else $navMenuName=i18n('menu'.substr($obj->name,3));
+      } else {
+        $navMenuName=i18n($idName);
+      }
+      $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst($navMenuName).'</div></a>';
       $result.='<div id="currentDiv'.$obj->name.'" class="div__link" ></div></li>';
     }
     $old=$menu['level'];
