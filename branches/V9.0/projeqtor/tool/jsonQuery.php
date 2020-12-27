@@ -1024,6 +1024,7 @@
             if ($id=='idproject') continue;
             echo (++$nbFields>1)?',':'';
             $numericLength=0;
+            if (! isset($formatter[$nbFields])) $formatter[$nbFields]='';
             if ($id=='id') {
             	$numericLength=6;
             } else if ($formatter[$nbFields]=='classNameFormatter') {
