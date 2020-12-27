@@ -1861,12 +1861,8 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
   $param=SqlElement::getSingleSqlElementFromCriteria('Parameter', 
        array('idUser'=>getSessionUser()->id, 'parameterCode'=>'Filter'.$filterObjectClass));
   $defaultFilter=($param)?$param->parameterValue:'';
-  echo "<div id='displayFilterList' style='overflow:hidden'>";
-   if ($context!='directFilterList') {
-    echo "<table id='dndListFilterSelector' jsId='dndListFilterSelector' width='100%' dojotype='dojo.dnd.Source' withhandles='true' data-dojo-props='accept: [ \"tableauBordLeft\",\"tableauBordRight\" ]' >";
-   }else{
-    echo "<table id='dndListFilterSelector2' jsId='dndListFilterSelector2' width='100%' dojotype='dojo.dnd.Source' withhandles='true' data-dojo-props='accept: [ \"tableauBordLeft\",\"tableauBordRight\" ]' >";
-   }
+  echo "<div id='displayFilterList' style='overflow:hidden;'>";
+  echo "<table width='100%'>";
   echo "<tr style='height:22px;'>";
   if ($context!='directFilterList') {
   	echo "<td class='filterHeader' colspan='3' style='width:749px;'>" . (isNewGui()?i18n("storedFiltersQuick"):i18n("storedFilters")) . "</td>";
@@ -1887,6 +1883,13 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
            . i18n("noFilterClause")
            . "</td>";
     echo "</tr>";
+  }
+  echo "</table>";
+  echo "<div style='overflow:hidden;max-height:".(($context=='directFilterList')?202:127)."px;overflow-y:auto'>";
+  if ($context!='directFilterList') {
+    echo "<table id='dndListFilterSelector' jsId='dndListFilterSelector' width='100%' dojotype='dojo.dnd.Source' withhandles='true' data-dojo-props='accept: [ \"tableauBordLeft\",\"tableauBordRight\" ]' >";
+  }else{
+    echo "<table id='dndListFilterSelector2' jsId='dndListFilterSelector2' width='100%' dojotype='dojo.dnd.Source' withhandles='true' data-dojo-props='accept: [ \"tableauBordLeft\",\"tableauBordRight\" ]' >";
   }
   if (count($filterArray)>0) {
     //gautier #filter
@@ -1930,6 +1933,7 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
   	}
   }
   echo "</table>";
+  echo "</div>";
   echo "</div>";
 }
 

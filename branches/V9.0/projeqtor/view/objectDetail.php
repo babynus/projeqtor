@@ -461,15 +461,16 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   $largeWidth='300';
   if (isNewGui()) $largeWidth='310';
   $labelWidth=(isNewGui())?175:160; // To be changed if changes in css file (label and .label) + = width in css + 15
-  $labelStyleWidth=($labelWidth-((isNewGui())?-7:15)).'px';
+  
   if ($outMode=='pdf') {
     // $labelWidth=40;
     // $labelStyleWidth=$labelWidth . 'px;';
   }
-  if ($print) {
+  if ($print and !isNewGui()) {
     $labelWidth=225;
     $labelStyleWidth='230px';
   }
+  $labelStyleWidth=($labelWidth-((isNewGui())?-7:15)).'px';
   $fieldWidth=$smallWidth;
   $extName="";
   $user=getSessionUser();
@@ -1765,7 +1766,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '</span>';
         } else if ($dataLength>4000) {
           // echo '</td></tr><tr><td colspan="2">';
-          echo '<div style="text-align:left;font-weight:normal" class="tabLabel longTextLabel">'.htmlEncode($obj->getColCaption($col), 'stipAllTags').'&nbsp;:&nbsp;</div>';
+          echo '<div style="text-align:left;font-weight:normal;'.(($print)?'border:0':'').'" class="tabLabel longTextLabel">'.htmlEncode($obj->getColCaption($col), 'stipAllTags').'&nbsp;:&nbsp;</div>';
           echo '<div style="border:1px dotted #AAAAAA;width:'.($colWidth-20).'px;padding:5px;'.$fieldStyle.'">';
           if (isTextFieldHtmlFormatted($val)) $val=htmlEncode($val, 'formatted');
           if ($outMode=="pdf") { // Must purge data, otherwise will never be generated
