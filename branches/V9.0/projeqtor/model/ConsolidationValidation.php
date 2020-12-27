@@ -390,26 +390,21 @@ class ConsolidationValidation extends SqlElement{
 	    $result .='      <table style="width:100%;">';
 	    $result .='        <tr>';
         $validFunct=($right=='1' and $canChangeValidation)?'onClick="saveOrCancelConsolidationValidation(\''.$uniqueId.'\',\''.$concMonth.'\',\''.$asSub.'\');"':'';
-        $result .='          <td style="width:60px;height:32px;'.(($right==1  and $canChangeValidation)?"cursor:pointer;":"cursor:not-allowed;").'" ><div style="float:right;" id="buttonCancel_'.$uniqueId.'" '.$validFunct.' >
+        $result .='          <td style="width:60px;max-width:60px;padding-left:20px;height:32px;'.(($right==1  and $canChangeValidation)?"cursor:pointer;":"cursor:not-allowed;").'" ><div style="" id="buttonCancel_'.$uniqueId.'" '.$validFunct.' >
                              '.formatIcon('Submitted', 32,i18n('cancelConsolidation'),false,true).'
                            </div></td>';
-	    $result .='          <td style=";height:30px;">'. i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate))).'</td>';
+	    $result .='          <td style="">'. i18n('validatedWork', array($resourceName, htmlFormatDate($validatedDate))).'</td>';
 	    if($right=='1'  and !$canChangeValidation)$right='2';
 
 	  }else{
 	    $result .='      <table style="width:100%;">';
 	    $result .='        <tr>';
 	    $validFunct=($right=='1')?'onClick="saveOrCancelConsolidationValidation(\''.$uniqueId.'\',\''.$concMonth.'\',\''.$asSub.'\');"':'';
-	    $classMediumTextButton = "";
-	    $alignCenter = "";
-	    if(isNewGui()){
-	     $classMediumTextButton='class="mediumTextButton"';
-	     $alignCenter= 'align="center"';
-	    }
-	    $result .='          <td '.$alignCenter.' style="width:60px;'.(($right==1)?"cursor:pointer;":"cursor:not-allowed;").'" ><div '.$classMediumTextButton.' style="float:right;" id="buttonValidation_'.$uniqueId.'" '.$validFunct.' >
+
+	    $result .='          <td style="width:60px;max-width:60px;padding-left:20px;'.(($right==1)?"cursor:pointer;":"cursor:not-allowed;").'" ><div style="" id="buttonValidation_'.$uniqueId.'" '.$validFunct.' >
 	                           '.formatIcon('Unsubmitted', 32, i18n('validateConsolidation'),false,true).'
 	                         </div></td>';
-	    $result .='          <td style="padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
+	    $result .='          <td style="padding-left:5px;">'.i18n('unvalidatedWorkPeriod').'</td>';
 	  }
 	  $result .='          <input type="hidden" id="projHabilitationValidation_'.substr($uniqueId, 6).'" name="projHabilitationValidation_'.substr($uniqueId, 6).'" value="'.$right.'"/>';
 	  $result .='          </tr>';
