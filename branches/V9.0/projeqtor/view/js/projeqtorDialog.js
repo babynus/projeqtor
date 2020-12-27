@@ -1475,7 +1475,6 @@ function addAttachment(attachmentType,refType,refId) {
         hideWait();
         showError(i18n("uploadUncomplete"));
       });
-      console.log("temp "+attachmentType+" "+refType+" "+refId);
       addAttachment(attachmentType,refType,refId);
       if (isHtml5() && dijit.byId('attachmentFileDirect')) {
         dijit.byId('attachmentFileDirect').reset();
@@ -1485,7 +1484,6 @@ function addAttachment(attachmentType,refType,refId) {
     loadDialog('dialogAttachment', callBack);
     return;
   }
-  console.log("ok "+attachmentType+" "+refType+" "+refId);
   dojo.byId("attachmentId").value="";
   dojo.byId("attachmentRefType").value=(refType)?refType:((dojo.byId('objectClass'))?dojo.byId('objectClass').value:'User');
   dojo.byId("attachmentRefId").value=(refId)?refId:((dojo.byId('objectId'))?dojo.byId("objectId").value:dojo.byId("userMenuIdUser").value);
