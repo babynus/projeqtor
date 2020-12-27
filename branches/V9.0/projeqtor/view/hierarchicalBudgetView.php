@@ -76,9 +76,10 @@ $maxwidht = '';
 if($print)$maxwidht='max-width:1350px;';
 // Header
 echo '<div id="hierarchicalBudgetListHeaderDiv"" style="'.$maxwidht.'">';
-echo '<table id="hierarchicalBudgetListHeader" align="left" width="100%" style="min-width:1350px;">';
+echo '<table id="hierarchicalBudgetListHeader" align="left" width="100%" style="min-width:'.((isNewGui())?1363:1350).'px;">';
 echo '<TR class="ganttHeight" style="height:32px">';
-echo '  <TD class="reportTableHeader" style="width:20px;min-width:20px;max-width:20px; border-right: 0px;"></TD>';
+$min=(isNewGui())?'33':'20';
+echo '  <TD class="reportTableHeader" style="width:'.$min.'px;min-width:'.$min.'px;max-width:'.$min.'px; border-right: 0px;"></TD>';
 echo '  <TD class="reportTableHeader" style="border-left:0px; text-align: left;width:100%;">' . i18n('colBudget') . '</TD>';
 echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colEstimateAmount') . '</div></TD>' ;
 echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colInitialAmount') . '</div></TD>' ;
@@ -97,7 +98,7 @@ echo '</table>';
 echo "</div>";
 $destHeight=RequestHandler::getValue('destinationHeight');
 $height=($destHeight)?(intval($destHeight)-40).'px':'100%';
-echo '<div id="hierarchicalBudgetListDiv" style="position:relative;height:100%;width:100%;min-width:1350px;'.$maxwidht.'overflow-x:hidden;">';
+echo '<div id="hierarchicalBudgetListDiv" style="position:relative;height:100%;width:100%;min-width:'.((isNewGui())?1363:1350).'px;'.$maxwidht.'overflow-x:hidden;">';
 echo '<table id="dndHierarchicalBudgetList" dojoType="dojo.dnd.Source" jsId="dndSourceTableBudget" id="dndSourceTableBudget" align="left" width="100%" style="min-width:1350px;">';
 function getSubBudgetList($subList, &$subBudget){
 	foreach ($subList as $id=>$obj){
