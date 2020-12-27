@@ -46,6 +46,7 @@ class Parameter extends SqlElement {
    * @return the validation javascript (for dojo frameword)
    */
   public function getValidationScript($colName) {
+    global $type;
     //$colScript = parent::getValidationScript($colName);   
     $colScript="";
     if ($colName=="theme") {
@@ -223,7 +224,12 @@ class Parameter extends SqlElement {
       $colScript .= '</script>';           
     } else if ($colName=="newGui") {
         $colScript .= '<script type="dojo/connect" event="onChange" >';
-        $colScript .= '  saveDataToSessionAndReload("newGui", this.value, true);';
+        if ($type=='userParameter') {
+          $colScript .= '  saveDataToSessionAndReload("newGui", this.value, true);';
+        } else {
+          $colScript .= '  var callbackAfterSave=function(){loadContent("parameter.php?type=globalParameter","centerDiv");};';
+          $colScript .= '  loadDiv("../tool/saveParameter.php","testEmailSaveResult", "parameterForm", callbackAfterSave);';
+        }
         $colScript .= '</script>';
     } else if ($colName=="menuBarTopMode") {
         $colScript .= '<script type="dojo/connect" event="onChange" >';
