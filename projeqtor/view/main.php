@@ -870,7 +870,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
 		</div>
   </div> 
   
-  <div id="hideMenuBarShowButton2" style="cursor:pointer;position:absolute;display:<?php echo (isset($showModuleScreen))?"none":"block";?>;left:<?php echo $IconSizeMenuHide2 ?>; bottom:2px;z-index:999998">
+  <div id="hideMenuBarShowButton2" style="cursor:pointer;position:absolute;display:<?php echo (isset($showModuleScreen))?"none":"block";?>;left:<?php echo $IconSizeMenuHide2 ?>; bottom:2px;z-index:949">
 	<?php if (! isset($showModuleScreen)) {?>
 	  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarShow" title="" >
 	    <span style='top:0px;display:inline-block;width:22px;height:22px;'>
