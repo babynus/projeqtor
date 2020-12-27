@@ -409,7 +409,6 @@ function setGlobalNewGuiThemeColor(param, color){
 
 function addColor(name,color) {
   elementDynamicCss.style.setProperty(name, color);
-  console.log(color);
   var colorNum=(typeof color == 'string')?color.replace('#','*'):color;
   allColors+=((allColors!="")?',':'')+'{"key":"'+name+'","value":"'+colorNum+'"}';
 }
