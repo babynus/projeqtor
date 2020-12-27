@@ -33,7 +33,7 @@ require_once "../tool/projeqtor.php";
     <?php if (isNewGui()) {?><tr><td><div style="height:6px"></div></td></tr><?php }?>
     <tr>
       <td>
-        <div id='listStoredFilters' dojoType="dijit.layout.ContentPane" region="center"></div>
+        <div id='listStoredFilters' dojoType="dijit.layout.ContentPane" region="center" ><div style="height:250px">loading...</div></div>
       </td>
     </tr>
     <tr><td>&nbsp;</td></tr>

@@ -607,9 +607,9 @@ class PlannedWorkManual extends GeneralWork {
         echo '<img  id="idImageInterventionActivitySelector'.$pe->refId.'" src="../view/img/savedOk.png"
                     style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
         echo '<div dojoType="dijit.form.NumberTextBox" id="interventionActivitySelector'.$pe->refId.'" name="interventionActivitySelector'.$pe->refId.'"
-      						  class="dijitReset dijitInputInner dijitNumberTextBox"
+      						  class="dijitReset dijitInputInner dijitNumberTextBox interventionFTE"
         					  value="'.$valueFte.'"
-                    style="padding:1px;background:none;max-width:100%;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px" >
+                    style="padding:1px;background:none;max-width:100%;display:block;;margin:2px 0px" >
                      <script type="dojo/method" event="onChange">
                       saveInterventionCapacity("'.$pe->refType.'",'.$pe->refId.','.$monthYear.','.$pe->id.'); 
                      </script>';

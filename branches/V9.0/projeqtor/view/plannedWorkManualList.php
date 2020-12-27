@@ -343,7 +343,7 @@ $currentMonth = strftime("%m");
             }
           ?>
           </div>
-          <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="min-width:1123px;left:474px;top:20px;position:absolute;">         
+          <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="min-width:1123px;left:<?php echo (isNewGui())?485:474;?>px;top:20px;position:absolute;">         
                   <?php 
                   if(!$displayNothing){
                     $listMonth=array($yearSpinner.$monthSpinner);

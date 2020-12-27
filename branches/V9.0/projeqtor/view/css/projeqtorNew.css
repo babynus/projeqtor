@@ -1722,6 +1722,21 @@ element.style {
   padding: 1px 5px 2px 0px !important;
   font-size:12px;
 }
+.ProjeQtOrNewGui .interventionFTE.dijitTextBox.dijitNumberTextBox input.dijitInputInner {
+	float:none;
+	text-align:center;
+	padding:0 !important;
+}
+.ProjeQtOrNewGui  .interventionFTE {
+  border:1px solid #A0A0A0 !important;
+}
+.ProjeQtOrNewGui .dojoxGridRowSelected .interventionFTE {
+	color:white;
+	border:1px solid white !important;
+}
+.ProjeQtOrNewGui .dojoxGridRowSelected .imageColorNewGui.iconGotoWhite16:hover {
+	filter: brightness(0) invert(1);
+}
 
 .inputLoginIconNewGui:hover{
     -webkit-filter: hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness)) !important;
