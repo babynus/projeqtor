@@ -2899,13 +2899,17 @@
 
 .iconSubmitted16 { background-image: url(images/Submitted.png);  background-size: 16px 16px;}
 .iconSubmitted32 { background-image: url(images/Submitted.png);  background-size: 32px 32px;}
+.iconSubmitted32 { background-image: url(images/Submitted.png);}
 .iconUnsubmitted16 { background-image: url(images/Unsubmitted.png);  background-size: 16px 16px;}
 .iconUnsubmitted32 { background-image: url(images/Unsubmitted.png);  background-size: 32px 32px;}
+.iconUnsubmitted { background-image: url(images/Unsubmitted.png);}
 
 .iconUnLocked16 { background-image: url(images/unlocked.png);  background-size: 16px 16px;}
 .iconUnLocked32 { background-image: url(images/unlocked.png);  background-size: 32px 32px;}
+.iconUnLocked { background-image: url(images/unlocked.png); }
 .iconLocked16 { background-image: url(images/locked.png);  background-size: 16px 16px;}
 .iconLocked32 { background-image: url(images/locked.png);  background-size: 32px 32px;}
+.iconLocked { background-image: url(images/locked.png); }
 
 .iconDeleteElement16 { background-image: url(images/iconDeleteElement.png);  background-size: 16px 16px;}
 .iconDeleteElement22 { background-image: url(images/iconDeleteElement.png);  background-size: 22px 22px;}
