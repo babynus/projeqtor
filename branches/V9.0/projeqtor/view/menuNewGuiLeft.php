@@ -579,7 +579,8 @@ function drawLeftMenuListNewGui($displayMode){
         
         $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.$obj->name.'\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.$obj->name.'\',\'leave\');">'; //li
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst($menuNameI18n).'<span style="display:none">'.strtolower(replace_accents($menuNameI18n)).';'.$menuTag.'</span></div></a>'; 
+        $menuNameWithTags=ucfirst($menuNameI18n).'<span style="display:none">'.strtolower(replace_accents($menuNameI18n)).';'.$menuTag.';'.i18n($menuTag);
+        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.$menuNameWithTags.'</span></div></a>'; 
         $result.='<div id="div'.$obj->name.'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
       }else{
         $classEl="Reports";
@@ -611,7 +612,8 @@ function drawLeftMenuListNewGui($displayMode){
         $result.='<li class="menu__item" role="menuitem" onmouseenter="checkClassForDisplay(this,\'div'.ucfirst($obj->name).'\',\'enter\');" onmouseleave="checkClassForDisplay(this,\'div'.ucfirst($obj->name).'\',\'leave\');">';
         $result.='<input type="hidden" id="reportFileMenu" value="'.$file.'"/>';
         $result.='<a class="menu__linkDirect" onclick="'.$funcOnClick.'" href="#" id="'.$obj->name.'" ><div class="icon'.$classEl.' iconSize16" style="'.$displayIcon.'position:relative;float:left;margin-right:10px;"></div>';
-        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.ucfirst(i18n($obj->name)).'</div></a>';
+        $menuNameWithTags=ucfirst(i18n($obj->name)).'<span style="display:none">'.strtolower(replace_accents(ucfirst(i18n($obj->name))));
+        $result.='<div class="divPosName" style="'.(($displayMode!='TXT')?"max-width: 155px !important;":"max-width: 180px !important;").'float: left;">'.$menuNameWithTags.'</div></a>';
         $result.='<div id="div'.ucfirst($obj->name).'" style="'.$styleDiv.'" class="'.$class.'" onclick="'.$funcuntionFav.'" ></div></li>';
       }
     }else if($menu['objectType']=='pluginNotInst'){
