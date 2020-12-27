@@ -180,7 +180,7 @@ function drawTableFromObjectList($objectList) {
 				echo '<select dojoType="dijit.form.FilteringSelect" class="input '.$requiredClass.'" name="' . $code . '" id="' . $code . '" ';
 				echo autoOpenFilteringSelect();
 				echo ' title="' . $helpTitle. '" style="width:200px">';
-				if ( ($type=='userParameter' and $code!='startPage') or $code=='versionNameAutoformat' or $code=='SAML_allow_login' or $code=='paramMailerType') {
+				if ( ($type=='userParameter' and $code!='startPage') or $code=='versionNameAutoformat' or $code=='SAML_allow_login' or $code=='paramMailerType' or $code=='newGui') {
 					echo $obj->getValidationScript($code);
 				}
 				foreach ($listValues as $value => $valueLabel ) {
