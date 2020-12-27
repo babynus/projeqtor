@@ -65,7 +65,7 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
   <tr style="height:40px" class="menuUserTopDetail" >
     <td <?php if ($showUserParameters) echo'rowspan="2"';?> style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"><?php if ($imgUrl) { echo '<img style="border-radius:40px;height:80px" src="'.$imgUrl.'" />'; } else { ?>
             <div style="overflow-x:hidden;position: relative; width:80px;height:80px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
-              onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
+              onClick="addAttachment('file','User','<?php echo getCurrentUserId()?>');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
    <?php } ?></td>
    <td>
     <?php if (Parameter::getGlobalParameter('simuIndex')){?>
@@ -120,7 +120,7 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
   <tr>
     <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"><?php if ($imgUrl) { echo '<img style="border-radius:40px;height:80px" src="'.$imgUrl.'" />'; } else { ?>
             <div style="overflow-x:hidden;position: relative; width:60px;height:60px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;" 
-              onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="left: 19px;position:relative;top: 20px;height:22px;width: 22px;" class="iconAdd iconSize22 imageColorNewGui">&nbsp;</div></div> 
+              onClick="addAttachment('file','User','<?php echo getCurrentUserId()?>');" title="<?php echo i18n('addPhoto');?> "><div style="left: 19px;position:relative;top: 20px;height:22px;width: 22px;" class="iconAdd iconSize22 imageColorNewGui">&nbsp;</div></div> 
    <?php } ?>
    </td>
    <td style="padding-left: 10px;">

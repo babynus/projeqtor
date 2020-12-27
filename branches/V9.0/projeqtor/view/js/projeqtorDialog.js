@@ -1460,7 +1460,7 @@ function situationSelectPredefinedText(idPrefefinedText) {
  * Display an add attachment Box
  * 
  */
-function addAttachment(attachmentType) {
+function addAttachment(attachmentType,refType,refId) {
   var content="";
   if (dijit.byId('dialogAttachment')) content=dijit.byId('dialogAttachment').get('content');
   if (content == "") {
@@ -1475,8 +1475,9 @@ function addAttachment(attachmentType) {
         hideWait();
         showError(i18n("uploadUncomplete"));
       });
-      addAttachment(attachmentType);
-      if (isHtml5()) {
+      console.log("temp "+attachmentType+" "+refType+" "+refId);
+      addAttachment(attachmentType,refType,refId);
+      if (isHtml5() && dijit.byId('attachmentFileDirect')) {
         dijit.byId('attachmentFileDirect').reset();
         dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('attachmentFileDropArea'));
       }
@@ -1484,9 +1485,10 @@ function addAttachment(attachmentType) {
     loadDialog('dialogAttachment', callBack);
     return;
   }
+  console.log("ok "+attachmentType+" "+refType+" "+refId);
   dojo.byId("attachmentId").value="";
-  dojo.byId("attachmentRefType").value=(dojo.byId('objectClass'))?dojo.byId('objectClass').value:'User';
-  dojo.byId("attachmentRefId").value=(dojo.byId('objectId'))?dojo.byId("objectId").value:dojo.byId("userMenuIdUser").value;
+  dojo.byId("attachmentRefType").value=(refType)?refType:((dojo.byId('objectClass'))?dojo.byId('objectClass').value:'User');
+  dojo.byId("attachmentRefId").value=(refId)?refId:((dojo.byId('objectId'))?dojo.byId("objectId").value:dojo.byId("userMenuIdUser").value);
   dojo.byId("attachmentType").value=attachmentType;
   dojo.byId('attachmentFileName').innerHTML="";
   dojo.style(dojo.byId('downloadProgress'), {
@@ -7342,7 +7344,10 @@ function switchModeLayout(paramToSend){
 }
 
 function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen){
-  var urlParams="?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen;
+  //var urlParams="?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen;
+  var urlParams="?"+paramDiv+"="+paramToSend;
+  if (currentObject) urlParams+="&objectClass="+ currentObject;
+  if (objectIdScreen) urlParams+="&objectId="+objectIdScreen;
   var urlPage="objectMain.php";
   if(currentScreen=='Planning'){
     urlPage="planningMain.php";
@@ -7365,7 +7370,7 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
   if(objectIdScreen !=''){
     callBack=function(){loadContent("objectDetail.php", "detailDiv", 'listForm');};
   }
-  if(dojo.byId('objectClass') && currentObject) {loadContent(urlPage+urlParams, "centerDiv",null,null,null,null,null,callBack);}
+  if (dojo.byId('objectClass') && (dojo.byId('objectClass').value || urlPage!="objectMain.php")) {loadContent(urlPage+urlParams, "centerDiv",null,null,null,null,null,callBack);}
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+"&"+paramDiv+"="+paramToSend,"mainDivMenu");  
 }
 var switchModeSkipAnimation=true;

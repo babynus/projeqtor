@@ -170,9 +170,6 @@ if (! $error) {
 if ($refType=='TicketSimple') {
   $refType='Ticket';    
 }
-if ($refType=='User' or $refType=='Contact' or $refType=='ResourceTeam') {
-	$refType='Resource';
-}
 
 if (! $error) {
   if (array_key_exists('attachmentRefId',$_REQUEST)) { // Retrieve from request
@@ -186,6 +183,18 @@ if (! $error) {
   		$refId=$obj->id;
   	} 
   }
+}
+
+if ($refType=='User' or $refType=='Contact' or $refType=='ResourceTeam' ) {
+  if ($refId==getCurrentUserId()) {
+    // OK save Photo for current user
+  } else {
+    $userToUpdate=new $refType($refId);
+    if (! Security::checkValidAccessForUser($userToUpdate,'update') ) {
+      traceHack("Update photo on $refType $refId without rights to do this for current user ".getCurrentUserId());
+    }
+  }
+  $refType='Resource'; // Attache to resource for Photo
 }
 
 if (! $error) {    
