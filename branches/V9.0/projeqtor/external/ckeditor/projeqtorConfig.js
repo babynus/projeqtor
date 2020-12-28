@@ -36,7 +36,7 @@ CKEDITOR.editorConfig = function( config ) {
       config.extraPlugins += ',staticspace';
       config.staticSpacePriority=1;
       config.removePlugins += ',elementspath';
-      config.resize_enabled = false;
+      //config.resize_enabled = false;
     }
   }
   //config.pasteFromWordRemoveStyles = false; // Removed in 4.6.0
