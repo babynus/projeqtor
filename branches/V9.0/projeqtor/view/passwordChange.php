@@ -222,7 +222,7 @@ $firstColor= getTheme();
               window.location=".";
               </script>
             </button>
-            <button id="buttonLoginPwChange" type="submit" style="margin-right:80px;width:150px!important;;height:20px !important;float:right;width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('loginLib');?>
+            <button id="buttonLoginPwChange" type="submit" style="margin-right:80px;width:150px!important;;height:20px !important;float:right;width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('passwordLib');?>
               <script type="dojo/connect" event="onClick" args="evt">
                 //loadContent("../tool/changePassword.php","passwordResultDiv", "passwordForm");
               </script>

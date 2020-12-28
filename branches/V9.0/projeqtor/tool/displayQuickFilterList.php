@@ -115,7 +115,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
         <td style="width:10%;text-align:center;">
           <div  id="listIdFilterQuickSw" name="listIdFilterQuickSw" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(sessionValueExists('listIdFilterQuickSw'.$objectClass)){ echo getSessionValue('listIdFilterQuickSw'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >
-              saveDataToSession('listIdFilterQuickSw<?php echo $objectClass;?>',this.value);
+              saveDataToSession('listIdFilterQuickSw<?php echo $objectClass;?>',this.value,true);
               if(this.value=='on'){
                 if(dojo.byId('filterDivs').style.display=="none"){
                   dojo.byId('filterDivs').style.display="block";
@@ -164,7 +164,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
         <td style="width:10%;text-align:center;">
           <div id="listNameFilterQuickSw" name="listNameFilterQuickSw" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(sessionValueExists('listNameFilterQuickSw'.$objectClass)){ echo getSessionValue('listNameFilterQuickSw'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >
-              saveDataToSession('listNameFilterQuickSw<?php echo $objectClass;?>',this.value);
+              saveDataToSession('listNameFilterQuickSw<?php echo $objectClass;?>',this.value,true);
               if(this.value=='on'){
                 if(dojo.byId('filterDivs').style.display=="none"){
                   dojo.byId('filterDivs').style.display="block";
@@ -213,7 +213,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
         <td style="width:10%;text-align:center;">
           <div id="listTypeFilterQuickSw" name="listTypeFilterQuickSw" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(sessionValueExists('listTypeFilterQuickSw'.$objectClass)){ echo getSessionValue('listTypeFilterQuickSw'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >
-              saveDataToSession('listTypeFilterQuickSw<?php echo $objectClass;?>',this.value);
+              saveDataToSession('listTypeFilterQuickSw<?php echo $objectClass;?>',this.value,true);
               if(this.value=='on'){
                 if(dojo.byId('filterDivs').style.display=="none"){
                   dojo.byId('filterDivs').style.display="block";
@@ -265,7 +265,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
         <td style="width:10%;text-align:center;">
           <div id="listClientFilterQuickSw" name="listClientFilterQuickSw" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(!$comboDetail and sessionValueExists('listClientFilterQuickSw'.$objectClass)){ echo getSessionValue('listClientFilterQuickSw'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >
-              saveDataToSession('listClientFilterQuickSw<?php echo $objectClass;?>',this.value);
+              saveDataToSession('listClientFilterQuickSw<?php echo $objectClass;?>',this.value,true);
               if(this.value=='on'){
                 if(dojo.byId('filterDivs').style.display=="none"){
                   dojo.byId('filterDivs').style.display="block";
@@ -317,7 +317,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
         <td style="width:10%;text-align:center;">
           <div id="listBudgetParentFilterQuickSw" name="listBudgetParentFilterQuickSw" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(!$comboDetail and sessionValueExists('listBudgetParentFilterQuickSw'.$objectClass)){ echo getSessionValue('listBudgetParentFilterQuickSw'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >
-              saveDataToSession('listClientFilterQuickSw<?php echo $objectClass;?>',this.value);
+              saveDataToSession('listClientFilterQuickSw<?php echo $objectClass;?>',this.value,true);
               if(this.value=='on'){
                 if(dojo.byId('filterDivs').style.display=="none"){
                   dojo.byId('filterDivs').style.display="block";

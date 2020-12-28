@@ -142,6 +142,18 @@ if (RequestHandler::getValue('objectClass')=='Project' and RequestHandler::getVa
   $allProjectsChecked=true;
 }
 
+$arrayFilter=array('Id','Name','Type','Client','BudgetParent');
+foreach ($arrayFilter as $filter) {
+  $param='list'.$filter.'FilterQuickSw'.$objectClass;
+  if (sessionValueExists($param)) {
+    $userVal=Parameter::getUserParameter($param);
+    if (trim($userVal)) {
+      setSessionValue($param, $userVal);
+    }
+  }
+  
+}
+
 //Gautier saveParam
 if(sessionValueExists('listTypeFilter'.$objectClass)){
   $listTypeFilter = getSessionValue('listTypeFilter'.$objectClass);
