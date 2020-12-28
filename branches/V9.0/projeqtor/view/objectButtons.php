@@ -690,7 +690,7 @@
 			onBegin="hideResultDivs();saveAttachment(true);"
 			iconClass="iconAttachFiles"
 			onError="dojo.style(dojo.byId('downloadProgress'), {display:'none'});"
-			style="font-size:60%;height:26px; width:36px; border: 1px dashed #ffffff; padding:0; color: #000000; position:absolute;
+			style="font-size:60%;height:26px; width:36px; border: 1px dashed #ffffff !important; padding:0; color: #000000; position:absolute;
 			 text-align: left; vertical-align:middle;font-size: 7pt; opacity: 0.8;z-index:9999"
 			label="">		 
 			  <script type="dojo/connect" event="onComplete" args="dataArray">
