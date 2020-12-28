@@ -372,7 +372,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
           (function() {
     var menuEl = dojo.byId('ml-menu'),
     mlmenu = new MLMenu(menuEl, {
-      initialBreadcrumb : 'Accueil', // initial breadcrumb text
+      initialBreadcrumb : i18n('homePage'), // initial breadcrumb text
       backCtrl : false, // show back button
     });
   })();
