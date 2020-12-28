@@ -35,7 +35,9 @@ CKEDITOR.editorConfig = function( config ) {
       config.removeButtons = 'tools,Maximize';
       config.extraPlugins += ',staticspace';
       config.staticSpacePriority=1;
-      config.removePlugins += ',elementspath';
+      //config.staticSpacePositionY='bottom';
+      //config.staticSpacePositionX='left';
+      //config.removePlugins += ',elementspath';
       //config.resize_enabled = false;
     }
   }
