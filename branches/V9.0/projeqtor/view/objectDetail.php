@@ -3046,7 +3046,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $ckEditorNumber++;
           // gautier
           $ckeDivheight=Parameter::getUserParameter('ckeditorHeight'.$classObj.$col.$extName);
-          $ckeDivheight=($ckeDivheight)?$ckeDivheight.'':'180';
+          $ckeDivheight=($ckeDivheight)?(intval($ckeDivheight)+((isNewGui())?75:0)).'':'180';
           echo '<input type="hidden" id="ckeditorObj'.$ckEditorNumber.'" value="'.$classObj.$col.$extName.'" />';
           
           // BEGIN - ADD BY TABARY - TOOLTIP
