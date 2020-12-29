@@ -52,6 +52,11 @@ $mobile=false;
      $msgList=$msg->getSqlElementsFromCriteria(array('showOnLogin'=>'1', 'idle'=>'0'));
      $msgTypeList=SqlList::getList('MessageType','color');
    }
+   $showPassword=true;
+   $lockPassword=Parameter::getGlobalParameter('lockPassword');
+   if (getBooleanValue($lockPassword)) { $showPassword=false; }
+   $hidePasswordOnLogin=Parameter::getGlobalParameter('lockPasswordOnLogin');
+   if (getBooleanValue($hidePasswordOnLogin)) { $showPassword=false; }
 ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
   "http://www.w3.org/TR/html4/strict.dtd">
@@ -339,13 +344,6 @@ $dbVersion=Sql::getDbVersion();
 			              </tr>
 			              <?php if (Parameter::getGlobalParameter('rememberMe')!='NO') {?>
 			              <tr style="font-size:50%"><td colspan="2">&nbsp;</td></tr>
-			              <?php 
-			              $showPassword=true;
-			              $lockPassword=Parameter::getGlobalParameter('lockPassword');
-			              if (getBooleanValue($lockPassword)) { $showPassword=false; }
-			              $hidePasswordOnLogin=Parameter::getGlobalParameter('lockPasswordOnLogin');
-			              if (getBooleanValue($hidePasswordOnLogin)) { $showPassword=false; }
-			              ?>
 			              <tr style="height:30px">
 			                <td></td>
 			                <?php if(!isNewGui()){ ?>
