@@ -651,7 +651,8 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButton .dijitIcon,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButton.dialogDetailButton .dijitIcon,
 .ProjeQtOrNewGui .ticketKanBanStyle .roundedButton .iconSize16,
-.ProjeQtOrNewGui .ganttExpandOpened, .ProjeQtOrNewGui .ganttExpandClosed 
+.ProjeQtOrNewGui .ganttExpandOpened, .ProjeQtOrNewGui .ganttExpandClosed,
+.ProjeQtOrNewGui .dijitTabStripIcon
  {
   -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
   filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
@@ -672,7 +673,8 @@ animation: fadeIn ease 0.5s;
 .ProjeQtOrNewGui .dijitReset.dijitInline.dialogDetailButton.dijitButtonHover .dijitIcon,
 .ProjeQtOrNewGui .dijitReset.dijitInline.dijitButtonHover.dialogDetailButton .dijitIcon,
 .ProjeQtOrNewGui .ticketKanBanStyle .roundedButton:hover .iconSize16,
-.ProjeQtOrNewGui #centerDiv .dijitButtonHover .notDijitButtonIcon
+.ProjeQtOrNewGui #centerDiv .dijitButtonHover .notDijitButtonIcon,
+.ProjeQtOrNewGui .dijitTabStripIcon:hover
 {
   -webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
   filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
@@ -2183,3 +2185,25 @@ border:1px solid var(--color-medium);
 .ProjeQtOrNewGui .dojoxCalendar .buttonContainer .dijit.dijitToolbar span.dijitButtonHover[widgetid=dijit_form_Button_23] span.dijitButtonNode {
   border:1px solid var(--color-secondary) !important;
 }
+.ProjeQtOrNewGui .dijitTabStripIcon.dijitTabStripSlideLeftIcon {
+	height: 22px;
+  width: 22px;
+  margin-top: 6px;
+  background-position:top;
+  background: url(customIcons/new/iconLeft.svg) no-repeat; background-size:22px 22px;
+}
+.ProjeQtOrNewGui .dijitTabStripIcon.dijitTabStripSlideRightIcon {
+  height: 22px;
+  width: 22px;
+  margin-top: 6px;
+  background-position:top;
+  background: url(customIcons/new/iconRight.svg) no-repeat; background-size:22px 22px;
+}
+.ProjeQtOrNewGui .dijitTabStripIcon.dijitTabStripMenuIcon {
+  height: 22px;
+  width: 22px;
+  margin-top: 6px;
+  background-position:top;
+  background: url(customIcons/new/iconListOfValues.svg) no-repeat; background-size:22px 22px;
+}
+
