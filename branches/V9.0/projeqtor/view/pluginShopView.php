@@ -34,10 +34,17 @@ require_once "../tool/formatter.php";
   $idPlugin=RequestHandler::getValue('objectId');
   $urlPlugins = "http://projeqtor.org/admin/getPlugins.php";
   $currentVersion=null;
+  $getYesNo=Parameter::getGlobalParameter('getVersion');
+  if ($getYesNo=='NO') {
+    echo "Cannot access remote information for the plugin";
+    exit;
+  }
   if (ini_get('allow_url_fopen')) {
     enableCatchErrors();
+    enableSilentErrors();
     $currentVersion=file_get_contents($urlPlugins);
     disableCatchErrors();
+    disableSilentErrors();
   }
   $json = file_get_contents($urlPlugins);
   $object = json_decode($json);

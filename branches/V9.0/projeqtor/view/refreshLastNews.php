@@ -38,6 +38,11 @@ $stringScr ='src="images';
 $stringNewScr = 'src="https://www.projeqtor.org/images/';
 $stringHref = '<a href="';
 $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
+$getYesNo=Parameter::getGlobalParameter('getVersion');
+if ($getYesNo=='NO') {
+  //echo "Cannot access remote information from ProjeQtOr web site";
+  exit;
+}
 ?>
 <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage1" name="divNewsPage1">
         <table>
@@ -46,8 +51,10 @@ $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
             $currentVersion=null;
             if (ini_get('allow_url_fopen')) {
               enableCatchErrors();
+              enableSilentErrors();
               $currentVersion=file_get_contents($urlGetNews);
               disableCatchErrors();
+              disableSilentErrors();
              }
            $json = file_get_contents($urlGetNews);
            $obj = json_decode($json);
