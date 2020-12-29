@@ -3338,8 +3338,14 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       $paneIndex=lcfirst($tabName);
       $extName=($comboDetail)?"_detail":'';
       if (!isset($panes[$paneIndex]) or $panes[$paneIndex]=='') {
+        $nbBadgeTab=$nbBadge;
+        if ($obj and $section=='predecessor') {
+          if (property_exists($obj,'_Dependency_Predecessor') and property_exists($obj,'_Dependency_Successor')) {
+            $nbBadgeTab=count($obj->_Dependency_Predecessor)+count($obj->_Dependency_Successor);
+          }
+        }
         echo '<div id="'.$tabName.$extName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" ';
-        echo ' title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
+        echo ' title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadgeTab==0)?'opacity:0.5;':'').'\' >'.$nbBadgeTab.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
         echo ' <script type="dojo/method" event="onShow" >'; 
         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
         echo '   hideEmptyTabs();';
