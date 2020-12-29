@@ -280,10 +280,16 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
         	}else{
         	  $user->finalizeSuccessfullConnection(true);
         	  setSessionUser($user);
+        	  $currentLocale=null;
+        	  $i18nMessages=null;
+        	  setupLocale();
         	}
         }else{
           $user->finalizeSuccessfullConnection(true);
           setSessionUser($user);
+          $currentLocale=null;
+          $i18nMessages=null;
+          setupLocale();
         }
       }
     }
@@ -1274,6 +1280,8 @@ function getUserVisibleResourcesList($limitToActiveResources=false,
 function setupLocale() {
   global $currentLocale, $browserLocale, $browserLocaleDateFormat;
   $paramDefaultLocale=Parameter::getGlobalParameter('paramDefaultLocale');
+  $paramUserLocale=Parameter::getGlobalParameter('currentLocale');
+  $paramUserLang=Parameter::getGlobalParameter('lang');
   if (sessionValueExists('currentLocale')) {
     // First fetch in Session (filled in at login depending on user parameter)
     $currentLocale=getSessionValue('currentLocale');
@@ -1283,6 +1291,10 @@ function setupLocale() {
     Security::checkValidLocale($currentLocale);
     setSessionValue('currentLocale', $currentLocale);
     $i18nMessages=null; // Should be null at this moment, just to be sure
+  } else if ($paramUserLocale) {
+    $currentLocale=$paramUserLocale;
+  } else if ($paramUserLang) {  
+    $currentLocale=$paramUserLang;
   } else {
     // none of the above methods worked : get the default one form parameter file
     $currentLocale=$paramDefaultLocale;
