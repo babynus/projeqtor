@@ -74,7 +74,7 @@ $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
                   <table>
                     <tr>
                       <td>
-                        <div style="position:relative;border-top-left-radius:5px;border-top-right-radius:5px;color:var(--color-dark);font-weight:bold;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;overflow:hidden;<?php if($i==1 or $i==3){?>margin-right:10px; <?php } ?>margin-bottom:10px;height:155px;width:165px;background:#DCDCDC;border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
+                        <div style="position:relative;border-top-left-radius:5px;border-top-right-radius:5px;color:var(--color-dark);font-weight:bold;cursor:pointer;text-align:center;display:flex;flex-direction:column;justify-content:center;overflow:hidden;<?php if($i==1 or $i==3){?>margin-right:10px; <?php } ?>margin-bottom:10px;height:155px;width:165px;background:var(--color-light);border-radius:5px;" id="divMsgTitle<?php echo $i;?>" name="divMsgTitle<?php echo $i;?>" onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
                          <div id="divMsgtextTitle<?php echo $i;?>" style="padding:15px;"> <?php echo $value->title;?> </div> 
                          <div id="arrowNewsDown<?php echo $i;?>" style="position:absolute;left:76px;bottom:4px;" class="arrow-down"></div>
                         </div>
@@ -83,7 +83,7 @@ $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
                     <tr>
                       <td>
                           <div  onmouseout="hideIntrotext(<?php echo $i;?>)" onmouseover="showIntrotext(<?php echo $i;?>)" 
-                              style="margin-bottom:10px;position:relative;cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:165px;overflow-y:auto;background:#f2f5f5;" 
+                              style="margin-bottom:10px;position:relative;cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:165px;overflow-y:auto;background:var(--color-lighter);" 
                               id="divSubTitle<?php echo $i;?>" name="divSubTitle<?php echo $i;?>" onClick="showMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
                               <div style="position:relative;padding:12px;"><?php echo $valueIntrotext;?></div>   
                                <?php  if($value->fulltext){
@@ -97,7 +97,7 @@ $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
                       </td>
                     </tr>
                      <tr>
-                      <td><div style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:165px;overflow-y:auto;background:#f2f5f5;"
+                      <td><div style="cursor:pointer;display:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:10px;width:165px;overflow-y:auto;background:var(--color-lighter);"
                                id="divMsgFull<?php echo $i;?>" name="divMsgFull<?php echo $i;?>" onClick="hideMsg(<?php echo $i;?>,<?php echo $i/4;?>);">
                             <div style="padding:10px;"><?php echo $valueIntrotext.$valueFullText?></div>
                           </div>
@@ -112,7 +112,7 @@ $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
               }?>
         </tr>
         </table>
-        <div id="arrowRight1" style="position:absolute;top:360px;left:247px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconNext"> </div>
+        <div id="arrowRight1" style="position:absolute;top:335px;left:247px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconNext"> </div>
     </div>
     <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage2" name="divNewsPage2">
         <table>
@@ -181,8 +181,8 @@ $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
               }?>
         </tr>
         </table>
-        <div id="arrowRight1" style="position:absolute;top:360px;left:75px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconPrevious"> </div>
-        <div id="arrowRight1" style="position:absolute;top:360px;left:247px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconNext"> </div>
+        <div id="arrowRight1" style="position:absolute;top:335px;left:75px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconPrevious"> </div>
+        <div id="arrowRight1" style="position:absolute;top:335px;left:247px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconNext"> </div>
     </div>
     <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage3" name="divNewsPage3">
         <table>
@@ -250,6 +250,6 @@ $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
               }?>
         </tr>
         </table>
-        <div id="arrowRight1" style="position:absolute;top:360px;left:75px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconPrevious"> </div>
+        <div id="arrowRight1" style="position:absolute;top:335px;left:75px;" class="imageColorNewGui dijitButtonIcon dijitButtonIconPrevious"> </div>
     </div>
     <div class="indicatorPage" data-dojo-type="dojox/mobile/PageIndicator" data-dojo-props='fixed:"bottom"'></div>

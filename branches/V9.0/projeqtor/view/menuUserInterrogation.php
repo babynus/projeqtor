@@ -32,6 +32,7 @@ $user=getSessionUser();
 $linkPlugin = "https://www.projeqtor.net/en/shop/plugins";
 $linkForum = "https://www.projeqtor.org/en/forum/index";
 $linkToForumRules="https://www.projeqtor.org/en/forum/aide";
+$linkChangelog="https://www.projeqtor.org/en/product-en/downloads/change-history-en";
 $userLang = getSessionValue('currentLocale');
 $lang = "en";
 if(substr($userLang,0,2)=="fr")$lang="fr";
@@ -39,6 +40,7 @@ if($lang=="fr"){
   $linkForum = "https://www.projeqtor.org/fr/forum-fr/index";
   $linkPlugin = "https://www.projeqtor.net/fr/shop-fr/plugins";
   $linkToForumRules="https://www.projeqtor.org/fr/forum-fr/aide";
+  $linkChangelog="https://www.projeqtor.org/fr/product-fr/downloads-fr/historique-des-mises-a-jour-xxx";
 }
 ?>
 
@@ -118,13 +120,12 @@ if($lang=="fr"){
         <td><div style="width:15px !important;"></div></td>
       </tr>
       
-    <tr style="margin-top:20px;height:15px;">
+    <tr style="margin-top:0px;height:15px;">
       <td><div style="width:15px !important;"></div></td>
       <td> 
         <a target="#" href="<?php echo $linkPlugin;?>"> <div class="roundedVisibleButton roundedButton generalColClass"
             title="<?php echo('linkToPlugin'); ?>"
-            style="text-align:left;height:23px;width:340px;
-            onClick="showFilterDialog();">
+            style="text-align:left;height:23px;width:340px;" >
             <img  class="imageColorNewGui" src="css/customIcons/new/iconGoto.svg" style="position:relative;left:305px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>
              <div style="position:relative;top:-19px;left:12px;"><?php echo i18n('linkToPlugin'); ?></div>
              </div> 
@@ -139,8 +140,7 @@ if($lang=="fr"){
       <td> 
         <a target="#" href="<?php echo $linkForum;?>"> <div class="roundedVisibleButton roundedButton generalColClass"
             title="<?php echo('linkToForum'); ?>"
-            style="margin-top:13px;text-align:left;height:23px;width:340px;
-            onClick="showFilterDialog();">
+            style="margin-top:13px;text-align:left;height:23px;width:340px;" >
             <img  class="imageColorNewGui" src="css/customIcons/new/iconGoto.svg" style="position:relative;left:305px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>
              <div style="position:relative;top:-19px;left:12px;"><?php echo i18n('linkToForum'); ?></div>
              </div> 
@@ -149,6 +149,19 @@ if($lang=="fr"){
       <td><div style="width:15px !important;"></div></td>
     </tr>
     
+    <tr>
+      <td><div style="width:15px !important;"></div></td>
+      <td> 
+        <a target="#" href="<?php echo $linkChangelog;?>"> <div class="roundedVisibleButton roundedButton generalColClass"
+            title="<?php echo('linkToChangelog'); ?>"
+            style="margin-top:13px;text-align:left;height:23px;width:340px;" >
+            <img  class="imageColorNewGui" src="css/customIcons/new/iconGoto.svg" style="position:relative;left:305px;top:2px;background-repeat:no-repeat;width:20px;background-size:20px;"/>
+             <div style="position:relative;top:-19px;left:12px;"><?php echo i18n('linkToChangelog'); ?></div>
+             </div> 
+         </a>
+      </td>
+      <td><div style="width:15px !important;"></div></td>
+    </tr>    
     <tr>
       <td><div style="width:15px !important;"></div></td>
       <td><div style="margin-bottom:20px;"></div></td>
