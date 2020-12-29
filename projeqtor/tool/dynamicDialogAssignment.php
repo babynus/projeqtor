@@ -159,7 +159,7 @@ if ($planningMode=='RECW') {
                      dojoType="dijit.form.CheckBox" name="assignmentUnique" id="assignmentUnique" 
                      onChange="assignmentChangeUniqueResource(this.checked);" <?php if (isNewGui()) echo 'class="whiteCheck"';?>
                      <?php echo ($assignmentObj->uniqueResource)?"checked=checked":"";?> />
-              <label title="<?php echo i18n('helpUniqueResource');?>" style="float:none" for="attendantIsOptional" ><?php echo i18n("uniqueResource"); ?></label>
+              <label title="<?php echo i18n('helpUniqueResource');?>" style="float:none;<?php echo (isNewGui())?'position:relative;top:5px;':'';?>" for="attendantIsOptional" ><?php echo i18n("uniqueResource"); ?></label>
             </td>          
            </tr>
            <tr>

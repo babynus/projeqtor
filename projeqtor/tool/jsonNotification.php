@@ -104,6 +104,11 @@
           $line = Sql::fetchLine($result);
           // Read each line of result
           while ($line) {
+            if (Sql::isPgsql()) { // Must replace lowercase data with cased values
+              foreach (array('idObjectNotif','typeId', 'objectClassName', 'notifiableItem') as $fld) {
+                $line[$fld]=$line[strtolower($fld)];
+              }
+            }
             $notifList[]=$line;
             $line = Sql::fetchLine($result);
           }

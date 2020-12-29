@@ -1613,7 +1613,7 @@
 .ProjeQtOrFlatRed .iconInputMailbox { background-image: url(customIcons/red/iconInputMailbox.png); }
 .ProjeQtOrFlatGreen .iconInputMailbox { background-image: url(customIcons/green/iconInputMailbox.png); }
 .ProjeQtOrFlatGrey .iconInputMailbox { background-image: url(customIcons/grey/iconInputMailbox.png); }
-.ProjeQtOrNewGui .iconInputMailbox { background-image: url(customIcons/new/iconInputMailBox.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconInputMailbox { background-image: url(customIcons/new/iconInputMailbox.svg);  background-repeat: no-repeat; }
 
 .iconInterventionMode { background-image: url(images/iconInterventionMode.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconInterventionMode { background-image: url(customIcons/blue/iconInterventionMode.png);  background-repeat: no-repeat;}
