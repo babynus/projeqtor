@@ -801,7 +801,7 @@ function changeLocale(locale, saveAsUserParam) {
   }
   if (locale != "") {
     currentLocale = locale;
-    //if (saveAsUserParam) saveDataToSession('lang', locale, true);
+    if (saveAsUserParam) saveDataToSession('lang', locale, true);
     saveDataToSessionAndReload('currentLocale', locale,true);
   }
 }
