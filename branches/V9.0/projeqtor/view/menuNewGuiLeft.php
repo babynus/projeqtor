@@ -345,10 +345,16 @@ function getPlugins (){
   }
   $urlPlugins = "http://projeqtor.org/admin/getPlugins.php";
   $currentVersion=null;
+  $getYesNo=Parameter::getGlobalParameter('getVersion');
+  if ($getYesNo=='NO') {
+    return $result;
+  }
   if (ini_get('allow_url_fopen')) {
     enableCatchErrors();
+    enableSilentErrors();
     $currentVersion=file_get_contents($urlPlugins);
     disableCatchErrors();
+    disableSilentErrors();
   }
   $json = file_get_contents($urlPlugins);
   $object = json_decode($json);

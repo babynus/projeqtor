@@ -3951,8 +3951,10 @@ function checkVersion() {
   $currentVersion=null;
   if (ini_get('allow_url_fopen')) {
     enableCatchErrors();
+    enableSilentErrors();
     $currentVersion=file_get_contents($checkUrl);
     disableCatchErrors();
+    disableSilentErrors();
   }
   if (!$currentVersion) {
     traceLog('Cannot check Version at '.$checkUrl);
