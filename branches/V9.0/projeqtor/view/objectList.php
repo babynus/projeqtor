@@ -55,7 +55,8 @@ if (array_key_exists('multipleSelect', $_REQUEST)) {
   }
 }
 $showIdle=(! $comboDetail and sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;
-if ((Parameter::getUserParameter('showIdleDefault'))=='true') $showIdle=($showIdle==1)?0:1;
+//if ((Parameter::getUserParameter('showIdleDefault'))=='true') $showIdle=($showIdle==1)?0:1;
+if ((Parameter::getUserParameter('showIdleDefault'))=='true') $showIdle=1;
 if (! $comboDetail and is_array( getSessionUser()->_arrayFilters)) {
   if (array_key_exists($objectClass, getSessionUser()->_arrayFilters)) {
     $arrayFilter=getSessionUser()->_arrayFilters[$objectClass];
@@ -1441,7 +1442,7 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
               <?php if (isNewGui()) {?>
 
   		        <?php 
-  		        $showIdleValue=0;
+  		        $showIdleValue=$showIdle;
   		        if(!$comboDetail and sessionValueExists('listShowIdle'.$objectClass)){   if(getSessionValue('listShowIdle'.$objectClass)== "on") {$showIdleValue=1;}}
   		        if (isNewGui()) htmlDrawSwitch('listShowIdle',$showIdleValue,true);?>
   		        <?php }?>

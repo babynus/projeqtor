@@ -712,7 +712,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
   <table align="center" width="100%" height="100%" class="<?php echo (isNewGui())?'':'loginBackground';?>">
     <tr height="100%">
       <td width="100%" align="center">
-        <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" >
+        <div class="background  <?php  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" <?php echo (isNewGui())?'style="background-color:white;"':'';?>>
         <table align="center" >
 		    <?php if(isNewGui()){?>
 			    <tr style="height:42px;" >
