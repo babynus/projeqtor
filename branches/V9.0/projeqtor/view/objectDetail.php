@@ -1477,7 +1477,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '<tr class="detail'.((!$nobr)?' generalRowClass '.$col.'Class':'').'" style="'.((!$nobr)?$specificStyle:'').'">';
           if ($dataLength>4000 and getEditorType()!='text') {
             // Will have to add label
-            echo '<td colspan="2">';
+            echo '<td colspan="2" style="position:relative">';
           } else {
             echo '<td class="label" style="position:relative;width:'.$labelStyleWidth.';">';
             $thumbRes=SqlElement::isThumbableField($col);
@@ -3039,7 +3039,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // Draw a long text (as a textarea) =================================== TEXTAREA
         // No real need to hide and apply class : long fields will be hidden while hiding row
         // class="generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="'.$specificStyle.'"
-        if (getEditorType()=="CK"||(getEditorType()=="CKInline")) {
+        if (getEditorType()=="CK" || getEditorType()=="CKInline") {
           // if (isIE() and ! $val) $val='<div></div>';
           $caption=htmlEncode($obj->getColCaption($col), 'stipAllTags');
           echo '<div style="text-align:left;font-weight:normal;width:'.(strlen($caption)+2).'ex;text-align:center;" class="tabLabel longTextLabel">'.$caption.'</div>';
@@ -3048,10 +3048,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $ckeDivheight=Parameter::getUserParameter('ckeditorHeight'.$classObj.$col.$extName);
           $ckeDivheight=($ckeDivheight)?(intval($ckeDivheight)+((isNewGui())?75:0)).'':'180';
           echo '<input type="hidden" id="ckeditorObj'.$ckEditorNumber.'" value="'.$classObj.$col.$extName.'" />';
-          
           // BEGIN - ADD BY TABARY - TOOLTIP
           echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
           // END - ADD BY TABARY - TOOLTIP
+          if (getEditorType()=="CKInline" and isNewGui() and ! $comboDetail) {
+            echo '<div style="position:absolute;z-index:9999;right:10px;top:10px;" onClick="displayFullScreenCK(\''.$col.$extName.'\',\''.$caption.'\');">X</div>';
+          }
           echo '<textarea style="height:300px"'; // Important to set big height to retreive correct scroll position after save
           echo ' name="'.$col.$extName.'" ';
           echo ' id="'.$col.$extName.'" ';

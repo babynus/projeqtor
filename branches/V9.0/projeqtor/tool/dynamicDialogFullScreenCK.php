@@ -24,11 +24,12 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 require_once "../tool/projeqtor.php";
-$detailWidth=intval(getSessionValue('screenWidth')*.9;
-$detailHeight=intval(getSessionValue('screenHeight')*.9;
+$detailWidth=intval(getSessionValue('screenWidth'))*(0.8);
+$detailHeight=intval(getSessionValue('screenHeight'))*(0.8);
+//dojoType="dijit.layout.ContentPane" region="center" 
 ?>
-<div >
+<div id="textFullScreenCKdiv" style="width:<?php echo $detailWidth?>px;height:<?php echo $detailHeight?>px;" class="">
   <input id="textFieldId" name="textFieldId" type="hidden" value="" />
   <input id="textEditorType" name="textEditorType" type="hidden" value="CK" />
-  <textarea style="width:<?php echo $detailWidth;?>px; height:<?php echo $detailHeight;?>px" name="textCK" id="textCK"></textarea>
+  <textarea style="width:100%; height:100%" name="textFullScreenCK" id="textFullScreenCK"></textarea>
 </div>

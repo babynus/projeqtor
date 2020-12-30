@@ -2207,3 +2207,12 @@ border:1px solid var(--color-medium);
   background: url(customIcons/new/iconListOfValues.svg) no-repeat; background-size:22px 22px;
 }
 
+.fullScreenCK {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+}

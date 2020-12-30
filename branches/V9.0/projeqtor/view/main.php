@@ -369,15 +369,16 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       if (isNewGui) {
         changeTheme('<?php echo getTheme();?>');
         setColorTheming('<?php echo '#'.Parameter::getUserParameter('newGuiThemeColor');?>','<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>');
-          (function() {
-    var menuEl = dojo.byId('ml-menu'),
-    mlmenu = new MLMenu(menuEl, {
-      initialBreadcrumb : i18n('homePage'), // initial breadcrumb text
-      backCtrl : false, // show back button
-    });
-  })();
-  new menuLeft( dojo.byId( 'mainDiv' ) );
+        (function() {
+          var menuEl = dojo.byId('ml-menu'),
+                       mlmenu = new MLMenu(menuEl, {
+                         initialBreadcrumb : i18n('homePage'), // initial breadcrumb text
+                         backCtrl : false, // show back button
+                       });
+        })();
+        new menuLeft( dojo.byId( 'mainDiv' ) );
       }
+      
       //setColorTheming('blue');
       // FIX IE11 not recognized as IE
       if( !dojo.isIE ) {
@@ -2385,6 +2386,9 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
 <div id="resultDivMain"           dojoType="dijit.layout.ContentPane" region="none" style="display:none"></div>
 <div id="disconnectionMessage" dojoType="dijit.layout.ContentPane" region="none" class="resultDiv" style="display:none;opacity:1">
   <div id="disconnectionMessageText" style="text-align:center;cursor:pointer;" onClick="quitConfirmed = true;window.location = '../index.php';"></div>
+</div>
+<div id="textFullScreenCKdiv" style="width:300px;height:200px;z-index:99999;position:fixed;display:none;" class="">
+  <textarea style="width:100%; height:100%" name="textFullScreenCK" id="textFullScreenCK"></textarea>
 </div>
 </body>
 </html>
