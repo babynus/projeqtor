@@ -770,7 +770,7 @@
 .ProjeQtOrFlatRed .iconChangedStatus22 { background-image: url(images/iconChangeRequest.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconChangedStatus22 { background-image: url(customIcons/new/iconChangedStatus.svg);  background-repeat: no-repeat; }
 
-.iconChangedStatus32 { background-image: url(images/iconChangeRequest.pngg);  background-repeat: no-repeat;  }
+.iconChangedStatus32 { background-image: url(images/iconChangeRequest.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconChangedStatus32 { background-image: url(images/iconChangeRequest.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconChangedStatus32 { background-image: url(images/iconChangeRequest.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconChangedStatus32 { background-image: url(images/iconChangeRequest.pngg);  background-repeat: no-repeat; }
@@ -778,7 +778,7 @@
 .ProjeQtOrNewGui .iconChangedStatus32 { background-image: url(customIcons/new/iconChangedStatus.svg);  background-repeat: no-repeat; }
 */
 
-.iconChangedStatus { background-image: url(images/iconChangeRequest.pngg);  background-repeat: no-repeat;  }
+.iconChangedStatus { background-image: url(images/iconChangeRequest.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconChangedStatus { background-image: url(images/iconChangeRequest.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconChangedStatus { background-image: url(images/iconChangeRequest.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconChangedStatu2 { background-image: url(images/iconChangeRequest.png);  background-repeat: no-repeat; }
@@ -2977,11 +2977,6 @@
 .ProjeQtOrFlatRed .iconTemplateReport { background-image: url(customIcons/red/iconDownload.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconTemplateReport { background-image: url(customIcons/new/iconTemplateReport.svg);  background-repeat: no-repeat; }
 
-.iconScreenCustomization { background-image: url(iconScreenCustomization32.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconScreenCustomization { background-image: url(customIcons/blue/iconScreenCustomization.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconScreenCustomization { background-image: url(customIcons/green/iconScreenCustomization.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconScreenCustomization { background-image: url(customIcons/grey/iconScreenCustomization.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconScreenCustomization { background-image: url(customIcons/red/iconScreenCustomization.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconScreenCustomization { background-image: url(customIcons/new/iconScreenCustomization.svg);  background-repeat: no-repeat; }
 
 .iconTranslation { background-image: url(images/iconPluginTranslationApplication.png);  background-repeat: no-repeat; }

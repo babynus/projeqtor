@@ -149,7 +149,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorIcons.css" />
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorPrint.css" />
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorFlat.css" />
-  <?php if (isNewGui() and $outMode!='pdf') {?>
+  <?php if (isNewGui() and ($outMode!='pdf' or (isset($pathToWkHtmlToPdf) and $pathToWkHtmlToPdf!=''))) {?>
     <style type="text/css">
       <?php 
       $css=file_get_contents('../view/css/projeqtorNew.css');
