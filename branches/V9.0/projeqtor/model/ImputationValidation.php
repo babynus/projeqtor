@@ -288,16 +288,16 @@ class ImputationValidation{
   				//$result .='     <td style="border-left: 1px solid grey;border-right: 1px solid grey;height:30px;width:16%;background-color:transparent;"></td>';
   			}
   			$displayWeek=$weekValue.'&nbsp;<span style="font-size:80%;font-style:italic;">('.htmlFormatDate($firstDay).' - '.htmlFormatDate($lastDay).')</span>';
-  			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;border: 1px solid grey;height:30px;width:10%;text-align:center;vertical-align:center;">'.$displayWeek.'</td>';
-  			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;border: 1px solid grey;height:30px;width:8%;text-align:center;vertical-align:center;">'.$expected.'</td>';
+  			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;border: 1px solid grey;height:30px;width:10%;text-align:center;vertical-align:center;background:white;">'.$displayWeek.'</td>';
+  			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;border: 1px solid grey;height:30px;width:8%;text-align:center;vertical-align:center;background:white;">'.$expected.'</td>';
   			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;width:23%;border: 1px solid grey;">';
   			$result .='      <table style="width:100%;height:35px">';
-  			$result .='        <tr><td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputWork.'</td>';
-  			$result .='        <td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputAdm.'</td>';
-  			$result .='        <td style="'.$backgroundColor.'width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputTotal.'</td></tr>';
+  			$result .='        <tr><td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;background:white;">'.$inputWork.'</td>';
+  			$result .='        <td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;background:white;">'.$inputAdm.'</td>';
+  			$result .='        <td style="'.$backgroundColor.'width:33%;height:30px;text-align:center;vertical-align:center;background:white;">'.$inputTotal.'</td></tr>';
   			$result .='      </table>';
   			$result .='     </td>';
-  			$result .='   <td style="border: 1px solid grey;height:30px;width:20%;text-align:left;vertical-align:center;">';
+  			$result .='   <td style="border: 1px solid grey;height:30px;width:20%;text-align:left;vertical-align:center;background:white;">';
   			$result .='   <div id="submittedDiv'.$uniqueId.'" name="submittedDiv'.$uniqueId.'" width="100%" dojoType="dijit.layout.ContentPane" region="center">';
   			if($week->submitted){
   				$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Submitted', 32, i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate))),false,true).'</td>';
@@ -314,7 +314,7 @@ class ImputationValidation{
   				$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unsubmittedWork'),false,true).'</td>';
   				$result .='     <td style="height:30px;width:90%;">'.i18n('unsubmittedWork').'</td></tr></table></div></td>';
   			}
-  			$result .='   <td style="border: 1px solid grey;height:30px;width:26%;text-align:left;vertical-align:center;">';
+  			$result .='   <td style="border: 1px solid grey;height:30px;width:26%;text-align:left;vertical-align:center;background:white;">';
   			$result .='   <div id="validatedDiv'.$uniqueId.'" name="validatedDiv'.$uniqueId.'" width="100%" dojoType="dijit.layout.ContentPane" region="center">';
   			$result .='     <table width="100%"><tr>';
   			if($week->validated){

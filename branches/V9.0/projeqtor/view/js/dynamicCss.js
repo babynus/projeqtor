@@ -2,6 +2,10 @@
 var colorThemingInProgress=false;
 var elementDynamicCss=document.getElementById('body');
 var allColors="";
+function setColorThemingBrightness(value) {
+  saveDataToSession('newGuiThemeBrightness',value,true);
+  setColorTheming(dojo.byId('menuUserColorPicker').value,dojo.byId('menuUserColorPickerBis').value); 
+}
 function setColorTheming(ref,bis, mode) {
   if (colorThemingInProgress) return;
   if (!ref) ref='#545382';
@@ -18,8 +22,14 @@ function setColorTheming(ref,bis, mode) {
   }
   var white='#ffffff';
   var black='#000000';
-  var background='#e0e0e0';
-  background='#ffffff';
+  var background='#ffffff';
+  if (top.dijit.byId('menuUserColorBrightness')) {
+    var selectedVal=parseInt(top.dijit.byId('menuUserColorBrightness').get('value'));
+    var displayVal=255-selectedVal;
+    var hex=displayVal.toString(16);
+    background='#'+hex+hex+hex;
+    console.log(selectedVal+" => "+background);
+  }
   if (!mode) mode='hsl'; // Mode = hsl or hsv 
   if (mode=='hsl') {
     var hslRef=hexToHSL(ref);

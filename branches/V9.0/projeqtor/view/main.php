@@ -159,6 +159,8 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     dojo.require("dijit.form.DateTextBox");
     dojo.require("dijit.form.FilteringSelect");
     dojo.require("dijit.form.Form");
+    dojo.require("dijit.form.HorizontalSlider");
+    dojo.require("dijit.form.HorizontalRuleLabels");
     dojo.require("dijit.form.MultiSelect");
     dojo.require("dijit.form.NumberSpinner");
     dojo.require("dijit.form.NumberTextBox");
@@ -451,9 +453,15 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
           if (dojo.isFF) stopDef();
           showHelp();
         }else if(event.keyCode==27){ // ESCAPE (to exit full screen mode of CK Editor)
+          console.log("escape");
           if(editorInFullScreen() && whichFullScreen!=-1){
+            console.log("default");
             editorArray[whichFullScreen].execCommand('maximize');
           }
+//            else if (displayFullScreenCKfield && whichFullScreen==996) {
+//             console.log("textFullScreenCK");
+//             CKEDITOR.instances['textFullScreenCK'].execCommand('maximize');
+//           }
         } if (event.target.id=="noteNoteStream") {
           saveNoteStream(event);
         } if (event.target.id=="noteStreamKanban") {
@@ -2387,7 +2395,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
 <div id="disconnectionMessage" dojoType="dijit.layout.ContentPane" region="none" class="resultDiv" style="display:none;opacity:1">
   <div id="disconnectionMessageText" style="text-align:center;cursor:pointer;" onClick="quitConfirmed = true;window.location = '../index.php';"></div>
 </div>
-<div id="textFullScreenCKdiv" style="width:300px;height:200px;z-index:99999;position:fixed;display:none;" class="">
+<div id="textFullScreenCKdiv" style="width:300px;height:200px;position:absolute;display:none;" class="">
   <textarea style="width:100%; height:100%" name="textFullScreenCK" id="textFullScreenCK"></textarea>
 </div>
 </body>

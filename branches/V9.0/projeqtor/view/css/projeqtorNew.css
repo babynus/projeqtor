@@ -95,7 +95,7 @@ label, .ProjeQtOrNewGui label,
     float: left;
     border: 1px;
     text-shadow: 0px 0px var(--color-background);
-    background-color: var(--color-background);
+    background-color: transparent;
     color:var(--color-text);
 }
 .ProjeQtOrNewGui .labelLeft {
@@ -137,7 +137,7 @@ label, .ProjeQtOrNewGui label,
 }
 
 .tabLabel, .ProjeQtOrNewGui .tabLabel {
-  background-color: var(--color-background);
+  background-color: transparent;
   color:var(--color-text);
 }
 
@@ -147,7 +147,7 @@ label, .ProjeQtOrNewGui label,
   border-bottom: 0px;
   border-radius: 5px 5px 0px 0px;
   width:100%;
-  background-color: var(--color-background);
+  background-color: #ffffff !important; /*var(--color-background);*/
   color:var(--color-text);
 }
 .ProjeQtOrNewGui .tabLabel.longTextLabel {
@@ -209,7 +209,7 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui .dojoxGridHeader .dojoxGridCell {
   background-color: var(--color-grid-header-bg) !important;
   border: 1px solid #ccc;
-  border-right: 1px solid #fefefe;
+  border-right: 1px solid var(--color-grid-header-bg);
   border-top: 0;
   color: var(--color-grid-header-text) !important;
   text-shadow: none;
@@ -255,6 +255,10 @@ label, .ProjeQtOrNewGui label,
 .ProjeQtOrNewGui .dijitButtonDisabled .dijitButtonNode, .ProjeQtOrNewGui .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
   background: rgba(255,255,255,0.3) !important;
 }
+.ProjeQtOrNewGui #subscribeButtonDiv .dijitButtonDisabled .dijitButtonNode, 
+.ProjeQtOrNewGui #subscribeButtonDiv .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode {
+  background: transparent ! important; 
+}
 
 /* === MENU BUTTONS AND ITEMS CSS ===================================================== MENU ===*/
 
@@ -277,7 +281,7 @@ label, .ProjeQtOrNewGui label,
 }
 
 .dijitComboBoxMenu, .dijitMenuItem {
-   background-color:var(--color-background);
+   background-color:#ffffff;
    background-image: url();
 }
 
@@ -326,6 +330,9 @@ label, .ProjeQtOrNewGui label,
     text-shadow: none !important;
     border-top: 0px;
     border-bottom: 1px solid var(--color-medium);
+}
+.ProjeQtOrNewGui .dijitAccordionTitle{
+	background: url() var(--color-background) !important;
 }
 .ProjeQtOrNewGui #activityStreamTop {
 	border-bottom: 1px solid var(--color-medium);
@@ -395,12 +402,12 @@ html, body, #mainDiv,
 
 .ProjeQtOrNewGui .tabLabel {
   font-size: 10pt;
-  background-color: var(--color-background);
+  background-color: tranparent;
   color:var(--color-text);
 }
 .ProjeQtOrNewGui .largeLabel {
   width: 380px;
-  background-color: var(--color-background);
+  background-color: tranparent;
   color:var(--color-text);
 }
 .ProjeQtOrNewGui .dijitToolbar {
@@ -1232,7 +1239,7 @@ animation: fadeIn ease 0.5s;
     background-image: url(images/checkmarkNoBorderGrey.png) !important;
     border: 1px solid #d4d4d4;
     border-radius:5px;
-    
+    background: #ffffff;
 }
 .ProjeQtOrNewGui .dijitDialogPaneContent .whiteCheck, .ProjeQtOrNewGui .dijitDialogPaneContent .dijitCheckBox {
 	margin-top: 6px;
@@ -2215,4 +2222,22 @@ border:1px solid var(--color-medium);
     height: 100% !important;
     max-width: 100% !important;
     max-height: 100% !important;
+}
+.ProjeQtOrNewGui .dijitDialog .dijitDialogPaneContent {
+	background: var(--color-background);
+}
+.ProjeQtOrNewGui .dijitTooltipContainer {
+	background: url() var(--color-background);
+}
+.ProjeQtOrNewGui .pseudoButton {
+	background: url() var(--color-background);
+	border-color: var(--color-background);
+}
+.ProjeQtOrNewGui .pseudoButton:hover {
+  background: url() var(--color-background);
+  border-color: var(--color-background);
+  color:var(--color-secondary);
+}
+.ProjeQtOrNewGui #objectStream .noteData {
+	background: var(--color-background);
 }
