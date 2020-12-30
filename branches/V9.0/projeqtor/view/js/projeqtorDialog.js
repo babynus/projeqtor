@@ -1347,7 +1347,7 @@ function addSituation() {
   var callBack=function() {
     var editorType=dojo.byId("situationEditorType").value;
     if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
-      ckEditorReplaceEditor("situationComment",999);
+      ckEditorReplaceEditor("situationComment",995);
     } else if (editorType=="text") {
       dijit.byId("situationComment").focus();
       dojo.byId("situationComment").style.height=(screen.height*0.6)+'px';
@@ -1377,7 +1377,7 @@ function editSituation(situationId) {
   var callBack=function() {
 	    var editorType=dojo.byId("situationEditorType").value;
 	    if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
-	      ckEditorReplaceEditor("situationComment",999);
+	      ckEditorReplaceEditor("situationComment",995);
 	    } else if (editorType=="text") {
 	      dijit.byId("situationComment").focus();
 	      dojo.byId("situationComment").style.height=(screen.height*0.6)+'px';
@@ -9292,7 +9292,7 @@ function unlockRequirement() {
 }
 
 // CHANGE BY Marc TABARY - 2017-03-13 - CHANGE TITLE DYNAMIC DIALOG
-function loadDialog(dialogDiv, callBack, autoShow, params, clearOnHide, closable, dialogTitle) {
+function loadDialog(dialogDiv, callBack, autoShow, params, clearOnHide, closable, dialogTitle, dialogTitleKeepAsIs) {
   // Before loading, be sure to clear dialogs containing "directAccessToListButton" 
   // This is mandatory as these dialogs may not be cleared on direct access, as they are not showed so .hide() and no effect and clearOnHide is not triggered  
   if (dojo.byId('directAccessToListButton')) {
@@ -9326,6 +9326,7 @@ function loadDialog(dialogDiv, callBack, autoShow, params, clearOnHide, closable
       theDialogTitle = dialogTitle;
       setTitle=true;
   }
+  if (! dialogTitleKeepAsIs) theDialogTitle=i18n(theDialogTitle);
   // END ADD BY Marc TABARY - 2017-03-13 - CHANGE TITLE DYNAMIC DIALOG
   
   extraClass="projeqtorDialogClass";
@@ -9336,7 +9337,7 @@ function loadDialog(dialogDiv, callBack, autoShow, params, clearOnHide, closable
     dialog=new dijit.Dialog({
       id : dialogDiv,
 // CHANGE BY Marc TABARY - 2017-03-13 - CHANGE TITLE DYNAMIC DIALOG
-      title : i18n(theDialogTitle),
+      title : theDialogTitle,
       // Old     
 //      title : i18n(dialogDiv),
 // END CHANGE BY Marc TABARY - 2017-03-13 - CHANGE TITLE DYNAMIC DIALOG
