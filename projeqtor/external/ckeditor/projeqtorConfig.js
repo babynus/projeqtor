@@ -5,12 +5,12 @@
 
 CKEDITOR.editorConfig = function( config ) {
   config.toolbar = [
-    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', '-', 'RemoveFormat'] },
+    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', '-', 'CopyFormatting','RemoveFormat'] },
     { name: 'paragraph', items: [ 'Indent', 'Outdent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock','-','NumberedList', 'BulletedList'] },
     { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
-    { name: 'tools', items: [ 'Print','Maximize'] },
+    { name: 'tools', items: [ 'Replace','Print','Maximize','ProjeqtorFullscreen'] },
     { name: 'styles', items: [ 'Font', 'FontSize' ] },
-    { name: 'links', items: [ 'Link', 'Unlink', 'Image','Table','SpecialChar','PasteFromWord','Source'] }
+    { name: 'links', items: [ 'Link', 'Unlink', 'Image','Table','Blockquote','Smiley','SpecialChar','PasteFromWord','Source'] }
   ];
   // 'showBlocks'
   config.enterMode = CKEDITOR.ENTER_DIV;
@@ -26,6 +26,7 @@ CKEDITOR.editorConfig = function( config ) {
   config.resize_minHeight = 150;
   config.extraPlugins = 'openlink';
   config.extraPlugins += ',sourcearea';
+  //config.extraPlugins += ',sourcearea';
   //config.extraPlugins += ',image2';
   //config.extraPlugins += ',uploadimage';
   //gautier
@@ -35,6 +36,7 @@ CKEDITOR.editorConfig = function( config ) {
       config.removeButtons = 'tools,Maximize';
       config.extraPlugins += ',staticspace';
       config.staticSpacePriority=1;
+      config.extraPlugins+=',projeqtorfullscreen';
       //config.staticSpacePositionY='bottom';
       //config.staticSpacePositionX='left';
       //config.removePlugins += ',elementspath';
