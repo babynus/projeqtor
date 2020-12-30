@@ -4078,7 +4078,15 @@ function globalSave() {
   }
   if (!button) {
     var button = dijit.byId('saveButton');
+    console.log("saveButton");
+    console.log(whichFullScreen);
+    console.log(displayFullScreenCKfield);
+    if (displayFullScreenCKfield) {
+      console.log("copy");
+      CKEDITOR.instances[displayFullScreenCKfield].setData(CKEDITOR.instances['textFullScreenCK'].getData());
+    }
   }
+  console.log(button);
   if (!button) {
     button = dijit.byId('saveParameterButton');
   }
@@ -5330,7 +5338,6 @@ function ckEditorReplaceEditor(editorName, numEditor) {
   });
   if (editorName != 'noteNote' && editorName != 'WUDescriptions'&& editorName != 'WUIncomings'&& editorName != 'WULivrables' && editorName!="situationComment") { // No formChanged for notes
     editorArray[numEditor].on('change', function(evt) {
-      // evt.editor.updateElement();
       formChanged();
     });
   }
@@ -5340,20 +5347,22 @@ function ckEditorReplaceEditor(editorName, numEditor) {
       displayFullScreenCKopening=false;
     });
     editorArray[numEditor].on( 'resize', function(event){
-      displayFullScreenCK_close();
+      var editorName='textFullScreenCK';
+      var status=CKEDITOR.instances['textFullScreenCK'].commands.maximize.state; // 1=minimized, 2=maximized
+      if (status==1) displayFullScreenCK_close();
     });
     editorArray[numEditor].on( 'key', function(e){
-      //console.log(event);
       event=e.data;
       if(event.keyCode==27){ // ESCAPE (to exit full screen mode of CK Editor
         CKEDITOR.instances['textFullScreenCK'].execCommand('maximize');
-        //displayFullScreenCK_close();
-      } else if (event.keyCode == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey && event.target.id!="noteNoteStream") { // CTRL + S (save)
-        event.preventDefault();
-        if (dojo.isFF) stopDef();
-        alert("save");
-        globalSave();
-      }
+      } 
+//      else if (event.keyCode == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey && event.target.id!="noteNoteStream") { // CTRL + S (save)
+//        event.preventDefault();
+//        if (dojo.isFF) stopDef();
+//        CKEDITOR.instances[displayFullScreenCKfield].setData(CKEDITOR.instances['textFullScreenCK'].getData());
+//        console.log("save");
+//        globalSave();
+//      }
     });
   }
   editorArray[numEditor].on('blur', function(evt) { // Trigger after paster
@@ -5364,34 +5373,36 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     // formChanged();
   });
   //gautier
-  editorArray[numEditor].on('resize', function(evt) {
-    if(tempResizeCK){
-      clearTimeout(tempResizeCK);
-    }
-    var CkHeight = this.ui.editor.container.$.clientHeight - 102;
-    tempResizeCK = setTimeout("CKeEnd("+CkHeight+","+numEditor+");",500);
-  }); 
-  
-  editorArray[numEditor].on('key', function(evt) {
-    onKeyDownCkEditorFunction(evt, this);
-  });
-  editorArray[numEditor].on('instanceReady', function(evt) {
-    if (dojo.hasClass(evt.editor.name, 'input required')) {
-      dojo.query('.cke_editor_'+evt.editor.name).addClass('input required');
-    }
-  });
-  editorArray[numEditor].on('dragover', function(evt) {
-    if (dojo.byId('dropFilesInfoDiv')) {
-      dojo.byId('dropFilesInfoDiv').style.opacity='0%';
-      dojo.byId('dropFilesInfoDiv').style.display='none';
-    }
-  });
-  editorArray[numEditor].on('dragleave', function(evt) {
-    if (dojo.byId('dropFilesInfoDiv')) {
-      dojo.byId('dropFilesInfoDiv').style.opacity='50%';
-      dojo.byId('dropFilesInfoDiv').style.display='block';
-    }
-  });
+  if (editorName != 'textFullScreenCK') { 
+    editorArray[numEditor].on('resize', function(evt) {
+      if(tempResizeCK){
+        clearTimeout(tempResizeCK);
+      }
+      var CkHeight = this.ui.editor.container.$.clientHeight - 102;
+      tempResizeCK = setTimeout("CKeEnd("+CkHeight+","+numEditor+");",500);
+    }); 
+    
+    editorArray[numEditor].on('key', function(evt) {
+      onKeyDownCkEditorFunction(evt, this);
+    });
+    editorArray[numEditor].on('instanceReady', function(evt) {
+      if (dojo.hasClass(evt.editor.name, 'input required')) {
+        dojo.query('.cke_editor_'+evt.editor.name).addClass('input required');
+      }
+    });
+    editorArray[numEditor].on('dragover', function(evt) {
+      if (dojo.byId('dropFilesInfoDiv')) {
+        dojo.byId('dropFilesInfoDiv').style.opacity='0%';
+        dojo.byId('dropFilesInfoDiv').style.display='none';
+      }
+    });
+    editorArray[numEditor].on('dragleave', function(evt) {
+      if (dojo.byId('dropFilesInfoDiv')) {
+        dojo.byId('dropFilesInfoDiv').style.opacity='50%';
+        dojo.byId('dropFilesInfoDiv').style.display='block';
+      }
+    });
+  }
   doNotTriggerResize=false;
 }
 function CKeEnd(CkHeight,numEditor) {

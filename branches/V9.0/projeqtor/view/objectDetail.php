@@ -3051,9 +3051,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           // BEGIN - ADD BY TABARY - TOOLTIP
           echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
           // END - ADD BY TABARY - TOOLTIP
-          if (getEditorType()=="CKInline" and isNewGui() and ! $comboDetail) {
-            echo '<div style="position:absolute;z-index:9999;right:10px;top:10px;" onClick="displayFullScreenCK(\''.$col.$extName.'\',\''.$caption.'\');">X</div>';
-          }
+//           if (getEditorType()=="CKInline" and isNewGui() and ! $comboDetail) {
+//             echo '<div style="position:absolute;z-index:9999;right:10px;top:10px;" onClick="displayFullScreenCK(\''.$col.$extName.'\',\''.$caption.'\');">X</div>';
+//           }
           echo '<textarea style="height:300px"'; // Important to set big height to retreive correct scroll position after save
           echo ' name="'.$col.$extName.'" ';
           echo ' id="'.$col.$extName.'" ';

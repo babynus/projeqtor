@@ -159,7 +159,7 @@ $user=getSessionUser();
             </div>
             <div id="moduleTitle_<?php echo $mod->id;?>"  style="cursor:pointer;z-index:100;border-radius:4px;display: flex; align-items: center;font-family: Verdana, Arial, Tahoma, sans-serif !important;font-size: 10pt !important;width:260px;height:28px;
                    margin-left:35px;margin-bottom:3px;<?php if (!$mod->idModule){?>color:white; <?php if($mod->active){?> background-color:#B0D0B0; <?php }else{?>background-color:#B0B0B0; <?php } ?><?php  }else{ if($mod->active){?>color:white !important; background-color:#cce0cc; <?php }else{?>color:#B0B0B0; background-color:#e6e6e6;<?php } }?>" onClick="showDisplayModule(<?php echo $mod->id;?>,<?php echo $nbTotal;?>);">
-              <?php if ($mod->idModule) echo "<div style='height:100%;background-color:white;width:40px;float:left'></div>";?>
+              <?php if ($mod->idModule) echo "<div style='height:100%;background-color:var(--color-background);width:40px;float:left'></div>";?>
               <div style="margin-left:10px;"><?php echo i18n($mod->name);?></div>
             </div>
           </div>

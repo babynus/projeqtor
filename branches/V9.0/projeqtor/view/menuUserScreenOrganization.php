@@ -206,7 +206,7 @@ if($paramRightDiv=='trailing'){
     <?php }?>  
     <?php if (! isIE()) {?>
     <td width="<?php echo (isIE())?37:35;?>px;" style="<?php echo (isNewGui())?'padding-left: 4px;':'';?>"> 
-      <div  class="pseudoButtonFullScreen " style="height:28px; position:relative;top:0px; z-index:30; width:30px; right:0px;" onclick="toggleFullScreen()" >
+      <div  class="pseudoButton<?php if (!isNewGui()) echo 'FullScreen';?>" style="height:28px; position:relative;top:0px; z-index:30; width:30px; right:0px;" onclick="toggleFullScreen()" >
         <table>
           <tr>
             <td style="width:28px" >
