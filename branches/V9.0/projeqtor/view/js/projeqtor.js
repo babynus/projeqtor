@@ -5310,6 +5310,9 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     height = 200;
     currentEditorIsNote=true;
   }
+  if (editorName == 'textFullScreenCK') {
+    currentEditorIsNote=true;
+  }
   var readOnly = false;
   if (dojo.byId('ckeditor' + numEditor + 'ReadOnly')
       && dojo.byId('ckeditor' + numEditor + 'ReadOnly').value == 'true') {
@@ -5329,6 +5332,28 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     editorArray[numEditor].on('change', function(evt) {
       // evt.editor.updateElement();
       formChanged();
+    });
+  }
+  if (editorName == 'textFullScreenCK') { // Control CKEditor
+    editorArray[numEditor].on( 'instanceReady', function(event){ 
+      if(event.editor.getCommand( 'maximize' ).state == CKEDITOR.TRISTATE_OFF) event.editor.execCommand( 'maximize'); //ckeck if maximize is off
+      displayFullScreenCKopening=false;
+    });
+    editorArray[numEditor].on( 'resize', function(event){
+      displayFullScreenCK_close();
+    });
+    editorArray[numEditor].on( 'key', function(e){
+      //console.log(event);
+      event=e.data;
+      if(event.keyCode==27){ // ESCAPE (to exit full screen mode of CK Editor
+        CKEDITOR.instances['textFullScreenCK'].execCommand('maximize');
+        //displayFullScreenCK_close();
+      } else if (event.keyCode == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey && event.target.id!="noteNoteStream") { // CTRL + S (save)
+        event.preventDefault();
+        if (dojo.isFF) stopDef();
+        alert("save");
+        globalSave();
+      }
     });
   }
   editorArray[numEditor].on('blur', function(evt) { // Trigger after paster
