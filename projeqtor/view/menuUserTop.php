@@ -212,8 +212,26 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
     <td>
        <input type="color" id="menuUserColorPickerBis" onInput="setColorTheming(dojo.byId('menuUserColorPicker').value,this.value);" onChange="saveDataToSession('newGuiThemeColorBis',this.value.substr(1),true);setColorTheming(dojo.byId('menuUserColorPicker').value,this.value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>" style="height: 24px;width: 160px;border-radius: 5px 5px 5px 5px;" />
     </td>
-  </tr> 
- <?php }?>
+  </tr>
+  <?php if (isset($paramNewGuiSwitch) and $paramNewGuiSwitch==true) {
+    $brightness=Parameter::getUserParameter('newGuiThemeBrightness');
+    if (!$brightness) $brightness=0;
+    ?>
+  <tr style="height:10px;"><td colspan="2"></td></tr>
+  <tr style="height:40px">
+    <td width="120px" style="text-align:right;vertical-align:top;padding-top:4px"><?php echo i18n("menuBrightnessColor");?>&nbsp;</td>
+    <td style="">
+      <input id="menuUserColorBrightness" value="<?php echo $brightness;?>" type="range" style="width:80%;margin-left:10%"
+        data-dojo-type="dijit/form/HorizontalSlider" onChange="setColorThemingBrightness(this.value);"
+        data-dojo-props="minimum: 0, maximum: 31, discreteValues: 32, showButtons: false, intermediateChanges: true">
+      <ol data-dojo-type="dijit/form/HorizontalRuleLabels" data-dojo-props="container: 'bottomDecoration'" style="height: 1em;width:80%;margin-left:10%">
+        <li><?php echo i18n('menuBrightnessClear');?></li>
+        <li><?php echo i18n('menuBrightnessDark');?></li>
+      </ol>
+    </td>
+  </tr>
+  <?php }?> 
+<?php }?>
   <tr style="height:40px">
     <td width="120px" style="text-align:right"><?php echo i18n("menuUserStartPage");?>&nbsp;<?php if (! isNewGui()) echo ":&nbsp;"; ?></td>
     <td>  
@@ -238,7 +256,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
         <table style="width:100%">
           <tr>
             <td style="width:24px;padding-top:2px;width:30px;">
-              <div class="iconLoginPassword22 iconLoginPassword iconSize22">&nbsp;</div>
+              <div class="imageColorNewGui iconLoginPassword22 iconLoginPassword iconSize22">&nbsp;</div>
             </td>
             <td style="vertical-align:middle;"><?php echo ucfirst(i18n('changePassword'));?>&nbsp;&nbsp;</td>
           </tr>
@@ -253,7 +271,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
         <table style="width:100%">
           <tr>
             <td style="width:24px;padding-top:2px;width:30px;">
-              <div class="iconCatalog22 iconCatalog iconSize22">&nbsp;</div>
+              <div class="imageColorNewGui iconCatalog22 iconCatalog iconSize22">&nbsp;</div>
             </td>
             <td style="vertical-align:middle;"><?php echo i18n('help');?>&nbsp;&nbsp;</td>
           </tr>

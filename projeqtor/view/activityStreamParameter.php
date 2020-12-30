@@ -53,7 +53,7 @@ if(!isNewGui()){
 	</tr>
 </table>
 
-<div style="width: 100%; margin: 0 auto; height: <?php echo (isNewGui())?'110':'90';?>px; padding-bottom: 2px; border-bottom: 1px solid #CCC;background-color:#FFFFFF">
+<div style="width: 100%; margin: 0 auto; height: <?php echo (isNewGui())?'110':'90';?>px; padding-bottom: 2px; border-bottom: 1px solid #CCC;background-color:var(--color-background)">
   <form id="activityStreamForm" name="activityStreamForm">
 		<table width="100%" class="activityStream" style="margin-left:10px;<?php if (isNewGui()) echo 'position:relative;top:-15px;';?>">
 			<tr>
@@ -239,7 +239,7 @@ if(!isNewGui()){
 	</tr>
 </table>
 
-<div style="width: 100%; margin: 0 auto; height: <?php echo (isNewGui())?'90':'90';?>px; padding-bottom: 2px; border-bottom: 1px solid #CCC;background-color:#FFFFFF">
+<div style="width: 100%; margin: 0 auto; height: <?php echo (isNewGui())?'90':'90';?>px; padding-bottom: 2px; border-bottom: 1px solid #CCC;background-color:var(--color-background)">
   <form id="activityStreamForm" name="activityStreamForm">
 		<table width="100%"  style="margin-left:10px;<?php if (isNewGui()) echo 'position:relative;top:-29px;';?>">
 			<tr>

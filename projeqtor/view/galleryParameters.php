@@ -58,7 +58,7 @@ $defaultIdTypeValue = '';
         </thead>
         <tbody>
             <tr>
-                <td class="reportTableData">
+                <td class="reportTableData" style="background:var(--color-background)">
                     <select dojoType="dijit.form.FilteringSelect" class="input" 
                     <?php echo autoOpenFilteringSelect();?>
                             style="width: 200px;"
@@ -72,7 +72,7 @@ $defaultIdTypeValue = '';
                         ?>
                     </select>
                 </td>
-                <td class="reportTableData">
+                <td class="reportTableData" style="background:var(--color-background)">
                     <div style="width:100px; text-align: center; color: #000000;" 
                          dojoType="dijit.form.DateTextBox" 
                          <?php
@@ -86,7 +86,7 @@ $defaultIdTypeValue = '';
                          id="startDate" name="startDate">
                     </div>
                 </td>
-                <td class="reportTableData">
+                <td class="reportTableData" style="background:var(--color-background)">
                     <div style="width:100px; text-align: center; color: #000000;" 
                          dojoType="dijit.form.DateTextBox" 
                          <?php
@@ -100,7 +100,7 @@ $defaultIdTypeValue = '';
                          id="endDate" name="endDate">
                     </div>
                 </td>
-                <td class="reportTableData">
+                <td class="reportTableData" style="background:var(--color-background)">
                     <select dojoType="dijit.form.FilteringSelect" class="input" 
                     <?php echo autoOpenFilteringSelect();?>
                             style="width: 200px;"
@@ -108,7 +108,7 @@ $defaultIdTypeValue = '';
                                 <?php htmlDrawOptionForReference("idClient", $defaultSupplierValue, null, false); ?>
                     </select>
                 </td>
-                <td class="reportTableData">
+                <td class="reportTableData" style="background:var(--color-background)">
                     <select dojoType="dijit.form.FilteringSelect" class="input" 
                     <?php echo autoOpenFilteringSelect();?>
                             style="width: 200px;"
@@ -116,7 +116,7 @@ $defaultIdTypeValue = '';
                                 <?php htmlDrawOptionForReference("id".$defaultEntity."Type", $defaultIdTypeValue, null, false); ?>
                     </select>
                 </td>
-                <td class="reportTableData">
+                <td class="reportTableData" style="background:var(--color-background)">
                     <button title="<?php echo i18n('galleryShow') ?>"   
                             dojoType="dijit.form.Button" type="submit" 
                             id="gallerySubmit" name="gallerySubmit" 
