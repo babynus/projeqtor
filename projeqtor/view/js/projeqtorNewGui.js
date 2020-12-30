@@ -825,7 +825,6 @@ function addNewGuiItem(item){
 	}
 }
 
-
 function setArchiveMode(){
 	var callBack = function(){
 	    refreshProjectSelectorList();
@@ -838,4 +837,52 @@ function setArchiveMode(){
   dojo.byId('archiveOn').style.display='none';
   dojo.byId('archiveOnSeparator').style.display='none';
   dojo.byId('archiveOnDiv').style.display='none';
+}
+
+displayFullScreenCKopening=false;
+displayFullScreenCKfield=false;
+function displayFullScreenCK(field,fieldName) {
+  //var callBack=function() {
+    //dojo.addClass('dialogFullScreenCK', 'fullScreenCK');
+    //dojo.addClass('dialogFullScreenCKdiv', 'fullScreenCK');
+  displayFullScreenCKfield=field;
+  displayFullScreenCKopening=true;
+  alreadyExist=false;
+  if (typeof CKEDITOR.instances['textFullScreenCK'] == 'undefined') {
+    ckEditorReplaceEditor("textFullScreenCK",996);
+  } else {
+    if(CKEDITOR.instances['textFullScreenCK'].getCommand('maximize').state == CKEDITOR.TRISTATE_OFF) CKEDITOR.instances['textFullScreenCK'].execCommand( 'maximize');
+  }
+  console.log(CKEDITOR.instances['textFullScreenCK']);
+  console.log(CKEDITOR.instances[field]);
+  if (typeof CKEDITOR.instances['textFullScreenCK'] != 'undefined' && typeof CKEDITOR.instances[field] != 'undefined') {
+    console.log(CKEDITOR.instances[field].getData());
+    CKEDITOR.instances['textFullScreenCK'].setData(CKEDITOR.instances[field].getData());
+    CKEDITOR.instances['textFullScreenCK'].focus();
+    //CKEDITOR.instances['textFullScreenCK'].getSelection().selectRanges( CKEDITOR.instances[field].getSelection().getRanges() );
+  }
+  whichFullScreen=996;
+  displayFullScreenCKopening=false;
+  //displayFullScreenCKopening.false;
+  //};
+  //var params=null;
+  //currentEditorIsNote=true;
+  //closable=true;
+  //autoShow=true;
+  //clearOnHide=true;
+  //loadDialog('dialogFullScreenCK', callBack, autoShow, params, clearOnHide, closable, fieldName, true);
+  
+}
+function displayFullScreenCK_close() {
+  if (displayFullScreenCKopening) return;
+  if (typeof CKEDITOR.instances['textFullScreenCK'] != 'undefined' && typeof CKEDITOR.instances[displayFullScreenCKfield] != 'undefined') {
+    CKEDITOR.instances[displayFullScreenCKfield].setData(CKEDITOR.instances['textFullScreenCK'].getData());
+    //CKEDITOR.instances['textFullScreenCK'].setData('');
+  }
+//  if (typeof CKEDITOR.instances['textFullScreenCK'] != 'undefined') {
+//    try { 
+//      CKEDITOR.instances['textFullScreenCK'].destroy(true);
+//    } catch (e) { }
+//  }
+  whichFullScreen=-1;
 }
