@@ -35,6 +35,8 @@ dependencies = {
 			    "dijit.form.DateTextBox",
 			    "dijit.form.FilteringSelect",
 			    "dijit.form.Form",
+			    "dijit.form.HorizontalSlider",
+			    "dijit.form.HorizontalRuleLabels",
 			    "dijit.form.MultiSelect",
 			    "dijit.form.NumberSpinner",
 			    "dijit.form.NumberTextBox",
