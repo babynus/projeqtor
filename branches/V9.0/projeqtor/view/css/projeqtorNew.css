@@ -1237,9 +1237,9 @@ animation: fadeIn ease 0.5s;
 
 .ProjeQtOrNewGui .whiteCheck, .ProjeQtOrNewGui .dijitCheckBox {
     background-image: url(images/checkmarkNoBorderGrey.png) !important;
+    background-color: #ffffff !important;
     border: 1px solid #d4d4d4;
     border-radius:5px;
-    background: #ffffff;
 }
 .ProjeQtOrNewGui .dijitDialogPaneContent .whiteCheck, .ProjeQtOrNewGui .dijitDialogPaneContent .dijitCheckBox {
 	margin-top: 6px;
