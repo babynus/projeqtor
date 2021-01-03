@@ -458,10 +458,6 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
             console.log("default");
             editorArray[whichFullScreen].execCommand('maximize');
           }
-//            else if (displayFullScreenCKfield && whichFullScreen==996) {
-//             console.log("textFullScreenCK");
-//             CKEDITOR.instances['textFullScreenCK'].execCommand('maximize');
-//           }
         } if (event.target.id=="noteNoteStream") {
           saveNoteStream(event);
         } if (event.target.id=="noteStreamKanban") {
