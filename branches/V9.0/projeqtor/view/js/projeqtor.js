@@ -1196,7 +1196,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           checkDestination(destination);
           // Create instances of CKEDITOR
           if (page.substr(0, 16) == 'objectDetail.php'
-              && (destination == 'detailDiv' || destination == 'detailFormDiv' || destination == "formDiv")&& !editorInFullScreen()) {
+              && (destination == 'detailDiv' || destination == 'detailFormDiv' || destination == "formDiv") && !editorInFullScreen()) {
             ckEditorReplaceAll();
           }
           if ( (page.substr(0, 16) == 'objectDetail.php' && destination == 'detailDiv')
@@ -5051,9 +5051,13 @@ function editorInFullScreen() {
     var numEditor = 1;
     while (dojo.byId('ckeditor' + numEditor)) {
       if(typeof editorArray[numEditor] != 'undefined'){
-        if(editorArray[numEditor].toolbar && editorArray[numEditor].toolbar[3] 
-        && editorArray[numEditor].toolbar[3].items[1] && editorArray[numEditor].toolbar[3].items[1]._
-        && editorArray[numEditor].toolbar[3].items[1]._.state==1){
+//        if(editorArray[numEditor].toolbar && editorArray[numEditor].toolbar[3] 
+//        && editorArray[numEditor].toolbar[3].items[1] && editorArray[numEditor].toolbar[3].items[1]._
+//        && editorArray[numEditor].toolbar[3].items[1]._.state==1){
+//          fullScreenTest=true;
+//          whichFullScreen=numEditor;
+//        }
+        if(editorArray[numEditor].commands.maximize && editorArray[numEditor].commands.maximize.state==1){
           fullScreenTest=true;
           whichFullScreen=numEditor;
         }

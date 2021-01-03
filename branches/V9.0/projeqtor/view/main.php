@@ -453,9 +453,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
           if (dojo.isFF) stopDef();
           showHelp();
         }else if(event.keyCode==27){ // ESCAPE (to exit full screen mode of CK Editor)
-          console.log("escape");
           if(editorInFullScreen() && whichFullScreen!=-1){
-            console.log("default");
             editorArray[whichFullScreen].execCommand('maximize');
           }
         } if (event.target.id=="noteNoteStream") {

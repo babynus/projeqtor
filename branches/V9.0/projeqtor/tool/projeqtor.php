@@ -5070,9 +5070,9 @@ function getWidthLayoutActivityStream($objectClass){
 
 function WidthDivContentDetail($positionListDiv,$objectClass){
   if($positionListDiv=='left'){
-    $rightDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
-    $widthListDiv=Parameter::getUserParameter("contentPaneTopDetailDivWidth".$objectClass);
-    $widthDetailDiv=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
+    $rightDivWidth=intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass));
+    $widthListDiv=intval(Parameter::getUserParameter("contentPaneTopDetailDivWidth".$objectClass));
+    $widthDetailDiv=intval(Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass));
     if(!empty($widthListDiv) or !empty($widthDetailDiv)){
       if($widthDetailDiv > 1400){
         $widthDetailDiv=1400;
