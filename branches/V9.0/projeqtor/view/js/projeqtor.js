@@ -1301,7 +1301,12 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
                   }).play();
                   hideWait();
                   formInitialize();
-                  if (whichFullScreen>=0 && editorArray[whichFullScreen]) editorArray[whichFullScreen].focus();
+                  if (whichFullScreen==996) {
+                    // save with editor in full screen for new CK TextFull Screen
+                    // Do not change focus
+                  } else if (whichFullScreen>=0 && editorArray[whichFullScreen]) {
+                    editorArray[whichFullScreen].focus();
+                  }
                 }
               }
             }).play();
@@ -4078,15 +4083,7 @@ function globalSave() {
   }
   if (!button) {
     var button = dijit.byId('saveButton');
-    console.log("saveButton");
-    console.log(whichFullScreen);
-    console.log(displayFullScreenCKfield);
-    if (displayFullScreenCKfield) {
-      console.log("copy");
-      CKEDITOR.instances[displayFullScreenCKfield].setData(CKEDITOR.instances['textFullScreenCK'].getData());
-    }
   }
-  console.log(button);
   if (!button) {
     button = dijit.byId('saveParameterButton');
   }
@@ -5039,6 +5036,7 @@ var fullScreenTest = false;
 var whichFullScreen=-1;
 var isCk=false;
 function editorInFullScreen() {
+  if (whichFullScreen==996) return true;
   fullScreenTest = false;
   whichFullScreen=-1;
   dojo.query(".dijitEditor").forEach(function(node, index, arr) {
@@ -5351,19 +5349,14 @@ function ckEditorReplaceEditor(editorName, numEditor) {
       var status=CKEDITOR.instances['textFullScreenCK'].commands.maximize.state; // 1=minimized, 2=maximized
       if (status==1) displayFullScreenCK_close();
     });
-    editorArray[numEditor].on( 'key', function(e){
-      event=e.data;
-      if(event.keyCode==27){ // ESCAPE (to exit full screen mode of CK Editor
-        CKEDITOR.instances['textFullScreenCK'].execCommand('maximize');
-      } 
-//      else if (event.keyCode == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey && event.target.id!="noteNoteStream") { // CTRL + S (save)
-//        event.preventDefault();
-//        if (dojo.isFF) stopDef();
-//        CKEDITOR.instances[displayFullScreenCKfield].setData(CKEDITOR.instances['textFullScreenCK'].getData());
-//        console.log("save");
-//        globalSave();
-//      }
+    editorArray[numEditor].addCommand('CKfullScreenSave', {
+      exec : function(editor, data) {
+        CKEDITOR.instances[displayFullScreenCKfield].setData(CKEDITOR.instances['textFullScreenCK'].getData());
+        saveObject();
+      }
     });
+    editorArray[numEditor].keystrokeHandler.keystrokes[CKEDITOR.CTRL + 83]='CKfullScreenSave';
+    editorArray[numEditor].keystrokeHandler.keystrokes[27]='maximize';
   }
   editorArray[numEditor].on('blur', function(evt) { // Trigger after paster
                                                     // image : notificationShow,
