@@ -868,7 +868,6 @@ function displayFullScreenCK_close() {
   if (typeof CKEDITOR.instances['textFullScreenCK'] != 'undefined' && typeof CKEDITOR.instances[displayFullScreenCKfield] != 'undefined') {
     CKEDITOR.instances[displayFullScreenCKfield].setData(CKEDITOR.instances['textFullScreenCK'].getData());
   }
-  console.log("clear references");
   displayFullScreenCKfield=null;
   whichFullScreen=-1;
 }
