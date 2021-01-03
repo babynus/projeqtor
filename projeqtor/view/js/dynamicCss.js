@@ -28,7 +28,6 @@ function setColorTheming(ref,bis, mode) {
     var displayVal=255-selectedVal;
     var hex=displayVal.toString(16);
     background='#'+hex+hex+hex;
-    console.log(selectedVal+" => "+background);
   }
   if (!mode) mode='hsl'; // Mode = hsl or hsv 
   if (mode=='hsl') {
