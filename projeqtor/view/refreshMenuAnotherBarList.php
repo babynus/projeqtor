@@ -46,7 +46,7 @@ if($defaultMenu == 'menuBarCustom'){
 <table style="width:100%;"><tr>
 <td id="hideMenuLeftMargin" style="width:37px;<?php if($isMenuLeftOpen == 'true')echo 'display:none;';?>"></td>
 <td style="width:120px;">
-  <div style="margin: 0px 5px 145px 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;">
+  <div style="margin: 5px 5px 5px 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;">
   <?php $menuBarTopMode = Parameter::getUserParameter('menuBarTopMode');?>
     <table style="width:100%;height:100%;">
            <tr>
@@ -54,6 +54,16 @@ if($defaultMenu == 'menuBarCustom'){
              <td class="<?php if($menuBarTopMode=='ICONTXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" onclick="saveUserParameter('menuBarTopMode', 'ICONTXT');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToIconTxt');?>"><?php echo formatNewGuiButton('FavorisIconTxt', 22, true);?></td>
              <td class="<?php if($menuBarTopMode=='TXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" onclick="saveUserParameter('menuBarTopMode', 'TXT');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToTxt');?>"><?php echo formatNewGuiButton('FavorisTxt', 22, true);?></td>
            </tr>
+    </table>
+  </div>
+  <div id="removeMenuDiv" dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar']" style="margin: 0px 5px 0px 5px;height: 141px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;visibility: hidden;">
+    <table style="width:100%;height:100%;">
+     <tr>
+       <td align="center" title=""><?php echo i18n('removeMenu');?></td>
+     </tr>
+     <tr>
+       <td class="imageColorNewGui" align="center" title="" style="padding-bottom: 20px;"><?php echo formatNewGuiButton('Remove', 32, false);?></td>
+     </tr>
     </table>
   </div>
 </td>
