@@ -739,6 +739,7 @@ function editFavoriteRow(hide){
 
 function moveMenuBarItem(source, target){
 	if(dojo.byId('isEditFavorite').value != 'true')dojo.byId('anotherBarContainer').style.display = 'none';
+	dojo.byId('removeMenuDiv').style.visibility = 'hidden';
 	var idRow = null;
 	if(target != 'menuBarDndSource'){
 		idRow = target.substr(-1);
@@ -758,6 +759,16 @@ function moveMenuBarItem(source, target){
       load : function(data, args) {
       },
     });
+}
+
+function removeMenuBarItem(target){
+	dojo.byId('removeMenuDiv').style.visibility = 'hidden';
+	dojo.byId('removeMenuDiv').querySelectorAll('.dojoDndItem').forEach(function(node){
+		var name = node.id.substr(7);
+		var type = (name.substr(4) == 'menu')?'menu':'reportDirect';
+		var id = (type=='menu')?'div'+name.charAt(0).toUpperCase()+name.slice(1):'div'+name;
+		addRemoveFavMenuLeft (id, name, 'remove', type);
+	});
 }
 
 function showFavoriteTooltip(menuClass) {

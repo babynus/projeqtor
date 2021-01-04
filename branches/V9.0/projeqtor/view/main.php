@@ -220,7 +220,9 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       }else if (source.id!=target.id) {
     	  if( target.id=='menuBarDndSource' || target.id=='menuBarDndSource1' || target.id=='menuBarDndSource2' || target.id=='menuBarDndSource3' || target.id=='menuBarDndSource4' || target.id=='menuBarDndSource5'){
         	  setTimeout('moveMenuBarItem("'+ source.id +'", "'+ target.id +'")',100); 
-          }else{
+          }else if(target.id=='removeMenuDiv'){
+        	  setTimeout('removeMenuBarItem("'+ target.id +'")',100);
+    	  }else{
         	  return;
           }
       } else if (nodes.length>0 && nodes[0] && target && target.current) {
@@ -249,7 +251,6 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
            } else if( target.id=='menuBarDndSource' || target.id=='menuBarDndSource1' || target.id=='menuBarDndSource2' || target.id=='menuBarDndSource3' || target.id=='menuBarDndSource4' || target.id=='menuBarDndSource5') {
              setTimeout('moveMenuBarItem("'+ source.id +'", "'+ target.id +'")',100); 
            }
-           
         });
         if (moveTasks) {
         //setTimeout('moveTask("' + idFrom + '", "' + idTo + '")',100);
@@ -260,12 +261,16 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     		  dojo.byId('anotherBarContainer').style.display = 'none';
     		  dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-left: 1px solid var(--color-dark);');
     	  }
+    	  dojo.byId('removeMenuDiv').style.visibility = 'hidden';
       }
     });
     dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
        if(source.id == 'menuBarDndSource'){
            dojo.byId('anotherBarContainer').style.display = 'block';
            dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-radius: 5px;border-left: 1px solid var(--color-dark);');
+           dojo.byId('removeMenuDiv').style.visibility = 'visible';
+       }else{
+    	   dojo.byId('removeMenuDiv').style.visibility = 'visible';
        }
     });
     dojo.subscribe("/dnd/cancel", function(){
@@ -276,6 +281,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     	}
 	    dojo.byId('anotherBarContainer').style.display = 'none';
 	    dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-left: 1px solid var(--color-dark);');
+	    dojo.byId('removeMenuDiv').style.visibility = 'hidden';
     });
 
     dndMoveInProgress=false;
@@ -1001,7 +1007,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
         <table style="width:100%;"><tr>
           <td id="hideMenuLeftMargin" style="width:37px;<?php echo ($isMenuLeftOpen=='false')?'display:block;':'display:none;'?>"></td>
           <td style="width:120px;">
-            <div style="margin: 0px 5px 145px 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;">
+            <div style="margin: 5px 5px 5px 5px;height: 43px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;">
             <?php $menuBarTopMode = Parameter::getUserParameter('menuBarTopMode');?>
               <table style="width:100%;height:100%;">
                      <tr>
@@ -1009,6 +1015,16 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
                        <td class="<?php if($menuBarTopMode=='ICONTXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" onclick="saveUserParameter('menuBarTopMode', 'ICONTXT');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToIconTxt');?>"><?php echo formatNewGuiButton('FavorisIconTxt', 22, true);?></td>
                        <td class="<?php if($menuBarTopMode=='TXT'){echo 'imageColorNewGuiSelected';}else{ echo 'imageColorNewGui';}?>" onclick="saveUserParameter('menuBarTopMode', 'TXT');menuNewGuiFilter('menuBarCustom', null);" title="<?php echo i18n('setToTxt');?>"><?php echo formatNewGuiButton('FavorisTxt', 22, true);?></td>
                      </tr>
+              </table>
+            </div>
+            <div id="removeMenuDiv" dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar']" style="margin: 0px 5px 0px 5px;height: 141px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;visibility: hidden;">
+              <table style="width:100%;height:100%;">
+               <tr>
+                 <td align="center" title=""><?php echo i18n('removeMenu');?></td>
+               </tr>
+               <tr>
+                 <td class="imageColorNewGui" align="center" title="" style="padding-bottom: 20px;"><?php echo formatNewGuiButton('Remove', 32, false);?></td>
+               </tr>
               </table>
             </div>
           </td>
