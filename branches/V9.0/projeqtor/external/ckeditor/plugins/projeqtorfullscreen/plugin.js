@@ -7,7 +7,7 @@ CKEDITOR.plugins.add( 'projeqtorfullscreen', {
       }
     });
     editor.ui.addButton( 'ProjeqtorFullscreen', {
-      label: 'Maximise',
+      label: editor.lang.maximize.maximize,
       command: 'projeqtorOpenFullScreen',
       toolbar: 'links,50'
     });
