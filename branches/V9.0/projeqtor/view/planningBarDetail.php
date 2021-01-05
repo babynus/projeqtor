@@ -88,6 +88,7 @@ foreach($wkLst as $wk) {
   $minSurbooking[$wk->idResource]=0;
 }
 
+
 $wk=new PlannedWork();
 $wkLst=$wk->getSqlElementsFromCriteria($crit);
 foreach($wkLst as $wk) {
@@ -119,6 +120,7 @@ foreach($wkLst as $wk) {
   $maxSurbooking[$wk->idResource]=0;
   $minSurbooking[$wk->idResource]=0;
 }
+
 
 $where="idProject in ".Project::getAdminitrativeProjectList();
 $act = new Activity();
@@ -152,11 +154,22 @@ foreach($actWorkList as $wk) {
 			$work[$keyAss]['resource'].=' ('.i18n('max').' = '.htmlDisplayNumericWithoutTrailingZeros($work[$keyAss]['capacity']).' '.i18n('days').')';
 		}
 	}
-	$work[$keyAss][$wk->workDate]=array('work'=>$wk->work,'type'=>'administrative');
-	$maxCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
-	$minCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
-	$maxSurbooking[$wk->idResource]=0;
-	$minSurbooking[$wk->idResource]=0;
+	
+	if(! isset($work[$keyAss][$wk->workDate]) and $wk->work >= $ress->capacity){
+	  $work[$keyAss][$wk->workDate]=array('work'=>$wk->work,'type'=>'administrative');
+	  $maxCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
+	  $minCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
+	  $maxSurbooking[$wk->idResource]=0;
+	  $minSurbooking[$wk->idResource]=0;
+	}else {
+	   $capacity=$work[$keyAss][$wk->workDate]['work']+$wk->work;
+    	$work[$keyAss][$wk->workDate]=array('work'=>$capacity,'type'=>'planned_administrative');
+    	$maxCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
+    	$minCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
+    	$maxSurbooking[$wk->idResource]=0;
+    	$minSurbooking[$wk->idResource]=0;
+	}
+
 }
 
 if ($pe->idPlanningMode=='22') { // RECW
@@ -259,7 +272,13 @@ foreach ($work as $resWork) {
       $tdColor="background-color:#dddddd;";
     }
     echo '<td style="padding:0;width:'.$width.'px;border-right:1px solid #eeeeee;position:relative;'.$tdColor.'">';
-    echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
+    if($resWork[$dt]['type']=='planned_administrative'){
+      $height=$height/2;
+      echo '<div style="display:block;background-color:#3d668f;position:absolute;top:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
+      echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
+    }else{
+      echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
+    }
     if ($heightSurbooked>0) echo '<div style="display:block;background-color:#f4bf42;position:absolute;bottom:'.$height.'px;left:0px;width:100%;height:'.$heightSurbooked.'px;"></div>';
     if ($maxCapacity[$resWork['idResource']]!=$resWork['capacity'] or $minCapacity[$resWork['idResource']]!=$resWork['capacity']) {
       echo '<div style="display:block;background-color:transparent;position:absolute;bottom:0px;left:0px;width:100%;border-top:1px solid grey;height:'.$heightNormal.'px;"></div>';
