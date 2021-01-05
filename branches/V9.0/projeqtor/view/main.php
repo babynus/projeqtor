@@ -1017,13 +1017,13 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
                      </tr>
               </table>
             </div>
-            <div id="removeMenuDiv" dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar']" style="margin: 0px 5px 0px 5px;height: 141px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;visibility: hidden;">
+            <div title="<?php echo i18n('removeMenu');?>" id="removeMenuDiv" dojoType="dojo.dnd.Source" data-dojo-props="accept: ['menuBar']" style="margin: 0px 5px 0px 5px;height: 141px;width: auto;border: 1px solid var(--color-dark);border-radius: 5px;background: white;overflow:hidden;visibility: hidden;">
               <table style="width:100%;height:100%;">
                <tr>
-                 <td align="center" title=""><?php echo i18n('removeMenu');?></td>
+                 <td align="center" style="font-style: italic;font-size: 11px;color: #9c9c9c;"><?php echo i18n('removeMenu');?></td>
                </tr>
                <tr>
-                 <td class="imageColorNewGui" align="center" title="" style="padding-bottom: 20px;"><?php echo formatNewGuiButton('Remove', 32, false);?></td>
+                 <td class="imageColorNewGui" align="center" title="<?php echo i18n('removeMenu');?>" style="padding-bottom: 20px;"><?php echo formatNewGuiButton('Remove', 32, false);?></td>
                </tr>
               </table>
             </div>
