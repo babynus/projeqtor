@@ -223,7 +223,7 @@ class ProviderOrderMain extends SqlElement {
     if(RequestHandler::getBoolean('generateProjectExpenseButton')){
       $canCreate=securityGetAccessRightYesNo('menuProjectExpense', 'create')=="YES";
       if($canCreate){
-        if(trim(RequestHandler::getValue('objectClassName'))!=get_class($this)){
+        if(trim(RequestHandler::getValue('objectClassName'))==get_class($this)){
           $projExpense = new ProjectExpense();
           $lstType=SqlList::getList('ProjectExpenseType');
           reset($lstType);
