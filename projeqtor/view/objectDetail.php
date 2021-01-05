@@ -9186,7 +9186,7 @@ function endBuffering($prevSection, $included) {
       'productversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
       'productversioncomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
       'productversioncompatibility'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
-      'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
+      'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
       'quotationslist'=>array('2'=>'bottom', '3'=>'extra','99'=>'financial'),
       'receivers'=>array('2'=>'bottom', '3'=>'extra','99'=>'treatment'), 
       'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'resources'), 
