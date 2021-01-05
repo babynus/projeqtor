@@ -139,7 +139,7 @@ $mobile=false;
       }
       currentLocale="<?php echo $currentLocale?>";
       saveResolutionToSession();
-      saveBrowserLocaleToSession();
+      //saveBrowserLocaleToSession();
       dijit.Tooltip.defaultPosition=["below","right"];
       dijit.byId('login').focus(); 
       // For IE, focus to login is delayed
