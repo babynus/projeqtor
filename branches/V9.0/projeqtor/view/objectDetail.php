@@ -4883,7 +4883,7 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
   }
 }
 
-function drawStructureFromObject($obj, $refresh=false, $way, $item) {
+function drawStructureFromObject($obj, $refresh=false, $way=null, $item=null) {
   $crit=array();
   if ($way=='composition') {
     $crit['idProduct']=$obj->id;
@@ -5189,7 +5189,7 @@ function drawContextSection($obj, $refresh=false) {
 }
 // END qCazelles - Lang-Context
 
-function drawSubscriptionsList($obj, $refresh=false, $limitToActive) {
+function drawSubscriptionsList($obj, $refresh=false, $limitToActive=null) {
   global $cr, $print, $user, $comboDetail;
   if ($comboDetail) {
     return;
@@ -5476,7 +5476,7 @@ function drawAssetComposition($obj,$refresh=false){
   if (!$refresh) echo '</td></tr>';
 }
 
-function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
+function drawVersionStructureFromObject($obj, $refresh=false, $way=null, $item=null) {
   $crit=array();
   if ($way=='composition') {
     $crit['idProductVersion']=$obj->id;
@@ -5578,7 +5578,7 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
   }
 }
 //gautier #4404
-function drawVersionStructureFromObjectAsset($obj, $refresh=false, $way, $item) {
+function drawVersionStructureFromObjectAsset($obj, $refresh=false, $way=null, $item=null) {
   global $cr, $print, $user, $comboDetail;
   if ($comboDetail) {
     return;

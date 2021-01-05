@@ -556,7 +556,7 @@ class EmployeeManagerMain extends SqlElement {
      * @param type $includeLeaveAdmin
      * @return type
      */
-    public function hasManager($actual=true, $includeLeaveAdmin) {
+    public function hasManager($actual=true, $includeLeaveAdmin=null) {
       $ret = $this->getManager($actual,$includeLeaveAdmin);
       return(empty($ret)?false:true);
       // return (empty($this->getManager($actual,$includeLeaveAdmin))?false:true);

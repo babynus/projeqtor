@@ -2184,7 +2184,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   }
 }
 
-function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false,$autoSendReport,$attachments=false,$erroSize=false,$tempAttach=false) {
+function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false,$autoSendReport=null,$attachments=false,$erroSize=false,$tempAttach=false) {
   scriptLog('sendMail_phpmailer');
   global $logLevel;
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');

@@ -518,7 +518,7 @@ class ImputationLine {
   }
   
   // Get the parent line for hierarchc display purpose
-  private static function getParent($elt, $result, $direct=true, $accessRight) {
+  private static function getParent($elt, $result, $direct=true, $accessRight=null) {
     // scriptLog(" => ImputationLine->getParent($elt->refType#$elt->refId, result[], $direct)");
     $plan=null;
     $user=getSessionUser();
