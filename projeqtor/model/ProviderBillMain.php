@@ -226,32 +226,34 @@ class ProviderBillMain extends SqlElement {
     if(RequestHandler::getBoolean('generateProjectExpenseButton')){
       $canCreate=securityGetAccessRightYesNo('menuProjectExpense', 'create')=="YES";
       if($canCreate){
-        $projExpense = new ProjectExpense();
-        $lstType=SqlList::getList('ProjectExpenseType');
-        reset($lstType);
-        $projExpense->idProjectExpenseType=key($lstType);
-        $lstStatus=SqlList::getList('Status');
-        reset($lstStatus);
-        $projExpense->idStatus=key($lstStatus);
-        $projExpense->name = $this->name;
-        $projExpense->idProject = $this->idProject;
-        $projExpense->taxPct = $this->taxPct;
-        $projExpense->realAmount = $this->totalUntaxedAmount;
-        $projExpense->realTaxAmount = $this->totalTaxAmount;
-        $projExpense->realFullAmount = $this->totalFullAmount;
-        // #3717 : also copy provider; contact, externalReference
-        $projExpense->idProvider = $this->idProvider;
-        $projExpense->idContact = $this->idContact;
-        $projExpense->externalReference = $this->externalReference;
-        // #3717 : end
-        if($this->date){
-          $projExpense->expenseRealDate = $this->date;
-        }else{
-          $projExpense->expenseRealDate = date('Y-m-d');
+        if(trim(RequestHandler::getValue('objectClassName'))==get_class($this)){
+          $projExpense = new ProjectExpense();
+          $lstType=SqlList::getList('ProjectExpenseType');
+          reset($lstType);
+          $projExpense->idProjectExpenseType=key($lstType);
+          $lstStatus=SqlList::getList('Status');
+          reset($lstStatus);
+          $projExpense->idStatus=key($lstStatus);
+          $projExpense->name = $this->name;
+          $projExpense->idProject = $this->idProject;
+          $projExpense->taxPct = $this->taxPct;
+          $projExpense->realAmount = $this->totalUntaxedAmount;
+          $projExpense->realTaxAmount = $this->totalTaxAmount;
+          $projExpense->realFullAmount = $this->totalFullAmount;
+          // #3717 : also copy provider; contact, externalReference
+          $projExpense->idProvider = $this->idProvider;
+          $projExpense->idContact = $this->idContact;
+          $projExpense->externalReference = $this->externalReference;
+          // #3717 : end
+          if($this->date){
+            $projExpense->expenseRealDate = $this->date;
+          }else{
+            $projExpense->expenseRealDate = date('Y-m-d');
+          }
+          $projExpense->save();
+          $this->idProjectExpense = $projExpense->id;
+          //ExpenseDetail::addExpenseDetailFromBillLines(get_class($this),$this->id,$projExpense->id,$projExpense->idProject);
         }
-        $projExpense->save();
-        $this->idProjectExpense = $projExpense->id;
-        //ExpenseDetail::addExpenseDetailFromBillLines(get_class($this),$this->id,$projExpense->id,$projExpense->idProject);
       }
     }
     $result=parent::save();
