@@ -219,14 +219,26 @@ class Affectable extends SqlElement {
   }
   
   public static function showBigImageEmpty($extraStylePosition, $canAdd=true) {
-    $result='<div style="position: absolute;'.$extraStylePosition.';'
-      .'border-radius:40px;width:80px;height:80px;border: 1px solid grey;color: grey;font-size:80%;'
-      .'text-align:center;'; 
-    if ($canAdd) {
-      $result.='cursor: pointer;"  onClick="addAttachment(\'file\');" title="'.i18n('addPhoto').'">';
-      $result.='<br/><br/><br/>'.i18n('addPhoto').'</div>';
-    } else {
-      $result.='" ></div>';
+    $result=null;
+    if(isNewGui()){
+      $result .= '<div style="position: absolute;'.$extraStylePosition.';width:60px;height:60px;border-radius:40px; border: 1px solid grey;color: grey;font-size:80%; text-align:center;cursor: pointer;"';
+      if ($canAdd) {
+        $result .= 'onClick="addAttachment(\'file\');" title="'.i18n('addPhoto').'">';
+        $result .= '<div style="left: 19px;position:relative;top: 20px;height:22px;width: 22px;" class="iconAdd iconSize22 imageColorNewGui">&nbsp;</div>';
+      }else{
+        $result.= '>';
+      }
+      $result.= '</div>';
+    }else{
+      $result='<div style="position: absolute;'.$extraStylePosition.';'
+      		.'border-radius:40px;width:80px;height:80px;border: 1px solid grey;color: grey;font-size:80%;'
+      		.'text-align:center;';
+      if ($canAdd) {
+      	$result.='cursor: pointer;"  onClick="addAttachment(\'file\');" title="'.i18n('addPhoto').'">';
+      	$result.='<br/><br/><br/>'.i18n('addPhoto').'</div>';
+      } else {
+      	$result.='" ></div>';
+      }
     }
     return $result;
   }
@@ -287,7 +299,7 @@ class Affectable extends SqlElement {
         $result.=i18n('colPhoto').'&nbsp;:&nbsp;';
         $canUpdate=securityGetAccessRightYesNo('menu'.$class, 'update') == "YES";
         if ($id==getSessionUser()->id) $canUpdate=true;
-        if ($canUpdate) {
+        if ($canUpdate and !isNewGui()) {
           //KEVIN
          $result.= '<span onClick="addAttachment(\'file\');"title="' . i18n('addPhoto') .'" >';
          $result.= formatSmallButton('Add');
@@ -296,9 +308,6 @@ class Affectable extends SqlElement {
         $result.='</span>';
         $extraStyle='top:30px;'.$horizontal;
         $result.=Affectable::showBigImageEmpty($extraStyle,$canUpdate);
-        //$result.='</td>';
-        //$result.='</tr>';
-        
       }
     }
     return $result;
