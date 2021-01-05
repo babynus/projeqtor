@@ -43,11 +43,13 @@ ProjeQtOr interface is divided into several areas.
 
 .. rubric:: Area separation
 
+The splitters allow resizing areas in the interface.
+
+
 .. image:: /images/GUI/GUI_SCR_Splitters.png
    :alt: Windows splitters
    :align: center   
-   
-The splitters allow resizing areas in the interface.
+
 
 The green splitter allows to resize the areas **Menu and Documents window** and **Message and Link window**.
 
@@ -2156,7 +2158,7 @@ Graphical User Interface 9.0
 
 ProjeQtOr interface is divided into several areas.
 
-.. figure:: /images/GUI9.0/GUI_SCR_Overview9.0.png
+.. figure:: /images/GUI9.0/GUI_SCR_Overview.png
    :alt: Overview
    :align: center
    
@@ -2166,23 +2168,23 @@ ProjeQtOr interface is divided into several areas.
 
    |one| :ref:`topbar-v9`
    
-   |two| :ref:`info-bar9.0<Info Bar>` 
+   |two| :ref:`infosbar-v9` 
    
-   |three| :ref:`menu9.0<Menu>`
+   |three| :ref:`custommenu-v9`
    
-   |four| :ref:`menu-secondary9.0<Secondary menu>`
+   |four| :ref:`Menu<menu-v9>`
    
-   |five| :ref:`list-area9.0<List area>` 
+   |five| :ref:`Secondary menu<secondary-menu-v9>` 
    
-   |six| :ref:`detail-area9.0<Details area>` 
+   |six| :ref:`List Area<list-window>` 
    
-   |seven| :ref:`activity-stream9.0<Activity Stream>`
+   |seven| :ref:`Details area<detail-window>`
    
-
+   |eight| :ref:`Activity Stream<activity-stream>`
 
 .. note:: Area separation
 
-   .. figure:: /images/GUI9.0/GUI_SCR_Splitters9.0.png
+   .. figure:: /images/GUI9.0/GUI_SCR_Splitters.png
       :scale: 15 %
       :alt: Windows splitters
       :align: center   
@@ -2200,7 +2202,7 @@ ProjeQtOr interface is divided into several areas.
 Top bar
 -------
 
-.. figure:: /images/GUI9.0/GUI_ZONE_TopBar9.0.png
+.. figure:: /images/GUI9.0/GUI_ZONE_TopBar.png
    :alt: Top bar
    :align: center
 
@@ -2212,12 +2214,9 @@ Top bar
    
    |three|  :ref:`Project selector<project-selector9>` 
    
-   |four| :ref:`Refresh<refresh-topbar9>` 
+   |four| :ref:`Instance name<name-topbar>` 
    
-   
-   
-   
-
+ 
 
 
 
@@ -2227,7 +2226,11 @@ Top bar
 
 The navigation buttons |buttonIconBackNavigation9| |buttonIconForwardNavigation9| give access to previous and next pages in the history.
 
-.. _buttons-new-tab9:
+
+
+
+
+.. _buttons-newtab9:
 
 .. rubric:: |twoBLC| Button New tab 
 
@@ -2237,12 +2240,11 @@ The new tab button |newtab9| allows to open a new tab within the same session.
 
    
 .. index:: Project (Selector)
-
 .. _project-selector9:
 
 .. rubric:: |threeBLC| Project selector
 
-.. figure:: /images/GUI9.0/GUI_ZONE_ProjectSelector9.0.png
+.. figure:: /images/GUI9.0/GUI_ZONE_ProjectSelector.png
    :alt: Project Selector
    :align: center
    
@@ -2261,42 +2263,653 @@ Definition of the "default" project for new elements.
    See: :ref:`User parameters - section automation<UP-automation>`
 
 
-.. figure:: /images/GUI9.0/GUI_ZONE_SelectorProject9.0.png
-   :alt: Project Selector Multi selection
+
+
+.. compound:: Project selector parameters
+
+   Click on |buttonIconParameter9| to display the project selector parameters dialog box, you can select :
    
-You can choose to display multiple projects by checking the corresponding boxes.
-
-
-.. rubric:: Project selector parameters
-
-Click on |buttonIconParameter9| to display the project selector parameters dialog box, you can select :
-
+   
+   .. figure:: /images/GUI9.0/GUI_BOX_ProjectSelect-Param.png
+      :alt: Dialog box - Project selector parameters
+      :align: center
+      :scale: 60
+      
+      Dialog box - Project selector parameters
+   
    * View closed projects and handled projects.
    * Change the project list display mode.
    * Refresh the list.
 
-.. figure:: /images/GUI9.0/GUI_BOX_ProjectSelect-Param9.0.png
-   :alt: Dialog box - Project selector parameters
-   :align: center
-   :scale: 60
 
-
-.. rubric:: Show / hide
-
-Choose which types of projects to display from the project selector list.
-
- .. compound:: show closed items
- 
-   This option allows you to enter the archive mode of the project selector.
-
-   Closed projects will then appear in the selector list.
+    .. compound:: Show / hide
    
-   When archive mode is activated then icon |archive9| is displayed in the top bar. Click on it to stop the process.
-
-   .. image:: /images/GUI9.0/GUI_ZONE_ModeArchive.png
+     Choose which types of projects to display from the project selector list.
+   
+      .. compound:: show closed items
+    
+        This option allows you to enter the archive mode of the project selector.
+   
+        Closed projects will then appear in the selector list.
+      
+        When archive mode is activated then icon |archive9| is displayed in the top bar. Click on it to stop the process.
+   
+        .. image:: /images/GUI9.0/GUI_ZONE_ModeArchive.png
+     
+        For them to appear in the list box you must activate the check box "closed" in this same area.
+   
+      .. compound:: Display the handled projects
+    
+        This option allows to display only in the list of the project selector, the projects with the macro state :term:`handled`.
+        
+        
+        
+    .. compound:: Project list display mode
+   
+     ProjeQtOr offers the possibility to display the list of projects in different ways.
   
-   For them to appear in the list box you must activate the check box "closed" in this same area.
+  
+      .. compound:: Standard reflecting WBS structure
+      
+         * List of project and sub-project are displayed according to WBS structure.
+         * Only multi selection mode
+         * You can choose to display multiple projects by checking the corresponding boxes.
+        
+   
+         .. figure:: /images/GUI9.0/GUI_ZONE_ProjectSelect-StandardMode.png
+            :alt: Example - Project list display mode standard
+            :align: center
+            
+            Project list display mode standard
+   
+   
+      .. compound:: Filtering select with autocomplete
+      
+         * List of project and sub-project are displayed according to entered text.
+         * Search criteria works in a "starts with" mode
+         * Autocompletion is active
+   
+         .. figure:: /images/GUI9.0/GUI_ZONE_ProjectSelect-AutoCompMode.png
+            :alt: Example - Filtering select (with autocomplete)
+            :align: center
+            
+            Filtering select with autocomplete
+   
+      .. compound:: Filtering select with search
+      
+         * List of project and sub-project are displayed according to search criteria.
+         * Search criteria works in a "contains" mode
+         * Autocompletion is **not** active
+   
+         .. figure:: /images/GUI9.0/GUI_ZONE_ProjectSelect-SearchMode.png
+            :alt: Example - Filtering select (with search)
+            :align: center
+            
+            Filtering select with search
 
- .. compound:: Display the handled projects
+
+
+
+.. compound:: Selector of the current item
+
+   * Click on the button |iconProject9| to select current project in the project selector. 
+   * Click once, from any element to display in the selector the project linked to the element.
+   * Double click to display all projects again
+
+.. compound:: Project selector search
+
+   Click on |buttonIconSearch9| to search projects and subprojects from any screen with the same search functions as on the projects screen
+
+   .. figure:: /images/GUI9.0/GUI_BOX_ProjectSelectorSearch.png
+      :alt: Project selector search mode
+      
+      Project selector search window
+         
+         
+     
+.. _name-topbar:
+
+.. rubric:: |fourBLC| Instance name
+
+you can rename the name of the ProjeQtOr instance via the global parameters in the View tab.
+
+See: :ref:`display`
+
+
+
+
+
+.. _infosbar-v9:
+
+Infos bar
+---------
+
+.. figure:: /images/GUI9.0/GUI_ZONE_InfosBar.png
+   :alt: Top bar
+   :align: center
+
+.. topic:: Interface areas:
+
+   |one| :ref:`CRON button<cron-button9>` 
+   
+   |two| :ref:`Version button<version-button9>` 
+   
+   |three| :ref:`About menu<about-menu>` 
+   
+   |four| :ref:`Display layout<menu-display>` 
+   
+   |five| :ref:`Session menu<menu-session>`
+
+
+
+
+
+.. _cron-button9:
+
+.. rubric:: |oneBLC| CRON button
+
+The CRON activation button allows you to quickly see if your CRON is launched or not.
+
+The button is only visible for Administrator profile.
+
+|CronRunning| the CRON is running
+
+|CronPause| In request for closure. The next refresh turns it red.
+
+|CronStopped| the CRON is stopped
+
+Click on the button to start or stop CRON in the same way as on the Administration page.
+
+See: :ref:`background-task`
+
+
+.. _version-button9:
+
+.. rubric:: |twoBLC| Version button
+
+Displays the version of ProjeQtOr installed
+
+Click on the button to access the site of ProjeQtOr.org
+
+
+
+.. _about-menu:
+
+.. rubric:: |threeBLC| About menu
+
+
+This menu allows you to have access to real-time information with a notification system for news.
+
+.. figure:: /images/GUI9.0/GUI_BOX_AboutMenu.png
+   :alt: About menu 
+   
+   About menu
+
+
+The button |reportbug| sends you to the forum of the ProjeQtOr site in order to post the possible anomaly.
+
+ .. compound:: Links
  
-   This option allows to display only in the list of the project selector, the projects with the macro state :term:`handled`. 
+   The links indicated allow you to display: 
+   
+   * the software manual, 
+   * the manual page concerning the keyboard shortcuts taken into account in ProjeQtOr, 
+   * the version information on the external libraries used in ProjeQtOr.
+
+
+ .. compound:: News
+ 
+   Find all the information about ProjeQtOr in real time.
+   
+   Hover over the desired information with the mouse to preview it.
+   
+   Click to view full information.
+   
+   A navigation system allows you to consult all the information.
+   
+   
+ .. compound:: Access
+
+   Access ProjeQtOr's plugin store and forum summary with just one click.
+   
+   
+   
+   
+   
+   
+   
+   
+.. _menu-display:
+
+.. rubric:: |fourBLC| Screen layout
+
+The layout of the screens allows you to choose how you want to display the ProjeQtOr interface
+
+The arrangement not chosen appears in gray
+
+.. figure:: /images/GUI9.0/GUI_ZONE_ScreenLayout.png
+   :alt: Screen layout 
+   
+   Screen layout
+
+Many modes are available!
+
+
+      .. compound:: |switchmode9| switched mode 
+   
+        Allows to enable or disable switched mode that allows to switch between list and detail windows. Window selected is displayed in "full screen" mode.
+         
+        Hidden window are replaced by a gray bar. Click on the gray bar to switch between windows. 
+   
+      .. compound:: |horizontalLayout9| Horizontal mode - |verticalLayout9| vertical layout
+   
+        The horizontal mode corresponds to the historical presentation of ProjeQtOr. 
+    
+        List area at the top of the screen and the detail area below.
+    
+        Vertical mode allows you to have the list box on the left of the screen and the details box on the right.
+         
+      .. compound:: |LayoutList9| Mode List
+   
+        Column mode corresponds to the historical presentation of ProjeQtOr, where the different parts making up the details area are displayed in one, two or three columns
+   
+      .. compound:: |LayoutTab9| Mode Tab
+   
+        The sections present in the columns are dispatched under tabs with the tab mode.
+   
+      
+      .. compound:: |ActivityStream9| Show/Hide Activity Stream
+   
+        Show or hide globally (on all screens), the notes area for each element.
+   
+        To display notes only on a specific screen, choose |ActivityStream9| from the details area toolbar.
+   
+        See: :ref:`detail-window-button`
+   
+      .. compound:: |FullScreen9| Full screen mode
+   
+        With this mode, you make your browser invisible, the menus, navigation bar, buttons ... are hidden. You can enjoy your ProjeQtOr instance in full screen mode.
+
+        
+        
+        
+.. _menu-session:
+
+.. rubric:: |fiveBLC| Session menu
+
+.. figure:: /images/GUI9.0/GUI_ZONE_SessionMenu.png
+   :alt: Session menu 
+   
+   Session menu
+
+The connection window offers some settings and information at user level.
+
+ .. compound:: Profile
+ 
+   The profile section tells you:
+
+   - The common name in the software
+   - The connection identifier
+   - The profile assigned in the software with this account
+   - The organization to which the user belongs
+ 
+   You can assign a profile picture in the :ref:`user settings<photo>`.
+   
+   
+ .. compound:: interface Parameters
+ 
+   The configuration section allows you to choose and modify at your leisure:
+   
+        - the language of your personal session
+        - the home page which will be displayed when you log in
+        - the colors of your personal interface
+        - Your password
+   
+   
+   You can access full user settings from this window.
+   
+   And it is in this window that you end your session using the disconnect button.
+
+   These changes only impact your session and will apply over the global settings defined by your administrator.
+
+
+      .. compound:: Interface colors
+    
+         You choose two colors which will be declined thanks to subtle colorimetric games throughout the software.
+   
+         The main color corresponds to the color that will be displayed in the background of the menus, title and separation elements.
+         
+         The secondary color is applied for everything related to selection, navigation or position.
+        
+        
+            .. compound:: Color discs
+         
+          
+               These discs are shortcuts for applying a color scheme. Basic four color discs are available including one with the original colors of ProjeQtOr.
+      
+               The other three discs are suggestions on our part.
+               You can display your colors by saving them in the global settings on the Display tab.
+               The next time you reconnect, the last color disc will have your colors.
+    
+
+
+
+
+.. _custommenu-v9:
+
+Custom Menu
+-----------
+
+.. figure:: /images/GUI9.0/GUI_ZONE_FavorisBar.png
+   :alt: bookmarks bar
+   :align: center
+   
+   Bookmarks Bar
+
+.. topic:: Interface areas:
+
+   |one| :ref:`New element<newelement>`
+   
+   |two| :ref:`Bookmarks<bookmarks>` 
+   
+   |three| :ref:`Recents<recentbar>` 
+   
+
+
+
+.. _newelement:
+
+.. rubric:: |oneBLC| New element
+
+
+This button allows you to quickly create a new element from any screen. 
+
+.. figure:: /images/GUI9.0/GUI_BOX_NewElement.png
+   :alt: Create a new element 
+   
+   Create a new element   
+   
+You can create:
+
+* a project
+* a resource
+* an activity
+* a ticket
+* a meeting
+* a milestone
+
+
+The switch button "create on pop-up" allows you to define how to initiate the creation.
+
+If the button is activated, a pop-up opens over the current screen on the screen of the element you want to create.
+   
+      
+  .. figure:: /images/GUI9.0/GUI_BOX_PopUpCreateElement.png
+   :alt: Create a new element 
+   
+   Create a new element 
+
+
+
+If the button is disabled, you go directly to the screen of the element you want to create.   
+
+
+
+
+
+.. index:: Bookmarks
+
+.. _bookmarks:
+
+.. rubric:: |twoBLC| Bookmarks
+
+you can mark certain screens and organize them in the favorites bars to create a personalized menu.
+
+You can create up to 5 favorite bars.
+
+Click on |iconFavoris| to display in the display zone the list of screens of the elements that you have put in favorites.
+
+
+.. figure:: /images/GUI9.0/GUI_ZONE_DisplayFavoris.png
+   :alt: Display bookmarks 
+   
+   Display bookmarks
+   
+Right clicking on the display area allows you to display and organize the 5 favorite bars and choose how to display them.
+   
+   
+    .. compound:: |favoristxt| Bookmarks text
+    
+      You view bookmarks in text mode only
+      
+      .. figure:: /images/GUI9.0/GUI_ZONE_FavorisTXT.png
+      
+         
+    .. compound:: |favorisimg| Bookmarks icon
+     
+      You display bookmarks in icon mode only
+      
+      .. figure:: /images/GUI9.0/GUI_ZONE_FavorisIMG.png
+      
+      
+    .. compound:: |favoristxtimg| Bookmarks icon and text  
+      
+      You display bookmarks with icon and text  
+      
+      .. figure:: /images/GUI9.0/GUI_ZONE_FavorisIMGTXT.png
+
+      
+The number displayed corresponds to the number of the favorites bar on which you are.
+
+To change bookmarks bar, use your mouse wheel when you are positioned on the bar.
+
+Or click on the up and down navigation arrows at the right end of the bar.       
+      
+      
+ .. compound:: Add, Organize and remove bookmarks
+
+   To add a bookmarks, click on the star to the right of each menu screen
+   
+   .. image:: /images/GUI9.0/GUI_ZONE_StarBookmark.png
+   
+   The star is filled with the secondary color of your interface once added to the favorites bar  
+   
+   .. image:: /images/GUI9.0/GUI_ZONE_StarBookmarkFiled.png
+   
+   To organize your favorites, right click on the bar or click on |iconEdit| to display your 5 bars, then click and drag and drop the screens to the desired bars. 
+ 
+   .. image:: /images/GUI9.0/GUI_ZONE_DragDrop.png
+ 
+   A green bar tells you that you can drop the favorites from your screen, a red bar tells you that it is impossible.
+
+   To remove a bookmark, right click on the bookmark and clik on the button remove from the custom menu bar
+   
+   .. image:: /images/GUI9.0/GUI_BOX_RemoveBookmark.png
+   
+   
+       
+.. _recentbar:
+
+.. rubric:: |threeBLC| Recents bar
+
+The recent screens bar allows you to keep in memory the screens you have browsed since the connection.
+It acts like a kind of limited history.
+
+
+.. figure:: /images/GUI9.0/GUI_ZONE_Recent.png
+   :alt: Recent bar
+   
+   Recent bar
+
+Indeed, the number of recent screens depends on your screen resolution.
+for example: between 12 and 16 screens displayed for a 2K screen and between 6 and 10 for an HD screen.
+
+
+
+
+
+
+
+
+.. _menu-v9:
+
+Menu
+----
+
+.. figure:: /images/GUI9.0/GUI_ZONE_Menu.png
+   :alt: Menu
+   :align: center
+   
+   Menu
+   
+.. topic:: Interface areas:
+
+   |one| :ref:`Main menu<mainmenu>`
+   
+   |two| :ref:`Section indication <section-indication>` 
+   
+   |three| :ref:`Breadcrumb<breadcrumb>` 
+   
+   |four| :ref:`Show / Hide menu<showmenu>` 
+   
+   |five| :ref:`Search menu<search-menu>` 
+   
+      
+.. _mainmenu:
+
+.. rubric:: |oneBLC| Main menu
+
+The menu takes up the overall scope of project management.
+Each section represents a part of this perimeter.
+
+The menu is designed to highlight the main screens in each section. These are often the screens most used by project management professionals.
+
+The secondary screens appear under sub-menus and the navigation is deeper.
+   
+   
+   
+.. _section-indication:
+
+.. rubric:: |twoBLC| Section indication  
+
+When browsing, each time you select a section or subsection, the icon corresponding to the latter is displayed in this area.
+
+
+.. _breadcrumb:
+
+.. rubric:: |threeBLC| Breadcrumb  
+
+Breadcrumb generally refers to the breadcrumb trail of website navigation. 
+
+This item tells the user where they are in the menu hierarchy.
+
+In ProjeQtOr, the Breadcrum shows you the previous section of the one where you are.
+
+By clicking on the breadcrumb, you return to the mother section, until you reach the reception. 
+
+
+
+.. _showmenu:
+
+.. rubric:: |fourBLC| Show / Hide menu 
+
+Click on |HideMenu| to hide the menu
+
+Click on |ShowMenu| to bring up the menu 
+
+.. _search-menu:
+
+.. rubric:: |fiveBLC| Search menu    
+
+You have the possibility to do a search directly in the menu.
+
+The search takes into account the name of the element screens, but also certain tags, which do not know how to be enriched.
+
+.. figure:: /images/GUI9.0/GUI_ZONE_SearchTag.png
+   :alt: Search with tags
+   
+   Search performed with the tag GANTT
+   
+   
+The search also allows you to display the reports related to the keywords entered in a separate section.
+
+When you click on a screen resulting from your search, the screen is displayed but you do not change the section in the menu, which allows you to return at any time to the screens of the section where you were.
+
+To return to your section after a search, click the reset icon in the search field.
+
+
+
+
+
+
+
+
+.. _secondary-menu-v9:
+
+Secondary Menu
+--------------
+
+The secondary menu can be seen as the right hand side of the menu.
+
+It allows you to display a lot of information about your project, your navigation or your organization.
+
+.. figure:: /images/GUI9.0/GUI_ZONE_SecondaryMenu.png
+   :alt: Menu
+   :align: center
+   
+   Menu
+   
+.. topic:: Interface areas:
+
+   |one| :ref:`Parameters<secondarymenu-parameters>`
+   
+   |two| :ref:`Links<secondarymenu-links>` 
+   
+   |three| :ref:`Repertory and Document<secondarymenu-docs>`
+   
+   |four| :ref:`Console<secondarymenu-console>` 
+      
+   |five| :ref:`Notifications<secondarymenu-notifications>` 
+   
+
+
+.. _secondarymenu-parameters:
+
+.. rubric:: |oneBLC| Parameters
+
+
+.. _secondarymenu-links:
+
+.. rubric:: |twoBLC| Links
+
+
+.. _secondarymenu-docs:
+
+.. rubric:: |threeBLC| Repertory and Document
+
+
+.. _secondarymenu-console:
+
+.. rubric:: |fourBLC| Console
+
+
+.. _secondarymenu-notifications:
+
+.. rubric:: |fiveBLC| Notifications   
+
+
+.. _list-window-v9:
+
+List Area
+---------
+
+New List Area under construction
+
+
+.. _details-window-v9:
+
+Details Area
+------------
+
+New details Area under construction
+
