@@ -206,7 +206,11 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
     $page=substr($page, $pos+1);
   }
   scriptLog("Page=".$page);
-  
+  if ($page=='passwordChange.php' and isset($lockPassword) and $lockPassword==true) {
+    header('Status: 301 Moved Permanently', false, 301);
+    header('Location: main.php');
+    exit;
+  }
   // SSO Athentication using SAML2
   //damian #3980
   Parameter::refreshParameters();
