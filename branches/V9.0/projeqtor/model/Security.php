@@ -308,6 +308,9 @@ class Security
           }
         } else {
           $check=Security::checkDisplayMenuForUser(substr($menuName,4),false);
+          if (!$check and $menuName=='menuAffectable') $check=Security::checkDisplayMenuForUser('User',false);
+          if (!$check and $menuName=='menuAffectable') $check=Security::checkDisplayMenuForUser('Resource',false);
+          if (!$check and $menuName=='menuAffectable') $check=Security::checkDisplayMenuForUser('Contact',false);
           if ( ! $check ) {
             if ($traceHack) traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
             else return false;
