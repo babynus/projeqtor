@@ -74,7 +74,7 @@ if ($displayMode!='standard' and $nbProj>1) {
 }
 ?>
 <?php if ($displayMode=='standard') {?>
-<span maxsize="160px" style="position: absolute; left:0px; top:0px; height: 20px; width: 241px; color:#202020;" 
+<span maxsize="160px" style="position: absolute; left:0px; top:px; height: 20px; width: 241px; color:#202020;" 
   dojoType="dijit.form.DropDownButton"
   id="selectedProject" jsId="selectedProject" name="selectedProject" showlabel="true" class="">
   <span style="width:220px; text-align: left;">

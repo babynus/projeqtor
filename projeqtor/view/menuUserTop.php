@@ -249,6 +249,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
     </td>
   </tr>
   <?php if(!isNewGui()){?>
+  <?php if (! isset($lockPassword) or $lockPassword==false) {?>
   <tr style="height:40px">
     <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"></td>
       <td>
@@ -264,6 +265,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       </div>
     </td>
   </tr>
+  <?php }?>
   <tr style="height:40px">
     <td style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"></td>
       <td>
@@ -313,6 +315,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
   } // End of if ($showUserParameters)
   if(isNewGui()){?>
 <tr style="height:10px"></tr>
+<?php if (! isset($lockPassword) or $lockPassword==false) {?>
 <tr style="height:40px">
     <td colspan="2" style="padding-left: 50px;">
       <div class="pseudoButton"  title="<?php echo i18n('changePassword');?>" onClick="requestPasswordChange();">
@@ -327,6 +330,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       </div>
     </td>
   </tr>
+<?php }?>
 <?php if ($showUserParameters) { // Do not give access to user parameters if locked ?>
   <tr style="height:40px">
     <td colspan="2" style="white-space:nowrap;padding-left: 50px;">
