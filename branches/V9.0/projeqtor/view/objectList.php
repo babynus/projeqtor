@@ -102,6 +102,7 @@ if ($comboDetail) {
   $screenWidth=getSessionValue('screenWidth',$displayWidthList);
   $displayWidthList=round($screenWidth*0.55,0)+150;
 }
+if(!isNewGui()){
 if ($displayWidthList<1560 and $objectClass == 'Budget' ) {
   $hideClientSearch=true;
 }
@@ -128,7 +129,7 @@ if ($displayWidthList<1400) {
     }
   }
 }
-
+}
 $extrahiddenFields=$obj->getExtraHiddenFields('*','*');
 if ($obj->isAttributeSetToField('idClient','hidden') or in_array('idClient',$extrahiddenFields)) $hideClientSearch=true;
 if ($obj->isAttributeSetToField('idBudget','hidden') or in_array('idBudget',$extrahiddenFields)) $hideParentBudgetSearch=true;
