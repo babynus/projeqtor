@@ -17,9 +17,23 @@
 
 
 
+.. |iconFavoris| image:: images/v9/iconFavoris.png
+	:alt: Bookmarks
+	:scale: 15
 
-
-
+.. |favoristxt| image:: images/v9/iconFavorisTxt.png
+	:alt: Bookmarks text
+	:scale: 15
+	
+.. |favorisimg| image:: images/v9/iconFavorisIcon.png
+	:alt: Bookmarks icon
+	:scale: 15
+	
+.. |favoristxtimg| image:: images/v9/iconFavorisIconTxt.png
+	:alt: Bookmarks icon and text
+	:scale: 15	
+	
+		
 
 .. |unlocked| image:: images/unlocked.png
    :alt: Unlocked
@@ -81,7 +95,8 @@
 .. |CronPause| image:: images/iconCronPause.png
 	:alt: icon Cron Demand
 
-
+.. |reportbug| image:: images/v9/reportBug_button.png
+	:alt: icon Cron Demand
 
 	
 .. |ListApprovers| image:: images/iconButtonListApprover.png
@@ -91,31 +106,83 @@
 	
 .. |switchmode| image:: images/iconChangeLayout.png
 	:alt: Switch mode	
-	
+
+.. |switchmode9| image:: images/v9/iconChangeLayout.png
+	:alt: Switch mode
+	:scale: 15
+		
+		
+		
 .. |horizontalLayout| image:: images/horizontalLayout.png	
 	:alt: Mode horizontal
 	
+.. |horizontalLayout9| image:: images/v9/horizontalLayout.png	
+	:alt: Mode horizontal	
+	:scale: 15
+	
+	
+	
 .. |verticalLayout| image:: images/verticalLayout.png	
 	:alt: Mode vertical		
-	
+
+.. |verticalLayout9| image:: images/v9/verticalLayout.png	
+	:alt: Mode vertical		
+	:scale: 15		
+		
+		
 .. |LayoutList| image:: images/iconLayoutList.png	
 	:alt: Layout list	
+	
+.. |LayoutList9| image:: images/v9/iconLayoutList.png	
+	:alt: Layout list	
+	:scale: 15
+
+
 
 .. |LayoutTab| image:: images/iconLayoutTab.png	
 	:alt: Layout tab	
-		
+
+.. |LayoutTab9| image:: images/v9/iconLayoutTab.png	
+	:alt: Layout tab
+	:scale: 15
+	
+	
+	
+			
 .. |HideLeft| image:: images/iconHideStreamLeft.png	
 	:alt: Hide stream left	
-
+	
 .. |HideTop| image:: images/iconHideStreamTop.png	
 	:alt: Hide stream top	
 
+
+
 .. |ActivityStream| image:: images/iconActivityStream.png	
 	:alt: Show Activity Stream	
+	
+.. |ActivityStream9| image:: images/v9/iconActivityStream.png	
+	:alt: Show Activity Stream	
+	:scale: 15
+	
+	
 
 .. |NoActivityStream| image:: images/iconActivityStreamClose.png
 	:alt: Hide Activity Stream	
 	
+.. |NoActivityStream9| image:: images/v9/iconActivityStreamClose.png
+	:alt: Hide Activity Stream	
+	
+		
+.. |FullScreen| image:: images/iconFullScreen.png	
+	:alt: Full screen	
+	
+.. |FullScreen9| image:: images/v9/iconFullScreen.png	
+	:alt: Full screen
+	:scale: 15	
+	
+		
+			
+		
 .. |LeftActivityStream| image:: images/changeActivityStream.png	
 	:alt: Left zone Activity Stream	
 
@@ -144,8 +211,7 @@
 .. |PrivateStream| image:: images/PrivateStream.png	
 	:alt: Private note	
 				
-.. |FullScreen| image:: images/iconFullScreen.png	
-	:alt: Full screen	
+
 	
 		
 	
@@ -287,6 +353,28 @@
 .. |buttonEdit| image:: images/smallButtonEdit.png
    :alt: Button edit
 
+.. |iconEdit| image:: images/v9/iconEdit.png
+   :alt: Button edit
+   :scale: 15
+
+
+
+
+
+
+.. |HideMenu| image:: images/v9/iconHideMenuLeft.png
+   :alt: Hide menu
+   :scale: 15
+   
+.. |ShowMenu| image:: images/v9/iconHideMenuRight.png
+   :alt: Show menu
+   :scale: 15   
+
+
+
+
+
+
 .. |iconGoto| image:: images/iconGoto.png
    :alt: Button icon goto 
 
@@ -312,6 +400,11 @@
    
 .. |iconProject16| image:: images/iconProject16.png
    :alt: Icon Project
+
+.. |iconProject9| image:: images/v9/iconProject.png
+   :alt: Button icon project 
+   :scale: 15
+
 
 .. |iconReplan16| image:: images/iconReplan16.png
    :alt: Replanning schedule icon
@@ -369,6 +462,10 @@
 
 .. |buttonIconSearch| image:: images/buttonIconSearch.png
    :alt: button icon search
+
+.. |buttonIconSearch9| image:: images/v9/iconSearch.png
+   :alt: button icon search
+   :scale: 15
    
 .. |view| image:: images/iconFollowup16.png
    :alt: button icon Follow up
