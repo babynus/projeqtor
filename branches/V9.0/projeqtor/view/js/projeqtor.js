@@ -819,7 +819,7 @@ function changeBrowserLocaleForDates(newFormat) {
     dojo.byId("p1value").value = "userParameter";
     dojo.byId("directAccessForm").submit();
   };
-  saveDataToSession('browserLocaleDateFormat', newFormat,null, callBack);
+  saveDataToSession('browserLocaleDateFormat', newFormat,true, callBack);
 }
 //gautier
 function changeBrowserLocaleTimeFormat(newFormat) {
@@ -835,7 +835,7 @@ function changeBrowserLocaleTimeFormat(newFormat) {
   dojo.byId("p1value").value = "userParameter";
   dojo.byId("directAccessForm").submit();
   };
-  saveDataToSession('browserLocaleTimeFormat', newFormat,null, callBack);
+  saveDataToSession('browserLocaleTimeFormat', newFormat,true, callBack);
 }
 
 function requestPasswordChange() {
