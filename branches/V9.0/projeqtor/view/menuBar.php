@@ -232,7 +232,7 @@
         </button>
       </a>
           
-      <span class="titleProject" style="position: relative; left:20px; top:-6px; text-align:right;">
+      <span class="titleProject" style="position: relative; left:20px; top:-<?php echo (isNewGui())?8:6;?>px; text-align:right;">
         &nbsp;<?php echo (i18n("projectSelector"));?>&nbsp;:&nbsp;
       </span>
       <span style="display:inline-block;width:250px; position:relative;left : 10px; top:-<?php echo (isNewGui())?9:6;?>px" title="<?php echo i18n("projectSelectorHelp");?>">

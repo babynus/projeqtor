@@ -206,3 +206,5 @@ a > img {
 	max-height: 1080px;
 	margin:0 auto;
 }
+body ::-webkit-scrollbar {height: 8px; width: 8px; background: var(--color-light); border-radius: 10px;}
+body ::-webkit-scrollbar-thumb {background: var(--color-medium); border-radius: 10px;}
