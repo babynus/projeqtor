@@ -272,7 +272,7 @@ foreach ($work as $resWork) {
       $tdColor="background-color:#dddddd;";
     }
     echo '<td style="padding:0;width:'.$width.'px;border-right:1px solid #eeeeee;position:relative;'.$tdColor.'">';
-    if($resWork[$dt]['type']=='planned_administrative'){
+    if(isset($resWork[$dt]) and $resWork[$dt]['type']=='planned_administrative'){
       $height=$height/2;
       echo '<div style="display:block;background-color:#3d668f;position:absolute;top:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
       echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
