@@ -804,7 +804,7 @@ function activityStreamDisplayHist ($hist,$origin){
         }else{
           $gotoResource=' ';
         }
-        $resourceName='<span '.$gotoResource.' >'.$resource->name.'</span>';
+        $resourceName='<span '.$gotoResource.' class="'.((isNewGui())?'classLinkName':'').'">'.$resource->name.'</span>';
       }
     }else{
       return;
