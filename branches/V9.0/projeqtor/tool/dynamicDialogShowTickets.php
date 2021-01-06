@@ -71,7 +71,7 @@
     if ($canGoto) {
       $goto=' onClick="dijit.byId(\'dialogShowTickets\').hide();gotoElement(' . "'" . $class . "','" . htmlEncode($ticket->id) . "'" . ');" style="cursor: pointer;" ';
     }
-    echo '<td class="linkData" ' . $goto . ' style="position:relative;width:35%">';
+    echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" ' . $goto . ' style="position:relative;width:35%">';
     echo htmlEncode($ticket->name);
     echo formatUserThumb($userId, $userName, 'Creator');
     echo formatDateThumb($ticket->creationDateTime, null);

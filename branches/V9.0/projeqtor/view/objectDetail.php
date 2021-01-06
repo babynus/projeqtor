@@ -3541,7 +3541,7 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
     }
     echo '</td><td width="30%" xclass="noteData" valign="top" style="xwhite-space:nowrap;padding:0px 5px;max-width:200px;cursor:pointer;" '.$gotoE.'>';
     echo i18n($refType).'&nbsp;#'.$refId.'';
-    echo '</td><td xclass="noteData" valign="top" '.$gotoE.' style="height: 15px;cursor:pointer">';
+    echo '</td><td class="noteData '.((isNewGui())?'classLinkName':'').'" valign="top" '.$gotoE.' style="height: 15px;cursor:pointer">';
     $orig=new $refType($refId, true);
     echo htmlEncode($orig->name);
     echo '</td></tr></table>';
@@ -3999,7 +3999,7 @@ function drawObjectLinkedByIdToObject($obj, $objLinkedByIdObject='', $refresh=fa
       }
       // END ADD BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
       // CHANGE BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
-      echo '<td '.$goto.' class="assignData hyperlink" style="width:'.(($print)?'85':'80').'%">'.htmlEncode($theObj->name).'</td>';
+      echo '<td '.$goto.' class="assignData hyperlink '.((isNewGui())?'classLinkName':'').'" style="width:'.(($print)?'85':'80').'%">'.htmlEncode($theObj->name).'</td>';
       // Old
       // echo '<td class="assignData" style="width:' . (($print)?'95':'85') . '%">' . htmlEncode($theObj->name) . '</td>';
       // END CHANGE BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
@@ -4095,7 +4095,7 @@ function drawNotificationsLinkedToObject($obj, $unreadOnly=true, $refresh=false)
     if (!$print and $canGoto) {
       $goto=' onClick="gotoElement('."'".$listClass."','".htmlEncode($notif->id)."'".');" style="cursor: pointer;" ';
     }
-    echo '<td class="linkData" '.$goto.' style="position:relative;width:50%">';
+    echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" '.$goto.' style="position:relative;width:50%">';
     echo htmlEncode($notificationDefinition->name);
     echo '</td>';
     echo '<td class="linkData colorNameData" style="position:relative;width:20%;">';
@@ -4836,11 +4836,13 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
             echo htmlGetMimeType($version->mimeType, $version->fileName, $version->id, 'DocumentVersion');
           }
         } else {
+          echo '<div '.$goto.' class="linkIconHover" >';
           echo formatIcon(get_class($linkObj), 16);
+          echo '</div>';
         }
-        echo '</td><td '.$goto.' style="'.(($goto)?'cursor: pointer;':'').(($print and $outMode=='pdf' and $outModeBack!='pdf')?'font-size:90%;':'').'padding-left:5px">'.$classLinkName.' #'.$linkObj->id.'</td></tr></table>';
+        echo '</td><td '.$goto.' style="'.(($goto)?'cursor: pointer;':'').(($print and $outMode=='pdf' and $outModeBack!='pdf')?'font-size:90%;':'').'padding-left:5px" class="'.((isNewGui())?'classLinkName':'').'">'.$classLinkName.' #'.$linkObj->id.'</td></tr></table>';
       } else {
-        echo '<td '.$goto.' class="linkData" style="white-space:nowrap;width:'.(($print)?'10':'5').'%">#'.$linkObj->id;
+        echo '<td '.$goto.' class="linkData '.((isNewGui())?'classLinkName':'').'" style="white-space:nowrap;width:'.(($print)?'10':'5').'%">#'.$linkObj->id;
       }
       echo '</td>';
       echo '<td class="linkData" '.$goto.' style="width:'.(($classLink)?'65':'55').'%">';
@@ -5237,7 +5239,7 @@ function drawSubscriptionsList($obj, $refresh=false, $limitToActive=null) {
     if (!$print and $canGoto) {
       $goto=' onClick="gotoElement('."'" . $subscription->refType ."','" . htmlEncode($item->id) . "'".');" style="cursor: pointer;" ';
     }
-    echo '<td class="linkData" ' . $goto . ' style="position:relative">'; 
+    echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" ' . $goto . ' style="position:relative">'; 
     echo htmlEncode($item->name);
     echo '</td>';
     echo '</tr>';
@@ -5318,7 +5320,7 @@ function drawTicketsList($obj, $refresh=false) {
     if (!$print and $canGoto) {
       $goto=' onClick="gotoElement('."'".$listClass."','".htmlEncode($ticket->id)."'".');" style="cursor: pointer;" ';
     }
-    echo '<td class="linkData" '.$goto.' style="position:relative;width:60%">';
+    echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" '.$goto.' style="position:relative;width:60%">';
     echo htmlEncode($ticket->name);
     echo '</td>';
     echo '<td class="linkData colorNameData" style="width:25%">';
@@ -5382,7 +5384,7 @@ function drawActivityList($obj, $refresh=false) {
       if (!$print and $canGoto) {
         $goto=' onClick="gotoElement('."'".$listClass."','".htmlEncode($activity->id)."'".');" style="cursor: pointer;" ';
       }
-      echo '<td class="linkData" '.$goto.' style="position:relative;width:55%;">';
+      echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" '.$goto.' style="position:relative;width:55%;">';
       echo htmlEncode($activity->name);
       echo '</td>';
       echo '<td class="linkData" style="width:15%">';
@@ -5454,19 +5456,19 @@ function drawAssetComposition($obj,$refresh=false){
         if (! $print and $canGoto) {
         $goto = ' onClick="gotoElement(' . "'" . get_class($ass) . "','" . htmlEncode($ass->id) . "'" . ');" style="cursor: pointer;" ';
       }
-      echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+      echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" ' . $goto . ' style="position:relative;">';
       echo htmlEncode($ass->name);
       echo'</td>';
-      echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+      echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" ' . $goto . ' style="position:relative;">';
       echo SqlList::getNameFromId('Type', $ass->idAssetType);
       echo'</td>';
-      echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+      echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" ' . $goto . ' style="position:relative;">';
       echo SqlList::getNameFromId('Brand', $ass->idBrand);
       echo'</td>';
-      echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+      echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" ' . $goto . ' style="position:relative;">';
       echo SqlList::getNameFromId('Model', $ass->idModel);
       echo'</td>';
-      echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+      echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" ' . $goto . ' style="position:relative;">';
       echo SqlList::getNameFromId('Affectable', $ass->idAffectable);
       echo'</td>';
     }
@@ -5711,7 +5713,7 @@ function drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $can
   $nameStatus = $sts->name;
   $colorStatus = $sts->color;
   echo '<td class="dependencyData colorNameData"  style="width:10%">' . colorNameFormatter($nameStatus . "#split#" . $colorStatus) . '</td>';
-  echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+  echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" ' . $goto . ' style="position:relative;">';
   $nameType = SqlList::getNameFromId('Type', $compObj->idVersionType);
   echo htmlEncode($nameType);
   if(get_class($obj) != 'Asset'){
@@ -6393,7 +6395,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         $goto=' onClick="gotoElement(\'Resource\',\''.htmlEncode($assignment->idResource).'\');" style="cursor: pointer;" ';
       }
     }
-    echo '<td '.$goto.'>'.$resName;
+    echo '<td '.$goto.' class="'.((isNewGui())?'classLinkName':'').'">'.$resName;
     echo ($assignment->idRole)?' ('.SqlList::getNameFromId('Role', $assignment->idRole).')':'';
     echo '</td>';
     if ($assignment->notPlannedWork>0) {
@@ -6634,7 +6636,7 @@ function drawResourceCostFromObject($list, $obj, $refresh=false) {
       }
       echo '</td>';
     }
-    echo '<td class="assignData" align="left">'.SqlList::getNameFromId('Role', $rcost->idRole).'</td>';
+    echo '<td class="assignData '.((isNewGui())?'classLinkName':'').'" align="left">'.SqlList::getNameFromId('Role', $rcost->idRole).'</td>';
     echo '<td class="assignData" align="right">'.htmlDisplayCurrency($rcost->cost);
     echo " / ".i18n('shortDay');
     echo '</td>';
@@ -6705,12 +6707,12 @@ function drawVersionProjectsFromObject($list, $obj, $refresh=false) {
       if (!$print and securityCheckDisplayMenu(null, 'ProductVersion') and securityGetAccessRightYesNo('menuProductVersion', 'read', '')=="YES") {
         $goto=' onClick="gotoElement(\'ProductVersion\',\''.htmlEncode($vp->idVersion).'\');" style="cursor: pointer;" ';
       }
-      echo '<td class="assignData" align="left"'.$goto.'>'.htmlEncode(SqlList::getNameFromId('Version', $vp->idVersion)).'</td>';
+      echo '<td class="assignData '.((isNewGui())?'classLinkName':'').'" align="left"'.$goto.'>'.htmlEncode(SqlList::getNameFromId('Version', $vp->idVersion)).'</td>';
     } else {
       if (!$print and securityCheckDisplayMenu(null, 'Project') and securityGetAccessRightYesNo('menuProject', 'read', '')=="YES") {
         $goto=' onClick="gotoElement(\'Project\',\''.htmlEncode($vp->idProject).'\');" style="cursor: pointer;" ';
       }
-      echo '<td class="assignData" align="left"'.$goto.'>'.htmlEncode(SqlList::getNameFromId('Project', $vp->idProject)).'</td>';
+      echo '<td class="assignData '.((isNewGui())?'classLinkName':'').'" align="left"'.$goto.'>'.htmlEncode(SqlList::getNameFromId('Project', $vp->idProject)).'</td>';
     }
     // CHANGE qCazelles - Ticket #119
     // Old
@@ -6812,13 +6814,13 @@ function drawProductProjectsFromObject($list, $obj, $refresh=false) {
       if (!$print and securityCheckDisplayMenu(null, 'Product') and securityGetAccessRightYesNo('menuProduct', 'read', $p)=="YES") {
         $goto=' onClick="gotoElement(\'Product\',\''.htmlEncode($pp->idProduct).'\');" style="cursor: pointer;" ';
       }
-      echo '<td class="assignData" align="left"'.$goto.'>'.htmlEncode(SqlList::getNameFromId('Product', $pp->idProduct)).'</td>';
+      echo '<td class="assignData '.((isNewGui())?'classLinkName':'').'" align="left"'.$goto.'>'.htmlEncode(SqlList::getNameFromId('Product', $pp->idProduct)).'</td>';
     } else {
       $p=new Project($pp->idProject, true);
       if (!$print and securityCheckDisplayMenu(null, 'Project') and securityGetAccessRightYesNo('menuProject', 'read', $p)=="YES") {
         $goto=' onClick="gotoElement(\'Project\',\''.htmlEncode($pp->idProject).'\');" style="cursor: pointer;" ';
       }
-      echo '<td class="assignData" align="left"'.$goto.'>'.htmlEncode(SqlList::getNameFromId('Project', $pp->idProject)).'</td>';
+      echo '<td class="assignData '.((isNewGui())?'classLinkName':'').'" align="left"'.$goto.'>'.htmlEncode(SqlList::getNameFromId('Project', $pp->idProject)).'</td>';
     }
     echo '<td class="assignData" align="center">'.htmlFormatDate($pp->startDate).'</td>';
     echo '<td class="assignData" align="center">'.htmlFormatDate($pp->endDate).'</td>';
@@ -6875,8 +6877,8 @@ function drawAssetFromModel($list, $obj) {
       if (!$print and securityCheckDisplayMenu(null, $typeAssetType) and securityGetAccessRightYesNo('menu'.$typeAssetType, 'read', '')=="YES") {
         $gotoType=' onClick="gotoElement(\''.$typeAssetType.'\',\''.htmlEncode($id).'\');" style="cursor: pointer;" ';
       }
-      echo '  <td '.$gotoType.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode($nameType).'</td>';
-      echo '  <td '.$goto.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">#'.$idVal.'  '.htmlEncode($value).'</td>';
+      echo '  <td '.$gotoType.' class="assignData'.$idleClass.' '.((isNewGui())?'classLinkName':'').'" align="left" style="white-space: nowrap;">'.htmlEncode($nameType).'</td>';
+      echo '  <td '.$goto.' class="assignData'.$idleClass.' '.((isNewGui())?'classLinkName':'').'" align="left" style="white-space: nowrap;">#'.$idVal.'  '.htmlEncode($value).'</td>';
       echo '</tr>';
     }
   }
@@ -6941,10 +6943,10 @@ function drawAssetFromUser($list, $obj) {
       if (!$print and securityCheckDisplayMenu(null, $typeModel) and securityGetAccessRightYesNo('menu'.$typeModel, 'read', '')=="YES") {
         $gotoModel=' onClick="gotoElement(\''.$typeModel.'\',\''.htmlEncode($currentAsset->idModel).'\');" style="cursor: pointer;" ';
       }
-      echo '  <td '.$gotoType.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode($nameType).'</td>';
-      echo '  <td '.$goto.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">#'.$idVal.'  '.htmlEncode($value).'</td>';
-      echo '  <td '.$gotoBrand.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode(SqlList::getNameFromId('Brand', $currentAsset->idBrand)).'</td>';
-      echo '  <td '.$gotoModel.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode(SqlList::getNameFromId('Model', $currentAsset->idModel)).'</td>';
+      echo '  <td '.$gotoType.' class="assignData'.$idleClass.' '.((isNewGui())?'classLinkName':'').'" align="left" style="white-space: nowrap;">'.htmlEncode($nameType).'</td>';
+      echo '  <td '.$goto.' class="assignData'.$idleClass.' '.((isNewGui())?'classLinkName':'').'" align="left" style="white-space: nowrap;">#'.$idVal.'  '.htmlEncode($value).'</td>';
+      echo '  <td '.$gotoBrand.' class="assignData'.$idleClass.' '.((isNewGui())?'classLinkName':'').'" align="left" style="white-space: nowrap;">'.htmlEncode(SqlList::getNameFromId('Brand', $currentAsset->idBrand)).'</td>';
+      echo '  <td '.$gotoModel.' class="assignData'.$idleClass.' '.((isNewGui())?'classLinkName':'').'" align="left" style="white-space: nowrap;">'.htmlEncode(SqlList::getNameFromId('Model', $currentAsset->idModel)).'</td>';
       echo '</tr>';
     }
   }
@@ -6978,7 +6980,7 @@ function drawInputMailboxHistory($list, $obj) {
       echo '<tr>';
       echo '  <td  class="assignData" align="left" style="white-space: nowrap;">'.htmlEncode($val->adress).'</td>';
       echo '  <td  class="assignData" align="left" style="white-space: nowrap;">'.htmlEncode($val->date).'</td>';
-      echo '  <td  '.$goto.' class="assignData" align="left" style="">'.htmlEncode($val->result).'</td>';
+      echo '  <td  '.$goto.' class="assignData '.((isNewGui())?'classLinkName':'').'" align="left" style="">'.htmlEncode($val->result).'</td>';
       echo '</tr>';
   }
   echo '</table>';
@@ -7031,8 +7033,8 @@ function drawModelFromBrand($list, $obj) {
       if (!$print and securityCheckDisplayMenu(null, $typeAsset) and securityGetAccessRightYesNo('menu'.$typeAsset, 'read', '')=="YES") {
         $gotoType=' onClick="gotoElement(\''.$typeAsset.'\',\''.htmlEncode($id).'\');" style="cursor: pointer;" ';
       }
-      echo '  <td '.$gotoType.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode($nameType).'</td>';
-      echo '  <td '.$goto.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode($value).'</td>';
+      echo '  <td '.$gotoType.' class="assignData'.$idleClass.' '.((isNewGui())?'classLinkName':'').'" align="left" style="white-space: nowrap;">'.htmlEncode($nameType).'</td>';
+      echo '  <td '.$goto.' class="assignData'.$idleClass.' '.((isNewGui())?'classLinkName':'').'" align="left" style="white-space: nowrap;">'.htmlEncode($value).'</td>';
       echo '</tr>';
     }
   }
@@ -7470,7 +7472,7 @@ function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
   	$res = new Resource($resInc->idIncompatible);
   	$goto=' onClick="gotoElement(\'Resource\',\''.htmlEncode($res->id).'\');" ';
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resInc->id).'</td>';
-  	echo ' <td class="assignData" align="left" style="white-space: nowrap; cursor:pointer;" '.$goto.'>'.htmlEncode($res->name).'</td>';
+  	echo ' <td class="assignData '.((isNewGui())?'classLinkName':'').'" align="left" style="white-space: nowrap; cursor:pointer;" '.$goto.'>'.htmlEncode($res->name).'</td>';
   	echo '</tr>';
   }
   echo '</table></td></tr>';
@@ -7543,7 +7545,7 @@ function drawResourceSupport($list, $obj, $type, $refresh=false) {
   	$res = new Resource($resSup->idSupport);
   	$goto=' onClick="gotoElement(\'Resource\',\''.htmlEncode($res->id).'\');" ';
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resSup->id).'</td>';
-  	echo ' <td class="assignData" align="left" style="white-space: nowrap; cursor:pointer;" '.$goto.'>'.htmlEncode($res->name).'</td>';
+  	echo ' <td class="assignData '.((isNewGui())?'classLinkName':'').'" align="left" style="white-space: nowrap; cursor:pointer;" '.$goto.'>'.htmlEncode($res->name).'</td>';
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resSup->rate).'</td>';
   	echo '</tr>';
   }
@@ -7843,7 +7845,7 @@ function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
       }
       echo '</td>';
     }
-    echo '<td class="assignData'.$idleClass.'" align="center" '.$goto.'>#'.htmlEncode($term->id).'</td>';
+    echo '<td class="assignData'.$idleClass.' '.((isNewGui())?'classLinkName':'').'" align="center" '.$goto.'>#'.htmlEncode($term->id).'</td>';
     echo '<td class="assignData'.$idleClass.'" align="center" '.$goto.' style="white-space: nowrap;">'.htmlFormatDate($term->date).'</td>';
     echo '<td class="assignData'.$idleClass.'" align="right" '.$goto.' style="white-space: nowrap;">'.htmlDisplayCurrency($term->fullAmount).'</td>';
     $sumTermAmount+=$term->fullAmount;
@@ -8170,7 +8172,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       * echo '<td class="assignData' . $idleClass . '" align="left"' . $goto . '>' . htmlEncode($name) . '</td>';
       * }
       */
-      echo '<td class="assignData'.$idleClass.'" align="left"'.$goto.'>';
+      echo '<td class="assignData'.$idleClass.' '.((isNewGui())?'classLinkName':'').'" align="left"'.$goto.'>';
       // resourceTeam
       if (isset($typeAffectable)=='ResourceAll') {
         $resource=new ResourceAll($aff->idResource);
@@ -8280,7 +8282,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     echo '<td class="assignData" align="center" style="width:5%">'.htmlEncode($tcr->sortOrder).'</td>';
     echo '<td class="assignData" align="center" style="width:10%">'.htmlEncode(SqlList::getNameFromId($otherClass.'Type', $tc->$typeClass)).'</td>';
     echo '<td class="assignData" align="center" style="width:5%">#'.htmlEncode($tc->id).'</td>';
-    echo '<td class="assignData" align="left"'.$goto.' style="width:'.$nameWidth.'%" >'.htmlEncode($tc->name).'</td>';
+    echo '<td class="assignData '.((isNewGui())?'classLinkName':'').'" align="left"'.$goto.' style="width:'.$nameWidth.'%" >'.htmlEncode($tc->name).'</td>';
     // gautier #1716
     $checkImg='savedOk.png';
     $commentWidth='200';

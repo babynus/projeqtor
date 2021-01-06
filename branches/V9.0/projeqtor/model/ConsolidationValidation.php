@@ -264,7 +264,7 @@ class ConsolidationValidation extends SqlElement{
           }
           ///----------------------------------------------------///
           
-          $style.='"';
+          $style.=(isNewGui())?'" class="classLinkName"':'"';
     	   $result .='   <tr id="tr_'.$uniqueId.'" onMouseOver="dojo.byId(\'tr_'.$uniqueId.'\').style.background=\'#DFDFDF\'"  onMouseOut="dojo.byId(\'tr_'.$uniqueId.'\').style.background=\'#FFFFFF\'">';
     	   $result .='    <td style="border-top: 1px solid black;border-right: 1px solid black;height:30px;text-align:left;vertical-center;">
     	                   <table>
