@@ -2244,3 +2244,11 @@ border:1px solid var(--color-medium);
 .ProjeQtOrNewGui #dialogReminder {
 	font-size: 9pt;
 }
+
+.linkIconHover{
+    cursor: pointer;
+}
+
+.classLinkName:hover{
+	 color:var(--color-secondary);
+}
