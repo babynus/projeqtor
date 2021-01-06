@@ -162,7 +162,10 @@ require_once "../tool/projeqtor.php";
                       <script type="dojo/connect" event="onClick" args="evt">
                         var objectName = dijit.byId('showDetailInFilter').get('value');
                         if( objectName ){
-                          var objectClass=objectName[0].substr(2);  
+                          var objectClass=objectName[0].substr(2);
+                          if (objectName[0].indexOf('__id')>=0) {
+                            objectClass=objectName[0].substr(objectName[0].indexOf('__id')+4);
+                          }  
                           if (objectClass=='TargetProductVersion' || objectClass=='OriginalProductVersion') objectClass='ProductVersion';
                           dijit.byId('filterValueList').reset();
                           showDetail('filterValueList',0,objectClass,true);

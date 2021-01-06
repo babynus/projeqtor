@@ -979,7 +979,8 @@ function listFieldsForFilter($obj, $nbRows, $included = false) {
         $dataType = 'bool';
       } else if ($dataType == 'datetime') {
         $dataType = 'date';
-      } else if ((substr ( $col, 0, 2 ) == 'id' and $dataType == 'int' and strlen ( $col ) > 2 and substr ( $col, 2, 1 ) == strtoupper ( substr ( $col, 2, 1 ) ))) {
+      //} else if ((substr ( $col, 0, 2 ) == 'id' and $dataType == 'int' and strlen ( $col ) > 2 and substr ( $col, 2, 1 ) == strtoupper ( substr ( $col, 2, 1 ) ))) {
+      } else if (isForeignKey($col, $obj)) {
         $dataType = 'list';
       }
       $colName = $obj->getColCaption ( $col );
