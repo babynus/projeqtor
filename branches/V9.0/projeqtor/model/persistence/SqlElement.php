@@ -2008,7 +2008,7 @@ abstract class SqlElement {
     $returnValue .= '<input type="hidden" id="lastSaveId" value="' . htmlEncode ( $this->id ) . '" />';
     $returnValue .= '<input type="hidden" id="lastOperation" value="delete" />';
     $returnValue .= '<input type="hidden" id="lastOperationStatus" value="' . $returnStatus . '" />';
-    $returnValue .= '<input type="hidden" id="noDataMessage" value="' . htmlGetNoDataMessage ( get_class ( $this ) ) . '" />';
+    $returnValue .= '<input type="hidden" id="noDataMessage" value="' . str_replace('"',"'",htmlGetNoDataMessage(get_class($this))). '" />';
     return $returnValue;
   }
 
