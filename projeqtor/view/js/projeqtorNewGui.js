@@ -858,18 +858,16 @@ function displayFullScreenCK(field) {
   alreadyExist=false;
   if (typeof CKEDITOR.instances['textFullScreenCK'] == 'undefined') {
     ckEditorReplaceEditor("textFullScreenCK",996);
-  } else {
+  } else {    
     if(CKEDITOR.instances['textFullScreenCK'].getCommand('maximize').state == CKEDITOR.TRISTATE_OFF) CKEDITOR.instances['textFullScreenCK'].execCommand( 'maximize');
   }
   if (typeof CKEDITOR.instances['textFullScreenCK'] != 'undefined' && typeof CKEDITOR.instances[field] != 'undefined') {
-    var editorFS=CKEDITOR.instances['textFullScreenCK'];
-    var editorSource=CKEDITOR.instances[field];
-    editorFS.setData(editorSource.getData());
-    editorFS.focusManager.focus();   
-    editorFS.forceNextSelectionCheck();
-//    var selection=editorSource.getSelection();
-//    var range=(selection)?selection.getRanges():null;
-//    editorFS.getSelection().selectRanges(range);
+    var ckSetDataAndFocus=function() {
+      var editorFS=CKEDITOR.instances['textFullScreenCK'];
+      var editorSource=CKEDITOR.instances[field];
+      editorFS.setData(editorSource.getData(),function(){editorFS.focus();});
+    };
+    setTimeout(ckSetDataAndFocus,100);
   }
   whichFullScreen=996;
   displayFullScreenCKopening=false;
@@ -877,7 +875,10 @@ function displayFullScreenCK(field) {
 function displayFullScreenCK_close() {
   if (displayFullScreenCKopening) return;
   if (typeof CKEDITOR.instances['textFullScreenCK'] != 'undefined' && typeof CKEDITOR.instances[displayFullScreenCKfield] != 'undefined') {
-    CKEDITOR.instances[displayFullScreenCKfield].setData(CKEDITOR.instances['textFullScreenCK'].getData());
+    var editor=CKEDITOR.instances[displayFullScreenCKfield];
+    editor.setData(CKEDITOR.instances['textFullScreenCK'].getData(),function(){editor.focus();});
+    //var focusManager=new CKEDITOR.focusManager(CKEDITOR.instances[displayFullScreenCKfield]);
+    //focusManager.focus();
   }
   displayFullScreenCKfield=null;
   whichFullScreen=-1;

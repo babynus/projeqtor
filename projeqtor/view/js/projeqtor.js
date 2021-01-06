@@ -4897,18 +4897,7 @@ function saveObject() {
 function onKeyDownFunction(event, field, editorFld) {
   var editorWidth = editorFld.domNode.offsetWidth;
   var screenWidth = document.body.getBoundingClientRect().width;
-  var fullScreenEditor = (editorWidth > screenWidth * 0.9) ? true : false; // if
-                                                                            // editor
-                                                                            // is >
-                                                                            // 90%
-                                                                            // screen
-                                                                            // width
-                                                                            // :
-                                                                            // editor
-                                                                            // is
-                                                                            // in
-                                                                            // full
-                                                                            // mode
+  var fullScreenEditor = (editorWidth > screenWidth * 0.9) ? true : false; // if editor is > 90% screen width : editor is in full mode
   if (event.keyCode == 83
       && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey)
       && !event.altKey) { // CTRL + S
@@ -4945,18 +4934,7 @@ function onKeyDownFunction(event, field, editorFld) {
 function onKeyDownCkEditorFunction(event, editor) {
   var editorWidth = editor.document.$.body.offsetWidth;
   var screenWidth = window.top.document.body.getBoundingClientRect().width;
-  var fullScreenEditor = (editorWidth > screenWidth * 0.9) ? true : false; // if
-                                                                            // editor
-                                                                            // is >
-                                                                            // 90%
-                                                                            // screen
-                                                                            // width
-                                                                            // :
-                                                                            // editor
-                                                                            // is
-                                                                            // in
-                                                                            // full
-                                                                            // mode
+  var fullScreenEditor = (editorWidth > screenWidth * 0.9) ? true : false; // if editor is > 90% screen width : editor is in full mode
   if (event.data.keyCode == CKEDITOR.CTRL + 83) { // CTRL + S
     event.cancel();
     /*if (fullScreenEditor)
@@ -5011,18 +4989,7 @@ function onKeyDownFunctionEditorSave() {
 function editorBlur(fieldId, editorFld) {
   var editorWidth = editorFld.domNode.offsetWidth;
   var screenWidth = document.body.getBoundingClientRect().width;
-  var fullScreenEditor = (editorWidth > screenWidth * 0.9) ? true : false; // if
-                                                                            // editor
-                                                                            // is >
-                                                                            // 90%
-                                                                            // screen
-                                                                            // width
-                                                                            // :
-                                                                            // editor
-                                                                            // is
-                                                                            // in
-                                                                            // full
-                                                                            // mode
+  var fullScreenEditor = (editorWidth > screenWidth * 0.9) ? true : false; // if editor is > 90% screen width : editor is in full mode
   window.top.dojo.byId(fieldId).value = editorFld.document.body.firstChild.innerHTML;
   if (fullScreenEditor) {
     editorFld.toggle(); // Not existing function : block some unexpected
@@ -5362,10 +5329,7 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     editorArray[numEditor].keystrokeHandler.keystrokes[CKEDITOR.CTRL + 83]='CKfullScreenSave';
     editorArray[numEditor].keystrokeHandler.keystrokes[27]='maximize';
   }
-  editorArray[numEditor].on('blur', function(evt) { // Trigger after paster
-                                                    // image : notificationShow,
-                                                    // afterCommandExec,
-                                                    // dialogShow
+  editorArray[numEditor].on('blur', function(evt) { // Trigger after paster image : notificationShow, afterCommandExec, dialogShow
     evt.editor.updateElement();
     // formChanged();
   });
