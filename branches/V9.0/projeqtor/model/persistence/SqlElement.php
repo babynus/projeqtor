@@ -3377,15 +3377,15 @@ abstract class SqlElement {
     $colName = strtolower ( $colName );
     $formatList = self::getFormatList ( get_class ( $this ) );
     if (! array_key_exists ( $colName, $formatList )) {
-      return '';
+      return 0;
     }
     $fmt = $formatList [$colName];
     $split = preg_split ( '/[()\s]+/', $fmt, 3 );
     $type = $split [0];
     if ($type == 'date') {
-      return '10';
+      return 10;
     } else if ($type == 'time') {
-      return '5';
+      return 5;
     } else if ($type == 'timestamp' or $type == 'datetime') {
       return 19;
     } else if ($type == 'double') {
@@ -3398,7 +3398,7 @@ abstract class SqlElement {
       return 4294967295;
     } else {
       if (count ( $split ) >= 2) {
-        return $split [1];
+        return intval($split [1]);
       } else {
         return 0;
       }
