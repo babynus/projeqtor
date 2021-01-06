@@ -299,6 +299,7 @@ class Security
         if ($menuName=='menuBudgetItem') $menuName='menuBudget';
         if ($menuName=='menuBusinessFeature') $menuName='menuProduct';
         if ($menuName=='menuWork') $menuName='menuImputation';
+        if ($menuName=='menuResourceAll') $menuName='menuResource';
         if (SqlElement::is_subclass_of($refType, 'PlgCustomList')) $menuName='menuScreenCustomization';
         if (isLeavesSystemMenuByMenuName("menu".$refType)) {
           $showLeaveMenu=showLeavesSystemMenu("menu".$refType);
