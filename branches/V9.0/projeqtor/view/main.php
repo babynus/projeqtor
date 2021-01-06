@@ -1453,11 +1453,27 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     }
   ?> 
   <div style="widht:100%" id="printPreview" dojoType="dijit.layout.ContentPane" region="center">
-    <?php if (isNewGui()) ?>
-  <div style="position:absolute;top:-10px;right:50px;z-index:9999">
-  XXXXXXXX
-  </div>
-  <?php ?>
+  <div style="position:absolute;top:0px;right:50px;z-index:99999">
+    <button  id="printFullScreen" dojoType="dijit.form.Button" showlabel="false" class="notButton"
+                iconClass="iconFullScreen22 iconFullScreen iconSize22 imageColorNewGui" >
+                <script type="dojo/connect" event="onClick" args="evt">
+          var myContentPane = dijit.byId("dialogPrint");
+          if( myContentPane.domNode.style.width == '90%'){
+             myContentPane.domNode.style.width = <?php echo $printWidth; ?>+'px';
+            myContentPane.domNode.style.height = <?php echo $printHeight; ?>+'px';
+          }else{
+            myContentPane.domNode.style.left = '5%';
+            myContentPane.domNode.style.top = '5%';
+            myContentPane.domNode.style.width = '90%';
+            myContentPane.domNode.style.height = '90%';
+          }
+            myContentPane = dijit.byId("dialogPrint");
+            dojo.byId('printFrame').style.height=(myContentPane.domNode.offsetHeight-100)+'px';
+            dojo.byId('printFrame').style.width=(myContentPane.domNode.offsetWidth-15)+'px';
+                </script>
+              </button>
+   </div>
+   
     <table style="widht:100%">
       <tr>
         <td width="<?php echo $printWidth;?>px" align="right">
@@ -1496,8 +1512,30 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       $printHeight=round(getSessionValue('screenHeight')*0.50);
     }
   ?> 
+  
+   <div style="position:absolute;top:0px;right:50px;z-index:99999">
+    <button  id="printFullScreenShowHtml" dojoType="dijit.form.Button" showlabel="false" class="notButton"
+                iconClass="iconFullScreen22 iconFullScreen iconSize22 imageColorNewGui" >
+                <script type="dojo/connect" event="onClick" args="evt">
+          var myContentPane = dijit.byId("dialogShowHtml");
+          if( myContentPane.domNode.style.width == '90%'){
+             myContentPane.domNode.style.width = <?php echo $printWidth; ?>+'px';
+            myContentPane.domNode.style.height = <?php echo $printHeight; ?>+'px';
+          }else{
+            myContentPane.domNode.style.left = '5%';
+            myContentPane.domNode.style.top = '5%';
+            myContentPane.domNode.style.width = '90%';
+            myContentPane.domNode.style.height = '90%';
+          }
+            myContentPane = dijit.byId("dialogShowHtml");
+            dojo.byId('showHtmlFrame').style.height=(myContentPane.domNode.offsetHeight-100)+'px';
+            dojo.byId('showHtmlFrame').style.width=(myContentPane.domNode.offsetWidth-15)+'px';
+                </script>
+              </button>
+   </div>
+  
   <div style="widht:100%" id="showHtmlLink" dojoType="dijit.layout.ContentPane" region="center">
-    <table style="widht:100%">
+    <table style="width:100%">
       <tr>
         <td width="<?php echo $printWidth;?>px">   
           <iframe width="100%" height="<?php echo $printHeight;?>px"
