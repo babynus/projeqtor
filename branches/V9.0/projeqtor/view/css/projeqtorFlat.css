@@ -540,7 +540,7 @@ body .ProjeQtOrFlatBlue {
   background: #ecebf2;
 }
 .ProjeQtOrFlatBlue .ganttTaskgroup:Hover, .ProjeQtOrFlatBlue .ganttTaskrow:hover, .ProjeQtOrFlatBlue .ganttTaskmile:Hover, .ProjeQtOrFlatBlue .ganttRowHover {
-  background-color: #ffffaa;
+  background-color: #ffffaa !important;
 }
 
 .ProjeQtOrFlatBlue .iconMenuBarCustom16 { background-image: url(customIcons/blue/favorite.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -1078,7 +1078,7 @@ body .ProjeQtOrFlatRed {
   background: #f2ebeb;
 }
 .ProjeQtOrFlatRed .ganttTaskgroup:Hover, .ProjeQtOrFlatRed .ganttTaskrow:hover, .ProjeQtOrFlatRed .ganttTaskmile:Hover, .ProjeQtOrFlatRed .ganttRowHover {
-  background-color: #ffffaa;
+  background-color: #ffffaa !important;
 }
 
 .ProjeQtOrFlatRed .iconMenuBarCustom16 { background-image: url(customIcons/red/favorite.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -1647,7 +1647,7 @@ body .ProjeQtOrFlatGreen {
   background: #ecf2eb;
 }
 .ProjeQtOrFlatGreen .ganttTaskgroup:Hover, .ProjeQtOrFlatGreen .ganttTaskrow:hover, .ProjeQtOrFlatGreen .ganttTaskmile:Hover, .ProjeQtOrFlatGreen .ganttRowHover {
-  background-color: #ffffaa;
+  background-color: #ffffaa !important;
 }
 
 .ProjeQtOrFlatGreen .iconMenuBarCustom16 { background-image: url(customIcons/green/favorite.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -2154,7 +2154,7 @@ body .ProjeQtOrFlatGrey {
   background: #ececec;
 }
 .ProjeQtOrFlatGrey .ganttTaskgroup:Hover, .ProjeQtOrFlatGrey .ganttTaskrow:hover, .ProjeQtOrFlatGrey .ganttTaskmile:Hover, .ProjeQtOrFlatGrey .ganttRowHover {
-  background-color: #ffffaa;
+  background-color: #ffffaa !important;
 }
 
 .ProjeQtOrFlatGrey .iconMenuBarCustom16 { background-image: url(customIcons/grey/favorite.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
