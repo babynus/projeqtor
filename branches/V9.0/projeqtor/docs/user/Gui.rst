@@ -2877,25 +2877,70 @@ It allows you to display a lot of information about your project, your navigatio
 
 .. rubric:: |oneBLC| Parameters
 
+the parameters displayed in the secondary menu are linked to the selected screen.
+
+In the example above, the user selected the Activity screen.
+We then see that the parameters are in direct correlation with the activities.
+
+If the user selects the project screen, then the parameters will be adapted for those.
+
+.. image:: /images/GUI9.0/GUI_ZONE_SecondaryMenuProject.png
 
 .. _secondarymenu-links:
 
 .. rubric:: |twoBLC| Links
+
+Display hyperlinks to remote web pages.
+
+These links are defined as hyperlink attachments on projects.
+
+Links displayed here depend on the selected project.
+
+.. image:: /images/GUI9.0/GUI_ZONE_SecondaryMenuLinks.png
 
 
 .. _secondarymenu-docs:
 
 .. rubric:: |threeBLC| Repertory and Document
 
+Document directories give direct access to documents contained in the directory.
+
+See also: :ref:`document-directory` screen.
+
+.. image:: /images/GUI9.0/GUI_ZONE_SecondaryMenuDocs.png
 
 .. _secondarymenu-console:
 
 .. rubric:: |fourBLC| Console
 
+Displays information about main actions: insert, update, delete. 
+
+The timestamp indicates when the action was done.
+
+.. warning::
+
+   Messages displayed here are not stored and will be flushed when user logout.
+
+.. image:: /images/GUI9.0/GUI_ZONE_SecondaryMenuConsole.png
+
 
 .. _secondarymenu-notifications:
 
 .. rubric:: |fiveBLC| Notifications   
+
+Under construction
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .. _list-window-v9:
@@ -2903,7 +2948,186 @@ It allows you to display a lot of information about your project, your navigatio
 List Area
 ---------
 
-New List Area under construction
+.. figure:: /images/GUI9.0/GUI_ZONE_ListWindows.png
+   :alt: List window
+   :align: center
+
+
+.. topic:: Interface areas:
+
+   |one| :ref:`Element identifier<element-identifier9>` 
+   
+   |two| :ref:`Tools<tools-list>` 
+   
+   |three| :ref:`Items list<items-list9>` 
+
+
+.. _element-identifier9:
+
+.. rubric:: |oneBLC| Element identifier
+
+Displays the element name and the count of items in the list.  
+
+Each element is identified with a distinctive icon.
+
+.. _tools-list:
+
+.. rubric:: |twoBLC| Tools
+
+
+.. figure:: /images/GUI9.0/GUI_ZONE_ToolsList.png
+   :alt: List window
+   :align: center
+
+
+* Click on |iconNew| to create a new element
+* Click on |iconRefresh| to refresh the list
+* Click on |iconFilters| to apply many filters  
+* Click on |iconColumn| to organize the columns
+* Click on |iconSubMenu| to open the sub-menu
+* Click on |iconPrint9| to print the list area as it appear on the window
+* Click on |iconPDF| to export the list area to PDF
+* Click on |iconCSV| to export the list area to CSV
+* Click on |iconMultipleUpdate| to open the multiple update
+
+Swith the button clos to make appear all the handled element
+
+ .. compound:: The filters
+ 
+   .. figure:: /images/GUI9.0/GUI_BOX_Filters.png
+      :alt: Filters
+      
+      Filters windows
+      
+      
+   The first filters offered are basic filters.
+   
+   
+    .. compound:: The rapid filters
+    
+      You can choose to always display them in the toolbar of the list box by activating the switch button.   
+      
+    
+   
+      .. figure:: /images/GUI9.0/GUI_ZONE_FiltersVisible.PNG
+        :alt: Filters always visible
+      
+        Filters always visible
+   
+      You can choose to always display them in the toolbar of the list box by activating the switch button.   
+
+      You can restrict the display:
+   
+      * by ID
+      * by name
+      * by type 
+   
+   
+    .. compound:: The Quick search
+    
+      fill in the quick search field then click on the magnifying glass to launch the search in all the available fields of the list box AND details.
+
+      Click the reset button to clear your search and restore the original display.
+      
+      .. note:: Accents are not taken into account
+      
+
+
+    .. compound:: States filters
+    
+      Switch the button **Display states to filter directly**
+      
+      .. figure:: /images/GUI9.0/GUI_ZONE_StateFilters.png
+         :alt: States filter
+         
+         States filter
+      
+      Only existing status are visible if their are used.
+      
+      Choice one of them and the item list will be filter.
+      
+      This is a quick filter list by status
+      
+
+
+
+    .. compound:: The advanced filters
+    
+      Click on the button to display the advanced filters window.
+      
+      .. figure:: /images/GUI9.0/GUI_BOX_AdvancedFilters.png
+         :alt: Advanced filters
+         
+         Advanced filters definition
+      
+      
+     
+
+      .. compound:: Active filter
+
+         Define the clauses of filter or sort in “Add a filter or sort clause”.
+   
+         Select the name of the field, the operator and the value to the clause.
+   
+         * Click on |iconAdd| to add additional criteria.
+         
+         * Name the filter to save and click on |iconSave| for later reuse.
+      
+         * Click on |buttonIconSearch9| to filter the filter list.
+
+         * Click on OK button to apply the filter.
+   
+         * Click on Cancel button to revert to previous filter.
+         
+         * Click on Clear button to reset the active filter.
+         
+                  
+         
+            .. compound:: Logical operator
+      
+              Possibility to select the logical operator OR between the criteria of a filter instead of AND.
+   
+              Applies logical operator with preceeding criteria (by default AND). 
+              
+              Be careful, operator AND is applies before OR. 
+              
+              
+   
+            .. compound:: Dynamic value
+            
+              When the selected value is dynamic, then you do not select anything in the list.
+              
+              The value will then be entered when the filter is called and will be fully activated when the filter is chosen.
+
+
+
+
+
+
+
+      .. compound:: Saved filters
+        
+        This section allows to manage saved filters.
+        
+        * Click on a saved filter to retrieve its definition.
+        
+        * Click on |iconDelete| from a saved filter to delete it.
+                
+        * Click on |iconDrag| to reorganize the filters.
+        
+        * Click on |iconShare| to shared a filter with your employees
+        
+        
+         When your collaborators share filters, they appear below the list of saved filters.
+
+         Click on the list to display all filters and their author.
+
+
+         .. figure:: /images/GUI9.0/GUI_ZONE_SharedFilters.png
+            :alt: Shared filters
+         
+            Shared filters
+
 
 
 .. _details-window-v9:
