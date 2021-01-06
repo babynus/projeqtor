@@ -347,8 +347,19 @@
 .. |iconBlocked| image:: images/iconBlocked.png
    :alt: Icon blocked
 
+
+
+
 .. |buttonAdd| image:: images/ButtonAdd.png
    :alt: Button add
+   
+.. |iconAdd| image:: images/v9/iconAdd.png
+   :alt: Add
+   :scale: 15   
+
+
+
+
 
 .. |buttonEdit| image:: images/smallButtonEdit.png
    :alt: Button edit
@@ -477,35 +488,92 @@
 .. |iconOrganization| image:: images/iconOrganization16.png
    :alt: button icon Assign Organization      
 
+
+
+
+
 .. |buttonIconActiveFilter| image:: images/iconActiveFilter.png
    :alt: Button icon active filter
+
+
 
 .. |buttonIconDrag| image:: images/iconDrag.png
    :alt: Button icon drag
 
 .. |IconDragBLC| image:: images/IconDragBLC.png
    :alt: icon drag
+   
+.. |iconDrag| image:: images/v9/iconDrag.png
+   :alt: Drag
+   :scale: 15 
+
+
+
 
 .. |buttonIconFilter| image:: images/iconActiveFilter.png
    :alt: button icon filter
+   
+.. |iconFilters| image:: images/v9/iconFilters.png
+   :alt: Filters
+   :scale: 15 
+   
+   
 
 .. |comboArrowDown| image:: images/comboArrowDown.png
    :alt: Button combo arrow down
 
+
+
+
 .. |buttonIconColumn| image:: images/buttonIconColumn.png
    :alt: Button icon column
+
+.. |iconColumn| image:: images/v9/iconColumns.png
+   :alt: Columns organizer
+   :scale: 15
+   
+
 
 .. |buttonIconPrint| image:: images/buttonIconPrint.png
    :alt: icon print button
 
+.. |iconPrint9| image:: images/v9/iconPrint.png
+   :alt: Print
+   :scale: 15
+
+
 .. |buttonIconPdf| image:: images/buttonIconPdf.png
    :alt: icon PDF button
+
+.. |iconPDF| image:: images/v9/iconPDF.png
+   :alt: Export PDF
+   :scale: 15
+   
+   
+   
 
 .. |buttonIconCsv| image:: images/buttonIconCSV.png
    :alt: Button icon CSV
 
+.. |iconCSV| image:: images/v9/iconCSV.png
+   :alt: Export CSV
+   :scale: 15
+
+
+
+
 .. |buttonIconNew| image:: images/buttonIconNew.png
    :alt: Button icon new
+   
+.. |iconNew| image:: images/v9/iconNew.png
+   :alt: New
+   :scale: 15
+   
+   
+   
+.. |iconSubMenu| image:: images/v9/iconSubMenu.png
+   :alt: Sub-menu
+   :scale: 15   
    
 .. |buttonIconStatus| image:: images/buttonIconStatus.png
    :alt: Button icon status
@@ -522,6 +590,12 @@
  
 .. |buttonIconSave| image:: images/buttonIconSave.png
    :alt: Button icon save
+   
+.. |iconSave| image:: images/v9/iconSave.png
+   :alt: Save
+   :scale: 15   
+   
+   
 
 .. |buttonIconCopy| image:: images/buttonIconCopy.png
    :alt: Button icon copy
@@ -529,19 +603,38 @@
 .. |buttonIconUndo| image:: images/buttonIconUndo.png
    :alt: button icon undo
 
+
+
+
 .. |buttonIconDelete| image:: images/buttonIconDelete.png
    :alt: Button icon delete
+
+.. |iconDelete| image:: images/v9/iconDelete.png
+   :alt: Delete
+   :scale: 15
+
+
+
 
 .. |buttonIconRefresh| image:: images/buttonIconRefresh.png
    :alt: Button icon refresh
 
+.. |iconRefresh| image:: images/v9/iconRefresh.png
+   :alt: Refresh
+   :scale: 15
+   
+   
+   
+   
 .. |buttonIconEmail| image:: images/buttonIconEmail.png
    :alt: Button icon email
 
 .. |buttonIconMultipleUpdate| image:: images/buttonIconMultipleUpdate.png
    :alt: Button icon multiple update
 
-
+.. |iconMultipleUpdate| image:: images/v9/iconMultipleUpdate.png
+   :alt: Multiple update
+   :scale: 15
 
 
 
@@ -646,8 +739,18 @@
 .. |unShareFilter| image:: images/share.png
    :alt: unshare filter
 
+
+
+
+
 .. |sharedFilter| image:: images/shared.png
    :alt: shared filter
+
+.. |iconShare| image:: images/v9/iconShare.png
+   :alt: Share
+   :scale: 15
+
+
 
 
 .. |pointingHandCursor| image:: images/pointingHandCursor.png
