@@ -1462,14 +1462,14 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
              myContentPane.domNode.style.width = <?php echo $printWidth; ?>+'px';
             myContentPane.domNode.style.height = <?php echo $printHeight; ?>+'px';
           }else{
-            myContentPane.domNode.style.left = '5%';
-            myContentPane.domNode.style.top = '5%';
-            myContentPane.domNode.style.width = '90%';
-            myContentPane.domNode.style.height = '90%';
+            myContentPane.domNode.style.left = '0%';
+            myContentPane.domNode.style.top = '1%';
+            myContentPane.domNode.style.width = '100%';
+            myContentPane.domNode.style.height = '95%';
           }
             myContentPane = dijit.byId("dialogPrint");
-            dojo.byId('printFrame').style.height=(myContentPane.domNode.offsetHeight-100)+'px';
-            dojo.byId('printFrame').style.width=(myContentPane.domNode.offsetWidth-15)+'px';
+            dojo.byId('printFrame').style.height=(myContentPane.domNode.offsetHeight-50)+'px';
+            dojo.byId('printFrame').style.width='100%';
                 </script>
               </button>
    </div>
@@ -1504,7 +1504,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
   </div>
 </div>
 
-<div id="dialogShowHtml" dojoType="dijit.Dialog" onHide="if (window.frames['showHtmlFrame']) window.frames['showHtmlFrame'].location.href='../view/preparePreview.php';" title="">
+<div class="dijitDialog dijitDialogFocused dijitFocused"" id="dialogShowHtml" dojoType="dijit.Dialog" refreshOnShow="true" onHide="if (window.frames['showHtmlFrame']) window.frames['showHtmlFrame'].location.href='../view/preparePreview.php';" title="">
   <?php 
     $printHeight=600;
     $printWidth=1010;
@@ -1518,18 +1518,18 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
                 iconClass="iconFullScreen22 iconFullScreen iconSize22 imageColorNewGui" >
                 <script type="dojo/connect" event="onClick" args="evt">
           var myContentPane = dijit.byId("dialogShowHtml");
-          if( myContentPane.domNode.style.width == '90%'){
+          if( myContentPane.domNode.style.width == '100%'){
              myContentPane.domNode.style.width = <?php echo $printWidth; ?>+'px';
             myContentPane.domNode.style.height = <?php echo $printHeight; ?>+'px';
           }else{
-            myContentPane.domNode.style.left = '5%';
-            myContentPane.domNode.style.top = '5%';
-            myContentPane.domNode.style.width = '90%';
-            myContentPane.domNode.style.height = '90%';
+            myContentPane.domNode.style.left = '0%';
+            myContentPane.domNode.style.top = '1%';
+            myContentPane.domNode.style.width = '100%';
+            myContentPane.domNode.style.height = '95%';
           }
             myContentPane = dijit.byId("dialogShowHtml");
             dojo.byId('showHtmlFrame').style.height=(myContentPane.domNode.offsetHeight-100)+'px';
-            dojo.byId('showHtmlFrame').style.width=(myContentPane.domNode.offsetWidth-15)+'px';
+            dojo.byId('showHtmlFrame').style.width='100%';
                 </script>
               </button>
    </div>
