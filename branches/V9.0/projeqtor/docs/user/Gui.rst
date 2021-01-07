@@ -3417,7 +3417,5 @@ See: :ref:`thumbnails`
    * |iconEmail| :ref:`Send details<email-detail9>`
    * |iconSubscribe9| :ref:`Subscribe detail<subscribe-detail9>`
    * |ActivityStream9| :ref:`Activity Stream<gui-activity-stream9>`
-   
-   
    * |iconHistory| :ref:`Show history<change-history9>`
    * |iconChecklist| :ref:`Show checklist<dw-show-checklist9>`
