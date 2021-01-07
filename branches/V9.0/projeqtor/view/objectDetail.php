@@ -5320,7 +5320,7 @@ function drawTicketsList($obj, $refresh=false) {
     if (!$print and $canGoto) {
       $goto=' onClick="gotoElement('."'".$listClass."','".htmlEncode($ticket->id)."'".');" style="cursor: pointer;" ';
     }
-    echo '<td class="linkData" '.((isNewGui())?'classLinkName':'').'" '.$goto.' style="position:relative;width:60%">';
+    echo '<td class="linkData '.((isNewGui())?'classLinkName':'').'" '.$goto.' style="position:relative;width:60%">';
     echo htmlEncode($ticket->name);
     echo '</td>';
     echo '<td class="linkData colorNameData" style="width:25%">';
@@ -8282,7 +8282,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     echo '<td class="assignData" align="center" style="width:5%">'.htmlEncode($tcr->sortOrder).'</td>';
     echo '<td class="assignData" align="center" style="width:10%">'.htmlEncode(SqlList::getNameFromId($otherClass.'Type', $tc->$typeClass)).'</td>';
     echo '<td class="assignData" align="center" style="width:5%">#'.htmlEncode($tc->id).'</td>';
-    echo '<td class="assignData" align="left"'.$goto.' style="width:'.$nameWidth.'%" >'.htmlEncode($tc->name).'</td>';
+    echo '<td class="assignData '.((isNewGui())?'classLinkName':'').'" align="left"'.$goto.' style="width:'.$nameWidth.'%" >'.htmlEncode($tc->name).'</td>';
     // gautier #1716
     $checkImg='savedOk.png';
     $commentWidth='200';
