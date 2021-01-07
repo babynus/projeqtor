@@ -93,12 +93,6 @@ class ClientMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
-    $clientElementList = Parameter::getUserParameter('clientElementList');
-    if($clientElementList == 'false' or !$this->id){
-    	self::$_fieldsAttributes['_sec_QuotationsList']='hidden';
-    	self::$_fieldsAttributes['_sec_CommandsList']='hidden';
-    	self::$_fieldsAttributes['_sec_BillsList']='hidden';
-    }
   }
 
   
@@ -179,6 +173,12 @@ class ClientMain extends SqlElement {
     if (Parameter::getGlobalParameter('manageTicketCustomer') != 'YES') {
       self::$_fieldsAttributes["_sec_TicketsClient"]='hidden';
       self::$_fieldsAttributes["_spe_tickets"]='hidden';
+    }
+    $clientElementList = Parameter::getUserParameter('clientElementList');
+    if($clientElementList == 'false' or !$this->id){
+      self::$_fieldsAttributes['_sec_QuotationsList']='hidden';
+      self::$_fieldsAttributes['_sec_CommandsList']='hidden';
+      self::$_fieldsAttributes['_sec_BillsList']='hidden';
     }
   }
   
