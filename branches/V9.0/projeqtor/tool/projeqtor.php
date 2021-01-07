@@ -4650,16 +4650,22 @@ function formatIconNewGui ($class, $size, $title=null, $withHighlight=false) {
 	return $result;
 }
 
-function formatSmallButton($class, $isClass=false, $activeButton=true) {
+function formatSmallButton($class, $isClass=false, $activeButton=true, $dontApplyRoundedButtonSmall=false) {
   global $print, $outMode;
   $size="16";
   $result='';
+  $roundedButton=" roundedButtonSmall ";
   if (isset($outMode) and $outMode=='pdf') {
-    $result.="<span class='roundedButtonSmall imageColorNewGui' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><img style='width:".$size."px;height:".$size."px;' src='css/customIcons/grey/icon$class.png' /></span>";
+    $result.="<span class='".$roundedButton.$newGui." ' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><img style='width:".$size."px;height:".$size."px;' src='css/customIcons/grey/icon$class.png' /></span>";
   } else {
     $button=($isClass)?'':'Button';
     $buttonClass=($activeButton)?'roundedButtonSmall':'';
-    $result.="<span class='$buttonClass' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><div class='icon$button$class$size icon$button$class iconSize$size' style='' >&nbsp;</div></span>";
+    $cursorMouse = "";
+    if($dontApplyRoundedButtonSmall){
+      $buttonClass="";
+      $cursorMouse= " cursor:pointer; ";
+    }
+    $result.="<span class='$buttonClass' style='".$cursorMouse."top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><div class='icon$button$class$size icon$button$class iconSize$size' style='' >&nbsp;</div></span>";
   }
   return $result;
 }
