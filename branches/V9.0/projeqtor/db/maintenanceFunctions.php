@@ -70,7 +70,7 @@ function runScript($vers,$pluginSqlFile=null) {
           Sql::beginTransaction();
           $result=Sql::query($query);
           if ( ! $result or !$result->queryString ) {
-            Sql::rollbackTransaction();
+            try {Sql::rollbackTransaction();} catch (Exception $e) { traceLog("Rollback cancelled (DDL command auto-committed)");}
             $nbError++;
             traceLog("");
             if ($vers) {
@@ -142,7 +142,7 @@ function runScript($vers,$pluginSqlFile=null) {
                 $resultSeq=Sql::query($querySeq);
               }
             }
-            Sql::commitTransaction();
+            try {Sql::commitTransaction();} catch (Exception $e) { /* traceLog("Commit already done (DDL command auto-committed)");*/ }
             switch ($action) {
               case "CREATE TABLE" :
                 traceLog(" Table \"" . $tableName . "\" created."); 
