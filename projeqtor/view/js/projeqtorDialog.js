@@ -687,6 +687,38 @@ function showPrint(page, context, comboName, outMode, orientation) {
   noDisconnect=false;
 }
 
+function dialogPrintPreviewFullScreen(printWidth,printHeight){
+  var myContentPane = dijit.byId("dialogPrint");
+  if( myContentPane.domNode.style.width == '90%'){
+     myContentPane.domNode.style.width = printWidth+'px';
+    myContentPane.domNode.style.height = printHeight+'px';
+  }else{
+    myContentPane.domNode.style.left = '0%';
+    myContentPane.domNode.style.top = '1%';
+    myContentPane.domNode.style.width = '100%';
+    myContentPane.domNode.style.height = '95%';
+  }
+    myContentPane = dijit.byId("dialogPrint");
+    dojo.byId('printFrame').style.height=(myContentPane.domNode.offsetHeight-50)+'px';
+    dojo.byId('printFrame').style.width='100%';
+}
+
+function dialogPrintPreviewFullScreenPDF(printWidth,printHeight){
+  var myContentPane = dijit.byId("dialogShowHtml");
+  if( myContentPane.domNode.style.width == '100%'){
+     myContentPane.domNode.style.width = printWidth+'px';
+    myContentPane.domNode.style.height =printHeight+'px';
+  }else{
+    myContentPane.domNode.style.left = '0%';
+    myContentPane.domNode.style.top = '1%';
+    myContentPane.domNode.style.width = '100%';
+    myContentPane.domNode.style.height = '95%';
+  }
+    myContentPane = dijit.byId("dialogShowHtml");
+    dojo.byId('showHtmlFrame').style.height=(myContentPane.domNode.offsetHeight-100)+'px';
+    dojo.byId('showHtmlFrame').style.width='100%';
+  }
+
 function sendFrameToPrinter() {
   dojo.byId("sendToPrinter").blur();
   window.frames['printFrame'].focus();
