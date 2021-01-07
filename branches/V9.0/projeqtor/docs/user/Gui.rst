@@ -2982,17 +2982,25 @@ Each element is identified with a distinctive icon.
 
 * Click on |iconNew| to create a new element
 * Click on |iconRefresh| to refresh the list
-* Click on |iconFilters| to apply many filters  
-* Click on |iconColumn| to organize the columns
+* Click on |iconFilters| :ref:`to apply many filters<filters9>`
+* Click on |iconColumn| :ref:`to organize the columns<columns9>`
 * Click on |iconSubMenu| to open the sub-menu
 * Click on |iconPrint9| to print the list area as it appear on the window
-* Click on |iconPDF| to export the list area to PDF
-* Click on |iconCSV| to export the list area to CSV
-* Click on |iconMultipleUpdate| to open the multiple update
+* Click on |iconPDF| :ref:`to export the list area to PDF<exportpdf9>`
+* Click on |iconCSV| :ref:`to export the list area to CSV<exportcsv9>`
+* Click on |iconMultipleUpdate| :ref:`to open the multiple update<multipleupdate9>`
 
 Swith the button clos to make appear all the handled element
 
- .. compound:: The filters
+
+
+
+
+
+
+.. _filters9:
+
+ .. compound:: |iconFilters| The filters
  
    .. figure:: /images/GUI9.0/GUI_BOX_Filters.png
       :alt: Filters
@@ -3118,22 +3126,298 @@ Swith the button clos to make appear all the handled element
         * Click on |iconShare| to shared a filter with your employees
         
         
-         When your collaborators share filters, they appear below the list of saved filters.
+        When your collaborators share filters, they appear below the list of saved filters.
 
-         Click on the list to display all filters and their author.
+        Click on the list to display all filters and their author.
 
 
-         .. figure:: /images/GUI9.0/GUI_ZONE_SharedFilters.png
+        .. figure:: /images/GUI9.0/GUI_ZONE_SharedFilters.png
             :alt: Shared filters
          
             Shared filters
 
 
 
+
+
+      .. compound:: List of filters
+        
+        The filter list allows to select a stored filter.
+        
+        To see the filter list, move the cursor over the advanced filter icon.
+        
+        .. figure:: /images/GUI9.0/GUI_BOX_FiltersList.png
+            :alt: List of filters
+         
+            List of filters 
+
+
+
+        * Click on the filter name to apply. Button icon active filter
+
+        * Click on no filter clause to reset the filter. button icon filter
+
+
+
+.. _columns9:
+
+ .. compound:: |iconColumn| The columns
+ 
+   .. figure:: /images/GUI9.0/GUI_BOX_Columns.png
+      :alt: Columns Organizer 
+      
+      Columns Organizer
+      
+      
+      
+   This functionality allows to define columns displayed in the list for this element.
+   
+   The columns display is defined for the user.
+   
+   The definition will be automatically applied in the next connection.
+
+   * Click on OK button to apply changes.
+
+   * Click on Reset button to reset the list to its default format
+
+
+      .. compound:: Column section
+      
+         Use checkboxes to select or unselect columns to display.
+
+         .. Note:: Id and name are mandatory fields. They cannot be removed from display.
+        
+
+      .. compound:: Columns order
+
+         Use the selector area Button icon drag to reorder fields with drag & drop feature.
+
+      .. compound:: Column size
+
+         Use the spinner buttons to change the width of the field.
+         
+         Width is in % of the total list width.
+         
+         The minimum width is 1%.
+         
+         The maximum width is 50%.
+         
+         .. note:: **Field Name**
+         
+            * The width of the field is automatically adjusted so that the total list width is 100%.
+              
+            * The width of the field cannot be less than 10%.
+         
+         .. warning:: **Total width over 100%**
+           
+            * The total width must be limited to a maximum 100%.
+              
+            * The exceedance will be highlighted beside the buttons.
+              
+            * This may lead to strange display, over page width, on list, reports and PDF export, depending on the browser.
+
+
+.. _exportpdf9:
+
+  .. compound:: |iconPdf| Export to PDF format
+
+
+      Allows to export data of list to PDF format.
+            
+      Export contains all details and links between tasks.
+
+      Export can be done horizontally (landscape) or vertically (portrait) in A4 and / or A3 format with high quality of details
+
+      
+
+
+
+
+.. _exportcsv9:
+
+  .. compound:: |iconCsv| Export to CSV format
+
+      This functionality allows to export data of list in a CSV file.
+            
+      The fields are regrouped and presented in the order as they appear in the item description.
+      
+      * Click on **OK** button to export data.
+      * Click on **Cancel** button to close the dialog box.
+               
+      The export definition is defined for each user. 
+         
+      The same definition can be applied in the next export.
+      
+      .. figure:: /images/GUI9.0/GUI_BOX_Export.png
+         :alt: Dialog box - Export 
+         :align: center
+            
+         Dialog box - Export
+         
+               
+      * Use the checkbox to select or unselect all fields.
+      * Click on **Select list columns** button to restrict selected fields to the ones that are currently displayed in the list.
+      * For fields that reference another item, you can select to export either the id or the clear name for the referenced item.
+      * Box checked indicating that HTML tags in a long text field will be kept during export.
+      
+      
+      .. note:: **Import Datas**
+         
+         The active filter defined will be applied to export data.
+                  
+         The CSV exported files can directly be imported through the import functionality. 
+                  
+         See: :ref:`import-data`
+         
+
+.. _multipleupdate9:
+
+  .. compound:: |iconMultipleUpdate| Multiple update
+
+   .. figure:: /images/GUI9.0/GUI_ZONE_MultipleModeList.png
+      :alt: Multiple mode item selection
+      :align: center
+               
+      Multiple mode item selection
+                  
+   Allows to update several items in one operation.
+   
+   * The fields that can be updated depends on the selected element.
+   
+   * The fields are grouped by section.
+  
+
+      
+    .. compound:: **Apply updates**
+      
+      * Selection of items can be done by selecting one or more items in the list window. |one|
+      * You can use the shift key or the control key to select several consecutive lines or not.
+      * Click to select the item, click again to deselect
+      * The count of items selected is displayed. |two|
+      * Or use checkboxes to select/unselect all items in the list. |three|
+      * Click on |iconSave| to save updates on selection. |four|
+      * Click on |iconDelete| to delete all selected items. |four|
+      * The update will be applied to all the items (if possible) and a report will be displayed on the right. |five|
+      * Click on |iconQuit| to quit the multiple mode window. |four|
+
+
+      .. note:: 
+      
+         * Target milestones can be modified with "multiple update" tickets and activity screens
+         
+         * You can bulk close items that do not have status (assigned, closed, recorded ...) as resources
+               
+         * The passwords of all users can be reset at the same time: 
+
+            * On the users screen, In the update area, click on the Reset button. 
+         
+            * An email will be send to the selected users.
+
+
+ 
+         
+.. _items-list9:         
+            
+.. rubric:: |threeBLC| Items list         
+         
+         
+Click a column header to sort the list on that column (first ascending, then descending).
+
+Sorting is not always on the name displayed.
+
+If the sorted column is linked to a reference list with sort order value, the sorting is executed on this sort value.
+
+Sorting on the “Status” allows to sort values such as defined in the workflow.
+
+Click on a line (any column) will display the corresponding item in the detail window.
+
+
+
+
+
+         
+         
+         
+         
+   
 .. _details-window-v9:
 
 Details Area
 ------------
 
-New details Area under construction
+.. figure:: /images/GUI9.0/GUI_ZONE_DetailWindow.png
+   :alt: Detail window
+   :align: center
+   
+   
+.. topic:: Interface areas:
 
+   |one| :ref:`Item identifier<item-identifier9>` 
+   
+   |two| :ref:`Creation information<creation-information9>` 
+   
+   |three| :ref:`Buttons<detail-window-button9>` 
+   
+   |four| :ref:`Text Editor<dw-text-editor9>`
+   
+   |five| :ref:`Sections<detail-window-sections9>`
+     
+
+
+
+.. _item-identifier9:
+
+.. rubric:: |oneBLC| Item identifier
+
+Identifies the item with the element type and the item id and name.
+
+Each element is identified with a distinctive icon.
+
+.. _creation-information9:
+
+.. rubric:: |twoBLC| Creation information
+
+You can see at a glance the status, update and creation information of the element.
+
+* First calendar shows the date of update.
+
+* Second calendar indicates the creation date of the element.
+
+      Calendars appear in red when the modified or created date is today's.
+      
+      They appear in yellow when this date is yesterday.
+      
+      and in gray when the date is older
+
+The thumbnail corresponds to the creator of the element
+
+See: :ref:`thumbnails`
+
+
+ .. note::
+
+    Administrator can change this informations.
+
+
+
+.. _detail-window-button9:
+
+.. rubric:: |threeBLC| Buttons
+
+.. topic:: Details windows buttons
+
+   * |iconNew| :ref:`Create new item<dw-create-item9>`
+   * |iconSave| :ref:`Save the changes<dw-save-item9>` 
+   * |iconRefresh| :ref:`Refresh the display<dw-refresh-display9>`
+   * |iconCopy| :ref:`Copy the current item<copy-item9>`     
+   * |iconDelete| :ref:`Delete the item<dw-delete-item9>`    
+   * |iconUndo| :ref:`Cancel changes<dw-undo-change9>`
+   * |iconPrint9| :ref:`Print the details<dw-print-item9>`
+   * |iconPdf|  :ref:`Export to PDF format<dw-export-pdf9>`
+   * |iconEmail| :ref:`Send details<email-detail9>`
+   * |iconSubscribe9| :ref:`Subscribe detail<subscribe-detail9>`
+   * |ActivityStream9| :ref:`Activity Stream<gui-activity-stream9>`
+   
+   
+   * |iconHistory| :ref:`Show history<change-history9>`
+   * |iconChecklist| :ref:`Show checklist<dw-show-checklist9>`

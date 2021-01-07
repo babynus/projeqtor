@@ -292,6 +292,12 @@
    
 .. |iconSubscribe| image:: images/IconSubscribe.png
    :alt: Susbcribe
+
+.. |iconSubscribe9| image:: images/v9/iconSubscribe.png
+   :alt: Susbcribe
+   :scale: 15
+	
+
 		
 .. |iconNotPlanned| image:: images/iconNotPlanned.png
    :alt: Icon not planned
@@ -388,9 +394,6 @@
 
 .. |iconGoto| image:: images/iconGoto.png
    :alt: Button icon goto 
-
-.. |iconPrint| image:: images/iconPrint.png
-   :alt: Button icon print
 
 .. |iconLink| image:: images/smallButtonLink.png
    :alt: Icon link
@@ -541,6 +544,13 @@
    :alt: Print
    :scale: 15
 
+.. |iconPrint| image:: images/iconPrint.png
+   :alt: Button icon print
+
+
+
+
+
 
 .. |buttonIconPdf| image:: images/buttonIconPdf.png
    :alt: icon PDF button
@@ -600,8 +610,19 @@
 .. |buttonIconCopy| image:: images/buttonIconCopy.png
    :alt: Button icon copy
 
+.. |IconCopy| image:: images/v9/IconCopy.png
+   :alt: Copy
+   :scale: 15   
+
+
+
+
 .. |buttonIconUndo| image:: images/buttonIconUndo.png
    :alt: button icon undo
+
+.. |iconUndo| image:: images/v9/iconUndo.png
+   :alt: Icon undo
+   :scale: 15   
 
 
 
@@ -628,6 +649,13 @@
    
 .. |buttonIconEmail| image:: images/buttonIconEmail.png
    :alt: Button icon email
+
+.. |iconEmail| image:: images/v9/iconEmail.png
+   :alt: email
+   :scale: 15
+
+
+
 
 .. |buttonIconMultipleUpdate| image:: images/buttonIconMultipleUpdate.png
    :alt: Button icon multiple update
@@ -661,11 +689,27 @@
 .. |buttonIconSelect| image:: images/buttonIconSelect.png
    :alt: Button icon select
  
+ 
+ 
+ 
 .. |buttonIconShowHistory| image:: images/buttonIconShowHistory.png
    :alt: Button icon show history
 
+.. |iconHistory| image:: images/v9/iconHistory.png
+   :alt: Show history
+   :scale: 15
+
+
+
 .. |buttonIconShowChecklist| image:: images/buttonIconShowChecklist.png
    :alt: Button icon show checklist
+
+.. |iconChecklist| image:: images/v9/iconChecklist.png
+   :alt: Show checklist
+   :scale: 15
+
+
+
 
 .. |yes| image:: images/buttonIconSelect.png
    :alt: Yes icon
@@ -691,8 +735,19 @@
 .. |statusFinishKO| image:: images/statusFinishKO.png
    :alt: Status finish KO
 
+
+
+
 .. |buttonQuit| image:: images/buttonQuit.png
-   :alt: button quit multiple update mode
+   :alt: Button quit multiple update mode
+
+.. |iconQuit| image:: images/v9/iconQuit.png
+   :alt: Quit multiple update mode
+   :scale: 15
+	
+
+
+
 
 .. |closeIcon| image:: images/close.png
    :alt: close icon
