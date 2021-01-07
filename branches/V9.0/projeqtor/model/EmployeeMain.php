@@ -242,7 +242,7 @@ class EmployeeMain extends SqlElement {
             $goto=' onClick="gotoElement('."'".get_class($res)."','".htmlEncode($res->id)."'".');" style="cursor: pointer;" ';
           }
           
-          $result .= '<td class="linkData '.((isNewGui())?'classLinkName':'').'" align="center"'.$goto.'>'.htmlEncode($res->name).'</td>';
+          $result .= '<td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="center"'.$goto.'>'.htmlEncode($res->name).'</td>';
           $result .= '<td class="linkData" align="center">'.htmlEncode($employee->startDate).'</td>';
           $result .= '<td class="linkData" align="center">'.htmlEncode($employee->endDate).'</td>';
           $result .= '<td class="linkData" align="center"><div dojoType="dijit.form.CheckBox" type="checkbox" readonly '.(($employee->idle==1)?'checked':'').' ></div></td>';
@@ -306,7 +306,7 @@ class EmployeeMain extends SqlElement {
             $goto=' onClick="gotoElement('."'EmploymentContract"."','".htmlEncode($ctr->id)."'".');" style="cursor: pointer;" ';
           }
           
-          $result .= '<td class="linkData classLinkName" align="center" '.$goto.'>'.htmlEncode($ctr->name).'</td>';
+          $result .= '<td class="linkData classLinkName '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="center" '.$goto.'>'.htmlEncode($ctr->name).'</td>';
           $result .= '<td class="linkData" align="center">'.htmlEncode($ctr->startDate).'</td>';
           $result .= '<td class="linkData" align="center">'.htmlEncode($ctr->endDate).'</td>';
           $result .= '<td class="linkData" align="center">'.htmlDisplayCheckbox($ctr->idle).'</td>';

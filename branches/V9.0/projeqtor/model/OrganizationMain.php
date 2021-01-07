@@ -417,7 +417,7 @@ class OrganizationMain extends SqlElement {
           {
             $goto=' onClick="gotoElement(\''.get_class($theObj).'\',\'' . htmlEncode($theObj->id) . '\');" style="cursor: pointer;" ';
           }
-          echo '<td '. $goto .' class="assignData hyperlink '.((isNewGui())?'classLinkName':'').'" style="width:' . (($print)?'45':'40') . '%" >' . htmlEncode($theObj->name) . '</td>';
+          echo '<td '. $goto .' class="assignData hyperlink '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="width:' . (($print)?'45':'40') . '%" >' . htmlEncode($theObj->name) . '</td>';
       } else {
           echo '<td class="assignData" style="width:5%"></td>';
           echo '<td class="assignData" style="width:' . (($print)?'45':'40') . '%">' . i18n('isNotVisible') . '</td>';        

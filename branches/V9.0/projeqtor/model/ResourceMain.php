@@ -894,7 +894,7 @@ class ResourceMain extends SqlElement {
         $result .= '<td class="assignData" style="width:5%">#' . htmlEncode($res->id) . '</td>';
         $result .= '<td  class="assignData hyperlink" style="width:' . (($print)?'45':'40') . '%">';
         $result .= '      <div style="float:left !important"> ' . $res->getPhotoThumb(22).'</div>';
-        $result .='      <div style="padding-top:5px;" '.$goto.' class="'.((isNewGui())?'classLinkName':'').'">&nbsp;&nbsp;' . htmlEncode($res->name) . '</div>';
+        $result .='      <div style="padding-top:5px;" '.$goto.' class="'.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'">&nbsp;&nbsp;' . htmlEncode($res->name) . '</div>';
         $result .='</td>';
       } else {
           $result .= '<td class="assignData" style="width:5%"></td>';

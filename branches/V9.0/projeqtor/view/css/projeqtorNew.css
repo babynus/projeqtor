@@ -2245,7 +2245,7 @@ border:1px solid var(--color-medium);
 	font-size: 9pt;
 }
 
-.linkIconHover{
+.linkIconHover, .classLinkName{
     cursor: pointer;
 }
 
