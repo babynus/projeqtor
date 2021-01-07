@@ -5942,8 +5942,8 @@ abstract class SqlElement {
       }
     }
     $msg .= $rowStart.'<td style="width:50%;vertical-align:top;padding-right:15px;">';
-    self::drawMailDetailCol($colArray['Description'], $msg);
-    self::drawMailDetailCol($colArray['Treatment'], $msg);
+    if(isset($colArray['Description']))self::drawMailDetailCol($colArray['Description'], $msg);
+    if(isset($colArray['Treatment']))self::drawMailDetailCol($colArray['Treatment'], $msg);
     $msg .= $fieldEnd.'<td style="width:50%;vertical-align:top;padding-left:15px;">';
     if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
     	$msg .= $tableStart;
