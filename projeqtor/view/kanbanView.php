@@ -691,6 +691,7 @@ function queryToDo($from,$nextFrom,$type,$isStatus){
     		$tableName.name as name,
     		$tableName.id".$typeKanbanC."Type as idtickettype,
     		$tableName.idStatus as idstatus,
+    		$tableName.idUrgency as idurgency,
     		$tableName.idProject as idproject,";
     if(property_exists($typeKanbanC, "idPriority")) {
       $query.="$tableName.idPriority as idpriority, ";

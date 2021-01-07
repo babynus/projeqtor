@@ -22,7 +22,7 @@
 require_once "../tool/kanbanConstructPrinc.php";
 function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
 	global $typeKanbanC, $arrayProject;
-	
+	debugLog($line);
 	$kanB = new Kanban ( $idKanban, true );
 	$json = $kanB->param;
 	$jsonDecode = json_decode ( $json, true );
