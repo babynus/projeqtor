@@ -390,7 +390,7 @@ class EmploymentContractTypeMain extends SqlElement {
             $goto=' onClick="gotoElement('."'".get_class($lvType)."','".htmlEncode($lvType->id)."'".');" style="cursor: pointer;" ';
           }
           
-          $result .= '<td class="linkData '.((isNewGui())?'classLinkName':'').'" align="center" '.$goto.'>'.htmlEncode($lvType->name).'</td>';
+          $result .= '<td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="center" '.$goto.'>'.htmlEncode($lvType->name).'</td>';
           if ($right->startMonthPeriod==null) {
               $theMonth = $months[0];
           } else {
@@ -514,7 +514,7 @@ class EmploymentContractTypeMain extends SqlElement {
           $result .= '<td class="linkData" align="center">'.htmlEncode($rule->rule).'</td>';
           $result .= '<td class="linkData" align="center">'.htmlEncode($rule->whereClause).'</td>';
           $result .= '<td class="linkData" align="center">'.htmlEncode($rule->quantity).'</td>';
-          $result .= '<td class="linkData '.((isNewGui())?'classLinkName':'').'" align="center" '.$goto.'>'.htmlEncode($lvType->name).'</td>';
+          $result .= '<td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="center" '.$goto.'>'.htmlEncode($lvType->name).'</td>';
           $result.="</tr>";
       }
       

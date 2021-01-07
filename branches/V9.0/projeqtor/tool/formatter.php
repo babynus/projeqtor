@@ -804,7 +804,7 @@ function activityStreamDisplayHist ($hist,$origin){
         }else{
           $gotoResource=' ';
         }
-        $resourceName='<span '.$gotoResource.' class="'.((isNewGui())?'classLinkName':'').'">'.$resource->name.'</span>';
+        $resourceName='<span '.$gotoResource.' class="'.((isNewGui() and isset($gotoResource) and $gotoResource!='')?'classLinkName':'').'">'.$resource->name.'</span>';
       }
     }else{
       return;
@@ -821,7 +821,7 @@ function activityStreamDisplayHist ($hist,$origin){
   $testObj=new $objectClass($objectId,true);
   if (securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', $testObj)=="YES") {
     //if($rightAcces->rightAccess==1){
-      $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
+      $gotoAndStyle=' class="streamLink '.((isNewGui())?'classLinkName':'').'" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
     //}
   }else{
     return;
@@ -855,7 +855,7 @@ function activityStreamDisplayHist ($hist,$origin){
     }else if($isLink){
       $gotoLink='';
       if ( securityCheckDisplayMenu(null, $linkedClass) and securityGetAccessRightYesNo('menu'.$linkedClass, 'read', '')=="YES") {
-        $gotoLink=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($linkedClass).'\',\''.htmlEncode($linkedId).'\')"';
+        $gotoLink=' class="streamLink '.((isNewGui())?'classLinkName':'').'" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($linkedClass).'\',\''.htmlEncode($linkedId).'\')"';
       }
       $text=i18n('addedLink').'<span '.$gotoLink.'>'.i18n($linkedClass).' #'.intval($linkedId).'</span>';
       $icon=formatIcon("LinkStream",22);
@@ -950,7 +950,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
   $testObj=($objectClass)?new $objectClass($objectId):null;
   if ($objectClass=='Ticket' and !securityCheckDisplayMenu(null, $objectClass)) $objectClass='TicketSimple';
   if ($mail->idMailable!='' and  securityCheckDisplayMenu(null, $objectClass) and securityGetAccessRightYesNo('menu'.$objectClass, 'read', $testObj)=="YES") {
-    $gotoAndStyle=' class="streamLink" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
+    $gotoAndStyle=' class="streamLink '.((isNewGui())?'classLinkName':'').'" style="margin-left:18px;" onClick="gotoElement(\''.htmlEncode($objectClass).'\',\''.htmlEncode($objectId).'\')"';
   } else {
     return;
   }

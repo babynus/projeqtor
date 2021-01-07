@@ -384,14 +384,14 @@ function showProjects() {
           echo '      style="float:left; width:16px; height:13px;"';
           echo '     >&nbsp;&nbsp;&nbsp;&nbsp;</div>';
         }
-        echo '<div '.$goto.' style="width:100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; " class="'.((isNewGui())?'classLinkName':'').'">'.$tab.htmlEncode($name);
+        echo '<div '.$goto.' style="width:100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; " class="'.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'">'.$tab.htmlEncode($name);
         echo '</div></td>';
         if ($showProject) {
-          echo ' <td class="messageData" style="vertical-align:middle;width:12px;margin:0;padding:0;spacing:0;border-left:0px;border-right:0px;" '.$goto.' >'.(($trendIcon)?'    <img height="12px" src="icons/'.$trendIcon.'" title="'.$trendName.'"/>':'').'  </td>';
+          echo ' <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="vertical-align:middle;width:12px;margin:0;padding:0;spacing:0;border-left:0px;border-right:0px;" '.$goto.' >'.(($trendIcon)?'    <img height="12px" src="icons/'.$trendIcon.'" title="'.$trendName.'"/>':'').'  </td>';
           if ($healthIcon) {
-            echo ' <td class="messageData" style="vertical-align:middle;width:12px;margin:0;padding:0;spacing:0;border-left:0px;border-right:0px;" '.$goto.' >'.' <img height="12px" src="icons/'.$healthIcon.'" title="'.$healthName.'"/>'.'  </td>';
+            echo ' <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="vertical-align:middle;width:12px;margin:0;padding:0;spacing:0;border-left:0px;border-right:0px;" '.$goto.' >'.' <img height="12px" src="icons/'.$healthIcon.'" title="'.$healthName.'"/>'.'  </td>';
           } else {
-            echo '  <td class="messageData" style="width:14px;margin:0;padding:0;spacing:0;border-left:0px;" '.$goto.' >'.'    <div class="colorHealth" style="'.$styleHealth.'background:'.$healthColor.';" title="'.$healthName.'">&nbsp;</div>'.'  </td>';
+            echo '  <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="width:14px;margin:0;padding:0;spacing:0;border-left:0px;" '.$goto.' >'.'    <div class="colorHealth" style="'.$styleHealth.'background:'.$healthColor.';" title="'.$healthName.'">&nbsp;</div>'.'  </td>';
           }
         }
         if ($showProject) echo '  <td style="width:'.$width.'px" class="messageDataValue'.($show?'':'Grey').' colorNameData">'.($show?displayProgress(htmlDisplayPct($progress), $planned, $left, $real, true, true):'').'</td>';
@@ -786,7 +786,7 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
       } else if ($alertLevel=='CRITICAL') {
         $color='background-color:#FF5555;';
       }
-      echo '<tr '.$goto.' id="displayWork_'.$cptDisplayId.'" >';
+      echo '<tr '.$goto.' id="displayWork_'.$cptDisplayId.' '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" >';
       if (!$print and $alertLevel!='NONE') {
         echo '<div dojoType="dijit.Tooltip" connectId="displayWork_'.$cptDisplayId.'" position="below">';
         echo $alertLevelArray['description'];

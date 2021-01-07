@@ -135,7 +135,7 @@ function showAsset($id,$name,$level,$position) {
   if (securityCheckDisplayMenu(null,'Asset') and securityGetAccessRightYesNo('menu'.get_class($item), 'read', '')=="YES") {
     $goto=' onClick="top.gotoElement(\''.get_class($item).'\',\''.htmlEncode($item->id).'\');window.top.dijit.byId(\'dialogPrint\').hide();" style="cursor: pointer;" ';
   }
-  echo '       <TD '.$goto.' style="'.$style.'padding-bottom:5px;" class="'.((isNewGui())?'classLinkName':'').'"><div class="amountTableDiv">#'.htmlEncode($item->id).'  '.htmlEncode($item->name). '</div></TD>' ;
+  echo '       <TD '.$goto.' style="'.$style.'padding-bottom:5px;" class="'.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'"><div class="amountTableDiv">#'.htmlEncode($item->id).'  '.htmlEncode($item->name). '</div></TD>' ;
   echo '      </tr></table>';
   echo '    </span>';
   echo '  </TD>';
