@@ -155,19 +155,20 @@ foreach($actWorkList as $wk) {
 		}
 	}
 	
-	if(! isset($work[$keyAss][$wk->workDate]) and $wk->work >= $ress->capacity){
-	  $work[$keyAss][$wk->workDate]=array('work'=>$wk->work,'type'=>'administrative');
-	  $maxCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
-	  $minCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
-	  $maxSurbooking[$wk->idResource]=0;
-	  $minSurbooking[$wk->idResource]=0;
-	}else {
+
+	if($wk->work ==($ress->capacity/2) and isset($work[$keyAss][$wk->workDate])) {
 	   $capacity=$work[$keyAss][$wk->workDate]['work']+$wk->work;
     	$work[$keyAss][$wk->workDate]=array('work'=>$capacity,'type'=>'planned_administrative');
     	$maxCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
     	$minCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
     	$maxSurbooking[$wk->idResource]=0;
     	$minSurbooking[$wk->idResource]=0;
+	}else{
+	  $work[$keyAss][$wk->workDate]=array('work'=>$wk->work,'type'=>'administrative');
+	  $maxCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
+	  $minCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
+	  $maxSurbooking[$wk->idResource]=0;
+	  $minSurbooking[$wk->idResource]=0;
 	}
 
 }
