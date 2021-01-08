@@ -1458,16 +1458,19 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       if (substr($col, 0, 7)=='_byMet_') {
         if (substr($col, -4, 4)=='Work' or substr($col, -3, 3)=='Pct' or substr($col, -4, 4)=='Rate' or strpos(strtolower($col), 'amount')!==false) {
           $dataType='decimal';
-          $dataLength='14.5';
+          $dataLengthWithDec='14,5';
+          $dataLength=14;
         }
         if (substr($col, -4, 4)=='Name') {
           $dataType='varchar';
           $dataLength=400;
+          $dataLengthWithDec=400;
         }
       } else {
         // END ADD BY Marc TABARY - 2017-02-28 - DATA CONSTRUCTED BY FUNCTION
         $dataType=$obj->getDataType($col);
-        $dataLength=$obj->getDataLength($col);
+        $dataLengthWithDec=$obj->getDataLength($col);
+        $dataLength=intval($dataLengthWithDec);
       }
       if ($obj->isAttributeSetToField($col, 'calculated') and (substr($col, -4, 4)=='Cost' or substr($col, -6, 6)=='Amount' or $col=='amount')) {
         $dataType='decimal';
@@ -2847,7 +2850,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if (($isWork or $isDuration or $isPercent) and $internalTable!=0 and $displayWidth<1600) {
           $fieldWidth-=12;
         }
-        $spl=explode(',', $dataLength);
+        $spl=explode(',', $dataLengthWithDec);
         $dec=0;
         if (count($spl)>1) {
           $dec=intval($spl[1]);

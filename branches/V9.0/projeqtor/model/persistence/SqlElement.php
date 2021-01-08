@@ -3398,7 +3398,7 @@ abstract class SqlElement {
       return 4294967295;
     } else {
       if (count ( $split ) >= 2) {
-        return intval($split [1]);
+        return ($split [1]);
       } else {
         return 0;
       }
