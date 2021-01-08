@@ -160,7 +160,7 @@
   <td style="width:1%; text-align:right;"  >
       <?php 
       $creationInfoWidth=0;
-      if (property_exists($obj, 'idStatus') and $displayWidthButton>=500) $creationInfoWidth+=125;
+      if (property_exists($obj, 'idStatus') and $displayWidthButton>=500) $creationInfoWidth+=130;
       if ($displayWidthButton>=800) $creationInfoWidth+=130;
       ?>
       <div style="width:<?php echo $creationInfoWidth;?>px;margin-right:0px;white-space:nowrap;max-height:32px;" id="buttonDivCreationInfo"><?php include_once '../tool/getObjectCreationInfo.php';?></div>
