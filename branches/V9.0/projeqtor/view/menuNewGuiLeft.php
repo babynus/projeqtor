@@ -319,7 +319,7 @@ function getPlugins (){
     $plInstal[$intalPlugin->uniqueCode]=$intalPlugin->uniqueCode;
     $plInstalVersion[$intalPlugin->uniqueCode]=$intalPlugin->pluginVersion;
   }
-  $where="id > 100000 and id <> 100006001";
+  $where="id > 100000 and id <> 100006001"; // Ids for plugin menu, except Kanban (not a plugin any more)
   $pluginsInstal=$menu->getSqlElementsFromCriteria(null,null,$where);
   $c=10;
   foreach ($pluginsInstal as $id=>$menuPlugin){
@@ -327,6 +327,10 @@ function getPlugins (){
     else  $idMenu=$menuPlugin->id;
     if (!$menuPlugin->canDisplay() ){
   	   unset($plInstal[$idMenu]);
+      continue;
+    }
+    if (securityCheckDisplayMenu($menuPlugin->id, null, getSessionUser())==false) {
+      //unset($plInstal[$idMenu]);
       continue;
     }
     if(!empty($plInstal)){
@@ -479,7 +483,7 @@ function navMenuHasItem($id,$result) {
     if (! is_object($nav)) {
       $idParent=(isset($nav['idParent']))?$nav['idParent']:0;
       $idMenu=(isset($nav['idMenu']))?$nav['idMenu']:0;
-      $idMenu=(isset($nav['idReport']))?$nav['idReport']:0;
+      $idReport=(isset($nav['idReport']))?$nav['idReport']:0;
       $idItem=(isset($nav['id']))?$nav['id']:0;
     } else {
       $idParent=(property_exists($nav, 'idParent'))?$nav->idParent:0;
