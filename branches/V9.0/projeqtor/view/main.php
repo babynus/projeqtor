@@ -1453,7 +1453,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     }
   ?> 
   <div style="widht:100%" id="printPreview" dojoType="dijit.layout.ContentPane" region="center">
-  <div style="cursor:pointer;position:absolute;top:7px;right:37px;z-index:99999" onClick="dialogPrintPreviewFullScreen(<?php echo $printWidth;?>,<?php echo $printHeight;?>);"  class="imageColorWhite iconSize22 iconFullScreen iconSize22 generalColClass"></div>
+  <div style="display:none;cursor:pointer;position:absolute;top:7px;right:37px;z-index:99999" onClick="dialogPrintPreviewFullScreen(<?php echo $printWidth;?>,<?php echo $printHeight;?>);"  class="imageColorWhite iconSize22 iconFullScreen iconSize22 generalColClass"></div>
     <table style="widht:100%">
       <tr>
         <td width="<?php echo $printWidth;?>px" align="right">
@@ -1492,7 +1492,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       $printHeight=round(getSessionValue('screenHeight')*0.50);
     }
   ?> 
-   <div id="printFullScreenShowHtml" style="cursor:pointer;position:absolute;top:7px;right:37px;z-index:99999" class="imageColorWhite iconSize22 iconFullScreen iconSize22 generalColClass" onClick="dialogPrintPreviewFullScreenPDF(<?php echo $printWidth;?>,<?php echo $printHeight;?>);"></div>
+   <div id="printFullScreenShowHtml" style="display:none;cursor:pointer;position:absolute;top:7px;right:37px;z-index:99999" class="imageColorWhite iconSize22 iconFullScreen iconSize22 generalColClass" onClick="dialogPrintPreviewFullScreenPDF(<?php echo $printWidth;?>,<?php echo $printHeight;?>);"></div>
   
   <div style="widht:100%" id="showHtmlLink" dojoType="dijit.layout.ContentPane" region="center">
     <table style="width:100%">
