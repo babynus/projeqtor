@@ -297,6 +297,7 @@ class Security
         $menuName='menu'.$refType;
         if ($menuName=='menuCalendarDefinition') $menuName='menuCalendar';
         if ($menuName=='menuBudgetItem') $menuName='menuBudget';
+        if ($menuName=='menuBusinessFeature') $menuName='menuProduct';
         if ($menuName=='menuWork') $menuName='menuImputation';
         if (SqlElement::is_subclass_of($refType, 'PlgCustomList')) $menuName='menuScreenCustomization';
         if (isLeavesSystemMenuByMenuName("menu".$refType)) {
@@ -306,17 +307,10 @@ class Security
             else return false;
           }
         } else {
-//           $accessRightList = $user->getAccessControlRights ();
-//           if ($menuName=='menuAffectable') {
-//             if (isset($accessRightList['menuResource']) and isset($accessRightList['menuResource']['read']) and $accessRightList['menuResource']['read']!='NO') {
-//               $accessRightList['menuAffectable']=$accessRightList['menuResource'];
-//             } else if (isset($accessRightList['menuUser']) and isset($accessRightList['menuUser']['read']) and $accessRightList['menuUser']['read']!='NO') {
-//               $accessRightList['menuAffectable']=$accessRightList['menuUser'];
-//             } else if (isset($accessRightList['menuContact']) and isset($accessRightList['menuContact']['read']) and $accessRightList['menuContact']['read']!='NO') {
-//               $accessRightList['menuAffectable']=$accessRightList['menuContact'];
-//             }
-//           }
           $check=Security::checkDisplayMenuForUser(substr($menuName,4),false);
+          if (!$check and $menuName=='menuAffectable') $check=Security::checkDisplayMenuForUser('User',false);
+          if (!$check and $menuName=='menuAffectable') $check=Security::checkDisplayMenuForUser('Resource',false);
+          if (!$check and $menuName=='menuAffectable') $check=Security::checkDisplayMenuForUser('Contact',false);
           if ( ! $check ) {
             if ($traceHack) traceHack("checkValidAccessForUser() Reject for $refType - no access to screen '$refType'");
             else return false;
@@ -337,7 +331,7 @@ class Security
         return true; // OK
       }
     } else if (get_class($obj)=='Attachment') {
-      // Access an attachement : must crontrol acess on item containing the attachment
+      // Access an attachment : must crontrol acess on item containing the attachment
       $refType=$obj->refType;
       $refId=$obj->refId;
       $obj=new $refType($refId);
