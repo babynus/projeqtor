@@ -9127,7 +9127,9 @@ function saveMailMessage() {
 //end
 
 //gautier #2935
+var doNotTriggerEmailChange=false;
 function findAutoEmail(){
+  if (doNotTriggerEmailChange==true) return;
   var adress=dijit.byId('dialogOtherMail').get('value');
   var regex = /,[ ]*|;[ ]*/gi;
   adress=adress.replace(regex,",");
@@ -9135,12 +9137,16 @@ function findAutoEmail(){
     url: '../tool/saveFindEmail.php?&isId=false&adress='+adress ,
     load: function(data,args) { 
       var email = data;
+      doNotTriggerEmailChange=true;
       dijit.byId('dialogOtherMail').set('value', email);
+      doNotTriggerEmailChange=false;
     }
   });
 }
 
 function dialogMailIdEmailChange(){
+  if (doNotTriggerEmailChange==true) return;
+  doNotTriggerEmailChange=true;
   var value = dijit.byId('dialogOtherMail').get('value');
   var id=dijit.byId('dialogMailObjectIdEmail').get('value');
   id = id+','+value;
@@ -9149,6 +9155,7 @@ function dialogMailIdEmailChange(){
     load: function(data,args) { 
       var email = data;
       dijit.byId('dialogOtherMail').set('value', email);
+      doNotTriggerEmailChange=false;
     }
   });
 }
