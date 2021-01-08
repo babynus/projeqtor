@@ -6870,7 +6870,7 @@ function resizeListDiv() {
   if (finalSize>100) finalSize=100;
   for (var i=0;i<arrayFieldsOrder.length;i++) {
     var fld=arrayFieldsOrder[i];
-    if (arrayFields[fld]["visible"]==false) {
+    if (arrayFields[fld]["visible"]==false && ! isNewGui) {
       dojo.query("."+fld+"SearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
     } else {
       var widgetId="#widget_list"+fld[0].toUpperCase()+fld.substring(1)+"Filter";
