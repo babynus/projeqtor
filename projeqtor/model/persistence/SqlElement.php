@@ -5941,7 +5941,7 @@ abstract class SqlElement {
         $colArray[$section][$col]=$val;
       }
     }
-    $msg .= $rowStart.'<td style="width:50%;vertical-align:top;padding-right:15px;">';
+    $msg .= $rowStart.'<td style="width:50%;vertical-align:top;padding-right:15px;min-width:500px;">';
     if(isset($colArray['Description']))self::drawMailDetailCol($colArray['Description'], $msg);
     if(isset($colArray['Treatment']))self::drawMailDetailCol($colArray['Treatment'], $msg);
     $msg .= $fieldEnd.'<td style="width:50%;vertical-align:top;padding-left:15px;">';
@@ -6153,9 +6153,9 @@ public function drawMailDetailCol($colArray, &$msg){
   			if (mb_strlen ( $val ) > 1000000) {
   				$text = new Html2Text ( $val );
   				$plainText = $text->getText();
-  				$msg .= nl2br(mb_substr($plainText,0, 1000000));
+  				$msg .= htmlSetClickableImages(nl2br(mb_substr($plainText,0, 1000000)), 450);
   			} else {
-  				$msg .= $val;
+  				$msg .= htmlSetClickableImages($val, 450);
   			}
   		} else if (strpos ( $this->getFieldAttributes ( $col ), 'displayHtml' ) !== false) {
   			$msg .= $val;
@@ -6507,9 +6507,9 @@ function getNotesClassicTab($msg, $rowStart,$rowEnd, $sectionStart, $sectionEnd,
       $plainText = $text->getText ();
       if (mb_strlen ( $plainText ) > 10000) { // Should not send too long email
         $noteTruncated = nl2br ( mb_substr ( $plainText, 0, 10000 ) );
-        $msg .= $noteTruncated;
+        $msg .= htmlSetClickableImages($noteTruncated,450);
       } else {
-        $msg .= $note->note;
+        $msg .= htmlSetClickableImages($note->note,450);
       }
       $msg .= $fieldEnd . $rowEnd;
     }
