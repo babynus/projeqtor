@@ -5023,7 +5023,7 @@ abstract class SqlElement {
           } else if ($object == "Link") {
             $crit = null;
             $where = "(ref1Type='" . get_class ( $this ) . "' and ref1Id=" . Sql::fmtId ( $this->id ) . ")" . " or (ref2Type='" . get_class ( $this ) . "' and ref2Id=" . Sql::fmtId ( $this->id ) . ")";
-          } else if (substr ( $object, - 4 ) == 'Type') {
+          } else if (substr ( $object, - 4 ) == 'Type' and property_exists($object, 'scope')) {
             $scope = substr ( $object, 0, strlen ( $object ) - 4 );
             $crit ['scope'] = $scope;
           }
