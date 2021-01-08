@@ -406,8 +406,13 @@ class Version extends SqlElement {
     $versList=$this->getSqlElementsFromCriteria($critArray,false,null,'name asc',false,true);
     $result='';
     foreach ($versList as $vers) {
-      $result.= '<tr><td class="linkData" style="white-space:nowrap;width:15%"><table><tr>';
-      $result.= '<td>'.formatIcon(get_class($vers), 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$vers->id.'</td></tr></table>';
+      $canRead=securityGetAccessRightYesNo('menu' . get_class($vers), 'read', $vers)=="YES";
+      $goto="";
+      if($canRead){
+        $goto='onClick="gotoElement(\'' . get_class($vers) .'\',\''. htmlEncode($vers->id) .'\');"';
+      }
+      $result.= '<tr><td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="white-space:nowrap;width:15%" '.$goto.'><table><tr>';
+      $result.= '<td>'.formatIcon(get_class($vers), 16).'</td><td style="vertical-align:top" >&nbsp;'.'#'.$vers->id.'</td></tr></table>';
       $result.= '</td>';
       //      $result.= '<td valign="top" style="padding-left:12px;width:20px;height:16px;	" class="icon'.$vers->scope.'Version16" >&nbsp;#'.$vers->id.'</td>';
       $style="";
