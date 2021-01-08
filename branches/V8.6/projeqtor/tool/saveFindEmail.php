@@ -34,17 +34,19 @@ $isId = RequestHandler::getValue('isId');
 if($isId == 'true'){
   $result = "";
   $id=RequestHandler::getValue('id');
-  $id = str_replace(',','_',$id);
+  $id = str_replace(array(',',';'),'_',$id);
   $listAttendees=explode('_',$id);
   foreach ($listAttendees as $val){
-    if (Security::checkValidId($val)) {
-      $name = SqlList::getFieldFromId('Resource', $val, 'email');
+    if (Security::checkValidId($val,false)) {
+      $name = SqlList::getFieldFromId('Affectable', $val, 'email');
       if($name != "" and Security::checkValidId($val,false)){
         $result .= $name.','; 
       }
+    } else {
+      if ($val) $result .= $val.',';
     }
   }
-  $result = substr($result, 0,-1);
+  $result = rtrim($result, ',');
   echo $result;
 //onBlur
 }else{
@@ -109,9 +111,9 @@ if($isId == 'true'){
         }
       }
     }
-    $adress=str_ireplace(',',',',$adress);
-   
-    echo $stockAdress.$adress;
+    $adress=str_ireplace(',,',',',$adress);
+    
+    echo rtrim($stockAdress.$adress,',');
   }else{
     echo "";
   }
