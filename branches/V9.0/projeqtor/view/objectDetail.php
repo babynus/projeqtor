@@ -3990,13 +3990,15 @@ function drawObjectLinkedByIdToObject($obj, $objLinkedByIdObject='', $refresh=fa
       echo '</td>';
     }
     if (array_key_exists($theObj->id, $listVisibleLinkedObj)) {
-      echo '<td class="assignData" style="width:5%">#'.htmlEncode($theObj->id).'</td>';
-      // ADD BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
       $classSub=get_class($theObj);
       if ($classSub=='ResourceAll') $classSub=($theObj->isResourceTeam)?'ResourceTeam':'Resource';
       if (!$print and securityCheckDisplayMenu(null, $classSub) and securityGetAccessRightYesNo('menu'.$classSub, 'read', '')=="YES") {
-        $goto=' onClick="gotoElement(\''.$classSub.'\',\''.htmlEncode($theObj->id).'\');" style="cursor: pointer;" ';
+        $goto=' onClick="gotoElement(\''.$classSub.'\',\''.htmlEncode($theObj->id).'\');" ';
       }
+      
+      echo '<td class="assignData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="width:5%" '.$goto.'>#'.htmlEncode($theObj->id).'</td>';
+      // ADD BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
+
       // END ADD BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
       // CHANGE BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
       echo '<td '.$goto.' class="assignData hyperlink '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="width:'.(($print)?'85':'80').'%">'.htmlEncode($theObj->name).'</td>';
@@ -4946,13 +4948,13 @@ function drawStructureFromObject($obj, $refresh=false, $way=null, $item=null) {
       echo '</td>';
     }
     // echo '<td class="linkData" style="white-space:nowrap;width:' . (($print)?'20':'15') . '%"><img src="css/images/icon'.get_class($compObj).'16.png" />&nbsp;'.$classCompName .' #' . $compObj->id;
-    echo '<td class="linkData" style="white-space:nowrap;width:'.(($print)?'20':'15').'%"><table><tr>';
-    echo '<td>'.formatIcon(get_class($compObj), 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$compObj->id.'</td></tr></table>';
-    echo '</td>';
     $goto="";
     if (!$print and $canGoto) {
       $goto=' onClick="gotoElement('."'".get_class($compObj)."','".htmlEncode($compObj->id)."'".');" style="cursor: pointer;" ';
     }
+    echo '<td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" '.$goto.' style="white-space:nowrap;width:'.(($print)?'20':'15').'%"><table><tr>';
+    echo '<td>'.formatIcon(get_class($compObj), 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$compObj->id.'</td></tr></table>';
+    echo '</td>';
     echo '<td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" '.$goto.' style="position:relative;">';
     echo htmlEncode($compObj->name);
     echo formatUserThumb($userId, $userName, 'Creator');
@@ -5231,14 +5233,15 @@ function drawSubscriptionsList($obj, $refresh=false, $limitToActive=null) {
     $item = new $subscription->refType($subscription->refId);
     if (!$item or !$item->id or ($limitToActive and $item->idle == 1)) continue;
     $canGoto=(securityCheckDisplayMenu(null, $subscription->refType) and securityGetAccessRightYesNo('menu'. $subscription->refType, 'read', $subscription)=="YES")?true:false;
-    echo '<tr>';
-    echo '<td class="linkData" style="white-space:nowrap;width:25%"><table><tr><td>' . htmlEncode(i18n($subscription->refType)) . '</td></tr></table>';
-    echo '</td><td class="linkData" style="white-space:nowrap;width:15%"><table><tr><td>' . formatIcon($subscription->refType, 16) . '</td><td style="vertical-align:top">&nbsp;'.'#' . $item->id . '</td></tr></table>';
-    echo '</td>';
     $goto="";
     if (!$print and $canGoto) {
       $goto=' onClick="gotoElement('."'" . $subscription->refType ."','" . htmlEncode($item->id) . "'".');" style="cursor: pointer;" ';
     }
+    echo '<tr>';
+    echo '<td class="linkData" style="white-space:nowrap;width:25%" ><table><tr><td>' . htmlEncode(i18n($subscription->refType)) . '</td></tr></table>';
+    echo '</td><td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="white-space:nowrap;width:15%" ' . $goto . '><table><tr><td>' . formatIcon($subscription->refType, 16) . '</td><td style="vertical-align:top">&nbsp;'.'#' . $item->id . '</td></tr></table>';
+    echo '</td>';
+
     echo '<td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" ' . $goto . ' style="position:relative">'; 
     echo htmlEncode($item->name);
     echo '</td>';
@@ -5313,13 +5316,13 @@ function drawTicketsList($obj, $refresh=false) {
     $canGoto=(securityCheckDisplayMenu(null, $listClass) and securityGetAccessRightYesNo('menu'.$listClass, 'read', $ticket)=="YES")?true:false;
     echo '<tr>';
     $classCompName=i18n($listClass);
-    echo '<td class="linkData" style="white-space:nowrap;width:15%">';
-    echo '<table><tr><td>'.formatIcon($listClass, 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$ticket->id.'</td></tr></table>';
-    echo '</td>';
     $goto="";
     if (!$print and $canGoto) {
       $goto=' onClick="gotoElement('."'".$listClass."','".htmlEncode($ticket->id)."'".');" style="cursor: pointer;" ';
     }
+    echo '<td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="white-space:nowrap;width:15%"  '.$goto.'>';
+    echo '<table><tr><td>'.formatIcon($listClass, 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$ticket->id.'</td></tr></table>';
+    echo '</td>';
     echo '<td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" '.$goto.' style="position:relative;width:60%">';
     echo htmlEncode($ticket->name);
     echo '</td>';
@@ -7136,7 +7139,7 @@ function drawAffectationsResourceTeamFromObject($list, $obj, $type, $refresh=fal
         }
         echo '</td>';
       }
-      echo '<td class="assignData'.$idleClass.'" align="center">'.htmlEncode($aff->idResource).'</td>';
+      echo '<td class="assignData'.$idleClass.' '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="center" '.$goto.'>'.htmlEncode($aff->idResource).'</td>';
       
       echo '<td class="assignData'.$idleClass.' '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="left"'.$goto.'>';
       if ($aff->description and !$print) {
@@ -7468,8 +7471,8 @@ function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
   	echo '</td>';
   	$res = new Resource($resInc->idIncompatible);
   	$goto=' onClick="gotoElement(\'Resource\',\''.htmlEncode($res->id).'\');" ';
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resInc->id).'</td>';
-  	echo ' <td class="assignData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="left" style="white-space: nowrap; cursor:pointer;" '.$goto.'>'.htmlEncode($res->name).'</td>';
+  	echo ' <td class="assignData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="center" style="white-space: nowrap;" '.$goto.'>'.htmlEncode($resInc->id).'</td>';
+  	echo ' <td class="assignData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="left" style="white-space: nowrap;" '.$goto.'>'.htmlEncode($res->name).'</td>';
   	echo '</tr>';
   }
   echo '</table></td></tr>';
@@ -7541,7 +7544,7 @@ function drawResourceSupport($list, $obj, $type, $refresh=false) {
   	echo '</td>';
   	$res = new Resource($resSup->idSupport);
   	$goto=' onClick="gotoElement(\'Resource\',\''.htmlEncode($res->id).'\');" ';
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resSup->id).'</td>';
+  	echo ' <td class="assignData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="center" style="white-space: nowrap;"  '.$goto.'>'.htmlEncode($resSup->id).'</td>';
   	echo ' <td class="assignData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="left" style="white-space: nowrap; cursor:pointer;" '.$goto.'>'.htmlEncode($res->name).'</td>';
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resSup->rate).'</td>';
   	echo '</tr>';
@@ -8072,18 +8075,18 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
         $resource=new ResourceAll($aff->idResource);
         if ($resource->isResourceTeam) {
           if (securityCheckDisplayMenu(null, 'ResourceTeam') and securityGetAccessRightYesNo('menuResourceTeam', 'read', '')=="YES") {
-            $goto=' onClick="gotoElement(\'ResourceTeam\',\''.htmlEncode($aff->idResource).'\');" style="cursor: pointer;" ';
+            $goto=' onClick="gotoElement(\'ResourceTeam\',\''.htmlEncode($aff->idResource).'\');" ';
           }
           $classToShow='ResourceTeam';
         } else {
           if (!$print and $isResource and securityCheckDisplayMenu(null, 'Resource') and securityGetAccessRightYesNo('menuResource', 'read', '')=="YES") {
-            $goto=' onClick="gotoElement(\'Resource\',\''.htmlEncode($aff->idResource).'\');" style="cursor: pointer;" ';
+            $goto=' onClick="gotoElement(\'Resource\',\''.htmlEncode($aff->idResource).'\');" ';
           }
           $classToShow='Resource';
         }
       } else {
         if (!$print and securityCheckDisplayMenu(null, $typeAffectable) and securityGetAccessRightYesNo('menu'.$typeAffectable, 'read', '')=="YES") {
-          $goto=' onClick="gotoElement(\''.$typeAffectable.'\',\''.htmlEncode($aff->idResource).'\');" style="cursor: pointer;" ';
+          $goto=' onClick="gotoElement(\''.$typeAffectable.'\',\''.htmlEncode($aff->idResource).'\');"  ';
         }
         $classToShow=$typeAffectable;
       }
@@ -8112,7 +8115,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
         
         echo '</td>';
       }
-      echo '<td class="assignData'.$idleClass.'" align="center">'.htmlEncode($idToShow).'</td>';
+      echo '<td class="assignData'.$idleClass.' '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="center" '.$goto.'>'.htmlEncode($idToShow).'</td>';
       /*
        * if ($idProj) {
        * echo '<td class="assignData' . $idleClass . '" align="left"' . $goto . '>' . htmlEncode($name) . '</td>';
@@ -8120,7 +8123,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
        * echo '<td class="assignData' . $idleClass . '" align="left"' . $goto . '>' . htmlEncode($name) . '</td>';
        * }
        */
-      echo '<td class="assignData'.$idleClass.' '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="left"'.$goto.'>';
+      echo '<td class="assignData'.$idleClass.' '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="left" '.$goto.'>';
       // resourceTeam
       if (isset($typeAffectable)=='ResourceAll') {
         $resource=new ResourceAll($aff->idResource);
@@ -8161,7 +8164,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       
         echo '</td>';
       }
-      echo '<td class="assignData'.$idleClass.'" align="center">'.htmlEncode($idToShow).'</td>';
+      echo '<td class="assignData'.$idleClass.' '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="center" '.$goto.'>'.htmlEncode($idToShow).'</td>';
       /*
        * if ($idProj) {
       * echo '<td class="assignData' . $idleClass . '" align="left"' . $goto . '>' . htmlEncode($name) . '</td>';
@@ -8169,7 +8172,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       * echo '<td class="assignData' . $idleClass . '" align="left"' . $goto . '>' . htmlEncode($name) . '</td>';
       * }
       */
-      echo '<td class="assignData'.$idleClass.' '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="left"'.$goto.'>';
+      echo '<td class="assignData'.$idleClass.' '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" align="left" '.$goto.'>';
       // resourceTeam
       if (isset($typeAffectable)=='ResourceAll') {
         $resource=new ResourceAll($aff->idResource);
