@@ -1453,7 +1453,6 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     }
   ?> 
   <div style="widht:100%" id="printPreview" dojoType="dijit.layout.ContentPane" region="center">
-  <div style="display:none;cursor:pointer;position:absolute;top:7px;right:37px;z-index:99999" onClick="dialogPrintPreviewFullScreen(<?php echo $printWidth;?>,<?php echo $printHeight;?>);"  class="imageColorWhite iconSize22 iconFullScreen iconSize22 generalColClass"></div>
     <table style="widht:100%">
       <tr>
         <td width="<?php echo $printWidth;?>px" align="right">
@@ -1484,7 +1483,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
   </div>
 </div>
 
-<div class="dijitDialog dijitDialogFocused dijitFocused"" id="dialogShowHtml" dojoType="dijit.Dialog" refreshOnShow="true" onHide="if (window.frames['showHtmlFrame']) window.frames['showHtmlFrame'].location.href='../view/preparePreview.php';" title="">
+<div class="dijitDialog dijitDialogFocused dijitFocused"" id="dialogShowHtml" dojoType="dijit.Dialog" onHide="if (window.frames['showHtmlFrame']) window.frames['showHtmlFrame'].location.href='../view/preparePreview.php';" title="">
   <?php 
     $printHeight=600;
     $printWidth=1010;
@@ -1492,7 +1491,6 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       $printHeight=round(getSessionValue('screenHeight')*0.50);
     }
   ?> 
-   <div id="printFullScreenShowHtml" style="display:none;cursor:pointer;position:absolute;top:7px;right:37px;z-index:99999" class="imageColorWhite iconSize22 iconFullScreen iconSize22 generalColClass" onClick="dialogPrintPreviewFullScreenPDF(<?php echo $printWidth;?>,<?php echo $printHeight;?>);"></div>
   
   <div style="widht:100%" id="showHtmlLink" dojoType="dijit.layout.ContentPane" region="center">
     <table style="width:100%">
@@ -1505,6 +1503,11 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       </tr>
     </table>
   </div>
+</div>
+
+<div id="showHtmlLink8" dojoType="dijit.Dialog"  id="divPrintFullScreenShowHtml2" style="top:0;z-index:99999;display:none;position:absolute;width:99%;height:99%;">test
+<iframe scrolling="auto" frameborder="0px" name="showHtmlFrame3" id="showHtmlFrame3" src="">
+</iframe>
 </div>
 
 <div id="dialogDetail" dojoType="dijit.Dialog" title="<?php echo i18n("dialogDetailCombo");?>" class="background" onHide="window.document.title=applicationName;">
