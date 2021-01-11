@@ -1217,7 +1217,7 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
 <?php }?>                 
 <?php if (! $comboDetail) {?>        
             <?php organizeListButtons();?>        
-             <td width="36px" class="allSearchFixLength">
+             <td width="36px" class="<?php if (! isNewGui()) echo 'allSearchFixLength';?>">
               <button title="<?php echo i18n('printList')?>"  
                dojoType="dijit.form.Button" 
                id="listPrint" name="listPrint"
@@ -1237,7 +1237,7 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
         }
       ?> 
              <?php organizeListButtons();?>              
-             <td width="36px" class="allSearchFixLength">
+             <td width="36px" class="<?php if (! isNewGui()) echo 'allSearchFixLength';?>">
               <button title="<?php echo ($modePdf=='pdf')?i18n('reportPrintPdf'):i18n('reportPrintTemplate');?>"
                dojoType="dijit.form.Button" 
                id="listPrintPdf" name="listPrintPdf"
@@ -1253,7 +1253,7 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
               </button>              
             </td>
             <?php organizeListButtons();?>        
-            <td width="36px" class="allSearchFixLength">
+            <td width="36px" class="<?php if (! isNewGui()) echo 'allSearchFixLength';?>">
               <button title="<?php echo i18n('reportPrintCsv')?>"  
                dojoType="dijit.form.Button" 
                id="listPrintCsv" name="listPrintCsv"
@@ -1284,7 +1284,7 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
     $buttonMultiple=($list->code=='NO')?false:true;
     if ($buttonMultiple and !$comboDetail and ! array_key_exists('planning',$_REQUEST) and $objClassList != 'GlobalView') {?>
     <?php organizeListButtons();?>
-    <td width="36px" class="allSearchFixLength">
+    <td width="36px" class="<?php if (! isNewGui()) echo 'allSearchFixLength';?>">
     <span id="multiUpdateButtonDiv" >
     <button id="multiUpdateButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('buttonMultiUpdate');?>"
@@ -1321,7 +1321,7 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
     $extraPlgButtons=Plugin::getButtons('list', $objectClass);
     foreach ($extraPlgButtons as $bt) { ?>
     <?php organizeListButtons();?>
-    <td width="36px" class="allSearchFixLength">
+    <td width="36px" class="<?php if (! isNewGui()) echo 'allSearchFixLength';?>">
       <button id="pluginButtonList<?php echo $bt->id;?>" dojoType="dijit.form.Button" showlabel="false"
         title="<?php echo i18n($bt->buttonName);?>"
         iconClass="<?php echo $bt->iconClass;?>" class="detailButton">
@@ -1615,7 +1615,7 @@ function organizeListButtons($nbButton=1) {
     if (! $extendedListZone) {
       echo "<! ========================================================>";
       $extendedListZone=true;
-      echo '<td>';
+      echo '<td class="allSearchFixLength">';
       echo '<div style="position:relative;z-index:9">';
       echo '<div dojoType="dijit.form.Button" showlabel="false" title="'. i18n('extraButtonsBar'). '" '
           .' iconClass="dijitButtonIcon dijitButtonIconExtraButtons" class="detailButton" '

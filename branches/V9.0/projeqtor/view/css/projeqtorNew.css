@@ -1805,7 +1805,7 @@ element.style {
   overflow:visible;	
 }
 .ProjeQtOrNewGui .allSearchFixLength {
-  min-width: 36px;
+  /* min-width: 36px;*/
 }
 
 .ProjeQtOrNewGui .menuBarItemSelectedModule {

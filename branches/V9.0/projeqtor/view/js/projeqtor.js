@@ -6826,6 +6826,7 @@ function resizeListDiv() {
       "element":{"set":false,"visible":true,"fixWidth":0,"size":3}
   };
   var arrayFieldsOrder=["reset","element","client","parentBudget","type","idle","id","name"];
+  // Reset all fields length to 10px (minimum)
   for (var i=0;i<arrayFieldsOrder.length;i++) {
     var fld=arrayFieldsOrder[i];
     if (arrayFields[fld]["size"]==0) continue;
@@ -6833,41 +6834,56 @@ function resizeListDiv() {
     dojo.query(widgetId).forEach(function(node, index, nodelist) { node.style.width="10px";});  
   }
   
+  // Count size for Fixed items (labels, reset, idle) and sum 'size' for each displayed item
   var fixedLenghtPart=0;
   var variableSize=0;
   dojo.query(".allSearchFixLength").forEach(function(node, index, nodelist) { 
-      var nodeWidth=node.offsetWidth+5;
-      fixedLenghtPart+=nodeWidth;
-      for (var fld in arrayFields) {
-        var cls=fld+"SearchTD";
-        if (dojo.hasClass(node,cls)) {
-          arrayFields[fld]["set"]=true;
-          arrayFields[fld]["fixWidth"]=nodeWidth;
-          variableSize+=arrayFields[fld]["size"];
-        }
-      }      
+      var nodeWidth=(node.offsetWidth)?node.offsetWidth+5:0;
+      if (isNewGui && node.hasChildNodes() && node.childNodes[1] && node.childNodes[1] && node.childNodes[1].style.display=='none') {
+        // Do not count hidden
+      } else {
+        fixedLenghtPart+=nodeWidth;
+        console.log(node);
+        for (var fld in arrayFields) {
+          if (isNewGui && fld=='reset') continue; // Do not count reset : on pop-up
+          var cls=fld+"SearchTD";
+          if (dojo.hasClass(node,cls)) {
+            console.log("   "+fld+"="+nodeWidth);
+            arrayFields[fld]["set"]=true;
+            arrayFields[fld]["fixWidth"]=nodeWidth;
+            variableSize+=arrayFields[fld]["size"];
+          }
+        }      
+      }
   });
   
   fixedLenghtPart+=dojo.byId("classNameSpan").offsetWidth; // Add length of Class Name
   fixedLenghtPart+=75; // Add size of icon (42) + small margin
+  //if (isNewGui) fixedLenghtPart+=50;
   var leftWidth=width-fixedLenghtPart;
   var minSize=25;
   var cptLoop=0;
-  while (minSize*variableSize>leftWidth && cptLoop<20) {
-    for (var i=0;i<arrayFieldsOrder.length;i++) {
-      var fld=arrayFieldsOrder[i];
-      if (arrayFields[fld]["set"]==true && arrayFields[fld]["visible"]==true) {
-        arrayFields[fld]["visible"]=false;
-        variableSize-=arrayFields[fld]["size"];
-        leftWidth+=arrayFields[fld]["fixWidth"];
-        break; // Check if display is possible
-      }  
+  if (isNewGui) {
+    // Nothing, hidden fileds already taken into account
+  } else {
+    while (minSize*variableSize>leftWidth && cptLoop<20) {
+      for (var i=0;i<arrayFieldsOrder.length;i++) {
+        var fld=arrayFieldsOrder[i];
+        if (arrayFields[fld]["set"]==true && arrayFields[fld]["visible"]==true) {
+          arrayFields[fld]["visible"]=false;
+          variableSize-=arrayFields[fld]["size"];
+          leftWidth+=arrayFields[fld]["fixWidth"];
+          break; // Check if display is possible
+        }  
+      }
+      cptLoop++;
     }
-    cptLoop++;
   }
   var finalSize=Math.floor(leftWidth/variableSize);
-  //if (isNewGui) finalSize-=10;
+  if (isNewGui) finalSize-=10;
+  if (isNewGui && finalSize<minSize) finalSize=minSize;
   if (finalSize>100) finalSize=100;
+  if (isNewGui && finalSize>90) finalSize=90;
   for (var i=0;i<arrayFieldsOrder.length;i++) {
     var fld=arrayFieldsOrder[i];
     if (arrayFields[fld]["visible"]==false && ! isNewGui) {
@@ -6875,40 +6891,13 @@ function resizeListDiv() {
     } else {
       var widgetId="#widget_list"+fld[0].toUpperCase()+fld.substring(1)+"Filter";
       var fldWidth=finalSize*arrayFields[fld]["size"];
-      dojo.query(widgetId).forEach(function(node, index, nodelist) { node.style.width=(fldWidth)+"px";});  
+      dojo.query(widgetId).forEach(function(node, index, nodelist) { 
+        node.style.width=(fldWidth)+"px";
+        node.style.maxWidth=(fldWidth)+"px";
+      });  
     }
     
   }
-//  var refWidth=50;
-//  if (width<1650) {
-//    dojo.query(".parentBudgetSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-//  }
-//  if (width<1400) {
-//    dojo.query(".clientSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-//    dojo.query(".hideInServiceTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-//  }
-//  if (width<1100) {
-//    refWidth=25;
-//  }
-//  dojo.query("#widget_listNameFilter").forEach(function(node, index, nodelist) { node.style.width=(refWidth*2)+"px";});
-//  dojo.query("#widget_listIdFilter").forEach(function(node, index, nodelist) { node.style.width=(refWidth*1)+"px";});
-//  dojo.query("#widget_listTypeFilter").forEach(function(node, index, nodelist) { node.style.width=(refWidth*4)+"px";});
-//
-//  if (width<1050) {
-//    dojo.query(".typeSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-//    dojo.query(".elementSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-//  }
-//  if (width<900) {
-//    dojo.query(".idSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-//    dojo.query(".resetSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-//  }
-//  if (width<750) {
-//	dojo.query(".idleSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-//    dojo.query(".idSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-//  }
-//  if (width<670) {
-//    dojo.query(".nameSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-//  }
 }
 
 var donotSaveResize=false;
