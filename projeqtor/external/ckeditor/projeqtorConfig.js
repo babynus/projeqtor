@@ -36,11 +36,11 @@ CKEDITOR.editorConfig = function( config ) {
       config.removeButtons = 'tools,Maximize';
       config.extraPlugins += ',staticspace';
       config.staticSpacePriority=1;
-      config.extraPlugins+=',projeqtorfullscreen';
+      if (! forceCkInline) config.extraPlugins+=',projeqtorfullscreen';
       //config.staticSpacePositionY='bottom';
       //config.staticSpacePositionX='left';
-      //config.removePlugins += ',elementspath';
-      //config.resize_enabled = false;
+      if (forceCkInline) config.removePlugins += ',elementspath';
+      if (forceCkInline) config.resize_enabled = false;
     }
   }
   //config.pasteFromWordRemoveStyles = false; // Removed in 4.6.0
