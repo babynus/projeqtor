@@ -145,11 +145,19 @@ if ($print) $canUpdate=false;
 			    <td class="noteData" style="border-left:0;">
 			      <table style="width:<?php echo $internalWidth;?>;">
 			        <tr>
-				<?php for ($i=1;$i<=5;$i++) {
+				<?php 
+				      $nb=0;
+				      for ($i=1;$i<=5;$i++) {
+				        $check='check0'.$i;
+				        if ($line->$check) $nb++;
+				      }
+				      if ($nb<3) $nb=3;
+				      $width=($nb)?15*5/$nb:15*5;
+				      for ($i=1;$i<=5;$i++) {
 								$check='check0'.$i;
 								$title='title0'.$i;
 								$value='value0'.$i;?>
-								<td style="min-width:100px;width:15%;vertical-align:top;<?php if (!$line->$check) echo 'display:none';?>" title="<?php echo ($print)?'':$line->$title;?>" >
+								<td style="min-width:100px;width:<?php echo $width;?>%;vertical-align:top;<?php if (!$line->$check) echo 'display:none';?>" title="<?php echo ($print)?'':$line->$title;?>" >
 					<?php if ($line->$check) {
 								  $checkName="check_".htmlEncode($line->id)."_".$i;
 								  if ($print) {
@@ -164,7 +172,7 @@ if ($print) $canUpdate=false;
 						        name="<?php echo $checkName;?>" id="<?php echo $checkName;?>"
 						        <?php if (! $canUpdate) echo 'readonly';?>
 				            <?php if ($lineVal->$value) { echo 'checked'; }?> ></div>
-								  <span style="cursor:pointer;" onClick="dojo.byId('<?php echo $checkName;?>').click();"><?php echo htmlEncode($line->$check);?>&nbsp;&nbsp;</span>
+								  <span style="cursor:pointer;" onClick="dojo.byId('<?php echo $checkName;?>').click();"><?php echo ($line->$check);?>&nbsp;&nbsp;</span>
 					  <?php } 
 		            }?>
 		            </td>
