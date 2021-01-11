@@ -2358,7 +2358,7 @@ Definition of the "default" project for new elements.
 
 .. compound:: Project selector search
 
-   Click on |buttonIconSearch9| to search projects and subprojects from any screen with the same search functions as on the projects screen
+   Click on |iconSearch| to search projects and subprojects from any screen with the same search functions as on the projects screen
 
    .. figure:: /images/GUI9.0/GUI_BOX_ProjectSelectorSearch.png
       :alt: Project selector search mode
@@ -2699,11 +2699,11 @@ Right clicking on the display area allows you to display and organize the 5 favo
       .. figure:: /images/GUI9.0/GUI_ZONE_FavorisIMGTXT.png
 
       
-The number displayed corresponds to the number of the favorites bar on which you are.
-
-To change bookmarks bar, use your mouse wheel when you are positioned on the bar.
-
-Or click on the up and down navigation arrows at the right end of the bar.       
+      The number displayed corresponds to the number of the favorites bar on which you are.
+      
+      To change bookmarks bar, use your mouse wheel when you are positioned on the bar.
+      
+      Or click on the up and down navigation arrows at the right end of the bar.       
       
       
  .. compound:: Add, Organize and remove bookmarks
@@ -3071,93 +3071,93 @@ Swith the button clos to make appear all the handled element
       
      
 
-      .. compound:: Active filter
-
-         Define the clauses of filter or sort in “Add a filter or sort clause”.
+         .. compound:: Active filter
    
-         Select the name of the field, the operator and the value to the clause.
-   
-         * Click on |iconAdd| to add additional criteria.
-         
-         * Name the filter to save and click on |iconSave| for later reuse.
+            Define the clauses of filter or sort in “Add a filter or sort clause”.
       
-         * Click on |buttonIconSearch9| to filter the filter list.
-
-         * Click on OK button to apply the filter.
-   
-         * Click on Cancel button to revert to previous filter.
-         
-         * Click on Clear button to reset the active filter.
-         
-                  
-         
-            .. compound:: Logical operator
+            Select the name of the field, the operator and the value to the clause.
       
-              Possibility to select the logical operator OR between the criteria of a filter instead of AND.
-   
-              Applies logical operator with preceeding criteria (by default AND). 
-              
-              Be careful, operator AND is applies before OR. 
-              
-              
-   
-            .. compound:: Dynamic value
+            * Click on |iconAdd| to add additional criteria.
             
-              When the selected value is dynamic, then you do not select anything in the list.
-              
-              The value will then be entered when the filter is called and will be fully activated when the filter is chosen.
-
-
-
-
-
-
-
-      .. compound:: Saved filters
-        
-        This section allows to manage saved filters.
-        
-        * Click on a saved filter to retrieve its definition.
-        
-        * Click on |iconDelete| from a saved filter to delete it.
-                
-        * Click on |iconDrag| to reorganize the filters.
-        
-        * Click on |iconShare| to shared a filter with your employees
-        
-        
-        When your collaborators share filters, they appear below the list of saved filters.
-
-        Click on the list to display all filters and their author.
-
-
-        .. figure:: /images/GUI9.0/GUI_ZONE_SharedFilters.png
-            :alt: Shared filters
+            * Name the filter to save and click on |iconSave| for later reuse.
          
-            Shared filters
-
-
-
-
-
-      .. compound:: List of filters
-        
-        The filter list allows to select a stored filter.
-        
-        To see the filter list, move the cursor over the advanced filter icon.
-        
-        .. figure:: /images/GUI9.0/GUI_BOX_FiltersList.png
-            :alt: List of filters
+            * Click on |iconSearch| to filter the filter list.
+   
+            * Click on OK button to apply the filter.
+      
+            * Click on Cancel button to revert to previous filter.
+            
+            * Click on Clear button to reset the active filter.
+            
+                     
+            
+               .. compound:: Logical operator
          
-            List of filters 
-
-
-
-        * Click on the filter name to apply. Button icon active filter
-
-        * Click on no filter clause to reset the filter. button icon filter
-
-
+                 Possibility to select the logical operator OR between the criteria of a filter instead of AND.
+      
+                 Applies logical operator with preceeding criteria (by default AND). 
+                 
+                 Be careful, operator AND is applies before OR. 
+                 
+                 
+      
+               .. compound:: Dynamic value
+               
+                 When the selected value is dynamic, then you do not select anything in the list.
+                 
+                 The value will then be entered when the filter is called and will be fully activated when the filter is chosen.
+   
+   
+   
+   
+   
+   
+   
+         .. compound:: Saved filters
+           
+           This section allows to manage saved filters.
+           
+           * Click on a saved filter to retrieve its definition.
+           
+           * Click on |iconDelete| from a saved filter to delete it.
+                   
+           * Click on |iconDrag| to reorganize the filters.
+           
+           * Click on |iconShare| to shared a filter with your employees
+           
+           
+           When your collaborators share filters, they appear below the list of saved filters.
+   
+           Click on the list to display all filters and their author.
+   
+   
+           .. figure:: /images/GUI9.0/GUI_ZONE_SharedFilters.png
+               :alt: Shared filters
+            
+               Shared filters
+   
+   
+   
+   
+   
+         .. compound:: List of filters
+           
+           The filter list allows to select a stored filter.
+           
+           To see the filter list, move the cursor over the advanced filter icon.
+           
+           .. figure:: /images/GUI9.0/GUI_BOX_FiltersList.png
+               :alt: List of filters
+            
+               List of filters 
+   
+   
+   
+           * Click on the filter name to apply.
+   
+           * Click on **no filter clause** to reset the filter.
+   
+   
 
 .. _columns9:
 
@@ -3346,8 +3346,10 @@ Details Area
 ------------
 
 .. figure:: /images/GUI9.0/GUI_ZONE_DetailWindow.png
-   :alt: Detail window
+   :alt: Details area
    :align: center
+   
+   Details Area
    
    
 .. topic:: Interface areas:
@@ -3361,6 +3363,8 @@ Details Area
    |four| :ref:`Text Editor<dw-text-editor9>`
    
    |five| :ref:`Sections<detail-window-sections9>`
+   
+   |six| :ref:`Special fields<specialfields9>`
      
 
 
@@ -3400,6 +3404,8 @@ See: :ref:`thumbnails`
 
 
 
+
+
 .. _detail-window-button9:
 
 .. rubric:: |threeBLC| Buttons
@@ -3419,3 +3425,636 @@ See: :ref:`thumbnails`
    * |ActivityStream9| :ref:`Activity Stream<gui-activity-stream9>`
    * |iconHistory| :ref:`Show history<change-history9>`
    * |iconChecklist| :ref:`Show checklist<dw-show-checklist9>`
+
+   
+    
+
+   .. warning::
+
+    Some buttons are not clickable when changes are ongoing.
+    
+    When changes are ongoing, you cannot select another item or another menu item. 
+    
+    Save or cancel ongoing changes first.
+    
+    
+    
+    
+    
+    
+.. _dw-create-item9:
+    
+   .. compound:: |iconNew| Create a new item
+   
+      Depending on the screen of the selected item, create a new item in that category 
+
+
+.. _dw-save-item9:
+    
+   .. compound:: |iconSave| Save the changes
+   
+      Save the changes of the current item. 
+      
+      Or use shortcut key :kbd:`ctrl-s` to save the changes on the current item.
+            
+            
+.. _dw-refresh-display9:
+
+   .. compound:: |iconRefresh| Refresh the display
+   
+      Allows you to refresh the details windows of the selected element
+
+
+
+.. _copy-item9:
+
+   .. compound:: |iconCopy| Copy item
+
+      Allows you to copy an entire element or to select only some information such as project structure, meetings, links or attached files.
+
+      The new item has the status **copied**.
+      
+      The information to copy is different depending on the item selected
+      
+        
+      .. figure:: /images/GUI9.0/GUI_BOX_CopyItemProject.png 
+         :alt: Dialog box - Copy element
+         :align: center
+         
+         Copy project
+          
+      The options displayed in dialog box depends on whether the element is simple or complex.
+
+
+
+         **Simple element**
+                           
+         Simple element (environment parameters, lists,…) can only be copied "as is".
+                     
+                           
+         **Complex element**
+                           
+         Complex element (Tickets, Activities, …), it is possible to copy them into a new kind of elements.
+         
+         For instance, it is possible to copy a Ticket (the request) into an Activity (the task to manage the request) or meeting, periodics meetings as well as test sessions. 
+                           
+                     
+         **It is possible to select:**
+                                 
+         * New kind of element.
+                                
+         * Select new type (corresponding to the kind of element).
+                                
+         * Change the name.
+         
+         * Change the project.
+         
+         * Select whether the initial element will be indicated as the origin of the copied one.
+         
+         For main items, it is also possible to choose to copy links, attachments and notes.
+                                   
+         For Projects and Activities, it is also possible to copy the hierarchic structure of activities (sub-projects, sub-activities). 
+                              
+
+      
+.. _dw-delete-item9:
+
+   .. compound:: |iconDelete| Delete the item
+   
+      To delete the selected element.
+      
+      Basically, some items cannot be deleted. For example, if actual work has been saved on an activity. The latter, as well as the project on which it depends, cannot be deleted.
+
+      To be able to delete these elements, go to the :ref:`Acces_Right` menu in the :ref:`specific_access` and choose YES in can force the deletion of the actual work in the "specific update rights" section.
+      
+
+.. _dw-undo-change9:
+
+   .. compound:: |iconUndo| Undo the change
+   
+      The button is clickable only when changes are ongoing.
+
+      Allows you to undo changes made to the current element 
+
+
+.. _dw-print-item9:
+    
+   .. compound:: |iconPrint9| Print the details
+   
+      To obtain a printable version of the details of the current element.      
+
+
+.. _dw-export-pdf9:
+    
+   .. compound:: |iconPdf| Export to PDF format
+   
+      To get a printable version of the details in PDF format.
+       
+
+
+  
+.. _email-detail9:
+
+   .. compound:: |iconEmail| Email detail
+
+      Allows to send an informative email to defined recipients list.
+
+      .. figure:: /images/GUI9.0/GUI_BOX_EmailDetails.png
+         :alt: Dialog box - Email detail
+         :align: center
+         
+         Email details dialog box
+         
+      The list is defined according to the role of the recipient.
+
+      See: :ref:`projeqtor-roles`
+         
+      Flag on the role checkbox to define the recipients list.
+      
+            .. compound:: **Checkbox other**
+                  
+               Flag on the checkbox other to manually enter email addresses.
+                            
+               When sending an email, the address (es) entered in "other" remains in memory and will be proposed during the next mailing
+                           
+               Use commas or semicolons to separate addresses.
+                  
+                  
+                  
+                  
+            .. compound:: **Message**
+            
+               The message that will be included in the body of the email, in addition to a  complete description of the item.
+            
+      
+      
+      
+            .. compound:: **Save as note**
+            
+               Flag on to indicate the email message will be saved as a note.
+               
+               
+            
+            .. compound:: **Email Template**
+            
+               You can choose an email template even without having predefined it in the settings.
+               
+               To create and view templates. See :ref:`email-template`.
+               
+               
+      
+            .. compound:: **Files to attach to email**
+            
+               Attachments for the item appear in the attachment table. If the item has no files attached then the table is not visible.
+      
+               The maximum size of attached files must be entered in the global parameters in the Mailing tab. The size indicated is in bytes unless you indicate otherwise. see: :ref:`Global parameters<gp-emailing-section>`
+      
+               When you check a file to send the size of the latter is displayed at the top right of the table. 
+               
+                  * If several files are selected, then the total size of these files is calculated and displayed.
+               
+                  * If the total size 
+
+
+
+
+          
+.. _subscribe-detail9:
+
+  
+   .. compound:: |iconSubscribe9| Subscribe detail
+
+      Allows to subscribe to tracking of an item.
+      
+      This icon is checked when you subscribed |iconSubscribeON9|.
+
+
+      .. figure:: /images/GUI9.0/GUI_ZONE_Subscribe.png
+         :alt: Dialog box - Susbcribe detail
+         
+         Subscribe detail
+   
+
+      When a user "subscribes" to the project, he will receive notifications "to subscribers" for all elements of the project
+      
+      
+      Ability to subscribe a third party user to the tracking of an element (according to configurable rights).
+      
+      You can drag the name of selected ressources and drop them on the right column for subscribe them.
+      
+      .. figure:: /images/GUI9.0/GUI_ZONE_SubscribeOther.png 
+         :alt: Dialog box - Susbcribe for other
+         
+         Suscribe for other
+         
+      
+      
+      **Display of list of followed items**
+         
+      You can view the list of followed items in two ways:
+            
+         * click on the button "View the list of subscriptions" in the subscription menu
+            
+         * In the user settings of the :ref:`Automation section<UP-automation>`, click on the "show list of followed items" button.
+         
+      .. figure:: /images/GUI9.0/GUI_BOX_ListSubscribe.png
+         :alt: Dialog box - Display list of tracked items
+            
+         Display list of followed items
+      
+      
+      .. note:: 
+         
+         **email**
+         
+         Possibility to send an email to users following the item
+         
+         When unitary sending detail or on automatic sending or on indicator.
+         
+         **contacts**
+         
+         You can see the items followed by your contacts
+         
+         see: :ref:`contact`
+         
+         
+      
+      
+.. _gui-activity-stream9:
+
+ .. compound:: |ActivityStream9| Activity Stream
+  
+  This icon allows you to display the Stream activity in a unique way on the selected element.
+  
+  Unlike the Activity Stream icon in the Display layout menu which activates it globally on all screens.
+  
+  The last position of the activity stream is always saved.
+ 
+ See: :ref:`activity-stream`
+ 
+ 
+ 
+ 
+ 
+.. _change-history9:
+
+ .. compound:: |iconHistory| History of changes
+
+   All the changes items are tracked.
+      
+   They are stored and displayed on each item.
+
+   On creation, just an insert operation is stored, not all the initial values on creation.
+
+
+
+
+      .. tabularcolumns:: |l|l|
+      
+      .. list-table:: Fields of changes
+         :widths: 30, 70
+         :header-rows: 1
+      
+         * - Field
+           - Description
+         * - Operation
+           - The operation on the item (insert or update).
+         * - Data
+           - The field modified.
+         * - Value before
+           - The value of the field before the update.
+         * - Value after
+           - The value of the field after the update.
+         * - Date
+           - Date of change operation.
+         * - User
+           - Name of the user who operated the change.
+
+
+      **Displaying the history of changes**
+
+      * The user parameter "Display history" allows to define whether the history of changes appears in a section or in a dialog box.
+      * If the value "On request" is set, the button |iconHistory| appears on the detail header window.
+      * Click on  to display the history of changes.
+      * If the value "Yes" is set, the "Change history" section appears in the detail window. 
+
+      .. figure:: /images/GUI9.0/GUI_BOX_HistoryChange.png
+         :alt: Dialog box - History of changes
+         :align: center
+      
+         Dialog box - History of changes
+
+
+      **Show/Hide work**
+
+      * This button allows to show or hide work changes done in "Real Work Allocation".
+      * For section "Change history"  the display of work is defined in  user parameter "Display history".
+      
+
+
+.. _dw-show-checklist9:
+
+   .. compound:: |iconChecklist| Show / hide the checklist
+   
+      This button is only displayed if the "display checklist" parameter in the user settings is set to "on request" status
+      
+      **More details:** :ref:`checklist-definition`
+      
+
+
+.. _drop-file-area9:
+
+   .. compound:: |iconAttach| Drop file area
+
+      This area allows to add an attachment file to the item.
+
+      * Drop the file in the area.
+      * Or click on the area to select a file.
+
+
+
+.. _dw-text-editor9:
+
+.. rubric:: |fourBLC| Text editor
+
+Text editors are available for editing of long text fields like description, results, notes, ...
+
+Selection of text editor can be done in User and Global parameters screens.
+
+
+   .. compound:: CK Editor
+
+         The most advanced web editor.
+         
+         Spell checker available with this text editor. 
+         
+         .. figure:: /images/GUI9.0/GUI_ZONE_CKEditor.png
+            :alt: CK Editor
+            :align: center
+         
+            CK Editor - Ability to resize the CK Editor height, the size is saved
+
+        
+   Possibility to deactivate the SCAYT spell checker. It can be modified by each user in user parameters.
+
+
+
+   .. compound:: CK editor inline
+
+      As CK Editor. 
+      
+      Activated only when needed.
+
+      .. note::
+         
+         * CK editor inline height, keep the size of CK editor.
+         * Click on the text zone to display toolbar.
+         * Can not use it in fullscreen mode.
+
+
+   .. compound:: Plain text editor
+
+      * Conventional text input.
+      * Text zone is extendable.
+
+
+
+.. _detail-window-sections9:
+
+.. rubric:: |sixBLC| Sections
+
+* The fields are regrouped under a section.
+* All sections can be folded or unfolded, clicking on the section title. 
+
+ .. compound:: **Columns**
+
+    The sections are organized in columns.
+    
+    Number of displayed columns can be defined in user parameters.
+
+ .. compound:: **Common sections**
+
+    Some sections are displayed on almost all screens. (See : :ref:`common-sections`)  
+
+ .. compound:: **Item count in the list**
+
+    When the section contains a list, the item count is displayed at right of the header.
+
+    .. figure:: /images/GUI9.0/GUI_ZONE_SectionHeader.png
+       :alt: Header section
+       :align: center
+
+       Header section
+
+ .. compound:: **Thumbnails on items in the list**
+
+    Thumbnails are displayed on item row to present field values in graphical format.
+    
+    See: :ref:`thumbnails`.
+
+ .. compound:: **Go to selected item**
+
+    In a list, possibility to go directly to an item by clicking on its fields.
+    
+    Cursor change to |pointingHandCursor| on clickable fields.
+
+
+
+
+.. _specialfields9:
+
+Special fields V9
+=================
+
+.. rubric:: Accelerator buttons
+
+This button allows to skip to the next status without having to open the list.
+
+
+   
+The next status is defined by the workflow linked to the type of element.
+   
+   
+.. figure:: /images/GUI9.0/GUI_BUTTON_MoveToNextStatus.png
+   :alt: Button - Move to next status 
+   :align: center
+      
+   Move to next status
+
+The mouse tracking over this colored button allows to show the workflow. 
+
+
+ .. compound:: Assign to me button
+
+This button allows to set the current user in the related field.
+
+.. figure:: /images/GUI9.0/GUI_BUTTON_AssignToMe.png
+   :alt: Button - Assign to me 
+   :align: center
+
+
+
+
+
+
+
+.. _combo-list-fields9:
+
+.. rubric:: Combo list field
+
+
+Combo list field allows to search, view or create item associated with the field.
+
+The access to view or create item depends on your access rights. Some buttons can be not available.
+
+
+.. figure:: /images/GUI9.0/GUI_ZONE_ComboListFields.png
+   :alt: Field - Combo list
+   :align: center
+   
+   Combo list
+
+
+* Click on |Goto| will directly go to the selected item.
+
+* Click on |iconView| to display the details of the selected item.
+
+* Click on |iconAdd| to directly add a new element corresponding to the selected field.
+
+* Click on |iconSearch| to search for an element among those existing corresponding to the selected field.
+
+
+.. figure:: /images/GUI9.0/GUI_BOX_DetailOfListITEM.png
+   :alt: Dialog box to search item
+   :align: center
+   
+   Dialog box - Item search
+   
+   
+* Click on |Valid| to re-select an item.
+       
+* Click on |iconUndo| to close the dialog box.
+      
+* Click on |iconFilters| to filter the items list
+   
+   
+Some elements is possible to select several items, use :kbd:`Control` or :kbd:`Shift`.
+ 
+ 
+
+
+
+
+.. _origin-field9:
+
+.. rubric:: Origin field
+
+The origin of an element has no impact on it.
+
+This is a memo, pure information.
+
+It can be filled in automatically during a copy or manually.
+
+
+.. figure:: /images/GUI9.0/GUI_ZONE_OriginField.png
+   :alt: Field - Origin 
+   :align: center
+   
+   Origin field
+
+* This field allows to determine the element of origin.
+* The origin is used to keep track of events (ex.: order from quote, action from meeting).
+* The origin may be selected manually or automatically inserted during copying an element. 
+
+
+   .. compound:: Origin element
+
+      * Click on |iconAdd| to add a orgin element.
+      * Click on |iconDelete| to delete the link.
+      
+      .. figure:: /images/GUI9.0/GUI_BOX_AddOriginElem.png
+         :alt: Dialog box - Add an origin element 
+         :align: center
+         
+         Add an origin element
+      
+      * Choose the type of element from the drop-down list.
+      * Select the item from the corresponding list
+
+.. rubric:: Set color field
+
+
+* This field allows to set the color of an item.
+* Used to differentiate items in list or report.
+* Click on list of colors to select.
+* Click on "Reset" button to erase.
+
+.. figure:: /images/GUI9.0/GUI_ZONE_SetColor.png
+   :alt: Zone - Set color field 
+   :align: center
+   
+   Set color field
+
+
+* Displays a colored circle for field colorable.
+* Some list of values has a field to define a color. 
+* A color is defined for each value.
+
+
+
+
+
+
+.. _thumbnails9:
+
+.. rubric:: Thumbnails
+
+Thumbnails are a graphical representation of the field value.
+
+
+
+
+ .. compound:: Date
+
+   * Displays the date of creation or update of the item.
+   * Move cursor over thumbnail to display the date.
+
+
+    .. compound:: |calendRed| The Item have been created or updated today.
+
+    .. compound:: |calendYellow| The Item have been created or updated recently. 
+
+    .. compound:: |calendGrey| Default view.
+
+
+
+
+
+ .. compound:: User
+
+   * Portrait of the user. Displays if it has created or updated an item.
+   * If no photo is saved, an icon will automatically be generated.
+   * The letter is chosen according to the real name. This is his initial.
+   * Move the cursor over the thumbnail to display the user's name and photo in its original size.
+   * The user who does not have a photo automatically obtains a thumbnail with the first letter that makes up the real name.
+
+      .. figure:: /images/GUI9.0/GUI_ZONE_ListNONphoto.PNG
+         :alt: list of users without personal photo
+         
+         list of users without personal photo
+   
+ .. compound:: Comment
+
+   * |Comment| Indicates a comment or description is defined.
+   * |AddComment| to add a new note or comment
+   * Move cursor over thumbnail to display text.
+
+ .. compound:: Privacy
+
+   Indicates the visibility level defined in a note or attachment.
+
+    * |Privacy| Private contents.
+   
+    * |iconTeam9| Visible to team.
+
+     
