@@ -530,7 +530,7 @@ function searchMenuToDisplay(val){
     menuName="'"+el.innerHTML.toLowerCase()+"'";
     if(!arrayMenuName.includes(menuName)){
       if(menuName.includes(val.toLowerCase())){
-        if(el.parentNode.className=='menu__linkDirect'){
+        if(el.parentNode.className=='menu__linkDirect' || el.parentNode.className=='menu__linkDirect menu__link--current'){
           arrayMenuName.push(menuName);
           if(el.parentNode.parentNode.querySelector('#reportFileMenu')){
             var report=el.parentNode.parentNode.cloneNode(true);
