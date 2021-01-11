@@ -7218,7 +7218,7 @@ function drawWorkUnits($obj,$listWorkUnit,$listComplexity,$refresh=false) {
   echo'</tr>';
   foreach ($listWorkUnit as $val){
     echo '<tr style="height:100%">';
-    echo '  <td class="assignData" style="width:5%">';
+    echo '  <td class="assignData" style="width:5%;white-space:nowrap">';
       if ($canUpdate) {
         echo '  <a onClick="editWorkUnit(\''.$val->id.'\',\''.$obj->id.'\',\''.$val->validityDate.'\');" '.'title="'.i18n('editWorkUnit').'" > '.formatSmallButton('Edit').'</a>';
       }
