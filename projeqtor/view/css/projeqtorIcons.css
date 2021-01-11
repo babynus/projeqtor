@@ -128,7 +128,7 @@
 .ProjeQtOrFlatGreen .iconButtonComment16 { background-image: url(customIcons/green/iconComment.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconButtonComment16 { background-image: url(customIcons/grey/iconComment.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconButtonComment16 { background-image: url(customIcons/red/iconComment.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconButtonComment16 { background-image: url(customIcons/new/iconAddComment.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconButtonComment16 { background-image: url(customIcons/new/iconComment.svg);  background-repeat: no-repeat; }
 
 .iconButtonSubscribe16 { background-image: url(images/iconSubscribe.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .iconButtonListApprover16 { background-image: url(images/iconButtonListApprover.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
