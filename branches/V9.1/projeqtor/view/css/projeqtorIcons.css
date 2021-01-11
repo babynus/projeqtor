@@ -1728,6 +1728,7 @@
 .ProjeQtOrNewGui .iconType { background-image: url(customIcons/new/iconListOfTypes.svg);  background-repeat: no-repeat; }
 
 .iconListOfValues { background-image: url(images/iconListOfValues32.png);  background-repeat: no-repeat; }
+.iconListOfValues22 { background-image: url(images/iconListOfValues32.png);  background-repeat: no-repeat; width:22px; height:22px; background-size: 22px 22px} /* for Screen Customization Plugin */ 
 .ProjeQtOrFlatBlue .iconListOfValues { background-image: url(customIcons/blue/iconListOfValues.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGreen .iconListOfValues { background-image: url(customIcons/green/iconListOfValues.png);  background-repeat: no-repeat;}
 .ProjeQtOrFlatGrey .iconListOfValues { background-image: url(customIcons/grey/iconListOfValues.png);  background-repeat: no-repeat;}
