@@ -69,14 +69,14 @@ if(!isset($dontDisplay))$dontDisplay = false;
     <td> <?php if(!$dontDisplay){ ?> <table>
       <tr> 
         <td style="width:60%;text-transform: uppercase;border-bottom:solid 1px;"><?php echo i18n("filters");?></td>
-        <td style="text-align:right;border-bottom:solid 1px;" class="allSearchTD resetSearchTD allSearchFixLength">
+        <td style="text-align:right;border-bottom:solid 1px;" class="allSearchTD resetSearchTD <?php if (! isNewGui()) echo 'allSearchFixLength';?>">
           <button dojoType="dijit.form.Button" type="button" class="mediumTextButton">
             <?php echo i18n('buttonReset');?>
             <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
             <script type="dojo/method" event="onClick">
                      var lstStat = <?php echo json_encode($lstStat); ?>;
                      resetFilterQuick(lstStat);
-                     // resizeListDiv(); // TODO
+                     resizeListDiv();
              </script>
           </button>
         </td>
@@ -108,7 +108,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
               }
               setTimeout("dijit.byId('listIdFilter').set('value',dijit.byId('listIdFilterQuick').get('value'))",10);
               setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
-              // resizeListDiv(); // TODO
+              resizeListDiv();
             </script>
           </div>
         </td>
@@ -130,7 +130,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
                   dijit.byId('listIdFilter').domNode.style.display = 'none';
                 }
               }
-              // resizeListDiv(); // TODO
+              resizeListDiv();
             </script>
           </div>
         </td>
@@ -157,7 +157,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
               }
               dijit.byId('listNameFilter').set('value',dijit.byId('listNameFilterQuick').get('value'));
               setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
-              // resizeListDiv(); // TODO
+              resizeListDiv();
             </script>
           </div>
         </td>
@@ -179,7 +179,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
                   dijit.byId('listNameFilter').domNode.style.display = 'none';
                 }
               }
-              // resizeListDiv(); // TODO
+              resizeListDiv();
             </script>
           </div>
         </td>
@@ -205,7 +205,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
               }
               dijit.byId('listTypeFilter').set('value',this.value);
               refreshJsonList('<?php echo $objectClass;?>');
-              // resizeListDiv(); // TODO
+              resizeListDiv();
             </script>
             <?php  htmlDrawOptionForReference($idClassType, $objectType, $obj, false); ?>
           </select>
@@ -228,7 +228,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
                   dijit.byId('listTypeFilter').domNode.style.display = 'none';
                 }
               }
-              // resizeListDiv(); // TODO
+              resizeListDiv();
             </script>
           </div>
          </td>
@@ -258,7 +258,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
                     }
                     dijit.byId('listClientFilter').set('value',this.value);
                     refreshJsonList('<?php echo $objectClass;?>');
-                    // resizeListDiv(); // TODO
+                    resizeListDiv();
                   </script>
           </select>
         </td>
@@ -280,7 +280,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
                   dijit.byId('listClientFilter').domNode.style.display = 'none';
                 }
               }
-              // resizeListDiv(); // TODO
+              resizeListDiv();
             </script>
           </div>
         </td>
@@ -310,7 +310,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
                     }
                     dijit.byId('listBudgetParentFilter').set('value',this.value);
                     refreshJsonList('<?php echo $objectClass;?>');
-                    // resizeListDiv(); // TODO
+                    resizeListDiv();
                   </script>
           </select>
         </td>
@@ -332,7 +332,7 @@ if(!isset($dontDisplay))$dontDisplay = false;
                   dijit.byId('listBudgetParentFilter').domNode.style.display = 'none';
                 }
               }
-              // resizeListDiv(); // TODO
+              resizeListDiv();
             </script>
           </div>
         </td>
