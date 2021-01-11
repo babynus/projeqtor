@@ -155,8 +155,6 @@
 .. |HideTop| image:: images/iconHideStreamTop.png	
 	:alt: Hide stream top	
 
-
-
 .. |ActivityStream| image:: images/iconActivityStream.png	
 	:alt: Show Activity Stream	
 	
@@ -164,6 +162,10 @@
 	:alt: Show Activity Stream	
 	:scale: 15
 	
+.. |iconAttach| image:: /images/v9/iconAttach.png
+	:alt: attach
+	:scale: 15
+
 	
 
 .. |NoActivityStream| image:: images/iconActivityStreamClose.png
@@ -290,13 +292,18 @@
 .. |iconSum| image:: images/iconSum.png
    :alt: Sum 
    
-.. |iconSubscribe| image:: images/IconSubscribe.png
+.. |iconSubscribe| image:: images/buttonIconSubscribe.png
    :alt: Susbcribe
+   :scale: 70
 
 .. |iconSubscribe9| image:: images/v9/iconSubscribe.png
    :alt: Susbcribe
    :scale: 15
-	
+
+.. |iconSubscribeON9| image:: images/v9/iconSubscribeON.png
+   :alt: Susbcribe on
+   :scale: 15
+   	
 
 		
 .. |iconNotPlanned| image:: images/iconNotPlanned.png
@@ -395,6 +402,14 @@
 .. |iconGoto| image:: images/iconGoto.png
    :alt: Button icon goto 
 
+.. |Goto| image:: images/v9/iconGoto.png
+   :alt: icon goto 
+   :scale: 15
+   
+   
+   
+   
+   
 .. |iconLink| image:: images/smallButtonLink.png
    :alt: Icon link
 
@@ -419,6 +434,9 @@
    :alt: Button icon project 
    :scale: 15
 
+.. |Privacy| image:: images/v9/iconFixed.png
+   :alt: Privacy  
+   :scale: 15
 
 .. |iconReplan16| image:: images/iconReplan16.png
    :alt: Replanning schedule icon
@@ -440,6 +458,15 @@
 
 .. |Note| image:: images/note.png
    :alt: Note
+
+.. |Comment| image:: images/v9/iconComment.png
+   :alt: Comment
+   :scale: 15
+
+.. |AddComment| image:: images/v9/iconAddComment.png
+   :alt: Add Comment
+   :scale: 15
+
 
 .. |Description| image:: images/description.png
    :alt: Icon description
@@ -477,15 +504,36 @@
 .. |buttonIconSearch| image:: images/buttonIconSearch.png
    :alt: button icon search
 
-.. |buttonIconSearch9| image:: images/v9/iconSearch.png
+.. |iconSearch| image:: images/v9/iconSearch.png
    :alt: button icon search
    :scale: 15
    
+   
+   
 .. |view| image:: images/iconFollowup16.png
+   :alt: icon view details     
+     
+.. |iconView| image:: images/v9/iconView.png
    :alt: button icon Follow up
+   :scale: 15
+   
+     
+.. |Valid| image:: images/v9/iconValid.png
+   :alt: Validation
+   :scale: 15
+     
+     
      
 .. |iconTeam| image:: images/iconTeam16.png
    :alt: button icon Assign Team
+
+
+.. |iconTeam9| image:: images/v9/iconTeam.png
+   :alt: Team
+   :scale: 15
+
+
+
    
    
 .. |iconOrganization| image:: images/iconOrganization16.png
@@ -773,18 +821,37 @@
 .. |dndLink| image:: images/dndLink.png
    :alt: DND link
 
+
+
+
 .. |calendarRed| image:: images/calendarRed.png
-   :alt: red calendar
+   :alt: red today calendar
+
+.. |calendRed| image:: images/v9/iconCalendarRed.png
+   :alt: red today calendar
+   :scale: 15
+	
 
 .. |calendarWhite| image:: images/calendarWhite.png
-   :alt: white calendar
+   :alt: grey old calendar
+
+.. |calendGrey| image:: images/v9/iconCalendarGrey.png
+   :alt: grey old calendar
+   :scale: 15
 
 .. |calendarYellow| image:: images/calendarYellow.png
-   :alt: yellow calendar
+   :alt: yellow yesterday calendar
 
+.. |calendYellow| image:: images/v9/iconCalendarYellow.png
+   :alt: yellow yesterday calendar
+   :scale: 15
+   
+   
+   
 .. |defaultUserThumb| image:: images/thumb.png
    :alt: Default user thumbnail
-
+   :scale: 80
+   
 .. |privateThumb| image:: images/private.png
    :alt: private thumbnail
 

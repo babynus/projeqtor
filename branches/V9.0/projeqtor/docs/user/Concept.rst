@@ -48,11 +48,11 @@ The project data visibility is granted according to the user profile.
 
 .. rubric:: Project selector
       
-   The project selector works as a filter.
+The project selector works as a filter.
           
-   By default, the selector displays "all projects", you can change this view in the user parameters and choose the project to display by default.
+By default, the selector displays "all projects", you can change this view in the user parameters and choose the project to display by default.
           
-   You can restrict data for one or more dedicated projects without necessarily being bound
+You can restrict data for one or more dedicated projects without necessarily being bound
        
 .. seealso:: 
          
