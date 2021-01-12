@@ -194,6 +194,7 @@ if ($planningMode=='RECW') {
              </td>
            </tr>
            <?php $pe=new PlanningElement();
+           $pe->idProject=(property_exists($obj, 'idProject'))?$obj->idProject:$idProject;
            $pe->setVisibility(); ?>
            <tr <?php echo ($pe->_costVisibility=='ALL')?'':'style="display:none;"'?>>
              <td class="dialogLabel" >
