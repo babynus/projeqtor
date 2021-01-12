@@ -6200,8 +6200,8 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     $canUpdate=false;
   }
   $pe=new PlanningElement();
-  $pe->setVisibility();
-  $workVisible=($pe->_workVisibility=='ALL')?true:false;
+  $pe->setVisibility($profile);
+  $workVisible=($pe->_workVisibility=='ALL')?true:false;  
   if ($obj->idle==1) {
     $canUpdate=false;
   }
