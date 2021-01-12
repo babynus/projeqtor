@@ -155,19 +155,6 @@ class MeetingMain extends SqlElement {
     	self::$_fieldsAttributes['periodicOccurence']="hidden";
     	//unset($this->isPeriodic);
     }  	
-    /*if (! $this->id) {
-      unset($this->_sec_progress);
-    } else {
-      $pe=new PlanningElement();
-      $pe->setVisibility();
-      if ($pe->_workVisibility!='ALL') {
-        unset($this->_sec_progress);
-      } else {        
-        if (count($this->_Assignment)==0) {
-          unset($this->_sec_progress);
-        }
-      }
-    }*/
   }
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS

@@ -6475,13 +6475,13 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
 }
 
 function drawExpenseDetailFromObject($list, $obj, $refresh=false) {
-  global $cr, $print, $user, $browserLocale, $comboDetail;
+  global $cr, $print, $user, $browserLocale, $comboDetail,$profile;
   if ($comboDetail) {
     return;
   }
   $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
   // $pe=new PlanningElement();
-  // $pe->setVisibility();
+  // $pe->setVisibility($profile);
   // $workVisible=($pe->_workVisibility=='ALL')?true:false;
   if ($obj->idle==1) {
     $canUpdate=false;
@@ -6543,13 +6543,13 @@ function drawExpenseDetailFromObject($list, $obj, $refresh=false) {
 }
 
 function drawResourceCostFromObject($list, $obj, $refresh=false) {
-  global $cr, $print, $user, $browserLocale, $comboDetail;
+  global $cr, $print, $user, $browserLocale, $comboDetail,$profile;
   if ($comboDetail) {
     return;
   }
   $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
   $pe=new PlanningElement();
-  $pe->setVisibility();
+  $pe->setVisibility($profile);
   $costVisible=($pe->_costVisibility=='ALL')?true:false;
   if (!$costVisible) return;
   if ($obj->idle==1) {
