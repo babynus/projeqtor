@@ -1920,7 +1920,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // Password specificity ============================================= PASSWORD
         if ($canUpdate) {
           echo '<button id="resetPassword" dojoType="dijit.form.Button" showlabel="true"';
-          echo ' class="generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="'.$specificStyleWithoutCustom.'"';
+          echo ' class="roundedVisibleButton generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="'.$specificStyleWithoutCustom.'"';
           echo $attributes;
           $salt=hash('sha256', "projeqtor".date('YmdHis'));
           $newPwd = User::getRandomPassword();
