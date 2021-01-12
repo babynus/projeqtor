@@ -2245,10 +2245,47 @@ border:1px solid var(--color-medium);
 	font-size: 9pt;
 }
 
-.linkIconHover, .classLinkName{
+.ProjeQtOrNewGui .linkIconHover, .ProjeQtOrNewGui .classLinkName{
     cursor: pointer;
 }
 
-.classLinkName:hover{
+.ProjeQtOrNewGui .classLinkName:hover{
 	 color:var(--color-secondary);
+}
+/* NOTIFICATIONS */
+.ProjeQtOrNewGui .messageNotificationInfo, 
+.ProjeQtOrNewGui .messageNotificationInformation, 
+.ProjeQtOrNewGui .messageNotificationAlert, 
+.ProjeQtOrNewGui .messageNotificationWarning, 
+.ProjeQtOrNewGui .messageNotificationTotal {
+  border: 1px solid var(--color-medium);
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px #656565;
+  font-weight: 600;
+  background-repeat:no-repeat;
+  /* -webkit-filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));
+  filter : hue-rotate(var(--image-hue-rotate)) saturate(var(--image-saturate)) brightness(var(--image-brightness));*/
+}
+.ProjeQtOrNewGui .messageNotificationTotal {
+  color:var(--color-dark); 
+  background-position:top;
+  background-color: var(--color-lighter);
+  background-image: url(images/iconNotification.png);
+}
+/* Notification dtail : to be changed if needed */
+
+.ProjeQtOrNewGui .messageNotificationAlert {
+  color:#FFFFFF; 
+  background-color: #FF0000;
+  background-image: url(images/iconAlert.png);
+}
+.ProjeQtOrNewGui .messageNotificationWarning {
+  color:#000000; 
+  background-color: #FFDDDD;
+  background-image: url(images/iconWarning.png);
+}
+.ProjeQtOrNewGui .messageNotificationInfo, .ProjeQtOrNewGui .messageNotificationInformation {
+  color:#FFFFFF; 
+  background-color: #DDDDFF;
+  background-image: url(images/iconInformation.png);
 }
