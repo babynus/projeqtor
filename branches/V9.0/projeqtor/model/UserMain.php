@@ -350,7 +350,7 @@ class UserMain extends SqlElement {
         return "";
       } 
       $result .= '<tr><td valign="top" class="label"><label></label></td><td>';
-      $result .= '<button id="sendInfoToUser" dojoType="dijit.form.Button" showlabel="true"'; 
+      $result .= '<button id="sendInfoToUser" dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton" '; 
       $result .= ' title="' . i18n('sendInfoToUser') . '" >';
       $result .= '<span>' . i18n('sendInfoToUser') . '</span>';
       $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
