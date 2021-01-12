@@ -1061,7 +1061,7 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
             foreach ($paramsToday as $pName=>$pValue) {
               $params[$pName]=$pValue;
             }
-            $urlParam="?fromToday=true";
+            $urlParam=((strpos($rpt->file, '?')>0)?'&':'?')."fromToday=true";
             foreach ($params as $paramName=>$paramValue) {
               $urlParam.=($urlParam or strpos($rpt->file, '?')>0)?'&':'?';
               $urlParam.=$paramName.'='.$paramValue;
