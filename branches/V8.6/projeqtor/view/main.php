@@ -847,11 +847,13 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
             <?php if (securityCheckDisplayMenu(null,'Document')) {?>
             <div dojoType="dijit.layout.ContentPane" title="<?php echo i18n('document');?>" <?php if ($selectedAccordionTop=='document') echo 'selected="true"';?>>
               <div dojoType="dojo.data.ItemFileReadStore" id="directoryStore" jsId="directoryStore" url="../tool/jsonDirectory.php"></div>
+              <?php if (securityCheckDisplayMenu(null,'DocumentDirectory')) {?>
               <div style="position: absolute; float:right; right: 5px; cursor:pointer;"
                 title="<?php echo i18n("menuDocumentDirectory");?>"
                 onclick="if (checkFormChangeInProgress()){return false;};loadContent('objectMain.php?objectClass=DocumentDirectory','centerDiv');"
                 class="iconDocumentDirectory22">
               </div>
+              <?php }?>
               <div dojoType="dijit.tree.ForestStoreModel" id="directoryModel" jsId="directoryModel" store="directoryStore"
                query="{id:'*'}" rootId="directoryRoot" rootLabel="Documents"
                childrenAttrs="children">
