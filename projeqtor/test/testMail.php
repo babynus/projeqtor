@@ -29,7 +29,7 @@ require_once("../tool/projeqtor.php");
 
 // IMAP must be enabled in Google Mail Settings
 define('GMAIL_EMAIL', 'pascal.bernard.muret@gmail.com');
-define('GMAIL_PASSWORD', 'Looping31!');
+define('GMAIL_PASSWORD', '');
 define('ATTACHMENTS_DIR', dirname(__FILE__) . '/../files/attach');
 
 $mailbox = new ImapMailbox('{imap.gmail.com:993/imap/ssl}INBOX', GMAIL_EMAIL, GMAIL_PASSWORD, ATTACHMENTS_DIR, 'utf-8');
