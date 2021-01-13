@@ -26,7 +26,7 @@ function kanbanAddPrinc($line) {
 		if ($line ['idstatus']) {
 			$addInPrinc .= '<div style="float:left;margin-bottom:1px;margin-left:3px;'.((isNewGui())?'border-radius:4px;height:24px;max-height:24px;margin-top:1px;':'height:21px;max-height:21px;margin-top:2px;').';overflow:hidden;white-space:nowrap;width:25%">' . colorNameFormatter ( SqlList::getNameFromId ( "Status", $line ['idstatus'] ) . '#split#' . SqlList::getFieldFromId ( "Status", $line ['idstatus'], 'color' ), $line ['id'] ) . '</div>';
 		}
-		if($line ['idurgency']){
+		if(isset($line ['idurgency'])){
 		  $addInPrinc .= '<div style="float:left;margin-bottom:1px;margin-left:3px;'.((isNewGui())?'border-radius:4px;height:24px;max-height:24px;margin-top:1px;':'height:21px;max-height:21px;margin-top:2px;').';overflow:hidden;white-space:nowrap;width:25%">' . colorNameFormatter ( SqlList::getNameFromId ( "Urgency", $line ['idurgency'] ) . '#split#' . SqlList::getFieldFromId ( "Urgency", $line ['idurgency'], 'color' ), $line ['id'] ) . '</div>';
 		}
 		if ($line ['idtargetproductversion']) {
