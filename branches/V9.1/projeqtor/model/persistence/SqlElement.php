@@ -2259,7 +2259,7 @@ abstract class SqlElement {
             } else {
               $lst=SqlList::getList(substr($plMode,2));
               if (count($lst)>0) {
-                foreach ($lst as $id->$val) {
+                foreach ($lst as $id=>$val) {
                   $pm=$id;
                   break;
                 }
