@@ -6027,6 +6027,8 @@ abstract class SqlElement {
   }
   
 public function drawMailDetailCol($colArray, &$msg){
+  $currencyPosition = Parameter::getGlobalParameter ( 'currencyPosition' );
+  $currency = Parameter::getGlobalParameter ( 'currency' );
   $rowStart = '<tr>';
   $rowEnd = '</tr>';
   $labelStart = '<td style="background:#FFFFFF;font-weight:bold;text-align: right;width:30%;min-width:30%;vertical-align: top;white-space:nowrap;padding-bottom:10px;">&nbsp;&nbsp;';
