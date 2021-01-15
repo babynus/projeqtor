@@ -199,6 +199,9 @@ label, .ProjeQtOrNewGui label,
 	background: var(--color-darker) ;
 }
 
+.ProjeQtOrNewGui .ganttRowHover.dojoxGridRowSelected {
+	color: #000000 !important;
+} 
 /* === GRID AND LINKED TO GRID CSS ==================================================== GRID ===*/
 
 .ProjeQtOrNewGui  #gridRowCount:hover {
