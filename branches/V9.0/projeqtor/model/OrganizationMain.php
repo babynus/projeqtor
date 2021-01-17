@@ -483,7 +483,7 @@ class OrganizationMain extends SqlElement {
         } else if ($item=='affectMembers') {
         	if ($this->id and !$print) {
     	    	$result .= '<button id="affectOrganizationMembers" dojoType="dijit.form.Button" showlabel="true"'; 
-    	      $result .= ' title="' . i18n('affectOrganizationMembers') . '" >';
+    	      $result .= ' class="roundedVisibleButton" title="' . i18n('affectOrganizationMembers') . '" >';
     	      $result .= '<span>' . i18n('affectOrganizationMembers') . '</span>';
     	      $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
     	      $result .=  '  affectOrganizationMembers(' . htmlEncode($this->id) . ');';

@@ -101,9 +101,9 @@ $objTeam=($obj)?get_class($obj):'';
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
-                id="affectationResource" name="affectationResource"  style="border-left:3px solid red !important;"
+                id="affectationResource" name="affectationResource" 
                 onChange="affectationChangeResource();"
-                class="input" value="<?php if($class=="Project" && $type=="Resource"){ echo $affectation->idResource;}else if($class=="Project" && $type=="Contact"){ echo $affectation->idContact;}else{ echo $idResource;}?>" 
+                class="input <?php echo ($objTeam=="Team" or $objTeam=="Organization")?'':'required';?>" value="<?php if($class=="Project" && $type=="Resource"){ echo $affectation->idResource;}else if($class=="Project" && $type=="Contact"){ echo $affectation->idContact;}else{ echo $idResource;}?>" 
                 <?php echo ($objTeam=="Team" or $objTeam=="Organization")?"required=false":"";?> <?php echo ($class!="Project")?"readonly=readonly":"";?>>
                  <?php if ($type=="Contact") htmlDrawOptionForReference('idContact', $idResource, null, true);
                        else if ($type=="User") htmlDrawOptionForReference('idUser', $idResource, null, true);
@@ -137,7 +137,7 @@ $objTeam=($obj)?get_class($obj):'';
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="affectationProfile" name="affectationProfile" 
-                class="input" style="border-left:3px solid red !important;" value="<?php 
+                class="input <?php echo ($objTeam=="Team" or $objTeam=="Organization")?'':'required';?>"  value="<?php 
                   if($mode=="edit"){ echo ($affectation->idProfile)?$affectation->idProfile:' ';}
                   else if($mode=="add" && $class=="Resource"){echo $resource->idProfile;}
                   else if($mode=="add" && $class=="Contact"){echo $contact->idProfile;}
