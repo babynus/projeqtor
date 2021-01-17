@@ -455,7 +455,7 @@ class OrganizationMain extends SqlElement {
         	$result.='<td class="label"></td>';
         	$result.='<td>';
         	$result.='<button id="showStructureButton" dojoType="dijit.form.Button" showlabel="true"';
-        	$result.=' title="'.i18n('showStructure').'" style="vertical-align: middle;">';
+        	$result.=' class="roundedVisibleButton" title="'.i18n('showStructure').'" style="vertical-align: middle;">';
         	$result.='<span>' . i18n('showStructure') . '</span>';
         	$result.='<script type="dojo/connect" event="onClick" args="evt">';
         	$page="../view/organizationStructure.php?id=$this->id";

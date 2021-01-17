@@ -817,7 +817,7 @@ class Parameter extends SqlElement {
                            "paramIconSize"=>'list',
                            'menuBarTopMode'=>'list',
                            'menuLeftDisplayMode'=>'list',
-                           'newItemAccessMode'=>'list',
+                           //'newItemAccessMode'=>'list',
                            "paramShowThumb"=>"list",
                            "paramShowThumbList"=>"list",
                            "notApplicableValue"=>"list",
@@ -890,9 +890,11 @@ class Parameter extends SqlElement {
           unset($parameterList['menuBarTopMode']);
           unset($parameterList['newItemAccessMode']);
           unset($parameterList['newGuiThemeColor']);
-          unset($parameterList['newGuiThemeColorBis']);
+          unset($parameterList['newGuiThemeColorBis']);        
         }else{
           unset($parameterList['theme']);
+          unset($parameterList['menuBarTopMode']);
+          unset($parameterList['menuLeftDisplayMode']);
         }
         if (isIE()) unset($parameterList['newGui']);
         break;
