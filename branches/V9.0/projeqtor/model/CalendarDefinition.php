@@ -157,7 +157,7 @@ class CalendarDefinition extends SqlElement {
                 // Add only
                 $result .= '<div id="div_btAddToCalendar" style="display:inline-block;">';
                 $result .= '<button id="bt_AddToCalendar" dojoType="dijit.form.Button" showlabel="true"';
-                $result .= ' title="' . i18n ( 'titleAddBankOffDaysToCalendar' ) . '" style="vertical-align: middle;">';
+                $result .= ' class="roundedVisibleButton" title="' . i18n ( 'titleAddBankOffDaysToCalendar' ) . '" style="vertical-align: middle;">';
                 $result .= '<span>' . i18n ( 'addBankOffDaysToCalendar' ) . '</span>';
                 $result .= '<script type="dojo/connect" event="onClick" args="evt">';
                 $result .= '   protectDblClick(this);';
@@ -170,7 +170,7 @@ class CalendarDefinition extends SqlElement {
                 // Clear Previous and Add
                 $result .= '<div id="div_btClearAddToCalendar" style="display:inline-block;">';
                 $result .= '<button id="bt_ClearAddToCalendar" dojoType="dijit.form.Button" showlabel="true"';
-                $result .= ' title="' . i18n ( 'titleClearOldAndAddBankOffDaysToCalendar' ) . '" style="vertical-align: middle;">';
+                $result .= ' class="roundedVisibleButton" title="' . i18n ( 'titleClearOldAndAddBankOffDaysToCalendar' ) . '" style="vertical-align: middle;">';
                 $result .= '<span>' . i18n ( 'clearOldAndAddBankOffDaysToCalendar' ) . '</span>';
                 $result .= '<script type="dojo/connect" event="onClick" args="evt">';
                 $result .= '   protectDblClick(this);';
