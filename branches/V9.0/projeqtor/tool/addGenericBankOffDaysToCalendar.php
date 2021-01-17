@@ -60,66 +60,66 @@ if (isset($_REQUEST['clear'])) {
 if ($clear) {
     // Clear old for idCalendarDefintion and year
     $calClear = new Calendar();
-    $clauseCal = "idCalendarDefinition=".$idCalendarDefinition." AND year=".$currentYear;
-    $calClear->purge($clauseCal);    
-}
+    $clauseCal = "idCalendarDefinition=".$idCalendarDefinition." AND year='".$currentYear."'";
+    $result=$calClear->purge($clauseCal);    
+} else {
 
-$calBank = new CalendarBankOffDays();
-$crit = array("idCalendarDefinition" => $idCalendarDefinition);
-$calBankList = $calBank->getSqlElementsFromCriteria($crit);
-foreach ($calBankList as $obj) {
-    if ($obj->easterDay!=null) {
-        $iEaster = getEaster($currentYear);
-        if ($obj->easterDay==0) {
-            $calendarDate = date('Y-m-d', $iEaster + 86400);            
-            $name = $easterDays[0];
-        } else if ($obj->easterDay==1) {
-	        $calendarDate = date ('Y-m-d', $iEaster + (86400*39));
-            $name = $easterDays[1];
-        } else if ($obj->easterDay==2) {
-	        $calendarDate = date ('Y-m-d', $iEaster + (86400*50));
-            $name = $easterDays[2];                        
-        } else if ($obj->easterDay==3) {
-	        $calendarDate = date ('Y-m-d', $iEaster - (86400*2));
-            $name = $easterDays[3];                        
-        }
-    } else {
-        $calendarDate = $currentYear . "-" . ($obj->month>9?$obj->month:"0".$obj->month) . "-" . ($obj->day>9?$obj->day:"0".$obj->day);
-        $name = $obj->name;
-    }
-    $cal = new Calendar();
-    // Search if calendar day off exists
-    $critCal = array(
-                        "idCalendarDefinition" => $idCalendarDefinition,
-                        "calendarDate" => $calendarDate
-                    );
-    $calList = $cal->getSqlElementsFromCriteria($critCal);
-    if (count($calList)>0) {
-        $first = true;
-        foreach ($calList as $cObj) {
-            if ($first) { // If first => Update
-                $first=false;
-                // Exists and is'nt off day => Become off day
-                if (!$cObj->isOffDay) {
-                    $cObj->isOffDay = 1;
-                    $cObj->name = $name;
-                    $cObj->save();
-                }
-            } else { // Not first => Delete (It's duplicate)
-                $cObj->delete();
-            }
-        }
-    } else {
-        // Does'nt exists => create it
-        $theCal = new Calendar();
-        $theCal->idCalendarDefinition = $idCalendarDefinition;
-        $theCal->calendarDate = $calendarDate;
-        $theCal->name = $name;
-        $theCal->isOffDay = 1;
-        addBankOffDayDay($theCal);
-    }
+  $calBank = new CalendarBankOffDays();
+  $crit = array("idCalendarDefinition" => $idCalendarDefinition);
+  $calBankList = $calBank->getSqlElementsFromCriteria($crit);
+  foreach ($calBankList as $obj) {
+      if ($obj->easterDay!=null) {
+          $iEaster = getEaster($currentYear);
+          if ($obj->easterDay==0) {
+              $calendarDate = date('Y-m-d', $iEaster + 86400);            
+              $name = $easterDays[0];
+          } else if ($obj->easterDay==1) {
+  	        $calendarDate = date ('Y-m-d', $iEaster + (86400*39));
+              $name = $easterDays[1];
+          } else if ($obj->easterDay==2) {
+  	        $calendarDate = date ('Y-m-d', $iEaster + (86400*50));
+              $name = $easterDays[2];                        
+          } else if ($obj->easterDay==3) {
+  	        $calendarDate = date ('Y-m-d', $iEaster - (86400*2));
+              $name = $easterDays[3];                        
+          }
+      } else {
+          $calendarDate = $currentYear . "-" . ($obj->month>9?$obj->month:"0".$obj->month) . "-" . ($obj->day>9?$obj->day:"0".$obj->day);
+          $name = $obj->name;
+      }
+      $cal = new Calendar();
+      // Search if calendar day off exists
+      $critCal = array(
+                          "idCalendarDefinition" => $idCalendarDefinition,
+                          "calendarDate" => $calendarDate
+                      );
+      $calList = $cal->getSqlElementsFromCriteria($critCal);
+      if (count($calList)>0) {
+          $first = true;
+          foreach ($calList as $cObj) {
+              if ($first) { // If first => Update
+                  $first=false;
+                  // Exists and is'nt off day => Become off day
+                  if (!$cObj->isOffDay) {
+                      $cObj->isOffDay = 1;
+                      $cObj->name = $name;
+                      $cObj->save();
+                  }
+              } else { // Not first => Delete (It's duplicate)
+                  $cObj->delete();
+              }
+          }
+      } else {
+          // Does'nt exists => create it
+          $theCal = new Calendar();
+          $theCal->idCalendarDefinition = $idCalendarDefinition;
+          $theCal->calendarDate = $calendarDate;
+          $theCal->name = $name;
+          $theCal->isOffDay = 1;
+          addBankOffDayDay($theCal);
+      }
+  }
 }
-
 $cal=new Calendar;
 $cal->setDates($currentYear.'-01-01');
 $cal->idCalendarDefinition=$idCalendarDefinition;
