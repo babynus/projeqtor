@@ -6910,6 +6910,7 @@ function drawAssetFromUser($list, $obj) {
   echo '<td class="assignHeader" style="width:25%">'.i18n('colAsset').'</td>';
   echo '<td class="assignHeader" style="width:25%">'.i18n('colBrand').'</td>';
   echo '<td class="assignHeader" style="width:25%">'.i18n('colModel').'</td>';
+  echo "</tr>";
   //order by alphabetic
   asort($list);
   $tabType = array();
