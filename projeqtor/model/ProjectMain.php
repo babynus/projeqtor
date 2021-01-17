@@ -804,7 +804,8 @@ static function isTheLeaveProject($id=null) {
             if(!$drawCheckBox){
               $styleMargin = "";
             }
-            $result .='<td valign="top" width="20px"><div style="'.$styleMargin.'" class="iconProject16 iconProject iconSize16 imageColorNewGuiNoSelection"></div></td>';
+            if ($outMode!='pdf') $result .='<td valign="top" width="20px"><div style="'.$styleMargin.'" class="imageColorNewGuiNoSelection iconProject iconSize16"></div></td>';
+            else $result .='<td valign="top" width="20px"><img src="../view/css/images/iconList16.png" style="width:16pxheight:16px" />&nbsp;</td>';
           }
           if ($selectField==null) {
             $result .= '<td valign="top" class="'.(($outMode=='html' or $outMode=='pdf')?'':'display').'"  NOWRAP>' . (($outMode=='html' or $outMode=='pdf')?htmlEncode($prj->name):htmlDrawLink($prj));
