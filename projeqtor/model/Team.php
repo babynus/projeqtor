@@ -104,7 +104,7 @@ class Team extends SqlElement {
     	
     	if ($this->id and !$print) {
 	    	$result .= '<button id="affectTeamMembers" dojoType="dijit.form.Button" showlabel="true"'; 
-	      $result .= ' title="' . i18n('affectTeamMembers') . '" >';
+	      $result .= ' class="roundedVisibleButton" title="' . i18n('affectTeamMembers') . '" >';
 	      $result .= '<span>' . i18n('affectTeamMembers') . '</span>';
 	      $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
 	      $result .=  '  affectTeamMembers(' . htmlEncode($this->id) . ');';
