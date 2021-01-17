@@ -1065,18 +1065,18 @@ abstract class SqlElement {
     if ($force) {
       $control = "OK";
     } else {
-      $control = $this->control ();
-      $class = get_class ( $this );
+      $control = $this->control();
+      $class = get_class($this);
       if (($control == 'OK' or strpos ( $control, 'id="confirmControl" value="save"' ) > 0) and property_exists ( $class, $class . 'PlanningElement' )) {
         $pe = $class . 'PlanningElement';
-        $controlPe = $this->$pe->control ();
+        $controlPe = $this->$pe->control();
         if ($controlPe != 'OK') {
           $control = $controlPe;
         }
       }
       if (($control == 'OK' or strpos ( $control, 'id="confirmControl" value="save"' ) > 0) and property_exists ( $this, 'WorkElement' ) and isset ( $this->WorkElement )) {
         $we = 'WorkElement';
-        $controlWe = $this->WorkElement->control ();
+        $controlWe = $this->WorkElement->control();
         if ($controlWe != 'OK') {
           $control = $controlWe;
         }
@@ -4588,7 +4588,7 @@ abstract class SqlElement {
       $prj = new Project ( $this->idProject, true );
       $right = securityGetAccessRightYesNo ( 'menuProject', 'update', $prj );
     } else if ($right != 'YES') {
-      $right = securityGetAccessRightYesNo ( 'menu' . get_class ( $this ), (($this->id) ? 'update' : 'create'), $this );
+      $right = securityGetAccessRightYesNo ( 'menu' . get_class ( $this ), (($this->id) ? 'update' : 'create'), $this, $user );
     }
     if ($right != 'YES') {
       $result .= '<br/>' . i18n ( 'error' . (($this->id) ? 'Update' : 'Create') . 'Rights' );
