@@ -364,13 +364,13 @@ class Calendar extends SqlElement {
         }
         if ($startDate==null and $endDate==null) {
             if ($year!=null) {
-                $whereClause .= " AND year=$year ";
+                $whereClause .= " AND year='$year' ";
             } elseif ($month!=null) {
-                $whereClause .= " AND month=$month ";
+                $whereClause .= " AND month='$month' ";
             } elseif ($week!=null) {
-                $whereClause .= " AND week=$week ";
+                $whereClause .= " AND week='$week' ";
             } elseif ($day!=null) {
-                $whereClause .= " AND day=$day ";
+                $whereClause .= " AND day='$day' ";
             }
             
         }
@@ -409,13 +409,13 @@ class Calendar extends SqlElement {
         }
         if ($startDate==null and $endDate==null) {
             if ($year!=null) {
-                $whereClause .= " AND year=$year ";
+                $whereClause .= " AND year='$year' ";
             } elseif ($month!=null) {
-                $whereClause .= " AND month=$month ";
+                $whereClause .= " AND month='$month' ";
             } elseif ($week!=null) {
-                $whereClause .= " AND week=$week ";
+                $whereClause .= " AND week='$week' ";
             } elseif ($day!=null) {
-                $whereClause .= " AND day=$day ";
+                $whereClause .= " AND day='$day' ";
             }
             
         }
