@@ -79,14 +79,22 @@ class KpiValue extends SqlElement {
     return $result;
   }
   
+//   public function storeHistory() {
+//     $h=new KpiHistory();
+//     $clause="idKpiDefinition=$this->idKpiDefinition and refType='$this->refType' and refId=$this->refId and kpiDate='$this->kpiDate'";
+//     $h->purge($clause); // Purge existing history for same day, same item, same kpi
+//     foreach ($this as $fld=>$val) {
+//       $h->$fld=$val;
+//     }
+//     $h->id=null; // Will create new history
+//     $h->save();
+//   }
   public function storeHistory() {
-    $h=new KpiHistory();
-    $clause="idKpiDefinition=$this->idKpiDefinition and refType='$this->refType' and refId=$this->refId and kpiDate='$this->kpiDate'";
-    $h->purge($clause); // Purge existing history for same day, same item, same kpi
+    $critArray=array('idKpiDefinition'=>$this->idKpiDefinition,'refType'=>$this->refType,'refId'=>$this->refId,'kpiDate'=>$this->kpiDate);
+    $h=SqlElement::getSingleSqlElementFromCriteria('KpiHistory', $critArray,true);
     foreach ($this as $fld=>$val) {
       $h->$fld=$val;
     }
-    $h->id=null; // Will create new history
     $h->save();
   }
   
