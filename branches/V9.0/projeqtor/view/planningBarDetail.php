@@ -278,7 +278,7 @@ foreach ($work as $resWork) {
       echo '<div style="display:block;background-color:#3d668f;position:absolute;top:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
       echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
     }else{
-      echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
+      echo '<div style="border-top:1px solid #555555;display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
     }
     if ($heightSurbooked>0) echo '<div style="display:block;background-color:#f4bf42;position:absolute;bottom:'.$height.'px;left:0px;width:100%;height:'.$heightSurbooked.'px;"></div>';
     if ($maxCapacity[$resWork['idResource']]!=$resWork['capacity'] or $minCapacity[$resWork['idResource']]!=$resWork['capacity']) {
