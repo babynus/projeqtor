@@ -6843,12 +6843,10 @@ function resizeListDiv() {
         // Do not count hidden
       } else {
         fixedLenghtPart+=nodeWidth;
-        console.log(node);
         for (var fld in arrayFields) {
           if (isNewGui && fld=='reset') continue; // Do not count reset : on pop-up
           var cls=fld+"SearchTD";
           if (dojo.hasClass(node,cls)) {
-            console.log("   "+fld+"="+nodeWidth);
             arrayFields[fld]["set"]=true;
             arrayFields[fld]["fixWidth"]=nodeWidth;
             variableSize+=arrayFields[fld]["size"];
