@@ -2192,7 +2192,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
                      id="infinitecapacity" name="infinitecapacity"
                      style="user-select: none;margin-right: 5px;" class="input"></div>
                    </td>
-                   <td class="dialogLabel" style="white-space:nowrap"><label for="infinitecapacity" ><?php echo i18n("planWithInfiniteCapacity");?></label></td>
+                   <td class="dialogLabel" style="white-space:nowrap"><label for="infinitecapacity" style="width:50px"><?php echo i18n("planWithInfiniteCapacity");?></label></td>
                 </tr>
                </table>             
              </td>
@@ -2208,7 +2208,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
                     <div dojoType="dijit.form.CheckBox" type="checkbox" id="onlyCheckedProject" name="onlyCheckedProject" 
                       style="margin-right: 5px;" onChange="showSelectedProject(this.checked);"></div>
                   </td>
-                  <td class="dialogLabel" style="white-space:nowrap"><label for="onlyCheckedProject" ><?php echo i18n("showSelectedProject"); ?></label></td>
+                  <td class="dialogLabel" style="white-space:nowrap"><label for="onlyCheckedProject" style="width:50px"><?php echo i18n("showSelectedProject"); ?></label></td>
                 </tr>
                </table>
              </td>
