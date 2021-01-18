@@ -302,6 +302,7 @@ class Parameter extends SqlElement {
                     'YESW'=>i18n('displayYesWithWork'),
                     'REQ'=>i18n('displayOnRequest') );
         break;
+      case 'displaySubTask':
       case 'displayChecklist':
         $list=array('YES'=>i18n('displayYes'),
                     'REQ'=>i18n('displayOnRequest'));
@@ -371,6 +372,7 @@ class Parameter extends SqlElement {
       case 'isManualProgress':
       case 'selectFonction' :
       case 'hideItemTypeRestrictionOnProject' : case 'SAML_isADFS' :
+      case 'activateSubtasksManagement':
       case 'automaticFeedingOfTheReal' : case 'showOnlyNotes'://florent
         $list=array('NO'=>i18n('displayNo'),
                     'YES'=>i18n('displayYes')); 
@@ -957,6 +959,8 @@ class Parameter extends SqlElement {
           	              'useOrganizationBudgetElement'=>'list', // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
           	              'sectionPool'=>'section',
           	               'autoAffectationPool'=>'list',
+          	               'sectionToDoList'=>'section',
+          	                'activateSubtasksManagement'=>'list',
       	                  'columnPlanningRight'=>'newColumn',
       	                    'sectionPlanningAutomation'=>'section',
       	                      'consolidateValidated'=>'list',

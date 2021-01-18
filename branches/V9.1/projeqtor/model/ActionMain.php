@@ -63,6 +63,8 @@ class ActionMain extends SqlElement {
   //public $_Link_Risk=array();
   //public $_sec_linkIssue;
   //public $_Link_Issue=array();
+  public $_sec_ToDoList;
+  public $_SubTask;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();

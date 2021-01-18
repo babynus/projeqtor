@@ -88,6 +88,8 @@ class TicketMain extends SqlElement {
   public $_OtherTargetProductVersion=array();
   public $idTargetComponentVersion;
   public $_OtherTargetComponentVersion=array();
+  public $_sec_ToDoList;
+  public $_SubTask;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
