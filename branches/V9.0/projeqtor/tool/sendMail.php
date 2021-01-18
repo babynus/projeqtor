@@ -41,6 +41,7 @@ if (array_key_exists('className', $_REQUEST)) {
   $typeSendMail=$_REQUEST['objectClassName'];
 }
 $result="";
+Sql::beginTransaction();
 if ($typeSendMail=="User") {
   $login=$_REQUEST['name'];
   $dest=$_REQUEST['email'];
@@ -266,21 +267,26 @@ if ($result=="OK") {
   echo '<div class="messageOK" >'.i18n('mailSentTo', array($dest)).'</div>';
   echo '<input type="hidden" id="lastOperation" value="mail" />';
   echo '<input type="hidden" id="lastOperationStatus" value="OK" />';
+  Sql::commitTransaction();
 } else if ($result=="NO" or $dest=='0') {
   echo '<div class="messageWARNING" >'.i18n('noEmailReceiver').'</div>';
   echo '<input type="hidden" id="lastOperation" value="mail" />';
   echo '<input type="hidden" id="lastOperationStatus" value="OK" />';
+  Sql::rollbackTransaction();
 } else if ($result=="Fail"){
   echo '<div class="messageWARNING" >'.i18n('mailImpossibleToSend').'</div>';
   echo '<input type="hidden" id="lastOperation" value="mail" />';
   echo '<input type="hidden" id="lastOperationStatus" value="OK" />';
+  Sql::rollbackTransaction();
 }else if ($result=="ErrorSize"){
   echo '<div class="messageERROR" >'.i18n('errorAttachmentSize').'</div>';
   echo '<input type="hidden" id="lastOperation" value="mail" />';
   echo '<input type="hidden" id="lastOperationStatus" value="ERROR" />';
+  Sql::commitTransaction(); // Commit as mail may have been sent, only attachment is uncomplete
 }else{
   echo '<div class="messageERROR" >'.i18n('noMailSent', array($dest, $result)).'</div>';
   echo '<input type="hidden" id="lastOperation" value="mail" />';
   echo '<input type="hidden" id="lastOperationStatus" value="ERROR" />';
+  Sql::rollbackTransaction();
 }
 ?>
