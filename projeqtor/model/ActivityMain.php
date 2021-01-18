@@ -80,6 +80,8 @@ class ActivityMain extends SqlElement {
   public $_spe_activity;
   // MTY - LEAVE SYSTEM
   public $_spe_isLeaveMngActivity;
+  public $_sec_ToDoList;
+  public $_SubTask;
   // MTY - LEAVE SYSTEM
   public $_sec_Link;
   public $_Link = array();

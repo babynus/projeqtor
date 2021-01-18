@@ -7946,6 +7946,8 @@ function loadMenuBarItem(item, itemName, from) {
 	    loadContent("imputationValidationMain.php", "centerDiv");  
   }else if(item == 'ConsultationValidation'){
     loadContent("consolidationValidationMain.php", "centerDiv");  
+  }else if (item == 'ViewAllSubTask') {
+    loadContent("viewAllSubTaskMain.php", "centerDiv"); 
   }else if (item == 'AutoSendReport') {
     loadContent("autoSendReportMain.php", "centerDiv"); 
   } else if (item == 'DataCloning') {

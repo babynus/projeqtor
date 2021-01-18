@@ -1629,7 +1629,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               + '</div>';
             }
             vIsOnCriticalPath=vTaskList[i].getIsOnCriticalPath();
-            vRightTableTempMeeting = '<div id=' + vBardivName + '  class="barDivTask" style="'+(vTaskList[i].getVisible()==1 && vTaskList[i].getClass()=='Meeting'?'display:block;':'');
+            vRightTableTempMeeting = '<div id=' + vBardivName + '  class="barDivTask" style="'+((vTaskList[i].getVisible()==1 && vTaskList[i].getClass()=='Meeting' )?'display:block;':'');
             if (! vTaskList[i].getGlobal() )
               var vBorderBottomColor=vTaskList[i].getColor();
               var vBorderBottomSize=2;
@@ -1637,13 +1637,13 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 vBorderBottomColor=vTaskList[i].getTaskStatusColor();
                 vBorderBottomSize=3;
               }
-              vRightTableTempMeeting += ' border-bottom: '+vBorderBottomSize+'px solid #' + vBorderBottomColor + ';';
+              if (! vTaskList[i].getGlobal() )vRightTableTempMeeting += ' border-bottom: '+vBorderBottomSize+'px solid #' + vBorderBottomColor + ';';
               vRightTableTempMeeting += ' left:' + vBarLeft + 'px; height:11px; '
 	            + ' width:' + vBarWidth + 'px" '
-	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
-	            + 'onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"'
-	            +'onmouseenter ="if(!isResizingGanttBar)handleResizeGantBAr('+vTaskList[i].getElementIdRef()+','+ Date.parse(vMinDate)+','+vDayWidth+',\''+vDateDisplayFormat+'\');"'
-	            +'>'; 
+	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" ';
+	            if(! vTaskList[i].getGlobal())vRightTableTempMeeting += 'onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"';
+	            if(! vTaskList[i].getGlobal())vRightTableTempMeeting +='onmouseenter ="if(!isResizingGanttBar)handleResizeGantBAr('+vTaskList[i].getElementIdRef()+','+ Date.parse(vMinDate)+','+vDayWidth+',\''+vDateDisplayFormat+'\');"';
+	            vRightTableTempMeeting +='>'; 
 
             vRightTableTempMeeting += ' <div class="ganttTaskrowBarComplete"  '
             	+ ' style="width:' + vTaskList[i].getCompStr() + '; cursor: pointer;'+((vTaskList[i].getGlobal)?'opacity:0.2;':'')+'"'
@@ -1715,7 +1715,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	          }
   	        vRightTableTempMeeting += '</div>' ;
             var idPm=vTaskList[i].getIdPlanningMode();
-            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13' || idPm=='19' || idPm=='21') && vTaskList[i].getFixPlanning()!=1 && !vTaskList[i].getGroup()){
+            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13' || idPm=='19' || idPm=='21') && vTaskList[i].getFixPlanning()!=1 && !vTaskList[i].getGroup() && !vTaskList[i].getGlobal()){
               // handle resizer start=======================
               leftposLeftResizer=vBarLeft-22;
               leftposdivDate=vBarLeft-43;
@@ -1725,7 +1725,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vRightTableTempMeeting +='<input class="inputDateGantBarResize" id="inputDateGantBarResizeleft_'+vID+'" name="inputDateGantBarResizeleft_'+vID+'" type="hidden" value="'+vTaskStart+'" />';
               //===========================
             }
-            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8'  || idPm=='4'  || idPm=='12') && vTaskList[i].getFixPlanning()!=1 && !vTaskList[i].getGroup()){
+            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8'  || idPm=='4'  || idPm=='12') && vTaskList[i].getFixPlanning()!=1 && !vTaskList[i].getGroup() && !vTaskList[i].getGlobal()){
               // handle resizer end=======================
               leftposRightResizer=vBarLeft+vBarWidth-11;
               vRightTableTempMeeting +='<div class="resizerEnd" id="taskbar_'+vID+'ResizerEnd" style="display:none;left:'+leftposRightResizer+'px;" '
