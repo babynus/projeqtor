@@ -8021,3 +8021,174 @@ function switchNewGui(){
 	}
 	saveDataToSessionAndReload("newGui", val, true);
 }
+
+
+function updateSubTask(id,refType,refId){
+  url = "../tool/saveSubTask.php?refType="+refType+"&refId="+refId+"&idSubTask="+id;
+  var name=(id==0)?dojo.byId(refType+'_'+refId+'_nameNewSubTask_'+id).value:dojo.byId('nameNewSubTask_'+id).value;
+  if(name.trim()!=''){
+    console.log('priorityNewSubTask_'+id);
+    var priority=(id==0)?dojo.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).value:dijit.byId('priorityNewSubTask_'+id).get('value');
+    var resource=(id==0)?dojo.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).value:dijit.byId('resourceNewSubTask_'+id).get('value');
+    var sortOrder=(id==0)?dojo.byId(refType+'_'+refId+'_sortOrder_'+id).value:dojo.byId('sortOrder_'+id).value;
+    console.log(priority+' '+resource);
+  }
+
+  save=false;
+  deleted=false;
+
+  if(id==0 && name.trim()!=''){
+    save=true;
+    sortOrder=sortOrder+1;
+    url+="&operation=save";
+    url+="&name="+name+"&priority="+priority+"&resource="+resource+"&sortOrder"+sortOrder;
+  }else if(id!=0 && name.trim()!=''){
+    url+="&operation=update";
+    url+="&name="+name+"&priority="+priority+"&resource="+resource;
+  }else if(name.trim()=='' && id!=0){
+    url+="&operation=delete";
+    deleted=true;
+  }else{
+    return;
+  }
+  if(deleted==true){
+    actionOK=function() {
+      loadContent(url, "resultDivMain", "listForm");
+      var tabSubTask=dojo.byId(refType+'_'+refId+'_drawSubTask'),
+        subTaskToDelete=tabSubTask.querySelector('#subTaskRow_'+id);
+        subTaskToDelete.parentNode.removeChild(subTaskToDelete);
+    };
+    msg=i18n('deleteButton');
+    showConfirm(msg, actionOK);
+  }else{
+    dojo.xhrPost({
+      url : url,
+      form :null,
+      handleAs : "text",
+      load : function(data) {
+        if(save==true){
+          var contentWidget=dijit.byId("resultDivMain");
+          if (!contentWidget) {
+            return;
+          }
+          contentWidget.set('content', data);
+          var lastOperationStatus=window.top.dojo.byId('lastOperationStatus');
+          var lastSaveId=window.top.dojo.byId('lastSaveId');
+          
+          if(lastOperationStatus.value == "OK"){
+            addSubTaskRow(lastSaveId.value,refType,refId,sortOrder);
+          } 
+        }
+      }
+    });
+  }
+}
+
+function addSubTaskRow(id,refType,refId,sortOrder){
+  var tabSubTask=dojo.byId(refType+'_'+refId+'_drawSubTask'),
+        subTaskCreat=tabSubTask.querySelector('#'+refType+'_'+refId+'_newSubTaskRow'),
+          newSubTask=subTaskCreat.cloneNode(true),
+            imgGrab=document.createElement('img');
+
+  imgGrab.setAttribute('style','width:7px;top: 10px;position: relative;');
+  imgGrab.setAttribute('src','css/images/iconDrag.gif');
+  newSubTask.id="subTaskRow_"+id;
+  order= sortOrder+1;
+  
+  var  priority=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_0'),
+            resource=dijit.byId(refType+'_'+refId+'_resourceNewSubTask_0'),
+            cloneName=newSubTask.querySelector('#widget_'+refType+'_'+refId+'_nameNewSubTask_0'),
+              clonePrio=newSubTask.querySelector('#widget_'+refType+'_'+refId+'_priorityNewSubTask_0'),
+                cloneResource=newSubTask.querySelector('#widget_'+refType+'_'+refId+'_resourceNewSubTask_0'),
+                  sort=newSubTask.querySelector('#'+refType+'_'+refId+'_sortOrder_0'),
+                    grabDiv=newSubTask.querySelector('#'+refType+'_'+refId+'_grabDive_0'),
+                      newPrio=document.createElement('input'),
+                       newResource=document.createElement('input'),
+                        newName=document.createElement('input'),
+                        slidContainerDiv=newSubTask.querySelector('#'+refType+'_'+refId+'_slidContainer_0');
+  newName.setAttribute('id','nameNewSubTask_'+id);
+  newPrio.setAttribute('id','priorityNewSubTask_'+id);
+  newResource.setAttribute('id','resourceNewSubTask_'+id);
+  slidContainerDiv.id='slidContainer_'+id;
+  
+  var pos=slidContainerDiv.querySelector('#'+refType+'_'+refId+'_pos_0'),
+        prev=slidContainerDiv.querySelector('#'+refType+'_'+refId+'_prev_0'),
+          next=slidContainerDiv.querySelector('#'+refType+'_'+refId+'_next_0');
+  
+  cloneName.parentNode.replaceChild(newName,cloneName);
+  clonePrio.parentNode.replaceChild(newPrio,clonePrio);
+  cloneResource.parentNode.replaceChild(newResource,cloneResource);
+  grabDiv.removeAttribute('id');
+  grabDiv.className='dojoDndHandle handleCursor linkData';
+  sort.id='sortOrder_'+id;
+  pos.id='pos_'+id;
+  prev.id='prev_'+id;
+  next.id='next_'+id;
+  
+  sort.setAttribute('value',order);
+  prev.setAttribute('style', 'display:block;');
+  next.setAttribute('style', 'display:block;');
+  prev.setAttribute('onclcik','plusSlides("prev",'+id+',"'+refType+'"'+refId+');');
+  next.setAttribute('onclick','plusSlides("next",'+id+',"'+refType+'",'+refId+');');
+  grabDiv.insertAdjacentElement('afterbegin',imgGrab);
+  subTaskCreat.insertAdjacentElement('beforebegin',newSubTask );
+  
+  var newFilterPrio=new dijit.form.FilteringSelect({
+    id: "priorityNewSubTask_"+id,
+    name: "priorityNewSubTask_"+id,
+    store: priority.store,
+    value:"",
+    searchAttr: "name"
+  }, "priorityNewSubTask_"+id);
+  
+  var newFilterResource=new dijit.form.FilteringSelect({
+    id: "resourceNewSubTask_"+id,
+    name: "resourceNewSubTask_"+id,
+    store: resource.store,
+    value:"",
+    searchAttr: "name"
+  }, "resourceNewSubTask_"+id);
+  
+  var newNameText = new dijit.form.TextBox({
+    id: "nameNewSubTask_"+id,
+    name: "nameNewSubTask_"+id,
+    style: "white-space:nowrap;width:90%;",
+    value: dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value 
+  }, "nameNewSubTask_"+id);
+
+  dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value='';
+  dojo.setAttr('nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',"'+refType+'",'+refId+')');
+  dojo.connect(newFilterResource, 'onChange', function(value){updateSubTask(id,refType,refId);}); 
+  dojo.connect(newFilterPrio, 'onChange', function(value){updateSubTask(id,refType,refId);}); 
+}
+
+function plusSlides(op,id,refType,refId) {
+  var pos=dojo.byId('pos_'+id).value,
+      n=1;
+  if(op=='next' && pos==4)return;
+  if(op=='prev' && pos==1)return;
+  pos=(op=='next')? parseInt(pos,10)+n : parseInt(pos,10)-n ;
+  showSlides(pos,id,refType,refId);
+}
+
+function showSlides(n,id,refType,refId) {
+  url = "../tool/saveSubTask.php?refType="+refType+"&refId="+refId+"&idSubTask="+id;
+  var i;
+  var div=dojo.byId(refType+'_'+refId+'_slidContainer_'+id);
+  var slides = div.querySelectorAll(".mySlides");
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  slides[n-1].style.display = "block";  
+  dojo.byId('pos_'+id).value=n;
+  dojo.setAttr('prev_'+id,'onClick','plusSlides("prev","'+id+'","'+refType+'",'+refId+')');
+  dojo.setAttr('next_'+id,'onClick','plusSlides("next","'+id+'","'+refType+'",'+refId+')');
+  
+  status=n-1;
+  url+="&operation=update&status="+status;
+  dojo.xhrPost({
+    url : url,
+    form :null,
+    handleAs : "text"
+  });
+}
