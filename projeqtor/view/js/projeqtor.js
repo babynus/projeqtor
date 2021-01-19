@@ -7131,14 +7131,14 @@ function expandHierarchicalBudgetGroup(idBudget, subBudget, recSubBudget, visibl
 	if(budgetClass == 'ganttExpandClosed'){
 		visibleRowList.forEach(function(item){
 			saveExpanded('hierarchicalBudgetRow_'+idBudget);
-			if (dojo.byId('hierarchicalBudgetRow_'+item)) dojo.byId('hierarchicalBudgetRow_'+item).style.visibility = 'visible';
+			if (dojo.byId('hierarchicalBudgetRow_'+item)) dojo.byId('hierarchicalBudgetRow_'+item).style.display = 'table-row';
 			if (dojo.byId('group_'+idBudget)) dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandOpened');
 		});
 		//refreshHierarchicalBudgetList();
 	}else{
 		recSubBudgetList.forEach(function(item){
 			saveCollapsed('hierarchicalBudgetRow_'+idBudget);
-			if (dojo.byId('hierarchicalBudgetRow_'+item)) dojo.byId('hierarchicalBudgetRow_'+item).style.visibility = 'collapse';
+			if (dojo.byId('hierarchicalBudgetRow_'+item)) dojo.byId('hierarchicalBudgetRow_'+item).style.display = 'none';
 			if (dojo.byId('group_'+idBudget)) dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandClosed');
 		});
 	}
@@ -7151,7 +7151,7 @@ function expandAssetGroup(idAsset, subAsset,recSubAsset){
   if(budgetClass == 'ganttExpandClosed'){
     if (dojo.byId('group_'+idAsset)) dojo.setAttr('group_'+idAsset, 'class', 'ganttExpandOpened');
     subBudgetList.forEach(function(item){
-      if (dojo.byId('assetStructureRow_'+item)) dojo.byId('assetStructureRow_'+item).style.visibility = 'visible';
+      if (dojo.byId('assetStructureRow_'+item)) dojo.byId('assetStructureRow_'+item).style.display = 'table-row';
     });
   }else{
     if (dojo.byId('group_'+idAsset)){
@@ -7159,7 +7159,7 @@ function expandAssetGroup(idAsset, subAsset,recSubAsset){
     }
     recSubAsset.forEach(function(item){
       if (dojo.byId('assetStructureRow_'+item)){
-        dojo.byId('assetStructureRow_'+item).style.visibility = 'collapse';
+        dojo.byId('assetStructureRow_'+item).style.display = 'none';
         if (dojo.attr('group_'+item, 'class') == 'ganttExpandOpened'){
           dojo.setAttr('group_'+item, 'class', 'ganttExpandClosed');
         }
@@ -7364,7 +7364,7 @@ function expandOrganizationGroup(idOrganization, subOrganization,recSubOrganizat
   if(budgetClass == 'ganttExpandClosed'){
     if (dojo.byId('group_'+idOrganization)) dojo.setAttr('group_'+idOrganization, 'class', 'ganttExpandOpened');
     subOrganizationList.forEach(function(item){
-      if (dojo.byId('organizationStructureRow_'+item)) dojo.byId('organizationStructureRow_'+item).style.visibility = 'visible';
+      if (dojo.byId('organizationStructureRow_'+item)) dojo.byId('organizationStructureRow_'+item).style.display = 'table-row';
     });
   }else{
     if (dojo.byId('group_'+idOrganization)){
@@ -7372,7 +7372,7 @@ function expandOrganizationGroup(idOrganization, subOrganization,recSubOrganizat
     }
     recSubOrganizationList.forEach(function(item){
       if (dojo.byId('organizationStructureRow_'+item)){
-        dojo.byId('organizationStructureRow_'+item).style.visibility = 'collapse';
+        dojo.byId('organizationStructureRow_'+item).style.display = 'none';
         if (dojo.attr('group_'+item, 'class') == 'ganttExpandOpened'){
             dojo.setAttr('group_'+item, 'class', 'ganttExpandClosed');
         }
