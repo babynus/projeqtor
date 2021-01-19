@@ -592,7 +592,7 @@ class PlannedWorkManual extends GeneralWork {
       echo '          <td style="width:90%" '.$onClick.'>'.$pe->refName.'</td>';
       $goto=($readonly or $readonlyHabil)?'':'onClick="gotoElement('."'".$pe->refType."','".htmlEncode($pe->refId)."'".');"';
       if($class=='dojoxGridRowSelected'){
-        $iconGoto='<div class="iconGotoWhite16 iconGoto iconSize16" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
+        $iconGoto='<div class="iconGotoWhite16 iconGoto iconSize16 imageColorNewGui" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
       }else{
         $iconGoto='<div class="iconGoto16 iconGoto iconSize16 imageColorNewGui" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
       }
