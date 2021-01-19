@@ -55,8 +55,10 @@ if ($mode=='after') {
   
 PlanningElement::$_noDispatch=true;
 $needRefreshInserted=false;
+$doNotTriggerAlerts=true;
 Sql::beginTransaction();
 foreach ($arrayFrom as $from) {
+  projeqtor_set_time_limit(300);
   $idFrom=substr($from, 6); // validated to be numeric value in SqlElement base constructor
   $idTo=substr($to, 6); // validated to be numeric value in SqlElement base constructor
   if (! is_numeric($idTo) or $idTo>PlanningElementExtension::$_startId) {
