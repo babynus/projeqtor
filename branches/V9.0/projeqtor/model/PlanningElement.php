@@ -1657,7 +1657,6 @@ class PlanningElement extends SqlElement {
       $changeParent=false;
     }
     $parent=new PlanningElement($dest->topId);
-    
     if ($status=="OK" and $task and !$recursive) { // Change parent, then will recursively call moveTo to reorder correctly
       $peName=get_class($task).'PlanningElement';
       if ($peName=='PeriodicMeetingPlanningElement') $peName='MeetingPlanningElement';
@@ -1701,8 +1700,9 @@ class PlanningElement extends SqlElement {
           $idx++;
           $root=substr($pe->wbs,0,strrpos($pe->wbs,'.'));
           //$root=$parent->wbs;
+          $oldWbs=$pe->wbs;
           $pe->wbs=($root=='')?$idx:$root.'.'.$idx;
-          if ($pe->refType) {
+          if ($pe->refType and $oldWbs!=$pe->wbs) {
             $pe->wbsSave();
           }
           if ($pe->id==$destId and $mode=="after") {
