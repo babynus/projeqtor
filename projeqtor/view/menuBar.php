@@ -67,7 +67,7 @@
   $isNotificationSystemActiv = isNotificationSystemActiv();
 // END - ADD BY TABARY - NOTIFICATION SYSTEM
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
-  
+  $displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
   if (! $defaultMenu) $defaultMenu='menuBarItem';
   if (! $defaultMenu and isNewGui()) $defaultMenu='menuBarCustom';
   
@@ -75,8 +75,10 @@
   foreach ($menuList as $menu) {
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM  
     if (! $isNotificationSystemActiv and strpos($menu->name, "Notification")!==false) { continue; }
+    
     if (! $menu->canDisplay() ) { continue;}
 // END - ADD BY TABARY - NOTIFICATION SYSTEM
+    if(!$displaySubTask and $menu->name=="menuViewAllSubTask" ){ continue; }
     if (! $isLanguageActive and $menu->name=="menuLanguage") { continue; }
     if (securityCheckDisplayMenu($menu->id,substr($menu->name,4))) {
       $menuClass=$menu->menuClass;

@@ -190,7 +190,8 @@ abstract class SqlElement {
           "PeriodicMeeting"=>"confirm",
           "PlannedWork" => "cascade",
           "TestSession"=>"confirm", 
-          "Ticket" => "control"
+          "Ticket" => "control",
+          "SubTask"=>"cascade"
           ), 
       "ActivityType" => array(
           "Activity" => "controlStrict"), 

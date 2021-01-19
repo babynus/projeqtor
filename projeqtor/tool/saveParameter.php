@@ -126,6 +126,7 @@ if ($type=='habilitation') {
   		                           'assignmentView'=>i18n('assignmentViewRight'),
   		                               'assignmentEdit'=>i18n('assignmentEditRight'),
                                  'combo'=>i18n('comboDetailAccess'),
+                                 'subtask'=>i18n('subTaskAccess'),
   		                               'checklist'=>i18n('checklistAccess'),
 									                   'joblist'=>i18n('joblistAccess'),
                                      'multipleUpdate'=>i18n('buttonMultiUpdate'), 

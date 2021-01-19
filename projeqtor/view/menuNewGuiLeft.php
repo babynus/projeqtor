@@ -407,6 +407,7 @@ function getNavigationMenuLeft (){
   $result=array();
   $nav=new Navigation();
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
+  $displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
   $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc');
   $menuPlugin=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuPlugin'));
   $menuReport=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuReports'));
@@ -426,6 +427,7 @@ function getNavigationMenuLeft (){
           if (!$isLanguageActive and $menu->name=="menuLanguage")  $unset=true;
           if (!Module::isMenuActive($menu->name))  $unset=true;
           if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) $unset=true;
+          if(!$displaySubTask and $menu->name=="menuViewAllSubTask" )$unset=true;
           if($unset==true){
             unset($result[$id]);
             continue;
