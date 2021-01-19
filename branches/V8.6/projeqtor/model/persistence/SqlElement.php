@@ -1148,7 +1148,8 @@ abstract class SqlElement {
       }
       // if (($statusChanged or $responsibleChanged) and stripos($returnValue,'id="lastOperationStatus" value="OK"')>0 ) {
       
-      if (stripos ( $returnValue, 'id="lastOperationStatus" value="OK"' ) > 0) {
+      if (stripos ( $returnValue, 'id="lastOperationStatus" value="OK"' ) > 0 and ! property_exists($this,'_noHistory')
+      and ! SqlElement::is_a($this, 'PlanningElement')) {
         $mailResult = $this->sendMailIfMailable ( $newItem, $statusChanged, false, $responsibleChanged, false, false, false, $descriptionChange, $resultChange, false, false, true,false,false );
         if ($mailResult) {
           $returnValue = str_replace ( '${mailMsg}', ' - ' . Mail::getResultMessage($mailResult), $returnValue );
@@ -1160,7 +1161,8 @@ abstract class SqlElement {
       }
       // indicators
       $classIndicatorable=(SqlElement::is_a($this, 'PlanningElement'))?$this->refType:get_class($this);
-      if (SqlList::getIdFromTranslatableName ( 'Indicatorable', $classIndicatorable )) {
+      global $doNotTriggerAlerts;
+      if (SqlList::getIdFromTranslatableName ( 'Indicatorable', $classIndicatorable ) and ! $doNotTriggerAlerts) {
         $indDef = new IndicatorDefinition ();
         if(property_exists($this, 'idProject')) {
           $idP=(get_class($this)=='Project')?$this->id:$this->idProject;
@@ -5119,7 +5121,9 @@ abstract class SqlElement {
    * @return status of mail, if sent
    */
   public function sendMailIfMailable($newItem = false, $statusChange = false, $directStatusMail = null, $responsibleChange = false, $noteAdd = false, $attachmentAdd = false, $noteChange = false, $descriptionChange = false, $resultChange = false, $assignmentAdd = false, $assignmentChange = false, $anyChange = false,$affectationAdd = false , $affectationChange = false, $linkAdd = false, $linkDelete = false, $attachments=false) {
-    global $cronnedScript;
+    global $cronnedScript, $doNotTriggerAlerts;
+    if ($doNotTriggerAlerts==true) return false;
+    
     $objectClass = get_class($this);
     $idProject = ($objectClass == 'Project') ? $this->id : ((property_exists ( $this, 'idProject' )) ? $this->idProject : null);
     if ($objectClass == 'TicketSimple') {
