@@ -32,6 +32,7 @@ require_once "../tool/projeqtor.php";
 $screen=(RequestHandler::isCodeSet('currentScreen'))?RequestHandler::getValue('currentScreen'):'';
 $isObject=(RequestHandler::isCodeSet('isObject'))?RequestHandler::getValue('isObject'):'false';
 $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
+$displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
 $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 $displayIcon=($displayMode=='TXT')?"display:none;":"display:block;";
 $result='';
@@ -171,6 +172,7 @@ if(empty($allMenuSort)){
           if (!$isLanguageActive and $menu->name=="menuLanguage")  $unset=true;
           if (!Module::isMenuActive($menu->name))  $unset=true;
           if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4))) $unset=true;
+          if(!$displaySubTask and $menu->name=="menuViewAllSubTask" )$unset=true;
           if($unset==true)continue;
           
           $menuName=$menu->name;

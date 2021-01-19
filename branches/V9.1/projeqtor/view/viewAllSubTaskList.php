@@ -32,17 +32,15 @@ require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
 scriptLog('   ->/view/imputationValidationList.php');
 
-$cons= new SubTask();
-$lockedImp= new LockedImputation();
-$impLocked=$lockedImp->getMaxValueFromCriteria('month',null);
-if ($impLocked ){
-  $date=$impLocked;
-  $currentYear=substr($date,0,-2);
-  $currentMonth=substr($date,-2);
-}else{
-  $currentYear=strftime("%Y") ;
-  $currentMonth=strftime("%m") ;
+$idProject=0;
+if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
+  if(strpos(getSessionValue('project'),',')){
+    $idProject=0;
+  }else{
+    $idProject =  getSessionValue('project');
+  }
 }
+
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="imputationConsolidationParamDiv" name="imputationConsolidationParamDiv">  
@@ -50,15 +48,15 @@ if ($impLocked ){
   <form dojoType="dijit.form.Form" name="SubTaskForm" id="SubTaskForm" action="" method="post" >
   <table width="100%" height="64px" class="listTitle">
     <tr height="32px">
-    <td style="vertical-align:top; min-width:100px; width:15%;">
-      <table >
-		    <tr height="32px">
-  		    <td width="80px" align="center">
+      <td style="vertical-align:top; min-width:100px; width:15%;">
+        <table >
+	     <tr height="32px">
+	       <td width="80px" align="center">
             <?php echo formatIcon('viewAllSubTask', 32, null, true);?>
-          </td>
-          <td width="100px"><span class="title">&nbsp;&nbsp;&nbsp;<?php echo i18n('menuViewAllSubTask');?></span></td>
-  		  </tr>
-  		  <tr height="32px">
+           </td>
+           <td width="100px"><span class="title">&nbsp;&nbsp;&nbsp;<?php echo i18n('menuViewAllSubTask');?></span></td>
+		 </tr>
+		 <tr height="32px">
           <td>
            <?php if(!isNewGui()){?>
             <button id="refreshConcolidationValidationButton" dojoType="dijit.form.Button" showlabel="false"
@@ -74,64 +72,58 @@ if ($impLocked ){
           </td>
         </tr>
 		  </table>
-    </td>
+      </td>
       <td>   
         <table>
          <tr>
            <td nowrap="nowrap" style="text-align: right;padding-right:5px;"> <?php echo i18n("colIdProject");?> &nbsp;</td>
            <td>
-                    <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-                      style="width: 175px;"
-                      name="idProjectConsolidation" id="idProjectConsolidation"
-                      <?php echo autoOpenFilteringSelect();?>
-                      value="<?php if(sessionValueExists('idProjectConsolidation')){
-                                     $idProject =  getSessionValue('idProjectConsolidation');
-                                     echo $idProject;
-                                   }else if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
-                                     if(strpos(getSessionValue('project'),',')){
-                                      $idProject=0;
-                                      echo $idProject;
-                                     }else{
-                                       $idProject =  getSessionValue('project');
-                                       echo $idProject;
-                                     }
-                                   }else{
-                                    $idProject=0;
-                                    echo $idProject;
-                                   }?>">
-                        <script type="dojo/method" event="onChange" >
-                    saveDataToSession("idProjectConsolidation",dijit.byId('idProjectConsolidation').get('value'),true);
+                <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
+                  style="width: 175px;"
+                  name="userNameSubTask" id="userNameSubTask"
+                  <?php echo autoOpenFilteringSelect();?>
+                  value="<?php if(sessionValueExists('userNameSubTask')){
+                                $idResource =  getSessionValue('userNameSubTask');
+                                echo $idResource;
+                               }else{
+                                echo 0;
+                               }?>">
+                    <script type="dojo/method" event="onChange" >
+                    saveDataToSession("userNameSubTask",dijit.byId('userNameSubTask').get('value'),true);
+                    refreshAllSubTaskList();
                   </script>
-                        <?php htmlDrawOptionForReference('idProject', null);?>  
-                    </select>
-           </td>
-          <td nowrap="nowrap" style="text-align: right;padding-right:5px;">&nbsp;&nbsp;&nbsp; <?php echo i18n("colIdActivity");?> &nbsp;</td>
+                <option value=""></option>
+                    <?php 
+                    $specific='imputation';
+                     include '../tool/drawResourceListForSpecificAccess.php';?>  
+                </select>
+          </td>
+          <td nowrap="nowrap" style="text-align: right;padding-right:5px;">&nbsp;&nbsp;&nbsp; <?php echo i18n("colIdProductVersion");?> &nbsp;</td>
            <td>
-                    <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-                      style="width: 175px;"
-                      name="idActivitySubTask" id="idActivitySubTask"
-                      <?php echo autoOpenFilteringSelect();?>
-                      value="<?php if(sessionValueExists('idActivitySubTask')){
-                                    $idActivity =  getSessionValue('idActivitySubTask');
-                                    echo $idActivity;
-                                   }else{
-                                    $idActivity=0;
-                                    echo $idActivity;
-                                   }?>">
-                        <script type="dojo/method" event="onChange" >
-                    saveDataToSession("idActivitySubTask",dijit.byId('idActivitySubTask').get('value'),true);
+                <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
+                  style="width: 175px;"
+                  name="targetProductVersionSubTask" id="targetProductVersionSubTask"
+                  <?php echo autoOpenFilteringSelect();?>
+                  value="<?php if(sessionValueExists('targetProductVersionSubTask')){
+                                $idVersion =  getSessionValue('targetProductVersionSubTask');
+                                echo $idVersion;
+                               }else{
+                                echo 0;
+                               }?>">
+                    <script type="dojo/method" event="onChange" >
+                    saveDataToSession("targetProductVersionSubTask",dijit.byId('targetProductVersionSubTask').get('value'),true);
+                    refreshAllSubTaskList();
                   </script>
-                        <?php htmlDrawOptionForReference('idActivity', null);?>  
-                    </select>
+                  <?php htmlDrawOptionForReference('idVersion',null)?>
+                </select>
            </td>
-  
             <?php if(isNewGui()){?>
            <td align="top">
-            <button id="refreshConcolidationValidationButton" dojoType="dijit.form.Button" showlabel="false" style="position:absolute; right:10px; top:0px;"
+            <button id="refreshAllSubTaskButton" dojoType="dijit.form.Button" showlabel="false" style="position:absolute; right:10px; top:0px;"
               title="<?php echo i18n('buttonRefreshList');?>"
               iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
               <script type="dojo/method" event="onClick" args="evt">
-	             refreshConcolidationValidationList();
+	             refreshAllSubTaskList();
               </script>
             </button> 
             </td>

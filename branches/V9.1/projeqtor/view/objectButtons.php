@@ -540,7 +540,38 @@
         </script>
       </button> 
     </div>
-    <?php }?> 
+    <?php }?>
+           <?php 
+       $buttonSubTaskListVisible="hidden";
+       $displaySubTask=Parameter::getUserParameter('displaySubTask');
+      if ((get_class($obj)=="Activity" or get_class($obj)=="Action" or get_class($obj)=="Ticket") and Parameter::getGlobalParameter('activateSubtasksManagement')=="YES" and $displaySubTask!="YES") {
+        $sub= new SubTask();
+        $cpLst=$sub->countSqlElementsFromCriteria(array("refType"=>get_class($obj),"refId"=>$obj->id));
+  		$user=getSessionUser();
+  		$habilSub=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$user->getProfile($obj),'scope'=>'subtask'));
+  		$listYesNo=new ListYesNo($habilSub->rightAccess);
+  		if ($listYesNo->code!='YES' or $displaySubTask!='REQ') {
+  		  $buttonSubTaskListVisible="never";
+  		} else  if ($cpLst>0) {
+          $buttonSubTaskListVisible="visible";
+        }
+      }
+      //$displayButton=( $buttonCheckListVisible=="visible")?'void':'none';?>
+    <?php if ($buttonSubTaskListVisible=="visible" and $obj->id) {organizeButtons();}?>
+    <span id="SubTaskButtonDiv" style="display:<?php echo ($buttonSubTaskListVisible=='visible')?'inline':'none';?>;">
+      <?php if ($buttonSubTaskListVisible!="never") {?>
+      <button id="SubTaskButton" dojoType="dijit.form.Button" showlabel="false"
+        title="<?php echo i18n('sectionToDoList');?>"
+        iconClass="dijitButtonIcon dijitButtonIconSubTask" class="detailButton">
+        <script type="dojo/connect" event="onClick" args="evt">
+          showSubTask('<?php echo get_class($obj);?>');  
+          hideResultDivs();
+          hideExtraButtons('extraButtonsDetail');
+        </script>
+      </button>
+      <?php }?>
+      <input type="hidden" id="buttonSubTaskListVisible" value="<?php echo $buttonSubTaskListVisible;?>" />
+    </span> 
     <?php 
       $crit="nameChecklistable='".get_class($obj)."'";
       $type='id'.get_class($obj).'Type';

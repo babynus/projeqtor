@@ -117,6 +117,10 @@ class ActionMain extends SqlElement {
     if ($this->id and $this->idUser!=getSessionUser()->id) {
       self::$_fieldsAttributes['isPrivate']='hidden';
     }
+    if(Parameter::getGlobalParameter('activateSubtasksManagement')!="YES" or Parameter::getUserParameter('displaySubTask')!="YES"){
+      self::$_fieldsAttributes ['_SubTask'] = 'hidden';
+      unset($this->_sec_ToDoList);
+    }
   }
 
    /** ==========================================================================

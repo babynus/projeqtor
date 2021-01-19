@@ -119,6 +119,7 @@ var menuData = {
   $isNotificationSystemActiv = isNotificationSystemActiv();
 // END - ADD BY TABARY - NOTIFICATION SYSTEM
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
+  $displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
   
   $pluginObjectClass='Menu';
   $tableObject=$menuList;
@@ -135,6 +136,7 @@ var menuData = {
     if (! $menu->canDisplay() ) { continue;}
 // END - ADD BY TABARY - NOTIFICATION SYSTEM          //echo "id=" . htmlEncode($menu->id) . "     idMenu=" . htmlEncode($menu->idMenu) . "     level=" . $level . "\n";
     if (!$isLanguageActive and $menu->name=="menuLanguage") { continue; }
+    if(!$displaySubTask and $menu->name=="menuViewAllSubTask" ){ continue; }
     if ($level>0 and securityCheckDisplayMenu($menu->id,substr($menu->name,4)) ) {
       while ($level>0 and $menu->idMenu!= $menuLevel[$level]) {
         drawMenuCloseChildren();

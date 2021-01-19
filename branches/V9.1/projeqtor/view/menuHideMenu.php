@@ -34,6 +34,7 @@
   $sortOrder = 'sortOrder asc';
   $menuList=$obj->getSqlElementsFromCriteria(null, false,null,$sortOrder,true);
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
+  $displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
   // Clean empty parents
   foreach (array_reverse($menuList,true) as $idMenu=>$menu) {
     if ($menu->type=='menu') {
@@ -55,6 +56,7 @@
     if (! $menu->canDisplay() ) { continue;}
     if (!$isLanguageActive and $menu->name=="menuLanguage") { continue; }
     if (!Module::isMenuActive($menu->name)) {continue;}
+    if(!$displaySubTask and $menu->name=="menuViewAllSubTask" ){continue;}
     if ($level>0 and securityCheckDisplayMenu($menu->id,substr($menu->name,4))) {
       while ($level>0 and $menu->idMenu!= $menuLevel[$level]) {
         drawMenuIconCloseChildren();
