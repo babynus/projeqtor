@@ -124,7 +124,7 @@ function showAsset($id,$name,$level,$position) {
   echo '<TD>';
   if(!$isElementary){
     echo '     <div id="group_'.$item->id.'" class="'.$class.'"';
-    echo '      style="'.$style.'word-wrap: break-word; margin-left:'.(($level-1)*$padding+5).'px; position: relative; z-index: 100000;   width:16px; height:13px;"';
+    echo '      style="word-wrap: break-word; margin-left:'.(($level-1)*$padding+5).'px; position: relative; z-index: 100000;   width:16px; height:13px;"';
     echo '      onclick="expandAssetGroup(\''.$item->id.'\',\''.implode(',', $limitedSubAsset).'\',\''.implode(',', $subBudget).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
   }else{
      echo '     <div id="group_'.$item->id.'" class="ganttAsset"';
