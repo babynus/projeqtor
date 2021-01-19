@@ -241,10 +241,10 @@ if ($noselect) {
     }
     exit();
   }
-//   if(array_key_exists('refreshSubTask', $_REQUEST)){
-//     SubTask::drawSubtasksForObject($obj,$objClass, $obj->id,true);
-//     exit();
-//   }
+  if(array_key_exists('refreshSubTask_Single', $_REQUEST)){
+    SubTask::drawSubtasksForObject($obj,$objClass, $obj->id,true);
+    exit();
+  }
 }
 // save the current object in session
 

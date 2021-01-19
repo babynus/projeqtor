@@ -33,6 +33,8 @@ class SubTask extends SqlElement {
   public $id;    
   public $refType;
   public $refId;
+  public $idProject;
+  public $idTargetProductVersion;
   public $sortOrder;
   public $name;
   public $idPriority;
@@ -67,29 +69,34 @@ class SubTask extends SqlElement {
   // ============================================================================**********
   // DRAW SUBTASK
   // ============================================================================**********
-  static function drawSubtasksForObject($obj,$refType, $refId,$refresh=false,$gloablView=false){
+  static function drawSubtasksForObject($obj,$refType, $refId,$refresh=false,$idResource=false,$gloablView=false){
     global $cr, $print, $user, $comboDetail;
     if ($comboDetail) {
       return;
     }
-    $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask')!='0')?true:false;
-      
+    if(!$gloablView) $view='Single';
+    else $view='Global';
+    $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_'.$view)!='0')?true:false;
     $subTask=new SubTask();
     $assignment= new Assignment();
     $crit=($showClosedSubTask)? array("refType"=>$refType,"refId"=>$refId): array("refType"=>$refType,"refId"=>$refId,"idle"=>'0');
+    if($idResource!=false and $idResource!=0){
+      $val=array("idResource"=>$idResource);
+      $crit=array_merge($crit,$val);
+    }
     $res=$subTask->getSqlElementsFromCriteria($crit,false,null,'sortOrder');
 
     $critFld='idProject';
     $critVal=$obj->idProject;
     
     
-    if (!$print and !$refresh and !$gloablView) {
+    if (!$print and !$gloablView) {
       echo'<div style="position:absolute;right:5px;top:3px;">';
-      echo'<label for="showClosedSubTask_'.$refId.'"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'&nbsp;</label>';
-      echo'<div class="whiteCheck" id="showClosedSubTask_'.$refId.'" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedSubTask)?'checked':'');
+      echo'<label for="showClosedSubTask_'.$view.'"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'&nbsp;</label>';
+      echo'<div class="whiteCheck" id="showClosedSubTask_'.$view.'" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedSubTask)?'checked':'');
       echo' title="'.i18n('labelShowIdle').'" >';
       echo'<script type="dojo/connect" event="onChange" args="evt">';
-      echo' saveUserParameter("showClosedSubTask",((this.checked)?"1":"0"));';
+      echo' saveUserParameter("showClosedSubTask_'.$view.'",((this.checked)?"1":"0"));';
       echo' if (checkFormChangeInProgress()) {return false;}';
       echo' loadContent("objectDetail.php", "detailDiv", "listForm");';
       echo'</script>';
@@ -98,6 +105,7 @@ class SubTask extends SqlElement {
     
     if (!$refresh) echo '<tr><td colspan="4"><div id="'.$refType.'_'.$refId.'_drawSubTask" dojotype="dijit.layout.ContentPane">';
     echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true" id="dndSubTask" jsId="dndSubTask">';
+    if($gloablView )echo      '<input id="SubTaskIdResourceFilter" value="'.$idResource.'" hidden />';
     echo  '<tr>';
     echo    '<td class="linkHeader" style="width:2%"></td>';
     echo    '<td class="linkHeader" style="width:38%;">'.i18n('colName').'</td>';
@@ -192,25 +200,21 @@ class SubTask extends SqlElement {
   }
   
   
-  static function drawAllSubTask($idProject,$idResource=false,$idElement=false,$idVersion=false){
+  static function drawAllSubTask($idProject,$idResource,$elementType,$idVersion){
     $tab= array();
     $subTask= new SubTask();
     $tableName=$subTask->getDatabaseTableName();
-    
     $query="SELECT DISTINCT  $tableName.refId as refId,$tableName.refType as refType FROM $tableName ";
-    if($idProject!=0 ){
-    }elseif ($idResource){
-      $query.="WHERE $tableName.idResource =".$idResource;
-    }elseif ($idElement){
-      $query.="WHERE $tableName.refType =".$idElement;
-    }elseif ($idVersion){
-      
-    }
+    $query.="WHERE 1=1";
+    if($idProject!=0)$query.=" and  $tableName.idProject = ".$idProject;
+    if($idResource!=0)$query.=" and  $tableName.idResource = ".$idResource;
+    if(trim($elementType)!='')$query.=" and  $tableName.refType = '".$elementType."'";
+    if($idResource!=0)$query.=" and  $tableName.idResource = ".$idResource;
+    if ($idVersion!=0)$query.=" and  $tableName.idTargetProductVersion = ".$idVersion;;
     $result=Sql::query($query);
     while ($line = Sql::fetchLine($result)) {
       $tab[]=$line;
     }
-    //echo '<table style="width:100%;height:90%; margin-bottom:10px;">';
     if(!empty($tab)){
       foreach ($tab as $id=>$obj){
         $element= new $obj['refType']( $obj['refId']);
@@ -244,9 +248,17 @@ class SubTask extends SqlElement {
                      echo '</td >';
               echo'</tr></table>';
             echo '</div></td></tr>';
-            SubTask::drawSubtasksForObject($element, $obj['refType'],  $obj['refId'],false,true);
+            SubTask::drawSubtasksForObject($element, $obj['refType'],  $obj['refId'],null,$idResource,true);
           echo '</table>';
       }
+    }else{
+      echo '<table style="width:95%; margin-bottom:10px;">';
+  	  echo '   <tr>';
+      echo '    <td colspan="10">';
+      echo '    <div style="background:#FFDDDD;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:100%;border-right: 1px solid grey;">'.i18n('noDataFound').'</div>';
+      echo '    </td>';
+      echo '   </tr>';
+      echo '</table>';
     }
   }
   
