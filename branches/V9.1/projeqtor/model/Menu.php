@@ -90,6 +90,7 @@ class Menu extends SqlElement {
   public static function drawAllNewGuiMenus($defaultMenu, $historyTable, $idFavoriteRow,$isAnotherBar=false) {
     $isNotificationSystemActiv = isNotificationSystemActiv();
     $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
+    $displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
     $customMenu = new MenuCustom();
     $obj=new Menu();
     $where=null;
@@ -168,6 +169,7 @@ class Menu extends SqlElement {
     foreach ($menuList as $menu) {
       if(get_class($menu)=='Menu' or $defaultMenu == 'menuBarRecent'){
         if (! $isLanguageActive and $menu->name=="menuLanguage") { continue; }
+        if(!$displaySubTask and $menu->name=="menuViewAllSubTask" ){ continue; }
         if (! $isNotificationSystemActiv and strpos($menu->name, "Notification")!==false) { continue; }
         if (! $menu->canDisplay() ) { continue;}
         if (securityCheckDisplayMenu($menu->id,substr($menu->name,4)) ) {

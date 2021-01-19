@@ -159,6 +159,10 @@ class TicketMain extends SqlElement {
     if (!$this->id and getSessionUser()->isContact) {
       $this->idContact=getSessionUser()->id;
     }
+    if(Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or Parameter::getUserParameter('displaySubTask')!="YES"){
+      self::$_fieldsAttributes ['_SubTask'] = 'hidden';
+      unset($this->_sec_ToDoList);
+    }
   }
 
    /** ==========================================================================

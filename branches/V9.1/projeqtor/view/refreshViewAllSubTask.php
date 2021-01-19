@@ -1,6 +1,4 @@
-<?php 
-use PhpOffice\PhpPresentation\Shape\Chart\Type\Area;
-use Mpdf\Utils\Arrays;
+<?php
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -27,24 +25,28 @@ use Mpdf\Utils\Arrays;
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 /* ============================================================================
- * Presents an object. 
+ * Presents the list of objects of a given class.
+ *
  */
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
-  scriptLog('   ->/view/imputationValidationMain.php');  
-  $idProject=0;
+scriptLog('   ->/view/refreshImputationValidation.php'); 
+
+$idProject=0;
+if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
+  if(strpos(getSessionValue('project'),',')){
+    $idProject=0;
+  }else{
+    $idProject =  getSessionValue('project');
+  }
+}
+$idResource= RequestHandler::getId('idResourceSubTaskView');
+$idProject = RequestHandler::getId('idProjectSubTaskView');
+$idVersion = RequestHandler::getId('idVersionSubTaskView');
+$idElement = RequestHandler::getId('idElementSubTaskView');
 ?>
-<input type="hidden" name="objectClassManual" id="objectClassManual" value="SubTask" />
-  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top"  style="height:<?php if(isNewGui()){?>70px;<?php }else{?>64px;<?php }?>">
-   <?php  //include 'viewAllSubTaskList.php' ;?>
-  </div>
-  
-  <div id="imputListDiv" name="subTaskListDiv" dojoType="dijit.layout.ContentPane" region="center"  style="<?php if(isNewGui()){?>max-height:95%;overflow-y: auto;<?php }else{?>height:95%;overflow-y:scroll;<?php }?>" >
-    <form dojoType="dijit.form.Form" name="SubTaskForm" id="SubTaskForm"  method="Post" >
-      <div  align="center" style="margin-top:20px;margin-bottom:30px; overflow-y:auto; width:100%;">
-        <?php 
-        SubTask::drawAllSubTask($idProject,false,false,false);
-        ?>
-      </div>
-    </form>
-  </div>
+<div id="subTaskListDiv" name="subTaskListDiv">
+  <form dojoType="dijit.form.Form" name="SubTaskForm" id="SubTaskForm"  method="Post" >
+  <?php SubTask::drawAllSubTask($idProject,$idResource,$idElement,$idVersion);?>
+  </form>
+</div>

@@ -7559,6 +7559,8 @@ function undoItemButton(curClass,curId) {
     if (dijit.byId("detailRightDiv")) loadContent("objectStream.php", "detailRightDiv", "listForm"); 
   }else if(currentScreen=='ConsultationValidation'){
     loadMenuBarItem('ConsultationValidation','menuConsultationValidation','bar');
+  }else if(currentScreen=='ViewAllSubTask'){
+    loadMenuBarItem('ViewAllSubTask','menuViewAllSubTask','bar');
   }else {
     target=getTargetFromCurrentScreen(currentScreen);
     loadContent(target,"centerDiv"); 

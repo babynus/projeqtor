@@ -150,6 +150,10 @@ class ActivityMain extends SqlElement {
     if (Parameter::getGlobalParameter ( 'limitPlanningActivity' ) != "YES") {
       self::$_fieldsAttributes ['isPlanningActivity'] = 'hidden';
     }
+    if(Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or Parameter::getUserParameter('displaySubTask')!="YES"){
+      self::$_fieldsAttributes ['_SubTask'] = 'hidden';
+      unset($this->_sec_ToDoList);
+    }
 // MTY - LEAVE SYSTEM
     // If it's an Leave activity (ie : Activity.idProject is the project Leave, id isLeaveSystemProject=1),
     // can't modify a lot of attributes

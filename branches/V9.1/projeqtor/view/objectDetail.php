@@ -241,10 +241,10 @@ if ($noselect) {
     }
     exit();
   }
-  if(array_key_exists('refreshSubTask', $_REQUEST)){
-    SubTask::drawSubtasksForObject($obj,$objClass, $obj->id,true);
-    exit();
-  }
+//   if(array_key_exists('refreshSubTask', $_REQUEST)){
+//     SubTask::drawSubtasksForObject($obj,$objClass, $obj->id,true);
+//     exit();
+//   }
 }
 // save the current object in session
 
@@ -1282,7 +1282,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // END - ADD BY TABARY - NOTIFICATION SYSTEM
       
       // ADD BY Marc TABARY - 2017-02-23 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT
-    }else if($col==='_SubTask'){
+    }else if($col==='_SubTask' and $obj->getFieldAttributes($col)!='hidden' ){ //florent ticket #5139
     	SubTask::drawSubtasksForObject($obj,$classObj,$obj->id);
     }else if (substr($col, 0, 1)=='_' and strpos($section, 'sOfObject')>0 and strpos($col, '_colSpan')==false) {
       drawObjectLinkedByIdToObject($obj, substr($col, 1), false);
@@ -1447,7 +1447,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // END CHANGE BY Marc TABARY - 2017-03-01 - DATA CONSTRUCTED BY FUNCTION
         // COMMENT BY Marc TABARY - 2017-03-01 - DATA CONSTRUCTED BY FUNCTION
         // Old
-        // if (!$canUpdate or (strpos($obj->getFieldAttributes($col), 'readonly') !== false) or $parentReadOnly or ($obj->idle == 1 and $col != 'idle' and $col != 'idStatus')) {
+        // if (!$canUpdate or (strpos($obj->getFieldAttributes($col), 'readonly') !== false) or $parentReadOnly or ($obj->idle == 1 and $col != 'idle' and $col != '')) {
         // END COMMENT BY Marc TABARY - 2017-03-01 - DATA CONSTRUCTED BY FUNCTION
         // ADD BY Marc TABARY - 2017-03-09 - PERIODIC YEAR BUDGET ELEMENT
         if ((strpos($obj->getFieldAttributes($col), 'forceInput')!==false and substr($col, 0, 7)=='_byMet_' and !$parentReadOnly) or (strpos($obj->getFieldAttributes($col), 'superforceInput')!==false and substr($col, 0, 7)=='_byMet_')) {} else {

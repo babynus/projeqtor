@@ -29,58 +29,78 @@
  */
 
 require_once "../tool/projeqtor.php";
-$operation = (RequestHandler::isCodeSet('operation'))?RequestHandler::getValue('operation'):"";
-$sortOrder = (RequestHandler::isCodeSet('sortOrder'))?RequestHandler::getValue('sortOrder'):null;
+
+$element= (RequestHandler::isCodeSet('element'))?RequestHandler::getValue('element'):"";
+if($element=='')return;
 $refType = (RequestHandler::isCodeSet('refType'))?RequestHandler::getValue('refType'):"";
 $refId = (RequestHandler::isCodeSet('refId'))?RequestHandler::getValue('refId'):null;
-if($operation!='save')$idSubTask = (RequestHandler::isCodeSet('idSubTask'))?RequestHandler::getId('idSubTask'):"";
-if($operation!='delete'){
-  $name=(RequestHandler::isCodeSet('name'))?RequestHandler::getValue('name'):null;
-  $priority = (RequestHandler::isCodeSet('priority'))?RequestHandler::getValue('priority'):null;
-  $status = (RequestHandler::isCodeSet('status'))?RequestHandler::getValue('status'):"";
-  $resource = (RequestHandler::isCodeSet('resource'))?RequestHandler::getValue('resource'):null;
-}
-Sql::beginTransaction();
-if($operation=='save' or $operation=='update'){
-  $subTask =($operation=='save')?new SubTask():new SubTask($idSubTask);
-  if($operation=='update')$old=$subTask->getOld();
-  if($name!=null)$subTask->name=$name;
-  if($priority!=null)$subTask->idPriority=intval($priority);
-  if($resource!=null)$subTask->idResource=intval($resource);
-  if($sortOrder!=null)$subTask->sortOrder=intval($sortOrder);
-  if($operation=='update' and $status!=null){
-    switch ($status){
-    	case '1':
-    	  $subTask->handled=1;
-    	  $subTask->done=0;
-    	  $subTask->idle=0;
-    	  break;
-    	case '2':
-    	  $subTask->handled=0;
-    	  $subTask->done=1;
-    	  $subTask->idle=0;
-    	  break;
-    	case '3':
-    	  $subTask->handled=0;
-    	  $subTask->done=0;
-    	  $subTask->idle=1;
-    	  break;
-    	  default:
-    	    if($old->handled!=0 or $old->done!=0 or $old->idle!=0){
-    	      $subTask->handled=0;
-    	      $subTask->done=0;
-    	      $subTask->idle=0;
-    	    }
-    }
-  }else{
-    $subTask->refId=$refId;
-    $subTask->refType=$refType;
+
+if($element=='SubTask'){
+  $operation = (RequestHandler::isCodeSet('operation'))?RequestHandler::getValue('operation'):"";
+  $sortOrder = (RequestHandler::isCodeSet('sortOrder'))?RequestHandler::getValue('sortOrder'):null;
+  
+  if($operation!='save')$idSubTask = (RequestHandler::isCodeSet('idSubTask'))?RequestHandler::getId('idSubTask'):"";
+  if($operation!='delete'){
+    $name=(RequestHandler::isCodeSet('name'))?RequestHandler::getValue('name'):null;
+    $priority = (RequestHandler::isCodeSet('priority'))?RequestHandler::getValue('priority'):null;
+    $status = (RequestHandler::isCodeSet('status'))?RequestHandler::getValue('status'):"";
+    $resource = (RequestHandler::isCodeSet('resource'))?RequestHandler::getValue('resource'):null;
   }
-  $result=$subTask->save();
-  displayLastOperationStatus($result);
+  Sql::beginTransaction();
+  if($operation=='save' or $operation=='update'){
+    $subTask =($operation=='save')?new SubTask():new SubTask($idSubTask);
+    if($operation=='update')$old=$subTask->getOld();
+    if($name!=null)$subTask->name=$name;
+    if($priority!=null)$subTask->idPriority=intval($priority);
+    if($resource!=null)$subTask->idResource=intval($resource);
+    if($sortOrder!=null)$subTask->sortOrder=intval($sortOrder);
+    if($operation=='update' and $status!=null){
+      switch ($status){
+      	case '1':
+      	  $subTask->handled=1;
+      	  $subTask->done=0;
+      	  $subTask->idle=0;
+      	  break;
+      	case '2':
+      	  $subTask->handled=0;
+      	  $subTask->done=1;
+      	  $subTask->idle=0;
+      	  break;
+      	case '3':
+      	  $subTask->handled=0;
+      	  $subTask->done=0;
+      	  $subTask->idle=1;
+      	  break;
+      	  default:
+      	    if($old->handled!=0 or $old->done!=0 or $old->idle!=0){
+      	      $subTask->handled=0;
+      	      $subTask->done=0;
+      	      $subTask->idle=0;
+      	    }
+      }
+    }else{
+      $subTask->refId=$refId;
+      $subTask->refType=$refType;
+    }
+    $result=$subTask->save();
+  }else{
+    $subTask = new SubTask($idSubTask);
+    $result=$subTask->delete();
+  }
+  displayLastOperationStatus ( $result );
 }else{
-  $subTask = new SubTask($idSubTask);
-  $result=$subTask->delete();
-  displayLastOperationStatus($result);
+  $field = (RequestHandler::isCodeSet('field'))?RequestHandler::getValue('field'):null;
+  $val = (RequestHandler::isCodeSet('value'))?RequestHandler::getValue('value'):null;
+  
+  Sql::beginTransaction();
+  $el= new $refType ($refId);
+  if($field=='Status'){
+    $el->idStatus=$val;
+  }else{
+    $el->idResource=$val;
+  }
+  $result=$el->save();
+  displayLastOperationStatus ( $result );
 }
+
 ?>
