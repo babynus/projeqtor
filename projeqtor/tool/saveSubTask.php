@@ -79,8 +79,11 @@ if($element=='SubTask'){
       	    }
       }
     }else{
+      $obj= new $refType ($refId);
       $subTask->refId=$refId;
       $subTask->refType=$refType;
+      $subTask->idProject=$obj->idProject;
+      if(property_exists($refType,'idTargetProductVersion'))$subTask->idTargetProductVersion=$obj->idTargetProductVersion;
     }
     $result=$subTask->save();
   }else{

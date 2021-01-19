@@ -32,18 +32,18 @@ use Mpdf\Utils\Arrays;
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
   scriptLog('   ->/view/imputationValidationMain.php');  
-  $idProject=0;
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="SubTask" />
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top"  style="height:<?php if(isNewGui()){?>70px;<?php }else{?>64px;<?php }?>">
-   <?php  //include 'viewAllSubTaskList.php' ;?>
+   <?php  include 'viewAllSubTaskList.php' ;?>
   </div>
-  
-  <div id="imputListDiv" name="subTaskListDiv" dojoType="dijit.layout.ContentPane" region="center"  style="<?php if(isNewGui()){?>max-height:95%;overflow-y: auto;<?php }else{?>height:95%;overflow-y:scroll;<?php }?>" >
+  <div id="subTaskListDiv" name="subTaskListDiv" dojoType="dijit.layout.ContentPane" region="center"  style="<?php if(isNewGui()){?>max-height:95%;overflow-y: auto;<?php }else{?>height:95%;overflow-y:scroll;<?php }?>" >
     <form dojoType="dijit.form.Form" name="SubTaskForm" id="SubTaskForm"  method="Post" >
       <div  align="center" style="margin-top:20px;margin-bottom:30px; overflow-y:auto; width:100%;">
         <?php 
-        SubTask::drawAllSubTask($idProject,false,false,false);
+        if(trim($idVersion)=='')$idVersion=0;
+        if(trim($idResource)=='')$idVersion=0;
+        SubTask::drawAllSubTask($idProject,$idResource,$element,$idVersion);
         ?>
       </div>
     </form>

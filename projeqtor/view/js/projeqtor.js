@@ -8036,6 +8036,7 @@ function updateSubTask(id,refType,refId){
   if(id==0 && name.trim()!=''){
     save=true;
     sortOrder=sortOrder+1;
+    if(dojo.byId('SubTaskIdResourceFilter'))resource=dojo.byId('SubTaskIdResourceFilter').value;
     url+="&operation=save";
     url+="&name="+name+"&priority="+priority+"&resource="+resource+"&sortOrder"+sortOrder;
   }else if(id!=0 && name.trim()!=''){
@@ -8072,7 +8073,7 @@ function updateSubTask(id,refType,refId){
           var lastSaveId=window.top.dojo.byId('lastSaveId');
           
           if(lastOperationStatus.value == "OK"){
-            addSubTaskRow(lastSaveId.value,refType,refId,sortOrder);
+            addSubTaskRow(lastSaveId.value,refType,refId,sortOrder,resource);
           } else {
               dojo.byId("resultDivMain").style.display='block';
           }
@@ -8082,12 +8083,12 @@ function updateSubTask(id,refType,refId){
   }
 }
 
-function addSubTaskRow(id,refType,refId,sortOrder){
+function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter){
   var tabSubTask=dojo.byId(refType+'_'+refId+'_drawSubTask'),
         subTaskCreat=tabSubTask.querySelector('#'+refType+'_'+refId+'_newSubTaskRow'),
           newSubTask=subTaskCreat.cloneNode(true),
             imgGrab=document.createElement('img');
-
+  
   imgGrab.setAttribute('style','width:7px;top: 10px;position: relative;');
   imgGrab.setAttribute('src','css/images/iconDrag.gif');
   newSubTask.id=refType+"_"+refId+"_subTaskRow_"+id;
@@ -8145,7 +8146,7 @@ function addSubTaskRow(id,refType,refId,sortOrder){
     id: "resourceNewSubTask_"+id,
     name: "resourceNewSubTask_"+id,
     store: resource.store,
-    value:"",
+    value:resourceFilter,
     searchAttr: "name"
   }, "resourceNewSubTask_"+id);
   
@@ -8155,7 +8156,7 @@ function addSubTaskRow(id,refType,refId,sortOrder){
     style: "white-space:nowrap;width:90%;",
     value: dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value 
   }, "nameNewSubTask_"+id);
-
+  
   dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value='';
   dojo.setAttr('nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',"'+refType+'",'+refId+')');
   dojo.connect(newFilterResource, 'onChange', function(value){updateSubTask(id,refType,refId);}); 
@@ -8248,6 +8249,6 @@ function refreshAllSubTaskList(){
   var callback=function() {
     hideWait();
   };
-  loadContent("../view/refreshViewAllSubTask.php", "subTaskListDiv","SubTaskForm");
+  loadContent("../view/refreshViewAllSubTask.php", "subTaskListDiv","SubTaskLisForm");
 }
 

@@ -40,13 +40,17 @@ if(sessionValueExists('project') and getSessionValue('project')!="" and  getSess
     $idProject =  getSessionValue('project');
   }
 }
-$idResource= RequestHandler::getId('idResourceSubTaskView');
-$idProject = RequestHandler::getId('idProjectSubTaskView');
-$idVersion = RequestHandler::getId('idVersionSubTaskView');
-$idElement = RequestHandler::getId('idElementSubTaskView');
+$idResource= (RequestHandler::isCodeSet('userNameSubTask'))?trim(RequestHandler::getId('userNameSubTask')):0;
+$idVersion = (RequestHandler::isCodeSet('targetProductVersionSubTask'))?trim(RequestHandler::getId('targetProductVersionSubTask')):0;
+$element = (RequestHandler::isCodeSet('elementSubTask'))?trim(RequestHandler::getValue('elementSubTask')):'';
+
+if($idResource=='')$idResource=0;
+if($idVersion=='')$idVersion=0;
 ?>
-<div id="subTaskListDiv" name="subTaskListDiv">
-  <form dojoType="dijit.form.Form" name="SubTaskForm" id="SubTaskForm"  method="Post" >
-  <?php SubTask::drawAllSubTask($idProject,$idResource,$idElement,$idVersion);?>
-  </form>
-</div>
+<form dojoType="dijit.form.Form" name="SubTaskForm" id="SubTaskForm"  method="Post" >
+  <div  align="center" style="margin-top:20px;margin-bottom:30px; overflow-y:auto; width:100%;">
+    <?php 
+    SubTask::drawAllSubTask($idProject,$idResource,$element,$idVersion);
+    ?>
+  </div>
+</form>
