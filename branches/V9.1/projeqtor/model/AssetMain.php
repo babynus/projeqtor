@@ -276,7 +276,7 @@ class AssetMain extends SqlElement {
       $result.='<tr>';
       $result.='<td rowspan="2" style="padding-left:10px">';
       $result.='<button id="showStructureButton" dojoType="dijit.form.Button" showlabel="true"';
-      $result.=' title="'.i18n('showStructure').'" style="vertical-align: middle;">';
+      $result.=' class="roundedVisibleButton" title="'.i18n('showStructure').'" style="vertical-align: middle;">';
       $result.='<span>' . i18n('showStructure') . '</span>';
       $result.='<script type="dojo/connect" event="onClick" args="evt">';
       $page="../view/assetStructure.php?id=$this->id";
