@@ -42,6 +42,8 @@ CREATE TABLE `${prefix}subtask` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `refType` varchar(100) DEFAULT NULL,
   `refId` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idProject` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idTargetProductVersion` int(12)  unsigned DEFAULT NULL COMMENT '12',
   `sortOrder` int(5) unsigned DEFAULT NULL COMMENT '5',
   `name` varchar(200) DEFAULT NULL,
   `idPriority` int(12)  unsigned DEFAULT NULL COMMENT '12',
