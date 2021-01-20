@@ -589,7 +589,7 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
                       setTimeout("hideList(null,true);", 1);
                     }
                     loadContent("objectDetail.php", "detailDiv", "listForm");
-                    if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+                    loadContentStream();
                   } else { 
                     showError(i18n("errorObjectId"));
 	                }
@@ -1392,8 +1392,8 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
                         setTimeout("hideList(null,true);", 1);
                       }
                       loadContent("objectDetail.php", "detailDiv", "listForm");
-                      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
-                      } else { 
+                      loadContentStream();
+                    } else { 
                       showError(i18n("errorObjectId"));
 	                  }
                   </script>
@@ -1566,7 +1566,7 @@ $listStatus = $object->getExistingStatus();
       formChangeInProgress=false; 
       listClick();
       loadContent("objectDetail.php", "detailDiv", 'listForm');
-      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+      loadContentStream();
    	}
     actionNo = function () {
 	    //unselectAllRows("objectGrid");
