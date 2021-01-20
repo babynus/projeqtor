@@ -198,7 +198,7 @@
 		          id.value="";
 		          unselectAllRows("objectGrid");
               loadContent("objectDetail.php", "detailDiv", 'listForm');
-              if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+              loadContentStream();
             }
           } else { 
             showError(i18n("errorObjectId"));
@@ -224,7 +224,7 @@
           dojo.byId("undoButton").blur();
           hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
-          if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+          loadContentStream();
 // ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
           // If undo Organization's detail screen, must passed periodic year in REQUEST
           cl='';
@@ -266,7 +266,7 @@
             param='';
           }
           loadContent("objectDetail.php"+param, "detailDiv", 'listForm');
-          if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+          loadContentStream();
 // END ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
 // COMMENT BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
 //          loadContent("objectDetail.php", "detailDiv", 'listForm');
@@ -329,7 +329,7 @@
           hideExtraButtons('extraButtonsDetail');
 		      action=function(){
 		        loadContent("../tool/deleteObject.php", "resultDivMain", 'objectForm', true);
-            if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+            loadContentStream();
           };
           var alsoDelete="";
           showConfirm(i18n("confirmDelete", new Array("<?php echo i18n($_REQUEST['objectClass']);?>",dojo.byId('id').value))+alsoDelete ,action);
