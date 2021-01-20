@@ -292,9 +292,9 @@ class ImputationValidation{
   			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;border: 1px solid grey;height:30px;width:8%;text-align:center;vertical-align:center;background:white;">'.$expected.'</td>';
   			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;width:23%;border: 1px solid grey;">';
   			$result .='      <table style="width:100%;height:35px">';
-  			$result .='        <tr><td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;background:white;">'.$inputWork.'</td>';
-  			$result .='        <td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;background:white;">'.$inputAdm.'</td>';
-  			$result .='        <td style="'.$backgroundColor.'width:33%;height:30px;text-align:center;vertical-align:center;background:white;">'.$inputTotal.'</td></tr>';
+  			$result .='        <tr><td style="background:white;border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputWork.'</td>';
+  			$result .='        <td style="background:white;border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputAdm.'</td>';
+  			$result .='        <td style="background:white;'.$backgroundColor.'width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputTotal.'</td></tr>';
   			$result .='      </table>';
   			$result .='     </td>';
   			$result .='   <td style="border: 1px solid grey;height:30px;width:20%;text-align:left;vertical-align:center;background:white;">';
