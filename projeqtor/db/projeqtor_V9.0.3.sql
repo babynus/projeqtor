@@ -43,4 +43,7 @@ CREATE UNIQUE INDEX kpihistoryKpiDefinitionReferenceDate ON `${prefix}kpihistory
 -- Add index on type for version (accelerate queries on type)
 CREATE INDEX versionVersionType ON `${prefix}version` (idVersionType);
 
+-- Add index on operationDate for history (accelerate activity stream)
+CREATE INDEX historyOperationDate ON `${prefix}history` (operationDate);
+
 
