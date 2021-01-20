@@ -50,7 +50,7 @@ $obj=new $ref1Type($ref1Id);
 if ($ref2Type) {
   $objList=new $ref2Type();
   if (property_exists($objList, "idProject") and property_exists($obj, "idProject")) {
-    $crit = array ( 'idle'=>'0', 'idProject'=>$obj->idProject);
+    $crit = array ( 'idle'=>'0', 'idProject'=>($ref1Type=='Project')?$obj->id:$obj->idProject);
     $list=$objList->getSqlElementsFromCriteria($crit,false,null);
   } else if ($ref2Type=='DocumentVersionFull' or $ref2Type=='DocumentVersion') {
     $doc=new Document();
