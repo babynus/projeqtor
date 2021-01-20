@@ -40,4 +40,7 @@ ALTER TABLE `${prefix}kpihistory` DROP INDEX kpihistoryReference;
 ALTER TABLE `${prefix}kpihistory` DROP INDEX kpihistoryDate;
 CREATE UNIQUE INDEX kpihistoryKpiDefinitionReferenceDate ON `${prefix}kpihistory` ( idKpiDefinition , refType, refId, kpiDate);
 
+-- Add index on type for version (accelerate queries on type)
+CREATE INDEX versionVersionType ON `${prefix}version` (idVersionType);
+
 

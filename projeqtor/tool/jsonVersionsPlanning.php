@@ -37,10 +37,6 @@ if (isset($_REQUEST['productVersionsListId'])) {
     $pvsArray=getSessionValue('tabProductVersions');
   }
 }
-
-//$type = new Type();
-//$componentTypeNoDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'1','scope'=>'ComponentVersion'));
-
 //florent ticket 4302
 $object=RequestHandler::getValue('objectVersion');
 

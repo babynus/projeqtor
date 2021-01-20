@@ -45,7 +45,7 @@ class TicketMain extends SqlElement {
   public $idContact;
   public $Origin;
   //ADD by qCazelles - Business features
-  public $idBusinessFeature;
+//  public $idBusinessFeature;
   //END ADD qCazelles
   public $idTicket;
   public $idContext1;
