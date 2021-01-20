@@ -141,7 +141,6 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               }else {
                 saveContentPaneResizing("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
                 if (paramMode=='left') saveContentPaneResizing("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
-                //if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
                 var newHeight=dojo.byId("detailRightDiv").offsetHeight;
                 if (dojo.byId("noteNoteStream")) dojo.byId("noteNoteStream").style.height=(newHeight-40)+'px';
                 var newWidth=dojo.byId("detailRightDiv").offsetWidth;

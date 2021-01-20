@@ -1303,7 +1303,7 @@ function saveNote() {
     }
   } 
   loadContent("../tool/saveNote.php", "resultDivMain", "noteForm", true, 'note');
-  if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+  loadContentStream();
   dijit.byId('dialogNote').hide();
 }
 
@@ -7556,7 +7556,7 @@ function undoItemButton(curClass,curId) {
     dojo.byId('objectClass').value = currentItem[0];
     dojo.byId('objectId').value = currentItem[1];
     loadContent('objectDetail.php', 'detailDiv', 'listForm');
-    if (dijit.byId("detailRightDiv")) loadContent("objectStream.php", "detailRightDiv", "listForm"); 
+    loadContentStream();
   }else if(currentScreen=='ConsultationValidation'){
     loadMenuBarItem('ConsultationValidation','menuConsultationValidation','bar');
   }else {
@@ -7668,7 +7668,7 @@ function redoItemButton() {
     dojo.byId('objectClass').value = currentItem[0];
     dojo.byId('objectId').value = currentItem[1];
     loadContent('objectDetail.php', 'detailDiv', 'listForm');
-    if (dijit.byId("detailRightDiv")) loadContent("objectStream.php", "detailRightDiv", "listForm"); 
+    loadContentStream();
   }else {
     target=getTargetFromCurrentScreen(currentScreen);
     loadContent(target,"centerDiv"); 

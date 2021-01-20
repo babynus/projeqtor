@@ -991,6 +991,11 @@ function warnLoadContentError(page, destination, formName, isResultMessage, vali
   console.warn("  => callBackFunction='"+"?"+"'");
   console.warn("  => noFading='"+noFading+"'");
 }
+function loadContentStream() {
+  if(dojo.byId('detailRightDiv') && dojo.byId('detailRightDiv').offsetWidth>0 && dojo.byId('detailRightDiv').offsetHeight>0){
+    loadContent("objectStream.php", "detailRightDiv", "listForm");  
+  }
+}
 function loadContent(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading) {
   if (formName && formName!=undefined && formName.id) formName=formName.id;
   if (!dojo.byId(formName)) formName=null;
@@ -1271,7 +1276,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
               showWait();
               var callBackFinal=function() {setTimeout('selectRowById("objectGrid", '+directAccess+');', 10);};
               loadContent("objectDetail.php", "detailDiv", 'listForm',null,null,null,null,callBackFinal);
-              if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv",'listForm');
+              loadContentStream();
               showWait();
               hideList();              
             }
@@ -1658,7 +1663,7 @@ function finalizeMessageDisplay(destination, validationType) {
     // alert('validationType='+validationType);
     if (validationType) {
       if (validationType == 'note') {
-        if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+        loadContentStream();
         if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual')=='Kanban') loadContent("../tool/dynamicDialogKanbanGetObjectStream.php","dialogKanbanGetObjectStream","noteFormStreamKanban");
         else loadContent("objectDetail.php?refreshNotes=true", dojo.byId('objectClass').value+ '_Note', 'listForm');
         if (dojo.byId('buttonDivCreationInfo')) {
@@ -1967,7 +1972,7 @@ function finalizeMessageDisplay(destination, validationType) {
         } else {
           loadContent("objectDetail.php?refresh=true", "detailFormDiv", 'listForm');
           if(dojo.byId('detailRightDiv')){
-            loadContent("objectStream.php", "detailRightDiv", "listForm");  
+            loadContentStream();  
           } else if (validationType == 'noteKanban' ){
             loadContent("../tool/dynamicDialogKanbanGetObjectStream.php","dialogKanbanGetObjectStream","noteFormStreamKanban");     
           } 
@@ -3557,7 +3562,7 @@ function runScript(refType, refId, id) {
   hideList();
   loadContent('objectDetail.php?planning=true&planningType='
       + dojo.byId('objectClassManual').value, 'detailDiv', 'listForm');
-  if (dijit.byId("detailRightDiv")) loadContent("objectStream.php", "detailRightDiv", "listForm"); 
+  loadContentStream();
   highlightPlanningLine(id);
 }
 var ongoingRunScriptContextMenu=false;
@@ -3913,7 +3918,7 @@ if (target==undefined) target='object';
     dojo.byId('objectClass').value = eltClass;
     dojo.byId('objectId').value = eltId;
     loadContent('objectDetail.php', 'detailDiv', 'listForm');
-    if (dijit.byId("detailRightDiv")) loadContent("objectStream.php", "detailRightDiv", "listForm"); 
+    loadContentStream();
   } else {
     if (dojo.byId("detailDiv")) {
       cleanContent("detailDiv");
@@ -3921,8 +3926,6 @@ if (target==undefined) target='object';
     if ( ( (!dojo.byId('objectClass') || dojo.byId('objectClass').value != eltClass) && (!dojo.byId('objectClassList') || dojo.byId('objectClassList').value != eltClass))
         || forceListRefresh || dojo.byId('titleKanban')) {
       var callBack=null;
-      //if (dijit.byId("detailRightDiv")) callBack=function(){loadContent("objectStream.php", "detailRightDiv", "listForm");};
-      //callBack=function(){setTimeout('selectRowById("objectGrid", '+eltId+');', 100);};
       loadContent("objectMain.php?objectClass=" + eltClass, "centerDiv", false,
           false, false, eltId,false,callBack);
     } else {
@@ -3935,7 +3938,7 @@ if (target==undefined) target='object';
         dojo.byId('objectId').value = eltId;
       }
       loadContent('objectDetail.php', 'detailDiv', 'listForm');
-      if (dijit.byId("detailRightDiv")) loadContent("objectStream.php", "detailRightDiv", "listForm"); 
+      loadContentStream();
       hideList();
       var key=(eltClass=='GlobalView')?eltId:parseInt(eltId);
       setTimeout('selectRowById("objectGrid", ' + key + ');', 100);
@@ -6162,10 +6165,10 @@ function hideStreamMode(show,position,dimension,modeGlobal){
     if (dimension && menuRightDivLastWidth) dimension=menuRightDivLastWidth;
     dijit.byId("detailRightDiv").resize({ w : dimension });
     dijit.byId("centerDiv").resize();
-    loadContent("objectStream.php", "detailRightDiv", "listForm");  
     //var detailHidden=false;
     //if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
   }
+  loadContentStream(); 
   if (dimension==0) setTimeout("refreshObjectDivAfterResize();",100);
   else setTimeout('if (dojo.byId("buttonDiv")) loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm");',100);
 }
@@ -8005,7 +8008,7 @@ function saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration){
       else refreshJsonPlanning();
       if((dojo.byId('objectClass').value.trim() !='' && dojo.byId('objectId').value.trim() !='' && dojo.getAttr('automaticRunPlan','aria-checked')!='true') && dojo.byId('objectId').value.trim()==refId.trim() ){
         loadContent("objectDetail.php", "detailDiv", 'listForm');
-        if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+        loadContentStream();
       }
     },
   });
