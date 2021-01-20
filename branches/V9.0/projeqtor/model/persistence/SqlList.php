@@ -194,82 +194,86 @@ class SqlList {
     }
     $query="select " . $obj->getDatabaseColumnName('id') . " as id, " . $field . " as name from " . $obj->getDatabaseTableName() . " where (1=1 ";
     $query.=(! $showIdle and property_exists($obj, 'idle'))?' and idle=0 ':'';
-    if (($listType=='Version' 
-        or $listType=='ProductVersion' or $listType=='ComponentVersion'
-        or $listType=='TargetVersion' or $listType=='TargetProductVersion' or $listType=='TargetComponentVersion'
-        or $listType=='OriginalVersion' or $listType=='OriginalProductVersion' or $listType=='OriginalComponentVersion') and $criteria) {
-      foreach($criteria as $key=>$val) {
-        if ($key=='idComponent' or $key=='idProductOrComponent') {
-          unset($criteria[$key]);
-          $criteria['idProduct']=$val;
+    if (is_array($criteria)) {
+      if (($listType=='Version' 
+          or $listType=='ProductVersion' or $listType=='ComponentVersion'
+          or $listType=='TargetVersion' or $listType=='TargetProductVersion' or $listType=='TargetComponentVersion'
+          or $listType=='OriginalVersion' or $listType=='OriginalProductVersion' or $listType=='OriginalComponentVersion') and $criteria) {
+        foreach($criteria as $key=>$val) {
+          if ($key=='idComponent' or $key=='idProductOrComponent') {
+            unset($criteria[$key]);
+            $criteria['idProduct']=$val;
+          }
         }
       }
-    }
-    $crit=array_merge($obj->getDatabaseCriteria(),$criteria);
-    foreach ($crit as $col => $val) {
-      if ( (strtolower($listType)=='resource' or strtolower($listType)=='contact' or strtolower($listType)=='user' 
-      or strtolower($listType)=='accountable' or strtolower($listType)=='affectable') and $col=='idProject') {
-        $aff=new Affectation();
-        $user=new Resource();
-        if ($val=='*' or ! $val) {$val=0;}
-        $query .= " and exists (select 'x' from " . $aff->getDatabaseTableName() . " a where a.idProject=" . Sql::fmtId($val) . " and a.idResource=" . $user->getDatabaseTableName() . ".id)";
-      } else if ((strtolower($listType)=='version'
-          or strtolower($listType)=='productversion' or strtolower($listType)=='componentversion' 
-          or strtolower($listType)=='originalversion' or strtolower($listType)=='originalproductversion' or strtolower($listType)=='originalcomponentversion' 
-          or strtolower($listType)=='targetversion' or strtolower($listType)=='targetproductversion' or strtolower($listType)=='targetcomponentversion') and $col=='idProject') {
-      	$vp=new VersionProject();
-        $ver=new Version();
-        $proj=new Project($val);
-        $lst=$proj->getTopProjectList(true);
-        $inClause='(0';
-        foreach ($lst as $prj) {
-        	if ($prj) {
-        	  $inClause.=',';
-        	  $inClause.=$prj;
-        	}
-        }
-        $inClause.=')';
-        if ($val) $query .= " and exists (select 'x' from " . $vp->getDatabaseTableName() . " vp where vp.idProject in " . $inClause . " and vp.idVersion=" . $ver->getDatabaseTableName() . ".id)";
-      } else if ( ( strtolower($listType)=='componentversion'  
-            or strtolower($listType)=='originalcomponentversion'
-            or strtolower($listType)=='targetcomponentversion') and $col=='idProductVersion') {
-          $psv=new ProductVersionStructure();
+      $crit=array_merge($obj->getDatabaseCriteria(),$criteria);
+      foreach ($crit as $col => $val) {
+        if ( (strtolower($listType)=='resource' or strtolower($listType)=='contact' or strtolower($listType)=='user' 
+        or strtolower($listType)=='accountable' or strtolower($listType)=='affectable') and $col=='idProject') {
+          $aff=new Affectation();
+          $user=new Resource();
+          if ($val=='*' or ! $val) {$val=0;}
+          $query .= " and exists (select 'x' from " . $aff->getDatabaseTableName() . " a where a.idProject=" . Sql::fmtId($val) . " and a.idResource=" . $user->getDatabaseTableName() . ".id)";
+        } else if ((strtolower($listType)=='version'
+            or strtolower($listType)=='productversion' or strtolower($listType)=='componentversion' 
+            or strtolower($listType)=='originalversion' or strtolower($listType)=='originalproductversion' or strtolower($listType)=='originalcomponentversion' 
+            or strtolower($listType)=='targetversion' or strtolower($listType)=='targetproductversion' or strtolower($listType)=='targetcomponentversion') and $col=='idProject') {
+        	$vp=new VersionProject();
           $ver=new Version();
-          $lstVers=ProductVersionStructure::getComposition($val);
+          $proj=new Project($val);
+          $lst=$proj->getTopProjectList(true);
           $inClause='(0';
-          foreach ($lstVers as $idsharp=>$idv) {
-            $inClause.=','.$idv;
+          foreach ($lst as $prj) {
+          	if ($prj) {
+          	  $inClause.=',';
+          	  $inClause.=$prj;
+          	}
           }
           $inClause.=')';
-          //$query .= " and exists (select 'x' from " . $psv->getDatabaseTableName() . " pvs where pvs.idProductVersion=".$val." and pvs.idComponentVersion=" . $ver->getDatabaseTableName() . ".id)";
-          $query .= " and ".$ver->getDatabaseTableName().".id in ".$inClause;
-        
-      } else if (strtolower($listType)=='indicator' and $col=='idIndicatorable' ) {
-      	$ii=new IndicatorableIndicator();
-      	$i=new Indicator();
-      	$query.=" and exists ( select 'x' from " . $ii->getDatabaseTableName() . " ii " 
-      	      . " where ii.idIndicatorable='" . Sql::fmtId($val) . "' and ii.idIndicator=" . $i->getDatabaseTableName() . ".id)"; 
-      } else if ( (strtolower($listType)=='warningdelayunit' or strtolower($listType)=='alertdelayunit') and $col=='idIndicator' ) {
-        $ind=new Indicator($val);
-        $query .= " and " . $obj->getDatabaseTableName() . '.type='. Sql::str($ind->type);
-      } else if ( $col=='idProjectSub' ) {
-        if ($val and $val!='*') {
-          $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName('idProject') . ' in ' . getVisibleProjectsList(true,$val);
-        }
-      } else if (is_array($val)) {
-        foreach ($val as $k => $v) {
-          $val[$k] = Sql::str($v);
-        }
-        if (count($val)==0) $val[0]=0;
-        $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . ' IN (' . implode(',', $val) . ')';
-      } else {
-        if ($val==null or $val=='') {
-          $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . " is null";
+          if ($val) $query .= " and exists (select 'x' from " . $vp->getDatabaseTableName() . " vp where vp.idProject in " . $inClause . " and vp.idVersion=" . $ver->getDatabaseTableName() . ".id)";
+        } else if ( ( strtolower($listType)=='componentversion'  
+              or strtolower($listType)=='originalcomponentversion'
+              or strtolower($listType)=='targetcomponentversion') and $col=='idProductVersion') {
+            $psv=new ProductVersionStructure();
+            $ver=new Version();
+            $lstVers=ProductVersionStructure::getComposition($val);
+            $inClause='(0';
+            foreach ($lstVers as $idsharp=>$idv) {
+              $inClause.=','.$idv;
+            }
+            $inClause.=')';
+            //$query .= " and exists (select 'x' from " . $psv->getDatabaseTableName() . " pvs where pvs.idProductVersion=".$val." and pvs.idComponentVersion=" . $ver->getDatabaseTableName() . ".id)";
+            $query .= " and ".$ver->getDatabaseTableName().".id in ".$inClause;
+          
+        } else if (strtolower($listType)=='indicator' and $col=='idIndicatorable' ) {
+        	$ii=new IndicatorableIndicator();
+        	$i=new Indicator();
+        	$query.=" and exists ( select 'x' from " . $ii->getDatabaseTableName() . " ii " 
+        	      . " where ii.idIndicatorable='" . Sql::fmtId($val) . "' and ii.idIndicator=" . $i->getDatabaseTableName() . ".id)"; 
+        } else if ( (strtolower($listType)=='warningdelayunit' or strtolower($listType)=='alertdelayunit') and $col=='idIndicator' ) {
+          $ind=new Indicator($val);
+          $query .= " and " . $obj->getDatabaseTableName() . '.type='. Sql::str($ind->type);
+        } else if ( $col=='idProjectSub' ) {
+          if ($val and $val!='*') {
+            $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName('idProject') . ' in ' . getVisibleProjectsList(true,$val);
+          }
+        } else if (is_array($val)) {
+          foreach ($val as $k => $v) {
+            $val[$k] = Sql::str($v);
+          }
+          if (count($val)==0) $val[0]=0;
+          $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . ' IN (' . implode(',', $val) . ')';
         } else {
-          if ($col=='idProject' and ($val=='*' or ! $val)) {continue;}
-          $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . '=' . Sql::str($val);
+          if ($val==null or $val=='') {
+            $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . " is null";
+          } else {
+            if ($col=='idProject' and ($val=='*' or ! $val)) {continue;}
+            $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . '=' . Sql::str($val);
+          }
         }
       }
+    } else {
+      $query.=" and ( $criteria )";
     }
     $query .=')';
     if ($listType=='Report') {

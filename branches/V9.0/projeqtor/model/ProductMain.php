@@ -69,6 +69,7 @@ class ProductMain extends ProductOrComponent {
   public $_Attachment=array();
   public $_Note=array();
   public $_nbColMax=3;
+  private static $_composition=array();
 
 
   // Define the layout that will be used for lists
@@ -341,16 +342,32 @@ class ProductMain extends ProductOrComponent {
   
   // Retrive composition in terms of components (will not retreive products in the composition of the product)
   public function getComposition($withName=true,$reculsively=false) {
-    $ps=new ProductStructure();
-    $psList=$ps->getSqlElementsFromCriteria(array('idProduct'=>$this->id),null,null,null,null,true);
+// PB : Performance optimization   
+    return self::getStaticComposition($this->id,$withName,$reculsively);
+//     $result=array();
+//     $ps=new ProductStructure();
+//     $psList=$ps->getSqlElementsFromCriteria(array('idProduct'=>$this->id),null,null,null,null,true);
+//     foreach ($psList as $ps) {
+//       $result[$ps->idComponent]=($withName)?SqlList::getNameFromId('Component', $ps->idComponent):$ps->idComponent;
+//       if ($reculsively) {
+//         $comp=new Component($ps->idComponent,true);
+//         $result=array_merge_preserve_keys($comp->getComposition($withName,true),$result);
+//       }
+//     }
+//     return $result;
+  }
+  public function getStaticComposition($id,$withName=true,$reculsively=false) {
+    $key=$id.'|'.(($withName)?'1':'0').'|'.(($reculsively)?'1':'0');
+    if (isset(self::$_composition[$key])) return self::$_composition[$key];
     $result=array();
-    foreach ($psList as $ps) {
-      $result[$ps->idComponent]=($withName)?SqlList::getNameFromId('Component', $ps->idComponent):$ps->idComponent;
+    $psList=SqlList::getListWithCrit('ProductStructure', array('idProduct'=>$id),'idComponent');
+    foreach ($psList as $id=>$idComp) {
+      $result[$idComp]=($withName)?SqlList::getNameFromId('Component',$idComp):$idComp;
       if ($reculsively) {
-        $comp=new Component($ps->idComponent,true);
-        $result=array_merge_preserve_keys($comp->getComposition($withName,true),$result);
+        $result=array_merge_preserve_keys(self::getStaticComposition($idComp,$withName,true),$result);
       }
     }
+    self::$_composition[$key]=$result;
     return $result;
   }
   
