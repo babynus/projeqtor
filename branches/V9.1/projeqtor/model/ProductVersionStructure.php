@@ -38,6 +38,7 @@ class ProductVersionStructure extends SqlElement {
   public $creationDate;
   public $idUser;
   public $idle;
+  public static $_composition=array();
   
    /** ==========================================================================
    * Constructor
@@ -182,16 +183,31 @@ class ProductVersionStructure extends SqlElement {
   
   public static function getComposition($id,$level='all') {
     $result=array();
+// PB - Optimization
+//     $crit=array('idProductVersion'=>$id);
+//     $ps=new ProductVersionStructure();
+//     $psList=$ps->getSqlElementsFromCriteria($crit);
+//     if (is_numeric($level)) $level--;
+//     foreach ($psList as $ps) {
+//       $result['#'.$ps->idComponentVersion]=$ps->idComponentVersion;
+//       if ($level=='all' or $level>0) {
+//         $result=array_merge($result,self::getComposition($ps->idComponentVersion));
+//       }
+//     }
+// PB - Optimization - New code
+    $key=$id.'|'.(($level=='all')?'1':'0');
+    if (isset(self::$_composition[$key])) return self::$_composition[$key];
     $crit=array('idProductVersion'=>$id);
-    $ps=new ProductVersionStructure();
-    $psList=$ps->getSqlElementsFromCriteria($crit);
+    $psList=SqlList::getListWithCrit('ProductVersionStructure',$crit,'idComponentVersion');
     if (is_numeric($level)) $level--;
-    foreach ($psList as $ps) {
-      $result['#'.$ps->idComponentVersion]=$ps->idComponentVersion;
+    foreach ($psList as $idComp) {
+      $result['#'.$idComp]=$idComp;
       if ($level=='all' or $level>0) {
-        $result=array_merge($result,self::getComposition($ps->idComponentVersion));
+        $result=array_merge($result,self::getComposition($idComp,$level));
       }
     }
+    self::$_composition[$key]=$result;
+// PB - Optimization - End
     return $result;
   }
   public static function getStructure($id, $level='all') {
