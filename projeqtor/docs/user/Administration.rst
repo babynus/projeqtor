@@ -9,7 +9,7 @@
 Administration Console
 **********************
 
-.. figure:: /images/GUI/ADMIN_SCR_Console.PNG
+.. figure:: /images/GUI/ADMIN_SCR_Console.png
    :alt: Administration screen
    :align: center
    
@@ -39,9 +39,9 @@ This program automatically runs scripts, commands, or software at a specified da
    
    Background tasks is running in Administration console
    
-You can activate or deactivate CRON directly from the info bar. See: :ref:`The CRON button<ib-cron-button>`
+You can activate or deactivate CRON directly from the info bar. See: :ref:`The CRON button<cron-button>`
 
-.. figure:: /images/GUI/ADMIN_ZONE_ButtonCRON.PNG
+.. figure:: /images/GUI/ADMIN_ZONE_ButtonCRON.png
    :alt: CRON Button
    
    CRON activation button
@@ -104,6 +104,12 @@ An internal alert can be sent by the administrator or by monitoring indicators.
 Manage connections
 ------------------
 
+
+.. figure:: /images/GUI/ADMIN_ZONE_ManageConnection.png
+   :alt: Manage connections
+   
+   Manage connections
+
 Allows to force disconnection of active users and close the application for new connections.
 
 .. compound:: Disconnect all users
@@ -159,9 +165,24 @@ The administrator has the possibility to:
 Log files maintenance
 ---------------------
 
-The administrator has the possibility to:
+.. figure:: /images/GUI/ADMIN_Zone_LogFiles.png
+   :alt: Log files maintenance
+   :align: center
+   
+   Log files maintenance
+
+The administrator has the possibility to choose the level of the log files among debug, trace, script and errors.
+
   
-  * Delete old log files.
-  * Show the list and specific log file.
+  * delete files on a given number of days.
+  * Show the list of logs
+  * Show the last logs list.
+  
+  
+.. figure:: /images/GUI/ADMIN_BOX_LogfilesList.png 
+   :alt: Log files maintenance
+   :align: center
+   
+   Log files list
   
   
