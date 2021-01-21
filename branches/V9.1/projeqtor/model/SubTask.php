@@ -69,12 +69,12 @@ class SubTask extends SqlElement {
   // ============================================================================**********
   // DRAW SUBTASK
   // ============================================================================**********
-  static function drawSubtasksForObject($obj,$refType, $refId,$refresh=false,$idResource=false,$gloablView=false){
+  static function drawSubtasksForObject($obj,$refType, $refId,$refresh=false,$idResource=false,$gloablView=false,$dialogView=false){
     global $cr, $print, $user, $comboDetail;
     if ($comboDetail) {
       return;
     }
-    if(!$gloablView) $view='Single';
+    if(!$gloablView ) $view='Single';
     else $view='Global';
     $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_'.$view)!='0')?true:false;
     $subTask=new SubTask();
@@ -90,7 +90,7 @@ class SubTask extends SqlElement {
     $critVal=$obj->idProject;
     
     
-    if (!$print and !$gloablView) {
+    if (!$print and !$gloablView and !$dialogView) {
       echo'<div style="position:absolute;right:5px;top:3px;">';
       echo'<label for="showClosedSubTask_'.$view.'"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'&nbsp;</label>';
       echo'<div class="whiteCheck" id="showClosedSubTask_'.$view.'" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedSubTask)?'checked':'');
@@ -104,9 +104,11 @@ class SubTask extends SqlElement {
     }
     
     if (!$refresh) echo '<tr><td colspan="4"><div id="'.$refType.'_'.$refId.'_drawSubTask" dojotype="dijit.layout.ContentPane">';
-    echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true" id="dndSubTask" jsId="dndSubTask">';
+    echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true" id="dndSubTask_'.$refType.'_'.$refId.'" jsId="dndSubTask_'.$refType.'_'.$refId.'">';
     if($gloablView )echo      '<input id="SubTaskIdResourceFilter" value="'.$idResource.'" hidden />';
-    echo  '<tr>';
+    echo      '<input class="refType" value="'.$refType.'" hidden />';
+    echo      '<input class="refId" value="'.$refId.'" hidden />';
+    echo  '<tr style="width:100%">';
     echo    '<td class="linkHeader" style="width:2%"></td>';
     echo    '<td class="linkHeader" style="width:38%;">'.i18n('colName').'</td>';
     echo    '<td class="linkHeader" style="width:23%;">'.i18n('colPriority').'</td>';
@@ -115,7 +117,8 @@ class SubTask extends SqlElement {
     echo  '</tr>';
     if(!empty($res)){
       foreach ($res as $id=>$subTask){
-        echo  '<tr id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'">';
+        echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'" width="100%" >';
+        echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" hidden />';
         echo    '<td  class="dojoDndHandle handleCursor linkData"  style="text-align: center;"><img style="width:7px;top: 10px;position: relative;" src="css/images/iconDrag.gif"></td>';
         echo    '<td class="linkData" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
         echo      '<div title="'.i18n('colName').'"  type="text"  id="nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.TextBox" style="width:90%;" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  value="'. htmlEncode($subTask->name).'">';
@@ -131,7 +134,6 @@ class SubTask extends SqlElement {
         echo      '</select>';
         echo    '</td>';
         echo    '<td class="linkData" id="statusNewSubTask_'.$subTask->id.'" style="white-space:nowrap;text-align: center;">';
-        echo      '<input id="sortOrder_'.$subTask->id.'" value="'.$subTask->sortOrder.'" hidden />';
                   $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId);
         echo    '</td>';
         echo  '</tr>';
@@ -139,7 +141,7 @@ class SubTask extends SqlElement {
       }
     }
     $lastSort=(!empty($res))? $lastSortRegist :0;
-    echo  '<tr id="'.$refType.'_'.$refId.'_newSubTaskRow" >';
+    echo  '<tr id="'.$refType.'_'.$refId.'_newSubTaskRow" width="100%">';
      echo    '<td class="linkData" id="'.$refType.'_'.$refId.'_grabDive_0">&nbsp;</td>';
     echo    '<td class="linkData" style="white-space:nowrap;text-align: center;">';
     echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_0" dojoType="dijit.form.TextBox" style="width:90%;" onChange="updateSubTask(0,\''.$refType.'\','.$refId.');" value="">';
@@ -164,7 +166,7 @@ class SubTask extends SqlElement {
   }
   
   function drawStatusSubTask($id, $done, $idle, $handled,$refType,$refId){
-    echo '<div id="'.$refType.'_'.$refId.'_slidContainer_'.$id.'" class="slideshow-container">';
+    echo '<div id="'.$refType.'_'.$refId.'_slidContainer_'.$id.'" class="slideshow-container" style="width:100%;">';
 
     
     echo '<div class="mySlides fade" style="'.(($done==0 && $idle==0 && $handled==0)?'display:block;':'display:none;').'">';
@@ -184,9 +186,9 @@ class SubTask extends SqlElement {
      echo '</div>';
     
      $pos=1;
-     if($done==1){
+     if($handled==1){
        $pos=2;
-     }else if($handled==1){
+     }else if($done==1){
        $pos=3;
      }else if($idle==1){
        $pos=4;
@@ -203,14 +205,25 @@ class SubTask extends SqlElement {
   static function drawAllSubTask($idProject,$idResource,$elementType,$idVersion){
     $tab= array();
     $subTask= new SubTask();
+    $ticket=new Ticket();
+    $action=new Action();
+    $activity=new Activity();
+    
     $tableName=$subTask->getDatabaseTableName();
+    $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Global')!='0')?true:false;
     $query="SELECT DISTINCT  $tableName.refId as refId,$tableName.refType as refType FROM $tableName ";
     $query.="WHERE 1=1";
     if($idProject!=0)$query.=" and  $tableName.idProject = ".$idProject;
     if($idResource!=0)$query.=" and  $tableName.idResource = ".$idResource;
-    if(trim($elementType)!='')$query.=" and  $tableName.refType = '".$elementType."'";
-    if($idResource!=0)$query.=" and  $tableName.idResource = ".$idResource;
-    if ($idVersion!=0)$query.=" and  $tableName.idTargetProductVersion = ".$idVersion;;
+    if(trim($elementType)!=''){
+      $query.=" and  $tableName.refType = '".$elementType."'";
+    }
+
+    if($idResource!=0){
+      $query.=" and  $tableName.idResource = ".$idResource;
+      if($showClosedSubTask!=1)$query.=" and  $tableName.idle = 0";
+    }
+    if ($idVersion!=0)$query.=" and  $tableName.idTargetProductVersion = ".$idVersion;
     $result=Sql::query($query);
     while ($line = Sql::fetchLine($result)) {
       $tab[]=$line;
@@ -218,12 +231,19 @@ class SubTask extends SqlElement {
     if(!empty($tab)){
       foreach ($tab as $id=>$obj){
         $element= new $obj['refType']( $obj['refId']);
+        if ($element->idle==1)continue;
+        if(!$showClosedSubTask and $element->done==1){
+          $cpST=$subTask->countSqlElementsFromCriteria(array("refType"=>$obj['refType'],"refId"=>$element->id,"idle"=>'0'));
+          if ($cpST==0)continue;
+        }
         $goto="";
         $style="";
+        $draw='';
         if ( securityCheckDisplayMenu(null, $obj['refType']) and securityGetAccessRightYesNo('menu'.$obj['refType'], 'read', '')=="YES") {
           $goto=' onClick="gotoElement(\''.$obj['refType'].'\',\''.htmlEncode($element->id).'\');" ';
           $style='cursor: pointer;';
         }
+        
           echo '<table style="width:95%; margin-bottom:10px;">';
             echo '<tr style="height:42px;"><td colspan="4" ><div dojotype="dijit.layout.ContentPane" class="dijitContentPane">';
               echo'<table style="width:100%;"><tr>';
