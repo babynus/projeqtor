@@ -57,6 +57,12 @@ if(!isset($dontDisplay))$dontDisplay = false;
     }
   }
   
+  if(!isset($objectClient)){
+    $objectClient = '';
+  }
+  if(!isset($budgetParent)){
+    $budgetParent = '';
+  }
   $user=getSessionUser();
   $context="";
   $comboDetail=false;
@@ -378,7 +384,9 @@ if(!isset($dontDisplay))$dontDisplay = false;
       <tr style="height:37px;">
         <td colspan=2 style="width:25%;text-align:right;text-transform:lowercase;"><span class="nobr"><?php echo i18n("filterByStatusQuick");?>&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 			  <td style="width:10%;text-align:center;">
-			   <div id="filterByStatusSwitch" name="filterByStatusSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(!$comboDetail and sessionValueExists('displayByStatusListSwitch'.$objectClass)){ echo getSessionValue('displayByStatusListSwitch'.$objectClass); }else{?>off<?php }?>" leftLabel="" rightLabel="">
+			  <?php  $paramDisplayByStatus = SqlElement::getSingleSqlElementFromCriteria('Parameter', array('idUser'=>$user->id,'parameterCode'=>'displayByStatusList_'.$objectClass));
+			  if($paramDisplayByStatus->parameterValue == 'block'){ $paramDisplayByStatus = 'on';}else{ $paramDisplayByStatus='off'; }?>
+			   <div id="filterByStatusSwitch" name="filterByStatusSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="<?php if(!$comboDetail and sessionValueExists('displayByStatusListSwitch'.$objectClass)){ echo getSessionValue('displayByStatusListSwitch'.$objectClass); }else{ echo $paramDisplayByStatus; }?>" leftLabel="" rightLabel="">
             <script type="dojo/method" event="onStateChanged" >
               saveDataToSession('displayByStatusListSwitch<?php echo $objectClass;?>',this.value);
               if (dijit.byId('barFilterByStatus').domNode.style.display == 'none') {
