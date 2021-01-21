@@ -31,7 +31,16 @@ Allows to define product and sub-product.
 
 Allows to link components to product.
 
+.. figure:: /images/GUI/CONF_SCR_Product.png
+   :alt: Product configuration screen
+   
+   Product configuration screen
+   
 
+
+   
+   
+     
 .. rubric:: Section Description
 
 .. sidebar:: Other sections
@@ -39,10 +48,11 @@ Allows to link components to product.
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>` 
    
+
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Required field |ReqFieldLegend|
-   :widths: 45, 80
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -70,34 +80,38 @@ Allows to link components to product.
    * - Description :
      - Box checked indicates the product is archived.
 
+You can create many links between products, product versions and component
 
-.. rubric:: Section Project linked to this product
+ .. compound:: Project linked to this product
 
-Possibility of attaching the products of the list to projects.
+   Possibility of attaching the products of the list to projects.
 
-.. rubric:: Section Product versions
+ .. compound:: Composition Section
+ 
+   List of sub-products and list of components used by this product
 
-List of versions defined for the product.
+   See: :ref:`relationship-product-component`.
 
-Product versions are defined in :ref:`product-version` screen.
-
-.. rubric:: Section Composition - List of sub-products used by this product
-
-List of sub-products for the product.
-
-.. rubric:: Section Composition - List of components used by this product
-
-See: :ref:`relationship-product-component`.
-
-.. note::
-
-   :kbd:`Display structure`
-
-   Button for displays the structure of the product.
-
+ .. compound:: Structure
+   
+   You can display 2 ways to display the structure. Normal and flat.
+   
+   
+   .. figure:: /images/GUI/CONF_BOX_DisplayStructureSSBox.png
+      :alt: Display the product structure
+      
+      Normal display the product structure
+      
+      
    Box checked "Show versions for all structure" allows to display versions of sub-products and components.
 
    Box checked "Show projects linked to versions" allows to display projects linked.
+
+   .. figure:: /images/GUI/CONF_BOX_DisplayStructure.png
+      :alt: Display the product structure box checked
+      
+      Display the product structure with the boxes checked
+
 
 .. index:: Product (Version)
 
@@ -105,6 +119,7 @@ See: :ref:`relationship-product-component`.
 
 Product Versions
 ----------------
+
 
 Allows to define versions of a product.
 
@@ -126,6 +141,13 @@ By profile, possibility to have a different list of the version of the original 
 
 .. rubric:: Section Description
 
+
+.. figure:: /images/GUI/CONF_ZONE_DescrptionVersionProduct.png
+   :alt: Product version description
+   
+   Product version description
+   
+   
 .. sidebar:: Other sections
 
    * :ref:`Projects linked to this version<Link-version-project-section>`
@@ -208,7 +230,12 @@ Allows to define products using the component.
 
 Possibility to define component types and component versions that will only be used for definition of structure (not for Version Planning or Tickets)
 
-
+.. figure:: /images/GUI/CONF_ZONE_ComponentDetails.png
+   :alt: Component
+   
+   Component details
+   
+   
 .. rubric:: Section Description
 
 .. sidebar:: **Other sections**
@@ -265,7 +292,12 @@ Allows to define versions of a component.
 
 Allows to link a product version to component version.
  
+.. figure:: /images/GUI/CONF_ZONE_ComponentVersionDetails.png
+   :alt: Component version details
    
+   Component version details
+   
+      
 .. rubric:: Automatic formatting of version name
 
 Possibility to define if the version name is automatically produced from the component name and version number.
@@ -359,8 +391,8 @@ See possible relationships:  :ref:`product-structure`
 
 .. rubric:: Relationships management
 
-* Click on |buttonAdd| to create a new relationship. The dialog box "Structure" appear. 
-* Click on |buttonIconDelete| to delete the corresponding relationship.
+* Click on |Add| to create a new relationship. The dialog box "Structure" appear. 
+* Click on |Delete| to delete the corresponding relationship.
 
 .. figure:: /images/GUI/CONF_BOX_ProductStructure.png
    :alt: Dialog box - Structure 
@@ -381,8 +413,8 @@ Allows to define links between versions of products and components.
 
 .. rubric:: Link management
 
-* Click on |buttonAdd| to create a new link. The dialog box "Version Structure" appear. 
-* Click on |buttonIconDelete| to delete the corresponding link.
+* Click on |Add| to create a new link. The dialog box "Version Structure" appear. 
+* Click on |Delete| to delete the corresponding link.
 
 .. figure:: /images/GUI/CONF_BOX_VersionStructure.png
    :alt: Dialog box - Version structure 
@@ -403,9 +435,9 @@ This section allows to manage links between projects and versions of products.
 
 .. rubric:: Link version to projects management
 
-* Click on |buttonAdd| to create a new link. 
-* Click on |buttonEdit| to update an existing link.
-* Click on |buttonIconDelete| to delete the corresponding link.
+* Click on |Add| to create a new link. 
+* Click on |Edit| to update an existing link.
+* Click on |Delete| to delete the corresponding link.
 
 
 .. figure:: /images/GUI/CONF_BOX_ProjectVersionLink.png
@@ -450,12 +482,6 @@ Select one or more product versions and the planning version is displayed.
 This planning displays each version of selected product versions and their components from define start date to deliverable date.
 
 To use it define your start and delivery date in Product Version and Component Version.
-
-.. figure:: /images/GUI/CONF_ZONE_deliveryDateComponent.png
-   :alt: Delivery date component 
-   :align: center
-   
-   Delivery date component
    
 .. note:: 
 
@@ -472,24 +498,21 @@ Graphically, you can see any delay or incompatibility.
    Planning version
    
    
-.. rubric:: Add a new activity
+.. rubric:: Display options
 
-you can add an activity directly in the version planning. 
 
-.. figure:: /images/GUI/CONF_ZONE_AddActivity.png
-   :alt: Add a new activity
+Click on |New| to add an activity.
+Click on |Filter| to filter the version display.  
+
+.. figure:: /images/GUI/CONF_ZONE_Options.png
+   :alt: Show options
    
-   Add a new activity
+   Version planning options
 
-To display the related activities, you must check the box "show activities related to component versions" or "show activities related to product versions".
+Click on **Show activities from product version** or **Show activities from component version** To display the related activities.
 
 New check boxes will appear: one to show resources and the other to show or hide versions with no activity displayed.
 
-.. figure:: /images/GUI/CONF_ZONE_CheckBox.png
-   :alt: checkbox to display activities related to component versions or product versions
-   
-   display activities related to component versions or product versions
-   
 You must select an existing activity to insert the new activity into the WBS structure.
 
 If no activity is selected then the "add new element" icon will be grayed out.
