@@ -13,17 +13,17 @@ This module is dedicated to the management of your IT infrastructure.
 
 You can manage:
 
-* types of equipment
-* equipment categories
-* Marks
-* The models
-* The localisation
+* All types of equipment
+* Equipment categories
+* Brands
+* Models
+* Equipement localisations
 
 
 Equipment
 =========
 
-This new screen allows you to manage lists of licenses, versions, products or even components linked to equipment.
+This screen allows you to manage lists of licenses, versions, products or even components linked to equipment.
 
 * Define the list of devices contained in another device.
 
@@ -43,7 +43,9 @@ This new screen allows you to manage lists of licenses, versions, products or ev
 
    Each asset related to a resource or an user, is displayed on the Resource screen and the user screen
    
-   See: :ref:`Resource<allocated-asset-resource>` - See: :ref:`User<allocated-asset-user>`
+   See: :ref:`Resource<allocated-asset-resource>`
+   
+   See: :ref:`User<allocated-asset-user>`
 
 .. rubric:: Description
 
@@ -88,15 +90,15 @@ This section allows you to enter the details of the composition of an item of eq
    
 This section allow to define:
 
-* a status for each device according to the selected workflow.
+* A status for each device according to the selected workflow.
 
-* an installation date and a possible decommissioning date.
+* An installation date and a possible decommissioning date.
 
-* the location of the equipment, with the possibility of defining a list (see: :ref:`asset-types`) and / or a manual entry field for more precision.
+* The location of the equipment, with the possibility of defining a list (see: :ref:`asset-types`) and / or a manual entry field for more precision.
 
-* the user who will benefit from this equipment.
+* The user who will benefit from this equipment.
 
-* the closed check box. Which allows to put the equipment in archive mode.     
+* The closed check box. Which allows to put the equipment in archive mode.     
 
 .. rubric:: Costs section
 
@@ -119,6 +121,12 @@ You can set a cost for:
 
 .. rubric:: Asset composition section
 
+When you define an element parent, the components of the element appear in this section giving you the complete structure of an element.
+
+The button :kbd:`display the structure` opens a pop up which summarizes the complete composition of your equipment in table form.
+
+You can print this box.
+
 
 .. figure:: /images/GUI/ASSETMANAGMENT_ZONE_AssetComposition.png
    :alt: Asset composition section
@@ -126,15 +134,6 @@ You can set a cost for:
    Asset composition section
 
 
-When you define an element parent, the components of the element appear in this section giving you the complete structure of an element.
-
-The button "display the structure" opens a pop up which summarizes the complete composition of your equipment in table form
-
-   
-.. figure:: /images/GUI/ASSETMANAGMENT_BOX_Composition.png
-   :alt: Display the structure
-   
-   Display the structure
    
    
 
@@ -179,13 +178,6 @@ But you can also create even more detailed lists with types of information stora
 You can define an icon for each type of asset.  
 
 ProjeQtOr puts some icons at your disposal but you can create and import yours in the application.
- 
-
-.. figure:: /images/GUI/ASSETMANAGMENT_ZONE_Description.png
-   :alt: Description section
-   
-   Choose your icon in th description section
-   
    
 Save your icons in the **www\\projeqtor\\view\\icons** folder and relaunch the application.    
    
@@ -274,7 +266,7 @@ Location
 Location screen allow to create a list of places so that you can locate your equipment.
 
 
-.. figure:: /images/GUI/ASSETMANAGMENT_SCR_Location.PNG
+.. figure:: /images/GUI/ASSETMANAGMENT_SCR_Location.png
    :alt: Location screen
    
    Location screen
