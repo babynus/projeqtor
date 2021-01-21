@@ -55,3 +55,39 @@ CREATE TABLE `${prefix}subtask` (
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 
+CREATE TABLE `${prefix}WorkCommand` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idCommand` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idWorkUnit` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idComplexity` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `name` varchar(200) DEFAULT NULL,
+  `unitAmount` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `commandQuantity` int(5) unsigned DEFAULT '0' COMMENT '5',
+  `commandAmount` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `doneQuantity` int(5) unsigned DEFAULT '0' COMMENT '5',
+  `doneAmount` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `billedQuantity` int(5) unsigned DEFAULT '0' COMMENT '5',
+  `billedAmound` int(12) unsigned DEFAULT NULL COMMENT '12',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}WorkCommandDone` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idCommand` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idWorkCommand` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `refType` varchar(100) DEFAULT NULL,
+  `refId` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `doneQuantity` int(5) unsigned DEFAULT '0' COMMENT '5',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}WorkCommandBilled` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idCommand` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idWorkCommand` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idBill` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `billedQuantity` int(5) unsigned DEFAULT '0' COMMENT '5',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+ALTER TABLE `${prefix}planningElement` ADD `idWorkCommand` INT(12) DEFAULT NULL COMMENT '12';
