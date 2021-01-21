@@ -32,43 +32,29 @@ A workflow defines the possibility to go from one status to another one, and who
 
 Once defined, a workflow can be linked to any type of any item. 
 
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the workflow.
-   * - |RequiredField| Name
-     - Name of the workflow.
-   * - Sort order
-     - Number to define the order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate that workflow is archived.
-   * - Description
-     - Complete description of the workflow.
-
-.. rubric:: Select status to show or hide
+.. figure:: /images/GUI/CONTROLAUTO_SCR_Workflow.png
+   :alt: Workflow screen
    
-By clicking this button |buttonIconParameter| you can hide some unnecessary states..
+   Workflow screen
+   
+    
 
-.. image:: /images/GUI/CONTROLAUTO_ZONE_SelectHide.png
-   :alt: Select or hide
-   :align: center 
-  
+.. rubric:: Select status
+   
+Click on |Parameter| to display the status list.
    
 .. figure:: /images/GUI/CONTROLAUTO_BOX_SelectStatus.png
    :alt: Dialog box - Select status to show or hide 
    :align: center
    
-   Select or hide state.s
+   Select or hide status
+   
+   
+Choose the statuses to keep or hide by clicking on the checkboxes   
+      
 
 .. rubric:: Section List of types using this workflow
+
 
 List of all elements and objects related to this workflow
 
@@ -77,6 +63,8 @@ List of all elements and objects related to this workflow
    :alt: List of types using this workflow
    
    List of types using this workflow
+   
+   
 
 .. rubric:: Section Workflow Diagram
 
@@ -84,7 +72,6 @@ The workflow diagram presents a visual representation of the workflow displaying
 
 .. figure:: /images/GUI/CONTROLAUTO_ZONE_WorkflowDiagram.png
    :alt: Workflow Diagram
-   :align: center
 
    Workflow Diagram
 
@@ -99,23 +86,14 @@ The workflow diagram presents a visual representation of the workflow displaying
 
 .. figure:: /images/GUI/CONTROLAUTO_ZONE_WorkflowList.png
    :alt: Habilitation table
-   :align: center
 
    Habilitation table
-   
-.. note:: 
 
-   In the example above, only the administrator, lead project, and supervisor can change from **Recorded** status to **assigned**, **verified**, or **canceled** status.
-  
-   Everyone can move from the **assigned** state to the **in progress** state.
-   
-   however, no one can move from **qualified** to another.
-   
+      
+Make sure that it is still possible to transfer an item from one status to another. Because it is possible to get stuck on a status.
 
-.. warning::
-   
-   In this case, make sure that it is never possible to transfer an item to the "qualified" status, as it will not be possible to leave this status.
-   You can also review the links in the workflow diagram area.
+Check the links so that there is still an outlet.
+
 
 .. raw:: latex
 
@@ -137,31 +115,6 @@ When using template, the standard email formating is replaced with selected one.
 Just define your templates, and select it on the "Mail on Events"
 
 
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table::
-   :widths: 30, 80
-   :header-rows: 1
-   
-   * - `Id`
-     - Unique Id for the template.
-   * - name
-     - email template name
-   * - Element updated
-     - elements that will be able to use this template
-   * - Type
-     - Type of the selected element that will be able to use this template 
-   * - title
-     - title of sent mails
-   * - template
-     - template of sent mails
-   * - :term:`Closed`
-     - Flag to indicate that email template is archived.
-
-
-
 .. topic:: Field element updated and type
 
    * If not set, the template is valid for every type of the element
@@ -173,13 +126,12 @@ Just define your templates, and select it on the "Mail on Events"
 .. figure:: /images/GUI/CONTROLAUTO_ZONE_SpecificTags.png
    :alt: specifics tags 
    
-   Specific tag
+   Specific tags
  
-In the model, the user can use any property of the object, and display it in the mail using specific tags.
+In the model, the user can use any property of the subject and display it in the mail using specific tags.
 
-you just have to use the ${projectName} tag for the project name to appear. 
+you just need to use the tag $ {projectName} for the name of the project to appear and $ {idproject} to display the identification number of this one.
 
-Likewise with ${idproject} to display the identification number of it.
    
 .. tip::
    
@@ -234,7 +186,7 @@ More details, see :ref:`Global Parameters<mail>`
 
 * Choose the tag you want to insert.
 
-* Click the insert button
+* Click on :kbd:`insert`
 
 * The tag appears in the body of the text
     
@@ -246,56 +198,60 @@ More details, see :ref:`Global Parameters<mail>`
 Mails on event
 --------------
 
-The application is able to automatically send mails on updating event.
+* The app is capable of automatically sending emails when updating an item.
 
-Events are defined on an element and element type.
+* Events are defined on an element and / or an element type.
 
+* The e-mail message is formatted to display information about the item.
 
-.. note::
+* Selecting a template will use the template formatting instead of the standard default formatting.
+ 
+* The e-mail titles are defined in :ref:`Global parameters<e-mail titles>`.
 
-   * The mail message is formatted to display item information.
-   * Mail titles is defined in :ref:`Global parameters<mail-titles>` screen.
-   * Selecting a Template will use the formating of the template instead of default standard formating.
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table::
-   :widths: 30, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the event.
-   * - Element updated
-     - Type of elements that will be concerned by automatic emailing.
-   * - Type
-     - Type of the selected element updated. 
-   * - New status
-     - Positioning the elements to this status will generate an email.
-   * - Or other event
-     - Other event that will possibly generate an email.
-   * - :term:`Closed`
-     - Flag to indicate that status mail is archived.
+* If the type field not set, the event is valid for every type of the element.
 
 
-.. topic:: Field Type
 
-   If not set, the event is valid for every type of the element.
+.. rubric:: Description section
+
+In the description section you will detail what will be the levers to trigger the sending of an email.
+
+Status is one of these levers. Positioning items in the chosen status will generate an email.
+
+Or choose any other event in the drop-down list.
 
 
-.. rubric:: Section Mail receivers
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_ListEvent.png
+   :alt: Events list
+   
+   Events list
+
+
+.. rubric:: Mail receivers Section
 
 * List of addresses of the mails.
 * The list is not nominative, but defined as roles on the element.
 * Each addressee will receive mail only once, even if a person has several “checked” roles on the element.
 * See: :ref:`receivers-list` for receivers detail.
 
-.. raw:: latex
 
-    \newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .. index:: Ticket (Delay)
 
@@ -315,7 +271,6 @@ It is possible to define a default delay for tickets, for each ticket type and e
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -495,16 +450,22 @@ Selecting an item in the list will automatically fill in the note text field.
 Checklists
 ----------
 
-It is possible to define checklist forms for each type of element.
+It is possible to define checklist forms for each element or each type of element.
 
-When a checklist form exists for a given element, the checklist is available for the element.
+When a checklist form exists for a given element, the checklist is available only for the element.
 
+
+.. figure:: /images/GUI/CONTROLAUTO_SCR_Checklist.png
+   :alt: Checklist screen
+   
+   Checklist screen
+   
+   
 .. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: 
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -522,34 +483,17 @@ When a checklist form exists for a given element, the checklist is available for
 
 A checklist is built from checklist lines.
 
-* Click on |buttonAdd|  to create a new checklist line. 
-* Click on |buttonEdit| to update an existing checklist line.
-* Click on |buttonIconDelete| to delete the corresponding checklist line.
+* Click on |Add|  to create a new checklist line. 
+* Click on |Edit| to update an existing checklist line.
+* Click on |Delete| to delete the corresponding checklist line.
 
 .. figure:: /images/GUI/CONTROLAUTO_BOX_ChoicesForChecklistLines.png
    :alt: Dialog box - Choices for the checklist lines 
-   :align: center
 
    Choices for the checklist lines
    
-.. tabularcolumns:: |l|l|
 
-.. list-table:: Choices for the checklist lines
-   :widths: 30, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Name
-     - Name of the subject of the checklist line.
-   * - Sort order
-     - Order of the line in the list.
-   * - Choice #n
-     - Possible choices (checks) for the list (up to 5 choices).
-   * - Exclusive
-     - Are the choices exclusive (select one will unselect others).
-
-.. topic:: Details of dialog box
+.. tip:: Details of dialog box
 
    * Each line has a name, an order and up to 5 check choices.
    * A line with no check choice will be displayed as a **section title**.
@@ -632,26 +576,17 @@ A performance indicator or key performance indicator (KPI) is a type of performa
 
 It is possible to define Kpi on incomings and deliverables items.
 
+
+.. figure:: /images/GUI/CONTROLAUTO_SCR_KPIDefinition.png
+   :alt: KPI Definition screen
+   
+   KPI Definition screen
+   
+   
+   
 .. rubric:: Section Description
 
-.. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 30, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the KPI.
-   * - Name
-     - Name of the KPI.
-   * - Code
-     - code of the KPI.
-   * - Description
-     - Complete description of the KPI.
-   * - Idle
-     - Statut of the KPI.
      
 .. warning::
      
@@ -661,11 +596,11 @@ It is possible to define Kpi on incomings and deliverables items.
 
 It is possible to attributes tresholds lines to KPI.
 
-* Click on |buttonAdd|  to create a new JobList line. 
-* Click on |buttonEdit| to update an existing JobList line.
-* Click on |buttonIconDelete| to delete the corresponding JobList line.
+* Click on |Add|  to create a new JobList line. 
+* Click on |Edit| to update an existing JobList line.
+* Click on |Delete| to delete the corresponding JobList line.
 
-.. figure:: /images/GUI/CONTROLAUTO_KpiTresholds.PNG
+.. figure:: /images/GUI/CONTROLAUTO_KpiTresholds.png
 
 .. note::
      
@@ -691,47 +626,55 @@ It is possible to attributes tresholds lines to KPI.
 JobList
 -------
 
-Management of the JobList can be used for each element but it usually used to detail an Activity or Ticket.
+The JobList can be used for each item or item type
 
-When a Joblist form exists for a given element, the Joblist is available for the element
+It is generally used to detail an activity or a ticket.
 
-It is an indicator to follow the respect of dates values.
+It also acts as an indicator to monitor compliance with date values thanks to the lead time of tasks.
 
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table::
-   :widths: 30, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the KPI..
-   * - IdChecklistable
-     - Unique Id for the Checklistable.
-   * - idType
-     - Type of the elements the joblist applies to.
-   * - Idle
-     - idle.
 
 .. rubric:: Section JobList lines
 
 A JobList is built from JobList lines.
 
-* Click on |buttonAdd|  to create a new JobList line. 
-* Click on |buttonEdit| to update an existing JobList line.
-* Click on |buttonIconDelete| to delete the corresponding JobList line.
+* Click on |Add|  to create a new JobList line. 
+* Click on |Edit| to update an existing JobList line.
+* Click on |Delete| to delete the corresponding JobList line.
 
-.. figure:: /images/GUI/CONTROLAUTO_BOX_Joblist.png
-   :alt: Definition of a job
+
    
-   Definition of a job
+   
+.. rubric:: Task anticipation delay .
 
-.. note::
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_Joblist.png
+   :alt: Joblist anticipation delay
+   
+   Joblist colors anticipation delay
+   
+   
+* This deadline is fixed for each step created in the joblist. It works with planned dates. It is not compulsory.
 
-   Looking like CheckLists with no choice.
+* A color code allows you to anticipate these dates
+
+   - **White:** Without anticipation delay
+   
+   - **Green:** Check the box to indicate that this step has been completed. The dot turns green.
+   
+   - **Orange:** You enter the anticipation period
+   
+   - **Red:** you have exceeded this deadline   
+
+
+
+
+
+
+
+
+
+
+
+
 
 .. index:: Notification
 
@@ -830,7 +773,7 @@ The syntax is the one we take for a WHERE clause in an SQL statement.
 
 .. tip:: 
 
-   scheduling a notification for all invoices where the amount has been paid = total amount AND project name 'ACME'
+   Scheduling a notification for all invoices where the amount has been paid = total amount AND project name 'ACME'
 
    #{paymentAmount} < #{fullAmount}
    AND
@@ -844,11 +787,6 @@ The syntax is the one we take for a WHERE clause in an SQL statement.
   
    In addition to choosing a dynamic field, you can choose to use an operator or function with the following elements:
 
-   .. figure:: /images/GUI/CONTROLAUTO_ZONE_OperatorFunctions.png
-      :alt: Operator functions
-   
-      Operator functions
-
 
 .. rubric:: Notification content
 
@@ -856,10 +794,6 @@ This section is mandatory
 
 You can also add dynamic fields with **help to insert a dynamic field in content** in the same way as in the description section
 
-.. figure:: /images/GUI/CONTROLAUTO_ZONE_Content.png
-   :alt: Content section
-   
-   Content section
 
 .. rubric:: Section Start as
 
@@ -872,11 +806,11 @@ this section allows you to program the frequency of the notification display
 
    .. compound:: **The reference date**
    
-   * Date on witch will be generate the notification (minus the number of days or minutes programmed before) 
-   
-   * Notify before: This is a number of days before the notification date for which the notification is to be generated
-   
-   * This field is mandatory       
+      * Date on witch will be generate the notification (minus the number of days or minutes programmed before) 
+      
+      * Notify before: This is a number of days before the notification date for which the notification is to be generated
+      
+      * This field is mandatory       
 
 --------------   
    
@@ -907,14 +841,7 @@ section separated by a ';
    
 The following items allow you to choose the type of remitter.
    
-.. figure:: /images/GUI/CONTROLAUTO_ZONE_Receivers.png 
-   :alt: Receivers section
-   
-   Receivers section
-   
-   .. compound:: **Sent e-mail**
-   
-   If checked, an e-mail will be generated even if the notification for each type of person has been defined.
+If :kbd:`Sent e-mail` checked, an e-mail will be generated even if the notification for each type of person has been defined.
 
 
 
@@ -940,34 +867,33 @@ The following items allow you to choose the type of remitter.
 Notification and the IHM
 ========================
 
-After logging in, a message generated after "Login accepted" that tells you that you have unread notifications:
 
 .. figure:: /images/GUI/CONTROLAUTO_BOX_IHMNotif.png 
    :alt: notification on the login screen
    
-   notification on the login screen
+   Notification on the login screen
 
-.. figure:: /images/GUI/CONTROLAUTO_ZONE_IconNotif.png
-   :alt: icon notifications
-   
-   Icon notifications
+
+After logging in, a message generated after "Login accepted" that tells you that you have unread notifications:
    
 
-Display of unread notifications
+ .. compound:: Display of unread notifications
 
-It is done at 2 levels on the main screen:
-
-   * Bottom right
-     A notification icon appears as soon as a notification is not intended for the user.
-
-     Clicking on the icon gives direct access to the notifications screen. 
-
-   * Below the menus
-
-.. figure:: /images/GUI/CONTROLAUTO_ZONE_NotifRecap.png
-   :alt: notification area
+   It is done at 2 levels on the main screen:
    
-   Notifications area
+      * Bottom right
+        A notification icon appears as soon as a notification is not intended for the user.
+   
+        Clicking on the icon gives direct access to the notifications screen. 
+        
+        
+   
+      * Below the menus
+
+      .. figure:: /images/GUI/CONTROLAUTO_ZONE_NotifRecap.png
+         :alt: notification area
+         
+         Notifications area
 
 A tree whose title indicates the number of unread notifications intended for the user.
 
@@ -981,9 +907,9 @@ This tree has the following levels:
 
 * Level 4: The id of the element that generated the notification. Allows direct access to the item.
 
-The icon |buttonIconRefresh| allows you to refresh notifications without waiting for the scheduled update.
+The icon |Refresh| allows you to refresh notifications without waiting for the scheduled update.
 
-The icon |iconNotif| provides direct access to the notifications screen.
+The icon |Notif| provides direct access to the notifications screen.
 
 Numbers in parentheses indicate the number of unread notifications
 
