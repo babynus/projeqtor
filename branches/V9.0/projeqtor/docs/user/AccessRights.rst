@@ -22,38 +22,40 @@ This enables or disables a consistent group of features.
 
 This screen is then accessible via a dedicated menu in the Acces Right
 
-.. image:: /images/GUI/ACCESSRIGHT_ManagementModule.png
+.. figure:: /images/GUI/ACCESSRIGHT_SCR_ManagementModule.png
+   :alt: Module management screen
+   
+   Module management screen
 
-.. topic:: columns descriptions
+The menu at the top of the page allows you to display all the modules or to display the modules corresponding to a part of the scope of the project management
 
-   .. compound:: * **first column:** The module's name
-   .. compound:: * **second column:** The list of screens that will be displayed if the module is installed.
-   .. compound:: * **third column:** The module's description
+When you have selected one of these menus, the modules are displayed below.
 
-**you can choose to install or not:**
+Click on a module to display its description, as well as the list of screens that will be activated or deactivated.
 
-* the planning section 
-* the ticketing
-* the time tracking
-* the requirements
-* the financial section with expenses - Incomes - financial situation and revenue managment
-* the risks
-* the meetings
-* the steering 
-* the products configuration (versions, components...)
-* the asset management
-* the humans resources
-* the external documents management 
-* the organizations (level society) management 
-* the activity stream
-* and the notifications.
+Click on the checkboxes to enable or disable the module.
+
+ .. compound:: Modules list
+ 
+   * the planning section 
+   * the ticketing
+   * the time tracking
+   * the requirements
+   * the financial section with expenses - Incomes - financial situation and revenue managment
+   * the risks
+   * the meetings
+   * the steering 
+   * the products configuration (versions, components...)
+   * the asset management
+   * the humans resources
+   * the external documents management 
+   * the organizations (level society) management 
+   * the activity stream
+   * and the notifications.
 
 .. note:: 
 
    Each module can be installed independently.
-   
-   Each module is described and explained on ProjeQtor
-
 
 
 .. index:: Profile (Access Rights)
@@ -63,13 +65,12 @@ This screen is then accessible via a dedicated menu in the Acces Right
 Profiles
 --------
 
-.. sidebar:: Concepts 
-
-   * :ref:`profiles-definition`
 
 The profile is a group of rights. Each with specific access rights to the database.
 
 Thus, each user is linked to a profile which defines the data that he can see and possibly manage. 
+
+See also: :ref:`Concept<profiles-definition>`
 
 .. figure:: /images/GUI/ACCESSRIGHT_SCR_Profiles.png 
    :alt: Profiles screen
@@ -80,10 +81,11 @@ Thus, each user is linked to a profile which defines the data that he can see an
 .. rubric:: Value of Field "Name"
 
 * The value of field "Name" is not the name displayed, but it is a code in the translation table. 
-* The name displayed at right of the field is the translated name.
+* The value of field "Name" must be a significant name and must not contain spaces or special characters.
 
-when the new profile is created, it appears in the list of existing profiles in the list box.
-It remains between square brackets because it does not exist in :ref:`translatable-name`. 
+* The name displayed at right of the field is the translated name.
+* when the new profile is created, it appears in the list of existing profiles in the list box.
+* It remains between square brackets because it does not exist in :ref:`translatable-name`. 
 
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_ProfilesDescription.png
    :alt: Profile description with translatable name
@@ -91,28 +93,26 @@ It remains between square brackets because it does not exist in :ref:`translatab
    
    Profile description with translatable name
    
-.. topic:: New profile
-
-   .. image:: /images/GUI/ACCESSRIGHT_ZONE_NewProfil.png
-      :align: center
       
-   The value of field "Name" must be a significant name and must not contain spaces or special characters.
    
-   Ideally, the value of the field should start with "profile" (to be easily identified in the translation table).
-
-The restriction zone offers two types of restriction.
-One by type based on ProjeQtOr elements (actions, activities, invoices, catalog ...) 
-and the other based on the restriction of product versions
+.. tip::
+   
+   Ideally, the value of the field should start with "profile" to be easily identified in the translation table.
 
 
-.. sidebar:: Other sections
 
-   * :ref:`Types restrictions<type-restriction-section>`
+
+
+The restriction zone offers two types of restriction:
+
+* By type based on ProjeQtOr elements (actions, activities, invoices, catalog ...) 
+* By product versions
+
+More details: :ref:`Restriction types<type-restriction-section>`
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required Field
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -172,18 +172,13 @@ Users belonging to a profile can see the corresponding report in the report list
 Reports are grouped by report categories
 
 **Click on checkbox to permit or revoke access to the report  for a profile.**
-
-.. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToReports.png
-   :alt: Access to reports screen
-   :align: center
-   
-   Access to reports screen
    
    
    
 .. index:: Access mode
 
 .. _access-mode:
+.. _cruds:
 
 Access modes
 ------------
@@ -203,7 +198,7 @@ By default, ProjeQtOr offers 10 different access modes.
 
 Each access defines the visibility that can be applied by type of elements dependent on a project (activity, ticket, action, ...).
 
-You can choose from several levels of visibility for each CRUD entitlement.
+You can choose from several levels of visibility for each :ref:`CRUD<cruds>` entitlement.
 
 * **No element:** No element is visible and updatable.
 * **Own elements:** Only the elements created by the user.
@@ -211,40 +206,24 @@ You can choose from several levels of visibility for each CRUD entitlement.
 * **Elements of own project:** Only the elements of the projects the user/resource is allocated to.
 * **All elements on all projects:** All elements, whatever the project.
 
-.. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessModeList.png 
-   :alt: Access modes screen
-   :align: center 
-   
-   Access modes screen
-
 
 
 .. rubric:: Value of Field "Name"
 
-* The value of field "Name"  is not the name displayed, but it is a code in the translation table. 
+* The value of field "Name" is not the name displayed, but it is a code in the translation table. 
+* The value of field "Name" must be a significant name and must not contain spaces or special characters.
 * The name displayed at right of the field is the translated name.
-* See: :ref:`translatable-name`.
+* when the new profile is created, it appears in the list of existing profiles in the list box.
+* It remains between square brackets because it does not exist in :ref:`translatable-name`. 
 
-.. topic:: New access mode
-
-   * The value of field "Name" must be a significant name 
+.. tip::
    
-     and must not contain spaces or special characters.
-     
-   * Ideally, the value of the field should start with "accessProfile" 
-     
-     (to be easily identified in the translation table).
+   Ideally, the value of the field should start with "accessProfile" to be easily identified in the translation table.
 
-
-.. figure:: /images/GUI/ACCESSRIGHT_ZONE_CreateNewMode.png
-   :alt: Create a new profile
-   
-   Create a new profile
    
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required Field 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -282,10 +261,6 @@ ProjeQtOr offers 5 different access modes where you can define creation, update 
 * **Own elements:** Only the elements created by the user.
 * **Elements he is responsible for:** Only the elements the user is responsible for.
 
-.. figure:: /images/GUI/ACCESRIGHT_SCR_AccesModeND.png
-   :alt: Acces mode non dependant screen
-   
-   Acces mode non dependant screen*
    
 You can then define a mode corresponding to the visibility rights that you wish to grant on each profile in the access to data not dependent on the project.
 
@@ -296,7 +271,7 @@ Access to data
 
 This screen allows to set element access mode for each profile.
 
-Allows to define scope of visibility  and/or updating of data in elements for users and resources.
+Allows to define scope of visibility and/or updating of data in elements for users and resources.
 
 
 
@@ -331,12 +306,6 @@ This screen is only for the elements not reliant on a project.
 
 **For each element, select the access rights granted to a profile.**
 
-.. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToDataNotProjectDependant.png
-   :alt: Access to data (Not project dependant) screen
-   :align: center
-   
-   Access to data (Not project dependant) screen
-
 Some features do not have a manager or are not linked specifically to a user profile, like messages, tools or even environmental parameters.
 
 Certain access modes are therefore not offered in the drop-down lists on certain elements of this screen.
@@ -355,11 +324,6 @@ Depending on options of functionality, allows to grant access rights, to define 
 
 **For each option, select the access granted to a profile.**
 
-.. figure:: /images/GUI/ACCESSRIGHT_SCR_SpecificAccess.png 
-   :alt: Specific access screen
-   :align: center
-   
-   Specific access screen
    
 .. rubric:: Access to resource data
 
@@ -389,7 +353,7 @@ This section allows to:
 
    .. compound:: **Display of combo detail button**
 
-    * This option defines for each profile whether the button |buttonIconSearch| will be displayed or not, facing every combo list box.
+    * This option defines for each profile whether the button |Search| will be displayed or not, facing every combo list box.
     * Through this button, it is possible to select an item and create a new item.
     * This button may also be hidden depending on access rights (if the user has no read access to corresponding elements).
 
