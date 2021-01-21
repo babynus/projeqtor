@@ -8006,14 +8006,6 @@ function saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration){
     load : function(data, args) {
       if (dojo.getAttr('automaticRunPlan','aria-checked')=='true')plan();
       else refreshJsonPlanning();
-function saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration){
-  var param="?id="+id+"&object="+element+"&idObj="+refId+"&startDate="+dateStart+"&endDate="+dateEnd+"&duration="+duration;
-  var url= "../tool/savePlanningElementAfterResize.php"+param;
-  dojo.xhrGet({
-    url : url,
-    load : function(data, args) {
-      if (dojo.getAttr('automaticRunPlan','aria-checked')=='true')plan();
-      else refreshJsonPlanning();
       if((dojo.byId('objectClass').value.trim() !='' && dojo.byId('objectId').value.trim() !='' && dojo.getAttr('automaticRunPlan','aria-checked')!='true') && dojo.byId('objectId').value.trim()==refId.trim() ){
         loadContent("objectDetail.php", "detailDiv", 'listForm');
         loadContentStream();
