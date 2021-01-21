@@ -225,6 +225,8 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     	  }else{
         	  return;
           }
+      }else if(source.id.substring(0,11) =='dndSubTask_'){
+  	    setTimeout('reorderSubTask('+source.node.id+')',100);  
       } else if (nodes.length>0 && nodes[0] && target && target.current) {
         var moveTasks=false;
         var arrayTasks=new Array();

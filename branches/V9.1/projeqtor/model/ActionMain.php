@@ -117,10 +117,6 @@ class ActionMain extends SqlElement {
     if ($this->id and $this->idUser!=getSessionUser()->id) {
       self::$_fieldsAttributes['isPrivate']='hidden';
     }
-    if(Parameter::getGlobalParameter('activateSubtasksManagement')!="YES" or Parameter::getUserParameter('displaySubTask')!="YES"){
-      self::$_fieldsAttributes ['_SubTask'] = 'hidden';
-      unset($this->_sec_ToDoList);
-    }
   }
 
    /** ==========================================================================
@@ -204,6 +200,7 @@ class ActionMain extends SqlElement {
     return $colScript;
   }
   
+
   /**=========================================================================
    * Overrides SqlElement::save() function to add specific treatments
    * @see persistence/SqlElement#save()
@@ -217,6 +214,12 @@ class ActionMain extends SqlElement {
     return $result;
     
   }
-    
+ 
+  public function setAttributes(){
+    if(Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or Parameter::getUserParameter('displaySubTask')!="YES" or $this->id==''){
+      self::$_fieldsAttributes ['_SubTask'] = 'hidden';
+      unset($this->_sec_ToDoList);
+    }
+  }
 }
 ?>

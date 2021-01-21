@@ -8006,6 +8006,14 @@ function saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration){
     load : function(data, args) {
       if (dojo.getAttr('automaticRunPlan','aria-checked')=='true')plan();
       else refreshJsonPlanning();
+function saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration){
+  var param="?id="+id+"&object="+element+"&idObj="+refId+"&startDate="+dateStart+"&endDate="+dateEnd+"&duration="+duration;
+  var url= "../tool/savePlanningElementAfterResize.php"+param;
+  dojo.xhrGet({
+    url : url,
+    load : function(data, args) {
+      if (dojo.getAttr('automaticRunPlan','aria-checked')=='true')plan();
+      else refreshJsonPlanning();
       if((dojo.byId('objectClass').value.trim() !='' && dojo.byId('objectId').value.trim() !='' && dojo.getAttr('automaticRunPlan','aria-checked')!='true') && dojo.byId('objectId').value.trim()==refId.trim() ){
         loadContent("objectDetail.php", "detailDiv", 'listForm');
         loadContentStream();
@@ -8030,7 +8038,7 @@ function updateSubTask(id,refType,refId){
   if(name.trim()!=''){
     var priority=(id==0)?dojo.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).value:dijit.byId('priorityNewSubTask_'+id).get('value');
     var resource=(id==0)?dojo.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).value:dijit.byId('resourceNewSubTask_'+id).get('value');
-    var sortOrder=(id==0)?dojo.byId(refType+'_'+refId+'_sortOrder_'+id).value:dojo.byId('sortOrder_'+id).value;
+    var sortOrder=(id==0)?dojo.byId(refType+'_'+refId+'_sortOrder_'+id).value:dojo.byId('sortOrder_'+refType+"_"+refId+'_'+id).value;
   }
 
   save=false;
@@ -8124,7 +8132,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter){
   cloneResource.parentNode.replaceChild(newResource,cloneResource);
   grabDiv.removeAttribute('id');
   grabDiv.className='dojoDndHandle handleCursor linkData';
-  sort.id='sortOrder_'+id;
+  sort.id='sortOrder_'+refType+"_"+refId+'_'+id;
   pos.id='pos_'+id;
   prev.id='prev_'+id;
   next.id='next_'+id;
@@ -8222,28 +8230,18 @@ function saveActivityValueFilter(value,refType,refId){
     url+="&field=Resource&value="+idResource;
   }
   
-  dojo.xhrPost({
-    url : url,
-    form :null,
-    handleAs : "text",
-    load: function(e){
-      var contentWidget=dijit.byId("resultDivMain");
-      if (!contentWidget) {
-        return;
-      }
-      contentWidget.set('content', e);
-      var lastOperationStatus=window.top.dojo.byId('lastOperationStatus');
-      var lastSaveId=window.top.dojo.byId('lastSaveId');
-      
-      if(lastOperationStatus.value != "OK"){
-        if(value=="Status"){
-          dijit.byId('idStatusElement_'+refType+'_'+refId).set('value',oldValue);
-        }else{
-          dijit.byId('idResourceElement_'+refType+'_'+refId).set('value',oldValue);
-        }
-      }
+
+  loadContent(url,"resultDivMain","SubTaskForm",true);
+  
+  var lastOperationStatus=window.top.dojo.byId('lastOperationStatus');
+  
+  if(lastOperationStatus.value != "OK"){
+    if(value=="Status"){
+      dijit.byId('idStatusElement_'+refType+'_'+refId).set('value',oldValue);
+    }else{
+      dijit.byId('idResourceElement_'+refType+'_'+refId).set('value',oldValue);
     }
-  });
+  }
 }
 
 function refreshAllSubTaskList(){
@@ -8255,3 +8253,39 @@ function refreshAllSubTaskList(){
   loadContent("../view/refreshViewAllSubTask.php", "subTaskListDiv","SubTaskLisForm");
 }
 
+
+function showSubTask(objectClass) {
+  if (!objectClass) {
+    return;
+  }
+  if (dijit.byId('id')) {
+    var objectId=dijit.byId('id').get('value');
+  } else {
+    return;
+  }
+  var params="&objectClass=" + objectClass + "&objectId=" + objectId;
+  loadDialog('dialogSubTask', null, true, params, true);
+}
+
+function reorderSubTask (tab){
+  var param="";
+  var nodeList=dijit.byId(tab).node.childNodes[0].childNodes;
+  var lst=dijit.byId(tab).node;
+  var info=dijit.byId(tab).id.substr(11);
+  var refType=info.substr(0,info.indexOf('_'));
+  var refId=info.substr(info.indexOf('_')+1);
+  for (i=0; i < nodeList.length-1; i++) {
+    var domNode=nodeList[i];
+    var trunc=domNode.id.indexOf('subTaskRow_')+11;
+    var item=domNode.id.substr(trunc);
+    var order=dojo.byId("sortOrder_"+refType+"_"+refId+'_'+item);
+       
+    if (order) {
+      param+='&'+refType+"_"+refId+'_'+item+"="+(i+1);
+    }
+  }
+  dojo.xhrPost({
+    url: '../tool/saveSubTaskOrder.php?refType='+refType+'&refId='+refId+param,
+    handleAs: "text"
+  });
+}
