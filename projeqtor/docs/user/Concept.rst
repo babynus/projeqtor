@@ -76,7 +76,7 @@ The project type
                   
          .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
             :align: center
-                  
+                              
       **2 - Administrative project**
                   
          Allows to follow the non productive work as holidays, sickness, training, …
@@ -176,16 +176,10 @@ Allocation to project is used to:
 * Define the period of access to project data by the user. 
 
 
-.. figure:: /images/GUI/ENVPARAM_SCR_AllocationProject.png
-   :alt: Allocation to project
-   :align: center
-   
-   Allocation to project
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend| 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -193,9 +187,11 @@ Allocation to project is used to:
    * - :term:`Id`
      - Unique Id of the resource.
    * - Resource
-     - Name of the allocated resource.
+     - Resource name.
    * - Or contact
-     - Name of the allocated contact.
+     - Contact name.
+   * - Or user
+     - User name.  
    * - |RequiredField| Profile
      - Selected profile.
    * - |RequiredField| Project
@@ -254,14 +250,13 @@ Allocation to project can be defined in the :ref:`user` screen.
 
 .. rubric:: Profile selection
 
-Selected profile allows to define access rights on project elements.
+The selected profile allows you to define the rights on all the elements of the project.
 
-.. tip::
+The profile displayed first will be the default
 
-   Selected profile allows to define the role played by the user in a project.
+The profile given to an assignment for a user / resource / contact may be different on each project
    
-   For instance, the user might be a project manager in a project and it could be a project member in another. 
-   
+These rights are applied only on the said project   
    
 .. note:: 
 
@@ -271,12 +266,9 @@ Selected profile allows to define access rights on project elements.
 
 .. rubric:: Period selection
 
-Allow to define the period of project data visibility.
+Allows you to define the visibility period of the project data.
 
-.. tip::
- 
-     Can be used to limit access period, according to services agreement.
-
+Can be used to limit the access period, in accordance with the service agreement.
 
 
 
@@ -312,10 +304,7 @@ This rate is used to keep some scheduling time for other tasks.
 
 For instance, if rate is 50%, the resource will not be planned more than half days on the task.
  
-
-.. note::
-
-   If the period is not specified then the resource is allocated throughout the project.
+If the period is not specified then the resource is allocated throughout the project.
 
 .. warning::
 
@@ -673,7 +662,7 @@ Faked and team resources can be mixed in same draft planning.
         * There are several levels of Java developer with different daily costs (beginner, intermediary and expert).
         * You can define for this resource the functions and average daily cost for each level. (See: :ref:`resource-function-cost`)
         * You assign this resource to tasks, to a specific function (level). (See: :ref:`assignment`)
-        * Faked resource will be easily replaced with *real* resources when project becomes real, with *allocation replacement* feature. 
+        * Faked resource will be easily replaced with real resources when project becomes real, with allocation replacement feature |Switch|. 
 
      .. compound:: **Team resource**
 
@@ -806,48 +795,47 @@ All planning elements can be linked to others.
 
 Dependencies can be managed in the Gantt chart and in screen of planning element.
 
-More detail, see: :ref:`dependency-links`, :ref:`predSuces-element-section`.
-
 .. note:: 
 
    **Global parameter "Apply strict mode for dependencies"**
 
    If the value is set to “Yes”, the planning element (successor) can't start the same day that the end date of planning element (predecessor). 
 
+.. rubric:: Dependency types
+
+* ProjeQtOr offers only the dependency (Finish to Start).
+* This section explains what are they dependency types can be reproduced or not.
+
+ .. compound:: |DependancySS| **Start to Start**
+
+   To reproduce this dependency type, it's possible to add a milestone as prior of both tasks.
+
+ .. compound:: |DependancyES| **Start to Finish** 
+
+   This dependency type can't be reproduced in ProjeQtOr.
+       
+   This is a very weird scenario.
+
+ .. compound:: |DependancyEE| **Finish to Finish**
+
+   The successor should not end after the end of the predecessor, which leads to planning "as late as possible". 
+    
+   Anyway, the successor can end before the predecessor. Note that the successor "should" not end after the end of predecessor, but in some cases this will not be respected:
+    
+   * if the resource is already 100% used until the end of the successor
+   * if the successor has another predecessor of type "End-Start" or "Start-Start" and the remaining time is not enough to complete the task
+   * if the delay from the planning start date does not allow to complete the task.
+
 .. rubric:: Delay (days)
 
 A delay can be defined between predecessor and successor (start).
 
 
-.. topic:: Dependency types
-
-   * ProjeQtOr offers only the dependency (Finish to Start).
-   * This section explains what are they dependency types can be reproduced or not.
-
-    .. compound:: |iconSS| **Start to Start**
-
-       To reproduce this dependency type, it's possible to add a milestone as prior of both tasks.
-
-    .. compound:: |iconES| **Start to Finish** 
-
-       This dependency type can't be reproduced in ProjeQtOr.
-       
-       This is a very weird scenario.
-
-    .. compound:: |iconEE| **Finish to Finish**
-
-       The successor should not end after the end of the predecessor, which leads to planning "as late as possible". 
-    
-       Anyway, the successor can end before the predecessor. Note that the successor "should" not end after the end of predecessor, but in some cases this will not be respected:
-    
-           * if the resource is already 100% used until the end of the successor
-           * if the successor has another predecessor of type "End-Start" or "Start-Start" and the remaining time is not enough to complete the task
-           * if the delay from the planning start date does not allow to complete the task.
 
 
-.. raw:: latex
 
-    \newpage
+
+
 
 .. _planningMode:
 
@@ -881,7 +869,9 @@ Planning modes are grouped under two types for milestone :
 
 .. rubric:: Planning element planning mode
 
-several planning modes for your project elements are proposed to best manage the time spent on certain planning elements
+Several planning modes for your project elements are proposed to best manage the time spent on certain planning elements.
+
+See: :ref:`planning-mode-gantt`
 
 * As soon as possible
 * Work together
@@ -919,26 +909,6 @@ several planning modes for your project elements are proposed to best manage the
    
    
    
-   
-.. _minimum-threshold:
-
-minimum threshold & not splitted work
--------------------------------------
-
-.. figure:: /images/GUI/CONCEPT_ZONE_Treshold&NoSPlit.png
-   :alt: The minimum threshold and the option not splitted work 
-   
-   The minimum threshold and the option not splitted work
-   
-When this value is set, the activity will only be scheduled on the day that the daily availability will be greater than or equal to this threshold.
-
-You also have the option to add a new property to a "can not be split" task.
-
-This will require defining the minimum work to be allocated each day and thus filling in the minimum threshold field
-
-planning will require finding consecutive days with at least the given value possible.
-
-.. warning:: Do not take into account the "real" work.
 
 .. _scheduling-priority:
 
@@ -1130,20 +1100,25 @@ The distinction between this profile and its equivalent, user access is more lim
 Stakeholder definition
 **********************
 
-ProjeQtOr allows to define roles of stakeholders.
+ProjeQtOr makes it possible to define the roles of the stakeholders.
 
-The stakeholder definition is made with profile and a combination with user/resource/contact definition.
+The definition of stakeholders is done in part with the profile. This allows certain access and visibility rights to be determined.
+See: profiles
 
-The combinations user/resource/contact allow to define:
+and with the definition of user / resource / contact.
 
-* Connection to the application or not.
+These combinations are used to define:
+
+* Connection to the application.
 * Data visibility.
-* Resource availability.
-* Contact roles.
+* Availability.
+* Roles.
+
+These stakeholders can be either resource, contact, or users, but they can also be all three.
 
 The next matrix shows the different possibilities.
 
-.. list-table:: 
+.. list-table:: U=User - R=Resource - C=Contact
    :header-rows: 1
    :stub-columns: 1
 
@@ -1171,16 +1146,20 @@ The next matrix shows the different possibilities.
      - |no|
      - |no|
      - |yes|
- 
+   
 
 
-.. rubric:: Row legend
 
-U = User, R = Resource, C = Contact   
 
-.. raw:: latex
 
-    \newpage
+
+
+
+
+
+
+
+
 
 .. rubric:: Data visibility
 
