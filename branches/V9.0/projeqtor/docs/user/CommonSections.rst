@@ -24,26 +24,34 @@ Those sections allows to set information or add information to an item of the el
 
    |one| :ref:`description-section`
    
-   |two| :ref:`search-view-item` 
+   |two| :ref:`allocation-section` [Project]
    
-   |three| :ref:`treatment-section` 
+   |two| :ref:`assignment-section` [Activity]
    
-   |four| :ref:`allocation-section`
+   |three| :ref:`treatment-section`
    
-   |five| :ref:`assignment-section`
+   |four| :ref:`Configuration<configuration-project>`
    
-   |six| :ref:`progress-section` 
+   |five| :ref:`display-sub-project-activity`
    
-   |seven| :ref:`display-sub-project-activity` 
+   |six| :ref:`predSuces-element-section`
    
-   |eight| :ref:`predSuces-element-section`
+   |seven| :ref:`progress-section` 
    
-   |nine| :ref:`linkelement-section`
+   |eight| :ref:`linkelement-section`
    
-   |ten| :ref:`attachment-section`
+   |nine| :ref:`attachment-section`
    
-   |eleven| :ref:`note-section`
+   |ten| :ref:`note-section`
    
+
+
+
+
+
+
+
+
 
 .. _description-section:
 
@@ -52,195 +60,26 @@ Description section
 
 This section allows to identify items of the element.
 
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Allocation dialog box - Required field |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id` 
-     - unique id of the element
-   * - |RequiredField| Resource
-     - Resource list.
-   * - |RequiredField| Profile
-     - Profile list.
-   * - Rate
-     - Rate (in %) of the allocation to the project.
-   * - Start date
-     - Start date of allocation.
-   * - End date
-     - End date of allocation.
-   * - Description
-     - Complete description of the allocation.
-   * - Closed
-     - Flag to indicate that allocation in not active anymore, without deleting it.
-     
-     
-     
-.. raw:: latex
-
-    \newpage
-
-
-.. _search-view-item: 
-
-Search view item
-----------------
+Each element has its own description section. The description fields are not the same depending on the element or even its type.
 
 Most of the fields available for each element offer the possibility of having a search view and an accelerator to access other elements.
 
-These are the icons |buttonIconSearch| and |iconGoto|
+See: :ref:`Combo list fields<combo-list-fields>`
 
-The GOTO icon allows you to access the page of the selected item. 
-
-You will then be redirected to this element with the detail of the latter displayed. 
-
-You can right click on the search icon, you will then have more search choices.
-
-.. figure:: /images/GUI/COMMON_BOX_SearchPlus.png
-   :alt: Right click on search icon
-   
-   Right click on the search icon
-   
-
-L'icone |view| vous permet de visualiser les détails de l'élément sélectionné parmi ceux existants dans un popup
-
-L'icone |buttonIconSearch| vous permet de rechercher un élément parmi la liste des éléments sélectionnés
-
-L'icône |buttonAdd| vous permet de créer un élément directement depuis n'importe quelle page
-
-   
-     
-     
-     
-     
-     
-     
-     
-     
-     
-.. raw:: latex
-
-    \newpage
-
-
-.. _treatment-section: 
-
-Treatment section
------------------
-
-This section contains information about item treatment.
-
-Depending on the element, this section  may have a different name.
-
-
-.. figure:: /images/GUI/COMMON_ZONE_TreatmentSection.png
-   :alt: Example of presentation for the processing section 
-   
-   Example of presentation for the processing section for projects
-   
-.. rubric:: Treatment section for project
     
-.. list-table::
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Status 
-     - Actual :term:`status` of the project.
-   * - Health status 
-     - Manual tracking status 
-   * - Quality level 
-     - Manual tracking status 
-   * - Trend 
-     - Manual tracking status 
-   * - Overall progress  
-     - Manual tracking status 
-   * - Fix planning  
-     - Fix the planning prevents it from being calculated when planning your projects 
-   * - Non extendable project   
-     - You can't add, delete or move to/from a element to this project
-   * - Under construction 
-     - The project has not started. You'll don't receive the alerts and email concerning him.
-   * - Exclude from global plan 
-     - Do not display the "unplannable" elements of this project in the overall planning view. This means that only "standard" planning elements will be displayed, with the exception of actions, decisions, deliveries ...  
-   * - :term:`Handled`
-     - Box checked indicates the ticket is taken over
-   * - :term:`Done`
-     - Box checked indicates the ticket has been treated
-   * - :term:`Closed`
-     - Box checked indicates the ticket is archived
-
-
-.. rubric:: Treatment section for activity
-
-.. list-table::
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Parent activity  
-     - Determines if the activity is the daughter of another activity.
-   * - Status 
-     - Actual :term:`status` of the project.
-   * - :term:`Responsible`
-     - The person working on the ticket     
-   * - :term:`Handled`
-     - Box checked indicates the ticket is taken over
-   * - :term:`Done`
-     - Box checked indicates the ticket has been treated
-   * - :term:`Closed`
-     - Box checked indicates the ticket is archived  
 
 
 
-.. rubric:: Treatment section for tickets
 
-
-.. list-table::
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Planning activity  
-     - Activity on which the load of ticket treatment was planned
-   * - Resolution
-     - Whether the ticket has been resolved or not. Several statuses (customizable) are available 
-   * - Is a regression  
-     - Indicates if the incident / bug designated by the ticket must be a regression
-   * - Accountable   
-     - Person for whom the ticket work is carried out
-   * - :term:`Responsible`
-     - The person working on the ticket
-   * - Criticality    
-     - Criticality for processing the ticket   
-   * - Priority    
-     - Priority for processing the ticket
-   * - Due date   
-     - Due date for the resolution of the ticket
-   * - Work   
-     - Estimated charge for ticket processing, actual work performed on the ticket (decremented from the estimated) and remaining work on this ticket
-   * - Dispatch   
-     - Click on the button to distribute the load to one or more resources
-   * - Start work   
-     - Click the button to start the stopwatch and record the working time automatically. Please note, if you exit the ticket screen, the stopwatch stops running. If you work in hours, it takes about 4 minutes to display
-   * - :term:`Handled`
-     - Box checked indicates the ticket is taken over
-   * - :term:`Done`
-     - Box checked indicates the ticket has been treated
-   * - :term:`Closed`
-     - Box checked indicates the ticket is archived     
-   * - Solved
-     - Box checked indicates the ticket is solved      
-   * - Cancelled
-     - Box checked indicates the ticket is cancelled       
-
+   
      
-.. raw:: latex
+     
+    
 
-    \newpage
+
+
+
+
 
 .. index:: Project Allocation, Allocation section
 
@@ -273,139 +112,84 @@ This section allows to manage resource allocation to projects.
    * - Resource
      - Name of the allocated resource.
    * - Profile
-     - Selected profile.
+     - Selected profile. Determine the profile on this project. A resource can have a different profile on each of the projects to which it is assigned.
    * - Start date
-     - Start date of allocation.
+     - Start date of allocation. The software will take these dates into account for the work calculation.
    * - End date
-     - End date of allocation.
+     - End date of allocation. The software will take these dates into account for the work calculation.
    * - Rate
      - Allocation rate for the project (%).
 
 
-.. rubric:: Allocation list management
 
-* Click on |buttonAdd| to create a new allocation. 
-* Click on |buttonEdit| to update an existing allocation.
-* Click on |buttonIconDelete| to delete the corresponding allocation.
-* Click on |iconSwitch| to replace resource on the corresponding allocation. 
 
-  (See: :ref:`Replace resource on an allocation<replace-resource-allocation>`)
+* Click on |Add| to create a new allocation. 
+* Click on |Edit| to update an existing allocation.
+* Click on |Delete| to delete the corresponding allocation.
+* Click on |Switch| to :ref:`replace resource<replace-resource-allocation>` on the corresponding allocation. 
 
-* The icon |closeIcon| indicates that allocation to project is closed.
 
-.. note:: **Direct access to information**
+Closed assignments are indicated with a gray background.
 
-   From project screen, click on the resource name to go directly to the selected resource.
+The contact and users sections only display those who only have this role.   
    
-   From resource screen, click the project name to go directly to the selected project.
-
-.. _allocation-box:
-
-.. figure:: /images/GUI/COMMON_BOX_Affectation.png
-   :alt: Dialog box - Allocation
-   :align: center
-   
-   Allocation dialog box
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Allocation dialog box - Required field |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - |RequiredField| Project
-     - Project list.
-   * - |RequiredField| Resource
-     - Resource list.
-   * - |RequiredField| Profile
-     - Profile list.
-   * - Rate
-     - Rate (in %) of the allocation to the project.
-   * - Start date
-     - Start date of allocation.
-   * - End date
-     - End date of allocation.
-   * - Description
-     - Complete description of the allocation.
-   * - Closed
-     - Flag to indicate that allocation in not active anymore, without deleting it.
-
-.. topic:: Fields Project & Resource
- 
-   If the allocation is done on the screen «Projects», the field «resource» will be selectable.
-   
-   If the allocation is done on the screens «Resources», «Contacts» or «Users», the field «project» will be selectable.
-
-.. topic:: Field Resource
-
-   This field can contain a list of users, resources or contacts according to which screen comes from project allocation.
-
-.. topic:: Field Profile
-
-   The user profile defined will be displayed first. 
-
-.. topic:: Field Rate
-
-   100% means a full time allocation.
-
-.. note::
- 
-   Depending on which screen is used to manage project allocations, the behavior of fields will change. 
+Click on the resource name to go directly to the selected resource.
 
 
 
+
+
+
+      
 .. _replace-resource-allocation:
 
-.. rubric:: Replace resource on an allocation
-
-* This feature allows to replace a resource by another.
-* All tasks assigned to old resource will be transferred to the new resource with assigned and left work.
-
-.. note:: 
-
-   Work done on tasks still belongs the old resource.
-
-.. figure:: /images/GUI/COMMON_BOX_ReplaceAffectation.png
-   :alt: Dialog box - Replace allocation 
-   :align: center
+ .. compound:: Replace resource
    
-   Replace allocation dialog box
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Replace allocation dialog box - Required field |ReqFieldLegend| 
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - |RequiredField| Resource
-     - Resource list.
-   * - Capacity (FTE)
-     - The capacity of the resource selected
-   * - |RequiredField| Profile
-     - Profile list.
-   * - |RequiredField| Rate
-     - Rate (in %) of the allocation to the project
-   * - Start date
-     - Start date of allocation
-   * - End date
-     - End date of allocation
+   * Replace resource on an allocation: all tasks assigned will be transferred to the new resource with assigned and left work.
+   
+   * Work done on tasks still belongs the old resource.
+   
+   .. figure:: /images/GUI/COMMON_BOX_ReplaceAffectation.png
+      :alt: Dialog box - Replace allocation 
+      :align: center
+      
+      Replace allocation dialog window
 
 
-.. topic:: Field Profile
+   .. tabularcolumns:: |l|l|
+   
+   .. list-table:: Replace allocation dialog box - Required field |ReqFieldLegend| 
+      :header-rows: 1
+   
+      * - Field
+        - Description
+      * - |RequiredField| Resource
+        - Resource list.
+      * - Capacity (FTE)
+        - The capacity of the resource selected
+      * - |RequiredField| Profile
+        - Profile list.
+      * - |RequiredField| Rate
+        - Rate (in %) of the allocation to the project
+      * - Start date
+        - Start date of allocation
+      * - End date
+        - End date of allocation
 
-   The user profile defined will be displayed first. 
-
-.. topic:: Field Rate
-
-   100% means a full time allocation.
 
 
 
-.. raw:: latex
 
-    \newpage
+
+
+
+
+
+
+
+
+
+
 
 .. index:: Assigment section
 
@@ -423,13 +207,11 @@ Assigning a resource to a task makes it possible to define its function on the l
 
    Activity page with assigment
 
-.. warning::
-    * Only resources allocated to a project can be assigned to its tasks.
-    * If real work exists for an assignment, it can not be deleted.
-    * Basic, if an actual job exists for an assignment, it cannot be deleted.
-    * Only a profile with the specific right "force deletions with real work" activated can delete an element with real work.
+.. important::
+    * Only project resources can be assigned to project tasks.
+    * If actual work exists for an assignment, it cannot be deleted.
     
-.. figure:: /images/GUI/COMMON_ZONE_AssignmentSection.PNG
+.. figure:: /images/GUI/COMMON_ZONE_AssignmentSection.png
    :alt: assignment section
    
    Assignment section 
@@ -456,51 +238,32 @@ Assigning a resource to a task makes it possible to define its function on the l
      - Remaining work to this resource to complete the task.
 
 
-* Click on |buttonAdd| to assign a new resource.
-* Click on |iconTeam| to assign an entire  team to the activity
-* Click on |iconOrganization| to assign an entire organization to the activity
-* Click on |buttonEdit| to modify the assignment.
-* Click on |buttonIconDelete| to delete the assignment.
-* Click on |iconSplit| to divide the assignment of a resource with a second resource into two equal parts 
-* Click on |iconGoto| to go directly to the allocation sheet for this resource. 
-* Click on the name of the resource to access the detail of the latter on the resource screen.
+* Click on |Add| to assign a new resource.
+* Click on |Team| to assign an entire  team to the activity
+* Click on |Organization| to assign an entire organization to the activity
+* Click on |Edit| to modify the assignment.
+* Click on |Delete| to delete the assignment.
+* Click on |Split| to divide the assignment (two equal parts between two resources) 
+* Click on |Goto| to go directly to the allocation sheet for this resource. 
+* You may have this button at the top of the assignment area if you are assigned to the item yourself.
+* Click on the name of the resource to access the details on the resource screen.
+* The closed assignments are displayed on a gray background.
 
+.. note:: 
 
-.. _goto-timesheet:
+   * If the person assigned to the projet as contact is also a resource, then it will appear in resource. 
 
-.. rubric:: Go to the timesheet
+   * The contact and user lines will only display people who are only contact or user.
 
-The button |iconGoto| allows you to go to the timesheet of the selected resource with the line of the current element highlighted.
-
-.. figure:: /images/GUI/COMMON_SCR_Timesheet.png
-   :alt: Resource's timesheet with the element highlighted
-   
-   Resource's timesheet with the element highlighted
-
-You can have a goto button at the top of the assignments area if you are assigned to the item yourself. 
-
-.. figure:: /images/GUI/COMMON_ZONE_AllocationSection-myself.png
-   :alt: Assignment of the connected user
-   
-   The button is displayed if the logged in user is assigned.
    
    
 .. rubric:: Multiple assignment to a task
 
-* A resource can be assigned more than once to a task. See the Assignment section illustration.
-* Allows to assign the resource to the same task, but with a different function (different daily cost).
+* A resource can be assigned more than once to a task.
+* Allows to assign the resource to the same task with a different function (different daily cost).
 * Allows to add extra work without modifying initial assignment.
 
-.. rubric:: Incomplete planned work
 
-* The scheduling process tries to schedule, the remaining work on the assigned task within the allocation to project period.
-* The remaining work that can't be planned is displayed on the right of the resource name.
-
-.. figure:: /images/GUI/COMMON_ZONE_AssSection-NotPlannedWork.png
-   :alt: Assignment section with incomplete planned work
-   :align: center
-
-   Assignment section with incomplete planned work
 
 
 .. rubric:: Add a new assignment
@@ -521,7 +284,7 @@ You can have a goto button at the top of the assignments area if you are assigne
    * - Resource
      - Resource list.
    * - Function
-     - Function list.
+     - Function list. The main function defined for the resource will be display first.
    * - Cost
      - Daily cost defined for the resource and its function.
    * - Rate
@@ -537,9 +300,7 @@ You can have a goto button at the top of the assignments area if you are assigne
    * - Comments
      - Any comment on the allocation.
 
-.. topic:: Field Function
-
-   The main function defined for the resource is the default function selected.
+  
 
 .. topic:: Field Left work
 
@@ -557,9 +318,19 @@ You can have a goto button at the top of the assignments area if you are assigne
 
 .. topic:: Field Comments
 
-   When a comment exists, |note| will appear on the assignment list, and on the description of the activity on the “real work allocation” screen.
+   When a comment exists, |Comment| will appear on the assignment list, and on the description of the activity on the “real work allocation” screen.
    
    Moving the mouse over the icon will display the comment.  
+
+
+
+
+
+
+
+
+
+
 
 
 .. _recurrent-mode-assign:
@@ -567,20 +338,41 @@ You can have a goto button at the top of the assignments area if you are assigne
 Recurrent mode assignment
 =========================
 
-When you use the RECURRENT planning mode, during the assignment, ProjeQtOr offers to distribute the workload of your resource on a weekly basis which will affect the entire duration of the project. The total charge will be calculated after validation.
+The recurring planning mode is the only mode that, by default, covers the entire duration of the project.
 
-Please note, this mode adds a significant workload depending on the duration of your project.
+If the project is lengthened, then the task in recurring mode will lengthen accordingly.
 
 .. figure:: /images/GUI/GANTT_BOX_RecurrentAssignment.png
    :alt: Recurring assignment
    
    Recurring assignment
 
+
+During the assignment, you distribute the workload of your resource on a weekly basis.
+
 You can enter a different value for each day of the week.
 
-The copy button is an accelerator to copy the value entered on Monday on all other days.
+The :kbd:`copy` is an accelerator to copy the entered value on Monday every other day.
 
-   
+The total load will be calculated after validation according to the duration of your project and the assigned times.
+
+.. warning:: 
+
+   * It is a priority planning method.
+   * Using this mode can add a significant workload!.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .. _plannedintervention-assign:
 
@@ -593,11 +385,11 @@ See: :ref:`Planned interventions assignment<plannedintervention-assign>`
 
  .. compound:: Display Manual planning calendar  
 
-   * Click on |buttonAdd| to add a new assignment. 
+   * Click on |Add| to add a new assignment. 
    
    * To see the workload distribution table, select the resource and confirm. Then click on the edit button.
 
-      * If the assignment already exists, click directly on the |buttonEdit|.
+      * If the assignment already exists, click directly on the |Edit|.
 
       * The calendar will then be displayed in the assignment window..
    
@@ -634,10 +426,74 @@ The workload saved in this window will be displayed to the :ref:`planned interve
    
   
 
+.. _treatment-section: 
 
-.. raw:: latex
+Treatment section
+-----------------
 
-    \newpage
+This section contains information on the treatment of articles, ie on the life and progress of the element.
+
+It usually contains status information, macro reports, situations or those responsible for the work of this element.   
+   
+
+Depending on the item, this section may display different fields.
+
+All the lists in this section are customizable.  
+
+
+ .. compound:: Macro status
+ 
+    The macros states work thanks to levers.
+    
+    Several states are populated directly based on the information you record.
+   
+   
+    .. compound:: in progress
+    
+      The field is filled in when you fill in the first charge on your timesheet.
+
+      Please note, the date recorded in the in progress field is the date on which the charge is entered and not the day on which it is entered.
+    
+    .. compound:: Done
+    
+      The field is filled in when you fill in the last charge on your timesheet.
+
+      The remaining time MUST therefore be at 0 for this field to be completed.
+    
+    .. compound:: Closed
+    
+      The field is filled in when you close an element
+    
+    .. compound:: Cancelled
+
+      The field is filled in when you cancel the element via the status of your workflow
+
+
+
+
+.. _configuration-project:
+
+Configuration section
+---------------------
+
+
+.. figure:: /images/GUI/COMMON_ZONE_Configuration.png
+   :alt: Configuration section
+   
+   Configuration section
+   
+   
+You can view the products and product versions related to this project.
+
+Click on the product name or product version to go to their respective screens.
+
+See: :ref:`Configuration Management<ConfigurationManagement>`
+   
+   
+   
+   
+   
+
 
 .. index:: Progress section
 
@@ -749,7 +605,7 @@ If the dates entered in the validated dates are lower than the dates calculated 
 
 This then reflects a possible delay.
 
-.. figure:: /images/GUI/COMMON_ZONE_DelayDates.PNG
+.. figure:: /images/GUI/COMMON_ZONE_DelayDates.png
    :alt: planned dates greater than validated dates
    
    The planned dates are greater than validated dates 
@@ -891,9 +747,9 @@ The Technical Progress section allows you to display an advancement in units of 
    
    See: :ref:`Global Parameters<gp_planning-section>`
 
-The section technical progress is displayed on Project and Activity screen.
+The section technical progress is displayed on **Project** and **Activity** screen.
 
-you determine the number of units of work to be performed on the tasks.
+You determine the number of units of work to be performed on the activity.
 
 The progress and the rest will be consolidated towards the father project and / or the mother activity. 
 
@@ -921,7 +777,7 @@ As for the dates and durations, you can enter several values for the realization
   
    .. compound:: Calculated
    
-     Progress is calculated by software.
+     Progress as a percentage is calculated by software.
      
    .. compound:: Manual
    
@@ -955,6 +811,15 @@ As for the dates and durations, you can enter several values for the realization
 Steering
 ========
 
+
+
+.. figure:: /images/GUI/COMMON_ZONE_Steering.png
+   :alt: Steering section
+   
+   Steering section
+   
+   
+   
 .. rubric:: Progress
 
 Percentage of actual progress.
@@ -967,19 +832,47 @@ Calculated by the sum of the work done divided by sum of work reassessed.
       
       = [real work] / ( [real work] + [left work] )
 
-.. rubric:: Expected
+ .. compound:: Expected
 
-Percentage of expected progress.
+   Percentage of expected progress.
+   
+   Calculated by the sum of the work done divided by scheduled work.
+   
+      .. code:: 
+         
+         [Expected %] = [real work] / [validated work]
 
-Calculated by the sum of the work done divided by scheduled work.
+ .. compound:: WBS
 
-   .. code:: 
-      
-      [Expected %] = [real work] / [validated work]
+   Hierarchical position in the global planning.
 
-.. rubric:: WBS
+.. rubric:: Priority
 
-Hierarchical position in the global planning.
+Allows to define priority to a project or activity.
+  
+A project or an activity with a priority 
+
+By default, the value is set to "500" (medium priority).
+  
+1 being the highest priority and 999 the lowest priority.
+
+See: :ref:`Scheduling priority<scheduling-priority>`.
+
+
+
+
+
+.. _progress-section-planning-mode:
+
+.. rubric:: Planning mode
+
+Used by Activity & Test session.
+
+Depending on the planning mode selected, the calculation of your planning will not be executed in the same way.
+
+* See :ref:`Concepts<planning-mode-concept>`
+* See :ref:`Planning modes<planning-mode-gantt>`
+
 
 
 .. rubric:: Color
@@ -1007,70 +900,17 @@ Fix planning will avoid the recalculation of planning for an activity.
 To fix the project see: :ref:`treatment-section`
 
 
-.. _margin:
-
-Margin
-""""""
-
-  .. compound:: Margin (work)
-  
-    Used by Project.
-    
-    Calculated by the scheduled work minus the sum of work reassessed.
-
-    .. code:: 
-   
-      [Margin] = [Validated work] - [Reassessed work]
-   
-      [Margin(%)] = ([Validated work] - [Reassessed work]) / [Validated work] 
-
-
-  .. compound:: Margin (cost)
-
-    Calculated by the budgeted cost (resource & expense) minus the total of reassessed cost.
-
-    .. code:: 
-
-      [Margin] = [Validated cost] - [Reassessed cost]
- 
-      [Margin(%)] = ([Validated cost] - [Reassessed cost]) / [Validated cost] 
-
-Priority
-""""""""
-
-  Allows to define priority to a project or activity.
-  
-  A project or an activity with a priority 
-
-  By default, the value is set to "500" (medium priority).
-  
-  1 being the highest priority and 999 the lowest priority.
-
-  See: :ref:`Scheduling priority<scheduling-priority>`.
-
-
-
-
-
-.. _progress-section-planning-mode:
-
-Planning mode
-"""""""""""""
-
-  Used by Activity & Test session.
-
-  Depending on the planning mode selected, the calculation of your planning will not be executed in the same way.
-
-  * See :ref:`Concepts<planning-mode-concept>`
-  * See :ref:`Planning modes<planning-mode-gantt>`
-
-
 
 .. _progress-section-ticket:
 
-Ticket
-""""""
+.. rubric:: Ticket
 
+.. figure:: /images/GUI/COMMON_ZONE_SteeringTickets.png
+   :alt: Attached tickets
+   
+   Attached tickets
+   
+   
 Used by Activity.
 
 Allows tracking of tickets attached to the activity throught the "planning activity" field of tickets. 
@@ -1102,12 +942,60 @@ Allows tracking of tickets attached to the activity throught the "planning activ
 
 .. rubric:: Show tickets attached
 
-* Click on |buttonIconSearch| to show ticket list attached to the activity.
+* Click on |View| to show ticket list attached to the activity.
 * Click on a ticket name to directly move to it.
 
 .. figure:: /images/GUI/COMMON_BOX_ListOfTicket.png
    :alt: Dialog box - List of tickets 
    :align: center
+   
+   
+   
+.. _margin:
+
+Progress section Project
+------------------------
+
+.. figure:: /images/GUI/COMMON_ZONE_SteeringProject.png
+   :alt: Steering section on Project screen
+   
+   Steering section on Project screen
+   
+    
+.. rubric:: Margin
+
+The margin is only displayed in the control section of the project screen.
+   
+   
+  .. compound:: Margin (work)
+  
+    Used by Project.
+    
+    Calculated by the scheduled work minus the sum of work reassessed.
+
+    .. code:: 
+   
+      [Margin] = [Validated work] - [Reassessed work]
+   
+      [Margin(%)] = ([Validated work] - [Reassessed work]) / [Validated work] 
+
+
+  .. compound:: Margin (cost)
+
+    Calculated by the budgeted cost (resource & expense) minus the total of reassessed cost.
+
+    .. code:: 
+
+      [Margin] = [Validated cost] - [Reassessed cost]
+ 
+      [Margin(%)] = ([Validated cost] - [Reassessed cost]) / [Validated cost] 
+
+
+
+
+
+
+
 
 
 
@@ -1228,6 +1116,8 @@ Sub-Project and Sub-Activity
 
 On the projects screen, this section allows you to display the sub-projects linked to the selected one.
 
+Click on the name of the sub-project to access its dedicated screen.
+
 .. figure:: /images/GUI/COMMON_ZONE_SubProject.png
    :alt: display of sub projects
    
@@ -1235,6 +1125,8 @@ On the projects screen, this section allows you to display the sub-projects link
  
  
 In the same way, you can display on the activities screen, the sub-activities linked to the selected activity.
+
+Click on the name of the sub-activity to access its dedicated screen.
 
 .. figure:: /images/GUI/COMMON_ZONE_SubActivity.png
    :alt: display of sub activities
@@ -1276,26 +1168,18 @@ Click on the name of a predecessor or successor to go directly to the element.
    Predecessor and Successor section
 
 
-.. rubric:: Predecessors and successors
+* Click on |Add| on the corresponding section to add a dependency link.
+* Click on |Edit| to edit the dependency link.
+* Click on |Delete| to delete the corresponding dependency link. 
 
-* Click on |buttonAdd| on the corresponding section to add a dependency link.
-* Click on |buttonEdit| to edit the dependency link.
-* Click on |buttonIconDelete| to delete the corresponding dependency link. 
-
-.. figure:: /images/GUI/COMMON_BOX_Success&Predecessor.png
-   :alt: Dialog box - Predecessor or Successor element
-   :align: center
-   :scale: 80%
-
-   Dialog box - Predecessor or Successor element
 
 In the NAME field, icons are displayed to indicate the type of dependencies
 
-|iconEE| End End dependency
+* |DependancyEE| End End dependency
 
-|iconES| End start dependency
+* |DependancyES| End start dependency
 
-|iconEE| End End dependency
+* |DependancySS| Start start dependency
 
 
 
@@ -1310,12 +1194,12 @@ In the NAME field, icons are displayed to indicate the type of dependencies
 
    But, it is possible to link items from different projects.
    
-   Click on |buttonIconSearch| to get the list of elements of all projects.   
+   Click on |Search| to get the list of elements of all projects.   
    
 
    **Multi-value selection**
 
-   Multi-line selection is possible using :kbd:`Control` key while clicking.
+   Multi-line selection is possible using :kbd:`Control` or :kbd:`Shift` key while clicking.
    
 
    **Delay (late)**
@@ -1339,86 +1223,74 @@ Highlighting the date that will most constrain the next activity
 Linked Elements section
 -----------------------
 
-This section allows to manage link between items of elements.
+This section allows to manage link between ProjeQtOr elements.
 
-.. rubric:: Used for
+.. figure:: /images/GUI/COMMON_ZONE_LinkedElement.png
+   :alt: Linked element section
+   
+   Linked element section
 
-Allows to associate items on different elements in the same project.
+
+You associate items on different elements in the same project.
 
 A project can be linked with other.
 
+Click on an item name to directly move to it.
 
-.. note:: Access to an item
+   * Click on |Add| to create a new link.
+   * Click on |Delete| to delete the corresponding link.
 
-   Click on an item name to directly move to it.
+      
+
+ .. compound:: Reciprocally interrelated
+
+   If Item A is linked to Item B, Item B is automatically linked to Item A.
    
-   Click on |buttonIconBackNavigation| to return to the last screen. 
-   
-   More detail, see: :ref:`Top bar <navigation-buttons>`
-
-
-.. rubric:: Reciprocally interrelated
-
-If Item A is linked to Item B, Item B is automatically linked to Item A.
-
-.. note::
-
    A link between items has no impact on them treatment.
    
-
-.. rubric:: Linked elements list
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Fields of linked elements list
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Element
-     - Type and id of the linked element.
-   * - Name
-     - Name of the linked element.
-   * - Date
-     - Date of creation of the link.
-   * - User
-     - User who created the link.
-   * - Status
-     - Actual status of the linked element.
-
-.. rubric:: Linked elements list buttons
-
-* Click on |buttonAdd| to create a new link.
-* Click on |buttonIconDelete| to delete the corresponding link.
-
-.. figure:: /images/GUI/COMMON_BOX_AddLink.png
-   :alt: Dialog box - Add a link with element 
-   :align: center
+      
+ .. compound:: Linked element list of values
    
-   Add a link with element
+      By default, the list of values shows items of the same project. 
+      
+      But, it is possible to link items from different projects.
+      
+      Click on |Search| to get the list of elements of all projects.    
 
-.. topic:: Linked element list of values
 
-   By default, the list of values shows items of the same project. But, it is possible to link items from different projects.
+
+ .. compound:: Link with Document
+ 
+   .. figure:: /images/GUI/COMMON_BOX_LinkedElement.png
+      :alt: Add a new link to a document
+      
+      Add a new link to a document
+
+  When a link to a document is selected. The document version can be selected.
    
-   Click on |buttonIconSearch| to get the list of elements of all projects.    
+   
+  .. image:: /images/GUI/COMMON_ZONE_LinkedDocument.png
 
-.. rubric:: Link with Document
+  Linked documents are available directly in linked elements list.
+  
 
-When a link to a document is selected. The document version can be selected. (See options below)
-Linked documents are available directly in linked elements list.
 
- .. compound:: **Specified version**
 
-    A link with a document element offer the possibility to select a specific version.
-    
-    A direct link to version of the document is created.
+    .. compound:: Specified version
+   
+       A link with a document element offer the possibility to select a specific version.
+       
+       A direct link to version of the document is created.
+   
+    .. compound:: Not specified version
+   
+       If the version is not specified, the last version will be selected.
+       
+       The download will transfer always the last version of the document.
 
- .. compound:: **Not specified version**
 
-    If the version is not specified, the last version will be selected.
-    
-    The download will transfer always the last version of the document.
+
+
 
 .. raw:: latex
 
@@ -1431,108 +1303,69 @@ Linked documents are available directly in linked elements list.
 Attachments section
 -------------------
 
-This section allows to attach files or hyperlinks to items of elements.
+This section allows you to attach files or hyperlinks to the selected item.
 
-.. rubric:: Document viewer available
 
-* image
-* text
-* PDF
-* Hyperlinks
-
-.. figure:: /images/GUI/COMMON_ZONE_AttachmentSection.PNG
-   :alt: Attachment Section
+.. figure:: /images/GUI/COMMON_ZONE_AttachmentSection.png
+   :alt: Attachments section
    :align: center
    
    Attachment section
 
+You can attach all types of files
 
-.. note:: 
+
+ .. compound:: Add a new file
+
+   There are several ways to add a file.
    
-   If you do not fill in the description then the exact name of the document will be displayed
+   * In the section table of attached files
    
-   see the ID#9 document in the table.
+      * Click on |Add| to add an attachment file to an item.
+      * Click on |Link| to add a hyperlink to an item.
+     
+   * In the attached files area in the toolbar of the details area
    
-   If the desciption field is filled then this text will be displayed 
+   * Directly on the detail area of ​​the element by dragging and dropping
    
-   see the ID#11 document in the table
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Fields of attachments list
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the attachment.
-   * - File
-     - File name or hyperlink.
-   * - Date
-     - Date of creation of the attachment.
-   * - User
-     - User who created the attachment.
-
-
-.. rubric:: the attachment
-
-Select an attachment depends on whether is a file or a hyperlink.
-
-  * Click on |buttonAdd| to add an attachment file to an item. See: :ref:`To upload a file<attachment-file>`
-  * Click on |buttonIconDelete| to delete an attachment.
-  * Click on |iconLink| to add hyperlink to an item.
-  * Click on |iconDownload| to download attachment file.
-  * Click on |iconLink| to access to hyperlink.
-
-.. _attachment-file:
-
-.. compound:: **To upload a file**
-
-   Select file with "Browse" button or drop the file in "drop files here" area.
    
-   Attached files are stored on server side.
+      
+   .. figure:: /images/GUI/COMMON_BOX_attachmentFile.png
+      :alt: Add an attachment file window
+      :align: center
+      
+      Add an attachment file window
    
-   Attachments directory is defined in :ref:`Global parameters<file-directory-section>` screen.
+   * Filled in the description to give a name to the document will be attached.
    
-   You can select one or more files of different types with the CTRL shortcuts when the files are not consecutive or SHIFT for those that follow.
-
-    .. figure:: /images/GUI/COMMON_BOX_attachmentFile.png
-       :alt: Dialog box - Attachment for file
-       :align: center
-
-       Attachment for file
+   * Hover over the icon |Comment| to see the exact name of the document. Otherwise, the exact name of the document will be displayed.
+     
+     * Click on |Delete| to remove an attachment.
+     * Click on |Download| to download the attached file.
+     * Click on |Link| to access the hyperlink.
    
-
-.. compound:: **Hyperlink**
-
-   Enter hyperlink in «Hyperlink» field.
-
-    .. figure:: /images/GUI/COMMON_BOX_attachmentHyperLink.png
-       :alt: Dialog box - Attachment for hyperlink
-       
-       Attachment for hyperlink
-
    
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Fields - Attachment dialog box
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Description
-     - Description of attachment.
-   * - Public
-     - Attachment is visible to anyone.
-   * - Team
-     - Attachment is visible to every member of the creator’s team.
-   * - Private
-     - Attachment is visible only to the creator.
+   You can select one or more files of different types with the shortcuts :kbd:`CTRL` when the files are not consecutive or :kbd:`SHIFT` for those that follow.
 
 
-.. raw:: latex
 
-    \newpage
+.. _file attached:
+
+ .. compound:: Download a file
+   
+   Attachments are stored on the server side.
+   
+   The attachment directory is defined in: ref:`Global Settings<file-directory-section>`.
+
+
+
+
+
+
+
+
+
+
 
 .. index:: Notes (section)
 
@@ -1545,46 +1378,24 @@ This section allows to add notes on items of elements.
 
 Notes are comments, that can be shared to track some information or progress.
 
-.. rubric:: Predefined note
+* Click on |Add| to add a note to an item. 
+* Click on |Edit| to edit the note.
+* Click on |Delete| to delete the note.
 
-The list of values appears whether a predefined note exists for an element or an element type.
-
-Selecting a predefined note  will automatically fill in the note text field.
-
-Predefined notes are defined in :ref:`predefined-notes` screen.
-
-.. rubric:: Note visibility
-
-* **Public:** Visible to anyone.
-* **Team:** Visible to every member of the creator’s team.
-* **Private:**  Visible only to the creator.
-
-.. rubric:: Notes list
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Fields of notes list
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the note.
-   * - Note 
-     - Text of the note.
-   * - Date
-     - Date of creation or modification of the note.
-   * - User
-     - Name of the user who created the note.
-
-.. rubric:: Notes list buttons
-
-* Click on |buttonAdd| to add a note to an item. 
-* Click on |buttonEdit| to edit the note.
-* Click on |buttonIconDelete| to delete the note.
-
-.. figure:: /images/GUI/COMMON_BOX_Note.png
-   :alt: Dialog box - Note 
-   :align: center
+  .. compound:: Predefined note
    
-   dialog box notes
+   The list of values appears whether a predefined note exists for an element or an element type.
+   
+   Selecting a predefined note  will automatically fill in the note text field.
+   
+   Predefined notes are defined in :ref:`predefined-notes`.
+   
+  .. compound:: Note visibility
+   
+   * **Public:** Visible by all members assigned to the project.
+   * **Team:** Visible to every member of the creator’s team.
+   * **Private:**  Visible only to the creator.
+
+
+
+
