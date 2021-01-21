@@ -502,7 +502,7 @@ Graphically, you can see any delay or incompatibility.
 
 
 Click on |New| to add an activity.
-Click on |Filter| to filter the version display.  
+Click on |Filters| to filter the version display.  
 
 .. figure:: /images/GUI/CONF_ZONE_Options.png
    :alt: Show options
