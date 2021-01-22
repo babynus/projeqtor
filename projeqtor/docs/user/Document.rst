@@ -188,7 +188,7 @@ A document can evolve following four ways defined as versioning type :
 * Click on |Add| to display the pop up.
 
 
-.. figure:: /images/GUI/BOX_DocumentVersion.png
+.. figure:: /images/GUI/DOCUMENT_BOX_DocumentVersion.png
    :alt: Dialog box - Document version 
    :align: center
    
