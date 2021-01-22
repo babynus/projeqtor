@@ -175,14 +175,14 @@ class SubTask extends SqlElement {
     }else if($idle==1){
       $pos=4;
     }
-    echo '<div>';
+    echo '<div id="'.$refType.'_'.$refId.'_slidContainer_'.$id.'">';
     echo '<table style="width:100%;height:100%;margin-top:5%;">';
       echo '<tr>';
         echo ' <td style="width:10%;height:100%;">';
         echo '<div id="'.(($id==0)?$refType.'_'.$refId.'_prev_'.$id:'prev_'.$id).'" class="prev" style="'.(($id==0)?'display:none':'').'" onclick="'.(($id!=0)?"nextSlides('prev',".$id.",'".$refType."',".$refId.");":"").'">&#10094;</div>';
         echo ' </td>';
         echo ' <td style="width:80%;height:100%;">';
-          echo '<div id="'.$refType.'_'.$refId.'_slidContainer_'.$id.'" class="slideshow-container" style="width:100%;">';
+          echo '<div  class="slideshow-container" style="width:100%;">';
           echo '<input id="'.(($id==0)?$refType.'_'.$refId.'_pos_'.$id:'pos_'.$id).'" value="'.$pos.'" hidden />';
           
           echo '<div class="mySlides fade" style="'.(($done==0 && $idle==0 && $handled==0)?'display:block;':'display:none;').'">';
