@@ -583,13 +583,13 @@ class PlannedWorkManual extends GeneralWork {
           $valueRefId = $pe->refId;
         }
       }
-      echo '<tr id="'.$pe->refId.'" style="border:1px solid #a0a0a0;cursor:'.$cursor.'" class="interventionActivitySelector '.$class.'">';
+      echo '<tr id="'.$pe->refId.'" style="border:1px solid #a0a0a0;cursor:'.$cursor.'" class="interventionActivitySelector'.$pe->id.' interventionActivitySelector '.$class.'">';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$nameWidth.'px" '.$onClick.'>'.$projList[$pe->idProject].'</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" '.$onClick.'>#'.$pe->refId.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" '.$onClick.'>'.$colorBadge.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >';
-      echo '  <table style="width:100%" ><tr>';
-      echo '          <td style="width:90%" '.$onClick.'>'.$pe->refName.'</td>';
+      echo '  <table style="width:100%;" ><tr>';
+      echo '          <td style="width:90%;" '.$onClick.'><div style="max-height:30px;overflow:hidden;">'.$pe->refName.'</div></td>';
       $goto=($readonly or $readonlyHabil)?'':'onClick="gotoElement('."'".$pe->refType."','".htmlEncode($pe->refId)."'".');"';
       if($class=='dojoxGridRowSelected'){
         $iconGoto='<div class="iconGotoWhite16 iconGoto iconSize16 imageColorNewGui" style="z-index:500;width:16px;height:16px;;" title="">&nbsp;</div>';
