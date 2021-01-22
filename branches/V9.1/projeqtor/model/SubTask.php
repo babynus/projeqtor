@@ -133,7 +133,7 @@ class SubTask extends SqlElement {
                     htmlDrawOptionForReference('idResource',$subTask->idResource,$obj,false,$critFld,$critVal);
         echo      '</select>';
         echo    '</td>';
-        echo    '<td class="linkData" id="statusNewSubTask_'.$subTask->id.'" style="white-space:nowrap;text-align: center;">';
+        echo    '<td class="linkData"  style="white-space:nowrap;text-align: center;padding:0px;">';
                   $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId);
         echo    '</td>';
         echo  '</tr>';
@@ -156,7 +156,7 @@ class SubTask extends SqlElement {
                 htmlDrawOptionForReference('idResource',null,$obj,false,$critFld,$critVal);
     echo      '</select>';
     echo    '</td>';
-    echo    '<td class="linkData" style="white-space:nowrap;text-align: center;">';
+    echo    '<td class="linkData" style="white-space:nowrap;text-align: center;padding:0px;">';
     echo      '<input id="'.$refType.'_'.$refId.'_sortOrder_0" value="'.$lastSort.'" hidden />';
                $subTask->drawStatusSubTask('0','0','0','0',$refType,$refId);
     echo    '</td>';
@@ -166,39 +166,50 @@ class SubTask extends SqlElement {
   }
   
   function drawStatusSubTask($id, $done, $idle, $handled,$refType,$refId){
-    echo '<div id="'.$refType.'_'.$refId.'_slidContainer_'.$id.'" class="slideshow-container" style="width:100%;">';
 
-    
-    echo '<div class="mySlides fade" style="'.(($done==0 && $idle==0 && $handled==0)?'display:block;':'display:none;').'">';
-    echo '  <div class="slideStatus"></div>';
-    echo '</div>';
-    
-    echo '<div class="mySlides fade" style="'.(($done==1)?'display:block;':'display:none;').'">';
-    echo '  <div class="slideStatus"><span>'.i18n('colHandled').'</span></div>';
-    echo '</div>';
-    
-    echo '<div class="mySlides fade" style="'.(($handled==1)?'display:block;':'display:none;').'">';
-    echo '  <div class="slideStatus"><span>'.i18n('done').'</span></div>';
-    echo '</div>';
-    
-     echo '<div class="mySlides fade" style="'.(($idle==1)?'display:block;':'display:none;').'">';
-     echo   '<div class="slideStatus" ><span>'.i18n('colIdle').'</span></div>';
+    $pos=1;
+    if($handled==1){
+      $pos=2;
+    }else if($done==1){
+      $pos=3;
+    }else if($idle==1){
+      $pos=4;
+    }
+    echo '<div>';
+    echo '<table style="width:100%;height:100%;margin-top:5%;">';
+      echo '<tr>';
+        echo ' <td style="width:10%;height:100%;">';
+        echo '<div id="'.(($id==0)?$refType.'_'.$refId.'_prev_'.$id:'prev_'.$id).'" class="prev" style="'.(($id==0)?'display:none':'').'" onclick="'.(($id!=0)?"nextSlides('prev',".$id.",'".$refType."',".$refId.");":"").'">&#10094;</div>';
+        echo ' </td>';
+        echo ' <td style="width:80%;height:100%;">';
+          echo '<div id="'.$refType.'_'.$refId.'_slidContainer_'.$id.'" class="slideshow-container" style="width:100%;">';
+          echo '<input id="'.(($id==0)?$refType.'_'.$refId.'_pos_'.$id:'pos_'.$id).'" value="'.$pos.'" hidden />';
+          
+          echo '<div class="mySlides fade" style="'.(($done==0 && $idle==0 && $handled==0)?'display:block;':'display:none;').'">';
+          echo '  <div class="slideStatus">&nbsp;</div>';
+          echo '</div>';
+          
+          echo '<div class="mySlides fade" style="'.(($done==1)?'display:block;':'display:none;').'">';
+          echo '  <div class="slideStatus"><span  style="font-weight: bolder;">'.i18n('colHandled').'</span></div>';
+          echo '</div>';
+          
+          echo '<div class="mySlides fade" style="'.(($handled==1)?'display:block;':'display:none;').'">';
+          echo '  <div class="slideStatus"><span  style="font-weight: bolder;">'.i18n('done').'</span></div>';
+          echo '</div>';
+          
+           echo '<div class="mySlides fade" style="'.(($idle==1)?'display:block;':'display:none;').'">';
+           echo   '<div class="slideStatus" ><span style="font-weight: bolder;">'.i18n('colIdle').'</span></div>';
+           echo '</div>';
+
+           echo '</div>';
+         echo ' </td>';
+         echo ' <td style="width:10%;height:100%;" >';
+         echo '<div  id="'.(($id==0)?$refType.'_'.$refId.'_next_'.$id:'next_'.$id).'" class="next" style="'.(($id==0)?'display:none':'').'"  onclick="'.(($id!=0)?"nextSlides('next',".$id.",'".$refType."',".$refId.");":"").'">&#10095;</div>';
+         echo ' </td>';
+       echo '</tr>';
+     echo '</table>';
      echo '</div>';
-    
-     $pos=1;
-     if($handled==1){
-       $pos=2;
-     }else if($done==1){
-       $pos=3;
-     }else if($idle==1){
-       $pos=4;
-     }
      
-     echo '<input id="'.(($id==0)?$refType.'_'.$refId.'_pos_'.$id:'pos_'.$id).'" value="'.$pos.'" hidden />';
-     echo '<div id="'.(($id==0)?$refType.'_'.$refId.'_prev_'.$id:'prev_'.$id).'" class="prev" style="'.(($id==0)?'display:none':'').'" onclick="'.(($id!=0)?"nextSlides('prev',".$id.",'".$refType."',".$refId.");":"").'">&#10094;</div>';
-     echo '<div  id="'.(($id==0)?$refType.'_'.$refId.'_next_'.$id:'next_'.$id).'" class="next" style="'.(($id==0)?'display:none':'').'"  onclick="'.(($id!=0)?"nextSlides('next',".$id.",'".$refType."',".$refId.");":"").'">&#10095;</div>';
-    
-     echo '</div>';
   }
   
   

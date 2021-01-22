@@ -7999,7 +7999,7 @@ function showResizerGanttBar (vID,val) {
 
 
 function saveGanttElementResize(element,refId,id,dateStart,dateEnd,duration){
-  var param="?id="+id+"&object="+element+"&idObj="+refId+"&startDate="+dateStart+"&endDate="+dateEnd+"&duration="+duration;
+  var param="?id="+id+"&object="+element+"&idObj="+refId+"&startDate="+dateStart+"&endDate="+dateEnd+"&duration="+duration;H
   var url= "../tool/savePlanningElementAfterResize.php"+param;
   dojo.xhrGet({
     url : url,

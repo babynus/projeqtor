@@ -125,6 +125,7 @@ function drawTableFromObjectList($objectList) {
 			}
 		}
 		if ($format=='tab') {
+		  debugLog($format);
 		  if ($hasSection) {
 		    echo '</table></div><br/>'; // close the section level
 		  }
