@@ -265,6 +265,7 @@ class ActivityPlanningElementMain extends PlanningElement {
         self::$_fieldsAttributes['unitLeft']='readonly';
         self::$_fieldsAttributes['unitProgress']='';
         self::$_fieldsAttributes['unitWeight']='';
+        self::$_fieldsAttributes["_label_weight"]='';
         self::$_fieldsAttributes['idProgressMode']='size1/3,';
         self::$_fieldsAttributes['idWeightMode']='size1/3,';
       }else{
