@@ -123,7 +123,9 @@
     <copy todir="${deploy.dir}/files" file="${src.dir}/files/index.php" />
     <copy todir="${deploy.dir}/files/attach" file="${src.dir}/files/index.php" />
     <copy todir="${deploy.dir}/files/attach/import" file="${src.dir}/files/index.php" />
+    <copy todir="${deploy.dir}/files/thumbs" file="${src.dir}/files/index.php" />
     <copy todir="${deploy.dir}/files/config" file="${src.dir}/files/index.php" />
+    <copy todir="${deploy.dir}/files/images" file="${src.dir}/files/index.php" />
     <copy todir="${deploy.dir}/files/logs" file="${src.dir}/files/index.php" />
     <copy todir="${deploy.dir}/files/report" file="${src.dir}/files/index.php" />
     <copy todir="${deploy.dir}/files/cron" file="${src.dir}/files/index.php" />
