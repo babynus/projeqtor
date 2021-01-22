@@ -11,7 +11,7 @@
 .. _document:
 
 Documents
----------
+*********
 
 .. sidebar:: Concepts 
 
@@ -95,26 +95,11 @@ When a document is locked the following fields are displayed.
    
    Lock document section
    
-  
+* Locked: box checked indicates the document is locked.
+* Locked by: user who locked the document.
+* Locked since: date and time when document was locked.
 
-
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Fields when the document is locked
-   :widths: 20, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Locked
-     - Box checked indicates the document is locked.
-   * - Locked by
-     - User who locked the document.
-   * - Locked since
-     - Date and time when document was locked.
-
-.. compound:: lock/unlock this document
+ .. compound:: lock/unlock this document
  
    * Button to lock or unlock the document to preserve it from being editing, or new version added.
          
@@ -141,7 +126,7 @@ When a document is locked the following fields are displayed.
 .. _versioning:
 
 Document versioning
-___________________
+-------------------
 
 This section allows to manage version list of document.
 
@@ -156,29 +141,12 @@ Type of versioning must be defined for a document.
    
    Versioning section
    
-   
-.. tabularcolumns:: |l|l|
 
-.. list-table:: Required field |ReqFieldLegend|
-   :widths: 40, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - |RequiredField| Versioning type
-     - Type of versioning for the document.
-   * - Last version
-     - Caption of the last version of the document.
-   * - :term:`Status`
-     - Status of the last version of the document.
-
-
-
-* Click on |buttonAdd| to add a new version. 
-* Click on |iconDownload| to download file at this version.
-* Click on |buttonEdit| to modifiy a version.
-* Click on |buttonIconDelete| to delete a version.
-* Click on |ListApprovers| to display the history for approvals for version
+* Click on |Add| to add a new version. 
+* Click on |Download| to download file at this version.
+* Click on |Edit| to modifiy a version.
+* Click on |Delete| to delete a version.
+* Click on |List| to display the history for approvals for version
 
    
   
@@ -217,7 +185,7 @@ A document can evolve following four ways defined as versioning type :
 .. rubric:: Document viewer
 
 * Document viewer available for image, text and PDF files.
-* Click on |buttonAdd| to display the pop up.
+* Click on |Add| to display the pop up.
 
 
 .. figure:: /images/GUI/BOX_DocumentVersion.png
@@ -237,31 +205,6 @@ A document can evolve following four ways defined as versioning type :
 
 
 
-.. tabularcolumns:: |l|l|
-
-.. list-table::  Fields - Document version dialog box
-   :widths: 20, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - File
-     - This button allows to upload locale file.
-   * - Last version
-     - Caption of the last existing version.
-   * - Update
-     - Importance of the update concerned by the new version.
-   * - New version
-     - New caption for the created version.
-   * - Date
-     - Date of the version.
-   * - Status
-     - Current status of the version.
-   * - Is a reference
-     - Check box to set this version is the new reference of the document.
-   * - Description
-     - Description of the version.
-
 .. rubric:: Field "Update"
 
 A version can have a draft status, that may be removed afterwards.
@@ -278,7 +221,7 @@ Reference version is displayed in bold format in the versions list.
    
 May be used to describe updates brought by the version.
 
-This icon |Note| appears when the description field is filled.
+This icon |Comment| appears when the description field is filled.
 
 Moving the mouse over the icon will display description text.
 
@@ -289,7 +232,7 @@ Moving the mouse over the icon will display description text.
 
 
 Approval process
-________________
+----------------
 
 
 .. figure:: /images/GUI/DOCUMENT_ZONE_Approvers.png
@@ -299,11 +242,13 @@ ________________
    
       
 You can define approvers for a document.
-  
-* Click on |buttonAdd| to add an approver
-* Click on |buttonIconDelete| to delete an approver
 
-.. warning :: Only users assigned to the project linked to the document can be added
+Only users assigned to the project linked to the document can be added.
+  
+* Click on |Add| to add an approver
+* Click on |Delete| to delete an approver
+
+
     
 When an approver is created in the list, the approver is also automatically added to the latest version of the document.
    
@@ -314,24 +259,10 @@ When adding a version to the document, approvers are automatically added to the 
 
 
 Each approver can see the list of documents to approve on their Today screen.
-
-
-
-.. figure:: /images/GUI/DOCUMENT_ZONE_ApproverValidation.png
-   :alt: Details zone for the approvers
-   
-   Document details area for the approvers
-   
-   
    
 On the Documents screen, the approver can approve or reject the document.
 
 Once the document is approved, the line is then checked and the date and time of the approval recorded.   
-
-.. figure:: /images/GUI/DOCUMENT_ZONE_DocumentApprove.png
-   :alt: Document is approved
-   
-   Document is approved
 
 When all approvers have approved the document version, it is considered approved and then appears with a check mark in the list of versions.
   
@@ -367,57 +298,18 @@ Document directories
 Document directories management allows to define a structure for document storage.
 
 * The files of document will be stored in the folder defined by the parameters  **Document root** and **Location**.
+
 * **Document root** is defined in :ref:`Global parameters<file-directory-section>` screen. 
 
-.. rubric:: Section Description
+* **Location** is automatically defined as «Parent directory» / «Name».
 
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required field |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the directory.
-   * - |RequiredField| Name
-     - Name of the directory.
-   * - Parent directory
-     - Name of the parent directory to define hierarchic structure.
-   * - Location
-     - Folder where files will be stored.
-   * - Project
-     - Directory is dedicated to this project.
-   * - Product
-     - Directory is dedicated to this product.
-   * - Default type
-     - Type of document the directory is dedicated to.
-   * - :term:`Closed`
-     - Flag to indicate that directory is archived.
- 
-.. topic:: Field **Parent directory**
-
-   The current directory is then a sub-directory of parent.
-
-.. topic:: Field **Location**
-
-   Location is automatically defined as «Parent directory» / «Name».
-
-.. topic:: Field **Project**
-
-   This project will be the default to new stored documents in this directory.
-
-.. topic:: Field **Product**
-
-   This product will be the default to new stored documents in this directory.
+* **Product** will be the default to new stored documents in this directory.
    
-   If the project is specified, the list of values contains the products linked the selected project.
-   
-   If the project is not specified, the list of values contains all products defined.
+   - If the project is specified, the list of values contains the products linked the selected project.
+      
+   - If the project is not specified, the list of values contains all products defined.
 
-.. topic:: Field **Default type**
-
-   This document type will be the default to new stored documents in this directory.
+* The **Default type** will be the default to new stored documents in this directory.
 
 
 
