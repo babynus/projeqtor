@@ -38,7 +38,7 @@ We offer you a small overview of the major developments and you will find the fu
    ProjeQtOr offers you a whole new interface, more intuitive and more ergonomic.
    Finally a complete and sexy tool!
    
-   :ref:`gui9.0`
+   :ref:`gui`
       
          
 
