@@ -4247,34 +4247,31 @@ div.ticketKanbanCustom .kanbanVersion{
 
 .prev {
 	cursor: pointer;
-    position: absolute;
+    position: relative;
     width: 8px;
-    left:0px;
+    float:left;
     font-size: 18px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
     color: #ffffff;
-    background-color: black;
-   	z-index:10;
+    background-color: #0000001c;
 }
 .next {
     cursor: pointer;
     position: relative;
-    left:90%;
+    float:right;
     width: 8px;
     color: #ffffff;
-    background-color: black;
+    background-color: #0000001c;
     font-size: 18px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
-   	z-index:10;
 }
 
 .slideStatus{
 	vertical-align: middle;
-    padding-top: 10%;
     position: relative;
 }
 
@@ -4289,5 +4286,4 @@ div.ticketKanbanCustom .kanbanVersion{
 
 .mySlides {
 	width:100%;
-	z-index:5
 }
