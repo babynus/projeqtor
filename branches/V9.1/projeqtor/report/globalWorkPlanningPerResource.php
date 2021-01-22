@@ -90,7 +90,8 @@ $user=getSessionUser();
 $queryWhere=getAccesRestrictionClause('Activity','t1',false,true,true);
 
 if ($idResource!='') {
-  $queryWhere.=  " and t1.idProject in " . getVisibleProjectsList(true, $idResource) ;
+  //$queryWhere.=  " and t1.idProject in " . getVisibleProjectsList(true, $idResource) ;
+  $queryWhere.=  " and t1.idResource = " . Sql::fmtId($idResource) ;
 } 
 //   //
 // }
@@ -171,6 +172,9 @@ for ($i=1;$i<=2;$i++) {
   }
 }
 if (checkNoData($tab)) if (!empty($cronnedScript)) goto end; else exit;
+
+// Sort resources on name
+uasort ( $tab , function ($a, $b) {  return strnatcmp($a["name"],$b["name"]); } );
 
 $arrDates=array();
 $arrYear=array();
@@ -274,7 +278,7 @@ foreach($tab as $res=>$lists) {
       }
       $val=null;
       if (array_key_exists($mode, $lists) and array_key_exists($date,$lists[$mode])) {
-        $val=round($lists[$mode][$date],2);
+        $val=round($lists[$mode][$date],((Work::getWorkUnit()=='hours')?5:2));
       }
       $styleDate=$style;
       if ($capaResDate[$res][$date]<$val) {   
