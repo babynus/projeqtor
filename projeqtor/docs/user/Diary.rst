@@ -23,7 +23,7 @@ Just click on any task to access directly.
 Calendar selector
 =================
 
-.. figure:: /images/GUI/Planning_SCR_DiaryPresentation.png
+.. figure:: /images/GUI/DIARY_SCR_DiaryPresentation.png
    :alt: Diary calendar selector
    :align: center
    
