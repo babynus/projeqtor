@@ -92,27 +92,35 @@ Parameters to determine the units used to calculate the actual work
 
 Defines behavior of tasks in the real work allocation screen.
 
-   .. compound:: Display only handled tasks
+   .. compound:: Display only started tasks
    
-      Display only tasks with "handled" status.
+      Display only tasks with the :ref:`Macro status<treatment-section>` activated.
    
-   .. compound:: Set to first 'handled' status
+   .. compound:: Set to first 'in progress' status
    
-      Change status of the task to the first "handled" status when  real work is entered.
+      Change the status of the task to the first "in progress" status when actual work is entered.
    
    .. compound:: Set to first 'done' status
    
       Change status of the task to the first "done" status when no left work remains.
+      
+   .. compound:: Show only notes on Activity Stream
+   
+      if so, you will not see the status change and item update.
    
    .. compound:: Max days to book work (warning) :
    
       Number of days that user can enter real work in the future before getting a warning.
+      
+      Leave blank if you do not want warning.
       
       This parameter does not apply to administrative projects
     
    .. compound:: Max days to book work (blocking)
    
       Number of days that user can enter real work in the future. This limit is blocking.
+      
+      Leave blank if you do not want blocking.
      
       This parameter does not apply to administrative projects.
   
@@ -160,6 +168,7 @@ Tab Activity
    * :ref:`Planning<gp_planning-section>`
    * :ref:`Tickets<globalParam_tickets>`
    * :ref:`Organization<gp-organization-section>`
+   * :ref:`Pools of resources<gp-pool-section>`
    * :ref:`Automation<GlobalParam_automation>`
    * :ref:`Milestones<gp-milestones-section>`
    * :ref:`Control and restriction<gp-control-restict-section>`
@@ -215,15 +224,15 @@ Specific parameters about Gantt planning presentation.
     
    .. compound:: Effect of capacity on planned interventions 
       
-      **Limit duration**
+      * **Limit duration**
       
       Limit duration a resource with capacity 0.8 can be planned only one half-day of 0.5d   
       
-      **Determine Duration**
+      * **Determine Duration**
       
       Determine duration a resource with capacity 0.8 can be planned on 2 half-days of 0.4d each
       
-      **none**
+      * **none**
       
       A resource with capacité 0.8 can be planned on 2 half-days of 0.5d each    
 
@@ -301,12 +310,7 @@ Parameters to manage automations
          * **Always**: Values are replaced on activities and project.(erase parents)
          * **Only is set**: Replaces values ( excepted if set by null or stay not indicated,do not erase parents)
 
-.. figure:: /images/GUI/COMMON_ZONE_ParamConsolidation.png
-      :alt: Consolidation work
-      :align: center
-      
-      Consolidation work
-   
+  
   
 .. _auto-responsible:
 
@@ -439,15 +443,15 @@ Graphic interface behavior and generic display parameters.
 
    .. compound:: Name of the instance
    
-      Change the window's name. The name appears at the top center of the window
+      Change the window's name. The name appears at the top center of the window.
    
    .. compound:: Display in fading mode
    
       Transition between screen changes in flash or fade mode.
    
-   .. compound:: Max items to display in Today lists
+   .. compound:: Max number of projects on today
    
-      Limit the display of the "today list". items are generally ordered by issue date increasing
+      Limit the display of the "today list". items are generally ordered by issue date increasing.
    
    .. compound:: Quick filtering by status
    
@@ -470,17 +474,48 @@ Choose how the monetary units behave in your area
 
 .. _gp-default-values-section:
 
-.. rubric:: Default values
+.. rubric:: Default values for user parameters
 
 Default values for user 
 
+
+    
+
+   .. compound:: New interface
+   
+      Choose between interface v8.6 or the new interface v9.0
+
+   .. compound:: Theme colors
+   
+      The v9.0 interface is composed of two main colors which are declined throughout the application in different hues and saturation to keep the same charter spirit.
+      
+      
+         .. compound:: Interface main color
+            
+            Choose the main color that will be applied to the main architectural elements
+      
+         .. compound:: Interface secondary color
+      
+            Choose the secondary color that will be applied on the navigation and highlighting elements
+            
+            
+         .. compound:: Color discs
+         
+            You have pre-recorded color discs available. One offers the colors of classic ProjeQtOr. Two others are proposals. The fourth will take the colors that you have saved in the global settings for your instances.
+      
+            They are accelerators to apply your themes.
+   
+
+
+
+
    .. compound:: Default language
    
-      Choose among 19 languages / easy come back with translation in target language
+      Choose among 19 languages / easy come back with translation in target language.
    
    .. compound:: Default theme
    
-      More than 30 themes choices
+      More than 30 themes choices. Available only with version v8.6. 
    
    .. compound:: First page
    
@@ -488,29 +523,40 @@ Default values for user
    
    .. compound:: Icone size in menu
    
-      Icon size are default : user can overwrite these values
+      Icon size are default : user can overwrite these values.  Available only with version v8.6.
    
    .. compound:: Display of the upper menu
    
-      Icones are hidden or no.
+      The top menu is invisible or not at each connection. Available only with version v8.6.
    
    .. compound:: Display of the left menu
    
-      Appears by icones or in wide mode
+      The top menu is invisible or not at each connection.  Available only with version v8.6.
+      
+      
+   .. tip:: Menu v9.0
+   
+      To show or hide the icons of the new menu, right click on the menu.   
    
    .. compound:: Display history
    
          * No
          * Yes, yes with work indicated on the bottom of the page
-         * On request with a specific button: |buttonIconShowHistory|  
+         * On request with a specific button
+         
+      To show or hide the icons of the new menu, right click on the menu.   
+      
+      The button |History| will then be displayed in the menu of the details area of each element.
        
    .. compound:: Editor for rich text
    
-      Choose your favorite text editor
+      Choose your favorite text editor.
    
    .. compound:: Activate the spell checker in CK editor
    
-      Yes or no 
+      No will no longer allow highlighting of misspelled words.
+
+      .. Warning:: your browser also has an autocorrect option which may continue to highlight misspelled words
    
    .. compound:: Not applicable value
    
@@ -533,10 +579,16 @@ Default values for user
    .. compound:: Not receive his own emails 
    
       You don't receive the emails you create. 
+      
+   .. compound:: Order notes ascending in mail model
+   
+      Choice of display of notes in the mail template.   
   
    .. compound:: List quotations, commands and bills on client form
   
       Display or not the list of financial elements related to the customer on the screen of the latter.
+      
+      Please note that the parameter also exists on the user side. If the latter is not activated also then the financial elements will not be visible.
       
  
 
@@ -574,7 +626,7 @@ Sections for format references
                  
    .. compound:: Change reference on type or project change
    
-      Change the reference on type change of element will generate missing numbers in reference
+      Change the reference on type change of element will generate missing numbers in reference.
 
 .. _format_reference_doc:
 
@@ -591,7 +643,7 @@ Sections for document format references
             * {NUM} for number as computed for reference, 
             * {NAME} for document name.
          
-      You can allow or forbid downloading locked files in this section
+      You can allow or forbid downloading locked files in this section.
    
    
    .. compound:: Version reference suffix
@@ -602,17 +654,17 @@ Sections for document format references
          
    .. compound:: Separator for draft in version name
    
-      Choose the sign for the separator of the draft
+      Choose the sign for the separator of the draft.
    
    .. compound:: Preserve uploaded file name
    
-      If yes, the file is downloaded with the name of original file 
+      If yes, the file is downloaded with the name of original file. 
    
-      If no, the document take the reference formatted name
+      If no, the document take the reference formatted name.
    
    .. compound:: Forbid download of locked document
    
-      Forbid document download if yes is checked
+      Forbid document download if yes is checked.
       
 .. _format_reference_bill:
     
@@ -646,24 +698,24 @@ This menu contains all the parameters for configuration management
    
    .. compound:: Display Business features
    
-         Filter on date
+         Filter on date.
    
    
    .. compound:: Display language in Product/Component (Version)
    
-         Enable language
+         Enable language.
    
    .. compound:: Display contexts in Product/Component (Version)
    
-         Enable contexts
+         Enable contexts.
    
    .. compound:: Display Tenders on Products, Components, Versions
    
-         Display a section to list linked Tenders on products, component, product version and component versions
+         Display a section to list linked Tenders on products, component, product version and component versions.
    
    .. compound:: Include sub-products in structure    
    
-         Include sub-products in display of product structure (flat or not)
+         Include sub-products in display of product structure (flat or not).
    
    
 
@@ -676,27 +728,27 @@ This section allows you to manage more details in the behavior of the elements l
    
    .. compound:: Display the start and delivery milestones
    
-         Display start and delivery milestones for product/component version and delivery dates in flat structure
+         Display start and delivery milestones for product/component version and delivery dates in flat structure.
    
    .. compound:: List of activity on component version
    
-         Display the list of activity
+         Display the list of activity.
    
    .. compound:: Direct access to product / component full list
    
-         When selecting a component, we go directly to the full list (with filter capacity), without going through the pop-up window
+         When selecting a component, we go directly to the full list (with filter capacity), without going through the pop-up window.
    
    .. compound:: Automatic format of version name
    
-         Ability to choose a preformatted format for version names
+         Ability to choose a preformatted format for version names.
    
    .. compound:: Separator between name and number
    
-         Choose the character of the separator for version names 
+         Choose the character of the separator for version names.
    
    .. compound:: Auto subscription to versions
    
-         Suscription automatic to versions or components when you suscribe to product or component
+         Suscription automatic to versions or components when you suscribe to product or component.
    
    .. compound:: Types of copy of Component Version
    
@@ -710,35 +762,35 @@ This section allows you to manage more details in the behavior of the elements l
    
    .. compound:: Enable Product Versions compatibility management
    
-         Display compatibility section in product version details
+         Display compatibility section in product version details.
    
    .. compound:: Display product version on delivery
    
-         Allows to link a delivery to product version
+         Allows to link a delivery to product version.
    
    .. compound:: Sort versions combobox in descending order
    
-         Change sort order for versions in combobox to have more recent first (descending on name)
+         Change sort order for versions in combobox to have more recent first (descending on name).
    
    .. compound:: Sort version composition and structure on type
    
-         Sort version composition and structure by type ascending and name descending
+         Sort version composition and structure by type ascending and name descending.
    
    .. compound:: Manage component on requirements
    
-         Manage component and target component version on requirements
+         Manage component and target component version on requirements.
    
    .. compound:: Do not add closed and delivered versions to a project
    
-         When adding a product to a project, do not add its closed and delivered versions
+         When adding a product to a project, do not add its closed and delivered versions.
    
    .. compound:: Allow activities on delivered version
    
-         Include delivered products versions in target product version list for activities
+         Include delivered products versions in target product version list for activities.
    
    .. compound:: Automatically set component version if unique
    
-         Automatically set component version if there is only one component version of the selected component that is linked to the selected product version
+         Automatically set component version if there is only one component version of the selected component that is linked to the selected product version.
 
 
 
@@ -761,29 +813,29 @@ Tab Financial
    
 .. rubric:: Input of amounts for expenses
 
-Parameters for choosing the input method for expenditure amounts
+Parameters for choosing the input method for expenditure amounts.
 
    .. compound:: Input mode for amounts
    
-         Defined for expenses items if the amounts must be entered without taxes and calculated in with taxes or vice versa
+         Defined for expenses items if the amounts must be entered without taxes and calculated in with taxes or vice versa.
    
    .. compound:: Input mode for bill lines
    
-         Defined for expenses items if the total bill lines feed the total with or without taxes. The parameter is priority if there a bill lines
+         Defined for expenses items if the total bill lines feed the total with or without taxes. The parameter is priority if there a bill lines.
 
 .. _gp-input-amount-incomes:
 
 .. rubric:: Input of amounts for incomes
 
-Parameters for choosing the method of entering income
+Parameters for choosing the method of entering income.
 
    .. compound:: Input mode for amounts
    
-         Defined for incomes items if the amounts must be entered without taxes and calculated in with taxes or vice versa
+         Defined for incomes items if the amounts must be entered without taxes and calculated in with taxes or vice versa.
    
    .. compound:: Input mode for bill lines
    
-         Defined for icomes items if the total bill lines feed the total with or without taxes. The parameter is priority if there a bill lines
+         Defined for icomes items if the total bill lines feed the total with or without taxes. The parameter is priority if there a bill lines.
 
 
 .. _deferral-expense:
@@ -808,7 +860,7 @@ Parameters used in the unit of work catalog.
 
       Parameter used to define the default maximum number used in the unit of work catalog.   
 
-   .. compound:: Copy revenue into validated cost of activities 
+   .. compound:: Copy revenue into validated cost of activities.
 
       Copy revenue into validated cost of activities.
 
@@ -839,7 +891,7 @@ Parameters to allow the application to send emails.
 
 You define the administrator's email with the possibility of choosing a different address for "from" and "reply to" and the name to display
 
-You configure the SMTP serveur and port - the login name and password 
+You configure the SMTP serveur and port - the login name and password.
 
 You can also define the sendmail path or the send method.
 
@@ -871,17 +923,19 @@ See: :ref:`administration-special-fields`
 
 .. rubric:: Automatic emails grouping
 
-Parameters to define if the email group is active or not 
+Parameters to define if the email group is active or not.
 
    .. compound:: Activate email grouping
 
-         When emailing grouping is activated, automatic emails sent during the defined period are grouped into a single mail
+         When email grouping is enabled, automatic emails sent within the defined period are grouped into a single email.
+
+For example when the status of an element has been modified several times in less than Xs then you will not receive an email for each change of state.
 
    .. compound:: Grouping period (in seconds)
 
-         Defines the period (in seconds) during which if an email is send after another on same item, 
+         Defines the period (in seconds) during which if an email is send after another on same item. 
       
-         Then emails are grouped into single one
+         Then emails are grouped into single one.
 
    .. compound:: How to treat different formats
 
@@ -891,19 +945,19 @@ Parameters to define if the email group is active or not
             * Only send the last message
             * Merge all messages and send a single email
 
-         You'll can see this email in the **email to send** screen in the Tools menu 
+         You'll can see this email in the **email to send** screen in the Tools menu.
 
 .. _gp-test-email-section:
 
 .. rubric:: Test email configuration
 
-You can test the settings of your email submissions
+You can test the settings of your email submissions.
 
    .. compound:: Send email to
 
       Sent a email to check sptm configuration.
 
-      .. warning:: This operation saves global parameters
+      .. warning:: This operation saves global parameters.
 
 
 .. _authent:
@@ -938,7 +992,7 @@ Parameters to manage how the connection behaves
 
          You can defined a new password to random value 
 
-         You can reset all the password with the :ref:`multiple update fonction<reset-all-password>`
+         You can reset all the password with the :ref:`multiple update fonction<multipleupdate>`
 
 .. _ldap_user:
 
@@ -968,7 +1022,7 @@ Project to allocate automatically...
 
 Single sign-on is a method that allows a user to access multiple computer applications (or secure websites) by performing a single authentication.
 
-.. figure:: /images/GUI/GLOBALPARAM_ZONE_ConnexionSSO.PNG
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_ConnexionSSO.png
    :alt: Connexion screen with the protocol SSO
    
    With the single sign on you do not go through the login screen of projeqtor but by a screen dedicated to single sign-on
@@ -1065,7 +1119,7 @@ This section allows you to manage the behavior of the history
      
 .. rubric:: Automatic import of files
 
-.. figure:: /images/GUI/ADMIN_ZONE_AutoImport.png
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_AutoImport.png
    :alt: Automatic import of files
    
    Automatic import of files
@@ -1084,12 +1138,10 @@ Automatic import settings for :term:`cron` processes.
 
 .. rubric:: Automatic import of replies to emails
 
-
-.. figure:: /images/GUI/GLOBALPARAM_ZONE_ReplyEmail.PNG
-   :alt: settings for email responses
    
-Defined parameters for the “Reply to” process
-It will manage connection to IMAP INBOX to retrieve email answers.
+* Defined parameters for the “Reply to” process
+
+* It will manage connection to IMAP INBOX to retrieve email answers.
 
    .. compound:: Email input check cron delay (in seconds)
    
@@ -1100,7 +1152,9 @@ It will manage connection to IMAP INBOX to retrieve email answers.
       When you have completed the IMAP settings for receiving emails, you receive your email with a new header. See the image below.
       
       .. figure:: /images/GUI/GLOBALPARAM_BOX_Outlook.png
-         :alt: receiving an email before and after configuring IMAP settings    
+         :alt: receiving an email before and after configuring IMAP settings 
+         
+         receiving an email settings
 
       You always find the name of the item that is related to your application. A single click takes you to the item page.
 
@@ -1128,7 +1182,7 @@ It will manage connection to IMAP INBOX to retrieve email answers.
 .. rubric:: Automatic planning calculation
 
 
-.. figure:: /images/GUI/GLOBALPARAM_ZONE_InputWork.PNG
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_InputWork.png
    :alt: Enter real work with the recalculation
    
 Activated or desactived this feature by simple click
@@ -1147,16 +1201,19 @@ You can choose the option **Automatic feed of the real** which will inform the r
 See: :ref:`automatic-inuptwork`         
 
 
-.. note:: Select the frequency of the calendar by clicking on the button **defined parameters** and choose the schedule, day, month.
-   
-   .. image:: /images/GUI/GLOBALPARAM_BOX_DefineParameters.png
-      :align: center
+ .. compound:: Frequency 
+
+   Select the frequency on the calendar by clicking on the button **defined parameters** and choose the schedule, day, month.
+      
+   .. figure:: /images/GUI/GLOBALPARAM_BOX_DefineParameters.png
+      :alt: Define parameters
+         
+      Define parameters
 
 
-.. note:: **Start date for...**
+ .. compound:: Start date for
 
    .. image:: /images/GUI/GLOBALPARAM_ZONE_StardDateFor.png
-      :align: center
    
    Select when you want to recalculate project(s)according the date of today's date 
 
@@ -1169,20 +1226,11 @@ Specific settings for alerts based on a profile.
 * An email is sent on the agreed date. 
 * Click on the button **Define Parameters**
 * Select the frequency of the calendar with which the emails will be generated and sent to the profile. 
-
-
-.. figure:: /images/GUI/GLOBALPARAM_ZONE_DefineParameters.png
-   :alt: Define parameters
-   
-   Define the parameters for sending alerts and / or emails
-
-See: :ref:`automated-service` to set the send frequency.
+* See: :ref:`automated-service` to set the send frequency.
 
 
 
 .. rubric:: When and How
-
-.. image:: /images/GUI/GLOBALPARAM_ZONE_Options.PNG
    
 In addition to the sending frequency, you can refine the generation with several additional options.
 
