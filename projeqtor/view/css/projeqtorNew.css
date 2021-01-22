@@ -407,6 +407,7 @@ html, body, #mainDiv,
   font-size: 10pt;
   background-color: tranparent;
   color:var(--color-text);
+  padding-right:10px;
 }
 .ProjeQtOrNewGui .largeLabel {
   width: 380px;
