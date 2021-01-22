@@ -206,7 +206,7 @@ Mails on event
 
 * Selecting a template will use the template formatting instead of the standard default formatting.
  
-* The e-mail titles are defined in :ref:`Global parameters<e-mail titles>`.
+* The e-mail titles are defined in :ref:`Global parameters<mail-titles>`.
 
 * If the type field not set, the event is valid for every type of the element.
 

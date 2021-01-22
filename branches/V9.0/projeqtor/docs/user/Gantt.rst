@@ -824,8 +824,6 @@ The bars displayed in the gantt chart can appear with different colors. Each col
 
    .. figure:: /images/GUI/GANTT_BAR_Surcapacity.png 
       :alt: Surcapacity
-      :figwidth: 100% 
-      :align: left
       
       Overcapacity of resources
 
