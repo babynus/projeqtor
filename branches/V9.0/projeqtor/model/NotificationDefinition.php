@@ -67,7 +67,7 @@ class NotificationDefinition extends SqlElement {
     public $notificationGenerateBeforeInMin=0;
     public $_lib_minutesBefore;    
     public $_spe_repeatNotification;
-    public $_tab_3_4_DNF=array('frequency','fixedMonth','fixedDay','everyYear','everyMonth','everyWeek','everyDay');
+    public $_tab_3_4_DNF=array('frequency','month','day','everyYear','everyMonth','everyWeek','everyDay');
         public $everyYear=0;
         public $fixedMonth=null;
         public $fixedMonthDay=null;    
@@ -600,7 +600,7 @@ class NotificationDefinition extends SqlElement {
     $style=$this->getDisplayStyling($item);
     $labelStyle=$style["caption"];
     $fieldStyle=$style["field"];
-    $fieldWidth=$largeWidth;
+    $fieldWidth=$largeWidth-10;
     $extName="";
     $fullItem = "_spe_$item";
     $name=' id="' . $fullItem . '" name="' . $fullItem . $extName . '" ';
@@ -612,10 +612,10 @@ class NotificationDefinition extends SqlElement {
     $colScript .= '</script>';
     
     $result  = '<tr class="detail generalRowClass">';
-    $result .= '<td class="label" style="text-align:right;font-weight:normal;">' . i18n("col".ucfirst($itemLab)).'';
-    $result .= '&nbsp;:&nbsp;</td>';
+    $result .= '<td class="label" style="text-align:right;font-weight:normal;"><label>' . i18n("col".ucfirst($itemLab)).'';
+    $result .= Tool::getDoublePoint().'</lable></td>';
     $result .= '<td>';
-    $result .= '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class" ';
+    $result .= '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class" ';
     $result .= '  style="width: ' . ($fieldWidth) . 'px;' . $fieldStyle . '"';
     $result .= $name;
     $result .=$attributes;
@@ -679,10 +679,10 @@ class NotificationDefinition extends SqlElement {
     $colScript  = '';
     
     $result  = '<tr class="detail generalRowClass">';
-    $result .= '<td class="label" style="font-weight:normal;">' . i18n("col".ucfirst($itemLab)).'';
-    $result .= '&nbsp;:&nbsp;</td>';
+    $result .= '<td class="label" style="font-weight:normal;"><label>' . i18n("col".ucfirst($itemLab)).'';
+    $result .= Tool::getDoublePoint().'</lable></td>';
     $result .= '<td>';
-    $result .= '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class"  ';
+    $result .= '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class"  ';
     $result .= '  style="width: ' . ($fieldWidth-100) . 'px;' . $fieldStyle . '; "';
     $result .= $name;
     $result .=$attributes;
@@ -753,10 +753,10 @@ class NotificationDefinition extends SqlElement {
     $colScript  = '';
     
     $result  = '<tr class="detail generalRowClass">';
-    $result .= '<td class="label" style="text-align:right;font-weight:normal;">' . i18n("col".ucfirst($itemLab));
-    $result .= '&nbsp;:&nbsp;</td>';
+    $result .= '<td class="label" style="text-align:right;font-weight:normal;"><label>' . i18n("col".ucfirst($itemLab));
+    $result .= Tool::getDoublePoint().'</label></td>';
     $result .= '<td>';
-    $result .= '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class"  ';
+    $result .= '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class"  ';
     $result .= '  style="width: ' . ($fieldWidth-100) . 'px;' . $fieldStyle . '; "';
     $result .= $name;
     $result .=$attributes;
@@ -798,7 +798,7 @@ class NotificationDefinition extends SqlElement {
     $editor = getEditorType();
 
     $result  = '<div style="position:relative;width:'.($largeWidth+145).'px;">';
-    $result .= '<button id="'.$fullItem.'" dojoType="dijit.form.Button" showlabel="true" style="position:absolute;top:-24px;right:0px;width:90px;height:17px">';
+    $result .= '<button class="roundedVisibleButton" id="'.$fullItem.'" dojoType="dijit.form.Button" showlabel="true" style="position:absolute;'.((isNewGui())?'top:-34px;right:-47px;width:85px;':'top-24px;height:17px;right:0px;width:90px;').'">';
     $result .= i18n($itemLab);
     $result .= '<script type="dojo/connect" event="onClick" args="evt">';
     $result .= '  addFieldInTextBoxForNotificationItem("'.$itemEnd.'","'.$textBox.'","'.$editor.'");';
@@ -827,7 +827,7 @@ class NotificationDefinition extends SqlElement {
     $toolTipConnected = "'".$fullItem."'";
 
     $result  = '<div style="position:relative;width:'.($largeWidth+145).'px;">';
-    $result .= '<button id="'.$fullItem.'" dojoType="dijit.form.Button" showlabel="true" style="position:absolute;top:-24px;right:0px;width:90px;height:17px">';
+    $result .= '<button class="roundedVisibleButton" id="'.$fullItem.'" dojoType="dijit.form.Button" showlabel="true" style="position:absolute;'.((isNewGui())?'top:-34px;right:-47px;width:85px;':'top-24px;height:17px;right:0px;width:90px;').'">';
     $result .= i18n($itemLab);
     $result .= '<script type="dojo/connect" event="onClick" args="evt">';
     $result .= '  addOperatorOrFunctionInTextBoxForNotificationItem("'.$textBox.'");';
@@ -871,7 +871,7 @@ class NotificationDefinition extends SqlElement {
     $style=$this->getDisplayStyling($item);
     $labelStyle=$style["caption"];
     $fieldStyle=$style["field"];
-    $fieldWidth=$largeWidth;
+    $fieldWidth=$largeWidth-10;
     $extName="";
     $fullItem = "_spe_$item";
     $name=' id="' . $fullItem . '" name="' . $fullItem . $extName . '" ';
@@ -880,12 +880,12 @@ class NotificationDefinition extends SqlElement {
     $colScript=$this->getValidationScript($fullItem);
     
     $result  = '<tr class="detail generalRowClass">';
-    $result .= '<td class="label" style="text-align:right;font-weight:normal">' . i18n("col".ucfirst($item));
-    $result .= '&nbsp;:&nbsp;</td>';    
+    $result .= '<td class="label" style="text-align:right;font-weight:normal"><label>' . i18n("col".ucfirst($item));
+    $result .= Tool::getDoublePoint().'</label></td>';    
     if (!$print) {
         $result .= '<td>';
         $result .= htmlDisplayTooltip($toolTip,$fullItem,$print,$outMode);
-        $result .= '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class" xlabelType="html" ';
+        $result .= '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class" xlabelType="html" ';
         $result .= '  style="width: ' . ($fieldWidth) . 'px;' . $fieldStyle . '"';
         $result .= $name;
         $result .=$attributes;
