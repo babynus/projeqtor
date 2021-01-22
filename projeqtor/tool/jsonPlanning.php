@@ -1639,6 +1639,9 @@
     	$arrayTask[$line['reftype'].'#'.$line['refid']]=array('id'=>$line['id']);
     	$pct=($line['plannedwork']>0)?round(100*$line['realwork']/$line['plannedwork'],0):'';
     	if (!$pct) $pct='0';
+    	if (!$pct and $line['plannedwork']==0 and $line['realwork']==0 and trim($line['realenddate'])) {
+    	  $pct=100;
+    	}
     	if ($line['reftype']=='Milestone') {
     	  if ($line['realenddate']) $pct=100;
     	  else $pct=0;
