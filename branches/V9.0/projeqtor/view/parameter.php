@@ -86,7 +86,8 @@ function drawTableFromObjectList($objectList) {
 	  $width=$_REQUEST['destinationWidth'];
 	  $width-=30;
 	  $displayWidth=$width.'px';
-	  $longTextWidth=($width-348).'px';
+	  $longTextWidth=($width-348-((isNewGui())?70:0)).'px';
+	  
 	} else {
 	  if (sessionValueExists('screenWidth')) {
 	    $detailWidth = round((getSessionValue('screenWidth') * 0.8) - 15) ; // 80% of screen - split barr - padding (x2)
@@ -255,15 +256,15 @@ function drawTableFromObjectList($objectList) {
 				echo '</div>';
 		  }else if ($format=='display') {
 		      if($code=="mailerTestMessage"){
-		        echo '<div class="input" style="width:200px;position:relative;min-height:18px">';
+		        echo '<div class="" style="width:212px;position:relative;min-height:18px">';
 		      } else {
-		        echo '<div class="input" style="width:'.$longTextWidth.';position:relative;min-height:18px">';
+		        echo '<div class="" style="width:'.$longTextWidth.';position:relative;min-height:18px">';
 		      }
 				  echo '<input type="hidden" name="'.$code.'" id="'.$code.'" value="'.htmlEncode($obj->parameterValue).'"/>';
 				  echo '<div id="'.$code.'_iconMessageMail" name="'.$code.'_iconMessageMail" style="display:none;right:0;position:absolute;pointer-events:none">';
 				  echo '<a onclick="mailerTextEditor('.$code.');" id="mailerTextEditor" title="' . i18n('editMailerTestMessageIcon') . '">'.formatSmallButton('Edit').'</a>';
 				  echo '</div>';
-				  echo '<div name="'.$code.'_display" id="'.$code.'_display" onmouseover="displayImageEditMessageMail(\''.$code.'\');" onmouseout="hideImageEditMessageMail(\''.$code.'\');" onclick="mailerTextEditor(\''.$code.'\');"';
+				  echo '<div style="background:white;color: #555555;margin: 5px 2px 5px 0px;padding: 2px 5px 6px 5px;border: 1px solid #d4d4d4;border-radius: 5px 5px 5px 5px;" name="'.$code.'_display" id="'.$code.'_display" onmouseover="displayImageEditMessageMail(\''.$code.'\');" onmouseout="hideImageEditMessageMail(\''.$code.'\');" onclick="mailerTextEditor(\''.$code.'\');"';
 				  if($code=="mailerTestMessage"){
 				   	echo ' style="word-wrap:break-word;width:200px;display:inline-block;min-height:18px" ';
 				  } else {
