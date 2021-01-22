@@ -1435,6 +1435,7 @@ select option:checked {
 }
 .ProjeQtOrNewGui .shortlabel {
 	width:100%;
+	padding-top:0;
 	/*margin-left:20px;*/
 }
 .ProjeQtOrNewGui .internalTable DIV.display {
