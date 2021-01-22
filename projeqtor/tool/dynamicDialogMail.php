@@ -47,7 +47,7 @@ if (property_exists($obj, 'idObjectType')) $where.=" and (idType = '".$obj->$idO
 $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
 $displayComboButton=false;
 $user=getSessionUser();
-$profile=$user->getProfile();
+$profile=$user->getProfile($obj);
 $habil=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$profile, 'scope'=>'combo'));
 if ($habil) {
   $list=new ListYesNo($habil->rightAccess);
