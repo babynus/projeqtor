@@ -3148,6 +3148,10 @@ abstract class SqlElement {
       if (Sql::$lastQueryNbRows > 0) {
         $empty = false;
         $line = Sql::fetchLine ( $result );
+        if (! is_array($line)) {
+          errorLog("Error in getSqlElement() for ".get_class($this)." #$this->id : no data retreived. Exiting script");
+          exit;
+        }
         // get all data fetched
         foreach ( $this as $col_name => $col_value ) {
           if (substr ( $col_name, 0, 1 ) == "_") {
