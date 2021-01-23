@@ -48,3 +48,7 @@ CREATE INDEX historyOperationDate ON `${prefix}history` (operationDate);
 
 -- Delete duplicates from HistoryArchive / History
 DELETE FROM `${prefix}historyarchive` WHERE id IN (SELECT id from `${prefix}history`);
+
+-- Incorrect creation date for tender
+UPDATE `${prefix}tender` SET creationDate=(select min(operationDate) from `${prefix}history` where refType='Tender' and refId=`${prefix}tender`.id)
+WHERE creationDate is null or creationDate='1970-01-01';
