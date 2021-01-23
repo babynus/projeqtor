@@ -483,14 +483,16 @@ if($paramMailerType=='phpmailer'){
                 <option value="<?php echo ($showVal==true)?$dialogMailEmailTemplate:''; ?>"><span> <?php  echo ($showVal==true)?$dialogName:''; ?></span></option>
                 <?php 
                   foreach ($listEmailTemplate as $key => $value){
+                    if ($value->idle) continue;
                     if(sessionValueExists('dialogMailEmailTemplate')){
                       if($value->id==$dialogMailEmailTemplate){
                         continue;
                       }
                     }
-                ?>
-                <option value="<?php echo $value->id;?>"><span> <?php echo htmlEncode($value->name);?></span></option>
-                <?php }?>
+                    ?>
+                    <option value="<?php echo $value->id;?>"><span> <?php echo htmlEncode($value->name);?></span></option>
+                <?php 
+                  }?>
                 <script type="dojo/connect" event="onChange" args="evt">
                   dojo.byId('idEmailTemplate').value = this.value;
                 </script>

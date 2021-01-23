@@ -93,6 +93,7 @@ $tender->idContact=$contactId;
 $tender->requestDateTime=$requestDateTime;
 $tender->expectedTenderDateTime=$expectedTenderDateTime;
 $tender->idTenderStatus=$tenderStatusId;
+$tender->creationDate=date('Y-m-d');
 $result=$tender->save();
 
 // Message of correct saving
