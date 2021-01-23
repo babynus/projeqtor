@@ -343,7 +343,7 @@ class PlannedWorkManual extends GeneralWork {
       echo '</table>';
       $leftAdmin=0;
       if ($real and ($real-$realAdmin)>0) {
-        $height=intval($size*($real-$realAdmin)/(($capacity)?$capacity:$resObj->capacity));
+        $height=intval($size*($real-$realAdmin)/(($capacity)?$capacity:(($resObj->capacity)?$resObj->capacity:1)));
         if ($height>$size) $height=$size;
         $background = 'background-color:#202020;opacity:0.5';
         //echo '<div style="pointer-events: none;position:absolute;top:0;'.$background.'; height:'.$height.'px;width:'.$size.'px"> </div>';
