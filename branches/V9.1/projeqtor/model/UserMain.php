@@ -53,6 +53,7 @@ class UserMain extends SqlElement {
   // ADD tLaguerie #Ticket 396
   public $startDate; // start date as a resource, is hidden on display
   public $_lib_colAsResource;
+  public $idRole;
 // END tLaguerie #Ticket 396
 // MTY - MULTI CALENDAR
   public $idCalendarDefinition;
@@ -108,6 +109,7 @@ class UserMain extends SqlElement {
   		                                    "passwordChangeDate"=>'hidden',
   		                                    "apiKey"=>"readonly",
                                           'idTeam'=>'hidden',
+                                           'idRole'=>'hidden',
                                           'idOrganization'=>'hidden',
 // MTY - LEAVE SYSTEM
                                           'isEmployee'=>'hidden',
@@ -116,7 +118,7 @@ class UserMain extends SqlElement {
                                           'startDate'=>"nobr",
 // END tLaguerie Ticket #396 
 // MTY - MULTI CALENDAR
-                                          'idCalendarDefinition'=> "hidden",
+                                          'idCalendarDefinition'=> "hidden"
 // MTY - MULTI CALENDAR   
   );  
   
@@ -231,6 +233,7 @@ class UserMain extends SqlElement {
     }
     if ($this->isResource or $this->isContact) {
       self::$_fieldsAttributes["resourceName"]="required,truncatedWidth100";
+      self::$_fieldsAttributes["idRole"]="required";
     }
     if (!$canUpdateContact and !$canUpdateResource) {
       self::$_fieldsAttributes["resourceName"]="readonly,truncatedWidth100";
@@ -312,8 +315,14 @@ class UserMain extends SqlElement {
       $colScript .= '  } else {';
       $colScript .= '    dijit.byId("resourceName").set("required", null);';
       $colScript .= '    dojo.removeClass(dijit.byId("resourceName").domNode,"required");';
-      //$colScript .= '    dijit.byId("resourceName").set("value", "");';
       $colScript .= '  } '; 
+      $colScript .= '  if (this.checked) { ';
+      $colScript .= '    dijit.byId("idRole").set("required", "true");';
+      $colScript .= '    dojo.addClass(dijit.byId("idRole").domNode,"required");';
+      $colScript .= '  } else {';
+      $colScript .= '    dijit.byId("idRole").set("required", null);';
+      $colScript .= '    dojo.removeClass(dijit.byId("idRole").domNode,"required");';
+      $colScript .= '  } ';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     }

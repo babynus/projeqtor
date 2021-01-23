@@ -9139,7 +9139,7 @@ function endBuffering($prevSection, $included) {
       'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
       'affectationresourceteamresource'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
       'affectationsresourceteam'=>array('2'=>'right', '3'=>'right','99'=>'resources'),
-      'answer'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
+      'answer'=>array('2'=>'right', '3'=>'right','99'=>'treatment'),
       'approver'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
       'attachment'=>array('2'=>'bottom', '3'=>'extra','99'=>'fichier'), 
       'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'progress'), 

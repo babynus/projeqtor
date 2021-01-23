@@ -491,7 +491,7 @@ class PlannedWorkManual extends GeneralWork {
       $where = " idPlanningMode = 23 and idle = '0' and idProject in $listProj" ;
       $order = null;
     }else{
-      $user = new User(getCurrentUserId());
+      $user = getSessionUser();
       $listProj = transformListIntoInClause($user->getVisibleProjects());
       $where = " idPlanningMode = 23 and idle = '0' and idProject in $listProj" ;
       $order = " wbs asc";
