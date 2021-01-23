@@ -267,11 +267,12 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       }
     });
     dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
+      console.log(source.id);
        if(source.id == 'menuBarDndSource'){
            dojo.byId('anotherBarContainer').style.display = 'block';
            dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-radius: 5px;border-left: 1px solid var(--color-dark);');
            dojo.byId('removeMenuDiv').style.visibility = 'visible';
-       }else{
+       } else if (source.id.substr(0,16)=='menuBarDndSource') {
     	   dojo.byId('removeMenuDiv').style.visibility = 'visible';
        }
     });

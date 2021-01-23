@@ -97,7 +97,8 @@ if ($nbProj==0) {
           selectedMultiProject();
        </script>
      </button>  
-    <div <?php echo ($cpt>25)?'style="height: 500px; overflow-x: hidden; overflow-y: scroll;"':'';?>>
+     <?php $heightSelectorList=(sessionValueExists('screenHeight'))?round(intval(getSessionValue('screenHeight'))*0.80):500; ?>
+    <div style="max-height: <?php echo $heightSelectorList;?>px; overflow-x: hidden; overflow-y: auto;">
     <?php 
       echo $subProjectsToDraw;
     ?>
