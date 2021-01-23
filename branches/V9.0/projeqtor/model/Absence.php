@@ -248,6 +248,7 @@ class Absence{
       $result .='   <td colspan="3" style="padding-top:5px;text-align:right">'.ucfirst(i18n('duration')).$doublePoint;
       $classMediumText = "";
       $widthMedium = "55";
+      $mediumTextButton='';
       if(isNewGui()){
         $mediumTextButton = 'class="mediumTextButton"';
         $widthMedium = "100";
