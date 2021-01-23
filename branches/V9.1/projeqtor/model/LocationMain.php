@@ -56,7 +56,7 @@ class LocationMain extends SqlElement {
   private static $_colCaptionTransposition = array('idLocation' => 'parentLocation');
   
   private static $_fieldsAttributes=array(
-      'name'=>'required', 
+      'name'=>'required'
   );
   
   private static $_databaseColumnName = array();
