@@ -40,7 +40,7 @@ class QuestionMain extends SqlElement {
   public $creationDate;
   public $idUser;
   public $description;
-  public $_sec_answer;
+  public $_sec_treatment;
   public $idStatus;
   public $idResource;
   public $initialDueDate;

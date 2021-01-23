@@ -29,7 +29,7 @@
  */
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
-  scriptLog('   ->/view/absenceMain.php');  
+  scriptLog('   ->/view/plannedWorkManualMain.php');  
   $readonly=(RequestHandler::isCodeSet('readonly'))?RequestHandler::getValue('readonly'):'false';
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="PlannedWorkManual" />
