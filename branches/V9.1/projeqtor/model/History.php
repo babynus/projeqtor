@@ -137,13 +137,15 @@ class History extends SqlElement {
                    SELECT $colList FROM $tableHist WHERE refType='$refType' and refId=$refId and operationDate <> '$hist->operationDate';"; 
       SqlDirectElement::execute($requestIns);
       $res=Sql::$lastQueryNbRows;
-      $where="refType='$refType' and refId=$refId and colName='$hist->colName' and newValue='$hist->newValue' and operationDate='$hist->operationDate'";
-      $idleRow=$hist->getSqlElementsFromCriteria(null,null,$where);
-      $result=date('Y-m-d H:i:s');
-      foreach ($idleRow as $history ){
-        $result=$history->operationDate;
-      }
-      $clauseDel="refType='$refType' and refId=$refId and operationDate <> '$result'";
+// Remove strange code : retreive stored history with criteria on operationDate to retrieve ... operationDate
+//       $where="refType='$refType' and refId=$refId and colName='$hist->colName' and newValue='$hist->newValue' and operationDate='$hist->operationDate'";
+//       $idleRow=$hist->getSqlElementsFromCriteria(null,null,$where);
+//       $result=date('Y-m-d H:i:s');
+//       foreach ($idleRow as $history ){
+//         $result=$history->operationDate;
+//       }
+//       $clauseDel="refType='$refType' and refId=$refId and operationDate <> '$result'";
+      $clauseDel="refType='$refType' and refId=$refId and operationDate <> '$hist->operationDate'";
       if($res > 0){
         $hist->purge($clauseDel);
       }
