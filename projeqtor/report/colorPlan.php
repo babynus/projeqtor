@@ -155,6 +155,9 @@ if($paramProject){
   $resourcesAffect = SqlList::getListWithCrit('Affectation', array('idProject'=>array_keys($listProj)),'idResource');
   $resourcesProject = SqlList::getListWithCrit('ResourceAll', array('id'=>$resourcesAffect));
   $resourcesToShow = array_intersect($resourcesToShow,$resourcesProject);
+} else {
+  $resourcesNotClose = SqlList::getListWithCrit('ResourceAll', array('idle'=>'0'));
+  $resourcesToShow = array_intersect($resourcesToShow,$resourcesNotClose);
 }
 //team
 if($paramTeam){
