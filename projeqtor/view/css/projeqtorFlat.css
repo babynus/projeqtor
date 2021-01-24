@@ -540,6 +540,7 @@ body .ProjeQtOrFlatBlue {
 }
 .ProjeQtOrFlatBlue .ganttTaskgroup:Hover, .ProjeQtOrFlatBlue .ganttTaskrow:hover, .ProjeQtOrFlatBlue .ganttTaskmile:Hover, .ProjeQtOrFlatBlue .ganttRowHover {
   background-color: #ffffaa !important;
+  color:#000000;
 }
 
 .ProjeQtOrFlatBlue .iconMenuBarCustom16 { background-image: url(customIcons/blue/favorite.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
