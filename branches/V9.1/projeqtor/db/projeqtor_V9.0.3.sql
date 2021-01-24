@@ -52,3 +52,6 @@ DELETE FROM `${prefix}historyarchive` WHERE id IN (SELECT id from `${prefix}hist
 -- Incorrect creation date for tender
 UPDATE `${prefix}tender` SET creationDate=(select min(operationDate) from `${prefix}history` where refType='Tender' and refId=`${prefix}tender`.id)
 WHERE creationDate is null or creationDate='1970-01-01';
+
+-- Incorrect idProject for assignment (when moved after creation)
+UPDATE `${prefix}assignment` ass SET idProject=(SELECT idProject FROM `${prefix}planningelement` pe WHERE pe.refType=ass.refType and pe.refId=ass.refId);
