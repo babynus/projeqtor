@@ -94,11 +94,14 @@ foreach ($projects as $id=>$name) {
 
 $projects=$newProject;
 ksort($projects);
+$listProjectsClause='(0';
 foreach ($projects as $id=>$name) {
   $idExplo=explode('-',$id);
   $id=$idExplo[1];
-  $sumProj[$id]=0;  
+  $sumProj[$id]=0;
+  $listProjectsClause.=','.$id;
 }
+$listProjectsClause.=')';
 
 asort($resources);
 if($idOrganization){
@@ -114,6 +117,21 @@ if($idOrganization){
     if(! in_array($idR, $listResOrg))unset($resources[$idR]);
   }
 }
+// Add left work on Activity isManualPlanning = left not liked to assignment
+$pe=new PlanningElement();
+$we=new WorkElement();
+foreach ($sumProj as $id=>$val) {
+  $sumPe=$pe->sumSqlElementsFromCriteria('leftWork', null, "idProject=$id and isManualProgress=1");
+  $sumWe=$we->sumSqlElementsFromCriteria('leftWork', null, "idProject=$id and idActivity is null");
+  $sum=$sumPe+$sumWe;
+  if ($sum) {
+    $key='xxx';
+    if (! isset($resources[$key])) $resources[$key]=i18n('notAssignedWork');
+    if (! isset($result[$key])) $result[$key]=array();
+    $result[$key][$id]=$sum;
+  }
+}
+
 foreach ($resources as $idR=>$nameR) {
     foreach ($projects as $idP=>$nameP) {
       $idExplo=explode('-',$idP);

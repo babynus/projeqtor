@@ -492,6 +492,14 @@ class Assignment extends SqlElement {
     $this->refresh();
     return $this->save();
   }
+  
+  public static function updateProjectFromPlanningElement($refType, $refId, $idProject=null) {
+    $ass=new Assignment(); $assTable=$ass->getDatabaseTableName();
+    $pe=new PlanningElement(); $peTable=$pe->getDatabaseTableName();
+    if (!$idProject) $idProject="(SELECT idProject FROM $peTable pe WHERE pe.refType=ass.refType and pe.refId=ass.refId)";
+    $query="UPDATE $assTable ass SET idProject=$idProject WHERE refType='$refType' and refId=$refId";
+    Sql::query($query);
+  }
 
 /** =========================================================================
    * control data corresponding to Model constraints
