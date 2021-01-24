@@ -1397,10 +1397,12 @@ class Parameter extends SqlElement {
   	}
     $param->parameterValue=$value;
   	$param->save();
-  	if (!sessionValueExists('userParamatersArray')) {
-  	  setSessionValue('userParamatersArray', array());
-  	}
-    setSessionTableValue('userParamatersArray', $code, $value);
+  	if ($userId==getSessionUser()->id) {
+    	if (!sessionValueExists('userParamatersArray')) {
+    	  setSessionValue('userParamatersArray', array());
+    	}
+      setSessionTableValue('userParamatersArray', $code, $value);
+    }
   }
   static function storeGlobalParameter($code,$value) {
     $param=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('idUser'=>null,'parameterCode'=>$code));

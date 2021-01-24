@@ -2317,7 +2317,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $displayComboButtonCol='force';
           //$displayDirectAccessButton=false;
         }
-        if ($col=='idProfile' and !$obj->id and !$val and ($classObj=='Resource' or $classObj=='User')) { // set default
+        if ($col=='idProfile' and !$obj->id and !$val and ($classObj=='Resource' or $classObj=='User' or $classObj=='Contact')) { // set default
           $val=Parameter::getGlobalParameter('defaultProfile');
         }
         if ($col=='idProject') {
