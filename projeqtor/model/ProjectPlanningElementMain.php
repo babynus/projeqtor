@@ -308,7 +308,7 @@ class ProjectPlanningElementMain extends PlanningElement {
   	$this->updateSynthesisProject($doNotSave);
   }
   protected function updateSynthesisProject ($doNotSave=false) {
-  	parent::updateSynthesisObj(true); // Will update work and resource cost, but not save yet ;)
+    parent::updateSynthesisObj(true); // Will update work and resource cost, but not save yet ;)
   	$this->updateExpense(true); // Will retrieve expense directly on the project
   	$this->updateReserve(true); // Will retrieve reserve for risk directly on the project
   	$this->addTicketWork(true); // Will add ticket work that is not linked to Activity
