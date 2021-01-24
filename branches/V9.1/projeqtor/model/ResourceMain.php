@@ -672,7 +672,9 @@ class ResourceMain extends SqlElement {
         }
     }
 // MTY - LEAVE SYSTEM
-    
+    if (!$oldResource->isUser and $this->isUser) {
+      UserMain::initializeNewUser($this->id);
+    }
   	return $result;
   }
   

@@ -332,6 +332,7 @@ class ContactMain extends SqlElement {
       $this->crypto=null;
   		$this->password=User::getRandomPassword();
     }
+    $old=$this->getOld(true);
     if (!$this->isResource) {
       $this->idOrganization=null;
       $this->idTeam=null;
@@ -352,6 +353,9 @@ class ContactMain extends SqlElement {
       setSessionUser($user);
     }
     if ($this->id==getSessionUser()->id) User::refreshUserInSession();
+    if (!$old->isUser and $this->isUser) {
+      UserMain::initializeNewUser($this->id);
+    }
     return $result;
   }
   
