@@ -5217,9 +5217,9 @@ function drawSubscriptionsList($obj, $refresh=false, $limitToActive=null) {
  	$checked = '';
  	if (isset($_REQUEST['showClosedSub']) and $_REQUEST['showClosedSub'] == true) $checked = ' checked ';
  	if (! $print) {
-   	echo '<div style="position:absolute;right:5px;top:2px;">';
-   	echo '<label for="showClosedSub" class="dijitTitlePaneTitle" style="font-weight:normal !important;height:10px;width:250px">' . i18n('labelShowIdle') . '</label>';
-   	echo '<div class="whiteCheck" title="'.i18n('labelShowIdle') .'" type="checkbox" id="showClosedSub" name="showClosedSub" value="showClosedSub" style="position:relative;left:5px" dojoType="dijit.form.CheckBox"'.$checked.'>';
+   	echo '<div style="position:absolute;right:5px;top:3px;">';
+   	echo '<label for="showClosedSub" class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">' . i18n('labelShowIdle'.((isNewGui())?'Short':'')) . '</label>';
+   	echo '<div class="whiteCheck" title="'.i18n('labelShowIdle') .'" type="checkbox" id="showClosedSub" name="showClosedSub" value="showClosedSub" style="'.((isNewGui())?'margin-top:14px':'position:relative;left:5px').'" dojoType="dijit.form.CheckBox"'.$checked.'>';
    	echo '<script type="dojo/method" event="onChange"> loadContent("objectDetail.php?&showClosedSub='.(($checked=='')?true:false).'", "detailDiv", "listForm"); </script>';
    	echo '</div>';
    	echo '</div>';
