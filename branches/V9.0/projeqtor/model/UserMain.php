@@ -1208,8 +1208,57 @@ class UserMain extends SqlElement {
       $user->isResource=$this->isResource;
       setSessionUser($user);
     }
+     if (! $old->id) { // Creation of user
+       self::initializeNewUser($this->id);
+     }
     if ($this->id==getSessionUser()->id) User::refreshUserInSession();
     return $result;
+  }
+  public static function initializeNewUser($id) {
+    $newGui=Parameter::getGlobalParameter('newGui');
+    if ($newGui==1) {
+      Parameter::storeUserParameter('newGui',1,$id);
+      self::storeDefaultMenus($id);
+      $msg=SqlElement::getSingleSqlElementFromCriteria('MessageLegal', array('name'=>'newGui'));
+      if ($msg and $msg->id) {
+        $msgf=SqlElement::getSingleSqlElementFromCriteria('MessageLegalFollowup', array('idMessageLegal'=>$msg->id,'idUser'=>$id));
+        if (! $msgf->id) {
+          $msgf->name=$msg->name;
+          $msgf->idMessageLegal=$msg->id;
+          $msgf->idUser=$id;
+          $msgf->accepted=1;
+          $msgf->save();
+        }
+      }
+      Parameter::storeUserParameter('paramScreen', 'left',$id);
+      Parameter::storeUserParameter('paramRightDiv', 'bottom',$id);
+      Parameter::storeUserParameter('paramLayoutObjectDetail', 'tab',$id);
+      Parameter::storeUserParameter('menuLeftDisplayMode', 'ICONTXT',$id);
+    }
+  }
+  public static function storeDefaultMenus($idRes) {
+    $customRow[1]=array('Project', 'Activity', 'Milestone', 'Meeting', 'Planning', 'Resource', 'Reports');
+    $customRow[2]=array('Ticket', 'TicketSimple', 'Kanban', 'Imputation', 'Absence');
+    $sortOrder = 1;
+    foreach ($customRow[1] as $menu){
+      $customMenu = new MenuCustom();
+      $customMenu->name = 'menu'.$menu;
+      $customMenu->idUser = $idRes;
+      $customMenu->idRow = 1;
+      $customMenu->sortOrder = $sortOrder;
+      $customMenu->save();
+      $sortOrder++;
+    }
+    $sortOrder = 1;
+    foreach ($customRow[2] as $menu){
+      $customMenu = new MenuCustom();
+      $customMenu->name = 'menu'.$menu;
+      $customMenu->idUser = $idRes;
+      $customMenu->idRow = 2;
+      $customMenu->sortOrder = $sortOrder;
+      $customMenu->save();
+      $sortOrder++;
+    }
   }
   
   public function reset() {
