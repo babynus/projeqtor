@@ -962,10 +962,38 @@ class Consistency {
         }
       }
     }
-  
+    
+    //
+    debugTraceLog("checkProject - Check Project on Assignment compared to Project on PlanningElement");
+    // Direct Query : valid here for technical needs on grouping
+    $pe=new PlanningElement();
+    $peTable=$pe->getDatabaseTableName();
+    $as=new Assignment();
+    $asTable=$as->getDatabaseTableName();
+    $query="SELECT a.id, a.idProject as idproject, a.refType as reftype, a.refId as refid from $asTable a where a.idProject <> ( select idProject from $peTable pe where pe.refType=a.refType and pe.refId=a.refId)";
+    $result=Sql::query($query);
+    while ($line = Sql::fetchLine($result)) {
+      $id=$line['id'];
+      $idProject=$line['idproject'];
+      $refType=$line['reftype'];
+      $refId=$line['refid'];
+      $obj=new $refType($refId);
+      displayError(i18n("checkProjectInvalid",array($idProject,i18n('Assignment').' #'.$id, $obj->idProject,i18n($refType).' #'.$refId)));
+      $errors++;
+      if ($correct) {
+        $as=new Assignment($id);
+        $as->idProject=$obj->idProject;
+        $res=$as->saveForced();
+        if (getLastOperationStatus($res)=='OK') {
+          displayOK(i18n("checkFixed"),true);
+        } else {
+          displayMsg(i18n("checkNotFixed"),true);
+        }
+      }
+    }
+    
     if (!$errors) {
       displayOK(i18n("checkNoError"));
-  
     }
   }
   

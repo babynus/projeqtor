@@ -6336,7 +6336,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         $resName=$affName;
       }
     }
-    if (!$print and $canUpdate) {
+    if (!$print and ($canUpdate or $canSeeDirectAcces)) {
       echo '<td class="assignData'.$idleClass.'" style="width:10%;text-align:center;white-space:nowrap;vertical-align:middle">';
       if ($canUpdate and !$print and $workVisible and !$assignment->supportedAssignment) {
         echo '  <a onClick="editAssignment('."'".htmlEncode($assignment->id)."'".",'".htmlEncode($assignment->idResource)."'".",'".htmlEncode($assignment->idRole)."'".",'".($assignment->dailyCost*100)."'".",'".htmlEncode($assignment->rate)."'".",'".(Work::displayWork($assignment->assignedWork)*100)."'".",'".(Work::displayWork($assignment->realWork)*100)."'".",'".(Work::displayWork($assignment->leftWork)*100)."'".",'".Work::displayShortWorkUnit()."'".",".$assignment->optional.');" '.'title="'.i18n('editAssignment').'" > '.formatSmallButton('Edit').'</a>';

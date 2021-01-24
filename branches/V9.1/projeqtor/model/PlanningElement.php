@@ -637,6 +637,11 @@ class PlanningElement extends SqlElement {
         }
       }
     }
+    // If project changed, update assignment
+    if($old->idProject!=$this->idProject and $cptAss>0) {
+      // Project change : update assignment
+      Assignment::updateProjectFromPlanningElement($this->refType, $this->refId, $this->idProject);
+    }
     // update topObject
     if ($topElt) {
       if ($topElt->refId and $topElt->refType) {
@@ -1198,7 +1203,6 @@ class PlanningElement extends SqlElement {
         if (!$pla->cancelled and $pla->validatedCost) $validatedCost+=$pla->validatedCost;
       }
     }
-    
     $this->realStartDate=$realStartDate;
     if ($realWork>0 or $leftWork>0) {
       if ($leftWork==0) {
