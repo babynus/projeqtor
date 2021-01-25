@@ -7,79 +7,46 @@
 Plug-ins management
 -------------------
 
+
+.. figure:: /images/GUI/PLUGIN_SCR_PluginManagement.png
+   :alt: Plugin management screen
+   
+   Plugin management screen
+   
+   
 Plug-ins add non-generic features to ProjeQtOr.
 
 You will find the complete list of plugins in the `ProjeQtOr online store <https://www.projeqtor.net/fr/shop-fr/plugins>`_
 
-.. figure:: /images/GUI/PLUGIN_SCR_PluginManagement.PNG
-   :alt: Plugin management screen
-   
-.. rubric:: Plug-in deployment
+* The section **Installed plugins** lists the installed plug-ins.
 
-* Plug-in will be deployed during installation.
-* The result of deployment will be available in the log file (See: :ref:`admin-console`).
+* The section **Available plugins** allows to manage local plug-ins
 
-.. rubric:: Section Installed plug-ins
 
-This section lists the installed plug-ins.
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Detail of installed plug-ins list 
-   :widths: 20, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Name
-     - Plug-in name.
-   * - Description
-     - Plug-in description.
-   * - Version
-     - Plug-in version.
-   * - Deployed date
-     - Deployed date.
-   * - Deployed on
-     - The version when the module has been installed.
-   * - Compatible since
-     - Compatibility version.
-
-.. rubric:: Section Available plug-ins (local)
-
-.. figure:: /images/GUI/PLUGIN_ZONE_AvailablePlugin.png
-   :alt: Add a plugin
-   
-This section allows to manage local plug-ins.
-
+  
  .. compound:: **Available plug-ins list**
 
-    * The button allows to select plug-in file.
-    * The file will be uploaded and it will be added in plugin-ins list.
+   .. figure:: /images/GUI/PLUGIN_ZONE_AvailablePlugin.png
+      :alt: Add a plugin
+   
+      Add a plugin
+   
+   * The :kbd:`Browse` button allows to select plugin file .zip.
+   * The file will be uploaded and it will be added in plugin-ins list.
 
-    .. tabularcolumns:: |l|l|
-
-    .. list-table:: Detail of available plug-ins list
-       :widths: 20, 80
-       :header-rows: 1
-
-       * - Field
-         - Description
-       * - File
-         - Plug-in file name.
-       * - Date
-         - File date.
-       * - Size
-         - File size.
 
  .. compound:: **Plug-in installation**
 
-    * Click on |buttonAdd| to install plug-in.
-    * Click on |buttonIconDisplay| to display the description of plug-in.
+   * Click on |Add| to install plug-in.
+   * Click on |View| to display the description of plug-in.
+   * Click on |Delete| to remove the plugin from the installation table.
+   * Plug-in will be deployed during installation.
+   * The result of deployment will be available in the log file (See: :ref:`admin-console`).
+   * Plug-in is removed from the list after installation.
+    
  
 .. figure:: /images/GUI/PLUGIN_BOX_DescriptionOfPlugin.png
    :alt: Dialog box - Description plug-in 
-   :align: center
-
-.. note:: 
-
-   Plug-in is removed from the list after installation.
+   :scale: 80
+   
+   Description plug-in 
