@@ -564,6 +564,12 @@ function showPrint(page, context, comboName, outMode, orientation) {
             + encodeURIComponent(dijit.byId("listTypeFilter").get('value'));
       }
     }
+    if (dijit.byId("listBudgetParentFilter")) {
+      if (trim(dijit.byId("listBudgetParentFilter").get('value'))) {
+        params+="&budgetParent="
+            + encodeURIComponent(dijit.byId("listBudgetParentFilter").get('value'));
+      }
+    }
     if (dijit.byId("listClientFilter")) {
       if (trim(dijit.byId("listClientFilter").get('value'))) {
         params+="&objectClient="
