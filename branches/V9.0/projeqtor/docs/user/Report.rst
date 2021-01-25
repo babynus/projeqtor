@@ -13,7 +13,7 @@ Reports
 *******
 
 
-.. figure:: /images/GUI/REPORT_SCR_DisplayReport.png
+.. figure:: /images/GUI/REPORT_SCR_ViewReport.png
    :alt: Reports screen
    
    Reports screen
@@ -22,10 +22,10 @@ A list of reports is available in different categories. They themselves contain 
 
 
 
-Reports display
----------------
+Reports View
+------------
 
-.. figure:: /images/GUI/REPORT_ZONE_Menu.PNG
+.. figure:: /images/GUI/REPORT_ZONE_Menu.png
    :alt: Reports screen
    :align: center
    
@@ -33,7 +33,7 @@ Reports display
 #. The selected report will appear in the |two| under the separator |three|.
 #. The specific parameters |four| |five| for this report appears.
 #. Update the parameters |five| to get the information you need.
-#. Click on |buttonIconDisplay| to produce the report. |four|
+#. Click on |View| to produce the report. |four|
 #. Click on the arrow to return to the category list. |six|
 
 
@@ -44,13 +44,13 @@ Reports display
 
 .. rubric:: Buttons
 
-* Click on |buttonIconDisplay| to display the report.
-* Click on |buttonIconPrint| to get a printable version of the report.
-* Click on |buttonIconPdf| to export the report as PDF format.
-* Click on |buttonIconToday| to display this report on the Today screen.
-* Click on |buttonIconReportFavorite| to define this report as favorite. 
-* Click on |buttonIconEmail| to schedule the sending of the selected report
-
+* Click on |View| to View the report.
+* Click on |Print| to get a printable version of the report.
+* Click on |Pdf| to export the report as PDF format.
+* Click on |Today| to View this report on the Today screen.
+* Click on |ReportFavorite| to define this report as favorite. 
+* Click on |Email| to schedule sending the selected report
+* Click on |ReportScheduled| to go to scheduled report screen
 
 
 .. raw:: latex
@@ -68,9 +68,9 @@ You can add reports to your home screen today.
 
 * Select the report you want to see quickly on this screen.
 
-* Click on the button |buttonIconToday|
+* Click on the button |Today|
 
-* On the Today screen, the report is displayed at the bottom of the page
+* On the Today screen, the report is Viewed at the bottom of the page
 
 * Click on the setting icon on the screen today to change the location of the report
 
@@ -78,13 +78,13 @@ You can add reports to your home screen today.
 
    **Update**
    
-   The displayed report is updated automatically. Any modification made to the content of the latter is reflected on the screen today.
+   The Viewed report is updated automatically. Any modification made to the content of the latter is reflected on the screen today.
 
 
-.. figure:: /images/GUI/REPORT_SCR_DisplayToday.png
-   :alt: Display a report on the today screen
+.. figure:: /images/GUI/REPORT_SCR_ViewToday.png
+   :alt: View a report on the today screen
    
-   Display a report on the today screen
+   View a report on the today screen
   
 
 Click the parameter button to define the location of the report (s) on the Today screen.
@@ -110,21 +110,13 @@ Move your cursor over the reports menu icon (in the top bar) to show the popup m
    :align: center
 
 You can add a "blank" report type to the favorites or to a specific project and resources.
-In this case, next to the report name, linked items will be displayed.
+In this case, next to the report name, linked items will be Viewed.
 
 .. compound:: **Popup menu management**
 
-   * Allows to reorder reports displayed with drag & drop feature. Using the selector area button icon drag |IconDragBLC|. 
-   * Click on |buttonIconDelete| to remove the report from the list.
+   * Allows to reorder reports Viewed with drag & drop feature. Using the selector area button icon drag |Drag|. 
+   * Click on |Delete| to remove the report from the list.
 
-
-.. rubric:: Direct display 
-
-Select a report to display (in print mode), without leaving the current screen.
-
-.. figure:: /images/GUI/REPORT_BOX_DirectDisplay.png
-   :alt: Dialog box - Print preview 
-   :align: center
 
 .. raw:: latex
 
@@ -142,16 +134,10 @@ For tickets and only tickets, you can apply an existing or create filter
    :alt: filters on ticket's report
    :align: center
    
-
-.. figure:: /images/GUI/REPORT_BOX_AdvancedFilter.png
-   :alt: Advanced filters
-   :align: center
    
-You can choose from many criteria to create your filter
+As with the advanced list box filters, you can choose from many criteria to create your filter;
 
-.. figure:: /images/GUI/REPORT_ZONE_CriteriaFilter.png
-   :alt: Advanced filters
-   :align: center
+See: :ref:`advanced filters<filters>`
 
 
 
