@@ -10455,7 +10455,7 @@ function reorderFavoriteReportItems() {
       order.value=null;
       dojo.removeClass(domNode,'dojoDndItemAnchor');
       dojo.query('dojoDndItemAnchor').removeClass('dojoDndItemAnchor');
-      continue;
+      //continue;
     }
     if (order) {
       order.value=i + 1;
@@ -10465,7 +10465,7 @@ function reorderFavoriteReportItems() {
   dojo.xhrPost({
     url: '../tool/saveReportFavoriteOrder.php'+param,
     handleAs: "text",
-    load: function(data,args) { 
+    load: function(data,args) {
       refreshFavoriteReportList(); 
     }
   });
