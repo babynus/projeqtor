@@ -40,7 +40,6 @@ Depending on the profile, you can limit the visibility of resources to people in
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -108,27 +107,15 @@ In this section you will find the list of projects and sub-projects linked to th
 
 .. rubric:: Linked resources
 
-This section allows you to see the resources attached to the selected organization.
-
-.. figure:: /images/GUI/ORGANIZATION_ZONE_LinkedResources.png
-   :alt: Linked resource section
-   
-   Linked resource section
-   
+This section allows you to see the resources attached to the selected organization.   
       
-* Click on |buttonAdd| to add a new resource in the organization
+* Click on |Add| to add a new resource in the organization
 
-* Click on |buttonIconDelete| to delete a resource of the organization
+* Click on |Delete| to delete a resource of the organization
 
-* Click the **allocate all organization members to a project** button to assign all of an organization's resources to a project.
 
+* Click the :kbd:`allocate all organization members to a project` button to assign all of an organization's resources to a project.
 * The project assignment pop-up opens and allows you to choose your resources.
-
-
-.. figure:: /images/GUI/ORGANIZATION_BOX_AllocatoinProject.png
-   :alt: Allocation to the project  
-   
-   Allocation to the project
    
    
 See: :ref:`allocation-section`   
@@ -136,11 +123,6 @@ See: :ref:`allocation-section`
 
 .. rubric:: Linked elements
 
-.. figure:: /images/GUI/ORGANIZATION_ZONE_LinkedElements.png
-   :alt: Linked element section
-   
-   Linked element section
-   
 This section allow you to linked any element of ProjeQtOr to the selected organization.
 
 See: :ref:`linkelement-section`
@@ -148,12 +130,6 @@ See: :ref:`linkelement-section`
 
 .. rubric:: Attachments
 
-.. figure:: /images/GUI/ORGANIZATION_ZONE_AttachmentSection.png
-   :alt: Attachment section
-   
-   Attachment section
-   
-   
 This section allows you to attach elements external to the selected organization. Whether documents or url addresses.
 
 See: :ref:`attachment-section` 
