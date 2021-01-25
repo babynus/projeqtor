@@ -67,7 +67,7 @@ CREATE TABLE `${prefix}WorkCommand` (
   `doneQuantity` int(5) unsigned DEFAULT '0' COMMENT '5',
   `doneAmount` int(12) unsigned DEFAULT NULL COMMENT '12',
   `billedQuantity` int(5) unsigned DEFAULT '0' COMMENT '5',
-  `billedAmound` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `billedAmount` int(12) unsigned DEFAULT NULL COMMENT '12',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
