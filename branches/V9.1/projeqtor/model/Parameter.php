@@ -435,6 +435,11 @@ class Parameter extends SqlElement {
                     'true'=>i18n('displayYes'));
         break;
         
+       case 'enableWorkCommandManagement':
+          $list=array('false'=>i18n('displayNo'),
+          'true'=>i18n('displayYes'));
+          break;
+        
       case 'CaReplaceValidCost':
       	$list = array('NO'=>i18n('displayNo'),
       	              'YES'=>i18n('displayYes'));
@@ -1086,6 +1091,7 @@ class Parameter extends SqlElement {
                               'sectionFinancialWorkUnit'=>'section',
                               'ComplexitiesNumber'=>'number',
                               'CaReplaceValidCost'=>'list',
+                              'enableWorkCommandManagement'=>'list',
                           'newColumnbFinancialRight'=>'newColumn',
                         'tabMail'=>"tab",   
                           'newColumnMailLeft'=>'newColumn',
