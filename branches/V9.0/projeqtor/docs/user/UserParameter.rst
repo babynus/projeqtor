@@ -17,8 +17,9 @@ The User Settings screen allows you to configure personal settings, that is, for
 
 The parameters are organized by tab.
 
-.. figure:: /images/GUI/USERPARAM_BOX_AccessParam.png
-   :alt: Display Parameters section 
+You can access the user parameters by going through the Configuration menu or through the connection window.
+
+See: :ref:`Menu session<menu-session>`
    
    
 .. note:: 
@@ -43,7 +44,9 @@ Allows you to define the display of some elements of the interface like the hist
 or choose default behaviors like closing the page or flipping mode
 
 .. figure:: /images/GUI/USERPARAM_ZONE_SectionDisplay.PNG
-   :alt: Display Parameters section 
+   :alt: Display Parameters section
+   
+   Display Parameters
  
  
  
@@ -52,11 +55,7 @@ or choose default behaviors like closing the page or flipping mode
 Tab Export
 ----------
 
-This section allows you to define whether you want to print the history, whether to print or PDF export in a new window
-
-.. figure:: /images/GUI/USERPARAM_ZONE_Export.PNG
-   :alt: Print section 
-
+In this section, you define some simple export or print settings.
 
 
 .. _UP-automation:
@@ -67,10 +66,12 @@ Tab Automation
 Default selected project and choice of character (Set to “none” to get a flat list) used to indent lists of projects, to represent the WBS structure of projects and sub-project.
 
 .. figure:: /images/GUI/USERPARAM_ZONE_SectionAutomation.PNG
-   :alt: Miscellaneaous section 
+   :alt: Automation section 
    :align: center
+   
+   Automation tab
 
-you can also see all the items you are registered for tracking and delete them from this window
+you can also see all the items you are registered for tracking and delete them from this window.
 
    
 
@@ -88,26 +89,19 @@ To default, the first letter of the name appear as long as you don't add photo.
 
 .. rubric:: Photo management
 
-browse your pc to find an image that suits you or drag and drop in the area indicated and validate
-
-.. figure:: /images/GUI/USERPARAM_BOX_SectionPhoto_Browser.PNG
-   :alt: browse
-   :align: center
+Browse your pc to find an image that suits you or drag and drop in the area indicated and validate.
 
       
-* Click on |buttonAdd| or photo frame to add an image file. To complete instruction (see: :ref:`Attachment file<attachment-file>`).
+* Click on |Add| or photo frame to add an image file. To complete instruction (see: :ref:`Attachment file<attachment-section>`).
      
-* Click on |buttonIconDelete| to remove  the image.
+* Click on |Delete| to remove  the image.
    
 * Click on the image to display the photo in its original format.
 
 
-
-
-
 .. note::
 
-   * Photo management can also be done in :ref:`user`, :ref:`resource` , :ref:`contact` screens.
+   * Photo management can also be done in :ref:`user`, :ref:`resource` , :ref:`contact` screens, :ref:`thumbnails<thumbnails>`
 
 
 .. _user-password-section:
@@ -115,6 +109,6 @@ browse your pc to find an image that suits you or drag and drop in the area indi
 Section Password
 ================
 
-Click the **Change Password** button to set a new one
+Click on :kbd:`Change Password` to set a new one.
 
 
