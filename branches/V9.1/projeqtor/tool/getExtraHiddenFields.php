@@ -66,4 +66,5 @@ if (property_exists($obj, 'WorkElement') and $objectClass!='TicketSimple') {
   $resultWe=$we->getExtraHiddenFields($type,$status,$profile);
   $result=array_merge($result,$resultWe);
 }
+
 echo json_encode($result);

@@ -1388,7 +1388,7 @@ class PlanningElement extends SqlElement {
         $projOld = new Project($old->idProject,true);
         $projNew = new Project($this->idProject,true);
       }
-      if ($projOld->fixPerimeter) {
+      if ($projOld->fixPerimeter and !$projOld->allowReduction) {
         $result .= "<br/>" .i18n('msgUnableToMoveOutToFixPerimeter');
       }
       if ($this->realWork>0 and $projNew->isUnderConstruction==1) {
@@ -1433,7 +1433,7 @@ class PlanningElement extends SqlElement {
   	} else {
   	  $proj = new Project($this->idProject,true);
   	}
-  	if($proj->fixPerimeter){
+  	if($proj->fixPerimeter and !$proj->allowReduction){
   	  $result .= "<br/>" . i18n("msgUnableToDeleteOfFixPerimeter");
   	}
   	
