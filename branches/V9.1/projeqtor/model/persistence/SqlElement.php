@@ -2383,6 +2383,7 @@ abstract class SqlElement {
     }
     if (property_exists ( $newObj, "fixPerimeter" )) {
       $newObj->fixPerimeter = 0;
+      $newObj->allowReduction = 0;
     }
     //gautier #4404
     if (get_class ( $newObj ) == 'Asset') {

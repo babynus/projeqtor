@@ -2851,7 +2851,12 @@
 
 
 
-
+.iconViewAllSubTask { background-image: url(images/iconTodoList.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconViewAllSubTask  { background-image: url(customIcons/blue/iconTodoList.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconViewAllSubTask { background-image: url(customIcons/green/iconTodoList.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconViewAllSubTask { background-image: url(customIcons/grey/iconTodoList.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconViewAllSubTask { background-image: url(customIcons/red/iconTodoList.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconViewAllSubTask { background-image: url(customIcons/new/iconTodoList.svg);  background-repeat: no-repeat; }
 
 
 
