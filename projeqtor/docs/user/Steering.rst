@@ -59,7 +59,7 @@ Each meeting is displayed in the agenda
    * - :term:`Id`
      - Unique Id for the meeting.
    * - Name
-     - Short description of the meeting.
+     - Short description of the meeting. If not set, will automatically be set to meeting type completed with meeting date.
    * - |RequiredField| Meeting type
      - Type of meeting. 
    * - |RequiredField| Project
@@ -75,19 +75,15 @@ Each meeting is displayed in the agenda
    * - Agenda of the meeting
      - Description of the meeting and agenda. 
      
-      
-.. topic:: Field Name
+     
+Description can be used to store agenda. 
 
-   If not set, will automatically be set to meeting type completed with meeting date.
-
-.. note:: Description can be used to store agenda.
-
-.. rubric:: Button **Email invitation**
+.. rubric:: Email invitation
 
 * Allows to send the email to attendees.
 * They will receive the invitation in their calendar management tool. 
 
-.. rubric:: Section Treatment
+.. rubric:: Treatment
 
 .. tabularcolumns:: |l|l|
 
@@ -97,7 +93,7 @@ Each meeting is displayed in the agenda
    * - Field
      - Description
    * - Parent activity
-     - Parent activity of the meeting.
+     - Parent activity of the meeting. In the WBS structure, under which the meeting will be displayed in the Gantt planning.
    * - |RequiredField| Status
      - Actual :term:`status` of the meeting.
    * - :term:`Responsible`
@@ -113,9 +109,7 @@ Each meeting is displayed in the agenda
    * - :term:`Minutes<Result>`
      - Minutes of the meeting.
  
-.. topic:: Field Parent activity
 
-   * In the WBS structure, under which the meeting will be displayed in the Gantt planning.
 
 .. note::
 
@@ -146,8 +140,7 @@ Each meeting is displayed in the agenda
 Live Meeting
 ------------
 
-
-**With LiveMeeting you can manage meetings in an :ref:`Agile` way:**
+LiveMeeting you can manage meetings in an :ref:`Agile<agile-methods>` way.
 
 * Manage minutes of meetings quickly
 
@@ -162,16 +155,9 @@ Live Meeting
 * Manage tickets, activities, actions and requirements with Kanban while writing minutes.
 
 
-**A new button is present in the meeting screen:**
+Click on :kbd:`Start meeting` button to access the Live Meeting Management screen.
 
-.. figure:: /images/GUI/AGILE_ZONE_LiveMeeting-Button.png
-   :alt: The LiveMeeting button
-   
-   The Live Meeting button
-
-Click this button to access the Live Meeting Management screen.
-
-.. figure:: /images/GUI/AGILE_SCR_LiveMeeting.PNG
+.. figure:: /images/GUI/AGILE_SCR_LiveMeeting.png
    :alt: The LiveMeeting screen
    
    The Live Meeting screen
@@ -179,14 +165,14 @@ Click this button to access the Live Meeting Management screen.
 * Click on **Hide time counters** to show or hide participants' tabs with their speaking time    
 * Click on |meetingPlay| to start the meeting and to start decrementing the speaking time
 * Click on |meetingStop| to stop the meeting and close the LiveMeeting window 
-* Click on |buttonQuit| to exit the LiveMeeting screen
-* Click on |buttonIconSave| to save the live meeting report
+* Click on |Quit| to exit the LiveMeeting screen
+* Click on |Save| to save the live meeting report
 
-See: :ref:`Live-meeting-Agile`
+See: :ref:`livemeeting-agile`
 
 .. rubric:: Kanban Management
 
-Click on |iconKanban| to manage the kanbans
+Click on |Kanban| to manage the kanbans
  
 .. figure:: /images/GUI/AGILE_SCR_LiveMeeting-Kanban.png
    :alt: Kanban management
@@ -214,7 +200,7 @@ Periodic meetings
 
 Periodic meeting is a way to define some meetings that will occur on a regular basis.
 
-.. figure:: /images/GUI/REVIEWLOGS_SCR_PeriodicMeeting.png
+.. figure:: /images/GUI/STEERING_SCR_PeriodicMeeting.png
    :alt: Periodic Meeting screen
    :align: center
    
@@ -228,23 +214,23 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
   
 .. rubric:: Periodic meeting process
 
-* When recording a recurring meeting, unit meetings are automatically created in a parent folder.
+When recording a recurring meeting, unit meetings are automatically created in a parent folder.
 
-.. figure:: /images/GUI/REVIEWLOGS_ZONE_Gantt-PeriodMeetings.png
+.. figure:: /images/GUI/STEERING_ZONE_Gantt-PeriodMeetings.png
    :alt: displaying periodic meetings in the Gantt chart 
    
    Display of unit meetings under the parent folder
          
-* When the parent folder is closed, the meeting lines are not visible, but they appear on the same line as the folder.
+When the parent folder is closed, the meeting lines are not visible, but they appear on the same line as the folder.
 
-.. figure:: /images/GUI/REVIEWLOGS_ZONE_Gantt-PeriodMeetings_HIDE.png
+.. figure:: /images/GUI/STEERING_ZONE_Gantt-PeriodMeetings_HIDE.png
    :alt: displaying periodic meetings on the bar 
    
    Display of single meetings on the parent folder bar
 
-* Changes can be made on each group meeting.
+Changes can be made on each group meeting.
 
-* In most cases, these changes will not be affected or erased by periodic meeting updates.
+In most cases, these changes will not be affected or erased by periodic meeting updates.
       
 
    
@@ -354,21 +340,21 @@ Attendees section
   
 * Ability to assign to a meeting a resource or a contact or a user not member of the project team
 
-.. figure:: /images/GUI/REVIEWLOGS_ZONE_Attendees.png
+.. figure:: /images/GUI/STEERING_ZONE_Attendees.png
    :alt: Attendees section
    :align: center
 
 
 .. rubric:: Attendee list
 
-* Click on |buttonAdd| to add a new attendee
-* Click on |buttonEdit| modify the assignment of the resource
-* Click on |buttonIconDelete| to delete the assignment of the resource
-* Click on |iconSplit| to divide the assignement with another resource
+* Click on |Add| to add a new attendee
+* Click on |Edit| modify the assignment of the resource
+* Click on |Delete| to delete the assignment of the resource
+* Click on |Split| to divide the assignement with another resource
 
 .. note:: Mandatory participant
 
-   The icon |iconStar| indicates that the presence of the participant is mandatory
+   The icon |Star| indicates that the presence of the participant is mandatory
  
    More detail about how assigned project resources, see: :ref:`assignment-section` section.
    
@@ -400,9 +386,6 @@ Change Request
 **************
 
 The change request feature provides effective tracking of your customer's change requests.
-
-.. figure:: /images/GUI/STEERING_SCR_ChangeRequest.png
-   :alt: Change Request screen
 
 Its purpose is to describe a process that makes clear how the change is communicated, how decisions will be made and by whom and how the project will adapt accordingly.
 
