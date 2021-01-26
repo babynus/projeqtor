@@ -318,7 +318,7 @@
             </tr>
              <?php }}
        // fix planning, fixPerimeter, under construction
-             $arrayCheckbox=array("fixPlanning","fixPerimeter","isUnderConstruction");
+             $arrayCheckbox=array("fixPlanning","fixPerimeter","allowReduction","isUnderConstruction");
              foreach($arrayCheckbox as $checkField) {
              if(get_class($obj)=='Activity' and $checkField=='fixPlanning')continue;
              if (isDisplayable($obj,$checkField)) {?>

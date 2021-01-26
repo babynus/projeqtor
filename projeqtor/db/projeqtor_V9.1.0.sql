@@ -91,3 +91,6 @@ CREATE TABLE `${prefix}WorkCommandBilled` (
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 ALTER TABLE `${prefix}planningElement` ADD `idWorkCommand` INT(12) DEFAULT NULL COMMENT '12';
+
+ALTER TABLE `${prefix}project`
+ADD `allowReduction` int(1) unsigned DEFAULT 0 COMMENT '1';

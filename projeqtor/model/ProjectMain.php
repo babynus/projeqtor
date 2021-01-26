@@ -72,6 +72,7 @@ class ProjectMain extends SqlElement {
   public $_lib_helpFixPlanning;
   public $fixPerimeter;
   public $_lib_helpFixPerimeter;
+  public $allowReduction;
   public $isUnderConstruction;
   public $_lib_helpUnderConstruction;
   public $excludeFromGlobalPlanning;
@@ -135,6 +136,7 @@ class ProjectMain extends SqlElement {
   private static $_fieldsTooltip = array(
       "fixPlanning"=> "tooltipFixPlanning",
       "fixPerimeter"=> "tooltipFixPerimeter",
+      "allowReduction"=> "tooltipAllowRedution",
       "isUnderConstruction" => "tooltipUnderConstruction",
       "excludeFromGlobalPlanning" => "tooltipExcludeFromGlobalPlanning",
       "commandOnValidWork"=> "tooltipCommandOnValidWork",
@@ -196,6 +198,7 @@ class ProjectMain extends SqlElement {
   			self::$_fieldsAttributes['idHealth']='hidden';
   			self::$_fieldsAttributes['isUnderConstruction']='hidden';
 			  self::$_fieldsAttributes['fixPerimeter']='hidden';
+			  self::$_fieldsAttributes['allowReduction']='invisible';
 			  self::$_fieldsAttributes['excludeFromGlobalPlanning']='hidden';			
   			self::$_fieldsAttributes['handled']='hidden';
   			self::$_fieldsAttributes['handledDate']='hidden';
@@ -335,6 +338,18 @@ class ProjectMain extends SqlElement {
       $colScript .= '  } else {';
       $colScript .= '    dijit.byId("done").set("checked", false);';
       $colScript .= '  }';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';     
+    }else if ($colName=="fixPerimeter") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if (this.checked) { ';
+      $colScript .= '    dojo.query(".generalRowClass.allowReductionClass").forEach(function(domNode){domNode.style.display="table-row";});';
+      $colScript .= '    dojo.query(".generalColClass.allowReductionClass").forEach(function(domNode){domNode.style.display="inline-block";});';
+      $colScript .= '  } else {';
+      $colScript .= '    dojo.query(".allowReductionClass").forEach(function(domNode){domNode.style.display="none";});';
+      $colScript .= '     dijit.byId("allowReduction").set("value", 0);';
+      $colScript .= '     dijit.byId("allowReduction").set("checked", "");';
+      $colScript .= '  } ';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';     
     } else if ($colName=="idProjectType") {
@@ -1426,6 +1441,9 @@ static function isTheLeaveProject($id=null) {
     }
     if ($this->ProjectPlanningElement and $this->ProjectPlanningElement->realWork>0) {
       self::$_fieldsAttributes["isUnderConstruction"]="readonly,nobr";
+    }
+    if($this->fixPerimeter==0){
+      self::$_fieldsAttributes["allowReduction"]="invisible";
     }
   }
   
