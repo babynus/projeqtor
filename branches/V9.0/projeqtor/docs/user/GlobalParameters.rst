@@ -1001,8 +1001,7 @@ Parameters to manage how the connection behaves
 All the necessary parameters for connecting your projeqtor instances with your corporate LDAP 
 
 .. figure:: /images/GUI/GLOBALPARAM_ZONE_LDAP.png
-   :alt: Global parameters : LDAP
-   :align: center
+   :alt: LDAP
    
    LDAP
    
@@ -1187,18 +1186,33 @@ Automatic import settings for :term:`cron` processes.
    
 Activated or desactived this feature by simple click
   
-   .. compound:: Differential calculation
+ .. compound:: Differential calculation
    
-         Project planning is recalculated only for those who need to be. A data or more has been changed into the project so a new calculation is expected. 
+   Project planning is recalculated only for those who need to be. A data or more has been changed into the project so a new calculation is expected. 
    
-   .. compound:: Complete calculation
+ .. compound:: Complete calculation
    
-         All projects planning are recalculated. 
+   All projects planning are recalculated. 
          
 
-You can choose the option **Automatic feed of the real** which will inform the real work according to the planned dates.
+ .. compound:: Automatic feed of the real
+   
+   You automatically fill in the actual work from the scheduled work up to a given date.
 
-See: :ref:`automatic-inuptwork`         
+   The automatic calculation of projects from the day after this date is triggered.
+
+   The actual work is automatically entered from the scheduled work until the day before the start of the schedule calculation.
+
+      .. warning:: 
+      
+         For security, and to avoid overlapping with a manual input of reality, if the resource has reality for a given date, we do not copy the possible planned existing in reality.
+ 
+   For each scheduled job found, if no job exists for the relevant resource on the date of the scheduled job, copies the scheduled job to an actual job.
+  
+   We will mark the actual work entered automatically (technical zone type label) to distinguish between automatic feeding and manual feeding.
+
+   This area will not be processed for screen renderings, but will analyze any unexpected behavior.
+         
 
 
  .. compound:: Frequency 
