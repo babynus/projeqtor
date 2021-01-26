@@ -19,17 +19,15 @@ Real work allocation
 .. _timesheet:
 
 Timesheet
-=========
+---------
 
-This screen is devoted to input of real work.
+This screen is dedicated to entering actual work.
 
-The resource informs his work day by day, for each assigned task.
+The resource completes their work every day, for each assigned task.
 
-Data entry for one resource, on a weekly base.
+Data entry for a resource is done on a weekly basis.
 
-.. note::
-
-   The corresponding cost to the real work is automatically updated to the assignment, activity and project.
+The corresponding cost to the real work is automatically updated to the assignment, activity and project.
 
 .. figure:: /images/GUI/REALWORK_SCR_TimeSheetZone.png
    :alt: Timesheet zone screen
@@ -39,64 +37,36 @@ Data entry for one resource, on a weekly base.
 
 .. topic:: Interface areas 
 
-   |one| :ref:`Selection timesheet<selectionTimesheet-section>`
+   |one| :ref:`Selection and filters<selectionTimesheet>`
    
-   |two| :ref:`Filters on the display<filters-resource-planning>`
+   |two| :ref:`Tools<tools-timesheet>`
    
-   |three| :ref:`Show planned work<show-plannedwork>`
+   |three| :ref:`Data entry validation<data-entryvalidation-timesheet>`
    
-   |four| :ref:`Buttons<buttons-timesheet>`
+   |four| :ref:`Task Zone<taskzone-imputation>`
    
-   |five| :ref:`Data entry validation<data-entryvalidation-timesheet>`
-   
-   |six| :ref:`Entry fields<entry-fields>`
-
-
-.. warning:: 
-
-   **Global parameter - Number of hours per day**
-
-   * In global parameters screen, you can define wether work will be entered in hours or in days.
-   * If you enter work in hours, you must define  the parameter **number of hours per day** before some real work has been entered.
-   * After first work is entered, this parameter will be locked.
-      
-   **see:** :ref:`Global Parameters<work>`
+   |five| :ref:`Entry field<entryfield-timesheet>`
    
 
 
-.. _selectionTimesheet-section:   
 
-Selection timesheet
--------------------
+.. _selectionTimesheet:   
 
-.. figure:: /images/GUI/REALWORK_ZONE_TimeSheetSelector.png
-   :alt: Timesheet selector zone
-   
-   Timesheet selector zone
+.. rubric:: |oneBLC| Selection and filters
 
-Allows to select a timesheet for a resource and for a period
+This filters allows to select a timesheet for a resource and for a period.
 
- .. compound:: |one| Selection of the resource 
+.. _resourceselection:
 
-  * By default, users can only select themselves as a resource.
+ .. compound:: Resource selection 
 
-  * Access to other resources timesheet depending on :ref:`specific_access`, then user can select other resources timesheets. 
+   * By default, users can only select themselves as a resource.
 
-  * Clicking on the checkbox below allows to select only resources allocated to the selected project on the list roll displayed. 
-
-    .. figure:: /images/GUI/REALWORK_ZONE_Timesheet_LimitList.PNG
-       :alt: Limit list of resources
-       
-       Limit list of resource
-
-
-  * The button |iconGoto| allows you to go to the timesheet of the selected resource with the line of the current element highlighted.
+   * Access to other resources timesheet depending on :ref:`specific_access`. 
   
-  * For more details see :ref:`goto-timesheet`
 
 
-
- .. compound:: |two| Selection period
+ .. compound:: Selection period
 
   By default, the period is determined according to the current day.
   
@@ -106,20 +76,10 @@ Allows to select a timesheet for a resource and for a period
 
    * The "first day" filter allows you to choose a specific date, day, month and year. The full week containing this date will be displayed.
 
-   * the button today targets the current week and D-day is highlighted
+   * The button today targets the current week 
 
-  .. figure:: /images/GUI/REALWORK_ZONE_DDay.png
-     :alt: the current week and D-day highlighted
-     
-     The current week and D-day highlighted 
+   * The D-day is highlighted.
   
- .. compound:: |three| Displayed timesheet
-
-  A timesheet is displayed depends on the resource and period selection.
-  
-  * The name of the resource and the week are displayed.
-  * The days of the week are displayed.
-  * The current day is displayed.
 
 
 
@@ -128,85 +88,65 @@ Allows to select a timesheet for a resource and for a period
 
 
 
-.. _filters-resource-planning:
+.. _tools-timesheet:
 
-Filters on the display
-----------------------
+.. rubric:: |twoBLC| Tools
 
-Filters allow to define the list of assigned tasks displayed.
+* Click on |Save| to save timesheet datas.
+* Click on |Refresh| to refresh datas.
+* Click on |SubMenu| to display options.
+* Click on |Print| to print timesheet.
+* Click on |Pdf| to export timesheet in PDF format.
+* Click on |Csv| to export timesheet in CSV format.
+
+
+
+.. figure:: /images/GUI/REALWORK_BOX_Options.png
+   :alt: timesheet options
+   
+   Timesheet options
+   
+   
+Filters allow to define the list of tasks displayed.
 
  .. compound:: **Show only current week meeting**
 
-    * Check this box to show only the tasks on meetings of the week.
+   * Recurring meetings display all meetings with one meeting per line. Depending on the period and frequency of your recurring meetings, many lines may be displayed.
+
+   * With this option, you only display meetings for the week displayed on the screen..
 
  .. compound:: **Hide done items**
 
-    * Check this box to hide completed tasks.
+   * Check this box to hide completed tasks. With left work to 0.
     
- .. compound:: **Hide not handled items**
+ .. compound:: **Hide not started items**
 
-    * Check this box to hide tasks not taken over.
+   * Select this check box to show or hide unsupported tasks. The macro state **in progress** must be activated and saved for the tasks to appear.
+    
+ .. compound:: **Limit list of resource for selected project**
+
+   * You can limit the display of the :ref:`resource selection<resourceselection>` drop-down list. If you have selected a project in your :ref:`project selector<project-selector>` then you will only see the resources assigned to that project.    
 
  .. compound:: **Show closed items**
 
-    * Check this box to show closed tasks.
+   * Check this box to show closed tasks. Archived tasks.
+
+.. _show-plannedwork:
+
+ .. compound:: **Show planned work**
+
+   * Planned work is indicated on each input cell, in the upper left corner, in light blue.
+   * Allows you to display the planned working time per day for the resource assigned to the task.
+   
+   
+   .. figure:: /images/GUI/REALWORK_ZONE_PlannedWork.png
+      :alt: Planned work displayed zone
+   
+      Planned work
 
  .. compound:: **Show ID**
 
     * Show ID to identify all single task.
-
-.. note:: 
-
-   **Global parameter - "Display only handled tasks"**
-
-   If the value of the parameter is set to "Yes", only tasks taken over (status "handled") will be displayed.
-   
-   The checkbox "Hide not handled items" will be hidden.
-
-
-
-
-
-
-
-
-
-.. _show-plannedwork:
-
-Show planned work
------------------
-
-* Check this box to display the planned work.
-* Planned work is indicated over each input cell, on top left corner, in light blue color.
-* Allows to display the planned working time by day, for the resource assigned to the task.
-
-.. figure:: /images/GUI/REALWORK_ZONE_WithPlannedWork2.png
-   :alt: Planned work displayed zone
-   :align: center
-
-   Planned work displayed zone
-
-.. note::
-
-   The planned work will be deleted if the real work is entered instead of planned work (to avoid duplication of work in reports) to see it you have to refresh the screen.
-
-
-
-
-.. _buttons-timesheet:
-
-Buttons
--------
-
-Buttons of the timesheet:
-
-* Click on |buttonIconSave| to save timesheet data.
-* Click on |buttonIconPrint| to print timesheet.
-* Click on |buttonIconPdf| to export timesheet in PDF format.
-* Click on |buttonIconCsv| to export timesheet in CSV format.
-* Click on |buttonIconUndo| to undo modification on the timesheet.
-
-
 
 
 
@@ -215,252 +155,161 @@ Buttons of the timesheet:
 
 .. _data-entryvalidation-timesheet:
 
-Data entry validation
----------------------
+.. rubric:: |threeBLC| Data entry validation
 
-.. image:: /images/GUI/Button_Timesheet_EnterRealWork.png 
 
-* To enter automatically  the work as it is planned
+:kbd:`Enter real as planned` 
 
-.. image:: /images/GUI/Button_Timesheet_SubmitWork.png 
+* Planned work on an activity for a resource is carried forward for each day.
 
-* Buttons allow to send and validate real work.
-* Displayed if mandatory
-* Users can send works to project leader.
+* If there is no figure displayed then it means that the resource is not supposed to be informed of the actual work on this activity during this period.
 
-.. image:: /images/GUI/Button_Timesheet_ValidateWork.png 
+* Even if planned work is scheduled for a resource, there is nothing forcing it to complete its work as expected.
 
-* Project leaders can validate works.
+* The option **Show planned work** must be activated.
 
 
 
+:kbd:`Submit work` 
+
+ProjeQtOr offers a system of validation of charges which makes it possible to follow the information of the real work of resources by a hierarchical manager.
+
+The validation system is optional and can therefore be hidden.
+
+After sending the actual work, you can no longer change the actual working time for the week.
+
+You must cancel the validation request to make a change.
+
+ 
+:kbd:`Validate work`
+
+* Project managers can validate the work or any other personalized profile authorized to do so.
+
+* Only people with the necessary permissions can see this button
+
+* When the work is validated, then the resource can no longer modify its work on this week. Likewise, the cancellation of validation will no longer be available.
 
 
 
-.. _entry-fields:
-
-Entry field
------------
-
-.. figure:: /images/GUI/REALWORK_ZONE_InputTimesheet.png
-   :alt: Input timesheet zone
-   :align: center
-
-   Input timesheet zone
-   
-.. topic:: Interface areas
-
-   |one| :ref:`comments<comments-entryfields>`
-   
-   |two| :ref:`Real work entry<real-work-entry>`
-   
-   |three| :ref:`Left work<left-work>`
-   
-   |four| :ref:`Task list<realwork-task-list>`
-   
-   |five| :ref:`Assigned task function<assignedtask-function>`   
-   
-   |six| :ref:`Assigned task comment<assignedtask-comment>`   
-   
 
 
+.. _taskzone-imputation:
 
-   
-.. _comments-entryfields:      
+.. rubric:: |fourBLC| Task Zone
 
-.. rubric:: |oneBLC| Comments
 
+The list displays the tasks assigned to the resource selected in the list.
+
+Click on the activity name to access the activity details screen.
+
+Tasks assigned with actual work are always displayed, even when closed.
+
+The function of the resource on this task is displayed at the end of the line.
+
+.. Note:: 
+
+   * A resource can have multiple :ref:`functions<resource-function-cost>`.
+
+   * It is possible to :ref:`assign<assignment-section>` the same resource several times but with different functions to monitor project costs.
+
+
+* The icon |AddComment| allows you to add a comment.
+* The icon |Comment| indicates that there is a comment on the assigned task. 
+* Simply move the mouse over the icon to see the latest comment.
+* Click to view all comments
 * A global comment can be added on the weekly follow-up.
-* Possibility to extend the main comment area.
-* Can enter a comment on each line of real work allocation screen.
 
+           
+The Start and End columns display the planned dates for each activity.
+
+   
+   
+
+
+.. _entryfield-timesheet:
+
+.. rubric:: |fiveBLC| Entry field
+
+
+In order to see and know the assignments on a task, several columns indicate the periods assigned to a resource
+
+
+ .. compound:: Assigned
+
+   It is the work assigned to the resource that is calculated by the software.
+   
+ .. compound:: Real work
+
+   This is the work actually performed and reported by the resource.
+   
+ .. compound:: Left work
+   
+   This is the work that the resource still has to provide for this task
+   
+   Left work is automatically decreased on input of real work.
+   
+   Resources can adjust this value to estimate the work needed to complete the task.
+   
+ .. compound:: Reassessed
+   
+   This is the work required to complete the task. It's the actual work + the rest to do. See: "progress-section-date-duration"
+   
+   * You cannot edit Assigned Work, Actual Work, and Reassessed directly in columns.
+      
+   * This information is calculated directly by the software based on what you have entered
 
 
 
 
 .. _real-work-entry:
 
-.. rubric:: |twoBLC| Real work entry
+ .. compound:: Real work entry
 
-* Area to enter real work.
-* Week is displayed from monday to sunday.
-* It possible put real work in off days.
+   * Area to enter real work. It possible put real work in off days.
+   * Columns of days off is displayed in grey.
+   * Days off is determine in resource :ref:`calendar definition<calendars>`.
 
-.. compound:: **Days off**
 
-    * Columns of days off is displayed in grey.
-    * Days off is determine in resource calendar definition, see: :ref:`calendars`.
-
-.. compound:: Periods types
-
-    In order to see and know the assignment times on a task, several columns indicate the periods that are assigned to a resource
-
-      * **Planned dates**: Planned start and end dates.
-      * **Assigned**: Planned work assigned to the resource.
-      * **Real**: Sum of work done by the resource.
-      * **Left**: The remaining planned work. 
-      * **Reassessed**: The work needed to complete the task. 
+ .. compound:: Total of days
+   
+   On the last row is the sum for all days of the week. 
       
-  .. figure:: /images/GUI/REALWORK_ZONE_RowsTime.png
-     :scale: 60%
-              
-          
-.. compound:: Total of days
-
-  On the last column is the sum for all days of the week. 
-
-  It is a synthesis displayed for each project and globally for the whole week.
-    
-  .. figure:: /images/GUI/REALWORK_ZONE_TimesheetTotalDay.PNG
-    :alt: Total of the day
+   It is a synthesis displayed for each project and globally for the whole week.
    
-    Total of the day Zone  
+   The resource capacity is defined by the number of hours per day and the resource capacity (fte).
    
- 
-
-.. compound:: Input entry validation
-
- * These controls are not blocking.
-
- * yellow background : Enhancement of data entered
-
-
-.. compound:: Resource capacity validation
-
-* The total of the day is green whether entries respects the resource capacity of days.
-* The total of the day is red whether entries is more than the resource capacity of days.
-
-.. compound:: Resource capacity of days
-
-   * The resource capacity is defined by the number of hours per day and the resource capacity.
+         
+   .. figure:: /images/GUI/REALWORK_ZONE_TimesheetTotalDay.png
+      :alt: Total of the day
+         
+      Total of the day Zone  
    
-   * The number of hours per day is defined on :ref:`Global parameters<unitForWork-section>` screen.
+
+   * The total of the day is **green** whether entries respects the resource capacity of days.
+   * The total of the day is **red** whether entries is more than the resource capacity of days.
+   * The total of the day is **no colored** whether entries is less than the resource capacity of days.
+
+
+
+.. seealso:: Timesheet parameters
+
+   * :ref:`Unit for work<unitForWork-section>`
    
-   * The capacity of the resource is defined on :ref:`resource` screen.
-
-.. figure:: /images/GUI/REALWORK_ZONE_WithColumnsValidation.png
-   :alt: Columns validation zone
-   :align: center
-
-   Columns validation zone
-
-
-.. compound:: Entering real work is in excess of the number of days specified 
-
-* This alert box appears when the real work to a resource is entering ahead of time.
-
-.. figure:: /images/GUI/REALWORK_ALERT_RealWorkBlocked.png
-
-* Resource can enter his real work is defined in "max days to book work" parameter in :ref:`Global parameters<unitForWork-section>` screen.
-    
-.. figure:: /images/GUI/GLOBALPARAM_WorkTime_Timesheet.png
-   :alt: Real work over expected days alert
-   :align: center
-
-
-
-.. topic:: **Unit time of real work data entry**
-
-    * The global parameter **Unit for real work allocation** into Work Time tab allows to set the unit time.
-    
-    .. figure:: /images/GUI/GLOBALPARAM_WorkTime_UnitsWorks.png
-    
-    * unit for Timesheet (real work) : available are in "Days" or "Hours".
-    * Selected unit time is displayed on left at bottom window.      
-
-
-
-
-
-
-
-
-
-
-
-
-.. _left-work:
-
-.. rubric:: |threeBLC| Left work
-
-* Left work is automatically decreased on input of real work.
-* Resources can adjust this value to estimate the work needed to complete the task.
-
-
-
-
-
-
-
-
-.. _realwork-task-list:
-
-.. rubric:: |fourBLC| Tasks list
-
-The list displays the assigned tasks for the resource.
-
-   * Only assigned tasks that meet the next criteria will be displayed.
+     Allows to set the unit time for real work and workload and the number of days worked per week. The number of hours per day is defined here.
+           
+   * :ref:`Timesheet<realWorkAllocation-section>` 
    
-   * Assigned tasks planned during this period.
-   
-   * Assigned tasks that meet the criteria of selected filters.
-
-   * Assigned tasks are grouped by project and displayed according the project structure.  
-
-   * Click on the name of the activity to access the detail screen.
-   
-.. note::
-
-     * Assigned tasks with real work are always displayed, even if closed.
-     * The goal is to show all lines of the sum for each column, to be able to check that the week is completely entered.
-
-  
-
- 
-
-.. _assignedtask-function:
-
-.. rubric:: |fiveBLC| Assigned task function
-
-* The assigned task function is displayed in blue after the name of the activity.  
-
-
-
-
-
-.. _assignedtask-comment:
-
-.. rubric:: |sixBLC| Assigned task comments
-    
-* The icon |iconNoteAdd| allows to add a comment.
-* The icon |Note| indicates there is a comment on assigned task. 
-* Just move the mouse over the icon to see the last comment.
-
-.. note:: The comments |Note|
-
-   fly over the icon with the mouse to see the comment
-   
-   .. figure:: /images/GUI/REALWORK_BOX_Timesheet_ViewComment.PNG
-   
-   * Click on the icon to open windows view comments
+     You can set many levers, alerts or display options
       
-   .. figure:: /images/GUI/REALWORK_BOX_leftclickNote.png
-      :alt: 
-      :align: center
-             
-        
-
-
-
-
-
-
-
-
-
-
-
-
+   * :ref:`Generation of alerts if real work is not entered<gp-genereation-alert-realwork>`
+   
+     You can trigger alerts on the entry of actual work for different collaborators.
+     These messages can be sent at a frequency defined by email or displayed as an alert directly in the application.
+    
+   * :ref:`Automatic feeding of the real<automatic-planning-calcul>`
+   
+     You can automatically fill in the actual work from the work scheduled up to a given date and then trigger the automatic calculation of the projects from the day after that date.
+   
 
 
    
@@ -473,33 +322,25 @@ The status of tasks
 
 The task status can be changed automatically according to data entries on real work and left work.
 
-.. rubric:: Global parameter "Set to first 'handled' status"
+* Set to first **in progress** status: if the parameter value is set to "Yes", when real work is entered on a task, its status will be changed automatically to the first status "handled".
 
-* If the parameter value is set to "Yes", when real work is entered on a task, its status will be changed automatically to the first status "handled".
+* Set to first **done** status: if the parameter value is set to "Yes", when left work is set to zero on a task, its status will be changed automatically to the first status "done".
 
-.. rubric:: Global parameter "Set to first 'done' status"
+ .. compound:: Change status validation
 
-* If the parameter value is set to "Yes", when left work is set to zero on a task, its status will be changed automatically to the first status "done".
+   An icon will be displayed on the task if a status change is applicable.
 
-.. rubric:: Change status validation
+   * |statusStart| Due to real work is entered, the task status will be changed to the first 'handled' status.
+   * |statusStartKO| The real work is entered, but the task status will not change because at issue is occurring. 
+   * |statusFinish| Due to no more left work, the task status will be changed to the first ‘done’ status.
+   * |statusFinishKO| No more left work, but the task status will not change because at issue is occurring. 
 
-* An icon will be displayed on the task if a status change is applicable.
-
- .. compound:: **Icons**
-
-    * |statusStart| Due to real work is entered, the task status will be changed to the first 'handled' status.
-    * |statusStartKO| The real work is entered, but the task status will not change because at issue is occurring. 
-    * |statusFinish| Due to no more left work, the task status will be changed to the first ‘done’ status.
-    * |statusFinishKO| No more left work, but the task status will not change because at issue is occurring. 
-
-    .. note::
-
-       Move the cursor over the icon to see the message.
-
- .. compound:: **Common issue**
+   .. warning:: Common issue
 
     * If a :term:`responsible` or a :term:`result` are set as mandatory in element type definition for the task. It's impossible to set those values by real work allocation screen.
     * The change status must be done in treatment section on the task definition screen.
+
+
 
    
 .. raw:: latex
@@ -507,49 +348,61 @@ The task status can be changed automatically according to data entries on real w
     \newpage
     
 Timesheet Validation
-====================
+--------------------
 
-The timesheet validation screen allows the project manager to receive, verify and validate the time allocated weekly by the resources to an activity for all the projects to which this resource is assigned.
 .. figure:: /images/GUI/REALWORK_ZONE_TimesheetValidation.png
-
-
-.. list-table:: Fields - Timesheet validation
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Resource
-     - resource name, owner of the posting sheet
-   * - Week
-     - dates of the imputed period - One shipment per week
-   * - Expected
-     - Expected work for the resource
-   * - Operational work
-     - work actually done for the resource
-   * - Administrative work
-     - period of leave/sickness/absence
-   * - Sum
-     - total days of resources over the period indicated
-   * - Timesheet submitted
-     - Date the timesheet was sent by the resource 
-   * - Timesheet validation
-     - project learder placeholder to validate or invalidate timesheet
-
-.. note:: **Color code**
-
-   According to the work completed by the resource, and according to the expected workload for this resource, 
+   :alt: Timesheet validation
    
-   the PL receives the timesheet with a precise color code
+   Timesheet validation
+   
+   
+The timesheet validation screen allows the project manager to receive, verify and validate the time allocated weekly by the resources to an activity for all the projects.
 
-      * **Green:** The completed job is the same as the expected one.
+ .. compound:: Selection and filters
+ 
+   You can filter the display of this screen by resource, by team and by period.
 
-      * **Red:** The filled workload is shorter or longer. It does not match the expected work.
+   The visibility of resources in the list is defined according to your rights defined by your profile.
 
-      * **Orange:** the job is not the same as the expected job but the load is the same.
-
-
+   You can increase the display restriction with the possibility to show only some of the validation request.
 
 
+
+
+ .. compound:: Color code
+
+      According to the work completed by the resource, and according to the expected workload for this resource.
+      
+      The project leader receives the timesheet with a precise color code.
+   
+         * **Green:** The completed job is the same as the expected one.
+   
+         * **Red:** The filled workload is shorter or longer. It does not match the expected work.
+   
+         * **Orange:** the job is not the same as the expected job but the load is the same.
+         
+         
+         
+         .. figure:: /images/GUI/REALWORK_ZONE_ImputationOrange.png
+            :alt: orange code
+            
+            Example of completed charges which generate the orange color code
+
+
+
+ .. compound:: Validation
+
+   In the "Timesheet submitted" column you see the date and time when the resource to send the submission.
+   
+   In the "Timesheet validation" column you have the possibility to validate the work or to cancel the submission so that the resource can correct his work.      
+      
+      
+      
+      
+      
+      
+      
+      
    
 .. raw:: latex
 
@@ -560,7 +413,7 @@ The timesheet validation screen allows the project manager to receive, verify an
 .. _monthly-consolidation:
 
 Monthly consolidation
-=====================
+---------------------
 
 Monthly consolidation allows you to view, control and validate resource allocations to a particular project for an entire month.
 This screen will list all the projects on which the user has visibility.
@@ -621,31 +474,6 @@ The |submitted| and |unsubmitted| buttons allow you to block or unblock charges 
 
 
    
-.. raw:: latex
-
-    \newpage
-    
-.. _automatic-inuptwork:
-
-Automatic input of work
-=======================
-
-The goal is to be able to automatically inform the real from the planned, until a given date, then trigger the automatic calculation of the projects from the day after that date.
-
-.. warning::
-
-   However, it will be necessary to ensure that the automatic capture of the real does not come superimposed on an actual seizure of real work by a resource, which would indicate in this way having worked differently from what had been planned.
-
-A parameter "automatic feed of the real" has been added on the setting of the complete automatic calculation.
-
-If the parameter "Automatic feed of the real" is selected, when the calculation is triggered, the actual work is automatically entered from the planned work until the day before the start of the calculation of the schedule.
-
-For security, and to avoid the superposition with a manual entry of real, if the resource has real for a given date, one does not copy the possible planned existing in real.
- 
-For each planned job found, if no job exists for the resource concerned on the date of the scheduled job, copies the planned job to real work.
-  
-We will mark the actual work entered automatically (technical zone type tag) to distinguish the automatic feed from a manual feed. This area will not be processed for screen renditions, but will analyze any unexpected behavior.
-
 
 
 
@@ -685,9 +513,9 @@ Absences are linked to an administrative project. Only one project is necessary 
 
    Select the type of leave and click on the accelerators to enter the selected value directly in the date boxes in the calendar.
 
-   1: full day
-   0.5: half day on the type of leave selected
-   0: delete the days already entered
+   * 1: full day
+   * 0.5: half day on the type of leave selected
+   * 0: delete the days already entered
 
  .. compound:: |four| calendar
  
@@ -697,6 +525,8 @@ Absences are linked to an administrative project. Only one project is necessary 
    
    The boxes are filled with the color of the leave type
  
+   The dark gray boxes indicate the real work. It's work actually performed and informed on the timesheet.
    
-   
+   The striped boxes indicates that the working time recorded by the resource has been validated.
+      
 
