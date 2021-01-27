@@ -529,7 +529,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     if ($user->_accessControlVisibility!='ALL') {
       $restrictArray=$user->getVisibleProjects(true);
     }
-    if (count($table)>0) {
+    if($objInsert){
+      $defaultProject = $obj->idProject;
+    } else if (count($table)>0 and property_exists($obj, 'idProject')) {
       $firstId=null;
       $menuClass=str_replace(array('PlanningElement','WorkElement'),'',$obj->getMenuClass());
       foreach ($table as $idTable=>$valTable) {
@@ -552,9 +554,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
       }
       $defaultProject=$firstId;
-      if($objInsert){
-        $defaultProject = $obj->idProject;
-      }
     }
   }
   if (property_exists($obj, $idType)) {
