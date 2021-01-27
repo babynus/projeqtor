@@ -529,8 +529,22 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     }
     if (count($table)>0) {
       $firstId=null;
+      $menuClass=str_replace(array('PlanningElement','WorkElement'),'',$obj->getMenuClass());
       foreach ($table as $idTable=>$valTable) {
         if (count($restrictArray)==0 or isset($restrictArray[$idTable])) {
+          if (! $obj->id) {
+            if (property_exists($obj, 'refType')) { $refType=$obj->refType; $tmpObj=new $refType(); } 
+            else { $tmpObj=clone($obj); }
+            if (get_class($tmpObj)=='Project') { $tmpObj->id=$idTable; } 
+            else { $tmpObj->idProject=$idTable; }
+            $controlRightsTable=$user->getAccessControlRights($tmpObj);
+            if (isset($controlRightsTable[$menuClass])) {
+              $controlRights=$controlRightsTable[$menuClass];
+              if (isset($controlRights["create"]) and $controlRights["create"]=='NO') {
+                continue;
+              }
+            }
+          }
           $firstId=$idTable;
           break;
         }
@@ -580,8 +594,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   if (!$included) $section='';
   $nbLineSection=0;
   
-  if (SqlElement::is_subclass_of($obj, 'PlanningElement')) {
-    $obj->setVisibility();
+  if (SqlElement::is_subclass_of($obj, 'PlanningElement')) { 
+    $obj->setVisibility(getSessionUser()->getProfile($defaultProject));
     $workVisibility=$obj->_workVisibility;
     $costVisibility=$obj->_costVisibility;
     //if (get_class($obj)=="MeetingPlanningElement" or get_class($obj)=="PeriodicMeetingPlanningElement") {
