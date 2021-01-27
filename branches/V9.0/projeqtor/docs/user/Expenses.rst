@@ -51,12 +51,6 @@ It allows to anticipate the resources that the company will have at a specific m
    
    If you change the name of a budget, remember to refresh the page so that the lists take into account the changes.
    
-   
-   .. figure:: /images/GUI/EXPENSES_ZONE_FilterBudgetParent.png
-      :alt: Filter parent budget
-   
-      Display of a budget and its family
- 
 
    * The parent budget exists only to consolidate the data of the underlying budget items.
 
@@ -72,7 +66,7 @@ It allows to anticipate the resources that the company will have at a specific m
    * The budget item is the finer element of the budget analysis. 
    * These posts or budget destinations will allow you to detail your budget, categorizing it at your convenience.
    
-   .. figure:: /images/GUI/EXPENSES_ZONE_ItemBudget.PNG
+   .. figure:: /images/GUI/EXPENSES_ZONE_ItemBudget.png
       :alt: Display of budget items on a project expense 
    
       Display of budget items on a project expense   
@@ -511,7 +505,7 @@ This section contains the list of providers to whom the invitation to tender is 
 
 * Click on |buttonEdit| to edit informations.
 
-* Click on |buttonIconDelete| to delete a provider to the list.
+* Click on |Delete| to delete a provider to the list.
 
 
 A pop up is displayed. Fill in the different fields necessary for your needs.
@@ -569,7 +563,7 @@ This section allows you to add evaluation criteria to rate your providers based 
 
 * Click on |buttonAdd| to add a criteria
 * Click on |buttonEdit| to modify a criteria
-* Click on |buttonIconDelete| to delete a criteria     
+* Click on |Delete| to delete a criteria     
      
 .. figure:: /images/GUI/EXPENSES_ZONE_CriterionEvaluation.png
    :alt: Evaluation criteria pop-up
@@ -586,7 +580,7 @@ This section allows you to add evaluation criteria to rate your providers based 
      
 .. tip:: 
 
-   Click on |buttonIconCopy| to logically switch from one financial item to another:
+   Click on |Copy| to logically switch from one financial item to another:
 
    Call for tenders -> Provider tenders -> Order to provider -> Terms/Bills -> Payments to providers
 
@@ -851,9 +845,9 @@ This screen allow to manage the orders to provider.
 
 This section allows you to create one or more terms for your bills.
 
-* Click on |buttonAdd| to add a term. A pop-up opens.
+* Click on |Add| to add a term. A pop-up opens.
 
-* Click on |iconList| to add an existing term.
+* Click on |List| to add an existing term.
 
 .. figure:: /images/GUI/EXPENSES_ZONE_ListOfTermSection.png
    :alt: List of term section
@@ -1088,9 +1082,9 @@ If your bill was created from an order, then the terms recorded on the offer wil
    
    List of term section
 
-* Click on |buttonAdd| to add a term. A pop-up opens.
+* Click on |Add| to add a term. A pop-up opens.
 
-* Click on |iconList| to add an existing term.
+* Click on |List| to add an existing term.
       
 * The name and the date are mandatory.
 
@@ -1161,7 +1155,7 @@ Follow the payment of your provider bills to better organize your general cash f
 
 .. rubric:: Section Treament 
 
-.. figure:: /images/GUI/EXPENSES_ZONE_TreatmentPayments.PNG
+.. figure:: /images/GUI/EXPENSES_ZONE_TreatmentPayments.png
    :alt: Payment modes
    
    Payment modes
@@ -1447,7 +1441,7 @@ It allows to enter detail on expense line.
  
 * Click on |buttonAdd| to add a detail line.
 * Click on |buttonEdit| to modify an existing detail line.
-* Click on |buttonIconDelete| to delete the detail line.
+* Click on |Delete| to delete the detail line.
 
 
 .. figure:: /images/GUI/BOX_ExpenseDetail.png

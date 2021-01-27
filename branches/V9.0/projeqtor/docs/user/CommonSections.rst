@@ -810,15 +810,7 @@ As for the dates and durations, you can enter several values for the realization
 
 Steering
 ========
-
-
-
-.. figure:: /images/GUI/COMMON_ZONE_Steering.png
-   :alt: Steering section
-   
-   Steering section
-   
-   
+  
    
 .. rubric:: Progress
 
@@ -858,10 +850,28 @@ By default, the value is set to "500" (medium priority).
 
 See: :ref:`Scheduling priority<scheduling-priority>`.
 
+See: :ref:`Steering section for activity<gantt-details-area>`
 
 
 
+.. rubric:: Color
+ 
+You can set a color on an element.
+  
+This color will be displayed on the bars of the Gantt chart.
+  
 
+
+Steering section Activity
+'''''''''''''''''''''''''
+
+.. figure:: /images/GUI/COMMON_ZONE_SteeringActivity.png
+   :alt: Steering section on Project screen
+   
+   Steering section on activity screen
+   
+   
+   
 .. _progress-section-planning-mode:
 
 .. rubric:: Planning mode
@@ -873,14 +883,6 @@ Depending on the planning mode selected, the calculation of your planning will n
 * See :ref:`Concepts<planning-mode-concept>`
 * See :ref:`Planning modes<planning-mode-gantt>`
 
-
-
-.. rubric:: Color
- 
-You can set a color on an activity.
-  
-This color will be displayed on the bars of the Gantt chart.
-  
   
 .. rubric:: Minimum threshold
  
@@ -892,13 +894,14 @@ This will require defining the minimum work to be allocated each day and thus fi
 
 Planning will require finding consecutive days with at least the given value possible.
 
+See: :ref:`Minimum threshold<minimum-threshold>`
+
 
 .. rubric:: Fix planning
  
 Fix planning will avoid the recalculation of planning for an activity.
   
 To fix the project see: :ref:`treatment-section`
-
 
 
 .. _progress-section-ticket:
@@ -910,34 +913,14 @@ To fix the project see: :ref:`treatment-section`
    
    Attached tickets
    
-   
-Used by Activity.
-
 Allows tracking of tickets attached to the activity throught the "planning activity" field of tickets. 
 
-.. tabularcolumns:: |l|l|
 
-.. list-table:: 
-   :header-rows: 1
+.. topic:: Field Estimated and  Left
 
-   * - Field
-     - Description
-   * - Number
-     - Number of tickets attached to the activity.
-   * - Estimated
-     - Sum of estimated work for tickets attached to the activity.
-   * - Real
-     - Sum of work done for tickets attached to the activity.  
-   * - Left
-     - Sum of remaining work for tickets attached to the activity. 
+   The Estimated field will be highlighted when the sum of estimated work on the tickets is higher than the planned work on the activity.
 
-.. topic:: Field Estimated
-
-   This field will be highlighted when the sum of estimated work on the tickets is higher than the planned work on the activity.
-
-.. topic:: Field Left
-
-   This field will be highlighted when the sum of remaining work on the tickets is higher than the remaining planned work on the activity.
+   The Left field will be highlighted when the sum of remaining work on the tickets is higher than the remaining planned work on the activity.
 
 
 .. rubric:: Show tickets attached
@@ -947,14 +930,13 @@ Allows tracking of tickets attached to the activity throught the "planning activ
 
 .. figure:: /images/GUI/COMMON_BOX_ListOfTicket.png
    :alt: Dialog box - List of tickets 
-   :align: center
    
-   
+   List of tickets
    
 .. _margin:
 
-Progress section Project
-------------------------
+Steering section Project
+''''''''''''''''''''''''
 
 .. figure:: /images/GUI/COMMON_ZONE_SteeringProject.png
    :alt: Steering section on Project screen
@@ -1005,8 +987,12 @@ The margin is only displayed in the control section of the project screen.
 .. _progress-section-milestone:
 
 Progress section Milestone
---------------------------
-
+''''''''''''''''''''''''''
+.. figure:: /images/GUI/COMMON_ZONE_SteeringMilestone.png
+   :alt: Steering section on milestone screen
+   
+   Steering section on milestone screen
+   
 This section allows to define planning and follow progress on a milestone.
 
 
@@ -1072,8 +1058,13 @@ This color will be displayed on the bars of the Gantt chart.
 .. _progress-section-meeting:
 
 Progress section Meeting
-------------------------
+''''''''''''''''''''''''
 
+.. figure:: /images/GUI/COMMON_ZONE_SteeringMeeting.png
+   :alt: Steering section on meeting screen
+   
+   Steering section on meeting screen
+   
 This section allows to define priority and follow progress on a meeting.
 
  .. compound:: Validated

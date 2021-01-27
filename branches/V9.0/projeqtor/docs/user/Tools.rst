@@ -38,8 +38,8 @@ You must enable the Activate email grouping option in the :ref:`global parameter
 
 The programmed emails will be grouped in this screen before their automatic sending based on the period entered in the global parameters
 
-.. figure:: /images/GUI/TOOLS_SCR_EmailtoSend.png
-   :alt: Email to send screen
+
+
 
 
 .. index:: Scheduled report
@@ -53,7 +53,7 @@ In reports, you can schedule sending emails for accurate reports.
 
 You can get the list and details of this programming on this screen
 
-Click on Button |buttonIconDelete| to cancelled the programmation
+Click on Button |Delete| to cancelled the programmation
 
 .. figure:: /images/GUI/TOOLS_ZONE_ScheduledReport.png
    :alt: scheduled report screen
@@ -77,9 +77,8 @@ Users can have a look at the alerts sent.
 By default, administrators can see all the alerts sent, and other users only see their own alerts.
 
 
-.. figure:: /images/GUI/SCR_Alert.png
+.. figure:: /images/GUI/TOOLS_SCR_Alert.png
    :alt: Alert screen
-   :align: center
 
    Alert screen
 
@@ -105,7 +104,7 @@ Messages
 
    * :ref:`profiles-definition`
 
-You can define some message that will be displayed on the :ref:`Today<messages-section>` screen of users.
+You can define some message that will be displayed on the connection screen.
 
 Optionally, the message can be shown on login screen.
 
@@ -121,7 +120,6 @@ The message will be displayed in a color depending on the message type.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required Fields
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -149,6 +147,13 @@ The message will be displayed in a color depending on the message type.
    * - :term:`Closed`
      - Flag to indicate that the message is archived
     
+    
+    
+    
+    
+    
+    
+    
 .. raw:: latex
 
     \newpage
@@ -160,23 +165,33 @@ The message will be displayed in a color depending on the message type.
 Legal notice
 ------------
 
+
+.. figure:: /images/GUI/TOOLS_SCR_MessageLegal.png
+   :alt: Legal notice screen
+   
+   Legal notice screen
+   
+   
 The General Data Protection Regulation (GDPR) governs the processing of personal data in the territory of the European Union.
 
 Above all, this involves informing people about what you do with their data and respecting their rights. As a data controller, or as a processor, you must take measures to ensure that this data is used that respects the privacy of the persons concerned.
 
 You can define a "legal" message that will be displayed when you log in from the home screen.
 
-.. figure:: /images/GUI/TOOLS_SCR_MessageLegal.png
-   :alt: Display of the legal message
-
 For this message to disappear, it must be scrolled to the read confirmation button.
 
+.. figure:: /images/GUI/TOOLS_ZONE_MessageLegalFollow.png
+   :alt: Legal notice screen
+   
+   Legal notice screen
+   
+   
 This allows you to have a real-time follow-up of the users who have confirmed the reading of this message.
 
 
 .. note::
 
-   What is the GDPR?
+   **What is the GDPR?**
 
    The abbreviation GDPR stands for "General Data Protection Regulation" (GDPR). The GDPR governs the processing of personal data in the territory of the European Union.
    
@@ -215,10 +230,10 @@ Imports data from CSV or XLSX files.
 * Data that is not imported because not recognized as a field appear in grey text in the result table.
 * Data that are voluntarily not imported (because must be calculated) appear in blue text in the result table.
 
-.. note:: Import users
+.. rubric:: Import users
 
-   * The password field must be cut and pasted from the database because it is encrypted.
-   * If you enter some readable password, the users will not be able to connect.
+* The password field must be cut and pasted from the database because it is encrypted.
+* If you enter some readable password, the users will not be able to connect.
 
 .. warning:: 
 
@@ -227,11 +242,12 @@ Imports data from CSV or XLSX files.
    * So be sure to keep an operational admin access.
 
 
-.. note:: Importing document versions
+.. rubric:: Importing document versions
 
-    * Two ways to import document versions:       
-        - by describing only the version, with its standard fields.    
-        - by describing the document and the version (the name of the fields of the version will be followed by '(DocumentVersion)', or its translation into the current language).
+* Two ways to import document versions:
+ 
+   - by describing only the version, with its standard fields.    
+   - by describing the document and the version (the name of the fields of the version will be followed by '(DocumentVersion)', or its translation into the current language).
 
 .. note:: CSV import 
     
@@ -252,18 +268,15 @@ File format
 
 The content of the imported file must fit the element type description.
 
-To know the data that may be imported, click on the |buttonIconHelp| button.
+To know the data that may be imported, click on the |Help| button.
 
 .. rubric:: Names of columns 
 
 * The first line of the file must contain the name of the fields.
+* Names of columns can contain spaces (to have better readability).
+* The spaces will be removed to get the name of the column.
 
-.. note::
-
-   * Names of columns can contain spaces (to have better readability).
-   * The spaces will be removed to get the name of the column.
-
-.. hint:: 
+.. tip:: 
    
    * Look into the model class. The names are the same.
 
@@ -273,9 +286,8 @@ To know the data that may be imported, click on the |buttonIconHelp| button.
 
 
 
-.. raw:: latex
 
-    \newpage
+
 
 Data import process
 """""""""""""""""""
@@ -326,29 +338,23 @@ For columns corresponding to linked tables ("idXxxx"), you can indicate as the c
 * Do not import the value of "real work" on tickets, even if it is specified in the import file.
 
 
-.. raw:: latex
 
-    \newpage
+
+
 
 .. index:: Import data (Automatic)
 
 Automatic import
 """"""""""""""""
 
-.. figure:: /images/GUI/ADMIN_ZONE_AutoImport.png
-   :alt: Automatic import of files
-   
 Imports can be automated.
 
 Files placed on a defined directory will automatically be imported.
 
 .. note:: 
 
-   * Automatic import parameters must be set in :ref:`Global parameters<automatic-import>` screen.
-   * Background task must be started by :ref:`admin-console` screen.
-
-
-------------
+   * Automatic import parameters must be set in :ref:`Global parameters<automatic-import>`.
+   * Background task must be started by :ref:`admin-console`.
  
 The files must respect some basic rules.  
 
@@ -377,12 +383,12 @@ The files must respect some basic rules.
 * The files must follow the ProjeQtOr :ref:`file-format`.
 * Files must be full and consistent.
 
-   .. hint::
+.. tip::
 
-      * The files should not be directly created in the import folder.
-      * They must be created in a temporary folder and moved afterwards. 
+   * The files should not be directly created in the import folder.
+   * They must be created in a temporary folder and moved afterwards. 
 
---------------
+
 
 .. rubric:: Import process
 
@@ -403,9 +409,12 @@ Cloned Environnement
 
 You can duplicate the complete environment (data and code) to form a simulation environment. 
 
+.. important:: The CRON program must be started and running so that the simulation request can be taken into account and can be generated.
+
+
 .. rubric:: Administration of simulation requests
 
-.. figure:: /images/GUI/TOOLS_ZONE_ClonedEnvironment.png
+.. figure:: /images/GUI/TOOLS_SCR_ClonedEnvironmentParam.png
    :alt: Cloned environment parameters
    
    Cloned environment parameters
@@ -413,7 +422,7 @@ You can duplicate the complete environment (data and code) to form a simulation 
    
 This parameters are also be accessible from simulated environments.
 
-Click on |buttonIconParameter| on the Simulation Management screen
+Click on |Parameter| on the Simulation Management screen
    
    
  .. compound:: Management of rights and limitations per profils
@@ -431,10 +440,10 @@ Click on |buttonIconParameter| on the Simulation Management screen
    The removal requests are decremented. If the limits are reached, the request screen to create a simulated environment is blocked.
    
    
-   .. figure:: /images/GUI/TOOLS_BOX_RequestInvalid.PNG
+   .. figure:: /images/GUI/TOOLS_BOX_RequestInvalid.png
       :alt: Invalid Request
       
-      example of a invalid request due to too much creation request.
+      Example of a invalid request due to too much creation request.
       
       
    
@@ -494,7 +503,7 @@ You can also track requests from other users based on your profiles and your rig
 
  .. compound:: Generating a simulation environment
 
-   To request the creation of a new simulation area, click on |buttonAdd|
+   To request the creation of a new simulation area, click on |Add|
    
    A pop up will appear allowing you to make your request.
    
@@ -530,11 +539,11 @@ You can also track requests from other users based on your profiles and your rig
  .. compound:: Go to the cloned Environment
    
    When your simulation is ready, green status, you can open your cloned environment.
-   Click on |iconGoto| to launch the environment.
+   Click on |Goto| to launch the environment.
    
    A new tab opens with a new ProjeQtOr session. Authenticate yourself, you can start working in your environment.
    
-   .. figure:: /images/GUI/TOOLS_SCR_ClonedEnvironmentSession.PNG
+   .. figure:: /images/GUI/TOOLS_SCR_ClonedEnvironmentSession.png
       :alt: Cloned environment session
       
       Cloned environment session
@@ -573,7 +582,6 @@ You can also track requests from other users based on your profiles and your rig
    
    
    
-   .. warning:: The CRON program must be started and running so that the simulation request can be taken into account and can be generated.
 
 
 
@@ -589,10 +597,12 @@ You can also track requests from other users based on your profiles and your rig
 Notifications
 -------------
 
-You can defined manually notifications in this screen
+You can defined manually notifications in this screen.
 
 .. figure:: /images/GUI/TOOLS_SCR_Notifications.png
-   :alt: Notifications of the Tools menu screen
+   :alt: Notifications
+   
+   Notifications
 
 You receive notifications as soon as you authenticate on the login screen
 
@@ -611,20 +621,15 @@ A slight color line in front of the name indicates the type of notification
 * Blue = information
 * Yellow = warning
 
-Click on the name of the notification to display its detail screen
+Click on the name of the notification to display its detail screen.
 
 .. figure:: /images/GUI/TOOLS_ZONE_NotificationList.png
 
-You can also display the notification in the part below the menu 
+You can also display the notification in the part below the menu.
 
-.. figure:: /images/GUI/TOOLS_ZONE_MenuNotification.png
-   :alt: Unread notification in the menu
+See: :ref:`Secondary menu - Notifications section<secondarymenu-notifications>`
    
-Click on an unread notification for discover the details
-
-
-.. figure:: /images/GUI/TOOLS_ZONE_MenuNotification_details.PNG
-   :alt: Unread notification details
+Click on an unread notification for discover the details.
 
 * The first icon indicates the type of notification
 * the second icon indicates how the notification was created
@@ -638,10 +643,10 @@ Click on an unread notification for discover the details
 
    Type of alert 
    
-   * |iconinfo| type information
-   * |iconwarning| type Warning
-   * |iconalert| type alert
-   * |iconsum| sum - Records all the type
+   * |info| type information
+   * |Warning| type Warning
+   * |Alert| type alert
+   * |Sum| sum - Records all the type
       
 .. raw:: latex
 
@@ -659,7 +664,7 @@ Audit connection proposes a view of “who is online”.
 
 you can know which platform the user has logged on to, his browser and dates of his first and last access, as well as the duration of the connection
 
-.. figure:: /images/GUI/TOOL_SCR_AuditConnexion.png
+.. figure:: /images/GUI/TOOLS_SCR_AuditConnexion.png
    :alt: Audit connection screen
 
 .. note::

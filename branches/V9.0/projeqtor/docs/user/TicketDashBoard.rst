@@ -34,7 +34,7 @@ Filters are available to limit scope.
 
 * Click on |buttonIconParameter| to access parameters |three|.
 * Allows to define reports displayed on the screen.
-* Allows to reorder reports displayed with drag & drop feature. Using the selector area button |buttonIconDrag|.
+* Allows to reorder reports displayed with drag & drop feature. Using the selector area button |Drag|.
 
 .. note::
 

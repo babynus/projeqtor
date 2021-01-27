@@ -65,12 +65,6 @@ Internal alerts can be sent to users.
 You can define a date and time for sending, specific adressees or all users, the type of message that users will receive: information, an alert or a warning ...
 
 This can be a good step to warn users before a temporary shutdown of ProjeQtOr for update for example.    
-   
- 
-.. figure:: /images/GUI/ADMIN_SCR_InternalAlertSend.png
-   :alt: receipt of internal alert
-   
-   receipt of internal alert
 
 An internal alert can be sent by the administrator or by monitoring indicators.
 

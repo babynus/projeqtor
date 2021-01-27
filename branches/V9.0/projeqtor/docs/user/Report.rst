@@ -89,7 +89,7 @@ You can add reports to your home screen today.
 
 Click the parameter button to define the location of the report (s) on the Today screen.
 
-Click on the handles to move the item in the list
+Click on the handles to move the item in the list.
 
 .. raw:: latex
 
