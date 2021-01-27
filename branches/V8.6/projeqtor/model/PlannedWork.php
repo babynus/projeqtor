@@ -127,7 +127,6 @@ class PlannedWork extends GeneralWork {
     global $arrayPlannedWork,$arrayRealWork,$arrayAssignment,$arrayPlanningElement;
     global $listPlan,$fullListPlan,$resources,$topList,$reserved,$arrayNotPlanned,$arrayWarning;
     global $cronnedScript;
-    
     // Increase default limits
   	projeqtor_set_time_limit(300);
   	projeqtor_set_memory_limit('512M');
@@ -162,7 +161,6 @@ class PlannedWork extends GeneralWork {
     $arrayRealWork=array();
     $arrayAssignment=array();
     $arrayPlanningElement=array();
-
     //-- Controls (check that current user can run planning)
     $accessRightRead=securityGetAccessRight('menuActivity', 'read');
     $allProjects=false;
@@ -186,7 +184,6 @@ class PlannedWork extends GeneralWork {
     if (Parameter::getGlobalParameter('OpenDayThursday')=='offDays') $daysPerWeek--;
     if (Parameter::getGlobalParameter('OpenDayFriday')=='offDays') $daysPerWeek--;
     if (Parameter::getGlobalParameter('OpenDaySaturday')=='offDays') $daysPerWeek--;
-    
     //-- Build in list to get a where clause : "idProject in ( ... )"
     $inClause="(";
     foreach ($projectIdArray as $projectId) {
@@ -206,6 +203,8 @@ class PlannedWork extends GeneralWork {
     $inClause.=" and (refType, refId) not in (select refType, refId from $peTable peFixed where fixPlanning=1) ";
     // Do not plan "Manual Planning" activities
     $inClause.=" and (refType, refId) not in (select refType, refId from $peTable peFixed where idPlanningMode=23) ";
+    // Try and merge the two last conditions
+    //$inClause.=" and (refType, refId) not in (select refType, refId from $peTable peFixed where peFixed.fixPlanning=1 or peFixed.idPlanningMode=23) ";
     //-- Purge existing planned work
     $plan=new PlannedWork();
     $plan->purge($inClause);
