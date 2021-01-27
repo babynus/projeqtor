@@ -25,7 +25,7 @@ For the module to be functional, you must define the employees, new status for r
 The absence manager in charge of leave, the types of leave you offer to your employees and the different types of employment contracts
 
 
-* Start to define the :ref:`employee-manager`, :ref:`Leaves-Types` and :ref:`employment-contract-type` 
+* Start to define the :ref:`employee-manager`, :ref:`leaves-types` and :ref:`employment-contract-type` 
 
 * You can choose the leave entitlement standard for each type of contract
 
@@ -38,12 +38,7 @@ The absence manager in charge of leave, the types of leave you offer to your emp
 
    In order to be able to manage and parameterize the human resources module after its installation, 
    you must go to global parameters in the Work tab.
-   A new parameter is displayed: Leaves System
-   
-
-.. figure:: /images/GUI/RH_ZONE_ParamGlob_LeavesAdmin.png
-   :alt: Global Parameters - Leaves System
-   :align: center
+   A new parameter is displayed: Leaves System.
    
    You can choose here who will be the administrator of this module
 
@@ -135,30 +130,15 @@ The properties below is visible only when the :ref:`regulated Absence module<mod
 
 .. rubric:: Employee
 
-An employee is a :ref:`resource` whose property **"is an employee"** is checked in the screen ressources
+An employee is a :ref:`resource` whose property **"is an employee"** is checked in the screen resources
 
-.. note:: 
-   
-   The manager records the request
-   
-   Employee makes the request 
-   
-.. figure:: /images/GUI/RH_ZONE_DescriptionEmployee.png
-   :alt: Employee is a resource
-   :align: center
-   :scale: 70%
-   
-   Box **is an employee** is checked
-   
-Once the resources are saved as employees, you can manage them from the employee screen
+* The manager records the request.
 
-you find the same fields of description as the resources.
+* Employee makes the request.  
+   
+Once the resources are saved as employees, you can manage them from the employee screen.
 
-
-.. figure:: /images/GUI/RH_SCR_Employee.png
-   :alt: Employee screen 
-
-   Employee screen
+You find the same fields of description as the resources.
 
 In this section, the employee can see the person who manage its leaves periods
 
@@ -172,9 +152,6 @@ In this section, the employee can see the person who manage its leaves periods
          The contract is associated with a :ref:`employment-contract-type` 
          
          This allow the employee to associate the rules of acquisition, the special rules of regulated absences and the acquired rights by type of absence and by acquisition period.
-
-
-
 
 
 .. rubric:: Manager
@@ -248,12 +225,66 @@ The administrator is obligatorily a leave manager
 
     \newpage
 
+.. index:: Leaves Dashboard
+
+.. _leaves-dashboard:
+
+Leaves Dashboard
+''''''''''''''''
+
+A dashboard is available to absence managers
+
+.. figure:: /images/GUI/RH_SCR_LeavesDashboard.png
+   :alt: Leaves Dahsboard
+   
+   Leaves dashboard
+   
+The filter bar allows you to filter the information presented in the dashboard
+
+.. figure:: /images/GUI/RH_ZONE_FilterBar.png
+   :alt: Filters
+   
+   Filter bar
+
+Leaves Calendar displays informations based on filters applied by managed employee
+
+The |iconDelay| tells you that the request was made late 
+
+You can export the calendar into Excel format 
+
+.. rubric:: Synthesis
+
+The synthesis is also displayed according to the filters selected beforehand, 
+
+and gives the number of days remaining to be taken by type of leave and managed employees
+
+
+.. rubric:: Leave period to process
+
+In this section, appears the list of absences to be processed, that is to say under the "recorded" status
+
+
+
+
+
+
+
+.. index:: Absence recording (RH)
+
+.. _absence-recording:
+
+Absence recording
+=================
+
+
+
+
 .. index:: Leaves Calendar
 
 .. _leaves-calendar:
 
 Leaves Calendar
-===============
+'''''''''''''''
 
 Regulated absences are done either by the employees or by their manager
 
@@ -295,7 +326,7 @@ The color of the holidays will change according to the validation.
 .. _leaves-period:
    
 Leaves Periods
-==============
+''''''''''''''
 
 Regulated absences are done either by the employees or by the manager of leaves.
 
@@ -368,48 +399,6 @@ You can see the details of the contracts and which employee is attached to them.
    Leaves rights earned
    
    
-.. raw:: latex
-
-    \newpage
-
-.. index:: Leaves Dashboard
-
-.. _leaves-dashboard:
-
-Leaves Dashboard
-================
-
-A dashboard is available to absence managers
-
-.. figure:: /images/GUI/RH_SCR_LeavesDashboard.png
-   :alt: Leaves Dahsboard
-   
-   Leaves dashboard
-   
-The filter bar allows you to filter the information presented in the dashboard
-
-.. figure:: /images/GUI/RH_ZONE_FilterBar.png
-   :alt: Filters
-   
-   Filter bar
-
-Leaves Calendar displays informations based on filters applied by managed employee
-
-The |iconDelay| tells you that the request was made late 
-
-You can export the calendar into Excel format 
-
-.. rubric:: Synthesis
-
-The synthesis is also displayed according to the filters selected beforehand, 
-
-and gives the number of days remaining to be taken by type of leave and managed employees
-
-
-.. rubric:: Leave period to process
-
-In this section, appears the list of absences to be processed, that is to say under the "recorded" status
-
 
 .. raw:: latex
 
@@ -420,14 +409,7 @@ In this section, appears the list of absences to be processed, that is to say un
 .. _Leaves_parameters:
 
 Regulated leaves parameters
-===========================
-
-
-
-.. _earned_rights:
-
-Earned rights
-^^^^^^^^^^^^^
+---------------------------
 
 The regulation of absences is based on the rights to take absences acquired over a given period.
 
@@ -436,7 +418,7 @@ It is therefore based on values to be given to attributes of regulation accordin
 
 .. rubric:: General acquisition of rights
 
-When you create a :ref:`employment-contract-type` or :ref:`Leaves-Types`, you have several contractual values to fill in.
+When you create a :ref:`employment-contract-type` or :ref:`leaves-types`, you have several contractual values to fill in.
 
 .. figure:: /images/GUI/RH_ZONE_LeavesRights.png
    :alt: Contractual values for the leaves type
@@ -530,10 +512,10 @@ Usable entities are:
 
 
 
-.. _Leaves-Types:
+.. _leaves-types:
 
 Leaves types
-^^^^^^^^^^^^
+============
 
 This part allows you to create the types of absences regulated according to the laws of your country.
 
@@ -562,13 +544,13 @@ You can choose the workflow that will be attached to human resources
 
 In this section, you can defined who received an internal alert or an email on the creation, the update, the delete and/or the treatment of the leaves
 
-.. seealso:: More detail about **contractual values**, see :ref:`earned_rights`
+.. seealso:: More detail about **Contractual values**, see :ref:`Earned rights<earned_rights>`
    
 
 .. _employment-contract-type:
 
 Employment contract type
-^^^^^^^^^^^^^^^^^^^^^^^^
+========================
 
 This section allows you to create the different contracts that are in effect in your company
 
@@ -592,7 +574,7 @@ You can only have one type of default contract
    
    Screen of Employment contract type   
    
-.. seealso:: More detail about **contractual values**, see :ref:`earned_rights`
+.. seealso:: More detail about **contractual values**, see :ref:`Earned rights<earned_rights>`
 
 
 .. rubric:: Parameters for earned leave rights
@@ -613,7 +595,7 @@ If you are missing types of absences, you can create them from this screen:
    
    Special leaves rights
 
-.. seealso:: More detail about **Specific values**, see :ref:`earned_rights`
+.. seealso:: More detail about **Specific values**, see :ref:`Earned rights<earned_rights>`
 
 
 
@@ -648,7 +630,7 @@ this clause follows the vocabulary of the SQL language
    
    A new part appears and proposes drop-down menus with prerecorded SQL queries 
 
-.. figure:: /images/GUI/RH_BOX_AddSpecialLeaves+mysql.PNG
+.. figure:: /images/GUI/RH_BOX_AddSpecialLeaves+mysql.png
    :alt: Special Leaves
    :align: center
    
@@ -668,7 +650,7 @@ The type of regulated absence to which will be attached, the rule of special abs
 .. _employmentEndRaison:
 
 Employment contract end reason
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''''''
 
 Allows you to record the different types of end of contract.
 
@@ -691,7 +673,7 @@ These different reasons may lead to changes in the rules governing the acquisiti
 .. _leavesSystemHabilitation:
 
 Leaves System habilitation
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+==========================
 
 Allows you to restrict or restrict the view of Human Resources module screens to employee profile types.
 
@@ -709,7 +691,7 @@ They can view - read - create - update and/or delete access
 .. _workflowHR:
 
 Workflows and values
-^^^^^^^^^^^^^^^^^^^^
+====================
 
 * When you install the regulated absences module, a workflow for absences is created.
 

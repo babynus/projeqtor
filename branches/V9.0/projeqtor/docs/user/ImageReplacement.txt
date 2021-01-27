@@ -16,7 +16,6 @@
 
 
 
-
 .. |iconFavoris| image:: images/v9/iconFavoris.png
 	:alt: Bookmarks
 	:scale: 15
@@ -99,50 +98,26 @@
 	:alt: icon Cron Demand
 
 	
-.. |ListApprovers| image:: images/iconButtonListApprover.png
-	:alt: icon List of approvers	
-	
-	
-	
-.. |switchmode| image:: images/iconChangeLayout.png
-	:alt: Switch mode	
-
-.. |switchmode9| image:: images/v9/iconChangeLayout.png
+.. |switchmode| image:: images/v9/iconChangeLayout.png
 	:alt: Switch mode
 	:scale: 15
-		
-		
-		
-.. |horizontalLayout| image:: images/horizontalLayout.png	
-	:alt: Mode horizontal
-	
-.. |horizontalLayout9| image:: images/v9/horizontalLayout.png	
+			
+.. |horizontalLayout| image:: images/v9/horizontalLayout.png	
 	:alt: Mode horizontal	
 	:scale: 15
 	
-	
-	
-.. |verticalLayout| image:: images/verticalLayout.png	
-	:alt: Mode vertical		
-
-.. |verticalLayout9| image:: images/v9/verticalLayout.png	
+.. |verticalLayout| image:: images/v9/verticalLayout.png	
 	:alt: Mode vertical		
 	:scale: 15		
 		
-		
-.. |LayoutList| image:: images/iconLayoutList.png	
-	:alt: Layout list	
 	
-.. |LayoutList9| image:: images/v9/iconLayoutList.png	
+	
+.. |LayoutList| image:: images/v9/iconLayoutList.png	
 	:alt: Layout list	
 	:scale: 15
+	
 
-
-
-.. |LayoutTab| image:: images/iconLayoutTab.png	
-	:alt: Layout tab	
-
-.. |LayoutTab9| image:: images/v9/iconLayoutTab.png	
+.. |LayoutTab| image:: images/v9/iconLayoutTab.png	
 	:alt: Layout tab
 	:scale: 15
 	
@@ -155,46 +130,48 @@
 .. |HideTop| image:: images/iconHideStreamTop.png	
 	:alt: Hide stream top	
 
-.. |ActivityStream| image:: images/iconActivityStream.png	
-	:alt: Show Activity Stream	
+
 	
-.. |ActivityStream9| image:: images/v9/iconActivityStream.png	
+.. |ActivityStream| image:: images/v9/iconActivityStream.png	
 	:alt: Show Activity Stream	
 	:scale: 15
 	
-.. |iconAttach| image:: /images/v9/iconAttach.png
-	:alt: attach
+.. |NOActivityStream| image:: images/v9/iconActivityStreamClose.png	
+	:alt: Hide Activity Stream	
 	:scale: 15
-
 	
-
-.. |NoActivityStream| image:: images/iconActivityStreamClose.png
-	:alt: Hide Activity Stream	
 	
-.. |NoActivityStream9| image:: images/v9/iconActivityStreamClose.png
-	:alt: Hide Activity Stream	
 	
 		
-.. |FullScreen| image:: images/iconFullScreen.png	
-	:alt: Full screen	
+.. |Attach| image:: /images/v9/iconAttach.png
+	:alt: attach
+	:scale: 15
 	
-.. |FullScreen9| image:: images/v9/iconFullScreen.png	
+		
+.. |FullScreen| image:: images/v9/iconFullScreen.png	
 	:alt: Full screen
 	:scale: 15	
 	
 		
 			
 		
-.. |LeftActivityStream| image:: images/changeActivityStream.png	
+.. |LeftActivityStream| image:: images/v9/changeActivityStream.png	
 	:alt: Left zone Activity Stream	
+	:scale: 15	
 
-.. |BottomActivityStream| image:: images/changeActivityStreamBot.png
+.. |BottomActivityStream| image:: images/v9/changeActivityStreamBot.png
 	:alt: Bottom zone Activity Stream
+	:scale: 15	
+	
+.. |ChangeStatus| image:: images/v9/iconChangedStatus.png
+	:alt: Changed Status
+	:scale: 15	
+	
 
-.. |MessageStream| image:: images/iconMessageStream.png
+.. |MessageStream| image:: images/v9/iconMessage.png
 	:alt: Message Activity Stream	
-	:scale: 60
-
+	:scale: 15
+	
 .. |CreateStream| image:: images/iconNewElement.png
 	:alt: Creation on Activity Stream
 	:scale: 60
@@ -203,16 +180,15 @@
 	:alt: Modification on Activity Stream
 	:scale: 60
 	
+		
 .. |DeleteStream| image:: images/iconDeleteElement.png
 	:alt: Deletion on Activity Stream
 	:scale: 60
 
-.. |ShareStream| image:: images/ActivityStreamShare.PNG	
+.. |Public| image:: images/V9/iconPublic.png	
 	:alt: Public Share
-	
-.. |PrivateStream| image:: images/PrivateStream.png	
-	:alt: Private note	
-				
+	:scale: 15
+					
 
 	
 		
@@ -243,33 +219,34 @@
 
 
 
-.. |iconKanban| image:: images/iconKanban.png
+.. |Kanban| image:: images/v9/iconKanban.png
    :alt: Kanban
-   :scale: 70
+   :scale: 15
 
-.. |addRequirementKanban| image:: images/iconKanbanAddRequirement.png
+.. |addRequirementKanban| image:: images/v9/iconKanbanAddRequirement.png
    :alt: add Requirement
+   :scale: 15
 
-.. |addTicketKanban| image:: images/iconAddTicket.png
-   :alt: add ticket 
+.. |addTicketKanban| image:: images/v9/iconKanbanAddTicket.png
+   :alt: add ticket
+   :scale: 15
    
-.. |addActivityKanban| image:: images/iconAddActivity.png
+.. |addActivityKanban| image:: images/v9/iconKanbanAddActivity.png
    :alt: add Activity  
-     
-.. |addActionKanban| image:: images/iconKanbanAddAction.png
+   :scale: 15
+
+.. |addActionKanban| image:: images/v9/iconKanbanAddAction.png
    :alt: add Action
+   :scale: 15
 
-.. |addKanban| image:: images/iconKanbanAdd.png
+.. |addKanban| image:: images/v9/iconKanbanAdd.png
    :alt: add new Kanban
+   :scale: 15
 
-.. |addColumnKanban| image:: images/iconKanbanAddColumns.png
+.. |addColumnKanban| image:: images/v9/iconKanbanAddColumns.png
    :alt: add Column
+   :scale: 15
    
-   
-   
-  
-.. |iconList| image:: images/iconButtonListApprover.png
-	:alt: List
 	
 .. |arrowCompound| image:: images/arrowCompound.png
    :alt: arrow
@@ -277,30 +254,31 @@
 .. |iconDelay| image:: images/iconDelay.png
    :alt: Susbcribe
 
-.. |iconNotif| image:: images/iconNotification.png
+.. |Notif| image:: images/V9/iconNotification.png
    :alt: Notification
+   :scale: 15
 	
 .. |iconInfo| image:: images/iconInformation.png
    :alt: Information
 
-.. |iconAlert| image:: images/iconAlert.png
+.. |Alert| image:: images/V9/iconAlert.png
    :alt: Alert
+   :scale: 15
 
-.. |iconWarning| image:: images/iconWarning.png
+.. |Warning| image:: images/v9/iconWarning.png
    :alt: Warning
+   :scale: 15
 
-.. |iconSum| image:: images/iconSum.png
+.. |Sum| image:: images/v9/iconSum.png
    :alt: Sum 
+   :scale: 15
    
-.. |iconSubscribe| image:: images/buttonIconSubscribe.png
-   :alt: Susbcribe
-   :scale: 70
 
-.. |iconSubscribe9| image:: images/v9/iconSubscribe.png
+.. |Subscribe| image:: images/v9/iconSubscribe.png
    :alt: Susbcribe
    :scale: 15
 
-.. |iconSubscribeON9| image:: images/v9/iconSubscribeON.png
+.. |SubscribeON| image:: images/v9/iconSubscribeON.png
    :alt: Susbcribe on
    :scale: 15
    	
@@ -309,21 +287,25 @@
 .. |iconNotPlanned| image:: images/iconNotPlanned.png
    :alt: Icon not planned
 
-.. |iconSS| image:: images/dependency_SS.png
+.. |DependancySS| image:: images/v9/iconDependencySS.png
    :alt: Start start dependency
+   :scale: 15
    
-.. |iconES| image:: images/dependency_E-S.png
+.. |DependancyES| image:: images/v9/iconDependencyES.png
    :alt: End Start dependency
-
-.. |iconEE| image:: images/dependency_E-E.png
-   :alt: End End dependency
+   :scale: 15
    
-.. |iconSplit| image:: images/iconSplit.png
-   :alt: Icon divide
+.. |DependancyEE| image:: images/v9/iconDependencyEE.png
+   :alt: End End dependency
+   :scale: 15
+      
+.. |Split| image:: images/v9/iconSplit.png
+   :alt: Split
+   :scale: 15
 
-.. |iconStar| image:: images/iconStar.png
+.. |Star| image:: images/v9/iconStar.png
    :alt: mandatory attendant
-   :scale: 60
+   :scale: 15
    
    
    
@@ -366,9 +348,9 @@
 .. |buttonAdd| image:: images/ButtonAdd.png
    :alt: Button add
    
-.. |iconAdd| image:: images/v9/iconAdd.png
+.. |Add| image:: images/v9/iconAdd.png
    :alt: Add
-   :scale: 15   
+   :scale: 15  
 
 
 
@@ -377,7 +359,7 @@
 .. |buttonEdit| image:: images/smallButtonEdit.png
    :alt: Button edit
 
-.. |iconEdit| image:: images/v9/iconEdit.png
+.. |Edit| image:: images/v9/iconEdit.png
    :alt: Button edit
    :scale: 15
 
@@ -410,27 +392,27 @@
    
    
    
-.. |iconLink| image:: images/smallButtonLink.png
+.. |Link| image:: images/v9/iconLink.png
    :alt: Icon link
+   :scale: 15
 
-.. |iconDownload| image:: images/smallButtonDownload.png
+.. |Download| image:: images/v9/iconDownload.png
    :alt: Icon download 
+   :scale: 15
 
-.. |iconSwitch| image:: images/smallButtonSwitch.png
+.. |Switch| image:: images/v9/iconSwitch.png
    :alt: Button small button switch 
+   :scale: 15
 
-.. |construction| image:: images/iconConstruction.png
+.. |construction| image:: images/v9/iconConstruction.png
    :alt: under construction
-   :scale: 60
+   :scale: 15
 
-.. |fixPlann| image:: images/iconFixed22.png
+.. |Fixed| image:: images/v9/iconFixed.png
    :alt: Fixed planning
-   :scale: 60
-   
-.. |iconProject16| image:: images/iconProject16.png
-   :alt: Icon Project
+   :scale: 15
 
-.. |iconProject9| image:: images/v9/iconProject.png
+.. |Project| image:: images/v9/iconProject.png
    :alt: Button icon project 
    :scale: 15
 
@@ -438,26 +420,33 @@
    :alt: Privacy  
    :scale: 15
 
-.. |iconReplan16| image:: images/iconReplan16.png
-   :alt: Replanning schedule icon
+.. |Replan| image:: images/v9/iconReplan.png
+   :alt: Replanning schedule
+   :scale: 15
    
-.. |iconActivity16| image:: images/iconActivity16.png
-   :alt: Activity icon 
+.. |Activity| image:: images/v9/iconActivity.png
+   :alt: Activity
+   :scale: 15 
    
-.. |iconMeeting16| image:: images/iconMeeting16.png
-   :alt: Meeting icon 
+.. |Meeting| image:: images/v9/iconMeeting.png
+   :alt: Meeting
+   :scale: 15 
    
-.. |iconTestSession16| image:: images/iconTestSession16.png
-   :alt: Projet icon 
+.. |TestSession| image:: images/v9/iconTestSession.png
+   :alt: Test session
+   :scale: 15 
 
-.. |iconMilestone16| image:: images/iconMilestone16.png
-   :alt: Projet icon 
+.. |Milestone| image:: images/v9/iconMilestone.png
+   :alt: Milestone
+   :scale: 15 
      
-.. |buttonIconHelp| image:: images/iconHelp.png
-   :alt: Button icon help
+.. |Help| image:: images/v9/iconHelp.png
+   :alt: Help
+   :scale: 15
 
-.. |Note| image:: images/note.png
-   :alt: Note
+.. |Info| image:: images/v9/iconInfo.png
+   :alt: infos
+   :scale: 15
 
 .. |Comment| image:: images/v9/iconComment.png
    :alt: Comment
@@ -480,11 +469,11 @@
 .. |buttonIconParameter| image:: images/iconParameter.png
    :alt: Button icon parameter 
 
-.. |buttonIconParameter9| image:: images/v9/iconParameter.png
-   :alt: Button icon parameter 
+.. |Parameter| image:: images/v9/iconParameter.png
+   :alt: Parameter 
    :scale: 15
 
-.. |archive9| image:: images/v9/iconHistArchive.png
+.. |Archive| image:: images/v9/iconHistArchive.png
    :alt: Button Archive 
    :scale: 15
 
@@ -492,28 +481,28 @@
 .. |buttonIconDocDir| image:: images/iconDocumentDirectory.png
    :alt: Button icon document directory
 
-.. |buttonIconToday| image:: images/iconToday.png
-   :alt: Button icon Today
+.. |Today| image:: images/v9/iconToday.png
+   :alt: Today
+   :scale: 15
 
-.. |buttonIconReportFavorite| image:: images/iconReportsFavorite.png
+.. |ReportFavorite| image:: images/v9/iconReportsFavorite.png
    :alt: Button icon report favorite
+   :scale: 15
 
-.. |buttonIconDisplay| image:: images/display.png
-   :alt: Button icon display
+.. |ReportScheduled| image:: images/v9/iconAutoSendReport.png
+   :alt: Scheduled report
+   :scale: 15
 
-.. |buttonIconSearch| image:: images/buttonIconSearch.png
-   :alt: button icon search
+.. |GlobalView| image:: images/v9/iconGlobalView.png
+   :alt: Global view
+   :scale: 15
 
-.. |iconSearch| image:: images/v9/iconSearch.png
+.. |Search| image:: images/v9/iconSearch.png
    :alt: button icon search
    :scale: 15
-   
-   
-   
-.. |view| image:: images/iconFollowup16.png
-   :alt: icon view details     
+  
      
-.. |iconView| image:: images/v9/iconView.png
+.. |View| image:: images/v9/iconView.png
    :alt: button icon Follow up
    :scale: 15
    
@@ -528,7 +517,7 @@
    :alt: button icon Assign Team
 
 
-.. |iconTeam9| image:: images/v9/iconTeam.png
+.. |Team| image:: images/v9/iconTeam.png
    :alt: Team
    :scale: 15
 
@@ -536,8 +525,9 @@
 
    
    
-.. |iconOrganization| image:: images/iconOrganization16.png
-   :alt: button icon Assign Organization      
+.. |Organization| image:: images/v9/iconOrganization.png
+   :alt: Organization 
+   :scale: 15     
 
 
 
@@ -546,25 +536,13 @@
 .. |buttonIconActiveFilter| image:: images/iconActiveFilter.png
    :alt: Button icon active filter
 
-
-
-.. |buttonIconDrag| image:: images/iconDrag.png
-   :alt: Button icon drag
-
-.. |IconDragBLC| image:: images/IconDragBLC.png
-   :alt: icon drag
    
-.. |iconDrag| image:: images/v9/iconDrag.png
+.. |Drag| image:: images/v9/iconDrag.png
    :alt: Drag
    :scale: 15 
 
-
-
-
-.. |buttonIconFilter| image:: images/iconActiveFilter.png
-   :alt: button icon filter
    
-.. |iconFilters| image:: images/v9/iconFilters.png
+.. |Filters| image:: images/v9/iconFilters.png
    :alt: Filters
    :scale: 15 
    
@@ -574,141 +552,83 @@
    :alt: Button combo arrow down
 
 
-
-
-.. |buttonIconColumn| image:: images/buttonIconColumn.png
-   :alt: Button icon column
-
-.. |iconColumn| image:: images/v9/iconColumns.png
+.. |Column| image:: images/v9/iconColumns.png
    :alt: Columns organizer
    :scale: 15
-   
+  
 
-
-.. |buttonIconPrint| image:: images/buttonIconPrint.png
-   :alt: icon print button
-
-.. |iconPrint9| image:: images/v9/iconPrint.png
+.. |Print| image:: images/v9/iconPrint.png
    :alt: Print
    :scale: 15
 
-.. |iconPrint| image:: images/iconPrint.png
-   :alt: Button icon print
-
-
-
-
-
-
-.. |buttonIconPdf| image:: images/buttonIconPdf.png
-   :alt: icon PDF button
-
-.. |iconPDF| image:: images/v9/iconPDF.png
+.. |PDF| image:: images/v9/iconPDF.png
    :alt: Export PDF
    :scale: 15
-   
-   
-   
-
-.. |buttonIconCsv| image:: images/buttonIconCSV.png
-   :alt: Button icon CSV
-
-.. |iconCSV| image:: images/v9/iconCSV.png
+  
+.. |CSV| image:: images/v9/iconCSV.png
    :alt: Export CSV
    :scale: 15
-
-
-
-
-.. |buttonIconNew| image:: images/buttonIconNew.png
-   :alt: Button icon new
    
-.. |iconNew| image:: images/v9/iconNew.png
+.. |New| image:: images/v9/iconNew.png
    :alt: New
    :scale: 15
    
-   
-   
-.. |iconSubMenu| image:: images/v9/iconSubMenu.png
+.. |SubMenu| image:: images/v9/iconSubMenu.png
    :alt: Sub-menu
    :scale: 15   
    
 .. |buttonIconStatus| image:: images/buttonIconStatus.png
    :alt: Button icon status
 
-.. |buttonCollapseOpen| image:: images/buttonCollapseOpen.png
-   :alt: Button Collapse open
 
-.. |buttonCollapseClose| image:: images/buttonCollapseClosed.png
+
+.. |CollapseOpen| image:: images/v9/iconButtonCollapseOpen.png
+   :alt: Button Collapse open
+   :scale: 15
+   
+.. |CollapseClose| image:: images/v9/iconButtonCollapseHide.png
    :alt: Button Collapse close
+   :scale: 15
+ 
+ 
  
 .. |iconHideStream| image:: images/iconHideStream.png
    :alt: icon Hide Stream  
    :scale: 80%
- 
-.. |buttonIconSave| image:: images/buttonIconSave.png
-   :alt: Button icon save
+
    
-.. |iconSave| image:: images/v9/iconSave.png
+.. |Save| image:: images/v9/iconSave.png
    :alt: Save
    :scale: 15   
-   
-   
 
-.. |buttonIconCopy| image:: images/buttonIconCopy.png
-   :alt: Button icon copy
-
-.. |IconCopy| image:: images/v9/IconCopy.png
+.. |Copy| image:: images/v9/IconCopy.png
    :alt: Copy
    :scale: 15   
 
-
-
-
-.. |buttonIconUndo| image:: images/buttonIconUndo.png
-   :alt: button icon undo
-
-.. |iconUndo| image:: images/v9/iconUndo.png
+.. |Undo| image:: images/v9/iconUndo.png
    :alt: Icon undo
    :scale: 15   
 
-
-
-
-.. |buttonIconDelete| image:: images/buttonIconDelete.png
-   :alt: Button icon delete
-
-.. |iconDelete| image:: images/v9/iconDelete.png
+.. |Delete| image:: images/v9/iconDelete.png
    :alt: Delete
    :scale: 15
 
-
-
-
-.. |buttonIconRefresh| image:: images/buttonIconRefresh.png
-   :alt: Button icon refresh
-
-.. |iconRefresh| image:: images/v9/iconRefresh.png
+.. |Refresh| image:: images/v9/iconRefresh.png
    :alt: Refresh
    :scale: 15
-   
-   
-   
-   
-.. |buttonIconEmail| image:: images/buttonIconEmail.png
-   :alt: Button icon email
+  
 
-.. |iconEmail| image:: images/v9/iconEmail.png
+.. |Mail| image:: images/v9/iconMail.png
+   :alt: email
+   :scale: 15
+
+.. |eMail| image:: images/v9/iconEmail.png
    :alt: email
    :scale: 15
 
 
 
-
-.. |buttonIconMultipleUpdate| image:: images/buttonIconMultipleUpdate.png
-   :alt: Button icon multiple update
-
-.. |iconMultipleUpdate| image:: images/v9/iconMultipleUpdate.png
+.. |MultipleUpdate| image:: images/v9/iconMultipleUpdate.png
    :alt: Multiple update
    :scale: 15
 
@@ -728,7 +648,7 @@
    :alt: Button icon forward navigation
    :scale: 15
 
-.. |newtab9| image:: images/v9/iconNewtab.png
+.. |newtab| image:: images/v9/iconNewtab.png
    :alt: Open a new tab
    :scale: 15
 
@@ -738,32 +658,28 @@
    :alt: Button icon select
  
  
- 
- 
-.. |buttonIconShowHistory| image:: images/buttonIconShowHistory.png
-   :alt: Button icon show history
 
-.. |iconHistory| image:: images/v9/iconHistory.png
+
+.. |History| image:: images/v9/iconHistory.png
    :alt: Show history
    :scale: 15
 
-
-
-.. |buttonIconShowChecklist| image:: images/buttonIconShowChecklist.png
-   :alt: Button icon show checklist
-
-.. |iconChecklist| image:: images/v9/iconChecklist.png
+.. |Checklist| image:: images/v9/iconChecklist.png
    :alt: Show checklist
    :scale: 15
 
+.. |List| image:: images/v9/iconList.png
+   :alt: List
+   :scale: 15
 
 
-
-.. |yes| image:: images/buttonIconSelect.png
+.. |yes| image:: images/v9/iconYes.png
    :alt: Yes icon
+   :scale: 15
 
-.. |no| image:: images/buttonIconDelete.png
+.. |no| image:: images/v9/iconWrong.png
    :alt: No icon
+   :scale: 15
 
 .. |arrowLeft| image:: images/left.png
    :alt: Arrow left
@@ -785,11 +701,7 @@
 
 
 
-
-.. |buttonQuit| image:: images/buttonQuit.png
-   :alt: Button quit multiple update mode
-
-.. |iconQuit| image:: images/v9/iconQuit.png
+.. |Quit| image:: images/v9/iconQuit.png
    :alt: Quit multiple update mode
    :scale: 15
 	
@@ -797,23 +709,30 @@
 
 
 
-.. |closeIcon| image:: images/close.png
+.. |Close| image:: images/close.png
    :alt: close icon
 
-.. |minusButton| image:: images/minusButton.png
-   :alt: minus button
+.. |Minus| image:: images/v9/iconMinus.png
+   :alt: minus
+   :scale: 15
 
-.. |plusButton| image:: images/plusButton.png
+.. |Plus| image:: images/icon/iconPlus.png
    :alt: plus button
+   :scale: 15
 
-.. |calculatePlanning| image:: images/plan.png
+.. |Plan| image:: images/v9/iconPlan.png
    :alt: calculate planning button
+   :scale: 15
 
-.. |storePlannedDates| image:: images/buttonStorePlannedDates.png
-   :alt: store planned dates button
+.. |Baseline| image:: images/v9/iconBaseline.png
+   :alt: saved baseline
+   :scale: 15
+   
 
-.. |msProject| image:: images/mpp.png
-   :alt: MS Project button
+
+.. |msProject| image:: images/v9/iconMSProject.png
+   :alt: MS Project
+   :scale: 15
 
 .. |createNewItem| image:: images/createNewItem.png
    :alt: create new item button
@@ -862,13 +781,7 @@
    :alt: unshare filter
 
 
-
-
-
-.. |sharedFilter| image:: images/shared.png
-   :alt: shared filter
-
-.. |iconShare| image:: images/v9/iconShare.png
+.. |Share| image:: images/v9/iconShare.png
    :alt: Share
    :scale: 15
 
@@ -958,7 +871,11 @@
 .. |eleven| image:: images/eleven.png
    :alt: Eleven
    :scale: 30
-   
+
+.. |elevenBLC| image:: images/elevenBLC.png
+   :alt: Eleven
+   :scale: 30
+      
 .. |twelve| image:: images/twelve.png
    :alt: Twelve
    :scale: 30

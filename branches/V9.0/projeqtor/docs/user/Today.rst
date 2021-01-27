@@ -34,39 +34,20 @@ This parameter defines the screen that will be displayed first on each connectio
 The definition of visibility is based on the access rights of each user
 
 
-.. index:: Message (Section)
-
-.. _messages-section:
-
-Messages
---------
-
-.. figure:: /images/GUI/TODAY_ZONE_TodayMessages.png
-   :alt: Section - Messages 
-   :align: center
-
-
-.. rubric:: Messages
-
-* Messages are displayed  depends on some criteria. 
-* Every message is component by title |one| and message |two|.
-* Messages are defined in :ref:`message` screen.
-
-
 .. rubric:: Automatic refresh
 
 * Allows to refresh data according defined delay. 
 * Also the screen will be scrolling from top to bottom according defined delay.
-* Click on |buttonIconRefresh| to enable/disable automatic refresh. 
+* Click on |Refresh| to enable/disable automatic refresh. 
 
 
 .. rubric:: Print
 
-* Click on |iconPrint| to print Today screen. 
+* Click on |Print| to print Today screen. 
 
 .. rubric:: Parameters
 
-* Click on |buttonIconParameter| to access screen parameters.
+* Click on |Parameter| to access screen parameters.
 
 .. figure:: /images/GUI/TODAY_BOX_Parameters.png
    :alt: Dialog box - Today parameters 
@@ -103,11 +84,7 @@ Allows to define parameters for automatic refresh.
 
 * Allows to define sections displayed on the screen.
 * Allows to reorder sections displayed with drag & drop feature.
-* Using the selector area button icon drag |buttonIconDrag|. 
-
-
-.. figure:: images/GUI/TODAY_BOX_Parameters_TRUE&FALSE.png
-   :alt: You can not drag it here
+* Using the selector area button icon drag |Drag|. 
 
 The number of items to display for the user can be customized in the user parameters, in the display tab.
 
@@ -118,19 +95,15 @@ See: :ref:`User parameters<display-parameters>`
  
 
 If you have added any reports to the Today page, they will appear in the list.
-   
-.. figure:: /images/GUI/TODAY_BOX_ParametersREPORTS.png
-   :alt: Parameters with reports
-   :scale: 60
-   
-   Parameters with reports
       
-You can hide or delete the added reports by clicking on the cross.
+You can hide the added reports by clicking on the box.
+
    
-see : :ref:`Favorite Report<favorite_report>`
+See : :ref:`Favorite Report<favorite_report>`
+
+See : :ref:`Today Screen Report<today_report>`
    
-   
-   
+See: :ref:`extending<extending-today>`
    
     
 .. raw:: latex
@@ -153,18 +126,32 @@ The number of displayed projects can be defined in the :ref:`global parameters<d
    
    Project section
    
+.. topic:: Interface areas
 
-.. rubric:: Description
-
+   |one| :ref:`Scope of the numbers counted<scopenumbers-today>`
+   
+   |two| :ref:`Trend<trend-today>`
+   
+   |three| :ref:`Health status<healthstatus-today>`
+   
+   |four| :ref:`Calculated and overall progress<calculated-today>`
+      
+   |five| :ref:`Other mesure of progress<otherprogress-today>`
+   
+   |six| :ref:`Elements concerned to project<elementproject-today>`
+   
+   
+   
 The list of projects is limited to the extent of visibility of the logged in user.
 
 All the projects to which you are assigned will therefore be displayed in this list
 
 
+.. _scopenumbers-today:
 
- .. compound:: |one| Scope of the numbers counted
+.. rubric:: |oneBLC| Scope of the numbers counted
 
-  Checkboxes allow to filter displayed projects:
+Checkboxes allow to filter displayed projects
 
   * **To do:** Projects to do.
   * **Not closed:** Projects to do and done.
@@ -174,58 +161,58 @@ All the projects to which you are assigned will therefore be displayed in this l
 
   Click on the name of a project will directly move to it. 
 
-.. rubric:: Manual indicators
+
+.. _trend-today:
+
+.. rubric:: |twoBLC| Trend
 
 Manual indicator can be set on project.
 
 Trend and health status indicators are displayed.
 
+This icon allows to display the trend of the project.
 
 
- .. compound:: |two| Icon "Trend"
+.. _healthstatus-today:
 
-    This icon allows to display the trend of the project.
+.. rubric:: |threeBLC| Health status
 
- .. compound:: |three| Icon "Health status"
-
-    This icon allows to display the health status of the project.  
-
-.. rubric:: Progress
-
-Calculated progress and overall progress are displayed.
+This icon allows to display the health status of the project.  
 
 
+.. _calculated-today:
 
- .. compound:: |four| Calculated progress
+.. rubric:: |fourBLC| Calculated and overall progress
 
-    * Actual progress of the work of project.
+Actual progress of the work of project and additional progress manually selected for the project
 
-    * On mouse over the bar
+* On mouse over the bar
     
     .. figure:: /images/GUI/TODAY_ZONE_Progress.png
       :alt: Calculated progress
       
       Calculated progress
       
-    On each project shows part of “to do” (red) compared to “done and closed” (green).
+On each project shows part of “to do” (red) compared to “done and closed” (green).
 
 
 
+.. _otherprogress-today:
 
- .. compound:: |five| Overall progress
+.. rubric:: |fiveBLC| Other measure of progress
 
-    Additional progress manually selected for the project.
-
- .. compound:: |six| Other measure of progress
-
-    * **Left:** Left work for the project.
-    * **Margin:** Work margin.
-    * **End date:** Planified end date of the project.
-    * **Late:** Number of late days in project.
+* **Left:** Left work for the project.
+* **Margin:** Work margin.
+* **End date:** Planified end date of the project.
+* **Late:** Number of late days in project.
  
- .. compound:: |seven| Numbers of elements concerned to project
+ 
+ 
+.. _elementproject-today:
+ 
+.. rubric:: |sixBLC| Elements concerned to project
 
-  Numbers of elements concerned to a project are displayed.
+Numbers of elements concerned to a project are displayed.
 
 
 
@@ -279,6 +266,9 @@ Click on an item will directly move to it.
 
     \newpage    
 
+
+.. _extending-today:
+
 Extending
 ---------
 
@@ -287,31 +277,20 @@ You can select any report to be displayed on the Today screen.
 .. rubric:: Add selected report
 
 * To do this, just go to the selected report, select parameters and display result (to check it is what you wish on today screen). 
-* Click on |buttonIconToday| to insert this report with parameter on the Today screen.
+* Click on |Today| to insert this report with parameter on the Today screen.
 * Any unchanged parameter will be set as default value.
 * These reports will be displayed on Today screen like other pre-defined parts.
 
-.. figure:: /images/GUI/REPORT_SCR_DisplayToday.png
-   :alt: Display a report on the today screen
-   
-   Display a report on the today screen
+See: :ref:`Favorite report on Today<today_report>`
    
    
-Click on |buttonIconParameter| to set the location of the report (s) on the Today screen.
+* Click on |Parameter| to set the location of the report (s) on the Today screen.
 
-Click on the handles to move the item in the list
+* Click on the handles to move the item in the list
 
-.. figure:: /images/GUI/REPORT_BOX_ReportDisplayParam.png
-   :alt: Parameters of the Today screen
-   
-   Parameters of the Today screen
-   
-
-.. rubric:: Manage extending section
-
-* Click on |buttonIconParameter| to access screen parameters.
 * You can reorder like any other parts.
-* Click on |buttonIconDelete| to completely remove them from the list.
+
+* Click on |Delete| to completely remove them from the list.
 
 .. figure:: /images/GUI/TODAY_BOX_ParametersExtending.png
    :alt: Dialog box - Today parameters with extending parts 

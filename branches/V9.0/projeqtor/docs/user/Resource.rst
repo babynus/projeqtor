@@ -38,7 +38,7 @@ Resource availability is defined by assigning it to a project.
   See: :ref:`pool`
      
    
-.. figure:: /images/GUI/RESOURCE_SCR_CreateResource.png
+.. figure:: /images/GUI/RESOURCE_SCR_Resource.png
    :alt: create a resource
    :align: center
    
@@ -131,7 +131,7 @@ Resource availability is defined by assigning it to a project.
 
 .. note:: 
 
-   If you want a resource pool of three people, the ETP capacity must be set to 3
+   If you want a resource pool of three people, the FTE capacity must be set to 3
 
 
 
@@ -151,7 +151,6 @@ Resource availability is defined by assigning it to a project.
 * Check this box if the resource needs to be linked to the human resources module.
 * The resource will then also appear in the :ref:`employee-manager` list.
 
-.. rubric:: treatment zone
 
 .. sidebar:: Concepts 
   
@@ -162,17 +161,11 @@ Resource availability is defined by assigning it to a project.
    
 .. compound:: **Allocations to projects**
    
-This Zone allows to allocated the ressources to the project
-
-.. figure:: /images/GUI/RESOURCE_ZONE_Allocation.png
-   :alt: Allocation Zone
-   :align: center
+This Zone allows to allocated the ressources to the project.
    
-   Allocation Zone
-   
-* Click on |buttonAdd| to allocate a new resource to the project. 
-* Click on |buttonEdit| to update an existing resource cost.
-* Click on |buttonIconDelete| to delete the resource cost.   
+* Click on |Add| to allocate a new resource to the project. 
+* Click on |Edit| to update an existing resource cost.
+* Click on |Delete| to delete the resource cost.   
    
 .. figure:: /images/GUI/RESOURCE_ZONE_AllocationOK.png
    :alt: Resource allocation
@@ -193,21 +186,15 @@ This allows you to reserve and enter additional working time (overtime) or to wi
 The resource will then enter its imputations, the exact value of its variable capacity for the given period.
 1 + XX hours for the status of the day to go green
 
-
-.. figure:: /images/GUI/RESOURCE_ZONE_Surcapacity.png
-   :alt: Variations in resource capacity
-   
-   Variations in the capacity of an FTE 1 resource with the addition of an overcapacity of 0.2 and over the period from 10 to 14/02/2020 
-
-The overcapacity of a resource is directly visible on the Gantt chart.
+The surcapacity of a resource is directly visible on the Gantt chart.
 
 A thin red stripe overcomes the resource work allocation bars and you will find the exact capacity added at the end of the resource detail.
 
 
-.. figure:: /images/GUI/RESOURCE_ZONE_Surcapacity2.png
+.. figure:: /images/GUI/RESOURCE_ZONE_Surcapacity.png
    :alt: Variations in resource capacity
    
-   Variations in the capacity of an FTE 0.5 resource with the addition of an overcapacity of 0.2 and over the period from 10 to 14/02/2020
+   Variations in the capacity
 
 
 .. index:: Surbooking
@@ -221,13 +208,13 @@ Surbooking in planning allows you to add extra work time on the standard capabil
 
 You can also subtract this work time to not plan the full availability of resources.
 
-.. figure:: /images/GUI/RESOURCE_ZONE_Surbooking.png
-   :alt: Surbooking
-   
-   Surbooking
-   
-
 The resource will continue to report their charges normally, with no extra or reduced work time, to change the status of their day to green.
+
+.. figure:: /images/GUI/GANTT_BAR_SurbookingView.png
+   :alt: Variations in resource capacity
+   
+   Variations in the capacity
+
 
 .. Warning::
 
@@ -305,11 +292,11 @@ This section allows to define functions and cost of the resource.
 
 .. rubric:: Resource cost management
 
-* Click on |buttonAdd| to create a new resource cost. 
-* Click on |buttonEdit| to update an existing resource cost.
-* Click on |buttonIconDelete| to delete the resource cost.
+* Click on |Add| to create a new resource cost. 
+* Click on |Edit| to update an existing resource cost.
+* Click on |Delete| to delete the resource cost.
 
-.. figure:: /images/GUI/BOX_ResourceCost.png
+.. figure:: /images/GUI/RESOURCE_BOX_ResourceCost.png
    :alt: Resource cost dialog box
    :align: center
 
@@ -353,8 +340,12 @@ This section allows to define functions and cost of the resource.
 Incompatible resources
 ----------------------
 
-**The goal of being able to define incompatible resources:**
-
+.. figure:: /images/GUI/RESOURCE_ZONE_AssignmentIncompatible.png
+   :alt: Assignment with incompatible resource
+   
+   Assignment with incompatible resource
+   
+   
 Two resources A and B are incompatible.
 
 If A is scheduled at a given time, B can not be scheduled on the same day as for a load less than or equal to the remaining availability of To date, 
@@ -373,6 +364,12 @@ that is, the minimum of [capacity of the resource-load already planned] for each
 Support resources
 -----------------
 
+.. figure:: /images/GUI/RESOURCE_ZONE_AssignmentSupport.png
+   :alt: Assignment with incompatible resource
+   
+   Assignment with incompatible resource
+   
+   
 If resource B is the resource resource of resource A, if A and planned at a given moment, B must also be automatically planned pro-rata indicated as employment rate in the definition of the support resource.
 
 If A's support resource B is not available (in part or in full), we plan for A only the part that is available taking into account the employment rate.
@@ -400,34 +397,20 @@ The display of the scheduled load for the support resource, although it is not a
 
 Pool of Resources
 *****************
-
-.. figure:: /images/PoolRessource.png
-   :alt: Resource cost dialog box
-   :align: left
    
 .. sidebar:: Other sections
    
    * :ref:`Allocations<allocation-section>`
    
 A pool is a group of resources that can work as any of the assigned resources.
+
 You assign resources to the pool at a given rate for a given period.
 
-.. note:: 
+A resource cannot be assigned on pools for more than 100% on a given period 
 
-   A resource cannot be assigned on pools for more than 100% on a given period 
-
-
-
-* A pool can be allocated to projects like any resource.
-* A pool can be assigned to activities like resources. The difference is that when you assign a pool, you don't specify the rate but the FTE (Full Time Equivalent) assigned to the activity. It means the number of resources that can work at the same time on the activity.
-* A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
-
-
-.. figure:: /images/GUI/RESOURCE_ZONE_CreatePoolResource.png
-   :alt: create a resource
-   
-   Create a new resource
-   
+   * A pool can be allocated to projects like any resource.
+   * A pool can be assigned to activities like resources. The difference is that when you assign a pool, you don't specify the rate but the FTE (Full Time Equivalent) assigned to the activity. It means the number of resources that can work at the same time on the activity.
+   * A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
 
 
 .. tabularcolumns:: |l|l|
@@ -477,7 +460,11 @@ You assign resources to the pool at a given rate for a given period.
 Behaviour
 ---------
 
+Find here some information on the type of behavior of certain elements
+
+
   .. compound:: Automatic decrement for assigned work
+  
      * When you assign a pool to an activity, and then assign a resource of the pool to the same activity, then assigned work on the resource is automatically subtracted from assignment of the pool
      * The same way, when you assign a pool to an activity, and then assign a resource of the pool to a sub-activity of this activity, then assigned work on the resource is automatically subtracted from assignment of the pool
      * When you assign a pool to an activity, and then assign the same pool to a sub-activity of this activity, then assigned work on the pool on the sub-activity is automatically subtracted from assignment of the pool on the parent activity
@@ -487,7 +474,7 @@ Behaviour
      * When planning a pool, availability of unitary resources already booked on other tasks is taken into account
      * When planning an unitary resource, availability already booked through the pool on other tasks is also taken into account (globally for all the resources of the pool)
 
-  .. compound:: **Possible use cases for pool**
+  .. compound:: Possible use cases for pool
 
      * When you have a group of resources that may work on same tasks, but you don't know in advance who will work. For instance a maintenance team that may work on maintenance tasks and other project tasks
      * For macro planning
@@ -523,20 +510,20 @@ If you select single resource then you will have no FTE capacity to fill in but 
 
 Check the box and confirm to close the pop up.
 
-.. figure:: /images/GUI/RESOURCE_BOX_AllocationPool.PNG
+.. figure:: /images/GUI/RESOURCE_BOX_AllocationPool.png
    :alt: Allocate the resource pool to the activity 
 
 
 When the pool is allocate, the pool icon appears on the board. 
 
-If you chose the unique resource then a 1 will be displayed on the icon.
+If you chose the **unique resource** then the 1 number will be displayed on the icon.
 
 Similarly, the function of the resource chosen from the pool is indicated in brackets. 
 
 .. figure:: /images/GUI/RESOURCE_ZONE_AllocationPool.png
    :alt: Pool allocation
 
-Click on |buttonEdit| to edit the allocation.
+Click on |Edit| to edit the allocation.
 
 The pop up opens again and this time you have the summary table showing you the resources of your pool 
 
@@ -547,7 +534,7 @@ You must fill in the activity load to see the end dates of the pool resources.
 Otherwise the message 'not planned work' appears instead of the dates.
 
 
-.. figure:: /images/GUI/RESOURCE_BOX_AllocationPool_Edit.PNG
+.. figure:: /images/GUI/RESOURCE_BOX_AllocationPool_Edit.png
 
 Choose the appropriate resource by selecting the corresponding line and confirm.
 
@@ -571,12 +558,10 @@ The selected resource will then be the only one to be planned on this activity f
 Teams
 *****
 
-.. figure:: /images/Teams22.png
-   :alt: Team
-   :align: left
-   
-| The team is a group of resources gathered on any criteria.
-| A resource can belong to only one team.
+The team is a group of resources gathered on any criteria.
+
+
+A resource can belong to only one team.
 
 .. topic:: **Use for**
 
@@ -584,21 +569,6 @@ Teams
    * To filter resource data in work, cost and planning reports.
    * To set attachment, note and document visibility to the team.
 
-.. tabularcolumns:: |l|l|
-
-.. list-table:: **Description section fields**
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the team.
-   * - **Name**
-     - Name of the team.
-   * - :term:`Closed`
-     - Flag to indicate that team is archived.
-   * - Description
-     - Complete description of the team.
 
 .. _team-member:
 
@@ -612,13 +582,13 @@ List of the resources members of the team.
    Team members section
    
    
-* Click on |buttonAdd| to add a new member to the team
-* Click on |buttonIconDelete| to delete the member to the team
+* Click on |Add| to add a new member to the team
+* Click on |Delete| to delete the member to the team
 
 .. topic:: Button **Allocate all team members of a project**
 
    * This button allows to allocate all team members of a project.
-   * The :ref:`allocation dialog box<allocation-box>` will be displayed.
+   * The :ref:`allocation dialog window<allocation-section>` will be displayed.
 
 .. raw:: latex
 
@@ -639,7 +609,7 @@ Calendars
 
 This tool allows to define calendars.
 
-.. figure:: /images/GUI/RESOURCE_SCR_CalendarPresentation.PNG
+.. figure:: /images/GUI/RESOURCE_SCR_CalendarPresentation.png
    :alt: calendar
    :align: center
    
@@ -680,38 +650,23 @@ This tool allows to define calendars.
 
 Holiday bank definition that can be easily added each year
 
-.. figure:: /images/GUI/RESOURCE_ZONE_BankDaysOFF.PNG
+.. figure:: /images/GUI/RESOURCE_ZONE_BankDaysOFF.png
    :alt: Bank OFF days
    
-Click on |buttonAdd| to create a public Holiday
+Click on |Add| to create a public Holiday
+
+
+.. figure:: /images/GUI/RESOURCE_BOX_CreationOFFDay.png
+   :alt: Bank OFF days
+   
+   Bank OFF days
 
 A Pop Up open and you can defined the Off day
 
-.. figure:: /images/GUI/RESOURCE_BOX_CreationOFFDay.PNG
-   :alt: Bank OFF days
-
-.. raw:: latex
-
-    \newpage
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Description section fields
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the calendar.
-   * - Name
-     - Name of the calendar.
-   * - :term:`Closed`
-     - Flag to indicate that team is archived.
-       the calendar will no longer appear in the lists.
-   * - Description
-     - Complete description of the team.
-
-.. compound:: **Week days off**
+     
+     
+     
+ .. compound:: Week days off
 
   * By default, Saturday and Sunday are non-working days
   * Check the boxes corresponding to non-working days if the default settings do not suit the structure of your company
@@ -730,11 +685,6 @@ A Pop Up open and you can defined the Off day
   * Copy exceptions of the selected year of the selected calendar into current calendar.
 
  .. compound:: Calendar days
-
-  .. figure:: /images/GUI/SEC_YearCalendar.png
-     :alt: Year calendar
-     :align: center
-
 
   A calendar of selected year is displayed to give a global overview of the exceptions existing.
 

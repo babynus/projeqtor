@@ -19,7 +19,7 @@ Financial situation
 
 The financial situation screens allow you to precisely follow up all the financial elements of a project. 
 
-.. figure:: /images/GUI/FINANCIAL_SCR_ProjectFinancialSituation.PNG
+.. figure:: /images/GUI/FINANCIAL_SCR_ProjectFinancialSituation.png
    :alt: Project financial situation screen
    
    Project financial situation screen

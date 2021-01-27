@@ -142,7 +142,7 @@ By profile, possibility to have a different list of the version of the original 
 .. rubric:: Section Description
 
 
-.. figure:: /images/GUI/CONF_ZONE_DescrptionVersionProduct.png
+.. figure:: /images/GUI/CONF_ZONE_DescriptionVersionProduct.png
    :alt: Product version description
    
    Product version description
