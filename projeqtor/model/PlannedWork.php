@@ -205,6 +205,8 @@ class PlannedWork extends GeneralWork {
     $inClause.=" and (refType, refId) not in (select refType, refId from $peTable peFixed where fixPlanning=1) ";
     // Do not plan "Manual Planning" activities
     $inClause.=" and (refType, refId) not in (select refType, refId from $peTable peFixed where idPlanningMode=23) ";
+    // Try and merge the two last conditions
+    //$inClause.=" and (refType, refId) not in (select refType, refId from $peTable peFixed where peFixed.fixPlanning=1 or peFixed.idPlanningMode=23) ";
     //-- Purge existing planned work
     $plan=new PlannedWork();
     $plan->purge($inClause);
