@@ -55,3 +55,7 @@ WHERE creationDate is null or creationDate='1970-01-01';
 
 -- Incorrect idProject for assignment (when moved after creation)
 UPDATE `${prefix}assignment` ass SET idProject=(SELECT idProject FROM `${prefix}planningelement` pe WHERE pe.refType=ass.refType and pe.refId=ass.refId);
+
+-- Add index on idProject for plannedwork (accelerate purge on plan())
+CREATE INDEX plannedworkProject ON `${prefix}plannedwork` (idProject);
+CREATE INDEX planningelementFixplanning ON `${prefix}planningelement` (fixPlanning);
