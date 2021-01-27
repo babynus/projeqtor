@@ -461,7 +461,7 @@ class ProviderOrderMain extends SqlElement {
     }else if($item=='situation'){
       $situation = new Situation();
       $situation->drawSituationHistory($this);
-    } 
+    }
     return $result;
   }
   

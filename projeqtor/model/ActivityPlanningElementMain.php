@@ -83,8 +83,10 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $unitWeight;
   public $idWeightMode;
   public $_separator_sectionRevenue_marginTop;
-  public $_tab_1_1_smallLabel_2 = array('', 'CA');
+  public $_tab_3_1_smallLabel_2 = array('','','','CA');
   public $revenue;
+  public $_label_workCommand;
+  public $idWorkCommand;
   public $_tab_5_1_smallLabel_3 = array('', '', '', '', '','workUnits');
   public $idWorkUnit;
   public $_label_complexity;
@@ -195,6 +197,9 @@ class ActivityPlanningElementMain extends PlanningElement {
     self::$_fieldsAttributes['idComplexity']='hidden';
     self::$_fieldsAttributes['quantity']='hidden';
     self::$_fieldsAttributes['_label_complexity']='hidden';
+    self::$_fieldsAttributes['idWorkUnit']='hidden';
+    self::$_fieldsAttributes['_label_workCommand']='hidden';
+    self::$_fieldsAttributes['idWorkCommand']='hidden';
     //if (Parameter::getGlobalParameter('PlanningActivity')=='YES') {
       $act=new Activity($this->refId,true);
       if ( ! $act->isPlanningActivity) {
@@ -303,6 +308,11 @@ class ActivityPlanningElementMain extends PlanningElement {
       	self::$_fieldsAttributes['revenue']='';
       	self::$_fieldsAttributes['idComplexity']='';
       	self::$_fieldsAttributes['quantity']='';
+      	$paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
+        if($paramEnableWorkUnit=='true'){
+          self::$_fieldsAttributes['_label_workCommand']='';
+          self::$_fieldsAttributes['idWorkCommand']='readonly';
+        }
       }
       if($project->ProjectPlanningElement->idRevenueMode == 2){
       	if($this->elementary){
@@ -332,8 +342,16 @@ class ActivityPlanningElementMain extends PlanningElement {
         	    self::$_fieldsAttributes['validatedCost']='readonly';
         	  }
         	}
+        	$paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
+        	if($paramEnableWorkUnit=='true'){
+        	  self::$_fieldsAttributes['_label_workCommand']='';
+        	  self::$_fieldsAttributes['idWorkCommand']='readonly';
+        	}
       	}else{
       	  self::$_fieldsAttributes['revenue']='readonly';
+      	}
+      	if($this->idWorkCommand){
+      	  self::$_fieldsAttributes['idWorkCommand']='';
       	}
       }else{
       	//unset($this->_separator_sectionRevenue_marginTop);
@@ -454,6 +472,20 @@ class ActivityPlanningElementMain extends PlanningElement {
       $CaReplaceValidCost= Parameter::getGlobalParameter('CaReplaceValidCost');
       if($CaReplaceValidCost=='YES'){
         $this->validatedCost = $complexityVal->price*$this->quantity;
+      }
+      
+      if($this->idWorkCommand){
+        $workCommandDone = new WorkCommandDone();
+        $workCommand = new WorkCommand($this->idWorkCommand);
+        $workCommandDone->idCommand = $workCommand->idCommand;
+        $workCommandDone->idWorkCommand = $this->idWorkCommand;
+        $workCommandDone->refType = "Activity";                
+        $workCommandDone->refId = $this->id;
+        $workCommandDone->doneQuantity = $this->quantity;
+        $workCommand->doneQuantity += $this->quantity;
+        $workCommand->doneAmount += $workCommand->unitAmount * $this->quantity;
+        $workCommand->save();
+        $workCommandDone->save();
       }
     }
     //
@@ -604,6 +636,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  var idComplexity=dijit.byId("ActivityPlanningElement_idComplexity").get("value");';
       $colScript .= '  var idWorkUnit=dijit.byId("ActivityPlanningElement_idWorkUnit").get("value");';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_idWorkCommand").set("value","");';
       $colScript .= '  if(idWorkUnit == " "){';
       $colScript .= '   dijit.byId("ActivityPlanningElement_idComplexity").set("value","");';
       $colScript .= '   dijit.byId("ActivityPlanningElement_quantity").set("value","");';
@@ -618,6 +651,17 @@ class ActivityPlanningElementMain extends PlanningElement {
       $colScript .= '   dojo.addClass(dijit.byId("ActivityPlanningElement_quantity").domNode, "required");';
       $colScript .= '   dijit.byId("ActivityPlanningElement_quantity").set("readOnly",false);';
       $colScript .= '   refreshListSpecific("idWorkUnit", "ActivityPlanningElement_idComplexity", "idWorkUnit",idWorkUnit);';
+      $colScript .= '  }';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
+    }else if ($colName=="idComplexity") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  var idComplexity=dijit.byId("ActivityPlanningElement_idComplexity").get("value");';
+      $colScript .= '  var idWorkUnit=dijit.byId("ActivityPlanningElement_idWorkUnit").get("value");';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_idWorkCommand").set("value","");';
+      $colScript .= '  if(idComplexity != " "){';
+      $colScript .= '   refreshListSpecific("idWorkCommand", "ActivityPlanningElement_idWorkCommand", "idWorkCommand",idWorkUnit+"separator"+idComplexity);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_idWorkCommand").set("readOnly",false);';
       $colScript .= '  }';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';

@@ -223,6 +223,7 @@ abstract class SqlElement {
           "Attachment" => "cascade", 
           "Link" => "cascade", 
           "Note" => "cascade",
+          "WorkCommand" => "cascade",
           "Situation"=> "cascade"), 
       "CommandType" => array(
           "Command" => "controlStrict"), 

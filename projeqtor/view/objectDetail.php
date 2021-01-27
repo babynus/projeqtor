@@ -2548,7 +2548,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $fieldWidth=round($fieldWidth/2)-23;
           if($fieldWidth<85)$fieldWidth=85;
         }
-        if($col=='idWorkUnit' or $col=='idComplexity'){
+        if($col=='idWorkUnit' or $col=='idComplexity' or $col=='idWorkCommand'){
           if (!$readOnly) $showExtraButton=true;
           $fieldWidth=round($fieldWidth/2)-23;
           if($fieldWidth<85)$fieldWidth=85;
@@ -7730,6 +7730,155 @@ function drawClientElementList($item, $object){
   	echo '</table>';
   }
 }
+
+function drawWorkCommand($list,$obj){
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create')=="YES";
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update')=="YES";
+  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete')=="YES";
+  if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
+    $canCreate=false;
+    $canUpdate=false;
+    $canDelete=false;
+  }
+  echo '<table style="width:100%">';
+  echo '<tr>';
+  echo '  <td colspan=3 class="reportTableHeader" style="width:40%">' . ucfirst(i18n('colWorkCommand')) . '</td>';
+  echo '  <td colspan=2 class="reportTableHeader" style="width:20%">' . ucfirst(i18n('colCommand')) . '</td>';
+  echo '  <td colspan=2 class="reportTableHeader" style="width:20%">' . ucfirst(i18n('colDone')) . '</td>';
+  echo '  <td colspan=2 class="reportTableHeader" style="width:20%">' . ucfirst(i18n('colBilled')) . '</td>';
+  echo '</tr>';
+  echo '<tr>';
+  echo '  <td class="noteHeader" style="width:10%">';
+  if ($canUpdate) {
+    echo '    <a onClick="addWorkCommand(\''.$obj->id.'\');" title="'.i18n('addProviderTerm').'" > '.formatSmallButton('Add').'</a>';
+  }
+  echo ' </td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colIdWorkUnit')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colComplexity')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colQty')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colAmount')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colQty')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colAmount')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colQty')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colAmount')) . '</td>';
+  echo '</tr>';
+  $amountCommand = 0;
+  $amountBilledCommand=0;
+  $amountDoneCommand = 0;
+  foreach ($list as $workCom){
+    echo '<tr><td class="assignData" style="text-align:center;white-space: nowrap;">';
+  		if ($canUpdate) {
+  			echo '<a onClick="editWorkCommand(\''.$obj->id.'\',\''.$workCom->id.'\',\''.$workCom->idWorkUnit.'\',\''.$workCom->idComplexity.'\',\''.$workCom->commandQuantity.'\',\''.$workCom->unitAmount.'\',\''.$workCom->commandAmount.'\');" '.'title="'.i18n('editWorkCommand').'" > '.formatSmallButton('Edit').'</a>';
+  		}
+  		if ($canDelete) {
+  			echo '<a onClick="removeWorkCommand(\''.$workCom->id.'\');" '.'title="'.i18n('removeWorkCommand').'" > '.formatSmallButton('Remove').'</a>';
+  		}
+  	echo '</td>';
+  	echo '<td class="assignData">'.SqlList::getNameFromId('WorkUnit', $workCom->idWorkUnit) .'</td>';
+  	echo '<td class="assignData">'.SqlList::getNameFromId('Complexity', $workCom->idComplexity) .'</td>';
+  	echo '<td style="text-align:center;" class="assignData">'.htmlDisplayNumericWithoutTrailingZeros($workCom->commandQuantity).'</td>';
+  	echo '<td style="text-align:right;" class="assignData">'.htmlDisplayCurrency($workCom->commandAmount).'</td>';
+  	echo '<td style="text-align:center;" class="assignData">'.htmlDisplayNumericWithoutTrailingZeros($workCom->doneQuantity).'</td>';
+  	echo '<td style="text-align:right;" class="assignData">'.htmlDisplayCurrency($workCom->doneAmount).'</td>';
+  	echo '<td style="text-align:center;" class="assignData">'.htmlDisplayNumericWithoutTrailingZeros($workCom->billedQuantity).'</td>';
+  	echo '<td style="text-align:right;" class="assignData">'.htmlDisplayCurrency($workCom->billedAmount).'</td></tr>';
+  	$amountDoneCommand += $workCom->doneAmount;
+  	$amountBilledCommand += $workCom->billedAmount;
+  	$amountCommand+=$workCom->commandAmount;
+  }
+  echo '<tr>';
+  echo '  <td colspan=3 class="noteHeader">' .ucfirst(i18n('colCountTotal')) . '</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountCommand).'</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountDoneCommand).'</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountBilledCommand).'</td>';
+  echo '</tr>';
+  echo '</table>';
+}
+
+function drawBilledWorkCommand($list,$obj){
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create')=="YES";
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update')=="YES";
+  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete')=="YES";
+  if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
+    $canCreate=false;
+    $canUpdate=false;
+    $canDelete=false;
+  }
+  echo '<table style="width:100%">';
+  echo '<tr>';
+  echo '  <td colspan=3 class="reportTableHeader" style="width:40%">' . ucfirst(i18n('colWorkCommand')) . '</td>';
+  echo '  <td colspan=2 class="reportTableHeader" style="width:20%">' . ucfirst(i18n('colCommand')) . '</td>';
+  echo '  <td colspan=2 class="reportTableHeader" style="width:20%">' . ucfirst(i18n('colDone')) . '</td>';
+  echo '  <td colspan=2 class="reportTableHeader" style="width:20%">' . ucfirst(i18n('colBilled')) . '</td>';
+  echo '  <td colspan=2 class="reportTableHeader" style="width:20%">' . ucfirst(i18n('colCurrentBilled')) . '</td>';
+  echo '</tr>';
+  echo '<tr>';
+  echo '  <td class="noteHeader" style="width:10%">';
+  if($canCreate){
+    echo '    <a onClick="addBilledWorkCommand(\''.$obj->id.'\');" title="'.i18n('addProviderTerm').'" > '.formatSmallButton('Add').'</a>';
+  }
+  echo ' </td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colIdWorkUnit')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colComplexity')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colQty')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colAmount')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colQty')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colAmount')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colQty')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colAmount')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colQty')) . '</td>';
+  echo '  <td class="noteHeader">' . ucfirst(i18n('colAmount')) . '</td>';
+  echo '</tr>';
+  $amountCommandArray = array();
+  $amountBilledCommandAcutal = 0;
+  foreach ($list as $billedWorkCom){
+    $workCom = new WorkCommand($billedWorkCom->idWorkCommand);
+    echo '<tr><td class="assignData" style="text-align:center;white-space: nowrap;">';
+    if ($canUpdate) {
+      echo '<a onClick="editBilledWorkCommand(\''.$obj->id.'\',\''.$billedWorkCom->id.'\',\''.$billedWorkCom->idWorkCommand.'\',\''.$billedWorkCom->billedQuantity.'\');" '.'title="'.i18n('editWorkCommand').'" > '.formatSmallButton('Edit').'</a>';
+  	}
+  	if ($canDelete) {
+      echo '<a onClick="removeBilledWorkCommand(\''.$workCom->id.'\');" '.'title="'.i18n('removeWorkCommand').'" > '.formatSmallButton('Remove').'</a>';
+  	}
+    echo '</td>';
+    echo '<td class="assignData">'.SqlList::getNameFromId('WorkUnit', $workCom->idWorkUnit) .'</td>';
+  	echo '<td class="assignData">'.SqlList::getNameFromId('Complexity', $workCom->idComplexity) .'</td>';
+  	echo '<td style="text-align:center;" class="assignData">'.htmlDisplayNumericWithoutTrailingZeros($workCom->commandQuantity).'</td>';
+  	echo '<td style="text-align:right;" class="assignData">'.htmlDisplayCurrency($workCom->commandAmount).'</td>';
+  	echo '<td style="text-align:center;" class="assignData">'.htmlDisplayNumericWithoutTrailingZeros($workCom->doneQuantity).'</td>';
+  	echo '<td style="text-align:right;" class="assignData">'.htmlDisplayCurrency($workCom->doneAmount).'</td>';
+  	echo '<td style="text-align:center;" class="assignData">'.htmlDisplayNumericWithoutTrailingZeros($workCom->billedQuantity).'</td>';
+  	echo '<td style="text-align:right;" class="assignData">'.htmlDisplayCurrency($workCom->billedAmount).'</td>';
+    echo '<td style="text-align:center;" class="assignData">'.htmlDisplayNumericWithoutTrailingZeros($billedWorkCom->billedQuantity).'</td>';
+    echo '<td style="text-align:right;" class="assignData">'.htmlDisplayCurrency($billedWorkCom->billedQuantity*$workCom->unitAmount).'</td></tr>';
+    $amountBilledCommandAcutal +=  $billedWorkCom->billedQuantity*$workCom->unitAmount;
+    $amountCommandArray[$workCom->id]['commandAmount']=$workCom->commandAmount;
+    $amountCommandArray[$workCom->id]['amountDoneCommand']=$workCom->doneAmount;
+    $amountCommandArray[$workCom->id]['amountBilledCommand']=$workCom->billedAmount;
+  }
+  $amountCommand = 0;
+  $amountDoneCommand = 0;
+  $amountBilledCommand = 0;
+  foreach ($amountCommandArray as $val){
+    $amountCommand += $val['commandAmount'];
+    $amountDoneCommand += $val['amountDoneCommand'];
+    $amountBilledCommand  += $val['amountBilledCommand'];
+  }
+  echo '<tr>';
+  echo '  <td colspan=3 class="noteHeader">' .ucfirst(i18n('colCountTotal')) . '</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountCommand).'</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountDoneCommand).'</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountBilledCommand).'</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountBilledCommandAcutal).'</td>';
+  echo '</tr>';
+
+  echo '</table>';
+
+}
+
+
 
 // gautier #ProviderTerm
 function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
