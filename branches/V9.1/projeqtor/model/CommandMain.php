@@ -89,6 +89,8 @@ class CommandMain extends SqlElement {
   //public $_sec_BillLine;
   public $_BillLine=array();
   public $_BillLine_colSpan="2";
+  public $_sec_WorkCommand;
+  public $_spe_WorkCommand;
   public $_sec_situation;
   public $idSituation;
   public $_spe_situation;
@@ -134,6 +136,7 @@ class CommandMain extends SqlElement {
                                   "validatedPricePerDayAmount"=>"hidden",
                                   "idProject"=>"required",
                                   "idSituation"=>"readonly"
+
   );  
   
   private static $_colCaptionTransposition = array('idUser'=>'issuer', 
@@ -438,6 +441,8 @@ class CommandMain extends SqlElement {
   }
   
   public function setAttributes() {
+    self::$_fieldsAttributes['_sec_WorkCommand']='hidden';
+    self::$_fieldsAttributes['_spe_WorkCommand']='hidden';
     if (count($this->_BillLine)) {
       self::$_fieldsAttributes['untaxedAmount']='readonly';
       self::$_fieldsAttributes['fullAmount']='readonly';
@@ -455,6 +460,11 @@ class CommandMain extends SqlElement {
       self::$_fieldsAttributes['untaxedAmount']="readonly";
       self::$_fieldsAttributes['addUntaxedAmount']="readonly";
     }
+    $paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
+    if($paramEnableWorkUnit=='true'){
+      self::$_fieldsAttributes['_sec_WorkCommand']='';
+      self::$_fieldsAttributes['_spe_WorkCommand']='';
+    }
   }
   
   public function drawSpecificItem($item){
@@ -463,6 +473,10 @@ class CommandMain extends SqlElement {
   	if($item=='situation'){
   		$situation = new Situation();
   		$situation->drawSituationHistory($this);
+  	}elseif($item=="WorkCommand"){
+  	  $workCommand = new WorkCommand();
+  	  $listCommand = $workCommand->getSqlElementsFromCriteria(array('idCommand'=>$this->id));
+  	  drawWorkCommand($listCommand,$this);
   	}
   	return $result;
   }

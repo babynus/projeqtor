@@ -6104,6 +6104,196 @@ function removeProviderTermFromBill(id,idProviderBill) {
     showConfirm(msg, actionOK);
 }
 
+function addWorkCommand(id) {
+  var callBack = function () {
+    affectationLoad=true;
+    dijit.byId("dialogWorkCommand").show();
+    setTimeout("affectationLoad=false", 500);
+  };
+  var params="&idCommand="+id;
+  params+="&mode=add";
+  loadDialog('dialogWorkCommand',callBack,false,params);
+}
+
+function editWorkCommand(idCommand,id,idWorkUnit,idComplexity,quantity,unitAmount,commandAmount) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  pauseBodyFocus();
+  var callBack = function () {
+    dijit.byId("dialogWorkCommand").show();
+  };
+  var params="&id="+id;
+  params+="&idCommand="+idCommand;
+  params+="&idWorkUnit="+idWorkUnit;
+  params+="&idComplexity="+idComplexity;
+  params+="&quantity="+quantity;
+  params+="&unitAmount="+unitAmount;
+  params+="&commandAmount="+commandAmount;
+  params+="&mode=edit";
+  loadDialog('dialogWorkCommand',callBack,false,params);
+}
+
+function editBilledWorkCommand(idBill,id,idWorkCommand,quantity) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  pauseBodyFocus();
+  var callBack = function () {
+    dijit.byId("dialogBilledWorkCommand").show();
+  };
+  var params="&id="+id;
+  params+="&idBill="+idBill;
+  params+="&idWorkCommand="+idWorkCommand;
+  params+="&quantity="+quantity;
+  params+="&mode=edit";
+  loadDialog('dialogBilledWorkCommand',callBack,false,params);
+}
+
+function addBilledWorkCommand(id) {
+  var callBack = function () {
+    affectationLoad=true;
+    dijit.byId("dialogBilledWorkCommand").show();
+    setTimeout("affectationLoad=false", 500);
+  };
+  var params="&idBill="+id;
+  params+="&mode=add";
+  loadDialog('dialogBilledWorkCommand',callBack,false,params);
+}
+
+function saveWorkCommand() {
+  var formVar=dijit.byId('workCommandForm');
+  if (formVar.validate()) {
+    loadContent("../tool/saveWorkCommand.php", "resultDivMain", "workCommandForm", true, 'workCommand');
+    dijit.byId('dialogWorkCommand').hide();
+  } else {
+    showAlert(i18n("alertInvalidForm"));
+  }
+}
+
+function saveBilledWorkCommand() {
+  var formVar=dijit.byId('billedWorkCommandForm');
+  if (formVar.validate()) {
+    loadContent("../tool/saveBilledWorkCommand.php", "resultDivMain", "billedWorkCommandForm", true, 'billedWorkCommand');
+    dijit.byId('dialogBilledWorkCommand').hide();
+  } else {
+    showAlert(i18n("alertInvalidForm"));
+  }
+}
+
+function removeWorkCommand(id) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  actionOK=function() {
+    loadContent("../tool/removeWorkCommand.php?idWorkCommand="+id, "resultDivMain",
+        null, true, 'workCommand');
+  };
+    msg=i18n('confirmRemoveWorkCommand', new Array(id));
+    showConfirm(msg, actionOK);
+}
+
+function removeBilledWorkCommand(id) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  actionOK=function() {
+    loadContent("../tool/removeBilledWorkCommand.php?idWorkCommandBilled="+id, "resultDivMain",
+        null, true, 'workCommand');
+  };
+    msg=i18n('confirmRemoveWorkCommand', new Array(id));
+    showConfirm(msg, actionOK);
+}
+
+function workCommandChangeIdWorkUnit(){
+  if(dijit.byId('workCommandWorkUnit').get('value')==''){
+    dijit.byId('workCommandComplexity').set('value','');
+  }else{
+    dijit.byId("workCommandComplexity").set('readOnly', false);
+    if(dijit.byId('workCommandComplexity').get('value')!=''){
+      dijit.byId('workCommandComplexity').set('value','');
+    }
+    refreshListSpecific("idWorkUnit", "workCommandComplexity", "idWorkUnit",dijit.byId('workCommandWorkUnit').get('value'));
+  }
+}
+
+function workCommandChangeIdComplexity(){
+  dijit.byId("workCommandQuantity").set('value','');
+  dijit.byId("workCommandAmount").set('value','');
+  dijit.byId("workCommandQuantity").set('readOnly', false);
+  dojo.xhrGet({
+        url : '../tool/getSingleData.php?dataType=workCommand'
+          +'&idWorkUnit='+dijit.byId('workCommandWorkUnit').get('value')+'&idComplexity='+dijit.byId('workCommandComplexity').get('value'),
+    handleAs : "text",
+    load : function(data) {
+      dijit.byId('workCommandUnitAmount').set('value', data);
+    }
+  });
+}
+
+function changeBilledWorkCommand(){
+  dijit.byId("billedWorkCommandQuantityBilled").set('readOnly', false);
+  dojo.xhrGet({
+    url : '../tool/getSingleData.php?dataType=billedWorkCommand'
+      +'&idWorkCommand='+dijit.byId('billedWorkCommandWorkCommand').get('value'),
+    handleAs : "text",
+    load : function(data) {
+      arrayData=data.split('#!#!#!#!#!#');
+      dijit.byId('billedWorkCommandWorkUnit').set('value',arrayData[0]);
+      dijit.byId('billedWorkCommandComplexity').set('value',arrayData[1]);
+      dijit.byId('billedWorkCommandUnitAmount').set('value',parseFloat(arrayData[2]));
+      dijit.byId('billedWorkCommandCommand').set('value',parseFloat(arrayData[3]));
+      dijit.byId('billedWorkCommandDone').set('value',parseFloat(arrayData[4]));
+      dijit.byId('billedWorkCommandBilled').set('value',parseFloat(arrayData[5]));
+    }
+    });
+}
+
+function billedWorkCommandChangeQuantity(mode,id){
+  var total = dijit.byId('billedWorkCommandUnitAmount').get('value') * dijit.byId('billedWorkCommandQuantityBilled').get('value');
+  dijit.byId('billedWorkCommandAmount').set('value',total);
+  
+  if(mode == 'add'){
+    dojo.xhrGet({
+      url : '../tool/getSingleData.php?dataType=billedWorkCommandQuantityAdd'
+        +'&idWorkCommand='+dijit.byId('billedWorkCommandWorkCommand').get('value'),
+      handleAs : "text",
+      load : function(data) {
+        var quantity = dijit.byId('billedWorkCommandQuantityBilled').get('value');
+        var totalQuantityBilled = parseInt(data) + quantity;
+        dijit.byId('billedWorkCommandBilled').set('value',totalQuantityBilled);
+      }
+      });
+  }else{
+    dojo.xhrGet({
+      url : '../tool/getSingleData.php?dataType=billedWorkCommandQuantityEdit'+'&idWorkCommandBill='+id
+        +'&idWorkCommand='+dijit.byId('billedWorkCommandWorkCommand').get('value'),
+      handleAs : "text",
+      load : function(data) {
+        var quantity = dijit.byId('billedWorkCommandQuantityBilled').get('value');
+        var totalQuantityBilled = parseInt(data) + quantity;
+        dijit.byId('billedWorkCommandBilled').set('value',totalQuantityBilled);
+      }
+      });
+  }
+  
+}
+
+function workCommandChangeQuantity(){
+  var quantity = dijit.byId('workCommandQuantity').get('value');
+ // if(quantity > 0 && quantity !=''){
+    var amountUnity = dijit.byId('workCommandUnitAmount').get('value');
+    var amount = quantity*amountUnity;
+    dijit.byId('workCommandAmount').set('value',amount);
+  //}else{
+   // dijit.byId('workCommandAmount').set('value','');
+  //}
+}
+
 function addProviderTerm(objectClass, type, idProviderOrder, isLine) {
   var callBack = function () {
     affectationLoad=true;

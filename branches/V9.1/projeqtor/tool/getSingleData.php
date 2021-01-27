@@ -208,7 +208,30 @@
         $idModel=RequestHandler::getId('idModel');
         $model=new Model($idModel);
         echo $model->idBrand;
-    } else {
+    }else if($type=='workCommand'){
+      $idComplexity = RequestHandler::getId('idComplexity');
+      $idWorkUnit = RequestHandler::getId('idWorkUnit');
+      $complexityValues=SqlElement::getSingleSqlElementFromCriteria('ComplexityValues',array('idComplexity'=>$idComplexity,'idWorkUnit'=>$idWorkUnit));
+      echo htmlDisplayNumericWithoutTrailingZeros($complexityValues->price);
+    }else if($type=='billedWorkCommand'){
+        $idWorkCommand = RequestHandler::getId('idWorkCommand');
+        $workCommand = new WorkCommand($idWorkCommand);
+        $name=SqlList::getNameFromId('WorkUnit', $workCommand->idWorkUnit);
+        $complex = SqlList::getNameFromId('Complexity', $workCommand->idComplexity);
+        $workCommand_array = "$name#!#!#!#!#!#$complex#!#!#!#!#!#$workCommand->unitAmount#!#!#!#!#!#$workCommand->commandQuantity;#!#!#!#!#!#$workCommand->doneQuantity#!#!#!#!#!#$workCommand->billedQuantity";
+        echo $workCommand_array;
+    }else if($type=='billedWorkCommandQuantityAdd'){
+      $idWorkCommand = RequestHandler::getId('idWorkCommand');
+      $workCommand = new WorkCommand($idWorkCommand);
+      echo $workCommand->billedQuantity;
+    }else if($type=='billedWorkCommandQuantityEdit'){
+      $idWorkCommand = RequestHandler::getId('idWorkCommand');
+      $workCommand = new WorkCommand($idWorkCommand);
+      $idWorkCommandBill = RequestHandler::getValue('idWorkCommandBill');
+      $workCommandBill = new WorkCommandBilled($idWorkCommandBill);
+      $total = ($workCommand->billedQuantity)-($workCommandBill->billedQuantity);
+      echo $total;
+    }else {
       debugTraceLog("Unknown type '$type'");          
       echo '';
     } 

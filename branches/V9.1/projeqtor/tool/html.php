@@ -70,9 +70,11 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 	}
 	if($col=="idComplexity"){
 	    $critFld = "idCatalogUO";
-	    if($obj->idWorkUnit){
-	      $workUnits = new WorkUnit($obj->idWorkUnit,true);
-	      $critVal = $workUnits->idCatalogUO;
+	    if(property_exists($obj, 'idWorkUnit')){
+  	    if($obj->idWorkUnit){
+  	      $workUnits = new WorkUnit($obj->idWorkUnit,true);
+  	      $critVal = $workUnits->idCatalogUO;
+  	    }
 	    }
 	}
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
@@ -902,8 +904,10 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   foreach($table as $key => $val) {
     
     if($col == "idComplexity"){
+      if(property_exists($obj, 'idWorkUnit')){
       $complexityVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idComplexity'=>$key,'idWorkUnit'=>$obj->idWorkUnit));
       if(!$complexityVal->charge and !$complexityVal->price)continue;
+      }
     }
     if($col =="idAsset"){
       if($key== $obj->id)continue;
