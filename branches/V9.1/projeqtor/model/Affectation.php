@@ -403,31 +403,32 @@ public $_noCopy;
       }
     }
     
-    if (!Project::$_deleteProjectInProgress and !$this->idResourceTeam and $this->idResource) {
-      //gautier #4495
-      $proj = new Project($this->idProject,true);
-      $topProject = $proj->getTopProjectList(true);
-      $where =  "idResource = ".$this->idResource." and idProject in " . transformValueListIntoInClause($topProject);
-      $nbAff = $this->countSqlElementsFromCriteria(null,$where);
-      if($nbAff<2){
-        $subProject = $proj->getRecursiveSubProjectsFlatList(false,true);
-        $where = " idle='0' and idResource = ".$this->idResource." and idProject in " . transformListIntoInClause($subProject);
-        $ass = new Assignment();
-        $listAss = $ass->countGroupedSqlElementsFromCriteria(null, array('idProject'), $where);
-        if(count($listAss)>0 ){
-          foreach ($listAss as $idProj=>$nbAss){
-              $proj = new Project($idProj,true);
-              $topProject = $proj->getTopProjectList(true);
-              $where =  "idResource = ".$this->idResource." and idProject in " . transformValueListIntoInClause($topProject);
-              $nbAff = $this->countSqlElementsFromCriteria(null,$where);
-              if($nbAff==1){
-                $result.='<br/>' . i18n('assignmentsStillExist');
-                break;
-              }
-          }
-        }
-      }
-    }
+// PBE - Control disabled - More blocking than else
+//     if (!Project::$_deleteProjectInProgress and !$this->idResourceTeam and $this->idResource) {
+//       //gautier #4495
+//       $proj = new Project($this->idProject,true);
+//       $topProject = $proj->getTopProjectList(true);
+//       $where =  "idResource = ".$this->idResource." and idProject in " . transformValueListIntoInClause($topProject);
+//       $nbAff = $this->countSqlElementsFromCriteria(null,$where);
+//       if($nbAff<2){
+//         $subProject = $proj->getRecursiveSubProjectsFlatList(false,true);
+//         $where = " idle='0' and idResource = ".$this->idResource." and idProject in " . transformListIntoInClause($subProject);
+//         $ass = new Assignment();
+//         $listAss = $ass->countGroupedSqlElementsFromCriteria(null, array('idProject'), $where);
+//         if(count($listAss)>0 ){
+//           foreach ($listAss as $idProj=>$nbAss){
+//               $proj = new Project($idProj,true);
+//               $topProject = $proj->getTopProjectList(true);
+//               $where =  "idResource = ".$this->idResource." and idProject in " . transformValueListIntoInClause($topProject);
+//               $nbAff = $this->countSqlElementsFromCriteria(null,$where);
+//               if($nbAff==1){
+//                 $result.='<br/>' . i18n('assignmentsStillExist');
+//                 break;
+//               }
+//           }
+//         }
+//       }
+//     }
     
     if (! $result) {
       $result=parent::deleteControl();
