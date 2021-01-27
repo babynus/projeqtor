@@ -8,7 +8,7 @@
 
 .. index:: Agile methods
 
-.. _Agile-Methods:
+.. _agile-methods:
 
 *************
 Agile Methods
@@ -381,13 +381,13 @@ Find below the details of the tiles of your kanbans
 
 .. index:: Live Meeting
 
-.. _Live-meeting-Agile:
+.. _livemeeting-agile:
 
 Live Meeting
 ************
 
 
-**With LiveMeeting you can manage meetings in an agile way:**
+LiveMeeting allow you to manage meetings in an agile way:
 
 * Manage minutes of meetings quickly
 
@@ -402,7 +402,6 @@ Live Meeting
 * Manage tickets, activities, actions and requirements with Kanban while writing minutes.
 
 
-**A new button is present in the meeting screen:**
 
 .. figure:: /images/GUI/AGILE_ZONE_LiveMeeting-Button.png
    :alt: The LiveMeeting button

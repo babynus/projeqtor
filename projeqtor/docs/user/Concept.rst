@@ -74,9 +74,6 @@ The project type
                         
          Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
                   
-         .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
-            :align: center
-                              
       **2 - Administrative project**
                   
          Allows to follow the non productive work as holidays, sickness, training, …

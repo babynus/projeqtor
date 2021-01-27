@@ -17,6 +17,8 @@ This is usually a short-lived activity for a single ticket that gives feedback t
 
 .. figure:: /images/GUI/TICKET_SCR_Presentation.png
    :alt: Tickets management screen
+   
+   Tickets management screen
 
 It can be globally planned as a general activity, but not unitarily.
 
@@ -318,7 +320,7 @@ Planning activity
    New fields displayed after saving the Planning activity option
    
    
-* Click on |buttonIconSearch| to open a popup which will display the details of these tickets.
+* Click on |Search| to open a popup which will display the details of these tickets.
 
 
 .. figure:: /images/GUI/TICKET_BOX_ActivityPlanningLISTTICKETS.png
@@ -367,11 +369,11 @@ In the version fields, it's possible to set several versions.
 
    * The version with smaller id will appear in the select list and is considered as the main version.
    * Other versions are listed above. 
-   * It is possible to set an ‘other’ version as the main version using the button |iconSwitch|.
+   * It is possible to set an ‘other’ version as the main version using the button |Switch|.
 
 
-* Click on |buttonAdd| to add a other version. 
-* Click on |buttonIconDelete| to delete a version.
+* Click on |Add| to add a other version. 
+* Click on |Delete| to delete a version.
 
 .. figure:: /images/GUI/TICKET_BOX_AddOtherVersion.png
    :alt: Dialog box - Add other version 

@@ -547,8 +547,8 @@ This section allows to manage element trigger.
    
 .. rubric:: Trigger element management
 
-* Click on |buttonAdd| to add an element trigger. 
-* Click on |buttonIconDelete| to delete an element trigger.
+* Click on |Add| to add an element trigger. 
+* Click on |Delete| to delete an element trigger.
 
 .. figure:: /images/GUI/BILL_BOX_AddTriggerElementToTerm.png
    :alt: Dialog box - Add a trigger element to term 
@@ -785,10 +785,10 @@ Input for each bill line depends on billing type.
  
 .. rubric:: Bill lines management
 
-* Click on |buttonAdd| to add a bill line. A different “Bill line” dialog box will be displayed depends on billing type.
+* Click on |Add| to add a bill line. A different “Bill line” dialog box will be displayed depends on billing type.
 * Click on |buttonClientBill|  to add a formated line depending on billing mode
-* Click on |buttonEdit| to modify an existing bill line.
-* Click on |buttonIconDelete| to delete the bill line.
+* Click on |Edit| to modify an existing bill line.
+* Click on |Delete| to delete the bill line.
 
 .. rubric:: Bill line "At terms"
 
@@ -1027,9 +1027,9 @@ per date, client or per type, partial, final and complete bill.
 
 Attachments are displayed grouped by element.
 
-Click on |buttonIconDisplay| to display attachment list.
+Click on |View| to display attachment list.
 
-.. figure:: /images/GUI/INCOMES_ZONE_FinancialGallery.PNG
+.. figure:: /images/GUI/INCOMES_ZONE_FinancialGallery.png
    :alt: financial gallery
    :align: center
 

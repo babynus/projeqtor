@@ -66,5 +66,5 @@ You can create the contacts directly on the contact screen.
 
 But you can create the contacts directly into the contact section
 
-* Click on |buttonAdd| to create the contact
-* Click on |buttonIconDelete| to delete the contact
+* Click on |Add| to create the contact
+* Click on |Delete| to delete the contact

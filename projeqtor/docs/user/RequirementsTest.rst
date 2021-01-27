@@ -496,9 +496,9 @@ This section allows to manage test case runs.
 
 .. rubric:: Test case runs list management
 
-* Click on |buttonAdd| to add a test case run. The **Test case run dialog box** will be appear.
-* Click on |buttonEdit| to edit a test case run. The **Test case run detail dialog box** will be appear.
-* Click on |buttonIconDelete| to remove a test case run.
+* Click on |Add| to add a test case run. The **Test case run dialog box** will be appear.
+* Click on |Edit| to edit a test case run. The **Test case run detail dialog box** will be appear.
+* Click on |Delete| to remove a test case run.
 * Click on |iconPassed| to mark test case run as passed.
 * Click on |iconFailed| to mark test case run as failed. The **Test case run detail dialog box** will be appear.
 * Click on |iconBlocked| to mark test case run as blocked.
