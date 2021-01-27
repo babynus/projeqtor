@@ -74,6 +74,8 @@ class BillMain extends SqlElement {
   //public $_sec_BillLine;
   public $_BillLine=array();
   public $_BillLine_colSpan="2";
+  public $_sec_BilledWorkCommand;
+  public $_spe_BilledWorkCommand;
   public $_sec_situation;
   public $idSituation;
   public $_spe_situation;
@@ -170,6 +172,14 @@ class BillMain extends SqlElement {
     if(trim(Module::isModuleActive('moduleSituation')) != 1){
       self::$_fieldsAttributes['_sec_situation']='hidden';
       self::$_fieldsAttributes['idSituation']='hidden';
+    }
+    
+    self::$_fieldsAttributes['_sec_BilledWorkCommand']='hidden';
+    self::$_fieldsAttributes['_spe_BilledWorkCommand']='hidden';
+    $paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
+    if($paramEnableWorkUnit=='true'){
+      self::$_fieldsAttributes['_sec_BilledWorkCommand']='';
+      self::$_fieldsAttributes['_spe_BilledWorkCommand']='';
     }
   }
 
@@ -508,6 +518,10 @@ class BillMain extends SqlElement {
     }else if($item=='situation'){
       $situation = new Situation();
       $situation->drawSituationHistory($this);
+    }elseif($item=="BilledWorkCommand"){
+        $workCommandBilled = new WorkCommandBilled();
+        $listBilledCommand = $workCommandBilled->getSqlElementsFromCriteria(array('idBill'=>$this->id));
+        drawBilledWorkCommand($listBilledCommand,$this);
     }
     return $result;
   }
