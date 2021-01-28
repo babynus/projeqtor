@@ -637,14 +637,24 @@ class PlannedWorkManual extends GeneralWork {
             $y = '0'.$y;
           }
           $myDate = $year.$month.$y;
+          $colorWithoutEtp = "#9AA8D6";
           if($peIntervention->fte){
             if(isset($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM'])){
+              $colorAM = $colorWithoutEtp;
               if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM']==$peIntervention->fte)$colorAM = "#50BB50";
               if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM']>$peIntervention->fte)$colorAM = "#BB5050";
             }
             if(isset($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM'])){
+              $colorPM = $colorWithoutEtp;
               if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM']==$peIntervention->fte)$colorPM = "#50BB50";
               if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM']>$peIntervention->fte)$colorPM = "#BB5050";
+            }
+          }else{
+            if(isset($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM'])){
+              $colorAM = $colorWithoutEtp;
+            }
+            if(isset($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM'])){
+              $colorPM = $colorWithoutEtp;
             }
           }
           echo '<td style="border:1px solid #a0a0a0;" '.$onClick.'>';
