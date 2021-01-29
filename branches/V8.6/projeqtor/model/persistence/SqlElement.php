@@ -5157,50 +5157,50 @@ abstract class SqlElement {
       if (! $mailable or ! $mailable->id) {
         return false; // exit if not mailable object
       }
-      $crit = "idle='0'";
-      $crit .= " and idMailable='" . $mailable->id . "' and ( false ";
+      $crit = "idle=0";
+      $crit .= " and idMailable=" . $mailable->id . " and ( 0 ";
       if ($statusChange and property_exists ( $this, 'idStatus' ) and trim ( $this->idStatus )) {
         $any = SqlElement::getSingleSqlElementFromCriteria('EventForMail', array('name'=>'statusChange'));
-        $crit .= "  or idStatus='" . $this->idStatus . "' or idEventForMail='".$any->id."' ";
+        $crit .= "  or idStatus=" . $this->idStatus . " or idEventForMail=".$any->id." ";
       }
       if ($responsibleChange) {
-        $crit .= " or idEventForMail='1' ";
+        $crit .= " or idEventForMail=1 ";
       }
       if ($noteAdd) {
-        $crit .= " or idEventForMail='2' ";
+        $crit .= " or idEventForMail=2 ";
       }
       if ($attachmentAdd) {
-        $crit .= " or idEventForMail='3' ";
+        $crit .= " or idEventForMail=3 ";
       }
       if ($noteChange) {
-        $crit .= " or idEventForMail='4' ";
+        $crit .= " or idEventForMail=4 ";
       }
       if ($descriptionChange) {
-        $crit .= " or idEventForMail='5' ";
+        $crit .= " or idEventForMail=5 ";
       }
       if ($resultChange) {
-        $crit .= " or idEventForMail='6' ";
+        $crit .= " or idEventForMail=6 ";
       }
       if ($assignmentAdd) {
-        $crit .= " or idEventForMail='7' ";
+        $crit .= " or idEventForMail=7 ";
       }
       if ($assignmentChange) {
-        $crit .= " or idEventForMail='8' ";
+        $crit .= " or idEventForMail=8 ";
       }
       if ($anyChange) {
-        $crit .= " or idEventForMail='9' ";
+        $crit .= " or idEventForMail=9 ";
       }
       if ($affectationAdd) {
-        $crit .= " or idEventForMail='10' ";
+        $crit .= " or idEventForMail=10 ";
       }
       if ($affectationChange) {
-        $crit .= " or idEventForMail='11' ";
+        $crit .= " or idEventForMail=11 ";
       }
       if ($linkAdd) {
-        $crit .= " or idEventForMail='12' ";
+        $crit .= " or idEventForMail=12 ";
       }
       if ($linkDelete) {
-        $crit .= " or idEventForMail='13' ";
+        $crit .= " or idEventForMail=13 ";
       }
       $crit .= ")";
       $statusMailList = $statusMail->getSqlElementsFromCriteria ( null, false, $crit );
@@ -5222,7 +5222,7 @@ abstract class SqlElement {
         $isSubProj = false;
         if($proj and $stm->idProject){
         	if(in_array($stm->idProject,$topList)){
-        		$statusMailListOrganized[$stm->idEventForMail]=$stm;
+        		//$statusMailListOrganized[$stm->idEventForMail]=$stm;
         		$isSubProj = true;
         	}
         }
@@ -5237,18 +5237,24 @@ abstract class SqlElement {
           continue;
         }
         // Now we are treating duplicates (already exists for event, we have another one that may fit, so we must select on Project and / or Type
-        if ($proj and $stm->idProject and $stm->idProject==$proj) { // OK, dedicated to correct project
-          if ($type and $stm->idType and $stm->idType==$type) { // Same project and same type : this is this one !!!!
-            $statusMailListOrganized[$stm->idEventForMail]=$stm;
-          } else { // Same project but not same type, replace if previous not on same project
-            if (!$statusMailListOrganized[$stm->idEventForMail]->idProject) {
-              $statusMailListOrganized[$stm->idEventForMail]=$stm;
-            }
+        if ($proj and $stm->idProject and ($stm->idProject==$proj or $isSubProj)) { // OK, dedicated to correct project (or top one)
+          if (! $statusMailListOrganized[$stm->idEventForMail]->idProject) {
+            $statusMailListOrganized[$stm->idEventForMail]=$stm;        // Found rule on projet, previous was not
+          } else if (array_search($stm->idProject,$topList)<array_search($statusMailListOrganized[$stm->idEventForMail]->idProject,$topList) ) {
+            $statusMailListOrganized[$stm->idEventForMail]=$stm;        // Found rule with projet "neared" on parents list than previously stored 
+          } else if ($stm->idProject and array_search($stm->idProject,$topList)>array_search($statusMailListOrganized[$stm->idEventForMail]->idProject,$topList) ) { 
+            continue;                                                   // Found rule with projet "farther" on parents list than previously stored 
+          } else if ($type and $stm->idType and $stm->idType==$type) { 
+            $statusMailListOrganized[$stm->idEventForMail]=$stm;        // Same project than previously stored and type match : this is this one !!!!
+          } else {
+            continue;                                                   // Same project than previously stored and not type match : pass ! (duplicate ?)
           }
-        } else { // Not same project, will check on type
-          if ($type and $stm->idType and $stm->idType==$type) { // Same type but not same project, replace if previous not on same project
+        } else { // Not project defined rule, will check on type
+          if ($type and $stm->idType and $stm->idType==$type) { // Same type but not same project, replace if previous not on project
             if (!$statusMailListOrganized[$stm->idEventForMail]->idProject) {
-              $statusMailListOrganized[$stm->idEventForMail]=$stm;
+              $statusMailListOrganized[$stm->idEventForMail]=$stm;     // Same type and previously stored not on project neither : store
+            } else {
+              continue;                                                // Not same Same project than previously stored and not type match : pass ! (duplicate ?)
             }
           }
         }
@@ -5446,7 +5452,7 @@ abstract class SqlElement {
     $msgWithoutDest = 0;      //check if something went wrong in retreiving email adresses
     $j = $i;
     while ($i--) {
-      if ($destTab[$emailTemplateTab[$i]->id] == '' or $destTab[$emailTemplateTab[$i]->id] == null)
+      if ($destTab[$emailTemplateTab[$i]->id] == '' or $destTab[$emailTemplateTab[$i]->id] == null or str_replace(array(',',';',' '),'',$destTab[$emailTemplateTab[$i]->id])=='')
         $msgWithoutDest++;
       else 
         $destTab[$emailTemplateTab[$i]->id] = str_replace('###', '', $destTab[$emailTemplateTab[$i]->id]);
