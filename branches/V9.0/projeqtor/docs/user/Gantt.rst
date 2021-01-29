@@ -811,6 +811,9 @@ The bars displayed in the gantt chart can appear with different colors. Each col
    
    .. figure:: /images/GUI/GANTT_BAR_SurbookingView.png
       :alt: Surbooking or orveruse view on Gantt chart
+      :figwidth: 100% 
+      :align: left
+      
       
       Surbooking or orveruse view on Gantt chart
          

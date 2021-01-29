@@ -90,7 +90,6 @@ ProjeQtOr offers three modes of authentication.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Users description section fields - Required Field |ReqFieldLegend| 
-   :widths: 30, 70
    :header-rows: 1
 
    * - Field

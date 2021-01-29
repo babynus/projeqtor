@@ -91,11 +91,11 @@ Follow the state, the progress of your contract in this section.
    
    Defines the behavior of the renewal of a contract at the end of the initially planned duration
    
-      * **Never:** the contract will never be renewed
+   * **Never:** the contract will never be renewed
       
-      * **Tacit:** the contract will be renewed if there is no termination
+   * **Tacit:** the contract will be renewed if there is no termination
       
-      * **Express:** the contract is renewed and is the subject of a written or verbal act 
+   * **Express:** the contract is renewed and is the subject of a written or verbal act 
 
 
  .. compound:: States
@@ -221,7 +221,6 @@ This section allows to detail the quotation modality.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 30, 70
    :header-rows: 1
 
    * - Field
@@ -256,7 +255,6 @@ This section allows to detail the quotation modality.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -334,7 +332,6 @@ This section allows to detail the order modality.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 40, 55
    :header-rows: 1
 
    * - Field
@@ -373,7 +370,6 @@ This section allows to detail the order modality.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -474,11 +470,6 @@ You can define as many terms as you wish, to define the billing calendar.
 * You can use these values to set real amount and date.
 
 
-.. figure:: /images/GUI/BILL_ZONE_ClientBillingDescription.png
-   :alt: Description zone
-   :align: center
-
-
 
 .. rubric:: Description
 
@@ -490,7 +481,6 @@ You can define as many terms as you wish, to define the billing calendar.
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -508,13 +498,9 @@ You can define as many terms as you wish, to define the billing calendar.
 
 .. rubric:: Fixed price for term
 
-.. figure:: /images/GUI/BILL_ZONE_FixedPrice.png
-   :align: center
-
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -540,9 +526,6 @@ You can define as many terms as you wish, to define the billing calendar.
 
 This section allows to manage element trigger.
 
-
-.. figure:: /images/GUI/BILL_ZONE_Trigger.png
-   :align: center
    
    
 .. rubric:: Trigger element management
@@ -550,13 +533,9 @@ This section allows to manage element trigger.
 * Click on |Add| to add an element trigger. 
 * Click on |Delete| to delete an element trigger.
 
-.. figure:: /images/GUI/BILL_BOX_AddTriggerElementToTerm.png
-   :alt: Dialog box - Add a trigger element to term 
-   :align: center
 
 
 .. list-table::
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -578,7 +557,7 @@ A bill is a request for payment for delivered work.
 
 Billing will depend on billing type defined for the project through project type.
 
-.. figure:: /images/GUI/BILL_SCR_BillsClient.png
+.. figure:: /images/GUI/INCOMES_SCR_InvoicesClient.png
    :alt: Clients Bills
    :align: center
    
@@ -590,7 +569,7 @@ Billing will depend on billing type defined for the project through project type
 Invoice Type
 ============
 
-.. figure:: /images/GUI/BILL_CAPT_SchemaBill.png
+.. figure:: /images/GUI/INCOMES_CAPT_SchemaBill.png
    :align: center
       
    Schema bill
@@ -642,11 +621,6 @@ Invoice Type
 
 .. rubric:: Description section
 
-.. figure:: /images/GUI/BILL_ZONE_BillDescription.png
-   :alt: Description fields
-   :align: center
-   
-   Description fields
    
 .. sidebar:: Other sections
 
@@ -657,7 +631,6 @@ Invoice Type
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -690,19 +663,11 @@ Invoice Type
    * - Billing type
      - Project billing type.
 
-.. rubric:: Treatment Zone
-
-.. figure:: /images/GUI/BILL_ZONE_BillTreatment.png
-   :alt: Treatment
-   :align: center
-   
-   Treatment section
-   
+.. rubric:: Treatment Zone   
    
 .. tabularcolumns:: |l|l|
 
 .. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -752,7 +717,7 @@ Invoice Type
 Invoice lines
 =============
 
-.. figure:: /images/GUI/BILL_ZONE_BillLines.png
+.. figure:: /images/GUI/INCOMES_ZONE_InvoiceLines.png
    :alt: Treatment
    :align: center
    
@@ -763,7 +728,6 @@ Input for each bill line depends on billing type.
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -786,22 +750,16 @@ Input for each bill line depends on billing type.
 .. rubric:: Bill lines management
 
 * Click on |Add| to add a bill line. A different “Bill line” dialog box will be displayed depends on billing type.
-* Click on |buttonClientBill|  to add a formated line depending on billing mode
+* Click on |Bill|  to add a formated line depending on billing mode
 * Click on |Edit| to modify an existing bill line.
 * Click on |Delete| to delete the bill line.
 
 .. rubric:: Bill line "At terms"
 
-.. figure:: /images/GUI/BILL_BOX_BillLineAtTerms.png
-   :alt: Dialog box - Bill line - At terms 
-   :align: center
-
-   Bill line - At terms
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -824,14 +782,7 @@ Input for each bill line depends on billing type.
 
 .. rubric:: Bill line On produced work & On capped produced work
 
-.. figure:: /images/GUI/BILL_BOX_BillLine-ProduceWork.png
-   :alt: Dialog box - Bill line - On produced work & On capped produced work
-   :align: center
-
-   Bill line - On produced work & On capped produced work
-
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -866,12 +817,6 @@ Input for each bill line depends on billing type.
 .. _manual-billing:
 
 .. rubric:: **Bill line "Manual billing"**
-
-.. figure:: /images/GUI/BILL_BOX_BillLineManual.png
-   :alt: Dialog box - Bill line - Manual billing 
-   :align: center
-
-   Bill line - Manual billing
 
 .. tabularcolumns:: |l|l|
 
@@ -917,7 +862,7 @@ Allow to define payment of bills.
 
 The bill keeps track of payment.
 
-.. figure:: /images/GUI/BILL_SCR_PaymentClient.png
+.. figure:: /images/GUI/INCOMES_SCR_PaymentClient.png
    :align: center
 
 .. rubric:: Description
@@ -1031,7 +976,9 @@ Click on |View| to display attachment list.
 
 .. figure:: /images/GUI/INCOMES_ZONE_FinancialGallery.png
    :alt: financial gallery
-   :align: center
+   
+   Financial gallery
+
 
 
 .. rubric:: Filters
@@ -1039,14 +986,14 @@ Click on |View| to display attachment list.
 Filters can be applied to the list.
 
 
-.. compound:: **Element**
+ .. compound:: **Element**
 
-* Displays attachments for this element.
+   * Displays attachments for this element.
 
-.. compound:: **Start and end date**
+ .. compound:: **Start and end date**
 
-* Displays attachments for this period.
-* Attachments will be displayed according a date defined in the element.
+   * Displays attachments for this period.
+   * Attachments will be displayed according a date defined in the element.
 
      .. compound:: **Quotation**
 
@@ -1061,13 +1008,13 @@ Filters can be applied to the list.
         * Bill date
 
 
-.. compound:: **Customer**
+ .. compound:: **Customer**
 
-* Displays attachments for this customer name.
+   * Displays attachments for this customer name.
 
-.. compound:: **Type**
+ .. compound:: **Type**
 
-* Displays attachments for this element type.
+   * Displays attachments for this element type.
 
 
 
@@ -1146,13 +1093,8 @@ Revenue Managment
 You can manage the turnover of the project at completion, and its consistency with the orders and invoices on the project.
 
 
-A new "Turnover" section is visible on the projects screen in the Progress section.     
-     
-.. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionProject.png
-   :alt: Revenue managment
-   
-   Revenue managment on the progress section
-   
+A "Revenue management" section is visible on the projects screen in the Progress section after activation of the "Revenue management" module under the financial section.
+
    
 **The following information is then accessible:**
 
@@ -1187,18 +1129,13 @@ For projects with sub-projects, the sum of orders and invoices will consolidate 
 The sum of the orders is in red if it is lower than the turnover.
 The sum of the invoices is in red if it is greater than the turnover.
 
-.. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionProjectRED.png
-   :alt: Sum of the orders is lower than the turnover.
-   
-   Sum of the orders is lower than the turnover.
-
 
 .. rubric:: Raise alerts
 
 You can create definable alerts for projects in the "unit indicators" section:
 
-   * revenue upper than command's sums
-   * revenue less than invoices sums
+   * Revenue upper than command's sums
+   * Revenue less than invoices sums
 
 In order to integrate this evolution into the community version, without disturbing the users who do not need this functionality, we will condition the behavior:
    
@@ -1240,10 +1177,10 @@ If your catalog is attached to a parent project, the sub-projects of the latter 
 
 You can select an OU on an activity, if the project has a “Variable” turnover valuation mode.
 
-.. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionProject.png
+.. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionActivity.png
    :alt: Revenue section
    
-   Revenue section on the project screen
+   Revenue section on the activity screen
    
    
       
@@ -1274,7 +1211,7 @@ You can select an OU on an activity, if the project has a “Variable” turnove
    
 Then fill in the fields with the name of the complexities managed by this catalog.
 
-Click on |buttonAdd| to open the pop-up windows and complete the complexity details.
+Click on |Add| to open the pop-up windows and complete the complexity details.
 
 You can fill in the following fields for each OU:
 
@@ -1318,11 +1255,6 @@ We will inform the OU, its complexity and the number of units:
 An activity will only be associated with a single OU / Complexity pair.
 
 If OU is selected, complexity and quantity are mandatory, otherwise they are prohibited, i.e. not enterable.
-
-.. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionProject-details.png
-   :alt: OU is selected, complexity and quantity are mandatory
-   
-   OU is selected, complexity and quantity are mandatory
 
 The UO / Complexity / Quantity data will make it possible to value:
    * The validated load = load of the OU / Complexity x Quantity

@@ -154,7 +154,7 @@ If a product or component is selected, the responsible defined can be automatica
 .. topic:: Fields: Original product version & Original comp. version
 
    * The list of values will be filtered depends on the selected value in fields "Product and component".
-   * Click on |buttonAdd| to add a other version, see :ref:`multi-version-selection`.
+   * Click on |Add| to add a other version, see :ref:`multi-version-selection`.
 
 
 .. rubric:: Section Treatment
@@ -222,7 +222,7 @@ If a product or component is selected, the responsible defined can be automatica
    **Target product version & Target comp. version**
 
    * The list of values will be filtered depends on the selected value in fields "Product and component".
-   * Click on |buttonAdd| to add a other version, see :ref:`multi-version-selection`.
+   * Click on |Add| to add a other version, see :ref:`multi-version-selection`.
 
    **Field Solved**
 
@@ -234,26 +234,23 @@ If a product or component is selected, the responsible defined can be automatica
 
 .. rubric:: Button **Start/End work**
 
-.. figure:: /images/GUI/TICKET_ZONE_Button_StartWork.png
+.. figure:: /images/GUI/TICKET_ZONE_StartWork.png
    :alt: Button start work
    
 * The start Work / Stop Work button is a clock on / off timer.
 * If the logged in user is a resource, he or she has the option to start working on the ticket.
 * Click the "Start work" button to start timing the processing time on the ticket.
-* The start time is then displayed under the button and the button changes name
+* The start time is then displayed under the button and the button changes name.
 
-.. figure:: /images/GUI/TICKET_ZONE_StartWork.png
+.. figure:: /images/GUI/TICKET_ZONE_Button_StartWork.png
    :alt: Button start work
 
-* Once the work is done, press the "stop work" button
-* The spend time will automatically be converted as real work
-* It'll be transferred on planning activity if it is set
-* A decrease in "left work" on activity will be carried out
-
-.. figure:: /images/GUI/TICKET_ZONE_StopWork.png
-   :alt: Button stop work
+* Once the work is done, press the "stop work" button.
+* The spend time will automatically be converted as real work.
+* It'll be transferred on planning activity if it is set.
+* A decrease in "left work" on activity will be carried out.
    
-.. attention::
+.. important::
 
    Closing the application or starting work on another ticket will automatically stop the current ongoing work. 
 
@@ -266,22 +263,9 @@ This button allows to dispatch ticket.
    :align: center
 
 
-* Click on |buttonAdd| to add a line. 
+* Click on |Add| to add a line. 
 
-.. tabularcolumns:: |l|l|
 
-.. list-table:: Fields - Dispatch work dialog box
-   :widths: 20, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Date
-     - Dispatch date.
-   * - Resources
-     - Work dispatch to a resource.
-   * - Work
-     - Planned work to this resource. 
 
 
 
@@ -297,24 +281,18 @@ This button allows to dispatch ticket.
 
 Planning activity
 """""""""""""""""
+Planning activity field allows to link the ticket with a planning activity.
 
-* Planning activity field allows to link the ticket with a planning activity.
+If the global parameter :ref:`limit Planning Activity to those with flag<globalParam_tickets>` is set to yes then:
+
 * You must check the "Planning activity" box on the activity to be linked.
 * It will then be visible in the planning activities list of your ticket.
 * Work on the ticket will be included in this activity.
-
-
-.. figure:: /images/GUI/TICKET_ZONE_SteeringActivityPlanning.png
-   :alt: Activity planning option on the Activities screen
-   
-   Activity planning option on the Activities screen
-   
 * After saving the option, new fields are displayed.
-
 * You can see the number of tickets linked to this activity and time information corresponding to all of these tickets.
 
 
-.. figure:: /images/GUI/TICKET_ZONE_SteeringActivityPlanningOK.PNG
+.. figure:: /images/GUI/TICKET_ZONE_SteeringActivityPlanningOK.png
    :alt: Planning activity news fields
    
    New fields displayed after saving the Planning activity option
@@ -342,7 +320,7 @@ Put the real work from tickets to the resource timesheet.
 .. figure:: /images/GUI/TICKET_ZONE_Timesheet.png
    :alt: Timesheet
    
-   imputations of actual work on linked tickets.
+   Imputations real work on related tickets.
 
 * The tickets are very dependent on the planning activity.
 * The time indicated by the resources will be decremented to that planned for the activity.
@@ -375,9 +353,6 @@ In the version fields, it's possible to set several versions.
 * Click on |Add| to add a other version. 
 * Click on |Delete| to delete a version.
 
-.. figure:: /images/GUI/TICKET_BOX_AddOtherVersion.png
-   :alt: Dialog box - Add other version 
-   :align: center
 
    
 .. _priority-calculation:

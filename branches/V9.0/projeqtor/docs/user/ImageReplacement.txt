@@ -319,45 +319,33 @@
    
    
    
+.. |Mark| image:: images/v9/iconMark.png
+	:alt: remove
+	:scale: 15   
    
+.. |Bill| image:: images/v9/iconBill.png
+   :alt: Add formated line
+   :scale: 15 
+
+.. |Passed| image:: images/v9/iconPassed.png
+   :alt: test run passed
+   :scale: 15
+
+.. |Failed| image:: images/v9/iconFailed.png
+   :alt: test run failed
+   :scale: 15
    
-.. |buttonClientBill| image:: images/iconClientBill16.png
-   :alt: Add formated line 
-      
-.. |iconNoteAdd| image:: images/GUI/iconNoteAdd.png
-   :alt: Add a Note
-   
-.. |iconenablecalendar| image:: images/iconEnableCalendar.png
-   :alt: Enable calendar
+.. |Blocked| image:: images/v9/iconBlocked.png
+   :alt: test run blocked
+   :scale: 15
 
-.. |iconPlanned| image:: images/iconPlanned.png
-   :alt: Icon planned
-
-.. |iconPassed| image:: images/iconPassed.png
-   :alt: Icon passed
-
-.. |iconFailed| image:: images/iconFailed.png
-   :alt: Icon failed
-
-.. |iconBlocked| image:: images/iconBlocked.png
-   :alt: Icon blocked
-
-
-
-
-.. |buttonAdd| image:: images/ButtonAdd.png
-   :alt: Button add
+.. |Planned| image:: images/v9/iconPlanned.png
+   :alt: test run Planned 
+   :scale: 15  
    
 .. |Add| image:: images/v9/iconAdd.png
    :alt: Add
    :scale: 15  
-
-
-
-
-
-.. |buttonEdit| image:: images/smallButtonEdit.png
-   :alt: Button edit
 
 .. |Edit| image:: images/v9/iconEdit.png
    :alt: Button edit
