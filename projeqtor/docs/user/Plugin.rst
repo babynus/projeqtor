@@ -8,7 +8,7 @@ Plug-ins management
 -------------------
 
 
-.. figure:: /images/GUI/PLUGIN_SCR_PluginManagement.png
+.. figure:: /images/GUI/PLUGIN_SCR_PluginsManagmt.png
    :alt: Plugin management screen
    
    Plugin management screen

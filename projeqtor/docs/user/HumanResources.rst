@@ -544,7 +544,7 @@ You can choose the workflow that will be attached to human resources
 
 In this section, you can defined who received an internal alert or an email on the creation, the update, the delete and/or the treatment of the leaves
 
-.. seealso:: More detail about **Contractual values**, see :ref:`Earned rights<earned_rights>`
+.. seealso:: More detail about **Contractual values**, see :ref:`Earned rights<leaves-rights-earned>`
    
 
 .. _employment-contract-type:
@@ -574,7 +574,7 @@ You can only have one type of default contract
    
    Screen of Employment contract type   
    
-.. seealso:: More detail about **contractual values**, see :ref:`Earned rights<earned_rights>`
+.. seealso:: More detail about **contractual values**, see :ref:`Earned rights<leaves-rights-earned>`
 
 
 .. rubric:: Parameters for earned leave rights
@@ -595,7 +595,7 @@ If you are missing types of absences, you can create them from this screen:
    
    Special leaves rights
 
-.. seealso:: More detail about **Specific values**, see :ref:`Earned rights<earned_rights>`
+.. seealso:: More detail about **Specific values**, see :ref:`Earned rights<leaves-rights-earned>`
 
 
 
