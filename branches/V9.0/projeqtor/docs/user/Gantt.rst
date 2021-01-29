@@ -833,7 +833,7 @@ The bars displayed in the gantt chart can appear with different colors. Each col
    Condition: The capacity of the resource has been changed. It can be under capacity or over capacity. That is to say, it does less or more than its FTE.
    
 
-   .. figure:: /images/GUI/GANTT_BAR_SurcapacityView.png
+   .. figure:: /images/GUI/GANTT_ZONE_SurcapacityDetails.png
       :alt: Surcapacity view on Gantt chart
       
       Surcapacity view on Gantt chart
