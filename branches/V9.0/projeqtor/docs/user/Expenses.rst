@@ -1268,11 +1268,6 @@ Follow the payment of your provider invoices to better organize your general cas
 
 .. rubric:: Treament 
 
-.. figure:: /images/GUI/EXPENSES_ZONE_TreatmentPayments.png
-   :alt: Payment modes
-   
-   Payment modes
-
 .. tabularcolumns:: |l|l|
 
 .. list-table::  Required field |ReqFieldLegend|

@@ -55,7 +55,7 @@ You can get the list and details of this programming on this screen
 
 Click on Button |Delete| to cancelled the programmation
 
-.. figure:: /images/GUI/TOOLS_ZONE_ScheduledReport.png
+.. figure:: /images/GUI/TOOLS_ZONE_ScheduleReportsList.png
    :alt: scheduled report screen
    
    Scheduled report screen
@@ -491,7 +491,7 @@ Click on |Parameter| on the Simulation Management screen
 
 .. rubric:: The cloned Environment managment
 
-.. figure:: /images/GUI/TOOLS_SCR_ClonedEnvironment.png
+.. figure:: /images/GUI/TOOLS_ZONE_ClonedEnvironmentList.png
    :alt: Cloned Environment managment
    
    Cloned environment managment
