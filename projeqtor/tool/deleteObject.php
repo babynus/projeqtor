@@ -56,21 +56,23 @@ if (array_key_exists('confirmed',$_REQUEST) ) {
 Sql::beginTransaction();
 
 $obj=new $className($obj->id); // Get the last saved version, to fetch last version for array of objects
+$peName=$className.'PlanningElement';
+$topItemType=null;
+$topItemId=null;
 // delete from database
-if ($className=='Project') {
+if (property_exists($obj,$peName)) {
   PlanningElement::$_noDispatch=true;
-  $topProject=$obj->idProject;
+  $topItemType=$obj->$peName->topRefType;
+  $topItemId=$obj->$peName->topRefId;
 }
 
 $result=$obj->delete();
 $resultStatus=getLastOperationStatus($result);
-if ($className=='Project' and $resultStatus=='OK') {
+if ($resultStatus=='OK' and $topItemType and $topItemId) {
   PlanningElement::$_noDispatch=false;
-  if ($topProject) {
-    PlanningElement::updateSynthesis('Project', $topProject);
-    $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array('refType'=>'Project','refId'=>$topProject));
-    $pe->renumberWbs();
-  }
+  PlanningElement::updateSynthesis($topItemType, $topItemId);
+  $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array('refType'=>$topItemType,'refId'=>$topItemId));
+  $pe->renumberWbs();
 }
 BudgetElement::dispatchFinalize();
 
