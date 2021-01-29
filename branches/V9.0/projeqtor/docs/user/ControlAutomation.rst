@@ -886,34 +886,39 @@ After logging in, a message generated after "Login accepted" that tells you that
    
         Clicking on the icon gives direct access to the notifications screen. 
         
+        .. figure:: /images/GUI/CONTROLAUTO_ZONE_IconNotif.png
+            :alt: notification area
+         
+            Notifications
         
    
-      * Below the menus
+      * In the secondary menu
 
       .. figure:: /images/GUI/CONTROLAUTO_ZONE_NotifRecap.png
          :alt: notification area
          
-         Notifications area
+         Notifications 
 
-A tree whose title indicates the number of unread notifications intended for the user.
-
-This tree has the following levels:
-
-* Level 1: The types of notifications
-
-* Level 2: The trigger for notifications
-
-* Level 3: The Notification Definition to Product Notifications
-
-* Level 4: The id of the element that generated the notification. Allows direct access to the item.
-
-The icon |Refresh| allows you to refresh notifications without waiting for the scheduled update.
-
-The icon |Notif| provides direct access to the notifications screen.
-
-Numbers in parentheses indicate the number of unread notifications
-
-
+      
+      
+ 
+      A tree whose title indicates the number of unread notifications intended for the user.
+       
+      **This tree has the following levels:**
+      
+      * Level 1: The types of notifications
+      
+      * Level 2: The trigger for notifications
+      
+      * Level 3: The Notification Definition to Product Notifications
+      
+      * Level 4: The id of the element that generated the notification. Allows direct access to the item.
+      
+      The icon |Refresh| allows you to refresh notifications without waiting for the scheduled update.
+      
+      The icon |Notif| provides direct access to the notifications screen.
+      
+      Numbers indicate the number of unread notifications
 
 
 

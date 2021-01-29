@@ -21,82 +21,49 @@ Allows user to have a tickets global view of his projects.
 
 Displays several small syntheses that group the tickets by category: type, priority or by product, component or by state.
 
-The number of tickets is listed. The result is displayed with numbers and as a percentage. |two|
+The number of tickets is listed. The result is displayed with numbers and as a percentage.
 
 Filters are available to limit scope.
 
 .. rubric:: Direct access to the list of tickets
 
-* In the various summaries, click on an element |one| to obtain the list of tickets corresponding to this element.
+* In the various summaries, click on an element to obtain the list of tickets corresponding to this element.
 * you return to the tickets screen
 
 .. rubric:: Parameters
 
-* Click on |buttonIconParameter| to access parameters |three|.
+* Click on |Parameter| to access parameters.
+
 * Allows to define reports displayed on the screen.
-* Allows to reorder reports displayed with drag & drop feature. Using the selector area button |Drag|.
 
-.. note::
+* Using |Drag| to reorder reports displayed. 
 
-   Arrange reports on left and right on screen. 
+* For Synthesis by status, filter clauses are not applicable.
 
 
-.. figure:: /images/GUI/BOX_TicketDashboardParameters.png
+.. figure:: /images/GUI/TICKET_BOX_Parameters.png
    :alt: Dialog box - Ticket dashboard parameters
    :align: center
 
-Filter clauses
---------------
 
-.. note:: Synthesis by status
 
-   For this report, filter clauses are not applicable.
+
+
+.. rubric:: Filters
 
 .. figure:: /images/GUI/TICKET_ZONE_ScopeFilters.png
    :alt: filters
    
-.. rubric:: Scope filters
-
-* **All issues**
+   Filters
    
-  * All tickets.
+Filters allow you to restrict the display of saved requirements
 
-* **Not closed issues**
+ .. compound:: Scope filters
+   
+   * By status, period, duration, closed element, linked to the user or no related...
 
-  * Tickets not closed. (Status <> 'closed')  	
 
-* **Not resolved issues**
+ .. compound:: No resolution scheduled 
 
-  * Tickets not resolved. (Status <> 'done') 
-
-.. rubric:: Recently updated
-
-* **Added recently**
-
-  * Tickets created within *x* last days.
-
-* **Resolved recently**
-
-  * Tickets treated within *x* last days.
-
-* **Updated recently**
-
-  * Tickets updated within *x* last days.
-
-.. rubric:: Linked to the user 
-
-* **Assigned to me**
-
-  * Tickets that you are responsible for their treatment.
-
-* **Reported by me**
-
-  * Tickets that you are the issuer.
-
-.. rubric:: No resolution scheduled 
-
-* **Unscheduled**
-
-  * Tickets whose resolution is not scheduled in a next product version (target product version not set). 
-
+   * Unscheduled: Requirements whose resolution is not scheduled in a next product version (target product version not set). 
 

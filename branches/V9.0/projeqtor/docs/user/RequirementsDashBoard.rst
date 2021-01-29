@@ -24,69 +24,28 @@ Filters are available to limit scope.
 
 .. rubric:: Parameters
 
-* Click on |buttonIconParameter| to access parameters.
-* Allows to define reports displayed on the screen.
-* Allows to reorder reports displayed with drag & drop feature. Using the selector area button |Drag|.
+* Click on |Parameter| to access parameters.
 
-.. note::
-
-   Arrange reports on left and right on screen. 
-
+.. important:: For **Synthesis by status**, filter clauses are not applicable.
 
 .. figure:: /images/GUI/REQUIREMENT_BOX_Itemdisplay.png 
    :alt: Dialog box - Ticket dashboard parameters
    :align: center
 
-Filter clauses
---------------
-
-.. note:: Report: Synthesis by status
-
-   For this report, filter clauses are not applicable.
+* Allows to define reports displayed on the screen.
+* Allows to reorder reports displayed with drag & drop feature. 
+* Using the selector area button |Drag|.
 
 
-.. rubric:: Scope filters
+ .. compound:: Scope filters
 
-* **All requirements**
-  
-  * All requirements.
+   * Filters allow you to restrict the display of saved requirements.
+   
+   * By status, period, duration, closed element, linked to the user or no related...
 
-* **Not closed requirements**
 
-  * Requirements not closed. (Status <> 'closed')  	
+ .. compound:: No resolution scheduled 
 
-* **Not resolved requirements**
-
-  * Requirements not resolved. (Status <> 'done') 
-
-.. rubric:: Recently updated
-
-* **Added recently**
-
-  * Requirements created within *x* last days.
-
-* **Resolved recently**
-
-  * Requirements treated within *x* last days.
-
-* **Updated recently**
-
-  * Requirements updated within *x* last days.
-
-.. rubric:: Linked to the user 
-
-* **Assigned to me**
-
-  * Requirements that you are responsible for their treatment.
-
-* **Reported by me**
-
-  * Requirements that you are the issuer.
-
-.. rubric:: No resolution scheduled 
-
-* **Unscheduled**
-
-  * Requirements whose resolution is not scheduled in a next product version (target product version not set). 
+   * Unscheduled: Requirements whose resolution is not scheduled in a next product version (target product version not set). 
 
 
