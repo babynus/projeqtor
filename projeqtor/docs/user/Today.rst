@@ -292,11 +292,11 @@ See: :ref:`Favorite report on Today<today_report>`
 
 * Click on |Delete| to completely remove them from the list.
 
-.. figure:: /images/GUI/TODAY_BOX_ParametersExtending.png
-   :alt: Dialog box - Today parameters with extending parts 
-   :align: center
 
-   Dialog box - Today parameters with extending parts 
+.. figure:: /images/GUI/TODAY_BOX_ParamReport.png
+   :alt: Display on today
+   
+   Display parameters on today
 
  
 

@@ -388,7 +388,9 @@ Many modes are available!
    
         To display notes only on a specific screen, choose |ActivityStream| from the details area toolbar.
    
-        See: :ref:`detail-window-button`
+        See: :ref:`Activity stream<activity-stream>`
+        
+        See: :ref:`Tools details area<gui-activity-stream>`
    
       .. compound:: |FullScreen| Full screen mode
    
@@ -792,7 +794,34 @@ The timestamp indicates when the action was done.
 
 .. rubric:: |fiveBLC| Notifications   
 
-Under construction
+In the secondary menu
+
+      .. figure:: /images/GUI/CONTROLAUTO_ZONE_NotifRecap.png
+         :alt: notification area
+         
+         Notifications 
+
+      
+      
+ 
+      A tree whose title indicates the number of unread notifications intended for the user.
+       
+      **This tree has the following levels:**
+      
+      * Level 1: The types of notifications
+      
+      * Level 2: The trigger for notifications
+      
+      * Level 3: The Notification Definition to Product Notifications
+      
+      * Level 4: The id of the element that generated the notification. Allows direct access to the item.
+      
+      The icon |Refresh| allows you to refresh notifications without waiting for the scheduled update.
+      
+      The icon |Notif| provides direct access to the notifications screen.
+      
+      Numbers indicate the number of unread notifications
+
 
 
 

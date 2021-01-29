@@ -321,7 +321,6 @@ Ability to filter activities by data or type, for instance by assigned resources
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field

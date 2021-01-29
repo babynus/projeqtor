@@ -123,12 +123,19 @@ You can set a cost for:
 
 When you define an element parent, the components of the element appear in this section giving you the complete structure of an element.
 
+.. figure:: /images/GUI/ASSETMANAGMENT_ZONE_AssetComposition.png
+   :alt: Asset composition 
+   
+   Asset composition 
+   
+   
+   
 The button :kbd:`display the structure` opens a pop up which summarizes the complete composition of your equipment in table form.
 
 You can print this box.
 
 
-.. figure:: /images/GUI/ASSETMANAGMENT_ZONE_AssetComposition.png
+.. figure:: /images/GUI/ASSETMANAGMENT_ZONE_DisplayStructure.png
    :alt: Asset composition section
    
    Asset composition section

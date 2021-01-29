@@ -226,23 +226,12 @@ The resource will continue to report their charges normally, with no extra or re
    overbooking is a way of planning in the future without interacting with the behavior of the working time of the resources
    
 
-.. _allocated-asset-resource:
-
-.. rubric:: Allocated asset
-
-This section allows you to view all the equipment connected to the resource in the form of a simple table.
-
-each line of equipment is clickable and directs to the element screen.
-
-See: :ref:`asset-management`
-
-
 .. index:: Resource (Function & Cost definition)   
 
 .. _function-cost-resource:
    
-.. rubric:: Function and cost zone
-
+Function and cost zone
+----------------------
 
 This section allows to define functions and cost of the resource.
 
@@ -385,6 +374,39 @@ The display of the scheduled load for the support resource, although it is not a
       * Day y, A is available 0.5 d and B 1.0 d: A is planned 0.5 d, B is planned 0.25 d
       
       * Day z, A is available 1.0 d and B 0.2 d: A is planned 0.4 d, B is planned 0.2 d
+
+
+
+
+
+
+Others
+------
+
+
+.. _allocated-asset-resource:
+
+.. rubric:: Allocated asset
+
+
+.. figure:: /images/GUI/RESOURCE_ZONE_AllocationAsset.png
+   :alt: Allocated asset
+   
+   Allocated asset
+   
+    
+This section allows you to view all the equipment connected to the resource in the form of a simple table.
+
+Each line of equipment is clickable and directs to the element screen.
+
+See: :ref:`asset-management`
+
+
+
+
+
+
+
 
 
 .. raw:: latex

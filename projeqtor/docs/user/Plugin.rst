@@ -26,7 +26,7 @@ You will find the complete list of plugins in the `ProjeQtOr online store <https
   
  .. compound:: **Available plug-ins list**
 
-   .. figure:: /images/GUI/PLUGIN_ZONE_AvailablePlugin.png
+   .. figure:: /images/GUI/PLUGIN_ZONE_AvailablePluginLocal.png
       :alt: Add a plugin
    
       Add a plugin

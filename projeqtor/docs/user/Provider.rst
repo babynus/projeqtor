@@ -55,11 +55,6 @@ Full address of the provider.
 
 .. rubric:: Section Contact
 
-.. figure:: /images/GUI/PROVIDER_ContactSection.png
-   :alt: Contact section
-   
-   Contact section
-
 Displays the names of provider-related contacts. 
 
 You can create the contacts directly on the contact screen.
