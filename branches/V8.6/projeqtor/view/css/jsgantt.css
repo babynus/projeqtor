@@ -317,7 +317,8 @@ div .scrollRightTop {
 }
 .ganttDetail {
   border-top: #c0c0c0 1px solid;
-  font-size: 90%;  
+  /*font-size: 90%;*/
+  font-size: 89%; /* important to avoid non-aligned lines on Gantt Chart on Linux / Firefox */
   padding: 0px; margin: 0px;
   z-index: 10;   
   /*z-index: 15;*/
@@ -328,7 +329,8 @@ div .scrollRightTop {
 
 .ganttDetailNoborder {
   border-top: #c0c0c0 1px solid;
-  font-size: 90%;  
+  /*font-size: 90%;*/
+  font-size: 89%; /* important to avoid non-aligned lines on Gantt Chart on Linux / Firefox */
   padding: 0px; margin: 0px;
   z-index: 10;   
   /*z-index: 15;*/
