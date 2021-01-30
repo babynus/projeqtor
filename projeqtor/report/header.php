@@ -72,7 +72,7 @@ echo "</td>";
 echo "<td align='center' style='width:40%; font-size: 100%; font-weight: normal;' ".excelFormatCell('header',80,null,null,null,null,null,16,null,null, true).">"; 
 
 if (array_key_exists('reportName', $_REQUEST)) {
-  if ($outMode!='excel') echo '<table><tr><td class="reportHeader" style="text-align: center; padding: 10px 30px 10px 30px;">';
+  if ($outMode!='excel') echo '<table><tr><td class="reportHeader reportHeaderRounded" style="text-align: center; padding: 10px 30px 10px 30px;">';
   echo htmlEncode(ucfirst($_REQUEST['reportName']),'html');
   if ($outMode!='excel') echo '</td></tr></table>';
 }

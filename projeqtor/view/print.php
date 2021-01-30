@@ -280,8 +280,14 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
   }
   //$pdfLib='dompdf';
   $outputFileName=null;
+  $customName=null;
+  if (file_exists('../report/object/customReportFunctions.php')) {
+    include_once '../report/object/customReportFunctions.php';
+  }
   if (isset($_REQUEST['objectClass']) and isset($_REQUEST['objectId']) and isset($_REQUEST['page']) 
-  and ($_REQUEST['page']=='objectDetail.php' or $_REQUEST['page']=='../report/object/'.$_REQUEST['objectClass'].'.php' )) {
+  and ($_REQUEST['page']=='objectDetail.php' 
+      or $_REQUEST['page']=='../report/object/'.$_REQUEST['objectClass'].'.php'
+      or $_REQUEST['page']=='../report/object/'.$_REQUEST['objectClass'].'_CustomReport.php' )) {
     $objectClass=$_REQUEST['objectClass'];
     $objectId=$_REQUEST['objectId'];
     $obj=new $objectClass($objectId);
@@ -296,16 +302,28 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
     }
     $outputFileName.=".pdf";
     $outputFileName=Security::checkValidFileName($outputFileName,false);
+    if (function_exists('getCustomReportName')) {
+      $customName=getCustomReportName($objectClass,$objectId,'detail','pdf',$outputFileName); // May return null or empty string to keep default name
+      if ($customName) $outputFileName=$customName;
+    }
   } else if (isset($_REQUEST['page']) and $_REQUEST['page']=='../tool/jsonQuery.php' and isset($_REQUEST['objectClass']) ) {
     $objectClass=$_REQUEST['objectClass'];
     $outputFileName=i18n('menu'.$objectClass).'_'.date('Ymd_His');
     $outputFileName.=".pdf";
     $outputFileName=Security::checkValidFileName($outputFileName,false);
+    if (function_exists('getCustomReportName')) {
+      $customName=getCustomReportName($objectClass,null,'list','pdf',$outputFileName); // May return null or empty string to keep default name
+      if ($customName) $outputFileName=$customName;
+    }
   } else if (isset($_REQUEST['reportName'])) {
     $outputFileName=$_REQUEST['reportName'].'_'.date('Ymd_His');
     if ($outMode=='excel') {
       $outputFileName.=".xlsx";
       $content=ob_get_contents();
+      if (function_exists('getCustomReportName')) {
+        $customName=getCustomReportName($_REQUEST['reportName'],null,'report','xlsx',$outputFileName); // May return null or empty string to keep default name
+        if ($customName) $outputFileName=$customName;
+      }
       if (strpos($content,'<table _excel-name=')!==false) { // Target is Excel and stype not transformed in xlsx file
         ob_clean();
         require_once('../external/HtmlPhpExcel/vendor/autoload.php');
@@ -316,9 +334,13 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
       }
     } else {
       $outputFileName.=".pdf";
+      if (function_exists('getCustomReportName')) {
+        $customName=getCustomReportName($_REQUEST['reportName'],null,'report','pdf',$outputFileName); // May return null or empty string to keep default name
+        if ($customName) $outputFileName=$customName;
+      }
     }
   }
-  if (isset($pdfNamePrefix)) $outputFileName=$pdfNamePrefix.$outputFileName;
+  if (isset($pdfNamePrefix) and !$customName) $outputFileName=$pdfNamePrefix.$outputFileName;
   if ($outMode=='pdf') {
     $content = ob_get_clean();   
     if ($pdfLib=='html2pdf') {

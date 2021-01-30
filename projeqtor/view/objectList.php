@@ -1621,7 +1621,7 @@ function organizeListButtons($nbButton=1) {
           .' iconClass="dijitButtonIcon dijitButtonIconExtraButtons" class="detailButton" '
           .' id="extraButtonsList" onClick="showExtraButtons(\'extraButtonsList\')" '
           .'></div>';
-      echo '<div class="statusBar" id="extraButtonsListDiv" style="display:none;position:absolute;width:41px;z-index:900;top:32px;text-align:right;marin-right:6px;padding-bottom:5px;background-color:#ffffff !important;border: 1px solid var(--color-light);border-top:0">';
+      echo '<div class="statusBar" id="extraButtonsListDiv" style="display:none;">';
       echo '<table><tr>';
     } else {
       echo '</tr><tr>';
