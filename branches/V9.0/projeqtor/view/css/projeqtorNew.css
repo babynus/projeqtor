@@ -1390,6 +1390,18 @@ select option:checked {
 	border-top:0px;
 	top:34px;
 }
+.ProjeQtOrNewGui #extraButtonsListDiv {
+	background: var(--color-background) !important;
+	border:1px solid var(--color-light);
+	position:absolute;
+	width:41px;
+	z-index:900;
+	top:32px;
+	text-align:right;
+	marin-right:6px;
+	padding-bottom:5px;
+}
+
 .ProjeQtOrNewGui .newGuiIconText{
 	color:var(--color-medium-dark) !important;
 }
@@ -2086,9 +2098,10 @@ element.style {
   background: var(--color-light) !important;
   color:#000000 !important;
 }
-.ProjeQtOrNewGui .reportHeader {
+.ProjeQtOrNewGui .reportHeaderRounded {
 	border-radius: 5px;
- }
+}
+
 .ProjeQtOrNewGui #detailReportDiv {
 	margin-top:10px;
 }
