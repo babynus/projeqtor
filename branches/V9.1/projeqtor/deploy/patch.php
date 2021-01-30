@@ -20,7 +20,7 @@
 <body>
 <?php
 
-$version="V9.1";
+$version="V9.0";
 $nbDays=1; // days
 if (isset($_REQUEST['nbDays'])) $nbDays=intval($_REQUEST[nbDays]);
 if ($nbDays<1) $nbDays=1;
@@ -30,12 +30,12 @@ $root="D:\\www\\projeqtor$version\\";
 $out="D:\\www\\temp";
 
 $action=(isset($_REQUEST['action']))?$_REQUEST['action']:null;
-if ($action) {
+if ($action and $action=='zip') {
   $zipName=$out.DIRECTORY_SEPARATOR."projeqtor_patch$version.zip";
   $nbFiles=zipFiles();
   if ($nbFiles>0) {
     echo "$nbFiles fichiers dans $zipName";
-    echo '&nbsp;<a class="download" href="'.str_replace('D:\\www\\','http://localhost/',$zipName).'" target="#">'.date('d-m-Y')." Ã  ".date('H:i:s').'</a>';
+    echo '&nbsp;<a class="download" href="'.str_replace('D:\\www\\','http://localhost/',$zipName).'" target="#">&nbsp;'.date('d-m-Y')." &agrave;  ".date('H:i:s').'&nbsp;</a>';
   } else {
     echo '&nbsp<br/>';
   }
@@ -47,16 +47,17 @@ display();
 
 
 function display() {
-  global $scanDir,$dateCheck,$root,$out,$version;
+  global $scanDir,$dateCheck,$root,$out,$version,$nbDays;
   $files=array();
   foreach($scanDir as $dir) {
     $files=array_merge_preserve_keys($files,listFiles($dir));
   }
   krsort($files);
-  echo "<form  action='/projeqtor$version/deploy/patch.php'>";
+  echo "<form id='mainForm' action='/projeqtor$version/deploy/patch.php'>";
   $button="<button type='submit'>ZIP</button>";
-  echo "<input type='hidden' name='action' value='zip' />";
-  echo "<table><tr class='header'><td>date</td><td>rÃ©pertoire</td><td>fichier</td><td class='min50 center'>$button</td></tr>";
+  $dayInput="<input style='width:30px;margin-left:100px;text-align:center' type='text' name='nbDays' value='$nbDays' onChange='document.getElementById(\"action\").value=\"nbDays\";document.getElementById(\"mainForm\").submit();'/>";
+  echo "<input type='hidden' name='action' id='action' value='zip' />";
+  echo "<table><tr class='header'><td>date$dayInput</td><td>r&eacute;pertoire</td><td>fichier</td><td class='min50 center'>$button</td></tr>";
   foreach ($files as $file) {
     $date=$file['date'];
     $dir=$file['dir'];
@@ -71,7 +72,7 @@ function display() {
 }
 
 function listFiles($dir) {
-  global $scanDir,$dateCheck,$root,$out,$version;
+  global $scanDir,$dateCheck,$root,$out,$version,$nbDays;
   $result = array();
   foreach (scandir($root.$dir) as $key => $value) {
     if (in_array($value,array(".",".."))) continue;
