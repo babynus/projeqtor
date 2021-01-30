@@ -57,19 +57,31 @@
   $printPage="objectDetail.php";
   $printPagePdf="objectDetail.php";
   $modePdf='pdf';
-  if (file_exists('../report/object/'.$class.'.php')) {
-    $printPage='../report/object/'.$class.'.php';
-    $printPagePdf='../report/object/'.$class.'.php';
-    if (SqlElement::class_exists('TemplateReport') and Plugin::isPluginEnabled('templateReport')) {
+  if (file_exists('../report/object/'.$class.'.php') or file_exists('../report/object/'.$class.'_CustomReport.php')) {
+    // Defaut = only Class.php exist, it can contain custom or template
+    $custom='default'; 
+    $extCustom='';
+    if (file_exists('../report/object/'.$class.'.php') and file_exists('../report/object/'.$class.'_CustomReport.php')) {
+      // Both = Class.php and Class_custom.php exist, first is template, second is custom
+      $custom='both';
+      $extCustom='_CustomReport';
+    } else if (file_exists('../report/object/'.$class.'_CustomReport.php')) {
+      // Custom = only Class_custom.php exist, it contains custom
+      $custom='custom';
+      $extCustom='_CustomReport';
+    }
+    $printPage='../report/object/'.$class.$extCustom.'.php';
+    $printPagePdf='../report/object/'.$class.$extCustom.'.php';
+    if (SqlElement::class_exists('TemplateReport') and Plugin::isPluginEnabled('templateReport') and $custom!='custom') {
       $tmpMode=TemplateReport::getMode($class);
       if ($tmpMode=='download') {
         $modePdf='download';
-        $printPage="objectDetail.php"; // If template must be downloaded, do not use it for print
+        //if ($custom=='default') $printPage="objectDetail.php"; // If template must be downloaded, do not use it for print
       } else if ($tmpMode=='show') {
         $modePdf='download'; // If template can be shown print will show, pdf will download
       } else if ($tmpMode=='multi') {
         $modePdf='download multi';
-        $printPage="objectDetail.php";
+        //if ($custom=='default') $printPage="objectDetail.php";
       } else if ($tmpMode=='revert') {
         // detected some inconsistent custom report
         $printPage="objectDetail.php";
