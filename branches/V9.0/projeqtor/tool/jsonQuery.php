@@ -910,7 +910,7 @@
         echo '<br/>';
 	      echo '<table style="width:100%;'.((isset($outModeBack) and $outModeBack=='pdf' and isWkHtmlEnabled())?'font-size:10pt':'').'">';
 	      echo '<tr>';
-	      $layout=str_ireplace('width="','style="border:1px solid black;width:',$layout);
+	      $layout=str_ireplace('width="','style="'.((isNewGui() and $outMode!='pdf')?'border:1px solid white;':'border:1px solid black;').'width:',$layout);
 	      $layout=str_ireplace('<th ','<th class="reportHeader" ',$layout);
 	      if ($objectClass=='GlobalView' ) $layout=str_replace('<th class="reportHeader" field="id" style="border:1px solid black;width:0%">id</th>','',$layout);
 	      echo $layout;
