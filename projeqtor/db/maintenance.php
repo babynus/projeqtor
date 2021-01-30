@@ -1029,7 +1029,33 @@ if (beforeVersion($currVersion,"V9.0.0") and $currVersion!='V0.0.0') {
     }
     Sql::commitTransaction();
 }
-
+if (beforeVersion($currVersion,"V9.0.3") and $currVersion!='V0.0.0') {
+  traceLog("update assignment were cost is null [9.0.3]");
+  //setSessionUser(new User());
+  $ass=new Assignment();
+  $assList=$ass->getSqlElementsFromCriteria(null,false, "realCost is null and realWork is not null and dailyCost is not null");
+  $cpt=0;
+  $cptCommit=100;
+  Sql::beginTransaction();
+  traceLog("   => ".count($assList)." to update");
+  if (count($assList)<100) {
+    projeqtor_set_time_limit(1500);
+  } else {
+    traceLog("   => setting unlimited execution time for script (more than 100 assignments to update)");
+    projeqtor_set_time_limit(0);
+  }
+  foreach($assList as $ass) {
+    $res=$ass->saveWithRefresh();
+    $cpt++;
+    if ( ($cpt % $cptCommit) == 0) {
+      Sql::commitTransaction();
+      traceLog("   => $cpt assignments done...");
+      Sql::beginTransaction();
+    }
+  }
+  Sql::commitTransaction();
+  traceLog("   => $cpt assignments updated");
+}
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
