@@ -151,6 +151,7 @@ foreach ($dateList as $idx=>$date) {
         break;
       }
     }
+    $ass->saveWithRefresh(); // required to update cost
   }
 }
 ProjectPlanningElement::updateSynthesis('Project',$we->idProject);
