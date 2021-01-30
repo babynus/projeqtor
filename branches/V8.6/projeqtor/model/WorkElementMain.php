@@ -400,12 +400,14 @@ class WorkElementMain extends SqlElement {
 		$lstAss = $ass->getSqlElementsFromCriteria ( $crit );
 		if (count ( $lstAss ) > 0) {
 			$ass = $lstAss [count ( $lstAss ) - 1];
+			if ($ass->rate===null) $ass->rate=100;
 		} else {
 			$ass = new Assignment ();
 			$ass->refType = $work->refType;
 			$ass->refId = $work->refId;
 			$ass->idResource = $work->idResource;
 			$ass->isNotImputable='1';
+			$ass->rate=100;
 		}
 		$ass->leftWork -= $diff;
 		$ass->realWork += $diff;
