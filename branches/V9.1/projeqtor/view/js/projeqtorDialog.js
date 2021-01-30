@@ -9558,7 +9558,7 @@ function loadDialog(dialogDiv, callBack, autoShow, params, clearOnHide, closable
     dialog=dijit.byId(dialogDiv);
 // ADD BY Marc TABARY - 2017-03-13 - CHANGE TITLE DYNAMIC DIALOG
     if (setTitle) {
-        dialog.set('title',i18n(theDialogTitle));
+        dialog.set('title',theDialogTitle);
   }
 // END ADD BY Marc TABARY - 2017-03-13 - CHANGE TITLE DYNAMIC DIALOG
   }
