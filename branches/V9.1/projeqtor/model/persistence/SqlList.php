@@ -207,6 +207,7 @@ class SqlList {
         }
       }
       $crit=array_merge($obj->getDatabaseCriteria(),$criteria);
+      debugLog($crit);
       foreach ($crit as $col => $val) {
         if ( (strtolower($listType)=='resource' or strtolower($listType)=='contact' or strtolower($listType)=='user' 
         or strtolower($listType)=='accountable' or strtolower($listType)=='affectable') and $col=='idProject') {
@@ -264,11 +265,16 @@ class SqlList {
           if (count($val)==0) $val[0]=0;
           $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . ' IN (' . implode(',', $val) . ')';
         } else {
-          if ($val==null or $val=='') {
+          if ($val==null or $val=='' or $val=='null') {
             $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . " is null";
           } else {
             if ($col=='idProject' and ($val=='*' or ! $val)) {continue;}
-            $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . '=' . Sql::str($val);
+            $dataType=$obj->getDataType($col);
+            if ($dataType=='numeric' or $dataType=='decimal' or $dataType=='int' or $dataType=='boolean') {
+              $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . '=' . Sql::fmtStr($val);
+            } else { 
+              $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . '=' . Sql::str($val);
+            }
           }
         }
       }
@@ -276,6 +282,7 @@ class SqlList {
       $query.=" and ( $criteria )";
     }
     $query .=')';
+    debugLog($query);
     if ($listType=='Report') {
       $hr=new HabilitationReport();
       $user=getSessionUser();
