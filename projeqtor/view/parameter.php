@@ -297,7 +297,7 @@ function drawTableFromObjectList($objectList) {
 			} else if ($format=='specific') {
 			  if ($code=='password') {
 			    $title=i18n('changePassword');
-			    echo '<button id="changePassword" dojoType="dijit.form.Button" showlabel="true"';
+			    echo '<button class="roundedVisibleButton" id="changePassword" dojoType="dijit.form.Button" showlabel="true"';
 			    if (0) {
 			      $result .= ' disabled="disabled" ';
 			    }
@@ -309,7 +309,8 @@ function drawTableFromObjectList($objectList) {
 			    echo '</button>';
 			  } else if ($code=='markAlertsAsRead') {
 			    $title=$helpTitle;
-			    echo '<button id="markAlertsAsRead" dojoType="dijit.form.Button" showlabel="true"';
+			    echo '<button class="roundedVisibleButton" id="markAlertsAsRead" dojoType="dijit.form.Button" showlabel="true"';
+			    echo ' iconClass="imageColorNewGui iconNotification22 iconNotification iconSize22" ';
 			    echo ' title="' . $title . '" style="vertical-align: middle;">';
 			    echo '<span>' . i18n('paramMarkAlertsAsRead') . '</span>';
 			    echo '<script type="dojo/connect" event="onClick" args="evt">';
@@ -318,8 +319,8 @@ function drawTableFromObjectList($objectList) {
 			    echo '</button>';
 			  } else if ($code=='showSubscribedItems') {
 			    $title=$helpTitle;
-			    echo '<button id="showSubscribedItems" dojoType="dijit.form.Button" showlabel="true"';
-			    echo 'iconClass="dijitButtonIcon iconListOfValues22" ';
+			    echo '<button class="roundedVisibleButton" id="showSubscribedItems" dojoType="dijit.form.Button" showlabel="true"';
+			    echo ' iconClass="imageColorNewGui dijitButtonIcon dijitButtonIconSubscribe" ';
 			    echo ' title="' . $title . '" style="vertical-align: middle;">';
 			    echo '<span>' . i18n('showSubscribedItemsList') . '</span>';
 			    echo '<script type="dojo/connect" event="onClick" args="evt">';
