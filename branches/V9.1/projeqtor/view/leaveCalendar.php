@@ -192,21 +192,21 @@
                         <tr>
                             <td colspan='2'>
                                 <input type='hidden' data-dojo-type="dijit/form/TextBox"  id='popupLeaveId' />
-                                <label for='popupLeaveType'><?php echo i18n("colType");?> : </label>
+                                <label for='popupLeaveType'><?php echo i18n("colType");?><?php echo Tool::getDoublePoint();?></label>
                                 <?php
                                     $onChange  = "getWorkflowStatusesOfLeaveType('fromLeaveCalendar',dijit.byId('popupLeaveType').value);";
                                 ?>
                                 <select id='popupLeaveType' 
-                                        dojoType='dijit.form.Select'
+                                        dojoType='dijit.form.FilteringSelect'
                                         onchange="<?php echo $onChange; ?>;"
                                         required>
                                 </select>
                             </td>
 
                             <td colspan='2'>
-                                <label for='popupStatus'><?php echo i18n("colIdStatus");?> : </label>
+                                <label for='popupStatus'><?php echo i18n("colIdStatus");?><?php echo Tool::getDoublePoint();?></label>
                                 <select id='popupStatus' 
-                                        data-dojo-type='dijit.form.Select' 
+                                        data-dojo-type='dijit.form.FilteringSelect' 
                                         onchange="changesPopupStatus();calculateNbRemainingDays('fromLeaveCalendar',<?php echo $idUser; ?>, <?php echo $idUser; ?>);"
                                         required>
                                 </select>
@@ -215,7 +215,7 @@
 
                         <tr>
                             <td colspan='2'>
-                                <label for='popupStartDate'><?php echo i18n("colStartDate"); ?> : </label>
+                                <label for='popupStartDate'><?php echo i18n("colStartDate"); ?><?php echo Tool::getDoublePoint();?></label>
                                 <input type='text' id="popupStartDate" 
                                        data-dojo-type="dijit/form/DateTextBox"
                                        <?php  if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -225,7 +225,7 @@
                             </td>
 
                             <td colspan='2'>
-                                <label for="popupEndDate"><?php echo i18n("colEndDate"); ?> : </label>
+                                <label for="popupEndDate"><?php echo i18n("colEndDate"); ?><?php echo Tool::getDoublePoint();?></label>
                                 <input type="text" id="popupEndDate"
                                        data-dojo-type="dijit/form/DateTextBox"
                                        <?php  if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -254,14 +254,14 @@
                         </tr>
                         <tr>
                             <td colspan='2'>
-                                <label for="popupNbDays"><?php echo i18n("colDays"); ?> : </label>
+                                <label for="popupNbDays"><?php echo i18n("colDays"); ?><?php echo Tool::getDoublePoint();?></label>
                                 <input type="text" id="popupNbDays" value="0"
                                        data-dojo-type="dijit/form/TextBox"
                                        readonly/>
                             </td>
                             <td colspan='2'>
                                     
-                                   <label id="labelPopupNbRemainingDays" for="popupNbRemainingDays"><?php echo i18n("colLeft"); ?> : </label>
+                                   <label id="labelPopupNbRemainingDays" for="popupNbRemainingDays"><?php echo i18n("colLeft"); ?><?php echo Tool::getDoublePoint();?></label>
                                    <input type="text" id="popupNbRemainingDays" value=""
                                        data-dojo-type="dijit/form/TextBox"
                                        readonly/>
@@ -270,7 +270,7 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <label for="popupReason"><?php echo i18n("reason"); ?> : </label>
+                                <label for="popupReason"><?php echo i18n("reason"); ?><?php echo Tool::getDoublePoint();?></label>
                                 <input type="text" id="popupReason" data-dojo-type="dijit/form/TextBox" style="width: 40em;" data-dojo-props="maxLength:255"/>
                             </td>
                         </tr>
