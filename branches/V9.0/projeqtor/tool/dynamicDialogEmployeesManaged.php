@@ -106,10 +106,10 @@ if($editMode==="true"){
                     <table>                                                                        
                         <tr>
                             <td class="dialogLabel" >
-                                <label for="idEmployeeEmployeesManaged"><?php echo i18n('Employee');?></label>
+                                <label for="idEmployeeEmployeesManaged"><?php echo i18n('Employee');?><?php echo Tool::getDoublePoint();?></label>
                             </td>
                             <td>
-                                <select id="idEmployeeEmployeesManaged"  dojoType="dijit.form.Select"
+                                <select id="idEmployeeEmployeesManaged"  dojoType="dijit.form.FilteringSelect"
                                     name="idEmployeeEmployeesManaged" class="input required" value="<?php echo $idEmployee;?>" required>
                                         <?php
                                             $employeeList = getUserVisibleResourcesList(true, "List",'', false,true,false,true);
@@ -126,7 +126,7 @@ if($editMode==="true"){
                         </tr>
                         <tr>
                             <td class="dialogLabel" >
-                              <label for="startDateEmployeesManaged" ><?php echo i18n("colStartDate");?>&nbsp;:&nbsp;</label>
+                              <label for="startDateEmployeesManaged" ><?php echo i18n("colStartDate");?><?php echo Tool::getDoublePoint();?></label>
                             </td>
                             <td>
                                 <input  id="startDateEmployeesManaged" name="startDateEmployeesManaged" 
@@ -140,7 +140,7 @@ if($editMode==="true"){
                         </tr>
                         <tr>
                             <td class="dialogLabel" >
-                              <label for="endDateEmployeesManaged" ><?php echo i18n("colEndDate");?>&nbsp;:&nbsp;</label>
+                              <label for="endDateEmployeesManaged" ><?php echo i18n("colEndDate");?><?php echo Tool::getDoublePoint();?></label>
                             </td>
                             <td>
                                 <input  id="endDateEmployeesManaged" name="endDateEmployeesManaged" 
@@ -152,7 +152,7 @@ if($editMode==="true"){
                         </tr>
                         <tr>
                             <td class="dialogLabel" >
-                                <label for="idleEmployeesManaged"><?php echo i18n('colIdle');?>&nbsp;:&nbsp;</label>
+                                <label for="idleEmployeesManaged"><?php echo i18n('colIdle');?><?php echo Tool::getDoublePoint();?></label>
                             </td>
                             <td>
                                 <input id="idleEmployeesManaged" name="idleEmployeesManaged"
