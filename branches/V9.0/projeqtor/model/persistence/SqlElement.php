@@ -5539,7 +5539,7 @@ abstract class SqlElement {
           $temp->dest=implode(",", $tabDest);
         }
         $temp->recordDateTime=date('Y-m-d H:i:s');
-        if (trim($temp->dest)) {
+        if (trim(str_replace(array(',',';',' '),'',$temp->dest))) {
           $tempRes=$temp->save();
           $resultMail[]='TEMP';
         }
@@ -5634,9 +5634,11 @@ abstract class SqlElement {
             $emailTemplateTab[$j]->title = $this->getMailDetailFromTemplate($emailTemplateTab[$j]->title,null,true);
           }
         }
-        $resultMail[] = sendMail($destTab[$emailTemplateTab[$j]->id], $emailTemplateTab[$j]->title,
+        if (trim(str_replace(array(',',';',' '),'',$destTab[$emailTemplateTab[$j]->id]))) {
+          $resultMail[] = sendMail($destTab[$emailTemplateTab[$j]->id], $emailTemplateTab[$j]->title,
             $emailTemplateTab[$j]->template,
             $this, null, $sender, null, null, $references,false,false,$attachments,$erroSize,$tempAttach);
+        }
       }
       
     }
