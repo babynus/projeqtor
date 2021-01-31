@@ -207,7 +207,6 @@ class SqlList {
         }
       }
       $crit=array_merge($obj->getDatabaseCriteria(),$criteria);
-      debugLog($crit);
       foreach ($crit as $col => $val) {
         if ( (strtolower($listType)=='resource' or strtolower($listType)=='contact' or strtolower($listType)=='user' 
         or strtolower($listType)=='accountable' or strtolower($listType)=='affectable') and $col=='idProject') {
@@ -282,7 +281,6 @@ class SqlList {
       $query.=" and ( $criteria )";
     }
     $query .=')';
-    debugLog($query);
     if ($listType=='Report') {
       $hr=new HabilitationReport();
       $user=getSessionUser();
