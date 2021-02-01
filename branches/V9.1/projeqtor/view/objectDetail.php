@@ -8778,24 +8778,29 @@ function drawTabExpense($obj, $refresh=false) {
     }
     foreach ($arrayPayment as $payment){
      if($payment->idProviderTerm){
+      if (!isset($tabTerm[$payment->idProviderTerm])) $tabTerm[$payment->idProviderTerm]=array();
      	$tabTerm[$payment->idProviderTerm][$payment->id]=$payment->id;
-     	unset($tabTerm[$payment->idProviderTerm]['payment']);
+     	if (isset($tabTerm[$payment->idProviderTerm]['payment'])) unset($tabTerm[$payment->idProviderTerm]['payment']);
      }else{
+      if (!isset($tabBill[$payment->idProviderBill])) $tabBill[$payment->idProviderBill]=array();
      	$tabBill[$payment->idProviderBill][$payment->id]=$payment->id;
-     	unset($tabBill[$payment->idProviderBill]['payment']);
+     	if (isset($tabBill[$payment->idProviderBill]['payment'])) unset($tabBill[$payment->idProviderBill]['payment']);
      }
     }
    //BILL with TERM
     foreach ($tabBill as $id=>$bill){
-    	unset($tabBill[$id]['term']);
+    	if (isset($tabBill[$id]['term'])) unset($tabBill[$id]['term']);
     }
     foreach ($arrayTerm as $providerTerm){
       if($providerTerm->idProviderBill){
+        if (!isset($tabBill[$providerTerm->idProviderBill])) $tabBill[$providerTerm->idProviderBill]=array();
+        if (!isset($tabTerm[$providerTerm->id])) $tabTerm[$providerTerm->id]=array();
         $tabBill[$providerTerm->idProviderBill]['t'.$providerTerm->id]=$tabTerm[$providerTerm->id];
-        unset($tabBill[$providerTerm->idProviderBill]['term']);
+        if (isset($tabBill[$providerTerm->idProviderBill]['term'])) unset($tabBill[$providerTerm->idProviderBill]['term']);
       }else{
+        if (!isset($tabOrder[$providerTerm->idProviderOrder])) $tabOrder[$providerTerm->idProviderOrder]=array();
         $tabOrder[$providerTerm->idProviderOrder]['t'.$providerTerm->id] = $providerTerm->id;
-        unset($tabOrder[$providerTerm->idProviderOrder]['term']);
+        if (isset($tabOrder[$providerTerm->idProviderOrder]['term'])) unset($tabOrder[$providerTerm->idProviderOrder]['term']);
       }
     }
     $link = new Link();
@@ -8805,6 +8810,7 @@ function drawTabExpense($obj, $refresh=false) {
     	foreach ($listLink as $billLinked){
     	  $billExpense = new ProviderBill($billLinked->ref1Id,true);
     	  if($billExpense->idProjectExpense != $obj->id)continue;
+    	  if (!isset($tabOrder[$order->id])) $tabOrder[$order->id]=array();
     	  if(isset($tabBill[$billLinked->ref1Id])){
     	    $tabOrder[$order->id][$billLinked->ref1Id]=$tabBill[$billLinked->ref1Id];
     	  }else{
@@ -8812,7 +8818,7 @@ function drawTabExpense($obj, $refresh=false) {
     	  }
     		
     	}
-    	unset($tabOrder[$order->id]['bill']);
+    	if (isset($tabOrder[$order->id]['bill'])) unset($tabOrder[$order->id]['bill']);
     }
     
     //TENDER with Order
@@ -8821,9 +8827,10 @@ function drawTabExpense($obj, $refresh=false) {
       foreach ($listLink as $orderLinked){
         $orderExpense = new ProviderOrder($orderLinked->ref1Id,true);
         if($orderExpense->idProjectExpense != $obj->id)continue;
+        if (!isset($tabTender[$tender->id])) $tabTender[$tender->id]=array();
         $tabTender[$tender->id][$orderLinked->ref1Id]=$tabOrder[$orderLinked->ref1Id];
       }
-      unset($tabTender[$tender->id]['tender']);
+      if (isset($tabTender[$tender->id]['tender'])) unset($tabTender[$tender->id]['tender']);
     }
     
     //DISPLAY
