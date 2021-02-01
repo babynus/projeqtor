@@ -853,17 +853,17 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
           if (menuActualStatus == 'visible' || !menuHidden) {
             hideShowMenu(false);
           }
-          dojo.byId('menuBarShow').style.top='0px';
-          dojo.byId('statusBarDiv').style.top='-4px';
-          dojo.byId('centerDiv').style.top='0px';
-          var heightCenterDiv = dojo.byId('centerDiv').style.height;
-          heightCenterDiv = heightCenterDiv.substring(0,heightCenterDiv.length-2);
-          heightCenterDiv =  parseInt(heightCenterDiv)+82;
-          dijit.byId("centerDiv").resize({h :heightCenterDiv});
-          dijit.byId("toolBarDiv").resize({h :0});
-          dijit.byId("statusBarDiv").resize({h :0});
-          //var obj  =  {  height : "2000px" }; 
-          //dojo.setAttr(dojo.byId("menuBarShow"),"style",obj);
+          if (dojo.byId('menuBarShow')) dojo.byId('menuBarShow').style.top='0px';
+          if (dojo.byId('statusBarDiv')) dojo.byId('statusBarDiv').style.top='-4px';
+          if (dojo.byId('centerDiv')) {
+            dojo.byId('centerDiv').style.top='0px';
+            var heightCenterDiv = dojo.byId('centerDiv').style.height;
+            heightCenterDiv = heightCenterDiv.substring(0,heightCenterDiv.length-2);
+            heightCenterDiv =  parseInt(heightCenterDiv)+82;
+            dijit.byId("centerDiv").resize({h :heightCenterDiv});
+          }
+          if (dijit.byId("toolBarDiv")) dijit.byId("toolBarDiv").resize({h :0});
+         if (dijit.byId("statusBarDiv"))  dijit.byId("statusBarDiv").resize({h :0});
           var msgParams=new Array();
           msgParams[0]='<?php echo $paramScrollDelay;?>';
           msgParams[1]='<?php echo $paramRefreshDelay;?>';
@@ -931,15 +931,17 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
         } else {
           exitFullScreen();
           formChangeInProgress=false;
-          dojo.byId('statusBarDiv').style.top='30px';
-          dijit.byId("toolBarDiv").resize({h :30});
-          dijit.byId("statusBarDiv").resize({h :52});
-          dojo.byId('menuBarShow').style.top='81px';
-          dojo.byId('centerDiv').style.top='81px';
-          var heightCenterDiv = dojo.byId('centerDiv').style.height;
-          heightCenterDiv = heightCenterDiv.substring(0,heightCenterDiv.length-2);
-          heightCenterDiv =  parseInt(heightCenterDiv)-81;
-          dojo.byId('centerDiv').style.height=heightCenterDiv+'px';
+          if (dojo.byId('statusBarDiv')) dojo.byId('statusBarDiv').style.top='30px';
+          if (dijit.byId("toolBarDiv")) dijit.byId("toolBarDiv").resize({h :30});
+          if (dijit.byId("statusBarDiv")) dijit.byId("statusBarDiv").resize({h :52});
+          if (dojo.byId('menuBarShow')) dojo.byId('menuBarShow').style.top='81px';
+          if (dojo.byId('centerDiv')) {
+            dojo.byId('centerDiv').style.top='81px';
+            var heightCenterDiv = dojo.byId('centerDiv').style.height;
+            heightCenterDiv = heightCenterDiv.substring(0,heightCenterDiv.length-2);
+            heightCenterDiv =  parseInt(heightCenterDiv)-81;
+            dojo.byId('centerDiv').style.height=heightCenterDiv+'px';
+          }
           showInfo(i18n("disableRefreshDone"));
           clearTimeout(refreshEnabled);
           var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
