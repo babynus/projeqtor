@@ -1001,7 +1001,7 @@ class Parameter extends SqlElement {
       	                  'columnDisplayLeft'=>'newColumn',
       	                    'sectionDisplay'=>'section',
       	                      'paramDbDisplayName'=>'text',
-      	                      'paramFadeLoadingMode'=>'list',
+      	                      //'paramFadeLoadingMode'=>'list',
       	                      'sizeDisplayProjectToday'=>'number',
       	                      'maxItemsInTodayLists'=>'number',
       	                      'filterByStatus'=>'list', //ADD by qCazelles - Filter by Status
