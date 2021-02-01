@@ -170,7 +170,7 @@ foreach ($lstVersion as $versId=>$versName) {
 	    $crit.=" and ".$obj->getDatabaseColumnName('idResource')."=$paramResponsible";
 	  }
 	  if ($paramProject) {
-	    $crit.=" and ".$obj->getDatabaseColumnName('idProject')."=$paramProject";
+	    $crit.=" and ".$obj->getDatabaseColumnName('idProject')." in " . getVisibleProjectsList(false,$paramProject);
 	  }
 	  $crit.=" and ".getAccesRestrictionClause(get_class($obj),false);
     $lst=$obj->getSqlElementsFromCriteria(null,null,$crit);
