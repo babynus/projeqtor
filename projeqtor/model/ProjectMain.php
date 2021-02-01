@@ -1043,7 +1043,7 @@ static function isTheLeaveProject($id=null) {
     }
     if($this->commandOnValidWork != $old->commandOnValidWork){
       //$this->ProjectPlanningElement->updateSynthesisObj();
-      $this->updateValidatedWork();
+      $this->updateValidatedWork(true);
     }
     return $result; 
 
@@ -1099,7 +1099,7 @@ static function isTheLeaveProject($id=null) {
     }
   }
   // Ticket #1175
-  public function updateValidatedWork() {
+  public function updateValidatedWork($force=false) {
   	if (! $this->id) return;
   	$consolidateValidated=Parameter::getGlobalParameter('consolidateValidated');
   	$lst=null;
@@ -1109,34 +1109,21 @@ static function isTheLeaveProject($id=null) {
   	$projList = '('.implode(',', array_flip($projList)).')';
   	if($this->commandOnValidWork == 1){
   	  $order=new Command();
-  	  $queryWhere='idProject in ' . $projList . ' AND idle=0';
-  	  $lst=$order->getSqlElementsFromCriteria(null,null,$queryWhere);
-  	  foreach ($lst as $item) {
-  	  	$sumValidatedWork+=$item->validatedWork;
-  	  	$sumValidatedCost+=$item->totalUntaxedAmount;
-  	  }
-  	}else{
+  	  $queryWhere='idProject in ' . $projList . ' AND cancelled=0';
+  	  $sumValidatedWork=$order->sumSqlElementsFromCriteria('validatedWork', null, $queryWhere);
+  	  $sumValidatedCost=$order->sumSqlElementsFromCriteria('totalUntaxedAmount', null, $queryWhere);
+  	}else if ($force==true) { // Update when changing mode (commandOnValidWork) or to consolidate Parent
   	  $lst=null;
   	  $prj=new Project();
-  	  $queryWhere='refType=\'Project\' and refId in (SELECT id FROM ' . $prj->getDatabaseTableName() . ' WHERE idProject=' . $this->id . ' and cancelled=0)';
-  	  $prj=new ProjectPlanningElement();
-  	  $lst=$prj->getSqlElementsFromCriteria(null, null, $queryWhere);
-  	  foreach ($lst as $item) {
-  	  	$sumValidatedWork+=$item->validatedWork;
-  	  	$sumValidatedCost+=$item->validatedCost;
-  	  }
-  	  if(!$this->getSubProjects()){
-    	  $queryWhere='refType=\'Activity\' AND idProject in ' . $projList . ' AND idle=0 AND elementary=1';
-    	  $act=new ActivityPlanningElement();
-    	  $lstAct=$act->getSqlElementsFromCriteria(null, null, $queryWhere);
-    	  foreach ($lstAct as $item) {
-    	  	$sumValidatedWork+=$item->validatedWork;
-    	  	$sumValidatedCost+=$item->validatedCost;
-    	  }
-  	  }
+  	  $queryWhere="topRefType='Project' and topRefId=$this->id and cancelled=0";
+  	  $pe=new PlanningElement();
+  	  $sumValidatedWork=$pe->sumSqlElementsFromCriteria('validatedWork', null, $queryWhere);
+  	  $sumValidatedCost=$pe->sumSqlElementsFromCriteria('validatedCost', null, $queryWhere);
+  	} else {
+  	  return;
   	}
-  	$this->ProjectPlanningElement->validatedWork=$sumValidatedWork;
-  	$this->ProjectPlanningElement->validatedCost=$sumValidatedCost;
+  	//$this->ProjectPlanningElement->validatedWork=$sumValidatedWork;
+  	//$this->ProjectPlanningElement->validatedCost=$sumValidatedCost;
   	
   	if (! $this->ProjectPlanningElement->elementary) {
   		if ($consolidateValidated=="ALWAYS") {
@@ -1144,10 +1131,11 @@ static function isTheLeaveProject($id=null) {
   			$this->ProjectPlanningElement->validatedCost=$sumValidatedCost;
   			$this->ProjectPlanningElement->validatedCalculated=1;
   		} else if ($consolidateValidated=="IFSET") {
+  		  $this->ProjectPlanningElement->validatedCalculated=0;
   			if ($sumValidatedWork) {
   				$this->ProjectPlanningElement->validatedWork=$sumValidatedWork;
   				$this->ProjectPlanningElement->validatedCalculated=1;
-  			}
+  			} 
   			if ($sumValidatedCost) {
   				$this->ProjectPlanningElement->validatedCost=$sumValidatedCost;
   				$this->ProjectPlanningElement->validatedCalculated=1;
@@ -1159,7 +1147,7 @@ static function isTheLeaveProject($id=null) {
   	
   	if (trim($this->idProject)!='') {
   		$prj=new Project($this->idProject);
-  		$prj->updateValidatedWork();
+  		$prj->updateValidatedWork(true);
   	}
   }
   // Ticket END
