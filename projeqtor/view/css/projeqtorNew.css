@@ -199,7 +199,7 @@ label, .ProjeQtOrNewGui label,
 	background: var(--color-darker) ;
 }
 
-.ProjeQtOrNewGui .ganttRowHover.dojoxGridRowSelected {
+.ProjeQtOrNewGui .ganttRowHover.dojoxGridRowSelected, .ProjeQtOrNewGui .dojoxGridRowSelected.dojoDndItemOver, .ProjeQtOrNewGui .ganttTaskrow.dojoxGridRowSelected {
 	color: #000000 !important;
 } 
 /* === GRID AND LINKED TO GRID CSS ==================================================== GRID ===*/
