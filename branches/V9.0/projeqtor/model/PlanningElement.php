@@ -1959,12 +1959,18 @@ class PlanningElement extends SqlElement {
       }
     }
     if ($this->_workVisibility=='NO') {
-      if (substr($fieldName,-4)=='Work') {
+      if (substr($fieldName,-4)=='Work' or $fieldName=='idWorkUnit' or $fieldName=='idComplexity' or $fieldName=='quantity'
+          or $fieldName=='_label_complexity' or $fieldName=='_label_quantity') {
          return 'hidden';
       }
     } else if ($this->_workVisibility=='VAL') {
       if ( substr($fieldName,-4)=='Work' and $fieldName!='validatedWork') {
          return 'hidden';
+      }
+    }
+    if ($this->_workVisibility=='NO' and $this->_costVisibility =='NO') {
+      if ( $fieldName=='_separator_sectionRevenue_marginTop') {
+        return 'hidden';
       }
     }
     //gautier #4344
