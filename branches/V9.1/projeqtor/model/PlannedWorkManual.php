@@ -587,7 +587,7 @@ class PlannedWorkManual extends GeneralWork {
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$nameWidth.'px" '.$onClick.'>';
       echo $projList[$pe->idProject];
       $activitys = new Activity($pe->refId,true);
-      echo '<div style="position:absolute;top:0px;right:0px;zoom:60%;width:60px;">';
+      echo '<div style="white-space:nowrap;position:absolute;top:0px;right:0px;zoom:60%;width:60px;">';
       echo formatColor('Status', $activitys->idStatus);
       echo '</div>';
       echo '</td>';
