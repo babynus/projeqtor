@@ -32,7 +32,7 @@ require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/saveResourceCapacity.php');
 
 $color = "#ffffff";
-
+$colorWithoutEtp = "#9AA8D6";
 $date= RequestHandler::getValue('date');
 $refId= RequestHandler::getId('refId');
 $period= trim(RequestHandler::getValue('period'));
@@ -54,15 +54,24 @@ if(strlen($period)=="3"){
  if($etp){
    if(isset($listOfDayByEtp[$date.'|AM'])){
      $value = $listOfDayByEtp[$date.'|AM'];
+     $colorAM = $colorWithoutEtp;
      if($value == $etp)$colorAM = "#50BB50";
      if($value > $etp)$colorAM = "#BB5050";
    }
    if(isset($listOfDayByEtp[$date.'|PM'])){
+     $colorPM = $colorWithoutEtp;
      $value = $listOfDayByEtp[$date.'|PM'];
      if($value == $etp)$colorPM = "#50BB50";
      if($value > $etp)$colorPM = "#BB5050";
    }
- }
+  }else{
+    if(isset($listOfDayByEtp[$date.'|AM'])){
+       $colorAM = $colorWithoutEtp;
+     }
+     if(isset($listOfDayByEtp[$date.'|PM'])){
+       $colorPM = $colorWithoutEtp;
+     }
+  }
  $color = $colorAM.$colorPM;
 }else{
   $month = substr($date, 0,-3);
@@ -75,12 +84,16 @@ if(strlen($period)=="3"){
   if($etp){
     if(isset($listOfDayByEtp[$date])){
       $value = $listOfDayByEtp[$date];
+      $color = $colorWithoutEtp;
       if($value == $etp)$color = "#50BB50";
       if($value > $etp)$color = "#BB5050";
     }
+  }else{
+    if($listOfDayByEtp){
+      $color = $colorWithoutEtp;
+    }
   }
 }
-
 echo json_encode($color);
 
 ?>
