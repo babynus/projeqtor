@@ -5162,7 +5162,7 @@ abstract class SqlElement {
         return false; // exit if not mailable object
       }
       $crit = "idle=0";
-      $crit .= " and idMailable=" . $mailable->id . " and ( 0 ";
+      $crit .= " and idMailable=" . $mailable->id . " and ( 1=0 ";
       if ($statusChange and property_exists ( $this, 'idStatus' ) and trim ( $this->idStatus )) {
         $any = SqlElement::getSingleSqlElementFromCriteria('EventForMail', array('name'=>'statusChange'));
         $crit .= "  or idStatus=" . $this->idStatus . " or idEventForMail=".$any->id." ";
