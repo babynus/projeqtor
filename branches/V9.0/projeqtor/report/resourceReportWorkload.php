@@ -149,8 +149,9 @@ $workload = array();
 //we put the result of the query in workload for each month
 for ($i=1; $i<13; $i++) {
     if ($month and $month<10) $month='0'.intval($month);
-    $whereCompleted = $where." and startDate<='" . $year . "-" . $month . "-31'";
-    $whereCompleted .= " and (endDate>= '" . $year . "-" . $month . "-31' or endDate is null)";
+    $lastDay=lastDayOfMonth(intval($month),intval($year));
+    $whereCompleted = $where." and startDate<='" . $year . "-" . $month . "-".$lastDay."'";
+    $whereCompleted .= " and (endDate>= '" . $year . "-" . $month . "-".$lastDay."' or endDate is null)";
     if ($month == '13'){
         $month = '01';
         $year += 1;
