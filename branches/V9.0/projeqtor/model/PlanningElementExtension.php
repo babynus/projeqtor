@@ -126,6 +126,7 @@ class PlanningElementExtension   extends SqlElement {
   
   public static function checkDelete($type, $id) {
     // TODO clean unsuefull PEX table lines
+    if (!$type or !$id) return;
     $where="(predecessorRefType='$type' and predecessorRefId=$id) or (successorRefType='$type' and successorRefId=$id)";
     $dep=new Dependency();
     $cpt=$dep->countSqlElementsFromCriteria(null,$where);
