@@ -57,22 +57,53 @@
   $printPage="objectDetail.php";
   $printPagePdf="objectDetail.php";
   $modePdf='pdf';
-  if (file_exists('../report/object/'.$class.'.php') or file_exists('../report/object/'.$class.'_CustomReport.php')) {
-    // Defaut = only Class.php exist, it can contain custom or template
-    $custom='default'; 
-    $extCustom='';
-    if (file_exists('../report/object/'.$class.'.php') and file_exists('../report/object/'.$class.'_CustomReport.php')) {
-      // Both = Class.php and Class_custom.php exist, first is template, second is custom
-      $custom='both';
-      $extCustom='_CustomReport';
-    } else if (file_exists('../report/object/'.$class.'_CustomReport.php')) {
-      // Custom = only Class_custom.php exist, it contains custom
-      $custom='custom';
-      $extCustom='_CustomReport';
+  $tmpMode=null;
+  $existCustom=(file_exists('../report/object/'.$class.'_CustomReport.php'))?'custom':null;
+  $existClass=(file_exists('../report/object/'.$class.'.php'))?'template':null;
+  if ($existClass) { 
+    $rpt=file_get_contents('../report/object/'.$class.'.php');
+    if (! strpos($rpt,"templateReportExecute.php")>0) {
+      $existClass="custom";
     }
-    $printPage='../report/object/'.$class.$extCustom.'.php';
-    $printPagePdf='../report/object/'.$class.$extCustom.'.php';
-    if (SqlElement::class_exists('TemplateReport') and Plugin::isPluginEnabled('templateReport') and $custom!='custom') {
+  }
+  if ($existClass=='template' and SqlElement::class_exists('TemplateReport') and Plugin::isPluginEnabled('templateReport')) {
+    $tmpMode=TemplateReport::getMode($class);
+  }
+  
+  if ($existClass or $existCustom) {
+    if ($existClass=='custom') {
+      $printPage='../report/object/'.$class.'.php';
+      $printPagePdf='../report/object/'.$class.'.php';
+    } else if ($existClass=='template') {
+      if ($tmpMode=='revert') {
+        if ($existCustom=='custom') {
+          $printPage='../report/object/'.$class.'_CustomReport.php';
+          $printPagePdf='../report/object/'.$class.'_CustomReport.php';
+        } else {
+          $printPage="objectDetail.php";
+          $printPagePdf="objectDetail.php";
+        }
+      } else {
+        if ($existCustom=='custom') {
+          $printPage='../report/object/'.$class.'_CustomReport.php';
+          $printPagePdf='../report/object/'.$class.'.php';
+        } else {
+          $printPage="objectDetail.php";
+          $printPagePdf='../report/object/'.$class.'.php';
+        }
+      }
+    } else { // ! existClass 
+      if ($existCustom=='custom') {
+        $printPage='../report/object/'.$class.'_CustomReport.php';
+        $printPagePdf='../report/object/'.$class.'_CustomReport.php';
+      } else {
+        $printPage="objectDetail.php";
+        $printPagePdf="objectDetail.php";
+      }
+    }
+//     $printPage='../report/object/'.$class.$extCustom.'.php';
+//     $printPagePdf='../report/object/'.$class.$extCustom.'.php';
+    if (SqlElement::class_exists('TemplateReport') and Plugin::isPluginEnabled('templateReport')) {
       $tmpMode=TemplateReport::getMode($class);
       if ($tmpMode=='download') {
         $modePdf='download';
@@ -84,8 +115,8 @@
         //if ($custom=='default') $printPage="objectDetail.php";
       } else if ($tmpMode=='revert') {
         // detected some inconsistent custom report
-        $printPage="objectDetail.php";
-        $printPagePdf="objectDetail.php";
+        //$printPage="objectDetail.php";
+        //$printPagePdf="objectDetail.php";
       } // else : keep default behavior
     }
   }
