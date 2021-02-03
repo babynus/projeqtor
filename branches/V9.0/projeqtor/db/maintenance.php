@@ -1037,6 +1037,7 @@ if (beforeVersion($currVersion,"V9.0.3") and $currVersion!='V0.0.0') {
   $cpt=0;
   $cptCommit=100;
   Sql::beginTransaction();
+  KpiValue::$_noKpiHistory=true;
   traceLog("   => ".count($assList)." to update");
   if (count($assList)<100) {
     projeqtor_set_time_limit(1500);
