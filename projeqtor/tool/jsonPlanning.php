@@ -473,19 +473,24 @@
             $line["overallprogress"]=(property_exists($item,'idOverallProgress'))?SqlList::getNameFromId('OverallProgress',$item->idOverallProgress):null;
           }
         }
+        $line['iconClass']=$line['reftype'];
         $line["planningmode"]=SqlList::getNameFromId('PlanningMode',$line['idplanningmode']);
         if ($line["reftype"]=="Project") {
         	$topProjectArray[$line['refid']]=$line['id'];
         	$proj=new Project($line["refid"],true);
         	if ($proj->isUnderConstruction) {
         	  $line['reftype']='Construction';
+        	  $line['iconClass']='Construction';
         	}
         	if ($proj->fixPlanning) {
         	  $line['reftype']='Fixed';
+        	  $line['iconClass']='Fixed';
         	} else if ( ! isset($plannableProjectsList[$line["refid"]]) ) {
         	  $line['reftype']='Fixed';
-        	} else if ($line["needreplan"]) {
+        	  $line['iconClass']='Fixed  ';
+        	} else if ($line["needreplan"] and !$proj->fixPlanning and ! isset($plannableProjectsList[$line["refid"]])) {
         	  $line['reftype']='Replan';
+        	  $line['iconClass']='Replan';
         	}
         } else if ($portfolio and $line["reftype"]=="Milestone" and $line["topreftype"]!='Project') {
           if (! isset($topProjectArray[$line['idproject']])) { // Case project is closed containing non closed Milestone
@@ -496,7 +501,7 @@
         }else if($line["reftype"]=="Activity"){
           $activity=new Activity($line["refid"]);
           if ($activity->fixPlanning) {
-            $line['reftype']='Fixed';
+            $line['iconClass']='Fixed';
           }
         }
         foreach ($line as $id => $val) {
