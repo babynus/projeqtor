@@ -3368,8 +3368,6 @@ function drawGantt() {
       // pGroup : is the task a group one ?
       var pGroup = (item.elementary == '0') ? 1 : 0;
       //MODIF qCazelles - GANTT
-      console.log(item.reftype);
-      console.log(item);
       if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' || item.reftype=='ClientContracthasChild' || item.reftype=='ActivityhasChild') pGroup=1;
      //END MODIF qCazelles - GANTT
       var pobjecttype='';
@@ -3388,7 +3386,7 @@ function drawGantt() {
         pHealthStatus=item.health;
         pQualityLevel=item.quality;
         pTrend=item.trend;
-        pOverallProgress=item.overallprogress
+        pOverallProgress=item.overallprogress;
       }
 
       if(dojo.byId('versionsPlanning')){
@@ -3492,7 +3490,7 @@ function drawGantt() {
           item.status,pHealthStatus,pQualityLevel,pTrend,pOverallProgress, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
           item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, 
-          item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract,elementIdRef,item.fixplanning));
+          item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract,elementIdRef,item.iconClass));
     }
     dojo.query(".inputDateGantBarResize").forEach(function(node, index, nodelist) {
       node.value='';
