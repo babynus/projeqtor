@@ -149,7 +149,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
                             pPriority,pIdPlanningMode, pPlanningMode,
                             pStatus,pHealthStatus,pQualityLevel,pTrend,pOverallProgress, pType, 
                             pValidatedCost, pAssignedCost, pRealCost, pLeftCost, pPlannedCost,
-                            pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes,pDurationContract,pElementIdRef,pFixPlan) {
+                            pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes,pDurationContract,pElementIdRef,pIconClass) {
   var vID    = pID;
   var vName  = pName;
   var vId	 = pId;
@@ -210,7 +210,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   var vStartInit = pStart;
   var vEndInit   = pEnd;
   var vElementIdRef=pElementIdRef;
-  var vFixPlan=pFixPlan;
+  var vIconClass=pIconClass;
   
   
   vStart = JSGantt.parseDateStr(pStart,g.getDateInputFormat());
@@ -307,7 +307,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   this.getCompStr  = function(){ if(vComp) return vComp+'%'; else return '0%'; };
   this.getDurationContract = function(){ return vDurationContract; };
   this.getElementIdRef = function(){ return vElementIdRef;};
-  this.getFixPlanning = function(){ return vFixPlan;};
+  this.getIconClass = function(){ return vIconClass;};
   this.getDuration = function(vFormat){ 
     if (vMile) { 
       vDuration = '-';
@@ -985,21 +985,20 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           vLeftTable += '<TR id=child_'+vID+' dndType="planningTask" class="dojoDndItem ganttTask' + vRowType + '" ' 
             + invisibleDisplay + ' style="height:21px">' ;
           vLeftTable += '  <TD class="ganttName" style="width:'+vIconWidth+'px">';
-          var iconName = vTaskList[i].getClass();
-          console.log(iconName);
+          var iconName = vTaskList[i].getIconClass();
 
-          if (vTaskList[i].getClass() == 'ActivityhasChild') {
-           //iconName = 'Activity';
+          if (vTaskList[i].getIconClass() == 'ActivityhasChild') {
+           iconName = 'Activity';
           }
-          if (vTaskList[i].getClass() == 'ComponentVersionhasChild') {
+          if (vTaskList[i].getIconClass() == 'ComponentVersionhasChild') {
             iconName = 'ComponentVersion';
           }
-          else if (vTaskList[i].getClass() == 'ProductVersionhasChild') {
+          else if (vTaskList[i].getIconClass() == 'ProductVersionhasChild') {
             iconName = 'ProductVersion';
           }
-          else if (vTaskList[i].getClass() == 'SupplierContracthasChild') {
+          else if (vTaskList[i].getIconClass() == 'SupplierContracthasChild') {
             iconName = 'SupplierContract';
-          }else if (vTaskList[i].getClass() == 'ClientContracthasChild') {
+          }else if (vTaskList[i].getIconClass() == 'ClientContracthasChild') {
             iconName = 'SupplierContract';
           }
           if (vTaskList[i].getClass() == 'ProductVersionhasChild' || vTaskList[i].getClass() == 'ComponentVersionhasChild'){
@@ -1716,7 +1715,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	          }
   	        vRightTableTempMeeting += '</div>' ;
             var idPm=vTaskList[i].getIdPlanningMode();
-            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13' || idPm=='19' || idPm=='21') && vTaskList[i].getFixPlanning()!=1 && !vTaskList[i].getGroup() && !vTaskList[i].getGlobal()){
+            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13' || idPm=='19' || idPm=='21') && vTaskList[i].getIconClass()!='Fixed' && !vTaskList[i].getGroup() && !vTaskList[i].getGlobal()){
               // handle resizer start=======================
               leftposLeftResizer=vBarLeft-22;
               leftposdivDate=vBarLeft-43;
@@ -1726,7 +1725,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vRightTableTempMeeting +='<input class="inputDateGantBarResize" id="inputDateGantBarResizeleft_'+vID+'" name="inputDateGantBarResizeleft_'+vID+'" type="hidden" value="'+vTaskStart+'" />';
               //===========================
             }
-            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8'  || idPm=='4'  || idPm=='12') && vTaskList[i].getFixPlanning()!=1 && !vTaskList[i].getGroup() && !vTaskList[i].getGlobal()){
+            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8'  || idPm=='4'  || idPm=='12') && vTaskList[i].getIconClass()!='Fixed' && !vTaskList[i].getGroup() && !vTaskList[i].getGlobal()){
               // handle resizer end=======================
               leftposRightResizer=vBarLeft+vBarWidth-11;
               vRightTableTempMeeting +='<div class="resizerEnd" id="taskbar_'+vID+'ResizerEnd" style="display:none;left:'+leftposRightResizer+'px;" '
