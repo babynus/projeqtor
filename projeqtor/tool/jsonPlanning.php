@@ -493,6 +493,11 @@
             $topProjectArray[$line['idproject']]=$pe->id;
           }
           $line["topid"]=$topProjectArray[$line['idproject']];
+        }else if($line["reftype"]=="Activity"){
+          $activity=new Activity($line["refid"]);
+          if ($activity->fixPlanning) {
+            $line['reftype']='Fixed';
+          }
         }
         foreach ($line as $id => $val) {
           if ($val==null) {$val=" ";}

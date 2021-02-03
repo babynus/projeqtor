@@ -53,6 +53,7 @@ class ActivityMain extends SqlElement {
   public $idMilestone;
   public $fixPlanning;
   public $_lib_helpFixPlanning;
+  public $paused;
   public $handled;
   public $handledDate;
   public $done;
@@ -301,6 +302,26 @@ class ActivityMain extends SqlElement {
         $colScript .= '  formChanged();';
         $colScript .= '</script>';
       }
+    }else if($colName=="paused"){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(this.checked){';
+      $colScript .= '   dijit.byId("fixPlanning").set("readOnly",true);';
+      $colScript .= '   dijit.byId("fixPlanning").set("checked",true);';
+      $colScript .= '   dijit.byId("fixPlanning").set("value",1);';
+      $colScript .= ' dijit.byId("ActivityPlanningElement_paused").set("checked",true);';
+      $colScript .= ' dijit.byId("ActivityPlanningElement_paused").set("value",1);';
+      $colScript .= ' dijit.byId("ActivityPlanningElement_fixPlanning").set("readOnly",true);';
+      $colScript .= '  }else{';
+      $colScript .= '   dijit.byId("fixPlanning").set("readOnly",false);';
+      $colScript .= '   dijit.byId("fixPlanning").set("checked",false);';
+      $colScript .= '   dijit.byId("fixPlanning").set("value",0);';
+      $colScript .= ' dijit.byId("ActivityPlanningElement_fixPlanning").set("readOnly",false);';
+      $colScript .= '  }';
+      if(Parameter::getUserParameter('paramLayoutObjectDetail')=="tab"){
+          $colScript .= ' dijit.byId("ActivityPlanningElement_paused").set("value",dijit.byId("paused").get("value"));';
+          $colScript .= '  formChanged();';
+      }
+      $colScript .= '</script>';
     } 
     return $colScript;
   }
@@ -540,8 +561,6 @@ class ActivityMain extends SqlElement {
       }
       $this->ownDate = false;
     }
-    
-    
     return $endDate;
   }
   /**
@@ -584,9 +603,6 @@ class ActivityMain extends SqlElement {
         }
       }
     }
-    if($this->fixPlanning and !$this->ActivityPlanningElement->fixPlanning)$this->ActivityPlanningElement->fixPlanning=1;
-    if(!$this->fixPlanning and $this->ActivityPlanningElement->fixPlanning)$this->fixPlanning=1;
-    
     // #305 : need to recalculate before dispatching to PE
     $this->recalculateCheckboxes ();
     $this->ActivityPlanningElement->refName = $this->name;
@@ -607,6 +623,23 @@ class ActivityMain extends SqlElement {
       $this->ActivityPlanningElement->wbs = null;
       $this->ActivityPlanningElement->wbsSortable = null;
     }
+    
+     if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 and $this->idStatus!=$old->idStatus and $this->paused==0){
+      $this->paused=1;
+      $this->fixPlanning=1;
+    }else if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=1 and $this->idStatus!=$old->idStatus and $this->paused==1){
+      $this->paused=0;
+      $this->fixPlanning=0;
+    }
+    
+    if($this->paused==1 and $this->paused!=$old->paused and  $this->ActivityPlanningElement->paused!=$this->paused){
+      $this->ActivityPlanningElement->plannedStartDate=null;
+      $this->ActivityPlanningElement->plannedEndDate=null;
+      $this->ActivityPlanningElement->paused=1;
+    }else if ($this->paused==0 and $this->paused!=$old->paused and $this->ActivityPlanningElement->paused!=$this->paused){
+      $this->ActivityPlanningElement->paused=0;
+    }
+    
     $result = parent::save ();
     if (! strpos ( $result, 'id="lastOperationStatus" value="OK"' )) {
       return $result;
@@ -790,7 +823,6 @@ class ActivityMain extends SqlElement {
         }
       }
     }*/
-    
 // MTY - LEAVE SYSTEM
     if (isLeavesSystemActiv()) {
         $leaveProjectId = Project::getLeaveProjectId();
@@ -798,6 +830,7 @@ class ActivityMain extends SqlElement {
 // MTY - LEAVE SYSTEM
     return $result;
   }
+  
   public function setAttributes() {
     if(Parameter::getUserParameter('paramLayoutObjectDetail')=="col"){
       self::$_fieldsAttributes["fixPlanning"]='hidden';
@@ -808,6 +841,16 @@ class ActivityMain extends SqlElement {
     if(Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or Parameter::getUserParameter('displaySubTask')!="YES" or $this->id==''){
       self::$_fieldsAttributes ['_SubTask'] = 'hidden';
       unset($this->_sec_ToDoList);
+    }
+    if($this->paused==1){
+      self::$_fieldsAttributes["fixPlanning"]='readonly,nobr';
+    }
+    if($this->ActivityPlanningElement->topRefId!=''){
+      $parent=new $this->ActivityPlanningElement->topRefType($this->ActivityPlanningElement->topRefId);
+    }
+    
+    if (SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1) ){
+      self::$_fieldsAttributes["paused"]="readonly";
     }
   }
   
