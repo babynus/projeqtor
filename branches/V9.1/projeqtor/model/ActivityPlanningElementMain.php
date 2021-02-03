@@ -111,6 +111,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $indivisibility;
   public $fixPlanning;
   public $_lib_helpFixPlanning;
+  public $paused;
   public $_tab_5_1_smallLabel = array('workElementCount', 'estimated', 'real', 'left', '', 'ticket');
   public $workElementCount;
   public $workElementEstimatedWork;
@@ -159,6 +160,7 @@ class ActivityPlanningElementMain extends PlanningElement {
     "indivisibility"=>"",
     "minimumThreshold"=>"",
     "fixPlanning"=>"nobr",
+     "paused"=>"",
     "_separator_menuTechnicalProgress_marginTop"=>"hidden",
     "_separator_sectionRevenue_marginTop"=>"hidden",
   );
@@ -359,6 +361,18 @@ class ActivityPlanningElementMain extends PlanningElement {
       	unset($this->_tab_5_1_smallLabel_3);
       }
     }
+    if($this->paused==1){
+      self::$_fieldsAttributes["fixPlanning"]='readonly,nobr';
+    }
+    
+    if($this->topRefId!=''){
+      $parent=new $this->topRefType($this->topRefId);
+      
+    }
+    $element=new $this->refType ($this->refId);
+    if (SqlList::getFieldFromId("Status", $element->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1) ){
+      self::$_fieldsAttributes["paused"]="readonly";
+    }
   }
   /** ==========================================================================
    * Destructor
@@ -515,6 +529,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       }
        //$this->updateSynthesis($this->refType, $this->refId);
     }
+    
     return parent::save();
   }
   
@@ -664,6 +679,24 @@ class ActivityPlanningElementMain extends PlanningElement {
       $colScript .= '   dijit.byId("ActivityPlanningElement_idWorkCommand").set("readOnly",false);';
       $colScript .= '  }';
       $colScript .= '  formChanged();';
+      $colScript .= '</script>';
+    }else if($colName=="paused"){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(this.checked){';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_fixPlanning").set("readOnly",true);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_fixPlanning").set("checked",true);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_fixPlanning").set("value",1);';
+      $colScript .= '   dijit.byId("fixPlanning").set("readOnly",true);';
+      $colScript .= '  }else{';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_fixPlanning").set("readOnly",false);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_fixPlanning").set("checked",false);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_fixPlanning").set("value",0);';
+      $colScript .= '   dijit.byId("fixPlanning").set("readOnly",false);';
+      $colScript .= '  }';
+      if(Parameter::getUserParameter('paramLayoutObjectDetail')=="tab"){
+      $colScript .= ' dijit.byId("paused").set("value",dijit.byId("ActivityPlanningElement_fixPlanning").get("value"));';
+      $colScript .= '  formChanged();';
+      }
       $colScript .= '</script>';
     }
     return $colScript;

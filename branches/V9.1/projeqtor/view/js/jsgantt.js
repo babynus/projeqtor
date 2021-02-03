@@ -986,9 +986,10 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             + invisibleDisplay + ' style="height:21px">' ;
           vLeftTable += '  <TD class="ganttName" style="width:'+vIconWidth+'px">';
           var iconName = vTaskList[i].getClass();
+          console.log(iconName);
 
           if (vTaskList[i].getClass() == 'ActivityhasChild') {
-            iconName = 'Activity';
+           //iconName = 'Activity';
           }
           if (vTaskList[i].getClass() == 'ComponentVersionhasChild') {
             iconName = 'ComponentVersion';

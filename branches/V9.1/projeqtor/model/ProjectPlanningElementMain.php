@@ -211,6 +211,9 @@ class ProjectPlanningElementMain extends PlanningElement {
     	if($this->idRevenueMode == 2){
     		self::$_fieldsAttributes['revenue']='readonly';
     	}
+    	if($this->paused==1){
+    	  self::$_fieldsAttributes["fixPlanning"]='readonly,nobr';
+    	}
     }
     
     if($proj->commandOnValidWork){
@@ -245,7 +248,6 @@ class ProjectPlanningElementMain extends PlanningElement {
     $old=$this->getOld();
   	$this->updateTotal();
   	$result=parent::save();
-
   	// Save History (for burndown graph)
   	if ($this->realWork and	($this->realWork!=$old->realWork or $this->leftWork!=$old->leftWork
   	                      or $this->realCost!=$old->realCost or $this->leftCost!=$old->leftCost
