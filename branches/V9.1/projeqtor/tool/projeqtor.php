@@ -4007,7 +4007,7 @@ function wbsProjectSort($p1, $p2) {
   }
 }
 
-function formatColor($type, $val) {
+function formatColor($type, $val , $padding=FALSE) {
   $obj=new $type($val);
   $color=$obj->color;
   $foreColor='#000000';
@@ -4020,7 +4020,9 @@ function formatColor($type, $val) {
       $foreColor='#FFFFFF';
     }
   }
-  $result='<div align="center" style="text-align:center; height:100%; background:'.$color.';color:'.$foreColor.';">'.SqlList::getNameFromId($type, $val).'</div>';
+  $pad = '';
+  if($padding)$pad = ' padding:0px 5px;';
+  $result='<div align="center" style="text-align:center; '.$pad.' height:100%; background:'.$color.';color:'.$foreColor.';">'.SqlList::getNameFromId($type, $val).'</div>';
   return $result;
 }
 
