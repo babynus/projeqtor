@@ -46,6 +46,7 @@ class KpiValue extends SqlElement {
   public $weight;
   public $refDone;
   public $_noHistory=true; // Will never save history for this object
+  public Static $_noKpiHistory=false;
   
    /** ==========================================================================
    * Constructor
@@ -90,6 +91,7 @@ class KpiValue extends SqlElement {
 //     $h->save();
 //   }
   public function storeHistory() {
+    if (self::$_noKpiHistory) return;
     $critArray=array('idKpiDefinition'=>$this->idKpiDefinition,'refType'=>$this->refType,'refId'=>$this->refId,'kpiDate'=>$this->kpiDate);
     $h=SqlElement::getSingleSqlElementFromCriteria('KpiHistory', $critArray,true);
     foreach ($this as $fld=>$val) {
