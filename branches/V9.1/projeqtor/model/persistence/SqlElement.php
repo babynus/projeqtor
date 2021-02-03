@@ -6763,6 +6763,12 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
 //         $this->done = 0;
 //       }
 //     }
+//     IF (PROPERTY_EXISTS ( $THIS, 'PAUSED' )) {
+//       IF ($STATUS->SETPAUSEDSTATUS) {
+//         $THIS->PAUSED = 1;
+//         IF (PROPERTY_EXISTS ( $THIS, 'FIXPLANNING' ) )$THIS->FIXPLANNING = 1;
+//       }
+//     } 
     //New
     if (((property_exists ( $type, 'lockDone' ) and $type->lockDone) or $force)) {
       if (property_exists ( $this, 'done' )) {

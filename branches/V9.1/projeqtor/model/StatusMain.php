@@ -37,6 +37,7 @@ class StatusMain extends SqlElement {
   public $setHandledStatus;
   public $setDoneStatus;
   public $setIntoserviceStatus; //ADD qCazelles - Ticket #53
+  public $setPausedStatus;
   public $setIdleStatus;
   public $setCancelledStatus;
   public $fixPlanning;
@@ -241,6 +242,19 @@ class StatusMain extends SqlElement {
         $colScript.='    statusSetLeaveFalse(this,"Submitted","Rejected");';
         $colScript.= '</script>';
     }
+    if($colName=="setPausedStatus"){
+        $colScript.='<script type="dojo/connect" event="onChange" >';
+        $colScript.='    if(this.checked){;';
+        $colScript.='     dijit.byId("fixPlanning").set("readOnly",true);';
+        $colScript.='     dijit.byId("fixPlanning").set("checked",true);';
+        $colScript.='     dijit.byId("fixPlanning").set("value",1);';
+        $colScript.='    }else{';
+        $colScript.='     dijit.byId("fixPlanning").set("checked",false);';
+        $colScript.='     dijit.byId("fixPlanning").set("value",0);';
+        $colScript.='     dijit.byId("fixPlanning").set("readOnly",false);';
+        $colScript.='    }';
+        $colScript.= '</script>';
+    }
    
     return $colScript;
   }
@@ -250,6 +264,15 @@ class StatusMain extends SqlElement {
     ======================================================================================== */   
     public function isLeaveNeutralStatus() {
         return (($this->setAcceptedLeave==1 or $this->setRejectedLeave==1 or $this->setSubmittedLeave==1)?false:true);
+    }
+    
+    /* ========================================================================================
+     * SET ATTributes FUNCTIONS
+    ======================================================================================== */
+    public function setAttributes() {
+      if($this->setPausedStatus==1){
+        self::$_fieldsAttributes["fixPlanning"]="readonly";
+      }
     }
   
 // MTY - LEAVE SYSTEM  

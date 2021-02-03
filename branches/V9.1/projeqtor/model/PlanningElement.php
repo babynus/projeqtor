@@ -71,6 +71,7 @@ class PlanningElement extends SqlElement {
   public $topRefId;
   public $priority;
   public $elementary;
+  public $paused;
   public $idle;
   public $done;
   public $cancelled;
@@ -167,7 +168,8 @@ class PlanningElement extends SqlElement {
                                   "revenue"=>"hidden,noImport",
                                   "commandSum"=>"hidden,noImport",
                                   "billSum"=>"hidden,noImport",
-                                  "idRevenueMode"=>"hidden,noImport"
+                                  "idRevenueMode"=>"hidden,noImport",
+                                  "paused"=>"hidden",
   );   
   
   private static $_predecessorItemsArray = array();
@@ -397,6 +399,7 @@ class PlanningElement extends SqlElement {
         $this->idProject=$refObj->idProject;
       }
     }
+    
     if (! $this->idProject and $this->refType=='Project') {
     	$this->idProject=$this->refId;
     }
@@ -618,6 +621,43 @@ class PlanningElement extends SqlElement {
     }
     ///
     
+    $oldEl=$this->getOld();
+    $tab= array();
+    if($this->paused!=$oldEl->paused){
+      $tableName=$this->getDatabaseTableName();
+      if($this->refType!='Project'){
+        $pw= new PlannedWork();
+        $clause= "idProject=".$this->idProject." and refType='".$this->refType."' and refId=".$this->refId;
+        $pw->purge($clause);
+      }
+
+      $query="SELECT $tableName.id as id, $tableName.refId as refId,$tableName.refType as refType FROM $tableName ";
+      $query.="WHERE topRefType='$this->refType' and topRefId=$this->refId";
+      $result = Sql::query ( $query );
+      while ($line = Sql::fetchLine($result)) {
+        $tab[]=$line;
+      }
+      if(!empty($tab)){
+        foreach ($tab as $id=>$obj){
+          $asChange=false;
+          $elem= new PlanningElement($obj['id']);
+          if($this->paused==1 and $elem->paused!=1){
+            $asChange=true;
+            $elem->paused=1;
+            $elem->fixPlanning=1;
+            $elem->plannedStartDate=null;
+            $elem->plannedEndDate=null;
+          }else if($this->paused==0 and $elem->paused!=0) {
+            $asChange=true;
+              $elem->paused=0;
+              $elem->fixPlanning=0;
+          }
+          if($asChange){
+             $elem->simpleSave();
+          }
+        } 
+      }
+     }
     //end
     $result=parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
@@ -986,6 +1026,7 @@ class PlanningElement extends SqlElement {
     if ($this->initialStartDate and $this->initialEndDate) {
       $this->initialDuration=workDayDiffDates($this->initialStartDate, $this->initialEndDate);
     }
+
     if (PlannedWork::$_planningInProgress and $this->id) {
       // Attention, we'll execute direct query to avoid concurrency issues for long duration planning
       // Otherwise, saving planned data may overwrite real work entered on Timesheet for corresponding items.
@@ -1028,6 +1069,48 @@ class PlanningElement extends SqlElement {
       }
       $result="OK";
     } else {
+      $oldEl=$this->getOld();
+      $tab= array();
+      if($this->paused!=$oldEl->paused){
+        if(property_exists($this->refType, 'paused')){
+          $thisElement=new $this->refType($this->refId);
+          if ($thisElement->paused!=$this->paused){
+            $thisElement->paused=$this->paused;
+            $thisElement->fixPlanning=$this->fixPlanning;
+            $thisElement->simpleSave();
+          }
+        }
+        if($this->refType!='Project'){
+          $pw= new PlannedWork();
+          $clause= "idProject=".$this->idProject." and refType='".$this->refType."' and refId=".$this->refId;
+          $pw->purge($clause);
+        }
+        $tableName=$this->getDatabaseTableName();
+        $query="SELECT $tableName.id as id, $tableName.refId as refId,$tableName.refType as refType FROM $tableName ";
+        $query.="WHERE topRefType='$this->refType' and topRefId=$this->refId";
+        $result = Sql::query ( $query );
+        while ($line = Sql::fetchLine($result)) {
+          $tab[]=$line;
+        }
+        if(!empty($tab)){
+          foreach ($tab as $id=>$obj){
+            $element= new $obj['refType']( $obj['refId']);
+            $elem= new PlanningElement($obj['id']);
+            $propExist=(property_exists(get_class($element), 'paused'))?true:false;
+              if($this->paused==1){
+                $elem->paused=1;
+                $elem->fixPlanning=1;
+                $elem->plannedStartDate=null;
+                $elem->plannedEndDate=null;
+              }else{
+                $elem->paused=0;
+                $elem->fixPlanning=0;
+
+              }
+              $elem->simpleSave();
+          }
+        }
+    }
       $result = parent::saveForced();
     }
     if ($this->refType=='Project') {

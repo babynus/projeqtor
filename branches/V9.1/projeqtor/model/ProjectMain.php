@@ -70,6 +70,7 @@ class ProjectMain extends SqlElement {
   public $idOverallProgress;
   public $fixPlanning;
   public $_lib_helpFixPlanning;
+  public $paused;
   public $fixPerimeter;
   public $_lib_helpFixPerimeter;
   public $allowReduction;
@@ -161,6 +162,7 @@ class ProjectMain extends SqlElement {
                                   "organizationInherited"=>"hidden",
                                   "organizationElementary"=>"hidden",
                                   "fixPlanning"=>"nobr",
+                                  "paused"=>"",
                                   "fixPerimeter"=>"nobr",
                                   "isUnderConstruction"=>"nobr",
                                   "excludeFromGlobalPlanning"=>"nobr",
@@ -212,6 +214,7 @@ class ProjectMain extends SqlElement {
   			self::$_fieldsAttributes['idSponsor']='hidden';
   			self::$_fieldsAttributes['idResource']='hidden';
   			self::$_fieldsAttributes['fixPlanning']='hidden';
+  			self::$_fieldsAttributes['paused']='hidden';
   			self::$_fieldsAttributes['commandOnValidWork']='hidden';
   			self::$_fieldsAttributes['ProjectPlanningElement']='hidden';
 			  self::$_fieldsAttributes['_sec_treatment']='hidden';
@@ -356,6 +359,19 @@ class ProjectMain extends SqlElement {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  setDefaultCategory(this.value);';
       $colScript .= '</script>';
+    }else if ($colName=="paused"){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(this.checked){';
+      $colScript .= '   dijit.byId("fixPlanning").set("readOnly",true);';
+      $colScript .= '   dijit.byId("fixPlanning").set("checked",true);';
+      $colScript .= '   dijit.byId("fixPlanning").set("value",1);';
+      $colScript .= '  }else{';
+      $colScript .= '   dijit.byId("fixPlanning").set("readOnly",false);';
+      $colScript .= '   dijit.byId("fixPlanning").set("checked",false);';
+      $colScript .= '   dijit.byId("fixPlanning").set("value",0);';
+      $colScript .= '  }';
+      $colScript .= '</script>';
+      
     }
     
     return $colScript;
@@ -925,6 +941,22 @@ static function isTheLeaveProject($id=null) {
     $this->ProjectPlanningElement->organizationInherited=$this->organizationInherited;
     $this->ProjectPlanningElement->organizationElementary=$this->organizationElementary;
     
+    if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 and $this->idStatus!=$old->idStatus and $this->paused==0){
+      $this->paused=1;
+      $this->fixPlanning=1;
+    }else if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=1 and $this->idStatus!=$old->idStatus and $this->paused==1){
+      $this->paused=0;
+      $this->fixPlanning=0;
+    }
+    
+    if($this->paused==1 and $this->paused!=$old->paused){
+      $this->ProjectPlanningElement->plannedStartDate=null;
+      $this->ProjectPlanningElement->plannedEndDate=null;
+      $this->ProjectPlanningElement->paused=1;
+    }else if ($this->paused==0 and $this->paused!=$old->paused ){
+      $this->ProjectPlanningElement->paused=0;
+    }
+    
     // SAVE
     $result = parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
@@ -1045,9 +1077,12 @@ static function isTheLeaveProject($id=null) {
       //$this->ProjectPlanningElement->updateSynthesisObj();
       $this->updateValidatedWork(true);
     }
+
     return $result; 
 
   }
+
+  
   public function delete() {
     // MTY - LEAVE SYSTEM
     if (isLeavesSystemActiv()) {
@@ -1432,6 +1467,15 @@ static function isTheLeaveProject($id=null) {
     }
     if($this->fixPerimeter==0){
       self::$_fieldsAttributes["allowReduction"]="invisible";
+    }
+    if($this->paused==1){
+      self::$_fieldsAttributes["fixPlanning"]="readonly,nobr";
+    }
+    if($this->ProjectPlanningElement->topRefId!=''){
+      $parent=new $this->ProjectPlanningElement->topRefType ($this->ProjectPlanningElement->topRefId);
+    }
+    if (SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1)){
+      self::$_fieldsAttributes["paused"]="readonly";
     }
   }
   
