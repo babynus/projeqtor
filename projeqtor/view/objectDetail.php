@@ -6457,7 +6457,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     // gautier #1702
     if (!$assignment->optional and (get_class($obj)=='Meeting' or get_class($obj)=='PeriodicMeeting')) {
       echo '<td>';
-      echo '<a style="float:right; vertical-align:middle;"> '.formatIcon('Favorite', 16, i18n('mandatoryAttendant')).'</a>';
+      echo '<a style="float:right; vertical-align:middle;"> '.formatIcon('Favorite', 16, i18n('mandatoryAttendant'),null,true).'</a>';
       echo '</td>';
     }
     // resourceTeam
