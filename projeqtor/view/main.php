@@ -267,6 +267,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       }
     });
     dojo.subscribe("/dnd/start", function(source, nodes, copy, target){
+      if (!source || !source.id) return;
       console.log(source.id);
        if(source.id == 'menuBarDndSource'){
            dojo.byId('anotherBarContainer').style.display = 'block';
