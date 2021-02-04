@@ -2372,8 +2372,8 @@ class PlanningElement extends SqlElement {
       $dep->id=null;
       $tmpRes=$dep->save();
       if (! stripos($tmpRes,'id="lastOperationStatus" value="OK"')>0 ) {
-        errorLog($tmpRes); // Will not raise an error but will trace it in log
-        errorLog("for predecessor $dep->predecessorRefType #$dep->predecessorRefId, successor $dep->successorRefType #$dep->successorRefId");
+        debugTraceLog($tmpRes); // Will not raise an error but will trace it in log
+        debugTraceLog("for predecessor $dep->predecessorRefType #$dep->predecessorRefId, successor $dep->successorRefType #$dep->successorRefId");
       }
     }
     BudgetElement::dispatchFinalize();
