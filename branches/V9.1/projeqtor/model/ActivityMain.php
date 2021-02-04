@@ -623,21 +623,22 @@ class ActivityMain extends SqlElement {
       $this->ActivityPlanningElement->wbs = null;
       $this->ActivityPlanningElement->wbsSortable = null;
     }
-    
-     if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 and $this->idStatus!=$old->idStatus and $this->paused==0){
-      $this->paused=1;
-      $this->fixPlanning=1;
-    }else if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=1 and $this->idStatus!=$old->idStatus and $this->paused==1){
-      $this->paused=0;
-      $this->fixPlanning=0;
-    }
-    
-    if($this->paused==1 and $this->paused!=$old->paused and  $this->ActivityPlanningElement->paused!=$this->paused){
-      $this->ActivityPlanningElement->plannedStartDate=null;
-      $this->ActivityPlanningElement->plannedEndDate=null;
-      $this->ActivityPlanningElement->paused=1;
-    }else if ($this->paused==0 and $this->paused!=$old->paused and $this->ActivityPlanningElement->paused!=$this->paused){
-      $this->ActivityPlanningElement->paused=0;
+    if($this->id){
+       if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 and $this->idStatus!=$old->idStatus and $this->paused==0){
+        $this->paused=1;
+        $this->fixPlanning=1;
+      }else if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=1 and $this->idStatus!=$old->idStatus and $this->paused==1){
+        $this->paused=0;
+        $this->fixPlanning=0;
+      }
+      
+      if($this->paused==1 and $this->paused!=$old->paused and  $this->ActivityPlanningElement->paused!=$this->paused){
+        $this->ActivityPlanningElement->plannedStartDate=null;
+        $this->ActivityPlanningElement->plannedEndDate=null;
+        $this->ActivityPlanningElement->paused=1;
+      }else if ($this->paused==0 and $this->paused!=$old->paused and $this->ActivityPlanningElement->paused!=$this->paused){
+        $this->ActivityPlanningElement->paused=0;
+      }
     }
     
     $result = parent::save ();

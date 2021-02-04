@@ -941,22 +941,23 @@ static function isTheLeaveProject($id=null) {
     $this->ProjectPlanningElement->organizationInherited=$this->organizationInherited;
     $this->ProjectPlanningElement->organizationElementary=$this->organizationElementary;
     
-    if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 and $this->idStatus!=$old->idStatus and $this->paused==0){
-      $this->paused=1;
-      $this->fixPlanning=1;
-    }else if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=1 and $this->idStatus!=$old->idStatus and $this->paused==1){
-      $this->paused=0;
-      $this->fixPlanning=0;
+    if($this->id){
+      if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 and $this->idStatus!=$old->idStatus and $this->paused==0){
+        $this->paused=1;
+        $this->fixPlanning=1;
+      }else if(SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=1 and $this->idStatus!=$old->idStatus and $this->paused==1){
+        $this->paused=0;
+        $this->fixPlanning=0;
+      }
+      
+      if($this->paused==1 and $this->paused!=$old->paused){
+        $this->ProjectPlanningElement->plannedStartDate=null;
+        $this->ProjectPlanningElement->plannedEndDate=null;
+        $this->ProjectPlanningElement->paused=1;
+      }else if ($this->paused==0 and $this->paused!=$old->paused ){
+        $this->ProjectPlanningElement->paused=0;
+      }
     }
-    
-    if($this->paused==1 and $this->paused!=$old->paused){
-      $this->ProjectPlanningElement->plannedStartDate=null;
-      $this->ProjectPlanningElement->plannedEndDate=null;
-      $this->ProjectPlanningElement->paused=1;
-    }else if ($this->paused==0 and $this->paused!=$old->paused ){
-      $this->ProjectPlanningElement->paused=0;
-    }
-    
     // SAVE
     $result = parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
