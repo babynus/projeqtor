@@ -245,7 +245,7 @@ if($idOrganization){
 }
 if ($paramTeam) {
 	foreach ($resources as $idR=>$ress) {
-		$res=new Resource($idR);
+		$res=new ResourceAll($idR);//florent ticket #5038
 		if ($res->idTeam!=$paramTeam) {
 			unset($resources[$idR]);
 		}

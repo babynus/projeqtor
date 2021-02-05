@@ -128,7 +128,7 @@ if ($periodValue) {
 }
 
 if ($paramTeam) {
-	$res=new Resource();
+	$res=new ResourceALL();//florent ticket #5038
 	$lstRes=$res->getSqlElementsFromCriteria(array('idTeam'=>$paramTeam));
 	$inClause='(0';
 	foreach ($lstRes as $res) {
