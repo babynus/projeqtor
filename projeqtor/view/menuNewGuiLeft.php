@@ -30,7 +30,9 @@
   require_once "../tool/projeqtor.php";
 
 $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
- $viewSelect=Parameter::getUserParameter('bottomMenuDivItemSelect');
+$viewSelect=Parameter::getUserParameter('bottomMenuDivItemSelect');
+$animationSpeed=Parameter::getUserParameter('animationSpeedMode');
+if($animationSpeed=='')$animationSpeed='Low';
 ?>
 
 <div id="menuLeftBarContaineur" class="container"  dojoType="dijit.layout.BorderContainer" liveSplitters="false" >
@@ -56,6 +58,7 @@ $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
     <div id="menuBarAccesTop" class="" dojoType="dijit.layout.ContentPane"  region="center" style="height:65%;overflow-x: hidden;" >
       <nav id="ml-menu" class="menu">
       <input id="displayModeLeftMenu" value="<?php echo $displayMode;?>" hidden />
+      <input id="animationSpeed" value="<?php echo $animationSpeed;?>" hidden />
             <?php // draw Menus
              echo drawLeftMenuListNewGui($displayMode);
             ?>

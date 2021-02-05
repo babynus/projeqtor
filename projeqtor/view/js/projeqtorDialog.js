@@ -12331,3 +12331,23 @@ function filterMenuModuleDisable(nbTotal){
   }
 
 }
+
+function changeSpeedAnimation (val){
+  dojo.byId('animationSpeed').value=val;
+  dijit.byId('lowAnimation').selected='false';
+  dijit.byId('medAnimation').selected='false';
+  dijit.byId('fastAnimation').selected='false';
+  
+  switch(val){
+  case 'Low':
+      dijit.byId('lowAnimation').selected='true';
+    break;
+  case 'Med':
+      dijit.byId('medAnimation').selected='true';
+    break;
+  case 'Fast':
+      dijit.byId('fastAnimation').selected='true';
+    break;
+  }
+  saveUserParameter('animationSpeedMode',val);
+}

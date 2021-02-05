@@ -70,6 +70,7 @@ if($resource->id){
     <td>
     <?php  $value=(isset($assRec[$i]))?Work::displayWork($assRec[$i]):0;
             $dayofweek = 'dayOfWeek'.$i;?>
+            debugLog($value);
       <div dojoType="dijit.form.NumberTextBox"  style="width:53px;" name="recurringAssignmentW<?php echo $i;?>" id="recurringAssignmentW<?php echo $i;?>" value="<?php echo $value;?>" 
       constraints="{min:0,max:999.99}" class="input <?php if ($calendar->$dayofweek == 1) echo ' offDay';?>" >
       <?php echo $keyDownEventScript;?> 

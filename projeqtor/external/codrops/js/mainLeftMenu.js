@@ -81,7 +81,7 @@
     // show back button
     backCtrl : true,
     // delay between each menu item sliding animation
-    itemsDelayInterval : 60,
+    ///itemsDelayInterval : 60,
     // direction 
     direction : 'r2l',
     // callback: item that doesn´t have a submenu gets clicked
@@ -290,15 +290,28 @@
       currentMenu = this.menusArr[this.current_menu].menuEl,
       isBackNavigation = typeof clickPosition == 'undefined' ? true : false;
     // slide out current menu items - first, set the delays for the items
+    var animationSpeed=dojo.byId('animationSpeed').value;
+    var speed=60;
+    switch(animationSpeed){
+      case 'Fast':
+        speed=15;
+        break;
+     
+      case 'Med':
+        speed=30;
+        break;
+    }
+    var itemsDelayInterval=speed;
     this.menusArr[this.current_menu].menuItems.forEach(function(item, pos) {
-      item.style.WebkitAnimationDelay = item.style.animationDelay = isBackNavigation ? parseInt(pos * self.options.itemsDelayInterval) + 'ms' : parseInt(Math.abs(clickPosition - pos) * self.options.itemsDelayInterval) + 'ms';
+      item.style.WebkitAnimationDelay = item.style.animationDelay = isBackNavigation ? parseInt(pos * itemsDelayInterval) + 'ms' : parseInt(Math.abs(clickPosition - pos) * itemsDelayInterval) + 'ms';
     });
+    
     // animation class
     if( this.options.direction === 'r2l' ) {
-      classie.add(currentMenu, !isBackNavigation ? 'animate-outToLeft' : 'animate-outToRight');
+      classie.add(currentMenu, !isBackNavigation ? 'animate-outToLeft'+animationSpeed : 'animate-outToRight'+animationSpeed);
     }
     else {
-      classie.add(currentMenu, isBackNavigation ? 'animate-outToLeft' : 'animate-outToRight');  
+      classie.add(currentMenu, isBackNavigation ? 'animate-outToLeft'+animationSpeed : 'animate-outToRight'+animationSpeed);  
     }
   };
 
@@ -313,10 +326,22 @@
       nextMenuEl = nextMenu.menuEl,
       nextMenuItems = nextMenu.menuItems,
       nextMenuItemsTotal = nextMenuItems.length;
-
+    
+      var animationSpeed=dojo.byId('animationSpeed').value;
+      var speed=60;
+      switch(animationSpeed){
+        case 'Fast':
+          speed=15;
+          break;
+       
+        case 'Med':
+          speed=30;
+          break;
+      }
+      var itemsDelayInterval=speed;
     // slide in next menu items - first, set the delays for the items
     nextMenuItems.forEach(function(item, pos) {
-      item.style.WebkitAnimationDelay = item.style.animationDelay = isBackNavigation ? parseInt(pos * self.options.itemsDelayInterval) + 'ms' : parseInt(Math.abs(clickPosition - pos) * self.options.itemsDelayInterval) + 'ms';
+      item.style.WebkitAnimationDelay = item.style.animationDelay = isBackNavigation ? parseInt(pos * itemsDelayInterval) + 'ms' : parseInt(Math.abs(clickPosition - pos) * itemsDelayInterval) + 'ms';
 
       // we need to reset the classes once the last item animates in
       // the "last item" is the farthest from the clicked item
@@ -326,13 +351,14 @@
       if( pos === farthestIdx ) {
         onEndAnimation(item, function() {
           // reset classes
+          var animationSpeed=dojo.byId('animationSpeed').value;
           if( self.options.direction === 'r2l' ) {
-            classie.remove(currentMenu, !isBackNavigation ? 'animate-outToLeft' : 'animate-outToRight');
-            classie.remove(nextMenuEl, !isBackNavigation ? 'animate-inFromRight' : 'animate-inFromLeft');
+            classie.remove(currentMenu, !isBackNavigation ? 'animate-outToLeft'+animationSpeed : 'animate-outToRight'+animationSpeed);
+            classie.remove(nextMenuEl, !isBackNavigation ? 'animate-inFromRight'+animationSpeed : 'animate-inFromLeft'+animationSpeed);
           }
           else {
-            classie.remove(currentMenu, isBackNavigation ? 'animate-outToLeft' : 'animate-outToRight');
-            classie.remove(nextMenuEl, isBackNavigation ? 'animate-inFromRight' : 'animate-inFromLeft');
+            classie.remove(currentMenu, isBackNavigation ? 'animate-outToLeft'+animationSpeed : 'animate-outToRight'+animationSpeed);
+            classie.remove(nextMenuEl, isBackNavigation ? 'animate-inFromRight'+animationSpeed : 'animate-inFromLeft'+animationSpeed);
           }
           classie.remove(currentMenu, 'menu__level--current');
           classie.add(nextMenuEl, 'menu__level--current');
@@ -362,13 +388,14 @@
         });
       }
     });
-
+    var animationSpeed=dojo.byId('animationSpeed').value;
     // animation class
     if( this.options.direction === 'r2l' ) {
-      classie.add(nextMenuEl, !isBackNavigation ? 'animate-inFromRight' : 'animate-inFromLeft');
+      
+      classie.add(nextMenuEl, !isBackNavigation ? 'animate-inFromRight'+animationSpeed : 'animate-inFromLeft'+animationSpeed);
     }
     else {
-      classie.add(nextMenuEl, isBackNavigation ? 'animate-inFromRight' : 'animate-inFromLeft');
+      classie.add(nextMenuEl, isBackNavigation ? 'animate-inFromRight'+animationSpeed : 'animate-inFromLeft'+animationSpeed);
     }
   };
 
