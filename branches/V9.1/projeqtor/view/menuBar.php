@@ -443,7 +443,7 @@
     			  </tr>
 			    </table>
 			    <div id="drawMenuUser" dojoType="dijit.TooltipDialog"
-             style="max-width:600px; overflow-x:hidden; height:460px;  max-height:500px;  width:350px;">
+             style="max-width:600px; overflow-x:hidden; height:500px;  max-height:520px;  width:350px;">
              <?php include "menuUserTop.php" ?>          
           </div> 
 		    </div>
