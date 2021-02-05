@@ -121,3 +121,6 @@ ALTER TABLE `${prefix}project` ADD COLUMN `paused` int(1) unsigned DEFAULT 0 COM
 ALTER TABLE `${prefix}activity` ADD COLUMN `paused` int(1) unsigned DEFAULT 0 COMMENT '1';
 ALTER TABLE `${prefix}planningelement` ADD COLUMN `paused` int(1) unsigned DEFAULT 0 COMMENT '1';
 ALTER TABLE `${prefix}planningelementbaseline` ADD COLUMN `paused` int(1) unsigned DEFAULT 0 COMMENT '1';
+
+INSERT INTO `${prefix}linkable` ( `name`, `idle`) VALUES ('Budget', 0);
+
