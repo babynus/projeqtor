@@ -1137,7 +1137,8 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
   public function getResourcesOfOrganizationsListAsArray($limitToActiveResource=false) {
       if ($limitToActiveResource) {$crit['idle'] = '0';}
       $crit['idOrganization'] = $this->id;
-      $resource = new Resource();
+      //$resource = new Resource();
+      $resource = new ResourceAll();// florent ticket #5032
       $listRes = SqlElement::transformObjSqlElementInArrayKeyName($resource->getSqlElementsFromCriteria($crit));
       return $listRes;
   }

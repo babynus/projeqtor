@@ -185,7 +185,7 @@ for($day=$start;$day<=$end;$day=addDaysToDate($day, 1)) {
 		$resultPeriodFmt[$period]=array();
 	}
 	foreach ($resources as $idR=>$nameR) {
-	  $res = new Resource($idR, true);
+	  $res = new ResourceAll($idR, true);//florent ticket #5038
 		$capaDay=0;
 		if (! isOffDay($day, $resourceCalendar[$idR])) {
 			$capaDay=$res->getCapacityPeriod($day);
@@ -244,7 +244,7 @@ echo '</tr>';
 foreach ($resources as $idR=>$nameR) {
 	//if ($paramTeam) {
 	
-  $res=new ResourceAll($idR);
+  $res=new ResourceAll($idR);//florent ticket #5038
   //}
   if ($res->isResourceTeam) {
     $maxCapa=$capacity[$idR];

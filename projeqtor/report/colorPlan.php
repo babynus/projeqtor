@@ -335,7 +335,7 @@ asort($resourcesToShow);
 foreach ($resourcesToShow as $idR=>$nameR) {
   $idCal=SqlList::getFieldFromId('Affectable', $idR, 'idCalendarDefinition');
 	//if ($paramTeam) {
-    $res=new Resource($idR);
+    $res=new ResourceAll($idR);//florent ticket #5038
   //}
   if (!$paramTeam or $res->idTeam==$paramTeam) {
     //gautier

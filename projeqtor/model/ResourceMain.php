@@ -857,7 +857,8 @@ class ResourceMain extends SqlElement {
     if ($showClosedItems == FALSE) $crit=array('idTeam'=>$team, 'idle'=>"0");
     if ($showClosedItems == TRUE) $crit=array('idTeam'=>$team);
     $clauseOrderBy="id DESC";
-    $resList=$this->getSqlElementsFromCriteria($crit, false,false,$clauseOrderBy);
+    $resAll= new ResourceAll();
+    $resList=$resAll->getSqlElementsFromCriteria($crit, false,false,$clauseOrderBy);
     $listVisibleLinkedObj = getUserVisibleObjectsList(get_class($this));
     
     $result = '<table width="99.9%">';
