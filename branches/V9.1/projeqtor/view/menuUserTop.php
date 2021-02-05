@@ -248,6 +248,23 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       </select>
     </td>
   </tr>
+  <?php if(isNewGui()){
+    $animationSpeed=Parameter::getUserParameter('animationSpeedMode');
+    if($animationSpeed=='')$animationSpeed='Low';
+    ?>
+    <tr style="height:40px">
+    <td width="120px" style="text-align:right"><?php echo i18n("animtionSpeed");?>&nbsp;</td>
+    <td>
+       <div  style="height: 24px;border-radius: 5px 5px 5px 5px; padding-left:10px;padding-right:10px;">
+          <ul style="top:-8px;" data-dojo-type="dojox/mobile/TabBar" data-dojo-props='barType:"segmentedControl"'>
+            <li id="lowAnimation" onClick="changeSpeedAnimation('Low')" data-dojo-type="dojox/mobile/TabBarButton"   <?php if($animationSpeed=='Low'){ echo "data-dojo-props='selected:true'"; }?> class="userParamTabar"> <?php echo i18n('LowAnim');?></li>
+            <li id="medAnimation" onClick="changeSpeedAnimation('Med')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($animationSpeed=='Med'){ echo "data-dojo-props='selected:true'"; }?>class="userParamTabar" ><?php echo i18n('MedAnim');?></li>
+            <li  id="fastAnimation" onClick="changeSpeedAnimation('Fast')" data-dojo-type="dojox/mobile/TabBarButton" <?php if($animationSpeed=='Fast'){ echo "data-dojo-props='selected:true'"; }?> class="userParamTabar"><?php echo i18n('FastAnim');?></li>
+          </ul>
+       </div>
+      </td>
+  </tr>  
+  <?php }?>
   <?php if(!isNewGui()){?>
   <?php if (! isset($lockPassword) or $lockPassword==false) {?>
   <tr style="height:40px">

@@ -2307,3 +2307,7 @@ border:1px solid var(--color-medium);
   background-color: #DDDDFF;
   background-image: url(images/iconInformation.png);
 }
+
+.ProjeQtOrNewGui .userParamTabar{
+	width:60px !important;
+}

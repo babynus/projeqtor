@@ -138,20 +138,32 @@ float: left;
 
 
 .menuTop{
-
-		-webkit-transition: -webkit-transform 0.5s, width 0.5s;
-		-moz-transition: -moz-transform 0.5s, width 0.5s;
-		transition: transform 0.5s, width 0.5s;
+	-webkit-transition: -webkit-transform 0.5s, width 0.5s;
+	-moz-transition: -moz-transform 0.5s, width 0.5s;
+	transition: transform 0.5s, width 0.5s;
 }
+
 [class^='animate-'],
 [class*=' animate-'] {
 	visibility: visible;
 }
 
-.animate-outToRight .menu__item {
-	-webkit-animation: outToRight 0.5s both cubic-bezier(0.7, 0, 0.3, 1);
-	animation: outToRight 0.5s both cubic-bezier(0.7, 0, 0.3, 1);
+.animate-outToRightLow .menu__item {
+	-webkit-animation: outToRight 0.5s both cubic-bezier(0.5, 0, 0.3, 0.5);
+	animation: outToRight 0.5s both cubic-bezier(0.5, 0, 0.3, 0.5);
 }
+
+.animate-outToRightMed .menu__item {
+	-webkit-animation: outToRight 0.25s both cubic-bezier(0.3, 0, 0.2, 0.3);
+	animation: outToRight 0.25s both cubic-bezier(0.3, 0, 0.2, 0.3);
+}
+
+.animate-outToRightFast .menu__item {
+	-webkit-animation: outToRight 0.1s both cubic-bezier(0.1, 0, 0.1, 0.1);
+	animation: outToRight 0.1s both cubic-bezier(0.1, 0, 0.1, 0.1);
+}
+
+
 
 @-webkit-keyframes outToRight {
 	to {
@@ -169,9 +181,18 @@ float: left;
 	}
 }
 
-.animate-outToLeft .menu__item {
-	-webkit-animation: outToLeft 0.5s both cubic-bezier(0.7, 0, 0.3, 1);
-	animation: outToLeft 0.5s both cubic-bezier(0.7, 0, 0.3, 1);
+.animate-outToLeftLow .menu__item {
+	-webkit-animation: outToLeft 0.5s both cubic-bezier(0.5, 0, 0.3, 0.5);
+	animation: outToLeft 0.5s both cubic-bezier(0.5, 0, 0.3, 0.5);
+}
+
+.animate-outToLeftMed .menu__item {
+	-webkit-animation: outToLeft 0.25s both cubic-bezier(0.3, 0, 0.2, 0.3);
+	animation: outToLeft 0.25s both cubic-bezier(0.3, 0, 0.2, 0.3);
+}
+.animate-outToLeftFast .menu__item {
+	-webkit-animation: outToLeft 0.1s both cubic-bezier(0.1, 0, 0.1, 0.1);
+	animation: outToLeft 0.1s both cubic-bezier(0.1, 0, 0.1, 0.1);
 }
 
 @-webkit-keyframes outToLeft {
@@ -190,9 +211,19 @@ float: left;
 	}
 }
 
-.animate-inFromLeft .menu__item {
-	-webkit-animation: inFromLeft 0.5s both cubic-bezier(0.7, 0, 0.3, 1);
-	animation: inFromLeft 0.5s both cubic-bezier(0.7, 0, 0.3, 1);
+.animate-inFromLeftLow .menu__item {
+	-webkit-animation: inFromLeft 0.5s both cubic-bezier(0.5, 0, 0.3, 0.5);
+	animation: inFromLeft 0.5s both cubic-bezier(0.5, 0, 0.3, 0.5);
+}
+
+.animate-inFromLeftMed .menu__item {
+	-webkit-animation: inFromLeft 0.5s both cubic-bezier(0.3, 0, 0.2, 0.3);
+	animation: inFromLeft 0.5s both cubic-bezier(0.3, 0, 0.2, 0.3);
+}
+
+.animate-inFromLeftFast .menu__item {
+	-webkit-animation: inFromLeft 0.5s both cubic-bezier(0.1, 0, 0.1, 0.1);
+	animation: inFromLeft 0.5s both cubic-bezier(0.1, 0, 0.1, 0.1);
 }
 
 @-webkit-keyframes inFromLeft {
@@ -221,10 +252,21 @@ float: left;
 	}
 }
 
-.animate-inFromRight .menu__item {
-	-webkit-animation: inFromRight 0.5s both cubic-bezier(0.7, 0, 0.3, 1);
-	animation: inFromRight 0.5s both cubic-bezier(0.7, 0, 0.3, 1);
+.animate-inFromRightLow .menu__item {
+	-webkit-animation: inFromRight 0.5s both cubic-bezier(0.5, 0, 0.3, 0.5);
+	animation: inFromRight 0.5s both cubic-bezier(0.5, 0, 0.3, 0.5);
 }
+
+.animate-inFromRightMed .menu__item {
+	-webkit-animation: inFromRight 0.5s both cubic-bezier(0.3, 0, 0.2, 0.3);
+	animation: inFromRight 0.5s both cubic-bezier(0.3, 0, 0.2, 0.3);
+}
+
+.animate-inFromRightFast .menu__item {
+	-webkit-animation: inFromRight 0.5s both cubic-bezier(0.1, 0, 0.1, 0.1);
+	animation: inFromRight 0.5s both cubic-bezier(0.1, 0, 0.1, 0.1);
+}
+
 
 @-webkit-keyframes inFromRight {
 	from {
