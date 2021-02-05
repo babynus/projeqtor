@@ -2061,6 +2061,7 @@ function finalizeMessageDisplay(destination, validationType) {
         contentWidget = dijit.byId(destination);
         contentNode = dojo.byId(destination);
         contentNode.style.display = "none";
+        contentWidget.set('content',null);
       } else {
         // showAlert(message);
         addCloseBoxToMessage(destination);
