@@ -572,6 +572,15 @@ class BudgetMain extends SqlElement {
     if ($this->id and $this->id==$this->idBudget) {
       $result.='<br/>' . i18n('errorHierarchicLoop');
     }
+    if($old->idBudget and $this->idBudget != $old->idBudget){
+      $parents=$old->getParentsFlatList();
+      foreach ($parents as $idParent=>$nameParent) {
+        $parentBudget = new Budget($idParent,true);
+        if($parentBudget->done){
+          $result.='<br/>' . i18n('budgetParentIsApprouved',array($idParent));
+        }
+      }
+    }
     if ($this->idBudget) {
       // Parent must not have expenses linked
       $exp=new Expense();
@@ -586,6 +595,10 @@ class BudgetMain extends SqlElement {
           $result.='<br/>' . i18n('errorHierarchicLoop');
           break;
         }
+        $parentBudget = new Budget($idParent,true);
+        if($parentBudget->done){
+          $result.='<br/>' . i18n('budgetParentIsApprouved',array($idParent));
+        }
       }
     }
     $defaultControl=parent::control();
@@ -598,6 +611,24 @@ class BudgetMain extends SqlElement {
     return $result;
   }
 
+  public function deleteControl() {
+    $result="";
+    if($this->idBudget){
+      $parents=$this->getParentsFlatList();
+      foreach ($parents as $idParent=>$nameParent) {
+        $parentBudget = new Budget($idParent,true);
+        if($parentBudget->done){
+          $result.='<br/>' . i18n('cantDeleteSubBudgetToDoneBudget');
+        }
+      }
+    }
+    if (! $result) {
+      $result=parent::deleteControl();
+    }
+    return $result;
+  }
+  
+  
   
   public function getColor() {
     $color="#777777";
