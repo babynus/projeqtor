@@ -527,7 +527,10 @@ function searchMenuToDisplay(val){
   var c=0;
   menus.forEach(function(el){
     c++;
-    menuName="'"+el.innerHTML.toLowerCase()+"'";
+    var text=el.innerHTML.toLowerCase();
+    text=text.replace('<span style="display:none">','');
+    text=text.replace('</span>','');
+    menuName="'"+text+"'";
     if(!arrayMenuName.includes(menuName)){
       if(menuName.includes(val.toLowerCase())){
         if(el.parentNode.className=='menu__linkDirect' || el.parentNode.className=='menu__linkDirect menu__link--current'){

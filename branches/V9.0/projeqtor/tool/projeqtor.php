@@ -53,8 +53,8 @@ if (is_session_started()===FALSE) {
 // === Application data : version, dependencies, about message, ...
 $applicationName = "ProjeQtOr"; // Name of the application
 $copyright = $applicationName; // Copyright to be displayed
-$version = "V9.0.4"; // Version of application : Major / Minor / Release
-$build = "0279"; // Build number. To be increased on each release
+$version = "V9.0.5"; // Version of application : Major / Minor / Release
+$build = "0280"; // Build number. To be increased on each release
 $website = "http://www.projeqtor.org"; // ProjeQtOr site url
 if (!isset($aesKeyLength)) { // one can define key lenth to 256 in parameters.php with $aesKeyLength=256; // valid values are 128, 192 and 256
   $aesKeyLength=128;
@@ -3634,8 +3634,6 @@ function firstDayofWeek($week=null, $year=null) {
     $now=date('Y-m-d');
     return firstDayofWeek(weekNumber($now), substr($now, 0, 4));
   }
-  $week=intval($week);
-  $year=intval($year);
   $Jan1=mktime(1, 1, 1, 1, 1, $year);
   $MondayOffset=(11-date('w', $Jan1))%7-3;
   $desiredMonday=strtotime(($week-1).' weeks '.$MondayOffset.' days', $Jan1);
