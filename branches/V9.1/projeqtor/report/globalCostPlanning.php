@@ -109,7 +109,7 @@ if ( $paramWeek) {
   $queryWhere.=  " and week=".Sql::str($periodValue);
 }
 if ($paramTeam) {
-  $res=new Resource();
+  $res=new ResourceAll();
   $lstRes=$res->getSqlElementsFromCriteria(array('idTeam'=>$paramTeam));
   $inClause='(0';
   foreach ($lstRes as $res) {
@@ -137,6 +137,7 @@ $querySelect2= 'select sum(w.work * a.dailyCost) as sumCost, w.' . $scale . ' as
 $queryGroupBy2 = $scale . ', w.idProject, t2.sortOrder';
 $queryWhere2 = $queryWhere . ' and w.idAssignment=a.id ';
 // constitute query and execute
+
 
 $tab=array();
 $start="";

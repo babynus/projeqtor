@@ -302,7 +302,7 @@ if($idOrganization){
 }
 if ($paramTeam) {
   foreach ($resources as $idR=>$ress) {
-    $res=new Resource($idR);
+    $res=new ResourceAll($idR);//florent ticket #5038
     if ($res->idTeam!=$paramTeam) {
       unset($resources[$idR]);
     }
@@ -414,7 +414,7 @@ for ($i=1; $i<=$nbDays;$i++) {
   }
   $sumDay=$globalSum[$startDate+$i-1];
   if ($paramResource) {
-    $res=new Resource($paramResource);
+    $res=new ResourceAll($paramResource);//florent ticket #5038
     $day=$startDate+$i-1;
     $day=substr($day,0,4).'-'.substr($day,4,2).'-'.substr($day,6,2);
     if ($res->getCapacityPeriod($day)<$sumDay) {

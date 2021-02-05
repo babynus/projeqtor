@@ -268,7 +268,7 @@ foreach ($projects as $id=>$name) {
 asort($resources);
 foreach ($resources as $idR=>$nameR) {
   if ($paramTeam) {
-    $res=new Resource($idR);
+    $res=new ResourceAll($idR);//florent ticket #5038
   }
   if (!$paramTeam or $res->idTeam==$paramTeam) {
     foreach ($projects as $idP=>$nameP) {
@@ -324,7 +324,7 @@ $rowspanRes = 0;
 $rowspanAct = 0;
 foreach ($resources as $idR=>$nameR) {
   if ($paramTeam) {
-		$res=new Resource($idR);
+		$res=new ResourceAll($idR);//florent ticket #5038
   }
   if (!$paramTeam or $res->idTeam==$paramTeam) {
     $sumRes=0;

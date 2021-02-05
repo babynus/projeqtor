@@ -124,7 +124,7 @@ if ($idOrganization ) {
   $queryWhere.= " and t1.idResource in ".$inClause;
 }
 if ($paramTeam) {
-	$res=new Resource();
+	$res=new ResourceAll();//florent ticket #5038
 	$lstRes=$res->getSqlElementsFromCriteria(array('idTeam'=>$paramTeam));
 	$inClause='(0';
 	foreach ($lstRes as $res) {
@@ -237,7 +237,7 @@ $sumProj=array();
 $sumProjUnit=array();
 $capaResDate=array();
 foreach($tab as $res=>$lists) {
-  $currentRes=new Resource($res);
+  $currentRes=new ResourceAll($res);//florent ticket #5038
   $capaResDate[$res]=array();
   foreach($arrDates as $date) {
     if ($scale=='week') {

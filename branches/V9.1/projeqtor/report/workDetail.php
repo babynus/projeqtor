@@ -209,7 +209,7 @@ if($idOrganization){
 }
 foreach ($resources as $idR=>$nameR) {
 	if ($paramTeam) {
-    $res=new Resource($idR);
+    $res=new ResourceAll($idR);//florent ticket #5038
   }
   if (!$paramTeam or $res->idTeam==$paramTeam) {
 	  $sumRes=0;

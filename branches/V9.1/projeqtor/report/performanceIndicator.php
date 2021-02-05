@@ -462,13 +462,13 @@ $maxPlotted=30; // max number of point to get plotted lines. If over lines are n
  
 if ($team != ' ') {
   foreach ($indice2 as $idR=>$ress) {
-    $res=new Resource($idR);
+    $res=new ResourceAll($idR);//florent ticket #5038
     if ($res->idTeam!=$team) {
       unset($indice2[$idR]);
     }
   }
   foreach ($nb2 as $idR=>$ress) {
-    $res=new Resource($idR);
+    $res=new ResourceAll($idR);//florent ticket #5038
     if ($res->idTeam!=$team) {
       unset($nb2[$idR]);
     }

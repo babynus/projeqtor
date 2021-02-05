@@ -278,7 +278,7 @@ if($idOrganization){
 foreach ($resources as $idR=>$nameR) {
   $sumNpw=0;
 	//if ($paramTeam) {
-    $res=new Resource($idR);
+    $res=new ResourceAll($idR);//florent ticket #5038
   //}
   if (!$paramTeam or $res->idTeam==$paramTeam) {
 	  $sum=array();
