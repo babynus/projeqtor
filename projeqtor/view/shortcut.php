@@ -52,7 +52,7 @@ echo '<table style="width: 100%;">';
 $att=new Attachment();
 $countAllAttachment=$att->countSqlElementsFromCriteria(array('refType'=>'Project','type'=>'link'));
 if($countAllAttachment==0 and isNewGui()){
-  echo '<tr>td><div>'.i18n('explainLinkOnLeftMenu').'</div></tr></td>';
+  echo '<tr><td><div class="noMenuToDisplay" style="width:95%;">'.i18n('explainLinkOnLeftMenu').'</div></td></tr>';
 }else {
   foreach ($lstProj as $prjId=>$prjName) {
     $lstAtt=$att->getSqlElementsFromCriteria(array('refType'=>'Project','refId'=>$prjId, 'type'=>'link'));
