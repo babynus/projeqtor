@@ -793,7 +793,13 @@ function addNewGuiItem(item){
 	}
     var currentScreen=null;
     if(dojo.byId('objectClass'))currentScreen=dojo.byId('objectClass').value;
+    var classManual=null;
+    if(dojo.byId('objectClassManual'))classManual=dojo.byId('objectClassManual').value;
     var param = dojo.byId('newItemAccessMode').value;
+    if(classManual == 'Kanban' && item==currentScreen){
+    	showDetail('refreshActionAdd'+item,1,item,false,'new');
+    	return;
+    }
 	if(param == 'direct'){
 		var callbackPlanning = function(){
 			loadDiv("menuUserScreenOrganization.php?currentScreen=Planning&objectExist="+objectExist,"mainDivMenu");
