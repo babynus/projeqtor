@@ -2568,13 +2568,26 @@ abstract class SqlElement {
           // Also copy AssignmentRecurring for recurring tasks
           $assRec=new AssignmentRecurring();
           $critRec = array('idAssignment' => $oldAssId);
-          $lstAssRec = $assRec->getSqlElementsFromCriteria ( $crit );
+          $lstAssRec = $assRec->getSqlElementsFromCriteria ( $critRec );
           foreach ( $lstAssRec as $assRec ) {
             $assRec->id = null;
             $assRec->idAssignment=$ass->id;
             $assRec->refType = $newClass;
             $assRec->refId = $newObj->id;
-            $assRec->save();
+            $resAssRec=$assRec->save();
+          }
+          // Also copy AssignmentSelection for recurring tasks
+          $assSel=new AssignmentSelection();
+          $critSel = array('idAssignment' => $oldAssId);
+          $lstAssSel = $assSel->getSqlElementsFromCriteria ( $critSel );
+          foreach ( $lstAssSel as $assSel ) {
+            $assSel->id = null;
+            $assSel->idAssignment=$ass->id;
+            $assSel->startDate=null;
+            $assSel->endDate=null;
+            $assSel->userSelected=0;
+            $assSel->selected=0;
+            $resAssSel=$assSel->save();
           }
         }
       }
@@ -5158,7 +5171,7 @@ abstract class SqlElement {
         return false; // exit if not mailable object
       }
       $crit = "idle=0";
-      $crit .= " and idMailable=" . $mailable->id . " and ( 0 ";
+      $crit .= " and idMailable=" . $mailable->id . " and ( 1=0 ";
       if ($statusChange and property_exists ( $this, 'idStatus' ) and trim ( $this->idStatus )) {
         $any = SqlElement::getSingleSqlElementFromCriteria('EventForMail', array('name'=>'statusChange'));
         $crit .= "  or idStatus=" . $this->idStatus . " or idEventForMail=".$any->id." ";

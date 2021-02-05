@@ -3615,8 +3615,6 @@ function firstDayofWeek($week=null, $year=null) {
     $now=date('Y-m-d');
     return firstDayofWeek(weekNumber($now), substr($now, 0, 4));
   }
-  $week=intval($week);
-  $year=intval($year);
   $Jan1=mktime(1, 1, 1, 1, 1, $year);
   $MondayOffset=(11-date('w', $Jan1))%7-3;
   $desiredMonday=strtotime(($week-1).' weeks '.$MondayOffset.' days', $Jan1);
