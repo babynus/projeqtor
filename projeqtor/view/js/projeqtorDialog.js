@@ -3054,6 +3054,7 @@ function assignmentChangeRole() {
   var idResource=dijit.byId("assignmentIdResource").get("value");
   var idRole=dijit.byId("assignmentIdRole").get("value");
   if(!idRole.trim())disableWidget('dialogAssignmentSubmit');
+  else if ( dijit.byId('dialogAssignmentSubmit').get('disabled')==true)enableWidget('dialogAssignmentSubmit');
   if (!idResource || !idRole)
     return;
   dojo.xhrGet({
