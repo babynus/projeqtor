@@ -174,7 +174,7 @@ if ($planningMode=='RECW') {
                 onChange="assignmentChangeRole();" <?php echo ($realWork!=0 && $idRole)?"readonly=readonly":"";?>>                
                  <?php 
                  if($mode=='edit'){
-                   if($isSelectFonction == 'YES' and !$resource->isResourceTeam){
+                   if($isSelectFonction == 'YES' ){//and !$resource->isResourceTeam    // Florent ticket 5263
                       $critFld = 'id';
                       $critVals = array();
                       $vals = array();
