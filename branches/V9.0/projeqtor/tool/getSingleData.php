@@ -38,7 +38,7 @@
       if (! $idRes) return;
       $idRol=RequestHandler::getId('idRole');
       if (! $idRol) return;
-      $r=new Resource($idRes);
+      $r=new ResourceAll($idRes);//florent ticket #5263
       echo $r->getActualResourceCost($idRol);
     } else if ($type=='resourceCostDefault') {
       $idRol=RequestHandler::getId('idRole');
