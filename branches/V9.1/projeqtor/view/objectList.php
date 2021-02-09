@@ -1591,8 +1591,35 @@ $listStatus = $object->getExistingStatus();
     }
   </script>
   <script type="dojo/connect" event="onMoveColumn" args="evt">
+    var colLayout = objectGrid.rows.grid.layout.cells;
+    var jsonValue = "";
+    colLayout.forEach(function(currentValue) {
+      jsonValue = jsonValue+currentValue.field+"__";
+    });
+    dojo.xhrGet({
+    url: '../tool/saveMoveColumn.php?class=<?php echo get_class($obj);?>&mode=move&jsonValue='+jsonValue,
+    load: function(data,args) { 
+      var callBack=function(){resizeListDiv();};
+        loadContent("objectList.php?objectClass="+dojo.byId('objectClassList').value+"&objectId="+dojo.byId('objectId').value,
+                    "listDiv",null,null,null,null,null,callBack);
+    }
+  });
   </script>
   <script type="dojo/connect" event="onResizeColumn" args="colIdx">
+    var colLayout = objectGrid.rows.grid.layout.cells;
+    var totalDiv = dojo.byId("objectGrid").offsetWidth;
+    var jsonValue = "";
+    colLayout.forEach(function(currentValue) {
+      jsonValue = jsonValue+currentValue.unitWidth+"__";
+    });
+    dojo.xhrGet({
+    url: '../tool/saveMoveColumn.php?class=<?php echo get_class($obj);?>&totalDiv='+totalDiv+'&mode=size&jsonValue='+jsonValue,
+    load: function(data,args) { 
+      var callBack=function(){resizeListDiv();};
+        loadContent("objectList.php?objectClass="+dojo.byId('objectClassList').value+"&objectId="+dojo.byId('objectId').value,
+                    "listDiv",null,null,null,null,null,callBack);
+    }
+  });
   </script>
   <script type="dojo/connect" event="_onFetchComplete" args="items, req">
      if (mustApplyFilter) {

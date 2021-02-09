@@ -2664,6 +2664,11 @@ table.dijitCalendarContainer {
 	padding-right:25px;
 	padding-left:0px;
 }
+
+.dojoxGridColResize, .dojoxGridColResize .dojoDndItemOver, .dojoxGridColumnResizing, .dojoxGridColumnResizing .dojoDndItemOver, .dojoxGridColumnResizing .dojoxGridHeader{
+	cursor : col-resize !important;
+}
+
 .dojoxGridLoading {
 	background-image: url('images/loading.gif');
 }
