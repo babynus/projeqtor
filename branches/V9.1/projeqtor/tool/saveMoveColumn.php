@@ -39,14 +39,13 @@ $currentList = $columnSelector->getSqlElementsFromCriteria(array('idUser'=>$user
 if($mode=='size'){
   foreach ($list as $id=>$val){
     $list[$id]= intval(substr($val, 0 , -2));
-    $list[$id] = round($list[$id]/intval($totalDiv) * 100,1);
+    $list[$id] = ceil(round($list[$id]/intval($totalDiv) * 100,1));
   }
   $total = 0;
   foreach ($list as $percent){
     $total += $percent;
   }
 }
-
 Sql::beginTransaction();
 foreach ($currentList as $id=>$obj){
 if($mode=='move'){
@@ -58,13 +57,6 @@ if($mode=='move'){
   }else{
     if($list[$id] != $obj->widthPct){
       $obj->widthPct = $list[$id];
-      if($total < 100 and $obj->field=='name'){
-        $obj->widthPct += abs(100-$total);
-      }
-      if($total > 100 and $obj->field=='name'){
-        $obj->widthPct -= abs(100-$total);
-        if($obj->widthPct < 10)$obj->widthPct=10;
-      }
       $obj->save();
     }
   }
