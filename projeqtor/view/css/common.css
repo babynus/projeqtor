@@ -2648,6 +2648,20 @@ table.dijitCalendarContainer {
 	background-color: #e9e9e9;
 	font-size: 0.85em; 
 }
+
+.dojoxGridResizeColLine {
+    width: 1px;
+    background-color: #777;
+    position: absolute;
+}
+.dojoxGridResizeColLine {
+    width: 1px;
+    background-color: #777;
+    position: absolute;
+    cursor: col-resize;
+    z-index: 10000;
+}
+
 .dojoxGridMasterMessages {
 	background-color: #fefefe;
 }
