@@ -1599,9 +1599,7 @@ $listStatus = $object->getExistingStatus();
     dojo.xhrGet({
     url: '../tool/saveMoveColumn.php?class=<?php echo get_class($obj);?>&mode=move&jsonValue='+jsonValue,
     load: function(data,args) { 
-      var callBack=function(){resizeListDiv();};
-        loadContent("objectList.php?objectClass="+dojo.byId('objectClassList').value+"&objectId="+dojo.byId('objectId').value,
-                    "listDiv",null,null,null,null,null,callBack);
+    
     }
   });
   </script>
@@ -1615,9 +1613,6 @@ $listStatus = $object->getExistingStatus();
     dojo.xhrGet({
     url: '../tool/saveMoveColumn.php?class=<?php echo get_class($obj);?>&totalDiv='+totalDiv+'&mode=size&jsonValue='+jsonValue,
     load: function(data,args) { 
-      var callBack=function(){resizeListDiv();};
-        loadContent("objectList.php?objectClass="+dojo.byId('objectClassList').value+"&objectId="+dojo.byId('objectId').value,
-                    "listDiv",null,null,null,null,null,callBack);
     }
   });
   </script>
