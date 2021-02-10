@@ -72,9 +72,11 @@ if(count($meeting->_Assignment)!=0){
   }
 }
 if(isset($_REQUEST['liveMeetingResult']))$liveMeeting->result=$_REQUEST['liveMeetingResult'];
-$liveMeeting->save();
+$resSaveLM=$liveMeeting->save();
+if (getLastOperationStatus($resSaveLM)=='INVALID') traceLog("liveMeetingUpdate.php => save LiveMeeting:$resSaveLM");
 
 $meeting->result=$liveMeeting->result;
 if($noHistory)$meeting->_noHistory=true;
-$meeting->save();
+$resSaveM=$meeting->save();
+if (getLastOperationStatus($resSaveM)=='INVALID') traceLog("liveMeetingUpdate.php => save Meeting:$resSaveM");
 ?>
