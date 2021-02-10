@@ -407,7 +407,7 @@ if ($type == 'empty') {
     }
   } else if ($dataType=='idBaselineSelect') {
     $list=array();
-    $critProj=(RequestHandler::getValue ('critField')=='idProject')?RequestHandler::getValue('critValue'):null;
+    $critProj=(RequestHandler::getValue ('critField')=='idProject')?intval(RequestHandler::getValue('critValue')):null;
     if ($critProj) {$critWhere='idProject = '.$critProj;}
     else {$critWhere='idProject in '.getVisibleProjectsList(); }
     $bl=new Baseline;
