@@ -407,11 +407,13 @@ if ($type == 'empty') {
     }
   } else if ($dataType=='idBaselineSelect') {
     $list=array();
-    $critWhere=  'idProject in ' . getVisibleProjectsList() ;
-    $bl=new Baseline();
+    $critProj=(RequestHandler::getValue ('critField')=='idProject')?RequestHandler::getValue('critValue'):null;
+    if ($critProj) {$critWhere='idProject = '.$critProj;}
+    else {$critWhere='idProject in '.getVisibleProjectsList(); }
+    $bl=new Baseline;
     $lstBaseline=$bl->getSqlElementsFromCriteria(null,null,$critWhere);
     foreach ($lstBaseline as $bl) {
-      $list[$bl->id]=$bl->name;
+      $list[$bl->id]=$bl->name." (".htmlFormatDate($bl->baselineDate).") - ".SqlList::getNameFromId('Project', $bl->idProject);
     }
   }else if($dataType=="refTypeIncome" or $dataType=="refTypeExpense"){
     $list=array();
