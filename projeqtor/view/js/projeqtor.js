@@ -6886,6 +6886,8 @@ function dropFilesFormOnDragOver() {
   if (dropFilesFormInProgress) clearTimeout(dropFilesFormInProgress);
   if (dojo.byId('updateRight') && dojo.byId('updateRight').value=='NO') return;
   if (! dojo.byId('id')) return;
+  if (!dojo.byId('dropFilesInfoDiv')) return;
+  if (!dojo.byId('attachmentFileDirectDiv')) return; 
   if ( dijit.byId('idle') && dijit.byId('idle').get('checked')==true) return;
   dojo.byId('dropFilesInfoDiv').style.height=(dojo.byId('formDiv').offsetHeight-10)+"px";
   var hasScrollBar=(dojo.byId('formDiv').scrollHeight>dojo.byId('formDiv').clientHeight)?true:false;
