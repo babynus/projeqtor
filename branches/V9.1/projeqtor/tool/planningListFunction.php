@@ -386,7 +386,7 @@ function drawOptionBaseline() {
             saveDataToSession("planningBaselineTop",this.value,false);
             refreshJsonPlanning();
           </script>
-          <?php htmlDrawOptionForReference('idBaselineSelect', getSessionValue("planningBaselineTop"), null,false,($proj)?'idProject':null,($proj)?$proj:null);?>
+          <?php htmlDrawOptionForReference('idBaselineSelect', getSessionValue("planningBaselineTop"), null,false,null,null);?>
         </select>
       </td>
     </tr>
