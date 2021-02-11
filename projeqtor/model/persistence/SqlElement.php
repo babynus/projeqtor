@@ -4624,6 +4624,7 @@ abstract class SqlElement {
         $isCopy = true;
       }
     }
+    $fielMessageExist=false;
     foreach ( $this as $col => $val ) {
       $dataType = $this->getDataType ( $col );
       $dataLength = $this->getDataLength ( $col );
@@ -4650,6 +4651,12 @@ abstract class SqlElement {
             //if ( ( ! $val and $val !== 0) or trim ( $val ) == '') {
             if ( ( ! $val) or trim ( $val ) == '') { // Since PHP 7.1, all numeric fields have default value zero and cannot be null  
               $result .= '<br/>'. i18n ( 'messageMandatory', array($this->getColCaption ( $col )) );
+              if(Parameter::getUserParameter('paramLayoutObjectDetail')=='tab' and !$fielMessageExist){
+                if(!$fielMessageExist){
+                  self::addFirstErrorField($this,$col,$result,$fielMessageExist);
+                }
+                
+              }
             }
           }
           if ($val and strpos($this->getFieldAttributes($col),'unique')!==false) {          
@@ -8015,7 +8022,136 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     return array('attachments'=>$attachments,'result'=>$message);
   }
   //
-}
+  
+  public function addFirstErrorField($obj,$col,&$result,&$exist){
+    $sectionPosition=self::setSectionPosition();
+      $exist=true;
+      $section='';
+      foreach ($obj as $id=>$val){
+        if(substr($id, 0,5 )=='_sec_'){
+          $section=substr($id,5);
+        }
+        if($id==$col){
+          break;
+        }
+      }
+      $position='detail';
+      if(isset($sectionPosition[$section]['99'])){
+        $position=$sectionPosition[$section]['99'];
+      }
+      $tab= $position;
+      $field='<input id="firstFieldRequired" value="'.$col.'" hidden />';
+      $tab='<input id="firstTabdRequired" value="'.$tab.'" hidden />';
+      $result=$result.$field.$tab;
+  }
 
+
+ public static function setSectionPosition (){
+  $sectionPosition=array(
+      'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
+      'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
+      'affectationresourceteamresource'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
+      'affectationsresourceteam'=>array('2'=>'right', '3'=>'right','99'=>'resources'),
+      'answer'=>array('2'=>'right', '3'=>'right','99'=>'treatment'),
+      'approver'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+      'attachment'=>array('2'=>'bottom', '3'=>'extra','99'=>'fichier'),
+      'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'progress'),
+      'billline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+      'billlineterm'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+      'billslist'=>array('2'=>'bottom', '3'=>'extra','99'=>'financial'),
+      'budgetsynthesis'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
+      'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+      'checklistdefinitionline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'description'),
+      'checklist'=>array('2'=>'bottom', '3'=>'bottom','99'=>'checklist'),
+      'commandslist'=>array('2'=>'bottom', '3'=>'extra','99'=>'financial'),
+      'componentcomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'componentstructure'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'componentversions'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'componentversioncomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'componentversionstructure'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'context'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+      'contacts'=>array('2'=>'right', '3'=>'right','99'=>'detail'),
+      'delivery'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
+      'description'=>array('2'=>'left', '3'=>'left','99'=>'description'),
+      'evaluation'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
+      'evaluationcriteria'=>array('2'=>'right', '3'=>'extra','99'=>'progress'),
+      'expensedetail'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+      'helpallowedwords'=>array('3'=>'bottom', '3'=>'extra','99'=>'detail'),
+      'helpallowedreceivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'detail'),
+      'hierarchicorganizationprojects'=>array('2'=>'bottom', '3'=>'extra','99'=>'projects'),
+      'history'=>array('2'=>'history', '3'=>'history','99'=>'history'),
+      'iban'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
+      'internalalert'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
+      'joblist'=>array('2'=>'bottom', '3'=>'bottom','99'=>'checklist'),
+      'jobdefinition'=>array('2'=>'bottom', '3'=>'bottom','99'=>'description'),
+      'link'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
+      'link_activity'=>array('2'=>'left', '3'=>'extra','99'=>'link'),
+      'link_deliverable'=>array('2'=>'left', '3'=>'extra','99'=>'link'),
+      'link_requirement'=>array('2'=>'bottom', '3'=>'extra','99'=>'coverage'),
+      'link_testcase'=>array('2'=>'bottom', '3'=>'extra','99'=>'coverage'),
+      'listtypeusingworkflow'=>array('2'=>'right', '3'=>'extra','99'=>'link'),
+      'lock'=>array('2'=>'left', '3'=>'left','99'=>'description'),
+      'mailtext'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+      'members'=>array('2'=>'right', '3'=>'right','99'=>'resources'),
+      'miscellaneous'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
+      'note'=>array('2'=>'bottom', '3'=>'extra','99'=>'note'),
+      'notificationtitle'=>array('2'=>'left', '3'=>'left','99'=>'description'),
+      'notificationrule'=>array('2'=>'left', '3'=>'left','99'=>'treatment'),
+      'notificationcontent'=>array('2'=>'left', '3'=>'right','99'=>'description'),
+      'notification'=>array('3'=>'bottom', '3'=>'extra','99'=>'description'),
+      'predecessor'=>array('2'=>'bottom', '3'=>'bottom','99'=>'dependency'),
+      'price' =>array('2'=>'right', '3'=>'right','99'=>'treatment'),
+      'projectsofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'dependency'),
+      'progress'=>array('2'=>'right', '3'=>'extra','99'=>'description','99'=>'progress'),
+      'progress_left'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
+      'progress_center'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
+      'productprojectprojects'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+      'productprojectproducts'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+      'productcomponent'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+      'productcomponent_right'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+      'productcomposition'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+      'productbusinessfeatures'=>array('2'=>'right', '3'=>'right','99'=>'detail'),
+      'productversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
+      'productversioncomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'productversioncompatibility'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
+      'quotationslist'=>array('2'=>'bottom', '3'=>'extra','99'=>'financial'),
+      'receivers'=>array('2'=>'bottom', '3'=>'extra','99'=>'treatment'),
+      'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'resources'),
+      'resourcecost'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
+      'situation'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
+      'situationexpense'=>array('2'=>'left', '3'=>'right','99'=>'detail'),
+      'situationincome'=>array('2'=>'right', '3'=>'right','99'=>'detail'),
+      'subprojects'=>array('2'=>'right', '3'=>'right','99'=>'dependency'),
+      'subproducts'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+      'subbudgets'=>array('2'=>'right', '3'=>'extra','99'=>'dependency'),
+      'submissions'=>array('2'=>'right', '3'=>'extra','99'=>'progress'),
+      'subscriptioncontact'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
+      'synthesis'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
+      'successor'=>array('2'=>'bottom', '3'=>'bottom','99'=>'dependency'),
+      'target'=>array('2'=>'bottom', '3'=>'extra','99'=>'treatment'),
+      'treatment'=>array('2'=>'right', '3'=>'right','99'=>'treatment'),
+      'treatment_right'=>array('2'=>'right', '3'=>'extra','99'=>'treatment'),
+      'ticket'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
+      'ticketscontact'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
+      'ticketsclient'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
+      'tickethistory'=>array('2'=>'right', '3'=>'extra','99'=>'History'),
+      'tenders'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
+      'testcaserun'=>array('2'=>'bottom', '3'=>'bottom','99'=>'coverage'),
+      'testcaserunsummary'=>array('2'=>'left', '3'=>'extra','99'=>'coverage'),
+      'testcasesummary'=>array('2'=>'right', '3'=>'extra','99'=>'coverage'),
+      'totalfinancialsynthesis'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+      'validation'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
+      'valuealertoverwarningoverokunder'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
+      'version'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+      'versionprojectversions'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+      'versionprojectprojects'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+      'void'=>array('2'=>'right', '3'=>'right','99'=>'descrpition'),
+      'workflowdiagram'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+      'workflowstatus'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'));
+
+  return $sectionPosition;
+}
+}
   
 ?>

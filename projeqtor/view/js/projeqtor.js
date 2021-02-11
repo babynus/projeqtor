@@ -2138,6 +2138,20 @@ function finalizeMessageDisplay(destination, validationType) {
     } else {
       formInitialize();
     }
+    if(dojo.byId('firstFieldRequired') && dojo.byId('firstTabdRequired')){
+      var fieldName=dojo.byId('firstFieldRequired').value,
+            tab=dojo.byId('firstTabdRequired').value,
+              tabToSelect=dijit.byId('tabDetailContainer_tablist_'+ tab.charAt(0).toUpperCase() + tab.slice(1))
+                tabContainer=dijit.byId('tabDetailContainer'),
+                  field=dojo.byId(fieldName);
+      tabContainer.selectChild(tabToSelect.page);
+      if(field.type!='textarea'){
+        field.focus();
+      }else{
+        var editor=CKEDITOR.instances[fieldName];
+        editor.focus();
+      }
+    }
   } else {
     if (dojo.byId('objectClass') && dojo.byId('objectId')) {
       var url = '../tool/getObjectCreationInfo.php?objectClass='+ dojo.byId('objectClass').value +'&objectId='+dojo.byId('objectId').value;
@@ -4870,7 +4884,7 @@ function newObject() {
     showError(i18n("errorObjectId"));
   }
 }
-
+  
 function saveObject() {
   var param=false;
   if(dojo.byId('resourcePlanningAssignment') && dojo.byId('resourcePlanningAssignment').value!='false'){
