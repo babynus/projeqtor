@@ -25,7 +25,6 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 require_once "../tool/projeqtor.php";
-$data = false;
 $class = RequestHandler::getClass('class');
 $jsonValue = RequestHandler::getValue('jsonValue');
 $userId = getCurrentUserId();
@@ -55,10 +54,8 @@ if($mode=='size'){
   }
   if($total < 100){
     $list[sizeof($list)-1] += (100 - $total) ;
-    $data = sizeof($list)-1;
   }
 }
-debugLog($list);
 Sql::beginTransaction();
 foreach ($currentList as $id=>$obj){
 if($mode=='move'){
@@ -68,7 +65,6 @@ if($mode=='move'){
      $obj->save();
    }
   }else{
-    debugLog($obj->widthPct.'--'.$obj->field);
     if($list[$id] != $obj->widthPct){
       if($list[$id]=='hidden'){
         $obj->hidden= 1;
@@ -80,7 +76,4 @@ if($mode=='move'){
   }
 }
 Sql::commitTransaction();
-if($data){
-  echo $data;
-}
  ?>
