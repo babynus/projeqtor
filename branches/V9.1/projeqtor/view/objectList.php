@@ -1612,7 +1612,11 @@ $listStatus = $object->getExistingStatus();
     });
     dojo.xhrGet({
     url: '../tool/saveMoveColumn.php?class=<?php echo get_class($obj);?>&totalDiv='+totalDiv+'&mode=size&jsonValue='+jsonValue,
-    load: function(data,args) { 
+    load: function(data,args) {
+     if(data){
+console.log(colLayout[9]._props.grid.__proto__);
+       //console.log(dojo.byId('objectGridHdr1'));
+      }
     }
   });
   </script>
