@@ -1615,7 +1615,6 @@ $listStatus = $object->getExistingStatus();
     load: function(data,args) {
      if(data){
 console.log(colLayout[9]._props.grid.__proto__);
-       //console.log(dojo.byId('objectGridHdr1'));
       }
     }
   });
