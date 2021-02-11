@@ -25,7 +25,7 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 require_once "../tool/projeqtor.php";
-
+$data = false;
 $class = RequestHandler::getClass('class');
 $jsonValue = RequestHandler::getValue('jsonValue');
 $userId = getCurrentUserId();
@@ -42,10 +42,23 @@ if($mode=='size'){
     $list[$id] = ceil(round($list[$id]/intval($totalDiv) * 100,1));
   }
   $total = 0;
-  foreach ($list as $percent){
+  foreach ($list as $idList=>$percent){
+    if($total>=100){
+      $list[$idList]='hidden';
+    }
+    if($total+$percent > 100 and $total < 100){
+      $percent = 100-$total;
+      $list[$idList] = $percent;
+      debugLog($percent.' mon pourcent'. $list[$idList]. ' idList');
+    }
     $total += $percent;
   }
+  if($total < 100){
+    $list[sizeof($list)-1] += (100 - $total) ;
+    $data = sizeof($list)-1;
+  }
 }
+debugLog($list);
 Sql::beginTransaction();
 foreach ($currentList as $id=>$obj){
 if($mode=='move'){
@@ -55,11 +68,19 @@ if($mode=='move'){
      $obj->save();
    }
   }else{
+    debugLog($obj->widthPct.'--'.$obj->field);
     if($list[$id] != $obj->widthPct){
-      $obj->widthPct = $list[$id];
-      $obj->save();
+      if($list[$id]=='hidden'){
+        $obj->hidden= 1;
+      }else{
+        $obj->widthPct = $list[$id];
+      }
     }
+    $obj->saveForced();
   }
 }
 Sql::commitTransaction();
+if($data){
+  echo $data;
+}
  ?>
