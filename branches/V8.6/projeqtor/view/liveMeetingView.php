@@ -31,11 +31,9 @@ if (! $meeting->id) {
   throwError ( 'Parameter idMeeting not found in DBBASE' );
 }
 $liveMeeting = new LiveMeeting ();
-$findMeLi = $liveMeeting->getSqlElementsFromCriteria ( array (
-    'idMeeting' => $idMeeting 
-) );
-if (count ( $findMeLi ) != 0)
-  $liveMeeting = reset ( $findMeLi );
+$findMeLi = $liveMeeting->getSqlElementsFromCriteria(array('idMeeting' => $idMeeting),true);
+if (count ( $findMeLi ) != 0) $liveMeeting = reset ( $findMeLi );
+else $liveMeeting->idMeeting=$idMeeting;
 $param = "{}";
 $noModif=true; //a changer si ya une modif
 $arrayToDel=array();
@@ -45,10 +43,12 @@ $time=0;
 if(count($meeting->_Assignment)==0){
   $liveMeeting->param=null;
   $liveMeeting->result=$meeting->result;
-  $liveMeeting->save();
+  $resSaveLM=$liveMeeting->save();
+  if (getLastOperationStatus($resSaveLM)=='INVALID') traceLog("liveMeetingView.php => save LM without assignment : $resSaveLM");
 }else if($liveMeeting->result!=$meeting->result){
   $liveMeeting->result=$meeting->result;
-  $liveMeeting->save();
+  $resSaveLM=$liveMeeting->save();
+  if (getLastOperationStatus($resSaveLM)=='INVALID') traceLog("liveMeetingView.php => save LM with assignment : $resSaveLM");
 }
 if (isset ( $liveMeeting->param )){
   $param = json_decode ( $liveMeeting->param, true );
