@@ -1613,9 +1613,17 @@ $listStatus = $object->getExistingStatus();
     dojo.xhrGet({
     url: '../tool/saveMoveColumn.php?class=<?php echo get_class($obj);?>&totalDiv='+totalDiv+'&mode=size&jsonValue='+jsonValue,
     load: function(data,args) {
-     if(data){
-console.log(colLayout[9]._props.grid.__proto__);
-      }
+    if(data){
+      arrayData=data.split('#!#!#!#!#!#');
+      objectGrid.setCellWidth(arrayData[0], arrayData[1]);
+      dojo.forEach(grid.layout.cells, function(cell,idx){
+        if(idx==arrayData[0]){
+            grid.setCellWidth(idx, arrayData[1]);
+            cell.view.update(); 
+          }
+        });
+    objectGrid.update();
+    }
     }
   });
   </script>

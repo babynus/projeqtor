@@ -25,6 +25,7 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 require_once "../tool/projeqtor.php";
+$data = false;
 $class = RequestHandler::getClass('class');
 $jsonValue = RequestHandler::getValue('jsonValue');
 $userId = getCurrentUserId();
@@ -48,12 +49,14 @@ if($mode=='size'){
     if($total+$percent > 100 and $total < 100){
       $percent = 100-$total;
       $list[$idList] = $percent;
-      debugLog($percent.' mon pourcent'. $list[$idList]. ' idList');
     }
     $total += $percent;
   }
   if($total < 100){
     $list[sizeof($list)-1] += (100 - $total) ;
+    $data = sizeof($list)-1;
+    $data .= "#!#!#!#!#!#";
+    $data .= round(($list[sizeof($list)-1]*$totalDiv/100))."px";
   }
 }
 Sql::beginTransaction();
@@ -76,4 +79,8 @@ if($mode=='move'){
   }
 }
 Sql::commitTransaction();
+
+if($data){
+  echo $data;
+}
  ?>
