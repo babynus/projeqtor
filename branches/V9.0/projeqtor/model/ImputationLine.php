@@ -110,6 +110,9 @@ class ImputationLine {
     if ($rangeType=='week') {
       $nbDays=7;
     }
+    if ($rangeType=='day') {
+    	$nbDays=1;
+    }
     $startDate=self::getFirstDay($rangeType, $rangeValue);
     $plus=$nbDays-1;
     $endDate=date('Y-m-d', strtotime("+$plus days", strtotime($startDate)));
@@ -557,6 +560,8 @@ class ImputationLine {
       $week=substr($rangeValue, 4, 2);
       $day=firstDayofWeek($week, $year);
       return date('Y-m-d', $day);
+    }else if($rangeType=='day'){
+      return date('Y-m-d');
     }
   }
 
