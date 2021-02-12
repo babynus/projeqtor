@@ -433,6 +433,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       saveResolutionToSession();
       saveBrowserLocaleToSession();
       aboutMessage="<?php echo $aboutMessage;?>";
+      aboutMessage+='<br/><b>PHP <?php echo phpversion();?></b><br/>';
       aboutMessage+='<br/><b>'+i18n('externalLibrary')+'</b><br/>';
       aboutMessage+='&nbsp;&nbsp;.&nbsp;Dojo : '+dojo.version.major+"."+dojo.version.minor+"."+dojo.version.patch+'<br/>';
       aboutMessage+='&nbsp;&nbsp;.&nbsp;html2pdf : <?php use Spipu\Html2Pdf\Html2Pdf;require_once '../external/html2pdf/vendor/autoload.php';$html2pdf = new Html2Pdf();echo $html2pdf->getVersion();?>'+'<br/>';
