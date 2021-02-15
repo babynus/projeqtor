@@ -512,7 +512,7 @@
                     <?php echo autoOpenFilteringSelect();?>
                     name="updateReferenceItem" id="updateReferenceItem" required="true">
                       <option value="*"><?php echo i18n('all')?></option>
-                      <?php htmlDrawOptionForReference('idReferencable', null, null, true);?> 
+                      <?php htmlDrawOptionForReference('idReferencable', null, null, true,null,null,null,null,false);?> 
                   </select>
                 </td>
               </tr>
