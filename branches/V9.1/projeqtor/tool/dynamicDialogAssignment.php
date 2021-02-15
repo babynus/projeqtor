@@ -466,7 +466,7 @@ if ($planningMode=='RECW') {
           </tr>
           <tr>
             <td colspan="2">
-              <button class="smallTextButton" dojoType="dijit.form.Button" type="button" >
+              <button class="<?php echo (isNewGui())?'':'roundedVisibleButton';?>" dojoType="dijit.form.Button" type="button" >
               <script type="dojo/connect" event="onClick" >
                 var val1=dijit.byId('recurringAssignmentW1').get('value');
                 for (var i=2; i<=7; i++) {
