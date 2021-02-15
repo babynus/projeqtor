@@ -33,6 +33,7 @@ class Referencable extends SqlElement {
   // extends SqlElement, so has $id
   public $id;    // redefine $id to specify its visible place 
   public $name;
+  public $idle;
   
   public $_isNameTranslatable = true;
    /** ==========================================================================
