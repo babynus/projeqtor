@@ -962,7 +962,6 @@ if ($type == 'empty') {
     if ($currentStatus->isCopyStatus) {
       $listAll=SqlList::getList('Status','id');
       $compTable[reset($listAll)]='ok';
-      unset($compTable[currentStatus]);
     }
     $table = array_intersect_key ( $table, $compTable );
   } else {
