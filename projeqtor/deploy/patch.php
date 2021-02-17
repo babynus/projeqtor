@@ -22,7 +22,7 @@
 
 $version="V9.0";
 $nbDays=1; // days
-if (isset($_REQUEST['nbDays'])) $nbDays=intval($_REQUEST[nbDays]);
+if (isset($_REQUEST['nbDays'])) $nbDays=intval($_REQUEST['nbDays']);
 if ($nbDays<1) $nbDays=1;
 $dateCheck=date("Y-m-d 00:00:00",time()-(($nbDays-1) * 24 * 60 * 60));
 $scanDir=array('api','db','model','report','sso','tool','view');
