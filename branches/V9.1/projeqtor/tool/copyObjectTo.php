@@ -118,7 +118,10 @@ if (RequestHandler::isCodeSet('copyToProject')) {
 }
 
 $copyStructure = RequestHandler::getValue('copyStructure');
-  
+$duplicateLinkedTestsCases = RequestHandler::getValue('duplicateLinkedTestsCases');
+if($copyToWithLinks and $duplicateLinkedTestsCases){
+  $copyToWithLinks = false;
+}
 Sql::beginTransaction();
 PlanningElement::$_noDispatch=true;
 SqlElement::$_doNotSaveLastUpdateDateTime=true;
@@ -165,6 +168,22 @@ if (!$error and $copyToLinkOrigin) {
   $resLink=$link->save();
 }
 
+if(!$error and $copyStructure and get_class($obj)=='Requirement') {
+  $res=Requirement::copyStructure($obj, $newObj, $copyToOrigin, $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, $copyAssignments, null, $toProject,$duplicateLinkedTestsCases);
+}
+if(!$error and $duplicateLinkedTestsCases and get_class($obj)=='Requirement'){
+  $link = new Link();
+  $listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>'Requirement','ref1Id'=>$obj->id,'ref2Type'=>'TestCase'));
+  foreach ($listLink as $lk){
+    $tc = new TestCase($lk->ref2Id);
+    $newTc = $tc->copy();
+    $newTc->save();
+    $newLink = $lk->copy();
+    $newLink->ref1Id = $newObj->id;
+    $newLink->ref2Id = $newTc->id;
+    $newLink->save();
+  }
+}
 // Message of correct saving
 $status = displayLastOperationStatus($result);
 if ($status == "OK") {

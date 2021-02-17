@@ -166,7 +166,7 @@ class AssetMain extends SqlElement {
       $assList=$ass->getSqlElementsFromCriteria(array('idAsset'=>$this->id));
       foreach($assList as $val) {
         $val->idAsset = $result->id;
-        $val->copyTo($newClass, $newType, $val->name, $newProject, $structure, $withNotes, $withAttachments, $withLinks);
+        $val->copyTo($newClass, $val->idAssetType, $val->name, $newProject, $structure, $withNotes, $withAttachments, $withLinks);
       }
     }
     return $result;
