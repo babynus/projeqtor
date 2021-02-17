@@ -135,6 +135,31 @@ if($copyType=="copyObjectTo"){
            </tr>
            <?php }?>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                 <?php  if($objectClass=='Requirement'){?>
+            <tr>
+             <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
+               <label for="copyStructure" style="width:90%;text-align: right;"><?php echo i18n("copyStructure") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+               <?php $isCheckedSructure=true;$isCheckedSructure=Parameter::getUserParameter('isCheckedSructure'.$objectClass);?>
+               <div id="copyStructureRequirement" name="copyStructure" dojoType="dijit.form.CheckBox" <?php if ($isCheckedSructure=='true') echo " checked ";?> type="checkbox" >
+               <script type="dojo/method" event="onChange" >
+                  saveDataToSession('isCheckedSructure<?php echo $objectClass;?>',((this.checked)?true:false),true);
+               </script>
+               </div>
+             </td>
+           </tr>
+           <tr>
+             <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
+               <label for="duplicateLinkedTestsCases" style="width:90%;text-align: right;"><?php echo i18n("DuplicateLinkedTestsCases") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+               <?php $isCheckedDuplicateLink=true;$isCheckedDuplicateLink=Parameter::getUserParameter('isCheckedDuplicateLink'.$objectClass);?>
+               <div id="duplicateLinkedTestsCases" name="duplicateLinkedTestsCases" dojoType="dijit.form.CheckBox" <?php if ($isCheckedDuplicateLink=='true') echo " checked ";?> type="checkbox" >
+               <script type="dojo/method" event="onChange" >
+                  saveDataToSession('isCheckedDuplicateLink<?php echo $objectClass;?>',((this.checked)?true:false),true);
+               </script>
+               </div>
+             </td>
+           </tr>
+           
+            <?php } ?>
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                <div id="copyWithStructureDiv" style="display:none;">
