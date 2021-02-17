@@ -322,6 +322,45 @@ class RequirementMain extends SqlElement {
   	$result=parent::save();
     return $result;
   }
+
+  static function copyStructure($obj, $newObj, $copyToOrigin=false, 
+      $copyToWithNotes=false, $copyToWithAttachments=false, $copyToWithLinks=false, 
+      $copyAssignments=false, $copyAffectations=false, $toProject=null, $copySubProjects=false ,$duplicateLinkedTestsCases=false){
+    if (  get_class($newObj)=='Requirement') {
+      $req = new Requirement();
+      $reqList=$req->getSqlElementsFromCriteria(array('idRequirement'=>$obj->id));
+      foreach ($reqList as $val){
+        $val->idRequirement = $newObj->id;
+        $newItem=$val->copyTo(get_class($val), $val->idRequirementType, $val->name, ($toProject)?$toProject:$val->idProject, $copyToOrigin, $copyToWithNotes, $copyToWithAttachments, $copyToWithLinks);
+        $resultItem=$newItem->_copyResult;
+        
+        $link = new Link();
+        $listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>'Requirement','ref1Id'=>$val->id,'ref2Type'=>'TestCase'));
+        foreach ($listLink as $lk){
+          $tc = new TestCase($lk->ref2Id);
+          $newTc = $tc->copy();
+          $newTc->save();
+          $newLink = $lk->copy();
+          $newLink->ref1Id = $newItem->id;
+          $newLink->ref2Id = $newTc->id;
+          $newLink->save();
+        }
+        
+        unset($newItem->_copyResult);
+        if (! stripos($resultItem,'id="lastOperationStatus" value="OK"')>0 ) {
+          return $resultItem;
+        }
+        // recursively call copy structure
+        $res=self::copyStructure($val, $newItem, $copyToOrigin,
+            $copyToWithNotes, $copyToWithAttachments, $copyToWithLinks,
+            $copyAssignments, $copyAffectations,$toProject,$copySubProjects);
+        if ($res!='OK') {
+          return $res;
+        }
+      }
+      return "OK"; // No error ;)
+    }
+  }
   
   public function drawSpecificItem($item){
     global $print;
