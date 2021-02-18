@@ -4254,9 +4254,7 @@ function showFilterDialog() {
     dojo.style(dijit.byId('filterValueDate').domNode, {
       display : 'none'
     });
-    dojo.style(dijit.byId('filterSortValueList').domNode, {
-      display : 'none'
-    });
+
     dojo.byId('filterDynamicParameterPane').style.display='none';
     if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
     dijit.byId('idFilterAttribute').reset();
@@ -12351,4 +12349,327 @@ function changeSpeedAnimation (val){
     break;
   }
   saveUserParameter('animationSpeedMode',val);
+}
+
+
+function multipleUpadteSelectAtribute(value) {
+  if (value) {
+    filterStartInput=true;
+    dijit.byId('idMultipleUpdateAttribute').store.fetchItemByIdentity({
+      identity : value,
+      onItem : function(item) {
+        var dataType=dijit.byId('idMultipleUpdateAttribute').store.getValue(
+            item, "dataType", "inconnu");
+        if(value=="refTypeIncome" || value=="refTypeExpense"){
+          dataType="list";
+        }
+        var datastoreOperator=new dojo.data.ItemFileReadStore({
+          url : '../tool/jsonList.php?listType=operator&actualView=MultipleUpadate&dataType=' + dataType
+        });
+        var storeOperator=new dojo.store.DataStore({
+          store : datastoreOperator
+        });
+        storeOperator.query({
+          id : "*"
+        });
+        dojo.byId('multipleUpdateOperateur').visibility = 'visible';
+        if(dataType!='textarea'){
+          if(dojo.byId('multipleUpdateOperateur').firstChild.innerHTML==undefined || dojo.byId('multipleUpdateOperateur').firstChild.innerHTML!=i18n('replaceMultipleUpadte') ){
+            var spanVal=document.createElement('span');
+            spanVal.setAttribute('style','position:relative;top:10px;');
+            spanVal.innerHTML=i18n('replaceMultipleUpadte');
+            if(dojo.byId('multipleUpdateOperateur').firstChild.innerHTML!=undefined )dojo.byId('multipleUpdateOperateur').removeChild(dojo.byId('multipleUpdateOperateur').firstChild);
+            dojo.byId('multipleUpdateOperateur').insertAdjacentElement('afterbegin',spanVal);
+          }
+        }
+        if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
+        dojo.byId('dataTypeSelected').value=dataType;
+        if (dataType == "bool") {
+          filterType="bool";
+          dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
+            display : 'none'
+          });
+          if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
+          if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { 
+            dojo.style(dijit.byId('multipleUpdateValueCheckboxSwitch').domNode, {
+              display : 'block'
+            });
+            dijit.byId('multipleUpdateValueCheckbox').set('value', 'off');
+          } else {
+            dojo.style(dijit.byId('multipleUpdateValueCheckbox').domNode, {
+              display : 'block'
+            });
+            dijit.byId('multipleUpdateValueCheckbox').set('checked', '');
+          }
+          dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+            display : 'none'
+          });
+        } else if (dataType == "list") {
+          filterType="list";
+          var extraUrl="";
+          if (value == 'idTargetVersion' || value == 'idTargetProductVersion' || value == 'idOriginalProductVersion') {
+            value='idProductVersion';
+            extraUrl='&critField=idle&critValue=all';
+          } else if (value == 'idTargetComponentVersion' || value == 'idOriginalComponentVersion') {
+            value='idComponentVersion';
+            extraUrl='&critField=idle&critValue=all';
+          }
+          var urlListFilter='../tool/jsonList.php?required=true&listType=list&dataType='+value;
+
+          if (typeof currentSelectedProject!='undefined' && currentSelectedProject!='' && currentSelectedProject!='*') {
+          if (value=='idActivity') {
+              urlListFilter+='&critField=idProjectSub&critValue='+currentSelectedProject;
+            } if (value=='idComponent') {
+              // noting
+            } else {
+              urlListFilter+='&critField=idProject&critValue='+currentSelectedProject;
+            }
+            if (extraUrl=='&critField=idle&critValue=all') {
+              extraUrl=='&critField1=idle&critValue1=all';
+            }
+          }
+          if (extraUrl!="") {
+            urlListFilter+=extraUrl;
+          }  
+          var tmpStore=new dojo.data.ItemFileReadStore({
+            url : urlListFilter
+          });
+          var mySelect=dojo.byId("multipleUpdateValueList");
+          mySelect.options.length=0;
+          var nbVal=0;
+          if(dijit.byId('idMultipleUpdateAttribute').getValue()=="idBusinessFeature"){
+            var listId = "";
+            tmpStore.fetch({
+                query : {
+                  id : "*"
+                },
+                onItem : function(item) {
+                  listId += (listId != "") ? '_' : '';
+                    listId += parseInt(tmpStore.getValue(item, "id", ""), 10) + '';
+                    nbVal++;
+                },
+                onError : function(err) {
+                  console.info(err.message);
+                },
+                onComplete : function() { 
+                  dojo.xhrGet({
+                  url : '../tool/getProductNameFromBusinessFeature.php?listId=' + listId,
+                handleAs : "text",
+                load: function(data){
+                  var listName = JSON.parse(data);
+                  tmpStore.fetch({
+                          query : {
+                            id : "*"
+                          },
+                          onItem : function(item) {
+                            mySelect.options[mySelect.length]=new Option(tmpStore.getValue(item, "name", "") + " (" + listName[tmpStore.getValue(item, "id", "")] + ")", tmpStore.getValue(item, "id", ""));
+                          },
+                          onError : function(err) {
+                            console.info(err.message);
+                          }
+                        });
+                }
+                  });
+                 }
+              });
+          }else{
+            tmpStore.fetch({
+                  query : {
+                    id : "*"
+                  },
+                  onItem : function(item) {
+                    mySelect.options[mySelect.length]=new Option(tmpStore.getValue(
+                        item, "name", ""), tmpStore.getValue(item, "id", ""));
+                    nbVal++;
+                  },
+                  onError : function(err) {
+                    console.info(err.message);
+                  }
+                });
+          }
+          dojo.removeAttr('multipleUpdateValueList','multiple');
+          dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
+            display : 'block'
+          });
+          if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="block";
+          dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
+            display : 'block'
+          });
+          dijit.byId('showDetailInMultipleUpdate').set('value', item.id);
+          dijit.byId('multipleUpdateValueList').reset();
+          dojo.style(dijit.byId('multipleUpdateValueCheckbox').domNode, {
+            display : 'none'
+          });
+          if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { 
+            dojo.style(dijit.byId('multipleUpdateValueCheckboxSwitch').domNode, {
+              display : 'none'
+            });
+          }
+          dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+            display : 'none'
+          });
+        } else if (dataType == "date") {
+          filterType="date";
+          dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
+            display : 'none'
+          });
+          if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
+          dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueCheckbox').domNode, {
+            display : 'none'
+          });
+          if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { 
+            dojo.style(dijit.byId('multipleUpdateValueCheckboxSwitch').domNode, {
+              display : 'none'
+            });
+          }
+          dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
+            display : 'block'
+          });
+          dijit.byId('multipleUpdateValueDate').reset();
+        } else if (dataType=="textarea"){
+          dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+            display : 'block'
+          });
+          if(dojo.byId('multipleUpdateOperateur').firstChild.innerHTML==undefined || dojo.byId('multipleUpdateOperateur').firstChild.innerHTML!=i18n('addMultipleUpdate')){
+            var spanVal=document.createElement('span');
+            spanVal.setAttribute('style','position:relative;top:10px;');
+            spanVal.innerHTML=i18n('addMultipleUpdate');
+            if(dojo.byId('multipleUpdateOperateur').firstChild.innerHTML!=undefined )dojo.byId('multipleUpdateOperateur').removeChild(dojo.byId('multipleUpdateOperateur').firstChild);
+            dojo.byId('multipleUpdateOperateur').insertAdjacentElement('afterbegin',spanVal);
+          }
+          dojo.byId('multipleUpdateOperateur').visibility = 'hidden';
+          dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
+            display : 'none'
+          });
+          if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
+          dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueCheckbox').domNode, {
+            display : 'none'
+          });
+          if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { 
+            dojo.style(dijit.byId('multipleUpdateValueCheckboxSwitch').domNode, {
+              display : 'none'
+            });
+          }
+          dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
+            display : 'none'
+          });
+        }else {
+          filterType="text";
+          dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+            display : 'block'
+          });
+          dijit.byId('newMultipleUpdateValue').reset();
+          dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
+            display : 'none'
+          });
+          if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
+          dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueCheckbox').domNode, {
+            display : 'none'
+          });
+          if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { 
+            dojo.style(dijit.byId('multipleUpdateValueCheckboxSwitch').domNode, {
+              display : 'none'
+            });
+          }
+          dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+            display : 'none'
+          });
+        }
+      },
+      onError : function(err) {
+        dojo.byId('multipleUpdateOperateur').visibility = 'hidden';
+        dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+          display : 'none'
+        });
+        dojo.style(dijit.byId('newMultipleUpdateValueueList').domNode, {
+          display : 'none'
+        });
+        if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
+        dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
+          display : 'none'
+        });
+        dojo.style(dijit.byId('multipleUpdateValueCheckbox').domNode, {
+          display : 'none'
+        });
+        if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { 
+          dojo.style(dijit.byId('multipleUpdateValueCheckboxSwitch').domNode, {
+            display : 'none'
+          });
+        }
+        dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
+          display : 'none'
+        });
+        dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+          display : 'none'
+        });
+        // hideWait();
+      }
+    });
+    dijit.byId('newMultipleUpdateValue').reset();
+    dijit.byId('multipleUpdateValueList').reset();
+    dijit.byId('multipleUpdateValueCheckbox').reset();
+    if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { dijit.byId('multipleUpdateValueCheckboxSwitch').reset();}
+    dijit.byId('multipleUpdateValueDate').reset();
+    dijit.byId('multipleUpdateTextArea').reset();
+    
+  } else {
+    dojo.byId('multipleUpdateOperateur').visibility = 'hidden';
+    dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+      display : 'none'
+    });
+    dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
+      display : 'none'
+    });
+    if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
+    dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
+      display : 'none'
+    });
+    dojo.style(dijit.byId('multipleUpdateValueCheckbox').domNode, {
+      display : 'none'
+    });
+    if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { 
+      dojo.style(dijit.byId('multipleUpdateValueCheckboxSwitch').domNode, {
+        display : 'none'
+      });
+    }
+    dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
+      display : 'none'
+    });
+    dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+      display : 'none'
+    });
+  }
 }
