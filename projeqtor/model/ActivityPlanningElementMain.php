@@ -369,8 +369,8 @@ class ActivityPlanningElementMain extends PlanningElement {
       $parent=new $this->topRefType($this->topRefId);
       
     }
-    $element=new $this->refType ($this->refId);
-    if (SqlList::getFieldFromId("Status", $element->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1) ){
+    if($this->refId)$element=new $this->refType ($this->refId);
+    if (isset($element) and SqlList::getFieldFromId("Status", $element->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1) ){
       self::$_fieldsAttributes["paused"]="readonly";
     }
   }
