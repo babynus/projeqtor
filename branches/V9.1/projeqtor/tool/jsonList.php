@@ -33,6 +33,7 @@
 require_once "../tool/projeqtor.php";
 // scriptLog(' ->/tool/jsonList.php');
 $type = $_REQUEST ['listType']; // Note: checked against constant values.
+$view=(RequestHandler::isCodeSet('actualView'))?RequestHandler::getValue('actualView'):'Filter';
 if (isset ( $_REQUEST ['critField'] )) {
   $field = $_REQUEST ['critField'];
   Security::checkValidAlphanumeric ( $field );
@@ -83,7 +84,12 @@ if ($type == 'empty') {
   Security::checkValidClass ( $objectClass, 'objectClass' );
   $obj = new $objectClass ();
   ob_start();
-  $nbRows = listFieldsForFilter ( $obj, 0 );
+  if($view!='MultipleUpadate'){
+    $nbRows = listFieldsForFilter ( $obj, 0 );
+  }else{
+    $nbRows = listFieldsForMultipleUpdate ( $obj, 0 );
+  }
+  
   $json=ob_get_clean();
   $jsonValid='{"identifier":"id", "items":['.$json.']}';
   $arr=json_decode($jsonValid);
@@ -1023,6 +1029,49 @@ function listFieldsForFilter($obj, $nbRows, $included = false) {
       echo ', ';
     echo '{"id":"Note", "name":"' . i18n ( 'colNote' ) . '", "dataType":"refObject"}';
     $nbRows ++;
+  }
+  return $nbRows;
+}
+
+function listFieldsForMultipleUpdate($obj, $nbRows, $included = false) {
+  global $extraHiddenFields, $extraReadonlyFields, $peExtraHiddenFields, $peExtraReadonlyFields;
+  if (!$extraHiddenFields) $extraHiddenFields = $obj->getExtraHiddenFields ( null, null, getSessionUser ()->getProfile () );
+  if (!$extraReadonlyFields) $extraReadonlyFields = $obj->getExtraReadonlyFields ( null, null, getSessionUser ()->getProfile () );
+  if (method_exists($obj,'setAttributes')) $obj->setAttributes();
+  
+  foreach ( $obj as $col => $val ) {
+    
+    if ($col=='_Assignment') {
+      if ($nbRows > 0) echo ', ';
+      echo '{"id":"' . ($included ? get_class ( $obj ) . '_' : '') . 'assignedResource__idResourceAll' . '", "name":"' . i18n("assignedResource") . '", "dataType":"list"}';
+      continue;
+    }
+    if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'readonly' ) and
+    ! $included  and  ! in_array($col,$extraHiddenFields) and ! in_array($col,$extraReadonlyFields) and $col != 'id' and $col != '_Note' and $col != '_wbs') {
+      
+      if ($nbRows > 0)echo ', ';
+      $dataType = $obj->getDataType ( $col );
+      $dataLength = $obj->getDataLength ( $col );
+      if ($dataType == 'int' and $dataLength == 1) {
+        $dataType = 'bool';
+      } else if ($dataType == 'datetime') {
+        $dataType = 'date';
+      } else if (isForeignKey($col, $obj)) {
+        $dataType = 'list';
+      }elseif ($dataType == 'varchar' and $dataLength >4000){
+        $dataType = 'textarea';
+      }
+
+      $colName = $obj->getColCaption ( $col );
+      if (substr ( $col, 0, 9 ) == 'idContext') {
+        $colName = SqlList::getNameFromId ( 'ContextType', substr ( $col, 9 ) );
+      }
+      echo '{"id":"' . ($included ? get_class ( $obj ) . '_' : '') . $col . '", "name":"' . $colName . '", "dataType":"' . $dataType . '"}';
+      $nbRows ++;
+    } else if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) == ucfirst ( substr ( $col, 0, 1 ) )) {
+      $sub = new $col ();
+      $nbRows = listFieldsForMultipleUpdate ( $sub, $nbRows, true );
+    }
   }
   return $nbRows;
 }
