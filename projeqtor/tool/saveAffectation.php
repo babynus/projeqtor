@@ -105,9 +105,9 @@ if (! $idTeam and !$idOrganization) {
 	$result=$affectation->save();
 } else {
     if($idOrganization){
-      $crit=array('idOrganization'=>$idOrganization);
+      $crit=array('idOrganization'=>$idOrganization,'idle'=>'0');
     }else if($idTeam){
-      $crit=array('idTeam'=>$idTeam);
+      $crit=array('idTeam'=>$idTeam,'idle'=>'0');
     }
 	$ress=new Resource();
 	$list=$ress->getSqlElementsFromCriteria($crit, false);
