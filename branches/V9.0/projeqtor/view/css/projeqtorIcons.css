@@ -145,17 +145,17 @@
 .ProjeQtOrNewGui .iconButtonRefresh { background-image: url(customIcons/new/iconRefresh.svg);  background-repeat: no-repeat;}
 
 .iconButtonPassed16 { background-image: url(images/iconPassed16.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconButtonPassed16 { background-image: url(customIcons/blue/iconPassed16.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconButtonPassed16 { background-image: url(customIcons/green/iconPassed16.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconButtonPassed16 { background-image: url(customIcons/grey/iconPassed16.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconButtonPassed16 { background-image: url(customIcons/red/iconPassed16.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconButtonPassed16 { background-image: url(images/iconPassed16.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconButtonPassed16 { background-image: url(images/iconPassed16.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconButtonPassed16 { background-image: url(images/iconPassed16.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconButtonPassed16 { background-image: url(cimages/iconPassed16.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonPassed16 { background-image: url(images/iconPassed16.png);  background-repeat: no-repeat; }
 
 .iconButtonFailed16 { background-image: url(images/iconFailed16.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconButtonFailed16 { background-image: url(customIcons/blue/iconFailed16.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconButtonFailed16 { background-image: url(customIcons/green/iconFailed16.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconButtonFailed16 { background-image: url(customIcons/grey/iconFailed16.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconButtonFailed16 { background-image: url(customIcons/red/iconFailed16.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatBlue .iconButtonFailed16 { background-image: url(images/iconFailed16.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconButtonFailed16 { background-image: url(images/iconFailed16.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconButtonFailed16 { background-image: url(images/iconFailed16.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconButtonFailed16 { background-image: url(images/iconFailed16.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconButtonFailed16 { background-image: url(images/iconFailed16.png);  background-repeat: no-repeat; }
 
 .iconButtonBlocked16 { background-image: url(images/iconBlocked16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
