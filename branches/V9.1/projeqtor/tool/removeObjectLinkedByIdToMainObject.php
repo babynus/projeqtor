@@ -54,6 +54,7 @@ if (! array_key_exists('linkObjectClassName',$_REQUEST)) {
 }
 $linkObjectClassName = $_REQUEST['linkObjectClassName'];
 
+if ($linkObjectClassName=='Resource') $linkObjectClassName='ResourceAll';
 Sql::beginTransaction();
 $obj=new $linkObjectClassName($idLinkObject);
 $obj->$idMainObjectClassName=null;
