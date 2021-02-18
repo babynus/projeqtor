@@ -876,6 +876,8 @@ class ResourceMain extends SqlElement {
     $result .= '</tr>';
     $result .= '</tr>';
     foreach ($resList as $res){
+      $subClass=get_class($res);
+      if ($subClass=='ResourceAll') $subClass=($res->isResourceTeam)?'ResourceTeam':'Resource';
       $result .= '<tr>';
       if (!$print) {
         $result .= '<td class="noteData smallButtonsGroup">';
@@ -889,8 +891,8 @@ class ResourceMain extends SqlElement {
         $result .= '</td>';
       }
       if (array_key_exists($res->id, $listVisibleLinkedObj)) {
-        if (!$print and  securityCheckDisplayMenu(null, get_class($res)) and securityGetAccessRightYesNo('menu'.get_class($res), 'read', '') == "YES"){
-          $goto=' onClick="gotoElement(\''.get_class($res).'\',\'' . htmlEncode($res->id) . '\');" style="cursor: pointer;" ';
+        if (!$print and  securityCheckDisplayMenu(null, $subClass) and securityGetAccessRightYesNo('menu'.$subClass, 'read', '') == "YES"){
+          $goto=' onClick="gotoElement(\''.$subClass.'\',\'' . htmlEncode($res->id) . '\');" style="cursor: pointer;" ';
         }else {
           $goto="";
         }
