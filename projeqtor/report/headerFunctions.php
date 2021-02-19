@@ -108,7 +108,7 @@ function excelName($name=null, $quote='"') {
   } else {
     $lastName=$name;
   }
-  return ' _excel-name='.$quote.$name.$quote.' ';
+  return ' _excel-name='.$quote.substr(str_replace(' - ',' ',$name),0,31).$quote.' ';
   
 }
 function excelFormatCell($cellType='data',$width=null, $color=null, $bgcolor=null, $bold=null, $hAlign=null, $vAlign=null,$fontSize=null,$valueType=null,$noWrap=false, $noBorder=false) {
