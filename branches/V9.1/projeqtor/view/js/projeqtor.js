@@ -1283,6 +1283,12 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           }
           if (isResultMessage) {    
             var contentNode = dojo.byId(destination);
+            var lastOperationStatus = dojo.byId('lastOperationStatus');
+            var lastOperation = dojo.byId('lastOperation');
+            if (! (lastOperationStatus && lastOperation) ) {
+              consoleTraceLog("***** Error **** isResultMessage without lastOperation or lastOperationStatus");
+              consoleTraceLog(data);
+            }
             dojo.fadeIn({
               node : contentNode,
               duration : 100,

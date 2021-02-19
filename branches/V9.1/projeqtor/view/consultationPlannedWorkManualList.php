@@ -256,7 +256,7 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
                 }
               }?>
     
-          <div id="activityTableCons" name="activityTableCons" style="margin:20px;">
+          <div id="activityTableCons" name="activityTableCons" style="margin:20px;min-width:1575px">
           <?php if(!$displayNothing){
                   if(isset($idProject)){
                     if(trim($idProject)==''){
@@ -279,7 +279,7 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
             }
           ?>
           </div>
-          <div id="consPlannedWorkManualInterventionDiv"  name="consPlannedWorkManualInterventionDiv" style="min-width:1123px;left:475px;top:20px;position:absolute;">
+          <div id="consPlannedWorkManualInterventionDiv"  name="consPlannedWorkManualInterventionDiv" style="min-width:1123px;left:485px;top:20px;position:absolute;">
             
                   <?php 
                   if(!$displayNothing){
