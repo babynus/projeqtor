@@ -858,7 +858,7 @@
     						if ($class=="TargetVersion" or $class=="TargetProductVersion" or $class=="TargetComponentVersion"
     						 or $class=="OriginalVersion" or $class=="OriginalProductVersion" or $class=="OriginalComponentVersion") $class='Version';
     						if ($exportReferencesAs=='name') {
-    						  if ($id=='idDocumentDirectory') {
+    						  if (strtolower($id)=='iddocumentdirectory') {
     						    $val=SqlList::getFieldFromId($class, $val,'location');
     						  } else if (property_exists($class, 'name')){
     					      $val=SqlList::getNameFromId($class, $val);
