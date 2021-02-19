@@ -172,7 +172,16 @@ foreach ($lstWork as $work) {
   	$activityWork[$work->refId][$work->idProject]=0;
   }
   $activityWork[$work->refId][$work->idProject] +=$work->work;
-  $activityRes[$work->idResource][$work->refId]=$activityWork[$work->refId];
+  if (! array_key_exists($work->idResource,$activityRes)) {
+    $activityRes[$work->idResource]=array();
+  }
+  if (! array_key_exists($work->refId,$activityRes[$work->idResource])) {
+    $activityRes[$work->idResource][$work->refId]=array();
+  }
+  if (! array_key_exists($work->idProject,$activityRes[$work->idResource][$work->refId])) {
+    $activityRes[$work->idResource][$work->refId][$work->idProject]=0;
+  }
+  $activityRes[$work->idResource][$work->refId][$work->idProject]+=$work->work;
 }
 if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
 // title
