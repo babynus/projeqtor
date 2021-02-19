@@ -4651,11 +4651,8 @@ abstract class SqlElement {
             //if ( ( ! $val and $val !== 0) or trim ( $val ) == '') {
             if ( ( ! $val) or trim ( $val ) == '') { // Since PHP 7.1, all numeric fields have default value zero and cannot be null  
               $result .= '<br/>'. i18n ( 'messageMandatory', array($this->getColCaption ( $col )) );
-              if(Parameter::getUserParameter('paramLayoutObjectDetail')=='tab' and !$fielMessageExist){
-                if(!$fielMessageExist){
-                  self::addFirstErrorField($this,$col,$result,$fielMessageExist);
-                }
-                
+              if(!$fielMessageExist){
+                  self::addFirstErrorField($this,$col,$result,Parameter::getUserParameter('paramLayoutObjectDetail'),$fielMessageExist);
               }
             }
           }
@@ -8029,26 +8026,32 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
   }
   //
   
-  public function addFirstErrorField($obj,$col,&$result,&$exist){
+  public function addFirstErrorField($obj,$col,&$result,$layout,&$exist){
     $sectionPosition=self::setSectionPosition();
       $exist=true;
-      $section='';
-      foreach ($obj as $id=>$val){
-        if(substr($id, 0,5 )=='_sec_'){
-          $section=substr($id,5);
+      if($layout=='tab'){
+        $section='';
+        foreach ($obj as $id=>$val){
+          if(substr($id, 0,5 )=='_sec_'){
+            $section=substr($id,5);
+          }
+          if($id==$col){
+            break;
+          }
         }
-        if($id==$col){
-          break;
+        $position='detail';
+        
+        if(isset($sectionPosition[$section]['99'])){
+          $position=$sectionPosition[$section]['99'];
         }
+        $tab= $position;
+        $field='<input id="firstFieldRequired" value="'.$col.'" hidden />';
+        $tab='<input id="firstTabdRequired" value="'.$tab.'" hidden />';
+        $result=$result.$field.$tab;
+      }else{
+        $field='<input id="firstFieldRequired" value="'.$col.'" hidden />';
+        $result=$result.$field;
       }
-      $position='detail';
-      if(isset($sectionPosition[$section]['99'])){
-        $position=$sectionPosition[$section]['99'];
-      }
-      $tab= $position;
-      $field='<input id="firstFieldRequired" value="'.$col.'" hidden />';
-      $tab='<input id="firstTabdRequired" value="'.$tab.'" hidden />';
-      $result=$result.$field.$tab;
   }
 
 
