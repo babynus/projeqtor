@@ -72,7 +72,7 @@ PlannedWorkManual::setSize($size);
 ?>
   <div dojoType="dijit.layout.BorderContainer" >
     <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:30%">
-      <div id="activityTableCons" name="activityTableCons" style="margin:20px;">
+      <div id="activityTableCons" name="activityTableCons" style="margin:20px;min-width:1575px">
         <?php if(!$displayNothing){
                 PlannedWorkManual::drawActivityTable($idProject,$yearSpinner.$monthSpinner,true); 
               }?>
@@ -87,7 +87,7 @@ PlannedWorkManual::setSize($size);
         }
       ?>
       </div>
-      <div id="consPlannedWorkManualInterventionDiv"  name="consPlannedWorkManualInterventionDiv" style="min-width:1123px;left:475px;top:20px;position:absolute;">
+      <div id="consPlannedWorkManualInterventionDiv"  name="consPlannedWorkManualInterventionDiv" style="min-width:1123px;left:485px;top:20px;position:absolute;">
               <?php //TAB RESOURCES
               $listMonth=array($yearSpinner.$monthSpinner);
               if(!$displayNothing){
