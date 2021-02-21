@@ -352,6 +352,7 @@ function getPlugins (){
   }
   $urlPlugins = "http://projeqtor.org/admin/getPlugins.php";
   $currentVersion=null;
+  $json=null;
   $getYesNo=Parameter::getGlobalParameter('getVersion');
   if ($getYesNo=='NO') {
     return $result;
@@ -360,10 +361,11 @@ function getPlugins (){
     enableCatchErrors();
     enableSilentErrors();
     $currentVersion=file_get_contents($urlPlugins);
+    $json = file_get_contents($urlPlugins);
     disableCatchErrors();
     disableSilentErrors();
   }
-  $json = file_get_contents($urlPlugins);
+  if (!$json) return $result;
   $object = json_decode($json);
   $plugins=$object->items;
   $userLang = getSessionValue('currentLocale');
