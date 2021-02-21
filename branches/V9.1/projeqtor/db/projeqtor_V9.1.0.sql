@@ -123,4 +123,3 @@ ALTER TABLE `${prefix}planningelement` ADD COLUMN `paused` int(1) unsigned DEFAU
 ALTER TABLE `${prefix}planningelementbaseline` ADD COLUMN `paused` int(1) unsigned DEFAULT 0 COMMENT '1';
 
 INSERT INTO `${prefix}linkable` ( `name`, `idle`) VALUES ('Budget', 0);
-
