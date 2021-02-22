@@ -36,6 +36,7 @@ error_reporting(E_ERROR);
 // ATTENTION, this PHP script returns its result into an iframe (the only way to submit a file)
 // then the iframe returns the result to resultDiv to reproduce expected behaviour
 $isIE=false;
+$mode = RequestHandler::getValue('mode');
 if (array_key_exists('isIE',$_REQUEST)) {
   $isIE=$_REQUEST['isIE'];
 } 

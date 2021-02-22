@@ -26,12 +26,16 @@
 require_once "../tool/projeqtor.php";
 $class=RequestHandler::getClass('objectClass');
 $id=RequestHandler::getId('objectId');
+$mode = RequestHandler::getValue('mode');
 if ($class and $id) {
 	$obj=new $class($id);
 } else {
   $obj=null;
 }
-
+if($mode =='edit'){
+  $linlinkId = RequestHandler::getId('linkId');
+  $link = new Link($linlinkId);
+}
 ?>
 <table>
     <tr>
@@ -41,18 +45,28 @@ if ($class and $id) {
          <input id="linkId" name="linkId" type="hidden" value="" />
          <input id="linkRef1Type" name="linkRef1Type" type="hidden" value="" />
          <input id="linkRef1Id" name="linkRef1Id" type="hidden" value="" />
+         <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
+         <input id="idLink" name="idLink" type="hidden" value="<?php echo $linlinkId;?>" />
          <table>
            <tr>
              <td class="dialogLabel"  >
                <label for="linkRef2Type" ><?php echo i18n("linkType") ?>&nbsp;<?php echo (isNewGui())?'':':';?>&nbsp;</label>
              </td>
              <td>
-               <select dojoType="dijit.form.FilteringSelect" id="linkRef2Type" name="linkRef2Type" onchange="refreshLinkList();"
+             <?php if($mode!='edit'){?>
+               <select dojoType="dijit.form.FilteringSelect" id="linkRef2Type" name="linkRef2Type" onchange="refreshLinkList();" 
                <?php if (isNewGui()) {?>  style="width:388px"<?php }?> 
-               <?php echo autoOpenFilteringSelect();?>
+               <?php autoOpenFilteringSelect();?>
                 class="input" value="">
-                 <?php htmlDrawOptionForReference('idLinkable', null, $obj, true);?>
+                 <?php htmlDrawOptionForReference('idLinkable',null , $obj, true);?>
                </select>
+               <?php }else{?>
+               <textarea dojoType="dijit.form.Textarea"
+                             id="linkRef2Type" name="linkRef2Type" readOnly
+                             style="width: 400px;" value="<?php echo $link->ref1Type;?>"
+                             maxlength="4000"
+                             class="input"></textarea>
+               <?php }?>
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -61,11 +75,20 @@ if ($class and $id) {
                <label for="linkRef2Id" ><?php echo i18n("linkElement") ?>&nbsp;<?php echo (isNewGui())?'':':';?>&nbsp;</label>
              </td>
              <td>
+             
                <table><tr><td>
                <div id="dialogLinkList" dojoType="dijit.layout.ContentPane" region="center">
+                <?php if($mode!='edit'){?>
                  <input id="linkRef2Id" name="linkRef2Id" type="hidden" value="" />
+                 <?php }else{?>
+                 <textarea dojoType="dijit.form.Textarea"
+                             id="linkRef2Id" name="linkRef2Id" readOnly
+                             style="width: 400px;" value="<?php echo '#'.$link->ref1Id.' '.SqlList::getNameFromId($link->ref1Type, $link->ref1Id);?>"
+                             maxlength="4000"
+                             class="input"></textarea>
+                   <?php }?>
                </div>
-               </td><td style="vertical-align: top">
+               </td><td style="vertical-align: top;<?php if($mode=='edit'){?>display:none;<?php }?>">
                <button id="linkDetailButton" dojoType="dijit.form.Button" showlabel="false"
                  title="<?php echo i18n('showDetail')?>" class="notButton notButtonRounded"
                  iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui">
@@ -119,14 +142,14 @@ if ($class and $id) {
              </td>     
           <td>
             <?php if (isNewGui()) {?>
-            <div  id="copyLinksofLinkedSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" 
-          	   value="off" leftLabel="" rightLabel="" style="width:10px;position:relative; left:0px;top:2px;z-index:99;" >
+            <div  id="copyLinksofLinkedSwitch" class="colorSwitch <?php if($mode=='edit'){?> mblSwitchDisabled <?php }?> " data-dojo-type="dojox/mobile/Switch" 
+          	   value="off" leftLabel="" rightLabel=""  style="width:10px;position:relative; left:0px;top:2px;z-index:99;" >
           	  <script type="dojo/method" event="onStateChanged" >
 	             dijit.byId("copyLinksofLinked").set("checked",(this.value=="on")?true:false);
 	            </script>
           	</div>
           	<?php }?>
-             <input dojoType="dijit.form.CheckBox" name="copyLinksofLinked" id="copyLinksofLinked" checked=false <?php if (isNewGui()) {?>style="display:none;"<?php }?>/>
+             <input  dojoType="dijit.form.CheckBox" name="copyLinksofLinked" id="copyLinksofLinked" checked=false <?php if (isNewGui()) {?>style="display:none;"<?php }?>/>
              <label style="float:none" for="copyLinksofLinked" ><?php echo i18n("copyLinkFromOriginalElement") ?></label>
           </td>
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
