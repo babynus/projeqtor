@@ -608,7 +608,7 @@ function activityStreamDisplayNote ($note,$origin){
       	}
       	$resultNote.= '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;font-size:100% !important;"></td>';
       }
-      $resultNote.= '<td cols$resultNote.="'.(6-$note->replyLevel).'" class="noteData" style="width:100%;font-size:100% !important;"><div style="float:left;">';
+      $resultNote.= '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:100%;font-size:100% !important;"><div style="float:left;">';
     }else{
       $resultNote.= '<td colspan="6" class="noteData" style="width:100%;font-size:100% !important;"><div style="float:left;">';
     }
