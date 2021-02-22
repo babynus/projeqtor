@@ -68,6 +68,8 @@ foreach ($param as $name=>$value){
 	}
 }
 $sendFrequency = 'everyDays';
+$report = new Report($idReport);
+$isWorkPlan = (substr($report->file, 0, 18) == 'globalWorkPlanning')?true:false;
 ?>
   <table>
     <tr>
@@ -93,7 +95,7 @@ $sendFrequency = 'everyDays';
               </td>
             </tr>
             <?php }?>
-            <?php if ($periodType == 'month') {?>
+            <?php if ($periodType == 'month' and !$isWorkPlan) {?>
             <tr>
               <td>
                 <label for="monthParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('month').Tool::getDoublePoint();?></label>
@@ -120,7 +122,7 @@ $sendFrequency = 'everyDays';
               </td>
             </tr>
             <?php }?>
-            <?php if ($periodType == 'week') {?>
+            <?php if ($periodType == 'week' and !$isWorkPlan) {?>
             <tr>
               <td>
                 <label for="weekParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('week').Tool::getDoublePoint();?></label>
