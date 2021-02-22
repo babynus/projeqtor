@@ -1494,7 +1494,9 @@ function addAttachment(attachmentType,refType,refId) {
   dojo.byId("attachmentRefType").value=(refType)?refType:((dojo.byId('objectClass'))?dojo.byId('objectClass').value:'User');
   dojo.byId("attachmentRefId").value=(refId)?refId:((dojo.byId('objectId'))?dojo.byId("objectId").value:dojo.byId("userMenuIdUser").value);
   dojo.byId("attachmentType").value=attachmentType;
-  dojo.byId('attachmentFileName').innerHTML="";
+  if(dojo.byId("attachmentFileName")){
+    dojo.byId("attachmentFileName").innerHTML="";
+  }
   dojo.style(dojo.byId('downloadProgress'), {
     display : 'none'
   });
@@ -1514,7 +1516,9 @@ function addAttachment(attachmentType,refType,refId) {
       display : 'none'
     });
   } else {
-    dijit.byId("attachmentLink").set('value', null);
+    if(dijit.byId("attachmentLink")){
+      dijit.byId("attachmentLink").set('value', null);
+    }
     dojo.style(dojo.byId('dialogAttachmentFileDiv'), {
       display : 'none'
     });
@@ -1665,6 +1669,37 @@ function removeAttachment(attachmentId) {
   };
   msg=i18n('confirmDelete', new Array(i18n('Attachment'), attachmentId));
   showConfirm(msg, actionOK);
+}
+
+function editAttachment(id){
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  var callBack = function () {
+    dojo.xhrGet({
+      url : '../tool/getSingleData.php?dataType=editAttachment&id='+id,
+      handleAs : "text",
+      load : function(data) {
+        dijit.byId('attachmentDescriptionEdit').set('value', data);
+      }
+      });
+    dijit.byId("dialogAttachmentEdit").show();
+  };
+  var params="&id="+id;
+  params+="&mode=edit";
+  loadDialog('dialogAttachmentEdit',callBack,false,params);
+}
+
+function saveAttachmentEdit() {
+  var privacy = 0;
+  if(dijit.byId('attachmentPrivacyPublicEdit').get('checked')) privacy = 1;
+  if(dijit.byId('attachmentPrivacyTeamEdit').get('checked')) privacy = 2;
+  if(dijit.byId('attachmentPrivacyPrivateEdit').get('checked'))privacy = 3;
+  var url='../tool/saveAttachmentEdit.php';
+  url+='?privacy=' + privacy;
+  loadContent(url, "resultDivMain", "attachmentFormEdit", true, "attachment");
+  dijit.byId('dialogAttachmentEdit').hide();
 }
 
 // =============================================================================
@@ -1830,6 +1865,28 @@ function removeLink(linkId, refType, refId, refTypeName, fixedClass) {
   msg=i18n('confirmDeleteLink', new Array(refTypeName, refId));
   showConfirm(msg, actionOK);
 }
+
+function editLink(linkId,id){
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  var callBack = function () {
+    dojo.xhrGet({
+      url : '../tool/getSingleData.php?dataType=editLink&idLink='+linkId,
+      handleAs : "text",
+      load : function(data) {
+        dijit.byId('linkComment').set('value', data);
+      }
+      });
+    dijit.byId("dialogLink").show();
+  };
+  var params="&id="+id;
+  params+="&linkId="+linkId;
+  params+="&mode=edit";
+  loadDialog('dialogLink',callBack,false,params);
+}
+
 
 //=============================================================================
 //= Product Composition

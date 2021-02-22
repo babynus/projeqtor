@@ -30,6 +30,8 @@
  */
 require_once "../tool/projeqtor.php";
 
+$mode=RequestHandler::getValue('mode');
+if($mode !='edit'){
 // Get the link info
 if (! array_key_exists('linkRef1Type',$_REQUEST)) {
   throwError('linkRef1Type parameter not found in REQUEST');
@@ -75,82 +77,91 @@ if (array_key_exists('linkComment',$_REQUEST)) {
 
 $linkId=null;
 
-$arrayId=array();
-if (is_array($ref2Id)) {
-	$arrayId=$ref2Id;
-} else {
-	$arrayId[]=$ref2Id;
-}
-Sql::beginTransaction();
-$result="";
-// get the modifications (from request)
-
-
-
-$Lnk=new Link();
-
-foreach ($arrayId as $ref2Id) {  
-  $crit1=array('ref1Type'=>$ref2Type,'ref1Id'=>intval($ref2Id));
-  $list1=$Lnk->getSqlElementsFromCriteria($crit1);
+  $arrayId=array();
+  if (is_array($ref2Id)) {
+  	$arrayId=$ref2Id;
+  } else {
+  	$arrayId[]=$ref2Id;
+  }
+  Sql::beginTransaction();
+  $result="";
+  // get the modifications (from request)
   
-  $crit2=array('ref2Type'=>$ref2Type,'ref2Id'=>intval($ref2Id));
-  $list2=$Lnk->getSqlElementsFromCriteria($crit2);
-
-	$link=new Link();
-	$link->ref1Id=$ref1Id;
-	$link->ref1Type=$ref1Type;
-	$link->ref2Id=$ref2Id;
-	$link->ref2Type=$ref2Type;
-  $link->comment=$comment;
-  $link->idUser=$user->id;
-  $link->creationDate=date("Y-m-d H:i:s"); 
-  $res=$link->save();
-  if ($copyLinksofLinked=='on'){
-    foreach ($list1 as $link){
-      $link->id=null;
-      $link->ref1Type=$ref1Type;
-      $link->ref1Id=$ref1Id;
-      $link->save();
-      
+  
+  
+  $Lnk=new Link();
+  
+  foreach ($arrayId as $ref2Id) {  
+    $crit1=array('ref1Type'=>$ref2Type,'ref1Id'=>intval($ref2Id));
+    $list1=$Lnk->getSqlElementsFromCriteria($crit1);
+    
+    $crit2=array('ref2Type'=>$ref2Type,'ref2Id'=>intval($ref2Id));
+    $list2=$Lnk->getSqlElementsFromCriteria($crit2);
+  
+  	$link=new Link();
+  	$link->ref1Id=$ref1Id;
+  	$link->ref1Type=$ref1Type;
+  	$link->ref2Id=$ref2Id;
+  	$link->ref2Type=$ref2Type;
+    $link->comment=$comment;
+    $link->idUser=$user->id;
+    $link->creationDate=date("Y-m-d H:i:s"); 
+    $res=$link->save();
+    if ($copyLinksofLinked=='on'){
+      foreach ($list1 as $link){
+        $link->id=null;
+        $link->ref1Type=$ref1Type;
+        $link->ref1Id=$ref1Id;
+        $link->save();
+        
+      }
+      foreach($list2 as $link){
+        $link->id=null;
+        $link->ref2Type=$ref1Type;
+        $link->ref2Id=$ref1Id;
+        $link->save();
+      }
     }
-    foreach($list2 as $link){
-      $link->id=null;
-      $link->ref2Type=$ref1Type;
-      $link->ref2Id=$ref1Id;
-      $link->save();
+    
+    if (!$result) {
+      $result=$res;
+    } else if (stripos($res,'id="lastOperationStatus" value="OK"')>0 ) {
+    	if (stripos($result,'id="lastOperationStatus" value="OK"')>0 ) {
+    		$deb=stripos($res,'#');
+    		$fin=stripos($res,' ',$deb);
+    		$resId=substr($res,$deb, $fin-$deb);
+    		$deb=stripos($result,'#');
+        $fin=stripos($result,' ',$deb);
+        $result=substr($result, 0, $fin).','.$resId.substr($result,$fin);
+    	} else {
+    	  $result=$res;
+    	} 
     }
   }
   
-  if (!$result) {
-    $result=$res;
-  } else if (stripos($res,'id="lastOperationStatus" value="OK"')>0 ) {
-  	if (stripos($result,'id="lastOperationStatus" value="OK"')>0 ) {
-  		$deb=stripos($res,'#');
-  		$fin=stripos($res,' ',$deb);
-  		$resId=substr($res,$deb, $fin-$deb);
-  		$deb=stripos($result,'#');
-      $fin=stripos($result,' ',$deb);
-      $result=substr($result, 0, $fin).','.$resId.substr($result,$fin);
-  	} else {
-  	  $result=$res;
-  	} 
+  //$mailResult=null;
+  $mailResult1=null;
+  $mailResult2=null;
+  if (getLastOperationStatus($result)=='OK') {
+    $elt1=new $link->ref1Type($link->ref1Id);
+    $mailResult1=$elt1->sendMailIfMailable(false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false);
+    $elt2=new $link->ref2Type($link->ref2Id);
+    $mailResult2=$elt2->sendMailIfMailable(false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false);
   }
-}
-
-//$mailResult=null;
-$mailResult1=null;
-$mailResult2=null;
-if (getLastOperationStatus($result)=='OK') {
-  $elt1=new $link->ref1Type($link->ref1Id);
-  $mailResult1=$elt1->sendMailIfMailable(false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false);
-  $elt2=new $link->ref2Type($link->ref2Id);
-  $mailResult2=$elt2->sendMailIfMailable(false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false);
-}
-if ($mailResult1 or $mailResult2) {
-  $pos=strpos($result,'<input type="hidden"');
-  if ($pos) {
-    $result=substr($result, 0,$pos).' - ' . Mail::getResultMessage(($mailResult1=='TEMP')?$mailResult1:$mailResult2).substr($result, $pos);
+  if ($mailResult1 or $mailResult2) {
+    $pos=strpos($result,'<input type="hidden"');
+    if ($pos) {
+      $result=substr($result, 0,$pos).' - ' . Mail::getResultMessage(($mailResult1=='TEMP')?$mailResult1:$mailResult2).substr($result, $pos);
+    }
   }
+}else{
+  $result = "";
+  $comment = RequestHandler::getValue('linkComment');
+  $idLink = RequestHandler::getId('idLink');
+  Sql::beginTransaction();
+  $link = new Link($idLink);
+  $link->comment = $comment;
+  $result=$link->saveForced();
 }
 // Message of correct saving
 displayLastOperationStatus($result);
