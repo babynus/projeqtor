@@ -255,6 +255,7 @@ function addRemoveFavMenuLeft (id,name,mode,type){
         url : "../tool/saveCustomMenu.php"+param,
         handleAs : "text",
         load : function(data, args) {
+        	menuNewGuiFilter('menuBarCustom', null);
         },
       });
       items.forEach(function(el){
@@ -270,6 +271,7 @@ function addRemoveFavMenuLeft (id,name,mode,type){
     url : "../tool/saveCustomMenu.php"+param,
     handleAs : "text",
     load : function(data, args) {
+    	menuNewGuiFilter('menuBarCustom', null);
     },
   });
   items.forEach(function(el){
@@ -278,8 +280,6 @@ function addRemoveFavMenuLeft (id,name,mode,type){
   
   });
   }
-  
-  menuNewGuiFilter('menuBarCustom', null);
 }
 
 //=============================================================================
