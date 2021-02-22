@@ -360,6 +360,7 @@ class TestSessionMain extends SqlElement {
       $new->idTestSession=$newId;
       $new->idTestCase=$tcr->idTestCase;
       $new->idRunStatus='1';
+      $new->sortOrder=$tcr->sortOrder;
       $new->_copy=true;
       $new->save();
     }
