@@ -114,10 +114,14 @@ if ($startDate) {
 }
 $aff->save();
 
+$proj=new Project($newAff->idProject);
+$listProj=getListToChange($proj,$aff->idResource);
+$crit='idProject in '.transformListIntoInClause($listProj).' and idResource='.$aff->idResource;
+
 
 // Change the assignments
 $ass=new Assignment();
-$assList=$ass->getSqlElementsFromCriteria(array('idProject'=>$newAff->idProject, 'idResource'=>$aff->idResource));
+$assList=$ass->getSqlElementsFromCriteria(null,null,$crit);
 $pw=new PlannedWork();
 foreach ($assList as $ass) {
   $needNew=true;
@@ -174,4 +178,19 @@ foreach ($assList as $ass) {
 
 // Message of correct saving
 displayLastOperationStatus($result);
+
+function getListTochange($proj,$idRes) {
+  $result=array();
+  $result[$proj->id]=$proj->name;
+  $subProjList=$proj->getSubProjects(true,true);
+  foreach ($subProjList as $subProj) {
+    $aff=new Affectation();
+    $countAff=$aff->countSqlElementsFromCriteria(array('idProject'=>$subProj->id,'idResource'=>$idRes));
+    if ($countAff==0) {
+      $result=array_merge_preserve_keys($result,getListTochange($subProj,$idRes));
+    }
+  }
+  return $result;
+}
+
 ?>
