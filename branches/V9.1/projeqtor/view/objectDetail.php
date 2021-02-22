@@ -4671,6 +4671,7 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
           echo ' target="#" title="'.urldecode($attachment->link).'">'.formatSmallButton('Link').'</a>';
         }
         if (($attachment->idUser==$user->id or $userCanDeleteAttachment->rightAccess==1) and !$print and $canUpdate) {
+          echo ' <a onClick="editAttachment('.htmlEncode($attachment->id).');" title="'.i18n('editAttachment').'" >'.formatSmallButton('Edit').'</a>';
           echo ' <a onClick="removeAttachment('.htmlEncode($attachment->id).');" title="'.i18n('removeAttachment').'" >'.formatSmallButton('Remove').'</a>';
         }
         echo '</td>';
@@ -4837,6 +4838,7 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
           }
         }
         if ($canUpdate) {
+          echo '  <a onClick="editLink('."'".htmlEncode($link->id)."','".$default."'".');" title="'.i18n('editLink').'" > '.formatSmallButton('Edit').'</a>';
           echo '  <a onClick="removeLink('."'".htmlEncode($link->id)."','".get_class($linkObj)."','".htmlEncode($linkObj->id)."','".$classLinkName."','".$classLink."'".');" title="'.i18n('removeLink').'" > '.formatSmallButton('Remove').'</a>';
         }
         echo '</td>';

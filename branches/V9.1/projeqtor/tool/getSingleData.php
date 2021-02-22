@@ -231,6 +231,14 @@
       $workCommandBill = new WorkCommandBilled($idWorkCommandBill);
       $total = ($workCommand->billedQuantity)-($workCommandBill->billedQuantity);
       echo $total;
+    }else if($type=='editLink'){  
+      $id = RequestHandler::getId('idLink');
+      $link = new Link($id,true);
+      echo $link->comment;
+    }else if($type=='editAttachment'){
+      $id = RequestHandler::getId('id');
+      $att = new Attachment($id,true);
+      echo $att->description;
     }else {
       debugTraceLog("Unknown type '$type'");          
       echo '';
