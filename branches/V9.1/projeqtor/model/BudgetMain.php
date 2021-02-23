@@ -577,7 +577,15 @@ class BudgetMain extends SqlElement {
       foreach ($parents as $idParent=>$nameParent) {
         $parentBudget = new Budget($idParent,true);
         if($parentBudget->done){
-          $result.='<br/>' . i18n('budgetParentIsApprouved',array($idParent));
+          if($this->idBudget != $old->idBudget or ($this->targetAmount!= 0 and $this->targetAmount != $old->targetAmount ) or ($this->targetFullAmount !=0 and $this->targetFullAmount != $old->targetFullAmount) or $this->plannedAmount != $old->plannedAmount or $this->plannedFullAmount != $old->plannedFullAmount or $this->initialAmount != $old->initialAmount
+            or $this->targetAmount != $old->targetAmount or $this->initialFullAmount != $old->initialFullAmount or ( $this->update1Amount != 0 and $this->update1Amount != $old->update1Amount ) or  ($this->update1FullAmount != 0 and  $this->update1FullAmount != $old->update1FullAmount ) or
+            ( $this->update2Amount != 0 and  $this->update2Amount != $old->update2Amount ) or ($this->update2FullAmount != 0 and $this->update2FullAmount != $old->update2FullAmount ) or ( $this->update3Amount != 0 and  $this->update3Amount != $old->update3Amount ) or
+            ( $this->update3FullAmount != 0 and $this->update3FullAmount != $old->update3FullAmount ) or ( $this->update4Amount != 0 and $this->update4Amount != $old->update4Amount ) or ( $this->update4FullAmount != 0 and  $this->update4FullAmount != $old->update4FullAmount ) or $this->actualAmount != $old->actualAmount or $this->actualFullAmount != $old->actualFullAmount or
+            $this->usedAmount != $old->usedAmount or $this->usedFullAmount != $old->usedFullAmount or $this->availableAmount != $old->availableAmount or
+            $this->availableFullAmount != $old->availableFullAmount or $this->billedAmount != $old->billedAmount or $this->billedFullAmount != $old->billedFullAmount or $this->leftAmount != $old->leftAmount or
+            $this->leftFullAmount != $old->leftFullAmount or ( $this->availableTransferedAmount != 0 and $this->availableTransferedAmount != $old->availableTransferedAmount)  or ($this->availableTransferedFullAmount != 0 and $this->availableTransferedFullAmount != $old->availableTransferedFullAmount )){
+            $result.='<br/>' . i18n('budgetParentIsApprouved',array($idParent));
+          }
         }
       }
     }
@@ -597,7 +605,15 @@ class BudgetMain extends SqlElement {
         }
         $parentBudget = new Budget($idParent,true);
         if($parentBudget->done){
-          $result.='<br/>' . i18n('budgetParentIsApprouved',array($idParent));
+          if($this->idBudget != $old->idBudget or ($this->targetAmount!= 0 and $this->targetAmount != $old->targetAmount ) or ($this->targetFullAmount !=0 and $this->targetFullAmount != $old->targetFullAmount) or $this->plannedAmount != $old->plannedAmount or $this->plannedFullAmount != $old->plannedFullAmount or $this->initialAmount != $old->initialAmount
+          or $this->targetAmount != $old->targetAmount or $this->initialFullAmount != $old->initialFullAmount or ( $this->update1Amount != 0 and $this->update1Amount != $old->update1Amount ) or  ($this->update1FullAmount != 0 and  $this->update1FullAmount != $old->update1FullAmount ) or
+          ( $this->update2Amount != 0 and  $this->update2Amount != $old->update2Amount ) or ($this->update2FullAmount != 0 and $this->update2FullAmount != $old->update2FullAmount ) or ( $this->update3Amount != 0 and  $this->update3Amount != $old->update3Amount ) or
+          ( $this->update3FullAmount != 0 and $this->update3FullAmount != $old->update3FullAmount ) or ( $this->update4Amount != 0 and $this->update4Amount != $old->update4Amount ) or ( $this->update4FullAmount != 0 and  $this->update4FullAmount != $old->update4FullAmount ) or $this->actualAmount != $old->actualAmount or $this->actualFullAmount != $old->actualFullAmount or
+          $this->usedAmount != $old->usedAmount or $this->usedFullAmount != $old->usedFullAmount or $this->availableAmount != $old->availableAmount or
+          $this->availableFullAmount != $old->availableFullAmount or $this->billedAmount != $old->billedAmount or $this->billedFullAmount != $old->billedFullAmount or $this->leftAmount != $old->leftAmount or
+          $this->leftFullAmount != $old->leftFullAmount or ( $this->availableTransferedAmount != 0 and $this->availableTransferedAmount != $old->availableTransferedAmount)  or ($this->availableTransferedFullAmount != 0 and $this->availableTransferedFullAmount != $old->availableTransferedFullAmount )){
+            $result.='<br/>' . i18n('budgetParentIsApprouved',array($idParent));
+          }
         }
       }
     }
