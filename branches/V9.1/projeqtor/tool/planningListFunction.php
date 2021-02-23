@@ -500,6 +500,23 @@ function drawOptionCriticalPath() {
 <?php 
 }
 
+function drawOptionProjectModel() {
+  ?>
+  <div style="white-space:nowrap; <?php echo (isNewGui())?'margin-right:6px;margin-top:5px;':'position:absolute; bottom:5px;left:10px;'; ?>" class="checkboxLabel">
+    <?php if (isNewGui()) {?><?php echo ucfirst(i18n('showProjectModel'));?>&nbsp;<?php }?>
+    <span title="<?php echo ucfirst(i18n('criticalPath'));?>" dojoType="dijit.form.CheckBox"
+      type="checkbox" id="showProjectModel" name="showProjectModel" class="whiteCheck"
+      <?php if ( Parameter::getUserParameter('criticalPathPlanning')=='1') {echo 'checked="checked"'; } ?>  >  
+      <script type="dojo/connect" event="onChange" args="evt">
+        saveUserParameter('showProjectModel',((this.checked)?'1':'0'));
+        refreshJsonPlanning();
+      </script>                    
+    </span>
+    <?php if (!isNewGui()) {?>&nbsp;<?php echo i18n('showProjectModel');?><?php }?>
+  </div>
+<?php 
+}
+
 // ================================================== FIELD MILESTONES
 function drawMilestones() {
   global $saveShowMilestone;

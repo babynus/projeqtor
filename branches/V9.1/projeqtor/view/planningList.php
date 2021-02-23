@@ -280,7 +280,7 @@ foreach ($lstUserP as $prof){
                                    </td>
 		                               <td style="text-align: right; align: right;">
                                      <?php drawOptionsDisplay();?>
-                                      <?php drawOptionCriticalPath();?>
+                                      <?php drawOptionCriticalPath();drawOptionProjectModel();?>
                                       <br/>
 		                               </td>
 		                             </tr>
