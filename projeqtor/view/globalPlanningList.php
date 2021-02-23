@@ -255,6 +255,7 @@ foreach ($lstUserP as $prof){
 		                               <td style="text-align: right; align: right;">
                                      <?php drawOptionsDisplay();?>
                                       <?php drawOptionCriticalPath();?>
+                                       <?php drawOptionProjectModel();?>
                                       <br/>
 		                               </td>
 		                             </tr>

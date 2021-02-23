@@ -144,6 +144,7 @@
   if (array_key_exists('idle',$_REQUEST)) {
     $showIdle=true;
   }
+  $showProjectModel = RequestHandler::getValue('showProjectModel');
   if ($portfolio) {
   	$accessRightRead=securityGetAccessRight('menuProject', 'read');
   } else {
@@ -192,6 +193,10 @@
 //       $queryWhere.=  " OR ".$table . ".idProject = " . ((Project::getLeaveProjectId())?Project::getLeaveProjectId():0).") " ;      
 //   } else {
   $queryWhere.=  $table . ".idProject not in " . Project::getAdminitrativeProjectList() ;
+  if($showProjectModel){
+    $queryWhere.= ($queryWhere=='')?'':' and ';
+    $queryWhere.=  $table . ".idProject not in " . Project::getTemplateInClauseList() ;
+  }
 //   }
 // MTY - LEAVE SYSTEM
   $querySelect .= $table . ".* ";

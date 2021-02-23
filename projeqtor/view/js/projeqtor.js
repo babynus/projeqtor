@@ -328,7 +328,13 @@ function refreshJsonPlanning(versionsPlanning) {
     }
   }
   //END ADD qCazelles - GANTT
-  
+  if (dojo.byId('showProjectModel')) {
+    if (dojo.byId('showProjectModel').checked) {
+      url += (param) ? "&" : "?";
+      url += "showProjectModel=true";
+      param = true;
+    }
+  }
   if (dojo.byId('listShowIdle')) {
     if (dojo.byId('listShowIdle').checked) {
       url += (param) ? "&" : "?";
