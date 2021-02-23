@@ -98,6 +98,13 @@ label, .ProjeQtOrNewGui label,
     background-color: transparent;
     color:var(--color-text);
 }
+.cke_dialog_ui_labeled_label, .cke_dialog_ui_hbox label, .cke_dialog_ui_vbox_child label{
+	float:none;
+}
+.cke_dialog .ImagePreviewBox {
+	overflow:auto !important;
+}
+
 .ProjeQtOrNewGui .labelLeft {
 	text-align: left;
 	float:none;
