@@ -179,9 +179,9 @@ foreach ($lstVersion as $versId=>$versName) {
       $class=get_class($item);
       $item=new $class($item->id);
       $initial=0;
-      $real='';
-      $left='';
-      $planned='';
+      $real=0;
+      $left=0;
+      $planned=0;
       $cpt++;
       $pe=get_class($item).'PlanningElement';
       if (isset($item->WorkElement)) {
