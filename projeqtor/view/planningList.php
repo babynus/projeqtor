@@ -67,6 +67,7 @@ $saveShowWork=Parameter::getUserParameter('planningShowWork');
 //$saveShowClosedObj=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningShowClosed'));
 //$saveShowClosed=$saveShowClosedObj->parameterValue;
 $saveShowClosed=Parameter::getUserParameter('planningShowClosed');
+$saveShowProjectModel=Parameter::getUserParameter('showProjectModel');
 if ($saveShowClosed) {
 	$_REQUEST['idle']=true;
 }
@@ -301,6 +302,7 @@ foreach ($lstUserP as $prof){
      style="display: none">
 		  <?php
 		       if ($saveShowResource) $_REQUEST['showResource']='on';
+		       if ($saveShowProjectModel) $_REQUEST['showProjectModel']='on';
             include '../tool/jsonPlanning.php';
           ?>
 		</div>

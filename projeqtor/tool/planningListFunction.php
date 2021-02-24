@@ -506,7 +506,7 @@ function drawOptionProjectModel() {
     <?php if (isNewGui()) {?><?php echo ucfirst(i18n('showProjectModel'));?>&nbsp;<?php }?>
     <span title="<?php echo ucfirst(i18n('criticalPath'));?>" dojoType="dijit.form.CheckBox"
       type="checkbox" id="showProjectModel" name="showProjectModel" class="whiteCheck"
-      <?php if ( Parameter::getUserParameter('criticalPathPlanning')=='1') {echo 'checked="checked"'; } ?>  >  
+      <?php if ( Parameter::getUserParameter('showProjectModel')=='1') {echo 'checked="checked"'; } ?>  >  
       <script type="dojo/connect" event="onChange" args="evt">
         saveUserParameter('showProjectModel',((this.checked)?'1':'0'));
         refreshJsonPlanning();
