@@ -606,6 +606,13 @@ function showPrint(page, context, comboName, outMode, orientation) {
           params+="&showResource=true";
         }
       }
+      if (dojo.byId('showProjectModel')) {
+        if (dojo.byId('showProjectModel').checked) {
+          url += (param) ? "&" : "?";
+          url += "showProjectModel=true";
+          param = true;
+        }
+      }
       if (dijit.byId('listShowLeftWork')) {
         if (dijit.byId('listShowLeftWork').checked) {
           params+="&showWork=true";
