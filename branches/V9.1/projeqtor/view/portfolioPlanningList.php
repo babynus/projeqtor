@@ -63,6 +63,7 @@ if ($paramEnd->id) {
 }
 //$saveShowWbsObj=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningShowWbs'));
 //$saveShowWbs=$saveShowWbsObj->parameterValue;
+$saveShowProjectModel=Parameter::getUserParameter('showProjectModel');
 $saveShowWbs=Parameter::getUserParameter('planningShowWbs');
 //$saveShowResourceObj=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningShowResource'));
 //$saveShowResource=$saveShowResourceObj->parameterValue;
@@ -238,7 +239,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                                      <?php drawOptionBaseline();?>
                                    </td>
 		                               <td style="text-align: right; align: right;">
-                                     <?php drawOptionsDisplay();?>
+                                     <?php drawOptionsDisplay();drawOptionProjectModel();?>
                                       <br/>
 		                               </td>
 		                             </tr>
@@ -259,6 +260,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
      style="display: none">
 		  <?php
 		        $portfolio=true;
+		        if ($saveShowProjectModel) $_REQUEST['showProjectModel']='on';
             include '../tool/jsonPlanning.php';
           ?>
 		</div>
