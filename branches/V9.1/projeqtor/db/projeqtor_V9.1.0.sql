@@ -10,7 +10,17 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`id
 (257, 'menuViewAllSubTask', 7, 'item', 121, Null, 0, 'Work');
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(3,257,0,(select `active` from `${prefix}module` where id=3));
+(3,257,0,(select `active` from `${prefix}module` where id=3)),
+(1,252,0,(select `active` from `${prefix}module` where id=1)),
+(1,253,0,(select `active` from `${prefix}module` where id=1)),
+(1,90,0,(select `active` from `${prefix}module` where id=1)),
+(1,181,0,(select `active` from `${prefix}module` where id=1)),
+(10,90,0,(select `active` from `${prefix}module` where id=10)),
+(10,181,0,(select `active` from `${prefix}module` where id=10)),
+(1,100006001,0,(select `active` from `${prefix}module` where id=1)),
+(2,100006001,0,(select `active` from `${prefix}module` where id=2)),
+(4,100006001,0,(select `active` from `${prefix}module` where id=4)),
+(10,100006001,0,(select `active` from `${prefix}module` where id=10));
 
 INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
 (334,'menuViewAllSubTask',3,257,55,0),
@@ -123,3 +133,16 @@ ALTER TABLE `${prefix}planningelement` ADD COLUMN `paused` int(1) unsigned DEFAU
 ALTER TABLE `${prefix}planningelementbaseline` ADD COLUMN `paused` int(1) unsigned DEFAULT 0 COMMENT '1';
 
 INSERT INTO `${prefix}linkable` ( `name`, `idle`) VALUES ('Budget', 0);
+
+INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VALUES
+(12,102,0,(select `active` from `${prefix}module` where id=12)),
+(12,103,0,(select `active` from `${prefix}module` where id=12)),
+(12,104,0,(select `active` from `${prefix}module` where id=12)),
+(1,105,0,(select `active` from `${prefix}module` where id=1)),
+(1,106,0,(select `active` from `${prefix}module` where id=1)),
+(1,109,0,(select `active` from `${prefix}module` where id=1)),
+(1,111,0,(select `active` from `${prefix}module` where id=1)),
+(1,66,0,(select `active` from `${prefix}module` where id=1)),
+(10,66,0,(select `active` from `${prefix}module` where id=10)),
+(1,67,0,(select `active` from `${prefix}module` where id=1)),
+(10,67,0,(select `active` from `${prefix}module` where id=10));
