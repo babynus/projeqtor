@@ -367,6 +367,8 @@ function showBottomContent (menu){
       break;
     case 'Document':
       dojo.byId('documentsDiv').style.display='block';
+      dojo.byId('documentDirectoryTree').style.height="auto";
+      dojo.byId('documentDirectoryTree').style.width="auto";
       dijit.byId('documentsDiv').resize();
       break;
     case 'Notification':
