@@ -5985,6 +5985,12 @@ abstract class SqlElement {
     	$msg .= '</tr></table>'.$sectionEnd.$rowEnd;
     	$msg .= $rowStart.'<td><br></td>'.$rowEnd;
     	$links=$this->_Link;
+    	if (count($links)==0) {//
+    	  $link=new Link();
+    	  $className=get_class($this);
+    	  $where="(ref1Type='$className' and ref1Id=$this->id) or (ref2Type='$className' and ref2Id=$this->id)";
+    	  $links=$link->getSqlElementsFromCriteria(null,null,$where);
+    	}
     	foreach ( $links as $link ) {
     		if($link->ref1Id == $this->id and $link->ref1Type == get_class($this)){
     			$refLinkType = $link->ref2Type;
