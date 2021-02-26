@@ -545,18 +545,18 @@ class ActivityPlanningElementMain extends PlanningElement {
     if ($this->idActivityPlanningMode) {
       $mode=new ActivityPlanningMode($this->idActivityPlanningMode);
     }   
-    if ($mode) {
-      if ($mode->mandatoryStartDate and ! $this->validatedStartDate) {
-        $result.='<br/>' . i18n('errorMandatoryValidatedStartDate');
-      }
-      if ($mode->mandatoryEndDate and ! $this->validatedEndDate) {
-        $result.='<br/>' . i18n('errorMandatoryValidatedEndDate');
-      }
-      if ($mode->mandatoryDuration and ! $this->validatedDuration) {
-        $result.='<br/>' . i18n('errorMandatoryValidatedDuration');
-      }
+//     if ($mode) {
+//       if ($mode->mandatoryStartDate and ! $this->validatedStartDate) {
+//         $result.='<br/>' . i18n('errorMandatoryValidatedStartDate');
+//       }
+//       if ($mode->mandatoryEndDate and ! $this->validatedEndDate) {
+//         $result.='<br/>' . i18n('errorMandatoryValidatedEndDate');
+//       }
+//       if ($mode->mandatoryDuration and ! $this->validatedDuration) {
+//         $result.='<br/>' . i18n('errorMandatoryValidatedDuration');
+//       }
    
-    }
+//     }
     if($this->idWorkUnit){
       if(!$this->quantity)$result.='<br/>' . i18n('errorMandatoryQuantity');
       if(!$this->idComplexity)$result.='<br/>' . i18n('errorMandatoryComplexity');

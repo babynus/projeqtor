@@ -192,18 +192,18 @@ class TestSessionPlanningElementMain extends PlanningElement {
     if ($this->idTestSessionPlanningMode) {
       $mode=new ActivityPlanningMode($this->idTestSessionPlanningMode);
     }   
-    if ($mode) {
-      if ($mode->mandatoryStartDate and ! $this->validatedStartDate) {
-        $result.='<br/>' . i18n('errorMandatoryValidatedStartDate');
-      }
-      if ($mode->mandatoryEndDate and ! $this->validatedEndDate) {
-        $result.='<br/>' . i18n('errorMandatoryValidatedEndDate');
-      }
-      if ($mode->mandatoryDuration and ! $this->validatedDuration) {
-        $result.='<br/>' . i18n('errorMandatoryValidatedDuration');
-      }
+//     if ($mode) {
+//       if ($mode->mandatoryStartDate and ! $this->validatedStartDate) {
+//         $result.='<br/>' . i18n('errorMandatoryValidatedStartDate');
+//       }
+//       if ($mode->mandatoryEndDate and ! $this->validatedEndDate) {
+//         $result.='<br/>' . i18n('errorMandatoryValidatedEndDate');
+//       }
+//       if ($mode->mandatoryDuration and ! $this->validatedDuration) {
+//         $result.='<br/>' . i18n('errorMandatoryValidatedDuration');
+//       }
    
-    }
+//     }
    
     
     $defaultControl=parent::control();
