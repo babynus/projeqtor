@@ -1176,8 +1176,9 @@ class ImputationLine {
             echo ' id="leftWork_'.$nbLine.'"';
             echo ' name="leftWork[]"';
             echo ' value="'.Work::displayImputation($line->leftWork).'" ';
-            if ($line->idle or $line->locked) {
-              echo ' readOnly="true" ';
+            $habil=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile' => $user->getProfile($line->idProject),'scope' => 'lockedLeftWork'));
+            if ($line->idle or $line->locked or $habil->rightAccess == '2') {
+                echo ' readOnly="true" ';
             }
             echo ' >';
             echo $keyDownEventScript;

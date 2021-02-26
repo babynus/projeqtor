@@ -314,7 +314,8 @@ if ($planningMode=='RECW') {
                <label for="assignmentLeftWork" ><?php echo i18n("colLeftWork");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
-               <div id="assignmentLeftWork" name="assignmentLeftWork" <?php if($planningMode=='MAN'){ echo "readonly";}?>                 
+             <?php $habil=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile' => $user->getProfile($idProject),'scope' => 'lockedLeftWork'));?>
+               <div id="assignmentLeftWork" name="assignmentLeftWork" <?php if($planningMode=='MAN' or $habil->rightAccess == '2'){ echo "readonly";}?>                 
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add" && $obj->meetingStartTime && $obj->meetingEndTime){ 
                                   echo $delay;
                               } else if($mode=="edit"){

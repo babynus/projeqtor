@@ -46,7 +46,9 @@ if($mode =='edit'){
          <input id="linkRef1Type" name="linkRef1Type" type="hidden" value="" />
          <input id="linkRef1Id" name="linkRef1Id" type="hidden" value="" />
          <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
+         <?php if($mode =='edit'){ ?>
          <input id="idLink" name="idLink" type="hidden" value="<?php echo $linlinkId;?>" />
+         <?php } ?>
          <table>
            <tr>
              <td class="dialogLabel"  >
