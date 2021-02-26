@@ -1549,7 +1549,7 @@ function submitForm(page, destination, formName) {
     return;
   }
   // validate form Data
-  if (formVar.validate()) {
+  if (1) { // if (formVar.validate()) {
     formLock();
     // form is valid, continue and submit it
     var isResultDiv = true;
