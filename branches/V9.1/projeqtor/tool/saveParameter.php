@@ -150,6 +150,7 @@ if ($type=='habilitation') {
                                      'canForceClose'=>i18n('canForceClose'),
                                      'canUpdateCreation'=>i18n('canUpdateCreationInfo'), 
                                      'viewComponents'=>i18n('viewComponents'),
+                                     'lockedLeftWork'=>i18n('lockedLeftWork'),
                                      'generateProjExpense'=>i18n('generateProjectExpenseButton'),
                                      'situation'=>i18n('situationRight'),
                                  'resVisibilityList'=>i18n('resourceVisibilityList'),
