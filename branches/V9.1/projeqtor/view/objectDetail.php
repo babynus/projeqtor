@@ -6525,7 +6525,8 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       
       if (!$print) echo '<input type="hidden" id="initLeft_'.$assignment->id.'" value="'.Work::displayWork($assignment->leftWork).'"/>';
       echo '<td class="assignData'.$idleClass.'" align="right" style="width:15%;vertical-align:middle;">';
-      if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW' and $planningMode !="MAN" and !$assignment->idle) {
+      $habil=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile' => $user->getProfile($obj->idProject),'scope' => 'lockedLeftWork'));
+      if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW' and $planningMode !="MAN" and !$assignment->idle and $habil->rightAccess == '1') {
         echo '<img  id="idImageLeftWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
         echo '<div dojoType="dijit.form.NumberTextBox" id="assLeftWork_'.$assignment->id.'" name="assLeftWork_'.$assignment->id.'"
         				class="dijitReset dijitInputInner dijitNumberTextBox"

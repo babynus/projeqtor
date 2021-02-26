@@ -146,3 +146,12 @@ INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VA
 (10,66,0,(select `active` from `${prefix}module` where id=10)),
 (1,67,0,(select `active` from `${prefix}module` where id=1)),
 (10,67,0,(select `active` from `${prefix}module` where id=10));
+
+INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
+(1,'lockedLeftWork','2'),
+(2,'lockedLeftWork','2'),
+(3,'lockedLeftWork','2'),
+(4,'lockedLeftWork','2'),
+(5,'lockedLeftWork','2'),
+(6,'lockedLeftWork','2'),
+(7,'lockedLeftWork','2');
