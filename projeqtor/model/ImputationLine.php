@@ -790,6 +790,25 @@ class ImputationLine {
           $manuPlan=true;
         }
       }
+      for ($i=1; $i<=$nbDays; $i++) {
+        if($line->refType!='Project'){
+          $date=str_replace("-","",substr($allDate[$i-1], 0,7));
+          $validatedImp=SqlElement::getSingleSqlElementFromCriteria('ConsolidationValidation', array('idProject'=>$line->idProject,'month'=>$date));
+          $lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', array('idProject'=>$line->idProject));
+          $validatedImpCase=(trim($validatedImp->id)!='')?true:false;
+          $lockedImpCase=(trim($lockedImp->id)!='')?true:false;
+          $impLock=false;
+          if($lockedImpCase){
+            $curMonth=substr(str_replace('-', '', $curDate), 0,6);
+            if(intval($lockedImp->month,10)<intval ($curMonth,10)){
+              $impLock=true;
+            }
+          }
+          $manuPlan=($validatedImpCase or $impLock)?false:$manuPlan;
+        }
+        if ($manuPlan and isset($line->arrayPlannedWork[$i]->work) and  $line->arrayPlannedWork[$i]->work!="") $line->realWork+= $line->arrayPlannedWork[$i]->work;
+      } 
+      
 // gautier hide activity with planning element isManualProgress = 1
 //       $isManualProgress = false;
 //       if($line->refType=='Activity'){
