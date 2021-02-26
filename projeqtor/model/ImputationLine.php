@@ -1118,7 +1118,8 @@ class ImputationLine {
                 if($line->idAssignment == $idAssignDirectAcces and $line->idAssignment and $today==$curDate){
                   echo '<input type="hidden" id="focusToday" name="focusToday" value="workValue_'.$nbLine.'_'.$i.'"/>';
                 }
-                echo '<input type="hidden" id="workId_'.$nbLine.'_'.$i.'"'.' name="workId_'.$i.'[]"'.' value="'.$idWork.'"/>';
+                //echo '<input type="hidden" id="workId_'.$nbLine.'_'.$i.'"'.' name="workId_'.$i.'[]"'.' value="'.$idWork.'"/>';
+                echo '<input type="hidden" id="workId_'.$nbLine.'_'.$i.'"'.' name="workId_'.$i.'[]"'.' value="'.(($manuPlan and isset($line->arrayPlannedWork[$i]->work) and  $line->arrayPlannedWork[$i]->work!="")?'x':$idWork).'"/>';
                 echo '<input type="hidden" id="isAdministrative_'.$nbLine.'_'.$i.'"'.' value="'.($isAdministrative?1:0).'"/>';
                 echo '<input type="hidden" id="workOldValue_'.$nbLine.'_'.$i.'"'.' value="'.Work::displayImputation($valWork).'"/>';
                 echo '<input type="hidden" id="idProject_'.$nbLine.'_'.$i.'"'.' value="'.$line->idProject.'"/>';

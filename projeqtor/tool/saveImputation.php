@@ -46,7 +46,6 @@ $nbLines=$_REQUEST['nbLines'];
 if ($rangeType=='week') {
   $nbDays=7;
 }
-
 // Save main comment
 if (isset($_REQUEST['imputationComment'])) {
 	$comment=$_REQUEST['imputationComment'];
@@ -95,13 +94,23 @@ for ($i=0; $i<$nbLines; $i++) {
     	}
       $workValue=Work::convertImputation($_REQUEST['workValue_'.$j][$i]);
       $workDate=$_REQUEST['day_' . $j];
-      if ($workId) {
+      if ($workId and $workId!='x') {
         $work=new Work($workId);
       } else {
         $crit=array('idAssignment'=>$line->idAssignment,
                     'workDate'=>$workDate, 'idWorkElement'=>null , 'idResource'=>$line->idResource);
         $work=SqlElement::getSingleSqlElementFromCriteria('Work', $crit);
       } 
+      if ($workId=='x') {
+        $crit=array('idAssignment'=>$line->idAssignment,
+            'workDate'=>$workDate, 'idResource'=>$line->idResource);
+        $plannedWork=SqlElement::getSingleSqlElementFromCriteria('PlannedWork', $crit);
+        if ($plannedWork and $plannedWork->id) {
+          $resPlan=$plannedWork->delete();
+          $statPlan=getLastOperationStatus($resPlan);
+          if ($statPlan=='OK') $changed=true;
+        }
+      }
       $arrayWork[$j]=$work;
       $arrayWork[$j]->work=$workValue;
       $arrayWork[$j]->idResource=$userId;
@@ -113,7 +122,7 @@ for ($i=0; $i<$nbLines; $i++) {
     }
     $line->arrayWork=$arrayWork;
     $result=$line->save();
-    $stat=getLastOperationStatus($result);
+    $stat=($result)?getLastOperationStatus($result):'NO_CHANGE';
     if ($stat=="ERROR" or $stat=="INVALID") {
       $status='ERROR';
       $finalResult=$result;
@@ -141,11 +150,10 @@ for ($i=0; $i<$nbLines; $i++) {
     }
     if ($changed) {
        $resultAss=$ass->saveWithRefresh();
-
-       $stat=getLastOperationStatus($resultAss);
-       if ($stat=="OK") {
+       $statAss=getLastOperationStatus($resultAss);
+       if ($statAss=="OK" or $statAss=='NO_CHANGE') { // NO_CHANGE means work was changed, but not assignment (Ex : -1 day 1, +1 day 2)
        	$status='OK';
-       } else if ($stat=="ERROR"){
+       } else if ($statAss=="ERROR"){
        	$status='ERROR';
        	$finalResult=$resultAss;
        	break;
