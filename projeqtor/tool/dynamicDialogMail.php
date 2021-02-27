@@ -43,7 +43,7 @@ $emTp = new EmailTemplate();
 $idObjectType = 'id'.$objectClass.'Type';
 $idMailable = SqlList::getIdFromTranslatableName('Mailable', $objectClass);
 $where = "(idMailable = ".Sql::fmtId($idMailable)." or idMailable IS NULL) ";
-if (property_exists($obj, 'idObjectType')) $where.=" and (idType = '".$obj->$idObjectType."' or idType IS NULL)";
+if (property_exists($obj, $idObjectType)) $where.=" and (idType = '".$obj->$idObjectType."' or idType IS NULL)";
 $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
 $displayComboButton=false;
 $user=getSessionUser();
