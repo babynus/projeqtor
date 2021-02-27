@@ -1457,7 +1457,7 @@ function i18n($str, $vars=null) {
  * @return void
  */
 function exceptionHandler($exception) {
-  global $globalSilentErrors,$cronnedScript;
+  global $globalSilentErrors,$cronnedScript, $printInfo;
   if ($globalSilentErrors) {
     return true;
   }
@@ -1471,6 +1471,13 @@ function exceptionHandler($exception) {
       errorLog("   => #".$indTrc." ".$trc['file']." (".$trc['line'].")"." -> ".$trc['function']."()");
     }
   }
+  if (isset($printInfo) and is_array($printInfo) and count($printInfo)>0) {  
+    errorLog("   => Error on print for parameters:");
+    if (isset($printInfo['page'])) errorLog("      -> page : ".$printInfo['page']);
+    if (isset($printInfo['objectClass'])) errorLog("      -> object class : ".$printInfo['objectClass']);
+    if (isset($printInfo['objectId'])) errorLog("      -> object id : ".$printInfo['objectId']);
+    if (isset($printInfo['reportName'])) errorLog("      -> report name : ".$printInfo['reportName']);
+  }  
   if ($cronnedScript==true) {
     // PBER : 2020-09-11 : retart fails, so CRON is stopped, not restarted
     // Exception in Cron Process => try and restart CRON
