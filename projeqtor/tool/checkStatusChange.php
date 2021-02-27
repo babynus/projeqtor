@@ -41,12 +41,12 @@ $ass=new Assignment($idAssignment);
 $resHandled=null;
 $resDone=null;
 $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array('refType'=>$ass->refType,'refId'=>$ass->refId));
-if ($newReal>0 and $pe->realWork==0) {
+if ($newReal>0 and $pe and $pe->id and $pe->realWork==0) {
   $resHandled=$pe->setHandledOnRealWork('check');
   
 }
 
-if ($newLeft==0 and $pe->leftWork>0) {
+if ($newLeft==0 and $pe and $pe->id and $pe->leftWork>0) {
   $crit="id!=".Sql::fmtId($ass->id)
     ." and refType='".Sql::fmtStr($ass->refType)."' and refId=".Sql::fmtId($ass->refId)
     ." and leftWork>0";
