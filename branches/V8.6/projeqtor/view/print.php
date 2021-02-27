@@ -254,12 +254,17 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
   finalizePrint();
 ?>
 <?php function finalizePrint() {
-  global $outMode, $download, $includeFile, $orientation;
+  global $outMode, $download, $includeFile, $orientation, $printInfo;
   $pdfLib='html2pdf';
   //$pdfLib='mPdf';
   if (isWkHtmlEnabled()) {
     $pdfLib='WkHtmlToPdf';
   }
+  $printInfo=array();
+  $printInfo['page']=(isset($_REQUEST['page']))?$_REQUEST['page']:'';
+  $printInfo['objectClass']=(isset($_REQUEST['objectClass']))?$_REQUEST['objectClass']:'';
+  $printInfo['objectId']=(isset($_REQUEST['objectId']))?$_REQUEST['objectId']:'';
+  $printInfo['reportName']=(isset($_REQUEST['reportName']))?$_REQUEST['reportName']:'';
   //$pdfLib='dompdf';
   $outputFileName=null;
   if (isset($_REQUEST['objectClass']) and isset($_REQUEST['objectId']) and isset($_REQUEST['page']) 
@@ -318,7 +323,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
       $html2pdf->setDefaultFont($fontForPDF);
       $html2pdf->setTestTdInOnePage(false);
       //$html2pdf->setModeDebug(); 
-      //$content=str_replace("à","&agrave;",$content);
+      //$content=str_replace("Ã ","&agrave;",$content);
 //traceExecutionTime($includeFile,true);
 
      $html2pdf->writeHTML($content);
