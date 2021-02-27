@@ -58,7 +58,6 @@ foreach($fieldsArray as $key => $val) {
     unset($fieldsArray[$key]);
     continue;
   }
-  debugLog("$key => $val");
 	if ( ! SqlElement::isVisibleField($val) ) {
 		unset($fieldsArray[$key]);
     continue;
