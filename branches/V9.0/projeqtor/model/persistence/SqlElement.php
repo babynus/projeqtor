@@ -2503,18 +2503,20 @@ abstract class SqlElement {
       $attachmentDirectory = Parameter::getGlobalParameter ( 'paramAttachmentDirectory' );
       foreach ( $attachments as $attachment ) {
         $fromdir = $attachmentDirectory . $pathSeparator . "attachment_" . $attachment->id . $pathSeparator;
-        if (file_exists ( $fromdir . $attachment->fileName )) {
+        if (file_exists ( $fromdir . $attachment->fileName ) or $attachment->type=='link') {
           $attachment->id = null;
           $attachment->refType = get_class ( $newObj );
           $attachment->refId = $newObj->id;
           $attachment->save ();
-          $todir = $attachmentDirectory . $pathSeparator . "attachment_" . $attachment->id . $pathSeparator;
-          if (! file_exists ( $todir )) {
-            mkdir ( $todir, 0777, true );
+          if ($attachment->type=='file') {
+            $todir = $attachmentDirectory . $pathSeparator . "attachment_" . $attachment->id . $pathSeparator;
+            if (! file_exists ( $todir )) {
+              mkdir ( $todir, 0777, true );
+            }
+            copy ( $fromdir . $attachment->fileName, $todir . $attachment->fileName );
+            $attachment->subDirectory = str_replace ( $attachmentDirectory, '${attachmentDirectory}', $todir );
+            $attachment->save ();
           }
-          copy ( $fromdir . $attachment->fileName, $todir . $attachment->fileName );
-          $attachment->subDirectory = str_replace ( $attachmentDirectory, '${attachmentDirectory}', $todir );
-          $attachment->save ();
         }
       }
     }
