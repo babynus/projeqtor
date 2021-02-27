@@ -202,7 +202,6 @@ if ($planningMode=='RECW') {
              </td>
              <td>
                <?php echo ($currencyPosition=='before')?$currency:''; ?>
-               <?php debugLog($assignmentObj);?>
                <div id="assignmentDailyCost" name="assignmentDailyCost" value="<?php echo ($mode=='edit')?$assignmentObj->dailyCost:'';?>" 
                  dojoType="dijit.form.NumberTextBox" 
                  constraints="{min:0}" 
