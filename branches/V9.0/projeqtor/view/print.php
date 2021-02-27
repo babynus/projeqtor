@@ -272,12 +272,17 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
   finalizePrint();
 ?>
 <?php function finalizePrint() {
-  global $outMode, $download, $includeFile, $orientation;
+  global $outMode, $download, $includeFile, $orientation, $printInfo;
   $pdfLib='html2pdf';
   //$pdfLib='mPdf';
   if (isWkHtmlEnabled()) {
     $pdfLib='WkHtmlToPdf';
   }
+  $printInfo=array();
+  $printInfo['page']=(isset($_REQUEST['page']))?$_REQUEST['page']:'';
+  $printInfo['objectClass']=(isset($_REQUEST['objectClass']))?$_REQUEST['objectClass']:'';
+  $printInfo['objectId']=(isset($_REQUEST['objectId']))?$_REQUEST['objectId']:'';
+  $printInfo['reportName']=(isset($_REQUEST['reportName']))?$_REQUEST['reportName']:'';
   //$pdfLib='dompdf';
   $outputFileName=null;
   $customName=null;
