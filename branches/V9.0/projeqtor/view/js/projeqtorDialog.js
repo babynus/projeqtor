@@ -6733,6 +6733,10 @@ function saveAffectationResourceTeam() {
       return;
     }
   }
+  if (trim(dijit.byId('affectationResourceTeam'))=='') {
+    showAlert(i18n("messageMandatory", new Array(i18n("colIdResource"))));
+    return;
+  }
   if (formVar.validate()) {
     loadContent("../tool/saveAffectationResourceTeam.php", "resultDivMain", "affectationResourceTeamForm",
         true, 'affectation');
