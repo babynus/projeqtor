@@ -210,7 +210,8 @@ class Work extends GeneralWork {
       }
       //
       if ($needReplanOtherProjects) {
-        $where="idResource=$this->idResource and workDate='$this->workDate' and idProject!=$this->idProject";
+        $idProj=($this->idProject)?$this->idProject:0;
+        $where="idResource=$this->idResource and workDate='$this->workDate' and idProject!=$idProj";
         $list=$pw->getSqlElementsFromCriteria(null, null, $where, 'workDate asc');
         $arrayProjTreated=array();
         foreach ($list as $pw) {
