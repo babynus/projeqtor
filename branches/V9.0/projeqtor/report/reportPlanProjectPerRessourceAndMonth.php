@@ -266,10 +266,10 @@ foreach($tab as $proj=>$projet) {
   $sumProj[$proj]=array();
   $sumProjUnit[$proj]=array();
 
-  echo '<tr><td class="reportTableLineHeader" style="width:200px;"'.'rowspan ='.count($tab[$proj]).'>' . htmlEncode(SqlList::getNameFromId('Project',$proj)) . '</td>'; 
-  
- foreach($tab[$proj] as $resource=>$ressource) { 
- 
+  echo '<tr><td class="reportTableLineHeader" style="width:200px;" rowspan="'.count($tab[$proj]).'">' . htmlEncode(SqlList::getNameFromId('Project',$proj)) . '</td>'; 
+  $firstResource=true;
+  foreach($tab[$proj] as $resource=>$ressource) { 
+    if (!$firstResource) echo '<tr>';
     echo '<td class="reportTableLineHeader" style="width:200px;">' . htmlEncode(SqlList::getNameFromId('Affectable',$resource)) . '</td>';
     
     $sum=0;
@@ -289,7 +289,7 @@ foreach($tab as $proj=>$projet) {
     echo '</td>';
    
     echo '</tr>';
-    
+    $firstResource=false;
     } // fin des ressources
   
   } // fin des projets
