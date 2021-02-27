@@ -1257,7 +1257,7 @@ class Cron {
   
   public static function checkMailGroup() {
     self::init();
-    global $globalCronMode, $globalCatchErrors;
+    global $globalCronMode, $globalCatchErrors, $cronnedMailSender;
     $globalCronMode=true;
     $globalCatchErrors=true;
     $period=Mail::getMailGroupPeriod();
@@ -1365,6 +1365,7 @@ class Cron {
         $body.=$mail['template'];
         $body.='</body>';
         $body.='</html>';
+        $cronnedMailSender=$toSend->idUser;
         $resultMail[] = sendMail($dest, $title, $body, $item, null, null, null, null, null );
       }
     }

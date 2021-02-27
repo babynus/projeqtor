@@ -2155,7 +2155,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   // + Meeting::sendMail() : sendMail($destList, $this->name, $vcal, $this, $headers,$sender) !!! VCAL Meeting Invite
   // + User::authenticate : sendMail($paramAdminMail, $title, $message)
   // + /tool/sendMail.php : sendMail($dest,$title,$msg)
-  global $targetDirImageUpload, $cronnedScript;
+  global $targetDirImageUpload, $cronnedScript, $cronnedMailSender;
   $messageBody=str_replace($targetDirImageUpload, SqlElement::getBaseUrl().substr(str_replace("..", "", $targetDirImageUpload), 0, strlen(str_replace("..", "", $targetDirImageUpload))-1), $messageBody);
   $paramMailSendmailPath=Parameter::getGlobalParameter('paramMailSendmailPath');
   $paramMailSmtpUsername=Parameter::getGlobalParameter('paramMailSmtpUsername');
@@ -2193,7 +2193,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
 
 function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false,$autoSendReport=null,$attachments=false,$erroSize=false,$tempAttach=false) {
   scriptLog('sendMail_phpmailer');
-  global $logLevel;
+  global $logLevel,$cronnedMailSender;
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
   // The user is stored in session , if you try to changed email of the admin , you need to disconnect/reconnect for have the new email in sender
   $user=getSessionUser();
@@ -2220,7 +2220,9 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   }
   $message.=$addAttachToMessage;
   $mail=new Mail();
-  if (sessionUserExists()) {
+  if ($cronnedMailSender and $cronnedMailSender!=null) {
+    $mail->idUser=$cronnedMailSender;
+  } else if (sessionUserExists()) {
     $mail->idUser=getSessionUser()->id;
   }
   if ($object) {
@@ -2392,6 +2394,7 @@ function projeqtor_mb_str_split($str, $split_length) {
 }
 function sendMail_socket($to, $subject, $messageBody, $object=null, $headers=null, $sender=null, $boundary=null) {
   scriptLog('sendMail_socket');
+  global $cronnedMailSender;
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
   // The user is stored in session , if you try to changed email of the admin , you need to disconnect/reconnect for have the new email in sender
   $user=getSessionUser();
@@ -2426,7 +2429,9 @@ function sendMail_socket($to, $subject, $messageBody, $object=null, $headers=nul
   $smtpServers['default']['smtpPort']=Parameter::getGlobalParameter('paramMailSmtpPort');
   // Save data of the mail
   $mail=new Mail();
-  if (sessionUserExists()) {
+  if ($cronnedMailSender and $cronnedMailSender!=null) {
+    $mail->idUser=$cronnedMailSender;
+  } else if (sessionUserExists()) {
     $mail->idUser=getSessionUser()->id;
   }
   if ($object) {
@@ -2609,6 +2614,7 @@ function quit($sock) {
 
 function sendMail_mail($to, $title, $message, $object=null, $headers=null, $sender=null, $boundary=null, $references=null) {
   scriptLog('sendMail_mail');
+  global $cronnedMailSender;
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
   // The user is stored in session , if you try to changed email of the admin , you need to disconnect/reconnect for have the new email in sender
   $user=getSessionUser();
@@ -2624,7 +2630,9 @@ function sendMail_mail($to, $title, $message, $object=null, $headers=null, $send
   }
   // Save data of the mail
   $mail=new Mail();
-  if (sessionUserExists()) {
+  if ($cronnedMailSender and $cronnedMailSender!=null) {
+    $mail->idUser=$cronnedMailSender;
+  } else if (sessionUserExists()) {
     $mail->idUser=getSessionUser()->id;
   }
   if ($object) {
