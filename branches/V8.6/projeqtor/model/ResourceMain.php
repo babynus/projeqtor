@@ -708,7 +708,7 @@ class ResourceMain extends SqlElement {
     }
     $where.= " and (startDate is null or startDate<='".date('Y-m-d')."')";
     $rc=new ResourceCost();
-    $rcL = $rc->getSqlElementsFromCriteria(null, false, $where, "startDate desc");
+    $rcL = $rc->getSqlElementsFromCriteria(null, false, $where, "startDate desc".((Sql::isPgsql())?' NULLS LAST':''));
     if (count($rcL)>=1) {
       $rc=reset($rcL);
       return $rc->cost;
