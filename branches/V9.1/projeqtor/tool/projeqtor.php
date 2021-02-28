@@ -3651,7 +3651,7 @@ function firstDayofWeek($week=null, $year=null) {
   }
   $Jan1=mktime(1, 1, 1, 1, 1, $year);
   $MondayOffset=(11-date('w', $Jan1))%7-3;
-  $desiredMonday=strtotime(($week-1).' weeks '.$MondayOffset.' days', $Jan1);
+  $desiredMonday=strtotime((intval($week)-1).' weeks '.$MondayOffset.' days', $Jan1);
   return $desiredMonday;
 }
 
