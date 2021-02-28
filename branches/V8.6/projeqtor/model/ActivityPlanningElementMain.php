@@ -466,16 +466,22 @@ class ActivityPlanningElementMain extends PlanningElement {
       $clause= "idProject=".$this->idProject." and refType='".$this->refType."' and refId=".$this->refId;
       $pw->purge($clause);
       if($old->idPlanningMode!='23'){
-        $ass->plannedWork;
+        //$ass->plannedWork;
         $lstAss=$ass->getSqlElementsFromCriteria(null, null,$clause);
         if($lstAss){
           foreach ( $lstAss as $assign){
             if($assign->isResourceTeam==1){
               $assign->delete();
+              continue;
             }
-            $newLeft=$assign->leftWork-$assign->plannedWork;
-            $assign->assignedWork=GeneralWork::convertWork(0);
-            $assign->leftWork=GeneralWork::convertWork($newLeft);
+            //$newLeft=$assign->leftWork-$assign->plannedWork;
+            $assign->assignedWork=0;
+            $assign->leftWork=0;
+            $assign->plannedWork=$assign->realWork;
+            $assign->assignedCost=0;
+            $assign->leftCost=0;
+            $assign->plannedCost=$assign->realCost;
+            $assign->notPlannedWork=0;
             $assign->save();
           }
         }
