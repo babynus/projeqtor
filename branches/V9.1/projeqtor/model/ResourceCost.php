@@ -91,7 +91,7 @@ class ResourceCost extends SqlElement {
     }
     $id=($this->id)?$this->id:SQL::$lastQueryNewid;
     if ($this->startDate and $new) {
-      $where="idResource='" . Sql::fmtId($this->idResource) . "' and idRole='" . Sql::fmtId($this->idRole) . "' ";
+      $where="idResource=" . Sql::fmtId($this->idResource) . " and idRole=" . Sql::fmtId($this->idRole) . " ";
       $where.=" and endDate is null";
       $where.=" and id<>" . Sql::fmtId($id);
       $rc=new ResourceCost();
@@ -105,7 +105,7 @@ class ResourceCost extends SqlElement {
     if ($newCost) { // Cost has changed : must dispatch to stored costs
       // Update Cost for Real Work : for the start date of new cost only (if set)
       $wk=new Work();
-      $where="idResource='" . Sql::fmtId($this->idResource) . "'";
+      $where="idResource=" . Sql::fmtId($this->idResource) ;
       if ($this->startDate) {
         $where.= " and workDate>='" . $this->startDate . "'";
       }
@@ -137,7 +137,7 @@ class ResourceCost extends SqlElement {
           }
         }
       }           
-      $where="idResource='" . Sql::fmtId($this->idResource) . "' and idRole='" .Sql::fmtId($this->idRole) . "' and leftWork>0";
+      $where="idResource=" . Sql::fmtId($this->idResource) . " and idRole=" .Sql::fmtId($this->idRole) . " and leftWork>0";
       $ass=new Assignment();
       $assList=$ass->getSqlElementsFromCriteria(null, false, $where);
       foreach ($assList as $ass) {
@@ -167,8 +167,8 @@ class ResourceCost extends SqlElement {
     $precStartDate=null;
     $precCost=0;
     if ($this->startDate) {
-      $where="idResource='" . Sql::fmtId($this->idResource) . "' and idRole='" . Sql::fmtId($this->idRole)
-        . "' and (endDate is not null ".((Sql::isMysql())?"and endDate<>'0000-00-00'":""). ")";
+      $where="idResource=" . Sql::fmtId($this->idResource) . " and idRole=" . Sql::fmtId($this->idRole)
+        . " and (endDate is not null ".((Sql::isMysql())?"and endDate<>'0000-00-00'":""). ")";
       if ($this->id) {
         $where.=" and id<>" . Sql::fmtId($this->id);
       }
