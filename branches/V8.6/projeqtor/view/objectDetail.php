@@ -6568,6 +6568,16 @@ function drawResourceCostFromObject($list, $obj, $refresh=false) {
   if ($obj->idle==1) {
     $canUpdate=false;
   }
+  // Sort list
+  $sortedList=array();
+  foreach ($list as $rcost) {
+    $key=SqlList::getNameFromId('Role', $rcost->idRole);
+    $key.='#';
+    $key.=($rcost->startDate)?$rcost->startDate:'1900-01-01';
+    $sortedList[$key]=$rcost;
+  }
+  ksort($sortedList);
+  $list=$sortedList;
   echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
   echo '<tr>';
   $funcList=' ';
