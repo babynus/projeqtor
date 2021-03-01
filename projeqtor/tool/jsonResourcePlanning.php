@@ -184,7 +184,13 @@ if ( array_key_exists('listShowNullAssignment',$_REQUEST) ) {
  
 if (!$seeAllResource) {
    $queryWhere.= ($queryWhere=='')?'':' and ';
-   $queryWhere.=' ass.idResource='.$user->id;
+   $listUsers=array($user->id=>$user->name);
+   $rta=new ResourceTeamAffectation();
+   $listRta=$rta->getSqlElementsFromCriteria(array('idResource'=>$user->id));
+   foreach ($listRta as $rta) {
+     $listUsers[$rta->idResourceTeam]='pool';
+   }
+   $queryWhere.=' ass.idResource in '.transformListIntoInClause($listUsers);
 }
 $queryWhere.= ($queryWhere=='')?'':' and ';
 $queryWhere.=getAccesRestrictionClause('Activity',$table,$showIdleProjects);
