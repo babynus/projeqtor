@@ -1116,11 +1116,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       if (strpos($obj->getFieldAttributes($col), 'nobr')!==false and $obj->getFieldAttributes($col)!='hidden' and !$hide and ! in_array($col, $extraHiddenFields)) {
         $nobr=true;
       }
-      if ($obj->getFieldAttributes($col)!='hidden' and !$hide) {
+      //if ($obj->getFieldAttributes($col)!='hidden' and !$hide) {
         if ($nobr) echo '&nbsp;';
-        echo '<span class="tabLabel" style="font-weight:normal">'.i18n($item).'</span>';
+        echo '<span id="'.$col.'" class="tabLabel" style="font-weight:normal;'.(($obj->getFieldAttributes($col)!='hidden' and !$hide)?'':'display:none;').'">'.i18n($item).'</span>';
         echo '&nbsp;';
-      }
+      //}
       
       if (!$nobr and (!$hide or !$print)) {
         echo "</td></tr>";
