@@ -3,26 +3,31 @@
 .. title:: Humans Resources
 
 .. index:: Humans resources
+.. index:: HR Module 
 
 .. _humans_resources:
-
+.. _human_resource:
 ****************
 Humans Resources
 ****************
 
-.. note:: **Documentation** 
+.. important:: **Documentation** 
    
-   The human resources module was developed by an external contributor SALTO CONSULTING.
-   
-   `French documentation <https://www.projeqtor.org/files/ProjeQtOr%20-%20Documentation%20-%20Absences%20r%C3%A9glement%C3%A9es.pdf>`_ on the implementation of regulated absences is available on the `download page <https://www.projeqtor.org/fr/product-fr/downloads-fr/>`_
+   The human resources module was developed by an external contributor SALTO CONSULTING. The explanations below have been taken from the instructions, provided in French only, with the module.
+   * `French documentation <https://www.projeqtor.org/files/ProjeQtOr%20-%20Documentation%20-%20Absences%20r%C3%A9glement%C3%A9es.pdf>`_ on the implementation of regulated absences is available on the `download page <https://www.projeqtor.org/fr/product-fr/downloads-fr/>`_
 
-This section allows to manage the society's Humans Resources 
+   The HR module was created in order to be easily adapted to French law, but it can be fully parameterized according to the rights of any country
 
-This system comes in addition to the standards of the management of absences
+
+This section allows to manage the society's Humans Resources. 
+
+This system comes in addition to the standards of the management of absences.
+
+Used to manage absences that must be validated, controlled and have values to be regulated according to French law.
 
 For the module to be functional, you must define the employees, new status for resources or users. 
 
-The absence manager in charge of leave, the types of leave you offer to your employees and the different types of employment contracts
+The absence manager in charge of leave, the types of leave you offer to your employees and the different types of employment contracts.
 
 
 * Start to define the :ref:`employee-manager`, :ref:`leaves-types` and :ref:`employment-contract-type` 
@@ -34,33 +39,15 @@ The absence manager in charge of leave, the types of leave you offer to your emp
 * The system also includes a validation process of the requests during the leave period.
 
 
-.. warning:: **Absence Administrator**
+ .. compound:: Absence Administrator
 
-   In order to be able to manage and parameterize the human resources module after its installation, 
-   you must go to global parameters in the Work tab.
-   A new parameter is displayed: Leaves System.
+   In order to be able to manage and configure the human resources module after its installation, you must access the :ref:`global parameters<leaves-system>`.
    
-   You can choose here who will be the administrator of this module
-
+   A special additional HR section allows you to define the administrator of absences and regulated rights.
    
-.. important:: The HR module was created in order to be easily adapted to French law 
-   but it can be fully parameterized according to the rights of any country
 
 
-.. raw:: latex
-
-    \newpage
-    
-.. index:: Regulated absence 
-   
-.. _regulated_absences:
-   
-Regulated absence
------------------
-
-The "Regulated Absence" module is used to manage absences that must be validated, controlled and have values to be regulated according to French law.
-
-Thanks to this module, it is thus possible to manage the paid holidays, the RTT, the Stopped diseases by treating
+It is thus possible to manage the paid holidays, the RTT, the Stopped diseases by treating:
 
    * Quantities acquired over a period of time
    * The period of validity of a quantity of absence 
@@ -74,11 +61,11 @@ Thanks to this module, it is thus possible to manage the paid holidays, the RTT,
 
 .. rubric:: Leaves States   
 
-Regulated absences have 3 states:
+With the activation of the HR module, an absence workflow is added with 3 states, which are accessible and customizable in the :ref:`automation systems<workflow>`.
 
    .. compound:: Recorded
 
-      Creation status. In this state all the data of the absence can be modified
+      Creation status. In this state all the data of the absence can be modified.
       
    .. compound:: Submitted
 
@@ -101,8 +88,9 @@ Regulated absences have 3 states:
 
 .. note:: 
 
-   The calculation of the number of days represented by absence is done on the basis of working days
-   :ref:`global_parameters` and schedule associated with employee: holidays, non-working days
+   The calculation of the number of days represented by absence is done on the basis of working days.
+   
+   The working days are defined in :ref:`global_parameters` and :ref:`calendar<calendars>` associated with employee: holidays, non-working days.
 
 
 
@@ -125,33 +113,30 @@ Employees and Manager
    * :ref:`resource`
    * :ref:`module-management`
 
-The properties below is visible only when the :ref:`regulated Absence module<module-management>` is enabled
+The properties below is visible only when the :ref:`HR module<module-management>` is enabled
 
 
 .. rubric:: Employee
 
-An employee is a :ref:`resource` whose property **"is an employee"** is checked in the screen resources
-
-* The manager records the request.
-
-* Employee makes the request.  
+An employee is a :ref:`resource` whose property **"is an employee"** is checked in the screen resources.
    
 Once the resources are saved as employees, you can manage them from the employee screen.
 
 You find the same fields of description as the resources.
 
-In this section, the employee can see the person who manage its leaves periods
+In this section, the employee can see the person who manage its leaves periods.
 
 
-      .. compound:: Employment Contract
+
+ .. compound:: Employment Contract
       
-         This section is visible and linked to the :ref:`employment-contract-type` screen
+   This section is visible and linked to the :ref:`employment-contract-type` screen.
    
-         To an employee are associated a :ref:`employment-contract` and :ref:`leaves-rights-earned` 
+   To an employee are associated a :ref:`employment-contract` and :ref:`leaves-rights-earned`.
          
-         The contract is associated with a :ref:`employment-contract-type` 
+   The contract is associated with a :ref:`employment-contract-type`.
          
-         This allow the employee to associate the rules of acquisition, the special rules of regulated absences and the acquired rights by type of absence and by acquisition period.
+   This allow the employee to associate the rules of acquisition, the special rules of regulated absences and the acquired rights by type of absence and by acquisition period.
 
 
 .. rubric:: Manager
@@ -173,9 +158,7 @@ He can validate or reject employee absentee requests that he manages.
 
 .. important:: 
 
-   The management of an employee is dated, which allows to change manager 
-   
-   or temporarily delegate management to another manager (absences).
+   The management of an employee is dated, which allows to change manager or temporarily delegate management to another manager (absences).
 
 
 .. figure:: /images/GUI/RH_SCR_Manager.png
