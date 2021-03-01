@@ -44,7 +44,7 @@ $mainPage=(! $user or ! $user->id)?true:false;
           <div id="welcomeTitle" style="position:absolute;height:100%;top:5%;right:5%;<?php if ($mainPage) echo "cursor:pointer;";?>" 
           <?php if ($mainPage) echo ' onclick="window.location=\'../index.php\';" title="'.i18n('ssoReconnect').'" ';?>
           >
-            <?php $logo="img/title.png"; 
+            <?php $logo="../view/img/title.png"; 
                   if (file_exists("../logo.gif")) $logo="../logo.gif"; 
                   if (file_exists("../logo.png")) $logo="../logo.png"; ?> 
             <img style="max-height:60px" src="<?php echo $logo;?>" style="width: 300px; height:54px"/>
