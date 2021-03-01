@@ -5727,6 +5727,8 @@ abstract class SqlElement {
       $ref .= substr ( $url, 0, strpos ( $url, '/sso/projeqtor/' ) );
     } else if (strpos ( $url, '/sso/' )) {
       $ref .= substr ( $url, 0, strpos ( $url, '/sso/' ) );
+    } else if (strpos ( $url, '/mobile/' )) {
+      $ref .= substr ( $url, 0, strpos ( $url, '/mobile/' ) );
     }
     return $ref;
   }
