@@ -101,9 +101,19 @@ Toolbar
 
 .. rubric:: |oneBLC| Activity planning calculation
 
-Click on |Plan| to start the activity planning calculation.
+When you make a modification on an element of your project, the project must then be recalculated to take it into account.
 
-A popup window appears with the list of projects. The check boxes allow you to select one or more projects to recalculate.
+You have the option of using the automatic calculation function, which, if you make a modification on the planning screen, and only on this screen, will immediately take this modification into account.
+
+If the modification is made on another screen, even if you have selected automatic calculation then, you will have to restart the calculation on the planning screen.
+
+
+
+* Click on |Plan| to start the activity planning calculation.
+
+* A popup window appears with the list of projects. 
+
+* The check boxes allow you to select one or more projects to recalculate.
 
 
 
@@ -115,7 +125,7 @@ A popup window appears with the list of projects. The check boxes allow you to s
 
 If you have selected one or more projects with :ref:`Project Selector<project-selector>` then the selected projects will be automatically checked.
    
-Choose the date on which you want to recalculate the project. Whether in the past, today or in the future. 
+Choose the date on which you want to recalculate the project.  
 
 By checking the "Hide unselected projects" box, you will only have the projects selected in the project selector and they will be automatically checked.
 
@@ -151,9 +161,11 @@ By checking the "Hide unselected projects" box, you will only have the projects 
 
 .. rubric:: |twoBLC| Automatic run plan
 
-Check the box to activate automatic calculation on each change.
+Swith the button to activate automatic calculation on each change.
   
-Only works on the Gantt Planning view. If the modification of an element is carried out on the dedicated screen of the element, then it is necessary to click again on BUTTON to restart the computation
+Only works on the Gantt Planning view. 
+
+If the modification of an element is carried out on the dedicated screen of the element, then it is necessary to click again on BUTTON to restart the computation
 
 All modifications about assignement (rate, name or numbers of resources, dates...) done are not displayed on the new planning screen until having, for this purpose, activited the planning calculation, either in an automatic run plan or not.
   
@@ -1413,13 +1425,17 @@ See: :ref:`Recurrent mode assignment<recurrent-mode-assign>`
 
 .. rubric:: Manual planning
 
-* Selection of activities through manual planning mode
-* Choice for planned workload between **planned work** or **real work** data.
+* This is the most priority planning mode and constraint.
 
-See: :ref:`global parameters<GP-effectCapacity>`.
+* You have the option to save the work as scheduled or actual work. 
 
+* Two screens are dedicated to it: :ref:`planned interventions<planned-interventions>` to plan monthly and the :ref:`View interventions<view-interventions>` for read-only.
 
-* Display of a monthly calendar of the same type as Absence with :ref:`planned interventions<planned-interventions>`
+.. note::
+
+   The choice of planned or actual work is made in the global parameters in the planning section work tab.
+
+   See: :ref:`global parameters<GP-effectCapacity>`.
 
 :ref:`|MODES|<planning-mode-gantt>` 
 
@@ -2005,8 +2021,8 @@ Ctrl Click allows you to complete the two half days
 
 .. _view-interventions:
    
-View intervention
-=================
+View interventions
+==================
 
 This screen allows you to see your planned interventions.
 
