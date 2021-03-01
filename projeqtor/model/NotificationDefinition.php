@@ -615,7 +615,7 @@ class NotificationDefinition extends SqlElement {
     $result .= '<td class="label" style="text-align:right;font-weight:normal;"><label>' . i18n("col".ucfirst($itemLab)).'';
     $result .= Tool::getDoublePoint().'</lable></td>';
     $result .= '<td>';
-    $result .= '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class" ';
+    $result .= '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class" ';
     $result .= '  style="width: ' . ($fieldWidth) . 'px;' . $fieldStyle . '"';
     $result .= $name;
     $result .=$attributes;
@@ -682,7 +682,7 @@ class NotificationDefinition extends SqlElement {
     $result .= '<td class="label" style="font-weight:normal;"><label>' . i18n("col".ucfirst($itemLab)).'';
     $result .= Tool::getDoublePoint().'</lable></td>';
     $result .= '<td>';
-    $result .= '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class"  ';
+    $result .= '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class"  ';
     $result .= '  style="width: ' . ($fieldWidth-100) . 'px;' . $fieldStyle . '; "';
     $result .= $name;
     $result .=$attributes;
@@ -756,7 +756,7 @@ class NotificationDefinition extends SqlElement {
     $result .= '<td class="label" style="text-align:right;font-weight:normal;"><label>' . i18n("col".ucfirst($itemLab));
     $result .= Tool::getDoublePoint().'</label></td>';
     $result .= '<td>';
-    $result .= '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class"  ';
+    $result .= '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class"  ';
     $result .= '  style="width: ' . ($fieldWidth-100) . 'px;' . $fieldStyle . '; "';
     $result .= $name;
     $result .=$attributes;
@@ -885,7 +885,7 @@ class NotificationDefinition extends SqlElement {
     if (!$print) {
         $result .= '<td>';
         $result .= htmlDisplayTooltip($toolTip,$fullItem,$print,$outMode);
-        $result .= '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class" xlabelType="html" ';
+        $result .= '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class" xlabelType="html" ';
         $result .= '  style="width: ' . ($fieldWidth) . 'px;' . $fieldStyle . '"';
         $result .= $name;
         $result .=$attributes;
