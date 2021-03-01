@@ -155,3 +155,17 @@ INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
 (5,'lockedLeftWork','2'),
 (6,'lockedLeftWork','2'),
 (7,'lockedLeftWork','2');
+
+-- REPORT attachment.php
+
+INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasPdf`) VALUES
+(115, 'reportAttachment', 9, 'attachment.php', 950, 1);
+
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES
+(115, 'idUser', 'userList', 10, null), 
+(115, 'Idle', 'boolean', 20, true);
+
+INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
+(1, 115, 1),
+(2, 115, 1),
+(3, 115, 1);
