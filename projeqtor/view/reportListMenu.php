@@ -17,7 +17,6 @@ foreach ($lst as $h) {
   $category=SqlList::getFieldFromId('Report', $report, 'idReportCategory',false);
   $allowedCategory[$category]=$category;
 }
-
 if (!$categ) {
   echo "<div class='messageData headerReport' style= ''>";
   echo ucfirst(i18n('colCategory'));

@@ -8039,28 +8039,58 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
   public function addFirstErrorField($obj,$col,&$result,$layout,&$exist){
     $sectionPosition=self::setSectionPosition();
       $exist=true;
+      $isPlan=false;
+      $isWork=false;
+      $asObje="";
+      $objectClass=get_class($obj);
+      if(strpos($objectClass, 'PlanningElement')){
+        $asObje=$objectClass;
+        $isPlan=true;
+      }else if(strpos($objectClass, 'WorkElement')){
+        $asObje=$objectClass;
+        $isWork=true;
+      }
+      if($asObje!=""){
+        if($isPlan){
+          $objCl= trim(str_replace("PlanningElement", "", $objectClass));
+        }else{
+          $objCl= trim(str_replace("PlanningElement", "", WorkElement));
+        }
+        $obj=new $objCl ();
+      }
       if($layout=='tab'){
         $section='';
         foreach ($obj as $id=>$val){
           if(substr($id, 0,5 )=='_sec_'){
-            $section=substr($id,5);
+            $section=lcfirst(substr($id,5));
           }
           if($id==$col){
             break;
           }
+          if($asObje!="" and $id==$objectClass){
+              $asCol=false;
+              foreach ($val as $elId=>$elVal){
+                if($elId==$col){
+                  $asCol=true;
+                  break;
+                }
+              }
+              if($asCol==true)break;
+          }
         }
         $position='detail';
-        
         if(isset($sectionPosition[$section]['99'])){
           $position=$sectionPosition[$section]['99'];
         }
         $tab= $position;
         $field='<input id="firstFieldRequired" value="'.$col.'" hidden />';
         $tab='<input id="firstTabdRequired" value="'.$tab.'" hidden />';
-        $result=$result.$field.$tab;
+        $isSpecificObj='<input id="isSepcificObj" value="'.$asObje.'" hidden />';
+        $result=$result.$field.$tab.$isSpecificObj;
       }else{
         $field='<input id="firstFieldRequired" value="'.$col.'" hidden />';
-        $result=$result.$field;
+        $isSpecificObj='<input id="isSepcificObj" value="'.$asObje.'" hidden />';
+        $result=$result.$field.$isSpecificObj;
       }
   }
 

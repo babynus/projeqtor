@@ -2116,6 +2116,8 @@ table.dijitCalendarContainer {
 .dijitButtonIconDownload { background-position: -926px;}
 .dijitButtonIconPowerpoint { background-position: -951px;}
 
+.dijitButtonIconSubTask {background-image: url(customIcons/new/iconTodoList.svg);  background-repeat: no-repeat; }
+
 .dijitColorPalette {
   border: 1px solid #7eabcd;
   background: #fff;

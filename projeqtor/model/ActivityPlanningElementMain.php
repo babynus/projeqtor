@@ -112,6 +112,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $fixPlanning;
   public $_lib_helpFixPlanning;
   public $paused;
+  public $_lib_helpPaused;
   public $_tab_5_1_smallLabel = array('workElementCount', 'estimated', 'real', 'left', '', 'ticket');
   public $workElementCount;
   public $workElementEstimatedWork;
@@ -160,7 +161,7 @@ class ActivityPlanningElementMain extends PlanningElement {
     "indivisibility"=>"",
     "minimumThreshold"=>"",
     "fixPlanning"=>"nobr",
-     "paused"=>"",
+     "paused"=>"nobr",
     "_separator_menuTechnicalProgress_marginTop"=>"hidden",
     "_separator_sectionRevenue_marginTop"=>"hidden",
   );
@@ -169,7 +170,8 @@ class ActivityPlanningElementMain extends PlanningElement {
   		"minimumThreshold"=> "tooltipMinimumThreshold",
   		"indivisibility"=> "tooltipIndivisibility",
       "fixPlanning"=> "tooltipFixPlanningActivity",
-      "expectedProgress"=> "tooltipFixPlanningActivity"
+      "expectedProgress"=> "tooltipFixPlanningActivity",
+      "paused"=>"tooltipPaused"
   );
   
   private static $_databaseTableName = 'planningelement';
@@ -439,6 +441,11 @@ class ActivityPlanningElementMain extends PlanningElement {
       if($old->minimumThreshold != $this->minimumThreshold){
         $this->minimumThreshold = Work::convertWork($this->minimumThreshold);
       }
+    }
+    
+    if($this->paused==1){
+      $this->plannedStartDate=null;
+      $this->plannedEndDate=null;
     }
     //gautier #workUnit
     if($this->idWorkUnit and $this->idComplexity and $this->quantity){

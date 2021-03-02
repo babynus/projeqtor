@@ -62,7 +62,7 @@ if (!$selection or count($selectList)==0) {
 	 echo '<input type="hidden" id="summaryResult" value="'.$summary.'" />';
 	 exit;
 }
-
+$isLongText=RequestHandler::getValue("isLongText");
 $newValue='';
 if(trim(RequestHandler::getValue('newMultipleUpdateValue'))!=''){
   $newValue=RequestHandler::getValue('newMultipleUpdateValue');
@@ -280,7 +280,13 @@ foreach ($selectList as $id) {
 	}
 	
 	if(property_exists($item, $field)){
-	  $item->$field=$newValue;
+	  if($isLongText!="true"){
+	    $item->$field=$newValue;
+	  }else{
+	    $newValue="<br>".$newValue;
+	    $item->$field=$item->$field.$newValue;
+	  }
+	  
 	}else{
 	  echo '<td><span class="messageWARNING" >' . i18n($className) . " #" . htmlEncode($item->id) . ' '.i18n('nonExistentFields'). ' '.$field.'</span></td>';
 	  continue;
