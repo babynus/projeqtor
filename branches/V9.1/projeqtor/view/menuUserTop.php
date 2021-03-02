@@ -213,7 +213,7 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
        <input type="color" id="menuUserColorPickerBis" onInput="setColorTheming(dojo.byId('menuUserColorPicker').value,this.value);" onChange="saveDataToSession('newGuiThemeColorBis',this.value.substr(1),true);setColorTheming(dojo.byId('menuUserColorPicker').value,this.value);" value="<?php echo '#'.Parameter::getUserParameter('newGuiThemeColorBis');?>" style="height: 24px;width: 160px;border-radius: 5px 5px 5px 5px;" />
     </td>
   </tr>
-  <?php if (isset($paramNewGuiSwitch) and $paramNewGuiSwitch==true) {
+  <?php 
     $brightness=Parameter::getUserParameter('newGuiThemeBrightness');
     if (!$brightness) $brightness=0;
     ?>
@@ -230,7 +230,6 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
       </ol>
     </td>
   </tr>
-  <?php }?> 
 <?php }?>
   <tr style="height:40px">
     <td width="120px" style="text-align:right"><?php echo i18n("menuUserStartPage");?>&nbsp;<?php if (! isNewGui()) echo ":&nbsp;"; ?></td>
