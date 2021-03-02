@@ -88,7 +88,9 @@ $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Single')!='0'
   </tr>
   <tr>
     <td style="width:<?php echo $printWidthDialog;?>;">
+      <table style="width:100%;">
       <?php SubTask::drawSubtasksForObject($obj, $objectClass, $objectId,false,false,false,true);?>
+      </table>
     </td>
   </tr>
  <tr>

@@ -1034,11 +1034,7 @@ function listFieldsForFilter($obj, $nbRows, $included = false) {
 }
 
 function listFieldsForMultipleUpdate($obj, $nbRows, $included = false) {
-  global $extraHiddenFields, $extraReadonlyFields, $peExtraHiddenFields, $peExtraReadonlyFields;
-  if (!$extraHiddenFields) $extraHiddenFields = $obj->getExtraHiddenFields ( null, null, getSessionUser ()->getProfile () );
-  if (!$extraReadonlyFields) $extraReadonlyFields = $obj->getExtraReadonlyFields ( null, null, getSessionUser ()->getProfile () );
   if (method_exists($obj,'setAttributes')) $obj->setAttributes();
-  
   foreach ( $obj as $col => $val ) {
     
     if ($col=='_Assignment') {
@@ -1047,7 +1043,7 @@ function listFieldsForMultipleUpdate($obj, $nbRows, $included = false) {
       continue;
     }
     if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'readonly' ) and
-    ! $included  and  ! in_array($col,$extraHiddenFields) and ! in_array($col,$extraReadonlyFields) and $col != 'id' and $col != '_Note' and $col != '_wbs') {
+    ! $included  and $col != 'id' and $col != '_Note' and $col != '_wbs') {
       
       if ($nbRows > 0)echo ', ';
       $dataType = $obj->getDataType ( $col );

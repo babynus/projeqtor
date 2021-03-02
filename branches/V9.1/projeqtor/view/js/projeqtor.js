@@ -2155,22 +2155,38 @@ function finalizeMessageDisplay(destination, validationType) {
             tab=dojo.byId('firstTabdRequired').value,
               tabToSelect=dijit.byId('tabDetailContainer_tablist_'+ tab.charAt(0).toUpperCase() + tab.slice(1)),
                 tabContainer=dijit.byId('tabDetailContainer'),
-                  field=dojo.byId(fieldName);
-      tabContainer.selectChild(tabToSelect.page);
-      if(field.type!='textarea'){
-        field.focus();
-      }else{
-        var editor=CKEDITOR.instances[fieldName];
-        editor.focus();
+                  field=dojo.byId(fieldName),
+                    specificObj=dojo.byId("isSepcificObj").value;
+      if(tabContainer!=undefined){
+        tabContainer.selectChild(tabToSelect.page);
+        if(field==undefined){
+          field=dojo.byId(specificObj+"_"+fieldName);
+        }
+        if(field!=undefined){
+          if(field.type!='textarea'){
+            field.focus();
+          }else{
+            var editor=CKEDITOR.instances[fieldName];
+            editor.focus();
+          }
+        }
+
       }
+
     }else if(dojo.byId('firstFieldRequired') && !dojo.byId('firstTabdRequired')){
       var fieldName=dojo.byId('firstFieldRequired').value,
-          field=dojo.byId(fieldName);
-      if(field.type!='textarea'){
-        field.focus();
-      }else{
-        var editor=CKEDITOR.instances[fieldName];
-        editor.focus();
+            field=dojo.byId(fieldName),
+              specificObj=dojo.byId("isSepcificObj").value;
+      if((field==undefined || field==null) && specificObj!=null ){
+        field=dojo.byId(specificObj+"_"+fieldName);
+      }
+      if(field!=undefined || field!=null){
+        if(field.type!='textarea'){
+          field.focus();
+        }else{
+          var editor=CKEDITOR.instances[fieldName];
+          editor.focus();
+        }
       }
     }
   } else {

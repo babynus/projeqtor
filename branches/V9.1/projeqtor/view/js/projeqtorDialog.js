@@ -12442,6 +12442,7 @@ function multipleUpadteSelectAtribute(value) {
         });
         dojo.byId('multipleUpdateOperateur').visibility = 'visible';
         if(dataType!='textarea'){
+          dojo.byId('isLongText').value="";
           if(dojo.byId('multipleUpdateOperateur').firstChild.innerHTML==undefined || dojo.byId('multipleUpdateOperateur').firstChild.innerHTML!=i18n('replaceMultipleUpadte') ){
             var spanVal=document.createElement('span');
             spanVal.setAttribute('style','position:relative;top:10px;');
@@ -12450,7 +12451,6 @@ function multipleUpadteSelectAtribute(value) {
             dojo.byId('multipleUpdateOperateur').insertAdjacentElement('afterbegin',spanVal);
           }
         }
-        if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
         dojo.byId('dataTypeSelected').value=dataType;
         if (dataType == "bool") {
           filterType="bool";
@@ -12460,7 +12460,9 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
             display : 'none'
           });
-          if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
+          dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
+            display : 'none'
+          });
           if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { 
             dojo.style(dijit.byId('multipleUpdateValueCheckboxSwitch').domNode, {
               display : 'block'
@@ -12568,7 +12570,6 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
             display : 'block'
           });
-          if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="block";
           dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
             display : 'block'
           });
@@ -12596,7 +12597,6 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
             display : 'none'
           });
-          if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
           dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
             display : 'none'
           });
@@ -12616,6 +12616,7 @@ function multipleUpadteSelectAtribute(value) {
           });
           dijit.byId('multipleUpdateValueDate').reset();
         } else if (dataType=="textarea"){
+          dojo.byId('isLongText').value="true";
           dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
             display : 'block'
           });
@@ -12633,7 +12634,6 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
             display : 'none'
           });
-          if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
           dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
             display : 'none'
           });
@@ -12657,7 +12657,6 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
             display : 'none'
           });
-          if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
           dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
             display : 'none'
           });
@@ -12685,7 +12684,6 @@ function multipleUpadteSelectAtribute(value) {
         dojo.style(dijit.byId('newMultipleUpdateValueueList').domNode, {
           display : 'none'
         });
-        if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
         dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
           display : 'none'
         });
@@ -12721,7 +12719,6 @@ function multipleUpadteSelectAtribute(value) {
     dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
       display : 'none'
     });
-    if (isNewGui) dojo.byId("multipleUpdateValueListHideTop").style.display="none";
     dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
       display : 'none'
     });

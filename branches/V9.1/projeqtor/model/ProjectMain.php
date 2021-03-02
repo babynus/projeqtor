@@ -71,9 +71,11 @@ class ProjectMain extends SqlElement {
   public $fixPlanning;
   public $_lib_helpFixPlanning;
   public $paused;
+  public $_lib_helpPaused;
   public $fixPerimeter;
   public $_lib_helpFixPerimeter;
   public $allowReduction;
+  public $_lib_helpAllowReduction;
   public $isUnderConstruction;
   public $_lib_helpUnderConstruction;
   public $excludeFromGlobalPlanning;
@@ -137,10 +139,11 @@ class ProjectMain extends SqlElement {
   private static $_fieldsTooltip = array(
       "fixPlanning"=> "tooltipFixPlanning",
       "fixPerimeter"=> "tooltipFixPerimeter",
+      "paused"=>"tooltipPaused",
       "allowReduction"=> "tooltipAllowRedution",
       "isUnderConstruction" => "tooltipUnderConstruction",
       "excludeFromGlobalPlanning" => "tooltipExcludeFromGlobalPlanning",
-      "commandOnValidWork"=> "tooltipCommandOnValidWork",
+      "commandOnValidWork"=> "tooltipCommandOnValidWork"
   );
 // Removed in 1.2.0 
 //     <th field="wbs" from="ProjectPlanningElement" width="5%" >${wbs}</th>
@@ -162,13 +165,15 @@ class ProjectMain extends SqlElement {
                                   "organizationInherited"=>"hidden",
                                   "organizationElementary"=>"hidden",
                                   "fixPlanning"=>"nobr",
+                                  "allowReduction"=>"nobr",
                                   "paused"=>"",
                                   "fixPerimeter"=>"nobr",
                                   "isUnderConstruction"=>"nobr",
                                   "excludeFromGlobalPlanning"=>"nobr",
                                   "commandOnValidWork"=>"nobr",
   		                            "isLeaveMngProject"=>"hidden",
-  		                             "locked"=>"hidden"
+  		                             "locked"=>"hidden",
+  		                             "paused"=>"nobr"
   );   
  
   private static $_colCaptionTransposition = array('idResource'=>'manager',
@@ -200,7 +205,8 @@ class ProjectMain extends SqlElement {
   			self::$_fieldsAttributes['idHealth']='hidden';
   			self::$_fieldsAttributes['isUnderConstruction']='hidden';
 			  self::$_fieldsAttributes['fixPerimeter']='hidden';
-			  self::$_fieldsAttributes['allowReduction']='invisible';
+			  self::$_fieldsAttributes['allowReduction']='hidden';
+			  self::$_fieldsAttributes['_lib_helpAllowReduction']='hidden';
 			  self::$_fieldsAttributes['excludeFromGlobalPlanning']='hidden';			
   			self::$_fieldsAttributes['handled']='hidden';
   			self::$_fieldsAttributes['handledDate']='hidden';
@@ -345,11 +351,17 @@ class ProjectMain extends SqlElement {
       $colScript .= '</script>';     
     }else if ($colName=="fixPerimeter") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '    var trAllowReduc=dojo.byId("allowReduction").parentNode.parentNode.parentNode;';
       $colScript .= '  if (this.checked) { ';
-      $colScript .= '    dojo.query(".generalRowClass.allowReductionClass").forEach(function(domNode){domNode.style.display="table-row";});';
+      $colScript .= '    if(trAllowReduc.style.display=="none")trAllowReduc.style.display="table-row";';
       $colScript .= '    dojo.query(".generalColClass.allowReductionClass").forEach(function(domNode){domNode.style.display="inline-block";});';
+      $colScript .= '    var inputAllaowReduc=dojo.byId("allowReduction");';
+      $colScript .= '    inputAllaowReduc.parentNode.insertAdjacentElement("afterend",dojo.byId("_lib_helpAllowReduction"));';
+      $colScript .= '    dojo.byId("_lib_helpAllowReduction").style.display="";';
       $colScript .= '  } else {';
+      $colScript .= '    trAllowReduc.style.display="none";';
       $colScript .= '    dojo.query(".allowReductionClass").forEach(function(domNode){domNode.style.display="none";});';
+      $colScript .= '    dojo.byId("_lib_helpAllowReduction").style.display="none";';
       $colScript .= '     dijit.byId("allowReduction").set("value", 0);';
       $colScript .= '     dijit.byId("allowReduction").set("checked", "");';
       $colScript .= '  } ';
@@ -1468,6 +1480,7 @@ static function isTheLeaveProject($id=null) {
     }
     if($this->fixPerimeter==0){
       self::$_fieldsAttributes["allowReduction"]="invisible";
+      self::$_fieldsAttributes["_lib_helpAllowReduction"]="invisible";
     }
     if($this->paused==1){
       self::$_fieldsAttributes["fixPlanning"]="readonly,nobr";

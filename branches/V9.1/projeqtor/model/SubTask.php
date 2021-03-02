@@ -134,7 +134,7 @@ class SubTask extends SqlElement {
         echo      '</select>';
         echo    '</td>';
         echo    '<td class="linkData"  style="white-space:nowrap;text-align: center;padding:0px;">';
-                  $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId);
+                  $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId,$gloablView);
         echo    '</td>';
         echo  '</tr>';
         $lastSortRegist=$subTask->sortOrder;
@@ -158,14 +158,14 @@ class SubTask extends SqlElement {
     echo    '</td>';
     echo    '<td class="linkData" style="white-space:nowrap;text-align: center;padding:0px;">';
     echo      '<input id="'.$refType.'_'.$refId.'_sortOrder_0" value="'.$lastSort.'" hidden />';
-               $subTask->drawStatusSubTask('0','0','0','0',$refType,$refId);
+               $subTask->drawStatusSubTask('0','0','0','0',$refType,$refId,$gloablView);
     echo    '</td>';
     echo  '</tr>';
     echo '</table>';
     if (!$refresh) echo '</div></td></tr>';
   }
   
-  function drawStatusSubTask($id, $done, $idle, $handled,$refType,$refId){
+  function drawStatusSubTask($id, $done, $idle, $handled,$refType,$refId,$gloablView){
 
     $pos=1;
     if($handled==1){
@@ -176,12 +176,12 @@ class SubTask extends SqlElement {
       $pos=4;
     }
     echo '<div id="'.$refType.'_'.$refId.'_slidContainer_'.$id.'">';
-    echo '<table style="width:100%;height:100%;margin-top:5%;">';
+    echo '<table style="width:100%;height:100%;'.(($gloablView==true)?"margin-top:6px;":"margin-top:5%;").'">';
       echo '<tr>';
         echo ' <td style="width:10%;height:100%;">';
         echo '<div id="'.(($id==0)?$refType.'_'.$refId.'_prev_'.$id:'prev_'.$id).'" class="prev" style="'.(($id==0)?'display:none':'').'" onclick="'.(($id!=0)?"nextSlides('prev',".$id.",'".$refType."',".$refId.");":"").'">&#10094;</div>';
         echo ' </td>';
-        echo ' <td style="width:80%;height:100%;">';
+        echo ' <td style="width:80%;height:100%;'.(($gloablView==true)?"padding-top:10px":"").'">';
           echo '<div  class="slideshow-container" style="width:100%;">';
           echo '<input id="'.(($id==0)?$refType.'_'.$refId.'_pos_'.$id:'pos_'.$id).'" value="'.$pos.'" hidden />';
           
@@ -259,7 +259,7 @@ class SubTask extends SqlElement {
             echo '<tr style="height:42px;"><td colspan="4" ><div dojotype="dijit.layout.ContentPane" class="dijitContentPane">';
               echo'<table style="width:100%;"><tr>';
                     echo '<td style="width:63%;">';
-                      echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;"><span style="margin-left:25px;float:left;padding-top:12px;'.$style.'" '.$goto.'>'.ucfirst($obj['refType']).'&nbsp#'.$element->id.'&nbsp_'.$element->name.'</span></div>';
+                      echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;"><span style="margin-left:25px;float:left;padding-top:12px;'.$style.'" '.$goto.'>'.ucfirst($obj['refType']).'&nbsp#'.$element->id.'&nbsp-&nbsp'.$element->name.'</span></div>';
                     echo '</td>';
                     echo '<td style="width:23%;">';
                        echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;vertical-align:middle;">';
