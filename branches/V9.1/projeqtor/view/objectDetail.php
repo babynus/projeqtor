@@ -712,6 +712,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     $labelStyle=$style["caption"];
     $fieldStyle=$style["field"];
     $hide=false;
+    $invisible=false;
     $notReadonlyClass=" generalColClassNotReadonly ";
     $notRequiredClass=" generalColClassNotRequired ";
     $nobr_before=$nobr;
@@ -730,6 +731,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     if (substr($col,0,9)=='_lib_help') { // Hide if corresponding field is hidden
       $helper=array(lcfirst(substr($col,9)), 'is'.substr($col,9));
       $helperField=null;
+      
       foreach( $helper as $helpTest) {
         if (property_exists($obj, $helpTest)) {
           $helperField=$helpTest;
@@ -738,6 +740,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       }
       if ($helperField and $obj->isAttributeSetToField($helperField, 'hidden') or in_array($helperField, $extraHiddenFields)) {
         $hide=true;
+      }
+      if($helperField and $obj->isAttributeSetToField($helperField, 'invisible')){
+        $invisible=true;
       }
     }
     if (substr($col, 0, 7)=='_label_') {
@@ -1116,12 +1121,15 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       if (strpos($obj->getFieldAttributes($col), 'nobr')!==false and $obj->getFieldAttributes($col)!='hidden' and !$hide and ! in_array($col, $extraHiddenFields)) {
         $nobr=true;
       }
-      //if ($obj->getFieldAttributes($col)!='hidden' and !$hide) {
+      if ($obj->getFieldAttributes($col)!='hidden' and !$invisible and !$hide ) {
         if ($nobr) echo '&nbsp;';
-        echo '<span id="'.$col.'" class="tabLabel" style="font-weight:normal;'.(($obj->getFieldAttributes($col)!='hidden' and !$hide)?'':'display:none;').'">'.i18n($item).'</span>';
+        echo '<span id="'.$col.'" class="tabLabel" style="font-weight:normal;">'.i18n($item).'</span>';
         echo '&nbsp;';
-      //}
-      
+      }else if ($invisible){
+        if ($nobr) echo '&nbsp;';
+        echo '<span id="'.$col.'" class="tabLabel" style="font-weight:normal;display:none;">'.i18n($item).'</span>';
+        echo '&nbsp;';
+      }
       if (!$nobr and (!$hide or !$print)) {
         echo "</td></tr>";
       }
@@ -1370,7 +1378,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       if (strpos($obj->getFieldAttributes($col), 'hidden')!==false) { // TODO : adapt so that $obj->getFieldAttributes($col), 'hidden')!==false is treated like in_array($col, $extraHiddenFields)
         if (!$print and property_exists($obj, '_dynamicHiddenFields') and in_array($col,$obj->_dynamicHiddenFields)) {
           $specificStyle.=' display:none';
+    
         } else {
+
           $hide=true;
         }
       } else if (in_array($col, $extraHiddenFields)) {

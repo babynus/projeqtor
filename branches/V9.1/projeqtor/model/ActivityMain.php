@@ -54,6 +54,7 @@ class ActivityMain extends SqlElement {
   public $fixPlanning;
   public $_lib_helpFixPlanning;
   public $paused;
+  public $_lib_helpPaused;
   public $handled;
   public $handledDate;
   public $done;
@@ -104,6 +105,7 @@ class ActivityMain extends SqlElement {
   
   private static $_fieldsTooltip = array(
       "fixPlanning"=> "tooltipFixPlanningActivity",
+      "paused"=>"tooltipPaused"
   );
   
   private static $_fieldsAttributes = array(
@@ -121,7 +123,8 @@ class ActivityMain extends SqlElement {
       "idleDate" => "nobr", 
       "cancelled" => "nobr",
       "isPlanningActivity" => "title",
-      "_spe_isLeaveMngActivity" => "hidden"
+      "_spe_isLeaveMngActivity" => "hidden",
+      "paused"=>"nobr"
   );
   private static $_colCaptionTransposition = array(
       'idUser' => 'issuer', 
@@ -631,10 +634,7 @@ class ActivityMain extends SqlElement {
         $this->paused=0;
         $this->fixPlanning=0;
       }
-      
       if($this->paused==1 and $this->paused!=$old->paused and  $this->ActivityPlanningElement->paused!=$this->paused){
-        $this->ActivityPlanningElement->plannedStartDate=null;
-        $this->ActivityPlanningElement->plannedEndDate=null;
         $this->ActivityPlanningElement->paused=1;
       }else if ($this->paused==0 and $this->paused!=$old->paused and $this->ActivityPlanningElement->paused!=$this->paused){
         $this->ActivityPlanningElement->paused=0;

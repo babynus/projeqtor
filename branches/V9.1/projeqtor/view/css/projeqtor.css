@@ -4248,7 +4248,8 @@ div.ticketKanbanCustom .kanbanVersion{
 .prev {
 	cursor: pointer;
     position: relative;
-    width: 8px;
+    width: 14px;
+    top:6px;
     float:left;
     font-size: 18px;
     transition: 0.6s ease;
@@ -4261,7 +4262,8 @@ div.ticketKanbanCustom .kanbanVersion{
     cursor: pointer;
     position: relative;
     float:right;
-    width: 8px;
+    width: 14px;
+    top:6px;
     color: #ffffff;
     background-color: #0000001c;
     font-size: 18px;

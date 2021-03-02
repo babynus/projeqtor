@@ -61,7 +61,8 @@
   $objectClass=$_REQUEST['objectClass'];
   Security::checkValidClass($objectClass);
   $obj=new $objectClass();
-
+  
+  
 ?>
 
 
@@ -199,15 +200,13 @@
                </div>
              </td>
               <td style="width:370 px;vertical-align:middle;position:relative;">
-               <input id="newMultipleUpdateValue" name="newMultipleUpdateValue" value=""    dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
-                <textarea dojoType="dijit.form.Textarea" id="multipleUpdateTextArea" name="multipleUpdateTextArea"
-                style="float:left;width:90%;min-width:300px;min-height:150px;font-size: 90%; background:none;display:none;" maxlength="4000" >
-                </textarea>
+                <textarea dojoType="dijit.form.Textarea" id="multipleUpdateTextArea" name="multipleUpdateTextArea" style="float:left;width:90%;min-width:300px;min-height:150px;font-size: 90%; background:none;display:none;" 
+                class="input" maxlength="4000" ></textarea>
+                <input id="newMultipleUpdateValue" name="newMultipleUpdateValue" value=""    dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
+                <input id="isLongText" name="isLongText" value=""  dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
                <select id="multipleUpdateValueList" name="multipleUpdateValueList[]" value=""  dojoType="dijit.form.MultiSelect" 
-                 style="width:350px;font-size:10pt;padding:30px 0px 0px 0px;color:#555555;height:150px;display:none;float:left;" size="10" class="selectList"></select>
-               <?php if (isNewGui()) {?>
-                 <div id="multipleUpdateValueListHideTop" style="position:absolute;top:1px;left:1px;width:340px;height:25px;background:#ffffff;z-index:15;display:none" ></div>
-               <?php }?>
+                 style="width:350px;font-size:10pt;color:#555555;height:150px;display:none;float:left;" size="10" class="selectList">
+               </select>
                <button style="display:none;width:20px;float:left;margin-left:15px;" id="showDetailInMultipleUpdate" dojoType="dijit.form.Button" showlabel="false"
                       title="<?php echo i18n('showDetail')?>" class="resetMargin notButton notButtonRounded"
                       iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui">
