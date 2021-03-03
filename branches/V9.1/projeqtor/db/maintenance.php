@@ -1086,6 +1086,11 @@ if (beforeVersion($currVersion,"V9.0.5") and $currVersion!='V0.0.0') {
   Sql::commitTransaction();
   traceLog("   => $cpt assignments updated");
 }
+
+if (beforeVersion($currVersion,"V9.0.6")) {
+  $nbErrors+=runScript('V9.0.6.lm');
+}
+
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
