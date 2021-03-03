@@ -345,7 +345,7 @@ function drawTableFromObjectList($objectList) {
 			    $title=$helpTitle;
 			    echo '<div style="vertical-align:top">';
 			    echo '<button id="testMail" dojoType="dijit.form.Button" showlabel="false"';
-			    echo 'iconClass="dijitButtonIcon dijitButtonIconEmail" ';
+			    echo ' class="detailButton" iconClass="dijitButtonIcon dijitButtonIconEmail " ';
 			    echo ' title="' . $title . '" style="vertical-align: middle;">';
 			    //echo '<span>' . i18n('paramMailerTest') . '</span>';
 			    echo '<script type="dojo/connect" event="onClick" args="evt">';
@@ -367,7 +367,7 @@ function drawTableFromObjectList($objectList) {
 			  } else if ($code=='SAML_metadata') {         
 			    echo '<div style="vertical-align:top">';
 			    echo '<button id="getSpMetadata" dojoType="dijit.form.Button" showlabel="true"';
-			    echo 'iconClass="dijitButtonIcon dijitButtonIconDisplay" ';
+			    echo 'class="roundedVisibleButton" iconClass="dijitButtonIcon dijitButtonIconDisplay" ';
 			    echo ' title="'.$helpTitle.'" ';
 			    echo ' style="vertical-align: middle;">'.i18n("SAML_getSpMetadata");
 			    //echo '<span>' . i18n('paramMailerTest') . '</span>';
