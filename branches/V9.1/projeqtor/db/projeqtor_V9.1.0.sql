@@ -20,7 +20,9 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (1,100006001,0,(select `active` from `${prefix}module` where id=1)),
 (2,100006001,0,(select `active` from `${prefix}module` where id=2)),
 (4,100006001,0,(select `active` from `${prefix}module` where id=4)),
-(10,100006001,0,(select `active` from `${prefix}module` where id=10));
+(10,100006001,0,(select `active` from `${prefix}module` where id=10)),
+(1,169,0,(select `active` from `${prefix}module` where id=1)),
+(10,169,0,(select `active` from `${prefix}module` where id=10));
 
 INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
 (334,'menuViewAllSubTask',3,257,55,0),
@@ -145,7 +147,8 @@ INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VA
 (1,66,0,(select `active` from `${prefix}module` where id=1)),
 (10,66,0,(select `active` from `${prefix}module` where id=10)),
 (1,67,0,(select `active` from `${prefix}module` where id=1)),
-(10,67,0,(select `active` from `${prefix}module` where id=10));
+(10,67,0,(select `active` from `${prefix}module` where id=10)),
+(1,108,0,(select `active` from `${prefix}module` where id=1));
 
 INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
 (1,'lockedLeftWork','2'),
@@ -169,3 +172,4 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess
 (1, 115, 1),
 (2, 115, 1),
 (3, 115, 1);
+
