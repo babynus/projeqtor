@@ -257,7 +257,7 @@ function getReportsMenu(){
   $level=2;
   $hr=new HabilitationReport();
   $user=getSessionUser();
-  //$allowedReport=array();
+  $allowedReport=array();
   $allowedCategory=array();
   $lst=$hr->getSqlElementsFromCriteria(array('idProfile'=>$user->idProfile, 'allowAccess'=>'1'), false);
   $res=array();
@@ -267,8 +267,8 @@ function getReportsMenu(){
   foreach ($lst as $h) {
     $report=$h->idReport;
     $nameReport=SqlList::getNameFromId('Report', $report, false);
-    if (! Module::isReportActive($nameReport)) continue;
-    //$allowedReport[$report]=$report;
+    if (!Module::isReportActive($nameReport)) continue;
+    $allowedReport[$report]=$report;
     $category=SqlList::getFieldFromId('Report', $report, 'idReportCategory',false);
     $allowedCategory[$category]=$category;
   }
@@ -297,6 +297,9 @@ function getReportsMenu(){
    $lstCatId=(empty($lstIdCate))?"0":"0".implode(",", $lstIdCate);
    $where=" idReportCategory in (".$lstCatId.")";
    $reportList= $reportDirect->getSqlElementsFromCriteria(null,false,$where,"file");
+   foreach ($reportList as $id=>$rpt){
+     if (!isset($allowedReport[$rpt->id])) unset($reportList[$id]);
+   }
    $nameFile=SqlList::getList('Report','file');
    $lstReportName=array();
    $lstNewNavMenu=array();
