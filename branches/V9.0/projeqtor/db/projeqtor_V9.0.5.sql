@@ -4,9 +4,7 @@
 -- // Version : 9.0.5                                       //
 -- // Date : 2021-02-10                                     //
 -- ///////////////////////////////////////////////////////////
--- Patch on V8.6
-
-ALTER TABLE `${prefix}livemeeting` CHANGE `result` `result` mediumtext;
+-- Patch on V9.0
 
 INSERT INTO `${prefix}referencable` (`id`,`name`, `idle`) VALUES 
 (26,'ProviderOrder', '0'),
