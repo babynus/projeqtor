@@ -603,7 +603,7 @@
       <?php if ($buttonSubTaskListVisible!="never") {?>
       <button id="SubTaskButton" dojoType="dijit.form.Button" showlabel="false"
         title="<?php echo i18n('sectionToDoList');?>"
-        iconClass="dijitButtonIcon dijitButtonIconSubTask" class="detailButton">
+        iconClass="imageColorNewGui notDijitButtonIcon iconViewAllSubTask iconSize22" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           showSubTask('<?php echo get_class($obj);?>');  
           hideResultDivs();
