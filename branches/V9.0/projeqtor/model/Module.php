@@ -193,65 +193,51 @@ class Module extends SqlElement {
   
   public static function applyModuleRestrictionsOnParametersList(&$list) {
     if (! Module::isModuleActive('moduleConfiguration')) {
-      unset($list['tabConfiguration']);
-      unset($list['columnConfigurationLeft']);
-      unset($list['sectionProductAndComponent']);
-      unset($list['displayBusinessFeature']);
-      unset($list['displayMilestonesStartDelivery']);
-      unset($list['displayLanguage']);
-      unset($list['displayContext']);
-      unset($list['showTendersOnVersions']);
-      unset($list['includeProductInProductStructure']);
-      unset($list['columnConfigurationRight']);
-      unset($list['sectionVersion']);
-      unset($list['displayMilestonesStartDelivery']);
-      unset($list['displayListOfActivity']);
-      unset($list['directAccessToComponentList']);
-      unset($list['versionNameAutoformat']);
-      unset($list['versionNameAutoformatSeparator']);
-      unset($list['subscriptionAuto']);
-      unset($list['typeOfCopyComponentVersion']);
-      unset($list['versionCompatibility']);
-      unset($list['productVersionOnDelivery']);
-      unset($list['sortVersionComboboxNameDesc']);
-      unset($list['sortCompositionStructure']);
-      unset($list['manageComponentOnRequirement']);
-      unset($list['dontAddClosedDeliveredVersionToProject']);
-      unset($list['authorizeActivityOnDeliveredProduct']);
-      unset($list['autoSetUniqueComponentVersion']);
+      self::unsetTab($list, 'tabConfiguration');
     }
     if (! Module::isModuleActive('moduleFinancial')) {
-      unset($list['tabFinancial']);
-      unset($list['newColumnbFinancialLeft']);
-      unset($list['newColumnbFinancialRight']);
+      self::unsetTab($list, 'tabFinancial');
     }
     if (! Module::isModuleActive('moduleExpenses')) {
-      unset($list['sectionFinancialProvider']);
-      unset($list['ImputOfAmountProvider']);
-      unset($list['ImputOfBillLineProvider']);
+      self::unsetSection($list, 'sectionFinancialProvider');
+      self::unsetSection($list, 'sectionFinancialAutomation');
     }  
     if (! Module::isModuleActive('moduleIncomes')) {
-      unset($list['sectionFinancialClient']);
-      unset($list['ImputOfAmountClient']);
-      unset($list['ImputOfBillLineClient']);
+      self::unsetSection($list, 'sectionFinancialClient');
     }
     if (! Module::isModuleActive('moduleHumanResource')) {
-      unset($list['sectionLeaves']);
-      unset($list['leavesSystemActiv']);
-      unset($list['leavesSystemAdmin']);
-      unset($list['typeExportXLSorODS']);
+      self::unsetSection($list, 'sectionLeaves');
     }
     if (! Module::isModuleActive('moduleNotification')) {
       unset($list['cronCheckNotifications']);
     }
     if (! Module::isModuleActive('moduleOrganization')) {
-      unset($list['useOrganizationBudgetElement']);
-      unset($list['sectionOrganization']);
+      self::unsetSection($list, 'sectionOrganization');
     }
     if (! Module::isModuleActive('moduleGestionCA')) {
-      unset($list['ComplexitiesNumber']);
-      unset($list['CaReplaceValidCost']);
-      unset($list['sectionFinancialWorkUnit']);
+      self::unsetSection($list, 'sectionFinancialWorkUnit');
+    }
+  }
+  public static function unsetTab(&$list, $tab) {
+    $tabFound=false;
+    foreach ($list as $key=>$val) {
+      if ($key==$tab) {
+        $tabFound=true; // Start
+      } else if ($val=='tab') {
+        $tabFound=false; // Stop
+      }
+      if ($tabFound) unset($list[$key]);
+    }
+  }
+  public static function unsetSection(&$list, $tab) {
+    $tabFound=false;
+    foreach ($list as $key=>$val) {
+      if ($key==$tab) {
+        $tabFound=true; // Start
+      } else if ($val=='tab' or $val=='section' or $val=='newColumn' or $val=='newColumnFull') {
+        $tabFound=false; // Stop
+      }
+      if ($tabFound) unset($list[$key]);
     }
   }
   
