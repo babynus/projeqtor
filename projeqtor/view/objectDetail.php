@@ -4416,6 +4416,8 @@ function drawBillLinesProviderTerms($obj, $refresh=false) {
       if ($providerTerm->idProviderOrder) {
         $providerOrder=new ProviderOrder($providerTerm->idProviderOrder);
         $discountRate[$i]=$providerOrder->discountRate;
+      } else {
+        $discountRate[$i]=0;
       }
       $i++;
       array_push($lines, $providerTerm->_BillLineTerm);
@@ -4447,7 +4449,7 @@ function drawBillLinesProviderTerms($obj, $refresh=false) {
   
   $fmt=new NumberFormatter52($browserLocale, NumberFormatter52::INTEGER);
   $fmtd=new NumberFormatter52($browserLocale, NumberFormatter52::DECIMAL);
-  $discountRate=null;
+  $discountRate=0;
   if (get_class($obj)!='ProviderBill') {
     $lines=array_reverse($lines);
     if (isset($obj->idProviderOrder)) {
@@ -4480,9 +4482,9 @@ function drawBillLinesProviderTerms($obj, $refresh=false) {
         echo '<td class="noteData" style="width:10%">'.htmlDisplayCurrency($billLine->amount).'</td>';
         echo '<td class="noteData" style="width:8%">'.htmlDisplayPct($linee->rate).'</td>';
         echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price).'</td>';
-        echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price*$discountRate[$i]/100).'</td>';
-        echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency((($linee->price)-($linee->price*$discountRate[$i]/100))*$obj->taxPct/100).'</td>';
-        echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency((($linee->price)-($linee->price*$discountRate[$i]/100))*$obj->taxPct/100+($linee->price-($linee->price*$discountRate[$i]/100))).'</td>';
+        echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price*$discountRate/100).'</td>';
+        echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency((($linee->price)-($linee->price*$discountRate/100))*$obj->taxPct/100).'</td>';
+        echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency((($linee->price)-($linee->price*$discountRate/100))*$obj->taxPct/100+($linee->price-($linee->price*$discountRate/100))).'</td>';
         echo '</tr>';
       }
       $i++;
