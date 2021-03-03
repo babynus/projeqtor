@@ -613,6 +613,7 @@ class Parameter extends SqlElement {
       	if (securityCheckDisplayMenu(null,'ResourcePlanning')) {$list['resourcePlanningMain.php']=i18n('menuResourcePlanning');}
       	if (securityCheckDisplayMenu(null,'GlobalPlanning')) {$list['globalPlanningMain.php']=i18n('menuGlobalPlanning');}
         if (securityCheckDisplayMenu(null,'Kanban')) {$list['kanbanViewMain.php']=i18n('menuKanban');}
+        if (securityCheckDisplayMenu(null,'PlannedWorkManual')) {$list['plannedWorkManualMain.php']=i18n('menuPlannedWorkManual');}
       	$arrayItem=array('Project','Document','Ticket','TicketSimple','Activity','Action','Requirement','ProjectExpense','ProductVersion','ComponentVersion','GlobalView');
       	foreach  ($arrayItem as $item) {
       		if (securityCheckDisplayMenu(null,$item)) {$list['objectMain.php?objectClass='.$item]=i18n('menu'.$item);}
@@ -1086,9 +1087,9 @@ class Parameter extends SqlElement {
                             'sectionFinancialClient'=>'section',
                               'ImputOfAmountClient'=>'list',
                               'ImputOfBillLineClient'=>'list',
-                              'sectionFinancialAutomation'=>'section',
+                            'sectionFinancialAutomation'=>'section',
                               'ExpenseLink'=>'list',
-                              'sectionFinancialWorkUnit'=>'section',
+                            'sectionFinancialWorkUnit'=>'section',
                               'ComplexitiesNumber'=>'number',
                               'CaReplaceValidCost'=>'list',
                               'enableWorkCommandManagement'=>'list',
