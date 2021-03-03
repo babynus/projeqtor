@@ -147,7 +147,7 @@ class CronExecution extends SqlElement {
     echo "  <tr><td class='linkData'>".i18n('colFixedDayOfWeek')."</td><td class='linkData'>".self::getWeekDayName($dayOfWeek)."</td></tr>";
     echo " </table>";
     echo "&nbsp;&nbsp;";
-    echo "<button id='cronExecution$scope' dojoType='dijit.form.Button' showlabel='true' style='position:relative;top:-2px'>";
+    echo "<button id='cronExecution$scope' dojoType='dijit.form.Button' class='roundedVisibleButton' showlabel='true' style='position:relative;top:-2px'>";
     echo i18n("cronDefineParameters");
     echo "  <script type='dojo/connect' event='onClick' args='evt'>";
     echo "    loadDialog('dialogCronDefinition', null, true, '&cronScope=$scope', true);";
@@ -155,7 +155,7 @@ class CronExecution extends SqlElement {
     echo "</button><br/>";
     echo "&nbsp;&nbsp;";
     if ($cronExecution->id) {
-      echo "<button id='cronExecutionActivate$scope' dojoType='dijit.form.Button' showlabel='true' style='position:relative;top:-2px'>";
+      echo "<button id='cronExecutionActivate$scope' class='roundedVisibleButton' dojoType='dijit.form.Button' showlabel='true' style='position:relative;top:-2px'>";
       echo $cronExecution->idle ? i18n("cronExecutionActivate") : i18n("cronExecutionDesactivate");
       echo "  <script type='dojo/connect' event='onClick' args='evt'>";
       echo "    cronActivation('$scope');";
@@ -163,9 +163,9 @@ class CronExecution extends SqlElement {
       echo "</button>";
     }
     if ($cronExecution->idle==1) {
-      echo "<div style='white-space:nowrapo;height:30px; width:400px;color:#A00000'>&nbsp;&nbsp;".i18n('cronExecutionNotRunning')."</div>";
+      echo "<div style='white-space:nowrapo;height:30px; width:400px;color:#A00000;position:relative;left:12px;'>".i18n('cronExecutionNotRunning')."</div>";
     } else {
-      echo "<div style='white-space:nowrapo;height:30px; width:400px;color:#00A000'>&nbsp;&nbsp;".i18n('cronExecutionRunning')."</div>";
+      echo "<div style='white-space:nowrapo;height:30px; width:400px;color:#00A000;position:relative;left:12px;'>".i18n('cronExecutionRunning')."</div>";
     }
   }
   public static function getObjectFromScope($scope) {
