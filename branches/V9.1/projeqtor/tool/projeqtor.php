@@ -254,6 +254,9 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
             $user->finalizeSuccessfullConnection(false,true);
           }
         }
+        $currentLocale=null;
+        $i18nMessages=null;
+        setupLocale();
       }
     } else if (SSO::isFirstTry()) { // Only 1 try to connect, then return to standard connection    
       $auth = new OneLogin_Saml2_Auth($settingsInfo);
