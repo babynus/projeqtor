@@ -8080,15 +8080,27 @@ function switchNewGui(){
 
 function updateSubTask(id,refType,refId){
   url = "../tool/saveSubTask.php?element=SubTask&refType="+refType+"&refId="+refId+"&idSubTask="+id;
-  var name=(id==0)?dojo.byId(refType+'_'+refId+'_nameNewSubTask_'+id).value:dojo.byId('nameNewSubTask_'+id).value;
+  var name=(id==0)?dojo.byId(refType+'_'+refId+'_nameNewSubTask_'+id).value:dojo.byId(refType+'_'+refId+'_nameNewSubTask_'+id).value;
   if(name.trim()!=''){
-    var priority=(id==0)?dojo.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).value:dijit.byId('priorityNewSubTask_'+id).get('value');
-    var resource=(id==0)?dojo.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).value:dijit.byId('resourceNewSubTask_'+id).get('value');
+    var priority=(id==0)?dojo.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).value:dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).get('value');
+    var resource=(id==0)?dojo.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).value:dijit.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).get('value');
     var sortOrder=(id==0)?dojo.byId(refType+'_'+refId+'_sortOrder_'+id).value:dojo.byId('sortOrder_'+refType+"_"+refId+'_'+id).value;
   }
-
+  var priority=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id),
+        resource=dijit.byId(refType+'_'+refId+'_resourceNewSubTask_'+id);
   save=false;
+  update=false;
   deleted=false;
+  
+  if(name.trim()!='' && id!=0){
+    if(priority.disabled==true && resource.disabled==true){
+      priority.set('disabled',false);
+      resource.set('disabled',false);
+    }
+    if(dojo.byId(refType+'_'+refId+'_next_'+id).style.display=='none' && dojo.byId(refType+'_'+refId+'_pos_'+id).value!='4' )dojo.byId(refType+'_'+refId+'_next_'+id).style.display="block";
+    if(dojo.byId(refType+'_'+refId+'_prev_'+id).style.display=='none' && dojo.byId(refType+'_'+refId+'_pos_'+id).value!='1')dojo.byId(refType+'_'+refId+'_prev_'+id).style.display="block";
+    priority.focus();
+  }
 
   if(id==0 && name.trim()!=''){
     save=true;
@@ -8097,6 +8109,7 @@ function updateSubTask(id,refType,refId){
     url+="&operation=save";
     url+="&name="+name+"&priority="+priority+"&resource="+resource+"&sortOrder"+sortOrder;
   }else if(id!=0 && name.trim()!=''){
+    update=true;
     url+="&operation=update";
     url+="&name="+name+"&priority="+priority+"&resource="+resource;
   }else if(name.trim()=='' && id!=0){
@@ -8106,6 +8119,12 @@ function updateSubTask(id,refType,refId){
     return;
   }
   if(deleted==true){
+    priority.set('disabled',true);
+    resource.set('disabled',true);
+    dojo.byId(refType+'_'+refId+'_next_'+id).style.display="none";
+    dojo.byId(refType+'_'+refId+'_prev_'+id).style.display="none";
+//    
+    priority.setReadOnlyAttr;
     actionOK=function() {
       loadContent(url, "resultDivMain", "listForm");
       var tabSubTask=dojo.byId(refType+'_'+refId+'_drawSubTask'),
@@ -8114,6 +8133,7 @@ function updateSubTask(id,refType,refId){
     };
     msg=i18n('deleteButton');
     showConfirm(msg, actionOK);
+
   }else{
     dojo.xhrPost({
       url : url,
@@ -8128,11 +8148,24 @@ function updateSubTask(id,refType,refId){
           contentWidget.set('content', data);
           var lastOperationStatus=window.top.dojo.byId('lastOperationStatus');
           var lastSaveId=window.top.dojo.byId('lastSaveId');
-          
           if(lastOperationStatus.value == "OK"){
             addSubTaskRow(lastSaveId.value,refType,refId,sortOrder,resource);
           } else {
               dojo.byId("resultDivMain").style.display='block';
+          }
+        }else if(update==true && priority!=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).get('value')){
+          var contentWidget=dijit.byId("resultDivMain");
+          if (!contentWidget) {
+            return;
+          }
+          contentWidget.set('content', data);
+          var lastOperationStatus=window.top.dojo.byId('lastOperationStatus');
+          var lastSaveId=window.top.dojo.byId('lastSaveId');
+          if(lastOperationStatus.value == "OK"){
+            var prio=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id);
+            var tdPrio=prio.domNode.parentNode;
+            var colorPrio=dojo.byId('colorPrio_'+prio.get('value')).value;
+            tdPrio.style.backgroundColor=colorPrio;
           }
         }
       }
@@ -8164,9 +8197,9 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter){
                        newResource=document.createElement('input'),
                         newName=document.createElement('input'),
                         slidContainerDiv=newSubTask.querySelector('#'+refType+'_'+refId+'_slidContainer_0');
-  newName.setAttribute('id','nameNewSubTask_'+id);
-  newPrio.setAttribute('id','priorityNewSubTask_'+id);
-  newResource.setAttribute('id','resourceNewSubTask_'+id);
+  newName.setAttribute('id',refType+'_'+refId+'_nameNewSubTask_'+id);
+  newPrio.setAttribute('id',refType+'_'+refId+'_priorityNewSubTask_'+id);
+  newResource.setAttribute('id',refType+'_'+refId+'_resourceNewSubTask_'+id);
   slidContainerDiv.id=refType+'_'+refId+'_slidContainer_'+id;
   
   var pos=slidContainerDiv.querySelector('#'+refType+'_'+refId+'_pos_0'),
@@ -8179,12 +8212,12 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter){
   grabDiv.removeAttribute('id');
   grabDiv.className='dojoDndHandle handleCursor linkData';
   sort.id='sortOrder_'+refType+"_"+refId+'_'+id;
-  pos.id='pos_'+id;
-  prev.id='prev_'+id;
-  next.id='next_'+id;
+  pos.id=refType+'_'+refId+'_pos_'+id;
+  prev.id=refType+'_'+refId+'_prev_'+id;
+  next.id=refType+'_'+refId+'_next_'+id;
   
   sort.setAttribute('value',order);
-  prev.setAttribute('style', 'display:block;');
+  prev.setAttribute('style', 'display:none;');
   next.setAttribute('style', 'display:block;');
   prev.setAttribute('onclcik','nextSlides("prev",'+id+',"'+refType+'"'+refId+');');
   next.setAttribute('onclick','nextSlides("next",'+id+',"'+refType+'",'+refId+');');
@@ -8192,36 +8225,39 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter){
   subTaskCreat.insertAdjacentElement('beforebegin',newSubTask );
   
   var newFilterPrio=new dijit.form.FilteringSelect({
-    id: "priorityNewSubTask_"+id,
-    name: "priorityNewSubTask_"+id,
+    id: refType+'_'+refId+"_priorityNewSubTask_"+id,
+    name: refType+'_'+refId+"_priorityNewSubTask_"+id,
     store: priority.store,
     value:"",
+    style:priority.style,
     searchAttr: "name"
-  }, "priorityNewSubTask_"+id);
+  }, refType+'_'+refId+"_priorityNewSubTask_"+id);
   
   var newFilterResource=new dijit.form.FilteringSelect({
-    id: "resourceNewSubTask_"+id,
-    name: "resourceNewSubTask_"+id,
+    id: refType+'_'+refId+"_resourceNewSubTask_"+id,
+    name: refType+'_'+refId+"_resourceNewSubTask_"+id,
     store: resource.store,
     value:resourceFilter,
+    style:resource.style,
     searchAttr: "name"
-  }, "resourceNewSubTask_"+id);
+  }, refType+'_'+refId+"_resourceNewSubTask_"+id);
   
   var newNameText = new dijit.form.TextBox({
-    id: "nameNewSubTask_"+id,
-    name: "nameNewSubTask_"+id,
-    style: "white-space:nowrap;width:90%;",
+    id: refType+'_'+refId+"_nameNewSubTask_"+id,
+    name: refType+'_'+refId+"_nameNewSubTask_"+id,
+    style: "white-space:nowrap;width:98%;",
     value: dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value 
-  }, "nameNewSubTask_"+id);
+  }, refType+'_'+refId+"_nameNewSubTask_"+id);
   
   dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value='';
-  dojo.setAttr('nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',"'+refType+'",'+refId+')');
+  dojo.setAttr(refType+'_'+refId+'_nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',"'+refType+'",'+refId+')');
   dojo.connect(newFilterResource, 'onChange', function(value){updateSubTask(id,refType,refId);}); 
   dojo.connect(newFilterPrio, 'onChange', function(value){updateSubTask(id,refType,refId);}); 
+  newFilterPrio.focus();
 }
 
 function nextSlides(op,id,refType,refId) {
-  var pos=dojo.byId('pos_'+id).value,
+  var pos=dojo.byId(refType+'_'+refId+'_pos_'+id).value,
       n=1;
   if(op=='next' && pos==4)return;
   if(op=='prev' && pos==1)return;
@@ -8238,11 +8274,39 @@ function showSlides(n,id,refType,refId) {
       slides[i].style.display = "none";  
   }
   slides[n-1].style.display = "block";  
-  dojo.byId('pos_'+id).value=n;
-  dojo.setAttr('prev_'+id,'onClick','nextSlides("prev","'+id+'","'+refType+'",'+refId+')');
-  dojo.setAttr('next_'+id,'onClick','nextSlides("next","'+id+'","'+refType+'",'+refId+')');
+  var tdColor=slides[n-1].parentNode.parentNode;
+
+  dojo.byId(refType+'_'+refId+'_pos_'+id).value=n;
+  dojo.setAttr(refType+'_'+refId+'_prev_'+id,'onClick','nextSlides("prev","'+id+'","'+refType+'",'+refId+')');
+  dojo.setAttr(refType+'_'+refId+'_next_'+id,'onClick','nextSlides("next","'+id+'","'+refType+'",'+refId+')');
   
+  var prevButton=dojo.byId(refType+'_'+refId+'_prev_'+id),
+        nextButton=dojo.byId(refType+'_'+refId+'_next_'+id);
   status=n-1;
+  switch(status){
+    case '0':
+      tdColor.style.backgroundColor ="";
+      break;
+    case '1':
+      tdColor.style.backgroundColor ="#FACA77";
+      break;
+    case '2':
+      tdColor.style.backgroundColor ="#77B7FA";
+      break;
+    case '3':
+      tdColor.backgroundColor ="#B7B3A9";
+      break;
+  }
+  
+  if(status==0 && prevButton.style.display!="none"){
+    prevButton.style.display="none";
+  }else if(status==3 && nextButton.style.display!="none"){
+    nextButton.style.display="none";
+  }else if(status!=0 && prevButton.style.display=="none"){
+    prevButton.style.display="block";
+  }else if(status!=3 && nextButton.style.display=="none"){
+    nextButton.style.display="block";
+  }
   url+="&operation=update&status="+status;
   dojo.xhrPost({
     url : url,

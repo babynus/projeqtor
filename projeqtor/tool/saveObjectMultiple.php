@@ -73,8 +73,10 @@ if(trim(RequestHandler::getValue('newMultipleUpdateValue'))!=''){
   foreach ($lst as $idL=>$valList){
     $newValue=$valList;
   }
-}elseif (trim(RequestHandler::getValue('multipleUpdateValueDate'))){
+}elseif (trim(RequestHandler::getValue('multipleUpdateValueDate')) and !trim(RequestHandler::getValue('multipleUpdateValueTime'))){
 	$newValue=RequestHandler::getValue('multipleUpdateValueDate');
+}elseif (trim(RequestHandler::getValue('multipleUpdateValueDate')) and trim(RequestHandler::getValue('multipleUpdateValueTime'))){
+  $newValue=RequestHandler::getValue('multipleUpdateValueDate').' '.substr(RequestHandler::getValue('multipleUpdateValueTime'),1);
 }elseif (RequestHandler::getValue('multipleUpdateValueCheckbox')){
   if(RequestHandler::getValue('multipleUpdateValueCheckbox')=='on')$newValue=1;
   else $newValue=0;

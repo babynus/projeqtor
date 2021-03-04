@@ -12450,7 +12450,7 @@ function multipleUpadteSelectAtribute(value) {
           dojo.byId('isLongText').value="";
           if(dojo.byId('multipleUpdateOperateur').firstChild.innerHTML==undefined || dojo.byId('multipleUpdateOperateur').firstChild.innerHTML!=i18n('replaceMultipleUpadte') ){
             var spanVal=document.createElement('span');
-            spanVal.setAttribute('style','position:relative;top:10px;');
+            spanVal.setAttribute('style','position:relative;');
             spanVal.innerHTML=i18n('replaceMultipleUpadte');
             if(dojo.byId('multipleUpdateOperateur').firstChild.innerHTML!=undefined )dojo.byId('multipleUpdateOperateur').removeChild(dojo.byId('multipleUpdateOperateur').firstChild);
             dojo.byId('multipleUpdateOperateur').insertAdjacentElement('afterbegin',spanVal);
@@ -12483,6 +12483,9 @@ function multipleUpadteSelectAtribute(value) {
             display : 'none'
           });
           dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueTime').domNode, {
             display : 'none'
           });
         } else if (dataType == "list") {
@@ -12594,7 +12597,10 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
             display : 'none'
           });
-        } else if (dataType == "date") {
+          dojo.style(dijit.byId('multipleUpdateValueTime').domNode, {
+            display : 'none'
+          });
+        } else if (dataType == "date" || dataType=="datetime") {
           filterType="date";
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'none'
@@ -12619,6 +12625,11 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
             display : 'block'
           });
+          if(dataType=="datetime"){
+            dojo.style(dijit.byId('multipleUpdateValueTime').domNode, {
+              display : 'block'
+            });
+          }
           dijit.byId('multipleUpdateValueDate').reset();
         } else if (dataType=="textarea"){
           dojo.byId('isLongText').value="true";
@@ -12653,6 +12664,9 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
             display : 'none'
           });
+          dojo.style(dijit.byId('multipleUpdateValueTime').domNode, {
+            display : 'none'
+          });
         }else {
           filterType="text";
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
@@ -12677,6 +12691,9 @@ function multipleUpadteSelectAtribute(value) {
             display : 'none'
           });
           dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueTime').domNode, {
             display : 'none'
           });
         }
@@ -12736,6 +12753,9 @@ function multipleUpadteSelectAtribute(value) {
       });
     }
     dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
+      display : 'none'
+    });
+    dojo.style(dijit.byId('multipleUpdateValueTime').domNode, {
       display : 'none'
     });
     dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {

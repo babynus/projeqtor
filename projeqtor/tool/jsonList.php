@@ -1042,17 +1042,15 @@ function listFieldsForMultipleUpdate($obj, $nbRows, $included = false) {
       echo '{"id":"' . ($included ? get_class ( $obj ) . '_' : '') . 'assignedResource__idResourceAll' . '", "name":"' . i18n("assignedResource") . '", "dataType":"list"}';
       continue;
     }
-    if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'readonly' ) and
-    ! $included  and $col != 'id' and $col != '_Note' and $col != '_wbs') {
+    if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'readonly' ) 
+    and ! $obj->isAttributeSetToField ( $col, 'calculated' ) and (! $included  or ($col != 'id' and $col != '_Note' and $col != '_wbs'))){
       
       if ($nbRows > 0)echo ', ';
       $dataType = $obj->getDataType ( $col );
       $dataLength = $obj->getDataLength ( $col );
       if ($dataType == 'int' and $dataLength == 1) {
         $dataType = 'bool';
-      } else if ($dataType == 'datetime') {
-        $dataType = 'date';
-      } else if (isForeignKey($col, $obj)) {
+      }  else if (isForeignKey($col, $obj)) {
         $dataType = 'list';
       }elseif ($dataType == 'varchar' and $dataLength >4000){
         $dataType = 'textarea';

@@ -288,8 +288,10 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
               if(paramId !='' && multiSelection==false){
                 loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
               }else if(multiSelection==true){
-               loadContent('objectMultipleUpdate.php?objectClass=' + param,
-                  'detailDiv');
+                var value=dojo.byId('idMultipleUpdateAttribute').value;
+              if(value==''){
+                loadContent('objectMultipleUpdate.php?objectClass=' + '<?php echo $objectClass;?>','detailDiv');
+              }
               }
             }
             if (paramMode=='switch' && dojo.byId('contentDetailDiv').offsetHeight<=15) setTimeout("dojo.byId('contentDetailDiv').style.top=(parseInt(dojo.byId('contentDetailDiv').style.top)-6)+'px';dijit.byId('contentDetailDiv').resize({h:21});",10);
