@@ -720,6 +720,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     if ($included and ($col=='id' or $col=='refId' or $col=='refType' or $col=='refName')) {
       $hide=true;
     }
+    if ($col=='idOrganization'  and ! Module::isModuleActive('Organization')) {
+      $hide=true;
+    }
     // For PDF Export : hide line if section is hidden
     $hiddenSection=false;
     if ($section) {
