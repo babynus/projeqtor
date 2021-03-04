@@ -878,9 +878,30 @@ class ActivityMain extends SqlElement {
           $returnValue .= '<input type="hidden" id="lastSaveId" value="' . htmlEncode ( $this->id ) . '" />';
           $returnValue .= '<input type="hidden" id="lastOperation" value="delete" />';
           return $returnValue;
-}
+         }
       }
-      return parent::delete();
+      $result = parent::delete();
+      if(getLastOperationStatus($result)=="OK"){
+        if($this->ActivityPlanningElement->idWorkCommand){
+            $newWorkCommandDone = SqlElement::getSingleSqlElementFromCriteria('WorkCommandDone', array('refType'=>'Activity','refId'=>$this->id));
+            $newWorkCommandDone->delete();
+            $workCommand = new WorkCommand($this->ActivityPlanningElement->idWorkCommand);
+            $newWorkCommandDone = new WorkCommandDone();
+            $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->ActivityPlanningElement->idWorkCommand,'idCommand'=>$workCommand->idCommand));
+            $quantity = 0;
+            foreach ($lstWorkCommand as $comVal){
+              if($comVal->refType == 'Activity' and $comVal->refId == $this->id){
+                continue;
+              }else{
+                $quantity += $comVal->doneQuantity;
+              }
+            }
+            $workCommand->doneQuantity = $quantity;
+            $workCommand->doneAmount = $quantity*$workCommand->unitAmount;
+            $workCommand->save();
+        }
+      }
+      return $result;
   }    
 // MTY - LEAVE SYSTEM  
 }

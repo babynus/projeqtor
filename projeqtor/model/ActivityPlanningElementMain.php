@@ -504,14 +504,14 @@ class ActivityPlanningElementMain extends PlanningElement {
         $workCommand = new WorkCommand($this->idWorkCommand);
         $workCommandDone = new WorkCommandDone();
         $newWorkCommandDone = new WorkCommandDone();
-        $workCommandDoneExist = $workCommandDone->getSingleSqlElementFromCriteria('WorkCommandDone', array('idWorkCommand'=>$this->idWorkCommand,'refId'=>$this->id,'refType'=>'Activity','idCommand'=>$workCommand->idCommand));
+        $workCommandDoneExist = $workCommandDone->getSingleSqlElementFromCriteria('WorkCommandDone', array('idWorkCommand'=>$this->idWorkCommand,'refId'=>$this->refId,'refType'=>'Activity','idCommand'=>$workCommand->idCommand));
         if($workCommandDoneExist){
           $workCommandDone = new WorkCommandDone($workCommandDoneExist->id);
         }
         $workCommandDone->idCommand = $workCommand->idCommand;
         $workCommandDone->idWorkCommand = $this->idWorkCommand;
         $workCommandDone->refType = "Activity";                
-        $workCommandDone->refId = $this->id;
+        $workCommandDone->refId = $this->refId;
         $workCommandDone->doneQuantity = $this->quantity;
         $workCommandDone->save();
         $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->idWorkCommand,'idCommand'=>$workCommand->idCommand));
@@ -594,7 +594,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->idWorkCommand,'idCommand'=>$workCommand->idCommand));
       $quantity = $this->quantity;
       foreach ($lstWorkCommand as $comVal){
-        if($comVal->refType == 'Activity' and $comVal->refId == $this->id){
+        if($comVal->refType == 'Activity' and $comVal->refId == $this->refId){
           continue;
         }else{
           $quantity += $comVal->doneQuantity;
