@@ -61,8 +61,10 @@ $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
               if(paramId !='' && multiSelection==false){
                 loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
               }else if(multiSelection==true){
-               loadContent('objectMultipleUpdate.php?objectClass=' + param,
-                  'detailDiv');
+                var value=dojo.byId('idMultipleUpdateAttribute').value;
+              if(value==''){
+                loadContent('objectMultipleUpdate.php?objectClass=' + '<?php echo $objectClass;?>','detailDiv');
+              }
               }
             }
       </script>

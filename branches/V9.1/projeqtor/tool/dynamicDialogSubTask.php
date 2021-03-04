@@ -56,7 +56,8 @@ if (isset($obj)) {
 }
 
 $obj= new $objectClass ($objectId);
-$showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Single')!='0')?true:false;
+$showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Single')!='' and Parameter::getUserParameter('showClosedSubTask_Single')!='0')?true:false;
+$showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Single')!='' and Parameter::getUserParameter('showDoneSubTask_Single') or  $showClosedSubTask==true)!='0')?true:false;
 ?>
 <?php if (! $print) {?>
 <?php if ($context=='popup') {?>
@@ -72,8 +73,8 @@ $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Single')!='0'
   <tr>
     <td width="100%">
       <div style="position:relative; float:right; top:0px;">
-        <label for="showClosedSubTask_Single"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;padding-top:13px;height:<?php echo ((isNewGui())?'20':'10');?>px;width:<?php echo((isNewGui())?'50':'150');?>px"><?php echo i18n('labelShowIdle'.((isNewGui())?'Short':''));?>&nbsp;</label>
-          <div class="whiteCheck" id="showClosedSubTask_Single" style="<?php echo ((isNewGui())?'margin-top:14px':'');?>" 
+        <label for="showClosedSubTask_Single"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;<?php echo ((isNewGui())?'padding-top:13px':'');?>;height:<?php echo ((isNewGui())?'20':'10');?>px;width:<?php echo((isNewGui())?'50':'150');?>px"><?php echo i18n('labelShowIdle'.((isNewGui())?'Short':''));?>&nbsp;</label>
+          <div class="<?php echo ((isNewGui())?"whiteCheck":"");?>" id="showClosedSubTask_Single" style="<?php echo ((isNewGui())?'margin-top:14px':'');?>" 
             dojoType="dijit.form.CheckBox" type="checkbox" <?php echo (($showClosedSubTask)?'checked':'');?> title="<?php echo i18n('labelShowIdle') ;?>" >
             <script type="dojo/connect" event="onChange" args="evt">
               saveUserParameter("showClosedSubTask_Single",((this.checked)?"1":"0"));
@@ -82,8 +83,22 @@ $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Single')!='0'
               dijit.byId('dialogSubTask').hide();
               showSubTask('<?php echo $objectClass?>');
           </script>
-        </div>
+          </div>
       </div>
+      <div style="position:relative; float:right; top:0px;">
+          <label for="showDoneSubTask_Single"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;<?php echo ((isNewGui())?'padding-top:13px':'');?>;height:<?php echo ((isNewGui())?'20':'10');?>px;width:<?php echo((isNewGui())?'50':'180');?>px"><?php echo i18n('labelShowDone'.((isNewGui())?'Short':''));?>&nbsp;</label>
+          <div class="<?php echo ((isNewGui())?"whiteCheck":"");?>" id="showDoneSubTask_Single" style="<?php echo ((isNewGui())?'margin-top:14px':'');?>" <?php if($showClosedSubTask)echo "readonly";?>
+            dojoType="dijit.form.CheckBox" type="checkbox" <?php echo (($showDoneSubTask)?'checked':'');?> title="<?php echo i18n('labelShowDone') ;?>" >
+            <script type="dojo/connect" event="onChange" args="evt">
+              saveUserParameter("showDoneSubTask_Single",((this.checked)?"1":"0"));
+              if (checkFormChangeInProgress()) {return false;}
+              if (checkFormChangeInProgress()) {return false;}
+              dijit.byId('dialogSubTask').hide();
+              showSubTask('<?php echo $objectClass?>');
+          </script>
+          </div>
+      </div>
+
     </td>
   </tr>
   <tr>

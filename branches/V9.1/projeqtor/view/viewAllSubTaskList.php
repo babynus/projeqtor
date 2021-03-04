@@ -37,7 +37,9 @@ $idResource=0;
 $idVersion=0;
 $element='';
 $ElmentTab =array("Activity","Ticket","Action");
-$showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Global')!='0')?true:false;
+$showClosedSubTask=(trim(Parameter::getUserParameter('showClosedSubTask_Global'))!='' and Parameter::getUserParameter('showClosedSubTask_Global')!='0')?true:false;
+$showDoneSubTask=((trim(Parameter::getUserParameter('showDoneSubTask_Global'))!='' and Parameter::getUserParameter('showDoneSubTask_Global')!='0') or $showClosedSubTask)?true:false;
+
 if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
   if(strpos(getSessionValue('project'),',')){
     $idProject=0;
@@ -45,19 +47,18 @@ if(sessionValueExists('project') and getSessionValue('project')!="" and  getSess
     $idProject =  getSessionValue('project');
   }
 }
-
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="imputationConsolidationParamDiv" name="imputationConsolidationParamDiv">  
   <div dojoType="dijit.layout.ContentPane" region="top" id="subTasButtonDiv" class="listTitle" >
   <form dojoType="dijit.form.Form" name="SubTaskLisForm" id="SubTaskLisForm" action="" method="post" >
   <table width="100%" height="64px" class="listTitle">
-    <tr height="32px">
-      <td style="vertical-align:top; min-width:100px; width:15%;" >
-        <table >
-	     <tr height="32px">
-	       <td width="80px" align="center">
-            <?php echo formatIcon('viewAllSubTask', 32, null, true);?>
+    <tr>
+      <td >
+        <table style="vertical-align:top;margin-top:5px; min-width:100px; width:15%;">
+	     <tr>
+	       <td  align="center">
+            <?php echo formatIcon('ViewAllSubTask', 32, null, true);?>
            </td>
            <td width="100px"><span class="title">&nbsp;&nbsp;&nbsp;<?php echo i18n('menuViewAllSubTask');?></span></td>
 		 </tr>
@@ -119,12 +120,31 @@ if(sessionValueExists('project') and getSessionValue('project')!="" and  getSess
                 </select>
            </td>
            <td align="top">
-            <div style="position:absolute; right:80px; top:0px;">
-              <label for="showClosedSubTaskAll"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;padding-top:13px;height:<?php echo ((isNewGui())?'20':'10');?>px;width:<?php echo((isNewGui())?'50':'150');?>px"><?php echo i18n('labelShowIdle'.((isNewGui())?'Short':''));?>&nbsp;</label>
-              <div class="whiteCheck" id="showClosedSubTaskAll" style="<?php echo ((isNewGui())?'margin-top:14px':'');?>" 
-              dojoType="dijit.form.CheckBox" type="checkbox" <?php echo (($showClosedSubTask)?'checked':'');?>title="<?php echo i18n('labelShowIdle') ;?>" >
+             <div style="position:absolute; right:<?php echo((isNewGui())?'160':'184');;?>px; top:0px;">
+              <label for="showDoneSubTaskAll"  class="<?php echo((isNewGui())?'dijitTitlePaneTitle;':'');?>" style="border:0;font-weight:normal !important;<?php echo((isNewGui())?'padding-top:14px;':'text-shadow:unset;');?>;height:<?php echo ((isNewGui())?'20':'10');?>px;width:<?php echo((isNewGui())?'50':'150');?>px"><?php echo i18n('labelShowDone'.((isNewGui())?'Short':''));?>&nbsp;</label>
+              <div class="<?php echo ((isNewGui())?"whiteCheck":"");?>" id="showDoneSubTaskAll" style="<?php echo ((isNewGui())?'margin-top:14px':'');?>" <?php if($showClosedSubTask)echo "readonly";?>
+              dojoType="dijit.form.CheckBox" type="checkbox" <?php echo (($showDoneSubTask)?'checked':'');?> title="<?php echo i18n('labelShowDone') ;?>" >
+                <script type="dojo/connect" event="onChange" args="evt">
+                  saveUserParameter("showDoneSubTask_Global",((this.checked)?"1":"0"));
+                  if (checkFormChangeInProgress()) {return false;}
+                  refreshAllSubTaskList();
+                </script>
+              </div>
+            </div>
+            <div style="position:absolute;right:<?php echo((isNewGui())?'80':'10');?>px;top:0px;">
+              <label for="showClosedSubTaskAll"  class="<?php echo((isNewGui())?'dijitTitlePaneTitle;':'');?>" style="border:0;font-weight:normal !important;<?php echo((isNewGui())?'padding-top:13px;':'text-shadow:unset;');?>;height:<?php echo ((isNewGui())?'20':'10');?>px;width:<?php echo((isNewGui())?'50':'150');?>px"><?php echo i18n('labelShowIdle'.((isNewGui())?'Short':''));?>&nbsp;</label>
+              <div class="<?php echo ((isNewGui())?"whiteCheck":"");?>" id="showClosedSubTaskAll" style="<?php echo ((isNewGui())?'margin-top:14px':'');?>" 
+              dojoType="dijit.form.CheckBox" type="checkbox" <?php echo (($showClosedSubTask)?'checked':'');?> title="<?php echo i18n('labelShowIdle') ;?>" >
                 <script type="dojo/connect" event="onChange" args="evt">
                   saveUserParameter("showClosedSubTask_Global",((this.checked)?"1":"0"));
+                  if(dijit.byId('showDoneSubTaskAll').readOnly==false && this.checked){
+                    dijit.byId('showDoneSubTaskAll').set('readOnly',true);
+                    dijit.byId('showDoneSubTaskAll').set('checked',true);
+                    saveUserParameter("showDoneSubTask_Global",1);
+                  }else{ 
+                    dijit.byId('showDoneSubTaskAll').set('readOnly',false);
+                    //dijit.byId('showDoneSubTaskAll').set('checked',false);
+                  }
                   if (checkFormChangeInProgress()) {return false;}
                   refreshAllSubTaskList();
                 </script>
@@ -141,9 +161,12 @@ if(sessionValueExists('project') and getSessionValue('project')!="" and  getSess
               </script>
             </button> 
             </td>
-             <?php }?>
+             <?php }
+             if(RequestHandler::getValue('destinationWidth')<='1150'){
+             ?>
            </tr>
            <tr>
+           <?php }?>
             <td nowrap="nowrap" style="text-align: right;padding-right:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo i18n("colType");?> &nbsp;</td>
             <td>
                <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" style="width: 175px;" name="elementSubTask" id="elementSubTask"
