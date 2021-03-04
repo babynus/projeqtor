@@ -57,7 +57,7 @@ if ($mode=='edit') {
   $workCommand->idCommand = $idCommand;
   $nameWorkUnit = SqlList::getFieldFromId('WorkUnit',$workCommandWorkUnit,'reference');
   $nameComplexity = SqlList::getNameFromId('Complexity',$workCommandComplexity);
-  $workCommand->name = $nameWorkUnit.'-'.$nameComplexity;
+  $workCommand->name = $nameWorkUnit.' - '.$nameComplexity;
   $workCommand->idWorkUnit = $workCommandWorkUnit;
   $workCommand->idComplexity = $workCommandComplexity;
   $workCommand->unitAmount = $workCommandUnitAmount;

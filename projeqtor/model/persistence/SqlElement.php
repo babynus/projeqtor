@@ -198,6 +198,7 @@ abstract class SqlElement {
       "Bill" => array(
           "BillLine" => "confirm", 
           "Note" => "cascade",
+          "WorkCommandBilled" => "cascade",
           "Situation"=> "cascade"), 
       "BillType" => array(
           "Bill" => "controlStrict"), 
