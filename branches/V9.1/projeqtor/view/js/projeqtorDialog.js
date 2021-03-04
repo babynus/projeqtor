@@ -6238,11 +6238,15 @@ function saveWorkCommand() {
 
 function saveBilledWorkCommand() {
   var formVar=dijit.byId('billedWorkCommandForm');
-  if (formVar.validate()) {
-    loadContent("../tool/saveBilledWorkCommand.php", "resultDivMain", "billedWorkCommandForm", true, 'billedWorkCommand');
-    dijit.byId('dialogBilledWorkCommand').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
+  if(dijit.byId('billedWorkCommandBilled').get('value') > dijit.byId('billedWorkCommandCommand').get('value')){
+    showAlert(i18n("billedQuantityCantBeSuperiorThanCommand"));
+  }else{
+    if (formVar.validate()) {
+      loadContent("../tool/saveBilledWorkCommand.php", "resultDivMain", "billedWorkCommandForm", true, 'billedWorkCommand');
+      dijit.byId('dialogBilledWorkCommand').hide();
+    } else {
+      showAlert(i18n("alertInvalidForm"));
+    }
   }
 }
 
@@ -6275,6 +6279,7 @@ function removeBilledWorkCommand(id) {
 function workCommandChangeIdWorkUnit(){
   if(dijit.byId('workCommandWorkUnit').get('value')==''){
     dijit.byId('workCommandComplexity').set('value','');
+    dijit.byId("workCommandComplexity").set('readOnly', true);
   }else{
     dijit.byId("workCommandComplexity").set('readOnly', false);
     if(dijit.byId('workCommandComplexity').get('value')!=''){

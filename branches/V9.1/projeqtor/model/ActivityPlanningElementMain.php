@@ -350,12 +350,17 @@ class ActivityPlanningElementMain extends PlanningElement {
         	if($paramEnableWorkUnit=='true'){
         	  self::$_fieldsAttributes['_label_workCommand']='';
         	  self::$_fieldsAttributes['idWorkCommand']='readonly';
+        	}else{
+        	  self::$_fieldsAttributes['_label_workCommand']='hidden';
+        	  self::$_fieldsAttributes['hidden']='readonly';
         	}
       	}else{
       	  self::$_fieldsAttributes['revenue']='readonly';
       	}
-      	if($this->idWorkCommand){
-      	  self::$_fieldsAttributes['idWorkCommand']='';
+      	if($paramEnableWorkUnit=='true'){
+      	 if($this->idWorkCommand){
+      	   self::$_fieldsAttributes['idWorkCommand']='';
+      	 }
       	}
       }else{
       	//unset($this->_separator_sectionRevenue_marginTop);
@@ -496,17 +501,27 @@ class ActivityPlanningElementMain extends PlanningElement {
       }
       
       if($this->idWorkCommand){
-        $workCommandDone = new WorkCommandDone();
         $workCommand = new WorkCommand($this->idWorkCommand);
+        $workCommandDone = new WorkCommandDone();
+        $newWorkCommandDone = new WorkCommandDone();
+        $workCommandDoneExist = $workCommandDone->getSingleSqlElementFromCriteria('WorkCommandDone', array('idWorkCommand'=>$this->idWorkCommand,'refId'=>$this->id,'refType'=>'Activity','idCommand'=>$workCommand->idCommand));
+        if($workCommandDoneExist){
+          $workCommandDone = new WorkCommandDone($workCommandDoneExist->id);
+        }
         $workCommandDone->idCommand = $workCommand->idCommand;
         $workCommandDone->idWorkCommand = $this->idWorkCommand;
         $workCommandDone->refType = "Activity";                
         $workCommandDone->refId = $this->id;
         $workCommandDone->doneQuantity = $this->quantity;
-        $workCommand->doneQuantity += $this->quantity;
-        $workCommand->doneAmount += $workCommand->unitAmount * $this->quantity;
-        $workCommand->save();
         $workCommandDone->save();
+        $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->idWorkCommand,'idCommand'=>$workCommand->idCommand));
+        $quantity = 0;
+        foreach ($lstWorkCommand as $comVal){
+          $quantity += $comVal->doneQuantity;
+        }
+        $workCommand->doneQuantity = $quantity;
+        $workCommand->doneAmount = $workCommand->unitAmount * $quantity;
+        $workCommand->save();
       }
     }
     //
@@ -573,7 +588,22 @@ class ActivityPlanningElementMain extends PlanningElement {
       if(!$this->quantity)$result.='<br/>' . i18n('errorMandatoryQuantity');
       if(!$this->idComplexity)$result.='<br/>' . i18n('errorMandatoryComplexity');
     }
-    
+    if($this->idWorkCommand){
+      $workCommand = new WorkCommand($this->idWorkCommand);
+      $newWorkCommandDone = new WorkCommandDone();
+      $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->idWorkCommand,'idCommand'=>$workCommand->idCommand));
+      $quantity = $this->quantity;
+      foreach ($lstWorkCommand as $comVal){
+        if($comVal->refType == 'Activity' and $comVal->refId == $this->id){
+          continue;
+        }else{
+          $quantity += $comVal->doneQuantity;
+        }
+      }
+      if($quantity > $workCommand->commandQuantity){
+        $result.='<br/>' . i18n('errorQuantityCantBeSuperiorThanCommand');
+      } 
+    }
     $old = $this->getOld();
     if($this->idActivityPlanningMode!='23' and $old->idPlanningMode=='23' and $this->plannedWork!='' and !SqlElement::isSaveConfirmed()){
       if(Parameter::getGlobalParameter('plannedWorkManualType')=="real" ){
