@@ -1539,8 +1539,6 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
    * @return void
    */
   public function finalizeSuccessfullConnection($rememberMe=false,$sso=false) {
-    debugLog("finalizeSuccessfullConnection(sso=$sso)");
-    debugLog("idUser=$this->id");
     setSessionUser($this);
     setSessionValue('appRoot', getAppRoot());
     $crit=array();
@@ -1551,9 +1549,8 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     $multipleProject=false;
     //$this->_arrayFilters[$filterObjectClass . "FilterName"]=$filter->name;
     foreach($objList as $obj) {
-      if ($obj->parameterCode=='currentLocale' and $obj->parameterValue) {
+      if ($obj->parameterCode=='lang' and $obj->parameterValue) {
         setSessionValue('currentLocale', $obj->parameterValue);
-        debugLog("currentLocale from lang = $obj->parameterValue");
         $i18nMessages=null;
       } else if ($obj->parameterCode=='defaultProject') {
         if($obj->parameterValue=="**"){
