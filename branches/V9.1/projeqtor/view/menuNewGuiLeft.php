@@ -414,23 +414,25 @@ function getPlugins (){
 function getNavigationMenuLeft (){
   $level=0;
   $result=array();
+  $user=getSessionUser();
   $nav=new Navigation();
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
   $displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
   $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc');
   $menuPlugin=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuPlugin'));
   $menuReport=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuReports'));
-  $rightPluginAcces=securityCheckDisplayMenu($menuPlugin->id,substr($menuPlugin->name,4));
-  $rightReportAcces=securityCheckDisplayMenu($menuReport->id,substr($menuReport->name,4));
+  $rightPluginAcces=securityCheckDisplayMenu($menuPlugin->id,substr('menuPlugin',4));
+  $rightReportAcces=securityCheckDisplayMenu($menuReport->id,substr('menuReports',4));
   sortMenus($contexctMenuMain,$result,0,$level,$rightPluginAcces);
   $navTa=array();
   $allNavSect=array();
   foreach ($result as $id=>$context){
       $context=$context['object'];
-      if($context->idMenu){
+        
         if($context->idMenu!=0 ){
           $unset=false;
           $menu=new Menu($context->idMenu);
+          
           if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) $unset=true; 
           if (! $menu->canDisplay() )  $unset=true;
           if (!$isLanguageActive and $menu->name=="menuLanguage")  $unset=true;
@@ -442,11 +444,14 @@ function getNavigationMenuLeft (){
             continue;
           }
           $lstMenuId[]=$context->idParent;
-        }else if($context->id!=6 and $rightReportAcces ){
+        }else if($context->id!=6 and $context->idReport==0){
            $navTa[$id]=$context->id;
            $allNavSect[$context->id]=$context->idParent;
+        }else if($context->idReport!=0 and $rightReportAcces){
+          $rep=SqlElement::getSingleSqlElementFromCriteria('HabilitationReport', array('idProfile'=>$user->idProfile,'idReport'=>$context->idReport, 'allowAccess'=>'1'));
+          if($rep->allowAccess!=1) unset($result[$id]);
+          if (! Module::isReportActive($context->name)) unset($result[$id]);
         }
-      }
   }
 
   $exist=array();
@@ -485,6 +490,7 @@ function getNavigationMenuLeft (){
   }
   return $result;
 }
+
 function navMenuHasItem($id,$result) {
   $hasItem=false;
   foreach($result as $res) {

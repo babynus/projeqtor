@@ -42,7 +42,7 @@
   $labelSelect=i18n("selectedItemsCount");
   $layout=(Parameter::getUserParameter('paramScreen')=='left')?'vertical':'horizontal';
   if (array_key_exists('destinationWidth',$_REQUEST)) {
-    $width=$_REQUEST['destinationWidth'];
+    $width=RequestHandler::getValue("destinationWidth");
     if ($layout=='vertical') $displayWidth=intval($width)-30;
     else $displayWidth=floor($width*0.6);
     if ($displayWidth<650) $labelSelect=i18n("selectedItemsCountShort");
@@ -61,7 +61,6 @@
   $objectClass=$_REQUEST['objectClass'];
   Security::checkValidClass($objectClass);
   $obj=new $objectClass();
-  
   
 ?>
 
@@ -180,7 +179,7 @@
           <input type="hidden" id="selection" name="selection" value=""/>
           <input type="hidden" id="dataTypeSelected"  />
           <div style="width: 92%; margin-left:8%;padding-top:30px;" >
-           <table width="100%" >
+           <table width="95%" >
              <tr style="vertical-align: top;">
               <td style="width: 220px;" >
                 <div dojoType="dojo.data.ItemFileReadStore" jsId="attributeMultipleUpadteStore" url="../tool/jsonList.php?listType=object&actualView=MultipleUpadate&objectClass=<?php echo  $objectClass;?>" searchAttr="name" >
@@ -195,22 +194,41 @@
                   </script>              
                  </select>
               </td>
-             <td style="width:190px;">
-               <div id="multipleUpdateOperateur" style="width:190px;" >
+              <?php  if($displayWidth<="840") echo '</tr><tr style="'.(($displayWidth<="610")?"height:50px;":"").'">';?>
+             <td id="operatorTd" style="width:190px;">
+               <div id="multipleUpdateOperateur" style="width:190px;<?php echo (($displayWidth>="840")?"margin-top:10px;":"");?>" >
                </div>
              </td>
-              <td style="width:370 px;vertical-align:middle;position:relative;">
+             <td id="inputTd" style="width:370 px;vertical-align:middle;position:relative;">
+              <input id="newMultipleUpdateValue" name="newMultipleUpdateValue" value=""    dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
+              <input id="isLongText" name="isLongText" value=""  dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
+               <div>
+               <?php if (isNewGui()) {?>
+                <div  id="multipleUpdateValueCheckboxSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" hidden
+                 leftLabel="" rightLabel="" style="width:10px;position:relative; top:0px;left:5px;z-index:99;display:none;" >
+  		           <script type="dojo/method" event="onStateChanged" >
+  		             dijit.byId("multipleUpdateValueCheckbox").set("checked",(this.value=="on")?true:false);
+  		           </script>
+  		         </div>
+  		        <?php }?>
+  		        <input type="checkbox" id="multipleUpdateValueCheckbox" name="multipleUpdateValueCheckbox" value=""  dojoType="dijit.form.CheckBox" style="padding-top:7px;margin-left:5px;display:none;";/> 
+	           </div>
+               <input id="multipleUpdateValueDate" name="multipleUpdateValueDate" value=""  dojoType="dijit.form.DateTextBox" constraints="{datePattern:browserLocaleDateFormatJs}"  style="width:100px;display:none;float:left;" />
+               <input id="multipleUpdateValueTime" name="multipleUpdateValueTime" value=""  dojoType="dijit.form.TimeTextBox"   style="width:75px;display:none;float:left;margin-left:15px;" />
+               <?php  if($displayWidth<="610"){
+                        echo "</td></tr><tr><td style='width:100%;vertical-align:middle;position:relative;'>"; 
+                        }
+                ?>
+               <div id="divListElement" >
                 <textarea dojoType="dijit.form.Textarea" id="multipleUpdateTextArea" name="multipleUpdateTextArea" style="float:left;width:90%;min-width:300px;min-height:150px;font-size: 90%; background:none;display:none;" 
                 class="input" maxlength="4000" ></textarea>
-                <input id="newMultipleUpdateValue" name="newMultipleUpdateValue" value=""    dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
-                <input id="isLongText" name="isLongText" value=""  dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
-               <select id="multipleUpdateValueList" name="multipleUpdateValueList[]" value=""  dojoType="dijit.form.MultiSelect" 
-                 style="width:350px;font-size:10pt;color:#555555;height:150px;display:none;float:left;" size="10" class="selectList">
-               </select>
-               <button style="display:none;width:20px;float:left;margin-left:15px;" id="showDetailInMultipleUpdate" dojoType="dijit.form.Button" showlabel="false"
+                <select id="multipleUpdateValueList" name="multipleUpdateValueList[]" value=""  dojoType="dijit.form.MultiSelect" 
+                 style="<?php  echo ($displayWidth<="840")?"width:370px;":"width:350px;";?>font-size:10pt;color:#555555;height:150px;display:none;float:left;" size="10" class="selectList">
+                </select>
+                <button style="display:none;width:20px;float:left;margin-left:15px;" id="showDetailInMultipleUpdate" dojoType="dijit.form.Button" showlabel="false"
                       title="<?php echo i18n('showDetail')?>" class="resetMargin notButton notButtonRounded"
                       iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui">
-                <script type="dojo/connect" event="onClick" args="evt">
+                      <script type="dojo/connect" event="onClick" args="evt">
                         var objectName = dijit.byId('showDetailInMultipleUpdate').get('value');
                         if( objectName ){
                           var objectClass=objectName[0].substr(2);
@@ -222,22 +240,9 @@
                           showDetail('multipleUpdateValueList',0,objectClass,false);
                         }
                       </script>
-              </button>
-               
-               <div>
-               <?php if (isNewGui()) {?>
-                <div  id="multipleUpdateValueCheckboxSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" hidden
-                 leftLabel="" rightLabel="" style="width:10px;position:relative; top:0px;left:5px;z-index:99;display:none;" >
-  		           <script type="dojo/method" event="onStateChanged" >
-  		             dijit.byId("multipleUpdateValueCheckbox").set("checked",(this.value=="on")?true:false);
-  		           </script>
-  		         </div>
-  		        <?php }?>
-  		        <input type="checkbox" id="multipleUpdateValueCheckbox" name="multipleUpdateValueCheckbox" value=""  dojoType="dijit.form.CheckBox" style="padding-top:7px;<?php echo (isNewGui())?'margin-left:5px;display:none;':'';?>";/> 
-	           </div>
-               <input id="multipleUpdateValueDate" name="multipleUpdateValueDate" value=""  dojoType="dijit.form.DateTextBox" constraints="{datePattern:browserLocaleDateFormatJs}"  style="width:100px;<?php echo (isNewGui())?'display:none':'display:block'; ?>;" />
+                  </button>
+                </div>
              </td>
-             <td></td>
             </tr>
            <?php  //gautier #533
             if(property_exists(get_class($obj), 'password') and securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=='YES'){?>

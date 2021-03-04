@@ -4249,9 +4249,9 @@ div.ticketKanbanCustom .kanbanVersion{
 	cursor: pointer;
     position: relative;
     width: 14px;
-    top:6px;
     float:left;
-    font-size: 18px;
+    height:28px;
+    padding-top:8px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
@@ -4263,12 +4263,12 @@ div.ticketKanbanCustom .kanbanVersion{
     position: relative;
     float:right;
     width: 14px;
-    top:6px;
+    height:28px;
+    padding-top:8px;
     color: #ffffff;
     background-color: #0000001c;
-    font-size: 18px;
     transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
+    border-radius:3px 0 0 3px ;
     user-select: none;
 }
 
@@ -4288,4 +4288,10 @@ div.ticketKanbanCustom .kanbanVersion{
 
 .mySlides {
 	width:100%;
+}
+
+.todoListTab{
+	padding-top:3px;
+	padding-bottom:3px;
+	border:1px solid  #AAAAAA;
 }
