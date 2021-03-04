@@ -110,6 +110,7 @@ $nr1 = 0;
 $fs = 0;
 $notFound=0;
 foreach ($res_att as $att) {
+    if (! class_exists($att->refType)) continue;
     $nr += 1;
     $paramId = 'idProject';
     if ($att->refType == 'Project') {
@@ -140,7 +141,7 @@ foreach ($res_att as $att) {
         }
         
         echo '<TR>';
-            echo '  <TD td class="attachmentData smallButtonsGroup" style="width:15px">';
+            echo '  <TD class="attachmentData smallButtonsGroup" style="width:15px">';
             if ($att->fileName and $att->subDirectory) {
               if ($exists) {
                 echo'<a href="../tool/download.php?class=Attachment&id=' . htmlEncode($att->id) . '" target="printFrame" title="' . i18n('helpDownload') . '">'
@@ -151,8 +152,9 @@ foreach ($res_att as $att) {
               }
             }
             if ($att->link) {
-                echo '<div style="float:center;cursor:pointer" onClick="window.open(\'' . htmlEncode(urldecode($att->link)) . '\')" target="_blank">'
-                . '<img src="../view/img/mime/html.png" title="' . htmlEncode($att->link) . '"/>';
+                echo '<div style="float:center;cursor:pointer" title="' . htmlEncode($att->link) . '" onClick="window.open(\'' . htmlEncode(urldecode($att->link)) . '\')" target="_blank">'
+                //. '<img src="../view/img/mime/html.png" />';
+                .formatSmallButton('Link');
                 echo '</div>';
             }
             echo '</TD>';
@@ -161,8 +163,9 @@ foreach ($res_att as $att) {
             echo '  <TD class="reportTableData" style="text-align:right;white-space:nowrap">' . htmlGetFileSize($att->fileSize) . '</TD>';
             echo '  <TD class="reportTableData" style="white-space:nowrap">';
             switch ($att->idPrivacy) {
-                case SqlList::getIdFromTranslatableName('privacy', 'private')
-                    : echo '<img style="width:14px; vertical-align:top" src="../view/css/images/iconLock32.png" /> ';
+                case SqlList::getIdFromTranslatableName('privacy', 'private') :
+                    echo '<span style="display:inline-block" >'.formatIcon('Locked',16,null, false, false).'</span>&nbsp;';
+                    // echo '<img style="width:14px; vertical-align:top" src="../view/css/images/iconLock32.png" /> ';
                     echo SqlList::getNameFromId('privacy', $att->idPrivacy);
                     break;
                 default: echo SqlList::getNameFromId('privacy', $att->idPrivacy);
@@ -170,8 +173,8 @@ foreach ($res_att as $att) {
             echo '</TD>';
             echo '  <TD class="reportTableData">'
             . SqlList::getNameFromId('Project', array_values(SqlList::getListWithCrit($att->refType, array('id' => $att->refId), $paramId, NULL, $paramActive))[0]) . '</TD>';
-            echo '  <TD class="reportTableData" style="text-align:left;white-space:nowrap"><img style="width:16px; vertical-align:top" src="../view/css/images/icon'
-            . $att->refType . '16.png" /> ' . i18n($att->refType) . '</TD>';
+            echo '  <TD class="reportTableData" style="text-align:left;white-space:nowrap">&nbsp;'
+                .'<span style="display:inline-block">'.formatIcon($att->refType,16,null, false, false).'</span>&nbsp;' . i18n($att->refType) . '</TD>';
             echo '  <TD class="reportTableData" style="white-space:nowrap">' . $att->refId . '</TD>';
             echo '  <TD class="reportTableData">' . SqlList::getNameFromId($att->refType, $att->refId) . '</TD>';
             echo '  <TD class="reportTableData" style="white-space:nowrap">' . SqlList::getNameFromId('user', $att->idUser) . '</TD>';
