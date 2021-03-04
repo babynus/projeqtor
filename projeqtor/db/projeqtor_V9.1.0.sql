@@ -150,14 +150,8 @@ INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VA
 (10,67,0,(select `active` from `${prefix}module` where id=10)),
 (1,108,0,(select `active` from `${prefix}module` where id=1));
 
-INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
-(1,'lockedLeftWork','1'),
-(2,'lockedLeftWork','1'),
-(3,'lockedLeftWork','1'),
-(4,'lockedLeftWork','1'),
-(5,'lockedLeftWork','1'),
-(6,'lockedLeftWork','1'),
-(7,'lockedLeftWork','1');
+INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) 
+SELECT id , 'lockedLeftWork','1' from `${prefix}profile`;
 
 -- REPORT attachment.php
 
