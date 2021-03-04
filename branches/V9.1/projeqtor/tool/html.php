@@ -361,6 +361,30 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         $table[$selection]=SqlList::getFieldFromId('WorkUnit', $selection, 'reference');
       }
       asort($table);
+      
+  }elseif($col=="idWorkCommand"){
+      $table=array();
+      $workCommand=new WorkCommand();
+      $com = new Command();
+      $lstCom = $com->getSqlElementsFromCriteria(array('idProject'=>$obj->idProject));
+      $tabLstCom = array();
+      foreach ($lstCom as $valComId=>$valCom){
+        $tabLstCom[]=$valCom->id;
+      }
+      $in = transformValueListIntoInClause($tabLstCom);
+      $where=" idCommand in " .$in ;
+      $list=$workCommand->getSqlElementsFromCriteria(null,null,$where);
+      foreach ($list as $wu) {
+        if (! array_key_exists($wu->id, $table)) {
+          $id=$wu->id;
+          $command = new Command($wu->idCommand);
+          $table[$id]=$command->reference.' - '. $wu->name;
+        }
+      }
+      if($selection){
+        $table[$selection]=SqlList::getFieldFromId('WorkCommand', $selection, 'reference');
+      }
+      asort($table);
   }else {
     // None of the previous cases : no criteria and not of the expected above cases
     $showIdleCriteria=$showIdle;

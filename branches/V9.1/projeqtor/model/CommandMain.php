@@ -389,6 +389,32 @@ class CommandMain extends SqlElement {
   	return $result;
   }
   
+  
+  public function copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
+    $result=parent::copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks);
+    if ($newClass=='Bill') {
+      $paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
+      if($paramEnableWorkUnit=='true'){
+        $workCommand = new WorkCommand();
+        $listWorkCommand = $workCommand->getSqlElementsFromCriteria(array('idCommand'=>$this->id));
+        foreach ($listWorkCommand as $id=>$com){
+          $workCommandBill = new WorkCommandBilled();
+           $workCommandBill->idCommand = $this->id;
+           $workCommandBill->idWorkCommand = $com->id;
+           $workCommandBill->idBill = $result->id;
+           $workCommandBill->billedQuantity = $com->commandQuantity - $com->billedQuantity;
+           $workCommandBill->save();
+           $com->billedQuantity += $workCommandBill->billedQuantity;
+           $com->billedAmount = $com->unitAmount * $com->billedQuantity;
+           $com->save();
+        }
+      }
+    }
+    return $result;
+  }
+  
+  
+  
   // Save without extra save() feature and without controls
   public function simpleSave() {
     return $this->saveForced();
