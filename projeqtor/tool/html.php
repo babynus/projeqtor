@@ -381,9 +381,6 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
           $table[$id]=$command->reference.' - '. $wu->name;
         }
       }
-      if($selection){
-        $table[$selection]=SqlList::getFieldFromId('WorkCommand', $selection, 'reference');
-      }
       asort($table);
   }else {
     // None of the previous cases : no criteria and not of the expected above cases
