@@ -278,5 +278,37 @@ class CatalogUOMain extends SqlElement {
     return $result;
   }
   
+  
+  public static function getProjectsUsingCatalog(){
+ //   $planningElement = new PlanningElement();
+//    $plTable=$planningElement->getDatabaseTableName();
+//     $querySelect = " SELECT DISTINCT  $plTable.idProject ";
+//     $queryFrom = "   FROM $plTable ";
+//     $queryWhere = "  WHERE $plTable.idWorkUnit IS NOT NULL ";
+//     $query=$querySelect.$queryFrom.$queryWhere;
+//     $result=Sql::query($query);
+//     $tabIdProj = array();
+//     while ($line = Sql::fetchLine($result)) {
+//       $tabIdProj[]= $line['idProject'];
+//     }
+    $crit = ' idWorkUnit IS NOT NULL ';
+    $tabIdProj = SqlList::getListWithCrit('PlanningElement', $crit , 'idProject');
+    return $tabIdProj;
+  }  
+  
+  public static function getCatalogueForProject($idProjet){
+    $proj = new Project($idProjet);
+    $topProj = $proj->getTopProjectList(true);
+    $projectCatalogUo = new CatalogUO();
+    $listProjCatalog = SqlList::getList('CatalogUO','idProject');
+    $result = null;
+    foreach ($topProj as $idProj){
+      if($result)break;
+      if(in_array($idProj, $listProjCatalog))$result=$idProj;
+    }
+    return $result;
+  }
+  
+  
 }
 ?>
