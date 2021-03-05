@@ -941,7 +941,7 @@ if ($type == 'empty') {
     $tabWorkCommand = array();
     foreach ($listWorkCOmmand as $val){
       $commandForRef = new Command($val->idCommand);
-      $tabWorkCommand[$val->id]=$commandForRef->reference.'-'.$val->name;
+      $tabWorkCommand[$val->id]=$commandForRef->reference.' - '.$val->name;
     }
     ksort($tabWorkCommand);
     echo '{id:"", name:""},';
