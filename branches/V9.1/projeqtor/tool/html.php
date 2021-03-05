@@ -390,8 +390,9 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $complexity = new Complexity($obj->idComplexity);
       if($obj->idWorkUnit and $obj->idComplexity){
         $catalog = new CatalogUO();
-        $idProject = $catalog->getCatalogueForProject($workUnit->idProject);
-        if(!$idProject)$idProject= $workUnit->idProject;
+//         $idProject = $catalog->getCatalogueForProject($workUnit->idProject);
+//         if(!$idProject)$idProject= $workUnit->idProject;
+        $idProject= $workUnit->idProject;
         $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject),'id');
         $in=transformValueListIntoInClause($listCommand);
         $workCommand = new WorkCommand();
