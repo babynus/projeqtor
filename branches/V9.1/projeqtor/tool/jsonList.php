@@ -932,21 +932,28 @@ if ($type == 'empty') {
     $idComplexity = $values[1];
     $workUnit = new WorkUnit($idWorkUnit);
     $complexity = new Complexity($idComplexity);
-    $idProject = $workUnit->idProject;
-    $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject),'id');
-    $in=transformValueListIntoInClause($listCommand);
-    $workCommand = new WorkCommand();
-    $where = "( idCommand in ".$in.") and ( idWorkUnit = ".$idWorkUnit." and idComplexity = ".$idComplexity." ) ";
-    $listWorkCOmmand = $workCommand->getSqlElementsFromCriteria(null,false,$where);
-    $tabWorkCommand = array();
-    foreach ($listWorkCOmmand as $val){
-      $commandForRef = new Command($val->idCommand);
-      $tabWorkCommand[$val->id]=$commandForRef->reference.' - '.$val->name;
-    }
-    ksort($tabWorkCommand);
-    echo '{id:"", name:""},';
-    foreach ($tabWorkCommand as $id=>$name){
-      echo '{id:"'.$id.'", name:"'.$name.'"},';
+    if($workUnit and $complexity){
+      //$idProject = $workUnit->idProject;
+      $catalog = new CatalogUO();
+      $idProject = $catalog->getCatalogueForProject($workUnit->idProject);
+      if(!$idProject)$idProject= $workUnit->idProject;
+      $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject),'id');
+      $in=transformValueListIntoInClause($listCommand);
+      $workCommand = new WorkCommand();
+      $where = "( idCommand in ".$in.") and ( idWorkUnit = ".$idWorkUnit." and idComplexity = ".$idComplexity." ) ";
+      $listWorkCOmmand = $workCommand->getSqlElementsFromCriteria(null,false,$where);
+      $tabWorkCommand = array();
+      foreach ($listWorkCOmmand as $val){
+        $commandForRef = new Command($val->idCommand);
+        $tabWorkCommand[$val->id]=$commandForRef->reference.' - '.$val->name;
+      }
+      ksort($tabWorkCommand);
+      echo '{id:"", name:""},';
+      foreach ($tabWorkCommand as $id=>$name){
+        echo '{id:"'.$id.'", name:"'.$name.'"},';
+      }
+    }else{
+      echo '{id:"", name:""},';
     }
 } else if ($type == 'listStatusDocumentVersion') {
   $doc = SqlElement::getCurrentObject ( null, null, false, false ); // V5.2

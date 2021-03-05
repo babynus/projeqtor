@@ -348,7 +348,11 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $table=SqlList::getList($listType,$column,$selection, $showIdleCriteria );
   }else if ($col=="idWorkUnit"){
       $table=array();
-      $where="idProject=$obj->idProject";
+      $catalog = new CatalogUO();
+      $idProject = $catalog->getCatalogueForProject($obj->idProject);
+      debugLog($idProject);
+      if(!$idProject)$idProject= $obj->idProject;
+      $where="idProject=$idProject";
       $workUnit=new WorkUnit();
       $list=$workUnit->getSqlElementsFromCriteria(null,null, $where);
       foreach ($list as $wu) {
@@ -363,25 +367,43 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       asort($table);
       
   }elseif($col=="idWorkCommand"){
-      $table=array();
-      $workCommand=new WorkCommand();
-      $com = new Command();
-      $lstCom = $com->getSqlElementsFromCriteria(array('idProject'=>$obj->idProject));
-      $tabLstCom = array();
-      foreach ($lstCom as $valComId=>$valCom){
-        $tabLstCom[]=$valCom->id;
-      }
-      $in = transformValueListIntoInClause($tabLstCom);
-      $where=" idCommand in " .$in ;
-      $list=$workCommand->getSqlElementsFromCriteria(null,null,$where);
-      foreach ($list as $wu) {
-        if (! array_key_exists($wu->id, $table)) {
-          $id=$wu->id;
-          $command = new Command($wu->idCommand);
-          $table[$id]=$command->reference.' - '. $wu->name;
+        $table=array();
+//       $workCommand=new WorkCommand();
+//       $com = new Command();
+//       $lstCom = $com->getSqlElementsFromCriteria(array('idProject'=>$obj->idProject));
+//       $tabLstCom = array();
+//       foreach ($lstCom as $valComId=>$valCom){
+//         $tabLstCom[]=$valCom->id;
+//       }
+//       $in = transformValueListIntoInClause($tabLstCom);
+//       $where=" idCommand in " .$in ;
+//       $list=$workCommand->getSqlElementsFromCriteria(null,null,$where);
+//       foreach ($list as $wu) {
+//         if (! array_key_exists($wu->id, $table)) {
+//           $id=$wu->id;
+//           $command = new Command($wu->idCommand);
+//           $table[$id]=$command->reference.' - '. $wu->name;
+//         }
+//       }
+//       asort($table);
+      $workUnit = new WorkUnit($obj->idWorkUnit);
+      $complexity = new Complexity($obj->idComplexity);
+      if($obj->idWorkUnit and $obj->idComplexity){
+        $catalog = new CatalogUO();
+        $idProject = $catalog->getCatalogueForProject($workUnit->idProject);
+        if(!$idProject)$idProject= $workUnit->idProject;
+        $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject),'id');
+        $in=transformValueListIntoInClause($listCommand);
+        $workCommand = new WorkCommand();
+        $where = "( idCommand in ".$in.") and ( idWorkUnit = ".$obj->idWorkUnit." and idComplexity = ".$obj->idComplexity." ) ";
+        $listWorkCOmmand = $workCommand->getSqlElementsFromCriteria(null,false,$where);
+        $tabWorkCommand = array();
+        foreach ($listWorkCOmmand as $val){
+          $commandForRef = new Command($val->idCommand);
+          $table[$val->id]=$commandForRef->reference.' - '.$val->name;
         }
+        ksort($table);
       }
-      asort($table);
   }else {
     // None of the previous cases : no criteria and not of the expected above cases
     $showIdleCriteria=$showIdle;

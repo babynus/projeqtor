@@ -197,6 +197,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   
   public function setAttributes() {
     global $contextForAttributes;
+    $paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
     self::$_fieldsAttributes['idWorkUnit']='hidden';
     self::$_fieldsAttributes['idComplexity']='hidden';
     self::$_fieldsAttributes['quantity']='hidden';
@@ -225,7 +226,6 @@ class ActivityPlanningElementMain extends PlanningElement {
       self::$_fieldsAttributes['latestStartDate']="readonly";
       self::$_fieldsAttributes['latestEndDate']="readonly";
     }
-    
     $user=getSessionUser();
     $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->getProfile($this->idProject),'scope'=>'changeManualProgress'));
     if(!$this->isManualProgress or $priority and ($priority->rightAccess == 2 or ! $priority->id ) ){
@@ -312,7 +312,6 @@ class ActivityPlanningElementMain extends PlanningElement {
       	self::$_fieldsAttributes['revenue']='';
       	self::$_fieldsAttributes['idComplexity']='';
       	self::$_fieldsAttributes['quantity']='';
-      	$paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
         if($paramEnableWorkUnit=='true'){
           self::$_fieldsAttributes['_label_workCommand']='';
           self::$_fieldsAttributes['idWorkCommand']='readonly';
@@ -358,7 +357,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       	  self::$_fieldsAttributes['revenue']='readonly';
       	}
       	if($paramEnableWorkUnit=='true'){
-      	 if($this->idWorkCommand){
+      	 if($this->idWorkCommand or ($this->idWorkUnit and $this->idComplexity)){
       	   self::$_fieldsAttributes['idWorkCommand']='';
       	 }
       	}
