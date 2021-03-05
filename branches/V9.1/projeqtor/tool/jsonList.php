@@ -933,11 +933,8 @@ if ($type == 'empty') {
     $workUnit = new WorkUnit($idWorkUnit);
     $complexity = new Complexity($idComplexity);
     if($workUnit and $complexity){
-      //$idProject = $workUnit->idProject;
+      $idProject = $workUnit->idProject;
       $catalog = new CatalogUO();
-      //$idProject = $catalog->getCatalogueForProject($workUnit->idProject);
-      //if(!$idProject)$idProject= $workUnit->idProject;
-      $idProject= $workUnit->idProject;
       $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject),'id');
       $in=transformValueListIntoInClause($listCommand);
       $workCommand = new WorkCommand();
