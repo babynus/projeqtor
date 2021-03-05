@@ -331,6 +331,17 @@ class BillMain extends SqlElement {
       $project = new Project($this->idProject);
       $project->ProjectPlanningElement->updateCA(true);
     }
+       
+    $workCommandBilled = new WorkCommandBilled();
+    $lstWorkCommandBilled = $workCommandBilled->getSqlElementsFromCriteria(array('idBill'=>$this->id));
+    foreach ($lstWorkCommandBilled as $wc){
+      $workCommand = new WorkCommand($wc->idWorkCommand);
+      $workCommand->billedQuantity -= $wc->billedQuantity;
+      $workCommand->billedAmount = $workCommand->unitAmount * $workCommand->billedQuantity;
+      $workCommand->save();
+      $wc->delete();
+    }
+    
 	  return $result;
   }
     
