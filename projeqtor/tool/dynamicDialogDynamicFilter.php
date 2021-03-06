@@ -79,7 +79,7 @@ Security::checkValidClass($objectClass);
                  }
                  ?>
                </select>
-                 	<?php } else if (in_array($filterCriteria->sqlOperator, array('LIKE', 'NOT LIKE','ILIKE')) or $filterCriteria->sqlValue == 'int') { ?>
+                 	<?php } else if (in_array($filterCriteria->sqlOperator, array('LIKE', 'NOT LIKE','ILIKE','NOT ILIKE')) or $filterCriteria->sqlValue == 'int') { ?>
                <input id="filterValue<?php echo $cpt;?>" name="filterValue<?php echo $cpt;?>" value=""  
                  dojoType="dijit.form.TextBox" 
                  style="width:<?php echo (isNewGui())?'373':'400';?>px" />
