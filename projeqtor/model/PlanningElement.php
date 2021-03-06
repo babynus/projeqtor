@@ -2167,6 +2167,7 @@ class PlanningElement extends SqlElement {
       }
     }
     // Predecessors
+    
     $crit='successorId in (0,' . implode(',',$idList) . ')';
     $dep=new Dependency();
     
@@ -2182,8 +2183,19 @@ class PlanningElement extends SqlElement {
       if (! array_key_exists("#".$dep->predecessorId, $result)) {
       	$parent=new GlobalPlanningElement($dep->predecessorId,true);
         $parent->_parentList=array();
-        $parent->_predecessorList=array();
-        $parent->_predecessorListWithParent=array();
+        $arrayPrecDepTmp=array();
+        if ($parent->paused) {
+          $tmpCrit='successorId = '.Sql::fmtId($dep->predecessorId);
+          $tmpPrecDepList=$dep->getSqlElementsFromCriteria(null, false, $tmpCrit);
+        
+          foreach ($tmpPrecDepList as $precDepTmp) { 
+            $arrayPrecDepTmp["#".$precDepTmp->predecessorId]=array("delay"=>$precDepTmp->dependencyDelay, "type"=>$precDepTmp->dependencyType);
+          }
+          $directPredecessors["#".$dep->predecessorId]=$arrayPrecDepTmp;
+          $lstPrec=array_merge_preserve_keys($lstPrec,$arrayPrecDepTmp);
+        }
+        $parent->_predecessorList=$arrayPrecDepTmp;
+        $parent->_predecessorListWithParent=$arrayPrecDepTmp;
         $parent->_noPlan=true;
         $parent->_childList=array();
         $result["#".$dep->predecessorId]=$parent;
