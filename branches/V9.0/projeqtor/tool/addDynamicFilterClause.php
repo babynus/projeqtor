@@ -121,12 +121,12 @@ for ($i=0;$i<$nbDynamicFilterClauses;$i++) {
 			$arrayDisp["value"]="'" . htmlEncode($filterValue) . "'";
 			$arraySql["value"]="'" . trim(Sql::str(htmlEncode($filterValue)),"'") . "'";
 		}
-	} else if ($idFilterOperator=="LIKE" and $filterDataType=="varcharStartBy") {
+	} else if (($idFilterOperator=="LIKE" or $idFilterOperator=="ILIKE") and $filterDataType=="varcharStartBy") {
 	  $arrayDisp["operator"]=i18n('startBy'); //TRANSLATION qCazelles
-	  $arraySql["operator"]="LIKE";
+	  $arraySql["operator"]=(Sql::isMysql())?"LIKE":"ILIKE";
 	  $arrayDisp["value"]="'".htmlEncode($filterValue)."'";
 	  $arraySql["value"]="'".htmlEncode($filterValue)."%'";	
-	} else if (($idFilterOperator=="LIKE" or $idFilterOperator=="hasSome") and $filterDataType!="varcharStartBy") {
+	} else if (($idFilterOperator=="LIKE" or $idFilterOperator=="ILIKE" or $idFilterOperator=="hasSome") and $filterDataType!="varcharStartBy") {
 		if ($filterDataType=='refObject' or $idFilterOperator=="hasSome") {
 			$arraySql["operator"]=' exists ';
 			if ($idFilterOperator=="hasSome") {
@@ -151,7 +151,7 @@ for ($i=0;$i<$nbDynamicFilterClauses;$i++) {
 			$arrayDisp["value"]="'" . htmlEncode($filterValue) . "'";
 			$arraySql["value"]="'%" . trim(Sql::str(htmlEncode($filterValue)),"'") . "%'";
 		}
-	} else if ($idFilterOperator=="NOT LIKE") {
+	} else if ($idFilterOperator=="NOT LIKE" or $idFilterOperator=="NOT ILIKE") {
 		$arrayDisp["operator"]=i18n("notContains");
 		$arraySql["operator"]=(Sql::isMysql())?'NOT LIKE':'NOT ILIKE';
 		$arrayDisp["value"]="'" . htmlEncode($filterValue) . "'";
