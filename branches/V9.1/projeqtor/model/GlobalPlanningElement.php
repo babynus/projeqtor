@@ -86,6 +86,7 @@ class GlobalPlanningElement extends SqlElement {
   public $idStatus;
   public $idResource;
   public $isGlobal=1;
+  public $paused;
   // public $validatedCalculated;
   // public $validatedExpenseCalculated;
   // public $_workVisibility;
