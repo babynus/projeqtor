@@ -3393,6 +3393,7 @@ msgNotGranted: "Ви не дозволено робити цю операцію"
 msgParentActivityInSameProject: "Батько справ (activity) мусить бути в одному проекті",
 msgParentRequirementInSameProjectProduct: "батько вимоги (requirement) мусить належати до того ж продукту або проекту",
 msgParentTestCaseInSameProjectProduct: "батько тестового сценарію мусить належати до того ж продукту або проекту",
+msgPausedActivity: "This activity is paused",
 msgPdfDosabled: "Експорт PDF вимкнено",
 msgPlanningActivityInSameProject: "Планування справ (activity) мусить бути в одному проекті",
 msgPlanningActivityWithWork: "Cannot change Planning Activity on Ticket with real work",
