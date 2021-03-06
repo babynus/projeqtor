@@ -3532,6 +3532,10 @@ function drawGantt() {
       if (keys.indexOf(topKey) == -1) {
         topId = '';
       }
+      if (item.paused==1) {
+        pColor='A0A0A0';
+        pItemColor='A0A0A0';
+      }
       keys += "#" + curKey + "#";
       g.AddTaskItem(new JSGantt.TaskItem(item.id, pName, pStart, pEnd, pColor, pItemColor,
           runScript, contextMenu, pMile, pResource, progress, pGroup, 
