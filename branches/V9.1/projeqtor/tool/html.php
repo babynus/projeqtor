@@ -351,7 +351,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $catalog = new CatalogUO();
       $idProject = $catalog->getCatalogueForProject($obj->idProject);
       if(!$idProject)$idProject= $obj->idProject;
-      $where="idProject=$idProject";
+      $where="idProject=".Sql::fmtId($idProject);
       $workUnit=new WorkUnit();
       $list=$workUnit->getSqlElementsFromCriteria(null,null, $where);
       foreach ($list as $wu) {
