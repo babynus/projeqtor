@@ -7649,10 +7649,10 @@ function saveOrCancelConsolidationValidation(proj,month,asSub){
   }else{
     mode='cancelCons';
   }
-  if (dojo.byId('projHabilitationValidation_'+proj.substr(6)).value=='1' && dojo.byId('projHabilitationLocked_'+proj.substr(6)).value=='2' && dojo.byId('lockedImputation_'+proj)){
-    showAlert(i18n('cantHaveHabilitaionLocked'));
-    return;
-  }
+//  if (dojo.byId('projHabilitationValidation_'+proj.substr(6)).value=='1' && dojo.byId('projHabilitationLocked_'+proj.substr(6)).value=='2' && dojo.byId('lockedImputation_'+proj)){
+//    showAlert(i18n('cantHaveHabilitaionLocked'));
+//    return;
+//  }
   saveConsolidationValidation(proj,mode,month,all,asSub);
 }
 
