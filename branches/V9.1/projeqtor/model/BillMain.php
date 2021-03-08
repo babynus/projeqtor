@@ -551,6 +551,7 @@ class BillMain extends SqlElement {
     }
     if (count($payList)==0 or $this->id==null) {
       $this->paymentsCount=0;
+      $this->paymentDone=0;
       if($isDeletePayment){
         $this->paymentDate = null;
         $this->paymentAmount = 0;
