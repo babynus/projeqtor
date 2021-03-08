@@ -52,6 +52,9 @@ if (array_key_exists('weekSpinner',$_REQUEST)) {
 	$paramWeek=Security::checkValidWeek($paramWeek);
 };
 
+$paramStartDate=RequestHandler::getValue('startDate');
+$paramEndDate=RequestHandler::getValue('endDate');
+
 $user=getSessionUser();
 
 $paramResource='';
@@ -70,7 +73,8 @@ if (array_key_exists('idResource',$_REQUEST)) {
   } 
 }
 
-$periodType=$_REQUEST['periodType']; // not filtering as data as data is only compared against fixed strings
+$periodType=RequestHandler::getValue('periodType'); // not filtering as data as data is only compared against fixed strings
+debugLog($periodType);
 $periodValue='';
 if (array_key_exists('periodValue',$_REQUEST))
 {
@@ -110,6 +114,10 @@ if ($periodType=='month') {
 if ( $periodType=='week') {
   $headerParameters.= i18n("week") . ' : ' . $paramWeek . '<br/>';
 }
+if ( $periodType=='date') {
+	$headerParameters.= i18n("startDate") . ' : ' . htmlFormatDate($paramStartDate) . '<br/>';
+	$headerParameters.= i18n("endDate") . ' : ' . htmlFormatDate($paramEndDate) . '<br/>';
+}
 // if ( $paramResource=='') {
 //   $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Resource',$paramResource)) . '<br/>';
 // }
@@ -139,6 +147,9 @@ if ($periodType=='year') {
   $where.=" and ((year='" . $periodValue . "' and month>='" . $periodValue.$paramMonth . "')".
           " or (year='" . ($periodValue + 1) . "' and month<'" . ($periodValue + 1) . $paramMonth . "'))";
 }
+if($periodType=='date'){
+  $where.=" and (workDate>='".$paramStartDate."' and workDate<='".$paramEndDate."')";
+}
 //END CHANGE qCazelles - Report start month - Ticket #128
 if ($paramProject!='') {
   #florent ticket #4049
@@ -149,6 +160,7 @@ $where.=($paramResource!='')?" and idResource='" . $paramResource . "'":'';
 $order="";
 //echo $where;
 $work=new Work();
+debugLog($where);
 $lstWork=$work->getSqlElementsFromCriteria(null,false, $where, $order);
 $result=array();
 $projects=array();
