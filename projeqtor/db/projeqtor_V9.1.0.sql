@@ -178,11 +178,13 @@ INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasExcel`) VALUES
 (115, 'reportWorkTwoDate',1, 'work.php', 130,'1'),
-(116, 'reportWorkDetailTwoDate',1, 'workDetailed.php', 131,'1');
+(116, 'reportWorkDetailTwoDate',1, 'workDetailed.php', 131,'1'),
+(117, 'reportDocumentApproval',4, 'work.php', 470,'1');
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
 (1, 115, 1),
-(1, 116, 1);
+(1, 116, 1),
+(1, 117, 1);
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 (115, 'idProject', 'projectList', 10, 'currentProject'),
@@ -194,9 +196,12 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (116,'idTeam','teamList',15,null),
 (116, 'idOrganization', 'organizationList', 20,null),
 (116,'startDate','date',25,'today'),
-(116,'endDate','date',30,'today');
+(116,'endDate','date',30,'today'),
+(117, 'idProject', 'projectList', 10, 'currentProject');
 
 
-INSERT INTO `${prefix}modulereport` (`id`,`idModule`,`idReport`,`hidden`,`active`) VALUES
-(95,3,115,0,1),
-(96,3,116,0,1);
+INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VALUES
+(3,115,0,1),
+(3,116,0,1),
+(2,117,0,1),
+(1,117,0,1);
