@@ -219,12 +219,15 @@
           style="height:22px;width:60px;">
           <script type="dojo/connect" event="onClick" args="evt">
             var url="main.php?directAccess=true";
-            if (dojo.byId('objectClass') && dojo.byId('objectClass').value) { 
+            if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value) {
+              //url+="&objectClass="+dojo.byId('objectClassManual').value;
+              url+="&objectClass=Today";
+            } else if (dojo.byId('objectClass') && dojo.byId('objectClass').value) { 
               url+="&objectClass="+dojo.byId('objectClass').value;
             } else {
               url+="&objectClass=Today";
             }
-            if (dojo.byId('objectId') && dojo.byId('objectId').value) {
+            if (dojo.byId('objectClass') && dojo.byId('objectId') && dojo.byId('objectId').value) {
               url+="&objectId="+dojo.byId('objectId').value;
             } else {
               url+="&objectId=";
