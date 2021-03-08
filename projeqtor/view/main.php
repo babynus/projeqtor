@@ -549,10 +549,16 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
 }        
       } else if (array_key_exists('objectClass', $_REQUEST) and array_key_exists('objectId', $_REQUEST) ) {
         $class=$_REQUEST['objectClass'];
-		    Security::checkValidClass($class);
-        $id=$_REQUEST['objectId'];
-        Security::checkValidId($id);
-        $directObj=new $class($id);
+        if (class_exists($class)) {
+		      Security::checkValidClass($class);
+          $id=$_REQUEST['objectId'];
+          Security::checkValidId($id);
+          $directObj=new $class($id);
+        } else {
+          $directObj=null;
+          $id=null;
+          $class="Today";
+        }
         $rights=$user->getAccessControlRights();
         if ($class=='Ticket' and (securityGetAccessRightYesNo('menuTicket', 'read', $directObj)=='NO' or securityCheckDisplayMenu(null,'Ticket')==false ) )  {
           $class='TicketSimple';
@@ -567,7 +573,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
         	  $directAccessIndex=array();
           }
           $index=count($directAccessIndex)+1;
-          if ($class) $directAccessIndex[$index]=$directObj;
+          if ($directObj) $directAccessIndex[$index]=$directObj;
           else $directAccessIndex[$index]='';
           setSessionValue('directAccessIndex', $directAccessIndex);
         	echo "directAccessIndex=$index;";
