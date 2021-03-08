@@ -65,6 +65,7 @@ $param=new ReportParameter();
 $crit=array('idReport'=>$idReport);
 $listParam=$param->getSqlElementsFromCriteria($crit,false,null,'sortOrder');
 if (count($listParam)==0) echo '<tr><td class="label"><label>&nbsp;</label></td><td><div style="width:70px;">&nbsp;</div></td></tr>';
+$isPeriodTypeDate=false;
 foreach ($listParam as $param) {
   if ($param->paramType=='week') {
     $defaultWeek='';
@@ -283,7 +284,11 @@ foreach ($listParam as $param) {
 ?>
     <tr>
     <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
-    <td><div style="width:100px; text-align: center; color: #000000;" 
+    <td>
+     <?php if(!$isPeriodTypeDate){?>
+       <input type="hidden" id='periodType' name='periodType' value='date'/>
+    <?php }?>
+    <div style="width:100px; text-align: center; color: #000000;" 
       dojoType="dijit.form.DateTextBox" 
       <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
 				echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';

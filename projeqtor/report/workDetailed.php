@@ -75,6 +75,8 @@ if (array_key_exists('periodValue',$_REQUEST))
 	$periodValue=$_REQUEST['periodValue'];
 	$periodValue=Security::checkValidPeriod($periodValue);
 }
+$paramStartDate=RequestHandler::getValue('startDate');
+$paramEndDate=RequestHandler::getValue('endDate');
 
 // Header
 $headerParameters="";
@@ -107,6 +109,10 @@ if ($periodType=='month') {
 if ( $periodType=='week') {
   $headerParameters.= i18n("week") . ' : ' . $paramWeek . '<br/>';
 }
+if ( $periodType=='date') {
+	$headerParameters.= i18n("startDate") . ' : ' . htmlFormatDate($paramStartDate) . '<br/>';
+	$headerParameters.= i18n("endDate") . ' : ' . htmlFormatDate($paramEndDate) . '<br/>';
+}
 if (isset($outMode) and $outMode=='excel') {
   $headerParameters.=str_replace('- ','<br/>',Work::displayWorkUnit()).'<br/>';
 }
@@ -128,6 +134,10 @@ if ($periodType=='year') {
   if ($paramMonth<10) $paramMonth='0'.intval($paramMonth);
   $where.=" and ((year='" . $periodValue . "' and month>='" . $periodValue.$paramMonth . "')".
           " or (year='" . ($periodValue + 1) . "' and month<'" . ($periodValue + 1) . $paramMonth . "'))";
+}
+
+if($periodType=='date'){
+	$where.=" and (workDate>='".$paramStartDate."' and workDate<='".$paramEndDate."')";
 }
 
 if ($paramProject!='') {
