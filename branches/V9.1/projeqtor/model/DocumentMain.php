@@ -57,6 +57,7 @@ class DocumentMain extends SqlElement {
   public $_DocumentVersion=array();
   
   public $_sec_Approver;
+  public $idApprovalStatus;
   public $_Approver=Array();
   public $_spe_buttonSendMail;
   
@@ -108,6 +109,7 @@ class DocumentMain extends SqlElement {
     "draft"=>"hidden",
     "idStatus"=>"readonly",
     "documentReference"=>"readonly",
+    "idApprovalStatus"=>"readonly",
    	"idle"=>"nobr",
     "cancelled"=>"nobr"
    );
@@ -359,5 +361,27 @@ class DocumentMain extends SqlElement {
   		return 0;
   	}
   }
+  
+  public function getApprovalStatus() {
+    $approver = new Approver();
+    $lstApprover = $approver->getSqlElementsFromCriteria(array('refType'=>'DocumentVersion','refId'=>$this->idDocumentVersion));
+    if(!$lstApprover){
+      $result = 1;
+    }else{
+      $reject = false;
+      $approved = true;
+      $notReject = false;
+      foreach ($lstApprover as $app){
+        if($app->approved != 1)$approved = false;
+        if($app->disapproved == 1) $reject = true;
+        if($app->approved==0 and $app->disapproved==0)$notReject = true;
+      }
+      if($approved)$result = 4;
+      if($reject)$result=2;
+      if($notReject and !$reject)$result=3;
+    }
+    return $result;
+  }
+  
 }
 ?>

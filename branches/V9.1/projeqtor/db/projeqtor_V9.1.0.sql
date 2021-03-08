@@ -205,3 +205,17 @@ INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VA
 (3,116,0,1),
 (2,117,0,1),
 (1,117,0,1);
+
+ALTER TABLE `${prefix}document` ADD COLUMN `idApprovalStatus` int(1) unsigned DEFAULT NULL COMMENT '1';
+
+CREATE TABLE `${prefix}approvalStatus` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `name` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}approvalStatus` (`name`) VALUES
+('noApprobationDoc'),
+('rejectDoc'),
+('waitApprobDoc'),
+('approvedDoc');

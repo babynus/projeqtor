@@ -1091,6 +1091,36 @@ if (beforeVersion($currVersion,"V9.0.6")) {
   $nbErrors+=runScript('V9.0.6.lm');
 }
 
+if (beforeVersion($currVersion,"V9.1.0")) {
+  traceLog("update document idApprovalStatus [9.1.0]");
+  $doc = new Document(); $docTable = $doc->getDatabaseTableName();
+  $docList=$doc->getSqlElementsFromCriteria(array('idApprovalStatus'=>null));
+  $cpt=0;
+  $cptCommit=100;
+  Sql::beginTransaction();
+  KpiValue::$_noKpiHistory=true;
+  traceLog("   => ".count($docList)." to update");
+  if (count($docList)<100) {
+    projeqtor_set_time_limit(1500);
+  } else {
+    traceLog("   => setting unlimited execution time for script (more than 100 documents to update)");
+    projeqtor_set_time_limit(0);
+  }
+  foreach($docList as $document) {
+    $idApproval = $document->getApprovalStatus();
+    $document->idApprovalStatus = $idApproval;
+    $document->save();
+    $cpt++;
+    if ( ($cpt % $cptCommit) == 0) {
+      Sql::commitTransaction();
+      traceLog("   => $cpt document done...");
+      Sql::beginTransaction();
+    }
+  }
+  Sql::commitTransaction();
+  traceLog("   => $cpt documents updated");
+}
+
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
