@@ -82,6 +82,14 @@ class Approver extends SqlElement {
      // On update check approvement : update document version status depending on approvement
      $vers=new DocumentVersion($this->refId);
      $vers->checkApproved();
+     $doc = new Document($vers->idDocument,true);
+     if($doc->idDocumentVersion == $vers->id){
+        $idApproval = $doc->getApprovalStatus();
+        if($idApproval != $doc->idApprovalStatus){
+          $doc->idApprovalStatus = $idApproval;
+          $doc->save();
+        }
+      }
    }
    return $result;
  }
@@ -120,6 +128,14 @@ class Approver extends SqlElement {
       // On update check approvement : update document version status depending on approvement
       $vers=new DocumentVersion($this->refId);
       $vers->checkApproved();
+      $doc = new Document($vers->idDocument,true);
+      if($doc->idDocumentVersion == $vers->id){
+        $idApproval = $doc->getApprovalStatus();
+        if($idApproval != $doc->idApprovalStatus){
+          $doc->idApprovalStatus = $idApproval;
+          $doc->save();
+        }
+      }
     }
     return $result;
   }
