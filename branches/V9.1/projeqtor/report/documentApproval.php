@@ -138,11 +138,10 @@ $imgName2=getGraphImgName("ApprovalStatusPie");
 
 $graph2->Render($imgName2);
 
-echo '<table width="95%" style="margin-top:20px;" align="center"><tr><td align="center">';
+echo '<table width="95%" style="margin-top:20px;" align="center"><tr><td class="section">'.i18n('repotApprovalDocumentBar').'<td></tr><tr><td><br/></td></tr><tr><td align="center">';
 echo '<img src="' . $imgName . '" />'; 
-echo '</td></tr></table>';
-echo '<br/>';
-echo '<table width="95%" align="center"><tr><td align="center">';
+echo '</td></tr><tr><td><br/></td></tr>';
+echo '<tr><td class="section">'.i18n('repotApprovalDocumentPie').'<td></tr><tr><td><br/></td></tr><tr><td align="center">';
 echo '<img src="' . $imgName2 . '" />';
 echo '</td></tr></table>';
 ?>
