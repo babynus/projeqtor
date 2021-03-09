@@ -93,6 +93,7 @@ class SubTask extends SqlElement {
       $val=array("idResource"=>$idResource);
       $crit=array_merge($crit,$val);
     }
+    debugLog($refresh);
     $res=$subTask->getSqlElementsFromCriteria($crit,false,null,'sortOrder');
     $critFld='idProject';
     $critVal=$obj->idProject;
@@ -101,39 +102,40 @@ class SubTask extends SqlElement {
       $priority=new Priority();
       $allPrio=$priority->getSqlElementsFromCriteria(null,null,"1=1");
       foreach ($allPrio as $id=>$priority){
-        echo '<input id="colorPrio_'.$priority->id.'" value="'.$priority->color.'" hidden />';
+        echo '<input id="colorPrio_'.$priority->id.'" value="'.$priority->color.'" type="hidden" />';
       }
     }
+    if($dialogView) echo '<table>';
     if (!$print and !$gloablView and !$dialogView) {
       echo'<div style="position:absolute;right:5px;top:3px;">';
-      echo'<label for="showClosedSubTask_'.$view.'"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'&nbsp;</label>';
-      echo'<div class="'.((isNewGui())?"whiteCheck":"").'" id="showClosedSubTask_'.$view.'" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedSubTask)?'checked':'');
-      echo' title="'.i18n('labelShowIdle').'" >';
-      echo'<script type="dojo/connect" event="onChange" args="evt">';
-      echo' saveUserParameter("showClosedSubTask_'.$view.'",((this.checked)?"1":"0"));';
-      echo' if (checkFormChangeInProgress()) {return false;}';
-      echo' loadContent("objectDetail.php", "detailDiv", "listForm");';
-      echo'</script>';
-      echo'</div>';
+      echo' <label for="showClosedSubTask_'.$view.'"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'&nbsp;</label>';
+      echo' <div class="'.((isNewGui())?"whiteCheck":"").'" id="showClosedSubTask_'.$view.'" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedSubTask)?'checked':'');
+      echo'   title="'.i18n('labelShowIdle').'" >';
+      echo'   <script type="dojo/connect" event="onChange" args="evt">';
+      echo'     saveUserParameter("showClosedSubTask_'.$view.'",((this.checked)?"1":"0"));';
+      echo'     if (checkFormChangeInProgress()) {return false;}';
+      echo'     loadContent("objectDetail.php", "detailDiv", "listForm");';
+      echo'   </script>';
+      echo' </div>';
       echo'</div>';
       echo'<div style="position:absolute;right:'.((isNewGui())?"110px":"200px").';top:3px;">';
-      echo'<label for="showDoneSubTask_'.$view.'"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowDone'.((isNewGui())?'Short':'')).'&nbsp;</label>';
-      echo'<div class="'.((isNewGui())?"whiteCheck":"").'" id="showDoneSubTask_'.$view.'" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox"  '.(($showDoneSubTask)?'checked':'').' '.(($showClosedSubTask)?'readonly':'');
+      echo' <label for="showDoneSubTask_'.$view.'"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowDone'.((isNewGui())?'Short':'')).'&nbsp;</label>';
+      echo' <div class="'.((isNewGui())?"whiteCheck":"").'" id="showDoneSubTask_'.$view.'" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox"  '.(($showDoneSubTask)?'checked':'').' '.(($showClosedSubTask)?'readonly':'');
       echo' title="'.i18n('labelShowDone').'" >';
-      echo'<script type="dojo/connect" event="onChange" args="evt">';
-      echo' saveUserParameter("showDoneSubTask_'.$view.'",((this.checked)?"1":"0"));';
-      echo' if (checkFormChangeInProgress()) {return false;}';
-      echo' loadContent("objectDetail.php", "detailDiv", "listForm");';
-      echo'</script>';
-      echo'</div>';
+      echo'   <script type="dojo/connect" event="onChange" args="evt">';
+      echo'     saveUserParameter("showDoneSubTask_'.$view.'",((this.checked)?"1":"0"));';
+      echo'     if (checkFormChangeInProgress()) {return false;}';
+      echo'     loadContent("objectDetail.php", "detailDiv", "listForm");';
+      echo'   </script>';
+      echo' </div>';
       echo'</div>';
     }
     
     if (!$refresh) echo '<tr><td colspan="4"><div id="'.$refType.'_'.$refId.'_drawSubTask" dojotype="dijit.layout.ContentPane">';
     echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true" id="dndSubTask_'.$refType.'_'.$refId.'" jsId="dndSubTask_'.$refType.'_'.$refId.'">';
-    if($gloablView )echo      '<input id="SubTaskIdResourceFilter" value="'.$idResource.'" hidden />';
-    echo      '<input class="refType" value="'.$refType.'" hidden />';
-    echo      '<input class="refId" value="'.$refId.'" hidden />';
+    if($gloablView )echo      '<input id="SubTaskIdResourceFilter" value="'.$idResource.'" type="hidden" />';
+    echo      '<input class="refType" value="'.$refType.'" type="hidden" />';
+    echo      '<input class="refId" value="'.$refId.'" type="hidden" />';
     echo  '<tr style="width:100%">';
     echo    '<td class="linkHeader" style="width:2%"></td>';
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:64%;':'width:52%;').'">'.i18n('colName').'</td>';
@@ -141,12 +143,13 @@ class SubTask extends SqlElement {
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:12%;':'width:18%;').'">'.i18n('colResponsible').'</td>';
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:8%;':'width:10%;').'">'.i18n('colIdStatus').'</td>';
     echo  '</tr>';
+    $res=array();
     if(!empty($res)){
       foreach ($res as $id=>$subTask){
         $prioSubTask=new Priority($subTask->idPriority);
         $colorPrio=$prioSubTask->color;
-        echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'" width="100%" >';
-        echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" hidden />';
+        echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'"  >';
+        echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" type="hidden" />';
         echo    '<td  class="dojoDndHandle handleCursor todoListTab"  style="text-align: center;"><img style="width:7px;top: 10px;position: relative;" src="css/images/iconDrag.gif"></td>';
         echo    '<td class="todoListTab" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
         echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  value="'. htmlEncode($subTask->name).'">';
@@ -169,8 +172,8 @@ class SubTask extends SqlElement {
       }
     }
     $lastSort=(!empty($res))? $lastSortRegist :0;
-    echo  '<tr id="'.$refType.'_'.$refId.'_newSubTaskRow" width="100%">';
-     echo    '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0">&nbsp;</td>';
+    echo  '<tr id="'.$refType.'_'.$refId.'_newSubTaskRow" >';
+     echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
     echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
     echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_0" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" onChange="updateSubTask(0,\''.$refType.'\','.$refId.');" value="">';
     echo    '</td>';
@@ -179,18 +182,19 @@ class SubTask extends SqlElement {
                 htmlDrawOptionForReference('idPriority',null);
     echo      '</select>';
     echo    '</td>';
-    echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
+    echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;" >';
     echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_0" style="width:auto;"  class="input"  readonly>';
                 htmlDrawOptionForReference('idResource',null,$obj,false,$critFld,$critVal);
     echo      '</select>';
     echo    '</td>';
-    echo    '<td  style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;">';
-    echo      '<input id="'.$refType.'_'.$refId.'_sortOrder_0" value="'.$lastSort.'" hidden />';
+    echo    '<td  style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;" >';
+    echo      '<input id="'.$refType.'_'.$refId.'_sortOrder_0" value="'.$lastSort.'" type="hidden" />';
                $subTask->drawStatusSubTask('0','0','0','0',$refType,$refId,$gloablView);
     echo    '</td>';
     echo  '</tr>';
     echo '</table>';
     if (!$refresh) echo '</div></td></tr>';
+    if($dialogView) echo '</table>';
   }
   
   function drawStatusSubTask($id, $done, $idle, $handled,$refType,$refId,$gloablView){
@@ -217,7 +221,7 @@ class SubTask extends SqlElement {
         echo ' </td>';
         echo ' <td style="width:80%;height:100%;'.$backgroundColor.'">';
           echo '<div  class="slideshow-container" style="width:100%;height:30px">';
-          echo '<input id="'.$refType.'_'.$refId.'_pos_'.$id.'" value="'.$pos.'" hidden />';
+          echo '<input id="'.$refType.'_'.$refId.'_pos_'.$id.'" value="'.$pos.'" type="hidden" />';
           
           echo '<div class="mySlides fade" style="'.(($done==0 && $idle==0 && $handled==0)?'display:block;':'display:none;').'margin-top:9px;padding-top:1px;">';
           echo '  <div class="slideStatus">&nbsp;</div>';
@@ -243,7 +247,6 @@ class SubTask extends SqlElement {
        echo '</tr>';
      echo '</table>';
      echo '</div>';
-     
   }
   
   
@@ -277,7 +280,7 @@ class SubTask extends SqlElement {
     $priority=new Priority();
     $allPrio=$priority->getSqlElementsFromCriteria(null,null,"1=1");
     foreach ($allPrio as $id=>$priority){
-      echo '<input id="colorPrio_'.$priority->id.'" value="'.$priority->color.'" hidden />';
+      echo '<input id="colorPrio_'.$priority->id.'" value="'.$priority->color.'" type="hidden" />';
     }
     if(!empty($tab)){
       foreach ($tab as $id=>$obj){
@@ -310,7 +313,7 @@ class SubTask extends SqlElement {
                           htmlDrawOptionForReference('idStatus',$element->idStatus,$element);
                         echo      '</select>';
                        echo '</div>';
-                       echo      '<input id="idOldStatusElement_'.$obj['refType'].'_'.$element->id.'" value="'.$element->idStatus.'" hidden />';
+                       echo      '<input id="idOldStatusElement_'.$obj['refType'].'_'.$element->id.'" value="'.$element->idStatus.'" type="hidden" />';
                     echo '</td>';
                     echo '<td style="width:14%;">';
                        echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;vertical-align:middle;">';
@@ -319,7 +322,7 @@ class SubTask extends SqlElement {
                           htmlDrawOptionForReference('idResource',$element->idResource,$element);
                         echo      '</select>';
                        echo '</div>';
-                       echo      '<input id="idOldResourceElement_'.$obj['refType'].'_'.$element->id.'" value="'.$element->idResource.'" hidden />';
+                       echo      '<input id="idOldResourceElement_'.$obj['refType'].'_'.$element->id.'" value="'.$element->idResource.'" type="hidden" />';
                      echo '</td >';
               echo'</tr></table>';
             echo '</div></td></tr>';

@@ -288,6 +288,10 @@ foreach ($selectList as $id) {
 	    $item->$field=$item->$field.$newValue;
 	  }
 	  
+	}else if((strpos($field, 'Element_') and property_exists(substr($field,0, strpos($field, 't_')+1),substr($field,strpos($field, 't_')+2)))){
+	   $subElement=substr($field,0, strpos($field, 't_')+1);
+	   $fieldElment=substr($field, strpos($field, 't_')+2);
+        $item->$subElement->$fieldElment=$newValue;
 	}else{
 	  echo '<td><span class="messageWARNING" >' . i18n($className) . " #" . htmlEncode($item->id) . ' '.i18n('nonExistentFields'). ' '.$field.'</span></td>';
 	  continue;
