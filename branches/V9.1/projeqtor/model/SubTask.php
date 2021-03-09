@@ -78,7 +78,7 @@ class SubTask extends SqlElement {
     if(!$gloablView ) $view='Single';
     else $view='Global';
     $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_'.$view)!='' and Parameter::getUserParameter('showClosedSubTask_'.$view)!='0')?true:false;
-    $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_'.$view)!='' and Parameter::getUserParameter('showDoneSubTask_'.$view)!='0') or $showClosedSubTask==true)?true:false;
+    $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_'.$view)!='0') or $showClosedSubTask==true)?true:false;
     $subTask=new SubTask();
     $assignment= new Assignment();
     $crit=array("refType"=>$refType,"refId"=>$refId,"done"=>"0","idle"=>"0");
@@ -256,7 +256,7 @@ class SubTask extends SqlElement {
     
     $tableName=$subTask->getDatabaseTableName();
     $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Global')!='' and Parameter::getUserParameter('showClosedSubTask_Global')!='0')?true:false;
-    $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Global')!='' and Parameter::getUserParameter('showDoneSubTask_Global')!='0') or $showClosedSubTask==true)?true:false;
+    $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Global')!='0') or $showClosedSubTask==true)?true:false;
     $query="SELECT DISTINCT  $tableName.refId as refId,$tableName.refType as refType FROM $tableName ";
     $query.="WHERE 1=1";
     if($idProject!=0)$query.=" and  $tableName.idProject = ".$idProject;

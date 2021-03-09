@@ -38,7 +38,7 @@ $idVersion=0;
 $element='';
 $ElmentTab =array("Activity","Ticket","Action");
 $showClosedSubTask=(trim(Parameter::getUserParameter('showClosedSubTask_Global'))!='' and Parameter::getUserParameter('showClosedSubTask_Global')!='0')?true:false;
-$showDoneSubTask=((trim(Parameter::getUserParameter('showDoneSubTask_Global'))!='' and Parameter::getUserParameter('showDoneSubTask_Global')!='0') or $showClosedSubTask)?true:false;
+$showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Global')!='0') or $showClosedSubTask)?true:false;
 
 if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
   if(strpos(getSessionValue('project'),',')){

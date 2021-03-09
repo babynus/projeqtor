@@ -12498,7 +12498,7 @@ function multipleUpadteSelectAtribute(value) {
             value='idComponentVersion';
             extraUrl='&critField=idle&critValue=all';
           }
-          var urlListFilter='../tool/jsonList.php?required=true&listType=list&dataType='+value;
+          var urlListFilter='../tool/jsonList.php?listType=list&dataType='+value+'&actualView=MultipleUpadate';
 
           if (typeof currentSelectedProject!='undefined' && currentSelectedProject!='' && currentSelectedProject!='*') {
           if (value=='idActivity') {
