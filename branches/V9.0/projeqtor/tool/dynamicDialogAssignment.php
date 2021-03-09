@@ -537,7 +537,7 @@ if ($planningMode=='RECW') {
   </table>
 <?php if ($assignmentObj->uniqueResource and $assignmentObj->id) {
   echo '<div style="position:relative;top:10px;width:80%;left:10%;">';
-  AssignmentSelection::drawListForAssignment($assignmentObj->id);
+  AssignmentSelection::drawListForAssignment($assignmentObj->id, $assignmentObj->realWork);
   echo '</div><br/>';
 }?>
 </form>
