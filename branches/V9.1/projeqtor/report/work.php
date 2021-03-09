@@ -74,7 +74,6 @@ if (array_key_exists('idResource',$_REQUEST)) {
 }
 
 $periodType=RequestHandler::getValue('periodType'); // not filtering as data as data is only compared against fixed strings
-debugLog($periodType);
 $periodValue='';
 if (array_key_exists('periodValue',$_REQUEST))
 {
@@ -160,7 +159,6 @@ $where.=($paramResource!='')?" and idResource='" . $paramResource . "'":'';
 $order="";
 //echo $where;
 $work=new Work();
-debugLog($where);
 $lstWork=$work->getSqlElementsFromCriteria(null,false, $where, $order);
 $result=array();
 $projects=array();
