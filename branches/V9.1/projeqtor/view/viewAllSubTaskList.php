@@ -162,7 +162,7 @@ if(sessionValueExists('project') and getSessionValue('project')!="" and  getSess
             </button> 
             </td>
              <?php }
-             if(RequestHandler::getValue('destinationWidth')<='1150'){
+             if(RequestHandler::getValue('destinationWidth')<='1350'){
              ?>
            </tr>
            <tr>

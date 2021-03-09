@@ -81,7 +81,7 @@ if(trim(RequestHandler::getValue('newMultipleUpdateValue'))!=''){
   if(RequestHandler::getValue('multipleUpdateValueCheckbox')=='on')$newValue=1;
   else $newValue=0;
 }
-
+debugLog($_REQUEST);
 // $description="";
 // if (array_key_exists('description',$_REQUEST)) {
 // 	$description=trim($_REQUEST['description']);
