@@ -58,6 +58,11 @@ Glossary
       cron is a program that allows users of Unix systems to automatically execute scripts, 
       commands or software at a date and time specified in advance, or according to a cycle defined in advance.
 
+   CRUD
+      
+      It is an English computer acronym for Create, Read, Update, Delete.
+      It designates the four basic operations for data persistence, in particular the storage of information in a database.
+
    Decision
    
       A good decision helps move towards the end goal. 
