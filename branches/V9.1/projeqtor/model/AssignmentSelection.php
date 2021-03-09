@@ -84,7 +84,7 @@ class AssignmentSelection extends SqlElement {
     return $rList;
   }
   
-  public static function drawListForAssignment($idAssignment) {
+  public static function drawListForAssignment($idAssignment,$realWork=0) {
     echo "<table style='width:100%'>";
     echo "  <tr>";
     echo "    <td class='assignHeader' style='width:40%'>".i18n('colIdResource')."</td>";
@@ -104,10 +104,11 @@ class AssignmentSelection extends SqlElement {
       echo "       onChange='assignmentUserSelectUniqueResource(this.checked,$as->idResource);' ";
       if  ($as->userSelected) echo " checked=checked ";
       echo "/>";
+      if ($realWork==0) {
       echo "     <button class='textButton' dojoType='dijit.form.Button' onclick='protectDblClick(this);saveAssignment($as->idResource);return false;' title=\"".i18n('helpDefinitiveSelection')."\">";
       echo i18n("buttonDefinitiveSelection"); 
       echo "     </button>";
-
+      }
       echo "</td>";
       echo "  </tr>";
     }
