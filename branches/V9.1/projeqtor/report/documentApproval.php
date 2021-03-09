@@ -87,8 +87,8 @@ $dataSet->setAbscissa("status");
 
 $width=1000;
 $legendWidth=300;
-$height=400;
-$legendHeight=100;
+$height=500;
+$legendHeight=150;
 $graph = new pImage($width+$legendWidth, $height,$dataSet);
 /* Draw the background */
 $graph->Antialias = FALSE;
