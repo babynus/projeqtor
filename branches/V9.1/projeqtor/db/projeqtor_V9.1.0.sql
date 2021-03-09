@@ -25,8 +25,8 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (10,169,0,(select `active` from `${prefix}module` where id=10));
 
 INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
-(334,'menuViewAllSubTask',3,257,55,0),
-(335,'menuViewAllSubTask',5,257,35,0);
+(336,'menuViewAllSubTask',3,257,55,0),
+(337,'menuViewAllSubTask',5,257,35,0);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,257,1),
@@ -67,7 +67,7 @@ CREATE TABLE `${prefix}subtask` (
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 
-CREATE TABLE `${prefix}WorkCommand` (
+CREATE TABLE `${prefix}workcommand` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `idCommand` int(12)  unsigned DEFAULT NULL COMMENT '12',
   `idWorkUnit` int(12)  unsigned DEFAULT NULL COMMENT '12',
@@ -83,7 +83,7 @@ CREATE TABLE `${prefix}WorkCommand` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE `${prefix}WorkCommandDone` (
+CREATE TABLE `${prefix}workcommanddone` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `idCommand` int(12)  unsigned DEFAULT NULL COMMENT '12',
   `idWorkCommand` int(12)  unsigned DEFAULT NULL COMMENT '12',
@@ -93,7 +93,7 @@ CREATE TABLE `${prefix}WorkCommandDone` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE `${prefix}WorkCommandBilled` (
+CREATE TABLE `${prefix}workcommandbilled` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `idCommand` int(12)  unsigned DEFAULT NULL COMMENT '12',
   `idWorkCommand` int(12)  unsigned DEFAULT NULL COMMENT '12',
@@ -102,7 +102,7 @@ CREATE TABLE `${prefix}WorkCommandBilled` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-ALTER TABLE `${prefix}planningElement` ADD `idWorkCommand` INT(12) DEFAULT NULL COMMENT '12';
+ALTER TABLE `${prefix}planningelement` ADD `idWorkCommand` INT(12) DEFAULT NULL COMMENT '12';
 
 ALTER TABLE `${prefix}project`
 ADD `allowReduction` int(1) unsigned DEFAULT 0 COMMENT '1';
@@ -177,34 +177,34 @@ INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
 (7,'lockedLeftWork','2');
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasExcel`) VALUES
-(115, 'reportWorkTwoDate',1, 'work.php', 130,'1'),
-(116, 'reportWorkDetailTwoDate',1, 'workDetailed.php', 131,'1'),
-(117, 'reportApprovalDocument',4, 'documentApproval.php', 470,'1');
+(116, 'reportWorkTwoDate',1, 'work.php', 130,'1'),
+(117, 'reportWorkDetailTwoDate',1, 'workDetailed.php', 131,'1'),
+(118, 'reportDocumentApproval',4, 'documentApproval.php', 470,'1');
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
-(1, 115, 1),
 (1, 116, 1),
-(1, 117, 1);
+(1, 117, 1),
+(1, 118, 1);
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
-(115, 'idProject', 'projectList', 10, 'currentProject'),
-(115,'idTeam','teamList',15,null),
-(115, 'idOrganization', 'organizationList', 20,null),
-(115,'startDate','date',25,'today'),
-(115,'endDate','date',30,'today'),
 (116, 'idProject', 'projectList', 10, 'currentProject'),
 (116,'idTeam','teamList',15,null),
 (116, 'idOrganization', 'organizationList', 20,null),
 (116,'startDate','date',25,'today'),
 (116,'endDate','date',30,'today'),
-(117, 'idProject', 'projectList', 10, 'currentProject');
+(117, 'idProject', 'projectList', 10, 'currentProject'),
+(117,'idTeam','teamList',15,null),
+(117, 'idOrganization', 'organizationList', 20,null),
+(117,'startDate','date',25,'today'),
+(117,'endDate','date',30,'today'),
+(118, 'idProject', 'projectList', 10, 'currentProject');
 
 
 INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VALUES
-(3,115,0,1),
 (3,116,0,1),
-(2,117,0,1),
-(1,117,0,1);
+(3,117,0,1),
+(2,118,0,1),
+(1,118,0,1);
 
 ALTER TABLE `${prefix}document` ADD COLUMN `idApprovalStatus` int(1) unsigned DEFAULT NULL COMMENT '1';
 
