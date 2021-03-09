@@ -57,7 +57,7 @@ if (isset($obj)) {
 
 $obj= new $objectClass ($objectId);
 $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Single')!='' and Parameter::getUserParameter('showClosedSubTask_Single')!='0')?true:false;
-$showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Single')!='' and Parameter::getUserParameter('showDoneSubTask_Single') or  $showClosedSubTask==true)!='0')?true:false;
+$showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Single') or  $showClosedSubTask==true)!='0')?true:false;
 ?>
 <?php if (! $print) {?>
 <?php if ($context=='popup') {?>
