@@ -179,7 +179,7 @@
           <input type="hidden" id="selection" name="selection" value=""/>
           <input type="hidden" id="dataTypeSelected"  />
           <div style="width: 92%; margin-left:8%;padding-top:30px;" >
-           <table width="95%" >
+           <table width="98%" >
              <tr style="vertical-align: top;">
               <td style="width: 220px;" >
                 <div dojoType="dojo.data.ItemFileReadStore" jsId="attributeMultipleUpadteStore" url="../tool/jsonList.php?listType=object&actualView=MultipleUpadate&objectClass=<?php echo  $objectClass;?>" searchAttr="name" >
@@ -194,7 +194,7 @@
                   </script>              
                  </select>
               </td>
-              <?php  if($displayWidth<="840") echo '</tr><tr style="'.(($displayWidth<="610")?"height:50px;":"").'">';?>
+              <?php if($displayWidth<="840") echo '</tr><tr style="'.(($displayWidth<="671")?"height:50px;":"").'">';?>
              <td id="operatorTd" style="width:190px;">
                <div id="multipleUpdateOperateur" style="width:190px;<?php echo (($displayWidth>="840")?"margin-top:10px;":"");?>" >
                </div>
@@ -215,7 +215,7 @@
 	           </div>
                <input id="multipleUpdateValueDate" name="multipleUpdateValueDate" value=""  dojoType="dijit.form.DateTextBox" constraints="{datePattern:browserLocaleDateFormatJs}"  style="width:100px;display:none;float:left;" />
                <input id="multipleUpdateValueTime" name="multipleUpdateValueTime" value=""  dojoType="dijit.form.TimeTextBox"   style="width:75px;display:none;float:left;margin-left:15px;" />
-               <?php  if($displayWidth<="610"){
+               <?php  if($displayWidth<="671"){
                         echo "</td></tr><tr><td style='width:100%;vertical-align:middle;position:relative;'>"; 
                         }
                 ?>

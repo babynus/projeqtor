@@ -1041,10 +1041,12 @@ function listFieldsForFilter($obj, $nbRows, $included = false) {
 function listFieldsForMultipleUpdate($obj, $nbRows, $included = false) {
   if (method_exists($obj,'setAttributes')) $obj->setAttributes();
   foreach ( $obj as $col => $val ) {
-    
     if ($col=='_Assignment') {
       if ($nbRows > 0) echo ', ';
       echo '{"id":"' . ($included ? get_class ( $obj ) . '_' : '') . 'assignedResource__idResourceAll' . '", "name":"' . i18n("assignedResource") . '", "dataType":"list"}';
+      continue;
+    }
+    if(get_class($obj)=="ActivityPlanningElement" and ( $col=="fixPlanning" or $col=="paused")){
       continue;
     }
     if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'readonly' ) 
@@ -1067,7 +1069,7 @@ function listFieldsForMultipleUpdate($obj, $nbRows, $included = false) {
       }
       echo '{"id":"' . ($included ? get_class ( $obj ) . '_' : '') . $col . '", "name":"' . $colName . '", "dataType":"' . $dataType . '"}';
       $nbRows ++;
-    } else if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) == ucfirst ( substr ( $col, 0, 1 ) )) {
+    } else if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) == ucfirst ( substr ( $col, 0, 1 ) ) ) {
       $sub = new $col ();
       $nbRows = listFieldsForMultipleUpdate ( $sub, $nbRows, true );
     }
