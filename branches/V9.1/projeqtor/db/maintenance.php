@@ -1094,7 +1094,7 @@ if (beforeVersion($currVersion,"V9.0.6")) {
 if (beforeVersion($currVersion,"V9.1.0")) {
   traceLog("update document idApprovalStatus [9.1.0]");
   $doc = new Document(); $docTable = $doc->getDatabaseTableName();
-  $docList=$doc->getSqlElementsFromCriteria(array('idApprovalStatus'=>null));
+  $docList=$doc->getSqlElementsFromCriteria(null,null,'1=1');
   $cpt=0;
   $cptCommit=100;
   Sql::beginTransaction();
