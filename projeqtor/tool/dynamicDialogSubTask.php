@@ -81,7 +81,7 @@ $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Single') or  $sh
               if (checkFormChangeInProgress()) {return false;}
               if (checkFormChangeInProgress()) {return false;}
               dijit.byId('dialogSubTask').hide();
-              showSubTask('<?php echo $objectClass?>');
+              setTimeout("showSubTask('<?php echo $objectClass;?>');",500);
           </script>
           </div>
       </div>
@@ -94,7 +94,7 @@ $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Single') or  $sh
               if (checkFormChangeInProgress()) {return false;}
               if (checkFormChangeInProgress()) {return false;}
               dijit.byId('dialogSubTask').hide();
-              showSubTask('<?php echo $objectClass?>');
+             setTimeout("showSubTask('<?php echo $objectClass;?>');",500);
           </script>
           </div>
       </div>

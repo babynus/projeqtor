@@ -93,7 +93,6 @@ class SubTask extends SqlElement {
       $val=array("idResource"=>$idResource);
       $crit=array_merge($crit,$val);
     }
-    debugLog($refresh);
     $res=$subTask->getSqlElementsFromCriteria($crit,false,null,'sortOrder');
     $critFld='idProject';
     $critVal=$obj->idProject;
@@ -143,7 +142,6 @@ class SubTask extends SqlElement {
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:12%;':'width:18%;').'">'.i18n('colResponsible').'</td>';
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:8%;':'width:10%;').'">'.i18n('colIdStatus').'</td>';
     echo  '</tr>';
-    $res=array();
     if(!empty($res)){
       foreach ($res as $id=>$subTask){
         $prioSubTask=new Priority($subTask->idPriority);
@@ -178,12 +176,12 @@ class SubTask extends SqlElement {
     echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_0" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" onChange="updateSubTask(0,\''.$refType.'\','.$refId.');" value="">';
     echo    '</td>';
     echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
-    echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_priorityNewSubTask_0" style="width:auto;"  class="input" readonly >';
+    echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_priorityNewSubTask_0" style="width:auto;"  class="input" readonly="true" >';
                 htmlDrawOptionForReference('idPriority',null);
     echo      '</select>';
     echo    '</td>';
     echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;" >';
-    echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_0" style="width:auto;"  class="input"  readonly>';
+    echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_0" style="width:auto;"  class="input"  readonly="true">';
                 htmlDrawOptionForReference('idResource',null,$obj,false,$critFld,$critVal);
     echo      '</select>';
     echo    '</td>';
