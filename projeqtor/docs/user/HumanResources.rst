@@ -1,12 +1,13 @@
 .. include:: ImageReplacement.txt
 
-.. title:: Humans Resources
+.. title:: Human Resources
 
-.. index:: Humans resources
+.. index:: Human resources
 .. index:: HR Module 
 
-.. _humans_resources:
-.. _human_resource:
+
+.. _human-resources:
+
 ****************
 Humans Resources
 ****************
@@ -204,9 +205,6 @@ The administrator is obligatorily a leave manager
 
 
 
-.. raw:: latex
-
-    \newpage
 
 .. index:: Leaves Dashboard
 
@@ -383,16 +381,11 @@ You can see the details of the contracts and which employee is attached to them.
    
    
 
-.. raw:: latex
 
-    \newpage
 
-.. index:: Leaves Parameters
+.. _leaves-parameters:
 
-.. _Leaves_parameters:
-
-Regulated leaves parameters
----------------------------
+.. rubric:: Regulated leaves parameters
 
 The regulation of absences is based on the rights to take absences acquired over a given period.
 
@@ -401,7 +394,7 @@ It is therefore based on values to be given to attributes of regulation accordin
 
 .. rubric:: General acquisition of rights
 
-When you create a :ref:`employment-contract-type` or :ref:`leaves-types`, you have several contractual values to fill in.
+When you create a :ref:`employment-contract-type`, you have several contractual values to fill in.
 
 .. figure:: /images/GUI/RH_ZONE_LeavesRights.png
    :alt: Contractual values for the leaves type
@@ -422,7 +415,6 @@ When you create a :ref:`employment-contract-type` or :ref:`leaves-types`, you ha
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 70
    :header-rows: 1
 
    * - Field
@@ -477,7 +469,6 @@ Usable entities are:
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 70
    :header-rows: 1
 
    * - Field
@@ -500,7 +491,7 @@ Usable entities are:
 Leaves types
 ============
 
-This part allows you to create the types of absences regulated according to the laws of your country.
+This part allows you to create the types of absences regulated.
 
 A corresponding activity (= name of absence type) is created on the project dedicated to absences management.
 
@@ -512,20 +503,9 @@ All employees (resource registered as employee) are assigned to this activity
    
    Leaves types screen
 
-In the details area, you defined the type of absence.
 
-.. rubric:: Section treatment
-
-You can choose the workflow that will be attached to human resources
-
-.. rubric:: Section "Send Information..."
-
-.. figure:: /images/GUI/RH_ZONE_Alerts.png
-   :alt: Send an alert to...
-   
-   Send an alert to
-
-In this section, you can defined who received an internal alert or an email on the creation, the update, the delete and/or the treatment of the leaves
+* You can choose the workflow that will be attached to human resources
+* you can defined who received an internal alert or an email on the creation, the update, the delete and/or the treatment of the leaves
 
 .. seealso:: More detail about **Contractual values**, see :ref:`Earned rights<leaves-rights-earned>`
    
@@ -569,10 +549,10 @@ You can only have one type of default contract
 
 If you are missing types of absences, you can create them from this screen:
 
-* Click on the |buttonAdd| button
+* Click on the |Add| button
 * A pop up opens and proposes to fill in the same fields as on the screen of the types of regulated absences
 
-.. figure:: /images/GUI/RH_BOX_RightsAcquisition.png
+.. figure:: /images/GUI/RH_ZONE_LeavesRights.png
    :alt: Special leaves rights
    :align: center
    
@@ -613,11 +593,6 @@ this clause follows the vocabulary of the SQL language
    
    A new part appears and proposes drop-down menus with prerecorded SQL queries 
 
-.. figure:: /images/GUI/RH_BOX_AddSpecialLeaves+mysql.png
-   :alt: Special Leaves
-   :align: center
-   
-   Special Leaves
    
    
 .. rubric:: **Quantity**
@@ -646,11 +621,7 @@ Allows you to record the different types of end of contract.
    
 These different reasons may lead to changes in the rules governing the acquisition of the rights of absence.
 
-.. figure:: /images/GUI/RH_SCR_ContractEND.png
-   :alt: Employment contract end reason
-   :align: center
-   
-   Employment contract end reason box
+
 
 
 .. _leavesSystemHabilitation:
@@ -662,12 +633,6 @@ Allows you to restrict or restrict the view of Human Resources module screens to
 
 They can view - read - create - update and/or delete access
 
-
-.. figure:: /images/GUI/RH_SCR_LeavesSystemHabilitation.png
-   :alt: Leaves System habilitation
-   :align: center
-   
-   Leaves System habilitation
 
    
    
@@ -685,11 +650,6 @@ Workflows and values
 * The regulated leaves section allows you to determine the behavior of the absence workflow states.
 
 * It can also trigger an alert and / or send mail
-
-.. figure:: /images/GUI/RH_ZONE_RegulatedLeaves.png
-   :alt: Regulated leaves section
-   
-   Regulated leaves section
    
    
    

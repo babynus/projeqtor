@@ -664,8 +664,7 @@ This system comes in addition to the standards of the management of absences
 
 .. topic:: **More details**
 
-   * :ref:`humans resources<humans_resources>`
-   * :ref:`Regulated Absences<regulated_absences>`
+   * :ref:`humans resources<human-resources>`
 
 
 
