@@ -104,13 +104,19 @@ $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Single')!='' and
   <tr>
     <td style="width:<?php echo $printWidthDialog;?>;">
       <table style="width:100%;">
+        <tr><td>
       <?php SubTask::drawSubtasksForObject($obj, $objectClass, $objectId,false,false,false,true);?>
+        </td></tr>
       </table>
     </td>
   </tr>
  <tr>
   <td style="width:<?php echo $printWidthDialog;?>;">&nbsp;</td>
  </tr>
-
+<td style="width: 50%;" align="right">
+       <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogSubTask').hide();">
+         <?php echo i18n("close");?>
+       </button>
+     </td>
 </table>
 <?php if (! $print and $context=='popup') {?></form><?php }?>

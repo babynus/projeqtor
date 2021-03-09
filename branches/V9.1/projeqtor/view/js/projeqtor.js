@@ -8082,7 +8082,7 @@ function switchNewGui(){
 }
 
 
-function updateSubTask(id,refType,refId){
+function updateSubTask(id,refType,refId,isPrio){
   url = "../tool/saveSubTask.php?element=SubTask&refType="+refType+"&refId="+refId+"&idSubTask="+id;
   var name=(id==0)?dojo.byId(refType+'_'+refId+'_nameNewSubTask_'+id).value:dojo.byId(refType+'_'+refId+'_nameNewSubTask_'+id).value;
   if(name.trim()!=''){
@@ -8153,11 +8153,11 @@ function updateSubTask(id,refType,refId){
           var lastOperationStatus=window.top.dojo.byId('lastOperationStatus');
           var lastSaveId=window.top.dojo.byId('lastSaveId');
           if(lastOperationStatus.value == "OK"){
-            addSubTaskRow(lastSaveId.value,refType,refId,sortOrder,resource);
+            addSubTaskRow(lastSaveId.value,refType,refId,sortOrder,resource,priority);
           } else {
               dojo.byId("resultDivMain").style.display='block';
           }
-        }else if(update==true && priority!=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).get('value')){
+        }else if(update==true && isPrio=='true'){
           var contentWidget=dijit.byId("resultDivMain");
           if (!contentWidget) {
             return;
@@ -8168,7 +8168,7 @@ function updateSubTask(id,refType,refId){
           if(lastOperationStatus.value == "OK"){
             var prio=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id);
             var tdPrio=prio.domNode.parentNode;
-            var colorPrio=dojo.byId('colorPrio_'+prio.get('value')).value;
+            var colorPrio=(dojo.byId('colorPrio_'+prio.get('value'))!=null)?dojo.byId('colorPrio_'+prio.get('value')).value:'white';
             tdPrio.style.backgroundColor=colorPrio;
           }
         }
@@ -8177,7 +8177,7 @@ function updateSubTask(id,refType,refId){
   }
 }
 
-function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter){
+function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter){
   var tabSubTask=dojo.byId(refType+'_'+refId+'_drawSubTask'),
         subTaskCreat=tabSubTask.querySelector('#'+refType+'_'+refId+'_newSubTaskRow'),
           newSubTask=subTaskCreat.cloneNode(true),
@@ -8232,7 +8232,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter){
     id: refType+'_'+refId+"_priorityNewSubTask_"+id,
     name: refType+'_'+refId+"_priorityNewSubTask_"+id,
     store: priority.store,
-    value:"",
+    value:(priorityFilter=='')?' ':priorityFilter,
     style:priority.style,
     searchAttr: "name"
   }, refType+'_'+refId+"_priorityNewSubTask_"+id);
@@ -8241,7 +8241,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter){
     id: refType+'_'+refId+"_resourceNewSubTask_"+id,
     name: refType+'_'+refId+"_resourceNewSubTask_"+id,
     store: resource.store,
-    value:resourceFilter,
+    value:(resourceFilter=='')?' ':resourceFilter,
     style:resource.style,
     searchAttr: "name"
   }, refType+'_'+refId+"_resourceNewSubTask_"+id);
@@ -8249,14 +8249,16 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter){
   var newNameText = new dijit.form.TextBox({
     id: refType+'_'+refId+"_nameNewSubTask_"+id,
     name: refType+'_'+refId+"_nameNewSubTask_"+id,
-    style: "white-space:nowrap;width:98%;",
+    style:dijit.byId(refType+'_'+refId+'_nameNewSubTask_0').style ,
     value: dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value 
   }, refType+'_'+refId+"_nameNewSubTask_"+id);
   
   dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value='';
   dojo.setAttr(refType+'_'+refId+'_nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',"'+refType+'",'+refId+')');
   dojo.connect(newFilterResource, 'onChange', function(value){updateSubTask(id,refType,refId);}); 
-  dojo.connect(newFilterPrio, 'onChange', function(value){updateSubTask(id,refType,refId);}); 
+  dojo.connect(newFilterPrio, 'onChange', function(value){updateSubTask(id,refType,refId,'true');}); 
+  dojo.connect(newFilterResource,'onMouseDown' , function(value){dijit.byId(this.name).toggleDropDown();});
+  dojo.connect(newFilterPrio,'onMouseDown' , function(value){dijit.byId(this.name).toggleDropDown();});
   newFilterPrio.focus();
 }
 
@@ -8298,10 +8300,9 @@ function showSlides(n,id,refType,refId) {
       tdColor.style.backgroundColor ="#77B7FA";
       break;
     case '3':
-      tdColor.backgroundColor ="#B7B3A9";
+      tdColor.style.backgroundColor ="#B7B3A9";
       break;
   }
-  
   if(status==0 && prevButton.style.display!="none"){
     prevButton.style.display="none";
   }else if(status==3 && nextButton.style.display!="none"){
