@@ -5381,8 +5381,10 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     });
     editorArray[numEditor].addCommand('CKfullScreenSave', {
       exec : function(editor, data) {
-        CKEDITOR.instances[displayFullScreenCKfield].setData(CKEDITOR.instances['textFullScreenCK'].getData());
-        saveObject();
+        if (CKEDITOR.instances[displayFullScreenCKfield]) {
+          CKEDITOR.instances[displayFullScreenCKfield].setData(CKEDITOR.instances['textFullScreenCK'].getData());
+          saveObject();
+        }
       }
     });
     editorArray[numEditor].keystrokeHandler.keystrokes[CKEDITOR.CTRL + 83]='CKfullScreenSave';

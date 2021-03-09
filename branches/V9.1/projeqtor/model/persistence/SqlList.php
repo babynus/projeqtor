@@ -52,6 +52,7 @@ class SqlList {
   }
   
   public static function getList($listType, $displayCol='name', $selectedValue=null, $showIdle=false, $applyRestrictionClause=false) {
+    if (! class_exists($listType)) return array();
     if (! property_exists($listType, $displayCol)) $displayCol=self::getDefaultDisplayCol($listType);
     $listName=$listType . "_" . $displayCol;
     if ($showIdle) { $listName .= '_all'; }
@@ -95,7 +96,7 @@ class SqlList {
 //scriptLog("fetchList($listType,$displayCol, $selectedValue, $showIdle, $translate)");
     $res=array();
     if (! SqlElement::class_exists($listType)) {
-      debugTraceLog("WARNING : SqlElement::fetchList() called for not valid class '$listType'");
+      debugTraceLog("WARNING : SqlList::fetchList() called for not valid class '$listType'");
       return array();
     }
     $obj=new $listType();
