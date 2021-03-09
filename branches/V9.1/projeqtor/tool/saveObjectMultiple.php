@@ -81,6 +81,11 @@ if(trim(RequestHandler::getValue('newMultipleUpdateValue'))!=''){
   if(RequestHandler::getValue('multipleUpdateValueCheckbox')=='on')$newValue=1;
   else $newValue=0;
 }
+
+if($field=="idActivity"){
+  $act=new Activity($newValue);
+  $idProjAct=$act->idProject;
+}
 // $description="";
 // if (array_key_exists('description',$_REQUEST)) {
 // 	$description=trim($_REQUEST['description']);
@@ -282,6 +287,11 @@ foreach ($selectList as $id) {
 	
 	if(property_exists($item, $field)){
 	  if($isLongText!="true"){
+	    if($field=="idActivity" and property_exists($className, "idProject") and $item->idProject!=$idProjAct){
+	      if($className!="Ticket" or ($className=="Ticket" and  $item->WorkElement->realWork==0)){
+	        $item->idProject=$idProjAct;
+	      }
+	    }
 	    $item->$field=$newValue;
 	  }else{
 	    $newValue="<br>".$newValue;
