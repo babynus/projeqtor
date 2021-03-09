@@ -85,7 +85,7 @@ See also: :ref:`Concept<profiles-definition>`
 
 * The name displayed at right of the field is the translated name.
 * when the new profile is created, it appears in the list of existing profiles in the list box.
-* It remains between square brackets because it does not exist in :ref:`translatable-name`. 
+* It remains between square brackets because it does not exist in :ref:`Translatable name<translatable-name>`. 
 
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_ProfilesDescription.png
    :alt: Profile description with translatable name
@@ -178,7 +178,6 @@ Reports are grouped by report categories
 .. index:: Access mode
 
 .. _access-mode:
-.. _cruds:
 
 Access modes
 ------------
@@ -198,7 +197,7 @@ By default, ProjeQtOr offers 10 different access modes.
 
 Each access defines the visibility that can be applied by type of elements dependent on a project (activity, ticket, action, ...).
 
-You can choose from several levels of visibility for each :ref:`CRUD<cruds>` entitlement.
+You can choose from several levels of visibility for each CRUD entitlement.
 
 * **No element:** No element is visible and updatable.
 * **Own elements:** Only the elements created by the user.
@@ -214,7 +213,7 @@ You can choose from several levels of visibility for each :ref:`CRUD<cruds>` ent
 * The value of field "Name" must be a significant name and must not contain spaces or special characters.
 * The name displayed at right of the field is the translated name.
 * when the new profile is created, it appears in the list of existing profiles in the list box.
-* It remains between square brackets because it does not exist in :ref:`translatable-name`. 
+* It remains between square brackets because it does not exist in :ref:`translatable name<translatable-name>`. 
 
 .. tip::
    
