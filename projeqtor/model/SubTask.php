@@ -152,7 +152,7 @@ class SubTask extends SqlElement {
         echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  value="'. htmlEncode($subTask->name).'">';
         echo    '</td>';
         echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';">';
-        echo      '<select dojoType="dijit.form.FilteringSelect"  id="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');" '.autoOpenFilteringSelect().'  >';
+        echo      '<select dojoType="dijit.form.FilteringSelect"  id="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'true\');" '.autoOpenFilteringSelect().'  >';
                     htmlDrawOptionForReference('idPriority',$subTask->idPriority);
         echo      '</select>';
         echo    '</td>';
@@ -290,7 +290,7 @@ class SubTask extends SqlElement {
         $goto="";
         $style="";
         $draw='';
-        $version=new ProductVersion($element->idTargetProductVersion);
+        $version=($element->idTargetProductVersion!='')?new ProductVersion($element->idTargetProductVersion):'&nbsp;-';
         if ( securityCheckDisplayMenu(null, $obj['refType']) and securityGetAccessRightYesNo('menu'.$obj['refType'], 'read', '')=="YES") {
           $goto=' onClick="gotoElement(\''.$obj['refType'].'\',\''.htmlEncode($element->id).'\');" ';
           $style='cursor: pointer;';
@@ -300,7 +300,8 @@ class SubTask extends SqlElement {
             echo '<tr style="height:42px;"><td colspan="4" ><div dojotype="dijit.layout.ContentPane" class="dijitContentPane">';
               echo'<table style="width:100%;"><tr>';
                     echo '<td style="width:63%;">';
-                      echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;"><span style="margin-left:25px;float:left;padding-top:12px;'.$style.'" class="classLinkName" '.$goto.'>'.ucfirst($obj['refType']).'&nbsp#'.$element->id.'&nbsp-&nbsp'.$element->name.'&nbsp;|&nbsp;'.ucfirst(i18n('colVersion')).':&nbsp;'.$version->name.'</span></div>';
+                      echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;"><span style="margin-left:25px;float:left;padding-top:12px;'.$style.'" class="classLinkName" '.$goto.'>'
+                          .ucfirst($obj['refType']).'&nbsp#'.$element->id.'&nbsp-&nbsp'.$element->name.'&nbsp;|&nbsp;'.ucfirst(i18n('colVersion')).':&nbsp;'.(($element->idTargetProductVersion!='')?$version->name:$version).'</span></div>';
                     echo '</td>';
                     echo '<td style="width:23%;">';
                        echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;vertical-align:middle;">';
