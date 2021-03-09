@@ -30,6 +30,7 @@ if (! isset($includedReport)) {
   include("../external/pChart2/class/pData.class.php");
   include("../external/pChart2/class/pDraw.class.php");
   include("../external/pChart2/class/pImage.class.php");
+  include("../external/pChart2/class/pPie.class.php");
   
 	$paramProject='';
 	if (array_key_exists('idProject',$_REQUEST)) {
@@ -65,14 +66,25 @@ foreach ($result as $doc){
 if (! testGraphEnabled()) { return;}
 
 $dataSet=new pData;
+$array[1] = array(VOID,VOID,VOID,VOID);
+$array[2]= array(VOID,VOID,VOID,VOID);
+$array[3] = array(VOID,VOID,VOID,VOID);
+$array[4] = array(VOID,VOID,VOID,VOID);
+for ($i = 1; $i<=4; $i++){
+	$idName = SqlList::getNameFromId('ApprovalStatus', $i);
+	$dataSet->addPoints($idName,"status");
+}
 for ($i = 1; $i<=4; $i++){
   if(isset($arrayStatus[$i])){
+    $point = $array[$i];
+    $point[$i-1]=count($arrayStatus[$i]);
+    $array[$i] = $point;
     $idName = SqlList::getNameFromId('ApprovalStatus', $i);
-    $dataSet->addPoints(count($arrayStatus[$i]),$idName);
-    $dataSet->addPoints($idName,"status");
+    $dataSet->addPoints($array[$i],$idName);
   }
 }
 $dataSet->setAbscissa("status");
+
 $width=1000;
 $legendWidth=300;
 $height=400;
@@ -106,10 +118,31 @@ $graph->Antialias = TRUE;
 $graph->drawStackedBarChart();
 
 /* Render the picture (choose the best way) */
-$imgName=getGraphImgName("statusDetail");
+$imgName=getGraphImgName("ApprovalStatusBar");
 $graph->render($imgName);
+
+$graph2 = new pImage(300,$height,$dataSet);
+
+/* Draw the background */
+$graph2->Antialias = FALSE;
+
+$pieChart = new pPie($graph2,$dataSet);
+
+/* Set the default font */
+$graph2->setFontProperties(array("FontName"=>getFontLocation("verdana"),"FontSize"=>8));
+$formSettings = array("R"=>255,"G"=>255,"B"=>255,"Alpha"=>0,"Surrounding"=>0);
+$graph2->setShadow(TRUE,$formSettings);
+$pieChart->draw3DPie(90,($height/2)+7,array("Border"=>FALSE));
+$pieChart->drawPieLegend(180,20,array("Style"=>LEGEND_BOX,"Mode"=>LEGEND_VERTICAL));
+$imgName2=getGraphImgName("ApprovalStatusPie");
+
+$graph2->Render($imgName2);
+
 echo '<table width="95%" style="margin-top:20px;" align="center"><tr><td align="center">';
 echo '<img src="' . $imgName . '" />'; 
 echo '</td></tr></table>';
 echo '<br/>';
+echo '<table width="95%" align="center"><tr><td align="center">';
+echo '<img src="' . $imgName2 . '" />';
+echo '</td></tr></table>';
 ?>
