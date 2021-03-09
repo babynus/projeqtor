@@ -103,11 +103,7 @@ $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Single') or  $sh
   </tr>
   <tr>
     <td style="width:<?php echo $printWidthDialog;?>;">
-      <table style="width:100%;">
-        <tr><td>
       <?php SubTask::drawSubtasksForObject($obj, $objectClass, $objectId,false,false,false,true);?>
-        </td></tr>
-      </table>
     </td>
   </tr>
  <tr>
