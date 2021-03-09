@@ -8243,7 +8243,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
     id: refType+'_'+refId+"_resourceNewSubTask_"+id,
     name: refType+'_'+refId+"_resourceNewSubTask_"+id,
     store: resource.store,
-    value:(resourceFilter=='')?' ':resourceFilter,
+    value:resourceFilter,
     style:resource.style,
     searchAttr: "name"
   }, refType+'_'+refId+"_resourceNewSubTask_"+id);
