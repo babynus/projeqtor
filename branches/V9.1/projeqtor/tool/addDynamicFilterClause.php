@@ -126,8 +126,8 @@ for ($i=0;$i<$nbDynamicFilterClauses;$i++) {
 	  $arraySql["operator"]=(Sql::isMysql())?"LIKE":"ILIKE";
 	  $arrayDisp["value"]="'".htmlEncode($filterValue)."'";
 	  $arraySql["value"]="'".htmlEncode($filterValue)."%'";	
-	} else if (($idFilterOperator=="LIKE" or $idFilterOperator=="ILIKE" or $idFilterOperator=="hasSome") and $filterDataType!="varcharStartBy") {
-		if ($filterDataType=='refObject' or $idFilterOperator=="hasSome") {
+	} else if (($idFilterOperator=="LIKE" or $idFilterOperator=="ILIKE" or $idFilterOperator=="hasSome" or $idFilterOperator==" exists ") and $filterDataType!="varcharStartBy") {
+		if ($filterDataType=='refObject' or $idFilterOperator=="hasSome" or $idFilterOperator==" exists ") {
 			$arraySql["operator"]=' exists ';
 			if ($idFilterOperator=="hasSome") {
 				$filterValue="";
