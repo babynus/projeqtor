@@ -8090,7 +8090,7 @@ function updateSubTask(id,refType,refId,isPrio){
   if(name.trim()!=''){
     var priority=(id==0)?dojo.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).value:dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).get('value');
     var resource=(id==0)?dojo.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).value:dijit.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).get('value');
-    var sortOrder=(id==0)?dojo.byId(refType+'_'+refId+'_sortOrder_'+id).value:dojo.byId('sortOrder_'+refType+"_"+refId+'_'+id).value;
+    var sortOrder=dojo.byId('sortOrder_'+refType+"_"+refId+'_'+id).value;
   }
   var priority=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id),
         resource=dijit.byId(refType+'_'+refId+'_resourceNewSubTask_'+id);
@@ -8197,7 +8197,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
             cloneName=newSubTask.querySelector('#widget_'+refType+'_'+refId+'_nameNewSubTask_0'),
               clonePrio=newSubTask.querySelector('#widget_'+refType+'_'+refId+'_priorityNewSubTask_0'),
                 cloneResource=newSubTask.querySelector('#widget_'+refType+'_'+refId+'_resourceNewSubTask_0'),
-                  sort=newSubTask.querySelector('#'+refType+'_'+refId+'_sortOrder_0'),
+                  sort=newSubTask.querySelector('#sortOrder_'+refType+'_'+refId+'_0'),
                     grabDiv=newSubTask.querySelector('#'+refType+'_'+refId+'_grabDive_0'),
                       newPrio=document.createElement('input'),
                        newResource=document.createElement('input'),
@@ -8386,7 +8386,7 @@ function showSubTask(objectClass) {
 
 function reorderSubTask (tab){
   var param="";
-  var nodeList=dijit.byId(tab).node.childNodes[0].childNodes;
+  var nodeList=dijit.byId(tab).node.childNodes[3].childNodes;
   var lst=dijit.byId(tab).node;
   var info=dijit.byId(tab).id.substr(11);
   var refType=info.substr(0,info.indexOf('_'));
@@ -8396,7 +8396,6 @@ function reorderSubTask (tab){
     var trunc=domNode.id.indexOf('subTaskRow_')+11;
     var item=domNode.id.substr(trunc);
     var order=dojo.byId("sortOrder_"+refType+"_"+refId+'_'+item);
-       
     if (order) {
       param+='&'+refType+"_"+refId+'_'+item+"="+(i+1);
     }
