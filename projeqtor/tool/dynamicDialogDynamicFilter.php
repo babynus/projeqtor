@@ -44,7 +44,6 @@ Security::checkValidClass($objectClass);
            	  $filterCriteria->dispOperator .= ' + ';
            	}
            ?>
-           
            <tr style="vertical-align: top;">
              <td style="width: 210px;padding-left:5px" >
                <input readOnly class="dijit dijitInline dijitLeft input dijitTextBox" tabIndex="-1" value="<?php echo $filterCriteria->dispAttribute;?>" style="width: 200px;padding:5px 10px;" />
@@ -78,8 +77,8 @@ Security::checkValidClass($objectClass);
                    htmlDrawOptionForReference($listField, null, null, true,null,null,false,null,$showIdle);
                  }
                  ?>
-               </select>
-                 	<?php } else if (in_array($filterCriteria->sqlOperator, array('LIKE', 'NOT LIKE','ILIKE','NOT ILIKE')) or $filterCriteria->sqlValue == 'int') { ?>
+               </select> 
+                 	<?php } else if (in_array(trim($filterCriteria->sqlOperator), array('exists', 'not exists','LIKE', 'NOT LIKE','ILIKE','NOT ILIKE')) or $filterCriteria->sqlValue == 'int') { ?>
                <input id="filterValue<?php echo $cpt;?>" name="filterValue<?php echo $cpt;?>" value=""  
                  dojoType="dijit.form.TextBox" 
                  style="width:<?php echo (isNewGui())?'373':'400';?>px" />
