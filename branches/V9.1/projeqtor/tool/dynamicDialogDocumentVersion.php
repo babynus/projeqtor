@@ -78,7 +78,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
           multiple="false" 
           onBegin="saveDocumentVersion();"
           onChange="changeDocumentVersion(this.getFileList());"
-          onError="dojo.style(dojo.byId('downloadProgress'), {display:'none'});"
+          onError="dojo.style(dojo.byId('downloadProgress'), {display:'none'});hideWait();"
           label="<?php echo i18n("buttonBrowse");?>"
           title="<?php echo i18n("helpSelectFile");?>"  />
           </span> 
