@@ -5526,7 +5526,7 @@ abstract class SqlElement {
     $title = $this->parseMailMessage ( $paramMailTitle );
     $references = $objectClass . "-" . $this->id;
     $message = $this->getMailDetail ();
-    if ($directStatusMail and isset ( $directStatusMail->message )) {
+    if ($directStatusMail and isset ( $directStatusMail->message ) and trim($directStatusMail->message)!='' ) {
       //$emailTemplateTab[0]->template = $this->getMailDetail($directStatusMail->message);
       $emailTemplateTab[0]->template = $this->parseMailMessage ( $directStatusMail->message ) . '<br/><br/>' . $emailTemplateTab[0]->template;
     }
