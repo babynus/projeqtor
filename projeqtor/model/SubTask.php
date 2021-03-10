@@ -258,7 +258,7 @@ class SubTask extends SqlElement {
     $tableName=$subTask->getDatabaseTableName();
     $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Global')!='' and Parameter::getUserParameter('showClosedSubTask_Global')!='0')?true:false;
     $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Global')!='0') or $showClosedSubTask==true)?true:false;
-    $query="SELECT DISTINCT  $tableName.refId as refId,$tableName.refType as refType FROM $tableName ";
+    $query="SELECT DISTINCT  $tableName.refId as refid,$tableName.refType as reftype FROM $tableName ";
     $query.="WHERE 1=1";
     if($idProject!=0)$query.=" and  $tableName.idProject = ".$idProject;
     if($idResource!=0)$query.=" and  $tableName.idResource = ".$idResource;
@@ -282,18 +282,18 @@ class SubTask extends SqlElement {
     }
     if(!empty($tab)){
       foreach ($tab as $id=>$obj){
-        $element= new $obj['refType']( $obj['refId']);
+        $element= new $obj['reftype']( $obj['refid']);
         if ($element->idle==1)continue;
         if(!$showClosedSubTask and !$showDoneSubTask and $element->done==1){
-          $cpST=$subTask->countSqlElementsFromCriteria(array("refType"=>$obj['refType'],"refId"=>$element->id,"idle"=>'0'));
+          $cpST=$subTask->countSqlElementsFromCriteria(array("refType"=>$obj['reftype'],"refId"=>$element->id,"idle"=>'0'));
           if ($cpST==0)continue;
         }
         $goto="";
         $style="";
         $draw='';
         $version=($element->idTargetProductVersion!='')?new ProductVersion($element->idTargetProductVersion):'&nbsp;-';
-        if ( securityCheckDisplayMenu(null, $obj['refType']) and securityGetAccessRightYesNo('menu'.$obj['refType'], 'read', '')=="YES") {
-          $goto=' onClick="gotoElement(\''.$obj['refType'].'\',\''.htmlEncode($element->id).'\');" ';
+        if ( securityCheckDisplayMenu(null, $obj['reftype']) and securityGetAccessRightYesNo('menu'.$obj['reftype'], 'read', '')=="YES") {
+          $goto=' onClick="gotoElement(\''.$obj['reftype'].'\',\''.htmlEncode($element->id).'\');" ';
           $style='cursor: pointer;';
         }
         
@@ -302,29 +302,29 @@ class SubTask extends SqlElement {
               echo'<table style="width:100%;"><tr>';
                     echo '<td style="width:63%;">';
                       echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;"><span style="margin-left:25px;float:left;padding-top:12px;'.$style.'" class="classLinkName" '.$goto.'>'
-                          .ucfirst($obj['refType']).'&nbsp#'.$element->id.'&nbsp-&nbsp'.$element->name.'&nbsp;|&nbsp;'.ucfirst(i18n('colVersion')).':&nbsp;'.(($element->idTargetProductVersion!='')?$version->name:$version).'</span></div>';
+                          .ucfirst($obj['reftype']).'&nbsp#'.$element->id.'&nbsp-&nbsp'.$element->name.'&nbsp;|&nbsp;'.ucfirst(i18n('colVersion')).':&nbsp;'.(($element->idTargetProductVersion!='')?$version->name:$version).'</span></div>';
                     echo '</td>';
                     echo '<td style="width:23%;">';
                        echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;vertical-align:middle;">';
-                        echo      '<select dojoType="dijit.form.FilteringSelect" id="idStatusElement_'.$obj['refType'].'_'.$element->id.'" name="idStatusElement_'.$obj['refType'].'_'.$element->id.'"
-                                  style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Status\',\''.$obj['refType'].'\','.$element->id.'); "  '.autoOpenFilteringSelect().'>';
+                        echo      '<select dojoType="dijit.form.FilteringSelect" id="idStatusElement_'.$obj['reftype'].'_'.$element->id.'" name="idStatusElement_'.$obj['reftype'].'_'.$element->id.'"
+                                  style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Status\',\''.$obj['reftype'].'\','.$element->id.'); "  '.autoOpenFilteringSelect().'>';
                           htmlDrawOptionForReference('idStatus',$element->idStatus,$element);
                         echo      '</select>';
                        echo '</div>';
-                       echo      '<input id="idOldStatusElement_'.$obj['refType'].'_'.$element->id.'" value="'.$element->idStatus.'" type="hidden" />';
+                       echo      '<input id="idOldStatusElement_'.$obj['reftype'].'_'.$element->id.'" value="'.$element->idStatus.'" type="hidden" />';
                     echo '</td>';
                     echo '<td style="width:14%;">';
                        echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;vertical-align:middle;">';
-                        echo      '<select dojoType="dijit.form.FilteringSelect" id="idResourceElement_'.$obj['refType'].'_'.$element->id.'" name="idResourceElement_'.$obj['refType'].'_'.$element->id.'" 
-                            style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Resposible\',\''.$obj['refType'].'\','.$element->id.');" '.autoOpenFilteringSelect().' >';
+                        echo      '<select dojoType="dijit.form.FilteringSelect" id="idResourceElement_'.$obj['reftype'].'_'.$element->id.'" name="idResourceElement_'.$obj['reftype'].'_'.$element->id.'" 
+                            style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Resposible\',\''.$obj['reftype'].'\','.$element->id.');" '.autoOpenFilteringSelect().' >';
                           htmlDrawOptionForReference('idResource',$element->idResource,$element);
                         echo      '</select>';
                        echo '</div>';
-                       echo      '<input id="idOldResourceElement_'.$obj['refType'].'_'.$element->id.'" value="'.$element->idResource.'" type="hidden" />';
+                       echo      '<input id="idOldResourceElement_'.$obj['reftype'].'_'.$element->id.'" value="'.$element->idResource.'" type="hidden" />';
                      echo '</td >';
               echo'</tr></table>';
             echo '</div></td></tr>';
-            SubTask::drawSubtasksForObject($element, $obj['refType'],  $obj['refId'],null,$idResource,true);
+            SubTask::drawSubtasksForObject($element, $obj['reftype'],  $obj['refid'],null,$idResource,true);
           echo '</table>';
       }
     }else{
