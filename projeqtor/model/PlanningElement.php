@@ -1086,7 +1086,7 @@ class PlanningElement extends SqlElement {
           $pw->purge($clause);
         }
         $tableName=$this->getDatabaseTableName();
-        $query="SELECT $tableName.id as id, $tableName.refId as refId,$tableName.refType as refType FROM $tableName ";
+        $query="SELECT $tableName.id as id, $tableName.refid as refId,$tableName.refType as reftype FROM $tableName ";
         $query.="WHERE topRefType='$this->refType' and topRefId=$this->refId";
         $result = Sql::query ( $query );
         while ($line = Sql::fetchLine($result)) {
@@ -1094,7 +1094,7 @@ class PlanningElement extends SqlElement {
         }
         if(!empty($tab)){
           foreach ($tab as $id=>$obj){
-            $element= new $obj['refType']( $obj['refId']);
+            $element= new $obj['reftype']( $obj['refid']);
             $elem= new PlanningElement($obj['id']);
             $propExist=(property_exists(get_class($element), 'paused'))?true:false;
               if($this->paused==1){
