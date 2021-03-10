@@ -66,8 +66,10 @@ if (! $documentVersionId) { // Get file only on insert
 	} else if (isset($_REQUEST['MAX_FILE_SIZE']) ) {
     // OK : no file	
 	} else {
-	  $error=htmlGetErrorMessage(i18n('errorTooBigFile',array($attachmentMaxSize,'$paramAttachmentMaxSize')));
-	  errorLog("[1] ".i18n('errorTooBigFile',array($attachmentMaxSize,'$paramAttachmentMaxSize')));
+	  //$error=htmlGetErrorMessage(i18n('errorTooBigFile',array($attachmentMaxSize,'$paramAttachmentMaxSize')));
+	  //errorLog("[1] ".i18n('errorTooBigFile',array($attachmentMaxSize,'$paramAttachmentMaxSize')));
+	  $error=htmlGetErrorMessage(i18n('errorTooBigFile',array(ini_get('upload_max_filesize'),'upload_max_filesize')));
+	  errorLog("[1] ".i18n('errorTooBigFile',array(ini_get('upload_max_filesize'),'upload_max_filesize')));
 	  //$error=true; 
 	}
 	if ($uploadedFile and $documentVersionLink and $uploadedFile['name']) {
@@ -99,12 +101,10 @@ if (! $documentVersionId) { // Get file only on insert
 	    //$error=true; 
 	  }
 	}
-	if (! $error and ! $uploadedFile and !$documentVersionLink) {
-	  if (! $uploadedFile['name']) {
+	if ( (! $error and ! $uploadedFile and !$documentVersionLink) or ( $uploadedFile and !$uploadedFile['name']) ) {
 	    $error=htmlGetWarningMessage(i18n('errorNoFile'));
 	    errorLog(i18n('errorNoFile'));
 	    //$error=true; 
-	  }
 	}
 }
 $documentVersionNewVersion=null;
@@ -289,5 +289,6 @@ if ($isIE and $isIE<=9) {
   echo '</body>';
   echo '</html>';
 } else {
+  ob_clean();
   echo $jsonReturn;
 }?>
