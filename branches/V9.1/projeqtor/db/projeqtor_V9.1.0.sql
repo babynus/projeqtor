@@ -206,7 +206,7 @@ INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VA
 (2,118,0,1),
 (1,118,0,1);
 
-ALTER TABLE `${prefix}document` ADD COLUMN `idApprovalStatus` int(1) unsigned DEFAULT NULL COMMENT '1';
+ALTER TABLE `${prefix}document` ADD COLUMN `idApprovalStatus` int(12) unsigned DEFAULT NULL COMMENT '12';
 
 CREATE TABLE `${prefix}approvalStatus` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
