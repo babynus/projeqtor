@@ -178,10 +178,13 @@
           </script>
           <input type="hidden" id="selection" name="selection" value=""/>
           <input type="hidden" id="dataTypeSelected"  />
-          <div style="width: 92%; margin-left:8%;padding-top:30px;" >
-           <table width="98%" >
-             <tr style="vertical-align: top;">
-              <td style="width: 220px;" >
+          <div style="width: 100%; padding-top:30px;" >
+           <table style="width:100%" >
+             <tr style="height:50px">
+              <td style="text-align-last:center;"><div><span style="position:relative;"><?php echo i18n("forField");?></span></div></td>
+             </tr>
+             <tr>
+              <td style="text-align-last:center;">
                 <div dojoType="dojo.data.ItemFileReadStore" jsId="attributeMultipleUpadteStore" url="../tool/jsonList.php?listType=object&actualView=MultipleUpadate&objectClass=<?php echo  $objectClass;?>" searchAttr="name" >
                 </div>
                 <select dojoType="dijit.form.FilteringSelect" 
@@ -194,41 +197,26 @@
                   </script>              
                  </select>
               </td>
-              <?php if($displayWidth<="840") echo '</tr><tr style="'.(($displayWidth<="671")?"height:50px;":"").'">';?>
-             <td id="operatorTd" style="width:190px;">
-               <div id="multipleUpdateOperateur" style="width:190px;<?php echo (($displayWidth>="840")?"margin-top:10px;":"");?>" >
+            </tr>
+            <tr style="height:50px">
+             <td id="operatorTd" style="text-align-last:center;">
+               <div id="multipleUpdateOperateur"  >
                </div>
              </td>
-             <td id="inputTd" style="width:370 px;vertical-align:middle;position:relative;">
-              <input id="newMultipleUpdateValue" name="newMultipleUpdateValue" value=""    dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
-              <input id="isLongText" name="isLongText" value=""  dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
-               <div>
-               <?php if (isNewGui()) {?>
-                <div  id="multipleUpdateValueCheckboxSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" hidden
-                 leftLabel="" rightLabel="" style="width:10px;position:relative; top:0px;left:5px;z-index:99;display:none;" >
-  		           <script type="dojo/method" event="onStateChanged" >
-  		             dijit.byId("multipleUpdateValueCheckbox").set("checked",(this.value=="on")?true:false);
-  		           </script>
-  		         </div>
-  		        <?php }?>
-  		        <input type="checkbox" id="multipleUpdateValueCheckbox" name="multipleUpdateValueCheckbox" value=""  dojoType="dijit.form.CheckBox" style="padding-top:7px;margin-left:5px;display:none;";/> 
-	           </div>
-               <input id="multipleUpdateValueDate" name="multipleUpdateValueDate" value=""  dojoType="dijit.form.DateTextBox" constraints="{datePattern:browserLocaleDateFormatJs}"  style="width:100px;display:none;float:left;" />
-               <input id="multipleUpdateValueTime" name="multipleUpdateValueTime" value=""  dojoType="dijit.form.TimeTextBox"   style="width:75px;display:none;float:left;margin-left:15px;" />
-               <?php  if($displayWidth<="671"){
-                        echo "</td></tr><tr><td style='width:100%;vertical-align:middle;position:relative;'>"; 
-                        }
-                ?>
-               <div id="divListElement" >
-                <textarea dojoType="dijit.form.Textarea" id="multipleUpdateTextArea" name="multipleUpdateTextArea" style="float:left;width:90%;min-width:300px;min-height:150px;font-size: 90%; background:none;display:none;" 
+             </tr>
+             <tr>
+             <td >
+               <div id="divListElement" style="text-align:-webkit-center;">
+                <textarea dojoType="dijit.form.Textarea" id="multipleUpdateTextArea" name="multipleUpdateTextArea" style="width:90%;min-width:300px;min-height:150px;font-size: 90%; background:none;display:none;" 
                 class="input" maxlength="4000" ></textarea>
-                <select id="multipleUpdateValueList" name="multipleUpdateValueList[]" value=""  dojoType="dijit.form.MultiSelect" 
-                 style="<?php  echo ($displayWidth<="840")?"width:370px;":"width:350px;";?>font-size:10pt;color:#555555;height:150px;display:none;float:left;" size="10" class="selectList">
-                </select>
-                <button style="display:none;width:20px;float:left;margin-left:15px;" id="showDetailInMultipleUpdate" dojoType="dijit.form.Button" showlabel="false"
-                      title="<?php echo i18n('showDetail')?>" class="resetMargin notButton notButtonRounded"
-                      iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui">
-                      <script type="dojo/connect" event="onClick" args="evt">
+                <div style="margin-right: 18%;width: 60%;margin-left: 22%;">
+                  <select id="multipleUpdateValueList" name="multipleUpdateValueList[]" value=""  dojoType="dijit.form.MultiSelect" 
+                   style="width:90%;font-size:10pt;color:#555555;height:150px;display:none;float:left;" size="10" class="selectList">
+                  </select>
+                  <button style="display:none;width:1%;margin-left:2%;float:left;" id="showDetailInMultipleUpdate" dojoType="dijit.form.Button" showlabel="false"
+                        title="<?php echo i18n('showDetail')?>" class="resetMargin notButton notButtonRounded"
+                        iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui">
+                        <script type="dojo/connect" event="onClick" args="evt">
                         var objectName = dijit.byId('showDetailInMultipleUpdate').get('value');
                         if( objectName ){
                           var objectClass=objectName[0].substr(2);
@@ -240,8 +228,38 @@
                           showDetail('multipleUpdateValueList',0,objectClass,false);
                         }
                       </script>
-                  </button>
+                    </button>
                 </div>
+                <input id="newMultipleUpdateValue" name="newMultipleUpdateValue" value=""    dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
+                <input id="isLongText" name="isLongText" value=""  dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
+                <div>
+                <?php if (isNewGui()) {?>
+                  <div  id="multipleUpdateValueCheckboxSwitch" class="colorSwitch" data-dojo-type="dojox/mobile/Switch" value="off" hidden
+                 leftLabel="" rightLabel="" style="width:10px;position:relative; top:0px;left:5px;z-index:99;display:none;" >
+  		           <script type="dojo/method" event="onStateChanged" >
+  		             dijit.byId("multipleUpdateValueCheckbox").set("checked",(this.value=="on")?true:false);
+  		           </script>
+  		          </div>
+  		          <?php }?>
+  		          <input type="checkbox" id="multipleUpdateValueCheckbox" name="multipleUpdateValueCheckbox" value=""  dojoType="dijit.form.CheckBox" style="padding-top:7px;margin-left:5px;display:none;";/> 
+                </div>
+                <input id="multipleUpdateValueDate" name="multipleUpdateValueDate" value=""  dojoType="dijit.form.DateTextBox" constraints="{datePattern:browserLocaleDateFormatJs}"  style="width:100px;display:none;" />
+                <input id="multipleUpdateValueTime" name="multipleUpdateValueTime" value=""  dojoType="dijit.form.TimeTextBox"   style="width:75px;display:none;margin-top:15px;" />
+                <input id="multipleUpdateColorButtonInput" name="multipleUpdateColorButtonInput" value=""  dojoType="dijit.form.TextBox"   style="width:75px;display:none;margin-top:15px;" />
+                <div id="multipleUpdateColorButton" dojoType="dijit.form.DropDownButton" style="position:relative;<?php echo (isNewGui())?'border:0 !important;width:60px;':'width:40px';?>;display:none;"
+                        title="<?php echo i18n('selectColor');?>"showlabel="false" iconClass="colorSelector" class="dropDownNoBorder">
+                  <div dojoType="dijit.ColorPalette" style="<?php echo (isNewGui())?'border:0;':'';?>">
+                          <script type="dojo/method" event="onChange" >
+                            var fld=dojo.byId("multipleUpdateColorButton");
+                            fld.style.color=this.value;
+                            fld.style.backgroundColor=this.value;
+                            fld.value=this.value;
+                            dijit.byId('multipleUpdateColorButtonInput').set('value',this.value);
+                          </script>
+                  </div>
+                </div>
+               
+              </div>
              </td>
             </tr>
            <?php  //gautier #533
@@ -272,38 +290,3 @@
   </div> 
 </div>
 
-<?php 
-function isDisplayable($obj, $field, $fromPlanningElement=false) {
-  global $extraHiddenFields, $extraReadonlyFields, $peExtraHiddenFields, $peExtraReadonlyFields;
-  if (!$extraHiddenFields) $extraHiddenFields = $obj->getExtraHiddenFields ( null, null, getSessionUser ()->getProfile () );
-  if (!$extraReadonlyFields) $extraReadonlyFields = $obj->getExtraReadonlyFields ( null, null, getSessionUser ()->getProfile () );
-  if ( property_exists($obj,$field) 
-  and ! $obj->isAttributeSetToField($field,'readonly') 
-  and ! $obj->isAttributeSetToField($field,'hidden') 
-  and ! in_array($field,$extraHiddenFields) and ! in_array($field,$extraReadonlyFields)) {
-    return true;
-  } else {
-    $pe=get_class($obj).'PlanningElement';
-    if ($fromPlanningElement and property_exists($obj,$pe) and is_object($obj->$pe) and property_exists($obj->$pe,$field)) {
-      $peObj=$obj->$pe;
-      $peObj->setVisibility();
-      $workVisibility=$peObj->_workVisibility;
-      $costVisibility=$peObj->_costVisibility;
-      if ( (substr($field,-4,4)=='Cost' and $costVisibility!='ALL') or (substr($field,-4, 4)=='Work' and $workVisibility!='ALL') ) {
-        return false;
-      }
-      if (!$peExtraHiddenFields) $peExtraHiddenFields = $peObj->getExtraHiddenFields ( null, null, getSessionUser ()->getProfile () );
-      if (!$peExtraReadonlyFields) $peExtraReadonlyFields = $peObj->getExtraReadonlyFields ( null, null, getSessionUser ()->getProfile () );
-      if (! $peObj->isAttributeSetToField($field,'readonly')
-      and ! $peObj->isAttributeSetToField($field,'hidden')
-      and ! in_array($field,$peExtraHiddenFields) and ! in_array($field,$peExtraReadonlyFields)     ) {
-        return true;
-      } else {
-        return false;
-      }      
-    } else {
-      return false;
-    }
-  }         
-}
-?>
