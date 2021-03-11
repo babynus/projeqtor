@@ -178,7 +178,7 @@ INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasExcel`) VALUES
 (116, 'reportWorkTwoDate',1, 'work.php', 130,'1'),
-(117, 'reportWorkDetailTwoDate',1, 'workDetailed.php', 131,'1'),
+(117, 'reportWorkDetailTwoDate',1, 'workDetailed.php', 134,'1'),
 (118, 'reportDocumentApproval',4, 'documentApproval.php', 470,'1');
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
