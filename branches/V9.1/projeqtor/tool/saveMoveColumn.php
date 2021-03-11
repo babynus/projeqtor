@@ -34,8 +34,12 @@ $mode = RequestHandler::getValue('mode');
 $totalDiv = RequestHandler::getValue('totalDiv');
 $list = explode("__", $jsonValue);
 $delete = array_pop($list);
-$order = ' sortOrder asc ';
-$currentList = $columnSelector->getSqlElementsFromCriteria(array('idUser'=>$userId,'objectClass'=>$class),null,$order);
+$order = " sortOrder ASC ";
+if($mode=='size'){
+  $currentList = $columnSelector->getSqlElementsFromCriteria(array('idUser'=>$userId,'objectClass'=>$class),null,null,$order);
+}else{
+  $currentList = $columnSelector->getSqlElementsFromCriteria(array('idUser'=>$userId,'objectClass'=>$class),null,null,$order,null,null,count($list));
+}
 if($mode=='size'){
   foreach ($list as $id=>$val){
     $list[$id]= intval(substr($val, 0 , -2));
@@ -61,14 +65,17 @@ if($mode=='size'){
 }
 Sql::beginTransaction();
 foreach ($currentList as $id=>$obj){
-  if(!$obj->hidden){
-    if($mode=='move'){
-       if($list[$id] != $obj->field){
-         $key = array_search($obj->field, $list);
-         $obj->sortOrder = $key+1;
-         $obj->save();
-       }
-      }else{
+  if($mode=='move'){
+    if(isset($list[$id]) and in_array($obj->field, $list) ){
+      if($list[$id] != $obj->field){
+        $key = array_search($obj->field, $list);
+        $obj->sortOrder = $key+1;
+        $obj->save();
+      }
+    }
+  }else{
+    if(!$obj->hidden){
+      if(isset($list[$id])){
         if($list[$id] != $obj->widthPct){
           if($list[$id]=='hidden'){
             $obj->hidden= 1;
@@ -78,16 +85,17 @@ foreach ($currentList as $id=>$obj){
         }
         $obj->saveForced();
       }
-  }else{
-    if(isset($list[$id])){
-      $obj->hidden= 0;
-      $obj->widthPct = $list[$id];
-      $obj->saveForced();
+    }else{
+      if(isset($list[$id])){
+        $obj->hidden= 0;
+        $obj->widthPct = $list[$id];
+        $obj->saveForced();
+      }
     }
   }
+  
 }
 Sql::commitTransaction();
-
 if($data){
   echo $data;
 }
