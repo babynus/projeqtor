@@ -20,6 +20,7 @@ Pre-requisites :
 	  max_execution_time = 30 ; minimum advised
     memory_limit = 512M ; minimum advised for PDF generation
     file_uploads = On ; to allow attachements and documents management
+    error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
   PHP extensions required :  
     gd => for reports graphs
     imap ==> to retrieve mails to insert replay as notes
