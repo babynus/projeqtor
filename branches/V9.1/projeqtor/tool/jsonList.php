@@ -1038,23 +1038,25 @@ function listFieldsForFilter($obj, $nbRows, $included = false) {
   return $nbRows;
 }
 
-function listFieldsForMultipleUpdate($obj, $nbRows, $included = false) {
+function listFieldsForMultipleUpdate($obj, $nbRows,$pObj=false, $included = false) {
   if (method_exists($obj,'setAttributes')) $obj->setAttributes();
+  $extraHiddenFields = $obj->getExtraHiddenFields ( null, null, getSessionUser ()->getProfile () );
+  $extraReadonlyFields = $obj->getExtraReadonlyFields ( null, null, getSessionUser ()->getProfile () );
   foreach ( $obj as $col => $val ) {
     if ($col=='_Assignment') {
       if ($nbRows > 0) echo ', ';
       echo '{"id":"' . ($included ? get_class ( $obj ) . '_' : '') . 'assignedResource__idResourceAll' . '", "name":"' . i18n("assignedResource") . '", "dataType":"list"}';
       continue;
     }
-    if(get_class($obj)=="ActivityPlanningElement" and ( $col=="fixPlanning" or $col=="paused")){
-      continue;
-    }
+    if($included and property_exists(get_class($pObj), $col) and ! $pObj->isAttributeSetToField ( $col, 'hidden' ) and ! $pObj->isAttributeSetToField ( $col, 'readonly' ) and ! $pObj->isAttributeSetToField ( $col, 'calculated' ))continue;
     if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'readonly' ) 
-    and ! $obj->isAttributeSetToField ( $col, 'calculated' ) and (! $included  or ($col != 'id' and $col != '_Note' and $col != '_wbs'))){
+    and ! $obj->isAttributeSetToField ( $col, 'calculated' )  and $col != 'id' and $col != '_Note' and $col != '_wbs' and $col !='wbs' and $col !='idle' and $col !='done' and $col!="handled" and $col!="originId" and $col!="cancelled"
+     and ! in_array($col,$extraHiddenFields) and ! in_array($col,$extraReadonlyFields)){
       
       if ($nbRows > 0)echo ', ';
       $dataType = $obj->getDataType ( $col );
       $dataLength = $obj->getDataLength ( $col );
+      if($col=="color")$dataType="color";
       if ($dataType == 'int' and $dataLength == 1) {
         $dataType = 'bool';
       }  else if (isForeignKey($col, $obj)) {
@@ -1062,7 +1064,7 @@ function listFieldsForMultipleUpdate($obj, $nbRows, $included = false) {
       }elseif ($dataType == 'varchar' and $dataLength >4000){
         $dataType = 'textarea';
       }
-
+      
       $colName = $obj->getColCaption ( $col );
       if (substr ( $col, 0, 9 ) == 'idContext') {
         $colName = SqlList::getNameFromId ( 'ContextType', substr ( $col, 9 ) );
@@ -1071,7 +1073,7 @@ function listFieldsForMultipleUpdate($obj, $nbRows, $included = false) {
       $nbRows ++;
     } else if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) == ucfirst ( substr ( $col, 0, 1 ) ) ) {
       $sub = new $col ();
-      $nbRows = listFieldsForMultipleUpdate ( $sub, $nbRows, true );
+      $nbRows = listFieldsForMultipleUpdate ( $sub, $nbRows,$obj, true );
     }
   }
   return $nbRows;
