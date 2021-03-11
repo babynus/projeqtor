@@ -86,11 +86,12 @@ class OneLogin_Saml2_Utils
         //assert('$dom instanceof DOMDocument');
         //assert('is_string($xml)');
 
-        $oldEntityLoader = libxml_disable_entity_loader(true);
-
+        if (version_compare(phpversion(), '8.0.0', '<')) $oldEntityLoader = libxml_disable_entity_loader(true);
+        else $oldEntityLoader = null;
+        
         $res = $dom->loadXML($xml);
 
-        libxml_disable_entity_loader($oldEntityLoader);
+        if (version_compare(phpversion(), '8.0.0', '<')) libxml_disable_entity_loader($oldEntityLoader);
 
         foreach ($dom->childNodes as $child) {
             if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
