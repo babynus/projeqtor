@@ -4339,7 +4339,7 @@ abstract class SqlElement {
       if (property_exists ( $this, 'endDate' ) and get_class($this)!='SupplierContract' and get_class($this)!='ClientContract') {
         $colScript .= '    if(! dijit.byId("endDate").get("value")) {';
         $colScript .= '       var curDate = new Date();';
-        $colScript .= '       dijit.byId("endDate").set("value", curDate);';
+        $colScript .= '       dijit.byId("endDate").set("value", curDate.toISOString().slice(0,10));';
         $colScript .= '    } ';
       }
       // END tLaguerie ticket #396
