@@ -8084,7 +8084,7 @@ function switchNewGui(){
 }
 
 
-function updateSubTask(id,refType,refId,isPrio){
+function updateSubTask(id,refType,refId,isPrio,isRes){
   url = "../tool/saveSubTask.php?element=SubTask&refType="+refType+"&refId="+refId+"&idSubTask="+id;
   var name=(id==0)?dojo.byId(refType+'_'+refId+'_nameNewSubTask_'+id).value:dojo.byId(refType+'_'+refId+'_nameNewSubTask_'+id).value;
   if(name.trim()!=''){
@@ -8098,7 +8098,7 @@ function updateSubTask(id,refType,refId,isPrio){
   update=false;
   deleted=false;
   
-  if(name.trim()!='' && id!=0){
+  if(name.trim()!='' && id!=0 && isPrio!='true' && isRes!='true'){
     if(priority.disabled==true && resource.disabled==true){
       priority.set('disabled',false);
       resource.set('disabled',false);
@@ -8217,6 +8217,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   cloneResource.parentNode.replaceChild(newResource,cloneResource);
   grabDiv.removeAttribute('id');
   grabDiv.className='dojoDndHandle handleCursor todoListTab';
+  grabDiv.innerHTML="";
   grabDiv.style="text-align: center;";
   sort.id='sortOrder_'+refType+"_"+refId+'_'+id;
   pos.id=refType+'_'+refId+'_pos_'+id;
@@ -8258,8 +8259,8 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   
   dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value='';
   dojo.setAttr(refType+'_'+refId+'_nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',"'+refType+'",'+refId+')');
-  dojo.connect(newFilterResource, 'onChange', function(value){updateSubTask(id,refType,refId);}); 
-  dojo.connect(newFilterPrio, 'onChange', function(value){updateSubTask(id,refType,refId,'true');}); 
+  dojo.connect(newFilterResource, 'onChange', function(value){updateSubTask(id,refType,refId,'false','true');}); 
+  dojo.connect(newFilterPrio, 'onChange', function(value){updateSubTask(id,refType,refId,'true','flase');}); 
   dojo.connect(newFilterResource,'onMouseDown' , function(value){dijit.byId(this.name).toggleDropDown();});
   dojo.connect(newFilterPrio,'onMouseDown' , function(value){dijit.byId(this.name).toggleDropDown();});
   newFilterPrio.focus();

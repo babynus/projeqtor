@@ -131,7 +131,7 @@ class SubTask extends SqlElement {
     }
     
     if (!$refresh) echo '<tr><td colspan="4"><div id="'.$refType.'_'.$refId.'_drawSubTask" dojotype="dijit.layout.ContentPane">';
-    echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true" id="dndSubTask_'.$refType.'_'.$refId.'" jsId="dndSubTask_'.$refType.'_'.$refId.'">';
+    echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true" id="dndSubTask_'.$refType.'_'.$refId.'" jsId="dndSubTask_'.$refType.'_'.$refId.'" data-dojo-id="test">';
     if($gloablView )echo      '<input id="SubTaskIdResourceFilter_'.$refType.'_'.$refId.'" value="'.$idResource.'" type="hidden" />';
     echo      '<input class="refType" value="'.$refType.'" type="hidden" />';
     echo      '<input class="refId" value="'.$refId.'" type="hidden" />';
@@ -153,12 +153,12 @@ class SubTask extends SqlElement {
         echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  value="'. htmlEncode($subTask->name).'">';
         echo    '</td>';
         echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';">';
-        echo      '<select dojoType="dijit.form.FilteringSelect"  id="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'true\');" '.autoOpenFilteringSelect().'  >';
+        echo      '<select dojoType="dijit.form.FilteringSelect"  id="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'true\',\'false\');" '.autoOpenFilteringSelect().'  >';
                     htmlDrawOptionForReference('idPriority',$subTask->idPriority);
         echo      '</select>';
         echo    '</td>';
         echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
-        echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');" '.autoOpenFilteringSelect().' >';
+        echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'false\',\'true\');" '.autoOpenFilteringSelect().' >';
                     htmlDrawOptionForReference('idResource',$subTask->idResource,$obj,false,$critFld,$critVal);
         echo      '</select>';
         echo    '</td>';
