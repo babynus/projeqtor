@@ -301,6 +301,9 @@ class DocumentMain extends SqlElement {
   	if ($old->name!=$this->name) {
   		$this->documentReference=str_replace($old->name, $this->name, $this->documentReference);
   	}
+  	if(!$this->id){
+  	  $this->idApprovalStatus = 1;
+  	}
   	$result=parent::save();
   	if ($old->idDocumentDirectory!=$this->idDocumentDirectory and $this->id) {
   		// directory changed, must must files !
