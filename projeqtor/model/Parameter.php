@@ -933,7 +933,6 @@ class Parameter extends SqlElement {
             	                'displayOnlyHandled'=>'list',
             	                'setHandledOnRealWork'=>'list',
             	                'setDoneOnNoLeftWork'=>'list',
-            	                "showOnlyNotes"=>"list",
             	                'maxDaysToBookWork'=>'number',
             	                'maxDaysToBookWorkBlocking'=>'number',
             	                'imputationAlertInputByOther'=>'list',
@@ -1033,6 +1032,7 @@ class Parameter extends SqlElement {
       	                      "typeExportXLSorODS"=>'list',
       	                      // MTY - EXPORT XLS OR ODS
       	                      "globalNoteDiscussionMode"=>'list',
+      	                      "showOnlyNotes"=>"list",
       	                      "notReceiveHisOwnEmails"=>'list',
       	                      'paramOrderNoteMail'=>'list',
       	                      "clientElementList"=>'list',
