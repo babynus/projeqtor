@@ -8090,7 +8090,7 @@ function updateSubTask(id,refType,refId,isPrio){
   if(name.trim()!=''){
     var priority=(id==0)?dojo.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).value:dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).get('value');
     var resource=(id==0)?dojo.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).value:dijit.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).get('value');
-    var sortOrder=dojo.byId('sortOrder_'+refType+"_"+refId+'_'+id).value;
+    var sortOrder=(dojo.byId('sortOrder_'+refType+"_"+refId+'_'+id).value!='')? parseInt(dojo.byId('sortOrder_'+refType+"_"+refId+'_'+id).value) : 0 ;
   }
   var priority=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id),
         resource=dijit.byId(refType+'_'+refId+'_resourceNewSubTask_'+id);
@@ -8113,7 +8113,7 @@ function updateSubTask(id,refType,refId,isPrio){
     sortOrder=sortOrder+1;
     if(dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId))resource=dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId).value;
     url+="&operation=save";
-    url+="&name="+name+"&priority="+priority+"&resource="+resource+"&sortOrder"+sortOrder;
+    url+="&name="+name+"&priority="+priority+"&resource="+resource+"&sortOrder="+sortOrder;
   }else if(id!=0 && name.trim()!=''){
     update=true;
     url+="&operation=update";
@@ -8190,7 +8190,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   newSubTask.id=refType+"_"+refId+"_subTaskRow_"+id;
   newSubTask.setAttribute('class','dojoDndItem');
   newSubTask.setAttribute('dndType','subTask_'+refType+'_'+refId);
-  order= sortOrder+1;
+  order= parseInt(sortOrder)+1;
   
   var  priority=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_0'),
             resource=dijit.byId(refType+'_'+refId+'_resourceNewSubTask_0'),
