@@ -8111,7 +8111,7 @@ function updateSubTask(id,refType,refId,isPrio){
   if(id==0 && name.trim()!=''){
     save=true;
     sortOrder=sortOrder+1;
-    if(dojo.byId('SubTaskIdResourceFilter'))resource=dojo.byId('SubTaskIdResourceFilter').value;
+    if(dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId))resource=dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId).value;
     url+="&operation=save";
     url+="&name="+name+"&priority="+priority+"&resource="+resource+"&sortOrder"+sortOrder;
   }else if(id!=0 && name.trim()!=''){
@@ -8216,7 +8216,8 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   clonePrio.parentNode.replaceChild(newPrio,clonePrio);
   cloneResource.parentNode.replaceChild(newResource,cloneResource);
   grabDiv.removeAttribute('id');
-  grabDiv.className='dojoDndHandle handleCursor linkData';
+  grabDiv.className='dojoDndHandle handleCursor todoListTab';
+  grabDiv.style="text-align: center;";
   sort.id='sortOrder_'+refType+"_"+refId+'_'+id;
   pos.id=refType+'_'+refId+'_pos_'+id;
   prev.id=refType+'_'+refId+'_prev_'+id;

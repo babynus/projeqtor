@@ -12459,6 +12459,9 @@ function multipleUpadteSelectAtribute(value) {
         dojo.byId('dataTypeSelected').value=dataType;
         if (dataType == "bool") {
           filterType="bool";
+          dojo.style(dijit.byId('multipleUpdateColorButton').domNode, {
+            display : 'none'
+          });
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'none'
           });
@@ -12476,6 +12479,40 @@ function multipleUpadteSelectAtribute(value) {
           } else {
             dojo.style(dijit.byId('multipleUpdateValueCheckbox').domNode, {
               display : 'block'
+            });
+            dijit.byId('multipleUpdateValueCheckbox').set('checked', '');
+          }
+          dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueTime').domNode, {
+            display : 'none'
+          });
+        }else if(dataType == "color"){
+          filterType="color";
+          dojo.style(dijit.byId('multipleUpdateColorButton').domNode, {
+            display : 'block'
+          });
+          dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
+            display : 'none'
+          });
+          if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { 
+            dojo.style(dijit.byId('multipleUpdateValueCheckboxSwitch').domNode, {
+              display : 'none'
+            });
+            dijit.byId('multipleUpdateValueCheckbox').set('value', 'off');
+          } else {
+            dojo.style(dijit.byId('multipleUpdateValueCheckbox').domNode, {
+              display : 'none'
             });
             dijit.byId('multipleUpdateValueCheckbox').set('checked', '');
           }
@@ -12572,6 +12609,9 @@ function multipleUpadteSelectAtribute(value) {
                 });
           }
           dojo.removeAttr('multipleUpdateValueList','multiple');
+          dojo.style(dijit.byId('multipleUpdateColorButton').domNode, {
+            display : 'none'
+          });
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'none'
           });
@@ -12602,6 +12642,9 @@ function multipleUpadteSelectAtribute(value) {
           });
         } else if (dataType == "date" || dataType=="datetime") {
           filterType="date";
+          dojo.style(dijit.byId('multipleUpdateColorButton').domNode, {
+            display : 'none'
+          });
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'none'
           });
@@ -12644,6 +12687,9 @@ function multipleUpadteSelectAtribute(value) {
             dojo.byId('multipleUpdateOperateur').insertAdjacentElement('afterbegin',spanVal);
           }
           dojo.byId('multipleUpdateOperateur').visibility = 'hidden';
+          dojo.style(dijit.byId('multipleUpdateColorButton').domNode, {
+            display : 'none'
+          });
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'none'
           });
@@ -12669,6 +12715,9 @@ function multipleUpadteSelectAtribute(value) {
           });
         }else {
           filterType="text";
+          dojo.style(dijit.byId('multipleUpdateColorButton').domNode, {
+            display : 'none'
+          });
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'block'
           });
@@ -12699,6 +12748,9 @@ function multipleUpadteSelectAtribute(value) {
         }
       },
       onError : function(err) {
+        dojo.style(dijit.byId('multipleUpdateColorButton').domNode, {
+          display : 'none'
+        });
         dojo.byId('multipleUpdateOperateur').visibility = 'hidden';
         dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
           display : 'none'
@@ -12735,6 +12787,9 @@ function multipleUpadteSelectAtribute(value) {
     
   } else {
     dojo.byId('multipleUpdateOperateur').visibility = 'hidden';
+    dojo.style(dijit.byId('multipleUpdateColorButton').domNode, {
+      display : 'none'
+    });
     dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
       display : 'none'
     });

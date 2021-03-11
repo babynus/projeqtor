@@ -64,11 +64,14 @@ if (!$selection or count($selectList)==0) {
 }
 $isLongText=RequestHandler::getValue("isLongText");
 $newValue='';
+$fieldSearch=$field;
+$obj= new $className();
+if(strpos($field, 'Element_'))$fieldSearch=substr($field,strpos($field, 't_')+2);
 if(trim(RequestHandler::getValue('newMultipleUpdateValue'))!=''){
   $newValue=RequestHandler::getValue('newMultipleUpdateValue');
 }elseif (trim(RequestHandler::getValue('multipleUpdateTextArea'))!=''){
   $newValue=RequestHandler::getValue('multipleUpdateTextArea');
-}elseif (!empty(RequestHandler::getValue('multipleUpdateValueList'))){
+}elseif (!empty(RequestHandler::getValue('multipleUpdateValueList')) and isForeignKey($fieldSearch, $obj)){
   $lst=RequestHandler::getValue('multipleUpdateValueList');
   foreach ($lst as $idL=>$valList){
     $newValue=$valList;
@@ -77,11 +80,12 @@ if(trim(RequestHandler::getValue('newMultipleUpdateValue'))!=''){
 	$newValue=RequestHandler::getValue('multipleUpdateValueDate');
 }elseif (trim(RequestHandler::getValue('multipleUpdateValueDate')) and trim(RequestHandler::getValue('multipleUpdateValueTime'))){
   $newValue=RequestHandler::getValue('multipleUpdateValueDate').' '.substr(RequestHandler::getValue('multipleUpdateValueTime'),1);
-}elseif (RequestHandler::getValue('multipleUpdateValueCheckbox')){
-  if(RequestHandler::getValue('multipleUpdateValueCheckbox')=='on')$newValue=1;
+}elseif ($obj->getDataType($fieldSearch)=='int' and $obj->getDataLength ( $fieldSearch )==1 ){
+  if(RequestHandler::getValue('multipleUpdateValueCheckbox') and RequestHandler::getValue('multipleUpdateValueCheckbox')=='on')$newValue=1;
   else $newValue=0;
+}else if (trim(RequestHandler::getValue('multipleUpdateColorButtonInput'))!=''){
+  $newValue=RequestHandler::getValue('multipleUpdateColorButtonInput');
 }
-
 if($field=="idActivity"){
   $act=new Activity($newValue);
   $idProjAct=$act->idProject;
@@ -297,11 +301,15 @@ foreach ($selectList as $id) {
 	    $newValue="<br>".$newValue;
 	    $item->$field=$item->$field.$newValue;
 	  }
-	  
 	}else if((strpos($field, 'Element_') and property_exists(substr($field,0, strpos($field, 't_')+1),substr($field,strpos($field, 't_')+2)))){
 	   $subElement=substr($field,0, strpos($field, 't_')+1);
 	   $fieldElment=substr($field, strpos($field, 't_')+2);
-        $item->$subElement->$fieldElment=$newValue;
+	   if($fieldElment!="fixPlanning" and $fieldElment!="paused"){
+	     $item->$subElement->$fieldElment=$newValue;
+	   }else{
+	     $item->$fieldElment=$newValue;
+	   }
+        
 	}else{
 	  echo '<td><span class="messageWARNING" >' . i18n($className) . " #" . htmlEncode($item->id) . ' '.i18n('nonExistentFields'). ' '.$field.'</span></td>';
 	  continue;
