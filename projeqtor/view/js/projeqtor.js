@@ -8185,7 +8185,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
           newSubTask=subTaskCreat.cloneNode(true),
             imgGrab=document.createElement('img');
   
-  imgGrab.setAttribute('style','width:7px;top: 10px;position: relative;');
+  imgGrab.setAttribute('style','width:7px;top: 4px;position: relative;');
   imgGrab.setAttribute('src','css/images/iconDrag.gif');
   newSubTask.id=refType+"_"+refId+"_subTaskRow_"+id;
   newSubTask.setAttribute('class','dojoDndItem');
