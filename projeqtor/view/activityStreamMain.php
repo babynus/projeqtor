@@ -34,7 +34,7 @@ require_once "../tool/projeqtor.php";
 	<div dojoType="dijit.layout.ContentPane" id="activityStreamParameterDiv" class="listTitle" style="z-index: 3; overflow: visible;width:100%;height:<?php echo (isNewGui())?'126':'125';?>px;" region="top">
 	  <?php include "../view/activityStreamParameter.php";?>
   </div>
-	<div dojoType="dijit.layout.ContentPane" id="activityStreamListDiv" region="center" style="overflow-y:overlay;width:100%;overflow-y:hidden;">
+	<div dojoType="dijit.layout.ContentPane" id="activityStreamListDiv" region="center" style="overflow-y:overlay;width:100%;overflow-y:hidden;z-index:999">
 	  <?php include "../view/activityStreamList.php";?>
 	</div>
 </div>

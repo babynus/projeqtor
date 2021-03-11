@@ -610,7 +610,7 @@ a, a:visited {
     transition: all 0.3s ease-in-out;
 }
 .streamLink:hover {
-  color: #ffffff;
+  color: #ffffff !important;
   cursor:pointer;
   background-color: #e97b2c
 }
