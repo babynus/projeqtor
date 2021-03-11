@@ -148,7 +148,7 @@ class SubTask extends SqlElement {
         $colorPrio=$prioSubTask->color;
         echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'"  >';
         echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" type="hidden" />';
-        echo    '<td  class="dojoDndHandle handleCursor todoListTab"  style="text-align: center;"><img style="width:7px;top: 10px;position: relative;" src="css/images/iconDrag.gif"></td>';
+        echo    '<td  class="dojoDndHandle handleCursor todoListTab"  style="text-align: center;"><img style="width:7px;top:4px;position: relative;" src="css/images/iconDrag.gif"></td>';
         echo    '<td class="todoListTab" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
         echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  value="'. htmlEncode($subTask->name).'">';
         echo    '</td>';
