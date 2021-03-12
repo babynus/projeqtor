@@ -8227,10 +8227,11 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   sort.setAttribute('value',order);
   prev.setAttribute('style', 'display:none;');
   next.setAttribute('style', 'display:block;');
-  prev.setAttribute('onclcik','nextSlides("prev",'+id+',"'+refType+'"'+refId+');');
-  next.setAttribute('onclick','nextSlides("next",'+id+',"'+refType+'",'+refId+');');
+  prev.setAttribute('onclick','nextSlides(\'prev\','+id+',\''+refType+'\','+refId+');');
+  next.setAttribute('onclick','nextSlides(\'next\','+id+',\''+refType+'\','+refId+');');
   grabDiv.insertAdjacentElement('afterbegin',imgGrab);
   subTaskCreat.insertAdjacentElement('beforebegin',newSubTask );
+  
   
   var newFilterPrio=new dijit.form.FilteringSelect({
     id: refType+'_'+refId+"_priorityNewSubTask_"+id,
@@ -8258,12 +8259,13 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   }, refType+'_'+refId+"_nameNewSubTask_"+id);
   
   dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value='';
-  dojo.setAttr(refType+'_'+refId+'_nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',"'+refType+'",'+refId+')');
+  dojo.setAttr(refType+'_'+refId+'_nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',\''+refType+'\','+refId+')');
   dojo.connect(newFilterResource, 'onChange', function(value){updateSubTask(id,refType,refId,'false','true');}); 
   dojo.connect(newFilterPrio, 'onChange', function(value){updateSubTask(id,refType,refId,'true','flase');}); 
   dojo.connect(newFilterResource,'onMouseDown' , function(value){dijit.byId(this.name).toggleDropDown();});
   dojo.connect(newFilterPrio,'onMouseDown' , function(value){dijit.byId(this.name).toggleDropDown();});
   newFilterPrio.focus();
+  dojo.parser.parse(refType+'_'+refId+'_subTaskRow_'+id)
 }
 
 function nextSlides(op,id,refType,refId) {
