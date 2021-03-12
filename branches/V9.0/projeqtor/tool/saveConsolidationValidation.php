@@ -42,8 +42,6 @@ $lstCons=array();
 $lock=($mode=='Locked')?$month:"";
 $proj=new Project();
 $adminProjects=$proj->getAdminitrativeProjectList(true);
-debugLog("saveConsolidationValidation mpde=$mode, month=$month");
-debugLog($lstProj);
 //___get Recursive Sub Projects___//
 foreach ($lstProj as $id=>$val){  
   $val=(($mode =='validaTionCons' or $mode=='cancelCons') and $all=='false')?substr($val,6):$val;
@@ -81,8 +79,6 @@ foreach ($lstProj as $id=>$val){
     }
   }
 }
-debugLog("Step 2");
-debugLog($lstProj);
 //==============//
 if($mode =='validaTionCons'){ // create all consolidationValidation for save 
   $lstImpLocked=array();
@@ -98,7 +94,6 @@ if($mode =='validaTionCons'){ // create all consolidationValidation for save
 //         continue;
 //       }
 //     }
-    debugLog("Step 3");
     $habValidation=
     $cons->idProject=$projId;
     $idproj=$month.$projId;
