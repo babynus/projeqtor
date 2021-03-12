@@ -2625,8 +2625,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseout="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
         if (isNewGui() and !$comboDetail and $canListCol) echo ' onfocus="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
         echo ' >';
-        //debugLog("=> before call htmlDrawOptionForReference for $col, val=$val, critFld=$critFld, critVal=$critVal");
-        //if (substr($col,-16)=='ComponentVersion') {global $debugQuery; $debugQuery=true; } // debugLog("TO REMOVE")
+        //debugTraceLog("=> before call htmlDrawOptionForReference for $col, val=$val, critFld=$critFld, critVal=$critVal");
         if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
         }else if (($classObj=='SupplierContract' or $classObj=='ClientContract') and $col=='idContactContract' or $col=='idUnitContract' or $col=='idUnitNotice') {
@@ -2646,8 +2645,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if ($col=='idProduct' and !$obj->id and $obj->isAttributeSetToField($col, 'required')) $obj->idProduct=$next;
         echo $colScript;
-        //debugLog("<= after call htmlDrawOptionForReference");
-        //if (substr($col,-16)=='ComponentVersion') {global $debugQuery; $debugQuery=false; } // debugLog("TO REMOVE")
+        //debugTraceLog("<= after call htmlDrawOptionForReference");
         echo '</select>';
         if (isNewGui() and !$comboDetail and $canListCol) echo '<span style="width:1px;position:relative;">';
         if (isNewGui() and !$comboDetail and $canListCol) echo '<div id="toolbar_'.$fieldId.'" class="fade-in dijitTextBox toolbarForSelect" style=""';
