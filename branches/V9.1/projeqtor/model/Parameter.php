@@ -1373,10 +1373,14 @@ class Parameter extends SqlElement {
   	  setSessionValue('globalParametersArray', array());
       $p=new Parameter();
       $crit=" (idUser is null and idProject is null)";
+      enableCatchErrors();
+      enableSilentErrors();
       $lst=$p->getSqlElementsFromCriteria(null, false, $crit);
       foreach ($lst as $param) {
         setSessionTableValue('globalParametersArray', $param->parameterCode, $param->parameterValue);
       }
+      disableCatchErrors();
+      disableSilentErrors();
   	}
   	if (sessionTableValueExist('globalParametersArray', $code)) {
   		return getSessionTableValue('globalParametersArray', $code);
