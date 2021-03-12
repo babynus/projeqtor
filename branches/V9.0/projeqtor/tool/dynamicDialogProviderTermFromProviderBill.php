@@ -26,12 +26,17 @@
 $providerBillId = RequestHandler::getId('providerBillId');
 $provBill = new ProviderBill($providerBillId);
 $obj=new ProviderTerm();
-$critFld ='idProviderBill';
-$critVal = null;
+$critFld=array();
+$critVal=array();
+$critFld[] ='idProviderBill';
+$critVal[] = null;
+$critFld[] ='idProject';
+$critVal[] = $provBill->idProject;
 if($provBill->taxPct > 0 ){
-  $critFld=array($critFld, 'taxPct');
-  $critVal=array($critVal, $provBill->taxPct);
+  $critFld[]='taxPct';
+  $critVal[]=$provBill->taxPct;
 }
+
 ?>
   <table>
     <tr>

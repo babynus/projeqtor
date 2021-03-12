@@ -2364,7 +2364,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $critVal=null;
         $valStore='';
         if ($col=='idResource' or substr($col,-12)=='__idResource' or $col=='idAffectable' or $col=="idAccountable" 
-         or $col=='idContact'  or $col=='idUser' or $col=='idProjectExpense'
+         or $col=='idContact'  or $col=='idUser' or $col=='idProjectExpense' or $col=='idProjectExpense'
          or $col=='idActivity' or $col=='idMilestone' or $col=='idTicket' or $col=='idTestCase' or $col=='idRequirement' 
          or $col=='idProduct' or $col=='idComponent' or $col=='idProductOrComponent' 
          or $col=='idProductVersion' or $col=='idComponentVersion' or $col=='idVersion' or $col=='idOriginalVersion' or $col=='idTargetVersion' 
@@ -2388,7 +2388,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
               }
             }
           }
-        }
+        } 
         
 // MTY - LEAVE SYSTEM
         // Restrict list to Employee (isEmployee=1) if col is idEmployee
