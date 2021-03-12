@@ -122,8 +122,8 @@ class Sql {
 	      	  . ((isset($arrayTrace['file']))?']':'')
 	      	  );
 	      }
-	      return false;
     	}
+    	return false;
     }
     disableCatchErrors();
     // store informations about last query
@@ -131,7 +131,7 @@ class Sql {
     self::$lastQueryResult=$result;
     self::$lastQueryType= (is_resource($result)) ? "SELECT" : "UPDATE";
     //if (strtoupper(substr($sqlRequest,0,6)=='SELECT')) self::$lastQueryType='SELECT';
-    self::$lastQueryNbRows = (self::$lastQueryType=="SELECT") ? $result->rowCount() : $result->rowCount();
+    self::$lastQueryNbRows = (self::$lastQueryType=="SELECT" and $checkResult=="OK") ? $result->rowCount() : $result->rowCount();
     self::$lastQueryNewid=null;
     if (self::$lastQueryType=="UPDATE") {
       if (self::isPgsql()) { // Specific update of sequence in pgsql mode.

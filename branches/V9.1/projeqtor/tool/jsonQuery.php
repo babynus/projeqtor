@@ -240,6 +240,10 @@
             $queryWhere.= ($queryWhere=='')?'':' and ';
             $queryWhere.= $table . ".isLeaveMngProject = 0 ";
         }
+//         if ($objectClass=='Activity' and !Project::isProjectLeaveVisible()) {
+//           $queryWhere.= ($queryWhere=='')?'':' and ';
+//           $queryWhere.= $table . ".idProject !=".Project::getLeaveProjectId();
+//         }
     }
 // MTY - LEAVE SYSTEM
     // --- Restrict to allowed projects : for Projects list

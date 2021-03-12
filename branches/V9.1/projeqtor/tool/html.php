@@ -523,6 +523,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
           $restrictArray=$lstChild;
         }
       }
+      if (! Project::isProjectLeaveVisible()) $excludeArray[Project::getLeaveProjectId()]='Leave';
       // end of $col=="idProject"
     } else if ($col=='idStatus') {
       // On list of Status, limit list depending on workflow

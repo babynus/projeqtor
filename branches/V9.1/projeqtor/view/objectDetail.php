@@ -527,6 +527,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   } else {
     $table=SqlList::getList('Project', 'name', null);
     $restrictArray=array();
+    if (! Project::isProjectLeaveVisible()) $restrictArray=array(Project::getLeaveProjectId()=>'Leave');
     if (!$user->_accessControlVisibility) {
       $user->getAccessControlRights(); // Force setup of accessControlVisibility
     }

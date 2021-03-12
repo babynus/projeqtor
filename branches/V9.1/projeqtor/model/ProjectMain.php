@@ -437,6 +437,7 @@ private function setLeaveProject() {
  * @return boolean True if leave system is activ and user is administrator
 */
 static function isProjectLeaveVisible() {
+    return false;
     $user = getSessionUser();
     $ret = (($user->idProfile==1 and isLeavesSystemActiv())?true:false);
     return $ret;
