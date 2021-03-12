@@ -316,7 +316,7 @@ foreach ($projects as $id=>$name) {
   if($sumProj[$id] != 0)
   echo '<td style="width:'. (array_key_exists('idActivityType', $_REQUEST) ? ($colWidth * 3 / 4) : $colWidth) .'%" class="reportTableColumnHeader">' . htmlEncode($name) . '</td>';
 }
-
+echo '</tr>';
 $sum=0;
 $sumAct = 0;
 $count=0;
@@ -413,7 +413,7 @@ foreach ($resources as $idR=>$nameR) {
     }
   }
 }
-echo '<tr><td class="reportTableHeader" colspan = ' . ($showDetail ? 3 : 2) . '>' . i18n('sum') . '</td>';
+echo '<tr><td class="reportTableHeader" colspan="' . ($showDetail ? 3 : 2) . '">' . i18n('sum') . '</td>';
 if ($nbProj == 0)
    echo '<td class="reportTableHeader">' . "" . '</td>';
 
