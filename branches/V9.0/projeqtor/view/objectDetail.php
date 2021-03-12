@@ -2605,7 +2605,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseout="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
         if (isNewGui() and !$comboDetail and $canListCol) echo ' onfocus="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
         echo ' >';
-        debugLog("=> before call htmlDrawOptionForReference for $col, val=$val, critFld=$critFld, critVal=$critVal");
         if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
         }else if (($classObj=='SupplierContract' or $classObj=='ClientContract') and $col=='idContactContract' or $col=='idUnitContract' or $col=='idUnitNotice') {
