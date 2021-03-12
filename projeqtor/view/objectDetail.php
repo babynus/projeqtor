@@ -2382,7 +2382,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $critFld=null;
         $critVal=null;
         $valStore='';
-        if ($col=='idResource' or substr($col,-12)=='__idResource' or $col=='idAffectable' or $col=="idAccountable" or $col=='idActivity' or $col=='idProduct' or $col=='idComponent' or $col=='idProductOrComponent' or $col=='idProductVersion' or $col=='idComponentVersion' or $col=='idVersion' or $col=='idOriginalVersion' or $col=='idTargetVersion' or $col=='idOriginalProductVersion' or $col=='idTargetProductVersion' or $col=='idOriginalComponentVersion' or $col=='idTargetComponentVersion' or $col=='idTestCase' or $col=='idRequirement' or $col=='idContact' or $col=='idMilestone' or $col=='idTicket' or $col=='idUser' or $col=='id'.$classObj.'Type') {
+        if ($col=='idResource' or substr($col,-12)=='__idResource' or $col=='idAffectable' or $col=="idAccountable" 
+         or $col=='idContact'  or $col=='idUser' or $col=='idProjectExpense'
+         or $col=='idActivity' or $col=='idMilestone' or $col=='idTicket' or $col=='idTestCase' or $col=='idRequirement' 
+         or $col=='idProduct' or $col=='idComponent' or $col=='idProductOrComponent' 
+         or $col=='idProductVersion' or $col=='idComponentVersion' or $col=='idVersion' or $col=='idOriginalVersion' or $col=='idTargetVersion' 
+         or $col=='idOriginalProductVersion' or $col=='idTargetProductVersion' or $col=='idOriginalComponentVersion' or $col=='idTargetComponentVersion' 
+          or $col=='id'.$classObj.'Type') {
           if ($col=='idContact' and property_exists($obj, 'idClient') and $obj->idClient) {
             $critFld='idClient';
             $critVal=$obj->idClient;
@@ -2618,7 +2624,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseout="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
         if (isNewGui() and !$comboDetail and $canListCol) echo ' onfocus="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
         echo ' >';
-        //debugLog("=> before call htmlDrawOptionForReference for $col");
+        //debugLog("=> before call htmlDrawOptionForReference for $col, val=$val, critFld=$critFld, critVal=$critVal");
         //if (substr($col,-16)=='ComponentVersion') {global $debugQuery; $debugQuery=true; } // debugLog("TO REMOVE")
         if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
