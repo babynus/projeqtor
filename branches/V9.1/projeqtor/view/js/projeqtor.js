@@ -8388,7 +8388,7 @@ function showSubTask(objectClass) {
 
 function reorderSubTask (tab){
   var param="";
-  var nodeList=dijit.byId(tab).node.childNodes[3].childNodes;
+  var nodeList=dijit.byId(tab).childNodes[3].childNodes;
   var lst=dijit.byId(tab).node;
   var info=dijit.byId(tab).id.substr(11);
   var refType=info.substr(0,info.indexOf('_'));
