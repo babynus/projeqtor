@@ -140,15 +140,17 @@ for ($i = 1; $i<=4; $i++){
 		$point[$i-1]=(count($arrayStatus[$i])/$totalDocSum)*100;
 		$array = $point;
 		$idName = SqlList::getNameFromId('ApprovalStatus', $i);
+		$name = $idName.' '.round($array[$i-1],0).'%';
+		$dataSet2->addPoints($array,$name);
 	}else{
 	  unset($tabColor[$i]);
 	}
 }
-$dataSet2->addPoints($array,'status');
 $arrayName = array();
 for ($i = 1; $i<=4; $i++){
 	$idName = SqlList::getNameFromId('ApprovalStatus', $i);
-	array_push($arrayName, $idName);
+	$name = $idName.' '.round($array[$i-1],0).'%';
+	array_push($arrayName, $name);
 }
 $dataSet2->addPoints($arrayName,"label");
 $dataSet2->setAbscissa("label");
@@ -169,7 +171,10 @@ $graph2->setFontProperties(array("FontName"=>getFontLocation("verdana"),"FontSiz
 $formSettings = array("R"=>255,"G"=>255,"B"=>255,"Alpha"=>0,"Surrounding"=>0);
 $graph2->setShadow(TRUE,$formSettings);
 $pieChart->draw2DPie(300,($height/2)+7,array("Radius"=>125,"Border"=>FALSE,"DrawLabels"=>TRUE));
-$pieChart->drawPieLegend(300,20,array("Style"=>LEGEND_BOX,"Mode"=>LEGEND_VERTICAL));
+$pieChart->drawPieLegend(300,20,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_FAMILY_BOX ,
+    "R"=>255,"G"=>255,"B"=>255,"Alpha"=>100,
+    "FontR"=>55,"FontG"=>55,"FontB"=>55,
+    "Margin"=>5));
 $imgName2=getGraphImgName("ApprovalStatusPie");
 
 $graph2->Render($imgName2);
