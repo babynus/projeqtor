@@ -32,12 +32,15 @@ use Mpdf\Utils\Arrays;
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
   scriptLog('   ->/view/imputationValidationMain.php');  
+ $destinationHeight=RequestHandler::getValue('destinationHeight');
+ $destinationHeight=(isNewGui())?$destinationHeight-75:$destinationHeight-70;
+ debugLog($destinationHeight);
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="SubTask" />
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top"  style="height:<?php if(isNewGui()){?>70px;<?php }else{?>64px;<?php }?>">
    <?php  include 'viewAllSubTaskList.php' ;?>
   </div>
-  <div id="subTaskListDiv" name="subTaskListDiv" dojoType="dijit.layout.ContentPane" region="center"  style="<?php if(isNewGui()){?>max-height:95%;overflow-y: auto;<?php }else{?>height:95%;overflow-y:scroll;<?php }?>" >
+  <div id="subTaskListDiv" name="subTaskListDiv" dojoType="dijit.layout.ContentPane" region="center"  style="margin-bottom:5%;<?php if(isNewGui()){?>max-height:<?php echo $destinationHeight;?>px;height:<?php echo $destinationHeight;?>px;overflow-y: auto;<?php }else{?>height:95%;overflow-y:scroll;<?php }?>" >
     <form dojoType="dijit.form.Form" name="SubTaskForm" id="SubTaskForm"  method="Post" >
       <div  align="center" style="margin-top:20px;margin-bottom:30px; overflow-y:auto; width:100%;">
         <?php 
