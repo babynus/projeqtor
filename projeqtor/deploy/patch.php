@@ -20,7 +20,7 @@
 <body>
 <?php
 
-$version="V9.0";
+$version="V9.1";
 $nbDays=1; // days
 if (isset($_REQUEST['nbDays'])) $nbDays=intval($_REQUEST['nbDays']);
 if ($nbDays<1) $nbDays=1;
