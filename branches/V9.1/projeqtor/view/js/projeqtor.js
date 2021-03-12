@@ -8265,7 +8265,6 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   dojo.connect(newFilterResource,'onMouseDown' , function(value){dijit.byId(this.name).toggleDropDown();});
   dojo.connect(newFilterPrio,'onMouseDown' , function(value){dijit.byId(this.name).toggleDropDown();});
   newFilterPrio.focus();
-  dojo.parser.parse(refType+'_'+refId+'_subTaskRow_'+id)
 }
 
 function nextSlides(op,id,refType,refId) {
@@ -8390,11 +8389,12 @@ function showSubTask(objectClass) {
 
 function reorderSubTask (tab){
   var param="";
-  var nodeList=dijit.byId(tab).childNodes[3].childNodes;
-  var lst=dijit.byId(tab).node;
-  var info=dijit.byId(tab).id.substr(11);
-  var refType=info.substr(0,info.indexOf('_'));
-  var refId=info.substr(info.indexOf('_')+1);
+  var view=dojo.byId('subTaskView').value;
+  var nodeList=(view=="Global")?dijit.byId(tab).childNodes[2].childNodes:dijit.byId(tab).childNodes[1].childNodes,
+            lst=dijit.byId(tab).node,
+              info=dijit.byId(tab).id.substr(11),
+                refType=info.substr(0,info.indexOf('_')),
+                  refId=info.substr(info.indexOf('_')+1);
   for (i=0; i < nodeList.length-1; i++) {
     var domNode=nodeList[i];
     var trunc=domNode.id.indexOf('subTaskRow_')+11;
