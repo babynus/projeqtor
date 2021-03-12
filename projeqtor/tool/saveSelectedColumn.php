@@ -49,6 +49,28 @@ if ($action=='status') {
   } else {
   	$cs->hidden=($status=='hidden')?1:0;
     $cs->save();
+    //Gautier #re-order column sortOrder
+    $columnSelector = new ColumnSelector();
+    $order = " sortOrder ASC ";
+    $csListNotHidden = $columnSelector->getSqlElementsFromCriteria(array('idUser'=>$user->id,'objectClass'=>$cs->objectClass),null,null,$order);
+    $tabHidden = array();
+    $tabNotHidden = array();
+    $finalTab = array();
+    foreach ($csListNotHidden as $obj){
+      if($obj->hidden){
+        $tabHidden[]= $obj->id;
+      }else{
+        $tabNotHidden[]= $obj->id;
+      }
+    }
+    $finalTab = array_merge($tabNotHidden, $tabHidden);
+    foreach ($finalTab as $id=>$value){
+       $cs = new ColumnSelector($value);
+       if($cs->sortOrder != $id+1){
+         $cs->sortOrder = $id+1;
+         $cs->save(); 
+       }
+    }
   }
 } else if ($action=='reset') {
   if (! array_key_exists('objectClass',$_REQUEST)) {
