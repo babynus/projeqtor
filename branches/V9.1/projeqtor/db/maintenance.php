@@ -1090,7 +1090,9 @@ if (beforeVersion($currVersion,"V9.0.5") and $currVersion!='V0.0.0') {
 if (beforeVersion($currVersion,"V9.0.6")) {
   $nbErrors+=runScript('V9.0.6.lm');
 }
-
+if (beforeVersion($currVersion,"V9.1.0") and Sql::isMysql()) {
+  $nbErrors+=runScript('V9.1.0.mysql');
+}
 if (beforeVersion($currVersion,"V9.1.0") and $currVersion!='V0.0.0') {
   traceLog("update document idApprovalStatus [9.1.0]");
   $doc = new Document(); $docTable = $doc->getDatabaseTableName();
