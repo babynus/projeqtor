@@ -61,7 +61,7 @@
   $objectClass=$_REQUEST['objectClass'];
   Security::checkValidClass($objectClass);
   $obj=new $objectClass();
-  
+  $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 ?>
 
 
@@ -178,9 +178,9 @@
           </script>
           <input type="hidden" id="selection" name="selection" value=""/>
           <input type="hidden" id="dataTypeSelected"  />
-          <div style="width: 100%; padding-top:30px;" >
+          <div style="width: 100%; padding-top:10px;" >
            <table style="width:100%" >
-             <tr style="height:50px">
+             <tr style="height:30px">
               <td style="text-align-last:center;"><div><span style="position:relative;"><?php echo i18n("forField");?></span></div></td>
              </tr>
              <tr>
@@ -231,6 +231,8 @@
                     </button>
                 </div>
                 <input id="newMultipleUpdateValue" name="newMultipleUpdateValue" value=""    dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
+                <div id="newMultipleUpdateValueNum" name="newMultipleUpdateValueNum" value=""    dojoType="dijit.form.NumberTextBox"  constraints="{min:0,max:999}" 
+                 class="input" hasDownArrow="true"style="width:320 px;display:none;"><?php echo $keyDownEventScript;?></div>
                 <input id="isLongText" name="isLongText" value=""  dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
                 <div>
                 <?php if (isNewGui()) {?>
@@ -283,7 +285,7 @@
       </div>
       <div dojoType="dijit.layout.ContentPane" id="resultDivMultiple" 
       region="<?php echo ($layout=='vertical')?'bottom':'right';?>" class="listTitle multipleResultDiv" 
-      style="<?php echo ($layout=='vertical')?'height:60%;border-top:1px solid var(--color-detail-header-border);':'width:38%;border-left:1px solid var(--color-detail-header-border);';?>">
+      style="<?php echo ($layout=='vertical')?'height:50%;border-top:1px solid var(--color-detail-header-border);':'width:38%;border-left:1px solid var(--color-detail-header-border);';?>">
          <span class="labelMessageEmptyArea" style=""><?php echo i18n('resultArea');?></span>
       </div>
     </div>

@@ -290,6 +290,7 @@ foreach ($selectList as $id) {
 	}
 	
 	if(property_exists($item, $field)){
+	  debugLog('yes');
 	  if($isLongText!="true"){
 	    if($field=="idActivity" and property_exists($className, "idProject") and $item->idProject!=$idProjAct){
 	      if($className!="Ticket" or ($className=="Ticket" and  $item->WorkElement->realWork==0)){
@@ -301,7 +302,7 @@ foreach ($selectList as $id) {
 	    $newValue="<br>".$newValue;
 	    $item->$field=$item->$field.$newValue;
 	  }
-	}else if((strpos($field, 'Element_') and property_exists(substr($field,0, strpos($field, 't_')+1),substr($field,strpos($field, 't_')+2)))){
+	}else if (trim(strpos($field, 'Element_'))!="" and property_exists(substr($field,0, strpos($field, 't_')+1),substr($field,strpos($field, 't_')+2))){
 	   $subElement=substr($field,0, strpos($field, 't_')+1);
 	   $fieldElment=substr($field, strpos($field, 't_')+2);
 	   if($fieldElment!="fixPlanning" and $fieldElment!="paused"){
@@ -310,7 +311,7 @@ foreach ($selectList as $id) {
 	     $item->$fieldElment=$newValue;
 	   }
         
-	}else{
+	} else{
 	  echo '<td><span class="messageWARNING" >' . i18n($className) . " #" . htmlEncode($item->id) . ' '.i18n('nonExistentFields'). ' '.$field.'</span></td>';
 	  continue;
 	}

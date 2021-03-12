@@ -12465,6 +12465,9 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'none'
           });
+          dojo.style(dijit.byId('newMultipleUpdateValueNum').domNode,{
+            display : 'none'
+          });
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
             display : 'none'
           });
@@ -12498,6 +12501,46 @@ function multipleUpadteSelectAtribute(value) {
           });
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'none'
+          });
+          dojo.style(dijit.byId('newMultipleUpdateValueNum').domNode,{
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('showDetailInMultipleUpdate').domNode, {
+            display : 'none'
+          });
+          if (dijit.byId('multipleUpdateValueCheckboxSwitch')) { 
+            dojo.style(dijit.byId('multipleUpdateValueCheckboxSwitch').domNode, {
+              display : 'none'
+            });
+            dijit.byId('multipleUpdateValueCheckbox').set('value', 'off');
+          } else {
+            dojo.style(dijit.byId('multipleUpdateValueCheckbox').domNode, {
+              display : 'none'
+            });
+            dijit.byId('multipleUpdateValueCheckbox').set('checked', '');
+          }
+          dojo.style(dijit.byId('multipleUpdateValueDate').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('multipleUpdateValueTime').domNode, {
+            display : 'none'
+          });
+        } else if (dataType == "numeric") {
+          filterType="numeric";
+          dojo.style(dijit.byId('multipleUpdateColorButton').domNode, {
+            display : 'block'
+          });
+          dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('newMultipleUpdateValueNum').domNode,{
+            display : 'block'
           });
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
             display : 'none'
@@ -12615,6 +12658,9 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'none'
           });
+          dojo.style(dijit.byId('newMultipleUpdateValueNum').domNode,{
+            display : 'none'
+          });
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
             display : 'block'
           });
@@ -12646,6 +12692,9 @@ function multipleUpadteSelectAtribute(value) {
             display : 'none'
           });
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('newMultipleUpdateValueNum').domNode,{
             display : 'none'
           });
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
@@ -12693,6 +12742,9 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'none'
           });
+          dojo.style(dijit.byId('newMultipleUpdateValueNum').domNode,{
+            display : 'none'
+          });
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
             display : 'none'
           });
@@ -12721,7 +12773,11 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'block'
           });
+          dojo.style(dijit.byId('newMultipleUpdateValueNum').domNode,{
+            display : 'none'
+          });
           dijit.byId('newMultipleUpdateValue').reset();
+          dijit.byId('newMultipleUpdateValueNum').reset();
           dojo.style(dijit.byId('multipleUpdateValueList').domNode, {
             display : 'none'
           });
@@ -12755,6 +12811,9 @@ function multipleUpadteSelectAtribute(value) {
         dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
           display : 'none'
         });
+        dojo.style(dijit.byId('newMultipleUpdateValueNum').domNode,{
+          display : 'none'
+        });
         dojo.style(dijit.byId('newMultipleUpdateValueueList').domNode, {
           display : 'none'
         });
@@ -12778,6 +12837,7 @@ function multipleUpadteSelectAtribute(value) {
         // hideWait();
       }
     });
+    dijit.byId('newMultipleUpdateValueNum').reset();
     dijit.byId('newMultipleUpdateValue').reset();
     dijit.byId('multipleUpdateValueList').reset();
     dijit.byId('multipleUpdateValueCheckbox').reset();
@@ -12791,6 +12851,9 @@ function multipleUpadteSelectAtribute(value) {
       display : 'none'
     });
     dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
+      display : 'none'
+    });
+    dojo.style(dijit.byId('newMultipleUpdateValueNum').domNode,{
       display : 'none'
     });
     dojo.style(dijit.byId('multipleUpdateValueList').domNode, {

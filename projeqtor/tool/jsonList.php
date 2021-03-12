@@ -1,4 +1,5 @@
 <?PHP
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
 /**
  * * COPYRIGHT NOTICE *********************************************************
  *
@@ -1044,8 +1045,6 @@ function listFieldsForMultipleUpdate($obj, $nbRows,$pObj=false, $included = fals
   $extraReadonlyFields = $obj->getExtraReadonlyFields ( null, null, getSessionUser ()->getProfile () );
   foreach ( $obj as $col => $val ) {
     if ($col=='_Assignment') {
-      if ($nbRows > 0) echo ', ';
-      echo '{"id":"' . ($included ? get_class ( $obj ) . '_' : '') . 'assignedResource__idResourceAll' . '", "name":"' . i18n("assignedResource") . '", "dataType":"list"}';
       continue;
     }
     if($included and property_exists(get_class($pObj), $col) and ! $pObj->isAttributeSetToField ( $col, 'hidden' ) and ! $pObj->isAttributeSetToField ( $col, 'readonly' ) and ! $pObj->isAttributeSetToField ( $col, 'calculated' ))continue;
@@ -1059,12 +1058,13 @@ function listFieldsForMultipleUpdate($obj, $nbRows,$pObj=false, $included = fals
       if($col=="color")$dataType="color";
       if ($dataType == 'int' and $dataLength == 1) {
         $dataType = 'bool';
+      }else if($col=="int"){
+        $dataType ="numeric";
       }  else if (isForeignKey($col, $obj)) {
         $dataType = 'list';
       }elseif ($dataType == 'varchar' and $dataLength >4000){
         $dataType = 'textarea';
       }
-      
       $colName = $obj->getColCaption ( $col );
       if (substr ( $col, 0, 9 ) == 'idContext') {
         $colName = SqlList::getNameFromId ( 'ContextType', substr ( $col, 9 ) );
