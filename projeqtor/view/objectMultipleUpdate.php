@@ -206,7 +206,7 @@
              </tr>
              <tr>
              <td >
-               <div id="divListElement" style="text-align:-webkit-center;">
+               <div id="divListElement" style="text-align:-webkit-center;tex-align:-moz-center;">
                 <textarea dojoType="dijit.form.Textarea" id="multipleUpdateTextArea" name="multipleUpdateTextArea" style="width:90%;min-width:300px;min-height:150px;font-size: 90%; background:none;display:none;" 
                 class="input" maxlength="4000" ></textarea>
                 <div style="margin-right: 18%;width: 60%;margin-left: 22%;">
@@ -265,11 +265,11 @@
              </td>
             </tr>
            <?php  //gautier #533
-            if(property_exists(get_class($obj), 'password') and securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=='YES'){?>
+            if(get_class($obj)=="User" and property_exists(get_class($obj), 'password') and securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=='YES'){?>
             <tr><td><div>&nbsp;</div></td></tr>
             <tr class="detail">
-              <td>
-                <button id="resetPassword" dojoType="dijit.form.Button" showlabel="true"'
+              <td style="text-align-last:center;">
+                <button id="resetPassword" dojoType="dijit.form.Button" showlabel="true"' 
                         class="generalColClass" title="<?php echo i18n('resetPassword');?>" >
                   <span><?php echo i18n('resetPassword');?></span>
                   <script type="dojo/connect" event="onClick" args="evt">

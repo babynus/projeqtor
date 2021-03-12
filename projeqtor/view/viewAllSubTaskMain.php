@@ -33,16 +33,16 @@ require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
   scriptLog('   ->/view/imputationValidationMain.php');  
  $destinationHeight=RequestHandler::getValue('destinationHeight');
- $destinationHeight=(isNewGui())?$destinationHeight-75:$destinationHeight-70;
+ $destinationHeight=(isNewGui())?$destinationHeight-115:$destinationHeight-110;
  debugLog($destinationHeight);
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="SubTask" />
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top"  style="height:<?php if(isNewGui()){?>70px;<?php }else{?>64px;<?php }?>">
    <?php  include 'viewAllSubTaskList.php' ;?>
   </div>
-  <div id="subTaskListDiv" name="subTaskListDiv" dojoType="dijit.layout.ContentPane" region="center"  style="margin-bottom:5%;<?php if(isNewGui()){?>max-height:<?php echo $destinationHeight;?>px;height:<?php echo $destinationHeight;?>px;overflow-y: auto;<?php }else{?>height:95%;overflow-y:scroll;<?php }?>" >
+  <div id="subTaskListDiv" name="subTaskListDiv" dojoType="dijit.layout.ContentPane" region="center"  style="height:100%;width:100%" >
     <form dojoType="dijit.form.Form" name="SubTaskForm" id="SubTaskForm"  method="Post" >
-      <div  align="center" style="margin-top:20px;margin-bottom:30px; overflow-y:auto; width:100%;">
+      <div  align="center" style="margin-bottom:35px;<?php if(isNewGui()){?>max-height:<?php echo $destinationHeight;?>px;height:<?php echo $destinationHeight;?>px;overflow-y: auto;<?php }else{?>height:95%;overflow-y:scroll;<?php }?>" >
         <?php 
         if(trim($idVersion)=='')$idVersion=0;
         if(trim($idResource)=='')$idVersion=0;

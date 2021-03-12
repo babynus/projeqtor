@@ -1043,16 +1043,29 @@ function listFieldsForMultipleUpdate($obj, $nbRows,$pObj=false, $included = fals
   if (method_exists($obj,'setAttributes')) $obj->setAttributes();
   $extraHiddenFields = $obj->getExtraHiddenFields ( null, null, getSessionUser ()->getProfile () );
   $extraReadonlyFields = $obj->getExtraReadonlyFields ( null, null, getSessionUser ()->getProfile () );
+  $proExist=property_exists(get_class($obj), "id".ucfirst(get_class($obj))."Type");
   foreach ( $obj as $col => $val ) {
     if ($col=='_Assignment') {
       continue;
     }
+    $colDisplay=true;
+    if($proExist and ($col =='idle' or $col =='done' or $col=="handled" or $col=="cancelled" )){
+      
+      $type= new Type();
+      $crit=array("scope"=>get_class($obj),"idle"=>"0");
+      $critArray=array("scope"=>get_class($obj),"lock".ucfirst($col)=>"1","idle"=>"0");
+      $lstLockType=$type->countSqlElementsFromCriteria($critArray);
+      $sumAllType=$type->countSqlElementsFromCriteria($crit);
+      if($lstLockType==$sumAllType){
+        $colDisplay=false;
+      }
+    }
     
     if($included and property_exists(get_class($pObj), $col) and ! $pObj->isAttributeSetToField ( $col, 'hidden' ) and ! $pObj->isAttributeSetToField ( $col, 'readonly' ) and ! $pObj->isAttributeSetToField ( $col, 'calculated' ))continue;
-    if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'readonly' ) 
-    and ! $obj->isAttributeSetToField ( $col, 'calculated' )  and $col != 'id' and $col != '_Note' and $col != '_wbs' and $col !='wbs' and $col !='idle' and $col !='done' and $col!="handled" and $col!="originId" and $col!="cancelled" 
-    and $col!='marginWorkPct' and $col!='marginCostPct'
-     and ! in_array($col,$extraHiddenFields) and ! in_array($col,$extraReadonlyFields)){
+    
+    if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'readonly' ) and $col!="originId"
+    and ! $obj->isAttributeSetToField ( $col, 'calculated' )  and $col != 'id' and $col != '_Note' and $col != '_wbs' and $col !='wbs' and $col!='marginWorkPct' and $col!='marginCostPct' and $col!="password"
+     and ! in_array($col,$extraHiddenFields) and ! in_array($col,$extraReadonlyFields) and $colDisplay){
       if ($nbRows > 0)echo ', ';
       $dataType = $obj->getDataType ( $col );
       $dataLength = $obj->getDataLength ( $col );
