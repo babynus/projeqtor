@@ -178,7 +178,7 @@ foreach ($res_att as $att) {
             echo '  <TD class="reportTableData" style="white-space:nowrap">' . $att->refId . '</TD>';
             echo '  <TD class="reportTableData">' . SqlList::getNameFromId($att->refType, $att->refId) . '</TD>';
             echo '  <TD class="reportTableData" style="white-space:nowrap">' . SqlList::getNameFromId('user', $att->idUser) . '</TD>';
-            echo '  <TD class="reportTableData" style="white-space:nowrap">' . $att->creationDate . '</TD>';
+            echo '  <TD class="reportTableData" style="white-space:nowrap">' . htmlFormatDateTime($att->creationDate) . '</TD>';
         echo '</TR>';
     }
 }
