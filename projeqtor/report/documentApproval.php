@@ -135,23 +135,25 @@ $tabColor[4] = array("R"=>46,"G"=>204,"B"=>113);
 $dataSet2=new pData;
 $array = array(0,0,0,0);
 for ($i = 1; $i<=4; $i++){
-	$idName = SqlList::getNameFromId('ApprovalStatus', $i);
-	$dataSet2->addPoints($idName,"status");
-}
-for ($i = 1; $i<=4; $i++){
 	if(isset($arrayStatus[$i])){
 		$point = $array;
 		$point[$i-1]=(count($arrayStatus[$i])/$totalDocSum)*100;
 		$array = $point;
 		$idName = SqlList::getNameFromId('ApprovalStatus', $i);
-		$dataSet2->addPoints($array,$idName);
 	}else{
 	  unset($tabColor[$i]);
 	}
 }
-$dataSet2->setAbscissa("status");
+$dataSet2->addPoints($array,'status');
+$arrayName = array();
+for ($i = 1; $i<=4; $i++){
+	$idName = SqlList::getNameFromId('ApprovalStatus', $i);
+	array_push($arrayName, $idName);
+}
+$dataSet2->addPoints($arrayName,"label");
+$dataSet2->setAbscissa("label");
 
-$graph2 = new pImage(300,$height,$dataSet2);
+$graph2 = new pImage(600,$height,$dataSet2);
 
 /* Draw the background */
 $graph2->Antialias = FALSE;
@@ -166,8 +168,8 @@ for ($i = 1; $i<=4; $i++){
 $graph2->setFontProperties(array("FontName"=>getFontLocation("verdana"),"FontSize"=>8));
 $formSettings = array("R"=>255,"G"=>255,"B"=>255,"Alpha"=>0,"Surrounding"=>0);
 $graph2->setShadow(TRUE,$formSettings);
-$pieChart->draw2DPie(150,($height/2)+7,array("Radius"=>150,"Border"=>FALSE));
-$pieChart->drawPieLegend(180,20,array("Style"=>LEGEND_BOX,"Mode"=>LEGEND_VERTICAL));
+$pieChart->draw2DPie(300,($height/2)+7,array("Radius"=>125,"Border"=>FALSE,"DrawLabels"=>TRUE));
+$pieChart->drawPieLegend(300,20,array("Style"=>LEGEND_BOX,"Mode"=>LEGEND_VERTICAL));
 $imgName2=getGraphImgName("ApprovalStatusPie");
 
 $graph2->Render($imgName2);
