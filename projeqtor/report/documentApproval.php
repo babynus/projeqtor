@@ -65,6 +65,11 @@ foreach ($result as $doc){
 
 if (! testGraphEnabled()) { return;}
 
+$tabColor[1] = array("R"=>166,"G"=>172,"B"=>175);
+$tabColor[2]= array("R"=>236,"G"=>112,"B"=>99);
+$tabColor[3] = array("R"=>241,"G"=>196,"B"=>15);
+$tabColor[4] = array("R"=>46,"G"=>204,"B"=>113);
+
 $dataSet=new pData;
 $array[1] = array(VOID,VOID,VOID,VOID);
 $array[2]= array(VOID,VOID,VOID,VOID);
@@ -81,6 +86,7 @@ for ($i = 1; $i<=4; $i++){
     $array[$i] = $point;
     $idName = SqlList::getNameFromId('ApprovalStatus', $i);
     $dataSet->addPoints($array[$i],$idName);
+    $dataSet->setPalette($idName,$tabColor[$i]);
   }
 }
 $dataSet->setAbscissa("status");
@@ -121,18 +127,46 @@ $graph->drawStackedBarChart();
 $imgName=getGraphImgName("ApprovalStatusBar");
 $graph->render($imgName);
 
-$graph2 = new pImage(300,$height,$dataSet);
+$tabColor[1] = array("R"=>166,"G"=>172,"B"=>175);
+$tabColor[2]= array("R"=>236,"G"=>112,"B"=>99);
+$tabColor[3] = array("R"=>241,"G"=>196,"B"=>15);
+$tabColor[4] = array("R"=>46,"G"=>204,"B"=>113);
+
+$dataSet2=new pData;
+$array = array(0,0,0,0);
+for ($i = 1; $i<=4; $i++){
+	$idName = SqlList::getNameFromId('ApprovalStatus', $i);
+	$dataSet2->addPoints($idName,"status");
+}
+for ($i = 1; $i<=4; $i++){
+	if(isset($arrayStatus[$i])){
+		$point = $array;
+		$point[$i-1]=(count($arrayStatus[$i])/$totalDocSum)*100;
+		$array = $point;
+		$idName = SqlList::getNameFromId('ApprovalStatus', $i);
+		$dataSet2->addPoints($array,$idName);
+	}else{
+	  unset($tabColor[$i]);
+	}
+}
+$dataSet2->setAbscissa("status");
+
+$graph2 = new pImage(300,$height,$dataSet2);
 
 /* Draw the background */
 $graph2->Antialias = FALSE;
 
-$pieChart = new pPie($graph2,$dataSet);
-
+$pieChart = new pPie($graph2,$dataSet2);
+for ($i = 1; $i<=4; $i++){
+  if(isset($tabColor[$i])){
+    $pieChart->setSliceColor($i-1,$tabColor[$i]);
+  }
+}
 /* Set the default font */
 $graph2->setFontProperties(array("FontName"=>getFontLocation("verdana"),"FontSize"=>8));
 $formSettings = array("R"=>255,"G"=>255,"B"=>255,"Alpha"=>0,"Surrounding"=>0);
 $graph2->setShadow(TRUE,$formSettings);
-$pieChart->draw3DPie(90,($height/2)+7,array("Border"=>FALSE));
+$pieChart->draw2DPie(150,($height/2)+7,array("Radius"=>150,"Border"=>FALSE));
 $pieChart->drawPieLegend(180,20,array("Style"=>LEGEND_BOX,"Mode"=>LEGEND_VERTICAL));
 $imgName2=getGraphImgName("ApprovalStatusPie");
 
