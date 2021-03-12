@@ -272,7 +272,9 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
   if ((!$user or !$user->id) and $page!='loginCheck.php' and $page!='getHash.php' and $page!='saveDataToSession.php') {
     $cookieHash=User::getRememberMeCookie();
     if (!empty($cookieHash)) {
+      enableSilentErrors();
       $cookieUser=SqlElement::getSingleSqlElementFromCriteria('User', array('cookieHash'=>$cookieHash));
+      disableSilentErrors();
       if ($cookieUser and $cookieUser->id and ! SSO::isEnabled()) {
         $user=$cookieUser;
         $loginSave=true;
