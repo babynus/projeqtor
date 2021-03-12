@@ -448,6 +448,7 @@ class ActivityPlanningElementMain extends PlanningElement {
     }
     
     if($this->paused==1){
+      if($this->fixPlanning!=1)$this->fixPlanning=1;
       $this->plannedStartDate=null;
       $this->plannedEndDate=null;
     }

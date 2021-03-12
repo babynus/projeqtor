@@ -69,6 +69,8 @@ $obj= new $className();
 if(strpos($field, 'Element_'))$fieldSearch=substr($field,strpos($field, 't_')+2);
 if(trim(RequestHandler::getValue('newMultipleUpdateValue'))!=''){
   $newValue=RequestHandler::getValue('newMultipleUpdateValue');
+}elseif (trim(RequestHandler::getValue('newMultipleUpdateValueNum'))!=''){
+  $newValue=RequestHandler::getValue('newMultipleUpdateValueNum');
 }elseif (trim(RequestHandler::getValue('multipleUpdateTextArea'))!=''){
   $newValue=RequestHandler::getValue('multipleUpdateTextArea');
 }elseif (!empty(RequestHandler::getValue('multipleUpdateValueList')) and isForeignKey($fieldSearch, $obj)){
@@ -288,9 +290,7 @@ foreach ($selectList as $id) {
         echo '<td><span class="messageWARNING" >' . i18n($className) . " #" . htmlEncode($item->id) . ' '.i18n('colLocked'). '</span></td>';
 		continue;
 	}
-	
-	if(property_exists($item, $field)){
-	  debugLog('yes');
+	if(property_exists($item, $field) and trim(strpos($field, 'Element_'))==""){
 	  if($isLongText!="true"){
 	    if($field=="idActivity" and property_exists($className, "idProject") and $item->idProject!=$idProjAct){
 	      if($className!="Ticket" or ($className=="Ticket" and  $item->WorkElement->realWork==0)){
@@ -302,6 +302,7 @@ foreach ($selectList as $id) {
 	    $newValue="<br>".$newValue;
 	    $item->$field=$item->$field.$newValue;
 	  }
+	  
 	}else if (trim(strpos($field, 'Element_'))!="" and property_exists(substr($field,0, strpos($field, 't_')+1),substr($field,strpos($field, 't_')+2))){
 	   $subElement=substr($field,0, strpos($field, 't_')+1);
 	   $fieldElment=substr($field, strpos($field, 't_')+2);
@@ -310,7 +311,6 @@ foreach ($selectList as $id) {
 	   }else{
 	     $item->$fieldElment=$newValue;
 	   }
-        
 	} else{
 	  echo '<td><span class="messageWARNING" >' . i18n($className) . " #" . htmlEncode($item->id) . ' '.i18n('nonExistentFields'). ' '.$field.'</span></td>';
 	  continue;
