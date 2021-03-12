@@ -231,8 +231,8 @@
                     </button>
                 </div>
                 <input id="newMultipleUpdateValue" name="newMultipleUpdateValue" value=""    dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
-                <div id="newMultipleUpdateValueNum" name="newMultipleUpdateValueNum" value=""    dojoType="dijit.form.NumberTextBox"  constraints="{min:0,max:999}" 
-                 class="input" hasDownArrow="true"style="width:320 px;display:none;"><?php echo $keyDownEventScript;?></div>
+                <div id="newMultipleUpdateValueNum" name="newMultipleUpdateValueNum" value=""    dojoType="dijit.form.NumberTextBox"  
+                 class="input" hasDownArrow="true"style="width:200px;display:none;"><?php echo $keyDownEventScript;?></div>
                 <input id="isLongText" name="isLongText" value=""  dojoType="dijit.form.TextBox"  style="width:320 px;display:none;" />
                 <div>
                 <?php if (isNewGui()) {?>

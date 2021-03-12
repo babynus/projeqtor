@@ -1047,23 +1047,24 @@ function listFieldsForMultipleUpdate($obj, $nbRows,$pObj=false, $included = fals
     if ($col=='_Assignment') {
       continue;
     }
+    
     if($included and property_exists(get_class($pObj), $col) and ! $pObj->isAttributeSetToField ( $col, 'hidden' ) and ! $pObj->isAttributeSetToField ( $col, 'readonly' ) and ! $pObj->isAttributeSetToField ( $col, 'calculated' ))continue;
     if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'readonly' ) 
-    and ! $obj->isAttributeSetToField ( $col, 'calculated' )  and $col != 'id' and $col != '_Note' and $col != '_wbs' and $col !='wbs' and $col !='idle' and $col !='done' and $col!="handled" and $col!="originId" and $col!="cancelled"
+    and ! $obj->isAttributeSetToField ( $col, 'calculated' )  and $col != 'id' and $col != '_Note' and $col != '_wbs' and $col !='wbs' and $col !='idle' and $col !='done' and $col!="handled" and $col!="originId" and $col!="cancelled" 
+    and $col!='marginWorkPct' and $col!='marginCostPct'
      and ! in_array($col,$extraHiddenFields) and ! in_array($col,$extraReadonlyFields)){
-      
       if ($nbRows > 0)echo ', ';
       $dataType = $obj->getDataType ( $col );
       $dataLength = $obj->getDataLength ( $col );
       if($col=="color")$dataType="color";
       if ($dataType == 'int' and $dataLength == 1) {
         $dataType = 'bool';
-      }else if($col=="int"){
-        $dataType ="numeric";
-      }  else if (isForeignKey($col, $obj)) {
+      }else if (isForeignKey($col, $obj)) {
         $dataType = 'list';
       }elseif ($dataType == 'varchar' and $dataLength >4000){
         $dataType = 'textarea';
+      }elseif ($dataType == 'int' and $dataLength >1){
+        $dataType = 'numeric';
       }
       $colName = $obj->getColCaption ( $col );
       if (substr ( $col, 0, 9 ) == 'idContext') {

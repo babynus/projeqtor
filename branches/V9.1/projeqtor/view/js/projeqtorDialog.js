@@ -12531,10 +12531,10 @@ function multipleUpadteSelectAtribute(value) {
           dojo.style(dijit.byId('multipleUpdateValueTime').domNode, {
             display : 'none'
           });
-        } else if (dataType == "numeric") {
-          filterType="numeric";
+        } else if (dataType == "decimal" || dataType=="numeric") {
+          filterType=dataType;
           dojo.style(dijit.byId('multipleUpdateColorButton').domNode, {
-            display : 'block'
+            display : 'none'
           });
           dojo.style(dijit.byId('newMultipleUpdateValue').domNode, {
             display : 'none'

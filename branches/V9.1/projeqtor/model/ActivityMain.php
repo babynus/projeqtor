@@ -594,6 +594,12 @@ class ActivityMain extends SqlElement {
       $oldIdProject = $old->idProject;
       $oldIdActivity = $old->idActivity;
       $oldTargetProductVersion = $old->idTargetProductVersion;
+      if($this->fixPlanning!=$old->fixPlanning and $this->fixPlanning!=$this->ActivityPlanningElement->fixPlanning){
+        $this->ActivityPlanningElement->fixPlanning=$this->fixPlanning;
+      }
+      if($this->ActivityPlanningElement->fixPlanning!=$old->ActivityPlanningElement->fixPlanning and $this->fixPlanning!=$this->ActivityPlanningElement->fixPlanning){
+        $this->fixPlanning=$this->ActivityPlanningElement->fixPlanning;
+      }
       if($old->fixPlanning and $old->ActivityPlanningElement->fixPlanning and !$this->ActivityPlanningElement->fixPlanning){
         $this->fixPlanning = 0;
         $this->ActivityPlanningElement->fixPlanning = 0;
@@ -634,10 +640,14 @@ class ActivityMain extends SqlElement {
         $this->paused=0;
         $this->fixPlanning=0;
       }
-      if($this->paused==1 and $this->paused!=$old->paused and  $this->ActivityPlanningElement->paused!=$this->paused){
-        $this->ActivityPlanningElement->paused=1;
-      }else if ($this->paused==0 and $this->paused!=$old->paused and $this->ActivityPlanningElement->paused!=$this->paused){
-        $this->ActivityPlanningElement->paused=0;
+      if($this->paused!=$old->paused and  $this->ActivityPlanningElement->paused!=$this->paused){
+        $this->ActivityPlanningElement->paused=$this->paused;
+      }else if( $this->ActivityPlanningElement->paused!=$old->ActivityPlanningElement->paused and $this->ActivityPlanningElement->paused!=$this->paused){
+        $this->paused=$this->ActivityPlanningElement->paused;
+      }
+      if ($this->paused!=$old->paused and $this->paused==1  and  $this->fixPlanning!=$this->paused){
+         $this->fixPlanning=1;
+        $this->ActivityPlanningElement->fixPlanning=1;
       }
     }
     
