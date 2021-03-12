@@ -133,8 +133,7 @@ class SubTask extends SqlElement {
     if (!$refresh) echo '<tr><td colspan="4"><div id="'.$refType.'_'.$refId.'_drawSubTask" dojotype="dijit.layout.ContentPane">';
     echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true" id="dndSubTask_'.$refType.'_'.$refId.'" jsId="dndSubTask_'.$refType.'_'.$refId.'" data-dojo-id="test">';
     if($gloablView )echo      '<input id="SubTaskIdResourceFilter_'.$refType.'_'.$refId.'" value="'.$idResource.'" type="hidden" />';
-    echo      '<input class="refType" value="'.$refType.'" type="hidden" />';
-    echo      '<input class="refId" value="'.$refId.'" type="hidden" />';
+    echo      '<input id="subTaskView" value="'.$view.'" type="hidden" />';
     echo  '<tr style="width:100%">';
     echo    '<td class="linkHeader" style="width:2%"></td>';
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:64%;':'width:52%;').'">'.i18n('colName').'</td>';
