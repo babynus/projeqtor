@@ -664,7 +664,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     	if ($selection) {
     	  $table[$selection]=SqlList::getNameFromId(substr($col,2), $selection);
     	}
-    	if (isset($restrictArray[$selection])) unset($restrictArray[$selection]);
+    	//if (isset($restrictArray[$selection])) unset($restrictArray[$selection]); // Code removed : if left, list of product is all products
     	// End ($col=='idProduct' or $col=='idComponent') and $critFld=='idProject'
     } else if ($col=='idComponent' and $critFld=='idProduct' and $critVal) {
       // Limit list of components depending on Product (only components linked to the product) 
@@ -792,7 +792,6 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     }
     // End of $obj not set
   }
-  
 // MTY - LEAVE SYSTEM    
     if ($col=="idEmployee") {
         // Leave Admin can see all employee => Nothing to do
