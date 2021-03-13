@@ -1238,6 +1238,10 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
 	padding:0;
 	height:10px;
 }
+td.noteData div div table tr td {
+	border: 1px solid;
+}
+
 @-moz-document url-prefix() {
     .colorNameData {
         height: 100%;
