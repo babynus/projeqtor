@@ -1320,7 +1320,7 @@ class ImputationLine {
       $inputWidthFooter=2*$inputWidth;
     }
     
-    echo '  <TD '.$colSpanFooter.' class="ganttLeftTitle" style="width: 132px;"'.(($print)?' colspan="2"':'').' ><span class="nobr" ><div id="totalWork" type="text" trim="true" disabled="true" dojoType="dijit.form.NumberTextBox" style="font-weight:bold;width: 95%; text-align: center; color: #000000 !important;" class="'.$classTotalWork.' imputation" value="'.$totalWork.'"></div></span></TD>';
+    echo '  <TD '.$colSpanFooter.' class="ganttLeftTitle" style="width:'.((isnewGui())?'137':'132').'px;"'.(($print)?' colspan="2"':'').' ><span class="nobr" ><div id="totalWork" type="text" trim="true" disabled="true" dojoType="dijit.form.NumberTextBox" style="font-weight:bold;width: 95%; text-align: center; color: #000000 !important;" class="'.$classTotalWork.' imputation" value="'.$totalWork.'"></div></span></TD>';
     
     echo '</TR>';
     echo '</table>';
