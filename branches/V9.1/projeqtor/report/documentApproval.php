@@ -63,6 +63,7 @@ foreach ($result as $doc){
   $arrayStatus[$doc->idApprovalStatus][$doc->id]=$doc;
 }
 
+if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
 if (! testGraphEnabled()) { return;}
 
 $tabColor[1] = array("R"=>166,"G"=>172,"B"=>175);
@@ -91,7 +92,7 @@ for ($i = 1; $i<=4; $i++){
 }
 $dataSet->setAbscissa("status");
 
-$width=1000;
+$width=790;
 $legendWidth=300;
 $height=500;
 $legendHeight=150;
@@ -179,10 +180,22 @@ $imgName2=getGraphImgName("ApprovalStatusPie");
 
 $graph2->Render($imgName2);
 
-echo '<table width="95%" style="margin-top:20px;" align="center"><tr><td class="section">'.i18n('reportApprovalDocumentBar').'<td></tr><tr><td><br/></td></tr><tr><td align="center">';
-echo '<img src="' . $imgName . '" />'; 
-echo '</td></tr><tr><td><br/></td></tr>';
-echo '<tr><td class="section">'.i18n('reportApprovalDocumentPie').'<td></tr><tr><td><br/></td></tr><tr><td align="center">';
-echo '<img src="' . $imgName2 . '" />';
-echo '</td></tr></table>';
+//echo '<page>';
+echo '<table width="90%" style="margin-top:20px;" align="center">';
+echo '  <tr><td class="section">'.i18n('reportApprovalDocumentBar').'</td></tr>';
+echo '  <tr><td><br/></td></tr>';
+echo '  <tr><td align="center"><img src="' . $imgName . '" /></td></tr>';
+echo '  <tr><td><br/></td></tr>';
+echo '</table>';
+//echo '</page>';
+echo '<page>';
+echo '<table width="90%" style="margin-top:20px;" align="center">';
+echo '  <tr><td class="section">'.i18n('reportApprovalDocumentPie').'</td></tr>';
+echo '  <tr><td><br/></td></tr>';
+echo '  <tr><td align="center"><img src="' . $imgName2 . '" /></td></tr>';
+echo '</table>';
+echo '</page>';
+
+end:
+
 ?>
