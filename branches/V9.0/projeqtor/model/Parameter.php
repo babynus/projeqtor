@@ -1668,6 +1668,11 @@ class Parameter extends SqlElement {
   }
   
   static public function isGlobalParameterInDB($code) {
+    global $hosted;
+    if (isset($hosted) and $hosted==true) {
+      $hostedParams=array('documentRoot','paramAttachmentDirectory','cronImportDirectory','logFile');
+      if (in_array($code, $hostedParams)) return false;
+    }
     $p=new Parameter();
     $crit=" idUser is null and idProject is null and parameterCode='" . $code . "'";
     $lst=$p->getSqlElementsFromCriteria(null, false, $crit);
