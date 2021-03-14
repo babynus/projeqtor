@@ -5530,6 +5530,16 @@ function testCaseRunChangeStatus() {
 }
 
 function removeTestCaseRun(id, idTestCase) {
+  formInitialize();
+  if (! dojo.byId("testCaseRunId")) {
+    var callBack=function() {
+      if (dijit.byId('dialogAlert')) {
+        dijit.byId('dialogAlert').hide();
+      }
+      removeTestCaseRun(id, idTestCase);  
+    }
+    loadDialog('dialogTestCaseRun', callBack, false);
+  }
   if (checkFormChangeInProgress()) {
    showAlert(i18n('alertOngoingChange'));
    return;
