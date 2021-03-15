@@ -192,6 +192,7 @@ class ActivityMain extends SqlElement {
       unset($this->_sec_successor);
       unset($this->_Dependency_Successor);
   }
+  
 // MTY - LEAVE SYSTEM
   }
   
@@ -849,7 +850,7 @@ class ActivityMain extends SqlElement {
     if (Parameter::getGlobalParameter('manageMilestoneOnItems') != 'YES' and (! property_exists('Activity','_customFields') or ! in_array('idMilestone', Activity::$_customFields))) {
       self::$_fieldsAttributes["idMilestone"]='hidden';
     }
-    if(Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or Parameter::getUserParameter('displaySubTask')!="YES" or $this->id==''){
+    if(Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or Parameter::getUserParameter('displaySubTask')!="YES" or $this->id=='' and !Module::isMenuActive("menuViewAllSubTask")){
       self::$_fieldsAttributes ['_SubTask'] = 'hidden';
       unset($this->_sec_ToDoList);
     }
