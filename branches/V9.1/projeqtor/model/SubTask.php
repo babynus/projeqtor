@@ -139,7 +139,7 @@ class SubTask extends SqlElement {
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:64%;':'width:52%;').'">'.i18n('colName').'</td>';
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:12%;':'width:18%;').'">'.i18n('colPriority').'</td>';
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:12%;':'width:18%;').'">'.i18n('colResponsible').'</td>';
-    echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:8%;':'width:10%;').'">'.i18n('colIdStatus').'</td>';
+    echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:8%;':'width:10%;').';min-width:95px;">'.i18n('colIdStatus').'</td>';
     echo  '</tr>';
     if(!empty($res)){
       foreach ($res as $id=>$subTask){
@@ -203,7 +203,7 @@ class SubTask extends SqlElement {
       $backgroundColor="background-color:#FACA77;";
     }else if($done==1){
       $pos=3;
-      $backgroundColor="background-color:#77B7FA;";
+      $backgroundColor="background-color:#57CE44;";
     }else if($idle==1){
       $pos=4;
       $backgroundColor="background-color:#B7B3A9;";
@@ -213,10 +213,10 @@ class SubTask extends SqlElement {
     echo '<div id="'.$refType.'_'.$refId.'_slidContainer_'.$id.'" >';
     echo '<table style="width:100%;height:100%;">';
       echo '<tr>';
-        echo ' <td style="width:10%;height:100%;">';
+        echo ' <td style="width:12%;height:100%;">';
         echo '<div id="'.$refType.'_'.$refId.'_prev_'.$id.'" class="prev" style="'.(($id==0 or ($done==0 && $idle==0 && $handled==0))?'display:none':'').'" onclick="'.(($id!=0)?"nextSlides('prev',".$id.",'".$refType."',".$refId.");":"").'">&#10094;</div>';
         echo ' </td>';
-        echo ' <td style="width:80%;height:100%;'.$backgroundColor.'">';
+        echo ' <td style="width:76%;height:100%;'.$backgroundColor.'">';
           echo '<div  class="slideshow-container" style="width:100%;height:30px">';
           echo '<input id="'.$refType.'_'.$refId.'_pos_'.$id.'" value="'.$pos.'" type="hidden" />';
           
@@ -238,7 +238,7 @@ class SubTask extends SqlElement {
 
            echo '</div>';
          echo ' </td>';
-         echo ' <td style="width:10%;height:100%;" >';
+         echo ' <td style="width:12%;height:100%;" >';
          echo '<div  id="'.$refType.'_'.$refId.'_next_'.$id.'" class="next" style="'.(($id==0 or ($idle==1))?'display:none':'').'"  onclick="'.(($id!=0)?"nextSlides('next',".$id.",'".$refType."',".$refId.");":"").'">&#10095;</div>';
          echo ' </td>';
        echo '</tr>';

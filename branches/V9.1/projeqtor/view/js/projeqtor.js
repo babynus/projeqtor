@@ -8302,7 +8302,7 @@ function showSlides(n,id,refType,refId) {
       tdColor.style.backgroundColor ="#FACA77";
       break;
     case '2':
-      tdColor.style.backgroundColor ="#77B7FA";
+      tdColor.style.backgroundColor ="#57CE44";
       break;
     case '3':
       tdColor.style.backgroundColor ="#B7B3A9";
