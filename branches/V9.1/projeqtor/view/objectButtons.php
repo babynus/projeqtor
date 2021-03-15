@@ -589,9 +589,10 @@
        $displaySubTask=Parameter::getUserParameter('displaySubTask');
       if ((get_class($obj)=="Activity" or get_class($obj)=="Action" or get_class($obj)=="Ticket") and Parameter::getGlobalParameter('activateSubtasksManagement')=="YES" and $displaySubTask!="YES" and Module::isMenuActive("menuViewAllSubTask")) {
   		$user=getSessionUser();
-  		$habilSub=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$user->getProfile($obj),'scope'=>'subtask'));
-  		$listYesNo=new ListYesNo($habilSub->rightAccess);
-  		if ($listYesNo->code!='YES' or $displaySubTask!='REQ' or $obj->id=='') {
+//   		$habilSub=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$user->getProfile($obj),'scope'=>'subtask'));
+//   		$listYesNo=new ListYesNo($habilSub->rightAccess);
+//$listYesNo->code!='YES' or
+  		if ( $displaySubTask!='REQ' or $obj->id=='') {
   		  $buttonSubTaskListVisible="never";
   		} else  {
           $buttonSubTaskListVisible="visible";

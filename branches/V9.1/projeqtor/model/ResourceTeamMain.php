@@ -111,6 +111,7 @@ class ResourceTeamMain extends ResourceMain {
 	      "isContact"=>"hidden" ,
  	      "isUser"=>"hidden" ,
 	      "isResourceTeam"=>"hidden" ,
+	      "crypto"=>"hidden",
 // 	      "_sec_ResourceCost"=>"hidden" ,
 //	      "idRole"=>"hidden" ,
 	      "idProfile"=>"hidden" ,
