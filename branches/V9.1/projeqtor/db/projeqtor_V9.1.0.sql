@@ -38,14 +38,6 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (2,257,8),
 (3,257,8);
 
-INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) VALUES
-(1, 'subtask', 1),
-(2, 'subtask', 1),
-(3, 'subtask', 1),
-(4, 'subtask', 1),
-(6, 'subtask', 2),
-(7, 'subtask', 2),
-(5, 'subtask', 2);  
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
 ('displaySubTask','YES');
