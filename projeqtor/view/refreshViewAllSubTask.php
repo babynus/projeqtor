@@ -43,12 +43,13 @@ if(sessionValueExists('project') and getSessionValue('project')!="" and  getSess
 $idResource= (RequestHandler::isCodeSet('userNameSubTask'))?trim(RequestHandler::getId('userNameSubTask')):0;
 $idVersion = (RequestHandler::isCodeSet('targetProductVersionSubTask'))?trim(RequestHandler::getId('targetProductVersionSubTask')):0;
 $element = (RequestHandler::isCodeSet('elementSubTask'))?trim(RequestHandler::getValue('elementSubTask')):'';
-
+$destinationHeight=RequestHandler::getValue('destinationHeight');
+$destinationHeight=(isNewGui())?$destinationHeight-75:$destinationHeight-70;
 if($idResource=='')$idResource=0;
 if($idVersion=='')$idVersion=0;
 ?>
 <form dojoType="dijit.form.Form" name="SubTaskForm" id="SubTaskForm"  method="Post" >
-  <div  align="center" style="margin-top:20px;margin-bottom:30px; overflow-y:auto; width:100%;">
+  <div  align="center" style="margin-bottom:5px;<?php if(isNewGui()){?>max-height:<?php echo $destinationHeight;?>px;height:<?php echo $destinationHeight;?>px;overflow-y: auto;<?php }else{?>height:95%;overflow-y:scroll;<?php }?>">
     <?php 
     SubTask::drawAllSubTask($idProject,$idResource,$element,$idVersion);
     ?>
