@@ -1307,19 +1307,22 @@ class Parameter extends SqlElement {
         $showChecklistAll=true;
       }
     }
-      $showSubTask=false;
-      foreach ($user->getAllProfiles() as $prof) {
-        $showSubTask=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$prof,'scope'=>'subtask'));
-        if ($showSubTask and $showSubTask->id and $showSubTask->rightAccess=='1') {
-          $showSubTask=true;
-        }
+    $showSubTask=false;
+    foreach ($user->getAllProfiles() as $prof) {
+      $showSubTask=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$prof,'scope'=>'subtask'));
+      if ($showSubTask and $showSubTask->id and $showSubTask->rightAccess=='1') {
+        $showSubTask=true;
       }
-      if (! $showChecklistAll) {
-        unset($parameterList['displayChecklist']);
-      }
-      if(!$showSubTask or Parameter::getGlobalParameter('activateSubtasksManagement')!='YES'){
-        unset($parameterList['displaySubTask']);
-      }
+    }
+    if (! $showChecklistAll) {
+      unset($parameterList['displayChecklist']);
+    }
+    if(!$showSubTask or Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or !Module::isMenuActive("menuViewAllSubTask")){
+      unset($parameterList['displaySubTask']);
+    }
+    if(!Module::isMenuActive("menuViewAllSubTask")){
+      unset($parameterList['activateSubtasksManagement']);
+    }
     if(!isNewGui()){
       unset($parameterList['menuLeftDisplayMode']);
       unset($parameterList['menuBarTopMode']);
