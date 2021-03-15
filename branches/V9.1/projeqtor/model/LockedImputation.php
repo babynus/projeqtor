@@ -15,21 +15,12 @@ class LockedImputation extends SqlElement {
 	public $_isNameTranslatable = true;
 	//public $_sec_void;
 	
-	private static $_databaseTableName = 'lockedImputation';
 	private static $_databaseCriteria = array();
 	/** ==========================================================================
 	 * Constructor
 	 * @param $id the id of the object in the database (null if not stored yet)
 	 * @return void
 	 */
-	/** ========================================================================
-	 * Return the specific databaseTableName
-	 * @return the databaseTableName
-	 */
-	protected function getStaticDatabaseTableName() {
-	  $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
-	  return $paramDbPrefix . self::$_databaseTableName;
-	}
 	
 	/** ========================================================================
 	 * Return the specific database criteria
