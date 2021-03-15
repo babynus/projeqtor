@@ -213,7 +213,7 @@
                   <select id="multipleUpdateValueList" name="multipleUpdateValueList[]" value=""  dojoType="dijit.form.MultiSelect" 
                    style="width:90%;font-size:10pt;color:#555555;height:150px;display:none;float:left;" size="10" class="selectList">
                   </select>
-                  <button style="display:none;width:1%;margin-left:2%;float:left;" id="showDetailInMultipleUpdate" dojoType="dijit.form.Button" showlabel="false"
+                  <button style="display:none;width:<?php echo (isNewGui())?"1%":"22px";?>;margin-left:2%;float:left;" id="showDetailInMultipleUpdate" dojoType="dijit.form.Button" showlabel="false"
                         title="<?php echo i18n('showDetail')?>" class="resetMargin notButton notButtonRounded"
                         iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui">
                         <script type="dojo/connect" event="onClick" args="evt">
