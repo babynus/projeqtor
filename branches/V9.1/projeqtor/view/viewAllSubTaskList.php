@@ -102,6 +102,7 @@ if(sessionValueExists('project') and getSessionValue('project')!="" and  getSess
                      include '../tool/drawResourceListForSpecificAccess.php';?>  
                 </select>
           </td>
+           <?php  if(RequestHandler::getValue('destinationWidth')>='1350'){?>
           <td nowrap="nowrap" style="text-align: right;padding-right:15px;padding-left:50px;"><?php echo i18n("colIdProductVersion");?> &nbsp;</td>
            <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" style="width: 175px;" name="targetProductVersionSubTask" id="targetProductVersionSubTask"
@@ -119,6 +120,29 @@ if(sessionValueExists('project') and getSessionValue('project')!="" and  getSess
                   <?php htmlDrawOptionForReference('idProductVersion',null)?>
                 </select>
            </td>
+           <td nowrap="nowrap" style="text-align: right;padding-right:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo i18n("colType");?> &nbsp;</td>
+            <td>
+               <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" style="width: 175px;" name="elementSubTask" id="elementSubTask"
+                  <?php echo autoOpenFilteringSelect();?>
+                  value="<?php if(sessionValueExists('elementSubTask')){
+                                $element =  getSessionValue('elementSubTask');
+                                echo $element;
+                               }else{
+                                echo 0;
+                               }?>">
+                    <script type="dojo/method" event="onChange" >
+                    saveDataToSession("elementSubTask",dijit.byId('elementSubTask').get('value'),true);
+                    refreshAllSubTaskList();
+                  </script>
+                <?php 
+                    echo ' <option value=" "></option>';
+                    foreach ($ElmentTab as $key){
+                      echo ' <option value="'.$key.'"><span selected="'.(($key==$element)?'selected':'').'" >'. htmlEncode(i18n($key)) . '</span></option>';
+                    }
+                ?>
+                </select>
+          </td>
+          <?php  }?>
            <td align="top">
              <div style="position:absolute; right:<?php echo((isNewGui())?'160':'184');;?>px; top:0px;">
               <label for="showDoneSubTaskAll"  class="<?php echo((isNewGui())?'dijitTitlePaneTitle;':'');?>" style="border:0;font-weight:normal !important;<?php echo((isNewGui())?'padding-top:14px;':'text-shadow:unset;');?>;height:<?php echo ((isNewGui())?'20':'10');?>px;width:<?php echo((isNewGui())?'50':'150');?>px"><?php echo i18n('labelShowDone'.((isNewGui())?'Short':''));?>&nbsp;</label>
@@ -162,12 +186,27 @@ if(sessionValueExists('project') and getSessionValue('project')!="" and  getSess
             </button> 
             </td>
              <?php }
-             if(RequestHandler::getValue('destinationWidth')<='1350'){
-             ?>
+             if(RequestHandler::getValue('destinationWidth')<='1350'){?>
            </tr>
            <tr>
-           <?php }?>
-            <td nowrap="nowrap" style="text-align: right;padding-right:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo i18n("colType");?> &nbsp;</td>
+          <td nowrap="nowrap" style="text-align: right;padding-right:15px;padding-left:50px;"><?php echo i18n("colIdProductVersion");?> &nbsp;</td>
+           <td>
+                <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" style="width: 175px;" name="targetProductVersionSubTask" id="targetProductVersionSubTask"
+                  <?php echo autoOpenFilteringSelect();?>
+                  value="<?php if(sessionValueExists('targetProductVersionSubTask')){
+                                $idVersion =  getSessionValue('targetProductVersionSubTask');
+                                echo $idVersion;
+                               }else{
+                                echo 0;
+                               }?>">
+                    <script type="dojo/method" event="onChange" >
+                    saveDataToSession("targetProductVersionSubTask",dijit.byId('targetProductVersionSubTask').get('value'),true);
+                    refreshAllSubTaskList();
+                  </script>
+                  <?php htmlDrawOptionForReference('idProductVersion',null)?>
+                </select>
+           </td>
+           <td nowrap="nowrap" style="text-align: right;padding-right:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo i18n("colType");?> &nbsp;</td>
             <td>
                <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" style="width: 175px;" name="elementSubTask" id="elementSubTask"
                   <?php echo autoOpenFilteringSelect();?>
@@ -188,7 +227,9 @@ if(sessionValueExists('project') and getSessionValue('project')!="" and  getSess
                     }
                 ?>
                 </select>
-            </td>
+          </td>
+           <?php  }?>
+
            </tr>
         </table>
       </td>
