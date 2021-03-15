@@ -1238,7 +1238,7 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
 	padding:0;
 	height:10px;
 }
-td.noteData table tr td {
+td.noteData div table tr td, td.noteData div div table tr td {
 	border: 1px solid;
 }
 
