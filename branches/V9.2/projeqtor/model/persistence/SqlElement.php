@@ -8079,8 +8079,8 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
           }
         }
         $position='detail';
-        if(isset($sectionPosition[$section]['99'])){
-          $position=$sectionPosition[$section]['99'];
+        if(isset($sectionPosition[strtolower($section)]['99'])){
+          $position=$sectionPosition[strtolower($section)]['99'];
         }
         $tab= $position;
         $field='<input id="firstFieldRequired" value="'.$col.'" hidden />';
