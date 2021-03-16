@@ -266,7 +266,7 @@ class GlobalPlanningElement extends SqlElement {
         initialWork,validatedWork,assignedWork,plannedWork,leftWork,realWork,
         validatedCost,assignedCost,plannedCost,leftCost,realCost,
         progress,expectedProgress,wbs,wbsSortable,isOnCriticalPath,notPlannedWork, needReplan,
-        null as idType, null as idStatus, null as idResource, 0 as isGlobal 
+        null as idType, null as idStatus, null as idResource, 0 as isGlobal , null as paused
       FROM $peTable";
       $query.="\n    WHERE ".getAccesRestrictionClause('Activity',$peTable,$showIdleProjects);
     }
