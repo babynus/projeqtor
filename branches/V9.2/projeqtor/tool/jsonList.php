@@ -1090,6 +1090,11 @@ function listFieldsForMultipleUpdate($obj, $nbRows,$pObj=false, $included = fals
       $nbRows = listFieldsForMultipleUpdate ( $sub, $nbRows,$obj, true );
     }
   }
+  if (isset ( $obj->_Note )) {
+    if ($nbRows > 0)echo ', ';
+    echo '{"id":"Note", "name":"' . i18n ( 'colNote' ) . '", "dataType":"note"}';
+    $nbRows ++;
+  }
   return $nbRows;
 }
 ?>

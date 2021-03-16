@@ -12734,7 +12734,7 @@ function multipleUpadteSelectAtribute(value) {
             });
           }
           dijit.byId('multipleUpdateValueDate').reset();
-        } else if (dataType=="textarea"){
+        } else if (dataType=="textarea" || dataType=="note"){
           dojo.byId('isLongText').value="true";
           dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
             display : 'block'
