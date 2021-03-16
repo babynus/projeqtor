@@ -105,21 +105,11 @@ ADD `setPausedStatus` int(1) unsigned DEFAULT 0 COMMENT '1';
 INSERT INTO `${prefix}status` (`name`, `setDoneStatus`, `setIdleStatus`, `color`, `sortOrder`, `idle`, `setHandledStatus`, `isCopyStatus`, `setCancelledStatus`, `setIntoserviceStatus`, `setSubmittedLeave`, `setAcceptedLeave`, `setRejectedLeave`, `fixPlanning`, `setPausedStatus`) VALUES
 ('paused', '0', '0', '#BABABA', '350', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1');
 
-INSERT INTO `${prefix}workflowstatus` (idWorkflow,idStatusFrom,idStatusTo,idProfile,allowed) VALUES 
-(1,3,18,1,1),
-(1,3,18,2,1),
-(1,3,18,3,1),
-(1,3,18,4,1),
-(1,3,18,5,1),
-(1,3,18,6,1),
-(1,3,18,7,1),
-(1,18,3,1,1),
-(1,18,3,2,1),
-(1,18,3,3,1),
-(1,18,3,4,1),
-(1,18,3,5,1),
-(1,18,3,6,1),
-(1,18,3,7,1);
+INSERT INTO `${prefix}workflowstatus` (idWorkflow,idStatusFrom,idStatusTo,idProfile,allowed) 
+SELECT 1, 3, (select max(id) from `${prefix}status` where name='paused'), id, 1 from `${prefix}profile`;
+
+INSERT INTO `${prefix}workflowstatus` (idWorkflow,idStatusFrom,idStatusTo,idProfile,allowed)
+SELECT 1, (select max(id) from `${prefix}status` where name='paused'), 3 , id, 1 from `${prefix}profile`;
 
 ALTER TABLE `${prefix}project` ADD COLUMN `paused` int(1) unsigned DEFAULT 0 COMMENT '1';
 ALTER TABLE `${prefix}activity` ADD COLUMN `paused` int(1) unsigned DEFAULT 0 COMMENT '1';
