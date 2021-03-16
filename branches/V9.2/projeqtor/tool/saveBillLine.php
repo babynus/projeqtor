@@ -135,10 +135,10 @@ if (array_key_exists('billLineBillingType',$_REQUEST)) {
 //gautier
 $catalogSpecification = "";
 $boolCatalog = false;
-if (array_key_exists('billLineIdCatalog',$_REQUEST)) {
+if (array_key_exists('billLineIdCatalog',$_REQUEST) and $_REQUEST['billLineIdCatalog']) {
   $boolCatalog = true;
   $catalog=new Catalog($_REQUEST['billLineIdCatalog']);
-  $catalogSpecification = $catalog->specification;
+  $catalogSpecification = ($catalog->specification)?$catalog->specification:"";
 }//end 
 
 Sql::beginTransaction();
