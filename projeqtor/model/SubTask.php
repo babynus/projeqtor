@@ -254,12 +254,20 @@ class SubTask extends SqlElement {
     $action=new Action();
     $activity=new Activity();
     
+   
+    
     $tableName=$subTask->getDatabaseTableName();
     $showClosedSubTask=(Parameter::getUserParameter('showClosedSubTask_Global')!='' and Parameter::getUserParameter('showClosedSubTask_Global')!='0')?true:false;
     $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Global')!='0') or $showClosedSubTask==true)?true:false;
     $query="SELECT DISTINCT  $tableName.refId as refid, $tableName.refType as reftype FROM $tableName ";
     $query.="WHERE 1=1";
-    if($idProject!=0)$query.=" and  $tableName.idProject = ".$idProject;
+    if($idProject!=0){
+      $query.=" and  $tableName.idProject = ".$idProject;
+    }else {
+      $user=getSessionUser();
+      $visibleProject= transformListIntoInClause($user->getVisibleProjects());
+      $query.=" and  $tableName.idProject in ".$visibleProject;
+    }
     if($idResource!=0)$query.=" and  $tableName.idResource = ".$idResource;
     if(trim($elementType)!=''){
       $query.=" and  $tableName.refType = '".$elementType."'";
