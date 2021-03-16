@@ -218,6 +218,7 @@ class ActionMain extends SqlElement {
   public function setAttributes(){
     if(Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or Parameter::getUserParameter('displaySubTask')!="YES" or $this->id=='' and !Module::isMenuActive("menuViewAllSubTask")){
       self::$_fieldsAttributes ['_SubTask'] = 'hidden';
+      self::$_fieldsAttributes ['_sec_ToDoList'] = 'hidden';
       unset($this->_sec_ToDoList);
     }
   }
