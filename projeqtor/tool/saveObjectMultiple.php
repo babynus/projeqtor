@@ -276,6 +276,7 @@ $cptOk=0;
 $cptError=0;
 $cptWarning=0;
 $cptNoChange=0;
+$note=false;
 echo "<table style='margin-top:5px;'>";
 foreach ($selectList as $id) {
 	if (!trim($id)) { continue;}
@@ -290,6 +291,7 @@ foreach ($selectList as $id) {
         echo '<td><span class="messageWARNING" >' . i18n($className) . " #" . htmlEncode($item->id) . ' '.i18n('colLocked'). '</span></td>';
 		continue;
 	}
+	debugLog($field);
 	if(property_exists($item, $field) and trim(strpos($field, 'Element_'))==""){
 	  if($isLongText!="true"){
 	    if($field=="idActivity" and property_exists($className, "idProject") and $item->idProject!=$idProjAct){
@@ -311,6 +313,17 @@ foreach ($selectList as $id) {
 	   }else{
 	     $item->$fieldElment=$newValue;
 	   }
+	}elseif ($field=="Note" and property_exists($item,'_Note')){
+	   $note=true;
+	      $noteObj=new Note();
+	      $noteObj->refType=$className;
+	      $noteObj->refId=$id;
+	      $noteObj->creationDate=date('Y-m-d H:i:s');
+	      $noteObj->note=$newValue;
+	      $noteObj->idPrivacy=1;
+	      $res=new Resource(getSessionUser()->id);
+	      $noteObj->idTeam=$res->idTeam;
+	      $resultSave=$noteObj->save();
 	} else{
 	  echo '<td><span class="messageWARNING" >' . i18n($className) . " #" . htmlEncode($item->id) . ' '.i18n('nonExistentFields'). ' '.$field.'</span></td>';
 	  continue;
@@ -501,21 +514,8 @@ foreach ($selectList as $id) {
 //     $item->isEmployee=($isEmployee=='ON')?1:0;
 //   }
 // // MTY - LEAVE SYSTEM    
-	$resultSave=$item->save();
-//   if ($note and property_exists($item,'_Note')) {
-//     $noteObj=new Note();
-//     $noteObj->refType=$className;
-//     $noteObj->refId=$id;
-//     $noteObj->creationDate=date('Y-m-d H:i:s');
-//     $noteObj->note=$note;
-//     $noteObj->idPrivacy=1;
-//     $res=new Resource(getSessionUser()->id);
-//     $noteObj->idTeam=$res->idTeam;
-//     $resultSaveNote=$noteObj->save();
-//     if (! stripos($resultSave,'id="lastOperationStatus" value="OK"')>0) {
-//     	$resultSave=$resultSaveNote;
-//     }   
-//   }
+	if(!$note)$resultSave=$item->save();
+
 	$resultSave=str_replace('<br/><br/>','<br/>',$resultSave);
 	$statusSave = getLastOperationStatus ( $resultSave );
 	if ($statusSave=="ERROR" ) {
