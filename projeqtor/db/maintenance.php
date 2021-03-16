@@ -1122,6 +1122,20 @@ if (beforeVersion($currVersion,"V9.1.0") and $currVersion!='V0.0.0') {
   traceLog("   => $cpt documents updated");
 }
 
+if (beforeVersion($currVersion,"V9.1.1") ) {
+  error_reporting(0);
+  enableCatchErrors();
+  enableSilentErrors();
+  $lockImp=new LockedImputation(1);
+  disableSilentErrors();
+  if (Sql::$lastQueryErrorCode) {
+    traceLog("Rename table lockedImputation into lowercase");
+    $nbErrors+=runScript('V9.1.1.linux');
+  }
+  error_reporting(E_ALL);
+  disableCatchErrors();
+}
+
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
