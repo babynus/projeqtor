@@ -1282,7 +1282,6 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$user->getProfile($obj),'scope'=>'multipleUpdate'));
     $list=new ListYesNo($habil->rightAccess);
     $buttonMultiple=($list->code=='NO')?false:true;
-    debugLog("objectClass=$objectClass, objClassList=$objClassList");
     if ($buttonMultiple and !$comboDetail and ! array_key_exists('planning',$_REQUEST) and $objectClass != 'GlobalView') {?>
     <?php organizeListButtons();?>
     <td width="36px" class="<?php if (! isNewGui()) echo 'allSearchFixLength';?>">
