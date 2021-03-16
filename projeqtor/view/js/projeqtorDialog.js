@@ -3134,6 +3134,7 @@ function assignmentChangeRole() {
 }
 //gautier #2516
 function billLineChangeCatalog(){
+  if (!dijit.byId("billLineIdCatalog") || ! dijit.byId("billLineIdCatalog").get("value")) return;
   var idCatalog=dijit.byId("billLineIdCatalog").get("value");
   dojo.xhrGet({
     url : '../tool/getSingleData.php?dataType=catalogBillLine&idCatalog='+idCatalog,
