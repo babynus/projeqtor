@@ -5888,7 +5888,7 @@ abstract class SqlElement {
       $msg .= '  &nbsp;';
       $msg .= "  <a href='". $ref ."' target='#' style='color:white'>". i18n ( get_class ( $this ) ) ." #". htmlEncode ( $this->id ) ."</a></div></td>";
       $msg .= "  </tr>";
-      $msg .= " \n ".$dmsg."\n";
+      $msg .= " \n <tr><td colspan='2'>".$dmsg."</td></tr>\n";
     }
     $msg .= '<tr><td style="padding-bottom:10px"></td></tr>';
     $msg .= '<tr>';
