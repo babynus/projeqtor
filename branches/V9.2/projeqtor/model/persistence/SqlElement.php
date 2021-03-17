@@ -3169,8 +3169,15 @@ abstract class SqlElement {
         $empty = false;
         $line = Sql::fetchLine ( $result );
         if (! is_array($line)) {
-          errorLog("Error in getSqlElement() for ".get_class($this)." #$this->id : no data retreived. Exiting script");
-          exit;
+          global $globalCatchErrors;
+          if ($globalCatchErrors==true) {
+            Sql::$lastQueryErrorCode='999';
+            Sql::$lastQueryErrorMessage="Error in getSqlElement() for ".get_class($this)." #$this->id : no data retreived.";
+            return $this;
+          } else {
+            errorLog("Error in getSqlElement() for ".get_class($this)." #$this->id : no data retreived. Exiting script");
+            exit;
+          }
         }
         // get all data fetched
         foreach ( $this as $col_name => $col_value ) {
