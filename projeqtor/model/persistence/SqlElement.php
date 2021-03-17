@@ -175,7 +175,8 @@ abstract class SqlElement {
       "Action" => array(
           "Attachment" => "cascade", 
           "Link" => "cascade", 
-          "Note" => "cascade"), 
+          "Note" => "cascade",
+          "SubTask"=>"cascade"),
       "ActionType" => array(
           "Action" => "controlStrict"), 
       "Activity" => array(
@@ -505,7 +506,8 @@ abstract class SqlElement {
           "Link" => "cascade", 
           "Note" => "cascade", 
           "Ticket" => "control", 
-          "Work" => "control"), 
+          "Work" => "control",
+          "SubTask"=>"cascade" ), 
       "TicketType" => array("Ticket" => "controlStrict"), 
       "Trend" => array("Project" => "controlStrict"), 
       "Urgency" => array(
