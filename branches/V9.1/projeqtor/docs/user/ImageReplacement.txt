@@ -704,7 +704,7 @@
    :alt: minus
    :scale: 15
 
-.. |Plus| image:: images/icon/iconPlus.png
+.. |Plus| image:: images/v9/iconPlus.png
    :alt: plus button
    :scale: 15
 
