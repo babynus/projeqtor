@@ -103,7 +103,9 @@ $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Single')!='0' or
   </tr>
   <tr>
     <td style="width:<?php echo $printWidthDialog;?>;">
-      <?php SubTask::drawSubtasksForObject($obj, $objectClass, $objectId,false,false,false,true);?>
+        <?php  $rightUpdate=securityGetAccessRightYesNo('menu'.$objectClass,'update',$obj);
+          $rightRead=securityGetAccessRightYesNo('menu'.$objectClass,'read',$obj);
+       SubTask::drawSubtasksForObject($obj, $objectClass, $objectId,$rightUpdate,$rightRead,false,false,false,true);?>
     </td>
   </tr>
  <tr>
