@@ -34,7 +34,8 @@ $element= (RequestHandler::isCodeSet('element'))?RequestHandler::getValue('eleme
 if($element=='')return;
 $refType = (RequestHandler::isCodeSet('refType'))?RequestHandler::getValue('refType'):"";
 $refId = (RequestHandler::isCodeSet('refId'))?RequestHandler::getValue('refId'):null;
-
+$obj= new $refType ($refId);
+if(!securityGetAccessRightYesNo('menu'.$refType,'update',$obj) or securityGetAccessRightYesNo('menu'.$refType,'update',$obj)!='YES')return;
 if($element=='SubTask'){
   $operation = (RequestHandler::isCodeSet('operation'))?RequestHandler::getValue('operation'):"";
   $sortOrder = (RequestHandler::isCodeSet('sortOrder'))?RequestHandler::getValue('sortOrder'):null;
@@ -79,7 +80,7 @@ if($element=='SubTask'){
       	    }
       }
     }else{
-      $obj= new $refType ($refId);
+      
       $subTask->refId=$refId;
       $subTask->refType=$refType;
       $subTask->idProject=$obj->idProject;
@@ -96,13 +97,12 @@ if($element=='SubTask'){
   $val = (RequestHandler::isCodeSet('value'))?RequestHandler::getValue('value'):null;
   
   Sql::beginTransaction();
-  $el= new $refType ($refId);
   if($field=='Status'){
-    $el->idStatus=$val;
+    $obj->idStatus=$val;
   }else{
-    $el->idResource=$val;
+    $obj->idResource=$val;
   }
-  $result=$el->save();
+  $result=$obj->save();
   displayLastOperationStatus ( $result );
 }
 
