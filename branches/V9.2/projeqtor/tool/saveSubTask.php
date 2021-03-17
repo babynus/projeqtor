@@ -34,8 +34,11 @@ $element= (RequestHandler::isCodeSet('element'))?RequestHandler::getValue('eleme
 if($element=='')return;
 $refType = (RequestHandler::isCodeSet('refType'))?RequestHandler::getValue('refType'):"";
 $refId = (RequestHandler::isCodeSet('refId'))?RequestHandler::getValue('refId'):null;
-$obj= new $refType ($refId);
-if(!securityGetAccessRightYesNo('menu'.$refType,'update',$obj) or securityGetAccessRightYesNo('menu'.$refType,'update',$obj)!='YES')return;
+$obj=new $refType ($refId);
+if(!securityGetAccessRightYesNo('menu'.$refType,'update',$obj) or securityGetAccessRightYesNo('menu'.$refType,'update',$obj)!='YES') {
+  traceHack("saveSubTask.php called for $refType #$refId but user has not write access to this item");
+  exit;
+}
 if($element=='SubTask'){
   $operation = (RequestHandler::isCodeSet('operation'))?RequestHandler::getValue('operation'):"";
   $sortOrder = (RequestHandler::isCodeSet('sortOrder'))?RequestHandler::getValue('sortOrder'):null;
