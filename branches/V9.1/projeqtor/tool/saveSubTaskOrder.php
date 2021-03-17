@@ -33,7 +33,12 @@ $user=getSessionUser();
 $objectClass=(RequestHandler::isCodeSet('refType'))?RequestHandler::getValue('refType'):false;
 $objectId=(RequestHandler::isCodeSet('refId'))?RequestHandler::getId('refId'):false;
 
-if($objectClass==false or $objectId==false)return ;
+if($objectClass==false or $objectId==false) exit ;
+$obj=new $objectClass($objectId);
+if(!securityGetAccessRightYesNo('menu'.$objectClass,'update',$obj) or securityGetAccessRightYesNo('menu'.$objectClass,'update',$obj)!='YES') {
+  traceHack("saveSubTaskOrder.php called for $objectClass #$objectId but user has not write access to this item");
+  exit;
+}
 $subTask= new SubTask();
 $critArray=array("refType"=>$objectClass,"refId"=>$objectId);
 $elment=$subTask->getSqlElementsFromCriteria($critArray,null,null,'sortOrder');
