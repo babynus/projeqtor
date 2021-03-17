@@ -318,7 +318,7 @@ foreach ($selectList as $id) {
 	      $noteObj->refType=$className;
 	      $noteObj->refId=$id;
 	      $noteObj->creationDate=date('Y-m-d H:i:s');
-	      $noteObj->note=$newValue;
+	      $noteObj->note=nl2br($newValue);
 	      $noteObj->idPrivacy=1;
 	      $res=new Resource(getSessionUser()->id);
 	      $noteObj->idTeam=$res->idTeam;
