@@ -183,27 +183,29 @@ class SubTask extends SqlElement {
         $lastSortRegist=$subTask->sortOrder;
       }
     }
-    $lastSort=(!empty($res))? $lastSortRegist :0;
-    echo  '<tr id="'.$refType.'_'.$refId.'_newSubTaskRow" >';
-    echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_0" value="'.$lastSort.'" type="hidden" />';
-     echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
-    echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
-    echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_0" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" onChange="updateSubTask(0,\''.$refType.'\','.$refId.');" value="">';
-    echo    '</td>';
-    echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
-    echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_priorityNewSubTask_0" style="width:auto;"  class="input" readonly="true" >';
-                htmlDrawOptionForReference('idPriority',null);
-    echo      '</select>';
-    echo    '</td>';
-    echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;" >';
-    echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_0" style="width:auto;"  class="input"  readonly="true">';
-                htmlDrawOptionForReference('idResource',null,$obj,false,$critFld,$critVal);
-    echo      '</select>';
-    echo    '</td>';
-    echo    '<td  style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;" >';
-               $subTask->drawStatusSubTask('0','0','0','0',$refType,$refId,$gloablView,$rightUpadate,$rightRead);
-    echo    '</td>';
-    echo  '</tr>';
+    if($rightUpadate=='YES'){
+      $lastSort=(!empty($res))? $lastSortRegist :0;
+      echo  '<tr id="'.$refType.'_'.$refId.'_newSubTaskRow" >';
+      echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_0" value="'.$lastSort.'" type="hidden" />';
+       echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
+      echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
+      echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_0" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" onChange="updateSubTask(0,\''.$refType.'\','.$refId.');" value="">';
+      echo    '</td>';
+      echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
+      echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_priorityNewSubTask_0" style="width:auto;"  class="input" readonly="true" >';
+                  htmlDrawOptionForReference('idPriority',null);
+      echo      '</select>';
+      echo    '</td>';
+      echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;" >';
+      echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_0" style="width:auto;"  class="input"  readonly="true">';
+                  htmlDrawOptionForReference('idResource',null,$obj,false,$critFld,$critVal);
+      echo      '</select>';
+      echo    '</td>';
+      echo    '<td  style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;" >';
+                 $subTask->drawStatusSubTask('0','0','0','0',$refType,$refId,$gloablView,$rightUpadate,$rightRead);
+      echo    '</td>';
+      echo  '</tr>';
+    }
     echo '</table>';
     if (!$refresh) echo '</div></td></tr>';
     if($dialogView) echo '</table>';
