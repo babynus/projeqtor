@@ -176,6 +176,10 @@ class ProviderPaymentMain extends SqlElement {
         $bill=new ProviderBill($this->idProviderBill);
         $bill->retreivePayments(true,true);
       }
+      if ($this->idProviderTerm){
+        $term=new ProviderTerm($this->idProviderTerm);
+        $term->updatePaidFlag();
+      }
     }
     return $result;
   }
