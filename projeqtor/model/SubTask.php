@@ -70,9 +70,9 @@ class SubTask extends SqlElement {
   // ============================================================================**********
   // DRAW SUBTASK
   // ============================================================================**********
-  static function drawSubtasksForObject($obj,$refType, $refId,$refresh=false,$idResource=false,$gloablView=false,$dialogView=false){
+  static function drawSubtasksForObject($obj,$refType, $refId,$rightUpadate,$rightRead,$refresh=false,$idResource=false,$gloablView=false,$dialogView=false){
     global $cr, $print, $user, $comboDetail;
-    if ($comboDetail) {
+    if ($comboDetail or (!$rightUpadate and !$rightRead) or ($rightUpadate=='NO' and $rightRead=='NO')) {
       return;
     }
     if(!$gloablView ) $view='Single';
@@ -149,20 +149,35 @@ class SubTask extends SqlElement {
         echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" type="hidden" />';
         echo    '<td  class="dojoDndHandle handleCursor todoListTab"  style="text-align: center;"><img style="width:7px;top:4px;position: relative;" src="css/images/iconDrag.gif"></td>';
         echo    '<td class="todoListTab" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
-        echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  value="'. htmlEncode($subTask->name).'">';
+        echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" value="'. htmlEncode($subTask->name).'" ';
+        if ($rightUpadate=='NO' and $rightRead=='YES'){
+          echo ' readonly="true">';
+        }else {
+          echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  >';
+        }
         echo    '</td>';
         echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';">';
-        echo      '<select dojoType="dijit.form.FilteringSelect"  id="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'true\',\'false\');" '.autoOpenFilteringSelect().'  >';
+        echo      '<select dojoType="dijit.form.FilteringSelect"  id="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" '.autoOpenFilteringSelect().''; 
+        if ($rightUpadate=='NO' and $rightRead=='YES'){
+          echo ' readonly="true">';
+        }else {
+          echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'true\',\'false\');"  >';
+        }
                     htmlDrawOptionForReference('idPriority',$subTask->idPriority);
         echo      '</select>';
         echo    '</td>';
         echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
-        echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'false\',\'true\');" '.autoOpenFilteringSelect().' >';
+        echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" style="width:auto;" class="input"Â² '.autoOpenFilteringSelect().'';
+        if ($rightUpadate=='NO' and $rightRead=='YES'){
+          echo ' readonly="true" >';
+        }else {
+          echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'false\',\'true\');">';
+        }
                     htmlDrawOptionForReference('idResource',$subTask->idResource,$obj,false,$critFld,$critVal);
         echo      '</select>';
         echo    '</td>';
         echo    '<td   style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;">';
-                  $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId,$gloablView);
+                  $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId,$gloablView,$rightUpadate,$rightRead);
         echo    '</td>';
         echo  '</tr>';
         $lastSortRegist=$subTask->sortOrder;
@@ -186,7 +201,7 @@ class SubTask extends SqlElement {
     echo      '</select>';
     echo    '</td>';
     echo    '<td  style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;" >';
-               $subTask->drawStatusSubTask('0','0','0','0',$refType,$refId,$gloablView);
+               $subTask->drawStatusSubTask('0','0','0','0',$refType,$refId,$gloablView,$rightUpadate,$rightRead);
     echo    '</td>';
     echo  '</tr>';
     echo '</table>';
@@ -194,7 +209,7 @@ class SubTask extends SqlElement {
     if($dialogView) echo '</table>';
   }
   
-  function drawStatusSubTask($id, $done, $idle, $handled,$refType,$refId,$gloablView){
+  function drawStatusSubTask($id, $done, $idle, $handled,$refType,$refId,$gloablView,$rightUpadate,$rightRead){
 
     $pos=1;
     $backgroundColor="";
@@ -214,7 +229,8 @@ class SubTask extends SqlElement {
     echo '<table style="width:100%;height:100%;">';
       echo '<tr>';
         echo ' <td style="width:12%;height:100%;">';
-        echo '<div id="'.$refType.'_'.$refId.'_prev_'.$id.'" class="prev" style="'.(($id==0 or ($done==0 && $idle==0 && $handled==0))?'display:none':'').'" onclick="'.(($id!=0)?"nextSlides('prev',".$id.",'".$refType."',".$refId.");":"").'">&#10094;</div>';
+        echo '<div id="'.$refType.'_'.$refId.'_prev_'.$id.'" class="prev" style="'.(($id==0 or ($done==0 && $idle==0 && $handled==0) or ($rightUpadate=='NO' and $rightRead=='YES'))?'display:none':'').'" 
+                  onclick="'.(($id!=0 and  ($rightUpadate=='NO' and $rightRead=='YES'))?"nextSlides('prev',".$id.",'".$refType."',".$refId.");":"").'">&#10094;</div>';
         echo ' </td>';
         echo ' <td style="width:76%;height:100%;'.$backgroundColor.'">';
           echo '<div  class="slideshow-container" style="width:100%;height:30px">';
@@ -239,7 +255,7 @@ class SubTask extends SqlElement {
            echo '</div>';
          echo ' </td>';
          echo ' <td style="width:12%;height:100%;" >';
-         echo '<div  id="'.$refType.'_'.$refId.'_next_'.$id.'" class="next" style="'.(($id==0 or ($idle==1))?'display:none':'').'"  onclick="'.(($id!=0)?"nextSlides('next',".$id.",'".$refType."',".$refId.");":"").'">&#10095;</div>';
+         echo '<div  id="'.$refType.'_'.$refId.'_next_'.$id.'" class="next" style="'.(($id==0 or ($idle==1) or ($rightUpadate=="NO" and $rightRead=='YES'))?'display:none':'').'"  onclick="'.(($id!=0 and  ($rightUpadate=='NO' and $rightRead=='YES'))?"nextSlides('next',".$id.",'".$refType."',".$refId.");":"").'">&#10095;</div>';
          echo ' </td>';
        echo '</tr>';
      echo '</table>';
@@ -253,7 +269,7 @@ class SubTask extends SqlElement {
     $ticket=new Ticket();
     $action=new Action();
     $activity=new Activity();
-    
+    $user=getSessionUser();
    
     
     $tableName=$subTask->getDatabaseTableName();
@@ -264,7 +280,6 @@ class SubTask extends SqlElement {
     if($idProject!=0){
       $query.=" and  $tableName.idProject = ".$idProject;
     }else {
-      $user=getSessionUser();
       $visibleProject= transformListIntoInClause($user->getVisibleProjects());
       $query.=" and  $tableName.idProject in ".$visibleProject;
     }
@@ -290,7 +305,10 @@ class SubTask extends SqlElement {
     if(!empty($tab)){
       foreach ($tab as $id=>$obj){
         $element= new $obj['reftype']( $obj['refid']);
-        if ($element->idle==1)continue;
+        //$menName= new Menu($element->idMenu);
+        $rightUpdate=securityGetAccessRightYesNo('menu'.get_class($element),'update',$element);
+        $rightRead=securityGetAccessRightYesNo('menu'.get_class($element),'read',$element);
+        if (($element->idle==1) or ($rightUpdate=='NO' and $rightRead=='NO') or (!$rightUpdate and !$rightRead))continue;
         if(!$showClosedSubTask and !$showDoneSubTask and $element->done==1){
           $cpST=$subTask->countSqlElementsFromCriteria(array("refType"=>$obj['reftype'],"refId"=>$element->id,"idle"=>'0'));
           if ($cpST==0)continue;
@@ -331,7 +349,7 @@ class SubTask extends SqlElement {
                      echo '</td >';
               echo'</tr></table>';
             echo '</div></td></tr>';
-            SubTask::drawSubtasksForObject($element, $obj['reftype'],  $obj['refid'],null,$idResource,true);
+            SubTask::drawSubtasksForObject($element, $obj['reftype'],  $obj['refid'],$rightUpdate,$rightRead,null,$idResource,true);
           echo '</table>';
       }
     }else{

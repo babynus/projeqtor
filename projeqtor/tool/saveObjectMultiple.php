@@ -291,7 +291,6 @@ foreach ($selectList as $id) {
         echo '<td><span class="messageWARNING" >' . i18n($className) . " #" . htmlEncode($item->id) . ' '.i18n('colLocked'). '</span></td>';
 		continue;
 	}
-	debugLog($field);
 	if(property_exists($item, $field) and trim(strpos($field, 'Element_'))==""){
 	  if($isLongText!="true"){
 	    if($field=="idActivity" and property_exists($className, "idProject") and $item->idProject!=$idProjAct){
