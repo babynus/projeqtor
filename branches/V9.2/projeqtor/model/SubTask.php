@@ -145,9 +145,14 @@ class SubTask extends SqlElement {
       foreach ($res as $id=>$subTask){
         $prioSubTask=new Priority($subTask->idPriority);
         $colorPrio=$prioSubTask->color;
-        echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'"  >';
+        echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" '.(($rightUpadate=='NO' and $rightRead=='YES')?'':'class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'"').'  >';
         echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" type="hidden" />';
-        echo    '<td  class="dojoDndHandle handleCursor todoListTab"  style="text-align: center;"><img style="width:7px;top:4px;position: relative;" src="css/images/iconDrag.gif"></td>';
+        if($rightUpadate=='NO' and $rightRead=='YES'){
+          echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
+        }else{
+          echo    '<td  class="dojoDndHandle handleCursor todoListTab"  style="text-align: center;"><img style="width:7px;top:4px;position: relative;" src="css/images/iconDrag.gif"></td>';
+        }
+        
         echo    '<td class="todoListTab" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
         echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" value="'. htmlEncode($subTask->name).'" ';
         if ($rightUpadate=='NO' and $rightRead=='YES'){
@@ -319,7 +324,7 @@ class SubTask extends SqlElement {
         $style="";
         $draw='';
         $version=(property_exists(get_class($element), 'idTargetProductVersion') and $element->idTargetProductVersion!='')?new ProductVersion($element->idTargetProductVersion):'&nbsp;-';
-        if ( securityCheckDisplayMenu(null, $obj['reftype']) and securityGetAccessRightYesNo('menu'.$obj['reftype'], 'read', '')=="YES") {
+        if ( securityCheckDisplayMenu(null, get_class($element)) and $rightRead=="YES") {
           $goto=' onClick="gotoElement(\''.$obj['reftype'].'\',\''.htmlEncode($element->id).'\');" ';
           $style='cursor: pointer;';
         }
@@ -333,7 +338,7 @@ class SubTask extends SqlElement {
                     echo '</td>';
                     echo '<td style="width:23%;">';
                        echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;vertical-align:middle;">';
-                        echo      '<select dojoType="dijit.form.FilteringSelect" id="idStatusElement_'.$obj['reftype'].'_'.$element->id.'" name="idStatusElement_'.$obj['reftype'].'_'.$element->id.'"
+                        echo      '<select dojoType="dijit.form.FilteringSelect" id="idStatusElement_'.$obj['reftype'].'_'.$element->id.'" name="idStatusElement_'.$obj['reftype'].'_'.$element->id.'" '.(( $rightUpdate=='NO' and $rightRead=="YES")?'readonly="true"':'').'
                                   style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Status\',\''.$obj['reftype'].'\','.$element->id.'); "  '.autoOpenFilteringSelect().'>';
                           htmlDrawOptionForReference('idStatus',$element->idStatus,$element);
                         echo      '</select>';
@@ -342,7 +347,7 @@ class SubTask extends SqlElement {
                     echo '</td>';
                     echo '<td style="width:14%;">';
                        echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;vertical-align:middle;">';
-                        echo      '<select dojoType="dijit.form.FilteringSelect" id="idResourceElement_'.$obj['reftype'].'_'.$element->id.'" name="idResourceElement_'.$obj['reftype'].'_'.$element->id.'" 
+                        echo      '<select dojoType="dijit.form.FilteringSelect" id="idResourceElement_'.$obj['reftype'].'_'.$element->id.'" name="idResourceElement_'.$obj['reftype'].'_'.$element->id.'" '.(( $rightUpdate=='NO' and $rightRead=="YES")?'readonly="true"':'').'
                             style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Resposible\',\''.$obj['reftype'].'\','.$element->id.');" '.autoOpenFilteringSelect().' >';
                           htmlDrawOptionForReference('idResource',$element->idResource,$element);
                         echo      '</select>';
