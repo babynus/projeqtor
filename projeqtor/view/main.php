@@ -585,7 +585,8 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
         if ($class=="Today") {
           $firstPage="welcome.php";
         } else { 
-          echo 'var delay=(dojo.isFF)?1000:10;';
+          //echo 'var delay=(dojo.isFF)?1000:10;';
+          echo 'var delay=1000;';
           echo 'setTimeout(\'gotoElement("' . $class . '","' . $id . '");\',delay);';
           $firstPage="";
         }
