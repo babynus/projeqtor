@@ -616,7 +616,8 @@ function drawTableFromObjectList($objectList) {
   	    'canForceClose'=>i18n('canForceClose'),
   	    'canUpdateCreation'=>i18n('canUpdateCreationInfo'),
   	    'viewComponents'=>i18n('viewComponents'),
-  	    'lockedLeftWork'=>i18n('lockedLeftWork')), 
+  	    'lockedLeftWork'=>i18n('lockedLeftWork'),
+  	    'canWorkOnTicket'=>i18n('canWorkOnTicket')),
   	  'scope', 'profile','idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
   	echo '</div><br/>';
   	$titlePane="habilitationOther_ResourceVisibility";

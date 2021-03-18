@@ -498,6 +498,11 @@ class Parameter extends SqlElement {
          $list=array('openDays'=>i18n('openDays'),
                      'offDays'=>i18n('offDays'));
          break;
+       
+       case 'porjectDailyHours':
+         $list=array('false'=>i18n('displayNo'),
+                    'true'=>i18n('displayYes'));
+         break;
                  
       case 'imputationUnit':
       	$list=array('days'=>i18n('days'),
@@ -916,6 +921,7 @@ class Parameter extends SqlElement {
             	                'endAM'=>'time',
             	                'startPM'=>'time',
             	                'endPM'=>'time',
+            	                'porjectDailyHours'=>'list',
             	              'sectionOpenDays'=>'section',
             	                'OpenDayMonday'=>'list',
             	                'OpenDayTuesday'=>'list',
