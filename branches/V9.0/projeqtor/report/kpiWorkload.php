@@ -237,7 +237,7 @@ foreach($listProjects as $prj) {
     $newKpiHistory = new KpiHistory();
     $lstKpi= $newKpiHistory->getSqlElementsFromCriteria($critKpi,false,null,'kpiValue desc');
     if (count($lstKpi)==0) {
-      $where="idKpiDefinition=$kpi->id and refType='Project' and refId=$prj->id and $period<=$periodValue";
+      $where="idKpiDefinition=$kpi->id and refType='Project' and refId=$prj->id and $period<='$periodValue'";
       $newKpiHist = new KpiHistory();
       $lstKpi= $newKpiHist->getSqlElementsFromCriteria(null,false,$where,'kpiDate desc');
     }
