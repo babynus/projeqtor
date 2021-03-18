@@ -2596,61 +2596,82 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $fieldWidth=$fieldWidth+$buttonFieldWidth-$maxButtonWidth;
           $buttonFieldWidth=$maxButtonWidth;
         }
-        // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
-        // END - ADD BY TABARY - TOOLTIP
-        if($col=='idBudgetItem'){
-          echo '<select dojoType="dijit.form.Select" class="dijitComboBox input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
-          $fieldWidth+=13;
+        if($col == 'idTicketStatus'){
+            echo '<input id="'.$col.'" name="'.$col.'" type="hidden" class="input '.(($isRequired)?'required':'').'" value="'.(($obj->idTicketStatus)?$obj->idTicketStatus:2).'"/>';
+        	echo '<ul id="'.$col.'List" data-dojo-type="dojox/mobile/TabBar" data-dojo-props=\'barType:"segmentedControl"\' center="false">';
+            	echo '<li id="isHandledStatus" onClick="dojo.byId(\''.$col.'\').value=1;" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
+            	if($obj->idTicketStatus==1){
+            		echo "data-dojo-props='selected:true'";
+            	}
+            	echo '>'.i18n('colHandled').'</li>';
+            	echo '<li id="isDoneStatus" onClick="dojo.byId(\''.$col.'\').value=2;" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
+            	if($obj->idTicketStatus==2 or !$obj->idTicketStatus){
+            		echo "data-dojo-props='selected:true'";
+            	}
+            	echo '>'.i18n('colDone').'</li>';
+            	echo '<li  id="isIdleStatus" onClick="dojo.byId(\''.$col.'\').value=3;" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
+            	if($obj->idTicketStatus==3){
+            		echo "data-dojo-props='selected:true'";
+            	}
+            	echo '>'.i18n('colIdle').'</li>';
+        	echo '</ul>';
         }else{
-          echo '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
-        }
-        //echo ' labelType="html" spanLabel=true  ';
-        echo '  style="width: '.($fieldWidth).'px;'.$specificStyle.'"';
-        if ($col=='idBusinessFeature' or $col=='idProject') echo 'data-dojo-props="queryExpr: \'*${0}*\', autoComplete:false"';
-        echo $name;
-        // ADD BY Marc TABARY - 2017-02-24 - ORGANIZATION MANAGER
-        if (get_class($obj)=='Resource' and $col=='idOrganization' and $val) {
-          // Implement the rule : A manager of an organization can't be dissocied from it.
-          $orga=new Organization($val);
-          if ($obj->id==$orga->idResource) {
-            if (strpos($attributes, 'disabled')==false) {
-              $attributes.=' disabled';
-            }
-            $displayComboButtonCol=false;
+          // BEGIN - ADD BY TABARY - TOOLTIP
+          echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
+          // END - ADD BY TABARY - TOOLTIP
+          if($col=='idBudgetItem'){
+            echo '<select dojoType="dijit.form.Select" class="dijitComboBox input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
+            $fieldWidth+=13;
+          }else {
+            echo '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
           }
-        }
-        // END ADD BY Marc TABARY - 2017-02-24 - ORGANIZATION MANAGER
-        
-        echo $attributes;
-        echo $valStore;
-        echo autoOpenFilteringSelect($comboDetail);
-        if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseover="showActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\','.(($canCreateCol)?'true':'false').','.(($canUpdate)?'true':'false').');"';
-        if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseout="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
-        if (isNewGui() and !$comboDetail and $canListCol) echo ' onfocus="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
-        echo ' >';
-        //debugTraceLog("=> before call htmlDrawOptionForReference for $col, val=$val, critFld=$critFld, critVal=$critVal");
-        if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
-          $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
-        }else if (($classObj=='SupplierContract' or $classObj=='ClientContract') and $col=='idContactContract' or $col=='idUnitContract' or $col=='idUnitNotice') {
-          if($col=='idUnitContract' or $col=='idUnitNotice'){
+          //echo ' labelType="html" spanLabel=true  ';
+          echo '  style="width: '.($fieldWidth).'px;'.$specificStyle.'"';
+          if ($col=='idBusinessFeature' or $col=='idProject') echo 'data-dojo-props="queryExpr: \'*${0}*\', autoComplete:false"';
+          echo $name;
+          // ADD BY Marc TABARY - 2017-02-24 - ORGANIZATION MANAGER
+          if (get_class($obj)=='Resource' and $col=='idOrganization' and $val) {
+            // Implement the rule : A manager of an organization can't be dissocied from it.
+            $orga=new Organization($val);
+            if ($obj->id==$orga->idResource) {
+              if (strpos($attributes, 'disabled')==false) {
+                $attributes.=' disabled';
+              }
+              $displayComboButtonCol=false;
+            }
+          }
+          // END ADD BY Marc TABARY - 2017-02-24 - ORGANIZATION MANAGER
+          
+          echo $attributes;
+          echo $valStore;
+          echo autoOpenFilteringSelect($comboDetail);
+          if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseover="showActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\','.(($canCreateCol)?'true':'false').','.(($canUpdate)?'true':'false').');"';
+          if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseout="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
+          if (isNewGui() and !$comboDetail and $canListCol) echo ' onfocus="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
+          echo ' >';
+          //debugTraceLog("=> before call htmlDrawOptionForReference for $col, val=$val, critFld=$critFld, critVal=$critVal");
+          if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
+            $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
+          }else if (($classObj=='SupplierContract' or $classObj=='ClientContract') and $col=='idContactContract' or $col=='idUnitContract' or $col=='idUnitNotice') {
+            if($col=='idUnitContract' or $col=='idUnitNotice'){
+              $next=htmlDrawOptionForReference($col, $val, $obj,true, $critFld, $critVal);
+            }else{
+              $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
+            }
+          }else if($col=='idSituation'){
+            $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
+            $projSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$obj->idProject));
+            $val = $projSituation->id;
+          }else if (($classObj=='ActivityPlanningElement' or $classObj=='ProjectPlanningElement') and ($col=='idWeightMode' or $col=='idProgressMode' or $col=='idRevenueMode')) {
             $next=htmlDrawOptionForReference($col, $val, $obj,true, $critFld, $critVal);
-          }else{
+          }else {
             $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
           }
-        }else if($col=='idSituation'){
-          $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
-          $projSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$obj->idProject));
-          $val = $projSituation->id;
-        }else if (($classObj=='ActivityPlanningElement' or $classObj=='ProjectPlanningElement') and ($col=='idWeightMode' or $col=='idProgressMode' or $col=='idRevenueMode')) {
-          $next=htmlDrawOptionForReference($col, $val, $obj,true, $critFld, $critVal);
-        }else {
-          $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
+          if ($col=='idProduct' and !$obj->id and $obj->isAttributeSetToField($col, 'required')) $obj->idProduct=$next;
+          echo $colScript;
+          //debugTraceLog("<= after call htmlDrawOptionForReference");
+          echo '</select>';
         }
-        if ($col=='idProduct' and !$obj->id and $obj->isAttributeSetToField($col, 'required')) $obj->idProduct=$next;
-        echo $colScript;
-        //debugTraceLog("<= after call htmlDrawOptionForReference");
-        echo '</select>';
         if (isNewGui() and !$comboDetail and $canListCol) echo '<span style="width:1px;position:relative;">';
         if (isNewGui() and !$comboDetail and $canListCol) echo '<div id="toolbar_'.$fieldId.'" class="fade-in dijitTextBox toolbarForSelect" style=""';
         if (isNewGui() and !$comboDetail and $canListCol) echo ' onmouseover="showActionSelect(\''.substr($col,2).'\',\''.$val.'\',\''.$fieldId.'\');"';
