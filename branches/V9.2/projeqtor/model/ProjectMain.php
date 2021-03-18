@@ -91,6 +91,9 @@ class ProjectMain extends SqlElement {
   public $cancelled;
   public $_lib_cancelled;
   
+  public $_sec_ProjectDailyHours;
+  public $_spe_projectDailyHours;
+  
   public $_sec_ProductprojectProducts;
   public $_ProductProject=array();
   
@@ -223,7 +226,8 @@ class ProjectMain extends SqlElement {
   			self::$_fieldsAttributes['paused']='hidden';
   			self::$_fieldsAttributes['commandOnValidWork']='hidden';
   			self::$_fieldsAttributes['ProjectPlanningElement']='hidden';
-			  self::$_fieldsAttributes['_sec_treatment']='hidden';
+			self::$_fieldsAttributes['_sec_treatment']='hidden';
+			self::$_fieldsAttributes['_sec_ProjectDailyHours']='hidden';
 	
   			unset($this->_sec_Progress);
   			unset($this->_sec_Affectations);
@@ -721,6 +725,66 @@ static function isTheLeaveProject($id=null) {
       }
       $result.='</div>';
       $result.='</td></tr><tr><td colspan="2">&nbsp;</td></tr></table>';
+      return $result;
+    }else if($item=='projectDailyHours'){
+      $result.='<table style="witdh:100%">';
+      $result.= '<tr><td class="label" style="padding-top: 9px;padding-right: 10px;">'.i18n('paramStartAM').'</td>';
+      $result.= '<td><div dojoType="dijit.form.TimeTextBox" ';
+      $result.= ' name="startAM" id="startAM"';
+      $result.= ' title=""';
+      $result.= ' type="text" maxlength="5" ';
+      if (sessionValueExists('browserLocaleTimeFormat')) {
+      	$result.= ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormat') . '\'}" ';
+      }
+      $result.= ' style="width:50px; text-align: center;" class="input" ';
+      $result.= ' value="T" ';
+      $result.= ' hasDownArrow="false" ';
+      $result.= ' >';
+      $result.= '</div></td><tr>';
+      
+      $result.= '<tr><td class="label" style="padding-top: 9px;padding-right: 10px;">'.i18n('paramEndAM').'</td>';
+      $result.= '<td><div dojoType="dijit.form.TimeTextBox" ';
+      $result.= ' name="endAM" id="endAM"';
+      $result.= ' title=""';
+      $result.= ' type="text" maxlength="5" ';
+      if (sessionValueExists('browserLocaleTimeFormat')) {
+      	$result.= ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormat') . '\'}" ';
+      }
+      $result.= ' style="width:50px; text-align: center;" class="input" ';
+      $result.= ' value="T" ';
+      $result.= ' hasDownArrow="false" ';
+      $result.= ' >';
+      $result.= '</div></td><tr>';
+      
+      $result.= '<tr><td class="label" style="padding-top: 9px;padding-right: 10px;">'.i18n('paramStartPM').'</td>';
+      $result.= '<td><div dojoType="dijit.form.TimeTextBox" ';
+      $result.= ' name="startPM" id="startPM"';
+      $result.= ' title=""';
+      $result.= ' type="text" maxlength="5" ';
+      if (sessionValueExists('browserLocaleTimeFormat')) {
+      	$result.= ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormat') . '\'}" ';
+      }
+      $result.= ' style="width:50px; text-align: center;" class="input" ';
+      $result.= ' value="T" ';
+      $result.= ' hasDownArrow="false" ';
+      $result.= ' >';
+      $result.= '</div></td><tr>';
+      
+      $result.= '<tr><td class="label" style="padding-top: 9px;padding-right: 10px;">'.i18n('paramEndPM').'</td>';
+      $result.= '<td><div dojoType="dijit.form.TimeTextBox" ';
+      $result.= ' name="endPM" id="endPM"';
+      $result.= ' title=""';
+      $result.= ' type="text" maxlength="5" ';
+      if (sessionValueExists('browserLocaleTimeFormat')) {
+      	$result.= ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormat') . '\'}" ';
+      }
+      $result.= ' style="width:50px; text-align: center;" class="input" ';
+      $result.= ' value="T" ';
+      $result.= ' hasDownArrow="false" ';
+      $result.= ' >';
+      $result.= '</div></td><tr>';
+      $result.='</table>';
+      debugLog($this);
       return $result;
     }
   }

@@ -25,37 +25,27 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 /* ============================================================================
- * RiskType defines the type of a risk.
+ * Stauts defines list stauts an activity or action can get in (lifecylce).
  */ 
 require_once('_securityCheck.php');
-class Delay extends SqlElement {
+class StatusPeriodMain extends SqlElement {
 
-  // extends SqlElement, so has $id
-  public $_sec_Description;
-  public $id;    // redefine $id to specify its visible place
-  //public $scope;
-  public $idType;
-  public $idUrgency;
-  public $value;
-  public $idDelayUnit;
-  public $idle;
-  public $idStatus;
-  //public $_sec_void;
+  public $id;    
+  public $name;
+  public $refType;
+  public $refId;
+  public $active;
+  public $type;
+  public $startDate;
+  public $endDate;
+  public idStatusStart;
+  public $idStatusEnd;
+  public idUserStart;
+  public $idUserEnd;
+  public $duration;
+  public $durationOpenTime;
   
-  public $_noCopy;
-  
-  // Define the layout that will be used for lists
-  
-  private static $_fieldsAttributes=array("idType"=>"hidden", 
-                                          "idUrgency"=>"required",
-                                          "value"=>"required",
-                                          "idDelayUnit"=>"required",
-                                          "scope"=>"hidden",
-                                          "idStatus"=>"hidden");
-  
-  private static $_databaseCriteria = array();
-  private static $_databaseTableName = 'delay';
-  
+  private static $_fieldsAttributes=array();
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -77,8 +67,7 @@ class Delay extends SqlElement {
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
-
-    /** ==========================================================================
+  /** ==========================================================================
    * Return the specific fieldsAttributes
    * @return the fieldsAttributes
    */
@@ -86,19 +75,8 @@ class Delay extends SqlElement {
     return self::$_fieldsAttributes;
   }
   
-  /** ========================================================================
-   * Return the specific database criteria
-   * @return the databaseTableName
-   */
-  protected function getStaticDatabaseCriteria() {
-    return self::$_databaseCriteria;
+  public function save() {
+      $result = parent::save();         
+      return $result;
   }
-  
-  protected function getStaticDatabaseTableName() {
-    $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
-    return $paramDbPrefix . self::$_databaseTableName;
-  }
-  
-  
-}
-?>
+}?>

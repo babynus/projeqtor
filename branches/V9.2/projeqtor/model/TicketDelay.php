@@ -42,6 +42,7 @@ class TicketDelay extends Delay {
   public $idle;
   //public $_sec_void;
   public $isProject;
+  public $idTicketStatus;
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
@@ -60,11 +61,13 @@ class TicketDelay extends Delay {
                                           "idDelayUnit"=>"required",
                                           "scope"=>"hidden",
                                           "isProject"=>"hidden",
+                                          "idTicketStatus"=>"required",
+                                          "idStatus"=>"hidden",
   );
   
   private static $_databaseCriteria = array('scope'=>'Ticket');
   
-  private static $_databaseColumnName = array("idTicketType"=>"idType");
+  private static $_databaseColumnName = array("idTicketType"=>"idType", "idTicketStatus"=>"idStatus");
   
   private static $_colCaptionTransposition = array('idDelayUnit'=>'unit');
   
@@ -94,6 +97,7 @@ class TicketDelay extends Delay {
     } else {
       $crit.=  " and idProject is null";
     }
+    $crit.= " and idStatus=".Sql::fmtId($this->idTicketStatus);
     $list=$this->getSqlElementsFromCriteria(null, false, $crit);
     if (count($list)>0) {
       $result.="<br/>" . i18n('errorDuplicateTicketDelay',null);
@@ -152,7 +156,6 @@ class TicketDelay extends Delay {
    */
   protected function getStaticColCaptionTransposition($fld=null) {
     return self::$_colCaptionTransposition;
-  }  
-
+  }
 }
 ?>

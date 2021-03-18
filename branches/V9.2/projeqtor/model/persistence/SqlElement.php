@@ -8172,6 +8172,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       'productversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
       'productversioncomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
       'productversioncompatibility'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'projectdailyhours'=>array('2'=>'left', '3'=>'right','99'=>'treatment'),
       'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
       'quotationslist'=>array('2'=>'bottom', '3'=>'extra','99'=>'financial'),
       'receivers'=>array('2'=>'bottom', '3'=>'extra','99'=>'treatment'),

@@ -42,7 +42,7 @@ $versionHistory = array(
   "V6.0.0", "V6.0.2", "V6.0.3", "V6.0.6", "V6.1.0", "V6.1.1", "V6.1.3", "V6.2.0", "V6.3.0", "V6.3.2", "V6.3.3", "V6.4.0", "V6.4.1", "V6.4.2", "V6.4.3", "V6.5.0", "V6.5.1", "V6.5.5", "V6.6.0",
 	"V7.0.0", "V7.0.2", "V7.1.0", "V7.1.2", "V7.1.3", "V7.2.0", "V7.2.3", "V7.2.6", "V7.3.0", "V7.3.2", "V7.3.3", "V7.4.0", "V7.4.1", "V7.4.3",
 	"V8.0.0", "V8.0.2", "V8.1.0", "V8.2.0", "V8.2.1", "V8.2.2", "V8.2.3", "V8.3.0", "V8.3.1", "V8.3.2","V8.3.4", "V8.3.5", "V8.4.0", "V8.4.1", "V8.5.0", "V8.5.1", "V8.6.0", "V8.6.1", "V8.6.2", "V8.6.5", 
-  "V9.0.0", "V9.0.2", "V9.0.3", "V9.0.5", "V9.1.0", "V9.1.1"
+  "V9.0.0", "V9.0.2", "V9.0.3", "V9.0.5", "V9.1.0", "V9.1.1", "V9.2.0"
 );
 $versionParameters =array(
   'V1.2.0'=>array('paramMailSmtpServer'=>'localhost',
@@ -1134,6 +1134,18 @@ if (beforeVersion($currVersion,"V9.1.1") ) {
   }
   error_reporting(E_ALL);
   disableCatchErrors();
+}
+
+if (beforeVersion($currVersion,"V9.2.0") ) {
+  $habilitation = new HabilitationOther();
+  $workVisibility = $habilitation->getSqlElementsFromCriteria(array('scope'=>'work'));
+  foreach ($workVisibility as $workV){
+    if($workV->rightAccess == 4){
+      $canWorkOnTicket = $habilitation->getSingleSqlElementFromCriteria('HabilitationOther', array('scope'=>'canWorkOnTicket', 'idProfile'=>$workV->idProfile));
+      $canWorkOnTicket->rightAccess = 1;
+      $canWorkOnTicket->save();
+    }
+  }
 }
 
 // To be sure, after habilitations updates ...
