@@ -437,10 +437,10 @@ if ($idProject) {
     //$critKpi[$period]=$periodValue;
     /*$lstKpi=(new KpiHistory())->getSqlElementsFromCriteria($critKpi,false,null,'kpiValue desc');
     if (count($lstKpi)==0) {
-      $where="idKpiDefinition=$kpi->id and refType='Project' and refId=$prj->id and $period<=$periodValue";
+      $where="idKpiDefinition=$kpi->id and refType='Project' and refId=$prj->id and $period<='$periodValue'";
       $lstKpi=(new KpiHistory())->getSqlElementsFromCriteria(null,false,$where,'kpiDate desc');
     }*/
-    $where="idKpiDefinition=$kpi->id and refType='Project' and refId=$idProject and $period<=$periodValue";
+    $where="idKpiDefinition=$kpi->id and refType='Project' and refId=$idProject and $period<='$periodValue'";
     $newKpiHis = new KpiHistory();
     $lstKpi=$newKpiHis->getSqlElementsFromCriteria(null,false,$where,'kpiDate desc');
     $kpiDispValue='';
