@@ -197,7 +197,7 @@
                                     $onChange  = "getWorkflowStatusesOfLeaveType('fromLeaveCalendar',dijit.byId('popupLeaveType').value);";
                                 ?>
                                 <select id='popupLeaveType' 
-                                        dojoType='dijit.form.FilteringSelect'
+                                        dojoType='dijit.form.Select'
                                         onchange="<?php echo $onChange; ?>;"
                                         required>
                                 </select>
@@ -206,7 +206,7 @@
                             <td colspan='2'>
                                 <label for='popupStatus'><?php echo i18n("colIdStatus");?><?php echo Tool::getDoublePoint();?></label>
                                 <select id='popupStatus' 
-                                        data-dojo-type='dijit.form.FilteringSelect' 
+                                        data-dojo-type='dijit.form.Select' 
                                         onchange="changesPopupStatus();calculateNbRemainingDays('fromLeaveCalendar',<?php echo $idUser; ?>, <?php echo $idUser; ?>);"
                                         required>
                                 </select>
