@@ -246,7 +246,7 @@ $months = array (
                                 <input data-dojo-type="dijit/form/NumberSpinner" id="rightStartMonthPeriod" value="<?php echo $startMonthPeriod;?>"
                                     data-dojo-props="smallDelta:1, constraints:{min:1,max:12,places:0}" name="rightStartMonthPeriod" style="width:100px"/>
 -->
-                                <select id="rightStartMonthPeriod"  dojoType="dijit.form.FilteringSelect"
+                                <select id="rightStartMonthPeriod"  dojoType="dijit.form.Select"
                                         name="rightStartMonthPeriod" 
                                         class="input required" 
                                         value="<?php 
