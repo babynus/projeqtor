@@ -499,7 +499,7 @@ class Parameter extends SqlElement {
                      'offDays'=>i18n('offDays'));
          break;
        
-       case 'porjectDailyHours':
+       case 'projectDailyHours':
          $list=array('false'=>i18n('displayNo'),
                     'true'=>i18n('displayYes'));
          break;
@@ -921,7 +921,7 @@ class Parameter extends SqlElement {
             	                'endAM'=>'time',
             	                'startPM'=>'time',
             	                'endPM'=>'time',
-            	                'porjectDailyHours'=>'list',
+            	                'projectDailyHours'=>'list',
             	              'sectionOpenDays'=>'section',
             	                'OpenDayMonday'=>'list',
             	                'OpenDayTuesday'=>'list',

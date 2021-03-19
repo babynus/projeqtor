@@ -466,7 +466,7 @@ if ($type=='habilitation') {
     $date->setTimestamp(strtotime($endPm));
     $date->modify('+60 minute');
     $endPm = date('H:i', $date->getTimestamp());
-    $startAm = Parameter::getGlobalParameter('startAM');
+    $startAm = getDailyHours(null, 'startAM', false);
     $date=new DateTime();
     $date->setTimestamp(strtotime($startAm));
     $date->modify('-45 minute');
