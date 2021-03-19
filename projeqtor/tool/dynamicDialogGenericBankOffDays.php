@@ -194,7 +194,7 @@ $months = array (
                                 <label class="longLabel" for="genericBankOffDayEasterDay" style="white-space:nowrap;width:250px"><?php echo i18n('easterDay');?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
                             </td>
                             <td>
-                                <select id="genericBankOffDayEasterDay"  dojoType="dijit.form.FilteringSelect"
+                                <select id="genericBankOffDayEasterDay"  dojoType="dijit.form.Select"
                                         name="genericBankOffDayEasterDay" 
                                         class="input" 
                                         value="<?php 
