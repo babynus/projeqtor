@@ -3099,6 +3099,8 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
           loadContent("../view/dashboardTicketMain.php", "centerDiv");
         } else if (dojo.byId('currentPhpPage') && dojo.byId('currentPhpPage').value) {
           loadContent("../view/dashboardTicketMain.php", "centerDiv");
+        }else if(dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value =='SubTask'){
+          refreshAllSubTaskList();
         } else if (currentPluginPage) {
           loadContent(currentPluginPage, "centerDiv");
         }
