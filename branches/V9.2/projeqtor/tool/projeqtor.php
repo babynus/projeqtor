@@ -3444,6 +3444,38 @@ function workTimeDiffDateTime($start, $end) {
   return $delay;
 }
 
+function getDailyHours($idProject, $col, $asMs){
+  $time = null;
+  if(!sessionValueExists('startAm') and !sessionValueExists('endAm') and !sessionValueExists('startPm') and !sessionValueExists('endPm')){
+    $ms = ($asMs)?'00':'';
+    if($idProject and Parameter::getGlobalParameter('projectDailyHours')=='true'){
+    	$project = new Project($idProject, true);
+    	$startAM=$project->startAM;
+    	$endAM=$project->endAM;
+    	$startPM=$project->startPM;
+    	$endPM=$project->endPM;
+    	if($col)$time = $project->$col;
+    }else{
+    	$startAM=Parameter::getGlobalParameter('startAM').$ms;
+    	$endAM=Parameter::getGlobalParameter('endAM').$ms;
+    	$startPM=Parameter::getGlobalParameter('startPM').$ms;
+    	$endPM=Parameter::getGlobalParameter('endPM').$ms;
+    	if($col)$time = Parameter::getGlobalParameter($col).$ms;
+    }
+    setSessionValue('startAm', $startAM);
+    setSessionValue('endAM', $endAM);
+    setSessionValue('startPM', $startPM);
+    setSessionValue('endPM', $endPM);
+  }else{
+    $startAM=getSessionValue('startAM');
+    $endAM=getSessionValue('endAM');
+    $startPM=getSessionValue('startPM');
+    $endPM=getSessionValue('endPM');
+    if($col)$time=getSessionValue($col);
+  }
+  if($col)return $time;
+}
+
 function addDelayToDatetime($dateTime, $delay, $unit) {
   $date=substr($dateTime, 0, 10);
   $time=substr($dateTime, 11, 5);
@@ -3468,10 +3500,10 @@ function addDelayToDatetime($dateTime, $delay, $unit) {
     $newDate=addDaysToDate($date, $res['d']);
     return $newDate." ".padto2($res['h']).":".padto2($res['m']).':00';
   } else if ($unit=='OH') {
-    $startAM=Parameter::getGlobalParameter('startAM');
-    $endAM=Parameter::getGlobalParameter('endAM');
-    $startPM=Parameter::getGlobalParameter('startPM');
-    $endPM=Parameter::getGlobalParameter('endPM');
+    $startAM=getDailyHours(null, 'startAM', true);
+    $endAM=getDailyHours(null, 'endAM', true);
+    $startPM=getDailyHours(null, 'startPM', true);
+    $endPM=getDailyHours(null, 'endPM', true);
     if (!$startAM or !$endAM or !$startPM or !$endPM) {
       return $dateTime;
     }
@@ -4530,10 +4562,10 @@ function displayLastOperationStatus($result) {
 
 function calculateFractionFromTime($time, $subtractMidDay=true) {
   $paramHoursPerDay=Parameter::getGlobalParameter('dayTime');
-  $paramStartAm=Parameter::getGlobalParameter('startAM');
-  $paramEndAm=Parameter::getGlobalParameter('endAM');
-  $paramStartPm=Parameter::getGlobalParameter('startPM');
-  $paramEndPm=Parameter::getGlobalParameter('endPM');
+  $paramStartAm=getDailyHours(null, 'startAM', true);
+  $paramEndAm=getDailyHours(null, 'endAM', true);
+  $paramStartPm=getDailyHours(null, 'startPM', true);
+  $paramEndPm=getDailyHours(null, 'endPM', true);
   $minutesPerDay=60*floatval($paramHoursPerDay);
   if (!$minutesPerDay) return 0;
   $minutesTime=round(strtotime("1970-01-01 $time UTC")/60, 0);
