@@ -109,7 +109,7 @@ if($editMode==="true"){
                                 <label for="idEmployeeEmployeesManaged"><?php echo i18n('Employee');?><?php echo Tool::getDoublePoint();?></label>
                             </td>
                             <td>
-                                <select id="idEmployeeEmployeesManaged"  dojoType="dijit.form.FilteringSelect"
+                                <select id="idEmployeeEmployeesManaged"  dojoType="dijit.form.Select"
                                     name="idEmployeeEmployeesManaged" class="input required" value="<?php echo $idEmployee;?>" required>
                                         <?php
                                             $employeeList = getUserVisibleResourcesList(true, "List",'', false,true,false,true);
