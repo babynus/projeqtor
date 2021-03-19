@@ -38,9 +38,9 @@ class StatusPeriodMain extends SqlElement {
   public $type;
   public $startDate;
   public $endDate;
-  public idStatusStart;
+  public $idStatusStart;
   public $idStatusEnd;
-  public idUserStart;
+  public $idUserStart;
   public $idUserEnd;
   public $duration;
   public $durationOpenTime;

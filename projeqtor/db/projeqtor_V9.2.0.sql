@@ -34,3 +34,8 @@ INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
 UPDATE `${prefix}status` set setHandledStatus='1' where name='paused';
 
 ALTER TABLE `${prefix}delay` ADD `idStatus` INT(12) DEFAULT NULL COMMENT '12';
+
+ALTER TABLE `${prefix}project` ADD `startAM` varchar(100) DEFAULT NULL, 
+							   ADD `endAM` varchar(100) DEFAULT NULL,
+							   ADD `startPM` varchar(100) DEFAULT NULL,
+							   ADD `endPM` varchar(100) DEFAULT NULL;

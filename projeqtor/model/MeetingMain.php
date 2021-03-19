@@ -519,11 +519,11 @@ class MeetingMain extends SqlElement {
     // Start hour
     if ($this->meetingStartTime) $dtStart=strtotime($this->meetingDate.' '.$this->meetingStartTime);
     else if ($this->meetingEndTime) $dtStart=strtotime('-1 hour',strtotime($this->meetingDate.' '.$this->meetingEndTime));
-    else $dtStart=strtotime($this->meetingDate.' '.Parameter::getGlobalParameter('startAM').':00');
+    else $dtStart=strtotime($this->meetingDate.' '.getDailyHours($this->idProject,'startAM', true));
     // End hour
     if ($this->meetingEndTime) $dtEnd=strtotime($this->meetingDate.' '.$this->meetingEndTime);
     else if ($this->meetingStartTime) $dtEnd=strtotime('+1 hour',$dtStart);
-    else $dtEnd=strtotime($this->meetingDate.' '.Parameter::getGlobalParameter('endPM').':00');
+    else $dtEnd=strtotime($this->meetingDate.' '.getDailyHours($this->idProject,'endPM', true));
     //
     $vcal .= "DTSTART:".gmdate('Ymd',$dtStart).'T'.gmdate('Hi',$dtStart)."00Z\r\n";
     $vcal .= "DTEND:".gmdate('Ymd',$dtEnd).'T'.gmdate('Hi',$dtEnd)."00Z\r\n";

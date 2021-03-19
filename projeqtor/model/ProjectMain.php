@@ -92,7 +92,10 @@ class ProjectMain extends SqlElement {
   public $_lib_cancelled;
   
   public $_sec_ProjectDailyHours;
-  public $_spe_projectDailyHours;
+  public $startAM;
+  public $endAM;
+  public $startPM;
+  public $endPM;
   
   public $_sec_ProductprojectProducts;
   public $_ProductProject=array();
@@ -176,7 +179,7 @@ class ProjectMain extends SqlElement {
                                   "commandOnValidWork"=>"nobr",
   		                            "isLeaveMngProject"=>"hidden",
   		                             "locked"=>"hidden",
-  		                             "paused"=>"nobr"
+  		                             "paused"=>"nobr",
   );   
  
   private static $_colCaptionTransposition = array('idResource'=>'manager',
@@ -725,66 +728,6 @@ static function isTheLeaveProject($id=null) {
       }
       $result.='</div>';
       $result.='</td></tr><tr><td colspan="2">&nbsp;</td></tr></table>';
-      return $result;
-    }else if($item=='projectDailyHours'){
-      $result.='<table style="witdh:100%">';
-      $result.= '<tr><td class="label" style="padding-top: 9px;padding-right: 10px;">'.i18n('paramStartAM').'</td>';
-      $result.= '<td><div dojoType="dijit.form.TimeTextBox" ';
-      $result.= ' name="startAM" id="startAM"';
-      $result.= ' title=""';
-      $result.= ' type="text" maxlength="5" ';
-      if (sessionValueExists('browserLocaleTimeFormat')) {
-      	$result.= ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormat') . '\'}" ';
-      }
-      $result.= ' style="width:50px; text-align: center;" class="input" ';
-      $result.= ' value="T" ';
-      $result.= ' hasDownArrow="false" ';
-      $result.= ' >';
-      $result.= '</div></td><tr>';
-      
-      $result.= '<tr><td class="label" style="padding-top: 9px;padding-right: 10px;">'.i18n('paramEndAM').'</td>';
-      $result.= '<td><div dojoType="dijit.form.TimeTextBox" ';
-      $result.= ' name="endAM" id="endAM"';
-      $result.= ' title=""';
-      $result.= ' type="text" maxlength="5" ';
-      if (sessionValueExists('browserLocaleTimeFormat')) {
-      	$result.= ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormat') . '\'}" ';
-      }
-      $result.= ' style="width:50px; text-align: center;" class="input" ';
-      $result.= ' value="T" ';
-      $result.= ' hasDownArrow="false" ';
-      $result.= ' >';
-      $result.= '</div></td><tr>';
-      
-      $result.= '<tr><td class="label" style="padding-top: 9px;padding-right: 10px;">'.i18n('paramStartPM').'</td>';
-      $result.= '<td><div dojoType="dijit.form.TimeTextBox" ';
-      $result.= ' name="startPM" id="startPM"';
-      $result.= ' title=""';
-      $result.= ' type="text" maxlength="5" ';
-      if (sessionValueExists('browserLocaleTimeFormat')) {
-      	$result.= ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormat') . '\'}" ';
-      }
-      $result.= ' style="width:50px; text-align: center;" class="input" ';
-      $result.= ' value="T" ';
-      $result.= ' hasDownArrow="false" ';
-      $result.= ' >';
-      $result.= '</div></td><tr>';
-      
-      $result.= '<tr><td class="label" style="padding-top: 9px;padding-right: 10px;">'.i18n('paramEndPM').'</td>';
-      $result.= '<td><div dojoType="dijit.form.TimeTextBox" ';
-      $result.= ' name="endPM" id="endPM"';
-      $result.= ' title=""';
-      $result.= ' type="text" maxlength="5" ';
-      if (sessionValueExists('browserLocaleTimeFormat')) {
-      	$result.= ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormat') . '\'}" ';
-      }
-      $result.= ' style="width:50px; text-align: center;" class="input" ';
-      $result.= ' value="T" ';
-      $result.= ' hasDownArrow="false" ';
-      $result.= ' >';
-      $result.= '</div></td><tr>';
-      $result.='</table>';
-      debugLog($this);
       return $result;
     }
   }
@@ -1555,6 +1498,9 @@ static function isTheLeaveProject($id=null) {
     }
     if (SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1)){
       self::$_fieldsAttributes["paused"]="readonly";
+    }
+    if (Parameter::getGlobalParameter('projectDailyHours')!='true') {
+      self::$_fieldsAttributes["_sec_ProjectDailyHours"]="hidden";
     }
   }
   

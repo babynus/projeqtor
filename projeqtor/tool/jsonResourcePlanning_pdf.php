@@ -896,10 +896,10 @@ function exportGantt($list) {
 	$nl="\n";
 	$hoursPerDay=Parameter::getGlobalParameter('dayTime');
 	$startDate=date('Y-m-d');
-	$startAM=Parameter::getGlobalParameter('startAM') . ':00';
-	$endAM=Parameter::getGlobalParameter('endAM') . ':00';
-	$startPM=Parameter::getGlobalParameter('startPM') . ':00';
-	$endPM=Parameter::getGlobalParameter('endPM') . ':00';
+	$startAM=getDailyHours(null, 'startAM', true);
+    $endAM=getDailyHours(null, 'endAM', true);
+    $startPM=getDailyHours(null, 'startPM', true);
+    $endPM=getDailyHours(null, 'endPM', true);
 	$name="export_planning_" . date('Ymd_His') . ".xml";
 	$now=date('Y-m-d').'T'.date('H:i:s');
 	if (array_key_exists('startDate',$_REQUEST)) {
