@@ -34,11 +34,7 @@ scriptLog('   ->/view/refreshImputationValidation.php');
 
 $idProject=0;
 if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
-  if(strpos(getSessionValue('project'),',')){
-    $idProject=0;
-  }else{
     $idProject =  getSessionValue('project');
-  }
 }
 $idResource= (RequestHandler::isCodeSet('userNameSubTask'))?trim(RequestHandler::getId('userNameSubTask')):0;
 $idVersion = (RequestHandler::isCodeSet('targetProductVersionSubTask'))?trim(RequestHandler::getId('targetProductVersionSubTask')):0;
