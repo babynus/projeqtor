@@ -180,7 +180,7 @@ if ($typeDynamic == 'update') {
 	<div style="height: <?php echo (isNewGui())?'34':'30';?>px;;">
 		<label class="dialogLabel"><?php echo i18n("colType");?> <?php if (!isNewGui()) echo ': ';?></label> 
 		<select
-			dojoType="dijit.form.FilteringSelect" class="input required" required="true"
+			dojoType="dijit.form.Select" class="input required" required="true"
 			default="" style="width: 150px;" name="kanbanTypeList"
 			id="kanbanTypeList">
 			<option value=""></option>
@@ -307,7 +307,7 @@ if ($typeDynamic == 'update') {
 			$trad = "colIdStatus";
 		echo '<div style="height:40px;"><label class="dialogLabel">' . i18n ( $trad );
 		?> <?php if (!isNewGui()) echo ': ';?></label>
-		<select dojoType="dijit.form.FilteringSelect" class="input required"
+		<select dojoType="dijit.form.Select" class="input required"
 			required="true" style="width: 150px;" name="kanbanTypeList"
 			id="kanbanTypeList">
 <?php foreach ($listFinal as $elmId => $elmName){?>
