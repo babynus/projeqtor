@@ -37,6 +37,7 @@ class ProjectMain extends SqlElement {
   public $_spe_rf; 
   public $name;
   public $idProjectType;
+  public $idProject;
   public $idOrganization;
   public $idCategory;
   public $organizationInherited;
@@ -47,7 +48,6 @@ class ProjectMain extends SqlElement {
   public $projectCode;
   public $contractCode;
   public $clientCode;
-  public $idProject;
   public $idSponsor;
   public $idResource;
   public $idUser;

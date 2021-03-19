@@ -63,7 +63,7 @@ require_once "../tool/projeqtor.php";
              <?php //ADD qCazelles - Dynamic filter - Ticket #78?>
            	 <td style="width:<?php echo (isNewGui())?'67':'80';?>px;" title="<?php echo i18n('helpOrInput');?>" >
            	  <div id="filterLogicalOperator" style="width: <?php echo (isNewGui())?'65':'80';?>px;display: none">
-           	 	<select dojoType="dijit.form.FilteringSelect"
+           	 	<select dojoType="dijit.form.Select"
            	 		id="orOperator" name="orOperator"
            	 		class="input" style="width: <?php echo (isNewGui())?'45px;position:relative;left:5px;':'70px;';?>" value="0">
            	 		<?php echo autoOpenFilteringSelect();?> 
