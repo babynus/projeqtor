@@ -285,7 +285,20 @@ class SubTask extends SqlElement {
     $query="SELECT DISTINCT  $tableName.refId as refid, $tableName.refType as reftype FROM $tableName ";
     $query.="WHERE 1=1";
     if($idProject!=0){
-      $query.=" and  $tableName.idProject = ".$idProject;
+      $lstProj=$idProject;
+      $idProjects=explode(',', $idProject);
+      $idProjectsFlip=array_flip($idProjects);
+      foreach ($idProjects as $id=>$idP){
+        $proj=new Project($idP);
+        $sub=$proj->getRecursiveSubProjectsFlatList();
+        if(!empty($sub)){
+          foreach ($sub as $id=>$subproj){
+            if(array_key_exists($id, $idProjectsFlip))continue;
+            $lstProj.=",".$id;
+          }
+        }
+      }
+      $query.=" and  $tableName.idProject in (".$lstProj.")";
     }else {
       $visibleProject= transformListIntoInClause($user->getVisibleProjects());
       $query.=" and  $tableName.idProject in ".$visibleProject;
