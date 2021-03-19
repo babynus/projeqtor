@@ -41,11 +41,7 @@ $showClosedSubTask=(trim(Parameter::getUserParameter('showClosedSubTask_Global')
 $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Global')!='0') or $showClosedSubTask)?true:false;
 
 if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
-  if(strpos(getSessionValue('project'),',')){
-    $idProject=0;
-  }else{
-    $idProject =  getSessionValue('project');
-  }
+    $idProject=getSessionValue('project');
 }
 ?>
 
