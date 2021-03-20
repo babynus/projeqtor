@@ -1326,7 +1326,7 @@ class Parameter extends SqlElement {
     if(!$showSubTask or Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or !Module::isMenuActive("menuViewAllSubTask")){
       unset($parameterList['displaySubTask']);
     }
-    if ($typeParameter=='userParameter' and !Module::isMenuActive("menuViewAllSubTask")){
+    if(!Module::isMenuActive("menuViewAllSubTask")){
       unset($parameterList['activateSubtasksManagement']);
     }
     if(!isNewGui()){
