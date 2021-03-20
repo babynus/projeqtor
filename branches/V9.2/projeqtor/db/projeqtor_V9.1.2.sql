@@ -6,9 +6,7 @@
 -- ///////////////////////////////////////////////////////////
 -- Patch on V9.2
 
-INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(1,257,0,(select `active` from `${prefix}module` where id=1)),
-(2,257,0,(select `active` from `${prefix}module` where id=2));
+DELETE FROM `${prefix}modulemenu` WHERE `idMenu`=257;
 
 INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
 (1,'subtask','1'),
