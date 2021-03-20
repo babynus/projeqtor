@@ -149,15 +149,6 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess
 (2, 115, 1),
 (3, 115, 1);
 
-INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
-(1,'lockedLeftWork','2'),
-(2,'lockedLeftWork','2'),
-(3,'lockedLeftWork','2'),
-(4,'lockedLeftWork','2'),
-(5,'lockedLeftWork','2'),
-(6,'lockedLeftWork','2'),
-(7,'lockedLeftWork','2');
-
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasExcel`) VALUES
 (116, 'reportWorkTwoDate',1, 'work.php', 130,'1'),
 (117, 'reportWorkDetailTwoDate',1, 'workDetailed.php', 134,'1'),

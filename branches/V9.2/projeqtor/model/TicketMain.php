@@ -513,7 +513,7 @@ class TicketMain extends SqlElement {
       self::$_fieldsAttributes["idMilestone"]='hidden';
     }
     
-    if(Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or Parameter::getUserParameter('displaySubTask')!="YES" or $this->id=='' and !Module::isMenuActive("menuViewAllSubTask")){
+    if(Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or Parameter::getUserParameter('displaySubTask')!="YES" or $this->id==''){
       self::$_fieldsAttributes ['_SubTask'] = 'hidden';
       self::$_fieldsAttributes ['_sec_ToDoList'] = 'hidden';
       unset($this->_sec_ToDoList);
