@@ -458,7 +458,11 @@ The connection window offers some settings and information at user level.
                The next time you reconnect, the last color disc will have your colors.
     
 
-
+      .. compound:: brightness 
+    
+         Adjust the background brightness of your interface.
+         
+         The brighter the brightness, the more white the background will be, move the cursor to dark to obtain the gray interface background.
 
 
 .. _custommenu:
