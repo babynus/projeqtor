@@ -32,6 +32,12 @@ A workflow defines the possibility to go from one status to another one, and who
 
 Once defined, a workflow can be linked to any type of any item. 
 
+It is possible to define events when a state passes. 
+
+If a field is required for the transition from one state to another then you will be automatically redirected to the required field. 
+
+Regardless of the layout and presentation of your screens.
+
 .. figure:: /images/GUI/CONTROLAUTO_SCR_Workflow.png
    :alt: Workflow screen
    

@@ -1124,7 +1124,57 @@ Click on the name of the sub-activity to access its dedicated screen.
    
    Display of sub activities
    
+
+
+
+
+
+
+.. index:: Todo list
+
+.. _todolist:
+
+Todo list
+---------
+
+The list of points to be processed must be activated via the global parameters. 
+
+You can use this feature for activities, tickets, and actions.
+
+By default, the list of points to be processed is inserted in the details area. 
+
+You can call up this list via a specific button in the user settings.
+
+.. figure:: /images/GUI/COMMON_ZONE_Todolist.png
+   :alt: todo list
    
+   Todo list
+
+It is a question of being able to create sub-tasks or steps for the selected elements.
+
+* For each line filled in, a new line appears after it. 
+
+* You can specify the urgency, the person in charge and the state of the point to be treated. 
+
+* You can reorganize the list using the handles in front of the point name.
+
+* To remove a line, delete the text completely and validate after the deletion popup.
+
+* A screen dedicated to the point to be treated is available in the monitoring menu.
+
+* You then have access to all your lists, all elements included.
+
+* Filters are available to restrict the display of these. 
+
+.. figure:: /images/GUI/COMMON_SCR_Todolist.png
+   :alt: todo list screen
+   
+   Todo list screen
+
+
+
+
+
    
    
    
