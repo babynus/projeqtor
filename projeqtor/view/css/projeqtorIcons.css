@@ -411,7 +411,7 @@
 .ProjeQtOrFlatGreen .iconBill16 { background-image: url(customIcons/green/iconClientBill.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGrey .iconBill16 { background-image: url(customIcons/grey/iconClientBill.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconBill16 { background-image: url(customIcons/red/iconClientBill.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconBill16 { background-image: url(customIcons/new/iconClientBill.svg);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconBill16 { background-image: url(customIcons/new/iconCost.svg);  background-repeat: no-repeat; }
 
 .iconBill32 { background-image: url(images/iconClientBill32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconBill32 { background-image: url(customIcons/blue/iconClientBill.png);  background-repeat: no-repeat; }
