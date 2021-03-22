@@ -244,11 +244,13 @@ In order to see and know the assignments on a task, several columns indicate the
    
  .. compound:: Left work
    
-   This is the work that the resource still has to provide for this task
+   This is the work that the resource still has to provide for this task.
    
    Left work is automatically decreased on input of real work.
    
    Resources can adjust this value to estimate the work needed to complete the task.
+   
+   You can block the left work field depending on the profile. 
    
  .. compound:: Reassessed
    
