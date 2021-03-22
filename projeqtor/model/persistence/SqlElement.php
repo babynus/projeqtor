@@ -7877,9 +7877,9 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         $result['refActualDueDate']=self::getRefActualDueDate($this->ref1Type, $this->ref1Id);
         $result['refDate']=self::getRefDate($this->ref1Type, $this->ref1Id);
         $result['refDescription']=self::getRefDescription($this->ref1Type, $this->ref1Id);
-        if (property_exists($this->ref1Type, 'contactFunction')) $result['contactFunction']=SqlList::getFieldFromId($this->ref1Type, $this->ref1Id,'contactFunction');
-        if (property_exists($this->ref1Type, 'email')) $result['email']=SqlList::getFieldFromId($this->ref1Type, $this->ref1Id,'email');
-        if (property_exists($this->ref1Type, 'phone')) $result['phone']=SqlList::getFieldFromId($this->ref1Type, $this->ref1Id,'phone');
+        if ($this->ref1Type and property_exists($this->ref1Type, 'contactFunction')) $result['contactFunction']=SqlList::getFieldFromId($this->ref1Type, $this->ref1Id,'contactFunction');
+        if ($this->ref1Type and property_exists($this->ref1Type, 'email')) $result['email']=SqlList::getFieldFromId($this->ref1Type, $this->ref1Id,'email');
+        if ($this->ref1Type and property_exists($this->ref1Type, 'phone')) $result['phone']=SqlList::getFieldFromId($this->ref1Type, $this->ref1Id,'phone');
       }
     }
     if (get_class($this)=='Project' and !$parent) {
