@@ -39,3 +39,33 @@ ALTER TABLE `${prefix}project` ADD `startAM` varchar(100) DEFAULT NULL,
 							   ADD `endAM` varchar(100) DEFAULT NULL,
 							   ADD `startPM` varchar(100) DEFAULT NULL,
 							   ADD `endPM` varchar(100) DEFAULT NULL;
+
+CREATE TABLE `${prefix}activityworkunit` (
+`id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+`refType` varchar(100) DEFAULT NULL,
+`refId` int(12) unsigned DEFAULT NULL COMMENT '12',
+`idWorkUnit` int(12) unsigned DEFAULT NULL COMMENT '12',
+`idComplexity` int(12) unsigned DEFAULT NULL COMMENT '12',
+`quantity` decimal(8,3) unsigned DEFAULT NULL,
+`idWorkCommand` INT(12) DEFAULT NULL COMMENT '12',
+PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}activityworkunit` (refType, refId, idWorkUnit, idComplexity , quantity , idWorkCommand)
+SELECT refType, refId, idWorkUnit, idComplexity , quantity , idWorkCommand
+FROM `${prefix}planningelement` WHERE idWorkUnit is not null and idComplexity is not null and quantity is not null;
+
+ALTER TABLE `${prefix}planningelement` ADD COLUMN `hasWorkUnit` int(1) unsigned DEFAULT 0 COMMENT '1';
+ALTER TABLE `${prefix}planningelementbaseline` ADD COLUMN `hasWorkUnit` int(1) unsigned DEFAULT 0 COMMENT '1';
+
+UPDATE `${prefix}planningelement` SET hasWorkUnit=1 
+WHERE `idWorkUnit` is not null and `idComplexity` is not null and `quantity` is not null;
+
+ALTER TABLE `${prefix}planningelement` DROP COLUMN `idWorkUnit`;
+ALTER TABLE `${prefix}planningelement` DROP COLUMN `idComplexity`;
+ALTER TABLE `${prefix}planningelement` DROP COLUMN `quantity`;
+ALTER TABLE `${prefix}planningelement` DROP COLUMN `idWorkCommand`;
+ALTER TABLE `${prefix}planningelementbaseline` DROP COLUMN `idWorkUnit`;
+ALTER TABLE `${prefix}planningelementbaseline` DROP COLUMN `idComplexity`;
+ALTER TABLE `${prefix}planningelementbaseline` DROP COLUMN `quantity`;
+ALTER TABLE `${prefix}planningelementbaseline` DROP COLUMN `idWorkCommand`;
