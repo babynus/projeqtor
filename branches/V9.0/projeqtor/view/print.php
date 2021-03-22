@@ -123,6 +123,29 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
        $name="export";
      }
      $name.="_".date('Ymd_His').'.'.$ext;
+     $idTemplate=RequestHandler::getId('idTemplate');
+     if (!$idTemplate and strpos(RequestHandler::getValue('page'), 'idTemplate=')) {
+       $split=explode('?',RequestHandler::getValue('page'));
+       if (count($split)>1) {
+         $spl=explode('&',$split[1]);
+         foreach($spl as $sp) {
+           $rsp=explode('=', $sp);
+           if (count($rsp)==2 and $rsp[0]=='idTemplate') {
+             $idTemplate=$rsp[1];
+           }
+         }
+       }
+     }
+     if ($idTemplate) {
+       $objectClass=RequestHandler::getClass('objectClass');
+       $className=i18n($objectClass);
+       $id=RequestHandler::getId('objectId');
+       $obj=null;
+       if ($objectClass) $obj=new $objectClass($id);
+       $tmp=new TemplateReport($idTemplate);
+       $tmpName=$tmp->getOutputFileName($obj);
+       if ($tmpName) $name=$tmpName;
+     }
      header("Content-Type: " . $contentType . "; name=\"" . $name . "\""); 
 	   header("Content-Transfer-Encoding: binary"); 
 	   //header("Content-Length: $size"); 
@@ -272,7 +295,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
   finalizePrint();
 ?>
 <?php function finalizePrint() {
-  global $outMode, $download, $includeFile, $orientation, $printInfo;
+  global $outMode, $download, $includeFile, $orientation, $printInfo,$templateOutputFileName;
   $pdfLib='html2pdf';
   //$pdfLib='mPdf';
   if (isWkHtmlEnabled()) {
@@ -307,7 +330,10 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
     }
     $outputFileName.=".pdf";
     $outputFileName=Security::checkValidFileName($outputFileName,false);
-    if (function_exists('getCustomReportName')) {
+    if ($templateOutputFileName) {
+      $customName=$templateOutputFileName;
+      $outputFileName=$templateOutputFileName;
+    } else if (function_exists('getCustomReportName')) {
       $customName=getCustomReportName($objectClass,$objectId,'detail','pdf',$outputFileName); // May return null or empty string to keep default name
       if ($customName) $outputFileName=$customName;
     }
@@ -316,7 +342,10 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
     $outputFileName=i18n('menu'.$objectClass).'_'.date('Ymd_His');
     $outputFileName.=".pdf";
     $outputFileName=Security::checkValidFileName($outputFileName,false);
-    if (function_exists('getCustomReportName')) {
+    if ($templateOutputFileName) {
+      $customName=$templateOutputFileName;
+      $outputFileName=$templateOutputFileName;
+    } else if (function_exists('getCustomReportName')) {
       $customName=getCustomReportName($objectClass,null,'list','pdf',$outputFileName); // May return null or empty string to keep default name
       if ($customName) $outputFileName=$customName;
     }
@@ -325,7 +354,10 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
     if ($outMode=='excel') {
       $outputFileName.=".xlsx";
       $content=ob_get_contents();
-      if (function_exists('getCustomReportName')) {
+      if ($templateOutputFileName) {
+        $customName=$templateOutputFileName;
+        $outputFileName=$templateOutputFileName;
+      } else if (function_exists('getCustomReportName')) {
         $customName=getCustomReportName($_REQUEST['reportName'],null,'report','xlsx',$outputFileName); // May return null or empty string to keep default name
         if ($customName) $outputFileName=$customName;
       }
@@ -339,13 +371,17 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
       }
     } else {
       $outputFileName.=".pdf";
-      if (function_exists('getCustomReportName')) {
+      if ($templateOutputFileName) {
+        $customName=$templateOutputFileName;
+        $outputFileName=$templateOutputFileName;
+      } else if (function_exists('getCustomReportName')) {
         $customName=getCustomReportName($_REQUEST['reportName'],null,'report','pdf',$outputFileName); // May return null or empty string to keep default name
         if ($customName) $outputFileName=$customName;
       }
     }
   }
   if (isset($pdfNamePrefix) and !$customName) $outputFileName=$pdfNamePrefix.$outputFileName;
+  if (!$outputFileName and $templateOutputFileName) $outputFileName=pathinfo($templateOutputFileName, PATHINFO_FILENAME).'.pdf';
   if ($outMode=='pdf') {
     $content = ob_get_clean();   
     if ($pdfLib=='html2pdf') {
