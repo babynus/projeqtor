@@ -7245,6 +7245,7 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
   var datastore=new dojo.data.ItemFileReadStore({
     url : urlList
   });
+  
   var store=new dojo.store.DataStore({
     store : datastore
   });
@@ -7277,7 +7278,7 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
       mySelect.set("value",selected); 
     }
     if(destination){
-      if(destination.substr(0,15)=='filterValueList') {
+      if(destination.substr(0,15)=='filterValueList' || destination=='multipleUpdateValueList') {
         var list=dojo.byId(destination);
         selectionList=selected.split('_');
         //while (list.options.length) {list.remove(0);} // Clean combo
