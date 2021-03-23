@@ -3120,6 +3120,17 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
   }
   loadContent('../view/shortcut.php', "projectLinkDiv", null, null, null, null,
       true);
+  // if template report installed, actualize icon for PDF export
+  if (dojo.byId('objectClass') && dojo.byId('modePdfForPdfButton') && dojo.byId('modePdfForPdfButton').value!='onlyPdf') { 
+    dojo.xhrGet({
+      url:'../tool/getModePdf.php?objectClass='+dojo.byId('objectClass').value,
+      handleAs: "text",
+      load: function (data) {
+        dojo.byId('modePdfForPdfButton').value=data;
+        dijit.byId("listPrintPdf").set('iconClass',"dijitButtonIcon dijitButtonIcon"+data[0].toUpperCase()+data.substring(1));
+      }
+    });
+  }
 }
 
 /**
