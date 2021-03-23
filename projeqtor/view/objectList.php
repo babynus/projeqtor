@@ -1230,25 +1230,29 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
 <?php }?>            
 <?php if (! $comboDetail) {?> 
 <?php   $modePdf='Pdf';
+        $modePdfChange='onlyPdf';
         if (SqlElement::class_exists('TemplateReport') and Plugin::isPluginEnabled('templateReport')) {
           $tmpMode=TemplateReport::getMode($objectClass,null,'list');
           if ($tmpMode=='multi') {$modePdf='download multi';}
           else if ($tmpMode=='download' or $tmpMode=='show') {$modePdf='download';}
+          $modePdfChange=$modePdf;
         }
       ?> 
              <?php organizeListButtons();?>              
              <td width="36px" class="<?php if (! isNewGui()) echo 'allSearchFixLength';?>">
+              <input type="hidden" style="width:32px" id="modePdfForPdfButton" value="<?php echo $modePdfChange;?>" />
               <button title="<?php echo ($modePdf=='pdf')?i18n('reportPrintPdf'):i18n('reportPrintTemplate');?>"
                dojoType="dijit.form.Button" 
                id="listPrintPdf" name="listPrintPdf"
                iconClass="dijitButtonIcon dijitButtonIcon<?php echo ucfirst($modePdf);?>" class="detailButton" showLabel="false">
                 <script type="dojo/connect" event="onClick" args="evt">
                  hideExtraButtons('extraButtonsList');
-                 <?php if (substr($modePdf,-5)=="multi" and SqlElement::class_exists('TemplateReport') ) {?>
+                 var modePdf=dojo.byId("modePdfForPdfButton").value;
+                 if (<?php echo (SqlElement::class_exists('TemplateReport'))?'1':'0';?> && modePdf.substr(-5)=="multi") {
                   selectTemplateForReport('<?php echo $objectClass?>','list');
-                 <?php } else { ?> 
+                 } else { 
                   showPrint("../tool/jsonQuery.php", 'list', null, 'pdf');
-                 <?php } ?>
+                 }
                 </script>
               </button>              
             </td>
