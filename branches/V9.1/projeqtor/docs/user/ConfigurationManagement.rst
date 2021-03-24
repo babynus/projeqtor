@@ -52,7 +52,6 @@ Allows to link components to product.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -158,7 +157,6 @@ By profile, possibility to have a different list of the version of the original 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 45, 80
    :header-rows: 1
 
    * - Field
@@ -248,7 +246,6 @@ Possibility to define component types and component versions that will only be u
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 40, 70
    :header-rows: 1
 
    * - Field
@@ -319,7 +316,6 @@ Else, the version name will entered manually.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 45, 80
    :header-rows: 1
 
    * - Field
@@ -447,7 +443,6 @@ This section allows to manage links between projects and versions of products.
    Project / Version Link
 
 .. list-table:: Project-Version link dialog box
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field

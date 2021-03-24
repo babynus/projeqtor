@@ -25,7 +25,6 @@ Allows to manage provider list.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 40, 80
    :header-rows: 1
 
    * - Field

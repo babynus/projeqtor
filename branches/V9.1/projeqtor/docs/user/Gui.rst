@@ -1618,7 +1618,6 @@ See: :ref:`thumbnails`
       .. tabularcolumns:: |l|l|
       
       .. list-table:: Fields of changes
-         :widths: 30, 70
          :header-rows: 1
       
          * - Field
@@ -1774,8 +1773,6 @@ Special fields
 
 .. rubric:: Accelerator buttons
 
-
-.. _movetonextstatus-button:
 
  .. compound:: Move to the next status
 

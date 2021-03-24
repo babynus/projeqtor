@@ -1171,9 +1171,13 @@ This functionality will only be accessible if the :ref:`Revenue management<modul
    
    Work units Catalog screen
    
-The catalog has no inheritance. It is only linked to one and the same project.
+Each project can only have one catalog.
 
-If your catalog is attached to a parent project, the sub-projects of the latter will not have access to this catalog and vice versa.
+If the activity project has a catalog, we present the OUs of this catalog. 
+
+Otherwise, we search for the catalog of the parent project, recursively going up the parent until we find a catalog. 
+
+We stop at the first catalog found. 
 
 You can select an OU on an activity, if the project has a “Variable” turnover valuation mode.
 
@@ -1302,5 +1306,63 @@ The project turnover will be updated from the sum of the turnover of the project
 The turnover of the activities and the UO, Complexity and Quantity data will only be accessible for "basic" activities (which do not have sub-activities). For "parent" activities, the turnover will be consolidated from the turnover of the sub-activities.
 
 
+.. index:: Management of ordered work
+
+.. index:: Ordered work
+
+.. _OrderedWork:
+
+Management of ordered work
+==========================
+
+The services ordered use the work unit catalog functionality. 
+
+You must "activate ordered services" in the :ref:`global parameters<gp-revenue-work-unit>`
+
+.. rubric:: On the activities
+
+In the Turnover section in Progress of the details area, the drop-down menu of the services ordered offers you the list of orders, 
+
+only if the project is an activity project, where the unit of work ordered is the same unit of work on the activity and where the complexity is consistent with that of the order.
 
 
+.. figure:: /images/GUI/INCOMES_ZONE_OrderedWork.png
+   :alt: Ordered work on activities
+   
+   Ordered work on activities
+   
+Select the order corresponding to the setting up of your activity in order to follow the realization and the invoicing of these units of works.
+
+Be careful though, some rules apply:
+
+* the quantity must not be less than the quantity already invoiced,
+* the quantity must not be less than the quantity already carried out
+* if there is a quantity performed or invoiced, the unit of work and the complexity cannot be changed   
+
+
+
+.. rubric:: On the commands
+
+On the order that you have linked from your activity, you have a summary table indicating the type of units ordered, 
+
+those that have been carried out, since the monitoring of your activity, 
+
+as well as the number of units and their corresponding amount, already charged.
+
+.. figure:: /images/GUI/INCOMES_ZONE_OrderedWorkCommand.png
+   :alt: Ordered work on activities
+   
+   Ordered work on activities
+   
+
+In the case of invoicing, a table for the invoiced work order will be available.
+
+When copying your order to an invoice, the table of services ordered is also done taking into account the quantity already invoiced.
+
+Please note, some rules apply:
+
+* The sum for the entire invoiced quantity (including current and already invoiced) must not exceed the ordered quantity
+* Selecting a work order displays the work unit, complexity, unit quantity and quantities (stored on the work order line)
+* The amount is calculated = quantity invoiced x unit amount
+* During the update, the reference of the work order cannot be changed
+* When data is inserted / updated, the sum of the data on the work order is updated

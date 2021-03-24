@@ -90,7 +90,7 @@ Unlike activities , milestones have no duration and no work.
 
 But on Projeqtor, you can specify deadlines (positive or negative) to apply to your milestones 
 
-See: :ref:`Milestones on the Gantt chart view<milestones-gantt>`
+See: :ref:`Milestones<milestonesgantt>`
 
 
 
