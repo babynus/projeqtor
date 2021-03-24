@@ -419,7 +419,6 @@ Selecting an item in the list will automatically fill in the note text field.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field

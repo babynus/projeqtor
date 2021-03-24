@@ -23,7 +23,6 @@ Recipients are mainly defined to store billing information.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -54,7 +53,6 @@ Recipients are mainly defined to store billing information.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field

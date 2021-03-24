@@ -82,7 +82,6 @@ Management of :ref:`Organizations` allows to edit the structure of the company i
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -162,7 +161,6 @@ Project type is a way to define common behavior on group of projects.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -207,7 +205,6 @@ Ticket type is a way to define common behavior on group of tickets.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -249,7 +246,6 @@ Activity type is a way to define common behavior on group of activities.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 30, 70
    :header-rows: 1
 
    * - Field
@@ -294,7 +290,6 @@ Milestone type is a way to define common behavior on group of milestones.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 30, 70
    :header-rows: 1
 
    * - Field
@@ -340,7 +335,6 @@ Estimated budget, cash, investment, sale ...
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -422,7 +416,6 @@ Types of contract are already pre-registered: management assistance, hosting, te
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -463,7 +456,6 @@ Types of contract are already pre-registered: management assistance, hosting, te
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -507,7 +499,6 @@ Quote types allow you to organize and categorize the different offers received b
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -549,7 +540,6 @@ Vendor order types categorize the subject of the request: service or product
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -594,7 +584,6 @@ You can create as many invoice types as you need.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -634,7 +623,6 @@ Payment type is a way to define common behavior on group of payments.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -672,7 +660,6 @@ Individual expense type is a way to define common behavior on group of individua
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -713,7 +700,6 @@ Project expense type is a way to define common behavior on group of project expe
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -750,7 +736,6 @@ Expense detail type is a way to define common behavior and calculation mode on g
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -781,7 +766,6 @@ Expense detail type is a way to define common behavior and calculation mode on g
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -813,7 +797,6 @@ Customer quote types allow you to define common behaviors on a quote group, such
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -855,7 +838,6 @@ Client order types allow you to define common order behaviors, such as billing
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -897,7 +879,6 @@ Bill type is a way to define common behavior on group of bills.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -938,7 +919,6 @@ customer payment type defines how the customer will pay the bill
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -981,7 +961,6 @@ catalog types allow you to defune what type of item you produce or sell to your 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1021,7 +1000,6 @@ Risk type is a way to define common behavior on group of risks.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1063,7 +1041,6 @@ Opportunity type is a way to define common behavior on group of opportunities.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1105,7 +1082,6 @@ Action type is a way to define common behavior on group of actions.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1147,7 +1123,6 @@ Issue type is a way to define common behavior on group of issues.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1193,7 +1168,6 @@ Meeting type is a way to define common behavior on group of meetings.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1240,7 +1214,6 @@ Several types are pre recorded: recurring problems, technical and functional imp
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1288,7 +1261,6 @@ Decision type is a way to define common behavior on group of decisions.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1337,7 +1309,6 @@ Question type is a way to define common behavior on group of questions.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1384,7 +1355,6 @@ Question type is a way to define common behavior on group of questions.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1426,7 +1396,6 @@ Message type is a way to define common behavior on group of messages (appearing 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1466,7 +1435,6 @@ Document type is a way to define common behavior on group of documents.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1512,7 +1480,6 @@ Only three context types exist, corresponding to the three selectable fields. (E
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1548,7 +1515,6 @@ Requirement type is a way to define common behavior on group of requirements.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1591,7 +1557,6 @@ Test case type is a way to define common behavior on group of test cases.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1633,7 +1598,6 @@ Test session type is a way to define common behavior on group of test sessions.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1679,7 +1643,6 @@ Customer type is a way to define different kinds of customers  (prospects or cli
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1717,7 +1680,6 @@ Provider type is a way to define different kinds of providers.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1755,7 +1717,6 @@ Product type is a way to define common behavior to group of product.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1797,7 +1758,6 @@ Component type is a way to define common behavior to group of component.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1839,7 +1799,6 @@ Product version type is a way to define common behavior to group of Product vers
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1881,7 +1840,6 @@ Component version type is a way to define common behavior to group of Component 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field

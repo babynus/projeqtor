@@ -19,7 +19,7 @@ Its particularity, in addition to its completeness, is to be oriented towards qu
 
     \newpage
     
-What's new in version 9.0 ?
+What's new in version 9.1 ?
 ---------------------------
 
 Find in this manual, every 3 months, the latest features integrated into ProjeQtOr.
@@ -30,20 +30,29 @@ We offer you a small overview of the major developments and you will find the fu
 
 .. container:: 
    
-   **New Interface**
-
-   .. image:: /images/NewInterface_connexion.png
-      :align: center
+   **Interface improvement**
       
-   ProjeQtOr offers you a whole new interface, more intuitive and more ergonomic.
-   Finally a complete and sexy tool!
+   Resize and move columns in lists by drag & drop, cursor focus on required fields, update all fields in multiple update...
    
    :ref:`gui`
       
          
+.. container:: 
+   
+   **Ordered work**
+      
+   Possibility of defining an order from units of work in your catalog. You can track work ordered, completed and invoiced.
+   
+   :ref:`OrderedWork`
 
-
-
+.. container:: 
+   
+   **Todo list**
+      
+   Ability to list the points to be processed on activities, tickets and actions, without having to create a new object such as a sub-activity.
+   
+   :ref:`todolist`
+   
 .. raw:: latex
 
     \newpage

@@ -94,7 +94,7 @@ Defines behavior of tasks in the real work allocation screen.
 
    .. compound:: Display only started tasks
    
-      Display only tasks with the :ref:`Macro status<treatment-section>` activated.
+      Display only tasks with the :ref:`Macro status<treatmentsection>` activated.
    
    .. compound:: Set to first 'in progress' status
    
@@ -900,7 +900,7 @@ Parameters used in the unit of work catalog.
 
       You can create orders from the units of work that you have created for a project. If you activate this parameter, a new work command field will be accessible in the progress section revenue
 
-      See: work command
+      See: :ref:`OrderedWork`
    
    
    
