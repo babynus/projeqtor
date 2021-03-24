@@ -63,7 +63,6 @@ It can be linked to test cases, it's used to describe how you will test that a g
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -103,7 +102,6 @@ It can be linked to test cases, it's used to describe how you will test that a g
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -156,7 +154,6 @@ A requirement can be locked to ensure that its definition has not changed during
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields when the requirement is locked
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -440,7 +437,6 @@ The test session is defined for a project, a product or one these components.
 This section allows to manage test case runs.
 
 .. list-table:: Fields - Test case runs list
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field

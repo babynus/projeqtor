@@ -255,7 +255,6 @@ This section allows to define functions and cost of the resource.
        
     
 .. list-table:: **Function and cost section fields**
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field

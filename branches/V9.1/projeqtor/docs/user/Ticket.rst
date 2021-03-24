@@ -106,7 +106,6 @@ If a product or component is selected, the responsible defined can be automatica
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 40, 80
    :header-rows: 1
 
    * - Field
@@ -162,7 +161,6 @@ If a product or component is selected, the responsible defined can be automatica
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 40, 80
    :header-rows: 1
 
    * - Field

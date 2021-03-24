@@ -36,7 +36,6 @@ The client defined here is not a person. Real persons into a client entity are c
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field

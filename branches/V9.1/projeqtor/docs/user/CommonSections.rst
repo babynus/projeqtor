@@ -28,7 +28,7 @@ Those sections allows to set information or add information to an item of the el
    
    |two| :ref:`assignment-section` [Activity]
    
-   |three| :ref:`treatment-section`
+   |three| :ref:`treatmentsection`
    
    |four| :ref:`Configuration<configuration-project>`
    
@@ -426,7 +426,7 @@ The workload saved in this window will be displayed to the :ref:`planned interve
    
   
 
-.. _treatment-section: 
+.. _treatmentsection: 
 
 Treatment section
 -----------------
@@ -533,7 +533,7 @@ The dates and durations section allow you to record and display different time i
 
 Validated dates are used for:
 
-* Define the input parameters according to the selected planning mode - See: :ref:`Planning mode<planning-mode-gantt>`
+* Define the input parameters according to the selected planning mode - See: :ref:`Planning mode<planningmodeGantt>`
 
 * Define the initial due dates as a reference in order to check any drifts in your project
 
@@ -881,7 +881,7 @@ Used by Activity & Test session.
 Depending on the planning mode selected, the calculation of your planning will not be executed in the same way.
 
 * See :ref:`Concepts<planning-mode-concept>`
-* See :ref:`Planning modes<planning-mode-gantt>`
+* See :ref:`Planning modes<planningmodeGantt>`
 
   
 .. rubric:: Minimum threshold
@@ -894,14 +894,14 @@ This will require defining the minimum work to be allocated each day and thus fi
 
 Planning will require finding consecutive days with at least the given value possible.
 
-See: :ref:`Minimum threshold<minimum-threshold>`
+See: :ref:`Minimum threshold<minimumthreshold>`
 
 
 .. rubric:: Fix planning
  
 Fix planning will avoid the recalculation of planning for an activity.
   
-To fix the project see: :ref:`treatment-section`
+To fix the project see: :ref:`treatmentsection`
 
 
 .. _progress-section-ticket:
@@ -1198,9 +1198,9 @@ Click on the name of a predecessor or successor to go directly to the element.
   
 .. seealso:: 
 
-  * :ref:`Dependencies<dependency-links>`
+  * :ref:`Dependencies<dependencylinks>`
   
-  * :ref:`Milestones on the Gantt Chart View<milestones-gantt>`
+  * :ref:`Milestones<milestonesgantt>`
 
 .. figure:: /images/GUI/COMMON_ZONE_Success&Predecessor.png
    :alt: Predecessor and Successor section
@@ -1280,6 +1280,8 @@ Click on an item name to directly move to it.
 
    * Click on |Add| to create a new link.
    * Click on |Delete| to delete the corresponding link.
+   * Click on |Download| to download the document
+   * Click on |Edit| to edit the comment linked to the element
 
       
 
@@ -1367,8 +1369,7 @@ You can attach all types of files
      
    * In the attached files area in the toolbar of the details area
    
-   * Directly on the detail area of ​​the element by dragging and dropping
-   
+   * Directly on the detail area of the element by dragging and dropping
    
       
    .. figure:: /images/GUI/COMMON_BOX_attachmentFile.png
@@ -1384,6 +1385,7 @@ You can attach all types of files
      * Click on |Delete| to remove an attachment.
      * Click on |Download| to download the attached file.
      * Click on |Link| to access the hyperlink.
+     * Click on |Edit| to edit the comment atached to the element
    
    
    You can select one or more files of different types with the shortcuts :kbd:`CTRL` when the files are not consecutive or :kbd:`SHIFT` for those that follow.

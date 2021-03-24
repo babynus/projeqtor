@@ -319,13 +319,6 @@ Glossary
     * Item is linked to a element type, element type is linked to a workflow.
     * A workflow defines the possibility to go from one status to another one, more detail, see: :ref:`workflow`.
 
-    .. seealso:: 
-    
-      **Accelerator button**
-
-       This button allows to skip to the next status.
-       
-       More detail, see: :ref:`Move to next status button<moveToNextStatus-button>`.    
    
    Ticketing
    
