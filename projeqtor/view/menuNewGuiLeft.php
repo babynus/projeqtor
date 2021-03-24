@@ -202,7 +202,7 @@ function sortMenus(&$listMenus, &$result, $parent,$level,$rightPluginAcces=false
     $allowedCategory[$category]=$category;
   }
   foreach ($listMenus as $id=>$menu){
-    if(!$rightPluginAcces && $menu->name=='navPlugin')continue;
+    if(!$rightPluginAcces && $menu->name=='navPlugin') continue;
     if($menu->idParent == $parent){
       if ($menu->idParent=='') {
       	$menu->idParent=0;
@@ -335,7 +335,7 @@ function getPlugins (){
     if(strlen($menuPlugin->id)==9)$idMenu=substr($menuPlugin->id,0,-3);
     else  $idMenu=$menuPlugin->id;
     if (!$menuPlugin->canDisplay() ){
-  	   unset($plInstal[$idMenu]);
+  	  unset($plInstal[$idMenu]);
       continue;
     }
     if (securityCheckDisplayMenu($menuPlugin->id, null, getSessionUser())==false) {
@@ -428,7 +428,7 @@ function getNavigationMenuLeft (){
   $allNavSect=array();
   foreach ($result as $id=>$context){
       $context=$context['object'];
-        
+        if ($context->name=='navPlugin' and $rightPluginAcces) continue;;
         if($context->idMenu!=0 ){
           $unset=false;
           $menu=new Menu($context->idMenu);
