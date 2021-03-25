@@ -64,6 +64,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
 <head>   
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <meta name="keywork" content="projeqtor, project management" />
+  <meta name="description" content="ProjeQtOr is Quality Based Project Organizer. Author: PROJEQTOR. Licensing: AGPL V3." />
   <meta name="author" content="projeqtor" />
   <meta name="Copyright" content="Pascal BERNARD" />
 <?php if (! isset($debugIEcompatibility) or $debugIEcompatibility==false) {?>  
