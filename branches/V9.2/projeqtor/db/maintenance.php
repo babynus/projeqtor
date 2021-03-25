@@ -28,6 +28,7 @@ require_once('../model/_securityCheck.php');
 require_once('maintenanceFunctions.php');
 require_once('../tool/configCheckPrerequisites.php');
 $maintenance=true;
+$doNotTriggerAlerts=true;
 Sql::$maintenanceMode=true;
 setSessionValue('setup', false, true);
 // Version History : starts at 0.3.0 with clean database (before scripts are empty)
