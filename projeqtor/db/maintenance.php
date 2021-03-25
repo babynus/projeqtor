@@ -238,23 +238,20 @@ if (beforeVersion($currVersion,"V2.4.2")) {
   }
 }
 
-// For V2.6.0 : migration of parameters to database
-if (beforeVersion($currVersion,"V2.6.0")) {
-  $arrayParamsToMigrate=array('paramDbDisplayName',
-                              'paramMailTitle','paramMailMessage','paramMailSender','paramMailReplyTo','paramAdminMail',
-                              'paramMailSmtpServer','paramMailSmtpPort','paramMailSendmailPath','paramMailShowDetail');
-  migrateParameters($arrayParamsToMigrate); 
-}
+// Migration of parameters to database
 if (beforeVersion($currVersion,"V3.0.0")) {
-  $arrayParamsToMigrate=array('paramLdap_allow_login', 'paramLdap_base_dn', 'paramLdap_host', 'paramLdap_port',
+  $arrayParamsToMigrate=array(
+    'paramDbDisplayName', 'paramMailTitle','paramMailMessage','paramMailSender','paramMailReplyTo','paramAdminMail',
+    'paramMailSmtpServer','paramMailSmtpPort','paramMailSendmailPath','paramMailShowDetail',
+    'paramLdap_allow_login', 'paramLdap_base_dn', 'paramLdap_host', 'paramLdap_port',
     'paramLdap_version', 'paramLdap_search_user', 'paramLdap_search_pass', 'paramLdap_user_filter',
     'paramDefaultPassword','paramPasswordMinLength', 'lockPassword',
     'paramDefaultLocale', 'paramDefaultTimezone', 'currency', 'currencyPosition',
     'paramFadeLoadingMode', 'paramRowPerPage', 'paramIconSize',
     'defaultTheme', 'paramPathSeparator', 'paramAttachmentDirectory', 'paramAttachmentMaxSize',
     'paramReportTempDirectory', 'paramMemoryLimitForPDF',
-    'defaultBillCode','paramMailEol' 
-    //'logFile', 'logLevel', 'paramDebugMode',
+    'defaultBillCode','paramMailEol',
+    'documentRoot','AttachmentMaxSizeMail'
     );
   migrateParameters($arrayParamsToMigrate); 
 }
