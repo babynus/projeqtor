@@ -151,6 +151,7 @@
     } else {
       $compStyle="font-weight: light; font-style:italic;";
     }
+    $compStyle.="white-space:nowrap;";
     echo '<TR>';
     echo '  <TD class="reportTableData" style="border-right:0px;' . $compStyle . '">'.formatIcon($resultt["refType"], 16).'</TD>';
     echo '  <TD class="reportTableData" style="border-left:0px; text-align: left;' . $compStyle . '" nowrap>'. $tab . htmlEncode($resultt["refName"]) . '</TD>';
