@@ -1670,7 +1670,7 @@ class Parameter extends SqlElement {
   static public function isGlobalParameterInDB($code) {
     global $hosted;
     if (isset($hosted) and $hosted==true) {
-      $hostedParams=array('documentRoot','paramAttachmentDirectory','cronImportDirectory','logFile');
+      $hostedParams=array('documentRoot','paramAttachmentDirectory','cronImportDirectory','logFile','logLevel');
       if (in_array($code, $hostedParams)) return false;
     }
     $p=new Parameter();
