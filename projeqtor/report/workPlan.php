@@ -141,6 +141,7 @@
       } else {
         $rowType  = "row";
       }
+      $compStyle.="white-space:nowrap;"; 
       $wbs=$line['wbssortable'];
       $level=(strlen($wbs)+1)/4;
       $tab="";
