@@ -58,6 +58,8 @@ class Type extends SqlElement {
   public $_lib_statusMustChangeCancelled;
   public $lockNoLeftOnDone;
   public $_lib_statusMustChangeLeftDone;
+  public $activityOnRealTime;
+  public $_lib_helpActivityOnRealTime;
   public $showInFlash;
   public $internalData;
   public $scope;
@@ -101,6 +103,8 @@ class Type extends SqlElement {
                                           "scope"=>"hidden",
                                           "lockNoLeftOnDone"=>"hidden",
                                           "_lib_statusMustChangeLeftDone"=>"hidden",
+                                          "activityOnRealTime"=>"hidden",
+                                          "_lib_helpActivityOnRealTime"=>"hidden"
                                           );
   
   private static $_databaseTableName = 'type';

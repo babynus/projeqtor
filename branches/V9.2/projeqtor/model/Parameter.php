@@ -380,6 +380,7 @@ class Parameter extends SqlElement {
       case 'pdfInNewWindow': case "paramConfirmQuit": case "paramShowThumb" : case "paramShowThumbList":
       case 'dependencyStrictMode':
       case 'technicalProgress':
+      case 'activityOnRealTime':
       case 'useOrganizationBudgetElement' :
       case 'notificationSystemActiv':
       case 'updateMilestoneResponsibleFromDeliverable': case 'updateMilestoneResponsibleFromIncoming':
@@ -980,6 +981,7 @@ class Parameter extends SqlElement {
                               'dependencyStrictMode'=>'list',
                               'isManualProgress'=>'list',
                               'technicalProgress'=>'list',
+                              'activityOnRealTime'=>'list',
                               'plannedWorkManualType'=>'list',
                               'manageCapacityForIntervention'=>'list',
                             'menuMilestone'=>'section',

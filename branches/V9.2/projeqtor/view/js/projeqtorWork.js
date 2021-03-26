@@ -388,8 +388,7 @@ function isOffDay(vDate) {
 /**
  * Dispatch updates for left work : re-calculate planned work 
  */
-function dispatchLeftWorkValueChange(rowId) {
-
+function dispatchLeftWorkValueChange(rowId,isOnRealTime) {
   var newLeft=dijit.byId('leftWork_' + rowId).get("value");
   if (newLeft==null || isNaN(newLeft) || newLeft=='') {
     dijit.byId('leftWork_' + rowId).set("value",'0');
@@ -398,6 +397,9 @@ function dispatchLeftWorkValueChange(rowId) {
   var newReal=formatDisplayToDecimal(dojo.byId('realWork_' + rowId).value);
   var newPlanned=newReal+newLeft;
   dojo.byId('plannedWork_' + rowId).value=formatDecimalToDisplay(newPlanned);
+  if(isOnRealTime==1){
+    dojo.byId('assignedWork_' + rowId).value=formatDecimalToDisplay(newPlanned);
+  }
   formChanged();
   
   disableWidget("userName");

@@ -86,7 +86,9 @@ class ProjectType extends SqlElement {
                                           "lockIdle"=>"nobr",
                                           "lockCancelled"=>"nobr",
                                           "isLeadProject"=>"nobr",
-                                          "lockNoLeftOnDone"=>"nobr"
+                                          "lockNoLeftOnDone"=>"nobr",
+                                          "activityOnRealTime"=>"hidden",
+                                          "_lib_helpActivityOnRealTime"=>"hidden"
                                            );
    
    private static $_databaseColumnName = array();

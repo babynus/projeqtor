@@ -247,6 +247,12 @@ class ActivityPlanningElementMain extends PlanningElement {
     if ($this->indivisibility){
       self::$_fieldsAttributes["minimumThreshold"]='required';
     }
+    if($this->refId){
+      $element=new $this->refType ($this->refId);
+      if($element->workOnRealTime==1){
+        self::$_fieldsAttributes["validatedWork"]="readonly";
+      }
+    }
     if(Parameter::getGlobalParameter('technicalProgress')=='YES'){
       self::$_fieldsAttributes['_separator_menuTechnicalProgress_marginTop']='';
       $asSon=$this->getSonItemsArray(true);
@@ -308,19 +314,21 @@ class ActivityPlanningElementMain extends PlanningElement {
     if(Module::isModuleActive('moduleGestionCA')){
       self::$_fieldsAttributes['_separator_sectionRevenue_marginTop']='';
       if (isset($contextForAttributes) and $contextForAttributes=='global'){
-      	self::$_fieldsAttributes['idWorkUnit']='';
-      	self::$_fieldsAttributes['revenue']='';
-      	self::$_fieldsAttributes['idComplexity']='';
-      	self::$_fieldsAttributes['quantity']='';
-        if($paramEnableWorkUnit=='true'){
-          self::$_fieldsAttributes['_label_workCommand']='';
-          self::$_fieldsAttributes['idWorkCommand']='readonly';
+        self::$_fieldsAttributes['revenue']='';
+        if(isset($element) and $element->workOnRealTime!=1){
+          self::$_fieldsAttributes['idWorkUnit']='';
+          self::$_fieldsAttributes['idComplexity']='';
+          self::$_fieldsAttributes['quantity']='';
+          if($paramEnableWorkUnit=='true'){
+            self::$_fieldsAttributes['_label_workCommand']='';
+            self::$_fieldsAttributes['idWorkCommand']='readonly';
+          }
         }
       }
       if($project->ProjectPlanningElement->idRevenueMode == 2){
       	if($this->elementary){
-      	  self::$_fieldsAttributes['idWorkUnit']='';
       	  self::$_fieldsAttributes['revenue']='';
+  	        self::$_fieldsAttributes['idWorkUnit']='';
         	if($this->idWorkUnit){
         	  self::$_fieldsAttributes['quantity']='';
         	}else{
@@ -375,10 +383,10 @@ class ActivityPlanningElementMain extends PlanningElement {
       $parent=new $this->topRefType($this->topRefId);
       
     }
-    if($this->refId)$element=new $this->refType ($this->refId);
     if (isset($element) and SqlList::getFieldFromId("Status", $element->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1) ){
       self::$_fieldsAttributes["paused"]="readonly";
     }
+    
   }
   /** ==========================================================================
    * Destructor
@@ -452,6 +460,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       $this->plannedStartDate=null;
       $this->plannedEndDate=null;
     }
+    
     //gautier #workUnit
     if($this->idWorkUnit and $this->idComplexity and $this->quantity){
       $complexityVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$this->idWorkUnit,'idComplexity'=>$this->idComplexity));
@@ -556,7 +565,12 @@ class ActivityPlanningElementMain extends PlanningElement {
       }
        //$this->updateSynthesis($this->refType, $this->refId);
     }
-    
+    if($this->plannedWork!=$old->plannedWork and $this->validatedWork!=$this->plannedWork){
+      $act= new Activity($this->refId);
+      if($act->workOnRealTime==1 ){
+        $this->validatedWork=$this->plannedWork;
+      }
+    }
     return parent::save();
   }
   

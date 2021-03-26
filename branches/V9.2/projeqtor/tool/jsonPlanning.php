@@ -508,6 +508,9 @@
           if ($activity->fixPlanning) {
             $line['iconClass']='Fixed';
           }
+          if($activity->workOnRealTime==1 and Parameter::getGlobalParameter('activityOnRealTime')=='YES'){
+            $line['iconClass']='OnRealTime';
+          }
         }
         foreach ($line as $id => $val) {
           if ($val==null) {$val=" ";}

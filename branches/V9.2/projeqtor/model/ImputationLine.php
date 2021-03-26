@@ -567,6 +567,7 @@ class ImputationLine {
 
   static function drawLines($resourceId, $rangeType, $rangeValue, $showIdle, $showPlanned=true, $print=false, $hideDone=false, $hideNotHandled=false, $displayOnlyCurrentWeekMeetings=false, $currentWeek=0, $currentYear=0, $showId=false) {
     $lowRes=0;
+    $isOnRealTime=false;
     if (array_key_exists('destinationWidth', $_REQUEST)) {
       $width=$_REQUEST['destinationWidth'];
       if ($width<1150) $lowRes=3; // $lowRes will contain colSpan value ;)
@@ -970,9 +971,11 @@ class ImputationLine {
           $crit2['id']=$line->refId;
           $crit2['idProject']=$line->idProject;
           $descriptionActivity=SqlElement::getSingleSqlElementFromCriteria('Activity', $crit2);
+          if($descriptionActivity->workOnRealTime==1 and Parameter::getGlobalParameter('activityOnRealTime')=='YES')$isOnRealTime=true;
           if ($descriptionActivity) {
             $line->description=$descriptionActivity->description;
           }
+          
         }
         echo '<td width="100%" style="position:relative"';
         if (!$print and $canGoto) {
@@ -1203,7 +1206,7 @@ class ImputationLine {
             echo ' >';
             echo $keyDownEventScript;
             echo '<script type="dojo/method" event="onChange" args="evt">';
-            echo '  dispatchLeftWorkValueChange("'.$nbLine.'");';
+            echo '  dispatchLeftWorkValueChange("'.$nbLine.'","'.$isOnRealTime.'");';
             echo '</script>';
             echo '</div>';
           } else {

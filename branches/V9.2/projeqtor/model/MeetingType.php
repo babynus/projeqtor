@@ -48,7 +48,10 @@ class MeetingType extends Type {
                                           "showInFlash"=>"hidden",
                                           "idPlanningMode"=>"hidden",
                                           "lockNoLeftOnDone"=>"nobr",
-                                          "scope"=>"hidden");
+                                          "scope"=>"hidden",
+                                          "activityOnRealTime"=>"hidden",
+                                          "_lib_helpActivityOnRealTime"=>"hidden"
+    );
   private static $_databaseCriteria = array('scope'=>'Meeting');
   private static $_colCaptionTransposition = array('description'=>'meetingAgenda');
   
