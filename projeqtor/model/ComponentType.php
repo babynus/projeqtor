@@ -76,7 +76,10 @@ class ComponentType extends Type {
       "lockCancelled"=>"hidden",
       "_lib_statusMustChangeCancelled"=>"hidden",
       "mandatoryResourceOnHandled"=>"hidden",
-      "_lib_mandatoryOnHandledStatus"=>"hidden");
+      "_lib_mandatoryOnHandledStatus"=>"hidden",
+      "activityOnRealTime"=>"hidden",
+      "_lib_helpActivityOnRealTime"=>"hidden"
+  );
   
   // Define the layout that will be used for lists
   private static $_layout='

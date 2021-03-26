@@ -5626,6 +5626,18 @@ function assUpdateLeftWork(id) {
 	  newAss=0;
 	  dijit.byId("assAssignedWork_"+id).set('value',0);
   }
+  if(dojo.byId('objectClass').value=='Activity'){
+    var isOnRealTime=dijit.byId('workOnRealTime').get('value');
+    if(isOnRealTime=='on'){
+      var realdWork=dojo.byId("RealWork_"+id).value;
+      if(assign<realdWork){
+        dijit.byId("assAssignedWork_"+id).set("value",dojo.byId('initAss_'+id).value);
+        dojo.byId('initLeft_'+id).value=dojo.byId('initAss_'+id).value;
+        showAlert(i18n('assingedWorkCantBeLowerInWorkOnRealTime'));
+        return;
+      }
+    }
+  }
   var leftWork = dijit.byId('assLeftWork_'+id).get("value");
   var diff = (newAss)-(initAss);
   var newLeft=leftWork + diff;
@@ -5645,14 +5657,28 @@ function assUpdateLeftWork(id) {
   dojo.byId(objClass+'PlanningElement_assignedCost').style.textDecoration="line-through";
 }
 function assUpdateLeftWorkDirect(id) {
+  var objClass=dojo.byId('objectClass').value;
   var initLeft=dojo.byId('initLeft_'+id).value;
+  var assign=dijit.byId("assAssignedWork_"+id).get('value');
   var left=dijit.byId("assLeftWork_"+id).get('value');
   if (left == null || isNaN(left)) {
     left=0;
   }
+  if(objClass=='Activity'){
+    var isOnRealTime=dijit.byId('workOnRealTime').get('value');
+    if(isOnRealTime=='on'){
+      var realdWork=dojo.byId("RealWork_"+id).value;
+      var assign=parseFloat (dijit.byId("assAssignedWork_"+id).get('value'));
+      var revised=parseFloat(realdWork)+parseFloat(left);
+      if(assign!=revised){
+        dijit.byId("assAssignedWork_"+id).set("value",revised);
+        dojo.byId('initAss_'+id).value=revised;
+      }
+    }
+  }
   var diff = (left)-(initLeft);
   // update left for PlanningElement
-  var objClass=dojo.byId('objectClass').value;
+ 
   var assPeLeft=dijit.byId(objClass+'PlanningElement_leftWork');
   if(assPeLeft){
     assPeLeft.set("value", assPeLeft.get("value") + diff);
@@ -5695,6 +5721,7 @@ function saveLeftWork(id, zone) {
   var assPeLeft=dijit.byId(objClass+'PlanningElement_leftWork');
   var assPePlan=dijit.byId(objClass+'PlanningElement_plannedWork');
   var diff=value-initLeft;
+  
   if(assPeLeft){
     assPeLeft.set("value", assPeLeft.get("value") + diff);
   }

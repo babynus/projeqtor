@@ -203,6 +203,12 @@ class Assignment extends SqlElement {
     }
     
     $this->plannedWork = $this->realWork + $this->leftWork;
+    if($this->refType="Activity" and Parameter::getGlobalParameter('activityOnRealTime')=='YES'){
+      if(!isset($refObj))$refObj=new $this->refType($this->refId);
+      if($refObj->workOnRealTime==1 and $this->plannedWork!=$this->assignedWork){
+        $this->assignedWork=$this->plannedWork;
+      }
+    }
     
     // Dispatch value
     $result = parent::save();
@@ -575,7 +581,7 @@ class Assignment extends SqlElement {
         }
       }
     }
-    
+
     return $result;
   }
   
