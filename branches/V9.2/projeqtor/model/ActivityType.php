@@ -79,7 +79,8 @@ class ActivityType extends Type {
                                           "idActivityPlanningMode"=>"required",
                                           "lockNoLeftOnDone"=>"nobr",
                                           "lockCancelled"=>"nobr",
-                                          "canHaveSubActivity"=>"nobr"
+                                          "canHaveSubActivity"=>"nobr",
+                                          "activityOnRealTime"=>"nobr",
   );
   private static $_colCaptionTransposition = array('idActivityPlanningMode'=>'defaultPlanningMode');
   private static $_databaseColumnName = array('idActivityPlanningMode'=>'idPlanningMode');
@@ -136,6 +137,28 @@ class ActivityType extends Type {
    */
   protected function getStaticDatabaseColumnName() {
     return self::$_databaseColumnName;
+  }
+  
+  public function setAttributes() {
+    if(Parameter::getGlobalParameter('activityOnRealTime')!='YES'){
+      self::$_fieldsAttributes["activityOnRealTime"]='hidden';
+    }
+  }
+  
+  public function save() {
+    $old = $this->getOld (false);
+    if($old->activityOnRealTime!=$this->activityOnRealTime){
+      $wokOnRealTime=($this->activityOnRealTime==1)?0:1;
+      $clause="idActivityType=$this->id and workOnRealTime=$wokOnRealTime";
+      $act= new Activity();
+      $lstAct=$act->getSqlElementsFromCriteria(null,null,$clause);
+      foreach ($lstAct as $id=>$activity){
+        $activity->workOnRealTime=$this->activityOnRealTime;
+        $activity->save();
+      }
+    }
+      
+    return parent::save();
   }
 }
 ?>

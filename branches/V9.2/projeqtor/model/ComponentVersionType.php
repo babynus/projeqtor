@@ -80,7 +80,9 @@ class ComponentVersionType extends Type {
     "_lib_statusMustChangeCancelled"=>"hidden",
 //     "mandatoryResourceOnHandled"=>"hidden",
 //     "_lib_mandatoryOnHandledStatus"=>"hidden"
-      "lockIntoservice"=>"nobr"
+      "lockIntoservice"=>"nobr",
+      "activityOnRealTime"=>"hidden",
+      "_lib_helpActivityOnRealTime"=>"hidden"
 );
 
    // Define the layout that will be used for lists

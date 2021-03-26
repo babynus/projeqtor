@@ -69,6 +69,7 @@ class ActivityMain extends SqlElement {
   public $_sec_Progress;
   public $ActivityPlanningElement; // is an object
   public $isPlanningActivity;
+  public $workOnRealTime;
   public $_sec_productComponent;
   public $idProduct;
   public $idComponent;
@@ -105,7 +106,8 @@ class ActivityMain extends SqlElement {
   
   private static $_fieldsTooltip = array(
       "fixPlanning"=> "tooltipFixPlanningActivity",
-      "paused"=>"tooltipPaused"
+      "paused"=>"tooltipPaused",
+      "workOnRealTime"=>"tooltipWorkOnRealTime"
   );
   
   private static $_fieldsAttributes = array(
@@ -325,6 +327,22 @@ class ActivityMain extends SqlElement {
           $colScript .= ' dijit.byId("ActivityPlanningElement_paused").set("value",dijit.byId("paused").get("value"));';
           $colScript .= '  formChanged();';
       }
+      $colScript .= '</script>';
+    }else if($colName=="workOnRealTime"){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(this.checked){';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("value",dijit.byId("ActivityPlanningElement_plannedWork").get("value"));';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("disabled",true);';
+//       $colScript .= '   dijit.byId("ActivityPlanningElement_quantity").set("value","");';
+//       $colScript .= '   dijit.byId("ActivityPlanningElement_idComplexity").set("value","");';
+//       $colScript .= '   dijit.byId("ActivityPlanningElement_idWorkUnit").set("value","");';
+//       $colScript .= '   dojo.byId("_tab_5_1_smallLabel_3").style.display="none";';
+      $colScript .= '  }else{';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("disabled",false);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("readOnly",false);';
+//       $colScript .= '   dojo.byId("_tab_5_1_smallLabel_3").style.display="table";';
+      $colScript .= '  }';
+      $colScript .= '   formChanged();';
       $colScript .= '</script>';
     } 
     return $colScript;
@@ -652,6 +670,16 @@ class ActivityMain extends SqlElement {
       }
     }
     
+    if($this->idActivityType and $old->idActivityType!=$this->idActivityType){
+      $actType= new ActivityType($this->idActivityType);
+      if($actType->activityOnRealTime==1){
+        $this->workOnRealTime=1;
+      }
+    }
+    if($this->workOnRealTime==1 and $old->workOnRealTime!=$this->workOnRealTime){
+      $this->ActivityPlanningElement->validatedWork=$this->ActivityPlanningElement->plannedWork;
+    }
+    
     $result = parent::save ();
     if (! strpos ( $result, 'id="lastOperationStatus" value="OK"' )) {
       return $result;
@@ -864,6 +892,9 @@ class ActivityMain extends SqlElement {
     
     if (SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1) ){
       self::$_fieldsAttributes["paused"]="readonly";
+    }
+    if(Parameter::getGlobalParameter('activityOnRealTime')!='YES'){
+      self::$_fieldsAttributes["workOnRealTime"]='hidden';
     }
   }
   

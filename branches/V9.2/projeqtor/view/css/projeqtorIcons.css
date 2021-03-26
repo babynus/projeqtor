@@ -1935,6 +1935,12 @@
 /* O */
 
 
+.iconOnRealTime { background-image: url(images/iconImputation32.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconOnRealTime { background-image: url(customIcons/blue/iconImputation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconOnRealTime { background-image: url(customIcons/green/iconImputation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconOnRealTime { background-image: url(customIcons/grey/iconImputation.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconOnRealTime { background-image: url(customIcons/red/iconImputation.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconOnRealTime { background-image: url(customIcons/new/iconImputation.svg);  background-repeat: no-repeat; }
 
 .iconOpportunity { background-image: url(images/iconOpportunity32.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatBlue .iconOpportunity { background-image: url(customIcons/blue/iconOpportunity.png);  background-repeat: no-repeat;}

@@ -5,6 +5,15 @@
 -- // Date : 2021-06-15                                     //
 -- ///////////////////////////////////////////////////////////
 
+
+
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+('activityOnRealTime','NO');
+
+ALTER TABLE `${prefix}type` ADD COLUMN `activityOnRealTime` int(1) unsigned DEFAULT 0 COMMENT '1';
+
+ALTER TABLE `${prefix}activity` ADD COLUMN `workOnRealTime` int(1) unsigned DEFAULT 0 COMMENT '1';
+
 CREATE TABLE `${prefix}statusperiod` (
 `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
 `refType` varchar(100) DEFAULT NULL,
