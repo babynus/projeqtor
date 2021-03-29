@@ -2429,8 +2429,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // if version and idProduct exists and is set : criteria is product
         if ((isset($obj->idProduct) or isset($obj->idComponent) or isset($obj->idProductOrComponent)) and ($col=='idVersion' or $col=='idProductVersion' or $col=='idComponentVersion' or $col=='idOriginalVersion' or $col=='idTargetVersion' or $col=='idOriginalProductVersion' or $col=='idTargetProductVersion' or $col=='idOriginalComponentVersion' or $col=='idTargetComponentVersion' or $col=='idTestCase' or ($col=='idRequirement' and (isset($obj->idProductOrComponent) or isset($obj->idProduct))))) {
           if (isset($obj->idProduct) and ($col=='idVersion' or $col=='idTargetVersion' or $col=='idProductVersion' or $col=='idOriginalProductVersion' or $col=='idTargetProductVersion' or $col=='idRequirement')) {
-            $critFld='idProduct';
-            $critVal=$obj->idProduct;
+            if ($critFld=='idProject') {
+              $critFld=array($critFld,'idProduct');
+              $critVal=array($critVal,$obj->idProduct);
+            } else {
+              $critFld='idProduct';
+              $critVal=$obj->idProduct;
+            }
           } else if (isset($obj->idComponent) and ($col=='idComponentVersion' or $col=='idOriginalComponentVersion' or $col=='idTargetComponentVersion')) {
             $critFld='idProduct';
             $critVal=$obj->idComponent;
