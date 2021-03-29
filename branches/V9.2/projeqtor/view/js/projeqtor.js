@@ -4940,6 +4940,7 @@ function newObject() {
 }
   
 function saveObject() {
+  if (! dojo.byId("objectClassName")) return;
   var param=false;
   if(dojo.byId('resourcePlanningAssignment') && dojo.byId('resourcePlanningAssignment').value!='false'){
     param=dojo.byId('resourcePlanningAssignment').value;
