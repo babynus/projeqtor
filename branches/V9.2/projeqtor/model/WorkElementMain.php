@@ -516,7 +516,18 @@ class WorkElementMain extends SqlElement {
 				
 			}
 			if ($canUpdate and $this->id and property_exists($this,'_spe_dispatch')) {
-			  $result.=$this->drawSpecificItem('dispatch', $readOnly, true); // Attention : must be kept call here, to preserve correct position
+			  $hWork=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->idProfile, 'scope'=>'work'));
+			  if ($hWork and $hWork->id) {
+			  	$visibility=SqlList::getFieldFromId('VisibilityScope', $hWork->rightAccess, 'accessCode', false);
+		  		$included=true;
+			  	$canWorkT=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->idProfile, 'scope'=>'canWorkOnTicket'));
+			  	if ($canWorkT and $canWorkT->id) {
+			  		if($canWorkT->rightAccess == 2 and $visibility=='ALL'){
+			  			$included=true;
+			  		}
+			  	}
+			  }
+			  $result.=$this->drawSpecificItem('dispatch', $readOnly, $included); // Attention : must be kept call here, to preserve correct position
 			}
 			if ($this->ongoing) {
 			  $result.='<span style="font-size:80%; font-style: italic; color:#a0a0a0;padding-right:7px;">';

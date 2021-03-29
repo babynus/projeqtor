@@ -32,14 +32,8 @@ CREATE TABLE `${prefix}statusperiod` (
 PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
-(1,'canWorkOnTicket','2'),
-(2,'canWorkOnTicket','2'),
-(3,'canWorkOnTicket','2'),
-(4,'canWorkOnTicket','2'),
-(5,'canWorkOnTicket','2'),
-(6,'canWorkOnTicket','2'),
-(7,'canWorkOnTicket','2');
+INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess)
+SELECT id , 'canWorkOnTicket','2' from `${prefix}profile`;
 
 UPDATE `${prefix}status` set setHandledStatus='1' where name='paused';
 

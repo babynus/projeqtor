@@ -1672,6 +1672,14 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
               if ($visibility!='ALL') {
                 $visibileSubObject=false;
               }
+              $canWorkT=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'canWorkOnTicket'));
+              if ($canWorkT and $canWorkT->id) {
+                if($canWorkT->rightAccess == 1){
+                  $visibileSubObject=true;
+                }else if($canWorkT->rightAccess == 2 and $visibility=='ALL'){
+                  $readOnly=true;
+                }
+              }
             }
           }
           if ($hide or $obj->isAttributeSetToField($col, 'hidden') or in_array($col, $extraHiddenFields)) {
