@@ -143,6 +143,7 @@ class VersionType extends Type {
    */
   protected function getStaticFieldsAttributes() {
     return array_merge(parent::getStaticFieldsAttributes(),self::$_fieldsAttributes);
+    //return self::$_fieldsAttributes;
   }
   
   /** ==========================================================================

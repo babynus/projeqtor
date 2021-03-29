@@ -76,8 +76,13 @@ class BudgetType extends Type {
     return self::$_databaseCriteria;
   }
   
+  /** ==========================================================================
+   * Return the specific fieldsAttributes
+   * @return the fieldsAttributes
+   */
   protected function getStaticFieldsAttributes() {
     return array_merge(parent::getStaticFieldsAttributes(),self::$_fieldsAttributes);
+    //return self::$_fieldsAttributes;
   }
   
   /** ============================================================================

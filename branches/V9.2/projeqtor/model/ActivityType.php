@@ -114,7 +114,8 @@ class ActivityType extends Type {
    * @return the fieldsAttributes
    */
   protected function getStaticFieldsAttributes() {
-    return self::$_fieldsAttributes;
+    return array_merge(parent::getStaticFieldsAttributes(),self::$_fieldsAttributes);
+    //return self::$_fieldsAttributes;
   }
   
   /** ============================================================================
