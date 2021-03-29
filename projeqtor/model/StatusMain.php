@@ -60,6 +60,7 @@ class StatusMain extends SqlElement {
     <th field="name" width="30%">${name}</th>
     <th field="setHandledStatus" width="10%" formatter="booleanFormatter">${setHandledStatus}</th>
     <th field="setDoneStatus" width="10%" formatter="booleanFormatter">${setDoneStatus}</th>
+    <th field="setPausedStatus" width="10%" formatter="booleanFormatter">${setPausedStatus}</th>
     <th field="setIdleStatus" width="10%" formatter="booleanFormatter">${setIdleStatus}</th>
     <th field="setCancelledStatus" width="10%" formatter="booleanFormatter">${setCancelledStatus}</th>
     <th field="color" width="10%" formatter="colorFormatter">${color}</th>

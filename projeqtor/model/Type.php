@@ -50,6 +50,8 @@ class Type extends SqlElement {
   public $_lib_mandatoryResolutionOnDoneStatus;
   public $lockHandled;
   public $_lib_statusMustChangeHandled;
+  public $lockPaused;
+  public $_lib_statusMustChangePaused;
   public $lockDone;
   public $_lib_statusMustChangeDone;
   public $lockIdle;
@@ -103,8 +105,9 @@ class Type extends SqlElement {
                                           "scope"=>"hidden",
                                           "lockNoLeftOnDone"=>"hidden",
                                           "_lib_statusMustChangeLeftDone"=>"hidden",
-                                          "activityOnRealTime"=>"hidden",
-                                          "_lib_helpActivityOnRealTime"=>"hidden"
+                                          "lockPaused"=>"hidden",
+      									  "activityOnRealTime"=>"hidden",
+      									  "_lib_helpActivityOnRealTime"=>"hidden"
                                           );
   
   private static $_databaseTableName = 'type';
