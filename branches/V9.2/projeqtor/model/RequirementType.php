@@ -33,6 +33,7 @@ class RequirementType extends Type {
   // Define the layout that will be used for lists
     
   private static $_databaseCriteria = array('scope'=>'Requirement');
+  private static $_fieldsAttributes=array();
   
    /** ==========================================================================
    * Constructor

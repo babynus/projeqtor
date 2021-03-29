@@ -34,6 +34,7 @@ class ProjectExpenseType extends ShortType {
   // Define the layout that will be used for lists
     
   private static $_databaseCriteria = array('scope'=>'ProjectExpense');
+  private static $_fieldsAttributes=array();
   
    /** ==========================================================================
    * Constructor
