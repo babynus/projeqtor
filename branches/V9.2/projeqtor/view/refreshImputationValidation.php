@@ -34,8 +34,10 @@ scriptLog('   ->/view/refreshImputationValidation.php');
 
 $idUser= RequestHandler::getId('userName');
 $idTeam = RequestHandler::getId('idTeam');
+$idProject=RequestHandler::getId('idProjectValidation');
 $firstDay = RequestHandler::getDatetime('startWeekImputationValidation');
 $lastDay = RequestHandler::getDatetime('endWeekImputationValidation');
+
 
 $showSubmitted = RequestHandler::getValue('showSubmitWork');
 setSessionValue('showSubmitWork', $showSubmitted);
@@ -43,5 +45,5 @@ $showValidated = RequestHandler::getValue('showValidatedWork');
 setSessionValue('showValidatedWork', $showValidated);
 ?>
 <div id="imputListDiv" name="imputListDiv">
-  <?php ImputationValidation::drawUserWorkList($idUser, $idTeam, $firstDay, $lastDay);?>
+  <?php ImputationValidation::drawUserWorkList($idUser, $idTeam, $firstDay, $lastDay,$idProject);?>
 </div>
