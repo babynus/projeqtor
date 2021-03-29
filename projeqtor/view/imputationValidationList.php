@@ -97,26 +97,32 @@ if(sessionValueExists('endWeekImputationValidation')){
       <td>   
         <table>
          <tr>
-           <td nowrap="nowrap" style="text-align: right;padding-right:5px;"><?php echo i18n("colIdResource");?></td>
+           <td nowrap="nowrap" style="text-align: right;padding-right:5px;"> <?php echo i18n("colIdProject");?> &nbsp;</td>
            <td>
               <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-                style="width: 150px;"
-                name="userName" id="userName"
+                style="width: 175px;"
+                name="idProjectValidation" id="idProjectValidation"
                 <?php echo autoOpenFilteringSelect();?>
-                value="<?php if(sessionValueExists('userNameValidation')){
-                              $userName =  getSessionValue('userNameValidation');
-                              echo $userName;
+                value="<?php if(sessionValueExists('idProjectValidation')){
+                               $idProject =  getSessionValue('idProjectValidation');
+                               echo $idProject;
+                             }else if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
+                               if(strpos(getSessionValue('project'),',')){
+                                $idProject=0;
+                                echo $idProject;
+                               }else{
+                                 $idProject =  getSessionValue('project');
+                                 echo $idProject;
+                               }
                              }else{
-                              echo $userName;
+                              $idProject=0;
+                              echo $idProject;
                              }?>">
                   <script type="dojo/method" event="onChange" >
-                    saveDataToSession("userNameValidation",dijit.byId('userName').get('value'),false);
+                    saveDataToSession("idProjectValidation",dijit.byId('idProjectValidation').get('value'),true);
                     refreshImputationValidation(null);
                   </script>
-                  <option value=""></option>
-                  <?php
-                   $specific='imputation';
-                   include '../tool/drawResourceListForSpecificAccess.php';?>  
+                  <?php htmlDrawOptionForReference('idProject', null);?>  
               </select>
            </td>
            <td nowrap="nowrap" style="text-align: right;padding-left:20px; padding-right:5px;"><?php echo i18n("weekStartLabel");?></td>
@@ -159,6 +165,28 @@ if(sessionValueExists('endWeekImputationValidation')){
            </td>
            </tr>
            <tr>
+             <td nowrap="nowrap" style="text-align: right;padding-right:5px;"><?php echo i18n("colIdResource");?></td>
+             <td>
+                <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
+                  style="width: 150px;"
+                  name="userName" id="userName"
+                  <?php echo autoOpenFilteringSelect();?>
+                  value="<?php if(sessionValueExists('userNameValidation')){
+                                $userName =  getSessionValue('userNameValidation');
+                                echo $userName;
+                               }else{
+                                echo $userName;
+                               }?>">
+                    <script type="dojo/method" event="onChange" >
+                    saveDataToSession("userNameValidation",dijit.byId('userName').get('value'),false);
+                    refreshImputationValidation(null);
+                  </script>
+                    <option value=""></option>
+                    <?php
+                     $specific='imputation';
+                     include '../tool/drawResourceListForSpecificAccess.php';?>  
+                </select>
+             </td>
              <td nowrap="nowrap" style="text-align: right;padding-left:50px; padding-right:5px;"><?php echo i18n("colIdTeam");?></td>
                <td>
                  <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
@@ -296,7 +324,7 @@ if(sessionValueExists('endWeekImputationValidation')){
       <?php 
       RequestHandler::setValue('showSubmitWork', $showSubmitted);
       RequestHandler::setValue('showValidatedWork', $showValidated);
-      ImputationValidation::drawUserWorkList($userName, $userTeam, $firstDay, $lastDay);?>
+      ImputationValidation::drawUserWorkList($userName, $userTeam, $firstDay, $lastDay,$idProject);?>
     </div>
   </div>  
 </div>
