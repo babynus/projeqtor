@@ -914,15 +914,15 @@ abstract class SqlElement {
     if(get_class($this)=='Ticket'){
       if($this->handled and !$this->done and !$this->idle and !$this->paused){
     	$statPeriod = self::getSingleSqlElementFromCriteria('StatusPeriod', array('refType'=>get_class($this), 'refId'=>$this->id));
-    	debugLog('handled');
-    	if($statPeriod->id){
+    	if($statPeriod->id and $statPeriod->active == 0){
     		$statPeriod->endDate=$this->handledDateTime;
     		$statPeriod->idStatusEnd=$this->idStatus;
     		$statPeriod->idUserEnd=getSessionUser ()->id;
+    		$statPeriod->duration = dayDiffDates($statPeriod->startDate, $this->handledDateTime);
+    		$statPeriod->durationOpenTime = countDayDiffDates($statPeriod->startDate, $this->handledDateTime, getSessionUser()->idCalendarDefinition);
     		$statPeriod->save();
     	}
-    	debugLog($statPeriod);
-    	if($statPeriod->active == 0 or !$statPeriod->id){
+    	if($statPeriod->active != 1){
     		$newStatPeriod = new StatusPeriod();
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);
@@ -931,33 +931,38 @@ abstract class SqlElement {
     		$newStatPeriod->type = 'handled';
     		$newStatPeriod->idStatusStart = $this->idStatus;
     		$newStatPeriod->idUserStart = getSessionUser()->id;
-    		$newStatPeriod->duration = dayDiffDates($newStatPeriod->startDate, $newStatPeriod->endDate);
-    		$newStatPeriod->durationOpenTime = countDayDiffDates($newStatPeriod->startDate, $newStatPeriod->endDate, getSessionUser()->idCalendarDefinition);
     		$newStatPeriod->save();
     	}
-      }else if($this->done or $this->idle or $this->paused) {
+      }else{
       	$statPeriod = self::getSingleSqlElementFromCriteria('StatusPeriod', array('refType'=>get_class($this), 'refId'=>$this->id));
-      	$status = new Status($this->idStatus);
-      	debugLog($status->name);
-      	$nameStat = $status->name.'DateTime';
-    	if($statPeriod->id){
+      	$type = 'recorded';
+      	if($this->idle){
+      		$type = 'idle';
+      	}else if($this->done){
+      		$type = 'done';
+      	}else if($this->paused){
+      		$type = 'paused';
+      	}else if($this->handled){
+      		$type = 'handled';
+      	}
+      	$nameStat = $type.'DateTime';
+    	if($statPeriod->id and $statPeriod->active == 1){
     	    $statPeriod->endDate=$this->$nameStat;
     	    $statPeriod->idStatusEnd=$this->idStatus;
     	    $statPeriod->idUserEnd=getSessionUser ()->id;
+    	    $statPeriod->duration = dayDiffDates($statPeriod->startDate, $this->$nameStat);
+    	    $statPeriod->durationOpenTime = countDayDiffDates($statPeriod->startDate, $this->$nameStat, getSessionUser()->idCalendarDefinition);
     	    $statPeriod->save();
         }
-        debugLog($statPeriod);
-        if($statPeriod->active == 1 or !$statPeriod->id){
+        if($statPeriod->active != 0){
     		$newStatPeriod = new StatusPeriod();
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);
     		$newStatPeriod->active = 0;
     		$newStatPeriod->startDate = $this->$nameStat;
-    		$newStatPeriod->type = $status->name;
+    		$newStatPeriod->type = $type;
     		$newStatPeriod->idStatusStart = $this->idStatus;
     		$newStatPeriod->idUserStart = getSessionUser()->id;
-    		$newStatPeriod->duration = dayDiffDates($newStatPeriod->startDate, $newStatPeriod->endDate);
-    		$newStatPeriod->durationOpenTime = countDayDiffDates($newStatPeriod->startDate, $newStatPeriod->endDate, getSessionUser()->idCalendarDefinition);
     		$newStatPeriod->save();
       	}
       }
