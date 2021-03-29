@@ -56,7 +56,14 @@ class OpportunityType extends Type {
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
   
-
+  /** ==========================================================================
+   * Return the specific fieldsAttributes
+   * @return the fieldsAttributes
+   */
+  protected function getStaticFieldsAttributes() {
+    return array_merge(parent::getStaticFieldsAttributes(),self::$_fieldsAttributes);
+    //return self::$_fieldsAttributes;
+  }
   /** ========================================================================
    * Return the specific database criteria
    * @return the databaseTableName
