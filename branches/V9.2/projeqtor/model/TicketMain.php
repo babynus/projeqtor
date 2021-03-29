@@ -68,6 +68,8 @@ class TicketMain extends SqlElement {
   public $WorkElement;
   public $handled;
   public $handledDateTime;
+  public $paused;
+  public $pausedDateTime;
   public $done;
   public $doneDateTime;
   public $solved;
@@ -126,7 +128,8 @@ class TicketMain extends SqlElement {
                                   "doneDateTime"=>"nobr",
                                   "solved"=>"nobr",
                                   "idActivity"=>"title",
-                                  "delayReadOnly"=>"hidden"
+                                  "delayReadOnly"=>"hidden",
+                                  "paused"=>"nobr"
   );  
   
   private static $_colCaptionTransposition = array('idUser'=>'issuer', 
