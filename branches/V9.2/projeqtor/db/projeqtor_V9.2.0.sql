@@ -16,6 +16,7 @@ ALTER TABLE `${prefix}activity` ADD COLUMN `workOnRealTime` int(1) unsigned DEFA
 
 CREATE TABLE `${prefix}statusperiod` (
 `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+`name` varchar(100) DEFAULT NULL,
 `refType` varchar(100) DEFAULT NULL,
 `refId` int(12) unsigned DEFAULT NULL COMMENT '12',
 `active` int(1) unsigned DEFAULT NULL COMMENT '1',
@@ -44,10 +45,10 @@ UPDATE `${prefix}status` set setHandledStatus='1' where name='paused';
 
 ALTER TABLE `${prefix}delay` ADD `idStatus` INT(12) DEFAULT NULL COMMENT '12';
 
-ALTER TABLE `${prefix}project` ADD `startAM` varchar(100) DEFAULT NULL, 
-							   ADD `endAM` varchar(100) DEFAULT NULL,
-							   ADD `startPM` varchar(100) DEFAULT NULL,
-							   ADD `endPM` varchar(100) DEFAULT NULL;
+ALTER TABLE `${prefix}project` ADD `startAM` time DEFAULT NULL, 
+							   ADD `endAM` time DEFAULT NULL,
+							   ADD `startPM` time DEFAULT NULL,
+							   ADD `endPM` time DEFAULT NULL;
 
 CREATE TABLE `${prefix}activityworkunit` (
 `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
@@ -78,3 +79,8 @@ ALTER TABLE `${prefix}planningelementbaseline` DROP COLUMN `idWorkUnit`;
 ALTER TABLE `${prefix}planningelementbaseline` DROP COLUMN `idComplexity`;
 ALTER TABLE `${prefix}planningelementbaseline` DROP COLUMN `quantity`;
 ALTER TABLE `${prefix}planningelementbaseline` DROP COLUMN `idWorkCommand`;
+
+ALTER TABLE `${prefix}ticket` ADD COLUMN `paused` int(1) unsigned DEFAULT 0 COMMENT '1';
+ALTER TABLE `${prefix}ticket` ADD COLUMN `pausedDateTime` datetime DEFAULT NULL;
+
+ALTER TABLE `${prefix}type` ADD COLUMN `lockPaused` int(1) unsigned DEFAULT 0 COMMENT '1';

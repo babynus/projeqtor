@@ -45,6 +45,8 @@ class StatusPeriodMain extends SqlElement {
   public $duration;
   public $durationOpenTime;
   
+  public $_noHistory=true;
+  
   private static $_fieldsAttributes=array();
    /** ==========================================================================
    * Constructor

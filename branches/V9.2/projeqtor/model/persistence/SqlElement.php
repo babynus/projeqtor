@@ -835,13 +835,16 @@ abstract class SqlElement {
         }
       }
       $status = new Status ($this->idStatus);
+      $isStatHandled=($status->setHandledStatus)?true:false;
       $isStatDone=($status->setDoneStatus)?true:false;
       $isStatIdle=($status->setIdleStatus)?true:false;
       $isStatCancelled=($status->setCancelledStatus)?true:false;
+      $isStatPaused=($status->setPausedStatus)?true:false;
       $status = new Status ($old->idStatus);
       $isOldStatDone=($status->setDoneStatus)?true:false;
       $isOldStatIdle=($status->setIdleStatus)?true:false;
       $isOldStatCancelled=($status->setCancelledStatus)?true:false;
+      $isOldStatPaused=($status->setPausedStatus)?true:false;
       SqlElement::$_cachedQuery ['Status']=array();
       $st=new Status();
       $statusList=$st->getSqlElementsFromCriteria(null,null,null,null,true);
@@ -906,6 +909,57 @@ abstract class SqlElement {
                 }
               }
         }
+      }
+    }
+    if(get_class($this)=='Ticket'){
+      if($this->handled and !$this->done and !$this->idle and !$this->paused){
+    	$statPeriod = self::getSingleSqlElementFromCriteria('StatusPeriod', array('refType'=>get_class($this), 'refId'=>$this->id));
+    	debugLog('handled');
+    	if($statPeriod->id){
+    		$statPeriod->endDate=$this->handledDateTime;
+    		$statPeriod->idStatusEnd=$this->idStatus;
+    		$statPeriod->idUserEnd=getSessionUser ()->id;
+    		$statPeriod->save();
+    	}
+    	debugLog($statPeriod);
+    	if($statPeriod->active == 0 or !$statPeriod->id){
+    		$newStatPeriod = new StatusPeriod();
+    		$newStatPeriod->refId = $this->id;
+    		$newStatPeriod->refType = get_class($this);
+    		$newStatPeriod->active = 1;
+    		$newStatPeriod->startDate = $this->handledDateTime;
+    		$newStatPeriod->type = 'handled';
+    		$newStatPeriod->idStatusStart = $this->idStatus;
+    		$newStatPeriod->idUserStart = getSessionUser()->id;
+    		$newStatPeriod->duration = dayDiffDates($newStatPeriod->startDate, $newStatPeriod->endDate);
+    		$newStatPeriod->durationOpenTime = countDayDiffDates($newStatPeriod->startDate, $newStatPeriod->endDate, getSessionUser()->idCalendarDefinition);
+    		$newStatPeriod->save();
+    	}
+      }else if($this->done or $this->idle or $this->paused) {
+      	$statPeriod = self::getSingleSqlElementFromCriteria('StatusPeriod', array('refType'=>get_class($this), 'refId'=>$this->id));
+      	$status = new Status($this->idStatus);
+      	debugLog($status->name);
+      	$nameStat = $status->name.'DateTime';
+    	if($statPeriod->id){
+    	    $statPeriod->endDate=$this->$nameStat;
+    	    $statPeriod->idStatusEnd=$this->idStatus;
+    	    $statPeriod->idUserEnd=getSessionUser ()->id;
+    	    $statPeriod->save();
+        }
+        debugLog($statPeriod);
+        if($statPeriod->active == 1 or !$statPeriod->id){
+    		$newStatPeriod = new StatusPeriod();
+    		$newStatPeriod->refId = $this->id;
+    		$newStatPeriod->refType = get_class($this);
+    		$newStatPeriod->active = 0;
+    		$newStatPeriod->startDate = $this->$nameStat;
+    		$newStatPeriod->type = $status->name;
+    		$newStatPeriod->idStatusStart = $this->idStatus;
+    		$newStatPeriod->idUserStart = getSessionUser()->id;
+    		$newStatPeriod->duration = dayDiffDates($newStatPeriod->startDate, $newStatPeriod->endDate);
+    		$newStatPeriod->durationOpenTime = countDayDiffDates($newStatPeriod->startDate, $newStatPeriod->endDate, getSessionUser()->idCalendarDefinition);
+    		$newStatPeriod->save();
+      	}
       }
     }
     if (isset($debugTraceUpdates) and $debugTraceUpdates==true) {
@@ -4303,6 +4357,17 @@ abstract class SqlElement {
         $colScript .= '    dijit.byId("cancelled").set("checked", false);';
         $colScript .= '  }';
       }
+      if (property_exists ( $this, 'paused' )) {
+      	$colScript .= htmlGetJsTable ( 'Status', 'setPausedStatus', 'tabStatusPaused' );
+      	$colScript .= '  var setPaused=0;';
+      	$colScript .= '  var filterStatusPaused=dojo.filter(tabStatusPaused, function(item){return item.id==dijit.byId("idStatus").value;});';
+      	$colScript .= '  dojo.forEach(filterStatusPaused, function(item, i) {setPaused=item.setPausedStatus;});';
+      	$colScript .= '  if (setPaused==1) {';
+      	$colScript .= '    dijit.byId("paused").set("checked", true);';
+      	$colScript .= '  } else {';
+      	$colScript .= '    dijit.byId("paused").set("checked", false);';
+      	$colScript .= '  }';
+      }
       // CHANGE BY Marc TABARY - 2017-03-06 - ALLOW DISABLED SPECIFIC WIDGET
       $colScript .= '    formChanged(' . $specificWidgetsToDisabled . ');';
       // Old
@@ -4482,6 +4547,33 @@ abstract class SqlElement {
         $colScript .= '    if (dijit.byId("idle").get("checked")) {';
         $colScript .= '      dijit.byId("idle").set("checked", false);';
         $colScript .= '    }';
+      }
+      $colScript .= '  } ';
+      // CHANGE BY Marc TABARY - 2017-03-06 - ALLOW DISABLED SPECIFIC WIDGET
+      $colScript .= '    formChanged(' . $specificWidgetsToDisabled . ');';
+      // Old
+      // $colScript .= ' formChanged();';
+      // END CHANGE BY Marc TABARY - 2017-03-06 - ALLOW DISABLED SPECIFIC WIDGET
+      $colScript .= '</script>';
+    } else if ($colName == "paused") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if (this.checked) { ';
+      if (property_exists ( $this, 'pausedDateTime' )) {
+        $colScript .= '    if (! dijit.byId("pausedDateTime").get("value")) {';
+        $colScript .= '      var curDate = new Date();';
+        $colScript .= '      dijit.byId("pausedDateTime").set("value", curDate); ';
+        $colScript .= '      dijit.byId("pausedDateTimeBis").set("value", curDate); ';
+        $colScript .= '    }';
+      }
+      if (property_exists ( $this, 'paused' )) {
+        $colScript .= '    if (! dijit.byId("paused").get("checked")) {';
+        $colScript .= '      dijit.byId("paused").set("checked", true);';
+        $colScript .= '    }';
+      }
+      $colScript .= '  } else {';
+      if (property_exists ( $this, 'pausedDateTime' )) {
+        $colScript .= '    dijit.byId("pausedDateTime").set("value", null); ';
+        $colScript .= '    dijit.byId("pausedDateTimeBis").set("value", null); ';
       }
       $colScript .= '  } ';
       // CHANGE BY Marc TABARY - 2017-03-06 - ALLOW DISABLED SPECIFIC WIDGET
@@ -6806,6 +6898,17 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
 //       }
 //     } 
     //New
+    if (((property_exists ( $type, 'lockPaused' ) and $type->lockPaused) or $force)) {
+    	if (property_exists ( $this, 'paused' )) {
+    		if ($status->setPausedStatus) {
+    			$this->paused = 1;
+    			if (property_exists ( $this, 'pausedDateTime' ) and ! $this->pausedDateTime)
+    				$this->pausedDateTime = date ( "Y-m-d H:i:s" );
+    		} else {
+    			$this->done = 0;
+    		}
+    	}
+    }
     if (((property_exists ( $type, 'lockDone' ) and $type->lockDone) or $force)) {
       if (property_exists ( $this, 'done' )) {
         if ($status->setDoneStatus) {
