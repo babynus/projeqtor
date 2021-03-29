@@ -798,7 +798,7 @@ class NotificationDefinition extends SqlElement {
     $editor = getEditorType();
 
     $result  = '<div style="position:relative;width:'.($largeWidth+145).'px;">';
-    $result .= '<button class="roundedVisibleButton" id="'.$fullItem.'" dojoType="dijit.form.Button" showlabel="true" style="position:absolute;'.((isNewGui())?'top:-34px;right:-47px;width:85px;':'top-24px;height:17px;right:0px;width:90px;').'">';
+    $result .= '<button class="roundedVisibleButton" id="'.$fullItem.'" dojoType="dijit.form.Button" showlabel="true" style="position:absolute;'.((isNewGui())?'top:-34px;right:-47px;width:85px;':'top:-26px;height:18px;right:0px;width:90px;').'">';
     $result .= i18n($itemLab);
     $result .= '<script type="dojo/connect" event="onClick" args="evt">';
     $result .= '  addFieldInTextBoxForNotificationItem("'.$itemEnd.'","'.$textBox.'","'.$editor.'");';
