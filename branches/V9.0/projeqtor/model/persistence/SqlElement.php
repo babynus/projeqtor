@@ -4136,7 +4136,11 @@ abstract class SqlElement {
           foreach ( $arrVersProd as $vers ) {
             if (property_exists ( $this, $vers )) {
               $colScript .= "if (trim(dijit.byId('idProduct').get('value'))) {";
-              $colScript .= "refreshList('$vers','idProduct', this.value);";
+              if (property_exists ( $this, 'idProject' )) {
+                $colScript .= "refreshList('$vers','idProduct', this.value, null, null, null, 'idProject', dijit.byId('idProject').get('value'));";
+              } else {
+                $colScript .= "refreshList('$vers','idProduct', this.value);";
+              }
               $colScript .= "} else {";
               if (property_exists ( $this, 'idProject' )) {
                 $colScript .= "refreshList('$vers','idProject', dijit.byId('idProject').get('value'));";
