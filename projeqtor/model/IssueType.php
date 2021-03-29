@@ -33,6 +33,7 @@ class IssueType extends Type {
   // Define the layout that will be used for lists
     
   private static $_databaseCriteria = array('scope'=>'Issue');
+  private static $_fieldsAttributes=array();
   
    /** ==========================================================================
    * Constructor

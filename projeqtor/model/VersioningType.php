@@ -33,8 +33,8 @@ class VersioningType extends Type {
   // Define the layout that will be used for lists
     
 	public $_isNameTranslatable = true;
-	
   private static $_databaseCriteria = array('scope'=>'Versioning');
+  private static $_fieldsAttributes=array();
   
    /** ==========================================================================
    * Constructor

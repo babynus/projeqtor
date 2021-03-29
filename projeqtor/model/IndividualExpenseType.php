@@ -34,6 +34,7 @@ class IndividualExpenseType extends ShortType {
   // Define the layout that will be used for lists
     
   private static $_databaseCriteria = array('scope'=>'IndividualExpense');
+  private static $_fieldsAttributes=array();
   
    /** ==========================================================================
    * Constructor
