@@ -231,7 +231,7 @@ class SqlList {
           	}
           }
           $inClause.=')';
-          if ($val) $query .= " and exists (select 'x' from " . $vp->getDatabaseTableName() . " vp where vp.idProject in " . $inClause . " and vp.idVersion=" . $ver->getDatabaseTableName() . ".id)";
+          if ($val) $query .= " and exists (select 'x' from " . $vp->getDatabaseTableName() . " vp where vp.idle=0 and vp.idProject in " . $inClause . " and vp.idVersion=" . $ver->getDatabaseTableName() . ".id)";
         } else if ( ( strtolower($listType)=='componentversion'  
               or strtolower($listType)=='originalcomponentversion'
               or strtolower($listType)=='targetcomponentversion') and $col=='idProductVersion') {
