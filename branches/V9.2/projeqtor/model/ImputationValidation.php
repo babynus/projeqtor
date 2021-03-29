@@ -46,20 +46,22 @@ class ImputationValidation{
 	 */
 	function __destruct() {}
 	
-	static function drawUserWorkList($idUser, $idTeam, $startDay, $endDay){
+	static function drawUserWorkList($idUser, $idTeam, $startDay, $endDay,$idProject){
 	  $showSubmitted = RequestHandler::getValue('showSubmitWork');
 	  $showValidated = RequestHandler::getValue('showValidatedWork');
 	  $user=getCurrentUserId();
 	  $noData = true;
 	  $critDraw = "";
 	  $result="";
+	  $idProject=(trim($idProject) != '')?$idProject:null;
 	  $currentDay = date('Y-m-d');
-	  $proj = new Project();
+	  $proj = new Project($idProject);
 	  $listAdmProj = $proj->getAdminitrativeProjectList(true);
 	  $userVisbileResourceList = getListForSpecificRights('imputation');
 	  if(trim($idUser) != ''){
 	    unset($userVisbileResourceList);
-	    foreach (getUserVisibleResourcesList(true) as $id=>$name){
+	    foreach (getUserVisibleResourcesList(true,false,false,false,false,false,false,false,$idProject) as $id=>$name){
+	      
 	      if($id == $idUser){
 	        $userVisbileResourceList[$id]=$name;
 	      }
@@ -74,14 +76,13 @@ class ImputationValidation{
 	  if(!isset($noResource)){
   	  if($idUser == '' and trim($idTeam) != ''){
   	    unset($userVisbileResourceList);
-  	    foreach (getUserVisibleResourcesList(true) as $id=>$name){
+  	    foreach (getUserVisibleResourcesList(true,false,false,false,false,false,false,false,$idProject) as $id=>$name){
   	      $res = new Resource($id, true);
   	      if($res->idTeam == $idTeam){
   	        $userVisbileResourceList[$id]=$name;
   	      }
   	    }
   	  }
-  	  
 //   	  $critWhere = "";
 //   	  if($showSubmitted != ''){
 //   	    $critWhere .= " and submitted=".$showSubmitted;
@@ -89,6 +90,24 @@ class ImputationValidation{
 //   	  if($showValidated != ''){
 //   	  	$critWhere .= " and validated=".$showValidated;
 //   	  }
+	  }
+	  if($idProject != null){
+	    $aff= new Affectation();
+	    $lstProj=transformValueListIntoInClause(array_flip($proj->getRecursiveSubProjectsFlatList(false,true)));
+	    $lstUser=transformValueListIntoInClause(array_flip($userVisbileResourceList));
+	    $clause="idProject in $lstProj and idResource in $lstUser";
+	    $pAff=$aff->getSqlElementsFromCriteria(null,null,$clause);
+	    $tabToSearch=$userVisbileResourceList;
+	    unset($userVisbileResourceList);
+	    if(empty($pAff)){
+	      $noResource=true;
+	    }else{
+	      foreach ($pAff as $id=>$val){
+	        if(array_key_exists($val->idResource, $tabToSearch)){
+	          $userVisbileResourceList[$val->idResource]=$tabToSearch[$val->idResource];
+	        }
+	      }
+	    }
 	  }
 	  
 	  //Header
