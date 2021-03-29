@@ -5327,7 +5327,7 @@ abstract class SqlElement {
         if (property_exists ( $this, 'idUser' )) {
           $user = new User ( $this->idUser );
           $newDest = "###" . $user->email . "###";
-          if ($user->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+          if (!$user->idle and $user->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
             $destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
             $destTab[$emailTemplateTab[$i]->id] .= $newDest;
           }
@@ -5337,7 +5337,7 @@ abstract class SqlElement {
         if (property_exists ( $this, 'idAccountable' )) {
           $resource = new Resource ( $this->idAccountable );
           $newDest = "###" . $resource->email . "###";
-          if ($resource->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+          if (!$resource->idle and $resource->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
             $destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
             $destTab[$emailTemplateTab[$i]->id] .= $newDest;
           }
@@ -5347,7 +5347,7 @@ abstract class SqlElement {
         if (property_exists ( $this, 'idResource' )) {
           $resource = new Resource ( $this->idResource );
           $newDest = "###" . $resource->email . "###";
-          if ($resource->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+          if (!$resource->idle and $resource->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
             $destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
             $destTab[$emailTemplateTab[$i]->id] .= $newDest;
           }
@@ -5357,7 +5357,7 @@ abstract class SqlElement {
         if (property_exists ( $this, 'idSponsor' )) {
           $sponsor = new Sponsor ( $this->idSponsor );
           $newDest = "###" . $sponsor->email . "###";
-          if ($sponsor->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+          if (!$sponsor->idle and $sponsor->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
             $destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
             $destTab[$emailTemplateTab[$i]->id] .= $newDest;
           }
@@ -5367,7 +5367,7 @@ abstract class SqlElement {
         $aff = new Affectation ();
         if ($statusMail->mailToProjectIncludingParentProject) {
           $proj = new Project($idProject); 
-          $critWhere="idProject in ".transformValueListIntoInClause($proj->getTopProjectList(true));
+          $critWhere="idle=0 and idProject in ".transformValueListIntoInClause($proj->getTopProjectList(true));
           $affList = $aff->getSqlElementsFromCriteria ( null, false, $critWhere);
         } else {
           $crit = array('idProject' => $idProject, 'idle' => '0');
@@ -5383,7 +5383,7 @@ abstract class SqlElement {
               } else {
                 $usr = new User ( $aff->idResource );
               }
-              if (! $resource->dontReceiveTeamMails) {
+              if (! $resource->idle and ! $resource->dontReceiveTeamMails) {
                 $newDest = "###" . $resource->email . "###";
                 if ($resource->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
                     $destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
@@ -5396,7 +5396,7 @@ abstract class SqlElement {
               $prf = new Profile ( $profile );
               if ($prf->profileCode == 'PL') {
                 $newDest = "###" . $resource->email . "###";
-                if ($resource->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+                if (!$resource->idle and $resource->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
                   $destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
                   $destTab[$emailTemplateTab[$i]->id] .= $newDest;
                 }
@@ -5410,7 +5410,7 @@ abstract class SqlElement {
           $project = new Project ( $idProject );
           $manager = new Affectable ( $project->idResource );
           $newDest = "###" . $manager->email . "###";
-          if ($manager->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+          if (!$manager->idle and $manager->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
             $destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
             $destTab[$emailTemplateTab[$i]->id] .= $newDest;
           }
@@ -5423,7 +5423,7 @@ abstract class SqlElement {
         foreach ( $assList as $ass ) {
           $res = new ResourceAll ( $ass->idResource );
           $newDest = "###" . $res->email . "###";
-          if ($res->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+          if (!$res->idle and $res->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
             $destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
             $destTab[$emailTemplateTab[$i]->id] .= $newDest;
           }
@@ -5433,7 +5433,7 @@ abstract class SqlElement {
         if (property_exists ( $this, 'idContact' )) {
           $contact = new Contact ( $this->idContact );
           $newDest = "###" . $contact->email . "###";
-          if ($contact->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+          if (!$contact->idle and $contact->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
             $destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
             $destTab[$emailTemplateTab[$i]->id] .= $newDest;
           }
@@ -5449,7 +5449,7 @@ abstract class SqlElement {
         foreach ( $lstSub as $sub ) {
           $resource = new Affectable ( $sub->idAffectable );
           $newDest = "###" . $resource->email . "###";
-          if ($resource->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+          if (!$resource->idle and $resource->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
             $destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
             $destTab[$emailTemplateTab[$i]->id] .= $newDest;
           }
@@ -5459,7 +5459,7 @@ abstract class SqlElement {
       	if (property_exists ( $this, 'idResponsible' )) {
       		$responsible = new Resource ( $this->idResponsible );
       		$newDest = "###" . $responsible->email . "###";
-      		if ($responsible->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
+      		if (!$responsible->idle and $responsible->email and strpos ( $destTab[$emailTemplateTab[$i]->id], $newDest ) === false) {
       			$destTab[$emailTemplateTab[$i]->id] .= ($destTab[$emailTemplateTab[$i]->id]) ? ', ' : '';
       			$destTab[$emailTemplateTab[$i]->id] .= $newDest;
       		}
