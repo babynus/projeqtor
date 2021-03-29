@@ -33,7 +33,7 @@ class DecisionType extends Type {
   // Define the layout that will be used for lists
     
   private static $_databaseCriteria = array('scope'=>'Decision');
-  
+  private static $_fieldsAttributes=array();
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)

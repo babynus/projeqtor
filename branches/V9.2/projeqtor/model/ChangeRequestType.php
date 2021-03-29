@@ -33,6 +33,7 @@ class ChangeRequestType extends Type {
   // Define the layout that will be used for lists
     
   private static $_databaseCriteria = array('scope'=>'ChangeRequest');
+  private static $_fieldsAttributes=array();
   
    /** ==========================================================================
    * Constructor

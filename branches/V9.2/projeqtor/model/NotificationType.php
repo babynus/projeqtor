@@ -33,6 +33,7 @@ class NotificationType extends Type {
   // Define the layout that will be used for lists
     
   private static $_databaseCriteria = array('scope'=>'Notification');
+  private static $_fieldsAttributes=array();
   
    /** ==========================================================================
    * Constructor
