@@ -668,17 +668,18 @@ class ActivityMain extends SqlElement {
          $this->fixPlanning=1;
         $this->ActivityPlanningElement->fixPlanning=1;
       }
-    }
-    
-    if($this->idActivityType and $old->idActivityType!=$this->idActivityType){
-      $actType= new ActivityType($this->idActivityType);
-      if($actType->activityOnRealTime==1){
-        $this->workOnRealTime=1;
+      if($this->idActivityType and $old->idActivityType!=$this->idActivityType){
+        $actType= new ActivityType($this->idActivityType);
+        if($actType->activityOnRealTime==1){
+          $this->workOnRealTime=1;
+        }
+      }
+      if($this->workOnRealTime==1 and $old->workOnRealTime!=$this->workOnRealTime){
+        $this->ActivityPlanningElement->validatedWork=$this->ActivityPlanningElement->plannedWork;
       }
     }
-    if($this->workOnRealTime==1 and $old->workOnRealTime!=$this->workOnRealTime){
-      $this->ActivityPlanningElement->validatedWork=$this->ActivityPlanningElement->plannedWork;
-    }
+    
+
     
     $result = parent::save ();
     if (! strpos ( $result, 'id="lastOperationStatus" value="OK"' )) {
