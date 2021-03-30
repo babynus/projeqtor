@@ -3835,6 +3835,18 @@ li.section {
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+.graphStatusDivContainer {
+	cursor:pointer;
+	-webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  transition: all 0.3s linear; 
+}
+.graphStatusDivContainer:hover {
+	opacity:50%;
+
+}
 .graphStatusDiv {
 	background-color:#ffffff;
 	width:100%;
