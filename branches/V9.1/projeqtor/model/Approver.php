@@ -87,7 +87,7 @@ class Approver extends SqlElement {
         $idApproval = $doc->getApprovalStatus();
         if($idApproval != $doc->idApprovalStatus){
           $doc->idApprovalStatus = $idApproval;
-          $doc->save();
+          $doc->simpleSave();
         }
       }
    }
