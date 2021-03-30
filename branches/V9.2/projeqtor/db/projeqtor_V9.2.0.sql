@@ -33,7 +33,10 @@ PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess)
-SELECT id , 'canWorkOnTicket','2' from `${prefix}profile`;
+SELECT id , 'canWorkOnTicket', '1' from `${prefix}profile` where id in (SELECT idProfile from `${prefix}habilitationother` where scope = 'work' and rightAccess=1);
+
+INSERT INTO `habilitationother` (idProfile, scope , rightAccess)
+SELECT id , 'canWorkOnTicket', '2' from `profile` where id in (SELECT idProfile from `habilitationother` where scope = 'work' and rightAccess <> 1);
 
 UPDATE `${prefix}status` set setHandledStatus='1' where name='paused';
 
