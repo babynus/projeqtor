@@ -1134,18 +1134,6 @@ if (beforeVersion($currVersion,"V9.1.1") ) {
   disableCatchErrors();
 }
 
-if (beforeVersion($currVersion,"V9.2.0") ) {
-  $habilitation = new HabilitationOther();
-  $workVisibility = $habilitation->getSqlElementsFromCriteria(array('scope'=>'work'));
-  foreach ($workVisibility as $workV){
-    if($workV->rightAccess == 4){
-      $canWorkOnTicket = $habilitation->getSingleSqlElementFromCriteria('HabilitationOther', array('scope'=>'canWorkOnTicket', 'idProfile'=>$workV->idProfile));
-      $canWorkOnTicket->rightAccess = 1;
-      $canWorkOnTicket->save();
-    }
-  }
-}
-
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
