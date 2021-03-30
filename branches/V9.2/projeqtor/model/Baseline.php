@@ -102,6 +102,7 @@ class Baseline extends SqlElement {
     $colList="";
     foreach ($objFrom as $fld=>$val) {
       if (substr($fld,0,1)=='_' or $fld=='id') continue;
+      if ($fld=='idLeave') continue;
       $col=$objFrom->getDatabaseColumnName($fld);
       if ($col) {
         $colList.="$col, ";
