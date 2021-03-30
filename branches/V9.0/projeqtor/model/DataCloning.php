@@ -765,6 +765,7 @@ class DataCloning extends SqlElement {
       $exceptionPath=array(
             "/.settings","\\.settings", 
             "/.svn", "\\.svn",
+            "/.github", "\\.github",
             "/deploy", "\\deploy",
             "/html2pdf/test", "\\html2pdf\\test",
             "/test", "\\test", 

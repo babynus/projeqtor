@@ -113,7 +113,7 @@ $hist=new History();
 $histTable=$hist->getDatabaseTableName();
 $critWhere="1=1";
 $max=($activityStreamAddedRecently or $activityStreamUpdatedRecently)?10000:2000;
-$where=" id>(select max(id)-$max from $histTable)";
+$where=" id>(select GREATEST(max(id),$max)-$max from $histTable)";
 $clause="1=1";
 if (trim($paramAuthorFilter)!="") {
 	$critWhere.=" and idUser=$paramAuthorFilter";
