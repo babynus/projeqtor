@@ -1546,7 +1546,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
                 echo '<div style="position:absolute;top:1px;right:'.$pos.'px;float:right;">';
               }
               if ($col=='idStatus') {
-                echo '<div onClick="drawGraphStatus();" class="graphStatusDivContainer">';
+                echo '<div onmouseover="drawGraphStatus();">';
               }
               echo $formatedThumb;
               if ($col=='idStatus') {
