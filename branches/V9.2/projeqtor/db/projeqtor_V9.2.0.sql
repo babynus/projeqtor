@@ -81,3 +81,23 @@ ALTER TABLE `${prefix}ticket` ADD COLUMN `paused` int(1) unsigned DEFAULT 0 COMM
 ALTER TABLE `${prefix}ticket` ADD COLUMN `pausedDateTime` datetime DEFAULT NULL;
 
 ALTER TABLE `${prefix}type` ADD COLUMN `lockPaused` int(1) unsigned DEFAULT 0 COMMENT '1';
+
+--acces right to repository
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
+(258, 'menuDocumentsRight', 37, 'item', 1275, Null, 0, 'HabilitationParameter ');
+
+INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
+(338,'menuDocumentsRight',130,258,85,0);
+
+CREATE TABLE `${prefix}documentright` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idDirectory` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idProfie` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idAccessMode` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+
+INSERT INTO `${prefix}documentright` (idDirectory, idProfie , idAccessMode)
+SELECT d.id, p.id, a.idAccessProfile FROM `${prefix}documentdirectory` as d CROSS JOIN `${prefix}profile` as p INNER JOIN `${prefix}accessright` as a ON p.id = a.idProfile and a.idMenu=103;
