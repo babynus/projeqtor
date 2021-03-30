@@ -73,6 +73,7 @@ class TicketType extends Type {
       "lockHandled"=>"nobr",
       "lockDone"=>"nobr",
       "lockPaused"=>"nobr",
+      "_lib_statusMustChangePaused"=>"",
       "lockSolved"=>"nobr",
       "lockIdle"=>"nobr",
       "lockCancelled"=>"nobr",

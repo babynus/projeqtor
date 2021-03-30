@@ -10793,6 +10793,10 @@ function showTickets(refType, refId) {
   loadDialog('dialogShowTickets', null, true, '&refType='+refType+'&refId='+refId, true);
 }
 
+function showStatusPeriod(refType, refId) {
+  loadDialog('dialogStatusPeriod', null, true, '&refType='+refType+'&refId='+refId, true);
+}
+
 function showMenuList() {
   clearTimeout(closeMenuListTimeout);
   menuListAutoshow=true;

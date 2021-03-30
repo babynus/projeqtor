@@ -106,6 +106,7 @@ class Type extends SqlElement {
                                           "lockNoLeftOnDone"=>"hidden",
                                           "_lib_statusMustChangeLeftDone"=>"hidden",
                                           "lockPaused"=>"hidden",
+                                          "_lib_statusMustChangePaused"=>"hidden",
       									  "activityOnRealTime"=>"hidden",
       									  "_lib_helpActivityOnRealTime"=>"hidden"
                                           );
