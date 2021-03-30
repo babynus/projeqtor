@@ -164,7 +164,7 @@ class IndicatorValue extends SqlElement {
   			$fld=str_replace('Due','End',$fld);
   		}
   		$sub=$class . "PlanningElement";
-  		if ( (substr($fld,-7)=='EndDate' or substr($fld,-9)=='StartDate') and property_exists($obj, $sub) ) {
+  		if ( (substr($fld,-7)=='EndDate' or substr($fld,-9)=='StartDate') and property_exists($obj, $sub) and is_object($obj->$sub) ) {
   		  $indVal->targetDateTime=$obj->$sub->$fld;
   		  $indVal->targetDateTime.=(strlen($indVal->targetDateTime)=='10')?" 00:00:00":"";
   	  } else if($ind->code=="YEARLY" && $indVal->targetDateTime) {
