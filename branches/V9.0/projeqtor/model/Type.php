@@ -100,7 +100,7 @@ class Type extends SqlElement {
                                           "showInFlash"=>"hidden",
                                           "scope"=>"hidden",
                                           "lockNoLeftOnDone"=>"hidden",
-                                          "_lib_statusMustChangeLeftDone"=>"hidden",
+                                          "_lib_statusMustChangeLeftDone"=>"hidden"
                                           );
   
   private static $_databaseTableName = 'type';
