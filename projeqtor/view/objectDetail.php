@@ -1522,11 +1522,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
                 echo '<div style="position:absolute;top:1px;right:'.$pos.'px;float:right;">';
               }
               if ($col=='idStatus') {
-                echo '<a onmouseover="drawGraphStatus();">';
+                echo '<div onClick="drawGraphStatus();" class="graphStatusDivContainer">';
               }
               echo $formatedThumb;
               if ($col=='idStatus') {
-                echo '</a>';
+                echo '</div>';
                 echo '<div id="graphStatusDiv" dojoType="dijit.layout.ContentPane" region="center" class="graphStatusDiv">';
                 echo '</div>';
               }
@@ -3497,9 +3497,9 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
     }
     echo '<td class="assignData">'.(($version->isRef)?'<b>':'').htmlEncode($version->name).(($version->isRef)?'</b>':'');
     if ($version->approved) {
-      echo '&nbsp;&nbsp;<img src="../view/img/check.png" height="12px" title="'.i18n('approved').'"/>';
+      echo '&nbsp;&nbsp;<img src="../view/img/check.png" style="height:12px;position:relative;top:1px" title="'.i18n('approved').'"/>';
     }else if ($version->disapproved) {
-      echo '&nbsp;&nbsp;<img src="../view/img/uncheck.png" height="12px" title="'.i18n('disapproved').'"/>';
+      echo '&nbsp;&nbsp;<img src="../view/img/uncheck.png" style="height:12px;position:relative;top:1px" title="'.i18n('disapproved').'"/>';
     }
     echo '</td>';
     echo '<td class="assignData">'.htmlFormatDate($version->versionDate).'</td>';
@@ -6026,14 +6026,14 @@ function drawApproverFromObject($list, $obj, $refresh=false) {
     echo '<table style="width:100%"><tr>';
     if ($approved and !$disapproved) {
       echo '<td>';
-      echo '<img src="../view/img/check.png" style="position:relative;height:12px;top:3px;"/>&nbsp;';
+      echo '<img src="../view/img/check.png" style="position:relative;height:12px;top:2px;"/>&nbsp;';
       echo i18n("approved").$compMsg.$approvedDate;
       echo '</td>';
     }else if(!$approved and $disapproved){
-      echo '<td style="white-space:nowrap"><img src="../view/img/uncheck.png" style="position:relative;height:12px;top:4px;"/>'.formatCommentThumb($versApp->disapprovedComment).'</td>';
+      echo '<td style="white-space:nowrap"><img src="../view/img/uncheck.png" style="position:relative;height:12px;top:2px;"/>&nbsp;'.formatCommentThumb($versApp->disapprovedComment).'</td>';
       echo '<td>'.i18n("disapproved").$compMsg.$disapprovedDate.'&nbsp;</td>';
       if ($user->id==$app->idAffectable and !$print and $versApp->id) {
-      	echo '<td><button dojoType="dijit.form.Button" showlabel="true" >';
+      	echo '<td><button dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">';
       	echo i18n('approveNow');
       	echo '  <script type="dojo/connect" event="onClick" args="evt">';
       	echo '   approveItem('.$approverId.', \'approved\');';
@@ -6044,13 +6044,13 @@ function drawApproverFromObject($list, $obj, $refresh=false) {
       echo '<td>';
       echo i18n("notApproved").$compMsg;
       if ($user->id==$app->idAffectable and !$print  and $versApp->id) {
-        echo '&nbsp;&nbsp;<button dojoType="dijit.form.Button" showlabel="true" >';
+        echo '&nbsp;&nbsp;<button dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">';
         echo i18n('approveNow');
         echo '  <script type="dojo/connect" event="onClick" args="evt">';
         echo '   approveItem('.$approverId.', \'approved\');';
         echo '  </script>';
         echo '</button>';
-        echo '&nbsp;&nbsp;<button dojoType="dijit.form.Button" showlabel="true" >';
+        echo '&nbsp;&nbsp;<button dojoType="dijit.form.Button" showlabel="true" class="roundedVisibleButton">';
         echo i18n('disapproveNow');
         echo '  <script type="dojo/connect" event="onClick" args="evt">';
         echo '   disapproveItem('.$approverId.');';

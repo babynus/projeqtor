@@ -44,11 +44,11 @@ if (array_key_exists('idUser', $_REQUEST)) {
 
 $headerParameters = "";
 if ($paramUser != "") {
-    $headerParameters .= i18n("colIdUser") . ' : ' . htmlEncode(SqlList::getNameFromId('idUser', $paramUser)) . '<br/>';
+    $headerParameters .= i18n("colIdUser") . ' : ' . htmlEncode(SqlList::getNameFromId('User', $paramUser)) . '<br/>';
 }
 
 if ($paramObjectType != "") {
-    $headerParameters .= i18n("colType") . ' : ' . htmlEncode(SqlList::getNameFromId('refType', $paramObjectType)) . '<br/>';
+    $headerParameters .= i18n("colType") . ' : ' . htmlEncode(SqlList::getNameFromId('Type', $paramObjectType)) . '<br/>';
 }
 
 include "header.php";
