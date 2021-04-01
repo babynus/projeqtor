@@ -222,7 +222,7 @@ function showProjects() {
     $width=($print)?'45':'55';
     $lstProj=implode(",",$lstProj);
     echo '<table align="center" style="width:100%; ">';
-    echo '<tr>'.'  <td class="messageHeader" colspan="'.(($showProject)?'3':'1').'">'.i18n('menuProject');
+    echo '<tr>'.'  <td class="messageHeader" colspan="'.(($showProject)?'1':'1').'" style="border-right:0">'.i18n('menuProject');
     if(!$print){
       echo '     <div id="showProjectToDay" class="ganttExpandOpened"';
       echo '      style="float:left; width:16px; height:13px;"';
@@ -232,6 +232,11 @@ function showProjects() {
       echo '      onclick="showProjectToDay(1,\''.$lstProj.'\')">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
     }
     echo '</td>';
+    if ($showProject) {
+      echo '<td class="messageHeader" style="border-left:0;border-right:0" title="'.i18n("Health").'"><div class="imageColorWhite iconHealth iconSize16"></div></td>';
+      echo '<td class="messageHeader" style="border-left:0;border-right:0" title="'.i18n("Quality").'"><div class="imageColorWhite iconQuality iconSize16"></div></td>';
+      echo '<td class="messageHeader" style="border-left:0;" title="'.i18n("Trend").'"><div class="imageColorWhite iconTrend iconSize16"></div></td>';
+    }
     if ($showProject) echo '  <td class="messageHeader" colspan="2" width="'.($width).'px;"><div xstyle="width:50px; xoverflow: hidden; xtext-overflow: ellipsis;">'.ucfirst(i18n('progress')).'</div></td>';
     if ($workVisibility=='ALL' and $showProject) {
       echo '  <td class="messageHeader" width="'.$width.'px;"><div xstyle="width:50px; xoverflow: hidden; xtext-overflow: ellipsis;">'.ucfirst(i18n('colLeft')).'</div></td>';
@@ -366,14 +371,18 @@ function showProjects() {
         } else {
           $goto=' style="border-right:0px;text-align: left;"';
         }
-        $healthColor=SqlList::getFieldFromId("Health", $proj->idHealth, "color");
-        $healthName=SqlList::getNameFromId("Health", $proj->idHealth);
-        $healthIcon=SqlList::getFieldFromId("Health", $proj->idHealth, "icon");
-        $trendIcon=SqlList::getFieldFromId("Trend", $proj->idTrend, "icon");
-        $trendName=SqlList::getNameFromId("Trend", $proj->idTrend);
         $styleHealth=($print)?'width:10px;height:10px;margin:1px;padding:0;-moz-border-radius:6px;border-radius:6px;border:1px solid #AAAAAA;':'';
-        echo '<tr style="text-align: center">';
-        echo '  <td class="messageData" >';
+        $healthColor=SqlList::getFieldFromId("Health", $proj->idHealth, "color");
+        $healthIcon=SqlList::getFieldFromId("Health", $proj->idHealth, "icon");
+        $healthName=i18n("colIdHealth").' : '.(($proj->idHealth)?SqlList::getNameFromId("Health", $proj->idHealth):i18n('undefinedValue'));
+        $trendIcon=SqlList::getFieldFromId("Trend", $proj->idTrend, "icon");
+        $trendColor=SqlList::getFieldFromId("Trend", $proj->idTrend, "color");
+        $trendName=i18n("colIdTrend").' : '.(($proj->idTrend)?SqlList::getNameFromId("Trend", $proj->idTrend):i18n('undefinedValue'));
+        $qualityColor=SqlList::getFieldFromId("Quality", $proj->idQuality, "color");
+        $qualityIcon=SqlList::getFieldFromId("Quality", $proj->idQuality,"icon");
+        $qualityName=i18n("colIdQuality").' : '.(($proj->idQuality)?SqlList::getNameFromId("Quality", $proj->idQuality):i18n('undefinedValue'));
+        echo '<tr style="text-align: center;">';
+        echo '  <td class="messageData" style="border-right:0">';
         if($subProj and !$print){
           echo '     <input id="group_asSub_'.$idProj.'" hidden value="'.implode(',', $listSub).'">';
           echo '     <div id="group_'.$idProj.'" class="'.$class.'"';
@@ -387,12 +396,25 @@ function showProjects() {
         echo '<div '.$goto.' style="width:100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; " class="'.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'">'.$tab.htmlEncode($name);
         echo '</div></td>';
         if ($showProject) {
-          echo ' <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="vertical-align:middle;width:12px;margin:0;padding:0;spacing:0;border-left:0px;border-right:0px;" '.$goto.' >'.(($trendIcon)?'    <img height="12px" src="icons/'.$trendIcon.'" title="'.$trendName.'"/>':'').'  </td>';
+          $extraStyle="width:10px;margin:0;padding:0;spacing:0;border-left:0px;border-right:0px;margin:0 0px; padding:0 2px;width:16px; height:16px; width:16px;";
+          $extraStyleImg="margin:0; padding:0;position:relative;top:2px; width:16px; height:16px;";
+          $extraStyleColor="margin:0; padding:0;position:relative;top:1px; width:13px; height:13px;border-radius:8px;";
           if ($healthIcon) {
-            echo ' <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="vertical-align:middle;width:12px;margin:0;padding:0;spacing:0;border-left:0px;border-right:0px;" '.$goto.' >'.' <img height="12px" src="icons/'.$healthIcon.'" title="'.$healthName.'"/>'.'  </td>';
+            echo ' <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="vertical-align:middle;'.$extraStyle.'" '.$goto.' >'.'<img height="16px" style="'.$extraStyleImg.'" src="icons/'.$healthIcon.'" title="'.$healthName.'"/>'.'  </td>';
           } else {
-            echo '  <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="width:14px;margin:0;padding:0;spacing:0;border-left:0px;" '.$goto.' >'.'    <div class="colorHealth" style="'.$styleHealth.'background:'.$healthColor.';" title="'.$healthName.'">&nbsp;</div>'.'  </td>';
+            echo '  <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="'.$extraStyle.'" '.$goto.' >'.'    <div class="colorHealth" style="'.$styleHealth.$extraStyleColor.'background:'.$healthColor.';" title="'.$healthName.'">&nbsp;</div>'.'  </td>';
           }
+          if ($qualityIcon) {
+            echo ' <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="vertical-align:middle;'.$extraStyle.'" '.$goto.' >'.(($qualityIcon)?'<img height="12px" style="'.$extraStyleImg.'" src="icons/'.$qualityIcon.'" title="'.$qualityName.'"/>':'').'  </td>';
+          } else {
+            echo '  <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="'.$extraStyle.'" '.$goto.' >'.'    <div class="colorHealth" style="'.$styleHealth.$extraStyleColor.'background:'.$qualityColor.';" title="'.$qualityName.'">&nbsp;</div>'.'  </td>';
+          }
+          if ($trendIcon) {
+            echo ' <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="vertical-align:middle;'.$extraStyle.'" '.$goto.' >'.(($trendIcon)?'<img height="12px" style="'.$extraStyleImg.'" src="icons/'.$trendIcon.'" title="'.$trendName.'"/>':'').'  </td>';
+          } else {
+            echo '  <td class="messageData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" style="'.$extraStyle.'" '.$goto.' >'.'    <div class="colorHealth" style="'.$styleHealth.$extraStyleColor.'background:'.$trendColor.';" title="'.$healthName.'">&nbsp;</div>'.'  </td>';
+          }
+          
         }
         if ($showProject) echo '  <td style="width:'.$width.'px" class="messageDataValue'.($show?'':'Grey').' colorNameData">'.($show?displayProgress(htmlDisplayPct($progress), $planned, $left, $real, true, true):'').'</td>';
         if ($showProject) echo '  <td style="width:'.$width.'px" class="messageDataValue'.($show?'':'Grey').'">'.($show?SqlList::getNameFromId('OverallProgress', $proj->idOverallProgress):"").'</td>';
