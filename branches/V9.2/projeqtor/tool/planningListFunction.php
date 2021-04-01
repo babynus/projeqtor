@@ -615,7 +615,8 @@ function drawResourceTeamOrga() {
           </script>
           <option value=""></option>
           <?php 
-          $specific='resourcePlanning';
+          //$specific='resourcePlanning';
+          $specific='imputation';
           $includePool=true;
           $specificDoNotInitialize=true;                       
           include '../tool/drawResourceListForSpecificAccess.php'; ?>
