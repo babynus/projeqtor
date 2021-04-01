@@ -1309,7 +1309,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       $readOnly=false;
       $specificStyle='';
       $specificStyleWithoutCustom='';
-      if (($col=="idle" or $col=="done" or $col=="handled" or $col=="cancelled" or $col=="solved") and $objType) {
+      if (($col=="idle" or $col=="done" or $col=="handled" or $col=="cancelled" or $col=="solved") and $objType and property_exists($obj, 'idStatus')) {
         $lock='lock'.ucfirst($col);
         if (!$obj->id or (property_exists($objType, $lock) and $objType->$lock)) {
           $attributes.=' readonly tabindex="-1"';
@@ -1342,7 +1342,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $readOnly=true;
         }
       }
-      if (($col=="realEndDate" or $col=="idle") and $objType) {
+      if (($col=="realEndDate" or $col=="idle") and $objType  and property_exists($obj, 'idStatus')) {
         $lock='lockIdle';
         if (!$obj->id or (property_exists($objType, $lock) and $objType->$lock)) {
           $attributes.=' readonly tabindex="-1"';
