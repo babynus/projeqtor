@@ -738,6 +738,7 @@ function saveBrowserLocaleToSession() {
   saveDataToSession('browserLocaleDateFormat', encodeURI(format));
   var fmt = "" + dojo.number.format(1.1) + " ";
   var decPoint = fmt.substr(1, 1);
+  browserLocaleDecimalSeparator=decPoint;
   saveDataToSession('browserLocaleDecimalPoint', decPoint);
   var fmt = dojo.number.format(100000) + ' ';
   var thousandSep = fmt.substr(3, 1);
