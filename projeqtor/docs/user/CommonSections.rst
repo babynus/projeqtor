@@ -434,39 +434,120 @@ Treatment section
 This section contains information on the treatment of articles, ie on the life and progress of the element.
 
 It usually contains status information, macro reports, situations or those responsible for the work of this element.   
+
+.. figure:: /images/GUI/COMMON_ZONE_Treatment.png
+   :alt: Treatment section
    
+   Treatment section for project   
 
 Depending on the item, this section may display different fields.
 
 All the lists in this section are customizable.  
 
 
- .. compound:: Macro status
+.. rubric:: Project tracking settings
+
+This part of the section allows you to follow your project in a more visual way.
+
+.. figure:: /images/GUI/COMMON_ZONE_FollowProject.png
+   :alt: Project tracking settings
+
+   Project tracking settings
+
+On the Today screen, you can see this informations in the scope of the numbers counted in the Project Section.
+
+.. figure:: /images/GUI/COMMON_ZONE_TodayScopeProject.png
+   :alt: scope of the numbers counted 
+
+   scope of the numbers counted in the project section on Today screen
+   
+
+.. rubric:: Macro status
  
-    The macros states work thanks to levers.
+The macros states work thanks to levers.
     
-    Several states are populated directly based on the information you record.
+Several states are populated directly based on the information you record.
    
    
-    .. compound:: in progress
+ .. compound:: in progress
     
-      The field is filled in when you fill in the first charge on your timesheet.
+   The field is filled in when you fill in the first charge on your timesheet.
 
-      Please note, the date recorded in the in progress field is the date on which the charge is entered and not the day on which it is entered.
+   Please note, the date recorded in the in progress field is the date on which the charge is entered and not the day on which it is entered.
     
-    .. compound:: Done
+ .. compound:: Done
     
-      The field is filled in when you fill in the last charge on your timesheet.
+   The field is filled in when you fill in the last charge on your timesheet.
 
-      The remaining time MUST therefore be at 0 for this field to be completed.
+   The remaining time MUST therefore be at 0 for this field to be completed.
     
-    .. compound:: Closed
+ .. compound:: Closed
     
-      The field is filled in when you close an element
+   The field is filled in when you close an element
     
-    .. compound:: Cancelled
+ .. compound:: Cancelled
 
-      The field is filled in when you cancel the element via the status of your workflow
+   The field is filled in when you cancel the element via the status of your workflow
+
+
+
+.. rubric:: Other options
+
+ProjeQtOr offers you several options to build your projects, protect them, or even pause them depending on the hazards you may encounter. 
+
+
+ .. compound:: Fix planning
+
+   * The project is never re-calculated.
+   
+   * It means the planning will always be the same whatever you do on other projects.
+   
+   .. important:: 
+      
+      This may lead to dependencies unconsistency.
+   
+ .. compound:: Paused 
+ 
+   * Available on projects and activities.
+ 
+   * The planning is never recalculated.
+   
+   * Unlike "fix planning", the current planning for the project is erased.
+   
+   * This is used to postpone the project to an undetermined date.   
+
+ .. compound:: Non extendable project
+
+   * You can't add new elements to this project, 
+   
+   * You can't delete elements from this project.
+   
+   * You can't move elements from/to this project.
+      
+   
+ .. compound:: Under construction
+
+   * The resource don't see it on timesheet.
+   
+   * The alerts are not generated
+
+   * Emails are not sent.
+
+
+ .. compound:: Exclude from global plan
+ 
+   * Do not show the **not plannable** items for this project on the global planning view.
+
+   * This means that only "standard" planning items will be displayed. Excluding actions, decisions, deliveries...
+ 
+
+ .. compound:: Validated work treatment
+
+   * Activates treatment of the validated work based on the sum of the work of the project orders.
+   
+   * Otherwise it will be calculated on the sum of the validated work of the activities
+
+
 
 
 

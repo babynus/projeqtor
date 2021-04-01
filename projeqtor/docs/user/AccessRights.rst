@@ -31,7 +31,7 @@ The menu at the top of the page allows you to display all the modules or to disp
 
 When you have selected one of these menus, the modules are displayed below.
 
-Click on a module to display its description, as well as the list of screens that will be activated or deactivated.
+Click on a module to display its description, as well as the list of screens that will be activated or deactivated. Disabling certain modules will also hide the corresponding reports.
 
 Click on the checkboxes to enable or disable the module.
 
@@ -50,6 +50,7 @@ Click on the checkboxes to enable or disable the module.
    * the humans resources
    * the external documents management 
    * the organizations (level society) management 
+   * the cloned environments
    * the activity stream
    * and the notifications.
 
