@@ -91,7 +91,7 @@ Toolbar
    
    |ten| :ref:`Print and Export<print-export-gantt>`
    
-   |eleven| :ref:`The checkbox<checkbox-gantt>`   
+   |eleven| :ref:`The other options<checkbox-gantt>`   
    
    
    
@@ -438,7 +438,7 @@ You can print directly on your printer or export in PDF format or in MS Project 
 
 .. _checkbox-gantt:
 
-.. rubric:: |elevenBLC| Checkbox for display
+.. rubric:: |elevenBLC| Other options: checkbox for display
 
 At the end of the first zone, you have the choice to display or not, certain information on the Gantt chart.
 
@@ -506,8 +506,9 @@ At the end of the first zone, you have the choice to display or not, certain inf
          The tasks of the project which are not crossed by the critical path are elements which will not affect the duration of the project and, even modified, will not automatically involve a modification of this duration for the entire project.
 
 
+  .. compound:: Hide models project
 
-
+      You can display or hide the template type projects in the area list.
 
 
 
@@ -1901,7 +1902,13 @@ A check is then carried out and takes into account all the resources assigned to
 
 If the field is left empty or at 0 then no control is carried out and the calendar will not display any green or red box.
 
-
+ .. compound:: Blue box
+ 
+   When you start to put in the workload but do not yet reach all of the expected FTEs.
+   
+   .. image:: /images/GUI/GANTT_ZONE_FTEBlue.png
+   
+   
 
  .. compound:: Green Box
  
@@ -1928,8 +1935,7 @@ If the field is left empty or at 0 then no control is carried out and the calend
    
  .. compound:: Non-colored box
  
-  The total entry is less than the expected workload in FTE or there is no expected workload.
-   
+   There is no expected workload.   
 
 .. _manualPlan-InterventionMode:
 

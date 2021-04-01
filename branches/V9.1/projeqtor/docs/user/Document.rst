@@ -233,13 +233,6 @@ Moving the mouse over the icon will display description text.
 
 Approval process
 ----------------
-
-
-.. figure:: /images/GUI/DOCUMENT_ZONE_Approvers.png
-   :alt: Approvers section
-   
-   Approvers section
-   
       
 You can define approvers for a document.
 
@@ -249,25 +242,48 @@ Only users assigned to the project linked to the document can be added.
 * Click on |Delete| to delete an approver
 
 
-    
+.. rubric:: The approvers
+
 When an approver is created in the list, the approver is also automatically added to the latest version of the document.
    
 When adding a version to the document, approvers are automatically added to the version.
 
-
-.. rubric:: The approvers
-
-
 Each approver can see the list of documents to approve on their Today screen.
+
+.. figure:: /images/GUI/DOCUMENT_ZONE_TodayDoc.png
+   :alt: Document to approve
+   
+   Documents to be approved on the today screen
    
 On the Documents screen, the approver can approve or reject the document.
 
-Once the document is approved, the line is then checked and the date and time of the approval recorded.   
+All approvers of the document can view the response of other approvers.   
 
-When all approvers have approved the document version, it is considered approved and then appears with a check mark in the list of versions.
-  
+
+.. figure:: /images/GUI/DOCUMENT_ZONE_Approve.png
+   :alt: Document to approve
+   
+   Documents to be approved on the today screen
    
 
+Once the document is **approved**, the line is then checked and the date and time of the approval recorded.
+
+If the document is **rejected**, the line is then marked with a cross.
+
+
+  .. compound:: Approval status
+  
+   This status allows you to globally track the status of the approval.
+
+   When there is no approver, the status is **without approval**
+   
+   When there is at least one approver, the status is **waiting for approve** if the approval response is missing.
+   
+   The status changes to **rejected** if at least one of the approvers rejected the document.
+   
+   The status changes to **Approved** if all approvers have approved the document and then appears with a check mark in the list of versions.
+  
+  
   .. compound:: Send a reminder email to approvers
 
    Send an email to approvers who have not yet validated the document. 
