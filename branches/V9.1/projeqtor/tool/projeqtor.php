@@ -4412,6 +4412,7 @@ function getListForSpecificRights($specific, $includePool=false) {
   if (!isset($user)) {
     $user=getSessionUser();
   }
+  
   if ($user->allSpecificRightsForProfilesOneOnlyValue($specific, 'NO')) {
     // $table[$user->id]=' ';
     $table=array($user->id=>SqlList::getNameFromId('Affectable', $user->id));
