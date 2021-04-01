@@ -207,7 +207,7 @@
              <tr>
              <td >
                <div id="divListElement" style="text-align:-webkit-center;tex-align:-moz-center;">
-                <textarea dojoType="dijit.form.Textarea" id="multipleUpdateTextArea" name="multipleUpdateTextArea" style="width:90%;min-width:300px;min-height:150px;font-size: 90%; background:none;display:none;" 
+                <textarea dojoType="dijit.form.Textarea" id="multipleUpdateTextArea" name="multipleUpdateTextArea" style="width:90%;min-width:300px;min-height:150px;font-size: 90%; background:#ffffff;display:none;" 
                 class="input" maxlength="4000" ></textarea>
                 <div style="margin-right: 18%;width: 60%;margin-left: 22%;">
                   <select id="multipleUpdateValueList" name="multipleUpdateValueList[]" value=""  dojoType="dijit.form.MultiSelect" 
