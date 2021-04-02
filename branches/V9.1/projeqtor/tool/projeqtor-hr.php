@@ -733,7 +733,8 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
  * @param Resource The resource for which init or purge leave system elements 
  */
 function initPurgeLeaveSystemElementsOfResource($resource=null) {
-if ($resource==null) {return;}    
+  if ($resource) debugLog("  $resource->id - $resource->name");
+  if ($resource==null) {return;}    
     if ($resource->isEmployee == 0) {
         $clausePrjAndRes = "idProject=". Project::getLeaveProjectId(). " and idResource=".$resource->id;
         $clauseRes = "idEmployee=".$resource->id;
@@ -829,10 +830,15 @@ if ($resource==null) {return;}
                 traceLog($result);
                 return $result;
             }
-            
-            $crit=array();
+            $leaveTypeContract=new LeaveTypeOfEmploymentContractType();
+            $lstLeaveType=$leaveTypeContract->getSqlElementsFromCriteria( array('idEmploymentContractType'=>EmploymentContractType::getDefaultEmploymentContractTypeId()));
+            $crit='id in (0';
+            foreach ($lstLeaveType as $lvType) {
+              $crit.=','.$lvType->idLeaveType;
+            }
+            $crit.=')';
             $lvType=new LeaveType();
-            $lvTypeList=$lvType->getSqlElementsFromCriteria($crit);
+            $lvTypeList=$lvType->getSqlElementsFromCriteria(null,null,$crit);
             $pjLeaveId = Project::getLeaveProjectId();
 
             foreach($lvTypeList as $leaveType){
