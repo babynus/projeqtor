@@ -352,6 +352,7 @@ class EmploymentContractMain extends SqlElement {
         $leaveEarned = new EmployeeLeaveEarned();
         $lvEList = $leaveEarned->getSqlElementsFromCriteria(null,false,$clauseWhere);
         foreach( $lvEList as $lvE) {
+            $arrayLeaveRightEarnedExist[$lvE->idLeaveType]=$lvE->idLeaveType;
             $lvE->setLeavesRight(true);
             if ($lvE->startDate!=null and $lvE->endDate!=null and $lvE->leftQuantity!==null) {
                 $nbDays=(float)0.0;
@@ -372,7 +373,38 @@ class EmploymentContractMain extends SqlElement {
                                               );
                 return $resultU;
             }
-        }
+        }   
+    }
+    // If change contract type, must continue
+    if ($this->idEmploymentContractType != $old->idEmploymentContractType) {
+      $resource=new Resource($this->idEmployee);
+      $leaveTypeContract=new LeaveTypeOfEmploymentContractType();
+      $lstLeaveType=$leaveTypeContract->getSqlElementsFromCriteria( array('idEmploymentContractType'=>$this->idEmploymentContractType));
+      $crit='id in (0';
+      foreach ($lstLeaveType as $lvType) {
+        $crit.=','.$lvType->idLeaveType;
+      }
+      $crit.=')';
+      $lvType=new LeaveType();
+      $lvTypeList=$lvType->getSqlElementsFromCriteria(null,null,$crit);
+      $pjLeaveId = Project::getLeaveProjectId();      
+      foreach($lvTypeList as $leaveType){
+        $leaveEarned=new EmployeeLeaveEarned();
+        $cptLeaveEarned=$leaveEarned->countSqlElementsFromCriteria(array('idEmployee'=>$this->idEmployee,'idLeaveType'=>$leaveType->id));
+        if ($cptLeaveEarned>0) continue; // do not store duplicate
+        $empLE = new EmployeeLeaveEarned();
+        $empLE->idEmployee=$resource->id;
+        $empLE->idLeaveType=$leaveType->id;
+        $empLE->idUser= getCurrentUserId();
+        $empLE->setLeavesRight();
+        $resultELE = $empLE->simpleSave();
+        $ass = new Assignment();
+        $ass->idProject = $pjLeaveId;
+        $ass->idResource = $resource->id;
+        $ass->refType = "Activity";
+        $ass->refId = $leaveType->idActivity;
+        $result=$ass->simpleSave();
+      }
     }
     
     // At the contract closure and if the employee has no more unclosed contract
@@ -390,7 +422,6 @@ class EmploymentContractMain extends SqlElement {
                                             "saveContract",
                                             getLastOperationStatus($resultU)
                                           );
-            return $resultU;
         }
         // Close the leave earned of the employee
         $critLv = array("idle" => '0',
@@ -409,7 +440,6 @@ class EmploymentContractMain extends SqlElement {
                                                 "saveContract",
                                                 getLastOperationStatus($resultU)
                                               );
-                return $resultU;
             }
         }
     }
