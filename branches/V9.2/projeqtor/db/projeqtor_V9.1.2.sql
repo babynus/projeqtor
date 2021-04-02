@@ -16,3 +16,6 @@ INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
 (5,'subtask','2'),
 (6,'subtask','2'),
 (7,'subtask','2');
+
+UPDATE `${prefix}filtercriteria` set sqlAttribute='idDeliveryType' 
+where sqlAttribute='idDeliverableType' and idFilter in (select id from `${prefix}filter` where refType='Delivery');
