@@ -101,3 +101,5 @@ CREATE TABLE `${prefix}documentright` (
 
 INSERT INTO `${prefix}documentright` (idDirectory, idProfie , idAccessMode)
 SELECT d.id, p.id, a.idAccessProfile FROM `${prefix}documentdirectory` as d CROSS JOIN `${prefix}profile` as p INNER JOIN `${prefix}accessright` as a ON p.id = a.idProfile and a.idMenu=103;
+
+UPDATE `${prefix}type` set lockPaused=lockDone where scope='Ticket';
