@@ -913,7 +913,11 @@ abstract class SqlElement {
     }
     if(get_class($this)=='Ticket'){
       if($this->handled and !$this->done and !$this->idle and !$this->paused){
-    	$statPeriod = self::getSingleSqlElementFromCriteria('StatusPeriod', array('refType'=>get_class($this), 'refId'=>$this->id));
+        $statPeriod = new StatusPeriod();
+        $statPeriodList = $statPeriod->getSqlElementsFromCriteria(array('refType'=>get_class($this), 'refId'=>$this->id), null, null, 'id DESC');
+    	if(count($statPeriodList)>0){
+    	  $statPeriod = $statPeriodList[0];
+    	}
     	if($statPeriod->id and $statPeriod->active == 0){
     		$statPeriod->endDate=$this->handledDateTime;
     		$statPeriod->idStatusEnd=$this->idStatus;
@@ -934,7 +938,11 @@ abstract class SqlElement {
     		$newStatPeriod->save();
     	}
       }else{
-      	$statPeriod = self::getSingleSqlElementFromCriteria('StatusPeriod', array('refType'=>get_class($this), 'refId'=>$this->id));
+        $statPeriod = new StatusPeriod();
+        $statPeriodList = $statPeriod->getSqlElementsFromCriteria(array('refType'=>get_class($this), 'refId'=>$this->id), null, null, 'id DESC');
+      	if(count($statPeriodList)>0){
+      		$statPeriod = $statPeriodList[0];
+      	}
       	$type = 'recorded';
       	if($this->idle){
       		$type = 'idle';
