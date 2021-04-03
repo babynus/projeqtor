@@ -783,6 +783,7 @@ class ImputationLine {
     $manuPlan=false;
     foreach ($tab as $key=>$line) {
       $pe=new PlanningElement();
+      $manuPlan=false;
       if($line->refType=='Activity'){
         $critArray=array("refType"=>$line->refType,"refId"=>$line->refId,"idProject"=>$line->idProject);
         $pe=$pe->getSingleSqlElementFromCriteria('PlanningElement', $critArray);
