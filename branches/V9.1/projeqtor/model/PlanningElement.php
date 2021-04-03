@@ -1086,7 +1086,7 @@ class PlanningElement extends SqlElement {
           $pw->purge($clause);
         }
         $tableName=$this->getDatabaseTableName();
-        $query="SELECT $tableName.id as id, $tableName.refid as refId,$tableName.refType as reftype FROM $tableName ";
+        $query="SELECT $tableName.id as id, $tableName.refId as refid,$tableName.refType as reftype FROM $tableName ";
         $query.="WHERE topRefType='$this->refType' and topRefId=$this->refId";
         $result = Sql::query ( $query );
         while ($line = Sql::fetchLine($result)) {
