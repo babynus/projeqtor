@@ -995,6 +995,8 @@ class PlanningElement extends SqlElement {
       if (property_exists($this,'_profile') and $this->_profile=='RECW' and $this->assignedWork!=$old->assignedWork) {
         $extraFields=array('assignedWork','assignedCost','leftWork','leftCost','plannedWork','plannedCost','progress');
         $fields=array_merge($fields,$extraFields);
+        if ($this->assignedWork<0) $this->assignedWork=0;
+        if ($this->leftWork<0) $this->leftWork=0;
         $this->plannedWork=$this->leftWork+$old->realWork;
         $this->plannedCost=$this->leftCost+$old->realCost;
         $this->progress=(($this->plannedWork)?round($old->realWork/($this->plannedWork)*100):0);
