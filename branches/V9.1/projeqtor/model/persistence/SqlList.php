@@ -268,7 +268,7 @@ class SqlList {
           if ($val==null or $val=='' or $val=='null') {
             $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . " is null";
           } else {
-            if ($col=='idProject' and ($val=='*' or ! $val)) {continue;}
+            if ($col=='idProject' and ($val=='*' or ! trim($val))) {continue;}
             $dataType=$obj->getDataType($col);
             if ($dataType=='numeric' or $dataType=='decimal' or $dataType=='int' or $dataType=='boolean') {
               $query .= ' and ' . $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName($col) . '=' . Sql::fmtStr($val);
