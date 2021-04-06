@@ -632,10 +632,12 @@ class ActivityPlanningElementMain extends PlanningElement {
         echo '<div style="position:relative;"><div style="color:#AA0000;margin:0px 10px;text-align:center;position:absolute;top:-55px;height:60px;">'.i18n('colIsOnCriticalPath').'</div></div>';
       }
     }elseif ($item=='idWorkUnits'){
-      $activityWU = new ActivityWorkUnit();
-      $listActWU = $activityWU->getSqlElementsFromCriteria(array('refId'=>$this->refId,'refType'=>'Activity'));
-      $obj = new Activity($this->refId);
-      drawActivityWorkUnit($listActWU,$obj);
+      if($this->id){
+        $activityWU = new ActivityWorkUnit();
+        $listActWU = $activityWU->getSqlElementsFromCriteria(array('refId'=>$this->refId,'refType'=>'Activity'));
+        $obj = new Activity($this->refId);
+        drawActivityWorkUnit($listActWU,$obj);
+      }
     }
   }
 }

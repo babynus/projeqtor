@@ -60,12 +60,12 @@ if($mode=='edit'){
          <table>
           <tr>
              <td class="dialogLabel"  >
-               <label for="workCommandWorkUnit" ><?php echo i18n("colIdWorkUnit") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+               <label for="ActivityWorkCommandWorkUnit" ><?php echo i18n("colIdWorkUnit") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect"
               <?php echo autoOpenFilteringSelect();?>
-                id="workCommandWorkUnit" name="workCommandWorkUnit" <?php if($readOnly==true){?>readOnly<?php }?>
+                id="ActivityWorkCommandWorkUnit" name="ActivityWorkCommandWorkUnit" <?php if($readOnly==true){?>readOnly<?php }?>
                 class="input" required="required" style="border-left:3px solid red !important;"
                 onChange="activityWorkUnitChangeIdWorkUnit();" 
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdWorkUnit')));?>" >
@@ -75,12 +75,12 @@ if($mode=='edit'){
            </tr>
            <tr>
              <td class="dialogLabel"  >
-               <label for="workCommandComplexity" ><?php echo i18n("colIdComplexity") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+               <label for="ActivityWorkCommandComplexity" ><?php echo i18n("colIdComplexity") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect"
               <?php echo autoOpenFilteringSelect();?>
-                id="workCommandComplexity" name="workCommandComplexity"
+                id="ActivityWorkCommandComplexity" name="ActivityWorkCommandComplexity"
                 class="input" required="required" style="border-left:3px solid red !important;"
                 onChange="activityWorkUnitChangeIdComplexity();"  <?php if($mode!="edit"){?>readOnly<?php }?>  <?php if($mode=="edit" and $readOnly==true){?>readOnly<?php }?> 
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('idComplexity')));?>" >
@@ -90,11 +90,11 @@ if($mode=='edit'){
            </tr>
             <tr>
              <td class="dialogLabel" >
-               <label for="workCommandQuantity" ><?php echo i18n("colQuantity");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+               <label for="ActivityWorkCommandQuantity" ><?php echo i18n("colQuantity");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <div dojoType="dijit.form.NumberTextBox" 
-                  id="workCommandQuantity" name="workCommandQuantity"
+                  id="ActivityWorkCommandQuantity" name="ActivityWorkCommandQuantity"
                   style="width:100px;border-left:3px solid red !important;" required="required" 
                   invalidMessage="<?php echo i18n('quantityCanBeInferiorThan',$minQuantity);?>" 
                   onChange="activityWorkUnitChangeQuantity();" <?php if($mode!="edit"){?>readOnly<?php }?> constraints="{min:<?php echo $minQuantity;?>}"
@@ -106,12 +106,12 @@ if($mode=='edit'){
             <?php if($paramEnableWorkUnit=='true'){ ?>
       <tr>
           <td class="dialogLabel"  >
-               <label for="billedWorkCommandWorkCommand" ><?php echo i18n("workCommand") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+               <label for="ActivityBilledWorkCommandWorkCommand" ><?php echo i18n("workCommand") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect"
               <?php echo autoOpenFilteringSelect();?>
-                id="billedWorkCommandWorkCommand" name="billedWorkCommandWorkCommand"
+                id="ActivityBilledWorkCommandWorkCommand" name="ActivityBilledWorkCommandWorkCommand"
                 class="input"  <?php if($mode!="edit"){?>readOnly<?php }?>>
                  <?php htmlDrawOptionForReference('idWorkCommand',$idWorkCommand, $obj, false);  ?>
                </select> 
@@ -120,12 +120,12 @@ if($mode=='edit'){
     <?php } ?>
             <tr>
              <td class="dialogLabel" >
-               <label for="workCommandAmount" ><?php echo i18n("colAmount");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+               <label for="ActivityWorkCommandAmount" ><?php echo i18n("colAmount");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
              <?php if ($currencyPosition=='before') echo $currency;?>
                <input dojoType="dijit.form.NumberTextBox" 
-                id="workCommandAmount" name="workCommandAmount"
+                id="ActivityWorkCommandAmount" name="ActivityWorkCommandAmount"
                 readonly 
                 style="width:100px;"
                 class="input"  value="<?php echo $commandAmount;?>">  
