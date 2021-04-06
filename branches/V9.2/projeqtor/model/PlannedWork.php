@@ -397,7 +397,7 @@ class PlannedWork extends GeneralWork {
         if ($strictDependency or $precVal!=0 or $precFraction==1) {
           if ( ( $prec->refType!='Milestone' and $plan->refType!='Milestone') or $precFraction==1 or ($strictDependency and $plan->refType=='Milestone') ) {
           //if ($prec->refType!='Milestone') {
-            $startPossible=addWorkDaysToDate($precEnd,($precVal>=0)?2+$precVal:1+$precVal); // #77
+            $startPossible=addWorkDaysToDate($precEnd,($precVal>=0 and $precTyp!='E-E')?2+$precVal:1+$precVal); // #77
           } else {
             if ($prec->refType=='Milestone') {
               $startPossible=addWorkDaysToDate($precEnd,($precVal>=0)?1+$precVal:$precVal);
