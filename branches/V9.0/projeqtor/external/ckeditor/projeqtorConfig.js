@@ -47,7 +47,7 @@ CKEDITOR.editorConfig = function( config ) {
   //config.pasteFromWordRemoveFontStyles = false; // Deprecated in 4.6.0, defaults to false
   config.scayt_sLang = getLocalLocation();
   config.scayt_autoStartup = getLocalScaytAutoStartup();
-  
+  config.disableNativeSpellChecker = false;
 };
 /*
 CKEDITOR.editorConfig = function( config ) {
