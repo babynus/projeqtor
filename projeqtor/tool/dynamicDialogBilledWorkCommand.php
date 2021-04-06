@@ -72,7 +72,12 @@ $obj = new Bill($idBill);
                 class="input"  style="border-left:3px solid red !important;" requiered="requiered"
                 onChange="changeBilledWorkCommand();"  <?php if($mode=='edit'){?>readOnly<?php }?>
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdWorkCommand')));?>" >
-                 <?php htmlDrawOptionForReference('idWorkCommand',$idWorkCommand, $obj, false); ?>
+                 <?php 
+                 if($mode=='edit'){
+                  htmlDrawOptionForReference('idWorkCommand',$idWorkCommand, $obj, false);
+                 }else{
+                  htmlDrawOptionForReference('idWorkCommand',$idWorkCommand, $obj, false); 
+                 }?>
                </select> 
              </td>
            </tr>

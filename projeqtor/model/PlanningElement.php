@@ -533,16 +533,24 @@ class PlanningElement extends SqlElement {
     if ($this->initialStartDate and $this->initialEndDate) {
       $this->initialDuration=workDayDiffDates($this->initialStartDate, $this->initialEndDate);
     }
+    // #gautier TODO
     if( get_class($this)=='ActivityPlanningElement'){
-      if($this->idWorkUnit and $this->idComplexity and $this->quantity){
-        $complexityVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$this->idWorkUnit,'idComplexity'=>$this->idComplexity));
-        if($complexityVal->duration){
-          $this->validatedDuration = $complexityVal->duration*$this->quantity;
+      if($this->hasWorkUnit){
+        $activityWorkUnit = new ActivityWorkUnit();
+        $lstActWorkUnit = $activityWorkUnit->getSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->refId));
+        $actValidatedDuration = 0;
+        foreach ($lstActWorkUnit as $actWork){
+          $complexityVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$actWork->idWorkUnit,'idComplexity'=>$actWork->idComplexity));
+          if($complexityVal->duration){
+            $actValidatedDuration += $complexityVal->duration*$actWork->quantity;
+          }
+        }
+        if($actValidatedDuration != 0){
+          $this->validatedDuration = $actValidatedDuration;
           if($this->validatedStartDate)$this->validatedEndDate = addWorkDaysToDate($this->validatedStartDate, ($this->validatedDuration));
         }
       }
     }
-    //
     $consolidateValidated=Parameter::getGlobalParameter('consolidateValidated');
     if ($consolidateValidated=='NO' or ! $consolidateValidated) {
     	$this->validatedCalculated=0;

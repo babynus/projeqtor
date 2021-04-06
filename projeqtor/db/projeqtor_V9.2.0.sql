@@ -65,8 +65,17 @@ FROM `${prefix}planningelement` WHERE idWorkUnit is not null and idComplexity is
 ALTER TABLE `${prefix}planningelement` ADD COLUMN `hasWorkUnit` int(1) unsigned DEFAULT 0 COMMENT '1';
 ALTER TABLE `${prefix}planningelementbaseline` ADD COLUMN `hasWorkUnit` int(1) unsigned DEFAULT 0 COMMENT '1';
 
+ALTER TABLE `${prefix}workcommanddone` ADD COLUMN `idActivityWorkUnit` int(12) unsigned DEFAULT NULL COMMENT '12';
+
 UPDATE `${prefix}planningelement` SET hasWorkUnit=1 
 WHERE `idWorkUnit` is not null and `idComplexity` is not null and `quantity` is not null;
+
+DELETE FROM `${prefix}workcommanddone`;
+
+INSERT INTO `${prefix}workcommanddone` (idWorkCommand, refType, refId , doneQuantity, idActivityWorkUnit )
+SELECT idWorkCommand, refType, refId , quantity, id
+FROM `${prefix}activityworkunit` 
+WHERE idWorkCommand is not null;
 
 ALTER TABLE `${prefix}planningelement` DROP COLUMN `idWorkUnit`;
 ALTER TABLE `${prefix}planningelement` DROP COLUMN `idComplexity`;
