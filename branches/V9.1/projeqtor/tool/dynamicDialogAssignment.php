@@ -287,7 +287,7 @@ if ($planningMode=='RECW') {
                  </div>
                <input id="assignmentAssignedUnit" name="assignmentAssignedUnit" value="<?php echo $unit ;?>" readonly tabindex="-1"
                  xdojoType="dijit.form.TextBox" 
-                 class="display" style="width:15px; background-color:white; color:#000000; border:0px;"/>
+                 class="display" style="width:15px; background-color:transparent; color:#000000; border:0px;"/>
                <input type="hidden" id="assignmentAssignedWorkInit" name="assignmentAssignedWorkInit" value="<?php echo($mode=="edit")?Work::displayWork($assignmentObj->assignedWork):"";?>" 
                  style="width:97px"/>  
              </td>    
@@ -305,7 +305,7 @@ if ($planningMode=='RECW') {
                  </div>
                <input id="assignmentRealUnit" name="assignmentRealUnit" value="<?php echo $unit ;?>" readonly tabindex="-1"
                  xdojoType="dijit.form.TextBox" 
-                 class="display" style="width:15px;background-color:#FFFFFF; color:#000000; border:0px;"/>
+                 class="display" style="width:15px;background-color:transparent; color:#000000; border:0px;"/>
              </td>
            </tr>
            <tr style="<?php if ($planningMode=='RECW') echo 'display:none;';?>">
@@ -350,7 +350,7 @@ if ($planningMode=='RECW') {
                  </div>
                <input id="assignmentLeftUnit" name="assignmentLeftUnit" value="<?php echo $unit ;?>" readonly tabindex="-1"
                  xdojoType="dijit.form.TextBox" 
-                 class="display" style="width:15px;background-color:#FFFFFF; color:#000000; border:0px;"/>
+                 class="display" style="width:15px;background-color:transparent; color:#000000; border:0px;"/>
                <input type="hidden" id="assignmentLeftWorkInit" name="assignmentLeftWorkInit" value="<?php echo ($mode=="edit")?Work::displayWork($assignmentObj->leftWork):"0";?>" 
                  style="width:97px"/>  
              </td>
@@ -381,7 +381,7 @@ if ($planningMode=='RECW') {
                  </div>
                <input id="assignmentPlannedUnit" name="assignmentPlannedUnit" value="<?php echo $unit;?>" readonly tabindex="-1"
                  xdojoType="dijit.form.TextBox" 
-                 class="display" style="width:15px;background-color:#FFFFFF; border:0px;"/>
+                 class="display" style="width:15px;background-color:transparent; border:0px;"/>
              </td>
            </tr>
            <tr>
@@ -411,7 +411,7 @@ if ($planningMode=='RECW') {
              </td>
              <td>
                <input id="assignmentComment" name="assignmentComment" value="<?php echo htmlEncode($assignmentObj->comment);?>"  
-                 dojoType="dijit.form.Textarea"
+                 dojoType="dijit.form.Textarea" style="max-height:200px"
                  class="input" 
                  /> 
              </td>
