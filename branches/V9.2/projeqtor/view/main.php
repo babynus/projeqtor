@@ -811,60 +811,61 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     ?>
    <div id="dialogMessageLegal" style="width:100%; visibility:visible; display:inline-block;height:30%;"> 
      <div id="messageLegallArrow" style="display:block; float:right; margin-top:15px; width:5%; height:100%; margin-top:5px;">
-      <div class="iconArrowMessageLegal" ><span style="color:white; width:18px; height:90%;writing-mode:vertical-rl;"><?php echo i18n("readToHide");?></span></div>
+       <div class="iconArrowMessageLegal" ><span style="color:white; width:18px; height:90%;writing-mode:vertical-rl;"><?php echo i18n("readToHide");?></span></div>
      </div>
-      <?php Sql::beginTransaction();
-            foreach ($listMessageLegalFollowup as $idFollowup=>$idMessage){
-              $messFollow = new MessageLegalFollowup($idFollowup);
-              $messLegal = new MessageLegal($idMessage);
-              $cptMess++;
-              if(!$messFollow->firstViewDate){
-                $messFollow->firstViewDate = date('Y-m-d H:i:s');
-              }
-              $messFollow->lastViewDate = date('Y-m-d H:i:s');
-              $messFollow->save();
-              $val=$messLegal->description; 
-              if($cptMess < $nbListMess){ ?>
-                 <div id="messageLegall<?php echo $messFollow->id;?>" style="display:none;  width:95%; height:100%; overflow-y:auto;"> 
-              <?php }else{ ?> 
-                 <div id="messageLegall<?php echo $messFollow->id;?>" style="display:block;  width:95%; height:100%; overflow-y:auto;"> 
-              <?php }?>
-                  <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; margin-top:15px; min-height:200px; margin:15px 40px 5px 40px;">  
-                    <?php echo $val;?>
-                  </div>
-                  <div style="width:97%;  bottom:5px; text-align:right;">
-                      <?php if($cptMess != 1){?>
-                  	   <span style="font-size:12pt;cursor:pointer; text-decoration:underline;" id="plusTard<?php echo $messFollow->id;?>" onclick="dojo.byId('messageLegall<?php echo $oldValue;?>').style.display='block';dojo.byId('messageLegall<?php echo $messFollow->id;?>').style.display='none'";>
-                      <?php }else{?>   
-                        <span style="font-size:12pt;cursor:pointer; text-decoration:underline;" id="buttonLater<?php echo $messFollow->id;?>" onclick="dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
-                      <?php } 
-                      echo i18n("buttonLater");?></span>
-                     &nbsp;&nbsp;&nbsp;
-                     <?php 
-                        if($messLegal->name != 'newGui'){
-                           if($cptMess != 1){?>
-                  	   <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="markOK<?php echo $messFollow->id;?>" onclick="setReadMessageLegalFollowup(<?php echo $messFollow->id;?>);dojo.byId('messageLegall<?php echo $oldValue;?>').style.display='block';dojo.byId('messageLegall<?php echo $messFollow->id;?>').style.display='none'";>
-                     <?php }else{?>
-                       <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="markOK<?php echo $messFollow->id;?>" onclick="setReadMessageLegalFollowup(<?php echo $messFollow->id;?>);dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
-                     <?php } echo i18n("buttonAgree");?>
-                       </button>
-                     <?php }else{?>
-                        <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="activateNewgui<?php echo $messFollow->id;?>" onclick="setNewGui(<?php echo $messFollow->id;?>, 1);dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
-                          <?php echo i18n("cronExecutionActivate");?>
-                        </button>
-                        <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="desactiveNewgui<?php echo $messFollow->id;?>" onclick="setNewGui(<?php echo $messFollow->id;?>, 0);dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
-                          <?php echo i18n("cronExecutionDesactivate");?>
-                        </button>
-                     <?php }?>
-                   </div>
-                   
-                 </div>
-            <?php 
-              $oldValue = $messFollow->id;
-            }
-            Sql::commitTransaction(); ?>
-    </div>
- <?php  } ?>
+     <?php 
+     Sql::beginTransaction();
+     foreach ($listMessageLegalFollowup as $idFollowup=>$idMessage){
+       $messFollow = new MessageLegalFollowup($idFollowup);
+       $messLegal = new MessageLegal($idMessage);
+       $cptMess++;
+       if(!$messFollow->firstViewDate){
+         $messFollow->firstViewDate = date('Y-m-d H:i:s');
+       }
+       $messFollow->lastViewDate = date('Y-m-d H:i:s');
+       $messFollow->save();
+       $val=$messLegal->description; 
+       if($cptMess < $nbListMess){ ?>
+         <div id="messageLegall<?php echo $messFollow->id;?>" style="display:none;  width:95%; height:100%; overflow-y:auto;"> 
+       <?php }else{ ?> 
+         <div id="messageLegall<?php echo $messFollow->id;?>" style="display:block;  width:95%; height:100%; overflow-y:auto;"> 
+       <?php }?>
+       <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; margin-top:15px; min-height:200px; margin:15px 40px 5px 40px;">  
+         <?php echo $val;?>
+       </div>
+       <div style="width:97%;  bottom:5px; text-align:right;">
+       <?php if($cptMess != 1){?>
+         <span style="font-size:12pt;cursor:pointer; text-decoration:underline;" id="plusTard<?php echo $messFollow->id;?>" onclick="dojo.byId('messageLegall<?php echo $oldValue;?>').style.display='block';dojo.byId('messageLegall<?php echo $messFollow->id;?>').style.display='none'";>
+       <?php }else{?>   
+         <span style="font-size:12pt;cursor:pointer; text-decoration:underline;" id="buttonLater<?php echo $messFollow->id;?>" onclick="dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
+       <?php } 
+       echo i18n("buttonLater");?></span>
+       &nbsp;&nbsp;&nbsp;
+       <?php 
+       if($messLegal->name != 'newGui'){
+         if($cptMess != 1){?>
+      	   <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="markOK<?php echo $messFollow->id;?>" onclick="setReadMessageLegalFollowup(<?php echo $messFollow->id;?>);dojo.byId('messageLegall<?php echo $oldValue;?>').style.display='block';dojo.byId('messageLegall<?php echo $messFollow->id;?>').style.display='none'";>
+         <?php }else{?>
+           <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="markOK<?php echo $messFollow->id;?>" onclick="setReadMessageLegalFollowup(<?php echo $messFollow->id;?>);dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
+         <?php } 
+         echo i18n("buttonAgree");?>
+         </button>
+       <?php } else {?>
+         <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="activateNewgui<?php echo $messFollow->id;?>" onclick="setNewGui(<?php echo $messFollow->id;?>, 1);dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
+           <?php echo i18n("cronExecutionActivate");?>
+         </button>
+         <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="desactiveNewgui<?php echo $messFollow->id;?>" onclick="setNewGui(<?php echo $messFollow->id;?>, 0);dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
+           <?php echo i18n("cronExecutionDesactivate");?>
+         </button>
+       <?php }?>
+       </div>  
+     </div>
+     <?php 
+       $oldValue = $messFollow->id;
+     }
+     Sql::commitTransaction(); ?>
+     </div>
+   <?php  } ?>
  
  
   <?php 
