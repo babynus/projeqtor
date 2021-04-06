@@ -1487,6 +1487,7 @@ class PlannedWork extends GeneralWork {
                             $leftSup, $supRes,
                             $sup);
                           $supportAssignments[$keySupAss]=$supportAss;
+                          $resources[$sup]=$supRes;
                         }
                       }
                     }
