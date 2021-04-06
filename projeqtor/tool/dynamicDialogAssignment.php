@@ -410,7 +410,7 @@ if ($planningMode=='RECW') {
              </td>
              <td>
                <input id="assignmentComment" name="assignmentComment" value="<?php echo htmlEncode($assignmentObj->comment);?>"  
-                 dojoType="dijit.form.Textarea"
+                 dojoType="dijit.form.Textarea" style="max-height:200px"
                  class="input" 
                  /> 
              </td>
