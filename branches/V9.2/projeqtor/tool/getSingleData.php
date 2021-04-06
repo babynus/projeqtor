@@ -239,6 +239,10 @@
       $id = RequestHandler::getId('id');
       $att = new Attachment($id,true);
       echo $att->description;
+    }else if($type=='validityDate'){
+      $id = RequestHandler::getId('idWorkUnit');
+      $workUnit = new WorkUnit($id);
+      echo $workUnit->validityDate;
     }else {
       debugTraceLog("Unknown type '$type'");          
       echo '';

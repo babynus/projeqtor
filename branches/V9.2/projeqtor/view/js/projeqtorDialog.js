@@ -6314,6 +6314,54 @@ function removeBilledWorkCommand(id) {
     showConfirm(msg, actionOK);
 }
 
+function activityWorkUnitChangeIdWorkUnit(){
+  if(dijit.byId('workCommandWorkUnit').get('value')=='' || dijit.byId('workCommandWorkUnit').get('value')==' '){
+    dijit.byId('workCommandComplexity').set('value','');
+    dijit.byId("workCommandComplexity").set('readOnly', true);
+    dijit.byId('billedWorkCommandWorkCommand').set('value','');
+    dijit.byId("billedWorkCommandWorkCommand").set('readOnly', true);
+  }else{
+    dijit.byId("workCommandComplexity").set('readOnly', false);
+    if(dijit.byId('workCommandComplexity').get('value')!=''){
+      dijit.byId('workCommandComplexity').set('value','');
+    }
+    refreshListSpecific("idWorkUnit", "workCommandComplexity", "idWorkUnit",dijit.byId('workCommandWorkUnit').get('value'));
+    dijit.byId('billedWorkCommandWorkCommand').set('value','');
+    dijit.byId("billedWorkCommandWorkCommand").set('readOnly', true);
+  }
+}
+
+function activityWorkUnitChangeIdComplexity(){
+  dijit.byId("workCommandAmount").set('value','');
+  dijit.byId("workCommandQuantity").set('readOnly', false);
+  if(dijit.byId("billedWorkCommandWorkCommand")){
+    var idComplexity=dijit.byId("workCommandComplexity").get("value");
+    var idWorkUnit=dijit.byId("workCommandWorkUnit").get("value");
+    dijit.byId("billedWorkCommandWorkCommand").set("value","");
+    if(idComplexity != " " && idComplexity !=""){
+     refreshListSpecific("idWorkCommand", "billedWorkCommandWorkCommand", "idWorkCommand",idWorkUnit+"separator"+idComplexity);
+     dijit.byId("billedWorkCommandWorkCommand").set("readOnly",false);
+    }else{
+      dijit.byId("billedWorkCommandWorkCommand").set("readOnly",true);
+    }
+  }
+  
+}
+
+function activityWorkUnitChangeQuantity(){
+  unit = dijit.byId('workCommandQuantity').get('value');
+  dojo.xhrGet({
+    url : '../tool/getSingleData.php?dataType=workCommand'
+      +'&idWorkUnit='+dijit.byId('workCommandWorkUnit').get('value')+'&idComplexity='+dijit.byId('workCommandComplexity').get('value'),
+  handleAs : "text",
+  load : function(data) {
+    total = data * unit;
+    dijit.byId('workCommandAmount').set('value', total);
+  }
+  });
+}
+
+
 function workCommandChangeIdWorkUnit(){
   if(dijit.byId('workCommandWorkUnit').get('value')==''){
     dijit.byId('workCommandComplexity').set('value','');
@@ -6722,6 +6770,63 @@ function editResourceCapacity(id,idResource,capacity, idle, startDate, endDate) 
   params+="&mode=edit";
   loadDialog('dialogResourceCapacity',callBack,false,params);
 }
+
+//gautier #activityWorkUnit
+function addActivityWorkUnit(id) {
+  var callBack = function () {
+    affectationLoad=true;
+    dijit.byId("dialogActivityWorkUnit").show();
+    setTimeout("affectationLoad=false", 500);
+  };
+  var params="&id="+id;
+  params+="&mode=add";
+  loadDialog('dialogActivityWorkUnit',callBack,false,params);
+}
+
+function removeActivityWorkUnit(idWorkUnit) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  actionOK=function() {
+    loadContent("../tool/removeActivityWorkUnit.php?idWorkUnit="+idWorkUnit, "resultDivMain",null, true, 'affectation');
+  };
+  msg=i18n('confirmDeleteWorkUnit', new Array(id,i18n('WorkUnit'),idWorkUnit));
+  showConfirm(msg, actionOK);
+}
+
+function saveActivityWorkUnit() {
+  var formVar=dijit.byId('activityWorkUnitForm');
+  if (formVar.validate()) {
+    var idWorkUnit=dijit.byId("workCommandWorkUnit").get("value");
+    var today = (new Date()).toISOString().substr(0,10);
+    dojo.xhrGet({
+      url : '../tool/getSingleData.php?dataType=validityDate&idWorkUnit='+ idWorkUnit,
+      handleAs : "text",
+      load : function(data) {
+        if(data){
+        if(data < today){
+          actionOK=function() {
+            loadContent("../tool/saveActivityWorkUnit.php", "resultDivMain", "activityWorkUnitForm", true, 'workUnit');
+            dijit.byId('dialogActivityWorkUnit').hide();
+          };
+          msg=i18n('errorValidityDate');
+          showConfirm(msg, actionOK);
+        }else{
+          loadContent("../tool/saveActivityWorkUnit.php", "resultDivMain", "activityWorkUnitForm", true, 'workUnit');
+          dijit.byId('dialogActivityWorkUnit').hide();
+        }
+      }else{
+        loadContent("../tool/saveActivityWorkUnit.php", "resultDivMain", "activityWorkUnitForm", true, 'workUnit');
+        dijit.byId('dialogActivityWorkUnit').hide();
+      }
+      }
+    });
+  } else {
+    showAlert(i18n("alertInvalidForm"));
+  }
+}
+
 //gautier workUnit
 function saveWorkUnit(){
   editorDescriptions=CKEDITOR.instances['WUDescriptions'];
@@ -6743,6 +6848,22 @@ function saveWorkUnit(){
     showAlert(i18n("alertInvalidForm"));
   }
 }
+
+function editActivityWorkUnit(idActivityWorkUnit,id) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  pauseBodyFocus();
+  var callBack = function () {
+    dijit.byId("dialogActivityWorkUnit").show();
+  };
+  var params="&id="+id;
+  params+="&idActivityWorkUnit="+idActivityWorkUnit;
+  params+="&mode=edit";
+  loadDialog('dialogActivityWorkUnit',callBack,false,params);
+}
+
 function editWorkUnit(id,idCatalogUO,validityDate) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));

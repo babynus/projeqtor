@@ -494,20 +494,7 @@ class ActivityMain extends SqlElement {
         }
       }
     }
-    if($result=='OK'){
-      if($this->ActivityPlanningElement->idWorkUnit){
-        $workUnit = new WorkUnit($this->ActivityPlanningElement->idWorkUnit);
-        if($workUnit->validityDate and !SqlElement::isSaveConfirmed() and $old->ActivityPlanningElement->idWorkUnit != $this->ActivityPlanningElement->idWorkUnit ){
-          $currentDateTime = date('Y-m-d');
-          $today = new DateTime($currentDateTime);
-          $validityDate = new DateTime($workUnit->validityDate);
-          if($validityDate < $today){
-            $result='<br/>' . i18n('errorValidityDate');
-            $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
-          }
-        }
-      }
-    }
+
     return $result;
   }
   public function startDateActivity($parentVersion = null){
@@ -678,8 +665,6 @@ class ActivityMain extends SqlElement {
         $this->ActivityPlanningElement->validatedWork=$this->ActivityPlanningElement->plannedWork;
       }
     }
-    
-
     
     $result = parent::save ();
     if (! strpos ( $result, 'id="lastOperationStatus" value="OK"' )) {
@@ -926,23 +911,26 @@ class ActivityMain extends SqlElement {
       }
       $result = parent::delete();
       if(getLastOperationStatus($result)=="OK"){
-        if($this->ActivityPlanningElement->idWorkCommand){
-            $newWorkCommandDone = SqlElement::getSingleSqlElementFromCriteria('WorkCommandDone', array('refType'=>'Activity','refId'=>$this->id));
-            $newWorkCommandDone->delete();
-            $workCommand = new WorkCommand($this->ActivityPlanningElement->idWorkCommand);
-            $newWorkCommandDone = new WorkCommandDone();
-            $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->ActivityPlanningElement->idWorkCommand,'idCommand'=>$workCommand->idCommand));
-            $quantity = 0;
-            foreach ($lstWorkCommand as $comVal){
-              if($comVal->refType == 'Activity' and $comVal->refId == $this->id){
-                continue;
-              }else{
+        if($this->ActivityPlanningElement->hasWorkUnit){
+          $activityWorkUnit = new ActivityWorkUnit();
+          $lstActWorkUnit = $activityWorkUnit->getSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->id));
+          foreach ($lstActWorkUnit as $actWork){
+            if($actWork->idWorkCommand){
+              $workCommandDone = SqlElement::getSingleSqlElementFromCriteria('WorkCommandDone', array('idActivityWorkUnit'=>$actWork->id));
+              $workCommandDone->delete();
+              $newWorkCommandDone = new WorkCommandDone();
+              $workCommand = new WorkCommand($actWork->idWorkCommand);
+              $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$actWork->idWorkCommand,'idCommand'=>$workCommand->idCommand));
+              $quantity = 0;
+              foreach ($lstWorkCommand as $comVal){
                 $quantity += $comVal->doneQuantity;
               }
+              $workCommand->doneQuantity = $quantity;
+              $workCommand->doneAmount = $workCommand->unitAmount * $quantity;
+              $workCommand->save();
             }
-            $workCommand->doneQuantity = $quantity;
-            $workCommand->doneAmount = $quantity*$workCommand->unitAmount;
-            $workCommand->save();
+            $actWork->delete();
+          }
         }
       }
       return $result;

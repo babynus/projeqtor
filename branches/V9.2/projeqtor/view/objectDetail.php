@@ -7287,6 +7287,73 @@ function drawComplexities($nbComplexities,$obj,$list,$refresh=false) {
   echo '</table>';
 }
 
+function drawActivityWorkUnit($listActWU,$obj,$refresh=false) {
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
+  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete', $obj)=="YES";
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create', $obj)=="YES";
+  if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
+    $canCreate=false;
+    $canUpdate=false;
+    $canDelete=false;
+  }
+  if ($obj->idle==1) {
+    $canUpdate=false;
+    $canCreate=false;
+    $canDelete=false;
+  }
+  echo '<table style="width:100%">';
+  echo '<tr><td colspan=2 style="width:100%;"><table style="height:100%;width:100%;">';
+  echo '<tr>';
+  if (!$print) {
+    echo '<td class="assignHeader" style="width:5%">';
+    if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
+      echo '<a onClick="addActivityWorkUnit(\''.$obj->id.'\');" title="'.i18n('addWorkUnit').'" /> '.formatSmallButton('Add').'</a>';
+    }
+    echo '</td>';
+  }
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colWorkUnits').'</td>';
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colComplexity').'</td>';
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colQuantity').'</td>';
+  if($paramEnableWorkUnit=='true'){
+    echo '<td class="assignHeader" style="width:12%">'.i18n('colWorkCommand').'</td>';
+  }
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colPrice').'</td>';
+  echo'</tr>';
+  foreach ($listActWU as $val){
+    echo '<tr style="height:100%">';
+    echo '  <td class="assignData" style="width:5%;white-space:nowrap">';
+    if ($canUpdate) {
+      echo '  <a onClick="editActivityWorkUnit(\''.$val->id.'\',\''.$obj->id.'\');" '.'title="'.i18n('editWorkUnit').'" > '.formatSmallButton('Edit').'</a>';
+    }
+    if ($canDelete) {
+      echo '  <a onClick="removeActivityWorkUnit(\''.$val->id.'\');" '.'title="'.i18n('removeWorkUnit').'" > '.formatSmallButton('Remove').'</a>';
+    }
+    echo '  </td>';
+    echo '<td style="text-align:center;" class="assignData">'.SqlList::getNameFromId('WorkUnit', $val->idWorkUnit) .'</td>';
+  	echo '<td style="text-align:center;" class="assignData">'.SqlList::getNameFromId('Complexity', $val->idComplexity) .'</td>';
+  	echo '<td style="text-align:center;" class="assignData">'.htmlDisplayNumericWithoutTrailingZeros($val->quantity).'</td>';
+  	if($paramEnableWorkUnit=='true'){
+  	  if($val->idWorkCommand){
+  	    $workCom = new WorkCommand($val->idWorkCommand);
+  	    $command = new Command($workCom->idCommand);
+  	    $ref = $command->reference;
+  	    $name = $workCom->name;
+  	    echo '<td style="text-align:center;" class="assignData"> '.$ref.' - '.$name.' </td>';
+  	  }else{
+  	    echo '<td style="text-align:center;" class="assignData"></td>';
+  	  }
+  	}
+  	$complex = new Complexity($val->idComplexity);
+  	$complexValue = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idComplexity'=>$val->idComplexity,'idWorkUnit'=>$val->idWorkUnit,'idCatalogUO'=>$complex->idCatalogUO));
+  	echo '<td style="text-align:right;" class="assignData">'.htmlDisplayCurrency($complexValue->price*$val->quantity).'</td>';
+    echo'</tr>';
+  }
+  echo '</table></td></tr>';
+  echo '</table>';
+}
+
 function drawWorkUnits($obj,$listWorkUnit,$listComplexity,$refresh=false) {
   global $cr, $print, $user, $browserLocale, $comboDetail;
   $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete', $obj)=="YES";
