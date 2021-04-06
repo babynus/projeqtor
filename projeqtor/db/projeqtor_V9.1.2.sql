@@ -19,3 +19,6 @@ INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess) VALUES
 
 UPDATE `${prefix}filtercriteria` set sqlAttribute='idDeliveryType' 
 where sqlAttribute='idDeliverableType' and idFilter in (select id from `${prefix}filter` where refType='Delivery');
+
+UPDATE `${prefix}columnselector` set field='nameDeliveryType', attribute='idDeliveryType', name='idDeliveryType'
+where attribute='idDeliverableType' and objectClass='Delivery';
