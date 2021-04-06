@@ -34,12 +34,12 @@ scriptLog('   ->/tool/saveProviderTerm.php');
 
 $mode=RequestHandler::getValue('mode');
 $id = RequestHandler::getId('id');
-$workCommandWorkUnit = RequestHandler::getId('workCommandWorkUnit');
-$workCommandComplexity = RequestHandler::getId('workCommandComplexity');
-$workCommandQuantity = RequestHandler::getValue('workCommandQuantity');
-$workCommandAmount = RequestHandler::getValue('workCommandAmount');
-$idWorkCommand = RequestHandler::getId('billedWorkCommandWorkCommand');
 $idActivityWorkUnit = RequestHandler::getId('idActivityWorkUnit');
+$workCommandWorkUnit = RequestHandler::getId('ActivityWorkCommandWorkUnit');
+$workCommandComplexity = RequestHandler::getId('ActivityWorkCommandComplexity');
+$workCommandQuantity = RequestHandler::getValue('ActivityWorkCommandQuantity');
+$workCommandAmount = RequestHandler::getValue('ActivityWorkCommandAmount');
+$idWorkCommand = RequestHandler::getId('ActivityBilledWorkCommandWorkCommand');
 Sql::beginTransaction();
 $result="";
 
