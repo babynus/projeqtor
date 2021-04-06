@@ -2207,7 +2207,7 @@ class PlanningElement extends SqlElement {
       	$parentChilds[$tmpIdChild]=array("delay"=>$dep->dependencyDelay, "type"=>$dep->dependencyType);
       }
       if (isset($parentChilds["#".$dep->successorId])) { unset($parentChilds["#".$dep->successorId]); } // Self cannot be it own predecessor
-      $directPredecessors["#".$dep->successorId]=array_merge_preserve_keys($lstPrec,$parentChilds);
+      if ($dep->dependencyType!='S-S') $directPredecessors["#".$dep->successorId]=array_merge_preserve_keys($lstPrec,$parentChilds);
     }
     foreach ($result as $id=>$pe) {
       $pe=$result[$id];
