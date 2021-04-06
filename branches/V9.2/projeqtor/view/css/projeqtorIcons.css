@@ -197,6 +197,15 @@
 .ProjeQtOrFlatRed .iconAbsence { background-image: url(customIcons/red/iconAbsence.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconAbsence { background-image: url(customIcons/new/iconAbsence.svg);  background-repeat: no-repeat; }
 
+
+.iconDocumentRight { background-image: url(images/iconAccessDocument.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconDocumentRight  { background-image: url(customIcons/blue/iconAccessDocument.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconDocumentRight { background-image: url(customIcons/green/iconAccessDocument.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconDocumentRight { background-image: url(customIcons/grey/iconAccessDocument.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconDocumentRight { background-image: url(customIcons/red/iconAccessDocument.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconDocumentRight { background-image: url(customIcons/new/iconAccessDocument.svg);  background-repeat: no-repeat; }
+
+
 .iconAccessProfile { background-image: url(images/iconAccessProfile32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconAccessProfile { background-image: url(customIcons/blue/iconAccessProfile.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconAccessProfile { background-image: url(customIcons/green/iconAccessProfile.png);  background-repeat: no-repeat; }
@@ -2863,9 +2872,6 @@
 .ProjeQtOrFlatGrey .iconViewAllSubTask { background-image: url(customIcons/grey/iconTodoList.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatRed .iconViewAllSubTask { background-image: url(customIcons/red/iconTodoList.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconViewAllSubTask { background-image: url(customIcons/new/iconTodoList.svg);  background-repeat: no-repeat; }
-
-
-
 
 
 

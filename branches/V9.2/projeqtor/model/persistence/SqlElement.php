@@ -269,7 +269,7 @@ abstract class SqlElement {
           "Link" => "cascade", 
           "Note" => "cascade"), 
       "DocumentVersion" => array("Approver" => "cascade"), 
-      "DocumentDirectory" => array("Document" => "control", "DocumentDirectory" => "control"), 
+      "DocumentDirectory" => array("Document" => "control", "DocumentDirectory" => "control","DocumentRight"=>"cascade"), 
       "DocumentType" => array("Document" => "controlStrict"), 
       "Efficiency" => array("Action" => "controlStrict"), 
 // MTY - LEAVE SYSTEM

@@ -8318,6 +8318,8 @@ function loadMenuBarItem(item, itemName, from) {
     loadContent("moduleView.php", "centerDiv");
   } else if(item == "Kanban"){
     loadContent("kanbanViewMain.php", "centerDiv");
+  }else if(item="DocumentsRight"){
+    loadContent("documentsRight.php", "centerDiv");
   }else {  
     showInfo(i18n("messageSelectedNotAvailable", new Array(itemName)));
   }
