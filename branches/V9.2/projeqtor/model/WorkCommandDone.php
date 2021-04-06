@@ -12,6 +12,8 @@ class WorkCommandDone extends SqlElement {
 	public $refType;
 	public $refId;
 	public $doneQuantity;
+	public $idActivityWorkUnit;
+	
 	private static $_databaseCriteria = array();
 	/** ==========================================================================
 	 * Constructor

@@ -83,16 +83,8 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $unitWeight;
   public $idWeightMode;
   public $_separator_sectionRevenue_marginTop;
-  public $_tab_3_1_smallLabel_2 = array('','','','CA');
+  public $_spe_idWorkUnits;
   public $revenue;
-  public $_label_workCommand;
-  public $idWorkCommand;
-  public $_tab_5_1_smallLabel_3 = array('', '', '', '', '','workUnits');
-  public $idWorkUnit;
-  public $_label_complexity;
-  public $idComplexity;
-  public $_label_quantity;
-  public $quantity;
   public $_separator_menuReview_marginTop;
   public $_tab_5_2_smallLabel_3 = array('', '', '', '', '', 'progress','priority');
   public $progress;
@@ -127,6 +119,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $topRefType;
   public $topRefId;
   public $idle;
+  public $hasWorkUnit;
   
   private static $_fieldsAttributes=array(
     "plannedStartDate"=>"readonly,noImport",
@@ -164,6 +157,7 @@ class ActivityPlanningElementMain extends PlanningElement {
      "paused"=>"nobr",
     "_separator_menuTechnicalProgress_marginTop"=>"hidden",
     "_separator_sectionRevenue_marginTop"=>"hidden",
+    "hasWorkUnit"=>"hidden",
   );
 
   private static $_fieldsTooltip = array(
@@ -198,13 +192,6 @@ class ActivityPlanningElementMain extends PlanningElement {
   public function setAttributes() {
     global $contextForAttributes;
     $paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
-    self::$_fieldsAttributes['idWorkUnit']='hidden';
-    self::$_fieldsAttributes['idComplexity']='hidden';
-    self::$_fieldsAttributes['quantity']='hidden';
-    self::$_fieldsAttributes['_label_complexity']='hidden';
-    self::$_fieldsAttributes['idWorkUnit']='hidden';
-    self::$_fieldsAttributes['_label_workCommand']='hidden';
-    self::$_fieldsAttributes['idWorkCommand']='hidden';
     //if (Parameter::getGlobalParameter('PlanningActivity')=='YES') {
       $act=new Activity($this->refId,true);
       if ( ! $act->isPlanningActivity) {
@@ -315,35 +302,13 @@ class ActivityPlanningElementMain extends PlanningElement {
       self::$_fieldsAttributes['_separator_sectionRevenue_marginTop']='';
       if (isset($contextForAttributes) and $contextForAttributes=='global'){
         self::$_fieldsAttributes['revenue']='';
-        if(isset($element) and $element->workOnRealTime!=1){
-          self::$_fieldsAttributes['idWorkUnit']='';
-          self::$_fieldsAttributes['idComplexity']='';
-          self::$_fieldsAttributes['quantity']='';
-          if($paramEnableWorkUnit=='true'){
-            self::$_fieldsAttributes['_label_workCommand']='';
-            self::$_fieldsAttributes['idWorkCommand']='readonly';
-          }
-        }
       }
       if($project->ProjectPlanningElement->idRevenueMode == 2){
       	if($this->elementary){
       	  self::$_fieldsAttributes['revenue']='';
-  	        self::$_fieldsAttributes['idWorkUnit']='';
-        	if($this->idWorkUnit){
-        	  self::$_fieldsAttributes['quantity']='';
-        	}else{
-        	  self::$_fieldsAttributes['quantity']='readonly';
-        	}
-        	self::$_fieldsAttributes['_label_complexity']='';
-        	self::$_fieldsAttributes['idWorkUnit']='size1/3';
-        	if($this->idWorkUnit){
-        	  self::$_fieldsAttributes['idComplexity']='size1/3';
-        	}else{
-        	  self::$_fieldsAttributes['idComplexity']='readonly,size1/3';
-        	}
-        	if($this->idWorkUnit and $this->idComplexity and $this->quantity){
-        	  $complexityValues = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idComplexity'=>$this->idComplexity,'idWorkUnit'=>$this->idWorkUnit));
-        	  if($complexityValues->duration){
+        	if($this->hasWorkUnit){
+        	  #gautier toDO
+        	  if($this->validatedDuration){
         	   self::$_fieldsAttributes['validatedDuration']='readonly';
         	  }
         	  self::$_fieldsAttributes['revenue']='readonly';
@@ -353,21 +318,8 @@ class ActivityPlanningElementMain extends PlanningElement {
         	    self::$_fieldsAttributes['validatedCost']='readonly';
         	  }
         	}
-        	$paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
-        	if($paramEnableWorkUnit=='true'){
-        	  self::$_fieldsAttributes['_label_workCommand']='';
-        	  self::$_fieldsAttributes['idWorkCommand']='readonly';
-        	}else{
-        	  self::$_fieldsAttributes['_label_workCommand']='hidden';
-        	  self::$_fieldsAttributes['hidden']='readonly';
-        	}
       	}else{
       	  self::$_fieldsAttributes['revenue']='readonly';
-      	}
-      	if($paramEnableWorkUnit=='true'){
-      	 if($this->idWorkCommand or ($this->idWorkUnit and $this->idComplexity)){
-      	   self::$_fieldsAttributes['idWorkCommand']='';
-      	 }
       	}
       }else{
       	//unset($this->_separator_sectionRevenue_marginTop);
@@ -460,80 +412,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       $this->plannedStartDate=null;
       $this->plannedEndDate=null;
     }
-    
-    //gautier #workUnit
-    if($this->idWorkUnit and $this->idComplexity and $this->quantity){
-      $complexityVal = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$this->idWorkUnit,'idComplexity'=>$this->idComplexity));
-      $this->validatedWork = $complexityVal->charge*$this->quantity;
-      $this->revenue = $complexityVal->price*$this->quantity;
-      if($old->quantity != $this->quantity or $old->idComplexity != $this->idComplexity){
-        $ass = new Assignment();
-        $lstAss = $ass->getSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->refId));
-        $totalValidatedWork = 0;
-        foreach ($lstAss as $asVal){
-          if ($this->idle) continue;
-          $totalValidatedWork += $asVal->assignedWork;
-        }
-        //if($totalValidatedWork < $this->validatedWork and $totalValidatedWork>0 ){
-        if( $totalValidatedWork>0 ){
-          $factor = $this->validatedWork / $totalValidatedWork;
-          $sumAssignedWork=0;
-          $sumLeftWork=0;
-          $sumAssignedCost=0;
-          $sumLeftCost=0;
-          foreach ($lstAss as $asVal){
-            if (! $asVal->idle) {
-              $asVal->_skipDispatch=true;             
-              $newLeftWork = ($asVal->assignedWork*$factor) - ($asVal->assignedWork) ;
-              $asVal->assignedWork = round($asVal->assignedWork*$factor,2);
-              $asVal->leftWork = $asVal->leftWork+$newLeftWork;
-              if($asVal->leftWork < 0)$asVal->leftWork=0;
-              $asVal->save();
-            }
-            $sumAssignedWork+=$asVal->assignedWork;
-            $sumLeftWork+=$asVal->leftWork;
-            $sumAssignedCost+=$asVal->assignedCost;
-            $sumLeftCost+=$asVal->leftCost;
-          }
-          $this->assignedWork=$sumAssignedWork;
-          $this->leftWork=$sumLeftWork;
-          $this->plannedWork=$this->realWork+$this->leftWork;
-          $this->assignedCost=$sumAssignedCost;
-          $this->leftCost=$sumLeftCost;          
-          $this->plannedCost=$this->realCost+$this->leftCost;
-          $this->_workHistory=true; // Will force to update data (it's a hack)
-        }
-      }
-      $CaReplaceValidCost= Parameter::getGlobalParameter('CaReplaceValidCost');
-      if($CaReplaceValidCost=='YES'){
-        $this->validatedCost = $complexityVal->price*$this->quantity;
-      }
-      
-      if($this->idWorkCommand){
-        $workCommand = new WorkCommand($this->idWorkCommand);
-        $workCommandDone = new WorkCommandDone();
-        $newWorkCommandDone = new WorkCommandDone();
-        $workCommandDoneExist = $workCommandDone->getSingleSqlElementFromCriteria('WorkCommandDone', array('idWorkCommand'=>$this->idWorkCommand,'refId'=>$this->refId,'refType'=>'Activity','idCommand'=>$workCommand->idCommand));
-        if($workCommandDoneExist){
-          $workCommandDone = new WorkCommandDone($workCommandDoneExist->id);
-        }
-        $workCommandDone->idCommand = $workCommand->idCommand;
-        $workCommandDone->idWorkCommand = $this->idWorkCommand;
-        $workCommandDone->refType = "Activity";                
-        $workCommandDone->refId = $this->refId;
-        $workCommandDone->doneQuantity = $this->quantity;
-        $workCommandDone->save();
-        $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->idWorkCommand,'idCommand'=>$workCommand->idCommand));
-        $quantity = 0;
-        foreach ($lstWorkCommand as $comVal){
-          $quantity += $comVal->doneQuantity;
-        }
-        $workCommand->doneQuantity = $quantity;
-        $workCommand->doneAmount = $workCommand->unitAmount * $quantity;
-        $workCommand->save();
-      }
-    }
-    //
+
     //florent
     if(($this->idPlanningMode=='23' and $old->idPlanningMode!='23')or($this->idPlanningMode!='23' and $old->idPlanningMode=='23') ){
       $pw= new PlannedWork();
@@ -598,26 +477,7 @@ class ActivityPlanningElementMain extends PlanningElement {
 //       }
    
 //     }
-    if($this->idWorkUnit){
-      if(!$this->quantity)$result.='<br/>' . i18n('errorMandatoryQuantity');
-      if(!$this->idComplexity)$result.='<br/>' . i18n('errorMandatoryComplexity');
-    }
-    if($this->idWorkCommand){
-      $workCommand = new WorkCommand($this->idWorkCommand);
-      $newWorkCommandDone = new WorkCommandDone();
-      $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->idWorkCommand,'idCommand'=>$workCommand->idCommand));
-      $quantity = $this->quantity;
-      foreach ($lstWorkCommand as $comVal){
-        if($comVal->refType == 'Activity' and $comVal->refId == $this->refId){
-          continue;
-        }else{
-          $quantity += $comVal->doneQuantity;
-        }
-      }
-      if($quantity > $workCommand->commandQuantity){
-        $result.='<br/>' . i18n('errorQuantityCantBeSuperiorThanCommand');
-      } 
-    }
+
     $old = $this->getOld();
     if($this->idActivityPlanningMode!='23' and $old->idPlanningMode=='23' and $this->plannedWork!='' and !SqlElement::isSaveConfirmed()){
       if(Parameter::getGlobalParameter('plannedWorkManualType')=="real" ){
@@ -771,6 +631,11 @@ class ActivityPlanningElementMain extends PlanningElement {
       if ($this->id and $this->isOnCriticalPath and RequestHandler::getValue('criticalPathPlanning')) {
         echo '<div style="position:relative;"><div style="color:#AA0000;margin:0px 10px;text-align:center;position:absolute;top:-55px;height:60px;">'.i18n('colIsOnCriticalPath').'</div></div>';
       }
+    }elseif ($item=='idWorkUnits'){
+      $activityWU = new ActivityWorkUnit();
+      $listActWU = $activityWU->getSqlElementsFromCriteria(array('refId'=>$this->refId,'refType'=>'Activity'));
+      $obj = new Activity($this->refId);
+      drawActivityWorkUnit($listActWU,$obj);
     }
   }
 }
