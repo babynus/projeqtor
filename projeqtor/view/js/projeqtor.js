@@ -3102,7 +3102,12 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
           loadContent("../view/dashboardTicketMain.php", "centerDiv");
         }else if(dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value =='SubTask'){
           refreshAllSubTaskList();
-        } else if (currentPluginPage) {
+        }else if(dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value =='ImputationValidation'){
+          if(idProject!='' && idProject!='*' && !Array.isArray(idProject)){
+            refreshImputationValidation(null);
+            dijit.byId('idProjectValidation').set('value',idProject);
+          }
+        }else if (currentPluginPage) {
           loadContent(currentPluginPage, "centerDiv");
         }
         if (dijit.byId('imputationButtonDiv') && dijit.byId('limitResByProj') && dijit.byId('limitResByProj').get('value')=="on"){
