@@ -85,21 +85,31 @@ ALTER TABLE `${prefix}type` ADD COLUMN `lockPaused` int(1) unsigned DEFAULT 0 CO
 --acces right to repository
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(258, 'menuDocumentsRight', 37, 'item', 1275, Null, 0, 'HabilitationParameter ');
+(258, 'menuDocumentRight', 37, 'item', 1275, Null, 0, 'HabilitationParameter ');
 
 INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
-(338,'menuDocumentsRight',130,258,85,0);
+(338,'menuDocumentRight',130,258,85,0);
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,258,1),
+(2,258,1),
+(3,258,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,258,8),
+(2,258,8),
+(3,258,8);
 
 CREATE TABLE `${prefix}documentright` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
-  `idDirectory` int(12)  unsigned DEFAULT NULL COMMENT '12',
-  `idProfie` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idDocumentDirectory` int(12)  unsigned DEFAULT NULL COMMENT '12',
+  `idProfile` int(12)  unsigned DEFAULT NULL COMMENT '12',
   `idAccessMode` int(12)  unsigned DEFAULT NULL COMMENT '12',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 
-INSERT INTO `${prefix}documentright` (idDirectory, idProfie , idAccessMode)
-SELECT d.id, p.id, a.idAccessProfile FROM `${prefix}documentdirectory` as d CROSS JOIN `${prefix}profile` as p INNER JOIN `${prefix}accessright` as a ON p.id = a.idProfile and a.idMenu=103;
+INSERT INTO `${prefix}documentright` (idDocumentDirectory, idProfile , idAccessMode)
+SELECT d.id, p.id, a.idAccessProfile FROM `${prefix}documentdirectory` as d CROSS JOIN `${prefix}profile` as p INNER JOIN `${prefix}accessright` as a ON p.id = a.idProfile and a.idMenu=102;
 
 UPDATE `${prefix}type` set lockPaused=lockDone where scope='Ticket';

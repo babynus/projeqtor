@@ -241,12 +241,12 @@ if ($noselect) {
     }
     exit();
   }
-  if(array_key_exists('refreshSubTask_Single', $_REQUEST)){
-    $rightUpdate=securityGetAccessRightYesNo('menu'.$objClass,'update',$obj);
-    $rightRead=securityGetAccessRightYesNo('menu'.$objClass,'read',$obj);
-    SubTask::drawSubtasksForObject($obj,$objClass, $obj->id,true);
-    exit();
-  }
+//   if(array_key_exists('refreshSubTask_Single', $_REQUEST)){
+//     $rightUpdate=securityGetAccessRightYesNo('menu'.$objClass,'update',$obj);
+//     $rightRead=securityGetAccessRightYesNo('menu'.$objClass,'read',$obj);
+//     SubTask::drawSubtasksForObject($obj,$objClass, $obj->id,true);
+//     exit();
+//   }
 }
 // save the current object in session
 
@@ -1313,6 +1313,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       $rightUpdate=securityGetAccessRightYesNo('menu'.$classObj,'update',$obj);
       $rightRead=securityGetAccessRightYesNo('menu'.$classObj,'read',$obj);
     	SubTask::drawSubtasksForObject($obj,$classObj,$obj->id,$rightUpdate,$rightRead);
+    } else if($col==='_DocumentRight' and $obj->getFieldAttributes($col)!='hidden' ){ //florent ticket #5139
+      $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menu'.$classObj));
+      if(securityCheckDisplayMenu($menu->id,substr($menu->name,4))){
+        $rightUpdate=securityGetAccessRightYesNo($menu->name,'update',$obj);
+        $rightRead=securityGetAccessRightYesNo($menu->name,'read',$obj);
+        DocumentRight::drawDocumentRight($obj,$rightRead,$rightUpdate);
+      }
     }else if (substr($col, 0, 1)=='_' and strpos($section, 'sOfObject')>0 and strpos($col, '_colSpan')==false) {
       drawObjectLinkedByIdToObject($obj, substr($col, 1), false);
       // END ADD BY Marc TABARY - 2017-02-23 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT
