@@ -43,6 +43,7 @@ class DocumentDirectory extends SqlElement {
   //public $sortOrder=0;
   public $idle;
   //public $_sec_void;
+  public $_DocumentRight;
   
   public $_noCopy;
   
@@ -190,10 +191,41 @@ class DocumentDirectory extends SqlElement {
   		$dir=new DocumentDirectory($this->idDocumentDirectory);
   		$this->location=$dir->location;
   	}
+  	
   	$this->location.=$paramPathSeparator . $this->name;
+  	
+  	$res='';
+  	$status='';
+  	if($this->id!=''){
+  	  if(RequestHandler::isCodeSet('lstDocRight')){
+  	   
+  	    $lstProf=explode(',', RequestHandler::getValue('lstDocRight'));
+  	    sort($lstProf);
+  	    foreach ($lstProf as $id=>$idProf){
+  	      if(RequestHandler::isCodeSet('documentRight_'.$idProf)){
+  	        $documentRight=SqlElement::getSingleSqlElementFromCriteria("DocumentRight", array("idDocumentDirectory"=>$this->id,"idProfile"=>$idProf));
+            $documentRight->idAccessMode=intval(RequestHandler::getValue('documentRight_'.$idProf));
+            $res.=$documentRight->save();
+            
+  	      }
+  	    }
+        if (trim(strpos($res, 'id="lastOperationStatus" value="OK"'))!=''){
+          $status="OK";
+        }
+  	  }
+  	}
   	$result=parent::save();
-    if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
-      return $result;     
+    if (! strpos($result,'id="lastOperationStatus" value="OK"') ) {
+      if($status==''){
+        return $result;
+        
+      }else {
+        $result= i18n('messageDocumentsRightsSaved');
+        $result.= '<input type="hidden" id="lastSaveId" value="'.$this->id.'">';
+        $result.='<input type="hidden" id="lastOperation" value="update" />';
+        $result.='<input type="hidden" id="lastOperationStatus" value="' . $status .'">';
+      }
+         
     }
     if (! $old->id) {
       $this->createDirectory();
@@ -222,7 +254,7 @@ class DocumentDirectory extends SqlElement {
       }
       $dir->save();
     }
-    
+
   	return $result;
   }
   
@@ -289,6 +321,11 @@ class DocumentDirectory extends SqlElement {
     return $colScript;
   }
   
+  public function setAttributes(){
+    if(! $this->id){
+      self::$_fieldsAttributes ['_DocumentRight'] = 'hidden';
+    }
+  }
   
 }
 ?>
