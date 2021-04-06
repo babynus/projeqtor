@@ -733,7 +733,6 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
  * @param Resource The resource for which init or purge leave system elements 
  */
 function initPurgeLeaveSystemElementsOfResource($resource=null) {
-  if ($resource) debugLog("  $resource->id - $resource->name");
   if ($resource==null) {return;}    
     if ($resource->isEmployee == 0) {
         $clausePrjAndRes = "idProject=". Project::getLeaveProjectId(). " and idResource=".$resource->id;
