@@ -103,23 +103,18 @@ if(sessionValueExists('endWeekImputationValidation')){
                 style="width: 175px;"
                 name="idProjectValidation" id="idProjectValidation"
                 <?php echo autoOpenFilteringSelect();?>
-                value="<?php if(sessionValueExists('idProjectValidation')){
-                               $idProject =  getSessionValue('idProjectValidation');
-                               echo $idProject;
-                             }else if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" ){
-                               if(strpos(getSessionValue('project'),',')){
-                                $idProject=0;
-                                echo $idProject;
-                               }else{
+                value="<?php  if(sessionValueExists('project') and getSessionValue('project')!="" and  getSessionValue('project')!="*" and trim(strpos(getSessionValue('project'),','))==''){
                                  $idProject =  getSessionValue('project');
                                  echo $idProject;
-                               }
+                             }else if(sessionValueExists('idProjectValidation') and trim(getSessionValue('idProjectValidation'))!=''){
+                               $idProject =  getSessionValue('idProjectValidation');
+                               echo $idProject;
                              }else{
                               $idProject=0;
                               echo $idProject;
                              }?>">
                   <script type="dojo/method" event="onChange" >
-                    saveDataToSession("idProjectValidation",dijit.byId('idProjectValidation').get('value'),true);
+                    saveDataToSession("idProjectValidation",dijit.byId('idProjectValidation').get('value'),false);
                     refreshImputationValidation(null);
                   </script>
                   <?php htmlDrawOptionForReference('idProject', null);?>  
