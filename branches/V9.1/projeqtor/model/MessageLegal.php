@@ -148,6 +148,9 @@ public function drawSpecificItem($item){
         self::$_fieldsAttributes['description']='readonly';
       }
     }
+    if ($this->name=='newGui') {
+      self::$_fieldsAttributes['name']='readonly';
+    }
   }
   
 }
