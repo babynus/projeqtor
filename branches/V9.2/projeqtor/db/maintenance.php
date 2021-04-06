@@ -1134,6 +1134,36 @@ if (beforeVersion($currVersion,"V9.1.1") ) {
   disableCatchErrors();
 }
 
+if (beforeVersion($currVersion,"V9.2.0") and $currVersion!='V0.0.0') {
+  traceLog("update workCommandDone [9.2.0]");
+  $workCommandDone = new WorkCommandDone();
+  $workCommandDoneList=$workCommandDone->getSqlElementsFromCriteria(null,null,'1=1');
+  $cpt=0;
+  $cptCommit=100;
+  Sql::beginTransaction();
+  traceLog("   => ".count($workCommandDoneList)." to update");
+  if (count($workCommandDoneList)<100) {
+    projeqtor_set_time_limit(1500);
+  } else {
+    traceLog("   => setting unlimited execution time for script (more than 100 documents to update)");
+    projeqtor_set_time_limit(0);
+  }
+  foreach($workCommandDoneList as $workCommandD) {
+    $workCommand = new WorkCommand($workCommandD->idWorkCommand);
+    $workCommandD->idCommand = $workCommand->idCommand;
+    $workCommandD->save();
+    $cpt++;
+    if ( ($cpt % $cptCommit) == 0) {
+      Sql::commitTransaction();
+      traceLog("   => $cpt workCommandDone...");
+      Sql::beginTransaction();
+    }
+  }
+  Sql::commitTransaction();
+  traceLog("   => $cpt workCommandDone updated");
+}
+
+
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
