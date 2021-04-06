@@ -6315,48 +6315,48 @@ function removeBilledWorkCommand(id) {
 }
 
 function activityWorkUnitChangeIdWorkUnit(){
-  if(dijit.byId('workCommandWorkUnit').get('value')=='' || dijit.byId('workCommandWorkUnit').get('value')==' '){
-    dijit.byId('workCommandComplexity').set('value','');
-    dijit.byId("workCommandComplexity").set('readOnly', true);
-    dijit.byId('billedWorkCommandWorkCommand').set('value','');
-    dijit.byId("billedWorkCommandWorkCommand").set('readOnly', true);
+  if(dijit.byId('ActivityWorkCommandWorkUnit').get('value')=='' || dijit.byId('ActivityWorkCommandWorkUnit').get('value')==' '){
+    dijit.byId('ActivityWorkCommandComplexity').set('value','');
+    dijit.byId("ActivityWorkCommandComplexity").set('readOnly', true);
+    dijit.byId('ActivityBilledWorkCommandWorkCommand').set('value','');
+    dijit.byId("ActivityBilledWorkCommandWorkCommand").set('readOnly', true);
   }else{
-    dijit.byId("workCommandComplexity").set('readOnly', false);
-    if(dijit.byId('workCommandComplexity').get('value')!=''){
-      dijit.byId('workCommandComplexity').set('value','');
+    dijit.byId("ActivityWorkCommandComplexity").set('readOnly', false);
+    if(dijit.byId('ActivityWorkCommandComplexity').get('value')!=''){
+      dijit.byId('ActivityWorkCommandComplexity').set('value','');
     }
-    refreshListSpecific("idWorkUnit", "workCommandComplexity", "idWorkUnit",dijit.byId('workCommandWorkUnit').get('value'));
-    dijit.byId('billedWorkCommandWorkCommand').set('value','');
-    dijit.byId("billedWorkCommandWorkCommand").set('readOnly', true);
+    refreshListSpecific("idWorkUnit", "ActivityWorkCommandComplexity", "idWorkUnit",dijit.byId('ActivityWorkCommandWorkUnit').get('value'));
+    dijit.byId('ActivityBilledWorkCommandWorkCommand').set('value','');
+    dijit.byId("ActivityBilledWorkCommandWorkCommand").set('readOnly', true);
   }
 }
 
 function activityWorkUnitChangeIdComplexity(){
-  dijit.byId("workCommandAmount").set('value','');
-  dijit.byId("workCommandQuantity").set('readOnly', false);
-  if(dijit.byId("billedWorkCommandWorkCommand")){
-    var idComplexity=dijit.byId("workCommandComplexity").get("value");
-    var idWorkUnit=dijit.byId("workCommandWorkUnit").get("value");
-    dijit.byId("billedWorkCommandWorkCommand").set("value","");
+  dijit.byId("ActivityWorkCommandAmount").set('value','');
+  dijit.byId("ActivityWorkCommandQuantity").set('readOnly', false);
+  if(dijit.byId("ActivityBilledWorkCommandWorkCommand")){
+    var idComplexity=dijit.byId("ActivityWorkCommandComplexity").get("value");
+    var idWorkUnit=dijit.byId("ActivityWorkCommandWorkUnit").get("value");
+    dijit.byId("ActivityBilledWorkCommandWorkCommand").set("value","");
     if(idComplexity != " " && idComplexity !=""){
-     refreshListSpecific("idWorkCommand", "billedWorkCommandWorkCommand", "idWorkCommand",idWorkUnit+"separator"+idComplexity);
-     dijit.byId("billedWorkCommandWorkCommand").set("readOnly",false);
+     refreshListSpecific("idWorkCommand", "ActivityBilledWorkCommandWorkCommand", "idWorkCommand",idWorkUnit+"separator"+idComplexity);
+     dijit.byId("ActivityBilledWorkCommandWorkCommand").set("readOnly",false);
     }else{
-      dijit.byId("billedWorkCommandWorkCommand").set("readOnly",true);
+      dijit.byId("ActivityBilledWorkCommandWorkCommand").set("readOnly",true);
     }
   }
   
 }
 
 function activityWorkUnitChangeQuantity(){
-  unit = dijit.byId('workCommandQuantity').get('value');
+  unit = dijit.byId('ActivityWorkCommandQuantity').get('value');
   dojo.xhrGet({
     url : '../tool/getSingleData.php?dataType=workCommand'
-      +'&idWorkUnit='+dijit.byId('workCommandWorkUnit').get('value')+'&idComplexity='+dijit.byId('workCommandComplexity').get('value'),
+      +'&idWorkUnit='+dijit.byId('ActivityWorkCommandWorkUnit').get('value')+'&idComplexity='+dijit.byId('ActivityWorkCommandComplexity').get('value'),
   handleAs : "text",
   load : function(data) {
     total = data * unit;
-    dijit.byId('workCommandAmount').set('value', total);
+    dijit.byId('ActivityWorkCommandAmount').set('value', total);
   }
   });
 }
@@ -6798,7 +6798,7 @@ function removeActivityWorkUnit(idWorkUnit) {
 function saveActivityWorkUnit() {
   var formVar=dijit.byId('activityWorkUnitForm');
   if (formVar.validate()) {
-    var idWorkUnit=dijit.byId("workCommandWorkUnit").get("value");
+    var idWorkUnit=dijit.byId("ActivityWorkCommandWorkUnit").get("value");
     var today = (new Date()).toISOString().substr(0,10);
     dojo.xhrGet({
       url : '../tool/getSingleData.php?dataType=validityDate&idWorkUnit='+ idWorkUnit,
