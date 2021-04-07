@@ -272,7 +272,7 @@ class StatusMain extends SqlElement {
     ======================================================================================== */
     public function setAttributes() {
       if($this->setPausedStatus==1){
-        self::$_fieldsAttributes["fixPlanning"]="readonly";
+        self::$_fieldsAttributes["fixPlanning"]="readonly,nobr";
       }
     }
   
