@@ -51,7 +51,8 @@ class TicketDelayPerProject extends TicketDelay {
                                           "value"=>"required, nobr",
                                           "idDelayUnit"=>"required",
                                           "scope"=>"hidden",
-                                          "isProject"=>"hidden"
+                                          "isProject"=>"hidden",
+                                          "idMacroStatus"=>"hidden",
   );
   
   private static $_databaseCriteria = array('scope'=>'Ticket','isProject'=>'1');
