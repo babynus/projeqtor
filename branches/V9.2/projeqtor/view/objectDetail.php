@@ -2616,21 +2616,21 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $fieldWidth=$fieldWidth+$buttonFieldWidth-$maxButtonWidth;
           $buttonFieldWidth=$maxButtonWidth;
         }
-        if($col == 'idTicketStatus'){
-            echo '<input id="'.$col.'" name="'.$col.'" type="hidden" class="input '.(($isRequired)?'required':'').'" value="'.(($obj->idTicketStatus)?$obj->idTicketStatus:4).'"/>';
+        if($col == 'idMacroTicketStatus'){
+            echo '<input id="'.$col.'" name="'.$col.'" type="hidden" class="input '.(($isRequired)?'required':'').'" value="'.(($obj->idMacroTicketStatus)?$obj->idMacroTicketStatus:2).'"/>';
         	echo '<ul id="'.$col.'List" data-dojo-type="dojox/mobile/TabBar" data-dojo-props=\'barType:"segmentedControl"\' center="false">';
-            	echo '<li id="isHandledStatus" onClick="dojo.byId(\''.$col.'\').value=3;" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
-            	if($obj->idTicketStatus==3){
+            	echo '<li id="isHandledStatus" onClick="dojo.byId(\''.$col.'\').value=\'1\';" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
+            	if($obj->idMacroTicketStatus==1){
             		echo "data-dojo-props='selected:true'";
             	}
             	echo '>'.i18n('colHandled').'</li>';
-            	echo '<li id="isDoneStatus" onClick="dojo.byId(\''.$col.'\').value=4;" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
-            	if($obj->idTicketStatus==4 or !$obj->idTicketStatus){
+            	echo '<li id="isDoneStatus" onClick="dojo.byId(\''.$col.'\').value=\'2\';" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
+            	if($obj->idMacroTicketStatus==2 or !$obj->idMacroTicketStatus){
             		echo "data-dojo-props='selected:true'";
             	}
             	echo '>'.i18n('colDone').'</li>';
-            	echo '<li  id="isIdleStatus" onClick="dojo.byId(\''.$col.'\').value=7;" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
-            	if($obj->idTicketStatus==7){
+            	echo '<li  id="isIdleStatus" onClick="dojo.byId(\''.$col.'\').value=\'3\';" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
+            	if($obj->idMacroTicketStatus==3){
             		echo "data-dojo-props='selected:true'";
             	}
             	echo '>'.i18n('colIdle').'</li>';

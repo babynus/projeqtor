@@ -39,7 +39,7 @@ class Delay extends SqlElement {
   public $value;
   public $idDelayUnit;
   public $idle;
-  public $idStatus;
+  public $idMacroStatus;
   //public $_sec_void;
   
   public $_noCopy;
@@ -51,7 +51,7 @@ class Delay extends SqlElement {
                                           "value"=>"required",
                                           "idDelayUnit"=>"required",
                                           "scope"=>"hidden",
-                                          "idStatus"=>"hidden");
+                                          "idMacroStatus"=>"hidden");
   
   private static $_databaseCriteria = array();
   private static $_databaseTableName = 'delay';

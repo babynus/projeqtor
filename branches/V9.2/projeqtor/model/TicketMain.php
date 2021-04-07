@@ -385,26 +385,25 @@ class TicketMain extends SqlElement {
   	 or $this->idUrgency != $old->idUrgency
   	 or $this->creationDateTime != $old->creationDateTime or $this->idProject != $old->idProject) {
   	    
-        $crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0', 'idProject'=>$this->idProject);
+        $crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0', 'idProject'=>$this->idProject, 'idMacroTicketStatus'=>2);
         $delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
-        
   		if ($delay and !$delay->id) {
   		  $proj = new Project($this->idProject);
   		  if($proj->idProject){
   		    $topList = $proj->getTopProjectList(true);
   		  	foreach ($topList as $id){
-  		  		$crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0', 'idProject'=>$id);
+  		  		$crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0', 'idProject'=>$id, 'idMacroTicketStatus'=>2);
   		  		$delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
   		  		if($delay and $delay->id){
   		  			break;
   		  		}
   		  	}
   		  }else{
-  		    $crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0','idProject'=>'');
+  		    $crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0','idProject'=>'', 'idMacroTicketStatus'=>2);
   		    $delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
   		  }
   		}
-  		if ($delay and $delay->id) {
+  		if ($delay and $delay->id and $this->done) {
   			$unit=new DelayUnit($delay->idDelayUnit);
   			$this->initialDueDateTime=addDelayToDatetime($this->creationDateTime,$delay->value, $unit->code);
   			if (! trim($this->actualDueDateTime) or ($old->actualDueDateTime==$old->initialDueDateTime 
@@ -523,11 +522,14 @@ class TicketMain extends SqlElement {
       self::$_fieldsAttributes ['_sec_ToDoList'] = 'hidden';
       unset($this->_sec_ToDoList);
     }
+    if(!$this->id){
+      self::$_fieldsAttributes ['_button_showStatusPeriod'] = 'hidden';
+    }
   }
   
   public function drawSpecificItem($item) {
   	if ($item=='showStatusPeriod') {
-  		echo '<div id="'.$item.'" title="' . i18n('showStatusPeriod') . '" style="float:right" >';
+  		echo '<div id="'.$item.'" title="' . i18n('showStatusPeriod') . '" style="float:right;padding:10px 2px 0px 0px;" >';
   		echo '<button id="' . $item . 'Button" dojoType="dijit.form.Button" style="width:200px;vertical-align: middle;" class="roundedVisibleButton">';
   		echo '<span>' . i18n('showStatusPeriod') . '</span>';
     	echo '<script type="dojo/connect" event="onClick" args="evt">';
