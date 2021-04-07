@@ -2216,6 +2216,22 @@ class PlanningElement extends SqlElement {
       }
       if (isset($parentChilds["#".$dep->successorId])) { unset($parentChilds["#".$dep->successorId]); } // Self cannot be it own predecessor
       if ($dep->dependencyType!='S-S') $directPredecessors["#".$dep->successorId]=array_merge_preserve_keys($lstPrec,$parentChilds);
+      else {
+        $firstChildren=array();
+        $firstChildrenKey=null;
+        foreach (array_reverse($parentChilds) as $fcId=>$fcVal) {
+          if (count($firstChildren)==0) {
+            $firstChildren=array($fcId=>$fcVal);
+            $firstChildrenKey=$fcId;
+          } else if (isset($directPredecessors[$firstChildrenKey])) {
+            if (isset($directPredecessors[$firstChildrenKey][$fcId])) {
+              $firstChildren=array($fcId=>$fcVal);
+              $firstChildrenKey=$fcId;
+            }
+          }
+        }
+        if (count($firstChildren)>0) $directPredecessors["#".$dep->successorId]=array_merge_preserve_keys($lstPrec,$firstChildren);;
+      }
     }
     foreach ($result as $id=>$pe) {
       $pe=$result[$id];
