@@ -922,8 +922,27 @@ abstract class SqlElement {
     		$statPeriod->endDate=$this->handledDateTime;
     		$statPeriod->idStatusEnd=$this->idStatus;
     		$statPeriod->idUserEnd=getSessionUser ()->id;
-    		$statPeriod->duration = dayDiffDates($statPeriod->startDate, $this->handledDateTime);
-    		$statPeriod->durationOpenTime = countDayDiffDates($statPeriod->startDate, $this->handledDateTime, getSessionUser()->idCalendarDefinition);
+//     		$startDate =strtotime($statPeriod->startDate);
+//     		$endDate = strtotime($this->handledDateTime);
+//     		$duration = $startDate-$endDate;
+//     		$statPeriod->duration=$duration;
+    		$startDate = new DateTime($statPeriod->startDate);
+    		$endDate = new DateTime($this->handledDateTime);
+    		$duration = $startDate->diff($endDate, true);
+    		$durationDisplay = "";
+    	    if($duration->y){
+    	    	$durationDisplay .= $duration->format('%y').i18n('shortYear');
+    	    }else if($duration->m){
+    	    	$durationDisplay .= $duration->format('%m').i18n('shortMonth');
+    	    }else if($duration->d){
+    	    	$durationDisplay .= $duration->format('%d').i18n('shortDay');
+    	    }else if($duration->h){
+    	    	$durationDisplay .= $duration->format('%h').i18n('shortHour');
+    	    }else if($duration->i){
+    	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute');
+    	    }
+    		$statPeriod->duration=$durationDisplay;
+    		$statPeriod->durationOpenTime = $durationDisplay;
     		$statPeriod->save();
     	}
     	if($statPeriod->active != 1){
@@ -958,8 +977,25 @@ abstract class SqlElement {
     	    $statPeriod->endDate=$this->$nameStat;
     	    $statPeriod->idStatusEnd=$this->idStatus;
     	    $statPeriod->idUserEnd=getSessionUser ()->id;
-    	    $statPeriod->duration = dayDiffDates($statPeriod->startDate, $this->$nameStat);
-    	    $statPeriod->durationOpenTime = countDayDiffDates($statPeriod->startDate, $this->$nameStat, getSessionUser()->idCalendarDefinition);
+    	    date_default_timezone_set('UTC');
+    	    $now=strtotime("now");
+    	    $startDate = new DateTime($statPeriod->startDate);
+    	    $endDate = new DateTime($this->$nameStat);
+    	    $duration = $startDate->diff($endDate, true);
+    	    $durationDisplay = "";
+    	    if($duration->y){
+    	    	$durationDisplay .= $duration->format('%y').i18n('shortYear');
+    	    }else if($duration->m){
+    	    	$durationDisplay .= $duration->format('%m').i18n('shortMonth');
+    	    }else if($duration->d){
+    	    	$durationDisplay .= $duration->format('%d').i18n('shortDay');
+    	    }else if($duration->h){
+    	    	$durationDisplay .= $duration->format('%h').i18n('shortHour');
+    	    }else if($duration->i){
+    	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute');
+    	    }
+    	    $statPeriod->duration=$durationDisplay;
+    	    $statPeriod->durationOpenTime = $durationDisplay;
     	    $statPeriod->save();
         }
         if($statPeriod->active != 0){

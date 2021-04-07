@@ -27,20 +27,20 @@ CREATE TABLE `${prefix}statusperiod` (
 `idStatusEnd` int(12) unsigned DEFAULT NULL COMMENT '12',
 `idUserStart` int(12) unsigned DEFAULT NULL COMMENT '12',
 `idUserEnd` int(12) unsigned DEFAULT NULL COMMENT '12',
-`duration` datetime DEFAULT NULL,
-`durationOpenTime` datetime DEFAULT NULL,
+`duration` timestamp DEFAULT NULL,
+`durationOpenTime` timestamp DEFAULT NULL,
 PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess)
-SELECT id , 'canWorkOnTicket', '1' from `${prefix}profile` where id in (SELECT idProfile from `${prefix}habilitationother` where scope = 'work' and rightAccess=1);
+SELECT id , 'canWorkOnTicket', '1' from `${prefix}profile` where id in (SELECT idProfile from `${prefix}habilitationother` where scope = 'work' and rightAccess=4);
 
-INSERT INTO `habilitationother` (idProfile, scope , rightAccess)
-SELECT id , 'canWorkOnTicket', '2' from `profile` where id in (SELECT idProfile from `habilitationother` where scope = 'work' and rightAccess <> 1);
+INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess)
+SELECT id , 'canWorkOnTicket', '2' from `${prefix}profile` where id in (SELECT idProfile from `${prefix}habilitationother` where scope = 'work' and rightAccess <> 4);
 
 UPDATE `${prefix}status` set setHandledStatus='1' where name='paused';
 
-ALTER TABLE `${prefix}delay` ADD `idStatus` INT(12) DEFAULT NULL COMMENT '12';
+ALTER TABLE `${prefix}delay` ADD `idMacroStatus` int(12) unsigned DEFAULT 2 COMMENT '12';
 
 ALTER TABLE `${prefix}project` ADD `startAM` time DEFAULT NULL, 
 							   ADD `endAM` time DEFAULT NULL,
@@ -122,3 +122,41 @@ INSERT INTO `${prefix}documentright` (idDocumentDirectory, idProfile , idAccessM
 SELECT d.id, p.id, a.idAccessProfile FROM `${prefix}documentdirectory` as d CROSS JOIN `${prefix}profile` as p INNER JOIN `${prefix}accessright` as a ON p.id = a.idProfile and a.idMenu=102;
 
 UPDATE `${prefix}type` set lockPaused=lockDone where scope='Ticket';
+
+INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasExcel`) VALUES
+(119, 'reportTicketHandledMonthSynthesis',3, 'ticketHandledMonthSynthesis.php', 396,'1'),
+(120, 'reportTicketDoneMonthSynthesis',3, 'ticketDoneMonthSynthesis.php', 397,'1');
+
+INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
+(1, 119, 1),
+(1, 120, 1);
+
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
+(119, 'idProject', 'projectList', 10, 'currentProject'),
+(119,'idTicketType','ticketType',15,null),
+(119, 'year', 'year', 20,'currentYear'),
+(119,'issuer','userList',30,null),
+(119, 'requestor', 'requestorList', 35, null),
+(119,'responsible','resourceList',40,null),
+(120, 'idProject', 'projectList', 10, 'currentProject'),
+(120,'idTicketType','ticketType',15,null),
+(120, 'year', 'year', 20,'currentYear'),
+(120,'issuer','userList',30,null),
+(120, 'requestor', 'requestorList', 35, null),
+(120,'responsible','resourceList',40,null);
+
+
+INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VALUES
+(2,119,0,1),
+(2,120,0,1);
+
+CREATE TABLE `${prefix}macroticketstatus` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}macroticketstatus` (`id`,`name`) VALUES
+(1,'handled'),
+(2,'done'),
+(3,'idle');
