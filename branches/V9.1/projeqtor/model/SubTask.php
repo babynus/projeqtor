@@ -237,7 +237,7 @@ class SubTask extends SqlElement {
       echo '<tr>';
         echo ' <td style="width:12%;height:100%;">';
         echo '<div id="'.$refType.'_'.$refId.'_prev_'.$id.'" class="prev" style="'.(($id==0 or ($done==0 && $idle==0 && $handled==0) or ($rightUpdate=='NO' and $rightRead=='YES'))?'display:none':'').'" 
-                  onclick="'.(($id!=0 and  ($rightUpdate=='NO' and $rightRead=='YES'))?"nextSlides('prev',".$id.",'".$refType."',".$refId.");":"").'">&#10094;</div>';
+                  onclick="'.(($id!=0 and  $rightUpdate=='YES' )?"nextSlides('prev',".$id.",'".$refType."',".$refId.");":"").'">&#10094;</div>';
         echo ' </td>';
         echo ' <td style="width:76%;height:100%;'.$backgroundColor.'">';
           echo '<div  class="slideshow-container" style="width:100%;height:30px">';
@@ -262,7 +262,7 @@ class SubTask extends SqlElement {
            echo '</div>';
          echo ' </td>';
          echo ' <td style="width:12%;height:100%;" >';
-         echo '<div  id="'.$refType.'_'.$refId.'_next_'.$id.'" class="next" style="'.(($id==0 or ($idle==1) or ($rightUpdate=="NO" and $rightRead=='YES'))?'display:none':'').'"  onclick="'.(($id!=0 and  $rightUpdate!='NO' and $rightRead=='YES')?"nextSlides('next',".$id.",'".$refType."',".$refId.");":"").'">&#10095;</div>';
+         echo '<div  id="'.$refType.'_'.$refId.'_next_'.$id.'" class="next" style="'.(($id==0 or ($idle==1) or ($rightUpdate=="NO" and $rightRead=='YES'))?'display:none':'').'"  onclick="'.(($id!=0 and  $rightUpdate=='YES')?"nextSlides('next',".$id.",'".$refType."',".$refId.");":"").'">&#10095;</div>';
          echo ' </td>';
        echo '</tr>';
      echo '</table>';
