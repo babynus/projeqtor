@@ -1013,7 +1013,7 @@ foreach ($listParam as $param) {
     if ($param->defaultValue) {
       if ($param->defaultValue=='currentOrganization') {
         $res=new Resource($user->id);
-        if ($res->id and $res->idOrganization) {
+        if ($res->id and $res->idOrganization and Module::isModuleActive('moduleOrganization')) {
           $defaultValue=$res->idOrganization;
         }
       } else {
@@ -1024,7 +1024,7 @@ foreach ($listParam as $param) {
     $class=ucfirst($class);
     if (! class_exists($class)) continue;
 ?>
-    <tr>
+    <tr style="<?php if ($class=='Organization' and ! Module::isModuleActive('moduleOrganization')) echo 'display:none;' ?>">
     <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;<?php if (!isNewGui()) echo ':&nbsp;';?></label></td>
     <td>
     <select data-dojo-type="<?php echo (($param->multiple == 1) ? 'dojox.form.CheckedMultiSelect' : 'dijit.form.FilteringSelect') ?>" class="input" 
