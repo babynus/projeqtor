@@ -2617,6 +2617,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $buttonFieldWidth=$maxButtonWidth;
         }
         if($col == 'idMacroTicketStatus'){
+          if(isNewGui()){
             echo '<input id="'.$col.'" name="'.$col.'" type="hidden" class="input '.(($isRequired)?'required':'').'" value="'.(($obj->idMacroTicketStatus)?$obj->idMacroTicketStatus:2).'"/>';
         	echo '<ul id="'.$col.'List" data-dojo-type="dojox/mobile/TabBar" data-dojo-props=\'barType:"segmentedControl"\' center="false">';
             	echo '<li id="isHandledStatus" onClick="dojo.byId(\''.$col.'\').value=\'1\';" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
@@ -2635,6 +2636,19 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             	}
             	echo '>'.i18n('colIdle').'</li>';
         	echo '</ul>';
+          }else{
+            echo '<table id="'.$col.'List"><tr>';
+            echo '<td>';
+            echo ' <label for="isHandledStatus" class="dialogLabel " style="text-align:right;">'.i18n('colHandled').Tool::getDoublePoint().'</label>';
+            echo ' <input type="radio" data-dojo-type="dijit/form/RadioButton" id="isHandledStatus" name="'.$col.'" value="1"'.(($obj->idMacroTicketStatus==1)?"checked":"").'/></td>';
+            echo '<td>';
+            echo ' <label for="isDoneStatus" class="dialogLabel " style="text-align:right;">'.i18n('colDone').Tool::getDoublePoint().'</label>';
+            echo ' <input type="radio" data-dojo-type="dijit/form/RadioButton" id="isDoneStatus" name="'.$col.'" value="2"'.(($obj->idMacroTicketStatus==2)?"checked":"").'/></td>';
+            echo '<td>';
+            echo ' <label for="isIdleStatus" class="dialogLabel " style="text-align:right;">'.i18n('colIdle').Tool::getDoublePoint().'</label>';
+            echo ' <input type="radio" data-dojo-type="dijit/form/RadioButton" id="isIdleStatus" name="'.$col.'" value="3"'.(($obj->idMacroTicketStatus==3)?"checked":"").'/></td>';
+            echo '</tr></table>';
+          }
         }else{
           // BEGIN - ADD BY TABARY - TOOLTIP
           echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
