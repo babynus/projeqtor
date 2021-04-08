@@ -57,7 +57,7 @@ class TicketDelayPerProject extends TicketDelay {
   
   private static $_databaseCriteria = array('scope'=>'Ticket','isProject'=>'1');
   
-  private static $_databaseColumnName = array("idTicketType"=>"idType");
+  private static $_databaseColumnName = array("idTicketType"=>"idType", "idMacroTicketStatus"=>"idMacroStatus");
   
   private static $_colCaptionTransposition = array('idDelayUnit'=>'unit');
   

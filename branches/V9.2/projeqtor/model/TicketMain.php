@@ -385,33 +385,36 @@ class TicketMain extends SqlElement {
   	 or $this->idUrgency != $old->idUrgency
   	 or $this->creationDateTime != $old->creationDateTime or $this->idProject != $old->idProject) {
   	    
-        $crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0', 'idProject'=>$this->idProject, 'idMacroTicketStatus'=>2);
-        $delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
-  		if ($delay and !$delay->id) {
-  		  $proj = new Project($this->idProject);
-  		  if($proj->idProject){
-  		    $topList = $proj->getTopProjectList(true);
-  		  	foreach ($topList as $id){
-  		  		$crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0', 'idProject'=>$id, 'idMacroTicketStatus'=>2);
-  		  		$delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
-  		  		if($delay and $delay->id){
-  		  			break;
-  		  		}
-  		  	}
-  		  }else{
-  		    $crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0','idProject'=>'', 'idMacroTicketStatus'=>2);
-  		    $delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
-  		  }
-  		}
-  		if ($delay and $delay->id and $this->done) {
-  			$unit=new DelayUnit($delay->idDelayUnit);
-  			$this->initialDueDateTime=addDelayToDatetime($this->creationDateTime,$delay->value, $unit->code);
-  			if (! trim($this->actualDueDateTime) or ($old->actualDueDateTime==$old->initialDueDateTime 
-  			                                     and $old->actualDueDateTime==$this->actualDueDateTime) ) {
-  			  $this->actualDueDateTime=$this->initialDueDateTime;   
-  			  $this->delayReadOnly = "1";                           	
-  			}
-  		}
+        $crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0');
+        $ticketDelay = new TicketDelay();
+        $delayList=$ticketDelay->getSqlElementsFromCriteria($crit);
+        foreach ($delayList as $delay){
+    		if ($delay and !$delay->id) {
+    		  $proj = new Project($this->idProject);
+    		  if($proj->idProject){
+    		    $topList = $proj->getTopProjectList(true);
+    		  	foreach ($topList as $id){
+    		  		$crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0', 'idProject'=>$id);
+    		  		$delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
+    		  		if($delay and $delay->id){
+    		  			break;
+    		  		}
+    		  	}
+    		  }else{
+    		    $crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0','idProject'=>'');
+    		    $delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
+    		  }
+    		}
+    		if ($delay and $delay->id and ($delay->idMacroTicketStatus == 2 or $delay->idMacroTicketStatus == 1)) {
+    			$unit=new DelayUnit($delay->idDelayUnit);
+    			$this->initialDueDateTime=addDelayToDatetime($this->creationDateTime,$delay->value, $unit->code);
+    			if (! trim($this->actualDueDateTime) or ($old->actualDueDateTime==$old->initialDueDateTime 
+    			                                     and $old->actualDueDateTime==$this->actualDueDateTime) ) {
+    			  $this->actualDueDateTime=$this->initialDueDateTime;   
+    			  $this->delayReadOnly = "1";                           	
+    			}
+    		}
+        }
   	}
   	if (isset($this->WorkElement)) {
   	  $this->WorkElement->done=$this->done;
