@@ -8137,7 +8137,7 @@ function updateSubTask(id,refType,refId,isPrio,isRes){
   }else if(id!=0 && name.trim()!=''){
     update=true;
     url+="&operation=update";
-    url+="&name="+name+"&priority="+priority+"&resource="+resource;
+    url+="&name="+encodeURI(name)+"&priority="+priority+"&resource="+resource;
   }else if(name.trim()=='' && id!=0){
     url+="&operation=delete";
     deleted=true;
