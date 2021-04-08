@@ -154,7 +154,7 @@ class SubTask extends SqlElement {
         }
         
         echo    '<td class="todoListTab" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
-        echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" value="'. htmlEncode($subTask->name).'" ';
+        echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.Textarea" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" value="'. htmlEncode($subTask->name).'" ';
         if ($rightUpdate=='NO' and $rightRead=='YES'){
           echo ' readonly="true">';
         }else {
