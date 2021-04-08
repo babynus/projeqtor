@@ -45,7 +45,7 @@ if($element=='SubTask'){
   
   if($operation!='save')$idSubTask = (RequestHandler::isCodeSet('idSubTask'))?RequestHandler::getId('idSubTask'):"";
   if($operation!='delete'){
-    $name=(RequestHandler::isCodeSet('name'))?RequestHandler::getValue('name'):null;
+    $name=(RequestHandler::isCodeSet('name'))?urldecode(RequestHandler::getValue('name')):null;
     $priority = (RequestHandler::isCodeSet('priority'))?RequestHandler::getValue('priority'):null;
     $status = (RequestHandler::isCodeSet('status'))?RequestHandler::getValue('status'):"";
     $resource = (RequestHandler::isCodeSet('resource'))?RequestHandler::getValue('resource'):null;
