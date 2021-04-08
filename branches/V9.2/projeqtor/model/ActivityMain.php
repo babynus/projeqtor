@@ -391,9 +391,8 @@ class ActivityMain extends SqlElement {
     }
     
     if($this->idActivity){
-      $actWorkUnit = new ActivityWorkUnit();
-      $countActWithWorkUnit = $actWorkUnit->countSqlElementsFromCriteria(array('refType'=>'Activity','refId'=>$this->idActivity));
-      if($countActWithWorkUnit){
+      $actParent = new Activity($this->idActivity);
+      if($actParent->ActivityPlanningElement->hasWorkUnit){
         $result .= '<br/>' . i18n ( 'cantHaveParentWithWorkUnit' );
       }
     }
