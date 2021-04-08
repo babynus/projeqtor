@@ -6979,11 +6979,12 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
     urlList+='&required=true';
   }
   if (objectClass) urlList+='&objectClass='+objectClass;
-  // MTY - LEAVE SYSTEM
-    if (destination=='idProjectPlan') {
-        urlList+='&withoutLeaveProject=1';
-    }
-// MTY - LEAVE SYSTEM
+  if (destination=='idProjectPlan') {
+      urlList+='&withoutLeaveProject=1';
+  }
+  if (directAccessIndex) {
+    urlList += "&directAccessIndex=" + directAccessIndex;
+  }
   var datastore=new dojo.data.ItemFileReadStore({
     url : urlList
   });
@@ -7054,6 +7055,9 @@ function refreshListSpecific(listType, destination, param, paramVal, selected, r
   }
   if (required) {
     urlList+='&required=true';
+  }
+  if (directAccessIndex) {
+    urlList += "&directAccessIndex=" + directAccessIndex;
   }
   var datastore=new dojo.data.ItemFileReadStore({
     url : urlList
