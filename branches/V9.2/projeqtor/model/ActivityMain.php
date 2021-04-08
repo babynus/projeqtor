@@ -333,14 +333,11 @@ class ActivityMain extends SqlElement {
       $colScript .= '  if(this.checked){';
       $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("value",dijit.byId("ActivityPlanningElement_plannedWork").get("value"));';
       $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("disabled",true);';
-//       $colScript .= '   dijit.byId("ActivityPlanningElement_quantity").set("value","");';
-//       $colScript .= '   dijit.byId("ActivityPlanningElement_idComplexity").set("value","");';
-//       $colScript .= '   dijit.byId("ActivityPlanningElement_idWorkUnit").set("value","");';
-//       $colScript .= '   dojo.byId("_tab_5_1_smallLabel_3").style.display="none";';
+      $colScript .= '   if(dojo.byId("tabActivityWorkUnit"))dojo.byId("tabActivityWorkUnit").parentNode.style.display="none"';
       $colScript .= '  }else{';
       $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("disabled",false);';
       $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("readOnly",false);';
-//       $colScript .= '   dojo.byId("_tab_5_1_smallLabel_3").style.display="table";';
+      $colScript .= '   if(dojo.byId("tabActivityWorkUnit"))dojo.byId("tabActivityWorkUnit").parentNode.style.display="table-cell"';
       $colScript .= '  }';
       $colScript .= '   formChanged();';
       $colScript .= '</script>';
@@ -879,9 +876,10 @@ class ActivityMain extends SqlElement {
     if (SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1) ){
       self::$_fieldsAttributes["paused"]="readonly";
     }
-    if(Parameter::getGlobalParameter('activityOnRealTime')!='YES'){
+    if(Parameter::getGlobalParameter('activityOnRealTime')!='YES' or $this->ActivityPlanningElement->hasWorkUnit){
       self::$_fieldsAttributes["workOnRealTime"]='hidden';
     }
+
   }
   
   protected function getStaticFieldsTooltip() {

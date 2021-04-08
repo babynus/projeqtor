@@ -7317,7 +7317,7 @@ function drawActivityWorkUnit($listActWU,$obj,$refresh=false) {
     $canCreate=false;
     $canDelete=false;
   }
-  echo '<table style="width:100%">';
+  echo '<table style="width:100%" id="tabActivityWorkUnit">';
   echo '<tr><td colspan=2 style="width:100%;"><table style="height:100%;width:100%;">';
   echo '<tr>';
   if (!$print) {
