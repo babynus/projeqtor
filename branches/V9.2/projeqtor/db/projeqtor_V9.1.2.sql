@@ -22,3 +22,6 @@ where sqlAttribute='idDeliverableType' and idFilter in (select id from `${prefix
 
 UPDATE `${prefix}columnselector` set field='nameDeliveryType', attribute='idDeliveryType', name='idDeliveryType'
 where attribute='idDeliverableType' and objectClass='Delivery';
+
+-- Fix issue for 
+DELETE FROM `${prefix}accessright` where idMenu=222;

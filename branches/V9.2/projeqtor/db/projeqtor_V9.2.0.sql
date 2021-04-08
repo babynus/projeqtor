@@ -160,3 +160,6 @@ INSERT INTO `${prefix}macroticketstatus` (`id`,`name`) VALUES
 (1,'handled'),
 (2,'done'),
 (3,'idle');
+
+-- Fix issue for 
+DELETE FROM `${prefix}accessright` where idMenu=222;
