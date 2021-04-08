@@ -238,6 +238,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       $element=new $this->refType ($this->refId);
       if($element->workOnRealTime==1){
         self::$_fieldsAttributes["validatedWork"]="readonly";
+        self::$_fieldsAttributes["_spe_idWorkUnits"]="hidden";
       }
     }
     if(Parameter::getGlobalParameter('technicalProgress')=='YES'){

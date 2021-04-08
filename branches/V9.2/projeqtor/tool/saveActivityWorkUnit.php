@@ -161,6 +161,7 @@ if ($mode=='edit') {
     $complexValue = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idComplexity'=>$workCommandComplexity,'idWorkUnit'=>$workCommandWorkUnit,'idCatalogUO'=>$complex->idCatalogUO));
     if($act->ActivityPlanningElement->hasWorkUnit==0){
       $act->ActivityPlanningElement->hasWorkUnit=1;
+      if($act->workOnRealTime==1)$act->workOnRealTime=0;
     }
     $act->save();
     if($idWorkCommand and $idWorkCommand!=' '){
