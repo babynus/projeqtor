@@ -2322,3 +2322,41 @@ border:1px solid var(--color-medium);
 .ProjeQtOrNewGui .userParamTabar{
 	width:60px !important;
 }
+
+/*  TIME PICKER */
+.ProjeQtOrNewGui .dijitTimePickerMarker {
+  background: var(--color-light) url();
+  color: var(--color-dark);
+  font-weight: bold;
+}
+.ProjeQtOrNewGui .dijitTimePickerItemSelected {
+  background: var(--color-secondary) url();
+  color: var(--color-white);
+  font-weight: bold;
+}
+
+.ProjeQtOrNewGui .dijitTimePickerItemHover {
+  background: var(--color-dark) url();
+  color: var(--color-light);;
+}
+/* DATE PICKET */
+.ProjeQtOrNewGui .dijitCalendarYearContainer {
+    background: var(--color-light);
+    border-top: 1px solid var(--color-light);
+}
+.ProjeQtOrNewGui .dijitCalendarDayLabelTemplate {
+    background: var(--color-light);
+    border-top: 1px solid var(--color-light);
+    color: var(--color-dark);
+    border-right: 5px solid var(--color-light);
+    border-left: 5px solid var(--color-light);
+}
+.ProjeQtOrNewGui .dijitCalendarSelectedDate {
+    background-color: var(--color-secondary) !important;
+    color: var(--color-white) !important;
+}
+.ProjeQtOrNewGui .dijitCalendarCurrentDate {
+    background-color: var(--color-light) !important;
+    color: var(--color-dark);
+    font-weight: bold;
+}
