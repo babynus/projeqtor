@@ -2637,16 +2637,16 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             	echo '>'.i18n('colIdle').'</li>';
         	echo '</ul>';
           }else{
-            echo '<table id="'.$col.'List"><tr>';
-            echo '<td>';
+            echo '<table id="'.$col.'List">';
+            echo '<tr><td>';
             echo ' <label for="isHandledStatus" class="dialogLabel " style="text-align:right;">'.i18n('colHandled').Tool::getDoublePoint().'</label>';
-            echo ' <input type="radio" data-dojo-type="dijit/form/RadioButton" id="isHandledStatus" name="'.$col.'" value="1"'.(($obj->idMacroTicketStatus==1)?"checked":"").'/></td>';
-            echo '<td>';
+            echo ' <input type="radio" data-dojo-type="dijit/form/RadioButton" id="isHandledStatus" name="'.$col.'" value="1"'.(($obj->idMacroTicketStatus==1)?"checked":"").' style="padding-top: 7px;"/></td></tr>';
+            echo '<tr><td>';
             echo ' <label for="isDoneStatus" class="dialogLabel " style="text-align:right;">'.i18n('colDone').Tool::getDoublePoint().'</label>';
-            echo ' <input type="radio" data-dojo-type="dijit/form/RadioButton" id="isDoneStatus" name="'.$col.'" value="2"'.(($obj->idMacroTicketStatus==2)?"checked":"").'/></td>';
-            echo '<td>';
+            echo ' <input type="radio" data-dojo-type="dijit/form/RadioButton" id="isDoneStatus" name="'.$col.'" value="2"'.(($obj->idMacroTicketStatus==2)?"checked":"").' style="padding-top: 7px;"/></td></tr>';
+            echo '<tr><td>';
             echo ' <label for="isIdleStatus" class="dialogLabel " style="text-align:right;">'.i18n('colIdle').Tool::getDoublePoint().'</label>';
-            echo ' <input type="radio" data-dojo-type="dijit/form/RadioButton" id="isIdleStatus" name="'.$col.'" value="3"'.(($obj->idMacroTicketStatus==3)?"checked":"").'/></td>';
+            echo ' <input type="radio" data-dojo-type="dijit/form/RadioButton" id="isIdleStatus" name="'.$col.'" value="3"'.(($obj->idMacroTicketStatus==3)?"checked":"").' style="padding-top: 7px;"/></td>';
             echo '</tr></table>';
           }
         }else{
