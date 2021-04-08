@@ -942,7 +942,7 @@ abstract class SqlElement {
     		$durationOpDay = countDayDiffDates($statPeriod->startDate, $this->handledDateTime, $res->idCalendarDefinition);
     		if($durationOpDay > 0){
     			$startDate = new DateTime(date("Y-m-d"));
-    			$endDate = new DateTime(date("Y-m-d", strtotime("-$durationOpDay")));
+    			$endDate = new DateTime(date("Y-m-d", strtotime("-$durationOpDay days")));
     			$duration = date_diff($startDate, $endDate, true);
     			$durationDisplay = "";
     			if($duration->y){
@@ -1014,7 +1014,7 @@ abstract class SqlElement {
     	    $durationOpDay = countDayDiffDates($statPeriod->startDate, $this->$nameStat, $res->idCalendarDefinition);
     	    if($durationOpDay > 0){
     	      $startDate = new DateTime(date("Y-m-d"));
-    	      $endDate = new DateTime(date("Y-m-d", strtotime("-$durationOpDay")));
+    	      $endDate = new DateTime(date("Y-m-d", strtotime("-$durationOpDay days")));
     	      $duration = date_diff($startDate, $endDate, true);
     	      $durationDisplay = "";
     	      if($duration->y){
