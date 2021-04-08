@@ -27,8 +27,8 @@ CREATE TABLE `${prefix}statusperiod` (
 `idStatusEnd` int(12) unsigned DEFAULT NULL COMMENT '12',
 `idUserStart` int(12) unsigned DEFAULT NULL COMMENT '12',
 `idUserEnd` int(12) unsigned DEFAULT NULL COMMENT '12',
-`duration` timestamp DEFAULT NULL,
-`durationOpenTime` timestamp DEFAULT NULL,
+`duration` varchar(100) DEFAULT NULL,
+`durationOpenTime` varchar(100) DEFAULT NULL,
 PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 

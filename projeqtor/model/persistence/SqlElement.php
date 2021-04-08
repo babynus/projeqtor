@@ -922,10 +922,6 @@ abstract class SqlElement {
     		$statPeriod->endDate=$this->handledDateTime;
     		$statPeriod->idStatusEnd=$this->idStatus;
     		$statPeriod->idUserEnd=getSessionUser ()->id;
-//     		$startDate =strtotime($statPeriod->startDate);
-//     		$endDate = strtotime($this->handledDateTime);
-//     		$duration = $startDate-$endDate;
-//     		$statPeriod->duration=$duration;
     		$startDate = new DateTime($statPeriod->startDate);
     		$endDate = new DateTime($this->handledDateTime);
     		$duration = $startDate->diff($endDate, true);
@@ -942,6 +938,25 @@ abstract class SqlElement {
     	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute');
     	    }
     		$statPeriod->duration=$durationDisplay;
+    		$res = new Resource($this->idResource);
+    		$durationOpDay = countDayDiffDates($statPeriod->startDate, $this->handledDateTime, $res->idCalendarDefinition);
+    		if($durationOpDay > 0){
+    			$startDate = new DateTime(date("Y-m-d"));
+    			$endDate = new DateTime(date("Y-m-d", strtotime("-$durationOpDay")));
+    			$duration = date_diff($startDate, $endDate, true);
+    			$durationDisplay = "";
+    			if($duration->y){
+    				$durationDisplay .= $duration->format('%y').i18n('shortYear');
+    			}else if($duration->m){
+    				$durationDisplay .= $duration->format('%m').i18n('shortMonth');
+    			}else if($duration->d){
+    				$durationDisplay .= $duration->format('%d').i18n('shortDay');
+    			}else if($duration->h){
+    				$durationDisplay .= $duration->format('%h').i18n('shortHour');
+    			}else if($duration->i){
+    				$durationDisplay .= $duration->format('%i').i18n('shortMinute');
+    			}
+    		}
     		$statPeriod->durationOpenTime = $durationDisplay;
     		$statPeriod->save();
     	}
@@ -995,6 +1010,25 @@ abstract class SqlElement {
     	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute');
     	    }
     	    $statPeriod->duration=$durationDisplay;
+    	    $res = new Resource($this->idResource);
+    	    $durationOpDay = countDayDiffDates($statPeriod->startDate, $this->$nameStat, $res->idCalendarDefinition);
+    	    if($durationOpDay > 0){
+    	      $startDate = new DateTime(date("Y-m-d"));
+    	      $endDate = new DateTime(date("Y-m-d", strtotime("-$durationOpDay")));
+    	      $duration = date_diff($startDate, $endDate, true);
+    	      $durationDisplay = "";
+    	      if($duration->y){
+    	      	$durationDisplay .= $duration->format('%y').i18n('shortYear');
+    	      }else if($duration->m){
+    	      	$durationDisplay .= $duration->format('%m').i18n('shortMonth');
+    	      }else if($duration->d){
+    	      	$durationDisplay .= $duration->format('%d').i18n('shortDay');
+    	      }else if($duration->h){
+    	      	$durationDisplay .= $duration->format('%h').i18n('shortHour');
+    	      }else if($duration->i){
+    	      	$durationDisplay .= $duration->format('%i').i18n('shortMinute');
+    	      }
+    	    }
     	    $statPeriod->durationOpenTime = $durationDisplay;
     	    $statPeriod->save();
         }
