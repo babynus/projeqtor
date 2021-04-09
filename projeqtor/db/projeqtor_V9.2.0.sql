@@ -158,7 +158,7 @@ CREATE TABLE `${prefix}macroticketstatus` (
 
 INSERT INTO `${prefix}macroticketstatus` (`id`,`name`) VALUES
 (1,'handled'),
-(2,'done'),
+(2,'ColDone'),
 (3,'idle');
 
 -- Fix issue for 

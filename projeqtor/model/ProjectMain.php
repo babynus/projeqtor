@@ -92,7 +92,7 @@ class ProjectMain extends SqlElement {
   public $_lib_cancelled;
   
   public $_sec_ProjectDailyHours;
-  public $_tab_2_2 = array('morning', 'afternoon','start', 'end');
+  public $_tab_2_2 = array('start', 'end', 'morning', 'afternoon');
   public $startAM;
   public $endAM;
   public $startPM;

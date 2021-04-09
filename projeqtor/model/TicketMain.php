@@ -131,7 +131,7 @@ class TicketMain extends SqlElement {
                                   "idActivity"=>"title",
                                   "delayReadOnly"=>"hidden",
                                   "paused"=>"nobr",
-                                  "pausedDateTime"=>"nobr"
+                                  "pausedDateTime"=>"nobr",
   );  
   
   private static $_colCaptionTransposition = array('idUser'=>'issuer', 
@@ -141,7 +141,8 @@ class TicketMain extends SqlElement {
                                                    'idTargetVersion'=>'targetVersion',
                                                    'idOriginalVersion'=>'originalVersion',
                                                    'idTicket'=>'duplicateTicket',
-                                                   'idContext1'=>'idContext');
+                                                   'idContext1'=>'idContext',
+                                                    'paused'=>'inPaused');
   
   private static $_databaseColumnName = array('idTargetVersion'=>'idVersion');
     
@@ -405,7 +406,7 @@ class TicketMain extends SqlElement {
     		    $delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
     		  }
     		}
-    		if ($delay and $delay->id and ($delay->idMacroTicketStatus == 2 or $delay->idMacroTicketStatus == 1)) {
+    		if ($delay and $delay->id and $delay->idMacroTicketStatus == 2) {
     			$unit=new DelayUnit($delay->idDelayUnit);
     			$this->initialDueDateTime=addDelayToDatetime($this->creationDateTime,$delay->value, $unit->code);
     			if (! trim($this->actualDueDateTime) or ($old->actualDueDateTime==$old->initialDueDateTime 
