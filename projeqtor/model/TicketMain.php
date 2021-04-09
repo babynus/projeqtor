@@ -533,7 +533,7 @@ class TicketMain extends SqlElement {
   
   public function drawSpecificItem($item) {
   	if ($item=='showStatusPeriod') {
-  		echo '<div id="'.$item.'" title="' . i18n('showStatusPeriod') . '" style="float:right;padding:10px 2px 0px 0px;" >';
+  		echo '<div id="'.$item.'" title="' . i18n('showStatusPeriod') . '" style="float:right;padding:2px 2px 0px 0px;" >';
   		echo '<button id="' . $item . 'Button" dojoType="dijit.form.Button" style="width:200px;vertical-align: middle;" class="roundedVisibleButton">';
   		echo '<span>' . i18n('showStatusPeriod') . '</span>';
     	echo '<script type="dojo/connect" event="onClick" args="evt">';
