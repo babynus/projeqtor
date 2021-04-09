@@ -131,6 +131,12 @@ class Assignment extends SqlElement {
     
     $old=$this->getOld();
     
+    if ($this->comment) {
+      $comLength=$this->getDataLength('comment');
+      if ($comLength) {
+        $this->comment=mb_substr($this->comment, 0,$comLength);
+      }
+    }
     $additionalAssignedWork=$this->assignedWork-$old->assignedWork;
     $additionalLeftWork=$this->leftWork-$old->leftWork;
     
