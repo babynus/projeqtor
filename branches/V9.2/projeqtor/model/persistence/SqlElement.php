@@ -968,7 +968,7 @@ abstract class SqlElement {
     		$statPeriod->durationOpenTime = $durationDisplay;
     		$statPeriod->save();
     	}
-    	if($statPeriod->active != 1){
+    	if($statPeriod->active == 0){
     		$newStatPeriod = new StatusPeriod();
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);
@@ -1047,12 +1047,12 @@ abstract class SqlElement {
     	    $statPeriod->durationOpenTime = $durationDisplay;
     	    $statPeriod->save();
         }
-        if($statPeriod->active != 0){
+        if($statPeriod->active == 1){
     		$newStatPeriod = new StatusPeriod();
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);
     		$newStatPeriod->active = 0;
-    		$newStatPeriod->startDate = date('Y-m-d H:i');
+    		$newStatPeriod->startDate = date('Y-m-d H:i:s');
     		$newStatPeriod->type = $type;
     		$newStatPeriod->idStatusStart = $this->idStatus;
     		$newStatPeriod->idUserStart = getSessionUser()->id;
