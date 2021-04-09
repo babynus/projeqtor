@@ -96,6 +96,7 @@ class ImputationLine {
     SqlElement::$_cachedQuery['Activity']=array();
     SqlElement::$_cachedQuery['Project']=array();
     
+    $projectNoteStartedBeforValidatedDate=(Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?:false;
     // Insert new lines for admin projects
     Assignment::insertAdministrativeLines($resourceId);
     
@@ -144,10 +145,22 @@ class ImputationLine {
         $leaveProject = Project::getLeaveProject();
         if ($leaveProject!=null) {$leaveProjectId = $leaveProject->id;} else {$leaveProjectId=null;};
         if ($theRes->isEmployee==0 and $leaveProjectId!=null) {
+                    $projPe=new ProjectPlanningElement();
+                    $critWhere.=" and idProject NOT IN (Select ".$projPe->getDatabaseColumnName('idProject')." FROM ".$projPe->getDatabaseTableName()." WHERE ".$projPe->getDatabaseColumnName('validatedStartDate')." > '".$endDate."'";
+                    $critWhere.= " and ".$projPe->getDatabaseColumnName('refType')." = 'Project' )";
                     $critWhere .= " and idProject <> ". $leaveProjectId;
+        }else if ($projectNoteStartedBeforValidatedDate) {
+          $projPe=new ProjectPlanningElement();
+          $critWhere.=" and idProject NOT IN (Select ".$projPe->getDatabaseColumnName('idProject')." FROM ".$projPe->getDatabaseTableName()." WHERE ".$projPe->getDatabaseColumnName('validatedStartDate')." > '".$endDate."'";
+          $critWhere.= " and ".$projPe->getDatabaseColumnName('refType')." = 'Project' )";
         }
     } else {
         $leaveProjectId=null;
+        if($projectNoteStartedBeforValidatedDate){
+          $projPe=new ProjectPlanningElement();
+          $critWhere.=" and idProject NOT IN (Select ".$projPe->getDatabaseColumnName('idProject')." FROM ".$projPe->getDatabaseTableName()." WHERE ".$projPe->getDatabaseColumnName('validatedStartDate')." > '".$endDate."'";
+          $critWhere.= " and ".$projPe->getDatabaseColumnName('refType')." = 'Project' )";
+        }
     }
 // MTY - LEAVE SYSTEM
     $ass=new Assignment();
@@ -568,6 +581,7 @@ class ImputationLine {
   static function drawLines($resourceId, $rangeType, $rangeValue, $showIdle, $showPlanned=true, $print=false, $hideDone=false, $hideNotHandled=false, $displayOnlyCurrentWeekMeetings=false, $currentWeek=0, $currentYear=0, $showId=false) {
     $lowRes=0;
     $isOnRealTime=false;
+    $projectNoteStartedBeforValidatedDate=(Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?:false;
     if (array_key_exists('destinationWidth', $_REQUEST)) {
       $width=$_REQUEST['destinationWidth'];
       if ($width<1150) $lowRes=3; // $lowRes will contain colSpan value ;)
@@ -620,6 +634,21 @@ class ImputationLine {
       $width=($width)-155-30;
     }
     $tab=ImputationLine::getLines($resourceId, $rangeType, $rangeValue, $showIdle, $showPlanned, $hideDone, $hideNotHandled, $displayOnlyCurrentWeekMeetings);
+    
+    if($projectNoteStartedBeforValidatedDate){
+      $projPlanEl=new ProjectPlanningElement();
+      $critWhere=$projPlanEl->getDatabaseColumnName('validatedStartDate')." < '".$endDate."' and ".$projPlanEl->getDatabaseColumnName('validatedStartDate')." > '".$startDate."'";
+      $critWhere.=" and ".$projPlanEl->getDatabaseColumnName('refType')." = 'Project' ";
+      $lstProj=$projPlanEl->getSqlElementsFromCriteria(null,false,$critWhere);
+      $lstIdP=array();
+      if(!empty($lstProj)){
+        foreach ($lstProj as $id=>$pPE){
+          $lstIdP[$pPE->idProject]=$pPE->validatedStartDate;
+        }
+      }
+    
+    }
+    
     if (!$print) {
       echo '<div dojoType="dijit.layout.BorderContainer">';
       echo '<div dojoType="dijit.layout.ContentPane" id="topRegionImputation" data-dojo-props="splitter: true" region="top" style="overflow-y: hide;height: auto;">';
@@ -793,21 +822,21 @@ class ImputationLine {
         }
       }
       for ($i=1; $i<=$nbDays; $i++) {
-        if($line->refType!='Project'){
-          $date=str_replace("-","",substr($allDate[$i-1], 0,7));
-          $validatedImp=SqlElement::getSingleSqlElementFromCriteria('ConsolidationValidation', array('idProject'=>$line->idProject,'month'=>$date));
-          $lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', array('idProject'=>$line->idProject));
-          $validatedImpCase=(trim($validatedImp->id)!='')?true:false;
-          $lockedImpCase=(trim($lockedImp->id)!='')?true:false;
-          $impLock=false;
-          if($lockedImpCase){
-            $curMonth=substr(str_replace('-', '', $curDate), 0,6);
-            if(intval($lockedImp->month,10)<intval ($curMonth,10)){
-              $impLock=true;
-            }
-          }
-          $manuPlan=($validatedImpCase or $impLock)?false:$manuPlan;
-        }
+//         if($line->refType!='Project'){
+//           $date=str_replace("-","",substr($allDate[$i-1], 0,7));
+//           $validatedImp=SqlElement::getSingleSqlElementFromCriteria('ConsolidationValidation', array('idProject'=>$line->idProject,'month'=>$date));
+//           $lockedImp=SqlElement::getSingleSqlElementFromCriteria('LockedImputation', array('idProject'=>$line->idProject));
+//           $validatedImpCase=(trim($validatedImp->id)!='')?true:false;
+//           $lockedImpCase=(trim($lockedImp->id)!='')?true:false;
+//           $impLock=false;
+//           if($lockedImpCase){
+//             $curMonth=substr(str_replace('-', '', $curDate), 0,6);
+//             if(intval($lockedImp->month,10)<intval ($curMonth,10)){
+//               $impLock=true;
+//             }
+//           }
+//           $manuPlan=($validatedImpCase or $impLock)?false:$manuPlan;
+//         }
         if ($manuPlan and isset($line->arrayPlannedWork[$i]->work) and  $line->arrayPlannedWork[$i]->work!="") $line->realWork+= $line->arrayPlannedWork[$i]->work;
       } 
       
@@ -1075,7 +1104,14 @@ class ImputationLine {
                 $impLock=true;
               }
             }
-            $manuPlan=($validatedImpCase or $impLock)?false:$manuPlan;
+            $readonly=false;
+            if($line->refType=='Activity'){
+              if(!$line->idle and !$line->locked and !$validatedImpCase and !$impLock and !empty($lstIdP) and $line->idProject!='') {
+                if(array_key_exists($line->idProject ,$lstIdP) and strtotime ($lstIdP[$line->idProject]) > strtotime($allDate[$i-1])){
+                  $readonly=true;
+                }
+              }
+            }
           }
           $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
           echo '<td class="ganttDetail" align="center" width="'.$inputWidth.'px;"';
@@ -1123,7 +1159,8 @@ class ImputationLine {
               echo ' id="workValue_'.$nbLine.'_'.$i.'"';
               echo ' name="workValue_'.$i.'[]"';
               echo ' value="'.Work::displayImputation($valWork).'" ';
-              if ($line->idle or $line->locked or $validatedImpCase or $impLock) {
+              
+              if ($line->idle or $line->locked or $validatedImpCase or $impLock or $readonly) {
                 echo ' readOnly="true" ';
               }
               echo ' >';

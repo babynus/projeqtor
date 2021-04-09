@@ -43,6 +43,7 @@ class DocumentDirectory extends SqlElement {
   //public $sortOrder=0;
   public $idle;
   //public $_sec_void;
+  public $_sec_AccessRight;
   public $_DocumentRight;
   
   public $_noCopy;
@@ -324,6 +325,17 @@ class DocumentDirectory extends SqlElement {
   public function setAttributes(){
     if(! $this->id){
       self::$_fieldsAttributes ['_DocumentRight'] = 'hidden';
+      self::$_fieldsAttributes ['_sec_AccessRight'] = 'hidden';
+    }else {
+      $dR=new DocumentRight();
+      $classDR=get_class($dR);
+      $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menu'.$classDR));
+      $rightUpdate=securityGetAccessRightYesNo($menu->name,'update',$dR);
+      $rightRead=securityGetAccessRightYesNo($menu->name,'read',$dR);
+      if ( !securityCheckDisplayMenu(null, $classDR) or $rightRead!="YES") {
+        self::$_fieldsAttributes ['_sec_AccessRight'] = 'hidden';
+        self::$_fieldsAttributes ['_sec_AccessRight'] = 'hidden';
+      }
     }
   }
   

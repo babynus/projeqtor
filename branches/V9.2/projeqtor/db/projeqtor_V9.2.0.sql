@@ -8,7 +8,8 @@
 
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
-('activityOnRealTime','NO');
+('activityOnRealTime','NO'),
+('notStratBeaforValidatedStartDate','NO');
 
 ALTER TABLE `${prefix}type` ADD COLUMN `activityOnRealTime` int(1) unsigned DEFAULT 0 COMMENT '1';
 
