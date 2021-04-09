@@ -8443,7 +8443,7 @@ function loadMenuBarItem(item, itemName, from) {
     loadContent("moduleView.php", "centerDiv");
   } else if(item == "Kanban"){
     loadContent("kanbanViewMain.php", "centerDiv");
-  }else if(item="DocumentsRight"){
+  }else if(item=="DocumentsRight"){
     loadContent("documentsRight.php", "centerDiv");
   }else {  
     showInfo(i18n("messageSelectedNotAvailable", new Array(itemName)));
@@ -13049,5 +13049,15 @@ function multipleUpadteSelectAtribute(value) {
     dojo.style(dijit.byId('multipleUpdateTextArea').domNode, {
       display : 'none'
     });
+  }
+}
+
+function setLstDocumentRight(lst,val){
+  var valueLst=dojo.byId(lst).value;
+  if (valueLst.indexOf(val)!=-1)return;
+  if(valueLst==''){
+    dojo.byId(lst).value=val;
+  }else{
+    dojo.byId(lst).value=valueLst+','+val;
   }
 }

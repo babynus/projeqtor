@@ -379,6 +379,7 @@ class Parameter extends SqlElement {
         break;
       case 'pdfInNewWindow': case "paramConfirmQuit": case "paramShowThumb" : case "paramShowThumbList":
       case 'dependencyStrictMode':
+      case 'notStratBeaforValidatedStartDate':
       case 'technicalProgress':
       case 'activityOnRealTime':
       case 'useOrganizationBudgetElement' :
@@ -976,6 +977,7 @@ class Parameter extends SqlElement {
                         'tabPlanPlanning'=>"tab",
                           'columnPlanPlanningLeft'=>'newColumn',
                             'sectionPlanning'=>'section',
+                            'notStratBeaforValidatedStartDate'=>'list',
                               'displayResourcePlan'=>'list',
                               'maxProjectsToDisplay'=>'number',
                               'dependencyStrictMode'=>'list',

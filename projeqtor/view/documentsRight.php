@@ -51,6 +51,8 @@ scriptLog('   ->/view/parameter.php');
       iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">              
           submitForm("../tool/saveDocumentRight.php?operation=save","resultDivMain", "parameterForm", true);
+          if(dojo.byId('lstDocRight').value!='')dojo.byId('lstDocRight').value='';
+          if(dojo.byId('lstNewDocRight').value!='')dojo.byId('lstNewDocRight').value='';          
         </script>
     </button>
     <div dojoType="dijit.Tooltip" connectId="saveButton"><?php echo i18n("buttonSaveParameter")?></div>
@@ -61,8 +63,7 @@ scriptLog('   ->/view/parameter.php');
   </tr>
 </table>
 </div>
-<div id="formDiv" dojoType="dijit.layout.ContentPane" region="center"
-  style="overflow-y: auto; overflow-x: hidden;">
+<div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" >
 <form dojoType="dijit.form.Form" id="parameterForm" jsId="parameterForm"
   name="parameterForm" encType="multipart/form-data" action="" method="">
   <?php 
