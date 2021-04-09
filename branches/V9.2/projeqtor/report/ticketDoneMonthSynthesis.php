@@ -165,4 +165,32 @@ $order="idUrgency";
 //echo $where;
 $ticket=new Ticket();
 $lstTicket=$ticket->getSqlElementsFromCriteria(null,false, $where, $order);
+$ticketType=new TicketType();
+$lstTicketType = $ticketType->getSqlElementsFromCriteria(null, null, "1=1");
+$urgency=new Urgency();
+$lstUrgency = $urgency->getSqlElementsFromCriteria(null, null, "1=1");
 
+echo '<table style="width:100%;text-align:center">';
+echo '<tr>';
+echo '<td class="linkHeader" style="width:20%">' . i18n('colIdTicketType') . '</td>';
+echo '<td class="linkHeader" style="width:15%">'.i18n('colUrgency').'</td>';
+echo '<td class="linkHeader" style="width:10%">'.i18n('nbDone').'</td>';
+echo '<td class="linkHeader" style="width:15%">'.i18n('delayDone').'</td>';
+echo '<td class="linkHeader" style="width:10%">'.i18n('nbNotDone').'</td>';
+echo '<td class="linkHeader" style="width:15%">'.i18n('delayNotDone').'</td>';
+echo '<td class="linkHeader" style="width:10%">'.i18n('punctuality').'</td>';
+echo '</tr>';
+foreach ($lstUrgency as $urgency){
+	foreach ($lstTicketType as $type){
+		echo '<tr>';
+		echo '<td class="reportTableData" style="width:20%">'.$type->name.'</td>';
+		echo '<td class="reportTableData" style="width:15%">'.$urgency->name.'</td>';
+		echo '<td class="reportTableData" style="width:10%"></td>';
+		echo '<td class="reportTableData" style="width:15%"></td>';
+		echo '<td class="reportTableData" style="width:10%"></td>';
+		echo '<td class="reportTableData" style="width:15%"></td>';
+		echo '<td class="reportTableData" style="width:10%"></td>';
+		echo '</tr>';
+	}
+}
+echo '</table>';
