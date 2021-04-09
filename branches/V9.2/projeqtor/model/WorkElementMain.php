@@ -530,7 +530,7 @@ class WorkElementMain extends SqlElement {
 			  $result.=$this->drawSpecificItem('dispatch', $readOnly, $included); // Attention : must be kept call here, to preserve correct position
 			}
 			if ($this->ongoing) {
-			  $result.='<span style="font-size:80%; font-style: italic; color:#a0a0a0;padding-right:7px;">';
+			  $result.='<span class="sectionBadge" style="font-size: 80%;font-style: italic;color: white;right: 0px;top: 25px;width: 120px;height: 14px;position: absolute;">';
 				if ($this->idUser == $user->id) {
 					// $days = workDayDiffDates($this->ongoingStartDateTime, date('Y-m-d H:i'));
 					if (substr ( $this->ongoingStartDateTime, 0, 10 ) != date ( 'Y-m-d' )) {
