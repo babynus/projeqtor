@@ -24,26 +24,61 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
-require_once('_securityCheck.php'); 
-class StatusPeriod extends StatusPeriodMain {
+/* ============================================================================
+ * Stauts defines list stauts an activity or action can get in (lifecylce).
+ */ 
+require_once('_securityCheck.php');
+class StatusPeriod extends SqlElement {
 
-	/** ==========================================================================
-	 * Constructor
-	 * @param $id the id of the object in the database (null if not stored yet)
-	 * @return void
-	 */
-	function __construct($id = NULL, $withoutDependentObjects=false) {
-		parent::__construct($id,$withoutDependentObjects);
-	}
-	
-	/** ==========================================================================
-	 * Destructor
-	 * @return void
-	 */
-	function __destruct() {
-		parent::__destruct();
-	}
-	
-	
-	}
-	?>
+  public $id;    
+  public $name;
+  public $refType;
+  public $refId;
+  public $active;
+  public $type;
+  public $startDate;
+  public $endDate;
+  public $idStatusStart;
+  public $idStatusEnd;
+  public $idUserStart;
+  public $idUserEnd;
+  public $duration;
+  public $durationOpenTime;
+  
+  public $_noHistory=true;
+  
+  private static $_fieldsAttributes=array();
+   /** ==========================================================================
+   * Constructor
+   * @param $id the id of the object in the database (null if not stored yet)
+   * @return void
+   */ 
+  function __construct($id = NULL, $withoutDependentObjects=false) {
+    parent::__construct($id,$withoutDependentObjects);
+  }
+
+  
+   /** ==========================================================================
+   * Destructor
+   * @return void
+   */ 
+  function __destruct() {
+    parent::__destruct();
+  }
+
+// ============================================================================**********
+// GET STATIC DATA FUNCTIONS
+// ============================================================================**********
+  /** ==========================================================================
+   * Return the specific fieldsAttributes
+   * @return the fieldsAttributes
+   */
+  protected function getStaticFieldsAttributes() {
+    return self::$_fieldsAttributes;
+  }
+  
+  public function save() {
+      $result = parent::save();         
+      return $result;
+  }
+}?>

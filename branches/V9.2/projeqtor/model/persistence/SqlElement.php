@@ -919,42 +919,50 @@ abstract class SqlElement {
     	  $statPeriod = $statPeriodList[0];
     	}
     	if($statPeriod->id and $statPeriod->active == 0){
-    		$statPeriod->endDate=$this->handledDateTime;
+    		$statPeriod->endDate=date('Y-m-d H:i:s');
     		$statPeriod->idStatusEnd=$this->idStatus;
     		$statPeriod->idUserEnd=getSessionUser ()->id;
     		$startDate = new DateTime($statPeriod->startDate);
-    		$endDate = new DateTime($this->handledDateTime);
+    		$endDate = new DateTime(date('Y-m-d H:i:s'));
     		$duration = $startDate->diff($endDate, true);
     		$durationDisplay = "";
     	    if($duration->y){
-    	    	$durationDisplay .= $duration->format('%y').i18n('shortYear');
-    	    }else if($duration->m){
-    	    	$durationDisplay .= $duration->format('%m').i18n('shortMonth');
-    	    }else if($duration->d){
-    	    	$durationDisplay .= $duration->format('%d').i18n('shortDay');
-    	    }else if($duration->h){
-    	    	$durationDisplay .= $duration->format('%h').i18n('shortHour');
-    	    }else if($duration->i){
-    	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute');
+    	    	$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
+    	    }
+    	    if($duration->m){
+    	    	$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
+    	    }
+    	    if($duration->d){
+    	    	$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
+    	    }
+    	    if($duration->h){
+    	    	$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
+    	    }
+    	    if($duration->i){
+    	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
     	    }
     		$statPeriod->duration=$durationDisplay;
-    		$res = new Resource($this->idResource);
-    		$durationOpDay = countDayDiffDates($statPeriod->startDate, $this->handledDateTime, $res->idCalendarDefinition);
-    		if($durationOpDay > 0){
-    			$startDate = new DateTime(date("Y-m-d"));
-    			$endDate = new DateTime(date("Y-m-d", strtotime("-$durationOpDay days")));
+    		$hoursPerDay=Parameter::getGlobalParameter('dayTime');
+    	    $durationOpDay = workDayDiffDates($statPeriod->startDate, date('Y-m-d H:i:s'))*$hoursPerDay;
+    	    if($durationOpDay > 0){
+    			$startDate = new DateTime(date("Y-m-d H:i:s"));
+    			$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("-$durationOpDay days")));
     			$duration = date_diff($startDate, $endDate, true);
     			$durationDisplay = "";
     			if($duration->y){
-    				$durationDisplay .= $duration->format('%y').i18n('shortYear');
-    			}else if($duration->m){
-    				$durationDisplay .= $duration->format('%m').i18n('shortMonth');
-    			}else if($duration->d){
-    				$durationDisplay .= $duration->format('%d').i18n('shortDay');
-    			}else if($duration->h){
-    				$durationDisplay .= $duration->format('%h').i18n('shortHour');
-    			}else if($duration->i){
-    				$durationDisplay .= $duration->format('%i').i18n('shortMinute');
+    				$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
+    			}
+    			if($duration->m){
+    				$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
+    			}
+    			if($duration->d){
+    				$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
+    			}
+    			if($duration->h){
+    				$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
+    			}
+    			if($duration->i){
+    				$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
     			}
     		}
     		$statPeriod->durationOpenTime = $durationDisplay;
@@ -965,7 +973,7 @@ abstract class SqlElement {
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);
     		$newStatPeriod->active = 1;
-    		$newStatPeriod->startDate = $this->handledDateTime;
+    		$newStatPeriod->startDate = date('Y-m-d H:i:s');
     		$newStatPeriod->type = 'handled';
     		$newStatPeriod->idStatusStart = $this->idStatus;
     		$newStatPeriod->idUserStart = getSessionUser()->id;
@@ -983,50 +991,57 @@ abstract class SqlElement {
       	}else if($this->done){
       		$type = 'done';
       	}else if($this->paused){
-      		$type = 'paused';
+      		$type = 'inPaused';
       	}else if($this->handled){
       		$type = 'handled';
       	}
-      	$nameStat = $type.'DateTime';
     	if($statPeriod->id and $statPeriod->active == 1){
-    	    $statPeriod->endDate=$this->$nameStat;
+    	    $statPeriod->endDate=date('Y-m-d H:i:s');
     	    $statPeriod->idStatusEnd=$this->idStatus;
     	    $statPeriod->idUserEnd=getSessionUser ()->id;
     	    date_default_timezone_set('UTC');
     	    $now=strtotime("now");
     	    $startDate = new DateTime($statPeriod->startDate);
-    	    $endDate = new DateTime($this->$nameStat);
+    	    $endDate = new DateTime(date('Y-m-d H:i:s'));
     	    $duration = $startDate->diff($endDate, true);
     	    $durationDisplay = "";
     	    if($duration->y){
-    	    	$durationDisplay .= $duration->format('%y').i18n('shortYear');
-    	    }else if($duration->m){
-    	    	$durationDisplay .= $duration->format('%m').i18n('shortMonth');
-    	    }else if($duration->d){
-    	    	$durationDisplay .= $duration->format('%d').i18n('shortDay');
-    	    }else if($duration->h){
-    	    	$durationDisplay .= $duration->format('%h').i18n('shortHour');
-    	    }else if($duration->i){
-    	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute');
+    	    	$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
+    	    }
+    	    if($duration->m){
+    	    	$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
+    	    }
+    	    if($duration->d){
+    	    	$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
+    	    }
+    	    if($duration->h){
+    	    	$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
+    	    }
+    	    if($duration->i){
+    	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
     	    }
     	    $statPeriod->duration=$durationDisplay;
-    	    $res = new Resource($this->idResource);
-    	    $durationOpDay = countDayDiffDates($statPeriod->startDate, $this->$nameStat, $res->idCalendarDefinition);
+    	    $hoursPerDay=Parameter::getGlobalParameter('dayTime');
+    	    $durationOpDay = workDayDiffDates($statPeriod->startDate, date('Y-m-d H:i:s'))*$hoursPerDay;
     	    if($durationOpDay > 0){
-    	      $startDate = new DateTime(date("Y-m-d"));
-    	      $endDate = new DateTime(date("Y-m-d", strtotime("-$durationOpDay days")));
+    	      $startDate = new DateTime(date("Y-m-d H:i:s"));
+    	      $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("-$durationOpDay hour")));
     	      $duration = date_diff($startDate, $endDate, true);
     	      $durationDisplay = "";
     	      if($duration->y){
-    	      	$durationDisplay .= $duration->format('%y').i18n('shortYear');
-    	      }else if($duration->m){
-    	      	$durationDisplay .= $duration->format('%m').i18n('shortMonth');
-    	      }else if($duration->d){
-    	      	$durationDisplay .= $duration->format('%d').i18n('shortDay');
-    	      }else if($duration->h){
-    	      	$durationDisplay .= $duration->format('%h').i18n('shortHour');
-    	      }else if($duration->i){
-    	      	$durationDisplay .= $duration->format('%i').i18n('shortMinute');
+    	      	$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
+    	      }
+    	      if($duration->m){
+    	      	$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
+    	      }
+    	      if($duration->d){
+    	      	$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
+    	      }
+    	      if($duration->h){
+    	      	$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
+    	      }
+    	      if($duration->i){
+    	      	$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
     	      }
     	    }
     	    $statPeriod->durationOpenTime = $durationDisplay;
@@ -1037,7 +1052,7 @@ abstract class SqlElement {
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);
     		$newStatPeriod->active = 0;
-    		$newStatPeriod->startDate = $this->$nameStat;
+    		$newStatPeriod->startDate = date('Y-m-d H:i');
     		$newStatPeriod->type = $type;
     		$newStatPeriod->idStatusStart = $this->idStatus;
     		$newStatPeriod->idUserStart = getSessionUser()->id;
