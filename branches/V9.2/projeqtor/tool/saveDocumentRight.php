@@ -31,17 +31,26 @@
 require_once "../tool/projeqtor.php";
 
 $lstDocumentsRight=(RequestHandler::isCodeSet('lstDocRight'))?explode(',', RequestHandler::getValue('lstDocRight')):false;
+$lstNewDocumentsRight=(RequestHandler::isCodeSet('lstNewDocRight'))?explode(',', RequestHandler::getValue('lstNewDocRight')):false;
+
 $operation=(RequestHandler::isCodeSet('operation'))?RequestHandler::getValue('operation'):false;
-if(!$lstDocumentsRight  or !$operation)return;
-sort($lstDocumentsRight);
+if(!$lstDocumentsRight and !$lstNewDocumentsRight )return;
+if(!$operation){
+    traceHack("saveDocumentRight.php called for deleted item but user has not write access");
+    exit;
+}
+
+if(is_array($lstDocumentsRight))sort($lstDocumentsRight);
+if(is_array($lstNewDocumentsRight))sort($lstNewDocumentsRight);
 $status="NO_CHANGE";
+if($lstDocumentsRight or $lstNewDocumentsRight){
 Sql::beginTransaction();
 
-foreach ($lstDocumentsRight as $id=>$idDocRight){
-  if(RequestHandler::isCodeSet('documentRight_'.$idDocRight)){
-    $val=RequestHandler::getValue('documentRight_'.$idDocRight);
-    $DocRight=new DocumentRight($idDocRight);
-    if($operation=='save'){
+if($lstDocumentsRight){
+  foreach ($lstDocumentsRight as $id=>$idDocRight){
+    if(RequestHandler::isCodeSet('documentRight_'.$idDocRight)){
+      $val=RequestHandler::getValue('documentRight_'.$idDocRight);
+      $DocRight=new DocumentRight($idDocRight);
       $DocRight->idAccessMode=$val;
       $result=$DocRight->save();
       $isSaveOK=strpos($result, 'id="lastOperationStatus" value="OK"');
@@ -50,13 +59,39 @@ foreach ($lstDocumentsRight as $id=>$idDocRight){
         if ($isSaveOK===false) {
           $status="ERROR";
           $errors=$result;
-        } else if ($status=="NO_CHANGE") {
+          break;
+        } else {
           $status="OK";
         }
       }
-    }else{
-      traceHack("saveDocumentRight.php called for deleted item but user has not write access");
-      exit;
+    }
+  }
+}
+
+if($lstNewDocumentsRight and $status!="ERROR"){
+  foreach ($lstNewDocumentsRight as $idNewDocR=>$newDocR){
+     if(RequestHandler::isCodeSet('newDocumentRight_'.$newDocR)){
+      $val=RequestHandler::getValue('newDocumentRight_'.$newDocR);
+      $newDocRight=new DocumentRight();
+      $searchDocRight=SqlElement::getSingleSqlElementFromCriteria(get_class($newDocRight), array('idDocumentDirectory'=>$idDirectoryIdProf[0],'idProfile'=>$idDirectoryIdProf[1]));
+      if($searchDocRight->id==''){
+        $newDocRight->idAccessMode=$val;
+        $newDocRight->idDocumentDirectory=$idDirectoryIdProf[0];
+        $newDocRight->idProfile=$idDirectoryIdProf[1];
+        $result=$newDocRight->save();
+      }else{
+        $searchDocRight->idAccessMode=$val;
+        $result=$searchDocRight->save();
+        
+      }
+      $isSaveOK=strpos($result, 'id="lastOperationStatus" value="OK"');
+      if ($isSaveOK===false) {
+        $status="ERROR";
+        $errors=$result;
+        break;
+      }else {
+        $status="OK";
+      }
     }
   }
 }
@@ -81,5 +116,5 @@ if ($status=='ERROR') {
 }
 echo '<input type="hidden" id="lastOperation" name="lastOperation" value="save">';
 echo '<input type="hidden" id="lastOperationStatus" name="lastOperationStatus" value="' . $status .'">';
-
+}
 ?>

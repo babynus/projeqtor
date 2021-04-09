@@ -346,7 +346,8 @@ abstract class SqlElement {
           "Habilitation" => "cascade", 
           "Message" => "cascade", 
           "Resource" => "controlStrict", 
-          "User" => "controlStrict"), 
+          "User" => "controlStrict",
+          "DocumentRight"=>"cascade"), 
       "ProjectExpenseType" => array("ProjectExpense" => "controlStrict"), 
       "ProjectType" => array("Project" => "controlStrict"), 
       "Product" => array(
@@ -8311,6 +8312,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
 
  public static function setSectionPosition (){
   $sectionPosition=array(
+      'accessright'=>array('2'=>'left', '3'=>'left','99'=>'description'),
       'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
       'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
       'affectationresourceteamresource'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),

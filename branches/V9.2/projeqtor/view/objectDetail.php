@@ -1314,12 +1314,14 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       $rightRead=securityGetAccessRightYesNo('menu'.$classObj,'read',$obj);
     	SubTask::drawSubtasksForObject($obj,$classObj,$obj->id,$rightUpdate,$rightRead);
     } else if($col==='_DocumentRight' and $obj->getFieldAttributes($col)!='hidden' ){ //florent ticket #5139
-      $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menu'.$classObj));
-      if(securityCheckDisplayMenu($menu->id,substr($menu->name,4))){
+        $dR=new DocumentRight();
+        $classDR=get_class($dR);
+        $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menu'.$classDR));
         $rightUpdate=securityGetAccessRightYesNo($menu->name,'update',$obj);
         $rightRead=securityGetAccessRightYesNo($menu->name,'read',$obj);
-        DocumentRight::drawDocumentRight($obj,$rightRead,$rightUpdate);
-      }
+        if ( securityCheckDisplayMenu(null, $classDR) and $rightRead=="YES") {
+            DocumentRight::drawDocumentRight($obj,$rightRead,$rightUpdate,$dR,$classDR);
+        }
     }else if (substr($col, 0, 1)=='_' and strpos($section, 'sOfObject')>0 and strpos($col, '_colSpan')==false) {
       drawObjectLinkedByIdToObject($obj, substr($col, 1), false);
       // END ADD BY Marc TABARY - 2017-02-23 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT
