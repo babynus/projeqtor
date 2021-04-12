@@ -7366,6 +7366,12 @@ function drawActivityWorkUnit($listActWU,$obj,$refresh=false) {
   	echo '<td style="text-align:right;" class="assignData">'.htmlDisplayCurrency($complexValue->price*$val->quantity).'</td>';
     echo'</tr>';
   }
+  if(count($listActWU) > 0){
+    echo'<tr>';
+    echo '  <td colspan=5 style="text-align:right;" class="assignHeader">'.strtolower(i18n('sum')).'&nbsp;&nbsp;&nbsp;</td>';
+    echo '  <td style="text-align:right;" class="assignHeader">'.htmlDisplayCurrency($obj->ActivityPlanningElement->revenue).'</td>';
+    echo'</tr>';
+  }
   echo '</table></td></tr>';
   echo '</table>';
 }
