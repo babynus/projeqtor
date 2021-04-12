@@ -83,8 +83,8 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $unitWeight;
   public $idWeightMode;
   public $_separator_sectionRevenue_marginTop;
-  public $_spe_idWorkUnits;
   public $revenue;
+  public $_spe_idWorkUnits;
   public $_separator_menuReview_marginTop;
   public $_tab_5_2_smallLabel_3 = array('', '', '', '', '', 'progress','priority');
   public $progress;
@@ -636,10 +636,14 @@ class ActivityPlanningElementMain extends PlanningElement {
       if(Module::isModuleActive('moduleGestionCA') and $this->id){
         $project = new Project($this->idProject);
         if($project->ProjectPlanningElement->idRevenueMode == 2){
+          $act = new Activity();
+          $isParent = $act->countSqlElementsFromCriteria(array('idActivity'=>$this->refId));
+          if(!$isParent){
             $activityWU = new ActivityWorkUnit();
             $listActWU = $activityWU->getSqlElementsFromCriteria(array('refId'=>$this->refId,'refType'=>'Activity'));
             $obj = new Activity($this->refId);
             drawActivityWorkUnit($listActWU,$obj);
+          }
         }
       }
     }
