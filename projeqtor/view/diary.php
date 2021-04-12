@@ -291,7 +291,7 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
 	$result=array();
 	$typesList=explode(',', $selectedTypes);
   foreach ($typesList as $typeFilter) {
-    if ($typeFilter=='All') $arrObj=array(new Action(), new Ticket(), new MilestonePlanningElement(), new MeetingPlanningElement());
+    if ($typeFilter=='All') $arrObj=array(new Action(), new Ticket(), new MilestonePlanningElement(), new MeetingPlanningElement(), new Deliverable());
     else if ($typeFilter=="Meeting") $arrObj=array(new MeetingPlanningElement());
     else $arrObj=array(new $typeFilter());
     if (isset($_REQUEST['countStatus'])) {
@@ -317,7 +317,7 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
         $critWhere.=((isset($countStatus))?" AND  exists ( select 'x' from $meetTable meet where id = ass.refId AND meet.idStatus $statusWhere)":"").")";
         $critWhere.="  or exists (select 'x' from $meetTable meet where id=$mpeTable.refId and meet.idResource=".Sql::fmtId($ress);
         $critWhere.=((isset($countStatus))?" AND meet.idStatus $statusWhere":"").") )";
-      } else if (get_class($obj)=='MilestonePlanningElement') {
+      } else if (get_class($obj)=='MilestonePlanningElement' ) {
         if (!isset($countStatus)) $critWhere="1=1";
         else {
           $mlst=new Milestone();
@@ -325,11 +325,14 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
           $mlstpeTable=$obj->getDatabaseTableName();
           $critWhere="exists (select 'x' from $mlstTable mlst where id=$mlstpeTable.refId AND mlst.idStatus $statusWhere)";
         }
+      }else if (get_class($obj)=='Deliverable'){
+        if (!isset($countStatus)) $critWhere="1=1";
+        else $critWhere.=" AND idStatus $statusWhere";
       } else {
         $critWhere="idResource=".Sql::fmtId($ress);
         if (isset($countStatus)) $critWhere.=" AND idStatus $statusWhere";
       }
-      if (!$showDone and !$showIdle) {
+      if (!$showDone and !$showIdle and get_class($obj)!='Deliverable' ) {
         $critWhere.=" and done=0 ";
       }
       if (!$showIdle) {
@@ -347,11 +350,19 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
           $lstMile=SqlList::getListWithCrit('Milestone', array('idResource'=>$ress));
           $critWhere.=" and refId in ".transformListIntoInClause($lstMile);
         }
-      } else {
+      }else if(property_exists($obj, 'initialDate') and property_exists($obj, 'plannedDate') and property_exists($obj, 'realDate')){
+        $critWhere.=" and ( "." ( realDate is null and  plannedDate is null and initialDate>='$startDate' and initialDate<='$endDate'  ) "." or ( realDate is null and (plannedDate>='$startDate' and plannedDate<='$endDate') )";
+        $critWhere.=" or (  (realDate>='$startDate' and realDate<='$endDate') )"." )";
+        $critWhere.=" and idProject in ".transformListIntoInClause(getSessionUser()->getVisibleProjects(true));
+        if ( $ress!=getSessionUser()->id  and $refType=="Deliverable") {
+          $lstDeliverable=SqlList::getListWithCrit('Deliverable', array('idResource'=>$ress));
+          $critWhere.=" and refId in ".transformListIntoInClause($lstDeliverable);
+        }
+      }else {
         $critWhere.=" and 1=0";
       }
       $lst=$obj->getSqlElementsFromCriteria(null, false, $critWhere);
-
+      
       foreach ($lst as $o) {
         if (get_class($o)=='MilestonePlanningElement' or get_class($o)=='MeetingPlanningElement') {
           $refType=$o->refType;
@@ -434,6 +445,18 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
           $class=$o->refType;
           $date=$o->validatedEndDate;
           $dateField=i18n('colValidatedEndDate');
+        }elseif ( property_exists($obj, 'initialDate') and property_exists($obj, 'plannedDate') and property_exists($obj, 'realDate')){
+          $name=$o->name;
+          if($o->realDate!=''){
+            $date=$o->realDate;
+            $dateField=i18n('colRealDate');
+          }elseif ($o->realDate=='' and $o->plannedDate!=''){
+            $date=$o->plannedDate;
+            $dateField=i18n('colPlannedDate');
+          }else{
+            $date=$o->initialDate;
+            $dateField=i18n('colInitialDate');
+          }
         }
         if ($date) {
           if (!array_key_exists($date, $result)) {
