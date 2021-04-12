@@ -636,13 +636,10 @@ class ActivityPlanningElementMain extends PlanningElement {
       if(Module::isModuleActive('moduleGestionCA') and $this->id){
         $project = new Project($this->idProject);
         if($project->ProjectPlanningElement->idRevenueMode == 2){
-          $paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
-          if( $paramEnableWorkUnit == 'true'){
             $activityWU = new ActivityWorkUnit();
             $listActWU = $activityWU->getSqlElementsFromCriteria(array('refId'=>$this->refId,'refType'=>'Activity'));
             $obj = new Activity($this->refId);
             drawActivityWorkUnit($listActWU,$obj);
-          }
         }
       }
     }
