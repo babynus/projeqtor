@@ -3446,7 +3446,7 @@ function workTimeDiffDateTime($start, $end) {
 
 function getDailyHours($idProject, $col, $asMs){
   $time = null;
-  if(!sessionValueExists('startAm') and !sessionValueExists('endAm') and !sessionValueExists('startPm') and !sessionValueExists('endPm')){
+  if(!sessionValueExists('startAm') or !sessionValueExists('endAm') or !sessionValueExists('startPm') or !sessionValueExists('endPm')){
     $ms = ($asMs)?'00':'';
     if($idProject and Parameter::getGlobalParameter('projectDailyHours')=='true'){
     	$project = new Project($idProject, true);
@@ -3474,6 +3474,63 @@ function getDailyHours($idProject, $col, $asMs){
     if($col)$time=getSessionValue($col);
   }
   if($col)return $time;
+}
+
+function openHourDiffTime($startDate, $endDate, $idProject){
+  $startAM=getDailyHours($idProject, 'startAM', false);
+  $endAM=getDailyHours($idProject, 'endAM', false);
+  $startPM=getDailyHours($idProject, 'startPM', false);
+  $endPM=getDailyHours($idProject, 'endPM', false);
+  
+  $dayDelay = workDayDiffDates($startDate, $endDate);
+  $delay = 0;
+  
+  $startAMDate = date('Y-m-d', strtotime($startDate)).' '.$startAM;
+  $endAMDate = date('Y-m-d', strtotime($startDate)).' '.$endAM;
+  $startPMDate = date('Y-m-d', strtotime($startDate)).' '.$startPM;
+  $endPMDate = date('Y-m-d', strtotime($startDate)).' '.$endPM;
+  $amDelay = abs(((strtotime($startAMDate)-strtotime($endAMDate))/60)/60);
+  $pmDelay = abs(((strtotime($startPMDate)-strtotime($endPMDate))/60)/60);
+  
+  if($dayDelay <= 1){
+    if($startDate >= $startAMDate and $startDate <= $endAMDate){
+      $amDelay = abs(((strtotime($startDate)-strtotime($endAMDate))/60)/60);
+    }
+    if($endDate >= $startPMDate and $endDate <= $endPMDate){
+      $pmDelay = abs(((strtotime($startPMDate)-strtotime($endDate))/60)/60);
+    }
+    $delay = $amDelay+$pmDelay;
+  }else{
+    if($startDate >= $startAMDate and $startDate <= $endAMDate){
+    	$amDelay = abs(((strtotime($startDate)-strtotime($endAMDate))/60)/60);
+    }
+    if($startDate >= $startPMDate and $startDate <= $endPMDate){
+    	$pmDelay = abs(((strtotime($startDate)-strtotime($endPMDate))/60)/60);
+    }
+    $firtDayDelay = $amDelay+$pmDelay;
+    $startAMDate = date('Y-m-d', strtotime($endDate)).' '.$startAM;
+    $endAMDate = date('Y-m-d', strtotime($endDate)).' '.$endAM;
+    $startPMDate = date('Y-m-d', strtotime($endDate)).' '.$startPM;
+    $endPMDate = date('Y-m-d', strtotime($endDate)).' '.$endPM;
+    $amDelay = abs(((strtotime($startAMDate)-strtotime($endAMDate))/60)/60);
+    $pmDelay = abs(((strtotime($startPMDate)-strtotime($endPMDate))/60)/60);
+    if($endDate >= $startAMDate and $endDate <= $endAMDate){
+    	$amDelay = abs(((strtotime($endDate)-strtotime($endAMDate))/60)/60);
+    }
+    if($endDate >= $startPMDate and $endDate <= $endPMDate){
+    	$pmDelay = abs(((strtotime($startPMDate)-strtotime($endDate))/60)/60);
+    }
+    $lastDayDelay = $amDelay+$pmDelay;
+    if(($dayDelay-2)>0){
+      $amDelay = abs(((strtotime($startAMDate)-strtotime($endAMDate))/60)/60);
+      $pmDelay = abs(((strtotime($startPMDate)-strtotime($endPMDate))/60)/60);
+      $delay = ($amDelay+$pmDelay)*($dayDelay-2);
+      $delay += $firtDayDelay+$lastDayDelay;
+    }else{
+      $delay = $firtDayDelay+$lastDayDelay;
+    }
+  }
+  return $delay;//return diff time in hour
 }
 
 function addDelayToDatetime($dateTime, $delay, $unit) {

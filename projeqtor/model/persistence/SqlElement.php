@@ -913,6 +913,7 @@ abstract class SqlElement {
       }
     }
     if(get_class($this)=='Ticket'){
+      $now=strtotime("now");
       if($this->handled and !$this->done and !$this->idle and !$this->paused){
         $statPeriod = new StatusPeriod();
         $statPeriodList = $statPeriod->getSqlElementsFromCriteria(array('refType'=>get_class($this), 'refId'=>$this->id), null, null, 'id DESC');
@@ -943,11 +944,11 @@ abstract class SqlElement {
     	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
     	    }
     		$statPeriod->duration=$durationDisplay;
-    		$hoursPerDay=Parameter::getGlobalParameter('dayTime');
-    	    $durationOpDay = workDayDiffDates($statPeriod->startDate, date('Y-m-d H:i:s'))*$hoursPerDay;
+    	    $durationOpDay = openHourDiffTime($statPeriod->startDate, date('Y-m-d H:i:s'), $this->idProject);
     	    if($durationOpDay > 0){
     			$startDate = new DateTime(date("Y-m-d H:i:s"));
-    			$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("-$durationOpDay days")));
+    			$durationOpDay = ($durationOpDay*60)*60;
+    			$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationOpDay seconds",$now)));
     			$duration = date_diff($startDate, $endDate, true);
     			$durationDisplay = "";
     			if($duration->y){
@@ -974,7 +975,7 @@ abstract class SqlElement {
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);
     		$newStatPeriod->active = 1;
-    		$newStatPeriod->startDate = date('Y-m-d H:i:s');
+    		$newStatPeriod->startDate = date('Y-m-d H:i:s', strtotime('now'));
     		$newStatPeriod->type = 'handled';
     		$newStatPeriod->idStatusStart = $this->idStatus;
     		$newStatPeriod->idUserStart = getSessionUser()->id;
@@ -1001,7 +1002,6 @@ abstract class SqlElement {
     	    $statPeriod->idStatusEnd=$this->idStatus;
     	    $statPeriod->idUserEnd=getSessionUser ()->id;
     	    date_default_timezone_set('UTC');
-    	    $now=strtotime("now");
     	    $startDate = new DateTime($statPeriod->startDate);
     	    $endDate = new DateTime(date('Y-m-d H:i:s'));
     	    $duration = $startDate->diff($endDate, true);
@@ -1022,11 +1022,11 @@ abstract class SqlElement {
     	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
     	    }
     	    $statPeriod->duration=$durationDisplay;
-    	    $hoursPerDay=Parameter::getGlobalParameter('dayTime');
-    	    $durationOpDay = workDayDiffDates($statPeriod->startDate, date('Y-m-d H:i:s'))*$hoursPerDay;
+    	    $durationOpDay = openHourDiffTime($statPeriod->startDate, date('Y-m-d H:i:s'), $this->idProject);
     	    if($durationOpDay > 0){
     	      $startDate = new DateTime(date("Y-m-d H:i:s"));
-    	      $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("-$durationOpDay hour")));
+    	      $durationOpDay = ($durationOpDay*60)*60;
+    	      $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationOpDay seconds", $now)));
     	      $duration = date_diff($startDate, $endDate, true);
     	      $durationDisplay = "";
     	      if($duration->y){
@@ -1053,7 +1053,7 @@ abstract class SqlElement {
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);
     		$newStatPeriod->active = 0;
-    		$newStatPeriod->startDate = date('Y-m-d H:i:s');
+    		$newStatPeriod->startDate = date('Y-m-d H:i:s', strtotime('now'));
     		$newStatPeriod->type = $type;
     		$newStatPeriod->idStatusStart = $this->idStatus;
     		$newStatPeriod->idUserStart = getSessionUser()->id;

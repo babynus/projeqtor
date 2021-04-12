@@ -129,19 +129,10 @@ if (count($arrayFilter)>0) {
 	$idTab=0;
 	jsonBuildWhereCriteria($querySelect,$queryFrom,$where,$queryOrderBy,$idTab,$arrayFilter,$obj);
 }
-if ($periodType=='year') {
-	$startMonth=$paramMonth;
-	if ($startMonth<10) $startMonth='0'.$startMonth;
-	$start=$paramYear.'-'.$startMonth.'-01';
-	$endMonth=$paramMonth-1;
-	if ($endMonth<1) $endMonth=12;
-	if ($endMonth<10) $endMonth='0'.$endMonth;
-	$endYear=$paramYear;
-	if ($paramMonth!=1) $endYear++;
-	$end=$endYear.'-'.$endMonth.'-'.lastDayOfMonth(intval($endMonth),$endYear);
-	$start.=' 00:00:00';
-	$end.=' 23:59:59';
-	$where.=" and ( handledDateTime>= '" . $start . "' and handledDateTime<='" . $end . "' )";
+if ($paramMonth and $paramYear) {
+    $firstDay = $paramYear.'-'.$paramMonth.'-01 00:00:00';
+	$lastDay = $paramYear.'-'.$paramMonth.'-'.numberOfDaysOfMonth($firstDay).' 00:00:00';
+	$where.=" and ( doneDateTime>= '" . $firstDay . "' and doneDateTime<='" . $lastDay . "' )";
 }
 if ($paramProject!="") {
 	$where.=" and idProject in " .  getVisibleProjectsList(false, $paramProject);
@@ -181,16 +172,49 @@ echo '<td class="linkHeader" style="width:15%">'.i18n('delayNotDone').'</td>';
 echo '<td class="linkHeader" style="width:10%">'.i18n('punctuality').'</td>';
 echo '</tr>';
 foreach ($lstUrgency as $urgency){
-	foreach ($lstTicketType as $type){
-		echo '<tr>';
-		echo '<td class="reportTableData" style="width:20%">'.$type->name.'</td>';
-		echo '<td class="reportTableData" style="width:15%">'.$urgency->name.'</td>';
-		echo '<td class="reportTableData" style="width:10%"></td>';
-		echo '<td class="reportTableData" style="width:15%"></td>';
-		echo '<td class="reportTableData" style="width:10%"></td>';
-		echo '<td class="reportTableData" style="width:15%"></td>';
-		echo '<td class="reportTableData" style="width:10%"></td>';
-		echo '</tr>';
-	}
+  foreach ($lstTicketType as $type){
+    $nbTicket = 0;
+    $duration = 0;
+    $durationDisplay = "";
+    foreach ($lstTicket as $ticket){
+      $delay = SqlElement::getSingleSqlElementFromCriteria('TicketDelay', array('idTicketType'=>$ticket->idTicketType, 'idUrgency'=>$ticket->idUrgency, 'idProject'=>$ticket->idProject));
+      if(!$delay->id){
+        $delay = SqlElement::getSingleSqlElementFromCriteria('TicketDelay', array('idTicketType'=>$ticket->idTicketType, 'idUrgency'=>$ticket->idUrgency));
+      }
+      if(!$delay->id)continue;
+      if($ticket->handled)$nbTicket++;
+      $durationOpDay = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
+      $duration = ($durationOpDay*60)*60;
+    }
+    if($duration > 0){
+    	$startDate = new DateTime(date("Y-m-d H:i:s"));
+    	$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$duration seconds")));
+    	$duration = date_diff($startDate, $endDate, true);
+    	if($duration->y){
+    		$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
+    	}
+    	if($duration->m){
+    		$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
+    	}
+    	if($duration->d){
+    		$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
+    	}
+    	if($duration->h){
+    		$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
+    	}
+    	if($duration->i){
+    		$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
+    	}
+    }
+    echo '<tr>';
+    echo '<td class="reportTableData" style="width:20%">'.$type->name.'</td>';
+    echo '<td class="reportTableData" style="width:15%">'.$urgency->name.'</td>';
+    echo '<td class="reportTableData" style="width:10%">'.$nbTicket.'</td>';
+    echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
+    echo '<td class="reportTableData" style="width:10%">'.$nbTicket.'</td>';
+    echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
+    echo '<td class="reportTableData" style="width:10%"></td>';    
+    echo '</tr>';
+  }
 }
 echo '</table>';
