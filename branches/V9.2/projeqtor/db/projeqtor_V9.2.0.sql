@@ -135,16 +135,16 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 (119, 'idProject', 'projectList', 10, 'currentProject'),
 (119,'idTicketType','ticketType',15,null),
-(119, 'year', 'year', 20,'currentYear'),
-(119,'issuer','userList',30,null),
-(119, 'requestor', 'requestorList', 35, null),
-(119,'responsible','resourceList',40,null),
+(119, 'month', 'month', 20,'currentMonth'),
+(119,'issuer','userList',25,null),
+(119, 'requestor', 'requestorList', 30, null),
+(119,'responsible','resourceList',35,null),
 (120, 'idProject', 'projectList', 10, 'currentProject'),
 (120,'idTicketType','ticketType',15,null),
-(120, 'year', 'year', 20,'currentYear'),
-(120,'issuer','userList',30,null),
-(120, 'requestor', 'requestorList', 35, null),
-(120,'responsible','resourceList',40,null);
+(120, 'month', 'month', 20,'currentMonth'),
+(120,'issuer','userList',25,null),
+(120, 'requestor', 'requestorList', 30, null),
+(120,'responsible','resourceList',35,null);
 
 
 INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VALUES
