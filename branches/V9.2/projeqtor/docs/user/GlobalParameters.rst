@@ -94,7 +94,7 @@ Defines behavior of tasks in the real work allocation screen.
 
    .. compound:: Display only started tasks
    
-      Display only tasks with the :ref:`Macro status<treatment-section>` activated.
+      Display only tasks with the :ref:`Macro status<treatmentsection>` activated.
    
    .. compound:: Set to first 'in progress' status
    
@@ -103,11 +103,7 @@ Defines behavior of tasks in the real work allocation screen.
    .. compound:: Set to first 'done' status
    
       Change status of the task to the first "done" status when no left work remains.
-      
-   .. compound:: Show only notes on Activity Stream
-   
-      if so, you will not see the status change and item update.
-   
+         
    .. compound:: Max days to book work (warning) :
    
       Number of days that user can enter real work in the future before getting a warning.
@@ -165,76 +161,12 @@ Tab Activity
 
 .. topic:: Activity tab's sections
 
-   * :ref:`Planning<gp_planning-section>`
    * :ref:`Tickets<globalParam_tickets>`
    * :ref:`Organization<gp-organization-section>`
-   * :ref:`Pools of resources<gp-pool-section>`
-   * :ref:`Automation<GlobalParam_automation>`
-   * :ref:`Milestones<gp-milestones-section>`
+   * :ref:`Todo List<gp-todolist-section>`
    * :ref:`Control and restriction<gp-control-restict-section>`
    * :ref:`Leaves system<leaves-system>`
    
-.. _gp_planning-section:
-
-.. rubric:: Planning
-
-Specific parameters about Gantt planning presentation.
-
-   .. compound:: Show resource in Gantt
-   
-      Select if the resource can be displayed in a Gantt chart, and format for display (name or initials or none).
-   
-   .. compound:: Max projects to display
-   
-      Defines maximum number of projects to display.
-   
-      To avoid performance issues.
-   
-   .. compound:: Apply strict mode for dependencies
-   
-      Defines if a task can begin the same day as the preceding one.
-   
-        * If yes, the successor should begin the next day 
-        * If no, the successor can start the same day.
-        
-   .. compound:: Manual progress of fixed-duration activities 
-   
-      Choose whether the progress should be calculated or entered manually.
-      
-
-   .. compound:: Progress in unity of work. 
-   
-      Displays a technical progress in unit of work independent of the planning progress by the load.
-      
-      See: :ref:`Technical progress<technical-progress>`
-      
-.. _GP-manualplan-workas:
-           
-   .. compound:: Manual planned interventions enter work as
-      
-      Choose whether the work entered in the manual planning should be saved as real work or planned work.
-      
-      See: :ref:`Manual planning mode<mode-manualplanning>`
-      
-      See: :ref:`Planned Interventions<planned-interventions>`
-      
-
-.. _GP-effectCapacity:
-
-    
-   .. compound:: Effect of capacity on planned interventions 
-      
-      * **Limit duration**
-      
-      Limit duration a resource with capacity 0.8 can be planned only one half-day of 0.5d   
-      
-      * **Determine Duration**
-      
-      Determine duration a resource with capacity 0.8 can be planned on 2 half-days of 0.4d each
-      
-      * **none**
-      
-      A resource with capacité 0.8 can be planned on 2 half-days of 0.5d each    
 
 .. _globalParam_tickets:
 
@@ -279,6 +211,168 @@ Specific parameter for Organization management
    .. compound:: Use budget feature for organizations
    
       If yes, can display and work on budget for an organization.
+       
+
+.. _gp-todolist-section:
+
+.. rubric:: Todo List
+      
+Activate or not the management of todo lists.
+       
+.. _gp-control-restict-section:
+
+.. rubric:: Controls and restrictions
+
+Specific parameters for the control and management of restrictions
+
+   .. compound:: Allow the type restriction on project
+   
+      Allow to define additional restriction's type on each project additionally to restrictions defined at project type level. 
+   
+      If so, a Restrict Types button appears in the detail area and allows you to define the type restriction .
+
+      .. image:: /images/GUI/GLOBALPARAM_ZONE_RestrictType.png
+
+   .. compound:: Restriction on types by profil hides items
+
+      If set to yes, users with profiles won't see items of unselected types
+      
+      If set to no, users will just not have possibility to create new items with such types
+
+      .. figure:: /images/GUI/GLOBALPARAM_BOX_RestrictType.png
+         :alt: Restrict type box
+         :align: center
+         
+         Restrict type box
+
+   .. compound:: Limit the functions to those of the resource 
+   
+     On assignments limit functions to those of the resource. Ones with cost and defaut one.
+
+
+
+.. _leaves-system:
+
+.. rubric:: Leaves system
+
+Allows you to determine who will be the administrator of regulated absences.
+
+The administrator of regulated absences can define the parameters and authorizations of the screens in this module.
+
+
+
+
+.. _gp-tabPlanning:
+
+Tab Planning
+************
+
+.. topic:: Planning tab's sections
+
+   * :ref:`Planning<gp_planning-section>`
+   * :ref:`Milestones<gp-milestones-section>`
+   * :ref:`Pools of resources<gp-pool-section>`
+   * :ref:`Automation<GlobalParam_automation>`
+
+
+.. _gp_planning-section:
+
+.. rubric:: Planning
+
+Specific parameters about Gantt planning presentation.
+
+   .. compound:: Show resource in Gantt
+   
+      Select if the resource can be displayed in a Gantt chart, and format for display (name or initials or none).
+   
+   .. compound:: Max projects to display
+   
+      Defines maximum number of projects to display.
+   
+      To avoid performance issues.
+   
+   .. compound:: Apply strict mode for dependencies
+   
+      Defines if a task can begin the same day as the preceding one.
+   
+        * If yes, the successor should begin the next day 
+        * If no, the successor can start the same day.
+        
+   .. compound:: Manual progress of fixed-duration activities 
+   
+      Choose whether the progress should be calculated or entered manually.
+      
+
+   .. compound:: Progress in unity of work. 
+   
+      Displays a technical progress in unit of work independent of the planning progress by the load.
+      
+      See: :ref:`Technical progress<technical-progress>`
+      
+   .. _GP-manualplan-works:
+           
+   .. compound:: Manual planned interventions enter work as
+      
+      Choose whether the work entered in the manual planning should be saved as real work or planned work.
+      
+      See: :ref:`Manual planning mode<mode-manualplanning>`
+      
+      See: :ref:`Planned Interventions<planned-interventions>`
+      
+
+   .. _GP-effectCapacity:
+
+    
+   .. compound:: Effect of capacity on planned interventions 
+      
+      * **Limit duration**
+      
+      Limit duration a resource with capacity 0.8 can be planned only one half-day of 0.5d   
+      
+      * **Determine Duration**
+      
+      Determine duration a resource with capacity 0.8 can be planned on 2 half-days of 0.4d each
+      
+      * **none**
+      
+      A resource with capacité 0.8 can be planned on 2 half-days of 0.5d each    
+
+
+
+.. _gp-milestones-section:
+
+.. rubric:: Milestones
+
+Specific parameters for Milstones management 
+
+   .. compound:: Manage target milestone
+    
+      It updates the target (planned) date of the element (on Requirements, Tickets, Product Versions, Incomings, Deliverables and Deliveries) from the planned date of the milestone.
+   
+   .. compound:: Auto link the milestone
+    
+      It optionally allows you to display the element linked to the milestone (The option above should be on "yes" to have access to the selection of milestone targetted)
+   
+   .. compound:: Set milestone from product version
+    
+      It optionally allows you to automatically retrieve the milestone from the milestone of the Project Version.
+       
+   .. compound:: Update milestone from deliverable (Have to link elements)
+    
+      Update milestone Responsible automatically when the Responsible of deliverable has changed.
+   
+   .. compound:: Update milestone from incoming (Have to link elements)
+    
+      Update milestone Responsible automatically when the Responsible of deliverable has changed.
+   
+   .. compound:: Update deliverable from milestone (have to link elements)
+    
+      Update deliverable Responsible automatically when the Responsible of mielstone has changed.
+   
+   .. compound:: Update incoming from milestone (have to link elements)
+    
+      Update incoming Responsible automatically when the Responsible of milestone has changed.  
+
 
 
 .. _gp-pool-section:
@@ -341,88 +435,6 @@ Parameters to manage automations
       
       
 
-.. _gp-milestones-section:
-
-.. rubric:: Milestones
-
-Specific parameters for Milstones management 
-
-   .. compound:: Manage target milestone
-    
-      It updates the target (planned) date of the element (on Requirements, Tickets, Product Versions, Incomings, Deliverables and Deliveries) from the planned date of the milestone.
-   
-   .. compound:: Auto link the milestone
-    
-      It optionally allows you to display the element linked to the milestone (The option above should be on "yes" to have access to the selection of milestone targetted)
-   
-   .. compound:: Set milestone from product version
-    
-      It optionally allows you to automatically retrieve the milestone from the milestone of the Project Version.
-       
-   .. compound:: Update milestone from deliverable (Have to link elements)
-    
-      Update milestone Responsible automatically when the Responsible of deliverable has changed.
-   
-   .. compound:: Update milestone from incoming (Have to link elements)
-    
-      Update milestone Responsible automatically when the Responsible of deliverable has changed.
-   
-   .. compound:: Update deliverable from milestone (have to link elements)
-    
-      Update deliverable Responsible automatically when the Responsible of mielstone has changed.
-   
-   .. compound:: Update incoming from milestone (have to link elements)
-    
-      Update incoming Responsible automatically when the Responsible of milestone has changed.  
-       
-       
-       
-.. _gp-control-restict-section:
-
-.. rubric:: Controls and restrictions
-
-Specific parameters for the control and management of restrictions
-
-   .. compound:: Allow the type restriction on project
-   
-      Allow to define additional restriction's type on each project additionally to restrictions defined at project type level. 
-   
-      If so, a Restrict Types button appears in the detail area and allows you to define the type restriction .
-
-      .. image:: /images/GUI/GLOBALPARAM_ZONE_RestrictType.png
-
-   .. compound:: Restriction on types by profil hides items
-
-      If set to yes, users with profiles won't see items of unselected types
-      
-      If set to no, users will just not have possibility to create new items with such types
-
-      .. figure:: /images/GUI/GLOBALPARAM_BOX_RestrictType.png
-         :alt: Restrict type box
-         :align: center
-         
-         Restrict type box
-
-   .. compound:: Limit the functions to those of the resource 
-   
-     On assignments limit functions to those of the resource. Ones with cost and defaut one.
-
-
-
-.. _leaves-system:
-
-.. rubric:: Leaves system
-
-Allows you to determine who will be the administrator of regulated absences.
-
-The administrator of regulated absences can define the parameters and authorizations of the screens in this module.
-
-
-
-
-
-
-
 
 .. _display:
     
@@ -445,13 +457,17 @@ Graphic interface behavior and generic display parameters.
    
       Change the window's name. The name appears at the top center of the window.
    
-   .. compound:: Display in fading mode
-   
-      Transition between screen changes in flash or fade mode.
-   
    .. compound:: Max number of projects on today
    
-      Limit the display of the "today list". items are generally ordered by issue date increasing.
+      Limit the display of projects ont the "today list". 
+      
+      Items are ordered by issue date increasing.
+   
+   .. compound:: Max items to display on Today Lists
+   
+      Limit the display of the items on "today task list". 
+      
+      Items are  ordered by issue date increasing.
    
    .. compound:: Quick filtering by status
    
@@ -523,7 +539,7 @@ Default values for user
    
    .. compound:: Icone size in menu
    
-      Icon size are default : user can overwrite these values.  Available only with version v8.6.
+      The icon size is fixed here by default but the user can override these values. Available only with version v8.6.
    
    .. compound:: Display of the upper menu
    
@@ -533,10 +549,22 @@ Default values for user
    
       The top menu is invisible or not at each connection.  Available only with version v8.6.
       
+   .. compound:: Menu top View
+   
+      Determines how you want to display screens listed in your favorites bar and recent screens.
+   
+   .. compound:: Menu left View
+   
+      Determines how you want to display your main menu listings.
       
    .. tip:: Menu v9.0
    
-      To show or hide the icons of the new menu, right click on the menu.   
+      To show or hide the icons of the new menu quickly, right click on the menu.   
+   
+   .. compound:: create new item on pop-up
+   
+      Select the default behavior for creating an element via the specific :ref:`new element<newelement>` button
+   
    
    .. compound:: Display history
    
@@ -575,6 +603,10 @@ Default values for user
    .. compound:: Displaying notes in discussion mode
    
       Display of notes in discussion mode with indentation for answers 
+  
+   .. compound:: Show only notes on Activity Stream
+   
+      if so, you will not see the status change and item update.
       
    .. compound:: Not receive his own emails 
    
@@ -864,9 +896,14 @@ Parameters used in the unit of work catalog.
 
       Copy revenue into validated cost of activities.
 
+   .. compound:: Enable work command
 
+      You can create orders from the units of work that you have created for a project. If you activate this parameter, a new work command field will be accessible in the progress section revenue
 
-
+      See: :ref:`OrderedWork`
+   
+   
+   
 .. index:: Mailing Parameters
 
 .. _mail:
@@ -970,7 +1007,6 @@ Tab Authentication
    * :ref:`User and password<user_password>`
    * :ref:`LDAP Management Parameters<ldap_user>`
    * :ref:`Single Sign On SAML2<SSO_Saml2>`
-   * :ref:`Test email configuration<gp-test-email-section>`
 
 .. _user_password:
 
