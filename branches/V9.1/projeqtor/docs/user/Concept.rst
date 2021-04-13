@@ -1042,6 +1042,8 @@ A profile can be selected to a user, resource or contact in project allocation.
 
 The profile selected is used to give data access to elements of the projects.
 
+A resource can have a different profile on each project to which it is assigned
+
 .. rubric:: Workflow definition
 
 The profile is used to define who can change from one status to another one.
