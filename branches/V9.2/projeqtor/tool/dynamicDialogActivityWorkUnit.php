@@ -84,7 +84,12 @@ if($mode=='edit'){
                 class="input" required="required" style="border-left:3px solid red !important;"
                 onChange="activityWorkUnitChangeIdComplexity();"  <?php if($mode!="edit"){?>readOnly<?php }?>  <?php if($mode=="edit" and $readOnly==true){?>readOnly<?php }?> 
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('idComplexity')));?>" >
-                 <?php htmlDrawOptionForReference('idComplexity',$idComplexity, $obj, false); ?>
+                 <?php 
+                 if($mode!='edit'){
+                    htmlDrawOptionForReference('idComplexity',$idComplexity, $obj, false); 
+                  }else{
+                    htmlDrawOptionForReference('idComplexity',$idComplexity, $actWorkUnit, false);
+                  }?>
                </select> 
              </td>
            </tr>
@@ -113,7 +118,12 @@ if($mode=='edit'){
               <?php echo autoOpenFilteringSelect();?>
                 id="ActivityBilledWorkCommandWorkCommand" name="ActivityBilledWorkCommandWorkCommand"
                 class="input"  <?php if($mode!="edit"){?>readOnly<?php }?>>
-                 <?php htmlDrawOptionForReference('idWorkCommand',$idWorkCommand, $obj, false);  ?>
+                 <?php 
+                 if($mode!='edit'){
+                    htmlDrawOptionForReference('idWorkCommand',$idWorkCommand, $obj, false);
+                  }else{
+                    htmlDrawOptionForReference('idWorkCommand',$idWorkCommand, $actWorkUnit, false);
+                  }?>
                </select> 
              </td>
            </tr>

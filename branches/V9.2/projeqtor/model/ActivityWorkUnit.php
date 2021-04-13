@@ -99,8 +99,8 @@ class ActivityWorkUnit extends SqlElement {
 	        if (! $asVal->idle) {
 	          $asVal->_skipDispatch=true;
 	          $newLeftWork = ($asVal->assignedWork*$factor) - ($asVal->assignedWork) ;
-	          $asVal->assignedWork = round($asVal->assignedWork*$factor,2);
-	          $asVal->leftWork = $asVal->leftWork+$newLeftWork;
+	          $asVal->assignedWork = round($asVal->assignedWork*$factor,3);
+	          $asVal->leftWork = round($asVal->leftWork+$newLeftWork,3);
 	          if($asVal->leftWork < 0)$asVal->leftWork=0;
 	          $asVal->save();
 	        }
