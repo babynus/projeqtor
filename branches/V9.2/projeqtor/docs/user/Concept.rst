@@ -641,7 +641,7 @@ Two methods can be used to create a draft planning.
 
 This planning mode is used to define fixed duration tasks. See: :ref:`planningMode`
 
-Dependencies allow to define the execution order of tasks. See: :ref:`dependency-links`
+Dependencies allow to define the execution order of tasks. See: :ref:`Dependencies<dependencylinks>`
 
 You can define this planning mode as defaut in the Activities Types screen for some types of activities you'll use in draft plannings
 
@@ -868,7 +868,7 @@ Planning modes are grouped under two types for milestone :
 
 Several planning modes for your project elements are proposed to best manage the time spent on certain planning elements.
 
-See: :ref:`planning-mode-gantt`
+See: :ref:`planningmodeGantt`
 
 * As soon as possible
 * Work together
@@ -1041,6 +1041,8 @@ Also, the profile is used to send message, email and alert to groups.
 A profile can be selected to a user, resource or contact in project allocation.
 
 The profile selected is used to give data access to elements of the projects.
+
+A resource can have a different profile on each project to which it is assigned
 
 .. rubric:: Workflow definition
 
