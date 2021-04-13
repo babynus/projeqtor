@@ -148,7 +148,7 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (120, 'month', 'month', 20,'currentMonth'),
 (120,'issuer','userList',25,null),
 (120, 'requestor', 'requestorList', 30, null),
-(120,'responsible','resourceList',35,null);
+(120,'responsible','resourceList',35,null),
 (121, 'idProject', 'projectList', 10, 'currentProject'),
 (121, 'idOrganization', 'organizationList', 20,null),
 (121,'idTeam','teamList',30,null),
