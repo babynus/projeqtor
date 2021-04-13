@@ -945,9 +945,9 @@ abstract class SqlElement {
     	    }
     		$statPeriod->duration=$durationDisplay;
     	    $durationOpDay = openHourDiffTime($statPeriod->startDate, date('Y-m-d H:i:s'), $this->idProject);
+    	    $durationOpDay = ($durationOpDay*60)*60;
     	    if($durationOpDay > 0){
     			$startDate = new DateTime(date("Y-m-d H:i:s"));
-    			$durationOpDay = ($durationOpDay*60)*60;
     			$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationOpDay seconds",$now)));
     			$duration = date_diff($startDate, $endDate, true);
     			$durationDisplay = "";
@@ -970,11 +970,14 @@ abstract class SqlElement {
     		$statPeriod->durationOpenTime = $durationDisplay;
     		$statPeriod->save();
     	}
+    	$tz=Parameter::getGlobalParameter('paramDefaultTimezone');
+    	if ($tz) date_default_timezone_set($tz); else date_default_timezone_set('Europe/Paris');
     	if($statPeriod->active == 0){
     		$newStatPeriod = new StatusPeriod();
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);
     		$newStatPeriod->active = 1;
+    		
     		$newStatPeriod->startDate = date('Y-m-d H:i:s', strtotime('now'));
     		$newStatPeriod->type = 'handled';
     		$newStatPeriod->idStatusStart = $this->idStatus;
@@ -1001,7 +1004,6 @@ abstract class SqlElement {
     	    $statPeriod->endDate=date('Y-m-d H:i:s');
     	    $statPeriod->idStatusEnd=$this->idStatus;
     	    $statPeriod->idUserEnd=getSessionUser ()->id;
-    	    date_default_timezone_set('UTC');
     	    $startDate = new DateTime($statPeriod->startDate);
     	    $endDate = new DateTime(date('Y-m-d H:i:s'));
     	    $duration = $startDate->diff($endDate, true);
@@ -1023,9 +1025,9 @@ abstract class SqlElement {
     	    }
     	    $statPeriod->duration=$durationDisplay;
     	    $durationOpDay = openHourDiffTime($statPeriod->startDate, date('Y-m-d H:i:s'), $this->idProject);
+    	    $durationOpDay = ($durationOpDay*60)*60;
     	    if($durationOpDay > 0){
     	      $startDate = new DateTime(date("Y-m-d H:i:s"));
-    	      $durationOpDay = ($durationOpDay*60)*60;
     	      $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationOpDay seconds", $now)));
     	      $duration = date_diff($startDate, $endDate, true);
     	      $durationDisplay = "";
@@ -1048,6 +1050,8 @@ abstract class SqlElement {
     	    $statPeriod->durationOpenTime = $durationDisplay;
     	    $statPeriod->save();
         }
+        $tz=Parameter::getGlobalParameter('paramDefaultTimezone');
+        if ($tz) date_default_timezone_set($tz); else date_default_timezone_set('Europe/Paris');
         if($statPeriod->active == 1){
     		$newStatPeriod = new StatusPeriod();
     		$newStatPeriod->refId = $this->id;
