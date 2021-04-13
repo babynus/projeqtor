@@ -154,11 +154,13 @@ class SubTask extends SqlElement {
         }
         
         echo    '<td class="todoListTab" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
-        echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" dojoType="dijit.form.Textarea" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" value="'. htmlEncode($subTask->name).'" ';
+        echo      '<textarea title="'.i18n('colName').'" id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" 
+                    dojoType="dijit.form.Textarea" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'max-height:150px !important;" 
+                    value="'. htmlEncode($subTask->name).'" ';
         if ($rightUpdate=='NO' and $rightRead=='YES'){
           echo ' readonly="true">';
         }else {
-          echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  >';
+          echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  ></textarea>';
         }
         echo    '</td>';
         echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';">';
@@ -194,7 +196,10 @@ class SubTask extends SqlElement {
       echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_0" value="'.$lastSort.'" type="hidden" />';
        echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
       echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
-      echo      '<div title="'.i18n('colName').'"  type="text"  id="'.$refType.'_'.$refId.'_nameNewSubTask_0" dojoType="dijit.form.TextBox" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'" onChange="updateSubTask(0,\''.$refType.'\','.$refId.');" value="">';
+      echo      '<textarea title="'.i18n('colName').'" id="'.$refType.'_'.$refId.'_nameNewSubTask_0" name="'.$refType.'_'.$refId.'_nameNewSubTask_0" 
+                  dojoType="dijit.form.Textarea" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'max-height:150px !important;" 
+                  maxlength="4000"  onChange="updateSubTask(0,\''.$refType.'\','.$refId.');" value="">';
+      echo      '</textarea>';
       echo    '</td>';
       echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
       echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_priorityNewSubTask_0" style="width:auto;"  class="input" readonly="true" >';

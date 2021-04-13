@@ -146,7 +146,6 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (120, 'requestor', 'requestorList', 30, null),
 (120,'responsible','resourceList',35,null);
 
-
 INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VALUES
 (2,119,0,1),
 (2,120,0,1);
@@ -164,3 +163,5 @@ INSERT INTO `${prefix}macroticketstatus` (`id`,`name`) VALUES
 
 -- Fix issue for 
 DELETE FROM `${prefix}accessright` where idMenu=222;
+
+ALTER TABLE `${prefix}subtask` CHANGE `name` `name` varchar(4000) DEFAULT NULL;
