@@ -354,9 +354,9 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
         $critWhere.=" and ( "." ( realDate is null and  plannedDate is null and initialDate>='$startDate' and initialDate<='$endDate'  ) "." or ( realDate is null and (plannedDate>='$startDate' and plannedDate<='$endDate') )";
         $critWhere.=" or (  (realDate>='$startDate' and realDate<='$endDate') )"." )";
         $critWhere.=" and idProject in ".transformListIntoInClause(getSessionUser()->getVisibleProjects(true));
-        if ( $ress!=getSessionUser()->id  and $refType=="Deliverable") {
+        if ( $ress!=getSessionUser()->id  and get_class($obj)=="Deliverable") {
           $lstDeliverable=SqlList::getListWithCrit('Deliverable', array('idResource'=>$ress));
-          $critWhere.=" and refId in ".transformListIntoInClause($lstDeliverable);
+          $critWhere.=" and id in ".transformListIntoInClause($lstDeliverable);
         }
       }else {
         $critWhere.=" and 1=0";
