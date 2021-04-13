@@ -164,7 +164,7 @@ $obj = new Bill($idBill);
              <td>
                <div dojoType="dijit.form.NumberTextBox" 
                   id="billedWorkCommandQuantityBilled" name="billedWorkCommandQuantityBilled"
-                  style="width:100px;border-left:3px solid red !important;" required="required"  constraints="{min:1}"
+                  style="width:100px;border-left:3px solid red !important;" required="required"  constraints="{min:0.01}"
                   onChange="billedWorkCommandChangeQuantity('<?php echo $mode;?>','<?php echo $id;?>');"  <?php if($mode!='edit'){?>readOnly<?php }?>
                   class="input"  value="<?php echo $quantity;?>">
                   <?php echo $keyDownEventScript;?>  

@@ -126,11 +126,15 @@ UPDATE `${prefix}type` set lockPaused=lockDone where scope='Ticket';
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasExcel`) VALUES
 (119, 'reportTicketHandledMonthSynthesis',3, 'ticketHandledMonthSynthesis.php', 396,'1'),
-(120, 'reportTicketDoneMonthSynthesis',3, 'ticketDoneMonthSynthesis.php', 397,'1');
+(120, 'reportTicketDoneMonthSynthesis',3, 'ticketDoneMonthSynthesis.php', 397,'1'),
+(121, 'reportYearlyResourcePlan',2, 'yearlyResourcePlan.php', 245,'0'),
+(122, 'reportYearlyPlanResource',2, 'yearlyPlanResource.php', 251,'0');
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
 (1, 119, 1),
-(1, 120, 1);
+(1, 120, 1),
+(1, 121, 1),
+(1, 122, 1);
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 (119, 'idProject', 'projectList', 10, 'currentProject'),
@@ -145,6 +149,14 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (120,'issuer','userList',25,null),
 (120, 'requestor', 'requestorList', 30, null),
 (120,'responsible','resourceList',35,null);
+(121, 'idProject', 'projectList', 10, 'currentProject'),
+(121, 'idOrganization', 'organizationList', 20,null),
+(121,'idTeam','teamList',30,null),
+(121, 'year', 'year', 40,'currentYear'),
+(122, 'idProject', 'projectList', 10, 'currentProject'),
+(122, 'idOrganization', 'organizationList', 20,null),
+(122,'idTeam','teamList',30,null),
+(122, 'year', 'year', 40,'currentYear');
 
 INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VALUES
 (2,119,0,1),
@@ -165,3 +177,14 @@ INSERT INTO `${prefix}macroticketstatus` (`id`,`name`) VALUES
 DELETE FROM `${prefix}accessright` where idMenu=222;
 
 ALTER TABLE `${prefix}subtask` CHANGE `name` `name` varchar(4000) DEFAULT NULL;
+
+ALTER TABLE ${prefix}workcommanddone MODIFY doneQuantity decimal(8,3) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommandbilled MODIFY billedQuantity decimal(8,3) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand MODIFY commandQuantity decimal(8,3) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand MODIFY doneQuantity decimal(8,3) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand MODIFY billedQuantity decimal(8,3) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand MODIFY unitAmount decimal(14,2) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand MODIFY commandAmount decimal(14,2) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand MODIFY doneAmount decimal(14,2) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand MODIFY billedAmount decimal(14,2) unsigned DEFAULT NULL;
+
