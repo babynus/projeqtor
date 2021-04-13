@@ -142,7 +142,7 @@ foreach ($res_att as $att) {
         
         echo '<TR>';
             echo '  <TD class="attachmentData smallButtonsGroup" style="width:15px">';
-            if ($att->fileName and $att->subDirectory) {
+            if ($att->fileName and $att->subDirectory and $outMode!='pdf') {
               if ($exists) {
                 echo'<a href="../tool/download.php?class=Attachment&id=' . htmlEncode($att->id) . '" target="printFrame" title="' . i18n('helpDownload') . '">'
                 . formatSmallButton('Download');
