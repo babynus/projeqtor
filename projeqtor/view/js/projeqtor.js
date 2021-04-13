@@ -8214,7 +8214,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   
   var  priority=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_0'),
             resource=dijit.byId(refType+'_'+refId+'_resourceNewSubTask_0'),
-            cloneName=newSubTask.querySelector('#widget_'+refType+'_'+refId+'_nameNewSubTask_0'),
+            cloneName=newSubTask.querySelector('#'+refType+'_'+refId+'_nameNewSubTask_0'),
               clonePrio=newSubTask.querySelector('#widget_'+refType+'_'+refId+'_priorityNewSubTask_0'),
                 cloneResource=newSubTask.querySelector('#widget_'+refType+'_'+refId+'_resourceNewSubTask_0'),
                   sort=newSubTask.querySelector('#sortOrder_'+refType+'_'+refId+'_0'),
@@ -8271,10 +8271,10 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
     searchAttr: "name"
   }, refType+'_'+refId+"_resourceNewSubTask_"+id);
   
-  var newNameText = new dijit.form.TextBox({
+  var newNameText = new dijit.form.Textarea({
     id: refType+'_'+refId+"_nameNewSubTask_"+id,
     name: refType+'_'+refId+"_nameNewSubTask_"+id,
-    style:dijit.byId(refType+'_'+refId+'_nameNewSubTask_0').style ,
+    style:"height:30px;"+dijit.byId(refType+'_'+refId+'_nameNewSubTask_0').style,
     value: dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value 
   }, refType+'_'+refId+"_nameNewSubTask_"+id);
   
