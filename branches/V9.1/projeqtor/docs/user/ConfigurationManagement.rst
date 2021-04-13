@@ -41,7 +41,7 @@ Allows to link components to product.
    
    
      
-.. rubric:: Section Description
+.. rubric:: Description
 
 .. sidebar:: Other sections
    
@@ -79,13 +79,21 @@ Allows to link components to product.
    * - Description :
      - Box checked indicates the product is archived.
 
+
+
+.. rubric:: Treatment
+
 You can create many links between products, product versions and component
 
  .. compound:: Project linked to this product
 
    Possibility of attaching the products of the list to projects.
+   
+   When you link a project to a product, all versions of this product are going to be linked.
+   
+   The start and end date corresponds to the duration of this link.
 
- .. compound:: Composition Section
+ .. compound:: Composition
  
    List of sub-products and list of components used by this product
 
@@ -138,7 +146,7 @@ Else, the version name will entered manually.
 
 By profile, possibility to have a different list of the version of the original product according to the status.
 
-.. rubric:: Section Description
+.. rubric:: Description
 
 
 .. figure:: /images/GUI/CONF_ZONE_DescriptionVersionProduct.png
@@ -234,7 +242,7 @@ Possibility to define component types and component versions that will only be u
    Component details
    
    
-.. rubric:: Section Description
+.. rubric:: Description
 
 .. sidebar:: **Other sections**
    
@@ -267,7 +275,7 @@ Possibility to define component types and component versions that will only be u
    * - Description
      - Complete description of the component
 
-.. rubric:: Section Component versions
+.. rubric:: Component versions
 
 List of versions defined for the component.
 
@@ -304,7 +312,7 @@ Set global parameters to activate this feature.
 Else, the version name will entered manually.
 
 
-.. rubric:: Section Description
+.. rubric:: Description
 
 .. sidebar:: Other sections
 
@@ -454,9 +462,9 @@ This section allows to manage links between projects and versions of products.
    * - Version
      - Product version linked to the project or list of product versions.
    * - Start date
-     - Start date for validity of the link.
+     - Version start date (Planned start date).
    * - End date
-     - End date for validity of the link.
+     - Version end date (release date on the version).
    * - Status 
      - State to be registerd
    * - Closed
