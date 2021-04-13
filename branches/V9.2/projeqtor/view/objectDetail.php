@@ -7335,8 +7335,12 @@ function drawActivityWorkUnit($listActWU,$obj,$refresh=false) {
   if($paramEnableWorkUnit=='true'){
     echo '<td class="assignHeader" style="width:12%">'.i18n('colWorkCommand').'</td>';
   }
+  echo '<td class="assignHeader" style="width:12%">'.i18n('charge').'</td>';
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colDuration').'</td>';
   echo '<td class="assignHeader" style="width:12%">'.i18n('colPrice').'</td>';
   echo'</tr>';
+  $totalCharge = 0;
+  $totalDuration = 0;
   foreach ($listActWU as $val){
     echo '<tr style="height:100%">';
     echo '  <td class="assignData" style="width:5%;white-space:nowrap">';
@@ -7363,12 +7367,22 @@ function drawActivityWorkUnit($listActWU,$obj,$refresh=false) {
   	}
   	$complex = new Complexity($val->idComplexity);
   	$complexValue = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idComplexity'=>$val->idComplexity,'idWorkUnit'=>$val->idWorkUnit,'idCatalogUO'=>$complex->idCatalogUO));
+  	echo '<td style="text-align:right;" class="assignData">'.Work::displayWorkWithUnit($complexValue->charge*$val->quantity).'</td>';
+  	echo '<td style="text-align:right;" class="assignData">'.Work::displayWorkWithUnit($complexValue->duration*$val->quantity).'</td>';
   	echo '<td style="text-align:right;" class="assignData">'.htmlDisplayCurrency($complexValue->price*$val->quantity).'</td>';
     echo'</tr>';
+    $totalCharge += $complexValue->charge*$val->quantity;
+    $totalDuration += $complexValue->duration*$val->quantity;
+  }
+  $colspan = 4;
+  if($paramEnableWorkUnit=='true'){
+    $colspan = 5;
   }
   if(count($listActWU) > 0){
     echo'<tr>';
-    echo '  <td colspan=5 style="text-align:right;" class="assignHeader">'.strtolower(i18n('sum')).'&nbsp;&nbsp;&nbsp;</td>';
+    echo '  <td colspan='.$colspan.' style="text-align:right;" class="assignHeader">'.strtolower(i18n('sum')).'&nbsp;&nbsp;&nbsp;</td>';
+    echo '  <td style="text-align:right;" class="assignHeader">'.Work::displayWorkWithUnit($totalCharge).'</td>';
+    echo '  <td style="text-align:right;" class="assignHeader">'.Work::displayWorkWithUnit($totalDuration).'</td>';
     echo '  <td style="text-align:right;" class="assignHeader">'.htmlDisplayCurrency($obj->ActivityPlanningElement->revenue).'</td>';
     echo'</tr>';
   }

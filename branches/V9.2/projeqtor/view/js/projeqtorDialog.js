@@ -6339,7 +6339,7 @@ function activityWorkUnitChangeIdComplexity(){
     var idWorkUnit=dijit.byId("ActivityWorkCommandWorkUnit").get("value");
     dijit.byId("ActivityBilledWorkCommandWorkCommand").set("value","");
     if(idComplexity != " " && idComplexity !=""){
-     refreshListSpecific("idWorkCommand", "ActivityBilledWorkCommandWorkCommand", "idWorkCommand",idWorkUnit+"separator"+idComplexity);
+     refreshListSpecific("idWorkCommand", "ActivityBilledWorkCommandWorkCommand", "idWorkCommand",idWorkUnit+"separator"+idComplexity+"separator"+dojo.byId("id").value);
      dijit.byId("ActivityBilledWorkCommandWorkCommand").set("readOnly",false);
     }else{
       dijit.byId("ActivityBilledWorkCommandWorkCommand").set("readOnly",true);
@@ -6363,7 +6363,7 @@ function activityWorkUnitChangeQuantity(){
 
 
 function workCommandChangeIdWorkUnit(){
-  if(dijit.byId('workCommandWorkUnit').get('value')==''){
+  if(dijit.byId('workCommandWorkUnit').get('value')=='' || dijit.byId('workCommandWorkUnit').get('value')==' '){
     dijit.byId('workCommandComplexity').set('value','');
     dijit.byId("workCommandComplexity").set('readOnly', true);
   }else{

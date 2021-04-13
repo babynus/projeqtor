@@ -386,24 +386,29 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
           ksort($table);
         }
       }else{
-              $workCommand=new WorkCommand();
-              $com = new Command();
-              $lstCom = $com->getSqlElementsFromCriteria(array('idProject'=>$obj->idProject));
-              $tabLstCom = array();
-              foreach ($lstCom as $valComId=>$valCom){
-                $tabLstCom[]=$valCom->id;
-              }
-              $in = transformValueListIntoInClause($tabLstCom);
-              $where=" idCommand in " .$in ;
-              $list=$workCommand->getSqlElementsFromCriteria(null,null,$where);
-              foreach ($list as $wu) {
-                if (! array_key_exists($wu->id, $table)) {
-                  $id=$wu->id;
-                  $command = new Command($wu->idCommand);
-                  $table[$id]=$command->reference.' - '. $wu->name;
-                }
-              }
-              asort($table);
+          $workCommand=new WorkCommand();
+          $com = new Command();
+          $lstCom = $com->getSqlElementsFromCriteria(array('idProject'=>$obj->idProject));
+          if(get_class($obj) == 'Bill'){
+            if($obj->idClient){
+              $lstCom = $com->getSqlElementsFromCriteria(array('idProject'=>$obj->idProject,'idClient'=>$obj->idClient));
+            }
+          }
+          $tabLstCom = array();
+          foreach ($lstCom as $valComId=>$valCom){
+            $tabLstCom[]=$valCom->id;
+          }
+          $in = transformValueListIntoInClause($tabLstCom);
+          $where=" idCommand in " .$in ;
+          $list=$workCommand->getSqlElementsFromCriteria(null,null,$where);
+          foreach ($list as $wu) {
+            if (! array_key_exists($wu->id, $table)) {
+              $id=$wu->id;
+              $command = new Command($wu->idCommand);
+              $table[$id]=$command->reference.' - '. $wu->name;
+            }
+          }
+          asort($table);
       }
   }else {
     // None of the previous cases : no criteria and not of the expected above cases

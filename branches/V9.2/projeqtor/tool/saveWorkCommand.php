@@ -51,6 +51,7 @@ if ($mode=='edit') {
   $workCommand->idWorkUnit = $workCommandWorkUnit;
   $workCommand->idComplexity = $workCommandComplexity;
   $workCommand->commandQuantity = $workCommandQuantity;
+  $workCommand->commandAmount = $workCommandQuantity * $workCommand->unitAmount;
   $res=$workCommand->save();
 }else{
   $workCommand = new WorkCommand();

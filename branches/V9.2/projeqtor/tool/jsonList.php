@@ -914,7 +914,7 @@ if ($type == 'empty') {
 }else if($type=="idWorkUnit"){
   $idWorkUnit = RequestHandler::getId('idWorkUnit');
   $complexityVal = new ComplexityValues();
-  $where = " (idWorkUnit = ".$idWorkUnit.") and  (price IS NOT NULL or charge IS NOT NULL) ";
+  $where = " (idWorkUnit = ".$idWorkUnit.") and  (price IS NOT NULL and charge IS NOT NULL) ";
   $listComplexityValues = $complexityVal->getSqlElementsFromCriteria(null,false,$where);
   $tabComplexityValues = array();
   foreach ($listComplexityValues as $val){
@@ -931,14 +931,28 @@ if ($type == 'empty') {
     $values = explode("separator", $idWorkCommand);
     $idWorkUnit = $values[0];
     $idComplexity = $values[1];
+    $idActivity = $values[2];
     $workUnit = new WorkUnit($idWorkUnit);
     $complexity = new Complexity($idComplexity);
     if($workUnit and $complexity){
       $idProject = $workUnit->idProject;
       $catalog = new CatalogUO();
       $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject),'id');
-      $in=transformValueListIntoInClause($listCommand);
       $workCommand = new WorkCommand();
+      if($idActivity){
+        $act = new Activity($idActivity);
+        if(property_exists($act, 'idClient')){
+          if($act->idClient){
+            $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject,'idClient'=>$act->idClient),'id');
+          }
+        }else{
+          if($act->idContact){
+            $contact = new Contact($act->idContact);
+            $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject,'idClient'=>$contact->idClient),'id');
+          }
+        }
+      }
+      $in=transformValueListIntoInClause($listCommand);
       $where = "( idCommand in ".$in.") and ( idWorkUnit = ".$idWorkUnit." and idComplexity = ".$idComplexity." ) ";
       $listWorkCOmmand = $workCommand->getSqlElementsFromCriteria(null,false,$where);
       $tabWorkCommand = array();
