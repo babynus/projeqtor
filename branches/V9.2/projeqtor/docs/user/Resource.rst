@@ -91,7 +91,7 @@ Resource availability is defined by assigning it to a project.
    * - |RequiredField| :ref:`calendars`
      - Calendar defines the availability of the resource.
    * - |RequiredField| Profile
-     - Profile of the user.
+     - Default profile of the user.
    * - Organization
      - The organization to which the resource is attached   
    * - :ref:`Team<team>`
@@ -255,7 +255,6 @@ This section allows to define functions and cost of the resource.
        
     
 .. list-table:: **Function and cost section fields**
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
