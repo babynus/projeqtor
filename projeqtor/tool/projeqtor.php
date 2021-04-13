@@ -4676,7 +4676,7 @@ function formatSmallButton($class, $isClass=false, $activeButton=true, $dontAppl
   $result='';
   $roundedButton=" roundedButtonSmall ";
   if (isset($outMode) and $outMode=='pdf') {
-    $result.="<span class='".$roundedButton.$newGui." ' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><img style='width:".$size."px;height:".$size."px;' src='css/customIcons/grey/icon$class.png' /></span>";
+    $result.="<span class='".$roundedButton." ' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><img style='width:".$size."px;height:".$size."px;' src='css/customIcons/grey/icon$class.png' /></span>";
   } else {
     $button=($isClass)?'':'Button';
     $buttonClass=($activeButton)?'roundedButtonSmall':'';
