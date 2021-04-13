@@ -134,6 +134,8 @@ class PlannedWork extends GeneralWork {
   	if (!is_array($projectIdArray)) $projectIdArray=array($projectIdArray);
   	// Strict dependency means when B follows A (A->B), B cannot start same date as A ends, but only day after
   	$strictDependency=(Parameter::getGlobalParameter('dependencyStrictMode')=='NO')?false:true;
+  	$projectNotStartBeforeValidatedDate=(Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?true:false;
+  	$arrayStartProject=array();
   	
   	//-- Manage cache
   	SqlElement::$_cachedQuery['Resource']=array();
@@ -238,7 +240,15 @@ class PlannedWork extends GeneralWork {
     $arrayNotPlanned=array();
     $arrayWarning=array();
     $uniqueResourceAssignment=null;
+    if ($projectNotStartBeforeValidatedDate) {
+      foreach ($listPlan as $plan) {
+        if ($plan->refType=='Project') {
+          $arrayStartProject[$plan->refId]=$plan->validatedStartDate;
+        }
+      }
+    }
 //-- Treat each PlanningElement ---------------------------------------------------------------------------------------------------
+    $startDateGlobal=$startDate;
     foreach ($listPlan as $plan) {
       if (! $plan->id) {
         continue;
@@ -258,6 +268,11 @@ class PlannedWork extends GeneralWork {
 //         $fullListPlan=self::storeListPlan($fullListPlan,$plan);
 //         continue;
 //       }
+      $startDate=$startDateGlobal;
+      if ($projectNotStartBeforeValidatedDate and $plan->refType!='Project' 
+      and isset($arrayStartProject[$plan->idProject]) and trim($arrayStartProject[$plan->idProject])!='') {
+        if ($arrayStartProject[$plan->idProject]>$startDate) $startDate=$arrayStartProject[$plan->idProject];
+      } 
       $startPlan=$startDate;
       $startFraction=0;
       $endPlan=null;
@@ -636,6 +651,7 @@ class PlannedWork extends GeneralWork {
           $stockGroupAss=$groupAss;
         }
         $restartLoopAllAssignements=true;
+        
         while ($restartLoopAllAssignements) {
           if ($plan->indivisibility==1 and $profile=='GROUP') {
             $plan=$stockPlan;
