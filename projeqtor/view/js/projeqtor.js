@@ -3352,6 +3352,7 @@ function drawGantt() {
     return;
   }
   var now = formatDate(new Date());
+  var arrProjectStart={};
   // g.AddTaskItem(new JSGantt.TaskItem( 0, 'project', '', '', 'ff0000', '',
   // 0, '', '10', 1, '', 1, '' , 'test'));
   if (g && jsonData) {
@@ -3381,14 +3382,11 @@ function drawGantt() {
       // pStart : start date of task
       var pStart = now;
       var pStartFraction = 0;
-      pStart = (trim(item.initialstartdate) != "") ? item.initialstartdate
-          : pStart;
-      pStart = (trim(item.validatedstartdate) != "") ? item.validatedstartdate
-          : pStart;
-      pStart = (trim(item.plannedstartdate) != "") ? item.plannedstartdate
-          : pStart;
+      pStart = (trim(item.initialstartdate) != "") ? item.initialstartdate : pStart;
+      pStart = (trim(item.validatedstartdate) != "") ? item.validatedstartdate : pStart;
+      pStart = (trim(item.plannedstartdate) != "") ? item.plannedstartdate : pStart;
       pStart = (trim(item.realstartdate) != "") ? item.realstartdate : pStart;
-      pStart = (trim(item.plannedstartdate)!="" && trim(item.realstartdate) && item.plannedstartdate<item.realstartdate)?item.plannedstartdate:pStart;
+      pStart = (trim(item.plannedstartdate)!="" && trim(item.realstartdate) && item.plannedstartdate<item.realstartdate) ? item.plannedstartdate:pStart;
       if (trim(item.plannedstartdate) != "" && trim(item.realenddate) == "") {
         pStartFraction = item.plannedstartfraction;
       }
@@ -3397,6 +3395,16 @@ function drawGantt() {
           && item.plannedstartdate < item.realstartdate
           && item.realstartdate > now) {
         pStart = item.plannedstartdate;
+      }
+      // PBER - Display project after validated start date when planning is not calculated yet
+      if (dojo.byId('projectNotStartBeforeValidatedDate') && dojo.byId('projectNotStartBeforeValidatedDate').value==1 ) {
+        if (item.reftype=='Project') {
+          arrProjectStart[item.refid]=item.validatedstartdate;
+        } else if (! trim(item.plannedstartdate) && ! trim(item.realstartdate)){
+          if (arrProjectStart[item.idproject] && arrProjectStart[item.idproject]!=undefined) {
+            pStart=arrProjectStart[item.idproject];
+          }
+        }
       }
       // pEnd : end date of task
       var pEnd = now;

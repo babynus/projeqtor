@@ -316,6 +316,8 @@
   } else {
     // return result in json format
     $na=Parameter::getUserParameter('notApplicableValue');
+    $projectNotStartBeforeValidatedDate=(Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?true:false;
+    $arrayProjectStart=array();
     $na=trim($na,"'");
     if (!$na) $na=null;
     $arrayObj=array();
@@ -436,8 +438,19 @@
         	$line["plannedstartdate"]='';
         	$line["plannedenddate"]='';
         }
+        if ($projectNotStartBeforeValidatedDate) {
+          if ($line['reftype']=='Project') {
+            $arrayProjectStart[$line['refid']]=$line['validatedstartdate'];
+          } 
+        }
         if (! $line["plannedduration"] and $line["validatedduration"]) { // Initialize planned duration to validated
-          if (!$line["plannedstartdate"]) $line["plannedstartdate"]=($line["validatedstartdate"])?$line["validatedstartdate"]:date('Y-m-d');
+          if (!$line["plannedstartdate"]) {
+            $pStart=date('Y-m-d');
+            if (isset($arrayProjectStart[$line['idproject']]) and trim($arrayProjectStart[$line['idproject']])!='') {
+              $pStart=$arrayProjectStart[$line['idproject']];
+            }
+            $line["plannedstartdate"]=($line["validatedstartdate"])?$line["validatedstartdate"]:$pStart;
+          }
           $line["plannedduration"]=$line["validatedduration"];
           $line["plannedenddate"]=addWorkDaysToDate($line["plannedstartdate"], $line["validatedduration"]);
         }
@@ -619,6 +632,8 @@
   function displayGantt($result) {
   	global $displayResource, $outMode, $showMilestone, $portfolio,  $columnsDescription, $nbQueriedRows;
   	$csvSep=Parameter::getGlobalParameter('csvSeparator');
+  	$projectNotStartBeforeValidatedDate=(Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?true:false;
+  	$arrayProjectStart=array();
     $showWbs=false;
     if (array_key_exists('showWBS',$_REQUEST) ) {
       $showWbs=true;
@@ -709,6 +724,15 @@
               $line['progress']='50';
             }
           } 
+        }
+        if ($projectNotStartBeforeValidatedDate) {
+          if ($line['reftype']=='Project') {
+            $arrayProjectStart[$line['refid']]=$line['validatedstartdate'];
+          } else if (! $pStart) {
+            if (isset($arrayProjectStart[$line['idproject']]) and trim($arrayProjectStart[$line['idproject']])!='') {
+              $pStart=$arrayProjectStart[$line['idproject']];
+            } 
+          }
         }
         $line['pstart']=$pStart;
         $line['pend']=$pEnd;

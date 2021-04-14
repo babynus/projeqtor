@@ -61,6 +61,7 @@
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Planning" />
 <input type="hidden" name="planning" id="planning" value="true" />
+<input type="hidden" id="projectNotStartBeforeValidatedDate" value="<?php echo (Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?1:0;?>" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" onclick="hideDependencyRightClick();">
  <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">
     <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
