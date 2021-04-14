@@ -316,7 +316,7 @@
   } else {
     // return result in json format
     $na=Parameter::getUserParameter('notApplicableValue');
-    $projectNotStartBeforeValidatedDate=(Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?true:false;
+    $projectNotStartBeforeValidatedDate=(Parameter::getGlobalParameter("notStartBeforeValidatedStartDate")=='YES')?true:false;
     $arrayProjectStart=array();
     $na=trim($na,"'");
     if (!$na) $na=null;
@@ -632,7 +632,7 @@
   function displayGantt($result) {
   	global $displayResource, $outMode, $showMilestone, $portfolio,  $columnsDescription, $nbQueriedRows;
   	$csvSep=Parameter::getGlobalParameter('csvSeparator');
-  	$projectNotStartBeforeValidatedDate=(Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?true:false;
+  	$projectNotStartBeforeValidatedDate=(Parameter::getGlobalParameter("notStartBeforeValidatedStartDate")=='YES')?true:false;
   	$arrayProjectStart=array();
     $showWbs=false;
     if (array_key_exists('showWBS',$_REQUEST) ) {
