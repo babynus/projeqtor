@@ -338,11 +338,16 @@ class SubTask extends SqlElement {
         //$menName= new Menu($element->idMenu);
         $rightUpdate=securityGetAccessRightYesNo('menu'.get_class($element),'update',$element);
         $rightRead=securityGetAccessRightYesNo('menu'.get_class($element),'read',$element);
-        if (($element->idle==1) or ($rightUpdate=='NO' and $rightRead=='NO') or (!$rightUpdate and !$rightRead))continue;
-        if(!$showClosedSubTask and !$showDoneSubTask and $element->done==1){
-          $cpST=$subTask->countSqlElementsFromCriteria(array("refType"=>$obj['reftype'],"refId"=>$element->id,"idle"=>'0'));
-          if ($cpST==0)continue;
+        if (($element->idle==1) or ($element->done==1) or ($rightUpdate=='NO' and $rightRead=='NO') or (!$rightUpdate and !$rightRead))continue;
+        $where="refType= '".$obj['reftype']."' and refId = ".$element->id;
+        $crit=array();
+        if(!$showClosedSubTask and !$showDoneSubTask  ){
+          $crit=array("done"=>'0',"idle"=>'0');
+        }else if($showDoneSubTask and !$showClosedSubTask){
+          $crit=array("idle"=>'0');
         }
+        $cpST=$subTask->countSqlElementsFromCriteria(array_merge(array("refType"=>$obj['reftype'],"refId"=>$element->id),$crit));
+        if ($cpST==0 )continue;
         $goto="";
         $style="";
         $draw='';
