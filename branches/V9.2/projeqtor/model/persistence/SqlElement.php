@@ -927,47 +927,10 @@ abstract class SqlElement {
     		$startDate = new DateTime($statPeriod->startDate);
     		$endDate = new DateTime(date('Y-m-d H:i:s'));
     		$duration = $startDate->diff($endDate, true);
-    		$durationDisplay = "";
-    	    if($duration->y){
-    	    	$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
-    	    }
-    	    if($duration->m){
-    	    	$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
-    	    }
-    	    if($duration->d){
-    	    	$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
-    	    }
-    	    if($duration->h){
-    	    	$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
-    	    }
-    	    if($duration->i){
-    	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
-    	    }
-    		$statPeriod->duration=$durationDisplay;
+    		$statPeriod->duration=abs(strtotime($statPeriod->startDate)-strtotime(date('Y-m-d H:i:s')));
     	    $durationOpDay = openHourDiffTime($statPeriod->startDate, date('Y-m-d H:i:s'), $this->idProject);
-    	    $durationOpDay = ($durationOpDay*60)*60;
-    	    if($durationOpDay > 0){
-    			$startDate = new DateTime(date("Y-m-d H:i:s"));
-    			$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationOpDay seconds",$now)));
-    			$duration = date_diff($startDate, $endDate, true);
-    			$durationDisplay = "";
-    			if($duration->y){
-    				$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
-    			}
-    			if($duration->m){
-    				$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
-    			}
-    			if($duration->d){
-    				$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
-    			}
-    			if($duration->h){
-    				$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
-    			}
-    			if($duration->i){
-    				$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
-    			}
-    		}
-    		$statPeriod->durationOpenTime = $durationDisplay;
+    	    $durationOpDay = $durationOpDay*3600;
+    		$statPeriod->durationOpenTime = $durationOpDay;
     		$statPeriod->save();
     	}
     	$tz=Parameter::getGlobalParameter('paramDefaultTimezone');
@@ -1004,50 +967,10 @@ abstract class SqlElement {
     	    $statPeriod->endDate=date('Y-m-d H:i:s');
     	    $statPeriod->idStatusEnd=$this->idStatus;
     	    $statPeriod->idUserEnd=getSessionUser ()->id;
-    	    $startDate = new DateTime($statPeriod->startDate);
-    	    $endDate = new DateTime(date('Y-m-d H:i:s'));
-    	    $duration = $startDate->diff($endDate, true);
-    	    $durationDisplay = "";
-    	    if($duration->y){
-    	    	$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
-    	    }
-    	    if($duration->m){
-    	    	$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
-    	    }
-    	    if($duration->d){
-    	    	$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
-    	    }
-    	    if($duration->h){
-    	    	$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
-    	    }
-    	    if($duration->i){
-    	    	$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
-    	    }
-    	    $statPeriod->duration=$durationDisplay;
+    	    $statPeriod->duration=abs(strtotime($statPeriod->startDate)-strtotime(date('Y-m-d H:i:s')));
     	    $durationOpDay = openHourDiffTime($statPeriod->startDate, date('Y-m-d H:i:s'), $this->idProject);
-    	    $durationOpDay = ($durationOpDay*60)*60;
-    	    if($durationOpDay > 0){
-    	      $startDate = new DateTime(date("Y-m-d H:i:s"));
-    	      $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationOpDay seconds", $now)));
-    	      $duration = date_diff($startDate, $endDate, true);
-    	      $durationDisplay = "";
-    	      if($duration->y){
-    	      	$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
-    	      }
-    	      if($duration->m){
-    	      	$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
-    	      }
-    	      if($duration->d){
-    	      	$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
-    	      }
-    	      if($duration->h){
-    	      	$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
-    	      }
-    	      if($duration->i){
-    	      	$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
-    	      }
-    	    }
-    	    $statPeriod->durationOpenTime = $durationDisplay;
+    	    $durationOpDay = $durationOpDay*3600;
+    	    $statPeriod->durationOpenTime = $durationOpDay;
     	    $statPeriod->save();
         }
         $tz=Parameter::getGlobalParameter('paramDefaultTimezone');
