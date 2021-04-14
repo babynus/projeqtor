@@ -69,8 +69,52 @@
     $userName = SqlList::getNameFromId('User', $statusPeriod->idUserEnd);
     echo '<td class="linkData" style="white-space:nowrap;width:10%">';
     echo '<table><tr><td style="float:left">'.formatUserThumb($statusPeriod->idUserEnd, $userName, 'Creator').'</td><td style="width:50px">'.$userName.'</td></tr></table></td>';
-    echo '<td class="linkData" style="white-space:nowrap;width:10%">'.$statusPeriod->duration.'</td>';
-    echo '<td class="linkData" style="white-space:nowrap;width:10%">'.$statusPeriod->durationOpenTime.'</td>';
+    $duration = $statusPeriod->duration;
+    $durationDisplay = "";
+    if($duration){
+    	$startDate = new DateTime(date("Y-m-d H:i:s"));
+    	$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$duration seconds")));
+    	$duration = date_diff($startDate, $endDate, true);
+    	if($duration->y){
+    		$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
+    	}
+    	if($duration->m){
+    		$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
+    	}
+    	if($duration->d){
+    		$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
+    	}
+    	if($duration->h){
+    		$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
+    	}
+    	if($duration->i){
+    		$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
+    	}
+    }
+    echo '<td class="linkData" style="white-space:nowrap;width:10%">'.$durationDisplay.'</td>';
+    $duration = $statusPeriod->durationOpenTime;
+    $durationDisplay = "";
+    if($duration){
+    	$startDate = new DateTime(date("Y-m-d H:i:s"));
+    	$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$duration seconds")));
+    	$duration = date_diff($startDate, $endDate, true);
+    	if($duration->y){
+    		$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
+    	}
+    	if($duration->m){
+    		$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
+    	}
+    	if($duration->d){
+    		$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
+    	}
+    	if($duration->h){
+    		$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
+    	}
+    	if($duration->i){
+    		$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
+    	}
+    }
+    echo '<td class="linkData" style="white-space:nowrap;width:10%">'.$durationDisplay.'</td>';
     echo '</tr>';
   }
   echo '</table>';

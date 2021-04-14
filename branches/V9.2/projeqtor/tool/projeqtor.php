@@ -3508,6 +3508,10 @@ function openHourDiffTime($startDate, $endDate, $idProject){
     	if($startDate >= $startAMDate and $endDate <= $endAMDate){
     		$delay = abs(((strtotime($startDate)-strtotime($endDate))/60)/60);
     	}
+    }else if($startDate >= $startPMDate and $endDate >= $endPMDate){
+      $delay = abs(((strtotime($startDate)-strtotime($endPMDate))/60)/60);
+    }else if($startDate <= $startAMDate and $endDate >= $startAMDate){
+      $delay = abs(((strtotime($startAMDate)-strtotime($endDate))/60)/60);
     }
   }else{
     $amDelay = abs(((strtotime($startAMDate)-strtotime($endAMDate))/60)/60);
