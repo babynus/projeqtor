@@ -96,7 +96,7 @@ class ImputationLine {
     SqlElement::$_cachedQuery['Activity']=array();
     SqlElement::$_cachedQuery['Project']=array();
     
-    $projectNoteStartedBeforValidatedDate=(Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?:false;
+    $projectNoteStartedBeforValidatedDate=(Parameter::getGlobalParameter("notStartBeforeValidatedStartDate")=='YES')?:false;
     // Insert new lines for admin projects
     Assignment::insertAdministrativeLines($resourceId);
     
@@ -581,7 +581,7 @@ class ImputationLine {
   static function drawLines($resourceId, $rangeType, $rangeValue, $showIdle, $showPlanned=true, $print=false, $hideDone=false, $hideNotHandled=false, $displayOnlyCurrentWeekMeetings=false, $currentWeek=0, $currentYear=0, $showId=false) {
     $lowRes=0;
     $isOnRealTime=false;
-    $projectNoteStartedBeforValidatedDate=(Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?:false;
+    $projectNoteStartedBeforValidatedDate=(Parameter::getGlobalParameter("notStartBeforeValidatedStartDate")=='YES')?:false;
     if (array_key_exists('destinationWidth', $_REQUEST)) {
       $width=$_REQUEST['destinationWidth'];
       if ($width<1150) $lowRes=3; // $lowRes will contain colSpan value ;)
