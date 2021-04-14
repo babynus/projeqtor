@@ -4878,9 +4878,12 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
   }
   
   echo '<td class="linkHeader" style="width:'.(($classLink)?'65':'55').'%">'.i18n('colName').'</td>';
-  // if ($classLink and property_exists($classLink, 'idStatus')) {
-  echo '<td class="linkHeader" style="width:15%">'.i18n('colIdStatus').'</td>';
-  echo '<td class="linkHeader" style="width:10%">'.i18n('colResponsibleShort').'</td>';
+  if (! $classLink or property_exists($classLink, 'idStatus')) {
+    echo '<td class="linkHeader" style="width:15%">'.i18n('colIdStatus').'</td>';
+  }
+  if (! $classLink or property_exists($classLink, 'idResource')) {
+    echo '<td class="linkHeader" style="width:10%">'.i18n('colResponsibleShort').'</td>';
+  }
   // }
   // echo '<td class="linkHeader" style="width:15%">' . i18n('colDate') . '</td>';
   // echo '<td class="linkHeader" style="width:15%">' . i18n('colUser') . '</td>';
@@ -4970,19 +4973,24 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
         $idStatus='id'.get_class($linkObj).'Status';
         $statusClass=get_class($linkObj).'Status';
       }
-      if (property_exists($linkObj, $idStatus)) {
-        $objStatus=new $statusClass($linkObj->$idStatus);
-        echo '<td class="linkData colorNameData"  style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
-      } else {
-        echo '<td class="linkData"  style="width:15%">&nbsp;</td>';
+      if (! $classLink or property_exists($classLink, 'idStatus')) {
+        if (property_exists($linkObj, $idStatus)) {
+          $objStatus=new $statusClass($linkObj->$idStatus);
+          echo '<td class="linkData colorNameData"  style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
+        } else {
+          echo '<td class="linkData"  style="width:15%">&nbsp;</td>';
+        }
       }
       // //KROWRY
-      if (property_exists($linkObj, 'idResource')&&$linkObj->idResource!=null) {
-        $objR=get_class($linkObj);
-        $objResp=new $objR($linkObj->id);
-        echo '<td class="dependencyData"  style="width:10%">'.formatLetterThumb($objResp->idResource, 22).'</td>';
-      } else {
-        echo '<td class="dependencyData"  style="width:10%">&nbsp;</td>';
+      if (! $classLink or property_exists($classLink, 'idResource')) {
+        if (property_exists($linkObj, 'idResource')&&$linkObj->idResource!=null) {
+          $objR=get_class($linkObj);
+          $objResp=new $objR($linkObj->id);
+          //echo '<td class="dependencyData"  style="width:10%">'.formatLetterThumb($objResp->idResource, 22).'</td>';
+          echo '<td class="dependencyData"  style="width:10%;text-align:center;"><span style="display:inline-block;">'.formatUserThumb($objResp->idResource, SqlList::getNameFromId('Affectable', $objResp->idResource), 'Responsible').'</span></td>';
+        } else {
+          echo '<td class="dependencyData"  style="width:10%">&nbsp;</td>';
+        }
       }
       echo '</tr>';
     }
