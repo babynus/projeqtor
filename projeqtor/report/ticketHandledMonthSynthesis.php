@@ -153,7 +153,6 @@ if ($paramResponsible!="") {
 //END ADD qCazelles - graphTickets
 
 $order="idUrgency";
-debugLog($where);
 $ticket=new Ticket();
 $lstTicket=$ticket->getSqlElementsFromCriteria(null,false, $where, $order);
 $ticketType=new TicketType();
@@ -167,54 +166,128 @@ echo '<tr>';
 echo '<td class="reportTableHeader" style="width:20%">' . i18n('colIdTicketType') . '</td>';
 echo '<td class="reportTableHeader" style="width:15%">'.i18n('colUrgency').'</td>';
 echo '<td class="reportTableHeader" style="width:10%">'.i18n('nbHandled').'</td>';
-echo '<td class="reportTableHeader" style="width:15%">'.i18n('delayHanlded').'</td>';
-echo '<td class="reportTableHeader" style="width:10%">'.i18n('nbNotHanlded').'</td>';
-echo '<td class="reportTableHeader" style="width:15%">'.i18n('delayNotHanlded').'</td>';
-echo '<td class="reportTableHeader" style="width:10%">'.i18n('punctuality').'</td>';
+echo '<td class="reportTableHeader" style="width:15%">'.i18n('delayHandled').'</td>';
+echo '<td class="reportTableHeader" style="width:10%">'.i18n('nbNotHandled').'</td>';
+echo '<td class="reportTableHeader" style="width:15%">'.i18n('delayNotHandled').'</td>';
+echo '<td class="reportTableHeader" style="width:10%">'.i18n('punctualityRate').'</td>';
 echo '</tr>';
+$result = array();
+$nbTT = 0;
+$nbOk = 0;
+$nbKo = 0;
+foreach ($lstTicket as $ticket){
+	$delay = SqlElement::getSingleSqlElementFromCriteria('TicketDelay', array('idTicketType'=>$ticket->idTicketType, 'idUrgency'=>$ticket->idUrgency, 'idProject'=>$ticket->idProject, 'idMacroTicketStatus'=>1));
+	if(!$delay->id){
+		$delay = SqlElement::getSingleSqlElementFromCriteria('TicketDelay', array('idTicketType'=>$ticket->idTicketType, 'idUrgency'=>$ticket->idUrgency, 'idMacroTicketStatus'=>1));
+	}
+	if(!$delay->id)continue;
+	$delayUnit = new DelayUnit($delay->idDelayUnit);
+	$delayValue = 0;
+	$duration = 0;
+	switch ($delayUnit->code){
+		case 'HH' :
+			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
+			$delayValue = ($duration/60)/60;
+			break;
+		case 'OH' :
+			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
+			$delayValue = $duration;
+			$duration = $duration*3600;
+			break;
+		case 'DD' :
+			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
+			$delayValue = (($duration/60)/60)/24;
+			break;
+		case 'OD' :
+			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
+			$delayValue = $duration/24;
+			$duration = $duration*3600;
+			break;
+	}
+	$duration = round($duration);
+	$delayValue = round($delayValue, 2);
+	$nbTT++;
+	$result[$ticket->idTicketType][$ticket->idUrgency]['Nb']=$nbTT;
+	if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'])){
+	  $result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] += $duration;
+	}else{
+	  $result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] = $duration;
+	}
+	if($delayValue <= $delay->value){
+		$nbOk++;
+		if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'])){
+		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] += $duration;
+		}else{
+		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] = $duration;
+		}
+	}else{
+		$nbKo++;
+	if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'])){
+		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'] += $duration;
+		}else{
+		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'] = $duration;
+		}
+	}
+	$result[$ticket->idTicketType][$ticket->idUrgency]['OK']=$nbOk;
+	$result[$ticket->idTicketType][$ticket->idUrgency]['KO']=$nbKo;
+}
 foreach ($lstUrgency as $urgency){
   foreach ($lstTicketType as $type){
-    $nbTicket = 0;
-    $duration = 0;
-    $durationDisplay = "";
-    foreach ($lstTicket as $ticket){
-      $delay = SqlElement::getSingleSqlElementFromCriteria('TicketDelay', array('idTicketType'=>$ticket->idTicketType, 'idUrgency'=>$ticket->idUrgency, 'idProject'=>$ticket->idProject));
-      if(!$delay->id){
-        $delay = SqlElement::getSingleSqlElementFromCriteria('TicketDelay', array('idTicketType'=>$ticket->idTicketType, 'idUrgency'=>$ticket->idUrgency));
-      }
-      if(!$delay->id)continue;
-      if($ticket->handled)$nbTicket++;
-      $durationOpDay = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
-      $duration = ($durationOpDay*60)*60;
-    }
-    if($duration > 0){
-    	$startDate = new DateTime(date("Y-m-d H:i:s"));
-    	$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$duration seconds")));
-    	$duration = date_diff($startDate, $endDate, true);
-    	if($duration->y){
-    		$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
-    	}
-    	if($duration->m){
-    		$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
-    	}
-    	if($duration->d){
-    		$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
-    	}
-    	if($duration->h){
-    		$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
-    	}
-    	if($duration->i){
-    		$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
-    	}
-    }
     echo '<tr>';
     echo '<td class="reportTableData" style="width:20%">'.$type->name.'</td>';
     echo '<td class="reportTableData" style="width:15%">'.$urgency->name.'</td>';
-    echo '<td class="reportTableData" style="width:10%">'.$nbTicket.'</td>';
+    $OK = (isset($result[$type->id][$urgency->id]['OK']))?$result[$type->id][$urgency->id]['OK']:0;
+    echo '<td class="reportTableData" style="width:10%">'.$OK.'</td>';
+    $durationOK = (isset($result[$type->id][$urgency->id]['durationOK']))?$result[$type->id][$urgency->id]['durationOK']:0;
+    if($durationOK)$durationOK = $durationOK/$OK;
+    $startDate = new DateTime(date("Y-m-d H:i:s"));
+    $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationOK seconds")));
+    $durationOK = date_diff($startDate, $endDate, true);
+    $durationDisplay = '';
+    if($durationOK->y){
+    	$durationDisplay .= $durationOK->format('%y').i18n('shortYear').' ';
+    }
+    if($durationOK->m){
+    	$durationDisplay .= $durationOK->format('%m').i18n('shortMonth').' ';
+    }
+    if($durationOK->d){
+    	$durationDisplay .= $durationOK->format('%d').i18n('shortDay').' ';
+    }
+    if($durationOK->h){
+    	$durationDisplay .= $durationOK->format('%h').i18n('shortHour').' ';
+    }
+    if($durationOK->i){
+    	$durationDisplay .= $durationOK->format('%i').i18n('shortMinute').' ';
+    }
     echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
-    echo '<td class="reportTableData" style="width:10%">'.$nbTicket.'</td>';
+    $KO = (isset($result[$type->id][$urgency->id]['KO']))?$result[$type->id][$urgency->id]['KO']:0;
+    echo '<td class="reportTableData" style="width:10%">'.$KO.'</td>';
+    $durationKO = (isset($result[$type->id][$urgency->id]['durationKO']))?$result[$type->id][$urgency->id]['durationKO']:0;
+    if($durationKO)$durationKO = $durationKO/$KO;
+    $startDate = new DateTime(date("Y-m-d H:i:s"));
+    $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationKO seconds")));
+    $durationKO = date_diff($startDate, $endDate, true);
+    $durationDisplay = '';
+    if($durationKO->y){
+    	$durationDisplay .= $durationKO->format('%y').i18n('shortYear').' ';
+    }
+    if($durationKO->m){
+    	$durationDisplay .= $durationKO->format('%m').i18n('shortMonth').' ';
+    }
+    if($durationKO->d){
+    	$durationDisplay .= $durationKO->format('%d').i18n('shortDay').' ';
+    }
+    if($durationKO->h){
+    	$durationDisplay .= $durationKO->format('%h').i18n('shortHour').' ';
+    }
+    if($durationKO->i){
+    	$durationDisplay .= $durationKO->format('%i').i18n('shortMinute').' ';
+    }
     echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
-    echo '<td class="reportTableData" style="width:10%"></td>';    
+    $ponctuality = 0;
+    $NB = (isset($result[$type->id][$urgency->id]['Nb']))?$result[$type->id][$urgency->id]['Nb']:0;
+    if($OK)$ponctuality = ($OK/$NB)*100;
+    echo '<td class="reportTableData" style="width:10%">'.$ponctuality.' %</td>';
     echo '</tr>';
   }
 }
