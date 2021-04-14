@@ -134,7 +134,7 @@ class PlannedWork extends GeneralWork {
   	if (!is_array($projectIdArray)) $projectIdArray=array($projectIdArray);
   	// Strict dependency means when B follows A (A->B), B cannot start same date as A ends, but only day after
   	$strictDependency=(Parameter::getGlobalParameter('dependencyStrictMode')=='NO')?false:true;
-  	$projectNotStartBeforeValidatedDate=(Parameter::getGlobalParameter("notStratBeaforValidatedStartDate")=='YES')?true:false;
+  	$projectNotStartBeforeValidatedDate=(Parameter::getGlobalParameter("notStartBeforeValidatedStartDate")=='YES')?true:false;
   	$arrayStartProject=array();
   	
   	//-- Manage cache
