@@ -291,7 +291,7 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
 	$result=array();
 	$typesList=explode(',', $selectedTypes);
   foreach ($typesList as $typeFilter) {
-    if ($typeFilter=='All') $arrObj=array(new Action(), new Ticket(), new MilestonePlanningElement(), new MeetingPlanningElement(), new Deliverable());
+    if ($typeFilter=='All') $arrObj=array(new Action(), new Ticket(), new MilestonePlanningElement(), new MeetingPlanningElement(), new Delivery());
     else if ($typeFilter=="Meeting") $arrObj=array(new MeetingPlanningElement());
     else $arrObj=array(new $typeFilter());
     if (isset($_REQUEST['countStatus'])) {
@@ -325,14 +325,14 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
           $mlstpeTable=$obj->getDatabaseTableName();
           $critWhere="exists (select 'x' from $mlstTable mlst where id=$mlstpeTable.refId AND mlst.idStatus $statusWhere)";
         }
-      }else if (get_class($obj)=='Deliverable'){
+      }else if (get_class($obj)=='Delivery'){
         if (!isset($countStatus)) $critWhere="1=1";
         else $critWhere.=" AND idStatus $statusWhere";
       } else {
         $critWhere="idResource=".Sql::fmtId($ress);
         if (isset($countStatus)) $critWhere.=" AND idStatus $statusWhere";
       }
-      if (!$showDone and !$showIdle and get_class($obj)!='Deliverable' ) {
+      if (!$showDone and !$showIdle ) {
         $critWhere.=" and done=0 ";
       }
       if (!$showIdle) {
@@ -354,13 +354,14 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
         $critWhere.=" and ( "." ( realDate is null and  plannedDate is null and initialDate>='$startDate' and initialDate<='$endDate'  ) "." or ( realDate is null and (plannedDate>='$startDate' and plannedDate<='$endDate') )";
         $critWhere.=" or (  (realDate>='$startDate' and realDate<='$endDate') )"." )";
         $critWhere.=" and idProject in ".transformListIntoInClause(getSessionUser()->getVisibleProjects(true));
-        if ( $ress!=getSessionUser()->id  and get_class($obj)=="Deliverable") {
-          $lstDeliverable=SqlList::getListWithCrit('Deliverable', array('idResource'=>$ress));
-          $critWhere.=" and id in ".transformListIntoInClause($lstDeliverable);
+        if ( $ress!=getSessionUser()->id  and get_class($obj)=="Delivery") {
+          $lstDelivery=SqlList::getListWithCrit('Delivery', array('idResource'=>$ress));
+          $critWhere.=" and id in ".transformListIntoInClause($lstDelivery);
         }
       }else {
         $critWhere.=" and 1=0";
       }
+      
       $lst=$obj->getSqlElementsFromCriteria(null, false, $critWhere);
       
       foreach ($lst as $o) {
