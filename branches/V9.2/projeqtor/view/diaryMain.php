@@ -195,7 +195,7 @@
                                     "MilestonePlanningElement"=>'Milestone',
                                     "Meeting"=>'Meeting',
                                     "Activity"=>"Activity",
-                                    "Deliverable"=>"Deliverable");
+                                    "Delivery"=>"Delivery");
                       foreach ($arrOpt as $key=>$val)
                          echo '<option value="'.$key.'">'.htmlencode(i18n($val)).'</option>';
                       ?>
@@ -258,7 +258,7 @@
       if (Parameter::getGlobalParameter('filterByStatus')=='YES') {
         $displayStatus=Parameter::getUserParameter("displayByStatusList_Diary");
         if (!$displayStatus) $displayStatus='none';
-        $arrObj=array(new Action(), new Ticket(), new Milestone(), new Meeting(), new Activity(), new Deliverable());
+        $arrObj=array(new Action(), new Ticket(), new Milestone(), new Meeting(), new Activity(), new Delivery());
         $listStatus=array();
         foreach ($arrObj as $obj) {
           $listObjStatus=$obj->getExistingStatus();
