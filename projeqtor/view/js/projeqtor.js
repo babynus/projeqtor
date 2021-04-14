@@ -8115,9 +8115,9 @@ function switchNewGui(){
 function updateSubTask(id,refType,refId,isPrio,isRes){
   url = "../tool/saveSubTask.php?element=SubTask&refType="+refType+"&refId="+refId+"&idSubTask="+id;
   var name=(id==0)?dojo.byId(refType+'_'+refId+'_nameNewSubTask_'+id).value:dojo.byId(refType+'_'+refId+'_nameNewSubTask_'+id).value;
+  var priorityVal=(id==0)?dojo.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).value:dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).get('value');
+  var resourceVal=(id==0)?dojo.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).value:dijit.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).get('value');
   if(name.trim()!=''){
-    var priority=(id==0)?dojo.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).value:dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id).get('value');
-    var resource=(id==0)?dojo.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).value:dijit.byId(refType+'_'+refId+'_resourceNewSubTask_'+id).get('value');
     var sortOrder=(dojo.byId('sortOrder_'+refType+"_"+refId+'_'+id).value!='')? parseInt(dojo.byId('sortOrder_'+refType+"_"+refId+'_'+id).value) : 0 ;
   }
   var priority=dijit.byId(refType+'_'+refId+'_priorityNewSubTask_'+id),
@@ -8139,13 +8139,13 @@ function updateSubTask(id,refType,refId,isPrio,isRes){
   if(id==0 && name.trim()!=''){
     save=true;
     sortOrder=sortOrder+1;
-    if(dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId))resource=dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId).value;
+    if(dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId))resourceVal=dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId).value;
     url+="&operation=save";
-    url+="&name="+name+"&priority="+priority+"&resource="+resource+"&sortOrder="+sortOrder;
+    url+="&name="+name+"&priority="+priorityVal+"&resource="+resourceVal+"&sortOrder="+sortOrder;
   }else if(id!=0 && name.trim()!=''){
     update=true;
     url+="&operation=update";
-    url+="&name="+encodeURI(name)+"&priority="+priority+"&resource="+resource;
+    url+="&name="+encodeURI(name)+"&priority="+priorityVal+"&resource="+resourceVal;
   }else if(name.trim()=='' && id!=0){
     url+="&operation=delete";
     deleted=true;
@@ -8183,7 +8183,7 @@ function updateSubTask(id,refType,refId,isPrio,isRes){
           var lastOperationStatus=window.top.dojo.byId('lastOperationStatus');
           var lastSaveId=window.top.dojo.byId('lastSaveId');
           if(lastOperationStatus.value == "OK"){
-            addSubTaskRow(lastSaveId.value,refType,refId,sortOrder,resource,priority);
+            addSubTaskRow(lastSaveId.value,refType,refId,sortOrder,resourceVal,priorityVal);
           } else {
               dojo.byId("resultDivMain").style.display='block';
           }
@@ -8282,10 +8282,10 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   var newNameText = new dijit.form.Textarea({
     id: refType+'_'+refId+"_nameNewSubTask_"+id,
     name: refType+'_'+refId+"_nameNewSubTask_"+id,
-    style:"height:30px;"+dijit.byId(refType+'_'+refId+'_nameNewSubTask_0').style,
-    value: dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value 
+    style:"min-height:30px;"+dijit.byId(refType+'_'+refId+'_nameNewSubTask_0').style,
   }, refType+'_'+refId+"_nameNewSubTask_"+id);
   
+  newNameText.set('value',dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value);
   dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value='';
   dojo.setAttr(refType+'_'+refId+'_nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',\''+refType+'\','+refId+')');
   dojo.connect(newFilterResource, 'onChange', function(value){updateSubTask(id,refType,refId,'false','true');}); 
