@@ -351,7 +351,7 @@ class SubTask extends SqlElement {
         $goto="";
         $style="";
         $draw='';
-        $version=(property_exists(get_class($element), 'idTargetProductVersion') and $element->idTargetProductVersion!='')?new ProductVersion($element->idTargetProductVersion):'&nbsp;-';
+        //$version=(property_exists(get_class($element), 'idTargetProductVersion') and $element->idTargetProductVersion!='')?new ProductVersion($element->idTargetProductVersion):'';
         if ( securityCheckDisplayMenu(null, get_class($element)) and $rightRead=="YES") {
           $goto=' onClick="gotoElement(\''.$obj['reftype'].'\',\''.htmlEncode($element->id).'\');" ';
           $style='cursor: pointer;';
@@ -360,12 +360,24 @@ class SubTask extends SqlElement {
           echo '<table style="width:95%; margin-bottom:10px;">';
             echo '<tr style="height:42px;"><td colspan="4" ><div dojotype="dijit.layout.ContentPane" class="dijitContentPane">';
               echo'<table style="width:100%;"><tr>';
-                    echo '<td style="width:63%;">';
+                    echo '<td style="width:64%;">';
                       echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;"><span style="margin-left:25px;float:left;padding-top:12px;'.$style.'" class="classLinkName" '.$goto.'>'
-                          .ucfirst($obj['reftype']).'&nbsp#'.$element->id.'&nbsp-&nbsp'.$element->name.'&nbsp;'.((property_exists(get_class($element), 'idTargetProductVersion'))? '|&nbsp;'.ucfirst(i18n('colVersion')).':&nbsp;'.(($element->idTargetProductVersion!='')?$version->name:$version):"").'</span></div>';
+                      //    .ucfirst($obj['reftype']).'&nbsp#'.$element->id.'&nbsp-&nbsp'.$element->name.'&nbsp;'.((property_exists(get_class($element), 'idTargetProductVersion'))? '|&nbsp;'.ucfirst(i18n('colVersion')).':&nbsp;'.(($element->idTargetProductVersion!='')?$version->name:$version):"").'</span></div>';
+                      .ucfirst($obj['reftype']).'&nbsp#'.$element->id.'&nbsp-&nbsp'.$element->name.'</span></div>';
                     echo '</td>';
-                    echo '<td style="width:23%;">';
-                       echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;vertical-align:middle;">';
+                    if(property_exists(get_class($element), 'idTargetProductVersion')){
+                      echo '<td class="reportHeader" style="width:12%;">';
+                      echo '<div  style="width:90%;height:42px;border-radius:unset!important;vertical-align:middle;">';
+                      echo      '<select dojoType="dijit.form.FilteringSelect" id="idVersionElement_'.$obj['reftype'].'_'.$element->id.'" name="idVersionElement_'.$obj['reftype'].'_'.$element->id.'" '.(( $rightUpdate=='NO' and $rightRead=="YES")?'readonly="true"':'').'
+                                    style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Version\',\''.$obj['reftype'].'\','.$element->id.'); "  '.autoOpenFilteringSelect().'>';
+                                htmlDrawOptionForReference('idTargetProductVersion',$element->idTargetProductVersion,$element);
+                      echo      '</select>';
+                      echo '</div>';
+                      echo      '<input id="idOldVersionElement_'.$obj['reftype'].'_'.$element->id.'" value="'.$element->idTargetProductVersion.'" type="hidden" />';
+                      echo '</td>';
+                    }
+                    echo '<td class="reportHeader" style="width:'.(property_exists(get_class($element), 'idTargetProductVersion')?'12%':'24').';">';
+                       echo '<div  style="width:90%;height:42px;border-radius:unset!important;vertical-align:middle;">';
                         echo      '<select dojoType="dijit.form.FilteringSelect" id="idStatusElement_'.$obj['reftype'].'_'.$element->id.'" name="idStatusElement_'.$obj['reftype'].'_'.$element->id.'" '.(( $rightUpdate=='NO' and $rightRead=="YES")?'readonly="true"':'').'
                                   style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Status\',\''.$obj['reftype'].'\','.$element->id.'); "  '.autoOpenFilteringSelect().'>';
                           htmlDrawOptionForReference('idStatus',$element->idStatus,$element);
@@ -373,8 +385,8 @@ class SubTask extends SqlElement {
                        echo '</div>';
                        echo      '<input id="idOldStatusElement_'.$obj['reftype'].'_'.$element->id.'" value="'.$element->idStatus.'" type="hidden" />';
                     echo '</td>';
-                    echo '<td style="width:14%;">';
-                       echo '<div class="reportHeader" style="width:100%;height:42px;border-radius:unset!important;vertical-align:middle;">';
+                    echo '<td class="reportHeader" style="width:'.(property_exists(get_class($element), 'idTargetProductVersion')?'12%':'24').';">';
+                       echo '<div style="width:90%;height:42px;border-radius:unset!important;vertical-align:middle;">';
                         echo      '<select dojoType="dijit.form.FilteringSelect" id="idResourceElement_'.$obj['reftype'].'_'.$element->id.'" name="idResourceElement_'.$obj['reftype'].'_'.$element->id.'" '.(( $rightUpdate=='NO' and $rightRead=="YES")?'readonly="true"':'').'
                             style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Resposible\',\''.$obj['reftype'].'\','.$element->id.');" '.autoOpenFilteringSelect().' >';
                           htmlDrawOptionForReference('idResource',$element->idResource,$element);

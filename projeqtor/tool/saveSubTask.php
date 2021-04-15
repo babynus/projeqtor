@@ -102,7 +102,9 @@ if($element=='SubTask'){
   Sql::beginTransaction();
   if($field=='Status'){
     $obj->idStatus=$val;
-  }else{
+  }else if($field=='Version'){
+    $obj->idTargetProductVersion=$val;
+  }else {
     $obj->idResource=$val;
   }
   $result=$obj->save();
