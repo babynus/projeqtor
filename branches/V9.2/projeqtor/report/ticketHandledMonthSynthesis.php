@@ -184,6 +184,11 @@ foreach ($lstTicket as $ticket){
 	$delayUnit = new DelayUnit($delay->idDelayUnit);
 	$delayValue = 0;
 	$duration = 0;
+	$startAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startAM', false);
+	$endAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endAM', false);
+	$startPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startPM', false);
+	$endPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endPM', false);
+	$hourPerDay = abs(strtotime($startAMDate)-strtotime($endAMDate))+abs(strtotime($startPMDate)-strtotime($endPMDate));
 	switch ($delayUnit->code){
 		case 'HH' :
 			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
@@ -193,6 +198,7 @@ foreach ($lstTicket as $ticket){
 			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
 			$delayValue = $duration;
 			$duration = $duration*3600;
+			if($duration>$hourPerDay)$duration = round(($duration/$hourPerDay)*86400);
 			break;
 		case 'DD' :
 			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
@@ -202,6 +208,7 @@ foreach ($lstTicket as $ticket){
 			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
 			$delayValue = $duration/24;
 			$duration = $duration*3600;
+			if($duration>$hourPerDay)$duration = round(($duration/$hourPerDay)*86400);
 			break;
 	}
 	$duration = round($duration);
@@ -259,6 +266,7 @@ foreach ($lstUrgency as $urgency){
     if($durationOK->i){
     	$durationDisplay .= $durationOK->format('%i').i18n('shortMinute').' ';
     }
+    if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
     $KO = (isset($result[$type->id][$urgency->id]['KO']))?$result[$type->id][$urgency->id]['KO']:0;
     echo '<td class="reportTableData" style="width:10%">'.$KO.'</td>';
@@ -283,6 +291,7 @@ foreach ($lstUrgency as $urgency){
     if($durationKO->i){
     	$durationDisplay .= $durationKO->format('%i').i18n('shortMinute').' ';
     }
+    if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
     $ponctuality = 0;
     $NB = (isset($result[$type->id][$urgency->id]['Nb']))?$result[$type->id][$urgency->id]['Nb']:0;

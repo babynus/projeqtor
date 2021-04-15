@@ -408,7 +408,7 @@ class TicketMain extends SqlElement {
     		}
     		if ($delay and $delay->id and $delay->idMacroTicketStatus == 2) {
     			$unit=new DelayUnit($delay->idDelayUnit);
-    			$this->initialDueDateTime=addDelayToDatetime($this->creationDateTime,$delay->value, $unit->code);
+    			$this->initialDueDateTime=addDelayToDatetime($this->creationDateTime,$delay->value, $unit->code, $this->idProject);
     			if (! trim($this->actualDueDateTime) or ($old->actualDueDateTime==$old->initialDueDateTime 
     			                                     and $old->actualDueDateTime==$this->actualDueDateTime) ) {
     			  $this->actualDueDateTime=$this->initialDueDateTime;   

@@ -3450,11 +3450,19 @@ function getDailyHours($idProject, $col, $asMs){
     $ms = ($asMs)?'00':'';
     if($idProject and Parameter::getGlobalParameter('projectDailyHours')=='true'){
     	$project = new Project($idProject, true);
-    	$startAM=$project->startAM;
-    	$endAM=$project->endAM;
-    	$startPM=$project->startPM;
-    	$endPM=$project->endPM;
-    	if($col)$time = $project->$col;
+    	if($project->startAM and $project->endAM and $project->startPM and $project->endPM){
+    	  $startAM=$project->startAM;
+    	  $endAM=$project->endAM;
+    	  $startPM=$project->startPM;
+    	  $endPM=$project->endPM;
+    	  if($col)$time = $project->$col;
+    	}else{
+    	  $startAM=Parameter::getGlobalParameter('startAM').$ms;
+    	  $endAM=Parameter::getGlobalParameter('endAM').$ms;
+    	  $startPM=Parameter::getGlobalParameter('startPM').$ms;
+    	  $endPM=Parameter::getGlobalParameter('endPM').$ms;
+    	  if($col)$time = Parameter::getGlobalParameter($col).$ms;
+    	}
     }else{
     	$startAM=Parameter::getGlobalParameter('startAM').$ms;
     	$endAM=Parameter::getGlobalParameter('endAM').$ms;
@@ -3476,7 +3484,7 @@ function getDailyHours($idProject, $col, $asMs){
   if($col)return $time;
 }
 
-function openHourDiffTime($startDate, $endDate, $idProject){
+function openHourDiffTime($startDate, $endDate, $idProject=null){
   $startAM=getDailyHours($idProject, 'startAM', false);
   $endAM=getDailyHours($idProject, 'endAM', false);
   $startPM=getDailyHours($idProject, 'startPM', false);
@@ -3508,7 +3516,7 @@ function openHourDiffTime($startDate, $endDate, $idProject){
     	if($startDate >= $startAMDate and $endDate <= $endAMDate){
     		$delay = abs(((strtotime($startDate)-strtotime($endDate))/60)/60);
     	}
-    }else if($startDate >= $startPMDate and $endDate >= $endPMDate){
+    }else if(($startDate >= $startPMDate and $startDate <= $endPMDate) and $endDate >= $endPMDate){
       $delay = abs(((strtotime($startDate)-strtotime($endPMDate))/60)/60);
     }else if($startDate <= $startAMDate and $endDate >= $startAMDate){
       $delay = abs(((strtotime($startAMDate)-strtotime($endDate))/60)/60);
@@ -3548,7 +3556,7 @@ function openHourDiffTime($startDate, $endDate, $idProject){
   return $delay;//return diff time in hour
 }
 
-function addDelayToDatetime($dateTime, $delay, $unit) {
+function addDelayToDatetime($dateTime, $delay, $unit, $idProject=null) {
   $date=substr($dateTime, 0, 10);
   $time=substr($dateTime, 11, 5);
   if ($unit=='DD') {
@@ -3572,10 +3580,10 @@ function addDelayToDatetime($dateTime, $delay, $unit) {
     $newDate=addDaysToDate($date, $res['d']);
     return $newDate." ".padto2($res['h']).":".padto2($res['m']).':00';
   } else if ($unit=='OH') {
-    $startAM=getDailyHours(null, 'startAM', true);
-    $endAM=getDailyHours(null, 'endAM', true);
-    $startPM=getDailyHours(null, 'startPM', true);
-    $endPM=getDailyHours(null, 'endPM', true);
+    $startAM=getDailyHours($idProject, 'startAM', true);
+    $endAM=getDailyHours($idProject, 'endAM', true);
+    $startPM=getDailyHours($idProject, 'startPM', true);
+    $endPM=getDailyHours($idProject, 'endPM', true);
     if (!$startAM or !$endAM or !$startPM or !$endPM) {
       return $dateTime;
     }
