@@ -49,7 +49,9 @@ $mobile=false;
      $msgList=array();
    } else {
      $msg=new Message();
-     $msgList=$msg->getSqlElementsFromCriteria(array('showOnLogin'=>'1', 'idle'=>'0'));
+     $today=date('Y-m-d H:i:s');
+     $where="showOnLogin=1 and idle=0 and ( (startDate <= '$today' and endDate >= '$today' ) or (startDate IS NULL and endDate IS NULL ) or (startDate <= '$today' and endDate IS NULL) or (startDate  IS NULL and endDate >= '$today'))";
+     $msgList=$msg->getSqlElementsFromCriteria(null,null,$where);
      $msgTypeList=SqlList::getList('MessageType','color');
    }
    $showPassword=true;
@@ -232,31 +234,33 @@ $dbVersion=Sql::getDbVersion();
     	$cpt=0;
     	$count=count($msgList);
     	foreach ($msgList as $msg) {
-       #Florent ticket 4030
-       $startDate=$msg->startDate;
-       $endDate=$msg->endDate;
-       $today=date('Y-m-d H:i:s');
-       if( $startDate <= $today && $endDate >= $today || $startDate=='' && $endDate=='' || $startDate<= $today && $endDate=='' ){ 
-        $cpt++;?>
-      <div class="loginMessage" id="loginMessage_<?php echo $cpt;?>" style="border-bottom:<?php echo (isNewGui() and $cpt<$count)?'1px solid':'';?>;">
-      <?php if (isNewGui()){
-          $messageType=new MessageType($msg->idMessageType);
-      }?>
-      <div class="loginMessageTitle" style="color:<?php echo (isNewGui())?'white':$msgTypeList[$msg->idMessageType];?>;"><?php echo htmlEncode($msg->name);?></div>
-      <br/>
-      <?php 
-      if(isNewGui()){
-       $currentWidth=(RequestHandler::isCodeSet('currentWidth')?RequestHandler::getValue('currentWidth'):'');
-       if($currentWidth!='')$calculatedWidth=(($currentWidth*0.33)*0.95)*0.8;
-       $width=($currentWidth!='')?$calculatedWidth:400;
-       echo htmlSetClickableImages($msg->description,$width);
-      }else{
-        echo $msg->description;
-      }?>
-      <br/>
-      <br/>
-      </div>
-      <?php }}?>
+         #Florent ticket 4030
+//          $startDate=$msg->startDate;
+//          $endDate=$msg->endDate;
+       
+//         if( $startDate <= $today && $endDate >= $today || $startDate=='' && $endDate=='' || $startDate<= $today && $endDate=='' ){ 
+          $cpt++;?>
+          <div class="loginMessage" id="loginMessage_<?php echo $cpt;?>" style="border-bottom:<?php echo (isNewGui() and $cpt<$count)?'1px solid':'';?>;">
+          <?php if (isNewGui()){
+              $messageType=new MessageType($msg->idMessageType);
+          }?>
+          <div class="loginMessageTitle" style="color:<?php echo (isNewGui())?'white':$msgTypeList[$msg->idMessageType];?>;"><?php echo htmlEncode($msg->name);?></div>
+          <br/>
+          <?php 
+          if(isNewGui()){
+           $currentWidth=(RequestHandler::isCodeSet('currentWidth')?RequestHandler::getValue('currentWidth'):'');
+           if($currentWidth!='')$calculatedWidth=(($currentWidth*0.33)*0.95)*0.8;
+           $width=($currentWidth!='')?$calculatedWidth:400;
+           echo htmlSetClickableImages($msg->description,$width);
+          }else{
+            echo $msg->description;
+          }?>
+          <br/>
+          <br/>
+          </div>
+          <?php 
+//           }
+        }?>
     <?php if(isNewGui())echo '</div>';?>
   </div>
   <?php if (1 and isNewGui()) echo '<div style="position:absolute;margin-top:-50%;margin-left:-0%;width:250%;height:250%;opacity:10%;z-index:-2;" class="loginBackgroundNewGui"></div>';?>
