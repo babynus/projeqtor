@@ -36,7 +36,7 @@ $idActivityWorkUnit = RequestHandler::getId('idActivityWorkUnit');
 $idComplexity = RequestHandler::getId('idComplexity');
 $idWorkCommand = RequestHandler::getId('idWorkCommand');
 $quantity = RequestHandler::getNumeric('quantity');
-$minQuantity = 1;
+$minQuantity = 0.01;
 $commandAmount = RequestHandler::getNumeric('commandAmount');
 $paramEnableWorkUnit = Parameter::getGlobalParameter('enableWorkCommandManagement');
 
