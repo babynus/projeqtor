@@ -8371,7 +8371,11 @@ function saveActivityValueFilter(value,refType,refId){
   if(value=="Status"){
     var status=dijit.byId('idStatusElement_'+refType+'_'+refId).get('value');
     var oldValue=dojo.byId('idOldStatusElement_'+refType+'_'+refId).value;
-    url+="&field=Status&value="+status;
+    url+="&field="+value+"&value="+status;
+  }if(value=="Version"){
+    var status=dijit.byId('idVersionElement_'+refType+'_'+refId).get('value');
+    var oldValue=dojo.byId('idOldVersionElement_'+refType+'_'+refId).value;
+    url+="&field="+value+"&value="+status;
   }else{
     var idResource=dijit.byId('idResourceElement_'+refType+'_'+refId).get('value');
     var oldValue=dojo.byId('idOldResourceElement_'+refType+'_'+refId).value;
