@@ -327,14 +327,21 @@ class SubTask extends SqlElement {
     while ($line = Sql::fetchLine($result)) {
       $tab[]=$line;
     }
+    $status=new Status();
     $priority=new Priority();
     $allPrio=$priority->getSqlElementsFromCriteria(null,null,"1=1");
+    $allStatus=$status->getSqlElementsFromCriteria(null,null,"1=1");
     foreach ($allPrio as $id=>$priority){
       echo '<input id="colorPrio_'.$priority->id.'" value="'.$priority->color.'" type="hidden" />';
+    }
+    foreach ($allStatus as $id=>$status){
+      echo '<input id="colorStatus_'.$status->id.'" value="'.$status->color.'" type="hidden" />';
     }
     if(!empty($tab)){
       foreach ($tab as $id=>$obj){
         $element= new $obj['reftype']( $obj['refid']);
+        $statusElment= new Status($element->idStatus);
+        $colorStatus=$statusElment->color;
         //$menName= new Menu($element->idMenu);
         $rightUpdate=securityGetAccessRightYesNo('menu'.get_class($element),'update',$element);
         $rightRead=securityGetAccessRightYesNo('menu'.get_class($element),'read',$element);
@@ -377,12 +384,14 @@ class SubTask extends SqlElement {
                       echo '</td>';
                     }
                     echo '<td class="reportHeader" style="width:'.(property_exists(get_class($element), 'idTargetProductVersion')?'12%':'24').';">';
-                       echo '<div  style="width:90%;height:42px;border-radius:unset!important;vertical-align:middle;">';
-                        echo      '<select dojoType="dijit.form.FilteringSelect" id="idStatusElement_'.$obj['reftype'].'_'.$element->id.'" name="idStatusElement_'.$obj['reftype'].'_'.$element->id.'" '.(( $rightUpdate=='NO' and $rightRead=="YES")?'readonly="true"':'').'
-                                  style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Status\',\''.$obj['reftype'].'\','.$element->id.'); "  '.autoOpenFilteringSelect().'>';
-                          htmlDrawOptionForReference('idStatus',$element->idStatus,$element);
-                        echo      '</select>';
-                       echo '</div>';
+                      echo '<div  style="width:100%;height:42px;border-radius:unset!important;vertical-align:middle;">';
+                         echo '<div id="status_'.$obj['reftype'].'_'.$element->id.'" style="width:90%;margin-left: 5%;margin-right: 5%;height:100%;background-color:'.$colorStatus.';">';
+                          echo      '<select dojoType="dijit.form.FilteringSelect" id="idStatusElement_'.$obj['reftype'].'_'.$element->id.'" name="idStatusElement_'.$obj['reftype'].'_'.$element->id.'" '.(( $rightUpdate=='NO' and $rightRead=="YES")?'readonly="true"':'').'
+                                    style="width:auto;margin-top:7px;" class="input" onChange="saveActivityValueFilter(\'Status\',\''.$obj['reftype'].'\','.$element->id.'); "  '.autoOpenFilteringSelect().'>';
+                            htmlDrawOptionForReference('idStatus',$element->idStatus,$element);
+                          echo      '</select>';
+                         echo '</div>';
+                       echo '';
                        echo      '<input id="idOldStatusElement_'.$obj['reftype'].'_'.$element->id.'" value="'.$element->idStatus.'" type="hidden" />';
                     echo '</td>';
                     echo '<td class="reportHeader" style="width:'.(property_exists(get_class($element), 'idTargetProductVersion')?'12%':'24').';">';
