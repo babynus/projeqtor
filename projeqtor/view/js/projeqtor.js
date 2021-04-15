@@ -8373,7 +8373,7 @@ function saveActivityValueFilter(value,refType,refId){
     var oldValue=dojo.byId('idOldStatusElement_'+refType+'_'+refId).value;
     url+="&field="+value+"&value="+status;
     dojo.byId('status_'+refType+'_'+refId).style.backgroundColor=dojo.byId("colorStatus_"+status).value;
-  }if(value=="Version"){
+  }else if(value=="Version"){
     var status=dijit.byId('idVersionElement_'+refType+'_'+refId).get('value');
     var oldValue=dojo.byId('idOldVersionElement_'+refType+'_'+refId).value;
     url+="&field="+value+"&value="+status;
