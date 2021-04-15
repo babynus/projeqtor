@@ -34,13 +34,18 @@
   
   $refType=RequestHandler::getClass('refType');
   $refId=RequestHandler::getId('refId');
-
+  $obj = new $refType($refId);
+  $startAMDate = date('Y-m-d').' '.getDailyHours($obj->idProject, 'startAM', false);
+  $endAMDate = date('Y-m-d').' '.getDailyHours($obj->idProject, 'endAM', false);
+  $startPMDate = date('Y-m-d').' '.getDailyHours($obj->idProject, 'startPM', false);
+  $endPMDate = date('Y-m-d').' '.getDailyHours($obj->idProject, 'endPM', false);
+  $hourPerDay = abs(strtotime($startAMDate)-strtotime($endAMDate))+abs(strtotime($startPMDate)-strtotime($endPMDate));
   $list=array();
   $stPeriod = new StatusPeriod();
   $list=$stPeriod->getSqlElementsFromCriteria(array('refType'=>$refType, 'refId'=>$refId));
   echo '<table style="width:100%;text-align:center">';
   echo '<tr>';
-  echo '<td class="linkHeader" style="width:10%" rowspan="2">' . i18n('colType') . '</td>';
+  echo '<td class="linkHeader" style="width:10%" rowspan="2">' . i18n('colMacroStatus') . '</td>';
   echo '<td class="linkHeader" style="width:30%" colspan="3">'.i18n('startPeriod').'</td>';
   echo '<td class="linkHeader" style="width:30%" colspan="3">'.i18n('endPeriod').'</td>';
   echo '<td class="linkHeader" style="width:30%" colspan="2">'.i18n('colDuration').'</td>';
@@ -56,7 +61,9 @@
   echo '</tr>';
   foreach ( $list as $statusPeriod ) {
     echo '<tr>';
-    echo '<td class="linkData" style="white-space:nowrap;width:10%">'.i18n('col'.ucfirst($statusPeriod->type)).'</td>';
+    echo '<td class="linkData" style="white-space:nowrap;width:10%">';
+    $class = ($statusPeriod->active)?'Submitted':'Unsubmitted';
+    echo '<table><tr><td style="float:left">'.formatIcon($class, 16, null, false, true).'</td><td style="padding-left:10px">'.i18n('col'.ucfirst($statusPeriod->type)).'</td></tr></table></td>';
     echo '<td class="linkData" style="white-space:nowrap;width:15%">'.htmlFormatDateTime($statusPeriod->startDate).'</td>';
     $objStatus=new Status($statusPeriod->idStatusStart);
     echo '<td class="dependencyData colorNameData"  style="width:10%">' . colorNameFormatter($objStatus->name . "#split#" . $objStatus->color) . '</td>';
@@ -91,8 +98,10 @@
     		$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
     	}
     }
+    if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="linkData" style="white-space:nowrap;width:10%">'.$durationDisplay.'</td>';
     $duration = $statusPeriod->durationOpenTime;
+    if($duration>$hourPerDay)$duration = round(($duration/$hourPerDay)*86400);
     $durationDisplay = "";
     if($duration){
     	$startDate = new DateTime(date("Y-m-d H:i:s"));
@@ -114,8 +123,11 @@
     		$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
     	}
     }
+    if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="linkData" style="white-space:nowrap;width:10%">'.$durationDisplay.'</td>';
     echo '</tr>';
   }
   echo '</table>';
+  echo '<br/>';
+  echo '<div align="center"><button dojoType="dijit.form.Button" type="button" onclick="dijit.byId(\'dialogStatusPeriod\').hide();">'.i18n("close").'</button></div>';
 ?>

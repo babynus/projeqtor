@@ -254,6 +254,7 @@ foreach ($lstUrgency as $urgency){
     if($durationOK->i){
     	$durationDisplay .= $durationOK->format('%i').i18n('shortMinute').' ';
     }
+    if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
     $KO = (isset($result[$type->id][$urgency->id]['KO']))?$result[$type->id][$urgency->id]['KO']:0;
     echo '<td class="reportTableData" style="width:10%">'.$KO.'</td>';
@@ -278,6 +279,7 @@ foreach ($lstUrgency as $urgency){
     if($durationKO->i){
     	$durationDisplay .= $durationKO->format('%i').i18n('shortMinute').' ';
     }
+    if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
     $ponctuality = 0;
     $NB = (isset($result[$type->id][$urgency->id]['Nb']))?$result[$type->id][$urgency->id]['Nb']:0;
