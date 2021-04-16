@@ -500,7 +500,21 @@ class ActivityPlanningElementMain extends PlanningElement {
         $this->validatedCost = $complexityVal->price*$this->quantity;
       }
       
-      if($this->idWorkCommand){
+      $newWorkCommand = false;
+      $changeWorkCommand = false;
+      $deleteWorkCommand = false;
+      if(!$old->idWorkCommand and $this->idWorkCommand){
+        $newWorkCommand=true;
+      }
+      if($this->idWorkCommand and $old->idWorkCommand and $old->idWorkCommand != $this->idWorkCommand ){
+        $oldActWorkCommand = $old->idWorkCommand;
+        $changeWorkCommand=true;
+      }
+      if($old->idWorkCommand and !$this->idWorkCommand){
+        $oldActWorkCommand = $old->idWorkCommand;
+        $deleteWorkCommand = true;
+      }
+      if($newWorkCommand){
         $workCommand = new WorkCommand($this->idWorkCommand);
         $workCommandDone = new WorkCommandDone();
         $newWorkCommandDone = new WorkCommandDone();
@@ -510,7 +524,82 @@ class ActivityPlanningElementMain extends PlanningElement {
         }
         $workCommandDone->idCommand = $workCommand->idCommand;
         $workCommandDone->idWorkCommand = $this->idWorkCommand;
-        $workCommandDone->refType = "Activity";                
+        $workCommandDone->refType = "Activity";
+        $workCommandDone->refId = $this->refId;
+        $workCommandDone->doneQuantity = $this->quantity;
+        $workCommandDone->save();
+        $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->idWorkCommand,'idCommand'=>$workCommand->idCommand));
+        $quantity = 0;
+        foreach ($lstWorkCommand as $comVal){
+          $quantity += $comVal->doneQuantity;
+        }
+        $workCommand->doneQuantity = $quantity;
+        $workCommand->doneAmount = $workCommand->unitAmount * $quantity;
+        $workCommand->save();
+      }
+      if($deleteWorkCommand){
+        $workCommandDone = SqlElement::getSingleSqlElementFromCriteria('WorkCommandDone', array('refType'=>'Activity','refId'=>$this->refId));
+        $workCommandDone->delete();
+        $newWorkCommandDone = new WorkCommandDone();
+        $workCommand = new WorkCommand($oldActWorkCommand);
+        $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$oldActWorkCommand,'idCommand'=>$workCommand->idCommand));
+        $quantity = 0;
+        foreach ($lstWorkCommand as $comVal){
+          $quantity += $comVal->doneQuantity;
+        }
+        $workCommand->doneQuantity = $quantity;
+        $workCommand->doneAmount = $workCommand->unitAmount * $quantity;
+        $workCommand->save();
+      }
+      if($changeWorkCommand){
+        //delete
+        $workCommandDone = SqlElement::getSingleSqlElementFromCriteria('WorkCommandDone', array('refType'=>'Activity','refId'=>$this->refId));
+        $workCommandDone->delete();
+        $newWorkCommandDone = new WorkCommandDone();
+        $workCommand = new WorkCommand($oldActWorkCommand);
+        $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->idWorkCommand,'idCommand'=>$workCommand->idCommand));
+        $quantity = 0;
+        foreach ($lstWorkCommand as $comVal){
+          $quantity += $comVal->doneQuantity;
+        }
+        $workCommand->doneQuantity = $quantity;
+        $workCommand->doneAmount = $workCommand->unitAmount * $quantity;
+        $workCommand->save();
+        //create
+        $workCommand = new WorkCommand($this->idWorkCommand);
+        $workCommandDone = new WorkCommandDone();
+        $newWorkCommandDone = new WorkCommandDone();
+        $workCommandDoneExist = $workCommandDone->getSingleSqlElementFromCriteria('WorkCommandDone', array('idWorkCommand'=>$this->idWorkCommand,'refId'=>$this->refId,'refType'=>'Activity','idCommand'=>$workCommand->idCommand));
+        if($workCommandDoneExist){
+          $workCommandDone = new WorkCommandDone($workCommandDoneExist->id);
+        }
+        $workCommandDone->idCommand = $workCommand->idCommand;
+        $workCommandDone->idWorkCommand = $this->idWorkCommand;
+        $workCommandDone->refType = "Activity";
+        $workCommandDone->refId = $this->refId;
+        $workCommandDone->doneQuantity = $this->quantity;
+        $workCommandDone->save();
+        $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$this->idWorkCommand,'idCommand'=>$workCommand->idCommand));
+        $quantity = 0;
+        foreach ($lstWorkCommand as $comVal){
+          $quantity += $comVal->doneQuantity;
+        }
+        $workCommand->doneQuantity = $quantity;
+        $workCommand->doneAmount = $workCommand->unitAmount * $quantity;
+        $workCommand->save();
+      }
+      
+      if($this->idWorkCommand and !$newWorkCommand and !$changeWorkCommand and !$deleteWorkCommand and $this->quantity != $old->quantity ){
+        $workCommand = new WorkCommand($this->idWorkCommand);
+        $workCommandDone = new WorkCommandDone();
+        $newWorkCommandDone = new WorkCommandDone();
+        $workCommandDoneExist = $workCommandDone->getSingleSqlElementFromCriteria('WorkCommandDone', array('idWorkCommand'=>$this->idWorkCommand,'refId'=>$this->refId,'refType'=>'Activity','idCommand'=>$workCommand->idCommand));
+        if($workCommandDoneExist){
+          $workCommandDone = new WorkCommandDone($workCommandDoneExist->id);
+        }
+        $workCommandDone->idCommand = $workCommand->idCommand;
+        $workCommandDone->idWorkCommand = $this->idWorkCommand;
+        $workCommandDone->refType = "Activity";
         $workCommandDone->refId = $this->refId;
         $workCommandDone->doneQuantity = $this->quantity;
         $workCommandDone->save();
@@ -524,7 +613,6 @@ class ActivityPlanningElementMain extends PlanningElement {
         $workCommand->save();
       }
     }
-    //
     //florent
     if(($this->idPlanningMode=='23' and $old->idPlanningMode!='23')or($this->idPlanningMode!='23' and $old->idPlanningMode=='23') ){
       $pw= new PlannedWork();
