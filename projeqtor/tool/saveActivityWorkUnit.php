@@ -55,7 +55,10 @@ if ($mode=='edit') {
   $activityWorkUnit->quantity = $workCommandQuantity;
   if($idWorkCommand == ' ')$idWorkCommand='';
   if(!$activityWorkUnit->idWorkCommand and $idWorkCommand)$newWorkCommand=true;
-  if($activityWorkUnit->idWorkCommand and $idWorkCommand)$changeWorkCommand=true;
+  if($activityWorkUnit->idWorkCommand and $idWorkCommand){
+    $oldActWorkCommand = $activityWorkUnit->idWorkCommand;
+    $changeWorkCommand=true;
+  }
   if($activityWorkUnit->idWorkCommand and !$idWorkCommand){
     $oldActWorkCommand = $activityWorkUnit->idWorkCommand;
     $deleteWorkCommand = true;
@@ -111,7 +114,7 @@ if ($mode=='edit') {
       $workCommandDone = SqlElement::getSingleSqlElementFromCriteria('WorkCommandDone', array('idActivityWorkUnit'=>$activityWorkUnit->id));
       $workCommandDone->delete();
       $newWorkCommandDone = new WorkCommandDone();
-      $workCommand = new WorkCommand($idWorkCommand);
+      $workCommand = new WorkCommand($oldActWorkCommand);
       $lstWorkCommand = $newWorkCommandDone->getSqlElementsFromCriteria(array('idWorkCommand'=>$idWorkCommand,'idCommand'=>$workCommand->idCommand));
       $quantity = 0;
       foreach ($lstWorkCommand as $comVal){

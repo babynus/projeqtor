@@ -6301,13 +6301,13 @@ function removeWorkCommand(id) {
     showConfirm(msg, actionOK);
 }
 
-function removeBilledWorkCommand(id) {
+function removeBilledWorkCommand(idWorkCommandBilled,idWorkCommand) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeBilledWorkCommand.php?idWorkCommandBilled="+id, "resultDivMain",
+    loadContent("../tool/removeBilledWorkCommand.php?idWorkCommandBilled="+idWorkCommandBilled+'&idWorkCommand='+idWorkCommand, "resultDivMain",
         null, true, 'workCommand');
   };
     msg=i18n('confirmRemoveWorkCommand', new Array(id));
