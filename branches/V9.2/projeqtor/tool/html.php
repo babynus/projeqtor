@@ -373,6 +373,12 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         if($obj->idWorkUnit and $obj->idComplexity){
           $catalog = new CatalogUO();
           $idProject= $workUnit->idProject;
+          if(get_class($obj)=='ActivityWorkUnit'){
+            if($obj->refType=='Activity'){
+              $act = new Activity($obj->refId);
+              $idProject= $act->idProject;
+            }
+          }
           $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject),'id');
           $in=transformValueListIntoInClause($listCommand);
           $workCommand = new WorkCommand();
