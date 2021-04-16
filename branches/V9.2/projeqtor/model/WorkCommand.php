@@ -35,6 +35,25 @@ class WorkCommand extends SqlElement {
 	  return self::$_databaseCriteria;
 	}
 	
+	public function deleteControl(){
+	  $result="";
+	  
+	  // Cannot delete done WorkCommand
+	  if ($this->doneQuantity and $this->doneQuantity > 0 )	{
+	  		$result .= "<br/>" . i18n("errorDeleteDoneWorkCommand");
+	  }
+	  // Cannot delete billed WorkCommand
+	  if ($this->billedQuantity and $this->billedQuantity > 0 )	{
+	    $result .= "<br/>" . i18n("errorDeleteBilledWorkCommand");
+	  }
+	   
+	  if (! $result) {
+	    $result=parent::deleteControl();
+	  }
+	  return $result;
+	}
+	
+	
 	/** ==========================================================================
 	 * Construct
 	 * @return void

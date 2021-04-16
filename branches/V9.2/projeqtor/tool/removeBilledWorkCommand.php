@@ -30,12 +30,13 @@
 
 require_once "../tool/projeqtor.php";
 
-$idWorkCommand = RequestHandler::getId('idWorkCommandBilled');
-$obj = new WorkCommandBilled($idWorkCommand);
+$idWorkCommand = RequestHandler::getId('idWorkCommand');
+$idWorkCommandBilled = RequestHandler::getId('idWorkCommandBilled');
+$obj = new WorkCommandBilled($idWorkCommandBilled);
 Sql::beginTransaction();
 $workCommand = new WorkCommand($obj->idWorkCommand);
 $workCommand->billedQuantity -= $obj->billedQuantity;
-$workCommand->billedAmount =  $obj->billedQuantity*$workCommand->unitAmount;
+$workCommand->billedAmount =  $workCommand->billedQuantity*$workCommand->unitAmount;
 $result=$obj->delete();
 $status=getLastOperationStatus($result);
 if ($status=="OK"){
