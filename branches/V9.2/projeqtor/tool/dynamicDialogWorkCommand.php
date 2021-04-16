@@ -37,7 +37,7 @@ $quantity = RequestHandler::getNumeric('quantity');
 $unitAmount = RequestHandler::getNumeric('unitAmount');
 $commandAmount = RequestHandler::getNumeric('commandAmount');
 $obj = new Command($idCommand);
-$minQuantity = 1;
+$minQuantity = 0.01;
 if($id){
   $minQuantityBilled = 0;
   $minQuantityDone = 0;

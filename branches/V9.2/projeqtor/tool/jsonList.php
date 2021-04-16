@@ -943,12 +943,14 @@ if ($type == 'empty') {
         $act = new Activity($idActivity);
         if(property_exists($act, 'idClient')){
           if($act->idClient){
-            $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject,'idClient'=>$act->idClient),'id');
+            $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$act->idProject,'idClient'=>$act->idClient),'id');
           }
         }else{
           if($act->idContact){
             $contact = new Contact($act->idContact);
-            $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject,'idClient'=>$contact->idClient),'id');
+            $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$act->idProject,'idClient'=>$contact->idClient),'id');
+          }else{
+            $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$act->idProject),'id');
           }
         }
       }
