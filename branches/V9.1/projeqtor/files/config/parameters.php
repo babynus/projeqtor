@@ -13,6 +13,7 @@ $paramDbHost='127.0.0.1';          // With MySql on Windows, better use "127.0.0
 
 // ========== Log file configuration =====================================================
 $logFile='../files/logs/projeqtor_${date}.log';
+$logLevel='3';
 
 // ========== Contextual configuration ===================================================
 //$lockPassword=true;           // Forbid password change (used in Demo to forbit password change)

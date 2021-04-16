@@ -383,6 +383,11 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
             $commandForRef = new Command($val->idCommand);
             $table[$val->id]=$commandForRef->reference.' - '.$val->name;
           }
+          if($selection){
+            $workCom = new WorkCommand($selection);
+            $command = new Command($workCom->idCommand);
+            $table[$selection]= $command->reference.' - '.SqlList::getFieldFromId('WorkCommand', $selection, 'reference');
+          }
           ksort($table);
         }
       }else{
