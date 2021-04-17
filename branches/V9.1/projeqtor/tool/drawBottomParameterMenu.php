@@ -39,7 +39,7 @@ $result='';
 $allMenu=array();
 $allMenuSort=array();
 
-if($isObject=='true' and $screen!=''){
+if($isObject=='true' and $screen!='' and SqlElement::class_exists($screen)){
   $obj=new $screen();
   $menu= new Menu();
   $lstParam=array();
