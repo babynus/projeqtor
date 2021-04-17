@@ -1107,20 +1107,20 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
             <?php echo i18n("remindMeIn");?>
            <input type="input" dojoType="dijit.form.TextBox" id="remindAlertTime" name="remindAletTime" value="15" style="width:25px" />
             <?php echo i18n("shortMinute");?>
-           <button dojoType="dijit.form.Button" onclick="setAlertRemindMessage();">
+           <button dojoType="dijit.form.Button" class="roundedVisibleButton" onclick="setAlertRemindMessage();">
                     <?php echo i18n("remind");?>
            </button>
          </div>
          <div style="width:100%; height:50px; text-align:right">
-           <table><tr><td width="80%">
+           <table><tr><td width="80%" style="padding-top:2px">
            <span id="markAllAsReadButtonDiv" >
-        	 <button  dojoType="dijit.form.Button" id="markAllAsReadButton" onclick="setAllAlertReadMessage();">
+        	 <button  dojoType="dijit.form.Button" class="roundedVisibleButton" id="markAllAsReadButton" onclick="setAllAlertReadMessage();">
         	          <?php echo i18n("markAllAsRead");?>
         	 </button>
         	 &nbsp;
         	 </span>
-        	 </td><td>
-        	 <button  dojoType="dijit.form.Button" onclick="setAlertReadMessage();">
+        	 </td><td style="padding-top:2px">
+        	 <button  dojoType="dijit.form.Button" class="roundedVisibleButton" onclick="setAlertReadMessage();">
         	          <?php echo i18n("markAsRead");?>
         	 </button>
         	 </td></tr></table>
