@@ -216,6 +216,14 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       }  
       $critArray['idVersionType'] = array_values($arrayType);        
     }
+    foreach($critArray as $cF=>$cV) {
+      if (substr($cF,0,2)=='id' and strlen($cF)>2) {
+        $cFclass=substr($cF,2);
+        if ($cFclass==ucfirst($cFclass) and $cV==' ') {
+          unset($critArray[$cF]);
+        }
+      }
+    }
     $table=SqlList::getListWithCrit($listType,$critArray,$column,$selection);
     if($col == 'idActivity' and $obj and (get_class($obj)=='Activity' or get_class($obj)=='TestSession' or get_class($obj)=='Milestone')){
       $activityTypeList = "(".implode(',' ,SqlList::getListWithCrit('ActivityType', array('canHaveSubActivity'=>'1', 'idle'=>'0'),'id')).")";
@@ -677,7 +685,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     	}
     	//if (isset($restrictArray[$selection])) unset($restrictArray[$selection]); // Code removed : if left, list of product is all products
     	// End ($col=='idProduct' or $col=='idComponent') and $critFld=='idProject'
-    } else if ($col=='idComponent' and $critFld=='idProduct' and $critVal) {
+    } else if ($col=='idComponent' and $critFld=='idProduct' and intval($critVal)>0) {
       // Limit list of components depending on Product (only components linked to the product) 
       $prod=new Product($critVal,true);
       $table=$prod->getComposition(true,true);

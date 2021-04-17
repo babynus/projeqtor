@@ -2396,9 +2396,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $isRequired=true; // TODO : study condition above : why security for 'read'', why not for project, ...
           }
           $controlRightsTable=$user->getAccessControlRights();
-          $controlRights=$controlRightsTable['menu'.$classObj];
-          if ($classObj=='Project' and $controlRights["create"]!="ALL" and $controlRights["create"]!="PRO") {
-            $isRequired=true;
+          if (isset($controlRightsTable['menu'.$classObj])) {
+            $controlRights=$controlRightsTable['menu'.$classObj];
+            if ($classObj=='Project' and $controlRights["create"]!="ALL" and $controlRights["create"]!="PRO") {
+              $isRequired=true;
+            }
           }
         }
         $critFld=null;
@@ -8389,7 +8391,8 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
   echo '<td class="assignHeader" style="width:18%">'.i18n('colIdProfile').'</td>';
   echo '<td class="assignHeader" style="width:13%">'.i18n('colStartDate').'</td>';
   echo '<td class="assignHeader" style="width:13%">'.i18n('colEndDate').'</td>';
-  echo '<td class="assignHeader" style="width:12%">'.i18n('colRate').'</td>';
+  if ($type=='User' or $type=='Contact' or get_class($obj)=='User' or get_class($obj)=='Contact') echo '<td class="" style="width:12%"></td>';
+  else echo '<td class="assignHeader" style="width:12%">'.i18n('colRate').'</td>';
   // echo '<td class="assignHeader" style="width:10%">' . i18n('colIdle'). '</td>';
   
   echo '</tr>';
@@ -8503,7 +8506,8 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       echo '<td class="assignData'.$idleClass.'" align="center" >'.SqlList::getNameFromId('Profile', $aff->idProfile, true).'</td>';
       echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlFormatDate($aff->startDate).'</td>';
       echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlFormatDate($aff->endDate).'</td>';
-      echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlEncode($aff->rate).'</td>';
+      if ($type=='User' or $type=='Contact' or get_class($obj)=='User' or get_class($obj)=='Contact') echo '<td class="" ></td>';
+      else echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlEncode($aff->rate).'</td>';
       // echo '<td class="assignData" align="center"><img src="../view/img/checked' . (($aff->idle)?'OK':'KO') . '.png" /></td>';
       echo '</tr>';
     }elseif(get_class($obj)!='Resource'){
@@ -8552,7 +8556,8 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       echo '<td class="assignData'.$idleClass.'" align="center" >'.SqlList::getNameFromId('Profile', $aff->idProfile, true).'</td>';
       echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlFormatDate($aff->startDate).'</td>';
       echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlFormatDate($aff->endDate).'</td>';
-      echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlEncode($aff->rate).'</td>';
+      if ($type=='User' or $type=='Contact' or get_class($obj)=='User' or get_class($obj)=='Contact') echo '<td class="" ></td>';
+      else echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlEncode($aff->rate).'</td>';
       // echo '<td class="assignData" align="center"><img src="../view/img/checked' . (($aff->idle)?'OK':'KO') . '.png" /></td>';
       echo '</tr>';
       
@@ -8562,7 +8567,9 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
   }
   if ($displayed==0 and isNewGui() and $type!='Project') {
     $msg="msgAffectation".(($type=='ResourceAll')?"Resource":$type);
-    echo '<tr><td class="assignData" colSpan="'.(($print)?'6':'7').'" style="text-align:center;color:#aaaaaa;font-style:italic;">'.i18n($msg).'</td></tr>';
+    $colSpan=($print)?6:7;
+    if ($type=='User' or $type=='Contact' or get_class($obj)=='User' or get_class($obj)=='Contact') $colSpan--;
+    echo '<tr><td class="assignData" colSpan="'.$colSpan.'" style="text-align:center;color:#aaaaaa;font-style:italic;">'.i18n($msg).'</td></tr>';
   }
   echo '</table></td></tr>';
   echo '</table>';
