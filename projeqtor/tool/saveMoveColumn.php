@@ -88,7 +88,7 @@ foreach ($currentList as $id=>$obj){
     }else{
       if(isset($list[$id])){
         $obj->hidden= 0;
-        $obj->widthPct = $list[$id];
+        if ($list[$id]!='hidden') $obj->widthPct = $list[$id];
         $obj->saveForced();
       }
     }

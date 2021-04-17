@@ -357,6 +357,7 @@ class ProductMain extends ProductOrComponent {
 //     return $result;
   }
   public function getStaticComposition($id,$withName=true,$reculsively=false) {
+    if (trim($id)) return array();
     $key=$id.'|'.(($withName)?'1':'0').'|'.(($reculsively)?'1':'0');
     if (isset(self::$_composition[$key])) return self::$_composition[$key];
     $result=array();
