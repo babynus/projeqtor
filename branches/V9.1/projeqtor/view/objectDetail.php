@@ -2379,9 +2379,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $isRequired=true; // TODO : study condition above : why security for 'read'', why not for project, ...
           }
           $controlRightsTable=$user->getAccessControlRights();
-          $controlRights=$controlRightsTable['menu'.$classObj];
-          if ($classObj=='Project' and $controlRights["create"]!="ALL" and $controlRights["create"]!="PRO") {
-            $isRequired=true;
+          if (isset($controlRightsTable['menu'.$classObj])) {
+            $controlRights=$controlRightsTable['menu'.$classObj];
+            if ($classObj=='Project' and $controlRights["create"]!="ALL" and $controlRights["create"]!="PRO") {
+              $isRequired=true;
+            }
           }
         }
         $critFld=null;
