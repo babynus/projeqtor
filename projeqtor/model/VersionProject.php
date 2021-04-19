@@ -131,7 +131,7 @@ class VersionProject extends SqlElement {
       if ($vers->idle) $this->idle=1;
     }
     if (!$this->idle) {  
-      $proj=new Version($this->idProject,true);
+      $proj=new Project($this->idProject,true);
       if ($proj->idle) $this->idle=1;
       
     }
