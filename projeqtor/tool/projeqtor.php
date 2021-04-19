@@ -1491,6 +1491,16 @@ function exceptionHandler($exception) {
     //exit;
     errorLog($exception->getMessage());
     errorLog("Exception while executing CRON script : fix the source issue and manually restart the CRON Process");
+    debugPrintTraceStack();
+    $dest=trim(Parameter::getGlobalParameter('paramAdminMail'));
+    $instance=Parameter::getGlobalParameter('paramDbDisplayName');
+    $title="[$instance] Cron abnormally stopped";
+    $now=date('Y-m-d H:i:s');
+    $msg="Cron was stopped for an undefined reason.<br/>Please check log file at $now for more information.";
+    $smtp=Parameter::getGlobalParameter('paramMailSmtpServer');
+    if ($smtp and $dest) {
+      $result=sendMail($dest,$title,$msg);
+    }
   } else if ($logLevel>=3) {
     throwError($exception->getMessage());
   } else {
