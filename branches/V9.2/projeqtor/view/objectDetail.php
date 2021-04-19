@@ -2609,11 +2609,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $fieldWidth=round($fieldWidth/2)-23;
           if($fieldWidth<85)$fieldWidth=85;
         }
-        if($col=='idWorkUnit' or $col=='idComplexity' or $col=='idWorkCommand'){
-          if (!$readOnly) $showExtraButton=true;
-          $fieldWidth=round($fieldWidth/2)-23;
-          if($fieldWidth<85)$fieldWidth=85;
-        }
         // END - ADD BY TABARY - NOTIFICATION SYSTEM
         $maxButtonWidth=max(min(2*$fieldWidth/3,350),250);
         if ($buttonFieldWidth>$maxButtonWidth) {
