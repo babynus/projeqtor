@@ -218,9 +218,10 @@ class SubTask extends SqlElement {
             $backgroundColor="background-color:#B7B3A9;";
             $i18n=i18n('colIdle');
           }
+          $prioStyle=(trim($colorPrio)!='')?'background-color:'.$colorPrio.';color:'.getForeColor($colorPrio).';':'';
           echo  '<tr>';
           echo   '<td class="assignData" >'.htmlEncode($subTask->name).'</td>';
-          echo    '<td class="assignData" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';" >'.htmlEncode($namePrio).'</td>';
+          echo    '<td class="assignData" style="white-space:nowrap;text-align: center;'.$prioStyle.'" >'.htmlEncode($namePrio).'</td>';
           echo    '<td class="assignData"   style="white-space:nowrap;text-align: center;">'.htmlEncode($nameResource).'</td>';
           echo    '<td class="assignData" style="white-space:nowrap;text-align: center;'.$backgroundColor.'">'.htmlEncode($i18n).'</td>';
           echo  '</tr>';
