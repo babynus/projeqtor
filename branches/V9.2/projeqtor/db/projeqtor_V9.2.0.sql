@@ -128,13 +128,15 @@ INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOr
 (119, 'reportTicketHandledMonthSynthesis',3, 'ticketHandledMonthSynthesis.php', 396,'1'),
 (120, 'reportTicketDoneMonthSynthesis',3, 'ticketDoneMonthSynthesis.php', 397,'1'),
 (121, 'reportYearlyResourcePlan',2, 'yearlyResourcePlan.php', 245,'0'),
-(122, 'reportYearlyPlanResource',2, 'yearlyPlanResource.php', 251,'0');
+(122, 'reportYearlyPlanResource',2, 'yearlyPlanResource.php', 251,'0'),
+(123, 'reportSynthesisOrdersInvoiceClient',7, 'synthesisOrdersInvoiceClient.php', 770,'0');
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
 (1, 119, 1),
 (1, 120, 1),
 (1, 121, 1),
-(1, 122, 1);
+(1, 122, 1),
+(1, 123, 1);
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 (119, 'idProject', 'projectList', 10, 'currentProject'),
@@ -156,7 +158,12 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (122, 'idProject', 'projectList', 10, 'currentProject'),
 (122, 'idOrganization', 'organizationList', 20,null),
 (122,'idTeam','teamList',30,null),
-(122, 'year', 'year', 40,'currentYear');
+(122, 'year', 'year', 40,'currentYear'),
+(123, 'idProject', 'projectList', 10, 'currentProject'),
+(123,'idClient','clientList',20,null),
+(123,'showClosedItems','boolean',30,null),
+(123,'showReference','boolean',40,null);
+
 
 INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VALUES
 (2,119,0,1),

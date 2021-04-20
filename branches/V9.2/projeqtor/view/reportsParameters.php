@@ -402,7 +402,8 @@ foreach ($listParam as $param) {
        style="width: 200px;"
        id="<?php echo $param->name;?>" name="<?php echo $param->name;?>"
      >  
-       <?php htmlDrawOptionForReference('idProject', $defaultValue, null, false,null,null,$limitToActiveProjects); ?>
+       <?php $projObj = new Project();
+             htmlDrawOptionForReference('idProject', $defaultValue,$projObj, false,null,null,$limitToActiveProjects); ?>
        <script type="dojo/connect" event="onChange" args="evt">
           if(dojo.byId('reportId').value=='4'){
              if(dojo.byId('idProject').value!=''){

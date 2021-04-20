@@ -111,7 +111,7 @@ if($mode=='edit'){
             <?php if($paramEnableWorkUnit=='true'){ ?>
       <tr>
           <td class="dialogLabel"  >
-               <label for="ActivityBilledWorkCommandWorkCommand" ><?php echo i18n("workCommand") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+               <label for="ActivityBilledWorkCommandWorkCommand" ><?php echo strtolower(i18n("WorkCommand")); ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect"

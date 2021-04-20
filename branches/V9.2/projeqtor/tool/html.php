@@ -388,6 +388,20 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
             }
           }
           $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$idProject),'id');
+          if(get_class($obj)=='ActivityWorkUnit'){
+            if(property_exists($act, 'idClient')){
+              if($act->idClient){
+                $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$act->idProject,'idClient'=>$act->idClient),'id');
+              }
+            }else{
+              if($act->idContact){
+                $contact = new Contact($act->idContact);
+                $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$act->idProject,'idClient'=>$contact->idClient),'id');
+              }else{
+                $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$act->idProject),'id');
+              }
+            }
+          }
           $in=transformValueListIntoInClause($listCommand);
           $workCommand = new WorkCommand();
           $where = "( idCommand in ".$in.") and ( idWorkUnit = ".$obj->idWorkUnit." and idComplexity = ".$obj->idComplexity." ) ";

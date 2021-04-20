@@ -7386,9 +7386,9 @@ function drawActivityWorkUnit($listActWU,$obj,$refresh=false) {
   if(count($listActWU) > 0){
     echo'<tr>';
     echo '  <td colspan='.$colspan.' style="text-align:right;" class="assignHeader">'.strtolower(i18n('sum')).'&nbsp;&nbsp;&nbsp;</td>';
-    echo '  <td style="text-align:right;" class="assignHeader">'.Work::displayWorkWithUnit($totalCharge).'&nbsp;&nbsp;</td>';
-    echo '  <td style="text-align:right;" class="assignHeader">'.Work::displayWorkWithUnit($totalDuration).'&nbsp;&nbsp;</td>';
-    echo '  <td style="text-align:right;" class="assignHeader">'.htmlDisplayCurrency($obj->ActivityPlanningElement->revenue).'&nbsp;&nbsp;</td>';
+    echo '  <td style="text-align:right;" class="assignHeader">'.Work::displayWorkWithUnit($totalCharge).'&nbsp</td>';
+    echo '  <td style="text-align:right;" class="assignHeader">'.Work::displayWorkWithUnit($totalDuration).'&nbsp</td>';
+    echo '  <td style="text-align:right;" class="assignHeader">'.htmlDisplayCurrency($obj->ActivityPlanningElement->revenue).'&nbsp;</td>';
     echo'</tr>';
   }
   echo '</table></td></tr>';
@@ -7988,9 +7988,9 @@ function drawWorkCommand($list,$obj){
   }
   echo '<tr>';
   echo '  <td colspan=3 class="noteHeader">' .ucfirst(i18n('colCountTotal')) . '</td>';
-  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountCommand).'&nbsp;&nbsp;</td>';
-  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountDoneCommand).'&nbsp;&nbsp;</td>';
-  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountBilledCommand).'&nbsp;&nbsp;</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountCommand).'&nbsp;</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountDoneCommand).'&nbsp;</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountBilledCommand).'&nbsp;</td>';
   echo '</tr>';
   echo '</table>';
 }
@@ -8067,10 +8067,10 @@ function drawBilledWorkCommand($list,$obj){
   }
   echo '<tr>';
   echo '  <td colspan=3 class="noteHeader">' .ucfirst(i18n('colCountTotal')) . '</td>';
-  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountCommand).'&nbsp;&nbsp;</td>';
-  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountDoneCommand).'&nbsp;&nbsp;</td>';
-  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountBilledCommand).'&nbsp;&nbsp;</td>';
-  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountBilledCommandAcutal).'&nbsp;&nbsp;</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountCommand).'&nbsp;</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountDoneCommand).'&nbsp;</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountBilledCommand).'&nbsp;</td>';
+  echo '  <td colspan=2 style="text-align:right;" class="noteHeader">'.htmlDisplayCurrency($amountBilledCommandAcutal).'&nbsp;</td>';
   echo '</tr>';
 
   echo '</table>';
