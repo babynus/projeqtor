@@ -169,13 +169,13 @@ INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VA
 (2,119,0,1),
 (2,120,0,1);
 
-CREATE TABLE `${prefix}macroticketstatus` (
+CREATE TABLE `${prefix}macrostatus` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `${prefix}macroticketstatus` (`id`,`name`) VALUES
+INSERT INTO `${prefix}macrostatus` (`id`,`name`) VALUES
 (1,'handled'),
 (2,'colDone'),
 (3,'idle');
