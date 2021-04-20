@@ -26,11 +26,12 @@
 
 
 require_once('_securityCheck.php'); 
-class MacroStatus extends SqlElement {
+class MacroTicketStatus extends SqlElement {
 
   public $id;
   public $name;
   public $_isNameTranslatable = true;
+  private static $_databaseTableName = 'macrostatus';
 	/** ==========================================================================
 	 * Constructor
 	 * @param $id the id of the object in the database (null if not stored yet)
@@ -46,6 +47,11 @@ class MacroStatus extends SqlElement {
 	 */
 	function __destruct() {
 		parent::__destruct();
+	}
+	
+	protected function getStaticDatabaseTableName() {
+		$paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
+		return $paramDbPrefix . self::$_databaseTableName;
 	}
 	
 	
