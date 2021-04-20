@@ -26,7 +26,7 @@
 
 
 require_once('_securityCheck.php'); 
-class MacroTicketStatus extends SqlElement {
+class MacroStatus extends SqlElement {
 
   public $id;
   public $name;
