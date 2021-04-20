@@ -97,7 +97,7 @@ class SubTask extends SqlElement {
     $critFld='idProject';
     $critVal=$obj->idProject;
     $widthDisplay=(RequestHandler::isCodeSet("destinationWidth")?RequestHandler::getValue("destinationWidth"):"");
-    if(!$gloablView){
+    if(!$gloablView and !$print){
       $priority=new Priority();
       $allPrio=$priority->getSqlElementsFromCriteria(null,null,"1=1");
       foreach ($allPrio as $id=>$priority){
@@ -129,18 +129,26 @@ class SubTask extends SqlElement {
       echo' </div>';
       echo'</div>';
     }
+    if(!$print){
+      if (!$refresh) echo '<tr><td colspan="4"><div id="'.$refType.'_'.$refId.'_drawSubTask" dojotype="dijit.layout.ContentPane">';
+      echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true" 
+                    id="dndSubTask_'.$refType.'_'.$refId.'" jsId="dndSubTask_'.$refType.'_'.$refId.'" data-dojo-id="test">';
+    }else {
+      echo '<tr><td colspan="2" style="width:100%;">';
+      echo '<table style="width:100%;">';
+    }
+    if(!$print){
+      if($gloablView and $idResource!=''){
+        echo      '<input id="SubTaskIdResourceFilter_'.$refType.'_'.$refId.'" value="'.$idResource.'" type="hidden" />';
+      }
+      else {
+        echo      '<input id="SubTaskIdResourceFilter_'.$refType.'_'.$refId.'" value="'.$obj->idResource.'" type="hidden" />';
+      }
+    }
     
-    if (!$refresh) echo '<tr><td colspan="4"><div id="'.$refType.'_'.$refId.'_drawSubTask" dojotype="dijit.layout.ContentPane">';
-    echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true" id="dndSubTask_'.$refType.'_'.$refId.'" jsId="dndSubTask_'.$refType.'_'.$refId.'" data-dojo-id="test">';
-    if($gloablView and $idResource!=''){
-      echo      '<input id="SubTaskIdResourceFilter_'.$refType.'_'.$refId.'" value="'.$idResource.'" type="hidden" />';
-    }
-    else {
-      echo      '<input id="SubTaskIdResourceFilter_'.$refType.'_'.$refId.'" value="'.$obj->idResource.'" type="hidden" />';
-    }
     echo      '<input id="subTaskView" value="'.$view.'" type="hidden" />';
     echo  '<tr style="width:100%">';
-    echo    '<td class="linkHeader" style="width:2%"></td>';
+    if(!$print)echo    '<td class="linkHeader" style="width:2%"></td>';
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:64%;':'width:52%;').'">'.i18n('colName').'</td>';
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:12%;':'width:18%;').'">'.i18n('colPriority').'</td>';
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:12%;':'width:18%;').'">'.i18n('colResponsible').'</td>';
@@ -150,6 +158,7 @@ class SubTask extends SqlElement {
       foreach ($res as $id=>$subTask){
         $prioSubTask=new Priority($subTask->idPriority);
         $colorPrio=$prioSubTask->color;
+        if(!$print){
         echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" '.(($rightUpdate=='NO' and $rightRead=='YES')?'':'class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'"').'  >';
         echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" type="hidden" />';
         if($rightUpdate=='NO' and $rightRead=='YES'){
@@ -193,9 +202,32 @@ class SubTask extends SqlElement {
         echo    '</td>';
         echo  '</tr>';
         $lastSortRegist=$subTask->sortOrder;
+        }else{
+          $resource= new Resource();
+          $namePrio=($subTask->idPriority!='' )?SqlList::getNameFromId(get_class($prioSubTask), $subTask->idPriority):'';
+          $nameResource=($subTask->idResource!='' )?SqlList::getNameFromId(get_class($resource), $subTask->idResource):'';
+          $backgroundColor="";
+          $i18n=' ';
+          if($subTask->handled==1){
+            $backgroundColor="background-color:#FACA77;";
+            $i18n=i18n('colHandled');
+          }else if($subTask->done==1){
+            $backgroundColor="background-color:#57CE44;";
+            $i18n=i18n('done');
+          }else if($subTask->idle==1){
+            $backgroundColor="background-color:#B7B3A9;";
+            $i18n=i18n('colIdle');
+          }
+          echo  '<tr>';
+          echo   '<td class="assignData" >'.htmlEncode($subTask->name).'</td>';
+          echo    '<td class="assignData" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';" >'.htmlEncode($namePrio).'</td>';
+          echo    '<td class="assignData"   style="white-space:nowrap;text-align: center;">'.htmlEncode($nameResource).'</td>';
+          echo    '<td class="assignData" style="white-space:nowrap;text-align: center;'.$backgroundColor.'">'.htmlEncode($i18n).'</td>';
+          echo  '</tr>';
+        }
       }
     }
-    if($rightUpdate=='YES'){
+    if($rightUpdate=='YES' and !$print){
       $lastSort=(!empty($res))? $lastSortRegist :0;
       echo  '<tr id="'.$refType.'_'.$refId.'_newSubTaskRow" >';
       echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_0" value="'.$lastSort.'" type="hidden" />';
@@ -222,8 +254,12 @@ class SubTask extends SqlElement {
       echo  '</tr>';
     }
     echo '</table>';
-    if (!$refresh) echo '</div></td></tr>';
-    if($dialogView) echo '</table>';
+    if(!$print){
+      if (!$refresh) echo '</div></td></tr>';
+      if($dialogView) echo '</table>';
+    }else{
+      echo '</td></tr>';
+    }
   }
   
   function drawStatusSubTask($id, $done, $idle, $handled,$refType,$refId,$gloablView,$rightUpdate,$rightRead){
