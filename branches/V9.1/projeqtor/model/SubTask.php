@@ -198,8 +198,6 @@ class SubTask extends SqlElement {
         }else{
           $resource= new Resource();
           $namePrio=($subTask->idPriority!='' or $subTask->idPriority!=0 )?SqlList::getNameFromId(get_class($prioSubTask), $subTask->idPriority):'';
-          echo($subTask->idPriority);
-          echo($namePrio);
           $nameResource=($subTask->idResource!='' or $subTask->idResource!=0)?SqlList::getNameFromId(get_class($resource), $subTask->idResource):'';
           $backgroundColor="";
           $i18n=' ';
