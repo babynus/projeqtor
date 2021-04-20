@@ -213,7 +213,7 @@ class SubTask extends SqlElement {
           }
           echo  '<tr>';
           echo   '<td class="assignData" >'.htmlEncode($subTask->name).'</td>';
-          echo    '<td class="assignData" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';" >'.htmlEncode($namePrio).'</td>';
+          echo    '<td class="assignData" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';filter:brightness(0) invert(var('.$colorPrio.'));" >'.htmlEncode($namePrio).'</td>';
           echo    '<td class="assignData"   style="white-space:nowrap;text-align: center;">'.htmlEncode($nameResource).'</td>';
           echo    '<td class="assignData" style="white-space:nowrap;text-align: center;'.$backgroundColor.'">'.htmlEncode($i18n).'</td>';
           echo  '</tr>';
