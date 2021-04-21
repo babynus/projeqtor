@@ -63,7 +63,7 @@ $obj = new Bill($idBill);
          
           <tr>
              <td class="dialogLabel"  >
-               <label for="billedWorkCommandWorkCommand" ><?php echo strtolower(i18n("WorkCommand")); ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+               <label for="billedWorkCommandWorkCommand" ><?php echo strtolower(i18n("colWorkCommand")); ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect"
