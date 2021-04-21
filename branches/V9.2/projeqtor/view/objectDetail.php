@@ -2236,7 +2236,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if ($col=='cancelled' or $col=='solved') echo "&nbsp;&nbsp;&nbsp;";
         // Draw a boolean (as a checkbox ====================================== BOOLEAN
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode, 'after');
         // END - ADD BY TABARY - TOOLTIP
         echo '<div dojoType="dijit.form.CheckBox" type="checkbox" ';
         echo $name;
