@@ -1260,7 +1260,7 @@ class PlanningElement extends SqlElement {
     // Add data from other planningElements dependant from this one
     $this->elementary=(count($plaList)==0)?1:0;
     foreach ($plaList as $pla) {
-      $assignedWork+=$pla->assignedWork;
+      if (!$pla->cancelled) $assignedWork+=$pla->assignedWork;
       $leftWork+=$pla->leftWork;
       $plannedWork+=$pla->plannedWork;
       $notPlannedWork+=$pla->notPlannedWork;
