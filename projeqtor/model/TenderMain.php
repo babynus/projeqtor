@@ -233,10 +233,12 @@ class TenderMain extends SqlElement {
           $projExpense->idContact = $this->idContact;
           $projExpense->externalReference = $this->externalReference;
           // #3717 : end
-          if(trim($this->receptionDateTime)){
-            $projExpense->expensePlannedDate = $this->receptionDateTime;
+          if(trim($this->deliveryDate)){
+            $projExpense->expensePlannedDate = $this->deliveryDate;
+          }else if(trim($this->receptionDateTime)){
+            $projExpense->expensePlannedDate = substr($this->receptionDateTime,0,10);
           }else if (trim($this->requestDateTime)){
-            $projExpense->expensePlannedDate = $this->requestDateTime;
+            $projExpense->expensePlannedDate = substr($this->requestDateTime);
           }else{
             $projExpense->expensePlannedDate = date('Y-m-d');
           }
