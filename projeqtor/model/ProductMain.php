@@ -53,9 +53,11 @@ class ProductMain extends ProductOrComponent {
   public $_spe_versions;
   public $_sec_SubProducts;
   public $_spe_subproducts;
+  public $_spe_showClosedStructure;
   public $_sec_ProductComposition;
   public $_productComposition;
   public $_spe_structure;
+  public $_spe_showClosedComposition;
   public $_sec_ProductBusinessFeatures; // ADD qCazelles
   public $_productBusinessFeatures; // ADD qCazelles
   public $_sec_language;
@@ -226,6 +228,21 @@ class ProductMain extends ProductOrComponent {
       return $result;
     } else if ($item=='tenders') {
       Tender::drawListFromCriteria('id'.get_class($this),$this->id);
+    }
+    if ($item=='showClosedStructure' or $item=='showClosedComposition'){
+    	$showClosed=(Parameter::getUserParameter($item)!='0')?true:false;
+    	$result.='<div style="position:absolute;right:5px;top:3px;">';
+    	$result.='<label for="'.$item.'" class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'</label>';
+    	$result.='<div id="'.$item.'" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosed)?'checked':'');
+    	$result.=' title="'.i18n('labelShowIdle').'" >';
+    	$result.='<script type="dojo/connect" event="onChange" args="evt">';
+    	$result.=' saveUserParameter("'.$item.'",((this.checked)?"1":"0"));';
+    	$result.=' if (checkFormChangeInProgress()) {return false;}';
+    	$result.=' loadContent("objectDetail.php", "detailDiv", "listForm");';
+    	$result.=' </script>';
+    	$result.='</div>';
+    	$result.='</div>';
+    	return $result;
     }
   }
   
