@@ -379,7 +379,7 @@ if(isset($_REQUEST['goToRequirement'])){
 					</td>
 					<td valign="top" style="width:20%">
 						<table>
-						<tr height="37px"><td>&nbsp;&nbsp;<?php echo i18n('filterCreateByTicket');?></td> </tr>
+						<tr height="37px"><td>&nbsp;&nbsp;<?php echo i18n('filterCreateByRequirement');?></td> </tr>
 							<tr>
 								<?php 
 							    $paramDashboardRequierementRecent =null;
