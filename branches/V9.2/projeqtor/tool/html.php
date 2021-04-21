@@ -2037,9 +2037,9 @@ function htmlDisplaySharedFilter($filterArray,$filterObjectClass,$currentFilter=
 }
 
 // BEGIN - ADD BY TABARY - TOOLTIP
-function htmlDisplayTooltip($value="", $colName="", $print=false, $outMode="") {
+function htmlDisplayTooltip($value="", $colName="", $print=false, $outMode="", $position='before') {
     if ($value=="" or $print or $outMode!="" or $colName=="") { return "";}
-    return '<div class="generalColClass" dojoType="dijit.Tooltip" position="before" connectId="'.$colName.'">'. i18n($value).'</div>';
+    return '<div class="generalColClass" dojoType="dijit.Tooltip" position="'.$position.'" connectId="'.$colName.'">'. i18n($value).'</div>';
 }
 // END - ADD BY TABATY - TOOLTIP
 
