@@ -719,6 +719,7 @@ static function isTheLeaveProject($id=null) {
         $cpt++;
         $result.=(($cpt>1)?', ':'').$cl;
       }
+      if ($cpt==0) $result.='<span style="color:#a0a0a0;"><i>'.i18n('paramNone').'</i></span>';
       $result.='</div>';
       $result.='</td></tr><tr><td colspan="2">&nbsp;</td></tr></table>';
       return $result;
