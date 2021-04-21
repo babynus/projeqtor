@@ -81,53 +81,76 @@
     if($duration){
     	$startDate = new DateTime(date("Y-m-d H:i:s"));
     	$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$duration seconds")));
-    	$duration = date_diff($startDate, $endDate, true);
-    	if($duration->y){
-    		$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
+    	$durationDiff = date_diff($startDate, $endDate, true);
+    	if($durationDiff->y){
+    		$durationDisplay .= $durationDiff->format('%y').i18n('shortYear').' ';
     	}
-    	if($duration->m){
-    		$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
+    	if($durationDiff->m){
+    		$durationDisplay .= $durationDiff->format('%m').i18n('shortMonth').' ';
     	}
-    	if($duration->d){
-    		$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
+    	if($duration >=86400){
+    		$durationDisplay .= $durationDiff->format('%d').i18n('shortDay').' ';
     	}
-    	if($duration->h){
-    		$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
+    	if($duration >=3600){
+    		$durationDisplay .= $durationDiff->format('%h').i18n('shortHour').' ';
     	}
-    	if($duration->i){
-    		$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
+    	if($duration >=60){
+    		$durationDisplay .= $durationDiff->format('%i').i18n('shortMinute').' ';
     	}
     }
-    if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
+    if(!$durationDisplay and $statusPeriod->duration)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="linkData" style="white-space:nowrap;width:10%">'.$durationDisplay.'</td>';
     $duration = $statusPeriod->durationOpenTime;
-    if($duration>$hourPerDay)$duration = round(($duration/$hourPerDay)*86400);
+    if($duration>$hourPerDay){
+      $duration = $duration/3600;
+      $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
+      $durationHour = fmod($duration,1)*3600;
+      if(fmod(($durationDay/86400), 1) > 0){
+        $hoursDay = fmod(($durationDay/86400), 1)*86400;
+      	$durationDay = $durationDay - $hoursDay;
+      	$durationHour = $durationHour + $hoursDay;
+      }
+      $duration = $durationDay+$durationHour;
+    }
     $durationDisplay = "";
     if($duration){
     	$startDate = new DateTime(date("Y-m-d H:i:s"));
     	$endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$duration seconds")));
-    	$duration = date_diff($startDate, $endDate, true);
-    	if($duration->y){
-    		$durationDisplay .= $duration->format('%y').i18n('shortYear').' ';
+    	$durationDiff = date_diff($startDate, $endDate, true);
+    	
+    	if($durationDiff->y){
+    		$durationDisplay .= $durationDiff->format('%y').i18n('shortYear').' ';
     	}
-    	if($duration->m){
-    		$durationDisplay .= $duration->format('%m').i18n('shortMonth').' ';
+    	if($durationDiff->m){
+    		$durationDisplay .= $durationDiff->format('%m').i18n('shortMonth').' ';
     	}
-    	if($duration->d){
-    		$durationDisplay .= $duration->format('%d').i18n('shortDay').' ';
+        if($duration >=86400){
+    		$durationDisplay .= $durationDiff->format('%d').i18n('shortDay').' ';
     	}
-    	if($duration->h){
-    		$durationDisplay .= $duration->format('%h').i18n('shortHour').' ';
+    	if($duration >=3600){
+    	    if($durationDiff->format('%h')>($hourPerDay/3600)){
+    	      $hour = round(($durationDiff->format('%h')*($hourPerDay/3600))/24);
+    	    }else{
+    	      $hour = $durationDiff->format('%h');
+    	    }
+    		$durationDisplay .= $hour.i18n('shortHour').' ';
     	}
-    	if($duration->i){
-    		$durationDisplay .= $duration->format('%i').i18n('shortMinute').' ';
+    	if($duration >=60){
+    		$durationDisplay .= $durationDiff->format('%i').i18n('shortMinute').' ';
     	}
     }
-    if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
+    if(!$durationDisplay and $statusPeriod->duration)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="linkData" style="white-space:nowrap;width:10%">'.$durationDisplay.'</td>';
     echo '</tr>';
   }
   echo '</table>';
   echo '<br/>';
   echo '<div align="center"><button dojoType="dijit.form.Button" type="button" onclick="dijit.byId(\'dialogStatusPeriod\').hide();">'.i18n("close").'</button></div>';
-?>
+  echo '<div align="right"><table style="position: absolute;right: 12px;bottom: 10px;width: 199px;text-align: right;font-size: 11px;color: #BABABA;">';
+  echo '<tr><td></td><td>'.i18n('colStart').'</td><td>'.i18n('colEnd').'</td></tr>';
+  echo '<tr><td>'.i18n('colMorning').'</td><td>'.getDailyHours($obj->idProject, 'startAM', false).'</td>';
+  echo '<td>'.getDailyHours($obj->idProject, 'endAM', false).'</td><tr>';
+  echo '<tr><td>'.i18n('colAfternoon').'</td><td>'.getDailyHours($obj->idProject, 'startPM', false).'</td>';
+  echo '<td>'.getDailyHours($obj->idProject, 'endAM', false).'</td><tr>';
+  echo '</table></div>';
+  ?>
