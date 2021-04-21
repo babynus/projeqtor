@@ -357,13 +357,14 @@ if ($typeDynamic == 'update') {
 				<div style="height: 40px;">
 					<label class="dialogLabel"><?php echo i18n("colReffType");?> <?php if (!isNewGui()) echo ': ';?></label>
 					<select dojoType="dijit.form.FilteringSelect"
-						class="input required" required="true"
+						class="input required" required="true" readonly
 						<?php echo autoOpenFilteringSelect ();?> name="kanbanReffList"
 						id="kanbanReffList">
-						<option value="Ticket"
-							<?php echo ($paramJson['typeData']=='Ticket' ? 'selected' : '');?>><?php echo i18n('Ticket');?></option>
-						<option value="Activity"
-							<?php echo ($paramJson['typeData']=='Activity' ? 'selected' : '');?>><?php echo i18n('Activity');?></option>
+							<?php foreach (array('Ticket','Activity','Action','Requirement') as $typ) {
+  					    if ($paramJson['typeData']==$typ or Security::checkDisplayMenuForUser($typ,false)) {?>
+  					      <option value="<?php echo $typ;?>" <?php echo ($paramJson['typeData']==$typ)?'selected':'';?> ><?php echo i18n($typ);?></option>
+  					    <?php }?>
+					    <?php }?>  
 					</select>
 				</div>
 			</td>
