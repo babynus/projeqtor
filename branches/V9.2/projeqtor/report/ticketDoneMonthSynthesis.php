@@ -190,12 +190,22 @@ foreach ($lstTicket as $ticket){
 			$delayValue = ($duration/60)/60;
 			break;
 		case 'OH' :
+			if($duration>$hourPerDay){
+				$durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
+				$durationHour = fmod($duration,1)*3600;
+				$duration = $durationDay+$durationHour;
+			}
 			$delayValue = ($duration/60)/60;
 			break;
 		case 'DD' :
 			$delayValue = (($duration/60)/60)/24;
 			break;
 		case 'OD' :
+			if($duration>$hourPerDay){
+				$durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
+				$durationHour = fmod($duration,1)*3600;
+				$duration = $durationDay+$durationHour;
+			}
 			$delayValue = (($duration/60)/60)/24;
 			break;
 	}
@@ -226,6 +236,11 @@ foreach ($lstTicket as $ticket){
 	$result[$ticket->idTicketType][$ticket->idUrgency]['OK']=$nbOk;
 	$result[$ticket->idTicketType][$ticket->idUrgency]['KO']=$nbKo;
 }
+$startAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startAM', false);
+$endAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endAM', false);
+$startPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startPM', false);
+$endPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endPM', false);
+$hourPerDay = abs(strtotime($startAMDate)-strtotime($endAMDate))+abs(strtotime($startPMDate)-strtotime($endPMDate));
 foreach ($lstUrgency as $urgency){
   foreach ($lstTicketType as $type){
     echo '<tr>';
@@ -235,50 +250,82 @@ foreach ($lstUrgency as $urgency){
     echo '<td class="reportTableData" style="width:10%">'.$OK.'</td>';
     $durationOK = (isset($result[$type->id][$urgency->id]['durationOK']))?$result[$type->id][$urgency->id]['durationOK']:0;
     if($durationOK)$durationOK = $durationOK/$OK;
+    if($durationOK>$hourPerDay){
+    	$durationOK = $durationOK/3600;
+    	$durationDay = (($durationOK - fmod($durationOK,1))/($hourPerDay/3600))*86400;
+    	$durationHour = fmod($durationOK,1)*3600;
+    	if(fmod(($durationDay/86400), 1) > 0){
+    		$hoursDay = fmod(($durationDay/86400), 1)*86400;
+    		$durationDay = $durationDay - $hoursDay;
+    		$durationHour = $durationHour + $hoursDay;
+    	}
+    	$durationOK = $durationDay+$durationHour;
+    }
     $startDate = new DateTime(date("Y-m-d H:i:s"));
     $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationOK seconds")));
-    $durationOK = date_diff($startDate, $endDate, true);
+    $durationDiff = date_diff($startDate, $endDate, true);
     $durationDisplay = '';
-    if($durationOK->y){
-    	$durationDisplay .= $durationOK->format('%y').i18n('shortYear').' ';
-    }
-    if($durationOK->m){
-    	$durationDisplay .= $durationOK->format('%m').i18n('shortMonth').' ';
-    }
-    if($durationOK->d){
-    	$durationDisplay .= $durationOK->format('%d').i18n('shortDay').' ';
-    }
-    if($durationOK->h){
-    	$durationDisplay .= $durationOK->format('%h').i18n('shortHour').' ';
-    }
-    if($durationOK->i){
-    	$durationDisplay .= $durationOK->format('%i').i18n('shortMinute').' ';
-    }
+  	if($durationDiff->y){
+  		$durationDisplay .= $durationDiff->format('%y').i18n('shortYear').' ';
+  	}
+  	if($durationDiff->m){
+  		$durationDisplay .= $durationDiff->format('%m').i18n('shortMonth').' ';
+  	}
+    if($durationOK >=86400){
+  		$durationDisplay .= $durationDiff->format('%d').i18n('shortDay').' ';
+  	}
+  	if($durationOK >=3600){
+  	    if($durationDiff->format('%h')>($hourPerDay/3600)){
+  	      $hour = round(($durationDiff->format('%h')*($hourPerDay/3600))/24);
+  	    }else{
+  	      $hour = $durationDiff->format('%h');
+  	    }
+  		$durationDisplay .= $hour.i18n('shortHour').' ';
+  	}
+  	if($durationOK >=60){
+  		$durationDisplay .= $durationDiff->format('%i').i18n('shortMinute').' ';
+  	}
     if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
     $KO = (isset($result[$type->id][$urgency->id]['KO']))?$result[$type->id][$urgency->id]['KO']:0;
     echo '<td class="reportTableData" style="width:10%">'.$KO.'</td>';
     $durationKO = (isset($result[$type->id][$urgency->id]['durationKO']))?$result[$type->id][$urgency->id]['durationKO']:0;
     if($durationKO)$durationKO = $durationKO/$KO;
+    if($durationKO>$hourPerDay){
+    	$durationKO = $durationOK/3600;
+    	$durationDay = (($durationKO - fmod($durationKO,1))/($hourPerDay/3600))*86400;
+    	$durationHour = fmod($durationKO,1)*3600;
+    	if(fmod(($durationDay/86400), 1) > 0){
+    		$hoursDay = fmod(($durationDay/86400), 1)*86400;
+    		$durationDay = $durationDay - $hoursDay;
+    		$durationHour = $durationHour + $hoursDay;
+    	}
+    	$durationKO = $durationDay+$durationHour;
+    }
     $startDate = new DateTime(date("Y-m-d H:i:s"));
     $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationKO seconds")));
-    $durationKO = date_diff($startDate, $endDate, true);
+    $durationDiff = date_diff($startDate, $endDate, true);
     $durationDisplay = '';
-    if($durationKO->y){
-    	$durationDisplay .= $durationKO->format('%y').i18n('shortYear').' ';
-    }
-    if($durationKO->m){
-    	$durationDisplay .= $durationKO->format('%m').i18n('shortMonth').' ';
-    }
-    if($durationKO->d){
-    	$durationDisplay .= $durationKO->format('%d').i18n('shortDay').' ';
-    }
-    if($durationKO->h){
-    	$durationDisplay .= $durationKO->format('%h').i18n('shortHour').' ';
-    }
-    if($durationKO->i){
-    	$durationDisplay .= $durationKO->format('%i').i18n('shortMinute').' ';
-    }
+    if($durationDiff->y){
+  		$durationDisplay .= $durationDiff->format('%y').i18n('shortYear').' ';
+  	}
+  	if($durationDiff->m){
+  		$durationDisplay .= $durationDiff->format('%m').i18n('shortMonth').' ';
+  	}
+    if($durationKO >=86400){
+  		$durationDisplay .= $durationDiff->format('%d').i18n('shortDay').' ';
+  	}
+  	if($durationKO >=3600){
+  	    if($durationDiff->format('%h')>($hourPerDay/3600)){
+  	      $hour = round(($durationDiff->format('%h')*($hourPerDay/3600))/24);
+  	    }else{
+  	      $hour = $durationDiff->format('%h');
+  	    }
+  		$durationDisplay .= $hour.i18n('shortHour').' ';
+  	}
+  	if($durationKO >=60){
+  		$durationDisplay .= $durationDiff->format('%i').i18n('shortMinute').' ';
+  	}
     if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
     $ponctuality = 0;
