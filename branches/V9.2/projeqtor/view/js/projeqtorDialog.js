@@ -2889,6 +2889,21 @@ function assignmentUpdateLeftWork(prefix) {
   var initLeft=dojo.byId(prefix + "LeftWorkInit");
   var assigned=dojo.byId(prefix + "AssignedWork");
   var newAssigned=dojo.number.parse(assigned.value);
+  
+
+  if(dojo.byId('objectClass').value=='Activity' && prefix=='assignment'){
+    var isOnRealTime=dijit.byId('workOnRealTime').get('value');
+    if(isOnRealTime=='on'){
+      var realdWork=dojo.byId(prefix + "RealWork").value;
+      if(newAssigned<realdWork){
+        dijit.byId(prefix + "AssignedWork").set("value",initAssigned.value);
+        dijit.byId(prefix+"LeftWork").set("value",initLeft.value);
+        showAlert(i18n('assingedWorkCantBeLowerInWorkOnRealTime'));
+        return;
+      }
+    }
+  }
+  
   if (newAssigned == null || isNaN(newAssigned)) {
     newAssigned=0;
     assigned.value=dojo.number.format(newAssigned);
@@ -2949,6 +2964,19 @@ function saveAssignment(definitive) {
   var mode = dojo.byId('mode').value;
   var isTeam = dojo.byId('isTeam').value;
   var isOrga = dojo.byId('isOrganization').value;
+  
+  if(dojo.byId('objectClass').value=='Activity'){
+    var isOnRealTime=dijit.byId('workOnRealTime').get('value');
+    if(isOnRealTime=='on'){
+      var realdWork=dojo.byId('assignmentRealWork').value,
+            assign=dojo.byId('assignmentAssignedWork').value;
+      if(assign<realdWork){
+        dijit.byId("assignmentAssignedWork").set("value",dojo.byId('assignedWorkOrigin').value);
+        showAlert(i18n('assingedWorkCantBeLowerInWorkOnRealTime'));
+        return;
+      }
+    }
+  }
   
   if (formVar.validate()) {
     dijit.byId("assignmentPlannedWork").focus();
@@ -5626,8 +5654,9 @@ function assUpdateLeftWork(id) {
 	  newAss=0;
 	  dijit.byId("assAssignedWork_"+id).set('value',0);
   }
+  isOnRealTime=false;
   if(dojo.byId('objectClass').value=='Activity'){
-    var isOnRealTime=dijit.byId('workOnRealTime').get('value');
+    isOnRealTime=dijit.byId('workOnRealTime').get('value');
     if(isOnRealTime=='on'){
       var realdWork=dojo.byId("RealWork_"+id).value;
       if(assign<realdWork){
@@ -5647,14 +5676,21 @@ function assUpdateLeftWork(id) {
   // update assigned for PlanningElement
   var objClass=dojo.byId('objectClass').value;
   var assPeAss=dijit.byId(objClass+'PlanningElement_assignedWork');
+  var valPeAss=dijit.byId(objClass+'PlanningElement_validatedWork');
   if(assPeAss){
     assPeAss.set("value", assPeAss.get("value") + diff);
+  }
+  if(dojo.byId('objectClass').value=='Activity' && isOnRealTime=='on' && valPeAss){
+    valPeAss.set("value", assPeAss.get("value"));
   }
   //
   dijit.byId('assLeftWork_'+id).set("value",newLeft); // Will trigger the saveLeftWork() function
   dojo.byId('initAss_'+id).value = newAss;
   diff = 0;
   dojo.byId(objClass+'PlanningElement_assignedCost').style.textDecoration="line-through";
+  if(dojo.byId('objectClass').value=='Activity' && isOnRealTime=='on'){
+    dojo.byId(objClass+'PlanningElement_validatedCost').style.textDecoration="line-through";;
+  }
 }
 function assUpdateLeftWorkDirect(id) {
   var objClass=dojo.byId('objectClass').value;

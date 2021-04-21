@@ -238,6 +238,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       $element=new $this->refType ($this->refId);
       if($element->workOnRealTime==1){
         self::$_fieldsAttributes["validatedWork"]="readonly";
+        self::$_fieldsAttributes["validatedCost"]="readonly";
         self::$_fieldsAttributes["_spe_idWorkUnits"]="hidden";
       }
     }
@@ -449,8 +450,11 @@ class ActivityPlanningElementMain extends PlanningElement {
       $act= new Activity($this->refId);
       if($act->workOnRealTime==1 ){
         $this->validatedWork=$this->plannedWork;
+        $this->validatedCost=$this->plannedCost;
+        $this->assignedCost=$this->plannedCost;
       }
     }
+    
     return parent::save();
   }
   

@@ -8214,7 +8214,8 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   var tabSubTask=dojo.byId(refType+'_'+refId+'_drawSubTask'),
         subTaskCreat=tabSubTask.querySelector('#'+refType+'_'+refId+'_newSubTaskRow'),
           newSubTask=subTaskCreat.cloneNode(true),
-            imgGrab=document.createElement('img');
+            imgGrab=document.createElement('img'),
+              buttonAddAttachExist=false;
   
   imgGrab.setAttribute('style','width:7px;top: 4px;position: relative;');
   imgGrab.setAttribute('src','css/images/iconDrag.gif');
@@ -8233,19 +8234,34 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
                       newPrio=document.createElement('input'),
                        newResource=document.createElement('input'),
                         newName=document.createElement('input'),
-                        slidContainerDiv=newSubTask.querySelector('#'+refType+'_'+refId+'_slidContainer_0');
+                          slidContainerDiv=newSubTask.querySelector('#'+refType+'_'+refId+'_slidContainer_0'),
+                              divAttachment=newSubTask.querySelector('#'+refType+'_'+refId+'_divAttachement_0');
+                                
   newName.setAttribute('id',refType+'_'+refId+'_nameNewSubTask_'+id);
   newPrio.setAttribute('id',refType+'_'+refId+'_priorityNewSubTask_'+id);
   newResource.setAttribute('id',refType+'_'+refId+'_resourceNewSubTask_'+id);
   slidContainerDiv.id=refType+'_'+refId+'_slidContainer_'+id;
+  divAttachment.setAttribute('id','divAttachement_'+id);
+  
+  if(newSubTask.querySelector('#'+refType+'_'+refId+'_buttonAddAttach_0')){
+    buttonAddAttachExist=true;
+    buttonAddAttach=newSubTask.querySelector('#'+refType+'_'+refId+'_buttonAddAttach_0');
+    buttonAddAttach.setAttribute('id','buttonAddAttach_'+id);
+    buttonAddAttach.setAttribute('onclick','addAttachment("file","SubTask",'+id+')');
+  }
+
   
   var pos=slidContainerDiv.querySelector('#'+refType+'_'+refId+'_pos_0'),
         prev=slidContainerDiv.querySelector('#'+refType+'_'+refId+'_prev_0'),
           next=slidContainerDiv.querySelector('#'+refType+'_'+refId+'_next_0');
   
+  
+  
   cloneName.parentNode.replaceChild(newName,cloneName);
   clonePrio.parentNode.replaceChild(newPrio,clonePrio);
   cloneResource.parentNode.replaceChild(newResource,cloneResource);
+
+  
   grabDiv.removeAttribute('id');
   grabDiv.className='dojoDndHandle handleCursor todoListTab';
   grabDiv.innerHTML="";
@@ -8288,6 +8304,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
     style:"min-height:30px;"+dijit.byId(refType+'_'+refId+'_nameNewSubTask_0').style,
   }, refType+'_'+refId+"_nameNewSubTask_"+id);
   
+  if(buttonAddAttachExist)buttonAddAttach.style.display='unset';
   newNameText.set('value',dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value);
   dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value='';
   dojo.setAttr(refType+'_'+refId+'_nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',\''+refType+'\','+refId+')');

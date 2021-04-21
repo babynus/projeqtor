@@ -117,10 +117,13 @@ if ($planningMode=='RECW') {
          <input id="interventionActivityId" name="interventionActivityId" type="hidden" value="<?php echo $refId ;?>" />
          <input id="assignedIdOrigin" name="assignedIdOrigin" type="hidden" value="<?php echo $assignedIdOrigin ;?>" />
          <input id="assignedWorkOrigin" name="assignedWorkOrigin" type="hidden" value="<?php echo $assignmentObj->assignedWork ;?>" />
+         <input id="leftWorkOrigin" name="leftWorkOrigin" type="hidden" value="<?php echo $assignmentObj->leftWork ;?>" />
          <input id="isTeam" name="isTeam" type="hidden" value="<?php echo $isTeam;?>" />
          <input id="isOrganization" name="isOrganization" type="hidden" value="<?php echo $isOrganization;?>" />
          <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
          <input id="planningMode" name="planningMode" type="hidden" value="<?php echo $planningMode;?>" />
+
+      
          <table>
            <tr>
              <td class="dialogLabel" >

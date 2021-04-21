@@ -72,6 +72,7 @@ class SubTask extends SqlElement {
   // ============================================================================**********
   static function drawSubtasksForObject($obj,$refType, $refId,$rightUpdate,$rightRead,$refresh=false,$idResource=false,$gloablView=false,$dialogView=false){
     global $cr, $print, $user, $comboDetail;
+    $attach= new Attachment();
     if ($comboDetail or (!$rightUpdate and !$rightRead) or ($rightUpdate=='NO' and $rightRead=='NO')) {
       return;
     }
@@ -159,49 +160,67 @@ class SubTask extends SqlElement {
         $prioSubTask=new Priority($subTask->idPriority);
         $colorPrio=$prioSubTask->color;
         if(!$print){
-        echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" '.(($rightUpdate=='NO' and $rightRead=='YES')?'':'class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'"').'  >';
-        echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" type="hidden" />';
-        if($rightUpdate=='NO' and $rightRead=='YES'){
-          echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
-        }else{
-          echo    '<td  class="dojoDndHandle handleCursor todoListTab"  style="text-align: center;"><img style="width:7px;top:4px;position: relative;" src="css/images/iconDrag.gif"></td>';
-        }
+          echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" '.(($rightUpdate=='NO' and $rightRead=='YES')?'':'class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'"').'  >';
+          echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" type="hidden" />';
+          if($rightUpdate=='NO' and $rightRead=='YES'){
+            echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
+          }else{
+            echo    '<td  class="dojoDndHandle handleCursor todoListTab"  style="text-align: center;"><img style="width:7px;top:4px;position: relative;" src="css/images/iconDrag.gif"></td>';
+          }
+          
+          echo    '<td class="todoListTab" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
+          echo      '<textarea title="'.i18n('colName').'" id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" 
+                      dojoType="dijit.form.Textarea" style="'.(($gloablView and $widthDisplay>='1530')?"width:96%;":"width:90%;" ).'max-height:150px !important;" 
+                      value="'. htmlEncode($subTask->name).'" ';
+          if ($rightUpdate=='NO' and $rightRead=='YES'){
+            echo ' readonly="true">';
+          }else {
+            echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  ></textarea>';
+          }
+          if($rightUpdate=='YES'){
+            echo '<a id="buttonAddAttach_'.$subTask->id.'" onClick="addAttachment(\'file\',\''.get_class($subTask).'\',\''.$subTask->id.'\');" title="'.i18n('addAttachment').'"> ';
+            echo ' <div class="imageColorNewGuiNoSelection iconAttachFiles22 iconAttachFiles iconSize22" style="display:inline-block;height:24px;top:-3px;position:relative;margin-left:5px;" title="">&nbsp;</div>';
+            echo '</a>';
+          }
+          echo    '<div id="divAttachement_'.$subTask->id.'" style="width:90%;margin:0% 5%;" >';
+                    $allAttach=$attach->getSqlElementsFromCriteria(array("refType"=>get_class($subTask),"refId"=>$subTask->id),null);
+                    if(!empty($allAttach)){
+                      foreach ($allAttach as $attachment){
+                        if ($attachment->isThumbable()) {
+                          echo '<img src="'.getImageThumb($attachment->getFullPathFileName(), 32).'" '.' title="'.htmlEncode($attachment->fileName).'" style="float:left;cursor:pointer"'.' onClick="showImage(\'Attachment\',\''.htmlEncode($attachment->id).'\',\''.htmlEncode($attachment->fileName, 'protectQuotes').'\');" />';
+                        }else{
+                          echo htmlGetMimeType($attachment->mimeType, $attachment->fileName, $attachment->id);
+                        }
+                      }
+                    }
+          echo'    </div>';
+          echo    '</td>';
+          echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';">';
+          echo      '<select dojoType="dijit.form.FilteringSelect"  id="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" '.autoOpenFilteringSelect().''; 
+          if ($rightUpdate=='NO' and $rightRead=='YES'){
+            echo ' readonly="true">';
+          }else {
+            echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'true\',\'false\');"  >';
+          }
+                      htmlDrawOptionForReference('idPriority',$subTask->idPriority);
+          echo      '</select>';
+          echo    '</td>';
+          echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
+          echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" style="width:auto;" class="input"Â² '.autoOpenFilteringSelect().'';
+          if ($rightUpdate=='NO' and $rightRead=='YES'){
+            echo ' readonly="true" >';
+          }else {
+            echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'false\',\'true\');">';
+          }
+                      htmlDrawOptionForReference('idResource',$subTask->idResource,$obj,false,$critFld,$critVal);
+          echo      '</select>';
+          echo    '</td>';
+          echo    '<td   style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;">';
+                    $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId,$gloablView,$rightUpdate,$rightRead);
+          echo    '</td>';
+          echo  '</tr>';
+          $lastSortRegist=$subTask->sortOrder;
         
-        echo    '<td class="todoListTab" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
-        echo      '<textarea title="'.i18n('colName').'" id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" 
-                    dojoType="dijit.form.Textarea" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'max-height:150px !important;" 
-                    value="'. htmlEncode($subTask->name).'" ';
-        if ($rightUpdate=='NO' and $rightRead=='YES'){
-          echo ' readonly="true">';
-        }else {
-          echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  ></textarea>';
-        }
-        echo    '</td>';
-        echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';">';
-        echo      '<select dojoType="dijit.form.FilteringSelect"  id="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" '.autoOpenFilteringSelect().''; 
-        if ($rightUpdate=='NO' and $rightRead=='YES'){
-          echo ' readonly="true">';
-        }else {
-          echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'true\',\'false\');"  >';
-        }
-                    htmlDrawOptionForReference('idPriority',$subTask->idPriority);
-        echo      '</select>';
-        echo    '</td>';
-        echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
-        echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_resourceNewSubTask_'.$subTask->id.'" style="width:auto;" class="input"Â² '.autoOpenFilteringSelect().'';
-        if ($rightUpdate=='NO' and $rightRead=='YES'){
-          echo ' readonly="true" >';
-        }else {
-          echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.',\'false\',\'true\');">';
-        }
-                    htmlDrawOptionForReference('idResource',$subTask->idResource,$obj,false,$critFld,$critVal);
-        echo      '</select>';
-        echo    '</td>';
-        echo    '<td   style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;">';
-                  $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId,$gloablView,$rightUpdate,$rightRead);
-        echo    '</td>';
-        echo  '</tr>';
-        $lastSortRegist=$subTask->sortOrder;
         }else{
           $resource= new Resource();
           $namePrio=($subTask->idPriority!='' )?SqlList::getNameFromId(get_class($prioSubTask), $subTask->idPriority):'';
@@ -233,11 +252,15 @@ class SubTask extends SqlElement {
       echo  '<tr id="'.$refType.'_'.$refId.'_newSubTaskRow" >';
       echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_0" value="'.$lastSort.'" type="hidden" />';
        echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
-      echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
+      echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;" >';
       echo      '<textarea title="'.i18n('colName').'" id="'.$refType.'_'.$refId.'_nameNewSubTask_0" name="'.$refType.'_'.$refId.'_nameNewSubTask_0" 
                   dojoType="dijit.form.Textarea" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'max-height:150px !important;" 
                   maxlength="4000"  onChange="updateSubTask(0,\''.$refType.'\','.$refId.');" value="">';
       echo      '</textarea>';
+      if($rightUpdate=='YES'){
+        echo '<a id="'.$refType.'_'.$refId.'_buttonAddAttach_0" style="display:none;" title="'.i18n('addAttachment').'"> '.formatSmallButton('Add').'</a>';
+      }
+      echo    '<div id="'.$refType.'_'.$refId.'_divAttachement_0" ></div>';
       echo    '</td>';
       echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
       echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_priorityNewSubTask_0" style="width:auto;"  class="input" readonly="true" >';
