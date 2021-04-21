@@ -944,6 +944,8 @@ if ($type == 'empty') {
         if(property_exists($act, 'idClient')){
           if($act->idClient){
             $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$act->idProject,'idClient'=>$act->idClient),'id');
+          }else{
+            $listCommand=SqlList::getListWithCrit('Command',array('idProject'=>$act->idProject),'id');
           }
         }else{
           if($act->idContact){
