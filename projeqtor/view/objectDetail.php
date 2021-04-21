@@ -7932,9 +7932,9 @@ function drawClientElementList($item, $object){
 
 function drawWorkCommand($list,$obj){
   global $cr, $print, $user, $browserLocale, $comboDetail;
-  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create')=="YES";
-  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update')=="YES";
-  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete')=="YES";
+  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create',$obj)=="YES";
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update',$obj)=="YES";
+  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete',$obj)=="YES";
   if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
     $canCreate=false;
     $canUpdate=false;
@@ -7997,9 +7997,9 @@ function drawWorkCommand($list,$obj){
 
 function drawBilledWorkCommand($list,$obj){
   global $cr, $print, $user, $browserLocale, $comboDetail;
-  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create')=="YES";
-  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update')=="YES";
-  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete')=="YES";
+  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create',$obj)=="YES";
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update',$obj)=="YES";
+  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete',$obj)=="YES";
   if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
     $canCreate=false;
     $canUpdate=false;
@@ -8015,7 +8015,7 @@ function drawBilledWorkCommand($list,$obj){
   echo '</tr>';
   echo '<tr>';
   echo '  <td class="noteHeader" style="width:10%">';
-  if($canCreate){
+  if($canUpdate){
     echo '    <a onClick="addBilledWorkCommand(\''.$obj->id.'\');" title="'.i18n('addProviderTerm').'" > '.formatSmallButton('Add').'</a>';
   }
   echo ' </td>';
