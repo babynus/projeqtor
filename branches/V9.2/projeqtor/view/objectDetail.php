@@ -5009,6 +5009,8 @@ function drawStructureFromObject($obj, $refresh=false, $way=null, $item=null) {
   } else {
     errorLog("unknown way=$way in drawStructureFromObject()");
   }
+  $showClosedStructure=Parameter::getUserParameter('showClosedStructure');
+  $showClosedComposition=Parameter::getUserParameter('showClosedComposition');
   $pcs=new ProductStructure();
   $list=$pcs->getSqlElementsFromCriteria($crit);
   global $cr, $print, $user, $comboDetail;
@@ -5046,6 +5048,7 @@ function drawStructureFromObject($obj, $refresh=false, $way=null, $item=null) {
     }
     if ($compObj->scope=='Product') $compObj=new Product($compObj->id);
     else $compObj=new Component($compObj->id);
+    if($compObj->idle and (!$showClosedStructure and $way=='structure') or (!$showClosedComposition and $way!='structure'))continue;
     $userId=$comp->idUser;
     $userName=SqlList::getNameFromId('User', $userId);
     $creationDate=$comp->creationDate;
