@@ -105,7 +105,8 @@ class ActivityMain extends SqlElement {
   
   private static $_fieldsTooltip = array(
       "fixPlanning"=> "tooltipFixPlanningActivity",
-      "paused"=>"tooltipPaused"
+      "paused"=>"tooltipPaused",
+      "isPlanningActivity"=>"titleIsPlanningActivity"
   );
   
   private static $_fieldsAttributes = array(
