@@ -334,10 +334,13 @@ class ActivityMain extends SqlElement {
       $colScript .= '  if(this.checked){';
       $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("value",dijit.byId("ActivityPlanningElement_plannedWork").get("value"));';
       $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("disabled",true);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_validatedCost").set("disabled",true);';
       $colScript .= '   if(dojo.byId("tabActivityWorkUnit"))dojo.byId("tabActivityWorkUnit").parentNode.style.display="none"';
       $colScript .= '  }else{';
       $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("disabled",false);';
       $colScript .= '   dijit.byId("ActivityPlanningElement_validatedWork").set("readOnly",false);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_validatedCost").set("disabled",false);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_validatedCost").set("readOnly",false);';
       $colScript .= '   if(dojo.byId("tabActivityWorkUnit"))dojo.byId("tabActivityWorkUnit").parentNode.style.display="table-cell"';
       $colScript .= '  }';
       $colScript .= '   formChanged();';
@@ -662,7 +665,14 @@ class ActivityMain extends SqlElement {
       if($this->workOnRealTime==1 and $old->workOnRealTime!=$this->workOnRealTime){
         $this->ActivityPlanningElement->validatedWork=$this->ActivityPlanningElement->plannedWork;
       }
-    }
+    }else {
+      if($this->idActivityType){
+        $actType= new ActivityType($this->idActivityType);
+        if($actType->activityOnRealTime==1){
+          $this->workOnRealTime=1;
+        }
+      }
+    }    
     
     $result = parent::save ();
     if (! strpos ( $result, 'id="lastOperationStatus" value="OK"' )) {
