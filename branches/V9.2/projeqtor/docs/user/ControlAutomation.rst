@@ -32,6 +32,12 @@ A workflow defines the possibility to go from one status to another one, and who
 
 Once defined, a workflow can be linked to any type of any item. 
 
+It is possible to define events when a state passes. 
+
+If a field is required for the transition from one state to another then you will be automatically redirected to the required field. 
+
+Regardless of the layout and presentation of your screens.
+
 .. figure:: /images/GUI/CONTROLAUTO_SCR_Workflow.png
    :alt: Workflow screen
    
@@ -413,7 +419,6 @@ Selecting an item in the list will automatically fill in the note text field.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -919,14 +924,3 @@ After logging in, a message generated after "Login accepted" that tells you that
       The icon |Notif| provides direct access to the notifications screen.
       
       Numbers indicate the number of unread notifications
-
-
-
-
-
-
-
-
-
-
-

@@ -44,7 +44,6 @@ The risk management plan is a key point to project management :
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -90,7 +89,6 @@ The risk management plan is a key point to project management :
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -149,7 +147,6 @@ An opportunity can be seen as a positive risk. It is not a threat but the opport
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend| 
-   :widths: 30, 50
    :header-rows: 1
 
    * - Field
@@ -194,7 +191,6 @@ An opportunity can be seen as a positive risk. It is not a threat but the opport
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend| 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -288,7 +284,6 @@ Actions must be defined to solve the issue.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend| 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -319,7 +314,6 @@ Actions must be defined to solve the issue.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend| 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -390,7 +384,6 @@ They must be regularly followed-up.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend| 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -415,7 +408,6 @@ They must be regularly followed-up.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend| 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field

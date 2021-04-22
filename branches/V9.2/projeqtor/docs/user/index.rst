@@ -19,7 +19,7 @@ Its particularity, in addition to its completeness, is to be oriented towards qu
 
     \newpage
     
-What's new in version 9.0 ?
+What's new in version 9.2 ?
 ---------------------------
 
 Find in this manual, every 3 months, the latest features integrated into ProjeQtOr.
@@ -30,20 +30,32 @@ We offer you a small overview of the major developments and you will find the fu
 
 .. container:: 
    
-   **New Interface**
-
-   .. image:: /images/NewInterface_connexion.png
-      :align: center
+   **Do not start project before Validated Start Date**
       
-   ProjeQtOr offers you a whole new interface, more intuitive and more ergonomic.
-   Finally a complete and sexy tool!
+   When this global parameter is activiated, Projects with validated start date will not be plannned before this date.
    
    :ref:`gui`
       
          
+.. container:: 
+   
+   **To defined**
+      
+   To defined
+   
+   :ref:`todefined`
 
-
-
+.. container:: 
+   
+   **To defined**
+      
+   To defined
+   
+   :ref:`todefined`
+   
+   
+   
+   
 .. raw:: latex
 
     \newpage

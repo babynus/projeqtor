@@ -340,7 +340,7 @@ Ability to filter activities by data or type, for instance by assigned resources
    * - Cancelled
      - Box checked indicates the activity is cancelled.
    * - Target version
-     - The target version of the product allocated in delivery of the activity.	
+     - The target version of the product allocated in delivery of the activity.  
    * - :term:`Result`
      - Complete description of the treatment done on the activity. 
  
@@ -437,7 +437,7 @@ ProjeQtOr offers two types of milestone:
    * - Cancelled
      - Box checked indicates the milestone is cancelled.
    * - Target version
-     - The target version of the product allocated in delivery of the milestone.	
+     - The target version of the product allocated in delivery of the milestone. 
    * - :term:`Result`
      - Complete description of the treatment done on the milestone. 
  
