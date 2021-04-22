@@ -31,7 +31,6 @@ The function defines the generic competency of a resource.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -94,7 +93,6 @@ See: :ref:`workflow`.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -151,7 +149,6 @@ Allows to define different kinds of resolution for tickets.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -188,7 +185,6 @@ It defines in a visual way the global conformity of the project.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -238,7 +234,6 @@ It is displayed on Today screen, for each project, as a Red / Amber / Green traf
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -284,7 +279,6 @@ It is displayed on Today screen, for each project.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -322,7 +316,6 @@ It is displayed on Today screen, for each project.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -362,7 +355,6 @@ The likelihood is the probability of a risk or an opportunity to occur.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -417,7 +409,6 @@ The criticality is the importance of an element to its context.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -442,7 +433,7 @@ The criticality is the importance of an element to its context.
 .. index:: Severity - Lists of values
 
 .. _severity:
-	
+   
 Severities
 **********
 
@@ -454,7 +445,6 @@ The severity designs the level of negative or positive impact the risk or opport
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -494,7 +484,6 @@ The ticket urgency is an element given by the requestor to indicate the quicknes
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -532,7 +521,6 @@ The ticket priority defines the order to treat different tickets.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -573,7 +561,6 @@ The risk level measures the technical risk of implementation of a requirement.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -607,7 +594,6 @@ The feasibility defines the first analysis of implementation of a requirement.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -647,7 +633,6 @@ The efficiency measures the result of an action.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -681,7 +666,6 @@ The payment deadline is stated on the bill.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -722,7 +706,6 @@ The mode of payment.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -752,7 +735,6 @@ The mode of delivery.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -790,7 +772,6 @@ The measure units.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -817,7 +798,6 @@ The orientation of the budget
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -841,7 +821,6 @@ The orientation of the budget
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -870,7 +849,6 @@ Tender status displayed on Tenders screen and in the table Submissions of tender
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -906,7 +884,6 @@ Define your categories of project and you are able to select one in Project scre
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -934,7 +911,6 @@ That is useful to calculate weighting between different parameters in Reports->K
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -966,7 +942,6 @@ That is useful to calculate weighting between different parameters in Reports->K
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -997,7 +972,6 @@ Define your incoming status list and select it in Incoming screen.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1030,7 +1004,6 @@ Define your deliverable status list and select it in Deliverable screen.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1068,7 +1041,6 @@ Then in Product or Component screen you can select your languages values.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1095,7 +1067,6 @@ Allows you to define and create your own list of locations, Sites, Cities, Count
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1121,7 +1092,6 @@ Allows you to define and create your own list of periods. These are used to defi
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1151,7 +1121,6 @@ See: :ref:`incomes<renewal>`
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1176,7 +1145,6 @@ xoixoioxioxioix
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1211,7 +1179,6 @@ These values are used in the :ref:`planned interventions<planned-interventions>`
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
