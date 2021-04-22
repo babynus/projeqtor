@@ -168,7 +168,6 @@ See::ref:`asset-management`
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Users miscellaneous section fields
-   :widths: 30, 70
    :header-rows: 1
 
    * - Field

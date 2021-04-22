@@ -28,7 +28,7 @@ Those sections allows to set information or add information to an item of the el
    
    |two| :ref:`assignment-section` [Activity]
    
-   |three| :ref:`treatment-section`
+   |three| :ref:`treatmentsection`
    
    |four| :ref:`Configuration<configuration-project>`
    
@@ -426,7 +426,7 @@ The workload saved in this window will be displayed to the :ref:`planned interve
    
   
 
-.. _treatment-section: 
+.. _treatmentsection: 
 
 Treatment section
 -----------------
@@ -434,39 +434,120 @@ Treatment section
 This section contains information on the treatment of articles, ie on the life and progress of the element.
 
 It usually contains status information, macro reports, situations or those responsible for the work of this element.   
+
+.. figure:: /images/GUI/COMMON_ZONE_Treatment.png
+   :alt: Treatment section
    
+   Treatment section for project   
 
 Depending on the item, this section may display different fields.
 
 All the lists in this section are customizable.  
 
 
- .. compound:: Macro status
+.. rubric:: Project tracking settings
+
+This part of the section allows you to follow your project in a more visual way.
+
+.. figure:: /images/GUI/COMMON_ZONE_FollowProject.png
+   :alt: Project tracking settings
+
+   Project tracking settings
+
+On the Today screen, you can see this informations in the scope of the numbers counted in the Project Section.
+
+.. figure:: /images/GUI/COMMON_ZONE_TodayScopeProject.png
+   :alt: scope of the numbers counted 
+
+   scope of the numbers counted in the project section on Today screen
+   
+
+.. rubric:: Macro status
  
-    The macros states work thanks to levers.
+The macros states work thanks to levers.
     
-    Several states are populated directly based on the information you record.
+Several states are populated directly based on the information you record.
    
    
-    .. compound:: in progress
+ .. compound:: in progress
     
-      The field is filled in when you fill in the first charge on your timesheet.
+   The field is filled in when you fill in the first charge on your timesheet.
 
-      Please note, the date recorded in the in progress field is the date on which the charge is entered and not the day on which it is entered.
+   Please note, the date recorded in the in progress field is the date on which the charge is entered and not the day on which it is entered.
     
-    .. compound:: Done
+ .. compound:: Done
     
-      The field is filled in when you fill in the last charge on your timesheet.
+   The field is filled in when you fill in the last charge on your timesheet.
 
-      The remaining time MUST therefore be at 0 for this field to be completed.
+   The remaining time MUST therefore be at 0 for this field to be completed.
     
-    .. compound:: Closed
+ .. compound:: Closed
     
-      The field is filled in when you close an element
+   The field is filled in when you close an element
     
-    .. compound:: Cancelled
+ .. compound:: Cancelled
 
-      The field is filled in when you cancel the element via the status of your workflow
+   The field is filled in when you cancel the element via the status of your workflow
+
+
+
+.. rubric:: Other options
+
+ProjeQtOr offers you several options to build your projects, protect them, or even pause them depending on the hazards you may encounter. 
+
+
+ .. compound:: Fix planning
+
+   * The project is never re-calculated.
+   
+   * It means the planning will always be the same whatever you do on other projects.
+   
+   .. important:: 
+      
+      This may lead to dependencies unconsistency.
+   
+ .. compound:: Paused 
+ 
+   * Available on projects and activities.
+ 
+   * The planning is never recalculated.
+   
+   * Unlike "fix planning", the current planning for the project is erased.
+   
+   * This is used to postpone the project to an undetermined date.   
+
+ .. compound:: Non extendable project
+
+   * You can't add new elements to this project, 
+   
+   * You can't delete elements from this project.
+   
+   * You can't move elements from/to this project.
+      
+   
+ .. compound:: Under construction
+
+   * The resource don't see it on timesheet.
+   
+   * The alerts are not generated
+
+   * Emails are not sent.
+
+
+ .. compound:: Exclude from global plan
+ 
+   * Do not show the **not plannable** items for this project on the global planning view.
+
+   * This means that only "standard" planning items will be displayed. Excluding actions, decisions, deliveries...
+ 
+
+ .. compound:: Validated work treatment
+
+   * Activates treatment of the validated work based on the sum of the work of the project orders.
+   
+   * Otherwise it will be calculated on the sum of the validated work of the activities
+
+
 
 
 
@@ -533,7 +614,7 @@ The dates and durations section allow you to record and display different time i
 
 Validated dates are used for:
 
-* Define the input parameters according to the selected planning mode - See: :ref:`Planning mode<planning-mode-gantt>`
+* Define the input parameters according to the selected planning mode - See: :ref:`Planning mode<planningmodeGantt>`
 
 * Define the initial due dates as a reference in order to check any drifts in your project
 
@@ -881,7 +962,7 @@ Used by Activity & Test session.
 Depending on the planning mode selected, the calculation of your planning will not be executed in the same way.
 
 * See :ref:`Concepts<planning-mode-concept>`
-* See :ref:`Planning modes<planning-mode-gantt>`
+* See :ref:`Planning modes<planningmodeGantt>`
 
   
 .. rubric:: Minimum threshold
@@ -894,14 +975,14 @@ This will require defining the minimum work to be allocated each day and thus fi
 
 Planning will require finding consecutive days with at least the given value possible.
 
-See: :ref:`Minimum threshold<minimum-threshold>`
+See: :ref:`Minimum threshold<minimumthreshold>`
 
 
 .. rubric:: Fix planning
  
 Fix planning will avoid the recalculation of planning for an activity.
   
-To fix the project see: :ref:`treatment-section`
+To fix the project see: :ref:`treatmentsection`
 
 
 .. _progress-section-ticket:
@@ -1124,7 +1205,57 @@ Click on the name of the sub-activity to access its dedicated screen.
    
    Display of sub activities
    
+
+
+
+
+
+
+.. index:: Todo list
+
+.. _todolist:
+
+Todo list
+---------
+
+The list of points to be processed must be activated via the global parameters. 
+
+You can use this feature for activities, tickets, and actions.
+
+By default, the list of points to be processed is inserted in the details area. 
+
+You can call up this list via a specific button in the user settings.
+
+.. figure:: /images/GUI/COMMON_ZONE_Todolist.png
+   :alt: todo list
    
+   Todo list
+
+It is a question of being able to create sub-tasks or steps for the selected elements.
+
+* For each line filled in, a new line appears after it. 
+
+* You can specify the urgency, the person in charge and the state of the point to be treated. 
+
+* You can reorganize the list using the handles in front of the point name.
+
+* To remove a line, delete the text completely and validate after the deletion popup.
+
+* A screen dedicated to the point to be treated is available in the monitoring menu.
+
+* You then have access to all your lists, all elements included.
+
+* Filters are available to restrict the display of these. 
+
+.. figure:: /images/GUI/COMMON_SCR_Todolist.png
+   :alt: todo list screen
+   
+   Todo list screen
+
+
+
+
+
    
    
    
@@ -1148,9 +1279,9 @@ Click on the name of a predecessor or successor to go directly to the element.
   
 .. seealso:: 
 
-  * :ref:`Dependencies<dependency-links>`
+  * :ref:`Dependencies<dependencylinks>`
   
-  * :ref:`Milestones on the Gantt Chart View<milestones-gantt>`
+  * :ref:`Milestones<milestonesgantt>`
 
 .. figure:: /images/GUI/COMMON_ZONE_Success&Predecessor.png
    :alt: Predecessor and Successor section
@@ -1230,6 +1361,8 @@ Click on an item name to directly move to it.
 
    * Click on |Add| to create a new link.
    * Click on |Delete| to delete the corresponding link.
+   * Click on |Download| to download the document
+   * Click on |Edit| to edit the comment linked to the element
 
       
 
@@ -1317,8 +1450,7 @@ You can attach all types of files
      
    * In the attached files area in the toolbar of the details area
    
-   * Directly on the detail area of ​​the element by dragging and dropping
-   
+   * Directly on the detail area of the element by dragging and dropping
    
       
    .. figure:: /images/GUI/COMMON_BOX_attachmentFile.png
@@ -1334,6 +1466,7 @@ You can attach all types of files
      * Click on |Delete| to remove an attachment.
      * Click on |Download| to download the attached file.
      * Click on |Link| to access the hyperlink.
+     * Click on |Edit| to edit the comment atached to the element
    
    
    You can select one or more files of different types with the shortcuts :kbd:`CTRL` when the files are not consecutive or :kbd:`SHIFT` for those that follow.

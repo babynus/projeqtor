@@ -91,7 +91,7 @@ Toolbar
    
    |ten| :ref:`Print and Export<print-export-gantt>`
    
-   |eleven| :ref:`The checkbox<checkbox-gantt>`   
+   |eleven| :ref:`The other options<checkbox-gantt>`   
    
    
    
@@ -438,7 +438,7 @@ You can print directly on your printer or export in PDF format or in MS Project 
 
 .. _checkbox-gantt:
 
-.. rubric:: |elevenBLC| Checkbox for display
+.. rubric:: |elevenBLC| Other options: checkbox for display
 
 At the end of the first zone, you have the choice to display or not, certain information on the Gantt chart.
 
@@ -506,8 +506,9 @@ At the end of the first zone, you have the choice to display or not, certain inf
          The tasks of the project which are not crossed by the critical path are elements which will not affect the duration of the project and, even modified, will not automatically involve a modification of this duration for the entire project.
 
 
+  .. compound:: Hide models project
 
-
+      You can display or hide the template type projects in the area list.
 
 
 
@@ -708,9 +709,9 @@ For each planning element, a bar is associated with it
    
    |two| :ref:`The Gantt chart's Bars<gantt-bars>`
    
-   |three| :ref:`Dependencies<dependency-links>`
+   |three| :ref:`Dependencies<dependencylinks>`
    
-   |four| :ref:`Milestone<milestones-gantt>`
+   |four| :ref:`Milestone<milestonesgantt>`
    
    |five| :ref:`Detail of the work<detail-work>`   
 
@@ -921,7 +922,7 @@ The bars displayed in the gantt chart can appear with different colors. Each col
 
 .. index:: Dependency Links
 
-.. _dependency-links:
+.. _dependencylinks:
 
 .. rubric:: |threeBLC| Dependency links
 
@@ -1020,7 +1021,7 @@ Dependencies between planning elements are displayed with an arrow.
 
 .. index:: Milestone (Gantt chart)
 
-.. _milestones-gantt:
+.. _milestonesgantt:
 
 .. rubric:: |fourBLC| Milestone
 
@@ -1107,7 +1108,7 @@ The details area is the same as on all the ProjeQtOr element screens and adapts 
 For more details on this area, see: :ref:`Details window<detail-window>`
 
 
-.. _planning-mode-gantt:
+.. _planningmodeGantt:
 
 Planning Modes
 ==============
@@ -1125,7 +1126,7 @@ Projeqtor offers several ways to plan the workload for your resource with 11 dif
 * :ref:`Recurring<mode-recurring>`
 * :ref:`Fixed duration<mode-fixedduration>`
 * :ref:`Manual planning<mode-manualplanning>`
-* :ref:`Minimum threshold & not splitted work<minimum-threshold>`
+* :ref:`Minimum threshold & not splitted work<minimumthreshold>`
 
 
 
@@ -1137,7 +1138,7 @@ The task is planned to finish as soon as possible.
 
 .. note:: For tasks "as soon as possible", if no assignment is created but the validated work is defined, take the validated work as the default duration (instead of 1 days)
 
-:ref:`|MODES|<planning-mode-gantt>` 
+:ref:`|MODES|<planningmodeGantt>` 
 
 
 
@@ -1154,7 +1155,7 @@ If only one resource is assigned, this planning mode is exactly the same as "As 
 
 If one resource is assigned more work than the other, the extra work is planned after working together periods.
 
-:ref:`|MODES|<planning-mode-gantt>` 
+:ref:`|MODES|<planningmodeGantt>` 
 
 
 
@@ -1167,7 +1168,7 @@ The validated start date field must be set.
 
 The task must not begin before a specific date.
 
-:ref:`|MODES|<planning-mode-gantt>`  
+:ref:`|MODES|<planningmodeGantt>`  
 
 
 
@@ -1183,7 +1184,7 @@ The task is planned backward from end to start.
      
 "Floating" backward planning is not possible, validated end date must be defined. 
 
-:ref:`|MODES|<planning-mode-gantt>` 
+:ref:`|MODES|<planningmodeGantt>` 
 
 
 
@@ -1212,7 +1213,7 @@ Work will be evenly divided between on working days. For instance, 0.2 days duri
 
 See also: :ref:`Regular modes with excess workload<mode-regularExcess>`
 
-:ref:`|MODES|<planning-mode-gantt>` 
+:ref:`|MODES|<planningmodeGantt>` 
 
 
 
@@ -1257,7 +1258,7 @@ Possibility to readjust the task with handles directly on the bar of the Gantt v
 
 See also: :ref:`Regular modes with excess workload<mode-regularExcess>`
 
-:ref:`|MODES|<planning-mode-gantt>`        
+:ref:`|MODES|<planningmodeGantt>`        
 
 
 
@@ -1302,7 +1303,7 @@ Possibility to readjust the task with handles directly on the bar of the Gantt v
 
 See also: :ref:`Regular modes with excess workload<mode-regularExcess>`
 
-:ref:`|MODES|<planning-mode-gantt>`
+:ref:`|MODES|<planningmodeGantt>`
 
 
 
@@ -1347,7 +1348,7 @@ Possibility to readjust the task with handles directly on the bar of the Gantt v
 
 See also: :ref:`Regular modes with excess workload<mode-regularExcess>`
 
-:ref:`|MODES|<planning-mode-gantt>` 
+:ref:`|MODES|<planningmodeGantt>` 
 
 
 
@@ -1377,7 +1378,7 @@ See also: :ref:`Regular modes with excess workload<mode-regularExcess>`
 
 See also: :ref:`Regular modes with excess workload<mode-regularExcess>`
 
-:ref:`|MODES|<planning-mode-gantt>` 
+:ref:`|MODES|<planningmodeGantt>` 
 
 
 .. _mode-recurring:
@@ -1396,7 +1397,7 @@ Activities in this mode dynamically assign the work based on the start and end b
 
 See: :ref:`Recurrent mode assignment<recurrent-mode-assign>`
    
-:ref:`|MODES|<planning-mode-gantt>` 
+:ref:`|MODES|<planningmodeGantt>` 
 
 
 
@@ -1418,7 +1419,7 @@ See: :ref:`Recurrent mode assignment<recurrent-mode-assign>`
 
    If you want fixed duration with fixed start, use "Regular between dates", or use milestone to define start.
 
-:ref:`|MODES|<planning-mode-gantt>` 
+:ref:`|MODES|<planningmodeGantt>` 
 
 
 .. _mode-manualplanning:
@@ -1437,10 +1438,10 @@ See: :ref:`Recurrent mode assignment<recurrent-mode-assign>`
 
    See: :ref:`global parameters<GP-effectCapacity>`.
 
-:ref:`|MODES|<planning-mode-gantt>` 
+:ref:`|MODES|<planningmodeGantt>` 
 
 
-.. _minimum-threshold:
+.. _minimumthreshold:
 
 .. rubric:: Minimum threshold & not splitted work
    
@@ -1901,7 +1902,13 @@ A check is then carried out and takes into account all the resources assigned to
 
 If the field is left empty or at 0 then no control is carried out and the calendar will not display any green or red box.
 
-
+ .. compound:: Blue box
+ 
+   When you start to put in the workload but do not yet reach all of the expected FTEs.
+   
+   .. image:: /images/GUI/GANTT_ZONE_FTEBlue.png
+   
+   
 
  .. compound:: Green Box
  
@@ -1928,8 +1935,7 @@ If the field is left empty or at 0 then no control is carried out and the calend
    
  .. compound:: Non-colored box
  
-  The total entry is less than the expected workload in FTE or there is no expected workload.
-   
+   There is no expected workload.   
 
 .. _manualPlan-InterventionMode:
 
@@ -2015,7 +2021,7 @@ Ctrl Click allows you to complete the two half days
 
    The workload can be recorded as a planned load or as a real load.   
 
-   This option can be set in the :ref:`global settings<GP-manualplan-workas>`. 
+   This option can be set in the :ref:`global settings<GP-manualplan-works>`. 
    
 
 

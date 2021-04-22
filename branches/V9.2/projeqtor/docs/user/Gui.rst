@@ -457,6 +457,17 @@ The connection window offers some settings and information at user level.
                You can display your colors by saving them in the global settings on the Display tab.
                The next time you reconnect, the last color disc will have your colors.
     
+    
+      .. compound:: brightness 
+    
+         Adjust the background brightness of your interface.
+         
+         The brighter the brightness, the more white the background will be, move the cursor to dark to obtain the gray interface background.
+
+
+      .. compound:: Menu speed 
+    
+         You determine how the menu behaves as you navigate through it. When you set to fast then the animation between the menus will hardly be visible anymore.
 
 
 
@@ -1084,6 +1095,8 @@ Swith the button clos to make appear all the handled element
       .. compound:: Columns order
 
          Use the selector area Button icon drag to reorder fields with drag & drop feature.
+         
+         You can also move the columns directly on the list with the drag and drop by placing you on the name of the latter. 
 
       .. compound:: Column size
 
@@ -1091,9 +1104,9 @@ Swith the button clos to make appear all the handled element
          
          Width is in % of the total list width.
          
-         The minimum width is 1%.
+         The minimum width is 1% and the maximum width is 50%.
          
-         The maximum width is 50%.
+         You can also position your mouse between two columns and drag to modify the width of the selected column.
          
          .. note:: **Field Name**
          
@@ -1177,21 +1190,21 @@ Swith the button clos to make appear all the handled element
    
    * The fields that can be updated depends on the selected element.
    
-   * The fields are grouped by section.
+   * The editable fields are sorted in alphabetical order.
   
 
       
     .. compound:: **Apply updates**
       
-      * Selection of items can be done by selecting one or more items in the list window. |one|
-      * You can use the shift key or the control key to select several consecutive lines or not.
-      * Click to select the item, click again to deselect
-      * The count of items selected is displayed. |two|
-      * Or use checkboxes to select/unselect all items in the list. |three|
-      * Click on |Save| to save updates on selection. |four|
-      * Click on |Delete| to delete all selected items. |four|
-      * The update will be applied to all the items (if possible) and a report will be displayed on the right. |five|
-      * Click on |Quit| to quit the multiple mode window. |four|
+      * Select the items to modify in the list box
+
+        You can select one or more rows with the Shift or Control keys directly in the list box or use the check boxes. Clicking a second time on the line deselects it.
+
+      * Then select the field to modify from the proposed list.
+      * Click on save to update the fields.
+      * Click on delete to delete the selected elements.
+      * Items and a report will be displayed on the right after validation
+      * Click on exit to exit multiple update mode.
 
 
       .. note:: 
@@ -1605,7 +1618,6 @@ See: :ref:`thumbnails`
       .. tabularcolumns:: |l|l|
       
       .. list-table:: Fields of changes
-         :widths: 30, 70
          :header-rows: 1
       
          * - Field
@@ -1762,8 +1774,6 @@ Special fields
 .. rubric:: Accelerator buttons
 
 
-.. _movetonextstatus-button:
-
  .. compound:: Move to the next status
 
    This button allows to skip to the next status without having to open the list.
@@ -1777,6 +1787,12 @@ Special fields
       Move to next status
 
    The mouse tracking over this colored button allows to show the workflow. 
+   
+   It is possible to define events when a state passes. 
+   
+   If a field is required for the transition from one state to another then you will be automatically redirected to the required field. 
+   
+   Regardless of the layout and presentation of your screens
 
 
 .. _assignToMe-button:

@@ -2,7 +2,7 @@
 
 .. title:: Tools
 
-.. index:: Toolspage
+.. index:: Tools
 
 .. _toolspage:
 
