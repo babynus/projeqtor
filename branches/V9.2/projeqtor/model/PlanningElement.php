@@ -2230,7 +2230,8 @@ class PlanningElement extends SqlElement {
             }
           }
         }
-        if (count($firstChildren)>0) $directPredecessors["#".$dep->successorId]=array_merge_preserve_keys($lstPrec,$firstChildren);;
+        if (count($firstChildren)>0) $directPredecessors["#".$dep->successorId]=array_merge_preserve_keys($lstPrec,$firstChildren);
+        else $directPredecessors["#".$dep->successorId]=$lstPrec;
       }
     }
     foreach ($result as $id=>$pe) {
