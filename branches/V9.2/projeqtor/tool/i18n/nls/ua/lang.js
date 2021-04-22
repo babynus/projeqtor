@@ -2837,6 +2837,7 @@ labelFullAmountOfTerms: "сума повної кількості терміні
 labelHideDone: "приховати виконані елементи",
 labelHideNotHandled: "приховати не  оброблені елементи",
 labelKanbanFullWidthElement: "show large elements",
+labelKanbanHideBacklog: "hide backlog",
 labelLimitResourceByProject: "Граничний список ресурсів для вибраного проекту",
 labelMultipleMode: "мульті-режим",
 labelPartToTerm: "Частина рядків на термін",

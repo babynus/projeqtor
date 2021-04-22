@@ -2837,6 +2837,7 @@ labelFullAmountOfTerms: "suma de los montos totales de los términos ya reservad
 labelHideDone: "Ocultar ítems realizados",
 labelHideNotHandled: "Ocultar ítems no manejados por mí",
 labelKanbanFullWidthElement: "show large elements",
+labelKanbanHideBacklog: "hide backlog",
 labelLimitResourceByProject: "Limitar la lista de recursos para el proyecto seleccionado",
 labelMultipleMode: "Modo múltiple",
 labelPartToTerm: "Parte de la línea en el término",
