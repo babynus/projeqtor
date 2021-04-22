@@ -209,11 +209,16 @@ function drawColumnKanban($type,$jsonD,$idKanban){
   $statusList=SqlList::getList('Status');
   $allowedStatus=array();
   $kanbanFullWidthElement = Parameter::getUserParameter ( "kanbanFullWidthElement" );
+  $hideBacklog = (Parameter::getUserParameter ( "kanbanHideBacklog" )=='on')?1:0;
   if(count($jsonD['column'])!=0){
   	$jsonArray=array();
   	$keyJsonOrder=array();
   	$sortedColumns=array();
-  	foreach ($jsonD['column'] as $itemKanban) {
+  	foreach ($jsonD['column'] as $key=>$itemKanban) {
+  	  if($itemKanban['name']=='Backlog' and $hideBacklog){
+  	    unset($jsonD['column'][$key]);
+  	    continue;
+  	  }
   	  if($itemKanban['from']!='n'){
   	    $obj = new $type($itemKanban['from'],true);
   	    if(isset($obj->sortOrder)){
@@ -944,7 +949,16 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
             	saveDataToSession("kanbanFullWidthElement",((this.checked)? "on":"off"),true);
             	kanbanFullWidthElement();		
             </script>
-          </div><br/>'; 
+          </div><br/>';
+  echo i18n("labelKanbanHideBacklog").'
+      		<div style="margin-right:8px;margin-top:2px;"
+            title="'.i18n("labelKanbanHideBacklog").'" dojoType="dijit.form.CheckBox" '.((Parameter::getUserParameter("kanbanHideBacklog")=='on')? 'checked="checked"' : '').' type="checkbox" class="whiteCheck"
+            id="kanbanHideBacklog" name="kanbanHideBacklog">
+            <script type="dojo/method" event="onChange" >
+            	saveDataToSession("kanbanHideBacklog",((this.checked)? "on":"off"),true);
+            	kanbanHideBacklog();
+            </script>
+          </div><br/>';
  // }
 }
 
