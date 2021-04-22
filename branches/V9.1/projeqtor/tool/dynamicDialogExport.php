@@ -89,14 +89,17 @@ foreach($fieldsArray as $key => $val) {
             $hiddenFields[$included.'_'.$cs->field]=true;
           }
         }
-        if ($arrayDependantObjects[$objectClass][$key]=='withSection') {   
-          $fieldsArray['_sec_'.$included]=i18n('_sec_'.$included);//i18n('section' . ltrim($key,'_'));
+        if ($arrayDependantObjects[$objectClass][$key]=='withSection') {
+          $nameSec=i18n('_sec_'.$included);
+          if (substr($nameSec,0,1)=='[') $nameSec=i18n('section'.ucfirst($included));
+          $fieldsArray['_sec_'.$included]=$nameSec;//i18n('section' . ltrim($key,'_'));
         }
         $incObj=new $included();
         foreach ($incObj as $incKey=>$incVal) {
           if (substr($incKey,0,1)=='_') continue;
           if ($incKey=='refType' or $incKey=='refId' or $incKey=='id'.$objectClass) continue;
           if ($incObj->isAttributeSetToField($incKey,'noExport')) continue;
+          if (substr(i18n('col'.ucfirst($incKey)),0,1)=="[") continue;
           $fieldsArray[$included.'_'.$incKey]=i18n('col'.ucfirst($incKey));
         }
       }
