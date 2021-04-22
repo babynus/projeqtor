@@ -167,7 +167,10 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 
 INSERT INTO `${prefix}modulereport` (`idModule`,`idReport`,`hidden`,`active`) VALUES
 (2,119,0,1),
-(2,120,0,1);
+(2,120,0,1),
+(1,121,0,1),
+(1,122,0,1),
+(7,123,0,1);
 
 CREATE TABLE `${prefix}macrostatus` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
