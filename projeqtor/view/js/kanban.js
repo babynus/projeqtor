@@ -406,6 +406,20 @@ function kanbanFullWidthElement(){
   });
 }
 
+function kanbanHideBacklog(){
+  showWait();
+  dojo.xhrGet({
+	url : "../tool/kanbanHideBacklog.php",
+	handleAs : "text",
+	load : function(data, args) {
+	  loadContent("../view/kanbanView.php", "divKanbanContainer");
+	},
+	error : function() {
+	  hideWait();
+	}
+  });
+}
+
 function changeWorkNbTicket(idColumn, idTicket, factor){
   if(dojo.byId('plannedWorkC'+idColumn)!=null){
     plannedTicket=parseFloat(dojo.byId('plannedWork'+idTicket).getAttribute("valueWork"))*factor;
