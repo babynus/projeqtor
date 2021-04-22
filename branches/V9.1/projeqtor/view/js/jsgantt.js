@@ -2137,9 +2137,9 @@ JSGantt.hide=function (pID,ganttObj) {
        if(vList[i].getClass()=='Meeting'){
          node=JSGantt.findObj('bardivMetting_' + vID);
          if (node) node.style.display = "";
-         node=JSGantt.findObj('labelBarDiv_'+ vID);
-         if (node) node.style.display = "none";
        }
+       node=JSGantt.findObj('labelBarDiv_'+ vID);
+       if (node) node.style.display = "none";
        vList[i].setVisible(0);
        if(vList[i].getGroup() == 1) {
          JSGantt.hide(vID,ganttObj);
@@ -2179,9 +2179,9 @@ JSGantt.show =  function (pID, ganttObj) {
         if(vList[i].getClass()=='Meeting'){
           node=JSGantt.findObj('bardivMetting_' + vID);
           if (node) node.style.display = "none";
-          node=JSGantt.findObj('labelBarDiv_'+ vID)
-          if (node) node.style.display = "block";        
         }
+        node=JSGantt.findObj('labelBarDiv_'+ vID)
+        if (node) node.style.display = "block";        
         vList[i].setVisible(1);
       }
       if(vList[i].getGroup() == 1 && vList[i].getVisible()) {
