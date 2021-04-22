@@ -4744,6 +4744,13 @@ abstract class SqlElement {
       $right = securityGetAccessRightYesNo ( 'menuProject', 'update', $prj );
     } else if ($right != 'YES') {
       $right = securityGetAccessRightYesNo ( 'menu' . get_class ( $this ), (($this->id) ? 'update' : 'create'), $this, $user );
+      if ($right=='YES' and $this->id and property_exists($this, 'idProject')) { // Must check that user also has right to current version of Item 
+        // This is mandatory for API interface, where user can submit change for id on new project also he does not have rights on old project
+        $old=$this->getOld(true); 
+        if ($old->idProject!=$this->idProject) {
+          $right = securityGetAccessRightYesNo ( 'menu'.get_class($this), 'update', $old, $user );
+        }
+      }
     }
     if ($right != 'YES') {
       $result .= '<br/>' . i18n ( 'error' . (($this->id) ? 'Update' : 'Create') . 'Rights' );
