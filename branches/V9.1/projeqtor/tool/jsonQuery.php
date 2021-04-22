@@ -778,6 +778,19 @@
     		$arrayFields=array();
         $arrayFields=$obj->getLowercaseFieldsArray(true);
         $arrayFieldsWithCase=$obj->getFieldsArray(true);
+        if (isset($arrayDependantObjects[$objectClass])) {
+          foreach ($arrayDependantObjects[$objectClass] as $incKey=>$incVal) {
+            $incClass=get_class($incVal);
+            $arrayFieldsInc=$incVal->getLowercaseFieldsArray(true);
+            $arrayFieldsWithCaseInc=$incVal->getFieldsArray(true);
+            foreach ($arrayFieldsInc as $incKey=>$incVal) {
+              $arrayFields[strtolower($incClass).'_'.$incKey]=$incVal;
+            }
+            foreach ($arrayFieldsWithCaseInc as $incKey=>$incVal) {
+              $arrayFieldsWithCase[strtolower($incClass).'_'.$incKey]=$incVal;
+            }
+          }
+        }
         if ($objectClass!='Work') {
           $arrayFields['hyperlink'] = 'hyperlink';
           $arrayFieldsWithCase['hyperlink'] = 'Hyperlink';
