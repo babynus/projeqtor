@@ -2837,6 +2837,7 @@ labelFullAmountOfTerms: "Summe der vollen Beträge der bereits gebuchten Konditi
 labelHideDone: "nicht 'bearbeitete' Elemente ausblenden",
 labelHideNotHandled: "'erledigte' Elemente ausblenden",
 labelKanbanFullWidthElement: "show large elements",
+labelKanbanHideBacklog: "hide backlog",
 labelLimitResourceByProject: "Liste der Ressourcen für das ausgewählte Projekt beschränken",
 labelMultipleMode: "Mehrfach-Modus",
 labelPartToTerm: "Teil der Linie am Begriff",
