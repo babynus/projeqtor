@@ -2261,7 +2261,6 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   
   // require_once '../external/PHPMailer/class.phpmailer.php';
   // require_once '../external/PHPMailer/class.smtp.php';
-  debugTraceLog(getcwd()." | ".$_SERVER["SCRIPT_NAME"]); // For tracing reason on track 
   require_once '../external/PHPMailer/src/Exception.php';
   require_once '../external/PHPMailer/src/PHPMailer.php';
   require_once '../external/PHPMailer/src/SMTP.php';
