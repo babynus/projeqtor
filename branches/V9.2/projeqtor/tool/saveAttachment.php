@@ -37,6 +37,7 @@ error_reporting(E_ERROR);
 // then the iframe returns the result to resultDiv to reproduce expected behaviour
 $isIE=false;
 $mode = RequestHandler::getValue('mode');
+$nameDiv=(RequestHandler::isCodeSet('nameDiv'))?RequestHandler::getValue('nameDiv').'s':false;
 if (array_key_exists('isIE',$_REQUEST)) {
   $isIE=$_REQUEST['isIE'];
 } 
@@ -77,7 +78,17 @@ if ($type=='file') {
     	$uf['size']=$_FILES['attachmentFiles']['size'][$i];
       $uploadedFileArray[$i]=$uf;
     }
-  } else {
+  } else if ($nameDiv and array_key_exists($nameDiv,$_FILES) and array_key_exists('name',$_FILES[$nameDiv])){
+  	for ($i=0;$i<count($_FILES[$nameDiv]['name']);$i++) {
+  	  $uf=array();
+  	  $uf['name']=$_FILES[$nameDiv]['name'][$i];
+  	  $uf['type']=$_FILES[$nameDiv]['type'][$i];
+  	  $uf['tmp_name']=$_FILES[$nameDiv]['tmp_name'][$i];
+  	  $uf['error']=$_FILES[$nameDiv]['error'][$i];
+  	  $uf['size']=$_FILES[$nameDiv]['size'][$i];
+  	  $uploadedFileArray[$i]=$uf;
+  	}
+  }else {
     if (RequestHandler::getValue('uploadType')=='html5' and count($_FILES)==0) {
       $jsonReturn='{"file":"text",'
                   .'"name":"text",'
@@ -172,6 +183,7 @@ if ($refType=='TicketSimple') {
   $refType='Ticket';    
 }
 
+
 if (! $error) {
   if (array_key_exists('attachmentRefId',$_REQUEST)) { // Retrieve from request
     $refId=$_REQUEST['attachmentRefId'];
@@ -218,6 +230,10 @@ $attachment=new Attachment();
 foreach ($uploadedFileArray as $uploadedFile) {
   $attachment=new Attachment();
 	if (! $error) {
+	  if($refType=='SubTask' and trim(strpos($uploadedFile['type'], 'image'))=='' and trim(strpos($uploadedFile['type'], 'pdf'))==''){
+	    $error=htmlGetWarningMessage(i18n('wrongFormatAttachmentForSubTask'));
+	    break;
+	  }
 		if ($refType=="Resource") {
 			// To avoid dupplicate image (if 2 users save picture on same time)
 	    $attachment->purge("refType='Resource' and refId=".$refId);
@@ -298,6 +314,8 @@ foreach ($uploadedFileArray as $uploadedFile) {
 }
 if (! $error) {
   // Message of correct saving
+  $result.='<input type="hidden" id="lastSaveRefType" value="'.$refType.'" />';
+  $result.='<input type="hidden" id="lastSaveRefId" value="'.$refId.'" />';
   $status = getLastOperationStatus ( $result );
   if ($status == "OK") {
     Sql::commitTransaction ();

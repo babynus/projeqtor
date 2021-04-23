@@ -106,7 +106,7 @@ class SubTask extends SqlElement {
       }
     }
     if($dialogView) echo '<table>';
-    if (!$print and !$gloablView and !$dialogView) {
+    if (!$print and !$gloablView and !$dialogView and !$refresh) {
       echo'<div style="position:absolute;right:5px;top:3px;">';
       echo' <label for="showClosedSubTask_'.$view.'"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'&nbsp;</label>';
       echo' <div class="'.((isNewGui())?"whiteCheck":"").'" id="showClosedSubTask_'.$view.'" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedSubTask)?'checked':'');
@@ -131,9 +131,11 @@ class SubTask extends SqlElement {
       echo'</div>';
     }
     if(!$print){
-      if (!$refresh) echo '<tr><td colspan="4"><div id="'.$refType.'_'.$refId.'_drawSubTask" dojotype="dijit.layout.ContentPane">';
-      echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true" 
+      if (!$refresh) echo '<tr><td colspan="4">
+          <div id="'.$refType.'_'.$refId.'_drawSubTask" dojotype="dijit.layout.ContentPane" >' ;
+      echo '<table style="width:100%;margin-top: 10px;" dojotype="dojo.dnd.Source" dndType="subTask_'.$refType.'_'.$refId.'" withhandles="true"  class="SubTaskTab"
                     id="dndSubTask_'.$refType.'_'.$refId.'" jsId="dndSubTask_'.$refType.'_'.$refId.'" data-dojo-id="test">';
+      if(!$gloablView)echo '<input id="refreshSTDivValues" value="" type="hidden"/>';
     }else {
       echo '<tr><td colspan="2" style="width:100%;">';
       echo '<table style="width:100%;">';
@@ -146,8 +148,10 @@ class SubTask extends SqlElement {
         echo      '<input id="SubTaskIdResourceFilter_'.$refType.'_'.$refId.'" value="'.$obj->idResource.'" type="hidden" />';
       }
     }
-    
-    echo      '<input id="subTaskView" value="'.$view.'" type="hidden" />';
+    if(!$print and !$gloablView){
+      echo      '<input id="subTaskView" value="'.$view.'" type="hidden" />';
+      echo      '<input id="subTaskViewMaxFileSize" value="'.Parameter::getGlobalParameter('paramAttachmentMaxSize').'" type="hidden" />';
+    }
     echo  '<tr style="width:100%">';
     if(!$print)echo    '<td class="linkHeader" style="width:2%"></td>';
     echo    '<td class="linkHeader" style="'.(($gloablView and $widthDisplay>='1530')?'width:64%;':'width:52%;').'">'.i18n('colName').'</td>';
@@ -160,7 +164,10 @@ class SubTask extends SqlElement {
         $prioSubTask=new Priority($subTask->idPriority);
         $colorPrio=$prioSubTask->color;
         if(!$print){
-          echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" '.(($rightUpdate=='NO' and $rightRead=='YES')?'':'class="dojoDndItem" dndType="subTask_'.$refType.'_'.$refId.'"').'  >';
+          echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" '.(($rightUpdate=='NO' and $rightRead=='YES')?'':'class="dojoDndItem subTaskRow" dndType="subTask_'.$refType.'_'.$refId.'"').'   
+                    ondragover="hideShowDropDiv(\'show\',\''.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'\',\'divAttachSubTask\');" 
+                        ondrop="hideShowDropDiv(\'dropHide\',\''.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'\',\'divAttachSubTask\');"
+                        ondragLeave="hideShowDropDiv(\'hide\',\''.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'\',\'divAttachSubTask\');">';
           echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" type="hidden" />';
           if($rightUpdate=='NO' and $rightRead=='YES'){
             echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
@@ -169,31 +176,54 @@ class SubTask extends SqlElement {
           }
           
           echo    '<td class="todoListTab" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
-          echo      '<textarea title="'.i18n('colName').'" id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" 
-                      dojoType="dijit.form.Textarea" style="'.(($gloablView and $widthDisplay>='1530')?"width:96%;":"width:90%;" ).'max-height:150px !important;" 
-                      value="'. htmlEncode($subTask->name).'" ';
-          if ($rightUpdate=='NO' and $rightRead=='YES'){
-            echo ' readonly="true">';
-          }else {
-            echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  ></textarea>';
-          }
-          if($rightUpdate=='YES'){
-            echo '<a id="buttonAddAttach_'.$subTask->id.'" onClick="addAttachment(\'file\',\''.get_class($subTask).'\',\''.$subTask->id.'\');" title="'.i18n('addAttachment').'"> ';
-            echo ' <div class="imageColorNewGuiNoSelection iconAttachFiles22 iconAttachFiles iconSize22" style="display:inline-block;height:24px;top:-3px;position:relative;margin-left:5px;" title="">&nbsp;</div>';
-            echo '</a>';
-          }
-          echo    '<div id="divAttachement_'.$subTask->id.'" style="width:90%;margin:0% 5%;" >';
-                    $allAttach=$attach->getSqlElementsFromCriteria(array("refType"=>get_class($subTask),"refId"=>$subTask->id),null);
-                    if(!empty($allAttach)){
-                      foreach ($allAttach as $attachment){
-                        if ($attachment->isThumbable()) {
-                          echo '<img src="'.getImageThumb($attachment->getFullPathFileName(), 32).'" '.' title="'.htmlEncode($attachment->fileName).'" style="float:left;cursor:pointer"'.' onClick="showImage(\'Attachment\',\''.htmlEncode($attachment->id).'\',\''.htmlEncode($attachment->fileName, 'protectQuotes').'\');" />';
-                        }else{
-                          echo htmlGetMimeType($attachment->mimeType, $attachment->fileName, $attachment->id);
+          echo    '  <table style="width:100%;"><tr><td style="'.(($gloablView and $widthDisplay>='1530')?"width:96%;":"width:90%;" ).'">';
+            echo      '<textarea title="'.i18n('colName').'" id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" 
+                        dojoType="dijit.form.Textarea" style="width:98%;max-height:150px !important;" 
+                        value="'. htmlEncode($subTask->name).'" ';
+            if ($rightUpdate=='NO' and $rightRead=='YES'){
+              echo ' readonly="true">';
+            }else {
+              echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  ></textarea>';
+            }
+            echo    '</td><td style="'.(($gloablView and $widthDisplay>='1530')?"width:4%;":"width:10%;" ).'">';
+              if($rightUpdate=='YES'){
+                echo '<a title="'.i18n('addAttachment').'"> '; 
+                echo ' <div dojoType="dojox.form.Uploader" type="file" 
+                            id="'.$subTask->id.'_attachmentFile" name="'.$subTask->id.'_attachmentFile" 
+                            MAX_FILE_SIZE="'.Parameter::getGlobalParameter('paramAttachmentMaxSize').'"
+  			                url="../tool/saveAttachment.php?attachmentRefType='.get_class($subTask).'&attachmentRefId='.$subTask->id.'&nameDiv='.$subTask->id.'_attachmentFile" 
+  			                multiple="true" class="directAttachment detailButton divAttachSubTask" 
+  			                uploadOnSelect="true" 
+  			                target="'.$subTask->id.'_resultAttach" 
+  			                onBegin="hideResultDivs();saveAttachment(true,\''.$subTask->id.'_attachmentFile\');" 
+  			                iconClass="iconAttachFiles" 
+  			                onError="dojo.style(dojo.byId(\'downloadProgress\'), {display:\'none\'});" 
+  			                style="display:inline-block;" label="">';		 
+    			   echo '  <script type="dojo/connect" event="onComplete" args="dataArray">  refreshSubTaskAttachment("'.$refType.'",'.$refId.','.$idResource.');saveAttachmentAck(dataArray,"'.$subTask->id.'_resultAttach"); </script>';
+    			   echo '  <script type="dojo/connect" event="onProgress" args="data"> saveAttachmentProgress(data); </script>';
+    	           echo '  <script type="dojo/connect" event="onError" args="data"> hideWait();showError(i18n("uploadUncomplete")); </script>';
+                echo '</div> ';
+                echo '</a>';
+              }
+            echo    '</td></tr><tr><td>';
+              echo    '<div id="divAttachement_'.$subTask->id.'" style="width:90%;margin:0% 5%;" >';
+                        $allAttach=$attach->getSqlElementsFromCriteria(array("refType"=>get_class($subTask),"refId"=>$subTask->id),null);
+                        if(!empty($allAttach)){
+                          foreach ($allAttach as $attachment){
+                            if ($attachment->isThumbable()) {
+                              echo '<div oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$refType.','.$refId.','.$idResource.'\';">';
+                              echo '<img src="'.getImageThumb($attachment->getFullPathFileName(), 32).'" '.' title="'.htmlEncode($attachment->fileName).'" style="float:left;cursor:pointer;margin-left: 5px;margin-right: 5px;" '
+                                    .' onClick="showImage(\'Attachment\',\''.htmlEncode($attachment->id).'\',\''.htmlEncode($attachment->fileName, 'protectQuotes').'\');" />';
+                              echo '</div>';
+                            }else{
+                              echo '<div oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$refType.','.$refId.','.$idResource.'\';">';
+                              echo htmlGetMimeType($attachment->mimeType, $attachment->fileName, $attachment->id);
+                              echo '</div>';
+                            }
+                          }
                         }
-                      }
-                    }
-          echo'    </div>';
+              echo'    </div>';
+          echo    '  </td></tr></table>';
           echo    '</td>';
           echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;background-color:'.$colorPrio.';">';
           echo      '<select dojoType="dijit.form.FilteringSelect"  id="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_priorityNewSubTask_'.$subTask->id.'" style="width:auto;" class="input" '.autoOpenFilteringSelect().''; 
@@ -253,14 +283,21 @@ class SubTask extends SqlElement {
       echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_0" value="'.$lastSort.'" type="hidden" />';
        echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
       echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;" >';
-      echo      '<textarea title="'.i18n('colName').'" id="'.$refType.'_'.$refId.'_nameNewSubTask_0" name="'.$refType.'_'.$refId.'_nameNewSubTask_0" 
-                  dojoType="dijit.form.Textarea" style="'.(($gloablView)?"width:98%;":"width:90%;" ).'max-height:150px !important;" 
-                  maxlength="4000"  onChange="updateSubTask(0,\''.$refType.'\','.$refId.');" value="">';
-      echo      '</textarea>';
-      if($rightUpdate=='YES'){
-        echo '<a id="'.$refType.'_'.$refId.'_buttonAddAttach_0" style="display:none;" title="'.i18n('addAttachment').'"> '.formatSmallButton('Add').'</a>';
-      }
-      echo    '<div id="'.$refType.'_'.$refId.'_divAttachement_0" ></div>';
+      echo    ' <table style="width:100%;"><tr><td style="'.(($gloablView and $widthDisplay>='1530')?"width:96%;":"width:90%;" ).'">';
+        echo      '<textarea title="'.i18n('colName').'" id="'.$refType.'_'.$refId.'_nameNewSubTask_0" name="'.$refType.'_'.$refId.'_nameNewSubTask_0" 
+                    dojoType="dijit.form.Textarea" style="width:98%;max-height:150px !important;" 
+                    maxlength="4000"  onChange="updateSubTask(0,\''.$refType.'\','.$refId.');" value="">';
+        echo      '</textarea>';
+      echo    ' </td><td style="'.(($gloablView and $widthDisplay>='1530')?"width:4%;":"width:10%;" ).'">';
+        if($rightUpdate=='YES'){
+          echo '<a  style="display:none;" title="'.i18n('addAttachment').'">';
+            echo ' <div dojoType="dojox.form.Uploader" type="file" id="'.$refType.'_'.$refId.'_attachmentFiles_0" id="'.$refType.'_'.$refId.'_attachmentFiles_0"  style="display:none;" label="">';		 
+            echo '</div> ';
+          echo '</a>';
+        }
+      echo    ' </td></tr><tr><td>';
+        echo    '   <div id="'.$refType.'_'.$refId.'_divAttachement_0" style="width:90%;margin:0% 5%;" dojotype="dijit.layout.ContentPane"></div>';
+      echo    '  </td></tr></table>';
       echo    '</td>';
       echo    '<td class="todoListTab" style="white-space:nowrap;text-align: center;">';
       echo      '<select dojoType="dijit.form.FilteringSelect" id="'.$refType.'_'.$refId.'_priorityNewSubTask_0" style="width:auto;"  class="input" readonly="true" >';
@@ -279,7 +316,10 @@ class SubTask extends SqlElement {
     }
     echo '</table>';
     if(!$print){
-      if (!$refresh) echo '</div></td></tr>';
+      if (!$refresh) {
+        echo '</div>';
+        echo '</td></tr>';
+      }
       if($dialogView) echo '</table>';
     }else{
       echo '</td></tr>';
@@ -397,6 +437,9 @@ class SubTask extends SqlElement {
     foreach ($allStatus as $id=>$status){
       echo '<input id="colorStatus_'.$status->id.'" value="'.$status->color.'" type="hidden" />';
     }
+    echo      '<input id="subTaskView" value="Global" type="hidden" />';
+    echo      '<input id="subTaskViewMaxFileSize" value="'.Parameter::getGlobalParameter('paramAttachmentMaxSize').'" type="hidden" />';
+    echo      '<input id="refreshSTDivValues" value="" type="hidden" />';
     if(!empty($tab)){
       foreach ($tab as $id=>$obj){
         $element= new $obj['reftype']( $obj['refid']);
