@@ -233,7 +233,7 @@ class Link extends SqlElement {
       $result.='<br/>' . i18n('errorDuplicateLink');
     }
     if( Module::isModuleActive('moduleGestionCA') and $this->ref1Type == 'Bill' and $this->ref2Type == 'Command'){
-      $checkUniqueBill=$lnk->getSqlElementsFromCriteria(array('ref1Type'=>$this->ref1Type, 'ref1Id'=>$this->ref1Id, $this->ref2Type=>'Command'));
+      $checkUniqueBill=$lnk->getSqlElementsFromCriteria(array('ref1Type'=>$this->ref1Type, 'ref1Id'=>$this->ref1Id, 'ref2Type'=>'Command'));
       if (count($checkUniqueBill)>0) {
         $result.='<br/>' . i18n('errorUniqueBillLink');
       }
