@@ -730,8 +730,9 @@ class PlanningElement extends SqlElement {
         $cpt=0;
         foreach ($lstEltOldTop as $elt) {
           $cpt++;
-          $elt->wbs=($oldTopElt->wbs)?$oldTopElt->wbs . '.' . $cpt:$cpt;
-          if ($elt->refType) { // just security for unit testing
+          $newWbs=($oldTopElt->wbs)?$oldTopElt->wbs . '.' . $cpt:$cpt;
+          if ($elt->refType and $elt->wbs!=$newWbs) { //Performance improvment : do not call wbsSave() if new WBS is the same as old
+            $elt->wbs=$newWbs;
             $elt->wbsSave();
           }
         }
