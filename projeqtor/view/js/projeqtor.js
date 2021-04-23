@@ -1393,6 +1393,10 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           //if (loadContentRetryArray[callKey]!==undefined) {
           //  loadContentRetryArray.splice(callKey, 1);
           //}
+          if((dojo.byId('formDiv') && dojo.byId('formDiv').querySelector('.SubTaskTab')) || (dojo.byId('SubTaskForm') && dojo.byId('SubTaskForm').querySelector('.SubTaskTab')) ){
+            form=(dojo.byId('formDiv'))?'formDiv':'SubTaskForm';
+            setDragAndDropAttachmentSubTask(form,'SubTaskTab','subTaskRow','divAttachSubTask');
+          }
         },
         error : function(error, args) {
           //var retries=-1;          
@@ -1703,7 +1707,13 @@ function finalizeMessageDisplay(destination, validationType) {
               'listForm');
           refreshGrid();
         } else {
-          loadContent("objectDetail.php?refreshAttachments=true", dojo.byId('objectClass').value+ '_Attachment', 'listForm');
+          var lastSaveRefId = dojo.byId('lastSaveRefId');
+          var lastSaveClass = dojo.byId('lastSaveRefType');
+          if (!(lastSaveClass && lastSaveRefId && lastSaveClass.value=="SubTask")) {
+//           refreshSubTaskAttachment( lastSaveClass.value,lastSaveRefId.value);
+//          }else{
+            loadContent("objectDetail.php?refreshAttachments=true", dojo.byId('objectClass').value+ '_Attachment', 'listForm');
+          }
         }
         dojo.style(dojo.byId('downloadProgress'), {
           display : 'none'
@@ -2022,11 +2032,18 @@ function finalizeMessageDisplay(destination, validationType) {
             }
           }
           if (refreshDetailElse && !validationType) {
-            if (dojo.byId(dojo.byId('objectClass').value + '_Attachment')) {
-              loadContent("objectDetail.php?refreshAttachments=true", dojo
-                  .byId('objectClass').value
-                  + '_Attachment', 'listForm');
+            var lastSaveRefId = dojo.byId('lastSaveRefId');
+            var lastSaveClass = dojo.byId('lastSaveRefType');
+            if (!(lastSaveClass && lastSaveRefId && lastSaveClass.value=="SubTask")) {
+//             refreshSubTaskAttachment( lastSaveClass.value,lastSaveRefId.value);
+//            }else{
+              if (dojo.byId(dojo.byId('objectClass').value + '_Attachment')) {
+                loadContent("objectDetail.php?refreshAttachments=true", dojo
+                    .byId('objectClass').value
+                    + '_Attachment', 'listForm');
+              }
             }
+            
             if (dojo.byId(dojo.byId('objectClass').value + '_Note')) {
               loadContent("objectDetail.php?refreshNotes=true", dojo
                   .byId('objectClass').value
@@ -7175,6 +7192,7 @@ function showListFilter(checkBoxName,value){
 
 var dropFilesFormInProgress=null;
 function dropFilesFormOnDragOver() {
+  if(activFuncHideShowDropDiv)return;
   event.preventDefault();
   if (dropFilesFormInProgress) clearTimeout(dropFilesFormInProgress);
   if (dojo.byId('updateRight') && dojo.byId('updateRight').value=='NO') return;
@@ -7196,6 +7214,7 @@ function dropFilesFormOnDragLeave() {
   dropFilesFormInProgress=setTimeout("dojo.byId('dropFilesInfoDiv').style.display='none';",100);
 }
 function dropFilesFormOnDrop() {
+  if(activFuncHideShowDropDiv)return;
   event.preventDefault();
   if (dropFilesFormInProgress) clearTimeout(dropFilesFormInProgress);
   dojo.byId('dropFilesInfoDiv').style.opacity='0%';
@@ -8234,7 +8253,8 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
                       newPrio=document.createElement('input'),
                        newResource=document.createElement('input'),
                         newName=document.createElement('input'),
-                          slidContainerDiv=newSubTask.querySelector('#'+refType+'_'+refId+'_slidContainer_0'),
+                          newButtonAttach=document.createElement('input'),
+                            slidContainerDiv=newSubTask.querySelector('#'+refType+'_'+refId+'_slidContainer_0'),
                               divAttachment=newSubTask.querySelector('#'+refType+'_'+refId+'_divAttachement_0');
                                 
   newName.setAttribute('id',refType+'_'+refId+'_nameNewSubTask_'+id);
@@ -8243,11 +8263,11 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   slidContainerDiv.id=refType+'_'+refId+'_slidContainer_'+id;
   divAttachment.setAttribute('id','divAttachement_'+id);
   
-  if(newSubTask.querySelector('#'+refType+'_'+refId+'_buttonAddAttach_0')){
+  if(newSubTask.querySelector('#'+refType+'_'+refId+'_attachmentFiles_0')){
     buttonAddAttachExist=true;
-    buttonAddAttach=newSubTask.querySelector('#'+refType+'_'+refId+'_buttonAddAttach_0');
-    buttonAddAttach.setAttribute('id','buttonAddAttach_'+id);
-    buttonAddAttach.setAttribute('onclick','addAttachment("file","SubTask",'+id+')');
+    buttonAddAttach=newSubTask.querySelector('#'+refType+'_'+refId+'_attachmentFiles_0');
+    newButtonAttach.setAttribute('id',id+'_attachmentFile');
+    buttonAddAttach.parentNode.parentNode.parentNode.replaceChild(newButtonAttach,buttonAddAttach.parentNode.parentNode);
   }
 
   
@@ -8301,10 +8321,39 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   var newNameText = new dijit.form.Textarea({
     id: refType+'_'+refId+"_nameNewSubTask_"+id,
     name: refType+'_'+refId+"_nameNewSubTask_"+id,
-    style:"min-height:30px;"+dijit.byId(refType+'_'+refId+'_nameNewSubTask_0').style,
+    style:dijit.byId(refType+'_'+refId+'_nameNewSubTask_0').style ,
+    value: dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value 
   }, refType+'_'+refId+"_nameNewSubTask_"+id);
   
-  if(buttonAddAttachExist)buttonAddAttach.style.display='unset';
+  if(buttonAddAttachExist){
+    newButtonAttach.parentNode.setAttribute("style","display;inline-block;");
+    var newButtonAttach = new dojox.form.Uploader({
+      id: id+'_attachmentFile',
+      name:id+'_attachmentFile',
+      MAX_FILE_SIZE:dojo.byId('subTaskViewMaxFileSize').value,
+      label:"",
+      multiple:true,
+      uploadOnSelect:true,
+      url:"../tool/saveAttachment.php?attachmentRefType=SubTask&attachmentRefId="+id+"&nameDiv="+id+"_attachmentFile",
+      target:id+'_resultAttach',
+      type:"file",
+      iconClass:'iconAttachFiles',
+
+      style:"display:inline-block;"
+    }, id+'_attachmentFile');
+    
+    dijit.byId(id+'_attachmentFile').set('class','directAttachment detailButton divAttachSubTask');
+    dojo.connect(newButtonAttach,'onBegin' , function(value){hideResultDivs();saveAttachment(true,id+'_attachmentFile');});
+    dojo.connect(newButtonAttach,'onComplete' , function(dataArray){saveAttachmentAck(dataArray,id+'_resultAttach');refreshSubTaskAttachment(refType,refId,resourceFilter);});
+    dojo.connect(newButtonAttach,'onProgress' , function(data){saveAttachmentProgress(data);});
+    dojo.connect(newButtonAttach,'onError' , function(value){dojo.style(dojo.byId('downloadProgress'), {display:'none'});hideWait();showError(i18n("uploadUncomplete"));});
+    var raw=imgGrab.parentNode.parentNode;
+    dojo.connect(raw,'ondragover' , function(value){hideShowDropDiv('show',refType+'_'+refId+'_subTaskRow_'+id);});
+    dojo.connect(raw,'ondrop' , function(value){hideShowDropDiv('dropHide',refType+'_'+refId+'_subTaskRow_'+id);});
+    dojo.connect(raw,'ondragLeave' , function(value){hideShowDropDiv('hide',refType+'_'+refId+'_subTaskRow_'+id);});
+    dijit.byId(id+'_attachmentFile').reset();
+    dijit.byId(id+'_attachmentFile').addDropTarget(raw,true);
+  }
   newNameText.set('value',dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value);
   dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value='';
   dojo.setAttr(refType+'_'+refId+'_nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',\''+refType+'\','+refId+')');
@@ -8443,7 +8492,7 @@ function showSubTask(objectClass) {
 function reorderSubTask (tab){
   var param="";
   var view=dojo.byId('subTaskView').value;
-  var nodeList=(view=="Global")?dijit.byId(tab).childNodes[2].childNodes:dijit.byId(tab).childNodes[1].childNodes,
+  var nodeList=(view=="Global")?dijit.byId(tab).childNodes[1].childNodes:dijit.byId(tab).childNodes[1].childNodes,
             lst=dijit.byId(tab).node,
               info=dijit.byId(tab).id.substr(11),
                 refType=info.substr(0,info.indexOf('_')),

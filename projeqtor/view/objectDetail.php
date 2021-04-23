@@ -241,12 +241,7 @@ if ($noselect) {
     }
     exit();
   }
-//   if(array_key_exists('refreshSubTask_Single', $_REQUEST)){
-//     $rightUpdate=securityGetAccessRightYesNo('menu'.$objClass,'update',$obj);
-//     $rightRead=securityGetAccessRightYesNo('menu'.$objClass,'read',$obj);
-//     SubTask::drawSubtasksForObject($obj,$objClass, $obj->id,true);
-//     exit();
-//   }
+
 }
 // save the current object in session
 
