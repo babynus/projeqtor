@@ -49,7 +49,6 @@ if($element=='SubTask'){
     $priority = (RequestHandler::isCodeSet('priority'))?RequestHandler::getValue('priority'):null;
     $status = (RequestHandler::isCodeSet('status'))?RequestHandler::getValue('status'):"";
     $resource = (RequestHandler::isCodeSet('resource'))?RequestHandler::getValue('resource'):null;
-    debugLog($resource);
   }
   Sql::beginTransaction();
   if($operation=='save' or $operation=='update'){
@@ -58,7 +57,6 @@ if($element=='SubTask'){
     if($name!=null)$subTask->name=$name;
     if($priority!=null)$subTask->idPriority=(intval($priority)!=0)?intval($priority):null;
     if($resource!=null){
-      debugLog('yes');
       $subTask->idResource=(intval($resource)!=0)?intval($resource):null;
     }
     if($sortOrder!=null)$subTask->sortOrder=intval($sortOrder);
