@@ -1534,9 +1534,18 @@ function addAttachment(attachmentType,refType,refId) {
     });
     enableWidget('dialogAttachmentSubmit');
   }
+  if(dijit.byId("attachmentDescription").get('checked')==true && refType!='SubTask'){
+    dijit.byId("attachmentDescription").set('disabled', false);
+    dijit.byId('attachmentPrivacyPrivate').set('disabled',false);
+  }
   dijit.byId("attachmentDescription").set('value', null);
   dijit.byId("dialogAttachment").set('title', i18n("dialogAttachment"));
   dijit.byId('attachmentPrivacyPublic').set('checked', 'true');
+  if(refType=='SubTask'){
+    dijit.byId("attachmentDescription").set('disabled', true);
+    dijit.byId('attachmentPrivacyPrivate').set('disabled',true);
+  }
+
   dijit.byId("dialogAttachment").show();
 }
 
@@ -1561,8 +1570,10 @@ function changeAttachment(list) {
  * 
  */
 var cancelDupplicate=false;
-function saveAttachment(direct) {
+function saveAttachment(direct,idName) {
   // disableWidget('dialogAttachmentSubmit');
+  if(cancelDupplicate)return;
+  cancelDupplicate=true;
   if (!isHtml5()) {
     if (dojo.isIE && dojo.isIE<=8) {
       dojo.byId('attachmentForm').submit();
@@ -1578,8 +1589,8 @@ function saveAttachment(direct) {
     return false;
   }
   if (direct) {
-    if (dijit.byId("attachmentFileDirect")) {
-      if (dijit.byId("attachmentFileDirect").getFileList().length > 20) {
+    if (dijit.byId(idName)) {
+      if (dijit.byId(idName).getFileList().length > 20) {
         showAlert(i18n('uploadLimitNumberFiles'));
         return false;
       }
@@ -1597,6 +1608,7 @@ function saveAttachment(direct) {
   });
   showWait();
   dijit.byId('dialogAttachment').hide();
+  cancelDupplicate=false;
   return true;
 }
 
@@ -1668,12 +1680,20 @@ function removeAttachment(attachmentId) {
   dojo.byId("attachmentId").value=attachmentId;
   dojo.byId("attachmentRefType").value=dojo.byId('objectClass').value;
   dojo.byId("attachmentRefId").value=dojo.byId("objectId").value;
-  actionOK=function() {
-    loadContent("../tool/removeAttachment.php", "resultDivMain", "attachmentForm",
-        true, 'attachment');
-    loadContent("../view/menuUserTop.php", "drawMenuUser");
-    //loadContent("../view/menuBar.php", "iconMenuUserPhoto");
+  actionOK=function(reftype,refId,idResource) {
+      loadContent("../tool/removeAttachment.php", "resultDivMain", "attachmentForm",
+          true, 'attachment');
+      loadContent("../view/menuUserTop.php", "drawMenuUser");
+      //loadContent("../view/menuBar.php", "iconMenuUserPhoto");
+      if(dojo.byId('refreshSTDivValues')){
+        var param=dojo.byId('refreshSTDivValues').value.split(","),
+              reftType=param[0],
+                refId=param[1],
+                  idResource=(param[2]==0)?null:param[2];
+        setTimeout('refreshSubTaskAttachment(\''+reftType+'\','+refId+','+idResource+')',200);
+      }
   };
+  
   msg=i18n('confirmDelete', new Array(i18n('Attachment'), attachmentId));
   showConfirm(msg, actionOK);
 }
@@ -13097,3 +13117,62 @@ function setLstDocumentRight(lst,val){
     dojo.byId(lst).value=valueLst+','+val;
   }
 }
+
+var activFuncHideShowDropDiv=false;
+function hideShowDropDiv(mode,subTaskRawId){
+  event.preventDefault();
+  var el=dojo.byId(subTaskRawId);
+  if(mode=='show'){
+      el.style.background="#EEEEEE";
+      el.style.opacity='50%';
+      if (dojo.byId('dropFilesInfoDiv')) {
+        dojo.byId('dropFilesInfoDiv').style.opacity='0%';
+        dojo.byId('dropFilesInfoDiv').style.display='none';
+      }
+      activFuncHideShowDropDiv=true;
+  }else if(mode =='hide'){
+    el.style.background="unset";
+    el.style.opacity='unset';
+    if(dojo.byId('dropFilesInfoDiv')){
+      dojo.byId('dropFilesInfoDiv').style.opacity='50%';
+      dojo.byId('dropFilesInfoDiv').style.display='block';
+    }
+      activFuncHideShowDropDiv=false;
+  }else {
+    activFuncHideShowDropDiv=false;
+    el.style.background="unset";
+    el.style.opacity='unset';
+    if(dojo.byId('dropFilesInfoDiv')){
+      dojo.byId('dropFilesInfoDiv').style.opacity='0%';
+      dojo.byId('dropFilesInfoDiv').style.display='none';
+    }
+
+  }
+}
+
+function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachmentDivClass,refresh){
+  var dest=dojo.byId(destination),
+        allTable=dest.querySelectorAll('.'+tableClass);
+  
+  allTable.forEach(function(table){
+    var allRaw=table.querySelectorAll('.'+rawClass);
+    allRaw.forEach(function(el){
+      var divAttach=el.querySelector('.'+attachmentDivClass);
+      if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
+        var idDiv=divAttach.childNodes[1].firstChild.id;
+        dijit.byId(idDiv).reset();
+        dijit.byId(idDiv);
+        if(!refresh)dijit.byId(idDiv).addDropTarget(el,true);
+      }
+      
+    });
+  });
+}
+
+function refreshSubTaskAttachment(refType,refId,idResource){
+  view=dojo.byId('subTaskView').value;
+  //loadDiv('../view/refreshSubTaskAttachmentDiv.php?idElement='+elemId+'&elementType='+refType, 'divAttachement_'+elemId);
+  loadContent('../view/refreshSubTaskAttachmentDiv.php?refType='+refType+'&refId='+refId+'&view='+view+'&idResource='+idResource ,refType+'_'+refId+'_drawSubTask');
+  //setDragAndDropAttachmentSubTask(destination,'SubTaskTab','subTaskRow','divAttachSubTask',true);
+}
+

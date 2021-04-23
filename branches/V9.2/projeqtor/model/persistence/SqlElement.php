@@ -484,6 +484,8 @@ abstract class SqlElement {
           "TestSession" => "controlStrict", 
           "Ticket" => "controlStrict", 
           "WorkflowStatus" => "cascade"), 
+      "SubTask"=>array(
+            "Attachment" => "cascade"),
       "Team" => array("Resource" => "control"), 
       "Tender" => array(
           "TenderEvaluation" => "cascade", 

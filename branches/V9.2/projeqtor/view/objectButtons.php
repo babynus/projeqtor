@@ -760,7 +760,7 @@
 			multiple="true" class="directAttachment detailButton"
 			uploadOnSelect="true"
 			target="resultPost"
-			onBegin="hideResultDivs();saveAttachment(true);"
+			onBegin="hideResultDivs();saveAttachment(true,'attachmentFileDirect');"
 			iconClass="iconAttachFiles"
 			onError="dojo.style(dojo.byId('downloadProgress'), {display:'none'});"
 			style="font-size:60%;height:26px; width:36px; border: 1px dashed #ffffff !important; padding:0; color: #000000; position:absolute;

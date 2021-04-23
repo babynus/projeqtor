@@ -59,5 +59,7 @@ if ($refType=='Resource') {
 	Affectable::deleteThumbs($refType, intval($refId), $obj->subDirectory.$obj->fileName);
 }
 // Message of correct saving
+$result.='<input type="hidden" id="lastSaveRefType" value="'.$refType.'" />';
+$result.='<input type="hidden" id="lastSaveRefId" value="'.$refId.'" />';
 displayLastOperationStatus($result);
 ?>
