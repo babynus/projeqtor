@@ -51,7 +51,6 @@ $mobile=false;
      $msg=new Message();
      $today=date('Y-m-d H:i:s');
      $where="showOnLogin=1 and idle=0 and ( (startDate <= '$today' and endDate >= '$today' ) or (startDate IS NULL and endDate IS NULL ) or (startDate <= '$today' and endDate IS NULL) or (startDate  IS NULL and endDate >= '$today'))";
-     debugLog($where);
      $msgList=$msg->getSqlElementsFromCriteria(null,null,$where);
      $msgTypeList=SqlList::getList('MessageType','color');
    }
