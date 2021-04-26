@@ -2285,6 +2285,7 @@ function htmlSetClickableImages($text,$maxWidth) {
   //return $text;
   global $widthToPass;
   $widthToPass=$maxWidth;
+  $title='title="'.i18n("msgClickToEnlarge").'"';
   $text=preg_replace_callback(
       '/<img src="(.*?)" style="(.*?)"/', 
       function ($matches) { 
@@ -2298,6 +2299,7 @@ function htmlSetClickableImages($text,$maxWidth) {
           $style="";
           $height=null;
           $width=null;
+          $title='title="'.i18n("msgClickToEnlarge").'"';
           foreach ($attrs as $att) {
             $att=strtolower(trim($att,' '));
             $vals=explode(':',$att);
@@ -2326,13 +2328,13 @@ function htmlSetClickableImages($text,$maxWidth) {
             $style.="height:$newHeight;width:$newWidth";
           }
         }
-        return '<img onClick="showImage(\'Note\',\''.$matches[1].'\',\''.basename($matches[1]).'\');" src="'.$matches[1].'" style="cursor:pointer;'.$style.'"';
+        return '<img onClick="showImage(\'Note\',\''.$matches[1].'\',\''.basename($matches[1]).'\');" src="'.$matches[1].'" style="cursor:pointer;'.$style.'" '.$title;
       },
       $text);
    $text=preg_replace_callback(
        '/<img src="(.*?)"/', 
        function ($matches) { 
-         return '<img onClick="showImage(\'Note\',\''.$matches[1].'\',\''.basename($matches[1]).'\');" src="'.$matches[1].'" style="cursor:pointer;"';
+         return '<img onClick="showImage(\'Note\',\''.$matches[1].'\',\''.basename($matches[1]).'\');" src="'.$matches[1].'" style="cursor:pointer;" '.$title;
        },
       $text);
   return $text;
