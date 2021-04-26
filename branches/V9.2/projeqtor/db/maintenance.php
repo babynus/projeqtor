@@ -1140,6 +1140,14 @@ if (beforeVersion($currVersion,"V9.2.0") and $currVersion!='V0.0.0') {
   $workCommandDoneList=$workCommandDone->getSqlElementsFromCriteria(null,null,'1=1');
   $cpt=0;
   $cptCommit=100;
+  $pwdLDAP = trim(Parameter::getGlobalParameter('paramLdap_search_pass'));
+  if($pwdLDAP){
+    Parameter::storeGlobalParameter('paramLdap_search_pass', encryptPwd($pwdLDAP, 'LDAP'));
+  }
+  $pwdIMAP = Parameter::getGlobalParameter('paramMailSmtpPassword');
+  if($pwdIMAP){
+  	Parameter::storeGlobalParameter('paramMailSmtpPassword', encryptPwd($pwdIMAP, 'IMAP'));
+  }
   Sql::beginTransaction();
   traceLog("   => ".count($workCommandDoneList)." to update");
   if (count($workCommandDoneList)<100) {
