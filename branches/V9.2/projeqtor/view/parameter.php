@@ -248,7 +248,13 @@ function drawTableFromObjectList($objectList) {
 				   $numb= number_format(intval($obj->parameterValue)/$valChar,0,' ',' ');
 				 echo ' value="' .  htmlEncode(strval($numb).$char) . '" ';
 				}else{
-				  echo ' value="' .  htmlEncode($obj->parameterValue) . '" ';
+				  $val = $obj->parameterValue;
+				  if($code=="paramLdap_search_pass"){
+				    $val = decryptPwd($obj->parameterValue, 'LDAP');
+				  }else if($code=="paramMailSmtpPassword"){
+				    $val = decryptPwd($obj->parameterValue, 'IMAP');
+				  }
+				  echo ' value="' .  htmlEncode($val) . '" ';
 				}
 				//end
 				echo ' >';

@@ -291,6 +291,11 @@ if ($type=='habilitation') {
       if ($fld == 'mailerTestMessage'){
          $text=$val;
       }
+      if ($fld == 'paramLdap_search_pass' and $val){
+      	$val=encryptPwd($val, 'LDAP');
+      }else if($fld == 'paramMailSmtpPassword' and $val){
+      	$val=encryptPwd($val, 'IMAP');
+      }
       if($fld =='cronArchivePlannedDate'){
         $cronExecutionActiv = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'archiveHistory'));
         $hoursArchiv = substr($val, 1, 2);
