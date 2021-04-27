@@ -69,17 +69,20 @@ class DocumentRight extends SqlElement {
    $classDirectory=get_class($documentDirectory);
    
    $lstDocDirectoty=$documentDirectory->getSqlElementsFromCriteria(null,null,$where,'location');
-   $destinationWidth=RequestHandler::getNumeric('destinationWidth')-(RequestHandler::getNumeric('destinationWidth')*0.05);
+   $destinationWidth=RequestHandler::getNumeric('destinationWidth')-(RequestHandler::getNumeric('destinationWidth')*0.05)-15;
+   $tableWidth=$destinationWidth*0.9;
+   $tableMargin=$destinationWidth*0.05;
    
    
    $widthSelect=intval($destinationWidth/($nbcolumn)-30);
    if(!empty($lstDocDirectoty)){
-     echo '       <table class="crossTable" style="margin-left:5%;margin-top:45px;margin-right:15px;;">';
+     echo '       <table class="crossTable" style="margin-left:'.$tableMargin.'px;margin-top:45px;">';
      echo '         <tr>';
      echo '             <td class="tabLabel">'.i18n('colName').'</td> <td class="tabLabel">'.i18n('colIdDocumentDirectory').'</td>';
                       foreach ($columnList as $col) {
      echo '             <td class="tabLabel">' . $col . '</td>';
                       }
+     echo '           <td></td>';
      echo '         </tr>';
                     foreach ($lstDocDirectoty as $id=>$docD){
                       $lst=array();
@@ -113,7 +116,7 @@ class DocumentRight extends SqlElement {
                               echo '  <select dojoType="dijit.form.FilteringSelect" class="input" '.(($rightUpdate=='NO' and $rightRead=='YES')?"readonly":"");
                               echo '     onchange="setLstDocumentRight(\'lstNewDocRight\',\''.$docD->id.'_'.$id .'\');"; ';
                               echo      autoOpenFilteringSelect();
-                              echo '    style="width:'.$widthSelect.'px !important; font-size: 80%;" id="' . $name . '" name="' . $name . '" >';
+                              echo '    style="width:'.$widthSelect.'px !important;min-width:80px; font-size: 80%;" id="' . $name . '" name="' . $name . '" >';
                               htmlDrawOptionForReference('idAccessProfile',9, null, true);
                               echo '  </select>';
                               echo '</td>';
@@ -125,12 +128,13 @@ class DocumentRight extends SqlElement {
                                   echo '  <select dojoType="dijit.form.FilteringSelect" class="input" '.(($rightUpdate=='NO' and $rightRead=='YES')?"readonly":"");
                                   echo '     onchange="setLstDocumentRight(\'lstDocRight\',\''.$docR->id .'\');"; ';
                                   echo      autoOpenFilteringSelect();
-                                  echo '    style="width:'.$widthSelect.'px !important; font-size: 80%;" id="' . $name . '" name="' . $name . '" >';
+                                  echo '    style="width:'.$widthSelect.'px !important;min-width:80px; font-size: 80%;" id="' . $name . '" name="' . $name . '" >';
                                   htmlDrawOptionForReference('idAccessProfile', $docR->idAccessMode, null, true);
                                   echo '  </select>';
                                   echo '</td>';
                           }
                         }
+                        echo '           <td>&nbsp;&nbsp;&nbsp;</td>';
                         echo '         </tr>';
                       }
                     }
@@ -204,7 +208,7 @@ class DocumentRight extends SqlElement {
                           echo '<td class="crossTablePivot">';
                           echo '  <select dojoType="dijit.form.FilteringSelect" class="input" '.(($rightUpdate=='NO' and $rightRead=='YES')?"readonly":"");
                           echo      autoOpenFilteringSelect();
-                          echo '    style=" width:'.$widthSelect.'px;font-size: 80%;" id="' . $name . '" name="' . $name . '" >';
+                          echo '    style=" width:'.$widthSelect.'px;min-width: 100px;font-size: 80%;" id="' . $name . '" name="' . $name . '" >';
                           htmlDrawOptionForReference('idAccessProfile', (($docDirect->id!='' and !$accesR)?$lstDocRight[$idP]->idAccessMode:$lstDocRight[$idP]->idAccessProfile), null, true);
                           echo '  </select>';
                           echo '</td>';
@@ -213,7 +217,7 @@ class DocumentRight extends SqlElement {
                          echo '<td class="crossTablePivot">';
                          echo '  <select dojoType="dijit.form.FilteringSelect" class="input" '.(($rightUpdate=='NO' and $rightRead=='YES')?"readonly":"");
                          echo      autoOpenFilteringSelect();
-                         echo '    style=" width:'.$widthSelect.'px;font-size: 80%;" id="' . $name . '" name="' . $name . '" >';
+                         echo '    style=" width:'.$widthSelect.'px;min-width: 100px;font-size: 80%;" id="' . $name . '" name="' . $name . '" >';
                          htmlDrawOptionForReference('idAccessProfile',9, null, true);
                          echo '  </select>';
                          echo '</td>';
