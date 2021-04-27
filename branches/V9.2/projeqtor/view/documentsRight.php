@@ -63,7 +63,7 @@ scriptLog('   ->/view/parameter.php');
   </tr>
 </table>
 </div>
-<div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" >
+<div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="overflow:auto;" >
 <form dojoType="dijit.form.Form" id="parameterForm" jsId="parameterForm"
   name="parameterForm" encType="multipart/form-data" action="" method="">
   <?php 
