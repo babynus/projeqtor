@@ -5043,7 +5043,9 @@ function drawStructureFromObject($obj, $refresh=false, $way=null, $item=null) {
     }
     if ($compObj->scope=='Product') $compObj=new Product($compObj->id);
     else $compObj=new Component($compObj->id);
-    if($compObj->idle and (!$showClosedStructure and $way=='structure') or (!$showClosedComposition and $way!='structure'))continue;
+    if($compObj->idle and ((!$showClosedStructure and $way=='structure') or (!$showClosedComposition and $way=='composition'))){
+      continue;
+    }
     $userId=$comp->idUser;
     $userName=SqlList::getNameFromId('User', $userId);
     $creationDate=$comp->creationDate;

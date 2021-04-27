@@ -151,6 +151,6 @@
   echo '<tr><td>'.i18n('colMorning').'</td><td>'.getDailyHours($obj->idProject, 'startAM', false).'</td>';
   echo '<td>'.getDailyHours($obj->idProject, 'endAM', false).'</td><tr>';
   echo '<tr><td>'.i18n('colAfternoon').'</td><td>'.getDailyHours($obj->idProject, 'startPM', false).'</td>';
-  echo '<td>'.getDailyHours($obj->idProject, 'endAM', false).'</td><tr>';
+  echo '<td>'.getDailyHours($obj->idProject, 'endPM', false).'</td><tr>';
   echo '</table></div>';
   ?>

@@ -965,7 +965,7 @@ abstract class SqlElement {
       	}else if($this->handled){
       		$type = 'handled';
       	}
-    	if(($statPeriod->id and $statPeriod->active == 1) or $this->idStatus==1){
+    	if($statPeriod->id and $statPeriod->active == 1){
     	    $statPeriod->endDate=date('Y-m-d H:i:s');
     	    $statPeriod->idStatusEnd=$this->idStatus;
     	    $statPeriod->idUserEnd=getSessionUser ()->id;
@@ -977,7 +977,7 @@ abstract class SqlElement {
         }
         $tz=Parameter::getGlobalParameter('paramDefaultTimezone');
         if ($tz) date_default_timezone_set($tz); else date_default_timezone_set('Europe/Paris');
-        if($statPeriod->active == 1 or $this->idStatus==1){
+        if($statPeriod->active == 1){
     		$newStatPeriod = new StatusPeriod();
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);

@@ -230,7 +230,7 @@ class ProductMain extends ProductOrComponent {
       Tender::drawListFromCriteria('id'.get_class($this),$this->id);
     }
     if ($item=='showClosedStructure' or $item=='showClosedComposition'){
-    	$showClosed=(Parameter::getUserParameter($item)!='0')?true:false;
+    	$showClosed=(Parameter::getUserParameter($item)=='1' or Parameter::getUserParameter($item)=='')?true:false;
     	$result.='<div style="position:absolute;right:5px;top:3px;">';
     	$result.='<label for="'.$item.'" class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'</label>';
     	$result.='<div id="'.$item.'" style="'.((isNewGui())?'margin-top:14px':'').'" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosed)?'checked':'');
