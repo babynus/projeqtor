@@ -5397,9 +5397,18 @@ function replace_accents($string) {
 
 function encryptPwd($pwd, $crypto){
   $key = User::getRandomPassword();
-  Parameter::storeGlobalParameter('RandomKeyL', $key);
   if($crypto == 'IMAP'){
-  	Parameter::storeGlobalParameter('RandomKeyI', $key);
+    if(!Parameter::getGlobalParameter('RandomKeyI')){
+      Parameter::storeGlobalParameter('RandomKeyI', $key);
+    }else{
+      $key = Parameter::getGlobalParameter('RandomKeyI');
+    }
+  }else{
+    if(!Parameter::getGlobalParameter('RandomKeyL')){
+      Parameter::storeGlobalParameter('RandomKeyL', $key);
+    }else{
+      $key = Parameter::getGlobalParameter('RandomKeyL')
+    }
   }
   $encryptPwd=AesCtr::encrypt($pwd, $key, Parameter::getGlobalParameter('aesKeyLength'));
   return $encryptPwd;
