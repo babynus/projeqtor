@@ -156,24 +156,30 @@ $order="idUrgency";
 $ticket=new Ticket();
 $lstTicket=$ticket->getSqlElementsFromCriteria(null,false, $where, $order);
 $ticketType=new TicketType();
-$lstTicketType = $ticketType->getSqlElementsFromCriteria(null, null, "1=1");
+$whereTicketType=($paramTicketType!='')?'id='.Sql::fmtId($paramTicketType):'1=1';
+$lstTicketType = $ticketType->getSqlElementsFromCriteria(null, null, $whereTicketType);
 $urgency=new Urgency();
 $lstUrgency = $urgency->getSqlElementsFromCriteria(null, null, "1=1");
 
 echo '<table style="width:100%;text-align:center">';
 echo '<tr>';
-echo '<td class="reportTableHeader" style="width:20%">' . i18n('colIdTicketType') . '</td>';
-echo '<td class="reportTableHeader" style="width:15%">'.i18n('colUrgency').'</td>';
-echo '<td class="reportTableHeader" style="width:10%">'.i18n('nbDone').'</td>';
-echo '<td class="reportTableHeader" style="width:15%">'.i18n('delayDone').'</td>';
-echo '<td class="reportTableHeader" style="width:10%">'.i18n('nbNotDone').'</td>';
-echo '<td class="reportTableHeader" style="width:15%">'.i18n('delayNotDone').'</td>';
-echo '<td class="reportTableHeader" style="width:10%">'.i18n('punctualityRate').'</td>';
+echo '<td class="reportTableHeader" style="width:20%"'.excelFormatCell('header',20).'>' . i18n('colIdTicketType') . '</td>';
+echo '<td class="reportTableHeader" style="width:15%"'.excelFormatCell('header',15).'>'.i18n('colUrgency').'</td>';
+echo '<td class="reportTableHeader" style="width:10%"'.excelFormatCell('header',10).'>'.i18n('nbDone').'</td>';
+echo '<td class="reportTableHeader" style="width:15%"'.excelFormatCell('header',15).'>'.i18n('delayDone').'</td>';
+echo '<td class="reportTableHeader" style="width:10%"'.excelFormatCell('header',10).'>'.i18n('nbNotDone').'</td>';
+echo '<td class="reportTableHeader" style="width:15%"'.excelFormatCell('header',15).'>'.i18n('delayNotDone').'</td>';
+echo '<td class="reportTableHeader" style="width:10%"'.excelFormatCell('header',10).'>'.i18n('punctualityRate').'</td>';
 echo '</tr>';
 $result = array();
 $nbTT = 0;
 $nbOk = 0;
 $nbKo = 0;
+$startAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startAM', false);
+$endAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endAM', false);
+$startPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startPM', false);
+$endPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endPM', false);
+$hourPerDay = abs(strtotime($startAMDate)-strtotime($endAMDate))+abs(strtotime($startPMDate)-strtotime($endPMDate));
 foreach ($lstTicket as $ticket){
 	$delay = SqlElement::getSingleSqlElementFromCriteria('TicketDelay', array('idTicketType'=>$ticket->idTicketType, 'idUrgency'=>$ticket->idUrgency, 'idProject'=>$ticket->idProject, 'idMacroTicketStatus'=>2));
 	if(!$delay->id){
@@ -236,18 +242,13 @@ foreach ($lstTicket as $ticket){
 	$result[$ticket->idTicketType][$ticket->idUrgency]['OK']=$nbOk;
 	$result[$ticket->idTicketType][$ticket->idUrgency]['KO']=$nbKo;
 }
-$startAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startAM', false);
-$endAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endAM', false);
-$startPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startPM', false);
-$endPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endPM', false);
-$hourPerDay = abs(strtotime($startAMDate)-strtotime($endAMDate))+abs(strtotime($startPMDate)-strtotime($endPMDate));
 foreach ($lstUrgency as $urgency){
   foreach ($lstTicketType as $type){
     echo '<tr>';
-    echo '<td class="reportTableData" style="width:20%">'.$type->name.'</td>';
-    echo '<td class="reportTableData" style="width:15%">'.$urgency->name.'</td>';
+    echo '<td class="reportTableData" style="width:20%"'.excelFormatCell('data',20).'>'.$type->name.'</td>';
+    echo '<td class="reportTableData" style="width:15%"'.excelFormatCell('data',15).'>'.$urgency->name.'</td>';
     $OK = (isset($result[$type->id][$urgency->id]['OK']))?$result[$type->id][$urgency->id]['OK']:0;
-    echo '<td class="reportTableData" style="width:10%">'.$OK.'</td>';
+    echo '<td class="reportTableData" style="width:10%"'.excelFormatCell('data',10).'>'.$OK.'</td>';
     $durationOK = (isset($result[$type->id][$urgency->id]['durationOK']))?$result[$type->id][$urgency->id]['durationOK']:0;
     if($durationOK)$durationOK = $durationOK/$OK;
     if($durationOK>$hourPerDay){
@@ -286,9 +287,9 @@ foreach ($lstUrgency as $urgency){
   		$durationDisplay .= $durationDiff->format('%i').i18n('shortMinute').' ';
   	}
     if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
-    echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
+    echo '<td class="reportTableData" style="width:15%"'.excelFormatCell('data',15).'>'.$durationDisplay.'</td>';
     $KO = (isset($result[$type->id][$urgency->id]['KO']))?$result[$type->id][$urgency->id]['KO']:0;
-    echo '<td class="reportTableData" style="width:10%">'.$KO.'</td>';
+    echo '<td class="reportTableData" style="width:10%"'.excelFormatCell('data',10).'>'.$KO.'</td>';
     $durationKO = (isset($result[$type->id][$urgency->id]['durationKO']))?$result[$type->id][$urgency->id]['durationKO']:0;
     if($durationKO)$durationKO = $durationKO/$KO;
     if($durationKO>$hourPerDay){
@@ -327,11 +328,11 @@ foreach ($lstUrgency as $urgency){
   		$durationDisplay .= $durationDiff->format('%i').i18n('shortMinute').' ';
   	}
     if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
-    echo '<td class="reportTableData" style="width:15%">'.$durationDisplay.'</td>';
+    echo '<td class="reportTableData" style="width:15%"'.excelFormatCell('data',15).'>'.$durationDisplay.'</td>';
     $ponctuality = 0;
     $NB = (isset($result[$type->id][$urgency->id]['Nb']))?$result[$type->id][$urgency->id]['Nb']:0;
     if($OK)$ponctuality = ($OK/$NB)*100;
-    echo '<td class="reportTableData" style="width:10%">'.$ponctuality.' %</td>';
+    echo '<td class="reportTableData" style="width:10%"'.excelFormatCell('data',10).'>'.$ponctuality.' %</td>';
     echo '</tr>';
   }
 }

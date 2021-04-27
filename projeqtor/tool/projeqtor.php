@@ -3535,12 +3535,13 @@ function openHourDiffTime($startDate, $endDate, $idProject=null){
     }
   }else{
     $amDelay = 0;
-    if($startDate >= $startAMDate and $startDate <= $endAMDate){
+    $pmDelay = 0;
+    if($startDate >= $startAMDate and $startDate <= $endAMDate and isOpenDay($startDate)){
     	$amDelay = abs(((strtotime($startDate)-strtotime($endAMDate))/60)/60);
     }
-    if($startDate >= $startPMDate and $startDate <= $endPMDate){
+    if($startDate >= $startPMDate and $startDate <= $endPMDate and isOpenDay($startDate)){
     	$pmDelay = abs(((strtotime($startDate)-strtotime($endPMDate))/60)/60);
-    }else{
+    }else if(isOpenDay($startDate)){
       $pmDelay = abs(((strtotime($startPMDate)-strtotime($endPMDate))/60)/60);
     }
     $firtDayDelay = $amDelay+$pmDelay;
@@ -3548,13 +3549,14 @@ function openHourDiffTime($startDate, $endDate, $idProject=null){
     $endAMDate = date('Y-m-d', strtotime($endDate)).' '.$endAM;
     $startPMDate = date('Y-m-d', strtotime($endDate)).' '.$startPM;
     $endPMDate = date('Y-m-d', strtotime($endDate)).' '.$endPM;
+    $amDelay = 0;
     $pmDelay = 0;
-    if($endDate >= $startAMDate and $endDate <= $endAMDate){
+    if($endDate >= $startAMDate and $endDate <= $endAMDate and isOpenDay($endDate)){
     	$amDelay = abs(((strtotime($endDate)-strtotime($endAMDate))/60)/60);
-    }else{
+    }else if(isOpenDay($startDate)){
       $amDelay = abs(((strtotime($startAMDate)-strtotime($endAMDate))/60)/60);
     }
-    if($endDate >= $startPMDate and $endDate <= $endPMDate){
+    if($endDate >= $startPMDate and $endDate <= $endPMDate and isOpenDay($endDate)){
     	$pmDelay = abs(((strtotime($startPMDate)-strtotime($endDate))/60)/60);
     }
     $lastDayDelay = $amDelay+$pmDelay;

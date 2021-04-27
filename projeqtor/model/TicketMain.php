@@ -498,6 +498,17 @@ class TicketMain extends SqlElement {
   			$ape->updateWorkElementSummary ();
   		} 
   	}
+    if(!$old->id){
+      $newStatPeriod = new StatusPeriod();
+      $newStatPeriod->refId = $this->id;
+      $newStatPeriod->refType = get_class($this);
+      $newStatPeriod->active = 0;
+      $newStatPeriod->startDate = date('Y-m-d H:i:s', strtotime('now'));
+      $newStatPeriod->type = 'recorded';
+      $newStatPeriod->idStatusStart = $this->idStatus;
+      $newStatPeriod->idUserStart = getSessionUser()->id;
+      $newStatPeriod->save();
+    }
   	return $result;
   }
 
