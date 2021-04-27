@@ -54,7 +54,7 @@ if($element=='SubTask'){
   if($operation=='save' or $operation=='update'){
     $subTask =($operation=='save')?new SubTask():new SubTask($idSubTask);
     if($operation=='update')$old=$subTask->getOld();
-    if($name!=null)$subTask->name=$name;
+    if($name!=null)$subTask->name=nl2brForPlainText($name);
     if($priority!=null)$subTask->idPriority=(intval($priority)!=0)?intval($priority):null;
     if($resource!=null)$subTask->idResource=(intval($resource)!=0)?intval($resource):null;
     if($sortOrder!=null)$subTask->sortOrder=intval($sortOrder);
