@@ -13125,7 +13125,7 @@ function hideShowDropDiv(mode,subTaskRawId){
   if(mode=='show'){
       el.style.background="#EEEEEE";
       el.style.opacity='50%';
-      el.style.border=" 2px solid var(--color-secondary)";
+      el.style.border=" 2px dashed grey";
       if (dojo.byId('dropFilesInfoDiv')) {
         dojo.byId('dropFilesInfoDiv').style.opacity='0%';
         dojo.byId('dropFilesInfoDiv').style.display='none';
