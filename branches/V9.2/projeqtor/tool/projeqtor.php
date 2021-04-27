@@ -5407,7 +5407,7 @@ function encryptPwd($pwd, $crypto){
     if(!Parameter::getGlobalParameter('RandomKeyL')){
       Parameter::storeGlobalParameter('RandomKeyL', $key);
     }else{
-      $key = Parameter::getGlobalParameter('RandomKeyL')
+      $key = Parameter::getGlobalParameter('RandomKeyL');
     }
   }
   $encryptPwd=AesCtr::encrypt($pwd, $key, Parameter::getGlobalParameter('aesKeyLength'));
