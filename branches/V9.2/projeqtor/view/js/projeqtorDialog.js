@@ -13125,6 +13125,7 @@ function hideShowDropDiv(mode,subTaskRawId){
   if(mode=='show'){
       el.style.background="#EEEEEE";
       el.style.opacity='50%';
+      el.style.border=" 2px solid var(--color-secondary)";
       if (dojo.byId('dropFilesInfoDiv')) {
         dojo.byId('dropFilesInfoDiv').style.opacity='0%';
         dojo.byId('dropFilesInfoDiv').style.display='none';
@@ -13133,6 +13134,7 @@ function hideShowDropDiv(mode,subTaskRawId){
   }else if(mode =='hide'){
     el.style.background="unset";
     el.style.opacity='unset';
+    el.style.border="";
     if(dojo.byId('dropFilesInfoDiv')){
       dojo.byId('dropFilesInfoDiv').style.opacity='50%';
       dojo.byId('dropFilesInfoDiv').style.display='block';
@@ -13142,6 +13144,7 @@ function hideShowDropDiv(mode,subTaskRawId){
     activFuncHideShowDropDiv=false;
     el.style.background="unset";
     el.style.opacity='unset';
+    el.style.border="";
     if(dojo.byId('dropFilesInfoDiv')){
       dojo.byId('dropFilesInfoDiv').style.opacity='0%';
       dojo.byId('dropFilesInfoDiv').style.display='none';
@@ -13171,8 +13174,6 @@ function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachm
 
 function refreshSubTaskAttachment(refType,refId,idResource){
   view=dojo.byId('subTaskView').value;
-  //loadDiv('../view/refreshSubTaskAttachmentDiv.php?idElement='+elemId+'&elementType='+refType, 'divAttachement_'+elemId);
   loadContent('../view/refreshSubTaskAttachmentDiv.php?refType='+refType+'&refId='+refId+'&view='+view+'&idResource='+idResource ,refType+'_'+refId+'_drawSubTask');
-  //setDragAndDropAttachmentSubTask(destination,'SubTaskTab','subTaskRow','divAttachSubTask',true);
 }
 

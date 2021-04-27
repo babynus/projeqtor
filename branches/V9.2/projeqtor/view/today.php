@@ -52,9 +52,9 @@ $workVisibility=$pe->_workVisibility;
 $costVisibility=$pe->_costVisibility;
 
 $displayWidth=RequestHandler::getValue('destinationWidth');
-$twoCols=($displayWidth>1400)?true:false;
-if (!isNewGui() ) $twoCols=false;
-$twoCols=false;
+// $twoCols=($displayWidth>1400)?true:false;
+// if (!isNewGui() ) $twoCols=false;
+//$twoCols=false;
 //echo "width=$displayWidth";
 
 $arrayCols=array('Ticket', 'Activity', 'Milestone', 'Action', 'Risk', 'Issue', 'Question', 'Requirement','Delivery');
@@ -859,10 +859,10 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
 <div class="container" dojoType="dijit.layout.BorderContainer">
   <div style="overflow: <?php echo(!$print)?'auto':'hidden';?>;padding:10px" id="detailDiv" dojoType="dijit.layout.ContentPane" region="center">
     <?php 
-    if ($twoCols) {?>
-      <table style=""><tr><td style="width:50%; border:1px solid green">
+//     if ($twoCols) {?>
+ <!--      <table style=""><tr><td style="width:50%; border:1px solid green">--> 
     <?php 
-    }
+//     }
     if (!$print) {?>
     <div class="parametersButton">
       <button id="todayRefreshButton" dojoType="dijit.form.Button"
@@ -989,7 +989,7 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
           showPrint('../view/today.php');
         </script>
       </button>    
-    </div>    
+    </div>
     <?php 
     } 
     $titlePane="Today_message";
@@ -1028,11 +1028,23 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
       <br />
     <?php
     }
+    
+    $drawDiv=false;
+    $coutTlist=count($todayList);
+    $cp=0;
+    $classicViewWidth='75%;';
+    $activityStreamWidth='25%;';
+    if(Parameter::getUserParameter('contentPaneTodayClassicViewWidth')){
+      $classicViewWidth=Parameter::getUserParameter('contentPaneTodayClassicViewWidth').'px';
+    }
+    if(Parameter::getUserParameter('contentPaneTodayActStreamWidth')){
+      $activityStreamWidth=Parameter::getUserParameter('contentPaneTodayActStreamWidth').'px';
+    }
     foreach ($todayList as $todayItem) {
-      if ($todayItem->scope=='static' and $todayItem->staticSection=='Projects') {
-        $titlePane="Today_project";
-        if (!$print or !array_key_exists($titlePane, $collapsedList)) {
+      $cp++;
+      if ($todayItem->scope=='static' and $todayItem->staticSection=='Projects' and !array_key_exists("Today_project", $collapsedList)) {
           if (!$print) {?> 
+          <!--  <div dojoType="dijit.layout.ContentPane" region="top" style="width:100%;">-->
             <div dojoType="dijit.TitlePane"
               open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
               id="<?php echo $titlePane;?>"
@@ -1046,83 +1058,98 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
           <?php
           }
           showProjects();
+          
           ?>
           </div>
-          <br /><?php
+          <?php
+          if(!$print)echo '<div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false" style="margin-top:25px;height:90%;" >  ';
+          else echo '<br/>';
+      }else{
+        if(!$drawDiv and !$print){
+          if(array_key_exists("Today_project", $collapsedList))echo '<div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false" 
+                                                                                        style="margin-top:25px;height:90%;border-top:2px solid var(--color-section-title-border);">  ';
+          echo '<div dojoType="dijit.layout.ContentPane" region="left" style="width:'.$classicViewWidth.'; padding-top:15px;height:100%;" splitter="true" id="todayClassicView">';
+          echo '<script type="dojo/connect" event="resize" args="evt">';
+          echo 'saveContentPaneResizing("contentPaneTodayClassicViewWidth", dojo.byId("todayClassicView").offsetWidth, true);';
+          echo '</script>';
+          $drawDiv=true;
         }
-      } else if ($todayItem->scope=='static' and $todayItem->staticSection=='AssignedTasks') {
-        showAssignedTasks();
-      } else if ($todayItem->scope=='static' and $todayItem->staticSection=='ResponsibleTasks') {
-        showResponsibleTasks();
-      } else if ($todayItem->scope=='static' and $todayItem->staticSection=='AccountableTasks') {
-        showAccountableTasks();
-      } else if ($todayItem->scope=='static' and $todayItem->staticSection=='IssuerRequestorTasks') {
-        showIssuerRequestorTasks();
-      } else if ($todayItem->scope=='static' and $todayItem->staticSection=='Documents') {
-        showDocuments();
-      } else if ($todayItem->scope=='static' and $todayItem->staticSection=='ProjectsTasks') {
-        if ($profile->profileCode=='PL') {
-          showProjectsTasks();
-        }
-      } else if ($todayItem->scope=='report') {
-        $rpt=new Report($todayItem->idReport);
-        $titlePane="Today_report_".$todayItem->id;
-        if (!$print or !array_key_exists($titlePane, $collapsedList)) {
-          if (!$print) {
-            // echo '<div id="'.$titlePane.'_wait">... loading...</div>';
-            echo '<div dojoType="dijit.TitlePane" style="overflow-x:auto"';
-            echo ' open="'.(array_key_exists($titlePane, $collapsedList)?'false':'true').'"';
-            echo ' id="'.$titlePane.'"';
-            echo ' title="'.i18n('colReport').' &quot;'.i18n($rpt->name).'&quot;" >';
-            echo ' <script type="dojo/connect" event="onHide" args="evt">';
-            echo ' saveCollapsed("'.$titlePane.'");';
-            echo ' setTimeout(\'dijit.byId("'.$titlePane.'").set("content","");\',100);';
-            echo ' </script>';
-            echo ' <script type="dojo/connect" event="onShow" args="evt">';
-            echo '   saveExpanded("'.$titlePane.'");';
-            $params=TodayParameter::returnReportParameters($rpt);
-            $paramsToday=TodayParameter::returnTodayReportParameters($todayItem);
-            foreach ($paramsToday as $pName=>$pValue) {
-              $params[$pName]=$pValue;
-            }
-            $urlParam=((strpos($rpt->file, '?')>0)?'&':'?')."fromToday=true";
-            foreach ($params as $paramName=>$paramValue) {
-              $urlParam.=($urlParam or strpos($rpt->file, '?')>0)?'&':'?';
-              $urlParam.=$paramName.'='.$paramValue;
-            }
-            echo '   loadReport("../report/'.$rpt->file.$urlParam.'","'.$titlePane.'");';
-            echo ' </script>';
-            echo '<img src="../view/css/images/treeExpand_loading.gif" />';
-          } else {
-            echo '<div class="section">'.i18n('colReport').' &quot;'.i18n($rpt->name).'&quot;</div><br/><div>';
-            $params=TodayParameter::returnReportParameters($rpt);
-            $paramsToday=TodayParameter::returnTodayReportParameters($todayItem);
-            foreach ($paramsToday as $pName=>$pValue) {
-              $params[$pName]=$pValue;
-            }
-            $urlParam="";
-            foreach ($params as $paramName=>$paramValue) {
-              $_REQUEST[$paramName]=$paramValue;
-            }
-            $reportFile=explode('?', $rpt->file);
-            include '../report/'. $reportFile[0];
-	    }
-	  	echo '</div>';
-	  	echo '<br/>';
-	  }
-	
-  }
+        if ($todayItem->scope=='static' and $todayItem->staticSection=='AssignedTasks') {
+          showAssignedTasks();
+        } else if ($todayItem->scope=='static' and $todayItem->staticSection=='ResponsibleTasks') {
+          showResponsibleTasks();
+        } else if ($todayItem->scope=='static' and $todayItem->staticSection=='AccountableTasks') {
+          showAccountableTasks();
+        } else if ($todayItem->scope=='static' and $todayItem->staticSection=='IssuerRequestorTasks') {
+          showIssuerRequestorTasks();
+        } else if ($todayItem->scope=='static' and $todayItem->staticSection=='Documents') {
+          showDocuments();
+        } else if ($todayItem->scope=='static' and $todayItem->staticSection=='ProjectsTasks') {
+          if ($profile->profileCode=='PL') {
+            showProjectsTasks();
+          }
+        } else if ($todayItem->scope=='report') {
+          $rpt=new Report($todayItem->idReport);
+          $titlePane="Today_report_".$todayItem->id;
+          if (!$print or !array_key_exists($titlePane, $collapsedList)) {
+            if (!$print) {
+              // echo '<div id="'.$titlePane.'_wait">... loading...</div>';
+              echo '<div dojoType="dijit.TitlePane" style="overflow-x:auto"';
+              echo ' open="'.(array_key_exists($titlePane, $collapsedList)?'false':'true').'"';
+              echo ' id="'.$titlePane.'"';
+              echo ' title="'.i18n('colReport').' &quot;'.i18n($rpt->name).'&quot;" >';
+              echo ' <script type="dojo/connect" event="onHide" args="evt">';
+              echo ' saveCollapsed("'.$titlePane.'");';
+              echo ' setTimeout(\'dijit.byId("'.$titlePane.'").set("content","");\',100);';
+              echo ' </script>';
+              echo ' <script type="dojo/connect" event="onShow" args="evt">';
+              echo '   saveExpanded("'.$titlePane.'");';
+              $params=TodayParameter::returnReportParameters($rpt);
+              $paramsToday=TodayParameter::returnTodayReportParameters($todayItem);
+              foreach ($paramsToday as $pName=>$pValue) {
+                $params[$pName]=$pValue;
+              }
+              $urlParam=((strpos($rpt->file, '?')>0)?'&':'?')."fromToday=true";
+              foreach ($params as $paramName=>$paramValue) {
+                $urlParam.=($urlParam or strpos($rpt->file, '?')>0)?'&':'?';
+                $urlParam.=$paramName.'='.$paramValue;
+              }
+              echo '   loadReport("../report/'.$rpt->file.$urlParam.'","'.$titlePane.'");';
+              echo ' </script>';
+              echo '<img src="../view/css/images/treeExpand_loading.gif" />';
+            } else {
+              echo '<div class="section">'.i18n('colReport').' &quot;'.i18n($rpt->name).'&quot;</div><br/><div>';
+              $params=TodayParameter::returnReportParameters($rpt);
+              $paramsToday=TodayParameter::returnTodayReportParameters($todayItem);
+              foreach ($paramsToday as $pName=>$pValue) {
+                $params[$pName]=$pValue;
+              }
+              $urlParam="";
+              foreach ($params as $paramName=>$paramValue) {
+                $_REQUEST[$paramName]=$paramValue;
+              }
+              $reportFile=explode('?', $rpt->file);
+              include '../report/'. $reportFile[0];
+  	    }
+  	  	echo '</div>';
+  	  	echo '<br/>';
+  	  }
+  	
+    }
 
+  }
+  if($cp==$coutTlist and $drawDiv and !$print){
+    echo '</div>';
+  }
 } 
-   if ($twoCols) {?>
-	    </td>
-	    <td style="width:100px;border:1px solid red;vertical-align:top;">
-	    <div style="height:500px">
-	    <?php include('../view/activityStreamList.php');?>
-	    </div>
-	  	</td>
-	    </tr></table>
-	  <?php 
-	  }	  ?>
+if(!$print){?>
+      <div dojoType="dijit.layout.ContentPane" id="todayActStream" region="center" style="width:<?php echo $activityStreamWidth;?>;padding-left:15px;padding-top:15px;height:100%;" splitter="true" >
+        <?php include('../view/activityStreamList.php');?>
+      </div>
+      <script type="dojo/connect" event="resize" args="evt">
+           saveContentPaneResizing("contentPaneTodayActStreamWidth", dojo.byId("todayActStream").offsetWidth, true);
+      </script>
+    </div> 
+<?php }?>
   </div>
 </div>
