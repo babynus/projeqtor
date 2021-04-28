@@ -1678,6 +1678,7 @@ function finalizeMessageDisplay(destination, validationType) {
     // changes
     addMessage(msg);
     // alert('validationType='+validationType);
+    console.log(validationType);
     if (validationType) {
       if (validationType == 'note') {
         loadContentStream();
@@ -1807,7 +1808,8 @@ function finalizeMessageDisplay(destination, validationType) {
         if (dijit.byId('detailFormDiv')) { // only refresh is detail is show
                                             // (possible when DndLing on
                                             // planning
-          loadContent("objectDetail.php?refresh=true", "detailFormDiv",
+        	if(validationType == 'affectation')buttonRightRefresh();
+        	loadContent("objectDetail.php?refresh=true", "detailFormDiv",
               'listForm');
         }
         if (validationType == 'assignment'
