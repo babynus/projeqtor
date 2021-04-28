@@ -100,7 +100,15 @@ class KpiValue extends SqlElement {
     $h->save();
   }
   
-  public static function calculateKpi($obj,$restrictToKpi=null, $date=null) {
+  public static function calculateKpi($obj) {
+    $class=get_class($obj);
+    $id=$obj->id;
+    $kvr=new KpiValueRequest();
+    $kvr->refType=$class;
+    $kvr->refId=$id;
+    $kvr->save();
+  }
+  public static function calculateKpiExecute($obj,$restrictToKpi=null, $date=null) {
     $class=get_class($obj);
     $id=$obj->id;
     $mutexKey=$class.'#'.$id;
@@ -314,7 +322,7 @@ class KpiValue extends SqlElement {
       $pe->realWork=$ph->realWork;
       $pe->leftWork=$ph->leftWork;
       $pe->plannedWork=$ph->realWork+$ph->leftWork;
-      self::calculateKpi($pe,'workload', substr($ph->day,0,4).'-'.substr($ph->day,4,2).'-'.substr($ph->day,6,2));
+      self::calculateKpiExecute($pe,'workload', substr($ph->day,0,4).'-'.substr($ph->day,4,2).'-'.substr($ph->day,6,2));
       if ($cpt % 100 == 0) {
         Sql::commitTransaction();
         traceLog("$cpt ProjectHistory elements treated");
