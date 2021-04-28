@@ -198,3 +198,17 @@ ALTER TABLE ${prefix}workcommand MODIFY commandAmount decimal(14,2) unsigned DEF
 ALTER TABLE ${prefix}workcommand MODIFY doneAmount decimal(14,2) unsigned DEFAULT NULL;
 ALTER TABLE ${prefix}workcommand MODIFY billedAmount decimal(14,2) unsigned DEFAULT NULL;
 
+-- PERFOMANCE IMPROVMENTS
+
+CREATE TABLE `${prefix}kpivaluerequest` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `refType` varchar(100) DEFAULT NULL,
+  `refId` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `requestDate` date,
+  `requestDateTime` datetime,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE INDEX `kpivaluerequestReference` ON `${prefix}kpivalue` (`refType`, `refId`);
+
+INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
+('01 * * * *', '../tool/cronExecutionStandard.php', 0, 'kpiCalculate');
