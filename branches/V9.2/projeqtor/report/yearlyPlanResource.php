@@ -52,18 +52,30 @@ $headerParameters.= i18n("startMonth") . ' : ' . $paramStartMonth . '<br/>';
 
 
 include "header.php";
-
+$nbMonthCurrentYear = 13 - $paramStartMonth;
+$nbMonthNewYear = 12 - $nbMonthCurrentYear;
+$paramYear1 = $paramYear+1;
 $where=getAccesRestrictionClause('Activity',false,false,true,true);
 $where='('.$where.' or idProject in '.Project::getAdminitrativeProjectList().')';
 if ($paramProject!='') {
   $where.=  "and idProject in " . getVisibleProjectsList(true, $paramProject) ;
 }
-$where.= " and year=" . $paramYear;
+if($nbMonthNewYear >= 1 ){
+  $where.= " and ( year= '$paramYear' or  year = '$paramYear1')";
+}else{
+  $where.= " and year=" . $paramYear;
+}
 $monthWhere = null;
 $monthWhere .=(strlen($paramStartMonth)==1)?0:'';
 $monthWhere .= $paramStartMonth;
 $monthWhere = $paramYear.$monthWhere;
 $where .= " and month >= ". $monthWhere; 
+if($nbMonthNewYear >= 1 ){
+  $monthWhere2 = $paramYear1;
+  $monthWhere2 .=(strlen($nbMonthNewYear)==1)?0:'';
+  $monthWhere2.=$nbMonthNewYear;
+  $where .= " and month <= ". $monthWhere2;
+}
 $order="";
 
 //VARIABLES
@@ -75,7 +87,10 @@ $projects=array();
 $projectsColor=array();
 $resources=array();
 $realDays=array();
-$startDate = $monthWhere;
+$startDate = $paramYear.'01';
+if(isset($monthWhere2)){
+  $startDate2 = $paramYear1.'01';
+}
 
 foreach ($lstWork as $work) {
   if (! array_key_exists($work->idResource,$resources)) {
@@ -149,7 +164,10 @@ echo "</tr></table>";
 echo '<table width="100%" align="left"><tr>';
 echo '<td class="reportTableHeader" rowspan="2">' . i18n('Project') . '</td>';
 echo '<td class="reportTableHeader" rowspan="2">' . i18n('Resource') . '</td>';
-echo '<td colspan="' . ($nbMonth) . '" class="reportTableHeader">' . i18n('month') . '</td>';
+echo '<td colspan="'.$nbMonth.'" class="reportTableHeader">' . $paramYear  . '</td>';
+if($nbMonth < 12){
+  echo '<td colspan="'.$nbMonthNewYear.'" class="reportTableHeader">' . $paramYear1  . '</td>';
+}
 echo '<td class="reportTableHeader" rowspan="2" width=50px;>' . i18n('sum'). '</td>';
 echo '<td  width="10%" rowspan="2"  class="reportTableHeader" >' . i18n('colNotPlannedWork'). '</td>';
 echo '</tr>';
@@ -158,6 +176,12 @@ $month=array();
 for($i=$paramStartMonth; $i<=12;$i++) {
   $style = "";
   echo '<td class="reportTableColumnHeader" ' . $style . '>' . $i . '</td>';
+}
+if($nbMonthNewYear>0){
+  for($i=1; $i<=$nbMonthNewYear;$i++) {
+    $style = "";
+    echo '<td class="reportTableColumnHeader" ' . $style . '>' . $i . '</td>';
+  }
 }
 echo '</tr>';
 
@@ -192,6 +216,11 @@ $globalSum=array();
 for ($i=$paramStartMonth; $i<=12;$i++) {
   $globalSum[$startDate+$i-1]=0;
 }
+if($nbMonthNewYear>0){
+  for ($i=1; $i<=$nbMonthNewYear;$i++) {
+    $globalSum[$startDate2+$i-1]=0;
+  }
+}
 $sortProject=array();
 foreach ($projects as $id=>$name) {
   $sortProject[SqlList::getFieldFromId('Project', $id, 'sortOrder').'#'.$id]=$name;
@@ -206,6 +235,11 @@ foreach ($projects as $idP=>$nameP) {
   $sum=array();
   for ($i=$paramStartMonth; $i<=12;$i++) {
     $sum[$startDate+$i-1]=0;
+  }
+  if($nbMonthNewYear>0){
+    for ($i=1; $i<=$nbMonthNewYear;$i++) {
+      $sum[$startDate2+$i-1]=0;
+    }
   }
   echo '<tr height="20px"><td class="reportTableLineHeader" style="width:150px;" rowspan="'. (count($result[$idP])+1) . '">' . htmlEncode($nameP) . '</td>';
   foreach ($result[$idP] as $idR=>$ress) {
@@ -233,6 +267,28 @@ foreach ($projects as $idP=>$nameP) {
         }
         echo '</td>';
       }
+      if($nbMonthNewYear>0){
+        for ($i=1; $i<=$nbMonthNewYear;$i++) {
+          $day=$startDate2+$i-1;
+          $style="";
+          $ital=false;
+          if (! array_key_exists($day, $realDays[$idP][$idR])
+          and array_key_exists($day,$result[$idP][$idR])) {
+            $style=$plannedStyle;
+            $ital=true;
+          }
+          echo '<td class="reportTableData" ' . $style . ' valign="top">';
+          if (array_key_exists($day,$result[$idP][$idR])) {
+            echo ($ital)?'<i>':'';
+            echo Work::displayWork($result[$idP][$idR][$day]);
+            echo ($ital)?'</i>':'';
+            $sum[$day]+=$result[$idP][$idR][$day];
+            $globalSum[$day]+=$result[$idP][$idR][$day];
+            $lineSum+=$result[$idP][$idR][$day];
+          }
+          echo '</td>';
+        }
+      }
       echo '<td class="reportTableColumnHeader">' . Work::displayWork($lineSum) . '</td>';
       $ass= new Assignment();
       $crit=array('idResource'=>$idR, 'idProject'=>$idP);
@@ -250,6 +306,14 @@ foreach ($projects as $idP=>$nameP) {
     echo '<td class="reportTableColumnHeader" ' . $style . ' >' . Work::displayWork($sum[$startDate+$i-1]) . '</td>';
     $lineSum+=$sum[$startDate+$i-1];
   }
+  if($nbMonthNewYear>0){
+    for ($i=1; $i<=$nbMonthNewYear;$i++) {
+      $style='';
+      $day=$startDate2+$i-1;
+      echo '<td class="reportTableColumnHeader" ' . $style . ' >' . Work::displayWork($sum[$startDate2+$i-1]) . '</td>';
+      $lineSum+=$sum[$startDate2+$i-1];
+    }
+  }
   echo '<td class="reportTableHeader">' . Work::displayWork($lineSum) . '</td>';
   echo '<td class="reportTableHeader">' . Work::displayWork($sumNpw) . '</td>';
   echo '</tr>';
@@ -263,6 +327,14 @@ for ($i=$paramStartMonth; $i<=12;$i++) {
   $day=$startDate+$i-1;
   echo '<td class="reportTableHeader" ' . $style . '>' . Work::displayWork($globalSum[$startDate+$i-1]) . '</td>';
   $lineSum+=$globalSum[$startDate+$i-1];
+}
+if($nbMonthNewYear>0){
+  for ($i=1; $i<=$nbMonthNewYear;$i++) {
+    $style='';
+    $day=$startDate2+$i-1;
+    echo '<td class="reportTableHeader" ' . $style . '>' . Work::displayWork($globalSum[$startDate2+$i-1]) . '</td>';
+    $lineSum+=$globalSum[$startDate2+$i-1];
+  }
 }
 echo '<td class="reportTableHeader">' . Work::displayWork($lineSum) . '</td>';
 echo '</tr>';

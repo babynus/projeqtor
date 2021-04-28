@@ -46,13 +46,13 @@ include "header.php";
 //Request
 $where=getAccesRestrictionClause('Project',false,false,true,true);
 if ($paramProject!='') {
-  $where.=  "and idProject in " . getVisibleProjectsList(true, $paramProject) ;
+  $where.=  " and idProject in " . getVisibleProjectsList(true, $paramProject) ;
 }
 if( $paramClient !=''){
-  $where.=  "and idClient = " . $paramClient ;
+  $where.=  " and idClient = " . $paramClient ;
 }
 if(!$paramShowIdle){
-  $where.=  "and idle = 0 " ;
+  $where.=  " and idle = 0 " ;
 }
 $order=" idProject asc ";
 $com = new Command();
@@ -127,40 +127,38 @@ foreach ($tabCmdOrder as $wbs=>$objId){
   foreach ($objId as $obj){
     foreach ($obj as $val){
       $nbRowSpan = 1;
-      $commandRest = $val->fullAmount;
+      $commandRest = $val->untaxedAmount;
       if(isset($tabBill[$val->id])){
         $nbRowSpan = 0;
         foreach ($tabBill[$val->id] as $billId){
           $nbRowSpan++;
           $newBill = new Bill($billId);
-          $commandRest -= $newBill->fullAmount;
+          if($newBill->cancelled){
+            unset($tabBill[$val->id]);
+            continue;
+          }
+          $commandRest -= $newBill->untaxedAmount;
         }
       }
       echo'<tr>';
       
-      $level=(strlen($wbs)+1)/4;
-      $tab="";
-      for ($i=1;$i<$level;$i++) {
-        $tab.='<span class="ganttSep">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-      }
-      
-      echo' <td  rowspan="'.$nbRowSpan.'" class="reportTableData"  style="padding:4px;text-align:left;width:'.$col1.'%;">'.$tab.SqlList::getNameFromId('Project', $val->idProject).'</td>';
+      echo' <td  rowspan="'.$nbRowSpan.'" class="reportTableData"  style="padding:4px;text-align:left;width:'.$col1.'%;">'.SqlList::getNameFromId('Project', $val->idProject).'</td>';
       if($paramshowReference){
-        echo' <td  rowspan="'.$nbRowSpan.'" class="reportTableData"  style="padding:4px;text-align:right;width:'.$col2.'%;">'.$val->reference.'</td>';
+        echo' <td  rowspan="'.$nbRowSpan.'" class="reportTableData"  style="padding:4px;text-align:left;width:'.$col2.'%;">'.$val->reference.'</td>';
       }
       echo' <td  rowspan="'.$nbRowSpan.'" class="reportTableData"  style="padding:4px;text-align:left;width:'.$col2.'%">'.$val->name.'</td>';
-      echo' <td  rowspan="'.$nbRowSpan.'" class="reportTableData"  style="padding:4px;width:'.$col2.'%;text-align:right;">'.htmlDisplayCurrency($val->fullAmount).'</td>';
+      echo' <td  rowspan="'.$nbRowSpan.'" class="reportTableData"  style="padding:4px;width:'.$col2.'%;text-align:right;">'.htmlDisplayCurrency($val->untaxedAmount).'</td>';
       if(isset($tabBill[$val->id])){
         $i=0;
         foreach ($tabBill[$val->id] as $billId){
+          $newBill = new Bill($billId);
           if($i>0)echo' <tr> ';
           $i++;
-          $newBill = new Bill($billId);
           if($paramshowReference){
-            echo' <td  class="reportTableData"  style="padding:4px;text-align:right;width:'.$col2.'%;">'.$newBill->reference.'</td>';
+            echo' <td  class="reportTableData"  style="padding:4px;text-align:left;width:'.$col2.'%;">'.$newBill->reference.'</td>';
           }
           echo' <td   class="reportTableData"  style="padding:4px;text-align:left;width:'.$col2.'%;">'.$newBill->name.'</td>';
-          echo' <td   class="reportTableData"  style="padding:4px;width:'.$col2.'%;text-align:right;">'.htmlDisplayCurrency($newBill->fullAmount).'</td>';
+          echo' <td   class="reportTableData"  style="padding:4px;width:'.$col2.'%;text-align:right;">'.htmlDisplayCurrency($newBill->untaxedAmount).'</td>';
           $backGround = "";
           if($commandRest < 0)$backGround = " background:#FFDDDD;" ;
           if($i==1){
