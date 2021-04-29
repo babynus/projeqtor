@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "Sie werden auf die mobile Version umgeleitet. <br/> K
 msgEnterPlannedDA: "Geplantes Datum und Betrag müssen beide erfaßt werden.",
 msgEnterRealDA: "Ist-Datum und -Betrag müssen beide erfaßt werden.",
 msgEnterRPAmount: "Betrag (geplant oder ist) muss erfaßt werden.",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "Datum (geplant oder ist) muss erfaßt werden.",
 msgErrorSelectedBaseline: "Gewählte Baseline passt nicht zu gewähltem Projekt",
 msgEvalutationMaxValue: "Maximaler Bewertungswert ist",

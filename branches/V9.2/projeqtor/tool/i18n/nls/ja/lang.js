@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "You will be redirected to the mobile version. <br/>Cl
 msgEnterPlannedDA: "予定日および金額を入力してください",
 msgEnterRealDA: "実績日および金額を入力してください",
 msgEnterRPAmount: "金額を入力してください(予定および実績値)",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "日付を入力してください(予定および実績値)",
 msgErrorSelectedBaseline: "The selected baseline does not fit the selected project",
 msgEvalutationMaxValue: "最大評価値は次のとおり設定されました&#58;",

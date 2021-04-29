@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "You will be redirected to the mobile version. <br/>Cl
 msgEnterPlannedDA: "Geplande datum en hoeveelheid moeten beide worden ingevoerd",
 msgEnterRealDA: "Werkelijke datum en hoeveelheid moeten beide worden ingevoerd",
 msgEnterRPAmount: "Je moet een hoeveelheid invoeren (geplanned of werkelijk)",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "Je moet een datum invoeren (geplanned of werkelijk)",
 msgErrorSelectedBaseline: "The selected baseline does not fit the selected project",
 msgEvalutationMaxValue: "Max evaluation value set to",

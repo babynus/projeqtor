@@ -324,7 +324,6 @@ class ProjectExpenseMain extends Expense {
         $this->expenseRealDate = null;
       }
     }
-    
     return parent::save(); 
   }
     

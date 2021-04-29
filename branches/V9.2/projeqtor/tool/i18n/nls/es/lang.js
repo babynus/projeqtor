@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "Serás redirigido a la versión móvil. <br/> Haga cl
 msgEnterPlannedDA: "Debe introducir la fecha planificada y el importe",
 msgEnterRealDA: "Debe introducir la fecha real y el importes",
 msgEnterRPAmount: "Debe introducir un importe (planificado o real)",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "Debe introducir una fecha (planificada o real)",
 msgErrorSelectedBaseline: "La línea de base seleccionada no se ajusta al proyecto seleccionado",
 msgEvalutationMaxValue: "Valor máximo de evaluación establecido en",

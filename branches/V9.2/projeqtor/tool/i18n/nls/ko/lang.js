@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "모바일 버전으로 리디렉션됩니다. 장치�
 msgEnterPlannedDA: "계획된 날짜와 금액을 모두 입력해야합니다",
 msgEnterRealDA: "실제 날짜와 금액을 모두 입력해야합니다",
 msgEnterRPAmount: "금액을 입력해야합니다 (예정 또는 실제)",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "날짜를 입력해야합니다 (예정 또는 실제)",
 msgErrorSelectedBaseline: "선택한 기준이 선택한 프로젝트에 맞지 않습니다",
 msgEvalutationMaxValue: "최대값 예측",

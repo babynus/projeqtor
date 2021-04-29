@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "Você será redirecionado para a versão mobile. <br/
 msgEnterPlannedDA: "A data planeada e o montante têm ambos de ser especificados",
 msgEnterRealDA: "A data real e o montante têm ambos de ser especificados",
 msgEnterRPAmount: "Você tem de introduzir um montante (planeado ou real)",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "Você tem de introduzir uma data (planeada ou real)",
 msgErrorSelectedBaseline: "A base de referencia selecionada não serve o projeto selecionado",
 msgEvalutationMaxValue: "Valor máximo de avaliação ",
