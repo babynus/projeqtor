@@ -853,143 +853,200 @@ $paramRefreshDelay=Parameter::getUserParameter('todayRefreshDelay');
 if (!$paramRefreshDelay) $paramRefreshDelay=5;
 $paramScrollDelay=Parameter::getUserParameter('todayScrollDelay');
 if (!$paramScrollDelay) $paramScrollDelay=10;
+$showActStream='false';
+if(Parameter::getUserParameter('showTodayActivityStream')){
+  $showActStream=Parameter::getUserParameter('showTodayActivityStream');
+}
+$topDiwHeight="20%";
+if($showActStream=='false'){
+  $classicViewWidth=($displayWidth-20)*0.75.'px';
+  $activityStreamWidth=($displayWidth-20)*0.25.'px';
+}else{
+  $classicViewWidth=($displayWidth-20).'px';
+  $activityStreamWidth='0px';
+} 
+$classicViewHeight='80%';
+$activityStreamHeight='80%';
+$widthForDisplay=($displayWidth-20)*0.25;
+
+if(Parameter::getUserParameter('contentPaneTodayTopHeight')){
+  $topDiwHeight=Parameter::getUserParameter('contentPaneTodayTopHeight').'px';
+}
+if(Parameter::getUserParameter('contentPaneTodayClassicViewHeight')){
+  $classicViewHeight=Parameter::getUserParameter('contentPaneTodayClassicViewHeight').'px';
+}
+
+if(Parameter::getUserParameter('contentPaneTodayActStreamHeight')){
+  $activityStreamHeight=Parameter::getUserParameter('contentPaneTodayActStreamHeight').'px';
+}
+
+if($showActStream=='false'){
+  if(Parameter::getUserParameter('contentPaneTodayActStreamWidth')){
+    $widthForDisplay=Parameter::getUserParameter('contentPaneTodayActStreamWidth');
+    $activityStreamWidth=Parameter::getUserParameter('contentPaneTodayActStreamWidth').'px';
+  }
+  if(Parameter::getUserParameter('contentPaneTodayClassicViewWidth')){
+    $classicViewWidth=Parameter::getUserParameter('contentPaneTodayClassicViewWidth').'px';
+  }
+}
+
+$isModuleActive=true;
+$menu =new Menu(177);
+if (!Module::isMenuActive($menu->name))  $isModuleActive=false;
+if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=false;
+
 ?>
 
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Today" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
   <div style="overflow: <?php echo(!$print)?'auto':'hidden';?>;padding:10px" id="detailDiv" dojoType="dijit.layout.ContentPane" region="center">
-    <?php 
-//     if ($twoCols) {?>
- <!--      <table style=""><tr><td style="width:50%; border:1px solid green">--> 
-    <?php 
-//     }
+     <?php 
     if (!$print) {?>
-    <div class="parametersButton">
-      <button id="todayRefreshButton" dojoType="dijit.form.Button"
-        showlabel="false" title="<?php echo i18n('enableRefresh');?>"
-        style="width: 28px" class="detailButton"
-        iconClass="dijitButtonIcon dijitButtonIconRefresh">
-        <script type="dojo/connect" event="onClick" args="evt">
-        if(typeof refreshEnabled === 'undefined') {
-          enterFullScreen();
-          if (menuActualStatus == 'visible' || !menuHidden) {
-            hideShowMenu(false);
-          }
-          if (dojo.byId('menuBarShow')) dojo.byId('menuBarShow').style.top='0px';
-          if (dojo.byId('statusBarDiv')) dojo.byId('statusBarDiv').style.top='-4px';
-          if (dojo.byId('centerDiv')) {
-            dojo.byId('centerDiv').style.top='0px';
-            var heightCenterDiv = dojo.byId('centerDiv').style.height;
-            heightCenterDiv = heightCenterDiv.substring(0,heightCenterDiv.length-2);
-            heightCenterDiv =  parseInt(heightCenterDiv)+82;
-            dijit.byId("centerDiv").resize({h :heightCenterDiv});
-          }
-          if (dijit.byId("toolBarDiv")) dijit.byId("toolBarDiv").resize({h :0});
-         if (dijit.byId("statusBarDiv"))  dijit.byId("statusBarDiv").resize({h :0});
-          var msgParams=new Array();
-          msgParams[0]='<?php echo $paramScrollDelay;?>';
-          msgParams[1]='<?php echo $paramRefreshDelay;?>';
-          showInfo(i18n("enableRefreshDone",msgParams));
-          formChanged();
-          // Check if old animation is not still running
-          var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
-          if(typeof myReq !== 'undefined') {
-            window.cancelAnimationFrame(myReq);
-          }
-          function animateScrollReport() {
-            function scrollToAnchor(myNode) {
-              if(typeof myNode !== 'undefined') {
-                dojox.fx.smoothScroll({
-                  node: myNode,
-                  win: dojo.byId('detailDiv')
-                }).play();
-              }
+     <?php if($isModuleActive){?> 
+    <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false"  > 
+      <div dojoType="dijit.layout.ContentPane" id="todayTop" region="top" style="width:100%;height:<?php echo $topDiwHeight;?>;" splitter="true">
+    <?php }?>
+      <div class="parametersButton">
+        <button id="todayRefreshButton" dojoType="dijit.form.Button"
+         showlabel="false" title="<?php echo i18n('enableRefresh');?>"
+         style="width: 28px" class="detailButton"
+          iconClass="dijitButtonIcon dijitButtonIconRefresh">
+         <script type="dojo/connect" event="onClick" args="evt">
+          if(typeof refreshEnabled === 'undefined') {
+            enterFullScreen();
+            if (menuActualStatus == 'visible' || !menuHidden) {
+              hideShowMenu(false);
+           }
+           if (dojo.byId('menuBarShow')) dojo.byId('menuBarShow').style.top='0px';
+           if (dojo.byId('statusBarDiv')) dojo.byId('statusBarDiv').style.top='-4px';
+            if (dojo.byId('centerDiv')) {
+             dojo.byId('centerDiv').style.top='0px';
+             var heightCenterDiv = dojo.byId('centerDiv').style.height;
+             heightCenterDiv = heightCenterDiv.substring(0,heightCenterDiv.length-2);
+             heightCenterDiv =  parseInt(heightCenterDiv)+82;
+             dijit.byId("centerDiv").resize({h :heightCenterDiv});
+           }
+           if (dijit.byId("toolBarDiv")) dijit.byId("toolBarDiv").resize({h :0});
+           if (dijit.byId("statusBarDiv"))  dijit.byId("statusBarDiv").resize({h :0});
+           var msgParams=new Array();
+           msgParams[0]='<?php echo $paramScrollDelay;?>';
+           msgParams[1]='<?php echo $paramRefreshDelay;?>';
+           showInfo(i18n("enableRefreshDone",msgParams));
+           formChanged();
+           // Check if old animation is not still running
+           var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+            if(typeof myReq !== 'undefined') {
+             window.cancelAnimationFrame(myReq);
             }
-            window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-            var start = null;
-            var reportNodes = dojo.query('#detailDiv .dijitTitlePane');
-            var nbReports = reportNodes.length;
-            var nbTimes = 1;
-            var i = 0;
-            function step(timestamp) {
-              var progress;
-              if(nbReports == 0) { // When refreshing
-                reportNodes = dojo.query('#detailDiv .dijitTitlePane');
-                nbReports = reportNodes.length;
-                requestAnimationFrame(step);
-              } else {
-                if (start === null) start = timestamp;
-                progress = timestamp - start;
-                var scrollDelay=<?php echo $paramScrollDelay;?>;
-                if (progress > (scrollDelay * 1000 * nbTimes)) {
-                  if(i >= reportNodes.length) {
-                    i = 0;
-                    ++nbTimes;
+            function animateScrollReport() {
+              function scrollToAnchor(myNode) {
+               if(typeof myNode !== 'undefined') {
+                 dojox.fx.smoothScroll({
+                    node: myNode,
+                    win: dojo.byId('detailDiv')
+                 }).play();
+               }
+             }
+             window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+             var start = null;
+             var reportNodes = dojo.query('#detailDiv .dijitTitlePane');
+             var nbReports = reportNodes.length;
+              var nbTimes = 1;
+             var i = 0;
+              function step(timestamp) {
+                var progress;
+                if(nbReports == 0) { // When refreshing
+                  reportNodes = dojo.query('#detailDiv .dijitTitlePane');
+                  nbReports = reportNodes.length;
+                  requestAnimationFrame(step);
+               } else {
+                 if (start === null) start = timestamp;
+                 progress = timestamp - start;
+                 var scrollDelay=<?php echo $paramScrollDelay;?>;
+                 if (progress > (scrollDelay * 1000 * nbTimes)) {
+                   if(i >= reportNodes.length) {
+                     i = 0;
+                     ++nbTimes;
+                    }
+                   scrollToAnchor(reportNodes[i]);
+                   if(i < reportNodes.length) {
+                      ++i;
+                      ++nbTimes;
+                   }
+                    myReq = requestAnimationFrame(step);
+                 } else {
+                    myReq = requestAnimationFrame(step);
                   }
-                  scrollToAnchor(reportNodes[i]);
-                  if(i < reportNodes.length) {
-                    ++i;
-                    ++nbTimes;
-                  }
-                  myReq = requestAnimationFrame(step);
-                } else {
-                  myReq = requestAnimationFrame(step);
-                }
+                 }
+             }
+              requestAnimationFrame(step);
+           }
+            animateScrollReport();
+           var refreshDelay=<?php echo $paramRefreshDelay;?>;
+            refreshEnabled = setInterval(function() {
+              formChangeInProgress=false;
+              var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+              if(typeof myReq !== 'undefined') {
+                window.cancelAnimationFrame(myReq);
               }
-            }
-            requestAnimationFrame(step);
-          }
-          animateScrollReport();
-          var refreshDelay=<?php echo $paramRefreshDelay;?>;
-          refreshEnabled = setInterval(function() {
+              loadMenuBarItem('Today', 'Today', 'tree');
+              animateScrollReport();
+            }, refreshDelay * 60 * 1000);
+          } else {
+            exitFullScreen();
             formChangeInProgress=false;
+            if (dojo.byId('statusBarDiv')) dojo.byId('statusBarDiv').style.top='30px';
+            if (dijit.byId("toolBarDiv")) dijit.byId("toolBarDiv").resize({h :30});
+            if (dijit.byId("statusBarDiv")) dijit.byId("statusBarDiv").resize({h :52});
+            if (dojo.byId('menuBarShow')) dojo.byId('menuBarShow').style.top='81px';
+            if (dojo.byId('centerDiv')) {
+              dojo.byId('centerDiv').style.top='81px';
+              var heightCenterDiv = dojo.byId('centerDiv').style.height;
+              heightCenterDiv = heightCenterDiv.substring(0,heightCenterDiv.length-2);
+              heightCenterDiv =  parseInt(heightCenterDiv)-81;
+              dojo.byId('centerDiv').style.height=heightCenterDiv+'px';
+            }
+            showInfo(i18n("disableRefreshDone"));
+            clearTimeout(refreshEnabled);
             var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
             if(typeof myReq !== 'undefined') {
               window.cancelAnimationFrame(myReq);
             }
-            loadMenuBarItem('Today', 'Today', 'tree');
-            animateScrollReport();
-          }, refreshDelay * 60 * 1000);
-        } else {
-          exitFullScreen();
-          formChangeInProgress=false;
-          if (dojo.byId('statusBarDiv')) dojo.byId('statusBarDiv').style.top='30px';
-          if (dijit.byId("toolBarDiv")) dijit.byId("toolBarDiv").resize({h :30});
-          if (dijit.byId("statusBarDiv")) dijit.byId("statusBarDiv").resize({h :52});
-          if (dojo.byId('menuBarShow')) dojo.byId('menuBarShow').style.top='81px';
-          if (dojo.byId('centerDiv')) {
-            dojo.byId('centerDiv').style.top='81px';
-            var heightCenterDiv = dojo.byId('centerDiv').style.height;
-            heightCenterDiv = heightCenterDiv.substring(0,heightCenterDiv.length-2);
-            heightCenterDiv =  parseInt(heightCenterDiv)-81;
-            dojo.byId('centerDiv').style.height=heightCenterDiv+'px';
+            delete refreshEnabled;
           }
-          showInfo(i18n("disableRefreshDone"));
-          clearTimeout(refreshEnabled);
-          var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
-          if(typeof myReq !== 'undefined') {
-            window.cancelAnimationFrame(myReq);
-          }
-          delete refreshEnabled;
-        }
-        </script>
-      </button>
-      <button id="todayParametersButton" dojoType="dijit.form.Button"
-        showlabel="false" title="<?php echo i18n('menuParameter');?>"
-        style="width: 28px" class="detailButton"
-        iconClass="imageColorNewGui iconParameter iconSize22">
-        <script type="dojo/connect" event="onClick" args="evt">
-          loadDialog('dialogTodayParameters', null, true);
-        </script>
-      </button>
-      <button id="todayPrintButton" dojoType="dijit.form.Button"
-        showlabel="false" title="<?php echo i18n('print');?>"  class="detailButton"
-        iconClass="dijitButtonIcon dijitButtonIconPrint">
-        <script type="dojo/connect" event="onClick" args="evt">
-          showPrint('../view/today.php');
-        </script>
-      </button>    
-    </div>
+          </script>
+        </button>
+        <button id="todayParametersButton" dojoType="dijit.form.Button"
+          showlabel="false" title="<?php echo i18n('menuParameter');?>"
+          style="width: 28px" class="detailButton"
+          iconClass="imageColorNewGui iconParameter iconSize22">
+          <script type="dojo/connect" event="onClick" args="evt">
+            loadDialog('dialogTodayParameters', null, true);
+          </script>
+        </button>
+        <button id="todayPrintButton" dojoType="dijit.form.Button"
+          showlabel="false" title="<?php echo i18n('print');?>"  class="detailButton"
+          iconClass="dijitButtonIcon dijitButtonIconPrint">
+          <script type="dojo/connect" event="onClick" args="evt">
+            showPrint('../view/today.php');
+          </script>
+        </button>
+        <?php 
+        if($isModuleActive){
+        $iconClass=($showActStream=='true')?'iconActivityStream22 iconActivityStream iconSize22':'iconActivityStreamClose22 iconActivityStreamClose iconSize22';?>
+        <div id="todayAsticityStreamButton" dojoType="dijit.layout.ContentPane">
+          <button id="todayShowActivityStream" dojoType="dijit.form.Button"
+            showlabel="false" title="<?php echo ($showActStream=='true')?i18n('showActivityStream'):i18n('hideActivityStream');?>"  class="detailButton"
+            iconClass=" <?php echo $iconClass;?> imageColorNewGui"  >
+            <script type="dojo/connect" event="onClick" args="evt">
+            showHideActivityStreamToday(<?php echo '\''.$showActStream.'\'';?>);
+          </script>
+          </button>   
+        </div>
+        <input id="defaultTodayActStreamWidth" value=<?php echo $widthForDisplay; ?>  type="hidden"/>
+        <?php }?>
+      </div>
+
     <?php 
     } 
     $titlePane="Today_message";
@@ -1032,19 +1089,12 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
     $drawDiv=false;
     $coutTlist=count($todayList);
     $cp=0;
-    $classicViewWidth='75%;';
-    $activityStreamWidth='25%;';
-    if(Parameter::getUserParameter('contentPaneTodayClassicViewWidth')){
-      $classicViewWidth=Parameter::getUserParameter('contentPaneTodayClassicViewWidth').'px';
-    }
-    if(Parameter::getUserParameter('contentPaneTodayActStreamWidth')){
-      $activityStreamWidth=Parameter::getUserParameter('contentPaneTodayActStreamWidth').'px';
-    }
+
     foreach ($todayList as $todayItem) {
       $cp++;
       if ($todayItem->scope=='static' and $todayItem->staticSection=='Projects' and !array_key_exists("Today_project", $collapsedList)) {
-          if (!$print) {?> 
-          <!--  <div dojoType="dijit.layout.ContentPane" region="top" style="width:100%;">-->
+          if (!$print) { 
+          $titlePane="Today_project";?>
             <div dojoType="dijit.TitlePane"
               open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
               id="<?php echo $titlePane;?>"
@@ -1062,15 +1112,25 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
           ?>
           </div>
           <?php
-          if(!$print)echo '<div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false" style="margin-top:25px;height:90%;" >  ';
+          if(!$print and $isModuleActive){
+            echo '<script type="dojo/connect" event="resize" args="evt">';
+            echo '  saveContentPaneResizing("contentPaneTodayTopHeight", dojo.byId("todayTop").offsetHeight, true);';
+            echo '</script>';
+            echo '</div>';
+          }
           else echo '<br/>';
       }else{
-        if(!$drawDiv and !$print){
-          if(array_key_exists("Today_project", $collapsedList))echo '<div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false" 
-                                                                                        style="margin-top:25px;height:90%;border-top:2px solid var(--color-section-title-border);">  ';
-          echo '<div dojoType="dijit.layout.ContentPane" region="left" style="width:'.$classicViewWidth.'; padding-top:15px;height:100%;" splitter="true" id="todayClassicView">';
+        if(!$drawDiv and !$print and $isModuleActive){
+          if(array_key_exists("Today_project", $collapsedList)){
+            echo '</div>';
+            echo '<script type="dojo/connect" event="resize" args="evt">';
+            echo '  saveContentPaneResizing("contentPaneTodayTopHeight", dojo.byId("todayTop").offsetHeight, true);';
+            echo '</script>';
+          }
+          echo '<div dojoType="dijit.layout.ContentPane" region="left" style="width:'.$classicViewWidth.';height:'.$classicViewHeight.'; padding-top:15px;padding-right:15px;" splitter="true" id="todayClassicView" >';
           echo '<script type="dojo/connect" event="resize" args="evt">';
           echo 'saveContentPaneResizing("contentPaneTodayClassicViewWidth", dojo.byId("todayClassicView").offsetWidth, true);';
+          echo 'saveContentPaneResizing("contentPaneTodayClassicViewHeight", dojo.byId("todayClassicView").offsetHeight, true);';
           echo '</script>';
           $drawDiv=true;
         }
@@ -1138,17 +1198,18 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
     }
 
   }
-  if($cp==$coutTlist and $drawDiv and !$print){
+  if($cp==$coutTlist and $drawDiv and !$print and $isModuleActive){
     echo '</div>';
   }
 } 
-if(!$print){?>
-      <div dojoType="dijit.layout.ContentPane" id="todayActStream" region="center" style="width:<?php echo $activityStreamWidth;?>;padding-left:15px;padding-top:15px;height:100%;" splitter="true" >
-        <?php include('../view/activityStreamList.php');?>
-      </div>
+if(!$print and $isModuleActive){?>
+      <div dojoType="dijit.layout.ContentPane" id="todayActStream" region="center" style="width:<?php echo $activityStreamWidth;?>;height:<?php echo $activityStreamHeight;?>;padding-left:15px;padding-top:15px;height:100%;" splitter="true" >
+        <?php  include('../view/activityStreamList.php');?>
       <script type="dojo/connect" event="resize" args="evt">
            saveContentPaneResizing("contentPaneTodayActStreamWidth", dojo.byId("todayActStream").offsetWidth, true);
+           saveContentPaneResizing("contentPaneTodayActStreamHeight", dojo.byId("todayActStream").offsetHeight, true);
       </script>
+      </div>
     </div> 
 <?php }?>
   </div>

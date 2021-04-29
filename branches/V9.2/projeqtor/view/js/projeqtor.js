@@ -1678,7 +1678,6 @@ function finalizeMessageDisplay(destination, validationType) {
     // changes
     addMessage(msg);
     // alert('validationType='+validationType);
-    console.log(validationType);
     if (validationType) {
       if (validationType == 'note') {
         loadContentStream();
@@ -1708,13 +1707,13 @@ function finalizeMessageDisplay(destination, validationType) {
               'listForm');
           refreshGrid();
         } else {
-          var lastSaveRefId = dojo.byId('lastSaveRefId');
-          var lastSaveClass = dojo.byId('lastSaveRefType');
-          if (!(lastSaveClass && lastSaveRefId && lastSaveClass.value=="SubTask")) {
+//          var lastSaveRefId = dojo.byId('lastSaveRefId');
+//          var lastSaveClass = dojo.byId('lastSaveRefType');
+//          if (!(lastSaveClass && lastSaveRefId && lastSaveClass.value=="SubTask")) {
 //           refreshSubTaskAttachment( lastSaveClass.value,lastSaveRefId.value);
 //          }else{
             loadContent("objectDetail.php?refreshAttachments=true", dojo.byId('objectClass').value+ '_Attachment', 'listForm');
-          }
+//          }
         }
         dojo.style(dojo.byId('downloadProgress'), {
           display : 'none'
@@ -2034,17 +2033,17 @@ function finalizeMessageDisplay(destination, validationType) {
             }
           }
           if (refreshDetailElse && !validationType) {
-            var lastSaveRefId = dojo.byId('lastSaveRefId');
-            var lastSaveClass = dojo.byId('lastSaveRefType');
-            if (!(lastSaveClass && lastSaveRefId && lastSaveClass.value=="SubTask")) {
+//            var lastSaveRefId = dojo.byId('lastSaveRefId');
+//            var lastSaveClass = dojo.byId('lastSaveRefType');
+//            if (!(lastSaveClass && lastSaveRefId && lastSaveClass.value=="SubTask")) {
 //             refreshSubTaskAttachment( lastSaveClass.value,lastSaveRefId.value);
 //            }else{
-              if (dojo.byId(dojo.byId('objectClass').value + '_Attachment')) {
-                loadContent("objectDetail.php?refreshAttachments=true", dojo
-                    .byId('objectClass').value
-                    + '_Attachment', 'listForm');
-              }
+            if (dojo.byId(dojo.byId('objectClass').value + '_Attachment')) {
+              loadContent("objectDetail.php?refreshAttachments=true", dojo
+                  .byId('objectClass').value
+                  + '_Attachment', 'listForm');
             }
+//            }
             
             if (dojo.byId(dojo.byId('objectClass').value + '_Note')) {
               loadContent("objectDetail.php?refreshNotes=true", dojo
@@ -6276,6 +6275,39 @@ function hideStreamMode(show,position,dimension,modeGlobal){
   loadContentStream(); 
   if (dimension==0) setTimeout("refreshObjectDivAfterResize();",100);
   else setTimeout('if (dojo.byId("buttonDiv")) loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm");',100);
+}
+
+todayActiStreamDivLastWidth=null;
+function showHideActivityStreamToday(show){
+  event.preventDefault();
+  var dimension=0;
+  if(show=='true'){
+    if(dijit.byId('todayActStream').w >0 ) return;
+    if(!todayActiStreamDivLastWidth) dimension=parseInt(dojo.byId('defaultTodayActStreamWidth').value);
+    else dimension=todayActiStreamDivLastWidth;
+    var classicViewDim=(dojo.byId("todayClassicView").offsetWidth-dimension);
+    var newValShow='false',
+          title=i18n('hideActivityStream');
+  }else{
+    if(dijit.byId('todayActStream').w <=0) return;
+    todayActiStreamDivLastWidth=dijit.byId("todayActStream").w;
+    var classicViewDim=(dojo.byId("todayClassicView").offsetWidth+todayActiStreamDivLastWidth);
+    dimension=0;
+    var newValShow='true',
+          title=i18n('showActivityStream');
+  }
+  var display=(show!='true')? 'none':'unset' ;
+  dijit.byId('todayClassicView').resize({ w : classicViewDim });
+  dijit.byId("todayActStream").resize({ w : dimension });
+  dijit.byId("centerDiv").resize();
+  dijit.byId('todayClassicView_splitter').domNode.style.display=display;
+
+  saveContentPaneResizing("contentPaneTodayActStreamWidth", dimension, true);
+  saveContentPaneResizing("contentPaneTodayClassicViewWidth", classicViewDim, true);
+  saveUserParameter('showTodayActivityStream',newValShow);
+
+  loadContent('refreshButtonActivityStreamToday.php?showActStream='+newValShow, 'todayAsticityStreamButton');
+
 }
 
 function focusStream() {

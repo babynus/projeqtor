@@ -107,7 +107,9 @@ $paramProject=getSessionValue('project');
 if(strpos($paramProject, ",")){
 	$paramProject="*";
 }
-
+if(!isset($widthForDisplay)){
+  $widthForDisplay=false;
+}
 $note = new Note ();
 $hist=new History();
 $histTable=$hist->getDatabaseTableName();
@@ -297,7 +299,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
   	   $type=$item['type'];
   	   $object=$item['object'];
   	   if ($type=='note') {
-  	     $resNot=activityStreamDisplayNote($object,"activityStream");
+  	     $resNot=activityStreamDisplayNote($object,"activityStream",$widthForDisplay);
   	     if($resNot){
   	       echo $resNot;
   	       $countDisplay++;
@@ -309,7 +311,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
   	       $countDisplay++;  	       
   	     }
   	   } else if ($type=='mail') {
-  	     $resMail=activityStreamDisplayMail($object,'activityStream',$activityStreamShowClosed); 	    
+  	     $resMail=activityStreamDisplayMail($object,'activityStream',$activityStreamShowClosed,false,$widthForDisplay); 	    
   	     if($resMail){
   	       echo $resMail;
   	       $countDisplay++;
