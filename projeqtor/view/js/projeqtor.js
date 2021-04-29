@@ -1807,7 +1807,10 @@ function finalizeMessageDisplay(destination, validationType) {
         if (dijit.byId('detailFormDiv')) { // only refresh is detail is show
                                             // (possible when DndLing on
                                             // planning
-        	if(validationType == 'affectation')buttonRightRefresh();
+        	if(validationType == 'affectation'){
+        		refreshProjectSelectorList();
+        		refreshGrid();
+        	}
         	loadContent("objectDetail.php?refresh=true", "detailFormDiv",
               'listForm');
         }

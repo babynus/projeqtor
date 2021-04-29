@@ -457,6 +457,7 @@ public $_noCopy;
         }
       }
     }
+    User::resetAllVisibleProjects(null,$this->idUser);
     return $result;
   }
   

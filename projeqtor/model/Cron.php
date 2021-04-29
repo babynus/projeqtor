@@ -1023,6 +1023,7 @@ class Cron {
 		// IMAP must be enabled in Mail Settings
 		$emailEmail=Parameter::getGlobalParameter('cronCheckEmailsUser');
 		$emailPassword=Parameter::getGlobalParameter('cronCheckEmailsPassword');
+		$emailPassword = decryptPwd($emailPassword, 'IMAP');
 		//$emailAttachmentsDir=dirname(__FILE__) . '/../files/attach';
 		$paramAttachDir=Parameter::getGlobalParameter('paramAttachmentDirectory');
 		$pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
