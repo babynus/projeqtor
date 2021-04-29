@@ -199,6 +199,10 @@ ALTER TABLE ${prefix}workcommand MODIFY commandAmount decimal(14,2) unsigned DEF
 ALTER TABLE ${prefix}workcommand MODIFY doneAmount decimal(14,2) unsigned DEFAULT NULL;
 ALTER TABLE ${prefix}workcommand MODIFY billedAmount decimal(14,2) unsigned DEFAULT NULL;
 
+-- Access rights on assets
+
+ALTER TABLE `${prefix}asset` ADD COLUMN `idResource` int(12) unsigned DEFAULT NULL COMMENT '12';
+
 -- PERFOMANCE IMPROVMENTS
 
 CREATE TABLE `${prefix}kpivaluerequest` (
