@@ -1933,7 +1933,7 @@ function getVisibleProjectsList($limitToActiveProjects=true, $idProject=null) {
 function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $excludeUserClause=false, $excludeResourceClause=false) {
   global $reportContext;
   // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-  if (!property_exists($objectClass, 'idProject') and $objectClass!='Notification') return '(1=1)'; // If not project depedant, no extra clause
+  //if (!property_exists($objectClass, 'idProject') and $objectClass!='Notification') return '(1=1)'; // If not project depedant, no extra clause
                                                                                                     
   // if (! property_exists($objectClass,'idProject')) return '(1=1)'; // If not project depedant, no extra clause
                                                                                                     // END - ADD BY TABARY - NOTIFICATION SYSTEM
@@ -1955,6 +1955,16 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
     $accessRightRead=securityGetAccessRight($obj->getMenuClass(), 'report');
   } else {
     $accessRightRead=securityGetAccessRight($obj->getMenuClass(), 'read');
+  }
+  debugLog("   => getAccesRestrictionClause($objectClass) accessRightRead=$accessRightRead");
+  if (!property_exists($objectClass, 'idProject') and $objectClass!='Notification') {
+    if ($accessRightRead=='OWN' and property_exists($obj, "idUser")) {
+      return $tableAlias."idUser=$user->id";
+    } else if ($accessRightRead=='RES' and property_exists($obj, "idResource")) {
+      return $tableAlias."idResource=$user->id";
+    } else {
+      return '(1=1)';
+    }
   }
   $listNO=transformListIntoInClause($user->getAccessRights($objectClass, 'NO', $showIdle));
   $listOWN=(property_exists($obj, "idUser"))?transformListIntoInClause($user->getAccessRights($objectClass, 'OWN', $showIdle)):null;
@@ -1978,7 +1988,6 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
   } else {
     $clauseRES="(1=4)"; // Will distinct the RES
   }
-  
   // $clausePRO='';
   $clauseAffPRO='';
   $fieldProj='idProject';
