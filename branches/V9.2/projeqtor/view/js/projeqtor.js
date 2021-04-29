@@ -8198,7 +8198,7 @@ function updateSubTask(id,refType,refId,isPrio,isRes){
     sortOrder=sortOrder+1;
     if(dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId))resourceVal=dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId).value;
     url+="&operation=save";
-    url+="&name="+name+"&priority="+priorityVal+"&resource="+resourceVal+"&sortOrder="+sortOrder;
+    url+="&name="+encodeURI(name)+"&priority="+priorityVal+"&resource="+resourceVal+"&sortOrder="+sortOrder;
   }else if(id!=0 && name.trim()!=''){
     update=true;
     if(isRes=='true' && resourceVal.trim()==''){
