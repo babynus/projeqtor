@@ -76,7 +76,6 @@ class KpiValueRequest extends SqlElement {
     $crit="requestDateTime<'$time'";
     $cpt=$kvr->countGroupedSqlElementsFromCriteria(null, array('refType','refId','requestDate'),$crit);
     if (count($cpt)>0) {
-      debugLog("triggerCalculation for ".count($cpt)." lines");
       foreach($cpt as $key=>$cptVal) {
         debugLog("   $key => $cptVal");
         $split=explode('|',$key);
@@ -86,12 +85,9 @@ class KpiValueRequest extends SqlElement {
         if (!SqlElement::class_exists($refType)) continue;
         $obj=new $refType($refId);
         KpiValue::calculateKpiExecute($obj,null,$requestDate);
-        $critPurge="refType='$refType' and refId=$refId and ".$crit;
-        debugLog("   call purge for crit=$critPurge");
-        $resPurge=$kvr->purge($crit);
-        debugLog("   $resPurge");
       }
     }
+    $resPurge=$kvr->purge($crit);
   }
   
 }
