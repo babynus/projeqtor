@@ -6312,7 +6312,7 @@ function showHideActivityStreamToday(show){
   saveUserParameter('showTodayActivityStream',newValShow);
 
   loadContent('refreshButtonActivityStreamToday.php?showActStream='+newValShow, 'todayAsticityStreamButton');
-  if(dojo.byId('todayActStream') && dojo.byId('todayActStream').offsetWidth>0 && dojo.byId('todayActStream').offsetHeight>0){
+  if(dojo.byId('todayActStream') && dojo.byId('todayActStream').offsetWidth>0 && dojo.byId('todayActStream').offsetHeight>0 && !dojo.byId('objectStream')){
     loadContent("activityStreamList.php", "todayActStream");  
   }
 }
