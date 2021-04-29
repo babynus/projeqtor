@@ -293,7 +293,7 @@ if ($type=='habilitation') {
       }
       if ($fld == 'paramLdap_search_pass' and $val){
       	$val=encryptPwd($val, 'LDAP');
-      }else if($fld == 'paramMailSmtpPassword' and $val){
+      }else if(($fld == 'cronCheckEmailsPassword' or $fld == 'paramMailSmtpPassword') and $val){
       	$val=encryptPwd($val, 'IMAP');
       }
       if($fld =='cronArchivePlannedDate'){
