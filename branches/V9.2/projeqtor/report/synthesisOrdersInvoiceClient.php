@@ -130,18 +130,19 @@ foreach ($tabCmdOrder as $wbs=>$objId){
       $commandRest = $val->untaxedAmount;
       if(isset($tabBill[$val->id])){
         $nbRowSpan = 0;
-        foreach ($tabBill[$val->id] as $billId){
-          $nbRowSpan++;
+        foreach ($tabBill[$val->id] as $idTab=>$billId){
           $newBill = new Bill($billId);
           if($newBill->cancelled){
-            unset($tabBill[$val->id]);
+            unset($tabBill[$val->id][$idTab]);
+            if(!$tabBill[$val->id])unset($tabBill[$val->id]);
             continue;
           }
+          $nbRowSpan++;
           $commandRest -= $newBill->untaxedAmount;
         }
       }
       echo'<tr>';
-      
+      if($nbRowSpan==0)$nbRowSpan=1;
       echo' <td  rowspan="'.$nbRowSpan.'" class="reportTableData"  style="padding:4px;text-align:left;width:'.$col1.'%;">'.SqlList::getNameFromId('Project', $val->idProject).'</td>';
       if($paramshowReference){
         echo' <td  rowspan="'.$nbRowSpan.'" class="reportTableData"  style="padding:4px;text-align:left;width:'.$col2.'%;">'.$val->reference.'</td>';
