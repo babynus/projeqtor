@@ -899,12 +899,12 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
 
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Today" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
-  <div style="overflow: <?php echo(!$print)?'auto':'hidden';?>;padding:10px" id="detailDiv" dojoType="dijit.layout.ContentPane" region="center">
+  <div style="overflow: <?php echo(!$print)?'auto':'hidden';?>;<?php if(!$isModuleActive)echo 'padding:10px;'; ?>" id="detailDiv" dojoType="dijit.layout.ContentPane" region="center">
      <?php 
     if (!$print) {?>
      <?php if($isModuleActive){?> 
     <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false"  > 
-      <div dojoType="dijit.layout.ContentPane" id="todayTop" region="top" style="width:100%;height:<?php echo $topDiwHeight;?>;" splitter="true">
+      <div dojoType="dijit.layout.ContentPane" id="todayTop" region="top" style="width:100%;height:<?php echo $topDiwHeight;?>;padding:15px;" splitter="true" >
     <?php }?>
       <div class="parametersButton">
         <button id="todayRefreshButton" dojoType="dijit.form.Button"
@@ -1127,7 +1127,7 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
             echo '  saveContentPaneResizing("contentPaneTodayTopHeight", dojo.byId("todayTop").offsetHeight, true);';
             echo '</script>';
           }
-          echo '<div dojoType="dijit.layout.ContentPane" region="left" style="width:'.$classicViewWidth.';height:'.$classicViewHeight.'; padding-top:15px;padding-right:15px;" splitter="true" id="todayClassicView" >';
+          echo '<div dojoType="dijit.layout.ContentPane" region="left" style="width:'.$classicViewWidth.';height:'.$classicViewHeight.'; padding:15px;" splitter="true" id="todayClassicView" >';
           echo '<script type="dojo/connect" event="resize" args="evt">';
           echo 'saveContentPaneResizing("contentPaneTodayClassicViewWidth", dojo.byId("todayClassicView").offsetWidth, true);';
           echo 'saveContentPaneResizing("contentPaneTodayClassicViewHeight", dojo.byId("todayClassicView").offsetHeight, true);';
@@ -1203,8 +1203,8 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
   }
 } 
 if(!$print and $isModuleActive){?>
-      <div dojoType="dijit.layout.ContentPane" id="todayActStream" region="center" style="width:<?php echo $activityStreamWidth;?>;height:<?php echo $activityStreamHeight;?>;padding-left:15px;padding-top:15px;height:100%;" splitter="true" >
-        <?php  include('../view/activityStreamList.php');?>
+      <div dojoType="dijit.layout.ContentPane" id="todayActStream" region="center" style="width:<?php echo $activityStreamWidth;?>;height:<?php echo $activityStreamHeight;?>;padding:15px;height:100%;" splitter="true" >
+        <?php if($showActStream!='true')  include('../view/activityStreamList.php');?>
       <script type="dojo/connect" event="resize" args="evt">
            saveContentPaneResizing("contentPaneTodayActStreamWidth", dojo.byId("todayActStream").offsetWidth, true);
            saveContentPaneResizing("contentPaneTodayActStreamHeight", dojo.byId("todayActStream").offsetHeight, true);
