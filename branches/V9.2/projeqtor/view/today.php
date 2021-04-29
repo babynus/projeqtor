@@ -1203,7 +1203,7 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
   }
 } 
 if(!$print and $isModuleActive){?>
-      <div dojoType="dijit.layout.ContentPane" id="todayActStream" region="center" style="width:<?php echo $activityStreamWidth;?>;height:<?php echo $activityStreamHeight;?>;padding:15px;height:100%;" splitter="true" >
+      <div dojoType="dijit.layout.ContentPane" id="todayActStream" region="center" style="width:<?php echo $activityStreamWidth;?>;height:<?php echo $activityStreamHeight;?>;height:100%;" splitter="true" >
         <?php if($showActStream!='true')  include('../view/activityStreamList.php');?>
       <script type="dojo/connect" event="resize" args="evt">
            saveContentPaneResizing("contentPaneTodayActStreamWidth", dojo.byId("todayActStream").offsetWidth, true);
