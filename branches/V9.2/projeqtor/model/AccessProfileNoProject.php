@@ -63,7 +63,7 @@ class AccessProfileNoProject extends SqlElement {
   );
   
   private static $_fieldsAttributes=array("name"=>"required", 
-                                  "idAccessScopeNoProjectRead"=>"hidden",
+                                  "idAccessScopeNoProjectRead"=>"required",
                                   "idAccessScopeNoProjectCreate"=>"required",
                                   "idAccessScopeNoProjectUpdate"=>"required",
                                   "idAccessScopeNoProjectDelete"=>"required",
