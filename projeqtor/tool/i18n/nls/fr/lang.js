@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "Vous allez être redirigé vers la version mobile. <b
 msgEnterPlannedDA: "Vous devez renseigner à la fois la date et le montant planifiés",
 msgEnterRealDA: "Vous devez renseigner à la fois la date et le montant réels",
 msgEnterRPAmount: "Vous devez renseigner un montant (prévu ou réel)",
+msgEnterRPAmountForgeneratedExpense: "Vous devez saisir un montant pour générer la dépense",
 msgEnterRPDate: "Vous devez renseigner une date (prévue ou réelle)",
 msgErrorSelectedBaseline: "La référence de planning sélectionnée ne correspond pas au projet sélectionné",
 msgEvalutationMaxValue: "La note d'évaluation est établie sur",

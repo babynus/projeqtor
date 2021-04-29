@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "You will be redirected to the mobile version. <br/>Cl
 msgEnterPlannedDA: "A data planejada e o valor devem ser informados",
 msgEnterRealDA: "A data real e o valor devem ser informados",
 msgEnterRPAmount: "Deve-se inserir um valor (planejado ou real)",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "Deve-se inserir uma data (planejada ou real)",
 msgErrorSelectedBaseline: "The selected baseline does not fit the selected project",
 msgEvalutationMaxValue: "Max evaluation value set to",

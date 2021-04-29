@@ -418,6 +418,9 @@ class ProviderBillMain extends SqlElement {
   
    public function control(){
     $result="";
+    if(RequestHandler::getBoolean('generateProjectExpenseButton') and $this->totalUntaxedAmount==''){
+      $result.= '<br/>' . i18n('msgEnterRPAmountForgeneratedExpense');
+    }
     
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {

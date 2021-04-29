@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "将为你重定向到移动版本. <br/>点击“取�
 msgEnterPlannedDA: "计划日期和数额都需要输入",
 msgEnterRealDA: "实际日期和数额都需要输入",
 msgEnterRPAmount: "必须输入数额 (计划或实际)",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "必须输入日期 (计划或实际)",
 msgErrorSelectedBaseline: "所选基线与所选项目不匹配",
 msgEvalutationMaxValue: "最大估值设为",
