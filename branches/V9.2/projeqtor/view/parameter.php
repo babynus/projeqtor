@@ -251,7 +251,7 @@ function drawTableFromObjectList($objectList) {
 				  $val = $obj->parameterValue;
 				  if($code=="paramLdap_search_pass"){
 				    $val = decryptPwd($obj->parameterValue, 'LDAP');
-				  }else if($code=="paramMailSmtpPassword"){
+				  }else if($code=="paramMailSmtpPassword" or $code=="cronCheckEmailsPassword"){
 				    $val = decryptPwd($obj->parameterValue, 'IMAP');
 				  }
 				  echo ' value="' .  htmlEncode($val) . '" ';
