@@ -35,6 +35,7 @@ $idProject = "";
 $displayNothing = false;
 $currentYear=strftime("%Y");
 $currentMonth = strftime("%m");
+$showDonPlannedWork=(trim(Parameter::getUserParameter('showDonePlannedWork'))!='0')?true:false;
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="plannedWorkManualParamDiv" name="plannedWorkManualParamDiv">  
@@ -249,8 +250,21 @@ $currentMonth = strftime("%m");
               </script>
                 </div>
                </td>
-               </tr>
-              </table>
+                <td>
+                  <label for="showDonePlannedWork"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:<?php echo ((isNewGui())?'20':'10');?>px;width:100px;" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo i18n('labelShowIdle'.((isNewGui())?'Short':''));?>&nbsp;</label>
+                </td>
+                <td>
+                  <div class="<?php echo ((isNewGui())?"whiteCheck":"");?>" id="showDonePlannedWork" dojoType="dijit.form.CheckBox" style="" type="checkbox" <?php echo(($showDonPlannedWork)?'checked':'');?>
+                      title="<?php echo i18n('labelShowIdle');?>" >
+                    <script type="dojo/connect" event="onChange" args="evt">
+                      saveUserParameter("showDonePlannedWork",((this.checked)?"1":"0"));
+                      if (checkFormChangeInProgress()) {return false;}
+                      refreshPlannedWorkManualList();
+                    </script>
+                  </div>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr> 
       </table>
@@ -324,13 +338,14 @@ $currentMonth = strftime("%m");
           <?php if(!$displayNothing){
                   if(isset($idProject)){
                     if(trim($idProject)==''){
-                      PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner);
+                      PlannedWorkManual::drawActivityTable($showDonPlannedWork,null,$yearSpinner.$monthSpinner);
                     }else{
-                      PlannedWorkManual::drawActivityTable($idProject,$yearSpinner.$monthSpinner);
+                      PlannedWorkManual::drawActivityTable($showDonPlannedWork,$idProject,$yearSpinner.$monthSpinner);
                     }
                   }else{
-                    PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner);
+                    PlannedWorkManual::drawActivityTable($showDonPlannedWork,null,$yearSpinner.$monthSpinner);
                   }
+                  
                } ?>
           </div>
         </div>
@@ -356,7 +371,7 @@ $currentMonth = strftime("%m");
                
                   <?php //TAB RESOURCES
                   if(!$displayNothing){
-                    PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, false);
+                    PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, false,$showDonPlannedWork);
                   } ?>
           </div>
         </div>
