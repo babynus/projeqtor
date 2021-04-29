@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "Preusmjerit ćete se na mobilnu verziju. <br/> Klikni
 msgEnterPlannedDA: "Planirani datum i iznos mora biti i ušao",
 msgEnterRealDA: "Stvarni datum i iznos mora biti i ušao",
 msgEnterRPAmount: "Morate unijeti iznos (planirano ili pravi)",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "Morate upisati datum (planirano ili pravi)",
 msgErrorSelectedBaseline: "Odabrana referenca planiranja ne odgovara odabranom projektu",
 msgEvalutationMaxValue: "Max vrijednost procjena postavljena na",

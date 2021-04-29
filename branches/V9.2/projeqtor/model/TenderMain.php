@@ -442,6 +442,10 @@ class TenderMain extends SqlElement {
         $result.='<br/>' . i18n('errorDuplicateTender');
       }
     }
+    
+    if(RequestHandler::getBoolean('generateProjectExpenseButton') and $this->totalUntaxedAmount==''){
+      $result.= '<br/>' . i18n('msgEnterRPAmountForgeneratedExpense');
+    }
         
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
@@ -687,9 +691,9 @@ class TenderMain extends SqlElement {
       self::$_fieldsAttributes['fullAmount']='readonly';
     }
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->getProfile($this->idProject), 'scope'=>'generateProjExpense'));
-    if($this->idProjectExpense or $habil->rightAccess == '2'){
-      self::$_fieldsAttributes['_button_generateProjectExpense']='hidden';
-    }
+//     if($this->idProjectExpense or $habil->rightAccess == '2'){
+//       self::$_fieldsAttributes['_button_generateProjectExpense']='hidden';
+//     }
     
     if (count($this->_BillLine)) {
       $paramImputOfAmountProvider = Parameter::getGlobalParameter('ImputOfBillLineProvider');

@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "You will be redirected to the mobile version. <br/>Cl
 msgEnterPlannedDA: "Planned date and amount must both be entered",
 msgEnterRealDA: "Musí sa zadať aj skutočný dátum aj suma",
 msgEnterRPAmount: "You must enter an amount (planned or real)",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "You must enter a date (planned or real)",
 msgErrorSelectedBaseline: "The selected baseline does not fit the selected project",
 msgEvalutationMaxValue: "Max hodnotiaca hodnota je nastavená",

@@ -3427,6 +3427,7 @@ msgConfirmRedirectMobile: "Mobil sürüme yönlendirileceksiniz. <br/> Cihazın�
 msgEnterPlannedDA: "Planlanan tarih ve miktarın her ikisi de girilmelidir",
 msgEnterRealDA: "Gerçek tarih ve miktarın her ikisi de girilmelidir",
 msgEnterRPAmount: "Bir miktar girmelisiniz (planlanmış veya gerçek)",
+msgEnterRPAmountForgeneratedExpense: "You must enter an amount to generate the expense",
 msgEnterRPDate: "Bir tarih girmelisiniz (planlanmış veya gerçek)",
 msgErrorSelectedBaseline: "Seçilen başlangıç seçilen projeye uymuyor",
 msgEvalutationMaxValue: "Maksimum değerlendirme değeri",
