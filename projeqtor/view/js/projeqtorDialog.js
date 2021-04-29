@@ -13122,6 +13122,9 @@ var activFuncHideShowDropDiv=false;
 function hideShowDropDiv(mode,subTaskRawId){
   event.preventDefault();
   var el=dojo.byId(subTaskRawId);
+  divAttach=el.querySelector('.divAttachSubTask');
+
+  if(dijit.byId('attachmentFileDirect'))dijit.byId('attachmentFileDirect').reset();
   if(mode=='show'){
       el.style.background="#EEEEEE";
       el.style.opacity='50%';
@@ -13132,6 +13135,10 @@ function hideShowDropDiv(mode,subTaskRawId){
       }
       activFuncHideShowDropDiv=true;
   }else if(mode =='hide'){
+    if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
+      var idDiv=divAttach.childNodes[1].firstChild.id;
+      dijit.byId(idDiv).reset();
+    }
     el.style.background="unset";
     el.style.opacity='unset';
     el.style.border="";
@@ -13141,6 +13148,10 @@ function hideShowDropDiv(mode,subTaskRawId){
     }
       activFuncHideShowDropDiv=false;
   }else {
+    if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
+      var idDiv=divAttach.childNodes[1].firstChild.id;
+      dijit.byId(idDiv).reset();
+    }
     activFuncHideShowDropDiv=false;
     el.style.background="unset";
     el.style.opacity='unset';
@@ -13164,7 +13175,6 @@ function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachm
       if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
         var idDiv=divAttach.childNodes[1].firstChild.id;
         dijit.byId(idDiv).reset();
-        dijit.byId(idDiv);
         if(!refresh)dijit.byId(idDiv).addDropTarget(el,true);
       }
       

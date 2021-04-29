@@ -72,6 +72,7 @@ if($lstNewDocumentsRight and $status!="ERROR"){
   foreach ($lstNewDocumentsRight as $idNewDocR=>$newDocR){
      if(RequestHandler::isCodeSet('newDocumentRight_'.$newDocR)){
       $val=RequestHandler::getValue('newDocumentRight_'.$newDocR);
+      $idDirectoryIdProf=explode('_',$newDocR);
       $newDocRight=new DocumentRight();
       $searchDocRight=SqlElement::getSingleSqlElementFromCriteria(get_class($newDocRight), array('idDocumentDirectory'=>$idDirectoryIdProf[0],'idProfile'=>$idDirectoryIdProf[1]));
       if($searchDocRight->id==''){
