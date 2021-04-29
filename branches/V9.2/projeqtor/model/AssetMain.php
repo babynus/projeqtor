@@ -44,6 +44,7 @@ class AssetMain extends SqlElement {
   public $description;
   public $_sec_Attribution;
   public $idStatus;
+  public $idResource;
   public $_tab_2_1 = array('installationDate','decommissioningDate','date');
   public $installationDate;
   public $decommissioningDate;
@@ -89,7 +90,7 @@ class AssetMain extends SqlElement {
     <th field="idle" width="4%" formatter="booleanFormatter">${idle}</th>
     ';
   
-  private static $_colCaptionTransposition = array('idAffectable' => 'user','idAsset' => 'parentAsset');
+  private static $_colCaptionTransposition = array('idAffectable' => 'user','idAsset' => 'parentAsset','idResource'=>'responsible');
   
   private static $_fieldsAttributes=array(
       'name'=>'required',
@@ -287,7 +288,7 @@ class AssetMain extends SqlElement {
       $result.='</div></td>';
       $result.='</tr></table>';
     }elseif($item=="fullNameLocation"){
-      $result .="<table><tr><td class='label' valign='top'><label>" . i18n('colLocation') . "&nbsp;:&nbsp;</label>";
+      $result .="<table><tr><td class='label' valign='top'><label>" . i18n('colLocation') . Tool::getDoublePoint()."</label>";
       $result .="</td><td>";
       if($this->idLocation){ 
         $location= new Location($this->idLocation); 
