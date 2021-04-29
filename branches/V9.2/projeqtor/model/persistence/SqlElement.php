@@ -7250,6 +7250,10 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
           }
         }
       }
+    } else if (!$this->id and property_exists($this,'idResource') and ! property_exists($this,'idProject') and !trim( $this->idResource) ) { 
+      // On creation, if acces right for non project dependant item on update is "Responsible", auto set responsible to self
+      $accessRight=securityGetAccessRight('menu'.get_class($this), 'update', null, getSessionUser());
+      if ($accessRight=='RES') $this->idResource=getCurrentUserId();
     }
   }
 
