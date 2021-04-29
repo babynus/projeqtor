@@ -178,13 +178,16 @@ class SubTask extends SqlElement {
           echo    '<td class="todoListTab" style="white-space:nowrap;width:auto;margin-right:5px;text-align: center;" >';
           echo    '  <table style="width:100%;"><tr><td style="'.(($gloablView and $widthDisplay>='1530')?"width:96%;":"width:90%;" ).'">';
             echo      '<textarea title="'.i18n('colName').'" id="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" name="'.$refType.'_'.$refId.'_nameNewSubTask_'.$subTask->id.'" 
-                        dojoType="dijit.form.Textarea" style="width:98%;max-height:150px !important;" 
-                        value="'. htmlEncode($subTask->name).'" ';
+                        dojoType="dijit.form.Textarea" style="width:98%;max-height:150px !important;" ';
             if ($rightUpdate=='NO' and $rightRead=='YES'){
               echo ' readonly="true">';
             }else {
-              echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  ></textarea>';
-            }
+              echo 'onChange="updateSubTask('.$subTask->id.',\''.$refType.'\','.$refId.');"  >';
+            }         
+            $text = new Html2Text ($subTask->name);
+            $name = $text->getText ();
+            //$name=htmlspecialchars($name);
+            echo       $name .'</textarea>';
             echo    '</td><td style="'.(($gloablView and $widthDisplay>='1530')?"width:4%;":"width:10%;" ).'">';
               if($rightUpdate=='YES'){
                 echo '<a title="'.i18n('addAttachment').'"> '; 
@@ -211,12 +214,12 @@ class SubTask extends SqlElement {
                         if(!empty($allAttach)){
                           foreach ($allAttach as $attachment){
                             if ($attachment->isThumbable()) {
-                              echo '<div oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$refType.','.$refId.','.$idResource.'\';">';
+                              echo '<div style="float:left;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$refType.','.$refId.','.$idResource.'\';">';
                               echo '<img src="'.getImageThumb($attachment->getFullPathFileName(), 32).'" '.' title="'.htmlEncode($attachment->fileName).'" style="float:left;cursor:pointer;margin-left: 5px;margin-right: 5px;" '
                                     .' onClick="showImage(\'Attachment\',\''.htmlEncode($attachment->id).'\',\''.htmlEncode($attachment->fileName, 'protectQuotes').'\');" />';
                               echo '</div>';
                             }else{
-                              echo '<div oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$refType.','.$refId.','.$idResource.'\';">';
+                              echo '<div style="float:left;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$refType.','.$refId.','.$idResource.'\';">';
                               echo htmlGetMimeType($attachment->mimeType, $attachment->fileName, $attachment->id);
                               echo '</div>';
                             }
