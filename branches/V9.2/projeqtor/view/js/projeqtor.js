@@ -6285,29 +6285,33 @@ function showHideActivityStreamToday(show){
     if(dijit.byId('todayActStream').w >0 ) return;
     if(!todayActiStreamDivLastWidth) dimension=parseInt(dojo.byId('defaultTodayActStreamWidth').value);
     else dimension=todayActiStreamDivLastWidth;
-    var classicViewDim=(dojo.byId("todayClassicView").offsetWidth-dimension);
+    var classicViewDim=(dojo.byId("todayClassicView").offsetWidth-dimension-5);
     var newValShow='false',
           title=i18n('hideActivityStream');
   }else{
     if(dijit.byId('todayActStream').w <=0) return;
     todayActiStreamDivLastWidth=dijit.byId("todayActStream").w;
-    var classicViewDim=(dojo.byId("todayClassicView").offsetWidth+todayActiStreamDivLastWidth);
+    var classicViewDim=(dojo.byId("todayClassicView").offsetWidth+todayActiStreamDivLastWidth+5);
     dimension=0;
     var newValShow='true',
           title=i18n('showActivityStream');
   }
+
   var display=(show!='true')? 'none':'unset' ;
-  dijit.byId('todayClassicView').resize({ w : classicViewDim });
+  dojo.byId('todayClassicView_splitter').style.display=display;
+  dijit.byId('todayClassicView').resize({ w : classicViewDim});
   dijit.byId("todayActStream").resize({ w : dimension });
   dijit.byId("centerDiv").resize();
-  dijit.byId('todayClassicView_splitter').domNode.style.display=display;
+  
 
   saveContentPaneResizing("contentPaneTodayActStreamWidth", dimension, true);
   saveContentPaneResizing("contentPaneTodayClassicViewWidth", classicViewDim, true);
   saveUserParameter('showTodayActivityStream',newValShow);
 
   loadContent('refreshButtonActivityStreamToday.php?showActStream='+newValShow, 'todayAsticityStreamButton');
-
+  if(dojo.byId('todayActStream') && dojo.byId('todayActStream').offsetWidth>0 && dojo.byId('todayActStream').offsetHeight>0){
+    loadContent("activityStreamList.php", "todayActStream");  
+  }
 }
 
 function focusStream() {
