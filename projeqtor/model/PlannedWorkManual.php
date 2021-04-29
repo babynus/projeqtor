@@ -234,7 +234,7 @@ class PlannedWorkManual extends GeneralWork {
     if (!$manageCapacity) return 'LIMIT';
     else return $manageCapacity;
   }
-  public static function drawLine($scope, $idResource, $year, $month, $refType, $refId, $readonly=false) {
+  public static function drawLine($scope, $idResource, $year, $month, $refType, $refId, $readonly=false,$done) {
     SqlElement::$_cachedQuery['WorkPeriod']=array();
     // draw line for given resource and month
     // if $idAssignment is not null, we are on update of existing assignment
@@ -273,6 +273,10 @@ class PlannedWorkManual extends GeneralWork {
     $resObj=new ResourceAll($idResource);
     $manageCapacity=self::getManageCapacity($resObj); // Take into account capacity of resource
     foreach ($lstPwm as $pwm) {
+      if(!$done){
+        $objToTest= new $pwm->refType ($pwm->refId);
+        if($objToTest->done)continue;
+      }
         if (!isset($exist[$pwm->workDate])) $exist[$pwm->workDate]=array();
         $exist[$pwm->workDate][$pwm->period]=array('refType'=>$pwm->refType,'refId'=>$pwm->refId,'mode'=>$pwm->idInterventionMode);
     }
@@ -372,7 +376,7 @@ class PlannedWorkManual extends GeneralWork {
    * @param unknown $resourceList
    * @param unknown $monthsList
    */
-  public static function drawTable($scope, $resourceList, $monthList, $refObj, $readonly=false) {
+  public static function drawTable($scope, $resourceList, $monthList, $refObj, $readonly=false,$done) {
     if ($scope=='assignment') {
       if (is_array($resourceList) and count($resourceList)>1) { 
         echo "ERROR - Only one resource for assignment mode";
@@ -437,7 +441,7 @@ class PlannedWorkManual extends GeneralWork {
       foreach ($resourceListName as $idRes=>$nameRes) {
         echo '<tr style="height:'.$size.'px">';
         echo '<td class="noteHeader" style="width:'.$nameWidth.'px;"><div style="white-space:nowrap;max-width:'.$nameWidth.'px;max-height:'.$size.'px;overflow:hidden;">'.$nameRes.'</div></td>';
-        self::drawLine($scope, $idRes, $year, $month, null, null, $readonly);
+        self::drawLine($scope, $idRes, $year, $month, null, null, $readonly,$done);
         echo '<tr>';
       }
       echo '</table>';
@@ -474,8 +478,9 @@ class PlannedWorkManual extends GeneralWork {
     
   }
   
-  public static function drawActivityTable($idProject=null,$monthYear=null,$readonly=false) {
+  public static function drawActivityTable($done,$idProject=null,$monthYear=null,$readonly=false) {
     $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
+
     if($idProject){
       if(is_array($idProject)){
         $listProj=array();
@@ -488,14 +493,15 @@ class PlannedWorkManual extends GeneralWork {
         $listProj = $myProj->getRecursiveSubProjectsFlatList(false,true);
       }
       $listProj=transformListIntoInClause($listProj);
-      $where = " idPlanningMode = 23 and idle = '0' and idProject in $listProj" ;
+      $where = " idPlanningMode = 23 and idle = '0'  and idProject in $listProj" ;
       $order = null;
     }else{
       $user = getSessionUser();
       $listProj = transformListIntoInClause($user->getVisibleProjects());
-      $where = " idPlanningMode = 23 and idle = '0' and idProject in $listProj" ;
+      $where = " idPlanningMode = 23  and idle = '0' and idProject in $listProj" ;
       $order = " wbs asc";
     }
+    if(!$done)$where.=" and done = '0'";
     $pe=new PlanningElement();
     $list=$pe->getSqlElementsFromCriteria(null,null,$where,$order);
     $nameWidth=250;
