@@ -6313,7 +6313,7 @@ function showHideActivityStreamToday(show){
 
   loadContent('refreshButtonActivityStreamToday.php?showActStream='+newValShow, 'todayAsticityStreamButton');
   if(dojo.byId('todayActStream') && dojo.byId('todayActStream').offsetWidth>0 && dojo.byId('todayActStream').offsetHeight>0 && !dojo.byId('objectStream')){
-    loadContent("activityStreamList.php", "todayActStream");  
+    loadContent("activityStreamList.php", "todayActStream",null,null,null,null,null,null,true);  
   }
 }
 
@@ -8376,7 +8376,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
       multiple:true,
       uploadOnSelect:true,
       url:"../tool/saveAttachment.php?attachmentRefType=SubTask&attachmentRefId="+id+"&nameDiv="+id+"_attachmentFile",
-      target:id+'_resultAttach',
+      target:'resultPost',
       type:"file",
       iconClass:'iconAttachFiles',
 
@@ -8385,7 +8385,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
     
     dijit.byId(id+'_attachmentFile').set('class','directAttachment detailButton divAttachSubTask');
     dojo.connect(newButtonAttach,'onBegin' , function(value){hideResultDivs();saveAttachment(true,id+'_attachmentFile');});
-    dojo.connect(newButtonAttach,'onComplete' , function(dataArray){saveAttachmentAck(dataArray,id+'_resultAttach');refreshSubTaskAttachment(refType,refId,resourceFilter);});
+    dojo.connect(newButtonAttach,'onComplete' , function(dataArray){saveAttachmentAck(dataArray);refreshSubTaskAttachment(refType,refId,resourceFilter);});
     dojo.connect(newButtonAttach,'onProgress' , function(data){saveAttachmentProgress(data);});
     dojo.connect(newButtonAttach,'onError' , function(value){dojo.style(dojo.byId('downloadProgress'), {display:'none'});hideWait();showError(i18n("uploadUncomplete"));});
     var raw=imgGrab.parentNode.parentNode;
@@ -8397,6 +8397,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
   }
   newNameText.set('value',dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value);
   dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').value='';
+  dojo.byId(refType+'_'+refId+'_nameNewSubTask_0').style.height='30px';
   dojo.setAttr(refType+'_'+refId+'_nameNewSubTask_'+id, 'onChange', 'updateSubTask('+id+',\''+refType+'\','+refId+')');
   dojo.connect(newFilterResource, 'onChange', function(value){updateSubTask(id,refType,refId,'false','true');}); 
   dojo.connect(newFilterPrio, 'onChange', function(value){updateSubTask(id,refType,refId,'true','flase');}); 

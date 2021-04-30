@@ -109,6 +109,9 @@ if(strpos($paramProject, ",")){
 }
 if(!isset($widthForDisplay)){
   $widthForDisplay=false;
+  if(RequestHandler::isCodeSet('contentPaneTodayActStreamWidth')){
+    $widthForDisplay=RequestHandler::getNumeric('contentPaneTodayActStreamWidth');
+  }
 }
 $note = new Note ();
 $hist=new History();
@@ -258,7 +261,7 @@ if ($countIdNote == 0 and $nbHistInfo==0 and $countMail==0) {
 $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : false;
 ?>
 <div dojo-type="dijit.layout.BorderContainer" class="container" style="overflow-y:auto;">
-	<table id="objectStream" style="width: 100%;font-size:100% !important;"> 
+	<table id="objectStream" style="width:<?php echo ($widthForDisplay)?$widthForDisplay.'px':'100%'?> ;font-size:100% !important;"> 
 	<?php
   	function sortNotes(&$listNotes, &$result, $parent){
   		foreach ($listNotes as $note){
@@ -305,7 +308,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
   	       $countDisplay++;
   	     }  	     
   	   } else if ($type=='histo') {
-  	     $resultHist= activityStreamDisplayHist($object,"activityStream");
+  	     $resultHist= activityStreamDisplayHist($object,"activityStream",$widthForDisplay);
   	     if($resultHist){
   	       echo $resultHist;
   	       $countDisplay++;  	       
