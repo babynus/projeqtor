@@ -35,7 +35,7 @@ $readonly=false;
 <h1>MODALITES</h1>
 <?php InterventionMode::drawList($readonly);?>
 <h1>ACTIVITES</h1>
-<?php PlannedWorkManual::drawActivityTable(null,null,$readonly);?>
+<?php PlannedWorkManual::drawActivityTable(true,null,null,$readonly);?>
 <h1>TEST SAISIE INTERVENTION</h1>
 <div id="plannedWorkManualInterventionDiv">
 <?php 

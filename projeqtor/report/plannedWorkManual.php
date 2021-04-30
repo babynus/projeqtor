@@ -120,12 +120,12 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
   echo'    <td colspan="2">';       
                 if(isset($idProject)){
                  if((!is_array($idProject) and trim($idProject)=='' ) or $idProject=="*"){
-                    PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner,true);
+                    PlannedWorkManual::drawActivityTable(true,null,$yearSpinner.$monthSpinner,true);
                   }else{
-                    PlannedWorkManual::drawActivityTable($idProject,$yearSpinner.$monthSpinner,true);
+                    PlannedWorkManual::drawActivityTable(true,$idProject,$yearSpinner.$monthSpinner,true);
                   }
                 }else{
-                    PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner,true);
+                    PlannedWorkManual::drawActivityTable(true,null,$yearSpinner.$monthSpinner,true);
                 }
   
   echo'    </td>';

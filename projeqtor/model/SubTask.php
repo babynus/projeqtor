@@ -197,12 +197,12 @@ class SubTask extends SqlElement {
   			                url="../tool/saveAttachment.php?attachmentRefType='.get_class($subTask).'&attachmentRefId='.$subTask->id.'&nameDiv='.$subTask->id.'_attachmentFile" 
   			                multiple="true" class="directAttachment detailButton divAttachSubTask" 
   			                uploadOnSelect="true" 
-  			                target="'.$subTask->id.'_resultAttach" 
+  			                target="resultPost" 
   			                onBegin="hideResultDivs();saveAttachment(true,\''.$subTask->id.'_attachmentFile\');" 
   			                iconClass="iconAttachFiles" 
   			                onError="dojo.style(dojo.byId(\'downloadProgress\'), {display:\'none\'});" 
   			                style="display:inline-block;" label="">';		 
-    			   echo '  <script type="dojo/connect" event="onComplete" args="dataArray">  refreshSubTaskAttachment("'.$refType.'",'.$refId.','.$idResource.');saveAttachmentAck(dataArray,"'.$subTask->id.'_resultAttach"); </script>';
+    			   echo '  <script type="dojo/connect" event="onComplete" args="dataArray">  refreshSubTaskAttachment("'.$refType.'",'.$refId.','.$idResource.');saveAttachmentAck(dataArray); </script>';
     			   echo '  <script type="dojo/connect" event="onProgress" args="data"> saveAttachmentProgress(data); </script>';
     	           echo '  <script type="dojo/connect" event="onError" args="data"> hideWait();showError(i18n("uploadUncomplete")); </script>';
                 echo '</div> ';

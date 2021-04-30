@@ -74,7 +74,7 @@ PlannedWorkManual::setSize($size);
     <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:30%">
       <div id="activityTableCons" name="activityTableCons" style="margin:20px;min-width:1575px">
         <?php if(!$displayNothing){
-                PlannedWorkManual::drawActivityTable($idProject,$yearSpinner.$monthSpinner,true); 
+                PlannedWorkManual::drawActivityTable(true,$idProject,$yearSpinner.$monthSpinner,true); 
               }?>
       </div>
     </div>
