@@ -251,13 +251,13 @@ $showDonPlannedWork=(trim(Parameter::getUserParameter('showDonePlannedWork'))!='
                 </div>
                </td>
                 <td>
-                  <label for="showDonePlannedWork"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:<?php echo ((isNewGui())?'20':'10');?>px;width:100px;" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo i18n('labelShowIdle'.((isNewGui())?'Short':''));?>&nbsp;</label>
+                  <label for="showDonePlannedWork"  class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:<?php echo ((isNewGui())?'20':'10');?>px;min-width:180px;" > &nbsp;<?php echo i18n('labelHideDone');?>&nbsp;</label>
                 </td>
                 <td>
-                  <div class="<?php echo ((isNewGui())?"whiteCheck":"");?>" id="showDonePlannedWork" dojoType="dijit.form.CheckBox" style="" type="checkbox" <?php echo(($showDonPlannedWork)?'checked':'');?>
-                      title="<?php echo i18n('labelShowIdle');?>" >
+                  <div class="<?php echo ((isNewGui())?"whiteCheck":"");?>" id="showDonePlannedWork" dojoType="dijit.form.CheckBox" style="" type="checkbox" <?php echo(($showDonPlannedWork)?'':'checked');?>
+                      title="<?php echo i18n('labelHideDone');?>" >
                     <script type="dojo/connect" event="onChange" args="evt">
-                      saveUserParameter("showDonePlannedWork",((this.checked)?"1":"0"));
+                      saveUserParameter("showDonePlannedWork",((this.checked)?"0":"1"));
                       if (checkFormChangeInProgress()) {return false;}
                       refreshPlannedWorkManualList();
                     </script>
@@ -371,7 +371,7 @@ $showDonPlannedWork=(trim(Parameter::getUserParameter('showDonePlannedWork'))!='
                
                   <?php //TAB RESOURCES
                   if(!$displayNothing){
-                    PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, false,$showDonPlannedWork);
+                    PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, false);
                   } ?>
           </div>
         </div>

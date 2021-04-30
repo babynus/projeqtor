@@ -35,7 +35,7 @@ scriptLog('   ->/view/refrehPlannedWorkManualList.php');
 $idProject = trim(RequestHandler::getId('idProjectPlannedInt'));
 $yearSpinner= RequestHandler::getYear('yearPlannedWorkManual');
 $monthSpinner= RequestHandler::getMonth('monthPlannedWorkManual');
-$showDonPlannedWork=(trim(Parameter::getUserParameter('showDonePlannedWork'))!='0')?true:false;
+$showDonePlannedWork=(trim(Parameter::getUserParameter('showDonePlannedWork'))!='0')?true:false;
 $displayNothing = false;$onlyRes=false;
 $listResource = array();
 $noNeed = false;
@@ -95,7 +95,7 @@ else $topHeight='30%';
       </script>
       <div id="activityTable" name="activityTable" style="margin:20px;min-width:1575px">
         <?php if(!$displayNothing){
-                PlannedWorkManual::drawActivityTable($showDonPlannedWork,$idProject,$yearSpinner.$monthSpinner); 
+                PlannedWorkManual::drawActivityTable($showDonePlannedWork,$idProject,$yearSpinner.$monthSpinner); 
               }?>
       </div>
     </div>
@@ -112,7 +112,7 @@ else $topHeight='30%';
               <?php //TAB RESOURCES
               $listMonth=array($yearSpinner.$monthSpinner);
               if(!$displayNothing){
-                PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, false,$showDonPlannedWork); 
+                PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, false); 
               }?>
       </div>
     </div>
