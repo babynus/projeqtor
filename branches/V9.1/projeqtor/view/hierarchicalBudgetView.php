@@ -32,7 +32,6 @@ require_once "../tool/projeqtor.php";
 include_once('../tool/formatter.php');
 scriptLog('   ->/view/hierarchicalBudgetView.php');
 
-
 $objectClass='Budget';
 $obj=new $objectClass();
 $table=$obj->getDatabaseTableName();
@@ -75,7 +74,7 @@ $result=Sql::query($query);
 $maxwidht = '';
 if($print)$maxwidht='max-width:1350px;';
 // Header
-echo '<div id="hierarchicalBudgetListHeaderDiv"" style="'.$maxwidht.'">';
+if (!$print) echo '<div id="hierarchicalBudgetListHeaderDiv"" style="'.$maxwidht.'">';
 echo '<table id="hierarchicalBudgetListHeader" align="left" width="100%" style="min-width:'.((isNewGui())?1363:1350).'px;">';
 echo '<TR class="ganttHeight" style="height:32px">';
 $min=(isNewGui())?'33':'20';
@@ -94,12 +93,12 @@ echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTab
 echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" style="min-width:80px;">' . i18n('colLeftAmount') . '</div></TD>' ;
 if(!$print)echo '  <TD class=""  ><div style="width:12px;" id="hierarchicBudgetScrollSpace">&nbsp;</div></TD>';
 echo '</TR>';
-echo '</table>';
-echo "</div>";
+if (! $print) echo '</table>';
+if (! $print) echo "</div>";
 $destHeight=RequestHandler::getValue('destinationHeight');
 $height=($destHeight)?(intval($destHeight)-40).'px':'100%';
-echo '<div id="hierarchicalBudgetListDiv" style="position:relative;height:100%;width:100%;min-width:'.((isNewGui())?1363:1350).'px;'.$maxwidht.'overflow-x:hidden;">';
-echo '<table id="dndHierarchicalBudgetList" dojoType="dojo.dnd.Source" jsId="dndSourceTableBudget" id="dndSourceTableBudget" align="left" width="100%" style="min-width:1350px;">';
+if (! $print) echo '<div id="hierarchicalBudgetListDiv" style="position:relative;height:100%;width:100%;min-width:'.((isNewGui())?1363:1350).'px;'.$maxwidht.'overflow-x:hidden;">';
+if (! $print) echo '<table id="dndHierarchicalBudgetList" dojoType="dojo.dnd.Source" jsId="dndSourceTableBudget" id="dndSourceTableBudget" align="left" width="100%" style="min-width:1350px;">';
 function getSubBudgetList($subList, &$subBudget){
 	foreach ($subList as $id=>$obj){
       $subBudget[]=$obj->id;
@@ -254,6 +253,6 @@ if (Sql::$lastQueryNbRows > 0) {
 	}
 }
 echo "</table>";
-echo '<div id="hierarchicalBudgetListDivEnd" style="min-height:20px; display:none;">&nbsp;</div>';
-echo '</div>';
+if (! $print) echo '<div id="hierarchicalBudgetListDivEnd" style="min-height:20px; display:none;">&nbsp;</div>';
+if (! $print) echo '</div>';
 ?>
