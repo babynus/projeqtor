@@ -34,7 +34,7 @@ We offer you a small overview of the major developments and you will find the fu
       
    When this global parameter is activiated, Projects with validated start date will not be plannned before this date.
    
-   :ref:`gui`
+   :ref:`gui` :ref:`global_parameters`
       
          
 .. container:: 
