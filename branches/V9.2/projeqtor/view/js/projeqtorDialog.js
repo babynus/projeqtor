@@ -13122,8 +13122,12 @@ var activFuncHideShowDropDiv=false;
 function hideShowDropDiv(mode,subTaskRawId){
   event.preventDefault();
   var el=dojo.byId(subTaskRawId);
-  divAttach=el.querySelector('.divAttachSubTask');
-
+//  divAttach=el.querySelector('.divAttachSubTask');
+//  if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
+//    var idDiv=divAttach.childNodes[1].firstChild.id;
+//    console.log('reset'+idDiv);
+//    dijit.byId(idDiv).reset();  
+//  }
   if(dijit.byId('attachmentFileDirect'))dijit.byId('attachmentFileDirect').reset();
   if(mode=='show'){
       el.style.background="#EEEEEE";
@@ -13135,10 +13139,6 @@ function hideShowDropDiv(mode,subTaskRawId){
       }
       activFuncHideShowDropDiv=true;
   }else if(mode =='hide'){
-    if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
-      var idDiv=divAttach.childNodes[1].firstChild.id;
-      dijit.byId(idDiv).reset();
-    }
     el.style.background="unset";
     el.style.opacity='unset';
     el.style.border="";
@@ -13148,10 +13148,6 @@ function hideShowDropDiv(mode,subTaskRawId){
     }
       activFuncHideShowDropDiv=false;
   }else {
-    if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
-      var idDiv=divAttach.childNodes[1].firstChild.id;
-      dijit.byId(idDiv).reset();
-    }
     activFuncHideShowDropDiv=false;
     el.style.background="unset";
     el.style.opacity='unset';
@@ -13160,11 +13156,11 @@ function hideShowDropDiv(mode,subTaskRawId){
       dojo.byId('dropFilesInfoDiv').style.opacity='0%';
       dojo.byId('dropFilesInfoDiv').style.display='none';
     }
-
   }
+
 }
 
-function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachmentDivClass,refresh){
+function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachmentDivClass){
   var dest=dojo.byId(destination),
         allTable=dest.querySelectorAll('.'+tableClass);
   
@@ -13174,8 +13170,9 @@ function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachm
       var divAttach=el.querySelector('.'+attachmentDivClass);
       if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
         var idDiv=divAttach.childNodes[1].firstChild.id;
+        console.log(dojo.byId(el.id));
         dijit.byId(idDiv).reset();
-        if(!refresh)dijit.byId(idDiv).addDropTarget(el,true);
+        dijit.byId(idDiv).addDropTarget(el,true);
       }
       
     });
