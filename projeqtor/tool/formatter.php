@@ -649,28 +649,27 @@ function activityStreamDisplayNote ($note,$origin,$width=false){
             $resultNote.=  '<div style="float:right;" ><a onClick="addNote(true,' . htmlEncode($note->id) . ');" title="' . i18n('replyToThisNote') . '" > '.formatSmallButton('Reply').'</a></div>';
           }
     }
-    $resultNote.= '</td></tr><tr><td>';
-    $resultNote.= '<div "style=float:right;"><a  id="imgCollapse_'.$note->id.'" style="float:right;'.((isNewGui() and $origin=='objectStream')?'margin-top:3px;':'').'" onclick="switchNoteStatus('.$note->id.');">'.formatSmallButton('Collapse'.(($isNoteClosed)?'Open':'Hide')).'</a></div>';
+    $resultNote.= '</td><td>';
+    $resultNote.= '<div "style=float:right;"><a  id="imgCollapse_'.$note->id.'" style="float:right;'.((isNewGui() and ($origin=='objectStream' or $width))?'margin-top:3px;':'').'" onclick="switchNoteStatus('.$note->id.');">'.formatSmallButton('Collapse'.(($isNoteClosed)?'Open':'Hide')).'</a></div>';
     $resultNote.= '</div></td></tr></table>';
     
     $maxWidth='100%';
-    if ($origin=='objectStream') {
-      $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px';
+    if ($origin=='objectStream' or $width) {
+      $rightWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-30).'px';
       if (isNewGui())   {
         if (Parameter::getUserParameter('paramScreen')=='top') {
           if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
             $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
-            $widthScree=($width)?$width:getSessionValue('screenWidth');
-            if ($menuLeftOpen) $innerNoteWidth=(intval((intval($widthScree)-250)*0.7)-50).'px'; // menu open
-            else $innerNoteWidth=(intval(intval($widthScree)*0.7)-50).'px';
+            if ($menuLeftOpen) $innerNoteWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
+            else $innerNoteWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
           } else { // trailing
-            $innerNoteWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
+            $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
           }
         } else { // 'left'
           if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
-            $innerNoteWidth=(intval(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))*0.7)-50).'px';
+            $innerNoteWidth=(intval(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))*0.7)-50).'px';
           } else { // trailing
-            $innerNoteWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
+            $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
           }
         }
         $maxWidth=(intval($innerNoteWidth)+50).'px';
@@ -681,13 +680,8 @@ function activityStreamDisplayNote ($note,$origin,$width=false){
           $rightWidth=($widthScree-30).'px';
           if (isNewGui()) $innerNoteWidth=($widthScree-80).'px';
     	}else if(RequestHandler::isCodeSet('destinationWidth') and RequestHandler::isCodeSet('xhrPostDestination') and RequestHandler::getValue('xhrPostDestination')=="activityStreamListDiv"){
-    	  if(!Parameter::getUserParameter('contentPaneTodayActStreamWidth')){
     	    $widthScree=($width)? $width :RequestHandler::getNumeric('destinationWidth');
     	    $rightWidth=(($widthScree-20)*0.25).'px';
-    	  }else{
-    	    $widthScree=($width)?$width:Parameter::getUserParameter('contentPaneTodayActStreamWidth');
-    	    $rightWidth=$widthScree.'px';
-    	  }
     	  
     	} else {
     		$rightWidth="100%";
@@ -729,7 +723,7 @@ function activityStreamDisplayNote ($note,$origin,$width=false){
 }
 
 
-function activityStreamDisplayHist ($hist,$origin){
+function activityStreamDisplayHist ($hist,$origin,$width=false){
   $text='';
   $reftText='';
   $inlineUserThumb=true;
@@ -891,8 +885,45 @@ function activityStreamDisplayHist ($hist,$origin){
   } else {
     return;
   }
+  
+  $maxWidth='100%';
+  if ($origin=='objectStream' or $width) {
+    $rightWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-30).'px';
+    if (isNewGui())   {
+      if (Parameter::getUserParameter('paramScreen')=='top') {
+        if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+          $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
+          if ($menuLeftOpen) $innerNoteWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
+          else $innerNoteWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
+        } else { // trailing
+          $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
+        }
+      } else { // 'left'
+        if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+          $innerNoteWidth=(intval(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))*0.7)-50).'px';
+        } else { // trailing
+          $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
+        }
+      }
+      $maxWidth=(intval($innerNoteWidth)+50).'px';
+    }
+  } else {
+    if (RequestHandler::isCodeSet('destinationWidth') and RequestHandler::isCodeSet('xhrPostDestination') and RequestHandler::getValue('xhrPostDestination')!="activityStreamListDiv") {
+      $widthScree=($width)? $width :RequestHandler::getNumeric('destinationWidth');
+      $rightWidth=($widthScree-30).'px';
+      if (isNewGui()) $innerNoteWidth=($widthScree-80).'px';
+    }else if(RequestHandler::isCodeSet('destinationWidth') and RequestHandler::isCodeSet('xhrPostDestination') and RequestHandler::getValue('xhrPostDestination')=="activityStreamListDiv"){
+      $widthScree=($width)? $width :RequestHandler::getNumeric('destinationWidth');
+      $rightWidth=(($widthScree-20)*0.25).'px';
+       
+    } else {
+      $rightWidth="100%";
+    }
+    $maxWidth=$rightWidth;
+  }
+  
   $result='';
-  if($origin=='objectStream'){
+  if($origin=='objectStream' or $width){
     $result.= '<tr style="height:100%;">';
     $result.= '  <td colspan="6" class="noteData" style="width:100%;border-top:0;font-size:100% !important;">';
     $result.= '    <div style="float:left;">';
@@ -927,10 +958,10 @@ function activityStreamDisplayHist ($hist,$origin){
     $result.= '      </div>';
     }
     $result.= '    </div>';    
-    $result.= '    <div style="float:left;width:90%;'.((isNewGui())?'':'margin-top:6px').';display:inline-block;margin-left:5px;margin-bottom:6px;">';
-    $result.= '      <div style="margin-top:2px;margin-left:10px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
-    $result.= '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
-    $result.= '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
+    $result.= '    <div style="padding-left:4px;max-width:'.$maxWidth.',">';
+    $result.= '      <div style="margin-top:2px;margin-left:37px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.'</div>';
+    $result.= '      <div style="margin-top:3px;margin-left:37px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
+    $result.= '      <div style="margin-top:8px;margin-left:37px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
     $result.='     <div>';
     if (Parameter::getGlobalParameter('logLevel')>=3) {
       $result.= '      <div style="position:absolute;right:10px;top:6px;color:grey">';
@@ -969,7 +1000,8 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
     $obj= new $objectClass($objectId);
     if($obj->idle==1 and !$activityStreamShowClosed)return;
   }
-  if($mail->idMailable!='')$elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute;top:9px">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
+  if($mail->idMailable!='')$elementName = '<span class="streamLink" style="margin-left:22px;position:relative;"  '.$gotoAndStyle.'>
+          <div style="width:16px;position:absolute;top:0px;">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
     $tmpName=SqlList::getNameFromId($objectClass, $objectId);
     if ($tmpName!=$objectId) $elementName.='&nbsp;|&nbsp;'.$tmpName;
@@ -982,28 +1014,44 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
   if ( securityCheckDisplayMenu(null, get_class($mail)) and securityGetAccessRightYesNo('menu'.get_class($mail), 'read', $mail)=="YES") {
     $showMail='<div class="roundedButtonSmall" style="width:20px;height:16px;display:inline-block;margin-left:20px;" title="'.i18n('showMail',array($mail->id)).'"><div class="iconGoto" style="z-index:500;width:16px;height:10px;display:inline-block;padding-right:5px;" onClick="gotoElement(\''.htmlEncode(get_class($mail)).'\',\''.htmlEncode($mail->id).'\')" title="'.i18n('showMail',array($mail->id)).'" style="widht:16px;height:16px;"></div></div>';
   }
-  $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px';
-  if (isNewGui())   {
-    if (Parameter::getUserParameter('paramScreen')=='top') {
-      if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
-        $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
-        $width=($width)?$width:getSessionValue('screenWidth');
-        if ($menuLeftOpen) $innerMailWidth=(intval((intval($width)-250)*0.7)-50).'px'; // menu open
-        else $innerMailWidth=(intval(intval($width)*0.7)-50).'px';
-      } else { // trailing
-        $innerMailWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
+  $maxWidth='100%';
+  if ($origin=='objectStream' or $width) {
+    $rightWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-30).'px';
+    if (isNewGui())   {
+      if (Parameter::getUserParameter('paramScreen')=='top') {
+        if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+          $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
+          if ($menuLeftOpen) $innerNoteWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
+          else $innerNoteWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
+        } else { // trailing
+          $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
+        }
+      } else { // 'left'
+        if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+          $innerNoteWidth=(intval(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))*0.7)-50).'px';
+        } else { // trailing
+          $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
+        }
       }
-    } else { // 'left'
-      if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
-        $innerMailWidth=(intval(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))*0.7)-50).'px';
-      } else { // trailing
-        $innerMailWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-40).'px';
-      }
+      $maxWidth=(intval($innerNoteWidth)+50).'px';
     }
-    $maxWidth=(intval($innerMailWidth)+50).'px';
+  } else {
+    if (RequestHandler::isCodeSet('destinationWidth') and RequestHandler::isCodeSet('xhrPostDestination') and RequestHandler::getValue('xhrPostDestination')!="activityStreamListDiv") {
+      $widthScree=($width)? $width :RequestHandler::getNumeric('destinationWidth');
+      $rightWidth=($widthScree-30).'px';
+      if (isNewGui()) $innerNoteWidth=($widthScree-80).'px';
+    }else if(RequestHandler::isCodeSet('destinationWidth') and RequestHandler::isCodeSet('xhrPostDestination') and RequestHandler::getValue('xhrPostDestination')=="activityStreamListDiv"){
+        $widthScree=($width)? $width :RequestHandler::getNumeric('destinationWidth');
+        $rightWidth=(($widthScree-20)*0.25).'px';
+
+    } else {
+      $rightWidth="100%";
+    }
+    $maxWidth=$rightWidth;
   }
+  
   $result='';
-  if($origin=='activityStream'){
+  if($origin=='activityStream' or $width){
     $result.= '<tr style="height:100%;">';
     $result.= '  <td colspan="6" class="noteData" style="border-left:unset;width:100%;border-top:0;font-size:100% !important;position:relative;">';
     $result.= '    <div style="float:left;width:22px;margin-left:6px;margin-top:6px;margin-bottom:6px">';
@@ -1016,10 +1064,11 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
       $result.= '      </div>';
     }
     $result.= '    </div>';
-    $result.= '    <div style="float:left;width:90%;'.((isNewGui())?'':'margin-top:6px').';display:inline-block;margin-left:5px;margin-bottom:6px;">';
-    $result.= '      <div style="margin-top:2px;margin-left:10px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.$showMail.'</div>';
-    $result.= '      <div style="margin-top:3px;margin-left:10px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
-    $result.= '      <div style="margin-top:8px;margin-left:10px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
+    $result.= '   <div class="activityStreamMailContainer" style="padding-left:4px;max-width:'.$maxWidth.'">';
+    $result.= '    <div style="padding-left:4px;max-width:'.$maxWidth.'">';
+    $result.= '      <div style="margin-top:2px;margin-left:37px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.$showMail.'</div>';
+    $result.= '      <div style="margin-top:2px;margin-left:37px;">'.formatDateThumb($date,null,"left",16).'</div>';
+    $result.= '      <div style="margin-top:2px;margin-left:37px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
     $result.='     <div>';
     $result.= '    <div  class="activityStreamMailTitle" style="width:'.((isset($innerMailWidth))?$innerMailWidth:'90%').';margin-top:16px;display:block;margin-left:5px;margin-bottom:6px;">';
     $result.=       htmlEncode($mail->mailTitle);
@@ -1029,6 +1078,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
       $result.=        'mail#'.$mail->id;
       $result.= '      </div>';
     }
+    $result.= '    </div>';
     $result.= '  </td>';
     $result.= '</tr>';
   }else{
@@ -1047,13 +1097,13 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
     }
     $result.= '    </div>';
     $result.= '    <div style="margin-left:0px;margin-top:6px;">';
-    $result.= '      <div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp;'.$text.$showMail.'</div>';
+    $result.= '      '.$userNameFormatted.'&nbsp;'.$text.$showMail;
     $result.= '      <div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($date,null,"left",16).'</div>';
     $result.= '      <div style="margin-top:8px;margin-bottom:5px">'.htmlFormatDateTime($date,false).'</div>';
     $result.='     <div>';
     $result.= '    <div class="activityStreamMailTitle" style="width:'.((isset($innerMailWidth))?$innerMailWidth:'90%').';margin-top:16px;display:block;margin-left:5px;margin-bottom:6px;">';
     $result.=       htmlEncode($mail->mailTitle);
-    $result.='     <div>';
+    $result.='     </div>';
     $result.= '  </td>';
     $result.= '</tr>';
   }

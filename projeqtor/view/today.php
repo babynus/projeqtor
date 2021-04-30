@@ -1225,6 +1225,7 @@ if($asTodayProject->id==''){
       <script type="dojo/connect" event="resize" args="evt">
            saveContentPaneResizing("contentPaneTodayActStreamWidth", dojo.byId("todayActStream").offsetWidth, true);
           <?php if($asTodayProject->id==''){?> saveContentPaneResizing("contentPaneTodayActStreamHeight", dojo.byId("todayActStream").offsetHeight, true);<?php }?>
+          loadContent("activityStreamList.php", "todayActStream",null,null,null,null,null,null,true);  
       </script>
       </div>
     </div> 
