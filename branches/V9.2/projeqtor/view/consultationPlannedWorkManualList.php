@@ -260,12 +260,12 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
           <?php if(!$displayNothing){
                   if(isset($idProject)){
                     if(trim($idProject)==''){
-                      PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner,true);
+                      PlannedWorkManual::drawActivityTable(true,null,$yearSpinner.$monthSpinner,true);
                     }else{
-                      PlannedWorkManual::drawActivityTable($idProject,$yearSpinner.$monthSpinner,true);
+                      PlannedWorkManual::drawActivityTable(true,$idProject,$yearSpinner.$monthSpinner,true);
                     }
                   }else{
-                    PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner,true);
+                    PlannedWorkManual::drawActivityTable(true,null,$yearSpinner.$monthSpinner,true);
                   }
                } ?>
           </div>

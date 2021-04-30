@@ -234,7 +234,7 @@ class PlannedWorkManual extends GeneralWork {
     if (!$manageCapacity) return 'LIMIT';
     else return $manageCapacity;
   }
-  public static function drawLine($scope, $idResource, $year, $month, $refType, $refId, $readonly=false,$done) {
+  public static function drawLine($scope, $idResource, $year, $month, $refType, $refId, $readonly=false) {
     SqlElement::$_cachedQuery['WorkPeriod']=array();
     // draw line for given resource and month
     // if $idAssignment is not null, we are on update of existing assignment
@@ -273,10 +273,10 @@ class PlannedWorkManual extends GeneralWork {
     $resObj=new ResourceAll($idResource);
     $manageCapacity=self::getManageCapacity($resObj); // Take into account capacity of resource
     foreach ($lstPwm as $pwm) {
-      if(!$done){
-        $objToTest= new $pwm->refType ($pwm->refId);
-        if($objToTest->done)continue;
-      }
+//       if(!$done){
+//         $objToTest= new $pwm->refType ($pwm->refId);
+//         if($objToTest->done)continue;
+//       }
         if (!isset($exist[$pwm->workDate])) $exist[$pwm->workDate]=array();
         $exist[$pwm->workDate][$pwm->period]=array('refType'=>$pwm->refType,'refId'=>$pwm->refId,'mode'=>$pwm->idInterventionMode);
     }
@@ -376,7 +376,7 @@ class PlannedWorkManual extends GeneralWork {
    * @param unknown $resourceList
    * @param unknown $monthsList
    */
-  public static function drawTable($scope, $resourceList, $monthList, $refObj, $readonly=false,$done) {
+  public static function drawTable($scope, $resourceList, $monthList, $refObj, $readonly=false) {
     if ($scope=='assignment') {
       if (is_array($resourceList) and count($resourceList)>1) { 
         echo "ERROR - Only one resource for assignment mode";
@@ -441,7 +441,7 @@ class PlannedWorkManual extends GeneralWork {
       foreach ($resourceListName as $idRes=>$nameRes) {
         echo '<tr style="height:'.$size.'px">';
         echo '<td class="noteHeader" style="width:'.$nameWidth.'px;"><div style="white-space:nowrap;max-width:'.$nameWidth.'px;max-height:'.$size.'px;overflow:hidden;">'.$nameRes.'</div></td>';
-        self::drawLine($scope, $idRes, $year, $month, null, null, $readonly,$done);
+        self::drawLine($scope, $idRes, $year, $month, null, null, $readonly);
         echo '<tr>';
       }
       echo '</table>';
