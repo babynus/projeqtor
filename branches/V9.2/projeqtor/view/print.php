@@ -143,7 +143,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
        $obj=null;
        if ($objectClass) $obj=new $objectClass($id);
        $tmp=new TemplateReport($idTemplate);
-       $tmpName=$tmp->getOutputFileName($obj);
+       $tmpName=(method_exists($tmp, getOutputFileName))?$tmp->getOutputFileName($obj):null;
        if ($tmpName) $name=$tmpName;
      }
      header("Content-Type: " . $contentType . "; name=\"" . $name . "\""); 
