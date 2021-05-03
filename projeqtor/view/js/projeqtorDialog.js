@@ -1076,7 +1076,7 @@ function saveDetailItem() {
     frames['comboDetailFrame'].CKEDITOR.instances[name].updateElement();
   }
   // validate form Data
-  if (formVar.validate()) {
+  if (1) { //if (formVar.validate()) {
     showWait();
     frames['comboDetailFrame'].dojo
         .xhrPost({
