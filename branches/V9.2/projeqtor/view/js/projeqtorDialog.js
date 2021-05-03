@@ -1608,7 +1608,7 @@ function saveAttachment(direct,idName) {
   });
   showWait();
   dijit.byId('dialogAttachment').hide();
-  cancelDupplicate=false;
+  setTimeout("cancelDupplicate=false;",1000);
   return true;
 }
 
