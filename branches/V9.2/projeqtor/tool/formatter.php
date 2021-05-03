@@ -893,25 +893,25 @@ function activityStreamDisplayHist ($hist,$origin,$width=false){
       if (Parameter::getUserParameter('paramScreen')=='top') {
         if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
           $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
-          if ($menuLeftOpen) $innerNoteWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
-          else $innerNoteWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
+          if ($menuLeftOpen) $innerMailHist=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
+          else $innerMailHist=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
         } else { // trailing
-          $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
+          $innerMailHist=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
         }
       } else { // 'left'
         if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
-          $innerNoteWidth=(intval(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))*0.7)-50).'px';
+          $innerMailHist=(intval(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))*0.7)-50).'px';
         } else { // trailing
-          $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
+          $innerMailHist=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
         }
       }
-      $maxWidth=(intval($innerNoteWidth)+50).'px';
+      $maxWidth=(intval($innerMailHist)+50).'px';
     }
   } else {
     if (RequestHandler::isCodeSet('destinationWidth') and RequestHandler::isCodeSet('xhrPostDestination') and RequestHandler::getValue('xhrPostDestination')!="activityStreamListDiv") {
       $widthScree=($width)? $width :RequestHandler::getNumeric('destinationWidth');
       $rightWidth=($widthScree-30).'px';
-      if (isNewGui()) $innerNoteWidth=($widthScree-80).'px';
+      if (isNewGui()) $innerMailHist=($widthScree-80).'px';
     }else if(RequestHandler::isCodeSet('destinationWidth') and RequestHandler::isCodeSet('xhrPostDestination') and RequestHandler::getValue('xhrPostDestination')=="activityStreamListDiv"){
       $widthScree=($width)? $width :RequestHandler::getNumeric('destinationWidth');
       $rightWidth=(($widthScree-20)*0.25).'px';
@@ -1021,25 +1021,25 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
       if (Parameter::getUserParameter('paramScreen')=='top') {
         if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
           $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
-          if ($menuLeftOpen) $innerNoteWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
-          else $innerNoteWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
+          if ($menuLeftOpen) $innerMailWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
+          else $innerMailWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
         } else { // trailing
-          $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
+          $innerMailWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
         }
       } else { // 'left'
         if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
-          $innerNoteWidth=(intval(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))*0.7)-50).'px';
+          $innerMailWidth=(intval(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))*0.7)-50).'px';
         } else { // trailing
-          $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
+          $innerMailWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
         }
       }
-      $maxWidth=(intval($innerNoteWidth)+50).'px';
+      $maxWidth=(intval($innerMailWidth)+50).'px';
     }
   } else {
     if (RequestHandler::isCodeSet('destinationWidth') and RequestHandler::isCodeSet('xhrPostDestination') and RequestHandler::getValue('xhrPostDestination')!="activityStreamListDiv") {
       $widthScree=($width)? $width :RequestHandler::getNumeric('destinationWidth');
       $rightWidth=($widthScree-30).'px';
-      if (isNewGui()) $innerNoteWidth=($widthScree-80).'px';
+      if (isNewGui()) $innerMailWidth=($widthScree-80).'px';
     }else if(RequestHandler::isCodeSet('destinationWidth') and RequestHandler::isCodeSet('xhrPostDestination') and RequestHandler::getValue('xhrPostDestination')=="activityStreamListDiv"){
         $widthScree=($width)? $width :RequestHandler::getNumeric('destinationWidth');
         $rightWidth=(($widthScree-20)*0.25).'px';
@@ -1065,12 +1065,12 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
     }
     $result.= '    </div>';
     $result.= '   <div class="activityStreamMailContainer" style="padding-left:4px;max-width:'.$maxWidth.'">';
-    $result.= '    <div style="padding-left:4px;max-width:'.$maxWidth.'">';
+    $result.= '    <div style="max-width:'.$maxWidth.'">';
     $result.= '      <div style="margin-top:2px;margin-left:37px;">'.$reftText.''.$userNameFormatted.'&nbsp;'.$text.$showMail.'</div>';
     $result.= '      <div style="margin-top:2px;margin-left:37px;">'.formatDateThumb($date,null,"left",16).'</div>';
     $result.= '      <div style="margin-top:2px;margin-left:37px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
     $result.='     <div>';
-    $result.= '    <div  class="activityStreamMailTitle" style="width:'.((isset($innerMailWidth))?$innerMailWidth:'90%').';margin-top:16px;display:block;margin-left:5px;margin-bottom:6px;">';
+    $result.= '    <div  class="activityStreamMailTitle" style="width:'.((isset($maxWidth))?$innerMailWidth:'90%').';margin-top:16px;display:block;margin-left:36px;margin-bottom:6px;">';
     $result.=       htmlEncode($mail->mailTitle);
     $result.='     <div>';
     if (Parameter::getGlobalParameter('logLevel')>=3) {
