@@ -444,7 +444,8 @@ if (Sql::$lastQueryNbRows == 0) {
     $line["elementary"]='1';
     if (!isset($line["id"])) $line["id"]=$line["idpe"];
 		if ($line['reftype']=='Meeting' and $line['topreftype']=='PeriodicMeeting') {
-		  // Do not change topRefType and topRefId;
+		  $line["topreftype"]=($showProject)?'Project':'Resource';
+		  $line["toprefid"]=($showProject)?$idProject:$idResource;
 		} else {
 		  if ($line['reftype']=='PeriodicMeeting') {
 		    $line["elementary"]='0'; // Will contain meetings
