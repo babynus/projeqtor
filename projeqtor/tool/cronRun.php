@@ -29,4 +29,5 @@ Security::checkDisplayMenuForUser('Admin');
 function cronAbort() {Cron::abort();}
 register_shutdown_function('cronAbort');
 //Cron::init();
+Cron::$cronRequestedStop=false;
 Cron::run();
