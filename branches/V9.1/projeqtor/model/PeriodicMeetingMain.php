@@ -615,21 +615,21 @@ class PeriodicMeetingMain extends SqlElement {
     $meeting->isPeriodic=1;
     $meeting->periodicOccurence=$nb;
     $meeting->meetingDate=$currentDate;
-    if ($old->meetingStartTime!=$this->meetingStartTime) $meeting->meetingStartTime=$this->meetingStartTime;
-    if ($old->meetingEndTime!=$this->meetingEndTime) $meeting->meetingEndTime=$this->meetingEndTime;
+    if ($old->meetingStartTime!=$this->meetingStartTime or $isNew) $meeting->meetingStartTime=$this->meetingStartTime;
+    if ($old->meetingEndTime!=$this->meetingEndTime or $isNew) $meeting->meetingEndTime=$this->meetingEndTime;
     $meeting->name=$this->name . " #".$nb;
-    if ($old->location!=$this->location) $meeting->location=$this->location;
-    if ($old->attendees!=$this->attendees) $meeting->attendees=$this->attendees;
+    if ($old->location!=$this->location or $isNew) $meeting->location=$this->location;
+    if ($old->attendees!=$this->attendees or $isNew) $meeting->attendees=$this->attendees;
     $meeting->idUser=$this->idUser;
-    if ($old->description!=$this->description) $meeting->description=$this->description;
+    if ($old->description!=$this->description or $isNew) $meeting->description=$this->description;
     $meeting->idActivity=null;
     if (! $meeting->idStatus) {
       $table=SqlList::getList('Status');
       reset($table);
       $meeting->idStatus=key($table);
     }
-    if ($old->location!=$this->idResource) $meeting->idResource=$this->idResource;
-    if ($old->MeetingPlanningElement->priority!=$this->MeetingPlanningElement->priority) 
+    if ($old->location!=$this->idResource or $isNew) $meeting->idResource=$this->idResource;
+    if ($old->MeetingPlanningElement->priority!=$this->MeetingPlanningElement->priority or $isNew) 
         $meeting->MeetingPlanningElement->priority=$this->MeetingPlanningElement->priority;
     $meeting->MeetingPlanningElement->color=$this->MeetingPlanningElement->color;
     if (isset($meeting->_moveToAfterCreate)) unset($meeting->_moveToAfterCreate);
