@@ -1630,7 +1630,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             }
             vIsOnCriticalPath=vTaskList[i].getIsOnCriticalPath();
             vRightTableTempMeeting = '<div id=' + vBardivName + '  class="barDivTask" style="'+((vTaskList[i].getVisible()==1 && vTaskList[i].getClass()=='Meeting' )?'display:block;':'');
-            if (! vTaskList[i].getGlobal() )
+            if (! vTaskList[i].getGlobal() || !dojo.byId('resourcePlanning'))
               var vBorderBottomColor=vTaskList[i].getColor();
               var vBorderBottomSize=2;
               if (vTaskList[i].getTaskStatusColor()!=vTaskList[i].getColor() && vTaskList[i].getTaskStatusColor()!='50BB50' && vTaskList[i].getTaskStatusColor()!='AEC5AE') {
@@ -1641,8 +1641,8 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vRightTableTempMeeting += ' left:' + vBarLeft + 'px; height:11px; '
 	            + ' width:' + vBarWidth + 'px" '
 	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" ';
-	            if(! vTaskList[i].getGlobal())vRightTableTempMeeting += 'onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"';
-	            if(! vTaskList[i].getGlobal())vRightTableTempMeeting +='onmouseenter ="if(!isResizingGanttBar)handleResizeGantBAr('+vTaskList[i].getElementIdRef()+','+ Date.parse(vMinDate)+','+vDayWidth+',\''+vDateDisplayFormat+'\');"';
+	            if(! vTaskList[i].getGlobal() || !dojo.byId('resourcePlanning'))vRightTableTempMeeting += 'onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"';
+	            if(! vTaskList[i].getGlobal() || !dojo.byId('resourcePlanning'))vRightTableTempMeeting +='onmouseenter ="if(!isResizingGanttBar)handleResizeGantBAr('+vTaskList[i].getElementIdRef()+','+ Date.parse(vMinDate)+','+vDayWidth+',\''+vDateDisplayFormat+'\');"';
 	            vRightTableTempMeeting +='>'; 
 
             vRightTableTempMeeting += ' <div class="ganttTaskrowBarComplete"  '
@@ -1714,26 +1714,28 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               }
 	          }
   	        vRightTableTempMeeting += '</div>' ;
-            var idPm=vTaskList[i].getIdPlanningMode();
-            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13' || idPm=='19' || idPm=='21') && vTaskList[i].getIconClass()!='Fixed' && !vTaskList[i].getGroup() && !vTaskList[i].getGlobal()){
-              // handle resizer start=======================
-              leftposLeftResizer=vBarLeft-22;
-              leftposdivDate=vBarLeft-43;
-              vRightTableTempMeeting +='<div class="resizerStart" id="taskbar_'+vID+'ResizerStart" style="display:none;left:'+leftposLeftResizer+'px;"'
-                                     + 'onmouseenter ="showResizerGanttBar ('+vID+',\'start\');" onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"></div>';
-              vRightTableTempMeeting +='<div class="divDateGantBarResizeleft" id="divStartDateResize_'+vID+'" style="display:none;left:'+leftposdivDate+'px;" >'+JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat)+'</div>';
-              vRightTableTempMeeting +='<input class="inputDateGantBarResize" id="inputDateGantBarResizeleft_'+vID+'" name="inputDateGantBarResizeleft_'+vID+'" type="hidden" value="'+vTaskStart+'" />';
-              //===========================
-            }
-            if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8'  || idPm=='4'  || idPm=='12') && vTaskList[i].getIconClass()!='Fixed' && !vTaskList[i].getGroup() && !vTaskList[i].getGlobal()){
-              // handle resizer end=======================
-              leftposRightResizer=vBarLeft+vBarWidth-11;
-              vRightTableTempMeeting +='<div class="resizerEnd" id="taskbar_'+vID+'ResizerEnd" style="display:none;left:'+leftposRightResizer+'px;" '
-                                     +'onmouseenter ="showResizerGanttBar ('+vID+',\'end\');"  onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"></div>';
-              vRightTableTempMeeting +='<div class="divDateGantBarResizeRight" id="divEndDateResize_'+vID+'" style="display:none;left:'+leftposRightResizer+'px;">'+JSGantt.formatDateStr(vTaskEnd,vDateDisplayFormat)+'</div>';
-              vRightTableTempMeeting +='<input class="inputDateGantBarResize" id="inputDateGantBarResizeRight_'+vID+'" name="inputDateGantBarResizeRight_'+vID+'" type="hidden" value="'+vTaskEnd+'" />';
-              //===========================
-            }
+  	        if(!dojo.byId('resourcePlanning')){
+              var idPm=vTaskList[i].getIdPlanningMode();
+              if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13' || idPm=='19' || idPm=='21') && vTaskList[i].getIconClass()!='Fixed' && !vTaskList[i].getGroup() && !vTaskList[i].getGlobal()){
+                // handle resizer start=======================
+                leftposLeftResizer=vBarLeft-22;
+                leftposdivDate=vBarLeft-43;
+                vRightTableTempMeeting +='<div class="resizerStart" id="taskbar_'+vID+'ResizerStart" style="display:none;left:'+leftposLeftResizer+'px;"'
+                                       + 'onmouseenter ="showResizerGanttBar ('+vID+',\'start\');" onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"></div>';
+                vRightTableTempMeeting +='<div class="divDateGantBarResizeleft" id="divStartDateResize_'+vID+'" style="display:none;left:'+leftposdivDate+'px;" >'+JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat)+'</div>';
+                vRightTableTempMeeting +='<input class="inputDateGantBarResize" id="inputDateGantBarResizeleft_'+vID+'" name="inputDateGantBarResizeleft_'+vID+'" type="hidden" value="'+vTaskStart+'" />';
+                //===========================
+              }
+              if((idPm=='2'  || idPm=='20' ||idPm=='3' || idPm=='7' || idPm=='10'|| idPm=='11' || idPm=='12' || idPm=='13'  || idPm=='8'  || idPm=='4'  || idPm=='12') && vTaskList[i].getIconClass()!='Fixed' && !vTaskList[i].getGroup() && !vTaskList[i].getGlobal()){
+                // handle resizer end=======================
+                leftposRightResizer=vBarLeft+vBarWidth-11;
+                vRightTableTempMeeting +='<div class="resizerEnd" id="taskbar_'+vID+'ResizerEnd" style="display:none;left:'+leftposRightResizer+'px;" '
+                                       +'onmouseenter ="showResizerGanttBar ('+vID+',\'end\');"  onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"></div>';
+                vRightTableTempMeeting +='<div class="divDateGantBarResizeRight" id="divEndDateResize_'+vID+'" style="display:none;left:'+leftposRightResizer+'px;">'+JSGantt.formatDateStr(vTaskEnd,vDateDisplayFormat)+'</div>';
+                vRightTableTempMeeting +='<input class="inputDateGantBarResize" id="inputDateGantBarResizeRight_'+vID+'" name="inputDateGantBarResizeRight_'+vID+'" type="hidden" value="'+vTaskEnd+'" />';
+                //===========================
+              }
+  	        }
             if(vTaskList[i].getClass()=='Meeting'){
               $idPrarentMeeting=vTaskList[i].getParent();
               var tagParentMeeting='<tag id="meeting_'+$idPrarentMeeting+'" ></tag>';
