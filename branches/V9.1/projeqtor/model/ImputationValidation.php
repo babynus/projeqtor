@@ -224,7 +224,7 @@ class ImputationValidation{
   			  if(isOpenDay($firstWeekDay, $idCalendar)){
   			    $expected += round($res->getCapacityPeriod($firstWeekDay),2);
   			  }
-    		  $weekDayArray[$week->idResource][$week->periodValue][$firstWeekDay]=round($res->getCapacityPeriod($firstWeekDay),2);
+    		  $weekDayArray[$week->idResource][$week->periodValue][$firstWeekDay]=(isOpenDay($firstWeekDay, $idCalendar))?round($res->getCapacityPeriod($firstWeekDay),2):0;
     	      $firstWeekDay=addDaysToDate($firstWeekDay, 1);
   			}
   			$work = new Work();
