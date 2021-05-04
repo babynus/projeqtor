@@ -299,15 +299,15 @@ class Cron {
   	  //unlink(self::$runningFile); // On Abort, preserve Running Flag so that Cron can restart
     }
     // TRy and alert Admin (send mail)
-    $dest=trim(Parameter::getGlobalParameter('paramAdminMail'));
-    $instance=Parameter::getGlobalParameter('paramDbDisplayName');
-    $title="[$instance] Cron abnormally stopped";
-    $now=date('Y-m-d H:i:s');
-    $msg="Cron was stopped for an undefined reason.<br/>Please check log file at $now for more information.";
-    $smtp=Parameter::getGlobalParameter('paramMailSmtpServer');
-    if ($smtp and $dest) {
-      $result=sendMail($dest,$title,$msg);
-    }
+//     $dest=trim(Parameter::getGlobalParameter('paramAdminMail'));
+//     $instance=Parameter::getGlobalParameter('paramDbDisplayName');
+//     $title="[$instance] Cron abnormally stopped";
+//     $now=date('Y-m-d H:i:s');
+//     $msg="Cron was stopped for an undefined reason.<br/>Please check log file at $now for more information.";
+//     $smtp=Parameter::getGlobalParameter('paramMailSmtpServer');
+//     if ($smtp and $dest) {
+//       $result=sendMail($dest,$title,$msg);
+//     }
     
     //$errorFileName=self::$errorFile.'_'.date('Ymd_His');
     //$mode=(file_exists($errorFileName))?'w':'x';
