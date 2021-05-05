@@ -383,6 +383,7 @@ class PlannedWork extends GeneralWork {
       foreach ($precList as $precId=>$precValArray) { // $precValArray = array(dependency delay,dependency type)
         $precVal=$precValArray['delay'];
         $precTyp=$precValArray['type'];
+        if (!isset($fullListPlan[$precId])) continue;
       	$prec=$fullListPlan[$precId];
         $precEnd=$prec->plannedEndDate;
         $precStart=$prec->plannedStartDate;
