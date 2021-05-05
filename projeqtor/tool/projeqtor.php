@@ -1956,7 +1956,6 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
   } else {
     $accessRightRead=securityGetAccessRight($obj->getMenuClass(), 'read');
   }
-  debugLog("   => getAccesRestrictionClause($objectClass) accessRightRead=$accessRightRead");
   if (!property_exists($objectClass, 'idProject') and $objectClass!='Notification') {
     if ($accessRightRead=='OWN' and property_exists($obj, "idUser")) {
       return $tableAlias."idUser=$user->id";

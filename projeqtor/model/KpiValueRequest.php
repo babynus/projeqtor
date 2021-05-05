@@ -77,7 +77,6 @@ class KpiValueRequest extends SqlElement {
     $cpt=$kvr->countGroupedSqlElementsFromCriteria(null, array('refType','refId','requestDate'),$crit);
     if (count($cpt)>0) {
       foreach($cpt as $key=>$cptVal) {
-        debugLog("   $key => $cptVal");
         $split=explode('|',$key);
         $refType=$split[0];
         $refId=$split[1];
