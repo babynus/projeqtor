@@ -272,8 +272,6 @@ foreach ($resources as $idR=>$nameR) {
 	          $style="";
 	          $ital=false;
 	          echo '<td class="reportTableData" ' . $style . ' valign="top">';
-	          //debugLog($day);
-	          //debugLog($result[$idR][$idP]);
 	          if (array_key_exists($day,$result[$idR][$idP])) {
 	            echo ($ital)?'<i>':'';
 	            echo Work::displayWork($result[$idR][$idP][$day]);

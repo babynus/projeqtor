@@ -188,7 +188,6 @@ function archiveHistory(){
 }
 function kpiCalculate() {
   $time=date("Y-m-d H:00:00");
-  debugLog("kpiCalculate() for $time");
   KpiValueRequest::triggerCalculation($time);
 }
 
