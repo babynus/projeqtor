@@ -217,3 +217,77 @@ CREATE INDEX `kpivaluerequestReference` ON `${prefix}kpivalue` (`refType`, `refI
 
 INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
 ('01 * * * *', '../tool/cronExecutionStandard.php', 0, 'kpiCalculate');
+
+CREATE TABLE `${prefix}pokercomplexity` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `name` varchar(100) DEFAULT NULL,
+  `value` int(2) unsigned DEFAULT NULL COMMENT '2',
+  `work` decimal(9,5) unsigned DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT 0 COMMENT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `${prefix}pokersession` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `name` varchar(100) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `idResource` int(2) unsigned DEFAULT NULL COMMENT '2',
+  `handled` int(1) unsigned DEFAULT 0 COMMENT '1',
+  `handledDate` datetime DEFAULT NULL,
+  `done` int(1) unsigned DEFAULT 0 COMMENT '1',
+  `doneDate` datetime DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT 0 COMMENT '1',
+  `idleDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `${prefix}pokerresource` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idPokerSession` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idResource` int(12) unsigned DEFAULT NULL COMMENT '12',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `${prefix}pokeritem` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `name` varchar(100) DEFAULT NULL,
+  `refType` varchar(100) DEFAULT NULL,
+  `refId` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idPokerSession` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `value` int(2) unsigned DEFAULT NULL COMMENT '2',
+  `work` decimal(9,5) unsigned DEFAULT NULL,
+  `comment` varchar(4000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `${prefix}pokervote` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idPokerItem` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idResource` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idPokerSession` int(12) unsigned DEFAULT NULL COMMENT '12',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
+(259, 'menuPokerSessionDefinition', 7, 'object', 155, Null, 0, 'Work '),
+(260, 'menuPokerSession', 7, 'object', 160, Null, 0, 'Work ');
+
+INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
+(339,'menuPokerSessionDefinition',3,259,115,0),
+(340,'menuPokerSession',3,260,120,0);
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,259,1),
+(2,259,1),
+(3,259,1),
+(1,260,1),
+(2,260,1),
+(3,260,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,259,8),
+(2,259,8),
+(3,259,8),
+(1,260,8),
+(2,260,8),
+(3,260,8);
