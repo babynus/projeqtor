@@ -1153,6 +1153,12 @@ if (beforeVersion($currVersion,"V9.2.0") and $currVersion!='V0.0.0') {
   	Parameter::storeGlobalParameter('cronCheckEmailsPassword ', encryptPwd($pwdCronEmail));
   }
   Sql::beginTransaction();
+  $inputMailBox = new InputMailbox();
+  $listMailBox = $inputMailBox->getSqlElementsFromCriteria(null, null, "1=1");
+  foreach ($listMailBox as $mailBox){
+    $mailBox->pwdImap = encryptPwd($mailBox->pwdImap);
+    $mailBox->save();
+  }
   traceLog("   => ".count($workCommandDoneList)." to update");
   if (count($workCommandDoneList)<100) {
     projeqtor_set_time_limit(1500);
