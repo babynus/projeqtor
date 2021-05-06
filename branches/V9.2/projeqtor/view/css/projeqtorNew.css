@@ -279,6 +279,23 @@ label, .ProjeQtOrNewGui label,
 	border:1px solid var(--color-light);
 }
 
+.ProjeQtOrNewGui .verticalLayoutClass {
+	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  	filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  	background-color: transparent;
+}
+
+.ProjeQtOrNewGui .verticalLayoutClass {
+	-webkit-filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  	filter : hue-rotate(var(--image-hue-rotate-selected)) saturate(var(--image-saturate-selected)) brightness(var(--image-brightness-selected));
+  	background-color: transparent;
+}
+
+.ProjeQtOrNewGui .selectedLayoutPos {
+  	-webkit-filter : invert(20%) ;
+  	filter: invert(20%) hue-rotate(180deg);
+    background: var(--color-background) !important;
+}
 /* === MENU BUTTONS AND ITEMS CSS ===================================================== MENU ===*/
 
 .dijitComboBoxMenu {

@@ -177,8 +177,10 @@ if ( array_key_exists('listShowNullAssignment',$_REQUEST) ) {
 }
 
  if (! $showNullAssignment) {
+   $classPeriodic= get_class(new PeriodicMeeting());
    $queryWhere.= ($queryWhere=='')?'':' and ';
-   $queryWhere.=' ass.plannedWork>0 ';
+   $queryWhere.=' (ass.plannedWork>0 or (ass.refType="'.$classPeriodic.'" and ass.assignedWork>0))';
+   //$queryWhere.=' ass.plannedWork>0';
  }
 // else $queryWhere.=' ass.plannedWork>0 ';
  
@@ -444,12 +446,12 @@ if (Sql::$lastQueryNbRows == 0) {
     $line["elementary"]='1';
     if (!isset($line["id"])) $line["id"]=$line["idpe"];
 		if ($line['reftype']=='Meeting' and $line['topreftype']=='PeriodicMeeting') {
-		  $line["topreftype"]=($showProject)?'Project':'Resource';
-		  $line["toprefid"]=($showProject)?$idProject:$idResource;
+        //Do not change topRefType  ;
+		  $line['topid']=$line['topid'].'_'.$line['idresource'];
 		} else {
 		  if ($line['reftype']=='PeriodicMeeting') {
 		    $line["elementary"]='0'; // Will contain meetings
-		    $line["id"]=$line["idpe"];
+		    $line["id"]=$line["idpe"].'_'.$line['idresource'];
 		  } 
 		  $line["topreftype"]=($showProject)?'Project':'Resource';
 		  $line["toprefid"]=($showProject)?$idProject:$idResource;

@@ -4311,3 +4311,9 @@ div.ticketKanbanCustom .kanbanVersion{
 	padding-bottom:3px;
 	border:1px solid  #AAAAAA;
 }
+
+.selectedLayoutPos{
+	Background:#D1D1D1 ;
+	border-radius:4px  !important;
+	cursor:not-allowed;
+}

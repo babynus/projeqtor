@@ -106,10 +106,6 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (2,258,1),
 (3,258,1);
 
-INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
-(1,258,8),
-(2,258,8),
-(3,258,8);
 
 CREATE TABLE `${prefix}documentright` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',

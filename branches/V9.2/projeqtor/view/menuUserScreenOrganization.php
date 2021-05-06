@@ -90,8 +90,7 @@ if($paramRightDiv=='trailing'){
  <table width="100%">
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px" > 
-        <div id="changeLayout" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;
-        <?php if( $paramScreen=='switch'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+        <div id="changeLayout" class="pseudoButton <?php if($paramScreen=='switch')echo 'selectedLayoutPos';?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;" title="<?php echo i18n("buttonSwitchedMode");?>"
          onclick="<?php if($paramScreen!='switch') {echo 'switchModeLayout(\'switch\')';}?>">
           <table >
             <tr>
@@ -103,8 +102,7 @@ if($paramRightDiv=='trailing'){
        </div>
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="horizontalLayout"  class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='top'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("showListTop");?>"
+        <div id="horizontalLayout"  class="pseudoButton <?php if($paramScreen=='top')echo 'selectedLayoutPos';?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("showListTop");?>"
         onclick="<?php if($paramScreen!='top' ){echo 'switchModeLayout(\'top\');';}?>">
           <table >
             <tr>
@@ -116,8 +114,7 @@ if($paramRightDiv=='trailing'){
        </div>
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="verticalLayout" lass="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='left'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("showListLeft"); ?>"
+        <div id="verticalLayout" lass="pseudoButton <?php if($paramScreen=='left')echo 'selectedLayoutPos';?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("showListLeft"); ?>"
         onclick="<?php if($paramScreen!='left' ){echo 'switchModeLayout(\'left\');';}?>">
           <table >
             <tr>
@@ -131,8 +128,8 @@ if($paramRightDiv=='trailing'){
     </tr>
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px"> 
-        <div id="layoutList" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramObjectDetail=='col'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("sectionMode");?>"
+        <div id="layoutList" class="pseudoButton <?php if($paramObjectDetail=='col')echo 'selectedLayoutPos';?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
+        title="<?php echo i18n("sectionMode");?>"
         onclick="<?php if($paramObjectDetail!='col'){echo 'switchModeLayout(\'col\');';}?>">
           <table >
             <tr>
@@ -145,8 +142,7 @@ if($paramRightDiv=='trailing'){
       </td>
       <?php if (! isIE()) {?>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="layoutTab" class="pseudoButton"   style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramObjectDetail=='tab'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" 
+        <div id="layoutTab" class="pseudoButton <?php if($paramObjectDetail=='tab')echo 'selectedLayoutPos';?>"   style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
         title="<?php echo i18n("tabularMode");?>"
         onclick="<?php if($paramObjectDetail!='tab'){echo 'switchModeLayout(\'tab\');';}?>">
           <table >
