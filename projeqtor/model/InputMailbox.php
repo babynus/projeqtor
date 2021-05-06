@@ -175,8 +175,6 @@ class InputMailbox extends SqlElement {
       $this->failedRead=0; // Reactivate closed mailbox
     }
     if($old->id){
-      debugLog($this->pwdImap);
-      debugLog(decryptPwd($old->pwdImap));
       if($this->pwdImap != decryptPwd($old->pwdImap)){
         $this->pwdImap = encryptPwd($this->pwdImap);
       }else{
