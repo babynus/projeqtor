@@ -270,6 +270,15 @@ label, .ProjeQtOrNewGui label,
   background: transparent ! important; 
 }
 
+.ProjeQtOrNewGui #changeScreenLayoutAutherPos{
+	background:white;
+	height: 36px;
+	left:-35px;
+	width: 108px;
+	position: absolute;
+	border:1px solid var(--color-light);
+}
+
 /* === MENU BUTTONS AND ITEMS CSS ===================================================== MENU ===*/
 
 .dijitComboBoxMenu {

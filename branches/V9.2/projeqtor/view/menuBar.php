@@ -421,7 +421,7 @@
 			    <div id="drawMenuUserScreenOrganization" dojoType="dijit.TooltipDialog"
              style="max-width:600px; overflow-x:hidden; height:450px;  max-height:500px;  width:150px; ">
              <?php include "menuUserScreenOrganization.php" ?>          
-          </div> 
+            </div> 
 		</div>
       </div>
     </td>

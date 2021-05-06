@@ -565,6 +565,22 @@ function privateFormatter($value) {
 
 function activityStreamDisplayNote ($note,$origin,$width=false){
   global $print,$user, $userRessource;
+  $currentScreen=getSessionValue('currentScreen');
+  if ($currentScreen=='Object'){
+    $objectClassScreen=RequestHandler::getClass('objectClass');
+    $currentScreen=$objectClassScreen;
+  }
+  if ($currentScreen=='Object') $currentScreen=$objectClassScreen;
+  if(Parameter::getUserParameter('paramScreen_'.$currentScreen)){
+    $paramDetailDiv=Parameter::getUserParameter('paramScreen_'.$currentScreen);
+  }else{
+    $paramDetailDiv=Parameter::getUserParameter('paramScreen');
+  }
+  if(Parameter::getUserParameter('paramRightDiv_'.$currentScreen)){
+    $rightDiv=Parameter::getUserParameter('paramRightDiv_'.$currentScreen);
+  }else{
+    $rightDiv=Parameter::getUserParameter('paramRightDiv');
+  }
   $inlineUserThumb=true;
   $rightWidthScreen=($width)? $width :RequestHandler::getNumeric('destinationWidth');
   $userId = $note->idUser;
@@ -654,11 +670,12 @@ function activityStreamDisplayNote ($note,$origin,$width=false){
     $resultNote.= '</div></td></tr></table>';
     
     $maxWidth='100%';
+    
     if ($origin=='objectStream' or $width) {
       $rightWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-30).'px';
       if (isNewGui())   {
-        if (Parameter::getUserParameter('paramScreen')=='top') {
-          if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+        if ($paramDetailDiv=='top') {
+          if ($rightDiv=='bottom') {
             $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
             if ($menuLeftOpen) $innerNoteWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
             else $innerNoteWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
@@ -666,7 +683,7 @@ function activityStreamDisplayNote ($note,$origin,$width=false){
             $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
           }
         } else { // 'left'
-          if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+          if ($rightDiv=='bottom') {
             $innerNoteWidth=(intval(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))*0.7)-50).'px';
           } else { // trailing
             $innerNoteWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
@@ -724,6 +741,21 @@ function activityStreamDisplayNote ($note,$origin,$width=false){
 
 
 function activityStreamDisplayHist ($hist,$origin,$width=false){
+  $currentScreen=getSessionValue('currentScreen');
+  if ($currentScreen=='Object'){
+    $objectClassScreen=RequestHandler::getClass('objectClass');
+    $currentScreen=$objectClassScreen;
+  }
+  if(Parameter::getUserParameter('paramScreen_'.$currentScreen)){
+    $paramDetailDiv=Parameter::getUserParameter('paramScreen_'.$currentScreen);
+  }else{
+    $paramDetailDiv=Parameter::getUserParameter('paramScreen');
+  }
+  if(Parameter::getUserParameter('paramRightDiv_'.$currentScreen)){
+    $rightDiv=Parameter::getUserParameter('paramRightDiv_'.$currentScreen);
+  }else{
+    $rightDiv=Parameter::getUserParameter('paramRightDiv');
+  }
   $text='';
   $reftText='';
   $inlineUserThumb=true;
@@ -890,8 +922,8 @@ function activityStreamDisplayHist ($hist,$origin,$width=false){
   if ($origin=='objectStream' or $width) {
     $rightWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-30).'px';
     if (isNewGui())   {
-      if (Parameter::getUserParameter('paramScreen')=='top') {
-        if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+      if ($paramDetailDiv=='top') {
+        if ($rightDiv=='bottom') {
           $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
           if ($menuLeftOpen) $innerMailHist=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
           else $innerMailHist=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
@@ -899,7 +931,7 @@ function activityStreamDisplayHist ($hist,$origin,$width=false){
           $innerMailHist=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
         }
       } else { // 'left'
-        if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+        if ($rightDiv=='bottom') {
           $innerMailHist=(intval(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))*0.7)-50).'px';
         } else { // trailing
           $innerMailHist=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
@@ -975,6 +1007,21 @@ function activityStreamDisplayHist ($hist,$origin,$width=false){
 }
 
 function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false,$width=false){
+  $currentScreen=getSessionValue('currentScreen');
+  if ($currentScreen=='Object'){
+    $objectClassScreen=RequestHandler::getClass('objectClass');
+    $currentScreen=$objectClassScreen;
+  }
+  if(Parameter::getUserParameter('paramScreen_'.$currentScreen)){
+    $paramDetailDiv=Parameter::getUserParameter('paramScreen_'.$currentScreen);
+  }else{
+    $paramDetailDiv=Parameter::getUserParameter('paramScreen');
+  }
+  if(Parameter::getUserParameter('paramRightDiv_'.$currentScreen)){
+    $rightDiv=Parameter::getUserParameter('paramRightDiv_'.$currentScreen);
+  }else{
+    $rightDiv=Parameter::getUserParameter('paramRightDiv');
+  }
   $reftText='';
   $elementName='';
   $inlineUserThumb=true;
@@ -1018,8 +1065,8 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
   if ($origin=='objectStream' or $width) {
     $rightWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-30).'px';
     if (isNewGui())   {
-      if (Parameter::getUserParameter('paramScreen')=='top') {
-        if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+      if ($paramDetailDiv=='top') {
+        if ($rightDiv=='bottom') {
           $menuLeftOpen=(Parameter::getUserParameter('isMenuLeftOpen')=='false')?0:1;
           if ($menuLeftOpen) $innerMailWidth=(intval((intval(getSessionValue('screenWidth'))-250)*0.7)-50).'px'; // menu open
           else $innerMailWidth=(intval(intval(getSessionValue('screenWidth'))*0.7)-50).'px';
@@ -1027,7 +1074,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
           $innerMailWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
         }
       } else { // 'left'
-        if (Parameter::getUserParameter('paramRightDiv')=='bottom') {
+        if ($rightDiv=='bottom') {
           $innerMailWidth=(intval(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))*0.7)-50).'px';
         } else { // trailing
           $innerMailWidth=(intval((($width)?$width:Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)))-40).'px';
@@ -1070,7 +1117,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
     $result.= '      <div style="margin-top:2px;margin-left:37px;">'.formatDateThumb($date,null,"left",16).'</div>';
     $result.= '      <div style="margin-top:2px;margin-left:37px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
     $result.='     <div>';
-    $result.= '    <div  class="activityStreamMailTitle" style="width:'.((isset($maxWidth))?$innerMailWidth:'90%').';margin-top:16px;display:block;margin-left:36px;margin-bottom:6px;">';
+    $result.= '    <div  class="activityStreamMailTitle" style="width:'.((isset($innerMailWidth))?$innerMailWidth:'90%').';margin-top:16px;display:block;margin-left:36px;margin-bottom:6px;">';
     $result.=       htmlEncode($mail->mailTitle);
     $result.='     <div>';
     if (Parameter::getGlobalParameter('logLevel')>=3) {

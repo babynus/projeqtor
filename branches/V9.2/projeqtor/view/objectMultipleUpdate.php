@@ -31,6 +31,8 @@
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/objectMultipleUpdate.php');
 
+  $objectClass=$_REQUEST['objectClass'];
+  Security::checkValidClass($objectClass);
   $displayWidth='98%';
   $spaceWidth='33%';
   $helpWidth=25;
@@ -40,7 +42,14 @@
     $helpWidth=60;
   }
   $labelSelect=i18n("selectedItemsCount");
-  $layout=(Parameter::getUserParameter('paramScreen')=='left')?'vertical':'horizontal';
+  $currentScreen=getSessionValue('currentScreen');
+  if ($currentScreen=='Object') $currentScreen=$objectClass;
+  if(Parameter::getUserParameter("paramScreen_".$currentScreen)){
+    $paramDetailDiv=Parameter::getUserParameter("paramScreen_".$currentScreen);
+  }else{
+    $paramDetailDiv=Parameter::getUserParameter("paramScreen");
+  }
+  $layout=($paramDetailDiv=='left')?'vertical':'horizontal';
   if (array_key_exists('destinationWidth',$_REQUEST)) {
     $width=RequestHandler::getValue("destinationWidth");
     if ($layout=='vertical') $displayWidth=intval($width)-30;
@@ -58,8 +67,7 @@
     }
   } 
   
-  $objectClass=$_REQUEST['objectClass'];
-  Security::checkValidClass($objectClass);
+
   $obj=new $objectClass();
   $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 ?>
@@ -128,10 +136,12 @@
                 </script>
               </button>
               <?php 
-              $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+              if(Parameter::getUserParameter('paramRightDiv_'.$currentScreen)){
+                $paramRightDiv=Parameter::getUserParameter('paramRightDiv_'.$currentScreen);
+              }else{
+                $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+              }
               $showActivityStream=false;
-              $currentScreen=getSessionValue('currentScreen');
-              if ($currentScreen=='Object') $currentScreen=$objectClass;
               if($paramRightDiv=="bottom"){
                 $activityStreamSize=getHeightLaoutActivityStream($currentScreen);
                 $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivHeight');
