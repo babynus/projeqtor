@@ -6136,7 +6136,7 @@ abstract class SqlElement {
     	$msg .= '</tr></table>'.$sectionEnd.$rowEnd;
     	$msg .= $rowStart.'<td><br></td>'.$rowEnd;
     	$links=$this->_Link;
-    	if (count($links)==0) {//
+    	if (count($links)==0 and $this->id) {//
     	  $link=new Link();
     	  $className=get_class($this);
     	  $where="(ref1Type='$className' and ref1Id=$this->id) or (ref2Type='$className' and ref2Id=$this->id)";
