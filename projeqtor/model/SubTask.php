@@ -443,6 +443,7 @@ class SubTask extends SqlElement {
     echo      '<input id="subTaskView" value="Global" type="hidden" />';
     echo      '<input id="subTaskViewMaxFileSize" value="'.Parameter::getGlobalParameter('paramAttachmentMaxSize').'" type="hidden" />';
     echo      '<input id="refreshSTDivValues" value="" type="hidden" />';
+    $drew=false;
     if(!empty($tab)){
       foreach ($tab as $id=>$obj){
         $element= new $obj['reftype']( $obj['refid']);
@@ -463,7 +464,6 @@ class SubTask extends SqlElement {
         if ($cpST==0 )continue;
         $goto="";
         $style="";
-        $draw='';
         //$version=(property_exists(get_class($element), 'idTargetProductVersion') and $element->idTargetProductVersion!='')?new ProductVersion($element->idTargetProductVersion):'';
         if ( securityCheckDisplayMenu(null, get_class($element)) and $rightRead=="YES") {
           $goto=' onClick="gotoElement(\''.$obj['reftype'].'\',\''.htmlEncode($element->id).'\');" ';
@@ -513,6 +513,20 @@ class SubTask extends SqlElement {
             echo '</div></td></tr>';
             SubTask::drawSubtasksForObject($element, $obj['reftype'],  $obj['refid'],$rightUpdate,$rightRead,null,$idResource,true);
           echo '</table>';
+          if(!$drew){
+            $drew=true;
+          }
+      }
+      if (!$drew){
+        echo '<table style="width:95%; margin-bottom:10px;">';
+        echo '   <tr>';
+        echo '    <td colspan="10">';
+        echo '    <div style="background:#FFDDDD;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:100%;border-right: 1px solid grey;">'.i18n('noDataFound').'</div>';
+        echo '    </td>';
+        echo '   </tr>';
+        echo '</table>';
+      }else{
+        //echo '<div id="targeDopForSubTask" ondragover="console.log(\'survole\');" style="border: 5px solid red;width: 100%;height: 100%;top: 0px;position: absolute;z-index:-10;"></div>';
       }
     }else{
       echo '<table style="width:95%; margin-bottom:10px;">';

@@ -7,14 +7,34 @@
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/view/contractGanttMain.php');
 //florent
-$paramScreen=RequestHandler::getValue('paramScreen');
-$paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
-$paramRightDiv=RequestHandler::getValue('paramRightDiv');
 $currentScreen='ContractGantt';
+$notGlobal=RequestHandler::getBoolean('notGlobal');
+$paramScreen='';
+if(RequestHandler::isCodeSet('paramScreen_'.$currentScreen)){
+  $paramScreen=RequestHandler::getValue('paramScreen_'.$currentScreen);
+}else if(RequestHandler::isCodeSet('paramScreen')){
+  $paramScreen=RequestHandler::getValue('paramScreen');
+}
+$paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
+if(RequestHandler::isCodeSet('paramRightDiv_'.$currentScreen)){
+  $paramRightDiv=RequestHandler::getValue('paramRightDiv_'.$currentScreen);
+}else{
+  $paramRightDiv=RequestHandler::getValue('paramRightDiv');
+}
+if(!$notGlobal and $paramScreen!=''){
+  if($paramScreen=='top')$paramRightDiv='trailing';
+   else $paramRightDiv='bottom';
+}
 setSessionValue('currentScreen', $currentScreen);
-$positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
-$positonRightDiv=changeLayoutActivityStream($paramRightDiv);
-$codeModeLayout=Parameter::getUserParameter('paramScreen');
+$positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail,'paramScreen_'.$currentScreen,$notGlobal);
+$positonRightDiv=changeLayoutActivityStream($paramRightDiv,'paramRightDiv_'.$currentScreen,$notGlobal);
+
+if(Parameter::getUserParameter('paramScreen_'.$currentScreen)){
+  $codeModeLayout=Parameter::getUserParameter('paramScreen_'.$currentScreen);
+}else{
+  $codeModeLayout=Parameter::getUserParameter('paramScreen');
+}
+
 if ($positionListDiv=='top'){
   $listHeight=HeightLayoutListDiv($currentScreen);
 }

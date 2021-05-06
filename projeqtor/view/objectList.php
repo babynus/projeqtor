@@ -41,6 +41,12 @@ $budgetParent=RequestHandler::getValue('budgetParent',false);
 $objectClient=RequestHandler::getValue('objectClient',false,'');
 $objectElementable=RequestHandler::getValue('objectElementable',false,'');
 
+if(Parameter::getUserParameter('paramScreen_'.$objectClass)){
+  $paramScreen=Parameter::getUserParameter('paramScreen_'.$objectClass);
+}else{
+  $paramScreen=Parameter::getUserParameter('paramScreen');
+}
+
 $obj=new $objectClass;
 
 if (array_key_exists('Directory', $_REQUEST)) {
@@ -1274,7 +1280,11 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
 <?php if ( isNewGui()) {
     $objClassList = RequestHandler::getValue('objectClassList');
     $currentScreen=getSessionValue('currentScreen');
-    $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+    if(Parameter::getUserParameter('paramRightDiv_'.$currentScreen)){
+      $paramRightDiv=Parameter::getUserParameter('paramRightDiv_'.$currentScreen);
+    }else{
+      $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+    }
     if($paramRightDiv=="bottom"){
       $activityStreamSize=getHeightLaoutActivityStream($currentScreen);
       $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivHeight');
@@ -1320,7 +1330,112 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
     </span>
     </td>
 <?php }
-    }?>
+
+    }
+    organizeListButtons();
+    switch ($paramScreen){
+      case 'switch':
+        $iconLayoutName="iconChangeLayout22 iconChangeLayout iconSize22";
+        $buttonIconleft="horizontalLayoutClass";
+        $buttonIconRight="verticalLayoutClass ";
+        $buttonTitleLeft=i18n("showListTop");
+        $buttonTitleRight=i18n("showListLeft");
+        $parmLayoutLeft="top";
+        $parmLayoutRight="left";
+        break;
+      case 'top':
+        $iconLayoutName="horizontalLayoutClass";
+        $buttonIconleft="iconChangeLayout22 iconChangeLayout iconSize22";
+        $buttonIconRight="verticalLayoutClass ";
+        $buttonTitleLeft=i18n("buttonSwitchedMode");
+        $buttonTitleRight=i18n("showListLeft");
+        $parmLayoutLeft="switch";
+        $parmLayoutRight="left";
+        break;
+      default;
+        $iconLayoutName="verticalLayoutClass ";
+        $buttonIconleft="iconChangeLayout22 iconChangeLayout iconSize22";
+        $buttonIconRight="horizontalLayoutClass";
+        $buttonTitleLeft= i18n("buttonSwitchedMode");
+        $buttonTitleRight=i18n("showListTop");
+        $parmLayoutLeft="switch";
+        $parmLayoutRight="top";
+        break;
+    }
+
+    ?>
+    <td width="36px" class="<?php if (! isNewGui()) echo 'allSearchFixLength';?>">
+    <?php if(isNewGui()){?>
+      <div dojoType="dijit.layout.ContentPane"  id="changeScreenLayout"  class="detailButton">
+        <div  id="changeScreenLayoutAutherPos" style="display:none;vertical-align:middle;" >
+          <table style="width: 100%;">
+            <tr>
+              <td style="width:33%;">
+                <button id="changeScreenLayoutButton_<?php echo $parmLayoutLeft; ?>" dojoType="dijit.form.Button" showlabel="false" title="<?php echo $buttonTitleLeft;?>"
+                  style="float:left;left: 6px;position: relative;"
+                  iconClass="<?php echo $buttonIconleft;?>" class="detailButton">
+                  <script type="dojo/connect" event="onClick" args="evt">
+                    var pos=<?php echo json_encode($parmLayoutLeft) ;?>;
+                    dojo.byId('changeScreenLayoutAutherPos').style.display="block";
+                    hideResultDivs();
+                    hideExtraButtons('extraButtonsList');
+                    if(pos!="switch")switchModeLayout(pos,true);
+                    else switchModeLayout(pos);
+                    hideExtraButtons('extraButtonsDetail');
+                  </script>
+                </button>
+              </td>
+              <td  style="width:34%;">
+                <div id="changeScreenLayoutButtonCopy" class="pseudoButton"  style="Background:#D1D1D1 !important;border-radius:4px;height:28px;position:relative;top:1px;" 
+                onclick="dojo.byId('changeScreenLayoutAutherPos').style.display='none';dojo.byId('changeScreenLayoutButton').style.display='block';">
+                     <div class="  <?php echo $iconLayoutName;?> imageColorNewGui" style="position:relative;left: 17%;top: 6%;" ></div>
+                </div>
+              </td>
+              <td  style="width:33%;">
+                <button id="changeScreenLayoutButton_<?php echo $parmLayoutRight; ?>" dojoType="dijit.form.Button" showlabel="false" title="<?php echo $buttonTitleRight;?>"
+                  style="float:right;position:relative;right:3px;"
+                 iconClass="<?php echo $buttonIconRight;?>" class="detailButton">
+                  <script type="dojo/connect" event="onClick" args="evt">
+                    var pos=<?php echo json_encode($parmLayoutRight) ;?>;
+                    dojo.byId('changeScreenLayoutAutherPos').style.display="block";
+                    hideResultDivs();
+                    hideExtraButtons('extraButtonsList');
+                    switchModeLayout(pos,true);
+                    hideExtraButtons('extraButtonsDetail');
+                  </script>
+                </button>
+              <td>
+            </tr>
+          </table>   
+        </div>
+        <button id="changeScreenLayoutButton" dojoType="dijit.form.Button" showlabel="false"
+          title="<?php echo i18n('changeScreenLayout');?>"
+           iconClass="<?php echo $iconLayoutName;?>" class="detailButton">
+          <script type="dojo/connect" event="onClick" args="evt">
+                dojo.byId('changeScreenLayoutAutherPos').style.display="block";
+                dojo.byId('changeScreenLayoutButton').style.display="none";
+          </script>
+        </button>
+      </div>
+     <?php }else{?>
+       <div dojoType="dijit.layout.ContentPane"  id="changeScreenLayout" class="pseudoButton" style="position:relative;overflow:hidden;width:50px;min-width:55px;">
+        <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("changeScreenLayout");?>" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;position:relative;min-width:50px;top:-3px" >
+			    <table style="width:100%">
+    			  <tr>
+      				<td style="width:24px;margin-top:2px;">
+      				  <div class="<?php if (!isNewGui()) echo 'iconChangeLayout22';?> iconChangeLayout iconSize22">&nbsp;</div> 
+      				</td>
+      			  <td style="vertical-align:middle;">&nbsp;</td>
+    			  </tr>
+			    </table>
+			    <div id="drawMenuLayoutScreen" dojoType="dijit.TooltipDialog"
+                  style="max-width:600px; overflow-x:hidden;width:150px; ">
+                <?php include "menuLayoutScreen.php" ?>          
+              </div> 
+		</div>
+      </div>
+     <?php }?>
+    </td>
  <?php if (! $comboDetail) {            
     $extraPlgButtons=Plugin::getButtons('list', $objectClass);
     foreach ($extraPlgButtons as $bt) { ?>

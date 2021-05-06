@@ -36,15 +36,33 @@
   	$topDetailDivHeight=$screenHeight-300;
   }
   //florent
-  $paramScreen=RequestHandler::getValue('paramScreen');
-  $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
-  $paramRightDiv=RequestHandler::getValue('paramRightDiv');
   $currentScreen='PortfolioPlanning';
+  $notGlobal=RequestHandler::getBoolean('notGlobal');
+  $paramScreen='';
+  if(RequestHandler::isCodeSet('paramScreen_'.$currentScreen)){
+    $paramScreen=RequestHandler::getValue('paramScreen_'.$currentScreen);
+  }else if(RequestHandler::isCodeSet('paramScreen')){
+    $paramScreen=RequestHandler::getValue('paramScreen');
+  }
+  $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
+  if(RequestHandler::isCodeSet('paramRightDiv_'.$currentScreen)){
+    $paramRightDiv=RequestHandler::getValue('paramRightDiv_'.$currentScreen);
+  }else{
+    $paramRightDiv=RequestHandler::getValue('paramRightDiv');
+  }
+  if(!$notGlobal and $paramScreen!=''){
+    if($paramScreen=='top')$paramRightDiv='trailing';
+    else $paramRightDiv='bottom';
+  }
   setSessionValue('currentScreen', $currentScreen);
-  $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
-  $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
+  $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail,'paramScreen_'.$currentScreen,$notGlobal);
+  $positonRightDiv=changeLayoutActivityStream($paramRightDiv,'paramRightDiv_'.$currentScreen,$notGlobal);
  $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
- $codeModeLayout=Parameter::getUserParameter('paramScreen');
+  if(Parameter::getUserParameter('paramScreen_'.$currentScreen)){
+    $codeModeLayout=Parameter::getUserParameter('paramScreen_'.$currentScreen);
+  }else{
+    $codeModeLayout=Parameter::getUserParameter('paramScreen');
+  }
  if ($positionListDiv=='top'){
    $listHeight=HeightLayoutListDiv($currentScreen);
  }

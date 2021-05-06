@@ -32,19 +32,40 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   scriptLog('   ->/view/objectMain.php');
 
   //florent
-  $paramScreen=RequestHandler::getValue('paramScreen');
-  $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
-  $paramRightDiv=RequestHandler::getValue('paramRightDiv');
-  if ($paramScreen) {
-    if ($paramScreen=='top') $paramRightDiv='trailing';
-    else if (($paramScreen=='left')) $paramRightDiv='bottom';
+
+  $notGlobal=RequestHandler::getBoolean('notGlobal');
+  $paramScreen='';
+  if(RequestHandler::isCodeSet('objectClass')){
+    if( RequestHandler::isCodeSet('paramScreen_'.RequestHandler::getValue('objectClass'))){
+      $paramScreen=RequestHandler::getValue('paramScreen_'.RequestHandler::getValue('objectClass'));
+    }else if(RequestHandler::isCodeSet('paramScreen')){
+      $paramScreen=RequestHandler::getValue('paramScreen');
+    }
+    if(RequestHandler::isCodeSet('paramRightDiv_'.RequestHandler::getValue('objectClass'))){
+      $paramRightDiv=RequestHandler::getValue('paramRightDiv_'.RequestHandler::getValue('objectClass'));
+    }else{
+      $paramRightDiv=RequestHandler::getValue('paramRightDiv');
+    }
+    $screen='paramScreen_'.RequestHandler::getClass('objectClass');
+    $paramRightDivScreen='paramRightDiv_'.RequestHandler::getClass('objectClass');
+  }else{
+    $screen='paramScreen';
+    $paramRightDivScreen='paramRightDiv';
   }
-  
+  if(!$notGlobal and $paramScreen!=''){
+    if($paramScreen=='top')$paramRightDiv='trailing';
+    else $paramRightDiv='bottom';
+  }
+  $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
+
   setSessionValue('currentScreen', 'Object');
-  $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
-  $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
-  $codeModeLayout=Parameter::getUserParameter('paramScreen');
-  
+  $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail,$screen,$notGlobal);
+  $positonRightDiv=changeLayoutActivityStream($paramRightDiv,$paramRightDivScreen,$notGlobal);
+  if(RequestHandler::isCodeSet('ObjectClass')){
+    $codeModeLayout=Parameter::getUserParameter('paramScreen_'.RequestHandler::getValue('ObjectClass'));
+  }else{
+    $codeModeLayout= Parameter::getUserParameter('paramScreen');
+  }
   ///////
   $objectClass="";
   if (isset($_REQUEST['objectClass'])) {

@@ -34,7 +34,9 @@
   
   $showOnlyNotes=Parameter::getUserParameter('showOnlyNotes');
   if($showOnlyNotes=='')$showOnlyNotes='NO';
-  
+  $objectClassScreen=RequestHandler::getClass('objectClass');
+  $currentScreen=getSessionValue('currentScreen');
+  if ($currentScreen=='Object') $currentScreen=$objectClassScreen;
   $historyInfoLst=array();
   if (! isset($objectClass) ) $objectClass=RequestHandler::getClass('objectClass');
   if (! isset($objectId)) $objectId=RequestHandler::getId('objectId');
@@ -109,11 +111,16 @@
   if ($updateDate == null) {
     $updateDate='';
   }
+  if(Parameter::getUserParameter('paramRightDiv_'.$currentScreen)){
+    $positionActivityStream=Parameter::getUserParameter('paramRightDiv_'.$currentScreen);
+  }else{
+    $positionActivityStream=Parameter::getUserParameter('paramRightDiv');
+  }
   if (!$objectId) {  
-      if(Parameter::getUserParameter('paramRightDiv')!='bottom'){
-        echo "<div onclick='switchModeLayout(\"bottom\");' class='imageColorNewGui changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
+      if($positionActivityStream!='bottom'){
+        echo "<div onclick='switchModeLayout(\"bottom\",true);' class='imageColorNewGui changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
       }else{
-        echo "<div onclick='switchModeLayout(\"trailing\");' class='imageColorNewGui changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
+        echo "<div onclick='switchModeLayout(\"trailing\",true);' class='imageColorNewGui changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
       }
     
     echo "</br></br>";
@@ -125,7 +132,7 @@
   $countMail= count($mailsSend);
   $onlyCenter=(RequestHandler::getValue('onlyCenter')=='true')?true:false;
   $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
-  $positionActivityStream=Parameter::getUserParameter('paramRightDiv');
+
 ?>
 <!-- Titre et listes de notes -->
 <?php if (!$onlyCenter) {?>
@@ -133,9 +140,9 @@
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
 	<?php
       if($positionActivityStream!="bottom"){
-         echo "<div onclick='switchModeLayout(\"bottom\");' class='imageColorNewGui changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
+         echo "<div onclick='switchModeLayout(\"bottom\",true);' class='imageColorNewGui changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
       }else{
-        echo "<div onclick='switchModeLayout(\"trailing\");'  class='imageColorNewGui changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
+        echo "<div onclick='switchModeLayout(\"trailing\",true);'  class='imageColorNewGui changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
       }
     
     ?>

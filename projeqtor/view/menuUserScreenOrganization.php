@@ -76,6 +76,7 @@ if(RequestHandler::isCodeSet('paramActiveGlobal')){
   $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
 }
 
+
 if($paramRightDiv=='trailing'){
   $globalActivityStreamSize=getDefaultLayoutSize('contentPaneRightDetailDivWidth');
 }else{

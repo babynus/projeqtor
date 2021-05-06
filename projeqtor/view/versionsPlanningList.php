@@ -235,6 +235,24 @@ if (is_array(getSessionUser()->_arrayFilters)) {
                            </div>
                         </div>
                 </td>
+                <td style="width:50px;padding-right:10px">
+                  <div dojoType="dijit.layout.ContentPane"  id="menuLayoutScreen" class="pseudoButton" style="position:relative;overflow:hidden;width:50px;min-width:55px;">
+                    <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("changeScreenLayout");?>"  style="display: table-cell;<?php if (!isNewGui()) {?>background-color: #D3D3D3;<?php }?>vertical-align: middle;position:relative;min-width:50px;top:-3px" >
+            			    <table style="width:100%">
+                			  <tr>
+                  				<td style="width:24px;padding-top:2px;">
+                  				  <div class="<?php if (!isNewGui()) echo 'iconChangeLayout22';?> iconChangeLayout iconSize22 <?php if(isNewGui()) echo 'imageColorNewGui';?>">&nbsp;</div> 
+                  				</td>
+                  			  <td style="vertical-align:middle;">&nbsp;</td>
+                			  </tr>
+            			    </table>
+            			    <div id="drawMenuLayoutScreen" dojoType="dijit.TooltipDialog"
+                         style="max-width:600px; overflow-x:hidden; height:450px;  max-height:500px;  width:150px; ">
+                         <?php include "menuLayoutScreen.php" ?>           
+                        </div> 
+            		</div>
+                  </div>
+                </td>
 		          </tr>
 		        </table>
 		        <?php }?>    

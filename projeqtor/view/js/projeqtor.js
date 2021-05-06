@@ -6072,6 +6072,10 @@ function showExtraButtons(location) {
   
   if (divNode.style.display=='block') {
     divNode.style.display='none';
+    if(dojo.byId('changeScreenLayoutButton')){
+      dojo.byId('changeScreenLayoutAutherPos').style.display='none';
+      dojo.byId('changeScreenLayoutButton').style.display='block';
+    }
   } else {
     divNode.style.display='block';
     divNode.style.left=(btnNode.offsetLeft-((isNewGui)?10:5))+"px";
@@ -6098,6 +6102,10 @@ function hideExtraButtons(location) {
   if (! divNode) return;
   if (divNode.style.display=='block') {
     divNode.style.display='none';
+    if(dojo.byId('changeScreenLayoutButton')){
+      dojo.byId('changeScreenLayoutAutherPos').style.display='none';
+      dojo.byId('changeScreenLayoutButton').style.display='block';
+    }
   }
 }
 
@@ -8376,7 +8384,6 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
       multiple:true,
       uploadOnSelect:true,
       url:"../tool/saveAttachment.php?attachmentRefType=SubTask&attachmentRefId="+id+"&nameDiv="+id+"_attachmentFile",
-      target:'resultPost',
       type:"file",
       iconClass:'iconAttachFiles',
 
