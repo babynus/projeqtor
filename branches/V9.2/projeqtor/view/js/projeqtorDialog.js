@@ -13194,3 +13194,10 @@ function refreshSubTaskAttachment(refType,refId,idResource){
   loadContent('../view/refreshSubTaskAttachmentDiv.php?refType='+refType+'&refId='+refId+'&view='+view+'&idResource='+idResource ,refType+'_'+refId+'_drawSubTask');
 }
 
+function addPokerMember(){
+	loadDialog('dialogAddPokerMember',null,true,null);
+}
+
+function addPokerItem(){
+	loadDialog('dialogAddPokerItem',null,true,null);
+}

@@ -52,11 +52,14 @@ class PokerSessionMain extends SqlElement {
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
+    <th field="name" width="15%">${name}</th>
+    <th field="nameProject" width="15%">${idProject}</th>
     <th field="date" width="10%" formatter="dateFormatter">${date}</th>
     <th field="nameResource" formatter="thumbName22" width="15%">${responsible}</th>
     ';
   
   private static $_fieldsAttributes=array("name"=>"readonly",
+                                  "idProject"=>"readonly",
                                   "date"=>"readonly, nobr",
                                   "idResource"=>"readonly",
                                   "handled"=>"readonly, nobr",
@@ -71,7 +74,7 @@ class PokerSessionMain extends SqlElement {
   
   public function setAttributes() {
     if(!$this->id){
-    	self::$_fieldsAttributes ['_button_startPokerSession'] = 'hidden';
+    	self::$_fieldsAttributes ['_button_startEndPokerSession'] = 'hidden';
     }
   }
   
