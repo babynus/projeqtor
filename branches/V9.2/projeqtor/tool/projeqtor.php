@@ -2184,7 +2184,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   $messageBody=str_replace($targetDirImageUpload, SqlElement::getBaseUrl().substr(str_replace("..", "", $targetDirImageUpload), 0, strlen(str_replace("..", "", $targetDirImageUpload))-1), $messageBody);
   $paramMailSendmailPath=Parameter::getGlobalParameter('paramMailSendmailPath');
   $paramMailSmtpUsername=Parameter::getGlobalParameter('paramMailSmtpUsername');
-  $paramMailSmtpPassword=decryptPwd(Parameter::getGlobalParameter('paramMailSmtpPassword'), 'IMAP');
+  $paramMailSmtpPassword=decryptPwd(Parameter::getGlobalParameter('paramMailSmtpPassword'));
   $paramMailerType=strtolower(Parameter::getGlobalParameter('paramMailerType'));
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
   if ($cronnedScript) $sender=$paramMailSender;
@@ -2229,7 +2229,7 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   $paramMailSmtpPort=Parameter::getGlobalParameter('paramMailSmtpPort');
   $paramMailSendmailPath=Parameter::getGlobalParameter('paramMailSendmailPath');
   $paramMailSmtpUsername=Parameter::getGlobalParameter('paramMailSmtpUsername');
-  $paramMailSmtpPassword=decryptPwd(Parameter::getGlobalParameter('paramMailSmtpPassword'), 'IMAP');
+  $paramMailSmtpPassword=decryptPwd(Parameter::getGlobalParameter('paramMailSmtpPassword'));
   $paramMailSenderName=Parameter::getGlobalParameter('paramMailReplyToName');
   $paramMailerHelo=Parameter::getGlobalParameter('paramMailerHelo');
   $eol=Parameter::getGlobalParameter('mailEol');
@@ -2450,7 +2450,7 @@ function sendMail_socket($to, $subject, $messageBody, $object=null, $headers=nul
   }
   $smtpServers['default']['server']=$smtpHost;
   $smtpServers['default']['userName']=Parameter::getGlobalParameter('paramMailSmtpUsername');
-  $smtpServers['default']['passWord']=decryptPwd(Parameter::getGlobalParameter('paramMailSmtpPassword'), 'IMAP');
+  $smtpServers['default']['passWord']=decryptPwd(Parameter::getGlobalParameter('paramMailSmtpPassword'));
   $smtpServers['default']['smtpPort']=Parameter::getGlobalParameter('paramMailSmtpPort');
   // Save data of the mail
   $mail=new Mail();
@@ -5444,30 +5444,19 @@ function replace_accents($string) {
   return str_replace($accents, $woaccts, $string);
 }
 
-function encryptPwd($pwd, $crypto){
+function encryptPwd($pwd){
   $key = User::getRandomPassword();
-  if($crypto == 'IMAP'){
-    if(!Parameter::getGlobalParameter('RandomKeyI')){
-      Parameter::storeGlobalParameter('RandomKeyI', $key);
+    if(!Parameter::getGlobalParameter('RandomKey')){
+      Parameter::storeGlobalParameter('RandomKey', $key);
     }else{
-      $key = Parameter::getGlobalParameter('RandomKeyI');
+      $key = Parameter::getGlobalParameter('RandomKey');
     }
-  }else{
-    if(!Parameter::getGlobalParameter('RandomKeyL')){
-      Parameter::storeGlobalParameter('RandomKeyL', $key);
-    }else{
-      $key = Parameter::getGlobalParameter('RandomKeyL');
-    }
-  }
   $encryptPwd=AesCtr::encrypt($pwd, $key, Parameter::getGlobalParameter('aesKeyLength'));
   return $encryptPwd;
 }
 
-function decryptPwd($pwd, $crypto){
-  $key = Parameter::getGlobalParameter('RandomKeyL');
-  if($crypto == 'IMAP'){
-    $key = Parameter::getGlobalParameter('RandomKeyI');
-  }
+function decryptPwd($pwd){
+  $key = Parameter::getGlobalParameter('RandomKey');
   $decryptPwd=AesCtr::decrypt($pwd, $key, Parameter::getGlobalParameter('aesKeyLength'));
   return $decryptPwd;
 }

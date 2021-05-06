@@ -699,7 +699,7 @@ class UserOld extends SqlElement {
 	  $paramLdap_port=Parameter::getGlobalParameter('paramLdap_port');
 	  $paramLdap_version=Parameter::getGlobalParameter('paramLdap_version');
 	  $paramLdap_search_user=Parameter::getGlobalParameter('paramLdap_search_user');
-	  $paramLdap_search_pass=Parameter::getGlobalParameter('paramLdap_search_pass');
+	  $paramLdap_search_pass=decryptPwd(Parameter::getGlobalParameter('paramLdap_search_pass'));
 	  $paramLdap_user_filter=Parameter::getGlobalParameter('paramLdap_user_filter');
 	  $paramLdap_defaultprofile=Parameter::getGlobalParameter('paramLdap_defaultprofile');
 	  
