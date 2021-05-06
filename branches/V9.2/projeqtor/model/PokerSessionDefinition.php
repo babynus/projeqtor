@@ -30,16 +30,10 @@
 require_once('_securityCheck.php');
 class PokerSessionDefinition extends PokerSessionMain {
   
-  private static $_databaseTableName = 'pokersession';
+   private static $_databaseTableName = 'pokersession';
   
-  // Define the layout that will be used for lists
-  private static $_layout='
-    <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
-    <th field="date" width="10%" formatter="dateFormatter">${date}</th>
-    <th field="nameResource" formatter="thumbName22" width="15%">${responsible}</th>
-    ';
-  
-   private static $_fieldsAttributes=array(
+   private static $_fieldsAttributes=array("name"=>"required",
+                                  "idProject"=>"required",
                                   "date"=>"required, nobr",
                                   "idResource"=>"required",
                                   "handled"=>"readonly, nobr",
@@ -53,7 +47,7 @@ class PokerSessionDefinition extends PokerSessionMain {
 
    public function setAttributes() {
    	if(!$this->id){
-   		self::$_fieldsAttributes ['_button_startPokerSession'] = 'hidden';
+   		self::$_fieldsAttributes ['_button_startEndPokerSession'] = 'hidden';
    	}
    }
    /** ==========================================================================
@@ -77,14 +71,6 @@ class PokerSessionDefinition extends PokerSessionMain {
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
-  /** ==========================================================================
-   * Return the specific layout
-   * @return the layout
-   */
-  protected function getStaticLayout() {
-    return self::$_layout;
-  }
-  
   /** ==========================================================================
    * Return the specific fieldsAttributes
    * @return the fieldsAttributes
