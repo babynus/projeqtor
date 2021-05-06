@@ -1997,7 +1997,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo '<input type="password" autocomplete="new-password" style="max-width:'.($largeWidth-5).'px;border:1px solid blue;"  ';
         echo $name;
         echo ' class="dijitReset dijitInputInner" data-dojo-attach-point="textbox,focusNode"  maxlength="100" tabindex="0" ';
-        echo ' value="'.htmlEncode($val).'" />';
+        echo ' value="'.htmlEncode(decryptPwd($val)).'" />';
         echo ' </div>';
       } else if($col=='securityConstraint'){
         if(!$val)$val = 1;

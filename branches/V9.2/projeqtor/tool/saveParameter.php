@@ -291,10 +291,16 @@ if ($type=='habilitation') {
       if ($fld == 'mailerTestMessage'){
          $text=$val;
       }
-      if ($fld == 'paramLdap_search_pass' and $val){
-      	$val=encryptPwd($val, 'LDAP');
-      }else if(($fld == 'cronCheckEmailsPassword' or $fld == 'paramMailSmtpPassword') and $val){
-      	$val=encryptPwd($val, 'IMAP');
+      if ($fld == 'paramLdap_search_pass' or $fld == 'cronCheckEmailsPassword' or $fld == 'paramMailSmtpPassword'){
+      	if($val){
+      	  $encryptVal=encryptPwd($val);
+      	  $decryptVal=decryptPwd(Parameter::getGlobalParameter($fld));
+      	  if($decryptVal != $val){
+      	    $val = $encryptVal;
+      	  }else{
+      	    $val = Parameter::getGlobalParameter($fld);
+      	  }
+      	}
       }
       if($fld =='cronArchivePlannedDate'){
         $cronExecutionActiv = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'archiveHistory'));

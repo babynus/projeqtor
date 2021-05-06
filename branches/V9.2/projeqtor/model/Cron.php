@@ -857,7 +857,7 @@ class Cron {
       purgeFiles ( $uploaddirMail, null );
     }
     foreach ($lstIMb as $mb){     
-      $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddirMail,'utf-8');
+      $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,decryptPwd($mb->pwdImap),$uploaddirMail,'utf-8');
       $mails = array();
       enableCatchErrors();
       $mailsIds = null;
@@ -1030,8 +1030,7 @@ class Cron {
     
 		// IMAP must be enabled in Mail Settings
 		$emailEmail=Parameter::getGlobalParameter('cronCheckEmailsUser');
-		$emailPassword=Parameter::getGlobalParameter('cronCheckEmailsPassword');
-		$emailPassword = decryptPwd($emailPassword, 'IMAP');
+		$emailPassword=decryptPwd(Parameter::getGlobalParameter('cronCheckEmailsPassword'));
 		//$emailAttachmentsDir=dirname(__FILE__) . '/../files/attach';
 		$paramAttachDir=Parameter::getGlobalParameter('paramAttachmentDirectory');
 		$pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
