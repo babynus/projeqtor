@@ -1311,7 +1311,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     } else if($col==='_DocumentRight' and $obj->getFieldAttributes($col)!='hidden' ){ //florent ticket #5139
         $dR=new DocumentRight();
         $classDR=get_class($dR);
-        $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menu'.$classDR));
+        $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menu'.get_class($obj)));
         $rightUpdate=securityGetAccessRightYesNo($menu->name,'update',$obj);
         $rightRead=securityGetAccessRightYesNo($menu->name,'read',$obj);
         if ( securityCheckDisplayMenu(null, $classDR) and $rightRead=="YES") {

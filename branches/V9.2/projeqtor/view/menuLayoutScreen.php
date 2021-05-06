@@ -62,9 +62,8 @@ else{
  <table width="100%">
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px" > 
-        <div id="changeLayout" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;
-        <?php if( $paramScreen=='switch'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
-         onclick="<?php if($paramScreen!='switch') {echo 'switchModeLayout(\'switch\',true)';}?>">
+        <div id="changeLayout" class="pseudoButton <?php if($paramScreen=='switch')echo 'selectedLayoutPos';?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;" title="<?php echo i18n("buttonSwitchedMode");?>"
+         onclick="<?php if($paramScreen!='switch') {echo 'switchModeLayout(\'switch\')';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -75,9 +74,8 @@ else{
        </div>
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="horizontalLayout"  class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='top'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("showListTop");?>"
-        onclick="<?php if($paramScreen!='top' ){echo 'switchModeLayout(\'top\');';}?>">
+        <div id="horizontalLayout"  class="pseudoButton <?php if($paramScreen=='top')echo 'selectedLayoutPos';?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("showListTop");?>"
+        onclick="<?php if($paramScreen!='top' ){echo 'switchModeLayout(\'top\',true);';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -88,8 +86,7 @@ else{
        </div>
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="verticalLayout" lass="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='left'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("showListLeft"); ?>"
+        <div id="verticalLayout" lass="pseudoButton <?php if($paramScreen=='left')echo 'selectedLayoutPos';?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("showListLeft"); ?>"
         onclick="<?php if($paramScreen!='left' ){echo 'switchModeLayout(\'left\',true);';}?>">
           <table >
             <tr>
