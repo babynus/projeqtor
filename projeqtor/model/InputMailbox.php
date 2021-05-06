@@ -174,6 +174,18 @@ class InputMailbox extends SqlElement {
     if ($old->idle and !$this->idle) {
       $this->failedRead=0; // Reactivate closed mailbox
     }
+    if($old->id){
+      debugLog($this->pwdImap);
+      debugLog(decryptPwd($old->pwdImap));
+      if($this->pwdImap != decryptPwd($old->pwdImap)){
+        $this->pwdImap = encryptPwd($this->pwdImap);
+      }else{
+        $this->pwdImap = $old->pwdImap;
+      }
+    }
+    if(!$this->id){
+    	$this->pwdImap = encryptPwd($this->pwdImap);
+    }
     $result = parent::save();
     if(!$old->id and $this->id == 1){
       $checkEmails=Parameter::getGlobalParameter('cronCheckEmails');

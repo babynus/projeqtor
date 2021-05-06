@@ -33,6 +33,7 @@ class PokerSessionMain extends SqlElement {
   public $_sec_description;
   public $id;
   public $name;
+  public $idProject;
   public $date;
   public $_button_startEndPokerSession;
   public $idResource;

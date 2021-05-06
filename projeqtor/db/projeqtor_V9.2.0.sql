@@ -231,6 +231,7 @@ CREATE TABLE `${prefix}pokersession` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `name` varchar(100) DEFAULT NULL,
   `date` date DEFAULT NULL,
+  `idProject` int(12) unsigned DEFAULT NULL COMMENT '12',
   `idResource` int(2) unsigned DEFAULT NULL COMMENT '2',
   `handled` int(1) unsigned DEFAULT 0 COMMENT '1',
   `handledDate` datetime DEFAULT NULL,
@@ -286,8 +287,8 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,259,8),
-(2,259,8),
-(3,259,8),
+(2,259,2),
+(3,259,7),
 (1,260,8),
-(2,260,8),
-(3,260,8);
+(2,260,2),
+(3,260,7);
