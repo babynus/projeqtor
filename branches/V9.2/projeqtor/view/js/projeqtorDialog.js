@@ -970,7 +970,6 @@ function selectDetailItem(selectedValue, lastSavedName) {
     hideDetail();
     return;
   }
-  
   if (combo) {
   	if(comboName == 'projectSelectorFiletering'){
   		var pos = idFldVal.indexOf('_');
@@ -1588,6 +1587,7 @@ function saveAttachment(direct,idName) {
       && dojo.byId('attachmentFileName').innerHTML == "") {
     return false;
   }
+  
   if (direct) {
     if (dijit.byId(idName)) {
       if (dijit.byId(idName).getFileList().length > 20) {
@@ -1608,7 +1608,6 @@ function saveAttachment(direct,idName) {
   });
   showWait();
   dijit.byId('dialogAttachment').hide();
-  setTimeout("cancelDupplicate=false;",1000);
   return true;
 }
 
@@ -7475,10 +7474,12 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
     if (selected) { // Check that selected is in the list
       var found=false;
       items.forEach(function(item) {
-        if (item.id==selected) found=true;
+        selectionList=selected.split('_');
+        if (selectionList.includes(item.id)) found=true;
       });
       if (! found) mySelect.set("value", items[0].id);
     }
+    
     if (field=='planning') {
       mySelect.set("value",selected); 
     }
@@ -7790,7 +7791,7 @@ function switchModeOff(){
   dijit.byId("mainDivContainer").resize();
 }
 
-function switchModeLayout(paramToSend){
+function switchModeLayout(paramToSend,notGlobal){
   if(dojo.byId('objectClass')){
     var currentObject=dojo.byId('objectClass').value;
     var currentScreen=(dojo.byId('objectClassManual'))?dojo.byId('objectClassManual').value:'Object';
@@ -7807,30 +7808,35 @@ function switchModeLayout(paramToSend){
     return false;
   }
   if (paramToSend=='top' || paramToSend=='left'){
-      var paramDiv='paramScreen';
+      var screen=(dojo.byId('objectClassManual'))?currentScreen  : currentObject;
+      var paramDiv=(!notGlobal)?'paramScreen':'paramScreen_'+screen;
       if(switchedMode==true){
+        paramDiv='paramScreen';
        switchModeOff();
       }
-      switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
+      switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen,notGlobal);
   }else if(paramToSend=='bottom' || paramToSend=='trailing'){
-    var paramDiv='paramRightDiv';
-    switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
+    var screen=(dojo.byId('objectClassManual'))?currentScreen  : currentObject;
+    var paramDiv=(!notGlobal)?'paramRightDiv':'paramRightDiv_'+screen;
+    switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen,notGlobal);
   }else if(paramToSend=='col' || paramToSend=='tab'){
     var paramDiv='paramLayoutObjectDetail';
-    switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
+    switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen,notGlobal);
   }else if (paramToSend=='switch'){
+    notGlobal=false;
     var paramDiv='paramScreen';
     if(objectIdScreen!=null){
       loadingContentDiv=true;
     }
-    switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
+    switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen,notGlobal);
     switchModeOn(objectIdScreen);
   }
   dijit.byId('iconMenuUserScreen').closeDropDown();
 }
 
-function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen){
+function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen,notGlobal){
   //var urlParams="?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen;
+  var notGlob=(notGlobal)?"&notGlobal=true":"&notGlobal=false";
   var urlParams="?"+paramDiv+"="+paramToSend;
   if (currentObject) urlParams+="&objectClass="+ currentObject;
   if (objectIdScreen) urlParams+="&objectId="+objectIdScreen;
@@ -7852,12 +7858,18 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
   }else if(currentScreen=='HierarchicalBudget') {
     urlPage="hierarchicalBudgetMain.php";
   }
+  if(urlPage!="objectMain.php"){
+    currentObject=currentScreen;
+  }
   var callBack=null;
   if(objectIdScreen !=''){
     callBack=function(){loadContent("objectDetail.php", "detailDiv", 'listForm');};
   }
-  if (dojo.byId('objectClass') && (dojo.byId('objectClass').value || urlPage!="objectMain.php")) {loadContent(urlPage+urlParams, "centerDiv",null,null,null,null,null,callBack);}
-  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+"&"+paramDiv+"="+paramToSend,"mainDivMenu");  
+  if (dojo.byId('objectClass') && (dojo.byId('objectClass').value || urlPage!="objectMain.php")) {loadContent(urlPage+urlParams+notGlob, "centerDiv",null,null,null,null,null,callBack);}
+  if(!notGlobal)loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+"&"+paramDiv+"="+paramToSend,"mainDivMenu");
+//  else if (!isNewGui && !notGlobal){
+//      loadDiv("menuLayoutScreen.php?objectClass="+currentObject+"&"+paramDiv+"="+paramToSend+notGlob,"mainDivMenuScreenLayout");
+//  }
 }
 var switchModeSkipAnimation=true;
 function showList(mode, skipAnimation) {
@@ -13122,11 +13134,10 @@ var activFuncHideShowDropDiv=false;
 function hideShowDropDiv(mode,subTaskRawId){
   event.preventDefault();
   var el=dojo.byId(subTaskRawId);
-//  divAttach=el.querySelector('.divAttachSubTask');
+  divAttach=el.querySelector('.divAttachSubTask');
 //  if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
 //    var idDiv=divAttach.childNodes[1].firstChild.id;
-//    console.log('reset'+idDiv);
-//    dijit.byId(idDiv).reset();  
+////    dijit.byId(idDiv).reset();  
 //  }
   if(dijit.byId('attachmentFileDirect'))dijit.byId('attachmentFileDirect').reset();
   if(mode=='show'){
@@ -13170,7 +13181,6 @@ function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachm
       var divAttach=el.querySelector('.'+attachmentDivClass);
       if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
         var idDiv=divAttach.childNodes[1].firstChild.id;
-        console.log(dojo.byId(el.id));
         dijit.byId(idDiv).reset();
         dijit.byId(idDiv).addDropTarget(el,true);
       }

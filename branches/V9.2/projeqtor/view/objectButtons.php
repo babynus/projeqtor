@@ -511,9 +511,13 @@
         } // end of : if ($mailable and $mailable->id) {
       ?>
     <?php 
-    $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
-    $showActivityStream=false;
     $currentScreen=getSessionValue('currentScreen');
+    if(Parameter::getUserParameter('paramRightDiv_'.$currentScreen)){
+      $paramRightDiv=Parameter::getUserParameter('paramRightDiv_'.$currentScreen);
+    }else{
+      $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+    }
+    $showActivityStream=false;
     if ($currentScreen=='Object') $currentScreen=$objectClass;
     if($paramRightDiv=="bottom"){
       $activityStreamSize=getHeightLaoutActivityStream($currentScreen);
@@ -686,7 +690,11 @@
     </span>
      <?php organizeButtons();?> 
      <?php 
-       $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+        if(Parameter::getUserParameter('paramRightDiv_'.$currentScreen)){
+          $paramRightDiv=Parameter::getUserParameter('paramRightDiv_'.$currentScreen);
+        }else{
+          $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+        }
        $showActivityStream=false;
        $currentScreen=getSessionValue('currentScreen');
        if ($currentScreen=='Object') $currentScreen=$objectClass;

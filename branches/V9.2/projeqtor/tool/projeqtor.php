@@ -5151,11 +5151,26 @@ function isLeavesSystemActiv() {
 }
 
 // florent ticket 4102
-function changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail){
+function changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail,$screen,$notGlobal=false){
   if(empty($paramScreen)){
-    $currentScreen=Parameter::getUserParameter("paramScreen");
+    $currentScreen=Parameter::getUserParameter($screen);
+    if($currentScreen==''){
+      $currentScreen=Parameter::getUserParameter("paramScreen");
+      Parameter::storeUserParameter($screen, $currentScreen);
+    }
   }else{
-    Parameter::storeUserParameter("paramScreen", $paramScreen);
+    if(!$notGlobal){
+      Parameter::storeUserParameter("paramScreen", $paramScreen);
+      $par=new Parameter();
+      $clause="idUser=".getCurrentUserId()." and (parameterCode like 'paramScreen_%')";
+      $res=$par->purge($clause);
+      foreach (getSessionValue('userParamatersArray') as $code=>$val) {
+        if (substr($code,0,12)=='paramScreen_') {
+          setSessionTableValue('userParamatersArray', $code,'');
+        }
+      }
+    }
+    Parameter::storeUserParameter($screen, $paramScreen);
     $currentScreen=$paramScreen;
   }
   if ($currentScreen=='top') $positionListDiv='top';
@@ -5171,25 +5186,47 @@ function changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail){
   return $positionListDiv;
 }
 
-function changeLayoutActivityStream($paramRightDiv){
-  $currentRightDiv=Parameter::getUserParameter("paramRightDiv");
+function changeLayoutActivityStream($paramRightDiv,$screen,$notGlobal=false){
+   $currentRightDiv=Parameter::getUserParameter($screen);
+   
   if (empty($paramRightDiv)) {
     if(empty($currentRightDiv)) {
-      $currentRightDiv='trailing';
-      Parameter::storeUserParameter("paramRightDiv", $currentRightDiv);
+      if(Parameter::getUserParameter('paramRightDiv'))$currentRightDiv=Parameter::getUserParameter('paramRightDiv');
+      else $currentRightDiv='trailing';
+      Parameter::storeUserParameter($screen, $currentRightDiv);
     }
     $positonRightDiv=$currentRightDiv;
   } else {
     $positonRightDiv=$paramRightDiv;
-    Parameter::storeUserParameter("paramRightDiv", $paramRightDiv);
+    if(!$notGlobal){
+      Parameter::storeUserParameter("paramRightDiv", $paramRightDiv);
+      $par=new Parameter();
+      $clause="idUser=".getCurrentUserId()." and (parameterCode like 'paramRightDiv_%')";
+      $res=$par->purge($clause);
+      foreach (getSessionValue('userParamatersArray') as $code=>$val) {
+        if (substr($code,0,14)=='paramRightDiv_') {
+          setSessionTableValue('userParamatersArray', $code,'');
+        }
+      }
+    }
+    Parameter::storeUserParameter($screen, $paramRightDiv);
   }
   return $positonRightDiv;
 }
 
 function getHeightLaoutActivityStream($objectClass){
   $rightHeight='0%';
-  if(Parameter::getUserParameter("paramRightDiv") == 'bottom' ){
-    $paramScreen=Parameter::getUserParameter("paramScreen");
+  if(Parameter::getUserParameter("paramRightDiv_".$objectClass)){
+    $rightDiv=Parameter::getUserParameter("paramRightDiv_".$objectClass);
+  }else{
+    $rightDiv=Parameter::getUserParameter("paramRightDiv");
+  }
+  if( $rightDiv== 'bottom' ){
+    if(Parameter::getUserParameter("paramScreen_".$objectClass)){
+      $paramScreen=Parameter::getUserParameter("paramScreen_".$objectClass);
+    }else{
+      $paramScreen=Parameter::getUserParameter("paramScreen");
+    }
     $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
     $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
     $modeActiveStream=($detailRightHeight==='' or $detailRightHeight===null)?$modeActiveStreamGlobal:(($detailRightHeight==0)?'false':'true');
@@ -5216,7 +5253,11 @@ function getHeightLaoutActivityStream($objectClass){
 }
 
 function getWidthLayoutActivityStream($objectClass){
-  $paramDetailDiv=Parameter::getUserParameter('paramScreen');
+  if(Parameter::getUserParameter("paramScreen_".$objectClass)){
+    $paramDetailDiv=Parameter::getUserParameter("paramScreen_".$objectClass);
+  }else{
+    $paramDetailDiv=Parameter::getUserParameter("paramScreen");
+  }
   $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
   $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
   $modeActiveStream=($detailDivWidth==='' or $detailDivWidth===null)?$modeActiveStreamGlobal:(($detailDivWidth==0)?'false':'true');
