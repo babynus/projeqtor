@@ -885,7 +885,7 @@ class ActivityMain extends SqlElement {
     }
     
     if (SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1) ){
-      self::$_fieldsAttributes["paused"]="readonly";
+      self::$_fieldsAttributes["paused"]="readonly,nobr";
     }
     if(Parameter::getGlobalParameter('activityOnRealTime')!='YES' or $this->ActivityPlanningElement->hasWorkUnit){
       self::$_fieldsAttributes["workOnRealTime"]='hidden';
