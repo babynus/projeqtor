@@ -380,15 +380,15 @@ class PlannedWorkManual extends GeneralWork {
     if ($scope=='assignment') {
       if (is_array($resourceList) and count($resourceList)>1) { 
         echo "ERROR - Only one resource for assignment mode";
-        exit;
+        return;
       }
       if (! is_array($monthList) and count($monthList)>1) {
         echo "ERROR - monthList must be a list for assignment mode";
-        exit;
+        return;
       } 
       if (! $refObj) {
         echo "ERROR - refObj (refype#refId) must be a set for assignment mode";
-        exit;
+        return;
       } 
       $split=explode('#',$refObj);
       $refType=$split[0];
@@ -396,11 +396,11 @@ class PlannedWorkManual extends GeneralWork {
     } else if ($scope=='intervention') {
       if (is_array($monthList) and count($monthList)>1) {
         echo "ERROR - Only one month for intervention mode";
-        exit;
+        return;
       }
       if (! is_array($resourceList) and count($resourceList)>1) {
         echo "ERROR - Resource must be a list for intervention mode";
-        exit;
+        return;
       }
     } else {
       echo "ERROR - invalid parameters";
