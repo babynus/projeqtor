@@ -1724,6 +1724,7 @@ element.style {
 .ProjeQtOrNewGui #drawMenuUser .dijitTooltipContainer, .ProjeQtOrNewGui #drawMenuUser .dijitTooltipFocusNode {
 	padding:0;
 }
+
 .ProjeQtOrNewGui #userMenuPopup {
 	margin: 0.45em;
 }
@@ -2283,6 +2284,9 @@ border:1px solid var(--color-medium);
 }
 .ProjeQtOrNewGui .dijitTooltipContainer {
 	background: url() var(--color-background);
+}
+.ProjeQtOrNewGui div.dijitTooltip.dijitTooltipRight div.dijitTooltipContainer, .ProjeQtOrNewGui .dijitTooltipData {
+  background: url() var(--color-white);
 }
 .ProjeQtOrNewGui .pseudoButton {
 	background: url() var(--color-background);
