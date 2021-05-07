@@ -653,7 +653,6 @@ if (document.addEventListener) {
   var konami = "38,38,40,40,37,39,37,39,66,65";
   document.addEventListener("keydown", function(e) {
     keys.push(e.keyCode);
-    console.log(e.keyCode);
     if (konami.indexOf(keys.toString()) == 0) {
       if (keys.toString().indexOf(konami) >= 0) {
         var rnd = Math.floor(Math.random() * konamiMsg.length);

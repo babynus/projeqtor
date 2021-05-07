@@ -214,6 +214,9 @@ CREATE INDEX `kpivaluerequestReference` ON `${prefix}kpivalue` (`refType`, `refI
 INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
 ('01 * * * *', '../tool/cronExecutionStandard.php', 0, 'kpiCalculate');
 
+INSERT INTO `${prefix}parameter` (idUser, idProject, parameterCode, parameterValue) VALUES
+(null,null, 'paramTryToHackObjectMail', 'Try to hack detected');
+
 CREATE TABLE `${prefix}pokercomplexity` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `name` varchar(100) DEFAULT NULL,

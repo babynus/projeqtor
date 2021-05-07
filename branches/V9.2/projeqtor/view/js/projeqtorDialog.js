@@ -13196,6 +13196,42 @@ function refreshSubTaskAttachment(refType,refId,idResource){
   loadContent('../view/refreshSubTaskAttachmentDiv.php?refType='+refType+'&refId='+refId+'&view='+view+'&idResource='+idResource ,refType+'_'+refId+'_drawSubTask');
 }
 
+
+function selectResources(type,target,project) {
+  loadDialog('dialogSelectResources',null,true,'&type='+type+'&list='+dojo.byId(target).value+'&target='+target+'&project='+project,true);
+}
+function selectResourcesValidated(targeted,target2) {
+  selectResourcesSelected.sync();
+  var nodeList=selectResourcesSelected.getAllNodes();
+  var arrayValues=new Array();
+  for (var i=0; i < nodeList.length; i++) {
+    arrayValues[i]=nodeList[i].getAttribute('userid');
+  }
+  var result = "";
+  for (var i=0; i < nodeList.length; i++) {
+    if(result==""){
+      result += arrayValues[i];
+    }else{
+      result += ";"+arrayValues[i];
+    }
+  }
+  var dest = target2+'Display';
+  dojo.byId(targeted).value=result;
+  dijit.byId(dest).set('value',result);
+  setTimeout('selectResourcesTransformIdToName( \''+dest+'\')', 100);
+  setTimeout("dijit.byId('dialogSelectResources').hide()", 200);
+}
+
+function selectResourcesTransformIdToName(target){
+    dojo.xhrGet({
+      url : '../tool/getSingleData.php?dataType=selectResourceTransformIdToName&idResource='+dijit.byId('paramTryToHackUserListDisplay').get('value'),
+      handleAs : "text",
+      load : function(data) {
+         dijit.byId(target).setDisplayedValue(data);
+      }
+    });
+}
+
 function addPokerMember(){
 	loadDialog('dialogAddPokerMember',null,true,null);
 }

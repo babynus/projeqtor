@@ -259,17 +259,19 @@ function drawTableFromObjectList($objectList) {
 				echo $obj->getValidationScript($code);
 				echo '</div>';
 		  }else if ($format=='display') {
-		      if($code=="mailerTestMessage"){
+		      if($code=="mailerTestMessage" or $code=="paramTryToHackMailList" or $code=="paramTryToHackObjectMail"){
 		        echo '<div class="" style="width:212px;position:relative;min-height:18px">';
 		      } else {
 		        echo '<div class="" style="width:'.$longTextWidth.';position:relative;min-height:18px">';
 		      }
 				  echo '<input type="hidden" name="'.$code.'" id="'.$code.'" value="'.htmlEncode($obj->parameterValue).'"/>';
 				  echo '<div id="'.$code.'_iconMessageMail" name="'.$code.'_iconMessageMail" style="display:none;right:0;position:absolute;pointer-events:none">';
+				  if($code!="paramTryToHackMailList"){
 				  echo '<a onclick="mailerTextEditor('.$code.');" id="mailerTextEditor" title="' . i18n('editMailerTestMessageIcon') . '">'.formatSmallButton('Edit').'</a>';
+				  }
 				  echo '</div>';
-				  echo '<div style="background:white;color: #555555;margin: 5px 2px 5px 0px;padding: 2px 5px 6px 5px;border: 1px solid #d4d4d4;border-radius: 5px 5px 5px 5px;" name="'.$code.'_display" id="'.$code.'_display" onmouseover="displayImageEditMessageMail(\''.$code.'\');" onmouseout="hideImageEditMessageMail(\''.$code.'\');" onclick="mailerTextEditor(\''.$code.'\');"';
-				  if($code=="mailerTestMessage"){
+				  echo '<div style="word-break:break-all;background:white;color: #555555;margin: 5px 2px 5px 0px;padding: 2px 5px 6px 5px;border: 1px solid #d4d4d4;border-radius: 5px 5px 5px 5px;" name="'.$code.'_display" id="'.$code.'_display" onmouseover="displayImageEditMessageMail(\''.$code.'\');" onmouseout="hideImageEditMessageMail(\''.$code.'\');" onclick="mailerTextEditor(\''.$code.'\');"';
+				  if($code=="mailerTestMessage"  or $code=="paramTryToHackMailList" or $code=="paramTryToHackObjectMail"){
 				   	echo ' style="word-wrap:break-word;width:200px;display:inline-block;min-height:18px" ';
 				  } else {
 				    echo ' style="width:'.$longTextWidth.';word-wrap:break-word;display:inline-block;min-height:18px';
@@ -279,15 +281,46 @@ function drawTableFromObjectList($objectList) {
 				  echo '</div>';
 				  echo '</div>';
 			}else if ($format=='longtext') {
-				echo '<textarea dojoType="dijit.form.Textarea" ';
-				echo ' name="' . $code . '" id="' . $code . '"';
-				echo ' title="' . $helpTitle . '"';
-				echo ' style="width: '.$longTextWidth.';" ';
-				echo ' class="input" ';
-				echo ' >';
-				echo $obj->parameterValue;
-				//echo $obj->getValidationScript($code);
-				echo '</textarea>';
+			  if($code=='paramTryToHackUserList' or $code=='paramTryToHackMailList'){
+			    if($code=="paramTryToHackUserList"){
+			      echo '<input type="hidden" name="' . $code . '" id="' . $code . '" value="'.$obj->parameterValue.'"/>';
+			      $code = $code.'Display';
+			      echo '<textarea readOnly dojoType="dijit.form.Textarea" ';
+			      echo ' name="' . $code . '" id="' . $code . '"';
+			      echo ' title="' . $helpTitle . '"';
+			      echo ' style="background:white !important;width:212px;position:relative;min-height:18px;" ';
+			      echo ' >';
+			      $idAffectable = explode(";", $obj->parameterValue);
+			      $number = 1;
+			      $countNumber = count($idAffectable);
+			      foreach ($idAffectable as $myId){
+			        if($number > 1 and $number <= $countNumber  )echo ';';
+			        echo SqlList::getNameFromId('Affectable', $myId);
+			        $number++;
+			      }
+			      echo '</textarea>';
+			      echo ' <div style="position:absolute;top:6px;left:191px;" class="roundedButton roundedIconButton generalColClass idProjectClass"><div class="imageColorNewGui iconToolbarSearch" onclick="selectResources(null,\'paramTryToHackUserList\',null)">  </div></div>';
+			    }else{
+			      echo '<textarea dojoType="dijit.form.Textarea" ';
+			      echo ' name="' . $code . '" id="' . $code . '"';
+			      echo ' title="' . $helpTitle . '"';
+			      echo ' style="width:212px;position:relative;min-height:18px;" ';
+			      echo ' class="input" ';
+			      echo ' >';
+			      echo $obj->parameterValue;
+			      echo '</textarea>';
+			    }
+			  }else{
+  				echo '<textarea dojoType="dijit.form.Textarea" ';
+  				echo ' name="' . $code . '" id="' . $code . '"';
+  				echo ' title="' . $helpTitle . '"';
+  				echo ' style="width: '.$longTextWidth.';" ';
+  				echo ' class="input" ';
+  				echo ' >';
+  				echo $obj->parameterValue;
+  				//echo $obj->getValidationScript($code);
+  				echo '</textarea>';
+			  }
 			} else if ($format=='photo') { // for user photo 
 			  //echo "</td></tr>";
 			  $user=getSessionUser();
