@@ -309,7 +309,6 @@ class ActivityPlanningElementMain extends PlanningElement {
       	if($this->elementary){
       	  self::$_fieldsAttributes['revenue']='';
         	if($this->hasWorkUnit){
-        	  #gautier toDO
         	  if($this->validatedDuration){
         	   self::$_fieldsAttributes['validatedDuration']='readonly';
         	  }

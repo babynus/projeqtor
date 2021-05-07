@@ -243,6 +243,19 @@
       $id = RequestHandler::getId('idWorkUnit');
       $workUnit = new WorkUnit($id);
       echo $workUnit->validityDate;
+    }else if($type=='selectResourceTransformIdToName'){
+      $value = "";
+      $idResources = RequestHandler::getValue('idResource');
+      $idAffectable = explode(";", $idResources);
+      $number = 1;
+      $countNumber = count($idAffectable);
+      foreach ($idAffectable as $myId){
+        if($number > 1 and $number <= $countNumber  )$value.= ';';
+        $value.= SqlList::getNameFromId('Affectable', $myId);
+        $number++;
+      }
+      debugLog($value);
+      echo $value;
     }else {
       debugTraceLog("Unknown type '$type'");          
       echo '';

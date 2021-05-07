@@ -537,6 +537,13 @@ class Parameter extends SqlElement {
       case 'ldapDefaultProfile': case 'defaultProfile': case 'SAML_defaultProfile' :
       	$list=SqlList::getList('Profile');
       	break;
+      case 'paramTryToHackUserProfilList' :
+        $list['']=' ';
+        $listVisible=SqlList::getList('Profile');
+        foreach ($listVisible as $key=>$val) {
+          $list[$key]=$val;
+        }
+        break;
       case 'imputationOnlyIncompleteResourceWork':case 'imputationOnlyIncompleteProjectLeaderWork':
       case 'imputationOnlyIncompleteTeamManagerWork':case 'imputationOnlyIncompleteOrganismManagerWork':
     		$list = array('false'=>i18n('displayNo'),
@@ -1272,6 +1279,11 @@ class Parameter extends SqlElement {
       	                      'paramDefaultTimezone'=>'list',
       	                      'csvSeparator'=>'list',
       	                      'csvExportUTF8'=>'list',
+      	                    'sectionSecurity'=>'section',
+        	                    'paramTryToHackUserProfilList'=>'list',
+        	                    'paramTryToHackUserList'=>'longtext',
+        	                    'paramTryToHackMailList'=>'longtext',
+        	                    'paramTryToHackObjectMail'=>'display',
               	         'newColumnbSystemRight'=>'newColumn',
               	            'sectionMiscellaneous'=>'section',
               	              'getVersion'=>'list',
