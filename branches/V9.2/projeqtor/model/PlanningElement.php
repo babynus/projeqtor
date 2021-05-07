@@ -466,7 +466,7 @@ class PlanningElement extends SqlElement {
     // calculate wbs
     $dispatchNeeded=false;
     $crit='';
-    if (! $this->wbs or trim($this->wbs)=='') {
+    if ((! $this->wbs or trim($this->wbs)=='' ) and !($this->refType='Project' and Project::isTheLeaveProject($this->refId))) {
       $wbs="";
       if ($topElt) {
         $wbs=$topElt->wbs . ".";
@@ -487,6 +487,7 @@ class PlanningElement extends SqlElement {
           $localSort=substr($lst[0]->wbsSortable,-5,5)+1;
         }
       }
+      
       $wbs.=$localSort;
       $this->wbs=$wbs;
       $dispatchNeeded=true;
