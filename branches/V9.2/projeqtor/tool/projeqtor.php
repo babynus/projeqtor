@@ -1567,6 +1567,61 @@ function disableSilentErrors() {
   $globalSilentErrors=false;
 }
 
+function sendTryToHackMail($msg){
+  $profile = Parameter::getGlobalParameter('paramTryToHackUserProfilList');
+  $UserList = Parameter::getGlobalParameter('paramTryToHackUserList');
+  $mailList=Parameter::getGlobalParameter('paramTryToHackMailList');
+  $object=Parameter::getGlobalParameter('paramTryToHackObjectMail');
+  $arrayUsers = array();
+  if($profile){
+    $lstRes = new User();
+    $lstResMail = $lstRes->getSqlElementsFromCriteria(array('idProfile'=>$profile,'idle'=>'0'));
+    foreach ($lstResMail as $res){
+      if($res->email){
+        array_push($arrayUsers,$res->email);
+      }
+    }
+  }
+  if($mailList){
+    $mailList  = str_replace(',', ';', $mailList);
+    $mailList  = str_replace('/', ';', $mailList);
+    $mailList  = str_replace(':', ';', $mailList);
+    $idAffectables = explode(";", $mailList);
+    foreach ($idAffectables as $mailAff){
+      array_push($arrayUsers,$mailAff);
+    }
+  }
+  if($UserList){
+    $idAffectable = explode(";", $UserList);
+    foreach ($idAffectable as $myId){
+      $resA = new Affectable($myId);
+      if($resA->email){
+        array_push($arrayUsers,$resA->email);
+      }
+    }
+  }
+ 
+  $newMsg =  " HACK ================================================================ <br/>";
+  $newMsg .= " Try to hack detected <br/>";
+  $newMsg .= " Source Code = ".$msg;
+  $newMsg .= " <br/>QUERY_STRING = ".$_SERVER['QUERY_STRING'];
+  $newMsg .= " <br/>REMOTE_ADDR = ".$_SERVER['REMOTE_ADDR'];
+  $newMsg .= " <br/>SCRIPT_FILENAME = ".$_SERVER['SCRIPT_FILENAME'];
+  $newMsg .= "<br/>  REQUEST_URI = ".$_SERVER['REQUEST_URI'];
+  
+  if($object){
+    $title=new Html2Text($object);
+    $title = $title->getText();
+  }else{
+    $title = " ";
+  }
+  $tempArrayUsers = array_flip($arrayUsers);
+  $arrayUsers = array_flip($tempArrayUsers);
+  foreach ($arrayUsers as $user){
+    sendMail($user,$title, $newMsg);
+  }
+}
+
 function traceHack($msg="Unidentified source code") {
   errorLog("HACK ================================================================");
   errorLog("Try to hack detected");
@@ -1585,6 +1640,7 @@ function traceHack($msg="Unidentified source code") {
     }
   }
   errorLog(" REQUEST_URI = ".$_SERVER['REQUEST_URI']);
+  sendTryToHackMail($msg);
   require "../tool/hackMessage.php"; // Will call exit
                                        // exit; / exit is called in hackMessage
 }
