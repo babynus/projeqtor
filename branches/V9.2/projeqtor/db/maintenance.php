@@ -1136,6 +1136,8 @@ if (beforeVersion($currVersion,"V9.1.1") ) {
 
 if (beforeVersion($currVersion,"V9.2.0") and $currVersion!='V0.0.0') {
   traceLog("update workCommandDone [9.2.0]");
+  $proj=new Project();
+  $leavProject=SqlElement::getSingleSqlElementFromCriteria(get_class($proj), array($proj->getDatabaseColumnName('isLeaveMngProject')=>1));
   $workCommandDone = new WorkCommandDone();
   $workCommandDoneList=$workCommandDone->getSqlElementsFromCriteria(null,null,'1=1');
   $cpt=0;
@@ -1152,7 +1154,13 @@ if (beforeVersion($currVersion,"V9.2.0") and $currVersion!='V0.0.0') {
   if($pwdCronEmail){
   	Parameter::storeGlobalParameter('cronCheckEmailsPassword ', encryptPwd($pwdCronEmail));
   }
+  
   Sql::beginTransaction();
+  if(trim($leavProject->id)!=''){
+    $leavProject->ProjectPlanningElement->wbs=0;
+    //$leavProject->ProjectPlanningElement->wbsSortable=00000;
+    $resSavLeavProj=$leavProject->ProjectPlanningElement->save();
+  }
   $inputMailBox = new InputMailbox();
   $listMailBox = $inputMailBox->getSqlElementsFromCriteria(null, null, "1=1");
   foreach ($listMailBox as $mailBox){
@@ -1179,6 +1187,10 @@ if (beforeVersion($currVersion,"V9.2.0") and $currVersion!='V0.0.0') {
   }
   Sql::commitTransaction();
   traceLog("   => $cpt workCommandDone updated");
+  if(isset($resSavLeavProj) and strpos($resSavLeavProj, 'OK')){
+    traceLog("update project [9.2.0]");
+    traceLog("   => 1 project updated");
+  }
 }
 
 
