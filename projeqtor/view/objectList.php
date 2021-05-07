@@ -1367,9 +1367,11 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
     <td width="36px" class="<?php if (! isNewGui()) echo 'allSearchFixLength';?>">
     <?php if(isNewGui()){?>
       <div dojoType="dijit.layout.ContentPane"  id="changeScreenLayout"  class="detailButton">
-        <div  id="changeScreenLayoutAutherPos" style="display:none;vertical-align:middle;" >
+        <div  id="changeScreenLayoutAutherPos" style="display:none;vertical-align:middle;<?php if( $parmLayoutLeft=='switch') echo 'width:86px;left:0px;';?>" >
           <table style="width: 100%;">
             <tr>
+              <?php if($parmLayoutLeft!='switch'){ ?>
+              
               <td style="width:33%;">
                 <button id="changeScreenLayoutButton_<?php echo $parmLayoutLeft; ?>" dojoType="dijit.form.Button" showlabel="false" title="<?php echo $buttonTitleLeft;?>"
                   style="float:left;left: 6px;position: relative;"
@@ -1385,8 +1387,9 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
                   </script>
                 </button>
               </td>
+              <?php } ?>
               <td  style="width:34%;">
-                <div id="changeScreenLayoutButtonCopy" class="pseudoButton"  style="Background:#D1D1D1 !important;border-radius:4px;height:28px;position:relative;top:1px;" 
+                <div id="changeScreenLayoutButtonCopy" class="pseudoButton"  style="Background:#D1D1D1 !important;border-radius:4px;height:28px;position:relative;top:1px;left: 2px;" 
                 onclick="dojo.byId('changeScreenLayoutAutherPos').style.display='none';dojo.byId('changeScreenLayoutButton').style.display='block';">
                      <div class="  <?php echo $iconLayoutName;?> imageColorNewGui" style="position:relative;left: 17%;top: 6%;" ></div>
                 </div>
@@ -1404,7 +1407,7 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
                     hideExtraButtons('extraButtonsDetail');
                   </script>
                 </button>
-              <td>
+              </td>
             </tr>
           </table>   
         </div>
@@ -1428,9 +1431,9 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
       			  <td style="vertical-align:middle;">&nbsp;</td>
     			  </tr>
 			    </table>
-			    <div id="drawMenuLayoutScreen" dojoType="dijit.TooltipDialog"
-                  style="max-width:600px; overflow-x:hidden;width:150px; ">
-                <?php include "menuLayoutScreen.php" ?>          
+  			    <div id="drawMenuLayoutScreen" dojoType="dijit.TooltipDialog"
+               style="max-width:90px; overflow-x:hidden;width:90px; ">
+               <?php include "menuLayoutScreen.php" ?>           
               </div> 
 		</div>
       </div>

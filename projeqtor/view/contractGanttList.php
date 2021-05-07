@@ -180,7 +180,7 @@ $contractGantt=true;
                 			  </tr>
             			    </table>
             			    <div id="drawMenuLayoutScreen" dojoType="dijit.TooltipDialog"
-                         style="max-width:600px; overflow-x:hidden; height:450px;  max-height:500px;  width:150px; ">
+                         style="max-width:90px; overflow-x:hidden;width:90px; ">
                          <?php include "menuLayoutScreen.php" ?>           
                         </div> 
             		</div>

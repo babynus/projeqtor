@@ -7792,6 +7792,7 @@ function switchModeOff(){
 }
 
 function switchModeLayout(paramToSend,notGlobal){
+  var switchModePassedToFalse=false;
   if(dojo.byId('objectClass')){
     var currentObject=dojo.byId('objectClass').value;
     var currentScreen=(dojo.byId('objectClassManual'))?dojo.byId('objectClassManual').value:'Object';
@@ -7812,7 +7813,8 @@ function switchModeLayout(paramToSend,notGlobal){
       var paramDiv=(!notGlobal)?'paramScreen':'paramScreen_'+screen;
       if(switchedMode==true){
         paramDiv='paramScreen';
-       switchModeOff();
+        notGlobal=false;
+        switchModeOff();
       }
       switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen,notGlobal);
   }else if(paramToSend=='bottom' || paramToSend=='trailing'){

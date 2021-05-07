@@ -386,6 +386,7 @@ changeInitialDueDate: "змінити належну дату запуску н�
 changeInitialDueDateTime: "змінити належні дата/час запуску на",
 changeInitialEndDate: "змінити дату закінчення запуску на",
 changeIsEmployee: "Change Is an employee",
+changeLayoutScreen: "change layout of this screen",
 changeLeaveDate: "Change date of leave period",
 changeLeaveEmployee: "Change employee",
 changeLeaveType: "Change leave type",
