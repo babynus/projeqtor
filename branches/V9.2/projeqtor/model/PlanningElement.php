@@ -466,7 +466,7 @@ class PlanningElement extends SqlElement {
     // calculate wbs
     $dispatchNeeded=false;
     $crit='';
-    if ((! $this->wbs or trim($this->wbs)=='' ) and !($this->refType='Project' and Project::isTheLeaveProject($this->refId))) {
+    if ((! $this->wbs or trim($this->wbs)=='') and !($this->refType=='Project' and Project::isTheLeaveProject($this->refId))) {
       $wbs="";
       if ($topElt) {
         $wbs=$topElt->wbs . ".";
