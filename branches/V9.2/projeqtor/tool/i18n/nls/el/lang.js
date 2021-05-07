@@ -386,6 +386,7 @@ changeInitialDueDate: "αλλαγή αρχικής ημερ. παράδοσης 
 changeInitialDueDateTime: "αλλαγή αρχικής ημερ./ώρας παράδοσης σε",
 changeInitialEndDate: "αλλαγή αρχικής ημερ. λήξης σε",
 changeIsEmployee: "Change Is an employee",
+changeLayoutScreen: "change layout of this screen",
 changeLeaveDate: "Change date of leave period",
 changeLeaveEmployee: "Change employee",
 changeLeaveType: "Change leave type",
