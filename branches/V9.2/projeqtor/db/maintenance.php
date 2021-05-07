@@ -1156,10 +1156,10 @@ if (beforeVersion($currVersion,"V9.2.0") and $currVersion!='V0.0.0') {
   }
   
   Sql::beginTransaction();
-  if(trim($leavProject->id)!=''){
-    $leavProject->ProjectPlanningElement->wbs=0;
-    //$leavProject->ProjectPlanningElement->wbsSortable=00000;
-    $resSavLeavProj=$leavProject->ProjectPlanningElement->save();
+  if(trim($leavProject->id)!='' and $leavProject->ProjectPlanningElement->wbs!=0){
+      $leavProject->ProjectPlanningElement->wbs=0;
+      //$leavProject->ProjectPlanningElement->wbsSortable=00000;
+      $resSavLeavProj=$leavProject->ProjectPlanningElement->save();
   }
   $inputMailBox = new InputMailbox();
   $listMailBox = $inputMailBox->getSqlElementsFromCriteria(null, null, "1=1");
