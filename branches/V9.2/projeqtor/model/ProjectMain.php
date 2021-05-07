@@ -1499,7 +1499,7 @@ static function isTheLeaveProject($id=null) {
       $parent=new $this->ProjectPlanningElement->topRefType ($this->ProjectPlanningElement->topRefId);
     }
     if (SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1)){
-      self::$_fieldsAttributes["paused"]="readonly";
+      self::$_fieldsAttributes["paused"]="readonly,nobr";
     }
     if (Parameter::getGlobalParameter('projectDailyHours')!='true') {
       self::$_fieldsAttributes["_sec_ProjectDailyHours"]="hidden";
