@@ -554,5 +554,15 @@ class TicketMain extends SqlElement {
   		echo '</div>';
   	}
   }
+  
+  public function delete() {
+  	$statusPeriod = new StatusPeriod();
+  	$listSPeriod = $statusPeriod->getSqlElementsFromCriteria(array("refType"=>"Ticket", "refId"=>$this->id));
+  	foreach ($listSPeriod as $sPeriod){
+  	  $sPeriod->delete();
+  	}
+  	$result = parent::delete();
+  	return $result;
+  }
 }
 ?>

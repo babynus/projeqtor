@@ -101,7 +101,7 @@
     if(!$durationDisplay and $statusPeriod->duration)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="linkData" style="white-space:nowrap;width:10%">'.$durationDisplay.'</td>';
     $duration = $statusPeriod->durationOpenTime;
-    if($duration>$hourPerDay){
+    if($duration>=$hourPerDay){
       $duration = $duration/3600;
       $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
       $durationHour = fmod($duration,1)*3600;
