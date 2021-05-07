@@ -1335,7 +1335,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       $readOnly=false;
       $specificStyle='';
       $specificStyleWithoutCustom='';
-      if (($col=="idle" or $col=="done" or $col=="handled" or $col=="cancelled" or $col=="solved" or $col=="paused") and $objType and property_exists($obj, 'idStatus')) {
+      if (($col=="idle" or $col=="done" or $col=="handled" or $col=="cancelled" or $col=="solved" or ($col=="paused" and get_class($obj)=='Ticket')) and $objType and property_exists($obj, 'idStatus')) {
         $lock='lock'.ucfirst($col);
         if (!$obj->id or (property_exists($objType, $lock) and $objType->$lock)) {
           $attributes.=' readonly tabindex="-1"';
