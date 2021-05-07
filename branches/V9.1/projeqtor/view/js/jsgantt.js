@@ -307,7 +307,6 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   this.getCompStr  = function(){ if(vComp) return vComp+'%'; else return '0%'; };
   this.getDurationContract = function(){ return vDurationContract; };
   this.getElementIdRef = function(){ return vElementIdRef;};
-  this.getIconClass = function(){ return vIconClass;};
   this.getDuration = function(vFormat){ 
     if (vMile) { 
       vDuration = '-';
@@ -361,7 +360,13 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
       }
     } 
     return vGlobal;
-  }
+  };
+  this.getIconClass = function(){ 
+    if(!vIconClass){
+      vIconClass=this.getClass();
+    }
+    return vIconClass;
+  };
   this.setDepend   = function(pDepend){ vDepend = pDepend;};
   this.setStart    = function(pStart){ vStart = pStart;};
   this.setEnd      = function(pEnd)  { vEnd   = pEnd;  };
