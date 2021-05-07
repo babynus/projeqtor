@@ -279,12 +279,12 @@ class Cron {
       if ($lastProcessId!=self::$cronProcessId or $lastUniqueId!=self::$cronUniqueId) {
         // Another process is already running with different PID
         // => Stop current one (exit)
-        debugTraceLog("Cron possibly running twice");
+        traceLog("Cron possibly running twice");
         debugTraceLog("    current process ID is ".self::$cronProcessId);
         debugTraceLog("    current unique ID is ".self::$cronUniqueId);
         debugTraceLog("    running process ID is ".$lastProcessId);
         debugTraceLog("    running unique ID is ".$lastUniqueId);
-        debugTraceLog("    => stopping current Cron");
+        traceLog("    => stopping current Cron");
         exit;
       }
     } else {
@@ -296,6 +296,7 @@ class Cron {
   	self::init();
     if (Cron::$cronRequestedStop==false) {
       if (! file_exists("../model/Mail.php")) {
+        debugTraceLog("../model/Mail.php not found, current directory is :'".getcwd()."' \nTry to move up with chdir('../')");
         chdir('../');
       }
       errorLog('CRON abnormally stopped');
@@ -602,7 +603,7 @@ class Cron {
   public static function checkNotifications() {      
 //scriptLog('Cron::checkNotifications()');
     global $globalCronMode;
-    if (!isNotificationSystemActiv()) {exit;}
+    if (!isNotificationSystemActiv()) {return;}
     self::init();
     $globalCronMode=true;  
     // Generates notification from notification Definition
@@ -628,7 +629,7 @@ class Cron {
   public static function checkLeavesEarned() {      
 //scriptLog('Cron::checkLeavesEarned()');
     global $globalCronMode;
-    if (!isLeavesSystemActiv()) {exit;}
+    if (!isLeavesSystemActiv()) {return;}
     self::init();
     $globalCronMode=true;  
     

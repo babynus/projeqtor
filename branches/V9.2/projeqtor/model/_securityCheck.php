@@ -30,6 +30,7 @@ if (!class_exists('SqlElement') ){
 	} else if (file_exists('../../tool/projeqtor.php')) {
 		include_once('../../tool/projeqtor.php');
 	} else {
+	  traceHack('Direct acces to class file rejected');
 		exit;
 	}
 	// FIX FOR IIS

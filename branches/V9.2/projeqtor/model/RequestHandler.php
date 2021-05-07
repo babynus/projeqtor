@@ -35,6 +35,7 @@ abstract class RequestHandler {
       return $_REQUEST[$code];
     } else {
       if ($required) {
+        debugTraceLog("parameter '$code' not found in Request");
         throwError("parameter '$code' not found in Request");
         exit;
       } else {
@@ -107,6 +108,7 @@ abstract class RequestHandler {
     if (in_array($val, $expectedList)) {
       return $val;
     } else {
+      debugTraceLog("parameter $code='$val' has an unexpected value");
       throwError("parameter $code='$val' has an unexpected value");
       exit;
     }
