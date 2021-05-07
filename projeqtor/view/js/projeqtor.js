@@ -6296,6 +6296,7 @@ function showHideActivityStreamToday(show){
     if(dijit.byId('todayActStream').w >0 ) return;
     if(!todayActiStreamDivLastWidth) dimension=parseInt(dojo.byId('defaultTodayActStreamWidth').value);
     else dimension=todayActiStreamDivLastWidth;
+    if(dimension<=0)dimension=100;
     var classicViewDim=(dojo.byId("todayClassicView").offsetWidth-dimension-5);
     var newValShow='false',
           title=i18n('hideActivityStream');
