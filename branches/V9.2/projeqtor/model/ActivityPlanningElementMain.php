@@ -338,7 +338,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       
     }
     if (isset($element) and SqlList::getFieldFromId("Status", $element->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1) ){
-      self::$_fieldsAttributes["paused"]="readonly";
+      self::$_fieldsAttributes["paused"]="readonly,nobr";
     }
     
   }
