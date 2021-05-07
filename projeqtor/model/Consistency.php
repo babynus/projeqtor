@@ -209,38 +209,40 @@ class Consistency {
     } else {
       displayError(i18n("checkCannotFix"),true);
     }
-    if ($action=="recalculate") {
-      $pe->wbs=null;
-      $pe->wbsSortable=null;
-      $res=$pe->save();
-      if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
-      else displayError($res,true);
-    } else if ($action=='moveFromPrec' and $pePrec) {
-      $res=$pe->moveTo($pePrec->id,'after');
-      if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
-      else displayError($res,true);
-    } else if ($action=="recalculateLevel" and $pe->topId) {
-      $where="topId=$pe->topId";
-      $levelList=$pe->getSqlElementsFromCriteria(null,null,$where,'wbsSortable');
-      if (count($levelList)==1) {
+    if(!($reftype='Project' and Project::isTheLeaveProject($pe->id))){
+      if ($action=="recalculate" ) {
         $pe->wbs=null;
         $pe->wbsSortable=null;
         $res=$pe->save();
         if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
         else displayError($res,true);
-      } else if (count($levelList)>1) {
-        $first=$levelList[0];
-        $second=$levelList[1];
-        $res=$second->moveTo($first->id,'before');
-        $first=new PlanningElement($first->id);
-        $second=new PlanningElement($second->id);
-        $res=$first->moveTo($second->id,'before');
+      } else if ($action=='moveFromPrec' and $pePrec) {
+        $res=$pe->moveTo($pePrec->id,'after');
         if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
         else displayError($res,true);
-      }
-    } else {
-      if ($issue!='') {
-        displayError(i18n("checkCannotFix"),true);
+      } else if ($action=="recalculateLevel" and $pe->topId) {
+        $where="topId=$pe->topId";
+        $levelList=$pe->getSqlElementsFromCriteria(null,null,$where,'wbsSortable');
+        if (count($levelList)==1) {
+          $pe->wbs=null;
+          $pe->wbsSortable=null;
+          $res=$pe->save();
+          if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
+          else displayError($res,true);
+        } else if (count($levelList)>1) {
+          $first=$levelList[0];
+          $second=$levelList[1];
+          $res=$second->moveTo($first->id,'before');
+          $first=new PlanningElement($first->id);
+          $second=new PlanningElement($second->id);
+          $res=$first->moveTo($second->id,'before');
+          if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
+          else displayError($res,true);
+        }
+      } else {
+        if ($issue!='') {
+          displayError(i18n("checkCannotFix"),true);
+        }
       }
     }
   }

@@ -943,7 +943,7 @@ static function isTheLeaveProject($id=null) {
       $this->ProjectPlanningElement->topRefType=null;
       $this->ProjectPlanningElement->topRefId=null;
     }
-    if (trim($this->idProject)!=trim($old->idProject)) {    	
+    if (trim($this->idProject)!=trim($old->idProject) and !$this->isLeaveMngProject) {   
       $this->ProjectPlanningElement->wbs=null;
       $this->ProjectPlanningElement->wbsSortable=null;
       $this->sortOrder=null;

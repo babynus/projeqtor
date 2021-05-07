@@ -254,7 +254,6 @@
         $value.= SqlList::getNameFromId('Affectable', $myId);
         $number++;
       }
-      debugLog($value);
       echo $value;
     }else {
       debugTraceLog("Unknown type '$type'");          

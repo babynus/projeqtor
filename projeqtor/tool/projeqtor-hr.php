@@ -625,8 +625,8 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         $prj->ProjectPlanningElement->topId=null;
         $prj->ProjectPlanningElement->topRefType=null;
         $prj->ProjectPlanningElement->topRefId=null;
-        $prj->ProjectPlanningElement->wbs=null;
-        $prj->ProjectPlanningElement->wbsSortable=null;
+        $prj->ProjectPlanningElement->wbs=0;
+        $prj->ProjectPlanningElement->wbsSortable=00000;
         $prj->ProjectPlanningElement->idOrganization=$prj->idOrganization;
         $prj->ProjectPlanningElement->organizationInherited=$prj->organizationInherited;
         $prj->ProjectPlanningElement->organizationElementary=$prj->organizationElementary;
