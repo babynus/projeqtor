@@ -100,7 +100,7 @@ $today=new Today();
       if ($todayItem->staticSection=='AccountableTasks' and !getSessionUser()->isResource) continue;
       if ($todayItem->staticSection=='ResponsibleTasks' and !getSessionUser()->isResource) continue;
     }
-    if ($todayItem->scope!="static" or $todayItem->staticSection!="ProjectsTasks" or $profile=='PL') {
+    if (($todayItem->scope!="static" or $todayItem->staticSection!="ProjectsTasks" or $profile=='PL') and $todayItem->staticSection!='Projects') {
       echo '<tr id="dialogTodayParametersRow' . htmlEncode($todayItem->id). '"
                 class="dojoDndItem" dndType="today" style="height:10px;">';
       echo '<td class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;</td>';
@@ -132,6 +132,24 @@ $today=new Today();
       }
       echo '<input type="hidden" style="width:100px" 
        id="dialogTodayParametersOrder' . htmlEncode($todayItem->id). '" name="dialogTodayParametersOrder' . htmlEncode($todayItem->id). '" 
+       value="' . htmlEncode($todayItem->sortOrder). '"/>';
+      echo '</td>';
+      echo '</tr>';
+    }else if($todayItem->staticSection=='Projects'){
+      echo '<tr id="dialogTodayParametersRow' . htmlEncode($todayItem->id). '" style="height:10px;">';
+      echo '<td >&nbsp;</td>';
+      echo '<input type="hidden" name="dialogTodayParametersDelete' . htmlEncode($todayItem->id). '" id="dialogTodayParametersDelete' . htmlEncode($todayItem->id). '" value="0" />';
+      echo '<td style="height:10px;">';
+      echo '</td>';
+      echo '<td style="width:16px;height:10px;"><div name="dialogTodayParametersIdle' . htmlEncode($todayItem->id). '"
+                 dojoType="dijit.form.CheckBox" type="checkbox" '.(($todayItem->idle=='0')?' checked="checked"':'').'>
+                </div>'.'</td>';
+      echo '<td>';
+      if ($todayItem->scope=="static") {
+        echo "<span class='nobr'>".i18n('today'.$todayItem->staticSection)."</span>";
+      } 
+      echo '<input type="hidden" style="width:100px"
+       id="dialogTodayParametersOrder' . htmlEncode($todayItem->id). '" name="dialogTodayParametersOrder' . htmlEncode($todayItem->id). '"
        value="' . htmlEncode($todayItem->sortOrder). '"/>';
       echo '</td>';
       echo '</tr>';
