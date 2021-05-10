@@ -46,8 +46,11 @@ class DocumentDirectory extends SqlElement {
   //public $_sec_void;
   public $_sec_AccessRight;
   public $_DocumentRight;
+  public $_accessRight_colSpan="2";
+  
   
   public $_noCopy;
+  
   
   // Define the layout that will be used for lists
   private static $_layout='
