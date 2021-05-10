@@ -184,7 +184,7 @@ class DocumentRight extends SqlElement {
     $widthSelect=intval($destinationWidth/($nbProf+2)-30);
      echo '<tr><td colspan="4"><div id="documenDirectory" dojotype="dijit.layout.ContentPane" >';
        $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array("id"=>258));
-       $goto=' onClick="loadMenuBarItem(\''.$classDR.'\',\''.htmlEncode(addslashes(i18n($menu->name)),'quotes').'\',\'bar\');showMenuBottomParam('.$classDR.',\'false\');" ';
+       $goto=' onClick="loadMenuBarItem(\''.$classDR.'\',\''.htmlEncode(addslashes(i18n($menu->name)),'quotes').'\',\'bar\');showMenuBottomParam(\''.$classDR.'\',\'false\');" ';
        echo '<tr><td colspan="4">';
        echo '   <div class="roundedVisibleButton roundedButton generalColClass" style="width:300px;text-align: left;position: relative; margin-top: 30px;height: 25px;margin-left: 70px" '.$goto.'>';
        echo '     <img src="css/customIcons/new/iconMoveTo.svg" class="imageColorNewGui" style="position:relative;left:5px;top:2px;top:4px;width:16px;height:16px">';
