@@ -352,7 +352,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
   this.getGlobal   = function() {
     if (vGlobal=='notSet') {  
       var cls=this.getClass();
-      if (cls=='Action' || cls=='Decision' || cls=='Delivery' || cls=='Issue' || cls=='Opportunity'
+      if (cls=='Action' || cls=='Decision' || cls=='Delivery' || cls=='Deliverable' || cls=='Incoming' || cls=='Issue' || cls=='Opportunity'
       || cls=='Question' || cls=='Risk' || cls=='Ticket' ) {
         vGlobal=true;  
       } else { 
