@@ -253,6 +253,17 @@ foreach ($lstTicket as $ticket){
 	  if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['OK'])){
 	    $result[$ticket->idTicketType][$ticket->idUrgency]['OK']++;
 	  }
+	  $duration = round(abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime)));
+	  if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'])){
+	  	$result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] += $duration;
+	  }else{
+	  	$result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] = $duration;
+	  }
+	  if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'])){
+	  	$result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] += $duration;
+	  }else{
+	  	$result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] = $duration;
+	  }
 	  $result[$ticket->idTicketType][$ticket->idUrgency]['Nb']++;
 	}else{
 	  continue;
