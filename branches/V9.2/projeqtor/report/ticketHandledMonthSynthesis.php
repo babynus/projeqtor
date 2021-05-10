@@ -71,6 +71,8 @@ if (! isset($includedReport)) {
 		$paramResponsible=trim($_REQUEST['responsible']);
 		$paramResponsible = Security::checkValidId($paramResponsible); // only allow digits
 	};
+	
+	$ticketWithoutDelay=RequestHandler::getBoolean('ticketWithoutDelay');
 
 	$user=getSessionUser();
 
@@ -115,6 +117,9 @@ if (! isset($includedReport)) {
 	if ($paramResponsible!="") {
 		$headerParameters.= i18n("colResponsible") . ' : ' . SqlList::getNameFromId('Resource', $paramResponsible) . '<br/>';
 	}
+	if ($ticketWithoutDelay!="") {
+		$headerParameters.= i18n("colTicketWithoutDelay") . ' : On' . '<br/>';
+	}
 	//END OF THAT
 	include "header.php";
 }
@@ -153,6 +158,7 @@ if ($paramResponsible!="") {
 //END ADD qCazelles - graphTickets
 
 $order="idUrgency";
+$where .= ' and handled=1';
 $ticket=new Ticket();
 $lstTicket=$ticket->getSqlElementsFromCriteria(null,false, $where, $order);
 $ticketType=new TicketType();
@@ -173,77 +179,89 @@ echo '<td class="reportTableHeader" style="width:15%"'.excelFormatCell('header',
 echo '<td class="reportTableHeader" style="width:10%"'.excelFormatCell('header',20).'>'.i18n('punctualityRate').'</td>';
 echo '</tr>';
 $result = array();
-$nbTT = 0;
-$nbOk = 0;
-$nbKo = 0;
 foreach ($lstTicket as $ticket){
 	$delay = SqlElement::getSingleSqlElementFromCriteria('TicketDelay', array('idTicketType'=>$ticket->idTicketType, 'idUrgency'=>$ticket->idUrgency, 'idProject'=>$ticket->idProject, 'idMacroTicketStatus'=>1));
 	if(!$delay->id){
 		$delay = SqlElement::getSingleSqlElementFromCriteria('TicketDelay', array('idTicketType'=>$ticket->idTicketType, 'idUrgency'=>$ticket->idUrgency, 'idMacroTicketStatus'=>1));
 	}
-	if(!$delay->id)continue;
-	$delayUnit = new DelayUnit($delay->idDelayUnit);
 	$delayValue = 0;
-	$duration = 0;
-	$startAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startAM', false);
-	$endAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endAM', false);
-	$startPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startPM', false);
-	$endPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endPM', false);
-	$hourPerDay = abs(strtotime($startAMDate)-strtotime($endAMDate))+abs(strtotime($startPMDate)-strtotime($endPMDate));
-	switch ($delayUnit->code){
-		case 'HH' :
-			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
-			$delayValue = ($duration/60)/60;
-			break;
-		case 'OH' :
-			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
-			$delayValue = $duration;
-        	if($duration>$hourPerDay){
-              $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
-              $durationHour = fmod($duration,1)*3600;
-              $duration = $durationDay+$durationHour;
-            }
-			break;
-		case 'DD' :
-			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
-			$delayValue = (($duration/60)/60)/24;
-			break;
-		case 'OD' :
-			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
-			$delayValue = $duration/24;
-        	if($duration>$hourPerDay){
-              $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
-              $durationHour = fmod($duration,1)*3600;
-              $duration = $durationDay+$durationHour;
-            }
-			break;
-	}
-	$duration = round($duration);
-	$delayValue = round($delayValue, 2);
-	$nbTT++;
-	$result[$ticket->idTicketType][$ticket->idUrgency]['Nb']=$nbTT;
-	if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'])){
-	  $result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] += $duration;
+    if(!isset($result[$ticket->idTicketType][$ticket->idUrgency]['OK'])){
+	    $result[$ticket->idTicketType][$ticket->idUrgency]['OK'] = 0;
+    }
+    if(!isset($result[$ticket->idTicketType][$ticket->idUrgency]['KO'])){
+    	$result[$ticket->idTicketType][$ticket->idUrgency]['KO'] = 0;
+    }
+    if(!isset($result[$ticket->idTicketType][$ticket->idUrgency]['Nb'])){
+    	$result[$ticket->idTicketType][$ticket->idUrgency]['Nb'] = 0;
+    }
+	if($delay->id){
+    	$delayUnit = new DelayUnit($delay->idDelayUnit);
+    	$duration = 0;
+    	$startAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startAM', false);
+    	$endAMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endAM', false);
+    	$startPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'startPM', false);
+    	$endPMDate = date('Y-m-d').' '.getDailyHours($ticket->idProject, 'endPM', false);
+    	$hourPerDay = abs(strtotime($startAMDate)-strtotime($endAMDate))+abs(strtotime($startPMDate)-strtotime($endPMDate));
+    	switch ($delayUnit->code){
+    		case 'HH' :
+    			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
+    			$delayValue = ($duration/60)/60;
+    			break;
+    		case 'OH' :
+    			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
+    			$delayValue = $duration;
+            	if($duration>$hourPerDay){
+                  $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
+                  $durationHour = fmod($duration,1)*3600;
+                  $duration = $durationDay+$durationHour;
+                }
+    			break;
+    		case 'DD' :
+    			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
+    			$delayValue = (($duration/60)/60)/24;
+    			break;
+    		case 'OD' :
+    			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
+    			$delayValue = $duration/24;
+            	if($duration>$hourPerDay){
+                  $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
+                  $durationHour = fmod($duration,1)*3600;
+                  $duration = $durationDay+$durationHour;
+                }
+    			break;
+    	}
+    	$result[$ticket->idTicketType][$ticket->idUrgency]['Nb']++;
+    	$duration = round($duration);
+    	$delayValue = round($delayValue, 2);
+    	if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'])){
+    		$result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] += $duration;
+    	}else{
+    		$result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] = $duration;
+    	}
+    	if($delayValue <= $delay->value){
+    		$nbOk++;
+    		if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'])){
+    			$result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] += $duration;
+    		}else{
+    			$result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] = $duration;
+    		}
+    		$result[$ticket->idTicketType][$ticket->idUrgency]['OK']++;
+    	}else if ($delayValue > $delay->value){
+    		if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'])){
+    			$result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'] += $duration;
+    		}else{
+    			$result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'] = $duration;
+    		}
+    		$result[$ticket->idTicketType][$ticket->idUrgency]['KO']++;
+    	}
+	}else if($ticketWithoutDelay and !$delay->id){
+	  if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['OK'])){
+	    $result[$ticket->idTicketType][$ticket->idUrgency]['OK']++;
+	  }
+	  $result[$ticket->idTicketType][$ticket->idUrgency]['Nb']++;
 	}else{
-	  $result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] = $duration;
+	  continue;
 	}
-	if($delayValue <= $delay->value){
-		$nbOk++;
-		if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'])){
-		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] += $duration;
-		}else{
-		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] = $duration;
-		}
-	}else{
-		$nbKo++;
-	if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'])){
-		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'] += $duration;
-		}else{
-		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'] = $duration;
-		}
-	}
-	$result[$ticket->idTicketType][$ticket->idUrgency]['OK']=$nbOk;
-	$result[$ticket->idTicketType][$ticket->idUrgency]['KO']=$nbKo;
 }
 $startAMDate = date('Y-m-d').' '.getDailyHours(null, 'startAM', false);
 $endAMDate = date('Y-m-d').' '.getDailyHours(null, 'endAM', false);
@@ -340,7 +358,7 @@ foreach ($lstUrgency as $urgency){
     $ponctuality = 0;
     $NB = (isset($result[$type->id][$urgency->id]['Nb']))?$result[$type->id][$urgency->id]['Nb']:0;
     if($OK)$ponctuality = ($OK/$NB)*100;
-    echo '<td class="reportTableData" style="width:10%"'.excelFormatCell('data',20).'>'.$ponctuality.' %</td>';
+    echo '<td class="reportTableData" style="width:10%"'.excelFormatCell('data',20).'>'.round($ponctuality).' %</td>';
     echo '</tr>';
   }
 }
