@@ -2146,6 +2146,9 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
       if ($listOWN) $queryWhere.=" and ($tableAlias$fieldProj not in $listOWN or $tableAlias$fieldProj is null or $clauseOWN $extraFieldCriteriaReverse)";
     }
   }
+  
+  // TODOPBER Document control over Repository access
+  
   return " (".$queryWhere.") ";
 }
 
@@ -3007,6 +3010,7 @@ function getIP() {
  *         'NO' => non access
  *         'PRO' => all elements of affected projects
  *         'OWN' => only own elements
+ *         'RES' => only elements responsible for
  *         'ALL' => any element
  */
 function securityGetAccessRight($menuName, $accessType, $obj=null, $user=null) {
@@ -3219,6 +3223,27 @@ function securityGetAccessRightYesNo($menuName, $accessType, $obj=null, $user=nu
     $app=new Approver();
     $cpt=$app->countSqlElementsFromCriteria(array('refType'=>'Document', 'refId'=>$obj->id, 'idAffectable'=>$user->id));
     if ($cpt>0) $accessRight='YES';
+  }
+  if ($accessRight=='YES' and $obj and get_class($obj)=='Document' and $obj->idDocumentDirectory) {
+    $accessRight='NO';
+    $rep=$obj->idDocumentDirectory;
+    if (!$user) $user=getSessionUser();
+    $prof=$user->getProfile($obj->idProject);
+    $dr=SqlElement::getSingleSqlElementFromCriteria('DocumentRight', array('idDocumentDirectory'=>$obj->idDocumentDirectory, 'idProfile'=>$prof));
+    if ($dr and $dr->id) {
+      $mode=new AccessProfile($dr->idAccessMode);
+      $modeCol='idAccessScope'.ucfirst($accessType);
+      $access=$mode->$modeCol;
+      $code=SqlList::getFieldFromId('AccessScope', $access, 'accessCode');
+      if ($code=='NO') $accessRight='NO';
+      else if ($code=='OWN') $accessRight=($obj->idUser==$user->id)?'YES':'NO';
+      else if ($code=='ALL') $accessRight='YES';
+      else if ($code=='RES') $accessRight=($obj->idAuthor==$user->id)?'YES':'NO';
+      else if ($code=='PRO') {
+        $pList=$user->getVisibleProjects();
+        if (isset($pList[$obj->idProject])) $accessRight='YES';
+      }
+    }
   }
   return $accessRight;
 }
