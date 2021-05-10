@@ -39,6 +39,12 @@ $WUIncoming=RequestHandler::getValue('WUIncomings');
 $WULivrable=RequestHandler::getValue('WULivrables');
 $ValidityDateWU=RequestHandler::getValue('ValidityDateWU');
 $idWorkUnit = RequestHandler::getId('idWorkUnit');
+$idle = RequestHandler::getBoolean('idleWU');
+if($idle){
+  $idle = 1;
+}else{
+  $idle = 0;
+}
 Sql::beginTransaction();
 $result = "";
 
@@ -53,6 +59,7 @@ if($mode == 'edit'){
   $wu->entering = $WUIncoming;
   $wu->deliverable = $WULivrable;
   $wu->validityDate = $ValidityDateWU;
+  $wu->idle = $idle;
   $catalog = new CatalogUO($idCatalog);
   $wu->idProject = $catalog->idProject;
   $res = $wu->save();
@@ -100,6 +107,7 @@ if($mode == 'edit'){
   $wu->entering = $WUIncoming;
   $wu->deliverable = $WULivrable;
   $wu->validityDate = $ValidityDateWU;
+  $wu->idle = $idle;
   $catalog = new CatalogUO($idCatalog);
   $wu->idProject = $catalog->idProject;
   $res = $wu->save();
