@@ -15,6 +15,7 @@ class WorkUnit extends SqlElement {
 	public $validityDate;
   public $idCatalogUO;
   public $idProject;
+  public $idle;
   	
 	private static $_databaseCriteria = array();
 	private static $_databaseColumnName = array(

@@ -7426,22 +7426,28 @@ function drawWorkUnits($obj,$listWorkUnit,$listComplexity,$refresh=false) {
   }
   echo'</tr>';
   foreach ($listWorkUnit as $val){
-    echo '<tr style="height:100%">';
-    echo '  <td class="assignData" style="width:5%;white-space:nowrap">';
+    $idleClass = "";
+    echo '<tr  style="height:100%;">';
+    if($val->idle)$idleClass= ' background:#EAEAEA; ';
+    echo '  <td class="assignData" style="'.$idleClass.'width:5%;white-space:nowrap">';
       if ($canUpdate) {
-        echo '  <a onClick="editWorkUnit(\''.$val->id.'\',\''.$obj->id.'\',\''.$val->validityDate.'\');" '.'title="'.i18n('editWorkUnit').'" > '.formatSmallButton('Edit').'</a>';
+        echo '  <a onClick="editWorkUnit(\''.$val->id.'\',\''.$obj->id.'\',\''.$val->validityDate.'\',\''.$val->idle.'\');" '.'title="'.i18n('editWorkUnit').'" > '.formatSmallButton('Edit').'</a>';
       }
       if ($canDelete) {
         echo '  <a onClick="removeWorkUnit(\''.$val->id.'\');" '.'title="'.i18n('removeWorkUnit').'" > '.formatSmallButton('Remove').'</a>';
       }
     echo '  </td>';
-    echo '  <td class="assignData" style="width:12%">'.$val->reference.'</td>';
+    echo '  <td class="assignData" style="'.$idleClass.'width:12%">'.$val->reference.'</td>';
     foreach ($listComplexity as $comp){
+      $idleClass2="";
       $compValu = SqlElement::getSingleSqlElementFromCriteria('ComplexityValues', array('idWorkUnit'=>$val->id,'idComplexity'=>$comp->id));
-      $idleClass = "";
-      if(!$compValu->price and !$compValu->charge and !$compValu->duration)$idleClass = ' background:#EAEAEA; ';
-      echo '  <td style="height:100%;padding:0;'.$idleClass.'" class="assignData">';
-      if($idleClass== ""){
+      if(!$compValu->price and !$compValu->charge and !$compValu->duration)$idleClass2 = ' background:#EAEAEA; ';
+      if($idleClass2==$idleClass){
+        echo '  <td style="height:100%;padding:0;'.$idleClass2.'" class="assignData">';
+      }else{
+        echo '  <td style="height:100%;padding:0;'.$idleClass2.$idleClass.'" class="assignData">';
+      }
+      if($idleClass2== ""){
         $work=null;
         if($compValu->charge)$work = Work::displayWorkWithUnit($compValu->charge);
         $price = ($compValu->price)?htmlDisplayCurrency($compValu->price):'';
