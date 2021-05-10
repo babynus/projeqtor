@@ -75,7 +75,7 @@ else{
       </td>
       <td width="15px">&nbsp;</td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="verticalLayout" lass="pseudoButton <?php if($paramScreen=='left')echo 'selectedLayoutPos';?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("showListLeft"); ?>"
+        <div id="verticalLayout" class="pseudoButton <?php if($paramScreen=='left')echo 'selectedLayoutPos';?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("showListLeft"); ?>"
         onclick="<?php if($paramScreen!='left' ){echo 'switchModeLayout(\'left\',true);';}?>">
           <table >
             <tr>

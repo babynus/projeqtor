@@ -26,8 +26,11 @@ function setColorTheming(ref,bis, mode) {
   if (top.dijit.byId('menuUserColorBrightness')) {
     var selectedVal=parseInt(top.dijit.byId('menuUserColorBrightness').get('value'));
     var displayVal=255-selectedVal;
+    var invertDisplayVal=224+selectedVal;
     var hex=displayVal.toString(16);
+    var invertHex=invertDisplayVal.toString(16);
     background='#'+hex+hex+hex;
+    invertBackground='#'+invertHex+invertHex+invertHex;
   }
   if (!mode) mode='hsl'; // Mode = hsl or hsv 
   if (mode=='hsl') {
@@ -162,7 +165,6 @@ function setColorTheming(ref,bis, mode) {
       if (dojo.byId("logoMenuBar")) dojo.byId("logoMenuBar").src="img/logoSmall.png";
     }
   }
-  
   var bisText = '#ffffff';
   if (bis.length == 7) {
     var red = bis.substr(1, 2);
@@ -240,6 +242,7 @@ function setColorTheming(ref,bis, mode) {
   addColor("--color-table-header", light);
   // Tools (buttons, ...)
   addColor("--color-button-background", lighter);
+  addColor("--color-button-background-selected",invertBackground)
   addColor("--color-button-text", dark);
   addColor("--image-hue-rotate", hueRotate+'deg');
   addColor("--image-hue-rotate-reverse", (-1*hueRotate)+'deg');
