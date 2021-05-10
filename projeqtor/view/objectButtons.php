@@ -690,13 +690,13 @@
     </span>
      <?php organizeButtons();?> 
      <?php 
+        $currentScreen=getSessionValue('currentScreen');
         if(Parameter::getUserParameter('paramRightDiv_'.$currentScreen)){
           $paramRightDiv=Parameter::getUserParameter('paramRightDiv_'.$currentScreen);
         }else{
           $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
         }
        $showActivityStream=false;
-       $currentScreen=getSessionValue('currentScreen');
        if ($currentScreen=='Object') $currentScreen=$objectClass;
        if($paramRightDiv=="bottom"){
          $activityStreamSize=getHeightLaoutActivityStream($currentScreen);
