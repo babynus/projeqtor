@@ -233,7 +233,7 @@ function drawButtonsDefault() {
               <?php 
               $arrayItems=array('Project','Activity','Milestone','Meeting','PeriodicMeeting','TestSession');
               if ($planningType=='resource' or $planningType=='version') $arrayItems=array('Activity');
-              if ($planningType=='global') $arrayItems=array_merge($arrayItems,array('Ticket','Action','Decision','Delivery','Risk','Issue','Opportunity','Question'));
+              if ($planningType=='global') $arrayItems=array_merge($arrayItems,array('Ticket','Action','Decision','Delivery','Deliverable','Incoming','Risk','Issue','Opportunity','Question'));
               foreach($arrayItems as $item) {
                 $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
                 if ($canCreate=='YES') {

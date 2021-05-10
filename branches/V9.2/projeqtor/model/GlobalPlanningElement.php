@@ -284,10 +284,15 @@ class GlobalPlanningElement extends SqlElement {
       if (!$limitToClass) {$query.="\n  UNION ";}
       $query.="\n    SELECT coalesce(cast( (pex.id+$pexRef) AS $formatChar) $formatCollation,concat('$class','_',$table.id)) as id, null as color";
       foreach ($obj as $fld=>$val) {
-        if (substr($fld,0,1)=='_' or $fld=='id') continue;        
+        if (substr($fld,0,1)=='_' or $fld=='id') continue;   
         $query.=", ";
         if ($fld=='priority' or $fld=='initialStartDate' or $fld=='initialEndDate' or $fld=='initialDuration' or $fld=='initialWork' or $fld=='validatedCost' or $fld=='progress') $query.="\n      ";
         if ($fld=='refType') $query.="cast('$class' AS $formatChar) $formatCollation";
+        else if (isset($convert[$fld])) {
+          if ($convert[$fld]=='null') $query.='null';
+          else if (strpos($convert[$fld],'.')!==false or strpos($convert[$fld],"'")!==false) $query.=$convert[$fld];
+          else $query.="$table.".$convert[$fld];
+        }
         else if ($fld=='isGlobal') $query.="1";
         else if ($fld=='plannedStartFraction' or $fld=='validatedStartFraction') $query.="0";
         else if ($fld=='plannedEndFraction' or $fld=='validatedEndFraction') $query.="1";
@@ -300,15 +305,11 @@ class GlobalPlanningElement extends SqlElement {
         else if ($fld=='topRefId') $query.="$table.idProject";
         else if ($fld=='elementary') $query.="1";
         else if ($fld=='idProject' or $fld=='idle' or $fld=='done' or $fld=='cancelled' or $fld=='idStatus' or $fld=='idResource') $query.="$table.$fld";
-        else if ($fld=='idType') $query.="$table.id".$class."Type";
+        else if ($fld=='idType')$query.="$table.id".$class."Type";
         else if ($fld=='wbs' or $fld=='wbsSortable') $query.="coalesce(pex.$fld,concat(pe.$fld,'._#',$table.id))";
-        else if (isset($convert[$fld])) {
-          if ($convert[$fld]=='null') $query.='null';
-          else if (strpos($convert[$fld],'.')!==false or strpos($convert[$fld],"'")!==false) $query.=$convert[$fld];
-          else $query.="$table.".$convert[$fld];
-        }
-        //florent
         else $query.="$na";
+        
+        
         $query.=" as $fld";
       }
       $query.="\n    FROM $table LEFT JOIN $peTable AS pe ON pe.refType='Project' and pe.refId=$table.idProject ";
@@ -439,7 +440,15 @@ class GlobalPlanningElement extends SqlElement {
       'Delivery'=>array('validatedEndDate'=>'initialDate',
                         'plannedStartDate'=>'plannedDate','plannedEndDate'=>'plannedDate',
                         'realStartDate'=>'handledDateTime','realEndDate'=>'realDate'
-                     )
+                     ),
+      'Deliverable'=>array('cancelled'=>'idle','done'=>'idle','validatedEndDate'=>'initialDate',
+          'plannedStartDate'=>'plannedDate','plannedEndDate'=>'plannedDate',
+          'realStartDate'=>'realDate','realEndDate'=>'realDate','idStatus'=>'idDeliverableStatus'
+                     ),
+      'Incoming'=>array('cancelled'=>'idle','done'=>'idle','validatedEndDate'=>'initialDate',
+          'plannedStartDate'=>'plannedDate','plannedEndDate'=>'plannedDate',
+          'realStartDate'=>'realDate','realEndDate'=>'realDate','idStatus'=>'idDeliverableStatus','idType'=>'idDeliverableType'
+      )
   );
 
   public static function drawGlobalizableList() {
