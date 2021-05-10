@@ -881,7 +881,6 @@ if(Parameter::getUserParameter('contentPaneTodayClassicViewHeight')){
 if(Parameter::getUserParameter('contentPaneTodayActStreamHeight')){
   $activityStreamHeight=Parameter::getUserParameter('contentPaneTodayActStreamHeight').'px';
 }
-
 if($showActStream=='false'){
   if(Parameter::getUserParameter('contentPaneTodayActStreamWidth')){
     $widthForDisplay=Parameter::getUserParameter('contentPaneTodayActStreamWidth');
@@ -889,6 +888,9 @@ if($showActStream=='false'){
   }
   if(Parameter::getUserParameter('contentPaneTodayClassicViewWidth')){
     $classicViewWidth=Parameter::getUserParameter('contentPaneTodayClassicViewWidth').'px';
+    if(Parameter::getUserParameter('contentPaneTodayClassicViewWidth')>= ($displayWidth-20)){
+      $classicViewWidth=(($displayWidth-20)-$widthForDisplay);
+    }
   }
 }
 
@@ -927,6 +929,7 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
           iconClass="dijitButtonIcon dijitButtonIconRefresh">
          <script type="dojo/connect" event="onClick" args="evt">
           if(typeof refreshEnabled === 'undefined') {
+            if(dojo.byId('isMenuLeftOpen').value=='true')dojo.byId( 'hideStreamNewGui' ).click();
             enterFullScreen();
             if (menuActualStatus == 'visible' || !menuHidden) {
               hideShowMenu(false);
@@ -957,20 +960,20 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
                if(typeof myNode !== 'undefined') {
                  dojox.fx.smoothScroll({
                     node: myNode,
-                    win: dojo.byId('detailDiv')
+                    win: dojo.byId('todayClassicView')
                  }).play();
                }
              }
              window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
              var start = null;
-             var reportNodes = dojo.query('#detailDiv .dijitTitlePane');
+             var reportNodes = dojo.query('#todayClassicView .dijitTitlePane');
              var nbReports = reportNodes.length;
               var nbTimes = 1;
              var i = 0;
               function step(timestamp) {
                 var progress;
                 if(nbReports == 0) { // When refreshing
-                  reportNodes = dojo.query('#detailDiv .dijitTitlePane');
+                  reportNodes = dojo.query('#todayClassicView .dijitTitlePane');
                   nbReports = reportNodes.length;
                   requestAnimationFrame(step);
                } else {
@@ -1007,6 +1010,7 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
               animateScrollReport();
             }, refreshDelay * 60 * 1000);
           } else {
+            if(dojo.byId('isMenuLeftOpen').value=='false')dojo.byId( 'hideStreamNewGuiTopBar' ).click();
             exitFullScreen();
             formChangeInProgress=false;
             if (dojo.byId('statusBarDiv')) dojo.byId('statusBarDiv').style.top='30px';
@@ -1058,6 +1062,7 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
           </button>   
         </div>
         <input id="defaultTodayActStreamWidth" value=<?php echo $widthForDisplay; ?>  type="hidden"/>
+        <input id="todayActStreamIsActive" value=<?php echo $showActStream; ?>  type="hidden"/>
         <?php }?>
       </div>
 
@@ -1103,17 +1108,14 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
     $drawDiv=false;
     $coutTlist=count($todayList);
     $cp=0;
-
     foreach ($todayList as $todayItem) {
       $cp++;
-      if ($todayItem->scope=='static' and $todayItem->staticSection=='Projects' and !array_key_exists("Today_project", $collapsedList)) {
+      if ($todayItem->scope=='static' and $todayItem->staticSection=='Projects' ) {
           if (!$print) { 
           $titlePane="Today_project";?>
             <div dojoType="dijit.TitlePane"
               open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
               id="<?php echo $titlePane;?>"
-              onHide="saveCollapsed('<?php echo $titlePane;?>');"
-              onShow="saveExpanded('<?php echo $titlePane;?>');"
               title="<?php echo i18n('menuProject');?>">
           <?php 
           } else {?>
@@ -1122,7 +1124,6 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
           <?php
           }
           showProjects();
-          
           ?>
           </div>
           <?php
