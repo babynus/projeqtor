@@ -108,6 +108,16 @@ $tabCompValues = array();
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr>
+             <td class="dialogLabel" >
+               <label for="idleWU" ><?php echo i18n("colIdle");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+             </td>
+             <td>
+               <div id="idleWU" name="idleWU"
+                 dojoType="dijit.form.CheckBox" type="checkbox" >
+               </div>
+             </td>    
+           </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr> <td></td><td>
            <table style="width:98%">

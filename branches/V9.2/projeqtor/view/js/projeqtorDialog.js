@@ -6919,7 +6919,7 @@ function editActivityWorkUnit(idActivityWorkUnit,id) {
   loadDialog('dialogActivityWorkUnit',callBack,false,params);
 }
 
-function editWorkUnit(id,idCatalogUO,validityDate) {
+function editWorkUnit(id,idCatalogUO,validityDate,idle) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
@@ -6933,6 +6933,11 @@ function editWorkUnit(id,idCatalogUO,validityDate) {
       dijit.byId("ValidityDateWU").set('value', validityDate);
     } else {
       dijit.byId("ValidityDateWU").reset();
+    }
+    if (idle == 1) {
+      dijit.byId("idleWU").set('value', idle);
+    } else {
+      dijit.byId("idleWU").reset();
     }
     dijit.byId("dialogWorkUnit").show();
   };

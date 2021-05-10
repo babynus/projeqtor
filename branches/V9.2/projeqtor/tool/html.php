@@ -360,6 +360,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $idProject = $catalog->getCatalogueForProject($obj->idProject);
       if(!$idProject)$idProject= $obj->idProject;
       $where="idProject=".Sql::fmtId($idProject);
+      $where.=" and idle=0 ";
       $workUnit=new WorkUnit();
       $list=$workUnit->getSqlElementsFromCriteria(null,null, $where);
       foreach ($list as $wu) {
