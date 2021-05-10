@@ -22,6 +22,7 @@ function setColorTheming(ref,bis, mode) {
   }
   var white='#ffffff';
   var black='#000000';
+  var invertBackground="#e0e0e0";
   var background='#ffffff';
   if (top.dijit.byId('menuUserColorBrightness')) {
     var selectedVal=parseInt(top.dijit.byId('menuUserColorBrightness').get('value'));
@@ -242,7 +243,7 @@ function setColorTheming(ref,bis, mode) {
   addColor("--color-table-header", light);
   // Tools (buttons, ...)
   addColor("--color-button-background", lighter);
-  addColor("--color-button-background-selected",invertBackground)
+  addColor("--color-button-background-selected",invertBackground);
   addColor("--color-button-text", dark);
   addColor("--image-hue-rotate", hueRotate+'deg');
   addColor("--image-hue-rotate-reverse", (-1*hueRotate)+'deg');
