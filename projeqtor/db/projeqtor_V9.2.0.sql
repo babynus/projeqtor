@@ -106,6 +106,12 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (2,258,1),
 (3,258,1);
 
+ALTER TABLE `${prefix}documentdirectory` ADD COLUMN `idResource` int(12) unsigned DEFAULT NULL COMMENT '12';
+ALTER TABLE `${prefix}documentdirectory` ADD COLUMN `idUser` int(12) unsigned DEFAULT NULL COMMENT '12';
+CREATE INDEX `documentdirectoryResource` ON `${prefix}documentdirectory` (`idResource`);
+CREATE INDEX `documentdirectoryUser` ON `${prefix}documentdirectory` (`idUser`);
+UPDATE `${prefix}documentdirectory` set idUser=(select min(id) from `${prefix}resource`);
+UPDATE `${prefix}menu` set level='ReadWritePrincipal' where id=103;
 
 CREATE TABLE `${prefix}documentright` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
