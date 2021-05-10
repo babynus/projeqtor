@@ -1892,7 +1892,7 @@ function removeLink(linkId, refType, refId, refTypeName, fixedClass) {
   showConfirm(msg, actionOK);
 }
 
-function editLink(linkId,id){
+function editLink(linkId,id,classLink){
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
@@ -1903,6 +1903,9 @@ function editLink(linkId,id){
       handleAs : "text",
       load : function(data) {
         dijit.byId('linkComment').set('value', data);
+        if(classLink){
+          dojo.byId("linkFixedClass").value=classLink;
+        }
       }
       });
     dijit.byId("dialogLink").show();

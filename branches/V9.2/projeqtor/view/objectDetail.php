@@ -4914,7 +4914,8 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
           }
         }
         if ($canUpdate) {
-          echo '  <a onClick="editLink('."'".htmlEncode($link->id)."','".$default."'".');" title="'.i18n('editLink').'" > '.formatSmallButton('Edit').'</a>';
+          if(!$classLink)$classLink="";
+          echo '  <a onClick="editLink('."'".htmlEncode($link->id)."','".$default."','".$classLink."'".');" title="'.i18n('editLink').'" > '.formatSmallButton('Edit').'</a>';
           echo '  <a onClick="removeLink('."'".htmlEncode($link->id)."','".get_class($linkObj)."','".htmlEncode($linkObj->id)."','".$classLinkName."','".$classLink."'".');" title="'.i18n('removeLink').'" > '.formatSmallButton('Remove').'</a>';
         }
         echo '</td>';
