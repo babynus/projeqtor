@@ -1001,7 +1001,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $crit=array('refId'=>$obj->id, 'refType'=>get_class($obj));
         $situation=new Situation();
         $cpt=$situation->countSqlElementsFromCriteria($crit);
-      } else {
+      }else {
         // ADD BY Marc TABARY - 2017-03-16 - FORCE SECTION ITEM'S COUNT
         // Want a item's count on section header
         // => In the section's declaration in the class : _sec_XXXXXXXX='itemsCount=method to call to count item'
