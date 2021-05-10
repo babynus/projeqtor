@@ -271,7 +271,7 @@ label, .ProjeQtOrNewGui label,
 }
 
 .ProjeQtOrNewGui #changeScreenLayoutAutherPos{
-	background:white;
+	background:background: var(--color-background));
 	height: 36px;
 	left:-35px;
 	width: 108px;
@@ -292,9 +292,7 @@ label, .ProjeQtOrNewGui label,
 }
 
 .ProjeQtOrNewGui .selectedLayoutPos {
-  	-webkit-filter : invert(20%) ;
-  	filter: invert(20%) hue-rotate(180deg);
-    background: var(--color-background) !important;
+    background: var(--color-button-background-selected) !important;
 }
 /* === MENU BUTTONS AND ITEMS CSS ===================================================== MENU ===*/
 

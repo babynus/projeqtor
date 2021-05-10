@@ -222,6 +222,24 @@
           },
           duration : duration
       })]).play();
+      if(dojo.byId('todayClassicView') && dojo.byId('todayActStream')){
+        var todayActStreamWidth=(dojo.byId('todayActStreamIsActive').value=='true')? 0 : parseInt(dojo.byId('defaultTodayActStreamWidth').value);
+        var todayClassicViwWidth=(globalWidth-20)-todayActStreamWidth;
+        dojox.fx.combine([ dojox.fx.animateProperty({
+          node : "todayClassicView",
+          properties : {
+            width : todayClassicViwWidth,
+            left: { start:(this.isMenuOpen=='true')? 0 : 250 ,end:(this.isMenuOpen=='true')? 250 : 0}
+          },
+          duration : duration
+        }), dojox.fx.animateProperty({
+          node : "todayActStream",
+          properties : {
+            width : todayActStreamWidth
+          },
+          duration : duration
+        })]).play();
+      }
       setTimeout('dijit.byId("globalContainer").resize();', duration+5);
       var detailHidden=false;
       if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;

@@ -1389,7 +1389,7 @@ else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable
               </td>
               <?php } ?>
               <td  style="width:34%;">
-                <div id="changeScreenLayoutButtonCopy" class="pseudoButton"  style="Background:#D1D1D1 !important;border-radius:4px;height:28px;position:relative;top:1px;left: 2px;" 
+                <div id="changeScreenLayoutButtonCopy" class="pseudoButton selectedLayoutPos"  style="height:28px;position:relative;top:1px;left: 2px;" 
                 onclick="dojo.byId('changeScreenLayoutAutherPos').style.display='none';dojo.byId('changeScreenLayoutButton').style.display='block';">
                      <div class="  <?php echo $iconLayoutName;?> imageColorNewGui" style="position:relative;left: 17%;top: 6%;" ></div>
                 </div>
