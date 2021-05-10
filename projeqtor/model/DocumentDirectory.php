@@ -38,7 +38,8 @@ class DocumentDirectory extends SqlElement {
   public $location;
   public $idProject;
   public $idProduct;
-  //public $idProduct;
+  public $idResource;
+  public $idUser;
   public $idDocumentType;
   //public $sortOrder=0;
   public $idle;
@@ -59,12 +60,14 @@ class DocumentDirectory extends SqlElement {
     ';
 
    private static $_colCaptionTransposition = array('idDocumentDirectory' => 'parentDirectory',
-                                                    'idDocumentType'=>'defaultType'
+                                                    'idDocumentType'=>'defaultType',
+                                                    'idResource'=>'responsible'
                                                     );
    
    private static $_fieldsAttributes=array("name"=>"required",
                                            "location"=>"readonly",
-                                           "idDocumentDirectory"=>"");  
+                                           "idDocumentDirectory"=>"",
+                                           'idUser'=>'hidden');  
    
    private static $_databaseColumnName = array();
   
