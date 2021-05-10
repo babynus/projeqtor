@@ -2416,7 +2416,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $critVal=$obj->idProvider;
           } else if (property_exists($obj, 'idProject') and get_class($obj)!='Project' and get_class($obj)!='Affectation') {
             //gautier #2620
-            if ($obj->id) {
+            if ($obj->id and $obj->idProject) {
               $critFld='idProject';
               $critVal=$obj->idProject;
             } else if ($obj->isAttributeSetToField('idProject', 'required') or (sessionValueExists('project') and getSessionValue('project')!='*')) {
