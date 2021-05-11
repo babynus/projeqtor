@@ -87,6 +87,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $_spe_idWorkUnits;
   public $_separator_menuReview_marginTop;
   public $_tab_5_2_smallLabel_3 = array('', '', '', '', '', 'progress','priority');
+  public $_tab_5_1_smallLabel_4 = array('', '', '', '', '', 'progress');
   public $progress;
   public $_label_expected;
   public $expectedProgress;
@@ -149,6 +150,7 @@ class ActivityPlanningElementMain extends PlanningElement {
     "latestEndDate"=>"hidden",
     "isOnCriticalPath"=>"hidden",
     "isManualProgress"=>"hidden",
+    "_tab_5_1_smallLabel_4"=>"hidden",
     "_spe_isOnCriticalPath"=>"",
     "_label_indivisibility"=>"",
     "indivisibility"=>"",
@@ -340,6 +342,21 @@ class ActivityPlanningElementMain extends PlanningElement {
       self::$_fieldsAttributes["paused"]="readonly,nobr";
     }
     
+    if($this->id){
+      $proj= new Project();
+      $count=$proj->countSqlElementsFromCriteria(array("id"=>$this->idProject,'codeType'=>'ADM'));
+      if($count!=0){
+        if(self::$_fieldsAttributes["fixPlanning"]!="hidden")self::$_fieldsAttributes["fixPlanning"]="hidden";
+        if(self::$_fieldsAttributes["paused"]!="hidden")self::$_fieldsAttributes["paused"]="hidden";
+        self::$_fieldsAttributes["priority"]="hidden";
+        self::$_fieldsAttributes["idActivityPlanningMode"]="hidden";
+        self::$_fieldsAttributes["minimumThreshold"]="hidden";
+        self::$_fieldsAttributes["indivisibility"]="hidden";
+        unset($this->_tab_5_2_smallLabel_3);
+      }else{
+        unset($this->_tab_5_1_smallLabel_4);
+      }
+    }
   }
   /** ==========================================================================
    * Destructor

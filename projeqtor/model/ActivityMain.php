@@ -297,6 +297,7 @@ class ActivityMain extends SqlElement {
       $colScript .= '  dojo.byId("ActivityPlanningElement_wbs").value=""; ';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
+      
     } else if ($colName == "idActivityType") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  setDefaultPlanningMode(this.value);';
@@ -890,7 +891,24 @@ class ActivityMain extends SqlElement {
     if(Parameter::getGlobalParameter('activityOnRealTime')!='YES' or $this->ActivityPlanningElement->hasWorkUnit){
       self::$_fieldsAttributes["workOnRealTime"]='hidden';
     }
-
+    if($this->id){
+      $proj= new Project();
+      $count=$proj->countSqlElementsFromCriteria(array("id"=>$this->idProject,'codeType'=>'ADM'));
+      if($count!=0){
+        if(self::$_fieldsAttributes["fixPlanning"]!="hidden")self::$_fieldsAttributes["fixPlanning"]="hidden";
+        if(self::$_fieldsAttributes["workOnRealTime"]!="hidden")self::$_fieldsAttributes["workOnRealTime"]='hidden';
+        if(self::$_fieldsAttributes["paused"]!="hidden")self::$_fieldsAttributes["paused"]="hidden";
+        if(self::$_fieldsAttributes["isPlanningActivity"]!="hidden")self::$_fieldsAttributes["isPlanningActivity"]="hidden";
+        self::$_fieldsAttributes["_sec_predecessor"]="hidden";
+        self::$_fieldsAttributes["_Dependency_Predecessor"]="hidden";
+        self::$_fieldsAttributes["_sec_successor"]="hidden";
+        self::$_fieldsAttributes["_Dependency_Successor"]="hidden";
+        unset($this->_sec_predecessor);
+        unset($this->_Dependency_Predecessor);
+        unset($this->_sec_successor);
+        unset($this->_Dependency_Successor);
+      }
+    }
   }
   
   protected function getStaticFieldsTooltip() {
