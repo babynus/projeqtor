@@ -34,8 +34,12 @@ class PokerSessionMain extends SqlElement {
   public $id;
   public $name;
   public $idProject;
-  public $date;
-  public $_button_startEndPokerSession;
+  public $pokerSessionDate;
+  public $_lib_from;
+  public $pokerSessionStartTime;
+  public $_lib_to;
+  public $pokerSessionEndTime;
+  public $_spe_startPokerSession;
   public $idResource;
   public $handled;
   public $handledDate;
@@ -43,34 +47,55 @@ class PokerSessionMain extends SqlElement {
   public $doneDate;
   public $idle;
   public $idleDate;
-  public $_sec_pokerMember;
-  public $_spe_pokerMember;
+  public $_sec_Attendees;
+  public $_Assignment=array();
+  public $attendees;
+  public $_spe_buttonAssignTeam;
   public $_sec_pokerItem;
   public $_spe_pokerItem;
+  public $_sec_progress_left;
+  public $PokerSessionPlanningElement;
   public $_sec_pokerVote;
   public $_spe_pokerVote;
+  public $_sec_predecessor;
+  public $_Dependency_Predecessor=array();
+  public $_sec_successor;
+  public $_Dependency_Successor=array();
+  public $pokerSessionStartDateTime;
+  public $pokerSessionEndDateTime;
+  public $_sec_Link;
+  public $_Link=array();
+  public $_Attachment=array();
+  public $_Note=array();
+  public $_nbColMax=3;
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
     <th field="name" width="15%">${name}</th>
     <th field="nameProject" width="15%">${idProject}</th>
-    <th field="date" width="10%" formatter="dateFormatter">${date}</th>
+    <th field="pokerSessionDate" width="10%" formatter="dateFormatter">${date}</th>
     <th field="nameResource" formatter="thumbName22" width="15%">${responsible}</th>
     ';
   
-  private static $_fieldsAttributes=array("name"=>"readonly",
-                                  "idProject"=>"readonly",
-                                  "date"=>"readonly, nobr",
+  private static $_fieldsAttributes=array("idProject"=>"readonly",
+                                  "pokerSessionDate"=>"readonly, nobr",
+                                  "_lib_from"=>'nobr',
+                                  "pokerSessionStartTime"=>'readonly, nobr',
+                                  "pokerSessionEndTime"=>'readonly',
+                                  "_lib_to"=>'readonly, nobr',
                                   "idResource"=>"readonly",
                                   "handled"=>"readonly, nobr",
                                   "done"=>"readonly, nobr",
                                   "idle"=>"readonly, nobr",
-                                  "handledDate"=>"readonly",
-                                  "doneDate"=>"readonly",
-                                  "idleDate"=>"readonly",
+                                  "pokerSessionStartDateTime"=>"hidden",
+                                  "pokerSessionEndDateTime"=>"hidden",
   );
   
-  private static $_colCaptionTransposition = array('idResource'=> 'responsible');
+  private static $_colCaptionTransposition = array('idResource'=> 'responsible',
+                                                  'attendees'=>'otherAttendees',
+                                                  'pokerSessionStartDateTime'=>'pokerSessionStartTime',
+                                                  'pokerSessionEndDateTime'=>'pokerSessionEndTime'
+  );
   
   public function setAttributes() {
     if(!$this->id){
@@ -124,20 +149,37 @@ class PokerSessionMain extends SqlElement {
   }
   
   public function drawSpecificItem($item) {
-  	if ($item=='startEndPokerSession') {
-  	    $name=(!$this->handled)?i18n('startPokerSession'):i18n('endPokerSession');
-  		echo '<div id="'.$item.'" title="' . $name . '" style="float:right;padding:3px 0px 0px 5px;left: 285px;position: absolute;top: 119px;" >';
-  		echo '<button id="' . $item . 'Button" dojoType="dijit.form.Button" style="width:150px;vertical-align: middle;" class="roundedVisibleButton">';
-  		echo '<span>' . $name . '</span>';
-  		echo '<script type="dojo/connect" event="onClick" args="evt">';
-  		echo (!$this->handled)?'startPokerSession('.$this->id.');':'endPokerSession('.$this->id.');';
-  		echo '</script>';
-  		echo '</button>';
-  		echo '</div>';
-  	}
-  	if($item=="pokerMember"){
-  	  drawPokerMember($this, 'Session');
-  	}
+    global $print;
+    $canUpdate=securityGetAccessRightYesNo('menuPokerSession', 'update', $this) == "YES";
+    $result = "";
+    if ($item=='buttonAssignTeam') {
+    	if ($print or !$canUpdate  or !$this->id or $this->idle or $this->done) {
+    		return "";
+    	}
+    	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
+    	$result .= '<button id="attendeesAllTeam" dojoType="dijit.form.Button" showlabel="true" onClick ="assignTeamForMeeting()"';
+    	$result .= ' title="' . i18n('buttonAssignWholeTeam') . '" class="roundedVisibleButton">';
+    	$result .= '<span>' . i18n('buttonAssignWholeTeam') . '</span>';
+    	$result .= '</button>';
+    	$result .= '</td></tr>';
+    	return $result;
+    }
+    if($item=="startPokerSession"){
+    	if ($print or !$canUpdate or ! $this->id or $this->idle or $this->done or !$this->handled) {
+    		return "";
+    	}
+    	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
+    	$result .= '<button id="startMeeting" dojoType="dijit.form.Button" showlabel="true"';
+    	$result .= ' title="' . i18n('pokerSessionStart') . '" class="roundedVisibleButton">';
+    	$result .= '<span>' . i18n('pokerSessionStart') . '</span>';
+    	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
+    	$result .= '   if (checkFormChangeInProgress()) {return false;}';
+    	$result .=  '  ';
+    	$result .= '</script>';
+    	$result .= '</button>';
+    	$result .= '</td></tr>';
+    	return $result;
+    }
   	if($item=="pokerItem"){
 	  drawPokerItem($this, 'Session');
   	}
