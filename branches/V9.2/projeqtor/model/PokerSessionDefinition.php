@@ -31,20 +31,21 @@ require_once('_securityCheck.php');
 class PokerSessionDefinition extends PokerSessionMain {
   
    private static $_databaseTableName = 'pokersession';
-  
-   private static $_fieldsAttributes=array("name"=>"required",
-                                  "idProject"=>"required",
-                                  "date"=>"required, nobr",
-                                  "idResource"=>"required",
-                                  "handled"=>"readonly, nobr",
-                                  "done"=>"readonly, nobr",
-                                  "idle"=>"readonly, nobr",
-                                  "handledDate"=>"readonly",
-                                  "doneDate"=>"readonly",
-                                  "idleDate"=>"readonly",
-                                  "_sec_pokerVote"=>"hidden"
+   
+   private static $_fieldsAttributes=array("idProject"=>"required",
+   		"pokerSessionDate"=>"required, nobr",
+   		"_lib_from"=>'nobr',
+   		"pokerSessionStartTime"=>'nobr',
+   		"_lib_to"=>'nobr',
+   		"idResource"=>"required",
+   		"handled"=>"readonly, nobr",
+   		"done"=>"readonly, nobr",
+   		"idle"=>"readonly, nobr",
+   		"pokerSessionStartDateTime"=>"hidden",
+   		"pokerSessionEndDateTime"=>"hidden",
+        "_sec_pokerVote"=>"hidden"
    );
-
+  
    public function setAttributes() {
    	if(!$this->id){
    		self::$_fieldsAttributes ['_button_startEndPokerSession'] = 'hidden';
@@ -94,8 +95,24 @@ class PokerSessionDefinition extends PokerSessionMain {
   }
   
   public function drawSpecificItem($item) {
-    if($item=="pokerMember"){
-    	drawPokerMember($this, 'Definition');
+    global $print;
+    $canUpdate=securityGetAccessRightYesNo('menuPokerSession', 'update', $this) == "YES";
+    $result = "";
+    if($item=="startPokerSession"){
+    	if ($print or !$canUpdate or ! $this->id or $this->idle or $this->done or $this->handled) {
+    		return "";
+    	}
+    	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
+    	$result .= '<button id="startMeeting" dojoType="dijit.form.Button" showlabel="true"';
+    	$result .= ' title="' . i18n('pokerSessionStart') . '" class="roundedVisibleButton">';
+    	$result .= '<span>' . i18n('pokerSessionStart') . '</span>';
+    	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
+    	$result .= '   if (checkFormChangeInProgress()) {return false;}';
+    	$result .=  '  ';
+    	$result .= '</script>';
+    	$result .= '</button>';
+    	$result .= '</td></tr>';
+    	return $result;
     }
     if($item=="pokerItem"){
     	drawPokerItem($this, 'Definition');

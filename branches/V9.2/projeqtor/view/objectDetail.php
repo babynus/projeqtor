@@ -9807,10 +9807,9 @@ function drawPokerItem($obj, $scope){
   	}
   	echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:30%">'.i18n('colname').'</td>';
+  echo '<td class="assignHeader" style="width:30%">'.i18n('colName').'</td>';
   echo '<td class="assignHeader" style="width:30%">'.i18n('colReference').'</td>';
-  echo '<td class="assignHeader" style="width:25%">'.i18n('colValue').'</td>';
-  echo '<td style="width:5%"></td>';
+  echo '<td class="assignHeader" style="width:30%">'.i18n('colValue').'</td>';
   echo '</tr>';
   $pokerItem = new PokerItem();
   $critArray = array('idPokerSession'=>$obj->id);
@@ -9825,15 +9824,16 @@ function drawPokerItem($obj, $scope){
     }
     echo '<td class="noteData" style="width:30%; text-align: center;">'.htmlEncode($item->name).'</td>';
     echo '<td class="noteData" style="width:30%; text-align: center;">'.htmlEncode($item->refType).' #'.htmlEncode($item->refId).'</td>';
-    echo '<td class="noteData" style="width:25%; text-align: center;">'.htmlEncode($item->value).'</td>';
-    echo '<td style="width:5%; text-align: center;">';
+    echo '<td class="noteData" style="width:30%; text-align: center;">';
+    echo '<table widht="100%"><tr><td>'.htmlEncode($item->value).'</td>';
+    echo '<td style="float:right;text-align: center;">';
     echo ' <button id="openPokerVote' . $item->id . '" dojoType="dijit.form.Button" style="width:150px;vertical-align: middle;" class="roundedVisibleButton">';
 	echo '   <span>' . i18n('openPokerVote') . '</span>';
 	echo '   <script type="dojo/connect" event="onClick" args="evt">';
 	echo '     openPokerVote('.$item->id.');';
 	echo '   </script>';
 	echo ' </button>';
-    echo '</td>';
+    echo '</td></tr></table></td>';
     echo '</tr>';
   }
   echo '</table>';
