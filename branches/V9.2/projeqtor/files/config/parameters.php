@@ -1,4 +1,4 @@
-<?php 
+<?php
 // =======================================================================================
 // PARAMETERS
 // =======================================================================================
@@ -7,6 +7,7 @@
 $paramDbType='mysql'; $paramDbPort='3306'; $paramDbUser='root'; $paramDbPassword='mysql';
 $paramDbName='projeqtor_v92';$paramDbPrefix='';
 // --- PostgreSql Default
+//$paramDbName='projeqtor_suivi';$paramDbPrefix='';
 //$paramDbType='pgsql'; $paramDbPort='5432'; $paramDbName='projeqtor'; $paramDbUser='projeqtor'; $paramDbPassword='projeqtor';
 //$paramDbName='support_ige';$paramDbPrefix=''; 
 $paramDbHost='127.0.0.1';          // With MySql on Windows, better use "127.0.0.1" rather than "localhost"
@@ -27,7 +28,7 @@ $pdfNamePrefix="ProjeQtOr - ";     // Prefix for PDF files
 $debugQuery=false;                 // Debug all queries : trace Query and running time for each query
 $debugJsonQuery=false;             // Trace only JsonQuery queries  (retrieving lists)
 $debugPerf=true;                   // Add some timestamps and execution time at all debug lines
-$debugTraceUpdates=false;          // Will add trace on each save() or delete(), except for History and Audit
+$debugTraceUpdates=false;           // Will add trace on each save() or delete(), except for History and Audit
 $debugTraceHistory=false;          // Will add trace on each save() or delete() of History and Audit (only if $debugTraceUpdates=true;)
 $debugReport=true;                 // Displays report file name on report header
 $i18nNocache=true;                 // Will not cache i18n table, so that new values are automatically displayed without needing disconnection

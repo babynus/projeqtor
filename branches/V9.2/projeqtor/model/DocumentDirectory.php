@@ -345,5 +345,33 @@ class DocumentDirectory extends SqlElement {
     }
   }
   
+  private static $arrayCanSee=array();
+  public static function canSeeDirectory($idProject, $idDirectory, $idAuthor, $idUser, $mode='read', $user=null) {
+    if (!$user) $user=getSessionUser();
+    $prf=$user->getProfile($idProject);
+    if (!isset(self::$arrayCanSee[$mode])) self::$arrayCanSee[$mode]=array();
+    if (!isset(self::$arrayCanSee[$mode][$prf])) self::$arrayCanSee[$mode][$prf]=array();
+    if (isset(self::$arrayCanSee[$mode][$prf][$idDirectory])) return self::$arrayCanSee[$mode][$prf][$idDirectory];
+    $dr=SqlElement::getSingleSqlElementFromCriteria('DocumentRight', array('idDocumentDirectory'=>$idDirectory,'idProfile'=>$prf));
+    if (!$dr or !$dr->id) {
+      $right=true;
+    } else {
+      $right=false;
+      $ap=new AccessProfile($dr->idAccessMode);
+      $col='idAccessScope'.ucfirst($mode);
+      $as=new AccessScope($ap->$col);
+      $code=$as->accessCode;
+      if ($code=='NO') $right=false;
+      else if ($code=='OWN' and $idUser==$user->id) $right=true;
+      else if ($code=='ALL') $right=true;
+      else if ($code=='RES' and $idAuthor==$user->id) $right=true;
+      else if ($code=='PRO') {
+        $pList=$user->getVisibleProjects();
+        if (isset($pList[$obj->idProject])) $right=true;
+      }
+    }
+    self::$arrayCanSee[$mode][$prf][$idDirectory]=$right;
+    return $right;
+  }
 }
 ?>
