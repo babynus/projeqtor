@@ -2176,7 +2176,6 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
     
     $t=(new DocumentRight())->getDatabaseTableName();
     $ta=trim($tableAlias,'.');
-    debugLog("Profil $prfDef, projects not in ".transformListIntoInClause($arrProjDef));
     $clauseDoc="( ($ta.idProject is null or $ta.idProject not in ".transformListIntoInClause($arrProjDef) . ") and ( \n";
     $clauseDoc.="    ( $ta.idUser=$user->id and $ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$prfDef and $t.idAccessMode in ".transformListIntoInClause($arrayCode['OWN'])." ) )\n";
     $clauseDoc.=" or ( $ta.idAuthor=$user->id and $ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$prfDef and $t.idAccessMode in ".transformListIntoInClause($arrayCode['RES'])." ) )\n";
