@@ -356,7 +356,9 @@ class ActivityPlanningElementMain extends PlanningElement {
       }else{
         unset($this->_tab_5_1_smallLabel_4);
       }
-    }
+    }else{
+        unset($this->_tab_5_1_smallLabel_4);
+      }
   }
   /** ==========================================================================
    * Destructor
