@@ -2147,8 +2147,55 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
     }
   }
   
-  // TODOPBER Document control over Repository access
-  
+  // Document control over Repository access
+  if ($objectClass=='Document') {
+    $prfDef=$user->idProfile;
+    $arrProjProf=array();
+    $arrProjDef=array();
+    $arrProjProf[$user->idProfile]=array();
+    foreach ($user->getSpecificAffectedProfiles() as $affProj=>$affProf) {
+      if (!isset($arrProjProf[$affProf])) $arrProjProf[$affProf]=array();
+      $arrProjProf[$affProf][$affProj]=$affProj;
+      $arrProjDef[$affProj]=$affProj;
+    }
+    $arrayCode=array();
+    $code=SqlList::getList('AccessScope','accessCode');
+    $arrayCode['NO']=array();   // id 1 
+    $arrayCode['OWN']=array();  // id 2
+    $arrayCode['PRO']=array();  // id 3
+    $arrayCode['RES']=array();  // id 4
+    $arrayCode['ALL']=array();  // id 5
+    $ap=new AccessProfile();
+    $apList=$ap->getSqlElementsFromCriteria(array());
+    foreach ($apList as $ap) {
+      $arrayCode[$code[$ap->idAccessScopeRead]][$ap->id]=$ap->id; 
+    }
+//     $inRes=" (idAuthor=$user->id and idDocumentDirectory in (0,";
+//     $inOwn=" (idUser=$user->id and idDocumentDirectory in (0,";
+//     $inPro=" (idProject in ".transformListIntoInClause($user->getVisibleProjects())." and idDocumentDirectory in (0,";
+    
+    $t=(new DocumentRight())->getDatabaseTableName();
+    $ta=trim($tableAlias,'.');
+    debugLog("Profil $prfDef, projects not in ".transformListIntoInClause($arrProjDef));
+    $clauseDoc="( ($ta.idProject is null or $ta.idProject not in ".transformListIntoInClause($arrProjDef) . ") and ( \n";
+    $clauseDoc.="    ( $ta.idUser=$user->id and $ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$prfDef and $t.idAccessMode in ".transformListIntoInClause($arrayCode['OWN'])." ) )\n";
+    $clauseDoc.=" or ( $ta.idAuthor=$user->id and $ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$prfDef and $t.idAccessMode in ".transformListIntoInClause($arrayCode['RES'])." ) )\n";
+    //$clauseDoc.=" or ($ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$prfDef and $t.idAccessMode in ".transformListIntoInClause($arrayCode['PRO'])." ) )";
+    $clauseDoc.=" or ( $ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$prfDef and $t.idAccessMode in ".transformListIntoInClause($arrayCode['ALL'])." ) )\n";
+    $clauseDoc.="  ) and $ta.idDocumentDirectory not in (select $t.idDocumentDirectory from $t where $t.idProfile=$affProf and $t.idAccessMode in ".transformListIntoInClause($arrayCode['NO'])." ) )\n";
+    foreach ($arrProjProf as $affProf=>$projList) {
+      if (count($projList)==0) continue;
+      // Direct query for perf
+      $clauseDoc.=' or ';
+      $clauseDoc.="($ta.idProject in ".transformListIntoInClause($projList) . " and ( \n";
+      $clauseDoc.="    ($ta.idUser=$user->id and $ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$affProf and $t.idAccessMode in ".transformListIntoInClause($arrayCode['OWN'])." ) )\n";
+      $clauseDoc.=" or ($ta.idAuthor=$user->id and $ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$affProf and $t.idAccessMode in ".transformListIntoInClause($arrayCode['RES'])." ) )\n";
+      $clauseDoc.=" or ($ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$affProf and $t.idAccessMode in ".transformListIntoInClause($arrayCode['PRO'])." ) )\n";
+      $clauseDoc.=" or ($ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$affProf and $t.idAccessMode in ".transformListIntoInClause($arrayCode['ALL'])." ) )\n";
+      $clauseDoc.="  ) and $ta.idDocumentDirectory not in (select $t.idDocumentDirectory from $t where $t.idProfile=$affProf and $t.idAccessMode in ".transformListIntoInClause($arrayCode['NO'])." ) )\n";
+    }
+    $queryWhere.=' and (' . $clauseDoc. ')';
+  }
   return " (".$queryWhere.") ";
 }
 
@@ -3243,6 +3290,11 @@ function securityGetAccessRightYesNo($menuName, $accessType, $obj=null, $user=nu
         $pList=$user->getVisibleProjects();
         if (isset($pList[$obj->idProject])) $accessRight='YES';
       }
+    }
+    if ($accessType=='read' and $obj->id) { // Must give read acces to approver
+      $approv=new Approver();
+      $cpt=$approv->countSqlElementsFromCriteria(array('refType'=>'Document','refId'=>$obj->id,'idAffectable'=>$user->id));
+      if ($cpt>0) $accessRight='YES';
     }
   }
   return $accessRight;
