@@ -899,14 +899,17 @@ class ActivityMain extends SqlElement {
         if(self::$_fieldsAttributes["workOnRealTime"]!="hidden")self::$_fieldsAttributes["workOnRealTime"]='hidden';
         if(self::$_fieldsAttributes["paused"]!="hidden")self::$_fieldsAttributes["paused"]="hidden";
         if(self::$_fieldsAttributes["isPlanningActivity"]!="hidden")self::$_fieldsAttributes["isPlanningActivity"]="hidden";
-        self::$_fieldsAttributes["_sec_predecessor"]="hidden";
         self::$_fieldsAttributes["_Dependency_Predecessor"]="hidden";
-        self::$_fieldsAttributes["_sec_successor"]="hidden";
         self::$_fieldsAttributes["_Dependency_Successor"]="hidden";
+        self::$_fieldsAttributes["idProduct"]="hidden";
+        self::$_fieldsAttributes["idComponent"]="hidden";
+        self::$_fieldsAttributes["idTargetProductVersion"]="hidden";
+        self::$_fieldsAttributes["idTargetComponentVersion"]="hidden";
         unset($this->_sec_predecessor);
         unset($this->_Dependency_Predecessor);
         unset($this->_sec_successor);
         unset($this->_Dependency_Successor);
+        unset($this->_sec_productComponent);
       }
     }
   }
