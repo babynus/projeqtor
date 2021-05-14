@@ -680,6 +680,30 @@ if ($type == 'empty') {
   if ($dataType == 'idLinkable' or $dataType == 'idCopyable' or $dataType == 'idImportable' or $dataType == 'idMailable' or $dataType == 'idIndicatorable' or $dataType == 'idChecklistable' or $dataType == 'idDependable' or $dataType == 'idOriginable' or $dataType == 'idReferencable' or $dataType == 'idNotifiable'  ) {
     asort ( $list );
   }
+  if ($dataType=='idDocumentDirectory') {
+    $list=SqlList::getList('DocumentDirectory','location');
+    $idP=null;
+    $obj=SqlElement::getCurrentObject();
+    if ($critField=='idProject' and trim($critValue)) $idP=$critValue;
+    $prf=$user->getProfile($idP);
+    $excludeArray=array();
+    foreach ($list as $idT=>$valT) {
+      $dr=SqlElement::getSingleSqlElementFromCriteria('DocumentRight',array('idDocumentDirectory'=>$idT,'idProfile'=>$prf),true);
+      $am=new AccessProfile($dr->idAccessMode);
+      $mode=($obj->id)?$am->idAccessScopeUpdate:$am->idAccessScopeCreate;
+      //$mode=$am->idAccessScopeCreate;
+      $right=SqlList::getFieldFromId('AccessScope', $mode, 'accessCode');
+      if ($right=='NO') {
+        $excludeArray[$idT]=$valT;
+      } else if ($right=='PRO') {
+        $affList=$user->getAffectedProjects(true);
+        if (! isset($affList[$idP])) {
+          $excludeArray[$idT]=$valT;
+        }
+      }
+    }
+    $list=array_diff ($list, $excludeArray);
+  }
   $pluginObjectClass = substr ( $dataType, 2 );
   $table = $list;
   $lstPluginEvt = Plugin::getEventScripts ( 'list', $pluginObjectClass );

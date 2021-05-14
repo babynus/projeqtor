@@ -9458,6 +9458,7 @@ function setWidthPct($displayWidth, $print, $printWidth, $obj, $colSpan=null) {
 
 function getNbColMax($displayWidth, $print, $printWidth, $obj) {
   global $nbColMax,$layout;
+  $displayWidth=intval($displayWidth);
   if (isNewGui()) {
     if ($displayWidth>1650) {
       $nbColMax=3;
