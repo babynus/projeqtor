@@ -32,9 +32,9 @@ A workflow defines the possibility to go from one status to another one, and who
 
 Once defined, a workflow can be linked to any type of any item. 
 
-It is possible to define events when a state passes. 
+It is possible to define some mandatory fields on some status change (in the definition of type of item or through the Screen Customization plugin).
 
-If a field is required for the transition from one state to another then you will be automatically redirected to the required field. 
+If a field is required for the transition from one status to another then you will be automatically redirected to the required field. 
 
 Regardless of the layout and presentation of your screens.
 
