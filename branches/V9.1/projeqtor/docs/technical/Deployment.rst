@@ -36,13 +36,16 @@ Procédure de Migration
 .. rubric:: Migration vers nouvelle version
 
 J-3 :
+
   - Annonce par un message en page de login : "Le xx/xx/xxxx l'application sera fermée à xx heure pour une opération de maintenance"
       
 H-1 :
+
   - Fermeture de l'application
   - Envoie d'un message de rappel " fermeture dans une heure"
       
 H :
+
   - Déconnexion des derniers utilisateurs connectés
   - Installation de la nouvelle version (recopie du code pour écraser l'existant)
   - Déconnexion/reconnexion admin
@@ -53,6 +56,7 @@ Cas particulier de changement de serveur
 ----------------------------------------
 
 Il faut :
+
   - Copier la base de données
   - Copier tout le code (c’est le plus simple pour ne rien oublier)
   - Modifier le fichier parameters.php qui contient les informations de connexion à la base (à modifier) et certains répertoires (à modifier ou pas selon la configuration)
@@ -61,7 +65,8 @@ Il faut :
 Si ces répertoires ont un chemin relatif (« ../files/xxxx »), il n’y a rien à faire de plus, mais la configuration n’est pas sécurisée
 Si ces chemins ont un chemin absolu (« /var/xxxx ») ; il faut recopier ces répertoires de la source et éventuellement adapter les répertoires en fonction de l’environnement
 
-Si on ne veut pas recopier tout le code pour repartir avec une nouvelle version du code, il faut penser à récupérer : 
+Si on ne veut pas recopier tout le code pour repartir avec une nouvelle version du code, il faut penser à récupérer :
+
   - les customisations : tous les fichiers dans projeqtor/model/custom
   - les plugins : tous les répertoires dans projeqtor/plugin
   - les rapport spécifiques : tous les fichiers dans projeqtor/report/object et dans projeqtor/report/template
