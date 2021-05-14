@@ -802,6 +802,26 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       }
       $brandsOfModels=SqlList::getListWithCrit('Model', array('idAssetType'=>$critType),'idBrand');
       $restrictArray=array_flip($brandsOfModels);
+  	} else if ($col=='idDocumentDirectory' and get_class($obj)=='Document') {
+  	  $idP=null;
+  	  if ($critFld=='idProject' and trim($critVal)) $idP=$critVal;
+  	  else if ($obj->idProject) $idP=$obj->idProject;
+  	  $prf=$user->getProfile($idP);
+  	  foreach ($table as $idT=>$valT) {
+  	    $dr=SqlElement::getSingleSqlElementFromCriteria('DocumentRight',array('idDocumentDirectory'=>$idT,'idProfile'=>$prf),true);
+  	    $am=new AccessProfile($dr->idAccessMode);
+  	    $mode=($obj->id)?$am->idAccessScopeUpdate:$am->idAccessScopeCreate;
+  	    $right=SqlList::getFieldFromId('AccessScope', $mode, 'accessCode');
+  	    if ($right=='NO') { 
+  	      $excludeArray[$idT]=$valT;
+  	    } else if ($right=='PRO') {
+  	      $affList=$user->getAffectedProjects(true);
+  	      if (! isset($affList[$idP])) { 
+  	        $excludeArray[$idT]=$valT;
+  	      }
+  	    }
+  	    
+  	  }  	  
   	}
     // End of $obj set
   } else { 

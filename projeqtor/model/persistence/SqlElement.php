@@ -4167,6 +4167,9 @@ abstract class SqlElement {
         if ($colName == 'idProject' and property_exists ( $this, 'idMilestone' )) {
           $colScript .= '   refreshList("idMilestone","idProject", this.value);';
         }
+        if ($colName == 'idProject' and property_exists ( $this, 'idDocumentDirectory' )) {
+          $colScript .= '   refreshList("idDocumentDirectory","idProject", this.value);';
+        }
         $arrVers = array(
             'idVersion', 
             'idProductVersion', 
