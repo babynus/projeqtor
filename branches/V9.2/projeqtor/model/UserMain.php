@@ -1346,8 +1346,8 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
 	    debugTraceLog("User->authenticate : LDAP authenticate");
 	  	disableCatchErrors();
 	  	// Decode password
-	  	$parampassword=decryptPwd($parampassword, 'LDAP');
-	  	//$parampassword=AesCtr::decrypt($parampassword, getSessionValue('sessionSalt'), Parameter::getGlobalParameter('aesKeyLength'));
+	  	//$parampassword=decryptPwd($parampassword, 'LDAP');
+	  	$parampassword=AesCtr::decrypt($parampassword, getSessionValue('sessionSalt'), Parameter::getGlobalParameter('aesKeyLength'));
 	  	// check password on LDAP
 	    if (! function_exists('ldap_connect')) {
 	    	errorLog('Ldap not installed on your PHP server. Check php-ldap extension or you should not set $paramLdap_allow_login to "true"');        
