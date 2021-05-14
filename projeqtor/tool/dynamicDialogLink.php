@@ -57,8 +57,8 @@ if($mode =='edit'){
              <td>
              <?php if($mode!='edit'){?>
                <select dojoType="dijit.form.FilteringSelect" id="linkRef2Type" name="linkRef2Type" onchange="refreshLinkList();" 
-               <?php if (isNewGui()) {?>  style="width:388px"<?php }?> 
-               <?php autoOpenFilteringSelect();?>
+               <?php if (isNewGui()) {?>  style="width:388px" <?php }?> 
+               <?php echo autoOpenFilteringSelect();?>
                 class="input" value="">
                  <?php htmlDrawOptionForReference('idLinkable',null , $obj, true);?>
                </select>
