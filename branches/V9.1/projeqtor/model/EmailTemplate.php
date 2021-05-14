@@ -229,7 +229,7 @@ class EmailTemplate extends SqlElement {
       $itemEnd = str_replace("buttonAddIn","", $item);
       $editor = getEditorType();
       $textBox = strtolower($itemEnd);;
-      $result .= '<button id="_spe_listItemTemplate_button" dojoType="dijit.form.Button" showlabel="true" style="position:relative;top:-2px;width:145px;height:17px">';
+      $result .= '<button id="_spe_listItemTemplate_button" class="roundedVisibleButton" dojoType="dijit.form.Button" showlabel="true" style="position:relative;min-width:100px;'.((isNewGui())?'top:0;':'top:-2px;height:17px;width:145px;').'">';
       $result .= i18n('operationInsert');
       $result .= '<script type="dojo/connect" event="onClick" args="evt">';
       $result .= '  addFieldInTextBoxForEmailTemplateItem("'.$editor.'");';
