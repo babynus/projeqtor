@@ -63,8 +63,8 @@
   	User::setOldUserStyle();
   }
   $obj=new User();
-  $crit=array('name'=>$login);
-  $users=$obj->getSqlElementsFromCriteria($crit,true);
+  $crit="lower(name)='".strtolower($login)."'";
+  $users=$obj->getSqlElementsFromCriteria(null,true,$crit);
   if ( ! $users ) {
     debugTraceLog("loginCheck : no user with name '$login'");
   	loginError();
