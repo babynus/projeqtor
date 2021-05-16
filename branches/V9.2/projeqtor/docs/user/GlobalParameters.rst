@@ -1007,6 +1007,22 @@ All the necessary parameters for connecting your projeqtor instances with your c
    
 Set the base dn, host, port, version...
 
+  - **LDAP Base dn** should be in format "dc=yourorganization,dc=extention".
+    - Example : "dc=projeqtor,dc=org"
+
+  - **LDAP Host** can be just the server name or IP, but it can also be full URi to the server (see help for ldap_connect on PHP documentation for more help)
+    The URi format is prefered as is allows to connect through SSL with ldaps, starting URi with "ldaps://".  
+    It also allows to define backup ldap server, separating servers with space.
+    When using URi format, you should not enter value for LDAP port, but indicate port in the URi
+    - Example 1 : "ldap://projeqtor.org:389"
+    - Example 2 : "ldaps://projeqtor.org"
+    - Example 3 : "projeqtor.org projeqtor.net"
+  - **LDAP user filter** is a filter to find user trying to connect. 
+    Use "%USERNAME%" to replace login given by the connecting user.
+    This may include "uid" for standard Ldap (Open Ldap) or "sAMAccountName" for Active Directory.
+    - Example 1 : "uid=%USERNAME%"
+    - Example 2 : "(&(objectClass=user)(sAMAccountName=%USERNAME%))"
+
 Default profile for Ldap users, message on creation new user from Ldap,  
 
 Actions on LDAP user creation   
