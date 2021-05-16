@@ -1353,7 +1353,16 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
         return "ldap";
 	    }
 			try { 
-	    	$ldapCnx=ldap_connect($paramLdap_host, $paramLdap_port);
+			  if (1) { // New signature
+			    $ldapUri=trim($paramLdap_host);
+			    $ldapPort=trim($paramLdap_port);
+			    if ($ldapPort and strtolower(substr($ldapUri,0,4))=='ldap' and strpos($ldapUri,' ')===false and strpos($ldapUri,':')===false) {
+			      $ldapUri=$ldapUri.':'.$ldapPort;
+			    }
+			    $ldapCnx=ldap_connect($ldapUri);
+			  } else {
+	    	  $ldapCnx=ldap_connect($paramLdap_host, $paramLdap_port);
+			  }
 			} catch (Exception $e) {
         traceLog("authenticate - LDAP connection error : " . $e->getMessage() );
         return "ldap";
@@ -1460,7 +1469,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
 				  $loginSave = true;
 				  $result=$aff->save();
 				  $loginSave = false;
-				  
+				  unsetSessionValue('userParamatersArray');
 					$sendAlert=Parameter::getGlobalParameter('ldapMsgOnUserCreation');
 					if ($sendAlert!='NO') {
 						$title="ProjeQtOr - " . i18n('newUser');
