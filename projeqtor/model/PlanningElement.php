@@ -679,6 +679,7 @@ class PlanningElement extends SqlElement {
       projeqtor_set_time_limit(600);
       $cpt=0;
       foreach ($lstElt as $elt) {
+        if($elt->refType=='Project' and Project::isTheLeaveProject($elt->refId))continue;
         $cpt++;
         $elt->wbs=$this->wbs . '.' . $cpt;
         if ($elt->refType) { // just security for unit testing 
@@ -730,6 +731,7 @@ class PlanningElement extends SqlElement {
         $lstEltOldTop=$this->getSqlElementsFromCriteria(null, null, $critOldTop ,'wbsSortable asc');
         $cpt=0;
         foreach ($lstEltOldTop as $elt) {
+          if($elt->refType=='Project' and Project::isTheLeaveProject($elt->refId))continue;
           $cpt++;
           $newWbs=($oldTopElt->wbs)?$oldTopElt->wbs . '.' . $cpt:$cpt;
           if ($elt->refType and $elt->wbs!=$newWbs) { //Performance improvment : do not call wbsSave() if new WBS is the same as old
@@ -1135,17 +1137,18 @@ class PlanningElement extends SqlElement {
   	$this->_noHistory=true;
   	$this->wbsSortable=formatSortableWbs($this->wbs);
   	$resTmp=$this->saveForced();
-  	if ($this->refType=='Project') {
+  	if ($this->refType=='Project' and !Project::isTheLeaveProject($this->refId)) {
   		$proj=new Project($this->refId); 
   		$proj->sortOrder=$this->wbsSortable;
   		$resSaveProj=$proj->saveForced();
   	} 
   	if (!$withSubItems) return;
   	//if (self::$_noDispatch) return;
-  	$crit=" topId=" . Sql::fmtId($this->id);
+  	$crit=" topId=" . Sql::fmtId($this->id).' and wbs <> 0';
   	$lstElt=$this->getSqlElementsFromCriteria(null, null, $crit ,'wbsSortable asc');
   	$cpt=0;
   	foreach ($lstElt as $elt) {
+  	   if($elt->refType=='Project' and Project::isTheLeaveProject($elt->refId))continue;
   		$cpt++;
   		$elt->wbs=$this->wbs . '.' . $cpt;
   		if ($elt->refType) { // just security for unit testing
@@ -1792,6 +1795,7 @@ class PlanningElement extends SqlElement {
         if ($pe->id==$this->id) {
           // met the one we are moving => skip
         } else {
+          if($pe->refType=='Project' and Project::isTheLeaveProject($pe->refId))continue;
           if ($pe->id==$destId and $mode=="before") {
             $idx++;
             $currentIdx=$idx;
@@ -1935,6 +1939,7 @@ class PlanningElement extends SqlElement {
   	$idx=0;
   	$currentIdx=0;
   	foreach ($list as $pe) {
+  	  if($pe->refType=='Project' and Project::isTheLeaveProject($pe->refId))continue;
   			$idx++;
   			$root=substr($pe->wbs,0,strrpos($pe->wbs,'.'));
   			$pe->wbs=($root=='')?$idx:$root.'.'.$idx;
