@@ -90,19 +90,19 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
 	     <?php echo ($displayMode=='standard')?'checked':'';?> 
         id="displayModeCkeckboxStandard" value="standard" onClick="changeProjectSelectorType('standard');" />
         </td><td>
-        <label class="display" style="background-color: white;<?php echo (isNewGui())?'position:relative;left:6px;top:-2px':'';?>" for="displayModeCkeckboxStandard"><?php echo i18n("displayModeStandard")?></label>
+        <label class="display" style="background-color: var(--color-background);<?php echo (isNewGui())?'position:relative;left:6px;top:-2px':'';?>" for="displayModeCkeckboxStandard"><?php echo i18n("displayModeStandard")?></label>
         </td></tr><tr><td>
 	    <input type="radio" data-dojo-type="dijit/form/RadioButton" name="displayModeCkeckbox" 
 	     <?php echo ($displayMode=='select')?'checked':'';?> 
         id="displayModeCkeckboxSelect" value="select" onClick="changeProjectSelectorType('select');" />
         </td><td>
-        <label class="display" style="background-color: white;<?php echo (isNewGui())?'position:relative;left:6px;top:-2px':'';?>" for="displayModeCkeckboxSelect"><?php echo i18n("displayModeSelect")?></label>
+        <label class="display" style="background-color: var(--color-background);<?php echo (isNewGui())?'position:relative;left:6px;top:-2px':'';?>" for="displayModeCkeckboxSelect"><?php echo i18n("displayModeSelect")?></label>
         </td></tr><tr><td>
 	    <input type="radio" data-dojo-type="dijit/form/RadioButton" name="displayModeCkeckbox" 
 	     <?php echo ($displayMode=='search')?'checked':'';?> 
         id="displayModeCkeckboxSearch" value="select" onClick="changeProjectSelectorType('search');" />
         </td><td>
-        <label class="display" style="background-color: white;<?php echo (isNewGui())?'position:relative;left:6px;top:-2px':'';?>" for="displayModeCkeckboxSearch"><?php echo i18n("displayModeSearch")?></label>
+        <label class="display" style="background-color: var(--color-background);<?php echo (isNewGui())?'position:relative;left:6px;top:-2px':'';?>" for="displayModeCkeckboxSearch"><?php echo i18n("displayModeSearch")?></label>
         </td></tr></table>
     </td>
   </tr>
