@@ -2214,7 +2214,7 @@ function finalizeMessageDisplay(destination, validationType) {
   } else {
     if (dojo.byId('objectClass') && dojo.byId('objectId')) {
       var url = '../tool/getObjectCreationInfo.php?objectClass='+ dojo.byId('objectClass').value +'&objectId='+dojo.byId('objectId').value;
-      loadDiv(url, 'buttonDivCreationInfo', null);
+      if(dojo.byId('buttonDivCreationInfo'))loadDiv(url, 'buttonDivCreationInfo', null);
       var objClass=dojo.byId('objectClass').value;
       if (lastOperationStatus.value=='NO_CHANGE' && !validationType && dojo.byId(objClass+'PlanningElement_assignedCost') 
           && (dojo.byId(objClass+'PlanningElement_assignedCost').style.textDecoration=="line-through" || dojo.byId(objClass+'PlanningElement_leftCost').style.textDecoration=="line-through")) {
