@@ -12236,12 +12236,17 @@ function readNotification (id){
 // CRON FEATURES
 // ====================================
 
-function cronActivation(scope){
+function cronActivation(scope,adminView){
+  console.log(adminView);
   showWait();
   dojo.xhrGet({
     url : "../tool/cronExecutionStandard.php?operation=activate&cronExecutionScope="+scope,
     load : function(data) {
-      loadContent("../view/parameter.php?type=globalParameter", "centerDiv");
+      if(adminView){
+        loadContent("../view/admin.php", "centerDiv");
+      }else{
+        loadContent("../view/parameter.php?type=globalParameter", "centerDiv");
+      }
       adminCronRestart();
     },
     error : function(data) {
