@@ -364,6 +364,9 @@
                        return false;
                      </script>
                  </button>
+                 <div style="display: inline-block;">
+                  <?php echo CronExecution::drawCronExecutionDefintion('closeMails',true);?>
+                 </div>
                 </td>
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
@@ -391,6 +394,9 @@
                        return false;
                      </script>
                  </button>
+                 <div style="display: inline-block;">
+                  <?php echo CronExecution::drawCronExecutionDefintion('deleteMails',true);?>
+                  </div>
                 </td>
               </tr>
                        <tr><td colspan="2">&nbsp;</td></tr>
@@ -418,6 +424,9 @@
                        return false;
                      </script>
                  </button>
+                 <div style="display: inline-block;">
+                  <?php echo CronExecution::drawCronExecutionDefintion('closeAlerts',true);?>
+                 </div>
                 </td>
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
@@ -445,6 +454,9 @@
                        return false;
                      </script>
                  </button>
+                 <div style="display: inline-block;">
+                    <?php echo CronExecution::drawCronExecutionDefintion('deleteAlerts',true);?>
+                 </div>
                 </td>
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
@@ -473,6 +485,9 @@
                        return false;
                      </script>
                  </button>
+                 <div style="display: inline-block;">
+                    <?php echo CronExecution::drawCronExecutionDefintion('deleteNotifications',true);?>
+                 </div>
                 </td>
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
@@ -500,6 +515,9 @@
                        return false;
                      </script>
                  </button>
+                 <div style="display: inline-block;">
+                  <?php echo CronExecution::drawCronExecutionDefintion('deleteAudit',true);?>
+                 </div>
                 </td>
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
