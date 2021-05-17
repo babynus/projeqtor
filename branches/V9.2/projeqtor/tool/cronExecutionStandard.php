@@ -191,4 +191,51 @@ function kpiCalculate() {
   KpiValueRequest::triggerCalculation($time);
 }
 
+function cronCloseMails(){
+  $nbDays=7;
+  $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
+  $obj=new $item();
+  $clauseWhere="mailDateTime<'" . $targetDate . "'";
+  $obj->close($clauseWhere);
+}
+
+function cronDeleteMails(){
+  $nbDays=30;
+  $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
+  $obj=new $item();
+  $clauseWhere="mailDateTime<'" . $targetDate . "'";
+  return $obj->purge($clauseWhere);
+}
+
+function cronCloseAlerts(){
+  $nbDays=7;
+  $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
+  $obj=new $item();
+  $clauseWhere="alertInitialDateTime<'" . $targetDate . "'";
+  $obj->read($clauseWhere);
+  $obj->close($clauseWhere);
+}
+function cronDeleteAlert(){
+  $nbDays=30;
+  $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
+  $obj=new $item();
+  $clauseWhere="alertInitialDateTime<'" . $targetDate . "'";
+  $obj->purge($clauseWhere);
+}
+
+function cronDeleteNotification(){
+  $nbDays=30;
+  $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays );
+  $obj=new $item();
+  $clauseWhere="notificationDate<'" . $targetDate . "'";
+  $obj->purge($clauseWhere);
+}
+
+function cronDeleteAudit(){
+  $nbDays=30;
+  $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
+  $obj=new $item();
+  $clauseWhere="disconnectionDateTime<'" . $targetDate . "'";
+  $obj->purge($clauseWhere);
+}
 ?>

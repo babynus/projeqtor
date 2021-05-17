@@ -306,3 +306,11 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (3,260,7);
 
 ALTER TABLE `${prefix}workunit` ADD COLUMN `idle` int(1) unsigned DEFAULT 0 COMMENT '1';
+
+INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
+('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronCloseMails'),
+('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteMails'),
+('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronCloseAlerts'),
+('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteAlerts'),
+('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteNotifications'),
+('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteAudit');
