@@ -1143,16 +1143,19 @@ if (beforeVersion($currVersion,"V9.2.0") and $currVersion!='V0.0.0') {
   $cpt=0;
   $cptCommit=100;
   $pwdLDAP = trim(Parameter::getGlobalParameter('paramLdap_search_pass'));
-  if($pwdLDAP){
-    Parameter::storeGlobalParameter('paramLdap_search_pass', encryptPwd($pwdLDAP));
+  if(trim($pwdLDAP)){
+    $pwd = encryptPwd($pwdLDAP);
+    Parameter::storeGlobalParameter('paramLdap_search_pass', $pwd);
   }
   $pwdIMAP = Parameter::getGlobalParameter('paramMailSmtpPassword');
-  if($pwdIMAP){
-  	Parameter::storeGlobalParameter('paramMailSmtpPassword', encryptPwd($pwdIMAP));
+  if(trim($pwdIMAP)){
+    $pwd = encryptPwd($pwdIMAP);
+  	Parameter::storeGlobalParameter('paramMailSmtpPassword', $pwd);
   }
-  $pwdCronEmail = Parameter::getGlobalParameter('cronCheckEmailsPassword ');
-  if($pwdCronEmail){
-  	Parameter::storeGlobalParameter('cronCheckEmailsPassword ', encryptPwd($pwdCronEmail));
+  $pwdCronEmail = Parameter::getGlobalParameter('cronCheckEmailsPassword');
+  if(trim($pwdCronEmail)){
+    $pwd = encryptPwd($pwdCronEmail);
+  	Parameter::storeGlobalParameter('cronCheckEmailsPassword', $pwd);
   }
   
   Sql::beginTransaction();
@@ -1164,8 +1167,11 @@ if (beforeVersion($currVersion,"V9.2.0") and $currVersion!='V0.0.0') {
   $inputMailBox = new InputMailbox();
   $listMailBox = $inputMailBox->getSqlElementsFromCriteria(null, null, "1=1");
   foreach ($listMailBox as $mailBox){
-    $mailBox->pwdImap = encryptPwd($mailBox->pwdImap);
-    $mailBox->save();
+    if(trim($mailBox->pwdImap)){
+      $pwd = encryptPwd($mailBox->pwdImap);
+      $mailBox->pwdImap = $pwd;
+      $mailBox->simpleSave();
+    }
   }
   traceLog("   => ".count($workCommandDoneList)." to update");
   if (count($workCommandDoneList)<100) {
