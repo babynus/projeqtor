@@ -220,7 +220,11 @@ function drawTableFromObjectList($objectList) {
 				echo '<div dojoType="dijit.form.TextBox" ';
 				echo ' name="' . $code . '" id="' . $code . '"';
 				echo ' title="' . $helpTitle . '"';
-				echo ($code=='paramAttachmentMaxSize' or $code=='paramAttachmentMaxSizeMail')?' style="width: 100px;text-align: center;" ':' style="width: 200px;" ';
+				if($code =='paramTryToHackObjectMail'){
+				  echo 'style="width: 290px;" ';
+				}else{
+				  echo ($code=='paramAttachmentMaxSize' or $code=='paramAttachmentMaxSizeMail')?' style="width: 100px;text-align: center;" ':' style="width: 200px;" ';
+				}
 				echo ' class="input '.$requiredClass.'" ';
 				if ($format=='password') echo ' type="password" ';
 				//florent
@@ -259,7 +263,7 @@ function drawTableFromObjectList($objectList) {
 				echo $obj->getValidationScript($code);
 				echo '</div>';
 		  }else if ($format=='display') {
-		      if($code=="mailerTestMessage" or $code=="paramTryToHackMailList" or $code=="paramTryToHackObjectMail"){
+		      if($code=="mailerTestMessage" or $code=="paramTryToHackMailList"){
 		        echo '<div class="" style="width:212px;position:relative;min-height:18px">';
 		      } else {
 		        echo '<div class="" style="width:'.$longTextWidth.';position:relative;min-height:18px">';
@@ -271,7 +275,7 @@ function drawTableFromObjectList($objectList) {
 				  }
 				  echo '</div>';
 				  echo '<div style="word-break:break-all;background:white;color: #555555;margin: 5px 2px 5px 0px;padding: 2px 5px 6px 5px;border: 1px solid #d4d4d4;border-radius: 5px 5px 5px 5px;" name="'.$code.'_display" id="'.$code.'_display" onmouseover="displayImageEditMessageMail(\''.$code.'\');" onmouseout="hideImageEditMessageMail(\''.$code.'\');" onclick="mailerTextEditor(\''.$code.'\');"';
-				  if($code=="mailerTestMessage"  or $code=="paramTryToHackMailList" or $code=="paramTryToHackObjectMail"){
+				  if($code=="mailerTestMessage"  or $code=="paramTryToHackMailList" ){
 				   	echo ' style="word-wrap:break-word;width:200px;display:inline-block;min-height:18px" ';
 				  } else {
 				    echo ' style="width:'.$longTextWidth.';word-wrap:break-word;display:inline-block;min-height:18px';
@@ -288,23 +292,23 @@ function drawTableFromObjectList($objectList) {
 			      echo '<textarea readOnly dojoType="dijit.form.Textarea" ';
 			      echo ' name="' . $code . '" id="' . $code . '"';
 			      echo ' title="' . $helpTitle . '"';
-			      echo ' style="background:white !important;width:212px;position:relative;min-height:18px;" ';
+			      echo ' style="max-height:118px;background:white !important;width:300px;position:relative;min-height:18px;" onclick="selectResources(null,\'paramTryToHackUserList\',null)" ';
 			      echo ' >';
 			      $idAffectable = explode(";", $obj->parameterValue);
 			      $number = 1;
 			      $countNumber = count($idAffectable);
 			      foreach ($idAffectable as $myId){
-			        if($number > 1 and $number <= $countNumber  )echo ';';
+			        if($number > 1 and $number <= $countNumber  ){echo ';';  echo " \n ";}
 			        echo SqlList::getNameFromId('Affectable', $myId);
 			        $number++;
 			      }
 			      echo '</textarea>';
-			      echo ' <div style="position:absolute;top:6px;left:191px;" class="roundedButton roundedIconButton generalColClass idProjectClass"><div class="imageColorNewGui iconToolbarSearch" onclick="selectResources(null,\'paramTryToHackUserList\',null)">  </div></div>';
+			      echo ' <div style="position:absolute;top:9px;left:270px;" class="roundedButton roundedIconButton generalColClass idProjectClass"><div class="imageColorNewGui iconToolbarSearch" onclick="selectResources(null,\'paramTryToHackUserList\',null)">  </div></div>';
 			    }else{
 			      echo '<textarea dojoType="dijit.form.Textarea" ';
 			      echo ' name="' . $code . '" id="' . $code . '"';
 			      echo ' title="' . $helpTitle . '"';
-			      echo ' style="width:212px;position:relative;min-height:18px;" ';
+			      echo ' style="width:300px;position:relative;min-height:18px;" ';
 			      echo ' class="input" ';
 			      echo ' >';
 			      echo $obj->parameterValue;

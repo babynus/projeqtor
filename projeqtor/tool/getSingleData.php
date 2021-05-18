@@ -250,7 +250,7 @@
       $number = 1;
       $countNumber = count($idAffectable);
       foreach ($idAffectable as $myId){
-        if($number > 1 and $number <= $countNumber  )$value.= ';';
+        if($number > 1 and $number <= $countNumber  ){ $value.= ';'; $value.= " \n ";  } 
         $value.= SqlList::getNameFromId('Affectable', $myId);
         $number++;
       }
