@@ -54,9 +54,12 @@ $obj=new $refType($refId);
 if($refType=="Meeting" || $refType=="PeriodicMeeting") {
 	$delay=Work::displayWork(workTimeDiffDateTime('2000-01-01T'.$obj->meetingStartTime,'2000-01-01T'.$obj->meetingEndTime));
 }
+if($refType=="PokerSession") {
+	$delay=Work::displayWork(workTimeDiffDateTime('2000-01-01T'.$obj->pokerSessionStartTime,'2000-01-01T'.$obj->pokerSessionEndTime));
+}
 $mode = RequestHandler::getValue('mode',false,true);
 
-$elementList =($refType=="Meeting" || $refType=="PeriodicMeeting")?'idAffectable':'idResourceAll';
+$elementList =($refType=="Meeting" || $refType=="PeriodicMeeting" || $refType=="PokerSession")?'idAffectable':'idResourceAll';
 $critFld ='idProject';
 $critVal =$idProject;
 if($isTeam){
@@ -78,7 +81,7 @@ if($isOrganization){
 // if (Parameter::getGlobalParameter('OpenDayFriday')=='offDays') $arrayDefaultOffDays[]=5;
 // if (Parameter::getGlobalParameter('OpenDaySaturday')=='offDays') $arrayDefaultOffDays[]=6;
 // if (Parameter::getGlobalParameter('OpenDaySunday')=='offDays') $arrayDefaultOffDays[]=7;
-$res=($refType=="Meeting" || $refType=="PeriodicMeeting")?'Affectable':'ResourceAll';
+$res=($refType=="Meeting" || $refType=="PeriodicMeeting" || $refType=="PokerSession")?'Affectable':'ResourceAll';
 $resource=new $res($idResource);
 
 if($resource->id  and $resource->isContact!='1'){
@@ -122,7 +125,7 @@ if ($planningMode=='RECW') {
          <input id="isOrganization" name="isOrganization" type="hidden" value="<?php echo $isOrganization;?>" />
          <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
          <input id="planningMode" name="planningMode" type="hidden" value="<?php echo $planningMode;?>" />
-
+         <?php if($refType=="PokerSession"){?><input id="idPokerSession" name="idPokerSession" type="hidden" value="<?php echo $obj->id ;?>" /><?php }?>
       
          <table>
            <tr>
@@ -137,13 +140,13 @@ if ($planningMode=='RECW') {
                 onChange="<?php if($isSelectFonction == 'YES'){?>assignmentChangeResourceSelectFonction();<?php }else{?> assignmentChangeResource(); <?php }?> assignmentChangeResourceTeamForCapacity();refreshReccurentAssignmentDiv(this.value);"
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdResource')));?>" <?php echo ($realWork!=0 && $mode=='edit')?"readonly=readonly":"";?>>
                 <?php if($mode=='edit'){                      
-                          htmlDrawOptionForReference((($refType=="Meeting" || $refType=="PeriodicMeeting")?'idAffectable':'idResourceAll'), $idResource,$obj,true,'idProject',$idProject);
+                          htmlDrawOptionForReference((($refType=="Meeting" || $refType=="PeriodicMeeting" || $refType=="PokerSession")?'idAffectable':'idResourceAll'), $idResource,$obj,true,'idProject',$idProject);
                 }else{
                           htmlDrawOptionForReference($elementList, null,$obj,false,$critFld,$critVal);
                 }?>
                </select>  
              </td>
-             <?php if($refType=="Meeting" || $refType=="PeriodicMeeting") {  ?>
+             <?php if($refType=="Meeting" || $refType=="PeriodicMeeting" || $refType=="PokerSession") {  ?>
              <td style="vertical-align: top">
                <button id="assignmentDetailButton" dojoType="dijit.form.Button" showlabel="false"
                  title="<?php echo i18n('showDetail')?>" iconClass="iconSearch22 iconSearch iconSize22 imageColorNewGui" class="notButton notButtonRounded">
@@ -265,7 +268,9 @@ if ($planningMode=='RECW') {
                <div id="assignmentAssignedWork" name="assignmentAssignedWork" <?php if($planningMode=='MAN'){ echo "readonly";}?>
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add" && $obj->meetingStartTime && $obj->meetingEndTime){ 
                                   echo $delay;
-                              } else if ($mode=="edit"){
+                              }else if (($refType=="PokerSession") && $mode=="add" && $obj->pokerSessionStartTime && $obj->pokerSessionEndTime){
+                                  echo $delay;
+                              }else if ($mode=="edit"){
                                   echo Work::displayWork($assignmentObj->assignedWork);
                               } else if($mode=="add" and $planningMode != 'MAN') { 
                                   $assignedWork = GeneralWork::convertWork($validatedWorkPeOld)-GeneralWork::convertWork($assignedWorkPeOld);
@@ -320,6 +325,8 @@ if ($planningMode=='RECW') {
                <div id="assignmentLeftWork" name="assignmentLeftWork" <?php if($planningMode=='MAN' or $habil->rightAccess == '2'){ echo "readonly";}?>                 
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add" && $obj->meetingStartTime && $obj->meetingEndTime){ 
                                   echo $delay;
+                              }else if (($refType=="PokerSession") && $mode=="add" && $obj->pokerSessionStartTime && $obj->pokerSessionEndTime){
+                                  echo $delay;
                               } else if($mode=="edit"){
                                   echo Work::displayWork($assignmentObj->leftWork);
                               } else if($mode=="divide"){
@@ -365,6 +372,8 @@ if ($planningMode=='RECW') {
              <td>
                <div id="assignmentPlannedWork" name="assignmentPlannedWork"                  
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add" && $obj->meetingStartTime && $obj->meetingEndTime){ 
+                                  echo $delay;
+                              }else if (($refType=="PokerSession") && $mode=="add" && $obj->pokerSessionStartTime && $obj->pokerSessionEndTime){
                                   echo $delay;
                               } else if($planningMode != 'MAN') {
                                   $assignedWork = GeneralWork::convertWork($validatedWorkPeOld)-GeneralWork::convertWork($assignedWorkPeOld);
@@ -421,7 +430,7 @@ if ($planningMode=='RECW') {
            </tr>
          </table>       
          
-       <div id="optionalAssignmentDiv" style="<?php if ($refType=="Meeting" || $refType=="PeriodicMeeting"){echo "display:block;";}else {echo "display:none;";}?>">
+       <div id="optionalAssignmentDiv" style="<?php if ($refType=="Meeting" || $refType=="PeriodicMeeting" || $refType=="PokerSession"){echo "display:block;";}else {echo "display:none;";}?>">
         <table style="margin-left:143px;">
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
             <td class="dialogLabel">&nbsp;</td>     

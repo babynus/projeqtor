@@ -2822,10 +2822,11 @@ function addAssignment(unit, rawUnit, hoursPerDay, isTeam, isOrganization) {
     return;
   }
   var objClass = dojo.byId('objectClass').value;
+  if(objClass == 'PokerSessionDefinition')objClass='PokerSession';
   var callBack = function () {
     dijit.byId("dialogAssignment").show();
   };
-  var params="&refType="+dojo.byId('objectClass').value;
+  var params="&refType="+objClass;
   params+="&refId="+dojo.byId("objectId").value;
   params+="&idProject="+dijit.byId('idProject').get('value');
   params+="&unit="+unit;
@@ -2837,7 +2838,15 @@ function addAssignment(unit, rawUnit, hoursPerDay, isTeam, isOrganization) {
     params+="&rawUnit="+rawUnit;
     params+="&hoursPerDay="+hoursPerDay;
   }
-  if (dojo.byId('objectClass').value != 'PeriodicMeeting') {
+  if (objClass == 'PokerSession') {
+	    params+="&pokerSessionEndTime="+dijit.byId('pokerSessionEndTime');
+	    params+="&pokerSessionEndTimeValue="+dijit.byId('pokerSessionEndTime').get('value');
+	    params+="&pokerSessionStartTime="+dijit.byId('pokerSessionStartTime');
+	    params+="&pokerSessionStartTimeValue="+dijit.byId('pokerSessionStartTime').get('value');
+	    params+="&rawUnit="+rawUnit;
+	    params+="&hoursPerDay="+hoursPerDay;
+	  }
+  if (dojo.byId('objectClass').value != 'PeriodicMeeting' && objClass != 'PokerSession') {
     params+="&validatedWorkPe="+dijit.byId(objClass +"PlanningElement_validatedWork").get('value');
     params+="&assignedWorkPe="+dijit.byId(objClass +"PlanningElement_assignedWork").get('value');
   }
@@ -3021,6 +3030,10 @@ function saveAssignment(definitive) {
         	    	params+="&mode=edit";
     	    		loadDialog('dialogAssignment',null,false,params);
     	    	}else{
+        	    	if(dojo.byId('objectClass').value=='PokerSession' || dojo.byId('objectClass').value=='PokerSessionDefinition'){
+        	    		url="../tool/savePokerMember.php";
+        	    		loadContent(url, "resultDivMain", "assignmentForm", true);
+        	    	}
     	    		dijit.byId('dialogAssignment').hide();
     	    	}
         };
@@ -3029,6 +3042,10 @@ function saveAssignment(definitive) {
     }else{
     	loadContent(url, "resultDivMain", "assignmentForm",
                 true, 'assignment');
+    	if(dojo.byId('objectClass').value=='PokerSession' || dojo.byId('objectClass').value=='PokerSessionDefinition'){
+    		url="../tool/savePokerMember.php";
+    		loadContent(url, "resultDivMain", "assignmentForm", true);
+    	}
     	dijit.byId('dialogAssignment').hide();
     }
   } else {

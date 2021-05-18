@@ -6314,6 +6314,10 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   if ($comboDetail) {
     return;
   }
+  if(get_class($obj)=='PokerSessionDefinition'){
+    $ass = new Assignment();
+    $list = $ass->getSqlElementsFromCriteria(array('refType'=>'PokerSession', 'refId'=>$obj->id));
+  }
   $pluginObjectClass='Assignment';
   $tableObject=$list;
   $lstPluginEvt=Plugin::getEventScripts('list', $pluginObjectClass);
@@ -9777,7 +9781,7 @@ function drawPokerMember($obj , $scope){
   		echo ' <a onClick="removePokerMember('.htmlEncode($member->id).');" title="'.i18n('removePokerMember').'" > '.formatSmallButton('Remove').'</a>';
     	echo '</td>';
     }
-    $res = new Resource($member->idResource);
+    $res = new ResourceAll($member->idResource);
     echo '<td class="noteData" style="width:30%; text-align: center;">'.htmlEncode($res->name).'</td>';
     if($res->isUser){
       $type = i18n('colIdUser');
