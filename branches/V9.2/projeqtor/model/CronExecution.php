@@ -157,9 +157,9 @@ class CronExecution extends SqlElement {
       echo "&nbsp;&nbsp;";
     }
     if ($cronExecution->id) {
-      echo "<button id='cronExecutionActivate$scope' class='roundedVisibleButton' dojoType='dijit.form.Button' showlabel='true' style='position:relative;".(($adminView)?'':'top:2px;')."'
-              title='".(($adminView)?i18n('helpCronExecutionActivateAdmin'):'')."' >";
-      echo $cronExecution->idle ? i18n("cronExecutionActivate") : i18n("cronExecutionDesactivate");
+      echo '<button id="cronExecutionActivate'.$scope.'" class="roundedVisibleButton" dojoType="dijit.form.Button" showlabel="true" style="position:relative;'.(($adminView)?'':'top:2px;').'"
+              title="'.(($adminView)?i18n('helpCronExecutionActivateAdmin'):'').'" >';
+      echo    $cronExecution->idle ? i18n("cronExecutionActivate") : i18n("cronExecutionDesactivate");
       echo "  <script type='dojo/connect' event='onClick' args='evt'>";
       echo "    cronActivation('$scope','$adminView');";
       echo "  </script>";
