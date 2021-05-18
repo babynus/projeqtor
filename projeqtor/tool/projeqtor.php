@@ -3651,7 +3651,9 @@ function openHourDiffTime($startDate, $endDate, $idProject=null){
   $endPMDate = date('Y-m-d', strtotime($startDate)).' '.$endPM;
   
   if($dayDelay <= 1){
-    $endDate = date('Y-m-d', strtotime($startDate)).' '.$endPM;
+    if(substr($startDate, 0, -9) != substr($endDate, 0, -9)){
+      $endDate = date('Y-m-d', strtotime($startDate)).' '.$endPM;
+    }
     $amDelay = 0;
     $pmDelay = 0;
     if($startDate >= $startAMDate and $startDate <= $endAMDate and isOpenDay($startDate)){
