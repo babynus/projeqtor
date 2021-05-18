@@ -45,9 +45,8 @@ if($type == 'resource'){
   $res=new Affectable();
   $scope=Affectable::getVisibilityScope();
   $crit="idle=0";
-  $lstRes=$res->getSqlElementsFromCriteria(null,false,$crit,'fullName asc, name asc',true);
+  $lstRes=$res->getSqlElementsFromCriteria(null,false,$crit,' UPPER(fullName) asc, UPPER(name) asc ',true);
 }
-
 $lstSub= array();
 if($values){
   $idAffectable = explode(";", $values);
@@ -135,7 +134,6 @@ if (! $scope->accessCode or $scope->accessCode == 'NO') {
 
 uasort($lstRes,'Affectable::sort');
 uasort($lstSub,'Affectable::sort');
-
 echo '<table style="width:100%;height:100%;min-height:300px">';
 echo '<tr style="height:20px">';
 echo '<td class="section" style="width:200px">'.i18n('titleAvailable').'</td>';
@@ -165,6 +163,7 @@ if(isNewGui()){
   $imageColorNewGui = 'imageColorNewGuiNoSelection';
 }
 echo '<div style="height:'.$showHeight.';overflow:auto;" id="selectResourcesAvailable" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" data-dojo-props="accept: [ \'subscription\' ]">';
+
 foreach($lstRes as $res) {
   drawResourceTile($res,"selectResourcesAvailable");
 }

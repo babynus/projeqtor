@@ -1283,7 +1283,7 @@ class Parameter extends SqlElement {
         	                    'paramTryToHackUserProfilList'=>'list',
         	                    'paramTryToHackUserList'=>'longtext',
         	                    'paramTryToHackMailList'=>'longtext',
-        	                    'paramTryToHackObjectMail'=>'display',
+        	                    'paramTryToHackObjectMail'=>'text',
               	         'newColumnbSystemRight'=>'newColumn',
               	            'sectionMiscellaneous'=>'section',
               	              'getVersion'=>'list',
