@@ -183,5 +183,8 @@ class PokerSessionMain extends SqlElement {
   	if($item=="pokerItem"){
 	  drawPokerItem($this, 'Session');
   	}
+  	if($item=="pokerMember"){
+  		drawPokerMember($this, 'Session');
+  	}
   }
 }?>

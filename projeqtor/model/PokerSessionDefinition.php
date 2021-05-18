@@ -117,5 +117,8 @@ class PokerSessionDefinition extends PokerSessionMain {
     if($item=="pokerItem"){
     	drawPokerItem($this, 'Definition');
     }
+    if($item=="pokerMember"){
+    	drawPokerMember($this, 'Definition');
+    }
   }
 }?>
