@@ -167,7 +167,7 @@ class ProjectPlanningElementMain extends PlanningElement {
     "organizationElementary"=>"hidden",
     "needReplan"=>"hidden",
     "color"=>"hidden",
-    "_separator_sectionRevenue_marginTop"=>"hidden",
+    "_separator_sectionRevenue_marginTop"=>"hidden"
   );   
   
   private static $_databaseTableName = 'planningelement';
