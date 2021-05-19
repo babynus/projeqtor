@@ -12254,7 +12254,6 @@ function readNotification (id){
 // ====================================
 
 function cronActivation(scope,adminView){
-  console.log(adminView);
   showWait();
   dojo.xhrGet({
     url : "../tool/cronExecutionStandard.php?operation=activate&cronExecutionScope="+scope,
