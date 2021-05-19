@@ -162,21 +162,21 @@ $line->billingType=$billingType;
 //gautier #2516
 if($boolCatalog){
   $line->idCatalog=$catalog->id;
-  if(!$lineId and $line->refType=="Bill"){
+  if(!$lineId and $line->refType=="Bill" and $catalogSpecification){
     $bill=new Bill($line->refId);
     if(!$bill->description or strpos($bill->description,$catalogSpecification )=== FALSE){ 
       $bill->description .= $catalogSpecification;
     }
     $bill->save();
   }
-  if(!$lineId and $line->refType=="Quotation"){
+  if(!$lineId and $line->refType=="Quotation" and $catalogSpecification){
     $quot=new Quotation($line->refId);
     if(!$quot->comment or strpos($quot->comment,$catalogSpecification )=== FALSE){ 
       $quot->comment .= $catalogSpecification;
     }
     $quot->save();
   }
-  if(!$lineId and $line->refType=="Command"){
+  if(!$lineId and $line->refType=="Command" and $catalogSpecification){
     $order=new Command($line->refId);
     if(!$order->comment or strpos($order->comment,$catalogSpecification )=== FALSE){ 
       $order->comment .= $catalogSpecification;
