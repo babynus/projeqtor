@@ -154,7 +154,7 @@ if ($paramIssuer!="") {
 if ($paramResponsible!="") {
 	$where.=" and idResource='" . Sql::fmtId($paramResponsible) . "'";
 }
-//$delay = openHourDiffTime('2021-04-09 11:30:00', '2021-04-22 16:30:00', $paramProject);
+//$delay = openHourDiffTime('2021-04-09 11:30:00', '2021-04-22 16:30:00', $paramProject)/3600;
 //END ADD qCazelles - graphTickets
 
 $order="idUrgency";
@@ -208,7 +208,7 @@ foreach ($lstTicket as $ticket){
     			$delayValue = ($duration/60)/60;
     			break;
     		case 'OH' :
-    			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
+    			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject)/3600;
     			$delayValue = $duration;
             	if($duration>$hourPerDay){
                   $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
@@ -221,7 +221,7 @@ foreach ($lstTicket as $ticket){
     			$delayValue = (($duration/60)/60)/24;
     			break;
     		case 'OD' :
-    			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
+    			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject)/3600;
     			$delayValue = $duration/24;
             	if($duration>$hourPerDay){
                   $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;

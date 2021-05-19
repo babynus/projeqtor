@@ -43,6 +43,7 @@
   $list=array();
   $stPeriod = new StatusPeriod();
   $list=$stPeriod->getSqlElementsFromCriteria(array('refType'=>$refType, 'refId'=>$refId));
+  echo '<div style="height:90%;max-height:90%;overflow:auto;">';
   echo '<table style="width:100%;text-align:center">';
   echo '<tr>';
   echo '<td class="linkHeader" style="width:10%" rowspan="2">' . i18n('colMacroStatus') . '</td>';
@@ -144,10 +145,11 @@
     echo '</tr>';
   }
   echo '</table>';
+  echo '</div>';
   echo '<br/>';
   echo '<div align="center"><button dojoType="dijit.form.Button" type="button" onclick="dijit.byId(\'dialogStatusPeriod\').hide();">'.i18n("close").'</button></div>';
-  echo '<div align="right"><table style="position: absolute;right: 12px;bottom: 10px;width: 199px;text-align: right;font-size: 11px;color: #BABABA;">';
-  echo '<tr><td></td><td>'.i18n('colStart').'</td><td>'.i18n('colEnd').'</td></tr>';
+  echo '<div align="right" style="position: absolute;right: 12px;bottom: 10px;width: 199px;text-align: right;font-size: 11px;color: #BABABA;">';
+  echo '<table style="width:100%"><tr><td></td><td>'.i18n('colStart').'</td><td>'.i18n('colEnd').'</td></tr>';
   echo '<tr><td>'.i18n('colMorning').'</td><td>'.getDailyHours($obj->idProject, 'startAM', false).'</td>';
   echo '<td>'.getDailyHours($obj->idProject, 'endAM', false).'</td><tr>';
   echo '<tr><td>'.i18n('colAfternoon').'</td><td>'.getDailyHours($obj->idProject, 'startPM', false).'</td>';
