@@ -344,12 +344,15 @@
                 <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("closeEmails"). Tool::getDoublePoint();?>
                 </td>
+                      <?php $maintenanceCloseMail=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceCloseMail'));
+                      if($maintenanceCloseMail->id=='')$maintenanceCloseMail=7;
+                      else $maintenanceCloseMail=$maintenanceCloseMail->parameterValue;
+                  ?>
                 <td class="display" width="90%">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
-                  <div dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:999}"
+                  <div dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:999}" 
                     style="width:30px;"
-                    value="7"
-                    name="closeMailDays" id="closeMailDays">
+                    value="<?php echo $maintenanceCloseMail;?>" onchange="saveMaintenanceAdmin('maintenanceCloseMail')" id="maintenanceCloseMail">
                   </div>
                   &nbsp;<?php echo i18n('days');?>
                 </td>
@@ -374,12 +377,16 @@
                 <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("deleteEmails"). Tool::getDoublePoint();?>
                 </td>
+                <?php 
+                      $maintenanceDeletedMail=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedMail'));
+                      if($maintenanceDeletedMail->id=='')$maintenanceDeletedMail=30;
+                      else $maintenanceDeletedMail=$maintenanceDeletedMail->parameterValue;
+                  ?>
                 <td class="display">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
                    <div dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:999}"
                     style="width:30px;"
-                    value="30"
-                    name="deleteMailDays" id="deleteMailDays">
+                    value="<?php echo $maintenanceDeletedMail;?>" onchange="saveMaintenanceAdmin('maintenanceDeletedMail')" id="maintenanceDeletedMail">
                   </div>
                   &nbsp;<?php echo i18n('days');?>
                 </td>
@@ -404,12 +411,16 @@
                 <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("closeAlerts"). Tool::getDoublePoint();?>
                 </td>
+                  <?php 
+                      $maintenanceCloseAlerts=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceCloseAlerts'));
+                      if($maintenanceCloseAlerts->id=='')$maintenanceCloseAlerts=7;
+                      else $maintenanceCloseAlerts=$maintenanceCloseAlerts->parameterValue;
+                  ?>
                 <td class="display">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
                    <div dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:999}"
                     style="width:30px;"
-                    value="7"
-                    name="closeAlertDays" id="closeAlertDays">
+                    value="<?php echo $maintenanceCloseAlerts;?>" onchange="saveMaintenanceAdmin('maintenanceCloseAlerts')" id="maintenanceCloseAlerts">
                   </div>
                   &nbsp;<?php echo i18n('days');?>
                 </td>
@@ -434,12 +445,16 @@
                 <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("deleteAlerts"). Tool::getDoublePoint();?>
                 </td>
+                  <?php 
+                      $maintenanceDeletedAlerts=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedAlerts'));
+                      if($maintenanceDeletedAlerts->id=='')$maintenanceDeletedAlerts=30;
+                      else $maintenanceDeletedAlerts=$maintenanceDeletedAlerts->parameterValue;
+                  ?>
                 <td class="display">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
                    <div dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:999}"
                     style="width:30px;"
-                    value="30"
-                    name="deleteAlertDays" id="deleteAlertDays">
+                    value="<?php echo $maintenanceDeletedAlerts;?>" onchange="saveMaintenanceAdmin('maintenanceDeletedAlerts')" id="maintenanceDeletedAlerts">
                   </div>
                   &nbsp;<?php echo i18n('days');?>
                 </td>
@@ -465,12 +480,16 @@
               <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo lcfirst(i18n("deleteNotifications")). Tool::getDoublePoint();?>
                 </td>
+                <?php 
+                      $maintenanceDeletedNotification=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedNotification'));
+                      if($maintenanceDeletedNotification->id=='')$maintenanceDeletedNotification=30;
+                      else $maintenanceDeletedNotification=$maintenanceDeletedNotification->parameterValue;
+                ?>
                 <td class="display">
                   <?php echo i18n('sentSinceMore');?>&nbsp;
                    <div dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:999}"
                     style="width:30px;"
-                    value="30"
-                    name="deleteNotificationDays" id="deleteNotificationDays">
+                    value="<?php echo $maintenanceDeletedNotification;?>" onchange="saveMaintenanceAdmin('maintenanceDeletedNotification')" id="maintenanceDeletedNotification">
                   </div>
                   &nbsp;<?php echo i18n('days');?>
                 </td>
@@ -495,12 +514,17 @@
 <!-- END - ADD BY TABARY - NOTIFICATION SYSTEM -->
               <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">                <?php echo i18n("deleteAudit"). Tool::getDoublePoint();?>
                 </td>
+                <?php 
+                      $maintenanceDeletedAudit=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedAudit'));
+                      if($maintenanceDeletedAudit->id=='')$maintenanceDeletedAudit=30;
+                      else $maintenanceDeletedAudit=$maintenanceDeletedAudit->parameterValue;
+                ?>
                 <td class="display">
                   <?php echo i18n('closedSinceMore');?>&nbsp;
                    <div dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:999}"
                     style="width:30px;"
-                    value="30"
-                    name="deleteAuditDays" id="deleteAuditDays">
+                    value="<?php echo $maintenanceDeletedAudit;?>" 
+                    onchange="saveMaintenanceAdmin('maintenanceDeletedAudit')" id="maintenanceDeletedAudit">
                   </div>
                   &nbsp;<?php echo i18n('days');?>
                 </td>
