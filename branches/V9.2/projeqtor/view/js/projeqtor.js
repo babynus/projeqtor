@@ -8561,3 +8561,12 @@ function reorderSubTask (tab){
     handleAs: "text"
   });
 }
+
+function saveMaintenanceAdmin(name){
+  if(!dojo.byId(name))return;
+  value=dojo.byId(name).value;
+  dojo.xhrPost({
+    url: '../tool/saveAdminConfigParam.php?name='+name+'&value='+value,
+    handleAs: "text"
+  });
+}
