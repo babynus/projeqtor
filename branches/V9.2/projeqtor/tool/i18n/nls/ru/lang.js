@@ -4613,7 +4613,7 @@ sectionRightsOfDatasOfContract: "Конфигурация специальных
 sectionRightsOfLeaveTypes: "Параметры для заработанного права на отпуск",
 sectionSAML: "Единый вход через SAML2",
 sectionScope: "Сфера применения",
-sectionSecurity: "Security",
+sectionSecurity: "Security - Message when a try to hack is detected",
 sectionSendInfo: "Отправка информации о периодах отпуска",
 sectionSendMail: "Получатели почты",
 sectionSituation: "История финансовых ситуаций",

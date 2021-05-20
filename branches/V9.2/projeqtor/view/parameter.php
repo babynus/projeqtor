@@ -298,7 +298,7 @@ function drawTableFromObjectList($objectList) {
 			      $number = 1;
 			      $countNumber = count($idAffectable);
 			      foreach ($idAffectable as $myId){
-			        if($number > 1 and $number <= $countNumber  ){echo ';';  echo " \n ";}
+			        if($number > 1 and $number <= $countNumber  ){echo ';';  echo "\n";}
 			        echo SqlList::getNameFromId('Affectable', $myId);
 			        $number++;
 			      }
