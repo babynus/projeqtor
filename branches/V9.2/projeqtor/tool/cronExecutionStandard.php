@@ -192,7 +192,9 @@ function kpiCalculate() {
 }
 
 function cronCloseMails(){
-  $nbDays=7;
+  $maintenanceCloseMail=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceCloseMail'));
+  if($maintenanceCloseMail->id=='')$nbDays=7;
+  else $nbDays=$maintenanceCloseMail->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
   $obj=new $item();
   $clauseWhere="mailDateTime<'" . $targetDate . "'";
@@ -200,7 +202,9 @@ function cronCloseMails(){
 }
 
 function cronDeleteMails(){
-  $nbDays=30;
+  $maintenanceDeletedMail=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedMail'));
+  if($maintenanceDeletedMail->id=='')$nbDays=30;
+  else $nbDays=$maintenanceDeletedMail->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
   $obj=new $item();
   $clauseWhere="mailDateTime<'" . $targetDate . "'";
@@ -208,7 +212,9 @@ function cronDeleteMails(){
 }
 
 function cronCloseAlerts(){
-  $nbDays=7;
+  $maintenanceCloseAlerts=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceCloseAlerts'));
+  if($maintenanceCloseAlerts->id=='')$nbDays=7;
+  else $nbDays=$maintenanceCloseAlerts->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
   $obj=new $item();
   $clauseWhere="alertInitialDateTime<'" . $targetDate . "'";
@@ -216,7 +222,9 @@ function cronCloseAlerts(){
   $obj->close($clauseWhere);
 }
 function cronDeleteAlert(){
-  $nbDays=30;
+  $maintenanceDeletedAlerts=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedAlerts'));
+  if($maintenanceDeletedAlerts->id=='')$nbDays=30;
+  else $nbDays=$maintenanceDeletedAlerts->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
   $obj=new $item();
   $clauseWhere="alertInitialDateTime<'" . $targetDate . "'";
@@ -224,7 +232,9 @@ function cronDeleteAlert(){
 }
 
 function cronDeleteNotification(){
-  $nbDays=30;
+  $maintenanceDeletedNotification=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedNotification'));
+  if($maintenanceDeletedNotification->id=='')$nbDays=30;
+  else $nbDays=$maintenanceDeletedNotification->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays );
   $obj=new $item();
   $clauseWhere="notificationDate<'" . $targetDate . "'";
@@ -232,7 +242,9 @@ function cronDeleteNotification(){
 }
 
 function cronDeleteAudit(){
-  $nbDays=30;
+  $maintenanceDeletedAudit=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedAudit'));
+  if($maintenanceDeletedAudit->id=='')$nbDays=30;
+  else $nbDays=$maintenanceDeletedAudit->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
   $obj=new $item();
   $clauseWhere="disconnectionDateTime<'" . $targetDate . "'";
