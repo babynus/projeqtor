@@ -383,18 +383,31 @@ For each indicator, a warning value and an alert value can be defined in days or
    * - :term:`Closed`
      - Flag to indicate that delay definition is archived.
 
-.. rubric:: Section Mail receivers
+.. rubric:: Mail receivers
 
 * List of addresses of the mails.
 * The list is not nominative, but defined as roles on the element.
 * Each addressee will receive mail only once, even if a person has several “checked” roles on the element. 
 * See : :ref:`receivers-list` for receivers detail.
 
-.. rubric:: Section Internal alert receivers
+.. rubric:: Internal alert and warning receivers
 
 * List of addresses of the internal alert.
 * The list is not nominative, but defined as roles on the element.
 * See : :ref:`receivers-list` for receivers detail.
+
+
+ .. compound:: Monitoring indicators   
+
+    Monitoring indicators send only warning and alert message.
+    
+    The message contains information that explains the alert:
+
+      * Item id and type.  
+      * Indicator description. 
+      * Target value.
+      * Alert or warning value.
+
 
 .. raw:: latex
 
