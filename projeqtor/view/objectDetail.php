@@ -1001,6 +1001,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $crit=array('refId'=>$obj->id, 'refType'=>get_class($obj));
         $situation=new Situation();
         $cpt=$situation->countSqlElementsFromCriteria($crit);
+      } else if ($section=='languageSkill'){
+          $localizationTranslatorLanguage = new LocalizationTranslatorLanguage();
+          $cpt = $localizationTranslatorLanguage->countSqlElementsFromCriteria(array("idTranslator"=>$obj->id));
+      } else if ($section =='linkedLocalizationItems'){
+          $localizationItem = new LocalizationItem();
+          $cpt = $localizationItem->countSqlElementsFromCriteria(array("idLocalizationRequest"=> $obj->id));
       }else {
         // ADD BY Marc TABARY - 2017-03-16 - FORCE SECTION ITEM'S COUNT
         // Want a item's count on section header
@@ -1145,6 +1151,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // ADD qCazelles - Lang-Context
     } else if ($col=='_productLanguage' and Parameter::getGlobalParameter('displayLanguage')=='YES') {
       drawLanguageSection($obj);
+    } else if ($col=='_languageSkill') {
+        drawLanguageSection($obj);
+    } else if ($col =='_localizationItem'){
+        drawLocalizationItemSection($obj);
     } else if ($col=='_productContext' and Parameter::getGlobalParameter('displayContext')=='YES') {
       drawContextSection($obj);
       // END ADD qCazelles - Lang-Context
@@ -2603,6 +2613,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if (!$readOnly) $showExtraButton=true;
           $fieldWidth=round($fieldWidth/2)-23;
           if($fieldWidth<85)$fieldWidth=85;
+        }
+        if($col =='idResource' and $classObj == 'LocalizationTranslator'){
+            $showExtraButton=false; // do not show assign to me - hide extra button for LocalizationTranslator object
         }
         // END - ADD BY TABARY - NOTIFICATION SYSTEM
         $maxButtonWidth=max(min(2*$fieldWidth/3,350),250);
@@ -5154,6 +5167,73 @@ function drawBusinessFeatures($obj, $refresh=false) {
 }
 // END ADD qCazelles
 
+function drawLocalizationItemSection($obj, $refresh = false){
+    global $cr, $print, $user, $comboDetail;
+    $crit=array('idLocalizationRequest'=>$obj->id);
+    $localizationItem = new LocalizationItem();
+
+    $listLocalizationItems = $localizationItem->getSqlElementsFromCriteria($crit);
+
+    global $cr, $print, $user, $comboDetail;
+    if ($comboDetail) {
+        return;
+    }
+    if (!$refresh) echo '<tr><td colspan="2">';
+    echo '<table style="width:100%;">';
+    echo '<tr>';
+    if (!$print) {
+        echo '<td class="linkHeader" style="width:5%">';
+        echo '</td>';
+    }
+    $listClass='LocalizationItem';
+    echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n($listClass).'</td>';
+    echo '<td class="linkHeader" style="width:45%">'.i18n('colName').'</td>';
+    echo '<td class="linkHeader" style="width:20%">'.i18n('colIdStatus').'</td>';
+    echo '<td class="linkHeader" style="width:15%">'.i18n('colIdLocalizationTranslator').'</td>';
+    echo '</tr>';
+    foreach ($listLocalizationItems as $localizationItem) {
+        $status = new Status($localizationItem->idStatus);
+        $translator = new LocalizationTranslator($localizationItem->idLocalizationTranslator);
+        $translatorName = $translator->name;
+        $goto="";
+        $canGoto=(securityCheckDisplayMenu(null, get_class($localizationItem)) and securityGetAccessRightYesNo('menu'.get_class($localizationItem), 'read', $localizationItem)=="YES")?true:false;
+        if (!$print and $canGoto) {
+            $goto=' onClick="gotoElement('."'".get_class($localizationItem)."','".htmlEncode($localizationItem->id)."'".');" style="cursor: pointer;" ';
+        }
+
+        echo '<tr>';
+        if (!$print) {
+            echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
+            echo '</td>';
+        }
+        echo '<td class="linkData" '.$goto.' style="white-space:nowrap;width:'.(($print)?'20':'15').'%"><table><tr>';
+        echo '<td>'.formatIcon(get_class($localizationItem), 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$localizationItem->id.'</td></tr></table>';
+        echo '</td>';
+        echo '<td class="linkData" '.$goto.' style="position:relative;">';
+        echo htmlEncode($localizationItem->name);
+        echo '</td>';
+        echo '<td class="noteData" style="text-align:center;background-color:'.$status->color.';" >' .htmlFormatDateTime($status->name). '</td>';
+        echo '</td>';
+        $canGoto=(securityCheckDisplayMenu(null, get_class($translator)) and securityGetAccessRightYesNo('menu'.get_class($translator), 'read', $localizationItem)=="YES")?true:false;
+        $goto ='';
+        if (!$print and $canGoto and $translator->id) {
+            $goto=' onClick="gotoElement('."'".get_class($translator)."','".htmlEncode($translator->id)."'".');" style="cursor: pointer;" ';
+        }
+        echo '<td class="dependencyData"' . $goto .'>'.$translatorName;
+        if ($translator->id){
+            echo formatLetterThumb($localizationItem->idLocalizationTranslator, 16);
+        }
+        echo '</td>';
+
+        echo '</tr>';
+    }
+    
+    echo '</table>';
+    if (!$refresh) echo '</td></tr>';
+    if (!$print) {
+        echo '<input id="LocalizationItemSectionCount" type="hidden" value="'.count($listLocalizationItems).'" />';
+    }
+}
 // ADD qCazelles - Lang-Context
 function drawLanguageSection($obj, $refresh=false) {
   $crit=array();
@@ -5166,6 +5246,9 @@ function drawLanguageSection($obj, $refresh=false) {
     $crit['idVersion']=$obj->id;
     $crit['scope']=str_replace('Version', '', $scope);
     $langClass='VersionLanguage';
+  } else if (get_class($obj)=='LocalizationTranslator'){
+      $crit['idTranslator']=$obj->id;
+      $langClass='LocalizationTranslatorlanguage';
   } else {
     errorLog("drawLanguageSection for item not taken into account : ".get_class($obj));
   }
@@ -5185,16 +5268,23 @@ function drawLanguageSection($obj, $refresh=false) {
   if (!$print) {
     echo '<td class="linkHeader" style="width:5%">';
     if ($obj->id!=null and !$print and $canUpdate) {
-      echo '<a onClick="addProductLanguage();" title="'.i18n('addProductLanguage').'" > '.formatSmallButton('Add').'</a>';
+       echo '<a onClick=addLanguage("' . get_class($obj) . '"); title="'.i18n('addLanguage').'" > '.formatSmallButton('Add').'</a>';
     }
     echo '</td>';
   }
   $listClass='Language';
   echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n($listClass).'</td>';
-  echo '<td class="linkHeader" style="width:80%">'.i18n('colName').'</td>';
+
+  if (get_class($obj)=='LocalizationTranslator'){
+      echo '<td class="linkHeader" style="width:40%">'.i18n('colName').'</td>';
+      echo '<td class="linkHeader" style="width:40%">'.i18n('colLevelLanguageSkill').'</td>';
+  }else{
+      echo '<td class="linkHeader" style="width:80%">'.i18n('colName').'</td>';
+  }
   echo '</tr>';
-  
-  foreach ($list as $lang) { // $lang is ProductLanguage
+
+
+  foreach ($list as $lang) { // $lang is ProductLanguage or LocalizationTranslatorLanguage
     $langObj=new Language($lang->idLanguage);
     $userId=$lang->idUser;
     $userName=SqlList::getNameFromId('User', $userId);
@@ -5205,8 +5295,8 @@ function drawLanguageSection($obj, $refresh=false) {
     if (!$print) {
       echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
       if ($canUpdate) {
-        echo '  <a onClick="editProductLanguage('.htmlEncode($lang->id).');" '.'title="'.i18n('editProductLanguage').'" > '.formatSmallButton('Edit').'</a>';
-        echo '  <a onClick="removeProductLanguage('."'".htmlEncode($lang->id)."','".get_class($obj)."'".');" '.'title="'.i18n('removeProductLanguage').'" > '.formatSmallButton('Remove').'</a>';
+        echo '  <a onClick="editLanguage(' . "'" . htmlEncode($lang->id) . "','" . get_class($obj) . "'" . ');" ' . 'title="' . i18n('editLanguage') . '" > ' . formatSmallButton('Edit') . '</a>';
+        echo '  <a onClick="removeLanguage(' . "'" . htmlEncode($lang->id) . "','" . get_class($obj) . "'" . ');" ' . 'title="' . i18n('removeLanguage') . '" > ' . formatSmallButton('Remove') . '</a>';
       }
       echo '</td>';
     }
@@ -5219,6 +5309,12 @@ function drawLanguageSection($obj, $refresh=false) {
     }
     echo '<td class="linkData '.((isNewGui() and isset($goto) and $goto!='')?'classLinkName':'').'" '.$goto.' style="position:relative;">';
     echo htmlEncode($langObj->name);
+    if (get_class($obj)=='LocalizationTranslator'){
+        echo '</td>';
+        echo '<td class="linkData" '.$goto.' style="position:relative;">';
+        $lsl = new LanguageSkillLevel($lang->idLanguageSkillLevel);
+        echo htmlEncode($lsl->name);;
+    }
     echo formatUserThumb($userId, $userName, 'Creator');
     echo formatDateThumb($creationDate, null);
     echo '</td>';
@@ -5227,7 +5323,9 @@ function drawLanguageSection($obj, $refresh=false) {
   echo '</table>';
   if (!$refresh) echo '</td></tr>';
   if (!$print) {
-    echo '<input id="ProductLanguageSectionCount" type="hidden" value="'.count($list).'" />';
+      if (!get_class($obj)=='LocalizationTranslator') {
+          echo '<input id="ProductLanguageSectionCount" type="hidden" value="' . count($list) . '" />';
+      }
   }
 }
 
@@ -9507,7 +9605,8 @@ function endBuffering($prevSection, $included) {
   //scriptLog("endBuffering($prevSection, $included)");
   global $print, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane, $panes, $nbColMax, $section, $beforeAllPanes, $arrayGroupe, $layout; 
   $sectionPosition=SqlElement::setSectionPosition();
-  $arrayGroupe=$sectionPosition ;
+  $arrayGroupe=$sectionPosition;
+
   // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
   // if(Parameter::getGlobalParameter('useOrganizationBudgetElement')==="YES") {
   // $sectionPosition['hierarchicorganizationprojects'] = array('2'=>'bottom', '3'=>'extra');

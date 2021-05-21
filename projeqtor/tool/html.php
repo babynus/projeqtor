@@ -439,7 +439,20 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
           }
           asort($table);
       }
-  }else {
+  } else if ($col == 'idLocalizationTranslator' and get_class($obj) == 'LocalizationItem'){
+      
+        $table=SqlList::getList($listType,$column,$selection);
+        $listTranslator = SqlList::getListWithCrit("LocalizationTranslatorLanguage", array("idLanguage"=>$obj->idLanguage), "idTranslator",$selection);
+        $listTranslatorOriginLanguage = SqlList::getListWithCrit("LocalizationTranslatorLanguage", array("idLanguage"=>$obj->idOriginLanguage), "idTranslator",$selection);
+        $listTranslator = array_intersect ($listTranslator, $listTranslatorOriginLanguage);
+        $table = array_filter($table,
+            function($keyTemp) use ($listTranslator){
+              return in_array($keyTemp, $listTranslator);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+        $refTable=$listType;
+  } else {
     // None of the previous cases : no criteria and not of the expected above cases
     $showIdleCriteria=$showIdle;
     if (! $obj and property_exists($listType, 'idProject'))  $showIdleCriteria=(! $limitToActiveProjects);
@@ -1136,7 +1149,22 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         }
         echo $disabled;
         echo '><span>'. htmlEncode($val) . '</span></option>';
-      }else{
+      }
+      elseif ($col == 'idLocalizationTranslator' and get_class($obj) == 'LocalizationItem'){
+          // Here we change behavior of list because we want to know language skill level of a translator for an easier visibility
+          $languageSkillLevelId = SqlElement::getSingleSqlElementFromCriteria('LocalizationTranslatorLanguage',array("idTranslator"=>$key,"idLanguage"=>$obj->idLanguage));
+          $idLanguageSkillLevel = $languageSkillLevelId->idLanguageSkillLevel;
+          $languageSkillLevelName = SqlList::getNameFromId('LanguageSkillLevel',$idLanguageSkillLevel,false);
+          $table[$selection]=SqlList::getFieldFromId($refTable, $selection,$column);
+
+          $languageName = SqlList::getNameFromId("Language", $obj->idLanguage);
+          $originLanguageName = SqlList::getNameFromId("Language", $obj->idOriginLanguage);
+          $originLanguageSkillLevelId =SqlElement::getSingleSqlElementFromCriteria('LocalizationTranslatorLanguage',array("idTranslator"=>$key,"idLanguage"=>$obj->idOriginLanguage));
+          $idOriginLanguageSkillLevel = $originLanguageSkillLevelId->idLanguageSkillLevel;
+          $originLanguageSkillLevelName = SqlList::getNameFromId('LanguageSkillLevel',$idOriginLanguageSkillLevel,false);
+          echo '><span>'. htmlEncode($val) . " - " . htmlEncode($originLanguageName) . ' [' . htmlEncode($originLanguageSkillLevelName) . ']' . " - " .  htmlEncode($languageName) . ' [' . htmlEncode($languageSkillLevelName) . ']' . ' </span></option>';
+      }
+      else{
         echo '><span>'. htmlEncode($val) . '</span></option>';
       }
 // END - CHANGE BY TABARY - NOTIFICATION SYSTEM      
