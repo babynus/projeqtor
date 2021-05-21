@@ -2063,44 +2063,68 @@ function removeBusinessFeature(businessFeatureId, refType) {
 //= Product/Component Language/Context 
 //=============================================================================
 
-function addProductLanguage() {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return;
-	}
-	var objectClass=dojo.byId('objectClass').value;
-	var objectId=dojo.byId("objectId").value;
-	var param="&objectClass="+objectClass+"&objectId="+objectId;
-	loadDialog('dialogProductLanguage', null, true, param, false);
+function addLanguage(scope) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  var objectClass=dojo.byId('objectClass').value;
+  var objectId=dojo.byId("objectId").value;
+  var param="&objectClass="+objectClass+"&objectId="+objectId;
+  if (scope == "LocalizationTranslator"){
+    loadDialog('dialogTranslatorLanguage', null, true, param, false);
+  }
+  else{
+    loadDialog('dialogProductLanguage', null, true, param, false);
+  }
+
+}
+function saveTranslationLanguage() {
+  loadContent("../tool/saveTranslatorLanguage.php", "resultDivMain", "translatorLanguageForm", true, 'LocalizationTranslatorLanguage');
+  dijit.byId('dialogTranslatorLanguage').hide();
 }
 
 function saveProductLanguage() {
 	loadContent("../tool/saveProductLanguage.php", "resultDivMain", "productLanguageForm", true, 'ProductLanguage');
-	dijit.byId('dialogProductLanguage').hide();	
+	dijit.byId('dialogProductLanguage').hide();
 }
 
-function editProductLanguage(productLanguageId) {
+
+function editLanguage(typeLanguageId, scope) {
 	if (checkFormChangeInProgress()) {
 		showAlert(i18n('alertOngoingChange'));
 		return;
 	}
 	var objectClass=dojo.byId('objectClass').value;
 	var objectId=dojo.byId("objectId").value;
-	
-	var param="&objectClass="+objectClass+"&objectId="+objectId+"&languageId="+productLanguageId;
-	loadDialog('dialogProductLanguage',null,true,param,true);
+
+	var param="&objectClass="+objectClass+"&objectId="+objectId+"&languageId="+typeLanguageId;
+
+    if (scope == "LocalizationTranslator"){
+      loadDialog('dialogTranslatorLanguage', null, true, param, false);
+    }
+    else{
+      loadDialog('dialogProductLanguage',null,true,param,true);
+    }
 }
 
-function removeProductLanguage(productLanguageId, refType) {
+function removeLanguage(typeLanguageId, refType) {
 	if (checkFormChangeInProgress()) {
 		showAlert(i18n('alertOngoingChange'));
 		return;
 	}
-	actionOK=function() {
-		loadContent("../tool/removeProductLanguage.php?refType="+refType+"&productLanguageId="+productLanguageId, "resultDivMain", null, true, 'ProductLanguage');
-	};
-	msg=i18n('confirmDeleteProductLanguage');
-	showConfirm(msg, actionOK);
+	if (refType == 'LocalizationTranslator'){
+      actionOK=function() {
+        loadContent("../tool/removeTranslatorLanguage.php?refType="+refType+"&translatorLanguageId="+typeLanguageId, "resultDivMain", null, true, 'LocalizationTranslatorLanguage');
+      };
+    }
+	else{
+      actionOK=function() {
+        loadContent("../tool/removeProductLanguage.php?refType="+refType+"&productLanguageId="+typeLanguageId, "resultDivMain", null, true, 'ProductLanguage');
+      };
+    }
+    msg=i18n('confirmDeleteLanguage');
+    showConfirm(msg, actionOK);
 }
 
 function addProductContext() {

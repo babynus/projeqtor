@@ -1773,6 +1773,54 @@
 .ProjeQtOrNewGui .iconLoginUser { background-image: url(customIcons/new/iconLogin.svg);  background-repeat: no-repeat;}
 
 
+.iconLocalizationManagement { background-image: url(images/iconLocalizationManagement.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconLocalizationManagement { background-image: url(customIcons/blue/iconLocalization.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatRed .iconLocalizationManagement { background-image: url(customIcons/red/iconLocalization.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGreen .iconLocalizationManagement { background-image: url(customIcons/green/iconLocalization.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGrey .iconLocalizationManagement { background-image: url(customIcons/grey/iconLocalization.png); background-repeat: no-repeat;  }
+.ProjeQtOrNewGui .iconLocalization { background-image: url(customIcons/new/iconLocalizationManagement.svg); background-repeat: no-repeat;  }
+
+.iconLocalizationRequest { background-image: url(images/iconLocalizationRequest.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconLocalizationRequest { background-image: url(customIcons/blue/iconLocalizationRequest.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatRed .iconLocalizationRequest { background-image: url(customIcons/red/iconLocalizationRequest.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGreen .iconLocalizationRequest { background-image: url(customIcons/green/iconLocalizationRequest.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGrey .iconLocalizationRequest { background-image: url(customIcons/grey/iconLocalizationRequest.png); background-repeat: no-repeat;  }
+.ProjeQtOrNewGui .iconLocalizationRequest { background-image: url(customIcons/new/iconLocalizationRequest.svg); background-repeat: no-repeat;  }
+
+.iconLocalizationItem { background-image: url(images/iconLocalizationItem.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconLocalizationItem { background-image: url(customIcons/blue/iconLocalizationItem.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatRed .iconLocalizationItem { background-image: url(customIcons/red/iconLocalizationItem.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGreen .iconLocalizationItem { background-image: url(customIcons/green/iconLocalizationItem.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGrey .iconLocalizationItem { background-image: url(customIcons/grey/iconLocalizationItem.png); background-repeat: no-repeat;  }
+.ProjeQtOrNewGui .iconLocalizationItem { background-image: url(customIcons/new/iconLocalizationItem.svg); background-repeat: no-repeat;  }
+
+.iconLocalizationTranslator { background-image: url(images/iconLocalizationTranslator.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconLocalizationTranslator { background-image: url(customIcons/blue/iconLocalizationTranslator.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatRed .iconLocalizationTranslator { background-image: url(customIcons/red/iconLocalizationTranslator.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGreen .iconLocalizationTranslator { background-image: url(customIcons/green/iconLocalizationTranslator.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGrey .iconLocalizationTranslator { background-image: url(customIcons/grey/iconLocalizationTranslator.png); background-repeat: no-repeat;  }
+.ProjeQtOrNewGui .iconLocalizationTranslator { background-image: url(customIcons/new/iconLocalizationTranslator.svg); background-repeat: no-repeat;  }
+
+.iconLanguageSkillLevel { background-image: url(images/iconLanguageSkillLevel.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconLanguageSkillLevel { background-image: url(customIcons/blue/iconLanguageSkillLevel.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatRed .iconLanguageSkillLevel { background-image: url(customIcons/red/iconLanguageSkillLevel.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGreen .iconLanguageSkillLevel { background-image: url(customIcons/green/iconLanguageSkillLevel.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGrey .iconLanguageSkillLevel { background-image: url(customIcons/grey/iconLanguageSkillLevel.png); background-repeat: no-repeat;  }
+.ProjeQtOrNewGui .iconLanguageSkillLevel { background-image: url(customIcons/new/iconLanguageSkillLevel.svg); background-repeat: no-repeat;  }
+
+.iconLocalizationRequestType { background-image: url(images/iconLocalizationRequestType.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconLocalizationRequestType { background-image: url(customIcons/blue/iconLocalizationRequestType.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatRed .iconLocalizationRequestType { background-image: url(customIcons/red/iconLocalizationRequestType.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGreen .iconLocalizationRequestType { background-image: url(customIcons/green/iconLocalizationRequestType.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGrey .iconLocalizationRequestType { background-image: url(customIcons/grey/iconLocalizationRequestType.png); background-repeat: no-repeat;  }
+.ProjeQtOrNewGui .iconLocalizationRequestType { background-image: url(customIcons/new/iconLocalizationRequestType.svg); background-repeat: no-repeat;  }
+
+.iconLocalizationItemType { background-image: url(images/iconLocalizationItemType.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconLocalizationItemType { background-image: url(customIcons/blue/iconLocalizationItemType.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatRed .iconLocalizationItemType { background-image: url(customIcons/red/iconLocalizationItemType.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGreen .iconLocalizationItemType { background-image: url(customIcons/green/iconLocalizationItemType.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGrey .iconLocalizationItemType { background-image: url(customIcons/grey/iconLocalizationItemType.png); background-repeat: no-repeat;  }
+.ProjeQtOrNewGui .iconLocalizationItemType { background-image: url(customIcons/new/iconLocalizationItemType.svg); background-repeat: no-repeat;  }
 
 
 
