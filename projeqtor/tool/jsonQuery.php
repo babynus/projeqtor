@@ -34,8 +34,8 @@
     $objectClass=$_REQUEST['objectClass'];
 	  Security::checkValidClass($objectClass);
 	  Security::checkValidAccessForUser(null, 'read', $objectClass);
-	  
-    $showThumb=Parameter::getUserParameter('paramShowThumbList');
+
+	  $showThumb=Parameter::getUserParameter('paramShowThumbList');
     if ($showThumb=='NO') {
       $showThumb=false;
     } else {
@@ -660,6 +660,12 @@
         $bbsSortable = $budg->bbsSortable;
         $queryWhere.= ' and bbsSortable like "'.$bbsSortable.'%"';
       }
+    }
+    
+    if($objectClass=='PokerSession'){
+      $poker = new PokerSession();
+      $pTable=$poker->getDatabaseTableName();
+	  $queryWhere.= ' and '.$pTable.'.handled=\'1\'';
     }
     
 // MTY - LEAVE SYSTEM

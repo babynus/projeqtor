@@ -269,6 +269,7 @@ CREATE TABLE `${prefix}pokeritem` (
   `idPokerSession` int(12) unsigned DEFAULT NULL COMMENT '12',
   `value` int(2) unsigned DEFAULT NULL COMMENT '2',
   `work` decimal(9,5) unsigned DEFAULT NULL,
+  `isOpen` int(1) unsigned DEFAULT 0 COMMENT '1',
   `comment` varchar(4000) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -290,20 +291,20 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (340,'menuPokerSession',3,260,120,0);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
-(1,259,1),
-(2,259,1),
-(3,259,1),
-(1,260,1),
-(2,260,1),
-(3,260,1);
+(1, 259, 1),
+(2, 259, 1),
+(3, 259, 1),
+(1, 260, 1),
+(2, 260, 1),
+(3, 260, 1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
-(1,259,8),
-(2,259,2),
-(3,259,7),
-(1,260,8),
-(2,260,2),
-(3,260,7);
+(1, 259, 8),
+(2, 259, 2),
+(3, 259, 7),
+(1, 260, 8),
+(2, 260, 2),
+(3, 260, 7);
 
 ALTER TABLE `${prefix}workunit` ADD COLUMN `idle` int(1) unsigned DEFAULT 0 COMMENT '1';
 

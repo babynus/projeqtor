@@ -741,6 +741,19 @@ function showDetailLink() {
   }
 }
 
+function showDetailPokerItem() {
+	  var pokerItemType=dijit.byId('pokerItemRef2Type').get("value");
+	  if (pokerItemType) {
+		var canCreate=0;
+	    if (canCreateArray[pokerItemType] == "YES") {
+	      canCreate=1;
+	    }
+	    showDetail('pokerItemRef2Id', canCreate, pokerItemType, true);
+	  } else {
+	    showInfo(i18n('messageMandatory', new Array(i18n('pokerItemType'))));
+	  }
+	}
+
 function showDetailApprover() {
   var canCreate=0;
   if (canCreateArray['Resource'] == "YES") {
@@ -908,6 +921,10 @@ function selectDetailItem(selectedValue, lastSavedName) {
         refreshLinkList(idFldVal);
         setTimeout("dojo.byId('linkRef2Id').focus()", 1000);
         enableWidget('dialogLinkSubmit');
+      } else if (comboName == 'pokerItemRef2Id') {
+          refreshPokerItemList(idFldVal);
+          setTimeout("dojo.byId('pokerItemRef2Id').focus()", 1000);
+          enableWidget('dialogPokerItemSubmit');
       } else if (comboName == 'productStructureListId') {
         refreshProductStructureList(idFldVal,lastSavedName);
         setTimeout("dojo.byId('productStructureListId').focus()",500);
@@ -13285,10 +13302,156 @@ function selectResourcesTransformIdToName(target){
     });
 }
 
-function addPokerMember(){
-	loadDialog('dialogAddPokerMember',null,true,null);
+//=============================================================================
+//= Poker Item
+//=============================================================================
+
+var noRefreshPokerItem=false;
+function addPokerItem(classPokerItem, defaultPokerItem) {
+  if (!classPokerItem) {
+    var params="&objectClass="+dojo.byId('objectClass').value+"&objectId="+dojo.byId("objectId").value;
+  }
+  loadDialog('dialogPokerItem',function(){
+	noRefreshPokerItem=true;
+    var objectClass=dojo.byId('objectClass').value;
+    var objectId=dojo.byId("objectId").value;
+    var message=i18n("dialogPokerItem");
+    dojo.byId("pokerItemId").value="";
+    dojo.byId("pokerItemRef1Type").value=objectClass;
+    dojo.byId("pokerItemRef1Id").value=objectId;
+    if (classPokerItem) {
+      dojo.byId("pokerItemFixedClass").value=classPokerItem;
+      message=i18n("dialogPokerItemRestricted", new Array(i18n(objectClass), objectId,
+          i18n(classPokerItem)));
+      dijit.byId("pokerItemRef2Type").setDisplayedValue(i18n(classLink));
+      lockWidget("pokerItemRef2Type");
+      noRefreshPokerItem=false;
+      refreshPokerItemList();
+    } else {
+      dojo.byId("pokerItemFixedClass").value="";
+      if (defaultPokerItem) {
+        dijit.byId("pokerItemRef2Type").set('value', defaultPokerItem);
+      } else {
+        dijit.byId("pokerItemRef2Type").reset();
+      }
+      message=i18n("dialogPokerItemExtended", new Array(i18n(objectClass), objectId));
+      unlockWidget("pokerItemRef2Type");
+      noRefreshPokerItem=false;
+      refreshPokerItemList();
+    }
+  
+    dijit.byId("dialogPokerItem").set('title', message);
+    dijit.byId("pokerItemComment").set('value', '');
+    dijit.byId("dialogPokerItem").show();
+    disableWidget('dialogPokerItemSubmit');
+  }, true, params, true);
 }
 
-function addPokerItem(){
-	loadDialog('dialogAddPokerItem',null,true,null);
+function selectPokerItemItem() {
+  var nbSelected=0;
+  list=dojo.byId('pokerItemRef2Id');
+	if (list.options) {
+	  for (var i=0; i < list.options.length; i++) {
+	    if (list.options[i].selected) {
+	      nbSelected++;
+	    }
+	  }
+	}
+  if (nbSelected > 0) {
+    enableWidget('dialogPokerItemSubmit');
+  } else {
+    disableWidget('dialogPokerItemSubmit');
+  }
+}
+
+/**
+ * Refresh the pokerItem list (after update)
+ */
+function refreshPokerItemList(selected) {
+  if (noRefreshPokerItem)
+    return;
+  disableWidget('dialogPokerItemSubmit');
+  var url='../tool/dynamicListPokerItem.php';
+  if (selected) {
+    url+='?selected=' + selected;
+  }
+  if (!selected) {
+    selectPokerItemItem();
+  }
+  loadContent(url, 'dialogPokerItemList', 'pokerItemForm', false);
+}
+
+/**
+ * save a pokerItem (after addPokerItem)
+ * 
+ */
+function savePokerItem() {
+  if (dojo.byId("pokerItemRef2Id").value == "")
+    return;
+  var fixedClass = (dojo.byId('pokerItemFixedClass'))?dojo.byId('pokerItemFixedClass').value:'';
+  loadContent("../tool/savePokerItem.php", "resultDivMain", "pokerItemForm", true, 'pokerItem'+fixedClass);
+  dijit.byId('dialogPokerItem').hide();
+}
+
+/**
+ * Display a delete PokerItem Box
+ * 
+ */
+function removePokerItem(pokerItemId) {
+  actionOK=function() {
+	  loadContent("../tool/removePokerItem.php?pokerItemId="+pokerItemId, "resultDivMain", null, true, 'pokerItem');
+  };
+  msg=i18n('confirmDeletePokerItem', new Array('PokerItem', pokerItemId));
+  showConfirm(msg, actionOK);
+}
+
+function editPokerItem(pokerItemId){
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  var callBack = function () {
+    dojo.xhrGet({
+      url : '../tool/getSingleData.php?dataType=editPokerItem&idPokerItem='+pokerItemId,
+      handleAs : "text",
+      load : function(data) {
+        dijit.byId('pokerItemComment').set('value', data);
+      }
+      });
+    dijit.byId("dialogPokerItem").show();
+  };
+  var params="&id="+id;
+  params+="&pokerItemId="+pokerItemId;
+  params+="&mode=edit";
+  loadDialog('dialogPokerItem',callBack,false,params);
+}
+
+function startPokerSession(idPokerSession){
+	dojo.xhrPost({
+	      url : '../tool/startPokerSession.php?idPokerSession='+idPokerSession,
+	      handleAs : "text",
+	      load : function(data) {
+	    	  var callBack=function(){
+	    		  tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
+	    		  console.log(tabToSelect);
+		    	  tabContainer=dijit.byId('tabDetailContainer');
+		    	  if(tabContainer!=undefined){
+	    	        tabContainer.selectChild(tabToSelect.page);
+		    	  }
+	    	  };
+	    	  loadContent("objectMain.php?objectClass=PokerSession", "centerDiv", false,
+	    	          false, false, idPokerSession,false,callBack,true);
+	      }
+	});
+}
+
+function stopPokerSession(idPokerSession){
+	dojo.xhrPost({
+	      url : '../tool/startPokerSession.php?idPokerSession='+idPokerSession,
+	      handleAs : "text",
+	      load : function(data) {
+	    	  refreshGrid();
+	    	  loadContent("objectDetail.php", "detailDiv", "listForm",null,null,null,null,null,true);
+	      }
+	});
 }
