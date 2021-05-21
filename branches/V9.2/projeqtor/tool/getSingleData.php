@@ -235,6 +235,10 @@
       $id = RequestHandler::getId('idLink');
       $link = new Link($id,true);
       echo $link->comment;
+    }else if($type=='editPokerItem'){  
+      $id = RequestHandler::getId('idPokerItem');
+      $pokerItem = new PokerItem($id,true);
+      echo $pokerItem->comment;
     }else if($type=='editAttachment'){
       $id = RequestHandler::getId('id');
       $att = new Attachment($id,true);
