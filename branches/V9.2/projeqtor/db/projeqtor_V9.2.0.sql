@@ -314,3 +314,160 @@ INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionN
 ('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteAlerts'),
 ('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteNotifications'),
 ('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteAudit');
+
+-- ======================================
+-- Localization module
+-- ======================================
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
+(261,'menuLocalizationManagement',0,'menu', 476,null,0,'Localization'),
+(262,'menuLocalizationRequest',261,'object', 477,"ReadWriteLocalization",0,'Localization'),
+(263,'menuLocalizationItem',261,'object', 477,"ReadWriteLocalization",0,'Localization'),
+(264,'menuLocalizationTranslator',261,'object', 477,"ReadWriteLocalization",0,'Localization');
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
+(1,261,1),
+(1,262,1),
+(1,263,1),
+(1,264,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,262,1000001),
+(1,263,1000001),
+(1,264,1000001);
+
+INSERT INTO `module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES 
+(21,'moduleLocalization','880',null,0,0);
+
+INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
+(21,262,0,1),
+(21,263,0,1),
+(21,264,0,1);
+
+CREATE TABLE `${prefix}localizationtranslator` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idResource` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `name` varchar(100) DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0' COMMENT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}localizationtranslatorlanguage` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `idTranslator` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idLanguage` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idLanguageSkillLevel` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idUser` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `creationDate` date DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0' COMMENT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}languageskilllevel` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `name` varchar(100) DEFAULT NULL,
+  `color` varchar(7) DEFAULT NULL,
+  `sortOrder` int(3) unsigned DEFAULT NULL COMMENT '3',
+  `idle` int(1) unsigned DEFAULT '0' COMMENT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES 
+(265, 'menuLanguageSkillLevel',36,'object',896,'ReadWriteList',0, 'ListOfValues');
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
+(1,265,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,265,1000001);
+
+INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
+(266, 'menuLocalizationRequestType', 79, 'object', 1042, 'ReadWriteType', 0, 'Type');
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
+(1,266,1);
+
+CREATE TABLE `${prefix}localizationrequest` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `name` varchar(100) DEFAULT NULL,
+  `textToTranslate` mediumtext,
+  `context` mediumtext,
+  `localizationId` VARCHAR(100) DEFAULT NULL,
+  `idLocalizationRequestType` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idLocalizationItemType` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idStatus` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idLanguage` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idLocalizationTranslator` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idProductVersion` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idComponentVersion` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idActivity` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idResource` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idAccountable` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `plannedDeliveryDate` date DEFAULT NULL,
+  `realDeliveryDate` date DEFAULT NULL,
+  `creationDateTime` DATETIME DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0' COMMENT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+ALTER TABLE `${prefix}type` ADD  `idStatus` int(12) unsigned DEFAULT NULL;
+
+CREATE TABLE `${prefix}localizationItem` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+  `name` varchar(100) DEFAULT NULL,
+  `localizationId` varchar(100) DEFAULT NULL,
+  `idResource` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idLocalizationRequest` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idLocalizationItemType` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idLocalizationTranslator` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idLanguage` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idOriginLanguage` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `textToTranslate` mediumtext,
+  `actualDueDate` date DEFAULT NULL,
+  `idStatus` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `context` mediumtext,
+  `idProductVersion` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idComponentVersion` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `localizationResult` mediumtext,
+  `automaticProcess` int(1) unsigned DEFAULT '0' COMMENT '1',
+  `idle` int(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
+(267, 'menuLocalizationItemType', 79, 'object', 1043, 'ReadWriteType', 0, 'Type');
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
+(1,267,1);
+
+INSERT INTO `${prefix}mailable` (`id`, `name`, `idle`) VALUES
+(45, 'LocalizationItem', 0),
+(46, 'LocalizationRequest', 0);
+
+ALTER TABLE `${prefix}type` ADD  `numberDaysBeforeDueDate` int(6) unsigned DEFAULT NULL COMMENT '6';
+
+INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
+(341,'navLocalization',0,0,95,0),
+(342,'menuLocalizationRequest',341,262,20,0),
+(343,'menuLocalizationItem',341,263,30,0),
+(344,'menuLocalizationTranslator',341,264,40,0);
+
+INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
+(345, 'menuLanguageSkillLevel',131,265,55,0),
+(346, 'menuLocalizationRequestType',332,266,60,0),
+(347, 'menuLocalizationItemType', 332,267,70,0);
+
+INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
+(21,265,0,1),
+(21,266,0,1),
+(21,267,0,1);
+
+INSERT INTO `${prefix}languageskilllevel` (`id`,`name`,`color`,`sortOrder`,`idle`) VALUES
+(1, 'beginner','#ff0000',10,0),
+(2, 'intermediate','#ffa500',20,0),
+(3, 'advanced','#00ff00',30,0);
+
+INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`, `idStatus`) VALUES 
+('LocalizationRequest', 'standard translation',10,1, 0, 1),
+('LocalizationRequest', 'urgent translation',20,1, 0, 1),
+('LocalizationItem', 'item',10,1, 0, 1);
