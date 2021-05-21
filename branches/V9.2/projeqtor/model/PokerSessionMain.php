@@ -49,8 +49,6 @@ class PokerSessionMain extends SqlElement {
   public $idleDate;
   public $_sec_Attendees;
   public $_Assignment=array();
-  public $attendees;
-  public $_spe_buttonAssignTeam;
   public $_sec_pokerItem;
   public $_spe_pokerItem;
   public $_sec_progress_left;
@@ -152,29 +150,17 @@ class PokerSessionMain extends SqlElement {
     global $print;
     $canUpdate=securityGetAccessRightYesNo('menuPokerSession', 'update', $this) == "YES";
     $result = "";
-    if ($item=='buttonAssignTeam') {
-    	if ($print or !$canUpdate  or !$this->id or $this->idle or $this->done) {
-    		return "";
-    	}
-    	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
-    	$result .= '<button id="attendeesAllTeam" dojoType="dijit.form.Button" showlabel="true" onClick ="assignTeamForMeeting()"';
-    	$result .= ' title="' . i18n('buttonAssignWholeTeam') . '" class="roundedVisibleButton">';
-    	$result .= '<span>' . i18n('buttonAssignWholeTeam') . '</span>';
-    	$result .= '</button>';
-    	$result .= '</td></tr>';
-    	return $result;
-    }
     if($item=="startPokerSession"){
-    	if ($print or !$canUpdate or ! $this->id or $this->idle or $this->done or !$this->handled) {
+    	if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {
     		return "";
     	}
     	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
-    	$result .= '<button id="startMeeting" dojoType="dijit.form.Button" showlabel="true"';
-    	$result .= ' title="' . i18n('pokerSessionStart') . '" class="roundedVisibleButton">';
-    	$result .= '<span>' . i18n('pokerSessionStart') . '</span>';
+    	$result .= '<button id="startPokerSession" dojoType="dijit.form.Button" showlabel="true"';
+    	$result .= ' title="' . i18n('pokerSessionStop') . '" class="roundedVisibleButton">';
+    	$result .= '<span>' . i18n('pokerSessionStop') . '</span>';
     	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
     	$result .= '   if (checkFormChangeInProgress()) {return false;}';
-    	$result .=  '  ';
+    	$result .=  '  stopPokerSession('.$this->id.');';
     	$result .= '</script>';
     	$result .= '</button>';
     	$result .= '</td></tr>';
@@ -183,8 +169,8 @@ class PokerSessionMain extends SqlElement {
   	if($item=="pokerItem"){
 	  drawPokerItem($this, 'Session');
   	}
-  	if($item=="pokerMember"){
-  		drawPokerMember($this, 'Session');
-  	}
+//   	if($item=="pokerVote"){
+//       drawPokerVote($this);
+//   	}
   }
 }?>

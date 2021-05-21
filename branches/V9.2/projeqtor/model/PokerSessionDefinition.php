@@ -43,7 +43,8 @@ class PokerSessionDefinition extends PokerSessionMain {
    		"idle"=>"readonly, nobr",
    		"pokerSessionStartDateTime"=>"hidden",
    		"pokerSessionEndDateTime"=>"hidden",
-        "_sec_pokerVote"=>"hidden"
+        "_sec_pokerVote"=>"hidden",
+        "_sec_progress_left"=>"hidden",
    );
   
    public function setAttributes() {
@@ -99,16 +100,21 @@ class PokerSessionDefinition extends PokerSessionMain {
     $canUpdate=securityGetAccessRightYesNo('menuPokerSession', 'update', $this) == "YES";
     $result = "";
     if($item=="startPokerSession"){
-    	if ($print or !$canUpdate or ! $this->id or $this->idle or $this->done or $this->handled) {
+        if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {
     		return "";
     	}
+    	$name=(!$this->handled)?i18n('pokerSessionStart'):i18n('pokerSessionStop');
     	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
-    	$result .= '<button id="startMeeting" dojoType="dijit.form.Button" showlabel="true"';
-    	$result .= ' title="' . i18n('pokerSessionStart') . '" class="roundedVisibleButton">';
-    	$result .= '<span>' . i18n('pokerSessionStart') . '</span>';
+    	$result .= '<button id="startPokerSession" dojoType="dijit.form.Button" showlabel="true"';
+    	$result .= ' title="' . $name . '" class="roundedVisibleButton">';
+    	$result .= '<span>' . $name. '</span>';
     	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
     	$result .= '   if (checkFormChangeInProgress()) {return false;}';
-    	$result .=  '  ';
+        if(!$this->handled){
+          $result .=  '  startPokerSession('.$this->id.');';
+        }else{
+          $result .=  '  stopPokerSession('.$this->id.');';
+        }    	
     	$result .= '</script>';
     	$result .= '</button>';
     	$result .= '</td></tr>';
@@ -116,9 +122,6 @@ class PokerSessionDefinition extends PokerSessionMain {
     }
     if($item=="pokerItem"){
     	drawPokerItem($this, 'Definition');
-    }
-    if($item=="pokerMember"){
-    	drawPokerMember($this, 'Definition');
     }
   }
 }?>
