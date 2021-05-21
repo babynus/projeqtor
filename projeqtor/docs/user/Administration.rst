@@ -15,13 +15,14 @@ Administration Console
    
    Administration screen
 
+Administration console allows to execute administration tasks on application.
+
 .. note::
 
   The screens described below are restricted to users with administrator profile.
    
   Users with other profiles can not access it, whether display or access rights are granted or not.   
 
-Administration console allows to execute administration tasks on application.
 
 .. index:: Background tasks
 
@@ -49,8 +50,8 @@ You can activate or deactivate CRON directly from the info bar. See: :ref:`The C
 
 .. index:: Internal alert, Background tasks
 
-Internal alert
---------------
+Send a internal alert
+---------------------
 
 Allows to send an internal alert to users. It's a :ref:`background task<background-task>`.
 
@@ -60,7 +61,7 @@ Allows to send an internal alert to users. It's a :ref:`background task<backgrou
    Internal Alert
    
    
-Internal alerts can be sent to users. 
+An internal alert can be sent to users. 
 
 You can define a date and time for sending, specific adressees or all users, the type of message that users will receive: information, an alert or a warning ...
 
@@ -74,21 +75,6 @@ An internal alert can be sent by the administrator or by monitoring indicators.
     
     The message will be received by user via message pop-up.
     
-    
-
- .. compound:: Monitoring indicators   
-
-    Monitoring indicators send only warning and alert message.
-    
-    The message contains information that explains the alert:
-
-      * Item id and type.  
-      * Indicator description. 
-      * Target value.
-      * Alert or warning value.
-
-    The indicators are defined in :ref:`Indicators screen<indicator>` .    
-
    
 
 .. index:: Connection Management
@@ -148,12 +134,20 @@ Consistency check
 Maintenance of Data
 -------------------
  
-The administrator has the possibility to:
+This section allows you to clean data relating to emails, alerts, notifications, logs ...
 
-  * Close and delete sent emails and alerts. 
-  * Delete history of connections. 
-  * Updating references for any kind of element.
+You have the option of closing or deleting and or activating the function so that the data is processed automatically on a daily basis.
 
+* Close emails sent over X days
+* Delete emails sent over X days
+* Close alerts sent over X days
+* Delete alerts sent older than X days
+* Delete notifications sent more than X days
+* Delete connection logs closed for X days
+
+
+
+And you can update references for all or each of the elements.
 .. index:: Log file Maintenance   
 
 Log files maintenance

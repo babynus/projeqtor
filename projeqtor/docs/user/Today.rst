@@ -47,65 +47,74 @@ The definition of visibility is based on the access rights of each user
 
 .. rubric:: Parameters
 
-* Click on |Parameter| to access screen parameters.
-
 .. figure:: /images/GUI/TODAY_BOX_Parameters.png
    :alt: Dialog box - Today parameters 
    :align: center
+
+* Click on |Parameter| to access screen parameters.
+
    
-.. rubric:: Period for task selection
+ .. compound:: Period for task selection
 
-Allows to define the period for tasks will be displayed.
-
- .. compound:: **Due date**
-
- * Select only items with due date less than today plus this selected period.
-
- .. compound:: **Or not set**
+   Allows to define the period for tasks will be displayed.
+   
+    .. compound:: **Due date**
+   
+    * Select only items with due date less than today plus this selected period.
+   
+    .. compound:: **Or not set**
+    
+    * Select also items with due date not set. 
  
- * Select also items with due date not set. 
  
- 
-.. rubric:: Refresh parameters
+ .. compound:: Refresh parameters
 
-Allows to define parameters for automatic refresh.
-
- .. compound:: **Field Refresh delay**
-         
- * Selects the delay between two screen refresh.
-
- .. compound:: **Field Scroll delay**
-         
- * Selects the delay between two scrolling.
+   Allows to define parameters for automatic refresh.
+   
+    .. compound:: **Field Refresh delay**
+            
+    * Selects the delay between two screen refresh.
+   
+    .. compound:: **Field Scroll delay**
+            
+    * Selects the delay between two scrolling.
 
 .. _items-be-displayed:
 
-.. rubric:: Items to be displayed
+ .. compound:: Items to be displayed
 
-* Allows to define sections displayed on the screen.
-* Allows to reorder sections displayed with drag & drop feature.
-* Using the selector area button icon drag |Drag|. 
-
-The number of items to display for the user can be customized in the user parameters, in the display tab.
-
-Enter the number of projects or tasks to appear on the screen.
-
-See: :ref:`User parameters<display-parameters>`
-
- 
-
-If you have added any reports to the Today page, they will appear in the list.
-      
-You can hide the added reports by clicking on the box.
-
+   * Allows to define sections displayed on the screen.
+   * Allows to reorder sections displayed with drag & drop feature.
+   * Using the selector area button icon drag |Drag|. 
    
-See : :ref:`Favorite Report<favorite_report>`
-
-See : :ref:`Today Screen Report<today_report>`
+   The number of items to display for the user can be customized in the user parameters, in the display tab.
    
-See: :ref:`extending<extending-today>`
+   Enter the number of projects or tasks to appear on the screen.
+   
+   See: :ref:`User parameters<display-parameters>`
    
     
+   
+   If you have added any reports to the Today page, they will appear in the list.
+         
+   You can hide the added reports by clicking on the box.
+   
+      
+   See : :ref:`Favorite Report<favorite_report>`
+   
+   See : :ref:`Today Screen Report<today_report>`
+      
+   See: :ref:`extending<extending-today>`
+      
+
+.. rubric:: Activity Stream
+
+Click on |ActivityStream| to display the activity stream on the Today page. 
+
+It will display all the elements whose user rights allow visibility.
+
+
+   
 .. raw:: latex
 
     \newpage
