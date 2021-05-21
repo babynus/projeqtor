@@ -216,7 +216,7 @@ if ($type=='habilitation') {
     resetUser();
   }
 } else if ($type=='accessRightNoProject') {
-  $tableCrossRef=array('menuReadWritePrincipal','menuReadWriteConfiguration','menuReadWriteTool','menuReadWriteEnvironment','menuReadWriteAutomation','menuReadWriteList','menuReadWriteType');
+  $tableCrossRef=array('menuReadWritePrincipal','menuReadWriteConfiguration','menuReadWriteTranslation','menuReadWriteTool','menuReadWriteEnvironment','menuReadWriteAutomation','menuReadWriteList','menuReadWriteType');
   foreach ($tableCrossRef as $crossRef) {
     $crosTable=htmlGetCrossTable($crossRef, 'profile', 'accessRight') ;
     foreach($crosTable as $lineId => $line) {

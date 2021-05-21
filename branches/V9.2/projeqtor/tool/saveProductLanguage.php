@@ -11,6 +11,7 @@ $objectId=RequestHandler::getId('productLanguageObjectId',true);
 $listId=RequestHandler::getValue('productLanguageListId',true);
 $scopeClass=RequestHandler::getClass('productLanguageScopeClass',true);
 $scope=RequestHandler::getClass('productLanguageScope',true);
+$selectedId =  RequestHandler::getValue('productLanguageSelectedId',true);
 
 $arrayId=array();
 if (is_array($listId)) {
@@ -23,7 +24,7 @@ Sql::beginTransaction();
 $result="";
 
 foreach ($arrayId as $id) {
-	$str=new $scopeClass();
+	$str=new $scopeClass($selectedId);
 	if ($scopeClass=='ProductLanguage') {
 	  $str->idProduct=$objectId;
 	}	else if ($scopeClass=='VersionLanguage') {

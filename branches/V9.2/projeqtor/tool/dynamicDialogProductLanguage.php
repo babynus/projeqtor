@@ -63,7 +63,9 @@ if ($objectClass == 'ProductVersion' or $objectClass == 'ComponentVersion') {
         <input id="productLanguageObjectId" name="productLanguageObjectId" type="hidden" value="<?php echo $objectId;?>" />
         <input id="productLanguageScopeClass" name="productLanguageScopeClass" type="hidden" value="<?php echo $scopeClass;?>" />  
         <input id="productLanguageScope" name="productLanguageScope" type="hidden" value="<?php echo $scope;?>" />
-        <table>
+        <input id="productLanguageSelectedId" name="productLanguageSelectedId" type="hidden" value="<?php echo $languageId;?>" />
+
+          <table>
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr><td colspan="2" class="section"><?php echo i18n('sectionProductLanguage',array(i18n($objectClass),intval($objectId).' '.$object->name));?></td></tr>
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>  
