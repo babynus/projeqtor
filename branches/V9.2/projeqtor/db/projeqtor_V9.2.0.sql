@@ -431,7 +431,7 @@ CREATE TABLE `${prefix}localizationItem` (
   `idComponentVersion` int(12) unsigned DEFAULT NULL COMMENT '12',
   `localizationResult` mediumtext,
   `automaticProcess` int(1) unsigned DEFAULT '0' COMMENT '1',
-  `idle` int(1) unsigned DEFAULT '0',
+  `idle` int(1) unsigned DEFAULT '0' COMMENT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
