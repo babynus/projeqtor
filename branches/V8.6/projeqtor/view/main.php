@@ -375,9 +375,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       aboutMessage+='<br/><b>'+i18n('externalLibrary')+'</b><br/>';
       aboutMessage+='&nbsp;&nbsp;.&nbsp;Dojo : '+dojo.version.major+"."+dojo.version.minor+"."+dojo.version.patch+'<br/>';
       aboutMessage+='&nbsp;&nbsp;.&nbsp;html2pdf : <?php use Spipu\Html2Pdf\Html2Pdf;require_once '../external/html2pdf/vendor/autoload.php';$html2pdf = new Html2Pdf();echo $html2pdf->getVersion();?>'+'<br/>';
-      aboutMessage+='&nbsp;&nbsp;.&nbsp;CK Editor : '+CKEDITOR.version+'<br/>';
-      aboutMessage+='&nbsp;&nbsp;.&nbsp;pChart2 : <?php include_once('../external/pChart2/getVersion.php');echo pChartGetVersion();?>'+'<br/>';
-      aboutMessage+='&nbsp;&nbsp;.&nbsp;phpMailer : <?php $vers=file_get_contents('../external/PHPMailer/VERSION');echo $vers;?>'+'<br/>';
+      aboutMessage+='&nbsp;&nbsp;.&nbsp;CK EditorÂ : '+CKEDITOR.version+'<br/>';
+      aboutMessage+='&nbsp;&nbsp;.&nbsp;pChart2Â : <?php include_once('../external/pChart2/getVersion.php');echo pChartGetVersion();?>'+'<br/>';
+      aboutMessage+='&nbsp;&nbsp;.&nbsp;phpMailerÂ : <?php $vers=file_get_contents('../external/PHPMailer/VERSION');echo $vers;?>'+'<br/>';
       aboutMessage+='&nbsp;&nbsp;.&nbsp;html2canvas : <?php include_once('../external/html2canvas/getVersion.php');echo html2canvasGetVersion();?>'+'<br/>';    
       aboutMessage+='&nbsp;&nbsp;.&nbsp;pdfMake : <?php include_once('../external/pdfmake/getVersion.php');echo pdfmakeGetVersion();?>'+'<br/>';
       aboutMessage+='&nbsp;&nbsp;&nbsp;CryptoJS 3.1.2 '+'<br/>';      
@@ -495,7 +495,10 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         Security::checkValidId($id);
         $directObj=new $class($id);
         $rights=$user->getAccessControlRights();
-        if ($class=='Ticket' and (securityGetAccessRightYesNo('menuTicket', 'read', $directObj)=='NO' or securityCheckDisplayMenu(null,'Ticket')==false ) )  {
+        //if ($class=='Ticket' and (securityGetAccessRightYesNo('menuTicket', 'read', $directObj)=='NO' or securityCheckDisplayMenu(null,'Ticket')==false ) )  {
+        if ($class=='Ticket' and securityCheckDisplayMenu(null,'Ticket')==false and securityCheckDisplayMenu(null,'TicketSimple')==true)  {
+          $class='TicketSimple';
+        } else if ($class=='Ticket' and securityGetAccessRightYesNo('menuTicket', 'read', $directObj)=='NO' and securityGetAccessRightYesNo('menuTicketSimple', 'read', $directObj)=='YES') {
           $class='TicketSimple';
         } else if ($class=='TicketSimple' and securityGetAccessRightYesNo('menuTicket', 'read', $directObj)=='YES' and securityCheckDisplayMenu(null,'Ticket')==true) {
           $class='Ticket';
@@ -511,6 +514,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           if ($class) $directAccessIndex[$index]=$directObj;
           else $directAccessIndex[$index]='';
           setSessionValue('directAccessIndex', $directAccessIndex);
+          setSessionValue('directAccessClass',$class);
         	echo "directAccessIndex=$index;";
         }
         if ($class=="Today") {

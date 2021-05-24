@@ -1540,6 +1540,10 @@ function traceHack($msg="Unidentified source code") {
   errorLog(" QUERY_STRING = ".$_SERVER['QUERY_STRING']);
   errorLog(" REMOTE_ADDR = ".$_SERVER['REMOTE_ADDR']);
   errorLog(" SCRIPT_FILENAME = ".$_SERVER['SCRIPT_FILENAME']);
+  $user=getSessionUser();
+  if ($user) {
+    errorLog(" CONNECTED USER = #$user->id - $user->name");
+  }
   if (intval(Parameter::getGlobalParameter('logLevel'))>=2) {
   	debugPrintTraceStack();
   }
