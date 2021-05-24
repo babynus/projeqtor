@@ -316,6 +316,10 @@ INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionN
 ('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteNotifications'),
 ('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteAudit');
 
+ALTER TABLE `${prefix}navigation` ADD COLUMN `moduleName` varchar(100) DEFAULT NULL;
+UPDATE `${prefix}navigation` SET moduleName='moduleTicket' WHERE name='navTicketing';
+UPDATE `${prefix}navigation` SET moduleName='moduleRisk' WHERE name='navRiskManagement';
+
 -- ======================================
 -- Localization module
 -- ======================================
