@@ -551,7 +551,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
         }
         echo "dojo.byId('directAccessPage').value='';";
         echo "dojo.byId('menuActualStatus').value='';";
-}        
+        }        
       } else if (array_key_exists('objectClass', $_REQUEST) and array_key_exists('objectId', $_REQUEST) ) {
         $class=$_REQUEST['objectClass'];
         if (class_exists($class)) {
@@ -565,7 +565,10 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
           $class="Today";
         }
         $rights=$user->getAccessControlRights();
-        if ($class=='Ticket' and (securityGetAccessRightYesNo('menuTicket', 'read', $directObj)=='NO' or securityCheckDisplayMenu(null,'Ticket')==false ) )  {
+        //if ($class=='Ticket' and (securityGetAccessRightYesNo('menuTicket', 'read', $directObj)=='NO' or securityCheckDisplayMenu(null,'Ticket')==false ) )  {
+        if ($class=='Ticket' and securityCheckDisplayMenu(null,'Ticket')==false and securityCheckDisplayMenu(null,'TicketSimple')==true)  {
+          $class='TicketSimple';
+        } else if ($class=='Ticket' and securityGetAccessRightYesNo('menuTicket', 'read', $directObj)=='NO' and securityGetAccessRightYesNo('menuTicketSimple', 'read', $directObj)=='YES') {
           $class='TicketSimple';
         } else if ($class=='TicketSimple' and securityGetAccessRightYesNo('menuTicket', 'read', $directObj)=='YES' and securityCheckDisplayMenu(null,'Ticket')==true) {
           $class='Ticket';
@@ -581,6 +584,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
           if ($directObj) $directAccessIndex[$index]=$directObj;
           else $directAccessIndex[$index]='';
           setSessionValue('directAccessIndex', $directAccessIndex);
+          setSessionValue('directAccessClass',$class);
         	echo "directAccessIndex=$index;";
         }
         if ($class=="Today") {
