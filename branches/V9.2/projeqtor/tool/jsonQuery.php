@@ -33,7 +33,13 @@
     scriptLog('   ->/tool/jsonQuery.php'); 
     $objectClass=$_REQUEST['objectClass'];
 	  Security::checkValidClass($objectClass);
-	  Security::checkValidAccessForUser(null, 'read', $objectClass);
+	  $traceHack=true;
+	  if (getSessionValue('directAccessClass')==$objectClass) {
+	    $traceHack=false;
+	  } else if (getSessionValue('directAccessClass')) {
+	    unsetSessionValue('directAccessClass');
+	  }
+	  Security::checkValidAccessForUser(null, 'read', $objectClass,null,$traceHack);
 
 	  $showThumb=Parameter::getUserParameter('paramShowThumbList');
     if ($showThumb=='NO') {
