@@ -79,10 +79,6 @@ class="selectList" >
  $found=array();
  foreach ($list as $lstObj) {
    $sel="";
-   if (in_array($lstObj->id,$selectedArray)) {
-    $sel=" selected='selected' ";
-    $found[$lstObj->id]=true;
-   }
    $val=$lstObj->name;
    if ($ref2Type=="Contact" ) {
      if ($obj and $obj->id and property_exists($obj, 'idClient')) {
@@ -91,6 +87,11 @@ class="selectList" >
        }
      }
    }
+   if (in_array($lstObj->id,$selectedArray)) {
+    $sel=" selected='selected' ";
+    $found[$lstObj->id]=true;
+   }
+
    if ($ref2Type=="Project" and $sepChar!='no') {
      $wbs=$wbsList[$lstObj->id];
      $wbsTest=$wbs;
