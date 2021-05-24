@@ -166,7 +166,6 @@ class LocalizationRequestMain extends SqlElement
         if ($old->idStatus != $this->idStatus){
             $localizationRequestType = new LocalizationRequestType($this->idLocalizationRequestType);
             if ($this->idStatus == $localizationRequestType->idStatus){
-                debugLog("generate");
                 $isCreated = $this->generateItemsOnchangeStatus();
             }
         }
@@ -209,7 +208,7 @@ class LocalizationRequestMain extends SqlElement
             $idVersion = $this->idComponentVersion;
         }
         else{
-            debugLog("do not generate because no component version or no product version");
+            // ("do not generate because no component version or no product version");
         }
         $versionLanguage = new VersionLanguage();
         $listLang = array();
