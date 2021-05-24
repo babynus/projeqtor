@@ -38,6 +38,7 @@ class Navigation extends SqlElement {
   public $idReport;
   public $sortOrder=0;
   public $tag;
+  public $moduleName;
   public $_isNameTranslatable = true;
   public $_noHistory=true; // Will never save history for this object
   
