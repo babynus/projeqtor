@@ -651,6 +651,10 @@ function drawLeftMenuListNewGui($displayMode){
       $result.='<div class="divPosName menuPluginToInstlal" style="'.(($displayMode!='TXT')?"max-width: 165px !important;":"max-width: 200px !important;").'float: left;">'.ucfirst($objName).'</div></a>';
       $result.='</li>';
     }else{
+      if (isset($menu['object'])) {
+        $nav=$menu['object'];
+        if (isset($nav->moduleName) and $nav->moduleName and ! Module::isModuleActive($nav->moduleName)) continue;
+      }
       if($menu['objectType']=='report' ){
         $idName=substr($obj->name,14);
       }else if($menu['objectType']=='reportSubMenu'){
