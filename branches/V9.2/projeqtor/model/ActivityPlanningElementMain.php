@@ -348,7 +348,9 @@ class ActivityPlanningElementMain extends PlanningElement {
       if($count!=0){
         if(self::$_fieldsAttributes["fixPlanning"]!="hidden")self::$_fieldsAttributes["fixPlanning"]="hidden";
         if(self::$_fieldsAttributes["paused"]!="hidden")self::$_fieldsAttributes["paused"]="hidden";
-        if(self::$_fieldsAttributes["revenue"]!="hidden")self::$_fieldsAttributes["revenue"]="hidden";
+        if(isset(self::$_fieldsAttributes["revenue"])){
+          if(self::$_fieldsAttributes["revenue"]!="hidden")self::$_fieldsAttributes["revenue"]="hidden";
+        }
         self::$_fieldsAttributes["priority"]="hidden";
         self::$_fieldsAttributes["idActivityPlanningMode"]="hidden";
         self::$_fieldsAttributes["minimumThreshold"]="hidden";
