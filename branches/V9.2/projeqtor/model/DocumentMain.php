@@ -191,13 +191,15 @@ class DocumentMain extends SqlElement {
   	global $print;
     $result="";
     if ($item=='lockButton' and !$print and $this->id) {
+      $canUpdate=securityGetAccessRightYesNo('menuDocument', 'update', $this);
+      if($canUpdate != 'YES')return "";
     	if ($this->locked) {
         $canUnlock=false;
         $user=getSessionUser();
         if ($user->id==$this->idLocker) {
         	$canUnlock=true;
     	  } else {
-          $right=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$user->getProfile($this), 'scope'=>'document'));        
+          $right=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$user->getProfile($this), 'scope'=>'document')); 
           if ($right) {
             $list=new ListYesNo($right->rightAccess);
             if ($list->code=='YES') {
@@ -234,6 +236,8 @@ class DocumentMain extends SqlElement {
     	if ($print or ! $this->id) {
     		return "";
     	}
+    	$canUpdate=securityGetAccessRightYesNo('menuDocument', 'update', $this);
+      if($canUpdate != 'YES')return "";
     	$result .= '<tr><td colspan="2">';
     	$result .= '<button id="sendInfoToApprovers" dojoType="dijit.form.Button" showlabel="true"';
     	$result .= ' title="' . i18n('sendInfoToApprovers') . '"class="roundedVisibleButton" >';
