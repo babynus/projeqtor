@@ -75,7 +75,8 @@ class PokerSessionMain extends SqlElement {
     <th field="nameResource" formatter="thumbName22" width="15%">${responsible}</th>
     ';
   
-  private static $_fieldsAttributes=array("idProject"=>"readonly",
+  private static $_fieldsAttributes=array("name"=>"readonly",
+                                  "idProject"=>"readonly",
                                   "pokerSessionDate"=>"readonly, nobr",
                                   "_lib_from"=>'nobr',
                                   "pokerSessionStartTime"=>'readonly, nobr',
@@ -85,6 +86,9 @@ class PokerSessionMain extends SqlElement {
                                   "handled"=>"readonly, nobr",
                                   "done"=>"readonly, nobr",
                                   "idle"=>"readonly, nobr",
+                                  "handledDate"=>"readonly",
+                                  "doneDate"=>"readonly",
+                                  "idleDate"=>"readonly",
                                   "pokerSessionStartDateTime"=>"hidden",
                                   "pokerSessionEndDateTime"=>"hidden",
   );
