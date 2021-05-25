@@ -34,8 +34,10 @@ $pokerSession = new PokerSession($id);
 debugLog($pokerSession);
 if(!$pokerSession->handled){
   $pokerSession->handled = 1;
+  $pokerSession->handledDate = date('Y-m-d H:i:s');
 }else{
   $pokerSession->handled = 0;
+  $pokerSession->handledDate = null;
 }
 $result = $pokerSession->save();
 debugLog($result);

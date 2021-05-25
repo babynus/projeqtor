@@ -2627,17 +2627,17 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if(isNewGui()){
             echo '<input id="'.$col.'" name="'.$col.'" type="hidden" class="input '.(($isRequired)?'required':'').'" value="'.(($obj->idMacroTicketStatus)?$obj->idMacroTicketStatus:2).'"/>';
         	echo '<ul id="'.$col.'List" data-dojo-type="dojox/mobile/TabBar" data-dojo-props=\'barType:"segmentedControl"\' center="false">';
-            	echo '<li id="isHandledStatus" onClick="dojo.byId(\''.$col.'\').value=\'1\';" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
+            	echo '<li id="isHandledStatus" onClick="dojo.byId(\''.$col.'\').value=\'1\';" data-dojo-type="dojox/mobile/TabBarButton" style="width: 80px !important;"';
             	if($obj->idMacroTicketStatus==1){
             		echo "data-dojo-props='selected:true'";
             	}
             	echo '>'.i18n('colHandled').'</li>';
-            	echo '<li id="isDoneStatus" onClick="dojo.byId(\''.$col.'\').value=\'2\';" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
+            	echo '<li id="isDoneStatus" onClick="dojo.byId(\''.$col.'\').value=\'2\';" data-dojo-type="dojox/mobile/TabBarButton" style="width: 80px !important;"';
             	if($obj->idMacroTicketStatus==2 or !$obj->idMacroTicketStatus){
             		echo "data-dojo-props='selected:true'";
             	}
             	echo '>'.i18n('colDone').'</li>';
-            	echo '<li  id="isIdleStatus" onClick="dojo.byId(\''.$col.'\').value=\'3\';" data-dojo-type="dojox/mobile/TabBarButton" class="userParamTabar"';
+            	echo '<li  id="isIdleStatus" onClick="dojo.byId(\''.$col.'\').value=\'3\';" data-dojo-type="dojox/mobile/TabBarButton" style="width: 80px !important;"';
             	if($obj->idMacroTicketStatus==3){
             		echo "data-dojo-props='selected:true'";
             	}
