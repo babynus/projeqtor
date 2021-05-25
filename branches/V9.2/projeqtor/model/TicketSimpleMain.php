@@ -87,7 +87,9 @@ class TicketSimpleMain extends TicketMain {
     "delayReadOnly"=>"hidden",
     "idAccountable"=>"hidden",
     "idMilestone"=>"hidden",
-    "isRegression"=>"hidden"
+    "isRegression"=>"hidden",
+    "paused"=>"nobr, readonly",
+    "pausedDateTime"=>"nobr, readonly"
   );  
     
   private static $_colCaptionTransposition = array('name'=>'ticketName',
@@ -99,7 +101,8 @@ class TicketSimpleMain extends TicketMain {
                                                    'idOriginalVersion'=>'version',
                                                    'idTicket'=>'duplicateTicket',
                                                    'idContext1'=>'idContext',
-                                                   'actualDueDateTime'=>'dueDate');
+                                                   'actualDueDateTime'=>'dueDate',
+                                                   'paused'=>'inPaused');
   
   private static $_databaseColumnName = array('idTargetVersion'=>'idVersion');
 
