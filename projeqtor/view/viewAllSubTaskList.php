@@ -36,7 +36,15 @@ $idProject=0;
 $idResource=0;
 $idVersion=0;
 $element='';
-$ElmentTab =array("Activity","Ticket","Action");
+$tab =array("Activity","Ticket","Action");
+$ElmentTab=array();
+foreach ($tab as $elem){
+  $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menu'.$elem));
+  debugLog($menu);
+  if (!Module::isMenuActive($menu->name))  continue;
+  if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))continue;
+  $ElmentTab []=$elem;
+}
 $showClosedSubTask=(trim(Parameter::getUserParameter('showClosedSubTask_Global'))!='' and Parameter::getUserParameter('showClosedSubTask_Global')!='0')?true:false;
 $showDoneSubTask=((Parameter::getUserParameter('showDoneSubTask_Global')!='0') or $showClosedSubTask)?true:false;
 
