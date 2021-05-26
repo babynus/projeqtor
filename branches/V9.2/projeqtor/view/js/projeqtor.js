@@ -3952,8 +3952,18 @@ function refreshTodayProjectsList(value) {
   if(value!=dojo.byId('showAllProjectToday').value){
     saveDataToSession('showAllProjectTodayVal',value,false);
   }
+  var callback=function(){
+    //console.log(dojo.byId('todayClassicView').offsetHeight);
+//    var dim=dojo.byId('detailDiv').offsetHeight;
+//    var dimClassicView=(dim-15)-dojo.byId('todayTop').offsetHeight;
+//    dijit.byId('todayClassicView').resize(h:dimClassicView);
+//    if(dojo.byId('todayActStream')){
+//      dojo.byId('todayActStream').resize(h:dimClassicView);
+//    }
+//    dijit.byId('centerDiv').resize();
+  }
   loadContent("../view/today.php?refreshProjects=true+&showAllProjectToday="+value, "Today_project",
-      "todayProjectsForm", false);
+      "todayProjectsForm", false,false,false,false,callback);
 }
 
 /**
@@ -8569,4 +8579,31 @@ function saveMaintenanceAdmin(name){
     url: '../tool/saveAdminConfigParam.php?name='+name+'&value='+value,
     handleAs: "text"
   });
+}
+
+function getLastNew () {
+  var xmlhttp = new XMLHttpRequest();
+  var url = "http://projeqtor.org/admin/getNews.php";
+
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var myArr = JSON.parse(this.responseText);
+          dojo.xhrPost({
+            url: '../view/refreshLastNews.php',
+            postData:dojo.toJson(myArr),
+            handleAs: "text",
+            load: function(data){
+              dijit.byId('getLastNews').set('content',data);
+            },
+            error: function(error){
+              
+            }
+          });
+      }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.onerror = function () {
+    console.log("** An error occurred during the transaction");
+  };
+  xmlhttp.send();
 }
