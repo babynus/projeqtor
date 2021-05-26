@@ -39,9 +39,10 @@ $stringNewScr = 'src="https://www.projeqtor.org/images/';
 $stringHref = '<a href="';
 $stringNewHref = '<a target="#" href="https://www.projeqtor.org/';
 $getYesNo=Parameter::getGlobalParameter('getVersion');
-if ($getYesNo=='NO') {
+if ($getYesNo=='NO' and !file_get_contents('php://input')) {
   //echo "Cannot access remote information from ProjeQtOr web site";
   exit;
+
 }
 ?>
 <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage1" name="divNewsPage1">
@@ -49,14 +50,16 @@ if ($getYesNo=='NO') {
           <tr><?php 
             $urlGetNews = "http://projeqtor.org/admin/getNews.php";
             $currentVersion=null;
-            if (ini_get('allow_url_fopen')) {
+            if (ini_get('allow_url_fopen') and $getYesNo=='YES' ) {
               enableCatchErrors();
               enableSilentErrors();
               $currentVersion=file_get_contents($urlGetNews);
               disableCatchErrors();
               disableSilentErrors();
+              $json = file_get_contents($urlGetNews);
+             }else if(file_get_contents('php://input')){
+                $json = file_get_contents('php://input');
              }
-           $json = file_get_contents($urlGetNews);
            $obj = json_decode($json);
            $i=1;
            foreach ($obj as $objV=>$val){
