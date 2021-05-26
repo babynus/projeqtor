@@ -389,7 +389,17 @@
       <div dojoType="dijit.layout.ContentPane"  id="menuInterrogation" class="pseudoButton" style="position:relative;overflow:hidden;width:50px; height:28px; min-width:45px;top:-5px;">
         <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuInterrogationTitle");?>" id="iconMenuInterrogation" style="display: table-cell;vertical-align: middle;position:relative;min-width:40px;top:-3px" >
         <script type="dojo/connect" event="onClick" args="evt">
-           loadContent("../view/refreshLastNews.php","getLastNews");       
+           <?php 
+           $getYesNo=Parameter::getGlobalParameter('getVersion');
+           if ($getYesNo=='NO') {
+             echo  "getLastNew();";
+           }else{
+             echo  "       var callBack = function() {";
+             echo  "            if(dojo.byId('getLastNews').innerHTML=='')getLastNew();";
+             echo  "         };";
+             echo  "loadContent('../view/refreshLastNews.php','getLastNews',false,false,false,false,false,callBack);";   
+           }
+           ?>
         </script>
         <table style="width:100%">
     			  <tr>
