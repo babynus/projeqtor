@@ -34,6 +34,7 @@ $idRole=RequestHandler::getId('idRole',false,null);
 $idResource = RequestHandler::getId('idResource',false,null);
 $isTeam = RequestHandler::getBoolean('isTeam');
 $isOrganization = RequestHandler::getBoolean('isOrganization');
+$isResourceTeam = RequestHandler::getBoolean('isResourceTeam');
 $idAssignment=RequestHandler::getId('idAssignment',false,null);
 $assignmentObj = new Assignment($idAssignment);
 $unit=RequestHandler::getValue('unit',false,null);
@@ -73,6 +74,12 @@ if($isOrganization){
   $elementList = 'idOrganization';
 }
 
+if($isResourceTeam){
+    $critFld =null;
+    $critVal =null;
+    $elementList = 'idResourceTeam';
+}
+
 // $arrayDefaultOffDays=array();
 // if (Parameter::getGlobalParameter('OpenDayMonday')=='offDays') $arrayDefaultOffDays[]=1;
 // if (Parameter::getGlobalParameter('OpenDayTuesday')=='offDays') $arrayDefaultOffDays[]=2;
@@ -107,6 +114,7 @@ if ($planningMode=='RECW') {
   }
 }
 
+
 ?>
 <form dojoType="dijit.form.Form" id='assignmentForm' jsid='assignmentForm' name='assignmentForm' onSubmit="return false;">    
   <table>
@@ -123,6 +131,7 @@ if ($planningMode=='RECW') {
          <input id="leftWorkOrigin" name="leftWorkOrigin" type="hidden" value="<?php echo $assignmentObj->leftWork ;?>" />
          <input id="isTeam" name="isTeam" type="hidden" value="<?php echo $isTeam;?>" />
          <input id="isOrganization" name="isOrganization" type="hidden" value="<?php echo $isOrganization;?>" />
+         <input id="isResourceTeam" name="isResourceTeam" type="hidden" value="<?php echo $isResourceTeam;?>" />
          <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
          <input id="planningMode" name="planningMode" type="hidden" value="<?php echo $planningMode;?>" />
          <?php if($refType=="PokerSession"){?><input id="idPokerSession" name="idPokerSession" type="hidden" value="<?php echo $obj->id ;?>" /><?php }?>
@@ -130,7 +139,7 @@ if ($planningMode=='RECW') {
          <table>
            <tr>
              <td class="dialogLabel" >
-               <label for="assignmentIdResource" ><?php if($isTeam){  echo i18n("colIdTeam");}else if($isOrganization){  echo i18n("colIdOrganization");}else{ echo i18n("colIdResource");}?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
+               <label for="assignmentIdResource" ><?php if($isTeam){  echo i18n("colIdTeam");}else if($isOrganization){  echo i18n("colIdOrganization");}else if($isResourceTeam){  echo i18n("ResourceTeam");}else{ echo i18n("colIdResource");}?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>  
              <td>
               <select dojoType="dijit.form.FilteringSelect"
@@ -158,15 +167,15 @@ if ($planningMode=='RECW') {
              </td> 
              <?php } ?>
            </tr>
-           <tr id="assignmentUniqueSelection" style="<?php echo ($resource->isResourceTeam)?"":"display:none";?>">
-            <td class="dialogLabel">&nbsp;</td>     
+           <tr id="assignmentUniqueSelection" style="<?php echo ($resource->isResourceTeam and !$isResourceTeam)?"":"display:none";?>">
+            <td class="dialogLabel">&nbsp;</td>
             <td>
-              <input title="<?php echo i18n('helpUniqueResource');?>" 
-                     dojoType="dijit.form.CheckBox" name="assignmentUnique" id="assignmentUnique" 
+              <input title="<?php echo i18n('helpUniqueResource');?>"
+                     dojoType="dijit.form.CheckBox" name="assignmentUnique" id="assignmentUnique"
                      onChange="assignmentChangeUniqueResource(this.checked);" <?php if (isNewGui()) echo 'class="whiteCheck"';?>
                      <?php echo ($assignmentObj->uniqueResource)?"checked=checked":"";?> />
               <label title="<?php echo i18n('helpUniqueResource');?>" style="float:none;<?php echo (isNewGui())?'position:relative;top:5px;':'';?>" for="attendantIsOptional" ><?php echo i18n("uniqueResource"); ?></label>
-            </td>          
+            </td>
            </tr>
            <tr>
              <td class="dialogLabel" >
@@ -221,27 +230,27 @@ if ($planningMode=='RECW') {
              </td>
            </tr>
 
-           <tr id="assignmentRateRow" name="assignmentRateRow" <?php if (($resource->isResourceTeam and !$assignmentObj->uniqueResource) or $planningMode=="MAN") echo 'style="display:none"';?>>
+           <tr id="assignmentRateRow" name="assignmentRateRow" <?php if (($resource->isResourceTeam and !$assignmentObj->uniqueResource and !$isResourceTeam) or $planningMode=="MAN") echo 'style="display:none"';?>>
              <td class="dialogLabel" >
                <label for="assignmentRate" ><?php echo i18n("colRate");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
-             <?php if($resource->isResourceTeam and !$assignmentObj->uniqueResource){
-               $assignmentObj->rate=$assignmentObj->capacity*100; 
+             <?php if($resource->isResourceTeam and !$assignmentObj->uniqueResource and !$isResourceTeam){
+               $assignmentObj->rate=$assignmentObj->capacity*100;
                if($assignmentObj->rate > 100)$assignmentObj->rate = 100;
              }?>
-               <div id="assignmentRate" name="assignmentRate" value="<?php echo ($mode=='edit' and $planningMode!='RECW')?$assignmentObj->rate:"100";?>" 
-                 dojoType="dijit.form.NumberTextBox" 
-                 constraints="{min:0,max:100}" 
-                 style="width:97px;" 
+               <div id="assignmentRate" name="assignmentRate" value="<?php echo ($mode=='edit' and $planningMode!='RECW')?$assignmentObj->rate:"100";?>"
+                 dojoType="dijit.form.NumberTextBox"
+                 constraints="{min:0,max:100}"
+                 style="width:97px;"
                  <?php if ($planningMode=='RECW') echo ' readonly';?>
-                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colRate')));?>" 
+                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colRate')));?>"
               <?php if (!$resource->isResourceTeam) { ?>  required="true" <?php } ?> >
                  <?php echo $keyDownEventScript;?>
                  </div>
              </td>
            </tr>
-           
+
              <tr id="assignmentCapacityResourceTeam" name="assignmentCapacityResourceTeam" <?php if (! $resource->isResourceTeam or $assignmentObj->uniqueResource) echo 'style="display:none"';?>>
                <td class="dialogLabel" >
                  <label for="assignmentCapacity" ><?php echo i18n("colCapacity");?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>

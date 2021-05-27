@@ -5214,5 +5214,6 @@ yearOf: "year of date",
 yesterday: "yesterday",
 YouMustBeAnEmployeeToAccessAtTheCalendar: "You must be an employee to access at the leaves calendar",
 YouMustBeAnEmployeeToAccessAtTheDashboardEmployeeManager: "You must be an employee to access the Employee Manager dashboard",
-currentLocaleOfFile: "en"
+currentLocaleOfFile: "en",
+addAssignmentResourceTeam: "Assign a pool"
 }
