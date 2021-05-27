@@ -1168,6 +1168,10 @@ The validated start date field must be set.
 
 The task must not begin before a specific date.
 
+.. note:: 
+   You have the possibility to define dates directly on the project. 
+   If no other constraint is applied to the elements of the latter, the planning will start only from the dates entered on the project.
+
 :ref:`|MODES|<planningmodeGantt>`  
 
 
