@@ -5681,6 +5681,7 @@ abstract class SqlElement {
     $groupMails=Parameter::getGlobalParameter('mailGroupActive');
     if ($directStatusMail) $groupMails='NO';
     $resultMail=array();
+    $sentArray = array();
     while ($j--) {
       if ($groupMails=='YES') {
         $temp=new MailToSend();
@@ -5804,9 +5805,34 @@ abstract class SqlElement {
           }
         }
         if (trim(str_replace(array(',',';',' '),'',$destTab[$emailTemplateTab[$j]->id]))) {
-          $resultMail[] = sendMail($destTab[$emailTemplateTab[$j]->id], $emailTemplateTab[$j]->title,
-            $emailTemplateTab[$j]->template,
-            $this, null, $sender, null, null, $references,false,false,$attachments,$erroSize,$tempAttach);
+          $toSendNowArray = array();
+          $to = str_replace(" ", "", $destTab[$emailTemplateTab[$j]->id]);
+          $userList = explode(",", $to);
+          $title = $emailTemplateTab[$j]->title;
+          
+          foreach ($userList as $user) {
+            //Checking if the mail has already been sent to the user
+            if (!array_key_exists($user, $sentArray) || !array_key_exists($title, $sentArray[$user]) ||
+              !array_key_exists($emailTemplateTab[$j]->id, $sentArray[$user][$title])) {
+              if (!array_key_exists($user, $sentArray)) {
+                $sentArray[$user] = array();
+              }
+              if (!array_key_exists($title, $sentArray[$user])) {
+                $sentArray[$user][$title] = array();
+              }
+              if (!array_key_exists($emailTemplateTab[$j]->id, $sentArray[$user][$title])) {
+                $sentArray[$user][$title][$emailTemplateTab[$j]->id] = array();
+              }
+              $toSendNowArray[$user] = $user;
+            }
+          }
+          //Group every user to only send one email
+          $userString = implode(',', $toSendNowArray);
+          if ($userString) {
+            $resultMail[] = sendMail($userString, $title, 
+                $emailTemplateTab[$j]->template, 
+                $this, null, $sender, null, null, $references, false, false, $attachments, $erroSize, $tempAttach);
+          }
         }
       }
       
