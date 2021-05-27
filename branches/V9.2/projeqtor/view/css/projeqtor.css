@@ -4317,3 +4317,6 @@ div.ticketKanbanCustom .kanbanVersion{
 	border-radius:4px  !important;
 	cursor:not-allowed;
 }
+.headerCompProdStruct:hover{
+	cursor:pointer;
+}

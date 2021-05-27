@@ -4774,6 +4774,55 @@ function filterSelectAtribute(value) {
   }
 }
 
+function onColumnHeaderClickedSort(ev) {
+  const th = ev.currentTarget;
+  const table = th.closest( 'table' );
+
+  const thIndex = Array.from( th.parentElement.children ).indexOf( th );
+  const ascending = !( 'sort' in th.dataset ) || th.dataset.sort != 'asc';
+  //const start = performance.now();
+
+  tableRowsSortByColumn( table, thIndex, ascending );
+
+  //const end = performance.now();
+  //console.log( "Sorted table rows in %d ms.",  end - start );
+
+  const allTh = table.querySelectorAll( ':scope > thead > tr > th' );
+  for( let th2 of allTh )
+  {
+    delete th2.dataset['sort'];
+  }
+
+  th.dataset['sort'] = ascending ? 'asc' : 'desc';
+}//onColumnHeaderClickedSort
+
+
+function tableRowsSortByColumn(table, columnIndex, ascending) {
+
+
+  const col = Array.from( table.querySelectorAll( ':scope > thead > tr' ) );
+  const columnName = col[0].cells[columnIndex].textContent; // not use but keep this variable, it can be interested to have this columb name if we wnt to improve sort function
+  const rows = Array.from( table.querySelectorAll( ':scope > tbody > tr' ) );
+  rows.sort( ( x, y ) => {
+        const xValue = x.cells[columnIndex].textContent;
+        const yValue = y.cells[columnIndex].textContent;
+
+        if (xValue.match("#[0-9]+") && yValue.match("#[0-9]+")) // if it's an id (#XXXX format)
+        {
+          const xNum = parseFloat(xValue.replace(/\D+/g, ''));
+          const yNum = parseFloat(yValue.replace(/\D+/g, ''));
+          return ascending ? (xNum - yNum) : (yNum - xNum);
+        }
+
+        return ascending ? (('' + xValue).localeCompare(yValue)) : (('' + yValue).localeCompare(xValue));
+      }
+  );
+  for( let row of rows )
+  {
+    table.tBodies[0].appendChild( row );
+  }
+}//tableRowsSortByColumn
+
 function filterSelectOperator(operator) {
   filterStartInput=true;
   if (operator == "SORT") {
