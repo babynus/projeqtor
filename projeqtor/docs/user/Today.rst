@@ -52,6 +52,13 @@ The definition of visibility is based on the access rights of each user
 .. figure:: /images/GUI/TODAY_BOX_Parameters.png
    :alt: Dialog box - Today parameters 
    :align: center
+
+.. rubric:: Activity Stream
+
+* You have access to the activity stream of the elements that you see displayed in accordance with the rights of your profile.
+* Click on |ActivityStream| to display current information related to your rights  
+   
+   
    
 .. rubric:: Period for task selection
 
