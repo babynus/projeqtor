@@ -95,7 +95,13 @@ Activates treatment of the validated work based on the sum of the work of the pr
 * The :ref:`indicators<indicator>` can be defined on the :ref:`progress data<progress-section>`.
 
 
+.. _projet-donot-start: 
 
+.. rubric:: Do not start project before Validated Start Date
+
+* The schedule should only start from this date, as if there was a fixed milestone preceding the project.
+* Resources cannot be charged to the project before the specified date (as with a project under construction). 
+* This option must be enabled in the :ref:`global parameters<gp_planning-section>`.
 
 .. _project-reserve:
 

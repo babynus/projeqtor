@@ -34,22 +34,22 @@ We offer you a small overview of the major developments and you will find the fu
       
    When this global parameter is activiated, Projects with validated start date will not be plannned before this date.
    
-   :ref:`gui` :ref:`global_parameters`
+   :ref:`projet-donot-start` :ref:`progress-section-date-duration`
       
          
 .. container:: 
    
-   **To defined**
+   **Imrovement of Todo lists**
       
-   To defined
+   Better display, input large values in textarea, auto-set responsible of todo-item from responsible of item.
    
-   :ref:`todefined`
+   :ref:`todolist`
 
 .. container:: 
    
-   **To defined**
+   **Access rights management for document**
       
-   To defined
+   Define access rights per profile for each document directory
    
    :ref:`todefined`
    

@@ -616,11 +616,11 @@ Validated dates are used for:
 
 * Define the input parameters according to the selected planning mode - See: :ref:`Planning mode<planningmodeGantt>`
 
-* Define the initial due dates as a reference in order to check any drifts in your project
+* Define the initial due dates as a reference in order to check any drifts in your project.
 
 * Set a deadline by which the work must be completed.
 
-
+* Directly on the project, without any other constraint, determines the start of planning for it.
 
 .. rubric:: Planned
 
