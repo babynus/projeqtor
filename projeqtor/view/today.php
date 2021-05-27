@@ -1070,7 +1070,7 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
     } 
     $titlePane="Today_message";
     if (! isNewGui() and (!$print or !array_key_exists($titlePane, $collapsedList))) {
-      if (!$print) {?>   
+      if (!$print ) {?>   
       <div dojoType="dijit.TitlePane"
         open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
         id="<?php echo $titlePane;?>"
@@ -1119,13 +1119,13 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
               title="<?php echo i18n('menuProject');?>">
           <?php 
           } else {?>
-            <div class="section"><?php echo i18n('menuProject');?></div><br />
+             <div class="section"><?php echo i18n('menuProject');?></div> 
             <div>    
           <?php
           }
           showProjects();
           ?>
-          </div>
+           </div> 
           <?php
           if(!$print and $isModuleActive){
             echo '</div>';
@@ -1133,17 +1133,12 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
           else echo '<br/>';
       }else{
         if(!$drawDiv and !$print and $isModuleActive and $asTodayProject->id!=''){
-//           if(array_key_exists("Today_project", $collapsedList)){
-//             echo '</div>';
-//             echo '<script type="dojo/connect" event="resize" args="evt">';
-//             echo '  saveContentPaneResizing("contentPaneTodayTopHeight", dojo.byId("todayTop").offsetHeight, true);';
-//             echo '</script>';
-//           }
           echo '<div dojoType="dijit.layout.ContentPane" region="left" style="width:'.$classicViewWidth.';height:'.(($asTodayProject->id=='')?'100%':$classicViewHeight).'; padding:15px;" splitter="true" id="todayClassicView" >';
-          echo '<script type="dojo/connect" event="resize" args="evt">';
-          echo 'saveContentPaneResizing("contentPaneTodayClassicViewWidth", dojo.byId("todayClassicView").offsetWidth, true);';
-          echo 'saveContentPaneResizing("contentPaneTodayClassicViewHeight", dojo.byId("todayClassicView").offsetHeight, true);';
-          echo '</script>';
+            echo '<script type="dojo/connect" event="resize" args="evt">';
+            echo 'saveContentPaneResizing("contentPaneTodayClassicViewWidth", dojo.byId("todayClassicView").offsetWidth, true);';
+            echo 'saveContentPaneResizing("contentPaneTodayClassicViewHeight", dojo.byId("todayClassicView").offsetHeight, true);';
+            echo '</script>';
+          
           $drawDiv=true;
         }
         if ($todayItem->scope=='static' and $todayItem->staticSection=='AssignedTasks') {
@@ -1205,20 +1200,20 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
   	    }
   	  	echo '</div>';
   	  	echo '<br/>';
-  	  }
+  	   }
   	
+      }
+
+    }
+    if($cp==$coutTlist and $drawDiv ){
+      echo '</div>';
     }
 
+  } 
+  if(!$print and $isModuleActive){
+  if($asTodayProject->id==''){
+      echo '</div>';
   }
-  if($cp==$coutTlist and $drawDiv ){
-    echo '</div>';
-  }
-
-} 
-if(!$print and $isModuleActive){
-if($asTodayProject->id==''){
-    echo '</div>';
-}
   ?>
       
       <div dojoType="dijit.layout.ContentPane" id="todayActStream" region="center" style="width:<?php echo $activityStreamWidth;?>;height:<?php echo ($asTodayProject->id=='')?'100%':$activityStreamHeight;?>;" splitter="true" >

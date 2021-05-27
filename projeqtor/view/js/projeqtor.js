@@ -3952,18 +3952,9 @@ function refreshTodayProjectsList(value) {
   if(value!=dojo.byId('showAllProjectToday').value){
     saveDataToSession('showAllProjectTodayVal',value,false);
   }
-  var callback=function(){
-    //console.log(dojo.byId('todayClassicView').offsetHeight);
-//    var dim=dojo.byId('detailDiv').offsetHeight;
-//    var dimClassicView=(dim-15)-dojo.byId('todayTop').offsetHeight;
-//    dijit.byId('todayClassicView').resize(h:dimClassicView);
-//    if(dojo.byId('todayActStream')){
-//      dojo.byId('todayActStream').resize(h:dimClassicView);
-//    }
-//    dijit.byId('centerDiv').resize();
-  }
-  loadContent("../view/today.php?refreshProjects=true+&showAllProjectToday="+value, "Today_project",
-      "todayProjectsForm", false,false,false,false,callback);
+//  loadContent("../view/today.php?refreshProjects=true+&showAllProjectToday="+value, "Today_project",
+//      "todayProjectsForm");
+  loadContent("../view/today.php", "centerDiv");
 }
 
 /**
