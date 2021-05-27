@@ -6479,12 +6479,14 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   if (!$print and $canUpdate) {
     echo '<td class="assignHeader" style="width:10%;vertical-align:middle;white-space:nowrap">';
     if ($obj->id!=null and !$print and $canUpdate and !$obj->idle and $workVisible) {
-      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', false, false);" ';
+      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', false, false, false);" ';
       echo ' title="'.i18n('addAssignment').'" > '.formatSmallButton('Add').'</a>';
-      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', true, false);" ';
+      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', true, false, false);" ';
       echo ' title="'.i18n('addAssignmentTeam').'" > '.formatSmallButton('Team', true).'</a>';
-      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', false, true);" ';
+      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', false, true, false);" ';
       echo ' title="'.i18n('addAssignmentOrganization').'" > '.formatSmallButton('Organization', true).'</a>';
+      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', false, false, true);" ';
+      echo ' title="'.i18n('addAssignmentResourceTeam').'" > '.formatSmallButton('ResourceTeam', true).'</a>';
     }
     if($canSeeDirectAcces){
       $goto="
