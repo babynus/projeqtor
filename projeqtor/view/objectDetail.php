@@ -5729,6 +5729,7 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way=null, $item=n
   }
   if (!$refresh) echo '<tr><td colspan="2">';
   echo '<table style="width:100%;">';
+  echo '<thead>';
   echo '<tr>';
   // ADD dFayolle ticket 366 and 367
   $actualStatus = '';
@@ -5749,15 +5750,17 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way=null, $item=n
     echo '</td>';
   }
   $listClass=($item=='ProductVersion')?'ComponentVersion':(($way=='structure')?'Version':'ComponentVersion');
-  echo '<td class="linkHeader" style="width:5%">'.i18n($listClass).'</td>';
-  echo '<td class="linkHeader" style="width:40%">'.i18n('colName').'</td>';
+  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:5%">'.i18n($listClass).'</td>';
+  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader headerCompProdStruct" style="width:40%">'.i18n('colName').'</td>';
   // ADD tLAGUERIE AND dFAYOLLE ticket 366 and 367
-  echo '<td class="linkHeader" style="width:10%">' . i18n('colIdStatus') . '</td>';
-  echo '<td class="linkHeader" style="width:10%">' . i18n('colType') . '</td>';
-  echo '<td class="linkHeader" style="width:10%">' . i18n('colPlannedDeliveryDate') . '</td>';
-  echo '<td class="linkHeader" style="width:15">' . i18n('colVersionDeliveryDate') . '</td>';
+  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:10%">' . i18n('colIdStatus') . '</td>';
+  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:10%">' . i18n('colType') . '</td>';
+  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:10%">' . i18n('colPlannedDeliveryDate') . '</td>';
+  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:15">' . i18n('colVersionDeliveryDate') . '</td>';
   // END tLAGUERIE AND dFAYOLLE ticket 366 and 367
   echo '</tr>';
+  echo '</thead>';
+  echo '<tbody>';
   // ADD tlaguerie & dFayolle ticket 366 and 367
   $showClosedItemComposition = Parameter::getUserParameter('showClosedItemComposition'); // Show closed items of composition of ComponentVersion
   $showClosedItemStructure = Parameter::getUserParameter('showClosedItemStructure'); // Show closed items of structure of Component Version
@@ -5788,6 +5791,7 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way=null, $item=n
     }
     // UPDATE END tLaguerie & dFayolle ticket 366 and 367
   }
+  echo '</tbody>';
   echo '</table>';
   if (!$refresh) echo '</td></tr>';
   if (!$print) {
