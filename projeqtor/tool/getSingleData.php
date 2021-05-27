@@ -52,6 +52,7 @@
       $idRes=RequestHandler::getId('idResource'); // validated to be numeric value in SqlElement base constructor.
       $isTeam=RequestHandler::getBoolean('isTeam');
       $isOrganization=RequestHandler::getBoolean('isOrganization');
+      $isResourceTeam=RequestHandler::getBoolean('isResourceTeam');
       if (! $idRes) return;
       if($isTeam){
         $crit = array('idTeam'=>$idRes);
@@ -81,6 +82,21 @@
         }else{
       	  return;
       	}
+      }else if($isResourceTeam){
+          $crit = array('idResourceTeam'=>$idRes);
+          $rta=new ResourceTeamAffectation();
+          $list=$rta->getSqlElementsFromCriteria($crit);
+          $roleArray = array();
+          foreach ($list as $l){
+              $res = new ResourceAll($l->idResource);
+              $roleArray[$res->idRole]= $idRes;
+          }
+          if(count($roleArray) == 1){
+              $roleArray = array_flip($roleArray);
+              echo $roleArray[$idRes];
+          }else{
+              return;
+          }
       }else{
         $r=new ResourceAll($idRes);
         echo $r->idRole;

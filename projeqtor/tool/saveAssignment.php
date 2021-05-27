@@ -124,6 +124,8 @@ if (array_key_exists('attendantIsOptional',$_REQUEST)) {
 
 $isTeam = RequestHandler::getBoolean('isTeam');
 $isOrganization = RequestHandler::getBoolean('isOrganization');
+$isResourceTeam = RequestHandler::getBoolean('isResourceTeam');
+
 $mode = RequestHandler::getValue('mode');
 
 //gautier #resourceTeam
@@ -156,6 +158,19 @@ if($isOrganization){
   $crit = array('idOrganization'=>$idResource);
   $resourceList = SqlList::getListWithCrit('Resource', $crit);
 }
+$res = new ResourceAll($idResource);
+
+if ($isResourceTeam){
+
+    $crit = array('idResourceTeam'=>$idResource);
+    $rta=new ResourceTeamAffectation();
+    $list=$rta->getSqlElementsFromCriteria($crit);
+    $resourceList = array();
+    foreach ($list as $l){
+        $resource = new ResourceAll($l->idResource);
+        $resourceList[$resource->id] = $resource->name;
+    }
+}
 Sql::beginTransaction();
 if($planningMode == 'MAN' and $mode =='edit'){
   $result = i18n('Assignment').' #'.$assignmentId.' '.i18n("resultUpdated").'<input type="hidden" id="lastSaveId" value="'.$assignmentId.'" /><input type="hidden" id="lastOperation" value="update" /><input type="hidden" id="lastOperationStatus" value="OK" />';
@@ -171,6 +186,7 @@ if($planningMode == 'MAN' and $mode =='edit'){
     if (! $realWork && $idResource) {
       $assignment->idResource=$idResource;
     }
+    // if it's a pool, affect role of resource in pool
     if(!trim($idRole)){
       $assignment->idRole = $res->idRole;
     }else{

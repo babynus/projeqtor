@@ -2857,7 +2857,8 @@ function removeOrigin(id, origType, origId) {
  * Display a add Assignment Box
  * 
  */
-function addAssignment(unit, rawUnit, hoursPerDay, isTeam, isOrganization) {
+function addAssignment(unit, rawUnit, hoursPerDay, isTeam, isOrganization, isResourceTeam) {
+
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
@@ -2891,7 +2892,7 @@ function addAssignment(unit, rawUnit, hoursPerDay, isTeam, isOrganization) {
     params+="&validatedWorkPe="+dijit.byId(objClass +"PlanningElement_validatedWork").get('value');
     params+="&assignedWorkPe="+dijit.byId(objClass +"PlanningElement_assignedWork").get('value');
   }
-  params+="&isTeam="+isTeam+"&isOrganization="+isOrganization; 
+  params+="&isTeam="+isTeam+"&isOrganization="+isOrganization+"&isResourceTeam="+isResourceTeam;;
   params+="&mode=add";  
   loadDialog('dialogAssignment',callBack,false,params);
 }
@@ -3124,6 +3125,7 @@ function assignmentChangeResourceTeamForCapacity() {
   if (editAssignmentLoading)
     return;
   var idResource=dijit.byId("assignmentIdResource").get("value");
+  var isResourceTeamDialog = document.getElementById("isResourceTeam").value;
   if (idResource.trim()) {
 	  enableWidget('dialogAssignmentSubmit');
   }else{
@@ -3134,7 +3136,7 @@ function assignmentChangeResourceTeamForCapacity() {
     url : '../tool/getIfResourceTeamOrResource.php?idResource='+idResource,
     handleAs : "text",
     load : function(data) {
-      if(data == 'isResourceTeam'){
+      if(data == 'isResourceTeam' && !isResourceTeamDialog){ // in case if we are in resourceTeam assignment dialog
         dojo.byId('assignmentRateRow').style.display="none";
         dojo.byId('assignmentCapacityResourceTeam').style.display="table-row";
         dojo.byId('assignmentUniqueSelection').style.display="table-row";
@@ -3180,10 +3182,11 @@ function assignmentChangeResource() {
   var idResource=dijit.byId("assignmentIdResource").get("value");
   var isTeam=dojo.byId("isTeam").value;
   var isOrganization=dojo.byId("isOrganization").value;
+  var isResourceTeam = dojo.byId("isResourceTeam").value;
   if (!idResource) {return;}
   if (dijit.byId('assignmentDailyCost')) {dijit.byId('assignmentDailyCost').reset();}
   dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=resourceRole&idResource='+idResource+'&isTeam='+isTeam+'&isOrganization='+isOrganization,
+    url : '../tool/getSingleData.php?dataType=resourceRole&idResource='+idResource+'&isTeam='+isTeam+'&isOrganization='+isOrganization+'&isResourceTeam='+isResourceTeam,
     handleAs : "text",
     load : function(data) {
       //if (data) dijit.byId('assignmentCapacity').set('value', parseInt(data)); // Error fixed by PBER : we retreive an idRole (and must)
