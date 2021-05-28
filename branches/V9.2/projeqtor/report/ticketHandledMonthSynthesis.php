@@ -217,7 +217,6 @@ foreach ($lstTicket as $ticket){
 //                   $durationHour = fmod($duration,1)*3600;
 //                   $duration = $durationDay+$durationHour;
                 }
-                debugLog($duration);
     			break;
     		case 'DD' :
     			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
@@ -226,7 +225,6 @@ foreach ($lstTicket as $ticket){
     		case 'OD' :
     			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
     			$delayValue = $duration/86400;
-    			debugLog($duration);
             	if($duration>$hourPerDay){
             	  $duration = $duration/$hourPerDay;
             	  $duration = $duration*86400;
