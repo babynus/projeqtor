@@ -128,6 +128,10 @@ class Module extends SqlElement {
     if (isset($list[$module])) return true;
     else return false;
   }
+  public static function resetMenuInactiveList() {
+    unsetSessionValue('menuInactiveList');
+    self::initializeMenuInactiveList();
+  }
   private static function initializeMenuInactiveList() {
     $moduleMenu=new ModuleMenu();
     $list=$moduleMenu->countGroupedSqlElementsFromCriteria(null, array('idMenu','active'),'1=1');
