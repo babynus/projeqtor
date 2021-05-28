@@ -44,6 +44,9 @@ if ($getYesNo=='NO' and !file_get_contents('php://input')) {
   exit;
 
 }
+if(! ini_get('allow_url_fopen')){
+  exit;
+}
 ?>
 <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage1" name="divNewsPage1">
         <table>
