@@ -496,17 +496,16 @@ function drawTableFromObjectList($objectList) {
   	echo ' title="' . i18n('menuPrincipal') . '">';
   	htmlDrawCrossTable('menuReadWritePrincipal', 'idMenu', 'profile', 'idProfile', 'accessRight', 'idAccessProfile', 'list', 'accessProfileNoProject') ;
   	echo '</div><br/>';
-  	if (Module::isModuleActive('moduleConfiguration')) {
-    	$titlePane="habilitation_ReadWriteConfiguration";
-    	echo '<div dojoType="dijit.TitlePane"';
-    	echo ' open="' . ( array_key_exists($titlePane, $collapsedList)?'false':'true') . '"';
-    	echo ' id="' . $titlePane . '" ';
-    	echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
-    	echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
-    	echo ' title="' . i18n('menuConfiguration') . '">';
-    	htmlDrawCrossTable('menuReadWriteConfiguration', 'idMenu', 'profile', 'idProfile', 'accessRight', 'idAccessProfile', 'list', 'accessProfileNoProject') ;
-      echo '</div><br/>';
-    }
+  	$titlePane="habilitation_ReadWriteConfiguration";
+  	echo '<div dojoType="dijit.TitlePane"';
+  	echo ' open="' . ( array_key_exists($titlePane, $collapsedList)?'false':'true') . '"';
+  	echo ' id="' . $titlePane . '" ';
+  	echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
+  	echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
+  	echo ' title="' . i18n('menuConfiguration') . '">';
+  	htmlDrawCrossTable('menuReadWriteConfiguration', 'idMenu', 'profile', 'idProfile', 'accessRight', 'idAccessProfile', 'list', 'accessProfileNoProject') ;
+  	//
+    echo '</div><br/>';
     $titlePane="habilitation_ReadWriteTranslation";
     echo '<div dojoType="dijit.TitlePane"';
     echo ' open="' . ( array_key_exists($titlePane, $collapsedList)?'false':'true') . '"';
