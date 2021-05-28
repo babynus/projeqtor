@@ -40,7 +40,7 @@ class PokerSessionDefinition extends PokerSessionMain {
    		"idResource"=>"required",
    		"handled"=>"readonly, nobr",
    		"done"=>"readonly, nobr",
-   		"idle"=>"readonly, nobr",
+   		"idle"=>"nobr",
    		"pokerSessionStartDateTime"=>"hidden",
    		"pokerSessionEndDateTime"=>"hidden",
         "_sec_pokerVote"=>"hidden",
@@ -97,7 +97,7 @@ class PokerSessionDefinition extends PokerSessionMain {
   
   public function drawSpecificItem($item) {
     global $print;
-    $canUpdate=securityGetAccessRightYesNo('menuPokerSession', 'update', $this) == "YES";
+    $canUpdate=securityGetAccessRightYesNo('menuPokerSessionDefinition', 'update', $this) == "YES";
     $result = "";
     if($item=="startPokerSession"){
         if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {

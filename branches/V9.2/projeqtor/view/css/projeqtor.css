@@ -4317,6 +4317,41 @@ div.ticketKanbanCustom .kanbanVersion{
 	border-radius:4px  !important;
 	cursor:not-allowed;
 }
+
 .headerCompProdStruct:hover{
 	cursor:pointer;
+}
+
+.pokerComplexityTable tbody{
+	border: 1px solid #AAAAAA !important;
+}
+
+.pokerComplexity{
+	font-size: 90%;
+    padding: 5px;
+    border-top: 1px solid #AAAAAA !important;
+    vertical-align: top;
+    background-color: #FFFFFF;
+    color: black;
+}
+
+.pokerComplexityResult{
+	font-size: 90%;
+    padding: 5px;
+    border: 1px solid #AAAAAA !important;
+    vertical-align: top;
+    background-color: #EEEEEE;
+    color: #AAAAAA;
+}
+
+.pokerComplexity:hover{
+	border: 1px solid black !important;
+	background-color : #fae2d1;
+	color: black;
+}
+
+.pokerComplexitySelected{
+	border: 1px solid black !important;
+	background-color : #fae2d1;
+	color: black;
 }

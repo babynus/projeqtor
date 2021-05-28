@@ -25,22 +25,34 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 /* ============================================================================
- * Stauts defines list stauts an activity or action can get in (lifecylce).
+ * RiskType defines the type of a risk.
  */ 
 require_once('_securityCheck.php');
-class PokerItem extends SqlElement {
+class PokerSessionPlanningMode extends PlanningMode {
 
+  // extends SqlElement, so has $id
+  public $_sec_description;
   public $id;
-  public $name;    
-  public $refType;
-  public $refId;
-  public $idPokerSession;
-  public $value;
-  public $work;
-  public $isOpen;
-  public $comment;
+  public $name;
+  public $code;
+  public $sortOrder=0;
+  public $mandatoryStartDate;
+  public $mandatoryEndDate;
+  public $applyTo;
+  public $idle ;
+  //public $_sec_void;
   
-  private static $_fieldsAttributes=array();
+  // Define the layout that will be used for lists
+  private static $_layout='
+    <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
+    <th field="name" width="85%">${name}</th>
+    <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
+    ';
+
+  private static $_databaseTableName = 'planningmode';
+    
+  private static $_databaseCriteria = array('applyTo'=>'PokerSession');
+  
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -62,16 +74,31 @@ class PokerItem extends SqlElement {
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
+  
   /** ==========================================================================
-   * Return the specific fieldsAttributes
-   * @return the fieldsAttributes
+   * Return the specific layout
+   * @return the layout
    */
-  protected function getStaticFieldsAttributes() {
-    return self::$_fieldsAttributes;
+  protected function getStaticLayout() {
+    return self::$_layout;
+  }
+
+    /** ========================================================================
+   * Return the specific databaseTableName
+   * @return the databaseTableName
+   */
+  protected function getStaticDatabaseTableName() {
+    $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
+    return $paramDbPrefix . self::$_databaseTableName;
   }
   
-  public function save() {
-      $result = parent::save();         
-      return $result;
+  /** ========================================================================
+   * Return the specific database criteria
+   * @return the databaseTableName
+   */
+  protected function getStaticDatabaseCriteria() {
+    return self::$_databaseCriteria;
   }
-}?>
+  
+}
+?>
