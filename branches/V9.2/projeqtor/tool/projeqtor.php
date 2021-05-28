@@ -2185,7 +2185,7 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
     $clauseDoc.=" or ( $ta.idAuthor=$user->id and $ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$prfDef and $t.idAccessMode in ".transformListIntoInClause($arrayCode['RES'])." ) )\n";
     //$clauseDoc.=" or ($ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$prfDef and $t.idAccessMode in ".transformListIntoInClause($arrayCode['PRO'])." ) )";
     $clauseDoc.=" or ( $ta.idDocumentDirectory in (select $t.idDocumentDirectory from $t where $t.idProfile=$prfDef and $t.idAccessMode in ".transformListIntoInClause($arrayCode['ALL'])." ) )\n";
-    $clauseDoc.="  ) and $ta.idDocumentDirectory not in (select $t.idDocumentDirectory from $t where $t.idProfile=$affProf and $t.idAccessMode in ".transformListIntoInClause($arrayCode['NO'])." ) )\n";
+    $clauseDoc.="  ) and $ta.idDocumentDirectory not in (select $t.idDocumentDirectory from $t where $t.idProfile=$prfDef and $t.idAccessMode in ".transformListIntoInClause($arrayCode['NO'])." ) )\n";
     foreach ($arrProjProf as $affProf=>$projList) {
       if (count($projList)==0) continue;
       // Direct query for perf

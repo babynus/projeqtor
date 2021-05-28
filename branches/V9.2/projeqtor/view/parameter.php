@@ -514,10 +514,7 @@ function drawTableFromObjectList($objectList) {
     echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
     echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
     echo ' title="' . i18n('menuLocalizationManagement') . '">';
-    htmlDrawCrossTable('menuReadWriteTranslation', 'idMenu', 'profile', 'idProfile', 'accessRight', 'idAccessProfile', 'list', 'accessProfileNoProject') ;
-  	//
-
-
+    htmlDrawCrossTable('menuReadWriteLocalization', 'idMenu', 'profile', 'idProfile', 'accessRight', 'idAccessProfile', 'list', 'accessProfileNoProject') ;
   	echo '</div><br/>';
   	$titlePane="habilitation_ReadWriteTool";
   	echo '<div dojoType="dijit.TitlePane"';

@@ -1773,12 +1773,12 @@
 .ProjeQtOrNewGui .iconLoginUser { background-image: url(customIcons/new/iconLogin.svg);  background-repeat: no-repeat;}
 
 
-.iconLocalizationManagement { background-image: url(images/iconLocalizationManagement.png); background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconLocalizationManagement { background-image: url(customIcons/blue/iconLocalization.png); background-repeat: no-repeat;  }
-.ProjeQtOrFlatRed .iconLocalizationManagement { background-image: url(customIcons/red/iconLocalization.png); background-repeat: no-repeat;  }
-.ProjeQtOrFlatGreen .iconLocalizationManagement { background-image: url(customIcons/green/iconLocalization.png); background-repeat: no-repeat;  }
-.ProjeQtOrFlatGrey .iconLocalizationManagement { background-image: url(customIcons/grey/iconLocalization.png); background-repeat: no-repeat;  }
-.ProjeQtOrNewGui .iconLocalization { background-image: url(customIcons/new/iconLocalizationManagement.svg); background-repeat: no-repeat;  }
+.iconLocalization { background-image: url(images/iconLocalization.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconLocalization { background-image: url(customIcons/blue/iconLocalization.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatRed .iconLocalization { background-image: url(customIcons/red/iconLocalization.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGreen .iconLocalization { background-image: url(customIcons/green/iconLocalization.png); background-repeat: no-repeat;  }
+.ProjeQtOrFlatGrey .iconLocalization { background-image: url(customIcons/grey/iconLocalization.png); background-repeat: no-repeat;  }
+.ProjeQtOrNewGui .iconLocalization { background-image: url(customIcons/new/iconLocalization.svg); background-repeat: no-repeat;  }
 
 .iconLocalizationRequest { background-image: url(images/iconLocalizationRequest.png); background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconLocalizationRequest { background-image: url(customIcons/blue/iconLocalizationRequest.png); background-repeat: no-repeat;  }

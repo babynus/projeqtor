@@ -13,6 +13,7 @@ class LocalizationRequestMain extends SqlElement
     public $idLocalizationRequestType;
     public $idLocalizationItemType;
     public $idStatus;
+    public $idle;
     public $idResource;
     public $idAccountable;
     public $plannedDeliveryDate;
@@ -29,7 +30,6 @@ class LocalizationRequestMain extends SqlElement
     public $_Link = array();
     public $_Attachment=array();
     public $_Note=array();
-    public $idle;
 
     private static $_layout='
     <th field="id" formatter="numericFormatter" width="15%"># ${id}</th>
@@ -45,8 +45,7 @@ class LocalizationRequestMain extends SqlElement
         "idStatus"=>"required",
         "idLanguage"=>"required",
         "idLocalizationRequestType"=>"required",
-        "idLocalizationItemType"=>"required",
-        "idle"=>"nobr"
+        "idLocalizationItemType"=>"required"
     );
 
     private static $_colCaptionTransposition = array(
@@ -163,8 +162,10 @@ class LocalizationRequestMain extends SqlElement
             $this->plannedDeliveryDate = $date = date('Y-m-d', strtotime("+" . $numberDaysBeforeDuedate . " days"));
         }
 
+        $result=parent::save();
         if ($old->idStatus != $this->idStatus){
             $localizationRequestType = new LocalizationRequestType($this->idLocalizationRequestType);
+            debugLog("current status=$this->idStatus, will generate on status=$localizationRequestType->idStatus");
             if ($this->idStatus == $localizationRequestType->idStatus){
                 $isCreated = $this->generateItemsOnchangeStatus();
             }
@@ -173,7 +174,7 @@ class LocalizationRequestMain extends SqlElement
             $this->updateItems();
         }
 
-        return parent::save();
+        return $result;
     }
 
 
