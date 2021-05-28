@@ -4292,14 +4292,18 @@ abstract class SqlElement {
             }
             $colScript .= "}";
           }
-          $colScript .= 'if (! trim(dijit.byId("idProduct").get("value")) ) {';
-          $colScript .= '   setProductValueFromVersion("idProduct",this.value);';
-          $colScript .= '}';
+          if (property_exists ( $this, 'idProduct' )) {
+            $colScript .= 'if (! trim(dijit.byId("idProduct").get("value")) ) {';
+            $colScript .= '   setProductValueFromVersion("idProduct",this.value);';
+            $colScript .= '}';
+          }
         }
         if (substr ( $colName, - 16 ) == 'ComponentVersion') {
-          $colScript .= 'if (! trim(dijit.byId("idComponent").get("value")) ) {';
-          $colScript .= '   setProductValueFromVersion("idComponent",this.value);';
-          $colScript .= '}';
+          if (property_exists ( $this, 'idProduct' )) {
+            $colScript .= 'if (! trim(dijit.byId("idComponent").get("value")) ) {';
+            $colScript .= '   setProductValueFromVersion("idComponent",this.value);';
+            $colScript .= '}';
+          }
         }
         if ($colName == 'idProject' and property_exists ( $this, 'idContact' )) {
           $colScript .= '   refreshList("idContact","idProject", this.value);';

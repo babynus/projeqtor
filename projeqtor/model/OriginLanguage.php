@@ -24,12 +24,12 @@
  *
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
-
 require_once('_securityCheck.php');
 class OriginLanguage extends Language {
 
     // Define the layout that will be used for lists
-
+  private static $_databaseTableName = 'language';
+  
     /** ==========================================================================
      * Constructor
      * @param $id the id of the object in the database (null if not stored yet)
@@ -47,8 +47,10 @@ class OriginLanguage extends Language {
     function __destruct() {
         parent::__destruct();
     }
-
-
-
+    
+    protected function getStaticDatabaseTableName() {
+      $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
+      return $paramDbPrefix . self::$_databaseTableName;
+    }
 }
 ?>
