@@ -943,7 +943,6 @@ abstract class SqlElement {
     		$newStatPeriod->refId = $this->id;
     		$newStatPeriod->refType = get_class($this);
     		$newStatPeriod->active = 1;
-    		
     		$newStatPeriod->startDate = date('Y-m-d H:i:s', strtotime('now'));
     		$newStatPeriod->type = 'handled';
     		$newStatPeriod->idStatusStart = $this->idStatus;
