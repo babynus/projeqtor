@@ -103,7 +103,7 @@ class Absence{
     }else{
       $max = 1;
     }
-    $max = round($etp * $max,2);
+    $max = round(floatval($etp) * floatval($max),2);
     $assId = "";
     $idColor = 0;
     $tabColor = array();
