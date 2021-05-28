@@ -1207,6 +1207,7 @@ Habilitation::correctUpdates();
 deleteDuplicate();
 Sql::saveDbVersion($version);
 Parameter::clearGlobalParameters();
+Module::resetMenuInactiveList();
 unsetSessionValue('_tablesFormatList');
 if (file_exists(Parameter::getGlobalParameter('cronDirectory')) and Cron::check()=='running') Cron::restart();
 

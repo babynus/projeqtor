@@ -331,7 +331,7 @@ UPDATE `${prefix}navigation` SET moduleName='moduleRisk' WHERE name='navRiskMana
 -- ======================================
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(261,'menuLocalizationManagement',0,'menu', 476,null,0,'Localization'),
+(261,'menuLocalization',0,'menu', 476,null,0,'Localization'),
 (262,'menuLocalizationRequest',261,'object', 477,"ReadWriteLocalization",0,'Localization'),
 (263,'menuLocalizationItem',261,'object', 477,"ReadWriteLocalization",0,'Localization'),
 (264,'menuLocalizationTranslator',261,'object', 477,"ReadWriteLocalization",0,'Localization');
@@ -351,9 +351,9 @@ INSERT INTO `module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
 (21,'moduleLocalization','880',null,0,0);
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(21,262,0,1),
-(21,263,0,1),
-(21,264,0,1);
+(21,262,0,0),
+(21,263,0,0),
+(21,264,0,0);
 
 CREATE TABLE `${prefix}localizationtranslator` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
@@ -466,12 +466,15 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
 (345, 'menuLanguageSkillLevel',131,265,55,0),
 (346, 'menuLocalizationRequestType',332,266,60,0),
-(347, 'menuLocalizationItemType', 332,267,70,0);
+(347, 'menuLocalizationItemType', 332,267,70,0),
+(348, 'menuLanguageSkillLevel',341,265,50,0),
+(349, 'menuLocalizationRequestType',341,266,60,0),
+(350, 'menuLocalizationItemType',341,267,70,0);
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(21,265,0,1),
-(21,266,0,1),
-(21,267,0,1);
+(21,265,0,0),
+(21,266,0,0),
+(21,267,0,0);
 
 INSERT INTO `${prefix}languageskilllevel` (`id`,`name`,`color`,`sortOrder`,`idle`) VALUES
 (1, 'beginner','#ff0000',10,0),
