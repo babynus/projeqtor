@@ -88,8 +88,12 @@ if (array_key_exists('checklistDefinitionId',$_REQUEST) and array_key_exists('ch
   if(trim($result)!=''){
     $isStop=true;
     $result.=($newObj->control()!='OK')?$newObj->control():'';
-    Sql::rollbackTransaction ();
     $status = getLastOperationStatus ( $result );
+    if ($status == "OK") {
+      Sql::commitTransaction ();
+    } else {
+      Sql::rollbackTransaction ();
+    }
   }else{
     $result='OK';
   }

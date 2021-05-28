@@ -53,8 +53,10 @@ foreach($checklistDefinition->_ChecklistDefinitionLine as $line) {
 	}
 	if($checkedCpt==0 and $required==1 and $done=='on'){
 	  $statusObj= new Status(RequestHandler::getValue('idStatus'));
+	  $result='<b>' . i18n('messageInvalidControls') . '</b><br/>';
       $result.='<br/>' . i18n('errorRequiredLine',array($line->name,$statusObj->name));
 	  $result .= '<input type="hidden" id="lastOperationStatus" value="INVALID" />';
+	  $result .= '<input type="hidden" id="lastOperation" value="update" />';
 	}
 }
 
