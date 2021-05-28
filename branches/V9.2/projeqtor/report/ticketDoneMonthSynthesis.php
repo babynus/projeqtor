@@ -253,7 +253,8 @@ foreach ($lstTicket as $ticket){
 	  if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['OK'])){
 	    $result[$ticket->idTicketType][$ticket->idUrgency]['OK']++;
 	  }
-	  $duration = round(abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime)));
+	  $statP = new StatusPeriod();
+	  $duration = $statP->sumSqlElementsFromCriteria('durationOpenTime', array('refType'=>'Ticket', 'refId'=>$ticket->id, 'active'=>1));
 	  if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'])){
 	  	$result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] += $duration;
 	  }else{
