@@ -54,6 +54,7 @@ $ref2Id=$_REQUEST['pokerItemRef2Id'];
 
 $comment = RequestHandler::getValue('pokerItemComment');
 $name = RequestHandler::getValue('pokerItemName');
+if(!trim($name))$name=i18n('object');
 $idPokerSession = RequestHandler::getId('idPokerSession');
 
 $pokerItemId=null;

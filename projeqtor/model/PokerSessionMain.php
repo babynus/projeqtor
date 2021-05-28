@@ -33,6 +33,8 @@ class PokerSessionMain extends SqlElement {
   public $_sec_description;
   public $id;
   public $name;
+  public $idPokerSessionType;
+  public $idStatus;
   public $idProject;
   public $pokerSessionDate;
   public $_lib_from;
@@ -75,20 +77,14 @@ class PokerSessionMain extends SqlElement {
     <th field="nameResource" formatter="thumbName22" width="15%">${responsible}</th>
     ';
   
-  private static $_fieldsAttributes=array("name"=>"readonly",
-                                  "idProject"=>"readonly",
-                                  "pokerSessionDate"=>"readonly, nobr",
+  private static $_fieldsAttributes=array(
+                                  "pokerSessionDate"=>"nobr",
                                   "_lib_from"=>'nobr',
-                                  "pokerSessionStartTime"=>'readonly, nobr',
-                                  "pokerSessionEndTime"=>'readonly',
-                                  "_lib_to"=>'readonly, nobr',
-                                  "idResource"=>"readonly",
-                                  "handled"=>"readonly, nobr",
-                                  "done"=>"readonly, nobr",
-                                  "idle"=>"readonly, nobr",
-                                  "handledDate"=>"readonly",
-                                  "doneDate"=>"readonly",
-                                  "idleDate"=>"readonly",
+                                  "pokerSessionStartTime"=>', nobr',
+                                  "_lib_to"=>'nobr',
+                                  "handled"=>"nobr",
+                                  "done"=>"nobr",
+                                  "idle"=>"nobr",
                                   "pokerSessionStartDateTime"=>"hidden",
                                   "pokerSessionEndDateTime"=>"hidden",
   );
@@ -173,8 +169,8 @@ class PokerSessionMain extends SqlElement {
   	if($item=="pokerItem"){
 	  drawPokerItem($this, 'Session');
   	}
-//   	if($item=="pokerVote"){
-//       drawPokerVote($this);
-//   	}
+  	if($item=="pokerVote"){
+      drawPokerVote($this);
+  	}
   }
 }?>

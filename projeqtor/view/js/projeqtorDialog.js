@@ -13507,3 +13507,33 @@ function stopPokerSession(idPokerSession){
 	      }
 	});
 }
+
+function openPokerItemVote(idPokerItem){
+	dojo.xhrPost({
+	      url : '../tool/openPokerItemVote.php?idPokerItem='+idPokerItem,
+	      handleAs : "text",
+	      load : function(data) {
+	    	  var callBack=function(){
+	    		  tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
+		    	  tabContainer=dijit.byId('tabDetailContainer');
+		    	  if(tabContainer!=undefined){
+	    	        tabContainer.selectChild(tabToSelect.page);
+		    	  }
+	    	  };
+	    	  saveDataToSession("idPokerItem",idPokerItem,false);
+	    	  loadContent("objectDetail.php", "detailDiv", "listForm", null, null, null,null,callBack,true);
+	      }
+	});
+}
+
+function gotoPokerItem(idPokerItem){
+	  var callBack=function(){
+		  tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
+  	      tabContainer=dijit.byId('tabDetailContainer');
+	  	  if(tabContainer!=undefined){
+		        tabContainer.selectChild(tabToSelect.page);
+	  	  }
+	  };
+	  saveDataToSession("idPokerItem",idPokerItem,false);
+	  loadContent("objectDetail.php", "detailDiv", "listForm", null, null, null,null,callBack,true);
+}
