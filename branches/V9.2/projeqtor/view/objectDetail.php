@@ -9863,39 +9863,76 @@ function drawPokerVote($obj){
   if ($obj->idle==1) {
   	$canUpdate=false;
   }
+  $user = getSessionUser();
+  $idItemDiv =  getSessionValue('idItemDivSession'.$obj->id);
   $pokerItem = new PokerItem();
-  $critArray = array('idPokerSession'=>$obj->id);
+  $critArray = array('idPokerSession'=>$obj->id, 'isOpen'=>'1');
   $itemList = $pokerItem->getSqlElementsFromCriteria($critArray);
-  echo '<table style="width: 100%;"><tr>';
-  echo '<td>'.i18n('colType').'</td>';
-  echo '<td class="noteData" style="width:30%">'.$obj->reference.'</td>';
-  echo '</tr><tr>';
-  echo '<td>'.i18n('colName').'</td>';
-  echo '<td class="noteData" style="width:30%">'.$obj->name.'</td>';
-  echo '</tr>';
-  foreach ($itemList as $item){
-    echo '<tr>';
-    if (!$print and $canUpdate) {
-    	echo '<td class="noteData smallButtonsGroup" style="width:10%">';
-  		echo ' <a onClick="editPokerMember('.htmlEncode($member->id).');" title="'.i18n('editPokerMember').'" > '.formatSmallButton('Edit').'</a>';
-  		echo ' <a onClick="removePokerMember('.htmlEncode($member->id).');" title="'.i18n('removePokerMember').'" > '.formatSmallButton('Remove').'</a>';
-    	echo '</td>';
-    }
-    $res = new ResourceAll($member->idResource);
-    echo '<td class="noteData" style="width:30%; text-align: center;">'.htmlEncode($res->name).'</td>';
-    if($res->isUser){
-      $type = i18n('colIdUser');
-    }else if($res->isResource){
-      $type = i18n('colIdResource');
+  if($itemList){
+    if(!trim($idItemDiv)){
+	 $pokerItem = $itemList[0];
     }else{
-      $type = null;
+  	 $pokerItem = $itemList[$idItemDiv];
     }
-    echo '<td class="noteData" style="width:30%; text-align: center;">'.htmlEncode($type).'</td>';
-    
-    echo '<td class="noteData" style="width:30%; text-align: center;"></td>';
-    echo '</tr>';
   }
-  echo '</table>';
+  $idPokerItem = getSessionValue('idPokerItem');
+  if($idPokerItem)$pokerItem = new PokerItem($idPokerItem);
+  if($pokerItem->id){
+    echo '<div align="center" style="width: 100%;">';
+    echo '<table style="width: 50%;"><tr><td>';
+    echo '<div><table style="width: 50%;"><tr>';
+    echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;">'.i18n('colType').'</td>';
+    echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.$pokerItem->refType.' #'.$pokerItem->refId.'</td>';
+    echo '</tr><tr><td><br></td></tr><tr>';
+    echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;" coslpan="2">'.i18n('colName').'</td>';
+    echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.$pokerItem->name.'</td>';
+    echo '</tr>';
+    echo '</tr><tr><td><br></td></tr><tr>';
+    echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;">'.i18n('colDescription').'</td>';
+    echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.htmlEncode($pokerItem->comment).'</td>';
+    echo '</tr>';
+    echo '</table></div></td></tr>';
+    echo '<tr><td><br><br></td></tr><tr>';
+    echo '<tr><td>';
+    echo '<div align="center" style="width: 100%;">';
+    $pokerMember = new PokerResource();
+    $pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSession'=>$obj->id));
+    $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$obj->id, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
+    if(!$pokerVote->id and !$pokerItem->value){
+      echo '<table style="width: 100%;" class="pokerComplexityTable">';
+      echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.i18n('colMyVote').'</td></tr>';
+      $pokerComplexityList = array(1,2,3,4,5,6,7,8,9,'?');
+      foreach ($pokerComplexityList as $pokerComplexity){
+        echo '<tr>';
+        echo '<td class="pokerComplexity" style="width:50%;height:15px;text-align:center;cursor:pointer;">'.$pokerComplexity.'</td>';
+        echo '</tr>';
+      }
+    }else{
+      echo '<table style="width: 50%;">';
+      echo '<tr><td><table><tr>';
+      $count = 0;
+      foreach ($pokerMemberList as $member){
+        $count++;
+        echo '<td><table style="width:200px;margin-right: 10px;">';
+        echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.htmlEncode(SqlList::getNameFromId("Resource", $member->idResource)).'</td></tr>';
+        $pokerComplexityList = array(1,2,3,4,5,6,7,8,9,'?');
+        foreach ($pokerComplexityList as $pokerComplexity){
+        	echo '<tr>';
+        	echo '<td class="pokerComplexityResult" style="width:50%;height:15px;text-align:center;">'.$pokerComplexity.'</td>';
+        	echo '</tr>';
+        }
+        echo '</table>';
+        if($count >= 3){
+          echo '</tr><tr><td><br></td></tr><tr>';
+          $count = 0;
+        }
+      }
+      echo '</table></td>';
+    }
+    echo '</table></div>';
+    echo '</table>';
+    echo '</div>';
+  }
 }
 
 function drawPokerItem($obj, $scope){
@@ -9922,22 +9959,27 @@ function drawPokerItem($obj, $scope){
   $itemList = $pokerItem->getSqlElementsFromCriteria($critArray);
   foreach ($itemList as $item){
     echo '<tr style="">';
+    echo '<td class="noteData smallButtonsGroup" style="width:10%;height:22px;">';
+    if(!$print)echo ' <a onClick="editPokerItem('.htmlEncode($item->id).', \'\', \'\');" title="'.i18n('editPokerItem').'" > '.formatSmallButton('Edit').'</a>';
     if (!$print and $canUpdate) {
-    	echo '<td class="noteData smallButtonsGroup" style="width:10%;height:22px;">';
-    	echo ' <a onClick="editPokerItem('.htmlEncode($item->id).', \'\', \'\');" title="'.i18n('editPokerItem').'" > '.formatSmallButton('Edit').'</a>';
     	echo ' <a onClick="removePokerItem('.htmlEncode($item->id).', \'\', \'\');" title="'.i18n('removePokerItem').'" > '.formatSmallButton('Remove').'</a>';
-    	echo '</td>';
+    	if($item->isOpen and $scope=="Session"){
+          echo ' <a onClick="gotoPokerItem('.htmlEncode($item->id).');" title="'.i18n('gotoPokerItem').'" >'.formatSmallButton('Goto', true).'</a>';
+    	}
     }
-    echo '<td class="noteData" style="width:30%; text-align: center;height:22px;">'.htmlEncode($item->name).'</td>';
-    echo '<td class="noteData" style="width:30%; text-align: center;height:22px;">'.htmlEncode($item->refType).' #'.htmlEncode($item->refId).'</td>';
+    echo '</td>';
+    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($item->name).' #'.htmlEncode($item->id).'</td>';
+    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($item->refType).' #'.htmlEncode($item->refId).'</td>';
     echo '<td class="noteData" style="width:30%; text-align: center;height:22px;">'.htmlEncode($item->value).'</td>';
     echo '<td style="">';
-    echo ' <button id="openPokerVote' . $item->id . '" dojoType="dijit.form.Button" style="width:120px;vertical-align: middle;" class="roundedVisibleButton">';
-	echo '   <span>' . i18n('openPokerVote') . '</span>';
-	echo '   <script type="dojo/connect" event="onClick" args="evt">';
-	echo '     openPokerVote('.$item->id.');';
-	echo '   </script>';
-	echo ' </button>';
+    if(!$item->isOpen and $scope=="Session"){
+        echo ' <button id="openPokerVote' . $item->id . '" dojoType="dijit.form.Button" style="width:120px;vertical-align: middle;" class="roundedVisibleButton">';
+    	echo '   <span>' . i18n('openPokerVote') . '</span>';
+    	echo '   <script type="dojo/connect" event="onClick" args="evt">';
+    	echo '     openPokerItemVote('.$item->id.');';
+    	echo '   </script>';
+    	echo ' </button>';
+	}
     echo '</td>';
     echo '</tr>';
   }

@@ -240,6 +240,8 @@ CREATE TABLE `${prefix}pokersession` (
   `pokerSessionDate` date DEFAULT NULL,
   `idProject` int(12) unsigned DEFAULT NULL COMMENT '12',
   `idResource` int(2) unsigned DEFAULT NULL COMMENT '2',
+  `idStatus` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `idPokerSessionType` int(12) unsigned DEFAULT NULL COMMENT '12',
   `attendees` varchar(4000) DEFAULT NULL,
   `pokerSessionStartTime` time DEFAULT NULL,
   `pokerSessionEndTime` time DEFAULT NULL,
@@ -302,9 +304,13 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1, 259, 8),
 (2, 259, 2),
 (3, 259, 7),
-(1, 260, 8),
-(2, 260, 2),
-(3, 260, 7);
+(1, 260, 2),
+(2, 260, 9),
+(3, 260, 1),
+(4, 260, 1),
+(6, 260, 9),
+(7, 260, 9),
+(5, 260, 9);
 
 ALTER TABLE `${prefix}workunit` ADD COLUMN `idle` int(1) unsigned DEFAULT 0 COMMENT '1';
 

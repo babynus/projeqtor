@@ -211,7 +211,7 @@
   <td style="width:1%"></td>
   <td  style="white-space:nowrap;width:33%">
     <div style="float:right;position:relative;width:fit-content;white-space:nowrap;<?php if ($showAttachment) echo 'padding-right:44px';?>" id="buttonDivContainerDiv"> 
-    <?php if (! $comboDetail and $class!='GlobalView' and $class!="PokerSession") {?>
+    <?php if (! $comboDetail and $class!='GlobalView') {?>
       <?php organizeButtons();?>
       <button id="newButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('buttonNew', array(i18n($_REQUEST['objectClass'])));?>"
