@@ -218,8 +218,8 @@ foreach ($lstTicket as $ticket){
     			break;
     		case 'OD' :
     			if($duration>$hourPerDay){
-    				$duration = $duration/$hourPerDay;
-            	    $duration = $duration*86400;
+    			  $duration = $duration/$hourPerDay;
+            	  $duration = $duration*86400;
     			}
     			$delayValue = (($duration/60)/60)/24;
     			break;
