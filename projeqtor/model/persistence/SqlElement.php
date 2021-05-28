@@ -929,11 +929,10 @@ abstract class SqlElement {
     		$startDate = new DateTime($statPeriod->startDate);
     		$endDate = new DateTime(date('Y-m-d H:i:s'));
     		$duration = $startDate->diff($endDate, true);
-    		$start=substr($statPeriod->startDate,11,5).':00';
-    	    $end=substr(date('Y-m-d H:i:s'),11,5).':00';
+    		$start=substr($statPeriod->startDate,0,16).':00';
+    	    $end=date('Y-m-d H:i').':00';
     	    $statPeriod->duration=abs(strtotime($start)-strtotime($end));
     	    $durationOpDay = openHourDiffTime($statPeriod->startDate, date('Y-m-d H:i:s'), $this->idProject);
-    	    //$durationOpDay = $durationOpDay*3600;
     		$statPeriod->durationOpenTime = $durationOpDay;
     		$statPeriod->save();
     	}
@@ -971,11 +970,10 @@ abstract class SqlElement {
     	    $statPeriod->endDate=date('Y-m-d H:i:s');
     	    $statPeriod->idStatusEnd=$this->idStatus;
     	    $statPeriod->idUserEnd=getSessionUser ()->id;
-    	    $start=substr($statPeriod->startDate,11,5).':00';
-    	    $end=substr(date('Y-m-d H:i:s'),11,5).':00';
+    	    $start=substr($statPeriod->startDate,0,16).':00';
+    	    $end=date('Y-m-d H:i').':00';
     	    $statPeriod->duration=abs(strtotime($start)-strtotime($end));
     	    $durationOpDay = openHourDiffTime($statPeriod->startDate, date('Y-m-d H:i:s'), $this->idProject);
-    	    //$durationOpDay = $durationOpDay*3600;
     	    $statPeriod->durationOpenTime = $durationOpDay;
     	    $statPeriod->save();
         }
