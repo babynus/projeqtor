@@ -205,28 +205,34 @@ foreach ($lstTicket as $ticket){
     	switch ($delayUnit->code){
     		case 'HH' :
     			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
-    			$delayValue = ($duration/60)/60;
+    			$delayValue = $duration/3600;
     			break;
     		case 'OH' :
-    			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject)/3600;
-    			$delayValue = $duration;
+    			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
+    			$delayValue = $duration/3600;
             	if($duration>$hourPerDay){
-                  $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
-                  $durationHour = fmod($duration,1)*3600;
-                  $duration = $durationDay+$durationHour;
+            	  $duration = $duration/$hourPerDay;
+            	  $duration = $duration*86400;
+//                   $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
+//                   $durationHour = fmod($duration,1)*3600;
+//                   $duration = $durationDay+$durationHour;
                 }
+                debugLog($duration);
     			break;
     		case 'DD' :
     			$duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
-    			$delayValue = (($duration/60)/60)/24;
+    			$delayValue = $duration/86400;
     			break;
     		case 'OD' :
-    			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject)/3600;
-    			$delayValue = $duration/24;
+    			$duration = openHourDiffTime($ticket->creationDateTime, $ticket->handledDateTime, $ticket->idProject);
+    			$delayValue = $duration/86400;
+    			debugLog($duration);
             	if($duration>$hourPerDay){
-                  $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
-                  $durationHour = fmod($duration,1)*3600;
-                  $duration = $durationDay+$durationHour;
+            	  $duration = $duration/$hourPerDay;
+            	  $duration = $duration*86400;
+//                   $durationDay = (($duration - fmod($duration,1))/($hourPerDay/3600))*86400;
+//                   $durationHour = fmod($duration,1)*3600;
+//                   $duration = $durationDay+$durationHour;
                 }
     			break;
     	}
@@ -257,7 +263,8 @@ foreach ($lstTicket as $ticket){
 	  if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['OK'])){
 	    $result[$ticket->idTicketType][$ticket->idUrgency]['OK']++;
 	  }
-	  $duration = round(abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime)));
+	  $statP = new StatusPeriod();
+	  $duration = $statP->sumSqlElementsFromCriteria('durationOpenTime', array('refType'=>'Ticket', 'refId'=>$ticket->id, 'active'=>1));
 	  if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'])){
 	  	$result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] += $duration;
 	  }else{
