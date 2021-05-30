@@ -962,7 +962,7 @@ class Cron {
               $attch->fileName = $att->name;
               $ext = strtolower ( pathinfo ( $attch->fileName, PATHINFO_EXTENSION ) );
               if (substr($ext,0,3)=='php' or substr($ext,0,3)=='pht' or substr($ext,0,3)=='sht') {
-                $attch->fileName.=".projeqtor";
+                $attch->fileName.='.projeqtor.txt';
               }           
               $attch->creationDate = date('Y-m-d H:i:s');
               $attch->fileSize = filesize($att->filePath);
