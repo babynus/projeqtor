@@ -346,8 +346,11 @@ class PlannedWorkManual extends GeneralWork {
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickPM.' style="cursor:'.$cursorPM.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
       echo '</table>';
       $leftAdmin=0;
+      $capacity=floatval($capacity);
+      $resObj->capacity=floatval($resObj->capacity);
+      $capacityVal=($capacity)?$capacity:(($resObj->capacity)?$resObj->capacity:1);
       if ($real and ($real-$realAdmin)>0) {
-        $height=intval($size*($real-$realAdmin)/(($capacity)?$capacity:(($resObj->capacity)?$resObj->capacity:1)));
+        $height=intval($size*($real-$realAdmin)/$capacityVal);
         if ($height>$size) $height=$size;
         $background = 'background-color:#202020;opacity:0.5';
         //echo '<div style="pointer-events: none;position:absolute;top:0;'.$background.'; height:'.$height.'px;width:'.$size.'px"> </div>';
@@ -355,7 +358,7 @@ class PlannedWorkManual extends GeneralWork {
         $leftAdmin=$height;
       }
       if ($realAdmin) {
-        $height=intval($size*$realAdmin/(($capacity)?$capacity:$resObj->capacity));
+        $height=intval($size*$realAdmin/$capacityVal);
         if ($height>$size) $height=$size;
         $background = 'background-color:#3d668f;opacity:1';
         //echo '<div style="pointer-events: none;position:absolute;top:0;'.$background.'; height:'.$height.'px;width:'.$size.'px"> </div>';
@@ -597,7 +600,10 @@ class PlannedWorkManual extends GeneralWork {
       echo formatColor('Status', $activitys->idStatus,true);
       echo '</div>';
       echo '</td>';
-      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" '.$onClick.'>#'.$pe->refId.'</td>';
+//       $idSize=100;
+//       if ($pe->refId>99) $idSize=85;
+//       if ($pe->refId>999) $idSize=70;
+      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth+8).'px" '.$onClick.'><div style="font-size:85%;position:absolute;bottom:8px;text-align:right;width:'.($idWidth).'px">'.(($pe->refId<=999)?'#':'').$pe->refId.'</div></td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" '.$onClick.'>'.$colorBadge.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >';
       echo '  <table style="width:100%;" ><tr>';
