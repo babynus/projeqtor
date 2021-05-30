@@ -104,7 +104,11 @@ if ($type) {$contentType=$type;}
 //}
 if (substr($name, -10)=='.projeqtor') {
 	$name=substr($name,0,strlen($name)-10);
-} 
+}
+if (substr($name, -14)=='.projeqtor.txt') {
+  $name=substr($name,0,strlen($name)-14);
+}
+
 $name=str_replace(array("\n","\r"),array('',''),$name);
 if (($file != "") && (file_exists($file))) { 
 	header("Pragma: public"); 

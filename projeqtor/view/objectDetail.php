@@ -4716,7 +4716,14 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
         echo '<img src="../view/img/mime/html.png" title="'.htmlEncode($attachment->link).'" />';
         echo '</div>';
       } else {
-        echo htmlGetMimeType($attachment->mimeType, $attachment->fileName, $attachment->id);
+        $fileName=$attachment->fileName;
+        if (substr($fileName, -10)=='.projeqtor') {
+          $fileName=substr($fileName,0,strlen($fileName)-10);
+        }
+        if (substr($fileName, -14)=='.projeqtor.txt') {
+          $fileName=substr($fileName,0,strlen($fileName)-14);
+        }
+        echo htmlGetMimeType($attachment->mimeType, $fileName, $attachment->id);
       }
       echo '</td><td class="attachmentData" style="border-left:none;width:'.(($print)?'90':'80').'%" >';
       echo formatUserThumb($userId, $userName, 'Creator');
@@ -4726,6 +4733,12 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
         $fileName=htmlEncode(urldecode($attachment->link), 'print');
       } else {
         $fileName=htmlEncode($attachment->fileName, 'print');
+        if (substr($fileName, -10)=='.projeqtor') {
+          $fileName=substr($fileName,0,strlen($fileName)-10);
+        }
+        if (substr($fileName, -14)=='.projeqtor.txt') {
+          $fileName=substr($fileName,0,strlen($fileName)-14);
+        }
       }
       if ($attachment->description and !$print) {
         echo formatCommentThumb($fileName);
