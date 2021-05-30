@@ -1715,7 +1715,8 @@ function getResultMessage($result) {
  * @return formated html mimeType, as an image
  */
 function htmlGetMimeType($mimeType,$fileName, $id=null, $type='Attachment',$float="float:left") {
-    $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+  debugLog($fileName);
+    $ext = strtolower(pathinfo(str_replace('.projeqtor.txt','',$fileName), PATHINFO_EXTENSION));
     if (file_exists("../view/img/mime/$ext.png")) {
       $img="../view/img/mime/$ext.png";
     } else {
@@ -1729,7 +1730,7 @@ function htmlGetMimeType($mimeType,$fileName, $id=null, $type='Attachment',$floa
     else {
       $image.=' style="'.$float.';opacity: 0.4;filter: alpha(opacity=40);" ';
     }
-    $image.='/>&nbsp;';
+    $image.='/>'.(($float=="float:left")?'':'&nbsp;');
   return $image;
 }
 
