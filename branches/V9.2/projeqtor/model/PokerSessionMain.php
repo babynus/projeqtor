@@ -75,6 +75,7 @@ class PokerSessionMain extends SqlElement {
     <th field="nameProject" width="15%">${idProject}</th>
     <th field="pokerSessionDate" width="10%" formatter="dateFormatter">${date}</th>
     <th field="nameResource" formatter="thumbName22" width="15%">${responsible}</th>
+    <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
     ';
   
   private static $_fieldsAttributes=array(

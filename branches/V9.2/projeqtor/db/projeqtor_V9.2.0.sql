@@ -225,6 +225,10 @@ INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionN
 INSERT INTO `${prefix}parameter` (idUser, idProject, parameterCode, parameterValue) VALUES
 (null,null, 'paramTryToHackObjectMail', 'Try to hack detected');
 
+-- ======================================
+-- Poker Session
+-- ======================================
+
 CREATE TABLE `${prefix}pokercomplexity` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `name` varchar(100) DEFAULT NULL,
@@ -286,11 +290,18 @@ CREATE TABLE `${prefix}pokervote` (
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (259, 'menuPokerSessionDefinition', 7, 'object', 155, Null, 0, 'Work '),
-(260, 'menuPokerSession', 7, 'object', 160, Null, 0, 'Work ');
+(260, 'menuPokerSession', 7, 'object', 160, Null, 0, 'Work '),
+(268, 'menuPokerSessionType', 79, 'object', 981, 'ReadWriteType', 0, 'Type');
 
 INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
 (339,'menuPokerSessionDefinition',3,259,115,0),
-(340,'menuPokerSession',3,260,120,0);
+(340,'menuPokerSession',3,260,120,0),
+(351,'menuPokerSessionType',132,268,45,0);
+
+INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES
+(198,9,259,0,1)
+(199,9,260,0,1)
+(200,9,268,0,1);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1, 259, 1),
@@ -298,7 +309,10 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (3, 259, 1),
 (1, 260, 1),
 (2, 260, 1),
-(3, 260, 1);
+(3, 260, 1),
+(1, 268, 1),
+(2, 268, 0),
+(3, 268, 0);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1, 259, 8),
@@ -484,4 +498,6 @@ INSERT INTO `${prefix}languageskilllevel` (`id`,`name`,`color`,`sortOrder`,`idle
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`, `idStatus`) VALUES 
 ('LocalizationRequest', 'standard translation',10,1, 0, 1),
 ('LocalizationRequest', 'urgent translation',20,1, 0, 1),
-('LocalizationItem', 'item',10,1, 0, 1);
+('LocalizationItem', 'item',10,1, 0, 1),
+('PokerSession', 'live session', 10, 1, 0, 1),
+('PokerSession', 'session with due date voting', 20, 1, 0, 1);
