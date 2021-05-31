@@ -272,16 +272,16 @@ class DeliveryMain extends SqlElement {
         }
       }
     }
-    if ($this->idDeliverableStatus){ // if idDeliverableStatus exist
+    if ($this->idDeliverableStatus and $this->idDeliverableStatus!=$old->idDeliverableStatus){ // if idDeliverableStatus exist
       $link=new Link(); 
-      $crit=array("ref1Type"=>"Deliverable");
-      $list2=$link->getSqlElementsFromCriteria($crit);
+      $crit="ref1Type='Deliverable' and ref2Type='Delivery' and ref2Id=$this->id";
+      $list2=$link->getSqlElementsFromCriteria(null,null,$crit);
       foreach ($list2 as $link2) {
-        if($link2->ref1Type=='Deliverable'){
+        //if($link2->ref1Type=='Deliverable'){
          $deliverable = new Deliverable($link2->ref1Id);
          $deliverable->idDeliverableStatus=$this->idDeliverableStatus;
          $test=$deliverable->save();
-        }
+        //}
       }
     }
     KpiValue::calculateKpi($this);
