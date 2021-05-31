@@ -1715,7 +1715,6 @@ function getResultMessage($result) {
  * @return formated html mimeType, as an image
  */
 function htmlGetMimeType($mimeType,$fileName, $id=null, $type='Attachment',$float="float:left") {
-  debugLog($fileName);
     $ext = strtolower(pathinfo(str_replace('.projeqtor.txt','',$fileName), PATHINFO_EXTENSION));
     if (file_exists("../view/img/mime/$ext.png")) {
       $img="../view/img/mime/$ext.png";
