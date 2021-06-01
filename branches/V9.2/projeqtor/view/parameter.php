@@ -496,6 +496,7 @@ function drawTableFromObjectList($objectList) {
   	echo ' title="' . i18n('menuPrincipal') . '">';
   	htmlDrawCrossTable('menuReadWritePrincipal', 'idMenu', 'profile', 'idProfile', 'accessRight', 'idAccessProfile', 'list', 'accessProfileNoProject') ;
   	echo '</div><br/>';
+  	if (Module::isModuleActive('moduleConfiguration')) {
   	$titlePane="habilitation_ReadWriteConfiguration";
   	echo '<div dojoType="dijit.TitlePane"';
   	echo ' open="' . ( array_key_exists($titlePane, $collapsedList)?'false':'true') . '"';
@@ -506,6 +507,7 @@ function drawTableFromObjectList($objectList) {
   	htmlDrawCrossTable('menuReadWriteConfiguration', 'idMenu', 'profile', 'idProfile', 'accessRight', 'idAccessProfile', 'list', 'accessProfileNoProject') ;
   	//
     echo '</div><br/>';
+    	}
     $titlePane="habilitation_ReadWriteTranslation";
     echo '<div dojoType="dijit.TitlePane"';
     echo ' open="' . ( array_key_exists($titlePane, $collapsedList)?'false':'true') . '"';
