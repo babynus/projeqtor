@@ -70,7 +70,7 @@ class SubTask extends SqlElement {
   // ============================================================================**********
   // DRAW SUBTASK
   // ============================================================================**********
-  static function drawSubtasksForObject($obj,$refType, $refId,$rightUpdate,$rightRead,$refresh=false,$idResource=false,$gloablView=false,$dialogView=false){
+  static function drawSubtasksForObject($obj,$refType, $refId,$rightUpdate,$rightRead,$refresh=false,$idResource=false,$gloablView=false,$dialogView=false,$onlyHisSubTask=false){
     global $cr, $print, $user, $comboDetail;
     $attach= new Attachment();
     if ($comboDetail or (!$rightUpdate and !$rightRead) or ($rightUpdate=='NO' and $rightRead=='NO')) {
@@ -92,6 +92,10 @@ class SubTask extends SqlElement {
     
     if($idResource!=false and $idResource!=0){
       $val=array("idResource"=>$idResource);
+      $crit=array_merge($crit,$val);
+    }else if($onlyHisSubTask){
+      $val=array("idResource"=>$user->id);
+      $rightUpdate='YES';
       $crit=array_merge($crit,$val);
     }
     $res=$subTask->getSqlElementsFromCriteria($crit,false,null,'sortOrder');
@@ -280,7 +284,7 @@ class SubTask extends SqlElement {
         }
       }
     }
-    if($rightUpdate=='YES' and !$print){
+    if($rightUpdate=='YES' and !$print and !$onlyHisSubTask){
       $lastSort=(!empty($res))? $lastSortRegist :0;
       echo  '<tr id="'.$refType.'_'.$refId.'_newSubTaskRow" >';
       echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_0" value="'.$lastSort.'" type="hidden" />';
@@ -446,12 +450,32 @@ class SubTask extends SqlElement {
     $drew=false;
     if(!empty($tab)){
       foreach ($tab as $id=>$obj){
+        $showElemSubTask=true;
+        $onlyHisSubTask=false;
         $element= new $obj['reftype']( $obj['refid']);
         $statusElment= new Status($element->idStatus);
         $colorStatus=$statusElment->color;
         //$menName= new Menu($element->idMenu);
         $rightUpdate=securityGetAccessRightYesNo('menu'.get_class($element),'update',$element);
         $rightRead=securityGetAccessRightYesNo('menu'.get_class($element),'read',$element);
+        $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menu'.get_class($element)));
+        if (!Module::isMenuActive($menu->name))  $showElemSubTask=false;
+        if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$showElemSubTask=false;
+        if(!$showElemSubTask){
+          $critArray=array('idResource'=>$user->id,'reftype'=>get_class($element),'refid'=>$element->id);
+          if(!$showClosedSubTask and !$showDoneSubTask  ){
+            $critArray=array('idResource'=>$user->id,'reftype'=>get_class($element),'refid'=>$element->id,"done"=>'0',"idle"=>'0');
+          }else if($showDoneSubTask and !$showClosedSubTask){
+            $critArray=array('idResource'=>$user->id,'reftype'=>get_class($element),'refid'=>$element->id,"idle"=>'0');
+          }
+          $nbTodoListForUser=$subTask->countSqlElementsFromCriteria($critArray);
+          if($nbTodoListForUser!=0){
+            $rightUpdate='NO';
+            $onlyHisSubTask=true;
+          }
+          else continue;
+
+        }
         if (($element->idle==1) or ($element->done==1) or ($rightUpdate=='NO' and $rightRead=='NO') or (!$rightUpdate and !$rightRead))continue;
         $where="refType= '".$obj['reftype']."' and refId = ".$element->id;
         $crit=array();
@@ -511,7 +535,7 @@ class SubTask extends SqlElement {
                      echo '</td >';
               echo'</tr></table>';
             echo '</div></td></tr>';
-            SubTask::drawSubtasksForObject($element, $obj['reftype'],  $obj['refid'],$rightUpdate,$rightRead,null,$idResource,true);
+            SubTask::drawSubtasksForObject($element, $obj['reftype'],  $obj['refid'],$rightUpdate,$rightRead,null,$idResource,true,false,$onlyHisSubTask);
           echo '</table>';
           if(!$drew){
             $drew=true;

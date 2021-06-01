@@ -391,13 +391,14 @@
         <script type="dojo/connect" event="onClick" args="evt">
            <?php 
            $getYesNo=Parameter::getGlobalParameter('getVersion');
-           if ($getYesNo=='NO') {
+           debugLog($getYesNo);
+           if ($getYesNo=='NO' ) {
              echo  "getLastNew();";
            }else{
              echo  "       var callBack = function() {";
              echo  "            if(dojo.byId('getLastNews').innerHTML=='')getLastNew();";
              echo  "         };";
-             echo  "loadContent('../view/refreshLastNews.php','getLastNews',false,false,false,false,false,callBack);";   
+             echo  "loadContent('../view/refreshLastNews.php','getLastNews',false,false,false,false,false,callBack,true);";   
            }
            ?>
         </script>

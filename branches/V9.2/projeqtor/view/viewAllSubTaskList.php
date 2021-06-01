@@ -40,7 +40,6 @@ $tab =array("Activity","Ticket","Action");
 $ElmentTab=array();
 foreach ($tab as $elem){
   $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menu'.$elem));
-  debugLog($menu);
   if (!Module::isMenuActive($menu->name))  continue;
   if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))continue;
   $ElmentTab []=$elem;
