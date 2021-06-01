@@ -28,9 +28,6 @@ $class=RequestHandler::getClass('objectClass');
 $id=RequestHandler::getId('objectId');
 $mode = RequestHandler::getValue('mode');
 
-debugLog($class);
-debugLog($id);
-debugLog($mode);
 if ($class and $id) {
 	$obj=new $class($id);
 } else {
