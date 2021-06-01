@@ -33,7 +33,9 @@ class PokerSessionDefinition extends PokerSessionMain {
    private static $_databaseTableName = 'pokersession';
    
    private static $_fieldsAttributes=array("idProject"=>"required",
-   		"pokerSessionDate"=>"required, nobr",
+        "idStatus"=>"required",
+        "idPokerSessionType"=>"required",
+        "pokerSessionDate"=>"required, nobr",
    		"_lib_from"=>'nobr',
    		"pokerSessionStartTime"=>'nobr',
    		"_lib_to"=>'nobr',

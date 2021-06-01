@@ -13537,3 +13537,23 @@ function gotoPokerItem(idPokerItem){
 	  saveDataToSession("idPokerItem",idPokerItem,false);
 	  loadContent("objectDetail.php", "detailDiv", "listForm", null, null, null,null,callBack,true);
 }
+
+function pokerItemNav(idPokerSession, idItem, itemList, nav){
+	var url='../tool/pokerItemNavigation.php?idPokerSession='+idPokerSession+'&idItem='+idItem+'&itemList='+itemList+'&nav='+nav;
+	loadContent(url, 'pokerVoteDiv', null, false);
+}
+
+function refreshPokerItemResult(idPokerSession, idItem, itemList){
+	var url='../tool/refreshPokerItemResult.php?idPokerSession='+idPokerSession+'&idItem='+idItem+'&itemList='+itemList;
+	loadContent(url, 'pokerVoteResult', null, false);
+}
+
+function voteToPokerItem(idPokerSession, idItem, itemList, vote){
+	dojo.xhrPost({
+	      url : '../tool/voteToPokerItem.php?idPokerSession='+idPokerSession+'&idItem='+idItem+'&vote='+vote,
+	      handleAs : "text",
+	      load : function(data) {
+	    	  refreshPokerItemResult(idPokerSession, idItem, itemList);
+	      }
+	});
+}

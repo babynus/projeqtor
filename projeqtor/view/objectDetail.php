@@ -9881,6 +9881,8 @@ function drawPokerVote($obj){
   $pokerItem = new PokerItem();
   $critArray = array('idPokerSession'=>$obj->id, 'isOpen'=>'1');
   $itemList = $pokerItem->getSqlElementsFromCriteria($critArray);
+  $pokerItemList = SqlList::getListWithCrit('PokerItem', $critArray, 'id');
+  $list = implode(',', $pokerItemList);
   if($itemList){
     if(!trim($idItemDiv)){
 	 $pokerItem = $itemList[0];
@@ -9891,8 +9893,8 @@ function drawPokerVote($obj){
   $idPokerItem = getSessionValue('idPokerItem');
   if($idPokerItem)$pokerItem = new PokerItem($idPokerItem);
   if($pokerItem->id){
-    echo '<div align="center" style="width: 100%;">';
-    echo '<table style="width: 50%;"><tr><td>';
+    echo '<div id="pokerVoteDiv" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;">';
+    echo '<table style="width: 100%;"><tr><td>';
     echo '<div><table style="width: 50%;"><tr>';
     echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;">'.i18n('colType').'</td>';
     echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.$pokerItem->refType.' #'.$pokerItem->refId.'</td>';
@@ -9907,31 +9909,54 @@ function drawPokerVote($obj){
     echo '</table></div></td></tr>';
     echo '<tr><td><br><br></td></tr><tr>';
     echo '<tr><td>';
-    echo '<div align="center" style="width: 100%;">';
+    echo '<div id="pokerVoteResult" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;">';
     $pokerMember = new PokerResource();
     $pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSession'=>$obj->id));
-    $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$obj->id, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
+    $pokerVote = new PokerVote();
+    $pokerVote = $pokerVote->getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$obj->id, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
+    $pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$obj->id, 'idPokerItem'=>$pokerItem->id), 'value');
+    sort($pokerVoteList);
+    $lowVote = $pokerVoteList[0];
+    $highVote = $pokerVoteList[count($pokerVoteList)-1];
     if(!$pokerVote->id and !$pokerItem->value){
-      echo '<table style="width: 100%;" class="pokerComplexityTable">';
+      echo '<table style="width: 100%;">';
+      echo '<tr>';
+      echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');"><div class="dijitButtonIcon dijitButtonIconPrevious"></div></td>';
+      echo '<td><table style="width: 100%;" class="pokerComplexityTable"><tr><td>';
       echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.i18n('colMyVote').'</td></tr>';
       $pokerComplexityList = array(1,2,3,4,5,6,7,8,9,'?');
       foreach ($pokerComplexityList as $pokerComplexity){
         echo '<tr>';
-        echo '<td class="pokerComplexity" style="width:50%;height:15px;text-align:center;cursor:pointer;">'.$pokerComplexity.'</td>';
+        echo '<td class="pokerComplexity" style="width:50%;height:15px;text-align:center;cursor:pointer;" onclick="voteToPokerItem('.$obj->id.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity.');">'.$pokerComplexity.'</td>';
         echo '</tr>';
       }
+      echo '</td></tr></table></td>';
+      echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');"><div class="dijitButtonIcon dijitButtonIconNext"></div></td>';
+      echo '</tr>';
     }else{
       echo '<table style="width: 50%;">';
-      echo '<tr><td><table><tr>';
+      echo '<tr>';
+      echo '<td align="center" class="imageColorNewGui" style="cursor:pointer;padding-right: 10px;" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');"><div class="dijitButtonIcon dijitButtonIconPrevious"></div></td>';
+      echo '<td><table><tr>';
       $count = 0;
+      
       foreach ($pokerMemberList as $member){
+        $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$obj->id, 'idResource'=>$member->idResource, 'idPokerItem'=>$pokerItem->id));
         $count++;
         echo '<td><table style="width:200px;margin-right: 10px;">';
         echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.htmlEncode(SqlList::getNameFromId("Resource", $member->idResource)).'</td></tr>';
         $pokerComplexityList = array(1,2,3,4,5,6,7,8,9,'?');
         foreach ($pokerComplexityList as $pokerComplexity){
+            $class = 'pokerComplexityResult';
+            if($pokerVote->id and $pokerVote->value == $pokerComplexity and $pokerVote->value == $lowVote){
+              $class = 'pokerComplexitySelectedLow';
+            }else if($pokerVote->id and $pokerVote->value == $pokerComplexity and $pokerVote->value == $highVote){
+              $class = 'pokerComplexitySelectedHigh';
+            }else if($pokerVote->id and $pokerVote->value == $pokerComplexity and $pokerVote->value == $pokerItem->value){
+              $class = 'pokerComplexitySelectedValue';
+            }
         	echo '<tr>';
-        	echo '<td class="pokerComplexityResult" style="width:50%;height:15px;text-align:center;">'.$pokerComplexity.'</td>';
+        	echo '<td class="'.$class.'" style="width:50%;height:15px;text-align:center;" voteToPokerItem('.$obj->id.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity.');>'.$pokerComplexity.'</td>';
         	echo '</tr>';
         }
         echo '</table>';
@@ -9941,8 +9966,10 @@ function drawPokerVote($obj){
         }
       }
       echo '</table></td>';
+      echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');"><div class="dijitButtonIcon dijitButtonIconNext"></div></td>';
     }
-    echo '</table></div>';
+    echo '</table>';
+    echo '</div>';
     echo '</table>';
     echo '</div>';
   }
