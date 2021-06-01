@@ -95,7 +95,6 @@ class SubTask extends SqlElement {
       $crit=array_merge($crit,$val);
     }else if($onlyHisSubTask){
       $val=array("idResource"=>$user->id);
-      $rightUpdate='YES';
       $crit=array_merge($crit,$val);
     }
     $res=$subTask->getSqlElementsFromCriteria($crit,false,null,'sortOrder');
@@ -253,6 +252,9 @@ class SubTask extends SqlElement {
           echo      '</select>';
           echo    '</td>';
           echo    '<td   style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;">';
+                    if($onlyHisSubTask){
+                      $rightUpdate='YES';
+                    }
                     $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId,$gloablView,$rightUpdate,$rightRead);
           echo    '</td>';
           echo  '</tr>';
