@@ -273,7 +273,7 @@ CREATE TABLE `${prefix}pokeritem` (
   `refType` varchar(100) DEFAULT NULL,
   `refId` int(12) unsigned DEFAULT NULL COMMENT '12',
   `idPokerSession` int(12) unsigned DEFAULT NULL COMMENT '12',
-  `value` int(2) unsigned DEFAULT NULL COMMENT '2',
+  `value` varchar(100) DEFAULT NULL,
   `work` decimal(9,5) unsigned DEFAULT NULL,
   `isOpen` int(1) unsigned DEFAULT 0 COMMENT '1',
   `comment` varchar(4000) DEFAULT NULL,
@@ -285,6 +285,7 @@ CREATE TABLE `${prefix}pokervote` (
   `idPokerItem` int(12) unsigned DEFAULT NULL COMMENT '12',
   `idResource` int(12) unsigned DEFAULT NULL COMMENT '12',
   `idPokerSession` int(12) unsigned DEFAULT NULL COMMENT '12',
+  `value` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

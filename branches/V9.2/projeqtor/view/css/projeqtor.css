@@ -4323,7 +4323,10 @@ div.ticketKanbanCustom .kanbanVersion{
 }
 
 .pokerComplexityTable tbody{
-	border: 1px solid #AAAAAA !important;
+	border-top: 0px;
+    border-left: 1px solid #AAAAAA;
+    border-right: 1px solid #AAAAAA;
+    border-bottom: 1px solid #AAAAAA;
 }
 
 .pokerComplexity{
@@ -4350,8 +4353,38 @@ div.ticketKanbanCustom .kanbanVersion{
 	color: black;
 }
 
-.pokerComplexitySelected{
-	border: 1px solid black !important;
-	background-color : #fae2d1;
-	color: black;
+.pokerComplexitySelectedValue{
+	font-size: 90%;
+    padding: 5px;
+    border-left: 1px solid black !important;
+    border-top: 2px solid black !important;
+    border-bottom: 2px solid black !important;
+    border-right: 1px solid black !important;
+    vertical-align: top;
+    background-color: #FFFFFF;
+    color: black;
+}
+
+.pokerComplexitySelectedLow{
+	font-size: 90%;
+    padding: 5px;
+    border-left: 1px solid black !important;
+    border-top: 2px solid black !important;
+    border-bottom: 2px solid black !important;
+    border-right: 1px solid black !important;
+    vertical-align: top;
+    background-color: #fae2d1;
+    color: black;
+}
+
+.pokerComplexitySelectedHigh{
+	font-size: 90%;
+    padding: 5px;
+    border-left: 1px solid black !important;
+    border-top: 2px solid black !important;
+    border-bottom: 2px solid black !important;
+    border-right: 1px solid black !important;
+    vertical-align: top;
+    background-color: #fae2d1;
+    color: black;
 }
