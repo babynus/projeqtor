@@ -115,7 +115,8 @@ if($lang=="fr"){
       <tr>
         <td><div style="width:15px !important;"></div></td>
         <td>
-          <div  class="container" dojoType="dijit.layout.ContentPane" id="getLastNews"></div>
+          <div  class="container" dojoType="dijit.layout.ContentPane" id="getLastNews">
+          </div>
         </td>
         <td><div style="width:15px !important;"></div></td>
       </tr>
