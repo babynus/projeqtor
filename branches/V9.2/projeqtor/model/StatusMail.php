@@ -155,7 +155,21 @@ class StatusMail extends SqlElement {
     } else {
       self::$_fieldsAttributes['otherMail']='invisible';
     }
-    
+    if($this->idEventForMail=='16'){
+      self::$_fieldsAttributes['mailToOther']="readonly,nobr";
+      self::$_fieldsAttributes['mailToContact']="invisible";
+      self::$_fieldsAttributes['mailToAccountable']="invisible";
+      self::$_fieldsAttributes['mailToResource']="invisible";
+      self::$_fieldsAttributes['mailToFinancialResponsible']="invisible";
+      self::$_fieldsAttributes['mailToSponsor']="invisible";
+      self::$_fieldsAttributes['mailToProject']="invisible";
+      self::$_fieldsAttributes['mailToProjectIncludingParentProject']="invisible";
+      self::$_fieldsAttributes['_lib_globalProjectTeam']="hidden";
+      self::$_fieldsAttributes['mailToLeader']="invisible";
+      self::$_fieldsAttributes['mailToManager']="invisible";
+      self::$_fieldsAttributes['mailToAssigned']="invisible";
+      self::$_fieldsAttributes['mailToSubscribers']="invisible";
+    }
   }
   
   public function control() {
@@ -281,6 +295,40 @@ class StatusMail extends SqlElement {
       $colScript .= '  if (this.value!=" ") { ';
       $colScript .= '    dijit.byId("idStatus").set("value"," ");';
       $colScript .= '  } '; 
+      //--Florent ticket #5535 
+      $colScript .= '     tab=["mailToContact","mailToAccountable","mailToResource","mailToFinancialResponsible",
+                               "mailToProject","mailToProjectIncludingParentProject","mailToLeader","mailToManager","mailToAssigned","mailToSubscribers"];';
+      $colScript .= '  if (this.value=="16") { ';
+      $colScript .= '     tab.forEach(function(name){';
+      $colScript .= '       dojo.query(".detail.generalRowClass."+name+"Class").forEach(function(domNode){domNode.style.display="none";});';
+      $colScript .= '       dojo.query(".generalColClass."+name+"Class").forEach(function(domNode){domNode.style.display="none";});';
+      $colScript .= '       if(dijit.byId(name).get("checked")===true)dijit.byId(name).set("checked",false);';
+      $colScript .= '     });';
+      $colScript .= '       if(dojo.byId("_lib_globalProjectTeam").parentNode.parentNode.style.display!="none")dojo.byId("_lib_globalProjectTeam").parentNode.parentNode.style.display="none";';
+      $colScript .= '       dijit.byId("mailToOther").set("checked",true);';
+      $colScript .= '       dijit.byId("mailToOther").set("readOnly",true);';
+      $colScript .= '  }else if(this.value!="16" && (dijit.byId("mailToOther").get("disabled")==true || dijit.byId("mailToOther").get("readOnly")==true ) && dijit.byId("mailToOther").get("checked")==true){ ';
+      $colScript .='      var isAccountableArray=new Array();';
+      if (parameter::getGlobalParameter('manageAccountable')=='YES') {
+        $list=SqlList::getListNotTranslated('Mailable');
+        foreach ($list as $id=>$name) {
+          if (property_exists($name, 'idAccountable')) {
+            $colScript .= "isAccountableArray['" . $name . "']='" . $name . "';";
+          }
+        }
+      }
+      $colScript .= '     tab.forEach(function(name){';
+      $colScript .= '       var mailable=mailableArray[dojo.byId("idMailable").value];';
+      $colScript .= '       if(name=="mailToAssigned" && mailable!="Activity" && mailable!="TestSession" && mailable!="Meeting" && mailable!="PeriodicMeeting")return;';
+      $colScript .= '       if(name=="mailToFinancialResponsible" &&  mailable!="IndividualExpense" && mailable!="ProjectExpense")return;';
+      $colScript .= '       if(name=="mailToAccountable" && isAccountableArray[mailable]!=mailable)return;';
+      $colScript .= '       dojo.query(".detail.generalRowClass."+name+"Class").forEach(function(domNode){if(domNode.style.display=="none")domNode.style.display="table-row";});';
+      $colScript .= '       dojo.query(".generalColClass."+name+"Class").forEach(function(domNode){if(domNode.style.display=="none")domNode.style.display="inline-block";});';
+      $colScript .= '     });';
+      $colScript .= '       if(dojo.byId("_lib_globalProjectTeam") && dojo.byId("_lib_globalProjectTeam").parentNode.parentNode.style.display=="none")dojo.byId("_lib_globalProjectTeam").parentNode.parentNode.style.display="table-row";';
+      $colScript .= '       if(dijit.byId("mailToOther").get("disabled")==true || dijit.byId("mailToOther").get("readOnly")==true){dijit.byId("mailToOther").set("disabled",false);dijit.byId("mailToOther").set("readOnly",false)}';
+      $colScript .= '  } ';
+      //
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     } else if ($colName=="mailToAssigned") {
