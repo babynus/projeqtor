@@ -42,6 +42,7 @@ class PokerSessionMain extends SqlElement {
   public $_lib_to;
   public $pokerSessionEndTime;
   public $_spe_startPokerSession;
+  public $_spe_pausePokerSession;
   public $idResource;
   public $handled;
   public $handledDate;
@@ -190,7 +191,7 @@ class PokerSessionMain extends SqlElement {
   
   public function drawSpecificItem($item) {
     global $print;
-    $canUpdate=securityGetAccessRightYesNo('menuPokerSession', 'update', $this) == "YES";
+    $canUpdate=securityGetAccessRightYesNo('menuPokerSessionDefinition', 'update', $this) == "YES";
     $result = "";
     if($item=="startPokerSession"){
     	if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {
@@ -203,6 +204,27 @@ class PokerSessionMain extends SqlElement {
     	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
     	$result .= '   if (checkFormChangeInProgress()) {return false;}';
     	$result .=  '  stopPokerSession('.$this->id.');';
+    	$result .= '</script>';
+    	$result .= '</button>';
+    	$result .= '</td></tr>';
+    	return $result;
+    }
+    if($item=="pausePokerSession"){
+    	if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {
+    		return "";
+    	}
+    	$name=(!$this->handled)?i18n('pokerSessionStartPause'):i18n('pokerSessionStopPause');
+    	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
+    	$result .= '<button id="pausePokerSession" dojoType="dijit.form.Button" showlabel="true"';
+    	$result .= ' title="' . $name . '" class="roundedVisibleButton">';
+    	$result .= '<span>' . $name. '</span>';
+    	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
+    	$result .= '   if (checkFormChangeInProgress()) {return false;}';
+    	if(!$this->handled){
+    		$result .=  '  startPausePokerSession('.$this->id.');';
+    	}else{
+    		$result .=  '  stopPausePokerSession('.$this->id.');';
+    	}
     	$result .= '</script>';
     	$result .= '</button>';
     	$result .= '</td></tr>';
