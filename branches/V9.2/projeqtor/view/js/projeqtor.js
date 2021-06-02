@@ -1393,9 +1393,15 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           //if (loadContentRetryArray[callKey]!==undefined) {
           //  loadContentRetryArray.splice(callKey, 1);
           //}
-          if((dojo.byId('formDiv') && dojo.byId('formDiv').querySelector('.SubTaskTab')) || (dojo.byId('SubTaskForm') && dojo.byId('SubTaskForm').querySelector('.SubTaskTab')) ){
-            form=(dojo.byId('formDiv'))?'formDiv':'SubTaskForm';
-            setDragAndDropAttachmentSubTask(form,'SubTaskTab','subTaskRow','divAttachSubTask');
+          var pageShort=(page.indexOf('?'))?page.substring(0, page.indexOf('?')):page;
+          if (   (pageShort=='objectDetail.php' && destination=='detailDiv') 
+              || (pageShort=='../view/refreshSubTaskAttachmentDiv.php') 
+              || (pageShort=='viewAllSubTaskMain.php' && destination=='centerDiv') 
+              || (pageShort=='../view/refreshViewAllSubTask.php' && destination=='subTaskListDiv') ) {
+            if((dojo.byId('formDiv') && dojo.byId('formDiv').querySelector('.SubTaskTab')) || (dojo.byId('SubTaskForm') && dojo.byId('SubTaskForm').querySelector('.SubTaskTab')) ){
+              form=(dojo.byId('formDiv'))?'formDiv':'SubTaskForm';
+              setDragAndDropAttachmentSubTask(form,'SubTaskTab','subTaskRow','divAttachSubTask');
+            }
           }
         },
         error : function(error, args) {
@@ -1712,7 +1718,9 @@ function finalizeMessageDisplay(destination, validationType) {
 //          if (!(lastSaveClass && lastSaveRefId && lastSaveClass.value=="SubTask")) {
 //           refreshSubTaskAttachment( lastSaveClass.value,lastSaveRefId.value);
 //          }else{
-            loadContent("objectDetail.php?refreshAttachments=true", dojo.byId('objectClass').value+ '_Attachment', 'listForm');
+            if (dojo.byId(dojo.byId('objectClass').value + '_Attachment')) {
+              loadContent("objectDetail.php?refreshAttachments=true", dojo.byId('objectClass').value+ '_Attachment', 'listForm');
+            }
 //          }
         }
         dojo.style(dojo.byId('downloadProgress'), {
