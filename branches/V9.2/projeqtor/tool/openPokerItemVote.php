@@ -28,9 +28,14 @@
  * Get the list of objects, in Json format, to display the grid list
  */
 require_once "../tool/projeqtor.php"; 
-$result="";
 $id=RequestHandler::getId('idPokerItem');
+$close = RequestHandler::getBoolean('close');
+
 $pokerItem = new PokerItem($id);
-$pokerItem->isOpen = 1;
+if(!$close){
+  $pokerItem->isOpen = 1;
+}else{
+  $pokerItem->isOpen = 0;
+}
 $pokerItem->save();
 ?>
