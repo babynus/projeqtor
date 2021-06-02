@@ -10220,7 +10220,7 @@ function showImage(objectClass, objectId, imageName) {
         title : imageName,
         href : imageUrl
       });
-      dijit.byId('formDiv').resize();
+      if (dijit.byId('formDiv')) dijit.byId('formDiv').resize();
     }
     // dialogShowImage.show({ title:imageName, href:imageUrl });
   } else {
@@ -13296,8 +13296,8 @@ function hideShowDropDiv(mode,subTaskRawId){
 }
 
 function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachmentDivClass){
-  var dest=dojo.byId(destination),
-        allTable=dest.querySelectorAll('.'+tableClass);
+  var dest=dojo.byId(destination);
+  var allTable=dest.querySelectorAll('.'+tableClass);
   
   allTable.forEach(function(table){
     var allRaw=table.querySelectorAll('.'+rawClass);
@@ -13305,8 +13305,9 @@ function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachm
       var divAttach=el.querySelector('.'+attachmentDivClass);
       if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
         var idDiv=divAttach.childNodes[1].firstChild.id;
+        console.log("addDropTarget to "+idDiv+" => "+el.id);
         dijit.byId(idDiv).reset();
-        dijit.byId(idDiv).addDropTarget(el,true);
+        dijit.byId(idDiv).addDropTarget(el,false);
       }
       
     });
