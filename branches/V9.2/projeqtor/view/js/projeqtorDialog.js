@@ -13508,9 +13508,39 @@ function stopPokerSession(idPokerSession){
 	});
 }
 
+function startPausePokerSession(idPokerSession){
+	dojo.xhrPost({
+	      url : '../tool/startPausePokerSession.php?idPokerSession='+idPokerSession,
+	      handleAs : "text",
+	      load : function(data) {
+	    	  var callBack=function(){
+	    		  tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
+	    		  console.log(tabToSelect);
+		    	  tabContainer=dijit.byId('tabDetailContainer');
+		    	  if(tabContainer!=undefined){
+	    	        tabContainer.selectChild(tabToSelect.page);
+		    	  }
+	    	  };
+	    	  loadContent("objectMain.php?objectClass=PokerSession", "centerDiv", false,
+	    	          false, false, idPokerSession,false,callBack,true);
+	      }
+	});
+}
+
+function stopPausePokerSession(idPokerSession){
+	dojo.xhrPost({
+	      url : '../tool/startPausePokerSession.php?idPokerSession='+idPokerSession,
+	      handleAs : "text",
+	      load : function(data) {
+	    	  refreshGrid();
+	    	  loadContent("objectDetail.php", "detailDiv", "listForm",null,null,null,null,null,true);
+	      }
+	});
+}
+
 function openPokerItemVote(idPokerItem){
 	dojo.xhrPost({
-	      url : '../tool/openPokerItemVote.php?idPokerItem='+idPokerItem,
+	      url : '../tool/openPokerItemVote.php?idPokerItem='+idPokerItem+'&close=false',
 	      handleAs : "text",
 	      load : function(data) {
 	    	  var callBack=function(){
@@ -13522,6 +13552,16 @@ function openPokerItemVote(idPokerItem){
 	    	  };
 	    	  saveDataToSession("idPokerItem",idPokerItem,false);
 	    	  loadContent("objectDetail.php", "detailDiv", "listForm", null, null, null,null,callBack,true);
+	      }
+	});
+}
+
+function closePokerItemVote(idPokerItem){
+	dojo.xhrPost({
+	      url : '../tool/openPokerItemVote.php?idPokerItem='+idPokerItem+'&close=true',
+	      handleAs : "text",
+	      load : function(data) {
+	    	  loadContent("objectDetail.php", "detailDiv", "listForm");
 	      }
 	});
 }

@@ -104,6 +104,7 @@ class PokerSessionDefinition extends PokerSessionMain {
     	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
     	$result .= '<button id="startPokerSession" dojoType="dijit.form.Button" showlabel="true"';
     	$result .= ' title="' . $name . '" class="roundedVisibleButton">';
+    	$result .= '<span>' . $name. '</span>';
     	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
     	$result .= '   if (checkFormChangeInProgress()) {return false;}';
         if(!$this->handled){
@@ -111,6 +112,27 @@ class PokerSessionDefinition extends PokerSessionMain {
         }else{
           $result .=  '  stopPokerSession('.$this->id.');';
         }    	
+    	$result .= '</script>';
+    	$result .= '</button>';
+    	$result .= '</td></tr>';
+    	return $result;
+    }
+    if($item=="pausePokerSession"){
+    	if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {
+    		return "";
+    	}
+    	$name=(!$this->handled)?i18n('pokerSessionStartPause'):i18n('pokerSessionStopPause');
+    	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
+    	$result .= '<button id="pausePokerSession" dojoType="dijit.form.Button" showlabel="true"';
+    	$result .= ' title="' . $name . '" class="roundedVisibleButton">';
+    	$result .= '<span>' . $name. '</span>';
+    	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
+    	$result .= '   if (checkFormChangeInProgress()) {return false;}';
+    	if(!$this->handled){
+    		$result .=  '  startPausePokerSession('.$this->id.');';
+    	}else{
+    		$result .=  '  stopPausePokerSession('.$this->id.');';
+    	}
     	$result .= '</script>';
     	$result .= '</button>';
     	$result .= '</td></tr>';

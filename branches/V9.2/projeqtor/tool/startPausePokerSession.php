@@ -35,8 +35,7 @@ if(!$pokerSession->handled){
   $pokerSession->handled = 1;
   $pokerSession->handledDate = date('Y-m-d H:i:s');
 }else{
-  $pokerSession->done = 1;
-  $pokerSession->doneDate = date('Y-m-d H:i:s');
+  $pokerSession->handled = 0;
 }
 $result = $pokerSession->save();
 ?>

@@ -9877,23 +9877,16 @@ function drawPokerVote($obj){
   	$canUpdate=false;
   }
   $user = getSessionUser();
-  $idItemDiv =  getSessionValue('idItemDivSession'.$obj->id);
+  $idPokerItem = getSessionValue('idPokerItem');
   $pokerItem = new PokerItem();
   $critArray = array('idPokerSession'=>$obj->id, 'isOpen'=>'1');
   $itemList = $pokerItem->getSqlElementsFromCriteria($critArray);
   $pokerItemList = SqlList::getListWithCrit('PokerItem', $critArray, 'id');
   $list = implode(',', $pokerItemList);
-  if($itemList){
-    if(!trim($idItemDiv)){
-	 $pokerItem = $itemList[0];
-    }else{
-  	 $pokerItem = $itemList[$idItemDiv];
-    }
-  }
+  if($itemList)$pokerItem = $itemList[0];
+  if($idPokerItem)$pokerItem = new PokerItem($idPokerItem);
   $pokerComplexity = new PokerComplexity();
   $pokerComplexityList = $pokerComplexity->getSqlElementsFromCriteria(array('idle'=>'0'), null, null, "sortOrder ASC");
-  $idPokerItem = getSessionValue('idPokerItem');
-  if($idPokerItem)$pokerItem = new PokerItem($idPokerItem);
   if($pokerItem->id){
     echo '<div id="pokerVoteDiv" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;">';
     echo '<table><tr><td>';
@@ -9921,7 +9914,7 @@ function drawPokerVote($obj){
     sort($pokerVoteList);
     $lowVote = (isset($pokerVoteList[0]))?$pokerVoteList[0]:1;
     $highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[count($pokerVoteList)-1]:1;
-    if(!$pokerVote->id and !$pokerItem->value and $pokerMember->id){
+    if(!$pokerVote->id and !$pokerItem->value and $pokerMember->id and !$obj->done){
       echo '<table>';
       echo '<tr>';
       echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');"><div class="dijitButtonIcon dijitButtonIconPrevious"></div></td>';
@@ -10012,14 +10005,21 @@ function drawPokerItem($obj, $scope){
     echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($item->refType).' #'.htmlEncode($item->refId).'</td>';
     echo '<td class="noteData" style="width:30%; text-align: center;height:22px;">'.htmlEncode($item->value).'</td>';
     echo '<td style="">';
-    if(!$item->isOpen and $scope=="Session"){
-        echo ' <button id="openPokerVote' . $item->id . '" dojoType="dijit.form.Button" style="width:120px;vertical-align: middle;" class="roundedVisibleButton">';
-    	echo '   <span>' . i18n('openPokerVote') . '</span>';
-    	echo '   <script type="dojo/connect" event="onClick" args="evt">';
-    	echo '     openPokerItemVote('.$item->id.');';
-    	echo '   </script>';
-    	echo ' </button>';
-	}
+    if(!$item->isOpen and $scope=="Session" and !$obj->done){
+      echo ' <button id="openPokerVote' . $item->id . '" dojoType="dijit.form.Button" style="width:120px;vertical-align: middle;" class="roundedVisibleButton">';
+      echo '   <span>' . i18n('openPokerVote') . '</span>';
+      echo '   <script type="dojo/connect" event="onClick" args="evt">';
+      echo '     openPokerItemVote('.$item->id.');';
+      echo '   </script>';
+      echo ' </button>';
+	}else if($item->isOpen and $scope=="Session" and !$obj->done){
+      echo ' <button id="openPokerVote' . $item->id . '" dojoType="dijit.form.Button" style="width:120px;vertical-align: middle;" class="roundedVisibleButton">';
+      echo '   <span>' . i18n('closePokerVote') . '</span>';
+      echo '   <script type="dojo/connect" event="onClick" args="evt">';
+      echo '     closePokerItemVote('.$item->id.');';
+      echo '   </script>';
+      echo ' </button>';
+    }
     echo '</td>';
     echo '</tr>';
   }
