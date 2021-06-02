@@ -41,8 +41,8 @@ $pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSessio
 $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
 $pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$idPokerSession, 'idPokerItem'=>$pokerItem->id), 'value');
 sort($pokerVoteList);
-$lowVote = $pokerVoteList[0];
-$highVote = $pokerVoteList[count($pokerVoteList)-1];
+$lowVote = (isset($pokerVoteList[0]))?$pokerVoteList[0]:1;
+    $highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[count($pokerVoteList)-1]:1;
 if(!$pokerVote->id and !$pokerItem->value){
 	echo '<table style="width: 100%;">';
 	echo '<tr>';
