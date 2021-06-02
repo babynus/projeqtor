@@ -234,8 +234,9 @@ CREATE TABLE `${prefix}pokercomplexity` (
   `name` varchar(100) DEFAULT NULL,
   `value` int(2) unsigned DEFAULT NULL COMMENT '2',
   `work` decimal(9,5) unsigned DEFAULT NULL,
+  `sortOrder` int(3) unsigned DEFAULT NULL COMMENT '3',
   `idle` int(1) unsigned DEFAULT 0 COMMENT '1',
-  idleDate
+  `idleDate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
