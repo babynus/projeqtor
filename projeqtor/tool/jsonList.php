@@ -581,6 +581,12 @@ if ($type == 'empty') {
       if (! property_exists ( $critValue, 'result' )) {
         unset ( $list [6] ); // 6 resultChange
       }
+      if(! property_exists ( $critValue, 'idPriority' )){
+        unset ( $list [15] ); // 15 priorityChange
+      }
+      if($critValue!='User'){
+        unset ( $list [16] );// 16 newUserCreated
+      }
       /* 9 anyChange */
     }
   }
