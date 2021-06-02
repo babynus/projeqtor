@@ -516,3 +516,12 @@ INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`,
 ('LocalizationItem', 'item',10,1, 0, 1),
 ('PokerSession', 'live session', 10, 1, 0, 1),
 ('PokerSession', 'session with due date voting', 20, 1, 0, 1);
+
+INSERT INTO `${prefix}eventformail` (`id`, `name`, `idle`, `sortOrder`) VALUES
+(15, 'priorityChanged', 0, 105),
+(16, 'newUserCreated', 0, 110);
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+( 'paramMailTitlePriorityChanged', '[${dbName}] Priority change on ticket #${id}'),
+( 'paramMailTitleNewUserCreated', '[${dbName}] The user #${id} has been created');
+INSERT INTO `${prefix}mailable` (name, `idle`) VALUES 
+('User', 0);

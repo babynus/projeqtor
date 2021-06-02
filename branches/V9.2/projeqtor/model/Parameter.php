@@ -1152,6 +1152,8 @@ class Parameter extends SqlElement {
       	                      'paramMailTitleNoteChange'=>'longtext',
       	                      'paramMailTitleAssignment'=>'longtext',
                               'paramMailTitleAssignmentChange'=>'longtext',
+                              'paramMailTitlePriorityChanged'=>'longtext',
+                              'paramMailTitleNewUserCreated'=>'longtext',
       	                      'paramMailTitleAttachment'=>'longtext',
       	      	              'paramMailTitleDirect'=>'longtext',
       	                      'paramMailTitleUser'=>'longtext',

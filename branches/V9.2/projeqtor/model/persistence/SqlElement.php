@@ -1233,11 +1233,18 @@ abstract class SqlElement {
           $resultChange = true;
         }
       }
+
+      $hasPriorityChanged = false;
+      if (property_exists($this, 'idPriority') and property_exists($old, 'idPriority') and $this->idPriority != $old->idPriority)
+        $hasPriorityChanged = true;
+      $hasUserBeenCreated = false;
+      if (get_class($this) == "User" && $old->id == "")
+        $hasUserBeenCreated = true;
       // if (($statusChanged or $responsibleChanged) and stripos($returnValue,'id="lastOperationStatus" value="OK"')>0 ) {
       
       if (stripos ( $returnValue, 'id="lastOperationStatus" value="OK"' ) > 0 and ! property_exists($this,'_noHistory')
       and ! SqlElement::is_a($this, 'PlanningElement')) {
-        $mailResult = $this->sendMailIfMailable ( $newItem, $statusChanged, false, $responsibleChanged, false, false, false, $descriptionChange, $resultChange, false, false, true,false,false );
+        $mailResult = $this->sendMailIfMailable ( $newItem, $statusChanged, false, $responsibleChanged, false, false, false, $descriptionChange, $resultChange, false, false, true,false,false, false, false, false, $hasPriorityChanged, $hasUserBeenCreated);
         if ($mailResult) {
           $returnValue = str_replace ( '${mailMsg}', ' - ' . Mail::getResultMessage($mailResult), $returnValue );
         } else {
@@ -5294,7 +5301,7 @@ abstract class SqlElement {
    *          void
    * @return status of mail, if sent
    */
-  public function sendMailIfMailable($newItem = false, $statusChange = false, $directStatusMail = null, $responsibleChange = false, $noteAdd = false, $attachmentAdd = false, $noteChange = false, $descriptionChange = false, $resultChange = false, $assignmentAdd = false, $assignmentChange = false, $anyChange = false,$affectationAdd = false , $affectationChange = false, $linkAdd = false, $linkDelete = false, $attachments=false) {
+  public function sendMailIfMailable($newItem = false, $statusChange = false, $directStatusMail = null, $responsibleChange = false, $noteAdd = false, $attachmentAdd = false, $noteChange = false, $descriptionChange = false, $resultChange = false, $assignmentAdd = false, $assignmentChange = false, $anyChange = false,$affectationAdd = false , $affectationChange = false, $linkAdd = false, $linkDelete = false, $attachments=false, $priorityChange = false, $newUserCreated = false) {
     global $cronnedScript, $doNotTriggerAlerts;
     if ($doNotTriggerAlerts==true) return false;
     
@@ -5316,7 +5323,7 @@ abstract class SqlElement {
     $statusMailListOrganized=array();
     $statusMail = new StatusMail ();
     $sender = Parameter::getGlobalParameter ( 'paramMailSender' );
-    
+
     if ($directStatusMail) { // Direct Send Mail
       $statusMailList = array($directStatusMail->id => $directStatusMail);
       $statusMailListOrganized=$statusMailList;
@@ -5375,6 +5382,15 @@ abstract class SqlElement {
       }
       if ($linkDelete) {
         $crit .= " or idEventForMail=13 ";
+      }
+      if ($statusChange) {
+        $crit .= " or idEventForMail=14 ";
+      }
+      if ($priorityChange) {
+        $crit .= " or idEventForMail=15 ";
+      }
+      if ($newUserCreated) {
+        $crit .= " or idEventForMail=16 ";
       }
       $crit .= ")";
       $statusMailList = $statusMail->getSqlElementsFromCriteria ( null, false, $crit );
@@ -5631,12 +5647,15 @@ abstract class SqlElement {
       else 
         $destTab[$emailTemplateTab[$i]->id] = str_replace('###', '', $destTab[$emailTemplateTab[$i]->id]);
     }
+
     if ($j <= $msgWithoutDest)   {
       traceLog('sendMailIfMailable : Mails without dest');
       return false;         // exit because no adresses
     }
     //    END modif gmartin Ticket #157
-    if ($newItem) {
+    if ($newUserCreated) {
+      $paramMailTitle = Parameter::getGlobalParameter ( 'paramMailTitleNewUserCreated' );
+    } else if ($newItem) {
       $paramMailTitle = Parameter::getGlobalParameter ( 'paramMailTitleNew' );
     } else if ($noteAdd) {
       $paramMailTitle = Parameter::getGlobalParameter ( 'paramMailTitleNote' );
@@ -5652,6 +5671,8 @@ abstract class SqlElement {
       $paramMailTitle = Parameter::getGlobalParameter ( 'paramMailTitleStatus' );
     } else if ($responsibleChange) {
       $paramMailTitle = Parameter::getGlobalParameter ( 'paramMailTitleResponsible' );
+    } else if ($priorityChange) {
+      $paramMailTitle = Parameter::getGlobalParameter('paramMailTitlePriorityChanged');
     } else if ($descriptionChange) {
       $paramMailTitle = Parameter::getGlobalParameter ( 'paramMailTitleDescription' );
     } else if ($resultChange) {
@@ -6341,6 +6362,7 @@ public function drawMailDetailCol($colArray, &$msg){
   		if (strpos ( $this->getFieldAttributes ( $col ), 'invisible' ) !== false) {
   			$specificStyle .= ' visibility:hidden';
   		}
+  		
   		if (is_object ( $val )) {
   			if (get_class ( $val ) == 'Origin') {
   				if ($val->originType and $val->originId) {

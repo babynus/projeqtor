@@ -391,7 +391,6 @@
         <script type="dojo/connect" event="onClick" args="evt">
            <?php 
            $getYesNo=Parameter::getGlobalParameter('getVersion');
-           debugLog($getYesNo);
            if ($getYesNo=='NO' ) {
              echo  "getLastNew();";
            }else{
