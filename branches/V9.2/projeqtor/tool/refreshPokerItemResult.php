@@ -35,24 +35,26 @@ $list = RequestHandler::getValue('itemList');
 $itemList=explode(',',$list);
 $user = getSessionUser();
 
+$pokerComplexity = new PokerComplexity();
+$pokerComplexityList = $pokerComplexity->getSqlElementsFromCriteria(array('idle'=>'0'), null, null, "sortOrder ASC");
 $pokerItem = new PokerItem($id);
 $pokerMember = new PokerResource();
+$pokerMember = $pokerMember->getSingleSqlElementFromCriteria('PokerResource', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id));
 $pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSession'=>$idPokerSession));
 $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
 $pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$idPokerSession, 'idPokerItem'=>$pokerItem->id), 'value');
 sort($pokerVoteList);
 $lowVote = (isset($pokerVoteList[0]))?$pokerVoteList[0]:1;
-    $highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[count($pokerVoteList)-1]:1;
-if(!$pokerVote->id and !$pokerItem->value){
-	echo '<table style="width: 100%;">';
+$highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[count($pokerVoteList)-1]:99;
+if(!$pokerVote->id and !$pokerItem->value and $pokerMember->id){
+	echo '<table>';
 	echo '<tr>';
 	echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'previous\');"><div class="dijitButtonIcon dijitButtonIconPrevious"></div></td>';
 	echo '<td><table style="width: 100%;" class="pokerComplexityTable"><tr><td>';
 	echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.i18n('colMyVote').'</td></tr>';
-	$pokerComplexityList = array(1,2,3,4,5,6,7,8,9,'?');
 	foreach ($pokerComplexityList as $pokerComplexity){
 		echo '<tr>';
-		echo '<td class="pokerComplexity" style="width:50%;height:15px;text-align:center;cursor:pointer;" onclick="voteToPokerItem('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity.');">'.$pokerComplexity.'</td>';
+		echo '<td class="pokerComplexity" style="width:50%;height:15px;text-align:center;cursor:pointer;" onclick="voteToPokerItem('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');">'.$pokerComplexity->name.'</td>';
 		echo '</tr>';
 	}
 	echo '</td></tr></table></td>';
@@ -69,10 +71,17 @@ if(!$pokerVote->id and !$pokerItem->value){
 		$count++;
 		echo '<td><table style="width:200px;margin-right: 10px;">';
 		echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.htmlEncode(SqlList::getNameFromId("Resource", $member->idResource)).'</td></tr>';
-		$pokerComplexityList = array(1,2,3,4,5,6,7,8,9,'?');
 		foreach ($pokerComplexityList as $pokerComplexity){
+            $class = 'pokerComplexityResult';
+            if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $lowVote){
+            	$class = 'pokerComplexitySelectedLow';
+            }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $highVote){
+            	$class = 'pokerComplexitySelectedHigh';
+            }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $pokerItem->value){
+            	$class = 'pokerComplexitySelectedValue';
+            }
 			echo '<tr>';
-			echo '<td class="pokerComplexityResult" style="width:50%;height:15px;text-align:center;" onclick="voteToPokerItem('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity.');">'.$pokerComplexity.'</td>';
+			echo '<td class="'.$class.'" style="width:50%;height:15px;text-align:center;" onclick="voteToPokerItem('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');">'.$pokerComplexity->name.'</td>';
 			echo '</tr>';
 		}
 		echo '</table>';
