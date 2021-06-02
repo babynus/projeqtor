@@ -222,8 +222,8 @@ class SubTask extends SqlElement {
                                     .' onClick="showImage(\'Attachment\',\''.htmlEncode($attachment->id).'\',\''.htmlEncode($attachment->fileName, 'protectQuotes').'\');" />';
                               echo '</div>';
                             }else{
-                              echo '<div style="float:left;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$refType.','.$refId.','.$idResource.'\';">';
-                              echo htmlGetMimeType($attachment->mimeType, $attachment->fileName, $attachment->id);
+                              echo '<div style="float:left;top:3px;position:relative;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$refType.','.$refId.','.$idResource.'\';">';
+                              echo htmlGetMimeType($attachment->mimeType, $attachment->fileName, $attachment->id,'Attachment',null,28);
                               echo '</div>';
                             }
                           }
