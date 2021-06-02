@@ -235,6 +235,7 @@ CREATE TABLE `${prefix}pokercomplexity` (
   `value` int(2) unsigned DEFAULT NULL COMMENT '2',
   `work` decimal(9,5) unsigned DEFAULT NULL,
   `idle` int(1) unsigned DEFAULT 0 COMMENT '1',
+  idleDate
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -292,17 +293,20 @@ CREATE TABLE `${prefix}pokervote` (
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (259, 'menuPokerSessionDefinition', 7, 'object', 155, Null, 0, 'Work '),
 (260, 'menuPokerSession', 7, 'object', 160, Null, 0, 'Work '),
-(268, 'menuPokerSessionType', 79, 'object', 981, 'ReadWriteType', 0, 'Type');
+(268, 'menuPokerSessionType', 79, 'object', 981, 'ReadWriteType', 0, 'Type'),
+(269, 'menuPokerComplexity',36,'object', 900,'ReadWriteList',0,'ListOfValues');
 
 INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
 (339,'menuPokerSessionDefinition',3,259,115,0),
 (340,'menuPokerSession',3,260,120,0),
-(351,'menuPokerSessionType',132,268,45,0);
+(351,'menuPokerSessionType',132,268,45,0),
+(352,'menuPokerComplexity',131,269,70,0);
 
 INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(198,9,259,0,1)
-(199,9,260,0,1)
-(200,9,268,0,1);
+(198,9,259,0,1),
+(199,9,260,0,1),
+(200,9,268,0,1),
+(201,9,269,0,1);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1, 259, 1),
@@ -312,8 +316,11 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (2, 260, 1),
 (3, 260, 1),
 (1, 268, 1),
-(2, 268, 0),
-(3, 268, 0);
+(2, 268, 1),
+(3, 268, 1),
+(1, 269, 1),
+(2, 269, 1),
+(3, 269, 1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1, 259, 8),
@@ -325,7 +332,13 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (4, 260, 1),
 (6, 260, 9),
 (7, 260, 9),
-(5, 260, 9);
+(5, 260, 9),
+(1, 268, 8),
+(2, 268, 2),
+(3, 268, 7),
+(1, 269, 8),
+(2, 269, 2),
+(3, 269, 7);
 
 ALTER TABLE `${prefix}workunit` ADD COLUMN `idle` int(1) unsigned DEFAULT 0 COMMENT '1';
 

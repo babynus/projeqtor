@@ -30,13 +30,27 @@
 require_once('_securityCheck.php');
 class PokerComplexity extends SqlElement {
 
+  public $_sec_description;
   public $id;    
   public $name;
   public $value;
   public $work;
   public $idle;
+  public $idleDate;
   
-  private static $_fieldsAttributes=array();
+  private static $_layout='
+    <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
+    <th field="name" width="50%">${name}</th>
+    <th field="value" width="40%">${value}</th>
+    <th field="work" width="20%">${work}</th>
+    <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
+    ';
+  
+  private static $_fieldsAttributes=array(
+      "name"=>"required",
+      "value"=>"required",
+      "idle"=>"nobr"
+  );
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -64,6 +78,10 @@ class PokerComplexity extends SqlElement {
    */
   protected function getStaticFieldsAttributes() {
     return self::$_fieldsAttributes;
+  }
+  
+  protected function getStaticLayout() {
+  	return self::$_layout;
   }
   
   public function save() {
