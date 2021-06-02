@@ -35,14 +35,15 @@ class PokerComplexity extends SqlElement {
   public $name;
   public $value;
   public $work;
+  public $sortOrder=0;
   public $idle;
   public $idleDate;
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
     <th field="name" width="50%">${name}</th>
-    <th field="value" width="40%">${value}</th>
-    <th field="work" width="20%">${work}</th>
+    <th field="value" formatter="numericFormatter" width="25%">${value}</th>
+    <th field="sortOrder" width="10%">${sortOrderShort}</th>
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
   
