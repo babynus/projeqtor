@@ -92,11 +92,6 @@ class PokerSessionDefinition extends PokerSessionMain {
   	return $paramDbPrefix . self::$_databaseTableName;
   }
   
-  public function save() {
-      $result = parent::save();         
-      return $result;
-  }
-  
   public function drawSpecificItem($item) {
     global $print;
     $canUpdate=securityGetAccessRightYesNo('menuPokerSessionDefinition', 'update', $this) == "YES";
@@ -109,7 +104,6 @@ class PokerSessionDefinition extends PokerSessionMain {
     	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
     	$result .= '<button id="startPokerSession" dojoType="dijit.form.Button" showlabel="true"';
     	$result .= ' title="' . $name . '" class="roundedVisibleButton">';
-    	$result .= '<span>' . $name. '</span>';
     	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
     	$result .= '   if (checkFormChangeInProgress()) {return false;}';
         if(!$this->handled){

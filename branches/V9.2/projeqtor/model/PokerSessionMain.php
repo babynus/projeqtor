@@ -143,8 +143,49 @@ class PokerSessionMain extends SqlElement {
   }
   
   public function save() {
-      $result = parent::save();         
+    $result = null;
+    $old = $this->getOld (false);
+	$oldResource = $old->idResource;
+	
+    $result = parent::save ();
+    if (! strpos ( $result, 'id="lastOperationStatus" value="OK"' )) {
       return $result;
+    }
+	
+    if((Parameter::getGlobalParameter('autoSetAssignmentByResponsible')=="YES" and !SqlElement::isCopyInProgress()  and !$this->PokerSessionPlanningElement->isManualProgress) or RequestHandler::isCodeSet('selectedResource')){
+    	$proj=new Project($this->idProject,true);
+    	$type=new Type($proj->idProjectType);
+    	$resource=$this->idResource;
+    	if ($type->code!='ADM' and $resource and trim ( $resource ) != '' and ! trim ( $oldResource ) and stripos ( $result, 'id="lastOperationStatus" value="OK"' ) > 0) {
+    		// Add assignment for responsible
+    		$habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', array(
+    				'idProfile' => getSessionUser ()->getProfile ( $this->idProject ),
+    				'scope' => 'assignmentEdit') );
+    		if ($habil and $habil->rightAccess == 1) {
+    			$ass = new Assignment ();
+    			$crit = array('idResource' => $resource, 'refType' => 'PokerSession', 'refId' => $this->id);
+    			$cpt=$ass->countSqlElementsFromCriteria($crit);
+    			if ($cpt == 0) {
+    				$ass->idProject = $this->idProject;
+    				$ass->refType = 'PokerSession';
+    				$ass->refId = $this->id;
+    				$ass->idResource = $resource;
+    				$ass->assignedWork = 0;
+    				$ass->realWork = 0;
+    				$ass->leftWork = 0;
+    				$ass->plannedWork = 0;
+    				$ass->notPlannedWork = 0;
+    				$ass->rate = '100';
+    				if ($this->PokerSessionPlanningElement->validatedWork and $this->PokerSessionPlanningElement->validatedWork>$this->PokerSessionPlanningElement->assignedWork) {
+    					$ass->assignedWork=$this->PokerSessionPlanningElement->validatedWork-$this->PokerSessionPlanningElement->assignedWork;
+    					$ass->leftWork=$ass->assignedWork;
+    				}
+    				$ass->save ();
+    			}
+    		}
+    	}
+    }
+    return $result;
   }
   
   public function drawSpecificItem($item) {
