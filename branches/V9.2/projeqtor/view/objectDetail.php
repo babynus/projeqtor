@@ -9887,10 +9887,18 @@ function drawPokerVote($obj){
   if($idPokerItem)$pokerItem = new PokerItem($idPokerItem);
   $pokerComplexity = new PokerComplexity();
   $pokerComplexityList = $pokerComplexity->getSqlElementsFromCriteria(array('idle'=>'0'), null, null, "sortOrder ASC");
+  
+  $pos = array_search($pokerItem->id, $itemList);
+  if($pos < 0)$pos=0;
+  $previous = ($pos>0)?true:false;
+  $lenght = count($itemList)-1;
+  if($lenght < 0)$lenght=0;
+  $next = ($pos<$lenght)?true:false;
+  
   if($pokerItem->id){
     echo '<div id="pokerVoteDiv" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;">';
-    echo '<table><tr><td>';
-    echo '<div><table style="width: 50%;"><tr>';
+    echo '<table style="width: 100%;"><tr><td>';
+    echo '<div id="pokerVoteDescription" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;"><table><tr>';
     echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;">'.i18n('colType').'</td>';
     echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.$pokerItem->refType.' #'.$pokerItem->refId.'</td>';
     echo '</tr><tr><td><br></td></tr><tr>';
@@ -9917,8 +9925,12 @@ function drawPokerVote($obj){
     if(!$pokerVote->id and !$pokerItem->value and $pokerMember->id and !$obj->done){
       echo '<table>';
       echo '<tr>';
-      echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');"><div class="dijitButtonIcon dijitButtonIconPrevious"></div></td>';
-      echo '<td><table style="width: 100%;" class="pokerComplexityTable"><tr><td>';
+      echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+      if($previous){
+        echo '<div class="dijitButtonIcon dijitButtonIconPrevious" style="cursor:pointer;" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');"></div>';
+      }
+      echo '</td>';
+      echo '<td><table style="width:200px;margin-right: 5px;margin-left: 5px;" class="pokerComplexityTable"><tr><td>';
       echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.i18n('colMyVote').'</td></tr>';
       foreach ($pokerComplexityList as $pokerComplexity){
         echo '<tr>';
@@ -9926,18 +9938,26 @@ function drawPokerVote($obj){
         echo '</tr>';
       }
       echo '</td></tr></table></td>';
-      echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');"><div class="dijitButtonIcon dijitButtonIconNext"></div></td>';
+      echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+      if($next){
+        echo '<div class="dijitButtonIcon dijitButtonIconNext" style="cursor:pointer" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');"></div>';
+      }
+      echo '</td>';
       echo '</tr>';
     }else{
-      echo '<table style="width: 50%;">';
+      echo '<table>';
       echo '<tr>';
-      echo '<td align="center" class="imageColorNewGui" style="cursor:pointer;padding-right: 10px;" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');"><div class="dijitButtonIcon dijitButtonIconPrevious"></div></td>';
+      echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+      if($previous){
+        echo '<div class="dijitButtonIcon dijitButtonIconPrevious" style="cursor:pointer;" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');"></div>';
+      }
+      echo '</td>';
       echo '<td><table><tr>';
       $count = 0;
       foreach ($pokerMemberList as $member){
         $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$obj->id, 'idResource'=>$member->idResource, 'idPokerItem'=>$pokerItem->id));
         $count++;
-        echo '<td><table style="width:200px;margin-right: 10px;">';
+        echo '<td><table style="width:200px;margin-right: 5px;margin-left: 5px;">';
         echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.htmlEncode(SqlList::getNameFromId("Resource", $member->idResource)).'</td></tr>';
         foreach ($pokerComplexityList as $pokerComplexity){
             $class = 'pokerComplexityResult';
@@ -9959,7 +9979,11 @@ function drawPokerVote($obj){
         }
       }
       echo '</table></td>';
-      echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');"><div class="dijitButtonIcon dijitButtonIconNext"></div></td>';
+      echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+      if($next){
+        echo '<div class="dijitButtonIcon dijitButtonIconNext" style="cursor:pointer" onclick="pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');"></div>';
+      }
+      echo '</td>';
     }
     echo '</table>';
     echo '</div>';
@@ -10001,8 +10025,9 @@ function drawPokerItem($obj, $scope){
     	}
     }
     echo '</td>';
-    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($item->name).' #'.htmlEncode($item->id).'</td>';
-    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($item->refType).' #'.htmlEncode($item->refId).'</td>';
+    $refObj = new $item->refType($item->refId);
+    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($item->name).' #'.htmlEncode($item->id).' '.formatCommentThumb($item->comment).'</td>';
+    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($refObj->name).' #'.htmlEncode($refObj->id).'</td>';
     echo '<td class="noteData" style="width:30%; text-align: center;height:22px;">'.htmlEncode($item->value).'</td>';
     echo '<td style="">';
     if(!$item->isOpen and $scope=="Session" and !$obj->done){
