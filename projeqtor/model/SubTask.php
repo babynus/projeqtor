@@ -205,24 +205,24 @@ class SubTask extends SqlElement {
   			                iconClass="iconAttachFiles" 
   			                onError="dojo.style(dojo.byId(\'downloadProgress\'), {display:\'none\'});" 
   			                style="display:inline-block;" label="">';		 
-    			   echo '  <script type="dojo/connect" event="onComplete" args="dataArray">  refreshSubTaskAttachment("'.$refType.'",'.$refId.','.$idResource.');saveAttachmentAck(dataArray); </script>';
+    			   echo '  <script type="dojo/connect" event="onComplete" args="dataArray">  refreshSubTaskAttachment('.$subTask->id.');saveAttachmentAck(dataArray); </script>';
     			   echo '  <script type="dojo/connect" event="onProgress" args="data"> saveAttachmentProgress(data); </script>';
     	           echo '  <script type="dojo/connect" event="onError" args="data"> hideWait();showError(i18n("uploadUncomplete")); </script>';
                 echo '</div> ';
                 echo '</a>';
               }
             echo    '</td></tr><tr><td>';
-              echo    '<div id="divAttachement_'.$subTask->id.'" style="width:90%;margin:0% 5%;" >';
+              echo    '<div id="divAttachement_'.$subTask->id.'" style="width:90%;margin:0% 5%;" dojotype="dijit.layout.ContentPane">';
                         $allAttach=$attach->getSqlElementsFromCriteria(array("refType"=>get_class($subTask),"refId"=>$subTask->id),null);
                         if(!empty($allAttach)){
                           foreach ($allAttach as $attachment){
                             if ($attachment->isThumbable()) {
-                              echo '<div style="float:left;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$refType.','.$refId.','.$idResource.'\';">';
+                              echo '<div style="float:left;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$subTask->id.'\';">';
                               echo '<img src="'.getImageThumb($attachment->getFullPathFileName(), 32).'" '.' title="'.htmlEncode($attachment->fileName).'" style="float:left;cursor:pointer;margin-left: 5px;margin-right: 5px;" '
                                     .' onClick="showImage(\'Attachment\',\''.htmlEncode($attachment->id).'\',\''.htmlEncode($attachment->fileName, 'protectQuotes').'\');" />';
                               echo '</div>';
                             }else{
-                              echo '<div style="float:left;top:3px;position:relative;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$refType.','.$refId.','.$idResource.'\';">';
+                              echo '<div style="float:left;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$subTask->id.'\';">';
                               echo htmlGetMimeType($attachment->mimeType, $attachment->fileName, $attachment->id,'Attachment',null,28);
                               echo '</div>';
                             }
@@ -550,8 +550,6 @@ class SubTask extends SqlElement {
         echo '    </td>';
         echo '   </tr>';
         echo '</table>';
-      }else{
-        //echo '<div id="targeDopForSubTask" ondragover="console.log(\'survole\');" style="border: 5px solid red;width: 100%;height: 100%;top: 0px;position: absolute;z-index:-10;"></div>';
       }
     }else{
       echo '<table style="width:95%; margin-bottom:10px;">';

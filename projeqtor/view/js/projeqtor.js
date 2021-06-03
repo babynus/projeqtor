@@ -8402,7 +8402,7 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
     
     dijit.byId(id+'_attachmentFile').set('class','directAttachment detailButton divAttachSubTask');
     dojo.connect(newButtonAttach,'onBegin' , function(value){hideResultDivs();saveAttachment(true,id+'_attachmentFile');});
-    dojo.connect(newButtonAttach,'onComplete' , function(dataArray){saveAttachmentAck(dataArray);refreshSubTaskAttachment(refType,refId,resourceFilter);});
+    dojo.connect(newButtonAttach,'onComplete' , function(dataArray){saveAttachmentAck(dataArray);refreshSubTaskAttachment(id);});
     dojo.connect(newButtonAttach,'onProgress' , function(data){saveAttachmentProgress(data);});
     dojo.connect(newButtonAttach,'onError' , function(value){dojo.style(dojo.byId('downloadProgress'), {display:'none'});hideWait();showError(i18n("uploadUncomplete"));});
     var raw=imgGrab.parentNode.parentNode;
