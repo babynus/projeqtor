@@ -33,21 +33,28 @@ require_once "../tool/formatter.php";
 scriptLog('   ->/view/refreshSubTaskAttachmentDiv.php'); 
 
 
-$refType=(RequestHandler::isCodeSet('refType'))?RequestHandler::getClass('refType'):null;
-$refId=(RequestHandler::isCodeSet('refId'))?RequestHandler::getId('refId'):null;
-$idResource=(RequestHandler::isCodeSet('idResource'))?RequestHandler::getValue('idResource'):null;
-$view=(RequestHandler::isCodeSet('view'))?RequestHandler::getValue('view'):false;
-if(!$view){
-  traceHack("refreshSubTask.php called illegally ");
-  exit;
-}else{
-  if($view=='Global')$view=true;
-  else $view=false;
+$idSubTask=(RequestHandler::isCodeSet('idSubTask'))?RequestHandler::getId('idSubTask'):null;
+
+if(!$idSubTask){
+    traceHack("refreshSubTask.php called illegally ");
+    exit;
 }
-$obj= new $refType($refId);
-$rightUpdate=securityGetAccessRightYesNo('menu'.get_class($obj),'update',$obj);
-$rightRead=securityGetAccessRightYesNo('menu'.get_class($obj),'read',$obj);
+$attach= new Attachment();
+$subTask= new SubTask($idSubTask);
 
-      SubTask::drawSubtasksForObject($obj,$refType, $refId,$rightUpdate,$rightRead,true,$idResource,$view);
-
+$allAttach=$attach->getSqlElementsFromCriteria(array("refType"=>get_class($subTask),"refId"=>$subTask->id),null);
+if(!empty($allAttach)){
+  foreach ($allAttach as $attachment){
+    if ($attachment->isThumbable()) {
+      echo '<div style="float:left;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$idSubTask.'\';">';
+      echo '<img src="'.getImageThumb($attachment->getFullPathFileName(), 32).'" '.' title="'.htmlEncode($attachment->fileName).'" style="float:left;cursor:pointer;margin-left: 5px;margin-right: 5px;" '
+          .' onClick="showImage(\'Attachment\',\''.htmlEncode($attachment->id).'\',\''.htmlEncode($attachment->fileName, 'protectQuotes').'\');" />';
+      echo '</div>';
+    }else{
+      echo '<div style="float:left;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$idSubTask.'\';">';
+      echo htmlGetMimeType($attachment->mimeType, $attachment->fileName, $attachment->id,'Attachment',null,28);
+      echo '</div>';
+    }
+  }
+}
 ?>
