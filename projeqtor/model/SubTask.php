@@ -252,10 +252,7 @@ class SubTask extends SqlElement {
           echo      '</select>';
           echo    '</td>';
           echo    '<td   style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;">';
-                    if($onlyHisSubTask){
-                      $rightUpdate='YES';
-                    }
-                    $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId,$gloablView,$rightUpdate,$rightRead);
+                    $subTask->drawStatusSubTask($subTask->id,$subTask->done,$subTask->idle,$subTask->handled,$refType,$refId,$gloablView,$rightUpdate,$rightRead,$onlyHisSubTask,$subTask->idResource);
           echo    '</td>';
           echo  '</tr>';
           $lastSortRegist=$subTask->sortOrder;
@@ -319,7 +316,7 @@ class SubTask extends SqlElement {
       echo      '</select>';
       echo    '</td>';
       echo    '<td  style="white-space:nowrap;text-align: center;border: 1px solid #AAAAAA;" >';
-                 $subTask->drawStatusSubTask('0','0','0','0',$refType,$refId,$gloablView,$rightUpdate,$rightRead);
+                 $subTask->drawStatusSubTask('0','0','0','0',$refType,$refId,$gloablView,$rightUpdate,$rightRead,false);
       echo    '</td>';
       echo  '</tr>';
     }
@@ -335,8 +332,8 @@ class SubTask extends SqlElement {
     }
   }
   
-  function drawStatusSubTask($id, $done, $idle, $handled,$refType,$refId,$gloablView,$rightUpdate,$rightRead){
-
+  function drawStatusSubTask($id, $done, $idle, $handled,$refType,$refId,$gloablView,$rightUpdate,$rightRead,$onlyHisSubTask,$res=false){
+    global $user;
     $pos=1;
     $backgroundColor="";
     if($handled==1){
@@ -349,7 +346,9 @@ class SubTask extends SqlElement {
       $pos=4;
       $backgroundColor="background-color:#B7B3A9;";
     }
-    
+    if($onlyHisSubTask or ($res and $user->id==$res and $rightUpdate!='YES' ) ){
+      $rightUpdate='YES';
+    }
     
     echo '<div id="'.$refType.'_'.$refId.'_slidContainer_'.$id.'" >';
     echo '<table style="width:100%;height:100%;">';
