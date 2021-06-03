@@ -303,6 +303,24 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (351,'menuPokerSessionType',132,268,45,0),
 (352,'menuPokerComplexity',131,269,70,0);
 
+INSERT INTO `${prefix}pokercomplexity` (`name`, `value`, `work`,`sortOrder`) VALUES
+('1', 1, 0.5, 10),
+('2', 2, 1, 20),
+('3', 3, 1.5, 30),
+('4', 4, 2, 40),
+('5', 5, 2.5, 50),
+('8', 8, 4, 60),
+('13', 13, 6.5, 70),
+('20', 20, 10, 80),
+('40', 40, 20, 90),
+('100', 100, 50, 100),
+('?', 0, 0, 110);
+
+INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`, `lockHandled`, `lockDone`, `lockIdle`) VALUES 
+('PokerSession', 'live session', 10, 1, 0, 1, 1, 1),
+('PokerSession', 'session with due date voting', 20, 1, 0, 1, 1, 1);
+ 
+
 INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (198,9,259,0,1),
 (199,9,260,0,1),
@@ -513,9 +531,7 @@ INSERT INTO `${prefix}languageskilllevel` (`id`,`name`,`color`,`sortOrder`,`idle
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`, `idStatus`) VALUES 
 ('LocalizationRequest', 'standard translation',10,1, 0, 1),
 ('LocalizationRequest', 'urgent translation',20,1, 0, 1),
-('LocalizationItem', 'item',10,1, 0, 1),
-('PokerSession', 'live session', 10, 1, 0, 1),
-('PokerSession', 'session with due date voting', 20, 1, 0, 1);
+('LocalizationItem', 'item',10,1, 0, 1);
 
 INSERT INTO `${prefix}eventformail` (`id`, `name`, `idle`, `sortOrder`) VALUES
 (15, 'priorityChanged', 0, 105),

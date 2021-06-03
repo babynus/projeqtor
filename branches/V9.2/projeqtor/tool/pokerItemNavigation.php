@@ -29,22 +29,29 @@
  */
 require_once "../tool/projeqtor.php"; 
 $result="";
-$id=RequestHandler::getId('idItem');
+$idItem=RequestHandler::getId('idItem');
 $idPokerSession=RequestHandler::getId('idPokerSession');
 $list = RequestHandler::getValue('itemList');
 $itemList=explode(',',$list);
 $nav=RequestHandler::getValue('nav');
 $user = getSessionUser();
 
-$pos = array_search($id, $itemList);
+$pos = array_search($idItem, $itemList);
 if($pos < 0)$pos=0;
 $lenght = count($itemList)-1;
 if($lenght < 0)$lenght=0;
 if($nav == 'next'){
-  $idItem = (isset($itemList[$pos+1]))?$itemList[$pos+1]:$itemList[0];
-}else{
-  $idItem = (isset($itemList[$pos-1]))?$itemList[$pos-1]:$itemList[$lenght];
+  $idItem = (isset($itemList[$pos+1]))?$itemList[$pos+1]:$itemList[$lenght];
+}else if($nav == 'previous'){
+  $idItem = (isset($itemList[$pos-1]))?$itemList[$pos-1]:itemList[0];
 }
+$pos = array_search($idItem, $itemList);
+if($pos < 0)$pos=0;
+$previous = ($pos>0)?true:false;
+$lenght = count($itemList)-1;
+if($lenght < 0)$lenght=0;
+$next = ($pos<$lenght)?true:false;
+
 $pokerComplexity = new PokerComplexity();
 $pokerComplexityList = $pokerComplexity->getSqlElementsFromCriteria(array('idle'=>'0'), null, null, "sortOrder ASC");
 $pokerItem = new PokerItem($idItem);
@@ -56,8 +63,8 @@ $pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$
 sort($pokerVoteList);
 $lowVote = (isset($pokerVoteList[0]))?$pokerVoteList[0]:1;
 $highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[count($pokerVoteList)-1]:99;
-echo '<table><tr><td>';
-echo '<div><table style="width: 50%;"><tr>';
+echo '<table style="width: 100%;"><tr><td>';
+echo '<div id="pokerVoteDescription" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;"><table><tr>';
 echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;">'.i18n('colType').'</td>';
 echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.$pokerItem->refType.' #'.$pokerItem->refId.'</td>';
 echo '</tr><tr><td><br></td></tr><tr>';
@@ -75,8 +82,12 @@ echo '<div id="pokerVoteResult" dojoType="dijit.layout.ContentPane" align="cente
 if(!$pokerVote->id and !$pokerItem->value and $pokerMember->id){
 	echo '<table>';
 	echo '<tr>';
-	echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'previous\');"><div class="dijitButtonIcon dijitButtonIconPrevious"></div></td>';
-	echo '<td><table style="width: 100%;" class="pokerComplexityTable"><tr><td>';
+	echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+    if($previous){
+        echo '<div class="dijitButtonIcon dijitButtonIconPrevious" style="cursor:pointer;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'previous\');"></div>';
+    }
+    echo '</td>';
+	echo '<td><table style="width:200px;margin-right: 5px;margin-left: 5px;" class="pokerComplexityTable"><tr><td>';
 	echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.i18n('colMyVote').'</td></tr>';
 	foreach ($pokerComplexityList as $pokerComplexity){
 		echo '<tr>';
@@ -84,18 +95,26 @@ if(!$pokerVote->id and !$pokerItem->value and $pokerMember->id){
 		echo '</tr>';
 	}
 	echo '</td></tr></table></td>';
-	echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'next\');"><div class="dijitButtonIcon dijitButtonIconNext"></div></td>';
+	echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+    if($next){
+        echo '<div class="dijitButtonIcon dijitButtonIconNext" style="cursor:pointer;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'next\');"></div>';
+    }
+    echo '</td>';
 	echo '</tr>';
 }else{
-	echo '<table style="width: 50%;">';
+	echo '<table>';
 	echo '<tr>';
-	echo '<td align="center" class="imageColorNewGui" style="cursor:pointer;padding-right: 10px;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'previous\');"><div class="dijitButtonIcon dijitButtonIconPrevious"></div></td>';
+	echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+    if($previous){
+        echo '<div class="dijitButtonIcon dijitButtonIconPrevious" style="cursor:pointer;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'previous\');"></div>';
+    }
+    echo '</td>';
 	echo '<td><table><tr>';
 	$count = 0;
 	foreach ($pokerMemberList as $member){
         $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$member->idResource, 'idPokerItem'=>$pokerItem->id));
 		$count++;
-		echo '<td><table style="width:200px;margin-right: 10px;">';
+		echo '<td><table style="width:200px;margin-right: 5px;margin-left: 5px;">';
 		echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.htmlEncode(SqlList::getNameFromId("Resource", $member->idResource)).'</td></tr>';
 		foreach ($pokerComplexityList as $pokerComplexity){
             $class = 'pokerComplexityResult';
@@ -117,7 +136,11 @@ if(!$pokerVote->id and !$pokerItem->value and $pokerMember->id){
 		}
 	}
 	echo '</table></td>';
-	echo '<td align="center" class="imageColorNewGui" style="cursor:pointer" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'next\');"><div class="dijitButtonIcon dijitButtonIconNext"></div></td>';
+	echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+    if($next){
+        echo '<div class="dijitButtonIcon dijitButtonIconNext" style="cursor:pointer;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'next\');"></div>';
+    }
+    echo '</td>';
 }
 echo '</table>';
 echo '</div>';

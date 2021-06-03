@@ -54,7 +54,6 @@ $ref2Id=$_REQUEST['pokerItemRef2Id'];
 
 $comment = RequestHandler::getValue('pokerItemComment');
 $name = RequestHandler::getValue('pokerItemName');
-if(!trim($name))$name=i18n('object');
 $idPokerSession = RequestHandler::getId('idPokerSession');
 
 $pokerItemId=null;
@@ -71,11 +70,12 @@ $pokerItemId=null;
   
   $item=new PokerItem();
   
-  foreach ($arrayId as $ref2Id) {  
+  foreach ($arrayId as $ref2Id) { 
   	$pokerItem=new PokerItem();
   	$pokerItem->refId=$ref2Id;
   	$pokerItem->refType=$ref2Type;
     $pokerItem->comment = $comment;
+    if(!trim($name))$name=$ref2Type;
     $pokerItem->name = $name;
     $pokerItem->idPokerSession = $idPokerSession;
     $res=$pokerItem->save();

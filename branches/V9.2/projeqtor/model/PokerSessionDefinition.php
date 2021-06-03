@@ -97,7 +97,7 @@ class PokerSessionDefinition extends PokerSessionMain {
     $canUpdate=securityGetAccessRightYesNo('menuPokerSessionDefinition', 'update', $this) == "YES";
     $result = "";
     if($item=="startPokerSession"){
-        if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {
+        if ($print or !$canUpdate or !$this->id or $this->idle) {
     		return "";
     	}
     	$name=(!$this->handled)?i18n('pokerSessionStart'):i18n('pokerSessionStop');
@@ -118,7 +118,7 @@ class PokerSessionDefinition extends PokerSessionMain {
     	return $result;
     }
     if($item=="pausePokerSession"){
-    	if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {
+    	if ($print or !$canUpdate or !$this->id or $this->idle or !$this->handled) {
     		return "";
     	}
     	$name=(!$this->handled)?i18n('pokerSessionStartPause'):i18n('pokerSessionStopPause');

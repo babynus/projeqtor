@@ -182,6 +182,10 @@ class PokerSessionMain extends SqlElement {
     					$ass->leftWork=$ass->assignedWork;
     				}
     				$ass->save ();
+    				$pokerM = new PokerResource();
+    				$pokerM->idPokerSession = $this->id;
+    				$pokerM->idResource = $resource;
+    				$pokerM->save();
     			}
     		}
     	}
@@ -194,23 +198,28 @@ class PokerSessionMain extends SqlElement {
     $canUpdate=securityGetAccessRightYesNo('menuPokerSessionDefinition', 'update', $this) == "YES";
     $result = "";
     if($item=="startPokerSession"){
-    	if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {
+        if ($print or !$canUpdate or !$this->id or $this->idle) {
     		return "";
     	}
+    	$name=(!$this->handled)?i18n('pokerSessionStart'):i18n('pokerSessionStop');
     	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
     	$result .= '<button id="startPokerSession" dojoType="dijit.form.Button" showlabel="true"';
-    	$result .= ' title="' . i18n('pokerSessionStop') . '" class="roundedVisibleButton">';
-    	$result .= '<span>' . i18n('pokerSessionStop') . '</span>';
+    	$result .= ' title="' . $name . '" class="roundedVisibleButton">';
+    	$result .= '<span>' . $name. '</span>';
     	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
     	$result .= '   if (checkFormChangeInProgress()) {return false;}';
-    	$result .=  '  stopPokerSession('.$this->id.');';
+        if(!$this->handled){
+          $result .=  '  startPokerSession('.$this->id.');';
+        }else{
+          $result .=  '  stopPokerSession('.$this->id.');';
+        }    	
     	$result .= '</script>';
     	$result .= '</button>';
     	$result .= '</td></tr>';
     	return $result;
     }
     if($item=="pausePokerSession"){
-    	if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {
+    	if ($print or !$canUpdate or !$this->id or $this->idle or !$this->handled) {
     		return "";
     	}
     	$name=(!$this->handled)?i18n('pokerSessionStartPause'):i18n('pokerSessionStopPause');
