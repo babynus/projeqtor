@@ -365,13 +365,15 @@ Many modes are available!
          
         Hidden window are replaced by a gray bar. Click on the gray bar to switch between windows. 
    
-      .. compound:: |horizontalLayout| Horizontal mode - |verticalLayout| vertical layout
+      .. compound:: |horizontalLayout| Horizontal layout - |verticalLayout| vertical layout
    
-        The horizontal mode corresponds to the historical presentation of ProjeQtOr. 
+        You have all the screens of the application in horizontal or vertical mode. 
+        
+        You can uniquely arrange your screens by using the display icon in the :ref:`list box<tools-list>`
+   
+        Horizontal mode shows the list box at the top of the screen and the details box at the bottom.
     
-        List area at the top of the screen and the detail area below.
-    
-        Vertical mode allows you to have the list box on the left of the screen and the details box on the right.
+        Vertical mode shows the list box on the left of the screen and the details box on the right.
          
       .. compound:: |LayoutList| Mode List
    
@@ -893,6 +895,7 @@ Each element is identified with a distinctive icon.
 * Click on |PDF| :ref:`to export the list area to PDF<exportpdf>`
 * Click on |CSV| :ref:`to export the list area to CSV<exportcsv>`
 * Click on |MultipleUpdate| :ref:`to open the multiple update<multipleupdate>`
+* Click on |verticalLayout| :ref:`to display this screen vertically or horizontally only<menu-display>`
 
 Swith the button clos to make appear all the handled element
 

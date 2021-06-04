@@ -424,7 +424,21 @@ The workload saved in this window will be displayed to the :ref:`planned interve
 
    * Save this data with the save button
    
-  
+
+.. _activity-on-real-time: 
+
+Activity on real time
+=====================
+
+When you check the activity option at the time spent on an activity then several fields will no longer be accessible and a recalculation of the load will be carried out:
+
+* Recalculation of the rated load = revised load when modifying the remainder to be done
+
+* Recalculation of the remainder to be done = rated load - actual load when changing the assigned load. This is the existing operation in all cases
+
+* Prohibition to modify the assigned load to a value lower than the actual load. You will then have a blocking message
+
+
 
 .. _treatmentsection: 
 
@@ -953,6 +967,11 @@ Steering section Activity
    
    
    
+   
+.. rubric:: Advancement
+
+You can monitor the effectiveness of the progress of your project based on the data entered upstream on the validated dates.   
+   
 .. _progress-section-planning-mode:
 
 .. rubric:: Planning mode
@@ -985,6 +1004,30 @@ Fix planning will avoid the recalculation of planning for an activity.
 To fix the project see: :ref:`treatmentsection`
 
 
+.. rubric:: Paused
+ 
+When an activity is paused, it is never recalculated.
+
+Unlike **fix the planning**, the current schedule for the project is purged. 
+
+This amounts to postponing the activity to an undetermined date. 
+
+When this option is checked, the option **fix the planning** is automatically checked.
+  
+
+.. rubric:: Activity on real time
+ 
+When you check the option ** activity at time spent ** then the validated load becomes read-only and the calculation of the validated load equals the revised load.
+
+The option can be disabled manually even if it has been set to the activity type.
+
+The option is incompatible with activities managed by "Work Units" (turnover module). The field will then not be visible and the "Unit of work", "complexity" and "quantity" fields will be hidden if the "activity over time" option is activated.
+
+It will therefore be necessary to deactivate the option to make these fields reappear.
+
+See: :ref:`Planning Activity<ticket-planning-activity>`
+
+
 .. _progress-section-ticket:
 
 .. rubric:: Ticket
@@ -1004,15 +1047,25 @@ Allows tracking of tickets attached to the activity throught the "planning activ
    The Left field will be highlighted when the sum of remaining work on the tickets is higher than the remaining planned work on the activity.
 
 
-.. rubric:: Show tickets attached
+ .. compound:: Show tickets attached
 
-* Click on |View| to show ticket list attached to the activity.
-* Click on a ticket name to directly move to it.
-
-.. figure:: /images/GUI/COMMON_BOX_ListOfTicket.png
-   :alt: Dialog box - List of tickets 
+   * Click on |View| to show ticket list attached to the activity.
+   * Click on a ticket name to directly move to it.
    
-   List of tickets
+   .. figure:: /images/GUI/COMMON_BOX_ListOfTicket.png
+      :alt: Dialog box - List of tickets 
+      
+      List of tickets
+   
+
+.. rubric:: Planning activity
+ 
+Planning activity field allows to link the ticket with a planning activity
+
+See: :ref:`Planning Activity<ticket-planning-activity>`
+
+
+   
    
 .. _margin:
 
