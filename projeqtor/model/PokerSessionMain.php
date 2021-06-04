@@ -148,6 +148,24 @@ class PokerSessionMain extends SqlElement {
     $old = $this->getOld (false);
 	$oldResource = $old->idResource;
 	
+	if (! $this->name) {
+		$this->name=SqlList::getNameFromId('PokerSessionType',$this->idPokerSessionType) . " " . $this->pokerSessionDate;
+	}
+	$listTeam=array_map('strtolower',SqlList::getList('Team','name'));
+	$listName=array_map('strtolower',SqlList::getList('Affectable'));
+	$listUserName=array_map('strtolower',SqlList::getList('Affectable','userName'));
+	$listInitials=array_map('strtolower',SqlList::getList('Affectable','initials'));
+	$this->PokerSessionPlanningElement->idle=$this->idle;
+	$this->PokerSessionPlanningElement->done=$this->done;
+	$this->PokerSessionPlanningElement->validatedStartDate=$this->pokerSessionDate;
+	$this->PokerSessionPlanningElement->validatedEndDate=$this->pokerSessionDate;
+	if (! $this->PokerSessionPlanningElement->assignedWork) {
+		$this->PokerSessionPlanningElement->plannedStartDate=$this->pokerSessionDate;
+		$this->PokerSessionPlanningElement->plannedEndDate=$this->pokerSessionDate;
+	}
+	$this->pokerSessionStartDateTime=$this->pokerSessionDate.' '.$this->pokerSessionStartTime;
+	$this->pokerSessionEndDateTime=$this->pokerSessionDate.' '.$this->pokerSessionEndTime;
+	
     $result = parent::save ();
     if (! strpos ( $result, 'id="lastOperationStatus" value="OK"' )) {
       return $result;
