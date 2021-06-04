@@ -911,7 +911,7 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
      <?php if($isModuleActive){?> 
     <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false"  > 
     <?php   if($asTodayProject->id!=''){?>
-      <div dojoType="dijit.layout.ContentPane" id="todayTop" region="top" style="width:100%;height:$topDiwHeight;padding:15px;" splitter="true" >
+      <div dojoType="dijit.layout.ContentPane" id="todayTop" region="top" style="width:100%;max-height:$topDiwHeight;padding:15px;" splitter="true" >
         <script type="dojo/connect" event="resize" args="evt">
           saveContentPaneResizing("contentPaneTodayTopHeight", dojo.byId("todayTop").offsetHeight, true);
         </script>

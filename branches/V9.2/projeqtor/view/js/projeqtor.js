@@ -3960,9 +3960,9 @@ function refreshTodayProjectsList(value) {
   if(value!=dojo.byId('showAllProjectToday').value){
     saveDataToSession('showAllProjectTodayVal',value,false);
   }
-//  loadContent("../view/today.php?refreshProjects=true+&showAllProjectToday="+value, "Today_project",
-//      "todayProjectsForm");
-  loadContent("../view/today.php", "centerDiv");
+  loadContent("../view/today.php?refreshProjects=true+&showAllProjectToday="+value, "Today_project",
+      "todayProjectsForm");
+  //loadContent("../view/today.php", "centerDiv");
 }
 
 /**
