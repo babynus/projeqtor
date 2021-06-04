@@ -5779,6 +5779,9 @@ function saveTcrData(id,textZone) {
 
 //Mehdi 
 function assUpdateLeftWork(id) {
+  if(dojo.byId('objectClass').value=='PokerSessionDefinition'){
+    dojo.byId('objectClass').value = 'PokerSession';
+  }
   var initAss =dojo.byId('initAss_'+id).value;
   var assign=dijit.byId("assAssignedWork_"+id).get('value');
   var newAss = assign;
@@ -5807,6 +5810,9 @@ function assUpdateLeftWork(id) {
   }
   // update assigned for PlanningElement
   var objClass=dojo.byId('objectClass').value;
+  if(objClass=='PokerSessionDefinition'){
+    objClass= 'PokerSession';
+  }
   var assPeAss=dijit.byId(objClass+'PlanningElement_assignedWork');
   var valPeAss=dijit.byId(objClass+'PlanningElement_validatedWork');
   if(assPeAss){
@@ -5826,6 +5832,9 @@ function assUpdateLeftWork(id) {
 }
 function assUpdateLeftWorkDirect(id) {
   var objClass=dojo.byId('objectClass').value;
+  if(objClass=='PokerSessionDefinition'){
+    objClass = 'PokerSession';
+  }
   var initLeft=dojo.byId('initLeft_'+id).value;
   var assign=dijit.byId("assAssignedWork_"+id).get('value');
   var left=dijit.byId("assLeftWork_"+id).get('value');
