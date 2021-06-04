@@ -532,6 +532,7 @@ class Assignment extends SqlElement {
     $obj = new $this->refType($this->refId);
     $classObj=get_class($obj);
     if ($classObj=='PeriodicMeeting')  $classObj='Meeting';
+    if ($classObj=='PokerSessionDefinition')  $classObj='PokerSession';
     $peFld=$classObj."PlanningElement";
     $planningMode = new PlanningMode($obj->$peFld->idPlanningMode);
       
