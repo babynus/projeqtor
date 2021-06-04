@@ -295,6 +295,18 @@ class Absence{
     $listAct = $act->getSqlElementsFromCriteria(null,false,$where,"idProject asc, id asc");
     $ass = new Assignment();
     $res = new Resource($userID);
+    $unitAbs = Parameter::getGlobalParameter('imputationUnit');
+    $max = $res->capacity;
+    if (!floatval($max)) $max=1;
+    
+    //gautier abs
+    $whereWork = "idProject not in " . Project::getAdminitrativeProjectList(false,false);
+    $whereWorkDay = " idResource=".$userID." AND year='".$currentYear."' AND ".$whereWork;
+    $listWork = $work->getSqlElementsFromCriteria(null,null,$whereWorkDay);
+    $listWorkDay = array();
+    foreach ($listWork as $wk){
+      $listWorkDay[$wk->workDate][] = $wk;
+    }
     
     $actId = "";
     $actProject = "";
@@ -350,6 +362,11 @@ class Absence{
         $listActId .= 0;
     }
     $listActId .= ')';
+    
+    $listADmWork = self::getWorkAdmActListYear($listActId, $userID, $currentYear);
+    foreach ($listADmWork as $wk){
+      $listADmWorkDay[$wk->workDate][] = $wk;
+    }
     
     $today=date('Y-m-d');
     global $bankHolidays,$bankWorkdays;
@@ -412,56 +429,56 @@ class Absence{
     		$result.= '<div style="width:30px; height:15px;position:absolute; padding-top:10px; text-align:center; vertical-align:middle">';
     		$result.= mb_substr(i18n(date('l',$iDay)),0,1,"UTF-8").$d;
     		$result.= '</div>';
-    		//gautier 
-    		$unitAbs = Parameter::getGlobalParameter('imputationUnit');
-        $res = new Resource($userID,true);
-        $max = $res->capacity;
-        if (!floatval($max)) $max=1;
     		if($isOpen){ 
     		  $dayWork = new Work();
-    		  $whereWorkDay = " idResource=".$userID." AND workDate='".$workDay."' AND ".$whereWork;
-    		  $listWork = $dayWork->getSqlElementsFromCriteria(null,null,$whereWorkDay);
-    			$listADmWork = self::getWorkAdmActList($listActId, $userID, $workDay);
+    		  //gautier abs
+    		  //$whereWorkDay = " idResource=".$userID." AND workDate='".$workDay."' AND ".$whereWork;
+    		  //$listWork = $dayWork->getSqlElementsFromCriteria(null,null,$whereWorkDay);
+    			//$listADmWork = self::getWorkAdmActList($listActId, $userID, $workDay);
+    		  //$listADmWork = array();
     			$totalRemplissage = 0;
     			$transHeight = 100;
     			$workHeigth = 0;
     			//Work open day and ADM project
-    			foreach ($listADmWork as $admWork){
-    				$workV = $admWork->work;
-    				if($workV >$max)$workV=$max;
-    				$idActWork = $admWork->refId;
-    				if($workV){
-    				  $workHeigth = $workHeigth + (($workV/$max)*100);
-    				  $totalRemplissage += $workHeigth;
-    				  if($totalRemplissage > 100){
-    				  	$workHeigth = 100-($totalRemplissage-$workHeigth);
-    				  }
-    				    if($tabColor){
-    				    $idColor = $tabColor[$idActWork];
-    				    $idColor = $idColor%10;
-    				    $background = $colorTab[$idColor];
-    				    $result.='<div style="background:'.$background.'; height:'.$workHeigth.'%"> </div>';
-    				  }
-    				}
+    			if(isset($listADmWorkDay[$workDay])){
+      			foreach ($listADmWorkDay[$workDay] as $admWork){
+      				$workV = $admWork->work;
+      				if($workV >$max)$workV=$max;
+      				$idActWork = $admWork->refId;
+      				if($workV){
+      				  $workHeigth = $workHeigth + (($workV/$max)*100);
+      				  $totalRemplissage += $workHeigth;
+      				  if($totalRemplissage > 100){
+      				  	$workHeigth = 100-($totalRemplissage-$workHeigth);
+      				  }
+      				    if($tabColor){
+      				    $idColor = $tabColor[$idActWork];
+      				    $idColor = $idColor%10;
+      				    $background = $colorTab[$idColor];
+      				    $result.='<div style="background:'.$background.'; height:'.$workHeigth.'%"> </div>';
+      				  }
+      				}
+      			}
     			}
     			//Work open day and not ADM project
-    			foreach ($listWork as $workNotAdm){
-    				$workVal = $workNotAdm->work;
-    				if($workVal > $max) $workVal = $max;
-    				$idActWork = $workNotAdm->refId;
-    				if($workVal){
-    				  if($totalRemplissage < 100){
-      					$workHeigth = $workHeigth + (($workVal/$max)*100);
-      					$totalRemplissage += $workHeigth;
-      					if($totalRemplissage > 100){
-      					  $workHeigth = 100-($totalRemplissage-$workHeigth);
-      					}
-  							$background = '#A0A0A0';
-  							$result.='<div style="background:'.$background.'; height:'.$workHeigth.'%"> </div>';
-    				  }
-    				}
+    			if(isset($listWorkDay[$workDay])){
+      			foreach ($listWorkDay[$workDay] as $workNotAdm){
+      				$workVal = $workNotAdm->work;
+      				if($workVal > $max) $workVal = $max;
+      				$idActWork = $workNotAdm->refId;
+      				if($workVal){
+      				  if($totalRemplissage < 100){
+        					$workHeigth = $workHeigth + (($workVal/$max)*100);
+        					$totalRemplissage += $workHeigth;
+        					if($totalRemplissage > 100){
+        					  $workHeigth = 100-($totalRemplissage-$workHeigth);
+        					}
+    							$background = '#A0A0A0';
+    							$result.='<div style="background:'.$background.'; height:'.$workHeigth.'%"> </div>';
+      				  }
+      				}
+      			}
     			}
-    			
     			if($isValidate){
     			  $positionGrid=($totalRemplissage<100)?$totalRemplissage:100;
     			  $background = 'repeating-linear-gradient(-45deg,#505050,#505050 2px,transparent 2px,transparent 8px);#00BFFF';
@@ -493,6 +510,15 @@ class Absence{
     $listWork = $work->getSqlElementsFromCriteria(null,false,$where);
     return $listWork;
   }
+  
+  static function getWorkAdmActListYear($listActId, $userId, $year){
+    $work = new Work();
+    $where = "refId in ".$listActId;
+    $where .= " and refType = 'Activity' and idResource =".$userId." and year='".$year."'";
+    $listWork = $work->getSqlElementsFromCriteria(null,false,$where);
+    return $listWork;
+  }
+  
 }
 
 function formatAbsenceColor($idColor, $size=20, $float='right') {
