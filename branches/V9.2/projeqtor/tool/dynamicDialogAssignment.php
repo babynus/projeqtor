@@ -51,6 +51,7 @@ if ($assignmentObj->realWork==null){
 if($assignmentObj->leftWork==null){
   $assignmentObj->leftWork="0";
 }
+if ($refType=='PokerSessionDefinition')  $refType='PokerSession';
 $obj=new $refType($refId);
 if($refType=="Meeting" || $refType=="PeriodicMeeting") {
 	$delay=Work::displayWork(workTimeDiffDateTime('2000-01-01T'.$obj->meetingStartTime,'2000-01-01T'.$obj->meetingEndTime));
@@ -113,7 +114,6 @@ if ($planningMode=='RECW') {
     $assRec[$ar->day]=$ar->value;
   }
 }
-
 
 ?>
 <form dojoType="dijit.form.Form" id='assignmentForm' jsid='assignmentForm' name='assignmentForm' onSubmit="return false;">    
