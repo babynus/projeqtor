@@ -1702,8 +1702,11 @@ function removeAttachment(attachmentId) {
       loadContent("../view/menuUserTop.php", "drawMenuUser");
       //loadContent("../view/menuBar.php", "iconMenuUserPhoto");
       if(dojo.byId('refreshSTDivValues')){
-        var idSubTask=dojo.byId('refreshSTDivValues').value;
-        setTimeout('refreshSubTaskAttachment('+idSubTask+')',200);
+        var param=dojo.byId('refreshSTDivValues').value.split(","),
+              reftType=param[0],
+                refId=param[1],
+                  idResource=(param[2]==0)?null:param[2];
+        setTimeout('refreshSubTaskAttachment(\''+reftType+'\','+refId+','+idResource+')',200);
       }
   };
   
@@ -13302,7 +13305,7 @@ function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachm
       var divAttach=el.querySelector('.'+attachmentDivClass);
       if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
         var idDiv=divAttach.childNodes[1].firstChild.id;
-        //console.log("addDropTarget to "+idDiv+" => "+el.id);
+        console.log("addDropTarget to "+idDiv+" => "+el.id);
         dijit.byId(idDiv).reset();
         dijit.byId(idDiv).addDropTarget(el,false);
       }
@@ -13311,15 +13314,15 @@ function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachm
   });
 }
 
-function refreshSubTaskAttachment(idSubTask){
-  loadDiv('../view/refreshSubTaskAttachmentDiv.php?idSubTask='+idSubTask ,'divAttachement_'+idSubTask);
+function refreshSubTaskAttachment(refType,refId,idResource){
+  view=dojo.byId('subTaskView').value;
+  loadContent('../view/refreshSubTaskAttachmentDiv.php?refType='+refType+'&refId='+refId+'&view='+view+'&idResource='+idResource ,refType+'_'+refId+'_drawSubTask');
 }
 
 
 function selectResources(type,target,project) {
   loadDialog('dialogSelectResources',null,true,'&type='+type+'&list='+dojo.byId(target).value+'&target='+target+'&project='+project,true);
 }
-
 function selectResourcesValidated(targeted,target2) {
   selectResourcesSelected.sync();
   var nodeList=selectResourcesSelected.getAllNodes();
