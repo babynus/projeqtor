@@ -88,7 +88,10 @@ class PokerSessionPlanningElementMain extends PlanningElement {
   private static $_databaseTableName = 'planningelement';
   //private static $_databaseCriteria = array('refType'=>'Meeting'); // Cannot use auto filter as PeriodicMeeting is a Meeting (no PeriodicMeetingPlanningElement)
   
-  private static $_databaseColumnName=array();
+  private static $_databaseColumnName=array(
+    "idMeetingPlanningMode"=>"idPlanningMode"
+  );
+  
   private static $_colCaptionTransposition = array('initialStartDate'=>'requestedStartDate',
       'initialEndDate'=> 'requestedEndDate',
       'initialDuration'=>'requestedDuration'
@@ -99,6 +102,7 @@ class PokerSessionPlanningElementMain extends PlanningElement {
    * @return void
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
+    $this->idMeetingPlanningMode=16;
     parent::__construct($id,$withoutDependentObjects);
   }
   
