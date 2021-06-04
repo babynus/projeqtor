@@ -79,7 +79,7 @@ class PokerSessionPlanningElementMain extends PlanningElement {
       "progress"=>"hidden,noImport",
       "expectedProgress"=>"hidden,noImport",
       "wbs"=>"hidden,noImport",
-      "idPokerSessionPlanningMode"=>"hidden,required,noImport",
+      //"idPokerSessionPlanningMode"=>"hidden,required,noImport",
       "plannedStartFraction"=>"hidden",
       "plannedEndFraction"=>"hidden",
       "validatedStartFraction"=>"hidden",
@@ -104,7 +104,7 @@ class PokerSessionPlanningElementMain extends PlanningElement {
    * @return void
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
-    $this->idPokerSessionPlanningMode=16;
+    //$this->idPokerSessionPlanningMode=16;
     parent::__construct($id,$withoutDependentObjects);
   }
   
