@@ -9900,14 +9900,14 @@ function drawPokerVote($obj){
     echo '<table style="width: 100%;"><tr><td>';
     echo '<div id="pokerVoteDescription" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;"><table><tr>';
     echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;">'.i18n('colType').'</td>';
-    echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.$pokerItem->refType.' #'.$pokerItem->refId.'</td>';
+    echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;border-radius: 5px;">'.$pokerItem->refType.' #'.$pokerItem->refId.'</td>';
     echo '</tr><tr><td><br></td></tr><tr>';
     echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;" coslpan="2">'.i18n('colName').'</td>';
-    echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.$pokerItem->name.'</td>';
+    echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;border-radius: 5px;">'.$pokerItem->name.'</td>';
     echo '</tr>';
     echo '</tr><tr><td><br></td></tr><tr>';
     echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;">'.i18n('colDescription').'</td>';
-    echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.htmlEncode($pokerItem->comment).'</td>';
+    echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;border-radius: 5px;">'.htmlEncode($pokerItem->comment).'</td>';
     echo '</tr>';
     echo '</table></div></td></tr>';
     echo '<tr><td><br><br></td></tr><tr>';
