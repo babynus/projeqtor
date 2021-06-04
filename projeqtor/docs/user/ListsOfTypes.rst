@@ -14,55 +14,160 @@ List of Types
 
     \newpage
 
+
+Each element of ProjeQtOr can be typed at your convenience according to your profession or your field of activity.
+
+Each type is presented the same. A very simple description section, with different fields depending on the element, 
+
+and a behavior section that will condition your future actions according to the parameters entered.
+
+
+
+
+.. _behavior-section:
+
+Behavior section
+****************
+
+This section is common to several element types.
+
+Allows to determine some GUI behavior, according to element types.
+
+
+.. rubric:: Description or Comments
+
+* Box checked indicates the field :term:`Description` is mandatory.
+
+.. rubric:: Responsible
+
+* Box checked indicates the field :term:`Responsible` is mandatory when the status to treatment of the item is "handled".  
+
+.. rubric:: Result
+
+* Box checked indicates the field :term:`Result` is mandatory when the status to treatment of the item is "done". 
+ 
+.. rubric:: Flag status
+
+* You can lock the macro status: In progress - Done - Closed - Canceled
+
+* Those fields allow to determine whether the checkbox fields concerned are locked or not.
+
+* If the box is checked then you will only be able to modify the macro status thanks to the workflow statuses.
+
+
+
+
+Project
+-------
+
+
+.. rubric:: No left work on done
+
+* The plannable elements of the project cannot be passed to status **done** if there is still left work.
+
+
+.. rubric:: Lead Project
+
+* The definition is made by the project type, you define that certain types of projects can not have activities, only subprojects or milestones.  
+
+
+
+
+
+Activity
+--------
+
+.. rubric:: activity on real time
+
+* Possibility of managing activities on real time.  
+
+* See: :ref:`Global parameters<gp_planning-section>` | :ref:`Assignement section<activity-on-real-time>`
+
+
+
+
+.. rubric:: No left work on done
+
+* The activity cannot be passed to status **done** if there is still left work.
+
+
+Ticket
+------
+
+.. rubric:: Resolution
+
+* Box checked indicates the field **Resolution** is mandatory when the status to treatment of an item is **done**.  
+
+.. rubric:: Lock solved
+
+* Box checked indicates the field **Solved** is read only.
+* The value of field must come from the field "Solved" defined in the selected resolution.
+
+
+
+
+
+
+
+
+
 .. _type-restriction-section:
 
 Types restrictions
-------------------
-
-Allows to limit values displayed in the list of values for each element type.
-
-Restrictions can be defined for a project, a project type or a profile.
-
-.. note:: **Types restrictions section on Project screen**
-
-   To display types restrictions section:
-   Go to :ref:`Global parameter > Tab Activity > Controls and Restrictions Section<gp-control-restict-section>`
-   "allow type restriction on project" must be set to "Yes".
-   Possibility to define more restrictions to a project against restrictions defined at the project type level.
+******************
 
 
-.. rubric:: Type restriction management
-
-.. figure:: /images/GUI/LISTofTYPE_ZONE_TypeRestriction.png
-   :alt: Section - Restrict types 
+   Allows to limit values displayed in the list of values for each element type.
    
-   Restrict types section
+   Restrictions can be defined for a project, a project type or a profile.
+   
+   .. note:: **Types restrictions section on Project screen**
+   
+      To display types restrictions section:
+      Go to :ref:`Global parameter > Tab Activity > Controls and Restrictions Section<gp-control-restict-section>`
+      "allow type restriction on project" must be set to "Yes".
+      Possibility to define more restrictions to a project against restrictions defined at the project type level.
    
    
-* Click on :kbd:`Restrict types` button to display the dialog box.
+   .. rubric:: Type restriction management
    
-* For each element type, select values that will be in the list of values displayed.
+   .. figure:: /images/GUI/LISTofTYPE_ZONE_TypeRestriction.png
+      :alt: Section - Restrict types 
+      
+      Restrict types section
+      
+      
+   * Click on :kbd:`Restrict types` button to display the dialog box.
+      
+   * For each element type, select values that will be in the list of values displayed.
+   
+   * By default, if no type of element is selected, all the values of the line will be displayed on each screen that will be affected. 
+   
+   .. figure:: /images/GUI/LISTofTYPE_ZONE_Restriction.png
+      :alt: Dialog box - Restrict types for the project 
+      :align: center
+   
+   .. rubric:: Displays element type names where a restriction is applied
+   
+   
+   
+   Reminder : It means too, no restriction for remainding element types on each dedicated screen.
+   
 
-* By default, if no type of element is selected, all the values of the line will be displayed on each screen that will be affected. 
-
-.. figure:: /images/GUI/LISTofTYPE_ZONE_Restriction.png
-   :alt: Dialog box - Restrict types for the project 
-   :align: center
-
-.. rubric:: Displays element type names where a restriction is applied
 
 
 
-Reminder : It means too, no restriction for remainding element types on each dedicated screen.
+
+
 
 .. raw:: latex
 
     \newpage
 
-.. index:: Project (Type)
+Description section
+*******************
 
-
-.. _project-type:
+  
 
 Organization types
 ------------------
@@ -71,13 +176,6 @@ The type of organization allows you to define a common behavior on organizations
 
 Management of :ref:`Organizations` allows to edit the structure of the company in the frame of organizations
 
-
-.. rubric:: Section Description
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-   * :ref:`Types restrictions<type-restriction-section>`
    
 .. tabularcolumns:: |l|l|
 
@@ -101,13 +199,7 @@ Management of :ref:`Organizations` allows to edit the structure of the company i
 
 
 
-.. raw:: latex
-
-    \newpage
-
 .. index:: Project (Type)
-
-
 .. _project_type:
 
 Projects types
@@ -137,9 +229,11 @@ Project type is a way to define common behavior on group of projects.
 
    Type of project to follow non productive work : holidays, sickness, training, …
 
-   Every resource will be able to enter some real work on such projects, without having to be allocated to the project, nor assigned to project activities.
+   Every resource will be able to enter real work on these projects, without having to be allocated to the project, nor assigned to project activities.
 
    Assignments to all project task will be automatically created for users to enter real work.
+   
+   These projects are not visible on Gantt type screens.
    
 
 .. topic::  **TMP** : Template project 
@@ -182,6 +276,10 @@ Project type is a way to define common behavior on group of projects.
    * - Description
      - Description of the type.
 
+
+
+
+   
 .. raw:: latex
 
     \newpage
@@ -1863,61 +1961,6 @@ Component version type is a way to define common behavior to group of Component 
 
     \newpage
 
-.. _behavior-section:
-
-Behavior section
-----------------
-
-This section is common to several element types.
-
-Allows to determine some GUI behavior, according to element types.
-
-.. note::
- 
-   Depending on the element type the following fields can be displayed.
-
-
-.. rubric:: Description or Comments
-
-* Box checked indicates the field :term:`Description` is mandatory.
-
-.. rubric:: Responsible
-
-* Box checked indicates the field :term:`Responsible` is mandatory when the status to treatment of the item is "handled".  
-
-.. rubric:: Result
-
-* Box checked indicates the field :term:`Result` is mandatory when the status to treatment of the item is "done". 
- 
-.. rubric:: Flag status
-
-* Fields: Lock handled, Lock done, Lock closed and Lock cancelled
-* Those fields allow to determine whether the checkbox fields concerned are locked or not.
-* When a flag status is locked, move to this status through status change.
-
-Project
-^^^^^^^
-
-.. rubric:: Hat Project
-
-* The definition is made by the project type, you define that certain types of projects can not have activities, only subprojects or milestones.  
-
-.. rubric:: Lock solved
-
-* Box checked indicates the field **Solved** is read only.
-* The value of field must come from the field "Solved" defined in the selected resolution.
-
-Ticket
-^^^^^^
-
-.. rubric:: Resolution
-
-* Box checked indicates the field **Resolution** is mandatory when the status to treatment of an item is **done**.  
-
-.. rubric:: Lock solved
-
-* Box checked indicates the field **Solved** is read only.
-* The value of field must come from the field "Solved" defined in the selected resolution.
 
 
 

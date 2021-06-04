@@ -357,10 +357,12 @@ Specific parameters about Gantt planning presentation.
       If yes, you correlate the validated, assigned, actual loads and the rest to be done. 
       
       That is, the validated load, the assigned load and the revised (reassessed) load will always be equal.
+      
+      If so, the addition of an "activity over time" option is added to the :ref:`activity types<activity-type>.
 
       .. Warning:: 
       
-      This option is not available for activities managed in work units.
+         This option is not available for activities managed in work units.
   
       
 .. _GP-manualplan-workas:

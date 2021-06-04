@@ -32,6 +32,16 @@ It is also the top-level of visibility, depending on profiles.
 * On the parent project screen, you can view the children in the subproject section.
 * Then, the projects may not be real projects, but just organizational breakdown corresponding to an organization.
 
+.. rubric:: Project type 
+
+There are 3 types of projects which are not managed in the same way.
+
+* Operational projects for work planning, 
+* Administrative projects for recording unavailability 
+* Template projects which will serve as models to be recovered.
+
+See: :ref:`project type<project_type>`
+
 
 .. rubric:: Fix planning 
 
