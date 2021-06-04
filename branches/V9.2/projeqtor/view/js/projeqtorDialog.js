@@ -13595,3 +13595,5 @@ function voteToPokerItem(idPokerSession, idItem, itemList, vote){
 	      }
 	});
 }
+
+//fin
