@@ -83,15 +83,17 @@ Toolbar
    
    |six| :ref:`Display other options<other-option>`
    
-   |seven| :ref:`Display from... to... <display-from>`
+   |seven| :ref:`Change the layout mode<menu-display>`
    
-   |eight|  :ref:`Planning validation<planning-validation>`
+   |eight| :ref:`Display from... to... <display-from>`
    
-   |nine| :ref:`Save and show baseline<save-baseline>`
+   |nine|  :ref:`Planning validation<planning-validation>`
    
-   |ten| :ref:`Print and Export<print-export-gantt>`
+   |ten| :ref:`Save and show baseline<save-baseline>`
    
-   |eleven| :ref:`The other options<checkbox-gantt>`   
+   |eleven| :ref:`Print and Export<print-export-gantt>`
+   
+   |twelve| :ref:`The other options<checkbox-gantt>`   
    
    
    
@@ -1105,8 +1107,10 @@ Details area
 
 The details area is the same as on all the ProjeQtOr element screens and adapts according to the selected element.
 
-For more details on this area, see: :ref:`Details window<detail-window>`
+For more details on this area:
 
+ * see: :ref:`Details window<detail-window>`
+ * see: :ref:`Common section<common-sections>`
 
 .. _planningmodeGantt:
 
@@ -1558,9 +1562,11 @@ This screen displays the Gantt chart from a resource perspective.
 
 The assigned tasks are grouped under the resource level.
 
-Regarding resource planning, periodic group meetings are under his responsibility
+Regarding resource planning, periodic group meetings are under his responsibility.
 
-Ability to view assigned activities without charge
+Ability to view assigned activities without charge.
+
+
 
 
 .. figure:: /images/GUI/GANTT_SCR_ResourcePlanning.png 
@@ -1676,7 +1682,8 @@ See: :ref:`Gantt chart’s bars<gantt-bars>`.
 * Click on |Add| to create a new element.
 * Click on |Filters| to apply many filters. See: :ref:`Advanced filters<filters>`.
 * Click on |Column| to organize the columns of the progress data view.
-* Click on |SubMenu| to display the sub-menu
+* Click on |SubMenu| to display the sub-menu.
+* Click on |switchmode| to display this screen in horizontal or vertical mode.
 
 
 
