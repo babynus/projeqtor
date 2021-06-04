@@ -6621,7 +6621,7 @@ function refreshAbsenceList() {
 }
 
 //Absence calendar refresh function
-function refreshAbsenceCalendar(tabColor) {
+function refreshAbsenceCalendar() {
 	if (checkFormChangeInProgress()) {
 	    showAlert(i18n('alertOngoingChange'));
 	    return false;
