@@ -2169,6 +2169,34 @@
 .ProjeQtOrFlatRed .iconPortfolioPlanning { background-image: url(customIcons/red/iconPortfolioPlanning.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconPortfolioPlanning { background-image: url(customIcons/new/iconPortfolioPlanning.svg);  background-repeat: no-repeat; }
 
+.iconPokerSession { background-image: url(images/iconPokerSession.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconPokerSession { background-image: url(customIcons/blue/iconPokerSession.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconPokerSession { background-image: url(customIcons/green/iconPokerSession.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconPokerSession { background-image: url(customIcons/grey/iconPokerSession.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconPokerSession { background-image: url(customIcons/red/iconPokerSession.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconPokerSession { background-image: url(customIcons/new/iconPokerSession.svg);  background-repeat: no-repeat; }
+
+.iconPokerSessionDefinition { background-image: url(images/iconPokerSessionDefinition.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconPokerSessionDefinition { background-image: url(customIcons/blue/iconPokerSessionDefinition.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconPokerSessionDefinition { background-image: url(customIcons/green/iconPokerSessionDefinition.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconPokerSessionDefinition { background-image: url(customIcons/grey/iconPokerSessionDefinition.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconPokerSessionDefinition { background-image: url(customIcons/red/iconPokerSessionDefinition.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconPokerSessionDefinition { background-image: url(customIcons/new/iconPokerSessionDefinition.svg);  background-repeat: no-repeat; }
+
+.iconPokerSessionType { background-image: url(images/iconPokerSessionType.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconPokerSessionType { background-image: url(customIcons/blue/iconPokerSessionType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconPokerSessionType { background-image: url(customIcons/green/iconPokerSessionType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconPokerSessionType { background-image: url(customIcons/grey/iconPokerSessionType.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconPokerSessionType { background-image: url(customIcons/red/iconPokerSessionType.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconPokerSessionType { background-image: url(customIcons/new/iconPokerSessionType.svg);  background-repeat: no-repeat; }
+
+.iconPokerComplexity { background-image: url(images/iconPokerSessionComplexity.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconPokerComplexity { background-image: url(customIcons/blue/iconPokerSessionComplexity.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconPokerComplexity { background-image: url(customIcons/green/iconPokerSessionComplexity.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconPokerComplexity { background-image: url(customIcons/grey/iconPokerSessionComplexity.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconPokerComplexity { background-image: url(customIcons/red/iconPokerSessionComplexity.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconPokerComplexity { background-image: url(customIcons/new/iconPokerSessionComplexity.svg);  background-repeat: no-repeat; }
+
 .iconPredefinedNote { background-image: url(images/iconPredefinedNote32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconPredefinedNote { background-image: url(customIcons/blue/iconPredefinedNote.png);  background-repeat: no-repeat; }
 .ProjeQtOrFlatGreen .iconPredefinedNote { background-image: url(customIcons/green/iconPredefinedNote.png);  background-repeat: no-repeat; }

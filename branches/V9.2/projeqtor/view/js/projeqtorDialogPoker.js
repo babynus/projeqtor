@@ -46,11 +46,9 @@ function showDetailPokerItem() {
 // =============================================================================
 
 var noRefreshPokerItem=false;
-function addPokerItem(classPokerItem, defaultPokerItem) {
-  if (!classPokerItem) {
-    var params="&objectClass=" + dojo.byId('objectClass').value + "&objectId="
-        + dojo.byId("objectId").value;
-  }
+function addPokerItem(classPokerItem, defaultPokerItem, idPokerSession) {
+  var params="&objectClass=PokerSession&objectId="
+	    + idPokerSession;
   loadDialog('dialogPokerItem', function() {
     noRefreshPokerItem=true;
     var objectClass=dojo.byId('objectClass').value;
@@ -177,8 +175,15 @@ function startPokerSession(idPokerSession) {
     handleAs : "text",
     load : function(data) {
       var callBack=function() {
+		  if(isNewGui){
+			  console.log('oui');
+			  refreshSelectedItem('menuPokerSession', defaultMenu);
+			  if(defaultMenu == 'menuBarRecent'){
+				  menuNewGuiFilter(defaultMenu, 'menuPokerSession');
+			  }
+			  editFavoriteRow(true);
+		  }
         tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
-        console.log(tabToSelect);
         tabContainer=dijit.byId('tabDetailContainer');
         if (tabContainer != undefined) {
           tabContainer.selectChild(tabToSelect.page);
@@ -237,22 +242,22 @@ function stopPausePokerSession(idPokerSession) {
       });
 }
 
-function openPokerItemVote(idPokerItem) {
+function openPokerItemVote(idPokerSession, idItem, itemList) {
   dojo.xhrPost({
-    url : '../tool/openPokerItemVote.php?idPokerItem=' + idPokerItem
+    url : '../tool/openPokerItemVote.php?idPokerItem=' + idItem
         + '&close=false',
     handleAs : "text",
     load : function(data) {
-      var callBack=function() {
+//      var callBack=function() {
         tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
         tabContainer=dijit.byId('tabDetailContainer');
         if (tabContainer != undefined) {
           tabContainer.selectChild(tabToSelect.page);
         }
-      };
-      saveDataToSession("idPokerItem", idPokerItem, false);
-      loadContent("objectDetail.php", "detailDiv", "listForm", null, null,
-          null, null, callBack, true);
+        pokerItemNav(idPokerSession, idItem, itemList, null);
+//      };
+//      loadContent("objectDetail.php", "detailDiv", "listForm", null, null,
+//          null, null, callBack, true);
     }
   });
 }
@@ -268,17 +273,17 @@ function closePokerItemVote(idPokerItem) {
   });
 }
 
-function gotoPokerItem(idPokerItem) {
-  var callBack=function() {
+function gotoPokerItem(idPokerSession, idItem, itemList) {
+//  var callBack=function() {
     tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
     tabContainer=dijit.byId('tabDetailContainer');
     if (tabContainer != undefined) {
       tabContainer.selectChild(tabToSelect.page);
     }
-  };
-  saveDataToSession("idPokerItem", idPokerItem, false);
-  loadContent("objectDetail.php", "detailDiv", "listForm", null, null, null,
-      null, callBack, true);
+    pokerItemNav(idPokerSession, idItem, itemList, null);
+//  };
+//  loadContent("objectDetail.php", "detailDiv", "listForm", null, null, null,
+//      null, callBack, true);
 }
 
 function pokerItemNav(idPokerSession, idItem, itemList, nav) {

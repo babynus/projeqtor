@@ -56,14 +56,14 @@ class PokerSessionMain extends SqlElement {
   public $_spe_pokerItem;
   public $_sec_progress_left;
   public $PokerSessionPlanningElement;
+  public $pokerSessionStartDateTime;
+  public $pokerSessionEndDateTime;
   public $_sec_pokerVote;
   public $_spe_pokerVote;
   public $_sec_predecessor;
   public $_Dependency_Predecessor=array();
   public $_sec_successor;
   public $_Dependency_Successor=array();
-  public $pokerSessionStartDateTime;
-  public $pokerSessionEndDateTime;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -98,91 +98,17 @@ class PokerSessionMain extends SqlElement {
   );
   
   public function setAttributes() {
-    if(!$this->id){
-    	self::$_fieldsAttributes ['_button_startEndPokerSession'] = 'hidden';
-    }
+    self::$_fieldsAttributes ['_sec_description'] = 'hidden';
+    self::$_fieldsAttributes ['_sec_Attendees'] = 'hidden';
+    self::$_fieldsAttributes ['_sec_predecessor'] = 'hidden';
+    self::$_fieldsAttributes ['_sec_successor'] = 'hidden';
+    self::$_fieldsAttributes ['_sec_Link'] = 'hidden';
+    self::$_fieldsAttributes ['_Attachment'] = 'hidden';
+    self::$_fieldsAttributes ['_Note'] = 'hidden';
+    self::$_fieldsAttributes ['_sec_progress_left'] = 'hidden';
+    self::$_fieldsAttributes ['_sec_pokerItem'] = 'hidden';
   }
   
-  // ============================================================================**********
-  // GET VALIDATION SCRIPT
-  // ============================================================================**********
-  
-  /** ==========================================================================
-   * Return the validation sript for some fields
-   * @return the validation javascript (for dojo framework)
-   */
-  public function getValidationScript($colName) {
-  	$colScript = parent::getValidationScript($colName);
-  
-  	if ($colName=="idStatus") {
-  		$colScript .= '<script type="dojo/connect" event="onChange" >';
-  		$colScript .= htmlGetJsTable('Status', 'setIdleStatus', 'tabStatusIdle');
-  		$colScript .= htmlGetJsTable('Status', 'setDoneStatus', 'tabStatusDone');
-  		$colScript .= '  var setIdle=0;';
-  		$colScript .= '  var filterStatusIdle=dojo.filter(tabStatusIdle, function(item){return item.id==dijit.byId("idStatus").value;});';
-  		$colScript .= '  dojo.forEach(filterStatusIdle, function(item, i) {setIdle=item.setIdleStatus;});';
-  		$colScript .= '  if (setIdle==1) {';
-  		$colScript .= '    dijit.byId("idle").set("checked", true);';
-  		$colScript .= '  } else {';
-  		$colScript .= '    dijit.byId("idle").set("checked", false);';
-  		$colScript .= '  }';
-  		$colScript .= '  var setDone=0;';
-  		$colScript .= '  var filterStatusDone=dojo.filter(tabStatusDone, function(item){return item.id==dijit.byId("idStatus").value;});';
-  		$colScript .= '  dojo.forEach(filterStatusDone, function(item, i) {setDone=item.setDoneStatus;});';
-  		$colScript .= '  if (setDone==1) {';
-  		$colScript .= '    dijit.byId("done").set("checked", true);';
-  		$colScript .= '  } else {';
-  		$colScript .= '    dijit.byId("done").set("checked", false);';
-  		$colScript .= '  }';
-  		$colScript .= '  formChanged();';
-  		$colScript .= '</script>';
-  	} else if ($colName=="initialDueDate") {
-  		$colScript .= '<script type="dojo/connect" event="onChange" >';
-  		$colScript .= '  if (dijit.byId("actualDueDate").get("value")==null) { ';
-  		$colScript .= '    dijit.byId("actualDueDate").set("value", this.value); ';
-  		$colScript .= '  } ';
-  		$colScript .= '  formChanged();';
-  		$colScript .= '</script>';
-  	} else if ($colName=="actualDueDate") {
-  		$colScript .= '<script type="dojo/connect" event="onChange" >';
-  		$colScript .= '  if (dijit.byId("initialDueDate").get("value")==null) { ';
-  		$colScript .= '    dijit.byId("initialDueDate").set("value", this.value); ';
-  		$colScript .= '  } ';
-  		$colScript .= '  formChanged();';
-  		$colScript .= '</script>';
-  	} else     if ($colName=="idle") {
-  		$colScript .= '<script type="dojo/connect" event="onChange" >';
-  		$colScript .= '  if (this.checked) { ';
-  		$colScript .= '    if (dijit.byId("idleDate").get("value")==null) {';
-  		$colScript .= '      var curDate = new Date();';
-  		$colScript .= '      dijit.byId("idleDate").set("value", curDate); ';
-  		$colScript .= '    }';
-  		//      $colScript .= '    if (! dijit.byId("done").get("checked")) {';
-  		//       $colScript .= '      dijit.byId("done").set("checked", true);';
-  		//       $colScript .= '    }';
-  		$colScript .= '  } else {';
-  		$colScript .= '    dijit.byId("idleDate").set("value", null); ';
-  		$colScript .= '  } ';
-  		$colScript .= '  formChanged();';
-  		$colScript .= '</script>';
-  	} else if ($colName=="done") {
-  		$colScript .= '<script type="dojo/connect" event="onChange" >';
-  		$colScript .= '  if (this.checked) { ';
-  		$colScript .= '    if (dijit.byId("doneDate").get("value")==null) {';
-  		$colScript .= '      var curDate = new Date();';
-  		$colScript .= '      dijit.byId("doneDate").set("value", curDate); ';
-  		$colScript .= '    }';
-  		$colScript .= '  } else {';
-  		$colScript .= '    dijit.byId("doneDate").set("value", null); ';
-  		$colScript .= '    if (dijit.byId("idle").get("checked")) {';
-  		$colScript .= '      dijit.byId("idle").set("checked", false);';
-  		$colScript .= '    }';
-  		$colScript .= '  } ';
-  		$colScript .= '  formChanged();';
-  		$colScript .= '</script>';
-  	}
-  	return $colScript;
-  }
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -293,53 +219,8 @@ class PokerSessionMain extends SqlElement {
   
   public function drawSpecificItem($item) {
     global $print;
-    $canUpdate=securityGetAccessRightYesNo('menuPokerSessionDefinition', 'update', $this) == "YES";
+    $canUpdate=securityGetAccessRightYesNo('menuPokerSession', 'update', $this) == "YES";
     $result = "";
-    if($item=="startPokerSession"){
-        if ($print or !$canUpdate or !$this->id or $this->idle) {
-    		return "";
-    	}
-    	$name=(!$this->handled)?i18n('pokerSessionStart'):i18n('pokerSessionStop');
-    	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
-    	$result .= '<button id="startPokerSession" dojoType="dijit.form.Button" showlabel="true"';
-    	$result .= ' title="' . $name . '" class="roundedVisibleButton">';
-    	$result .= '<span>' . $name. '</span>';
-    	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
-    	$result .= '   if (checkFormChangeInProgress()) {return false;}';
-        if(!$this->handled){
-          $result .=  '  startPokerSession('.$this->id.');';
-        }else{
-          $result .=  '  stopPokerSession('.$this->id.');';
-        }    	
-    	$result .= '</script>';
-    	$result .= '</button>';
-    	$result .= '</td></tr>';
-    	return $result;
-    }
-    if($item=="pausePokerSession"){
-    	if ($print or !$canUpdate or !$this->id or $this->idle or !$this->handled) {
-    		return "";
-    	}
-    	$name=(!$this->handled)?i18n('pokerSessionStartPause'):i18n('pokerSessionStopPause');
-    	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
-    	$result .= '<button id="pausePokerSession" dojoType="dijit.form.Button" showlabel="true"';
-    	$result .= ' title="' . $name . '" class="roundedVisibleButton">';
-    	$result .= '<span>' . $name. '</span>';
-    	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
-    	$result .= '   if (checkFormChangeInProgress()) {return false;}';
-    	if(!$this->handled){
-    		$result .=  '  startPausePokerSession('.$this->id.');';
-    	}else{
-    		$result .=  '  stopPausePokerSession('.$this->id.');';
-    	}
-    	$result .= '</script>';
-    	$result .= '</button>';
-    	$result .= '</td></tr>';
-    	return $result;
-    }
-  	if($item=="pokerItem"){
-	  drawPokerItem($this, 'Session');
-  	}
   	if($item=="pokerVote"){
       drawPokerVote($this);
   	}
