@@ -105,6 +105,13 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
   <script type="text/javascript" src="js/jsgantt.js?version=<?php echo $version.'.'.$build;?>"></script>
   <script type="text/javascript" src="js/projeqtorWork.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtorDialog.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogAdminTool.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogConfiguration.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogDocument.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogFinancial.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogPlanning.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogPoker.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogRequirement.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/liveMeeting.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/kanban.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtorFormatter.js?version=<?php echo $version.'.'.$build;?>" ></script>
