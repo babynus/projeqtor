@@ -41,6 +41,13 @@ header ('Content-Type: text/html; charset=UTF-8');
   <?php if (isNewGui()) {?><link rel="stylesheet" type="text/css" href="../view/css/projeqtorNew.css" /> <?php }?>
   <script type="text/javascript" src="../view/js/dynamicCss.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../view/js/projeqtorDialog.js?version=<?php echo $version.'.'.$build;?>" ></script>
+    <script type="text/javascript" src="js/projeqtorDialogAdminTool.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogConfiguration.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogDocument.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogFinancial.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogPlanning.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogPoker.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/projeqtorDialogRequirement.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <?php if (isNewGui()) {?>
   <script type="text/javascript">
     //var isNewGui=true;
