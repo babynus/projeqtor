@@ -663,6 +663,7 @@ function menuNewGuiFilter(filter, item) {
 }
 
 function refreshSelectedItem(item, filter){
+	console.log('ok');
 	dojo.byId('itemSelected').value = item;
 	var refreshItem = function(){
 		if(item)selectIconMenuBar(item);

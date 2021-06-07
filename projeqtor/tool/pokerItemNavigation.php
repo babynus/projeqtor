@@ -69,7 +69,7 @@ echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;paddin
 echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.$pokerItem->refType.' #'.$pokerItem->refId.'</td>';
 echo '</tr><tr><td><br></td></tr><tr>';
 echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;" coslpan="2">'.i18n('colName').'</td>';
-echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.$pokerItem->name.'</td>';
+echo '<td class="noteData" style="position:absolute;min-width:232px;height:15px;">'.$pokerItem->name.' #'.$pokerItem->id.'</td>';
 echo '</tr>';
 echo '</tr><tr><td><br></td></tr><tr>';
 echo '<td class="" style="width:50%;text-align: right;padding-right: 10px;padding-top: 5px;">'.i18n('colDescription').'</td>';
