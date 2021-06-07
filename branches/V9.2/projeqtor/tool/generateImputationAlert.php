@@ -269,10 +269,19 @@ function calculListToSend($startDate, $endDate, &$lstRes, $incompleteResource, $
         $tmpDate=$startDate;
         $full=true;
         $overCap=false;
+        $workGlobal=0;
+        $cpWorkDay=0;
+        $cpOpenDay=0;
         while ($tmpDate<=$endDate) {
             if($incompleteResource=='true' or $incompleteProjectLeader=='true' or $incompleteTeamManager=='true' or $incompleteOrganismManager=='true'){
               if (isset($res['days'][$tmpDate]) and $res['days'][$tmpDate]['open']=='1' and abs($res['days'][$tmpDate]['work'] - $res['capacity']) >= 0.01 and ($res['days'][$tmpDate]['work'] < $res['capacity'])) {
               	$full=false;
+              }
+            }else if($incompleteResource=='trueOnGlobalPeriod' or $incompleteProjectLeader=='trueOnGlobalPeriod' or $incompleteTeamManager=='trueOnGlobalPeriod' or $incompleteOrganismManager=='trueOnGlobalPeriod'){
+              if($res['days'][$tmpDate]['open']==1)$cpOpenDay++;
+              if($res['days'][$tmpDate]['work']!=0){
+                $workGlobal += $res['days'][$tmpDate]['work'];
+                $cpWorkDay++;
               }
             }else{
               if (isset($res['days'][$tmpDate]) and $res['days'][$tmpDate]['open']=='1' and abs($res['days'][$tmpDate]['work'] - $res['capacity']) >= 0.01) {
@@ -280,6 +289,12 @@ function calculListToSend($startDate, $endDate, &$lstRes, $incompleteResource, $
               }
             }
             $tmpDate=addDaysToDate($tmpDate, 1);
+        }
+        if($incompleteResource=='trueOnGlobalPeriod' or $incompleteProjectLeader=='trueOnGlobalPeriod' or $incompleteTeamManager=='trueOnGlobalPeriod' or $incompleteOrganismManager=='trueOnGlobalPeriod'){
+          $exeptedWorkingTime = abs($cpOpenDay * $res['capacity']);
+          if($workGlobal < $exeptedWorkingTime ){
+            $full=false;
+          }
         }
         $lstRes[$idRes]['full']=$full;
         if (!$full) {
