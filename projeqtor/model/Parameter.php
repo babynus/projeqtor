@@ -547,7 +547,8 @@ class Parameter extends SqlElement {
       case 'imputationOnlyIncompleteResourceWork':case 'imputationOnlyIncompleteProjectLeaderWork':
       case 'imputationOnlyIncompleteTeamManagerWork':case 'imputationOnlyIncompleteOrganismManagerWork':
     		$list = array('false'=>i18n('displayNo'),
-    		              'true'=>i18n('displayYes'));
+    		              'true'=>i18n('displayYes'),
+    		              'trueOnGlobalPeriod'=>i18n('onGlobalPeriod'));
   		break;
       case 'ldapMsgOnUserCreation': case 'imputationAlertSendToResource': case 'SAML_msgOnUserCreation' :
       case 'imputationAlertSendToProjectLeader': case 'imputationAlertSendToTeamManager': 
