@@ -27,6 +27,7 @@
 // All specific ProjeQtOr functions and variables for Dialog Purpose
 // This file is included in the main.php page, to be reachable in every context
 // ============================================================================
+
 // =============================================================================
 // = Variables (global)
 // =============================================================================
@@ -54,17 +55,13 @@ var cpMaj=0;
 var cpNum=0;
 var cpChar=0;
 var cpParamLength=0;
+
 // =============================================================================
 // = Wait spinner
 // =============================================================================
 
 var waitingForReply=false;
-/**
- * ============================================================================
- * Shows a wait spinner
- * 
- * @return void
- */
+
 function showWait() {
   if (dojo.byId("wait")) {
     showField("wait");
@@ -74,12 +71,6 @@ function showWait() {
   }
 }
 
-/**
- * ============================================================================
- * Hides a wait spinner
- * 
- * @return void
- */
 function hideWait() {
   waitingForReply=false;
   hideField("wait");
@@ -93,14 +84,6 @@ function hideWait() {
 // = Generic field visibility properties
 // =============================================================================
 
-/**
- * ============================================================================
- * Setup the style properties of a field to set it visible (show it)
- * 
- * @param field
- *          the name of the field to be set
- * @return void
- */
 function showField(field) {
   var dest=dojo.byId(field);
   if (dijit.byId(field)) {
@@ -113,8 +96,6 @@ function showField(field) {
     dojo.style(dest, {
       display : 'inline'
     });
-    // dest.style.visibility = 'visible';
-    // dest.style.display = 'inline';
   }
 }
 
@@ -138,8 +119,6 @@ function hideField(field) {
     dojo.style(dest, {
       display : 'none'
     });
-    // dest.style.visibility = 'hidden';
-    // dest.style.display = 'none';
   }
 }
 
@@ -148,6 +127,7 @@ function protectDblClick(widget){
   disableWidget(widget.id);
   setTimeout("enableWidget('"+widget.id+"');",300);
 }
+
 // =============================================================================
 // = Message boxes
 // =============================================================================
@@ -471,22 +451,12 @@ function hideMsg(id,value){
     }
   }
 }
+
 // =============================================================================
 // = Print
 // =============================================================================
 
-/**
- * ============================================================================
- * Display a Dialog Print Preview Box
- * 
- * @param page
- *          the page to display
- * @param forms
- *          the form containing the data to send to the page
- * @return void
- */
 function showPrint(page, context, comboName, outMode, orientation) {
-  // dojo.byId('printFrame').style.width= 1000 + 'px';
   showWait();
   quitConfirmed=true;
   noDisconnect=true;
@@ -534,12 +504,9 @@ function showPrint(page, context, comboName, outMode, orientation) {
     }
   }
 
-// ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
-  // For Organization, add the period year as parameter
   if (cl=='Organization' && dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear')) {
     params+='&OrganizationBudgetPeriod='+dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear').get("value");
   }
-// END ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
   if (context == 'list' || context == 'downloadList' || context == 'download') {
     if (dijit.byId("listShowIdle")) {
       if (dijit.byId("listShowIdle").get('checked')) {
@@ -707,6 +674,7 @@ function sendFrameToPrinter() {
   dijit.byId('dialogPrint').hide();
   return true;
 }
+
 // =============================================================================
 // = Detail (from combo)
 // =============================================================================
@@ -739,27 +707,6 @@ function showDetailLink() {
   } else {
     showInfo(i18n('messageMandatory', new Array(i18n('linkType'))));
   }
-}
-
-function showDetailPokerItem() {
-	  var pokerItemType=dijit.byId('pokerItemRef2Type').get("value");
-	  if (pokerItemType) {
-		var canCreate=0;
-	    if (canCreateArray[pokerItemType] == "YES") {
-	      canCreate=1;
-	    }
-	    showDetail('pokerItemRef2Id', canCreate, pokerItemType, true);
-	  } else {
-	    showInfo(i18n('messageMandatory', new Array(i18n('pokerItemType'))));
-	  }
-	}
-
-function showDetailApprover() {
-  var canCreate=0;
-  if (canCreateArray['Resource'] == "YES") {
-    canCreate=1;
-  }
-  showDetail('approverId', canCreate, 'Resource', true);
 }
 
 function showDetailOrigin() {
@@ -813,7 +760,6 @@ function showDetail(comboName, canCreate, objectClass, multiSelect, objectId, fo
       window.frames['comboDetailFrame'].document.body.innerHTML='<i>'
           + i18n("messagePreview") + '</i>';
       dijit.byId("dialogDetail").show();
-      //frames['comboDetailFrame'].location.href="print.php?print=true&page=preparePreview.php";
       gotoDetailItem(objectClass,objectId);
     }
     
@@ -959,19 +905,16 @@ function selectDetailItem(selectedValue, lastSavedName) {
         refreshTestCaseRunList(idFldVal);
         setTimeout("dojo.byId('testCaseRunTestCaseList').focus()", 1000);
         enableWidget('dialogTestCaseRunSubmit');
-// ADD BY Marc TABARY - 2017-02-23 - ADD OBJECTS LINKED BY ID TO MAIN OBJECT
       } else if (comboName == 'linkedObjectId') {
         refreshLinkObjectList(idFldVal);
         setTimeout("dojo.byId('linkedObjectId').focus()", 1000);
         enableWidget('dialogObjectSubmit');
-// END ADD BY Marc TABARY - 2017-02-23 - ADD OBJECTS LINKED BY ID TO MAIN OBJECT
       } else if (comboName == 'linkProviderTerm') {
         refreshLinkProviderTerm(idFldVal);
       }    
     }
   }
   
-  //ADD qCazelles - Correction GANTT - Ticket #100
   if (comboName == 'versionsPlanningDetail') {
 	  displayVersionsPlanning(idFldVal,'ProductVersion');
 	  hideDetail();
@@ -981,7 +924,6 @@ function selectDetailItem(selectedValue, lastSavedName) {
     hideDetail();
     return;                                                    
   }  
-  //END ADD qCazelles - Correction GANTT - Ticket #100
   if(comboClass=='Contact' && (dojo.byId('objectClass').value=='Client' || dojo.byId('objectClass').value=='Provider') ){
     saveContact(idFldVal,comboClass,comboName);
     hideDetail();
@@ -996,10 +938,6 @@ function selectDetailItem(selectedValue, lastSavedName) {
   			combo.set("value", idFldVal);
   		}
   	}else if(comboName.substr(0,15) == 'filterValueList'){
-  		//var pos = idFldVal.indexOf('_');
-  		//if(pos != -1){
-  		//	dijit.byId('filterValueList').set("value", idFldVal);
-  		//}else{
   		idFldVal=idFldVal.split('_');
   		combo.set("value", idFldVal);
   		//}
@@ -1016,7 +954,6 @@ function selectDetailItem(selectedValue, lastSavedName) {
 
 function displaySearch(objClass) {
   if (!objClass) {
-    // comboName=dojo.byId('comboName').value;
     objClass=dojo.byId('comboClass').value;
   }
   showWait();
@@ -1059,8 +996,6 @@ function gotoDetailItem(objectClass,objectId) {
     hideField('comboSaveButton');
   }
   showField('comboCloseButton');
-  //contentNode=frames['comboDetailFrame'].dojo.byId('body');
-  //destinationWidth=dojo.style(contentNode, "width");
   destinationWidth=frames['comboDetailFrame'].document.body.offsetWidth
   page="comboSearch.php";
   page+="?objectClass=" + objClass;
@@ -1154,7 +1089,6 @@ function copyObjectBox(copyType) {
   var callBack=function() {
 
   };
-  //gautier #2522
   if (copyType=="copyDocument") {
     callBack=function() {
     };
@@ -1191,26 +1125,10 @@ function copyObjectBox(copyType) {
   }
 }
 
-//=============================================================================
-//= Planning PDF
-//=============================================================================
-
-/**
-* Display a planning PDF Box
-* 
-*/
-function planningPDFBox(copyType) { 
-  loadDialog('dialogPlanningPdf', null, true, "", false);
-}
-
 // =============================================================================
 // = Notes
 // =============================================================================
 
-/**
- * Display a add note Box
- * 
- */
 // DOJO HACK
 // Hack to be able to interact with ck_editor popups in Notes
 // NEEDS TO CHANGE dijit/Dialog.js, in focus.watch
@@ -1272,10 +1190,7 @@ function noteSelectPredefinedText(idPrefefinedText) {
     }
   });
 }
-/**
- * Display a edit note Box
- * 
- */
+
 function editNote(noteId, privacy) {
   if (dijit.byId("noteToolTip")) {
     dijit.byId("noteToolTip").destroy();
@@ -1304,10 +1219,6 @@ function editNote(noteId, privacy) {
   loadDialog('dialogNote', callBack, true, params, true);
 }
 
-/**
- * save a note (after addNote or editNote)
- * 
- */
 function saveNote() {
   var editorType=dojo.byId("noteEditorType").value;
   if (editorType=="CK" || editorType=="CKInline") {
@@ -1336,11 +1247,6 @@ function saveNote() {
   dijit.byId('dialogNote').hide();
 }
 
-
-/**
- * Display a delete note Box
- * 
- */
 function removeNote(noteId) {
   var param="?noteId="+noteId;
   var dest="resultDivMain";
@@ -1359,136 +1265,10 @@ function removeNote(noteId) {
   showConfirm(msg, actionOK);
 }
 
-//=============================================================================
-//= Situation
-//=============================================================================
-
-function addSituation() {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-   }
-  if (dijit.byId("situationToolTip")) {
-    dijit.byId("situationToolTip").destroy();
-    dijit.byId("situationComment").set("class", "");
-  }
-  pauseBodyFocus();
-  var callBack=function() {
-    var editorType=dojo.byId("situationEditorType").value;
-    if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
-      ckEditorReplaceEditor("situationComment",995);
-    } else if (editorType=="text") {
-      dijit.byId("situationComment").focus();
-      dojo.byId("situationComment").style.height=(screen.height*0.6)+'px';
-      dojo.byId("situationComment").style.width=(screen.width*0.6)+'px';
-    } else if (dijit.byId("situationEditor")) { // Dojo type editor
-      dijit.byId("situationEditor").set("class", "input");
-      dijit.byId("situationEditor").focus();
-      dijit.byId("situationEditor").set("height", (screen.height*0.6)+'px'); // Works on first time
-      dojo.byId("situationEditor_iframe").style.height=(screen.height*0.6)+'px'; // Works after first time
-    }
-  };
-  var params="&objectClass="+dojo.byId('objectClass').value;
-  params+="&objectId="+dojo.byId("objectId").value;
-  loadDialog('dialogSituation', callBack, true, params, true);
-}
-
-function editSituation(situationId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  if (dijit.byId("situationToolTip")) {
-    dijit.byId("situationToolTip").destroy();
-    dijit.byId("situationComment").set("class", "");
-  }
-  pauseBodyFocus();
-  var callBack=function() {
-	    var editorType=dojo.byId("situationEditorType").value;
-	    if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
-	      ckEditorReplaceEditor("situationComment",995);
-	    } else if (editorType=="text") {
-	      dijit.byId("situationComment").focus();
-	      dojo.byId("situationComment").style.height=(screen.height*0.6)+'px';
-	      dojo.byId("situationComment").style.width=(screen.width*0.6)+'px';
-	    } else if (dijit.byId("situationEditor")) { // Dojo type editor
-	      dijit.byId("situationEditor").set("class", "input");
-	      dijit.byId("situationEditor").focus();
-	      dijit.byId("situationEditor").set("height", (screen.height*0.6)+'px'); // Works on first time
-	      dojo.byId("situationEditor_iframe").style.height=(screen.height*0.6)+'px'; // Works after first time
-	    }
-  };
-  var params="&objectClass="+dojo.byId('objectClass').value;
-  params+="&objectId="+dojo.byId("objectId").value;
-  params+="&situationId="+situationId;
-  loadDialog('dialogSituation', callBack, true, params, true);
-}
-
-function saveSituation() {
-  var formVar=dijit.byId('situationForm');
-  if (formVar.validate()) {
-	  var editorType=dojo.byId("situationEditorType").value;
-	  if (editorType=="CK" || editorType=="CKInline") {
-		situationEditor=CKEDITOR.instances['situationComment'];
-		situationEditor.updateElement();
-	    var tmpCkEditor=situationEditor.document.getBody().getText();
-	    var tmpCkEditorData=situationEditor.getData();
-	  }
-	  loadContent("../tool/saveSituation.php", "resultDivMain", "situationForm", true, 'situation');
-	  dijit.byId('dialogSituation').hide();
-  }else{
-	  showAlert(i18n("alertInvalidForm"));
-	  return;
-  }
-}
-/**
- * Display a delete situation Box
- * 
- */
-function removeSituation(situationId) {
-  var param="?situationId="+situationId;
-  param+="&situationRefType="+dojo.byId('objectClass').value;
-  param+="&situationRefId="+dojo.byId("objectId").value;
-  param+="&action=remove";
-  actionOK=function() {
-    loadContent("../tool/saveSituation.php"+param, "resultDivMain", "situationForm", true, 'situation');
-  };
-  msg=i18n('confirmDelete', new Array(i18n('Situation'), situationId));
-  showConfirm(msg, actionOK);
-}
-
-function situationSelectPredefinedText(idPrefefinedText) {
-	dojo.xhrPost({
-	    url : '../tool/getPredefinedSituation.php?id=' + idPrefefinedText,
-		handleAs : "text",
-		load : function(data,args) {
-			if (data) {
-		        var ps = JSON.parse(data);
-		        dijit.byId('situationSituation').set('value', ps.situation);
-		        var editorType=dojo.byId("situationEditorType").value;
-		        if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
-		          CKEDITOR.instances['situationComment'].setData(ps.comment);
-		        } else if (editorType=="text") { 
-		          dijit.byId('situationComment').set('value', ps.comment);
-		          dijit.byId('situationComment').focus();
-		        } else if (dijit.byId('situationCommentEditor')) {
-		          dijit.byId('situationComment').set('value', ps.comment);
-		          dijit.byId('situationCommentEditor').set('value', ps.comment);
-		          dijit.byId("situationCommentEditor").focus();
-		        }
-			}
-	    }
-	  });
-}
-
 // =============================================================================
 // = Attachments
 // =============================================================================
 
-/**
- * Display an add attachment Box
- * 
- */
 function addAttachment(attachmentType,refType,refId) {
   var content="";
   if (dijit.byId('dialogAttachment')) content=dijit.byId('dialogAttachment').get('content');
@@ -1581,10 +1361,6 @@ function changeAttachment(list) {
   }
 }
 
-/**
- * save an Attachment
- * 
- */
 var cancelDupplicate=false;
 function saveAttachment(direct,idName) {
   // disableWidget('dialogAttachmentSubmit');
@@ -1628,11 +1404,6 @@ function saveAttachment(direct,idName) {
   return true;
 }
 
-/**
- * Acknowledge the attachment save
- * 
- * @return void
- */
 function saveAttachmentAck(dataArray) {
   if (dataArray==undefined) {
     dojo.style(dojo.byId('downloadProgress'), {display : 'none'});
@@ -1658,7 +1429,6 @@ function saveAttachmentAck(dataArray) {
   dojo.byId('resultAck').value=result.message;
   loadContent("../tool/ack.php", "resultDivMain", "attachmentAckForm", true,
       'attachment');
-//gautier #menuUserTop
   loadContent("../view/menuUserTop.php", "drawMenuUser");
 }
 
@@ -1668,13 +1438,9 @@ function saveAttachmentProgress(data) {
   if (total) {
     progress=done / total;
   }
-  // dojo.style(dojo.byId('downloadProgress'), {display:'block'});
   dijit.byId('downloadProgress').set('value', progress);
 }
-/**
- * Display a delete Attachment Box
- * 
- */
+
 function removeAttachment(attachmentId) {
   var content="";
   if (dijit.byId('dialogAttachment')) content=dijit.byId('dialogAttachment').get('content');
@@ -1746,10 +1512,6 @@ function saveAttachmentEdit() {
 // = Links
 // =============================================================================
 
-/**
- * Display a add link Box
- * 
- */
 var noRefreshLink=false;
 function addLink(classLink, defaultLink) {
   if (dojo.byId('objectClass') && dojo.byId('objectClass').value=='Requirement' && classLink=='TestCase' &&checkFormChangeInProgress()) {
@@ -1777,11 +1539,6 @@ function addLink(classLink, defaultLink) {
           i18n(classLink)));
       dijit.byId("linkRef2Type").setDisplayedValue(i18n(classLink));
       lockWidget("linkRef2Type");
-      // var url="../tool/dynamicListLink.php"
-      // + "?linkRef2Type="+dojo.byId("linkRef2Type").value
-      // + "&linkRef1Type="+objectClass
-      // + "&linkRef1Id="+objectId;
-      // loadContent(url, "dialogLinkList", null, false);
       noRefreshLink=false;
       refreshLinkList();
     } else {
@@ -1796,8 +1553,6 @@ function addLink(classLink, defaultLink) {
       noRefreshLink=false;
       refreshLinkList();
     }
-  
-    // dojo.byId("linkRef2Id").value='';
     dijit.byId("dialogLink").set('title', message);
     dijit.byId("linkComment").set('value', '');
     dijit.byId("dialogLink").show();
@@ -1850,9 +1605,6 @@ function selectLinkItem() {
   }
 }
 
-/**
- * Refresh the link list (after update)
- */
 function refreshLinkList(selected) {
   if (noRefreshLink)
     return;
@@ -1867,10 +1619,6 @@ function refreshLinkList(selected) {
   loadContent(url, 'dialogLinkList', 'linkForm', false);
 }
 
-/**
- * save a link (after addLink)
- * 
- */
 function saveLink() {
   if (dojo.byId("linkRef2Id").value == "")
     return;
@@ -1879,10 +1627,6 @@ function saveLink() {
   dijit.byId('dialogLink').hide();
 }
 
-/**
- * Display a delete Link Box
- * 
- */
 function removeLink(linkId, refType, refId, refTypeName, fixedClass) {
   if (dojo.byId('objectClass') && dojo.byId('objectClass').value=='Requirement' && fixedClass=='TestCase' && checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
@@ -1930,794 +1674,6 @@ function editLink(linkId,id,classLink){
   loadDialog('dialogLink',callBack,false,params);
 }
 
-
-//=============================================================================
-//= Product Composition
-//=============================================================================
-
-/**
-* Display a add link Box
-* 
-*/
-function addProductStructure(way) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way;
-  var callBackFunc=function() {
-    if (dojo.byId('directAccessToList') && dojo.byId('directAccessToList').value=='true') {
-      var canCreate=0;
-      if (dojo.byId('productStructureCanCreateComponent')) {
-        canCreate=dojo.byId('productStructureCanCreateComponent').value;
-      }
-      showDetail('productStructureListId', canCreate, 'Component', true); 
-    } else {
-      dijit.byId('dialogProductStructure').show();
-    }
-  }
-  dojo.xhrGet({
-   	url : "../tool/filterComponentType.php?" + param,
-	});
-  loadDialog('dialogProductStructure',callBackFunc, false, param, true);
-}
-
-function editProductStructure(way,productStructureId) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  
-  var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way+"&structureId="+productStructureId;
-  loadDialog('dialogProductStructure',null, true, param, true);
-}
-
-function refreshProductStructureList(selected,newName) {
-  var selectList=dojo.byId('productStructureListId');
-  if (selected && selectList) {
-    if (newName) {
-      var option = document.createElement("option");
-      option.text = newName;
-      option.value=selected;
-      selectList.add(option);
-    }
-    var ids=selected.split('_');
-    for (j=0;j<selectList.options.length;j++) {
-      var sel=selectList.options[j].value;
-      if (ids.indexOf(sel)>=0) { // Found in selected items
-        selectList.options[j].selected='selected';
-      }
-    }
-    selectList.focus()
-    enableWidget('dialogProductStructureSubmit');
-  }
-}
-/**
-* save a link (after addLink)
-* 
-*/
-function saveProductStructure() {
-  if (dojo.byId("productStructureListId").value == "") return;
-  loadContent("../tool/saveProductStructure.php", "resultDivMain", "productStructureForm", true, 'ProductStructure');
-  dijit.byId('dialogProductStructure').hide();
-}
-
-/**
-* Display a delete Link Box
-* 
-*/
-function removeProductStructure(ProductStructureId, refType, refId, refTypeName) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  actionOK=function() {
-   loadContent("../tool/removeProductStructure.php?id="+ProductStructureId, "resultDivMain", null, true, 'ProductStructure');
-  };
-  if (!refTypeName) {
-   refTypeName=i18n(refType);
-  }
-  msg=i18n('confirmDeleteLink', new Array(refTypeName, refId));
-  showConfirm(msg, actionOK);
-}
-
-//ADD by qCazelles - Business features
-//=============================================================================
-//= BusinessFeatures
-//=============================================================================
-function addBusinessFeature() {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return;
-	}
-	var objectClass=dojo.byId('objectClass').value;
-	var objectId=dojo.byId("objectId").value;
-	var param="&objectClass="+objectClass+"&objectId="+objectId;
-	loadDialog('dialogBusinessFeature', null, true, param, false);
-}
-
-//ADD qCazelles - Business Feature (Correction)
-function editBusinessFeature(businessFeatureId) {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return;
-	}
-	var objectClass=dojo.byId('objectClass').value;
-	var objectId=dojo.byId("objectId").value;
-	var param="&objectClass="+objectClass+"&objectId="+objectId+"&businessFeatureId="+businessFeatureId;
-	loadDialog('dialogBusinessFeature', null, true, param, false);
-}
-//END ADD qCazelles - Business Feature (Correction)
-
-function saveBusinessFeature() {
-	if (dojo.byId("businessFeatureName").value == "") return;
-	loadContent("../tool/saveBusinessFeature.php", "resultDivMain", "businessFeatureForm", true, 'BusinessFeature');
-	dijit.byId('dialogBusinessFeature').hide();	
-}
-
-function removeBusinessFeature(businessFeatureId, refType) {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return;
-	}
-	actionOK=function() {
-		loadContent("../tool/removeBusinessFeature.php?businessFeatureId="+businessFeatureId, "resultDivMain", null, true, 'BusinessFeature');
-	};
-	msg=i18n('confirmDeleteBusinessFeature', new Array(refType, businessFeatureId));
-	showConfirm(msg, actionOK);
-}
-//END ADD qCazelles
-
-//ADD qCazelles - Lang-Context
-//=============================================================================
-//= Product/Component Language/Context 
-//=============================================================================
-
-function addLanguage(scope) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  var param="&objectClass="+objectClass+"&objectId="+objectId;
-  if (scope == "LocalizationTranslator"){
-    loadDialog('dialogTranslatorLanguage', null, true, param, false);
-  }
-  else{
-    loadDialog('dialogProductLanguage', null, true, param, false);
-  }
-
-}
-function saveTranslationLanguage() {
-  loadContent("../tool/saveTranslatorLanguage.php", "resultDivMain", "translatorLanguageForm", true, 'LocalizationTranslatorLanguage');
-  dijit.byId('dialogTranslatorLanguage').hide();
-}
-
-function saveProductLanguage() {
-	loadContent("../tool/saveProductLanguage.php", "resultDivMain", "productLanguageForm", true, 'ProductLanguage');
-	dijit.byId('dialogProductLanguage').hide();
-}
-
-
-function editLanguage(typeLanguageId, scope) {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return;
-	}
-	var objectClass=dojo.byId('objectClass').value;
-	var objectId=dojo.byId("objectId").value;
-
-	var param="&objectClass="+objectClass+"&objectId="+objectId+"&languageId="+typeLanguageId;
-
-    if (scope == "LocalizationTranslator"){
-      loadDialog('dialogTranslatorLanguage', null, true, param, false);
-    }
-    else{
-      loadDialog('dialogProductLanguage',null,true,param,true);
-    }
-}
-
-function removeLanguage(typeLanguageId, refType) {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return;
-	}
-	if (refType == 'LocalizationTranslator'){
-      actionOK=function() {
-        loadContent("../tool/removeTranslatorLanguage.php?refType="+refType+"&translatorLanguageId="+typeLanguageId, "resultDivMain", null, true, 'LocalizationTranslatorLanguage');
-      };
-    }
-	else{
-      actionOK=function() {
-        loadContent("../tool/removeProductLanguage.php?refType="+refType+"&productLanguageId="+typeLanguageId, "resultDivMain", null, true, 'ProductLanguage');
-      };
-    }
-    msg=i18n('confirmDeleteLanguage');
-    showConfirm(msg, actionOK);
-}
-
-function addProductContext() {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return;
-	}
-	var objectClass=dojo.byId('objectClass').value;
-	var objectId=dojo.byId("objectId").value;
-	var param="&objectClass="+objectClass+"&objectId="+objectId;
-	loadDialog('dialogProductContext', null, true, param, false);
-}
-
-function saveProductContext() {
-	loadContent("../tool/saveProductContext.php", "resultDivMain", "productContextForm", true, 'ProductContext');
-	dijit.byId('dialogProductContext').hide();	
-}
-
-function editProductContext(productContextId) {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return;
-	}
-	var objectClass=dojo.byId('objectClass').value;
-	var objectId=dojo.byId("objectId").value;
-	
-	var param="&objectClass="+objectClass+"&objectId="+objectId+"&contextId="+productContextId;
-	loadDialog('dialogProductContext',null,true,param,true);
-}
-
-function removeProductContext(productContextId, refType) {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return;
-	}
-	actionOK=function() {
-		loadContent("../tool/removeProductContext.php?refType="+refType+"&productContextId="+productContextId, "resultDivMain", null, true, 'ProductContext');
-	};
-	msg=i18n('confirmDeleteProductContext');
-	showConfirm(msg, actionOK);
-}
-//END ADD qCazelles - Lang-Context
-//ADD qCazelles - Version compatibility
-//=============================================================================
-//= Product Version Compatibility
-//=============================================================================
-function addVersionCompatibility() {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return;
-	}
-	var objectClass=dojo.byId('objectClass').value;
-	var objectId=dojo.byId("objectId").value;
-	var param="&objectClass="+objectClass+"&objectId="+objectId;
-	var callBackFunc=function() {
-		 if (dojo.byId('directAccessToList') && dojo.byId('directAccessToList').value=='true') {
-			  showDetail('versionCompatibilityListId', 0, 'ProductVersion', true);
-			  dijit.byId('dialogDetail').on('hide', function(evt) {
-				  dojo.xhrGet({
-					  url : "../tool/removeHiddenFilterDetail.php?objectClass=ProductVersion"
-				  });
-				  dijit.byId('dialogDetail').on('hide', null);
-				  dijit.byId('dialogVersionCompatibility').hide();
-			  });
-		  }else {
-			 	dijit.byId('dialogVersionCompatibility').show();
-		 }
-	};
-	loadDialog('dialogVersionCompatibility', callBackFunc, false, param, true);
-}
-
-//ADD aGaye - Ticket 179
-function refreshVersionCompatibilityList(selected,newName) {
-	  var selectList=dojo.byId('versionCompatibilityListId');
-	  if (selected && selectList) {
-	    if (newName) {
-	      var option = document.createElement("option");
-	      option.text = newName;
-	      option.value=selected;
-	      selectList.add(option);
-	    }
-	    var ids=selected.split('_');
-	    for (j=0;j<selectList.options.length;j++) {
-	      var sel=selectList.options[j].value;
-	      if (ids.indexOf(sel)>=0) { // Found in selected items
-	        selectList.options[j].selected='selected';
-	      }
-	    }
-	    selectList.focus();
-	    enableWidget('dialogVersionCompatibilitySubmit');
-	  }
-}
-//END aGaye - Ticket 179
-
-function saveVersionCompatibility() {
-if (dojo.byId('versionCompatibilityListId').value=='') return;
-loadContent("../tool/saveVersionCompatibility.php", "resultDivMain", "versionCompatibilityForm", true, 'VersionCompatibility');
-dijit.byId('dialogVersionCompatibility').hide();
-}
-
-function removeVersionCompatibility(versionCompatibilityId, refType, refId, refTypeName) {
-if (checkFormChangeInProgress()) {
-	showAlert(i18n('alertOngoingChange'));
-	return;
-}
-actionOK=function() {
-	loadContent("../tool/removeVersionCompatibility.php?versionCompatibilityId="+versionCompatibilityId, "resultDivMain", null, true, 'VersionCompatibility');
-};
-if (!refTypeName) {
-	refTypeName=i18n(refType);
-}
-msg=i18n('confirmDeleteVersionCompatibility', new Array(refType, versionCompatibilityId));
-showConfirm(msg, actionOK);
-}
-//END ADD qCazelles - Version compatibility
-
-//Gautier #4404
-function addAssetComposition(id) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-    dijit.byId("dialogAssetComposition").show();
-  };
-  var params="&idParent="+id;
-  params+="&mode=add";  
-  loadDialog('dialogAssetComposition',callBack,false,params);
-}
-
-function saveAssetComposition() {
-  if (dojo.byId("idParent").value == "") return;
-  loadContent("../tool/saveAssetComposition.php", "resultDivMain", "assetCompositionForm", true, 'AssetComposition');
-  dijit.byId('dialogAssetComposition').hide();
-}
-
-function removeAssetComposition(assetId) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  actionOK=function() {
-   loadContent("../tool/removeAssetComposition.php?id="+assetId, "resultDivMain", null, true, 'AssetComposition');
-  };
-  refTypeName=i18n('Asset');
-  msg=i18n('confirmDeleteLink', new Array(refTypeName, assetId));
-  showConfirm(msg, actionOK);
-}
-//=============================================================================
-//= Product Version Composition
-//=============================================================================
-
-/**
-* Display a add link Box
-* 
-*/
-function addProductVersionStructure(way) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way;
-  //CHANGE qCazelles - Ticket 165
-  //Old
-  //loadDialog('dialogProductVersionStructure', null, false, param, true);
-  //New
-  var callBackFunc=function() {
-	  if (dojo.byId('directAccessToList') && dojo.byId('directAccessToList').value=='true') {
-		  showDetail('productVersionStructureListId', 0, 'ComponentVersion', true);
-		  handle=dijit.byId('dialogDetail').on('hide', function(evt) {
-			  dojo.xhrGet({
-				  url : "../tool/removeHiddenFilterDetail.php?objectClass=ComponentVersion"
-			  });
-			  //dijit.byId('dialogDetail').on('hide', null);
-			  handle.remove();
-		  });
-	  } else {
-		  dijit.byId('dialogProductVersionStructure').show();
-	  }
-  }
-  loadDialog('dialogProductVersionStructure', callBackFunc, false, param, true);
-  //END CHANGE qCazelles - Ticket 165
-}
-
-function editProductVersionStructureAsset(productVersionStructureId) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  var param="&objectClass="+objectClass+"&objectId="+objectId+"&structureId="+productVersionStructureId;
-  loadDialog('dialogProductVersionStructure',null, true, param, true);
-}
-
-function editProductVersionStructure(way, productVersionStructureId) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way+"&structureId="+productVersionStructureId;
-  loadDialog('dialogProductVersionStructure',null, true, param, true);
-}
-
-var upgradeProductVersionStructureId=null;
-function upgradeProductVersionStructure(structureId,withoutConfirm) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  upgradeProductVersionStructureId=structureId;
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  var params="&objectClass="+objectClass+"&objectId="+objectId;
-  if (structureId) params+="&structureId="+structureId;
-  if (withoutConfirm) {
-    loadContent("../tool/upgradeProductVersionStructure.php?confirm=true"+params, "resultDivMain", null, true, 'ProductVersionStructure');
-  } else {
-    dojo.xhrGet({
-      url : "../tool/upgradeProductVersionStructure.php?confirm=false"+params,
-      handleAs : "text",
-      load : function(data) {
-        actionOK=function() {
-          var objectClass=dojo.byId('objectClass').value;
-          var objectId=dojo.byId("objectId").value;
-          var params="&objectClass="+objectClass+"&objectId="+objectId;
-          if (upgradeProductVersionStructureId) params+="&structureId="+upgradeProductVersionStructureId;
-          loadContent("../tool/upgradeProductVersionStructure.php?confirm=true"+params, "resultDivMain", null, true, 'ProductVersionStructure');
-        };
-        showConfirm(data, actionOK);
-      }
-    });
-  }
-}
-
-function refreshProductVersionStructureList(selected,newName) {
-  var selectList=dojo.byId('productVersionStructureListId');
-  if (selected && selectList) {
-    if (newName) {
-      var option = document.createElement("option");
-      option.text = newName;
-      option.value=selected;
-      selectList.add(option);
-    }
-    var ids=selected.split('_');
-    for (var j=0;j<selectList.options.length;j++) {
-      var sel=selectList.options[j].value;
-      if (ids.indexOf(sel)>=0) { // Found in selected items
-        selectList.options[j].selected='selected';
-      }
-    }
-    selectList.focus();
-    enableWidget('dialogProductVersionStructureSubmit');
-  }
-}
-/**
-* save a link (after addLink)
-* 
-*/
-function saveProductVersionStructure() {
-  if (dojo.byId("productVersionStructureListId").value == "") return;
-  loadContent("../tool/saveProductVersionStructure.php", "resultDivMain", "productVersionStructureForm", true, 'ProductVersionStructure');
-  dijit.byId('dialogProductVersionStructure').hide();
-}
-
-function saveProductVersionStructureAsset(){
-  if (dojo.byId("productVersionStructureListId").value == "") return;
-  loadContent("../tool/saveProductAsset.php", "resultDivMain", "productVersionStructureForm", true, 'ProductVersionStructure');
-  dijit.byId('dialogProductVersionStructure').hide();
-}
-
-/**
-* Display a delete Link Box
-* 
-*/
-function removeProductVersionStructure(ProductVersionStructureId, refType, refId, refTypeName) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  actionOK=function() {
-   loadContent("../tool/removeProductVersionStructure.php?id="+ProductVersionStructureId, "resultDivMain", null, true, 'ProductVersionStructure');
-  };
-  if (!refTypeName) {
-   refTypeName=i18n(refType);
-  }
-  msg=i18n('confirmDeleteLink', new Array(refTypeName, refId));
-  showConfirm(msg, actionOK);
-}
-
-function removeProductVersionStructureAsset(id,refType, refId,refTypeName) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  actionOK=function() {
-   loadContent("../tool/removeProductVersionStructureAsset.php?id="+id, "resultDivMain", null, true, 'ProductVersionStructure');
-  };
-  if (!refTypeName) {
-    refTypeName=i18n(refType);
-   }
-  msg=i18n('confirmDeleteLink', new Array(refTypeName, refId));
-  showConfirm(msg, actionOK);
-}
-
-function changeValueSecurityConstraint(value) {
-  dojo.byId("securityConstraint").value=value;
-}
-
-// =============================================================================
-// = OtherVersions
-// =============================================================================
-function addOtherVersion(versionType) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  dojo.byId("otherVersionRefType").value=objectClass;
-  dojo.byId("otherVersionRefId").value=objectId;
-  dojo.byId("otherVersionType").value=versionType;
-  refreshOtherVersionList(null);
-  dijit.byId("dialogOtherVersion").show();
-  disableWidget('dialogOtherVersionSubmit');
-}
-
-/**
- * Refresh the link list (after update)
- */
-function refreshOtherVersionList(selected) {
-  disableWidget('dialogOtherVersionSubmit');
-  var url='../tool/dynamicListOtherVersion.php';
-  if (selected) {
-    url+='?selected=' + selected;
-  }
-  if (!selected) {
-    selectOtherVersionItem();
-  }
-  loadContent(url, 'dialogOtherVersionList', 'otherVersionForm', false);
-}
-
-function selectOtherVersionItem() {
-  var nbSelected=0;
-  list=dojo.byId('otherVersionIdVersion');
-  if (list.options) {
-    for (var i=0; i < list.options.length; i++) {
-      if (list.options[i].selected) {
-        nbSelected++;
-      }
-    }
-  }
-  if (nbSelected > 0) {
-    enableWidget('dialogOtherVersionSubmit');
-  } else {
-    disableWidget('dialogOtherVersionSubmit');
-  }
-}
-
-function saveOtherVersion() {
-  if (dojo.byId("otherVersionIdVersion").value == "")
-    return;
-  loadContent("../tool/saveOtherVersion.php", "resultDivMain", "otherVersionForm",
-      true, 'otherVersion');
-  dijit.byId('dialogOtherVersion').hide();
-}
-
-function removeOtherVersion(id, name, type) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  dojo.byId("otherVersionId").value=id;
-  actionOK=function() {
-    loadContent("../tool/removeOtherVersion.php", "resultDivMain",
-        "otherVersionForm", true, 'otherVersion');
-  };
-  msg=i18n('confirmDeleteOtherVersion', new Array(name, i18n('colId' + type)));
-  showConfirm(msg, actionOK);
-}
-
-function swicthOtherVersionToMain(id, name, type) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  dojo.byId("otherVersionId").value=id;
-  // actionOK=function() {loadContent("../tool/switchOtherVersion.php",
-  // "resultDivMain", "otherVersionForm", true,'otherVersion');};
-  // msg=i18n('confirmSwitchOtherVersion',new Array(name, i18n('col'+type)));
-  // showConfirm (msg, actionOK);
-  loadContent("../tool/switchOtherVersion.php", "resultDivMain",
-      "otherVersionForm", true, 'otherVersion');
-}
-
-function showDetailOtherVersion() {
-  var canCreate=0;
-  if (canCreateArray['Version'] == "YES") {
-    canCreate=1;
-  }
-  var versionType='Version';
-  if (dojo.byId("otherVersionType")) {
-    var typeValue=dojo.byId("otherVersionType").value;
-    if (typeValue.substr(-16)=='ComponentVersion') versionType='ComponentVersion';
-    else if (typeValue.substr(-14)=='ProductVersion') versionType='ProductVersion';
-  }
-  showDetail('otherVersionIdVersion', canCreate, versionType, true);
-}
-
-//=============================================================================
-//= OtherClients
-//=============================================================================
-var handle=null;
-function addOtherClient() {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  dojo.byId("otherClientRefType").value=objectClass;
-  dojo.byId("otherClientRefId").value=objectId;
-  if (1) { // direct Access To List : always on
-    dojo.byId('otherClientIdClient').value=null;
-    showDetail('otherClientIdClient', 0, 'Client', true);
-    handle=dijit.byId('dialogDetail').on('hide', function(evt) {
-      saveOtherClient();
-      handle.remove();
-    });
-  } else { // No real use, kept in case direct access to list will become parametered
-    refreshOtherClientList(null);
-    dijit.byId("dialogOtherClient").show();
-    disableWidget('dialogOtherClientSubmit');
-  }
-}
-
-/**
-* Refresh the link list (after update)
-*/
-function refreshOtherClientList(selected) {
-  disableWidget('dialogOtherClientSubmit');
-  var url='../tool/dynamicListOtherClient.php';
-  if (selected) {
-   url+='?selected=' + selected;
-  }
-  if (!selected) {
-   selectOtherClientItem();
-  }
-  loadContent(url, 'dialogOtherClientList', 'otherClientForm', false);
-}
-
-function selectOtherClientItem() {
-  var nbSelected=0;
-  list=dojo.byId('otherClientIdClient');
-  if (list.options) {
-   for (var i=0; i < list.options.length; i++) {
-     if (list.options[i].selected) {
-       nbSelected++;
-     }
-   }
-  }
-  if (nbSelected > 0) {
-   enableWidget('dialogOtherClientSubmit');
-  } else {
-   disableWidget('dialogOtherClientSubmit');
-  }
-}
-
-function saveOtherClient() {
-  if (dojo.byId("otherClientIdClient").value == "")
-   return;
-  loadContent("../tool/saveOtherClient.php", "resultDivMain", "otherClientForm",
-     true, 'otherClient');
-  dijit.byId('dialogOtherClient').hide();
-}
-
-function removeOtherClient(id, name, type) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  dojo.byId("otherClientId").value=id;
-  actionOK=function() {
-   loadContent("../tool/removeOtherClient.php", "resultDivMain",
-       "otherClientForm", true, 'otherClient');
-  };
-  msg=i18n('confirmDeleteOtherClient', new Array(name, i18n('colId' + type)));
-  showConfirm(msg, actionOK);
-}
-
-function swicthOtherClientToMain(id, name, type) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  dojo.byId("otherClientId").value=id;
-  loadContent("../tool/switchOtherClient.php", "resultDivMain",
-     "otherClientForm", true, 'otherClient');
-}
-
-function showDetailOtherClient() {
-  var canCreate=0;
-  if (canCreateArray['Client'] == "YES") {
-   canCreate=1;
-  }
-  showDetail('otherVersionIdVersion', canCreate, 'Client', true);
-}
-// =============================================================================
-// = Approvers
-// =============================================================================
-
-/**
- * Display a add link Box
- * 
- */
-function addApprover() {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  dojo.byId("approverRefType").value=objectClass;
-  dojo.byId("approverRefId").value=objectId;
-  refreshApproverList();
-  dijit.byId("dialogApprover").show();
-  disableWidget('dialogApproverSubmit');
-}
-
-function selectApproverItem() {
-  var nbSelected=0;
-  list=dojo.byId('approverId');
-  if (list.options) {
-    for (var i=0; i < list.options.length; i++) {
-      if (list.options[i].selected) {
-        nbSelected++;
-      }
-    }
-  }
-  if (nbSelected > 0) {
-    enableWidget('dialogApproverSubmit');
-  } else {
-    disableWidget('dialogApproverSubmit');
-  }
-}
-
-/**
- * Refresh the Approver list (after update)
- */
-function refreshApproverList(selected) {
-  disableWidget('dialogApproverSubmit');
-  var url='../tool/dynamicListApprover.php';
-  if (selected) {
-    url+='?selected=' + selected;
-  }
-  selectApproverItem();
-  loadContent(url, 'dialogApproverList', 'approverForm', false);
-}
-
-/**
- * save a link (after addLink)
- * 
- */
-function saveApprover() {
-  if (dojo.byId("approverId").value == "")
-    return;
-  loadContent("../tool/saveApprover.php", "resultDivMain", "approverForm", true,
-      'approver');
-  dijit.byId('dialogApprover').hide();
-}
-
-/**
- * Display a delete Link Box
- * 
- */
 function removeFollowup(followupId,all){
   var param="?messageFollowup="+followupId;
   param+="&deleteAll="+all;
@@ -2734,56 +1690,10 @@ function removeFollowup(followupId,all){
   showConfirm(msg, actionOK);
 }
 
-function removeApprover(approverId, approverName) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  dojo.byId("approverItemId").value=approverId;
-  dojo.byId("approverRefType").value=dojo.byId('objectClass').value;
-  dojo.byId("approverRefId").value=dojo.byId("objectId").value;
-  actionOK=function() {
-    loadContent("../tool/removeApprover.php", "resultDivMain", "approverForm",
-        true, 'approver');
-  };
-  msg=i18n('confirmDeleteApprover', new Array(approverName));
-  showConfirm(msg, actionOK);
-}
-
-function approveItem(approverId, action) {
-  var form = null;
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  if(action=='disapproved'){
-	  form='confirmDisapproveForm';
-  }
-  loadContent("../tool/approveItem.php?approverId="+approverId+"&action="+action, "resultDivMain",form, true, 'approver');
-}
-
-function disapproveItem(approverId){
-	var params = "&approverId="+approverId;
-	loadDialog('dialogConfirmDisapprove',null, true, params, false);
-}
-
-function enableConfirmDisapproveSubmit(value){
-	var value = dijit.byId('disapproveDescription').get('value');
-	if(value != ""){
-		enableWidget('dialogConfirmDisapproveSubmit');
-	}else{
-		disableWidget('dialogConfirmDisapproveSubmit');
-	}
-}
-
 // =============================================================================
 // = Origin
 // =============================================================================
 
-/**
- * Display a add origin Box
- * 
- */
 function addOrigin() {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
@@ -2800,9 +1710,6 @@ function addOrigin() {
   disableWidget('dialogOriginSubmit');
 }
 
-/**
- * Refresh the origin list (after update)
- */
 function refreshOriginList(selected) {
   disableWidget('dialogOriginSubmit');
   var url='../tool/dynamicListOrigin.php';
@@ -2812,10 +1719,6 @@ function refreshOriginList(selected) {
   loadContent(url, 'dialogOriginList', 'originForm', false);
 }
 
-/**
- * save a link (after addLink)
- * 
- */
 function saveOrigin() {
   if (dojo.byId("originOriginId").value == "")
     return;
@@ -2824,10 +1727,6 @@ function saveOrigin() {
   dijit.byId('dialogOrigin').hide();
 }
 
-/**
- * Display a delete Link Box
- * 
- */
 function removeOrigin(id, origType, origId) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
@@ -2846,1250 +1745,21 @@ function removeOrigin(id, origType, origId) {
   showConfirm(msg, actionOK);
 }
 
-// =============================================================================
-// = Assignments
-// =============================================================================
-
-/**
- * Display a add Assignment Box
- * 
- */
-function addAssignment(unit, rawUnit, hoursPerDay, isTeam, isOrganization, isResourceTeam) {
-
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var objClass = dojo.byId('objectClass').value;
-  if(objClass == 'PokerSessionDefinition')objClass='PokerSession';
-  var callBack = function () {
-    dijit.byId("dialogAssignment").show();
-  };
-  var params="&refType="+objClass;
-  params+="&refId="+dojo.byId("objectId").value;
-  params+="&idProject="+dijit.byId('idProject').get('value');
-  params+="&unit="+unit;
-  if (dojo.byId('objectClass').value == 'Meeting' || dojo.byId('objectClass').value == 'PeriodicMeeting') {
-    params+="&meetingEndTime="+dijit.byId('meetingEndTime');
-    params+="&meetingEndTimeValue="+dijit.byId('meetingEndTime').get('value');
-    params+="&meetingStartTime="+dijit.byId('meetingStartTime');
-    params+="&meetingStartTimeValue="+dijit.byId('meetingStartTime').get('value');
-    params+="&rawUnit="+rawUnit;
-    params+="&hoursPerDay="+hoursPerDay;
-  }
-  if (objClass == 'PokerSession') {
-	    params+="&pokerSessionEndTime="+dijit.byId('pokerSessionEndTime');
-	    params+="&pokerSessionEndTimeValue="+dijit.byId('pokerSessionEndTime').get('value');
-	    params+="&pokerSessionStartTime="+dijit.byId('pokerSessionStartTime');
-	    params+="&pokerSessionStartTimeValue="+dijit.byId('pokerSessionStartTime').get('value');
-	    params+="&rawUnit="+rawUnit;
-	    params+="&hoursPerDay="+hoursPerDay;
-	  }
-  if (dojo.byId('objectClass').value != 'PeriodicMeeting' && objClass != 'PokerSession') {
-    params+="&validatedWorkPe="+dijit.byId(objClass +"PlanningElement_validatedWork").get('value');
-    params+="&assignedWorkPe="+dijit.byId(objClass +"PlanningElement_assignedWork").get('value');
-  }
-  params+="&isTeam="+isTeam+"&isOrganization="+isOrganization+"&isResourceTeam="+isResourceTeam;;
-  params+="&mode=add";  
-  loadDialog('dialogAssignment',callBack,false,params);
-}
-
-/**
- * Display a edit Assignment Box
- * 
- */
-
-var editAssignmentLoading=false;
-function editAssignment(assignmentId, idResource, idRole, cost, rate,
-    assignedWork, realWork, leftWork, unit, optional) { 
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-    editAssignmentLoading=false;
-    assignmentUpdatePlannedWork('assignment');
-    dijit.byId("dialogAssignment").show();
-};
-var params="&idAssignment="+assignmentId;
-params+="&refType="+dojo.byId('objectClass').value;
-params+="&idProject="+dijit.byId('idProject').get('value');
-params+="&refId="+dojo.byId("objectId").value;
-params+="&idResource="+idResource;
-params+="&idRole="+idRole;
-params+="&mode=edit";
-params+="&unit="+unit;
-params+="&realWork="+realWork;
-editAssignmentLoading=true;
-loadDialog('dialogAssignment',callBack,false,params);
-}
-
-/**
- * Display a divide assignment box 
- * 
- * @param prefix
- * @return
- */
-
-function divideAssignment(assignedIdOrigin,unit) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-    dijit.byId("dialogAssignment").show();
-  };
-  var params="&refType="+dojo.byId('objectClass').value;
-  params+="&refId="+dojo.byId("objectId").value;
-  params+="&idProject="+dijit.byId('idProject').get('value');
-  params+="&assignedIdOrigin="+assignedIdOrigin;
-  params+="&unit="+unit;
-  params+="&mode=divide";
-  loadDialog('dialogAssignment',callBack,false,params);
-}
-
-/**
- * Update the left work on assignment update
- * 
- * @param prefix
- * @return
- */
-function assignmentUpdateLeftWork(prefix) {
-  var initAssigned=dojo.byId(prefix + "AssignedWorkInit");
-  var initLeft=dojo.byId(prefix + "LeftWorkInit");
-  var assigned=dojo.byId(prefix + "AssignedWork");
-  var newAssigned=dojo.number.parse(assigned.value);
-  
-
-  if(dojo.byId('objectClass').value=='Activity' && prefix=='assignment'){
-    var isOnRealTime=dijit.byId('workOnRealTime').get('value');
-    if(isOnRealTime=='on'){
-      var realdWork=dojo.byId(prefix + "RealWork").value;
-      if(newAssigned<realdWork){
-        dijit.byId(prefix + "AssignedWork").set("value",initAssigned.value);
-        dijit.byId(prefix+"LeftWork").set("value",initLeft.value);
-        showAlert(i18n('assingedWorkCantBeLowerInWorkOnRealTime'));
-        return;
-      }
-    }
-  }
-  
-  if (newAssigned == null || isNaN(newAssigned)) {
-    newAssigned=0;
-    assigned.value=dojo.number.format(newAssigned);
-  }
-  var left=dojo.byId(prefix + "LeftWork");
-  //// Krowry #2338 ////
-  var real = dojo.byId(prefix + "RealWork");
-  // var planned = dojo.byId(prefix + "PlannedWork");
-  diff=dojo.number.parse(assigned.value) - initAssigned.value;
-  newLeft=parseFloat(initLeft.value) + diff;
-  if (newLeft < 0 || isNaN(newLeft)) {
-    newLeft=0;
-  }
-  if(assigned.value != initAssigned.value){
-    diffe=dojo.number.parse(assigned.value) - real.value ;
-    if (initAssigned.value==0 || isNaN(initAssigned.value)){
-      newLeft= 0 + diffe;
-    }
-  }
-  left.value=dojo.number.format(newLeft);
-  assignmentUpdatePlannedWork(prefix);
-}
-
-/**
- * Update the planned work on assignment update
- * 
- * @param prefix
- * @return
- */
-function assignmentUpdatePlannedWork(prefix) {
-  var left=dojo.byId(prefix + "LeftWork");
-  var newLeft=dojo.number.parse(left.value);
-  if (newLeft == null || isNaN(newLeft)) {
-    newLeft=0;
-    left.value=dojo.number.format(newLeft);
-  }
-  var real=dojo.byId(prefix + "RealWork");
-  var planned=dojo.byId(prefix + "PlannedWork");
-  newPlanned=dojo.number.parse(real.value) + dojo.number.parse(left.value);
-  planned.value=dojo.number.format(newPlanned);
-  
-}
-
-/**
- * save an Assignment (after addAssignment or editAssignment)
- * 
- */
-function saveAssignment(definitive) {
-  /*
-   * if (! dijit.byId('assignmentIdResource').get('value')) {
-   * showAlert(i18n('messageMandatory',new Array(i18n('colIdResource'))));
-   * return; } if (! dijit.byId('assignmentIdResource').get('value')) {
-   * showAlert(i18n('messageMandatory',new Array(i18n('colIdResource'))));
-   * return; }
-   */
-  var formVar=dijit.byId('assignmentForm');
-  var planningMode = dojo.byId('planningMode').value;
-  var mode = dojo.byId('mode').value;
-  var isTeam = dojo.byId('isTeam').value;
-  var isOrga = dojo.byId('isOrganization').value;
-  
-  if(dojo.byId('objectClass').value=='Activity'){
-    var isOnRealTime=dijit.byId('workOnRealTime').get('value');
-    if(isOnRealTime=='on'){
-      var realdWork=dojo.byId('assignmentRealWork').value,
-            assign=dojo.byId('assignmentAssignedWork').value;
-      if(assign<realdWork){
-        dijit.byId("assignmentAssignedWork").set("value",dojo.byId('assignedWorkOrigin').value);
-        showAlert(i18n('assingedWorkCantBeLowerInWorkOnRealTime'));
-        return;
-      }
-    }
-  }
-  
-  if (formVar.validate()) {
-    dijit.byId("assignmentPlannedWork").focus();
-    dijit.byId("assignmentLeftWork").focus();
-    url="../tool/saveAssignment.php";
-    if (definitive) url+="?definitive="+definitive;
-    if(planningMode == 'MAN' && mode != 'edit' && !isTeam && !isOrga){
-    	var callback=function(){
-    	    	var lastOperationStatus = dojo.byId('lastOperationStatus').value;
-    	    	if(lastOperationStatus != 'INVALID'){
-    	    		var params="&idAssignment="+dojo.byId('idAssignment').value;
-        	    	params+="&refType="+dojo.byId('objectClass').value;
-        	    	params+="&idProject="+dijit.byId('idProject').get('value');
-        	    	params+="&refId="+dojo.byId("objectId").value;
-        	    	params+="&idResource="+dijit.byId('assignmentIdResource').get('value');
-        	    	params+="&idRole="+dijit.byId('assignmentIdRole').get('value');
-        	    	params+="&unit="+dojo.byId('assignmentAssignedUnit').value;
-        	    	params+="&realWork="+dijit.byId('assignmentRealWork').get('value');
-        	    	params+=dijit.byId('assignmentDailyCost').get('value');
-        	    	params+="&mode=edit";
-    	    		loadDialog('dialogAssignment',null,false,params);
-    	    	}else{
-        	    	if(dojo.byId('objectClass').value=='PokerSession' || dojo.byId('objectClass').value=='PokerSessionDefinition'){
-        	    		url="../tool/savePokerMember.php";
-        	    		loadContent(url, "resultDivMain", "assignmentForm", true);
-        	    	}
-    	    		dijit.byId('dialogAssignment').hide();
-    	    	}
-        };
-        loadContent(url, "resultDivMain", "assignmentForm",
-            true, 'assignment', null,null,callback);
-    }else{
-    	loadContent(url, "resultDivMain", "assignmentForm",
-                true, 'assignment');
-    	if(dojo.byId('objectClass').value=='PokerSession' || dojo.byId('objectClass').value=='PokerSessionDefinition'){
-    		url="../tool/savePokerMember.php";
-    		loadContent(url, "resultDivMain", "assignmentForm", true);
-    	}
-    	dijit.byId('dialogAssignment').hide();
-    }
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-/**
- * Display a delete Assignment Box
- * 
- */
-function removeAssignment(assignmentId, realWork, resource) {
-  var planningMode = dojo.byId('planningMode').value;
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  if (parseFloat(realWork)) {
-    msg=i18n('msgUnableToDeleteRealWork');
-    showAlert(msg);
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeAssignment.php?assignmentId="+assignmentId+"&assignmentRefType="+dojo.byId('objectClass').value+"&assignmentRefId="+dojo.byId("objectId").value+"&planningMode="+planningMode, "resultDivMain", null,
-        true, "assignment");
-  };
-  msg=i18n('confirmDeleteAssignment', new Array(resource));
-  if(planningMode == 'MAN'){
-	  msg += '<br/><br/>'+i18n("confirmControlDeletePlannedWork");
-  }
-  showConfirm(msg, actionOK);
-}
-//gautier #resourceTeam
-function assignmentChangeResourceTeamForCapacity() {
-  if (editAssignmentLoading)
-    return;
-  var idResource=dijit.byId("assignmentIdResource").get("value");
-  var isResourceTeamDialog = document.getElementById("isResourceTeam").value;
-  if (idResource.trim()) {
-	  enableWidget('dialogAssignmentSubmit');
-  }else{
-	  disableWidget('dialogAssignmentSubmit');
-  }
-  if (!idResource.trim()) {return;}
-  dojo.xhrGet({
-    url : '../tool/getIfResourceTeamOrResource.php?idResource='+idResource,
-    handleAs : "text",
-    load : function(data) {
-      if(data == 'isResourceTeam' && !isResourceTeamDialog){ // in case if we are in resourceTeam assignment dialog
-        dojo.byId('assignmentRateRow').style.display="none";
-        dojo.byId('assignmentCapacityResourceTeam').style.display="table-row";
-        dojo.byId('assignmentUniqueSelection').style.display="table-row";
-      }else{
-        dojo.byId('assignmentRateRow').style.display="table-row";
-        dojo.byId('assignmentCapacityResourceTeam').style.display="none";
-        dojo.byId('assignmentUniqueSelection').style.display="none";
-        dijit.byId('assignmentUnique').set('checked',false);
-      }
-      var planningMode = dojo.byId('planningMode').value;
-      if(planningMode=='MAN'){
-    	  dojo.byId('assignmentRateRow').style.display="none";
-      }
-    }
-  });
-}
-function assignmentChangeUniqueResource(newValue) {
-  if(newValue==false){
-    dojo.byId('assignmentRateRow').style.display="none";
-    dojo.byId('assignmentCapacityResourceTeam').style.display="table-row";
-  }else{
-    dojo.byId('assignmentRateRow').style.display="table-row";
-    dojo.byId('assignmentCapacityResourceTeam').style.display="none";
-  }
-}
-assignmentUserSelectUniqueResourceCurrent=null;
-function assignmentUserSelectUniqueResource(newValue,idRes) {
-  if (assignmentUserSelectUniqueResourceCurrent!=null) return;
-  assignmentUserSelectUniqueResourceCurrent=idRes;
-  dojo.query(".dialogAssignmentManualSelectCheck").forEach(function(node, index, nodelist) {
-    var id=node.getAttribute('widgetid');
-    if (dijit.byId(id) && parseInt(id.substr(34))!=parseInt(idRes)) {
-      dijit.byId(id).set('checked',false);
-    }
-  });
-  dojo.byId("dialogAssignmentManualSelect").value=(newValue)?idRes:null;
-  setTimeout("assignmentUserSelectUniqueResourceCurrent=null;",100);
-}
-
-function assignmentChangeResource() {
-  if (editAssignmentLoading)
-    return;
-  var idResource=dijit.byId("assignmentIdResource").get("value");
-  var isTeam=dojo.byId("isTeam").value;
-  var isOrganization=dojo.byId("isOrganization").value;
-  var isResourceTeam = dojo.byId("isResourceTeam").value;
-  if (!idResource) {return;}
-  if (dijit.byId('assignmentDailyCost')) {dijit.byId('assignmentDailyCost').reset();}
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=resourceRole&idResource='+idResource+'&isTeam='+isTeam+'&isOrganization='+isOrganization+'&isResourceTeam='+isResourceTeam,
-    handleAs : "text",
-    load : function(data) {
-      //if (data) dijit.byId('assignmentCapacity').set('value', parseInt(data)); // Error fixed by PBER : we retreive an idRole (and must)
-      if (data) dijit.byId('assignmentIdRole').set('value', parseInt(data));
-    }
-  });
-}
-
-function assignmentChangeResourceSelectFonction(){
-  if (editAssignmentLoading)
-    return;
-  var idResource=dijit.byId("assignmentIdResource").get("value");
-  if (!idResource) {return;}
-  if (dijit.byId('assignmentDailyCost')) {dijit.byId('assignmentDailyCost').reset();}
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=resourceRole&idResource='+idResource,
-    handleAs : "text",
-    load : function(data) {
-      refreshListSpecific('listRoleResource', 'assignmentIdRole', 'idResource',idResource);
-      if (data) {
-        dijit.byId('assignmentIdRole').set('value', parseInt(data));
-      }else{
-        dijit.byId('assignmentIdRole').set('value', null);
-      }
-    }
-  });
-}
-
-function refreshReccurentAssignmentDiv(){
-	showWait();
-	callBack=function() {
-	     hideWait();
-    };
-	loadContent('../tool/refreshReccurentAssignmentDiv.php', 'recurringAssignmentDiv', 'assignmentForm', null, null, null, null, callBack);
-}
-
-function assignmentChangeRole() {
-  if (editAssignmentLoading)
-    return;
-  var idResource=dijit.byId("assignmentIdResource").get("value");
-  var idRole=dijit.byId("assignmentIdRole").get("value");
-  if(!idRole.trim())disableWidget('dialogAssignmentSubmit');
-  else if ( dijit.byId('dialogAssignmentSubmit').get('disabled')==true)enableWidget('dialogAssignmentSubmit');
-  if (!idResource || !idRole)
-    return;
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=resourceCost&idResource='
-        + idResource + '&idRole=' + idRole,
-    handleAs : "text",
-    load : function(data) {
-      // #303
-      // dijit.byId('assignmentDailyCost').set('value',data);
-      dijit.byId('assignmentDailyCost').set('value', dojo.number.format(data));
-    }
-  });
-}
-//gautier #2516
-function billLineChangeCatalog(){
-  if (!dijit.byId("billLineIdCatalog") || ! dijit.byId("billLineIdCatalog").get("value")) return;
-  var idCatalog=dijit.byId("billLineIdCatalog").get("value");
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=catalogBillLine&idCatalog='+idCatalog,
-    handleAs : "text",
-    load : function(data) {
-      arrayData=data.split('#!#!#!#!#!#');
-      dijit.byId('billLineDescription').set('value',arrayData[0]);
-      dijit.byId('billLineDetail').set('value',arrayData[1]);
-      dijit.byId('billLinePrice').set('value',parseFloat(arrayData[3]));
-      dijit.byId('billLineUnit').set('value',arrayData[4]);
-      if(arrayData[6]){
-        dijit.byId('billLineQuantity').set('value',parseFloat(arrayData[6])); 
-      }
-    }
-  });
-}
-//end
-
-// =============================================================================
-// = ExpenseDetail
-// =============================================================================
-
-/**
- * Display a add Assignment Box
- * 
- */
-function addExpenseDetail(expenseType) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  dojo.byId("expenseDetailId").value="";
-  dojo.byId("idExpense").value=dojo.byId("objectId").value;
-  dijit.byId("expenseDetailName").reset();
-  dijit.byId("expenseDetailReference").reset();
-  dijit.byId("expenseDetailDate").set('value', null);
-  dijit.byId("expenseDetailType").reset();
-  dojo.byId("expenseDetailDiv").innerHTML="";
-  dijit.byId("expenseDetailAmount").reset();
-  refreshList('idExpenseDetailType', expenseType, '1', null,'expenseDetailType', false);
-  // dijit.byId("dialogExpenseDetail").set('title',i18n("dialogExpenseDetail"));
-  dijit.byId("dialogExpenseDetail").show();
-}
-
-/**
- * Display a edit Assignment Box
- * 
- */
-var expenseDetailLoad=false;
-function editExpenseDetail(expenseType, id, idExpense, type, expenseDate,
-    amount) {
-  expenseDetailLoad=true;
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  refreshList('idExpenseDetailType', expenseType, '1', null,'expenseDetailType', false);
-  dojo.byId("expenseDetailId").value=id;
-  dojo.byId("idExpense").value=idExpense;
-  dijit.byId("expenseDetailName").set("value",
-      dojo.byId('expenseDetail_' + id).value);
-  dijit.byId("expenseDetailReference").set("value",
-      dojo.byId('expenseDetailRef_' + id).value);
-  dijit.byId("expenseDetailDate").set("value", getDate(expenseDate));
-  dijit.byId("expenseDetailAmount").set("value", dojo.number.parse(amount));
-  dijit.byId("dialogExpenseDetail").set('title',
-      i18n("dialogExpenseDetail") + " #" + id);
-  dijit.byId("expenseDetailType").set("value", type);
-  expenseDetailLoad=false;
-  expenseDetailTypeChange(id);
-  expenseDetailLoad=true;
-  setTimeout('expenseDetailLoad=false;', 500);
-  dijit.byId("dialogExpenseDetail").show();
-}
-
-/**
- * save an Assignment (after addAssignment or editAssignment)
- * 
- */
-function saveExpenseDetail() {
-  expenseDetailRecalculate();
-  if (!dijit.byId('expenseDetailName').get('value')) {
-    showAlert(i18n('messageMandatory', new Array(i18n('colName'))));
-    return;
-  }
-  /*if (!dijit.byId('expenseDetailDate').get('value')) {
-    showAlert(i18n('messageMandatory', new Array(i18n('colDate'))));
-    return;
-  }*/
-  /*if (!dijit.byId('expenseDetailType').get('value')) {
-    showAlert(i18n('messageMandatory', new Array(i18n('colType'))));
-    return;
-  }*/
-  if (!dijit.byId('expenseDetailAmount').get('value')) {
-    showAlert(i18n('messageMandatory', new Array(i18n('colAmount'))));
-    return;
-  }
-  var formVar=dijit.byId('expenseDetailForm');
-  if (formVar.validate()) {
-    dijit.byId("expenseDetailName").focus();
-    dijit.byId("expenseDetailAmount").focus();
-    loadContent("../tool/saveExpenseDetail.php", "resultDivMain",
-        "expenseDetailForm", true, 'expenseDetail');
-    dijit.byId('dialogExpenseDetail').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-/**
- * Display a delete Assignment Box
- * 
- */
-function removeExpenseDetail(expenseDetailId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  dojo.byId("expenseDetailId").value=expenseDetailId;
-  actionOK=function() {
-    loadContent("../tool/removeExpenseDetail.php", "resultDivMain",
-        "expenseDetailForm", true, 'expenseDetail');
-  };
-  msg=i18n('confirmDeleteExpenseDetail', new Array(dojo.byId('expenseDetail_'
-      + expenseDetailId).value));
-  showConfirm(msg, actionOK);
-}
-
-function expenseDetailTypeChange(expenseDetailId) {
-  if (expenseDetailLoad)
-    return;
-  var idType=dijit.byId("expenseDetailType").get("value");
-  var url='../tool/expenseDetailDiv.php?idType=' + idType;
-  if (expenseDetailId) {
-    url+='&expenseDetailId=' + expenseDetailId;
-  }
-  loadContent(url, 'expenseDetailDiv', null, false);
-}
-
-function expenseDetailRecalculate() {
-  val=false;
-  if (! dojo.byId('expenseDetailValue01')) return;
-  if (dijit.byId('expenseDetailValue01')) {
-    val01=dijit.byId('expenseDetailValue01').get("value");
-  } else {
-    val01=dojo.byId('expenseDetailValue01').value;
-  }
-  if (dijit.byId('expenseDetailValue02')) {
-    val02=dijit.byId('expenseDetailValue02').get("value");
-  } else {
-    val02=dojo.byId('expenseDetailValue02').value;
-  }
-  if (dijit.byId('expenseDetailValue03')) {
-    val03=dijit.byId('expenseDetailValue03').get("value");
-  } else {
-    val03=dojo.byId('expenseDetailValue03').value;
-  }
-  total=1;
-  if (dojo.byId('expenseDetailUnit01').value) {
-    total=total * val01;
-    val=true;
-  }
-  if (dojo.byId('expenseDetailUnit02').value) {
-    total=total * val02;
-    val=true;
-  }
-  if (dojo.byId('expenseDetailUnit03').value) {
-    total=total * val03;
-    val=true;
-  }
-  if (val) {
-    dijit.byId("expenseDetailAmount").set('value', total);
-    lockWidget("expenseDetailAmount");
-  } else {
-    unlockWidget("expenseDetailAmount");
-  }
-}
-
-// =============================================================================
-// = DocumentVersion
-// =============================================================================
-
-/**
- * Display a add Document Version Box
- * 
- */
-function addDocumentVersion(defaultStatus, typeEvo, numVers, dateVers, nameVers, lockStatus) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  content=dijit.byId('dialogDocumentVersion').get('content');
-  if (content == "") {
-    callBack=function() {
-      dojo.connect(dijit.byId("documentVersionFile"), "onComplete", function(
-          dataArray) {
-        saveDocumentVersionAck(dataArray);
-      });
-      dojo.connect(dijit.byId("documentVersionFile"), "onProgress", function(
-          data) {
-        saveDocumentVersionProgress(data);
-      });
-      addDocumentVersion(defaultStatus, typeEvo, numVers, dateVers, nameVers, lockStatus);
-    };
-    loadDialog('dialogDocumentVersion', callBack);
-    return;
-  }
-  dojo.style(dojo.byId('downloadProgress'), {
-    display : 'none'
-  });
-  if (dijit.byId("documentVersionFile")) {
-    dijit.byId("documentVersionFile").reset();
-    if (!isHtml5()) {
-      enableWidget('dialogDocumentVersionSubmit');
-    } else {
-      disableWidget('dialogDocumentVersionSubmit');
-    }
-  }
-  dojo.byId("documentVersionId").value="";
-  dojo.byId('documentVersionFileName').innerHTML="";
-  refreshListSpecific('listStatusDocumentVersion', 'documentVersionIdStatus','idDocumentVersion', '');
-  dijit.byId('documentVersionIdStatus').set('value', defaultStatus);
-  dojo.style(dojo.byId('inputFileDocumentVersion'), {
-    display : 'block'
-  });
-  dojo.byId("documentId").value=dojo.byId("objectId").value;
-  dojo.byId("documentVersionVersion").value=dojo.byId('version').value;
-  dojo.byId("documentVersionRevision").value=dojo.byId('revision').value;
-  dojo.byId("documentVersionDraft").value=dojo.byId('draft').value;
-  dojo.byId("typeEvo").value=typeEvo;
-  dijit.byId("documentVersionLink").set('value', '');
-  dijit.byId("documentVersionFile").reset();
-  dijit.byId("documentVersionDescription").set('value', '');
-  dijit.byId("documentVersionUpdateMajor").set('checked', 'true');
-  dijit.byId("documentVersionUpdateDraft").set('checked', false);
-  dijit.byId("documentVersionDate").set('value', new Date());
-  dijit.byId("documentVersionUpdateMajor").set('readOnly', false);
-  dijit.byId("documentVersionUpdateMinor").set('readOnly', false);
-  dijit.byId("documentVersionUpdateNo").set('readonly', false);
-  dijit.byId("documentVersionUpdateDraft").set('readonly', false);
-  dijit.byId("documentVersionIsRef").set('checked', false);
-  dijit.byId('documentVersionVersionDisplay')
-      .set(
-          'value',
-          getDisplayVersion(typeEvo, dojo.byId('documentVersionVersion').value,
-              dojo.byId('documentVersionRevision').value, dojo
-                  .byId('documentVersionDraft').value), numVers, dateVers,
-          nameVers);
-  dojo.byId('documentVersionMode').value="add";
-  calculateNewVersion();
-  setDisplayIsRefDocumentVersion();
-  if(lockStatus==1){
-	dojo.byId("lockedMsg").style.display = 'block';
-  }else{
-    dojo.byId("lockedMsg").style.display = 'none';  
-  }
-  dijit.byId("dialogDocumentVersion").show();
-  dojo.setStyle('widget_documentVersionNewVersionDisplay',"border-color","#b3b3b3");
-}
-
-/**
- * Display a edit Document Version Box
- * 
- */
-// var documentVersionLoad=false;
-function editDocumentVersion(id, version, revision, draft, versionDate, status,
-    isRef, typeEvo, numVers, dateVers, nameVers) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  content=dijit.byId('dialogDocumentVersion').get('content');
-  if (content == "") {
-    callBack=function() {
-      dojo.connect(dijit.byId("documentVersionFile"), "onComplete", function(
-          dataArray) {
-        saveDocumentVersionAck(dataArray);
-      });
-      dojo.connect(dijit.byId("documentVersionFile"), "onProgress", function(
-          data) {
-        saveDocumentVersionProgress(data);
-      });
-      editDocumentVersion(id, version, revision, draft, versionDate, status,
-          isRef, typeEvo, numVers, dateVers, nameVers);
-    };
-    loadDialog('dialogDocumentVersion', callBack);
-    return;
-  }
-  dijit.byId('documentVersionIdStatus').store;
-  refreshListSpecific('listStatusDocumentVersion', 'documentVersionIdStatus','idDocumentVersion', id);
-  dijit.byId('documentVersionIdStatus').set('value', status);
-  dojo.style(dojo.byId('inputFileDocumentVersion'), {
-    display : 'none'
-  });
-  dojo.byId("documentVersionId").value=id;
-  dojo.byId("documentId").value=dojo.byId("objectId").value;
-  dojo.byId("documentVersionVersion").value=version;
-  dojo.byId("documentVersionRevision").value=revision;
-  dojo.byId("documentVersionDraft").value=draft;
-  dojo.byId("typeEvo").value=typeEvo;
-  if (draft) {
-    dijit.byId('documentVersionUpdateDraft').set('checked', true);
-  } else {
-    dijit.byId('documentVersionUpdateDraft').set('checked', false);
-  }
-  if (isRef == '1') {
-    dijit.byId('documentVersionIsRef').set('checked', true);
-  } else {
-    dijit.byId('documentVersionIsRef').set('checked', false);
-  }
-  dijit.byId("documentVersionLink").set('value', '');
-  dijit.byId("documentVersionFile").reset();
-  dijit.byId("documentVersionDescription").set("value",
-      dojo.byId("documentVersion_" + id).value);
-  dijit.byId("documentVersionUpdateMajor").set('readOnly', 'readOnly');
-  dijit.byId("documentVersionUpdateMinor").set('readOnly', 'readOnly');
-  dijit.byId("documentVersionUpdateNo").set('readonly', 'readonly');
-  dijit.byId("documentVersionUpdateNo").set('checked', true);
-  dijit.byId("documentVersionUpdateDraft").set('readonly', 'readonly');
-  dijit.byId("documentVersionDate").set('value', versionDate);
-  dojo.byId('documentVersionMode').value="edit";
-  dijit.byId('documentVersionVersionDisplay').set('value', nameVers);
-  calculateNewVersion(false);
-  setDisplayIsRefDocumentVersion();
-  dijit.byId("dialogDocumentVersion").show();
-}
-
-function changeDocumentVersion(list) {
-  if (list.length > 0) {
-    dojo.byId('documentVersionFileName').innerHTML=list[0]['name'];
-    enableWidget('dialogDocumentVersionSubmit');
-  } else {
-    dojo.byId('documentVersionFileName').innerHTML="";
-    disableWidget('dialogDocumentVersionSubmit');
-  }
-}
-
-/**
- * save an Assignment (after addAssignment or editAssignment)
- * 
- */
-function saveDocumentVersion() {
-  // dojo.byId('documentVersionForm').submit();
-  if (!isHtml5()) {
-    // dojo.byId('documentVersionForm').submit();
-    showWait();
-    dijit.byId('dialogDocumentVersion').hide();
-    return true;
-  }
-  if (dojo.byId('documentVersionFileName').innerHTML == "") {
-    return false;
-  }
-  dojo.style(dojo.byId('downloadProgress'), {
-    display : 'block'
-  });
-  showWait();
-  dijit.byId('dialogDocumentVersion').hide();
-  return true;
-}
-
-/**
- * Acknoledge the attachment save
- * 
- * @return void
- */
-function saveDocumentVersionAck(dataArray) {
-  if (!isHtml5()) {
-    resultFrame=document.getElementById("documentVersionPost");
-    resultText=documentVersionPost.document.body.innerHTML;
-    dojo.byId('resultAckDocumentVersion').value=resultText;
-    loadContent("../tool/ack.php", "resultDivMain", "documentVersionAckForm", true,
-        'documentVersion');
-    return;
-  }
-  dijit.byId('dialogDocumentVersion').hide();
-  if (dojo.isArray(dataArray)) {
-    result=dataArray[0];
-  } else {
-    result=dataArray;
-  }
-  dojo.style(dojo.byId('downloadProgress'), {
-    display : 'none'
-  });
-  dojo.byId('resultAckDocumentVersion').value=result.message;
-  loadContent("../tool/ack.php", "resultDivMain", "documentVersionAckForm", true,
-      'documentVersion');
-}
-
-function saveDocumentVersionProgress(data) {
-  done=data.bytesLoaded;
-  total=data.bytesTotal;
-  if (total) {
-    progress=done / total;
-  }
-  dijit.byId('downloadProgress').set('value', progress);
-}
-/**
- * Display a delete Assignment Box
- * 
- */
-function removeDocumentVersion(documentVersionId, documentVersionName) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  content=dijit.byId('dialogDocumentVersion').get('content');
-  if (content == "") {
-    callBack=function() {
-      dojo.connect(dijit.byId("documentVersionFile"), "onComplete", function(
-          dataArray) {
-        saveDocumentVersionAck(dataArray);
-      });
-      dojo.connect(dijit.byId("documentVersionFile"), "onProgress", function(
-          data) {
-        saveDocumentVersionProgress(data);
-      });
-      removeDocumentVersion(documentVersionId, documentVersionName);
-    };
-    loadDialog('dialogDocumentVersion', callBack);
-    return;
-  }
-  dojo.byId("documentVersionId").value=documentVersionId;
-  actionOK=function() {
-    loadContent("../tool/removeDocumentVersion.php", "resultDivMain",
-        "documentVersionForm", true, 'documentVersion');
-  };
-  msg=i18n('confirmDeleteDocumentVersion', new Array(documentVersionName));
-  showConfirm(msg, actionOK);
-}
-
-function getDisplayVersion(typeEvo, version, revision, draft, numVers,
-    dateVers, nameVers) {
-  var res="";
-  if (typeEvo == "EVO") {
-    if (version != "" && revision != "") {
-      res="V" + version + "." + revision;
-    }
-  } else if (typeEvo == "EVT") {
-    res=dateVers;
-  } else if (typeEvo == "SEQ") {
-    res=numVers;
-  } else if (typeEvo == "EXT") {
-    res=nameVers;
-  }
-  if (typeEvo == "EVO" || typeEvo == "EVT" || typeEvo == "SEQ") {
-    if (draft) {
-      res+=draftSeparator + draft;
-    }
-  }
-  return res;
-}
-
-function calculateNewVersion(update) {
-  var typeEvo=dojo.byId("typeEvo").value;
-  var numVers="";
-  var dateVers="";
-  var nameVers="";
-  if (dijit.byId('documentVersionUpdateMajor').get('checked')) {
-    type="major";
-  } else if (dijit.byId('documentVersionUpdateMinor').get('checked')) {
-    type="minor";
-  } else if (dijit.byId('documentVersionUpdateNo').get('checked')) {
-    type="none";
-  }
-  version=dojo.byId('documentVersionVersion').value;
-  revision=dojo.byId('documentVersionRevision').value;
-  draft=dojo.byId('documentVersionDraft').value;
-  isDraft=dijit.byId('documentVersionUpdateDraft').get('checked');
-  version=(version == '') ? 0 : parseInt(version, 10);
-  revision=(revision == '') ? 0 : parseInt(revision, 10);
-  draft=(draft == '') ? 0 : parseInt(draft, 10);
-  if (type == "major") {
-    dojo.byId('documentVersionNewVersion').value=version + 1;
-    dojo.byId('documentVersionNewRevision').value=0;
-    dojo.byId('documentVersionNewDraft').value=(isDraft) ? '1' : '';
-  } else if (type == "minor") {
-    dojo.byId('documentVersionNewVersion').value=version;
-    dojo.byId('documentVersionNewRevision').value=revision + 1;
-    dojo.byId('documentVersionNewDraft').value=(isDraft) ? '1' : '';
-  } else { // 'none'
-    dojo.byId('documentVersionNewVersion').value=version;
-    dojo.byId('documentVersionNewRevision').value=revision;
-    if (dojo.byId('documentVersionId').value) {
-      dojo.byId('documentVersionNewDraft').value=(isDraft) ? ((draft) ? draft
-          : 1) : '';
-    } else {
-      dojo.byId('documentVersionNewDraft').value=(isDraft) ? draft + 1 : '';
-    }
-  }
-  dateVers=dojo.date.locale.format(dijit.byId("documentVersionDate").get(
-      'value'), {
-    datePattern : "yyyyMMdd",
-    selector : "date"
-  });
-  nameVers=dijit.byId("documentVersionVersionDisplay").get('value');
-  numVers=nameVers;
-  if (typeEvo == "SEQ" && dojo.byId('documentVersionMode').value == "add") {
-    if (!nameVers) {
-      nameVers=0;
-    }
-    numVers=parseInt(nameVers, 10) + 1;
-  }
-  dijit.byId("documentVersionNewVersionDisplay").set('readOnly', 'readOnly');
-  if (typeEvo == "EXT") {
-    dijit.byId("documentVersionNewVersionDisplay").set('readOnly', false);
-  }
-  var newVers=getDisplayVersion(typeEvo,
-      dojo.byId('documentVersionNewVersion').value, dojo
-          .byId('documentVersionNewRevision').value, dojo
-          .byId('documentVersionNewDraft').value, numVers, dateVers, nameVers);
-  dijit.byId('documentVersionNewVersionDisplay').set('value', newVers);
-  if (typeEvo == "EXT") {
-    dojo.byId('oldDocumentVersionNewVersionDisplay').value= newVers;
-  }
-  if (isDraft) {
-    dijit.byId('documentVersionIsRef').set('checked', false);
-    setDisplayIsRefDocumentVersion();
-  }
-}
-
-function setDisplayIsRefDocumentVersion() {
-  if (dijit.byId('documentVersionIsRef').get('checked')) {
-    dojo.style(dojo.byId('documentVersionIsRefDisplay'), {
-      display : 'block'
-    });
-    dijit.byId('documentVersionUpdateDraft').set('checked', false);
-    calculateNewVersion();
-  } else {
-    dojo.style(dojo.byId('documentVersionIsRefDisplay'), {
-      display : 'none'
-    });
-  }
-}
-
-// =============================================================================
-// = Dependency
-// =============================================================================
-
-/**
- * Display a add Dependency Box
- * 
- */
-function addDependency(depType) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  noRefreshDependencyList=false;
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  var message=i18n("dialogDependency");
-  if (depType) {
-    dojo.byId("dependencyType").value=depType;
-    message=i18n("dialogDependencyRestricted", new Array(i18n(objectClass),
-        objectId, i18n(depType)));
-  } else {
-    dojo.byId("dependencyType").value=null;
-    message=i18n("dialogDependencyExtended", new Array(i18n(objectClass),
-        objectId.value));
-  }
-  if (objectClass == 'Requirement') {
-    refreshList('idDependable', 'scope', 'R', '4', 'dependencyRefTypeDep',true);
-    dijit.byId("dependencyRefTypeDep").set('value', '4');
-    dijit.byId("dependencyDelay").set('value', '0');
-    dojo.byId("dependencyDelayDiv").style.display="none";
-    dojo.byId("dependencyTypeDiv").style.display="none";
-  } else if (objectClass == 'TestCase') {
-    refreshList('idDependable', 'scope', 'TC', '5', 'dependencyRefTypeDep',true);
-    dijit.byId("dependencyRefTypeDep").set('value', '5');
-    dijit.byId("dependencyDelay").set('value', '0');
-    dojo.byId("dependencyDelayDiv").style.display="none";
-    dojo.byId("dependencyTypeDiv").style.display="none";
-  } else {
-    if (objectClass == 'Project') {
-      dijit.byId("dependencyRefTypeDep").set('value', '3');
-      refreshList('idDependable', 'scope', 'PE', '3', 'dependencyRefTypeDep',true);
-    } else {
-      dijit.byId("dependencyRefTypeDep").set('value', '1');
-      refreshList('idDependable', 'scope', 'PE', '1', 'dependencyRefTypeDep',true);
-    }
-    if (objectClass == 'Term') {
-      dojo.byId("dependencyDelayDiv").style.display="none";
-      dojo.byId("dependencyTypeDiv").style.display="none";
-      dijit.byId("typeOfDependency").set("value","E-S");
-    } else {
-      dojo.byId("dependencyDelayDiv").style.display="block";
-      dojo.byId("dependencyTypeDiv").style.display="block";
-    }
-  }
-  dojo.byId("dependencyRefType").value=objectClass;
-  dojo.byId("dependencyRefId").value=objectId;
-  refreshList('idActivity', 'idProject', '0', null, 'dependencyRefIdDepEdit',false);
-  dijit.byId('dependencyRefIdDepEdit').reset();
-  dojo.byId("dependencyId").value="";
-  dijit.byId("dialogDependency").set('title', message);
-  dijit.byId("dialogDependency").show();
-  dojo.byId('dependencyAddDiv').style.display='block';
-  dojo.byId('dependencyEditDiv').style.display='none';
-  dijit.byId("dependencyRefTypeDep").set('readOnly', false);
-  dijit.byId("dependencyComment").set('value',null);
-  disableWidget('dialogDependencySubmit');
-  refreshDependencyList();
-}
-
-function editDependency(depType, id, refType, refTypeName, refId, delay, typeOfDependency) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  noRefreshDependencyList=true;
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId("objectId").value;
-  var message=i18n("dialogDependencyEdit");
-  if (objectClass == 'Requirement') {
-    refreshList('idDependable', 'scope', 'R', refType, 'dependencyRefTypeDep',true);
-    dijit.byId("dependencyRefTypeDep").set('value', refType);
-    dijit.byId("dependencyDelay").set('value', '0');
-    dojo.byId("dependencyDelayDiv").style.display="none";
-    dojo.byId("dependencyTypeDiv").style.display="none";
-  } else if (objectClass == 'TestCase') {
-    refreshList('idDependable', 'scope', 'TC', refType, 'dependencyRefTypeDep',true);
-    dijit.byId("dependencyRefTypeDep").set('value', refType);
-    dijit.byId("dependencyDelay").set('value', '0');
-    dojo.byId("dependencyDelayDiv").style.display="none";
-    dojo.byId("dependencyTypeDiv").style.display="none";
-  } else {
-    refreshList('idDependable', 'scope', 'PE', refType, 'dependencyRefTypeDep',true);
-    dijit.byId("dependencyRefTypeDep").set('value', refType);
-    dijit.byId("dependencyDelay").set('value', delay);
-    dojo.byId("dependencyDelayDiv").style.display="block";
-    dojo.byId("dependencyTypeDiv").style.display="block";
-  }
-  // refreshDependencyList();
-  refreshList('id' + refTypeName, 'idProject', '0', refId,'dependencyRefIdDepEdit', true);
-  dijit.byId('dependencyRefIdDepEdit').set('value', refId);
-  dojo.byId("dependencyId").value=id;
-  dojo.byId("dependencyRefType").value=objectClass;
-  dojo.byId("dependencyRefId").value=objectId;
-  dojo.byId("dependencyType").value=depType;
-  dijit.byId("typeOfDependency").set('value', typeOfDependency);
-  dijit.byId("dialogDependency").set('title', message);
-  dijit.byId("dialogDependency").show();
-  dojo.byId('dependencyAddDiv').style.display='none';
-  dojo.byId('dependencyEditDiv').style.display='block';
-  dijit.byId("dependencyRefTypeDep").set('readOnly', true);
-  dijit.byId("dependencyRefIdDepEdit").set('readOnly', true);
-  disableWidget('dialogDependencySubmit');
-  //KEVIN TICKET #2038 
-  disableWidget('dependencyComment');
-  dijit.byId('dependencyComment').set('value',"");
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=dependencyComment&idDependency='+ id,
-    handleAs : "text",
-    load : function(data) {
-      dijit.byId('dependencyComment').set('value', data);
-      enableWidget('dialogDependencySubmit');
-      enableWidget('dependencyComment');
-    }
-  });
-}
-
-/**
- * Refresh the Dependency list (after update)
- */
-var noRefreshDependencyList=false;
-function refreshDependencyList(selected) {
-  if (noRefreshDependencyList)
-    return;
-  disableWidget('dialogDependencySubmit');
-  var url='../tool/dynamicListDependency.php';
-  if (selected) {
-    url+='?selected=' + selected;
-  }
-  loadContent(url, 'dialogDependencyList', 'dependencyForm', false);
-}
-/**
- * save a Dependency (after addLink)
- * 
- */
-function saveDependency() {
-  var formVar=dijit.byId('dependencyForm');
-  if (!formVar.validate()) {
-    showAlert(i18n("alertInvalidForm"));
-    return;
-  }
-  if (dojo.byId("dependencyRefIdDep").value == ""
-      && !dojo.byId('dependencyId').value)
-    return;
-  loadContent("../tool/saveDependency.php", "resultDivMain", "dependencyForm",
-      true, 'dependency');
-  dijit.byId('dialogDependency').hide();
-}
-
-function saveDependencyFromDndLink(ref1Type, ref1Id, ref2Type, ref2Id) {
-  // alert("saveDependencyFromDndLink("+ref1Type+","+ref1Id+","+ref2Type+","+ref2Id+")");
-  if (ref1Type == ref2Type && ref1Id == ref2Id)
-    return;
-  param="ref1Type=" + ref1Type;
-  param+="&ref1Id=" + ref1Id;
-  param+="&ref2Type=" + ref2Type;
-  param+="&ref2Id=" + ref2Id;
-  loadContent("../tool/saveDependencyDnd.php?" + param, "resultDivMain", null,
-      true, 'dependency');
-}
-/**
- * Display a delete Dependency Box
- * 
- */
-function removeDependency(dependencyId, refType, refId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  dojo.byId("dependencyId").value=dependencyId;
-  actionOK=function() {
-    loadContent("../tool/removeDependency.php", "resultDivMain", "dependencyForm",
-        true, 'dependency');
-  };
-  msg=i18n('confirmDeleteLink', new Array(i18n(refType), refId));
-  showConfirm(msg, actionOK);
-}
-
-// =============================================================================
-// = BillLines
-// =============================================================================
-
-/**
- * Display a add line Box
- * 
- */
-function addBillLine(billingType) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var postLoad=function() {  
-    var prj=dijit.byId('idProject').get('value');
-    refreshListSpecific('listTermProject', 'billLineIdTerm', 'idProject', prj);
-    refreshListSpecific('listResourceProject', 'billLineIdResource', 'idProject',prj);
-    refreshList('idActivityPrice', 'idProject', prj, null,'billLineIdActivityPrice');
-    dijit.byId("dialogBillLine").set('title', i18n("dialogBillLine"));
-  };
-  var params="&id=";
-  params+="&refType="+dojo.byId('objectClass').value;
-  params+="&refId="+dojo.byId("objectId").value;
-  if (billingType) params+="&billingType="+billingType;
-  loadDialog('dialogBillLine', postLoad, true, params, true);
-}
-
-/**
- * Display a edit line Box
- * 
- */
-function editBillLine(id,billingType) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var params="&id="+id;
-  params+="&refType="+dojo.byId('objectClass').value;
-  params+="&refId="+dojo.byId("objectId").value;
-  if (billingType) params+="&billingType="+billingType;
-  loadDialog('dialogBillLine', null, true, params, true);
-}
-
-
-/**
- * save a line (after addDetail or editDetail)
- * 
- */
-function saveBillLine() {
-  if (isNaN(dijit.byId("billLineLine").getValue())) {
-    dijit.byId("billLineLine").set("class", "dijitError");
-    // dijit.byId("noteNote").blur();
-    var msg=i18n('messageMandatory', new Array(i18n('BillLine')));
-    new dijit.Tooltip({
-      id : "billLineToolTip",
-      connectId : [ "billLineLine" ],
-      label : msg,
-      showDelay : 0
-    });
-    dijit.byId("billLineLine").focus();
-  } else {
-    loadContent("../tool/saveBillLine.php", "resultDivMain", "billLineForm", true,
-        'billLine');
-    dijit.byId('dialogBillLine').hide();
-  }
-}
-
-/**
- * Display a delete line Box
- * 
- */
-function removeBillLine(lineId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  //dojo.byId("billLineId").value=lineId;
-  actionOK=function() {
-    loadContent("../tool/removeBillLine.php?billLineId="+lineId, "resultDivMain", null,
-        true, 'billLine');
-  };
-  msg=i18n('confirmDelete', new Array(i18n('BillLine'), lineId));
-  showConfirm(msg, actionOK);
-}
-
-function billLineUpdateAmount() {
-  var price=dijit.byId('billLinePrice').get('value');
-  var quantity=dijit.byId('billLineQuantity').get('value');
-  var amount=price*quantity;
-  dijit.byId('billLineAmount').set('value',amount);
-}
-function billLineUpdateNumberDays() {
-  if (dijit.byId('billLineUnit') && dijit.byId('billLineUnit').get("value")=='3' ) { // If unit = day
-    if (dijit.byId('billLineNumberDays') && dijit.byId('billLineQuantity') && dijit.byId('billLineQuantity').get("value")>0) {
-      dijit.byId('billLineNumberDays').set("value",dijit.byId('billLineQuantity').get("value"));
-    }
-  }
-}
 
 // =============================================================================
 // = ChecklistDefinitionLine
 // =============================================================================
 
-/**
- * Display a add line Box
- * 
- */
 function addChecklistDefinitionLine(checkId) {
   var params="&checkId=" + checkId;
   loadDialog('dialogChecklistDefinitionLine', null, true, params);
 }
 
-/**
- * Display a edit line Box
- * 
- */
 function editChecklistDefinitionLine(checkId, lineId) {
   var params="&checkId=" + checkId + "&lineId=" + lineId;
   loadDialog('dialogChecklistDefinitionLine', null, true, params);
 }
 
-/**
- * save a line (after addDetail or editDetail)
- * 
- */
 function saveChecklistDefinitionLine() {
   if (!dijit.byId("dialogChecklistDefinitionLineName").get('value')) {
     showAlert(i18n('messageMandatory', new Array(i18n('colName'))));
@@ -4101,14 +1771,8 @@ function saveChecklistDefinitionLine() {
 
 }
 
-/**
- * Display a delete line Box
- * 
- */
 function removeChecklistDefinitionLine(lineId) {
   var params="?lineId=" + lineId;
-  // loadDialog('dialogChecklistDefinitionLine',null, true, params)
-  // dojo.byId("checklistDefinitionLineId").value=lineId;
   actionOK=function() {
     loadContent("../tool/removeChecklistDefinitionLine.php" + params,
         "resultDivMain", null, true, 'checklistDefinitionLine');
@@ -4135,8 +1799,6 @@ function showChecklist(objectClass) {
 }
 
 function saveChecklist() {
-  // var params="&objectClass="+objectClass+"&objectId="+objectId;
-  // loadDialog('dialogChecklist',null, true, params);
   loadContent('../tool/saveChecklist.php', 'resultDivMain', 'dialogChecklistForm',
       true, 'checklist');
   dijit.byId('dialogChecklist').hide();
@@ -4170,6 +1832,7 @@ function showHistory(objectClass) {
   var params="&objectClass=" + objectClass + "&objectId=" + objectId;
   loadDialog('dialogHistory', null, true, params);
 }
+
 // =============================================================================
 // = Import
 // =============================================================================
@@ -4215,181 +1878,11 @@ function importFinished() {
     refreshProjectSelectorList();
   }
 }
-// =============================================================================
-// = Plan
-// =============================================================================
-
-/**
- * Display a planning Box
- * 
- */
-var oldSelectedProjectsToPlan=null;
-function showPlanParam(selectedProject) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  dijit.byId("dialogPlan").show();
-  oldSelectedProjectsToPlan=dijit.byId("idProjectPlan").get("value");
-}
-
-function changedIdProjectPlan(value) {
-	var selectField = dijit.byId("idProjectPlan").get("value");
-	if(selectField.length <= 0){
-		dijit.byId('dialogPlanSubmit').set('disabled', true);
-	}else{
-		dijit.byId('dialogPlanSubmit').set('disabled', false);
-	}
-  if (!oldSelectedProjectsToPlan || oldSelectedProjectsToPlan==value) return;
-  if (oldSelectedProjectsToPlan.indexOf(" ")>=0 && value.length>1 ) {
-    if(value.indexOf(" ")>=0){
-    	value.splice(0,1);
-    }
-    oldSelectedProjectsToPlan=value;
-    dijit.byId("idProjectPlan").set("value",value);
-  } else if (value.indexOf(" ")>=0 && oldSelectedProjectsToPlan.indexOf(" ")===-1) {
-    value=[" "];
-    oldSelectedProjectsToPlan=value;
-    dijit.byId("idProjectPlan").set("value",value);
-  }
-  oldSelectedProjectsToPlan=value;
-}
-
-function showSelectedProject(value){
-	var selectedProj = oldSelectedProjectsToPlan;
-	var callback=function(){
-		 dijit.byId("idProjectPlan").set("value",selectedProj);
-		 var selectField = dijit.byId("idProjectPlan").get("value");
-			if(selectField.length <= 0){
-				dijit.byId('dialogPlanSubmit').set('disabled', true);
-			}else{
-				dijit.byId('dialogPlanSubmit').set('disabled', false);
-			}
-	  };
-	loadContent("../view/refreshSelectedProjectListDiv.php?isChecked="+value+"&selectedProjectPlan="+selectedProj, "selectProjectList", "dialogPlanForm", false, null,null,null,callback);
-}
-
-/**
- * Run planning
- * 
- */
-function plan() {
-  var bt=dijit.byId('planButton');
-  if (bt) {
-    bt.set('iconClass', "dijitIcon iconPlan");
-  }
-  if (!dijit.byId('idProjectPlan').get('value')) {
-    dijit.byId('idProjectPlan').set('value', ' ');
-  }
-  if (!dijit.byId('startDatePlan').get('value')) {
-    showAlert(i18n('messageInvalidDate'));
-    return;
-  }
-  loadContent("../tool/plan.php", "resultDivMain", "dialogPlanForm", true, null);
-  dijit.byId("dialogPlan").hide();
-}
-
-function cancelPlan() {
-  if (!dijit.byId('idProjectPlan').get('value')) {
-    dijit.byId('idProjectPlan').set('value', ' ');
-  }
-  dijit.byId('dialogPlan').hide();
-}
-
-function showPlanSaveDates() {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  callBack=function() {
-    var proj=dijit.byId('idProjectPlan');
-    if (proj && proj.get('value') && proj.get('value')!='*') {
-      dijit.byId('idProjectPlanSaveDates').set('value', proj.get('value'));
-    }
-  };
-  /*if (dijit.byId("dialogPlanSaveDates")) {
-    callBack();
-    dijit.byId("dialogPlanSaveDates").show();
-    return;
-  }*/
-  loadDialog('dialogPlanSaveDates', callBack, true,null,true);
-}
-function planSaveDates() {
-  var formVar=dijit.byId('dialogPlanSaveDatesForm');
-  if (!formVar.validate()) {
-    showAlert(i18n("alertInvalidForm"));
-    return;
-  }
-  if (!dijit.byId('idProjectPlanSaveDates').get('value')) {
-    dijit.byId('idProjectPlanSaveDates').set('value', ' ');
-  }
-  loadContent("../tool/planSaveDates.php", "resultDivMain",
-      "dialogPlanSaveDatesForm", true, null);
-  dijit.byId("dialogPlanSaveDates").hide();
-}
-
-//=============================================================================
-//= Baseline
-//=============================================================================
-
-function showPlanningBaseline() {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  callBack=function() {
-    var proj=dijit.byId('idProjectPlan');
-    if (proj) {
-      dijit.byId('idProjectPlanBaseline').set('value', proj.get('value'));
-    }
-  };
-  loadDialog('dialogPlanBaseline', callBack, true);
-}
-function savePlanningBaseline() {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callback=function(){
-    dijit.byId('selectBaselineTop').reset();
-    dijit.byId('selectBaselineBottom').reset();
-    refreshList('idBaselineSelect',null,null,null,'selectBaselineTop');
-    refreshList('idBaselineSelect',null,null,null,'selectBaselineBottom');
-  };
-  if (dojo.byId('isGlobalPlanning')) {
-    if (dojo.byId('globalPlanning') && dojo.byId('globalPlanning').value=='true') {
-      dojo.byId('isGlobalPlanning').value='true';
-    }
-  }
-  var formVar=dijit.byId('dialogPlanBaselineForm');
-  if (formVar.validate()) {
-    loadContent("../tool/savePlanningBaseline.php", "resultDivMain", "dialogPlanBaselineForm", true, null,null,null,callback);
-    dijit.byId("dialogPlanBaseline").hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-function editBaseline(baselineId) {
-  var params="&editMode=true&baselineId="+baselineId;
-  loadDialog('dialogPlanBaseline', null, true, params, true);
-}
-
-function removeBaseline(baselineId) {
-  var param="?baselineId="+baselineId;
-  actionOK=function() {
-    loadContent("../tool/removePlanningBaseline.php"+param, "dialogPlanBaseline", null);
-  };
-  msg=i18n('confirmDelete', new Array(i18n('Baseline'), baselineId));
-  showConfirm(msg, actionOK);
-}
+ 
 // =============================================================================
 // = Filter
 // =============================================================================
 
-/**
- * Display a Filter Box
- * 
- */
 var filterStartInput=false;
 var filterFromDetail=false;
 function showFilterDialog() {
@@ -4462,18 +1955,12 @@ function showFilterDialog() {
   loadDialog('dialogFilter', callBack, true, "", true);
 }
 
-//ADD qCazelles - Dynamic filter - Ticket #78
 function displayOrOperator() {
 	if (dojo.byId('nbFilterCriteria').value != "0") {
 		dojo.byId('filterLogicalOperator').style.display='block';
     }
 }
-//END ADD qCazelles - Dynamic filter - Ticket #78
 
-/**
- * Select attribute : refresh dependant lists box
- * 
- */
 function filterSelectAtribute(value) {
   if (value) {
     filterStartInput=true;
@@ -4777,12 +2264,7 @@ function onColumnHeaderClickedSort(ev) {
 
   const thIndex = Array.from( th.parentElement.children ).indexOf( th );
   const ascending = !( 'sort' in th.dataset ) || th.dataset.sort != 'asc';
-  //const start = performance.now();
-
   tableRowsSortByColumn( table, thIndex, ascending );
-
-  //const end = performance.now();
-  //console.log( "Sorted table rows in %d ms.",  end - start );
 
   const allTh = table.querySelectorAll( ':scope > thead > tr > th' );
   for( let th2 of allTh )
@@ -4791,12 +2273,9 @@ function onColumnHeaderClickedSort(ev) {
   }
 
   th.dataset['sort'] = ascending ? 'asc' : 'desc';
-}//onColumnHeaderClickedSort
-
+}
 
 function tableRowsSortByColumn(table, columnIndex, ascending) {
-
-
   const col = Array.from( table.querySelectorAll( ':scope > thead > tr' ) );
   const columnName = col[0].cells[columnIndex].textContent; // not use but keep this variable, it can be interested to have this columb name if we wnt to improve sort function
   const rows = Array.from( table.querySelectorAll( ':scope > tbody > tr' ) );
@@ -4818,7 +2297,7 @@ function tableRowsSortByColumn(table, columnIndex, ascending) {
   {
     table.tBodies[0].appendChild( row );
   }
-}//tableRowsSortByColumn
+}
 
 function filterSelectOperator(operator) {
   filterStartInput=true;
@@ -4849,12 +2328,10 @@ function filterSelectOperator(operator) {
     dojo.style(dijit.byId('filterSortValueList').domNode, {
       display : 'block'
     });
-  //ADD qCazelles - Dynamic filter - Ticket #78
     dijit.byId('filterDynamicParameter').set('checked', '');
     if (dijit.byId('filterDynamicParameterSwitch')) dijit.byId('filterDynamicParameterSwitch').set('value', 'off');
     dojo.byId('filterDynamicParameterPane').style.display='none';
     if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
-    //END ADD qCazelles - Dynamic filter - Ticket #78
   } else if (operator == "<=now+" || operator == ">=now+") {
     filterType="text";
     dojo.style(dijit.byId('filterValue').domNode, {
@@ -4910,12 +2387,10 @@ function filterSelectOperator(operator) {
     dojo.style(dijit.byId('filterSortValueList').domNode, {
       display : 'none'
     });
-    //ADD qCazelles - Dynamic filter - Ticket #78
     dijit.byId('filterDynamicParameter').set('checked', '');
     if (dijit.byId('filterDynamicParameterSwitch')) dijit.byId('filterDynamicParameterSwitch').set('value', 'off');
     dojo.byId('filterDynamicParameterPane').style.display='none';
     if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
-    //END ADD qCazelles - Dynamic filter - Ticket #78
   } else {
     dojo.style(dijit.byId('filterValue').domNode, {
       display : 'none'
@@ -4945,41 +2420,31 @@ function filterSelectOperator(operator) {
       dojo.style(dijit.byId('showDetailInFilter').domNode, {
         display : 'block'
       });
-      //ADD qCazelles - Dynamic filter - Ticket #78
       dijit.byId('filterDynamicParameter').set('checked', '');
       if (dijit.byId('filterDynamicParameterSwitch')) dijit.byId('filterDynamicParameterSwitch').set('value', 'off');
       dojo.byId('filterDynamicParameterPane').style.display='block';
-      //END ADD qCazelles - Dynamic filter - Ticket #78
     } else if (dataType == "date") {
       filterType="date";
       dojo.style(dijit.byId('filterValueDate').domNode, {
         display : 'block'
       });
-      //ADD qCazelles - Dynamic filter - Ticket #78
       dijit.byId('filterDynamicParameter').set('checked', '');
       if (dijit.byId('filterDynamicParameterSwitch')) dijit.byId('filterDynamicParameterSwitch').set('value', 'off');
       dojo.byId('filterDynamicParameterPane').style.display='block';
       if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
-      //END ADD qCazelles - Dynamic filter - Ticket #78
     } else {
       filterType="text";
       dojo.style(dijit.byId('filterValue').domNode, {
         display : 'block'
       });
-      //ADD qCazelles - Dynamic filter - Ticket #78
       dijit.byId('filterDynamicParameter').set('checked', '');
       if (dijit.byId('filterDynamicParameterSwitch')) dijit.byId('filterDynamicParameterSwitch').set('value', 'off');
       dojo.byId('filterDynamicParameterPane').style.display='block';
       if (isNewGui) dojo.byId("filterValueListHideTop").style.display="none";
-      //END ADD qCazelles - Dynamic filter - Ticket #78
     }
   }
 }
 
-/**
- * Save filter clause
- * 
- */
 function addfilterClause(silent) {
   filterStartInput=false;
   if (dijit.byId('filterNameDisplay')) {
@@ -4995,9 +2460,7 @@ function addfilterClause(silent) {
       showAlert(i18n('operatorNotSelected'));
     return;
   }
-  //ADD qCazelles - Dynamic filter - Ticket #78
   if (!dijit.byId('filterDynamicParameter').get('checked')) {
-  //END ADD qCazelles - Dynamic filter - Ticket #78
 	  if (filterType == "list"
 	      && trim(dijit.byId('filterValueList').get('value')) == '') {
 	    if (!silent)
@@ -5019,42 +2482,24 @@ function addfilterClause(silent) {
 	    && dijit.byId('filterValueCheckbox').get('checked')) {
 	    dijit.byId('listShowIdle').set('checked',true);
 	  }
-  //ADD qCazelles - Dynamic filter - Ticket #78
   }
-  //END ADD qCazelles - Dynamic filter - Ticket #78
-  // Add controls on operator and value
   var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
   loadContent("../tool/addFilterClause.php" + compUrl, "listFilterClauses",
       "dialogFilterForm", false,null,null,null,function(){clearDivDelayed('saveFilterResult');});
-  // dijit.byId('filterNameDisplay').set('value',null);
-  // dojo.byId('filterName').value=null;
-  
-  //ADD qCazelles - Dynamic filter - Ticket #78
   if (dojo.byId('filterLogicalOperator') && dojo.byId('filterLogicalOperator').style.display=='none') {
 	  dojo.byId('filterLogicalOperator').style.display='block';
   }
-  //END ADD qCazelles - Dynamic filter - Ticket #78
-	  
 }
 
-/**
- * Remove a filter clause
- * 
- */
 function removefilterClause(id) {
   if (dijit.byId('filterNameDisplay')) {
     dojo.byId('filterName').value=dijit.byId('filterNameDisplay').get(
         'value');
   }
-  // Add controls on operator and value
   dojo.byId("filterClauseId").value=id;
   var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
   loadContent("../tool/removeFilterClause.php" + compUrl,
       "listFilterClauses", "dialogFilterForm", false);
-  // dijit.byId('filterNameDisplay').set('value',null);
-  // dojo.byId('filterName').value=null;
-  
-  //ADD qCazelles - Dynamic filter - Ticket #78
   if (id=='all' || dojo.byId('nbFilterCriteria').value == "1") { //Value is not set to 0 already but is going to
 	dojo.byId('filterLogicalOperator').style.display='none';
   }
@@ -5062,13 +2507,7 @@ function removefilterClause(id) {
 	  loadContent("../tool/displayFilterClause.php" + compUrl,
 		"listFilterClauses", "dialogFilterForm", false,null,null,null,function(){clearDivDelayed('saveFilterResult');});
   }
-  //END ADD qCazelles - Dynamic filter - Ticket #78
 }
-
-/**
- * Action on OK for filter
- * 
- */
 
 function selectFilter() {
   if (filterStartInput) {
@@ -5142,10 +2581,6 @@ function selectFilterContinue() {
   filterStartInput=false;
 }
 
-/**
- * Action on Cancel for filter
- * 
- */
 function cancelFilter() {
   filterStartInput=true;
   var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
@@ -5159,10 +2594,6 @@ function cancelFilter() {
   dijit.byId('dialogFilter').hide();
 }
 
-/**
- * Action on Clear for filter
- * 
- */
 function clearFilter() {
   if (dijit.byId('filterNameDisplay')) {
     dijit.byId('filterNameDisplay').reset();
@@ -5175,16 +2606,8 @@ function clearFilter() {
   dojo.byId('filterName').value=null;
 }
 
-/**
- * Action on Default for filter
- * 
- */
 function defaultFilter() {
   if (dijit.byId('filterNameDisplay')) {
-    // if (dijit.byId('filterNameDisplay').get('value')=="") {
-    // showAlert(i18n("messageMandatory", new Array(i18n("filterName")) ));
-    // return;
-    // }
     dojo.byId('filterName').value=dijit.byId('filterNameDisplay').get(
         'value');
   }
@@ -5193,10 +2616,6 @@ function defaultFilter() {
       "dialogFilterForm", false,null,null,null,function(){clearDivDelayed('saveFilterResult');});
 }
 
-/**
- * Save a filter as a stored filter
- * 
- */
 function saveFilter() {
   if (dijit.byId('filterNameDisplay')) {
     if (dijit.byId('filterNameDisplay').get('value') == "") {
@@ -5210,6 +2629,7 @@ function saveFilter() {
   loadContent("../tool/saveFilter.php" + compUrl, "listStoredFilters",
       "dialogFilterForm", false,null,null,null,function(){clearDivDelayed('saveFilterResult');});
 }
+
 clearDivDelayedTimeout=[];
 function clearDivDelayed(divName,delay) {
   if (clearDivDelayedTimeout[divName]) clearTimeout(clearDivDelayedTimeout[divName]);
@@ -5280,10 +2700,6 @@ function selectStoredFilter(idFilter, context, contentLoad, container) {
 
 }
 
-/**
- * Removes a stored filter from the list
- * 
- */
 function removeStoredFilter(idFilter, nameFilter) {
   var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   var action=function() {
@@ -5293,19 +2709,13 @@ function removeStoredFilter(idFilter, nameFilter) {
   window.top.showConfirm(i18n("confirmRemoveFilter", new Array(nameFilter)), action);
 }
 
-/**
- * Share a stored filter from the list
- * 
- */
 function shareStoredFilter(idFilter, nameFilter) {
   var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   loadContent("../tool/shareFilter.php?idFilter=" + idFilter + compUrl,
         "listStoredFilters", "dialogFilterForm", false);
 }
 
-//ADD qCazelles - Dynamic filter - Ticket #78
-function selectDynamicFilter() {
-	
+function selectDynamicFilter() {	
 	for (var i = 0; i < dojo.byId('nbDynamicFilterClauses').value; i++) {
 		if (dijit.byId('filterValueList' + i)) {
 			if (dijit.byId('filterValueList' + i).get("value")=="") {
@@ -5368,11 +2778,6 @@ function selectDynamicFilterContinue() {
     }
 	  dijit.byId("dialogDynamicFilter").hide();
 }
-//END ADD qCazelles - Dynamic filter - Ticket #78
-
-// =============================================================================
-// = Reports
-// =============================================================================
 
 function reportSelectCategory(idCateg) {
   if (isNaN(idCateg)) return;
@@ -5417,649 +2822,18 @@ function reportSelectReport(idReport) {
   }
 
 // =============================================================================
-// = Resource Cost
-// =============================================================================
-
-function addResourceCost(idResource, idRole, funcList) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-    affectationLoad=true;
-  dojo.byId("resourceCostId").value="";
-  dojo.byId("resourceCostIdResource").value=idResource;
-  dojo.byId("resourceCostFunctionList").value=funcList;
-  dijit.byId("resourceCostIdRole").set('readOnly', false);
-  if (idRole) {
-    dijit.byId("resourceCostIdRole").set('value', idRole);
-  } else {
-    dijit.byId("resourceCostIdRole").reset();
-  }
-  dijit.byId("resourceCostValue").reset('value');
-  dijit.byId("resourceCostStartDate").set('value', null);
-  resourceCostUpdateRole();
-    dijit.byId("dialogResourceCost").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&idResource="+idResource;
-  params+="&funcList="+funcList;
-  params+="&idRole="+idRole;
-  params+="&mode=add";
-  loadDialog('dialogResourceCost',callBack,true,params);
-}
-
-function removeResourceCost(id, idRole, nameRole, startDate) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var params="&idResource="+dijit.byId('id').get("value");
-  params+="&funcList=";
-  params+="&idRole="+idRole;
-  params+="&mode=delete";
-  var callBack=function(){dojo.byId("resourceCostId").value=id;}
-  loadDialog('dialogResourceCost',callBack,false,params,false); // Ticket #3584 : be sure dialog has been loaded at least once
-  actionOK=function() {
-    
-    loadContent("../tool/removeResourceCost.php", "resultDivMain",
-        "resourceCostForm", true, 'resourceCost');
-  };
-  msg=i18n('confirmDeleteResourceCost', new Array(nameRole, startDate));
-  showConfirm(msg, actionOK);
-}
-
-reourceCostLoad=false;
-function editResourceCost(id, idResource, idRole, cost, startDate, endDate) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack=function() {
-    dojo.byId("resourceCostId").value=id;
-    dojo.byId("resourceCostIdResource").value=idResource;
-    dijit.byId("resourceCostIdRole").set('readOnly', true);
-    dijit.byId("resourceCostValue").set('value', dojo.number.format(cost / 100));
-    var dateStartDate=getDate(startDate);
-    dijit.byId("resourceCostStartDate").set('value', dateStartDate);
-    dijit.byId("resourceCostStartDate").set('disabled', true);
-    dijit.byId("resourceCostStartDate").set('required', 'false');
-    reourceCostLoad=true;
-    dijit.byId("resourceCostIdRole").set('value', idRole);
-    setTimeout('reourceCostLoad=false;', 300);
-    dijit.byId("dialogResourceCost").show();
-  };
-  loadDialog('dialogResourceCost',callBack,true,null);
-}
-
-function saveResourceCost() {
-  var formVar=dijit.byId('resourceCostForm');
-  if (formVar.validate()) {
-    loadContent("../tool/saveResourceCost.php", "resultDivMain",
-        "resourceCostForm", true, 'resourceCost');
-    dijit.byId('dialogResourceCost').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-function resourceCostUpdateRole() {
-  if (reourceCostLoad) {
-    return;
-  }
-  if (dijit.byId("resourceCostIdRole").get('value') ) {
-    dojo.xhrGet({
-      url : '../tool/getSingleData.php?dataType=resourceCostDefault&idRole=' + dijit.byId("resourceCostIdRole").get('value'),
-      handleAs : "text",
-      load : function(data) {
-        dijit.byId('resourceCostValue').set('value', dojo.number.format(data));
-      }
-    });
-  }
-  var funcList=dojo.byId('resourceCostFunctionList').value;
-  $key='#' + dijit.byId("resourceCostIdRole").get('value') + '#';
-  if (funcList.indexOf($key) >= 0) {
-    dijit.byId("resourceCostStartDate").set('disabled', false);
-    dijit.byId("resourceCostStartDate").set('required', 'true');
-  } else {
-    dijit.byId("resourceCostStartDate").set('disabled', true);
-    dijit.byId("resourceCostStartDate").set('value', null);
-    dijit.byId("resourceCostStartDate").set('required', 'false');
-  }
-}
-
-// =============================================================================
-// = Version Project
-// =============================================================================
-
-function addVersionProject(idVersion, idProject) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  params="&idVersionProject=&idVersion="+idVersion+"&idProject="+idProject;
-  loadDialog('dialogVersionProject', null, true, params, true);
-  }
-
-function removeVersionProject(id) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeVersionProject.php?idVersionProject="+id, "resultDivMain", null, true, 'versionProject');
-  };
-  msg=i18n('confirmDeleteVersionProject');
-  showConfirm(msg, actionOK);
-}
-;
-function editVersionProject(id, idVersion, idProject) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  params="&idVersionProject="+id+"&idVersion="+idVersion+"&idProject="+idProject;
-  loadDialog('dialogVersionProject', null, true, params, true);
-}
-
-function saveVersionProject() {
-  var formVar=dijit.byId('versionProjectForm');
-  if (formVar.validate()) {
-    loadContent("../tool/saveVersionProject.php", "resultDivMain",
-        "versionProjectForm", true, 'versionProject');
-    dijit.byId('dialogVersionProject').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-// =============================================================================
-// = Product Project
-// =============================================================================
-
-function addProductProject(idProduct, idProject) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  params="&idProductProject=&idProduct="+idProduct+"&idProject="+idProject;
-  loadDialog('dialogProductProject', null, true, params, true);
-}
-
-function removeProductProject(id) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeProductProject.php?idProductProject="+id, "resultDivMain", null, true, 'productProject');
-  };
-  msg=i18n('confirmDeleteProductProject');
-  showConfirm(msg, actionOK);
-}
-
-function editProductProject(id, idProduct, idProject) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  params="&idProductProject="+id+"&idProduct="+idProduct+"&idProject="+idProject;
-  loadDialog('dialogProductProject', null, true, params, true);
-}
-
-function saveProductProject() {
-  var formVar=dijit.byId('productProjectForm');
-  if (formVar.validate()) {
-    loadContent("../tool/saveProductProject.php", "resultDivMain",
-        "productProjectForm", true, 'productProject');
-    dijit.byId('dialogProductProject').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-//=============================================================================
-//= Test Case Run
-//=============================================================================
-
-function addTestCaseRun() {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-   //disableWidget('dialogTestCaseRunSubmit');  
-  var params="&testSessionId="+dijit.byId('id').get('value');
-  loadDialog('dialogTestCaseRun', null, true, params);
-}
-
-function refreshTestCaseRunList(selected) {
-  disableWidget('dialogTestCaseRunSubmit');
-  var url='../tool/dynamicListTestCase.php';
-  url+='?idProject='+dijit.byId('idProject').get('value');
-  if (dijit.byId('idProduct')) url+='&idProduct='+dijit.byId('idProduct').get('value');
-  else if (dijit.byId('idProductOrComponent')) url+='&idProduct='+dijit.byId('idProductOrComponent').get('value');
-  else if (dijit.byId('idComponent')) url+='&idComponent='+dijit.byId('idComponent').get('value');
-  if (selected) {
-    url+='&selected=' + selected;
-  }
-  loadContent(url, 'testCaseRunListDiv', 'testCaseRunForm', false);
-}
-
-function editTestCaseRun(testCaseRunId, idRunStatus, callback) {
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var testSessionId = dijit.byId('id').get('value');
-  var params="&testCaseRunId=" + testCaseRunId + "&testSessionId=" + testSessionId;
-  if (idRunStatus) params+="&runStatusId="+idRunStatus;
-  loadDialog('dialogTestCaseRun', callback, ((callback)?false:true), params);
-}
-
-function passedTestCaseRun(idTestCaseRun) {
-  var callback=function() { 
-    if (saveTestCaseRun()) dijit.byId('dialogTestCaseRun').hide();
-  };
-  editTestCaseRun(idTestCaseRun, '2', callback);
-}
-
-function failedTestCaseRun(idTestCaseRun) {
-  editTestCaseRun(idTestCaseRun, '3', null);
-}
-
-function blockedTestCaseRun(idTestCaseRun) {
-  var callback=function() { 
-    if (saveTestCaseRun()) dijit.byId('dialogTestCaseRun').hide();
-  };
-  editTestCaseRun(idTestCaseRun, '4', callback);
-}
-
-function testCaseRunChangeStatus() {
-  var status=dijit.byId('testCaseRunStatus').get('value');
-  if (status == '3') {
-   dojo.byId('testCaseRunTicketDiv').style.display="block";
-  } else {
-   if (!trim(dijit.byId('testCaseRunTicket').get('value'))) {
-     dojo.byId('testCaseRunTicketDiv').style.display="none";
-   } else {
-     dojo.byId('testCaseRunTicketDiv').style.display="block";
-   }
-  }
-}
-
-function removeTestCaseRun(id, idTestCase) {
-  formInitialize();
-  if (! dojo.byId("testCaseRunId")) {
-    var callBack=function() {
-      if (dijit.byId('dialogAlert')) {
-        dijit.byId('dialogAlert').hide();
-      }
-      removeTestCaseRun(id, idTestCase);  
-    }
-    loadDialog('dialogTestCaseRun', callBack, false);
-  }
-  if (checkFormChangeInProgress()) {
-   showAlert(i18n('alertOngoingChange'));
-   return;
-  }
-  dojo.byId("testCaseRunId").value=id;
-  actionOK=function() {
-   loadContent("../tool/removeTestCaseRun.php", "resultDivMain",
-       "testCaseRunForm", true, 'testCaseRun');
-  };
-  msg=i18n('confirmDeleteTestCaseRun', new Array(idTestCase));
-  showConfirm(msg, actionOK);
-}
-
-function saveTestCaseRun() {
-  var formVar=dijit.byId('testCaseRunForm');
-  var mode=dojo.byId("testCaseRunMode").value;
-  if ( (mode == 'add'  && dojo.byId("testCaseRunTestCaseList").value == "") 
-    || (mode == 'edit' && dojo.byId("testCaseRunTestCase").value == "" ) )
-   return ;
-  if (mode == 'edit') {
-   var status=dijit.byId('testCaseRunStatus').get('value');
-   if (status == '3') {
-     if (trim(dijit.byId('testCaseRunTicket').get('value')) == '') {
-       dijit.byId("dialogTestCaseRun").show();
-       showAlert(i18n('messageMandatory', new Array(i18n('colTicket'))));
-       return;
-     }
-   }
-  }
-  if (formVar.validate()) {
-   loadContent("../tool/saveTestCaseRun.php", "resultDivMain", "testCaseRunForm", true, 'testCaseRun');
-   dijit.byId('dialogTestCaseRun').hide();
-   return true;
-  } else {
-   dijit.byId("dialogTestCaseRun").show();
-   showAlert(i18n("alertInvalidForm"));
-   return false;
-  }
-}
-//gautier complexity
-function saveComplexity(id,idZone) {
-  var value=dijit.byId("complexity"+idZone).get("value");
-  var url = '../tool/saveComplexity.php?idCatalog='+id +'&name='+value+'&idZone='+idZone;
-  dojo.xhrPut({
-    url : url,
-    form : 'objectForm',
-    handleAs : "text",
-    load : function(data) {
-      if(data){
-        dijit.byId("complexity"+idZone).set("value",data);
-        showAlert(i18n("cantDeleteUsingUOComplexity"));
-      }else{
-        loadContent("objectDetail.php?refreshComplexitiesValues=true", "CatalogUO_unitOfWork", 'listForm');
-      }
-    }
-  });
-  
-}
-
-//gautier #1716
-function saveTcrData(id,textZone) {
-  var value=dijit.byId("tcr"+textZone+"_"+id).get("value");
-  var url = '../tool/saveTcrData.php?idTcr='+id +'&zone='+textZone +'&valueZone='+value;
-  dojo.xhrPut({
-    url : url,
-    form : 'objectForm',
-    handleAs : "text",
-    load : function(data) {
-     //Display saved message
-      addMessage(i18n("col"+textZone)+" "+i18n("resultSave"));
-      document.getElementById('idImage'+textZone+id).style.display="block";
-      setTimeout("dojo.byId('idImage"+textZone+id+"').style.display='none';", 1000);
-      }
-  });
-}
-
-//Mehdi 
-function assUpdateLeftWork(id) {
-  var initAss =dojo.byId('initAss_'+id).value;
-  var assign=dijit.byId("assAssignedWork_"+id).get('value');
-  var newAss = assign;
-  if (newAss == null || isNaN(newAss)) {
-	  newAss=0;
-	  dijit.byId("assAssignedWork_"+id).set('value',0);
-  }
-  isOnRealTime=false;
-  if(dojo.byId('objectClass').value=='Activity'){
-    isOnRealTime=dijit.byId('workOnRealTime').get('value');
-    if(isOnRealTime=='on'){
-      var realdWork=dojo.byId("RealWork_"+id).value;
-      if(assign<realdWork){
-        dijit.byId("assAssignedWork_"+id).set("value",dojo.byId('initAss_'+id).value);
-        dojo.byId('initLeft_'+id).value=dojo.byId('initAss_'+id).value;
-        showAlert(i18n('assingedWorkCantBeLowerInWorkOnRealTime'));
-        return;
-      }
-    }
-  }
-  var leftWork = dijit.byId('assLeftWork_'+id).get("value");
-  var diff = (newAss)-(initAss);
-  var newLeft=leftWork + diff;
-  if (newLeft < 0 || isNaN(newLeft)) {
-    newLeft=0;
-  }
-  // update assigned for PlanningElement
-  var objClass=dojo.byId('objectClass').value;
-  var assPeAss=dijit.byId(objClass+'PlanningElement_assignedWork');
-  var valPeAss=dijit.byId(objClass+'PlanningElement_validatedWork');
-  if(assPeAss){
-    assPeAss.set("value", assPeAss.get("value") + diff);
-  }
-  if(dojo.byId('objectClass').value=='Activity' && isOnRealTime=='on' && valPeAss){
-    valPeAss.set("value", assPeAss.get("value"));
-  }
-  //
-  dijit.byId('assLeftWork_'+id).set("value",newLeft); // Will trigger the saveLeftWork() function
-  dojo.byId('initAss_'+id).value = newAss;
-  diff = 0;
-  dojo.byId(objClass+'PlanningElement_assignedCost').style.textDecoration="line-through";
-  if(dojo.byId('objectClass').value=='Activity' && isOnRealTime=='on'){
-    dojo.byId(objClass+'PlanningElement_validatedCost').style.textDecoration="line-through";;
-  }
-}
-function assUpdateLeftWorkDirect(id) {
-  var objClass=dojo.byId('objectClass').value;
-  var initLeft=dojo.byId('initLeft_'+id).value;
-  var assign=dijit.byId("assAssignedWork_"+id).get('value');
-  var left=dijit.byId("assLeftWork_"+id).get('value');
-  if (left == null || isNaN(left)) {
-    left=0;
-  }
-  if(objClass=='Activity'){
-    var isOnRealTime=dijit.byId('workOnRealTime').get('value');
-    if(isOnRealTime=='on'){
-      var realdWork=dojo.byId("RealWork_"+id).value;
-      var assign=parseFloat (dijit.byId("assAssignedWork_"+id).get('value'));
-      var revised=parseFloat(realdWork)+parseFloat(left);
-      if(assign!=revised){
-        dijit.byId("assAssignedWork_"+id).set("value",revised);
-        dojo.byId('initAss_'+id).value=revised;
-      }
-    }
-  }
-  var diff = (left)-(initLeft);
-  // update left for PlanningElement
- 
-  var assPeLeft=dijit.byId(objClass+'PlanningElement_leftWork');
-  if(assPeLeft){
-    assPeLeft.set("value", assPeLeft.get("value") + diff);
-  }
-  var assPePlanned=dijit.byId(objClass+'PlanningElement_plannedWork');
-  if(assPePlanned){
-    assPePlanned.set("value", assPePlanned.get("value") + diff);
-  }
-  //
-  dojo.byId('initLeft_'+id).value=left;
-  diff = 0;
-  dojo.byId(objClass+'PlanningElement_leftCost').style.textDecoration="line-through";
-}
-  
-function saveAssignedWork(id, zone) {
-  var value=dijit.byId("ass"+zone+"_"+id).get("value");
-  var objClass=dojo.byId('objectClass').value;
-  var url = '../tool/saveLeftWork.php?idAssign='+id +'&zone='+zone +'&valueTextZone='+value;
-  dojo.xhrPut({
-	url : url,
-	form : 'objectForm',
-	handleAs : "text",
-	load : function(data) {
-	  addMessage(i18n("col"+zone)+" "+i18n("resultSave"));
-	  document.getElementById('idImage'+zone+id).style.display="none";
-	  setTimeout("dojo.byId('idImage"+zone+id+"').style.display='block';", 1000);
-	}
-  });
-}
-
-function saveLeftWork(id, zone) {
-  var value=dijit.byId("ass"+zone+"_"+id).get("value");
-  if(isNaN(value) || value==null){
-    value=0;
-    dijit.byId("ass"+zone+"_"+id).set("value",0);
-  }
-  // update left and planned for PlanningElement
-  var initLeft =dojo.byId('initLeft_'+id).value;
-  var objClass=dojo.byId('objectClass').value;
-  var assPeLeft=dijit.byId(objClass+'PlanningElement_leftWork');
-  var assPePlan=dijit.byId(objClass+'PlanningElement_plannedWork');
-  var diff=value-initLeft;
-  
-  if(assPeLeft){
-    assPeLeft.set("value", assPeLeft.get("value") + diff);
-  }
-  if(assPePlan){
-    assPePlan.set("value", assPePlan.get("value") + diff);
-  }
-	//
-	var url = '../tool/saveLeftWork.php?idAssign='+id +'&zone='+zone +'&valueTextZone='+value;
-	dojo.xhrPut({
-	  url : url,
-	  form : 'objectForm',
-	  handleAs : "text",
-	  load : function(data) {
-		  addMessage(i18n("col"+zone)+" "+i18n("resultSave"));
-	    document.getElementById('idImage'+zone+id).style.display="block";
-	    setTimeout("dojo.byId('idImage"+zone+id+"').style.display='none';", 1000);
-	    var objClass=dojo.byId('objectClass').value;
-	    if (data) {
-	      dijit.byId(objClass+'PlanningElement_realEndDate').set('value',data);
-	    } else {
-	      dijit.byId(objClass+'PlanningElement_realEndDate').set('value',null);
-	    }
-	  }
-	});
-	dojo.byId('initLeft_'+id).value=value;
-	dojo.byId(objClass+'PlanningElement_leftCost').style.textDecoration="line-through";
-	dojo.byId(objClass+'PlanningElement_plannedCost').style.textDecoration="line-through";
-}
-
-// ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT - ADD-EDIT-REMOVE
-// =============================================================================
-// = Add-Edit-Remove an organization's Budget Element
-// =============================================================================
-/**
- * Add a budgetElement
- * @param objectClassName     : The class name on witch the edit is done
- * @param refId               : The RefId of the MainClass
- * @param id                  : The id of the budgetElement = 0
- * @param year                : The year of the budgetElement to add
- * @param scope               : The scope (For organization : 'organization'
- */
-function addBudgetElement(objectClassName, refId, id, year, scope) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  params='&objectClass='+objectClassName;
-  params+='&action=ADD';
-  params+='&refId='+refId;
-  params+='&id='+id;
-  params+='&year='+year;
-  params+='&scope='+scope;
-  loadDialog('dialogAddChangeBudgetElement', null, true, params, true, true, 'addBudgetElement');
-  }
-
-/**
- * Change values of a budgetElement
- * @param objectClassName     : The class name on witch the edit is done
- * @param refId               : The id of the MainClass
- * @param id                  : The id on witch the edit is done
- * @param year                : The year of the budgetElement (for showing)
- * @param budgetWork          : The budget Work to edit
- * @param budgetCost          : The budget Cost to edit
- * @param budgetExpenseAmount : The budget element's expense Amount to edit
- */
-function changeBudgetElement(objectClassName, refId, id, year, budgetWork, budgetCost, budgetExpenseAmount) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  params='&objectClass='+objectClassName;
-  params+='&action=CHANGE';
-  params+='&refId='+refId;
-  params+='&id='+id;
-  params+='&year='+year;
-  params+='&budgetWork='+budgetWork;
-  params+='&budgetCost='+budgetCost;
-  params+='&budgetExpenseAmount='+budgetExpenseAmount;
-    
-  loadDialog('dialogAddChangeBudgetElement', null, true, params, false, true, 'changeBudgetElement');        
-}
-
-/**
- * Add or save a budgetElement
- * After calling the dialog dialogAddChangeBudgetElement
- */
-//gautier #4360
-function saveOrganizationBudgetElement() {
-//loadContent("../tool/saveOrganizationBudgetElement.php", "detailDiv", "addChangeBudgetElementForm");
-  loadContent("../tool/saveOrganizationBudgetElement.php", "resultDivMain", "addChangeBudgetElementForm", true);
-  dijit.byId('dialogAddChangeBudgetElement').hide();
-showWait();
-}
-
-/**
- * Close or unclose a budgetElement
- * @param objectClassName     : The class name on witch the edit is done
- * @param refId               : The id of main Class
- * @param id                  : The id of a budget element
- * @param idle                : The value of idle  - If 0, setting to 1
- * @param year                : The period year
- */
-function closeUncloseBudgetElement(objectClassName, refId, id, idle, year) {
-  var param="?objectClassName="+objectClassName;
-  param+="&refId="+refId;
-  param+="&budgetElementId="+id;
-  param+="&idle="+idle;
-  param+="&year="+year;
-
-if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-
-  if(idle==0) {
-      msg=i18n('confirmCloseBudgetElement');
-  } else {
-      msg=i18n('confirmUncloseBudgetElement');  
-  }
-      
-
-  actionOK=function() {
-    loadContent("../tool/closeUncloseOrganizationBudgetElement.php"+param, "detailDiv","");
-  };
-
-  showConfirm(msg, actionOK);
-}
-
-/**
- * Delete a budgetElement
- * @param objectClassName     : The class name on witch the edit is done
- * @param refId               : The id of main Class
- * @param id                  : The id of the budgetElement to delete
- * @param year                : The period year
- */
-function removeBudgetElement(objectClassName, refId, id, year) {
-  var param="?objectClassName="+objectClassName;
-  param+="&refId="+refId;
-  param+="&budgetElementId="+id;
-  param+="&year="+year;
-
-if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-
-  actionOK=function() {
-    loadContent("../tool/removeOrganizationBudgetElement.php"+param, "detailDiv","");
-  };
-
-  msg=i18n('confirmRemoveBudgetElement');
-  showConfirm(msg, actionOK);
-
-}
-
-// END ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT - ADD-EDIT-REMOVE
-
-
-// ADD BY Marc TABARY - 2017-02-23 - LIST - ADD - REMOVE OBJECTS LINKED BY ID TO MAIN OBJECT
-// =============================================================================
 // = Linked Object by id to main object
 // =============================================================================
+
 function addLinkObjectToObject(mainObjectClassName, idOfInstanceOfMainClass, linkObjectClassName) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
-  // empty select of previous options
   if (typeof dojo.byId('linkedObjectId') !== 'undefined') {
     var node = document.getElementById("linkedObjectId");
     while (node.firstChild) node.removeChild(node.firstChild);
   }
-//  dijit.byId("dialogObject").hide();
   refreshLinkObjectList(0,mainObjectClassName, linkObjectClassName);
   dijit.byId("dialogObject").show();
 
@@ -6070,18 +2844,12 @@ function addLinkObjectToObject(mainObjectClassName, idOfInstanceOfMainClass, lin
   disableWidget('dialogObjectSubmit');
 }
 
-/**
- * save a idXXX of the selected linked object
- * 
- */
 function saveLinkObject() {  
   var param="";  
   var nbSelected=0;
   if (dojo.byId("linkedObjectId").value == "") {
       return;
   }
-
-// ADD BY Marc TABARY - 2017-03-31 - ADD MULTIPLE OBJECTS LINKED BY ID
   list=dojo.byId("linkedObjectId");
   if (list.options) {
     selected=new Array();
@@ -6092,23 +2860,14 @@ function saveLinkObject() {
       }
     }
   }  
-// END ADD BY Marc TABARY - 2017-03-31 - ADD MULTIPLE OBJECTS LINKED BY ID
-
-// CHANGE BY Marc TABARY - 2017-03-31 - ADD MULTIPLE OBJECTS LINKED BY ID
   param="?linkedObjectId="+selected;
-// END CHANGE BY Marc TABARY - 2017-03-31 - ADD MULTIPLE OBJECTS LINKED BY ID
   param+="&mainObjectClass="+dojo.byId('mainObjectClass').value;
   param+="&idInstanceOfMainClass="+dojo.byId('idInstanceOfMainClass').value;
   param+="&linkObjectClassName="+dojo.byId('linkObjectClassName').value;
-
   loadContent("../tool/saveObjectLinkedByIdToMainObject.php"+param, "resultDivMain", "objectFormDialog", true, 'linkObject');
   dijit.byId('dialogObject').hide();
 }
 
-/**
- * Set idXXX of the linked object to null
- * 
- */
 function removeLinkObjectFromObject(mainObjectClassName, linkObjectClassName, idLinkObject, nameLinkObject) {
   var param="?mainObjectClassName="+mainObjectClassName;
   param+="&linkObjectClassName="+linkObjectClassName;
@@ -6127,30 +2886,20 @@ if (checkFormChangeInProgress()) {
   showConfirm(msg, actionOK);
 }
 
-
-/**
- * Refresh the link objects list (after update)
- */
 function refreshLinkObjectList(selected, mainObjectClassName, linkObjectClassName) {
-  var param='';
-  
+  var param='';  
   selected = typeof selected !== 'undefined' ? selected : 0;
   mainObjectClassName = typeof mainObjectClassName !== 'undefined' ? mainObjectClassName : '';
   linkObjectClassName = typeof linkObjectClassName !== 'undefined' ? linkObjectClassName : '';
-  
   disableWidget('dialogObjectSubmit');
   var url='../tool/dynamicListObjectLinkedByIdToMainObject.php';
-
-  param='?selected=' + selected;
-    
+  param='?selected=' + selected;    
   if (mainObjectClassName!='') {
     param+='&mainObjectClass=' + mainObjectClassName;      
   }
-
   if (linkObjectClassName!='') {
     param+='&linkObjectClassName=' + linkObjectClassName;      
   }
-
   url+=param;
   loadContent(url, 'dialogObjectList', 'objectForm', false);
   selectLinkObjectItem();
@@ -6172,39 +2921,24 @@ function selectLinkObjectItem() {
     disableWidget('dialogObjectSubmit');
   }
 }
-// END ADD BY Marc TABARY - 2017-02-23 - LIST - ADD - REMOVE OBJECTS LINKED BY ID TO MAIN OBJECT
-
-// BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-
-/**
- * Save the new status of the object
- */
 function saveChangedStatusObject() {
-    // The selected status
     list=dojo.byId("changeStatusId");
     if (list.options) {
-        selected=0;
-        for (var i=0; i < list.options.length; i++) {
-          if (list.options[i].selected) {
-            selected=list.options[i].value;
-            i = list.options.length+10;
-          }
+      selected=0;
+      for (var i=0; i < list.options.length; i++) {
+        if (list.options[i].selected) {
+          selected=list.options[i].value;
+          i = list.options.length+10;
         }
-    
-    // The class object
-    var objectClass = dojo.byId("objectClassChangeStatus").value;
-    
-    // The Object id
-    var objectId = dojo.byId("idInstanceOfClassChangeStatus").value;
-    
-    url = "";
-    
-    param="?newStatusId="+selected;
-    param+="&objectClass="+objectClass;
-    param+="&idInstanceOfClass="+objectId;
-
-    loadContent("../tool/changeObjectStatus.php"+param, "resultDivMain", "objectForm", true, objectClass);
-    dijit.byId('dialogChangeStatus').hide();
+      }
+      var objectClass = dojo.byId("objectClassChangeStatus").value;
+      var objectId = dojo.byId("idInstanceOfClassChangeStatus").value;   
+      url = "";
+      param="?newStatusId="+selected;
+      param+="&objectClass="+objectClass;
+      param+="&idInstanceOfClass="+objectId;
+      loadContent("../tool/changeObjectStatus.php"+param, "resultDivMain", "objectForm", true, objectClass);
+      dijit.byId('dialogChangeStatus').hide();
     }  
 }
 
@@ -6226,14 +2960,6 @@ function selectChangeStatusItem() {
   }
 }
 
-/**
- * Refresh the allowed status for the object
- * @param objClass      : The object's class for which change the status
- * @param objId         : The object's id
- * @param obTypeId      : The object's type
- * @param objStatusId   : The object's status
- * 
- */
 function changeObjectStatus(objClass, objId, objTypeId, objStatusId) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
@@ -6268,13 +2994,6 @@ function changeObjectStatus(objClass, objId, objTypeId, objStatusId) {
   dojo.byId("idTypeOfInstanceOfClassChangeStatus").value = objTypeId;
 }
 
-
-/**
- * Refresh the allowed status for the object
- * @param objId         : The object's id
- * @param objStatusId   : The object's status
- * 
- */
 function changeStatusNotification(objId, objStatusId) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
@@ -6288,1210 +3007,7 @@ function changeStatusNotification(objId, objStatusId) {
   loadContent("../tool/changeStatusNotification.php"+param, "resultDivMain", "objectForm", true, "Notification");
   refreshNotificationTree(false);
 }
-
-// END - ADD BY TABARY - NOTIFICATION SYSTEM
-
-
-//=============================================================================
-//= Financial
-//=============================================================================
-
-//gautier #providerTerm
-function editProviderTerm(objectClass,idProviderOrder,isLine,id,name,date,tax,discount,untaxed,taxAmount,fullAmount,totalUntaxed) {
-  affectationLoad=true;
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  //var percent = Math.round(untaxed*100000/totalUntaxed)/1000;
-  var percent = untaxed*100/totalUntaxed;
-  var callBack = function () {
-    if(name){
-      dijit.byId("providerTermName").set('value', name);
-    }
-    if (date) {
-      dijit.byId("providerTermDate").set('value', date);
-    }
-    if (tax) {
-      dijit.byId("providerTermTax").set('value', tax);
-    }
-    if (discount) {
-      dijit.byId("providerTermDiscount").set('value', discount);
-    }
-    if( isLine == 'false'){
-      dijit.byId("providerTermPercent").set('value', percent);
-      
-      if (untaxed) {
-        dijit.byId("providerTermUntaxedAmount").set('value', untaxed);
-      }
-      if (taxAmount) {
-        dijit.byId("providerTermTaxAmount").set('value', taxAmount);
-      } 
-      if (fullAmount) {
-        dijit.byId("providerTermFullAmount").set('value', fullAmount);
-      } 
-    }
-    dijit.byId("dialogProviderTerm").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&objectClass="+objectClass;
-  params+="&id="+id;
-  params+="&idProviderOrderEdit="+idProviderOrder;
-  params+="&isLineMulti="+isLine;
-  params+="&mode=edit";
-  loadDialog('dialogProviderTerm',callBack,false,params);
-}
-
-function removeProviderTerm(id, fromBill) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    var url="../tool/removeProviderTerm.php?providerTermId="+id;
-    if (fromBill) url+="&fromBill=true";
-    loadContent(url, "resultDivMain",
-        null, true, 'providerTerm');
-  };
-    msg=i18n('confirmDeleteProviderTerm', new Array(id));
-    showConfirm(msg, actionOK);
-}
-
-function removeProviderTermFromBill(id,idProviderBill) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeProviderTerm.php?providerTermId="+id+"&isProviderBill=true", "resultDivMain",
-        null, true, 'providerTerm');
-  };
-    msg=i18n('confirmRemoveProviderTermFromBill', new Array(id));
-    showConfirm(msg, actionOK);
-}
-
-function addWorkCommand(id) {
-  var callBack = function () {
-    affectationLoad=true;
-    dijit.byId("dialogWorkCommand").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&idCommand="+id;
-  params+="&mode=add";
-  loadDialog('dialogWorkCommand',callBack,false,params);
-}
-
-function editWorkCommand(idCommand,id,idWorkUnit,idComplexity,quantity,unitAmount,commandAmount) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  pauseBodyFocus();
-  var callBack = function () {
-    dijit.byId("dialogWorkCommand").show();
-  };
-  var params="&id="+id;
-  params+="&idCommand="+idCommand;
-  params+="&idWorkUnit="+idWorkUnit;
-  params+="&idComplexity="+idComplexity;
-  params+="&quantity="+quantity;
-  params+="&unitAmount="+unitAmount;
-  params+="&commandAmount="+commandAmount;
-  params+="&mode=edit";
-  loadDialog('dialogWorkCommand',callBack,false,params);
-}
-
-function editBilledWorkCommand(idBill,id,idWorkCommand,quantity) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  pauseBodyFocus();
-  var callBack = function () {
-    dijit.byId("dialogBilledWorkCommand").show();
-  };
-  var params="&id="+id;
-  params+="&idBill="+idBill;
-  params+="&idWorkCommand="+idWorkCommand;
-  params+="&quantity="+quantity;
-  params+="&mode=edit";
-  loadDialog('dialogBilledWorkCommand',callBack,false,params);
-}
-
-function addBilledWorkCommand(id) {
-  var callBack = function () {
-    affectationLoad=true;
-    dijit.byId("dialogBilledWorkCommand").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&idBill="+id;
-  params+="&mode=add";
-  loadDialog('dialogBilledWorkCommand',callBack,false,params);
-}
-
-function saveWorkCommand() {
-  var formVar=dijit.byId('workCommandForm');
-  if (formVar.validate()) {
-    loadContent("../tool/saveWorkCommand.php", "resultDivMain", "workCommandForm", true, 'workCommand');
-    dijit.byId('dialogWorkCommand').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-function saveBilledWorkCommand() {
-  var formVar=dijit.byId('billedWorkCommandForm');
-  if(dijit.byId('billedWorkCommandBilled').get('value') > dijit.byId('billedWorkCommandCommand').get('value')){
-    showAlert(i18n("billedQuantityCantBeSuperiorThanCommand"));
-  }else{
-    if (formVar.validate()) {
-      loadContent("../tool/saveBilledWorkCommand.php", "resultDivMain", "billedWorkCommandForm", true, 'billedWorkCommand');
-      dijit.byId('dialogBilledWorkCommand').hide();
-    } else {
-      showAlert(i18n("alertInvalidForm"));
-    }
-  }
-}
-
-function removeWorkCommand(id) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeWorkCommand.php?idWorkCommand="+id, "resultDivMain",
-        null, true, 'workCommand');
-  };
-    msg=i18n('confirmRemoveWorkCommand', new Array(id));
-    showConfirm(msg, actionOK);
-}
-
-function removeBilledWorkCommand(idWorkCommandBilled,idWorkCommand) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeBilledWorkCommand.php?idWorkCommandBilled="+idWorkCommandBilled+'&idWorkCommand='+idWorkCommand, "resultDivMain",
-        null, true, 'workCommand');
-  };
-    msg=i18n('confirmRemoveWorkCommand', new Array(id));
-    showConfirm(msg, actionOK);
-}
-
-function activityWorkUnitChangeIdWorkUnit(){
-  if(dijit.byId('ActivityWorkCommandWorkUnit').get('value')=='' || dijit.byId('ActivityWorkCommandWorkUnit').get('value')==' '){
-    dijit.byId('ActivityWorkCommandComplexity').set('value','');
-    dijit.byId("ActivityWorkCommandComplexity").set('readOnly', true);
-    dijit.byId('ActivityBilledWorkCommandWorkCommand').set('value','');
-    dijit.byId("ActivityBilledWorkCommandWorkCommand").set('readOnly', true);
-  }else{
-    dijit.byId("ActivityWorkCommandComplexity").set('readOnly', false);
-    if(dijit.byId('ActivityWorkCommandComplexity').get('value')!=''){
-      dijit.byId('ActivityWorkCommandComplexity').set('value','');
-    }
-    refreshListSpecific("idWorkUnit", "ActivityWorkCommandComplexity", "idWorkUnit",dijit.byId('ActivityWorkCommandWorkUnit').get('value'));
-    dijit.byId('ActivityBilledWorkCommandWorkCommand').set('value','');
-    dijit.byId("ActivityBilledWorkCommandWorkCommand").set('readOnly', true);
-  }
-}
-
-function activityWorkUnitChangeIdComplexity(){
-  dijit.byId("ActivityWorkCommandAmount").set('value','');
-  dijit.byId("ActivityWorkCommandQuantity").set('readOnly', false);
-  if(dijit.byId("ActivityBilledWorkCommandWorkCommand")){
-    var idComplexity=dijit.byId("ActivityWorkCommandComplexity").get("value");
-    var idWorkUnit=dijit.byId("ActivityWorkCommandWorkUnit").get("value");
-    dijit.byId("ActivityBilledWorkCommandWorkCommand").set("value","");
-    if(idComplexity != " " && idComplexity !=""){
-     refreshListSpecific("idWorkCommand", "ActivityBilledWorkCommandWorkCommand", "idWorkCommand",idWorkUnit+"separator"+idComplexity+"separator"+dojo.byId("id").value);
-     dijit.byId("ActivityBilledWorkCommandWorkCommand").set("readOnly",false);
-    }else{
-      dijit.byId("ActivityBilledWorkCommandWorkCommand").set("readOnly",true);
-    }
-  }
-  
-}
-
-function activityWorkUnitChangeQuantity(){
-  unit = dijit.byId('ActivityWorkCommandQuantity').get('value');
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=workCommand'
-      +'&idWorkUnit='+dijit.byId('ActivityWorkCommandWorkUnit').get('value')+'&idComplexity='+dijit.byId('ActivityWorkCommandComplexity').get('value'),
-  handleAs : "text",
-  load : function(data) {
-    total = data * unit;
-    dijit.byId('ActivityWorkCommandAmount').set('value', total);
-  }
-  });
-}
-
-
-function workCommandChangeIdWorkUnit(){
-  if(dijit.byId('workCommandWorkUnit').get('value')=='' || dijit.byId('workCommandWorkUnit').get('value')==' '){
-    dijit.byId('workCommandComplexity').set('value','');
-    dijit.byId("workCommandComplexity").set('readOnly', true);
-  }else{
-    dijit.byId("workCommandComplexity").set('readOnly', false);
-    if(dijit.byId('workCommandComplexity').get('value')!=''){
-      dijit.byId('workCommandComplexity').set('value','');
-    }
-    refreshListSpecific("idWorkUnit", "workCommandComplexity", "idWorkUnit",dijit.byId('workCommandWorkUnit').get('value'));
-  }
-}
-
-function workCommandChangeIdComplexity(){
-  dijit.byId("workCommandQuantity").set('value','');
-  dijit.byId("workCommandAmount").set('value','');
-  dijit.byId("workCommandQuantity").set('readOnly', false);
-  dojo.xhrGet({
-        url : '../tool/getSingleData.php?dataType=workCommand'
-          +'&idWorkUnit='+dijit.byId('workCommandWorkUnit').get('value')+'&idComplexity='+dijit.byId('workCommandComplexity').get('value'),
-    handleAs : "text",
-    load : function(data) {
-      dijit.byId('workCommandUnitAmount').set('value', data);
-    }
-  });
-}
-
-function changeBilledWorkCommand(){
-  dijit.byId("billedWorkCommandQuantityBilled").set('readOnly', false);
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=billedWorkCommand'
-      +'&idWorkCommand='+dijit.byId('billedWorkCommandWorkCommand').get('value'),
-    handleAs : "text",
-    load : function(data) {
-      arrayData=data.split('#!#!#!#!#!#');
-      dijit.byId('billedWorkCommandWorkUnit').set('value',arrayData[0]);
-      dijit.byId('billedWorkCommandComplexity').set('value',arrayData[1]);
-      dijit.byId('billedWorkCommandUnitAmount').set('value',parseFloat(arrayData[2]));
-      dijit.byId('billedWorkCommandCommand').set('value',parseFloat(arrayData[3]));
-      dijit.byId('billedWorkCommandDone').set('value',parseFloat(arrayData[4]));
-      dijit.byId('billedWorkCommandBilled').set('value',parseFloat(arrayData[5]));
-    }
-    });
-}
-
-function billedWorkCommandChangeQuantity(mode,id){
-  var total = dijit.byId('billedWorkCommandUnitAmount').get('value') * dijit.byId('billedWorkCommandQuantityBilled').get('value');
-  dijit.byId('billedWorkCommandAmount').set('value',total);
-  
-  if(mode == 'add'){
-    dojo.xhrGet({
-      url : '../tool/getSingleData.php?dataType=billedWorkCommandQuantityAdd'
-        +'&idWorkCommand='+dijit.byId('billedWorkCommandWorkCommand').get('value'),
-      handleAs : "text",
-      load : function(data) {
-        var quantity = dijit.byId('billedWorkCommandQuantityBilled').get('value');
-        var totalQuantityBilled = parseInt(data) + quantity;
-        dijit.byId('billedWorkCommandBilled').set('value',totalQuantityBilled);
-      }
-      });
-  }else{
-    dojo.xhrGet({
-      url : '../tool/getSingleData.php?dataType=billedWorkCommandQuantityEdit'+'&idWorkCommandBill='+id
-        +'&idWorkCommand='+dijit.byId('billedWorkCommandWorkCommand').get('value'),
-      handleAs : "text",
-      load : function(data) {
-        var quantity = dijit.byId('billedWorkCommandQuantityBilled').get('value');
-        var totalQuantityBilled = parseInt(data) + quantity;
-        dijit.byId('billedWorkCommandBilled').set('value',totalQuantityBilled);
-      }
-      });
-  }
-  
-}
-
-function workCommandChangeQuantity(){
-  var quantity = dijit.byId('workCommandQuantity').get('value');
- // if(quantity > 0 && quantity !=''){
-    var amountUnity = dijit.byId('workCommandUnitAmount').get('value');
-    var amount = quantity*amountUnity;
-    dijit.byId('workCommandAmount').set('value',amount);
-  //}else{
-   // dijit.byId('workCommandAmount').set('value','');
-  //}
-}
-
-function addProviderTerm(objectClass, type, idProviderOrder, isLine) {
-  var callBack = function () {
-    affectationLoad=true;
-    dijit.byId("dialogProviderTerm").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&idProviderOrder="+idProviderOrder;
-  params+="&type="+type;
-  params+="&isLine="+isLine;
-  params+="&mode=add";
-  params+="&objectClass="+objectClass;
-  loadDialog('dialogProviderTerm',callBack,false,params);
-}
-
-function saveProviderTerm() {
-  var formVar=dijit.byId('providerTermForm');
-  if (formVar.validate()) {
-    loadContent("../tool/saveProviderTerm.php", "resultDivMain", "providerTermForm", true, 'providerTerm');
-    dijit.byId('dialogProviderTerm').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-var cancelRecursiveChange_OnGoingChange = false;
-function providerTermLine(totalUntaxedAmount){
-  if (cancelRecursiveChange_OnGoingChange) return;
-  cancelRecursiveChange_OnGoingChange = true;
-  var totalUntaxedAmountValue = totalUntaxedAmount;
-  var untaxedAmount = dijit.byId("providerTermUntaxedAmount").get("value");
-  if (!untaxedAmount)
-    untaxedAmount = 0;
-  var taxPct = dijit.byId("providerTermTax").get("value");
-  if (!taxPct)
-    taxPct = 0;
-  // Calculated values
-  var taxAmount = Math.round(untaxedAmount * taxPct) / 100;
-  var fullAmount = taxAmount + untaxedAmount;
-  //var percent = Math.round(untaxedAmount*100000/totalUntaxedAmountValue)/1000;
-  var percent = untaxedAmount*100/totalUntaxedAmountValue;
-  // Set values to fields
-  dijit.byId("providerTermPercent").set('value', percent);
-  dijit.byId("providerTermTaxAmount").set('value', taxAmount);
-  dijit.byId("providerTermFullAmount").set('value', fullAmount);
-  setTimeout("cancelRecursiveChange_OnGoingChange = false;",50);
-}
-function providerTermLinePercent(totalUntaxedAmount){
-  if (cancelRecursiveChange_OnGoingChange) return;
-  cancelRecursiveChange_OnGoingChange = true;
-  var totalUntaxedAmountValue = totalUntaxedAmount;
-  var percent = dijit.byId("providerTermPercent").get("value");
-  var taxPct = dijit.byId("providerTermTax").get("value");
-  if (!taxPct)
-    taxPct = 0;
-  // Calculated values
-  var untaxedAmount = percent*totalUntaxedAmountValue/100;
-  var taxAmount = Math.round(untaxedAmount * taxPct) / 100;
-  var fullAmount = taxAmount + untaxedAmount;
-  // Set values to fields
-  dijit.byId("providerTermUntaxedAmount").set('value', untaxedAmount);
-  dijit.byId("providerTermTaxAmount").set('value', taxAmount);
-  dijit.byId("providerTermFullAmount").set('value', fullAmount);
-  setTimeout("cancelRecursiveChange_OnGoingChange = false;",50);
-}
-
-function providerTermLineBillLine(id){
-  if (cancelRecursiveChange_OnGoingChange) return;
-  cancelRecursiveChange_OnGoingChange = true;
-  var totalUntaxedAmountValue = dijit.byId("providerTermBillLineUntaxed"+id).get("value");
-  var untaxedAmount = dijit.byId("providerTermUntaxedAmount"+id).get("value");
-  var discount = dijit.byId("providerTermDiscount").get("value");
-  if (!untaxedAmount)
-    untaxedAmount = 0;
-  var taxPct = dijit.byId("providerTermTax").get("value");
-  if (!taxPct)
-    taxPct = 0;
-  // Calculated values
-  var discountBill = (untaxedAmount * discount / 100);
-  var taxAmount = Math.round((untaxedAmount-discountBill)* taxPct) / 100;
-  var fullAmount = untaxedAmount - discountBill + taxAmount;
-  //var percent = Math.round(untaxedAmount*100000/totalUntaxedAmountValue)/1000;
-  var percent = untaxedAmount*100/totalUntaxedAmountValue;
-  // Set values to fields
-  dijit.byId("providerTermDiscountAmount"+id).set('value', discountBill);
-  dijit.byId("providerTermPercent"+id).set('value', percent);
-  dijit.byId("providerTermTaxAmount"+id).set('value', taxAmount);
-  dijit.byId("providerTermFullAmount"+id).set('value', fullAmount);
-  setTimeout("cancelRecursiveChange_OnGoingChange = false;",50);
-}
-
-function providerTermLinePercentBilleLine(id){
-  if (cancelRecursiveChange_OnGoingChange) return;
-  cancelRecursiveChange_OnGoingChange = true;
-  var totalUntaxedAmountValue = dijit.byId("providerTermBillLineUntaxed"+id).get("value");
-  var percent = dijit.byId("providerTermPercent"+id).get("value");
-  var taxPct = dijit.byId("providerTermTax").get("value");
-  var discount = dijit.byId("providerTermDiscount").get("value");
-  if (!taxPct)
-    taxPct = 0;
-  // Calculated values
-  var untaxedAmount = percent*totalUntaxedAmountValue/100;
-  var discountBill = (untaxedAmount * discount / 100);
-  var taxAmount = Math.round((untaxedAmount-discountBill)* taxPct) / 100;
-  var fullAmount = untaxedAmount - discountBill + taxAmount;
-  // Set values to fields
-  dijit.byId("providerTermUntaxedAmount"+id).set('value', untaxedAmount);
-  dijit.byId("providerTermDiscountAmount"+id).set('value', discountBill);
-  dijit.byId("providerTermTaxAmount"+id).set('value', taxAmount);
-  dijit.byId("providerTermFullAmount"+id).set('value', fullAmount);
-  setTimeout("cancelRecursiveChange_OnGoingChange = false;",50);
-}
-
-function addProviderTermFromProviderBill() {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var params="&providerBillId="+dijit.byId('id').get('value');
-  loadDialog('dialogProviderTermFromProviderBill', null, true, params);
-}
-
-
-function saveProviderTermFromProviderBill() {
-  var formVar=dijit.byId('providerTermFromProviderBillForm');
-  if (formVar.validate() && dojo.byId('linkProviderTerm') && dojo.byId('linkProviderTerm').value ) {
-    loadContent("../tool/saveProviderTermFromProviderBill.php", "resultDivMain", "providerTermFromProviderBillForm", true,'ProviderTerm');
-    dijit.byId('dialogProviderTermFromProviderBill').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-function providerTermLineChangeNumber(){
-  if (!dijit.byId('providerTermNumberOfTerms')) return;
-  var number=dijit.byId('providerTermNumberOfTerms').get("value");
-  if (! number || number<=0) return;
-  //dijit.byId('providerTermPercent').set('value',100/number);
-  
-  if (number>1) {
-    cancelRecursiveChange_OnGoingChange=true;
-    dijit.byId('providerTermUntaxedAmount').set('value',dijit.byId('providerTermOrderUntaxedAmount').get('value')/number);
-    dijit.byId('providerTermPercent').set('value',100/number);
-    dijit.byId('providerTermFullAmount').set('value',dijit.byId('providerTermOrderFullAmount').get('value')/number);
-    dijit.byId('providerTermTaxAmount').set('value',dijit.byId('providerTermFullAmount').get('value')-dijit.byId('providerTermUntaxedAmount').get('value'));
-    lockWidget('providerTermPercent');
-    lockWidget('providerTermUntaxedAmount');
-    var termDate=dijit.byId('providerTermDate').get('value');
-    if (! termDate) {
-      dojo.byId('labelRegularTerms').innerHTML='<br/>'+'<span style="color:red">'+i18n('messageMandatory',new Array(i18n('colDate')))+'</span>';
-    } else {
-      var termDay=termDate.getDate();
-      var lastDayOfMonth = (new Date(termDate.getFullYear(), termDate.getMonth()+1, 0)).getDate();
-      if (termDay==lastDayOfMonth ) {
-        termDay=i18n('colLastDay');
-      }
-      var startDate=dateFormatter(formatDate(termDate));
-      dojo.byId('labelRegularTerms').innerHTML='<br/>'+i18n('labelRegularTerms',new Array(number,termDay,startDate));
-    }
-    setTimeout("cancelRecursiveChange_OnGoingChange=false;",50);
-  } else {
-    //dijit.byId('providerTermPercent').set('value',100);
-    unlockWidget('providerTermPercent');
-    unlockWidget('providerTermUntaxedAmount');
-    dojo.byId('labelRegularTerms').innerHTML="";
-  }
-}
-function refreshLinkProviderTerm(selected) {
-  var url='../tool/dynamicListLinkProviderTerm.php';
-  if (selected) {
-    url+='?selected=' + selected;
-    if (dojo.byId("ProviderBillId")) {
-      url+="&providerBillId="+dojo.byId("ProviderBillId").value;
-    }
-    var callback=function() {
-      dojo.byId('linkProviderTerm').focus();
-    };
-    loadDiv(url, 'linkProviderTermDiv', null, callback);
-  }
-}
-// =============================================================================
-// = Affectation
-// =============================================================================
-
-function addAffectation(objectClass, type, idResource, idProject) {
-//  if (checkFormChangeInProgress()) {
-//    showAlert(i18n('alertOngoingChange'));
-//    return;
-//  }
-  var callBack = function () {
-    affectationLoad=true;
-    dijit.byId("dialogAffectation").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&idProject="+idProject;
-  params+="&objectClass="+objectClass;
-  params+="&idResource="+idResource;
-  params+="&type="+type;
-  params+="&mode=add";
-  loadDialog('dialogAffectation',callBack,false,params);
-}
-//gautier #workUnits
-function addWorkUnit(idCatalogUO) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  pauseBodyFocus();
-  var callBack = function () {
-    ckEditorReplaceEditor("WUDescriptions",992);
-    ckEditorReplaceEditor("WUIncomings",993);
-    ckEditorReplaceEditor("WULivrables",994);
-    dijit.byId("dialogWorkUnit").show();
-  };
-  var params="&idCatalog="+idCatalogUO;
-  params+="&mode=add";
-  loadDialog('dialogWorkUnit',callBack,false,params);
-}
-function removeWorkUnit(idWorkUnit) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeWorkUnit.php?idWorkUnit="+idWorkUnit, "resultDivMain",null, true, 'affectation');
-  };
-  msg=i18n('confirmDeleteWorkUnit', new Array(id,i18n('WorkUnit'),idWorkUnit));
-  showConfirm(msg, actionOK);
-}
-//end workUnits
-//gautier #resourceCapacity
-function addResourceCapacity(objectClass, type, idResource) {
-  var callBack = function () {
-    affectationLoad=true;
-    dijit.byId("dialogResourceCapacity").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&idResource="+idResource;
-  params+="&type="+type;
-  params+="&mode=add";
-  loadDialog('dialogResourceCapacity',callBack,false,params);
-}
-
-function saveResourceCapacity(capacity){
-  var formVar=dijit.byId('resourceCapacityForm');
-  if (dijit.byId('resourceCapacityStartDate') && dijit.byId('resourceCapacityEndDate')) {
-    var start=dijit.byId('resourceCapacityStartDate').value;
-    var end=dijit.byId('resourceCapacityEndDate').value;
-    if (start && end && dayDiffDates(start, end) < 0) {
-      showAlert(i18n("errorStartEndDates", new Array(i18n("colStartDate"),
-          i18n("colEndDate"))));
-      return;
-    }
-  }
-  if (dijit.byId('resourceCapacity')){
-    var newCapacity = dijit.byId('resourceCapacity').value;
-    if(capacity === newCapacity){
-      showAlert(i18n("changeCapacity"));
-      return;
-    }
-  }
-  
-  if (formVar.validate()) {
-    loadContent("../tool/saveResourceCapacity.php", "resultDivMain", "resourceCapacityForm",true,'affectation');
-    dijit.byId('dialogResourceCapacity').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-function removeResourceCapacity(id,idResource) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeResourceCapacity.php?idResourceCapacity="+id+"&idResource="+idResource, "resultDivMain",null, true, 'affectation');
-  };
-  msg=i18n('confirmDeleteResourceCapacity', new Array(id,i18n('Resource'),idResource));
-  showConfirm(msg, actionOK);
-}
-
-function editResourceCapacity(id,idResource,capacity, idle, startDate, endDate) {
-  affectationLoad=true;
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-    dojo.xhrGet({
-      url : '../tool/getSingleData.php?dataType=resourceCapacityDescription&idResourceCapacity='+id,
-      handleAs : "text",
-      load : function(data) {
-        dijit.byId('resourceCapacityDescription').set('value', data);
-        enableWidget("resourceCapacityDescription");
-      }
-      });
-    if (capacity) {
-      dijit.byId("resourceCapacity").set('value', parseFloat(capacity));
-    }
-    if (startDate) {
-      dijit.byId("resourceCapacityStartDate").set('value', startDate);
-    } else {
-      dijit.byId("resourceCapacityStartDate").reset();
-    }
-    if (endDate) {
-      dijit.byId("resourceCapacityEndDate").set('value', endDate);
-    } else {
-      dijit.byId("resourceCapacityEndDate").reset();
-    }
-    if (idle == 1) {
-      dijit.byId("resourceCapacityIdle").set('value', idle);
-    } else {
-      dijit.byId("resourceCapacityIdle").reset();
-    }
-    dijit.byId("dialogResourceCapacity").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&id="+id;
-  params+="&idResource="+idResource;
-  params+="&mode=edit";
-  loadDialog('dialogResourceCapacity',callBack,false,params);
-}
-
-//gautier #activityWorkUnit
-function addActivityWorkUnit(id) {
-  var callBack = function () {
-    affectationLoad=true;
-    dijit.byId("dialogActivityWorkUnit").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&id="+id;
-  params+="&mode=add";
-  loadDialog('dialogActivityWorkUnit',callBack,false,params);
-}
-
-function removeActivityWorkUnit(idWorkUnit) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeActivityWorkUnit.php?idWorkUnit="+idWorkUnit, "resultDivMain",null, true, 'affectation');
-  };
-  msg=i18n('confirmDeleteWorkUnit', new Array(id,i18n('WorkUnit'),idWorkUnit));
-  showConfirm(msg, actionOK);
-}
-
-function saveActivityWorkUnit() {
-  var formVar=dijit.byId('activityWorkUnitForm');
-  if (formVar.validate()) {
-    var idWorkUnit=dijit.byId("ActivityWorkCommandWorkUnit").get("value");
-    var today = (new Date()).toISOString().substr(0,10);
-    dojo.xhrGet({
-      url : '../tool/getSingleData.php?dataType=validityDate&idWorkUnit='+ idWorkUnit,
-      handleAs : "text",
-      load : function(data) {
-        if(data){
-        if(data < today){
-          actionOK=function() {
-            loadContent("../tool/saveActivityWorkUnit.php", "resultDivMain", "activityWorkUnitForm", true, 'workUnit');
-            dijit.byId('dialogActivityWorkUnit').hide();
-          };
-          msg=i18n('errorValidityDate');
-          showConfirm(msg, actionOK);
-        }else{
-          loadContent("../tool/saveActivityWorkUnit.php", "resultDivMain", "activityWorkUnitForm", true, 'workUnit');
-          dijit.byId('dialogActivityWorkUnit').hide();
-        }
-      }else{
-        loadContent("../tool/saveActivityWorkUnit.php", "resultDivMain", "activityWorkUnitForm", true, 'workUnit');
-        dijit.byId('dialogActivityWorkUnit').hide();
-      }
-      }
-    });
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-//gautier workUnit
-function saveWorkUnit(){
-  editorDescriptions=CKEDITOR.instances['WUDescriptions'];
-  editorDescriptions.updateElement();
-  editorWUIncomings=CKEDITOR.instances['WUIncomings'];
-  editorWUIncomings.updateElement();
-  editorWULivrables=CKEDITOR.instances['WULivrables'];
-  editorWULivrables.updateElement();
-  if (trim(dijit.byId('WUReferences').get("value"))=="") {
-    showAlert(i18n("referenceIsMissing"));
-    return;
-  }
-  var formVar=dijit.byId('workUnitForm');
-  if (formVar.validate()) {
-    loadContent("../tool/saveWorkUnit.php", "resultDivMain", "workUnitForm",true,'WorkUnit');
-    dijit.byId('dialogWorkUnit').hide();
-    loadContent("objectDetail.php?refreshComplexitiesValues=true", "CatalogUO_unitOfWork", 'listForm');
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-function editActivityWorkUnit(idActivityWorkUnit,id) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  pauseBodyFocus();
-  var callBack = function () {
-    dijit.byId("dialogActivityWorkUnit").show();
-  };
-  var params="&id="+id;
-  params+="&idActivityWorkUnit="+idActivityWorkUnit;
-  params+="&mode=edit";
-  loadDialog('dialogActivityWorkUnit',callBack,false,params);
-}
-
-function editWorkUnit(id,idCatalogUO,validityDate,idle) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  pauseBodyFocus();
-  var callBack = function () {
-    ckEditorReplaceEditor("WUDescriptions",992);
-    ckEditorReplaceEditor("WUIncomings",993);
-    ckEditorReplaceEditor("WULivrables",994);
-    if (validityDate) {
-      dijit.byId("ValidityDateWU").set('value', validityDate);
-    } else {
-      dijit.byId("ValidityDateWU").reset();
-    }
-    if (idle == 1) {
-      dijit.byId("idleWU").set('value', idle);
-    } else {
-      dijit.byId("idleWU").reset();
-    }
-    dijit.byId("dialogWorkUnit").show();
-  };
-  var params="&id="+id;
-  params+="&idCatalog="+idCatalogUO;
-  params+="&mode=edit";
-  loadDialog('dialogWorkUnit',callBack,false,params);
-}
-// end workUnit
-
-//gautier resourceSurbooking
-function addResourceSurbooking(objectClass, type, idResource) {
-  var callBack = function () {
-    affectationLoad=true;
-    dijit.byId("dialogResourceSurbooking").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&idResource="+idResource;
-  params+="&type="+type;
-  params+="&mode=add";
-  loadDialog('dialogResourceSurbooking',callBack,false,params);
-}
-
-function saveResourceSurbooking(capacity){
-  var formVar=dijit.byId('resourceSurbookingForm');
-  if (dijit.byId('resourceSurbookingStartDate') && dijit.byId('resourceSurbookingEndDate')) {
-    var start=dijit.byId('resourceSurbookingStartDate').value;
-    var end=dijit.byId('resourceSurbookingEndDate').value;
-    if (start && end && dayDiffDates(start, end) < 0) {
-      showAlert(i18n("errorStartEndDates", new Array(i18n("colStartDate"),
-          i18n("colEndDate"))));
-      return;
-    }
-  }
-  if (dijit.byId('resourceSurbooking')){
-    var newCapacity = dijit.byId('resourceSurbooking').value;
-    if(newCapacity === 0){
-      showAlert(i18n("changeSurbooking"));
-      return;
-    }
-  }
-  if (formVar.validate()) {
-    loadContent("../tool/saveResourceSurbooking.php", "resultDivMain", "resourceSurbookingForm",true,'affectation');
-    dijit.byId('dialogResourceSurbooking').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-function removeResourceSurbooking(id,idResource) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeResourceSurbooking.php?idResourceSurbooking="+id+"&idResource="+idResource, "resultDivMain",null, true, 'affectation');
-  };
-  msg=i18n('confirmDeleteResourceSurbooking', new Array(id,i18n('Resource'),idResource));
-  showConfirm(msg, actionOK);
-}
-
-function editResourceSurbooking(id,idResource,capacity, idle, startDate, endDate) {
-  affectationLoad=true;
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-    dojo.xhrGet({
-      url : '../tool/getSingleData.php?dataType=resourceSurbookingDescription&idResourceSurbooking='+id,
-      handleAs : "text",
-      load : function(data) {
-        dijit.byId('resourceSurbookingDescription').set('value', data);
-        enableWidget("resourceSurbookingDescription");
-      }
-      });
-    if (capacity) {
-      dijit.byId("resourceSurbooking").set('value', parseFloat(capacity));
-    }
-    if (startDate) {
-      dijit.byId("resourceSurbookingStartDate").set('value', startDate);
-    } else {
-      dijit.byId("resourceSurbookingStartDate").reset();
-    }
-    if (endDate) {
-      dijit.byId("resourceSurbookingEndDate").set('value', endDate);
-    } else {
-      dijit.byId("resourceSurbookingEndDate").reset();
-    }
-    if (idle == 1) {
-      dijit.byId("resourceSurbookingIdle").set('value', idle);
-    } else {
-      dijit.byId("resourceSurbookingIdle").reset();
-    }
-    dijit.byId("dialogResourceSurbooking").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&id="+id;
-  params+="&idResource="+idResource;
-  params+="&mode=edit";
-  loadDialog('dialogResourceSurbooking',callBack,false,params);
-}
-
-//gautier #resourceTeam
-function addAffectationResourceTeam(objectClass, type, idResource) {
-var callBack = function () {
-  affectationLoad=true;
-  dijit.byId("dialogAffectationResourceTeam").show();
-  setTimeout("affectationLoad=false", 500);
-};
-var params="&idResource="+idResource;
-params+="&type="+type;
-params+="&mode=add";
-loadDialog('dialogAffectationResourceTeam',callBack,false,params);
-}
-
-function removeAffectation(id,own,affectedClass,affectedId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeAffectation.php?affectationId="+id+"&affectationIdTeam=''", "resultDivMain",
-        null, true, 'affectation');
-  };
-  if (own) {
-    msg='<span style="color:red;font-weight:bold;">'+i18n('confirmDeleteOwnAffectation', new Array(id))+'</span>';
-  } else {
-    msg=i18n('confirmDeleteAffectation', new Array(id,i18n(affectedClass),affectedId));
-  }
-  showConfirm(msg, actionOK);
-}
-
-// gautier #resourceTeam
-function removeAffectationResourceTeam(id,idResource) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeAffectationResourceTeam.php?affectaionId="+id, "resultDivMain",
-        null, true, 'affectation');
-  };
-  msg=i18n('confirmDeleteAffectation', new Array(id,i18n('Resource'),idResource));
-  showConfirm(msg, actionOK);
-}
-
-affectationLoad=false;
-//gautier #resourceTeam
-function editAffectationResourceTeam(id, objectClass, type, idResource, rate, idle, startDate, endDate) {
-  affectationLoad=true;
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-    dojo.xhrGet({
-      url : '../tool/getSingleData.php?dataType=affectationDescriptionResourceTeam&idAffectation='+id,
-      handleAs : "text",
-      load : function(data) {
-        dijit.byId('affectationDescriptionResourceTeam').set('value', data);
-        enableWidget("affectationDescriptionResourceTeam");
-      }
-      });
-    if(idResource){
-      dijit.byId("affectationResourceTeam").set('value', idResource);
-    }
-    if (rate) {
-      dijit.byId("affectationRateResourceTeam").set('value', rate);
-    }
-    if (startDate) {
-      dijit.byId("affectationStartDateResourceTeam").set('value', startDate);
-    } else {
-      dijit.byId("affectationStartDateResourceTeam").reset();
-    }
-    if (endDate) {
-      dijit.byId("affectationEndDateResourceTeam").set('value', endDate);
-    } else {
-      dijit.byId("affectationEndDateResourceTeam").reset();
-    }
-    if (idle == 1) {
-      dijit.byId("affectationIdleResourceTeam").set('value', idle);
-    } else {
-      dijit.byId("affectationIdleResourceTeam").reset();
-    }
-    dijit.byId("dialogAffectationResourceTeam").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&id="+id;
-  params+="&refType="+dojo.byId('objectClass').value;
-  params+="&idResource="+idResource;
-  params+="&mode=edit";
-  params+="&type="+type;
-  params+="&objectClass="+objectClass;
-  loadDialog('dialogAffectationResourceTeam',callBack,false,params);
-}
-
-function editAffectation(id, objectClass, type, idResource, idProject, rate, idle, startDate, endDate, idProfile) {
-  affectationLoad=true;
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=affectationDescription&idAffectation='+id,
-    handleAs : "text",
-    load : function(data) {
-      dijit.byId('affectationDescription').set('value', data);
-      enableWidget("affectationDescription");
-      }
-    });
-    if (startDate) {
-      dijit.byId("affectationStartDate").set('value', startDate);
-    } else {
-      dijit.byId("affectationStartDate").reset();
-    }
-    if (endDate) {
-      dijit.byId("affectationEndDate").set('value', endDate);
-    } else {
-      dijit.byId("affectationEndDate").reset();
-    }
-    if (idle == 1) {
-      dijit.byId("affectationIdle").set('value', idle);
-    } else {
-      dijit.byId("affectationIdle").reset();
-    }
-    dijit.byId("dialogAffectation").show();
-    setTimeout("affectationLoad=false", 500);
-  };
-  var params="&id="+id;
-  params+="&refType="+dojo.byId('objectClass').value;
-  params+="&idProject="+idProject;
-  params+="&idResource="+idResource;
-  params+="&mode=edit";
-  params+="&type="+type;
-  params+="&objectClass="+objectClass;
-  loadDialog('dialogAffectation',callBack,false,params);
-}
-
-function saveAffectation() {
-  var formVar=dijit.byId('affectationForm');
-  if (dijit.byId('affectationStartDate') && dijit.byId('affectationEndDate')) {
-    var start=dijit.byId('affectationStartDate').value;
-    var end=dijit.byId('affectationEndDate').value;
-    if (start && end && dayDiffDates(start, end) < 0) {
-      showAlert(i18n("errorStartEndDates", new Array(i18n("colStartDate"),
-          i18n("colEndDate"))));
-      return;
-    }
-  }
-  if (formVar.validate()) {
-    loadContent("../tool/saveAffectation.php", "resultDivMain", "affectationForm",
-        true, 'affectation');
-    dijit.byId('dialogAffectation').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-//gautier #resourceTeam
-function saveAffectationResourceTeam() {
-  var formVar=dijit.byId('affectationResourceTeamForm');
-  if (dijit.byId('affectationStartDate') && dijit.byId('affectationEndDate')) {
-    var start=dijit.byId('affectationStartDate').value;
-    var end=dijit.byId('affectationEndDate').value;
-    if (start && end && dayDiffDates(start, end) < 0) {
-      showAlert(i18n("errorStartEndDates", new Array(i18n("colStartDate"),
-          i18n("colEndDate"))));
-      return;
-    }
-  }
-  if (trim(dijit.byId('affectationResourceTeam'))=='') {
-    showAlert(i18n("messageMandatory", new Array(i18n("colIdResource"))));
-    return;
-  }
-  if (formVar.validate()) {
-    loadContent("../tool/saveAffectationResourceTeam.php", "resultDivMain", "affectationResourceTeamForm",
-        true, 'affectation');
-    dijit.byId('dialogAffectationResourceTeam').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-function affectTeamMembers(idTeam) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-    dijit.byId("dialogAffectation").show();
-  };
-  var params="&affectationIdTeam="+idTeam;
-  loadDialog('dialogAffectation',callBack,false,params);
-}
-
-function affectOrganizationMembers(idOrganization) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-    dijit.byId("dialogAffectation").show();
-  };
-  var params="&affectationIdOrganization="+idOrganization;
-  loadDialog('dialogAffectation',callBack,false,params);
-}
-
-function affectationChangeResource() {
-  var idResource=dijit.byId("affectationResource").get("value");
-  if (!idResource)
-    return;
-  if (affectationLoad)
-    return;
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=resourceProfile&idResource='
-        + idResource,
-    handleAs : "text",
-    load : function(data) {
-      dijit.byId('affectationProfile').set('value', data);
-    }
-  });
-}
-
-function replaceAffectation (id, objectClass, type, idResource, idProject, rate,
-    idle, startDate, endDate, idProfile) {
-  var callback=function() {
-    refreshList('idProfile', 'idProject', idProject, null, 'replaceAffectationProfile', false  );
-  };
-  var param="&idAffectation="+id;
-  loadDialog("dialogReplaceAffectation", callback, true, param);
-}
-function replaceAffectationSave() {
-  var formVar=dijit.byId('replaceAffectationForm');
-  if (dijit.byId('replaceAffectationStartDate') && dijit.byId('replaceAffectationEndDate')) {
-    var start=dijit.byId('replaceAffectationStartDate').value;
-    var end=dijit.byId('replaceAffectationEndDate').value;
-    if (start && end && dayDiffDates(start, end) <= 0) {
-      showAlert(i18n("errorStartEndDates", new Array(i18n("colStartDate"),i18n("colEndDate"))));
-      return;
-    }
-  }
-  if (dijit.byId('replaceAffectationResource').get("value")==dojo.byId("replaceAffectationExistingResource").value) {
-    showAlert(i18n("errorReplaceResourceNotChanged"));
-    return;
-  }
-  if (formVar.validate()) {
-    loadContent("../tool/saveAffectationReplacement.php", "resultDivMain", "replaceAffectationForm",
-        true, 'affectation');
-    dijit.byId('dialogReplaceAffectation').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-function replaceAffectationChangeResource() {
-  var idResource=dijit.byId("replaceAffectationResource").get("value");
-  if (!idResource)
-    return;
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=resourceProfile&idResource='
-        + idResource,
-    handleAs : "text",
-    load : function(data) {
-      dijit.byId('replaceAffectationProfile').set('value', data);
-    }
-  });
-  dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=resourceCapacity&idResource='
-        + idResource,
-    handleAs : "text",
-    load : function(data) {
-      dijit.byId('replaceAffectationCapacity').set('value', parseFloat(data));
-    }
-  });
-}
-
-function addResourceIncompatible(idResource) {
-  var callBack = function () {
-    dijit.byId("dialogResourceIncompatible").show();
-  };
-  var params="&idResource="+idResource;
-  loadDialog('dialogResourceIncompatible',callBack,false,params);
-}
-
-function saveResourceIncompatible(){
-  var formVar=dijit.byId('resourceIncompatibleForm');
-  if (formVar.validate()) {
-    loadContent("../tool/saveResourceIncompatible.php", "resultDivMain", "resourceIncompatibleForm", true, 'affectation');
-    dijit.byId('dialogResourceIncompatible').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-function removeResourceIncompatible(id) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/saveResourceIncompatible.php?idIncompatible="+id, "resultDivMain", null, true, 'affectation');
-  };
-  msg=i18n('confirmDeleteResourceIncompatible', new Array(id,i18n('Resource')));
-  showConfirm(msg, actionOK);
-}
-
-function addResourceSupport(idResource) {
-  var callBack = function () {
-    dijit.byId("dialogResourceSupport").show();
-  };
-  var params="&idResource="+idResource;
-  loadDialog('dialogResourceSupport',callBack,false,params);
-}
-
-function saveResourceSupport(mode){
-  var formVar=dijit.byId('resourceSupportForm');
-  if (formVar.validate()) {
-    loadContent("../tool/saveResourceSupport.php?mode="+mode, "resultDivMain", "resourceSupportForm",true, 'affectation');
-    dijit.byId('dialogResourceSupport').hide();
-  } else {
-    showAlert(i18n("alertInvalidForm"));
-  }
-}
-
-function editResourceSupport(id) {
-	var callBack = function () {
-	    dijit.byId("dialogResourceSupport").show();
-	  };
-	  var params="&idSupport="+id;
-	  loadDialog('dialogResourceSupport',callBack,false,params);
-}
-
-function removeResourceSupport(id) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/saveResourceSupport.php?idSupport="+id, "resultDivMain", null, true, 'affectation');
-  };
-  msg=i18n('confirmDeleteResourceSupport', new Array(id,i18n('Resource')));
-  showConfirm(msg, actionOK);
-}
-
+ 
 // =============================================================================
 // = Misceallanous
 // =============================================================================
@@ -7650,21 +3166,7 @@ function refreshListSpecific(listType, destination, param, paramVal, selected, r
   var mySelect=dijit.byId(destination);
   mySelect.set('store', store);
 }
-function setProductValueFromVersion(field, versionId) {
-  // alert("Call : "+field+"/"+versionId);
-  dojo.xhrGet({
-    url : "../tool/getProductValueFromVersion.php?idVersion=" + versionId,
-    handleAs : "text",
-    load : function(data, args) {
-      prd=dijit.byId(field);
-      if (prd) {
-        prd.set("value", trim(data));
-      }
-    },
-    error : function() {
-    }
-  });
-}
+
 function setClientValueFromProject(field, projectId) {
   dojo.xhrGet({
     url : "../tool/getClientValueFromProject.php?idProject=" + projectId,
@@ -7741,7 +3243,6 @@ function hideShowMenu(noRefresh,noStore) {
       setTimeout("dojo.byId('menuBarShow').style.display='block'", duration);
       setTimeout("dojo.byId('leftDiv_splitter').style.display='none';",duration);
     }
-    //dojo.byId("buttonHideMenuLabel").innerHTML=i18n('buttonShowMenu');
     menuHidden=true;
     menuActualStatus='hidden'; 
     dojo.byId('hideMenuBarShowButton2').style.display='none';
@@ -7782,7 +3283,6 @@ function hideShowMenu(noRefresh,noStore) {
       dojo.byId('leftDiv_splitter').style.left='20px';
       dojo.byId('leftDiv_splitter').style.display='block';
     }
-    //dojo.byId("buttonHideMenuLabel").innerHTML=i18n('buttonHideMenu');
     menuHidden=false;
     menuActualStatus='visible';
     dojo.byId('hideMenuBarShowButton2').style.display='block';
@@ -7795,21 +3295,17 @@ function hideShowMenu(noRefresh,noStore) {
         duration + 50);
   }
   setTimeout("hideShowMenuInProgress=false;",duration+50);
-  // dojo.byId('menuBarShow').style.top='50px';
   dojo.byId("hideMenuBarShowButton2").style.left=dojo.byId("leftDiv").offsetWidth+3+"px";
 }
 
-// gautier #2672
 function hideMenuBarShowMode() {
   hideShowMenu(false);
   dijit.byId("iconMenuUserScreen").closeDropDown();
 }
 
-//gautier menu top
 function hideMenuBarShowModeTop(){ 
   if(dojo.byId('statusBarDiv').style.height == '0px'){
     saveDataToSession("hideMenuTop","NO",true);
-    //dojo.byId('statusBarDiv').style.display='block';
     dojo.byId('statusBarDiv').style.height="48px";
     dojo.byId('statusBarDiv').style.padding="1px";
     dojo.byId('leftDiv').style.top='82px';
@@ -7862,7 +3358,6 @@ var switchListMode='CLICK';
 
 function switchModeOn(objectIdScreen){
   switchedMode=true;
-  //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
   if (!dojo.byId("listDiv")) {
     if (listDivSize == 0) {
       listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
@@ -7884,7 +3379,6 @@ function switchModeOn(objectIdScreen){
 
 function switchModeOff(){
   switchedMode=false;
-  //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonSwitchedMode');
   if (!dojo.byId("listDiv")) {
     return;
   }
@@ -7984,10 +3478,8 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
   }
   if (dojo.byId('objectClass') && (dojo.byId('objectClass').value || urlPage!="objectMain.php")) {loadContent(urlPage+urlParams+notGlob, "centerDiv",null,null,null,null,null,callBack);}
   if(!notGlobal)loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+"&"+paramDiv+"="+paramToSend,"mainDivMenu");
-//  else if (!isNewGui && !notGlobal){
-//      loadDiv("menuLayoutScreen.php?objectClass="+currentObject+"&"+paramDiv+"="+paramToSend+notGlob,"mainDivMenuScreenLayout");
-//  }
 }
+
 var switchModeSkipAnimation=true;
 function showList(mode, skipAnimation) {
   duration=300;
@@ -8101,7 +3593,6 @@ function listClick() {
 }
 
 function consoleLogHistory(msg) {
-  //KROWRY
   consoleTraceLog('====='+msg+'==== ('+historyTable.length+')');
   if (historyTable.length==0) {
     consoleTraceLog(msg+' => Empty');
@@ -8303,9 +3794,6 @@ function redoItemButton() {
   getTargetFromCurrentScreen(currentScreen);
 }
 
-// Stock id and name, to
-// => avoid filterJsonList to reduce visibility => clear this data on open
-// => retrieve data before close to retrieve the previous visibility
 var quickSearchStockId=null;
 var quickSearchStockName=null;
 var quickSearchIsOpen=false;
@@ -8384,8 +3872,11 @@ function quickSearchExecuteQuick() {
 }
 
 /*
- * ========================================== Copy functions
+ * ========================================== 
+ * Copy functions
+ * ==========================================
  */
+
 function copyObject(objectClass) {
   dojo.byId("copyButton").blur();
   action=function() {
@@ -8426,7 +3917,7 @@ function copyObjectToSubmit(objectClass) {
       'copyTo');
   dijit.byId('dialogCopy').hide();
 }
-//gautier #2522
+
 function copyDocumentToSubmit(objectClass) {
   loadContent("../tool/copyDocumentTo.php", "resultDivMain", 'copyDocumentForm', true );
   dijit.byId('dialogCopyDocument').hide();
@@ -8490,6 +3981,7 @@ function loadMenuBarObject(menuClass, itemName, from) {
   }
   return true;
 }
+
 function hideResultDivs() {
   if (dojo.byId('resultDivMain')) {
       dojo.byId('resultDivMain').style.display='none';
@@ -8573,16 +4065,9 @@ function loadMenuBarItem(item, itemName, from) {
 		loadContent("dataCloningMain.php", "centerDiv");
   } else if (item == 'DataCloningParameter') {
 		loadContent("dataCloningParameterMain.php", "centerDiv");
-    //ADD qCazelles - GANTT
   } else if (item == 'VersionsPlanning'  ) {
     objectExist='true';
-	//CHANGE qCazelles - Correction GANTT - Ticket #100
-	//Old
-	//loadDialog("dialogVersionsPlanning", null, true, null, false);
-	//New
 	showDetail('versionsPlanningDetail', false, 'ProductVersion', true);
-	//END CHANGE qCazelles - Correction GANTT - Ticket #100
-	//END ADD qCazelles - GANTT
   }else if(item=='VersionsComponentPlanning'){
     showDetail('versionsComponentPlanningDetail', false, 'ComponentVersion', true);
   }else if (item == 'UserParameter') {
@@ -8606,7 +4091,6 @@ function loadMenuBarItem(item, itemName, from) {
   } else if (item == 'Plugin' || item == 'PluginManagement') {
     loadContent("pluginManagement.php", "centerDiv");
   } else if (item == 'Calendar') {
-    // loadContent("calendar.php","centerDiv");
     loadContent("objectMain.php?objectClass=CalendarDefinition", "centerDiv");
   } else if (item == 'Gallery') {
     loadContent("galleryMain.php", "centerDiv");
@@ -8616,14 +4100,12 @@ function loadMenuBarItem(item, itemName, from) {
 	loadContent("dashboardRequirementMain.php", "centerDiv");
   } else if (pluginMenuPage && pluginMenuPage['menu'+item]) {
     loadMenuBarPlugin(item, itemName, from);
-// ELIOTT - LEAVE SYSTEM    
   } else if(item == "LeaveCalendar"){
       loadContent("leaveCalendar.php", "centerDiv");
   } else if(item == "LeavesSystemHabilitation"){
       loadContent("leavesSystemHabilitation.php", "centerDiv");
   } else if(item == "DashboardEmployeeManager"){
       loadContent("dashboardEmployeeManager.php", "centerDiv");
-// ELIOTT - LEAVE SYSTEM    
   } else if(item == "Module"){
     loadContent("moduleView.php", "centerDiv");
   } else if(item == "Kanban"){
@@ -8752,14 +4234,15 @@ function hideIconViewSubMenu(col){
 	}
 	hideIconViewSubMenuTimeOut=setTimeout("dojo.byId("+name+").style.display='none';",300);
 }
+
 // ====================================================================================
 // ALERTS
 // ====================================================================================
 //
+
 // var alertDisplayed=false;
 var checkAlertDisplayQuick=false;
 function checkAlert() {
-  // if (alertDisplayed) return;
   dojo.xhrGet({
     url : "../tool/checkAlertToDisplay.php",
     handleAs : "text",
@@ -8771,6 +4254,7 @@ function checkAlert() {
     }
   });
 }
+
 function checkAlertRetour(data) {
   if (data) {
     if (data.indexOf('name="lastOperation" value="testConnection"')>0 && data.indexOf('name="lastOperationStatus" value="ERROR"')>0) {
@@ -8837,27 +4321,30 @@ function checkAlertRetour(data) {
     }
   }
 }
+
 function showDisconnectedMessage(data) {
   dojo.byId('disconnectionMessageText').innerHTML=data;
   dojo.byId('disconnectionMessage').style.display='block';
 }
+
 function setAlertReadMessage() {
-  // alertDisplayed=false;
   closeAlertBox();
   if (dojo.byId('idAlert') && dojo.byId('idAlert').value) {
     setAlertRead(dojo.byId('idAlert').value);
   }
 }
+
 function setAllAlertReadMessage() {
-  // alertDisplayed=false;
   checkAlertDisplayQuick=false;
   closeAlertBox();
   setAlertRead('*');
 }
+
 function setAlertReadMessageInForm() {
   dijit.byId('readFlag').set('checked', 'checked');
   submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
 }
+
 function setAlertRemindMessage() {
   closeAlertBox();
   if (dojo.byId('idAlert') && dojo.byId('idAlert').value) {
@@ -8934,184 +4421,6 @@ function setNewGui(idMessageLegal, newGuiActivated){
 	    	}
 	    },
 	  });
-}
-// ===========================================================================================
-// ADMIN functionalities
-// ===========================================================================================
-//
-var cronCheckIteration=50; // Number of cronCheckTimeout to wait max
-function adminLaunchScript(scriptName,needRefresh) {
-  if(typeof needRefresh == 'undefined')needRefresh=true;
-  var url="../tool/" + scriptName + ".php";
-  dojo.xhrGet({
-    url : url,
-    handleAs : "text",
-    load : function(data, args) {
-      
-    },
-    error : function() {
-    }
-  });
-  if (scriptName == 'cronRun') {
-    if(needRefresh)setTimeout('loadContent("admin.php","centerDiv");', 3000);
-  } else if (scriptName == 'cronStop' && needRefresh) {
-    i=120;
-    cronCheckIteration=5 * cronSleepTime;
-    setTimeout('adminCronCheckStop();', 1000);
-  }
-}
-
-function adminCronCheckStop() {
-  dojo.xhrGet({
-    url : "../tool/cronCheck.php",
-    handleAs : "text",
-    load : function(data, args) {
-      if (data != 'running') {
-        loadContent("admin.php", "centerDiv");
-      } else {
-        cronCheckIteration--;
-        if (cronCheckIteration > 0) {
-          setTimeout('adminCronCheckStop();', 1000);
-        } else {
-          loadContent("admin.php", "centerDiv");
-        }
-      }
-    },
-    error : function() {
-      loadContent("admin.php", "centerDiv");
-    }
-  });
-}
-
-function adminCronRelaunch() {
-  var url="../tool/cronRelaunch.php";
-  dojo.xhrGet({
-    url : url,
-    handleAs : "text",
-    load : function(data, args) {
-    },
-    error : function() {
-    }
-  });
-}
-
-function adminCronRestart() {
-  if (cronCheckCount>0) return;
-  cronCheckCount=1;
-  dojo.xhrGet({
-    url : "../tool/cronStop.php",
-    handleAs : "text",
-    load : function(data, args) {
-      setTimeout("adminCronRestartCheck();",1000);
-    }
-  });
-}
-var cronCheckCount=0;
-function adminCronRestartCheck() {
-  dojo.xhrGet({
-    url : "../tool/cronCheck.php",
-    handleAs : "text",
-    load : function(data, args) {
-      if (data == 'running') {
-        cronCheckCount++;
-        if (cronCheckCount<60) setTimeout("adminCronRestartCheck();",1000);
-      } else {
-        adminCronRestartRun();
-      }
-    }
-  });
-}
-function adminCronRestartRun() {
-  dojo.xhrGet({
-    url : "../tool/cronRun.php",
-    handleAs : "text",
-    load : function(data, args) {
-    }
-  });
-  cronCheckCount=0;
-}
-function adminSendAlert() {
-  formVar=dijit.byId("adminForm");
-  if (formVar.validate()) {
-    loadContent(
-        "../tool/adminFunctionalities.php?adminFunctionality=sendAlert",
-        "resultDivMain", "adminForm", true, 'admin');
-  }
-}
-
-// MTY - LEAVE SYSTEM
-// Add param 'toConfirm' set to true to adminDisconnectAll 
-// MTY - LEAVE SYSTEM
-//function adminDisconnectAll() {
-function adminDisconnectAll(toConfirm) {
-  actionOK=function() {
-    loadContent(
-        "../tool/adminFunctionalities.php?adminFunctionality=disconnectAll&element=Audit",
-        "resultDivMain", "adminForm", true, 'admin');
-  };
-  if (toConfirm) {
-  msg=i18n('confirmDisconnectAll');
-  showConfirm(msg, actionOK);
-}
-}
-
-function maintenance(operation, item) {
-  if (operation == "updateReference") {
-    loadContent("../tool/adminFunctionalities.php?adminFunctionality="
-        + operation + "&element=" + item, "resultDivMain", "adminForm", true,
-        'admin');
-  } else {
-    var nb=0;
-    if (operation!='read') {
-      nb=dijit.byId(operation + item + "Days").get('value');
-    }
-    loadContent(
-        "../tool/adminFunctionalities.php?adminFunctionality=maintenance&operation="
-            + operation + "&item=" + item + "&nbDays=" + nb, "resultDivMain",
-        "adminForm", true, 'admin');
-  }
-}
-function adminSetApplicationTo(newStatus) {
-  var url="../tool/adminFunctionalities.php?adminFunctionality=setApplicationStatusTo&newStatus="
-      + newStatus;
-  showWait();
-  dojo.xhrPost({
-    url : url,
-    form : "adminForm",
-    handleAs : "text",
-    load : function(data, args) {
-      loadContent("../view/admin.php", "centerDiv");
-    },
-    error : function() {
-    }
-  });
-}
-
-function lockDocument() {
-  if (checkFormChangeInProgress()) {
-    return false;
-  }
-  dijit.byId('locked').set('checked', true);
-  dijit.byId('idLocker').set('value', dojo.byId('idCurrentUser').value);
-  var curDate=new Date();
-  dijit.byId('lockedDate').set('value', curDate);
-  dijit.byId('lockedDateBis').set('value', curDate);
-  formChanged();
-  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
-  return true;
-}
-
-function unlockDocument() {
-  if (checkFormChangeInProgress()) {
-    return false;
-  }
-  dijit.byId('locked').set('checked', false);
-  dijit.byId('idLocker').set('value', null);
-  dijit.byId('lockedDate').set('value', null);
-  dijit.byId('lockedDateBis').set('value', null);
-  formChanged();
-  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
-  return true;
 }
 
 /*
@@ -9199,29 +4508,6 @@ function movePlanningColumn(source, destination) {
     }
   });
   // loadContent(url, "resultDivMain");
-}
-
-function moveBudgetFromHierarchicalView(idFrom, idTo){
-  var mode = 'before';
-  dndSourceTableBudget.sync();
-  var nodeList = dndSourceTableBudget.getAllNodes();
-  for (i = 0; i < nodeList.length; i++) {
-    if  (nodeList[i].id == idFrom) {
-      mode = 'before';
-      break;
-    } else if (nodeList[i].id == idTo) {
-      mode = 'after';
-      break;
-    }
-  }
-	 var url='../tool/moveBudgetFromHierarchicalView.php?idFrom=' + idFrom +'&idTo='+idTo+'&mode='+mode;
-	  dojo.xhrPost({
-	    url : url,
-	    handleAs : "text",
-	    load : function() {
-	    	refreshHierarchicalBudgetList();
-	    }
-	  });
 }
 
 /*
@@ -9649,7 +4935,7 @@ function changeFileSizeMail(name){
     }
   }
 }
-//
+
 function dialogMailToOtherChange() {
   var show=dijit.byId('dialogMailToOther').get('checked');
   if (show) {
@@ -9661,7 +4947,6 @@ function dialogMailToOtherChange() {
   }
 }
 
-//mehdi #3019
 function mailerTextEditor(code){
   var callBack= function() {
   var codeParam = dojo.byId("codeParam");
@@ -9715,9 +5000,7 @@ function saveMailMessage() {
   loadDiv("../tool/saveParameter.php", "resultDivMain", "parameterForm", callBack);
   dijit.byId('dialogMailEditor').hide();
 }
-//end
 
-//gautier #2935
 var doNotTriggerEmailChange=false;
 function findAutoEmail(){
   if (doNotTriggerEmailChange==true) return;
@@ -9879,46 +5162,6 @@ function sendMail() {
 	      "mailForm", true, 'mail');
 	  dijit.byId("dialogMail").hide();
 	}
-}
-//gautier ticket #2096
-function assignTeamForMeeting() {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/assignTeamForMeeting.php?assignmentId=&assignmentRefType="+dojo.byId('objectClass').value+"&assignmentRefId="+dojo.byId("objectId").value,"resultDivMain", null,
-        true, 'assignment');
-  };
-  msg=i18n('confirmAssignWholeTeam');
-  showConfirm(msg, actionOK);
-  
-}
-function lockRequirement() {
-  if (checkFormChangeInProgress()) {
-    return false;
-  }
-  dijit.byId('locked').set('checked', true);
-  dijit.byId('idLocker').set('value', dojo.byId('idCurrentUser').value);
-  var curDate=new Date();
-  dijit.byId('lockedDate').set('value', curDate);
-  dijit.byId('lockedDateBis').set('value', curDate);
-  formChanged();
-  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
-  return true;
-}
-
-function unlockRequirement() {
-  if (checkFormChangeInProgress()) {
-    return false;
-  }
-  dijit.byId('locked').set('checked', false);
-  dijit.byId('idLocker').set('value', null);
-  dijit.byId('lockedDate').set('value', null);
-  dijit.byId('lockedDateBis').set('value', null);
-  formChanged();
-  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
-  return true;
 }
 
 // CHANGE BY Marc TABARY - 2017-03-13 - CHANGE TITLE DYNAMIC DIALOG
@@ -10315,9 +5558,6 @@ function showHtml(id, file, className) {
   dijit.byId("dialogShowHtml").show();
   window.frames['showHtmlFrame'].focus();
 } 
-/*function displayTestPreview(){
-	var toto = dojo.byId('testPreview');
-}*/
 
 // *******************************************************
 // Dojo code to position into a tree
@@ -10346,146 +5586,6 @@ function selectTreeNodeById(tree, lookfor) {
   }
 }
 
-// ************************************************************
-// Code to select columns to be exported
-// ************************************************************
-var ExportType='';
-// open the dialog with checkboxes
-function openExportDialog(Type) {
-  ExportType=Type;
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var objectClass=(dojo.byId('objectClassList'))?dojo.byId('objectClassList').value:dojo.byId('objectClass').value;
-  var params = "&objectClass=" + objectClass;
-  if(objectClass == 'Work'){
-    params += "&dateWeek="+ dojo.byId("dateWeek").value;
-    params += "&dateMonth="+ dojo.byId("dateMonth").value;
-    params += "&userId="+ dojo.byId("userId").value;
-  }
-   loadDialog("dialogExport", null, true,params );
-}
-
-// close the dialog with checkboxes
-function closeExportDialog() {
-  dijit.byId("dialogExport").hide();
-}
-
-// save current state of checkboxes
-function saveCheckboxExport(obj, idUser) {
-  var val=dojo.byId('column0').value;
-  var toStore="";
-  val=eval(val);
-  for (i=1; i <= val; i++) {
-    var checkbox=dijit.byId('column' + i);
-    if (checkbox) {
-      if (!checkbox.get('checked')) {
-        var field=checkbox.value;
-        toStore+=field + ";";
-      }
-    }
-  }
-  dojo.xhrPost({
-    url : "../tool/saveCheckboxes.php?&objectClass=" + obj + "&toStore="
-        + toStore,
-    handleAs : "text",
-    load : function() {
-    }
-  });
-}
-
-// Executes the report (shows the print/pdf/csv)
-function executeExport(obj, idUser) {
-  var verif=0;
-  var val=dojo.byId('column0').value;
-  var exportReferencesAs=dijit.byId('exportReferencesAs').get('value');
-  var exportHtml=(dijit.byId('exportHtml').get('checked'))?'1':'0';
-  var separatorCSV=dijit.byId('separatorCSV').get('value');
-  if(obj == 'Work'){
-    var exportDateAs = dijit.byId('exportDateAs').get('value');
-    var exportRessourceAs = dijit.byId('exportRessourceAs').get('value');
-  }
-  val=eval(val);
-  var toExport="";
-  for (var i=1; i <= val; i++) {
-    var checkbox=dijit.byId('column' + i);
-    if (checkbox) {
-      if (checkbox.get('checked')) {
-        verif=1;
-      } else {
-        var field=checkbox.value;
-        toExport+=field + ";";
-      }
-    }
-  }
-  if (dijit.byId('documentVersionLastOnly') && dijit.byId('documentVersionLastOnly').get('checked')) {
-    toExport+='documentVersionAll';
-  }
-  if (verif == 1) {
-    if (ExportType == 'csv') {
-      if(obj != 'Work'){
-      showPrint("../tool/jsonQuery.php?exportHtml="+exportHtml
-          +"&exportReferencesAs="+ exportReferencesAs + "&hiddenFields=" + toExport + "&separatorCSV=" + separatorCSV
-          , 'list', null,
-          'csv');
-      }else{
-        showPrint("../tool/jsonQuery.php?exportHtml="+exportHtml
-            +"&exportReferencesAs="+ exportReferencesAs + "&hiddenFields=" + toExport +"&exportDateAs="+ exportDateAs
-            +"&exportRessourceAs="+ exportRessourceAs + "&separatorCSV=" + separatorCSV
-            , 'list', null,
-            'csv');
-      }
-    }
-    saveCheckboxExport(obj, idUser);
-    closeExportDialog(obj, idUser);
-  } else {
-    showAlert(i18n('alertChooseOneAtLeast'));
-  }
-}
-
-// Check or uncheck all boxes
-function checkExportColumns(scope) {
-  if (scope == 'aslist') {
-    showWait();
-    dojo.xhrGet({
-      url : "../tool/getColumnsList.php?objectClass="+((dojo.byId('objectClassList'))?dojo.byId('objectClassList').value:dojo.byId('objectClass').value),
-      load : function(data) {
-        var list=";" + data;
-        var val=dojo.byId('column0').value;
-        val=eval(val);
-        var allChecked=true;
-        for (i=1; i <= val; i++) {
-          var checkbox=dijit.byId('column' + i);
-          if (checkbox) {
-            var search=";" + checkbox.value + ";";
-            if (list.indexOf(search) >= 0) {
-              checkbox.set('checked', true);
-            } else {
-              checkbox.set('checked', false);
-              allChecked=false;
-            }
-          }
-        }
-        dijit.byId('checkUncheck').set('checked', allChecked);
-        hideWait();
-      },
-      error : function() {
-        hideWait();
-      }
-    });
-  } else {
-    var check=dijit.byId('checkUncheck').get('checked');
-    var val=dojo.byId('column0').value;
-    val=eval(val);
-    for (i=1; i <= val; i++) {
-      var checkbox=dijit.byId('column' + i);
-      if (checkbox) {
-        checkbox.set('checked', check);
-      }
-    }
-  }
-}
 
 // ==================================================================
 // Project Selector Functions
@@ -10681,74 +5781,6 @@ function diaryDisplayDay(day) {
   dojo.byId("diaryCaption").innerHTML=caption;
   dijit.byId('dateSelector').set('value', day);
 }
-
-// ********************************************************************************************
-// WORKFLOW PARAMETERS (selection of status)
-// ********************************************************************************************
-var workflowParameterAllChecked=true;
-function showWorkflowParameter(id) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  callBack=function() {
-  };
-  workflowParameterAllChecked=true;
-  var params='&idWorkflow=' + id;
-  loadDialog('dialogWorkflowParameter', callBack, true, params);
-}
-
-function saveWorkflowParameter() {
-  loadContent("../tool/saveWorkflowParameter.php", "resultDivMain",
-      "dialogWorkflowParameterForm", true);
-  dijit.byId('dialogWorkflowParameter').hide();
-}
-
-function dialogWorkflowParameterUncheckAll() {
-  dojo.query(".workflowParameterCheckbox").forEach(function(node, index, nodelist) {
-    var id=node.getAttribute('widgetid');
-    if (dijit.byId(id) ) {
-      dijit.byId(id).set('checked',!workflowParameterAllChecked);
-    }
-  });
-  workflowParameterAllChecked=!workflowParameterAllChecked;
-}
-
-//********************************************************************************************
-//WORKFLOW AUTHORIZATION PARAMETERS (selection of profile)
-//********************************************************************************************
-var workflowProfileParameterAllChecked=true;
-function showWorkflowProfileParameter(id) {
-if (checkFormChangeInProgress()) {
- showAlert(i18n('alertOngoingChange'));
- return;
-}
-callBack=function() {
-};
-workflowProfileParameterAllChecked=true;
-var params='&idWorkflow=' + id;
-loadDialog('dialogWorkflowProfileParameter', callBack, true, params);
-}
-
-function saveWorkflowProfileParameter() {
-loadContent("../tool/saveWorkflowProfileParameter.php", "resultDivMain",
-   "dialogWorkflowProfileParameterForm", true);
-dijit.byId('dialogWorkflowProfileParameter').hide();
-}
-
-function dialogWorkflowProfileParameterUncheckAll() {
-dojo.query(".workflowProfileParameterCheckbox").forEach(function(node, index, nodelist) {
- var id=node.getAttribute('widgetid');
- if (dijit.byId(id) ) {
-   dijit.byId(id).set('checked',!workflowProfileParameterAllChecked);
- }
-});
-workflowProfileParameterAllChecked=!workflowProfileParameterAllChecked;
-}
-//********************************************************************************************
-//END - WORKFLOW AUTHORIZATION PARAMETERS (selection of profile)
-//********************************************************************************************
-
 
 function changeCreationInfo() {
   toShow=false;
@@ -11140,19 +6172,6 @@ function saveRestrictTypes() {
   dijit.byId('dialogRestrictTypes').hide();
 }
 
-/*************************************************************************************
- * 				START FUNCTION RESTRICTION LIST
- ************************************************************************************/
-
-function saveRestrictProductList() {
-	loadContent("../tool/saveRestrictProductList.php" , "resultDivMain", "dialogRestrictProductListForm", true);
-	dijit.byId('dialogRestrictProductList').hide();
-}
-
-/*************************************************************************************
- * 				END FUNCTION RESTRICTION LIST
- ************************************************************************************/
-
 function getMaxWidth(document){
   return Math.max( document.scrollWidth, document.offsetWidth, 
       document.clientWidth);
@@ -11161,409 +6180,6 @@ function getMaxWidth(document){
 function getMaxHeight(document){
   return Math.max( document.scrollHeight, document.offsetHeight, 
       document.clientHeight);
-}
-
-function planningToCanvasToPDF(){
-
-  var iframe = document.createElement('iframe');
-  
-  //this onload is for firefox but also work on others browsers
-  iframe.onload = function() {
-  var orientation="landscape";  // "portrait" ou "landscape"
-  if(!document.getElementById("printLandscape").checked)orientation="portrait";
-  var ratio=parseInt(document.getElementById("printZoom").value)/100;
-  var repeatIconTask=document.getElementById("printRepeat").checked; // If true this will repeat on each page the icon
-  loadContent("../tool/submitPlanningPdf.php", "resultDivMain", 'planningPdfForm', false,null,null,null,function(){showWait();});
-  var sizeElements=[];
-  var marge=30;
-  var widthIconTask=0; // the width that icon+task represent
-  //var heightColumn=parseInt(document.getElementById('leftsideTop').offsetHeight)*ratio;
-  //damian #exportPDF
-  var deviceRatio = window.devicePixelRatio;
-  if(!deviceRatio){
-	  deviceRatio = 1;
-  }
-  var heightColumn=parseInt(document.getElementById('leftsideTop').offsetHeight)*deviceRatio;
-  //var heightRow=21*ratio;
-  var heightRow=21*deviceRatio;
-  //var widthRow=(parseInt(dojo.query('.ganttRightTitle')[0].offsetWidth)-1)*ratio;
-  var widthRow=(parseInt(dojo.query('.ganttRightTitle')[0].offsetWidth)-1);
-  var nbRowTotal=0;
-  var nbColTotal=0;
-  // init max width/height by orientation
-  var pageFormat='A4';
-  if(document.getElementById("printFormatA3").checked)pageFormat="A3";
-  var imageZoomIn=1.3/ratio;
-  var imageZoomOut=1/imageZoomIn;
-  ratio=1;
-  var maxWidth=(596-(2*marge))*imageZoomIn;
-  var maxHeight=(842-(2*marge))*imageZoomIn;
-  if (pageFormat=='A3') {
-    var maxTemp=maxWidth;
-    maxWidth=maxHeight;
-    maxHeight=2*maxTemp;
-  }
-  if(orientation=="landscape"){
-    var maxTemp=maxWidth;
-    maxWidth=maxHeight;
-    maxHeight=maxTemp;
-  }
-  
-  //We create an iframe will which contain the planning to transform it in image
-  var frameContent=document.getElementById("iframeTmpPlanning");
-  
-  var cssLink2 = document.createElement("link");
-  cssLink2.href = "css/projeqtor.css"; 
-  cssLink2 .rel = "stylesheet"; 
-  cssLink2 .type = "text/css"; 
-  frameContent.contentWindow.document.head.appendChild(cssLink2);
-  
-  var cssLink = document.createElement("link");
-  cssLink.href = "css/jsgantt.css"; 
-  cssLink .rel = "stylesheet"; 
-  cssLink .type = "text/css";
-  frameContent.contentWindow.document.head.appendChild(cssLink);
-  
-  /*var css = document.createElement("style");
-  css .type = "text/css";
-  frameContent.contentWindow.document.head.appendChild(css);
-  styles = '.rightTableLine{ height:22px; }';
-  
-  if (css.styleSheet) css.styleSheet.cssText = styles;
-  else css.appendChild(document.createTextNode(styles));*/
-  var heightV=(heightColumn+getMaxHeight(document.getElementById('leftside'))+(getMaxHeight(document.getElementById('leftside'))/21))+'px';
-  
-  frameContent.style.position='absolute';
-  frameContent.style.width=(4+parseInt(document.getElementById('leftGanttChartDIV').style.width)+getMaxWidth(document.getElementById('rightTableContainer')))+'px';
-  frameContent.style.height=heightV;
-  frameContent.style.border='0';
-  //frameContent.style.top='0';
-  //frameContent.style.left='0';
-  frameContent.contentWindow.document.body.innerHTML='<div style="float:left;width:'+document.getElementById('leftGanttChartDIV').style.width+';overflow:hidden;height:'+heightV+';">'+document.getElementById('leftGanttChartDIV').innerHTML+'</div><div style="float:left;width:'+getMaxWidth(document.getElementById('rightTableContainer'))+'px;height:'+heightV+';">'+document.getElementById('GanttChartDIV').innerHTML+"</div>";
-
-  frameContent.contentWindow.document.getElementById('ganttScale').style.display='none';
-  frameContent.contentWindow.document.getElementById('topGanttChartDIV').style.width=getMaxWidth(document.getElementById('rightTableContainer'))+'px';
-  frameContent.contentWindow.document.getElementById('topGanttChartDIV').style.overflow='visible';
-  frameContent.contentWindow.document.getElementById('mainRightPlanningDivContainer').style.overflow='visible';
-  frameContent.contentWindow.document.getElementById('rightGanttChartDIV').style.overflow='visible';
-  frameContent.contentWindow.document.getElementById('mainRightPlanningDivContainer').style.height=(getMaxHeight(document.getElementById('leftside')))+'px';
-  frameContent.contentWindow.document.getElementById('rightGanttChartDIV').style.height=(getMaxHeight(document.getElementById('leftside')))+'px';
-  frameContent.contentWindow.document.getElementById('rightGanttChartDIV').style.height=(getMaxHeight(document.getElementById('leftside')))+'px';
-  frameContent.contentWindow.document.getElementById('dndSourceTable').style.height=(getMaxHeight(document.getElementById('leftside')))+'px';
-  frameContent.contentWindow.document.getElementById('vScpecificDay_1').style.height=(getMaxHeight(document.getElementById('leftside')))+'px';
-  frameContent.contentWindow.document.getElementById('leftside').style.top="0";
-  frameContent.contentWindow.document.getElementById('leftsideTop').style.width=document.getElementById('leftGanttChartDIV').style.width;
-  frameContent.contentWindow.document.getElementById('leftside').style.width=document.getElementById('leftGanttChartDIV').style.width;
-  frameContent.contentWindow.document.getElementById('rightGanttChartDIV').style.overflowX="visible";
-  frameContent.contentWindow.document.getElementById('rightGanttChartDIV').style.overflowY="visible";
-  //Calculate each width column in left top side
-  for(var i=0; i<dojo.query("[id^='topSourceTable'] tr")[1].childNodes.length;i++){
-    sizeElements.push((dojo.query("[id^='topSourceTable'] tr")[1].childNodes[i].offsetWidth)*ratio);
-  }
-  for(var i=0; i<dojo.query("[class^='rightTableLine']").length;i++){
-    dojo.query("[class^='rightTableLine']")[i].style.width=(parseInt(dojo.query("[class^='rightTableLine']")[i].style.width)-1)+"px";
-  }
-  for(var i=0; i<dojo.query("[class^='ganttDetail weekBackground']").length;i++){
-    dojo.query("[class^='ganttDetail weekBackground']")[i].style.width=(parseInt(dojo.query("[class^='ganttDetail weekBackground']")[i].style.width)-1)+"px";
-  }
-  
-  widthIconTask=(sizeElements[0]+sizeElements[1])*deviceRatio;
-  if (widthIconTask>parseInt(document.getElementById('leftGanttChartDIV').style.width)*deviceRatio) widthIconTask=parseInt(document.getElementById('leftGanttChartDIV').style.width)*deviceRatio;
-  
-  sizeColumn=parseInt(dojo.query(".ganttRightTitle")[0].style.width)*ratio;
-  
-  frameContent.contentWindow.document.getElementById('rightGanttChartDIV').style.width=getMaxWidth(frameContent.contentWindow.document.getElementById('rightGanttChartDIV'))+'px';
-  frameContent.contentWindow.document.getElementById('topGanttChartDIV').style.width=getMaxWidth(frameContent.contentWindow.document.getElementById('rightGanttChartDIV'))+'px';
-  frameContent.contentWindow.document.getElementById('mainRightPlanningDivContainer').style.width=getMaxWidth(frameContent.contentWindow.document.getElementById('rightGanttChartDIV'))+'px';
-  //add border into final print
-  frameContent.contentWindow.document.getElementById('leftsideTop').innerHTML ='<div id="separatorLeftGanttChartDIV2" style="position:absolute;height:100%;z-index:10000;width:4px;background-color:#C0C0C0;"></div>'+frameContent.contentWindow.document.getElementById('leftsideTop').innerHTML;
-  frameContent.contentWindow.document.getElementById('leftside').innerHTML ='<div id="separatorLeftGanttChartDIV" style="position:absolute;height:100%;z-index:10000;width:4px;background-color:#C0C0C0;"></div>'+frameContent.contentWindow.document.getElementById('leftside').innerHTML;
-  frameContent.contentWindow.document.getElementById('leftside').style.width=(parseInt(frameContent.contentWindow.document.getElementById('leftside').style.width)+parseInt(frameContent.contentWindow.document.getElementById('separatorLeftGanttChartDIV').style.width))+'px';
-  frameContent.contentWindow.document.getElementById('leftsideTop').style.width=frameContent.contentWindow.document.getElementById('leftside').style.width;
-  frameContent.contentWindow.document.getElementById('separatorLeftGanttChartDIV').style.left=(parseInt(frameContent.contentWindow.document.getElementById('leftside').style.width)-4)+'px';
-  frameContent.contentWindow.document.getElementById('separatorLeftGanttChartDIV2').style.left=(parseInt(frameContent.contentWindow.document.getElementById('leftsideTop').style.width)-4)+'px';
-  frameContent.contentWindow.document.getElementById('rightGanttChartDIV').style.width=frameContent.contentWindow.document.getElementById('rightTableContainer').style.width;
-  frameContent.contentWindow.document.getElementById('rightGanttChartDIV').style.height=frameContent.contentWindow.document.getElementById('rightTableContainer').style.height;
-
-  var tabImage=[]; //Contain pictures 
-  var mapImage={}; //Contain pictures like key->value, cle=namePicture, value=base64(picture)
-  
-  //Start the 4 prints function
-  //Print image activities and projects
-  html2canvas(frameContent.contentWindow.document.getElementById('leftside')).then(function(leftElement) {
-    //Print image column left side
-    html2canvas(frameContent.contentWindow.document.getElementById('leftsideTop')).then(function(leftColumn) { 
-      //Print right Line
-      html2canvas(frameContent.contentWindow.document.getElementById('rightGanttChartDIV')).then(function(rightElement) {
-        //Print right column
-        html2canvas(frameContent.contentWindow.document.getElementById('rightside')).then(function(rightColumn) {
-          if(ratio!=1){
-            leftElement=cropCanvas(leftElement,0,0,leftElement.width,leftElement.height,ratio);
-            leftColumn=cropCanvas(leftColumn,0,0,leftColumn.width,leftColumn.height,ratio);
-            rightElement=cropCanvas(rightElement,0,0,rightElement.width,rightElement.height,ratio);
-            rightColumn=cropCanvas(rightColumn,0,0,rightColumn.width,rightColumn.height,ratio);
-          }
-          //Init number of total rows
-          nbRowTotal=Math.round(leftElement.height/heightRow); 
-          //frameContent.parentNode.removeChild(frameContent);
-          //Start pictures's calcul
-          firstEnterHeight=true;
-          var EHeightValue=0; //Height pointer cursor
-          var EHeight=leftElement.height; //total height
-          while((Math.ceil(EHeight/maxHeight)>=1 || firstEnterHeight) && EHeight>heightRow){
-            var calculHeight=maxHeight;
-            var ELeftWidth=leftElement.width; //total width
-            var ERightWidth=rightElement.width; //total width
-            var addHeighColumn=0;
-            if(firstEnterHeight || (!firstEnterHeight && repeatIconTask)){
-              addHeighColumn=heightColumn;
-            }
-            var heightElement=0;
-            while(calculHeight-addHeighColumn>=heightRow && nbRowTotal!=0){
-              calculHeight-=heightRow;
-              heightElement+=heightRow;
-              nbRowTotal--;
-            }
-            var iterateurColumnLeft=0;
-            firstEnterWidth=true;
-            var widthElement=0;
-            var imageRepeat=null;
-            if(repeatIconTask){
-              imageRepeat=combineCanvasIntoOne(
-                              cropCanvas(leftColumn,0,0,widthIconTask,heightColumn),
-                              cropCanvas(leftElement,0,EHeightValue,widthIconTask,heightElement),
-                              true);
-            }
-            var canvasList=[];
-            while(ELeftWidth/maxWidth>=1 || (!firstEnterWidth && ELeftWidth>0)){
-              firstEnterWidth2=true;
-              oldWidthElement=widthElement;
-              while(iterateurColumnLeft<sizeElements.length && ELeftWidth>=sizeElements[iterateurColumnLeft]){
-                ELeftWidth-=sizeElements[iterateurColumnLeft];
-                widthElement+=sizeElements[iterateurColumnLeft]*deviceRatio;
-                if(repeatIconTask && !firstEnterWidth && firstEnterWidth2)ELeftWidth+=widthIconTask;
-                iterateurColumnLeft++;
-                firstEnterWidth2=false;
-              }
-              if(oldWidthElement==widthElement){
-                widthElement+=ELeftWidth;
-                ELeftWidth=0;
-              }
-              if(!firstEnterWidth){
-                if(repeatIconTask){
-                  canvasList.push(combineCanvasIntoOne(imageRepeat,
-                                  combineCanvasIntoOne(
-                                      cropCanvas(leftColumn,oldWidthElement,0,widthElement-oldWidthElement,heightColumn),
-                                      cropCanvas(leftElement,oldWidthElement,EHeightValue,widthElement-oldWidthElement,heightElement),
-                                      true),
-                                      false));
-                }else{
-                  if(firstEnterHeight){
-                    canvasList.push(combineCanvasIntoOne(
-                                        cropCanvas(leftColumn,oldWidthElement,0,widthElement-oldWidthElement,heightColumn),
-                                        cropCanvas(leftElement,oldWidthElement,EHeightValue,widthElement-oldWidthElement,heightElement),
-                                        true));
-                  }else{
-                    canvasList.push(cropCanvas(leftElement,oldWidthElement,EHeightValue,widthElement-oldWidthElement,heightElement));
-                  } 
-                }
-              }else{
-                if(firstEnterHeight || repeatIconTask){
-                  canvasList.push(combineCanvasIntoOne(
-                                        cropCanvas(leftColumn,oldWidthElement,0,widthElement-oldWidthElement,heightColumn),
-                                        cropCanvas(leftElement,oldWidthElement,EHeightValue,widthElement-oldWidthElement,heightElement),
-                                        true));
-                }else{
-                  canvasList.push(cropCanvas(leftElement,oldWidthElement,EHeightValue,widthElement-oldWidthElement,heightElement));                  
-                }
-              }
-              firstEnterWidth=false;
-            }
-            if(canvasList.length==0){
-              if(firstEnterHeight || repeatIconTask){
-                canvasList.push(combineCanvasIntoOne(
-                                        cropCanvas(leftColumn,0,0,leftColumn.width,heightColumn),
-                                        cropCanvas(leftElement,0,EHeightValue,leftElement.width,heightElement),
-                                        true));
-              }else{
-                canvasList.push(cropCanvas(leftElement,0,EHeightValue,leftElement.width,heightElement));
-              }
-            }
-            firstEnterWidth=true;
-            if(repeatIconTask && leftColumn.width>widthIconTask){
-              imageRepeat=combineCanvasIntoOne(combineCanvasIntoOne(
-                                                    cropCanvas(leftColumn,0,0,widthIconTask,heightColumn),
-                                                    cropCanvas(leftElement,0,EHeightValue,widthIconTask,heightElement),
-                                                    true),
-                                               combineCanvasIntoOne(
-                                                    cropCanvas(leftColumn,leftColumn.width-4,0,4,heightColumn),
-                                                    cropCanvas(leftElement,leftElement.width-4,EHeightValue,4,heightElement),
-                                                    true),
-                                               false);
-            }
-            widthElement=0;
-            firstEnterWidth=true;
-            var canvasList2=[];
-            //Init number of total cols
-            nbColTotal=Math.round(rightElement.width/widthRow); 
-            var countIteration=0;
-            while((Math.ceil(ERightWidth/maxWidth)>=1 || (!firstEnterWidth && ERightWidth>0)) && nbColTotal>0){
-              countIteration++;
-              firstEnterWidth2=true;
-              oldWidthElement=widthElement;
-              limit=0;
-              if(firstEnterWidth)limit=canvasList[canvasList.length-1].width;
-              if(!firstEnterWidth && repeatIconTask)limit=widthIconTask;
-              var currentWidthElm=0;
-              while(ERightWidth>widthRow && currentWidthElm+widthRow<maxWidth-limit && nbColTotal>0){
-                ERightWidth-=widthRow;
-                widthElement+=widthRow;
-                currentWidthElm+=widthRow;
-                firstEnterWidth2=false;
-                nbColTotal--;
-              }
-              if(!firstEnterWidth){
-                if(currentWidthElm!=0 && widthElement!=oldWidthElement)
-                  if(repeatIconTask){
-                    canvasList2.push(combineCanvasIntoOne(imageRepeat,
-                                       combineCanvasIntoOne(
-                                           cropCanvas(rightColumn,oldWidthElement+1,0,currentWidthElm,heightColumn),
-                                           cropCanvas(rightElement,oldWidthElement,EHeightValue,currentWidthElm,heightElement),
-                                           true),
-                                       false));
-                }else{
-                  if(firstEnterHeight){
-                    canvasList2.push(combineCanvasIntoOne(
-                                          cropCanvas(rightColumn,oldWidthElement+1,0,currentWidthElm,heightColumn),
-                                          cropCanvas(rightElement,oldWidthElement,EHeightValue,currentWidthElm,heightElement),
-                                          true));
-                  }else{
-                    canvasList2.push(cropCanvas(rightElement,oldWidthElement,EHeightValue,currentWidthElm,heightElement));
-                  }
-                }
-              }else{
-                if(widthElement==0){
-                  canvasList2.push(canvasList[canvasList.length-1]);
-                }else if(firstEnterHeight || repeatIconTask){
-                  canvasList2.push(combineCanvasIntoOne(canvasList[canvasList.length-1],
-                                        combineCanvasIntoOne(
-                                            cropCanvas(rightColumn,oldWidthElement+1,0,currentWidthElm,heightColumn),
-                                            cropCanvas(rightElement,oldWidthElement,EHeightValue,currentWidthElm,heightElement),
-                                            true),
-                                        false));
-                }else{
-                  canvasList2.push(combineCanvasIntoOne(canvasList[canvasList.length-1],
-                                        cropCanvas(rightElement,oldWidthElement,EHeightValue,currentWidthElm,heightElement),
-                                        false));
-                }
-              }
-              if(nbColTotal==0 || countIteration>100){
-                ERightWidth=0;
-              }
-              firstEnterWidth=false;
-            }
-            var baseIterateur=tabImage.length;
-            for(var i=0;i<canvasList.length-1;i++){
-              
-              //Add image to mapImage in base64 format
-              mapImage["image"+(i+baseIterateur)]=canvasList[i].toDataURL();
-              
-              //Add to tabImage an array wich contain parameters to put an image into a pdf page with a pagebreak if necessary
-              ArrayToPut={image: "image"+(i+baseIterateur),width: canvasList[i].width*imageZoomOut,height:canvasList[i].height*imageZoomOut};
-              if(!(canvasList2.length==0 && i==canvasList.length-1)){
-                ArrayToPut['pageBreak']='after';
-              }
-              tabImage.push(ArrayToPut);
-            }
-            for(var i=0;i<canvasList2.length;i++){
-              if(canvasList2[i].width-widthIconTask>4){
-                //Add image to mapImage in base64 format
-                mapImage["image"+(i+canvasList.length+baseIterateur)]=canvasList2[i].toDataURL();
-                
-                //Add to tabImage an array wich contain parameters to put an image into a pdf page with a pagebreak if necessary
-                ArrayToPut={image: "image"+(i+canvasList.length+baseIterateur),width: canvasList2[i].width*imageZoomOut,height:canvasList2[i].height*imageZoomOut};
-                if(i!=canvasList2.length-1){
-                  ArrayToPut['pageBreak']='after';
-                }
-                tabImage.push(ArrayToPut);
-              }
-            }
-            EHeight-=maxHeight-calculHeight;
-            EHeightValue+=maxHeight-calculHeight;
-            firstEnterHeight=false;
-          }
-          var dd = {
-             pageMargins: [ marge, marge, marge, marge ],
-             pageOrientation: orientation,
-             content: tabImage,
-             images: mapImage,
-             footer: function(currentPage, pageCount) {  return { fontSize : 8, text: currentPage.toString() + ' / ' + pageCount , alignment: 'center' };},
-             pageSize: pageFormat
-          };
-          if( !dojo.isIE ) {
-            var userAgent = navigator.userAgent.toLowerCase(); 
-            var IEReg = /(msie\s|trident.*rv:)([\w.]+)/; 
-            var match = IEReg.exec(userAgent); 
-            if( match )
-              dojo.isIE = match[2] - 0;
-            else
-              dojo.isIE = undefined;
-          }
-          var pdfFileName='ProjeQtOr_Planning';
-          var now = new Date();
-          pdfFileName+='_'+formatDate(now).replace(/-/g,'')+'_'+formatTime(now).replace(/:/g,'');
-          pdfFileName+='.pdf';
-          if((dojo.isIE && dojo.isIE>0) || window.navigator.userAgent.indexOf("Edge") > -1) {
-            pdfMake.createPdf(dd).download(pdfFileName);
-          }else{
-            pdfMake.createPdf(dd).download(pdfFileName);
-          }
-          // open the PDF in a new window
-          //pdfMake.createPdf(dd).open();
-          // print the PDF (temporarily Chrome-only)
-         // pdfMake.createPdf(dd).print();
-          // download the PDF (temporarily Chrome-only)
-          dijit.byId('dialogPlanningPdf').hide();
-          iframe.parentNode.removeChild(iframe);
-          setTimeout('hideWait();',100);
-        });
-      });
-    });
-  });
-  };
-  iframe.id="iframeTmpPlanning";
-  document.body.appendChild(iframe);
-}
-function cropCanvas(canvasToCrop,x,y,w,h,r){
-  if(typeof r=='undefined')r=1;
-    var tempCanvas = document.createElement("canvas"),
-    tCtx = tempCanvas.getContext("2d");
-    tempCanvas.width = w*r;
-    tempCanvas.height = h*r;
-    if(w!=0 && h!=0)tCtx.drawImage(canvasToCrop,x,y,w,h,0,0,w*r,h*r);
-    return tempCanvas;
-}
-
-//addBottom=true : we add the canvas2 at the bottom of canvas1, addBottom=false : we add the canvas2 at the right of canvas1
-function combineCanvasIntoOne(canvas1,canvas2,addBottom){
-  var tempCanvas = document.createElement("canvas");
-  var tCtx = tempCanvas.getContext("2d");
-  var ajoutWidth=0;
-  var ajoutHeight=0;
-  var x=0;
-  var y=0;
-  if(addBottom){
-    ajoutHeight=canvas2.height;
-    y=canvas1.height;
-  }else{
-    ajoutWidth=canvas2.width;
-    x=canvas1.width;
-  }
-  tempCanvas.width = canvas1.width+ajoutWidth;
-  tempCanvas.height = canvas1.height+ajoutHeight;
-  if(canvas1.width!=0 && canvas1.height!=0)tCtx.drawImage(canvas1,0,0,canvas1.width,canvas1.height);
-  if(canvas1.width!=0 && canvas1.height!=0)if(canvas2.width!=0 && canvas2.height!=0)tCtx.drawImage(canvas2,0,0,canvas2.width,canvas2.height,x,y,canvas2.width,canvas2.height);
-  return tempCanvas;
 }
 
 function changeParamDashboardTicket(paramToSend){
@@ -11636,11 +6252,6 @@ function changeDashboardTicketMainTabPos(){
   }
   iddleList+="]";
   toSend+=addRight+iddleList+"}";
-//CHANGE qCazelles - Requirement dashboard - Ticket 90
-//Old
-//	loadContent('dashboardTicketMain.php?updatePosTab='+toSend, 'centerDiv', 'dashboardTicketMainForm');
-//}
-//New
   if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value=='DashboardRequirement') {
 	  loadContent('dashboardRequirementMain.php?updatePosTab='+toSend, 'centerDiv', 'dashboardRequirementMainForm');
   } else {
@@ -11651,7 +6262,6 @@ function changeDashboardTicketMainTabPos(){
 function changeParamDashboardRequirement(paramToSend){
   loadContent('dashboardRequirementMain.php?'+paramToSend, 'centerDiv', 'dashboardRequirementMainForm');
 }
-//END CHANGE qCazelles - Requirement dashboard - Ticket 90
 
 function getLocalLocation(){
   var availableScaytLocales=["en_US", "en_GB", "pt_BR", "da_DK", "nl_NL", "en_CA", "fi_FI", "fr_FR", "fr_CA", "de_DE", "el_GR", "it_IT", "nb_NO", "pt_PT", "es_ES", "sv_SE"];
@@ -11673,141 +6283,6 @@ function getLocalScaytAutoStartup() {
   }
 }
 
-function commentImputationSubmit(year,week,idAssignment,refType,refId){
-  var text=dijit.byId('commentImputation').get('value');
-  if(text.trim()==''){
-    showAlert(i18n('messageMandatory',[i18n('colComment')]));
-    return;
-  }
-  showWait();
-  dojo.xhrPost({
-    url : "../tool/dynamicDialogCommentImputation.php?year="+year+"&week="+week+"&idAssignment="+idAssignment+"&refTypeComment="+refType+"&refIdComment="+refId,
-    handleAs : "text",
-    form : 'commentImputationForm',
-    load : function(data, args) {
-      formChangeInProgress=false;
-      document.getElementById("showBig"+idAssignment).style.display='block'; 
-      dojo.byId("showBig"+idAssignment).childNodes[0].onmouseover=function(){
-        showBigImage(null,null,this,data);
-      };
-      dijit.byId('dialogCommentImputation').hide();
-      hideWait();
-    },
-    error : function() {
-      hideWait();
-    }
-  });
-}
-
-function commentImputationTitlePopup(type){
-  title='';
-  if(type=='add'){
-    title= i18n('commentImputationAdd');
-  }else if(type=='view'){
-    title= i18n('commentImputationView');
-  }
-  dijit.byId('dialogCommentImputation').set('title',title);
-}
-
-// Evaluation criteria
-function addTenderEvaluationCriteria(callForTenderId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var params="&mode=add&callForTenderId="+callForTenderId;
-  loadDialog('dialogCallForTenderCriteria', null, true, params, false);
-}
-function editTenderEvaluationCriteria(criteriaId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var params="&mode=edit&criteriaId="+criteriaId;
-  loadDialog('dialogCallForTenderCriteria', null, true, params, false);
-}
-function saveTenderEvaluationCriteria() {
-  var formVar=dijit.byId("dialogTenderCriteriaForm");
-  if (!formVar) {
-    showError(i18n("errorSubmitForm", new Array("n/a", "n/a", "dialogTenderCriteriaForm")));
-    return;
-  }
-  if (formVar.validate()) {
-    loadContent("../tool/saveTenderEvaluationCriteria.php", "resultDivMain", "dialogTenderCriteriaForm", true,'tenderEvaluationCriteria');
-    dijit.byId('dialogCallForTenderCriteria').hide();
-  }  
-}
-function removeTenderEvaluationCriteria(criteriaId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeTenderEvaluationCriteria.php?criteriaId="+criteriaId, "resultDivMain", null,true,'tenderEvaluationCriteria');
-  };
-  msg=i18n('confirmDelete', new Array(i18n('TenderEvaluationCriteria'), criteriaId));
-  showConfirm(msg, actionOK);
-}
-
-//Tender submission
-function addTenderSubmission(callForTenderId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var params="&mode=add&callForTenderId="+callForTenderId;
-  loadDialog('dialogCallForTenderSubmission', null, true, params, false);
-}
-function editTenderSubmission(tenderId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var params="&mode=edit&tenderId="+tenderId;
-  loadDialog('dialogCallForTenderSubmission', null, true, params, false);
-}
-function saveTenderSubmission() {
-  var formVar=dijit.byId("dialogTenderSubmissionForm");
-  if (dijit.byId('dialogCallForTenderSubmissionProvider') && ! trim(dijit.byId('dialogCallForTenderSubmissionProvider').get("value"))) {
-    showAlert(i18n('messageMandatory', new Array(i18n('colIdProvider'))));
-    return;
-  }
-  if (!formVar) {
-    showAlert(i18n("errorSubmitForm", new Array("n/a", "n/a", "dialogTenderSubmissionForm")));
-    return;
-  }
-  if (formVar.validate()) {
-    loadContent("../tool/saveTenderSubmission.php", "resultDivMain", "dialogTenderSubmissionForm", true,'tenderSubmission');
-    dijit.byId('dialogCallForTenderSubmission').hide();
-  }  
-}
-function removeTenderSubmission(tenderId) {
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  actionOK=function() {
-    loadContent("../tool/removeTenderSubmission.php?tenderId="+tenderId, "resultDivMain", null,true,'tenderSubmission');
-  };
-  msg=i18n('confirmDelete', new Array(i18n('Tender'), tenderId))+'<br/><b>'+i18n('messageAlerteDeleteTender')+'</b>';
-  showConfirm(msg, actionOK);
-}
-
-
-function changeTenderEvaluationValue(index) {
-  var value=dijit.byId("tenderEvaluation_"+index).get("value");
-  var coef=dojo.byId("tenderCoef_"+index).value;
-  var total=value*coef;
-  dijit.byId("tenderTotal_"+index).set("value",total);
-  var list=dojo.byId('idTenderCriteriaList').value.split(';');
-  var sum=0;
-  for (var i=0;i<list.length;i++) {
-    sum+=dijit.byId('tenderTotal_'+list[i]).get('value');
-  }
-  dijit.byId("tenderTotal").set("value",sum);
-  var newValue=Math.round(sum*dojo.byId('evaluationMaxCriteriaValue').value/dojo.byId('evaluationSumCriteriaValue').value*100)/100;
-  dijit.byId("evaluationValue").set("value",newValue);
-}
 // =============================================================================
 // = JobDefinition
 // =============================================================================
@@ -11894,9 +6369,6 @@ function jobClick(line) {
   }
 }
 
-// ===================================================
-// custom
-// ===================================================
 function changeJobInfo(jobId) {
   toShow=false;
   if(dijit.byId('dialogJobInfoJobId')) {
@@ -11971,58 +6443,6 @@ function saveJobInfo() {
     saveObject();
     dijit.byId('dialogJobInfo').hide();
   }
-}
-
-//=============================================================================
-//= KpiThreshold
-//=============================================================================
-
-/**
-* Display a add Kpi Threshold Box
-*
-*/
-function addKpiThreshold(idKpiDefinition) {
-  var params="&mode=add&idKpiDefinition=" + idKpiDefinition;
-  loadDialog('dialogKpiThreshold', null, true, params);
-}
-
-/**
-* Display a edit Kpi Threshold Box
-*
-*/
-function editKpiThreshold(idKpiThreshold) {
-  var params="&mode=edit&idKpiThreshold=" + idKpiThreshold;
-  loadDialog('dialogKpiThreshold', null, true, params);
-}
-
-/**
-* save a Kpi Threshold (after add or edit)
-*
-*/
-function saveKpiThreshold() {
-  if (!dijit.byId("kpiThresholdName").get('value')) {
-    showAlert(i18n('messageMandatory', new Array(i18n('colName'))));
-    return false;
-  }
-  if (! dijit.byId("kpiThresholdValue").get('value') && dijit.byId("kpiThresholdValue").get('value')!='0') {
-    showAlert(i18n('messageMandatory', new Array(i18n('colValue'))));
-    return false;
-  }
-  loadContent("../tool/saveKpiThreshold.php", "resultDivMain","dialogKpiThresholdForm", true,'kpiThreshold');
-  dijit.byId('dialogKpiThreshold').hide();
-}
-
-/**
-* Display a delete line Box
-*
-*/
-function removeKpiThreshold(idKpiThreshold) {
-  var params="?kpiThresholdId=" + idKpiThreshold;
-  actionOK=function() {
-    loadContent("../tool/removeKpiThreshold.php" + params, "resultDivMain", null, true,'kpiThreshold');
-  };
-  msg=i18n('confirmDelete', new Array(i18n('KpiThreshold'), idKpiThreshold));
-  showConfirm(msg, actionOK);
 }
 
 function toggleFullScreen() {
@@ -12200,18 +6620,6 @@ function changeSubscriptionFromDialog(mode,dialog,objectClass,objectId,userId,ke
   });
 }
 
-//ADD qCazelles - GANTT
-function displayVersionsPlanning(idProductVersions,objectVersion) {
-	vGanttCurrentLine=-1;
-	cleanContent("centerDiv");
-	loadContent("versionsPlanningMain.php?productVersionsListId=" + idProductVersions+"&objectVersion="+objectVersion, "centerDiv");
-	//REMOVE qCazelles - Correction GANTT - Ticket #100
-	//dijit.byId('dialogVersionsPlanning').hide();
-	//END REMOVE qCazelles - Correction GANTT - Ticket #100
-}
-//END ADD qCazelles - GANTT
-
-
 function filterDnDList(search,list) {
   var searchVal=dojo.byId(search).value;
   searchVal=searchVal.replace(/\*/gi,'.*');
@@ -12234,7 +6642,6 @@ function storePaneSize(paneName,sizeValue) {
   saveDataToSession(paneName, sizeValue, true);
 }
 
-//gautier #showHideMenu
 function displayMenu(id){
   if(hideUnderMenuId){
     if (hideUnderMenuId == id ){
@@ -12248,7 +6655,7 @@ function displayMenu(id){
   dojo.byId('UnderMenu'+id).style.display="block";
   setTimeout("repositionMenuDiv("+id+","+id+");",10);
 }
-//Florent 
+
 function displayUnderMenu(id,idParent){
   if (hideUnderMenuId==null && previewhideUnderMenuId!=null){
     hideUnderMenu(previewhideUnderMenuId,0);
@@ -12284,7 +6691,7 @@ function repositionMenuDiv(id,idParent) {
     currentDiv.style.top = newTop+'px';
   };
 }
-//end
+
 function hideMenu(id,delay){
   if(! delay){ 
     delay=300;
@@ -12303,7 +6710,7 @@ function hideUnderMenu(id){
   dojo.byId('UnderMenu'+id).style.display="none";
   hideUnderMenuId = null;
 }
-//Florent 
+
 function hidePreviewUnderMenu(id){
   if(previewhideUnderMenuId!=id && previewhideUnderMenuId!=null){
     hideUnderMenu(previewhideUnderMenuId);
@@ -12315,8 +6722,6 @@ function displayListOfApprover(id){
   loadDialog('dialogListApprover', null, true,params,null,true);
 }
 
-
-//gautier
 function readNotification (id){
   var url='../view/menuNotificationRead.php?id=' + id;
   dojo.xhrPost({
@@ -12337,47 +6742,8 @@ function readNotification (id){
     }
   });
 }
-//end
 
-// ====================================
-// CRON FEATURES
-// ====================================
 
-function cronActivation(scope,adminView){
-  showWait();
-  dojo.xhrGet({
-    url : "../tool/cronExecutionStandard.php?operation=activate&cronExecutionScope="+scope,
-    load : function(data) {
-      if(adminView){
-        loadContent("../view/admin.php", "centerDiv");
-      }else{
-        loadContent("../view/parameter.php?type=globalParameter", "centerDiv");
-      }
-      adminCronRestart();
-    },
-    error : function(data) {
-      hideWait();
-    }
-  });
-}
-
-function cronExecutionDefinitionSave(){
-  var finish=false;
-  showWait();
-  dojo.xhrPost({
-    url : "../tool/cronExecutionStandard.php?operation=saveDefinition",
-    form: "cronDefiniton",
-    handleAs : "text",
-    load : function(data, args) {
-      dijit.byId('dialogCronDefinition').hide();
-      loadContent("../view/parameter.php?type=globalParameter", "centerDiv");
-      hideWait();
-    },
-    error : function() {
-      hideWait();
-    }
-  });
-}
 
 // MTY - GENERIC DAY OFF
 function addGenericBankOffDays(idCalendarDefinition) {
@@ -12440,6 +6806,7 @@ function removeGenericBankOffDays(id, name) {
 function showDialogAutoSendReport(){
 	setTimeout(loadDialog('dialogAutoSendReport',null,true,null,true), 200);
 }
+
 function saveAutoSendReport(){
 	var formVar=dijit.byId('autoSendReportForm');
 	  if (dijit.byId('destinationInput').get('value') == '' && dijit.byId('otherDestinationInput').get('value') == '') {
@@ -12473,6 +6840,7 @@ function saveModuleStatus(id,status) {
     saveModuleStatusContinue(id,status);
   }
 }   
+
 function saveModuleStatusContinue(id,status) {
   var url='../tool/saveModuleStatus.php?idModule='+id+'&status='+status;
   dojo.xhrGet({
@@ -12498,6 +6866,7 @@ function saveModuleStatusContinue(id,status) {
   });
   saveModuleStatusCheckParent(id);  
 }
+
 function saveModuleStatusCheckParent(id) {
   var wdgt=dijit.byId('module_'+id);
   var parent=wdgt.get('parent');
@@ -12527,15 +6896,6 @@ function saveModuleStatusCheckParent(id) {
       });
     }
   }
-}
-
-function addDataCloning(){
-	loadDialog('dialogAddDataCloning',null,true,null,true);
-}
-
-function copyDataCloning(idDataCloning){
-	var param = '&idDataCloningParent='+idDataCloning;
-	loadDialog('dialogAddDataCloning',null,true,param,true);
 }
 
 function controlChar (){
@@ -12611,25 +6971,6 @@ function selectAllCheckBox(val){
         dijit.byId(node.getAttribute('widgetid')).set('checked', true);
       }
     });
-}
-
-function refreshCronIconStatus(status){
-  if (dojo.byId('actualCronStatusInDiv') && dojo.byId('actualCronStatusInDiv').value.toLowerCase()==status.toLowerCase()) return;
-	var url='../view/refreshCronIconStatus.php';
-	    url+='?cronStatus=' + status;
-    loadDiv(url, 'menuBarCronStatus', null, null);
-}
-
-function checkCronStatus(status){
-	dojo.byId('cronStatus').style.filter = 'grayscale(100%)';
-	if (status=='Stopped') {
-  	adminLaunchScript("cronRun", false);
-  	refreshCronIconStatus("running");
-	} else {
-  	adminLaunchScript("cronStop", false);
-  	dojo.byId('cronStatusButton').title = i18n('cronStopping');
-  	//refreshCronIconStatus("stopped");
-	}
 }
 
 function saveContact(idFldVal,comboClass){
@@ -12760,7 +7101,6 @@ function filterMenuModuleDisable(nbTotal){
   }else{
     filterMenuModule(1,nbTotal);
   }
-
 }
 
 function changeSpeedAnimation (val){
@@ -12782,7 +7122,6 @@ function changeSpeedAnimation (val){
   }
   saveUserParameter('animationSpeedMode',val);
 }
-
 
 function multipleUpadteSelectAtribute(value) {
   if (value) {
@@ -13351,249 +7690,3 @@ function selectResourcesTransformIdToName(target){
       }
     });
 }
-
-//=============================================================================
-//= Poker Item
-//=============================================================================
-
-var noRefreshPokerItem=false;
-function addPokerItem(classPokerItem, defaultPokerItem) {
-  if (!classPokerItem) {
-    var params="&objectClass="+dojo.byId('objectClass').value+"&objectId="+dojo.byId("objectId").value;
-  }
-  loadDialog('dialogPokerItem',function(){
-	noRefreshPokerItem=true;
-    var objectClass=dojo.byId('objectClass').value;
-    var objectId=dojo.byId("objectId").value;
-    var message=i18n("dialogPokerItem");
-    dojo.byId("pokerItemId").value="";
-    dojo.byId("pokerItemRef1Type").value=objectClass;
-    dojo.byId("pokerItemRef1Id").value=objectId;
-    if (classPokerItem) {
-      dojo.byId("pokerItemFixedClass").value=classPokerItem;
-      message=i18n("dialogPokerItemRestricted", new Array(i18n(objectClass), objectId,
-          i18n(classPokerItem)));
-      dijit.byId("pokerItemRef2Type").setDisplayedValue(i18n(classLink));
-      lockWidget("pokerItemRef2Type");
-      noRefreshPokerItem=false;
-      refreshPokerItemList();
-    } else {
-      dojo.byId("pokerItemFixedClass").value="";
-      if (defaultPokerItem) {
-        dijit.byId("pokerItemRef2Type").set('value', defaultPokerItem);
-      } else {
-        dijit.byId("pokerItemRef2Type").reset();
-      }
-      message=i18n("dialogPokerItemExtended", new Array(i18n(objectClass), objectId));
-      unlockWidget("pokerItemRef2Type");
-      noRefreshPokerItem=false;
-      refreshPokerItemList();
-    }
-  
-    dijit.byId("dialogPokerItem").set('title', message);
-    dijit.byId("pokerItemComment").set('value', '');
-    dijit.byId("dialogPokerItem").show();
-    disableWidget('dialogPokerItemSubmit');
-  }, true, params, true);
-}
-
-function selectPokerItemItem() {
-  var nbSelected=0;
-  list=dojo.byId('pokerItemRef2Id');
-	if (list.options) {
-	  for (var i=0; i < list.options.length; i++) {
-	    if (list.options[i].selected) {
-	      nbSelected++;
-	    }
-	  }
-	}
-  if (nbSelected > 0) {
-    enableWidget('dialogPokerItemSubmit');
-  } else {
-    disableWidget('dialogPokerItemSubmit');
-  }
-}
-
-/**
- * Refresh the pokerItem list (after update)
- */
-function refreshPokerItemList(selected) {
-  if (noRefreshPokerItem)
-    return;
-  disableWidget('dialogPokerItemSubmit');
-  var url='../tool/dynamicListPokerItem.php';
-  if (selected) {
-    url+='?selected=' + selected;
-  }
-  if (!selected) {
-    selectPokerItemItem();
-  }
-  loadContent(url, 'dialogPokerItemList', 'pokerItemForm', false);
-}
-
-/**
- * save a pokerItem (after addPokerItem)
- * 
- */
-function savePokerItem() {
-  if (dojo.byId("pokerItemRef2Id").value == "")
-    return;
-  var fixedClass = (dojo.byId('pokerItemFixedClass'))?dojo.byId('pokerItemFixedClass').value:'';
-  loadContent("../tool/savePokerItem.php", "resultDivMain", "pokerItemForm", true, 'pokerItem'+fixedClass);
-  dijit.byId('dialogPokerItem').hide();
-}
-
-/**
- * Display a delete PokerItem Box
- * 
- */
-function removePokerItem(pokerItemId) {
-  actionOK=function() {
-	  loadContent("../tool/removePokerItem.php?pokerItemId="+pokerItemId, "resultDivMain", null, true, 'pokerItem');
-  };
-  msg=i18n('confirmDeletePokerItem', new Array('PokerItem', pokerItemId));
-  showConfirm(msg, actionOK);
-}
-
-function editPokerItem(pokerItemId){
-  if (checkFormChangeInProgress()) {
-    showAlert(i18n('alertOngoingChange'));
-    return;
-  }
-  var callBack = function () {
-    dojo.xhrGet({
-      url : '../tool/getSingleData.php?dataType=editPokerItem&idPokerItem='+pokerItemId,
-      handleAs : "text",
-      load : function(data) {
-        dijit.byId('pokerItemComment').set('value', data);
-      }
-      });
-    dijit.byId("dialogPokerItem").show();
-  };
-  var params="&id="+id;
-  params+="&pokerItemId="+pokerItemId;
-  params+="&mode=edit";
-  loadDialog('dialogPokerItem',callBack,false,params);
-}
-
-function startPokerSession(idPokerSession){
-	dojo.xhrPost({
-	      url : '../tool/startPokerSession.php?idPokerSession='+idPokerSession,
-	      handleAs : "text",
-	      load : function(data) {
-	    	  var callBack=function(){
-	    		  tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
-	    		  console.log(tabToSelect);
-		    	  tabContainer=dijit.byId('tabDetailContainer');
-		    	  if(tabContainer!=undefined){
-	    	        tabContainer.selectChild(tabToSelect.page);
-		    	  }
-	    	  };
-	    	  loadContent("objectMain.php?objectClass=PokerSession", "centerDiv", false,
-	    	          false, false, idPokerSession,false,callBack,true);
-	      }
-	});
-}
-
-function stopPokerSession(idPokerSession){
-	dojo.xhrPost({
-	      url : '../tool/startPokerSession.php?idPokerSession='+idPokerSession,
-	      handleAs : "text",
-	      load : function(data) {
-	    	  refreshGrid();
-	    	  loadContent("objectDetail.php", "detailDiv", "listForm",null,null,null,null,null,true);
-	      }
-	});
-}
-
-function startPausePokerSession(idPokerSession){
-	dojo.xhrPost({
-	      url : '../tool/startPausePokerSession.php?idPokerSession='+idPokerSession,
-	      handleAs : "text",
-	      load : function(data) {
-	    	  var callBack=function(){
-	    		  tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
-	    		  console.log(tabToSelect);
-		    	  tabContainer=dijit.byId('tabDetailContainer');
-		    	  if(tabContainer!=undefined){
-	    	        tabContainer.selectChild(tabToSelect.page);
-		    	  }
-	    	  };
-	    	  loadContent("objectMain.php?objectClass=PokerSession", "centerDiv", false,
-	    	          false, false, idPokerSession,false,callBack,true);
-	      }
-	});
-}
-
-function stopPausePokerSession(idPokerSession){
-	dojo.xhrPost({
-	      url : '../tool/startPausePokerSession.php?idPokerSession='+idPokerSession,
-	      handleAs : "text",
-	      load : function(data) {
-	    	  refreshGrid();
-	    	  loadContent("objectDetail.php", "detailDiv", "listForm",null,null,null,null,null,true);
-	      }
-	});
-}
-
-function openPokerItemVote(idPokerItem){
-	dojo.xhrPost({
-	      url : '../tool/openPokerItemVote.php?idPokerItem='+idPokerItem+'&close=false',
-	      handleAs : "text",
-	      load : function(data) {
-	    	  var callBack=function(){
-	    		  tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
-		    	  tabContainer=dijit.byId('tabDetailContainer');
-		    	  if(tabContainer!=undefined){
-	    	        tabContainer.selectChild(tabToSelect.page);
-		    	  }
-	    	  };
-	    	  saveDataToSession("idPokerItem",idPokerItem,false);
-	    	  loadContent("objectDetail.php", "detailDiv", "listForm", null, null, null,null,callBack,true);
-	      }
-	});
-}
-
-function closePokerItemVote(idPokerItem){
-	dojo.xhrPost({
-	      url : '../tool/openPokerItemVote.php?idPokerItem='+idPokerItem+'&close=true',
-	      handleAs : "text",
-	      load : function(data) {
-	    	  loadContent("objectDetail.php", "detailDiv", "listForm");
-	      }
-	});
-}
-
-function gotoPokerItem(idPokerItem){
-	  var callBack=function(){
-		  tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
-  	      tabContainer=dijit.byId('tabDetailContainer');
-	  	  if(tabContainer!=undefined){
-		        tabContainer.selectChild(tabToSelect.page);
-	  	  }
-	  };
-	  saveDataToSession("idPokerItem",idPokerItem,false);
-	  loadContent("objectDetail.php", "detailDiv", "listForm", null, null, null,null,callBack,true);
-}
-
-function pokerItemNav(idPokerSession, idItem, itemList, nav){
-	var url='../tool/pokerItemNavigation.php?idPokerSession='+idPokerSession+'&idItem='+idItem+'&itemList='+itemList+'&nav='+nav;
-	loadContent(url, 'pokerVoteDiv', null, false);
-}
-
-function refreshPokerItemResult(idPokerSession, idItem, itemList){
-	var url='../tool/refreshPokerItemResult.php?idPokerSession='+idPokerSession+'&idItem='+idItem+'&itemList='+itemList;
-	loadContent(url, 'pokerVoteResult', null, false);
-}
-
-function voteToPokerItem(idPokerSession, idItem, itemList, vote){
-	dojo.xhrPost({
-	      url : '../tool/voteToPokerItem.php?idPokerSession='+idPokerSession+'&idItem='+idItem+'&vote='+vote,
-	      handleAs : "text",
-	      load : function(data) {
-	    	  refreshPokerItemResult(idPokerSession, idItem, itemList);
-	      }
-	});
-}
-
-//fin
