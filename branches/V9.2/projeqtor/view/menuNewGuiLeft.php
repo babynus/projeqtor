@@ -268,6 +268,7 @@ function getReportsMenu(){
     $report=$h->idReport;
     $nameReport=SqlList::getNameFromId('Report', $report, false);
     if (!Module::isReportActive($nameReport)) continue;
+    if ($h->idReport==108 and Parameter::getGlobalParameter("technicalProgress")!="YES")continue;
     $allowedReport[$report]=$report;
     $category=SqlList::getFieldFromId('Report', $report, 'idReportCategory',false);
     $allowedCategory[$category]=$category;

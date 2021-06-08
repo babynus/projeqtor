@@ -134,6 +134,8 @@ INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOr
 (122, 'reportYearlyPlanResource',2, 'yearlyPlanResource.php', 251,'0'),
 (123, 'reportSynthesisOrdersInvoiceClient',7, 'synthesisOrdersInvoiceClient.php', 770,'0');
 
+
+
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
 (1, 119, 1),
 (1, 120, 1),
@@ -541,3 +543,8 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ( 'paramMailTitleNewUserCreated', '[${dbName}] The user #${id} has been created');
 INSERT INTO `${prefix}mailable` (name, `idle`) VALUES 
 ('User', 0);
+
+UPDATE `${prefix}report` set sortOrder=125 where id=3 ;
+UPDATE `${prefix}report` set sortOrder=905 where id=25 ;
+UPDATE `${prefix}report` set sortOrder=915 where id=24 ;
+UPDATE `${prefix}report` set sortOrder=855 where id=88 ;
