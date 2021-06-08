@@ -1436,7 +1436,10 @@
     echo $tab.'<CriticalSlackLimit>0</CriticalSlackLimit>' . $nl;
     echo $tab.'<CurrencyDigits>2</CurrencyDigits>' . $nl;
     echo $tab.'<CurrencySymbol>' . $currency . '</CurrencySymbol>' . $nl;
-    echo $tab.'<CurrencyCode>' . getCurrencyCode($currency) . '</CurrencyCode>' . $nl;
+    $currencyCode = getCurrencyCode($currency);
+    if($currencyCode){
+      echo $tab.'<CurrencyCode>' . getCurrencyCode($currency) . '</CurrencyCode>' . $nl;
+    }
     echo $tab.'<CurrencySymbolPosition>' . (($currencyPosition=='before')?'2':'3') . '</CurrencySymbolPosition>' . $nl;
     echo $tab.'<CalendarUID>0</CalendarUID>' . $nl;
     echo $tab.'<DefaultStartTime>' . $startAM . '</DefaultStartTime>' . $nl;
@@ -1539,7 +1542,7 @@
     foreach($calList as $cal) {
       echo $tab.$tab.'<Calendar>' . $nl;
       echo $tab.$tab.$tab.'<UID>'.($cal->id -1).'</UID>' . $nl;
-      echo $tab.$tab.$tab.'<Name>Standard</Name>' . $nl;
+      echo $tab.$tab.$tab.'<Name>'.$cal->name.'</Name>' . $nl;
       echo $tab.$tab.$tab.'<IsBaseCalendar>'.(($cal->id==1)?1:0).'</IsBaseCalendar>' . $nl;
       echo $tab.$tab.$tab.'<IsBaselineCalendar>0</IsBaselineCalendar>' .$nl;
       echo $tab.$tab.$tab.'<BaseCalendarUID>-1</BaseCalendarUID>' . $nl;
@@ -1579,6 +1582,7 @@
       echo $tab.$tab.$tab.'</WeekDays>' . $nl;
       echo $tab.$tab.'</Calendar>' . $nl;
       foreach ($resourceList as $resource) {
+        if($resource->idCalendarDefinition != $cal->id) continue;
         if ($exportAssignments==false) continue;
       	echo $tab.$tab."<Calendar>" . $nl;
         echo $tab.$tab.$tab."<UID>" . htmlEncode($resource->id,'xml') . "</UID>" . $nl;
@@ -1586,6 +1590,23 @@
         echo $tab.$tab.$tab."<IsBaseCalendar>0</IsBaseCalendar>" . $nl;
         echo $tab.$tab.$tab."<IsBaselineCalendar>0</IsBaselineCalendar>". $nl;
         echo $tab.$tab.$tab."<BaseCalendarUID>".($resource->idCalendarDefinition -1)."</BaseCalendarUID>" . $nl;
+        // Gautier #4648
+        $work = new Work();
+        $where1 = " idResource = ".$resource->id." and idProject in " . Project::getAdminitrativeProjectList(false, false);    
+        $lstWork = $work->getSqlElementsFromCriteria(null,false,$where1);
+        if(count($lstWork)>0)echo $tab.$tab.$tab.'<WeekDays>' . $nl;
+        foreach ($lstWork as $admWork){
+          echo $tab.$tab.$tab.$tab.'<WeekDay>' . $nl;
+          echo $tab.$tab.$tab.$tab.$tab.'<DayType>0</DayType>' . $nl;
+          echo $tab.$tab.$tab.$tab.$tab.'<DayWorking>0</DayWorking>' . $nl;
+          echo $tab.$tab.$tab.$tab.$tab.'<TimePeriod>' . $nl;
+          echo $tab.$tab.$tab.$tab.$tab.$tab.'<FromDate>'.$admWork->workDate.'T00:00:00</FromDate>' . $nl;
+          echo $tab.$tab.$tab.$tab.$tab.$tab.'<ToDate>'.$admWork->workDate.'T23:59:00</ToDate>' . $nl;
+          echo $tab.$tab.$tab.$tab.$tab.'</TimePeriod>' . $nl;
+          echo $tab.$tab.$tab.$tab.'</WeekDay>'.$nl;
+        }
+         if(count($lstWork)>0)echo $tab.$tab.$tab.'</WeekDays>' . $nl;
+        //
         echo $tab.$tab."</Calendar>" . $nl;
       }
     }
