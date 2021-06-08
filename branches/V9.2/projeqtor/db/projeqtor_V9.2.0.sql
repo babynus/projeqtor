@@ -321,13 +321,15 @@ INSERT INTO `${prefix}pokercomplexity` (`name`, `value`, `work`,`sortOrder`) VAL
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
 ('PokerSession', 'live session', 10, 1, 0),
 ('PokerSession', 'session with due date voting', 20, 1, 0);
- 
+
+INSERT INTO `module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES 
+(22,'modulePoker','110',1,0,0); 
 
 INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(198,9,259,0,1),
-(199,9,260,0,1),
-(200,9,268,0,1),
-(201,9,269,0,1);
+(198,22,259,0,0),
+(199,22,260,0,0),
+(200,22,268,0,0),
+(201,22,269,0,0);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1, 259, 1),
