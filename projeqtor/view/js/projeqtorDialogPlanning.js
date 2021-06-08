@@ -48,8 +48,6 @@ function addAssignment(unit, rawUnit, hoursPerDay, isTeam, isOrganization,
     return;
   }
   var objClass=dojo.byId('objectClass').value;
-  if (objClass == 'PokerSessionDefinition')
-    objClass='PokerSession';
   var callBack=function() {
     dijit.byId("dialogAssignment").show();
   };
@@ -231,8 +229,7 @@ function saveAssignment(definitive) {
           params+="&mode=edit";
           loadDialog('dialogAssignment', null, false, params);
         } else {
-          if (dojo.byId('objectClass').value == 'PokerSession'
-              || dojo.byId('objectClass').value == 'PokerSessionDefinition') {
+          if (dojo.byId('objectClass').value == 'PokerSession') {
             url="../tool/savePokerMember.php";
             loadContent(url, "resultDivMain", "assignmentForm", true);
           }
@@ -243,8 +240,7 @@ function saveAssignment(definitive) {
           null, null, callback);
     } else {
       loadContent(url, "resultDivMain", "assignmentForm", true, 'assignment');
-      if (dojo.byId('objectClass').value == 'PokerSession'
-          || dojo.byId('objectClass').value == 'PokerSessionDefinition') {
+      if (dojo.byId('objectClass').value == 'PokerSession') {
         url="../tool/savePokerMember.php";
         loadContent(url, "resultDivMain", "assignmentForm", true);
       }

@@ -2176,12 +2176,12 @@
 .ProjeQtOrFlatRed .iconPokerSession { background-image: url(customIcons/red/iconPokerSession.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconPokerSession { background-image: url(customIcons/new/iconPokerSession.svg);  background-repeat: no-repeat; }
 
-.iconPokerSessionDefinition { background-image: url(images/iconPokerSessionDefinition.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconPokerSessionDefinition { background-image: url(customIcons/blue/iconPokerSessionDefinition.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconPokerSessionDefinition { background-image: url(customIcons/green/iconPokerSessionDefinition.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconPokerSessionDefinition { background-image: url(customIcons/grey/iconPokerSessionDefinition.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconPokerSessionDefinition { background-image: url(customIcons/red/iconPokerSessionDefinition.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconPokerSessionDefinition { background-image: url(customIcons/new/iconPokerSessionDefinition.svg);  background-repeat: no-repeat; }
+.iconPokerSessionVoting { background-image: url(images/iconPokerSessionVoting.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconPokerSessionVoting { background-image: url(customIcons/blue/iconPokerSessionVoting.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconPokerSessionVoting { background-image: url(customIcons/green/iconPokerSessionVoting.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconPokerSessionVoting { background-image: url(customIcons/grey/iconPokerSessionVoting.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconPokerSessionVoting { background-image: url(customIcons/red/iconPokerSessionVoting.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconPokerSessionVoting { background-image: url(customIcons/new/iconPokerSessionVoting.svg);  background-repeat: no-repeat; }
 
 .iconPokerSessionType { background-image: url(images/iconPokerSessionType.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconPokerSessionType { background-image: url(customIcons/blue/iconPokerSessionType.png);  background-repeat: no-repeat; }
