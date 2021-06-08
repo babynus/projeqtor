@@ -668,12 +668,6 @@
       }
     }
     
-    if($objectClass=='PokerSession'){
-      $poker = new PokerSession();
-      $pTable=$poker->getDatabaseTableName();
-	  $queryWhere.= ' and '.$pTable.'.handled=\'1\'';
-    }
-    
 // MTY - LEAVE SYSTEM
     // For Class of Leave System
     if (isLeavesSystemActiv()) {

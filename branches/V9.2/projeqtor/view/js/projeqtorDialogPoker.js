@@ -175,21 +175,9 @@ function startPokerSession(idPokerSession) {
     handleAs : "text",
     load : function(data) {
       var callBack=function() {
-		  if(isNewGui){
-			  console.log('oui');
-			  refreshSelectedItem('menuPokerSession', defaultMenu);
-			  if(defaultMenu == 'menuBarRecent'){
-				  menuNewGuiFilter(defaultMenu, 'menuPokerSession');
-			  }
-			  editFavoriteRow(true);
-		  }
-        tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
-        tabContainer=dijit.byId('tabDetailContainer');
-        if (tabContainer != undefined) {
-          tabContainer.selectChild(tabToSelect.page);
-        }
+    	selectIconMenuBar('PokerSessionVoting');
       };
-      loadContent("objectMain.php?objectClass=PokerSession", "centerDiv",
+      loadContent("objectMain.php?objectClass=PokerSessionVoting", "centerDiv",
           false, false, false, idPokerSession, false, callBack, true);
     }
   });
@@ -215,14 +203,9 @@ function startPausePokerSession(idPokerSession) {
         handleAs : "text",
         load : function(data) {
           var callBack=function() {
-            tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
-            console.log(tabToSelect);
-            tabContainer=dijit.byId('tabDetailContainer');
-            if (tabContainer != undefined) {
-              tabContainer.selectChild(tabToSelect.page);
-            }
+        	selectIconMenuBar('PokerSessionVoting');
           };
-          loadContent("objectMain.php?objectClass=PokerSession", "centerDiv",
+          loadContent("objectMain.php?objectClass=PokerSessionVoting", "centerDiv",
               false, false, false, idPokerSession, false, callBack, true);
         }
       });
@@ -248,16 +231,16 @@ function openPokerItemVote(idPokerSession, idItem, itemList) {
         + '&close=false',
     handleAs : "text",
     load : function(data) {
-//      var callBack=function() {
+      var callBack=function() {
         tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
         tabContainer=dijit.byId('tabDetailContainer');
         if (tabContainer != undefined) {
           tabContainer.selectChild(tabToSelect.page);
         }
         pokerItemNav(idPokerSession, idItem, itemList, null);
-//      };
-//      loadContent("objectDetail.php", "detailDiv", "listForm", null, null,
-//          null, null, callBack, true);
+      };
+      loadContent("objectDetail.php", "detailDiv", "listForm", null, null,
+          null, null, callBack, true);
     }
   });
 }
