@@ -6429,10 +6429,10 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   if ($comboDetail) {
     return;
   }
-  if(get_class($obj)=='PokerSessionDefinition'){
-    $ass = new Assignment();
-    $list = $ass->getSqlElementsFromCriteria(array('refType'=>'PokerSession', 'refId'=>$obj->id));
-  }
+//   if(get_class($obj)=='PokerSession'){
+//     $ass = new Assignment();
+//     $list = $ass->getSqlElementsFromCriteria(array('refType'=>'PokerSession', 'refId'=>$obj->id));
+//   }
   $pluginObjectClass='Assignment';
   $tableObject=$list;
   $lstPluginEvt=Plugin::getEventScripts('list', $pluginObjectClass);

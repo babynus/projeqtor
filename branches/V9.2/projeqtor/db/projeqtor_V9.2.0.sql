@@ -294,14 +294,14 @@ CREATE TABLE `${prefix}pokervote` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(259, 'menuPokerSessionDefinition', 7, 'object', 155, Null, 0, 'Work '),
-(260, 'menuPokerSession', 7, 'object', 160, Null, 0, 'Work '),
+(259, 'menuPokerSession', 7, 'object', 155, Null, 0, 'Work '),
+(260, 'menuPokerSessionVoting', 7, 'object', 160, Null, 0, 'Work '),
 (268, 'menuPokerSessionType', 79, 'object', 981, 'ReadWriteType', 0, 'Type'),
 (269, 'menuPokerComplexity',36,'object', 900,'ReadWriteList',0,'ListOfValues');
 
 INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
-(339,'menuPokerSessionDefinition',3,259,115,0),
-(340,'menuPokerSession',3,260,120,0),
+(339,'menuPokerSession',3,259,115,0),
+(340,'menuPokerSessionVoting',3,260,120,0),
 (351,'menuPokerSessionType',132,268,45,0),
 (352,'menuPokerComplexity',131,269,70,0);
 
@@ -318,9 +318,9 @@ INSERT INTO `${prefix}pokercomplexity` (`name`, `value`, `work`,`sortOrder`) VAL
 ('100', 100, 50, 100),
 ('?', 0, 0, 110);
 
-INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`, `lockHandled`, `lockDone`, `lockIdle`) VALUES 
-('PokerSession', 'live session', 10, 1, 0, 1, 1, 1),
-('PokerSession', 'session with due date voting', 20, 1, 0, 1, 1, 1);
+INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
+('PokerSession', 'live session', 10, 1, 0),
+('PokerSession', 'session with due date voting', 20, 1, 0);
  
 
 INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES

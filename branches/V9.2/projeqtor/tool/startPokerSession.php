@@ -28,9 +28,9 @@
  * Get the list of objects, in Json format, to display the grid list
  */
 require_once "../tool/projeqtor.php"; 
-$result="";
+
 $id=RequestHandler::getId('idPokerSession');
-$pokerSession = new PokerSessionDefinition($id);
+$pokerSession = new PokerSession($id);
 if(!$pokerSession->handled){
   $pokerSession->handled = 1;
   $pokerSession->handledDate = date('Y-m-d H:i:s');
@@ -43,5 +43,5 @@ if(!$pokerSession->handled){
   $pokerSession->done = 0;
   $pokerSession->doneDate = null;
 }
-$result = $pokerSession->save();
+$pokerSession->save();
 ?>
