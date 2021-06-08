@@ -550,3 +550,7 @@ UPDATE `${prefix}report` set sortOrder=125 where id=3 ;
 UPDATE `${prefix}report` set sortOrder=905 where id=25 ;
 UPDATE `${prefix}report` set sortOrder=915 where id=24 ;
 UPDATE `${prefix}report` set sortOrder=855 where id=88 ;
+
+UPDATE `${prefix}navigation` set idParent=13, sortOrder=110 where id=69 ;
+UPDATE `${prefix}navigation` set idParent=14, sortOrder=110 where id=70;
+
