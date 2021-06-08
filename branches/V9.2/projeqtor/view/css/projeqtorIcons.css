@@ -2190,12 +2190,12 @@
 .ProjeQtOrFlatRed .iconPokerSessionType { background-image: url(customIcons/red/iconPokerSessionType.png);  background-repeat: no-repeat; }
 .ProjeQtOrNewGui .iconPokerSessionType { background-image: url(customIcons/new/iconPokerSessionType.svg);  background-repeat: no-repeat; }
 
-.iconPokerComplexity { background-image: url(images/iconPokerSessionComplexity.png);  background-repeat: no-repeat;  }
-.ProjeQtOrFlatBlue .iconPokerComplexity { background-image: url(customIcons/blue/iconPokerSessionComplexity.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGreen .iconPokerComplexity { background-image: url(customIcons/green/iconPokerSessionComplexity.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatGrey .iconPokerComplexity { background-image: url(customIcons/grey/iconPokerSessionComplexity.png);  background-repeat: no-repeat; }
-.ProjeQtOrFlatRed .iconPokerComplexity { background-image: url(customIcons/red/iconPokerSessionComplexity.png);  background-repeat: no-repeat; }
-.ProjeQtOrNewGui .iconPokerComplexity { background-image: url(customIcons/new/iconPokerSessionComplexity.svg);  background-repeat: no-repeat; }
+.iconPokerComplexity { background-image: url(images/iconPokerComplexity.png);  background-repeat: no-repeat;  }
+.ProjeQtOrFlatBlue .iconPokerComplexity { background-image: url(customIcons/blue/iconPokerComplexity.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGreen .iconPokerComplexity { background-image: url(customIcons/green/iconPokerComplexity.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatGrey .iconPokerComplexity { background-image: url(customIcons/grey/iconPokerComplexity.png);  background-repeat: no-repeat; }
+.ProjeQtOrFlatRed .iconPokerComplexity { background-image: url(customIcons/red/iconPokerComplexity.png);  background-repeat: no-repeat; }
+.ProjeQtOrNewGui .iconPokerComplexity { background-image: url(customIcons/new/iconPokerComplexity.svg);  background-repeat: no-repeat; }
 
 .iconPredefinedNote { background-image: url(images/iconPredefinedNote32.png);  background-repeat: no-repeat;  }
 .ProjeQtOrFlatBlue .iconPredefinedNote { background-image: url(customIcons/blue/iconPredefinedNote.png);  background-repeat: no-repeat; }
