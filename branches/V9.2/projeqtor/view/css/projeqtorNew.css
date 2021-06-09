@@ -1935,6 +1935,10 @@ element.style {
 .ProjeQtOrNewGui .imputationTable .ganttLeftTopLine .dijitReset.dijitInline.dijitButtonNode {
 	background: var(--color-lighter);
 }
+
+.ProjeQtOrNewGui .imputationTable .ganttLeftTopLine .imputationExpand  .dijitReset.dijitInline.dijitButtonNode {
+	background: var(--color-darker);
+}
 .ProjeQtOrNewGui .imputationSubmitted {
 	font-size: 90%;
 	padding:1px 5px;
