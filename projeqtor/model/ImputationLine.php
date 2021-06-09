@@ -634,7 +634,7 @@ class ImputationLine {
       $width=($width)-155-30;
     }
     $tab=ImputationLine::getLines($resourceId, $rangeType, $rangeValue, $showIdle, $showPlanned, $hideDone, $hideNotHandled, $displayOnlyCurrentWeekMeetings);
-    
+    $jsonTab = json_encode($tab);
     if($projectNoteStartedBeforValidatedDate){
       $projPlanEl=new ProjectPlanningElement();
       $critWhere=$projPlanEl->getDatabaseColumnName('validatedStartDate')." < '".$endDate."' and ".$projPlanEl->getDatabaseColumnName('validatedStartDate')." > '".$startDate."'";
@@ -682,7 +682,16 @@ class ImputationLine {
     echo '  <TD class="ganttLeftTopLine" style="width:'.$iconWidth.'px;"></TD>';
     echo '  <TD class="ganttLeftTopLine" style="width:'.$iconWidth.'px;"></TD>';
     echo '  <TD class="ganttLeftTopLine" colspan="'.(($lowRes)?$lowRes:'5').'" style="width:'.($nameWidth+2*$dateWidth+2*$workWidth).'px">';
-    echo '<table style="width:98%"><tr><td style="width:99%">'.htmlEncode($resource->name).' - '.i18n($rangeType).' '.$rangeValueDisplay;
+    
+    echo '<table style="width:98%"><tr><td style="width:99%">';
+    
+    echo '<button dojoType="dijit.form.Button" style="font-size:5px; text-align: center; position: relative; left: -1px;vertical-align: middle; height:16px; width:16px;" iconClass="iconCollapse" class="imputationExpand">';
+    echo '<script type="dojo/connect" event="onClick" args="evt">collapseExpandAll('.$jsonTab . ',' . $resourceId . ',' . '\'close\'' .');</script>';
+    echo '</button>';
+    echo '<button dojoType="dijit.form.Button" style="margin-right: 20px; font-size:5px; text-align: center; position: relative; left: -1px;vertsical-align: middle; height:16px; width:16px;" iconClass="iconExpand" class="imputationExpand">';
+    echo '<script type="dojo/connect" event="onClick" args="evt">collapseExpandAll('.$jsonTab . ',' . $resourceId . ',' . '\'open\'' .');</script>';
+    echo '</button>';
+    echo htmlEncode($resource->name).' - '.i18n($rangeType).' '.$rangeValueDisplay;
     echo '</td>';
     if (!$print and !$period->validated and !$period->submitted and !$lowRes) { // and $resourceId == $user->id
       echo '<td style="width:1%">';
