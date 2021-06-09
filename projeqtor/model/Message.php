@@ -43,6 +43,8 @@ class Message extends SqlElement {
   public $_sec_detail;
   public $idProfile;
   public $idProject;
+  public $idOrganization;
+  public $idTeam;
   public $idAffectable;
   public $showOnLogin;
   
@@ -169,10 +171,10 @@ public function getValidationScript($colName) {
   
   public function setAttributes() {
     if (isNewGui()) {
-      if ($this->showOnLogin) self::$_fieldsAttributes["showOnLogin"]="hidden";
-      self::$_fieldsAttributes["_sec_detail"]="hidden";
-      self::$_fieldsAttributes["idProfile"]="hidden";
-      self::$_fieldsAttributes["idProject"]="hidden";
+      //if ($this->showOnLogin) self::$_fieldsAttributes["showOnLogin"]="hidden";
+      //self::$_fieldsAttributes["_sec_detail"]="hidden";
+      //self::$_fieldsAttributes["idProfile"]="hidden";
+      //self::$_fieldsAttributes["idProject"]="hidden";
       //if (Parameter::getUserParameter('paramLayoutObjectDetail')=='tab') self::$_fieldsAttributes["_sec_message"]="hidden";
     } else {
       //self::$_fieldsAttributes["_sec_message"]="hidden";
