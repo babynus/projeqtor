@@ -352,6 +352,12 @@ class StatusMail extends SqlElement {
           }
         }
       }
+      $colScript .= ' if (mailable=="User") { ';
+      $colScript .= ' dijit.byId("idStatus").reset();';
+      $colScript .= ' dijit.byId("idStatus").set("readOnly",true);';
+      $colScript .= ' } else { ';
+      $colScript .= ' dijit.byId("idStatus").set("readOnly",false);';
+      $colScript .= ' }';
       $colScript .= '  dijit.byId("idType").set("value",null);';
       $colScript .= '  refreshList("idType","scope", mailable);';
       $colScript .= '  dijit.byId("idEventForMail").reset();';
