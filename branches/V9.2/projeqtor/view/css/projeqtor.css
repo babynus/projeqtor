@@ -1231,6 +1231,7 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
   font-size: 90%;
   padding: 1px 5px 1px 5px;
   border: 1px solid #AAAAAA;
+  background-clip: padding-box;
   vertical-align: top;
   background-color: #FFFFFF;
 }
