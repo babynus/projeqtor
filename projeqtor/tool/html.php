@@ -492,7 +492,46 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $restrictArray[$bl->id]=$bl->name;
     }
   }
-
+  if ($obj and $col=='idEventForMail' and property_exists($obj, 'idMailable')) {
+    $critValue=SqlList::getNameFromId('Mailable', $obj->idMailable,false);
+    if (! property_exists ( $critValue, 'idResource' )) {
+      $excludeArray [1]='NO'; // 1 responsibleChange
+    }
+    if (! property_exists ( $critValue, '_Note' )) {
+      $excludeArray [2]='NO';
+      $excludeArray [4]='NO';
+    }
+    if (! property_exists ( $critValue, '_Link' )) {
+      $excludeArray [12]='NO';
+      $excludeArray [13]='NO';
+    }
+    if (! property_exists ( $critValue, '_Attachment' )) {
+      $excludeArray [3]='NO';
+    }
+    if ($critValue != 'Project') {
+      $excludeArray [10]='NO';
+      $excludeArray [11]='NO';
+    }
+    if (! property_exists ( $critValue, '_Assignment' )) {
+      $excludeArray [7]='NO';
+      $excludeArray [8]='NO';
+    }
+    if (! property_exists ( $critValue, 'description' )) {
+      $excludeArray [5]='NO';
+    }
+    if (! property_exists ( $critValue, 'result' )) {
+      $excludeArray [6]='NO';
+    }
+    if(! property_exists ( $critValue, 'idStatus' )){
+      $excludeArray [14]='NO';
+    }
+    if(! property_exists ( $critValue, 'idPriority' )){
+      $excludeArray [15]='NO';
+    }
+    if($critValue!='User'){
+      $excludeArray [16]='NO';
+    }
+  }
   if ($obj) {
     // Current object is passed to the function, use it to apply restrictions or exclusions 
     // All lists froms objectDetail.php come here

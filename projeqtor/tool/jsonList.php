@@ -581,6 +581,9 @@ if ($type == 'empty') {
       if (! property_exists ( $critValue, 'result' )) {
         unset ( $list [6] ); // 6 resultChange
       }
+      if(! property_exists ( $critValue, 'idStatus' )){
+        unset ( $list [14] ); // 14 status change
+      }
       if(! property_exists ( $critValue, 'idPriority' )){
         unset ( $list [15] ); // 15 priorityChange
       }
