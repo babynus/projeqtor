@@ -3105,7 +3105,12 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
     if (selected) { // Check that selected is in the list
       var found=false;
       items.forEach(function(item) {
-        selectionList=selected.split('_');
+        if(Array.isArray(selected)==false){
+          if(Number.isInteger(selected)==true)selected=selected.toString();
+          selectionList=selected.split('_');
+        }else{
+          selectionList=selected;
+        }
         if (selectionList.includes(item.id)) found=true;
       });
       if (! found) mySelect.set("value", items[0].id);
@@ -3117,7 +3122,12 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
     if(destination){
       if(destination.substr(0,15)=='filterValueList' || destination=='multipleUpdateValueList') {
         var list=dojo.byId(destination);
-        selectionList=selected.split('_');
+        if(Array.isArray(selected)==false){
+          if(Number.isInteger(selected)==true)selected=selected.toString();
+          selectionList=selected.split('_');
+        }else{
+          selectionList=selected;
+        }
         //while (list.options.length) {list.remove(0);} // Clean combo
         items.forEach(function(item) {
           if (!item.name || item.id==' ' || item.name==selected) {
@@ -7641,7 +7651,6 @@ function setDragAndDropAttachmentSubTask(destination,tableClass,rawClass,attachm
       var divAttach=el.querySelector('.'+attachmentDivClass);
       if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
         var idDiv=divAttach.childNodes[1].firstChild.id;
-        //console.log("addDropTarget to "+idDiv+" => "+el.id);
         dijit.byId(idDiv).reset();
         dijit.byId(idDiv).addDropTarget(el,false);
       }
