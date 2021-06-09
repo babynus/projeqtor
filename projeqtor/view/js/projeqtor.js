@@ -7919,12 +7919,24 @@ function hideActionProjectSelector() {
 }
 
 function displayCheckBoxDefinitionLine(){
+  var table= dojo.byId('tableCheckBoxDef');
+  var lst=table.querySelectorAll('.dialogChecklistDefinitionLineChoice');
   var requiredVisibility=dojo.byId('tr_dialogChecklistDefinitionLineRequired').style.visibility;
   var exclusiveVisibility=dojo.byId('tr_dialogChecklistDefinitionLineExclusive').style.visibility;
-  if(requiredVisibility=='hidden' && exclusiveVisibility=='hidden' && this.value!=''){
+  var noVal=false;
+  
+  lst.forEach(function (item){
+   var input=dijit.byId(item.firstChild.firstChild.id);
+    if(input.value!=''){
+      noVal=true;
+      return;
+    }
+  });
+
+  if(requiredVisibility=='hidden' && exclusiveVisibility=='hidden' && noVal){
     dojo.byId('tr_dialogChecklistDefinitionLineRequired').style.visibility='visible';
     dojo.byId('tr_dialogChecklistDefinitionLineExclusive').style.visibility='visible';
-  }else {
+  }else if (requiredVisibility=='visible' && exclusiveVisibility=='visible' && !noVal) {
     dojo.byId('tr_dialogChecklistDefinitionLineRequired').style.visibility='hidden';
     dojo.byId('tr_dialogChecklistDefinitionLineExclusive').style.visibility='hidden'
   }
