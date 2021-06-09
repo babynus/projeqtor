@@ -294,8 +294,8 @@ CREATE TABLE `${prefix}pokervote` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(259, 'menuPokerSession', 7, 'object', 155, Null, 0, 'Work '),
-(260, 'menuPokerSessionVoting', 7, 'object', 160, Null, 0, 'Work '),
+(259, 'menuPokerSession', 7, 'object', 155, 'Project', 0, 'Work '),
+(260, 'menuPokerSessionVoting', 7, 'object', 160, 'Project', 0, 'Work '),
 (268, 'menuPokerSessionType', 79, 'object', 981, 'ReadWriteType', 0, 'Type'),
 (269, 'menuPokerComplexity',36,'object', 900,'ReadWriteList',0,'ListOfValues');
 
@@ -323,7 +323,7 @@ INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`)
 ('PokerSession', 'session with due date voting', 20, 1, 0);
 
 INSERT INTO `module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES 
-(22,'modulePoker','110',1,0,0); 
+(22,'modulePoker','110',null,0,0); 
 
 INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (198,22,259,0,0),
@@ -335,9 +335,6 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (1, 259, 1),
 (2, 259, 1),
 (3, 259, 1),
-(1, 260, 1),
-(2, 260, 1),
-(3, 260, 1),
 (1, 268, 1),
 (2, 268, 1),
 (3, 268, 1),
@@ -345,17 +342,20 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (2, 269, 1),
 (3, 269, 1);
 
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`)
+SELECT id , 260,1 from `${prefix}profile`;
+
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1, 259, 8),
 (2, 259, 2),
 (3, 259, 7),
-(1, 260, 2),
-(2, 260, 9),
-(3, 260, 1),
-(4, 260, 1),
-(6, 260, 9),
+(1, 260, 4),
+(2, 260, 4),
+(3, 260, 4),
+(4, 260, 4),
+(5, 260, 4),
+(6, 260, 4),
 (7, 260, 9),
-(5, 260, 9),
 (1, 268, 8),
 (2, 268, 2),
 (3, 268, 7),

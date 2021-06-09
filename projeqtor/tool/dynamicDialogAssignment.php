@@ -133,7 +133,7 @@ if ($planningMode=='RECW') {
          <input id="isResourceTeam" name="isResourceTeam" type="hidden" value="<?php echo $isResourceTeam;?>" />
          <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
          <input id="planningMode" name="planningMode" type="hidden" value="<?php echo $planningMode;?>" />
-         <?php if($refType=="PokerSession"){?><input id="idPokerSession" name="idPokerSession" type="hidden" value="<?php echo $obj->id ;?>" /><?php }?>
+         <input id="idPokerSession" name="idPokerSession" type="hidden" value="<?php echo $refId ;?>" />
       
          <table>
            <tr>
