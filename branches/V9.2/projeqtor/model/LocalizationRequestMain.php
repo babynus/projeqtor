@@ -165,7 +165,6 @@ class LocalizationRequestMain extends SqlElement
         $result=parent::save();
         if ($old->idStatus != $this->idStatus){
             $localizationRequestType = new LocalizationRequestType($this->idLocalizationRequestType);
-            debugLog("current status=$this->idStatus, will generate on status=$localizationRequestType->idStatus");
             if ($this->idStatus == $localizationRequestType->idStatus){
                 $isCreated = $this->generateItemsOnchangeStatus();
             }
