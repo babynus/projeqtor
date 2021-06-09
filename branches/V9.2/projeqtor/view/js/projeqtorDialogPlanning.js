@@ -230,8 +230,7 @@ function saveAssignment(definitive) {
           loadDialog('dialogAssignment', null, false, params);
         } else {
           if (dojo.byId('objectClass').value == 'PokerSession') {
-            url="../tool/savePokerMember.php";
-            loadContent(url, "resultDivMain", "assignmentForm", true);
+            loadContent("../tool/savePokerMember.php", "resultDivMain", "assignmentForm");
           }
           dijit.byId('dialogAssignment').hide();
         }
@@ -241,8 +240,7 @@ function saveAssignment(definitive) {
     } else {
       loadContent(url, "resultDivMain", "assignmentForm", true, 'assignment');
       if (dojo.byId('objectClass').value == 'PokerSession') {
-        url="../tool/savePokerMember.php";
-        loadContent(url, "resultDivMain", "assignmentForm", true);
+        loadContent("../tool/savePokerMember.php", "resultDivMain", "assignmentForm");
       }
       dijit.byId('dialogAssignment').hide();
     }

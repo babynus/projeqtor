@@ -291,3 +291,14 @@ function voteToPokerItem(idPokerSession, idItem, itemList, vote) {
     }
   });
 }
+
+function savePokerMember() {
+	  dojo.xhrPost({
+	    url : '../tool/voteToPokerItem.php?idPokerSession=' + idPokerSession
+	        + '&idItem=' + idItem + '&vote=' + vote,
+	    handleAs : "text",
+	    load : function(data) {
+	      refreshPokerItemResult(idPokerSession, idItem, itemList);
+	    }
+	  });
+	}
