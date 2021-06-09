@@ -554,3 +554,7 @@ UPDATE `${prefix}report` set sortOrder=855 where id=88 ;
 UPDATE `${prefix}navigation` set idParent=13, sortOrder=110 where id=69 ;
 UPDATE `${prefix}navigation` set idParent=14, sortOrder=110 where id=70;
 
+-- Patchs IGE
+ALTER TABLE `${prefix}message` ADD `idOrganization` int(12) unsigned DEFAULT NULL COMMENT '12';
+ALTER TABLE `${prefix}message` ADD `idTeam` int(12) unsigned DEFAULT NULL COMMENT '12';
+
