@@ -2296,7 +2296,8 @@ border:1px solid var(--color-medium);
   color:var(--color-secondary);
 }
 .ProjeQtOrNewGui #objectStream .noteData {
-	background: var(--color-background);
+	background-color: var(--color-background);
+	background-clip: padding-box;
 }
 .ProjeQtOrNewGui #dialogReminder {
 	font-size: 9pt;
