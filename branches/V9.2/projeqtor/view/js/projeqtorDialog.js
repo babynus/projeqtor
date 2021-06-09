@@ -1140,6 +1140,48 @@ function copyObjectBox(copyType) {
 // 7.3.0 Not usefull anymore with dojo 1.14 and 2 lines below
 function pauseBodyFocus() { dojo.query(".cke_dialog_body").addClass("dijitPopup");}      
 function resumeBodyFocus() { dojo.query(".cke_dialog_body").removeClass("dijitPopup");}   
+//Function handling change in note size
+function changeNoteSize(objName) {
+    const collapse = "iconButtonCollapseHide16 iconButtonCollapseHide iconSize16";
+    const fullScreen = "iconButtonCollapseOpen16 iconButtonCollapseOpen iconSize16";
+
+    let noteDiv = document.getElementById(objName + "_Note");
+    let mainDiv = document.getElementById("mainDiv");
+    let newDiv;
+    let count = 1;
+
+    if (document.getElementById("idIconButtonCollapseOpen").className == fullScreen) {
+
+        mainDiv.style.visibility = "hidden";
+        document.getElementById("idIconButtonCollapseOpen").className = collapse;
+
+        newDiv = document.createElement("div");
+        newDiv.setAttribute("name", objName + "_Note");
+        
+        
+        let temp = noteDiv.cloneNode(true);
+        newDiv.appendChild(temp);
+
+        noteDiv.id = objName + "_Note_Hidden";
+        document.body.insertBefore(newDiv, document.body.firstChild);
+        
+        document.getElementById(objName + "_Note").style.width = "98%";
+        while (count <= newDiv.querySelectorAll("[id=idIconRemove]").length * 3 + 1) {
+            newDiv.getElementsByClassName("roundedButtonSmall")[count].parentNode.style.visibility = "collapse";
+            count += 1;
+        }
+        document.getElementById(objName + "_Note_pane").style.height = "94vh";
+        document.getElementById(objName + "_Note_pane").style.overflow = "auto";
+
+    } else {
+        document.getElementsByName(objName + "_Note")[0].remove();
+        document.getElementById(objName + "_Note_Hidden").id = objName + "_Note";
+
+        document.getElementById("idIconButtonCollapseOpen").className = fullScreen;
+        mainDiv.style.visibility = "visible";
+    }
+}
+
 function addNote(reply, idParentNote) {
   if (dijit.byId("noteToolTip")) {
     dijit.byId("noteToolTip").destroy();

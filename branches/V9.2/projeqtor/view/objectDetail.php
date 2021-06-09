@@ -4255,6 +4255,8 @@ function drawNotesFromObject($obj, $refresh=false) {
   if (!$print) {
     echo '<td class="noteHeader smallButtonsGroup" style="width:10%">';
     if ($obj->id!=null and !$print and $canUpdate) {
+      $noteFunction = "changeNoteSize(" . "'" . get_class($obj) . "'" . ");";
+      echo '<a style="position:absolute;right:10px" onClick=' . $noteFunction . ' title="Change size">'.formatSmallButton('ButtonCollapseOpen', true).'</a>';
       echo '<a onClick="addNote(false);" title="'.i18n('addNote').'" >'.formatSmallButton('Add').'</a>';
     }
     echo '</td>';
@@ -4323,7 +4325,7 @@ function drawNotesFromObject($obj, $refresh=false) {
       }else{
         echo '<td colspan="6" class="noteData" style="width:'.(($print)?'95':'85').'%">';
       }
-      echo "<div style='position:absolute;right:".((isNewGui())?'10':'3')."px;height:20px;width:100px;'>";
+      echo "<div style='right:".((isNewGui())?'10':'3')."px;top:2px;'>";
       echo formatUserThumb($userId, $userName, 'Creator');
       echo formatDateThumb($creationDate, $updateDate);
       echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
@@ -4342,7 +4344,7 @@ function drawNotesFromObject($obj, $refresh=false) {
         }
       }
       echo "</div>";
-      if (!$print) echo '<div style="min-height:23px;max-width:'.$widthPctNote.';overflow-x:auto;" >';
+      if (!$print) echo '<div style="min-height:23px;max-width:95%;overflow-x:auto;" >';
       $strDataHTML=$note->note;
       if ($print and $outMode=="pdf") {
       	if ($preseveHtmlFormatingForPDF) {
