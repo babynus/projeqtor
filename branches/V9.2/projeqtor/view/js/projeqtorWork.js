@@ -28,14 +28,29 @@
 // This file is included in the main.php page, to be reachable in every context
 // ============================================================================
 
+function collapseExpandAll(tab, resourceId, action){
+  var line = 1;
+  for (var key in tab) {
+    if (tab.hasOwnProperty(key) && !tab[key]['elementary']){
+      var scope = 'Imputation_' + resourceId + '_' + tab[key]['refType'] + '_' + tab[key]['refId'];
+      workOpenCloseLine(line, scope, action);
+    }
+    line ++;
+  }
+
+}
+
 /**
  * Open / Close Group : hide sub-lines
  */
-function workOpenCloseLine(line, scope) {
+function workOpenCloseLine(line, scope, action= null) {
   var nbLines=dojo.byId('nbLines').value;
   var wbsLine=dojo.byId('wbs_'+line).value;
   var wbsLineTop=wbsLine.substr(0,wbsLine.lastIndexOf("."));
-  var action=(dojo.byId('status_'+line).value=='opened')?"close":"open";
+  if (action == null){
+    var action=(dojo.byId('status_'+line).value=='opened')?"close":"open";
+  }
+
   if (action=="close") {
     dojo.byId('group_' + line).className="ganttExpandClosed";
     dojo.byId('status_'+line).value="closed";
