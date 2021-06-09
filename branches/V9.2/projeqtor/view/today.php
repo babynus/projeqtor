@@ -109,6 +109,10 @@ function showMessages() {
   $where.=" and (idUser is null or idUser='".Sql::fmtId($user->id)."')";
   $where.=" and (idProfile is null or idProfile in ".transformListIntoInClause($user->getAllProfiles()).")";
   $where.=" and (idProject is null or idProject in ".transformListIntoInClause($user->getVisibleProjects()).")";
+  if ($user->idTeam)
+    $where.=" and (idTeam is null or idTeam = " . $user->idTeam . ")";
+  else
+    $where.=" and (idTeam is null)";
   
   $sort="id desc";
   $listMsg=$msg->getSqlElementsFromCriteria(null, false, $where, $sort);
@@ -118,6 +122,17 @@ function showMessages() {
     echo '<form id="todayMessageForm" name="todayMessageForm">';
     echo '<table align="center" style="width:100%">';
     foreach ($listMsg as $msg) {
+      if ($msg->idOrganization) {
+        if (!$user->idOrganization)
+            continue;
+        $msgOrgaSort = new Organization($msg->idOrganization);
+        $msgOrgaSortUser = new Organization($user->idOrganization);
+        if ($msgOrgaSort->sortOrder && $msgOrgaSortUser->sortOrder) {
+          if (strpos($msgOrgaSortUser->sortOrder, $msgOrgaSort->sortOrder) !== 0)
+            continue;
+        } else if ($msg->idOrganization != $user->idOrganization)
+            continue;
+      }
       #Florent ticket 4030
       $startDate=$msg->startDate;
       $endDate=$msg->endDate;
@@ -1068,42 +1083,7 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
 
     <?php 
     } 
-    $titlePane="Today_message";
-    if (! isNewGui() and (!$print or !array_key_exists($titlePane, $collapsedList))) {
-      if (!$print ) {?>   
-      <div dojoType="dijit.TitlePane"
-        open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
-        id="<?php echo $titlePane;?>"
-        onHide="saveCollapsed('<?php echo $titlePane;?>');"
-        onShow="saveExpanded('<?php echo $titlePane;?>');"
-        title="<?php echo i18n('menuMessage');?>">  
-      <?php 
-      } else {?>
-      <div class="section"><?php echo i18n('menuMessage');?></div>
-      <br />
-      <div>    
-      <?php
-      }   
-      //showMessages();
-      ?>
-      </div>
-      <br /><?php
-    }
-    $paramFirstPage=Parameter::getUserParameter('startPage');
-    if ($paramFirstPage=='startGuide.php' and !$print) {
-      $titlePane="Today_startGuide";
-      ?>
-      <div dojoType="dijit.TitlePane"
-          open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
-          id="<?php echo $titlePane;?>"
-          onHide="saveCollapsed('<?php echo $titlePane;?>');"
-          onShow="saveExpanded('<?php echo $titlePane;?>');"
-          title="<?php echo i18n('startGuideTitle');?>">  
-        <?php include "startGuide.php";?>
-      </div>
-      <br />
-    <?php
-    }
+    
     
     $drawDiv=false;
     $coutTlist=count($todayList);
@@ -1140,6 +1120,45 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
             echo '</script>';
           
           $drawDiv=true;
+          
+          // MSG
+          $titlePane="Today_message";
+          if (!$print or !array_key_exists($titlePane, $collapsedList)) {
+            if (!$print ) {?>
+            <div dojoType="dijit.TitlePane"
+              open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
+              id="<?php echo $titlePane;?>"
+              onHide="saveCollapsed('<?php echo $titlePane;?>');"
+              onShow="saveExpanded('<?php echo $titlePane;?>');"
+              title="<?php echo i18n('menuMessage');?>">  
+            <?php 
+            } else {?>
+            <div class="section"><?php echo i18n('menuMessage');?></div>
+            <br />
+            <div>    
+            <?php
+            }   
+            showMessages();
+            ?>
+            </div>
+            <br /><?php
+          }
+          // Start Guide   
+          $paramFirstPage=Parameter::getUserParameter('startPage');
+          if ($paramFirstPage=='startGuide.php' and !$print) {
+            $titlePane="Today_startGuide";
+            ?>
+                <div dojoType="dijit.TitlePane"
+                    open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
+                    id="<?php echo $titlePane;?>"
+                    onHide="saveCollapsed('<?php echo $titlePane;?>');"
+                    onShow="saveExpanded('<?php echo $titlePane;?>');"
+                    title="<?php echo i18n('startGuideTitle');?>">  
+                  <?php include "startGuide.php";?>
+                </div>
+                <br />
+              <?php
+              }
         }
         if ($todayItem->scope=='static' and $todayItem->staticSection=='AssignedTasks') {
           showAssignedTasks();
