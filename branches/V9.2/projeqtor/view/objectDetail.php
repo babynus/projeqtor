@@ -9930,7 +9930,7 @@ function drawPokerVote($obj){
       }
       echo '</td>';
       echo '<td><table style="width:200px;margin-right: 5px;margin-left: 5px;" class="pokerComplexityTable"><tr><td>';
-      echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.i18n('colMyVote').'</td></tr>';
+      echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.i18n('colMyPokerVote').'</td></tr>';
       foreach ($pokerComplexityList as $pokerComplexity){
         echo '<tr>';
         echo '<td class="pokerComplexity" style="width:50%;height:15px;text-align:center;cursor:pointer;" onclick="voteToPokerItem('.$obj->id.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');">'.$pokerComplexity->name.'</td>';
@@ -9996,7 +9996,7 @@ function drawPokerVote($obj){
   }
 }
 
-function drawPokerItem($obj, $scope){
+function drawPokerItem($obj){
   global $print;
   $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
   if ($obj->idle==1) {

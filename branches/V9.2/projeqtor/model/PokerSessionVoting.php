@@ -30,9 +30,9 @@
 require_once('_securityCheck.php');
 class PokerSessionVoting extends SqlElement {
    
+   public $_sec_description;
    public $id;
    public $name;
-   public $_sec_pokerVote;
    public $_spe_pokerVote;
   
    private static $_databaseTableName = 'pokersession';
