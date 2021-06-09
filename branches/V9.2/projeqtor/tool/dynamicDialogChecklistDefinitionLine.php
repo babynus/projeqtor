@@ -55,7 +55,7 @@ if ($line->id) {
 <form id="dialogChecklistDefinitionLineForm" name="dialogChecklistDefinitionLineForm" action="">
 <input type="hidden" name="checklistDefinitionLineId" value="<?php echo $line->id;?>" />
 <input type="hidden" name="checklistDefinitionId" value="<?php echo htmlEncode($checkId);?>" />
-<table style="width: 100%;">
+<table style="width: 100%;" id="tableCheckBoxDef">
   <tr>
     <td class="dialogLabel" ><label><?php echo i18n('colName').Tool::getDoublePoint();?></label></td>
     <td><input type="text" dojoType="dijit.form.TextBox" 
@@ -91,10 +91,11 @@ $cpVar=0;
   <tr>
     <td class="dialogLabel" ><label><?php echo i18n('colChoice') . ' #'.$i.Tool::getDoublePoint();?></label></td>
     <td><input type="text" dojoType="dijit.form.TextBox" 
+    
       id="dialogChecklistDefinitionLineChoice_<?php echo $i?>" 
       name="dialogChecklistDefinitionLineChoice_<?php echo $i?>"
       value="<?php $var="check0$i";echo $line->$var;if($line->$var!='')$cpVar++?>"
-      style="width: 300px;" maxlength="100" class="input" onchange="displayCheckBoxDefinitionLine();"/>
+      style="width: 300px;" maxlength="100" class="input dialogChecklistDefinitionLineChoice" onchange="displayCheckBoxDefinitionLine();"/>
     </td>  
   </tr>
   <tr>
