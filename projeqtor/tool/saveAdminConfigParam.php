@@ -31,14 +31,12 @@ require_once "../tool/projeqtor.php";
 
 $param=(RequestHandler::isCodeSet('name'))?RequestHandler::getValue('name'):false;
 $value=(RequestHandler::isCodeSet('value'))?RequestHandler::getNumeric('value'):false;
-debugLog($value);
 
 Sql::beginTransaction();
 $user=getSessionUser();
 
 
 if($param==false or ($value==false and $value!=0)) exit ;
-debugLog("on passe ici et il y a al valmuer => ".$value);
 $obj=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>$param));
 
 if($obj->id==''){
