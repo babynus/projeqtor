@@ -5069,7 +5069,7 @@ function formatSmallButton($class, $isClass=false, $activeButton=true, $dontAppl
       $buttonClass="";
       $cursorMouse= " cursor:pointer; ";
     }
-    $result.="<span class='$buttonClass' style='".$cursorMouse."top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><div class='icon$button$class$size icon$button$class iconSize$size' style='' >&nbsp;</div></span>";
+    $result.="<span class='$buttonClass' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><div id='idIcon$class' class='icon$button$class$size icon$button$class iconSize$size' style='' >&nbsp;</div></span>";
   }
   return $result;
 }

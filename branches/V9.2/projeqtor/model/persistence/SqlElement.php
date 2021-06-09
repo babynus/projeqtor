@@ -1235,11 +1235,12 @@ abstract class SqlElement {
       }
 
       $hasPriorityChanged = false;
-      if (property_exists($this, 'idPriority') and property_exists($old, 'idPriority') and $this->idPriority != $old->idPriority)
+      if (property_exists($this, 'idPriority') and isset($old) and property_exists($old, 'idPriority') and $this->idPriority != $old->idPriority)
         $hasPriorityChanged = true;
       $hasUserBeenCreated = false;
-      if (get_class($this) == "User" && $old->id == "")
+      if ( (get_class($this) == "User" && $old->id == "") or ( (get_class($this) == "Resource" or get_class($this) == "Contact") and $this->isUser and ! $old->isUser) )
         $hasUserBeenCreated = true;
+      if (isset($old) and (get_class($this) == "Resource" or get_class($this) == "Contact")) debugLog("Class=".get_class($this)." old=$old->isUser new=$this->isUser created=$hasUserBeenCreated");
       // if (($statusChanged or $responsibleChanged) and stripos($returnValue,'id="lastOperationStatus" value="OK"')>0 ) {
       
       if (stripos ( $returnValue, 'id="lastOperationStatus" value="OK"' ) > 0 and ! property_exists($this,'_noHistory')
@@ -5304,12 +5305,13 @@ abstract class SqlElement {
   public function sendMailIfMailable($newItem = false, $statusChange = false, $directStatusMail = null, $responsibleChange = false, $noteAdd = false, $attachmentAdd = false, $noteChange = false, $descriptionChange = false, $resultChange = false, $assignmentAdd = false, $assignmentChange = false, $anyChange = false,$affectationAdd = false , $affectationChange = false, $linkAdd = false, $linkDelete = false, $attachments=false, $priorityChange = false, $newUserCreated = false) {
     global $cronnedScript, $doNotTriggerAlerts;
     if ($doNotTriggerAlerts==true) return false;
-    
+    debugLog("sendMailIfMailable");
     $objectClass = get_class($this);
     $idProject = ($objectClass == 'Project') ? $this->id : ((property_exists ( $this, 'idProject' )) ? $this->idProject : null);
     if ($objectClass == 'TicketSimple') {
       $objectClass = 'Ticket';
     }
+    if (($objectClass=='Resource' or $objectClass=='Contact') and $newUserCreated) $objectClass='User';
     if ($objectClass == 'History' or $objectClass == 'Audit' or $objectClass == 'KpiHistory' or ! in_array($objectClass,SqlList::getListNotTranslated('Mailable'))) {
       return false; // exit : not for History
     }
