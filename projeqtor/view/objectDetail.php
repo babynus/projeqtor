@@ -10045,7 +10045,7 @@ function drawPokerItem($obj){
       echo ' <button id="openPokerVote' . $item->id . '" dojoType="dijit.form.Button" style="width:120px;vertical-align: middle;" class="roundedVisibleButton">';
       echo '   <span>' . i18n('closePokerVote') . '</span>';
       echo '   <script type="dojo/connect" event="onClick" args="evt">';
-      echo '     closePokerItemVote('.$item->id.');';
+      echo '     closePokerItemVote('.$item->id.','.$obj->id.');';
       echo '   </script>';
       echo ' </button>';
     }
