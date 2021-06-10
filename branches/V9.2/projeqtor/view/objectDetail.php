@@ -9966,7 +9966,7 @@ function drawPokerVote($obj){
               $class = 'pokerComplexitySelectedLow';
             }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $highVote){
               $class = 'pokerComplexitySelectedHigh';
-            }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $pokerItem->value){
+            }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value){
               $class = 'pokerComplexitySelectedValue';
             }
             $onclick='';
