@@ -35,6 +35,7 @@ if (array_key_exists('idProject',$_REQUEST)) {
 }
 
 $idOrganization = trim(RequestHandler::getId('idOrganization'));
+$paramActivityType = trim(RequestHandler::getId('idActivityType'));
 
 $paramTeam='';
 if (array_key_exists('idTeam',$_REQUEST)) {
@@ -90,6 +91,9 @@ if ($idOrganization!="") {
 }
 if ($paramTeam!="") {
   $headerParameters.= i18n("colIdTeam") . ' : ' . htmlEncode(SqlList::getNameFromId('Team', $paramTeam)) . '<br/>';
+}
+if ($paramActivityType!="") {
+  $headerParameters.= i18n("colIdActivityType") . ' : ' . htmlEncode(SqlList::getNameFromId('ActivityType', $paramActivityType)) . '<br/>';
 }
 if ($periodType=='year' or $periodType=='month' or $periodType=='week') {
   $headerParameters.= i18n("year") . ' : ' . $paramYear . '<br/>';
@@ -147,39 +151,43 @@ $parent=array();
 $resources=array();
 $sumActi=array();
 foreach ($lstWork as $work) {
-  if (! array_key_exists($work->idResource,$resources)) {
-    $resources[$work->idResource]=SqlList::getNameFromId('Resource', $work->idResource);
-  }
-  $refType=$work->refType;
-  $refId=$work->refId;
-  $key=$refType . "#" . $refId;
-  if (! array_key_exists($key,$activities)) {
-  	if ($refType) {
-      $obj=new $refType($refId);
-  	} else {
-  		$obj=new Ticket();
-  	}
-    $key=SqlList::getFieldFromId('Project', $obj->idProject, 'sortOrder').'-'.$refType . "#" . $refId;
-    $activities[$key]=$obj->name;
-    $description[$key]=$obj->description;
-    if ($refType=='Project') {
-      $parent[$key]="[" . i18n('Project') . "]";
-    } else {
-      if (property_exists($obj,'idActivity') and $obj->idActivity) {
-        $parent[$key]=SqlList::getNameFromId('Activity', $obj->idActivity);
-      } else {
-        $parent[$key]="";
-      }
+  $act = new Activity($work->refId);
+  $actType = new activityType($act->idActivityType);
+  if ($paramActivityType == "" or $paramActivityType == $act->idActivityType) {
+    if (!array_key_exists($work->idResource, $resources)) {
+      $resources[$work->idResource] = SqlList::getNameFromId('Resource', $work->idResource);
     }
-    $project[$key]=SqlList::getNameFromId('Project', $obj->idProject);
+    $refType = $work->refType;
+    $refId = $work->refId;
+    $key = $refType . "#" . $refId;
+    if (!array_key_exists($key, $activities)) {
+      if ($refType) {
+        $obj = new $refType($refId);
+      } else {
+        $obj = new Ticket();
+      }
+      $key = SqlList::getFieldFromId('Project', $obj->idProject, 'sortOrder') . '-' . $refType . "#" . $refId;
+      $activities[$key] = $obj->name;
+      $description[$key] = $obj->description;
+      if ($refType == 'Project') {
+        $parent[$key] = "[" . i18n('Project') . "]";
+      } else {
+        if (property_exists($obj, 'idActivity') and $obj->idActivity) {
+          $parent[$key] = SqlList::getNameFromId('Activity', $obj->idActivity);
+        } else {
+          $parent[$key] = "";
+        }
+      }
+      $project[$key] = SqlList::getNameFromId('Project', $obj->idProject);
+    }
+    if (!array_key_exists($work->idResource, $result)) {
+      $result[$work->idResource] = array();
+    }
+    if (!array_key_exists($key, $result[$work->idResource])) {
+      $result[$work->idResource][$key] = 0;
+    }
+    $result[$work->idResource][$key] += $work->work;
   }
-  if (! array_key_exists($work->idResource,$result)) {
-    $result[$work->idResource]=array();
-  }
-  if (! array_key_exists($key,$result[$work->idResource])) {
-    $result[$work->idResource][$key]=0;
-  } 
-  $result[$work->idResource][$key]+=$work->work;
 }
 ksort($activities);
 if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
