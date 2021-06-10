@@ -168,7 +168,7 @@ if(sessionValueExists('listShowIdleTimesheet')and getSessionValue('listShowIdleT
 				        </div>&nbsp;
 				      </td>
 				  <?php }?>
-              <td style="width: 180px;text-align: right; align: left;" nowrap="nowrap" colspan="2">
+              <td style="padding-left:10px; text-align: right; align: left;" nowrap="nowrap" colspan="2">
                 <?php echo i18n("colFirstDay");?> 
                 <div dojoType="dijit.form.DateTextBox"
                 	<?php if (sessionValueExists('browserLocaleDateFormatJs')) {
