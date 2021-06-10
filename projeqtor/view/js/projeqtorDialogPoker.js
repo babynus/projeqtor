@@ -202,23 +202,6 @@ function startPausePokerSession(idPokerSession) {
             + idPokerSession,
         handleAs : "text",
         load : function(data) {
-          var callBack=function() {
-        	selectIconMenuBar('PokerSessionVoting');
-          };
-          loadContent("objectMain.php?objectClass=PokerSessionVoting", "centerDiv",
-              false, false, false, idPokerSession, false, callBack, true);
-        }
-      });
-}
-
-function stopPausePokerSession(idPokerSession) {
-  dojo
-      .xhrPost({
-        url : '../tool/startPausePokerSession.php?idPokerSession='
-            + idPokerSession,
-        handleAs : "text",
-        load : function(data) {
-          refreshGrid();
           loadContent("objectDetail.php", "detailDiv", "listForm", null, null,
               null, null, null, true);
         }

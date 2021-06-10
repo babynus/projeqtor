@@ -31,11 +31,9 @@ require_once "../tool/projeqtor.php";
 
 $id=RequestHandler::getId('idPokerSession');
 $pokerSession = new PokerSession($id);
-if(!$pokerSession->handled){
-  $pokerSession->handled = 1;
-  $pokerSession->handledDate = date('Y-m-d H:i:s');
-}else{
+if($pokerSession->handled){
   $pokerSession->handled = 0;
+  $pokerSession->save();
 }
-$pokerSession->save();
+
 ?>

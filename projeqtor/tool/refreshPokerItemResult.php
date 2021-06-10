@@ -35,6 +35,7 @@ $list = RequestHandler::getValue('itemList');
 $itemList=explode(',',$list);
 $user = getSessionUser();
 
+$obj = new PokerSession($idPokerSession);
 $pos = array_search($id, $itemList);
 if($pos < 0)$pos=0;
 $previous = ($pos>0)?true:false;
@@ -53,68 +54,69 @@ $pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$
 sort($pokerVoteList);
 $lowVote = (isset($pokerVoteList[0]))?$pokerVoteList[0]:1;
 $highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[count($pokerVoteList)-1]:99;
-if(!$pokerVote->id and !$pokerItem->value and $pokerMember->id){
-	echo '<table>';
-	echo '<tr>';
-	echo '<td align="center" class="imageColorNewGui" style="width:32px">';
-    if($previous){
-        echo '<div class="dijitButtonIcon dijitButtonIconPrevious" style="cursor:pointer;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'previous\');"></div>';
-    }
-    echo '</td>';
-	echo '<td><table style="width:200px;margin-right: 5px;margin-left: 5px;" class="pokerComplexityTable"><tr><td>';
-	echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.i18n('colMyVote').'</td></tr>';
-	foreach ($pokerComplexityList as $pokerComplexity){
-		echo '<tr>';
-		echo '<td class="pokerComplexity" style="width:50%;height:15px;text-align:center;cursor:pointer;" onclick="voteToPokerItem('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');">'.$pokerComplexity->name.'</td>';
-		echo '</tr>';
-	}
-	echo '</td></tr></table></td>';
-	echo '<td align="center" class="imageColorNewGui" style="width:32px">';
-    if($next){
-        echo '<div class="dijitButtonIcon dijitButtonIconNext" style="cursor:pointer;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'next\');"></div>';
-    }
-    echo '</td>';
-	echo '</tr>';
+if(!$pokerVote->id and !$pokerItem->value and $pokerMember->id and !$obj->done){
+  echo '<table>';
+  echo '<tr>';
+  echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+  if($previous){
+    echo '<div class="dijitButtonIcon dijitButtonIconPrevious" style="cursor:pointer;position:absolute;top:10px;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'previous\');"></div>';
+  }
+  echo '</td>';
+  echo '<td><table style="width:200px;margin: 5px;" class="pokerComplexityTable"><tr><td>';
+  echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.i18n('colMyPokerVote').'</td></tr>';
+  foreach ($pokerComplexityList as $pokerComplexity){
+    echo '<tr>';
+    echo '<td class="pokerComplexity" style="width:50%;height:15px;text-align:center;cursor:pointer;" onclick="voteToPokerItem('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');">'.$pokerComplexity->name.'</td>';
+    echo '</tr>';
+  }
+  echo '</td></tr></table></td>';
+  echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+  if($next){
+    echo '<div class="dijitButtonIcon dijitButtonIconNext" style="cursor:pointer;position:absolute;top:10px;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'next\');"></div>';
+  }
+  echo '</td>';
+  echo '</tr>';
 }else{
-	echo '<table>';
-	echo '<tr>';
-	echo '<td align="center" class="imageColorNewGui" style="width:32px">';
-    if($previous){
-        echo '<div class="dijitButtonIcon dijitButtonIconPrevious" style="cursor:pointer;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'previous\');"></div>';
+  echo '<table>';
+  echo '<tr>';
+  echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+  if($previous){
+    echo '<div class="dijitButtonIcon dijitButtonIconPrevious" style="cursor:pointer;position:absolute;top:10px;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'previous\');"></div>';
+  }
+  echo '</td>';
+  echo '<td><table><tr><td>';
+  $count = 0;
+  foreach ($pokerMemberList as $member){
+    $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$member->idResource, 'idPokerItem'=>$pokerItem->id));
+    $count++;
+    echo '<div style="float:left"><table style="width:200px;margin: 5px;">';
+    echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.htmlEncode(SqlList::getNameFromId("Resource", $member->idResource)).'</td></tr>';
+    foreach ($pokerComplexityList as $pokerComplexity){
+        $class = 'pokerComplexityResult';
+        if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $lowVote){
+          $class = 'pokerComplexitySelectedLow';
+        }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $highVote){
+          $class = 'pokerComplexitySelectedHigh';
+        }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $pokerItem->value){
+          $class = 'pokerComplexitySelectedValue';
+        }
+        $onclick='';
+        if($member->idResource == $user->id){
+          $class .= ' pokerComplexity';
+          $onclick='voteToPokerItem('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');';
+        }
+    	echo '<tr>';
+    	echo '<td class="'.$class.'" style="width:50%;height:15px;text-align:center;" onclick="'.$onclick.'">'.$pokerComplexity->name.'</td>';
+    	echo '</tr>';
     }
-    echo '</td>';
-	echo '<td><table><tr>';
-	$count = 0;
-	foreach ($pokerMemberList as $member){
-        $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$member->idResource, 'idPokerItem'=>$pokerItem->id));
-		$count++;
-		echo '<td><table style="width:200px;margin-right: 5px;margin-left: 5px;">';
-		echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.htmlEncode(SqlList::getNameFromId("Resource", $member->idResource)).'</td></tr>';
-		foreach ($pokerComplexityList as $pokerComplexity){
-            $class = 'pokerComplexityResult';
-            if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $lowVote){
-            	$class = 'pokerComplexitySelectedLow';
-            }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $highVote){
-            	$class = 'pokerComplexitySelectedHigh';
-            }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $pokerItem->value){
-            	$class = 'pokerComplexitySelectedValue';
-            }
-			echo '<tr>';
-			echo '<td class="'.$class.'" style="width:50%;height:15px;text-align:center;" onclick="voteToPokerItem('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');">'.$pokerComplexity->name.'</td>';
-			echo '</tr>';
-		}
-		echo '</table>';
-		if($count >= 3){
-			echo '</tr><tr><td><br></td></tr><tr>';
-			$count = 0;
-		}
-	}
-	echo '</table></td>';
-	echo '<td align="center" class="imageColorNewGui" style="width:32px">';
-    if($next){
-        echo '<div class="dijitButtonIcon dijitButtonIconNext" style="cursor:pointer;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'next\');"></div>';
-    }
-    echo '</td>';
+    echo '</table></div>';
+  }
+  echo '</table>';
+  echo '<td align="center" class="imageColorNewGui" style="width:32px">';
+  if($next){
+    echo '<div class="dijitButtonIcon dijitButtonIconNext" style="cursor:pointer;position:absolute;top:10px;" onclick="pokerItemNav('.$idPokerSession.','.$pokerItem->id.',\''.$list.'\', \'next\');"></div>';
+  }
+  echo '</td>';
 }
 echo '</table>';
 ?>
