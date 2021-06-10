@@ -31,6 +31,7 @@
   $objectClass='PlanningElement';
   $obj=new $objectClass();
   $table=$obj->getDatabaseTableName();
+  $paramActivityType = trim(RequestHandler::getId('idActivityType'));
 
 
   $print=false;
@@ -44,6 +45,9 @@
 	  $paramProject=trim($_REQUEST['idProject']);
 	  Security::checkValidId($paramProject);
     $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project', $paramProject)) . '<br/>';
+  }
+  if ($paramActivityType!="") {
+    $headerParameters.= i18n("colIdActivityType") . ' : ' . htmlEncode(SqlList::getNameFromId('ActivityType', $paramActivityType)) . '<br/>';
   }
   $showIdle=false;
   
@@ -121,7 +125,19 @@
     echo '</TR>';
 
     // Treat each line of result
+
+    $alreadyExistingActivity=array();
     while ($line = Sql::fetchLine($result)) {
+      if ($paramActivityType) {
+        if (array_key_exists($line["refId"], $alreadyExistingActivity))
+          $act = $alreadyExistingActivity[$line["refId"]]; 
+        else {
+          $act = new Activity($line["refId"]);
+          $alreadyExistingActivity[$line["refId"]] = $act;
+        }
+        if ($line["refType"] == "Activity" && $paramActivityType != $act->idActivityType)
+          continue;
+      }
       $line=array_change_key_case($line,CASE_LOWER);
   	  // Store result elements
       $validatedWork=round($line['validatedwork'],2);
