@@ -1543,14 +1543,31 @@
       echo $tab.$tab.'<Calendar>' . $nl;
       echo $tab.$tab.$tab.'<UID>'.($cal->id -1).'</UID>' . $nl;
       echo $tab.$tab.$tab.'<Name>'.$cal->name.'</Name>' . $nl;
-      echo $tab.$tab.$tab.'<IsBaseCalendar>'.(($cal->id==1)?1:0).'</IsBaseCalendar>' . $nl;
+      echo $tab.$tab.$tab.'<IsBaseCalendar>1</IsBaseCalendar>' . $nl;
       echo $tab.$tab.$tab.'<IsBaselineCalendar>0</IsBaselineCalendar>' .$nl;
       echo $tab.$tab.$tab.'<BaseCalendarUID>-1</BaseCalendarUID>' . $nl;
       echo $tab.$tab.$tab.'<WeekDays>' . $nl;
       for ($i=1;$i<=7;$i++) {
         echo $tab.$tab.$tab.$tab.'<WeekDay>' . $nl;
         echo $tab.$tab.$tab.$tab.$tab.'<DayType>' . $i . '</DayType>' . $nl;
-        if (($i==1 or $i==7)) {
+        $ofDays = false;
+        if($i==1 or $i==7) $ofDays= true;
+        if($i==2 and $cal->dayOfWeek1==1){
+          $ofDays= true;
+        }
+        if($i==3 and $cal->dayOfWeek2==1){
+          $ofDays= true;
+        }
+        if($i==4 and $cal->dayOfWeek3==1){
+          $ofDays= true;
+        }
+        if($i==5 and $cal->dayOfWeek4==1){
+          $ofDays= true;
+        }
+        if($i==6 and $cal->dayOfWeek5==1){
+          $ofDays= true;
+        }
+        if( $ofDays  ){
         	echo $tab.$tab.$tab.$tab.$tab.'<DayWorking>0</DayWorking>' . $nl;
         } else {
   	      echo $tab.$tab.$tab.$tab.$tab.'<DayWorking>1</DayWorking>' . $nl;
@@ -1598,11 +1615,27 @@
         foreach ($lstWork as $admWork){
           echo $tab.$tab.$tab.$tab.'<WeekDay>' . $nl;
           echo $tab.$tab.$tab.$tab.$tab.'<DayType>0</DayType>' . $nl;
-          echo $tab.$tab.$tab.$tab.$tab.'<DayWorking>0</DayWorking>' . $nl;
+          if($admWork->work < 1 ){
+            echo $tab.$tab.$tab.$tab.$tab.'<DayWorking>1</DayWorking>' . $nl;
+          }else{
+            echo $tab.$tab.$tab.$tab.$tab.'<DayWorking>0</DayWorking>' . $nl;
+          }
           echo $tab.$tab.$tab.$tab.$tab.'<TimePeriod>' . $nl;
           echo $tab.$tab.$tab.$tab.$tab.$tab.'<FromDate>'.$admWork->workDate.'T00:00:00</FromDate>' . $nl;
           echo $tab.$tab.$tab.$tab.$tab.$tab.'<ToDate>'.$admWork->workDate.'T23:59:00</ToDate>' . $nl;
           echo $tab.$tab.$tab.$tab.$tab.'</TimePeriod>' . $nl;
+          if($admWork->work < 1 ){
+            (float)$nbHourWork = $admWork->work;
+            $hourEnd = round($nbHourWork*(float)$hoursPerDay,PHP_ROUND_HALF_EVEN);
+            $explodeValue = explode(':',$startAM);
+            $valueFloat = (float)$explodeValue[0] + $hourEnd;
+            echo $tab.$tab.$tab.$tab.$tab.'<WorkingTimes>' . $nl;
+            echo $tab.$tab.$tab.$tab.$tab.$tab.'<WorkingTime>' . $nl;
+            echo $tab.$tab.$tab.$tab.$tab.$tab.$tab.'<FromTime>'.$startAM.'</FromTime>' . $nl;
+            echo $tab.$tab.$tab.$tab.$tab.$tab.$tab.'<ToTime>'.$valueFloat.':00:00</ToTime>' . $nl;
+            echo $tab.$tab.$tab.$tab.$tab.$tab.'</WorkingTime>' . $nl;
+            echo $tab.$tab.$tab.$tab.$tab.'</WorkingTimes>' . $nl;
+          }
           echo $tab.$tab.$tab.$tab.'</WeekDay>'.$nl;
         }
          if(count($lstWork)>0)echo $tab.$tab.$tab.'</WeekDays>' . $nl;
@@ -1831,7 +1864,7 @@
       echo $tab.$tab.$tab.'<RemainingOvertimeWork>PT0H0M0S</RemainingOvertimeWork>' . $nl;
       echo $tab.$tab.$tab.'<ACWP>0.00</ACWP>' . $nl;
       echo $tab.$tab.$tab.'<CV>0.00</CV>' . $nl;
-      echo $tab.$tab.$tab.'<ConstraintType>' . (($line['elementary'])?'2':'2') . '</ConstraintType>' . $nl;
+      echo $tab.$tab.$tab.'<ConstraintType>' . (($line['elementary'])?'0':'4') . '</ConstraintType>' . $nl;
       echo $tab.$tab.$tab.'<CalendarUID>-1</CalendarUID>' . $nl;
       if (1 or $line['elementary']) { echo $tab.$tab.$tab.'<ConstraintDate>' . $line['pstart'] . 'T' . $startAM . '</ConstraintDate>' . $nl;}
       echo $tab.$tab.$tab.'<LevelAssignments>0</LevelAssignments>' . $nl;
