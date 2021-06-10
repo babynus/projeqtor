@@ -34,22 +34,28 @@ $pokerSession = new PokerSession($id);
 if(!$pokerSession->handled){
   $pokerSession->handled = 1;
   $pokerSession->handledDate=date('Y-m-d H:i:s');
-  $allowedStatusList=Workflow::getAllowedStatusListForObject($pokerSession);
-  foreach ( $allowedStatusList as $st ) {
-  	if ($st->setHandledStatus) {
-  		$pokerSession->idStatus=$st->id;
-  		break;
-  	}
+  $st = new Status($pokerSession->idStatus);
+  if(!$st->setHandledStatus){
+    $allowedStatusList=Workflow::getAllowedStatusListForObject($pokerSession);
+    foreach ( $allowedStatusList as $st ) {
+    	if ($st->setHandledStatus) {
+    		$pokerSession->idStatus=$st->id;
+    		break;
+    	}
+    }
   }
 }else if($pokerSession->handled and !$pokerSession->done){
   $pokerSession->done = 1;
   $pokerSession->doneDate=date('Y-m-d H:i:s');
-  $allowedStatusList=Workflow::getAllowedStatusListForObject($pokerSession);
-  foreach ( $allowedStatusList as $st ) {
-  	if ($st->setDoneStatus) {
-  		$pokerSession->idStatus=$st->id;
-  		break;
-  	}
+  $st = new Status($pokerSession->idStatus);
+  if(!$st->setDoneStatus){
+    $allowedStatusList=Workflow::getAllowedStatusListForObject($pokerSession);
+    foreach ( $allowedStatusList as $st ) {
+    	if ($st->setDoneStatus) {
+    		$pokerSession->idStatus=$st->id;
+    		break;
+    	}
+    }
   }
 }else{
   $pokerSession->handled = 1;
