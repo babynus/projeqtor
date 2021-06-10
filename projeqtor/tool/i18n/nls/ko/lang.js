@@ -2940,6 +2940,7 @@ leaveMngProjectCantHaveParentProject: "휴가 시스템 전용 프로젝트는 �
 leavePeriod: "휴가 기간",
 leaveProcessingAfterLeaveDate: "휴가 날짜 이후에 휴가 처리가 완료되었습니다.",
 leaveProjectDescription: "This project is dedicated to Leave System Management.<br/>Do not touch it unless you clearly know what you do.",
+leaveRequest: "You have a leave request",
 leaveRequestAfterLeaveDate: "휴가 날짜 이후에 휴가 요청이 완료되었습니다.",
 leavesAdmin: "휴가 시스템 관리자",
 leavesCalendar: "휴가 달력",
