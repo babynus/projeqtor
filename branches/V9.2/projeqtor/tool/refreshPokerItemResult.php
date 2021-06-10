@@ -97,7 +97,7 @@ if(!$pokerVote->id and !$pokerItem->value and $pokerMember->id and !$obj->done){
           $class = 'pokerComplexitySelectedLow';
         }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $highVote){
           $class = 'pokerComplexitySelectedHigh';
-        }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $pokerItem->value){
+        }else if($pokerVote->id and $pokerVote->value == $pokerComplexity->value){
           $class = 'pokerComplexitySelectedValue';
         }
         $onclick='';
