@@ -176,9 +176,20 @@ $sumWorkAct=array();
 $actNames=array();
 $workActivity=array();
 $resActTypes=array();
+$alreadyExistingActivity=array();
+$alreadyExistingType=array();
 foreach ($lstWork as $work) {
-  $act = new Activity($work->refId);
-  $actType = new activityType($act->idActivityType);
+  if ($paramActivityType) {
+    if (array_key_exists($work->refId, $alreadyExistingActivity)) {
+      $act = $alreadyExistingActivity[$work->refId];
+      $actType = $alreadyExistingType[$work->refId];
+    } else {
+      $act = new Activity($work->refId);
+      $actType = new activityType($act->idActivityType);
+      $alreadyExistingActivity[$work->refId] = $act;
+      $alreadyExistingType[$work->refId] = $actType;
+    }
+  }
   if ($paramActivityType == "" or $paramActivityType == $act->idActivityType) {
     if (! array_key_exists($work->idResource,$resources)) {
       $resources[$work->idResource]=SqlList::getNameFromId('Resource', $work->idResource);

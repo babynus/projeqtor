@@ -31,6 +31,7 @@ include_once '../tool/projeqtor.php';
 $paramProject = trim(RequestHandler::getId('idProject'));
 $paramProjectType = trim(RequestHandler::getId('idProjectType'));
 $idOrganization = trim(RequestHandler::getId('idOrganization'));
+$paramActivityType = trim(RequestHandler::getId('idActivityType'));
 
 $user=getSessionUser();
 
@@ -44,6 +45,9 @@ if ($paramProjectType!="") {
 }
 if ($idOrganization!="") {
   $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$idOrganization)) . '<br/>';
+}
+if ($paramActivityType!="") {
+  $headerParameters.= i18n("colIdActivityType") . ' : ' . htmlEncode(SqlList::getNameFromId('ActivityType', $paramActivityType)) . '<br/>';
 }
 
 if (isset($outMode) and $outMode=='excel') {
@@ -68,21 +72,30 @@ $result=array();
 $projects=array();
 $resources=array();
 $sumProj=array();
-
+$alreadyExistingActivity=array();
 foreach ($lstWork as $work) {
-  if (! array_key_exists($work->idResource,$resources)) {
-    $resources[$work->idResource]=SqlList::getNameFromId('ResourceAll', $work->idResource);
+  if ($paramActivityType) {
+    if (array_key_exists($work->refId, $alreadyExistingActivity))
+      $act = $alreadyExistingActivity[$work->refId];
+    else {
+      $act = new Activity($work->refId);
+      $alreadyExistingActivity[$work->refId] = $act;
+    }
   }
-  if (! array_key_exists($work->idProject,$projects)) {
-    $projects[$work->idProject]=SqlList::getNameFromId('Project', $work->idProject);
-  }
-  if (! array_key_exists($work->idResource,$result)) {
-    $result[$work->idResource]=array();
-  }
-  if (! array_key_exists($work->idProject,$result[$work->idResource])) {
-    $result[$work->idResource][$work->idProject]=0;
-  }
-  $result[$work->idResource][$work->idProject]=round($result[$work->idResource][$work->idProject]+$work->leftWork,2);
+  if (!$paramActivityType or $paramActivityType == $act->idActivityType) {
+    if (!array_key_exists($work->idResource, $resources)) {
+      $resources[$work->idResource] = SqlList::getNameFromId('ResourceAll', $work->idResource);
+    }
+    if (!array_key_exists($work->idProject, $projects)) {
+      $projects[$work->idProject] = SqlList::getNameFromId('Project', $work->idProject);
+    }
+    if (!array_key_exists($work->idResource, $result)) {
+      $result[$work->idResource] = array();
+    }        if (!array_key_exists($work->idProject, $result[$work->idResource])) {
+      $result[$work->idResource][$work->idProject] = 0;
+    }
+    $result[$work->idResource][$work->idProject] = round($result[$work->idResource][$work->idProject] + $work->leftWork, 2);
+   }
 }
 
 if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;

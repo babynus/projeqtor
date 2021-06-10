@@ -558,3 +558,8 @@ UPDATE `${prefix}navigation` set idParent=14, sortOrder=110 where id=70;
 ALTER TABLE `${prefix}message` ADD `idOrganization` int(12) unsigned DEFAULT NULL COMMENT '12';
 ALTER TABLE `${prefix}message` ADD `idTeam` int(12) unsigned DEFAULT NULL COMMENT '12';
 
+INSERT INTO `${prefix}reportparameter`(`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES
+(1, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0), (2, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0),
+(3, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0), (112, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0),
+(113, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0), (114, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0),
+(40, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0), (111, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0);

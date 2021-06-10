@@ -31,6 +31,7 @@ include_once '../tool/projeqtor.php';
 $paramProject = trim(RequestHandler::getId('idProject'));
 $paramTeam = trim(RequestHandler::getId('idTeam'));
 $idOrganization = trim(RequestHandler::getId('idOrganization'));
+$paramActivityType = trim(RequestHandler::getId('idActivityType'));
 //$paramYear = RequestHandler::getYear('yearSpinner');
 //$paramMonth = RequestHandler::getMonth('monthSpinner');
 //$paramWeek = RequestHandler::getValue('weekSpinner');
@@ -91,6 +92,9 @@ if ($idOrganization!="") {
 }
 if ($paramTeam!="") {
   $headerParameters.= i18n("colIdTeam") . ' : ' . htmlEncode(SqlList::getNameFromId('Team', $paramTeam)) . '<br/>';
+}
+if ($paramActivityType!="") {
+  $headerParameters.= i18n("colIdActivityType") . ' : ' . htmlEncode(SqlList::getNameFromId('ActivityType', $paramActivityType)) . '<br/>';
 }
 if ($periodType=='year' or $periodType=='month' or $periodType=='week') {
   $headerParameters.= i18n("year") . ' : ' . $paramYear . '<br/>';
@@ -164,21 +168,31 @@ $result=array();
 $projects=array();
 $resources=array();
 $sumProj=array();
+$alreadyExistingActivity = array();
 foreach ($lstWork as $work) {
-  if (! array_key_exists($work->idResource,$resources)) {
-    $resources[$work->idResource]=SqlList::getNameFromId('Resource', $work->idResource);
+  if ($paramActivityType) {
+    if (array_key_exists($work->refId, $alreadyExistingActivity))
+      $act = $alreadyExistingActivity[$work->refId];
+    else {
+      $act = new Activity($work->refId);
+      $alreadyExistingActivity[$work->refId] = $act;
+    }
   }
-  if (! array_key_exists($work->idProject,$projects)) {
-    $projects[$work->idProject]=SqlList::getNameFromId('Project', $work->idProject);
+  if (!$paramActivityType or $paramActivityType == $act->idActivityType) {
+    if (!array_key_exists($work->idResource, $resources)) {
+      $resources[$work->idResource] = SqlList::getNameFromId('Resource', $work->idResource);
+    }
+    if (!array_key_exists($work->idProject, $projects)) {
+      $projects[$work->idProject] = SqlList::getNameFromId('Project', $work->idProject);
+    }
+    if (!array_key_exists($work->idResource, $result)) {
+      $result[$work->idResource] = array();
+    }
+    if (!array_key_exists($work->idProject, $result[$work->idResource])) {
+      $result[$work->idResource][$work->idProject] = 0;
+    }
+    $result[$work->idResource][$work->idProject] += $work->work;
   }
-  if (! array_key_exists($work->idResource,$result)) {
-    $result[$work->idResource]=array();
-  }
-  if (! array_key_exists($work->idProject,$result[$work->idResource])) {
-    $result[$work->idResource][$work->idProject]=0;
-  } 
-  $result[$work->idResource][$work->idProject]+=$work->work;
-
 }
 
 if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;

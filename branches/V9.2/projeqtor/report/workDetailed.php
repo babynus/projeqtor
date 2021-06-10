@@ -31,6 +31,7 @@ include_once '../tool/projeqtor.php';
 $paramProject = trim(RequestHandler::getId('idProject'));
 $paramTeam = trim(RequestHandler::getId('idTeam'));
 $idOrganization = trim(RequestHandler::getId('idOrganization'));
+$paramActivityType = trim(RequestHandler::getId('idActivityType'));
 
 $paramYear='';
 if (array_key_exists('yearSpinner',$_REQUEST)) {
@@ -88,6 +89,9 @@ if ($idOrganization!="") {
 }
 if ($paramTeam!="") {
   $headerParameters.= i18n("colIdTeam") . ' : ' . htmlEncode(SqlList::getNameFromId('Team', $paramTeam)) . '<br/>';
+}
+if ($paramActivityType!="") {
+  $headerParameters.= i18n("colIdActivityType") . ' : ' . htmlEncode(SqlList::getNameFromId('ActivityType', $paramActivityType)) . '<br/>';
 }
 if ($periodType=='year' or $periodType=='month' or $periodType=='week') {
   $headerParameters.= i18n("year") . ' : ' . $paramYear . '<br/>';
@@ -154,44 +158,45 @@ $activities=array();
 $activityWork=array();
 $activityRes=array();
 $sumProj=array();
+$alreadyExistingActivity=array();
 foreach ($lstWork as $work) {
-  if (! array_key_exists($work->idResource,$resources)) {
-    $resources[$work->idResource]=SqlList::getNameFromId('Resource', $work->idResource);
+  if ($paramActivityType) {
+    if (array_key_exists($work->refId, $alreadyExistingActivity))
+      $act = $alreadyExistingActivity[$work->refId];
+    else {
+      $act = new Activity($work->refId);
+      $alreadyExistingActivity[$work->refId] = $act;
+    }
   }
-  if (! array_key_exists($work->idProject,$projects)) {
-    $projects[$work->idProject]=SqlList::getNameFromId('Project', $work->idProject);
+  if (!$paramActivityType or $paramActivityType == $act->idActivityType) {
+    if (!array_key_exists($work->idResource, $resources)) {
+      $resources[$work->idResource] = SqlList::getNameFromId('Resource', $work->idResource);
+    }
+    if (!array_key_exists($work->idProject, $projects)) {
+      $projects[$work->idProject] = SqlList::getNameFromId('Project', $work->idProject);
+    }
+    if ($work->refType == 'Activity' and !array_key_exists($work->idResource, $activities)) {
+      $activities[$work->idResource] = array();
+    }
+    if ($work->refType == 'Activity' and !array_key_exists($work->refId, $activities[$work->idResource])) {
+      $activities[$work->idResource][$work->refId] = SqlList::getNameFromId('Activity', $work->refId);
+    }
+    if (!array_key_exists($work->idResource, $result)) {
+      $result[$work->idResource] = array();
+    }
+    if (!array_key_exists($work->idProject, $result[$work->idResource])) {
+      $result[$work->idResource][$work->idProject] = 0;
+    }
+    $result[$work->idResource][$work->idProject] += $work->work;
+    if (!array_key_exists($work->refId, $activityWork)) {
+      $activityWork[$work->refId] = array();
+    }
+    if (!array_key_exists($work->idProject, $activityWork[$work->refId])) {
+      $activityWork[$work->refId][$work->idProject] = 0;
+    }
+    $activityWork[$work->refId][$work->idProject] += $work->work;
+    $activityRes[$work->idResource][$work->refId] = $activityWork[$work->refId];
   }
-  if ($work->refType == 'Activity' and ! array_key_exists($work->idResource,$activities)) {
-  	$activities[$work->idResource]=array();
-  }
-  if ($work->refType == 'Activity' and ! array_key_exists($work->refId,$activities[$work->idResource])) {
-  	$activities[$work->idResource][$work->refId]=SqlList::getNameFromId('Activity', $work->refId);
-  }
-  if (! array_key_exists($work->idResource,$result)) {
-    $result[$work->idResource]=array();
-  }
-  if (! array_key_exists($work->idProject,$result[$work->idResource])) {
-    $result[$work->idResource][$work->idProject]=0;
-  } 
-  $result[$work->idResource][$work->idProject] +=$work->work;
-  
-  if (! array_key_exists($work->refId,$activityWork)) {
-  	$activityWork[$work->refId]=array();
-  }
-  if (! array_key_exists($work->idProject,$activityWork[$work->refId])) {
-  	$activityWork[$work->refId][$work->idProject]=0;
-  }
-  $activityWork[$work->refId][$work->idProject] +=$work->work;
-  if (! array_key_exists($work->idResource,$activityRes)) {
-    $activityRes[$work->idResource]=array();
-  }
-  if (! array_key_exists($work->refId,$activityRes[$work->idResource])) {
-    $activityRes[$work->idResource][$work->refId]=array();
-  }
-  if (! array_key_exists($work->idProject,$activityRes[$work->idResource][$work->refId])) {
-    $activityRes[$work->idResource][$work->refId][$work->idProject]=0;
-  }
-  $activityRes[$work->idResource][$work->refId][$work->idProject]+=$work->work;
 }
 if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
 // title
