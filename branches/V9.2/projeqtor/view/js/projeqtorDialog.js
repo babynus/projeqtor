@@ -7092,7 +7092,7 @@ function filterMenuModule(id,nbTotal){
   }
   
   if(id==2){
-    var tab = [1,9,16];
+    var tab = [1,9,16,22];
   }else if(id==3){
     var tab = [2,16];
   }else if(id==4){
