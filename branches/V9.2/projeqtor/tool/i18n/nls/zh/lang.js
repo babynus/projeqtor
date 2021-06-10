@@ -2940,6 +2940,7 @@ leaveMngProjectCantHaveParentProject: "The project dedicated to the leave system
 leavePeriod: "Leave period",
 leaveProcessingAfterLeaveDate: "Leave processing done after the leave date",
 leaveProjectDescription: "This project is dedicated to Leave System Management.<br/>Do not touch it unless you clearly know what you do.",
+leaveRequest: "You have a leave request",
 leaveRequestAfterLeaveDate: "Leave request done after the leave date",
 leavesAdmin: "Administrator of leaves system",
 leavesCalendar: "Leaves Calendar",

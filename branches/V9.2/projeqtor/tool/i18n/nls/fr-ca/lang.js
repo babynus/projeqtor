@@ -2940,6 +2940,7 @@ leaveMngProjectCantHaveParentProject: "Le projet dédié au module Absences Rég
 leavePeriod: "Période d'absence",
 leaveProcessingAfterLeaveDate: "Traitement de la demande fait après la date de d'absence",
 leaveProjectDescription: "Ce projet est dédié à la gestion des Absences Réglementées (RH).<br/>Ne le touchez que si vous savez clairement ce que vous faites.",
+leaveRequest: "Vous avez une demande de congés",
 leaveRequestAfterLeaveDate: "Demande d'absence faite après la date d'absence",
 leavesAdmin: "Administrateur du module des absences réglementées",
 leavesCalendar: "Calendrier des absences",

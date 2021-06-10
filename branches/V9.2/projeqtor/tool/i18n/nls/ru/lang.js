@@ -2941,6 +2941,7 @@ leaveMngProjectCantHaveParentProject: "Проект&#44; посвященный 
 leavePeriod: "Пориод отпуска",
 leaveProcessingAfterLeaveDate: "Оставьте обработку&#44; выполненную после даты отпуска",
 leaveProjectDescription: "This project is dedicated to Leave System Management.<br/>Do not touch it unless you clearly know what you do.",
+leaveRequest: "You have a leave request",
 leaveRequestAfterLeaveDate: "Оставить запрос&#44; сделанный после даты отпуска",
 leavesAdmin: "Администратор системы отпусков",
 leavesCalendar: "Календарь отпусков",

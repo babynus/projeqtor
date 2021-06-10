@@ -2935,6 +2935,7 @@ leaveMngProjectCantHaveParentProject: "The project dedicated to the leave system
 leavePeriod: "Leave period",
 leaveProcessingAfterLeaveDate: "Leave processing done after the leave date",
 leaveProjectDescription: "Този проект е посветен на управлението на системата за напускане. <br/> Не го докосвайте&#44 освен ако не знаете ясно какво правите.",
+leaveRequest: "You have a leave request",
 leaveRequestAfterLeaveDate: "Leave request done after the leave date",
 leavesAdmin: "Administrator of leaves system",
 leavesCalendar: "Leaves Calendar",

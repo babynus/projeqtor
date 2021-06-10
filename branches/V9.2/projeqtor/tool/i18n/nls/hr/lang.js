@@ -2940,6 +2940,7 @@ leaveMngProjectCantHaveParentProject: "projekt posvećen modulu regulirana odsut
 leavePeriod: "Razdoblje odsutnosti",
 leaveProcessingAfterLeaveDate: "Obrada prijave napravljena nakon datuma odsutnosti",
 leaveProjectDescription: "Ovaj je projekt posvećen upravljanju sustavom napuštanja. <br/> Ne dirajte ga ako jasno ne znate što radite.",
+leaveRequest: "You have a leave request",
 leaveRequestAfterLeaveDate: "Zahtjev za izostanak podnesen nakon datuma odsutnosti",
 leavesAdmin: "Upravitelj modula za regulirano odsustvo",
 leavesCalendar: "Kalendar odsutnosti",

@@ -1949,7 +1949,11 @@ class LeaveMain extends SqlElement {
             // Alert allowed
             if ($readAllowed) {
                 // Emit alert
-                if ($delete or $old->id==null) {
+                if ($this->submitted == 1 and $old->submitted == 0){
+                    $title = i18n("leaveRequest")." ".i18n("FOR")." ".$requester->name;
+                    $message = $cause;
+                }
+                else if ($delete or $old->id==null) {
                     $title = i18n("leave")." ".i18n("is")." ".$cause." - ".$newLeaveType->name. " ". i18n("FOR")." ".$requester->name;
                     $message = i18n("by")." ".$user->name." ".i18n("comment")." : ".$this->comment;
                 } else {
@@ -1973,7 +1977,12 @@ class LeaveMain extends SqlElement {
         if ($this->isInfoOnLeaveToSend($action,'email',$receiver->__Ame)==true) {
             // If receiver as email => send email
             if ($receiver->email!=null) {
-                if ($delete or $old->id==null) {
+
+                if ($this->submitted == 1 and $old->submitted == 0){
+                    $subject = i18n("leaveRequest")." ".i18n("FOR")." ".$requester->name;
+                    $messageBody = $cause;
+                }
+                else if ($delete or $old->id==null) {
                     $subject = i18n("leave")." ".i18n("is")." ".$cause." - ".$newLeaveType->name." ".i18n("FOR")." ".$requester->name;
                     $messageBody = i18n("by")." ".$user->name." ".i18n("comment")." : ".$this->comment;
                 } else {
