@@ -29,12 +29,16 @@
  */
 require_once "../tool/projeqtor.php"; 
 $id=RequestHandler::getId('idPokerItem');
-$close = RequestHandler::getBoolean('close');
-
+$mode = RequestHandler::getValue('mode');
 $pokerItem = new PokerItem($id);
-if(!$close){
+if($mode=='open'){
   $pokerItem->isOpen = 1;
-}else{
+}else if($mode=='pause'){
+  $pokerItem->isOpen = 0;
+}else if($mode=='close'){
+  $idComplexity = RequestHandler::getValue('idComplexity');
+  $comp = new PokerComplexity($idComplexity);
+  $pokerItem->value = $comp->value;
   $pokerItem->isOpen = 0;
 }
 $pokerItem->save();
