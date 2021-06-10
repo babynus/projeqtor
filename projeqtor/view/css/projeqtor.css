@@ -4358,8 +4358,8 @@ div.ticketKanbanCustom .kanbanVersion{
 	font-size: 90%;
     padding: 5px;
     border-left: 1px solid black !important;
-    border-top: 2px solid black !important;
-    border-bottom: 2px solid black !important;
+    border-top: 1px solid black !important;
+    border-bottom: 1px solid black !important;
     border-right: 1px solid black !important;
     vertical-align: top;
     background-color: #FFFFFF;
@@ -4370,8 +4370,8 @@ div.ticketKanbanCustom .kanbanVersion{
 	font-size: 90%;
     padding: 5px;
     border-left: 1px solid black !important;
-    border-top: 2px solid black !important;
-    border-bottom: 2px solid black !important;
+    border-top: 1px solid black !important;
+    border-bottom: 1px solid black !important;
     border-right: 1px solid black !important;
     vertical-align: top;
     background-color: #fae2d1;
@@ -4382,8 +4382,8 @@ div.ticketKanbanCustom .kanbanVersion{
 	font-size: 90%;
     padding: 5px;
     border-left: 1px solid black !important;
-    border-top: 2px solid black !important;
-    border-bottom: 2px solid black !important;
+    border-top: 1px solid black !important;
+    border-bottom: 1px solid black !important;
     border-right: 1px solid black !important;
     vertical-align: top;
     background-color: #fae2d1;
