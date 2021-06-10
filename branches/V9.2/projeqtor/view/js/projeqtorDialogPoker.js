@@ -163,8 +163,7 @@ function editPokerItem(pokerItemId) {
     });
     dijit.byId("dialogPokerItem").show();
   };
-  var params="&id=" + id;
-  params+="&pokerItemId=" + pokerItemId;
+  var params="&pokerItemId=" + pokerItemId;
   params+="&mode=edit";
   loadDialog('dialogPokerItem', callBack, false, params);
 }
@@ -211,7 +210,7 @@ function startPausePokerSession(idPokerSession) {
 function openPokerItemVote(idPokerSession, idItem, itemList) {
   dojo.xhrPost({
     url : '../tool/openPokerItemVote.php?idPokerItem=' + idItem
-        + '&close=false',
+        + '&mode=open',
     handleAs : "text",
     load : function(data) {
       var callBack=function() {
@@ -228,15 +227,41 @@ function openPokerItemVote(idPokerSession, idItem, itemList) {
   });
 }
 
-function closePokerItemVote(idPokerItem) {
+function commitPokerItemVote(idPokerItem) {
+  var idComplexity = dijit.byId('pokerComplexity').get('value');
   dojo.xhrPost({
     url : '../tool/openPokerItemVote.php?idPokerItem=' + idPokerItem
-        + '&close=true',
+        + '&mode=close' + '&idComplexity='+idComplexity,
     handleAs : "text",
     load : function(data) {
+	  dijit.byId("dialogPokerCloseVote").hide();
       loadContent("objectDetail.php", "detailDiv", "listForm");
     }
   });
+}
+
+function pausePokerItemVote(idPokerItem) {
+	  dojo.xhrPost({
+	    url : '../tool/openPokerItemVote.php?idPokerItem=' + idPokerItem
+	        + '&mode=pause',
+	    handleAs : "text",
+	    load : function(data) {
+	      dijit.byId("dialogPokerCloseVote").hide();
+	      loadContent("objectDetail.php", "detailDiv", "listForm");
+	    }
+	  });
+	}
+
+function closePokerItemVote(idPokerItem, idPokerSession) {
+	if (checkFormChangeInProgress()) {
+	    showAlert(i18n('alertOngoingChange'));
+	    return;
+	}
+	var callBack=function() {
+	    dijit.byId("dialogPokerCloseVote").show();
+	};
+	var params="&idPokerItem=" + idPokerItem + "&idPokerSession="+idPokerSession;
+	loadDialog('dialogPokerCloseVote', callBack, false, params);
 }
 
 function gotoPokerItem(idPokerSession, idItem, itemList) {
