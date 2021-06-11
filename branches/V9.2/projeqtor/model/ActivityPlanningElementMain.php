@@ -660,16 +660,22 @@ class ActivityPlanningElementMain extends PlanningElement {
         echo '<div style="position:relative;"><div style="color:#AA0000;margin:0px 10px;text-align:center;position:absolute;top:-55px;height:60px;">'.i18n('colIsOnCriticalPath').'</div></div>';
       }
     }elseif ($item=='idWorkUnits'){
-      if(Module::isModuleActive('moduleGestionCA') and $this->id){
-        $project = new Project($this->idProject);
-        if($project->ProjectPlanningElement->idRevenueMode == 2){
-          $act = new Activity();
-          $isParent = $act->countSqlElementsFromCriteria(array('idActivity'=>$this->refId));
-          if(!$isParent){
-            $activityWU = new ActivityWorkUnit();
-            $listActWU = $activityWU->getSqlElementsFromCriteria(array('refId'=>$this->refId,'refType'=>'Activity'));
-            $obj = new Activity($this->refId);
-            drawActivityWorkUnit($listActWU,$obj);
+      $user=getSessionUser();
+      $profile=$user->getProfile($this->idProject);
+      $visibility1=PlanningElement::getCostVisibility($profile);
+      $visibility2=PlanningElement::getWorkVisibility($profile);
+      if($visibility1!='NO' and $visibility2 != 'NO'){
+        if(Module::isModuleActive('moduleGestionCA') and $this->id){
+          $project = new Project($this->idProject);
+          if($project->ProjectPlanningElement->idRevenueMode == 2){
+            $act = new Activity();
+            $isParent = $act->countSqlElementsFromCriteria(array('idActivity'=>$this->refId));
+            if(!$isParent){
+              $activityWU = new ActivityWorkUnit();
+              $listActWU = $activityWU->getSqlElementsFromCriteria(array('refId'=>$this->refId,'refType'=>'Activity'));
+              $obj = new Activity($this->refId);
+              drawActivityWorkUnit($listActWU,$obj);
+            }
           }
         }
       }
