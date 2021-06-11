@@ -195,15 +195,15 @@ DELETE FROM `${prefix}accessright` where idMenu=222;
 
 ALTER TABLE `${prefix}subtask` CHANGE `name` `name` varchar(4000) DEFAULT NULL;
 
-ALTER TABLE ${prefix}workcommanddone MODIFY doneQuantity decimal(8,3) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommandbilled MODIFY billedQuantity decimal(8,3) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand MODIFY commandQuantity decimal(8,3) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand MODIFY doneQuantity decimal(8,3) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand MODIFY billedQuantity decimal(8,3) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand MODIFY unitAmount decimal(14,2) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand MODIFY commandAmount decimal(14,2) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand MODIFY doneAmount decimal(14,2) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand MODIFY billedAmount decimal(14,2) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommanddone CHANGE `doneQuantity` `doneQuantity` decimal(8,3) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommandbilled CHANGE `billedQuantity` `billedQuantity` decimal(8,3) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand CHANGE `commandQuantity` `commandQuantity` decimal(8,3) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand CHANGE `doneQuantity` `doneQuantity` decimal(8,3) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand CHANGE `billedQuantity` `billedQuantity` decimal(8,3) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand CHANGE `unitAmount` `unitAmount` decimal(14,2) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand CHANGE `commandAmount` `commandAmount` decimal(14,2) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand CHANGE `doneAmount` `doneAmount` decimal(14,2) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommand CHANGE `billedAmount` `billedAmount` decimal(14,2) unsigned DEFAULT NULL;
 
 -- Access rights on assets
 
