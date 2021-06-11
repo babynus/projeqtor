@@ -234,7 +234,7 @@ INSERT INTO `${prefix}parameter` (idUser, idProject, parameterCode, parameterVal
 CREATE TABLE `${prefix}pokercomplexity` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
   `name` varchar(100) DEFAULT NULL,
-  `value` int(2) unsigned DEFAULT NULL COMMENT '2',
+  `value` int(3) unsigned DEFAULT NULL COMMENT '3',
   `work` decimal(9,5) unsigned DEFAULT NULL,
   `sortOrder` int(3) unsigned DEFAULT NULL COMMENT '3',
   `idle` int(1) unsigned DEFAULT 0 COMMENT '1',
