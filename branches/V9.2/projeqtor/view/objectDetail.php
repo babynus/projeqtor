@@ -689,6 +689,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   if( $layout=='tab' and $included==false and !$print){
     echo '<div id ="tabDetailContainer" dojoType="dijit.layout.TabContainer">';
   }
+  $validatedWorkReadOnly=false;
+  $validatedCostReadOnly=false;
   // Loop on each property of the object
   foreach ($obj as $col=>$val) {
     if ($detailWidth) {
@@ -1505,6 +1507,16 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $attributes.=' readonly tabindex="-1"';
         $readOnly=true;
       }
+      if(get_class($obj)=='ActivityPlanningElement' and ($col=='validatedCost' or $col=='validatedWork')){
+        if(trim(strpos($obj->getFieldAttributes($col), 'readonly'))!='' or in_array($col, $extraReadonlyFields)){
+          if($col=='validatedWork'){
+            $validatedWorkReadOnly=true;
+          }else if ($col=='validatedCost'){
+             $validatedCostReadOnly=true;
+          }
+        }
+      }
+
       // ADD BY Marc TABARY - 2017-02-28 - DATA CONSTRUCTED BY FUNCTION
       if (substr($col, 0, 7)=='_byMet_') {
         if (substr($col, -4, 4)=='Work' or substr($col, -3, 3)=='Pct' or substr($col, -4, 4)=='Rate' or strpos(strtolower($col), 'amount')!==false) {
@@ -3343,6 +3355,19 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     }
   }
 
+  if( $classObj=='ActivityPlanningElement' and ($validatedWorkReadOnly or $validatedCostReadOnly)){
+    $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$profile,'scope'=>'changeValidatedData'));
+    if($habil and ($habil->rightAccess == 2 or ! $habil->id )){
+      $fieldHidden='';
+      if($validatedWorkReadOnly){
+        echo '<input id="hiddenFielsActivityWork" type="hidden" value="readonly" /> ';
+      }
+      if($validatedCostReadOnly){
+        $fieldHidden .='validatedCost';
+        echo '<input id="hiddenFielsActivityCost" type="hidden" value="readonly" /> ';
+      }
+    }
+  }
   if (!$included) {
     if ($currentCol==0) {
       if ($section and !$print) {
@@ -3357,6 +3382,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // echo '</td></tr></table>';
     }
   }
+
 
   if (!$included) {
     endBuffering($section, $included);
