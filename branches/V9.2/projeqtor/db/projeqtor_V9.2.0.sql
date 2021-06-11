@@ -383,9 +383,9 @@ UPDATE `${prefix}navigation` SET moduleName='moduleRisk' WHERE name='navRiskMana
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (261,'menuLocalization',0,'menu', 476,null,0,'Localization'),
-(262,'menuLocalizationRequest',261,'object', 477,"ReadWriteLocalization",0,'Localization'),
-(263,'menuLocalizationItem',261,'object', 477,"ReadWriteLocalization",0,'Localization'),
-(264,'menuLocalizationTranslator',261,'object', 477,"ReadWriteLocalization",0,'Localization');
+(262,'menuLocalizationRequest',261,'object', 477,'ReadWriteLocalization',0,'Localization'),
+(263,'menuLocalizationItem',261,'object', 477,'ReadWriteLocalization',0,'Localization'),
+(264,'menuLocalizationTranslator',261,'object', 477,'ReadWriteLocalization',0,'Localization');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
 (1,261,1),
