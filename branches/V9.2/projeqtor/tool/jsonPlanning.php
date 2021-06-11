@@ -1864,7 +1864,7 @@
       echo $tab.$tab.$tab.'<RemainingOvertimeWork>PT0H0M0S</RemainingOvertimeWork>' . $nl;
       echo $tab.$tab.$tab.'<ACWP>0.00</ACWP>' . $nl;
       echo $tab.$tab.$tab.'<CV>0.00</CV>' . $nl;
-      echo $tab.$tab.$tab.'<ConstraintType>' . (($line['elementary'])?'0':'4') . '</ConstraintType>' . $nl;
+      echo $tab.$tab.$tab.'<ConstraintType>' . (($line['elementary'])?'0':'2') . '</ConstraintType>' . $nl;
       echo $tab.$tab.$tab.'<CalendarUID>-1</CalendarUID>' . $nl;
       if (1 or $line['elementary']) { echo $tab.$tab.$tab.'<ConstraintDate>' . $line['pstart'] . 'T' . $startAM . '</ConstraintDate>' . $nl;}
       echo $tab.$tab.$tab.'<LevelAssignments>0</LevelAssignments>' . $nl;
