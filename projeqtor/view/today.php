@@ -94,8 +94,9 @@ if(array_key_exists('refreshDocumentDiv', $_REQUEST)) {
   exit;
 }
 
-function showMessages() {
-  global $cptMax;
+function showMessages($addTitlePane=false) {
+  global $cptMax,$collapsedList, $print;
+  $titlePane="Today_message";
   $user=getSessionUser();
   $msg=new Message();
   if(sessionValueExists('showAllMessageTodayVal')){
@@ -109,30 +110,41 @@ function showMessages() {
   $where.=" and (idUser is null or idUser='".Sql::fmtId($user->id)."')";
   $where.=" and (idProfile is null or idProfile in ".transformListIntoInClause($user->getAllProfiles()).")";
   $where.=" and (idProject is null or idProject in ".transformListIntoInClause($user->getVisibleProjects()).")";
-  if ($user->idTeam)
+  if ($user->idTeam) {
     $where.=" and (idTeam is null or idTeam = " . $user->idTeam . ")";
-  else
+  } else {
     $where.=" and (idTeam is null)";
-  
+  }
+  if ($user->idOrganization) {
+    $orga=new Organization($user->idOrganization);
+    $listOrga=$orga->getParentOrganizationStructure();
+    $listOrga[$orga->id]=$orga->name;
+    $where.=" and (idOrganization is null or idOrganization in " . transformListIntoInClause($listOrga). ")";
+  } else {
+    $where.=" and (idOrganization is null)";
+  }
   $sort="id desc";
   $listMsg=$msg->getSqlElementsFromCriteria(null, false, $where, $sort);
   if (count($listMsg)>0 ) {
+    if ($addTitlePane) {
+      if (!$print) {?>
+        <div dojoType="dijit.TitlePane"
+          open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
+          id="<?php echo $titlePane;?>"
+          onHide="saveCollapsed('<?php echo $titlePane;?>');"
+          onShow="saveExpanded('<?php echo $titlePane;?>');"
+          title="<?php echo i18n('menuMessage');?>">  
+     <?php } else { ?>
+        <div class="section"><?php echo i18n('menuMessage');?></div>
+        <br />
+        <div>    
+     <?php }
+    }   
     $cpt=0;
     echo '<input id="showAllMessageToday" name="showAllMessageToday"  hidden value="'.$showAllMessage.'" />';
     echo '<form id="todayMessageForm" name="todayMessageForm">';
     echo '<table align="center" style="width:100%">';
     foreach ($listMsg as $msg) {
-      if ($msg->idOrganization) {
-        if (!$user->idOrganization)
-            continue;
-        $msgOrgaSort = new Organization($msg->idOrganization);
-        $msgOrgaSortUser = new Organization($user->idOrganization);
-        if ($msgOrgaSort->sortOrder && $msgOrgaSortUser->sortOrder) {
-          if (strpos($msgOrgaSortUser->sortOrder, $msgOrgaSort->sortOrder) !== 0)
-            continue;
-        } else if ($msg->idOrganization != $user->idOrganization)
-            continue;
-      }
       #Florent ticket 4030
       $startDate=$msg->startDate;
       $endDate=$msg->endDate;
@@ -156,6 +168,10 @@ function showMessages() {
     }
     echo '</table>';
     echo '</form>';
+    if ($addTitlePane) {?>
+      </div>
+      <br /><?php
+    }      
   }
 }
 
@@ -1121,27 +1137,9 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
           
           $drawDiv=true;
           
-          // MSG
-          $titlePane="Today_message";
+          // MSG   
           if (!$print or !array_key_exists($titlePane, $collapsedList)) {
-            if (!$print ) {?>
-            <div dojoType="dijit.TitlePane"
-              open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
-              id="<?php echo $titlePane;?>"
-              onHide="saveCollapsed('<?php echo $titlePane;?>');"
-              onShow="saveExpanded('<?php echo $titlePane;?>');"
-              title="<?php echo i18n('menuMessage');?>">  
-            <?php 
-            } else {?>
-            <div class="section"><?php echo i18n('menuMessage');?></div>
-            <br />
-            <div>    
-            <?php
-            }   
-            showMessages();
-            ?>
-            </div>
-            <br /><?php
+            showMessages(true);
           }
           // Start Guide   
           $paramFirstPage=Parameter::getUserParameter('startPage');
