@@ -279,14 +279,16 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
        }
     });
     dojo.subscribe("/dnd/cancel", function(){
-    	if(dojo.byId('isEditFavorite').value == 'true'){
-    		dojo.byId('isEditFavorite').value = 'false';
-    	}else{
-    		dojo.byId('isEditFavorite').value = 'true';
-    	}
-	    dojo.byId('anotherBarContainer').style.display = 'none';
-	    dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-left: 1px solid var(--color-dark);');
-	    dojo.byId('removeMenuDiv').style.visibility = 'hidden';
+      if (isNewGui) {
+      	if(dojo.byId('isEditFavorite').value == 'true'){
+      		dojo.byId('isEditFavorite').value = 'false';
+      	}else{
+      		dojo.byId('isEditFavorite').value = 'true';
+      	}
+  	    dojo.byId('anotherBarContainer').style.display = 'none';
+  	    dojo.byId('menuBarListDiv').setAttribute('style', 'overflow:hidden;width: 100%;height: 43px;border-left: 1px solid var(--color-dark);');
+  	    dojo.byId('removeMenuDiv').style.visibility = 'hidden';
+      }
     });
 
     dndMoveInProgress=false;
