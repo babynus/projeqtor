@@ -203,7 +203,7 @@ ALTER TABLE ${prefix}workcommand CHANGE `billedQuantity` `billedQuantity` decima
 ALTER TABLE ${prefix}workcommand CHANGE `unitAmount` `unitAmount` decimal(14,2);
 ALTER TABLE ${prefix}workcommand CHANGE `commandAmount` `commandAmount` decimal(14,2);
 ALTER TABLE ${prefix}workcommand CHANGE `doneAmount` `doneAmount` decimal(14,2);
-ALTER TABLE ${prefix}workcommand CHANGE `billedAmount` `billedAmount` decimal(14,2;
+ALTER TABLE ${prefix}workcommand CHANGE `billedAmount` `billedAmount` decimal(14,2);
 
 -- Access rights on assets
 
