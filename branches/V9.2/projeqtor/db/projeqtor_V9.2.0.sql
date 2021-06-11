@@ -35,10 +35,10 @@ PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess)
-SELECT id , 'canWorkOnTicket', '1' from `${prefix}profile` where id in (SELECT idProfile from `${prefix}habilitationother` where scope = 'work' and rightAccess=4);
+SELECT id , 'canWorkOnTicket', '1' from `${prefix}profile` where id in (SELECT idProfile from `${prefix}habilitationother` where scope = 'work' and rightAccess='4');
 
 INSERT INTO `${prefix}habilitationother` (idProfile, scope , rightAccess)
-SELECT id , 'canWorkOnTicket', '2' from `${prefix}profile` where id in (SELECT idProfile from `${prefix}habilitationother` where scope = 'work' and rightAccess <> 4);
+SELECT id , 'canWorkOnTicket', '2' from `${prefix}profile` where id in (SELECT idProfile from `${prefix}habilitationother` where scope = 'work' and rightAccess <> '4');
 
 UPDATE `${prefix}status` set setHandledStatus='1' where name='paused';
 
@@ -193,17 +193,17 @@ INSERT INTO `${prefix}macrostatus` (`id`,`name`) VALUES
 -- Fix issue for 
 DELETE FROM `${prefix}accessright` where idMenu=222;
 
-ALTER TABLE `${prefix}subtask` CHANGE `name` `name` varchar(4000) DEFAULT NULL;
+ALTER TABLE `${prefix}subtask` CHANGE `name` `name` varchar(4000);
 
-ALTER TABLE ${prefix}workcommanddone CHANGE `doneQuantity` `doneQuantity` decimal(8,3) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommandbilled CHANGE `billedQuantity` `billedQuantity` decimal(8,3) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand CHANGE `commandQuantity` `commandQuantity` decimal(8,3) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand CHANGE `doneQuantity` `doneQuantity` decimal(8,3) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand CHANGE `billedQuantity` `billedQuantity` decimal(8,3) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand CHANGE `unitAmount` `unitAmount` decimal(14,2) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand CHANGE `commandAmount` `commandAmount` decimal(14,2) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand CHANGE `doneAmount` `doneAmount` decimal(14,2) unsigned DEFAULT NULL;
-ALTER TABLE ${prefix}workcommand CHANGE `billedAmount` `billedAmount` decimal(14,2) unsigned DEFAULT NULL;
+ALTER TABLE ${prefix}workcommanddone CHANGE `doneQuantity` `doneQuantity` decimal(8,3);
+ALTER TABLE ${prefix}workcommandbilled CHANGE `billedQuantity` `billedQuantity` decimal(8,3);
+ALTER TABLE ${prefix}workcommand CHANGE `commandQuantity` `commandQuantity` decimal(8,3);
+ALTER TABLE ${prefix}workcommand CHANGE `doneQuantity` `doneQuantity` decimal(8,3);
+ALTER TABLE ${prefix}workcommand CHANGE `billedQuantity` `billedQuantity` decimal(8,3);
+ALTER TABLE ${prefix}workcommand CHANGE `unitAmount` `unitAmount` decimal(14,2);
+ALTER TABLE ${prefix}workcommand CHANGE `commandAmount` `commandAmount` decimal(14,2);
+ALTER TABLE ${prefix}workcommand CHANGE `doneAmount` `doneAmount` decimal(14,2);
+ALTER TABLE ${prefix}workcommand CHANGE `billedAmount` `billedAmount` decimal(14,2;
 
 -- Access rights on assets
 
