@@ -1218,6 +1218,10 @@ function removeActivityWorkUnit(idWorkUnit) {
 }
 
 function saveActivityWorkUnit() {
+  if (trim(dijit.byId('ActivityWorkCommandComplexity').get("value")) == "") {
+    showAlert(i18n("ActivityWorkCommandComplexityIsMissing"));
+    return;
+  }
   var formVar=dijit.byId('activityWorkUnitForm');
   if (formVar.validate()) {
     var idWorkUnit=dijit.byId("ActivityWorkCommandWorkUnit").get("value");
