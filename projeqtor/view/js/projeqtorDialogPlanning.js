@@ -533,10 +533,18 @@ function saveLeftWork(id, zone) {
     value=0;
     dijit.byId("ass" + zone + "_" + id).set("value", 0);
   }
+  isOnRealTime=false;
+  if (dojo.byId('objectClass').value == 'Activity') {
+    isOnRealTime=dijit.byId('workOnRealTime').get('value');
+  }
+  
   var initLeft=dojo.byId('initLeft_' + id).value;
   var objClass=dojo.byId('objectClass').value;
   var assPeLeft=dijit.byId(objClass + 'PlanningElement_leftWork');
   var assPePlan=dijit.byId(objClass + 'PlanningElement_plannedWork');
+  var assPeAss=dijit.byId(objClass + 'PlanningElement_assignedWork');
+  var valPeAss=dijit.byId(objClass + 'PlanningElement_validatedWork');
+  
   var diff=value - initLeft;
 
   if (assPeLeft) {
@@ -544,6 +552,15 @@ function saveLeftWork(id, zone) {
   }
   if (assPePlan) {
     assPePlan.set("value", assPePlan.get("value") + diff);
+  }
+  if (dojo.byId('objectClass').value == 'Activity' && isOnRealTime == 'on'
+    && assPeAss) {
+    assPeAss.set("value", assPePlan.get("value") + diff);
+  }
+  
+  if (dojo.byId('objectClass').value == 'Activity' && isOnRealTime == 'on'
+    && valPeAss) {
+    valPeAss.set("value", assPePlan.get("value") + diff);
   }
   //
   var url='../tool/saveLeftWork.php?idAssign=' + id + '&zone=' + zone
