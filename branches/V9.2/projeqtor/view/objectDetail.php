@@ -9959,7 +9959,7 @@ function drawPokerVote($obj){
         $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$obj->id, 'idResource'=>$member->idResource, 'idPokerItem'=>$pokerItem->id));
         $count++;
         echo '<div style="float:left"><table style="width:200px;margin: 5px;">';
-        echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.htmlEncode(SqlList::getNameFromId("Resource", $member->idResource)).'</td></tr>';
+        echo '<tr><td style="width:50%;text-align:center;border-bottom: unset;" class="noteHeader">'.htmlEncode(SqlList::getNameFromId("Affectable", $member->idResource)).'</td></tr>';
         foreach ($pokerComplexityList as $pokerComplexity){
             $class = 'pokerComplexityResult';
             if($pokerVote->id and $pokerVote->value == $pokerComplexity->value and $pokerVote->value == $lowVote){
