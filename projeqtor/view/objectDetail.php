@@ -9556,16 +9556,16 @@ function setWidthPct($displayWidth, $print, $printWidth, $obj, $colSpan=null) {
   if (intval($displayWidth)<=0 and intval($printWidth)>0) {
     $displayWidth=(intval($printWidth)-50).'px';
   }
-  $nbCol=getNbColMax($displayWidth, $print, $printWidth, $obj);
+  $nbCol=intval(getNbColMax($displayWidth, $print, $printWidth, $obj));
   if ($print) {
     $nbCol=1;
   }
   $widthPct=round(99/$nbCol)."%";
-  if ($nbCol=='1') {
+  if ($nbCol==1) {
     $widthPct=$displayWidth;
   }
-  if (substr($displayWidth, -2, 2)=="px") {
-    $val=substr($displayWidth, 0, strlen($displayWidth)-2);
+  if (substr($displayWidth, -2, 2)=="px" and $nbCol>0) {
+    $val=intval($displayWidth);
     $widthPct=floor(($val/$nbCol)-($nbCol+1));
     if (isNewGui()) $widthPct-=15;
     $widthPct.="px";
