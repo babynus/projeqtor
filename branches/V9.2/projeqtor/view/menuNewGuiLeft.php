@@ -414,6 +414,7 @@ function getPlugins (){
 
 function getNavigationMenuLeft (){
   $level=0;
+  $lstMenuId=array();
   $result=array();
   $user=getSessionUser();
   $nav=new Navigation();

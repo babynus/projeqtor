@@ -295,6 +295,9 @@ class Cron {
  public static function abort() {
   	self::init();
     if (Cron::$cronRequestedStop==false) {
+      if (! file_exists("../model/Mail.php") and getcwd()=='/') {
+        chdir(__DIR__);
+      }
       if (! file_exists("../model/Mail.php")) {
         debugTraceLog("../model/Mail.php not found, current directory is :'".getcwd()."' \nTry to move up with chdir('../')");
         chdir('../');
