@@ -104,7 +104,7 @@ class EmploymentContractMain extends SqlElement {
         "idOrganization"=>"readonly",
         "idEmploymentContractType"=>"required",
         "idStatus"=>"required",
-        "startDate"=>"required",
+        "startDate"=>"required"
         );
 
   private static $_fieldsTooltip = array(
