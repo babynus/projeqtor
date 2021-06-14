@@ -52,6 +52,7 @@ $workVisibility=$pe->_workVisibility;
 $costVisibility=$pe->_costVisibility;
 
 $displayWidth=RequestHandler::getValue('destinationWidth');
+$displayHeigth=RequestHandler::getValue('destinationHeight');
 // $twoCols=($displayWidth>1400)?true:false;
 // if (!isNewGui() ) $twoCols=false;
 //$twoCols=false;
@@ -890,7 +891,7 @@ $showActStream='false';
 if(Parameter::getUserParameter('showTodayActivityStream')){
   $showActStream=Parameter::getUserParameter('showTodayActivityStream');
 }
-$topDiwHeight="20%";
+$topDivHeight="20%";
 if($showActStream=='false'){
   $classicViewWidth=($displayWidth-20)*0.75.'px';
   $activityStreamWidth=($displayWidth-20)*0.25.'px';
@@ -903,10 +904,16 @@ $activityStreamHeight='80%';
 $widthForDisplay=($displayWidth-20)*0.25;
 
 if(Parameter::getUserParameter('contentPaneTodayTopHeight')){
-  $topDiwHeight=Parameter::getUserParameter('contentPaneTodayTopHeight').'px';
+  $topDivHeight=Parameter::getUserParameter('contentPaneTodayTopHeight').'px';
 }
 if(Parameter::getUserParameter('contentPaneTodayClassicViewHeight')){
   $classicViewHeight=Parameter::getUserParameter('contentPaneTodayClassicViewHeight').'px';
+}
+
+$topDivHeightNum=intval(substr($topDivHeight,0,strlen($topDivHeight)-2));
+if(($displayHeigth-30) <=$topDivHeightNum){
+  $topDivHeight=$displayHeigth*0.9;
+  $topDivHeight=$topDivHeight.'px';
 }
 
 if(Parameter::getUserParameter('contentPaneTodayActStreamHeight')){
@@ -942,7 +949,7 @@ if (!securityCheckDisplayMenu($menu->id,substr($menu->name,4)))$isModuleActive=f
      <?php if($isModuleActive){?> 
     <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false"  > 
     <?php   if($asTodayProject->id!=''){?>
-      <div dojoType="dijit.layout.ContentPane" id="todayTop" region="top" style="width:100%;max-height:$topDiwHeight;padding:15px;" splitter="true" >
+      <div dojoType="dijit.layout.ContentPane" id="todayTop" region="top" style="width:100%;height:<?php echo $topDivHeight;?>;padding:15px;" splitter="true" >
         <script type="dojo/connect" event="resize" args="evt">
           saveContentPaneResizing("contentPaneTodayTopHeight", dojo.byId("todayTop").offsetHeight, true);
         </script>
