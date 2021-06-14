@@ -4389,3 +4389,82 @@ div.ticketKanbanCustom .kanbanVersion{
     background-color: #fae2d1;
     color: black;
 }
+
+/* .card-rig { */
+/*   width: 100px; */
+/*   text-align: center; */
+/* } */
+
+.card {
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 100px;
+  height: 140px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  font-weight: bold;
+  color: white;
+  transform: scale(1);
+  transition: transform 100ms ease-in-out;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.card-face {
+  border: 2px solid #606060;
+}
+
+.small-card-id {
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  font-size: 20px;
+}
+
+.card-face .player-vote {
+  position: relative;
+  padding-top: 40px;
+  font-size: 45px;
+}
+
+.card-in-hand {
+  position: relative;
+  margin: 15px;
+  float: left;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.selected{
+    transform: scale(1.2) rotate(0.01turn);
+}
+
+.card-in-hand:hover {
+	transform: scale(1.2);
+}
+
+.card-container {
+  width: 100px;
+  height: 140px;
+  border-radius: 10px;
+}
+
+.card-in-hand .card-container {
+  box-shadow: 0 10px 10px rgba(0, 0, 0, .5);
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100px;
+  height: 140px;
+  z-index: 1;
+}
