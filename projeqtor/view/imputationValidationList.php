@@ -190,7 +190,7 @@ if(sessionValueExists('endWeekImputationValidation')){
                     <?php echo autoOpenFilteringSelect();?>
                     value="<?php if(sessionValueExists('idTeamValidation')){
                                   echo getSessionValue('idTeamValidation');
-                                  $userTeam = getSessionValue('idTeam');
+                                  $userTeam = getSessionValue('idTeamValidation');
                                  }?>">
                     <script type="dojo/method" event="onChange" >
                       saveDataToSession("idTeamValidation",dijit.byId('idTeam').get('value'),false);
