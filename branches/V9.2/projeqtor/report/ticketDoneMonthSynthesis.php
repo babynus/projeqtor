@@ -232,14 +232,13 @@ foreach ($lstTicket as $ticket){
     	}else{
     	  $result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] = $duration;
     	}
-    	if($delayValue <= $delay->value){
-    		if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'])){
-    		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] += $duration;
-    		}else{
-    		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] = $duration;
-    		}
-    		$result[$ticket->idTicketType][$ticket->idUrgency]['OK']++;
-    	}else{
+  		if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'])){
+  		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] += $duration;
+  		}else{
+  		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationOK'] = $duration;
+  		}
+  		$result[$ticket->idTicketType][$ticket->idUrgency]['OK']++;
+  		if($delayValue > $delay->value){
   	        if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'])){
     		  $result[$ticket->idTicketType][$ticket->idUrgency]['durationKO'] += $duration;
     		}else{
@@ -288,6 +287,7 @@ foreach ($lstUrgency as $urgency){
     	}
     	$durationOK = $durationDay+$durationHour;
     }
+    $durationOK = round($durationOK);
     $startDate = new DateTime(date("Y-m-d H:i:s"));
     $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationOK seconds")));
     $durationDiff = date_diff($startDate, $endDate, true);
@@ -329,6 +329,7 @@ foreach ($lstUrgency as $urgency){
     	}
     	$durationKO = $durationDay+$durationHour;
     }
+    $durationKO = round($durationKO);
     $startDate = new DateTime(date("Y-m-d H:i:s"));
     $endDate = new DateTime(date("Y-m-d H:i:s", strtotime("+$durationKO seconds")));
     $durationDiff = date_diff($startDate, $endDate, true);
@@ -357,7 +358,7 @@ foreach ($lstUrgency as $urgency){
     echo '<td class="reportTableData" style="width:15%"'.excelFormatCell('data',25).'>'.$durationDisplay.'</td>';
     $ponctuality = 0;
     $NB = (isset($result[$type->id][$urgency->id]['Nb']))?$result[$type->id][$urgency->id]['Nb']:0;
-    if($OK)$ponctuality = ($OK/$NB)*100;
+    if($OK)$ponctuality = (($OK-$KO)/$NB)*100;
     echo '<td class="reportTableData" style="width:10%"'.excelFormatCell('data',20).'>'.$ponctuality.' %</td>';
     echo '</tr>';
   }
