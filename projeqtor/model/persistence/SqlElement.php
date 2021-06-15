@@ -2570,6 +2570,9 @@ abstract class SqlElement {
     if (! $copyToWithResult and property_exists ( $newObj, "result" )) {
       $newObj->result = null;
     }
+    if (! $copyToWithResult and property_exists ( $newObj, "idResolution" )) {
+      $newObj->idResolution = null;
+    }
     $result = $newObj->save ();
     if (stripos ( $result, 'id="lastOperationStatus" value="OK"' ) > 0) {
       $returnValue = i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . ' ' . i18n ( 'resultCopied' ) . ' #' . $newObj->id;

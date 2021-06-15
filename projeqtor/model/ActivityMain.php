@@ -290,6 +290,8 @@ class ActivityMain extends SqlElement {
     if ($colName == "idProject") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  dojo.byId("ActivityPlanningElement_wbs").value=""; ';
+      $colScript .= '  dojo.byId("idActivity").value=""; ';
+      $colScript .= '  document.getElementsByName("idActivity")[0].value=""; ';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     } else if ($colName == "idActivity") {
