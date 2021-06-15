@@ -72,7 +72,7 @@ ALTER TABLE `${prefix}workcommanddone` ADD COLUMN `idActivityWorkUnit` int(12) u
 UPDATE `${prefix}planningelement` SET hasWorkUnit=1 
 WHERE `idWorkUnit` is not null and `idComplexity` is not null and `quantity` is not null;
 
-DELETE FROM `${prefix}workcommanddone`;
+DELETE FROM `${prefix}workcommanddone` WHERE 1=1;
 
 INSERT INTO `${prefix}workcommanddone` (idWorkCommand, refType, refId , doneQuantity, idActivityWorkUnit )
 SELECT idWorkCommand, refType, refId , quantity, id
