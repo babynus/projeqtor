@@ -323,7 +323,7 @@ INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`)
 ('PokerSession', 'session with due date voting', 20, 1, 0);
 
 INSERT INTO `module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES 
-(22,'modulePoker','110',null,0,0); 
+(22,'modulePoker','110',null,1,0); 
 
 INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (198,22,259,0,0),
