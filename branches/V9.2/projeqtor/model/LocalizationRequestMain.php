@@ -70,7 +70,7 @@ class LocalizationRequestMain extends SqlElement
      * Destructor
      * @return void
      */
-    function __destruct() {
+    public function __destruct() {
         parent::__destruct();
     }
 
