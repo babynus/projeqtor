@@ -28,21 +28,20 @@
  * Get the list of objects, in Json format, to display the grid list
  */
 require_once "../tool/projeqtor.php"; 
-$result="";
 $id=RequestHandler::getId('idItem');
 $idPokerSession=RequestHandler::getId('idPokerSession');
 $vote = RequestHandler::getValue('vote');
 $user = getSessionUser();
 
-Sql::beginTransaction();
-
-$pokerVote = new PokerVote();
-$pokerVote->idResource = $user->id;
-$pokerVote->idPokerItem = $id;
-$pokerVote->idPokerSession = $idPokerSession;
-$pokerVote->value = $vote;
-$result = $pokerVote->save();
-
-// Message of correct saving
-displayLastOperationStatus($result);
+$pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerItem'=>$id, 'idResource'=>$user->id, 'idPokerSession'=>$idPokerSession));
+if($pokerVote->id){
+  $pokerVote->value = $vote;
+}else{
+  $pokerVote = new PokerVote();
+  $pokerVote->idResource = $user->id;
+  $pokerVote->idPokerItem = $id;
+  $pokerVote->idPokerSession = $idPokerSession;
+  $pokerVote->value = $vote;
+}
+$pokerVote->save();
 ?>

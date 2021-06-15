@@ -290,6 +290,7 @@ function refreshPokerItemResult(idPokerSession, idItem, itemList) {
 }
 
 function voteToPokerItem(idPokerSession, idItem, itemList, vote) {
+	if(!vote)vote='';
   dojo.xhrPost({
     url : '../tool/voteToPokerItem.php?idPokerSession=' + idPokerSession
         + '&idItem=' + idItem + '&vote=' + vote,
