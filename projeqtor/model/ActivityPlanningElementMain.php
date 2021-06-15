@@ -303,7 +303,13 @@ class ActivityPlanningElementMain extends PlanningElement {
     }
     $project = new Project($this->idProject);
     if(Module::isModuleActive('moduleGestionCA')){
-      self::$_fieldsAttributes['_separator_sectionRevenue_marginTop']='';
+      $user=getSessionUser();
+      $profile=$user->getProfile($this->idProject);
+      $visibility1=PlanningElement::getCostVisibility($profile);
+      $visibility2=PlanningElement::getWorkVisibility($profile);
+      if($visibility1!='NO' and $visibility2 != 'NO'){
+        self::$_fieldsAttributes['_separator_sectionRevenue_marginTop']='';
+      }
       if (isset($contextForAttributes) and $contextForAttributes=='global'){
         self::$_fieldsAttributes['revenue']='';
       }
