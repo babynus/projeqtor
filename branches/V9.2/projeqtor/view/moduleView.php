@@ -43,7 +43,7 @@ $user=getSessionUser();
     </div> 
     
     <?php $mod=new Module();
-          $modList=$mod->getSqlElementsFromCriteria(null,null,null,'sortOrder asc');
+          $modList=$mod->getSqlElementsFromCriteria(array('idle'=>'0'),null,null,'sortOrder asc');
           $nbTotal = count($modList);
           $simuIndex=Parameter::getGlobalParameter('simuIndex');
           global $hosted;
