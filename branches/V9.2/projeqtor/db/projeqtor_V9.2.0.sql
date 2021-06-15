@@ -310,14 +310,13 @@ INSERT INTO `${prefix}pokercomplexity` (`name`, `value`, `work`,`sortOrder`,`col
 ('1', 1, 0.5, 10, '#a2a2c3'),
 ('2', 2, 1, 20, '#a2a2c3'),
 ('3', 3, 1.5, 30, '#a2a2c3'),
-('4', 4, 2, 40, '#a2a2c3'),
 ('5', 5, 2.5, 50, '#a2a2c3'),
 ('8', 8, 4, 60, '#a2a2c3'),
 ('13', 13, 6.5, 70, '#a2a2c3'),
 ('20', 20, 10, 80, '#a2a2c3'),
 ('40', 40, 20, 90, '#a2a2c3'),
 ('100', 100, 50, 100, '#a2a2c3'),
-('?', 0, 0, 110, '#f1a874');
+('?', null, 0, 110, '#f1a874');
 
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
 ('PokerSession', 'live session', 10, 1, 0),
