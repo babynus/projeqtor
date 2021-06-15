@@ -899,10 +899,37 @@ class ImputationLine {
           $canRead=(securityGetAccessRightYesNo('menu'.$line->refType, 'read', $obj)=='YES');
           $canGoto=($canRead and securityCheckDisplayMenu(null, $line->refType))?true:false;
         }
+        $crit2 = array();
+        $crit2['id'] = $line->refId;
+        $crit2['idProject'] = $line->idProject;
+        $descriptionActivity = SqlElement::getSingleSqlElementFromCriteria('Activity', $crit2);
         
-        //gautier #directAcces
-        $style = '';
-        if($line->idAssignment == $idAssignDirectAcces and $line->idAssignment)$style = "style=background-color:#ffffaa;";
+        // Display leaves only if they are related to the contract type
+        $validLeaves = [];
+        $employementContract = new EmploymentContract();
+        $userContractType = $employementContract->getSqlElementsFromCriteria(array("idEmployee"=>$resourceId));
+        
+        $leaveTypeOfEmployment = new LeaveTypeOfEmploymentContractType();
+        $style = "";
+        if ($userContractType) {
+          $leaveTypeArray = $leaveTypeOfEmployment->getSqlElementsFromCriteria(array("idEmploymentContractType" => $userContractType[0]->idEmploymentContractType));
+          
+          $leaveType = new LeaveType();
+          $leaveArray = $leaveType->getSqlElementsFromCriteria(array());
+          foreach ($leaveArray as $array)
+            foreach ($leaveTypeArray as $typeArray)
+              if ($array->id == $typeArray->idLeaveType)
+                array_push($validLeaves, $array->name);
+              $idActivityType = $descriptionActivity->idActivityType;
+              $type = new Type($idActivityType);
+              if (!in_array($descriptionActivity->name, $validLeaves) && $type->code == "LEAVESYST")
+                $visibility = "collapse"; 
+              else
+                $visibility = "visible";
+              $style = 'style=visibility:' . $visibility;
+        }
+        //END
+        if($line->idAssignment == $idAssignDirectAcces and $line->idAssignment)$style .= ";background-color:#ffffaa";
         echo '<tr '.$style.' id="line_'.$nbLine.'"class="ganttTask'.$rowType.'"';
         if ($closedWbs and $closedWbs!=$line->wbsSortable) {
           echo ' style="display:none" ';

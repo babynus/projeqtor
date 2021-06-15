@@ -1914,7 +1914,7 @@ class LeaveMain extends SqlElement {
             $notif->name = $newLeaveType->name." #".$this->id." ".i18n("is")." ".i18n("changed")." ".i18n("by")." ".$requester->userName;
             $notif->content = $cause;
         }
-        $notif->title = i18n("informations")." ".i18n("FOR")." ".i18n("leave")." #".$this->id;
+        $notif->title = i18n("informations")." ".i18n("leaveAbout")." ".i18n("leave")." #".$this->id;
         $notif->sendEmail = 0;
         $notif->idle=0;
     } 
@@ -1950,14 +1950,14 @@ class LeaveMain extends SqlElement {
             if ($readAllowed) {
                 // Emit alert
                 if ($this->submitted == 1 and $old->submitted == 0){
-                    $title = i18n("leaveRequest")." ".i18n("FOR")." ".$requester->name;
+                    $title = i18n("leaveRequest")." ".i18n("leaveAbout")." ".$requester->name;
                     $message = $cause;
                 }
                 else if ($delete or $old->id==null) {
-                    $title = i18n("leave")." ".i18n("is")." ".$cause." - ".$newLeaveType->name. " ". i18n("FOR")." ".$requester->name;
+                    $title = i18n("leave")." ".i18n("is")." ".$cause." - ".$newLeaveType->name. " ". i18n("leaveAbout")." ".$requester->name;
                     $message = i18n("by")." ".$user->name." ".i18n("comment")." : ".$this->comment;
                 } else {
-                    $title = i18n("leave")." ".i18n("is")." ".i18n("changed")." ".i18n("FOR")." ".$requester->name;
+                    $title = i18n("leave")." ".i18n("is")." ".i18n("changed")." ".i18n("leaveAbout")." ".$requester->name;
                     $message = $cause;
                 }
                 $theDate = new DateTime();
@@ -1979,14 +1979,14 @@ class LeaveMain extends SqlElement {
             if ($receiver->email!=null) {
 
                 if ($this->submitted == 1 and $old->submitted == 0){
-                    $subject = i18n("leaveRequest")." ".i18n("FOR")." ".$requester->name;
+                    $subject = i18n("leaveRequest")." ".i18n("leaveAbout")." ".$requester->name;
                     $messageBody = $cause;
                 }
                 else if ($delete or $old->id==null) {
-                    $subject = i18n("leave")." ".i18n("is")." ".$cause." - ".$newLeaveType->name." ".i18n("FOR")." ".$requester->name;
+                    $subject = i18n("leave")." ".i18n("is")." ".$cause." - ".$newLeaveType->name." ".i18n("leaveAbout")." ".$requester->name;
                     $messageBody = i18n("by")." ".$user->name." ".i18n("comment")." : ".$this->comment;
                 } else {
-                    $subject = i18n("leave")." ".i18n("is")." ".i18n("changed")." ".i18n("FOR")." ".$requester->name;
+                    $subject = i18n("leave")." ".i18n("is")." ".i18n("changed")." ".i18n("leaveAbout")." ".$requester->name;
                     $messageBody = $cause;
                 }
                 sendMail($receiver->email, $subject, $messageBody);

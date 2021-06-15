@@ -339,19 +339,18 @@
         <!--------------------------------->
         <!-- LIST OF EXISTING LEAVE TYPE -->
         <!--------------------------------->
-        <table style="margin-top:10px;margin-bottom:5px;font-size:12px;">
-            <th class="label" style="font-size:13px;"><b><?php echo (i18n("colType")); ?> : </b></th>
+    <div style="font-size:12px;height:40px;margin-top:10px">
             <?php
-                foreach($leaveTypes as $lvt) {
-                    $textColor = oppositeColor($lvt->color);
-                    $echo  = '<td>&nbsp;</td>';
-                    $echo .= '<td>';
-                    $echo .= ' <span class="leaveType" style="background-color:'.$lvt->color.';color:'.$textColor.';">&nbsp;'.$lvt->name.'&nbsp;</span>';
-                    $echo .= '</td>';
-                    echo $echo;
-                }
+            $countLine = 0;
+            foreach($leaveTypes as $lvt) {
+                $textColor = oppositeColor($lvt->color);
+                echo '<span class="leaveType" style="background-color:'.$lvt->color.';color:'.$textColor.';margin:6px">&nbsp;'.$lvt->name.'&nbsp;</span>';
+                if ($countLine == round(sizeof($leaveTypes) / 2) - 2)
+                    echo "<br>";
+                $countLine += 1;
+            }
             ?>
-        </table>
+        </div>
         <!------------------------------------------------------->
         <!-- LIST OF STATUS OF WORKFLOW DEDICATED TO THE LEAVE -->
         <!------------------------------------------------------->                
@@ -763,8 +762,7 @@
                                                 foreach($leaveTypes as $leaveType) {
                                                     $nbTypes++;
                                                     $bgColorType='background-color:'.$leaveType->color.' !important;';
-                                                    $colorType = 'color:'.oppositeColor($bgColorType).' !important;';
-                                                    $colorStyle = $bgColorType.$colorType;
+                                                    $colorStyle = $bgColorType;
                                                     $colorStyleType[]=$colorStyle;
                                                     echo '<td colspan="2" style="text-align:center;vertical-align:middle;'.$colorStyle.'" class="assignHeader">';
                                                     echo $leaveType->name;
@@ -772,10 +770,8 @@
                                                 }
                                             } else {
                                                 $bgColorType='background-color:'.$leaveTypeRequestColor.' !important;';
-                                                $colorType = 'color:'.oppositeColor($bgColorType).' !important;';
-                                                $colorStyle = $bgColorType.$colorType;
-                                                $colorStyleType[]=$colorStyle;
-                                                echo '<td colspan="2" style="text-align:center;vertical-align:middle;'.$colorStyle.'" class="assignHeader">';
+                                                $colorStyleType[]=$bgColorType;
+                                                echo '<td colspan="2" style="text-align:center;vertical-align:middle;'.$bgColorType.'" class="assignHeader">';
                                                 echo $leaveTypeRequestName;
                                                 echo '</td>';                        
                                             }
@@ -790,10 +786,10 @@
                                                 $iE = 1;
                                             }    
                                             for ($i=0;$i<$iE;$i++) {
-                                                echo '<td style="text-align:center;vertical-align:middle;'.$colorStyleType[$i].'" class="assignHeader">';
+                                                echo '<td style="text-align:center;vertical-align:middle;" class="assignHeader">';
                                                 echo (i18n('taken'));
                                                 echo '</td>';
-                                                echo '<td style="text-align:center;vertical-align:middle;'.$colorStyleType[$i].'" class="assignHeader">';
+                                                echo '<td style="text-align:center;vertical-align:middle;" class="assignHeader">';
                                                 echo (i18n('colLeft'));
                                                 echo '</td>';
                                             }
@@ -863,8 +859,7 @@
                                                             $leftTotalType[$leaveType->id] += $left;
                                                         }
                                                         $bgColorType='background-color:'.$leaveType->color.' !important;';
-                                                        $colorType = 'color:'.oppositeColor($bgColorType).' !important;';
-                                                        $colorStyle = $bgColorType.$colorType;                                                        
+                                                        $colorStyle = $bgColorType;                                                       
                                                         // Taken 
                                                         echo '  <td style="text-align:center;vertical-align:middle;'.$colorStyle.'" class="assignHeader">';
                                                         echo $taken;
@@ -914,8 +909,7 @@
                                         foreach($leaveTypes as $leaveType) {
                                             if ($idTypeRequest!=0 and $idTypeRequest!=$leaveType->id) { continue; }
                                             $bgColorType='background-color:'.$leaveType->color.' !important;';
-                                            $colorType = 'color:'.oppositeColor($bgColorType).' !important;';
-                                            $colorStyle = $bgColorType.$colorType;                                                        
+                                            $colorStyle = $bgColorType;                                                       
                                             // Taken 
                                             echo '  <td style="text-align:center;vertical-align:middle;'.$colorStyle.'" class="assignHeader"><b>';
                                             echo $takenTotalType[$leaveType->id];
