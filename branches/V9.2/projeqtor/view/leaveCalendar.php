@@ -98,14 +98,18 @@
 <!--------------------------------->
 <!-- LIST OF EXISTING LEAVE TYPE -->
 <!--------------------------------->
-    <table style="margin-top:5px;margin-bottom:5px;font-size:13px;">
+      <div style="font-size:12px;height:40px;margin-top:10px">
         <?php
+        $countLine = 0;
             foreach($leaveTypes as $lvt) {
                 $textColor = oppositeColor($lvt->color);
-                echo '<td><span class="leaveType" style="background-color:'.$lvt->color.';color:'.$textColor.';">&nbsp;'.$lvt->name.'&nbsp;</span></td>';
+              echo '<span class="leaveType" style="background-color:'.$lvt->color.';color:'.$textColor.';margin:6px">&nbsp;'.$lvt->name.'&nbsp;</span>';
+              if ($countLine == round(sizeof($leaveTypes) / 2) - 2)
+                  echo "<br>";               
+              $countLine += 1;
             }
         ?>
-    </table>
+      </div>
     <table style="width:100%; height:100%;text-align:center;">
 <!-------------------------------->
 <!-- TAG FOR THE LEAVE CALENDAR -->
@@ -370,9 +374,27 @@
                             $endDateContract = null;
                         } else {
                             $endDateContract = $empContract->endDate;
+                        }$validLeaves = [];
+                        $employementContract = new EmploymentContract();
+                        $userContractType = $employementContract->getSqlElementsFromCriteria(array("idEmployee"=>$idUser));
+                    
+                        $leaveTypeOfEmployment = new LeaveTypeOfEmploymentContractType();
+                        if ($userContractType) {
+                            $leaveTypeArray = $leaveTypeOfEmployment->getSqlElementsFromCriteria(array("idEmploymentContractType" => $userContractType[0]->idEmploymentContractType));
+                            $leaveType = new LeaveType();
+                            $leaveArray = $leaveType->getSqlElementsFromCriteria(array());
+                            foreach ($leaveArray as $array)
+                                foreach ($leaveTypeArray as $typeArray)
+                                    if ($array->id == $typeArray->idLeaveType)
+                                        array_push($validLeaves, $array->id);
                         }
+                        $daysTaken = 0;
+                        $quantity = 0;
+                        $daysLeft = 0;
                         foreach($lvsEarned as $lve) {
                             // Leave Type
+                          if (!in_array($lve->idLeaveType, $validLeaves))
+                              continue;
                             $lvt=new LeaveType($lve->idLeaveType);
                             $textColor = oppositeColor($lvt->color);
                             echo '<tr style="border: solid 1pt; height: 20px;">';
@@ -408,6 +430,9 @@
                                 echo '<td>'.number_format($lve->quantity+0,1).'</td>';
                                 echo '<td>'.number_format($lve->quantity - $lve->leftQuantity, 1).'</td>';
                                 echo '<td>'.number_format($lve->leftQuantity+0, 1).'</td>';
+                                $quantity += number_format($lve->quantity+0,1);
+                                $daysTaken += number_format($lve->quantity - $lve->leftQuantity, 1);
+                                $daysLeft += number_format($lve->leftQuantity+0, 1);
                             } else {
                                 echo '<td> - </td>';
                                 echo '<td id="summaryTakenDays'.$lve->id.'"> - </td>';
@@ -428,6 +453,13 @@
                             echo '</tr>';
                         }
                     ?>
+                      <td>Total</td>
+                      <td> - </td>
+                      <td> - </td>
+                      <td><?= $quantity ?></td>
+                      <td><?= $daysTaken ?></td>
+                      <td><?= $daysLeft ?></td>
+                      <td> - </td>
                 </table>
               </div>
             </td>
