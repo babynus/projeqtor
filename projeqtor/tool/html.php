@@ -456,7 +456,24 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     // None of the previous cases : no criteria and not of the expected above cases
     $showIdleCriteria=$showIdle;
     if (! $obj and property_exists($listType, 'idProject'))  $showIdleCriteria=(! $limitToActiveProjects);
-    $table=SqlList::getList($listType,$column,$selection, $showIdleCriteria );
+    if ($col == 'idLeaveType') {
+      $table = [];
+      $employementContract = new EmploymentContract();
+      $userContractType = $employementContract->getSqlElementsFromCriteria(array("idEmployee" => getSessionUser()->id));
+      
+      $leaveTypeOfEmployment = new LeaveTypeOfEmploymentContractType();
+      if ($userContractType) {
+        $leaveTypeArray = $leaveTypeOfEmployment->getSqlElementsFromCriteria(array("idEmploymentContractType" => $userContractType[0]->idEmploymentContractType));
+        $leaveType = new LeaveType();
+        $leaveArray = $leaveType->getSqlElementsFromCriteria(array());
+        foreach ($leaveArray as $array)
+          foreach ($leaveTypeArray as $typeArray)
+            if ($array->id == $typeArray->idLeaveType)
+              $table[$array->id] = $array->name;
+      }
+    } else {
+      $table = SqlList::getList($listType, $column, $selection, $showIdleCriteria);
+    }
     if ($col=="idProject" or $col=="planning") { 
       // $wbsList will able to order list depending on WBS
     	$wbsList=SqlList::getList($listType,'sortOrder',$selection, (! $obj)?!$limitToActiveProjects:false );
