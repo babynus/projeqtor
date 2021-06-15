@@ -47,7 +47,8 @@ class TicketDelay extends Delay {
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
     <th field="nameTicketType" width="20%">${idTicketType}</th>
-    <th field="nameUrgency" width="20%">${urgency}</th>
+    <th field="nameUrgency" width="10%">${urgency}</th>
+    <th field="nameMacroTicketStatus" width="10%" formatter="translateFormatter">${idMacroTicketStatus}</th>
     <th field="nameProject" width="20%">${idProject}</th>
     <th field="value" width="10%" formatter="numericFormatter">${value}</th>
     <th field="nameDelayUnit" width="20%" formatter="translateFormatter">${unit}</th>
