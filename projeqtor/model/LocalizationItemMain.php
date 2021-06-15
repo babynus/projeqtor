@@ -45,7 +45,16 @@ class LocalizationItemMain extends SqlElement
         "idle"=>"nobr"
     );
 
-
+    public function __construct($id = NULL, $withoutDependentObjects=false)
+    {
+      parent::__construct($id,$withoutDependentObjects);
+      if ($withoutDependentObjects) return;
+    }
+    
+    public function __destruct() {
+      parent::__destruct();
+    }
+    
     private static $_colCaptionTransposition = array(
         'context'=>'idContext',
         'idResource'=>'responsible'
