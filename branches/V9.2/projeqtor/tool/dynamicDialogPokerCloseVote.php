@@ -34,20 +34,22 @@ $pokerVote = new PokerVote();
 $pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$id, 'idPokerItem'=>$idPokerItem), 'value');
 $lowComplexity='';
 $highComplexity='';
+$value='';
+if($item->value){
+	$complexity = new PokerComplexity();
+	$value = $complexity->getSingleSqlElementFromCriteria('PokerComplexity', array('value'=>$item->value));
+}else{
+	$complexity = new PokerComplexity();
+	$value = $complexity->getSingleSqlElementFromCriteria('PokerComplexity', array('value'=>'1'));
+}
 if($pokerVoteList){
   sort($pokerVoteList);
   $lowVote = $pokerVoteList[0];
   $complexity = new PokerComplexity();
   $lowComplexity = $complexity->getSingleSqlElementFromCriteria('PokerComplexity', array('value'=>$lowVote));
+  $value = $lowComplexity;
   $highVote = $pokerVoteList[count($pokerVoteList)-1];
   $highComplexity = $complexity->getSingleSqlElementFromCriteria('PokerComplexity', array('value'=>$highVote));
-}
-if($item->value){
-  $complexity = new PokerComplexity();
-  $value = $complexity->getSingleSqlElementFromCriteria('PokerComplexity', array('value'=>$item->value));
-}else{
-  $complexity = new PokerComplexity();
-  $value = $complexity->getSingleSqlElementFromCriteria('PokerComplexity', array('value'=>'1'));
 }
 ?>
 <table>
@@ -75,13 +77,11 @@ if($item->value){
              </td>
              <td>
                <table><tr><td>
-               <div id="dialogPokerItemList" dojoType="dijit.layout.ContentPane" region="center">
                  <textarea dojoType="dijit.form.Textarea"
                              id="pokerItemRefId" name="pokerItemRefId" readOnly
                              style="width: 400px;" value="<?php echo '#'.$item->refId.' '.SqlList::getNameFromId($item->refType, $item->refId);?>"
                              maxlength="4000"
                              class="input"></textarea>
-               </div>
                </td></tr></table>
              </td>
            </tr>
@@ -94,12 +94,14 @@ if($item->value){
                 <?php echo autoOpenFilteringSelect();?> class="input" value="<?php echo $value->id;?>">
                 <?php echo htmlDrawOptionForReference('idPokerComplexity',null,$obj,true);?>
                </select>
+               <?php if($lowComplexity and $highComplexity and ($lowComplexity != $highComplexity)){?>
                <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" style="width:82px" id="pokerMinVoteValue" onclick="dijit.byId('pokerComplexity').set('value', <?php echo $lowComplexity->id;?>);">
                 <?php echo ($lowComplexity)?$lowComplexity->name:'';?>&nbsp;&darr;
               </button>
               <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" style="width:82px" id="pokerMaxVoteValue" onclick="dijit.byId('pokerComplexity').set('value', <?php echo $highComplexity->id;?>);">
                 <?php echo 	($highComplexity)?$highComplexity->name:'';?>&nbsp;&uarr;
               </button>
+              <?php }?>
              </td>
            </tr>
             <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -113,10 +115,10 @@ if($item->value){
         <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogPokerCloseVote').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
-        <button class="mediumTextButton" dojoType="dijit.form.Button" type="submit" style="width:150px" id="dialogPokerItemPause" onclick="protectDblClick(this);pausePokerItemVote(<?php echo $idPokerItem;?>);return false;">
+        <button class="mediumTextButton" dojoType="dijit.form.Button" type="submit" style="width:150px" onclick="protectDblClick(this);pausePokerItemVote(<?php echo $idPokerItem;?>);return false;">
           <?php echo i18n("pausePokerVote");?>
         </button>
-        <button class="mediumTextButton" dojoType="dijit.form.Button" type="submit" style="width:150px" id="dialogPokerItemSubmit" onclick="protectDblClick(this);commitPokerItemVote(<?php echo $idPokerItem;?>);return false;">
+        <button class="mediumTextButton" dojoType="dijit.form.Button" type="submit" style="width:150px" onclick="protectDblClick(this);commitPokerItemVote(<?php echo $idPokerItem;?>);return false;">
           <?php echo i18n("closePokerVote");?>
         </button>
       </td>
