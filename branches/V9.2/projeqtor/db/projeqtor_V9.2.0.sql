@@ -186,9 +186,9 @@ CREATE TABLE `${prefix}macrostatus` (
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 INSERT INTO `${prefix}macrostatus` (`id`,`name`) VALUES
-(1,'handled'),
-(2,'colDone'),
-(3,'idle');
+(1,'macroStatusHandled'),
+(2,'macroStatusDone'),
+(3,'macroStatusIdle');
 
 -- Fix issue for 
 DELETE FROM `${prefix}accessright` where idMenu=222;
@@ -513,15 +513,14 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (341,'navLocalization',0,0,95,0),
 (342,'menuLocalizationRequest',341,262,20,0),
 (343,'menuLocalizationItem',341,263,30,0),
-(344,'menuLocalizationTranslator',341,264,40,0);
-
-INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder`,`idReport`) VALUES
+(344,'menuLocalizationTranslator',341,264,40,0),
 (345, 'menuLanguageSkillLevel',131,265,55,0),
 (346, 'menuLocalizationRequestType',332,266,60,0),
 (347, 'menuLocalizationItemType', 332,267,70,0),
 (348, 'menuLanguageSkillLevel',341,265,50,0),
 (349, 'menuLocalizationRequestType',341,266,60,0),
-(350, 'menuLocalizationItemType',341,267,70,0);
+(350, 'menuLocalizationItemType',341,267,70,0),
+(353, 'menuEmployee',112,212,65,0);
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (21,265,0,0),
