@@ -472,7 +472,7 @@ abstract class SqlElement {
           "Document" => "controlStrict", 
           "DocumentVersion" => "controlStrict", 
           "EmploymentContract" => "controlStrict",
-          "Expense" => "controlStrict", 
+//          "Expense" => "controlStrict", 
           "IndividualExpense" => "controlStrict", 
           "Issue" => "controlStrict", 
 // MTY - LEAVE SYSTEM          
