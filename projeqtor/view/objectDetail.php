@@ -8621,7 +8621,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
         if ($canDelete and !$print) {
           echo '  <a onClick="removeAffectation(\''.htmlEncode($aff->id).'\','.(($aff->idResource==getSessionUser()->id)?'1':'0').',\''.$classToShow.'\',\''.$idToShow.'\');" '.'title="'.i18n('removeAffectation').'" > '.formatSmallButton('Remove').'</a>';
         }
-        if ($canUpdate and !$print and $isResource and !$aff->idle) {
+        if ($canUpdate and !$print and !$aff->idle) {
           echo '  <a onClick="replaceAffectation('."'".htmlEncode($aff->id)."'".",'".get_class($obj)."'".",'".$type."'".",'".htmlEncode($aff->idResource)."'".",'".htmlEncode($aff->idProject)."'".",'".htmlEncode($aff->rate)."'".",'".htmlEncode($aff->idle)."'".",'".$aff->startDate."'".",'".htmlEncode($aff->endDate)."'".','.htmlEncode($aff->idProfile).');" '.'title="'.i18n('replaceAffectation').'" > '.formatSmallButton('SwitchUser').'</a>';
         } else {
           if ($aff->idle) {
@@ -8671,7 +8671,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
         if ($canDelete and !$print) {
           echo '  <a onClick="removeAffectation(\''.htmlEncode($aff->id).'\','.(($aff->idResource==getSessionUser()->id)?'1':'0').',\''.$classToShow.'\',\''.$idToShow.'\');" '.'title="'.i18n('removeAffectation').'" > '.formatSmallButton('Remove').'</a>';
         }
-        if ($canUpdate and !$print and $isResource and !$aff->idle) {
+        if ($canUpdate and !$print  and !$aff->idle) {
           echo '  <a onClick="replaceAffectation('."'".htmlEncode($aff->id)."'".",'".get_class($obj)."'".",'".$type."'".",'".htmlEncode($aff->idResource)."'".",'".htmlEncode($aff->idProject)."'".",'".htmlEncode($aff->rate)."'".",'".htmlEncode($aff->idle)."'".",'".$aff->startDate."'".",'".htmlEncode($aff->endDate)."'".','.htmlEncode($aff->idProfile).');" '.'title="'.i18n('replaceAffectation').'" > '.formatSmallButton('SwitchUser').'</a>';
         } else {
           if ($aff->idle) {
