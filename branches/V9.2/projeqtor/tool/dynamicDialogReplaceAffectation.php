@@ -36,7 +36,11 @@
   }
   $affId=$_REQUEST['idAffectation'];
   $aff=new Affectation($affId);
-  $res=new Resource($aff->idResource);
+  if($aff->idResource!=''){
+    $res=new ResourceAll($aff->idResource);
+  }else{
+    $res=new ResourceAll($aff->idResourceSelect);
+  }
   $obj=SqlElement::getCurrentObject(null,null,true,false) ;
   ?>
 <div>
