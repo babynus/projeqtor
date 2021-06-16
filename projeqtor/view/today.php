@@ -396,10 +396,9 @@ function showProjects() {
       if ($show or $cptSubPrj>0) {
         $goto="";
         $proj=new Project($id);
-        if (!$print and $show and securityCheckDisplayMenu(null, 'Project') and 
+        if (!$print and $show and securityCheckDisplayMenu(null, 'Project') and array_key_exists($id, $prjVisLst)) {
         // and securityGetAccessRightYesNo('menuProject', 'read', $prj)=="YES"
-        array_key_exists($id, $prjVisLst)) {
-          $goto=' onClick="gotoElement(\'Project\',\''.$id.'\');setSelectedProject(\''.htmlEnCode($proj->id).'\',\''.htmlEnCode($proj->name).'\',\'selectedProject\');" style="border-right:0px;text-align: left;cursor: pointer;'.($show?'':'color:#AAAAAA;').'" ';
+          $goto=' onClick="setSelectedProject(\''.htmlEnCode($proj->id).'\',\''.htmlEnCode($proj->name).'\',\'selectedProject\',\'null\',\'true\');" style="border-right:0px;text-align: left;cursor: pointer;'.($show?'':'color:#AAAAAA;').'" ';
         } else {
           $goto=' style="border-right:0px;text-align: left;"';
         }
