@@ -170,7 +170,7 @@ $resources=array();
 $sumProj=array();
 $alreadyExistingActivity = array();
 foreach ($lstWork as $work) {
-  if ($paramActivityType) {
+  if ($paramActivityType and $work->refType=='Activity') {
     if (array_key_exists($work->refId, $alreadyExistingActivity))
       $act = $alreadyExistingActivity[$work->refId];
     else {
@@ -178,7 +178,7 @@ foreach ($lstWork as $work) {
       $alreadyExistingActivity[$work->refId] = $act;
     }
   }
-  if (!$paramActivityType or $paramActivityType == $act->idActivityType) {
+  if (!$paramActivityType or (isset($act) and ($paramActivityType == $act->idActivityType))) {
     if (!array_key_exists($work->idResource, $resources)) {
       $resources[$work->idResource] = SqlList::getNameFromId('Resource', $work->idResource);
     }

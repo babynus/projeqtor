@@ -905,7 +905,6 @@ $widthForDisplay=($displayWidth-20)*0.25;
 
 if(Parameter::getUserParameter('contentPaneTodayTopHeight')){
   $topDivHeight=Parameter::getUserParameter('contentPaneTodayTopHeight').'px';
-  debugLog($topDivHeight);
 }
 // if(Parameter::getUserParameter('contentPaneTodayClassicViewHeight')){
 //   $classicViewHeight=Parameter::getUserParameter('contentPaneTodayClassicViewHeight').'px';
@@ -918,7 +917,6 @@ if(($displayHeigth-30) <= $topDivHeightNum){
   $topDivHeight=$displayHeigth*0.9;
   $topDivHeight=$topDivHeight.'px';
 }
-debugLog($topDivHeight);
 
 
 if($showActStream=='false'){
