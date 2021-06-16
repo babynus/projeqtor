@@ -179,7 +179,7 @@ $resActTypes=array();
 $alreadyExistingActivity=array();
 $alreadyExistingType=array();
 foreach ($lstWork as $work) {
-  if ($paramActivityType) {
+  if ($paramActivityType and $work->refType=='Activity' ) {
     if (array_key_exists($work->refId, $alreadyExistingActivity)) {
       $act = $alreadyExistingActivity[$work->refId];
       $actType = $alreadyExistingType[$work->refId];
@@ -190,7 +190,7 @@ foreach ($lstWork as $work) {
       $alreadyExistingType[$work->refId] = $actType;
     }
   }
-  if ($paramActivityType == "" or $paramActivityType == $act->idActivityType) {
+  if ($paramActivityType == "" or  (isset($act) and ($paramActivityType == $act->idActivityType))) {
     if (! array_key_exists($work->idResource,$resources)) {
       $resources[$work->idResource]=SqlList::getNameFromId('Resource', $work->idResource);
     }

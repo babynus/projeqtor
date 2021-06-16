@@ -128,7 +128,7 @@
 
     $alreadyExistingActivity=array();
     while ($line = Sql::fetchLine($result)) {
-      if ($paramActivityType) {
+      if ($paramActivityType and $line["refType"]=='Activity') {
         if (array_key_exists($line["refId"], $alreadyExistingActivity))
           $act = $alreadyExistingActivity[$line["refId"]]; 
         else {
