@@ -8330,8 +8330,8 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
   }
 
 
- public static function setSectionPosition (){
-  $sectionPosition=array(
+  public static function setSectionPosition (){
+    $sectionPosition=array(
       'accessright'=>array('2'=>'extra', '3'=>'history','99'=>'description'),
       'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
       'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
@@ -8439,9 +8439,19 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       'void'=>array('2'=>'right', '3'=>'right','99'=>'descrpition'),
       'workflowdiagram'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
       'workflowstatus'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'));
+    return $sectionPosition;
+  }
 
-  return $sectionPosition;
-}
+  public function getObjectTypeName() {
+    $class=get_class($this);
+    return self::getTypeName($class);
+  }
+  
+  public static function getTypeName($class) {
+    $typeFld = 'id' . $class . 'Type';
+    if ($class=='PeriodicMeeting') $typeFld='idMeetingType';
+    return $typeFld;
+  }
 }
   
 ?>
