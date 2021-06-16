@@ -3048,7 +3048,7 @@ function i18n(str, vars) {
  *          the name of the field where selection is executed
  * @return void
  */
-function setSelectedProject(idProject, nameProject, selectionField,resetPrevious) {
+function setSelectedProject(idProject, nameProject, selectionField,resetPrevious,goToProject) {
 	var isChecked = dijit.byId('onlyCheckedProject').get('checked');
 	if(isChecked == true){
 		showSelectedProject(false);
@@ -3120,7 +3120,11 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
         } else if (dijit.byId("listForm") && dojo.byId('objectClass') && dojo.byId('listShowIdle')) {
           refreshJsonList(dojo.byId('objectClass').value);
         } else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value == 'Today') {
-          loadContent("../view/today.php", "centerDiv");
+          if(goToProject=='true'){
+            gotoElement('Project',idProject);
+          }else{
+            loadContent("../view/today.php", "centerDiv");
+          }
         } else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value == 'Kanban') {
           loadContent("../view/kanbanViewMain.php", "centerDiv");        
         } else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value == 'ActivityStream') {
