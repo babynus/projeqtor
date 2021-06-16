@@ -9900,6 +9900,7 @@ function drawJoblistFromObject($obj,$nbCol=3) {
 
 function drawPokerVote($obj){
   global $print;
+  if (!$obj->id) return;
   $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
   if ($obj->idle==1) {
   	$canUpdate=false;
@@ -9921,8 +9922,9 @@ function drawPokerVote($obj){
   $lenght = count($itemList)-1;
   if($lenght < 0)$lenght=0;
   $next = ($pos<$lenght)?true:false;
-  $refObj = new $pokerItem->refType($pokerItem->refId);
+  
   if($pokerItem->id){
+    $refObj = new $pokerItem->refType($pokerItem->refId);
     echo '<div id="pokerVoteDiv" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;">';
     echo '<table style="width: 100%;"><tr><td>';
     echo '<div id="pokerVoteDescription" dojoType="dijit.layout.ContentPane" region="center" align="left" style="width: 100%;"><table><tr><td>';
