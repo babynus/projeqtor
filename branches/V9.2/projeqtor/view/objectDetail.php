@@ -2643,17 +2643,17 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             	if($obj->idMacroTicketStatus==1){
             		echo "data-dojo-props='selected:true'";
             	}
-            	echo '>'.i18n('colHandled').'</li>';
+            	echo '>'.i18n('macroStatusHandled').'</li>';
             	echo '<li id="isDoneStatus" onClick="dojo.byId(\''.$col.'\').value=\'2\';" data-dojo-type="dojox/mobile/TabBarButton" style="width: 80px !important;"';
             	if($obj->idMacroTicketStatus==2 or !$obj->idMacroTicketStatus){
             		echo "data-dojo-props='selected:true'";
             	}
-            	echo '>'.i18n('colDone').'</li>';
+            	echo '>'.i18n('macroStatusDone').'</li>';
             	echo '<li  id="isIdleStatus" onClick="dojo.byId(\''.$col.'\').value=\'3\';" data-dojo-type="dojox/mobile/TabBarButton" style="width: 80px !important;"';
             	if($obj->idMacroTicketStatus==3){
             		echo "data-dojo-props='selected:true'";
             	}
-            	echo '>'.i18n('colIdle').'</li>';
+            	echo '>'.i18n('macroStatusIdle').'</li>';
         	echo '</ul>';
           }else{
             echo '<table id="'.$col.'List">';
