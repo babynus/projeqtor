@@ -235,6 +235,7 @@ Diagram, synthesis, colored report, loads plan between planned and real work...
 
 #. Monthly planning resource/project
 #. Monthly planning project/resource
+#. Yearly planning project/resource
 #. Monthly planning project/activity/resource
 #. Monthly planning resource/project/activity
 #. Monthly planning for a resource
@@ -250,6 +251,30 @@ Diagram, synthesis, colored report, loads plan between planned and real work...
 #. Colored monthly resource planning
 #. Global planning project/resource per month
 #. Planned interventions
+
+.. rubric:: Steering charts
+
+The management diagrams are very precise reports to follow, compare and inform on the costs, deadlines and progress of your projects.
+
+#. Burndown chart
+#. S curve chart
+#. 45° chart
+#. Performance indicator 
+
+
+.. rubric:: KPIs
+
+Track your KPI indicators with precision.
+
+#. KPI Duration for project
+#. KPI Duration consolidated
+#. KPI Workload for project
+#. KPI Workload consolidated
+#. KPI Deliverable for project
+#. KPI Deliverable consolidated
+#. KPI Incoming for project
+#. KPI Incoming consolidated
+#. KPI Terms
 
 
 .. rubric:: Tickets
@@ -274,6 +299,8 @@ You can restrict and filter your display by resource, by customer, by requestor,
 #. Report for opened tickets - global
 #. Report for tickets cumulated - number of days
 
+#. Handled ticket synthesis - monthly
+#. Done ticket synthesis - monthly
 #. Curve of tickets BurnDown
 #. Clients impacted by tickets
 
@@ -285,7 +312,6 @@ The current status category allows you to follow the status of elements relating
 #. Status of ongoing work
 #. Status of all work
 #. Risk management plan
-#. Opportunity plan
 #. Version detail
 #. Jobs summary for activities
 #. Approval of documents
@@ -297,7 +323,6 @@ You will be able to follow all your costs related to the project, the activity o
 
 #. Cost synthesis per activity
 #. Resources costs per month
-#. Risk management plan
 #. Project expense per month
 #. Individual expense per month
 #. Total expense per month
@@ -314,6 +339,7 @@ In the same way, you will be able to follow the receipts related to the project 
 #. Financial expenses board
 #. Financial expenses synthesis
 #. Monthly consolidation
+#. Summary of orders / client invoicing
 
 
 
@@ -340,8 +366,8 @@ You will be able to trace the status of cases played out for requirements and / 
 
 A set of additional but very comprehensive reports on your projects and some of its elements.
 
-#. Connections audit
 #. Detail of history for one item
+#. Connections audit
 #. Deleted items
 #. Project dashboard
 #. Flash report
@@ -349,27 +375,14 @@ A set of additional but very comprehensive reports on your projects and some of 
 #. List of attachments per user
 
 
+.. rubric:: Human Resources
 
-.. rubric:: Steering charts
+A set of additional but very comprehensive reports on your projects and some of its elements.
 
-The management diagrams are very precise reports to follow, compare and inform on the costs, deadlines and progress of your projects.
-
-#. Burndown chart
-#. S curve chart
-#. 45° chart
-#. Performance indicator 
+#. Resources inputs - outputs
+#. Resources workforce
+#. Resources seniority
 
 
-.. rubric:: KPIs
 
-Track your KPI indicators with precision.
 
-#. KPI Duration for project
-#. KPI Duration consolidated
-#. KPI Workload for project
-#. KPI Workload consolidated
-#. KPI Deliverable for project
-#. KPI Deliverable consolidated
-#. KPI Incoming for project
-#. KPI Incoming consolidated
-#. KPI Terms

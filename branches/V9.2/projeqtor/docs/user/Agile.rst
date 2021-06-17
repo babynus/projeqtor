@@ -285,7 +285,15 @@ The main objective is to balance production and demand.
     
     Wide kanban board display
 
-
+  .. compound:: Hide backlog
+  
+   When you create a kanban, you do not yet have columns representing a state, a set of states or even versions.
+   
+   The tiles then appear in a Backlog column.
+   
+   You have the option to hide this column.
+    
+    
 .. rubric:: Element management
 
 Find below the details of the tiles of your kanbans

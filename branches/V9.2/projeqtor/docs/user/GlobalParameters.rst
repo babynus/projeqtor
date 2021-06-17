@@ -38,13 +38,21 @@ Tab Work time
 
 .. rubric:: Daily work hours
 
-Definition of the hours of work applied in your company.
+Definition of the working hours applied in your company.
 
-Used to calculate delays based on “open hours”.
+Used to calculate the time based on "hours worked".
 
-You can also apply specific working hours to each of your projects by setting the working hours per project option to yes
+ .. compound:: working hours per project
 
-You can then apply specific schedules on the project screen
+   You can also apply specific working hours to each of your projects by setting the working hours per project option to yes.
+   
+   You can then apply specific working hours on the project screen.
+
+
+
+
+
+
 
 .. figure:: /images/GUI/GLOBALPARAM_ZONE_WorkingHours.png
    :alt: Workflow screen
@@ -358,7 +366,7 @@ Specific parameters about Gantt planning presentation.
       
       That is, the validated load, the assigned load and the revised (reassessed) load will always be equal.
       
-      If so, the addition of an "activity over time" option is added to the :ref:`activity types<activity-type>.
+      If so, the addition of an "activity over time" option is added to the :ref:`activity types<activity-type>`.
 
       .. Warning:: 
       
@@ -1374,9 +1382,6 @@ Specific settings for alerts based on a profile.
 * Select the frequency of the calendar with which the emails will be generated and sent to the profile. 
 * See: :ref:`automated-service` to set the send frequency.
 
-
-
-.. rubric:: When and How
    
 In addition to the sending frequency, you can refine the generation with several additional options.
 
@@ -1392,7 +1397,7 @@ In addition to the sending frequency, you can refine the generation with several
    
    Choose how alerts will be sent, Internal alert, email, both or none
 
- .. compound:: only incompletes imputation  
+ .. compound:: Only incompletes imputation  
       
    The goal is to be able to send alerts on charges only if the entry is incomplete, not if it is greater than the capacity of the resource.
 

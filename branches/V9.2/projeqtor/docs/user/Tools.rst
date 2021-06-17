@@ -101,20 +101,11 @@ Messages
 
 .. sidebar:: Concepts 
 
-
    * :ref:`profiles-definition`
 
-You can define some message that will be displayed on the connection screen.
+You can define some message that will be displayed on the login screen.
 
-Optionally, the message can be shown on login screen.
-
-You can limit the display by profile, project and user.
-
-The message will be displayed in a color depending on the message type.
-
-.. figure:: /images/GUI/TOOLS_SCR_Message.png
-   :alt: Today screen Message
-
+   
 .. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
@@ -136,20 +127,24 @@ The message will be displayed in a color depending on the message type.
      - Date when the message ended
    * - :term:`Message<Description>`
      - Complete text of the message       
-   * - Profile
-     - The message is limited to users with this profile
-   * - Project
-     - The message is limited to resources allocated to the project
-   * - User
-     - The message is limited to this user
-   * - Show on login screen
-     - Show this message on login screen
-   * - :term:`Closed`
-     - Flag to indicate that the message is archived
     
     
+.. rubric:: Detail section
+
+You can apply visibility filters.
+
+* by profile
+* by project
+* by organization
+* by team
+* per user    
     
-    
+.. figure:: /images/GUI/TOOLS_SCR_Message.png
+   :alt: Login screen with message
+   
+   Login screen with message
+   
+Check the "Show on login screen" box to see your message on the login screen.   
     
     
     

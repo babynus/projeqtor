@@ -31,15 +31,19 @@ We offer you a small overview of the major developments and you will find the fu
 .. container:: 
    
    **Do not start project before Validated Start Date**
+   
+   |PeriodBIG|
       
    When this global parameter is activiated, Projects with validated start date will not be plannned before this date.
    
-   :ref:`projet-donot-start` :ref:`progress-section-date-duration`
+   :ref:`Do not start...<projet-donot-start>` :ref:`progress-section-date-duration`
       
          
 .. container:: 
    
    **Imrovement of Todo lists**
+   
+   |TodoListBIG|
       
    Better display, input large values in textarea, auto-set responsible of todo-item from responsible of item.
    
@@ -48,13 +52,23 @@ We offer you a small overview of the major developments and you will find the fu
 .. container:: 
    
    **Access rights management for document**
+   
+   |AccessDocBIG|
       
-   Define access rights per profile for each document directory
+   Define access rights per profile for each document directory.
    
-   :ref:`todefined`
+   :ref:`Directory access rights<directory-access-rights>`
    
    
+.. container:: 
    
+   **Translation request**
+   
+   New functionality to request a translation for a text - You will be able to define translators with skill levels.
+   
+   |Localisation|
+         
+   :ref:`translation-request`   
    
 .. raw:: latex
 

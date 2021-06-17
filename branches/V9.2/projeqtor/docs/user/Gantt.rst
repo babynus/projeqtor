@@ -1878,6 +1878,10 @@ These parameters are not exclusive, you can select team and organization.
  
    Select the month to display.  
    
+ .. compound:: Hide done items
+ 
+   You can hide the activities recorded in the "done" state in the displayed list.    
+   
 
 .. note:: 
 
@@ -2032,7 +2036,7 @@ Ctrl Click allows you to complete the two half days
 
    The workload can be recorded as a planned load or as a real load.   
 
-   This option can be set in the :ref:`global settings<GP-manualplan-works>`. 
+   This option can be set in the :ref:`global settings<GP-manualplan-workas>`. 
    
 
 
