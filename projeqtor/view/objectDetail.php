@@ -1414,12 +1414,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       if ($col=='idBusinessFeature' and Parameter::getGlobalParameter('displayBusinessFeature')!='YES') {
         $hide=true;
       }
-      // ADD qCazelles
-      // if ($col=='idProductVersion' and get_class($obj) == 'Delivery' and Parameter::getGlobalParameter('productVersionOnDelivery') != 'YES') {
-      // $hide=true;
-      // }
-      // END ADD qCazelles
-      // ADD qCazelles - Project restriction
       if ($col=='idProject') {
         $uniqueProjectRestriction=false;
         $lstIdProject = array();
@@ -1430,14 +1424,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if(strpos(getSessionValue('project'), ",") != -1){
             foreach ($lstIdProject as $idProj){
               $proj=new Project($idProj, true);
-              $lstSubProjs=$proj->getSubProjects();
-              foreach ($lstSubProjs as $id=>$val){
-                $subProjs[$id]=$val;
-              }
+              $subProjs=$proj->getSubProjectsList();
             }
           }else{
             $proj=new Project(getSessionValue('project'));
-            $subProjs=$proj->getSubProjects();
+            $subProjs=$proj->getSubProjectsList();
           }
           if (count($subProjs)==0) {
             $uniqueProjectRestriction=true;
@@ -1445,12 +1436,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           }
         }
       }
-      // END ADD qCazelles - Project restriction
-      // ADD qCazelles - dateComposition
-      // if (SqlElement::is_a($obj,'Version') and Parameter::getGlobalParameter('displayMilestonesStartDelivery') != 'YES' and ($col=='initialStartDate' or $col=='plannedStartDate' or $col=='realStartDate' or $col=='isStarted' or $col=='initialDeliveryDate' or $col=='plannedDeliveryDate' or $col=='realDeliveryDate' or $col=='isDelivered')) {
-      // $hide=true; //continue;
-      // }
-      // END ADD qCazelles - dateComposition
       if (( ($col=='idUser' and $classObj!='Affectation') or $col=='creationDate' or $col=='creationDateTime' or $col=='lastUpdateDateTime') and !$print) {
         $hide=true;
       }
