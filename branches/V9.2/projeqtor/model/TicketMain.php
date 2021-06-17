@@ -293,7 +293,7 @@ class TicketMain extends SqlElement {
       $colScript .= '  };';
       
       //ADD by qCazelles - Business features
-      if ($colName=="idProduct") $colScript .= 'dijit.byId("idBusinessfeature").set("value", "");refreshList("idBusinessfeature", "idProduct", dijit.byId("idProduct").get("value"));';
+      if ($colName=="idProduct") $colScript .= 'if (dijit.byId("idBusinessfeature")) {dijit.byId("idBusinessfeature").set("value", "");refreshList("idBusinessfeature", "idProduct", dijit.byId("idProduct").get("value"));}';
       //END ADD
       
       $colScript .= '</script>';
