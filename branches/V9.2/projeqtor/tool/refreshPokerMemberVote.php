@@ -28,25 +28,31 @@
  * Get the list of objects, in Json format, to display the grid list
  */
 require_once "../tool/projeqtor.php"; 
+$result="";
 $id=RequestHandler::getId('idItem');
 $idPokerSession=RequestHandler::getId('idPokerSession');
-$vote = RequestHandler::getValue('vote');
+$list = RequestHandler::getValue('itemList');
+$itemList=explode(',',$list);
 $user = getSessionUser();
 
-$pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerItem'=>$id, 'idResource'=>$user->id, 'idPokerSession'=>$idPokerSession));
-if($pokerVote->id){
-  if($pokerVote->value != $vote){
-    $pokerVote->value = $vote;
-    $pokerVote->save();
-  }else{
-    $pokerVote->delete();
-  }
-}else{
-  $pokerVote = new PokerVote();
-  $pokerVote->idResource = $user->id;
-  $pokerVote->idPokerItem = $id;
-  $pokerVote->idPokerSession = $idPokerSession;
-  $pokerVote->value = $vote;
-  $pokerVote->save();
-}
+$obj = new PokerSession($idPokerSession);
+$pos = array_search($id, $itemList);
+if($pos < 0)$pos=0;
+$previous = ($pos>0)?true:false;
+$lenght = count($itemList)-1;
+if($lenght < 0)$lenght=0;
+$next = ($pos<$lenght)?true:false;
+
+$pokerComplexity = new PokerComplexity();
+$pokerComplexityList = $pokerComplexity->getSqlElementsFromCriteria(array('idle'=>'0'), null, null, "sortOrder ASC");
+$pokerItem = new PokerItem($id);
+$pokerMember = new PokerResource();
+$pokerMember = $pokerMember->getSingleSqlElementFromCriteria('PokerResource', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id));
+$pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSession'=>$idPokerSession));
+$pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
+$pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$idPokerSession, 'idPokerItem'=>$pokerItem->id), 'value');
+sort($pokerVoteList);
+$lowVote = (isset($pokerVoteList[0]))?$pokerVoteList[0]:1;
+$highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[count($pokerVoteList)-1]:99;
+
 ?>
