@@ -54,6 +54,8 @@ $user=getSessionUser();
 $query = "";
 if ($paramProject!='') {
   $query = "idProject in " . getVisibleProjectsList(true, $paramProject) ;
+} else {
+  $query = "idProject in " . getVisibleProjectsList(false) ;
 }
 $result=$obj->getSqlElementsFromCriteria(null,false,$query, 'idApprovalStatus');
 $totalDocSum = count($result);
