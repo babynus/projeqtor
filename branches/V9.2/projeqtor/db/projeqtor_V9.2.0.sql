@@ -559,11 +559,14 @@ ALTER TABLE `${prefix}message` ADD `idOrganization` int(12) unsigned DEFAULT NUL
 ALTER TABLE `${prefix}message` ADD `idTeam` int(12) unsigned DEFAULT NULL COMMENT '12';
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES
-(1, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0),
-(2, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0),
-(3, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0),
+(1, 'idActivityType', 'activityTypeList', 7, 0, NULL, 0),
+(2, 'idActivityType', 'activityTypeList', 7, 0, NULL, 0),
+(3, 'idActivityType', 'activityTypeList', 7, 0, NULL, 0),
+(28, 'idActivityType', 'activityTypeList', 7, 0, NULL, 0),
+(29, 'idActivityType', 'activityTypeList', 7, 0, NULL, 0),
+(30, 'idActivityType', 'activityTypeList', 7, 0, NULL, 0),
 (40, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0),
 (111, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0),
-(112, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0),
-(113, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0),
-(114, 'idActivityType', 'activityTypeList', 30, 0, NULL, 0);
+(112, 'idActivityType', 'activityTypeList', 23, 0, NULL, 0),
+(113, 'idActivityType', 'activityTypeList', 23, 0, NULL, 0),
+(114, 'idActivityType', 'activityTypeList', 23, 0, NULL, 0);

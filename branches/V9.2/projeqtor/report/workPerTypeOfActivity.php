@@ -164,6 +164,7 @@ if ($paramProject!='') {
   $where.=  " and idProject in " . getVisibleProjectsList(false, $paramProject); 
 }
 $where.=($paramResource!='')?" and idResource='" . $paramResource . "'":'';
+$where.=" and refType='Activity' "; // florent ticket #5561
 $order="";
 //echo $where;
 $work=new Work();
@@ -179,7 +180,7 @@ $resActTypes=array();
 $alreadyExistingActivity=array();
 $alreadyExistingType=array();
 foreach ($lstWork as $work) {
-  if ($paramActivityType and $work->refType=='Activity' ) {
+  if ($paramActivityType  ) {
     if (array_key_exists($work->refId, $alreadyExistingActivity)) {
       $act = $alreadyExistingActivity[$work->refId];
       $actType = $alreadyExistingType[$work->refId];
@@ -189,6 +190,9 @@ foreach ($lstWork as $work) {
       $alreadyExistingActivity[$work->refId] = $act;
       $alreadyExistingType[$work->refId] = $actType;
     }
+  }else{
+    $act = new Activity($work->refId);
+    $actType = new activityType($act->idActivityType);
   }
   if ($paramActivityType == "" or  (isset($act) and ($paramActivityType == $act->idActivityType))) {
     if (! array_key_exists($work->idResource,$resources)) {

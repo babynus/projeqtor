@@ -160,7 +160,7 @@ $activityRes=array();
 $sumProj=array();
 $alreadyExistingActivity=array();
 foreach ($lstWork as $work) {
-  if ($paramActivityType and $work->refType=='Activity') {
+  if ($paramActivityType) {
     if (array_key_exists($work->refId, $alreadyExistingActivity))
       $act = $alreadyExistingActivity[$work->refId];
     else {
