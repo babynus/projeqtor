@@ -149,6 +149,7 @@ for ($i=0; $i<$nbLines; $i++) {
     	$ass->leftWork=$line->leftWork;
     }
     if ($changed) {
+       //PlanningElement::$_noDispatch=true; // FOR TESTS ONLY
        $resultAss=$ass->saveWithRefresh();
        $statAss=getLastOperationStatus($resultAss);
        if ($statAss=="OK" or $statAss=='NO_CHANGE') { // NO_CHANGE means work was changed, but not assignment (Ex : -1 day 1, +1 day 2)
@@ -158,6 +159,9 @@ for ($i=0; $i<$nbLines; $i++) {
        	$finalResult=$resultAss;
        	break;
        }
+       // PBER - V9.2 : will slightly increase time to save, but will unlock items to avoid deadlocks
+       Sql::commitTransaction();
+       Sql::beginTransaction();
     }
   }
 }
