@@ -1256,7 +1256,7 @@ abstract class SqlElement {
       }
 
       $hasPriorityChanged = false;
-      if (property_exists($this, 'idPriority') and isset($old) and property_exists($old, 'idPriority') and $this->idPriority != $old->idPriority)
+      if (property_exists($this, 'idPriority') and isset($old) and $old->id and property_exists($old, 'idPriority') and $this->idPriority != $old->idPriority)
         $hasPriorityChanged = true;
       $hasUserBeenCreated = false;
       if ( (get_class($this) == "User" && $old->id == "") or ( (get_class($this) == "Resource" or get_class($this) == "Contact") and $this->isUser and ! $old->isUser) )
