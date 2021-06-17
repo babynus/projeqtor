@@ -65,6 +65,8 @@ if (isset($_REQUEST['imputationComment'])) {
     }
   }
 }
+PlanningElement::$_noDispatch=true; // FOR TESTS ONLY
+$arrayPeToRefresh=array();
 Sql::beginTransaction();
 for ($i=0; $i<$nbLines; $i++) {
 	$imputable=$_REQUEST['imputable'][$i];
@@ -149,8 +151,8 @@ for ($i=0; $i<$nbLines; $i++) {
     	$ass->leftWork=$line->leftWork;
     }
     if ($changed) {
-       //PlanningElement::$_noDispatch=true; // FOR TESTS ONLY
        $resultAss=$ass->saveWithRefresh();
+       $arrayPeToRefresh[$ass->refType.'#'.$ass->refId]=array('refType'=>$ass->refType, 'refId'=>$ass->refId);
        $statAss=getLastOperationStatus($resultAss);
        if ($statAss=="OK" or $statAss=='NO_CHANGE') { // NO_CHANGE means work was changed, but not assignment (Ex : -1 day 1, +1 day 2)
        	$status='OK';
@@ -165,7 +167,18 @@ for ($i=0; $i<$nbLines; $i++) {
     }
   }
 }
-
+$arrayTodo=fillWithParent($arrayPeToRefresh);
+if ($status=='OK'){
+  //PlanningElement::$_noDispatch=false;
+  foreach ($arrayTodo as $ref) {
+    $res=PlanningElement::updateSynthesis($ref['refType'], $ref['refId']);
+    if (getLastOperationStatus($res)=='OK') {
+      // PBER - V9.2 : will slightly increase time to save, but will unlock items to avoid deadlocks
+      Sql::commitTransaction();
+      Sql::beginTransaction();
+    }
+  }
+}
 if ($status=='ERROR') {
 	Sql::rollbackTransaction();
   echo '<div class="messageERROR" >' . $finalResult . '</div>';
@@ -207,5 +220,18 @@ function checkSendAlert($userId,$periodValue) {
       $result=sendMail($to, '['.Parameter::getGlobalParameter('paramDbDisplayName').'] '.$alertSendTitle, $alertSendMessage);
     }
   }
+}
+function fillWithParent($arrayPeToRefresh) {
+  $result=array();
+  foreach ($arrayPeToRefresh as $ref) {
+    $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>$ref['refType'], 'refId'=>$ref['refId']),true);
+    $result[$pe->wbsSortable]=$ref;
+    while ($pe->topRefType and $pe->topRefId) {
+      $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>$pe->topRefType, 'refId'=>$pe->topRefId),true);
+      $result[$pe->wbsSortable]=array('refType'=>$pe->refType, 'refId'=>$pe->refId);
+    }
+  }
+  krsort($result);
+  return $result;
 }
 ?>
