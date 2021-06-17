@@ -164,7 +164,6 @@ if ($paramProject!='') {
   $where.=  " and idProject in " . getVisibleProjectsList(false, $paramProject); 
 }
 $where.=($paramResource!='')?" and idResource='" . $paramResource . "'":'';
-$where.=" and refType='Activity' "; // florent ticket #5561
 $order="";
 //echo $where;
 $work=new Work();
@@ -180,7 +179,7 @@ $resActTypes=array();
 $alreadyExistingActivity=array();
 $alreadyExistingType=array();
 foreach ($lstWork as $work) {
-  if ($paramActivityType  ) {
+  if ($paramActivityType and $work->refType=='Activity' ) {
     if (array_key_exists($work->refId, $alreadyExistingActivity)) {
       $act = $alreadyExistingActivity[$work->refId];
       $actType = $alreadyExistingType[$work->refId];
@@ -194,7 +193,7 @@ foreach ($lstWork as $work) {
     $act = new Activity($work->refId);
     $actType = new activityType($act->idActivityType);
   }
-  if ($paramActivityType == "" or  (isset($act) and ($paramActivityType == $act->idActivityType))) {
+  if ($paramActivityType == "" or  (isset($act) and $paramActivityType == $act->idActivityType and $work->refType=='Activity')) {
     if (! array_key_exists($work->idResource,$resources)) {
       $resources[$work->idResource]=SqlList::getNameFromId('Resource', $work->idResource);
     }
@@ -264,6 +263,7 @@ foreach ($lstWork as $work) {
     // End #407
     $result[$work->idResource][$work->idProject]+=$work->work;
   }
+  debugLog("================");
 }
 
 if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
