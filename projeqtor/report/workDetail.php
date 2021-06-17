@@ -153,7 +153,7 @@ $sumActi=array();
 foreach ($lstWork as $work) {
   $act = new Activity($work->refId);
   $actType = new activityType($act->idActivityType);
-  if ($paramActivityType == "" or $paramActivityType == $act->idActivityType) {
+  if ($paramActivityType == "" or ($paramActivityType == $act->idActivityType and $work->refType=='Activity')) {
     if (!array_key_exists($work->idResource, $resources)) {
       $resources[$work->idResource] = SqlList::getNameFromId('Resource', $work->idResource);
     }
