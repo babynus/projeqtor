@@ -274,15 +274,18 @@ If the document is **rejected**, the line is then marked with a cross.
   .. compound:: Approval status
   
    This status allows you to globally track the status of the approval.
-
-   When there is no approver, the status is **without approval**
    
-   When there is at least one approver, the status is **waiting for approve** if the approval response is missing.
+   It can be used in a filter, like all the other fields of the document object.
    
-   The status changes to **rejected** if at least one of the approvers rejected the document.
+   calculated according to the approval status of the latest version of the document and may take the following values:
    
-   The status changes to **Approved** if all approvers have approved the document and then appears with a check mark in the list of versions.
-  
+   * **Without approval:** if no approver has been added to the list of approvers
+   * **Rejected:** if at least one approver rejected the version of the document
+   * **Pending approval:** if there is at least one approver who has not approved the document and no one has yet rejected the version of the document
+   * **Approved:** if all approvers approved the document.  
+   
+   .. note:: 
+      The quick search only display documents that are in directories to which the user has rights.
   
   .. compound:: Send a reminder email to approvers
 
@@ -313,6 +316,8 @@ Document directories
 
 Document directories management allows to define a structure for document storage.
 
+.. rubric:: Location
+
 * The files of document will be stored in the folder defined by the parameters  **Document root** and **Location**.
 
 * **Document root** is defined in :ref:`Global parameters<file-directory-section>` screen. 
@@ -328,8 +333,33 @@ Document directories management allows to define a structure for document storag
 * The **Default type** will be the default to new stored documents in this directory.
 
 
+.. _directory-access-rights:
 
-      
+.. rubric:: Directory access rights
+
+* The list of documents only displays Documents that are in directories for which the user has read rights.
+
+* You can define the access rights to documents according to the profile at each level of the document directory tree.
+
+* There is no notion of inheriting rights to subdirectories.
+
+* You define for each profile the CRUD right (create / read / update / delete) on each directory.
+
+* The rights defined in the "Project dependent data access" rights screen will only be used as a definition of default values when creating a directory.
+
+See: :ref:`Documents rights per directory<doc-rights-per-directory>` 
+  
+.. note:: 
+
+   * Note that if a directory is dedicated to a project, the profile used for assigning rights is the user's profile on this project, otherwise it is his default profile.
+   
+   * The assignment of modification or deletion rights without assigning read rights is inconsistent and will not be taken into account.
+
+
+
+
+
+
 
 Nomenclature
 ------------

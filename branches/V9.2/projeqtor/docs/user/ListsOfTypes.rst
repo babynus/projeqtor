@@ -235,6 +235,10 @@ Project type is a way to define common behavior on group of projects.
    
    These projects are not visible on Gantt type screens.
    
+   Some sections and fields are not visible or do not work on administrative projects like Paused, Fix planning or the minimum threshold.
+   
+   
+   
 
 .. topic::  **TMP** : Template project 
 

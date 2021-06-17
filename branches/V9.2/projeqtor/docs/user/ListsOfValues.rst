@@ -72,6 +72,13 @@ See: :ref:`workflow`.
       * This status specifies that the treatment of item is supported.
       * A :term:`responsible` can be determined or required.
 
+   Paused status
+
+      * This state indicates that item processing is in a paused state.
+      * Used for the processing of certain elements (activity, tickets ...)
+      * Allows you to exclude and purge the calculation from the schedule
+      * Recording these break times allows you to get more accurate treatment information      
+      
    Done status
 
       * This status specifies that the treatment of item is done.

@@ -1179,7 +1179,12 @@ Otherwise, we search for the catalog of the parent project, recursively going up
 
 We stop at the first catalog found. 
 
-You can select an OU on an activity, if the project has a “Variable” turnover valuation mode.
+You can select an or several OU on an activity, if the project has a “Variable” turnover valuation mode.
+
+* Click on |Add| to add a new OU
+
+* Click on |Edit| to edit the OU
+
 
 .. figure:: /images/GUI/INCOMES_ZONE_RevenueSectionActivity.png
    :alt: Revenue section
@@ -1279,7 +1284,7 @@ If the global parameter "Report of turnover on the validated cost of activities"
 
 
 
-.. rubric:: modification of data
+.. rubric:: Modification of data
 
 You can modify the catalog on the data of an OU, a Complexity or a Quantity however it is not possible to modify a unit of work from the catalog, if it is already used on an activity. 
 
@@ -1304,6 +1309,10 @@ You can delete the catalog on the data of an OU, a Complexity or a Quantity howe
 The project turnover will be updated from the sum of the turnover of the project activities, whether this data is entered from an OU or entered manually.
 
 The turnover of the activities and the UO, Complexity and Quantity data will only be accessible for "basic" activities (which do not have sub-activities). For "parent" activities, the turnover will be consolidated from the turnover of the sub-activities.
+
+You can close an unit of work directly in the OU's window.
+
+If closed, the OU is no longer selectable.
 
 
 .. index:: Management of ordered work

@@ -73,7 +73,7 @@ Click on the day number button to go day display mode.
 
 Each item the resource is assigned to is displayed in its log.
 
-All types of holidays are also displayed.
+All types of holidays and deliveries are also displayed.
 
 The color that appears on the objects are those of the project to which they are attached
  

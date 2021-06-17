@@ -1,3 +1,11 @@
+
+.. |Localisation| image:: images/v9/iconLocalization.png
+	:alt: Translation
+	:scale: 45
+
+
+
+
 .. |greenBox| image:: images/BoxDetail_green.png
    :alt: Planned workload 
    :scale: 60
@@ -16,7 +24,7 @@
 
 
 
-.. |iconFavoris| image:: images/v9/iconFavoris.png
+.. |Favoris| image:: images/v9/iconFavoris.png
 	:alt: Bookmarks
 	:scale: 15
 
@@ -620,8 +628,6 @@
    :alt: Multiple update
    :scale: 15
 
-
-
 .. |buttonIconBackNavigation| image:: images/buttonIconBackNavigation.png
    :alt: Button icon back navigation
 
@@ -731,6 +737,38 @@
 
 
 
+
+.. |TodoList| image:: images/v9/iconTodoList.png
+   :alt: To do List
+   :scale: 15
+
+.. |TodoListBIG| image:: images/v9/iconTodoList.png
+   :alt: To do List
+   :scale: 45
+   
+   
+   
+.. |AccessDoc| image:: images/v9/iconAccessDocument.png
+   :alt: Access right for the documents
+   :scale: 15
+
+.. |AccessDocBIG| image:: images/v9/iconAccessDocument.png
+   :alt: Access right for the documents
+   :scale: 45   
+   
+.. |Period| image:: images/v9/iconPeriod.png
+   :alt: Period
+   :scale: 15   
+   
+.. |PeriodBIG| image:: images/v9/iconPeriod.png
+   :alt: Period
+   :scale: 45     
+   
+   
+   
+   
+    
+   
 .. |calendarRed| image:: images/calendarRed.png
    :alt: red today calendar
 

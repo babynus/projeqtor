@@ -163,16 +163,7 @@ Users belonging to one profile can see the corresponding screen if authorized or
 
 .. index:: Access to reports
 
-.. _access-to-reports:
 
-Access to reports
------------------
-
-This screen allows to define report access for each profile.
-Users belonging to a profile can see the corresponding report in the report list.
-Reports are grouped by report categories
-
-**Click on checkbox to permit or revoke access to the report  for a profile.**
    
    
    
@@ -311,6 +302,29 @@ Some features do not have a manager or are not linked specifically to a user pro
 Certain access modes are therefore not offered in the drop-down lists on certain elements of this screen.
 
 
+
+.. _access-to-reports:
+
+Access to reports
+-----------------
+
+This screen allows to define report access for each profile.
+Users belonging to a profile can see the corresponding report in the report list.
+Reports are grouped by report categories
+
+**Click on checkbox to permit or revoke access to the report  for a profile.**
+
+
+.. _doc-rights-per-directory:
+
+Document rights per directory
+-----------------------------
+
+You can define the access rights to documents according to the profile at each level of the document directory tree.
+
+By default, all values are initialized for each existing directory from the existing values in the "Project-dependent access to data" rights screen.
+   
+
 .. index:: Specific Access 
 
 .. _specific_access:
@@ -379,19 +393,27 @@ This section allows to:
 * This section defines for each profile the ability to unlock any document or requirement.
 * Otherwise, each user can only unlock the documents and requirements locked by himself.
 
+
 .. rubric:: Reports
 
 * This section defines for each profile the ability to change the resource parameter in reports.
+
+.. rubric:: Financial
+
+* This section defines for each profile the possibility of modifying the financial situations or of being able to automatically generate a project expense.
+
 
 .. rubric:: Specific update rights
 
 * Defines for each profile the ability to manage all notes.
 * Defines for each profile the ability to delete attached files.
 * Defines for each profile the ability to force delete items.
+* Defines for each profile the ability to force delete items with real work.
 * Defines for each profile the ability to force close items.
-* Defines for each profile the ability to update creation information.
+* Defines for each profile the ability to update creation information in the header of the details area.
 * Defines for each profile the ability to mention or not the components on a ticket.
-* Defines for each profile the ability to use the check box "Create the expense from the current element"
+* Defines for each profile the ability to update the left work on assigment section and timesheet.
+* Defines for each profile the ability to work on tickets
 
 
 .. rubric:: Limit visibilty to resources

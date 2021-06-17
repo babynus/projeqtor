@@ -150,9 +150,17 @@ Maintenance of Data
  
 The administrator has the possibility to:
 
-  * Close and delete sent emails and alerts. 
-  * Delete history of connections. 
-  * Updating references for any kind of element.
+
+.. figure:: /images/GUI/ADMIN_ZONE_DataMaintenance.png
+   :alt: Maintenance of datas
+   
+   Maintenance of datas
+   
+* Close and delete sent emails and alerts. 
+* Delete history of connections. 
+* Updating references for any kind of element.
+   
+You can automate these cleanings by activating them using the corresponding buttons.
 
 .. index:: Log file Maintenance   
 
