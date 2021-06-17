@@ -570,3 +570,5 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (112, 'idActivityType', 'activityTypeList', 23, 0, NULL, 0),
 (113, 'idActivityType', 'activityTypeList', 23, 0, NULL, 0),
 (114, 'idActivityType', 'activityTypeList', 23, 0, NULL, 0);
+
+CREATE INDEX indicatorvalueType ON `${prefix}indicatorvalue` (type,idle);
