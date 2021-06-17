@@ -957,7 +957,7 @@ static function isTheLeaveProject($id=null) {
       $topProj=new Project($this->idProject,true);
       $this->idOrganization=$topProj->idOrganization;
     }
-    $subProj=$this->getSubProjects(false,false);
+    $subProj=$this->getSubProjectsList(false);
     $this->organizationElementary=(count($subProj)==0)?0:1;
     $this->ProjectPlanningElement->idOrganization=$this->idOrganization;
     $this->ProjectPlanningElement->organizationInherited=$this->organizationInherited;
