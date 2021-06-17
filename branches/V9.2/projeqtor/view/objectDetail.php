@@ -524,7 +524,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   } else {
     $table=SqlList::getList('Project', 'name', null);
     $restrictArray=array();
-    if (! Project::isProjectLeaveVisible()) $restrictArray=array(Project::getLeaveProjectId()=>'Leave');
+    if (! Project::isProjectLeaveVisible()) unset($table[Project::getLeaveProjectId()]);
     if (!$user->_accessControlVisibility) {
       $user->getAccessControlRights(); // Force setup of accessControlVisibility
     }
@@ -2429,7 +2429,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
          or $col=='idProduct' or $col=='idComponent' or $col=='idProductOrComponent' 
          or $col=='idProductVersion' or $col=='idComponentVersion' or $col=='idVersion' or $col=='idOriginalVersion' or $col=='idTargetVersion' 
          or $col=='idOriginalProductVersion' or $col=='idTargetProductVersion' or $col=='idOriginalComponentVersion' or $col=='idTargetComponentVersion' 
-          or $col=='id'.$classObj.'Type') {
+         or $col=='id'.$classObj.'Type' ) {
           if ($col=='idContact' and property_exists($obj, 'idClient') and $obj->idClient) {
             $critFld='idClient';
             $critVal=$obj->idClient;
@@ -2449,7 +2449,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             }
           }
         } 
-        
+        if ($col=='idDocumentDirectory' and ! $obj->id and $defaultProject) {
+          $obj->idProject=$defaultProject;
+          $critFld=null;
+        }
 // MTY - LEAVE SYSTEM
         // Restrict list to Employee (isEmployee=1) if col is idEmployee
         if ($col=="idEmployee") {
