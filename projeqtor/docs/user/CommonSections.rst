@@ -28,7 +28,7 @@ Those sections allows to set information or add information to an item of the el
    
    |two| :ref:`assignment-section` [Activity]
    
-   |three| :ref:`treatmentsection`
+   |three| :ref:`treatment-section`
    
    |four| :ref:`Configuration<configuration-project>`
    
@@ -440,7 +440,7 @@ When you check the activity option at the time spent on an activity then several
 
 
 
-.. _treatmentsection: 
+.. _treatment-section: 
 
 Treatment section
 -----------------
@@ -563,6 +563,29 @@ ProjeQtOr offers you several options to build your projects, protect them, or ev
 
 
 
+
+.. _working-hours:
+
+Working hours
+-------------
+
+
+.. figure:: /images/GUI/COMMON_ZONE_WorkingHours.png
+   :alt: Working hours for the project
+   
+   Working hours section for the project
+   
+   
+Section visible if you have enabled the global setting to apply working hours to projects.
+
+You can enter different times for each project.
+
+These times will then be used for the automatisms using the delays.
+ 
+
+See: :ref:`Global parameters<daily-work-hours-section>`
+
+See: :ref:`Delay for tickets<delay-for-ticket>`
 
 
 
@@ -1001,7 +1024,7 @@ See: :ref:`Minimum threshold<minimumthreshold>`
  
 Fix planning will avoid the recalculation of planning for an activity.
   
-To fix the project see: :ref:`treatmentsection`
+To fix the project see: :ref:`treatment-section`
 
 
 .. rubric:: Paused

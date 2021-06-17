@@ -39,13 +39,35 @@ This screen allows you to manage lists of licenses, versions, products or even c
    Asset management screen
 
 
+
+.. rubric:: Access rights
+
+You can limit the visibility of equipment.
+   
+some fields will be updated automatically to allow the user to see the items they have just created.
+   
+If a profile has creation rights and read rights only on "the items for which it is responsible", the creation must automatically position the manager on the current user.
+   
+If a profile has creation rights and read rights only on "its own elements", the creation must automatically position the user on the current user.
+   
+This rights management is automatically extended to all elements not dependent on the project.
+   
+Feeding the responsible field when creating an element if the user has visibility rights such as "the elements for which he is responsible".
+   
+   
+.. warning:: 
+
+   Hide buttons "Lock" and "send mail" when access right is readonly
+   
+   
+
+
+
 .. note:: 
 
-   Each asset related to a resource or an user, is displayed on the Resource screen and the user screen
+   Each asset related to a resource or an user, is displayed on their respective screen.
    
-   See: :ref:`Resource<allocated-asset-resource>`
-   
-   See: :ref:`User<allocated-asset-user>`
+   See: :ref:`Resource<allocated-asset-resource>` and :ref:`User<allocated-asset-user>`
 
 .. rubric:: Description
 

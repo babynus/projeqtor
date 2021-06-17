@@ -546,7 +546,7 @@ you can mark certain screens and organize them in the favorites bars to create a
 
 You can create up to 5 favorite bars.
 
-Click on |iconFavoris| to display in the display zone the list of screens of the elements that you have put in favorites.
+Click on |Favoris| to display in the display zone the list of screens of the elements that you have put in favorites.
 
 
 .. figure:: /images/GUI/GUI_ZONE_DisplayFavoris.png
@@ -1775,6 +1775,8 @@ Special fields
 ==============
 
 .. rubric:: Accelerator buttons
+
+ProjeQtOr provides you with shortcut buttons allowing you to more easily and quickly manage the information in the fields.
 
 
  .. compound:: Move to the next status

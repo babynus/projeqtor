@@ -265,6 +265,18 @@ This button allows to dispatch ticket.
 
 
 
+.. rubric:: Button Show periods
+
+You can calculate the time spent between the start of processing, which corresponds to the receipt of the ticket and the end of processing of a ticket, that is to say when it goes to the done state, with the possibility of subtracting waiting periods thanks to the "paused" state macro.
+
+The passages from an active macro-state to a non-active macro-state (paused or done), are recorded thanks to the start and end dates of each period. This table is updated automatically with calculation of the duration in working hours and the duration in calendar hours when the end date of the period is entered.
+
+.. figure:: /images/GUI/TICKET_BOX_StatusPeriod.png
+   :alt: Dialog box - Status period 
+   :align: center
+   
+   Status period
+
 
 
 

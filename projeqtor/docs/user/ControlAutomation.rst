@@ -266,7 +266,14 @@ Or choose any other event in the drop-down list.
 Delays for tickets
 ------------------
 
-It is possible to define a default delay for tickets, for each ticket type and each ticket urgency.
+
+.. figure:: /images/GUI/CONTROLAUTO_SCR_DelayForTickets.png
+   :alt: Delays for tickets screen
+   
+   Delays for tickets screen
+   
+   
+It is possible to define a default delay for tickets, for each ticket type, each ticket urgency and for each status.
 
 .. note::
 
@@ -287,6 +294,8 @@ It is possible to define a default delay for tickets, for each ticket type and e
      - Ticket type the delay applies to.
    * - |RequiredField| Urgency
      - Urgency of ticket the delay applied to.
+   * - |RequiredField| Project
+     - The project on which the delays will be applied.
    * - |RequiredField| Value
      - Value of delay.
    * - :term:`Closed`
@@ -308,7 +317,11 @@ It is possible to define a default delay for tickets, for each ticket type and e
      * **Open hours:** calculation only on the “standard open hours” defined in :ref:`Global parameters<daily-work-hours-section>` screen. 
 
 
+.. topic:: Ticket status
 
+   You determine what the status of the ticket will be for the timeframe you create.
+   
+   For the same ticket, you can have 2 days to take charge of it, 1 day to process it and 1 day to close it.
 
 .. raw:: latex
 

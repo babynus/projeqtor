@@ -106,11 +106,11 @@ If you have added any reports to the Today page, they will appear in the list.
 You can hide the added reports by clicking on the box.
 
    
-See : :ref:`Favorite Report<favorite_report>`
+See: :ref:`Favorite Report<favorite_report>`
 
-See : :ref:`Today Screen Report<today_report>`
+See: :ref:`Today Screen Report<today_report>`
    
-See: :ref:`extending<extending-today>`
+See: :ref:`Extending<extending-today>`
    
     
 .. raw:: latex
