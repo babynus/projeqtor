@@ -4390,11 +4390,6 @@ div.ticketKanbanCustom .kanbanVersion{
     color: black;
 }
 
-/* .card-rig { */
-/*   width: 100px; */
-/*   text-align: center; */
-/* } */
-
 .card {
   border-radius: 10px;
   margin: 0 auto;
@@ -4467,4 +4462,48 @@ div.ticketKanbanCustom .kanbanVersion{
   width: 100px;
   height: 140px;
   z-index: 1;
+}
+
+.card-mini {
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 50px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  font-weight: bold;
+  color: white;
+  transform: scale(1);
+  transition: transform 100ms ease-in-out;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.card-on-table {
+  position: relative;
+  float: left;
+}
+
+.card-wrapper-mini {
+  position: relative;
+  width: 50px;
+  height: 70px;
+  z-index: 1;
+}
+
+.card-container-mini {
+  width: 50px;
+  height: 70px;
+  border-radius: 10px;
+}
+
+.card-face .player-vote-mini {
+  position: relative;
+  padding-top: 17px;
+  font-size: 30px;
 }

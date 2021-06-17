@@ -339,7 +339,7 @@ class PokerSessionMain extends SqlElement {
     if($item=="pokerItem"){
     	drawPokerItem($this);
     }
-    if($item=="pokerVote"){
+    if($item=="pokerVote" and $this->handled){
     	drawPokerVote($this);
     }
   }

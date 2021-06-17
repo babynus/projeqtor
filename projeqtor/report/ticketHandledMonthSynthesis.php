@@ -168,7 +168,7 @@ $urgency=new Urgency();
 $lstUrgency = $urgency->getSqlElementsFromCriteria(null, null, "1=1");
 
 
-echo '<table style="width:100%;text-align:center"'.excelName().'>';
+echo '<table style="width:95%;text-align:center"'.excelName().' align="center">';
 echo '<tr>';
 echo '<td class="reportTableHeader" style="width:20%"'.excelFormatCell('header',40).'>' . i18n('colIdTicketType') . '</td>';
 echo '<td class="reportTableHeader" style="width:15%"'.excelFormatCell('header',30).'>'.i18n('colUrgency').'</td>';
@@ -260,8 +260,7 @@ foreach ($lstTicket as $ticket){
 	  if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['OK'])){
 	    $result[$ticket->idTicketType][$ticket->idUrgency]['OK']++;
 	  }
-	  $statP = new StatusPeriod();
-	  $duration = $statP->sumSqlElementsFromCriteria('durationOpenTime', array('refType'=>'Ticket', 'refId'=>$ticket->id, 'active'=>1));
+	  $duration = abs(strtotime($ticket->creationDateTime)-strtotime($ticket->handledDateTime));
 	  if(isset($result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'])){
 	  	$result[$ticket->idTicketType][$ticket->idUrgency]['durationTotal'] += $duration;
 	  }else{
@@ -327,7 +326,7 @@ foreach ($lstUrgency as $urgency){
   	if($durationOK >=60){
   		$durationDisplay .= $durationDiff->format('%i').i18n('shortMinute').' ';
   	}
-    if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
+    if(!$durationDisplay and $OK)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="reportTableData" style="width:15%"'.excelFormatCell('data',20).'>'.$durationDisplay.'</td>';
     $KO = (isset($result[$type->id][$urgency->id]['KO']))?$result[$type->id][$urgency->id]['KO']:0;
     echo '<td class="reportTableData" style="width:10%"'.excelFormatCell('data',20).'>'.$KO.'</td>';
@@ -369,12 +368,13 @@ foreach ($lstUrgency as $urgency){
   	if($durationKO >=60){
   		$durationDisplay .= $durationDiff->format('%i').i18n('shortMinute').' ';
   	}
-    if(!$durationDisplay)$durationDisplay='0'.i18n('shortMinute');
+    if(!$durationDisplay and $KO)$durationDisplay='0'.i18n('shortMinute');
     echo '<td class="reportTableData" style="width:15%"'.excelFormatCell('data',20).'>'.$durationDisplay.'</td>';
-    $ponctuality = 0;
     $NB = (isset($result[$type->id][$urgency->id]['Nb']))?$result[$type->id][$urgency->id]['Nb']:0;
+    $ponctuality='';
     if($OK)$ponctuality = (($OK-$KO)/$NB)*100;
-    echo '<td class="reportTableData" style="width:10%"'.excelFormatCell('data',20).'>'.round($ponctuality).' %</td>';
+    $ponctuality = (!trim($ponctuality))?'':round($ponctuality).'%';
+    echo '<td class="reportTableData" style="width:10%"'.excelFormatCell('data',20).'>'.$ponctuality.'</td>';
     echo '</tr>';
   }
 }
