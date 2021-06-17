@@ -152,8 +152,8 @@ for ($i=0; $i<$nbLines; $i++) {
     }
     if ($changed) {
        $resultAss=$ass->saveWithRefresh();
-       $arrayPeToRefresh[$ass->refType.'#'.$ass->refId]=array('refType'=>$ass->refType, 'refId'=>$ass->refId);
        $statAss=getLastOperationStatus($resultAss);
+       if ($statAss=="OK") $arrayPeToRefresh[$ass->refType.'#'.$ass->refId]=array('refType'=>$ass->refType, 'refId'=>$ass->refId);
        if ($statAss=="OK" or $statAss=='NO_CHANGE') { // NO_CHANGE means work was changed, but not assignment (Ex : -1 day 1, +1 day 2)
        	$status='OK';
        } else if ($statAss=="ERROR"){
