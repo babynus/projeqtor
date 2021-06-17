@@ -8235,14 +8235,14 @@ function updateSubTask(id,refType,refId,isPrio,isRes){
     sortOrder=sortOrder+1;
     if(dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId))resourceVal=dojo.byId('SubTaskIdResourceFilter_'+refType+'_'+refId).value;
     url+="&operation=save";
-    url+="&name="+encodeURI(name)+"&priority="+priorityVal+"&resource="+resourceVal+"&sortOrder="+sortOrder;
+    url+="&name="+encodeURIComponent(name)+"&priority="+priorityVal+"&resource="+resourceVal+"&sortOrder="+sortOrder;
   }else if(id!=0 && name.trim()!=''){
     update=true;
     if(isRes=='true' && resourceVal.trim()==''){
       resourceVal=0;
     }
     url+="&operation=update";
-    url+="&name="+encodeURI(name)+"&priority="+priorityVal+"&resource="+resourceVal;
+    url+="&name="+encodeURIComponent(name)+"&priority="+priorityVal+"&resource="+resourceVal;
   }else if(name.trim()=='' && id!=0){
     url+="&operation=delete";
     deleted=true;
