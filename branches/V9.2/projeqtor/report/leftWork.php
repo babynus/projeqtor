@@ -82,7 +82,7 @@ foreach ($lstWork as $work) {
       $alreadyExistingActivity[$work->refId] = $act;
     }
   }
-  if (!$paramActivityType or (isset($act) and ($paramActivityType == $act->idActivityType))) {
+  if (!$paramActivityType or (isset($act) and ($paramActivityType == $act->idActivityType) and $work->refType=='Activity')) {
     if (!array_key_exists($work->idResource, $resources)) {
       $resources[$work->idResource] = SqlList::getNameFromId('ResourceAll', $work->idResource);
     }
