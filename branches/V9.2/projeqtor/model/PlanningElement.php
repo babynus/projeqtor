@@ -1144,7 +1144,7 @@ class PlanningElement extends SqlElement {
   	} 
   	if (!$withSubItems) return;
   	//if (self::$_noDispatch) return;
-  	$crit=" topId=" . Sql::fmtId($this->id).' and wbs <> 0';
+  	$crit=" topId=" . Sql::fmtId($this->id)." and wbs <> '0'";
   	$lstElt=$this->getSqlElementsFromCriteria(null, null, $crit ,'wbsSortable asc');
   	$cpt=0;
   	foreach ($lstElt as $elt) {
