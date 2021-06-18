@@ -229,7 +229,7 @@ class ProductMain extends ProductOrComponent {
     } else if ($item=='tenders') {
       Tender::drawListFromCriteria('id'.get_class($this),$this->id);
     }
-    if ($item=='showClosedStructure' or $item=='showClosedComposition'){
+    if ( !$print and ($item=='showClosedStructure' or $item=='showClosedComposition')){
     	$showClosed=(Parameter::getUserParameter($item)=='1' or Parameter::getUserParameter($item)=='')?true:false;
     	$result.='<div style="position:absolute;right:5px;top:3px;">';
     	$result.='<label for="'.$item.'" class="dijitTitlePaneTitle" style="border:0;font-weight:normal !important;height:'.((isNewGui())?'20':'10').'px;width:'.((isNewGui())?'50':'150').'px">'.i18n('labelShowIdle'.((isNewGui())?'Short':'')).'</label>';
