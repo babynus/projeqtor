@@ -13,7 +13,8 @@ $id=null;
 if (isset($_REQUEST['id'])) {
   $id=$_REQUEST['id'];
 }
-Security::checkValidId($id);
+if ($class!='PeriodicMeeting') Security::checkValidId($id);
+
 $scale='day';
 if (isset($_REQUEST['scale'])) {
   $scale=$_REQUEST['scale'];
@@ -24,7 +25,7 @@ if ($scale!='day' and $scale!='week') {
 }
 
 $objectClassManual = RequestHandler::getValue('objectClassManual');
-if($objectClassManual == 'ResourcePlanning' ){
+if($objectClassManual == 'ResourcePlanning' and $class!='PeriodicMeeting'){
   $idAssignment = RequestHandler::getId('idAssignment');
 }
 
@@ -39,7 +40,7 @@ $start=null;
 $end=null;
 $resourceList = array(0=>0);
 
-if ($class=='Resource' or $class=='ResourceTeam') {
+if ($class=='Resource' or $class=='ResourceTeam' or $class=='PeriodicMeeting') {
   echo '<div style="background-color:#FFF0F0;padding:3px;border:1px solid #E0E0E0;">'.i18n('noDataToDisplay')."</div>";
   return;
 }
