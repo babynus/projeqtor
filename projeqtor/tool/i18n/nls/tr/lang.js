@@ -3447,6 +3447,7 @@ moduleImputationComment: "Time tracking&#44 in correlation with the schedule&#44
 moduleIncomes: "Gelir",
 moduleIncomesComment: "Incomes management tracks project activity as profit centers.&#13;&#10;<br/> We start from a quotation sent to a client&#44 which is transformed into an order when it is validated&#44 and which increments the project budget.&#13;&#10;<br/> The order can then be scheduled by payment deadlines and then converted into an invoice&#44 for which payment will be followed.&#13;&#10;<br/> ProjeQtOr integrates several invoiding modes that are very adapted to the management of a key / supplier relationship&#44 such as the possibility of invoicing time spent&#44 by finding the time actually spent by a resource on the follow-up entered in ProjeQtOr.",
 moduleLocalization: "Translation request",
+moduleLocalizationComment: "The management of translation requests makes it possible to request translations of texts from translators according to their language skills. <br/>Linked to configuration management&#44 it allows you to easily identify the languages to be translated according to the languages of a product or component version.",
 moduleMeeting: "Toplantılar",
 moduleMeetingComment: "The meeting management allows to follow the different meetings of the project&#44; positioning them on the schedule.&#10;<br/> It is possible to schedule recurring meetings&#44; on a defined periodicity.",
 moduleNotification: "Bildirimler",

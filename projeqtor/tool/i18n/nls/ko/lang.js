@@ -3447,6 +3447,7 @@ moduleImputationComment: "일정과 관련하여 시간 추적을 통해 각 리
 moduleIncomes: "수입",
 moduleIncomesComment: "수입 관리는 프로젝트 활동을 손익 센터로 추적합니다.  우리는 고객에게 보낸 견적에서 시작합니다. 주문이 확인되면 주문으로 변환되며 프로젝트 예산이 증가합니다. 결제 마감일로 주문을 예약 한 다음 결제를 위해 송장으 로 전환 할 수 있습니다. ProjeQtOr은 ProjeQtOr에 입력 된 후속 조치에서 자원이 실제로 소비 한 시간을 찾아서 보낸 시간 인보이스 발행 가능성과 같은 키 / 공급 업체 관계 관리에 매우 적합한 여러 가지 호출 모드를 통합합니다.",
 moduleLocalization: "Translation request",
+moduleLocalizationComment: "The management of translation requests makes it possible to request translations of texts from translators according to their language skills. <br/>Linked to configuration management&#44 it allows you to easily identify the languages to be translated according to the languages of a product or component version.",
 moduleMeeting: "회의",
 moduleMeetingComment: "회의 관리를 통해 프로젝트의 여러 회의 일정에 따라 회의를 진행할 수 있습니다. 약속 된 주기에 따라 모임을 반복해서 예약 할 수 있습니다.",
 moduleNotification: "알림",
