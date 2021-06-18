@@ -5122,7 +5122,7 @@ function drawStructureFromObject($obj, $refresh=false, $way=null, $item=null) {
   echo '</table>';
   if (!$refresh) echo '</td></tr>';
   if (!$print) {
-    echo '<input id="ProductStructureSectionCount" type="hidden" value="'.count($list).'" />';
+    echo '<input id="'.get_class($obj).ucfirst($way).'SectionCount" type="hidden" value="'.count($list).'" />';
   }
 }
 
