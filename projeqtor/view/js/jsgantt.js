@@ -1646,8 +1646,8 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               vRightTableTempMeeting += ' left:' + vBarLeft + 'px; height:11px; '
 	            + ' width:' + vBarWidth + 'px" '
 	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" ';
-	            if(! vTaskList[i].getGlobal() || !dojo.byId('resourcePlanning'))vRightTableTempMeeting += 'onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"';
-	            if(! vTaskList[i].getGlobal() || !dojo.byId('resourcePlanning'))vRightTableTempMeeting +='onmouseenter ="if(!isResizingGanttBar)handleResizeGantBAr('+vTaskList[i].getElementIdRef()+','+ Date.parse(vMinDate)+','+vDayWidth+',\''+vDateDisplayFormat+'\');"';
+	            if(!vTaskList[i].getGlobal() && !dojo.byId('resourcePlanning'))vRightTableTempMeeting += 'onmouseleave="if(!isResizingGanttBar)hideResizerGanttBar ('+vID+');"';
+	            if(!vTaskList[i].getGlobal() && !dojo.byId('resourcePlanning'))vRightTableTempMeeting +='onmouseenter ="if(!isResizingGanttBar)handleResizeGantBAr('+vTaskList[i].getElementIdRef()+','+ Date.parse(vMinDate)+','+vDayWidth+',\''+vDateDisplayFormat+'\');"';
 	            vRightTableTempMeeting +='>'; 
 
             vRightTableTempMeeting += ' <div class="ganttTaskrowBarComplete"  '
