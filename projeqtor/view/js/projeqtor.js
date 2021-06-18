@@ -8423,8 +8423,8 @@ function addSubTaskRow(id,refType,refId,sortOrder,resourceFilter,priorityFilter)
     dojo.connect(newButtonAttach,'onError' , function(value){dojo.style(dojo.byId('downloadProgress'), {display:'none'});hideWait();showError(i18n("uploadUncomplete"));});
     var raw=imgGrab.parentNode.parentNode;
     dojo.connect(raw,'ondragover' , function(value){hideShowDropDiv('show',refType+'_'+refId+'_subTaskRow_'+id);});
-    dojo.connect(raw,'ondrop' , function(value){hideShowDropDiv('dropHide',refType+'_'+refId+'_subTaskRow_'+id);});
-    dojo.connect(raw,'ondragLeave' , function(value){hideShowDropDiv('hide',refType+'_'+refId+'_subTaskRow_'+id);});
+    raw.addEventListener("drop", function(value){hideShowDropDiv('dropHide',refType+'_'+refId+'_subTaskRow_'+id);});
+    raw.addEventListener("dragleave", function(value){hideShowDropDiv('hide',refType+'_'+refId+'_subTaskRow_'+id);});
     dijit.byId(id+'_attachmentFile').reset();
     dijit.byId(id+'_attachmentFile').addDropTarget(raw,true);
   }
