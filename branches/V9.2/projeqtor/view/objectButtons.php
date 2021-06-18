@@ -225,6 +225,7 @@
 	        if (id) { 	
             var currentItem=historyTable[historyPosition];
             var currentScreen=(currentItem && currentItem.length>2)?currentItem[2]:null;
+            if(currentItem[0] == currentScreen)return;
             if (currentItem && (currentScreen=="Planning" || currentScreen=="GlobalPlanning") || ( (currentScreen=="VersionsPlanning" || currentScreen=="ResourcePlanning") && objectClass=="Activity")){
               var currentItemParent = currentItem[1];
               var originClass = currentItem[0];
