@@ -8567,7 +8567,7 @@ function showSubTask(objectClass) {
 function reorderSubTask (tab){
   var param="";
   var view=dojo.byId('subTaskView').value;
-  var nodeList=(view=="Global")?dijit.byId(tab).childNodes[1].childNodes:dijit.byId(tab).childNodes[1].childNodes,
+  var nodeList=(view=="Global")?dijit.byId(tab).childNodes[1].childNodes:dijit.byId(tab).childNodes[4].childNodes,
             lst=dijit.byId(tab).node,
               info=dijit.byId(tab).id.substr(11),
                 refType=info.substr(0,info.indexOf('_')),
