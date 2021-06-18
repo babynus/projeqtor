@@ -323,7 +323,7 @@ INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`)
 ('PokerSession', 'live session', 10, 1, 0),
 ('PokerSession', 'session with due date voting', 20, 1, 0);
 
-INSERT INTO `module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES 
+INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES 
 (22,'modulePoker','110',null,1,0); 
 
 INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES
@@ -399,7 +399,7 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,263,1000001),
 (1,264,1000001);
 
-INSERT INTO `module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES 
+INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES 
 (21,'moduleLocalization','880',null,0,0);
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
