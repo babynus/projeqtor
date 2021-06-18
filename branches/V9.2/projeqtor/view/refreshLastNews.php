@@ -51,7 +51,7 @@ if(! ini_get('allow_url_fopen')){
 <div class="swapView" data-dojo-type="dojox/mobile/SwapView"  id="divNewsPage1" name="divNewsPage1">
         <table>
           <tr><?php 
-            $urlGetNews = "http://projeqtor.org/admin/getNews.php";
+            $urlGetNews = "https://projeqtor.org/admin/getNews.php";
             $currentVersion=null;
             if (ini_get('allow_url_fopen') and $getYesNo=='YES' ) {
               enableCatchErrors();
