@@ -124,7 +124,7 @@ class Consistency {
       // Check Order
       $order=substr($pe->wbsSortable,-5);
       if ($lastWbs==$parentWbs) { // Previous is parent, so must be 001
-        if (intval($order)!=1) {
+        if (intval($order)!=1 and ($pe->wbsSortable!='00000' or $pe->refType!='Project')) {
           displayError(i18n("checkWbsFirst", array($pe->wbsSortable,i18n($pe->refType),$pe->refId)));
           $errors++;
           if ($correct) {

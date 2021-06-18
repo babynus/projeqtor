@@ -65,7 +65,7 @@ if (isset($_REQUEST['imputationComment'])) {
     }
   }
 }
-PlanningElement::$_noDispatch=true; // FOR TESTS ONLY
+PlanningElement::$_noDispatch='needReplan'; // FOR TESTS ONLY
 $arrayPeToRefresh=array();
 Sql::beginTransaction();
 for ($i=0; $i<$nbLines; $i++) {
@@ -173,7 +173,7 @@ if ($status=='OK'){
   foreach ($arrayTodo as $ref) {
     $res=PlanningElement::updateSynthesis($ref['refType'], $ref['refId']);
     if (getLastOperationStatus($res)=='OK') {
-      // PBER - V9.2 : will slightly increase time to save, but will unlock items to avoid deadlocks
+      // PBER - V9.2 : will slightly increase time to save, and may bring slight unconsistency, but will unlock items to avoid deadlocks
       Sql::commitTransaction();
       Sql::beginTransaction();
     }

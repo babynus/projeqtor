@@ -263,7 +263,6 @@ foreach ($lstWork as $work) {
     // End #407
     $result[$work->idResource][$work->idProject]+=$work->work;
   }
-  debugLog("================");
 }
 
 if (checkNoData($result)) if (!empty($cronnedScript)) goto end; else exit;
