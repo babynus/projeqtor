@@ -304,7 +304,7 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (339,'menuPokerSession',3,259,115,0),
 (340,'menuPokerSessionVoting',3,260,120,0),
 (351,'menuPokerSessionType',132,268,45,0),
-(352,'menuPokerComplexity',131,269,70,0);
+(352,'menuPokerComplexity',322,269,155,0);
 
 INSERT INTO `${prefix}pokercomplexity` (`name`, `value`, `work`,`sortOrder`,`color`) VALUES
 ('1', 1, 0.5, 10, '#a2a2c3'),
@@ -514,13 +514,18 @@ INSERT INTO `${prefix}navigation` (`id`, `name`, `idParent`, `idMenu`,`sortOrder
 (342,'menuLocalizationRequest',341,262,20,0),
 (343,'menuLocalizationItem',341,263,30,0),
 (344,'menuLocalizationTranslator',341,264,40,0),
-(345, 'menuLanguageSkillLevel',131,265,55,0),
+(345, 'menuLanguageSkillLevel',354,265,30,0),
 (346, 'menuLocalizationRequestType',332,266,60,0),
 (347, 'menuLocalizationItemType', 332,267,70,0),
 (348, 'menuLanguageSkillLevel',341,265,50,0),
 (349, 'menuLocalizationRequestType',341,266,60,0),
 (350, 'menuLocalizationItemType',341,267,70,0),
-(353, 'menuEmployee',112,212,65,0);
+(353, 'menuEmployee',112,212,65,0),
+(354,'navLocalization',131,0,110,0),
+(355,'menuLanguage',341,178,45,0);
+
+UPDATE `${prefix}navigation` set idParent=354, sortOrder=10 where id=199;
+UPDATE `${prefix}navigation` SET moduleName='moduleLocalization' WHERE id=341;
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (21,265,0,0),
