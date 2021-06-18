@@ -8618,7 +8618,7 @@ function getLastNew () {
   };
   xmlhttp.open("GET", url, true);
   xmlhttp.onerror = function () {
-    console.log("** An error occurred during the transaction");
+    consoleTraceLog("** An error occurred during the transaction");
   };
   xmlhttp.send();
 }
