@@ -89,7 +89,9 @@ class TicketSimpleMain extends TicketMain {
     "idMilestone"=>"hidden",
     "isRegression"=>"hidden",
     "paused"=>"nobr, readonly",
-    "pausedDateTime"=>"nobr, readonly"
+    "pausedDateTime"=>"nobr, readonly",
+    "_sec_ToDoList"=>"hidden",
+    "_SubTask"=>"hidden"
   );  
     
   private static $_colCaptionTransposition = array('name'=>'ticketName',
