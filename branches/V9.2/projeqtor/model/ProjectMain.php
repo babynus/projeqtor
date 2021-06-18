@@ -1445,7 +1445,7 @@ static function isTheLeaveProject($id=null) {
   } 
   
   public static function setNeedReplan($id) {
-    if (PlanningElement::$_noDispatch) return;
+    if (PlanningElement::$_noDispatch and PlanningElement::$_noDispatch!='needReplan') return;
     $adminProjects=Project::getAdminitrativeProjectList(true);
     if (isset($adminProjects[$id])) return;
     $proj=SqlElement::getSingleSqlElementFromCriteria("ProjectPlanningElement",array('refType'=>'Project','refId'=>$id),true);
