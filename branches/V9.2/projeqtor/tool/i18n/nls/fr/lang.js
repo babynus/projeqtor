@@ -3447,6 +3447,7 @@ moduleImputationComment: "Le suivi des temps&#44 en corrélation avec le plannin
 moduleIncomes: "Recettes",
 moduleIncomesComment: "La gestion des recettes permet de suivre l'activité des projets comme des centres de profit.&#10;<br/>On part d'un devis envoyé à un client&#44; que l'on transforme en commande à sa validation&#44; et qui incrémente le budget du projet.&#10;<br/>La commande peut alors être planifiée par des échéances de paiement et ensuite transformée en facture&#44; pour laquelle on suivra le paiement.&#10;<br/>ProjeQtOr intègre plusieurs modes de facturation très adaptés à la gestion d'une relation client / fournisseur&#44; comme la possibilité de facturer au temps passé&#44; en retrouvant le temps effectivement passé par une ressource sur le suivi entré dans ProjeQtOr.",
 moduleLocalization: "Requêtes de traduction",
+moduleLocalizationComment: "La gestion des requêtes de traduction permet de demander des traductions des textes à des traducteurs en fonction de leurs compétences linguistiques. <br/>Liée à la gestion de configuration&#44 elle permet de facilement identifier les langues à traduire en fonction des langues d'une version de produit ou de composant.",
 moduleMeeting: "Réunions",
 moduleMeetingComment: "La gestion des réunions permet de suivre les différentes réunions du projet&#44; en les positionnant sur le planning.&#10;<br/>Il est possible de planifier des réunions récurrentes&#44; sur une périodicité définie.",
 moduleNotification: "Notifications",

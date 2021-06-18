@@ -3448,6 +3448,7 @@ moduleImputationComment: "Отслеживание времени&#44; в соо
 moduleIncomes: "Доходы",
 moduleIncomesComment: "Управление доходами отслеживает деятельность проекта как центры прибыли.<br />Мы начинаем с предложения&#44; отправленного клиенту&#44; которое преобразуется в заказ при его проверке и увеличивает бюджет проекта.<br />Заказ может затем запланируйте сроки оплаты&#44; а затем преобразуйте в счет-фактуру&#44; за которой будет выполняться оплата.<br />ProjeQtOr интегрирует несколько режимов выставления счетов&#44; которые очень адаптированы к управлению отношениями ключ&#44; поставщик&#44; например&#44; возможность выставления счетов время&#44; потраченное путем нахождения времени&#44; фактически потраченного ресурсом на последующее наблюдение&#44; введенное в ProjeQtOr.",
 moduleLocalization: "Translation request",
+moduleLocalizationComment: "The management of translation requests makes it possible to request translations of texts from translators according to their language skills. <br/>Linked to configuration management&#44 it allows you to easily identify the languages to be translated according to the languages of a product or component version.",
 moduleMeeting: "Совещание",
 moduleMeetingComment: "Управление собраниями позволяет следить за разными встречами проекта&#44; располагая их по расписанию.<br />Можно запланировать повторяющиеся  с определенной периодичностью.",
 moduleNotification: "Уведомления",

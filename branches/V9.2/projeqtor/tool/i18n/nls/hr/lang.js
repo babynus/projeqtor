@@ -3447,6 +3447,7 @@ moduleImputationComment: "Praćenje vremena&#44 u korelaciji s rasporedom&#44 om
 moduleIncomes: "Prihodi",
 moduleIncomesComment: "Upravljanje prihodima prati projektnu aktivnost kao profitne centre.&#13;&#10;<br/> Počinjemo s ponudom poslanom klijentu&#44 koja se pretvara u narudžbu kada je validirana&#44 a koja povećava proračun projekta.&#13;&#10;<br/> Narudžba se može odrediti prema rokovima plaćanja&#44 a zatim konvertirati u račun&#44 za koji će se izvršiti plaćanje.&#13;&#10;<br/> ProjeQtOr integrira nekoliko načina naplate koji su vrlo prilagođeni upravljanju odnosom ključ / dobavljač&#44 kao što je mogućnost utrošenog vremena naplate&#44 pronalaženjem vremena utrošenog od strane resursa na praćenje u ProjeQtOr.",
 moduleLocalization: "Translation request",
+moduleLocalizationComment: "The management of translation requests makes it possible to request translations of texts from translators according to their language skills. <br/>Linked to configuration management&#44 it allows you to easily identify the languages to be translated according to the languages of a product or component version.",
 moduleMeeting: "Sastanci",
 moduleMeetingComment: "Upravljanje sastancima omogućuje praćenje različitih sastanaka projekta&#44 pozicioniranje na rasporedu.&#10;<br/> Moguće je zakazivati ​​sastanke koji se ponavljaju&#44 na određenu periodičnost.",
 moduleNotification: "Obavijesti",
