@@ -1354,9 +1354,13 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
         return "ldap";
 	    }
 			try { 
-			  if (1) { // New signature
+			  $ldapFormatUri=Parameter::getGlobalParameter('ldapFormatUri');
+			  if ($ldapFormatUri===null or $ldapFormatUri=='' or strtolower($ldapFormatUri)=='true' or $ldapFormatUri===true) $ldapFormatUri=true;
+			  else $ldapFormatUri=false;
+			  if ($ldapFormatUri) { // New signature
 			    $ldapUri=trim($paramLdap_host);
 			    $ldapPort=trim($paramLdap_port);
+			    if (strtolower(substr($ldapUri,0,4))!='ldap') $ldapUri='ldap://'.$ldapUri;
 			    if ($ldapPort and strtolower(substr($ldapUri,0,4))=='ldap' and strpos($ldapUri,' ')===false and strpos($ldapUri,':')===false) {
 			      $ldapUri=$ldapUri.':'.$ldapPort;
 			    }
