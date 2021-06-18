@@ -7647,38 +7647,23 @@ function hideShowDropDiv(mode,subTaskRawId){
   event.preventDefault();
   var el=dojo.byId(subTaskRawId);
   divAttach=el.querySelector('.divAttachSubTask');
-//  if(divAttach.childNodes[1] && divAttach.childNodes[1].firstChild && divAttach.childNodes[1].firstChild.id){
-//    var idDiv=divAttach.childNodes[1].firstChild.id;
-////    dijit.byId(idDiv).reset();  
-//  }
   if(dijit.byId('attachmentFileDirect'))dijit.byId('attachmentFileDirect').reset();
   if(mode=='show'){
-      el.style.background="#EEEEEE";
+      el.style.background="var(--color-button-background-selected)";
       el.style.opacity='50%';
       el.style.border=" 2px dashed grey";
-      if (dojo.byId('dropFilesInfoDiv')) {
-        dojo.byId('dropFilesInfoDiv').style.opacity='0%';
-        dojo.byId('dropFilesInfoDiv').style.display='none';
-      }
+
       activFuncHideShowDropDiv=true;
   }else if(mode =='hide'){
     el.style.background="unset";
     el.style.opacity='unset';
     el.style.border="";
-    if(dojo.byId('dropFilesInfoDiv')){
-      dojo.byId('dropFilesInfoDiv').style.opacity='50%';
-      dojo.byId('dropFilesInfoDiv').style.display='block';
-    }
       activFuncHideShowDropDiv=false;
   }else {
     activFuncHideShowDropDiv=false;
     el.style.background="unset";
     el.style.opacity='unset';
     el.style.border="";
-    if(dojo.byId('dropFilesInfoDiv')){
-      dojo.byId('dropFilesInfoDiv').style.opacity='0%';
-      dojo.byId('dropFilesInfoDiv').style.display='none';
-    }
   }
 
 }

@@ -168,9 +168,9 @@ class SubTask extends SqlElement {
         $colorPrio=$prioSubTask->color;
         if(!$print){
           echo  '<tr  id="'.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'" '.(($rightUpdate=='NO' and $rightRead=='YES')?'':'class="dojoDndItem subTaskRow" dndType="subTask_'.$refType.'_'.$refId.'"').'   
-                    ondragover="hideShowDropDiv(\'show\',\''.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'\',\'divAttachSubTask\');" 
-                        ondrop="hideShowDropDiv(\'dropHide\',\''.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'\',\'divAttachSubTask\');"
-                        ondragLeave="hideShowDropDiv(\'hide\',\''.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'\',\'divAttachSubTask\');">';
+                    ondragover="hideShowDropDiv(\'show\',\''.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'\');" 
+                        ondrop="hideShowDropDiv(\'dropHide\',\''.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'\');"
+                        ondragLeave="hideShowDropDiv(\'hide\',\''.$refType.'_'.$refId.'_subTaskRow_'.$subTask->id.'\');">';
           echo      '<input id="sortOrder_'.$refType.'_'.$refId.'_'.$subTask->id.'" value="'.$subTask->sortOrder.'" type="hidden" />';
           if($rightUpdate=='NO' and $rightRead=='YES'){
             echo   '<td class="todoListTab" id="'.$refType.'_'.$refId.'_grabDive_0" >&nbsp;</td>';
