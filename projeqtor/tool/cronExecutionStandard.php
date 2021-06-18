@@ -196,6 +196,7 @@ function cronCloseMails(){
   if($maintenanceCloseMail->id=='')$nbDays=7;
   else $nbDays=$maintenanceCloseMail->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
+  $item='Mail';
   $obj=new $item();
   $clauseWhere="mailDateTime<'" . $targetDate . "'";
   $obj->close($clauseWhere);
@@ -206,6 +207,7 @@ function cronDeleteMails(){
   if($maintenanceDeletedMail->id=='')$nbDays=30;
   else $nbDays=$maintenanceDeletedMail->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
+  $item='Mail';
   $obj=new $item();
   $clauseWhere="mailDateTime<'" . $targetDate . "'";
   return $obj->purge($clauseWhere);
@@ -216,6 +218,7 @@ function cronCloseAlerts(){
   if($maintenanceCloseAlerts->id=='')$nbDays=7;
   else $nbDays=$maintenanceCloseAlerts->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
+  $item='Alert';
   $obj=new $item();
   $clauseWhere="alertInitialDateTime<'" . $targetDate . "'";
   $obj->read($clauseWhere);
@@ -226,6 +229,7 @@ function cronDeleteAlert(){
   if($maintenanceDeletedAlerts->id=='')$nbDays=30;
   else $nbDays=$maintenanceDeletedAlerts->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
+  $item='Alert';
   $obj=new $item();
   $clauseWhere="alertInitialDateTime<'" . $targetDate . "'";
   $obj->purge($clauseWhere);
@@ -236,6 +240,7 @@ function cronDeleteNotification(){
   if($maintenanceDeletedNotification->id=='')$nbDays=30;
   else $nbDays=$maintenanceDeletedNotification->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays );
+  $item='Notification';
   $obj=new $item();
   $clauseWhere="notificationDate<'" . $targetDate . "'";
   $obj->purge($clauseWhere);
@@ -246,6 +251,7 @@ function cronDeleteAudit(){
   if($maintenanceDeletedAudit->id=='')$nbDays=30;
   else $nbDays=$maintenanceDeletedAudit->parameterValue;
   $targetDate=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i');
+  $item='Audit';
   $obj=new $item();
   $clauseWhere="disconnectionDateTime<'" . $targetDate . "'";
   $obj->purge($clauseWhere);
