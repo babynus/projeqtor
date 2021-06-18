@@ -179,7 +179,7 @@ if ( array_key_exists('listShowNullAssignment',$_REQUEST) ) {
  if (! $showNullAssignment) {
    $classPeriodic= get_class(new PeriodicMeeting());
    $queryWhere.= ($queryWhere=='')?'':' and ';
-   $queryWhere.=' (ass.plannedWork>0 or (ass.refType="'.$classPeriodic.'" and ass.assignedWork>0))';
+   $queryWhere.=" (ass.plannedWork>0 or (ass.refType='".$classPeriodic."' and ass.assignedWork>0))";
    //$queryWhere.=' ass.plannedWork>0';
  }
 // else $queryWhere.=' ass.plannedWork>0 ';
