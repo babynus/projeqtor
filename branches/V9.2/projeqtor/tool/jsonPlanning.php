@@ -506,7 +506,7 @@
         	} else if ( ! isset($plannableProjectsList[$line["refid"]]) ) {
         	  $line['reftype']='Fixed';
         	  $line['iconClass']='Fixed  ';
-        	} else if ($line["needreplan"] and !$proj->fixPlanning and ! isset($plannableProjectsList[$line["refid"]])) {
+        	} else if ($line["needreplan"] and !$proj->fixPlanning and isset($plannableProjectsList[$line["refid"]])) {
         	  $line['reftype']='Replan';
         	  $line['iconClass']='Replan';
         	}
