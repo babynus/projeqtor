@@ -905,10 +905,10 @@ class ActivityMain extends SqlElement {
       $proj= new Project();
       $count=$proj->countSqlElementsFromCriteria(array("id"=>$this->idProject,'codeType'=>'ADM'));
       if($count!=0){
-        if(self::$_fieldsAttributes["fixPlanning"]!="hidden")self::$_fieldsAttributes["fixPlanning"]="hidden";
-        if(self::$_fieldsAttributes["workOnRealTime"]!="hidden")self::$_fieldsAttributes["workOnRealTime"]='hidden';
-        if(self::$_fieldsAttributes["paused"]!="hidden")self::$_fieldsAttributes["paused"]="hidden";
-        if(self::$_fieldsAttributes["isPlanningActivity"]!="hidden")self::$_fieldsAttributes["isPlanningActivity"]="hidden";
+        self::$_fieldsAttributes["fixPlanning"]="hidden";
+        self::$_fieldsAttributes["workOnRealTime"]='hidden';
+        self::$_fieldsAttributes["paused"]="hidden";
+        self::$_fieldsAttributes["isPlanningActivity"]="hidden";
         self::$_fieldsAttributes["_Dependency_Predecessor"]="hidden";
         self::$_fieldsAttributes["_Dependency_Successor"]="hidden";
         self::$_fieldsAttributes["idProduct"]="hidden";
