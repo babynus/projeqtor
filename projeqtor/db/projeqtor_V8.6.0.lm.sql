@@ -5,4 +5,4 @@
 -- // Date : 2020-09-09                                     //
 -- ///////////////////////////////////////////////////////////
 
-RENAME TABLE `livemeeting` to `${prefix}livemeeting`;
+RENAME TABLE `livemeeting` TO `${prefix}livemeeting`;
