@@ -121,7 +121,14 @@ $crit='idProject in '.transformListIntoInClause($listProj).' and idResource='.$a
 
 // Change the assignments
 $ass=new Assignment();
+$assRec=new AssignmentRecurring();
+$critRes='idAssignment in ( select id from '.$ass->getDatabaseTableName().' where '.$crit.')';
+$resAss=array();
+
 $assList=$ass->getSqlElementsFromCriteria(null,null,$crit);
+$assRecLst=$assRec->getSqlElementsFromCriteria(null,null,$critRes,'idAssignment asc');
+
+
 $pw=new PlannedWork();
 foreach ($assList as $ass) {
   $needNew=true;
@@ -171,8 +178,25 @@ foreach ($assList as $ass) {
     $newAss->leftCost=$newAss->leftWork*$newAss->dailyCost;
     $newAss->plannedCost=$newAss->plannedWork*$newAss->dailyCost;
     $newAss->save();
+    $resAss[$ass->id]=$newAss->id;
     if ($needNew) $ass->save();
     $pw->purge($where);
+  }
+}
+foreach ($assRecLst as $assReToChange){
+  if(array_key_exists($assReToChange->idAssignment, $resAss) and $assReToChange->idAssignment!=$resAss[$assReToChange->idAssignment]){
+    $newRec=new AssignmentRecurring();
+    $newRec->day=$assReToChange->day;
+    $newRec->idAssignment=$resAss[$assReToChange->idAssignment];
+    $newRec->idResource=$resource;
+    $newRec->refId=$assReToChange->refId;
+    $newRec->refType=$assReToChange->refType;
+    $newRec->value=$assReToChange->value;
+    $newRec->type=$assReToChange->type;
+    $newRec->save();
+  }else{
+    $assReToChange->idResource=$resource;
+    $assReToChange->save();
   }
 }
 
