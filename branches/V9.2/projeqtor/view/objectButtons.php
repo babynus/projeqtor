@@ -568,7 +568,7 @@
     <?php 
     $isGlobal=GlobalPlanningElement::isGlobalizable($class);
     if (RequestHandler::isCodeSet('planning') and RequestHandler::isCodeSet('planningType') and RequestHandler::getValue('planningType')=='Planning') {organizeButtons(2);}?>
-    <div id="indentButtonDiv" class="statusBar" style="display:<?php echo ($isGlobal)?'none':'inline-block';?>;<?php echo (isNewGui())?'height:64px;width:36px;background:var(--background-color) !important;':'height:32px; width:'.(($extendedZone)?'72':'68').'px;';?>">
+    <div id="indentButtonDiv" class="statusBar" style="<?php echo ($isGlobal)?'display:none':'';?>;<?php echo (isNewGui())?'height:64px;width:36px;background:var(--background-color) !important;':'height:32px; width:'.(($extendedZone)?'72':'68').'px;';?>">
      <button id="indentDecreaseButton" dojoType="dijit.form.Button" showlabel="false" 
         title="<?php echo i18n('indentDecreaseButton');?>"
         iconClass="dijitButtonIcon dijitButtonIconDecrease" class="detailButton">
