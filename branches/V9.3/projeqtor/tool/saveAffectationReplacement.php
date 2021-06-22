@@ -105,7 +105,7 @@ $oldRes=new ResourceAll($aff->idResource);
 // save old affectation
 if ($startDate) {
   $endTst=addWorkDaysToDate($startDate, -1);
-  if ($endTst>=$aff->startDate and !$aff->endDate) $aff->endDate=$endTst;
+  if (($endTst>=$aff->startDate and !$aff->endDate)  or ($endTst>=$aff->startDate and $endTst<=$aff->endDate)) $aff->endDate=$endTst;
   if ($aff->endDate and $aff->endDate<date('Y-m-d')) {
     $aff->idle=1;
   }
@@ -127,6 +127,7 @@ $resAss=array();
 
 $assList=$ass->getSqlElementsFromCriteria(null,null,$crit);
 $assRecLst=$assRec->getSqlElementsFromCriteria(null,null,$critRes,'idAssignment asc');
+
 
 $pw=new PlannedWork();
 foreach ($assList as $ass) {
@@ -177,6 +178,7 @@ foreach ($assList as $ass) {
     $newAss->leftCost=$newAss->leftWork*$newAss->dailyCost;
     $newAss->plannedCost=$newAss->plannedWork*$newAss->dailyCost;
     $newAss->save();
+    $resAss[$ass->id]=$newAss->id;
     if ($needNew) $ass->save();
     $pw->purge($where);
   }
