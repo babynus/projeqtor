@@ -5,7 +5,7 @@
 // ========== Database configuration =====================================================
 // --- MySql Degfault
 $paramDbType='mysql'; $paramDbPort='3306'; $paramDbUser='root'; $paramDbPassword='mysql';
-$paramDbName='projeqtor_v92';$paramDbPrefix='';
+$paramDbName='projeqtor_v93';$paramDbPrefix='';
 // --- PostgreSql Default
 //$paramDbName='projeqtor_suivi';$paramDbPrefix='';
 //$paramDbType='pgsql'; $paramDbPort='5432'; $paramDbName='projeqtor'; $paramDbUser='projeqtor'; $paramDbPassword='projeqtor';
