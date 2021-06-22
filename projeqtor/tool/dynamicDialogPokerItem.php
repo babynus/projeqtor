@@ -61,7 +61,7 @@ if($mode =='edit'){
                <select dojoType="dijit.form.FilteringSelect" id="pokerItemRef2Type" name="pokerItemRef2Type" onchange="refreshPokerItemList();" 
                <?php if (isNewGui()) {?>  style="width:388px" <?php }?> 
                <?php echo autoOpenFilteringSelect();?>
-                class="input" value="">
+                class="input" value="Ticket">
                 <option value='Ticket'><?php echo htmlEncode(i18n('Ticket'));?></option>
                 <option value='Activity'><?php echo htmlEncode(i18n('Activity'));?></option>
                 <option value='Requirement'><?php echo htmlEncode(i18n('Requirement'));?></option>

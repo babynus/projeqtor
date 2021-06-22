@@ -30,16 +30,27 @@
 require_once "../tool/projeqtor.php"; 
 $id=RequestHandler::getId('idPokerItem');
 $mode = RequestHandler::getValue('mode');
-$pokerItem = new PokerItem($id);
+$list = RequestHandler::getValue('itemList');
+$itemList=explode(',',$list);
+$pokerItem = new PokerItem($id,true);
 if($mode=='open'){
   $pokerItem->isOpen = 1;
+  $pokerItem->save();
 }else if($mode=='pause'){
   $pokerItem->isOpen = 0;
+  $pokerItem->save();
 }else if($mode=='close'){
   $idComplexity = RequestHandler::getValue('idComplexity');
   $comp = new PokerComplexity($idComplexity);
   $pokerItem->value = $comp->value;
   $pokerItem->isOpen = 0;
+  $pokerItem->save();
+}else if($mode=='global'){
+  foreach ($itemList as $idItem){
+    $pokerItem = new PokerItem($idItem,true);
+    if($pokerItem->isOpen)continue;
+    $pokerItem->isOpen = 1;
+    $pokerItem->save();
+  }
 }
-$pokerItem->save();
 ?>
