@@ -227,6 +227,24 @@ function openPokerItemVote(idPokerSession, idItem, itemList) {
   });
 }
 
+function globalOpenPokerItemVote(itemList) {
+	  dojo.xhrPost({
+	    url : '../tool/openPokerItemVote.php?itemList=' + itemList + '&mode=global',
+	    handleAs : "text",
+	    load : function(data) {
+	    	var callBack=function() {
+	            tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
+	            tabContainer=dijit.byId('tabDetailContainer');
+	            if (tabContainer != undefined) {
+	              tabContainer.selectChild(tabToSelect.page);
+	            }
+	          };
+	          loadContent("objectDetail.php", "detailDiv", "listForm", null, null,
+	              null, null, callBack, true);
+	    }
+	  });
+	}
+
 function commitPokerItemVote(idPokerItem) {
   var idComplexity = dijit.byId('pokerComplexity').get('value');
   dojo.xhrPost({
