@@ -105,7 +105,7 @@ $oldRes=new ResourceAll($aff->idResource);
 // save old affectation
 if ($startDate) {
   $endTst=addWorkDaysToDate($startDate, -1);
-  if ($endTst>=$aff->startDate and !$aff->endDate) $aff->endDate=$endTst;
+  if (($endTst>=$aff->startDate and !$aff->endDate)  or ($endTst>=$aff->startDate and $endTst<=$aff->endDate)) $aff->endDate=$endTst;
   if ($aff->endDate and $aff->endDate<date('Y-m-d')) {
     $aff->idle=1;
   }
