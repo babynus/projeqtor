@@ -63,11 +63,19 @@ $endDate="";
 if (array_key_exists('replaceAffectationEndDate',$_REQUEST)) {
 	$endDate=trim($_REQUEST['replaceAffectationEndDate']);;
 }
+$paramAutoAff=Parameter::getGlobalParameter('autoAffectationPool');
 Security::checkValidDateTime($endDate);
 
 $idle=0;
 
+if($aff->idResource!=''){
+  $oldRes=new ResourceAll($aff->idResource);
+}else{
+  $oldRes=new ResourceAll($aff->idResourceSelect);
+}
+
 $resObj=new ResourceAll($resource);
+
 $rc=new ResourceCost();
 $crit=array('idResource'=>$resource,'endDate'=>null);
 $rcList=$rc->getSqlElementsFromCriteria($crit,null,null,'id asc');
@@ -101,7 +109,8 @@ $newAff->endDate=$endDate;
 $newAff->idProfile=$profile;
 $result=$newAff->save();
 
-$oldRes=new ResourceAll($aff->idResource);
+
+
 // save old affectation
 if ($startDate) {
   $endTst=addWorkDaysToDate($startDate, -1);
@@ -113,6 +122,15 @@ if ($startDate) {
   $aff->idle=1;
 }
 $aff->save();
+
+
+if($paramAutoAff=='IMPLICIT' and $oldRes->isResourceTeam==1 and $aff->idle==1){
+  $allAffImpl=$aff->getSqlElementsFromCriteria(array('idResourceTeam'=>$oldRes->id));
+  foreach ($allAffImpl as $affImp){
+    $affImp->idle=1;
+    $affImp->save();
+  }
+}
 
 $proj=new Project($newAff->idProject);
 $listProj=getListToChange($proj,$aff->idResource);
@@ -161,6 +179,12 @@ foreach ($assList as $ass) {
       $ass->leftWork-=$left;
       if ($ass->leftWork<0) $ass->leftWork=0;
     } else {
+      if($ass->isResourceTeam and $ass->uniqueResource){
+         if(!$resObj->isResourceTeam){
+           $ass->isResourceTeam=0;
+         }
+         $ass->uniqueResource=0;
+      }
       $newAss=$ass;
     } 
     $newAss->idResource=$resource;;
@@ -183,6 +207,7 @@ foreach ($assList as $ass) {
     $pw->purge($where);
   }
 }
+
 foreach ($assRecLst as $assReToChange){
   if(array_key_exists($assReToChange->idAssignment, $resAss) and $assReToChange->idAssignment!=$resAss[$assReToChange->idAssignment]){
     $newRec=new AssignmentRecurring();
