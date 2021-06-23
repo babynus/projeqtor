@@ -304,7 +304,16 @@ function pokerItemNav(idPokerSession, idItem, itemList, nav) {
 function refreshPokerItemResult(idPokerSession, idItem, itemList) {
   var url='../tool/refreshPokerItemResult.php?idPokerSession=' + idPokerSession
       + '&idItem=' + idItem + '&itemList=' + itemList;
-  loadContent(url, 'pokerVoteResult', null, false);
+  var callBack=function() {
+	  refreshPokerVoteList(idPokerSession, idItem);
+    };
+  loadContent(url, 'pokerVoteResult', null, false, null, null, null, callBack, true);
+}
+
+function refreshPokerVoteList(idPokerSession, idItem) {
+  var url='../tool/refreshPokerVoteList.php?idPokerSession=' + idPokerSession
+      + '&idItem=' + idItem;
+  loadContent(url, 'pokerVoteList', null, false);
 }
 
 function voteToPokerItem(idPokerSession, idItem, itemList, vote) {

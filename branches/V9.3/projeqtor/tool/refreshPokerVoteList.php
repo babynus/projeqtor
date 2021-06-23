@@ -31,46 +31,34 @@ require_once "../tool/projeqtor.php";
 $result="";
 $id=RequestHandler::getId('idItem');
 $idPokerSession=RequestHandler::getId('idPokerSession');
-$list = RequestHandler::getValue('itemList');
-$itemList=explode(',',$list);
 $user = getSessionUser();
 
 $obj = new PokerSession($idPokerSession);
-$pos = array_search($id, $itemList);
-if($pos < 0)$pos=0;
-$previous = ($pos>0)?true:false;
-$lenght = count($itemList)-1;
-if($lenght < 0)$lenght=0;
-$next = ($pos<$lenght)?true:false;
 
-$pokerComplexity = new PokerComplexity();
-$pokerComplexityList = $pokerComplexity->getSqlElementsFromCriteria(array('idle'=>'0'), null, null, "sortOrder ASC");
 $pokerItem = new PokerItem($id);
 $pokerMember = new PokerResource();
 $pokerMember = $pokerMember->getSingleSqlElementFromCriteria('PokerResource', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id));
 $pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSession'=>$idPokerSession));
 $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
-$pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$idPokerSession, 'idPokerItem'=>$pokerItem->id), 'value');
-sort($pokerVoteList);
-$lowVote = (isset($pokerVoteList[0]))?$pokerVoteList[0]:1;
-$highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[count($pokerVoteList)-1]:99;
-if($pokerMember->id and !$obj->done){
-  foreach ($pokerComplexityList as $pokerComplexity){
-      $onclick='voteToPokerItem('.$obj->id.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');';
-      $selected = ($pokerVote->id and $pokerVote->value == $pokerComplexity->value)?'selected':'';
-      $style='background-color:'.$pokerComplexity->color.';';
-      if($selected)$style='background-color:white;color:'.$pokerComplexity->color.';';
-      echo '<div class="card-rig card-in-hand '.$selected.'" onclick="'.$onclick.'">';
-        echo '<div class="card-wrapper perspective-wrapper">';
-          echo '<div class="card-container">
-                  <div class="card card-face" style="'.$style.'">
-                      <div class="small-card-id"><span>'.$pokerComplexity->value.'</span></div>
-                      <div class="text-center player-vote"><span>'.$pokerComplexity->name.'</span></div>
-                  </div>
-                </div>';
+
+foreach ($pokerMemberList as $member){
+  echo '<div style="float:left;padding: 0px 5px 10px 5px;"><table><tr>';
+  echo '<td>';
+  $pVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerItem'=>$pokerItem->id, 'idPokerSession'=>$obj->id, 'idResource'=>$member->idResource));
+  $pComplex = PokerComplexity::getSingleSqlElementFromCriteria('PokerComplexity', array('value'=>$pVote->value));
+  $style='';
+  if($pVote->id and $pComplex->id)$style='background-color:'.$pComplex->color.';';
+  echo '<div class="card-on-table">';
+    echo '<div class="card-wrapper-mini">';
+      echo '<div class="card-container-mini">';
+        echo '<div class="card-mini card-face" style="'.$style.'">';
+          if($pVote->id)echo '<div class="text-center player-vote-mini"><span>'.$pComplex->name.'</span></div>';
         echo '</div>';
       echo '</div>';
-  }
+    echo '</div>';
+  echo '</div>';
+  echo '</td>';
+  echo '<td><div style="padding-left: 10px;width: 55px;">'.SqlList::getNameFromId('Affectable', $member->idResource).'</div></td>';
+  echo '</tr></table></div>';
 }
-echo '</table>';
 ?>
