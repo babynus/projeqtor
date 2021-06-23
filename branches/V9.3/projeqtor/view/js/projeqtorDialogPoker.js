@@ -207,6 +207,28 @@ function startPausePokerSession(idPokerSession) {
       });
 }
 
+function flipPokerVote(idPokerSession, idItem, itemList){
+	dojo.xhrPost({
+	    url : '../tool/flipPokerVote.php?idPokerItem=' + idItem
+	        + '&idPokerSession='+idPokerSession+'&mode=flip',
+	    handleAs : "text",
+	    load : function(data) {
+	    	loadContent("objectDetail.php", "detailDiv", "listForm");
+	    }
+	  });
+}
+
+function resetPokerVote(idPokerSession, idItem, itemList){
+	dojo.xhrPost({
+	    url : '../tool/flipPokerVote.php?idPokerItem=' + idItem
+	        + '&idPokerSession='+idPokerSession+'&mode=reset',
+	    handleAs : "text",
+	    load : function(data) {
+	    	loadContent("objectDetail.php", "detailDiv", "listForm");
+	    }
+	  });
+}
+
 function openPokerItemVote(idPokerSession, idItem, itemList) {
   dojo.xhrPost({
     url : '../tool/openPokerItemVote.php?idPokerItem=' + idItem

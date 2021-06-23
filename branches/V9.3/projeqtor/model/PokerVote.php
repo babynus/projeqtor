@@ -35,6 +35,7 @@ class PokerVote extends SqlElement {
   public $idResource;
   public $idPokerSession;
   public $value;
+  public $flipped;
   
   private static $_fieldsAttributes=array();
    /** ==========================================================================

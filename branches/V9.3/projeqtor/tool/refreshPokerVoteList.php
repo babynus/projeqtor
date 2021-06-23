@@ -47,12 +47,18 @@ foreach ($pokerMemberList as $member){
   $pVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerItem'=>$pokerItem->id, 'idPokerSession'=>$obj->id, 'idResource'=>$member->idResource));
   $pComplex = PokerComplexity::getSingleSqlElementFromCriteria('PokerComplexity', array('value'=>$pVote->value));
   $style='';
-  if($pVote->id and $pComplex->id)$style='background-color:'.$pComplex->color.';';
+  if($pVote->id and $pComplex->id){
+    $style='background-color:'.$pComplex->color.';';
+  }
   echo '<div class="card-on-table">';
     echo '<div class="card-wrapper-mini">';
       echo '<div class="card-container-mini">';
-        echo '<div class="card-mini card-face" style="'.$style.'">';
-          if($pVote->id)echo '<div class="text-center player-vote-mini"><span>'.$pComplex->name.'</span></div>';
+        echo '<div class="card-mini card-face" style="'.$style.'" align="center">';
+          if($pVote->id and $pVote->flipped){
+            echo '<div class="text-center player-vote-mini"><span>'.$pComplex->name.'</span></div>';
+          }else if($pVote->id and !$pVote->flipped){
+            echo '<div style="position: absolute;top: 20px;left: 8px;"><img style="height:32px;width:32px;" src="img/logoSmallWhite.png"></div>';
+          }
         echo '</div>';
       echo '</div>';
     echo '</div>';
