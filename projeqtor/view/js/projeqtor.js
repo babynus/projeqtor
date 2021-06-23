@@ -5792,7 +5792,7 @@ function addFieldInTextBoxForNotificationItem(context, textBox, editor) {
 //Damian
 function addFieldInTextBoxForEmailTemplateItem(editor) {
   var selectedItem = dijit.byId('_spe_listItemTemplate').get("value");
-  var idTextBox = dojo.byId('template').value;
+  var idTextBox = dojo.byId('template');
   var element = document.getElementById('template');
   var context = '_spe_listItemTemplate';
   var textBox = 'template';
