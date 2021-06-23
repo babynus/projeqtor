@@ -4445,6 +4445,7 @@ div.ticketKanbanCustom .kanbanVersion{
 
 .card-in-hand:hover {
 	transform: scale(1.2);
+	z-index: 10;
 }
 
 .card-container {
