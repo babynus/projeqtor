@@ -68,7 +68,7 @@ $description=null;
 if (array_key_exists('affectationDescription',$_REQUEST)) {
   $description=($_REQUEST['affectationDescription']);
 }
-
+$paramAutoAff=Parameter::getGlobalParameter('autoAffectationPool');
 
 $startDate="";
 if (array_key_exists('affectationStartDate',$_REQUEST)) {
@@ -93,7 +93,20 @@ if (! $idTeam and !$idOrganization) {
 	
 	$affectation->idProject=$project;
 	$affectation->idResource=$resource;
-	
+	if($affectation->idle!=$idle){
+    	if($affectation->idResource!=''){
+    	  $ress=new ResourceAll($affectation->idResource);
+    	}else{
+    	  $ress=new ResourceAll($affectation->idResourceSelect);
+    	}
+    	if( $ress->isResourceTeam==1 and $paramAutoAff=='IMPLICIT' ){
+    	  $allAffImpl=$affectation->getSqlElementsFromCriteria(array('idResourceTeam'=>$ress->id));
+    	  foreach ($allAffImpl as $affImp){
+    	    $affImp->idle=$idle;
+    	    $affImp->save();
+    	  }
+    	}
+	}
 	$affectation->idle=$idle;
 	$affectation->rate=$rate;
 	$affectation->startDate=$startDate;
