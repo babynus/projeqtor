@@ -4431,6 +4431,7 @@ resetActivityStreamParams: "활동 스트림 영역의 크기가 재설정됩니
 resetColor: "재설정",
 resetPassword: "매년-일",
 ResetPasswordadm: "비밀번호 리셋",
+resetPokerVote: "reset votes",
 Resolution: "해결",
 resolutionMustChangeSolved: "확인 및 '해결됨'인 경우 상태별로 만 변경할 수 있습니다",
 ResolvedRecently: "Resolved",

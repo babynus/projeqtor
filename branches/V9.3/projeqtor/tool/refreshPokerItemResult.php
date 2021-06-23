@@ -56,8 +56,9 @@ $lowVote = (isset($pokerVoteList[0]))?$pokerVoteList[0]:1;
 $highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[count($pokerVoteList)-1]:99;
 if($pokerMember->id and !$obj->done){
   foreach ($pokerComplexityList as $pokerComplexity){
-      $onclick='voteToPokerItem('.$obj->id.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');';
       $selected = ($pokerVote->id and $pokerVote->value == $pokerComplexity->value)?'selected':'';
+      $onclick=(!$pokerVote->flipped)?'voteToPokerItem('.$obj->id.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');':'';
+      if($selected)$onclick='';
       $style='background-color:'.$pokerComplexity->color.';';
       if($selected)$style='background-color:white;color:'.$pokerComplexity->color.';';
       echo '<div class="card-rig card-in-hand '.$selected.'" onclick="'.$onclick.'">';

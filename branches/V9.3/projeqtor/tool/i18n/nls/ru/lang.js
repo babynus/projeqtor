@@ -4432,6 +4432,7 @@ resetActivityStreamParams: "Это позволит сбросить разме�
 resetColor: "Сброс",
 resetPassword: "Сброс пароля",
 ResetPasswordadm: "Сбросить пароль",
+resetPokerVote: "reset votes",
 Resolution: "Разрешение",
 resolutionMustChangeSolved: "если отмечено&#44; «решено» может быть изменено только по статусу",
 ResolvedRecently: "Resolved",

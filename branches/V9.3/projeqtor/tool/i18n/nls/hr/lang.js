@@ -4431,6 +4431,7 @@ resetActivityStreamParams: "Ovo će resetirati veličinu područja toka aktivnos
 resetColor: "poništiti",
 resetPassword: "poništavanje lozinke",
 ResetPasswordadm: "Ponovno postavljanje lozinke",
+resetPokerVote: "reset votes",
 Resolution: "Rezolucija",
 resolutionMustChangeSolved: " &#34;riješenjo&#34;  modificirano putem rezolucijie",
 ResolvedRecently: "Riješeno",
