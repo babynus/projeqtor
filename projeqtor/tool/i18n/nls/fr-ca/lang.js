@@ -4431,6 +4431,7 @@ resetActivityStreamParams: "Ceci réinitialisera les tailles des zones de flux d
 resetColor: "Effacer",
 resetPassword: "Initaliser le mot de passe",
 ResetPasswordadm: "Mot de passe réinitialisé",
+resetPokerVote: "réinitialiser les votes",
 Resolution: "Résolution",
 resolutionMustChangeSolved: "&#34;solutionné&#34; est modifié uniquement par la résolution",
 ResolvedRecently: "Résolus",

@@ -29,17 +29,89 @@
  */
 require_once "../tool/projeqtor.php"; 
 $result="";
-$id=RequestHandler::getId('idItem');
+$idItem=RequestHandler::getId('idItem');
 $idPokerSession=RequestHandler::getId('idPokerSession');
+$list = RequestHandler::getValue('itemList');
+$itemList=explode(',',$list);
 $user = getSessionUser();
 
 $obj = new PokerSession($idPokerSession);
+$canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+if ($obj->idle==1) {
+	$canUpdate=false;
+}
 
-$pokerItem = new PokerItem($id);
+$pos = array_search($idItem, $itemList);
+if($pos < 0)$pos=0;
+$lenght = count($itemList)-1;
+if($lenght < 0)$lenght=0;
+$pos = array_search($idItem, $itemList);
+if($pos < 0)$pos=0;
+$previous = ($pos>0)?true:false;
+$lenght = count($itemList)-1;
+if($lenght < 0)$lenght=0;
+$next = ($pos<$lenght)?true:false;
+
+$pokerComplexity = new PokerComplexity();
+$pokerComplexityList = $pokerComplexity->getSqlElementsFromCriteria(array('idle'=>'0'), null, null, "sortOrder ASC");
+$pokerItem = new PokerItem($idItem);
 $pokerMember = new PokerResource();
 $pokerMember = $pokerMember->getSingleSqlElementFromCriteria('PokerResource', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id));
 $pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSession'=>$idPokerSession));
 $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
+$pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$idPokerSession, 'idPokerItem'=>$pokerItem->id), 'value');
+sort($pokerVoteList);
+$lowVote = (isset($pokerVoteList[0]))?$pokerVoteList[0]:1;
+$highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[count($pokerVoteList)-1]:99;
+
+echo '<div style="width: 100%;padding-bottom: 20px;">';
+echo '  <button id="refreshPokerDiv" dojoType="dijit.form.Button" showlabel="false"';
+echo '  title="'.i18n('refreshPokerVote').'" iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">';
+echo   '  <script type="dojo/connect" event="onClick" args="evt">';
+echo   '    refreshPokerItemResult('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
+echo   '  </script>';
+echo '  </button>';
+if($canUpdate){
+	$name = i18n('flipPokerVote');
+	if($pokerVote->flipped){
+		$name = i18n('resetPokerVote');
+	}
+	echo ' <button id="flipPokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;padding: 0px 5px 0px 5px;" class="roundedVisibleButton">';
+	$icon = '&curarr;&nbsp;';
+	if($pokerVote->flipped)$icon='&orarr;&nbsp;';
+	echo '   <span>'.$icon . $name . '</span>';
+	echo '   <script type="dojo/connect" event="onClick" args="evt">';
+	if(!$pokerVote->flipped){
+		echo '     flipPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
+	}else{
+		echo '     resetPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
+	}
+	echo '   </script>';
+	echo ' </button>';
+	echo ' <button id="closePokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;padding: 0px 5px 0px 5px;" class="roundedVisibleButton">';
+	echo '   <span>' . i18n('closePokerVote') . '</span>';
+	echo '   <script type="dojo/connect" event="onClick" args="evt">';
+	echo '     closePokerItemVote('.$pokerItem->id.','.$obj->id.');';
+	echo '   </script>';
+	echo ' </button>';
+}
+if($previous){
+	echo ' <button id="previousItem" dojoType="dijit.form.Button" style="vertical-align: middle;padding: 0px 5px 0px 5px;" class="roundedVisibleButton">';
+	echo '   <span>&larr;&nbsp;' . i18n('previous') . '</span>';
+	echo '   <script type="dojo/connect" event="onClick" args="evt">';
+	echo '     pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');';
+	echo '   </script>';
+	echo ' </button>';
+}
+if($next){
+	echo ' <button id="nextItem" dojoType="dijit.form.Button" style="vertical-align: middle;padding: 0px 5px 0px 5px;" class="roundedVisibleButton">';
+	echo '   <span>' . i18n('next') . '&nbsp;&rarr;</span>';
+	echo '   <script type="dojo/connect" event="onClick" args="evt">';
+	echo '     pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');';
+	echo '   </script>';
+	echo ' </button>';
+}
+echo '</div>';
 
 foreach ($pokerMemberList as $member){
   echo '<div style="float:left;padding: 0px 5px 10px 5px;"><table><tr>';
