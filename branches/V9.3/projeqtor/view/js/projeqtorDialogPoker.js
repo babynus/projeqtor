@@ -213,7 +213,7 @@ function flipPokerVote(idPokerSession, idItem, itemList){
 	        + '&idPokerSession='+idPokerSession+'&mode=flip',
 	    handleAs : "text",
 	    load : function(data) {
-	    	loadContent("objectDetail.php", "detailDiv", "listForm");
+	    	refreshPokerItemResult(idPokerSession, idItem, itemList);
 	    }
 	  });
 }
@@ -224,7 +224,7 @@ function resetPokerVote(idPokerSession, idItem, itemList){
 	        + '&idPokerSession='+idPokerSession+'&mode=reset',
 	    handleAs : "text",
 	    load : function(data) {
-	    	loadContent("objectDetail.php", "detailDiv", "listForm");
+	    	refreshPokerItemResult(idPokerSession, idItem, itemList);
 	    }
 	  });
 }
@@ -305,16 +305,12 @@ function closePokerItemVote(idPokerItem, idPokerSession) {
 }
 
 function gotoPokerItem(idPokerSession, idItem, itemList) {
-//  var callBack=function() {
     tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
     tabContainer=dijit.byId('tabDetailContainer');
     if (tabContainer != undefined) {
       tabContainer.selectChild(tabToSelect.page);
     }
     pokerItemNav(idPokerSession, idItem, itemList, null);
-//  };
-//  loadContent("objectDetail.php", "detailDiv", "listForm", null, null, null,
-//      null, callBack, true);
 }
 
 function pokerItemNav(idPokerSession, idItem, itemList, nav) {
@@ -327,14 +323,14 @@ function refreshPokerItemResult(idPokerSession, idItem, itemList) {
   var url='../tool/refreshPokerItemResult.php?idPokerSession=' + idPokerSession
       + '&idItem=' + idItem + '&itemList=' + itemList;
   var callBack=function() {
-	  refreshPokerVoteList(idPokerSession, idItem);
+	  refreshPokerVoteList(idPokerSession, idItem, itemList);
     };
   loadContent(url, 'pokerVoteResult', null, false, null, null, null, callBack, true);
 }
 
-function refreshPokerVoteList(idPokerSession, idItem) {
+function refreshPokerVoteList(idPokerSession, idItem, itemList) {
   var url='../tool/refreshPokerVoteList.php?idPokerSession=' + idPokerSession
-      + '&idItem=' + idItem;
+      + '&idItem=' + idItem + '&itemList=' + itemList;
   loadContent(url, 'pokerVoteList', null, false);
 }
 
