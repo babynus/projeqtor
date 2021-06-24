@@ -3534,6 +3534,7 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
   if ($typeEvo=='SEQ') {
     $num=intVal($vers->name)+1;
   }
+  echo '<thead>';
   echo '<tr>';
   if (!$print) {
     $statusTable=SqlList::getList('Status', 'name', null);
@@ -3552,11 +3553,13 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:15%" >'.i18n('colIdVersion').'</td>';
+  echo '<td class="assignHeader" style="width:15%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colIdVersion').'</td>';
   echo '<td class="assignHeader" style="width:15%" >'.i18n('colDate').'</td>';
   echo '<td class="assignHeader" style="width:15%">'.i18n('colIdStatus').'</td>';
   echo '<td class="assignHeader" style="width:'.(($print)?'55':'45').'%">'.i18n('colFile').'</td>';
   echo '</tr>';
+  echo '</thead>';
+  echo '<tbody>';
   $preserveFileName=Parameter::getGlobalParameter('preserveUploadedFileName');
   if (!$preserveFileName) {
     $preserveFileName="NO";
@@ -3623,6 +3626,7 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
     echo '</td></tr></table>';
     echo '</td></tr>';
   }
+  echo '</tbody>';
   echo '</table></td></tr>';
 }
 

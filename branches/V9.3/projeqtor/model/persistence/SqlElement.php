@@ -170,7 +170,8 @@ abstract class SqlElement {
       "AssetCategory" => array("Asset" => "controlStrict"),
       "Assignment" => array(
           "AssignmentRecurring"=>"cascade",
-          "PlannedWork" => "cascade", 
+          "PlannedWork" => "cascade",
+          "PokerResource" => "cascade",
           "Work" => "controlStrict"), 
       "Action" => array(
           "Attachment" => "cascade", 
