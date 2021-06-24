@@ -9889,7 +9889,10 @@ function drawJoblistFromObject($obj,$nbCol=3) {
 
 function drawPokerVote($obj){
   global $print;
-  if (!$obj->id) return;
+  if (!$obj->id or !$obj->handled){
+    echo '<div class="container" style="height:200px"><div class="labelMessageEmptyArea" style="top:50px">'.i18n('emptyPokerVote').'</div></div>';
+    return;
+  }
   $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
   if ($obj->idle==1) {
   	$canUpdate=false;
@@ -10041,6 +10044,8 @@ function drawPokerVote($obj){
     echo '</div>';
     echo '</table>';
     echo '</div>';
+  }else{
+    echo '<div class="container" style="height:200px"><div class="labelMessageEmptyArea" style="top:50px">'.i18n('emptyPokerVote').'</div></div>';
   }
 }
 
