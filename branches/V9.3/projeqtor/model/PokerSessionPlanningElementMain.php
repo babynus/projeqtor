@@ -343,6 +343,8 @@ class PokerSessionPlanningElementMain extends PlanningElement {
   		  $this->priority=1; // very high priority
   	  }
   	}
+  	$this->topRefType='Project';
+  	$this->topRefId=$pokerSession->idProject;
   	if ($this->refType=='PokerSession') {
   	  $this->validatedStartDate=$pokerSession->pokerSessionDate;
   	  $this->plannedStartDate=$pokerSession->pokerSessionDate;
@@ -384,6 +386,9 @@ class PokerSessionPlanningElementMain extends PlanningElement {
     $result="";
     $mode=null;
     $pokerSession=new $this->refType($this->refId,true);
+    if (! $this->idPokerSessionPlanningMode) {
+    	$this->idPokerSessionPlanningMode=16;
+    }
     if (!$this->priority) {
       $this->priority=1; // very high priority
     }

@@ -232,10 +232,6 @@ class PokerSessionMain extends SqlElement {
 	if (! $this->name) {
 		$this->name=SqlList::getNameFromId('PokerSessionType',$this->idPokerSessionType) . " " . $this->pokerSessionDate;
 	}
-	$listTeam=array_map('strtolower',SqlList::getList('Team','name'));
-	$listName=array_map('strtolower',SqlList::getList('Affectable'));
-	$listUserName=array_map('strtolower',SqlList::getList('Affectable','userName'));
-	$listInitials=array_map('strtolower',SqlList::getList('Affectable','initials'));
 	$this->PokerSessionPlanningElement->idle=$this->idle;
 	$this->PokerSessionPlanningElement->done=$this->done;
 	$this->PokerSessionPlanningElement->validatedStartDate=$this->pokerSessionDate;
@@ -244,6 +240,12 @@ class PokerSessionMain extends SqlElement {
 		$this->PokerSessionPlanningElement->plannedStartDate=$this->pokerSessionDate;
 		$this->PokerSessionPlanningElement->plannedEndDate=$this->pokerSessionDate;
 	}
+	
+	if (trim($this->idProject)!=trim($old->idProject)) {
+		$this->PokerSessionPlanningElement->wbs=null;
+		$this->PokerSessionPlanningElement->wbsSortable=null;
+	}
+	
 	$this->pokerSessionStartDateTime=$this->pokerSessionDate.' '.$this->pokerSessionStartTime;
 	$this->pokerSessionEndDateTime=$this->pokerSessionDate.' '.$this->pokerSessionEndTime;
 	
@@ -339,7 +341,7 @@ class PokerSessionMain extends SqlElement {
     if($item=="pokerItem"){
     	drawPokerItem($this);
     }
-    if($item=="pokerVote" and $this->handled){
+    if($item=="pokerVote"){
     	drawPokerVote($this);
     }
   }
