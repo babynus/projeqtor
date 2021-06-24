@@ -707,6 +707,7 @@ function activityStreamDisplayNote ($note,$origin,$width=false){
     }
     $resultNote.= '<div class="activityStreamNoteContainer" style="padding-left:4px;max-width:'.$maxWidth.'">';
     $strDataHTML=$note->note;
+    $strDataHTML=str_replace(array('<style','/style>'),array('<nostyle','/nostyle>'),$strDataHTML);
     $resultNote.= '<div><div style="margin-top:2px;margin-left:37px;">'.(($origin!='objectStream')?$ticketName."&nbsp;|&nbsp;":"").$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
   	$resultNote.= '<div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($note->creationDate,$note->updateDate,"left",16).'</div>';
   	if($note->updateDate){
