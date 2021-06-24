@@ -2319,7 +2319,7 @@ function onColumnHeaderClickedSort(ev) {
 
 function tableRowsSortByColumn(table, columnIndex, ascending) {
   const col = Array.from( table.querySelectorAll( ':scope > thead > tr' ) );
-  const columnName = col[0].cells[columnIndex].textContent; // not use but keep this variable, it can be interested to have this columb name if we wnt to improve sort function
+  //const columnName = col[0].cells[columnIndex].textContent; // not use but keep this variable, it can be interested to have this columb name if we wnt to improve sort function
   const rows = Array.from( table.querySelectorAll( ':scope > tbody > tr' ) );
   rows.sort( ( x, y ) => {
         const xValue = x.cells[columnIndex].textContent;

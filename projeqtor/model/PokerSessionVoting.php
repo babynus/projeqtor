@@ -33,6 +33,7 @@ class PokerSessionVoting extends SqlElement {
    public $_sec_description;
    public $id;
    public $name;
+   public $idUser;
    public $_spe_pokerVote;
   
    private static $_databaseTableName = 'pokersession';
@@ -90,6 +91,7 @@ class PokerSessionVoting extends SqlElement {
   public function drawSpecificItem($item) {
     global $print;
     $canUpdate=securityGetAccessRightYesNo('menuPokerSessionVoting', 'update', $this) == "YES";
+    debugLog($canUpdate);
     $result = "";
     if($item=="pokerVote"){
         $pokerSession = new PokerSession($this->id, true);
