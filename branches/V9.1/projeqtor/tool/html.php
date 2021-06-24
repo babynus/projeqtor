@@ -1555,6 +1555,7 @@ function htmlFormatTime($val, $withSecond=true) {
  * @return string - the formated value 
  */
 function htmlEncode($val,$context="default") {
+  $val=str_replace(array('<style','/style>'),array('<nostyle','/nostyle>'),$val);
   if ($context=='none') {
     return str_replace('"',"''",$val);
   } else if ($context=='print' or $context=='html') {
