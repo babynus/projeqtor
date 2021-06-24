@@ -291,7 +291,6 @@ CREATE TABLE `${prefix}pokervote` (
   `idResource` int(12) unsigned DEFAULT NULL COMMENT '12',
   `idPokerSession` int(12) unsigned DEFAULT NULL COMMENT '12',
   `value` varchar(100) DEFAULT NULL,
-  `flipped` int(1) unsigned DEFAULT 0 COMMENT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
