@@ -4289,6 +4289,7 @@ function drawNotesFromObject($obj, $refresh=false) {
       echo "</div>";
       if (!$print) echo '<div style="min-height:23px;max-width:'.$widthPctNote.';overflow-x:auto;" >';
       $strDataHTML=$note->note;
+      $strDataHTML=str_replace(array('<style','/style>'),array('<nostyle','/nostyle>'),$strDataHTML);
       if ($print and $outMode=="pdf") {
       	if ($preseveHtmlFormatingForPDF) {
       	} else {
