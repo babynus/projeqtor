@@ -309,16 +309,16 @@ class Cron {
       $instance=Parameter::getGlobalParameter('paramDbDisplayName');
       $title="[$instance] Cron abnormally stopped";
       $now=date('Y-m-d H:i:s');
-      $msg="Cron was stopped for an undefined reason.<br/>Please check log file at $now for more information.";
+      $msg="Cron was stopped for an undefined reason (abort).<br/>Please check log file at $now for more information.";
       $smtp=Parameter::getGlobalParameter('paramMailSmtpServer');
       if ($smtp and $dest) {
         $result=sendMail($dest,$title,$msg);
       }
     }
     
-    if (file_exists(self::$runningFile)) {
-  	  //unlink(self::$runningFile); // On Abort, preserve Running Flag so that Cron can restart
-    }
+    //if (file_exists(self::$runningFile)) {
+  	//  unlink(self::$runningFile); // On Abort, preserve Running Flag so that Cron can restart
+    //}
     
     //$errorFileName=self::$errorFile.'_'.date('Ymd_His');
     //$mode=(file_exists($errorFileName))?'w':'x';
@@ -416,13 +416,14 @@ class Cron {
       $now=time();
       fclose($handle);
       if (!$last or !is_numeric($last)) $last=0;
-      if ( !$last or ($now-$last) > (self::getSleepTime()*5)) {
-        // not running for more than 5 cycles : dead process
+      if ( !$last or ($now-$last) > (60*30)) {
+        // not running for more than 30 mn (before we used 5 cycles : dead process)
         self::removeRunningFlag();
         self::run();
       }
 		} else {
-		  // relaunch for not running Cron. Nothing to do
+		  // relaunch for not running Cron. Nothing to do as Cron is running fine
+		  self::$cronRequestedStop=true; // Mandatory to avoid Abort message
 		}
 	}
 	

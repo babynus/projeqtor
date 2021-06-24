@@ -1498,7 +1498,7 @@ function exceptionHandler($exception) {
     $instance=Parameter::getGlobalParameter('paramDbDisplayName');
     $title="[$instance] Cron abnormally stopped";
     $now=date('Y-m-d H:i:s');
-    $msg="Cron was stopped for an undefined reason.<br/>Please check log file at $now for more information.";
+    $msg="Cron was stopped for an undefined reason (exception).<br/>Please check log file at $now for more information.";
     $smtp=Parameter::getGlobalParameter('paramMailSmtpServer');
     if ($smtp and $dest) {
       $result=sendMail($dest,$title,$msg);
