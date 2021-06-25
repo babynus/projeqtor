@@ -2303,7 +2303,6 @@ function filterSelectAtribute(value) {
 function onColumnHeaderClickedSort(ev) {
   const th = ev.currentTarget;
   const table = th.closest( 'table' );
-
   const thIndex = Array.from( th.parentElement.children ).indexOf( th );
   const ascending = !( 'sort' in th.dataset ) || th.dataset.sort != 'asc';
   tableRowsSortByColumn( table, thIndex, ascending );
@@ -2318,13 +2317,23 @@ function onColumnHeaderClickedSort(ev) {
 }
 
 function tableRowsSortByColumn(table, columnIndex, ascending) {
+  var th = Array.from( table.querySelectorAll( 'thead' ) );
+  if(!th.length){
+	table.createTHead();
+	th = Array.from( table.querySelectorAll( 'thead' ) );
+	const tb = Array.from( table.querySelectorAll( 'tbody' ) );
+	const tr = Array.from( table.querySelectorAll( 'tr' ) );
+	th[0].insertAdjacentElement('afterbegin',tr[0]);
+	tr.splice(0,1);
+  }
   const col = Array.from( table.querySelectorAll( ':scope > thead > tr' ) );
-  //const columnName = col[0].cells[columnIndex].textContent; // not use but keep this variable, it can be interested to have this columb name if we wnt to improve sort function
+  const columnName = col[0].cells[columnIndex].textContent; // not use but keep this variable, it can be interested to have this columb name if we wnt to improve sort function
+  var arrowFlip = (!ascending)?'background-position: -21px 0px;':'';
+  col[0].cells[columnIndex].innerHTML = columnName+'<span class="dijitInline dijitArrowNode" style="position: relative;float: right;top: 5px;right: 5px;'+arrowFlip+'"></span>';
   const rows = Array.from( table.querySelectorAll( ':scope > tbody > tr' ) );
   rows.sort( ( x, y ) => {
         const xValue = x.cells[columnIndex].textContent;
         const yValue = y.cells[columnIndex].textContent;
-
         if (xValue.match("#[0-9]+") && yValue.match("#[0-9]+")) // if it's an id (#XXXX format)
         {
           const xNum = parseFloat(xValue.replace(/\D+/g, ''));
