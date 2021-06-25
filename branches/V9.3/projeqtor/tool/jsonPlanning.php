@@ -1326,6 +1326,7 @@
   	$nl="\n";
   	$tab="\t";
   	$hoursPerDay=Parameter::getGlobalParameter('dayTime');
+  	if(!$hoursPerDay)$hoursPerDay=8;
     $startDate=date('Y-m-d');
     $startAM=getDailyHours(null, 'startAM', true);
     $endAM=getDailyHours(null, 'endAM', true);
@@ -1772,6 +1773,7 @@
       echo $tab.$tab.$tab.'<Start>' . $line['pstart'] . 'T' . $startAM . '</Start>' . $nl;
       echo $tab.$tab.$tab.'<Finish>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</Finish>' . $nl;
       echo $tab.$tab.$tab.'<Duration>' . formatDuration($line['pduration'],$hoursPerDay) . '</Duration>' . $nl;
+      debugLog($line['pduration']);
       echo $tab.$tab.$tab.'<ManualStart>' . $line['pstart'] . 'T' . $startAM . '</ManualStart>' . $nl;
       echo $tab.$tab.$tab.'<ManualFinish>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</ManualFinish>' . $nl;
       echo $tab.$tab.$tab.'<ManualDuration>' . formatDuration($line['pduration'],$hoursPerDay) . '</ManualDuration>' . $nl;
@@ -2122,7 +2124,19 @@
 	      //echo "<Unit>2</Unit>" . $nl;
 	      //echo "<Value>PT8H0M0S</Value>" . $nl;
 	      //echo "</TimephasedData>" . $nl;
-	      echo $tab.$tab."</Assignment>" . $nl;
+        $work = new Work();
+        $lstWork = $work->getSqlElementsFromCriteria(array('idAssignment'=>$ass->id,'idResource'=>$ass->idResource));
+        foreach ($lstWork as $wk){
+  	      echo $tab.$tab.$tab."<TimephasedData>" . $nl;
+  	      echo $tab.$tab.$tab.$tab."<Type>2</Type>" . $nl;
+  	      echo $tab.$tab.$tab.$tab."<UID>" . htmlEncode($ass->id) . "</UID>" . $nl;
+  	      echo $tab.$tab.$tab.$tab."<Start>" . htmlEncode($wk->workDate) . "T08:00:00</Start>" . $nl;
+  	      echo $tab.$tab.$tab.$tab."<Finish>" . htmlEncode($wk->workDate) . "T18:00:00</Finish>" . $nl;
+  	      echo $tab.$tab.$tab.$tab."<Unit>1</Unit>" . $nl;
+  	      echo $tab.$tab.$tab.$tab."<Value>PT" . formatWork($wk->work,$hoursPerDay) ."</Value>" . $nl;
+  	      echo $tab.$tab.$tab."</TimephasedData>" . $nl;
+        }
+        echo $tab.$tab."</Assignment>" . $nl;
     	}
     }
     echo $tab."</Assignments>" . $nl;
