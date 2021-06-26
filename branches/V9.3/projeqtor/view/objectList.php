@@ -1611,12 +1611,12 @@ $listStatus = $object->getExistingStatus();
 		$cptStatus += 1;
 ?>		
 			<td style="float: left; height: 100%; width: 130px; white-space: nowrap">
-				<div id="showStatus<?php echo $cptStatus; ?>" title="<?php echo $status->name; ?>" dojoType="dijit.form.CheckBox" type="checkbox" value="<?php echo $status->id; ?>" <?php if(!$comboDetail and sessionValueExists('showStatus'.$status->id.$objectClass)){if(getSessionValue('showStatus'.$status->id.$objectClass)== 'true'){ ?>	checked=" checked "<?php } }?> >
+				<div style="position:relative;float:left;" id="showStatus<?php echo $cptStatus; ?>" title="<?php echo $status->name; ?>" dojoType="dijit.form.CheckBox" type="checkbox" value="<?php echo $status->id; ?>" <?php if(!$comboDetail and sessionValueExists('showStatus'.$status->id.$objectClass)){if(getSessionValue('showStatus'.$status->id.$objectClass)== 'true'){ ?>	checked=" checked "<?php } }?> >
 					<script type="dojo/method" event="onChange">
 						refreshJsonList('<?php echo $objectClass; ?>');
 					</script>
 				</div>
-				<?php echo $status->name; ?>&nbsp;&nbsp;
+				<div style="position:relative;float:left;width: 108px;overflow: hidden; text-overflow: ellipsis;"><?php echo $status->name; ?>&nbsp;&nbsp;</div>
 			</td>
 <?php
 	 } ?>
