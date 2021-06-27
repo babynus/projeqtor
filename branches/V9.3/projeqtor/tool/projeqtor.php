@@ -3111,6 +3111,7 @@ function securityGetAccessRight($menuName, $accessType, $obj=null, $user=null) {
  */
 function securityGetAccessRightYesNo($menuName, $accessType, $obj=null, $user=null) {
   scriptLog("securityGetAccessRightYesNo ( menuName=$menuName, accessType=$accessType, obj=".debugDisplayObj($obj).", user=".debugDisplayObj($user).")");
+  debugLog("securityGetAccessRightYesNo ( menuName=$menuName, accessType=$accessType, obj=".debugDisplayObj($obj).", user=".debugDisplayObj($user).")");
 // MTY - LEAVE SYSTEM
   if (isLeavesSystemActiv()) {
     $secLeaveSystemResult = securityGetLeaveSystemAccessRight($menuName, $accessType, $obj, $user, true);
@@ -3139,6 +3140,7 @@ function securityGetAccessRightYesNo($menuName, $accessType, $obj=null, $user=nu
   if (!SqlElement::class_exists($class) and $obj) {
     $class=get_class($obj);
   }
+  debugLog("   class=$class");
   if (!$class) return 'NO';
   if ($class=='Admin') return 'YES';
   if (!SqlElement::class_exists($class)) {
@@ -3173,6 +3175,7 @@ function securityGetAccessRightYesNo($menuName, $accessType, $obj=null, $user=nu
     }
   }
   $accessRight=securityGetAccessRight($menuName, $accessType, $obj, $user);
+  debugLog($accessRight);
   if ($accessType=='create') {
     if ((!$obj or (property_exists(substr($menuName, 4), 'name') and !$obj->name)) and property_exists(substr($menuName, 4), 'idProject')) { // Case of project dependent screen, will allow if user has some create rights on one of his profiles
       foreach ($user->getAllProfiles() as $prf) {
