@@ -32,6 +32,7 @@ class PokerSessionMain extends SqlElement {
 
   public $_sec_description;
   public $id;
+  public $idUser;
   public $name;
   public $idPokerSessionType;
   public $idStatus;
@@ -79,7 +80,9 @@ class PokerSessionMain extends SqlElement {
     <th field="colorNameStatus" width="15%" formatter="colorNameFormatter">${idStatus}</th>
     ';
   
-  private static $_fieldsAttributes=array("idProject"=>"required",
+  private static $_fieldsAttributes=array(
+      "idProject"=>"required",
+      "idUser"=>"hidden",
   		"idStatus"=>"required",
   		"idPokerSessionType"=>"required",
   		"pokerSessionDate"=>"required, nobr",

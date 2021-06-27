@@ -32,13 +32,24 @@ class PokerSessionVoting extends SqlElement {
    
    public $_sec_description;
    public $id;
-   public $name;
    public $idUser;
+   public $idProject;
+   public $idResource;
+   public $name;
+   //public $idUser;
    public $_spe_pokerVote;
   
    private static $_databaseTableName = 'pokersession';
   
-   private static $_fieldsAttributes=array('id'=>'hidden', 'name'=>'hidden');
+   private static $_fieldsAttributes=array(
+       'id'=>'hidden', 
+       'name'=>'readonly',
+       'idProject'=>'readonly', 
+       'idResource'=>'readonly');
+   
+   private static $_colCaptionTransposition = array(
+       'idUser'=>'issuer',
+       'idResource'=> 'responsible');
    
    private static $_databaseCriteria = array('handled'=>'1');
    
@@ -86,6 +97,13 @@ class PokerSessionVoting extends SqlElement {
    */
   protected function getStaticDatabaseCriteria() {
   	return self::$_databaseCriteria;
+  }
+  /** ============================================================================
+   * Return the specific colCaptionTransposition
+   * @return the colCaptionTransposition
+   */
+  protected function getStaticColCaptionTransposition($fld=null) {
+    return self::$_colCaptionTransposition;
   }
   
   public function drawSpecificItem($item) {

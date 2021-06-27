@@ -5,7 +5,9 @@
 -- // Date : 2021-06-15                                     //
 -- ///////////////////////////////////////////////////////////
 
-ALTER TABLE `${prefix}pokervote` ADD `flipped` INT(1) DEFAULT '0';
+ALTER TABLE `${prefix}pokervote` ADD `flipped` int(1) DEFAULT '0' COMMENT '1';
+
+ALTER TABLE `${prefix}pokersession` ADD `idUser` int(12) unsigned DEFAULT NULL COMMENT '12';
 
 INSERT INTO `${prefix}planningmode` (name, code, sortOrder, mandatoryStartDate, mandatoryEndDate, applyTo, idle, mandatoryDuration) VALUES 
 ('PlanningModeFIXED', 'FIXED', 100, 1, 0, 'PokerSession', 0, 0);
