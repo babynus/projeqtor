@@ -5516,7 +5516,7 @@ function drawTicketsList($obj, $refresh=false) {
   echo '<tr>';
   $listClass='Ticket';
   echo '<td class="linkHeader" style="width:15%">'.i18n($listClass).'</td>';
-  echo '<td class="linkHeader" style="width:60%"> onclick="onColumnHeaderClickedSort(event)"'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:60%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="linkHeader" style="width:25%">'.i18n('colIdStatus').'</td>';
   echo '</tr>';
   if (!$obj->id) {
