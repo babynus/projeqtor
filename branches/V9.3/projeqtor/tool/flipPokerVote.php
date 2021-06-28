@@ -31,14 +31,17 @@ require_once "../tool/projeqtor.php";
 $id=RequestHandler::getId('idPokerItem');
 $idPokerSession = RequestHandler::getId('idPokerSession');
 $mode = RequestHandler::getValue('mode');
-$vote = new PokerVote();
-$voteList = $vote->getSqlElementsFromCriteria(array('idPokerSession'=>$idPokerSession, 'idPokerItem'=>$id));
-foreach ($voteList as $vote){
-  if($mode == 'flip'){
-    $vote->flipped = 1;
-    $vote->save();
-  }else if($mode == 'reset'){
-    $vote->delete();
-  }
+$item = new PokerItem($id);
+if($mode=="flip"){
+  $item->flipped = 1;
 }
+if($mode == 'reset'){
+  $vote = new PokerVote();
+  $voteList = $vote->getSqlElementsFromCriteria(array('idPokerSession'=>$idPokerSession, 'idPokerItem'=>$id));
+  foreach ($voteList as $vote){
+      $vote->delete();
+  }
+  $item->flipped = 0;
+}
+$item->save();
 ?>

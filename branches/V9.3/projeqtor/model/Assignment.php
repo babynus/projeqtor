@@ -256,6 +256,13 @@ class Assignment extends SqlElement {
         $resAss=$ass->save();
       }
     }
+    if ($this->refType=='PokerSession') {
+      $pokerM = new PokerResource();
+      $pokerM->idPokerSession = $this->refId;
+      $pokerM->idResource = $this->idResource;
+      $pokerM->idAssignment = $this->id;
+      $pokerM->save();
+    }
     if (! PlanningElement::$_noDispatch) {
       PlanningElement::updateSynthesis($this->refType, $this->refId);
     } else {

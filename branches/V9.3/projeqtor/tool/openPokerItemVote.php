@@ -29,9 +29,8 @@
  */
 require_once "../tool/projeqtor.php"; 
 $id=RequestHandler::getId('idPokerItem');
+$idPokerSession = RequestHandler::getId('idPokerSession');
 $mode = RequestHandler::getValue('mode');
-$list = RequestHandler::getValue('itemList');
-$itemList=explode(',',$list);
 $pokerItem = new PokerItem($id,true);
 if($mode=='open'){
   $pokerItem->isOpen = 1;
@@ -46,6 +45,7 @@ if($mode=='open'){
   $pokerItem->isOpen = 0;
   $pokerItem->save();
 }else if($mode=='global'){
+  $itemList = SqlList::getListWithCrit('PokerItem', array('idPokerSession'=>$idPokerSession), 'id');
   foreach ($itemList as $idItem){
     $pokerItem = new PokerItem($idItem,true);
     if($pokerItem->isOpen)continue;
