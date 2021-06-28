@@ -2,7 +2,8 @@
 
 .. title:: Lists of values
 
-.. index:: Function - Lists of values
+.. index:: List of values
+
 
 .. _list-of-values:
 
@@ -19,38 +20,17 @@ Then you will be able to select them in corresponding screens.
    
    * To use them you must enable their parameter in global parameters.
 
-.. _function:
 
-Functions
-*********
 
-The function defines the generic competency of a resource.
 
-.. rubric:: Section Description
 
-.. tabularcolumns:: |l|l|
 
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   * - Description
-     - Complete description of this value.
 
 .. raw:: latex
 
     \newpage
 
-.. index:: Status - Lists of values
+.. index:: Status (Lists of values)
 
 .. _status:
 
@@ -138,11 +118,86 @@ See: :ref:`workflow`.
 
 .. warning::  If parents items status has not been changed auto, please check your controls like required fields.
 
-.. raw:: latex
 
-    \newpage
 
-.. index:: Resolutions - Lists of values
+
+
+
+
+.. index:: Function (Lists of values)
+
+.. _function:
+
+Functions
+*********
+
+The function defines the generic competency of a resource.
+
+The function is used to track resource costs on planning element.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+   * - Description
+     - Complete description of this value.
+
+
+
+
+
+
+
+
+
+
+.. _categories-project:
+
+Categories of project
+*********************
+
+Categories are defined to group sets of projects. Reporting exploits this value.
+
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+   * - Description
+     - Complete description of this value.
+     
+     
+     
+     
+     
+
+.. index:: Resolutions (Lists of values)
 
 .. _resolution:
 
@@ -176,7 +231,678 @@ Allows to define different kinds of resolution for tickets.
 
 
 
-.. index:: Quality level - Lists of values
+
+
+
+
+
+
+
+
+
+
+
+
+
+Languages
+*********
+
+Allows to define and create your own languages list.
+
+Then in Product, product version or Component screen you can select your languages values.
+
+This language are also used with the translation module.
+
+.. note:: 
+   
+   you have to active 'display language in Product/Component' in global parameters.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - |RequiredField| Code
+     - Code / reference for the registered language.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+
+
+
+
+
+
+
+Language skill level
+********************
+
+Le niveau de compétence langage est utilisé pour les traduction sur les produits et versions de produits.
+
+Vous déterminez le niveau de compétence pour une langue.
+
+
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - |RequiredField| Color
+     - Color for the registered language skill level.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+
+.. _intervention-mode-value:
+            
+Intervention modes
+******************
+
+Allows you to define and create your own list of interventions mode. 
+
+These values are used in the :ref:`planned interventions<planned-interventions>` screens and :ref:`view interventions<view-interventions>`.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - |RequiredField| Letter
+     - Letter displayed on the intervention schedule and which refers to the corresponding intervention mode  
+   * - Sort order 
+     - Number which defines the display order of intervention modes on the planned interventions and view interventions screen
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.             
+            
+                 
+     
+     
+     
+     
+     
+     
+Steering
+********
+
+
+
+
+.. index:: Risk level - Lists of values
+
+.. _risk-level:
+
+Risk levels
+-----------
+
+The risk level measures the technical risk of implementation of a requirement.
+
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Color
+     - Color to display the risk level in element lists.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+   
+
+
+
+.. index:: Feasibility - Lists of values
+
+.. _feasibility:
+
+Feasibilities
+-------------
+
+The feasibility defines the first analysis of implementation of a requirement.
+
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this status.
+   * - |RequiredField| Name
+     - Name of this status.
+   * - Color
+     - Color to display the feasibility in element lists.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this status is archived.
+ 
+   
+   
+   
+.. index:: Efficiency - Lists of values
+
+.. _efficiency:
+
+Efficiencies
+------------
+
+The efficiency measures the result of an action.
+
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Color
+     - Color to display the efficiency in element lists.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+     
+     
+     
+     
+     
+Financial
+*********
+    
+     
+
+.. index:: Payment deadline - Lists of values
+
+.. _payment-deadline:
+
+Payment deadlines
+-----------------
+
+The payment deadline is stated on the bill.
+
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Number of days
+     - Delay in payment (in days).
+   * - End of month
+     - Flag to indicate that delay for payment is set at the end of month.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+   
+
+
+
+.. raw:: latex
+
+    \newpage
+
+
+.. index:: Payment method - Lists of values
+
+.. _payment-method:
+
+Payment methods
+---------------
+
+The mode of payment.
+
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+   
+
+
+.. index:: Delivery mode - Lists of values
+
+.. _delivery-mode:
+
+Delivery modes
+--------------
+
+The mode of delivery.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+   
+
+
+* Add dates on deliveries to follow dates : initial, planned, real, validation
+
+
+.. raw:: latex
+
+    \newpage
+
+
+.. index:: Measure unit - Lists of values
+
+.. _measure-unit:
+
+Measure units
+-------------
+
+The measure units.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Plural of name
+     - Plural form of name.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+
+
+Budget orientation
+------------------
+
+The orientation of the budget
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+
+Budget Categories
+-----------------
+
+The orientation of the budget
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+
+
+.. _LoV-tender-statut:
+
+Tender status
+-------------
+
+Allows to define or create your own tender status list.
+
+Tender status displayed on Tenders screen and in the table Submissions of tenders 
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Color
+     - Color to display the status in element lists.
+   * - Waiting tender
+     - Status information.
+   * - Tender received
+     - status information.
+   * - Tender not selected
+     - status information.
+   * - Tender selected
+     - status information.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+     
+     
+     
+     
+     
+Renewal
+-------
+
+Allows you to define and create your own renewal type list. These values are used in the customer and supplier contract management screens.
+
+3 values are pre-registered by default: never, tacit and Express
+See: :ref:`incomes<renewal>`
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.    
+     
+     
+     
+Predefined situation
+--------------------
+
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Element 
+     - Type of element affected
+   * - Type
+     - Name of the :ref:`brands` 
+   * - Sort order 
+     - Number which defines the display order of the finacial elements
+   * - Financial situation
+     - The financial situation which will be taken into account  
+   * - :term:`Closed`
+     - Flag to indicate this value is archived. 
+            
+
+
+
+     
+     
+     
+Deliveries
+**********
+
+
+
+Incoming weights
+----------------
+
+Define your incoming weights list and select it in Incoming screen.
+
+That is useful to calculate weighting between different parameters in Reports->KPIs->KPI-incoming-for-project screen.   
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - |RequiredField| Value
+     - Value of incoming weights.
+   * - Color
+     - Color to display the incoming weights in element lists.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+   
+
+
+Deliverable weights
+-------------------
+
+Define your deliverable weights list and select it in Deliverable screen.
+
+That is useful to calculate weighting between different parameters in Reports->KPIs->KPI-deliverable-for-project screen. 
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - |RequiredField| Value
+     - Value of deliverable weights.
+   * - Color
+     - Color to display the deliverable weights in element lists.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+   
+
+
+
+Incoming status
+---------------
+
+Define your incoming status list and select it in Incoming screen.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - |RequiredField| Value
+     - Value of incoming status.
+   * - Color
+     - Color to display the incoming status in element lists.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+   
+
+
+* Add dates on incomings to follow dates : initial, planned, real, validation
+
+
+Deliverable status
+------------------
+
+Define your deliverable status list and select it in Deliverable screen.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - |RequiredField| Value
+     - Value of deliverable status.
+   * - Color
+     - Color to display the deliverable status in element lists.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+   
+
+
+* Add dates on deliverables to follow dates : initial, planned, real, validation 
+
+
+
+
+
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+             
+     
+.. index:: Quality level (Lists of values)
 
 .. _quality-level:
 
@@ -544,524 +1270,6 @@ The ticket priority defines the order to treat different tickets.
      - Number to define order of display in lists.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
-   
-
-
-
-.. raw:: latex
-
-    \newpage
-
-
-.. index:: Risk level - Lists of values
-
-.. _risk-level:
-
-Risk levels
-***********
-
-The risk level measures the technical risk of implementation of a requirement.
-
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Color
-     - Color to display the risk level in element lists.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-
-.. index:: Feasibility - Lists of values
-
-.. _feasibility:
-
-Feasibilities
-*************
-
-The feasibility defines the first analysis of implementation of a requirement.
-
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this status.
-   * - |RequiredField| Name
-     - Name of this status.
-   * - Color
-     - Color to display the feasibility in element lists.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this status is archived.
-   
-
-
-
-
-.. raw:: latex
-
-    \newpage
-
-
-.. index:: Efficiency - Lists of values
-
-.. _efficiency:
-
-Efficiencies
-************
-
-The efficiency measures the result of an action.
-
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Color
-     - Color to display the efficiency in element lists.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-
-.. index:: Payment deadline - Lists of values
-
-.. _payment-deadline:
-
-Payment deadlines
-*****************
-
-The payment deadline is stated on the bill.
-
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Number of days
-     - Delay in payment (in days).
-   * - End of month
-     - Flag to indicate that delay for payment is set at the end of month.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-
-.. raw:: latex
-
-    \newpage
-
-
-.. index:: Payment method - Lists of values
-
-.. _payment-method:
-
-Payment methods
-***************
-
-The mode of payment.
-
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-.. index:: Delivery mode - Lists of values
-
-.. _delivery-mode:
-
-Delivery modes
-**************
-
-The mode of delivery.
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-* Add dates on deliveries to follow dates : initial, planned, real, validation
-
-
-.. raw:: latex
-
-    \newpage
-
-
-.. index:: Measure unit - Lists of values
-
-.. _measure-unit:
-
-Measure units
-*************
-
-The measure units.
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Plural of name
-     - Plural form of name.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-
-
-Budget orientation
-******************
-
-The orientation of the budget
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-
-Budget Category
-***************
-
-The orientation of the budget
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-
-
-.. _LoV-tender-statut:
-
-Tender status
-*************
-
-Allows to define or create your own tender status list.
-
-Tender status displayed on Tenders screen and in the table Submissions of tenders 
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Color
-     - Color to display the status in element lists.
-   * - Waiting tender
-     - Status information.
-   * - Tender received
-     - status information.
-   * - Tender not selected
-     - status information.
-   * - Tender selected
-     - status information.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-Categories of project
-*********************
-
-Define your categories of project and you are able to select one in Project screen.
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-Incoming weights
-****************
-
-Define your incoming weights list and select it in Incoming screen.
-
-That is useful to calculate weighting between different parameters in Reports->KPIs->KPI-incoming-for-project screen.   
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - |RequiredField| Value
-     - Value of incoming weights.
-   * - Color
-     - Color to display the incoming weights in element lists.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-Deliverable weights
-*******************
-
-Define your deliverable weights list and select it in Deliverable screen.
-
-That is useful to calculate weighting between different parameters in Reports->KPIs->KPI-deliverable-for-project screen. 
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - |RequiredField| Value
-     - Value of deliverable weights.
-   * - Color
-     - Color to display the deliverable weights in element lists.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-
-Incoming status
-***************
-
-Define your incoming status list and select it in Incoming screen.
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - |RequiredField| Value
-     - Value of incoming status.
-   * - Color
-     - Color to display the incoming status in element lists.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-* Add dates on incomings to follow dates : initial, planned, real, validation
-
-
-Deliverable status
-******************
-
-Define your deliverable status list and select it in Deliverable screen.
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - |RequiredField| Value
-     - Value of deliverable status.
-   * - Color
-     - Color to display the deliverable status in element lists.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
-   
-
-
-* Add dates on deliverables to follow dates : initial, planned, real, validation 
-
-Languages
-*********
-
-Allows to define and create your own languages list.
-
-Then in Product or Component screen you can select your languages values.
-
-.. note:: 
-   
-   you have to active 'display language in Product/Component' in global parameters.
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - |RequiredField| Value
-     - Value of deliverable status.
-   * - Sort order
-     - Number to define order of display in lists.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.
 
 
 Locations
@@ -1115,90 +1323,7 @@ Allows you to define and create your own list of periods. These are used to defi
 
 
 
-Renewal
-*******
-
-Allows you to define and create your own renewal type list. These values are used in the customer and supplier contract management screens.
-
-3 values are pre-registered by default: never, tacit and Express
-See: :ref:`incomes<renewal>`
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived. 
-            
 
             
-Predefined situation
-********************
 
-xoixoioxioxioix
-
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - Element 
-     - Type of element affected
-   * - Type
-     - Name of the :ref:`brands` 
-   * - Sort order 
-     - Number which defines the display order of the finacial elements
-   * - Financial situation
-     - The financial situation which will be taken into account  
-   * - :term:`Closed`
-     - Flag to indicate this value is archived. 
-            
-
-.. _intervention-mode-value:
-            
-Intervention modes
-******************
-
-Allows you to define and create your own list of interventions mode. 
-
-These values are used in the :ref:`planned interventions<planned-interventions>` screens and :ref:`view interventions<view-interventions>`.
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - |RequiredField| Letter
-     - Letter displayed on the intervention schedule and which refers to the corresponding intervention mode  
-   * - Sort order 
-     - Number which defines the display order of intervention modes on the planned interventions and view interventions screen
-   * - :term:`Closed`
-     - Flag to indicate this value is archived.             
-            
-            
+       
