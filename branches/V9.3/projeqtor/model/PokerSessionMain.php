@@ -162,8 +162,17 @@ class PokerSessionMain extends SqlElement {
   
   	if ($colName=="idStatus") {
   		$colScript .= '<script type="dojo/connect" event="onChange" >';
+  		$colScript .= htmlGetJsTable('Status', 'setHandledStatus', 'tabStatusHandled');
   		$colScript .= htmlGetJsTable('Status', 'setIdleStatus', 'tabStatusIdle');
   		$colScript .= htmlGetJsTable('Status', 'setDoneStatus', 'tabStatusDone');
+  		$colScript .= '  var setHandled=0;';
+  		$colScript .= '  var filterStatusHandled=dojo.filter(tabStatusHandled, function(item){return item.id==dijit.byId("idStatus").value;});';
+  		$colScript .= '  dojo.forEach(filterStatusHandled, function(item, i) {setHandled=item.setHandledStatus;});';
+  		$colScript .= '  if (setHandled==1) {';
+  		$colScript .= '    startPokerSession('.$this->id.')';
+  		$colScript .= '  } else {';
+  		$colScript .= '    dijit.byId("handled").set("checked", false);';
+  		$colScript .= '  }';
   		$colScript .= '  var setIdle=0;';
   		$colScript .= '  var filterStatusIdle=dojo.filter(tabStatusIdle, function(item){return item.id==dijit.byId("idStatus").value;});';
   		$colScript .= '  dojo.forEach(filterStatusIdle, function(item, i) {setIdle=item.setIdleStatus;});';
@@ -177,26 +186,13 @@ class PokerSessionMain extends SqlElement {
   		$colScript .= '  dojo.forEach(filterStatusDone, function(item, i) {setDone=item.setDoneStatus;});';
   		$colScript .= '  if (setDone==1) {';
   		$colScript .= '    dijit.byId("done").set("checked", true);';
+  		$colScript .= '    stopPokerSession('.$this->id.')';
   		$colScript .= '  } else {';
-  		$colScript .= '    dijit.byId("done").set("checked", false);';
-  		$colScript .= '  }';
+        $colScript .= '    dijit.byId("done").set("checked", false);';
+        $colScript .= '  }';
   		$colScript .= '  formChanged();';
   		$colScript .= '</script>';
-  	} else if ($colName=="initialDueDate") {
-  		$colScript .= '<script type="dojo/connect" event="onChange" >';
-  		$colScript .= '  if (dijit.byId("actualDueDate").get("value")==null) { ';
-  		$colScript .= '    dijit.byId("actualDueDate").set("value", this.value); ';
-  		$colScript .= '  } ';
-  		$colScript .= '  formChanged();';
-  		$colScript .= '</script>';
-  	} else if ($colName=="actualDueDate") {
-  		$colScript .= '<script type="dojo/connect" event="onChange" >';
-  		$colScript .= '  if (dijit.byId("initialDueDate").get("value")==null) { ';
-  		$colScript .= '    dijit.byId("initialDueDate").set("value", this.value); ';
-  		$colScript .= '  } ';
-  		$colScript .= '  formChanged();';
-  		$colScript .= '</script>';
-  	} else     if ($colName=="idle") {
+  	} else if ($colName=="idle") {
   		$colScript .= '<script type="dojo/connect" event="onChange" >';
   		$colScript .= '  if (this.checked) { ';
   		$colScript .= '    if (dijit.byId("idleDate").get("value")==null) {';
@@ -217,6 +213,21 @@ class PokerSessionMain extends SqlElement {
   		$colScript .= '    }';
   		$colScript .= '  } else {';
   		$colScript .= '    dijit.byId("doneDate").set("value", null); ';
+  		$colScript .= '    if (dijit.byId("idle").get("checked")) {';
+  		$colScript .= '      dijit.byId("idle").set("checked", false);';
+  		$colScript .= '    }';
+  		$colScript .= '  } ';
+  		$colScript .= '  formChanged();';
+  		$colScript .= '</script>';
+  	} else if ($colName=="handled") {
+  		$colScript .= '<script type="dojo/connect" event="onChange" >';
+  		$colScript .= '  if (this.checked) { ';
+  		$colScript .= '    if (dijit.byId("handledDate").get("value")==null) {';
+  		$colScript .= '      var curDate = new Date();';
+  		$colScript .= '      dijit.byId("handledDate").set("value", curDate); ';
+  		$colScript .= '    }';
+  		$colScript .= '  } else {';
+  		$colScript .= '    dijit.byId("handledDate").set("value", null); ';
   		$colScript .= '    if (dijit.byId("idle").get("checked")) {';
   		$colScript .= '      dijit.byId("idle").set("checked", false);';
   		$colScript .= '    }';
@@ -252,6 +263,10 @@ class PokerSessionMain extends SqlElement {
 	$this->pokerSessionStartDateTime=$this->pokerSessionDate.' '.$this->pokerSessionStartTime;
 	$this->pokerSessionEndDateTime=$this->pokerSessionDate.' '.$this->pokerSessionEndTime;
 	
+	if(!$this->handled and $this->handledDate)$this->handledDate=null;
+	if(!$this->done and $this->doneDate)$this->doneDate=null;
+	if(!$this->idle and $this->idleDate)$this->idleDate=null;
+	
     $result = parent::save ();
     if (! strpos ( $result, 'id="lastOperationStatus" value="OK"' )) {
       return $result;
@@ -286,16 +301,38 @@ class PokerSessionMain extends SqlElement {
     					$ass->leftWork=$ass->assignedWork;
     				}
     				$ass->save ();
-    				$pokerM = new PokerResource();
-    				$pokerM->idPokerSession = $this->id;
-    				$pokerM->idResource = $resource;
-    				$pokerM->save();
     			}
     		}
     	}
     }
     return $result;
   }
+  
+/** =========================================================================
+ * control data corresponding to Model constraints
+ * @param void
+ * @return "OK" if controls are good or an error message
+ *  must be redefined in the inherited class
+ */
+  public function control(){
+  	$result="";
+  	$old= $this->getOld();
+  	$pItem = new PokerItem();
+  	$nbItem = $pItem->countSqlElementsFromCriteria(array('idPokerSession'=>$this->id));
+  	if(!$nbItem){
+  	  $status = new Status($this->idStatus);
+  	  if($this->idStatus != $old->idStatus and $status->setHandledStatus){
+  	    $result.='<br/>' . i18n('msgNoItemInPokerSession');
+  	  }
+  	}
+  	$defaultControl=parent::control();
+  	if ($defaultControl!='OK') {
+  		$result.=$defaultControl;
+  	}if ($result=="") {
+  		$result='OK';
+  	}
+  	return $result;
+  }  
   
   public function drawSpecificItem($item) {
   global $print;

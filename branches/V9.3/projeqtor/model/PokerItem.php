@@ -38,6 +38,7 @@ class PokerItem extends SqlElement {
   public $value;
   public $work;
   public $isOpen;
+  public $flipped;
   public $comment;
   
   private static $_fieldsAttributes=array();

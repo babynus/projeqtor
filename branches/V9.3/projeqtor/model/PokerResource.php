@@ -33,6 +33,7 @@ class PokerResource extends SqlElement {
   public $id;    
   public $idPokerSession;
   public $idResource;
+  public $idAssignment;
   
   private static $_fieldsAttributes=array();
    /** ==========================================================================

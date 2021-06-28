@@ -173,11 +173,7 @@ function startPokerSession(idPokerSession) {
     url : '../tool/startPokerSession.php?idPokerSession=' + idPokerSession,
     handleAs : "text",
     load : function(data) {
-      var callBack=function() {
-    	selectIconMenuBar('PokerSessionVoting');
-      };
-      loadContent("objectMain.php?objectClass=PokerSessionVoting", "centerDiv",
-          false, false, false, idPokerSession, false, callBack, true);
+	  globalOpenPokerItemVote(idPokerSession);
     }
   });
 }
@@ -229,40 +225,25 @@ function resetPokerVote(idPokerSession, idItem, itemList){
 	  });
 }
 
-function openPokerItemVote(idPokerSession, idItem, itemList) {
+function openPokerItemVote(idItem) {
   dojo.xhrPost({
     url : '../tool/openPokerItemVote.php?idPokerItem=' + idItem
         + '&mode=open',
     handleAs : "text",
     load : function(data) {
-      var callBack=function() {
-        tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
-        tabContainer=dijit.byId('tabDetailContainer');
-        if (tabContainer != undefined) {
-          tabContainer.selectChild(tabToSelect.page);
-        }
-        pokerItemNav(idPokerSession, idItem, itemList, null);
-      };
       loadContent("objectDetail.php", "detailDiv", "listForm", null, null,
-          null, null, callBack, true);
+          null, null, null, true);
     }
   });
 }
 
-function globalOpenPokerItemVote(itemList) {
+function globalOpenPokerItemVote(idPokerSession) {
   dojo.xhrPost({
-    url : '../tool/openPokerItemVote.php?itemList=' + itemList + '&mode=globalOpen',
+    url : '../tool/openPokerItemVote.php?idPokerSession=+'+idPokerSession+'&mode=global',
     handleAs : "text",
     load : function(data) {
-    	var callBack=function() {
-            tabToSelect=dijit.byId('tabDetailContainer_tablist_Treatment');
-            tabContainer=dijit.byId('tabDetailContainer');
-            if (tabContainer != undefined) {
-              tabContainer.selectChild(tabToSelect.page);
-            }
-          };
           loadContent("objectDetail.php", "detailDiv", "listForm", null, null,
-              null, null, callBack, true);
+              null, null, null, true);
     }
   });
 }
@@ -345,14 +326,3 @@ function voteToPokerItem(idPokerSession, idItem, itemList, vote) {
     }
   });
 }
-
-function savePokerMember() {
-	  dojo.xhrPost({
-	    url : '../tool/voteToPokerItem.php?idPokerSession=' + idPokerSession
-	        + '&idItem=' + idItem + '&vote=' + vote,
-	    handleAs : "text",
-	    load : function(data) {
-	      refreshPokerItemResult(idPokerSession, idItem, itemList);
-	    }
-	  });
-	}
