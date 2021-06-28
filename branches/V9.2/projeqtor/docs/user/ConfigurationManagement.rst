@@ -78,6 +78,8 @@ Allows to link components to product.
      - item is closed if checked
    * - Description :
      - Box checked indicates the product is archived.
+   * - Context
+     - Add context for the product   
 
 
 
@@ -112,12 +114,35 @@ You can create many links between products, product versions and component
       
    Box checked "Show versions for all structure" allows to display versions of sub-products and components.
 
-   Box checked "Show projects linked to versions" allows to display projects linked.
 
    .. figure:: /images/GUI/CONF_BOX_DisplayStructure.png
       :alt: Display the product structure box checked
       
       Display the product structure with the boxes checked
+   
+   
+   Box checked "Show projects linked to versions" allows to display projects linked.
+
+
+
+ .. compound:: List of business features concerning to this product
+ 
+   Link business functionalities to the product
+
+   See: 
+ 
+ .. compound:: Language
+ 
+ 
+ 
+   
+   You can display 2 ways to display the structure. Normal and flat.
+   
+   
+
+
+
+
 
 
 .. index:: Product (Version)

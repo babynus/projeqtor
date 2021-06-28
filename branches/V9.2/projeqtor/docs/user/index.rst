@@ -62,13 +62,13 @@ We offer you a small overview of the major developments and you will find the fu
    
 .. container:: 
    
-   **Translation request**
-   
-   New functionality to request a translation for a text - You will be able to define translators with skill levels.
-   
+   **Translation**
+
    |Localisation|
-         
-   :ref:`translation-request`   
+   
+   New functionality to request a translation for a text with translators with skill levels.
+            
+   :ref:`translation`   
    
 .. raw:: latex
 
