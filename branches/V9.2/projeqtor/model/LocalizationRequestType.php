@@ -39,7 +39,8 @@ class LocalizationRequestType extends Type
         "scope"=>"hidden",
         "lockNoLeftOnDone"=>"hidden",
         "_lib_statusMustChangeLeftDone"=>"hidden",
-        "color"=>"hidden"
+        "color"=>"hidden",
+        "priority"=>"hidden"
     );
 
     private static $_colCaptionTransposition = array(
