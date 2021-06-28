@@ -1773,7 +1773,6 @@
       echo $tab.$tab.$tab.'<Start>' . $line['pstart'] . 'T' . $startAM . '</Start>' . $nl;
       echo $tab.$tab.$tab.'<Finish>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</Finish>' . $nl;
       echo $tab.$tab.$tab.'<Duration>' . formatDuration($line['pduration'],$hoursPerDay) . '</Duration>' . $nl;
-      debugLog($line['pduration']);
       echo $tab.$tab.$tab.'<ManualStart>' . $line['pstart'] . 'T' . $startAM . '</ManualStart>' . $nl;
       echo $tab.$tab.$tab.'<ManualFinish>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</ManualFinish>' . $nl;
       echo $tab.$tab.$tab.'<ManualDuration>' . formatDuration($line['pduration'],$hoursPerDay) . '</ManualDuration>' . $nl;

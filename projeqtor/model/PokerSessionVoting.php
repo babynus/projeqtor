@@ -109,7 +109,6 @@ class PokerSessionVoting extends SqlElement {
   public function drawSpecificItem($item) {
     global $print;
     $canUpdate=securityGetAccessRightYesNo('menuPokerSessionVoting', 'update', $this) == "YES";
-    debugLog($canUpdate);
     $result = "";
     if($item=="pokerVote"){
         $pokerSession = new PokerSession($this->id, true);
