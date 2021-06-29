@@ -404,8 +404,10 @@ class Cron {
 	// If running flag exists and cron is not really running, relaunch
 	public static function relaunch() {
 		self::init();
+		Cron::$cronRequestedStop=true; // Mandatory to avoid Abort message if Cron is already running
 		if (file_exists(self::$restartFile)) {
 			self::removeRestartFlag();
+			Cron::$cronRequestedStop=false;
 			self::run();
 		} else if (file_exists(self::$runningFile)) {
       $handle=fopen(self::$runningFile, 'r');
@@ -419,11 +421,9 @@ class Cron {
       if ( !$last or ($now-$last) > (60*30)) {
         // not running for more than 30 mn (before we used 5 cycles : dead process)
         self::removeRunningFlag();
+        Cron::$cronRequestedStop=false;
         self::run();
       }
-		} else {
-		  // relaunch for not running Cron. Nothing to do as Cron is running fine
-		  self::$cronRequestedStop=true; // Mandatory to avoid Abort message
 		}
 	}
 	
