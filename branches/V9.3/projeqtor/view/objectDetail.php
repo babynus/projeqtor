@@ -9934,50 +9934,60 @@ function drawPokerVote($obj){
   }
   if($pokerItem->id){
     $refObj = new $pokerItem->refType($pokerItem->refId);
+    $nbVoted = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idResource'=>$user->id));
+    $nbItem = count($itemList);
     echo '<div id="pokerVoteDiv" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;">';
     echo '<table style="width: 100%;"><tr><td>';
     echo '<div id="pokerVoteDescription" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;overflow:hidden"><table style="width: 100%;"><tr><td>';
-    echo '<div style="width: 100%;">';
-    echo '  <table style="width: 100%;"><tr>';
-    echo '    <td class="assignHeader" style="width:30%">'.i18n('colReference').'</td>';
-    echo '    <td class="assignHeader" style="width:30%">'.i18n('colName').'</td>';
-    echo '    <td class="assignHeader" style="width:40%">'.i18n('colDescription').'</td>';
-    echo '  </tr><tr>';
-    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">';
-    echo '  <table><tr><td style="padding-right:10px">'.formatIcon(get_class($refObj), 22).'</td><td>'.htmlEncode($refObj->name).' #'.htmlEncode($refObj->id).'</td></tr></table></td>';
-    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($pokerItem->name).' #'.htmlEncode($pokerItem->id).'</td>';
-    echo '<td class="noteData" style="width:40%; text-align: left;height:22px;">'.htmlEncode($pokerItem->comment).'</td>';
-    echo '  </tr></table>';
-    echo '</div>';
-    echo '<div id="pokerVoteList" dojoType="dijit.layout.ContentPane" region="center" style="width: 100%;padding-top: 10px;padding-left: 10px;">';
-    echo '<div style="width: 100%;padding-bottom: 20px;">';
-    echo '  <button id="refreshPokerDiv" dojoType="dijit.form.Button" showlabel="false"';
-    echo '  title="'.i18n('refreshPokerVote').'" iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">';
-    echo   '  <script type="dojo/connect" event="onClick" args="evt">';
-    echo   '    refreshPokerItemResult('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
-    echo   '  </script>';
-    echo '  </button>';
+    echo '<div style="width: 100%;padding-bottom: 20px;" align="center">';
+    echo '  <div style="float:left">';
+    echo '    <div style="padding-bottom: 5px;font-size: 9pt;">'.i18n('nbPokerVote').'</div>';
+    echo '    <div style="font-size: 15pt;color: var(--color-dark);">'.($nbItem-$nbVoted).'</div>';
+    echo '  </div>';
     $disabled='';
     if(!$previous){
-      $disabled = 'disabled';
+    	$disabled = 'disabled';
     }
-  	echo ' <button id="previousItem" dojoType="dijit.form.Button" class="roundedVisibleButton" style="vertical-align: middle;width: 120px;" '.$disabled.'>';
-  	echo '   <div class="dijitButtonIcon dijitButtonIconPrevious" style="float:left"></div><span style="padding-left: 10px;">' . i18n('previous') . '</span>';
-  	echo '   <script type="dojo/connect" event="onClick" args="evt">';
-  	echo '     pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');';
-  	echo '   </script>';
-  	echo ' </button>';
-  	$disabled='';
+    echo ' <div id="previousItem" dojoType="dijit.form.Button" class="roundedVisibleButton" style="vertical-align: middle;width: 140px;height: 24px;padding-bottom: 5px;margin-right: 10px;margin-top: 8px;" '.$disabled.'>';
+    echo '   <div class="dijitButtonIcon dijitButtonIconPrevious" style="float:left;padding-top: 6px;"></div><span style="padding-left: 15px;">' . i18n('previous') . '</span>';
+    echo '   <script type="dojo/connect" event="onClick" args="evt">';
+    echo '     pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');';
+    echo '   </script>';
+    echo ' </div>';
+    $disabled='';
     if(!$next){
-      $disabled = 'disabled';
+    	$disabled = 'disabled';
     }
-    echo '<span style="padding-left:5px">('.$pos.'/'.count($itemList).')</span>';
-  	echo ' <button id="nextItem" dojoType="dijit.form.Button" style="vertical-align: middle;width: 120px;" class="roundedVisibleButton" '.$disabled.'>';
-  	echo '   <span style="padding-right: 10px;">' . i18n('next') . '</span><div class="dijitButtonIcon dijitButtonIconNext" style="float:right"></div>';
-  	echo '   <script type="dojo/connect" event="onClick" args="evt">';
-  	echo '     pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');';
-  	echo '   </script>';
-  	echo ' </button>';
+    echo ' <div id="nextItem" dojoType="dijit.form.Button" style="padding-bottom: 5px;vertical-align: middle;width: 140px;height: 24px;margin-left: 10px;margin-top: 8px;" class="roundedVisibleButton" '.$disabled.'>';
+    echo '   <span style="padding-right: 15px;">' . i18n('next') . '</span><div class="dijitButtonIcon dijitButtonIconNext" style="float:right;padding-top: 6px;"></div>';
+    echo '   <script type="dojo/connect" event="onClick" args="evt">';
+    echo '     pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');';
+    echo '   </script>';
+    echo ' </div>';
+    echo '  <div id="refreshPokerDiv" dojoType="dijit.form.Button" showlabel="false" style="float:right;"';
+    echo '  title="'.i18n('refreshPokerVote').'" iconClass="iconRefresh iconSize32 imageColorNewGui" class="detailButton">';
+    echo   '  <script type="dojo/connect" event="onClick" args="evt">';
+    echo   '    pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', null);';
+    echo   '  </script>';
+    echo '  </div>';
+    echo '</div>';
+    echo '<div style="width: 100%;padding-top:15px">';
+    echo '  <table style="width: 100%;"><tr>';
+    echo '    <td style="width:5%"></td>';
+    echo '    <td class="assignHeader" style="width:30%">'.i18n('colReference').'</td>';
+    echo '    <td class="assignHeader" style="width:40%">'.i18n('colName').'</td>';
+    echo '    <td class="assignHeader" style="width:25%">'.i18n('colComment').'</td>';
+    echo '  </tr><tr>';
+    echo '<td class="noteData" style="width:5%;vertical-align: middle;" align="center">'.$pos.'/'.count($itemList).'</td>';
+    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;vertical-align: middle;">';
+    $gotoE=' onClick="gotoElement('."'".get_class($refObj)."','".htmlEncode($refObj->id)."'".');" style="cursor:pointer" class="classLinkName"';
+    echo '  <table><tr><td style="padding-right:10px">'.formatIcon(get_class($refObj), 22).'</td><td'.$gotoE.'>'.i18n(get_class($refObj)).' #'.htmlEncode($refObj->id).'</td></tr></table></td>';
+    echo '<td class="noteData" style="width:40%; text-align: left;height:22px;">'.htmlEncode($refObj->name).'</td>';
+    echo '<td class="noteData" style="width:25%; text-align: left;height:22px;">'.htmlEncode($pokerItem->comment).'</td>';
+    echo '  </tr></table>';
+    echo '</div>';
+    echo '<div id="pokerVoteList" dojoType="dijit.layout.ContentPane" region="center" style="width: 100%;padding-top: 20px;padding-left: 10px;">';
+    echo '<div style="width: 100%;padding-bottom: 20px;" align="right">';
     if($canUpdate){
     	$name = i18n('flipPokerVote');
     	if($pokerItem->flipped){
@@ -9995,7 +10005,7 @@ function drawPokerVote($obj){
     	}
     	echo '   </script>';
     	echo ' </button>';
-    	echo ' <button id="closePokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;" class="roundedVisibleButton">';
+    	echo ' <button id="closePokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;margin-right: 10px;" class="roundedVisibleButton">';
     	echo '   <span style="padding: 0px 5px 0px 5px;">' . i18n('closePokerVote') . '</span>';
     	echo '   <script type="dojo/connect" event="onClick" args="evt">';
     	echo '     closePokerItemVote('.$pokerItem->id.','.$obj->id.');';
@@ -10010,10 +10020,10 @@ function drawPokerVote($obj){
       $pComplex = PokerComplexity::getSingleSqlElementFromCriteria('PokerComplexity', array('value'=>$pVote->value));
       $style='';
       $color='white';
-      if($lowVote == $pComplex->value){
-      	$color='#65b577';
-      }else if($highVote == $pComplex->value){
-      	$color='#d46d6d';
+      if($lowVote == $pComplex->value and count($pokerVoteList) > 1){
+      	$color='#84ea9b';
+      }else if($highVote == $pComplex->value and count($pokerVoteList) > 1){
+      	$color='#ff6565';
       }
       if($pVote->id and $pComplex->id and $pokerItem->flipped){
         $style='background-color:'.$pComplex->color.';color:'.$color;
@@ -10039,7 +10049,7 @@ function drawPokerVote($obj){
     }
     echo '</div>';
     echo '</div></td></tr>';
-    echo '<tr><td><br><br></td></tr>';
+    echo '<tr><td><br></td></tr>';
     echo '<tr><td>';
     echo '<div id="pokerVoteResult" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;height: 100%;padding: 10px 0px 10px 0px;overflow: hidden;">';
     if($pokerMember->id and !$obj->done){
@@ -10115,8 +10125,9 @@ function drawPokerItem($obj){
     }
     echo '</td>';
     $refObj = new $item->refType($item->refId);
-    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($item->name).' #'.htmlEncode($item->id).' '.formatCommentThumb($item->comment).'</td>';
-    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($refObj->name).' #'.htmlEncode($refObj->id).'</td>';
+    $gotoE=' onClick="gotoElement('."'".get_class($refObj)."','".htmlEncode($refObj->id)."'".');" style="cursor:pointer" class="noteData classLinkName"';
+    echo '<td style="width:30%; text-align: left;height:22px;" '.$gotoE.'>'.htmlEncode(get_class($refObj)).' #'.htmlEncode($refObj->id).' '.formatCommentThumb($item->comment).'</td>';
+    echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($refObj->name).'</td>';
     echo '<td class="noteData" style="width:30%; text-align: center;height:22px;">'.htmlEncode($item->value).'</td>';
     echo '<td style="">';
     if(!$item->isOpen and !$obj->done){

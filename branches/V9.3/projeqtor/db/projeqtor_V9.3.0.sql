@@ -17,6 +17,12 @@ ALTER TABLE `${prefix}pokerresource` ADD `idAssignment` int(12) unsigned DEFAULT
 INSERT INTO `${prefix}planningmode` (name, code, sortOrder, mandatoryStartDate, mandatoryEndDate, applyTo, idle, mandatoryDuration) VALUES 
 ('PlanningModeFIXED', 'FIXED', 100, 1, 0, 'PokerSession', 0, 0);
 
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(4, 259, 9),
+(5, 259, 9),
+(6, 259, 9),
+(7, 259, 9);
+
 UPDATE `${prefix}navigation` SET moduleName='modulePlanning' WHERE name='navPlanning';
 UPDATE `${prefix}navigation` SET moduleName='moduleReview' WHERE name='navSteering';
 

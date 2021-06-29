@@ -33,7 +33,7 @@ $id=RequestHandler::getId('idPokerSession');
 $pokerSession = new PokerSession($id);
 if(!$pokerSession->handled){
   $pokerSession->handled = 1;
-  $pokerSession->handledDate=date('Y-m-d H:i:s');
+  $pokerSession->handledDate=date('Y-m-d');
   $st = new Status($pokerSession->idStatus);
   if(!$st->setHandledStatus){
     $allowedStatusList=Workflow::getAllowedStatusListForObject($pokerSession);
@@ -46,7 +46,7 @@ if(!$pokerSession->handled){
   }
 }else if($pokerSession->handled and !$pokerSession->done){
   $pokerSession->done = 1;
-  $pokerSession->doneDate=date('Y-m-d H:i:s');
+  $pokerSession->doneDate=date('Y-m-d');
   $st = new Status($pokerSession->idStatus);
   if(!$st->setDoneStatus){
     $allowedStatusList=Workflow::getAllowedStatusListForObject($pokerSession);
@@ -59,7 +59,7 @@ if(!$pokerSession->handled){
   }
 }else{
   $pokerSession->handled = 1;
-  $pokerSession->handledDate=date('Y-m-d H:i:s');
+  $pokerSession->handledDate=date('Y-m-d');
   $pokerSession->done = 0;
   $pokerSession->doneDate = null;
   $allowedStatusList=Workflow::getAllowedStatusListForObject($pokerSession);

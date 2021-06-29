@@ -322,7 +322,7 @@ function voteToPokerItem(idPokerSession, idItem, itemList, vote) {
         + '&idItem=' + idItem + '&vote=' + vote,
     handleAs : "text",
     load : function(data) {
-      refreshPokerItemResult(idPokerSession, idItem, itemList);
+    	pokerItemNav(idPokerSession, idItem, itemList, null);
     }
   });
 }
