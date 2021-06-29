@@ -5796,7 +5796,6 @@ function addFieldInTextBoxForEmailTemplateItem(editor) {
   var element = document.getElementById('template');
   var context = '_spe_listItemTemplate';
   var textBox = 'template';
-  
   if (editor==='text' || textBox!=='template') {
     var val = element.value;
     cursPos = val.slice(0, element.selectionStart).length;
@@ -5807,7 +5806,6 @@ function addFieldInTextBoxForEmailTemplateItem(editor) {
     var val = dijit.byId(textBox+'Editor').getValue();
     cursPos = val.length;
   }
-
   if (editor=='text' && textBox!=='template') {
       oldText = idTextBox.getValue();
   } else {
@@ -5824,8 +5822,10 @@ function addFieldInTextBoxForEmailTemplateItem(editor) {
   textToAdd=textToAdd + "}";
   newText = oldText.substr(0, cursPos) + textToAdd + oldText.substr(cursPos);        
   
+  console.log(idTextBox);
   if (editor==='text' || textBox!=='template') {
-      idTextBox.setValue(newText);
+      //idTextBox.setValue(newText);
+    element.value=newText;
   } else if (editor==='CK' || editor==='CKInline') {
     CKEDITOR.instances[textBox].insertText(textToAdd);
     //CKEDITOR.instances[textBox].setData(newText);
