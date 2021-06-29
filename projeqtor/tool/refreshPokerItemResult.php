@@ -57,7 +57,7 @@ $highVote = (isset($pokerVoteList[count($pokerVoteList)-1]))?$pokerVoteList[coun
 if($pokerMember->id and !$obj->done){
   foreach ($pokerComplexityList as $pokerComplexity){
       $selected = ($pokerVote->id and $pokerVote->value == $pokerComplexity->value)?'selected':'';
-      $onclick=(!$pokerVote->flipped)?'voteToPokerItem('.$obj->id.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');':'';
+      $onclick=(!$pokerItem->flipped)?'voteToPokerItem('.$obj->id.','.$pokerItem->id.',\''.$list.'\', '.$pokerComplexity->value.');':'';
       if($selected)$onclick='';
       $style='background-color:'.$pokerComplexity->color.';';
       if($selected)$style='background-color:white;color:'.$pokerComplexity->color.';';
