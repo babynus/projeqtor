@@ -31,13 +31,13 @@ require_once('_securityCheck.php');
 class PokerSessionVoting extends SqlElement {
    
    public $_sec_description;
+   public $_spe_pokerVote;
+   public $_sec_detail;
    public $id;
    public $idUser;
    public $idProject;
    public $idResource;
    public $name;
-   //public $idUser;
-   public $_spe_pokerVote;
   
    private static $_databaseTableName = 'pokersession';
   

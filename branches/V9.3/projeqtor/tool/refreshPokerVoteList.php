@@ -69,43 +69,16 @@ if(count($pokerVoteList) > 0){
   $lowVote = $pokerVoteList[0];
   $highVote = $pokerVoteList[count($pokerVoteList)-1];
 }
-echo '<div style="width: 100%;padding-bottom: 20px;">';
-echo '  <button id="refreshPokerDiv" dojoType="dijit.form.Button" showlabel="false"';
-echo '  title="'.i18n('refreshPokerVote').'" iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">';
-echo   '  <script type="dojo/connect" event="onClick" args="evt">';
-echo   '    refreshPokerItemResult('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
-echo   '  </script>';
-echo '  </button>';
-$disabled='';
-if(!$previous){
-  $disabled = 'disabled';
-}
-echo ' <button id="previousItem" dojoType="dijit.form.Button" class="roundedVisibleButton" style="vertical-align: middle;width: 120px;" '.$disabled.'>';
-echo '   <div class="dijitButtonIcon dijitButtonIconPrevious" style="float:left"></div><span style="padding-left: 10px;">' . i18n('previous') . '</span>';
-echo '   <script type="dojo/connect" event="onClick" args="evt">';
-echo '     pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');';
-echo '   </script>';
-echo ' </button>';
-$disabled='';
-if(!$next){
-  $disabled = 'disabled';
-}
-echo '<span style="padding-left:5px">('.$pos.'/'.count($itemList).')</span>';
-echo ' <button id="nextItem" dojoType="dijit.form.Button" style="vertical-align: middle;width: 120px;" class="roundedVisibleButton" '.$disabled.'>';
-echo '   <span style="padding-right: 10px;">' . i18n('next') . '</span><div class="dijitButtonIcon dijitButtonIconNext" style="float:right"></div>';
-echo '   <script type="dojo/connect" event="onClick" args="evt">';
-echo '     pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');';
-echo '   </script>';
-echo ' </button>';
+echo '<div style="width: 100%;padding-bottom: 20px;" align="right">';
 if($canUpdate){
 	$name = i18n('flipPokerVote');
 	if($pokerItem->flipped){
 		$name = i18n('resetPokerVote');
 	}
-	echo ' <button id="flipPokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;padding: 0px 5px 0px 5px;" class="roundedVisibleButton">';
+	echo ' <button id="flipPokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;" class="roundedVisibleButton">';
 	$icon = '&curarr;&nbsp;';
 	if($pokerItem->flipped)$icon='&orarr;&nbsp;';
-	echo '   <span>'.$icon . $name . '</span>';
+	echo '   <span style="padding: 0px 5px 0px 5px;">'.$icon . $name . '</span>';
 	echo '   <script type="dojo/connect" event="onClick" args="evt">';
 	if(!$pokerItem->flipped){
 		echo '     flipPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
@@ -114,8 +87,8 @@ if($canUpdate){
 	}
 	echo '   </script>';
 	echo ' </button>';
-	echo ' <button id="closePokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;padding: 0px 5px 0px 5px;" class="roundedVisibleButton">';
-	echo '   <span>' . i18n('closePokerVote') . '</span>';
+	echo ' <button id="closePokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;margin-right: 10px;" class="roundedVisibleButton">';
+	echo '   <span style="padding: 0px 5px 0px 5px;">' . i18n('closePokerVote') . '</span>';
 	echo '   <script type="dojo/connect" event="onClick" args="evt">';
 	echo '     closePokerItemVote('.$pokerItem->id.','.$obj->id.');';
 	echo '   </script>';
@@ -130,10 +103,10 @@ foreach ($pokerMemberList as $member){
   $pComplex = PokerComplexity::getSingleSqlElementFromCriteria('PokerComplexity', array('value'=>$pVote->value));
   $style='';
   $color='white';
-  if($lowVote == $pComplex->value){
-  	$color='#65b577';
-  }else if($highVote == $pComplex->value){
-  	$color='#d46d6d';
+  if($lowVote == $pComplex->value and count($pokerVoteList) > 1){
+  	$color='#84ea9b';
+  }else if($highVote == $pComplex->value and count($pokerVoteList) > 1){
+  	$color='#ff6565';
   }
   if($pVote->id and $pComplex->id and $pokerItem->flipped){
     $style='background-color:'.$pComplex->color.';color:'.$color;
