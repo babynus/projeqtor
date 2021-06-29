@@ -180,7 +180,7 @@ class ProjectMain extends SqlElement {
                                   "commandOnValidWork"=>"nobr",
   		                            "isLeaveMngProject"=>"hidden",
   		                             "locked"=>"hidden",
-  		                             "paused"=>"nobr",
+  		                             "paused"=>"nobr"
   );   
  
   private static $_colCaptionTransposition = array('idResource'=>'manager',
