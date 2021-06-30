@@ -335,6 +335,7 @@ abstract class SqlElement {
           "Project" => "controlStrict", "Organization" => "control", "Resource" => "controlStrict"), 
       "PaymentType" => array("Payment" => "controlStrict"),
       "PeriodicMeeting" => array("Assignment" => "cascade", "Meeting" => "cascade", "Note" => "cascade"), 
+      "PokerItem" => array("PokerVote"=>"cascade"),
       "Priority" => array(
           "Action" => "controlStrict", 
           "Issue" => "controlStrict", 
