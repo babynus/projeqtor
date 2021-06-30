@@ -726,7 +726,6 @@ function showDetailOrigin() {
 
 function showDetail(comboName, canCreate, objectClass, multiSelect, objectId, forceSearch) {
   var contentWidget=dijit.byId("comboDetailResult");
-  
   dojo.byId("canCreateDetail").value=canCreate;
   if (contentWidget) {
     contentWidget.set('content', '');
@@ -744,6 +743,7 @@ function showDetail(comboName, canCreate, objectClass, multiSelect, objectId, fo
   } else if(dojo.byId(comboName)) {
     val=dojo.byId(comboName).value;
   }
+  console.log(val);
   if (forceSearch) val=null; // will force search
   if (objectId) {
     if (objectId=='new') {
@@ -775,6 +775,9 @@ function showDetail(comboName, canCreate, objectClass, multiSelect, objectId, fo
     window.frames['comboDetailFrame'].document.body.innerHTML='<i>'
         + i18n("messagePreview") + '</i>';
     dijit.byId("dialogDetail").show();
+    console.log(val);
+	console.log(objectId);
+	console.log(cl);
     displayDetail(cl, id);
   }
   dojo.connect(dijit.byId("dialogDetail"),"onhide", 
