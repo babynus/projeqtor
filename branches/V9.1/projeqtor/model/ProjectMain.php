@@ -1487,7 +1487,7 @@ static function isTheLeaveProject($id=null) {
     if($this->paused==1){
       self::$_fieldsAttributes["fixPlanning"]="readonly,nobr";
     }
-    if($this->ProjectPlanningElement->topRefId!=''){
+    if($this->ProjectPlanningElement and $this->ProjectPlanningElement->topRefId!=''){
       $parent=new $this->ProjectPlanningElement->topRefType ($this->ProjectPlanningElement->topRefId);
     }
     if (SqlList::getFieldFromId("Status", $this->idStatus, "setPausedStatus")!=0 or (isset($parent) and $parent->paused==1)){
