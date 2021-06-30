@@ -577,6 +577,10 @@ class Assignment extends SqlElement {
       	  $result=i18n('minimumThresholdAssignError',array(($minimumThreshold*$dayTime).Work::displayShortWorkUnit()));
       	}
       }
+      if($activity->ActivityPlanningElement->idPlanningMode==22 ){
+        $cpAssAct=$this->countSqlElementsFromCriteria(array("refId"=>$activity->id,"refType"=>$this->refType,"idResource"=>$this->idResource));
+        if($cpAssAct == 1)$result ='<br/>' .i18n("resourceAlreadyAssigned");
+      }
     }
     
     if($this->refType=='Meeting'){
