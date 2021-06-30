@@ -9973,7 +9973,12 @@ function drawPokerVote($obj){
     echo '</div>';
     echo '<div style="width: 100%;padding-top:15px">';
     echo '  <table style="width: 100%;"><tr>';
-    echo '    <td style="width:5%"></td>';
+    echo '    <td class="assignHeader" style="width:5%">';
+    echo '      <div title="'.i18n('showItem').'" style="width:100%;" class="roundedButton roundedIconButton generalColClass">';
+    echo '        <input type="hidden" id="refId'.get_class($refObj).'" name="refId'.get_class($refObj).'" value="'.$refObj->id.'"/>';
+    echo '        <div style="width:100%;" class="imageColorNewGui iconToolbarView" onclick="showDetail(\'refId'.get_class($refObj).'\', 0, \''.get_class($refObj).'\', false,null, false);"></div>';
+    echo '      </div>';
+    echo '    </td>';
     echo '    <td class="assignHeader" style="width:30%">'.i18n('colReference').'</td>';
     echo '    <td class="assignHeader" style="width:40%">'.i18n('colName').'</td>';
     echo '    <td class="assignHeader" style="width:25%">'.i18n('colComment').'</td>';
