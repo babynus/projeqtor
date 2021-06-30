@@ -130,11 +130,17 @@ $assRecLst=$assRec->getSqlElementsFromCriteria(null,null,$critRes,'idAssignment 
 
 
 $pw=new PlannedWork();
+$pwM=new PlannedWorkManual();
 foreach ($assList as $ass) {
   $needNew=true;
+  $needChangePM=false;
   $where='idAssignment='.$ass->id;
   $left=0;
   $assigned=0;
+  $leftM=$pwM->sumSqlElementsFromCriteria('work', null, $where);
+  if($leftM!=0){
+    $needChangePM=true;
+  }
   if (! $startDate) {
     $left=$ass->leftWork;
     $assigned=$ass->assignedWork;
@@ -144,7 +150,7 @@ foreach ($assList as $ass) {
   } else {
     $where.=" and workDate>='$startDate'";
     $left=$pw->sumSqlElementsFromCriteria('work', null, $where);
-    if ($ass->realWork==0 and $left==$ass->leftWork) {
+    if ($ass->realWork==0 and ($left==$ass->leftWork or $leftM==$ass->leftWork )) {
       $needNew=false;
     }
   }
@@ -163,7 +169,7 @@ foreach ($assList as $ass) {
     } else {
       $newAss=$ass;
     } 
-    $newAss->idResource=$resource;;
+    $newAss->idResource=$resource;
     $newAss->plannedWork=$newAss->realWork+$newAss->leftWork;
     $newAss->notPlannedWork=0;
     $newAss->rate=$rate;
@@ -177,10 +183,26 @@ foreach ($assList as $ass) {
     $newAss->assignedCost=$newAss->assignedWork*$newAss->dailyCost;
     $newAss->leftCost=$newAss->leftWork*$newAss->dailyCost;
     $newAss->plannedCost=$newAss->plannedWork*$newAss->dailyCost;
-    $newAss->save();
+    $resTest=$newAss->save();
     $resAss[$ass->id]=$newAss->id;
     if ($needNew) $ass->save();
-    $pw->purge($where);
+    if($needChangePM){
+      $purgePw=false;
+      $dbTableName=array($pwM->getDatabaseTableName(),$pw->getDatabaseTableName());
+      foreach ($dbTableName as $name){
+        $query="UPDATE ".$name." SET  ".$name.".idResource = ".$newAss->idResource." WHERE ".$name.".idAssignment = ".$ass->id." and ".$name.".idResource = ".$oldRes->id;
+        if($startDate!='' and $endDate==''){
+          $query.=" and ".$name.".workDate >= '$startDate' ";
+          $purgePw=true;
+        }else if($startDate!='' and $endDate!=''){
+          $query.=" and ".$name.".workDate between '$startDate' and '$endDate' ";
+          $purgePw=true;
+        }
+        $testRes=SqlDirectElement::execute($query);
+      }
+    }else{
+      $pw->purge($where);
+    }
   }
 }
 foreach ($assRecLst as $assReToChange){
