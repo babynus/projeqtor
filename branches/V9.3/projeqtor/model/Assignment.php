@@ -560,7 +560,7 @@ class Assignment extends SqlElement {
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
-    }else if($this->refType=="Meeting"){ //  or $planningMode->code == 'MAN'
+    }else if($this->refType=="Meeting" or $this->refType=="PokerSession"){ //  or $planningMode->code == 'MAN'
       $elm=SqlElement::getSingleSqlElementFromCriteria("Assignment", array('refType'=>$this->refType,'refId'=>$this->refId,'idResource'=>$this->idResource));
       if($elm && $elm->id!=$this->id){
         $result.='<br/>' . i18n('messageResourceDouble');
