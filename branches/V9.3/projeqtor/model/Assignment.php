@@ -560,7 +560,7 @@ class Assignment extends SqlElement {
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
-    }else if($this->refType=="Meeting" or $planningMode->code == 'MAN'){
+    }else if($this->refType=="Meeting"){ //  or $planningMode->code == 'MAN'
       $elm=SqlElement::getSingleSqlElementFromCriteria("Assignment", array('refType'=>$this->refType,'refId'=>$this->refId,'idResource'=>$this->idResource));
       if($elm && $elm->id!=$this->id){
         $result.='<br/>' . i18n('messageResourceDouble');
@@ -583,6 +583,10 @@ class Assignment extends SqlElement {
       	  }
       	  $result=i18n('minimumThresholdAssignError',array(($minimumThreshold*$dayTime).Work::displayShortWorkUnit()));
       	}
+      }
+      if($activity->ActivityPlanningElement->idPlanningMode==22 ){
+        $cpAssAct=$this->countSqlElementsFromCriteria(array("refId"=>$activity->id,"refType"=>$this->refType,"idResource"=>$this->idResource));
+        if($cpAssAct == 1)$result ='<br/>' .i18n("resourceAlreadyAssigned");
       }
     }
     
