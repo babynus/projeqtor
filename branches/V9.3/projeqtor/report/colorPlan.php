@@ -184,7 +184,9 @@ foreach ($lstWork as $work) {
       $orga=SqlList::getFieldFromId('Resource', $work->idResource,'idOrganization');
       if ($orga!=$idOrganization) continue;
     }
-  	$resources[$work->idResource]=SqlList::getNameFromId('ResourceAll', $work->idResource);
+	$nameResToAdd=SqlList::getNameFromId('ResourceAll', $work->idResource);
+    if ($nameResToAdd==$work->idResource) continue;
+    $resources[$work->idResource]=$nameResToAdd;
   	$resourceCapacity[$work->idResource]=SqlList::getFieldFromId('ResourceAll', $work->idResource, 'capacity');
     $result[$work->idResource]=array();
   }
@@ -217,7 +219,9 @@ foreach ($lstPlanWork as $work) {
       $orga=SqlList::getFieldFromId('Resource', $work->idResource,'idOrganization');
       if ($orga!=$idOrganization) continue;
     }
-    $resources[$work->idResource]=SqlList::getNameFromId('ResourceAll', $work->idResource);
+    $nameResToAdd=SqlList::getNameFromId('ResourceAll', $work->idResource);
+    if ($nameResToAdd==$work->idResource) continue;
+    $resources[$work->idResource]=$nameResToAdd;
     $resourceCapacity[$work->idResource]=SqlList::getFieldFromId('ResourceAll', $work->idResource, 'capacity');
     $result[$work->idResource]=array();
   }
