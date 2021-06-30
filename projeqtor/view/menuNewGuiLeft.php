@@ -449,9 +449,9 @@ function getNavigationMenuLeft (){
         }else if($context->id!=6 and $context->idReport==0){
            $navTa[$id]=$context->id;
            $allNavSect[$context->id]=$context->idParent;
-        }else if($context->idReport!=0 and $rightReportAcces){
+        }else if($context->idReport!=0){
           $rep=SqlElement::getSingleSqlElementFromCriteria('HabilitationReport', array('idProfile'=>$user->idProfile,'idReport'=>$context->idReport, 'allowAccess'=>'1'));
-          if($rep->allowAccess!=1) unset($result[$id]);
+          if(!$rep or !$rep->id or $rep->allowAccess!=1 or !$rightReportAcces) unset($result[$id]);
           if (! Module::isReportActive($context->name)) unset($result[$id]);
         }
   }
