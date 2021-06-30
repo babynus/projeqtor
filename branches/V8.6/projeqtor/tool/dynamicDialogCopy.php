@@ -67,8 +67,8 @@ if($copyType=="copyObjectTo"){
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect(); if($objectClass == 'CatalogUO'){ ?> readOnly <?php }?>
-                id="copyToClass" name="copyToClass" required
-                class="input" >
+                id="copyToClass" name="copyToClass" required="required"
+                class="input required" >
                  <?php htmlDrawOptionForReference('idCopyable', $copyToClassId, $toCopy, true,'idle','0');?>
                  <script type="dojo/connect" event="onChange" args="evt" >
                    var objclass=copyableArray[this.value];
@@ -95,7 +95,7 @@ if($copyType=="copyObjectTo"){
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="copyToType" name="copyToType" required
-                class="input">
+                class="input required">
                 <?php ($copyToClass=="PeriodicMeeting")?$colName='idMeetingType':$colName='id'.$copyToClass.'Type';
                       if($copyToClass!="ProviderTerm"){
                       htmlDrawOptionForReference($colName, (($copyToClass==$objectClass)?$toCopy->$colName:null), null, true); }
@@ -113,7 +113,7 @@ if($copyType=="copyObjectTo"){
                <select id="copyToName" name="copyToName" dojoType="dijit.form.ValidationTextBox"
                 required="required"
                 style="width: 400px;"
-                trim="true" maxlength="100" class="input"
+                trim="true" maxlength="100" class="input required"
                 value="<?php echo str_replace('"', '&quot;', $toCopy->name);?>">
                </select>     
              </td>
@@ -126,7 +126,7 @@ if($copyType=="copyObjectTo"){
              </td>
              <td>
                <div id="copyToProject" name="copyToProject" dojoType="dijit.form.FilteringSelect"
-                required="required" class="input" style="width: 400px;"
+                required="required" class="input required" style="width: 400px;"
                 <?php echo autoOpenFilteringSelect();?>
                 class="input">
                 <?php htmlDrawOptionForReference('idProject', $toCopy->idProject, null, true);?>
@@ -275,8 +275,9 @@ if($copyType=="copyObjectTo"){
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
+               required="required"
                 id="copyProjectToType" name="copyProjectToType" required
-                class="input" value="" >
+                class="input required" value="" >
                 <?php htmlDrawOptionForReference('idProjectType', null, null, true);?>
                </select>
              </td>
@@ -290,7 +291,7 @@ if($copyType=="copyObjectTo"){
                <div id="copyProjectToName" name="copyProjectToName" dojoType="dijit.form.ValidationTextBox"
                 required="required"
                 style="width: 400px;"
-                trim="true" maxlength="100" class="input"
+                trim="true" maxlength="100" class="input required"
                 value="">
                </div>     
              </td>
@@ -301,11 +302,12 @@ if($copyType=="copyObjectTo"){
                <label for="copyProjectToName" ><?php echo i18n("colProjectCode") ?>&nbsp;:&nbsp;</label>
              </td>
              <td>
+               <?php $required=(strpos($toCopy->getFieldAttributes('projectCode'),'required')!==false)?true:false; debugLog("required=$required")?>
                <div id="copyProjectToProjectCode" name="copyProjectToProjectCode" dojoType="dijit.form.ValidationTextBox"
-                style="width: 400px;"
-                trim="true" maxlength="100" class="input"
+                style="width: 400px;" <?php if ($required) echo ' required="required" ';?>
+                trim="true" maxlength="100" class="input<?php if ($required) echo ' required';?>"
                 value="">
-               </div>     
+               </div>       
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
