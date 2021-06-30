@@ -114,9 +114,9 @@
                  id="replaceAffectationExistingEndDate"
 			           constraints="{datePattern:browserLocaleDateFormatJs}"  style="width:100px" /></td>
       <td>&nbsp;&nbsp;</td>
-      <td><input value="" dojoType="dijit.form.DateTextBox" class="input"
-                 id="replaceAffectationEndDate" name="replaceAffectationEndDate"
-			           constraints="{datePattern:browserLocaleDateFormatJs}" style="width:100px" /></td>
+<!--       <td><input value="" dojoType="dijit.form.DateTextBox" class="input" -->
+<!--                  id="replaceAffectationEndDate" name="replaceAffectationEndDate" -->
+<!-- 			           constraints="{datePattern:browserLocaleDateFormatJs}" style="width:100px" /></td> -->
     </tr>
     <tr><td colspan="4">&nbsp;</td></tr>
     <tr>
