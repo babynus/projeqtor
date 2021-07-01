@@ -87,6 +87,7 @@ class History extends SqlElement {
         return true;
       }
     }
+    if (property_exists($refType, '_noHistory')) return true;
     $user=getSessionUser();
     $hist=new History();
     $histArch= new HistoryArchive();

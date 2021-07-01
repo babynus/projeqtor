@@ -341,7 +341,7 @@ class Audit extends SqlElement {
 			if ($this->sessionId == session_id ()) {
 				$result .= ' disabled="disabled" ';
 			}
-			$result .= ' title="' . i18n ( 'disconnectSession' ) . '" style="vertical-align: middle;">';
+			$result .= ' title="' . i18n ( 'disconnectSession' ) . '" style="vertical-align: middle;" class="roundedVisibleButton">';
 			$result .= '<span>' . i18n ( 'disconnect' ) . '</span>';
 			$result .= '<script type="dojo/connect" event="onClick" args="evt">';
 			$result .= '    loadContent("../tool/disconnectSession.php?idAudit=' . htmlEncode($this->id) . '","resultDivMain","objectForm",true);';
