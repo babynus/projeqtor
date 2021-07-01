@@ -5822,7 +5822,6 @@ function addFieldInTextBoxForEmailTemplateItem(editor) {
   textToAdd=textToAdd + "}";
   newText = oldText.substr(0, cursPos) + textToAdd + oldText.substr(cursPos);        
   
-  console.log(idTextBox);
   if (editor==='text' || textBox!=='template') {
       //idTextBox.setValue(newText);
     element.value=newText;
