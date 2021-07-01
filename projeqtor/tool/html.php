@@ -1329,17 +1329,6 @@ function htmlDrawCrossTable($lineObj, $lineProp, $columnObj, $colProp, $pivotObj
     $lineList=$lineObj;
   } else {
     $lineList=SqlList::getList($lineObj);
-// MTY - LEAVE SYSTEM        
-//     if (isLeavesSystemActiv() and $testIfLeavesSystemMenu) {
-//       $tempLineList = $lineList;
-//       // Don't draw leave system menu
-//       foreach($tempLineList as $id => $line) {
-//         if (isLeavesSystemMenu($id)) {
-//           unset($lineList[$id]);
-//         }
-//       }
-//     }
-// MTY - LEAVE SYSTEM        
   }
   // Filter on line (for instance will filter menu)
   if (is_array($lineObj)) {
