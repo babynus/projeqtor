@@ -708,7 +708,7 @@ class ImputationLine {
       if (!$print and !$period->validated and ($resourceId==$user->id or $canValidate)) {
         echo '<td style="width:1%">'.$msg.'</td>';
         echo '<td style="width:1%">';
-        echo '<button id="unsubmitButton" class="roundedVisibleButton"jsid="unsubmitButton" dojoType="dijit.form.Button" showlabel="true" >';
+        echo '<button id="unsubmitButton" class="roundedVisibleButton" jsid="unsubmitButton" dojoType="dijit.form.Button" showlabel="true" >';
         echo '<script type="dojo/connect" event="onClick" args="evt">submitWorkPeriod("unsubmit");</script>';
         echo ucfirst(i18n('unSubmitWorkPeriod'));
         echo '</button>';
