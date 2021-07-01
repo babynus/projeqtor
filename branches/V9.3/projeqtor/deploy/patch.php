@@ -20,7 +20,10 @@
 <body>
 <?php
 
-$version="V9.2";
+$dir=dirname(__FILE__);
+$version=str_replace(array('D:\www\projeqtor','\deploy'),'',$dir);
+echo "&nbsp;$version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+//$version="V9.3";
 $nbDays=1; // days
 if (isset($_REQUEST['nbDays'])) $nbDays=intval($_REQUEST['nbDays']);
 if ($nbDays<1) $nbDays=1;
