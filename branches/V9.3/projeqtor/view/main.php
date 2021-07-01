@@ -33,6 +33,7 @@
  *  Remarks for deployment :
  *    - set isDebug:false in djConfig
  */
+$uniqueSessionId=md5(time());
 $mobile=false;
 require_once "../tool/projeqtor.php";
 if (isset($locked) and $locked) {
@@ -512,11 +513,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
         }
       }
       if (array_key_exists("directAccessPage",$_REQUEST)) {
- // MTY - LEAVE SYSTEM
-        // After reload when changing Resource and :
-        //      - leavesSystemActif = true 
-        //      - ressource.isemployee is changed to false
-        //      - ressource.id = user.id
+        $uniqueSessionId=getSessionValue('uniqueSessionId');
         if ($_REQUEST["directAccessPage"]=== "objectMain.php") {
             if (array_key_exists("p1name", $_REQUEST)) {
                 if ($_REQUEST['p1name']=='Resource') {
@@ -583,6 +580,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
           $class='Ticket';
         }
         if (array_key_exists('directAccess', $_REQUEST)) {
+          $uniqueSessionId=getSessionValue('uniqueSessionId');
         	echo "noDisconnect=true;";
         	if (sessionValueExists('directAccessIndex')) {
         		$directAccessIndex=getSessionValue('directAccessIndex');
@@ -737,7 +735,22 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
     //window.onbeforeunload = function (evt){ return beforequit();};
   </script>
 </head>
+    <?php
+    
+    $currentUniqueSessionId=trim(getSessionValue('uniqueSessionId'));
+    if ($currentUniqueSessionId and $currentUniqueSessionId!=$uniqueSessionId) {
+      // 
+      debugTraceLog("Double connection on same browser for user #".getSessionUser()->id);
+      include_once '../view/welcome.php';
+      echo "<div style='position:absolute;top:50%;width:100%;text-align:center;color:white;font-size:20pt;'>".i18n("connectionAlreadyExists")."</div>";
+      exit;
+    }    
+    if ($uniqueSessionId) {
+      setSessionValue('uniqueSessionId',$uniqueSessionId);
+    }
+    ?>
 <body id="body" class="nonMobile tundra <?php echo getTheme();?>" <?php if(isNewGui()) echo 'style="background-color:'.$background.';"'; ?> onBeforeUnload="return beforequit();" onUnload="quit();">
+
 <div id="centerThumb80" style="display:none;z-index:999999;position:absolute;top:10px;left:10px;height:80px;width:80px;"></div>
 <div id="loadingDiv" class="<?php echo getTheme();  echo (isNewGui())?'loginFrameNewGui':'loginFrame' ;?>" 
  style="position:absolute; visibility: visible; display:block; width:100%; height:100%; margin:0; padding:0; border:0">
