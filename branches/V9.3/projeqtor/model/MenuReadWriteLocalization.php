@@ -28,11 +28,11 @@
  * MenuProject defines list of project depedant items to present to users.
  */
 require_once('_securityCheck.php');
-class MenuReadWriteTranslation extends Menu {
+class MenuReadWriteLocalization extends Menu {
 
     private static $_databaseTableName = 'menu';
 
-    private static $_databaseCriteria = array('level'=>'ReadWriteTranslation');
+    private static $_databaseCriteria = array('level'=>'ReadWriteLocalization');
 
     /** ==========================================================================
      * Constructor
