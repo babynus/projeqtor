@@ -1292,7 +1292,8 @@ function setupLocale() {
   global $currentLocale, $browserLocale, $browserLocaleDateFormat;
   $paramDefaultLocale=Parameter::getGlobalParameter('paramDefaultLocale');
   $paramUserLocale=Parameter::getGlobalParameter('currentLocale');
-  $paramUserLang=Parameter::getGlobalParameter('lang');
+  //$paramUserLang=Parameter::getGlobalParameter('lang');
+  $paramUserLang=Parameter::getUserParameter('lang');
   if (sessionValueExists('currentLocale')) {
     // First fetch in Session (filled in at login depending on user parameter)
     $currentLocale=getSessionValue('currentLocale');
@@ -1302,9 +1303,9 @@ function setupLocale() {
     Security::checkValidLocale($currentLocale);
     setSessionValue('currentLocale', $currentLocale);
     $i18nMessages=null; // Should be null at this moment, just to be sure
-  } else if ($paramUserLocale) {
+  } else if ($paramUserLocale and getCurrentUserId()) {
     $currentLocale=$paramUserLocale;
-  } else if ($paramUserLang) {  
+  } else if ($paramUserLang and getCurrentUserId()) {  
     $currentLocale=$paramUserLang;
   } else {
     // none of the above methods worked : get the default one form parameter file
