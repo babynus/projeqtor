@@ -229,7 +229,9 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
         	$where="";
         	while (isset($split[$cpt])) {
         		$where.=($where)?" and ":'';
-        		$where.=urldecode($split[$cpt]);
+        		$addWhere=urldecode($split[$cpt]);
+        		$addWhere=str_replace('id IN ()', 'id IN (0)', $addWhere);
+        		$where.=$addWhere;
         		$cpt++;
         	}
         	// 
