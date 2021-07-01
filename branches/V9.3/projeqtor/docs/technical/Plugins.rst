@@ -175,6 +175,8 @@ Pour être intégré, le fichier zip doit être placé dans le dossier / plugin 
 * Si vous copiez ou déplacez des fichiers dans la structure de ProjeQtOr, le nom des fichiers devrait commencer par plgXXXXXX.
         
 * Il est conseillé (mais pas obligatoire), d'ajouter un trait de soulignement (_) après le code unique lors du nom des fichiers, des tables et des colonnes.
+
+* Si vous avez besoin d'ajouter du code Javascript, il suffit de mettre ce code dans le fichier myPlugin.js (qui porte le même nom que le plugin. Ce fichier sera chargé automatiquement par le framework de projeqtor.
         
 .. rubric:: Comment ajouter un nouveau menu
 
