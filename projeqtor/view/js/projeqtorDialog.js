@@ -6934,7 +6934,7 @@ function saveModuleStatusContinue(id,status) {
 function saveModuleStatusCheckParent(id) {
   var wdgt=dijit.byId('module_'+id);
   var parent=wdgt.get('parent');
-  if (parent && dojo.byId('module_'+parent)) {
+  if (parent==5 && dojo.byId('module_'+parent)) {
     var oneOn=false;
     var allOff=true;
     dojo.query(".moduleClass.parentModule"+parent).forEach(function(domNode){
