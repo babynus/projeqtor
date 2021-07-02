@@ -46,7 +46,6 @@ foreach ($lstNotif as $notifs){
     }
   }
 }
-debugLog($displayHighlight);
 echo $displayHighlight;
 
 ?>
