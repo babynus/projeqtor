@@ -20,7 +20,10 @@
 <body>
 <?php
 
-$version="V9.1";
+$dir=dirname(__FILE__);
+$version=str_replace(array('D:\www\projeqtor','\deploy'),'',$dir);
+echo "&nbsp;$version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+//$version="V9.3";
 $nbDays=1; // days
 if (isset($_REQUEST['nbDays'])) $nbDays=intval($_REQUEST['nbDays']);
 if ($nbDays<1) $nbDays=1;
@@ -31,7 +34,8 @@ $out="D:\\www\\temp";
 
 $action=(isset($_REQUEST['action']))?$_REQUEST['action']:null;
 if ($action and $action=='zip') {
-  $zipName=$out.DIRECTORY_SEPARATOR."projeqtor_patch$version.zip";
+  //$zipName=$out.DIRECTORY_SEPARATOR."projeqtor_patch$version.zip";
+  $zipName=$out.DIRECTORY_SEPARATOR.'pluginPatch'.$version.'.zip';
   $nbFiles=zipFiles();
   if ($nbFiles>0) {
     echo "$nbFiles fichiers dans $zipName";
@@ -101,7 +105,22 @@ function array_merge_preserve_keys() {
 }
 function zipFiles() {
   global $scanDir,$dateCheck,$root,$out,$version;
-  $outDir=$out.DIRECTORY_SEPARATOR.'projeqtor';
+  $namePlugin='pluginPatch'.$version;
+  $v=str_replace(array("V",'.'),'',$version);
+  $idx=substr("500000",0,(6-strlen($v))).$v;
+  $nl="\n";
+  $descriptor='<?xml version="1.0" encoding="UTF-8"?>'.$nl;
+  $descriptor.='<plugin name="'.$namePlugin.'">'.$nl;
+  $descriptor.='<property name="description"    value="corrective patch on version '.$version.'" />'.$nl;
+  $descriptor.='<property name="comment"        value="this plugin brings some fixing on a given version without waiting for community patch" />'.$nl;
+  $descriptor.='<property name="uniqueCode"     value="'.$idx.'"/>'.$nl;
+  $descriptor.='<property name="version"        value="'.date('Ymd.His').'" />'.$nl;
+  $descriptor.='<property name="compatibility"  value="'.$version.'.0" />'.$nl;
+  $descriptor.='<property name="reload"         value="1" />'.$nl;
+  $descriptor.='<files>'.$nl;
+
+  $outDir=$out.DIRECTORY_SEPARATOR.$namePlugin;
+  $putDirZip=$outDir;
   if (! file_exists($out)) mkdir($out,null,true);
   if (file_exists($outDir)) purgeDir($outDir,true);
   mkdir($outDir);
@@ -122,9 +141,14 @@ function zipFiles() {
       $nbFiles++;
       if (! file_exists($outDir.$dir)) mkdir($outDir.$dir,null,true);
       copy($root.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$fileName,$outDir.$dir.DIRECTORY_SEPARATOR.$fileName);
+      $descriptor.='  <file name="'.str_replace('\\','/',$dir).'/'.$fileName.'" target=".." action="move" />'.$nl;
     }
   }
-  $zipFile = str_replace('\projeqtor','',$outDir)."projeqtor_patch$version.zip";
+  $descriptor.='</files>'.$nl;
+  $descriptor.='</plugin>';
+  file_put_contents($outDir.'pluginDescriptor.xml',$descriptor);
+  //$zipFile = str_replace('\projeqtor','',$outDir)."projeqtor_patch$version.zip";
+  $zipFile=$putDirZip.'.zip';
   if (file_exists($zipFile)) unlink($zipFile);
   $zip=new ZipArchive();
   $ret=$zip->open($zipFile, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
