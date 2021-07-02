@@ -649,6 +649,8 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       }
       ?>
       showHideMoveButtons();
+      <?php  $lastHighLight = SqlElement::getSingleSqlElementFromCriteria('Highlight', array('idUser'=>$user->id,'scope'=>'news')) ;?>
+      getLastNews(<?php echo $lastHighLight->reference ;?>);
     }); // End of dojo.addOnload 
     var ganttPlanningScale="<?php echo Parameter::getUserParameter('planningScale');?>";
     if (! ganttPlanningScale) ganttPlanningScale='day';
@@ -1243,8 +1245,8 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
           <div id="accordionLeftBottomDiv" dojoType="dijit.layout.AccordionContainer" persists="true">
             <?php $selectedAccordionBottom=Parameter::getUserParameter('accordionPaneBottom');
                 if (! $selectedAccordionBottom) $selectedAccordionBottom='projectLinkDiv';?>
-<!-- BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM -->
-            <?php if (securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv() ) {?>
+<!-- BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM -->                
+            <?php if (securityCheckDisplayMenu(null,'Notification') and isNotificationSystemActiv()) {?>
             <div id="notificationAccordion"
                  dojoType="dijit.layout.ContentPane" 
                  class="background" 
