@@ -1303,9 +1303,9 @@ function setupLocale() {
     Security::checkValidLocale($currentLocale);
     setSessionValue('currentLocale', $currentLocale);
     $i18nMessages=null; // Should be null at this moment, just to be sure
-  } else if ($paramUserLocale and getCurrentUserId()) {
+  } else if ($paramUserLocale and sessionUserExists()) {
     $currentLocale=$paramUserLocale;
-  } else if ($paramUserLang and getCurrentUserId()) {  
+  } else if ($paramUserLang and sessionUserExists()) {  
     $currentLocale=$paramUserLang;
   } else {
     // none of the above methods worked : get the default one form parameter file
@@ -4606,7 +4606,7 @@ function setSessionValue($code, $value, $global=false) {
   } else {
     $projeqtorSession='ProjeQtOr_'.$paramDbName.(($paramDbPrefix)?'_'.$paramDbPrefix:'');
   }
-  if (!isset($_SESSION[$projeqtorSession])) {
+  if (! isset($_SESSION[$projeqtorSession]) or ! is_array($_SESSION[$projeqtorSession])) {
     $_SESSION[$projeqtorSession]=array();
   }
   $_SESSION[$projeqtorSession][$code]=$value;
