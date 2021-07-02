@@ -314,9 +314,10 @@
     </td>
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
     <td  width="<?php echo (isNewGui())?42:57;?>px;" style=""> 
-     <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount"  style="text-align: center; position:relative;top:-5px">
+    <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount" style="text-align: center; position:relative;top:-5px">
        <div dojoType="dijit.form.DropDownButton"  id=""
             style="display: table-cell;vertical-align: middle;" >
+            <div id="highlightDiv"  onClick="setHighlight('Notification');"  style="display:none;position:absolute;width:26px;height:22px;left:1px;z-index:999999999;background-image: url(img/highlight2.gif) !important;background-repeat: no-repeat !important;" ></div>
           <span  class="<?php if ($iconClassWithSize) echo 'iconNotification22';?> iconNotification iconSize22" style="display: table-cell;">  
             <span id="countNotifications" class="menuBarNotificationCount" style="text-align:center;" >
               0
@@ -388,6 +389,9 @@
     <td title="<?php ?>"  style="position:relative;width:55px;padding-left:5px">
       <div dojoType="dijit.layout.ContentPane"  id="menuInterrogation" class="pseudoButton" style="position:relative;overflow:hidden;width:50px; height:28px; min-width:45px;top:-5px;">
         <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuInterrogationTitle");?>" id="iconMenuInterrogation" style="display: table-cell;vertical-align: middle;position:relative;min-width:40px;top:-3px" >
+        <div id="highlightNewsDiv"  onClick="setHighlight('News')"  style="display:none;position:absolute;width:26px;height:22px;left:1px;z-index:999999999;background-image: url(img/highlight2.gif) !important;background-repeat: no-repeat !important;" >
+      <input type="hidden" id="lastValueNews" value=""/>
+      </div>
         <script type="dojo/connect" event="onClick" args="evt">
            <?php 
            $getYesNo=Parameter::getGlobalParameter('getVersion');

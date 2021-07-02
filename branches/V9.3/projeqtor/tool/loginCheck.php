@@ -31,6 +31,8 @@
   require_once "../external/phpAES/aes.class.php";
   require_once "../external/phpAES/aesctr.class.php";
   scriptLog('   ->/tool/loginCheck.php');
+  $isMobile = RequestHandler::getValue('isMobile');
+  debugLog($isMobile);
   $login="";
   $password="";
   $dbVersion=Sql::getDbVersion();
@@ -261,6 +263,7 @@
   }
   
   function loginOK($user) {
+    global $isMobile;
     $user->finalizeSuccessfullConnection(false);
     echo '<div class="messageOK">';
     echo i18n('loginOK');
@@ -268,7 +271,7 @@
     echo '</div>';
     echo '</div>';
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-    if(!isNotificationSystemActiv() or !securityCheckDisplayMenu(null,'Notification')) { return; }
+    if(!isNotificationSystemActiv() or !securityCheckDisplayMenu(null,'Notification') or $isMobile=='mobile') { return; }
     $notif = new Notification();
     $notificationCounts = $notif->countUnreadNotifications();
     

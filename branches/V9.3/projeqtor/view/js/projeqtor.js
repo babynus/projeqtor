@@ -5796,7 +5796,7 @@ function addFieldInTextBoxForEmailTemplateItem(editor) {
   var element = document.getElementById('template');
   var context = '_spe_listItemTemplate';
   var textBox = 'template';
-  console.log(element);
+  
   if (editor==='text' || textBox!=='template') {
     var val = element.value;
     cursPos = val.slice(0, element.selectionStart).length;
@@ -5807,7 +5807,7 @@ function addFieldInTextBoxForEmailTemplateItem(editor) {
     var val = dijit.byId(textBox+'Editor').getValue();
     cursPos = val.length;
   }
-  console.log(val);
+
   if (editor=='text' && textBox!=='template') {
       oldText = idTextBox.getValue();
   } else {
@@ -5824,7 +5824,6 @@ function addFieldInTextBoxForEmailTemplateItem(editor) {
   textToAdd=textToAdd + "}";
   newText = oldText.substr(0, cursPos) + textToAdd + oldText.substr(cursPos);        
   
-  console.log(idTextBox);
   if (editor==='text' || textBox!=='template') {
       //idTextBox.setValue(newText);
     element.value=newText;
@@ -8623,4 +8622,39 @@ function getLastNew () {
     consoleTraceLog("** An error occurred during the transaction");
   };
   xmlhttp.send();
+}
+
+function getLastNews (id) {
+  var xmlhttp = new XMLHttpRequest();
+  var url = "https://projeqtor.org/admin/getNews.php";
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var myArr = JSON.parse(this.responseText);
+          var data = myArr.items[0]['id'];
+            if(id < data ){
+              document.getElementById("highlightNewsDiv").style.display = "block";
+              document.getElementById("lastValueNews").value = data;
+              
+            }
+      }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.onerror = function () {
+  };
+  xmlhttp.send();
+}
+
+function setHighlight(object){
+  idNews = null;
+  if(object == 'News'){
+    document.getElementById("highlightNewsDiv").style.display = "none";
+    var idNews = document.getElementById("lastValueNews").value;
+  }else{
+    document.getElementById("highlightDiv").style.display = "none";
+  }
+    dojo.xhrPost({
+      url: '../tool/setHighlight.php?reference='+object+'&idNews='
+      + idNews,
+      handleAs: "text"
+    });
 }

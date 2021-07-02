@@ -34,3 +34,12 @@ UPDATE `${prefix}module` SET idModule=1, sortOrder=120 WHERE name ='modulePoker'
 UPDATE `${prefix}module` SET idModule=10, sortOrder=720 WHERE name='moduleAssets';
 UPDATE `${prefix}module` SET idModule=10, sortOrder=730 WHERE name='moduleRisk';
 UPDATE `${prefix}module` SET idModule=10, sortOrder=740 WHERE name='moduleRequirement';
+
+CREATE TABLE `${prefix}highlight` (
+`id` int(12) unsigned NOT NULL AUTO_INCREMENT COMMENT '12',
+`idUser` int(12) unsigned DEFAULT NULL COMMENT '12',
+`scope` varchar(100) DEFAULT NULL,
+`date` date,
+`reference` varchar(100) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;

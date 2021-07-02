@@ -166,6 +166,16 @@ if($animationSpeed=='')$animationSpeed='Low';
                                     document.getElementById("countNotifications").style.visibility="visible";
                                     document.getElementById("menuBarNotificationCount").style.visibility = "visible";
                                     document.getElementById("countNotifications").innerHTML = totalCount;
+                                    var url='../tool/getNotificationHighlight.php';
+                                      dojo.xhrGet({
+                                        url : url,
+                                        handleAs : "text",
+                                        load : function(data) {
+                                            if(data=='yes'){
+                                              document.getElementById("highlightDiv").style.display = "block";
+                                            }
+                                         }
+                                       }); 
                                 }
                                 loadContent("../view/menuNotificationRead.php", "drawNotificationUnread");  
                             }
