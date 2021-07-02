@@ -8,9 +8,9 @@
 ALTER TABLE `${prefix}pokeritem` ADD `flipped` int(1) DEFAULT '0' COMMENT '1';
 
 ALTER TABLE `${prefix}pokersession` ADD `idUser` int(12) unsigned DEFAULT NULL COMMENT '12';
-ALTER TABLE `pokersession` CHANGE `handledDate` `handledDate` DATE  DEFAULT NULL;
-ALTER TABLE `pokersession` CHANGE `doneDate` `doneDate` DATE  DEFAULT NULL;
-ALTER TABLE `pokersession` CHANGE `idleDate` `idleDate` DATE  DEFAULT NULL;
+ALTER TABLE `${prefix}pokersession` CHANGE `handledDate` `handledDate` DATE  DEFAULT NULL;
+ALTER TABLE `${prefix}pokersession` CHANGE `doneDate` `doneDate` DATE  DEFAULT NULL;
+ALTER TABLE `${prefix}pokersession` CHANGE `idleDate` `idleDate` DATE  DEFAULT NULL;
 
 ALTER TABLE `${prefix}pokerresource` ADD `idAssignment` int(12) unsigned DEFAULT NULL COMMENT '12';
 
