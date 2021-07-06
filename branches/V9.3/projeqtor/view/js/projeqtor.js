@@ -8625,12 +8625,18 @@ function getLastNew () {
 }
 
 function getLastNews (id) {
+  var lang = currentLocale;
+  if(currentLocale != 'fr')currentLocale='en';
   var xmlhttp = new XMLHttpRequest();
   var url = "https://projeqtor.org/admin/getNews.php";
   xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
           var myArr = JSON.parse(this.responseText);
-          var data = myArr.items[0]['id'];
+          var i = 0;
+          while (myArr.items[i]['lang'] != lang){
+            i++;
+          }
+          var data = myArr.items[i]['id'];
             if(id < data ){
               document.getElementById("highlightNewsDiv").style.display = "block";
               document.getElementById("lastValueNews").value = data;
