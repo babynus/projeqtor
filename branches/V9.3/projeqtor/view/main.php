@@ -649,7 +649,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       }
       ?>
       showHideMoveButtons();
-      <?php  $lastHighLight = SqlElement::getSingleSqlElementFromCriteria('Highlight', array('idUser'=>$user->id,'scope'=>'news')) ;?>
+      <?php  $lastHighLight = SqlElement::getSingleSqlElementFromCriteria('Highlight', array('idUser'=>$user->id,'scope'=>'news'));?>
       getLastNews(<?php echo $lastHighLight->reference ;?>);
     }); // End of dojo.addOnload 
     var ganttPlanningScale="<?php echo Parameter::getUserParameter('planningScale');?>";
