@@ -599,7 +599,7 @@ class PlanningElement extends SqlElement {
       $this->updateSynthesisObj(true);
     }
     ///florent
-    if(Parameter::getGlobalParameter('technicalProgress')=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
+    if(Module::isModuleActive('moduleTechnicalProgress') and ($this->refType=='Project' or $this->refType=='Activity')){
       if($this->refType=='Project' and ($this->idProgressMode=='' or $this->idWeightMode=='')){
         $this->idProgressMode=1;
         $this->idWeightMode=2;
@@ -1173,7 +1173,7 @@ class PlanningElement extends SqlElement {
    */
   protected function updateSynthesisObj ($doNotSave=false) {
     $consolidateValidated=Parameter::getGlobalParameter('consolidateValidated');	
-    $technicalProgress=Parameter::getGlobalParameter('technicalProgress');  	
+    $technicalProgress=Module::isModuleActive('moduleTechnicalProgress');  	
     $this->validatedCalculated=0;
   	$this->validatedExpenseCalculated=0;
     $assignedWork=0;
@@ -1225,7 +1225,7 @@ class PlanningElement extends SqlElement {
       }      
     }
     /// florent
-    if($technicalProgress=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
+    if($technicalProgress and ($this->refType=='Project' or $this->refType=='Activity')){
       if($this->refType=='Project' and ($this->idProgressMode=='' or $this->idWeightMode=='')){
         $this->idProgressMode=1;
         $this->idWeightMode=2;

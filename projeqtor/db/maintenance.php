@@ -1200,12 +1200,44 @@ if (beforeVersion($currVersion,"V9.2.0") and $currVersion!='V0.0.0') {
 }
 
 
+
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
 deleteDuplicate();
 Sql::saveDbVersion($version);
+
+if ($version=='V9.3.0') {
+  $mod= new Module();
+  $modDbTableName=$mod->getDatabaseTableName();
+  $lstMod=array();
+  if(Parameter::getGlobalParameter('activateSubtasksManagement')=="YES"){
+   $lstMod[]='moduleTodoList';
+  }
+  if(Parameter::getGlobalParameter('useOrganizationBudgetElement')=="YES"){
+    $lstMod[]='moduleBugetFunctionOfOrga';
+  }
+  if(Parameter::getGlobalParameter('manageMilestoneOnItems')=="YES"){
+    $lstMod[]='moduleTargetMilestone';
+  }
+  if(Parameter::getGlobalParameter('technicalProgress')=="YES"){
+    $lstMod[]='moduleTechnicalProgress';
+  }
+  if(!empty($lstMod)){
+    $resClaus="(";
+    foreach ($lstMod as $id=>$name) {
+        $resClaus.=($resClaus=="(")?"":", ";
+        $resClaus.="'".$name."'";
+    }
+    $resClaus.=')';
+    $query="UPDATE ".$modDbTableName." SET  ".$modDbTableName.".active = 1 WHERE ".$modDbTableName.".name in ".$resClaus." and ".$modDbTableName.".active <> 1";
+    Sql::beginTransaction();
+    SqlDirectElement::execute($query);
+    Sql::commitTransaction();
+  }
+}
+
 Parameter::clearGlobalParameters();
 Module::resetMenuInactiveList();
 unsetSessionValue('_tablesFormatList');

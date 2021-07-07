@@ -119,7 +119,7 @@ var menuData = {
   $isNotificationSystemActiv = isNotificationSystemActiv();
 // END - ADD BY TABARY - NOTIFICATION SYSTEM
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
-  $displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
+  $displaySubTask=(Module::isModuleActive('moduleTodoList'))?true:false;//Parameter::getGlobalParameter('activateSubtasksManagement')=='YES'
   
   $pluginObjectClass='Menu';
   $tableObject=$menuList;

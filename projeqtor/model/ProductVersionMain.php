@@ -194,7 +194,7 @@ class ProductVersionMain extends Version {
       self::$_fieldsAttributes["_sec_Ticket"]='hidden';
       self::$_fieldsAttributes["_spe_tickets"]='hidden';
     }   
-    if (Parameter::getGlobalParameter('manageMilestoneOnItems') != 'YES') {
+    if (!Module::isModuleActive('moduleTargetMilestone')) {
       self::$_fieldsAttributes["idMilestone"]='hidden';
     }
    

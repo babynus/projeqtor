@@ -592,7 +592,7 @@
            <?php 
        $buttonSubTaskListVisible="hidden";
        $displaySubTask=Parameter::getUserParameter('displaySubTask');
-      if ((get_class($obj)=="Activity" or get_class($obj)=="Action" or get_class($obj)=="Ticket") and Parameter::getGlobalParameter('activateSubtasksManagement')=="YES" and $displaySubTask!="YES") {
+      if ((get_class($obj)=="Activity" or get_class($obj)=="Action" or get_class($obj)=="Ticket") and Module::isModuleActive('moduleTodoList')  and $displaySubTask!="YES") { //Parameter::getGlobalParameter('activateSubtasksManagement')=="YES"
   		$user=getSessionUser();
 //   		$habilSub=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$user->getProfile($obj),'scope'=>'subtask'));
 //   		$listYesNo=new ListYesNo($habilSub->rightAccess);
@@ -635,13 +635,13 @@
   		$habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$user->getProfile($obj),'scope'=>'checklist'));
   		$list=new ListYesNo($habil->rightAccess);
   		$displayChecklist=Parameter::getUserParameter('displayChecklist');
-  		if ($list->code!='YES' or $displayChecklist!='REQ') {
+  		if ($list->code!='YES' or $displayChecklist!='REQ' or !Module::isModuleActive('moduleChecklist')) {
   		  $buttonCheckListVisible="never";
   		} else if (count($cdList)>0 and $obj->id) {
-        $buttonCheckListVisible="visible";
-      } else {
-        $buttonCheckListVisible="hidden";
-      }
+          $buttonCheckListVisible="visible";
+        } else {
+          $buttonCheckListVisible="hidden";
+        }
       //$displayButton=( $buttonCheckListVisible=="visible")?'void':'none';?>
     <?php if ($buttonCheckListVisible=="visible" and $obj->id) {organizeButtons();}?>
     <span id="checkListButtonDiv" style="display:<?php echo ($buttonCheckListVisible=='visible')?'inline':'none';?>;">

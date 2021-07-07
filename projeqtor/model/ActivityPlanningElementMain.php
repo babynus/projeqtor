@@ -244,7 +244,7 @@ class ActivityPlanningElementMain extends PlanningElement {
         self::$_fieldsAttributes["_spe_idWorkUnits"]="hidden";
       }
     }
-    if(Parameter::getGlobalParameter('technicalProgress')=='YES'){
+    if(Module::isModuleActive('moduleTechnicalProgress')){//Parameter::getGlobalParameter('technicalProgress')=='YES'
       self::$_fieldsAttributes['_separator_menuTechnicalProgress_marginTop']='';
       $asSon=$this->getSonItemsArray(true);
       if($asSon and count($asSon)>0){
