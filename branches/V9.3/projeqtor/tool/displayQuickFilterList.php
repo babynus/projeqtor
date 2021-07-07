@@ -408,6 +408,16 @@ if(!isset($dontDisplay))$dontDisplay = false;
      
      <table style="width: 100%;">
       <tr style="border-top:solid 1px;">
+        <?php if($dontDisplay){?>
+         <td id="chips"  width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
+           <button dojoType="dijit.form.Button" type="button" style="position:relative;top:8px;" >
+              <?php echo i18n('buttonReset');?>
+              <script type="dojo/method" event="onClick">
+                     selectStoredFilter('0','directFilterList');
+              </script>
+           </button>
+         </td>
+         <?php  }?>
         <td style="text-align:center"> 
          <?php 
           echo '<div class="roundedVisibleButton roundedButton generalColClass"';
