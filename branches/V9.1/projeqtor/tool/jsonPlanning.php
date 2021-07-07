@@ -1299,6 +1299,7 @@
   	$nl="\n";
   	$tab="\t";
   	$hoursPerDay=Parameter::getGlobalParameter('dayTime');
+  	if(!$hoursPerDay)$hoursPerDay=8;
     $startDate=date('Y-m-d');
     $startAM=Parameter::getGlobalParameter('startAM') . ':00';
     $endAM=Parameter::getGlobalParameter('endAM') . ':00';
