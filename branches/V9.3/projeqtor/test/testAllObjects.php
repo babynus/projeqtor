@@ -28,7 +28,7 @@ include_once "../tool/projeqtor.php";
 include_once "testTools.php";
 header ('Content-Type: text/html; charset=UTF-8');
 projeqtor_set_time_limit(60);
-Parameter::storeGlobalParameter('useOrganizationBudgetElement','YES');
+//Parameter::storeGlobalParameter('useOrganizationBudgetElement','YES');
 // PREPARE TESTS
 // => remove mail sending, to avoid spamming
 //Sql::query('UPDATE statusmail set idle=1');

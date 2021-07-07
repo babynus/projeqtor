@@ -158,7 +158,7 @@ class ChangeRequestMain extends SqlElement {
       self::$_fieldsAttributes['idComponent']='hidden';
       self::$_fieldsAttributes['idTargetComponentVersion']='hidden';
     }
-    if (Parameter::getGlobalParameter('manageMilestoneOnItems') != 'YES') {
+    if (!Module::isModuleActive('moduleTargetMilestone')) {
       self::$_fieldsAttributes["idMilestone"]='hidden';
     }
   }

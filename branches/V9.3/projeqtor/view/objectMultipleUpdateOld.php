@@ -775,7 +775,7 @@
             <?php }
      // weight type  and Progress type 
             $pe=get_class($obj).'PlanningElement';
-            if(Parameter::getGlobalParameter('technicalProgress')=='YES' and $pe=="ActivityPlanningElement"){
+            if(Module::isModuleActive('moduleTechnicalProgress') and $pe=="ActivityPlanningElement"){
             ?>
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colIdProgressMode');?>&nbsp;<?php if (!isNewGui()) echo':&nbsp;';?></td>

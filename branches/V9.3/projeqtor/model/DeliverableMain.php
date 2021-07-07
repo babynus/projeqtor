@@ -229,7 +229,7 @@ class DeliverableMain extends SqlElement {
     return $result;
   }
   public function setAttributes() {
-    if (Parameter::getGlobalParameter('manageMilestoneOnItems') != 'YES') {
+    if (!Module::isModuleActive('moduleTargetMilestone')) {
       self::$_fieldsAttributes["idMilestone"]='hidden';
     }
   }

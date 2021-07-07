@@ -49,7 +49,7 @@ if (!$categ) {
   $listReport=$report->getSqlElementsFromCriteria($crit, false, null, 'sortOrder asc');
   echo "<ul class='bmenu report' style=''>";
   foreach ($listReport as $rpt) {
-    if($rpt->id=="108" and Parameter::getGlobalParameter("technicalProgress")!="YES")continue;
+    if($rpt->id=="108" and !Module::isModuleActive('moduleTechnicalProgress'))continue;
     if (isset($allowedReport[$rpt->id])) {
       echo "<li class='section' id='report$rpt->id' onClick='reportSelectReport($rpt->id);'><div class='bmenuText'>".ucfirst(i18n($rpt->name))."</div></li>";   
     }

@@ -32,7 +32,7 @@ require_once "../tool/projeqtor.php";
 $screen=(RequestHandler::isCodeSet('currentScreen'))?RequestHandler::getValue('currentScreen'):'';
 $isObject=(RequestHandler::isCodeSet('isObject'))?RequestHandler::getValue('isObject'):'false';
 $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
-$displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
+$displaySubTask=(Module::isModuleActive('moduleTodoList'))?true:false;//Parameter::getGlobalParameter('activateSubtasksManagement')=='YES'
 $displayMode=Parameter::getUserParameter('menuLeftDisplayMode');
 $displayIcon=($displayMode=='TXT')?"display:none;":"display:block;";
 $result='';

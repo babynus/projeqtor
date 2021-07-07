@@ -278,7 +278,7 @@ function getReportsMenu(){
     $report=$h->idReport;
     $nameReport=SqlList::getNameFromId('Report', $report, false);
     if (!Module::isReportActive($nameReport)) continue;
-    if ($h->idReport==108 and Parameter::getGlobalParameter("technicalProgress")!="YES")continue;
+    if ($h->idReport==108 and !Module::isModuleActive('moduleTechnicalProgress'))continue;
     $allowedReport[$report]=$report;
     $category=SqlList::getFieldFromId('Report', $report, 'idReportCategory',false);
     $allowedCategory[$category]=$category;
@@ -429,7 +429,7 @@ function getNavigationMenuLeft (){
   $user=getSessionUser();
   $nav=new Navigation();
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
-  $displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
+  $displaySubTask=(Module::isModuleActive('moduleTodoList'))?true:false;//Parameter::getGlobalParameter('activateSubtasksManagement')=='YES'
   $contexctMenuMain=$nav->getSqlElementsFromCriteria(null, false,null,'id asc');
   $menuPlugin=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuPlugin'));
   $menuReport=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuReports'));

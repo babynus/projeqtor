@@ -880,10 +880,10 @@ class ActivityMain extends SqlElement {
     if(Parameter::getUserParameter('paramLayoutObjectDetail')=="col"){
       self::$_fieldsAttributes["fixPlanning"]='hidden';
     }
-    if (Parameter::getGlobalParameter('manageMilestoneOnItems') != 'YES' and (! property_exists('Activity','_customFields') or ! in_array('idMilestone', Activity::$_customFields))) {
+    if (!Module::isModuleActive('moduleTargetMilestone') and (! property_exists('Activity','_customFields') or ! in_array('idMilestone', Activity::$_customFields))) {//Parameter::getGlobalParameter('manageMilestoneOnItems') != 'YES'
       self::$_fieldsAttributes["idMilestone"]='hidden';
     }
-    if(Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or Parameter::getUserParameter('displaySubTask')!="YES" or ! $this->id){
+    if(!Module::isModuleActive('moduleTodoList') or Parameter::getUserParameter('displaySubTask')!="YES" or ! $this->id){//Parameter::getGlobalParameter('activateSubtasksManagement')!='YES'
       self::$_fieldsAttributes ['_SubTask'] = 'hidden';
       self::$_fieldsAttributes ['_sec_ToDoList'] = 'hidden';
       unset($this->_sec_ToDoList);

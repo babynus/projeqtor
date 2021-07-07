@@ -222,7 +222,7 @@ foreach ($assList as $ass) {
           $query.=" and ".$name.".workDate between '$startDate' and '$endDate' ";
           $purgePw=true;
         }
-        $testRes=SqlDirectElement::execute($query);
+        SqlDirectElement::execute($query);
       }
     }else{
       $pw->purge($where);

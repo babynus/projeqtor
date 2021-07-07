@@ -310,7 +310,7 @@ class DeliveryMain extends SqlElement {
   	if (Parameter::getGlobalParameter('productVersionOnDelivery') != 'YES') {
   		self::$_fieldsAttributes['idProductVersion']='hidden';
   	} 
-  	if (Parameter::getGlobalParameter('manageMilestoneOnItems') != 'YES') {
+  	if (!Module::isModuleActive('moduleTargetMilestone')) {
   	  self::$_fieldsAttributes["idMilestone"]='hidden';
   	}
   }

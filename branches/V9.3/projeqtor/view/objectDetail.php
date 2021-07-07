@@ -2915,7 +2915,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $isWork=true;
           $fieldWidth=$smallWidth;
         }
-        if(Parameter::getUserParameter('technicalProgress')=='YES'){
+        if(Module::isModuleActive('moduleTechnicalProgress')){
           $isProgress=true;
           if($col=='unitToDeliver' or $col=='unitToRealise' or $col=='unitRealised' or $col=='unitWeight'){
             $uo=true;
@@ -9530,8 +9530,7 @@ function drawChecklistFromObject($obj,$nbCol=3) {
   $user=getSessionUser();
   $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'checklist'));
   $list=new ListYesNo($habil->rightAccess);
-  $displayChecklist=Parameter::getUserParameter('displayChecklist');
-  if (!$displayChecklist) $displayChecklist='YES';
+  if(Module::isModuleActive('moduleChecklist'))$displayChecklist=Parameter::getUserParameter('displayChecklist');
   if (!$noselect and $obj->id and $list->code=='YES' and ($displayChecklist=='YES' or $print)) {
     if ($print) {
       echo '<table class="detail" width="'.$printWidth.'px;">';
