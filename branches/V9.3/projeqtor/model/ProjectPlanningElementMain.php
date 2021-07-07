@@ -188,7 +188,7 @@ class ProjectPlanningElementMain extends PlanningElement {
   
   function setAttributes(){
     $proj = new Project($this->idProject);
-    if(Parameter::getGlobalParameter('technicalProgress')=='YES' and $this->unitWeight!=0){
+    if(Module::isModuleActive('moduleTechnicalProgress') and $this->unitWeight!=0){
       self::$_fieldsAttributes['unitProgress']='readonly';
       self::$_fieldsAttributes['idProgressMode']='readonly,size1/3';
       self::$_fieldsAttributes['unitWeight']='readonly';

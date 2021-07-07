@@ -389,7 +389,7 @@ function periodChanged(theId) {
 
   public function hideSynthesisBudgetAndProjectElement($hide=false) {
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {  
+    if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {  
       foreach($this as $fieldName=>$value) {
           switch($fieldName) {
               case '_byMet_budgetWork' :
@@ -601,7 +601,7 @@ function periodChanged(theId) {
    */
   private function drawActionsButtonsGroup($item,$readOnly) {
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {
+    if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {
         return;
     }
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
@@ -695,7 +695,7 @@ function periodChanged(theId) {
    */
   public function drawSpecificItem($item,$readOnly=true) {
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {
+    if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {
         return;
     }
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
@@ -740,7 +740,7 @@ function periodChanged(theId) {
       
       if ($this->id==NULL or trim($this->id)=="" or 
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-          Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES"    
+          !Module::isModuleActive('moduleBugetFunctionOfOrga')    
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
          ) {
           $this->_byMet_daughtersBudgetWork=0;
@@ -794,7 +794,7 @@ function periodChanged(theId) {
             
   private function getSubBudgetElement() {
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if (Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {
+    if (!Module::isModuleActive('moduleBugetFunctionOfOrga')) {
         return array();
     }    
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT      
@@ -1521,7 +1521,7 @@ function periodChanged(theId) {
     $workVisibility=$this->_workVisibility;
     $costVisibility=$this->_costVisibility;
     // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {
+    if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {
       self::$_fieldsAttributes["_sec_synthesis"] = "hidden,noPrint";
       self::$_fieldsAttributes["_byMet_periodYear"] = "hidden,noList,notInFilter";
     }

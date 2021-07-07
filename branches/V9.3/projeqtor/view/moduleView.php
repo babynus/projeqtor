@@ -192,6 +192,7 @@ $user=getSessionUser();
             <div style="color: #8c8c8c;font-size:18px;margin-top:20px;margin-left:70px;"><?php echo i18n($mod->name);?></div>
             <div style="margin-top:40px;width:100%">
               <div class="simpleText" style="margin-left:70px;width:300px;vertical-align:top; text-align:justify;margin-right:50px;"><?php echo i18n($mod->name.'Comment');?></div>
+              <?php if(!empty($modMenuList)){?>
               <div style="width:450px;margin-right:100px;margin-left:450px;position:absolute;top:86px;border-left:solid 1px black;">
                     <div style="color:#808080;margin-left:30px;margin-bottom:20px;"><?php  if($mod->id != 5)echo i18n('activateScreen');?></div>
                 <?php
@@ -208,7 +209,9 @@ $user=getSessionUser();
                   }
                   ?>
               </div>
+              <?php }?>
             </div>
+            
           </div>
           
     <?php }?>

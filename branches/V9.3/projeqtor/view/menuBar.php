@@ -67,7 +67,7 @@
   $isNotificationSystemActiv = isNotificationSystemActiv();
 // END - ADD BY TABARY - NOTIFICATION SYSTEM
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
-  $displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
+  $displaySubTask=(Module::isModuleActive('moduleTodoList'))?true:false;//Parameter::getGlobalParameter('activateSubtasksManagement')=='YES'
   if (! $defaultMenu) $defaultMenu='menuBarItem';
   if (! $defaultMenu and isNewGui()) $defaultMenu='menuBarCustom';
   

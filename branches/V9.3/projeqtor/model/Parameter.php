@@ -363,7 +363,7 @@ class Parameter extends SqlElement {
       case 'manageComponentOnChangeRequest':
       case 'sortVersionComboboxNameDesc' : //ADD qCazelles - Sort versions in combobox - Ticket 89
       case 'sortCompositionStructure' : //ADD qCazelles - Sort version composition-structure - Ticket 142	    
-      case 'manageMilestoneOnItems' :
+      //case 'manageMilestoneOnItems' :
       case 'autoLinkMilestone' :
       case 'milestoneFromVersion' :
       case 'dontAddClosedDeliveredVersionToProject' : //ADD qCazelles - Dont add closed and delivered versions to Project - Ticket 181 
@@ -372,7 +372,7 @@ class Parameter extends SqlElement {
       case 'isManualProgress':
       case 'selectFonction' :
       case 'hideItemTypeRestrictionOnProject' : case 'SAML_isADFS' :
-      case 'activateSubtasksManagement':
+      //case 'activateSubtasksManagement':
       case 'automaticFeedingOfTheReal' : case 'showOnlyNotes'://florent
         $list=array('NO'=>i18n('displayNo'),
                     'YES'=>i18n('displayYes')); 
@@ -380,9 +380,9 @@ class Parameter extends SqlElement {
       case 'pdfInNewWindow': case "paramConfirmQuit": case "paramShowThumb" : case "paramShowThumbList":
       case 'dependencyStrictMode':
       case 'notStartBeforeValidatedStartDate':
-      case 'technicalProgress':
+      //case 'technicalProgress':
       case 'activityOnRealTime':
-      case 'useOrganizationBudgetElement' :
+      //case 'useOrganizationBudgetElement' :
       case 'notificationSystemActiv':
       case 'updateMilestoneResponsibleFromDeliverable': case 'updateMilestoneResponsibleFromIncoming':
       case 'updateDeliverableResponsibleFromMilestone': case 'updateIncomingResponsibleFromMilestone': 
@@ -970,10 +970,10 @@ class Parameter extends SqlElement {
         	                //    'enablePredefinedActions'=>'list',
         	                 'manageAccountable'=>'list',
 
-      	                   'sectionOrganization'=>'section',
-        	                 'useOrganizationBudgetElement'=>'list', // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-      	                   'sectionToDoList'=>'section',
-        	                 'activateSubtasksManagement'=>'list',
+      	                   //'sectionOrganization'=>'section',
+        	                 //'useOrganizationBudgetElement'=>'list', // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
+      	                   //'sectionToDoList'=>'section',
+        	                 //'activateSubtasksManagement'=>'list',
                         'columnPlanningRight'=>'newColumn',
                           'sectionPlanningControl'=>'section',
                             'allowTypeRestrictionOnProject'=>'list',
@@ -990,12 +990,12 @@ class Parameter extends SqlElement {
                               'maxProjectsToDisplay'=>'number',
                               'dependencyStrictMode'=>'list',
                               'isManualProgress'=>'list',
-                              'technicalProgress'=>'list',
+                              //'technicalProgress'=>'list',
                               'activityOnRealTime'=>'list',
                               'plannedWorkManualType'=>'list',
                               'manageCapacityForIntervention'=>'list',
                             'menuMilestone'=>'section',
-                              'manageMilestoneOnItems'=>'list',
+                              //'manageMilestoneOnItems'=>'list',
                               'autoLinkMilestone'=>'list',
                               'milestoneFromVersion'=>'list',
                               'updateMilestoneResponsibleFromDeliverable'=>'list',
@@ -1320,16 +1320,27 @@ class Parameter extends SqlElement {
     	  unset($parameterList['cronDirectory']);
     	}
     }
+    if(!Module::isModuleActive('moduleTargetMilestone')){
+      unset($parameterList['menuMilestone']);
+      unset($parameterList['autoLinkMilestone']);
+      unset($parameterList['milestoneFromVersion']);
+      unset($parameterList['updateMilestoneResponsibleFromDeliverable']);
+      unset($parameterList['updateMilestoneResponsibleFromIncoming']);
+      unset($parameterList['updateDeliverableResponsibleFromMilestone']);
+      unset($parameterList['updateIncomingResponsibleFromMilestone']);
+    }
     if (Parameter::getGlobalParameter('paramMailerType')!='phpmailer' and Parameter::getGlobalParameter('paramAttachmentMaxSizeMail')==0) {
       unset($parameterList['paramAttachmentMaxSizeMail']);
     }
     Module::applyModuleRestrictionsOnParametersList($parameterList);
     $user=getSessionUser();
     $showChecklistAll=false;
-    foreach ($user->getAllProfiles() as $prf) {
-      $showChecklist=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$prf,'scope'=>'checklist'));
-      if ($showChecklist and $showChecklist->id and $showChecklist->rightAccess=='1') {
-        $showChecklistAll=true;
+    if(Module::isModuleActive('moduleChecklist')){
+      foreach ($user->getAllProfiles() as $prf) {
+        $showChecklist=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$prf,'scope'=>'checklist'));
+        if ($showChecklist and $showChecklist->id and $showChecklist->rightAccess=='1') {
+          $showChecklistAll=true;
+        }
       }
     }
     $showSubTask=false;
@@ -1342,12 +1353,12 @@ class Parameter extends SqlElement {
     if (! $showChecklistAll) {
       unset($parameterList['displayChecklist']);
     }
-    if(!$showSubTask or Parameter::getGlobalParameter('activateSubtasksManagement')!='YES' or !Module::isMenuActive("menuViewAllSubTask")){
+    if(!$showSubTask or !Module::isModuleActive('moduleTodoList') or !Module::isMenuActive("menuViewAllSubTask")){ //Parameter::getGlobalParameter('activateSubtasksManagement')!='YES'
       unset($parameterList['displaySubTask']);
     }
-    if(!Module::isMenuActive("menuViewAllSubTask")){
-      unset($parameterList['activateSubtasksManagement']);
-    }
+//     if(!Module::isMenuActive("menuViewAllSubTask")){
+//       unset($parameterList['activateSubtasksManagement']);
+//     }
     if(!isNewGui()){
       unset($parameterList['menuLeftDisplayMode']);
       unset($parameterList['menuBarTopMode']);

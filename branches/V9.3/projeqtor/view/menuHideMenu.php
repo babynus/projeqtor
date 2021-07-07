@@ -34,7 +34,7 @@
   $sortOrder = 'sortOrder asc';
   $menuList=$obj->getSqlElementsFromCriteria(null, false,null,$sortOrder,true);
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
-  $displaySubTask=(Parameter::getGlobalParameter('activateSubtasksManagement')=='YES')?true:false;
+  $displaySubTask=(Module::isModuleActive('moduleTodoList'))?true:false;//Parameter::getGlobalParameter('activateSubtasksManagement')=='YES'
   // Clean empty parents
   foreach (array_reverse($menuList,true) as $idMenu=>$menu) {
     if ($menu->type=='menu') {
