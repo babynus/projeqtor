@@ -57,3 +57,5 @@ UPDATE `${prefix}module` SET idModule=25, sortOrder=310 WHERE name='moduleImputa
 INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (208,27,257,0,0),
 (209,28,130,0,0);
+
+CREATE INDEX historyarchiveRef ON `${prefix}historyarchive` (`refType`, `refId`);
