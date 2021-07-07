@@ -99,12 +99,10 @@ class ContactMain extends SqlElement {
                                           "isResource"=>"",
                                           "password"=>"hidden",
                                           "crypto"=>"hidden",
-                                          // ADD tLaguerie ticket #396
                                           "startDate"=>"nobr",
                                           'idTeam'=>'hidden',
                                           'idRole'=>'hidden',
                                           'idOrganization'=>'hidden'
-                                          // END tLaguerie ticket #396
   );    
   
   private static $_databaseTableName = 'resource';
