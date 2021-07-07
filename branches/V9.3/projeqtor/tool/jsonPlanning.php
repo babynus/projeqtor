@@ -1385,12 +1385,25 @@
         if ($minDate=='' or $minDate>$pStart) {$minDate=$pStart;}
       }
       if ($endDate and $maxDate>$endDate) {
-        $maxDate=$endDate;
+        //$maxDate=$endDate; // PBE : REMOVED, SETS THE MESS
       }
     }
-    
+    $globalProgress=0;
+    $globalStart='';
+    $globalPlanWork=0;
+    $globalRealWork=0;
+    $globalLeftWork=0;
+    $globalDuration=0;
     for ($i=0;$i<count($resultArray);$i++) {
       $wbs=$resultArray[$i]['wbssortable'];
+      if ($i==0) {
+        $globalProgress=($resultArray[$i]['plannedwork']>0)?round(100*$resultArray[$i]['realwork']/$resultArray[$i]['plannedwork'],2):'0';
+        $globalStart=$resultArray[$i]['pstart'];
+        $globalPlanWork=$resultArray[$i]['plannedwork'];
+        $globalRealWork=$resultArray[$i]['realwork'];
+        $globalLeftWork=$resultArray[$i]['leftwork'];
+        $globalDuration=$resultArray[$i]['pduration'];
+      }
       for ($j=$i+1;$j<count($resultArray);$j++) {
         if (substr($resultArray[$j]['wbssortable'],0,strlen($wbs))!=$wbs) break;
         if ($resultArray[$j]['pstart']<$resultArray[$i]['pstart']) {
@@ -1431,8 +1444,8 @@
     echo $tab.'<CreationDate>' . $now . '</CreationDate>' . $nl;
     echo $tab.'<LastSaved>' . $now . '</LastSaved>' . $nl;
     echo $tab.'<ScheduleFromStart>1</ScheduleFromStart>' . $nl;
-    echo $tab.'<StartDate>' . $minDate . 'T00:00:00</StartDate>' . $nl;
-    echo $tab.'<FinishDate>' . $maxDate . 'T00:00:00</FinishDate>' . $nl;
+    echo $tab.'<StartDate>' . $minDate . 'T'.$startAM.'</StartDate>' . $nl;
+    echo $tab.'<FinishDate>' . $maxDate . 'T'.$endPM.'</FinishDate>' . $nl;
     echo $tab.'<FYStartDate>1</FYStartDate>' . $nl;
     echo $tab.'<CriticalSlackLimit>0</CriticalSlackLimit>' . $nl;
     echo $tab.'<CurrencyDigits>2</CurrencyDigits>' . $nl;
@@ -1459,7 +1472,7 @@
     // echo $tab.'<EarnedValueMethod>0</EarnedValueMethod>' . $nl;
     echo $tab.'<InsertedProjectsLikeSummary>0</InsertedProjectsLikeSummary>' . $nl;
     echo $tab.'<MultipleCriticalPaths>0</MultipleCriticalPaths>' . $nl;
-    echo $tab.'<NewTasksEffortDriven>1</NewTasksEffortDriven>' . $nl;
+    echo $tab.'<NewTasksEffortDriven>0</NewTasksEffortDriven>' . $nl;
     echo $tab.'<NewTasksEstimated>0</NewTasksEstimated>' . $nl;
     echo $tab.'<SplitsInProgressTasks>0</SplitsInProgressTasks>' . $nl;
     echo $tab.'<SpreadActualCost>0</SpreadActualCost>' . $nl;
@@ -1480,6 +1493,7 @@
     echo $tab.'<NewTasksAreManual>1</NewTasksAreManual>'. $nl;
     echo $tab.'<DefaultTaskEVMethod>0</DefaultTaskEVMethod>' . $nl;
     echo $tab.'<ProjectExternallyEdited>1</ProjectExternallyEdited>' . $nl;
+    //echo $tab.'<ExtendedCreationDate>'.$now.'</ExtendedCreationDate>' . $nl;
     echo $tab.'<ExtendedCreationDate>1984-01-01T00:00:00</ExtendedCreationDate>' . $nl;
     echo $tab.'<ActualsInSync>0</ActualsInSync>' . $nl;
     echo $tab.'<RemoveFileProperties>0</RemoveFileProperties>' . $nl;
@@ -1608,7 +1622,6 @@
         echo $tab.$tab.$tab."<IsBaseCalendar>0</IsBaseCalendar>" . $nl;
         echo $tab.$tab.$tab."<IsBaselineCalendar>0</IsBaselineCalendar>". $nl;
         echo $tab.$tab.$tab."<BaseCalendarUID>".($resource->idCalendarDefinition -1)."</BaseCalendarUID>" . $nl;
-        // Gautier #4648
         $work = new Work();
         $where1 = " idResource = ".$resource->id." and idProject in " . Project::getAdminitrativeProjectList(false, false);    
         $lstWork = $work->getSqlElementsFromCriteria(null,false,$where1);
@@ -1662,15 +1675,17 @@
     echo $tab.$tab.$tab.'<Priority>500</Priority>' . $nl;
     echo $tab.$tab.$tab.'<Start>'.date('Y-m-d').'T00:00:00</Start>' . $nl;
     echo $tab.$tab.$tab.'<Finish>'.date('Y-m-d').'T00:00:00</Finish>' . $nl;
-    echo $tab.$tab.$tab.'<Duration>PT0H0M0S</Duration>' . $nl;
+    echo $tab.$tab.$tab.'<Duration>'.formatDuration($globalDuration,$hoursPerDay).'</Duration>' . $nl;
     echo $tab.$tab.$tab.'<ManualStart>'.date('Y-m-d').'T00:00:00</ManualStart>' . $nl;
     echo $tab.$tab.$tab.'<ManualFinish>'.date('Y-m-d').'T00:00:00</ManualFinish>' . $nl;
     echo $tab.$tab.$tab.'<ManualDuration>PT0H0M0S</ManualDuration>' . $nl;
     echo $tab.$tab.$tab.'<DurationFormat>21</DurationFormat>' . $nl;
+    echo $tab.$tab.$tab.'<Work>PT'.formatWork($globalPlanWork,$hoursPerDay).'</Work>' . $nl;
+    echo $tab.$tab.$tab.'<Stop>'.$globalStart.'T'.$startAM.'</Stop>' . $nl;
+    echo $tab.$tab.$tab.'<Resume>'.$globalStart.'T'.$startAM.'</Resume>' . $nl;
     echo $tab.$tab.$tab.'<FreeformDurationFormat>7</FreeformDurationFormat>' . $nl;
-    echo $tab.$tab.$tab.'<Work>PT0H0M0S</Work>' . $nl;
     echo $tab.$tab.$tab.'<ResumeValid>0</ResumeValid>' . $nl;
-    echo $tab.$tab.$tab.'<EffortDriven>1</EffortDriven>' . $nl;
+    echo $tab.$tab.$tab.'<EffortDriven>0</EffortDriven>' . $nl;
     echo $tab.$tab.$tab.'<Recurring>0</Recurring>' . $nl;
     echo $tab.$tab.$tab.'<OverAllocated>0</OverAllocated>' . $nl;
     echo $tab.$tab.$tab.'<Estimated>0</Estimated>' . $nl;
@@ -1681,9 +1696,9 @@
     echo $tab.$tab.$tab.'<IsSubproject>0</IsSubproject>' . $nl;
     echo $tab.$tab.$tab.'<IsSubprojectReadOnly>0</IsSubprojectReadOnly>' . $nl;
     echo $tab.$tab.$tab.'<ExternalTask>0</ExternalTask>' . $nl;
-    echo $tab.$tab.$tab.'<EarlyStart>'.date('Y-m-d').'T00:00:00</EarlyStart>' . $nl;
+    echo $tab.$tab.$tab.'<EarlyStart>'.$pStart.'T00:00:00</EarlyStart>' . $nl;
     echo $tab.$tab.$tab.'<EarlyFinish>'.date('Y-m-d').'T00:00:00</EarlyFinish>' . $nl;
-    echo $tab.$tab.$tab.'<LateStart>'.date('Y-m-d').'T00:00:00</LateStart>' . $nl;
+    echo $tab.$tab.$tab.'<LateStart>'.$pStart.'T'.$startAM.'</LateStart>' . $nl;
     echo $tab.$tab.$tab.'<LateFinish>'.date('Y-m-d').'T00:00:00</LateFinish>' . $nl;
     echo $tab.$tab.$tab.'<StartVariance>0</StartVariance>' . $nl;
     echo $tab.$tab.$tab.'<FinishVariance>0</FinishVariance>' . $nl;
@@ -1695,19 +1710,20 @@
     echo $tab.$tab.$tab.'<FixedCost>0</FixedCost>' . $nl;
     echo $tab.$tab.$tab.'<FixedCostAccrual>2</FixedCostAccrual>' . $nl;
     echo $tab.$tab.$tab.'<PercentComplete>0</PercentComplete>' . $nl;
-    echo $tab.$tab.$tab.'<PercentWorkComplete>0</PercentWorkComplete>' . $nl;
+    echo $tab.$tab.$tab.'<PercentWorkComplete>'.round($globalProgress,0).'</PercentWorkComplete>' . $nl;
     echo $tab.$tab.$tab.'<Cost>0</Cost>' . $nl;
     echo $tab.$tab.$tab.'<OvertimeCost>0</OvertimeCost>' . $nl;
     echo $tab.$tab.$tab.'<OvertimeWork>PT0H0M0S</OvertimeWork>' . $nl;
+    echo $tab.$tab.$tab.'<ActualStart>'.$globalStart.'T'.$startAM.'</ActualStart>' . $nl;
     echo $tab.$tab.$tab.'<ActualDuration>PT0H0M0S</ActualDuration>' . $nl;
     echo $tab.$tab.$tab.'<ActualCost>0</ActualCost>' . $nl;
     echo $tab.$tab.$tab.'<ActualOvertimeCost>0</ActualOvertimeCost>' . $nl;
-    echo $tab.$tab.$tab.'<ActualWork>PT0H0M0S</ActualWork>' . $nl;
+    echo $tab.$tab.$tab.'<ActualWork>PT'.formatWork($globalRealWork,$hoursPerDay).'</ActualWork>' . $nl;
     echo $tab.$tab.$tab.'<ActualOvertimeWork>PT0H0M0S</ActualOvertimeWork>' . $nl;
-    echo $tab.$tab.$tab.'<RegularWork>PT0H0M0S</RegularWork>' . $nl;
+    echo $tab.$tab.$tab.'<RegularWork>PT'.formatWork($globalPlanWork,$hoursPerDay).'</RegularWork>' . $nl;
     echo $tab.$tab.$tab.'<RemainingDuration>PT0H0M0S</RemainingDuration>' . $nl;
     echo $tab.$tab.$tab.'<RemainingCost>0</RemainingCost>' . $nl;
-    echo $tab.$tab.$tab.'<RemainingWork>PT0H0M0S</RemainingWork>' . $nl;
+    echo $tab.$tab.$tab.'<RemainingWork>PT'.formatWork($globalLeftWork,$hoursPerDay).'</RemainingWork>' . $nl;
     echo $tab.$tab.$tab.'<RemainingOvertimeCost>0</RemainingOvertimeCost>' . $nl;
     echo $tab.$tab.$tab.'<RemainingOvertimeWork>PT0H0M0S</RemainingOvertimeWork>' . $nl;
     echo $tab.$tab.$tab.'<ACWP>0.00</ACWP>' . $nl;
@@ -1735,7 +1751,7 @@
     foreach ($resultArray as $line) {
     	$cpt++;
     	$arrayTask[$line['reftype'].'#'.$line['refid']]=array('id'=>$line['id']);
-    	$pct=($line['plannedwork']>0)?round(100*$line['realwork']/$line['plannedwork'],2):'';
+    	$pct=($line['plannedwork']>0)?round(100*$line['realwork']/$line['plannedwork'],0):'';
     	if (!$pct) $pct='0';
     	if (!$pct and $line['plannedwork']==0 and $line['realwork']==0 and trim($line['realenddate'])) {
     	  $pct=100;
@@ -1777,46 +1793,37 @@
       echo $tab.$tab.$tab.'<ManualFinish>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</ManualFinish>' . $nl;
       echo $tab.$tab.$tab.'<ManualDuration>' . formatDuration($line['pduration'],$hoursPerDay) . '</ManualDuration>' . $nl;
       echo $tab.$tab.$tab.'<DurationFormat>'.getDurationFormat().'</DurationFormat>' . $nl;
-      echo $tab.$tab.$tab.'<FreeformDurationFormat>'.getDurationFormat().'</FreeformDurationFormat>' . $nl;
       echo $tab.$tab.$tab.'<Work>PT' . formatWork($line['plannedwork'],$hoursPerDay).'</Work>' . $nl;
+      if ($cpt==1) echo $tab.$tab.$tab.'<Stop>'.$globalStart.'T'.$startAM.'</Stop>' . $nl;
+      if ($cpt==1) echo $tab.$tab.$tab.'<Resume>'.$globalStart.'T'.$startAM.'</Resume>' . $nl;
+      echo $tab.$tab.$tab.'<FreeformDurationFormat>'.getDurationFormat().'</FreeformDurationFormat>' . $nl;
       $arrayTask[$line['reftype'].'#'.$line['refid']]['start']=$line['pstart'] . 'T' . $startAM ;
       $arrayTask[$line['reftype'].'#'.$line['refid']]['end']=$line['pend'] . 'T' . $endPM;
       $arrayTask[$line['reftype'].'#'.$line['refid']]['duration']=formatDuration($line['pduration'],$hoursPerDay);
       $arrayTask[$line['reftype'].'#'.$line['refid']]['pct']=$pct;
-      $remainingDuration=0;
-      $actualDuration=$line['pduration'];
+      //$actualDuration=$line['pduration'];
+      //$remainingDuration=0;
+      // TRY PBE
+      $totalDuration=$line['pduration'];
+      $actualDuration=$totalDuration*$pct/100;
+      $remainingDuration=$totalDuration-$actualDuration;
+      debugLog($line['refname']." => totalDuration=$totalDuration, actualDuration=$actualDuration, remainingDuration=$remainingDuration");
       if ($pct==100) echo $tab.$tab.$tab.'<Stop>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</Stop>' . $nl;
       //else echo $tab.$tab.$tab.'<Stop></Stop>' . $nl;
       if ($pct==100) echo $tab.$tab.$tab.'<Resume>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</Resume>' . $nl;
-      //else echo $tab.$tab.$tab.'<Resume></Resume>' . $nl;
-//       if ($pct) {
-//         // V1
-//         $length=dayDiffDates($line['pstart'], $line['pend'])+1;
-//         $lengthPct=$length*$pct/100;
-//         $lengthDays=floor($lengthPct);
-//         $lengthHours=$lengthPct-$lengthDays;
-//         $lengthHH=floor($lengthHours*$hoursPerDay);
-//         $lengthMM=floor((($lengthHours*$hoursPerDay)-$lengthHH)*60);
-//         $stopDate=addDaysToDate($line['pstart'], $lengthDays);
-//         $stop=$stopDate."T".htmlFixLengthNumeric(substr($startAM,0,2)+$lengthHH,2).":".htmlFixLengthNumeric($lengthMM,2).":00";
-//         $resume=$stop;
-//         $actualDuration=$line['pduration']*$pct/100;
-//         $remainingDuration=$line['pduration']-$actualDuration;
-//         if ($pct==100) {
-//           echo $tab.$tab.$tab.'<Stop>'.$line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM).'</Stop>' . $nl;
-//           echo $tab.$tab.$tab.'<Resume></Resume>' . $nl;          
-//         } else {
-//           echo $tab.$tab.$tab."<Stop>" . $stop . "</Stop>" . $nl;
-//           echo $tab.$tab.$tab."<Resume>" . $resume . "</Resume>" . $nl;
-//         }
-//         $arrayTask[$line['reftype'].'#'.$line['refid']]['stop']=$stop;
-//       } else {
-//         echo $tab.$tab.$tab.'<Stop></Stop>' . $nl;
-//         echo $tab.$tab.$tab.'<Resume></Resume>' . $nl;
-//         $remainingDuration=$line['pduration'];
-//         $actualDuration=0;
-//       }
-      //echo $tab.$tab.$tab.'<Resume>' . $line['pstart'] . 'T' . $startAM . '</Resume>' . $nl;
+      $pctDuration=0;
+      $work = new Work();
+      $lstWork = $work->getSqlElementsFromCriteria(array('refType'=>$line['reftype'],'refId'=>$line['refid']));
+      $minWorkDate='';
+      $maxWorkDate='';
+      foreach ($lstWork as $wk){
+        if ($minWorkDate=='' or $wk->workDate<$minWorkDate) $minWorkDate=$wk->workDate;
+        if ($maxWorkDate=='' or $wk->workDate>$maxWorkDate) $maxWorkDate=$wk->workDate;
+      }
+      if ($minWorkDate and $maxWorkDate and isset($line['duration']) and $line['duration']>0) {
+        $actualDuration=workDayDiffDates($minWorkDate, $maxWorkDate);
+        $pctDuration=$actualDuration/$line['duration']*100;
+      }
       echo $tab.$tab.$tab.'<ResumeValid>0</ResumeValid>' . $nl;
       echo $tab.$tab.$tab.'<EffortDriven>1</EffortDriven>' . $nl;
       echo $tab.$tab.$tab.'<Recurring>0</Recurring>' . $nl;
@@ -1843,15 +1850,15 @@
       echo $tab.$tab.$tab.'<FinishSlack>0</FinishSlack>' . $nl;
       echo $tab.$tab.$tab.'<FixedCost>0</FixedCost>' . $nl;
       echo $tab.$tab.$tab.'<FixedCostAccrual>2</FixedCostAccrual>' . $nl;
-      echo $tab.$tab.$tab.'<PercentComplete>'.$pct.'</PercentComplete>' . $nl;
-      //echo $tab.$tab.$tab.'<PercentWorkComplete>'.$pct.'</PercentWorkComplete>' . $nl;
+      echo $tab.$tab.$tab.'<PercentComplete>'.round($pctDuration,0).'</PercentComplete>' . $nl;
+      echo $tab.$tab.$tab.'<PercentWorkComplete>'.$pct.'</PercentWorkComplete>' . $nl;
       echo $tab.$tab.$tab.'<Cost>0</Cost>' . $nl;
       echo $tab.$tab.$tab.'<OvertimeCost>0</OvertimeCost>' . $nl;
       echo $tab.$tab.$tab.'<OvertimeWork>PT0H0M0S</OvertimeWork>' . $nl;
       //if ($pct>0) echo $tab.$tab.$tab.'<ActualStart>' .  $line['pstart'] . 'T' . $startAM . '</ActualStart>' . $nl;
       echo $tab.$tab.$tab.'<ActualStart>' . (($line['pstart'])?$line['pstart'] . 'T' . $startAM:'') . '</ActualStart>' . $nl;
-      echo $tab.$tab.$tab.'<ActualDuration>'.formatDuration($actualDuration,$hoursPerDay) .'</ActualDuration>' . $nl;
       if ($pct==100) echo $tab.$tab.$tab.'<ActualFinish>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</ActualFinish>' . $nl;
+      echo $tab.$tab.$tab.'<ActualDuration>'.formatDuration($actualDuration,$hoursPerDay) .'</ActualDuration>' . $nl;
       echo $tab.$tab.$tab.'<ActualCost>0</ActualCost>' . $nl;
       echo $tab.$tab.$tab.'<ActualOvertimeCost>0</ActualOvertimeCost>' . $nl;
       echo $tab.$tab.$tab.'<ActualWork>PT' . formatWork($line['realwork'],$hoursPerDay) . '</ActualWork>' . $nl;
@@ -1905,18 +1912,18 @@
       }
       echo $tab.$tab.$tab.'<IsPublished>1</IsPublished>' . $nl;
       echo $tab.$tab.$tab.'<CommitmentType>0</CommitmentType>' . $nl;
-//       if ($line['reftype']!='Milestone') {
-//         echo $tab.$tab.$tab.'<TimephasedData>' . $nl;
-//         echo $tab.$tab.$tab.'<Type>11</Type>' . $nl;
-//         echo $tab.$tab.$tab.'<UID>'.$line['id'].'</UID>' . $nl;
-//         echo $tab.$tab.$tab.'<Start>' . $line['pstart'] . 'T' . $startAM . '</Start>' . $nl;
-//         echo $tab.$tab.$tab.'<Finish>' . $line['pend'] . 'T' . $endPM . '</Finish>' . $nl;
-//         echo $tab.$tab.$tab.'<Unit>3</Unit>' . $nl;
-//         echo $tab.$tab.$tab.'<Value>'.$pct.'</Value>' . $nl;
-//         echo $tab.$tab.$tab.'</TimephasedData>' . $nl;
-//       }
-      echo $tab.$tab.$tab.'<projeqtorPlanningModeId>'.$line["idplanningmode"].'</projeqtorPlanningModeId>'. $nl;;
-      echo $tab.$tab.$tab.'<projeqtorPlanningModeName>'.SqlList::getNameFromId('PlanningMode',$line['idplanningmode']).'</projeqtorPlanningModeName>'. $nl;;
+      if ($line['reftype']!='Milestone') {
+        echo $tab.$tab.$tab.'<TimephasedData>' . $nl;
+        echo $tab.$tab.$tab.'<Type>11</Type>' . $nl;
+        echo $tab.$tab.$tab.'<UID>'.$line['id'].'</UID>' . $nl;
+        echo $tab.$tab.$tab.'<Start>' . $minWorkDate . 'T' . $startAM . '</Start>' . $nl;
+        echo $tab.$tab.$tab.'<Finish>' . $maxWorkDate . 'T' . $endPM . '</Finish>' . $nl;
+        echo $tab.$tab.$tab.'<Unit>3</Unit>' . $nl;
+        echo $tab.$tab.$tab.'<Value>'.$pctDuration.'</Value>' . $nl;
+        echo $tab.$tab.$tab.'</TimephasedData>' . $nl;
+      }
+      echo $tab.$tab.$tab.'<projeqtorPlanningModeId>'.$line["idplanningmode"].'</projeqtorPlanningModeId>'. $nl;
+      echo $tab.$tab.$tab.'<projeqtorPlanningModeName>'.SqlList::getNameFromId('PlanningMode',$line['idplanningmode']).'</projeqtorPlanningModeName>'. $nl;
       echo $tab.$tab.'</Task>' . $nl;
     }
     echo $tab.'</Tasks>' . $nl;
@@ -2128,9 +2135,9 @@
         foreach ($lstWork as $wk){
   	      echo $tab.$tab.$tab."<TimephasedData>" . $nl;
   	      echo $tab.$tab.$tab.$tab."<Type>2</Type>" . $nl;
-  	      echo $tab.$tab.$tab.$tab."<UID>" . htmlEncode($ass->id) . "</UID>" . $nl;
-  	      echo $tab.$tab.$tab.$tab."<Start>" . htmlEncode($wk->workDate) . "T08:00:00</Start>" . $nl;
-  	      echo $tab.$tab.$tab.$tab."<Finish>" . htmlEncode($wk->workDate) . "T18:00:00</Finish>" . $nl;
+  	      echo $tab.$tab.$tab.$tab."<UID>" . htmlEncode($wk->id) . "</UID>" . $nl;
+  	      echo $tab.$tab.$tab.$tab."<Start>" . htmlEncode($wk->workDate) . "T".$startAM."</Start>" . $nl;
+  	      echo $tab.$tab.$tab.$tab."<Finish>" . htmlEncode($wk->workDate) . "T".$endPM."</Finish>" . $nl;
   	      echo $tab.$tab.$tab.$tab."<Unit>1</Unit>" . $nl;
   	      echo $tab.$tab.$tab.$tab."<Value>PT" . formatWork($wk->work,$hoursPerDay) ."</Value>" . $nl;
   	      echo $tab.$tab.$tab."</TimephasedData>" . $nl;
