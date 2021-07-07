@@ -3604,7 +3604,7 @@ function workTimeDiffDateTime($start, $end) {
 function getDailyHours($idProject, $col, $asMs){
   $time = null;
   if(!sessionValueExists('startAm') or !sessionValueExists('endAm') or !sessionValueExists('startPm') or !sessionValueExists('endPm')){
-    $ms = ($asMs)?'00':'';
+    $ms = ($asMs)?':00':'';
     if($idProject and Parameter::getGlobalParameter('projectDailyHours')=='true'){
     	$project = new Project($idProject, true);
     	if($project->startAM and $project->endAM and $project->startPM and $project->endPM){
