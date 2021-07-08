@@ -12,6 +12,11 @@ ALTER TABLE `${prefix}pokersession` CHANGE `handledDate` `handledDate` DATE DEFA
 ALTER TABLE `${prefix}pokersession` CHANGE `doneDate` `doneDate` DATE DEFAULT NULL;
 ALTER TABLE `${prefix}pokersession` CHANGE `idleDate` `idleDate` DATE DEFAULT NULL;
 
+UPDATE `${prefix}menu` SET sortOrder='901' WHERE name='menuType';
+UPDATE `${prefix}menu` SET sortOrder='156' WHERE name='menuPokerSessionVoting';
+
+
+
 ALTER TABLE `${prefix}pokerresource` ADD `idAssignment` int(12) unsigned DEFAULT NULL COMMENT '12';
 
 INSERT INTO `${prefix}planningmode` (name, code, sortOrder, mandatoryStartDate, mandatoryEndDate, applyTo, idle, mandatoryDuration) VALUES 
