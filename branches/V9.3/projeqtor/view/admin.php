@@ -604,12 +604,18 @@
                 <td class="label" style="width:200px;<?php echo (isNewGui())?'margin-top:5px;':'';?>">
                   <?php echo i18n("deleteLogfile"). Tool::getDoublePoint();?>
                 </td>
+               <?php 
+                      $maintenanceDeletedLogfile=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedLogfile'));
+                      if($maintenanceDeletedLogfile->id=='')$maintenanceDeletedLogfile=30;
+                      else $maintenanceDeletedLogfile=$maintenanceDeletedLogfile->parameterValue;
+                ?>
+                  
                 <td class="display" width="90%">
                   <?php echo i18n('olderThan');?>&nbsp;
                   <div dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:999}"
                     style="width:30px;"
-                    value="7"
-                    name="deleteLogfileDays" id="deleteLogfileDays">
+                    value="<?php echo $maintenanceDeletedLogfile;?>" 
+                    onchange="saveMaintenanceAdmin('maintenanceDeletedLogfile')" name="deleteLogfileDays" id="deleteLogfileDays">
                   </div>
                   &nbsp;<?php echo i18n('days');?>
                 </td>
@@ -624,6 +630,9 @@
                        return false;
                      </script>
                  </button>
+                 <div style="display: inline-block;">
+                  <?php echo CronExecution::drawCronExecutionDefintion('deleteLogFile',true);?>
+                 </div>
                 </td>
               </tr>
               <tr><td colspan="2">&nbsp;</td></tr>
