@@ -2197,7 +2197,8 @@ function finalizeMessageDisplay(destination, validationType) {
             field.focus();
           }else{
             var editor=CKEDITOR.instances[fieldName];
-            editor.focus();
+            if (editor) editor.focus();
+            else field.focus();
           }
         }
 
