@@ -349,7 +349,7 @@ class NotificationDefinition extends SqlElement {
     // If title do reference to object's field ${xxx}
     if (strpos($this->title,'${')>=0) {
         // Verify if object's fields correct
-        $result = $this->verifyObjectFields('title',$className);
+        $result .= $this->verifyObjectFields('title',$className);
     }
     
     // If content do reference to object's field ${xxx}
@@ -1311,11 +1311,11 @@ class NotificationDefinition extends SqlElement {
     // For each instance of the Object Class
     foreach ($listObjClasses as $objClass) {
         // The id of notified instance object
-        $notif->notifiedObjectId = $objClass[$className.'_id'];
+        $notif->notifiedObjectId = $objClass[strtolower($className).'_id'];
 
         // The targetDate value
         if ($targetDate!="without") {
-            $targetDateValue = $objClass[$className.'_'.$targetDate];
+            $targetDateValue = $objClass[strtolower($className).'_'.$targetDate];
             // TargetDate is null => nothing to do
             if ($targetDateValue=="") {                
                 continue;
