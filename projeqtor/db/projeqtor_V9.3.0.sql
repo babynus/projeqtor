@@ -38,6 +38,9 @@ CREATE TABLE `${prefix}highlight` (
 PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
+INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
+('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteLogfile');
+
 --Module 
 INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES 
 (23,'moduleTargetMilestone','112',1,0,0),
