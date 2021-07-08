@@ -256,4 +256,14 @@ function cronDeleteAudit(){
   $clauseWhere="disconnectionDateTime<'" . $targetDate . "'";
   $obj->purge($clauseWhere);
 }
+
+function cronDeleteLogfile(){
+  $maintenanceDeletedLogfile=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedLogfile'));
+  if($maintenanceDeletedLogfile->id=='')$nbDays=30;
+  else $nbDays=$maintenanceDeletedLogfile->parameterValue;
+  $clauseWhere=addDaysToDate(date('Y-m-d'), (-1)*$nbDays ) . ' ' . date('H:i:s');
+  $item='Logfile';
+  $obj=new $item();
+  $obj->purge($clauseWhere);
+}
 ?>
