@@ -218,7 +218,8 @@ class SubTask extends SqlElement {
                           foreach ($allAttach as $attachment){
                             if ($attachment->isThumbable()) {
                               echo '<div style="float:left;" oncontextmenu="event.preventDefault();removeAttachment('.$attachment->id.');dojo.byId(\'refreshSTDivValues\').value=\''.$subTask->id.'\';">';
-                              echo '<img src="'.getImageThumb($attachment->getFullPathFileName(), 32).'" '.' title="'.htmlEncode($attachment->fileName).'" style="float:left;cursor:pointer;margin-left: 5px;margin-right: 5px;" '
+                              echo '<img src="'.getImageThumb($attachment->getFullPathFileName(), 32).'" '.' title="'.htmlEncode($attachment->fileName).'" 
+                                    style="float:left;cursor:pointer;margin-left: 5px;margin-right: 5px;border:'.((isNewGui())?'1px solid var(--color-button-background-selected)':'1px solid black').'"'
                                     .' onClick="showImage(\'Attachment\',\''.htmlEncode($attachment->id).'\',\''.htmlEncode($attachment->fileName, 'protectQuotes').'\');" />';
                               echo '</div>';
                             }else{
