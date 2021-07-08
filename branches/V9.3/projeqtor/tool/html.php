@@ -1051,7 +1051,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   foreach ($lstPluginEvt as $script) {
     require $script; // execute code
   }
-  if (! $obj and $col!="planning") $sepChar='no';
+  if (! $obj and $col!="planning" and $col!="idProject") $sepChar='no';
   $selectedFound=false;
   $next="";
   if (isset($table['*'])) unset($table['*']);
@@ -1084,8 +1084,10 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     // Don't show the leave system project
       if ($key == $leaveProjectId) {continue;}
     }          
+    
 // MTY - LEAVE SYSTEM
     if (! array_key_exists($key, $excludeArray) and ( count($restrictArray)==0 or array_key_exists($key, $restrictArray) or $key==$selection) ) {
+      
       if ( ($col=="idProject" or $col=="planning") and $sepChar!='no') {   
         if (isset($wbsList[$key])) {
           $wbs=$wbsList[$key];
