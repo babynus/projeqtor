@@ -1218,6 +1218,10 @@ function getUserVisibleResourcesList($limitToActiveResources=false,
                 }
             }
             return $emplList;
+        } else {
+          $emp=new Employee(getSessionUser()->id);
+          $emplList = array($emp->id=>$emp->name);
+          return $emplList;
         }
     }
 
