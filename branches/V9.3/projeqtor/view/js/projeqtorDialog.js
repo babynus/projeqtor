@@ -6917,15 +6917,18 @@ function saveModuleStatusContinue(id,status) {
     var name=domNode.getAttribute('widgetid');
     var widget=dijit.byId(name);
     if (widget) {
-      widget.set('checked',(status==true)?true:false);
       var idSub=name.replace('module_','');
-      var url='../tool/saveModuleStatus.php?idModule='+idSub+'&status='+status;
-      dojo.xhrGet({
-        url : url,
-        handleAs : "text",
-        load : function(){
-        }
-      });
+      var parentActive=dojo.byId('parentActive_'+idSub).value;
+      if((parentActive==1 && status==true) || status==false){
+        widget.set('checked',(status==true)?true:false);
+        var url='../tool/saveModuleStatus.php?idModule='+idSub+'&status='+status;
+        dojo.xhrGet({
+          url : url,
+          handleAs : "text",
+          load : function(){
+          }
+        });
+      }
     }
   });
   saveModuleStatusCheckParent(id);  
@@ -6934,7 +6937,8 @@ function saveModuleStatusContinue(id,status) {
 function saveModuleStatusCheckParent(id) {
   var wdgt=dijit.byId('module_'+id);
   var parent=wdgt.get('parent');
-  if (parent==5 && dojo.byId('module_'+parent)) {
+  var notActiveAlone=dojo.byId('notActiveAlone_'+id).value;
+  if (dojo.byId('module_'+parent)) {
     var oneOn=false;
     var allOff=true;
     dojo.query(".moduleClass.parentModule"+parent).forEach(function(domNode){
@@ -6949,7 +6953,7 @@ function saveModuleStatusCheckParent(id) {
     });
     var status=(oneOn==true)?true:false;
     var widget=dijit.byId('module_'+parent);
-    if (widget.get('checked')!=status) {
+    if (widget.get('checked')!=status && ((notActiveAlone=='1' && status==false) || status==true)) {
       widget.set('checked',status);
       var url='../tool/saveModuleStatus.php?idModule='+parent+'&status='+status;
       dojo.xhrGet({

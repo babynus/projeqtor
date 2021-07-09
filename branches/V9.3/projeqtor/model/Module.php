@@ -36,6 +36,8 @@ class Module extends SqlElement {
   public $idModule;
   public $sortOrder=0;
   public $active;
+  public $parentActive;
+  public $notActiveAlone;
   public $idle;
   
   public $_isNameTranslatable = true;

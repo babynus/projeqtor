@@ -47,6 +47,9 @@ INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionN
 ('0 1 * * *', '../tool/cronExecutionStandard.php', 1, 'cronDeleteLogfile');
 
 --Module 
+ALTER TABLE `${prefix}module` ADD `parentActive` int(1) unsigned DEFAULT 0 COMMENT '1';
+ALTER TABLE `${prefix}module` ADD `notActiveAlone` int(1) unsigned DEFAULT 0 COMMENT '1';
+
 INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES 
 (23,'moduleTargetMilestone','112',1,0,0),
 (24,'moduleTechnicalProgress','114',1,0,0),  
@@ -55,12 +58,14 @@ INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active
 (27,'moduleTodoList','320',25,0,0), 
 (28,'moduleChecklist','330',25,0,1);
 
-UPDATE `${prefix}module` SET idModule=1, sortOrder=110 WHERE name ='moduleMeeting';
+UPDATE `${prefix}module` SET idModule=1, sortOrder=110, parentActive=1 WHERE name ='moduleMeeting';
 UPDATE `${prefix}module` SET idModule=1, sortOrder=120 WHERE name ='modulePoker';
 UPDATE `${prefix}module` SET idModule=10, sortOrder=720 WHERE name='moduleAssets';
-UPDATE `${prefix}module` SET idModule=10, sortOrder=730 WHERE name='moduleRisk';
-UPDATE `${prefix}module` SET idModule=10, sortOrder=740 WHERE name='moduleRequirement';
-UPDATE `${prefix}module` SET idModule=25, sortOrder=310 WHERE name='moduleImputation';
+UPDATE `${prefix}module` SET idModule=10, sortOrder=730, parentActive=1 WHERE name='moduleRisk';
+UPDATE `${prefix}module` SET idModule=10, sortOrder=740, parentActive=1 WHERE name='moduleRequirement';
+UPDATE `${prefix}module` SET idModule=25, sortOrder=310, parentActive=1 WHERE name='moduleImputation';
+UPDATE `${prefix}module` SET parentActive=1 WHERE name in ('moduleExpenses','moduleIncomes');
+UPDATE `${prefix}module` SET notActiveAlone=1 WHERE name in ('moduleFinancial','moduleFollowUp');
 
 INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (208,27,257,0,0),
