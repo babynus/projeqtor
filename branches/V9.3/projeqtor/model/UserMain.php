@@ -1277,15 +1277,22 @@ class UserMain extends SqlElement {
    * @return -1 or Id of authentified user
    */
 	public function authenticate( $paramlogin, $parampassword) {
-	  global $loginSave;
-debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );	
+	  global $loginSave, $paramLdap_search_pass;
+    debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );	
 	  $paramLdap_allow_login=Parameter::getGlobalParameter('paramLdap_allow_login');
 	  $paramLdap_base_dn=Parameter::getGlobalParameter('paramLdap_base_dn');
 	  $paramLdap_host=Parameter::getGlobalParameter('paramLdap_host');
 	  $paramLdap_port=Parameter::getGlobalParameter('paramLdap_port');
 	  $paramLdap_version=Parameter::getGlobalParameter('paramLdap_version');
 	  $paramLdap_search_user=Parameter::getGlobalParameter('paramLdap_search_user');
-	  $paramLdap_search_pass=decryptPwd(Parameter::getGlobalParameter('paramLdap_search_pass'));
+	  if ( ! $paramLdap_search_pass ) {
+	    $currVersion=Sql::getDbVersion();
+	    if (version_compare($currVersion, 'V9.2.0',"<")) {
+	      $paramLdap_search_pass=Parameter::getGlobalParameter('paramLdap_search_pass');
+	    } else {
+	      $paramLdap_search_pass=decryptPwd(Parameter::getGlobalParameter('paramLdap_search_pass'));
+	    }
+	  } 
 	  $paramLdap_user_filter=Parameter::getGlobalParameter('paramLdap_user_filter');
 	  $paramLdap_defaultprofile=Parameter::getGlobalParameter('paramLdap_defaultprofile');
 	  $rememberMe=false;
