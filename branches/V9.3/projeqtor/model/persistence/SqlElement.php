@@ -485,7 +485,7 @@ abstract class SqlElement {
           "Mail" => "controlStrict", 
           "Meeting" => "controlStrict", 
           "Milestone" => "controlStrict", 
-          "Notification" => "controlStrict",
+//           "Notification" => "controlStrict",
           "Opportunity" => "controlStrict",
           "PokerSession" => "controlStrict",
           "PredefinedAction" => "controlStrict",
