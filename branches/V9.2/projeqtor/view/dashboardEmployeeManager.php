@@ -806,6 +806,9 @@
                                                 $leftTotalType[$leaveType->id]=null;                                                
                                             }
                                             foreach($employeeListRequest as $id => $name) {
+                                                if ( ! isLeavesManager(getSessionUser()->id) and $id!=$user->id) {
+                                                  continue;
+                                                }
                                                 $emp = $employees[$id];
                                                 $leftByType = $emp->getLeftLeavesByLeaveType($idTypeRequest);
                                                 $totalLeft = null;
@@ -968,6 +971,9 @@
                                         $cursor = 'cursor:pointer;';
                                         $lvTpHasWfStWithSubmitted==null;                                                                                                                     
                                         foreach($employees as $employee) {
+                                            if ( ! isLeavesManager(getSessionUser()->id) and $employee->id!=$user->id) {
+                                              continue;
+                                            }
                                             $lvList=$employee->getEmployeeLeavesBetweenDateToProcess($startDateRequest,$endDateRequest, $idTypeRequest, "startDate ASC",-1,-1,-1);
                                             foreach ($lvList as $leave) {                                                
                                                 if ($lvTpHasWfStWithSubmitted==null or !array_key_exists($leave->idLeaveType, $lvTpHasWfStWithSubmitted)) {
