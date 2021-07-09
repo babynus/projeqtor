@@ -147,6 +147,8 @@ $user=getSessionUser();
       if($simuIndex and $mod->name == 'moduleDataCloning'){
         continue;
       }?>
+          <input type="hidden" name="parentActive_<?php echo $mod->id;?>" id="parentActive_<?php echo $mod->id;?>" value="<?php echo $mod->parentActive;?>"/>
+          <input type="hidden" name="notActiveAlone_<?php echo $mod->id;?>" id="notActiveAlone_<?php echo $mod->id;?>" value="<?php echo $mod->notActiveAlone;?>"/>
           <div id="moduleMenuDiv_<?php echo $mod->id;?>" style="width:330px;"  <?php if($mod->active){?> class="activeModuleMenu"<?php }?> >
             <div id="module_<?php echo $mod->id;?>" style="margin-top:5px;float:left;" dojoType="dijit.form.CheckBox" 
                  parent="<?php if ($mod->idModule) {echo $mod->idModule;}?>" type="checkbox" <?php echo ($mod->active)?'checked="checked"':'';?> 
