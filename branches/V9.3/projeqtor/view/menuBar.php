@@ -315,9 +315,9 @@
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
     <td  width="<?php echo (isNewGui())?42:57;?>px;" style=""> 
     <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount" style="text-align: center; position:relative;top:-5px">
-       <div dojoType="dijit.form.DropDownButton"  id=""
+       <div dojoType="dijit.form.DropDownButton"  id="notificationBellDiv"
             style="display: table-cell;vertical-align: middle;" >
-            <div id="highlightDiv"  onClick="setHighlight('Notification');"  style="display:none;position:absolute;width:26px;height:22px;left:1px;z-index:999999999;background-image: url(img/highlight2.gif) !important;background-repeat: no-repeat !important;" ></div>
+            
           <span  class="<?php if ($iconClassWithSize) echo 'iconNotification22';?> iconNotification iconSize22" style="display: table-cell;">  
             <span id="countNotifications" class="menuBarNotificationCount" style="text-align:center;" >
               0
@@ -327,7 +327,8 @@
                style="  max-width:360px; overflow-x:hidden; height:300px;  max-height:300px;  width:360px;">
               <?php include "menuNotificationRead.php" ?>          
           </div>       
-       </div>         
+       </div>
+       <div id="highlightDiv"  onClick="setHighlight('Notification');dijit.byId('notificationBellDiv').open();"  style="display:none;position:absolute;top:0;width:26px;height:22px;left:1px;z-index:999999999;background-image: url(img/highlight2.gif) !important;background-repeat: no-repeat !important;" ></div>         
      </div>
     </td>
     <?php } ?>
