@@ -317,7 +317,6 @@
     <div dojoType="dijit.layout.ContentPane" id="menuBarNotificationCount" style="text-align: center; position:relative;top:-5px">
        <div dojoType="dijit.form.DropDownButton"  id="notificationBellDiv"
             style="display: table-cell;vertical-align: middle;" >
-            
           <span  class="<?php if ($iconClassWithSize) echo 'iconNotification22';?> iconNotification iconSize22" style="display: table-cell;">  
             <span id="countNotifications" class="menuBarNotificationCount" style="text-align:center;" >
               0
@@ -326,9 +325,9 @@
           <div id="drawNotificationUnread" dojoType="dijit.TooltipDialog"
                style="  max-width:360px; overflow-x:hidden; height:300px;  max-height:300px;  width:360px;">
               <?php include "menuNotificationRead.php" ?>          
-          </div>       
-       </div>
-       <div id="highlightDiv"  onClick="setHighlight('Notification');dijit.byId('notificationBellDiv').open();"  style="display:none;position:absolute;top:0;width:26px;height:22px;left:1px;z-index:999999999;background-image: url(img/highlight2.gif) !important;background-repeat: no-repeat !important;" ></div>         
+          </div>  
+          </div>     
+       <div id="highlightDiv"  onClick="setHighlight('Notification');dijit.byId('notificationBellDiv').openDropDown();"  style="display:none;position:absolute;top:2px;width:26px;height:22px;left:1px;z-index:999999999;background-image: url(img/highlight2.gif) !important;background-repeat: no-repeat !important;" ></div>         
      </div>
     </td>
     <?php } ?>
@@ -390,9 +389,7 @@
     <td title="<?php ?>"  style="position:relative;width:55px;padding-left:5px">
       <div dojoType="dijit.layout.ContentPane"  id="menuInterrogation" class="pseudoButton" style="position:relative;overflow:hidden;width:50px; height:28px; min-width:45px;top:-5px;">
         <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuInterrogationTitle");?>" id="iconMenuInterrogation" style="display: table-cell;vertical-align: middle;position:relative;min-width:40px;top:-3px" >
-        <div id="highlightNewsDiv"  onClick="setHighlight('News')"  style="display:none;position:absolute;width:26px;height:22px;left:1px;z-index:999999999;background-image: url(img/highlight2.gif) !important;background-repeat: no-repeat !important;" >
-      <input type="hidden" id="lastValueNews" value=""/>
-      </div>
+         <input type="hidden" id="lastValueNews" value=""/>
         <script type="dojo/connect" event="onClick" args="evt">
            <?php 
            $getYesNo=Parameter::getGlobalParameter('getVersion');
@@ -419,6 +416,7 @@
              <?php include "menuUserInterrogation.php" ?>          
           </div> 
         </div>
+        <div id="highlightNewsDiv"  onClick="setHighlight('News')"  style="display:none;position:absolute;top:2px;width:50px;height:29px;left:1px;z-index:999999999;background-image: url(img/highlight2.gif) !important;background-repeat: no-repeat !important;" ></div>
       </div>
     </td>
     <?php } drawSeparator();?>
