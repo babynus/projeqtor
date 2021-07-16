@@ -445,7 +445,7 @@ class BillMain extends SqlElement {
 		$projectList = $project->getRecursiveSubProjectsFlatList(true, true);
 		$projectList = array_flip($projectList);
 		$projectList = '(0,'.implode(',',$projectList).')';
-		$where = 'idProject in '.$projectList.' and idle = 0';
+		$where = 'idProject in '.$projectList.' and cancelled = 0'; // Fix PBE
 		$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
 		$billAmount = ($paramAmount == 'HT')?'untaxedAmount':'fullAmount';
 		$project->ProjectPlanningElement->billSum = $this->sumSqlElementsFromCriteria($billAmount, null, $where);

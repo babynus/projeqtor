@@ -3033,7 +3033,7 @@
 .iconLinkStream16 { background-image: url(images/iconLink.png);  background-size: 16px 16px;}
 .iconLinkStream22 { background-image: url(images/iconLink.png);  background-size: 22px 22px;}
 .iconLinkStream32 { background-image: url(images/iconLink.png);  background-size: 32px 32px;}
-.ProjeQtOrNewGui .iconLinkStream { background-image: url(customIcons/new/iconLinkStream.svg);  }
+.ProjeQtOrNewGui .iconLinkStream { background-image: url(customIcons/new/iconLink.svg);  }
 
 .iconAttachStream16 { background-image: url(images/iconAttach.png);  background-size: 16px 16px;}
 .iconAttachStream22 { background-image: url(images/iconAttach.png);  background-size: 22px 22px;}
