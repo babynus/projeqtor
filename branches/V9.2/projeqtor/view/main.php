@@ -743,6 +743,7 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
       debugTraceLog("Double connection on same browser for user #".getSessionUser()->id);
       include_once '../view/welcome.php';
       echo "<div style='position:absolute;top:50%;width:100%;text-align:center;color:white;font-size:20pt;'>".i18n("connectionAlreadyExists")."</div>";
+      echo "<div onDblClick='var callBack=function() {window.location = \"../index.php\";};saveDataToSession(\"disconnect\", null, null, callBack);' style='position:absolute;top:0;left:0;width:100%;height:100%;background:transparent'></div>";
       exit;
     }    
     if ($uniqueSessionId) {
