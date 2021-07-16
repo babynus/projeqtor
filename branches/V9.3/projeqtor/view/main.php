@@ -738,7 +738,10 @@ $background=(isNewGui())?'#'.$firstColor.' !important':' #C3C3EB';
   </script>
 </head>
     <?php
-    
+    if (getSessionValue('passwordChangeInProgress')=='true') {
+      setSessionValue('uniqueSessionId',$uniqueSessionId);
+    }
+    unsetSessionValue('passwordChangeInProgress');
     $currentUniqueSessionId=trim(getSessionValue('uniqueSessionId'));
     if ($currentUniqueSessionId and $currentUniqueSessionId!=$uniqueSessionId) {
       // 
