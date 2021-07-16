@@ -96,7 +96,10 @@ class MilestonePlanningElementMain extends PlanningElement {
   
   private static $_colCaptionTransposition = array('initialStartDate'=>'requestedStartDate',
       'initialEndDate'=> 'requestedEndDate',
-      'initialDuration'=>'requestedDuration'
+      'initialDuration'=>'requestedDuration',
+      'validatedEndDate'=>'validatedDueDate',
+      'plannedEndDate'=>'plannedDueDate',
+      'requestedEndDate'=>'requestedDueDate'
   );
   /** ==========================================================================
    * Constructor

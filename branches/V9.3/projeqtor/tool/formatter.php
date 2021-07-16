@@ -513,7 +513,7 @@ function getMonthName($month,$maxLength=0) {
   if ($maxLength) {
     if ($maxLength=='auto') {
       $dispMonth=substr($dispMonth,0,4);
-      if (strpos('aàeéèêiîïoôuù',substr($dispMonth,-1))!==false) {
+      if (strpos('aÃ eÃ©Ã¨ÃªiÃ®Ã¯oÃ´uÃ¹',substr($dispMonth,-1))!==false) {
         $dispMonth=substr($dispMonth,0,3);
       }
     } else {
@@ -549,7 +549,7 @@ function diffReplaceEOL($valIn) {
   $val=str_replace(array('&nbsp;','<br />','<br/>','<div>','</div>','</p>','</td>','</tr>','</table>','<tbody>','</tbody>','color:white'),
                    array(' '     ,"\n"    ,"\n"   ,"\n"   ,''      ,''    ,''     ,''     ,''        ,''       ,''        ,'color:grey'),
                    $val);
-  if (substr_count($val,'<o:p> </o:p>')>0 or substr_count($val,'<o:p></o:p>')>0) {
+  if (substr_count($val,'<o:p>Â </o:p>')>0 or substr_count($val,'<o:p></o:p>')>0) {
     $val=strip_tags($val);
     //return $valIn;
   }
@@ -708,7 +708,7 @@ function activityStreamDisplayNote ($note,$origin,$width=false){
     $resultNote.= '<div class="activityStreamNoteContainer" style="padding-left:4px;max-width:'.$maxWidth.'">';
     $strDataHTML=$note->note;
     $strDataHTML=str_replace(array('<style','/style>'),array('<nostyle','/nostyle>'),$strDataHTML);
-    $resultNote.= '<div><div style="margin-top:2px;margin-left:37px;">'.(($origin!='objectStream')?$ticketName."&nbsp;|&nbsp;":"").$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
+    $resultNote.= '<div><div style="margin-top:2px;margin-left:37px;">'.(($origin!='objectStream')?$ticketName." | ":"").$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
   	$resultNote.= '<div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($note->creationDate,$note->updateDate,"left",16).'</div>';
   	if($note->updateDate){
   	 $resultNote.= '<div style="margin-top:8px;">'.htmlFormatDateTime($note->updateDate,false).'</div></div>';    	 
@@ -867,7 +867,7 @@ function activityStreamDisplayHist ($hist,$origin,$width=false){
   $elementName = '<span '.$gotoAndStyle.'><div style="width:16px;position:absolute;top:9px;">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
     $tmpName=SqlList::getNameFromId($objectClass, $objectId);
-    if ($tmpName!=$objectId) $elementName.='&nbsp;|&nbsp;'.$tmpName;
+    if ($tmpName!=$objectId) $elementName.=' | '.$tmpName;
   } 
   if($operation=='update' and $change=='idStatus'){
     $newStatus=new Status($newVal);
@@ -875,10 +875,10 @@ function activityStreamDisplayHist ($hist,$origin,$width=false){
     $oldStatusName='<span style="font-weight:bold;">'.$oldStatus->name.'</span>';
     $newStatusName='<span style="font-weight:bold;">'.$newStatus->name.'</span>';
     $text=i18n('changeStatusStream',array($oldStatusName,$newStatusName));
-    $reftText=$elementName.'&nbsp;|&nbsp;';    
+    $reftText=$elementName.' | ';    
     $icon=formatIcon("ChangedStatus",22);
   }else if($operation=='insert'){
-    $reftText=$elementName.'&nbsp;|&nbsp;';
+    $reftText=$elementName.' | ';
     $icon=formatIcon("NewElement",22);
     if($isAssign){
       $text=i18n('assignResource').'&nbsp;'.$resourceName;
@@ -904,7 +904,7 @@ function activityStreamDisplayHist ($hist,$origin,$width=false){
       $text=i18n('createdElementStream');
     }
   }else if($operation=='delete'){
-    $reftText=$elementName.'&nbsp;|&nbsp;';
+    $reftText=$elementName.' | ';
     $text=i18n('deletedElementStream');
     $icon=formatIcon("DeleteElement",22);
     if($isLink){
@@ -996,7 +996,7 @@ function activityStreamDisplayHist ($hist,$origin,$width=false){
     $result.= '      <div style="margin-top:3px;margin-left:37px;position:relative;">'.formatDateThumb($date,null,"left",16).'</div>';
     $result.= '      <div style="margin-top:8px;margin-left:37px;">&nbsp;'.htmlFormatDateTime($date,false).'</div>';
     $result.='     <div>';
-    if (Parameter::getGlobalParameter('logLevel')>=3) {
+    if (Parameter::getGlobalParameter('debugStream')==true) {
       $result.= '      <div style="position:absolute;right:10px;top:6px;color:grey">';
       $result.=        'histo#'.$hist->id;
       $result.= '      </div>';
@@ -1052,10 +1052,10 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
           <div style="width:16px;position:absolute;top:0px;">'.formatIcon($objectClass, 16).'</div>&nbsp;'.i18n(str_replace('Simple','',$objectClass)).'&nbsp;#'.$objectId.'</span>';
   if ($origin=='activityStream') {
     $tmpName=SqlList::getNameFromId($objectClass, $objectId);
-    if ($tmpName!=$objectId) $elementName.='&nbsp;|&nbsp;'.$tmpName;
+    if ($tmpName!=$objectId) $elementName.=' | '.$tmpName;
   }
   
-  if($mail->idMailable!='')$reftText=$elementName.'&nbsp;|&nbsp;';
+  if($mail->idMailable!='')$reftText=$elementName.' | ';
   $icon=formatIcon("MailSentMsg",22);
   $text=lcfirst(i18n('mailActivityStrameSendTo',array($dest)));
   $showMail="";
@@ -1121,7 +1121,7 @@ function activityStreamDisplayMail($mail,$origin,$activityStreamShowClosed=false
     $result.= '    <div  class="activityStreamMailTitle" style="width:'.((isset($innerMailWidth))?$innerMailWidth:'90%').';margin-top:16px;display:block;margin-left:36px;margin-bottom:6px;">';
     $result.=       htmlEncode($mail->mailTitle);
     $result.='     <div>';
-    if (Parameter::getGlobalParameter('logLevel')>=3) {
+    if (Parameter::getGlobalParameter('debugStream')==true) {
       $result.= '      <div style="position:absolute;right:10px;top:6px;color:grey">';
       $result.=        'mail#'.$mail->id;
       $result.= '      </div>';
