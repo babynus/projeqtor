@@ -9928,7 +9928,7 @@ function drawPokerVote($obj){
     if($highCount >= (count($pokerMemberList)/2))$highVote=false;
   }
   if($pokerItem->id){
-    $pos = array_search($pokerItem->id, $itemList);
+    $pos = array_search("$pokerItem->id", $itemList);
     if($pos < 0)$pos=0;
     $previous = ($pos>0)?true:false;
     $lenght = count($itemList)-1;
