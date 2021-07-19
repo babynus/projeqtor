@@ -9910,6 +9910,14 @@ function drawPokerVote($obj){
   $pokerComplexity = new PokerComplexity();
   $pokerComplexityList = $pokerComplexity->getSqlElementsFromCriteria(array('idle'=>'0'), null, null, "sortOrder ASC");
   
+  $pos = array_search("$pokerItem->id", $itemList);
+  if($pos < 0)$pos=0;
+  $previous = ($pos>0)?true:false;
+  $lenght = count($itemList)-1;
+  if($lenght < 0)$lenght=0;
+  $next = ($pos<$lenght)?true:false;
+  $pos +=1;
+  
   $pokerMember = new PokerResource();
   $pokerMember = $pokerMember->getSingleSqlElementFromCriteria('PokerResource', array('idPokerSession'=>$obj->id, 'idResource'=>$user->id));
   $pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSession'=>$obj->id));
@@ -9928,13 +9936,6 @@ function drawPokerVote($obj){
     if($highCount >= (count($pokerMemberList)/2))$highVote=false;
   }
   if($pokerItem->id){
-    $pos = array_search("$pokerItem->id", $itemList);
-    if($pos < 0)$pos=0;
-    $previous = ($pos>0)?true:false;
-    $lenght = count($itemList)-1;
-    if($lenght < 0)$lenght=0;
-    $next = ($pos<$lenght)?true:false;
-    $pos +=1;
     $refObj = new $pokerItem->refType($pokerItem->refId);
     $nbVoted = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idResource'=>$user->id));
     $nbItem = count($itemList);
