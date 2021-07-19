@@ -3553,7 +3553,7 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:15%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colIdVersion').'</td>';
+  echo '<td class="assignHeader" style="width:15%">'.i18n('colIdVersion').'</td>';
   echo '<td class="assignHeader" style="width:15%" >'.i18n('colDate').'</td>';
   echo '<td class="assignHeader" style="width:15%">'.i18n('colIdStatus').'</td>';
   echo '<td class="assignHeader" style="width:'.(($print)?'55':'45').'%">'.i18n('colFile').'</td>';
@@ -4084,7 +4084,7 @@ function drawObjectLinkedByIdToObject($obj, $objLinkedByIdObject='', $refresh=fa
     echo '</td>';
   }
   echo '<td class="assignHeader" style="width:5%">'.i18n('colId').'</td>';
-  echo '<td class="assignHeader" style="width:'.(($print)?'85':'80').'%"  onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="assignHeader" style="width:'.(($print)?'85':'80').'%;cursor:pointer"  onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   // ADD BY Marc TABARY - 2017-03-16 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - idle
   echo '<td class="assignHeader" style="width:'.(($print)?'10':'10').'%">'.i18n('colIdle').'</td>';
   // ADD BY Marc TABARY - 2017-03-16 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - idle
@@ -4207,7 +4207,7 @@ function drawNotificationsLinkedToObject($obj, $unreadOnly=true, $refresh=false)
   echo '<tr>';
   $listClass='Notification';
   echo '<td class="linkHeader" style="width:10%">'.i18n('colId').'</td>';
-  echo '<td class="linkHeader" style="width:50%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:50%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="linkHeader" style="width:20%">'.i18n('colType').'</td>';
   echo '<td class="linkHeader" style="width:20%">'.i18n('colIdStatus').'</td>';
   echo '</tr>';
@@ -4279,7 +4279,7 @@ function drawNotesFromObject($obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="noteHeader" style="width:5%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
+  echo '<td class="noteHeader" style="width:5%">'.i18n('colId').'</td>';
   echo '<td colspan="6" class="noteHeader" style="width:'.(($print)?'95':'85').'%">'.i18n('colNote').'</td>';
   // echo '<td class="noteHeader" style="width:15%">' . i18n ( 'colDate' ) . '</td>';
   // echo '<td class="noteHeader" style="width:15%">' . i18n ( 'colUser' ) . '</td>';
@@ -4438,8 +4438,8 @@ function drawBillLinesFromObject($obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="noteHeader" style="width:5%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
-  echo '<td class="noteHeader" style="width:5%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colLineNumber').'</td>';
+  echo '<td class="noteHeader" style="width:5%">'.i18n('colId').'</td>';
+  echo '<td class="noteHeader" style="width:5%">'.i18n('colLineNumber').'</td>';
   echo '<td class="noteHeader" style="width:20%">'.i18n('colDescription').'</td>';
   echo '<td class="noteHeader" style="width:25%">'.i18n('colDetail').'</td>';
   echo '<td class="noteHeader" style="width:10%">'.i18n('colUnitPrice').'</td>';
@@ -4550,8 +4550,8 @@ function drawBillLinesProviderTerms($obj, $refresh=false) {
     if ($refresh) echo '<table width="100%">';
   }
   echo '<tr>';
-  echo '  <td class="noteHeader" style="width:5%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
-  echo '  <td class="noteHeader" style="width:5%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colLineNumber').'</td>';
+  echo '  <td class="noteHeader" style="width:5%">'.i18n('colId').'</td>';
+  echo '  <td class="noteHeader" style="width:5%">'.i18n('colLineNumber').'</td>';
   echo '  <td class="noteHeader" style="width:20%">'.i18n('colDescription').'</td>';
   echo '  <td class="noteHeader" style="width:20%">'.i18n('colDetail').'</td>';
   echo '  <td class="noteHeader" style="width:10%">'.i18n('colInitialAmount').'</td>';
@@ -4667,7 +4667,7 @@ function drawChecklistDefinitionLinesFromObject($obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="noteHeader" style="width:25%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="noteHeader" style="width:25%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="noteHeader" style="width:'.(($print)?'65':'60').'%">'.i18n('colChoices').'</td>';
   echo '<td class="noteHeader" style="width:5%">'.i18n('colRequiredShort').'</td>';
   echo '<td class="noteHeader" style="width:5%">'.i18n('colExclusiveShort').'</td>';
@@ -4756,7 +4756,7 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="attachmentHeader" style="width:5%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
+  echo '<td class="attachmentHeader" style="width:5%">'.i18n('colId').'</td>';
   echo '<td colspan="2" class="attachmentHeader" style="width:'.(($print)?'95':'85').'%">'.i18n('colFile').'</td>';
   echo '</tr>';
   foreach ($attachments as $attachment) {
@@ -4916,7 +4916,7 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
     echo '<td class="linkHeader" style="width:'.(($print)?'10':'5').'%">'.i18n('colId').'</td>';
   }
   
-  echo '<td class="linkHeader" style="width:'.(($classLink)?'65':'55').'%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:'.(($classLink)?'65':'55').'%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   if (! $classLink or property_exists($classLink, 'idStatus')) {
     echo '<td class="linkHeader" style="width:15%">'.i18n('colIdStatus').'</td>';
   }
@@ -5080,7 +5080,7 @@ function drawStructureFromObject($obj, $refresh=false, $way=null, $item=null) {
   }
   $listClass=($item=='Product')?'Component':(($way=='structure')?'ProductOrComponent':'Component');
   echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n($listClass).'</td>';
-  echo '<td class="linkHeader" style="width:80% onclick="onColumnHeaderClickedSort(event)"">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:80%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '</tr>';
   foreach ($list as $comp) {
     $compObj=null;
@@ -5152,7 +5152,7 @@ function drawBusinessFeatures($obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
+  echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n('colId').'</td>';
   echo '<td class="linkHeader" style="width:80%">'.i18n('BusinessFeature').'</td>';
   echo '</tr>';
   
@@ -5221,7 +5221,7 @@ function drawLocalizationItemSection($obj, $refresh = false){
     }
     $listClass='LocalizationItem';
     echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n($listClass).'</td>';
-    echo '<td class="linkHeader" style="width:45%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+    echo '<td class="linkHeader" style="width:45%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
     echo '<td class="linkHeader" style="width:20%">'.i18n('colIdStatus').'</td>';
     echo '<td class="linkHeader" style="width:15%">'.i18n('colIdLocalizationTranslator').'</td>';
     echo '</tr>';
@@ -5310,7 +5310,7 @@ function drawLanguageSection($obj, $refresh=false) {
   echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n($listClass).'</td>';
 
   if (get_class($obj)=='LocalizationTranslator'){
-      echo '<td class="linkHeader" style="width:40%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+      echo '<td class="linkHeader" style="width:40%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
       echo '<td class="linkHeader" style="width:40%">'.i18n('colLevelLanguageSkill').'</td>';
   }else{
       echo '<td class="linkHeader" style="width:80%">'.i18n('colName').'</td>';
@@ -5399,7 +5399,7 @@ function drawContextSection($obj, $refresh=false) {
   }
   $listClass='Context';
   echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n($listClass).'</td>';
-  echo '<td class="linkHeader" style="width:80%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:80%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '</tr>';
   foreach ($list as $context) { // $context is a ProductContext
     $contextObj=new Context($context->idContext);
@@ -5462,8 +5462,8 @@ function drawSubscriptionsList($obj, $refresh=false, $limitToActive=null) {
   echo '<table style="width:100%;">';
   echo '<tr>';
   echo '<td class="linkHeader" style="width:25%">'.i18n('colType').'</td>';
-  echo '<td class="linkHeader" style="width:15%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
-  echo '<td class="linkHeader" style="width:60%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:15%">'.i18n('colId').'</td>';
+  echo '<td class="linkHeader" style="width:60%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '</tr>';
   if (!$obj->id) {
     $list=array();
@@ -5516,7 +5516,7 @@ function drawTicketsList($obj, $refresh=false) {
   echo '<tr>';
   $listClass='Ticket';
   echo '<td class="linkHeader" style="width:15%">'.i18n($listClass).'</td>';
-  echo '<td class="linkHeader" style="width:60%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:60%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="linkHeader" style="width:25%">'.i18n('colIdStatus').'</td>';
   echo '</tr>';
   if (!$obj->id) {
@@ -5601,8 +5601,8 @@ function drawActivityList($obj, $refresh=false) {
   if (!$refresh) echo '<tr><td colspan="4">';
   echo '<table style="width:100%;">';
   echo '<tr>';
-  echo '<td class="linkHeader" style="width:10%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
-  echo '<td class="linkHeader" style="width:55%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:10%">'.i18n('colId').'</td>';
+  echo '<td class="linkHeader" style="width:55%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="linkHeader" style="width:15%">'.i18n('colProgress').'</td>';
   echo '<td class="linkHeader" style="width:20%">'.i18n('colIdStatus').'</td>';
   echo '</tr>';
@@ -5687,7 +5687,7 @@ function drawAssetComposition($obj,$refresh=false){
       }
     echo '</td>';
   }
-  echo '<td class="linkHeader" style="width:20%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:20%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="linkHeader" style="width:20%">'.i18n('colAssetType').'</td>';
   echo '<td class="linkHeader" style="width:20%">'.i18n('colBrand').'</td>';
   echo '<td class="linkHeader" style="width:20%">'.i18n('colModel').'</td>';
@@ -5784,13 +5784,13 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way=null, $item=n
     echo '</td>';
   }
   $listClass=($item=='ProductVersion')?'ComponentVersion':(($way=='structure')?'Version':'ComponentVersion');
-  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:5%">'.i18n($listClass).'</td>';
-  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader headerCompProdStruct" style="width:40%">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:5%">'.i18n($listClass).'</td>';
+  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader headerCompProdStruct" style="width:40%;cursor:pointer">'.i18n('colName').'</td>';
   // ADD tLAGUERIE AND dFAYOLLE ticket 366 and 367
-  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:10%">' . i18n('colIdStatus') . '</td>';
-  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:10%">' . i18n('colType') . '</td>';
-  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:10%">' . i18n('colPlannedDeliveryDate') . '</td>';
-  echo '<td onclick="onColumnHeaderClickedSort(event)" class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:15">' . i18n('colVersionDeliveryDate') . '</td>';
+  echo '<td class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:10%">' . i18n('colIdStatus') . '</td>';
+  echo '<td class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:10%">' . i18n('colType') . '</td>';
+  echo '<td class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:10%">' . i18n('colPlannedDeliveryDate') . '</td>';
+  echo '<td class="linkHeader '.(($item=='ProductVersion')?'':'headerCompProdStruct').'" style="width:15">' . i18n('colVersionDeliveryDate') . '</td>';
   // END tLAGUERIE AND dFAYOLLE ticket 366 and 367
   echo '</tr>';
   echo '</thead>';
@@ -5883,7 +5883,7 @@ function drawVersionStructureFromObjectAsset($obj, $refresh=false, $way=null, $i
   }
   $listClass=($item=='ProductVersion')?'ComponentVersion':(($way=='structure')?'Version':'ComponentVersion');
   echo '<td class="linkHeader" style="width:5%">'.i18n($listClass).'</td>';
-  echo '<td class="linkHeader" style="width:40%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:40%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="linkHeader" style="width:10%">' . i18n('colIdStatus') . '</td>';
   echo '<td class="linkHeader" style="width:10%">' . i18n('colType') . '</td>';
   echo '</tr>';
@@ -6067,7 +6067,7 @@ function drawVersionCompatibility($obj, $refresh=false) {
   }
   $listClass='ProductVersion';
   echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n($listClass).'</td>';
-  echo '<td class="linkHeader" style="width:80%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:80%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '</tr>';
   
   foreach ($list as $vc) {
@@ -6120,7 +6120,7 @@ function drawDeliverysFromObject($obj) {
   
   echo '<tr>';
   echo '<td class="linkHeader" style="width:'.(($print)?'10':'5').'%">'.i18n('Delivery').'</td>';
-  echo '<td class="linkHeader" style="width:40%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:40%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="linkHeader" style="width:50%">'.i18n('colIdDeliveryStatus').'</td>';
   echo '</tr>';
   
@@ -6191,7 +6191,7 @@ function drawApproverFromObject($list, $obj, $refresh=false) {
     echo '</td>';
   }
   echo '<td class="dependencyHeader" style="width:'.(($print)?'10':'5').'%">'.i18n('colId').'</td>';
-  echo '<td class="dependencyHeader" style="width:40%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="dependencyHeader" style="width:40%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="dependencyHeader" style="width:50%">'.i18n('colIdStatus').'</td>';
   echo '</tr>';
   if ($obj and get_class($obj)=='Document') {
@@ -6324,7 +6324,7 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
     echo '</td>';
   }
   echo '<td class="dependencyHeader" style="width:'.(($print)?'30':'20').'%">'.i18n('colElement').'</td>';
-  echo '<td class="dependencyHeader" style="width:40%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="dependencyHeader" style="width:40%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="dependencyHeader" style="width:15%">'.i18n('colIdStatus').'</td>';
   //gautier #3562
   if($depType=="Predecessor"){
@@ -6559,7 +6559,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:'.(($print)?'40':'30').'%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colIdResource').'</td>';
+  echo '<td class="assignHeader" style="width:'.(($print)?'40':'30').'%">'.i18n('colIdResource').'</td>';
   echo '<td class="assignHeader" style="width:15%" >'.i18n('colRateOrEtp').'</td>';
   if ($workVisible) {
     echo '<td class="assignHeader" style="width:15%">'.i18n('colAssigned').' ('.Work::displayShortWorkUnit().')'.'</td>';
@@ -6800,9 +6800,9 @@ function drawExpenseDetailFromObject($list, $obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:'.(($print)?'13':'8').'%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colDate').'</td>';
+  echo '<td class="assignHeader" style="width:'.(($print)?'13':'8').'%">'.i18n('colDate').'</td>';
   echo '<td class="assignHeader" style="width:10%">'.i18n('colReference').'</td>';
-  echo '<td class="assignHeader" style="width:30%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="assignHeader" style="width:30%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="assignHeader" style="width:12%" >'.i18n('colType').'</td>';
   echo '<td class="assignHeader" style="width:25%">'.i18n('colDetail').'</td>';
   // if ($workVisible) {
@@ -6886,8 +6886,8 @@ function drawResourceCostFromObject($list, $obj, $refresh=false) {
   }
   echo '<td class="assignHeader" style="width:'.(($print)?'40':'30').'%">'.i18n('colIdRole').'</td>';
   echo '<td class="assignHeader" style="width:20%">'.i18n('colCost').'</td>';
-  echo '<td class="assignHeader" style="width:20%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colStartDate').'</td>';
-  echo '<td class="assignHeader" style="width:20%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colEndDate').'</td>';
+  echo '<td class="assignHeader" style="width:20%">'.i18n('colStartDate').'</td>';
+  echo '<td class="assignHeader" style="width:20%">'.i18n('colEndDate').'</td>';
   
   echo '</tr>';
   $fmt=new NumberFormatter52($browserLocale, NumberFormatter52::DECIMAL);
@@ -6940,12 +6940,12 @@ function drawVersionProjectsFromObject($list, $obj, $refresh=false) {
     echo '</td>';
   }
   if ($idProj) {
-    echo '<td class="assignHeader" style="width:'.(($print)?'60':'50').'%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colIdVersion').'</td>';
+    echo '<td class="assignHeader" style="width:'.(($print)?'60':'50').'%">'.i18n('colIdVersion').'</td>';
   } else {
-    echo '<td class="assignHeader" style="width:'.(($print)?'60':'50').'%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colIdProject').'</td>';
+    echo '<td class="assignHeader" style="width:'.(($print)?'60':'50').'%">'.i18n('colIdProject').'</td>';
   }
-  echo '<td class="assignHeader" style="width:15%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colStartDate').'</td>';
-  echo '<td class="assignHeader" style="width:15%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colEndDate').'</td>';
+  echo '<td class="assignHeader" style="width:15%">'.i18n('colStartDate').'</td>';
+  echo '<td class="assignHeader" style="width:15%">'.i18n('colEndDate').'</td>';
   echo '<td class="assignHeader" style="width:10%">'.i18n('colIdle').'</td>';
   
   echo '</tr>';
@@ -7053,12 +7053,12 @@ function drawProductProjectsFromObject($list, $obj, $refresh=false) {
     echo '</td>';
   }
   if ($idProj) {
-    echo '<td class="assignHeader" style="width:'.(($print)?'60':'50').'%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colIdProduct').'</td>';
+    echo '<td class="assignHeader" style="width:'.(($print)?'60':'50').'%">'.i18n('colIdProduct').'</td>';
   } else {
-    echo '<td class="assignHeader" style="width:'.(($print)?'60':'50').'%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colIdProject').'</td>';
+    echo '<td class="assignHeader" style="width:'.(($print)?'60':'50').'%">'.i18n('colIdProject').'</td>';
   }
-  echo '<td class="assignHeader" style="width:15%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colStartDate').'</td>';
-  echo '<td class="assignHeader" style="width:15%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colEndDate').'</td>';
+  echo '<td class="assignHeader" style="width:15%">'.i18n('colStartDate').'</td>';
+  echo '<td class="assignHeader" style="width:15%">'.i18n('colEndDate').'</td>';
   echo '<td class="assignHeader" style="width:10%">'.i18n('colIdle').'</td>';
   
   echo '</tr>';
@@ -7116,7 +7116,7 @@ function drawAssetFromModel($list, $obj) {
   echo '<table style="width:100%">';
   echo '<tr>';
   echo '<td class="assignHeader" style="width:50%">'.i18n('dashboardTicketMainTitleType').'</td>';
-  echo '<td class="assignHeader" style="width:50%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colAsset').'</td>';
+  echo '<td class="assignHeader" style="width:50%">'.i18n('colAsset').'</td>';
   //order by alphabetic
   asort($list);
   $tabType = array();
@@ -7171,7 +7171,7 @@ function drawAssetFromUser($list, $obj) {
   echo '<table style="width:100%">';
   echo '<tr>';
   echo '<td class="assignHeader" style="width:25%">'.i18n('dashboardTicketMainTitleType').'</td>';
-  echo '<td class="assignHeader" style="width:25%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colAsset').'</td>';
+  echo '<td class="assignHeader" style="width:25%">'.i18n('colAsset').'</td>';
   echo '<td class="assignHeader" style="width:25%">'.i18n('colBrand').'</td>';
   echo '<td class="assignHeader" style="width:25%">'.i18n('colModel').'</td>';
   echo "</tr>";
@@ -7235,8 +7235,8 @@ function drawInputMailboxHistory($list, $obj) {
   }
   echo '<table style="width:99.5%">';
   echo '<tr>';
-  echo '<td class="assignHeader" style="width:40%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colEmail').'</td>';
-  echo '<td class="assignHeader" style="width:20%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colDate').'</td>';
+  echo '<td class="assignHeader" style="width:40%">'.i18n('colEmail').'</td>';
+  echo '<td class="assignHeader" style="width:20%">'.i18n('colDate').'</td>';
   echo '<td class="assignHeader" style="width:40%">'.i18n('colResult').'</td>';
   echo '</tr>';
   foreach ($list as $id=>$val){
@@ -7271,7 +7271,7 @@ function drawModelFromBrand($list, $obj) {
   echo '<table style="width:100%">';
   echo '<tr>';
   echo '<td class="assignHeader" style="width:50%">'.i18n('dashboardTicketMainTitleType').'</td>';
-  echo '<td class="assignHeader" style="width:50%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colModel').'</td>';
+  echo '<td class="assignHeader" style="width:50%">'.i18n('colModel').'</td>';
   echo '</tr>';
   
   //order by alphabetic
@@ -7361,10 +7361,10 @@ function drawAffectationsResourceTeamFromObject($list, $obj, $type, $refresh=fal
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:8%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
-  echo '<td class="assignHeader" style="width:39%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
-  echo '<td class="assignHeader" style="width:13%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colStartDate').'</td>';
-  echo '<td class="assignHeader" style="width:13%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colEndDate').'</td>';
+  echo '<td class="assignHeader" style="width:8%">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" style="width:39%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="assignHeader" style="width:13%">'.i18n('colStartDate').'</td>';
+  echo '<td class="assignHeader" style="width:13%">'.i18n('colEndDate').'</td>';
   echo '<td class="assignHeader" style="width:12%">'.i18n('colRate').'</td>';
   
   echo '</tr>';
@@ -7477,7 +7477,7 @@ function drawActivityWorkUnit($listActWU,$obj,$refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:12%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colWorkUnits').'</td>';
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colWorkUnits').'</td>';
   echo '<td class="assignHeader" style="width:12%">'.i18n('colComplexity').'</td>';
   echo '<td class="assignHeader" style="width:12%">'.i18n('colQuantity').'</td>';
   if($paramEnableWorkUnit=='true'){
@@ -7654,9 +7654,9 @@ function drawResourceCapacity($list, $obj, $type, $refresh=false) {
 		}
 		echo '</td>';
 	}
-	echo '<td class="assignHeader" style="width:12%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
+	echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
 	echo '<td class="assignHeader" style="width:35%">'.i18n('colCapacity').'</td>';
-	echo '<td class="assignHeader" style="width:19%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colStartDate').'</td>';
+	echo '<td class="assignHeader" style="width:19%">'.i18n('colStartDate').'</td>';
 	echo '<td class="assignHeader" style="width:19%">'.i18n('colEndDate').'</td>';
 	echo '</tr>';
 
@@ -7734,9 +7734,9 @@ function drawResourceSurbooking($list, $obj, $type, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:12%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
   echo '<td class="assignHeader" style="width:35%">'.i18n('colSurbooking').'</td>';
-  echo '<td class="assignHeader" style="width:19%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colStartDate').'</td>';
+  echo '<td class="assignHeader" style="width:19%">'.i18n('colStartDate').'</td>';
   echo '<td class="assignHeader" style="width:19%">'.i18n('colEndDate').'</td>';
   echo '</tr>';
 
@@ -7814,8 +7814,8 @@ function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
   	}
   	echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:12%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
-  echo '<td class="assignHeader" style="width:73%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" style="width:73%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '</tr>';
   
   foreach ($list as $resInc) {
@@ -7883,8 +7883,8 @@ function drawResourceSupport($list, $obj, $type, $refresh=false) {
   	}
   	echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:12%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
-  echo '<td class="assignHeader" style="width:54%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" style="width:54%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="assignHeader" style="width:19%">'.i18n('colRate').'</td>';
   echo '</tr>';
   
@@ -7951,8 +7951,8 @@ function drawProjectSituation($type, $obj){
 	echo '<tr>';
 	echo '<td class="noteHeader" style="width:30%">' . i18n('colElement') . '</td>';
 	echo '<td class="noteHeader" style="width:5%">' . i18n('colIdStatus') . '</td>';
-	echo '<td class="noteHeader" style="width:15%" onclick="onColumnHeaderClickedSort(event)">' . i18n('colDate') . '</td>';
-	echo '<td class="noteHeader" style="width:20%" onclick="onColumnHeaderClickedSort(event)">' . i18n('colSituation') . '</td>';
+	echo '<td class="noteHeader" style="width:15%">' . i18n('colDate') . '</td>';
+	echo '<td class="noteHeader" style="width:20%">' . i18n('colSituation') . '</td>';
 	echo '<td class="noteHeader" style="width:20%">' . i18n('colComment') . '</td>';
 	echo '<td class="noteHeader" style="width:10%">' . i18n('colResponsible') . '</td>';
 	echo '</tr>';
@@ -8035,8 +8035,8 @@ function drawProjectSituation($type, $obj){
 function drawClientElementList($item, $object){
   echo '<table width="99.9%">';
   echo '<tr>';
-  echo '<td class="noteHeader" style="width:30%" onclick="onColumnHeaderClickedSort(event)">' . i18n('colName') . '</td>';
-  echo '<td class="noteHeader" style="width:15%" onclick="onColumnHeaderClickedSort(event)">' . i18n('colDate') . '</td>';
+  echo '<td class="noteHeader" style="width:30%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">' . i18n('colName') . '</td>';
+  echo '<td class="noteHeader" style="width:15%">' . i18n('colDate') . '</td>';
   echo '<td class="noteHeader" style="width:20%">' . i18n('colUntaxedAmount') . '</td>';
   echo '<td class="noteHeader" style="width:20%">' . i18n('colFullAmount') . '</td>';
   echo '<td class="noteHeader" style="width:15%">' . i18n('colIdStatus') . '</td>';
@@ -8299,7 +8299,7 @@ function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
     }
   }
   echo '</td>';
-  echo '<td class="assignHeader" style="width:10%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" style="width:10%">'.i18n('colId').'</td>';
   echo '<td class="assignHeader" style="width:15%">'.i18n('colStatusDateTime').'</td>';
   echo '<td class="assignHeader" style="width:20%">'.i18n('colValidatedAmount2').'</td>';
   echo '<td class="assignHeader" style="width:45%">'.i18n('colIdProviderBill').'</td>';
@@ -8426,10 +8426,10 @@ function drawAffectationsResourceTeamResourceFromObject($list, $obj, $type, $ref
     $idRess=null;
   }
   
-  echo '<td class="assignHeader" style="width:8%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
-  echo '<td class="assignHeader" style="width:39%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
-  echo '<td class="assignHeader" style="width:13%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colStartDate').'</td>';
-  echo '<td class="assignHeader" style="width:13%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colEndDate').'</td>';
+  echo '<td class="assignHeader" style="width:8%">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" style="width:39%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="assignHeader" style="width:13%">'.i18n('colStartDate').'</td>';
+  echo '<td class="assignHeader" style="width:13%">'.i18n('colEndDate').'</td>';
   echo '<td class="assignHeader" style="width:12%">'.i18n('colRate').'</td>';
   
   echo '</tr>';
@@ -8530,11 +8530,11 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:8%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" style="width:8%">'.i18n('colId').'</td>';
   echo '<td class="assignHeader" style="width:'.(($print)?'35':'20').'%">'.i18n('colId'.$type).'</td>';
-  echo '<td class="assignHeader" style="width:18%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colIdProfile').'</td>';
-  echo '<td class="assignHeader" style="width:13%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colStartDate').'</td>';
-  echo '<td class="assignHeader" style="width:13%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colEndDate').'</td>';
+  echo '<td class="assignHeader" style="width:18%">'.i18n('colIdProfile').'</td>';
+  echo '<td class="assignHeader" style="width:13%">'.i18n('colStartDate').'</td>';
+  echo '<td class="assignHeader" style="width:13%">'.i18n('colEndDate').'</td>';
   if ($type=='User' or $type=='Contact' or get_class($obj)=='User' or get_class($obj)=='Contact') echo '<td class="" style="width:12%"></td>';
   else echo '<td class="assignHeader" style="width:12%">'.i18n('colRate').'</td>';
   // echo '<td class="assignHeader" style="width:10%">' . i18n('colIdle'). '</td>';
@@ -8746,7 +8746,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" colspan="4" style="width:'.($nameWidth+20).'%" onclick="onColumnHeaderClickedSort(event)">'.i18n('col'.$otherClass).'</td>';
+  echo '<td class="assignHeader" colspan="4" style="width:'.($nameWidth+20).'%">'.i18n('col'.$otherClass).'</td>';
   // gautier #1716
   echo '<td class="assignHeader" colspan="1" style="width:10%">'.i18n('colResult').'</td>';
   echo '<td class="assignHeader" colspan="1" style="width:10%">'.i18n('colComment').'</td>';
@@ -8918,8 +8918,8 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" colspan="1" style="width:10%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colId').'</td>';
-  echo '<td class="assignHeader" colspan="1" style="width:15%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colDate').'</td>';
+  echo '<td class="assignHeader" colspan="1" style="width:10%">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" colspan="1" style="width:15%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colDate').'</td>';
   echo '<td class="assignHeader" colspan="1" style="width:20%">'.i18n('colAmount').'</td>';
   echo '<td class="assignHeader" colspan="1" style="width:45%">'.i18n('colIdProviderOrder').'</td>';
   echo '</tr>';
@@ -9324,9 +9324,9 @@ function drawExpenseBudgetDetail($obj) {
 	echo '<tr><td colspan="2" style="width:100%;">';
 	echo '<table style="width:100%;">';
 	echo '  <tr>';
-	echo '    <td class="assignHeader" colspan="1" style="width:25%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+	echo '    <td class="assignHeader" colspan="1" style="width:25%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
 	echo '    <td class="assignHeader" colspan="1" style="width:10%"></td>';
-	echo '    <td class="assignHeader" colspan="1" style="width:10%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colDate').'</td>';
+	echo '    <td class="assignHeader" colspan="1" style="width:10%">'.i18n('colDate').'</td>';
 	echo '    <td class="assignHeader" colspan="1" style="width:20%">'.i18n('colUntaxedAmount').'</td>';
 	echo '    <td class="assignHeader" colspan="1" style="width:15%">'.i18n('colTaxAmount').'</td>';
 	echo '    <td class="assignHeader" colspan="1" style="width:20%">'.i18n('colFullAmount').'</td>';
@@ -9798,7 +9798,7 @@ function drawJobDefinitionFromObject($obj, $refresh=false) {
     echo '</th>';
   }
   echo '<th class="noteHeader" style="width: 20%">'.i18n('colSortOrder').'</th>';
-  echo '<th class="noteHeader" style="width:'.(($print)?'60':'55').'%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</th>';
+  echo '<th class="noteHeader" style="width:'.(($print)?'60':'55').'%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</th>';
   echo '<th class="noteHeader" style="width: 20%">'.i18n('colDaysBeforeWarning').'</th>';
   echo '</tr>';
   
@@ -10107,7 +10107,7 @@ function drawPokerItem($obj){
   	}
   	echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:30%" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
+  echo '<td class="assignHeader" style="width:30%;cursor:pointer" onclick="onColumnHeaderClickedSort(event)">'.i18n('colName').'</td>';
   echo '<td class="assignHeader" style="width:30%">'.i18n('colReference').'</td>';
   echo '<td class="assignHeader" style="width:30%">'.i18n('colValue').'</td>';
   $globalOpenItem = '';
