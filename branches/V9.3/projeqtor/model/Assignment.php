@@ -156,6 +156,12 @@ class Assignment extends SqlElement {
       $this->plannedEndDate=$meeting->meetingDate;
     }
     
+    if ($this->refType=='PokerSession' and ! $this->plannedStartDate) {
+    	$pokerSession=new $this->refType($this->refId);
+    	$this->plannedStartDate=$pokerSession->pokerSessionDate;
+    	$this->plannedEndDate=$pokerSession->pokerSessionDate;
+    }
+    
     $r=new ResourceAll($this->idResource);
     $this->isResourceTeam=$r->isResourceTeam; // Store isResourceTeam from Resource for convenient use
     if (!$this->id and !$this->supportedAssignment and !$this->manual) { // on creation
