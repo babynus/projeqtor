@@ -290,10 +290,10 @@ class PokerSessionMain extends SqlElement {
     				$ass->refType = 'PokerSession';
     				$ass->refId = $this->id;
     				$ass->idResource = $resource;
-    				$ass->assignedWork = 0;
+    				$ass->assignedWork = Work::displayWork(workTimeDiffDateTime('2000-01-01T'.$this->pokerSessionStartTime,'2000-01-01T'.$this->pokerSessionEndTime));
     				$ass->realWork = 0;
-    				$ass->leftWork = 0;
-    				$ass->plannedWork = 0;
+    				$ass->leftWork = Work::displayWork(workTimeDiffDateTime('2000-01-01T'.$this->pokerSessionStartTime,'2000-01-01T'.$this->pokerSessionEndTime));
+    				$ass->plannedWork = Work::displayWork(workTimeDiffDateTime('2000-01-01T'.$this->pokerSessionStartTime,'2000-01-01T'.$this->pokerSessionEndTime));
     				$ass->notPlannedWork = 0;
     				$ass->rate = '100';
     				if ($this->PokerSessionPlanningElement->validatedWork and $this->PokerSessionPlanningElement->validatedWork>$this->PokerSessionPlanningElement->assignedWork) {
