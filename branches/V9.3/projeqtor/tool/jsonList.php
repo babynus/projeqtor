@@ -168,7 +168,7 @@ if ($type == 'empty') {
   $dataType = RequestHandler::getValue ( 'dataType' );
   $critField = RequestHandler::getValue ( 'critField' );
   $critValue = RequestHandler::getValue ( 'critValue' );
-  $dataType=str_replace(array('ActivityPlanningElement_','ProjectPlanningElement_','MilestonePlanningElement_','MeetingPlanningElement_','TestSessionPlanningElement_'),'',$dataType);
+  $dataType=str_replace(array('ActivityPlanningElement_','ProjectPlanningElement_','MilestonePlanningElement_','MeetingPlanningElement_','TestSessionPlanningElement_', 'PkerSessionPlanningElement_'),'',$dataType);
   if(strpos($critValue, '_') != null){
   	$critValue = explode('_', $critValue);
   }
