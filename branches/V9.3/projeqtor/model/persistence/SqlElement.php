@@ -1191,7 +1191,7 @@ abstract class SqlElement {
           $control = $controlWe;
         }
       }
-      if (($control == 'OK' or strpos ( $control, 'id="confirmControl" value="save"' ) > 0) and property_exists ( $class, 'OrganizationBudgetElementCurrent' ) and Module::isModuleActive('moduleBugetFunctionOfOrga')){
+      if (($control == 'OK' or strpos ( $control, 'id="confirmControl" value="save"' ) > 0) and property_exists ( $class, 'OrganizationBudgetElementCurrent' ) and Module::isModuleActive('moduleBudgetFunctionOfOrga')){
         //Parameter::getGlobalParameter ( 'useOrganizationBudgetElement' ) === "YES"
         // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
         $be = 'OrganizationBudgetElementCurrent';

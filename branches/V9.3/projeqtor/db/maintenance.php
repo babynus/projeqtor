@@ -1216,7 +1216,7 @@ if ($version=='V9.3.0') {
    $lstMod[]='moduleTodoList';
   }
   if(Parameter::getGlobalParameter('useOrganizationBudgetElement')=="YES"){
-    $lstMod[]='moduleBugetFunctionOfOrga';
+    $lstMod[]='moduleBudgetFunctionOfOrga';
   }
   if(Parameter::getGlobalParameter('manageMilestoneOnItems')=="YES"){
     $lstMod[]='moduleTargetMilestone';

@@ -184,7 +184,7 @@ class OrganizationMain extends SqlElement {
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
     $this->_attributesSet=true;
     $id=$this->id;
-    if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {
+    if(!Module::isModuleActive('moduleBudgetFunctionOfOrga')) {
       self::$_fieldsAttributes["_sec_ValueAlertOverWarningOverOkUnder"] = "hidden,noList,notInFilter,noPrint";
       self::$_fieldsAttributes["alertOverPct"] = "hidden,noList,notInFilter,noPrint";
       self::$_fieldsAttributes["warningOverPct"] = "hidden,noList,notInFilter,noPrint";
@@ -545,7 +545,7 @@ class OrganizationMain extends SqlElement {
     }
     
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if(Module::isModuleActive('moduleBugetFunctionOfOrga')) {
+    if(Module::isModuleActive('moduleBudgetFunctionOfOrga')) {
     
     if ($this->OrganizationBudgetElementCurrent->id or   # The Budget Element exist for this organization et selected period
         $this->id==null or trim($this->id)==''           # The organization is to create
@@ -604,7 +604,7 @@ if($old->id==null or trim($old->id)=='') {
     
     if ($this->idOrganization != $old->idOrganization) {
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-        if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {
+        if(!Module::isModuleActive('moduleBudgetFunctionOfOrga')) {
             $this->calculatePlanningElement();
         } else {
         // Change the current BudgetElement
@@ -627,7 +627,7 @@ if($old->id==null or trim($old->id)=='') {
         }    
     } else {
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-      if(Module::isModuleActive('moduleBugetFunctionOfOrga')) {
+      if(Module::isModuleActive('moduleBudgetFunctionOfOrga')) {
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
         if($this->idle!=$old->idle or $this->name!=$old->name) {            
             $this->saveOrganizationBudgetElement( # Close BudgetElement only on change idle 0 => 1
@@ -730,7 +730,7 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
    */
   public function updateBudgetElementSynthesis($bE=null) {
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {return;}
+    if(!Module::isModuleActive('moduleBudgetFunctionOfOrga')) {return;}
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
     // PBE - Improve performance and reliability of the synthesis
     if($bE==null) {return;}
@@ -748,7 +748,7 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
    * @param boolean $updateName : If true, Update the BudgetElement's name
    */
   public function updateSynthesis($budget=null) {
-    if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {return;}
+    if(!Module::isModuleActive('moduleBudgetFunctionOfOrga')) {return;}
     if (isset(BudgetElement::$_noDispatchArrayBudget[$this->id])) {return;}
     BudgetElement::$_noDispatchArrayBudget[$this->id]=$this->id; // Will avoid double update for same change
     // Retrieve organization's projects
@@ -815,7 +815,7 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
   
 //   public function updateSynthesisOld($updateIdle=true) {
 // // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-//     if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {return;}
+//     if(!Module::isModuleActive('moduleBudgetFunctionOfOrga')) {return;}
 // // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
       
 //     // Retrieve organization's projects (idle=0 and 1)
@@ -1018,7 +1018,7 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
    */
   public function updateSynthesisWithoutPeriod() {      
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {return;}
+    if(!Module::isModuleActive('moduleBudgetFunctionOfOrga')) {return;}
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
     // Update current budgetElement
     $bec=$this->OrganizationBudgetElementCurrent;
@@ -1028,7 +1028,7 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
 
 //   public function updateSynthesisWithOutPeriodAndWithOutHierarchic() {
 // // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-//     if(!Module::isModuleActive('moduleBugetFunctionOfOrga')) {return;}
+//     if(!Module::isModuleActive('moduleBudgetFunctionOfOrga')) {return;}
 // // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
       
 //     // Update current budgetElement
@@ -1607,7 +1607,7 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
       //if (($currentDetailObj and get_class($currentDetailObj)==get_class($this) and $currentDetailObj->id==$this->id)
       //or !$this->id) { 
       //}
-      if(Module::isModuleActive('moduleBugetFunctionOfOrga')) {return;}
+      if(Module::isModuleActive('moduleBudgetFunctionOfOrga')) {return;}
       $this->setVisibility();
       $wcVisibility = $this->_workVisibility.$this->_costVisibility;
       switch ($wcVisibility) {
