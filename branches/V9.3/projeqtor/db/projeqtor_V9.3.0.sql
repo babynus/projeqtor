@@ -54,7 +54,7 @@ INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active
 (23,'moduleTargetMilestone','112',1,0,0),
 (24,'moduleTechnicalProgress','114',1,0,0),  
 (25,'moduleFollowUp','300',null,0,(SELECT `active` from `${prefix}module` as m WHERE m.name='moduleImputation' )),
-(26,'moduleBugetFunctionOfOrga','1110',14,0,0), 
+(26,'moduleBudgetFunctionOfOrga','1110',14,0,0), 
 (27,'moduleTodoList','320',25,0,0), 
 (28,'moduleChecklist','330',25,0,1);
 

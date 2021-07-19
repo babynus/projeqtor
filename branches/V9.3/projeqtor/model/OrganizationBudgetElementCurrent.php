@@ -55,7 +55,7 @@ class OrganizationBudgetElementCurrent extends OrganizationBudgetElement {
    */
   public function save() {
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if (!Module::isModuleActive('moduleBugetFunctionOfOrga')) {// Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES"
+    if (!Module::isModuleActive('moduleBudgetFunctionOfOrga')) {// Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES"
       $returnValue= '<input type="hidden" id="lastSaveId" value="" />';
       $returnValue .= '<input type="hidden" id="lastOperation" value="update" />';
       $returnValue .= '<input type="hidden" id="lastOperationStatus" value="OK" />';
@@ -106,7 +106,7 @@ class OrganizationBudgetElementCurrent extends OrganizationBudgetElement {
   }
   
   public function delete() {
-    if (!Module::isModuleActive('moduleBugetFunctionOfOrga')) {// Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES"
+    if (!Module::isModuleActive('moduleBudgetFunctionOfOrga')) {// Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES"
       $returnValue= '<input type="hidden" id="lastSaveId" value="" />';
       $returnValue .= '<input type="hidden" id="lastOperation" value="update" />';
       $returnValue .= '<input type="hidden" id="lastOperationStatus" value="OK" />';
