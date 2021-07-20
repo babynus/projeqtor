@@ -51,7 +51,6 @@ class PokerComplexity extends SqlElement {
   
   private static $_fieldsAttributes=array(
       "name"=>"required",
-      "value"=>"required",
       "idle"=>"nobr"
   );
    /** ==========================================================================

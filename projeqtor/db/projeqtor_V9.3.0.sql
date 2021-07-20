@@ -11,6 +11,7 @@ ALTER TABLE `${prefix}pokersession` ADD `idUser` int(12) unsigned DEFAULT NULL C
 ALTER TABLE `${prefix}pokersession` CHANGE `handledDate` `handledDate` DATE DEFAULT NULL;
 ALTER TABLE `${prefix}pokersession` CHANGE `doneDate` `doneDate` DATE DEFAULT NULL;
 ALTER TABLE `${prefix}pokersession` CHANGE `idleDate` `idleDate` DATE DEFAULT NULL;
+ALTER TABLE `${prefix}pokersession` CHANGE `idResource` `idResource` int(12) DEFAULT NULL COMMENT '12';
 
 UPDATE `${prefix}menu` SET sortOrder='901' WHERE name='menuType';
 UPDATE `${prefix}menu` SET sortOrder='156' WHERE name='menuPokerSessionVoting';

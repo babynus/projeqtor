@@ -116,6 +116,12 @@ class PokerSessionMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+    if(!$this->id){
+    	$user = getSessionUser();
+    	if($user->isResource){
+    		$this->idResource = $user->id;
+    	}
+    }
   }
 
    /** ==========================================================================
