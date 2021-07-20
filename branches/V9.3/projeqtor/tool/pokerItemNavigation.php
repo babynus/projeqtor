@@ -73,12 +73,16 @@ $lowVote = '';
 $highVote = '';
 if(count($pokerVoteList) > 0){
   sort($pokerVoteList);
-  $lowVote = $pokerVoteList[0];
-  $lowCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$lowVote));
-  if($lowCount >= (count($pokerMemberList)/2))$lowVote=false;
-  $highVote = $pokerVoteList[count($pokerVoteList)-1];
-  $highCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$highVote));
-  if($highCount >= (count($pokerMemberList)/2))$highVote=false;
+  if(isset($pokerVoteList[0])){
+    $lowVote = $pokerVoteList[0];
+    $lowCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$lowVote));
+    if($lowCount >= (count($pokerMemberList)/2))$lowVote=false;
+  }
+  if(isset($pokerVoteList[count($pokerVoteList)-1])){
+    $highVote = $pokerVoteList[count($pokerVoteList)-1];
+    $highCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$highVote));
+    if($highCount >= (count($pokerMemberList)/2))$highVote=false;
+  }
 }
 $refObj = new $pokerItem->refType($pokerItem->refId);
 $nbVoted = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idResource'=>$user->id));
