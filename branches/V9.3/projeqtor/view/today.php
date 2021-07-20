@@ -509,7 +509,8 @@ function showDocuments() {
   $whereTicket=$where;
   $whereMeeting=$whereTicket;
   $whereDecision="id in ".transformListIntoInClause($arrayDec);
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_DocumentDiv', 'documentsApproval');
+  $wherePokerSession = $where;
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, $wherePokerSession,'Today_DocumentDiv', 'documentsApproval');
 }
 
 function countFrom($list, $idProj, $type, $scope) {
@@ -577,18 +578,20 @@ function displayProgress($value, $allValue, $todoValue, $doneValue, $showTitle=t
 }
 
 function showAssignedTasks() {
-  if (!securityCheckDisplayMenu(null, 'Activity') and !!securityCheckDisplayMenu(null, 'Meeting') ) return;
+  if (!securityCheckDisplayMenu(null, 'Activity') and !securityCheckDisplayMenu(null, 'Meeting') ) return;
   $user=getSessionUser();
   $ass=new Assignment();
   $act=new Activity();
   $meet=new Meeting();
+  $poker = new PokerSession();
   $where="1=0";
   $whereTicket=$where;
   $whereDocument=$where;
   $whereActivity=" (exists (select 'x' from ".$ass->getDatabaseTableName()." x "."where x.refType='Activity' and x.refId=".$act->getDatabaseTableName().".id and x.idResource='".Sql::fmtId($user->id)."')".") and idle=0 and done=0";
   $whereMeeting=str_replace(array('Activity', $act->getDatabaseTableName()), array('Meeting', $meet->getDatabaseTableName()), $whereActivity);
   $whereDecision=$where;
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_WorkDiv', 'todayAssignedTasks');
+  $wherePokerSession = " (exists (select 'x' from ".$ass->getDatabaseTableName()." x "."where x.refType='PokerSession' and x.refId=".$poker->getDatabaseTableName().".id and x.idResource='".Sql::fmtId($user->id)."')".") and idle=0 and done=0";
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision,$wherePokerSession, 'Today_WorkDiv', 'todayAssignedTasks');
 }
 
 function showAccountableTasks() {
@@ -600,7 +603,8 @@ function showAccountableTasks() {
   $whereMeeting=$whereActivity;
   $whereDocument=$whereMeeting;
   $whereDecision=$where;
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_AccDiv', 'todayAccountableTasks');
+  $wherePokerSession=$where;
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, $wherePokerSession,'Today_AccDiv', 'todayAccountableTasks');
 }
 
 function showResponsibleTasks() {
@@ -614,7 +618,8 @@ function showResponsibleTasks() {
   $whereMeeting=$whereActivity;
   $whereDocument="1=0";
   $whereDecision=$whereDocument;
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_RespDiv', 'todayResponsibleTasks');
+  $wherePokerSession=$where;
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, $wherePokerSession,'Today_RespDiv', 'todayResponsibleTasks');
 }
 
 function showIssuerRequestorTasks() {
@@ -625,7 +630,8 @@ function showIssuerRequestorTasks() {
   $whereMeeting=$where;
   $whereDocument="1=0";
   $whereDecision=$whereDocument;
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_FollowDiv', 'todayIssuerRequestorTasks');
+  $wherePokerSession=$where;
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, $wherePokerSession,'Today_FollowDiv', 'todayIssuerRequestorTasks');
 }
 
 function showProjectsTasks() {
@@ -635,10 +641,11 @@ function showProjectsTasks() {
   $whereMeeting=$where;
   $whereDocument="1=0";
   $whereDecision=$whereDocument;
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_ProjectTasks', 'todayProjectsTasks');
+  $wherePokerSession=$where;
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, $wherePokerSession,'Today_ProjectTasks', 'todayProjectsTasks');
 }
 
-function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument, $whereDecision, $divName, $title) {
+function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument, $whereDecision, $wherePokerSession, $divName, $title) {
   // Assign idRess idUser idCont Items
   // $where : NO YES YES NO Milestone, Risk, Action, Issue, Opportunity, Decision, Question, Quote, Order, Bill
   // $whereActivity : YES YES YES YES Activity
@@ -699,6 +706,9 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
   $meeting=new Meeting();
   $listMeeting=$meeting->getSqlElementsFromCriteria(null, null, $whereMeeting, $order, null, true, $cptMax+1);
   $list=array_merge($list, $listMeeting);
+  $poker=new PokerSessionVoting();
+  $listPoker=$poker->getSqlElementsFromCriteria(null, null, $wherePokerSession, $order, null, true, $cptMax+1);
+  $list=array_merge($list, $listPoker);
   $session=new TestSession();
   $listSession=$session->getSqlElementsFromCriteria(null, null, str_replace(array('Meeting', $meeting->getDatabaseTableName()), array(
       'TestSession', 
