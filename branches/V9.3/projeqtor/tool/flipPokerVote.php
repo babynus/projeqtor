@@ -33,6 +33,9 @@ $idPokerSession = RequestHandler::getId('idPokerSession');
 $mode = RequestHandler::getValue('mode');
 $item = new PokerItem($id);
 if($mode=="flip"){
+  $vote = new PokerVote();
+  $voteList = $vote->getSqlElementsFromCriteria(array('idPokerItem'=>$id, 'idPokerSession'=>$idPokerSession));
+  if(count($voteList) <= 0)return;
   $item->flipped = 1;
 }
 if($mode == 'reset'){

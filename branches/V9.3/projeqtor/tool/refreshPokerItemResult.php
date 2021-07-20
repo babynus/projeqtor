@@ -52,12 +52,16 @@ $pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSessio
 $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
 $pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$idPokerSession, 'idPokerItem'=>$pokerItem->id), 'value');
 sort($pokerVoteList);
-$lowVote = $pokerVoteList[0];
-$lowCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$lowVote));
-if($lowCount >= (count($pokerMemberList)/2))$lowVote=false;
-$highVote = $pokerVoteList[count($pokerVoteList)-1];
-$highCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$highVote));
-if($highCount >= (count($pokerMemberList)/2))$highVote=false;
+if(isset($pokerVoteList[0])){
+  $lowVote = $pokerVoteList[0];
+  $lowCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$lowVote));
+  if($lowCount >= (count($pokerMemberList)/2))$lowVote=false;
+}
+if(isset($pokerVoteList[count($pokerVoteList)-1])){
+  $highVote = $pokerVoteList[count($pokerVoteList)-1];
+  $highCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$highVote));
+  if($highCount >= (count($pokerMemberList)/2))$highVote=false;
+}
 
 if($pokerMember->id and !$obj->done){
   foreach ($pokerComplexityList as $pokerComplexity){
