@@ -38,17 +38,26 @@ if($mode=='open'){
 }else if($mode=='pause'){
   $pokerItem->isOpen = 0;
   $pokerItem->save();
-}else if($mode=='close'){
+}else if($mode=='close' and $pokerItem->flipped){
   $idComplexity = RequestHandler::getValue('idComplexity');
   $comp = new PokerComplexity($idComplexity);
   $pokerItem->value = $comp->value;
   $pokerItem->isOpen = 0;
   $pokerItem->save();
+  $obj = new $pokerItem->refType($pokerItem->refId);
+  if($pokerItem->refType == "Ticket"){
+    $obj->WorkElement->plannedWork = $comp->work;
+  }else if($pokerItem->refType == "Activity"){
+    $obj->ActivityPlanningElement->validatedWork = $comp->work;
+  }else if($pokerItem->refType == "Requirement"){
+    $obj->plannedWork = $comp->work;
+  }
+  $obj->save();
 }else if($mode=='global'){
   $itemList = SqlList::getListWithCrit('PokerItem', array('idPokerSession'=>$idPokerSession), 'id');
   foreach ($itemList as $idItem){
     $pokerItem = new PokerItem($idItem,true);
-    if($pokerItem->isOpen)continue;
+    if(!$pokerItem->isOpen and $pokerItem->flipped)continue;
     $pokerItem->isOpen = 1;
     $pokerItem->save();
   }
