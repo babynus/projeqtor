@@ -136,7 +136,7 @@ Just define your templates, and select it on the "Mail on Events"
  
 In the model, the user can use any property of the subject and display it in the mail using specific tags.
 
-you just need to use the tag $ {projectName} for the name of the project to appear and $ {idproject} to display the identification number of this one.
+you just need to use the tag ${projectName} for the name of the project to appear and ${idproject} to display the identification number of this one.
 
    
 .. tip::
@@ -146,7 +146,7 @@ you just need to use the tag $ {projectName} for the name of the project to appe
      
 Other tags are available as parameters for email titles
 
-More details, see :ref:`Global Parameters<mail>`
+See :ref:`Global Parameters<mail>`
 
 .. topic:: Some specific tags can also be used
 
@@ -173,10 +173,10 @@ More details, see :ref:`Global Parameters<mail>`
         
 .. topic:: This tags are available except in the mail title because they display a table
    
-     - ${HISTORY} : displays the last change of an object.
+     - ${HISTORY} : display the last change of an object.
      - ${HISTORYFULL} : display all the modifications
      - ${LINK} : list linked elements to the item
-     - ${NOTE} : lists the element's notes in tabular form 
+     - ${NOTE} : list the element's notes in tabular form 
      - ${NOTESTD} : list notes in default format
 
 

@@ -86,60 +86,20 @@ These skill levels are required of you when creating your :ref:`translators`.
 
 
 
-Translation requests types
---------------------------
+Translation requests and items types
+------------------------------------
 
 You define the types of translation that you will use in your business.
-
-.. figure:: /images/GUI/TRANSLATION_SCR_RequestTypes.png
-   :alt: Request types
-   
-   Request types
    
 This allows you to apply a different workflow and behavior for each type.
 
-.. rubric:: Behaviour
-
 For each type you can apply automatisms.
-
- .. compound:: initial status of items
- 
-   The initial state of the lines corresponds to the state of the request which will result in the automatic generation of the translation lines according to the languages recorded on your product or component version.
-
- .. compound:: translation delay (nb days)
- 
-   The translation deadline (in days) determines the deadline for the planned delivery date which will be calculated automatically from the creation of the request. This period is expressed in calendar duration and does not take into account non-working days.
-
- .. compound:: automatism
-   
-   * Make the Description mandatory.
-   * Make the responsible mandatory as soon as the status changes to "in progress".
-   * You can lock the "done" status, it can then only be modified by the status if the box is checked.
-   * You can lock the "closed" status, it can then only be modified by the status if the box is checked.
-   * You can lock the "canceled" status, it can then only be modified by status if the box is checked.
-
-   
-   
-Translation items types
------------------------
 
 Translation lines also have the possibility of being typed.
+
 You can more easily compartmentalize your requests.
 
-Assign a different workflow and behavior for each type of line.
-
-.. rubric:: Behaviour
-
-The "status of generation of item" corresponds to the state in which the rows will be created.
-
-For each type you can apply automatisms.
-
-* Make the Description mandatory.
-* Make the responsible mandatory as soon as the status changes to "in progress".
-* You can lock the "done" status, it can then only be modified by the status if the box is checked.
-* You can lock the "closed" status, it can then only be modified by the status if the box is checked.
-* You can lock the "canceled" status, it can then only be modified by status if the box is checked.
-
+See: :ref:`List of Types`
 
 
 
