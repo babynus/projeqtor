@@ -87,12 +87,14 @@ if(count($pokerVoteList) > 0){
 $refObj = new $pokerItem->refType($pokerItem->refId);
 $nbVoted = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idResource'=>$user->id));
 $nbItem = count($itemList);
+$nbLeft = ($nbItem-$nbVoted);
+if($nbLeft < 0)$nbLeft=0;
 echo '<table style="width: 100%;"><tr><td>';
 echo '<div id="pokerVoteDescription" dojoType="dijit.layout.ContentPane" region="center" align="center" style="width: 100%;overflow:hidden"><table style="width: 100%;"><tr><td>';
 echo '<div style="width: 100%;padding-bottom: 20px;" align="center">';
 echo '  <div style="float:left">';
 echo '    <div style="padding-bottom: 5px;font-size: 9pt;">'.i18n('nbPokerVote').'</div>';
-echo '    <div style="font-size: 15pt;color: var(--color-dark);">'.($nbItem-$nbVoted).'</div>';
+echo '    <div style="font-size: 15pt;color: var(--color-dark);">'.$nbLeft.'</div>';
 echo '  </div>';
 $disabled='';
 if(!$previous){
