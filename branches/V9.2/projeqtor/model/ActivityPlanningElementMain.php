@@ -72,11 +72,6 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $unitRealised;
   public $unitLeft;
   public $_tab_5_1_smallLabel_8 = array('', '','','','','progress');
-//   public $_void_20;
-//   public $_void_21;
-//   public $_void_22;
-//   public $_void_23;
-//   public $_void_24;
   public $unitProgress;
   public $idProgressMode;
   public $_label_weight;
@@ -87,7 +82,6 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $_spe_idWorkUnits;
   public $_separator_menuReview_marginTop;
   public $_tab_5_2_smallLabel_3 = array('', '', '', '', '', 'progress','priority');
-  public $_tab_5_1_smallLabel_4 = array('', '', '', '', '', 'progress');
   public $progress;
   public $_label_expected;
   public $expectedProgress;
@@ -369,7 +363,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       }
     }else{
         unset($this->_tab_5_1_smallLabel_4);
-      }
+    }
   }
   /** ==========================================================================
    * Destructor

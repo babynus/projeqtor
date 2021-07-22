@@ -539,8 +539,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       foreach ($table as $idTable=>$valTable) {
         if (count($restrictArray)==0 or isset($restrictArray[$idTable])) {
           if (! $obj->id) {
-            if (property_exists($obj, 'refType')) { $refType=$obj->refType; $tmpObj=new $refType(); } 
-            else { $tmpObj=clone($obj); }
+            if (property_exists($obj, 'refType') and $obj->refType) { 
+              $refType=$obj->refType;
+              $tmpObj=new $refType(); 
+            } else { 
+              $tmpObj=clone($obj); 
+            }
             if (get_class($tmpObj)=='Project') { $tmpObj->id=$idTable; } 
             else { $tmpObj->idProject=$idTable; }
             $controlRightsTable=$user->getAccessControlRights($tmpObj);
