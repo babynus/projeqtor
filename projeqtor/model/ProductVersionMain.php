@@ -418,6 +418,56 @@ class ProductVersionMain extends Version {
       $separator=Parameter::getGlobalParameter('versionNameAutoformatSeparator');
       $this->name=SqlList::getNameFromId('Product', $this->idProduct).$separator.$this->versionNumber;
     }
+    $status = new Status ($this->idStatus);
+    debugLog($status);
+    if ( $this->isStarted!=$status->setHandledStatus ) {
+      $this->isStarted = $status->setHandledStatus;
+      if ($status->setHandledStatus and ! $this->realStartDate){
+        $this->initialStartDate=date ( "Y-m-d" );
+        $this->plannedStartDate=date ( "Y-m-d" );
+        $this->realStartDate = date ( "Y-m-d" );
+      }else{
+        $this->initialStartDate= null;
+        $this->plannedStartDate= null;
+        $this->realStartDate= null;
+      }
+    }
+    if ( $this->isDelivered!=$status->setDoneStatus) {
+      $this->isDelivered = $status->setDoneStatus;
+      if ($status->setDoneStatus and ! $this->realDeliveryDate){
+        $this->initialDeliveryDate=date ( "Y-m-d" );
+        $this->plannedDeliveryDate=date ( "Y-m-d" );
+        $this->realDeliveryDate = date ( "Y-m-d" );
+      }else{
+        $this->initialDeliveryDate= null;
+        $this->plannedDeliveryDate= null;
+        $this->realDeliveryDate= null;
+      }
+    }
+    if ( $this->isEis!=$status->setIntoserviceStatus) {
+      $this->isEis = $status->setIntoserviceStatus;
+      if ($status->setIntoserviceStatus and ! $this->realEisDate){
+        $this->initialEisDate=date ( "Y-m-d" );
+        $this->plannedEisDate=date ( "Y-m-d" );
+        $this->realEisDate = date ( "Y-m-d" );
+      }else{
+        $this->initialEisDate=null;
+        $this->plannedEisDate=null;
+        $this->realEisDate= null;
+      }
+    }
+    if ($this->idle!=$status->setIdleStatus) {
+      $this->idle = $status->setIdleStatus;
+      if ($status->setIdleStatus and ! $this->realEndDate){
+        $this->initialEndDate = date ( "Y-m-d" );
+        $this->plannedEndDate = date ( "Y-m-d" );
+        $this->realEndDate = date ( "Y-m-d" );
+      }else{
+        $this->initialEndDate = null;
+        $this->plannedEndDate = null;
+        $this->realEndDate= null;
+      }
+    }
   	$result=parent::save();
   	$this->defaultLanguageVersion();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
