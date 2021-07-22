@@ -10003,22 +10003,24 @@ function drawPokerVote($obj){
     echo '<div id="pokerVoteList" dojoType="dijit.layout.ContentPane" region="center" style="width: 100%;padding-top: 20px;padding-left: 10px;">';
     echo '<div style="width: 100%;padding-bottom: 20px;" align="right">';
     if($canUpdate){
-    	$name = i18n('flipPokerVote');
-    	if($pokerItem->flipped){
-    		$name = i18n('resetPokerVote');
-    	}
-    	echo ' <button id="flipPokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;" class="roundedVisibleButton">';
-    	$icon = '&curarr;&nbsp;';
-    	if($pokerItem->flipped)$icon='&orarr;&nbsp;';
-    	echo '   <span style="padding: 0px 5px 0px 5px;">'.$icon . $name . '</span>';
-    	echo '   <script type="dojo/connect" event="onClick" args="evt">';
-    	if(!$pokerItem->flipped){
-    		echo '     flipPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
-    	}else{
-    		echo '     resetPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
-    	}
-    	echo '   </script>';
-    	echo ' </button>';
+        if(count($pokerVoteList) > 0){
+          $name = i18n('flipPokerVote');
+          if($pokerItem->flipped){
+          	$name = i18n('resetPokerVote');
+          }
+          echo ' <button id="flipPokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;" class="roundedVisibleButton">';
+          $icon = '&curarr;&nbsp;';
+          if($pokerItem->flipped)$icon='&orarr;&nbsp;';
+          echo '   <span style="padding: 0px 5px 0px 5px;">'.$icon . $name . '</span>';
+          echo '   <script type="dojo/connect" event="onClick" args="evt">';
+          if(!$pokerItem->flipped){
+          	echo '     flipPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
+          }else{
+          	echo '     resetPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
+          }
+          echo '   </script>';
+          echo ' </button>';
+        }
     	echo ' <button id="closePokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;margin-right: 10px;" class="roundedVisibleButton">';
     	echo '   <span style="padding: 0px 5px 0px 5px;">' . i18n('closePokerVote') . '</span>';
     	echo '   <script type="dojo/connect" event="onClick" args="evt">';
@@ -10121,7 +10123,7 @@ function drawPokerItem($obj){
     $globalOpenItem = '<button id="globalOpenPokerVote" dojoType="dijit.form.Button" style="min-width:130px;vertical-align: middle;" class="roundedVisibleButton">';
     $globalOpenItem .= '   <span style="padding: 0px 5px 0px 5px;">' . i18n('globalOpenPokerVote') . '</span>';
     $globalOpenItem .= '   <script type="dojo/connect" event="onClick" args="evt">';
-    $globalOpenItem .= '     globalOpenPokerItemVote('.$obj->id.');';
+    $globalOpenItem .= '     startPokerSession('.$obj->id.');';
     $globalOpenItem .= '   </script>';
     $globalOpenItem .= ' </button>';
   }
@@ -10144,14 +10146,14 @@ function drawPokerItem($obj){
     echo '<td class="noteData" style="width:30%; text-align: left;height:22px;">'.htmlEncode($refObj->name).'</td>';
     echo '<td class="noteData" style="width:30%; text-align: center;height:22px;">'.htmlEncode($item->value).'</td>';
     echo '<td style="">';
-    if(!$item->isOpen and !$obj->done){
+    if(!$item->isOpen){
       echo ' <button id="openPokerVote' . $item->id . '" dojoType="dijit.form.Button" style="min-width:130px;vertical-align: middle;" class="roundedVisibleButton">';
       echo '   <span style="padding: 0px 5px 0px 5px;">' . i18n('openPokerVote') . '</span>';
       echo '   <script type="dojo/connect" event="onClick" args="evt">';
-      echo '     openPokerItemVote('.$item->id.');';
+      echo '     openPokerItemVote('.$item->id.','.$obj->id.');';
       echo '   </script>';
       echo ' </button>';
-	}else if($item->isOpen and !$obj->done){
+	}else if($item->isOpen){
       echo ' <button id="openPokerVote' . $item->id . '" dojoType="dijit.form.Button" style="min-width:130px;vertical-align: middle;" class="roundedVisibleButton">';
       echo '   <span style="padding: 0px 5px 0px 5px;">' . i18n('closePokerVote') . '</span>';
       echo '   <script type="dojo/connect" event="onClick" args="evt">';

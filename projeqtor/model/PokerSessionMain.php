@@ -277,7 +277,7 @@ class PokerSessionMain extends SqlElement {
     if (! strpos ( $result, 'id="lastOperationStatus" value="OK"' )) {
       return $result;
     }
-	if(!$this->id){
+	if(!$old->id){
 	  $proj=new Project($this->idProject,true);
 	  $type=new Type($proj->idProjectType);
 	  $resource=$this->idResource;
@@ -346,7 +346,7 @@ class PokerSessionMain extends SqlElement {
     $pItem = new PokerItem();
     $noItem = $pItem->countSqlElementsFromCriteria(array('idPokerSession'=>$this->id));
     if($item=="startPokerSession"){
-    	if ($print or !$canUpdate or !$this->id or $this->idle or !$noItem) {
+    	if ($print or !$canUpdate or !$this->id or $this->idle or !$noItem or !$this->handled or $this->done) {
     		return "";
     	}
     	$name=(!$this->handled or $this->done)?i18n('pokerSessionStart'):i18n('pokerSessionStop');
@@ -367,17 +367,18 @@ class PokerSessionMain extends SqlElement {
     	return $result;
     }
     if($item=="pausePokerSession"){
-    	if ($print or !$canUpdate or !$this->id or $this->idle or !$this->handled or !$noItem or $this->done) {
+        $st = new Status($this->idStatus);
+    	if ($print or !$canUpdate or !$this->id or $this->idle or !$noItem or $this->done) {
     		return "";
     	}
-    	$name=i18n('pokerSessionPause');
+    	$name=(!$st->setPausedStatus)?i18n('pokerSessionPauseStart'):i18n('pokerSessionPauseStop');
     	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
     	$result .= '<button id="pausePokerSession" dojoType="dijit.form.Button" showlabel="true"';
     	$result .= ' title="' . $name . '" class="roundedVisibleButton">';
     	$result .= '<span>' . $name. '</span>';
     	$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
     	$result .= '   if (checkFormChangeInProgress()) {return false;}';
-  		$result .=  '  startPausePokerSession('.$this->id.');';
+  		$result .=  '  pausePokerSession('.$this->id.');';
     	$result .= '</script>';
     	$result .= '</button>';
     	$result .= '</td></tr>';
