@@ -31,9 +31,24 @@ require_once "../tool/projeqtor.php";
 
 $id=RequestHandler::getId('idPokerSession');
 $pokerSession = new PokerSession($id);
+$allowedStatusList=Workflow::getAllowedStatusListForObject($pokerSession);
 if($pokerSession->handled){
+  foreach ( $allowedStatusList as $st ) {
+  	if ($st->setPausedStatus) {
+  		$pokerSession->idStatus=$st->id;
+  		break;
+  	}
+  }
   $pokerSession->handled = 0;
-  $pokerSession->save();
+}else{
+  foreach ( $allowedStatusList as $st ) {
+  	if ($st->setHandledStatus) {
+  		$pokerSession->idStatus=$st->id;
+  		break;
+  	}
+  }
+  $pokerSession->handled = 1;
+  $pokerSession->handledDate = date("Y-m-d");
 }
-
+$pokerSession->save();
 ?>

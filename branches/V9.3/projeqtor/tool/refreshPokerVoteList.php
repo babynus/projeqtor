@@ -79,22 +79,24 @@ if(count($pokerVoteList) > 0){
 }
 echo '<div style="width: 100%;padding-bottom: 20px;" align="right">';
 if($canUpdate){
-	$name = i18n('flipPokerVote');
-	if($pokerItem->flipped){
-		$name = i18n('resetPokerVote');
-	}
-	echo ' <button id="flipPokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;" class="roundedVisibleButton">';
-	$icon = '&curarr;&nbsp;';
-	if($pokerItem->flipped)$icon='&orarr;&nbsp;';
-	echo '   <span style="padding: 0px 5px 0px 5px;">'.$icon . $name . '</span>';
-	echo '   <script type="dojo/connect" event="onClick" args="evt">';
-	if(!$pokerItem->flipped){
-		echo '     flipPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
-	}else{
-		echo '     resetPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
-	}
-	echo '   </script>';
-	echo ' </button>';
+    if(count($pokerVoteList) > 0){
+      $name = i18n('flipPokerVote');
+      if($pokerItem->flipped){
+      	$name = i18n('resetPokerVote');
+      }
+      echo ' <button id="flipPokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;" class="roundedVisibleButton">';
+      $icon = '&curarr;&nbsp;';
+      if($pokerItem->flipped)$icon='&orarr;&nbsp;';
+      echo '   <span style="padding: 0px 5px 0px 5px;">'.$icon . $name . '</span>';
+      echo '   <script type="dojo/connect" event="onClick" args="evt">';
+      if(!$pokerItem->flipped){
+      	echo '     flipPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
+      }else{
+      	echo '     resetPokerVote('.$obj->id.','.$pokerItem->id.',\''.$list.'\');';
+      }
+      echo '   </script>';
+      echo ' </button>';
+    }
 	echo ' <button id="closePokerVote" dojoType="dijit.form.Button" style="vertical-align: middle;margin-right: 10px;" class="roundedVisibleButton">';
 	echo '   <span style="padding: 0px 5px 0px 5px;">' . i18n('closePokerVote') . '</span>';
 	echo '   <script type="dojo/connect" event="onClick" args="evt">';

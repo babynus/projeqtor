@@ -170,7 +170,7 @@ function editPokerItem(pokerItemId) {
 
 function startPokerSession(idPokerSession) {
   dojo.xhrPost({
-    url : '../tool/startPokerSession.php?idPokerSession=' + idPokerSession,
+    url : '../tool/startPokerSession.php?idPokerSession=' + idPokerSession + '&quickStart=true',
     handleAs : "text",
     load : function(data) {
 	  globalOpenPokerItemVote(idPokerSession);
@@ -180,7 +180,7 @@ function startPokerSession(idPokerSession) {
 
 function stopPokerSession(idPokerSession) {
   dojo.xhrPost({
-    url : '../tool/startPokerSession.php?idPokerSession=' + idPokerSession,
+    url : '../tool/startPokerSession.php?idPokerSession=' + idPokerSession + '&quickStart=false',
     handleAs : "text",
     load : function(data) {
       refreshGrid();
@@ -190,7 +190,7 @@ function stopPokerSession(idPokerSession) {
   });
 }
 
-function startPausePokerSession(idPokerSession) {
+function pausePokerSession(idPokerSession) {
   dojo
       .xhrPost({
         url : '../tool/startPausePokerSession.php?idPokerSession='
@@ -225,16 +225,22 @@ function resetPokerVote(idPokerSession, idItem, itemList){
 	  });
 }
 
-function openPokerItemVote(idItem) {
-  dojo.xhrPost({
-    url : '../tool/openPokerItemVote.php?idPokerItem=' + idItem
-        + '&mode=open',
-    handleAs : "text",
-    load : function(data) {
-      loadContent("objectDetail.php", "detailDiv", "listForm", null, null,
-          null, null, null, true);
-    }
-  });
+function openPokerItemVote(idItem, idPokerSession) {
+	dojo.xhrPost({
+	    url : '../tool/startPokerSession.php?idPokerSession=' + idPokerSession + '&quickStart=true',
+	    handleAs : "text",
+	    load : function(data) {
+	    	dojo.xhrPost({
+	    	    url : '../tool/openPokerItemVote.php?idPokerItem=' + idItem
+	    	        + '&mode=open',
+	    	    handleAs : "text",
+	    	    load : function(data) {
+	    	      loadContent("objectDetail.php", "detailDiv", "listForm", null, null,
+	    	          null, null, null, true);
+	    	    }
+	    	});
+	    }
+	  });
 }
 
 function globalOpenPokerItemVote(idPokerSession) {
