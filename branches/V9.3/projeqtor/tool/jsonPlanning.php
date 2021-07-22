@@ -1807,7 +1807,6 @@
       $totalDuration=$line['pduration'];
       $actualDuration=$totalDuration*$pct/100;
       $remainingDuration=$totalDuration-$actualDuration;
-      debugLog($line['refname']." => totalDuration=$totalDuration, actualDuration=$actualDuration, remainingDuration=$remainingDuration");
       if ($pct==100) echo $tab.$tab.$tab.'<Stop>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</Stop>' . $nl;
       //else echo $tab.$tab.$tab.'<Stop></Stop>' . $nl;
       if ($pct==100) echo $tab.$tab.$tab.'<Resume>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</Resume>' . $nl;
