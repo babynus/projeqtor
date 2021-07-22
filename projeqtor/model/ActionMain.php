@@ -58,19 +58,14 @@ class ActionMain extends SqlElement {
   public $_lib_cancelled;
   public $idEfficiency;
   public $result;
-  
-  //public $_sec_linkRisk;
-  //public $_Link_Risk=array();
-  //public $_sec_linkIssue;
-  //public $_Link_Issue=array();
   public $_sec_ToDoList;
   public $_SubTask;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-
   public $_nbColMax=3;
+  
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
