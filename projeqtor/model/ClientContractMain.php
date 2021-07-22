@@ -79,7 +79,6 @@ class ClientContractMain extends SqlElement {
   public $saturdayPeriodEnd;
   public $sundayAndOffDayPeriod;
   public $sundayAndOffDayPeriodEnd;
-  
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();

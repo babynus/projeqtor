@@ -52,38 +52,29 @@ class OrganizationMain extends SqlElement {
   public $warningOverPct;
   public $okUnderPct;
   public $sortOrder;
-  public $OrganizationBudgetElementCurrent; // is an object because first Letter is Upper
- // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT 
+  public $OrganizationBudgetElementCurrent; 
   public $_sec_synthesis;
-  public $_tab_5_4_smallLabel = array('validated','assigned','real','left','reassessed',
-      'work','cost','expense','totalCost');
-  // Work row
+  public $_tab_5_4_smallLabel = array('validated','assigned','real','left','reassessed','work','cost','expense','totalCost');
   public $_byMet_validatedWork;
   public $_byMet_assignedWork;
   public $_byMet_realWork;
   public $_byMet_leftWork;
   public $_byMet_plannedWork;
-  // Cost row
   public $_byMet_validatedCost;
   public $_byMet_assignedCost;
   public $_byMet_realCost;
   public $_byMet_leftCost;
   public $_byMet_plannedCost;
-  // Expense row  
   public $_byMet_expenseValidatedAmount;
   public $_byMet_expenseAssignedAmount;
   public $_byMet_expenseRealAmount;
   public $_byMet_expenseLeftAmount;
   public $_byMet_expensePlannedAmount;
-  // total row
   public $_byMet_totalValidatedCost;
   public $_byMet_totalAssignedCost;
   public $_byMet_totalRealCost;
   public $_byMet_totalLeftCost;
   public $_byMet_totalPlannedCost;
-  // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT 
-  // Section that presents the projects that are linked to this organization and its sub-organizations
-  // Want a item's count on section header => ='itemsCount=method to call to get objects to count'
   public $_sec_HierarchicOrganizationProjects='itemsCount=getProjectsOfOrganizationAndSubOrganizations';
   public $_spe_Project=array();
   public $_sec_ResourcesOfObject;
@@ -93,20 +84,17 @@ class OrganizationMain extends SqlElement {
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-  // hidden
-  public $_nbColMax=3;
-  
-  // ADD BY Marc TABARY - 2017-06-06 - WORK AND COST VISIBILITY
   public $_workVisibility;
   public $_costVisibility;
+  public $_nbColMax=3;
   
   public static $_projectsList=array();
   public static $_projectsListOut=array();
   public static $_projectsListForWork=array();
-  
   private static $staticCostVisibility=null;
   private static $staticWorkVisibility=null;
-// END ADD BY Marc TABARY - 2017-06-06 - WORK AND COST VISIBILITY
+  
+
 
   // Define the layout that will be used for lists
   private static $_layout='
