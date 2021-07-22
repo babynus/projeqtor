@@ -32,32 +32,30 @@ class Notification extends SqlElement {
 
   // List of fields that will be exposed in general user interface
   public $_sec_description;
-    public $id;    // redefine $id to specify its visible place 
-    public $idNotificationDefinition;
-    public $idNotifiable;
-    public $notifiedObjectId;
-    public $creationDateTime;
-    public $name;
-    public $idNotificationType;
-    public $idMenu;
-    public $title;
-    public $notificationDate;
-    public $notificationTime;
-    public $sendEmail=0;
-    public $content;
-    public $idPluginIdVersion;
+  public $id;    // redefine $id to specify its visible place 
+  public $idNotificationDefinition;
+  public $idNotifiable;
+  public $notifiedObjectId;
+  public $creationDateTime;
+  public $name;
+  public $idNotificationType;
+  public $idMenu;
+  public $title;
+  public $notificationDate;
+  public $notificationTime;
+  public $sendEmail=0;
+  public $content;
+  public $idPluginIdVersion;
   public $_sec_treatment;
-    public $idUser;
-    public $idResource;
-    public $idStatusNotification;
-    public $emailSent=0;
-    public $idle;  
-  //public $_sec_Link;
-    //public $_Link=array();
-    public $_Attachment=array();
-    public $_Note=array();
-
+  public $idUser;
+  public $idResource;
+  public $idStatusNotification;
+  public $emailSent=0;
+  public $idle;  
+  public $_Attachment=array();
+  public $_Note=array();
   public $_nbColMax=3;
+  
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>

@@ -32,7 +32,6 @@ require_once ('_securityCheck.php');
 class ActivityMain extends SqlElement {
   
   // List of fields that will be exposed in general user interface
-  // List of fields that will be exposed in general user interface
   public $_sec_description;
   public $id; // redefine $id to specify its visible place
   public $reference;
@@ -81,11 +80,9 @@ class ActivityMain extends SqlElement {
   public $_Dependency_Successor = array();
   public $_sec_subActivity;
   public $_spe_activity;
-  // MTY - LEAVE SYSTEM
   public $_spe_isLeaveMngActivity;
   public $_sec_ToDoList;
   public $_SubTask;
-  // MTY - LEAVE SYSTEM
   public $_sec_Link;
   public $_Link = array();
   public $_Attachment = array();

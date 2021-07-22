@@ -53,7 +53,6 @@ class AssetMain extends SqlElement {
   public $_spe_fullNameLocation;
   public $idAffectable;
   public $idUser;
-  //public $idResource;
   public $creationDateTime;
   public $lastUpdateDateTime;
   public $idle;
