@@ -30,8 +30,9 @@
 require_once "../tool/projeqtor.php"; 
 
 $id=RequestHandler::getId('idPokerSession');
+$quickStart = RequestHandler::getBoolean('quickStart');
 $pokerSession = new PokerSession($id);
-if(!$pokerSession->handled){
+if(!$pokerSession->handled and $quickStart){
   $pokerSession->handled = 1;
   $pokerSession->handledDate=date('Y-m-d');
   $st = new Status($pokerSession->idStatus);
@@ -44,7 +45,7 @@ if(!$pokerSession->handled){
     	}
     }
   }
-}else if($pokerSession->handled and !$pokerSession->done){
+}else if($pokerSession->handled and !$pokerSession->done and !$quickStart){
   $pokerSession->done = 1;
   $pokerSession->doneDate=date('Y-m-d');
   $st = new Status($pokerSession->idStatus);
@@ -57,7 +58,7 @@ if(!$pokerSession->handled){
     	}
     }
   }
-}else{
+}else if(!$quickStart){
   $pokerSession->handled = 1;
   $pokerSession->handledDate=date('Y-m-d');
   $pokerSession->done = 0;
