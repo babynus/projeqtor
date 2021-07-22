@@ -87,8 +87,6 @@ class BudgetMain extends SqlElement {
   public $update4FullAmount;
   public $actualAmount;
   public $actualFullAmount;
-  //public $actualSubAmount;
-  //public $actualSubFullAmount;
   public $usedAmount;
   public $usedFullAmount;
   public $availableAmount;
@@ -105,7 +103,6 @@ class BudgetMain extends SqlElement {
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-
   public static $_consolidate=false;
   public $_nbColMax=3;
   // Define the layout that will be used for lists
