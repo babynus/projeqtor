@@ -2695,6 +2695,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if (isNewGui() and !$comboDetail and $canListCol) echo ' onfocus="hideActionSelect(\''.$comboClass.'\',\''.$val.'\',\''.$fieldId.'\');"';
           echo ' >';
           //debugTraceLog("=> before call htmlDrawOptionForReference for $col, val=$val, critFld=$critFld, critVal=$critVal");
+          if ($isRequired and $obj->isAttributeSetToField($col, 'doNotAutoFill')) {
+            echo '<option value=" " ></option>';
+          }
           if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
             $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
           }else if (($classObj=='SupplierContract' or $classObj=='ClientContract') and $col=='idContactContract' or $col=='idUnitContract' or $col=='idUnitNotice') {
