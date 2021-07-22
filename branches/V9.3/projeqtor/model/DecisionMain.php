@@ -51,13 +51,10 @@ class DecisionMain extends SqlElement {
   public $_sec_Approver;
   public $_Approver=Array();
   public $_spe_buttonSendMail;
-  //public $_sec_linkMeeting;
-  //public $_Link_Meeting=array();
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-
   public $_nbColMax=3;
   
   // Define the layout that will be used for lists

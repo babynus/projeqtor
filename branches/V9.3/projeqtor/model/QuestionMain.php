@@ -32,7 +32,7 @@ class QuestionMain extends SqlElement {
 
   // List of fields that will be exposed in general user interface
   public $_sec_description;
-  public $id;    // redefine $id to specify its visible place 
+  public $id;    
   public $reference;
   public $name;
   public $idQuestionType;
@@ -55,14 +55,12 @@ class QuestionMain extends SqlElement {
   public $cancelled;
   public $_lib_cancelled;
   public $result;    
-  //public $_sec_linkMeeting;
-  //public $_Link_Meeting=array();
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-
   public $_nbColMax=3;
+  
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>

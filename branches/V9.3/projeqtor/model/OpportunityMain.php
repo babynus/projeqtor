@@ -63,16 +63,12 @@ class OpportunityMain extends SqlElement {
   public $cancelled;
   public $_lib_cancelled;
   public $result;
-  //public $_sec_linkAction;
-  //public $_Link_Action=array();
-  //public $_sec_linkIssue;
-  //public $_Link_Issue=array();
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-
   public $_nbColMax=3;
+  
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
