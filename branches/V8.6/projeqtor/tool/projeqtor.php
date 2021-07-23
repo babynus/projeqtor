@@ -1903,7 +1903,7 @@ function getVisibleProjectsList($limitToActiveProjects=true, $idProject=null) {
 function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $excludeUserClause=false, $excludeResourceClause=false) {
   global $reportContext;
   // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-  if (!property_exists($objectClass, 'idProject') and $objectClass!='Notification') return '(1=1)'; // If not project depedant, no extra clause
+  //if (!property_exists($objectClass, 'idProject') and $objectClass!='Notification') return '(1=1)'; // If not project depedant, no extra clause
                                                                                                     
   // if (! property_exists($objectClass,'idProject')) return '(1=1)'; // If not project depedant, no extra clause
                                                                                                     // END - ADD BY TABARY - NOTIFICATION SYSTEM
@@ -1925,6 +1925,15 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
     $accessRightRead=securityGetAccessRight($obj->getMenuClass(), 'report');
   } else {
     $accessRightRead=securityGetAccessRight($obj->getMenuClass(), 'read');
+  }
+  if (!property_exists($objectClass, 'idProject') and $objectClass!='Notification') {
+    if ($accessRightRead=='OWN' and property_exists($obj, "idUser")) {
+      return $tableAlias."idUser=$user->id";
+    } else if ($accessRightRead=='RES' and property_exists($obj, "idResource")) {
+      return $tableAlias."idResource=$user->id";
+    } else {
+      return '(1=1)';
+    }
   }
   $listNO=transformListIntoInClause($user->getAccessRights($objectClass, 'NO', $showIdle));
   $listOWN=(property_exists($obj, "idUser"))?transformListIntoInClause($user->getAccessRights($objectClass, 'OWN', $showIdle)):null;
@@ -1964,7 +1973,7 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
     }
   }
   // if ($objectClass == 'Document' or $objectClass=='TestCase' or $objectClass=='Requirement' or $objectClass=='TestSession') {
-  if (property_exists($objectClass, 'idProject') and !$obj->isAttributeSetToField('idProject', 'required') and property_exists($objectClass, 'idProduct') and substr($alias, -15)!='planningelement') {
+  if ($objectClass!='Project' and property_exists($objectClass, 'idProject') and !$obj->isAttributeSetToField('idProject', 'required') and property_exists($objectClass, 'idProduct') and substr($alias, -15)!='planningelement') {
     $v=new Version();
     $vp=new VersionProject();
     $clauseALLPRO="(".$tableAlias."idProject in ".$listALLPRO." or (".$tableAlias."idProject is null and ".$tableAlias."idProduct in "."(select idProduct from ".$v->getDatabaseTableName()." existV, ".$vp->getDatabaseTableName()." existVP "."where existV.id=existVP.idVersion and existVP.idProject in ".$listALLPRO.")))";
