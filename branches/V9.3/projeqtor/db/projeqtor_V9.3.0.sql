@@ -12,7 +12,7 @@ ALTER TABLE `${prefix}pokersession` CHANGE `handledDate` `handledDate` date DEFA
 ALTER TABLE `${prefix}pokersession` CHANGE `doneDate` `doneDate` date DEFAULT NULL;
 ALTER TABLE `${prefix}pokersession` CHANGE `idleDate` `idleDate` date DEFAULT NULL;
 ALTER TABLE `${prefix}pokersession` CHANGE `idResource` `idResource` int(12) DEFAULT NULL COMMENT '12';
-UPDATE `${prefix}module` SET active='1' WHERE name='modulePoker';
+UPDATE `${prefix}module` SET idle='0' WHERE name='modulePoker';
 
 UPDATE `${prefix}menu` SET sortOrder='901' WHERE name='menuType';
 UPDATE `${prefix}menu` SET sortOrder='156' WHERE name='menuPokerSessionVoting';
