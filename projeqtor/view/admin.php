@@ -605,9 +605,10 @@
                   <?php echo i18n("deleteLogfile"). Tool::getDoublePoint();?>
                 </td>
                <?php 
-                      $maintenanceDeletedLogfile=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'maintenanceDeletedLogfile'));
+                      $maintenanceDeletedLogfile=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'deleteLogfileDays'));
                       if($maintenanceDeletedLogfile->id=='')$maintenanceDeletedLogfile=30;
                       else $maintenanceDeletedLogfile=$maintenanceDeletedLogfile->parameterValue;
+                      debugLog($maintenanceDeletedLogfile);
                 ?>
                   
                 <td class="display" width="90%">
@@ -615,7 +616,7 @@
                   <div dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:999}"
                     style="width:30px;"
                     value="<?php echo $maintenanceDeletedLogfile;?>" 
-                    onchange="saveMaintenanceAdmin('maintenanceDeletedLogfile')" name="deleteLogfileDays" id="deleteLogfileDays">
+                    onchange="saveMaintenanceAdmin('deleteLogfileDays');" name="deleteLogfileDays" id="deleteLogfileDays">
                   </div>
                   &nbsp;<?php echo i18n('days');?>
                 </td>
