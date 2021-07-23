@@ -368,10 +368,10 @@ class PokerSessionMain extends SqlElement {
     }
     if($item=="pausePokerSession"){
         $st = new Status($this->idStatus);
-    	if ($print or !$canUpdate or !$this->id or $this->idle or !$noItem or $this->done) {
+    	if ($print or !$canUpdate or !$this->id or $this->idle or !$noItem or $this->done or !$st->setHandledStatus) {
     		return "";
     	}
-    	$name=(!$st->setPausedStatus)?i18n('pokerSessionPauseStart'):i18n('pokerSessionPauseStop');
+    	$name=($this->handled)?i18n('pokerSessionPauseStart'):i18n('pokerSessionPauseStop');
     	$result .= '<tr><td valign="top" class="label"><label></label></td><td>';
     	$result .= '<button id="pausePokerSession" dojoType="dijit.form.Button" showlabel="true"';
     	$result .= ' title="' . $name . '" class="roundedVisibleButton">';
