@@ -6937,7 +6937,7 @@ function saveModuleStatusContinue(id,status) {
 function saveModuleStatusCheckParent(id) {
   var wdgt=dijit.byId('module_'+id);
   var parent=wdgt.get('parent');
-  var notActiveAlone=dojo.byId('notActiveAlone_'+id).value;
+  var notActiveAlone=dojo.byId('notActiveAlone_'+parent).value;
   if (dojo.byId('module_'+parent)) {
     var oneOn=false;
     var allOff=true;
