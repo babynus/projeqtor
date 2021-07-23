@@ -2067,7 +2067,7 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
     }
   }
   // if ($objectClass == 'Document' or $objectClass=='TestCase' or $objectClass=='Requirement' or $objectClass=='TestSession') {
-  if (property_exists($objectClass, 'idProject') and !$obj->isAttributeSetToField('idProject', 'required') and property_exists($objectClass, 'idProduct') and substr($alias, -15)!='planningelement') {
+  if ($objectClass!='Project' and property_exists($objectClass, 'idProject') and !$obj->isAttributeSetToField('idProject', 'required') and property_exists($objectClass, 'idProduct') and substr($alias, -15)!='planningelement') {
     $v=new Version();
     $vp=new VersionProject();
     $clauseALLPRO="(".$tableAlias."idProject in ".$listALLPRO." or (".$tableAlias."idProject is null and ".$tableAlias."idProduct in "."(select idProduct from ".$v->getDatabaseTableName()." existV, ".$vp->getDatabaseTableName()." existVP "."where existV.id=existVP.idVersion and existVP.idProject in ".$listALLPRO.")))";
