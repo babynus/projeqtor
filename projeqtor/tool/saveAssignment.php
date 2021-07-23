@@ -164,7 +164,14 @@ if ($isResourceTeam){
 
     $crit = array('idResourceTeam'=>$idResource);
     $rta=new ResourceTeamAffectation();
-    $list=$rta->getSqlElementsFromCriteria($crit);
+    if($refType=='Meeting' or $refType=='PeriodicMeeting' or $refType=='PokerSession'){
+      $date=($refType=='Meeting' or $refType=='PeriodicMeeting')?$obj->meetingDate:$obj->pokerSessionDate;
+      $where="idResourceTeam = $idResource and (startDate <= '$date' or startDate IS NULL) and (endDate >= '$date'  or endDate IS NULL ) ";
+      debugLog($where);
+       $list=$rta->getSqlElementsFromCriteria(null,null,$where);
+    }else{
+      $list=$rta->getSqlElementsFromCriteria($crit);
+    }
     $resourceList = array();
     foreach ($list as $l){
         $resource = new ResourceAll($l->idResource);
