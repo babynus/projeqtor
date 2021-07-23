@@ -608,7 +608,6 @@
                       $maintenanceDeletedLogfile=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('parameterCode'=>'deleteLogfileDays'));
                       if($maintenanceDeletedLogfile->id=='')$maintenanceDeletedLogfile=30;
                       else $maintenanceDeletedLogfile=$maintenanceDeletedLogfile->parameterValue;
-                      debugLog($maintenanceDeletedLogfile);
                 ?>
                   
                 <td class="display" width="90%">
