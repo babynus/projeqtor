@@ -926,6 +926,20 @@ class Cron {
         
         if(!$mail->subject)$result = i18n('noSubject');
         $bodyHtml=$mail->textHtml;
+        $encodings = [
+            "UTF-8",
+            "win-1252",
+            "ISO-8859-15",
+            "ISO-8859-1",
+            "ASCII"
+        ];
+        $bodyEncoding=mb_detect_encoding($bodyHtml, $encodings, true);
+        if ($bodyEncoding==false) {
+          debugTraceLog("Read Mailbox : cannot find encoding for message");
+          debugTraceLog($bodyHtml);
+        } else if ($bodyEncoding!='UTF-8') {
+          $bodyHtml=mb_convert_encoding($bodyHtml,'UTF-8',$bodyEncoding);
+        }
         
         $ticket = new Ticket();
         if($result == ""){
