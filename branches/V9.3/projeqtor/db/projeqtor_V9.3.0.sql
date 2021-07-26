@@ -12,6 +12,7 @@ ALTER TABLE `${prefix}pokersession` CHANGE `handledDate` `handledDate` date;
 ALTER TABLE `${prefix}pokersession` CHANGE `doneDate` `doneDate` date;
 ALTER TABLE `${prefix}pokersession` CHANGE `idleDate` `idleDate` date;
 ALTER TABLE `${prefix}pokersession` CHANGE `idResource` `idResource` int(12) COMMENT '12';
+ALTER TABLE `${prefix}pokercomplexity` CHANGE `work` `itemWork` DECIMAL(9,5) UNSIGNED NULL DEFAULT NULL;
 UPDATE `${prefix}module` SET idle='0' WHERE name='modulePoker';
 
 UPDATE `${prefix}menu` SET sortOrder='901' WHERE name='menuType';

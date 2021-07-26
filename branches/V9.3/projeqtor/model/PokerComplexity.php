@@ -34,7 +34,7 @@ class PokerComplexity extends SqlElement {
   public $id;    
   public $name;
   public $value;
-  public $work;
+  public $itemWork;
   public $sortOrder=0;
   public $idle;
   public $idleDate;
@@ -53,6 +53,9 @@ class PokerComplexity extends SqlElement {
       "name"=>"required",
       "idle"=>"nobr"
   );
+  
+  private static $_colCaptionTransposition = array('itemWork'=> 'work');
+  
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -84,6 +87,14 @@ class PokerComplexity extends SqlElement {
   
   protected function getStaticLayout() {
   	return self::$_layout;
+  }
+  
+  /** ============================================================================
+   * Return the specific colCaptionTransposition
+   * @return the colCaptionTransposition
+   */
+  protected function getStaticColCaptionTransposition($fld=null) {
+  	return self::$_colCaptionTransposition;
   }
   
   public function save() {
