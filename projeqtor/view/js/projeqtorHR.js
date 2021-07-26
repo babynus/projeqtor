@@ -1667,12 +1667,15 @@ function leaveCalendarDisplay(){
                 domStyle.set(calendar.matrixView.grid,'border-left','1px solid #B5BCC7');
                 domStyle.set(calendar.matrixView.itemContainer,'left','0px');
                 domStyle.set(calendar.matrixView.buttonContainer,'position','relative');
-                domConstruct.destroy(calendar.matrixView.rowHeader);
-                domConstruct.destroy(calendar.matrixView.yearColumnHeader);
+//                domConstruct.destroy(calendar.matrixView.rowHeader);
+//                domConstruct.destroy(calendar.matrixView.yearColumnHeader);
             
             //to display the current month and year of the calendar in the header
                 var calendarMonthYear = "<div id=\"calendarMonthYear\" style=\"position:absolute;left:24%;top:5px;\"><table><tbody><tr><td><span>"+formatMonthYearDate(calendar.date)+"</span></td></tr></tbody></table></div>";
-                domConstruct.place(calendarMonthYear, calendar.matrixView.buttonContainer, "first");
+//                console.log(calendar.matrixView);
+//                console.log(calendar.matrixView.buttonContainer);
+                //calendar.matrixView.buttonContainer.insertAdjacentElement('afterbegin',calendarMonthYear);
+                domConstruct.place(calendarMonthYear, calendar.matrixView.buttonContainer.firstElementChild, "first");
             
             
             //a function to refresh the date displayed in the header
