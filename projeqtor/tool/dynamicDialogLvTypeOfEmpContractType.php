@@ -231,7 +231,8 @@ $months = array (
                             </td>
                             <td>
                                 <select id="rightIdLeaveType"  dojoType="dijit.form.FilteringSelect"
-                                    <?php if ($idLeaveType) echo ' readonly ';?>
+                                <?php echo autoOpenFilteringSelect(); ?>
+                                    <?php  if ($idLeaveType) echo ' readonly ';?>
                                     name="rightIdLeaveType" class="input <?php if (!$idLeaveType) echo ' required ';?>" value="<?php echo $idLeaveType;?>" required>
                                         <?php htmlDrawOptionForReference('idLeaveType', $idLeaveType, null, true);?>
                                 </select>    
@@ -249,6 +250,7 @@ $months = array (
                                 <select id="rightStartMonthPeriod"  dojoType="dijit.form.Select"
                                         name="rightStartMonthPeriod" 
                                         class="input required" 
+                                        <?php echo autoOpenFilteringSelect(); ?>
                                         value="<?php 
                                                     $theMonth = ($startMonthPeriod==null?0:$startMonthPeriod);
                                                     echo $startMonthPeriod;
