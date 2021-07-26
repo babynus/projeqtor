@@ -51,16 +51,30 @@ $pokerMember = $pokerMember->getSingleSqlElementFromCriteria('PokerResource', ar
 $pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSession'=>$idPokerSession));
 $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
 $pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$idPokerSession, 'idPokerItem'=>$pokerItem->id), 'value');
-sort($pokerVoteList);
-if(isset($pokerVoteList[0])){
-  $lowVote = $pokerVoteList[0];
-  $lowCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$lowVote));
-  if($lowCount >= (count($pokerMemberList)/2))$lowVote=false;
-}
-if(isset($pokerVoteList[count($pokerVoteList)-1])){
-  $highVote = $pokerVoteList[count($pokerVoteList)-1];
-  $highCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$highVote));
-  if($highCount >= (count($pokerMemberList)/2))$highVote=false;
+$lowVote = 0;
+$highVote = 0;
+if(count($pokerVoteList) > 0){
+  sort($pokerVoteList);
+  if(isset($pokerVoteList[0])){
+    $lowVote = $pokerVoteList[0];
+    $lowCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$lowVote));
+    if($lowCount >= (count($pokerMemberList)/2))$lowVote=false;
+    if(isset($pokerVoteList[count($pokerVoteList)-1])){
+    	$highVote = $pokerVoteList[count($pokerVoteList)-1];
+    	$highCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$highVote));
+    	if($highCount >= (count($pokerMemberList)/2))$highVote=false;
+    }
+  }else if (isset($pokerVoteList[1])){
+    unset($pokerVoteList[0]);
+    $lowVote = $pokerVoteList[1];
+    $lowCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$lowVote));
+    if($lowCount >= (count($pokerMemberList)/2))$lowVote=false;
+    if(isset($pokerVoteList[count($pokerVoteList)])){
+    	$highVote = $pokerVoteList[count($pokerVoteList)];
+    	$highCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$highVote));
+    	if($highCount >= (count($pokerMemberList)/2))$highVote=false;
+    }
+  }
 }
 
 if($pokerMember->id and !$obj->done){
