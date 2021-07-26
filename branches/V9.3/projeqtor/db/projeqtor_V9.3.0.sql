@@ -8,10 +8,10 @@
 ALTER TABLE `${prefix}pokeritem` ADD `flipped` int(1) DEFAULT '0' COMMENT '1';
 
 ALTER TABLE `${prefix}pokersession` ADD `idUser` int(12) unsigned DEFAULT NULL COMMENT '12';
-ALTER TABLE `${prefix}pokersession` CHANGE `handledDate` `handledDate` date DEFAULT NULL;
-ALTER TABLE `${prefix}pokersession` CHANGE `doneDate` `doneDate` date DEFAULT NULL;
-ALTER TABLE `${prefix}pokersession` CHANGE `idleDate` `idleDate` date DEFAULT NULL;
-ALTER TABLE `${prefix}pokersession` CHANGE `idResource` `idResource` int(12) DEFAULT NULL COMMENT '12';
+ALTER TABLE `${prefix}pokersession` CHANGE `handledDate` `handledDate` date;
+ALTER TABLE `${prefix}pokersession` CHANGE `doneDate` `doneDate` date;
+ALTER TABLE `${prefix}pokersession` CHANGE `idleDate` `idleDate` date;
+ALTER TABLE `${prefix}pokersession` CHANGE `idResource` `idResource` int(12) COMMENT '12';
 UPDATE `${prefix}module` SET idle='0' WHERE name='modulePoker';
 
 UPDATE `${prefix}menu` SET sortOrder='901' WHERE name='menuType';
