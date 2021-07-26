@@ -329,7 +329,6 @@ class EmployeeLeaveEarnedMain extends SqlElement {
    */
   public function save($withInitialLeftQuantity=false) {
     $old=$this->getOld();
-        
     //to modify leftQuantity depending on the value of quantity
     if(($this->id==null and $this->quantity!=null) || ($old->quantity==null && $this->quantity!=null)){
         if (!$withInitialLeftQuantity) {
@@ -765,6 +764,9 @@ class EmployeeLeaveEarnedMain extends SqlElement {
         $this->leftQuantity = $leavesRight['left'];                        
         $this->startDate = $leavesRight['startDate'];
         $this->endDate = $leavesRight['endDate'];
+        $currentDate = new DateTime();
+        $currentDateString = $currentDate->format("Y-m-d");
+        $this->lastUpdateDate = $currentDateString;
     }
 
     public function getThisLeaves($arrayStatus=array()) {
