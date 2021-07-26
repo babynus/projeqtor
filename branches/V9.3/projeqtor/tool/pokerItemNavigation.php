@@ -69,19 +69,29 @@ $pokerMemberList = $pokerMember->getSqlElementsFromCriteria(array('idPokerSessio
 $pokerVote = PokerVote::getSingleSqlElementFromCriteria('PokerVote', array('idPokerSession'=>$idPokerSession, 'idResource'=>$user->id, 'idPokerItem'=>$pokerItem->id));
 $pokerVoteList = SqlList::getListWithCrit('pokerVote', array('idPokerSession'=>$idPokerSession, 'idPokerItem'=>$pokerItem->id), 'value');
 sort($pokerVoteList);
-$lowVote = '';
-$highVote = '';
+$lowVote = 0;
+$highVote = 0;
 if(count($pokerVoteList) > 0){
   sort($pokerVoteList);
   if(isset($pokerVoteList[0])){
     $lowVote = $pokerVoteList[0];
     $lowCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$lowVote));
     if($lowCount >= (count($pokerMemberList)/2))$lowVote=false;
-  }
-  if(isset($pokerVoteList[count($pokerVoteList)-1])){
-    $highVote = $pokerVoteList[count($pokerVoteList)-1];
-    $highCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$highVote));
-    if($highCount >= (count($pokerMemberList)/2))$highVote=false;
+    if(isset($pokerVoteList[count($pokerVoteList)-1])){
+    	$highVote = $pokerVoteList[count($pokerVoteList)-1];
+    	$highCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$highVote));
+    	if($highCount >= (count($pokerMemberList)/2))$highVote=false;
+    }
+  }else if (isset($pokerVoteList[1])){
+    unset($pokerVoteList[0]);
+    $lowVote = $pokerVoteList[1];
+    $lowCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$lowVote));
+    if($lowCount >= (count($pokerMemberList)/2))$lowVote=false;
+    if(isset($pokerVoteList[count($pokerVoteList)])){
+    	$highVote = $pokerVoteList[count($pokerVoteList)];
+    	$highCount = $pokerVote->countSqlElementsFromCriteria(array('idPokerSession'=>$obj->id,'idPokerItem'=>$pokerItem->id, 'value'=>$highVote));
+    	if($highCount >= (count($pokerMemberList)/2))$highVote=false;
+    }
   }
 }
 $refObj = new $pokerItem->refType($pokerItem->refId);
@@ -101,7 +111,7 @@ if(!$previous){
 	$disabled = 'disabled';
 }
 echo ' <div id="previousItem" dojoType="dijit.form.Button" class="roundedVisibleButton" style="vertical-align: middle;width: 140px;height: 24px;padding-bottom: 5px;margin-right: 10px;margin-top: 8px;" '.$disabled.'>';
-echo '   <div class="dijitButtonIcon dijitButtonIconPrevious" style="float:left;padding-top: 6px;"></div><span style="padding-left: 15px;">' . i18n('previous') . '</span>';
+echo '   <div class="dijitButtonIcon dijitButtonIconPrevious" style="float:left;padding-top: 6px;"></div><span style="padding-left: 15px;">' . i18n('previousItem') . '</span>';
 echo '   <script type="dojo/connect" event="onClick" args="evt">';
 echo '     pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'previous\');';
 echo '   </script>';
@@ -111,7 +121,7 @@ if(!$next){
 	$disabled = 'disabled';
 }
 echo ' <div id="nextItem" dojoType="dijit.form.Button" style="padding-bottom: 5px;vertical-align: middle;width: 140px;height: 24px;margin-left: 10px;margin-top: 8px;" class="roundedVisibleButton" '.$disabled.'>';
-echo '   <span style="padding-right: 15px;">' . i18n('next') . '</span><div class="dijitButtonIcon dijitButtonIconNext" style="float:right;padding-top: 6px;"></div>';
+echo '   <span style="padding-right: 15px;">' . i18n('nextItem') . '</span><div class="dijitButtonIcon dijitButtonIconNext" style="float:right;padding-top: 6px;"></div>';
 echo '   <script type="dojo/connect" event="onClick" args="evt">';
 echo '     pokerItemNav('.$obj->id.','.$pokerItem->id.',\''.$list.'\', \'next\');';
 echo '   </script>';
