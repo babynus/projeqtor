@@ -39,6 +39,16 @@ if (array_key_exists ( 'needResolution', $_REQUEST )) {
 	$needResolution = true;
 }
 
+$idObj = RequestHandler::getId('idTicket');
+$typeObj = RequestHandler::getClass('ticketType');
+
+$extraRequiredFields = RequestHandler::getValue('extraRequiredFields');
+$extraRequiredFields = explode(',', $extraRequiredFields);
+$obj = new $typeObj($idObj);
+foreach ($extraRequiredFields as $field){
+  debugLog($obj->getDataType($field));
+}
+
 if (! array_key_exists ( 'typeDynamic', $_REQUEST )) {
 	throwError ( 'Parameter typeDynamic not found in REQUEST' );
 }
