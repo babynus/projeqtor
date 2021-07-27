@@ -1130,6 +1130,7 @@ abstract class SqlElement {
 
   public function copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = null, $toActivity = null, $copyToWithResult = false, $copyToWithVersionProjects = false) {
     global $debugTraceUpdates,$debugTraceHistory;
+    scriptLog("for ".debugDisplayObj($this)."->copyTo(newClass=$newClass, newType=$newType, newName=$newName, newProject=$newProject, setOrigin=$setOrigin, withNotes=$withNotes, withAttachments=$withAttachments, withLinks=$withLinks, withAssignments=$withAssignments, withAffectations=$withAffectations, toProject=$toProject, toActivity=$toActivity, copyToWithResult=$copyToWithResult, copyToWithVersionProjects=$copyToWithVersionProjects)");
     if (isset($debugTraceUpdates) and $debugTraceUpdates==true) {
       if ( ! property_exists($this,'_noHistory') or (isset($debugTraceHistory) and $debugTraceHistory==true) )
         debugTraceLog("Start COPYTO for ".get_class($this)." #".$this->id);$startMicroTime=microtime(true);
