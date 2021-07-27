@@ -115,6 +115,7 @@ if($type=="Status"){
 	}
 	// PBE - End
 	$status=new Status($newStatut);
+	$requiredList = $ticket->getExtraRequiredFields();
   if($ticketType->mandatoryResourceOnHandled && $status->setHandledStatus && !$ticket->idResource){
     $reponse.="&needRessource=true";
   }
@@ -123,6 +124,14 @@ if($type=="Status"){
   }
   if($ticketType->mandatoryResolutionOnDone && $status->setDoneStatus && !$ticket->idResolution){
     $reponse.="&needResolution=true";
+  }
+  if(count($requiredList) > 0){
+    $extraRequiredFields = array();
+    foreach ($requiredList as $field=>$att){
+      array_push($extraRequiredFields, $field);
+    }
+    $extraRequiredFields = implode(',', $extraRequiredFields);
+    $reponse.="&extraRequiredFields=$extraRequiredFields";
   }
 }
 if($reponse==""){
@@ -147,6 +156,6 @@ if($reponse==""){
     echo 'messageError/split/'.getLastOperationMessage($result);
   }
 }else{
-  echo $reponse."&idTicket=".$idTicket."&idStatus=".$newStatut;
+  echo $reponse."&idTicket=".$idTicket."&ticketType=".$typeKanbanType."&idStatus=".$newStatut;
 }
 ?>
