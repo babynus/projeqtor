@@ -659,6 +659,13 @@ function dispatchWorkSave() {
     res=dijit.byId('dispatchWorkResource_'+cpt).get('value');
     dat=dijit.byId('dispatchWorkDate_'+cpt).get('value');
     val=dijit.byId('dispatchWorkValue_'+cpt).get('value');
+    if(val!=0 && dat!='' && res.trim()=='' ){
+      showAlert(i18n('selectRes'));
+      return;
+    }else if (res.trim()!='' && val!=0 && dat==null ) {
+      showAlert(i18n('selectDate'));
+      return;
+    }
     if ( res && dat) {
       var key=res+"#"+dat;
       if (key in listArray) {
