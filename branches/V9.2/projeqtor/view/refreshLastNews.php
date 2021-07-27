@@ -62,6 +62,8 @@ if(! ini_get('allow_url_fopen')){
               $json = file_get_contents($urlGetNews);
              }else if(file_get_contents('php://input')){
                 $json = file_get_contents('php://input');
+             } else {
+               $json = '{"identifier":"id", "items":[]}';
              }
            $obj = json_decode($json);
            $i=1;

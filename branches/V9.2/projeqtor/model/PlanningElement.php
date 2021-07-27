@@ -743,9 +743,11 @@ class PlanningElement extends SqlElement {
     }
     if(Module::isModuleActive('moduleGestionCA')){
     	$project = new Project($this->idProject);
-    	$projectList = $project->getRecursiveSubProjectsFlatList(true, true);
-    	$projectList = array_flip($projectList);
-    	$projectList = '(0,'.implode(',',$projectList).')';
+    	$projectListArr = $project->getRecursiveSubProjectsFlatList(true, true);
+    	//$projectList = array_flip($projectList);
+    	$projectList = '(0';
+    	foreach ($projectListArr as $idP=>$nameP) {if ($idP) $projectList.=",$idP";}
+    	$projectList.=')';
     	$where = 'idProject in '.$projectList.' and idle = 0';
     	$paramAmount = Parameter::getGlobalParameter('ImputOfAmountClient');
     	$cmdAmount = ($paramAmount == 'HT')?'totalUntaxedAmount':'totalFullAmount';
@@ -2320,7 +2322,8 @@ class PlanningElement extends SqlElement {
   
   static function copyStructure($obj, $newObj, $copyToOrigin=false, 
       $copyToWithNotes=false, $copyToWithAttachments=false, $copyToWithLinks=false, 
-      $copyAssignments=false, $copyAffectations=false, $toProject=null, $copySubProjects=false) {
+      $copyAssignments=false, $copyAffectations=false, $toProject=null, $copySubProjects=false, $copyOtherStructure=false) {
+    scriptLog("copyStructure(obj=".debugDisplayObj($obj).", newObj=".debugDisplayObj($newObj).", copyToOrigin=$copyToOrigin, copyToWithNotes=$copyToWithNotes, copyToWithAttachments=$copyToWithAttachments, copyToWithLinks=$copyToWithLinks, copyAssignments=$copyAssignments, copyAffectations=$copyAffectations, toProject=$toProject, copySubProjects=$copySubProjects, copyOtherStructure=$copyOtherStructure)");
     //self::$_noDispatch=true; // avoid recursive updates on each item, will be done only at elementary level    
     $pe=new PlanningElement();
     $list=$pe->getSqlElementsFromCriteria(array('topRefType'=>get_class($obj), 'topRefId'=>$obj->id),null,null,'wbsSortable asc');
@@ -2355,7 +2358,15 @@ class PlanningElement extends SqlElement {
       // recursively call copy structure
       $res=self::copyStructure($item, $newItem, $copyToOrigin,
                           $copyToWithNotes, $copyToWithAttachments, $copyToWithLinks,
-                          $copyAssignments, $copyAffectations, ($pe->refType=='Project')?$newItem->id:$toProject,$copySubProjects);
+                          $copyAssignments, $copyAffectations, ($pe->refType=='Project')?$newItem->id:$newItem->idProject,$copySubProjects, $copyOtherStructure);
+      if ($res!='OK') {
+        return $res;
+      }
+      if ($copyOtherStructure and ($pe->refType=='Project' or $pe->refType=='Activity')) {
+        $res=self::copyOtherStructure($item, $newItem, false, 
+                          false, $copyToWithAttachments,$copyToWithLinks,
+                          $copyAssignments, $copyAffectations, ($pe->refType=='Project')?$newItem->id:$newItem->idProject,$copySubProjects, false,true);
+      }
       if ($res!='OK') {
         return $res;
       }
@@ -2410,6 +2421,7 @@ class PlanningElement extends SqlElement {
   static function copyOtherStructure($obj, $newObj, $copyToOrigin=false,
     $copyToWithNotes=false, $copyToWithAttachments=false, $copyToWithLinks=false,
     $copyAssignments=false, $copyAffectations=false, $toProject=null, $copySubProjects=false, $copyToWithVersionProjects=false, $copyStructure=false) {
+    scriptLog("copyOtherStructure(obj=".debugDisplayObj($obj).", newObj=".debugDisplayObj($newObj).", copyToOrigin=$copyToOrigin, copyToWithNotes=$copyToWithNotes, copyToWithAttachments=$copyToWithAttachments, copyToWithLinks=$copyToWithLinks, copyAssignments=$copyAssignments, copyAffectations=$copyAffectations, toProject=$toProject, copySubProjects=$copySubProjects, copyToWithVersionProjects=$copyToWithVersionProjects, copyStructure=$copyStructure)");
     //self::$_noDispatch=true; // avoid recursive updates on each item, will be done only al elementary level
     $pe=new PlanningElement();
     $list=$pe->getSqlElementsFromCriteria(array('topRefType'=>get_class($obj), 'topRefId'=>$obj->id),null,null,'wbsSortable asc');
@@ -2426,7 +2438,7 @@ class PlanningElement extends SqlElement {
       }
       $newItem=$item->copyTo(get_class($item),$item->$type, $item->name ,$pe->idProject, $copyToOrigin,
           $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks,
-          $copyAssignments, $copyAffectations, $toProject,null );
+          $copyAssignments, $copyAffectations, $toProject, (get_class($newObj)=='Activity')?$newObj->id:null);
       $resultItem=$newItem->_copyResult;
       unset($newItem->_copyResult);
       if (! stripos($resultItem,'id="lastOperationStatus" value="OK"')>0 ) {
@@ -2458,7 +2470,7 @@ class PlanningElement extends SqlElement {
     return "OK"; // No error ;)
   }
   
-  static function copyStructureFinalize() {
+  static function copyStructureFinalize($mustReorder) {
     self::$_noDispatch=true;
     // Update synthesys for non elementary item (will just be done once ;)
     foreach (array_reverse(PlanningElement::$_noDispatchArray) as $pe) {
@@ -2468,6 +2480,7 @@ class PlanningElement extends SqlElement {
     // copy dependencies
     $critWhere="";
     foreach (self::$_copiedItems as $id=>$fromTo) {
+      debugLog("copy from ".get_class($fromTo['from'])." #".$fromTo['from']->id." to ".get_class($fromTo['to'])." #".$fromTo['to']->id);
       $from=$fromTo['from'];
       $critWhere.=(($critWhere)?',':'')."('".get_class($from)."','" . Sql::fmtId($from->id) . "')";
     }
