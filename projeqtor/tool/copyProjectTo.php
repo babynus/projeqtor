@@ -143,20 +143,20 @@ if(!$error) {
   $newProj->sortOrder=$newProj->ProjectPlanningElement->wbsSortable; // update sortOrder
   $newProj->save();
 }
-if (!$error and $copyStructure) {
-  $res=PlanningElement::copyStructure($proj, $newProj, false, false, $copyToWithAttachments,$copyToWithLinks,$copyAssignments, $copyAffectations,$newProj->id,$copySubProjects,$copyToWithVersionProjects,$copyOtherStructure);
+if (!$error and ($copyStructure or $copyOtherStructure)) {
+  $res=PlanningElement::copyStructure($proj, $newProj, false, false, $copyToWithAttachments,$copyToWithLinks,$copyAssignments, $copyAffectations,$newProj->id,$copySubProjects,$copyStructure,$copyOtherStructure);
   if ($res!='OK') {
     $result=$res;
     $error=true;
   }
 }
-if (!$error and $copyOtherStructure) {
-  $res=PlanningElement::copyOtherStructure($proj, $newProj, false, false, $copyToWithAttachments,$copyToWithLinks,$copyAssignments, $copyAffectations,$newProj->id,$copySubProjects,$copyToWithVersionProjects,$copyStructure);
-  if ($res!='OK') {
-    $result=$res;
-    $error=true;
-  }
-}
+// if (!$error and $copyOtherStructure) {
+//   $res=PlanningElement::copyOtherStructure($proj, $newProj, false, false, $copyToWithAttachments,$copyToWithLinks,$copyAssignments, $copyAffectations,$newProj->id,$copySubProjects,$copyToWithVersionProjects,$copyStructure);
+//   if ($res!='OK') {
+//     $result=$res;
+//     $error=true;
+//   }
+// }
 
 if(!$error and !$copyStructure and !$copyOtherStructure and $copySubProjects){
   $res=PlanningElement::copyStructureProject($proj, $newProj, false, false, $copyToWithAttachments,$copyToWithLinks,$copyAssignments, $copyAffectations,$newProj->id,$copySubProjects,$copyToWithVersionProjects);
