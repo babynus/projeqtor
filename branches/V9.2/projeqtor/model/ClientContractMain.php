@@ -124,12 +124,13 @@ class ClientContractMain extends SqlElement {
    'idResource'=>'responsible',
    'idUnitContract'=>'idUnitDurationContract',
    'idUnitNotice'=>'idUnitDurationNotice',
+    'tenderReference'=>'ClientReference'
   );
   
   private static $_databaseColumnName = array( 
       'idUnitContract'=>'idUnitDurationContract', 
       'idUnitNotice' => 'idUnitDurationNotice',
-      'idContact'=>'idContactContract',
+      'idContact'=>'idContactContract'
   );
    /** ==========================================================================
    * Constructor
