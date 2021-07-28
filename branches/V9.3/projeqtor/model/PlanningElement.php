@@ -2489,7 +2489,6 @@ class PlanningElement extends SqlElement {
     // copy dependencies
     $critWhere="";
     foreach (self::$_copiedItems as $id=>$fromTo) {
-      debugLog("copy from ".get_class($fromTo['from'])." #".$fromTo['from']->id." to ".get_class($fromTo['to'])." #".$fromTo['to']->id);
       $from=$fromTo['from'];
       $critWhere.=(($critWhere)?',':'')."('".get_class($from)."','" . Sql::fmtId($from->id) . "')";
     }
