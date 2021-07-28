@@ -1181,8 +1181,9 @@ class NotificationDefinition extends SqlElement {
     
     foreach($listFields as $classAndField) {
         $class = substr($classAndField,0,strpos($classAndField,'_'));
-        
+        $classObj=new $class();
         $field = substr($classAndField,strpos($classAndField,'_')+1);
+        $field=$classObj->getDatabaseColumnName($field);
         $fieldsInSelect .= ($fieldsInSelect===""?"":",")."$listTables[$class].$field AS $class"."_$field";
 
         if ($class!== $className and strpos($leftJoin, "LEFT JOIN $listTables[$class] ON")=== false) {
