@@ -167,7 +167,7 @@ if(!$error and !$copyStructure and !$copyOtherStructure and $copySubProjects){
 }
 
 if (!$error and ($copyStructure or $copyOtherStructure or $copySubProjects)) {
-  PlanningElement::copyStructureFinalize($copyOtherStructure);
+  PlanningElement::copyStructureFinalize();
 }
 // copy affectations
 if (!$error and $copyAffectations) {

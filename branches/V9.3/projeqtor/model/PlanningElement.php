@@ -2479,7 +2479,7 @@ class PlanningElement extends SqlElement {
 //     return "OK"; // No error ;)
 //   }
   
-  static function copyStructureFinalize($mustReorder) {
+  static function copyStructureFinalize() {
     self::$_noDispatch=true;
     // Update synthesys for non elementary item (will just be done once ;)
     foreach (array_reverse(PlanningElement::$_noDispatchArray) as $pe) {
