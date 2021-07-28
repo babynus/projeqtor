@@ -327,7 +327,7 @@ if($copyType=="copyObjectTo"){
                <label for="copyProjectToName" ><?php echo i18n("colProjectCode") ?>&nbsp;<?php if(!isNewGui()){?>:<?php }?>&nbsp;</label>
              </td>
              <td>
-               <?php $required=(strpos($toCopy->getFieldAttributes('projectCode'),'required')!==false)?true:false; debugLog("required=$required")?>
+               <?php $required=(strpos($toCopy->getFieldAttributes('projectCode'),'required')!==false)?true:false;?>
                <div id="copyProjectToProjectCode" name="copyProjectToProjectCode" dojoType="dijit.form.ValidationTextBox"
                 style="width: 400px;" <?php if ($required) echo ' required="required" ';?>
                 trim="true" maxlength="100" class="input<?php if ($required) echo ' required';?>"
