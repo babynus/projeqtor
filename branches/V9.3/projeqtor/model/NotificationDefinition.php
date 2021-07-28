@@ -1310,12 +1310,13 @@ class NotificationDefinition extends SqlElement {
             
     // For each instance of the Object Class
     foreach ($listObjClasses as $objClass) {
+        $objClass=array_change_key_case($objClass, CASE_LOWER);      
         // The id of notified instance object
         $notif->notifiedObjectId = $objClass[strtolower($className).'_id'];
 
         // The targetDate value
         if ($targetDate!="without") {
-            $targetDateValue = $objClass[strtolower($className).'_'.$targetDate];
+            $targetDateValue = $objClass[strtolower($className.'_'.$targetDate)];
             // TargetDate is null => nothing to do
             if ($targetDateValue=="") {                
                 continue;
