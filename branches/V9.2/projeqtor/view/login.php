@@ -26,7 +26,7 @@
 
 /* ============================================================================
  * Connnexion page of application.
- * TEST GITHUB
+ * TEST GITHUB #2
  */
 $mobile=false;
    require_once "../tool/projeqtor.php";
