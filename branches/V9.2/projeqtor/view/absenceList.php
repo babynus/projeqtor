@@ -23,7 +23,7 @@
  * about contributors at http://www.projeqtor.org 
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
-
+/* This is a test */
 /* ============================================================================
  * Presents the list of objects of a given class.
  *
