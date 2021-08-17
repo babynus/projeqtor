@@ -35,6 +35,7 @@ scriptLog('   ->/view/absenceList.php');
 $user=getSessionUser();
 $currentYear=strftime("%Y") ;
 $yearSpinner = $currentYear;
+// TEST
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="paramDiv" name="paramDiv">  
