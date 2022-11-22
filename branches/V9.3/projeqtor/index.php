@@ -1,4 +1,5 @@
 <?php
+// TEST UPDAT
 $indexPhp=true;
 chdir(dirname(__FILE__).'/view');
 $theme="ProjeQtOr";
