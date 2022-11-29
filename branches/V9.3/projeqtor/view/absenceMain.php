@@ -22,8 +22,8 @@
  * You can get complete code of ProjeQtOr, other resource, help and information
  * about contributors at http://www.projeqtor.org 
  *     
- *** DO NOT REMOVE THIS NOTICE ************************************************/
-// TICKET-1 #comment This is test number 15
+ *** DO NOT REMOVE THIS NOTICE ******************************TICKET-1 #comment This is test number 16 #status-xxx******************/
+// 
 /* ============================================================================
  * Presents an object. 
  */
