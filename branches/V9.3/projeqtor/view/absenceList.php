@@ -26,7 +26,7 @@
 // COMMIT TRY 
 /* ============================================================================
  * Presents the list of objects of a given class.
- *
+ * TEST MODIF
  */
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
