@@ -151,4 +151,4 @@ if (is_file ( "../tool/parametersLocation.php" )) {
 
 </body>
 
-</html>
+</html> 
