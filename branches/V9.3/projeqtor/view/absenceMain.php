@@ -23,7 +23,7 @@
  * about contributors at http://www.projeqtor.org 
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
-// TEST O9
+// TEST 10
 /* ============================================================================
  * Presents an object. 
  */
