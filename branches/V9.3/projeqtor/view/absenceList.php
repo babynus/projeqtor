@@ -23,7 +23,7 @@
  * about contributors at http://www.projeqtor.org 
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
-// COMMIT TRY 
+// COMMIT TRY 02
 /* ============================================================================
  * Presents the list of objects of a given class.
  * TEST MODIF
