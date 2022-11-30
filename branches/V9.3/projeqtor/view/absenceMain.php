@@ -23,7 +23,7 @@
  * about contributors at http://www.projeqtor.org 
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
-// TICKET-2 #comment This is test number 21 #fait
+// TICKET-2 #comment This is test number 22 #fait
 /* ============================================================================
  * Presents an object. 
  */
