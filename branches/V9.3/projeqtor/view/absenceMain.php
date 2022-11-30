@@ -23,7 +23,7 @@
  * about contributors at http://www.projeqtor.org 
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
-// TICKET-2 #comment This is test number 29 with 1,25 work #fait  #time 45m
+// ACT-3 #comment This is test number 30 with 0,5 work #fait  #time 4h
 /* ============================================================================
  * Presents an object. 
  */
