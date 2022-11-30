@@ -23,7 +23,7 @@
  * about contributors at http://www.projeqtor.org 
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
-// ACT-3 #comment This is test number 31 with 0,5 work #fait  #time 4h
+// ACT-3 #comment This is test number 32 with 0,5 work #fait  #time 4h
 /* ============================================================================
  * Presents an object. 
  */
