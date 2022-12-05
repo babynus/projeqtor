@@ -27,6 +27,7 @@
 /** ===========================================================================
  * Copy an object as a new one (of the same class) : call corresponding method in SqlElement Class
  */
+// TEST on 3 copyXxxx.php files
 require_once "../tool/projeqtor.php";
 projeqtor_set_time_limit(300);
 

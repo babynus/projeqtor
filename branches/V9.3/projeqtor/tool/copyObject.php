@@ -27,7 +27,7 @@
 /** ===========================================================================
  * Copy an object as a new one (of the same class) : call corresponding method in SqlElement Class
  */
-
+// TEST on 3 copyXxxx.php files
 require_once "../tool/projeqtor.php";
 
 // Get the object from session(last status before change)
