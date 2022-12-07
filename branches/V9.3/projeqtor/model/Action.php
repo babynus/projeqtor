@@ -25,7 +25,7 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 //test
 /** ============================================================================
- * Action is establised during meeting, to define an action to be followed.
+ * Action is establised during meeting, to define an action to be followed. OK aussi
  */ 
 require_once('_securityCheck.php'); 
 class Action extends ActionMain {

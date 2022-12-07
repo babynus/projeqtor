@@ -25,7 +25,7 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 /** ============================================================================
- * Activity is main planned element
+ * Activity is main planned element OK
  */  
 require_once('_securityCheck.php');
 class Activity extends ActivityMain {
