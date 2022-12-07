@@ -37,6 +37,7 @@ class Asset extends AssetMain {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+    // OK
   }
 
    /** ==========================================================================

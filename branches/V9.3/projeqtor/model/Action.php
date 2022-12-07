@@ -38,6 +38,7 @@ class Action extends ActionMain {
 	 */
 	function __construct($id = NULL, $withoutDependentObjects=false) {
 		parent::__construct($id,$withoutDependentObjects);
+		// OK ou pas
 	}
 	
 	/** ==========================================================================
