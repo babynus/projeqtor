@@ -23,10 +23,9 @@
  * about contributors at http://www.projeqtor.org 
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
-//test
+//
 /** ============================================================================
  * Action is establised during meeting, to define an action to be followed. OK 
- * ticket-3 #comment mise à jour OK	OK
  */ 
 require_once('_securityCheck.php'); 
 class Action extends ActionMain {
